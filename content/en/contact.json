@@ -1,0 +1,27 @@
+{
+  "seo": {
+    "title": "Contact Setu Technology",
+    "description": "Get in touch with Setu Technology — for product questions, partnership enquiries, or to tell us what software your business needs next.",
+    "keywords": ["contact Setu Technology", "Setu Technology support"]
+  },
+  "hero": {
+    "eyebrow": "Contact",
+    "headline": "Let's talk about your business",
+    "subheadline": "Questions about Setu POS, partnership enquiries, or telling us what you need next — we read every message."
+  },
+  "form": {
+    "fields": [
+      { "name": "name", "label": "Name", "type": "text", "required": true },
+      { "name": "email", "label": "Email", "type": "email", "required": true },
+      { "name": "company", "label": "Business name", "type": "text", "required": false },
+      { "name": "message", "label": "Message", "type": "textarea", "required": true }
+    ],
+    "submitLabel": "Send message"
+  },
+  "directContact": {
+    "headline": "Prefer to reach us directly?",
+    "email": "hello@setutech.com",
+    "demoNote": "Looking to book a Setu POS demo instead?",
+    "demoCta": { "label": "Book a demo", "href": "https://pos.setutech.com/demo" }
+  }
+}

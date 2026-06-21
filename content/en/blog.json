@@ -1,0 +1,35 @@
+{
+  "seo": {
+    "title": "Blog | Setu Technology",
+    "description": "Thought leadership and practical tips for restaurant and business operators across India and Southeast Asia, from Setu Technology.",
+    "keywords": ["restaurant management tips", "GST billing software", "Setu Technology blog"]
+  },
+  "hero": {
+    "eyebrow": "Blog",
+    "headline": "Practical thinking for business operators",
+    "subheadline": "Notes on running better operations, from the team building software for it."
+  },
+  "posts": [
+    {
+      "slug": "gst-billing-checklist-for-restaurants",
+      "title": "A GST billing checklist every restaurant owner should know",
+      "excerpt": "The most common GST billing mistakes restaurants make, and how to avoid them before your next audit.",
+      "date": "2026-05-12",
+      "category": "Compliance"
+    },
+    {
+      "slug": "multi-outlet-visibility",
+      "title": "How to know which of your outlets is actually making money",
+      "excerpt": "Why most multi-outlet owners are flying blind on per-location performance, and what to track instead.",
+      "date": "2026-04-28",
+      "category": "Operations"
+    },
+    {
+      "slug": "kitchen-order-accuracy",
+      "title": "Why orders go wrong at 8pm on a Friday — and how to fix it",
+      "excerpt": "A breakdown of where kitchen order accuracy actually breaks down during peak hours.",
+      "date": "2026-04-02",
+      "category": "Kitchen Ops"
+    }
+  ]
+}

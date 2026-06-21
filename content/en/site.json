@@ -1,0 +1,54 @@
+{
+  "brand": {
+    "name": "Setu Technology",
+    "tagline": "Setu for your business",
+    "domain": "setutech.com",
+    "posUrl": "https://pos.setutech.com",
+    "posDemoUrl": "https://pos.setutech.com/demo"
+  },
+  "nav": {
+    "links": [
+      { "label": "Products", "href": "/products" },
+      { "label": "About", "href": "/about" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "cta": { "label": "Book a Demo", "href": "https://pos.setutech.com/demo" }
+  },
+  "footer": {
+    "description": "Setu Technology builds practical, operator-first software for businesses across India and Southeast Asia.",
+    "columns": [
+      {
+        "heading": "Products",
+        "links": [
+          { "label": "Setu POS", "href": "https://pos.setutech.com" },
+          { "label": "Setu Retail", "href": "/products#retail" },
+          { "label": "Setu Clinic", "href": "/products#clinic" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "label": "About", "href": "/about" },
+          { "label": "Blog", "href": "/blog" },
+          { "label": "Contact", "href": "/contact" },
+          { "label": "Careers", "href": "/contact" }
+        ]
+      },
+      {
+        "heading": "Legal",
+        "links": [
+          { "label": "Privacy Policy", "href": "/legal/privacy" },
+          { "label": "Terms of Service", "href": "/legal/terms" },
+          { "label": "Refund Policy", "href": "/legal/refund" }
+        ]
+      }
+    ],
+    "social": [
+      { "label": "Instagram", "href": "https://instagram.com/setutech" },
+      { "label": "LinkedIn", "href": "https://linkedin.com/company/setutech" },
+      { "label": "Twitter/X", "href": "https://x.com/setutech" }
+    ],
+    "copyright": "© 2026 Setu Technology. Made in India."
+  }
+}

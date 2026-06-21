@@ -1,0 +1,108 @@
+{
+  "seo": {
+    "title": "Setu Technology | Business software built for how you actually work",
+    "description": "Setu Technology builds operational software for businesses across India and Southeast Asia, starting with Setu POS for restaurants. Book a free demo.",
+    "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu POS"]
+  },
+  "hero": {
+    "eyebrow": "Setu for your business",
+    "headline": "Business software built for how you actually work",
+    "subheadline": "Setu builds operational software for businesses across India & Southeast Asia — starting with restaurants, expanding to every industry.",
+    "primaryCta": { "label": "See Setu POS", "href": "https://pos.setutech.com" },
+    "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
+  },
+  "products": {
+    "headline": "One company, every industry, starting now",
+    "subtext": "We build for every kind of business, starting with restaurants — and we're not stopping there.",
+    "cards": [
+      {
+        "id": "pos",
+        "status": "live",
+        "name": "Setu POS",
+        "headline": "Restaurant operations, sorted",
+        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards for restaurants of any size.",
+        "cta": { "label": "Explore POS", "href": "https://pos.setutech.com" }
+      },
+      {
+        "id": "retail",
+        "status": "coming-soon",
+        "name": "Setu Retail",
+        "headline": "Retail, run simply",
+        "description": "Inventory, billing and store management for retail businesses.",
+        "cta": { "label": "Get notified", "href": "/contact" }
+      },
+      {
+        "id": "clinic",
+        "status": "coming-soon",
+        "name": "Setu Clinic",
+        "headline": "Clinics, without the chaos",
+        "description": "Appointments, records and front-desk operations for clinics.",
+        "cta": { "label": "Get notified", "href": "/contact" }
+      },
+      {
+        "id": "wildcard",
+        "status": "coming-soon",
+        "name": "Setu for your business",
+        "headline": "Don't see your industry?",
+        "description": "Tell us what you run — we're building Setu for every kind of business.",
+        "cta": { "label": "Tell us your need", "href": "/contact" }
+      }
+    ]
+  },
+  "whySetu": {
+    "headline": "Why businesses choose Setu",
+    "subtext": "Built for India and Southeast Asia, not retrofitted from somewhere else.",
+    "items": [
+      {
+        "heading": "Built for India & SEA",
+        "body": "Not a Western product retrofitted. Built from the ground up for GST, local payment methods, multi-currency and local languages."
+      },
+      {
+        "heading": "One system, every outlet",
+        "body": "Whether you have 1 location or 20, Setu scales without adding complexity."
+      },
+      {
+        "heading": "Owned by operators",
+        "body": "Every feature in Setu exists because a real business owner needed it."
+      },
+      {
+        "heading": "Support that answers",
+        "body": "Real humans, fast responses. Not a ticket system that replies in 5 days."
+      }
+    ]
+  },
+  "socialProof": {
+    "headline": "Trusted by restaurants that mean business",
+    "stats": [
+      { "value": "50+", "label": "Restaurants on Setu" },
+      { "value": "120K+", "label": "Orders processed monthly" },
+      { "value": "India + SEA", "label": "Markets served" },
+      { "value": "45 min", "label": "Average onboarding time" }
+    ],
+    "testimonials": [
+      {
+        "quote": "Our dinner rush billing time dropped by half once we moved to Setu — the kitchen display alone paid for itself in the first month.",
+        "name": "Aarav Mehta",
+        "company": "Spice Route Kitchen",
+        "city": "Pune"
+      },
+      {
+        "quote": "We run six outlets and used to call each manager every evening for numbers. Now I just open the Setu dashboard.",
+        "name": "Priya Nair",
+        "company": "Coastal Curry Co.",
+        "city": "Bengaluru"
+      },
+      {
+        "quote": "As a cloud kitchen, order accuracy is everything. Setu's kitchen routing has cut our wrong-order rate to almost zero.",
+        "name": "Ahmad Rizal",
+        "company": "Nasi Lemak Express",
+        "city": "Kuala Lumpur"
+      }
+    ]
+  },
+  "ctaBanner": {
+    "headline": "Ready to see Setu in action?",
+    "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
+    "cta": { "label": "Book your free demo", "href": "https://pos.setutech.com/demo" }
+  }
+}

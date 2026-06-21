@@ -1,0 +1,54 @@
+{
+  "seo": {
+    "title": "Products | Setu Technology",
+    "description": "Explore Setu Technology's products — Setu POS for restaurants is live today, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": ["Setu products", "Setu POS", "Setu Retail", "Setu Clinic"]
+  },
+  "hero": {
+    "eyebrow": "Products",
+    "headline": "One company, building for every industry",
+    "subheadline": "We started with restaurants. Here's what's live today, and what's coming next."
+  },
+  "products": [
+    {
+      "id": "pos",
+      "status": "live",
+      "name": "Setu POS",
+      "headline": "Restaurant management, done right",
+      "description": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain.",
+      "features": [
+        "Multi-outlet dashboard",
+        "Kitchen workflow & order routing",
+        "Table management",
+        "GST-ready tax engine",
+        "Customer management & QR tracking",
+        "Coupons & discounts"
+      ],
+      "cta": { "label": "Explore Setu POS", "href": "https://pos.setutech.com" }
+    },
+    {
+      "id": "retail",
+      "status": "coming-soon",
+      "name": "Setu Retail",
+      "headline": "Retail store management, coming soon",
+      "description": "Inventory tracking, billing and store operations built for retail businesses across India and Southeast Asia.",
+      "cta": { "label": "Get notified", "href": "/contact" }
+    },
+    {
+      "id": "clinic",
+      "status": "coming-soon",
+      "name": "Setu Clinic",
+      "headline": "Clinic & appointment management, coming soon",
+      "description": "Appointments, patient records and front-desk operations for clinics of any size.",
+      "cta": { "label": "Get notified", "href": "/contact" }
+    },
+    {
+      "id": "wildcard",
+      "status": "coming-soon",
+      "name": "Setu for your business",
+      "headline": "Building for your industry next",
+      "description": "If you don't see your industry yet, tell us what you run. We're building Setu for every kind of business, one industry at a time.",
+      "cta": { "label": "Tell us your need", "href": "/contact" }
+    }
+  ]
+}

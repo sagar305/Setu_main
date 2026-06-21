@@ -1,0 +1,46 @@
+{
+  "seo": {
+    "title": "About Setu Technology | Our story",
+    "description": "Setu Technology builds operator-first business software for India and Southeast Asia. Learn about our story, mission and team.",
+    "keywords": ["Setu Technology about", "Setu Technology team", "business software company India"]
+  },
+  "hero": {
+    "eyebrow": "About Setu",
+    "headline": "We build software the way operators wish someone would",
+    "subheadline": "Setu Technology started with one question: why does business software make running a business harder, not easier?"
+  },
+  "story": {
+    "headline": "Our story",
+    "paragraphs": [
+      "Setu means 'bridge' — and that's exactly what we set out to build: a bridge between how businesses actually run day-to-day, and the software meant to support them.",
+      "We started with restaurants because the problem was the clearest there — billing mistakes during rush hour, kitchen orders going wrong, owners with no visibility across outlets. Setu POS was built directly with restaurant owners, outlet managers and kitchen staff, not in a boardroom.",
+      "What we learned building Setu POS — about GST, multi-outlet operations, and what business owners in India and Southeast Asia actually need — is now the foundation for everything else we build."
+    ]
+  },
+  "mission": {
+    "headline": "Our mission",
+    "body": "To build practical, honest software for every kind of business across India and Southeast Asia — starting with restaurants, and expanding one industry at a time."
+  },
+  "values": {
+    "headline": "How we work",
+    "items": [
+      {
+        "heading": "Operator-first",
+        "body": "Every feature starts with a real business owner's problem, not a feature checklist."
+      },
+      {
+        "heading": "Built for this region",
+        "body": "GST, local payments, multi-currency and local context are the default, not an add-on."
+      },
+      {
+        "heading": "Honest, not hyped",
+        "body": "We'd rather under-promise and show you the product than oversell it."
+      }
+    ]
+  },
+  "cta": {
+    "headline": "Want to see what we're building?",
+    "subtext": "Start with Setu POS, our restaurant management product.",
+    "cta": { "label": "Explore Setu POS", "href": "https://pos.setutech.com" }
+  }
+}
