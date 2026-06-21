@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   const { error } = await resend.emails.send({
-    from: "Setu Technology Website <onboarding@resend.dev>",
+    from: "Setu Technology <noreply@setutechnology.com>",
     to: NOTIFY_EMAIL,
     replyTo: email,
     subject: `New contact form submission from ${name}`,

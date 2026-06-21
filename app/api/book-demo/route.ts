@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   const productName = product || "Setu";
 
   const { error } = await resend.emails.send({
-    from: "Setu Technology Website <onboarding@resend.dev>",
+    from: "Setu Technology <noreply@setutechnology.com>",
     to: NOTIFY_EMAIL,
     replyTo: email,
     subject: `Demo request: ${productName}`,
