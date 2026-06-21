@@ -73,7 +73,7 @@
     {
       "heading": "QR customer tracking",
       "icon": "qr-code",
-      "body": "QR-based ordering that tracks repeat visits, so you know your regulars without asking."
+      "body": "Customers scan a QR code at the table to track their order status live and call a waiter for help, no app or login needed."
     }
   ],
   "cta": {

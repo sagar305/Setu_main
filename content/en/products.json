@@ -21,7 +21,7 @@
         "Kitchen workflow & order routing",
         "Table management",
         "GST-ready tax engine",
-        "Customer management & QR tracking",
+        "QR order tracking & waiter call",
         "Coupons & discounts"
       ],
       "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
