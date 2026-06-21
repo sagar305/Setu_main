@@ -97,38 +97,40 @@ export function RestaurantPosShowcase({ features }: { features: Feature[] }) {
         </div>
 
         <div className="hidden md:block">
-          <div className="sticky top-1/2 flex -translate-y-1/2 flex-col items-center rounded-3xl bg-indigo p-10 text-center text-cream-paper">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 16, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -16, scale: 0.96 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex flex-col items-center"
-              >
-                <motion.span
-                  initial={{ rotate: -8 }}
-                  animate={{ rotate: 0 }}
+          <div className="sticky top-20 flex h-[calc(100vh-5rem)] flex-col items-center justify-center">
+            <div className="flex flex-col items-center rounded-3xl bg-indigo p-10 text-center text-cream-paper">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -16, scale: 0.96 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron"
+                  className="flex flex-col items-center"
                 >
-                  <ActiveIcon className="h-8 w-8 text-ink" aria-hidden="true" />
-                </motion.span>
-                <h4 className="mt-6 text-xl font-semibold">{features[active].heading}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-cream-paper/80">{features[active].body}</p>
-              </motion.div>
-            </AnimatePresence>
+                  <motion.span
+                    initial={{ rotate: -8 }}
+                    animate={{ rotate: 0 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron"
+                  >
+                    <ActiveIcon className="h-8 w-8 text-ink" aria-hidden="true" />
+                  </motion.span>
+                  <h4 className="mt-6 text-xl font-semibold">{features[active].heading}</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-cream-paper/80">{features[active].body}</p>
+                </motion.div>
+              </AnimatePresence>
 
-            <div className="mt-8 flex gap-1.5">
-              {features.map((feature, index) => (
-                <span
-                  key={feature.heading}
-                  className={`h-1.5 rounded-full transition-all ${
-                    active === index ? "w-6 bg-saffron" : "w-1.5 bg-cream-paper/30"
-                  }`}
-                />
-              ))}
+              <div className="mt-8 flex gap-1.5">
+                {features.map((feature, index) => (
+                  <span
+                    key={feature.heading}
+                    className={`h-1.5 rounded-full transition-all ${
+                      active === index ? "w-6 bg-saffron" : "w-1.5 bg-cream-paper/30"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
