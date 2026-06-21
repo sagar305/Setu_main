@@ -1,13 +1,13 @@
 {
   "seo": {
     "title": "Setu Technology | Business software built for how you actually work",
-    "description": "Setu Technology builds operational software for businesses across India and Southeast Asia, starting with Setu POS for restaurants. Book a free demo.",
+    "description": "Setu Technology builds operational software for businesses globally, starting with Setu POS for restaurants. Book a free demo.",
     "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu POS"]
   },
   "hero": {
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
-    "subheadline": "Setu builds operational software for businesses across India & Southeast Asia — starting with restaurants, expanding to every industry.",
+    "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
     "primaryCta": { "label": "See Setu POS", "href": "/products/restaurant-pos" },
     "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
   },
@@ -51,10 +51,10 @@
   },
   "whySetu": {
     "headline": "Why businesses choose Setu",
-    "subtext": "Built for India and Southeast Asia, not retrofitted from somewhere else.",
+    "subtext": "Built for global businesses, not retrofitted from somewhere else.",
     "items": [
       {
-        "heading": "Built for India & SEA",
+        "heading": "Built for global businesses",
         "icon": "map-pin",
         "body": "Not a Western product retrofitted. Built from the ground up for GST, local payment methods, multi-currency and local languages."
       },
@@ -80,7 +80,7 @@
     "stats": [
       { "value": "Tax-ready", "label": "Compliant billing, out of the box" },
       { "value": "Multi-outlet", "label": "One dashboard, every location" },
-      { "value": "India + SEA", "label": "Markets we build for" },
+      { "value": "Global", "label": "Markets we build for" },
       { "value": "Real humans", "label": "Support, not ticket queues" }
     ]
   },

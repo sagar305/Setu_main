@@ -89,7 +89,7 @@ export function HeroVisual() {
         transition={{ duration: 0.4, delay: 0.8 }}
       >
         One system replacing spreadsheets, registers and notebooks — built for how
-        Indian and SEA businesses actually run.
+        businesses actually run, globally.
       </motion.p>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Setu POS | Restaurant management software",
-    "description": "Setu POS is restaurant management software for billing, kitchen workflow, table management and multi-outlet operations — built for India and Southeast Asia.",
+    "description": "Setu POS is restaurant management software for billing, kitchen workflow, table management and multi-outlet operations — built for businesses globally.",
     "keywords": ["Setu POS", "restaurant POS India", "restaurant billing software", "kitchen order management"]
   },
   "hero": {
@@ -48,7 +48,7 @@
     {
       "heading": "Tax engine",
       "icon": "percent",
-      "body": "Compliant billing out of the box, built for how tax actually works for restaurants in India and Southeast Asia."
+      "body": "Compliant billing out of the box, built for how tax actually works for restaurants globally."
     },
     {
       "heading": "Fee engine",
