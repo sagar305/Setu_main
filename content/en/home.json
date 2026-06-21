@@ -55,29 +55,33 @@
     "items": [
       {
         "heading": "Built for India & SEA",
+        "icon": "map-pin",
         "body": "Not a Western product retrofitted. Built from the ground up for GST, local payment methods, multi-currency and local languages."
       },
       {
         "heading": "One system, every outlet",
+        "icon": "layers",
         "body": "Whether you have 1 location or 20, Setu scales without adding complexity."
       },
       {
         "heading": "Owned by operators",
+        "icon": "wrench",
         "body": "Every feature in Setu exists because a real business owner needed it."
       },
       {
         "heading": "Support that answers",
+        "icon": "headset",
         "body": "Real humans, fast responses. Not a ticket system that replies in 5 days."
       }
     ]
   },
   "socialProof": {
-    "headline": "Trusted by restaurants that mean business",
+    "headline": "Built for how restaurants actually run",
     "stats": [
-      { "value": "50+", "label": "Restaurants on Setu" },
-      { "value": "120K+", "label": "Orders processed monthly" },
-      { "value": "India + SEA", "label": "Markets served" },
-      { "value": "45 min", "label": "Average onboarding time" }
+      { "value": "GST-ready", "label": "Compliant billing, out of the box" },
+      { "value": "Multi-outlet", "label": "One dashboard, every location" },
+      { "value": "India + SEA", "label": "Markets we build for" },
+      { "value": "Real humans", "label": "Support, not ticket queues" }
     ]
   },
   "ctaBanner": {
