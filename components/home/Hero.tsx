@@ -1,11 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import type { HomeContent } from "@/lib/content";
 import { LogoMark } from "@/components/Logo";
 
 export function Hero({ hero }: { hero: HomeContent["hero"] }) {
   return (
     <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-20 pt-16 md:grid-cols-2 md:items-center md:pt-24">
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">
           {hero.eyebrow}
         </p>
@@ -27,13 +34,18 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
             {hero.secondaryCta.label}
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        className="flex items-center justify-center"
+      >
         <div className="flex aspect-square w-full max-w-sm items-center justify-center rounded-2xl bg-white shadow-sm">
           <LogoMark size={140} className="text-indigo" />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
