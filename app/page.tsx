@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getHomeContent } from "@/lib/content";
 import { Hero } from "@/components/home/Hero";
 import { Products } from "@/components/home/Products";
-import { ProductLoop } from "@/components/home/ProductLoop";
 import { WhySetu } from "@/components/home/WhySetu";
 import { SocialProof } from "@/components/home/SocialProof";
 import { CtaBanner } from "@/components/CtaBanner";
@@ -26,7 +25,6 @@ export default function HomePage() {
     <>
       <Hero hero={content.hero} />
       <Products products={content.products} />
-      <ProductLoop />
       <WhySetu whySetu={content.whySetu} />
       <SocialProof socialProof={content.socialProof} />
       <CtaBanner {...content.ctaBanner} />
