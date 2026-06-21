@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import type { HomeContent } from "@/lib/content";
-import { LogoMark } from "@/components/Logo";
+import { HeroVisual } from "@/components/home/HeroVisual";
 
 export function Hero({ hero }: { hero: HomeContent["hero"] }) {
   return (
@@ -42,9 +42,7 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
         transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
         className="flex items-center justify-center"
       >
-        <div className="flex aspect-square w-full max-w-sm items-center justify-center rounded-2xl bg-white shadow-sm">
-          <LogoMark size={140} className="text-indigo" />
-        </div>
+        <HeroVisual />
       </motion.div>
     </section>
   );
