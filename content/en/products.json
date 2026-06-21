@@ -24,7 +24,7 @@
         "Customer management & QR tracking",
         "Coupons & discounts"
       ],
-      "cta": { "label": "Explore Setu POS", "href": "https://pos.setutech.com" }
+      "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
     },
     {
       "id": "retail",

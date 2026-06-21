@@ -41,6 +41,6 @@
   "cta": {
     "headline": "Want to see what we're building?",
     "subtext": "Start with Setu POS, our restaurant management product.",
-    "cta": { "label": "Explore Setu POS", "href": "https://pos.setutech.com" }
+    "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
   }
 }

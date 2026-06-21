@@ -8,7 +8,7 @@
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
     "subheadline": "Setu builds operational software for businesses across India & Southeast Asia — starting with restaurants, expanding to every industry.",
-    "primaryCta": { "label": "See Setu POS", "href": "https://pos.setutech.com" },
+    "primaryCta": { "label": "See Setu POS", "href": "/products/restaurant-pos" },
     "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
   },
   "products": {
@@ -21,7 +21,7 @@
         "name": "Setu POS",
         "headline": "Restaurant operations, sorted",
         "description": "Billing, kitchen workflow, table management and multi-outlet dashboards for restaurants of any size.",
-        "cta": { "label": "Explore POS", "href": "https://pos.setutech.com" }
+        "cta": { "label": "Explore POS", "href": "/products/restaurant-pos" }
       },
       {
         "id": "retail",
@@ -87,6 +87,6 @@
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
-    "cta": { "label": "Book your free demo", "href": "https://pos.setutech.com/demo" }
+    "cta": { "label": "Book your free demo", "href": "/book-demo?product=Setu%20POS" }
   }
 }

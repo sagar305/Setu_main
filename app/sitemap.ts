@@ -3,7 +3,7 @@ import { getBlogContent } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://setutech.com";
-  const routes = ["", "/about", "/products", "/blog", "/contact"];
+  const routes = ["", "/about", "/products", "/products/restaurant-pos", "/blog", "/contact", "/book-demo"];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${base}${route}`,

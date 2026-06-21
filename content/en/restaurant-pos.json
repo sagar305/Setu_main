@@ -1,0 +1,43 @@
+{
+  "seo": {
+    "title": "Setu POS | Restaurant management software",
+    "description": "Setu POS is restaurant management software for billing, kitchen workflow, table management and multi-outlet operations — built for India and Southeast Asia.",
+    "keywords": ["Setu POS", "restaurant POS India", "restaurant billing software", "kitchen order management"]
+  },
+  "hero": {
+    "eyebrow": "Setu POS — Live",
+    "headline": "Restaurant management, done right",
+    "subheadline": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain."
+  },
+  "features": [
+    {
+      "heading": "Multi-outlet dashboard",
+      "body": "See sales, orders and performance across every outlet from one screen — no more chasing spreadsheets from each location."
+    },
+    {
+      "heading": "Kitchen workflow & order routing",
+      "body": "Orders route straight to the right kitchen station, cutting mistakes and ticket time during rush hour."
+    },
+    {
+      "heading": "Table management",
+      "body": "Track table status in real time — open, occupied, billed — so your floor staff always know what's happening."
+    },
+    {
+      "heading": "Tax-ready billing engine",
+      "body": "Compliant billing out of the box, built for how tax actually works for restaurants in India and Southeast Asia."
+    },
+    {
+      "heading": "Customer management & QR tracking",
+      "body": "Build a customer base automatically with QR-based ordering and repeat-visit tracking."
+    },
+    {
+      "heading": "Coupons & discounts",
+      "body": "Run promotions and loyalty offers without juggling a separate tool."
+    }
+  ],
+  "cta": {
+    "headline": "See Setu POS running in your restaurant",
+    "subtext": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting.",
+    "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+  }
+}

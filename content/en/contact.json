@@ -22,6 +22,6 @@
     "headline": "Prefer to reach us directly?",
     "email": "hello@setutech.com",
     "demoNote": "Looking to book a Setu POS demo instead?",
-    "demoCta": { "label": "Book a demo", "href": "https://pos.setutech.com/demo" }
+    "demoCta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
   }
 }
