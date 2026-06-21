@@ -78,26 +78,6 @@
       { "value": "120K+", "label": "Orders processed monthly" },
       { "value": "India + SEA", "label": "Markets served" },
       { "value": "45 min", "label": "Average onboarding time" }
-    ],
-    "testimonials": [
-      {
-        "quote": "Our dinner rush billing time dropped by half once we moved to Setu — the kitchen display alone paid for itself in the first month.",
-        "name": "Aarav Mehta",
-        "company": "Spice Route Kitchen",
-        "city": "Pune"
-      },
-      {
-        "quote": "We run six outlets and used to call each manager every evening for numbers. Now I just open the Setu dashboard.",
-        "name": "Priya Nair",
-        "company": "Coastal Curry Co.",
-        "city": "Bengaluru"
-      },
-      {
-        "quote": "As a cloud kitchen, order accuracy is everything. Setu's kitchen routing has cut our wrong-order rate to almost zero.",
-        "name": "Ahmad Rizal",
-        "company": "Nasi Lemak Express",
-        "city": "Kuala Lumpur"
-      }
     ]
   },
   "ctaBanner": {
