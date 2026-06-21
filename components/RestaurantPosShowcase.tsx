@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ComponentType } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import {
   Building2,
@@ -50,9 +50,11 @@ function FeatureRow({
   const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
   const Icon = icons[feature.icon];
 
-  if (inView && !active) {
-    onActivate(index);
-  }
+  useEffect(() => {
+    if (inView) {
+      onActivate(index);
+    }
+  }, [inView, index, onActivate]);
 
   return (
     <div
@@ -95,19 +97,24 @@ export function RestaurantPosShowcase({ features }: { features: Feature[] }) {
         </div>
 
         <div className="hidden md:block">
-          <div className="sticky top-28 flex flex-col items-center rounded-3xl bg-indigo p-10 text-center text-cream-paper">
+          <div className="sticky top-1/2 flex -translate-y-1/2 flex-col items-center rounded-3xl bg-indigo p-10 text-center text-cream-paper">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 16, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -16, scale: 0.96 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 className="flex flex-col items-center"
               >
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron">
+                <motion.span
+                  initial={{ rotate: -8 }}
+                  animate={{ rotate: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron"
+                >
                   <ActiveIcon className="h-8 w-8 text-ink" aria-hidden="true" />
-                </span>
+                </motion.span>
                 <h4 className="mt-6 text-xl font-semibold">{features[active].heading}</h4>
                 <p className="mt-3 text-sm leading-relaxed text-cream-paper/80">{features[active].body}</p>
               </motion.div>
