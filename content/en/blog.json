@@ -15,21 +15,39 @@
       "title": "A GST billing checklist every restaurant owner should know",
       "excerpt": "The most common GST billing mistakes restaurants make, and how to avoid them before your next audit.",
       "date": "2026-05-12",
-      "category": "Compliance"
+      "category": "Compliance",
+      "content": [
+        "GST compliance is one of the most overlooked parts of running a restaurant — until an audit forces the issue. Most billing mistakes aren't intentional; they come from manual processes that were never built with tax rules in mind.",
+        "The most common mistake is mismatched tax rates across menu categories. Restaurants often apply a single flat rate across the board instead of correctly splitting rates for dine-in, takeaway and packaged goods, which can lead to under- or over-charging customers.",
+        "A second common gap is missing or incorrect GSTIN details on invoices, especially for B2B customers who need the number to claim input tax credit. This is an easy fix with billing software that pulls verified business details automatically.",
+        "Finally, many restaurants struggle with reconciliation — matching what was billed against what was filed. Doing this manually at month-end is where most errors surface. A system that generates tax-ready reports as you go removes this entirely."
+      ]
     },
     {
       "slug": "multi-outlet-visibility",
       "title": "How to know which of your outlets is actually making money",
       "excerpt": "Why most multi-outlet owners are flying blind on per-location performance, and what to track instead.",
       "date": "2026-04-28",
-      "category": "Operations"
+      "category": "Operations",
+      "content": [
+        "Running more than one outlet multiplies the complexity of knowing what's actually working. Most owners we talk to are relying on end-of-day phone calls with managers instead of real data.",
+        "The problem with phone calls is they tell you what happened, not why. You hear total sales for the day, but not which items are underperforming, which shifts are inefficient, or which outlet's food cost is creeping up.",
+        "The fix isn't more reporting — it's the right reporting, in one place. A single dashboard that shows sales, food cost and staffing efficiency side-by-side across every outlet turns a guessing game into a five-minute morning routine.",
+        "Once owners can see outlets side-by-side, the underperforming ones usually become obvious fast — and so do the fixes, whether that's a menu change, a staffing adjustment or simply closing a location that was never going to work."
+      ]
     },
     {
       "slug": "kitchen-order-accuracy",
       "title": "Why orders go wrong at 8pm on a Friday — and how to fix it",
       "excerpt": "A breakdown of where kitchen order accuracy actually breaks down during peak hours.",
       "date": "2026-04-02",
-      "category": "Kitchen Ops"
+      "category": "Kitchen Ops",
+      "content": [
+        "Peak hour order mistakes rarely come from one big failure — they come from small friction points that only show up under pressure. A kitchen that runs fine at 3pm can fall apart by 8pm on a Friday.",
+        "The biggest culprit is handwritten or verbally relayed orders. Under pressure, modifications and special requests get dropped or misheard, especially across a noisy kitchen.",
+        "The second culprit is unclear order sequencing. Without a system showing what came in first, kitchens default to whatever's easiest to cook next, which causes some tables to wait far longer than others.",
+        "Digital kitchen routing solves both: orders arrive exactly as entered, with modifications intact, and are sequenced automatically so nothing sits forgotten in a queue. It won't make a Friday rush calm, but it removes the avoidable mistakes."
+      ]
     }
   ]
 }
