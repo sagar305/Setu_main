@@ -78,7 +78,7 @@
   "socialProof": {
     "headline": "Built for how restaurants actually run",
     "stats": [
-      { "value": "GST-ready", "label": "Compliant billing, out of the box" },
+      { "value": "Tax-ready", "label": "Compliant billing, out of the box" },
       { "value": "Multi-outlet", "label": "One dashboard, every location" },
       { "value": "India + SEA", "label": "Markets we build for" },
       { "value": "Real humans", "label": "Support, not ticket queues" }
