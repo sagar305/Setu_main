@@ -9,30 +9,71 @@
     "headline": "Restaurant management, done right",
     "subheadline": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain."
   },
+  "showcase": {
+    "eyebrow": "Inside Setu POS",
+    "headline": "One system, every part of your restaurant",
+    "subtext": "Scroll through what's actually running under the hood — built around how a real shift moves, from the table to the till."
+  },
   "features": [
     {
-      "heading": "Multi-outlet dashboard",
-      "body": "See sales, orders and performance across every outlet from one screen — no more chasing spreadsheets from each location."
+      "heading": "Multi-outlet support",
+      "icon": "building-2",
+      "body": "Run one outlet or twenty from the same system, with performance visible across every location."
     },
     {
-      "heading": "Kitchen workflow & order routing",
+      "heading": "Role management",
+      "icon": "shield-check",
+      "body": "Give owners, managers and staff exactly the access they need — nothing more, nothing less."
+    },
+    {
+      "heading": "Kitchen workflow",
+      "icon": "chef-hat",
       "body": "Orders route straight to the right kitchen station, cutting mistakes and ticket time during rush hour."
     },
     {
       "heading": "Table management",
+      "icon": "layout-grid",
       "body": "Track table status in real time — open, occupied, billed — so your floor staff always know what's happening."
     },
     {
-      "heading": "Tax-ready billing engine",
+      "heading": "Customer management",
+      "icon": "user-round",
+      "body": "Build a customer base automatically as people order, without a separate CRM tool."
+    },
+    {
+      "heading": "Coupons",
+      "icon": "ticket",
+      "body": "Run promotions and loyalty offers without juggling a separate tool."
+    },
+    {
+      "heading": "Tax engine",
+      "icon": "percent",
       "body": "Compliant billing out of the box, built for how tax actually works for restaurants in India and Southeast Asia."
     },
     {
-      "heading": "Customer management & QR tracking",
-      "body": "Build a customer base automatically with QR-based ordering and repeat-visit tracking."
+      "heading": "Fee engine",
+      "icon": "wallet",
+      "body": "Service charges, packaging fees and platform fees, all configured once and applied automatically."
     },
     {
-      "heading": "Coupons & discounts",
-      "body": "Run promotions and loyalty offers without juggling a separate tool."
+      "heading": "Dashboard",
+      "icon": "layout-dashboard",
+      "body": "See sales, orders and performance across every outlet from one screen — no more chasing spreadsheets."
+    },
+    {
+      "heading": "Billing",
+      "icon": "receipt",
+      "body": "Fast, accurate billing at the counter or the table, with every line item accounted for."
+    },
+    {
+      "heading": "Payment",
+      "icon": "credit-card",
+      "body": "Accept cash, cards and local payment methods, reconciled automatically against every bill."
+    },
+    {
+      "heading": "QR customer tracking",
+      "icon": "qr-code",
+      "body": "QR-based ordering that tracks repeat visits, so you know your regulars without asking."
     }
   ],
   "cta": {

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getRestaurantPosContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
+import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
+import { FadeIn } from "@/components/motion/FadeIn";
 
 const content = getRestaurantPosContent();
 
@@ -26,16 +28,15 @@ export default function RestaurantPosPage() {
         subheadline={content.hero.subheadline}
       />
 
-      <section className="mx-auto max-w-5xl px-6 py-12">
-        <div className="grid gap-6 sm:grid-cols-2">
-          {content.features.map((feature) => (
-            <div key={feature.heading} className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-ink">{feature.heading}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{feature.body}</p>
-            </div>
-          ))}
-        </div>
+      <section className="mx-auto max-w-3xl px-6 pb-4 pt-8 text-center">
+        <FadeIn>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.showcase.eyebrow}</p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink">{content.showcase.headline}</h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">{content.showcase.subtext}</p>
+        </FadeIn>
       </section>
+
+      <RestaurantPosShowcase features={content.features} />
 
       <section className="bg-indigo py-16 text-center text-cream-paper">
         <div className="mx-auto max-w-2xl px-6">
