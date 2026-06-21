@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getBlogContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 
@@ -45,8 +46,18 @@ export default function BlogPage() {
                 <span aria-hidden="true">·</span>
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
               </div>
-              <h2 className="mt-3 text-xl font-bold text-ink">{post.title}</h2>
+              <Link href={`/blog/${post.slug}`}>
+                <h2 className="mt-3 text-xl font-bold text-ink transition hover:text-indigo">
+                  {post.title}
+                </h2>
+              </Link>
               <p className="mt-2 text-muted leading-relaxed">{post.excerpt}</p>
+              <Link
+                href={`/blog/${post.slug}`}
+                className="mt-3 inline-block text-sm font-semibold text-indigo hover:underline"
+              >
+                Read more →
+              </Link>
             </article>
           ))}
         </div>
