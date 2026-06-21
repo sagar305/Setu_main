@@ -36,6 +36,12 @@ export function getBlogContent(): BlogContent {
   return blogData;
 }
 
+export type BlogPost = BlogContent["posts"][number];
+
+export function getBlogPostBySlug(slug: string): BlogPost | undefined {
+  return blogData.posts.find((post) => post.slug === slug);
+}
+
 export function getContactContent(): ContactContent {
   return contactData;
 }
