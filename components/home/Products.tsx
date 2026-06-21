@@ -1,19 +1,20 @@
 import Link from "next/link";
 import type { HomeContent } from "@/lib/content";
+import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
 export function Products({ products }: { products: HomeContent["products"] }) {
   return (
     <section id="products" className="mx-auto max-w-6xl px-6 py-20">
-      <div className="max-w-2xl">
+      <FadeIn className="max-w-2xl">
         <h2 className="text-3xl font-bold tracking-tight text-ink">{products.headline}</h2>
         <p className="mt-4 text-lg text-muted">{products.subtext}</p>
-      </div>
+      </FadeIn>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <FadeInStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {products.cards.map((card) => {
           const isLive = card.status === "live";
           return (
-            <div
+            <FadeInStaggerItem
               key={card.id}
               className={`flex flex-col gap-4 rounded-2xl border p-6 ${
                 isLive
@@ -43,10 +44,10 @@ export function Products({ products }: { products: HomeContent["products"] }) {
               >
                 {card.cta.label} →
               </Link>
-            </div>
+            </FadeInStaggerItem>
           );
         })}
-      </div>
+      </FadeInStagger>
     </section>
   );
 }
