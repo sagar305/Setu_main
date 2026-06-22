@@ -29,7 +29,7 @@
         "name": "Setu Retail",
         "headline": "Retail, run simply",
         "description": "Inventory, billing and store management for retail businesses.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": { "label": "Learn more", "href": "/products/retail" }
       },
       {
         "id": "clinic",
@@ -37,7 +37,7 @@
         "name": "Setu Clinic",
         "headline": "Clinics, without the chaos",
         "description": "Appointments, records and front-desk operations for clinics.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": { "label": "Learn more", "href": "/products/clinic" }
       },
       {
         "id": "wildcard",

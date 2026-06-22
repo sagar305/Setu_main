@@ -32,7 +32,7 @@
       "name": "Setu Retail",
       "headline": "Retail store management, coming soon",
       "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
-      "cta": { "label": "Get notified", "href": "/contact" }
+      "cta": { "label": "Explore Setu Retail", "href": "/products/retail" }
     },
     {
       "id": "clinic",
@@ -40,7 +40,7 @@
       "name": "Setu Clinic",
       "headline": "Clinic & appointment management, coming soon",
       "description": "Appointments, patient records and front-desk operations for clinics of any size.",
-      "cta": { "label": "Get notified", "href": "/contact" }
+      "cta": { "label": "Explore Setu Clinic", "href": "/products/clinic" }
     },
     {
       "id": "wildcard",

@@ -22,8 +22,8 @@
         "heading": "Products",
         "links": [
           { "label": "Setu POS", "href": "/products/restaurant-pos" },
-          { "label": "Setu Retail", "href": "/products#retail" },
-          { "label": "Setu Clinic", "href": "/products#clinic" }
+          { "label": "Setu Retail", "href": "/products/retail" },
+          { "label": "Setu Clinic", "href": "/products/clinic" }
         ]
       },
       {

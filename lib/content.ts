@@ -7,6 +7,8 @@ import productsData from "@/content/en/products.json";
 import blogData from "@/content/en/blog.json";
 import contactData from "@/content/en/contact.json";
 import restaurantPosData from "@/content/en/restaurant-pos.json";
+import retailData from "@/content/en/retail.json";
+import clinicData from "@/content/en/clinic.json";
 
 export type Cta = { label: string; href: string };
 
@@ -17,6 +19,8 @@ export type ProductsContent = typeof productsData;
 export type BlogContent = typeof blogData;
 export type ContactContent = typeof contactData;
 export type RestaurantPosContent = typeof restaurantPosData;
+export type RetailContent = typeof retailData;
+export type ClinicContent = typeof clinicData;
 
 export function getSiteContent(): SiteContent {
   return siteData;
@@ -50,4 +54,12 @@ export function getContactContent(): ContactContent {
 
 export function getRestaurantPosContent(): RestaurantPosContent {
   return restaurantPosData;
+}
+
+export function getRetailContent(): RetailContent {
+  return retailData;
+}
+
+export function getClinicContent(): ClinicContent {
+  return clinicData;
 }
