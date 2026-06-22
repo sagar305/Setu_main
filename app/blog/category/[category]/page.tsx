@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogCategories, getBlogPostsByCategorySlug } from "@/lib/content";
+import { getBlogCategories, getBlogPostUrl, getBlogPostsByCategorySlug } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 
 function formatDate(dateStr: string) {
@@ -73,14 +73,14 @@ export default async function BlogCategoryPage({
                 <span aria-hidden="true">·</span>
                 <time dateTime={post.date}>{formatDate(post.date)}</time>
               </div>
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={getBlogPostUrl(post)}>
                 <h2 className="mt-3 text-xl font-bold text-ink transition hover:text-indigo">
                   {post.title}
                 </h2>
               </Link>
               <p className="mt-2 text-muted leading-relaxed">{post.excerpt}</p>
               <Link
-                href={`/blog/${post.slug}`}
+                href={getBlogPostUrl(post)}
                 className="mt-3 inline-block text-sm font-semibold text-indigo hover:underline"
               >
                 Read more →

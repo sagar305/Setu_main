@@ -64,6 +64,10 @@ export function getBlogPostsByCategorySlug(categorySlug: string): BlogPost[] {
   return blogData.posts.filter((post) => slugifyCategory(post.category) === categorySlug);
 }
 
+export function getBlogPostUrl(post: BlogPost): string {
+  return `/blog/${slugifyCategory(post.category)}/${post.slug}`;
+}
+
 export function getContactContent(): ContactContent {
   return contactData;
 }
