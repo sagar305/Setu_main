@@ -101,7 +101,7 @@
       },
       {
         "question": "What payment methods does Setu POS support?",
-        "answer": "Setu POS accepts cash, cards and local payment methods, with every payment reconciled automatically against the bill."
+        "answer": "Setu POS accepts cash, cards and local payment methods including UPI, with every payment reconciled automatically against the bill."
       },
       {
         "question": "Can I run promotions and coupons in Setu POS?",
@@ -110,6 +110,10 @@
       {
         "question": "How do I get started with Setu POS?",
         "answer": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting for your restaurant."
+      },
+      {
+        "question": "How is Setu POS different from other restaurant POS systems?",
+        "answer": "Setu POS is built from the ground up for how restaurants actually operate in India and globally — local tax rules, local payment methods and multi-outlet operations are defaults, not add-ons. Every feature exists because a real restaurant owner needed it, not because it was on a feature checklist."
       }
     ]
   },

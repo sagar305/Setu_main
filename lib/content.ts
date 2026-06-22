@@ -48,6 +48,22 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogData.posts.find((post) => post.slug === slug);
 }
 
+export function slugifyCategory(category: string): string {
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
+export function getBlogCategories(): { name: string; slug: string }[] {
+  const seen = new Map<string, string>();
+  for (const post of blogData.posts) {
+    seen.set(slugifyCategory(post.category), post.category);
+  }
+  return Array.from(seen, ([slug, name]) => ({ slug, name }));
+}
+
+export function getBlogPostsByCategorySlug(categorySlug: string): BlogPost[] {
+  return blogData.posts.filter((post) => slugifyCategory(post.category) === categorySlug);
+}
+
 export function getContactContent(): ContactContent {
   return contactData;
 }
