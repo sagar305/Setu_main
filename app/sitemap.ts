@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getBlogCategories, getBlogContent, getBlogPostUrl } from "@/lib/content";
+import { getBlogCategories, getBlogCategoryUrl, getBlogContent, getBlogPostUrl } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://setutechnology.com";
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const categoryEntries: MetadataRoute.Sitemap = getBlogCategories().map((category) => ({
-    url: `${base}/blog/category/${category.slug}`,
+    url: `${base}${getBlogCategoryUrl(category.slug)}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.5,

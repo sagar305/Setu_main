@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogContent, getBlogPostBySlug, getBlogPostUrl, slugifyCategory } from "@/lib/content";
+import { getBlogCategoryUrl, getBlogContent, getBlogPostBySlug, getBlogPostUrl, slugifyCategory } from "@/lib/content";
 
 const content = getBlogContent();
 
@@ -75,7 +75,7 @@ export default async function BlogPostPage({
       </Link>
 
       <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-warm">
-        <Link href={`/blog/category/${slugifyCategory(post.category)}`} className="hover:text-indigo">
+        <Link href={getBlogCategoryUrl(slugifyCategory(post.category))} className="hover:text-indigo">
           {post.category}
         </Link>
         <span aria-hidden="true">·</span>

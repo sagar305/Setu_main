@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getBlogCategories, getBlogContent, getBlogPostUrl, slugifyCategory } from "@/lib/content";
+import { getBlogCategories, getBlogCategoryUrl, getBlogContent, getBlogPostUrl, slugifyCategory } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 
 const content = getBlogContent();
@@ -41,7 +41,7 @@ export default function BlogPage() {
           {categories.map((category) => (
             <Link
               key={category.slug}
-              href={`/blog/category/${category.slug}`}
+              href={getBlogCategoryUrl(category.slug)}
               className="rounded-full border border-muted-line/30 px-4 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo hover:text-indigo"
             >
               {category.name}
@@ -58,7 +58,7 @@ export default function BlogPage() {
               className="rounded-2xl border border-muted-line/20 bg-white p-6 shadow-sm"
             >
               <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                <Link href={`/blog/category/${slugifyCategory(post.category)}`} className="hover:text-indigo">
+                <Link href={getBlogCategoryUrl(slugifyCategory(post.category))} className="hover:text-indigo">
                   {post.category}
                 </Link>
                 <span aria-hidden="true">·</span>

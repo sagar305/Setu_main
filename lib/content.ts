@@ -68,6 +68,10 @@ export function getBlogPostUrl(post: BlogPost): string {
   return `/blog/${slugifyCategory(post.category)}/${post.slug}`;
 }
 
+export function getBlogCategoryUrl(categorySlug: string): string {
+  return `/blog/${categorySlug}`;
+}
+
 export function getContactContent(): ContactContent {
   return contactData;
 }
