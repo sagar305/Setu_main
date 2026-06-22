@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Setu Technology | Business software built for how you actually work",
-    "description": "Setu Technology builds operational software for businesses globally, starting with Setu POS for restaurants. Book a free demo.",
+    "title": "Setu Technology | Business Software Built for Every Operator",
+    "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu POS for restaurants. Expanding to retail, clinics and beyond.",
     "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu POS"]
   },
   "hero": {
@@ -12,7 +12,7 @@
     "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
   },
   "products": {
-    "headline": "One company, every industry, starting now",
+    "headline": "One platform, built for every kind of business",
     "subtext": "We build for every kind of business, starting with restaurants — and we're not stopping there.",
     "cards": [
       {
@@ -50,13 +50,13 @@
     ]
   },
   "whySetu": {
-    "headline": "Why businesses choose Setu",
+    "headline": "Why operators in India and beyond choose Setu",
     "subtext": "Built for global businesses, not retrofitted from somewhere else.",
     "items": [
       {
         "heading": "Built for global businesses",
         "icon": "map-pin",
-        "body": "Not a Western product retrofitted. Built from the ground up for GST, local payment methods, multi-currency and local languages."
+        "body": "Not a Western product retrofitted. Built from the ground up for local tax rules, local payment methods, multi-currency and local languages."
       },
       {
         "heading": "One system, every outlet",
@@ -76,7 +76,7 @@
     ]
   },
   "socialProof": {
-    "headline": "Built for how restaurants actually run",
+    "headline": "Built for how your business actually runs",
     "stats": [
       { "value": "Tax-ready", "label": "Compliant billing, out of the box" },
       { "value": "Multi-outlet", "label": "One dashboard, every location" },

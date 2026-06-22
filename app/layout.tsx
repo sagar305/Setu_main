@@ -30,12 +30,25 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Setu Technology",
+  url: "https://setutechnology.com",
+  logo: "https://setutechnology.com/icon.svg",
+  sameAs: ["https://www.instagram.com/setu.technology"],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const site = getSiteContent();
 
   return (
     <html lang="en" className={sora.variable}>
       <body className="font-sora">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Nav site={site} />
         <main>{children}</main>
         <Footer site={site} />

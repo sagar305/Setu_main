@@ -1,13 +1,13 @@
 {
   "seo": {
-    "title": "Setu POS | Restaurant management software",
-    "description": "Setu POS is restaurant management software for billing, kitchen workflow, table management and multi-outlet operations — built for businesses globally.",
-    "keywords": ["Setu POS", "restaurant POS India", "restaurant billing software", "kitchen order management"]
+    "title": "Setu POS — Restaurant POS System for India & Global Operators | Billing, KOT & Multi-Outlet",
+    "description": "Setu POS is a cloud-based restaurant POS system built for restaurants in India and globally — tax-compliant billing, kitchen order tracking, table management and multi-outlet dashboards. Book a free demo.",
+    "keywords": ["Setu POS", "restaurant POS India", "restaurant billing software", "restaurant management software", "kitchen order management", "multi outlet restaurant software", "cloud POS for restaurants"]
   },
   "hero": {
     "eyebrow": "Setu POS — Live",
-    "headline": "Restaurant management, done right",
-    "subheadline": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain."
+    "headline": "Restaurant Management Software for India & Global Operators",
+    "subheadline": "Restaurant management, done right: billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain, in India and worldwide."
   },
   "showcase": {
     "eyebrow": "Inside Setu POS",
@@ -76,6 +76,43 @@
       "body": "Customers scan a QR code at the table to track their order status live and call a waiter for help, no app or login needed."
     }
   ],
+  "faq": {
+    "headline": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Is Setu POS suitable for restaurants in India?",
+        "answer": "Yes. Setu POS is built with a tax engine designed around how billing actually works for restaurants in India, alongside support for restaurants running globally."
+      },
+      {
+        "question": "Does Setu POS support multiple outlets?",
+        "answer": "Yes. You can run one outlet or twenty from the same system, with sales and performance visible across every location from a single dashboard."
+      },
+      {
+        "question": "What is KOT and how does Setu POS handle it?",
+        "answer": "KOT (Kitchen Order Ticket) is how an order reaches the kitchen. Setu POS routes orders straight to the right kitchen station automatically, cutting mistakes and ticket time during rush hour."
+      },
+      {
+        "question": "Is Setu POS tax compliant?",
+        "answer": "Yes. Compliant billing is built in out of the box, configured for how tax actually works for restaurants in India and other markets."
+      },
+      {
+        "question": "Can customers track their order without an app?",
+        "answer": "Yes. Customers scan a QR code at the table to track their order status live and call a waiter for help — no app or login required."
+      },
+      {
+        "question": "What payment methods does Setu POS support?",
+        "answer": "Setu POS accepts cash, cards and local payment methods, with every payment reconciled automatically against the bill."
+      },
+      {
+        "question": "Can I run promotions and coupons in Setu POS?",
+        "answer": "Yes. Setu POS includes built-in coupons and loyalty offers, so you can run promotions without a separate tool."
+      },
+      {
+        "question": "How do I get started with Setu POS?",
+        "answer": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting for your restaurant."
+      }
+    ]
+  },
   "cta": {
     "headline": "See Setu POS running in your restaurant",
     "subtext": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting.",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getRestaurantPosContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
+import { Faq } from "@/components/Faq";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 const content = getRestaurantPosContent();
@@ -19,9 +20,34 @@ export const metadata: Metadata = {
   },
 };
 
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Setu POS",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web, Android, iOS",
+  description: content.seo.description,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: content.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default function RestaurantPosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}
@@ -37,6 +63,8 @@ export default function RestaurantPosPage() {
       </section>
 
       <RestaurantPosShowcase features={content.features} />
+
+      <Faq headline={content.faq.headline} items={content.faq.items} />
 
       <section className="bg-indigo py-16 text-center text-cream-paper">
         <div className="mx-auto max-w-2xl px-6">

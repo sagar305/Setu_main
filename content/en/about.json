@@ -14,7 +14,7 @@
     "paragraphs": [
       "Setu means 'bridge' — and that's exactly what we set out to build: a bridge between how businesses actually run day-to-day, and the software meant to support them.",
       "We started with restaurants because the problem was the clearest there — billing mistakes during rush hour, kitchen orders going wrong, owners with no visibility across outlets. Setu POS was built directly with restaurant owners, outlet managers and kitchen staff, not in a boardroom.",
-      "What we learned building Setu POS — about GST, multi-outlet operations, and what business owners globally actually need — is now the foundation for everything else we build."
+      "What we learned building Setu POS — about tax compliance, multi-outlet operations, and what business owners globally actually need — is now the foundation for everything else we build."
     ]
   },
   "mission": {
@@ -30,7 +30,7 @@
       },
       {
         "heading": "Built for global operators",
-        "body": "GST, local payments, multi-currency and local context are the default, not an add-on."
+        "body": "Local tax rules, local payments, multi-currency and local context are the default, not an add-on."
       },
       {
         "heading": "Honest, not hyped",
