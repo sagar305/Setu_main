@@ -13,7 +13,7 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://setutech.com"),
+  metadataBase: new URL("https://setutechnology.com"),
   title: {
     default: "Setu Technology | Setu for your business",
     template: "%s",
