@@ -11,9 +11,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { name, email, company, message } = body as Record<string, string>;
+  const { name, email, date, time, details, product } = body as Record<string, string>;
 
-  if (!name || !email || !message) {
+  if (!name || !email || !date || !time) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -22,26 +22,28 @@ export async function POST(request: Request) {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
+  const productName = product || "Setu";
+
   const { error } = await resend.emails.send({
     from: "Setu Technology <noreply@setutechnology.com>",
     to: NOTIFY_EMAIL,
     replyTo: email,
-    subject: `New contact form submission from ${name}`,
+    subject: `Demo request: ${productName}`,
     text: [
+      `Product: ${productName}`,
       `Name: ${name}`,
       `Email: ${email}`,
-      company ? `Business name: ${company}` : null,
-      "",
-      "Message:",
-      message,
+      `Preferred date: ${date}`,
+      `Preferred time: ${time}`,
+      details ? `Details: ${details}` : null,
     ]
       .filter(Boolean)
       .join("\n"),
   });
 
   if (error) {
-    console.error("Resend error (contact):", error);
-    return NextResponse.json({ error: "Failed to send message" }, { status: 502 });
+    console.error("Resend error (book-demo):", error);
+    return NextResponse.json({ error: "Failed to send request" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

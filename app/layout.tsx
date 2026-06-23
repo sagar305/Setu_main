@@ -13,13 +13,13 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://setutech.com"),
+  metadataBase: new URL("https://setutechnology.com"),
   title: {
     default: "Setu Technology | Setu for your business",
     template: "%s",
   },
   description:
-    "Setu Technology builds operational software for businesses across India and Southeast Asia, starting with Setu POS for restaurants.",
+    "Setu Technology builds operational software for businesses globally, starting with Setu POS for restaurants.",
   openGraph: {
     siteName: "Setu Technology",
     type: "website",
@@ -30,12 +30,25 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Setu Technology",
+  url: "https://setutechnology.com",
+  logo: "https://setutechnology.com/icon.svg",
+  sameAs: ["https://www.instagram.com/setu.technology"],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const site = getSiteContent();
 
   return (
     <html lang="en" className={sora.variable}>
       <body className="font-sora">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Nav site={site} />
         <main>{children}</main>
         <Footer site={site} />

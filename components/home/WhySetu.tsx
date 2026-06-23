@@ -1,5 +1,14 @@
+import type { ComponentType } from "react";
+import { Headset, Layers, MapPin, Wrench } from "lucide-react";
 import type { HomeContent } from "@/lib/content";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
+
+const icons: Record<string, ComponentType<{ className?: string }>> = {
+  "map-pin": MapPin,
+  layers: Layers,
+  wrench: Wrench,
+  headset: Headset,
+};
 
 export function WhySetu({ whySetu }: { whySetu: HomeContent["whySetu"] }) {
   return (
@@ -11,15 +20,20 @@ export function WhySetu({ whySetu }: { whySetu: HomeContent["whySetu"] }) {
         </FadeIn>
 
         <FadeInStagger className="mt-12 grid gap-8 sm:grid-cols-2">
-          {whySetu.items.map((item) => (
-            <FadeInStaggerItem key={item.heading} className="flex gap-4">
-              <span className="mt-1 h-10 w-10 shrink-0 rounded-xl bg-cream" aria-hidden="true" />
-              <div>
-                <h3 className="text-lg font-semibold text-ink">{item.heading}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
-              </div>
-            </FadeInStaggerItem>
-          ))}
+          {whySetu.items.map((item) => {
+            const Icon = icons[item.icon];
+            return (
+              <FadeInStaggerItem key={item.heading} className="flex gap-4">
+                <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cream">
+                  <Icon className="h-5 w-5 text-indigo" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-ink">{item.heading}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
+                </div>
+              </FadeInStaggerItem>
+            );
+          })}
         </FadeInStagger>
       </div>
     </section>

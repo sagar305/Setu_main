@@ -10,3 +10,48 @@ body {
   background-color: #ECEAE3;
   color: #0E1124;
 }
+
+.blog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  line-height: 1.75;
+  color: #5F6478;
+}
+
+.blog-content h2 {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0E1124;
+}
+
+.blog-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0E1124;
+}
+
+.blog-content p {
+  line-height: 1.75;
+}
+
+.blog-content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.blog-content strong {
+  font-weight: 700;
+  color: #0E1124;
+}
+
+.blog-content a {
+  font-weight: 600;
+  color: #26306B;
+  text-decoration: underline;
+}

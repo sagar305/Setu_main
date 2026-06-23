@@ -1,18 +1,18 @@
 {
   "seo": {
-    "title": "Setu Technology | Business software built for how you actually work",
-    "description": "Setu Technology builds operational software for businesses across India and Southeast Asia, starting with Setu POS for restaurants. Book a free demo.",
+    "title": "Setu Technology | Business Software Built for Every Operator",
+    "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu POS for restaurants. Expanding to retail, clinics and beyond.",
     "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu POS"]
   },
   "hero": {
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
-    "subheadline": "Setu builds operational software for businesses across India & Southeast Asia — starting with restaurants, expanding to every industry.",
-    "primaryCta": { "label": "See Setu POS", "href": "https://pos.setutech.com" },
+    "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
+    "primaryCta": { "label": "See Setu POS", "href": "/products/restaurant-pos" },
     "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
   },
   "products": {
-    "headline": "One company, every industry, starting now",
+    "headline": "One platform, built for every kind of business",
     "subtext": "We build for every kind of business, starting with restaurants — and we're not stopping there.",
     "cards": [
       {
@@ -21,7 +21,7 @@
         "name": "Setu POS",
         "headline": "Restaurant operations, sorted",
         "description": "Billing, kitchen workflow, table management and multi-outlet dashboards for restaurants of any size.",
-        "cta": { "label": "Explore POS", "href": "https://pos.setutech.com" }
+        "cta": { "label": "Explore POS", "href": "/products/restaurant-pos" }
       },
       {
         "id": "retail",
@@ -29,7 +29,7 @@
         "name": "Setu Retail",
         "headline": "Retail, run simply",
         "description": "Inventory, billing and store management for retail businesses.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": { "label": "Learn more", "href": "/products/retail" }
       },
       {
         "id": "clinic",
@@ -37,7 +37,7 @@
         "name": "Setu Clinic",
         "headline": "Clinics, without the chaos",
         "description": "Appointments, records and front-desk operations for clinics.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": { "label": "Learn more", "href": "/products/clinic" }
       },
       {
         "id": "wildcard",
@@ -50,39 +50,43 @@
     ]
   },
   "whySetu": {
-    "headline": "Why businesses choose Setu",
-    "subtext": "Built for India and Southeast Asia, not retrofitted from somewhere else.",
+    "headline": "Why operators in India and beyond choose Setu",
+    "subtext": "Built for global businesses, not retrofitted from somewhere else.",
     "items": [
       {
-        "heading": "Built for India & SEA",
-        "body": "Not a Western product retrofitted. Built from the ground up for GST, local payment methods, multi-currency and local languages."
+        "heading": "Built for global businesses",
+        "icon": "map-pin",
+        "body": "Not a Western product retrofitted. Built from the ground up for local tax rules, local payment methods, multi-currency and local languages."
       },
       {
         "heading": "One system, every outlet",
+        "icon": "layers",
         "body": "Whether you have 1 location or 20, Setu scales without adding complexity."
       },
       {
         "heading": "Owned by operators",
+        "icon": "wrench",
         "body": "Every feature in Setu exists because a real business owner needed it."
       },
       {
         "heading": "Support that answers",
+        "icon": "headset",
         "body": "Real humans, fast responses. Not a ticket system that replies in 5 days."
       }
     ]
   },
   "socialProof": {
-    "headline": "Trusted by restaurants that mean business",
+    "headline": "Built for how your business actually runs",
     "stats": [
-      { "value": "50+", "label": "Restaurants on Setu" },
-      { "value": "120K+", "label": "Orders processed monthly" },
-      { "value": "India + SEA", "label": "Markets served" },
-      { "value": "45 min", "label": "Average onboarding time" }
+      { "value": "Tax-ready", "label": "Compliant billing, out of the box" },
+      { "value": "Multi-outlet", "label": "One dashboard, every location" },
+      { "value": "Global", "label": "Markets we build for" },
+      { "value": "Real humans", "label": "Support, not ticket queues" }
     ]
   },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
-    "cta": { "label": "Book your free demo", "href": "https://pos.setutech.com/demo" }
+    "cta": { "label": "Book your free demo", "href": "/book-demo?product=Setu%20POS" }
   }
 }

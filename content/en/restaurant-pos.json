@@ -1,0 +1,125 @@
+{
+  "seo": {
+    "title": "Setu POS — Restaurant POS System for India & Global Operators | Billing, KOT & Multi-Outlet",
+    "description": "Setu POS is a cloud-based restaurant POS system built for restaurants in India and globally — tax-compliant billing, kitchen order tracking, table management and multi-outlet dashboards. Book a free demo.",
+    "keywords": ["Setu POS", "restaurant POS India", "restaurant billing software", "restaurant management software", "kitchen order management", "multi outlet restaurant software", "cloud POS for restaurants"]
+  },
+  "hero": {
+    "eyebrow": "Setu POS — Live",
+    "headline": "Restaurant Management Software for India & Global Operators",
+    "subheadline": "Restaurant management, done right: billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain, in India and worldwide."
+  },
+  "showcase": {
+    "eyebrow": "Inside Setu POS",
+    "headline": "One system, every part of your restaurant",
+    "subtext": "Scroll through what's actually running under the hood — built around how a real shift moves, from the table to the till."
+  },
+  "features": [
+    {
+      "heading": "Multi-outlet support",
+      "icon": "building-2",
+      "body": "Run one outlet or twenty from the same system, with performance visible across every location."
+    },
+    {
+      "heading": "Role management",
+      "icon": "shield-check",
+      "body": "Give owners, managers and staff exactly the access they need — nothing more, nothing less."
+    },
+    {
+      "heading": "Kitchen workflow",
+      "icon": "chef-hat",
+      "body": "Orders route straight to the right kitchen station, cutting mistakes and ticket time during rush hour."
+    },
+    {
+      "heading": "Table management",
+      "icon": "layout-grid",
+      "body": "Track table status in real time — open, occupied, billed — so your floor staff always know what's happening."
+    },
+    {
+      "heading": "Customer management",
+      "icon": "user-round",
+      "body": "Build a customer base automatically as people order, without a separate CRM tool."
+    },
+    {
+      "heading": "Coupons",
+      "icon": "ticket",
+      "body": "Run promotions and loyalty offers without juggling a separate tool."
+    },
+    {
+      "heading": "Tax engine",
+      "icon": "percent",
+      "body": "Compliant billing out of the box, built for how tax actually works for restaurants globally."
+    },
+    {
+      "heading": "Fee engine",
+      "icon": "wallet",
+      "body": "Service charges, packaging fees and platform fees, all configured once and applied automatically."
+    },
+    {
+      "heading": "Dashboard",
+      "icon": "layout-dashboard",
+      "body": "See sales, orders and performance across every outlet from one screen — no more chasing spreadsheets."
+    },
+    {
+      "heading": "Billing",
+      "icon": "receipt",
+      "body": "Fast, accurate billing at the counter or the table, with every line item accounted for."
+    },
+    {
+      "heading": "Payment",
+      "icon": "credit-card",
+      "body": "Accept cash, cards and local payment methods, reconciled automatically against every bill."
+    },
+    {
+      "heading": "QR customer tracking",
+      "icon": "qr-code",
+      "body": "Customers scan a QR code at the table to track their order status live and call a waiter for help, no app or login needed."
+    }
+  ],
+  "faq": {
+    "headline": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Is Setu POS suitable for restaurants in India?",
+        "answer": "Yes. Setu POS is built with a tax engine designed around how billing actually works for restaurants in India, alongside support for restaurants running globally."
+      },
+      {
+        "question": "Does Setu POS support multiple outlets?",
+        "answer": "Yes. You can run one outlet or twenty from the same system, with sales and performance visible across every location from a single dashboard."
+      },
+      {
+        "question": "What is KOT and how does Setu POS handle it?",
+        "answer": "KOT (Kitchen Order Ticket) is how an order reaches the kitchen. Setu POS routes orders straight to the right kitchen station automatically, cutting mistakes and ticket time during rush hour."
+      },
+      {
+        "question": "Is Setu POS tax compliant?",
+        "answer": "Yes. Compliant billing is built in out of the box, configured for how tax actually works for restaurants in India and other markets."
+      },
+      {
+        "question": "Can customers track their order without an app?",
+        "answer": "Yes. Customers scan a QR code at the table to track their order status live and call a waiter for help — no app or login required."
+      },
+      {
+        "question": "What payment methods does Setu POS support?",
+        "answer": "Setu POS accepts cash, cards and local payment methods including UPI, with every payment reconciled automatically against the bill."
+      },
+      {
+        "question": "Can I run promotions and coupons in Setu POS?",
+        "answer": "Yes. Setu POS includes built-in coupons and loyalty offers, so you can run promotions without a separate tool."
+      },
+      {
+        "question": "How do I get started with Setu POS?",
+        "answer": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting for your restaurant."
+      },
+      {
+        "question": "How is Setu POS different from other restaurant POS systems?",
+        "answer": "Setu POS is built from the ground up for how restaurants actually operate in India and globally — local tax rules, local payment methods and multi-outlet operations are defaults, not add-ons. Every feature exists because a real restaurant owner needed it, not because it was on a feature checklist."
+      }
+    ]
+  },
+  "cta": {
+    "headline": "See Setu POS running in your restaurant",
+    "subtext": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting.",
+    "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+  }
+}

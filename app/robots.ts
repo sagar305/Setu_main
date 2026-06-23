@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://setutech.com/sitemap.xml",
+    sitemap: "https://setutechnology.com/sitemap.xml",
   };
 }

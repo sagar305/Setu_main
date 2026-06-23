@@ -1,9 +1,19 @@
 import type { MetadataRoute } from "next";
-import { getBlogContent } from "@/lib/content";
+import { getBlogCategories, getBlogCategoryUrl, getBlogContent, getBlogPostUrl } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://setutech.com";
-  const routes = ["", "/about", "/products", "/blog", "/contact"];
+  const base = "https://setutechnology.com";
+  const routes = [
+    "",
+    "/about",
+    "/products",
+    "/products/restaurant-pos",
+    "/products/retail",
+    "/products/clinic",
+    "/blog",
+    "/contact",
+    "/book-demo",
+  ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${base}${route}`,
@@ -13,11 +23,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const blogEntries: MetadataRoute.Sitemap = getBlogContent().posts.map((post) => ({
-    url: `${base}/blog/${post.slug}`,
+    url: `${base}${getBlogPostUrl(post)}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...blogEntries];
+  const categoryEntries: MetadataRoute.Sitemap = getBlogCategories().map((category) => ({
+    url: `${base}${getBlogCategoryUrl(category.slug)}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
+
+  return [...staticEntries, ...blogEntries, ...categoryEntries];
 }

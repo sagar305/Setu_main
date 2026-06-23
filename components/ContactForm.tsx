@@ -12,7 +12,8 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
     event.preventDefault();
     setStatus("submitting");
 
-    const data = Object.fromEntries(new FormData(event.currentTarget));
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
 
     try {
       const res = await fetch("/api/contact", {
@@ -21,7 +22,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
         body: JSON.stringify(data),
       });
       setStatus(res.ok ? "success" : "error");
-      if (res.ok) event.currentTarget.reset();
+      if (res.ok) form.reset();
     } catch {
       setStatus("error");
     }

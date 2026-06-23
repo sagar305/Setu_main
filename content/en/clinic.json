@@ -1,0 +1,28 @@
+{
+  "seo": {
+    "title": "Setu Clinic — Clinic & Appointment Management Software for India & Global Businesses | Coming Soon",
+    "description": "Setu Clinic is clinic management software for appointments, patient records and front-desk operations — built for clinics in India and globally. Get notified when it launches.",
+    "keywords": ["Setu Clinic", "clinic management software India", "appointment scheduling software", "clinic front-desk software"]
+  },
+  "hero": {
+    "eyebrow": "Setu Clinic — Coming Soon",
+    "headline": "Clinic & Appointment Management Software for India & Global Businesses",
+    "subheadline": "Appointments, patient records and front-desk operations for clinics of any size, in India and worldwide — part of the same platform powering Setu POS."
+  },
+  "body": {
+    "headline": "What we're building",
+    "paragraphs": [
+      "Setu Clinic brings the same operator-first approach behind Setu POS to clinics — appointment scheduling that doesn't double-book, patient records your front desk can actually find, and a front-desk workflow built around how a real clinic day moves.",
+      "We're building it on the same multi-outlet architecture already running in Setu POS, so multi-location clinics get visibility across every branch from day one."
+    ]
+  },
+  "cta": {
+    "headline": "Want early access to Setu Clinic?",
+    "subtext": "Tell us about your clinic and we'll notify you as soon as Setu Clinic launches.",
+    "cta": { "label": "Get notified", "href": "/contact" }
+  },
+  "crossSell": {
+    "text": "Running a restaurant instead? Setu POS is live today.",
+    "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
+  }
+}
