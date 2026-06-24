@@ -39,9 +39,9 @@ export function RecipeCostingCalculatorTool() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Total recipe cost" value={formatCurrency(result.totalCost)} />
+        <ResultStat label="Total recipe cost (all servings)" value={formatCurrency(result.totalCost)} />
         <ResultStat label="Cost per serving" value={formatCurrency(result.costPerServing)} emphasis />
-        <ResultStat label="Suggested menu price" value={formatCurrency(result.suggestedPrice)} />
+        <ResultStat label="Suggested price per serving" value={formatCurrency(result.suggestedPrice)} />
       </div>
     </div>
   );
