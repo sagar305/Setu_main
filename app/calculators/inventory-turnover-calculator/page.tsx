@@ -1,0 +1,26 @@
+import type { Metadata } from "next";
+import { getCalculatorBySlug } from "@/lib/content";
+import { CalculatorShell } from "@/components/calculators/CalculatorShell";
+import { InventoryTurnoverCalculatorTool } from "@/components/calculators/tools/InventoryTurnoverCalculatorTool";
+
+const item = getCalculatorBySlug("inventory-turnover-calculator")!;
+
+export const metadata: Metadata = {
+  title: item.seo.title,
+  description: item.seo.description,
+  keywords: item.seo.keywords,
+  alternates: { canonical: "/calculators/inventory-turnover-calculator" },
+  openGraph: {
+    title: item.seo.title,
+    description: item.seo.description,
+    url: "/calculators/inventory-turnover-calculator",
+  },
+};
+
+export default function InventoryTurnoverCalculatorPage() {
+  return (
+    <CalculatorShell item={item}>
+      <InventoryTurnoverCalculatorTool />
+    </CalculatorShell>
+  );
+}
