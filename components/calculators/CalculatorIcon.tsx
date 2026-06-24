@@ -20,6 +20,7 @@ import {
   RefreshCw,
   Target,
   CircleDollarSign,
+  Smartphone,
 } from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
@@ -42,6 +43,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "refresh-cw": RefreshCw,
   target: Target,
   "circle-dollar-sign": CircleDollarSign,
+  smartphone: Smartphone,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {

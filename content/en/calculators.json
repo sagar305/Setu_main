@@ -627,6 +627,57 @@
       }
     },
     {
+      "slug": "online-menu-price-calculator",
+      "name": "Online Menu Price Calculator",
+      "category": "restaurant-ops",
+      "icon": "smartphone",
+      "shortDescription": "Find the price to upload on Zomato, Swiggy or any app so you still take home your target amount after commission and GST.",
+      "seo": {
+        "title": "Zomato Swiggy Menu Price Calculator | Setu Technology",
+        "description": "Free online menu price calculator for restaurants. Enter the amount you want to take home and find the listed price that covers commission, GST on commission, gateway fees and GST on the item.",
+        "keywords": ["zomato menu price calculator", "swiggy price calculator", "online menu price after commission", "delivery app pricing calculator", "reverse commission calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Online Menu Price Calculator",
+        "headline": "Online Menu Price Calculator",
+        "subheadline": "Tell us what you want to actually take home from an online order, and we'll work out the price you need to list on the app."
+      },
+      "about": {
+        "headline": "Work backward from your target take-home",
+        "paragraphs": [
+          "If you list the same price online as you charge at the counter, commission, GST on that commission, gateway fees and the GST you owe on the sale all eat into it before you see a rupee — so your online take-home ends up well below your dine-in price.",
+          "This calculator flips the usual commission calculation around: enter the amount you actually want to keep per item, plus your platform's charges, and it solves for the listed price that gets you there. Use it whenever you onboard a new item to an aggregator or a platform changes its commission slab.",
+          "This is a simplified model — it assumes commission and gateway fees are charged on the listed price and that the listed price is inclusive of the GST you charge on the item. Aggregator agreements vary, so cross-check the result against an actual payout report before rolling out new menu prices."
+        ]
+      },
+      "faq": {
+        "headline": "Online menu price calculator FAQs",
+        "items": [
+          {
+            "question": "Why is the price I should list higher than my dine-in price?",
+            "answer": "Because commission, GST on that commission, gateway fees and the GST you owe on the sale are all deducted from the listed price before you get paid. To net the same amount online as you would at the counter, the listed price has to absorb all of those deductions."
+          },
+          {
+            "question": "Is commission really charged on the GST-inclusive price?",
+            "answer": "It depends on the platform and your agreement — some charge commission on the base (pre-GST) value, others on the full listed price. This calculator assumes commission and gateway fees apply to the listed price, which is the more common and conservative case. Check your payout report to confirm which applies to you."
+          },
+          {
+            "question": "What if no listed price can cover all the charges?",
+            "answer": "If commission, GST and fees together add up to 100% or more of the listed price, no price can recover your target take-home — the calculator will flag this so you can reconsider the item's online margin instead of guessing at a price."
+          },
+          {
+            "question": "Can Setu POS sync these prices to my delivery platforms?",
+            "answer": "Yes. Setu POS lets you manage menu pricing across dine-in and multiple aggregators from one screen, so updated prices go out everywhere at once."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Manage every aggregator from one screen",
+        "subtext": "Setu POS brings orders from all your delivery platforms into a single kitchen view.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
       "slug": "recipe-costing-calculator",
       "name": "Recipe Costing Calculator",
       "category": "restaurant-ops",
