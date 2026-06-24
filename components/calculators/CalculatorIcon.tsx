@@ -1,5 +1,26 @@
 import type { ComponentType } from "react";
-import { Percent, TrendingUp, Tag, Scale, ChefHat, BadgePercent, Landmark, Clock, Calculator } from "lucide-react";
+import {
+  Percent,
+  TrendingUp,
+  Tag,
+  Scale,
+  ChefHat,
+  BadgePercent,
+  Landmark,
+  Clock,
+  Calculator,
+  Wallet,
+  Receipt,
+  PiggyBank,
+  ShoppingCart,
+  UtensilsCrossed,
+  Martini,
+  HandCoins,
+  Boxes,
+  RefreshCw,
+  Target,
+  CircleDollarSign,
+} from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
   percent: Percent,
@@ -10,6 +31,17 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "badge-percent": BadgePercent,
   landmark: Landmark,
   clock: Clock,
+  wallet: Wallet,
+  receipt: Receipt,
+  "piggy-bank": PiggyBank,
+  "shopping-cart": ShoppingCart,
+  "utensils-crossed": UtensilsCrossed,
+  martini: Martini,
+  "hand-coins": HandCoins,
+  boxes: Boxes,
+  "refresh-cw": RefreshCw,
+  target: Target,
+  "circle-dollar-sign": CircleDollarSign,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {

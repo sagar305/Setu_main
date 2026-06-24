@@ -21,7 +21,9 @@
   "categories": [
     { "id": "pricing-profit", "name": "Pricing & Profit" },
     { "id": "restaurant-ops", "name": "Restaurant Operations" },
-    { "id": "tax-finance", "name": "Tax & Finance" }
+    { "id": "retail-ops", "name": "Retail Operations" },
+    { "id": "tax-finance", "name": "Tax & Finance" },
+    { "id": "growth-marketing", "name": "Growth & Marketing" }
   ],
   "items": [
     {
@@ -421,6 +423,556 @@
       "cta": {
         "headline": "See every table's status, live",
         "subtext": "Setu POS tracks table status in real time, so your floor staff always know what's free.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "take-home-salary-calculator",
+      "name": "Take-Home Salary Calculator",
+      "category": "tax-finance",
+      "icon": "wallet",
+      "shortDescription": "See your monthly in-hand salary after PF, professional tax and other deductions from CTC.",
+      "seo": {
+        "title": "Take-Home Salary Calculator — CTC to In-Hand Salary | Setu Technology",
+        "description": "Free take-home salary calculator. Enter your CTC to estimate monthly in-hand salary after PF, professional tax and other standard deductions.",
+        "keywords": ["take home salary calculator", "CTC to in hand salary calculator", "in hand salary calculator India", "salary calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Take-Home Salary Calculator",
+        "headline": "Take-Home Salary Calculator",
+        "subheadline": "Enter your annual CTC to estimate your monthly in-hand salary after standard deductions."
+      },
+      "about": {
+        "headline": "What actually lands in your account each month",
+        "paragraphs": [
+          "CTC (Cost to Company) is rarely the amount that lands in a bank account. Provident fund contributions, professional tax and other deductions come out before salary is paid, and the gap between CTC and in-hand pay surprises a lot of new hires — and a lot of owners budgeting for a new role.",
+          "This calculator gives a quick estimate of monthly take-home pay from an annual CTC figure, using typical PF and professional tax assumptions. Actual numbers depend on your specific salary structure (basic, HRA, allowances) and company policy, so treat this as a planning estimate rather than a payslip."
+        ]
+      },
+      "faq": {
+        "headline": "Take-home salary calculator FAQs",
+        "items": [
+          {
+            "question": "What is the difference between CTC and take-home salary?",
+            "answer": "CTC is the total cost an employer bears for an employee, including basic pay, allowances, employer's PF contribution and other benefits. Take-home salary is what actually gets paid into the employee's bank account each month, after deductions like employee PF contribution, professional tax and income tax (if applicable)."
+          },
+          {
+            "question": "Why is my take-home salary lower than CTC divided by 12?",
+            "answer": "Because CTC includes employer contributions (like employer PF) that never reach the employee's bank account, and deductions like employee PF, professional tax and TDS are subtracted from gross pay before it's disbursed."
+          },
+          {
+            "question": "Is this calculator accurate for my exact salary slip?",
+            "answer": "It's a planning estimate based on typical assumptions for PF and professional tax. Your actual take-home pay depends on your specific salary structure, state, and any additional deductions like income tax TDS, so use your company's payslip or HR for the exact figure."
+          },
+          {
+            "question": "Does this include income tax deduction?",
+            "answer": "No — this calculator estimates deductions for PF and professional tax only. For an estimate that includes income tax, use the income tax calculator alongside this tool."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Staffing a new location? Plan the numbers first",
+        "subtext": "Setu POS gives you the sales and labour-cost data to know if a new hire pays for itself.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "income-tax-calculator",
+      "name": "Income Tax Calculator",
+      "category": "tax-finance",
+      "icon": "receipt",
+      "shortDescription": "Estimate income tax under the old vs new regime for FY 2025-26.",
+      "seo": {
+        "title": "Income Tax Calculator (FY 2025-26) — Old vs New Regime | Setu Technology",
+        "description": "Free income tax calculator for FY 2025-26 (AY 2026-27). Compare old regime vs new regime tax and see which saves you more. Estimate only — verify against the latest Budget.",
+        "keywords": ["income tax calculator", "income tax calculator FY 2025-26", "old vs new tax regime calculator", "income tax calculator India"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Income Tax Calculator",
+        "headline": "Income Tax Calculator",
+        "subheadline": "Compare old regime vs new regime tax on your income for FY 2025-26, and see which one works out cheaper."
+      },
+      "about": {
+        "headline": "Old regime or new regime — know before you choose",
+        "paragraphs": [
+          "India's income tax system lets most taxpayers choose between the old regime (more deductions, higher slab rates) and the new regime (fewer deductions, lower slab rates). The right choice depends entirely on how many deductions and exemptions you actually claim — there's no universal answer.",
+          "This calculator estimates tax payable under both regimes for FY 2025-26 (AY 2026-27) using the latest slabs and standard deduction we have on record, including the Section 87A rebate. It does not account for surcharge on very high incomes, marginal-relief edge cases, or every possible deduction — and tax slabs are typically revised in the Union Budget each year, so always cross-check against the latest official slabs or a chartered accountant before filing or making a regime decision."
+        ]
+      },
+      "faq": {
+        "headline": "Income tax calculator FAQs",
+        "items": [
+          {
+            "question": "What are the new tax regime slabs for FY 2025-26?",
+            "answer": "Under the new regime (FY 2025-26 / AY 2026-27): nil up to ₹4,00,000; 5% from ₹4,00,001-8,00,000; 10% from ₹8,00,001-12,00,000; 15% from ₹12,00,001-16,00,000; 20% from ₹16,00,001-20,00,000; 25% from ₹20,00,001-24,00,000; and 30% above ₹24,00,000. Tax slabs change with each Union Budget, so confirm against the latest official notification before relying on this for filing."
+          },
+          {
+            "question": "What is the Section 87A rebate?",
+            "answer": "It's a rebate that brings tax liability to zero for taxpayers under a certain taxable income threshold. Under the new regime for FY 2025-26, the rebate generally applies up to ₹12,00,000 taxable income, with marginal relief tapering it just above that threshold. This calculator applies a simplified version and doesn't model every marginal-relief edge case."
+          },
+          {
+            "question": "Should I choose the old regime or new regime?",
+            "answer": "It depends on how much you claim in deductions — HRA, 80C investments, home loan interest, and so on. If your eligible deductions are large, the old regime often works out cheaper; if you claim few deductions, the new regime's lower slab rates usually win. Compare both using this calculator with your actual numbers."
+          },
+          {
+            "question": "Is this calculator a substitute for filing advice from a CA?",
+            "answer": "No. This is a simplified estimate for planning purposes only — it excludes surcharge, cess nuances for some cases, and several itemised deductions. For your actual tax filing or a regime decision with real money at stake, verify the latest slabs and consult a qualified chartered accountant."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Run your business, not your tax spreadsheet",
+        "subtext": "Setu POS keeps your sales and expense data organised, so tax season is less of a scramble.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "gratuity-calculator",
+      "name": "Gratuity Calculator",
+      "category": "tax-finance",
+      "icon": "piggy-bank",
+      "shortDescription": "Estimate gratuity payable under the Payment of Gratuity Act based on salary and years of service.",
+      "seo": {
+        "title": "Gratuity Calculator — Payment of Gratuity Act | Setu Technology",
+        "description": "Free gratuity calculator. Enter last drawn salary and years of service to estimate gratuity payable under the Payment of Gratuity Act, 1972.",
+        "keywords": ["gratuity calculator", "gratuity calculator India", "payment of gratuity act calculator", "gratuity formula"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Gratuity Calculator",
+        "headline": "Gratuity Calculator",
+        "subheadline": "Enter last drawn salary and years of service to estimate gratuity payable on exit."
+      },
+      "about": {
+        "headline": "What gratuity is owed, and when",
+        "paragraphs": [
+          "Gratuity is a lump-sum payment employers owe employees who've completed at least 5 years of continuous service, under the Payment of Gratuity Act, 1972. It's calculated from an employee's last drawn salary and total years of service — not their full career earnings.",
+          "This calculator applies the standard formula used for employees covered under the Act, and is useful for both employees estimating what they're owed on exit and owners budgeting for the gratuity liability of long-tenured staff. The statutory ceiling on gratuity is revised periodically by the government, so confirm the current cap before relying on this for a final settlement figure."
+        ]
+      },
+      "faq": {
+        "headline": "Gratuity calculator FAQs",
+        "items": [
+          {
+            "question": "What is the formula for gratuity calculation?",
+            "answer": "Gratuity = (Last Drawn Monthly Salary × 15 × Number of Years of Service) ÷ 26, for employees covered under the Payment of Gratuity Act. Salary here typically means basic pay plus dearness allowance."
+          },
+          {
+            "question": "Am I eligible for gratuity?",
+            "answer": "Generally, employees who've completed 5 or more years of continuous service with the same employer are eligible, with some exceptions (such as death or disablement, where the 5-year condition doesn't apply)."
+          },
+          {
+            "question": "Is there a maximum limit on gratuity?",
+            "answer": "Yes — the Payment of Gratuity Act sets a statutory ceiling on tax-exempt gratuity, which the government revises periodically. Check the current limit before treating this calculator's output as a final, capped figure."
+          },
+          {
+            "question": "How is 'years of service' counted if I worked 7 years and 8 months?",
+            "answer": "Under the Act, a period of service of more than 6 months past a completed year is typically rounded up to the next full year. So 7 years 8 months would usually be treated as 8 years for the calculation."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Planning your staffing budget?",
+        "subtext": "Setu POS gives you the sales data to plan staffing and long-term payroll costs around what your outlet can support.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "online-order-commission-calculator",
+      "name": "Online Order Commission Calculator",
+      "category": "restaurant-ops",
+      "icon": "shopping-cart",
+      "shortDescription": "See your real payout after platform commission, packaging and payment gateway charges on an online order.",
+      "seo": {
+        "title": "Online Food Delivery Commission Calculator | Setu Technology",
+        "description": "Free online order commission calculator for restaurants. Enter order value, platform commission and other charges to see your real payout per order.",
+        "keywords": ["food delivery commission calculator", "Swiggy Zomato commission calculator", "online order payout calculator", "restaurant aggregator commission"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Online Order Commission Calculator",
+        "headline": "Online Order Commission Calculator",
+        "subheadline": "Enter the order value and platform charges to see exactly what you take home from an online order."
+      },
+      "about": {
+        "headline": "What an online order actually pays you",
+        "paragraphs": [
+          "Listed commission rates rarely tell the whole story. Once you add packaging cost, payment gateway charges and GST on the commission itself, the gap between the order value a customer pays and what actually lands in your account can be 30% or more.",
+          "Enter the order value and the charges that apply on your aggregator account to see the real payout per order and your effective take-home percentage. Run a few of your common order sizes through this to see whether online orders are as profitable as your dine-in or takeaway business once all the deductions are in."
+        ]
+      },
+      "faq": {
+        "headline": "Online order commission calculator FAQs",
+        "items": [
+          {
+            "question": "How do food delivery platforms calculate commission?",
+            "answer": "Most platforms charge a commission as a percentage of the order value, and may charge GST on top of that commission. Packaging charges and payment gateway fees are typically separate and reduce your payout further."
+          },
+          {
+            "question": "Why is my actual payout so much lower than the order value?",
+            "answer": "Commission, GST on commission, packaging cost and payment gateway fees all come out of the order value before you're paid. On a typical order these combined deductions commonly run 25-35% of the order value, depending on your platform and category."
+          },
+          {
+            "question": "Should I price items differently for delivery platforms?",
+            "answer": "Many restaurants do build a delivery-specific markup into their aggregator menu prices to offset commission, since dine-in and delivery have very different cost structures. Use this calculator to check whether your current delivery prices leave you a sustainable margin."
+          },
+          {
+            "question": "Can Setu POS manage orders from multiple delivery platforms?",
+            "answer": "Yes. Setu POS can bring in orders from multiple aggregators into a single view, so your kitchen doesn't have to juggle separate tablets for every platform."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Manage every aggregator from one screen",
+        "subtext": "Setu POS brings orders from all your delivery platforms into a single kitchen view.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "recipe-costing-calculator",
+      "name": "Recipe Costing Calculator",
+      "category": "restaurant-ops",
+      "icon": "utensils-crossed",
+      "shortDescription": "Cost out a recipe ingredient by ingredient to find true cost per serving.",
+      "seo": {
+        "title": "Recipe Costing Calculator — Cost Per Serving | Setu Technology",
+        "description": "Free recipe costing calculator for restaurants. Add ingredients and quantities to find total recipe cost, cost per serving and a suggested menu price.",
+        "keywords": ["recipe costing calculator", "recipe cost calculator", "menu costing", "cost per serving calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Recipe Costing Calculator",
+        "headline": "Recipe Costing Calculator",
+        "subheadline": "Add each ingredient and quantity to find the true cost of a recipe, per serving."
+      },
+      "about": {
+        "headline": "Cost the recipe, not just the headline ingredients",
+        "paragraphs": [
+          "Most menu pricing mistakes come from costing a dish on its 2-3 main ingredients and guessing the rest. Oil, spices, garnish and packaging are individually small but add up — and that gap compounds across hundreds of orders a month.",
+          "Add every ingredient in a recipe with its quantity and unit cost to get an accurate total cost and cost per serving. Once you know the real cost, use it alongside the food cost percentage calculator to set a menu price that protects your margin."
+        ]
+      },
+      "faq": {
+        "headline": "Recipe costing calculator FAQs",
+        "items": [
+          {
+            "question": "Why should I cost every ingredient instead of just the main ones?",
+            "answer": "Small ingredients like oil, spices, sauces and garnish are individually cheap but add up across a recipe, and across hundreds of plates sold each month that gap can meaningfully erode margin if it's never accounted for."
+          },
+          {
+            "question": "How many servings should I divide the total cost by?",
+            "answer": "Divide by the actual number of servings or plates the recipe yields, not the number of ingredients used. If a batch recipe makes a base used across 10 plates, use 10 as the serving count."
+          },
+          {
+            "question": "Does this include labour or overhead cost?",
+            "answer": "No — this calculates raw ingredient cost only. Add labour and overhead separately, and consider both alongside ingredient cost when setting a final menu price."
+          },
+          {
+            "question": "Can I save this for every dish on my menu?",
+            "answer": "This tool doesn't store data between sessions, so note down the cost per serving for each dish as you go. Setu POS can store recipe costs against menu items permanently and update automatically as ingredient prices change."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Recipes that update cost automatically",
+        "subtext": "Setu POS links recipes to live ingredient prices, so cost per plate stays accurate without manual recalculation.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "liquor-cost-calculator",
+      "name": "Liquor Pour Cost Calculator",
+      "category": "restaurant-ops",
+      "icon": "martini",
+      "shortDescription": "Find your pour cost percentage and profit on every drink you pour.",
+      "seo": {
+        "title": "Liquor Pour Cost Calculator — Bar Cost Control | Setu Technology",
+        "description": "Free liquor pour cost calculator for bars and restaurants. Enter bottle cost, pour size and selling price to find pour cost % and profit per drink.",
+        "keywords": ["pour cost calculator", "liquor cost calculator", "bar cost calculator", "pour cost percentage"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Liquor Pour Cost Calculator",
+        "headline": "Liquor Pour Cost Calculator",
+        "subheadline": "Enter bottle cost, pour size and selling price to see your pour cost % and profit per drink."
+      },
+      "about": {
+        "headline": "The bar's version of food cost percentage",
+        "paragraphs": [
+          "Pour cost is to a bar what food cost percentage is to a kitchen — the share of a drink's selling price that goes toward the liquor itself. It's the number that tells you whether your drink pricing and pour sizes are actually profitable, especially once you factor in how many pours a single bottle yields.",
+          "Enter the bottle cost, bottle size, the pour size you actually serve, and the selling price per drink to get pour cost %, profit per pour and how many pours you should get from each bottle. Run your top sellers through this whenever a supplier changes a price."
+        ]
+      },
+      "faq": {
+        "headline": "Liquor cost calculator FAQs",
+        "items": [
+          {
+            "question": "How is pour cost percentage calculated?",
+            "answer": "Pour Cost % = (Cost per Pour ÷ Selling Price per Pour) × 100, where Cost per Pour = Bottle Cost ÷ (Bottle Size ÷ Pour Size)."
+          },
+          {
+            "question": "What is a good pour cost percentage?",
+            "answer": "Most bars target 18-24% pour cost on spirits, though it varies by category — premium and craft offerings often run a bit higher in exchange for a higher price point and perceived value."
+          },
+          {
+            "question": "Why does my actual pour cost not match my target?",
+            "answer": "Over-pouring is the most common cause — even an extra 5-10ml per drink compounds quickly across a busy night. Inconsistent pour sizes, spillage, and complimentary or comped drinks also widen the gap between target and actual pour cost."
+          },
+          {
+            "question": "How many pours should I get from one bottle?",
+            "answer": "Pours per Bottle = Bottle Size ÷ Pour Size. A standard 750ml bottle poured at 30ml per drink should yield 25 pours — track actual pours against this to spot over-pouring or wastage."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Control bar costs the same way you control food cost",
+        "subtext": "Setu POS tracks inventory consumption against sales, so over-pouring and wastage show up fast.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "tip-split-calculator",
+      "name": "Tip Split Calculator",
+      "category": "restaurant-ops",
+      "icon": "hand-coins",
+      "shortDescription": "Split a shared tip pool fairly across staff by hours, shares or equally.",
+      "seo": {
+        "title": "Tip Split Calculator — Fair Tip Pooling for Staff | Setu Technology",
+        "description": "Free tip split calculator. Add staff and hours or shares to split a tip pool fairly — equal split, by hours worked, or by points.",
+        "keywords": ["tip split calculator", "tip pooling calculator", "tip sharing calculator", "restaurant tip calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Tip Split Calculator",
+        "headline": "Tip Split Calculator",
+        "subheadline": "Add your staff and split a shared tip pool equally, by hours worked, or by points/shares."
+      },
+      "about": {
+        "headline": "Tip pooling that staff can see is fair",
+        "paragraphs": [
+          "Splitting tips manually gets messy fast once you're accounting for different shift lengths or roles. A server who worked a full double shift and one who covered the last two hours shouldn't get equal shares — but agreeing on exactly how to weight it is where most disputes start.",
+          "This calculator splits a tip pool three ways: equally across everyone, proportionally by hours worked, or by a points/shares system where you assign each role or person a weight. Add your staff, pick a method, and the split updates instantly."
+        ]
+      },
+      "faq": {
+        "headline": "Tip split calculator FAQs",
+        "items": [
+          {
+            "question": "What's the difference between an equal split and a points-based split?",
+            "answer": "An equal split divides the pool evenly regardless of role or hours. A points-based split assigns each person a weight (points or shares) reflecting role, seniority or hours, and divides the pool proportionally to those weights — common when front-of-house and support roles are pooled together."
+          },
+          {
+            "question": "Should kitchen staff be included in a tip pool with servers?",
+            "answer": "Tip pooling rules and norms vary by region and by local labour regulations — some jurisdictions restrict who can be included in a tip pool. Check what's permitted where you operate before deciding who's eligible."
+          },
+          {
+            "question": "How do I split tips fairly by hours worked?",
+            "answer": "Use the 'by hours' method — enter each person's hours for the shift or period, and the pool is divided proportionally, so someone who worked twice as long receives roughly twice the share."
+          },
+          {
+            "question": "Can I use this for a single shift or a whole week's tips?",
+            "answer": "Either — enter the total tip pool for whatever period you're splitting (a shift, a day, a week) along with the hours or shares for that same period."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Payroll and tips, without the side spreadsheet",
+        "subtext": "Setu POS tracks shift hours and sales by staff member, so you've always got the numbers tip splits need.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "inventory-turnover-calculator",
+      "name": "Inventory Turnover Calculator",
+      "category": "retail-ops",
+      "icon": "boxes",
+      "shortDescription": "Find how many times your inventory sells through in a period, and how many days of stock you're holding.",
+      "seo": {
+        "title": "Inventory Turnover Ratio Calculator — Free Tool | Setu Technology",
+        "description": "Free inventory turnover calculator for retail businesses. Enter cost of goods sold and average inventory to find turnover ratio and days of inventory on hand.",
+        "keywords": ["inventory turnover calculator", "inventory turnover ratio", "days inventory outstanding calculator", "stock turnover calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Inventory Turnover Calculator",
+        "headline": "Inventory Turnover Calculator",
+        "subheadline": "Enter cost of goods sold and average inventory value to see your turnover ratio and days of stock on hand."
+      },
+      "about": {
+        "headline": "Cash tied up on a shelf is cash you can't use elsewhere",
+        "paragraphs": [
+          "Inventory turnover tells you how many times you sell through your average stock in a given period. A low turnover ratio usually means cash sitting in slow-moving stock; a very high one can mean you're at risk of stockouts. Neither extreme is automatically good — the right number depends on your category and how easily you can restock.",
+          "Enter your cost of goods sold for a period (month or year) and your average inventory value over the same period to get your turnover ratio and the equivalent number of days of stock you're holding. Track this over time rather than in isolation — a falling turnover ratio is often the earliest sign of slow-moving or dead stock building up."
+        ]
+      },
+      "faq": {
+        "headline": "Inventory turnover calculator FAQs",
+        "items": [
+          {
+            "question": "What is the inventory turnover ratio formula?",
+            "answer": "Inventory Turnover Ratio = Cost of Goods Sold ÷ Average Inventory Value, for the same period. Average inventory is typically (Opening Inventory + Closing Inventory) ÷ 2."
+          },
+          {
+            "question": "What is a good inventory turnover ratio?",
+            "answer": "It varies widely by category — perishables and fast fashion turn over much faster than furniture or electronics. Compare your ratio against your own historical trend and category benchmarks rather than a single universal number."
+          },
+          {
+            "question": "What does 'days inventory outstanding' mean?",
+            "answer": "It's the turnover ratio converted into days — roughly how many days of sales your current average inventory represents. It's calculated as 365 ÷ Inventory Turnover Ratio, and a rising number signals stock is moving more slowly than before."
+          },
+          {
+            "question": "Why is my inventory turnover dropping?",
+            "answer": "Common causes are overstocking ahead of demand, slow-moving SKUs accumulating, seasonal demand dips, or pricing that's no longer competitive enough to move stock at the previous pace."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Want early access to Setu Retail?",
+        "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches, with inventory tracking built in.",
+        "cta": { "label": "Get notified", "href": "/contact" }
+      }
+    },
+    {
+      "slug": "stock-reorder-point-calculator",
+      "name": "Stock Reorder Point Calculator",
+      "category": "retail-ops",
+      "icon": "refresh-cw",
+      "shortDescription": "Find the exact stock level that should trigger your next reorder.",
+      "seo": {
+        "title": "Stock Reorder Point Calculator — Avoid Stockouts | Setu Technology",
+        "description": "Free reorder point calculator for retail. Enter average daily sales, lead time and safety stock to find the stock level that should trigger reordering.",
+        "keywords": ["reorder point calculator", "stock reorder point", "inventory reorder calculator", "safety stock calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Stock Reorder Point Calculator",
+        "headline": "Stock Reorder Point Calculator",
+        "subheadline": "Enter average daily sales, supplier lead time and safety stock to find when you should reorder."
+      },
+      "about": {
+        "headline": "Reorder before you run out, not after",
+        "paragraphs": [
+          "A reorder point is the stock level that should trigger a new purchase order — set it too low and you risk running out before the new stock arrives; set it too high and you're tying up cash in excess inventory.",
+          "Enter your average daily sales for an item, how many days your supplier typically takes to deliver, and a safety stock buffer for demand spikes or delivery delays, and this calculator gives you the exact unit count that should trigger your next order."
+        ]
+      },
+      "faq": {
+        "headline": "Stock reorder point calculator FAQs",
+        "items": [
+          {
+            "question": "What is the reorder point formula?",
+            "answer": "Reorder Point = (Average Daily Sales × Supplier Lead Time in Days) + Safety Stock. It's the stock level at which a new order should be placed so the replacement stock arrives before you run out."
+          },
+          {
+            "question": "How do I decide on a safety stock number?",
+            "answer": "Safety stock should cover both demand variability (busier-than-average days) and supplier delays. A common starting approach is a few days' worth of average sales, adjusted up for items with unreliable suppliers or volatile demand."
+          },
+          {
+            "question": "What if my supplier's lead time varies a lot?",
+            "answer": "Use your worst realistic lead time rather than the best case when calculating the reorder point, and lean on a larger safety stock buffer for items where lead time is unpredictable."
+          },
+          {
+            "question": "Does this account for seasonal demand spikes?",
+            "answer": "Not directly — this uses your average daily sales figure. For seasonal items, recalculate using the average daily sales expected during the upcoming season rather than a flat annual average."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Want early access to Setu Retail?",
+        "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches, with reorder alerts built in.",
+        "cta": { "label": "Get notified", "href": "/contact" }
+      }
+    },
+    {
+      "slug": "cac-calculator",
+      "name": "Customer Acquisition Cost (CAC) Calculator",
+      "category": "growth-marketing",
+      "icon": "target",
+      "shortDescription": "Find out exactly how much you're spending to acquire each new customer.",
+      "seo": {
+        "title": "Customer Acquisition Cost (CAC) Calculator | Setu Technology",
+        "description": "Free CAC calculator. Enter marketing spend and new customers acquired to find your customer acquisition cost, and compare it against revenue per customer.",
+        "keywords": ["CAC calculator", "customer acquisition cost calculator", "marketing cost per customer", "CAC formula"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — CAC Calculator",
+        "headline": "Customer Acquisition Cost Calculator",
+        "subheadline": "Enter your marketing spend and new customers acquired to find your cost per customer."
+      },
+      "about": {
+        "headline": "The number that tells you if marketing is working",
+        "paragraphs": [
+          "Customer Acquisition Cost (CAC) is the average amount you spend to win one new customer, across all the marketing and sales costs that went into acquiring them. It only means something next to a second number — what that customer is actually worth to you.",
+          "Enter your total spend over a period and the number of new customers it brought in to get your CAC. If you also know the average revenue per customer, this calculator shows the ratio between the two — a quick gut-check on whether a campaign or channel is actually paying for itself."
+        ]
+      },
+      "faq": {
+        "headline": "CAC calculator FAQs",
+        "items": [
+          {
+            "question": "What is the CAC formula?",
+            "answer": "CAC = Total Marketing and Sales Spend ÷ Number of New Customers Acquired, over the same period. Spending ₹50,000 to acquire 100 new customers gives a CAC of ₹500."
+          },
+          {
+            "question": "What costs should I include in marketing spend?",
+            "answer": "Include ad spend, agency or platform fees, promotional discounts used purely for acquisition, and a reasonable share of sales team cost if relevant — anything spent specifically to bring in new customers during that period."
+          },
+          {
+            "question": "What's a good CAC?",
+            "answer": "It depends entirely on what a customer is worth to you over time. A CAC is healthy if it's comfortably below the revenue (ideally repeat revenue) a typical customer generates — there's no fixed 'good' number across businesses."
+          },
+          {
+            "question": "How is CAC different from average order value?",
+            "answer": "CAC measures what you spent to win a customer; average order value measures what a customer spends per order once acquired. Comparing the two tells you roughly how many orders it takes to recover your acquisition cost."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Know which customers are worth keeping",
+        "subtext": "Setu POS tracks repeat customers and order history, so you can see which channels bring in customers who actually come back.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "aov-calculator",
+      "name": "Average Order Value (AOV) Calculator",
+      "category": "growth-marketing",
+      "icon": "circle-dollar-sign",
+      "shortDescription": "Find your average order value, and see the revenue impact of nudging it up.",
+      "seo": {
+        "title": "Average Order Value (AOV) Calculator | Setu Technology",
+        "description": "Free AOV calculator. Enter total revenue and number of orders to find your average order value, and see the revenue impact of increasing it.",
+        "keywords": ["average order value calculator", "AOV calculator", "AOV formula", "ecommerce average order value"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — AOV Calculator",
+        "headline": "Average Order Value Calculator",
+        "subheadline": "Enter total revenue and number of orders to find your AOV, and see what a small increase is worth."
+      },
+      "about": {
+        "headline": "A small AOV increase compounds fast",
+        "paragraphs": [
+          "Average order value (AOV) is the average amount spent per order — and it's one of the few revenue levers you can move without acquiring a single new customer. A combo offer, a well-placed add-on suggestion, or a small price adjustment can lift AOV across every order you already get.",
+          "Enter your total revenue and number of orders for a period to find your current AOV, then enter a target percentage increase to see what that lift would be worth in extra revenue at the same order volume — useful for justifying whether an upsell push or menu/bundle change is worth the effort."
+        ]
+      },
+      "faq": {
+        "headline": "AOV calculator FAQs",
+        "items": [
+          {
+            "question": "What is the average order value formula?",
+            "answer": "AOV = Total Revenue ÷ Number of Orders, for the same period. ₹5,00,000 in revenue across 1,000 orders gives an AOV of ₹500."
+          },
+          {
+            "question": "How can I increase average order value?",
+            "answer": "Common levers include combo or bundle offers, upselling a larger size or add-on at the point of order, minimum-spend free delivery thresholds, and prominently suggesting complementary items alongside what a customer is already ordering."
+          },
+          {
+            "question": "Why does a small AOV increase matter so much?",
+            "answer": "Because it applies to every order you already get, with no additional acquisition cost — a 10% AOV lift on your existing order volume drops straight to extra revenue, without needing a single new customer."
+          },
+          {
+            "question": "Is a higher AOV always better?",
+            "answer": "Generally yes for revenue, but check it doesn't come at the cost of order frequency or customer satisfaction — pushing add-ons too aggressively can backfire. Track AOV alongside repeat order rate to catch that early."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Spot upsell opportunities automatically",
+        "subtext": "Setu POS surfaces combo and add-on prompts at billing, so lifting AOV doesn't rely on staff remembering to ask.",
         "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
       }
     }
