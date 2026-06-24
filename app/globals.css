@@ -55,3 +55,23 @@ body {
   color: #26306B;
   text-decoration: underline;
 }
+
+.blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.blog-content th,
+.blog-content td {
+  border: 1px solid rgba(95, 100, 120, 0.25);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-content th {
+  background-color: rgba(38, 48, 107, 0.06);
+  color: #0E1124;
+  font-weight: 700;
+}
