@@ -1,0 +1,428 @@
+{
+  "seo": {
+    "title": "Free Business Calculators for Restaurants & Retail | Setu Technology",
+    "description": "Free online calculators for restaurants and small businesses — GST, profit margin, markup, break-even, food cost %, discount, loan EMI and table turnover rate. No signup needed.",
+    "keywords": [
+      "business calculators",
+      "restaurant calculators",
+      "GST calculator",
+      "profit margin calculator",
+      "food cost calculator",
+      "break-even calculator",
+      "loan EMI calculator",
+      "free business tools"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Free Tools",
+    "headline": "Business calculators, built for operators",
+    "subheadline": "Quick, free tools for the numbers you check every week — pricing, margins, tax and more. No signup, just answers."
+  },
+  "categories": [
+    { "id": "pricing-profit", "name": "Pricing & Profit" },
+    { "id": "restaurant-ops", "name": "Restaurant Operations" },
+    { "id": "tax-finance", "name": "Tax & Finance" }
+  ],
+  "items": [
+    {
+      "slug": "gst-calculator",
+      "name": "GST Calculator",
+      "category": "tax-finance",
+      "icon": "percent",
+      "shortDescription": "Add or remove GST from any amount in a tap, for any tax slab.",
+      "seo": {
+        "title": "GST Calculator — Add or Remove GST Online Free | Setu Technology",
+        "description": "Free GST calculator to add GST to a base amount or remove GST from a final price, for any GST rate. Get the tax amount and total instantly.",
+        "keywords": ["GST calculator", "GST calculator online", "add GST", "remove GST", "GST amount calculator India"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — GST Calculator",
+        "headline": "GST Calculator",
+        "subheadline": "Add GST to a base price or pull GST out of a final price — pick a rate and get the split instantly."
+      },
+      "about": {
+        "headline": "Why use a GST calculator",
+        "paragraphs": [
+          "GST shows up everywhere in a business's day-to-day — quoting a price to a customer, checking a supplier invoice, or working out what to enter on a bill. Doing the maths by hand for every slab is slow and easy to get wrong, especially when you're moving between rates like 5%, 12%, 18% and 28%.",
+          "This calculator works both ways. Enter a base amount to see the GST and total with tax added, or enter a final amount to see what the base price and tax were before GST was included. It's the same calculation Setu POS runs automatically on every bill, available here as a free, standalone tool."
+        ]
+      },
+      "faq": {
+        "headline": "GST calculator FAQs",
+        "items": [
+          {
+            "question": "How do I calculate GST on an amount?",
+            "answer": "Multiply the base amount by the GST rate and divide by 100 to get the GST amount, then add it to the base amount for the total. For example, ₹1,000 at 18% GST adds ₹180, for a total of ₹1,180."
+          },
+          {
+            "question": "How do I remove GST from a final price to find the base price?",
+            "answer": "Divide the final amount by (1 + GST rate/100). For a final amount of ₹1,180 at 18% GST, the base price is ₹1,180 ÷ 1.18 = ₹1,000."
+          },
+          {
+            "question": "What are the common GST slabs in India?",
+            "answer": "The most common GST slabs are 5%, 12%, 18% and 28%, though some goods and services fall outside these or are exempt. Always check the rate that applies to what you're billing."
+          },
+          {
+            "question": "Does Setu POS calculate GST automatically?",
+            "answer": "Yes. Setu POS has a built-in tax engine that applies the correct GST automatically on every bill, so you don't need to calculate it manually for each order."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Let Setu POS handle tax on every bill",
+        "subtext": "Setu POS applies the right GST automatically on every order — no manual calculation, no mistakes.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "profit-margin-calculator",
+      "name": "Profit Margin Calculator",
+      "category": "pricing-profit",
+      "icon": "trending-up",
+      "shortDescription": "Work out your profit margin and markup % from cost and selling price.",
+      "seo": {
+        "title": "Profit Margin Calculator — Free Online Tool | Setu Technology",
+        "description": "Calculate profit margin and markup percentage from your cost price and selling price. Free profit margin calculator for retail and restaurant businesses.",
+        "keywords": ["profit margin calculator", "margin calculator", "profit calculator", "markup vs margin"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Profit Margin Calculator",
+        "headline": "Profit Margin Calculator",
+        "subheadline": "Enter your cost price and selling price to see your profit, margin % and markup % at once."
+      },
+      "about": {
+        "headline": "Why margin and markup both matter",
+        "paragraphs": [
+          "Profit margin tells you what share of your selling price is actual profit — useful for checking whether a product or dish is genuinely worth selling at its current price. Markup tells you how much you've added on top of cost — useful when you're setting a price from scratch.",
+          "The two numbers look similar but aren't the same: a 50% markup on cost is only a 33% margin on the selling price. This calculator shows both together so you can sanity-check pricing decisions without mixing the two up."
+        ]
+      },
+      "faq": {
+        "headline": "Profit margin calculator FAQs",
+        "items": [
+          {
+            "question": "What is the formula for profit margin?",
+            "answer": "Profit margin % = (Selling Price − Cost Price) ÷ Selling Price × 100. It measures profit as a percentage of the selling price."
+          },
+          {
+            "question": "What's the difference between margin and markup?",
+            "answer": "Margin is profit divided by selling price; markup is profit divided by cost price. They use the same profit figure but different denominators, so a given profit amount produces a higher markup % than margin %."
+          },
+          {
+            "question": "What's a good profit margin for a small business?",
+            "answer": "It varies widely by industry — restaurants often run 10-15% net margin, while retail margins vary by category. Compare your margin against your own historical numbers and industry benchmarks rather than a single universal target."
+          },
+          {
+            "question": "Should I price based on margin or markup?",
+            "answer": "Most businesses set prices using markup on cost, then check the resulting margin to confirm it meets their profit target. Using both avoids underpricing items that look fine by one measure but not the other."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "See your real margins, automatically",
+        "subtext": "Setu POS tracks cost and sales together, so you always know your margin without doing the maths yourself.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "markup-calculator",
+      "name": "Markup Calculator",
+      "category": "pricing-profit",
+      "icon": "tag",
+      "shortDescription": "Find the selling price you need to hit a target markup over cost.",
+      "seo": {
+        "title": "Markup Calculator — Find Your Selling Price | Setu Technology",
+        "description": "Free markup calculator. Enter your cost price and target markup percentage to instantly find the selling price and profit per unit.",
+        "keywords": ["markup calculator", "selling price calculator", "cost plus pricing calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Markup Calculator",
+        "headline": "Markup Calculator",
+        "subheadline": "Enter your cost and target markup % to get the selling price you should charge."
+      },
+      "about": {
+        "headline": "Pricing from cost upward",
+        "paragraphs": [
+          "Cost-plus pricing — taking your cost and adding a fixed markup — is the simplest way to price a new product or menu item. The hard part is doing it consistently across dozens of SKUs or dishes without a calculator open in another tab for every one.",
+          "This tool flips the usual margin question around: instead of checking the margin on a price you've already picked, you tell it the markup you want and it gives you the price to charge, along with the profit per unit at that price."
+        ]
+      },
+      "faq": {
+        "headline": "Markup calculator FAQs",
+        "items": [
+          {
+            "question": "What is the markup formula?",
+            "answer": "Selling Price = Cost Price × (1 + Markup % ÷ 100). For example, a ₹100 cost item with a 40% markup sells at ₹140."
+          },
+          {
+            "question": "Is a 50% markup the same as a 50% margin?",
+            "answer": "No. A 50% markup on a ₹100 cost gives a ₹150 selling price, which works out to a 33.3% margin, not 50%. Markup and margin are calculated on different bases."
+          },
+          {
+            "question": "What markup should I use for retail products?",
+            "answer": "It depends on the category, competition and how much value-add or service comes with the product. Many retailers start in the 30-50% markup range and adjust based on what sells and what the market will bear."
+          },
+          {
+            "question": "Can I use this for restaurant menu pricing too?",
+            "answer": "Yes — enter your plate cost as the cost price and your target markup to get a starting menu price, then sanity-check it against the food cost percentage calculator."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Price every item with confidence",
+        "subtext": "Setu POS keeps cost and pricing data together so you can update prices without losing track of margin.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "break-even-calculator",
+      "name": "Break-Even Point Calculator",
+      "category": "pricing-profit",
+      "icon": "scale",
+      "shortDescription": "Find out how many units you need to sell to cover your costs.",
+      "seo": {
+        "title": "Break-Even Point Calculator — Free Online Tool | Setu Technology",
+        "description": "Calculate your break-even point in units and revenue. Free break-even calculator for restaurants, retail stores and small businesses.",
+        "keywords": ["break-even calculator", "break even point calculator", "break-even analysis"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Break-Even Calculator",
+        "headline": "Break-Even Point Calculator",
+        "subheadline": "Enter your fixed costs, price and variable cost per unit to see exactly how much you need to sell to break even."
+      },
+      "about": {
+        "headline": "Know your number before the month starts",
+        "paragraphs": [
+          "Your break-even point is the level of sales where revenue exactly covers your costs — sell less and you're in a loss, sell more and every extra unit is pure contribution to profit. It's one of the most useful numbers in a business because it turns rent, salaries and other fixed costs into a single, concrete sales target.",
+          "Enter your monthly fixed costs (rent, salaries, subscriptions), your variable cost per unit (ingredients, packaging, per-order costs) and your selling price, and this calculator works out the units and revenue you need to hit before you're in profit."
+        ]
+      },
+      "faq": {
+        "headline": "Break-even calculator FAQs",
+        "items": [
+          {
+            "question": "What is the break-even point formula?",
+            "answer": "Break-even units = Fixed Costs ÷ (Selling Price per unit − Variable Cost per unit). Multiply the result by the selling price to get break-even revenue."
+          },
+          {
+            "question": "What counts as a fixed cost vs a variable cost?",
+            "answer": "Fixed costs stay roughly the same regardless of sales volume — rent, salaries, software subscriptions. Variable costs scale with each unit sold — ingredients, packaging, payment gateway fees per order."
+          },
+          {
+            "question": "Why does break-even matter for a new restaurant or store?",
+            "answer": "It converts your overheads into a daily or monthly sales target, which makes it much easier to judge whether a location, menu price or staffing level is realistic before you commit to it."
+          },
+          {
+            "question": "What is contribution margin?",
+            "answer": "Contribution margin is the selling price minus the variable cost per unit — the amount each sale contributes toward covering fixed costs. A higher contribution margin means you break even with fewer units sold."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Track sales against your break-even, daily",
+        "subtext": "Setu POS gives you real-time sales data, so you always know where you stand against your numbers.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "food-cost-calculator",
+      "name": "Food Cost Percentage Calculator",
+      "category": "restaurant-ops",
+      "icon": "chef-hat",
+      "shortDescription": "Check if a dish's ingredient cost is in a healthy range for its menu price.",
+      "seo": {
+        "title": "Food Cost Percentage Calculator — Free for Restaurants | Setu Technology",
+        "description": "Free food cost percentage calculator for restaurants. Enter ingredient cost and menu price to find food cost % and profit per dish instantly.",
+        "keywords": ["food cost calculator", "food cost percentage", "restaurant food cost", "menu pricing calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Food Cost Calculator",
+        "headline": "Food Cost Percentage Calculator",
+        "subheadline": "Enter a dish's ingredient cost and menu price to see its food cost % and profit per plate."
+      },
+      "about": {
+        "headline": "The single number every menu price should pass",
+        "paragraphs": [
+          "Food cost percentage is the share of a dish's menu price that goes toward its ingredients. Most restaurants aim to keep this somewhere between 28% and 35%, though it varies by cuisine, format and how much labour goes into a dish versus raw ingredient cost.",
+          "Run each dish on your menu through this calculator when you're setting prices or when ingredient costs change. A dish with a food cost % far outside your target range either needs a price change, a recipe change, or is intentionally priced as a loss-leader — but you should know which one it is."
+        ]
+      },
+      "faq": {
+        "headline": "Food cost calculator FAQs",
+        "items": [
+          {
+            "question": "How do you calculate food cost percentage?",
+            "answer": "Food Cost % = (Ingredient Cost ÷ Menu Selling Price) × 100. A dish costing ₹70 in ingredients sold at ₹280 has a food cost of 25%."
+          },
+          {
+            "question": "What is a good food cost percentage for a restaurant?",
+            "answer": "Most full-service and quick-service restaurants target 28-35% food cost, but high-end ingredients, beverages and bakery items can run lower or higher and still be profitable once labour and overhead are factored in."
+          },
+          {
+            "question": "Why is my food cost percentage higher than expected?",
+            "answer": "Common causes are portion sizes drifting larger over time, ingredient price increases that prices haven't caught up to, wastage in the kitchen, or recipes that were never costed properly to begin with."
+          },
+          {
+            "question": "Does this account for labour cost?",
+            "answer": "No — this calculator covers raw ingredient (food) cost only. Labour, packaging and overhead should be tracked separately alongside food cost when deciding final menu prices."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Cost every dish accurately, automatically",
+        "subtext": "Setu POS connects recipes to inventory, so food cost stays accurate as ingredient prices change.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "discount-calculator",
+      "name": "Discount Calculator",
+      "category": "pricing-profit",
+      "icon": "badge-percent",
+      "shortDescription": "Work out the final price and savings for any discount or offer.",
+      "seo": {
+        "title": "Discount Calculator — Final Price & Savings | Setu Technology",
+        "description": "Free discount calculator. Enter the original price and discount percentage to instantly see the final price and amount saved.",
+        "keywords": ["discount calculator", "percentage off calculator", "sale price calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Discount Calculator",
+        "headline": "Discount Calculator",
+        "subheadline": "Enter the original price and discount percentage to see the final price and exactly how much is saved."
+      },
+      "about": {
+        "headline": "Useful for both sides of the counter",
+        "paragraphs": [
+          "When you're running a sale or a coupon offer, you need to know the final price you'll actually charge — and what it costs you in margin. This calculator gives you both instantly, for any discount percentage.",
+          "It's also handy for checking a supplier's discount offer on a bulk order, or for quickly answering a customer's \"how much is that after the discount\" question without reaching for a phone calculator."
+        ]
+      },
+      "faq": {
+        "headline": "Discount calculator FAQs",
+        "items": [
+          {
+            "question": "How do I calculate a discounted price?",
+            "answer": "Discount Amount = Original Price × Discount % ÷ 100. Final Price = Original Price − Discount Amount. A ₹500 item at 20% off saves ₹100, for a final price of ₹400."
+          },
+          {
+            "question": "How do running a discount affect my profit margin?",
+            "answer": "A discount reduces your selling price but not your cost, so it eats directly into margin. Check the profit margin calculator on the discounted price before running a promotion to make sure it's still worth selling at."
+          },
+          {
+            "question": "Can I stack two discounts together?",
+            "answer": "Apply them one after another rather than adding the percentages — a 20% discount followed by a further 10% off is not a 30% total discount. Run the first discount through the calculator, then run the result through again for the second discount."
+          },
+          {
+            "question": "Can Setu POS apply discounts and coupons automatically at billing?",
+            "answer": "Yes. Setu POS supports configurable coupons and discounts that apply automatically at the bill, so staff don't need to calculate offers manually at the counter."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Run offers without the manual maths",
+        "subtext": "Setu POS applies coupons and discounts automatically at billing, every time.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "loan-emi-calculator",
+      "name": "Business Loan EMI Calculator",
+      "category": "tax-finance",
+      "icon": "landmark",
+      "shortDescription": "Estimate your monthly EMI, total interest and total payment on a business loan.",
+      "seo": {
+        "title": "Business Loan EMI Calculator — Free Online Tool | Setu Technology",
+        "description": "Free business loan EMI calculator. Enter loan amount, interest rate and tenure to instantly see your monthly EMI, total interest and total repayment.",
+        "keywords": ["loan EMI calculator", "business loan calculator", "EMI calculator", "loan calculator India"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Loan EMI Calculator",
+        "headline": "Business Loan EMI Calculator",
+        "subheadline": "Enter the loan amount, interest rate and tenure to see your monthly EMI, total interest and total repayment."
+      },
+      "about": {
+        "headline": "Know the monthly number before you sign",
+        "paragraphs": [
+          "Whether it's a working capital loan, equipment financing or a line of credit to fund a new outlet, the EMI is the number that actually shows up against your cash flow every month. Comparing loan offers by interest rate alone can be misleading once tenure and processing costs are factored in.",
+          "Enter the loan amount, annual interest rate and tenure to get the EMI using the standard reducing-balance formula, along with the total interest you'll pay over the life of the loan — useful for comparing two offers side by side."
+        ]
+      },
+      "faq": {
+        "headline": "Loan EMI calculator FAQs",
+        "items": [
+          {
+            "question": "What is the EMI formula?",
+            "answer": "EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the number of monthly instalments."
+          },
+          {
+            "question": "Does this include processing fees or other charges?",
+            "answer": "No — this calculates EMI based on principal, interest rate and tenure only. Add any processing fees or charges separately when comparing the true cost of different loan offers."
+          },
+          {
+            "question": "Is the interest rate I should enter the same as the rate the bank quotes?",
+            "answer": "Use the annual interest rate as quoted by the lender. If a lender quotes a flat rate instead of a reducing-balance rate, the actual EMI will differ from what this calculator shows, since flat-rate loans charge interest on the full principal throughout the tenure."
+          },
+          {
+            "question": "How does a shorter tenure affect total interest?",
+            "answer": "A shorter tenure means a higher EMI but significantly less total interest paid, since less time passes with interest accruing on the outstanding balance. A longer tenure lowers the EMI but increases total interest paid over the loan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Funding a new outlet? We can help you plan it",
+        "subtext": "Talk to us about what it takes to open and run a new location with Setu POS in place from day one.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    },
+    {
+      "slug": "table-turnover-calculator",
+      "name": "Table Turnover Rate Calculator",
+      "category": "restaurant-ops",
+      "icon": "clock",
+      "shortDescription": "See how many times each table turns over during service, and your average turn time.",
+      "seo": {
+        "title": "Table Turnover Rate Calculator — Free for Restaurants | Setu Technology",
+        "description": "Free table turnover rate calculator for restaurants. Enter covers served, number of tables and service hours to find turnover rate and average turn time.",
+        "keywords": ["table turnover rate calculator", "restaurant table turnover", "covers per table calculator"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Table Turnover Calculator",
+        "headline": "Table Turnover Rate Calculator",
+        "subheadline": "Enter covers served, number of tables and service hours to see your turnover rate and average turn time."
+      },
+      "about": {
+        "headline": "The number behind a busy-looking dining room",
+        "paragraphs": [
+          "Table turnover rate tells you how many times, on average, each table was used during a service period. It's a direct measure of how efficiently your floor is converting seats into covers — and during peak hours, it matters as much as footfall does.",
+          "Enter the total covers served, the number of tables you have, and the length of the service period, and this calculator works out your turnover rate and the average time each table was occupied per turn — useful for spotting whether slow turns are capping your revenue on busy nights."
+        ]
+      },
+      "faq": {
+        "headline": "Table turnover calculator FAQs",
+        "items": [
+          {
+            "question": "How is table turnover rate calculated?",
+            "answer": "Table Turnover Rate = Total Covers Served ÷ Number of Tables. If 120 covers were served across 20 tables during a service, the turnover rate is 6 — each table was used 6 times on average."
+          },
+          {
+            "question": "What is a good table turnover rate for a restaurant?",
+            "answer": "It depends heavily on format — quick-service and casual dining aim for higher turnover (multiple turns per service), while fine dining intentionally runs lower turnover with longer dwell times and higher spend per cover. Compare against your own format and past performance."
+          },
+          {
+            "question": "How do I improve table turnover without rushing customers?",
+            "answer": "Faster kitchen ticket times, efficient billing and payment, and staff trained to read natural pauses in a table's meal (rather than imposing a time limit) typically improve turnover more sustainably than rushing guests."
+          },
+          {
+            "question": "Can Setu POS track table status in real time?",
+            "answer": "Yes. Setu POS shows live table status — open, occupied, billed — across your floor, so staff always know which tables are free without walking the room to check."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "See every table's status, live",
+        "subtext": "Setu POS tracks table status in real time, so your floor staff always know what's free.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+      }
+    }
+  ]
+}
