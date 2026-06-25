@@ -7,13 +7,13 @@
   "hero": {
     "eyebrow": "Setu Retail — Coming Soon",
     "headline": "Retail Management Software for India & Global Businesses",
-    "subheadline": "Inventory tracking, billing and store operations built for retail businesses in India and worldwide — part of the same platform powering Setu POS."
+    "subheadline": "Inventory tracking, billing and store operations built for retail businesses in India and worldwide — part of the same platform powering Setu Dine."
   },
   "body": {
     "headline": "What we're building",
     "paragraphs": [
-      "Setu Retail brings the same operator-first approach behind Setu POS to retail stores — inventory that stays accurate, billing that's fast at the counter, and visibility across every store location.",
-      "We're building it on the same multi-outlet architecture already running in Setu POS, so retail chains get multi-store reporting from day one."
+      "Setu Retail brings the same operator-first approach behind Setu Dine to retail stores — inventory that stays accurate, billing that's fast at the counter, and visibility across every store location.",
+      "We're building it on the same multi-outlet architecture already running in Setu Dine, so retail chains get multi-store reporting from day one."
     ]
   },
   "cta": {
@@ -22,7 +22,7 @@
     "cta": { "label": "Get notified", "href": "/contact" }
   },
   "crossSell": {
-    "text": "Already running a restaurant? Setu POS is live today.",
-    "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
+    "text": "Already running a restaurant? Setu Dine is live today.",
+    "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
   }
 }

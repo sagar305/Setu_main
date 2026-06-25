@@ -13,8 +13,8 @@
     "headline": "Our story",
     "paragraphs": [
       "Setu means 'bridge' — and that's exactly what we set out to build: a bridge between how businesses actually run day-to-day, and the software meant to support them.",
-      "We started with restaurants because the problem was the clearest there — billing mistakes during rush hour, kitchen orders going wrong, owners with no visibility across outlets. Setu POS was built directly with restaurant owners, outlet managers and kitchen staff, not in a boardroom.",
-      "What we learned building Setu POS — about tax compliance, multi-outlet operations, and what business owners globally actually need — is now the foundation for everything else we build."
+      "We started with restaurants because the problem was the clearest there — billing mistakes during rush hour, kitchen orders going wrong, owners with no visibility across outlets. Setu Dine was built directly with restaurant owners, outlet managers and kitchen staff, not in a boardroom.",
+      "What we learned building Setu Dine — about tax compliance, multi-outlet operations, and what business owners globally actually need — is now the foundation for everything else we build."
     ]
   },
   "mission": {
@@ -40,7 +40,7 @@
   },
   "cta": {
     "headline": "Want to see what we're building?",
-    "subtext": "Start with Setu POS, our restaurant management product.",
-    "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
+    "subtext": "Start with Setu Dine, our restaurant management product.",
+    "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
   }
 }

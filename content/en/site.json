@@ -4,7 +4,7 @@
     "tagline": "Setu for your business",
     "domain": "setutechnology.com",
     "posUrl": "/products/restaurant-pos",
-    "posDemoUrl": "/book-demo?product=Setu%20POS"
+    "posDemoUrl": "/book-demo?product=Setu%20Dine"
   },
   "nav": {
     "links": [
@@ -13,7 +13,7 @@
       { "label": "Blog", "href": "/blog" },
       { "label": "Contact", "href": "/contact" }
     ],
-    "cta": { "label": "Book a Demo", "href": "/book-demo?product=Setu%20POS" }
+    "cta": { "label": "Book a Demo", "href": "/book-demo?product=Setu%20Dine" }
   },
   "footer": {
     "description": "Setu Technology builds practical, operator-first software for businesses across the globe.",
@@ -21,7 +21,7 @@
       {
         "heading": "Products",
         "links": [
-          { "label": "Setu POS", "href": "/products/restaurant-pos" },
+          { "label": "Setu Dine", "href": "/products/restaurant-pos" },
           { "label": "Setu Retail", "href": "/products/retail" },
           { "label": "Setu Clinic", "href": "/products/clinic" }
         ]

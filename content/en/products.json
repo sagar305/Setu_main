@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Products | Setu Technology",
-    "description": "Explore Setu Technology's products — Setu POS for restaurants is live today, with Setu Retail and Setu Clinic coming soon.",
-    "keywords": ["Setu products", "Setu POS", "Setu Retail", "Setu Clinic"]
+    "description": "Explore Setu Technology's products — Setu Dine for restaurants is live today, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": ["Setu products", "Setu Dine", "Setu Retail", "Setu Clinic"]
   },
   "hero": {
     "eyebrow": "Products",
@@ -13,7 +13,7 @@
     {
       "id": "pos",
       "status": "live",
-      "name": "Setu POS",
+      "name": "Setu Dine",
       "headline": "Restaurant management, done right",
       "description": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain.",
       "features": [
@@ -24,7 +24,7 @@
         "QR order tracking & waiter call",
         "Coupons & discounts"
       ],
-      "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
+      "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
     },
     {
       "id": "retail",
