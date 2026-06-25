@@ -9,7 +9,6 @@
   "nav": {
     "links": [
       { "label": "Products", "href": "/products" },
-      { "label": "Calculators", "href": "/calculators" },
       { "label": "About", "href": "/about" },
       { "label": "Blog", "href": "/blog" },
       { "label": "Contact", "href": "/contact" }
@@ -34,18 +33,11 @@
           { "label": "Blog", "href": "/blog" },
           { "label": "Contact", "href": "/contact" }
         ]
-      },
-      {
-        "heading": "Free Tools",
-        "links": [
-          { "label": "Business Calculators", "href": "/calculators" },
-          { "label": "GST Calculator", "href": "/calculators/gst-calculator" },
-          { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" }
-        ]
       }
     ],
     "social": [
-      { "label": "Instagram", "href": "https://www.instagram.com/setu.technology" }
+      { "label": "Instagram", "href": "https://www.instagram.com/setu.technology" },
+      { "label": "YouTube", "href": "https://www.youtube.com/@setu.technology" }
     ],
     "copyright": "© 2026 Setu Technology. Made in India."
   }
