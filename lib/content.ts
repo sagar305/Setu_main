@@ -10,6 +10,7 @@ import restaurantPosData from "@/content/en/restaurant-pos.json";
 import queueData from "@/content/en/queue.json";
 import retailData from "@/content/en/retail.json";
 import clinicData from "@/content/en/clinic.json";
+import calculatorsData from "@/content/en/calculators.json";
 
 export type Cta = { label: string; href: string };
 
@@ -23,6 +24,8 @@ export type RestaurantPosContent = typeof restaurantPosData;
 export type QueueContent = typeof queueData;
 export type RetailContent = typeof retailData;
 export type ClinicContent = typeof clinicData;
+export type CalculatorsContent = typeof calculatorsData;
+export type CalculatorItem = CalculatorsContent["items"][number];
 
 export function getSiteContent(): SiteContent {
   return siteData;
@@ -92,4 +95,22 @@ export function getRetailContent(): RetailContent {
 
 export function getClinicContent(): ClinicContent {
   return clinicData;
+}
+
+export function getCalculatorsContent(): CalculatorsContent {
+  return calculatorsData;
+}
+
+export function getCalculatorBySlug(slug: string): CalculatorItem | undefined {
+  return calculatorsData.items.find((item) => item.slug === slug);
+}
+
+export function getRelatedCalculators(slug: string, count = 3): CalculatorItem[] {
+  const current = getCalculatorBySlug(slug);
+  const rest = calculatorsData.items.filter((item) => item.slug !== slug);
+  if (!current) return rest.slice(0, count);
+
+  const sameCategory = rest.filter((item) => item.category === current.category);
+  const others = rest.filter((item) => item.category !== current.category);
+  return [...sameCategory, ...others].slice(0, count);
 }
