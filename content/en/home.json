@@ -24,6 +24,14 @@
         "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
       },
       {
+        "id": "queue",
+        "status": "live",
+        "name": "Setu Queue",
+        "headline": "QSR counter service, sorted",
+        "description": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants and food courts.",
+        "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
+      },
+      {
         "id": "retail",
         "status": "coming-soon",
         "name": "Setu Retail",

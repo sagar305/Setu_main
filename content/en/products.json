@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Products | Setu Technology",
-    "description": "Explore Setu Technology's products — Setu Dine for restaurants is live today, with Setu Retail and Setu Clinic coming soon.",
-    "keywords": ["Setu products", "Setu Dine", "Setu Retail", "Setu Clinic"]
+    "description": "Explore Setu Technology's products — Setu Dine and Setu Queue for restaurants are live today, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": ["Setu products", "Setu Dine", "Setu Queue", "Setu Retail", "Setu Clinic"]
   },
   "hero": {
     "eyebrow": "Products",
@@ -25,6 +25,21 @@
         "Coupons & discounts"
       ],
       "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+    },
+    {
+      "id": "queue",
+      "status": "live",
+      "name": "Setu Queue",
+      "headline": "QSR counter service, sorted",
+      "description": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants and food courts.",
+      "features": [
+        "Counter billing with auto GST",
+        "Token generation & display",
+        "Kitchen order routing",
+        "Customer pickup display",
+        "Real-time queue dashboard"
+      ],
+      "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
     },
     {
       "id": "retail",
