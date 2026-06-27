@@ -40,14 +40,6 @@
         "cta": { "label": "Learn more", "href": "/products/retail" }
       },
       {
-        "id": "clinic",
-        "status": "coming-soon",
-        "name": "Setu Clinic",
-        "headline": "Clinics, without the chaos",
-        "description": "Appointments, records and front-desk operations for clinics.",
-        "cta": { "label": "Learn more", "href": "/products/clinic" }
-      },
-      {
         "id": "wildcard",
         "status": "coming-soon",
         "name": "Setu for your business",
