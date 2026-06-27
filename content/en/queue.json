@@ -1,0 +1,140 @@
+{
+  "seo": {
+    "title": "Setu Queue — QSR Counter Service & Order Pickup Display | Token Management",
+    "description": "Setu Queue is counter service software for quick service restaurants — counter billing, token generation, kitchen routing and customer pickup display. Built for QSRs, food courts and canteens.",
+    "keywords": ["Setu Queue", "QSR POS India", "counter service software", "order pickup display", "token management restaurant", "food court billing software"]
+  },
+  "hero": {
+    "eyebrow": "Setu Queue — Live",
+    "headline": "QSR counter service, sorted",
+    "subheadline": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants, food courts and canteens where speed is everything.",
+    "primaryCta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" },
+    "secondaryCta": { "label": "See how it works", "href": "#how-it-works" }
+  },
+  "showcase": {
+    "eyebrow": "Inside Setu Queue",
+    "headline": "One system, from counter to pickup",
+    "subtext": "Scroll through what's actually running under the hood — built around how a real counter shift moves, from the order to the pickup screen."
+  },
+  "features": [
+    {
+      "heading": "Counter billing",
+      "icon": "receipt",
+      "body": "Fast, accurate billing at the counter — GST applied automatically on every order."
+    },
+    {
+      "heading": "Token generation",
+      "icon": "ticket",
+      "body": "Every order gets a unique token number, printed or displayed instantly at billing."
+    },
+    {
+      "heading": "Kitchen routing",
+      "icon": "chef-hat",
+      "body": "Orders route instantly to the kitchen the moment billing is confirmed — no shouting, no paper slips."
+    },
+    {
+      "heading": "Pickup display",
+      "icon": "monitor",
+      "body": "A customer-facing screen shows token numbers as orders move from preparing to ready for collection."
+    },
+    {
+      "heading": "Payment",
+      "icon": "credit-card",
+      "body": "Cash, card and UPI — all reconciled automatically against every order."
+    },
+    {
+      "heading": "Dashboard",
+      "icon": "layout-dashboard",
+      "body": "Sales, orders and queue performance visible in real time — no manual exports needed."
+    },
+    {
+      "heading": "Tax engine",
+      "icon": "percent",
+      "body": "GST applied automatically based on order type. No manual rate selection at the counter."
+    },
+    {
+      "heading": "Role management",
+      "icon": "shield-check",
+      "body": "Counter staff, kitchen staff and managers each get exactly the access they need."
+    }
+  ],
+  "howItWorks": {
+    "headline": "How it works",
+    "steps": [
+      {
+        "title": "Customer orders",
+        "body": "Staff takes the order at the counter and confirms billing. Token number generated instantly."
+      },
+      {
+        "title": "Kitchen notified",
+        "body": "Order routes digitally to the kitchen the moment billing is confirmed — with all items and modifications intact."
+      },
+      {
+        "title": "Pickup display updates",
+        "body": "When the kitchen marks the order ready, the customer's token number moves to the \"Ready\" column on the display screen."
+      }
+    ]
+  },
+  "comparison": {
+    "headline": "Not sure which Setu product is right for you?",
+    "columns": [
+      {
+        "name": "Setu Dine",
+        "serviceStyle": "Table service",
+        "customerExperience": "Seated, waiter-served",
+        "bestFor": "Restaurants, cafes, dhabas",
+        "keyFeature": "Table & multi-outlet management"
+      },
+      {
+        "name": "Setu Queue",
+        "serviceStyle": "Counter service",
+        "customerExperience": "Order at counter, wait for pickup",
+        "bestFor": "QSRs, food courts, canteens",
+        "keyFeature": "Token system & pickup display"
+      }
+    ],
+    "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you."
+  },
+  "builtFor": {
+    "headline": "Built for",
+    "tags": ["Quick service restaurants", "Food courts", "Canteens", "Bakeries & cafes", "Fast casual dining", "Corporate cafeterias"]
+  },
+  "faq": {
+    "headline": "Frequently asked questions",
+    "items": [
+      {
+        "question": "What is Setu Queue?",
+        "answer": "Setu Queue is a counter service system built for quick service restaurants, food courts and canteens. It handles counter billing, token generation, kitchen order routing and a customer-facing pickup display — all in one system."
+      },
+      {
+        "question": "How does token management work in Setu Queue?",
+        "answer": "When a customer places an order at the counter, Setu Queue generates a unique token number automatically. That number appears on the customer's receipt and on the pickup display screen, which updates in real time as their order moves from preparing to ready."
+      },
+      {
+        "question": "Is Setu Queue GST compliant?",
+        "answer": "Yes. Setu Queue has a built-in tax engine that applies GST automatically on every order — no manual rate selection required at the counter."
+      },
+      {
+        "question": "What is the customer pickup display?",
+        "answer": "The pickup display is a screen (typically mounted where customers wait) that shows token numbers in two columns: Preparing and Ready. When the kitchen marks an order complete, the token number moves to Ready automatically."
+      },
+      {
+        "question": "What is the difference between Setu Queue and Setu Dine?",
+        "answer": "Setu Queue is built for counter-service restaurants where customers order at the counter and wait for their number to be called. Setu Dine is built for table-service restaurants where customers sit down and a staff member takes their order. They serve different restaurant models — you choose the one that matches how your restaurant operates."
+      },
+      {
+        "question": "What payment methods does Setu Queue support?",
+        "answer": "Setu Queue accepts cash, cards and UPI. All payments are reconciled automatically against every order."
+      },
+      {
+        "question": "Is there a demo available?",
+        "answer": "Yes. Book a free 30-minute demo and we'll walk through counter billing, token flow and the pickup display for your setup."
+      }
+    ]
+  },
+  "cta": {
+    "headline": "See Setu Queue running in your restaurant",
+    "subtext": "Book a free 30-minute demo and we'll walk through counter billing, token flow and the pickup display for your setup.",
+    "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" }
+  }
+}

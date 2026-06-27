@@ -1,14 +1,14 @@
 {
   "seo": {
     "title": "Setu Technology | Business Software Built for Every Operator",
-    "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu POS for restaurants. Expanding to retail, clinics and beyond.",
-    "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu POS"]
+    "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu Dine for restaurants. Expanding to retail, clinics and beyond.",
+    "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu Dine"]
   },
   "hero": {
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
     "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
-    "primaryCta": { "label": "See Setu POS", "href": "/products/restaurant-pos" },
+    "primaryCta": { "label": "See Setu Dine", "href": "/products/restaurant-pos" },
     "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
   },
   "products": {
@@ -18,10 +18,18 @@
       {
         "id": "pos",
         "status": "live",
-        "name": "Setu POS",
-        "headline": "Restaurant operations, sorted",
-        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards for restaurants of any size.",
-        "cta": { "label": "Explore POS", "href": "/products/restaurant-pos" }
+        "name": "Setu Dine",
+        "headline": "Table-service restaurants, sorted",
+        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards — for restaurants where customers sit down and staff take their orders.",
+        "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+      },
+      {
+        "id": "queue",
+        "status": "live",
+        "name": "Setu Queue",
+        "headline": "Counter-service restaurants, sorted",
+        "description": "Counter billing, token management, kitchen routing and customer pickup display — for QSRs, food courts and canteens where customers order at the counter.",
+        "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
       },
       {
         "id": "retail",
@@ -30,14 +38,6 @@
         "headline": "Retail, run simply",
         "description": "Inventory, billing and store management for retail businesses.",
         "cta": { "label": "Learn more", "href": "/products/retail" }
-      },
-      {
-        "id": "clinic",
-        "status": "coming-soon",
-        "name": "Setu Clinic",
-        "headline": "Clinics, without the chaos",
-        "description": "Appointments, records and front-desk operations for clinics.",
-        "cta": { "label": "Learn more", "href": "/products/clinic" }
       },
       {
         "id": "wildcard",
@@ -87,6 +87,6 @@
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
-    "cta": { "label": "Book your free demo", "href": "/book-demo?product=Setu%20POS" }
+    "cta": { "label": "Book your free demo", "href": "/book-demo?product=Setu%20Dine" }
   }
 }

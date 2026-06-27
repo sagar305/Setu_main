@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Setu POS",
+  name: "Setu Dine",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web, Android, iOS",
   description: content.seo.description,

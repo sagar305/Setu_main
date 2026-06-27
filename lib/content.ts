@@ -7,6 +7,7 @@ import productsData from "@/content/en/products.json";
 import blogData from "@/content/en/blog.json";
 import contactData from "@/content/en/contact.json";
 import restaurantPosData from "@/content/en/restaurant-pos.json";
+import queueData from "@/content/en/queue.json";
 import retailData from "@/content/en/retail.json";
 import clinicData from "@/content/en/clinic.json";
 import calculatorsData from "@/content/en/calculators.json";
@@ -20,6 +21,7 @@ export type ProductsContent = typeof productsData;
 export type BlogContent = typeof blogData;
 export type ContactContent = typeof contactData;
 export type RestaurantPosContent = typeof restaurantPosData;
+export type QueueContent = typeof queueData;
 export type RetailContent = typeof retailData;
 export type ClinicContent = typeof clinicData;
 export type CalculatorsContent = typeof calculatorsData;
@@ -81,6 +83,10 @@ export function getContactContent(): ContactContent {
 
 export function getRestaurantPosContent(): RestaurantPosContent {
   return restaurantPosData;
+}
+
+export function getQueueContent(): QueueContent {
+  return queueData;
 }
 
 export function getRetailContent(): RetailContent {

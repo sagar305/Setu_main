@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Products | Setu Technology",
-    "description": "Explore Setu Technology's products — Setu POS for restaurants is live today, with Setu Retail and Setu Clinic coming soon.",
-    "keywords": ["Setu products", "Setu POS", "Setu Retail", "Setu Clinic"]
+    "description": "Explore Setu Technology's products — Setu Dine and Setu Queue for restaurants are live today, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": ["Setu products", "Setu Dine", "Setu Queue", "Setu Retail", "Setu Clinic"]
   },
   "hero": {
     "eyebrow": "Products",
@@ -13,7 +13,7 @@
     {
       "id": "pos",
       "status": "live",
-      "name": "Setu POS",
+      "name": "Setu Dine",
       "headline": "Restaurant management, done right",
       "description": "Billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain.",
       "features": [
@@ -24,7 +24,22 @@
         "QR order tracking & waiter call",
         "Coupons & discounts"
       ],
-      "cta": { "label": "Explore Setu POS", "href": "/products/restaurant-pos" }
+      "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+    },
+    {
+      "id": "queue",
+      "status": "live",
+      "name": "Setu Queue",
+      "headline": "QSR counter service, sorted",
+      "description": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants and food courts.",
+      "features": [
+        "Counter billing with auto GST",
+        "Token generation & display",
+        "Kitchen order routing",
+        "Customer pickup display",
+        "Real-time queue dashboard"
+      ],
+      "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
     },
     {
       "id": "retail",
@@ -33,14 +48,6 @@
       "headline": "Retail store management, coming soon",
       "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
       "cta": { "label": "Explore Setu Retail", "href": "/products/retail" }
-    },
-    {
-      "id": "clinic",
-      "status": "coming-soon",
-      "name": "Setu Clinic",
-      "headline": "Clinic & appointment management, coming soon",
-      "description": "Appointments, patient records and front-desk operations for clinics of any size.",
-      "cta": { "label": "Explore Setu Clinic", "href": "/products/clinic" }
     },
     {
       "id": "wildcard",

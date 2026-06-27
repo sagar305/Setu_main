@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Setu Technology builds operational software for businesses globally, starting with Setu POS for restaurants.",
+    "Setu Technology builds operational software for businesses globally, starting with Setu Dine for restaurants.",
   openGraph: {
     siteName: "Setu Technology",
     type: "website",
