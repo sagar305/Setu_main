@@ -9,6 +9,7 @@
   "nav": {
     "links": [
       { "label": "Products", "href": "/products" },
+      { "label": "Calculators", "href": "/calculators" },
       { "label": "About", "href": "/about" },
       { "label": "Blog", "href": "/blog" },
       { "label": "Contact", "href": "/contact" }
@@ -33,6 +34,14 @@
           { "label": "About", "href": "/about" },
           { "label": "Blog", "href": "/blog" },
           { "label": "Contact", "href": "/contact" }
+        ]
+      },
+      {
+        "heading": "Free Tools",
+        "links": [
+          { "label": "Business Calculators", "href": "/calculators" },
+          { "label": "GST Calculator", "href": "/calculators/gst-calculator" },
+          { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" }
         ]
       }
     ],
