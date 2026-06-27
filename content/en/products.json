@@ -48,7 +48,7 @@
       "headline": "Retail store management, coming soon",
       "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
       "cta": { "label": "Explore Setu Retail", "href": "/products/retail" }
-    }
+    },
     {
       "id": "wildcard",
       "status": "coming-soon",
