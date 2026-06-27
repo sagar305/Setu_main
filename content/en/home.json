@@ -19,16 +19,16 @@
         "id": "pos",
         "status": "live",
         "name": "Setu Dine",
-        "headline": "Restaurant operations, sorted",
-        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards for restaurants of any size.",
+        "headline": "Table-service restaurants, sorted",
+        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards — for restaurants where customers sit down and staff take their orders.",
         "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
       },
       {
         "id": "queue",
         "status": "live",
         "name": "Setu Queue",
-        "headline": "QSR counter service, sorted",
-        "description": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants and food courts.",
+        "headline": "Counter-service restaurants, sorted",
+        "description": "Counter billing, token management, kitchen routing and customer pickup display — for QSRs, food courts and canteens where customers order at the counter.",
         "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
       },
       {

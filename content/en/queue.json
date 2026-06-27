@@ -75,6 +75,26 @@
       }
     ]
   },
+  "comparison": {
+    "headline": "Not sure which Setu product is right for you?",
+    "columns": [
+      {
+        "name": "Setu Dine",
+        "serviceStyle": "Table service",
+        "customerExperience": "Seated, waiter-served",
+        "bestFor": "Restaurants, cafes, dhabas",
+        "keyFeature": "Table & multi-outlet management"
+      },
+      {
+        "name": "Setu Queue",
+        "serviceStyle": "Counter service",
+        "customerExperience": "Order at counter, wait for pickup",
+        "bestFor": "QSRs, food courts, canteens",
+        "keyFeature": "Token system & pickup display"
+      }
+    ],
+    "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you."
+  },
   "builtFor": {
     "headline": "Built for",
     "tags": ["Quick service restaurants", "Food courts", "Canteens", "Bakeries & cafes", "Fast casual dining", "Corporate cafeterias"]
@@ -99,8 +119,8 @@
         "answer": "The pickup display is a screen (typically mounted where customers wait) that shows token numbers in two columns: Preparing and Ready. When the kitchen marks an order complete, the token number moves to Ready automatically."
       },
       {
-        "question": "Can Setu Queue work alongside Setu Dine?",
-        "answer": "Yes. Setu Queue and Setu Dine are both part of the Setu platform. A restaurant that has both table service and a counter service section can run both products from the same Setu account."
+        "question": "What is the difference between Setu Queue and Setu Dine?",
+        "answer": "Setu Queue is built for counter-service restaurants where customers order at the counter and wait for their number to be called. Setu Dine is built for table-service restaurants where customers sit down and a staff member takes their order. They serve different restaurant models — you choose the one that matches how your restaurant operates."
       },
       {
         "question": "What payment methods does Setu Queue support?",
@@ -108,7 +128,7 @@
       },
       {
         "question": "Is there a demo available?",
-        "answer": "Yes. Book a free 30-minute demo and we'll walk you through counter billing, token flow and the pickup display for your setup."
+        "answer": "Yes. Book a free 30-minute demo and we'll walk through counter billing, token flow and the pickup display for your setup."
       }
     ]
   },

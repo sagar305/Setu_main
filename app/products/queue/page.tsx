@@ -115,6 +115,51 @@ export default function QueuePage() {
         </div>
       </section>
 
+      <section className="bg-cream py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <FadeIn>
+            <h2 className="text-center text-3xl font-bold tracking-tight text-ink">{content.comparison.headline}</h2>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="mt-10 overflow-hidden rounded-2xl border border-muted-line/30 bg-white">
+              <table className="w-full text-left text-sm">
+                <thead>
+                  <tr className="border-b border-muted-line/30">
+                    <th className="px-5 py-4 font-semibold text-muted-warm"></th>
+                    {content.comparison.columns.map((col) => (
+                      <th key={col.name} className="px-5 py-4 font-bold text-ink">
+                        {col.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { label: "Service style", key: "serviceStyle" as const },
+                    { label: "Customer experience", key: "customerExperience" as const },
+                    { label: "Best for", key: "bestFor" as const },
+                    { label: "Key feature", key: "keyFeature" as const },
+                  ].map((row) => (
+                    <tr key={row.key} className="border-b border-muted-line/15 last:border-0">
+                      <td className="px-5 py-4 font-semibold text-muted-warm">{row.label}</td>
+                      {content.comparison.columns.map((col) => (
+                        <td key={col.name} className="px-5 py-4 text-muted">
+                          {col[row.key]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-muted">
+              {content.comparison.footnote}
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
       <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <FadeIn>
