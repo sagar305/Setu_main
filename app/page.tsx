@@ -4,6 +4,7 @@ import { Hero } from "@/components/home/Hero";
 import { Products } from "@/components/home/Products";
 import { WhySetu } from "@/components/home/WhySetu";
 import { SocialProof } from "@/components/home/SocialProof";
+import { LatestBlogs } from "@/components/home/LatestBlogs";
 import { CtaBanner } from "@/components/CtaBanner";
 
 const content = getHomeContent();
@@ -27,6 +28,7 @@ export default function HomePage() {
       <Products products={content.products} />
       <WhySetu whySetu={content.whySetu} />
       <SocialProof socialProof={content.socialProof} />
+      <LatestBlogs />
       <CtaBanner {...content.ctaBanner} />
     </>
   );
