@@ -17,7 +17,8 @@ export function LatestBlogs() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
+    <section className="bg-white">
+    <div className="mx-auto max-w-6xl px-6 py-20">
       <FadeIn className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold tracking-tight text-ink">From the blog</h2>
@@ -56,6 +57,7 @@ export function LatestBlogs() {
           </FadeInStaggerItem>
         ))}
       </FadeInStagger>
+    </div>
     </section>
   );
 }
