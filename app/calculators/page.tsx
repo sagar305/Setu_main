@@ -50,8 +50,8 @@ export default function CalculatorsPage() {
 
       <CtaBanner
         headline="Want the numbers to track themselves?"
-        subtext="Setu POS tracks sales, cost and tax automatically, so you spend less time on calculators and more time running your business."
-        cta={{ label: "Book a demo", href: "/book-demo?product=Setu%20POS" }}
+        subtext="Setu Dine tracks sales, cost and tax automatically, so you spend less time on calculators and more time running your business."
+        cta={{ label: "Book a demo", href: "/book-demo?product=Setu%20Dine" }}
       />
     </>
   );

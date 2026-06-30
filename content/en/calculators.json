@@ -46,7 +46,7 @@
         "headline": "Why use a GST calculator",
         "paragraphs": [
           "GST shows up everywhere in a business's day-to-day — quoting a price to a customer, checking a supplier invoice, or working out what to enter on a bill. Doing the maths by hand for every slab is slow and easy to get wrong, especially when you're moving between rates like 5%, 12%, 18% and 28%.",
-          "This calculator works both ways. Enter a base amount to see the GST and total with tax added, or enter a final amount to see what the base price and tax were before GST was included. It's the same calculation Setu POS runs automatically on every bill, available here as a free, standalone tool."
+          "This calculator works both ways. Enter a base amount to see the GST and total with tax added, or enter a final amount to see what the base price and tax were before GST was included. It's the same calculation Setu Dine runs automatically on every bill, available here as a free, standalone tool."
         ]
       },
       "faq": {
@@ -65,15 +65,15 @@
             "answer": "The most common GST slabs are 5%, 12%, 18% and 28%, though some goods and services fall outside these or are exempt. Always check the rate that applies to what you're billing."
           },
           {
-            "question": "Does Setu POS calculate GST automatically?",
-            "answer": "Yes. Setu POS has a built-in tax engine that applies the correct GST automatically on every bill, so you don't need to calculate it manually for each order."
+            "question": "Does Setu Dine calculate GST automatically?",
+            "answer": "Yes. Setu Dine has a built-in tax engine that applies the correct GST automatically on every bill, so you don't need to calculate it manually for each order."
           }
         ]
       },
       "cta": {
-        "headline": "Let Setu POS handle tax on every bill",
-        "subtext": "Setu POS applies the right GST automatically on every order — no manual calculation, no mistakes.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "headline": "Let Setu Dine handle tax on every bill",
+        "subtext": "Setu Dine applies the right GST automatically on every order — no manual calculation, no mistakes.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -122,8 +122,8 @@
       },
       "cta": {
         "headline": "See your real margins, automatically",
-        "subtext": "Setu POS tracks cost and sales together, so you always know your margin without doing the maths yourself.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine tracks cost and sales together, so you always know your margin without doing the maths yourself.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -172,8 +172,8 @@
       },
       "cta": {
         "headline": "Price every item with confidence",
-        "subtext": "Setu POS keeps cost and pricing data together so you can update prices without losing track of margin.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine keeps cost and pricing data together so you can update prices without losing track of margin.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -222,8 +222,8 @@
       },
       "cta": {
         "headline": "Track sales against your break-even, daily",
-        "subtext": "Setu POS gives you real-time sales data, so you always know where you stand against your numbers.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine gives you real-time sales data, so you always know where you stand against your numbers.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -272,8 +272,8 @@
       },
       "cta": {
         "headline": "Cost every dish accurately, automatically",
-        "subtext": "Setu POS connects recipes to inventory, so food cost stays accurate as ingredient prices change.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine connects recipes to inventory, so food cost stays accurate as ingredient prices change.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -315,15 +315,15 @@
             "answer": "Apply them one after another rather than adding the percentages — a 20% discount followed by a further 10% off is not a 30% total discount. Run the first discount through the calculator, then run the result through again for the second discount."
           },
           {
-            "question": "Can Setu POS apply discounts and coupons automatically at billing?",
-            "answer": "Yes. Setu POS supports configurable coupons and discounts that apply automatically at the bill, so staff don't need to calculate offers manually at the counter."
+            "question": "Can Setu Dine apply discounts and coupons automatically at billing?",
+            "answer": "Yes. Setu Dine supports configurable coupons and discounts that apply automatically at the bill, so staff don't need to calculate offers manually at the counter."
           }
         ]
       },
       "cta": {
         "headline": "Run offers without the manual maths",
-        "subtext": "Setu POS applies coupons and discounts automatically at billing, every time.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine applies coupons and discounts automatically at billing, every time.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -372,8 +372,8 @@
       },
       "cta": {
         "headline": "Funding a new outlet? We can help you plan it",
-        "subtext": "Talk to us about what it takes to open and run a new location with Setu POS in place from day one.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Talk to us about what it takes to open and run a new location with Setu Dine in place from day one.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -415,15 +415,15 @@
             "answer": "Faster kitchen ticket times, efficient billing and payment, and staff trained to read natural pauses in a table's meal (rather than imposing a time limit) typically improve turnover more sustainably than rushing guests."
           },
           {
-            "question": "Can Setu POS track table status in real time?",
-            "answer": "Yes. Setu POS shows live table status — open, occupied, billed — across your floor, so staff always know which tables are free without walking the room to check."
+            "question": "Can Setu Dine track table status in real time?",
+            "answer": "Yes. Setu Dine shows live table status — open, occupied, billed — across your floor, so staff always know which tables are free without walking the room to check."
           }
         ]
       },
       "cta": {
         "headline": "See every table's status, live",
-        "subtext": "Setu POS tracks table status in real time, so your floor staff always know what's free.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine tracks table status in real time, so your floor staff always know what's free.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -472,8 +472,8 @@
       },
       "cta": {
         "headline": "Staffing a new location? Plan the numbers first",
-        "subtext": "Setu POS gives you the sales and labour-cost data to know if a new hire pays for itself.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine gives you the sales and labour-cost data to know if a new hire pays for itself.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -522,8 +522,8 @@
       },
       "cta": {
         "headline": "Run your business, not your tax spreadsheet",
-        "subtext": "Setu POS keeps your sales and expense data organised, so tax season is less of a scramble.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine keeps your sales and expense data organised, so tax season is less of a scramble.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -572,8 +572,8 @@
       },
       "cta": {
         "headline": "Planning your staffing budget?",
-        "subtext": "Setu POS gives you the sales data to plan staffing and long-term payroll costs around what your outlet can support.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine gives you the sales data to plan staffing and long-term payroll costs around what your outlet can support.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -615,15 +615,15 @@
             "answer": "Many restaurants do build a delivery-specific markup into their aggregator menu prices to offset commission, since dine-in and delivery have very different cost structures. Use this calculator to check whether your current delivery prices leave you a sustainable margin."
           },
           {
-            "question": "Can Setu POS manage orders from multiple delivery platforms?",
-            "answer": "Yes. Setu POS can bring in orders from multiple aggregators into a single view, so your kitchen doesn't have to juggle separate tablets for every platform."
+            "question": "Can Setu Dine manage orders from multiple delivery platforms?",
+            "answer": "Yes. Setu Dine can bring in orders from multiple aggregators into a single view, so your kitchen doesn't have to juggle separate tablets for every platform."
           }
         ]
       },
       "cta": {
         "headline": "Manage every aggregator from one screen",
-        "subtext": "Setu POS brings orders from all your delivery platforms into a single kitchen view.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine brings orders from all your delivery platforms into a single kitchen view.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -666,15 +666,15 @@
             "answer": "If commission, GST and fees together add up to 100% or more of the listed price, no price can recover your target take-home — the calculator will flag this so you can reconsider the item's online margin instead of guessing at a price."
           },
           {
-            "question": "Can Setu POS sync these prices to my delivery platforms?",
-            "answer": "Yes. Setu POS lets you manage menu pricing across dine-in and multiple aggregators from one screen, so updated prices go out everywhere at once."
+            "question": "Can Setu Dine sync these prices to my delivery platforms?",
+            "answer": "Yes. Setu Dine lets you manage menu pricing across dine-in and multiple aggregators from one screen, so updated prices go out everywhere at once."
           }
         ]
       },
       "cta": {
         "headline": "Manage every aggregator from one screen",
-        "subtext": "Setu POS brings orders from all your delivery platforms into a single kitchen view.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine brings orders from all your delivery platforms into a single kitchen view.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -717,14 +717,14 @@
           },
           {
             "question": "Can I save this for every dish on my menu?",
-            "answer": "This tool doesn't store data between sessions, so note down the cost per serving for each dish as you go. Setu POS can store recipe costs against menu items permanently and update automatically as ingredient prices change."
+            "answer": "This tool doesn't store data between sessions, so note down the cost per serving for each dish as you go. Setu Dine can store recipe costs against menu items permanently and update automatically as ingredient prices change."
           }
         ]
       },
       "cta": {
         "headline": "Recipes that update cost automatically",
-        "subtext": "Setu POS links recipes to live ingredient prices, so cost per plate stays accurate without manual recalculation.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine links recipes to live ingredient prices, so cost per plate stays accurate without manual recalculation.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -773,8 +773,8 @@
       },
       "cta": {
         "headline": "Control bar costs the same way you control food cost",
-        "subtext": "Setu POS tracks inventory consumption against sales, so over-pouring and wastage show up fast.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine tracks inventory consumption against sales, so over-pouring and wastage show up fast.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -823,8 +823,8 @@
       },
       "cta": {
         "headline": "Payroll and tips, without the side spreadsheet",
-        "subtext": "Setu POS tracks shift hours and sales by staff member, so you've always got the numbers tip splits need.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine tracks shift hours and sales by staff member, so you've always got the numbers tip splits need.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -973,8 +973,8 @@
       },
       "cta": {
         "headline": "Know which customers are worth keeping",
-        "subtext": "Setu POS tracks repeat customers and order history, so you can see which channels bring in customers who actually come back.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine tracks repeat customers and order history, so you can see which channels bring in customers who actually come back.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     },
     {
@@ -1023,8 +1023,8 @@
       },
       "cta": {
         "headline": "Spot upsell opportunities automatically",
-        "subtext": "Setu POS surfaces combo and add-on prompts at billing, so lifting AOV doesn't rely on staff remembering to ask.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20POS" }
+        "subtext": "Setu Dine surfaces combo and add-on prompts at billing, so lifting AOV doesn't rely on staff remembering to ask.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
     }
   ]
