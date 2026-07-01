@@ -67,7 +67,7 @@ export default function QueuePage() {
         subheadline={content.hero.subheadline}
       />
 
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-12">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-8">
         <Link
           href={content.hero.primaryCta.href}
           className="rounded-full bg-indigo px-7 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink"
@@ -76,16 +76,16 @@ export default function QueuePage() {
         </Link>
       </div>
 
-      <section className="bg-white pb-16">
+      <section className="pb-14">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <FadeIn>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.builtFor.headline}</p>
           </FadeIn>
-          <FadeInStagger className="mt-5 flex flex-wrap justify-center gap-3">
+          <FadeInStagger className="mt-4 flex flex-wrap justify-center gap-3">
             {content.builtFor.tags.map((tag) => (
               <FadeInStaggerItem
                 key={tag}
-                className="rounded-full bg-cream px-4 py-2 text-sm font-medium text-ink"
+                className="rounded-full border border-muted-line/40 bg-white px-4 py-2 text-sm font-medium text-ink"
               >
                 {tag}
               </FadeInStaggerItem>
