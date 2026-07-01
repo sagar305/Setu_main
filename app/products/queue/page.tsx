@@ -14,13 +14,13 @@ export const metadata: Metadata = {
   keywords: content.seo.keywords,
   alternates: { canonical: "/products/queue" },
   openGraph: {
-    title: content.seo.title,
-    description: content.seo.description,
+    title: content.seo.ogTitle,
+    description: content.seo.ogDescription,
     url: "/products/queue",
   },
   twitter: {
-    title: content.seo.title,
-    description: content.seo.description,
+    title: content.seo.ogTitle,
+    description: content.seo.ogDescription,
   },
 };
 
@@ -30,7 +30,7 @@ const softwareApplicationSchema = {
   name: "Setu Queue",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
-  description: content.seo.description,
+  description: content.seo.schemaDescription,
   offers: {
     "@type": "Offer",
     availability: "https://schema.org/InStock",
@@ -67,26 +67,82 @@ export default function QueuePage() {
         subheadline={content.hero.subheadline}
       />
 
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-12">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-8">
         <Link
           href={content.hero.primaryCta.href}
           className="rounded-full bg-indigo px-7 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink"
         >
           {content.hero.primaryCta.label} →
         </Link>
-        <Link
-          href={content.hero.secondaryCta.href}
-          className="rounded-full border border-muted-line/40 px-7 py-3 text-sm font-semibold text-ink transition hover:border-indigo hover:text-indigo"
-        >
-          {content.hero.secondaryCta.label} ↓
-        </Link>
       </div>
 
-      <section className="mx-auto max-w-3xl px-6 pb-4 pt-8 text-center">
+      <section className="pb-14">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <FadeIn>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.builtFor.headline}</p>
+          </FadeIn>
+          <FadeInStagger className="mt-4 flex flex-wrap justify-center gap-3">
+            {content.builtFor.tags.map((tag) => (
+              <FadeInStaggerItem
+                key={tag}
+                className="rounded-full border border-muted-line/40 bg-white px-4 py-2 text-sm font-medium text-ink"
+              >
+                {tag}
+              </FadeInStaggerItem>
+            ))}
+          </FadeInStagger>
+        </div>
+      </section>
+
+      <section className="bg-cream py-16">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <FadeIn>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.workflow.headline}</p>
+            <div className="mx-auto mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-4">
+              {content.workflow.steps.map((step, index) => (
+                <div key={step} className="flex items-center gap-3">
+                  <span className="rounded-full border border-muted-line/40 bg-white px-4 py-2 text-sm font-semibold text-ink">
+                    {step}
+                  </span>
+                  {index < content.workflow.steps.length - 1 && (
+                    <span className="text-muted-warm" aria-hidden="true">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted">{content.workflow.note}</p>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="bg-indigo py-16 text-center text-cream-paper">
+        <div className="mx-auto max-w-3xl px-6">
+          <FadeIn>
+            <h2 className="text-3xl font-bold tracking-tight">{content.differentiator.headline}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-cream-paper/85">
+              {content.differentiator.subtext}
+            </p>
+            <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-4">
+              {content.differentiator.chain.map((step, index) => (
+                <div key={step} className="flex items-center gap-3">
+                  <span className="rounded-full bg-saffron px-4 py-2 text-sm font-semibold text-ink">{step}</span>
+                  {index < content.differentiator.chain.length - 1 && (
+                    <span className="text-cream-paper/60" aria-hidden="true">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="mx-auto mt-6 max-w-xl text-sm font-medium text-cream-paper/85">
+              {content.differentiator.note}
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-6 pb-4 pt-16 text-center">
         <FadeIn>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.showcase.eyebrow}</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink">{content.showcase.headline}</h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">{content.showcase.subtext}</p>
         </FadeIn>
       </section>
 
@@ -157,24 +213,6 @@ export default function QueuePage() {
               {content.comparison.footnote}
             </p>
           </FadeIn>
-        </div>
-      </section>
-
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <FadeIn>
-            <h2 className="text-3xl font-bold tracking-tight text-ink">{content.builtFor.headline}</h2>
-          </FadeIn>
-          <FadeInStagger className="mt-8 flex flex-wrap justify-center gap-3">
-            {content.builtFor.tags.map((tag) => (
-              <FadeInStaggerItem
-                key={tag}
-                className="rounded-full bg-cream px-4 py-2 text-sm font-medium text-ink"
-              >
-                {tag}
-              </FadeInStaggerItem>
-            ))}
-          </FadeInStagger>
         </div>
       </section>
 

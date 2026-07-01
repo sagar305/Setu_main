@@ -1,61 +1,78 @@
 {
   "seo": {
-    "title": "Setu Queue — QSR Counter Service & Order Pickup Display | Token Management",
-    "description": "Setu Queue is counter service software for quick service restaurants — counter billing, token generation, kitchen routing and customer pickup display. Built for QSRs, food courts and canteens.",
-    "keywords": ["Setu Queue", "QSR POS India", "counter service software", "order pickup display", "token management restaurant", "food court billing software"]
+    "title": "Setu Queue — The QSR Operating System | Recipe, Kitchen & Food Cost Management",
+    "description": "Setu Queue is the operating system for modern QSRs — counter billing, kitchen display, recipe-driven inventory and real-time food cost tracking. Built for cafés, QSR chains, cloud kitchens and food courts.",
+    "keywords": ["Setu Queue", "QSR POS India", "cafe POS India", "cloud kitchen software", "food court POS", "kitchen display system", "food cost management software", "recipe management POS", "offline POS India"],
+    "ogTitle": "Setu Queue — The QSR Operating System",
+    "ogDescription": "Counter billing, kitchen display, recipe-driven inventory and real-time food cost — built for cafés, QSR chains, cloud kitchens and food courts.",
+    "schemaDescription": "The operating system for modern QSRs — counter billing, kitchen display, recipe-driven inventory and real-time food cost management for cafés, QSR chains, cloud kitchens and food courts."
   },
   "hero": {
     "eyebrow": "Setu Queue — Live",
-    "headline": "QSR counter service, sorted",
-    "subheadline": "Counter billing, token management, kitchen routing and customer pickup display — built for quick service restaurants, food courts and canteens where speed is everything.",
+    "headline": "The operating system for modern QSRs",
+    "subheadline": "Run your counter, kitchen, recipes, inventory and customer pickup from one platform.\nKnow your food cost in real time.",
     "primaryCta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" },
     "secondaryCta": { "label": "See how it works", "href": "#how-it-works" }
   },
+  "builtFor": {
+    "headline": "Built for",
+    "tags": ["Cafés", "QSR chains", "Cloud kitchens", "Food courts"]
+  },
+  "workflow": {
+    "headline": "How it flows",
+    "steps": ["Counter POS", "Kitchen Display", "Ready Screen", "Customer Pickup", "Reports + Inventory Updated"],
+    "note": "Every order updates inventory automatically. Every sale feeds into food cost and profit."
+  },
+  "differentiator": {
+    "headline": "Most POS systems know what you sold. Setu Queue knows what it cost.",
+    "subtext": "Other systems track products and prices. Setu Queue tracks ingredients, recipes and the actual cost of every item you sell — automatically, on every order.",
+    "chain": ["Ingredient", "Recipe", "Inventory deduction", "Food cost", "Profit per item"],
+    "note": "No other QSR POS in India does this properly at this price point."
+  },
   "showcase": {
     "eyebrow": "Inside Setu Queue",
-    "headline": "One system, from counter to pickup",
-    "subtext": "Scroll through what's actually running under the hood — built around how a real counter shift moves, from the order to the pickup screen."
+    "headline": "What's inside Setu Queue"
   },
   "features": [
     {
-      "heading": "Counter billing",
+      "heading": "Recipe builder",
+      "icon": "book-open",
+      "body": "Know exactly how much every item costs to make — including combos and customisations."
+    },
+    {
+      "heading": "Counter POS",
       "icon": "receipt",
-      "body": "Fast, accurate billing at the counter — GST applied automatically on every order."
+      "body": "Fast billing, thermal printing, offline support — keeps working even when internet goes down."
     },
     {
-      "heading": "Token generation",
-      "icon": "ticket",
-      "body": "Every order gets a unique token number, printed or displayed instantly at billing."
-    },
-    {
-      "heading": "Kitchen routing",
+      "heading": "Kitchen display",
       "icon": "chef-hat",
-      "body": "Orders route instantly to the kitchen the moment billing is confirmed — no shouting, no paper slips."
+      "body": "Orders appear at the kitchen screen the moment billing confirms — with preparation timers and ready status."
     },
     {
-      "heading": "Pickup display",
-      "icon": "monitor",
-      "body": "A customer-facing screen shows token numbers as orders move from preparing to ready for collection."
+      "heading": "Customer tracking",
+      "icon": "qr-code",
+      "body": "Customers scan a QR code to track their order live. Ready screen updates automatically — no app needed."
     },
     {
-      "heading": "Payment",
-      "icon": "credit-card",
-      "body": "Cash, card and UPI — all reconciled automatically against every order."
+      "heading": "Smart inventory",
+      "icon": "boxes",
+      "body": "Ingredients deduct from stock automatically on every order. Low stock alerts and auto purchase orders included."
     },
     {
-      "heading": "Dashboard",
-      "icon": "layout-dashboard",
-      "body": "Sales, orders and queue performance visible in real time — no manual exports needed."
+      "heading": "AI menu creation",
+      "icon": "sparkles",
+      "body": "Create a new menu item — with recipe, ingredients and pricing — in under a minute."
     },
     {
-      "heading": "Tax engine",
-      "icon": "percent",
-      "body": "GST applied automatically based on order type. No manual rate selection at the counter."
+      "heading": "Multi outlet",
+      "icon": "store",
+      "body": "One dashboard, every location. Sales, kitchen performance and food cost visible across all outlets in real time."
     },
     {
-      "heading": "Role management",
-      "icon": "shield-check",
-      "body": "Counter staff, kitchen staff and managers each get exactly the access they need."
+      "heading": "Profit reports",
+      "icon": "trending-up",
+      "body": "See profit per menu item, food cost percentage, hourly sales and kitchen performance — not just total revenue."
     }
   ],
   "howItWorks": {
@@ -66,8 +83,8 @@
         "body": "Staff takes the order at the counter and confirms billing. Token number generated instantly."
       },
       {
-        "title": "Kitchen notified",
-        "body": "Order routes digitally to the kitchen the moment billing is confirmed — with all items and modifications intact."
+        "title": "Kitchen notified + inventory updated",
+        "body": "Order routes digitally to the kitchen the moment billing confirms. Ingredients are automatically deducted from inventory based on the recipe."
       },
       {
         "title": "Pickup display updates",
@@ -95,46 +112,46 @@
     ],
     "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you."
   },
-  "builtFor": {
-    "headline": "Built for",
-    "tags": ["Quick service restaurants", "Food courts", "Canteens", "Bakeries & cafes", "Fast casual dining", "Corporate cafeterias"]
-  },
   "faq": {
     "headline": "Frequently asked questions",
     "items": [
       {
         "question": "What is Setu Queue?",
-        "answer": "Setu Queue is a counter service system built for quick service restaurants, food courts and canteens. It handles counter billing, token generation, kitchen order routing and a customer-facing pickup display — all in one system."
+        "answer": "Setu Queue is a QSR operating system — not just a billing app. It connects your counter, kitchen, recipes, inventory and customer pickup in one platform. The biggest difference from other POS systems is that every order automatically updates inventory and calculates your food cost in real time."
       },
       {
-        "question": "How does token management work in Setu Queue?",
-        "answer": "When a customer places an order at the counter, Setu Queue generates a unique token number automatically. That number appears on the customer's receipt and on the pickup display screen, which updates in real time as their order moves from preparing to ready."
+        "question": "How does the recipe-driven inventory work?",
+        "answer": "When you build a product in Setu Queue, you define its recipe — which ingredients go into it and in what quantities. Every time that product is sold, those ingredients are automatically deducted from your inventory. You always know your stock levels and the actual cost of every item you've sold."
+      },
+      {
+        "question": "What is the kitchen display system?",
+        "answer": "The kitchen display shows every order in real time the moment billing is confirmed — with preparation timers, order sequence and ready status. When kitchen staff mark an order complete, the customer's token number moves to the Ready Screen automatically."
+      },
+      {
+        "question": "How does customer order tracking work?",
+        "answer": "Every order generates a token number. Customers can scan a QR code to track their order status live on their phone, or watch the Ready Screen display. No app download or login required."
+      },
+      {
+        "question": "Does Setu Queue work offline?",
+        "answer": "Yes. Counter billing and receipt printing work without internet. Orders created offline sync automatically when connectivity is restored. Kitchen display status requires a live connection to stay accurate — this is by design."
       },
       {
         "question": "Is Setu Queue GST compliant?",
-        "answer": "Yes. Setu Queue has a built-in tax engine that applies GST automatically on every order — no manual rate selection required at the counter."
-      },
-      {
-        "question": "What is the customer pickup display?",
-        "answer": "The pickup display is a screen (typically mounted where customers wait) that shows token numbers in two columns: Preparing and Ready. When the kitchen marks an order complete, the token number moves to Ready automatically."
+        "answer": "Yes. Setu Queue has a built-in tax engine that applies GST automatically on every order based on order type — no manual rate selection required at the counter."
       },
       {
         "question": "What is the difference between Setu Queue and Setu Dine?",
-        "answer": "Setu Queue is built for counter-service restaurants where customers order at the counter and wait for their number to be called. Setu Dine is built for table-service restaurants where customers sit down and a staff member takes their order. They serve different restaurant models — you choose the one that matches how your restaurant operates."
-      },
-      {
-        "question": "What payment methods does Setu Queue support?",
-        "answer": "Setu Queue accepts cash, cards and UPI. All payments are reconciled automatically against every order."
+        "answer": "They are separate products for different restaurant models. Setu Queue is for counter-service restaurants (QSRs, cafés, food courts, cloud kitchens) where customers order at the counter and wait for pickup. Setu Dine is for table-service restaurants where customers are seated and served by staff. You choose the one that matches your service model."
       },
       {
         "question": "Is there a demo available?",
-        "answer": "Yes. Book a free 30-minute demo and we'll walk through counter billing, token flow and the pickup display for your setup."
+        "answer": "Yes. Book a free 30-minute demo and we'll walk through counter billing, recipe costing, kitchen display and the pickup screen for your specific setup."
       }
     ]
   },
   "cta": {
-    "headline": "See Setu Queue running in your restaurant",
-    "subtext": "Book a free 30-minute demo and we'll walk through counter billing, token flow and the pickup display for your setup.",
+    "headline": "See Setu Queue running in your QSR",
+    "subtext": "Book a free 30-minute demo — we'll walk through counter billing, kitchen display, recipe costing and the pickup screen for your setup.",
     "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" }
   }
 }
