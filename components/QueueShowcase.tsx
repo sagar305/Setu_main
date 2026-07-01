@@ -3,26 +3,26 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
 import {
+  BookOpen,
   Receipt,
-  Ticket,
   ChefHat,
-  Monitor,
-  CreditCard,
-  LayoutDashboard,
-  Percent,
-  ShieldCheck,
+  QrCode,
+  Boxes,
+  Sparkles,
+  Store,
+  TrendingUp,
 } from "lucide-react";
 import type { QueueContent } from "@/lib/content";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
+  "book-open": BookOpen,
   receipt: Receipt,
-  ticket: Ticket,
   "chef-hat": ChefHat,
-  monitor: Monitor,
-  "credit-card": CreditCard,
-  "layout-dashboard": LayoutDashboard,
-  percent: Percent,
-  "shield-check": ShieldCheck,
+  "qr-code": QrCode,
+  boxes: Boxes,
+  sparkles: Sparkles,
+  store: Store,
+  "trending-up": TrendingUp,
 };
 
 type Feature = QueueContent["features"][number];
