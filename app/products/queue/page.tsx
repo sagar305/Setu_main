@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import type { ComponentType } from "react";
+import {
+  Coffee,
+  Store,
+  Cloud,
+  UtensilsCrossed,
+  Receipt,
+  ChefHat,
+  Bell,
+  ShoppingBag,
+  TrendingUp,
+  ArrowRight,
+} from "lucide-react";
 import { getQueueContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 import { QueueShowcase } from "@/components/QueueShowcase";
+import { QueueHeroVisual } from "@/components/QueueHeroVisual";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
@@ -42,6 +56,18 @@ const softwareApplicationSchema = {
   },
 };
 
+const sectionIcons: Record<string, ComponentType<{ className?: string }>> = {
+  coffee: Coffee,
+  store: Store,
+  cloud: Cloud,
+  utensils: UtensilsCrossed,
+  receipt: Receipt,
+  "chef-hat": ChefHat,
+  bell: Bell,
+  "shopping-bag": ShoppingBag,
+  "trending-up": TrendingUp,
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -67,7 +93,7 @@ export default function QueuePage() {
         subheadline={content.hero.subheadline}
       />
 
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-8">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-10">
         <Link
           href={content.hero.primaryCta.href}
           className="rounded-full bg-indigo px-7 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink"
@@ -76,41 +102,66 @@ export default function QueuePage() {
         </Link>
       </div>
 
-      <section className="pb-14">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.builtFor.headline}</p>
-          </FadeIn>
-          <FadeInStagger className="mt-4 flex flex-wrap justify-center gap-3">
-            {content.builtFor.tags.map((tag) => (
-              <FadeInStaggerItem
-                key={tag}
-                className="rounded-full border border-muted-line/40 bg-white px-4 py-2 text-sm font-medium text-ink"
-              >
-                {tag}
-              </FadeInStaggerItem>
-            ))}
-          </FadeInStagger>
-        </div>
-      </section>
+      <QueueHeroVisual />
 
-      <section className="bg-cream py-16">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.workflow.headline}</p>
-            <div className="mx-auto mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-4">
-              {content.workflow.steps.map((step, index) => (
-                <div key={step} className="flex items-center gap-3">
-                  <span className="rounded-full border border-muted-line/40 bg-white px-4 py-2 text-sm font-semibold text-ink">
-                    {step}
-                  </span>
-                  {index < content.workflow.steps.length - 1 && (
-                    <span className="text-muted-warm" aria-hidden="true">→</span>
-                  )}
-                </div>
-              ))}
+      <section className="pb-16 pt-2">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center">
+            <FadeIn>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{content.builtFor.headline}</p>
+            </FadeIn>
+            <FadeInStagger className="mt-5 flex flex-wrap justify-center gap-3">
+              {content.builtFor.tags.map((tag) => {
+                const Icon = sectionIcons[tag.icon];
+                return (
+                  <FadeInStaggerItem
+                    key={tag.label}
+                    className="flex items-center gap-2.5 rounded-full border border-muted-line/40 bg-white py-1.5 pl-2 pr-5 text-sm font-semibold text-ink"
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo">
+                      <Icon className="h-4 w-4 text-cream-paper" aria-hidden="true" />
+                    </span>
+                    {tag.label}
+                  </FadeInStaggerItem>
+                );
+              })}
+            </FadeInStagger>
+          </div>
+
+          <FadeIn className="mt-12">
+            <div className="rounded-3xl border border-muted-line/30 bg-white p-8 md:p-10">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">
+                {content.workflow.headline}
+              </p>
+              <div className="mt-9 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-5">
+                {content.workflow.steps.map((step, index) => {
+                  const Icon = sectionIcons[step.icon];
+                  return (
+                    <div
+                      key={step.label}
+                      className="relative flex flex-col items-center text-center last:col-span-2 md:last:col-span-1"
+                    >
+                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo">
+                        <Icon className="h-6 w-6 text-cream-paper" aria-hidden="true" />
+                      </span>
+                      <span className="mt-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-saffron">
+                        Step {index + 1}
+                      </span>
+                      <p className="mt-1 text-sm font-semibold text-ink">{step.label}</p>
+                      {index < content.workflow.steps.length - 1 && (
+                        <ArrowRight
+                          className="absolute -right-3.5 top-4 hidden h-5 w-5 text-muted-line md:block"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="mx-auto mt-9 max-w-xl border-t border-muted-line/20 pt-6 text-center text-sm leading-relaxed text-muted">
+                {content.workflow.note}
+              </p>
             </div>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted">{content.workflow.note}</p>
           </FadeIn>
         </div>
       </section>
