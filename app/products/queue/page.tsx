@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getQueueContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
 import { QueueShowcase } from "@/components/QueueShowcase";
+import { QueueHeroVisual } from "@/components/QueueHeroVisual";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
@@ -67,7 +68,7 @@ export default function QueuePage() {
         subheadline={content.hero.subheadline}
       />
 
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-8">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-6 pb-10">
         <Link
           href={content.hero.primaryCta.href}
           className="rounded-full bg-indigo px-7 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink"
@@ -75,6 +76,8 @@ export default function QueuePage() {
           {content.hero.primaryCta.label} →
         </Link>
       </div>
+
+      <QueueHeroVisual />
 
       <section className="pb-14">
         <div className="mx-auto max-w-3xl px-6 text-center">

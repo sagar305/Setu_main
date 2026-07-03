@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentType } from "react";
-import { motion, AnimatePresence, useInView } from "motion/react";
+import type { ComponentType } from "react";
 import {
   BookOpen,
   Receipt,
@@ -13,6 +12,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import type { QueueContent } from "@/lib/content";
+import { FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
   "book-open": BookOpen,
@@ -27,105 +27,32 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
 
 type Feature = QueueContent["features"][number];
 
-function FeatureRow({
-  feature,
-  index,
-  active,
-  onActivate,
-}: {
-  feature: Feature;
-  index: number;
-  active: boolean;
-  onActivate: (index: number) => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
-  const Icon = icons[feature.icon];
-
-  useEffect(() => {
-    if (inView) {
-      onActivate(index);
-    }
-  }, [inView, index, onActivate]);
-
-  return (
-    <div
-      ref={ref}
-      className={`flex min-h-[50vh] items-center gap-5 border-l-2 pl-6 transition-colors md:min-h-[55vh] ${
-        active ? "border-saffron" : "border-muted-line/30"
-      }`}
-    >
-      <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors md:hidden ${
-        active ? "bg-saffron" : "bg-cream"
-      }`}>
-        <Icon className={`h-5 w-5 ${active ? "text-ink" : "text-indigo"}`} aria-hidden="true" />
-      </span>
-      <div>
-        <span className={`text-xs font-semibold uppercase tracking-[0.2em] transition-colors ${
-          active ? "text-saffron" : "text-muted-warm"
-        }`}>
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <h3 className={`mt-3 text-2xl font-bold tracking-tight transition-colors ${active ? "text-ink" : "text-muted"}`}>
-          {feature.heading}
-        </h3>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">{feature.body}</p>
-      </div>
-    </div>
-  );
-}
-
 export function QueueShowcase({ features }: { features: Feature[] }) {
-  const [active, setActive] = useState(0);
-  const ActiveIcon = icons[features[active].icon];
-
   return (
-    <section className="bg-white py-12">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1fr_320px]">
-        <div>
-          {features.map((feature, index) => (
-            <FeatureRow key={feature.heading} feature={feature} index={index} active={active === index} onActivate={setActive} />
-          ))}
-        </div>
-
-        <div className="hidden md:block">
-          <div className="sticky top-20 flex h-[calc(100vh-5rem)] flex-col items-center justify-center">
-            <div className="flex flex-col items-center rounded-3xl bg-indigo p-10 text-center text-cream-paper">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, y: 16, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -16, scale: 0.96 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="flex flex-col items-center"
-                >
-                  <motion.span
-                    initial={{ rotate: -8 }}
-                    animate={{ rotate: 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="flex h-16 w-16 items-center justify-center rounded-2xl bg-saffron"
-                  >
-                    <ActiveIcon className="h-8 w-8 text-ink" aria-hidden="true" />
-                  </motion.span>
-                  <h4 className="mt-6 text-xl font-semibold">{features[active].heading}</h4>
-                  <p className="mt-3 text-sm leading-relaxed text-cream-paper/80">{features[active].body}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="mt-8 flex gap-1.5">
-                {features.map((feature, index) => (
-                  <span
-                    key={feature.heading}
-                    className={`h-1.5 rounded-full transition-all ${
-                      active === index ? "w-6 bg-saffron" : "w-1.5 bg-cream-paper/30"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+    <section className="pb-20 pt-10">
+      <div className="mx-auto max-w-6xl px-6">
+        <FadeInStagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature, index) => {
+            const Icon = icons[feature.icon];
+            return (
+              <FadeInStaggerItem
+                key={feature.heading}
+                className="group flex flex-col rounded-2xl border border-muted-line/30 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-saffron hover:shadow-lg hover:shadow-ink/5"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo transition-colors group-hover:bg-saffron">
+                    <Icon className="h-5 w-5 text-cream-paper transition-colors group-hover:text-ink" aria-hidden="true" />
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-warm">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-lg font-bold tracking-tight text-ink">{feature.heading}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{feature.body}</p>
+              </FadeInStaggerItem>
+            );
+          })}
+        </FadeInStagger>
       </div>
     </section>
   );
