@@ -16,11 +16,22 @@
   },
   "builtFor": {
     "headline": "Built for",
-    "tags": ["Cafés", "QSR chains", "Cloud kitchens", "Food courts"]
+    "tags": [
+      { "label": "Cafés", "icon": "coffee" },
+      { "label": "QSR chains", "icon": "store" },
+      { "label": "Cloud kitchens", "icon": "cloud" },
+      { "label": "Food courts", "icon": "utensils" }
+    ]
   },
   "workflow": {
     "headline": "How it flows",
-    "steps": ["Counter POS", "Kitchen Display", "Ready Screen", "Customer Pickup", "Reports + Inventory Updated"],
+    "steps": [
+      { "label": "Counter POS", "icon": "receipt" },
+      { "label": "Kitchen Display", "icon": "chef-hat" },
+      { "label": "Ready Screen", "icon": "bell" },
+      { "label": "Customer Pickup", "icon": "shopping-bag" },
+      { "label": "Reports + Inventory", "icon": "trending-up" }
+    ],
     "note": "Every order updates inventory automatically. Every sale feeds into food cost and profit."
   },
   "differentiator": {
@@ -42,7 +53,7 @@
     {
       "heading": "Counter POS",
       "icon": "receipt",
-      "body": "Fast billing, thermal printing, offline support — keeps working even when internet goes down."
+      "body": "Fast billing with instant token generation — built for rush-hour speed at the counter."
     },
     {
       "heading": "Kitchen display",
@@ -73,6 +84,26 @@
       "heading": "Profit reports",
       "icon": "trending-up",
       "body": "See profit per menu item, food cost percentage, hourly sales and kitchen performance — not just total revenue."
+    },
+    {
+      "heading": "Printer & cash drawer",
+      "icon": "printer",
+      "body": "Works with any ESC/POS thermal printer and cash drawer — receipts, kitchen tickets and drawer kick, out of the box."
+    },
+    {
+      "heading": "Offline mode",
+      "icon": "wifi-off",
+      "body": "Take orders and print receipts with zero internet. Everything syncs back automatically the moment you're online."
+    },
+    {
+      "heading": "Multi currency",
+      "icon": "coins",
+      "body": "Bill in the currency you operate in — pricing, taxes and reports follow automatically."
+    },
+    {
+      "heading": "Multi lingual",
+      "icon": "languages",
+      "body": "Run the counter in the language your staff is comfortable with — switch anytime, per device."
     }
   ],
   "howItWorks": {

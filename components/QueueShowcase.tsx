@@ -10,6 +10,10 @@ import {
   Sparkles,
   Store,
   TrendingUp,
+  Printer,
+  WifiOff,
+  Coins,
+  Languages,
 } from "lucide-react";
 import type { QueueContent } from "@/lib/content";
 import { FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
@@ -23,6 +27,10 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   sparkles: Sparkles,
   store: Store,
   "trending-up": TrendingUp,
+  printer: Printer,
+  "wifi-off": WifiOff,
+  coins: Coins,
+  languages: Languages,
 };
 
 type Feature = QueueContent["features"][number];
