@@ -46,7 +46,8 @@
     ],
     "social": [
       { "label": "Instagram", "href": "https://www.instagram.com/setu.technology" },
-      { "label": "YouTube", "href": "https://www.youtube.com/@setu.technology" }
+      { "label": "YouTube", "href": "https://www.youtube.com/@setu.technology" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/company/setu-technology" }
     ],
     "copyright": "© 2026 Setu Technology. Made in India."
   }
