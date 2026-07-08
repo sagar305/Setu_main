@@ -147,41 +147,113 @@ export function MenuEngineeringCalculatorTool() {
     }
   };
 
-  const exportToPDF = async () => {
-    if (!tableRef.current) return;
-
+  const exportToPDF = () => {
     try {
-      const element = tableRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-        logging: false,
-      });
-
-      const imgWidth = 280;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
       const pdf = new jsPDF({
-        orientation: canvas.width > canvas.height ? "landscape" : "portrait",
+        orientation: "landscape",
         unit: "mm",
         format: "a4",
       });
 
+      const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      let heightLeft = imgHeight;
-      let position = 0;
+      let yPosition = 15;
 
-      const imgData = canvas.toDataURL("image/png");
-      pdf.addImage(imgData, "PNG", 15, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+      // Title
+      pdf.setFontSize(16);
+      pdf.text("Menu Engineering Analysis Report", 15, yPosition);
+      yPosition += 10;
 
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", 15, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
+      // Date
+      pdf.setFontSize(10);
+      pdf.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, yPosition);
+      yPosition += 12;
+
+      // Summary Section
+      pdf.setFontSize(12);
+      pdf.text("Summary Statistics", 15, yPosition);
+      yPosition += 8;
+
+      pdf.setFontSize(10);
+      const summaryData = [
+        [`Total Revenue:`, formatCurrency(analytics.totalRevenue)],
+        [`Total Cost:`, formatCurrency(analytics.totalCost)],
+        [`Total Contribution:`, formatCurrency(analytics.totalContribution)],
+        [`Average Margin:`, `${formatNumber(analytics.averageContributionMargin)}%`],
+      ];
+
+      summaryData.forEach((row) => {
+        pdf.text(row[0], 15, yPosition);
+        pdf.text(row[1], 120, yPosition);
+        yPosition += 6;
+      });
+
+      yPosition += 8;
+
+      // Classification Summary
+      pdf.setFontSize(12);
+      pdf.text("Item Classification", 15, yPosition);
+      yPosition += 8;
+
+      pdf.setFontSize(10);
+      const classData = [
+        [`⭐ Stars:`, analytics.stars.length.toString()],
+        [`🐄 Cash Cows:`, analytics.cashCows.length.toString()],
+        [`🧩 Puzzles:`, analytics.puzzles.length.toString()],
+        [`🐕 Dogs:`, analytics.dogs.length.toString()],
+      ];
+
+      classData.forEach((row) => {
+        pdf.text(row[0], 15, yPosition);
+        pdf.text(row[1], 120, yPosition);
+        yPosition += 6;
+      });
+
+      yPosition += 10;
+
+      // Table Header
+      const tableTop = yPosition;
+      const colWidths = [30, 20, 20, 25, 22, 20, 30];
+      const headers = ["Item Name", "Price (₹)", "Cost (₹)", "Margin (₹)", "Margin %", "Units", "Classification"];
+
+      pdf.setFontSize(10);
+      pdf.setFont("helvetica", "bold");
+
+      let xPos = 15;
+      headers.forEach((header, idx) => {
+        pdf.text(header, xPos, tableTop);
+        xPos += colWidths[idx];
+      });
+
+      pdf.setFont("helvetica", "normal");
+      yPosition = tableTop + 8;
+
+      // Table Rows
+      analytics.classifiedItems.forEach((item) => {
+        if (yPosition > pageHeight - 15) {
+          pdf.addPage();
+          yPosition = 15;
+        }
+
+        xPos = 15;
+        const rowData = [
+          item.name,
+          `₹${item.price}`,
+          `₹${item.cost}`,
+          `₹${item.contributionMargin}`,
+          `${formatNumber(item.contributionMarginPercent)}%`,
+          item.popularity.toString(),
+          getClassificationBadge(item.classification),
+        ];
+
+        pdf.setFontSize(9);
+        rowData.forEach((data, idx) => {
+          pdf.text(data, xPos, yPosition);
+          xPos += colWidths[idx];
+        });
+
+        yPosition += 7;
+      });
 
       pdf.save("menu-engineering-report.pdf");
     } catch (error) {
