@@ -354,7 +354,7 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Price */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Price (Rs) - Numbers only, max 2 decimals
+                    Price (Rs)
                   </label>
                   <input
                     type="text"
@@ -371,7 +371,7 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Cost */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Cost (Rs) - Numbers only, max 2 decimals
+                    Cost (Rs)
                   </label>
                   <input
                     type="text"
@@ -385,7 +385,7 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Units Sold */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Units Sold - Integers only
+                    Units Sold
                   </label>
                   <input
                     type="text"
