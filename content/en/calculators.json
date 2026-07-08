@@ -1026,6 +1026,72 @@
         "subtext": "Setu Dine surfaces combo and add-on prompts at billing, so lifting AOV doesn't rely on staff remembering to ask.",
         "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
       }
+    },
+    {
+      "slug": "menu-engineering-calculator",
+      "name": "Menu Engineering Calculator",
+      "category": "restaurant-ops",
+      "icon": "chart-pie",
+      "shortDescription": "Analyze your menu items by profit and popularity to identify stars, cash cows, puzzles and dogs.",
+      "seo": {
+        "title": "Menu Engineering Calculator — Restaurant Menu Analysis Tool | Setu Technology",
+        "description": "Free menu engineering calculator for restaurants. Input menu items, prices, costs and popularity to identify profit drivers, optimize pricing, and increase margins.",
+        "keywords": [
+          "menu engineering calculator",
+          "restaurant menu analysis",
+          "menu profit calculator",
+          "restaurant menu optimisation",
+          "contribution margin calculator",
+          "menu classification",
+          "restaurant profitability analysis"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Menu Engineering Calculator",
+        "headline": "Menu Engineering Calculator",
+        "subheadline": "Analyze your menu by profit and popularity — identify stars to promote, cash cows to feature, and dogs to remove or reprice."
+      },
+      "about": {
+        "headline": "Stop guessing which items drive profit",
+        "paragraphs": [
+          "Menu engineering is the practice of analyzing your menu items by contribution margin and popularity to identify which items are genuinely profitable and which are eating into your margins.",
+          "This tool classifies every item into one of four categories: Stars (high profit, high popularity) that should be promoted, Cash Cows (high profit, low popularity) that need visibility, Puzzles (low profit, high popularity) that need repricing, and Dogs (low profit, low popularity) that should be removed or repositioned. Input your menu items with their prices, costs and units sold — the calculator handles the rest."
+        ]
+      },
+      "faq": {
+        "headline": "Menu engineering calculator FAQs",
+        "items": [
+          {
+            "question": "What does 'contribution margin' mean in menu engineering?",
+            "answer": "Contribution margin is the profit per item before allocating fixed overhead costs (rent, salaries, etc.). It's the amount each sale contributes toward covering fixed costs and generating profit, calculated as Selling Price minus Cost of Goods Sold."
+          },
+          {
+            "question": "How are items classified in menu engineering?",
+            "answer": "Items are classified by comparing their contribution margin and popularity (units sold) against the menu average. Stars are high on both, Cash Cows are high margin but low popularity, Puzzles are high popularity but low margin, and Dogs are low on both."
+          },
+          {
+            "question": "What should I do with each classification?",
+            "answer": "Stars — promote heavily, keep pricing stable. Cash Cows — increase visibility and bundling to boost sales. Puzzles — increase price or reduce costs (they're already popular, just not profitable). Dogs — remove, reposition as a loss-leader, or improve the recipe cost."
+          },
+          {
+            "question": "Does popularity mean units sold or revenue?",
+            "answer": "In this calculator, popularity means units or covers sold, not revenue. A low-margin item that sells in high volume is a Puzzle, not a Star, because it ties up kitchen capacity without delivering margin."
+          },
+          {
+            "question": "How often should I re-run this analysis?",
+            "answer": "At least once a month or whenever you introduce new items or make significant price or recipe changes. Seasonal changes in popularity often shift items between categories, so you can spot shifting dynamics and adjust positioning."
+          },
+          {
+            "question": "Does this account for labour cost?",
+            "answer": "No — this calculator uses ingredient cost only to find contribution margin. For a more complete profit picture, add an estimated labour cost per item (prep time, cooking time, plating) to your COGS before calculating margin."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimize your menu with real-time data",
+        "subtext": "Setu Dine tracks every item's cost and sales automatically, so you can run menu engineering analysis daily and spot profit-killing items before they hurt your bottom line.",
+        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+      }
     }
   ]
 }
