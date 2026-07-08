@@ -115,14 +115,14 @@ export function MenuEngineeringCalculatorTool() {
     try {
       const exportData = analytics.classifiedItems.map((item) => ({
         "Item Name": item.name,
-        "Price (₹)": item.price,
-        "Cost (₹)": item.cost,
-        "Margin (₹)": item.contributionMargin,
+        "Price (Rs)": item.price,
+        "Cost (Rs)": item.cost,
+        "Margin (Rs)": item.contributionMargin,
         "Margin %": parseFloat(item.contributionMarginPercent.toFixed(2)),
         "Units Sold": item.popularity,
-        Classification: item.classification === "star" ? "⭐ Star" :
-                       item.classification === "cash-cow" ? "🐄 Cash Cow" :
-                       item.classification === "puzzle" ? "🧩 Puzzle" : "🐕 Dog",
+        Classification: item.classification === "star" ? "Star" :
+                       item.classification === "cash-cow" ? "Cash Cow" :
+                       item.classification === "puzzle" ? "Puzzle" : "Dog",
       }));
 
       const ws = XLSX.utils.json_to_sheet(exportData);
@@ -197,10 +197,10 @@ export function MenuEngineeringCalculatorTool() {
 
       pdf.setFontSize(10);
       const classData = [
-        [`⭐ Stars:`, analytics.stars.length.toString()],
-        [`🐄 Cash Cows:`, analytics.cashCows.length.toString()],
-        [`🧩 Puzzles:`, analytics.puzzles.length.toString()],
-        [`🐕 Dogs:`, analytics.dogs.length.toString()],
+        [`Stars:`, analytics.stars.length.toString()],
+        [`Cash Cows:`, analytics.cashCows.length.toString()],
+        [`Puzzles:`, analytics.puzzles.length.toString()],
+        [`Dogs:`, analytics.dogs.length.toString()],
       ];
 
       classData.forEach((row) => {
@@ -214,7 +214,7 @@ export function MenuEngineeringCalculatorTool() {
       // Table Header
       const tableTop = yPosition;
       const colWidths = [30, 20, 20, 25, 22, 20, 30];
-      const headers = ["Item Name", "Price (₹)", "Cost (₹)", "Margin (₹)", "Margin %", "Units", "Classification"];
+      const headers = ["Item Name", "Price (Rs)", "Cost (Rs)", "Margin (Rs)", "Margin %", "Units", "Classification"];
 
       pdf.setFontSize(10);
       pdf.setFont("helvetica", "bold");
@@ -236,14 +236,17 @@ export function MenuEngineeringCalculatorTool() {
         }
 
         xPos = 15;
+        const classificationText = item.classification === "star" ? "Star" :
+                                   item.classification === "cash-cow" ? "Cash Cow" :
+                                   item.classification === "puzzle" ? "Puzzle" : "Dog";
         const rowData = [
           item.name,
-          `₹${item.price}`,
-          `₹${item.cost}`,
-          `₹${item.contributionMargin}`,
+          `Rs${item.price}`,
+          `Rs${item.cost}`,
+          `Rs${item.contributionMargin}`,
           `${formatNumber(item.contributionMarginPercent)}%`,
           item.popularity.toString(),
-          getClassificationBadge(item.classification),
+          classificationText,
         ];
 
         pdf.setFontSize(9);
