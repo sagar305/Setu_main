@@ -288,15 +288,15 @@ export function MenuEngineeringCalculatorTool() {
   return (
     <div className="space-y-8">
       {/* Input Section */}
-      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
-        <div className="mb-8 flex items-center gap-3">
+      <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+        <div className="mb-6 flex items-center gap-3">
           <ChefHat className="h-6 w-6 text-blue-600" />
           <h3 className="text-2xl font-bold text-ink">Menu Items</h3>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {items.map((item, idx) => (
-            <div key={item.id} className="rounded-lg border border-gray-300 bg-gray-50 p-6">
+            <div key={item.id} className="rounded-lg border border-gray-300 bg-gray-50 p-4">
               <div className="mb-5 flex items-center justify-between">
                 <span className="text-sm font-bold text-gray-600">Item #{idx + 1}</span>
                 <button
