@@ -4,7 +4,7 @@ import { useMemo, useState, useRef } from "react";
 import * as XLSX from "xlsx";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { Download, Plus, Trash2, ChefHat } from "lucide-react";
+import { Download, Plus, Trash2, ChefHat, X } from "lucide-react";
 import { formatCurrency, formatNumber } from "@/lib/format";
 
 interface MenuItem {
@@ -215,20 +215,42 @@ export function MenuEngineeringCalculatorTool() {
 
   return (
     <div className="space-y-8">
-      {/* Input Section */}
+      {/* Input Section - Card Format */}
       <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-8 shadow-sm">
-        <div className="mb-6 flex items-center gap-3">
+        <div className="mb-8 flex items-center gap-3">
           <ChefHat className="h-6 w-6 text-blue-600" />
           <h3 className="text-2xl font-bold text-ink">Menu Items</h3>
+          <span className="ml-auto inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+            {items.length} items
+          </span>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {items.map((item, idx) => (
-            <div key={item.id} className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs transition-all hover:shadow-sm">
-              <div className="grid gap-4 sm:grid-cols-6">
+            <div
+              key={item.id}
+              className="rounded-xl border border-gray-200 bg-white p-6 shadow-xs transition-all hover:shadow-md"
+            >
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-600">
+                    {idx + 1}
+                  </div>
+                  <span className="text-sm font-semibold uppercase text-gray-500">Item #{idx + 1}</span>
+                </div>
+                <button
+                  onClick={() => deleteItem(item.id)}
+                  className="flex items-center justify-center rounded-lg bg-red-50 hover:bg-red-100 text-red-600 p-2.5 transition-colors duration-200"
+                  title="Delete item"
+                >
+                  <Trash2 className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {/* Item Name */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-gray-600 mb-2">
+                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
                     Item Name
                   </label>
                   <input
@@ -236,13 +258,13 @@ export function MenuEngineeringCalculatorTool() {
                     value={item.name}
                     onChange={(e) => updateItem(item.id, "name", e.target.value)}
                     placeholder="e.g., Butter Chicken"
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
                   />
                 </div>
 
                 {/* Price */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-gray-600 mb-2">
+                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
                     Price (₹)
                   </label>
                   <input
@@ -250,13 +272,13 @@ export function MenuEngineeringCalculatorTool() {
                     value={item.price}
                     onChange={(e) => updateItem(item.id, "price", parseFloat(e.target.value) || 0)}
                     placeholder="350"
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
                   />
                 </div>
 
                 {/* Cost */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-gray-600 mb-2">
+                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
                     Cost (₹)
                   </label>
                   <input
@@ -264,13 +286,13 @@ export function MenuEngineeringCalculatorTool() {
                     value={item.cost}
                     onChange={(e) => updateItem(item.id, "cost", parseFloat(e.target.value) || 0)}
                     placeholder="100"
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
                   />
                 </div>
 
                 {/* Popularity */}
                 <div>
-                  <label className="block text-xs font-semibold uppercase text-gray-600 mb-2">
+                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
                     Units Sold
                   </label>
                   <input
@@ -278,25 +300,33 @@ export function MenuEngineeringCalculatorTool() {
                     value={item.popularity}
                     onChange={(e) => updateItem(item.id, "popularity", parseFloat(e.target.value) || 0)}
                     placeholder="150"
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
                   />
                 </div>
+              </div>
 
-                {/* Index */}
-                <div className="flex items-end">
-                  <div className="w-full rounded-lg bg-gray-100 px-3 py-2.5 text-center text-sm font-medium text-gray-600">
-                    #{idx + 1}
+              {/* Quick Stats Row */}
+              <div className="mt-6 grid gap-4 sm:grid-cols-3 border-t border-gray-200 pt-4">
+                <div className="rounded-lg bg-green-50 p-4">
+                  <div className="text-xs font-semibold uppercase text-green-700">Margin</div>
+                  <div className="mt-2 text-2xl font-bold text-green-900">
+                    ₹{item.price - item.cost}
+                  </div>
+                  <div className="mt-1 text-xs text-green-600">
+                    {formatNumber(((item.price - item.cost) / item.price) * 100)}%
                   </div>
                 </div>
-
-                {/* Delete Button */}
-                <div className="flex items-end">
-                  <button
-                    onClick={() => deleteItem(item.id)}
-                    className="w-full flex items-center justify-center rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-medium py-2.5 transition-colors duration-200"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                <div className="rounded-lg bg-blue-50 p-4">
+                  <div className="text-xs font-semibold uppercase text-blue-700">Total Revenue</div>
+                  <div className="mt-2 text-2xl font-bold text-blue-900">
+                    ₹{(item.price * item.popularity).toLocaleString()}
+                  </div>
+                </div>
+                <div className="rounded-lg bg-purple-50 p-4">
+                  <div className="text-xs font-semibold uppercase text-purple-700">Total Contribution</div>
+                  <div className="mt-2 text-2xl font-bold text-purple-900">
+                    ₹{((item.price - item.cost) * item.popularity).toLocaleString()}
+                  </div>
                 </div>
               </div>
             </div>
@@ -305,10 +335,10 @@ export function MenuEngineeringCalculatorTool() {
 
         <button
           onClick={addItem}
-          className="mt-6 flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-3 text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
+          className="mt-8 flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-4 text-base font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
         >
           <Plus className="h-5 w-5" />
-          Add Menu Item
+          Add New Menu Item
         </button>
       </div>
 
