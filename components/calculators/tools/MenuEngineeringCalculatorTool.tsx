@@ -311,7 +311,7 @@ export function MenuEngineeringCalculatorTool() {
       </div>
 
       {/* Summary Statistics */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-blue-50 p-6">
           <div className="text-xs font-bold uppercase text-blue-700">Total Revenue</div>
           <div className="mt-2 text-2xl font-bold text-blue-900">
@@ -342,7 +342,7 @@ export function MenuEngineeringCalculatorTool() {
       </div>
 
       {/* Classification Breakdown */}
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-yellow-300 bg-yellow-50 p-6">
           <div className="text-4xl mb-2">⭐</div>
           <div className="text-sm font-bold text-yellow-900">Stars</div>
