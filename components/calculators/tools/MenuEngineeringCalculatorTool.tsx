@@ -7,6 +7,10 @@ import jsPDF from "jspdf";
 import { Download, Plus, Trash2, ChefHat } from "lucide-react";
 import { formatCurrency, formatNumber } from "@/lib/format";
 
+// Regex patterns for validation
+const PRICE_PATTERN = /^\d+(\.\d{1,2})?$/; // Integer or decimal with up to 2 places
+const QTY_PATTERN = /^\d+$/; // Integer only
+
 interface MenuItem {
   id: string;
   name: string;
@@ -33,7 +37,12 @@ export function MenuEngineeringCalculatorTool() {
   const tableRef = useRef<HTMLDivElement>(null);
 
   const analytics = useMemo(() => {
-    if (items.length === 0) {
+    // Filter out completely empty items
+    const validItems = items.filter(
+      (item) => item.name.trim() !== "" || item.price > 0 || item.cost > 0 || item.popularity > 0
+    );
+
+    if (validItems.length === 0) {
       return {
         classifiedItems: [],
         averageContributionMargin: 0,
@@ -49,7 +58,7 @@ export function MenuEngineeringCalculatorTool() {
       };
     }
 
-    const itemsWithMargin = items.map((item) => ({
+    const itemsWithMargin = validItems.map((item) => ({
       ...item,
       contributionMargin: item.price - item.cost,
       contributionMarginPercent: ((item.price - item.cost) / item.price) * 100,
@@ -95,16 +104,31 @@ export function MenuEngineeringCalculatorTool() {
   const addItem = () => {
     const newItem: MenuItem = {
       id: Date.now().toString(),
-      name: "New Item",
-      price: 200,
-      cost: 80,
-      popularity: 50,
+      name: "",
+      price: 0,
+      cost: 0,
+      popularity: 0,
     };
     setItems([...items, newItem]);
   };
 
   const updateItem = (id: string, field: keyof MenuItem, value: string | number) => {
-    setItems(items.map((item) => (item.id === id ? { ...item, [field]: value } : item)));
+    let finalValue: string | number = value;
+
+    // Validate based on field type
+    if (typeof value === "string") {
+      if (field === "popularity") {
+        // Quantity: only integers, but allow empty for user to clear
+        if (value !== "" && !QTY_PATTERN.test(value)) return;
+        finalValue = value === "" ? 0 : parseInt(value);
+      } else if (field === "price" || field === "cost") {
+        // Price/Cost: integers or decimals with up to 2 places, allow empty
+        if (value !== "" && !PRICE_PATTERN.test(value)) return;
+        finalValue = value === "" ? 0 : parseFloat(value);
+      }
+    }
+
+    setItems(items.map((item) => (item.id === id ? { ...item, [field]: finalValue } : item)));
   };
 
   const deleteItem = (id: string) => {
@@ -330,13 +354,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Price */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Price (₹)
+                    Price (Rs) - Numbers only, max 2 decimals
                   </label>
                   <input
-                    type="number"
-                    value={item.price}
-                    onChange={(e) => updateItem(item.id, "price", parseFloat(e.target.value) || 0)}
-                    placeholder="0"
+                    type="text"
+                    value={item.price === 0 ? "" : item.price}
+                    onChange={(e) => updateItem(item.id, "price", e.target.value)}
+                    placeholder="e.g. 100.50"
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -347,13 +371,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Cost */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Cost (₹)
+                    Cost (Rs) - Numbers only, max 2 decimals
                   </label>
                   <input
-                    type="number"
-                    value={item.cost}
-                    onChange={(e) => updateItem(item.id, "cost", parseFloat(e.target.value) || 0)}
-                    placeholder="0"
+                    type="text"
+                    value={item.cost === 0 ? "" : item.cost}
+                    onChange={(e) => updateItem(item.id, "cost", e.target.value)}
+                    placeholder="e.g. 50.25"
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -361,13 +385,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Units Sold */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Units Sold
+                    Units Sold - Integers only
                   </label>
                   <input
-                    type="number"
-                    value={item.popularity}
-                    onChange={(e) => updateItem(item.id, "popularity", parseFloat(e.target.value) || 0)}
-                    placeholder="0"
+                    type="text"
+                    value={item.popularity === 0 ? "" : item.popularity}
+                    onChange={(e) => updateItem(item.id, "popularity", e.target.value)}
+                    placeholder="e.g. 100"
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
