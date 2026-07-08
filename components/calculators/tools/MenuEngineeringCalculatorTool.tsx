@@ -268,7 +268,7 @@ export function MenuEngineeringCalculatorTool() {
               </div>
 
               {/* Row 2 */}
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 pt-6">
                 {/* Cost */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
