@@ -200,9 +200,9 @@ export function MenuEngineeringCalculatorTool() {
 
       pdf.setFontSize(10);
       const summaryData = [
-        [`Total Revenue:`, formatCurrency(analytics.totalRevenue)],
-        [`Total Cost:`, formatCurrency(analytics.totalCost)],
-        [`Total Contribution:`, formatCurrency(analytics.totalContribution)],
+        [`Total Revenue:`, `Rs${formatNumber(analytics.totalRevenue)}`],
+        [`Total Cost:`, `Rs${formatNumber(analytics.totalCost)}`],
+        [`Total Contribution:`, `Rs${formatNumber(analytics.totalContribution)}`],
         [`Average Margin:`, `${formatNumber(analytics.averageContributionMargin)}%`],
       ];
 
