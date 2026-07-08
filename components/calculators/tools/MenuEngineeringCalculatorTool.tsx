@@ -4,7 +4,7 @@ import { useMemo, useState, useRef } from "react";
 import * as XLSX from "xlsx";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { Download, Plus, Trash2, ChefHat, X } from "lucide-react";
+import { Download, Plus, Trash2, ChefHat } from "lucide-react";
 import { formatCurrency, formatNumber } from "@/lib/format";
 
 interface MenuItem {
@@ -215,118 +215,82 @@ export function MenuEngineeringCalculatorTool() {
 
   return (
     <div className="space-y-8">
-      {/* Input Section - Card Format */}
-      <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-8 shadow-sm">
+      {/* Input Section */}
+      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
         <div className="mb-8 flex items-center gap-3">
           <ChefHat className="h-6 w-6 text-blue-600" />
           <h3 className="text-2xl font-bold text-ink">Menu Items</h3>
-          <span className="ml-auto inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
-            {items.length} items
-          </span>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
           {items.map((item, idx) => (
-            <div
-              key={item.id}
-              className="rounded-xl border border-gray-200 bg-white p-6 shadow-xs transition-all hover:shadow-md"
-            >
-              <div className="mb-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-600">
-                    {idx + 1}
-                  </div>
-                  <span className="text-sm font-semibold uppercase text-gray-500">Item #{idx + 1}</span>
-                </div>
+            <div key={item.id} className="rounded-lg border border-gray-300 bg-gray-50 p-6">
+              <div className="mb-5 flex items-center justify-between">
+                <span className="text-sm font-bold text-gray-600">Item #{idx + 1}</span>
                 <button
                   onClick={() => deleteItem(item.id)}
-                  className="flex items-center justify-center rounded-lg bg-red-50 hover:bg-red-100 text-red-600 p-2.5 transition-colors duration-200"
-                  title="Delete item"
+                  className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                  title="Delete"
                 >
-                  <Trash2 className="h-5 w-5" />
+                  <Trash2 className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {/* Item Name */}
-                <div>
-                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
+                <div className="flex flex-col">
+                  <label className="block text-xs font-bold text-gray-700 mb-2">
                     Item Name
                   </label>
                   <input
                     type="text"
                     value={item.name}
                     onChange={(e) => updateItem(item.id, "name", e.target.value)}
-                    placeholder="e.g., Butter Chicken"
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    placeholder="Item name"
+                    className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
 
                 {/* Price */}
-                <div>
-                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
+                <div className="flex flex-col">
+                  <label className="block text-xs font-bold text-gray-700 mb-2">
                     Price (₹)
                   </label>
                   <input
                     type="number"
                     value={item.price}
                     onChange={(e) => updateItem(item.id, "price", parseFloat(e.target.value) || 0)}
-                    placeholder="350"
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    placeholder="0"
+                    className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
 
                 {/* Cost */}
-                <div>
-                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
+                <div className="flex flex-col">
+                  <label className="block text-xs font-bold text-gray-700 mb-2">
                     Cost (₹)
                   </label>
                   <input
                     type="number"
                     value={item.cost}
                     onChange={(e) => updateItem(item.id, "cost", parseFloat(e.target.value) || 0)}
-                    placeholder="100"
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    placeholder="0"
+                    className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
 
-                {/* Popularity */}
-                <div>
-                  <label className="block text-sm font-bold uppercase text-gray-700 mb-3">
+                {/* Units Sold */}
+                <div className="flex flex-col">
+                  <label className="block text-xs font-bold text-gray-700 mb-2">
                     Units Sold
                   </label>
                   <input
                     type="number"
                     value={item.popularity}
                     onChange={(e) => updateItem(item.id, "popularity", parseFloat(e.target.value) || 0)}
-                    placeholder="150"
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-medium text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
+                    placeholder="0"
+                    className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
-                </div>
-              </div>
-
-              {/* Quick Stats Row */}
-              <div className="mt-6 grid gap-4 sm:grid-cols-3 border-t border-gray-200 pt-4">
-                <div className="rounded-lg bg-green-50 p-4">
-                  <div className="text-xs font-semibold uppercase text-green-700">Margin</div>
-                  <div className="mt-2 text-2xl font-bold text-green-900">
-                    ₹{item.price - item.cost}
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    {formatNumber(((item.price - item.cost) / item.price) * 100)}%
-                  </div>
-                </div>
-                <div className="rounded-lg bg-blue-50 p-4">
-                  <div className="text-xs font-semibold uppercase text-blue-700">Total Revenue</div>
-                  <div className="mt-2 text-2xl font-bold text-blue-900">
-                    ₹{(item.price * item.popularity).toLocaleString()}
-                  </div>
-                </div>
-                <div className="rounded-lg bg-purple-50 p-4">
-                  <div className="text-xs font-semibold uppercase text-purple-700">Total Contribution</div>
-                  <div className="mt-2 text-2xl font-bold text-purple-900">
-                    ₹{((item.price - item.cost) * item.popularity).toLocaleString()}
-                  </div>
                 </div>
               </div>
             </div>
@@ -335,92 +299,72 @@ export function MenuEngineeringCalculatorTool() {
 
         <button
           onClick={addItem}
-          className="mt-8 flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-4 text-base font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
+          className="mt-6 flex items-center justify-center gap-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-colors"
         >
-          <Plus className="h-5 w-5" />
-          Add New Menu Item
+          <Plus className="h-4 w-4" />
+          Add Menu Item
         </button>
       </div>
 
       {/* Summary Statistics */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-xs font-bold uppercase tracking-wide text-blue-700">
-            Total Revenue
-          </div>
-          <div className="mt-3 text-3xl font-bold text-blue-900">
+        <div className="rounded-lg border border-gray-200 bg-blue-50 p-6">
+          <div className="text-xs font-bold uppercase text-blue-700">Total Revenue</div>
+          <div className="mt-2 text-2xl font-bold text-blue-900">
             {formatCurrency(analytics.totalRevenue)}
           </div>
-          <div className="mt-1 text-xs text-blue-600">All items combined</div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-orange-50 to-orange-100 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-xs font-bold uppercase tracking-wide text-orange-700">
-            Total Cost
-          </div>
-          <div className="mt-3 text-3xl font-bold text-orange-900">
+        <div className="rounded-lg border border-gray-200 bg-orange-50 p-6">
+          <div className="text-xs font-bold uppercase text-orange-700">Total Cost</div>
+          <div className="mt-2 text-2xl font-bold text-orange-900">
             {formatCurrency(analytics.totalCost)}
           </div>
-          <div className="mt-1 text-xs text-orange-600">COGS total</div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-green-50 to-green-100 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-xs font-bold uppercase tracking-wide text-green-700">
-            Total Contribution
-          </div>
-          <div className="mt-3 text-3xl font-bold text-green-900">
+        <div className="rounded-lg border border-gray-200 bg-green-50 p-6">
+          <div className="text-xs font-bold uppercase text-green-700">Total Contribution</div>
+          <div className="mt-2 text-2xl font-bold text-green-900">
             {formatCurrency(analytics.totalContribution)}
           </div>
-          <div className="mt-1 text-xs text-green-600">Profit contribution</div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-purple-50 to-purple-100 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-xs font-bold uppercase tracking-wide text-purple-700">
-            Avg Margin %
-          </div>
-          <div className="mt-3 text-3xl font-bold text-purple-900">
+        <div className="rounded-lg border border-gray-200 bg-purple-50 p-6">
+          <div className="text-xs font-bold uppercase text-purple-700">Avg Margin %</div>
+          <div className="mt-2 text-2xl font-bold text-purple-900">
             {formatNumber(analytics.averageContributionMargin)}%
           </div>
-          <div className="mt-1 text-xs text-purple-600">Across all items</div>
         </div>
       </div>
 
       {/* Classification Breakdown */}
       <div className="grid gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border-2 border-yellow-300 bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 shadow-sm">
+        <div className="rounded-lg border border-yellow-300 bg-yellow-50 p-6">
           <div className="text-4xl mb-2">⭐</div>
           <div className="text-sm font-bold text-yellow-900">Stars</div>
-          <div className="mt-2 text-3xl font-bold text-yellow-700">{analytics.stars.length}</div>
-          <div className="mt-3 text-xs text-yellow-700 leading-relaxed font-medium">
-            High margin + High popularity. Promote these items.
-          </div>
+          <div className="mt-2 text-2xl font-bold text-yellow-700">{analytics.stars.length}</div>
+          <div className="mt-2 text-xs text-yellow-700">High margin + High popularity</div>
         </div>
 
-        <div className="rounded-xl border-2 border-green-300 bg-gradient-to-br from-green-50 to-green-100 p-6 shadow-sm">
+        <div className="rounded-lg border border-green-300 bg-green-50 p-6">
           <div className="text-4xl mb-2">🐄</div>
           <div className="text-sm font-bold text-green-900">Cash Cows</div>
-          <div className="mt-2 text-3xl font-bold text-green-700">{analytics.cashCows.length}</div>
-          <div className="mt-3 text-xs text-green-700 leading-relaxed font-medium">
-            High margin + Low popularity. Increase visibility.
-          </div>
+          <div className="mt-2 text-2xl font-bold text-green-700">{analytics.cashCows.length}</div>
+          <div className="mt-2 text-xs text-green-700">High margin + Low popularity</div>
         </div>
 
-        <div className="rounded-xl border-2 border-orange-300 bg-gradient-to-br from-orange-50 to-orange-100 p-6 shadow-sm">
+        <div className="rounded-lg border border-orange-300 bg-orange-50 p-6">
           <div className="text-4xl mb-2">🧩</div>
           <div className="text-sm font-bold text-orange-900">Puzzles</div>
-          <div className="mt-2 text-3xl font-bold text-orange-700">{analytics.puzzles.length}</div>
-          <div className="mt-3 text-xs text-orange-700 leading-relaxed font-medium">
-            Low margin + High popularity. Raise prices or reduce costs.
-          </div>
+          <div className="mt-2 text-2xl font-bold text-orange-700">{analytics.puzzles.length}</div>
+          <div className="mt-2 text-xs text-orange-700">Low margin + High popularity</div>
         </div>
 
-        <div className="rounded-xl border-2 border-red-300 bg-gradient-to-br from-red-50 to-red-100 p-6 shadow-sm">
+        <div className="rounded-lg border border-red-300 bg-red-50 p-6">
           <div className="text-4xl mb-2">🐕</div>
           <div className="text-sm font-bold text-red-900">Dogs</div>
-          <div className="mt-2 text-3xl font-bold text-red-700">{analytics.dogs.length}</div>
-          <div className="mt-3 text-xs text-red-700 leading-relaxed font-medium">
-            Low margin + Low popularity. Remove or reposition.
-          </div>
+          <div className="mt-2 text-2xl font-bold text-red-700">{analytics.dogs.length}</div>
+          <div className="mt-2 text-xs text-red-700">Low margin + Low popularity</div>
         </div>
       </div>
 
@@ -428,47 +372,47 @@ export function MenuEngineeringCalculatorTool() {
       <div className="flex gap-3">
         <button
           onClick={exportToExcel}
-          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 px-6 py-3 font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
+          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-green-600 hover:bg-green-700 px-6 py-3 font-semibold text-white transition-colors"
         >
-          <Download className="h-5 w-5" />
+          <Download className="h-4 w-4" />
           Export to Excel
         </button>
         <button
           onClick={exportToPDF}
-          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 px-6 py-3 font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
+          className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-red-600 hover:bg-red-700 px-6 py-3 font-semibold text-white transition-colors"
         >
-          <Download className="h-5 w-5" />
+          <Download className="h-4 w-4" />
           Export to PDF
         </button>
       </div>
 
       {/* Results Table */}
-      <div ref={tableRef} className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+      <div ref={tableRef} className="rounded-lg border border-gray-200 bg-white overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-gradient-to-r from-gray-50 to-gray-100 border-b-2 border-gray-200">
+            <thead className="bg-gray-100 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-4 text-left font-bold text-gray-900">Item Name</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900">Price (₹)</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900">Cost (₹)</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900">Margin (₹)</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900">Margin %</th>
-                <th className="px-6 py-4 text-right font-bold text-gray-900">Units Sold</th>
-                <th className="px-6 py-4 text-center font-bold text-gray-900">Classification</th>
+                <th className="px-4 py-3 text-left font-bold text-gray-900">Item Name</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Price (₹)</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Cost (₹)</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin (₹)</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin %</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Units Sold</th>
+                <th className="px-4 py-3 text-center font-bold text-gray-900">Classification</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {analytics.classifiedItems.map((item) => (
-                <tr key={item.id} className={`${getClassificationColor(item.classification)} transition-colors hover:opacity-75`}>
-                  <td className="px-6 py-4 font-semibold text-gray-900">{item.name}</td>
-                  <td className="px-6 py-4 text-right text-gray-700 font-medium">₹{item.price}</td>
-                  <td className="px-6 py-4 text-right text-gray-700 font-medium">₹{item.cost}</td>
-                  <td className="px-6 py-4 text-right text-gray-900 font-bold">₹{item.contributionMargin}</td>
-                  <td className="px-6 py-4 text-right text-gray-900 font-bold">
+                <tr key={item.id} className={`${getClassificationColor(item.classification)}`}>
+                  <td className="px-4 py-3 font-medium text-gray-900">{item.name}</td>
+                  <td className="px-4 py-3 text-right text-gray-700">₹{item.price}</td>
+                  <td className="px-4 py-3 text-right text-gray-700">₹{item.cost}</td>
+                  <td className="px-4 py-3 text-right font-bold text-gray-900">₹{item.contributionMargin}</td>
+                  <td className="px-4 py-3 text-right font-bold text-gray-900">
                     {formatNumber(item.contributionMarginPercent)}%
                   </td>
-                  <td className="px-6 py-4 text-right text-gray-700 font-medium">{item.popularity}</td>
-                  <td className="px-6 py-4 text-center font-semibold text-gray-900">
+                  <td className="px-4 py-3 text-right text-gray-700">{item.popularity}</td>
+                  <td className="px-4 py-3 text-center font-semibold text-gray-900">
                     {getClassificationBadge(item.classification)}
                   </td>
                 </tr>
@@ -479,24 +423,24 @@ export function MenuEngineeringCalculatorTool() {
       </div>
 
       {/* Information Section */}
-      <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 p-8 shadow-sm">
-        <h3 className="text-lg font-bold text-blue-900 mb-4">How to Use This Calculator</h3>
+      <div className="rounded-lg border border-blue-200 bg-blue-50 p-6">
+        <h3 className="text-lg font-bold text-blue-900 mb-4">How to Use</h3>
         <div className="grid gap-4 text-sm text-blue-800 sm:grid-cols-2">
-          <div className="rounded-lg bg-white/60 p-4 backdrop-blur">
-            <div className="font-bold text-blue-900 mb-2">⭐ Stars</div>
-            <p>These items have high profit margins AND strong customer demand. Keep them on the menu, promote them, and maintain competitive pricing.</p>
+          <div>
+            <div className="font-bold">⭐ Stars</div>
+            <p className="mt-1">High margin + High popularity. Promote these items.</p>
           </div>
-          <div className="rounded-lg bg-white/60 p-4 backdrop-blur">
-            <div className="font-bold text-blue-900 mb-2">🐄 Cash Cows</div>
-            <p>High profit margin but low customer demand. Feature them in combos, pair with popular items, or highlight them on the menu.</p>
+          <div>
+            <div className="font-bold">🐄 Cash Cows</div>
+            <p className="mt-1">High margin + Low popularity. Increase visibility.</p>
           </div>
-          <div className="rounded-lg bg-white/60 p-4 backdrop-blur">
-            <div className="font-bold text-blue-900 mb-2">🧩 Puzzles</div>
-            <p>Customers love these but margins are thin. Consider: increase prices, optimize costs, or reduce portion sizes to improve profitability.</p>
+          <div>
+            <div className="font-bold">🧩 Puzzles</div>
+            <p className="mt-1">Low margin + High popularity. Raise prices or reduce costs.</p>
           </div>
-          <div className="rounded-lg bg-white/60 p-4 backdrop-blur">
-            <div className="font-bold text-blue-900 mb-2">🐕 Dogs</div>
-            <p>Low margin AND low popularity. Best action: remove from menu, reposition as loss-leader, or redesign the recipe for better margins.</p>
+          <div>
+            <div className="font-bold">🐕 Dogs</div>
+            <p className="mt-1">Low margin + Low popularity. Remove or reposition.</p>
           </div>
         </div>
       </div>
