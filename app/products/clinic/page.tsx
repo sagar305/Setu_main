@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: "/products/clinic",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og/setu-og-image.png",
         width: 1200,
         height: 630,
         alt: "Setu Technology - Setu for your business",
