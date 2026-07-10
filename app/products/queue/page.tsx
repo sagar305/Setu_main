@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     title: content.seo.ogTitle,
     description: content.seo.ogDescription,
     url: "/products/queue",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Setu Technology - Setu for your business",
+      },
+    ],
   },
   twitter: {
     title: content.seo.ogTitle,
@@ -53,6 +61,14 @@ const softwareApplicationSchema = {
     "@type": "Organization",
     name: "Setu Technology",
     url: "https://setutechnology.com",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Setu Technology - Setu for your business",
+      },
+    ],
   },
 };
 

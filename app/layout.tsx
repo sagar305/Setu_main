@@ -24,9 +24,18 @@ export const metadata: Metadata = {
     siteName: "Setu Technology",
     type: "website",
     locale: "en_IN",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Setu Technology - Setu for your business",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    image: "/og-image.png",
   },
 };
 

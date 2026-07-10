@@ -14,6 +14,14 @@ export const metadata: Metadata = {
     title: item.seo.title,
     description: item.seo.description,
     url: "/calculators/online-order-commission-calculator",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Setu Technology - Setu for your business",
+      },
+    ],
   },
 };
 

@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     title: content.seo.title,
     description: content.seo.description,
     url: "/calculators",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Setu Technology - Setu for your business",
+      },
+    ],
   },
 };
 
