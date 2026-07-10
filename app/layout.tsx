@@ -35,7 +35,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    image: "/og/setu-og-image.png",
   },
 };
 
