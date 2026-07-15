@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Download, Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff } from "lucide-react";
+import { Download, Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff, ChevronRight } from "lucide-react";
 import { InvoicePreview } from "./InvoicePreview";
 import { BusinessDetailsSection } from "./BusinessDetailsSection";
 import { ClientDetailsSection } from "./ClientDetailsSection";
@@ -46,11 +46,75 @@ export function InvoiceGeneratorTool() {
     template: false,
   });
 
+  const [lockedSections, setLockedSections] = useState<Record<string, boolean>>({
+    business: false,
+    client: false,
+    invoice: false,
+    items: false,
+    bank: false,
+    notes: false,
+    template: false,
+  });
+
   const toggleSection = (section: string) => {
     setOpenSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
+  };
+
+  const toggleLockSection = (section: string) => {
+    setLockedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+
+  const clearUnlockedFields = () => {
+    // Clear only unlocked sections
+    if (!lockedSections.invoice) {
+      updateInvoiceDetails({
+        number: "",
+        date: new Date().toISOString().split("T")[0],
+        dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+        poNumber: "",
+        ewayBillNumber: "",
+      });
+    }
+
+    if (!lockedSections.items) {
+      // Clear line items - start with one empty item
+      // This is handled by resetting and adding one item
+      while (data.lineItems.length > 1) {
+        removeLineItem(data.lineItems[0].id);
+      }
+      if (data.lineItems.length > 0) {
+        updateLineItem(data.lineItems[0].id, {
+          description: "",
+          quantity: 1,
+          unit: "Qty",
+          rate: 0,
+          discountPercent: 0,
+          taxRate: 18,
+        });
+      }
+    }
+
+    if (!lockedSections.notes) {
+      updateNotes("");
+      updateTerms("");
+    }
+
+    if (!lockedSections.client) {
+      updateClientDetails({
+        name: "",
+        address: "",
+        phone: "",
+        email: "",
+        gstin: "",
+      });
+    }
   };
 
   const handleExportPDF = async () => {
@@ -78,7 +142,6 @@ export function InvoiceGeneratorTool() {
     printWindow.document.close();
     printWindow.focus();
 
-    // Add Tailwind styles
     const styles = document.querySelectorAll("style");
     styles.forEach((style) => {
       printWindow.document.head.appendChild(style.cloneNode(true));
@@ -135,11 +198,24 @@ export function InvoiceGeneratorTool() {
           </button>
 
           <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
+            onClick={() => {
+              handlePrint();
+              clearUnlockedFields();
+            }}
+            className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100"
+            title="Print invoice and clear unlocked fields for next invoice"
           >
             <Printer className="h-4 w-4" />
-            Print
+            Print & Clear
+          </button>
+
+          <button
+            onClick={clearUnlockedFields}
+            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700"
+            title="Clear unlocked fields and prepare for next invoice"
+          >
+            <ChevronRight className="h-4 w-4" />
+            Next Invoice
           </button>
 
           <button
@@ -147,7 +223,7 @@ export function InvoiceGeneratorTool() {
             className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
           >
             <RotateCcw className="h-4 w-4" />
-            Reset
+            Reset All
           </button>
         </div>
 
@@ -182,6 +258,8 @@ export function InvoiceGeneratorTool() {
                 icon={<Building2 className="h-5 w-5" />}
                 isOpen={openSections.business}
                 onToggle={() => toggleSection("business")}
+                isLocked={lockedSections.business}
+                onToggleLock={() => toggleLockSection("business")}
               >
                 <BusinessDetailsSection
                   data={data.businessDetails}
@@ -195,6 +273,8 @@ export function InvoiceGeneratorTool() {
                 icon={<Users className="h-5 w-5" />}
                 isOpen={openSections.client}
                 onToggle={() => toggleSection("client")}
+                isLocked={lockedSections.client}
+                onToggleLock={() => toggleLockSection("client")}
               >
                 <ClientDetailsSection
                   data={data.clientDetails}
@@ -208,6 +288,8 @@ export function InvoiceGeneratorTool() {
                 icon={<FileText className="h-5 w-5" />}
                 isOpen={openSections.invoice}
                 onToggle={() => toggleSection("invoice")}
+                isLocked={lockedSections.invoice}
+                onToggleLock={() => toggleLockSection("invoice")}
               >
                 <InvoiceDetailsSection
                   data={data.invoiceDetails}
@@ -221,6 +303,8 @@ export function InvoiceGeneratorTool() {
                 icon={<ShoppingCart className="h-5 w-5" />}
                 isOpen={openSections.items}
                 onToggle={() => toggleSection("items")}
+                isLocked={lockedSections.items}
+                onToggleLock={() => toggleLockSection("items")}
               >
                 <LineItemsSection
                   items={data.lineItems}
@@ -237,6 +321,8 @@ export function InvoiceGeneratorTool() {
                 icon={<Banknote className="h-5 w-5" />}
                 isOpen={openSections.bank}
                 onToggle={() => toggleSection("bank")}
+                isLocked={lockedSections.bank}
+                onToggleLock={() => toggleLockSection("bank")}
               >
                 <BankDetailsSection
                   data={data.bankDetails}
@@ -250,6 +336,8 @@ export function InvoiceGeneratorTool() {
                 icon={<BookOpen className="h-5 w-5" />}
                 isOpen={openSections.notes}
                 onToggle={() => toggleSection("notes")}
+                isLocked={lockedSections.notes}
+                onToggleLock={() => toggleLockSection("notes")}
               >
                 <NotesAndTermsSection
                   notes={data.notes}
@@ -265,6 +353,8 @@ export function InvoiceGeneratorTool() {
                 icon={<Palette className="h-5 w-5" />}
                 isOpen={openSections.template}
                 onToggle={() => toggleSection("template")}
+                isLocked={lockedSections.template}
+                onToggleLock={() => toggleLockSection("template")}
               >
                 <TemplateSelector
                   selectedTemplate={data.template}
