@@ -57,7 +57,7 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
 
       <div className="p-8">
         {/* Invoice Details Cards */}
-        <div className="mb-8 grid grid-cols-3 gap-4">
+        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
           <div
             className="rounded-lg p-4 text-white"
             style={{ backgroundColor: data.brandColor }}
@@ -77,18 +77,20 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
               })}
             </div>
           </div>
-          <div
-            className="rounded-lg p-4 text-white"
-            style={{ backgroundColor: adjustBrightness(data.brandColor, -10) }}
-          >
-            <div className="text-xs font-semibold opacity-80">Due Date</div>
-            <div className="mt-2 text-lg font-bold">
-              {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN", {
-                month: "short",
-                day: "numeric",
-              })}
+          {data.invoiceDetails.dueDate && (
+            <div
+              className="rounded-lg p-4 text-white"
+              style={{ backgroundColor: adjustBrightness(data.brandColor, -10) }}
+            >
+              <div className="text-xs font-semibold opacity-80">Due Date</div>
+              <div className="mt-2 text-lg font-bold">
+                {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* From/To */}

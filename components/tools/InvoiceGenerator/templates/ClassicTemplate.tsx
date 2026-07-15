@@ -33,7 +33,9 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
         <div className="text-right text-xs">
           <div className="font-bold">Invoice #: {data.invoiceDetails.number}</div>
           <div>Date: {new Date(data.invoiceDetails.date).toLocaleDateString("en-IN")}</div>
-          <div>Due: {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN")}</div>
+          {data.invoiceDetails.dueDate && (
+            <div>Due: {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN")}</div>
+          )}
         </div>
       </div>
 

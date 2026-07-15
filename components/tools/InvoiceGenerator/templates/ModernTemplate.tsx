@@ -30,7 +30,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
       <div className="p-8">
         {/* Invoice Meta */}
-        <div className="mb-8 grid grid-cols-4 gap-4">
+        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           <div>
             <div className="text-xs font-semibold opacity-60">Invoice #</div>
             <div className="mt-1 text-lg font-bold">{data.invoiceDetails.number}</div>
@@ -45,16 +45,18 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               })}
             </div>
           </div>
-          <div>
-            <div className="text-xs font-semibold opacity-60">Due Date</div>
-            <div className="mt-1 text-lg font-bold">
-              {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
+          {data.invoiceDetails.dueDate && (
+            <div>
+              <div className="text-xs font-semibold opacity-60">Due Date</div>
+              <div className="mt-1 text-lg font-bold">
+                {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </div>
             </div>
-          </div>
+          )}
           {data.invoiceDetails.poNumber && (
             <div>
               <div className="text-xs font-semibold opacity-60">PO #</div>
