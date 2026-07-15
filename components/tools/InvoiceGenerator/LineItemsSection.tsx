@@ -1,9 +1,8 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
 import { calculateLineItem } from "@/lib/invoice";
-import { UNIT_PRESETS } from "@/lib/constants/units";
 import type { LineItem } from "@/lib/types/invoice";
 
 interface LineItemsSectionProps {
@@ -58,8 +57,8 @@ export function LineItemsSection({
                   />
                 </div>
 
-                {/* Second Row: Qty, Unit, Rate */}
-                <div className="mb-3 grid gap-2 sm:grid-cols-3">
+                {/* Second Row: Qty, Rate */}
+                <div className="mb-3 grid gap-2 sm:grid-cols-2">
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
                       Quantity
@@ -75,25 +74,6 @@ export function LineItemsSection({
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="1"
                     />
-                  </div>
-
-                  <div>
-                    <label className="mb-1 block text-xs font-semibold text-ink">
-                      Unit
-                    </label>
-                    <select
-                      value={item.unit}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, { unit: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-sm text-ink outline-none transition focus:border-indigo"
-                    >
-                      {UNIT_PRESETS.map((unit) => (
-                        <option key={unit} value={unit}>
-                          {unit}
-                        </option>
-                      ))}
-                    </select>
                   </div>
 
                   <div>
@@ -115,7 +95,7 @@ export function LineItemsSection({
                 </div>
 
                 {/* Third Row: Discount %, Tax %, Amount, Remove */}
-                <div className="grid gap-2 sm:grid-cols-6 sm:items-end">
+                <div className="grid gap-2 sm:grid-cols-5 sm:items-end">
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
                       Discount %
@@ -155,8 +135,8 @@ export function LineItemsSection({
                     <label className="mb-1 block text-xs font-semibold text-ink">
                       Amount
                     </label>
-                    <div className="flex items-center justify-end rounded-lg border border-indigo/40 bg-indigo/5 px-4 py-3">
-                      <span className="text-lg font-bold text-indigo">
+                    <div className="flex items-center justify-end rounded-lg border border-indigo/40 bg-indigo/5 px-4 py-2">
+                      <span className="font-bold text-indigo">
                         {formatCurrency(calculated.amount)}
                       </span>
                     </div>
@@ -166,10 +146,10 @@ export function LineItemsSection({
                     type="button"
                     onClick={() => onRemoveItem(item.id)}
                     disabled={items.length <= 1}
-                    className="rounded-lg border border-red-200 bg-red-50 p-2.5 text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
                     title="Remove item"
                   >
-                    <X className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               </div>
