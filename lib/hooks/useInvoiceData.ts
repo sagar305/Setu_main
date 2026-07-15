@@ -49,9 +49,32 @@ const DEFAULT_INVOICE_DATA: InvoiceData = {
 };
 
 const STORAGE_KEY = "invoice_generator_data";
+const LOCK_STATUS_KEY = "invoice_generator_locks";
+
+const DEFAULT_LOCK_STATUS = {
+  business: false,
+  client: false,
+  invoice: false,
+  items: false,
+  bank: false,
+  notes: false,
+  template: false,
+};
+
+const DEFAULT_OPEN_SECTIONS = {
+  business: true,
+  client: false,
+  invoice: false,
+  items: true,
+  bank: false,
+  notes: false,
+  template: false,
+};
 
 export function useInvoiceData() {
   const [data, setData] = useState<InvoiceData>(DEFAULT_INVOICE_DATA);
+  const [lockedSections, setLockedSections] = useState<Record<string, boolean>>(DEFAULT_LOCK_STATUS);
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(DEFAULT_OPEN_SECTIONS);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load from localStorage on mount
@@ -71,6 +94,21 @@ export function useInvoiceData() {
     } else {
       setData(DEFAULT_INVOICE_DATA);
     }
+
+    // Load lock status
+    const storedLocks = localStorage.getItem(LOCK_STATUS_KEY);
+    if (storedLocks) {
+      try {
+        const parsed = JSON.parse(storedLocks);
+        setLockedSections({
+          ...DEFAULT_LOCK_STATUS,
+          ...parsed,
+        });
+      } catch {
+        setLockedSections(DEFAULT_LOCK_STATUS);
+      }
+    }
+
     setIsLoaded(true);
   }, []);
 
@@ -80,6 +118,13 @@ export function useInvoiceData() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
   }, [data, isLoaded]);
+
+  // Auto-save lock status to localStorage
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem(LOCK_STATUS_KEY, JSON.stringify(lockedSections));
+    }
+  }, [lockedSections, isLoaded]);
 
   const updateBusinessDetails = (details: Partial<BusinessDetails>) => {
     setData((prev) => ({
@@ -169,11 +214,29 @@ export function useInvoiceData() {
   const reset = () => {
     setData(DEFAULT_INVOICE_DATA);
     localStorage.removeItem(STORAGE_KEY);
+    setLockedSections(DEFAULT_LOCK_STATUS);
+    localStorage.removeItem(LOCK_STATUS_KEY);
+  };
+
+  const toggleLockSection = (section: string) => {
+    setLockedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
   };
 
   return {
     data,
     isLoaded,
+    lockedSections,
+    openSections,
     updateBusinessDetails,
     updateClientDetails,
     updateInvoiceDetails,
@@ -187,5 +250,7 @@ export function useInvoiceData() {
     updateBrandColor,
     updateTaxMode,
     reset,
+    toggleLockSection,
+    toggleSection,
   };
 }

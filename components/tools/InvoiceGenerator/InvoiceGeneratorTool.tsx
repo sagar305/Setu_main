@@ -18,6 +18,8 @@ export function InvoiceGeneratorTool() {
   const {
     data,
     isLoaded,
+    lockedSections,
+    openSections,
     updateBusinessDetails,
     updateClientDetails,
     updateInvoiceDetails,
@@ -30,45 +32,14 @@ export function InvoiceGeneratorTool() {
     updateTemplate,
     updateBrandColor,
     reset,
+    toggleLockSection,
+    toggleSection,
   } = useInvoiceData();
 
   const previewRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(true);
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
-    business: true,
-    client: false,
-    invoice: false,
-    items: true,
-    bank: false,
-    notes: false,
-    template: false,
-  });
-
-  const [lockedSections, setLockedSections] = useState<Record<string, boolean>>({
-    business: false,
-    client: false,
-    invoice: false,
-    items: false,
-    bank: false,
-    notes: false,
-    template: false,
-  });
-
-  const toggleSection = (section: string) => {
-    setOpenSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
-
-  const toggleLockSection = (section: string) => {
-    setLockedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
 
   const incrementInvoiceNumber = (currentNumber: string): string => {
     // Match pattern: anything-digits (e.g., "qwe-123", "INV-001", "qwe-123-abc")
