@@ -15,11 +15,20 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
     <div className="bg-white p-8 font-serif text-sm" style={{ fontFamily: "Georgia, serif" }}>
       {/* Header */}
       <div className="mb-8 flex items-start justify-between border-b-2 border-black pb-4">
-        <div>
-          <div className="text-2xl font-bold" style={{ color: data.brandColor }}>
-            {data.businessDetails.name}
+        <div className="flex items-center gap-4">
+          {data.businessDetails.logo && (
+            <img
+              src={data.businessDetails.logo}
+              alt="Business logo"
+              className="h-16 w-16 rounded-lg object-cover"
+            />
+          )}
+          <div>
+            <div className="text-2xl font-bold" style={{ color: data.brandColor }}>
+              {data.businessDetails.name}
+            </div>
+            <div className="mt-1 text-xs text-gray-600">INVOICE</div>
           </div>
-          <div className="mt-1 text-xs text-gray-600">INVOICE</div>
         </div>
         <div className="text-right text-xs">
           <div className="font-bold">Invoice #: {data.invoiceDetails.number}</div>

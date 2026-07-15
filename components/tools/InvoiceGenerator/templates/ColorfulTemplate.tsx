@@ -40,9 +40,18 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
             transform: "translate(30%, -30%)",
           }}
         />
-        <div className="relative z-10 text-white">
-          <div className="text-4xl font-bold">{data.businessDetails.name}</div>
-          <div className="mt-3 text-sm opacity-90">Invoice for Professional Services</div>
+        <div className="relative z-10 flex items-center gap-4 text-white">
+          {data.businessDetails.logo && (
+            <img
+              src={data.businessDetails.logo}
+              alt="Business logo"
+              className="h-20 w-20 rounded-lg object-cover"
+            />
+          )}
+          <div>
+            <div className="text-4xl font-bold">{data.businessDetails.name}</div>
+            <div className="mt-3 text-sm opacity-90">Invoice for Professional Services</div>
+          </div>
         </div>
       </div>
 

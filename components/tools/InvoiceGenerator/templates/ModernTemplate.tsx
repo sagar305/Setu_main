@@ -14,9 +14,18 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
   return (
     <div className="bg-white text-sm" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
       {/* Header with Brand Color */}
-      <div className="p-8" style={{ backgroundColor: data.brandColor, color: "white" }}>
-        <div className="text-3xl font-bold">{data.businessDetails.name}</div>
-        <div className="mt-2 opacity-90">Professional Invoice</div>
+      <div className="flex items-center gap-6 p-8" style={{ backgroundColor: data.brandColor, color: "white" }}>
+        {data.businessDetails.logo && (
+          <img
+            src={data.businessDetails.logo}
+            alt="Business logo"
+            className="h-20 w-20 rounded-lg object-cover"
+          />
+        )}
+        <div>
+          <div className="text-3xl font-bold">{data.businessDetails.name}</div>
+          <div className="mt-2 opacity-90">Professional Invoice</div>
+        </div>
       </div>
 
       <div className="p-8">
