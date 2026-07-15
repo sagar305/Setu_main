@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "qrcode";
 
 interface UPIQRCodeProps {
@@ -10,7 +10,7 @@ interface UPIQRCodeProps {
 }
 
 export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [qrSvg, setQrSvg] = useState<string>("");
 
   // UPI deeplink format: upi://pay?pa=UPI_ID&pn=NAME&am=AMOUNT&tr=REFERENCE
   const encodeURIComponent_ = (str: string) => encodeURIComponent(str);
@@ -20,8 +20,9 @@ export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
   }${amount ? `&am=${amount}` : ""}&tn=Invoice%20Payment`;
 
   useEffect(() => {
-    if (canvasRef.current && upiId) {
-      QRCode.toCanvas(canvasRef.current, upiUrl, {
+    if (upiId) {
+      QRCode.toString(upiUrl, {
+        type: "svg",
         width: 128,
         margin: 1,
         errorCorrectionLevel: "H",
@@ -29,18 +30,20 @@ export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
           dark: "#000000",
           light: "#ffffff",
         },
+      }).then((svg: string) => {
+        setQrSvg(svg);
       }).catch((err: Error) => {
         console.error("Failed to generate QR code:", err);
       });
     }
   }, [upiUrl, upiId]);
 
-  if (!upiId) return null;
+  if (!upiId || !qrSvg) return null;
 
   return (
     <div className="flex justify-center print:block" style={{ breakInside: "avoid" }}>
-      <canvas
-        ref={canvasRef}
+      <div
+        dangerouslySetInnerHTML={{ __html: qrSvg }}
         style={{
           display: "inline-block",
           border: "1px solid #e5e7eb",
