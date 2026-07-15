@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/lib/format";
 import { amountInWordsIndian, calculateLineItem, calculateTotals } from "@/lib/invoice";
+import { UPIQRCode } from "../UPIQRCode";
 import type { InvoiceData } from "@/lib/types/invoice";
 
 interface ColorfulTemplateProps {
@@ -209,10 +210,21 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
                 <div className="font-bold" style={{ color: data.brandColor }}>
                   Payment Information
                 </div>
-                <div className="mt-2 space-y-1 text-sm">
-                  {data.bankDetails.accountNo && <div>Account: {data.bankDetails.accountNo}</div>}
-                  {data.bankDetails.ifsc && <div>IFSC: {data.bankDetails.ifsc}</div>}
-                  {data.bankDetails.upiId && <div>UPI: {data.bankDetails.upiId}</div>}
+                <div className="mt-2 grid grid-cols-2 gap-4">
+                  <div className="space-y-1 text-sm">
+                    {data.bankDetails.accountNo && <div>Account: {data.bankDetails.accountNo}</div>}
+                    {data.bankDetails.ifsc && <div>IFSC: {data.bankDetails.ifsc}</div>}
+                    {data.bankDetails.upiId && <div>UPI: {data.bankDetails.upiId}</div>}
+                  </div>
+                  {data.bankDetails.upiId && (
+                    <div className="flex justify-end">
+                      <UPIQRCode
+                        upiId={data.bankDetails.upiId}
+                        amount={totals.grandTotal}
+                        businessName={data.businessDetails.name}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             )}

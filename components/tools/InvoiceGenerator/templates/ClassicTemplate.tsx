@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/lib/format";
 import { amountInWordsIndian, calculateLineItem, calculateTotals, splitTax } from "@/lib/invoice";
+import { UPIQRCode } from "../UPIQRCode";
 import type { InvoiceData } from "@/lib/types/invoice";
 
 interface ClassicTemplateProps {
@@ -125,17 +126,30 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
 
       {/* Bank Details */}
       {(data.bankDetails?.accountNo || data.bankDetails?.upiId) && (
-        <div className="mb-6 border-b border-gray-300 pb-4 text-xs">
-          <div className="font-bold mb-2">Payment Details</div>
-          {data.bankDetails.accountNo && (
-            <div>Account: {data.bankDetails.accountNo}</div>
-          )}
-          {data.bankDetails.ifsc && (
-            <div>IFSC: {data.bankDetails.ifsc}</div>
-          )}
-          {data.bankDetails.upiId && (
-            <div>UPI: {data.bankDetails.upiId}</div>
-          )}
+        <div className="mb-6 border-b border-gray-300 pb-4">
+          <div className="font-bold mb-2 text-xs">Payment Details</div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-xs">
+              {data.bankDetails.accountNo && (
+                <div>Account: {data.bankDetails.accountNo}</div>
+              )}
+              {data.bankDetails.ifsc && (
+                <div>IFSC: {data.bankDetails.ifsc}</div>
+              )}
+              {data.bankDetails.upiId && (
+                <div>UPI: {data.bankDetails.upiId}</div>
+              )}
+            </div>
+            {data.bankDetails.upiId && (
+              <div className="flex justify-end">
+                <UPIQRCode
+                  upiId={data.bankDetails.upiId}
+                  amount={calculateTotals(data.lineItems, data.taxMode).grandTotal}
+                  businessName={data.businessDetails.name}
+                />
+              </div>
+            )}
+          </div>
         </div>
       )}
 

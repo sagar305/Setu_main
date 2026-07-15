@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/lib/format";
 import { amountInWordsIndian, calculateLineItem, calculateTotals } from "@/lib/invoice";
+import { UPIQRCode } from "../UPIQRCode";
 import type { InvoiceData } from "@/lib/types/invoice";
 
 interface ModernTemplateProps {
@@ -155,12 +156,23 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Payment Details */}
         {(data.bankDetails?.accountNo || data.bankDetails?.upiId) && (
-          <div className="mb-6 border-b py-4 text-xs">
-            <div className="font-bold">Payment Details</div>
-            <div className="mt-2 space-y-1">
-              {data.bankDetails.accountNo && <div>Account: {data.bankDetails.accountNo}</div>}
-              {data.bankDetails.ifsc && <div>IFSC: {data.bankDetails.ifsc}</div>}
-              {data.bankDetails.upiId && <div>UPI: {data.bankDetails.upiId}</div>}
+          <div className="mb-6 border-b py-4">
+            <div className="font-bold text-xs">Payment Details</div>
+            <div className="mt-2 grid grid-cols-2 gap-4">
+              <div className="space-y-1 text-xs">
+                {data.bankDetails.accountNo && <div>Account: {data.bankDetails.accountNo}</div>}
+                {data.bankDetails.ifsc && <div>IFSC: {data.bankDetails.ifsc}</div>}
+                {data.bankDetails.upiId && <div>UPI: {data.bankDetails.upiId}</div>}
+              </div>
+              {data.bankDetails.upiId && (
+                <div className="flex justify-end">
+                  <UPIQRCode
+                    upiId={data.bankDetails.upiId}
+                    amount={totals.grandTotal}
+                    businessName={data.businessDetails.name}
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}

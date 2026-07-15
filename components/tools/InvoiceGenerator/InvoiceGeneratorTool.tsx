@@ -5,6 +5,7 @@ import { Download, Printer, RotateCcw } from "lucide-react";
 import { InvoiceForm } from "./InvoiceForm";
 import { InvoicePreview } from "./InvoicePreview";
 import { TemplateSelector } from "./TemplateSelector";
+import { SectionNavigation } from "./SectionNavigation";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
 import { exportInvoiceToPdf } from "@/lib/pdf/exportInvoiceToPdf";
 
@@ -29,6 +30,8 @@ export function InvoiceGeneratorTool() {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState("business");
+  const [showPreview, setShowPreview] = useState(true);
 
   const handleExportPDF = async () => {
     if (!previewRef.current) return;
@@ -91,105 +94,119 @@ export function InvoiceGeneratorTool() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Error Message */}
-      {error && (
-        <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-4 text-sm text-red-800">
-          {error}
-        </div>
-      )}
+    <div className="space-y-0">
+      {/* Section Navigation */}
+      <SectionNavigation
+        activeSection={activeSection}
+        onSectionChange={setActiveSection}
+        showPreview={showPreview}
+        onPreviewToggle={setShowPreview}
+      />
 
-      {/* Action Buttons */}
-      <div className="flex flex-wrap gap-3">
-        <button
-          onClick={handleExportPDF}
-          disabled={isExporting}
-          className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
-        >
-          <Download className="h-4 w-4" />
-          {isExporting ? "Generating PDF..." : "Download PDF"}
-        </button>
-
-        <button
-          onClick={handlePrint}
-          className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
-        >
-          <Printer className="h-4 w-4" />
-          Print
-        </button>
-
-        <button
-          onClick={handleReset}
-          className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
-        >
-          <RotateCcw className="h-4 w-4" />
-          Reset
-        </button>
-      </div>
-
-      {/* Main Layout: Desktop 2-column, Mobile stacked */}
-      <div className="grid gap-8 lg:grid-cols-2">
-        {/* Left: Form */}
-        <div className="overflow-y-auto">
-          <div className="space-y-8 rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
-            <InvoiceForm
-              data={data}
-              onBusinessDetailsChange={updateBusinessDetails}
-              onClientDetailsChange={updateClientDetails}
-              onInvoiceDetailsChange={updateInvoiceDetails}
-              onBankDetailsChange={updateBankDetails}
-              onAddLineItem={addLineItem}
-              onRemoveLineItem={removeLineItem}
-              onUpdateLineItem={updateLineItem}
-              onNotesChange={updateNotes}
-              onTermsChange={updateTerms}
-            />
-
-            <div className="border-t border-muted-line/10 pt-8" />
-
-            <TemplateSelector
-              selectedTemplate={data.template}
-              brandColor={data.brandColor}
-              onTemplateChange={updateTemplate}
-              onBrandColorChange={updateBrandColor}
-            />
+      <div className="space-y-6 px-6 py-6">
+        {/* Error Message */}
+        {error && (
+          <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-4 text-sm text-red-800">
+            {error}
           </div>
+        )}
+
+        {/* Sticky Action Buttons */}
+        <div className="sticky top-20 z-30 flex flex-wrap gap-3 rounded-lg bg-white/95 backdrop-blur-sm p-4 shadow-sm">
+          <button
+            onClick={handleExportPDF}
+            disabled={isExporting}
+            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
+          >
+            <Download className="h-4 w-4" />
+            {isExporting ? "Generating PDF..." : "Download PDF"}
+          </button>
+
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
+          >
+            <Printer className="h-4 w-4" />
+            Print
+          </button>
+
+          <button
+            onClick={handleReset}
+            className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Reset
+          </button>
         </div>
 
-        {/* Right: Preview */}
-        <div className="hidden lg:block">
-          <div className="sticky top-6 overflow-auto rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8" style={{ maxHeight: "calc(100vh - 150px)" }}>
-            <div
-              ref={previewRef}
-              className="bg-white"
-              style={{
-                fontSize: "0.875rem",
-                lineHeight: "1.5",
-              }}
-            >
-              <InvoicePreview data={data} />
+        {/* Main Layout: Desktop 2-column, Mobile stacked */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Left: Form */}
+          <div className="overflow-y-auto">
+            <div className="space-y-8 rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
+              <InvoiceForm
+                data={data}
+                onBusinessDetailsChange={updateBusinessDetails}
+                onClientDetailsChange={updateClientDetails}
+                onInvoiceDetailsChange={updateInvoiceDetails}
+                onBankDetailsChange={updateBankDetails}
+                onAddLineItem={addLineItem}
+                onRemoveLineItem={removeLineItem}
+                onUpdateLineItem={updateLineItem}
+                onNotesChange={updateNotes}
+                onTermsChange={updateTerms}
+              />
+
+              <div className="border-t border-muted-line/10 pt-8" />
+
+              <TemplateSelector
+                selectedTemplate={data.template}
+                brandColor={data.brandColor}
+                onTemplateChange={updateTemplate}
+                onBrandColorChange={updateBrandColor}
+              />
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Mobile Preview (below form on mobile) */}
-      <div className="lg:hidden">
-        <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-            Preview
-          </h3>
-          <div
-            ref={previewRef}
-            className="overflow-x-auto bg-white"
-            style={{
-              fontSize: "0.75rem",
-              lineHeight: "1.5",
-            }}
-          >
-            <InvoicePreview data={data} />
-          </div>
+          {/* Right: Preview - Conditionally shown */}
+          {showPreview && (
+            <div className="hidden lg:block">
+              <div className="sticky top-24 overflow-auto rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8" style={{ maxHeight: "calc(100vh - 200px)" }}>
+                <div
+                  ref={previewRef}
+                  className="bg-white"
+                  style={{
+                    fontSize: "0.875rem",
+                    lineHeight: "1.5",
+                  }}
+                >
+                  <InvoicePreview data={data} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* Mobile Preview (below form on mobile) - Conditionally shown */}
+        {showPreview && (
+          <div className="lg:hidden">
+            <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
+              <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
+                Preview
+              </h3>
+              <div
+                ref={previewRef}
+                className="overflow-x-auto bg-white"
+                style={{
+                  fontSize: "0.75rem",
+                  lineHeight: "1.5",
+                }}
+              >
+                <InvoicePreview data={data} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
