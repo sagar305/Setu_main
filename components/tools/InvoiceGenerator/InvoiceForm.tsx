@@ -7,17 +7,17 @@ import { InvoiceDetailsSection } from "./InvoiceDetailsSection";
 import { LineItemsSection } from "./LineItemsSection";
 import { NotesAndTermsSection } from "./NotesAndTermsSection";
 import { BankDetailsSection } from "./BankDetailsSection";
-import type { InvoiceData } from "@/lib/types/invoice";
+import type { InvoiceData, BusinessDetails, ClientDetails, InvoiceDetails, BankDetails, LineItem } from "@/lib/types/invoice";
 
 interface InvoiceFormProps {
   data: InvoiceData;
-  onBusinessDetailsChange: (data: Parameters<typeof BusinessDetailsSection>["0"]["onChange"]>) => void;
-  onClientDetailsChange: (data: Parameters<typeof ClientDetailsSection>["0"]["onChange"]>) => void;
-  onInvoiceDetailsChange: (data: Parameters<typeof InvoiceDetailsSection>["0"]["onChange"]>) => void;
-  onBankDetailsChange: (data: Parameters<typeof BankDetailsSection>["0"]["onChange"]>) => void;
+  onBusinessDetailsChange: (data: Partial<BusinessDetails>) => void;
+  onClientDetailsChange: (data: Partial<ClientDetails>) => void;
+  onInvoiceDetailsChange: (data: Partial<InvoiceDetails>) => void;
+  onBankDetailsChange: (data: Partial<BankDetails>) => void;
   onAddLineItem: () => void;
   onRemoveLineItem: (id: string) => void;
-  onUpdateLineItem: (id: string, updates: Parameters<typeof LineItemsSection>["0"]["onUpdateItem"]) => void;
+  onUpdateLineItem: (id: string, updates: Partial<LineItem>) => void;
   onNotesChange: (notes: string) => void;
   onTermsChange: (terms: string) => void;
 }

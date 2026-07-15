@@ -51,7 +51,7 @@ export function BankDetailsSection({
                 onChange={(e) => onChange({ ifsc: e.target.value.toUpperCase() })}
                 className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
                 placeholder="SBIN0001234"
-                maxLength="11"
+                maxLength={11}
               />
             </div>
 

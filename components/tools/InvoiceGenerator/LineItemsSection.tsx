@@ -94,7 +94,7 @@ export function LineItemsSection({
                       }
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="Unit"
-                      maxLength="10"
+                      maxLength={10}
                     />
                   </td>
                   <td className="px-3 py-2">
