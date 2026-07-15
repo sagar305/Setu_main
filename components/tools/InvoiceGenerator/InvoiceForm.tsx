@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { BusinessDetailsSection } from "./BusinessDetailsSection";
 import { ClientDetailsSection } from "./ClientDetailsSection";
 import { InvoiceDetailsSection } from "./InvoiceDetailsSection";
@@ -34,8 +33,6 @@ export function InvoiceForm({
   onNotesChange,
   onTermsChange,
 }: InvoiceFormProps) {
-  const [showBankDetails, setShowBankDetails] = useState(false);
-
   return (
     <div className="space-y-8">
       <BusinessDetailsSection
@@ -71,8 +68,6 @@ export function InvoiceForm({
 
       <BankDetailsSection
         data={data.bankDetails}
-        isVisible={showBankDetails}
-        onVisibilityChange={setShowBankDetails}
         onChange={onBankDetailsChange}
       />
 

@@ -1,11 +1,16 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Download, Printer, RotateCcw } from "lucide-react";
-import { InvoiceForm } from "./InvoiceForm";
+import { Download, Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff } from "lucide-react";
 import { InvoicePreview } from "./InvoicePreview";
+import { BusinessDetailsSection } from "./BusinessDetailsSection";
+import { ClientDetailsSection } from "./ClientDetailsSection";
+import { InvoiceDetailsSection } from "./InvoiceDetailsSection";
+import { LineItemsSection } from "./LineItemsSection";
+import { BankDetailsSection } from "./BankDetailsSection";
+import { NotesAndTermsSection } from "./NotesAndTermsSection";
 import { TemplateSelector } from "./TemplateSelector";
-import { SectionNavigation } from "./SectionNavigation";
+import { AccordionSection } from "./AccordionSection";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
 import { exportInvoiceToPdf } from "@/lib/pdf/exportInvoiceToPdf";
 
@@ -30,8 +35,23 @@ export function InvoiceGeneratorTool() {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState("business");
   const [showPreview, setShowPreview] = useState(true);
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
+    business: true,
+    client: false,
+    invoice: false,
+    items: true,
+    bank: false,
+    notes: false,
+    template: false,
+  });
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
 
   const handleExportPDF = async () => {
     if (!previewRef.current) return;
@@ -95,14 +115,6 @@ export function InvoiceGeneratorTool() {
 
   return (
     <div className="space-y-0">
-      {/* Section Navigation */}
-      <SectionNavigation
-        activeSection={activeSection}
-        onSectionChange={setActiveSection}
-        showPreview={showPreview}
-        onPreviewToggle={setShowPreview}
-      />
-
       <div className="space-y-6 px-6 py-6">
         {/* Error Message */}
         {error && (
@@ -139,32 +151,128 @@ export function InvoiceGeneratorTool() {
           </button>
         </div>
 
-        {/* Main Layout: Desktop 2-column, Mobile stacked */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Left: Form */}
-          <div className="overflow-y-auto">
-            <div className="space-y-8 rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
-              <InvoiceForm
-                data={data}
-                onBusinessDetailsChange={updateBusinessDetails}
-                onClientDetailsChange={updateClientDetails}
-                onInvoiceDetailsChange={updateInvoiceDetails}
-                onBankDetailsChange={updateBankDetails}
-                onAddLineItem={addLineItem}
-                onRemoveLineItem={removeLineItem}
-                onUpdateLineItem={updateLineItem}
-                onNotesChange={updateNotes}
-                onTermsChange={updateTerms}
-              />
+        {/* Preview Toggle Button */}
+        <div className="flex justify-end">
+          <button
+            onClick={() => setShowPreview(!showPreview)}
+            className="inline-flex items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 text-sm font-semibold text-muted transition hover:border-indigo hover:text-indigo"
+          >
+            {showPreview ? (
+              <>
+                <EyeOff className="h-4 w-4" />
+                <span className="hidden sm:inline">Hide Preview</span>
+              </>
+            ) : (
+              <>
+                <Eye className="h-4 w-4" />
+                <span className="hidden sm:inline">Show Preview</span>
+              </>
+            )}
+          </button>
+        </div>
 
-              <div className="border-t border-muted-line/10 pt-8" />
+        {/* Main Layout: Desktop 2-column (when preview visible), full width when hidden */}
+        <div className={`grid gap-8 ${showPreview ? "lg:grid-cols-2" : "lg:grid-cols-1"}`}>
+          {/* Left: Accordion Form */}
+          <div>
+            <div className="rounded-2xl border border-indigo/15 bg-white shadow-sm overflow-hidden">
+              {/* Business Details */}
+              <AccordionSection
+                title="Business Details"
+                icon={<Building2 className="h-5 w-5" />}
+                isOpen={openSections.business}
+                onToggle={() => toggleSection("business")}
+              >
+                <BusinessDetailsSection
+                  data={data.businessDetails}
+                  onChange={updateBusinessDetails}
+                />
+              </AccordionSection>
 
-              <TemplateSelector
-                selectedTemplate={data.template}
-                brandColor={data.brandColor}
-                onTemplateChange={updateTemplate}
-                onBrandColorChange={updateBrandColor}
-              />
+              {/* Client Details */}
+              <AccordionSection
+                title="Bill To"
+                icon={<Users className="h-5 w-5" />}
+                isOpen={openSections.client}
+                onToggle={() => toggleSection("client")}
+              >
+                <ClientDetailsSection
+                  data={data.clientDetails}
+                  onChange={updateClientDetails}
+                />
+              </AccordionSection>
+
+              {/* Invoice Details */}
+              <AccordionSection
+                title="Invoice Details"
+                icon={<FileText className="h-5 w-5" />}
+                isOpen={openSections.invoice}
+                onToggle={() => toggleSection("invoice")}
+              >
+                <InvoiceDetailsSection
+                  data={data.invoiceDetails}
+                  onChange={updateInvoiceDetails}
+                />
+              </AccordionSection>
+
+              {/* Line Items */}
+              <AccordionSection
+                title="Line Items"
+                icon={<ShoppingCart className="h-5 w-5" />}
+                isOpen={openSections.items}
+                onToggle={() => toggleSection("items")}
+              >
+                <LineItemsSection
+                  items={data.lineItems}
+                  taxMode={data.taxMode}
+                  onAddItem={addLineItem}
+                  onRemoveItem={removeLineItem}
+                  onUpdateItem={updateLineItem}
+                />
+              </AccordionSection>
+
+              {/* Bank Details */}
+              <AccordionSection
+                title="Bank & Payment"
+                icon={<Banknote className="h-5 w-5" />}
+                isOpen={openSections.bank}
+                onToggle={() => toggleSection("bank")}
+              >
+                <BankDetailsSection
+                  data={data.bankDetails}
+                  onChange={updateBankDetails}
+                />
+              </AccordionSection>
+
+              {/* Notes & Terms */}
+              <AccordionSection
+                title="Notes & Terms"
+                icon={<BookOpen className="h-5 w-5" />}
+                isOpen={openSections.notes}
+                onToggle={() => toggleSection("notes")}
+              >
+                <NotesAndTermsSection
+                  notes={data.notes}
+                  terms={data.terms}
+                  onNotesChange={updateNotes}
+                  onTermsChange={updateTerms}
+                />
+              </AccordionSection>
+
+              {/* Template */}
+              <AccordionSection
+                title="Template & Brand"
+                icon={<Palette className="h-5 w-5" />}
+                isOpen={openSections.template}
+                onToggle={() => toggleSection("template")}
+              >
+                <TemplateSelector
+                  selectedTemplate={data.template}
+                  brandColor={data.brandColor}
+                  onTemplateChange={updateTemplate}
+                  onBrandColorChange={updateBrandColor}
+                />
+              </AccordionSection>
             </div>
           </div>
 

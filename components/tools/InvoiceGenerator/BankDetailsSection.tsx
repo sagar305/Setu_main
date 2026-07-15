@@ -1,34 +1,17 @@
-import { ChevronDown } from "lucide-react";
 import type { BankDetails } from "@/lib/types/invoice";
 
 interface BankDetailsSectionProps {
   data: BankDetails | undefined;
-  isVisible: boolean;
-  onVisibilityChange: (visible: boolean) => void;
   onChange: (data: Partial<BankDetails>) => void;
 }
 
 export function BankDetailsSection({
   data = {},
-  isVisible,
-  onVisibilityChange,
   onChange,
 }: BankDetailsSectionProps) {
   return (
     <div>
-      <button
-        type="button"
-        onClick={() => onVisibilityChange(!isVisible)}
-        className="mb-4 flex w-full items-center gap-2 text-sm font-semibold text-ink transition hover:text-indigo"
-      >
-        <ChevronDown
-          className={`h-4 w-4 transition-transform ${isVisible ? "rotate-180" : ""}`}
-        />
-        Bank & Payment Details (Optional)
-      </button>
-
-      {isVisible && (
-        <div className="space-y-4 border-l-2 border-indigo/20 pl-4">
+      <div className="space-y-4">
           <div>
             <label className="block text-sm font-semibold text-ink">
               Account Number
@@ -66,8 +49,7 @@ export function BankDetailsSection({
               />
             </div>
           </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export function InvoiceDetailsSection({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-ink">Due Date *</label>
+            <label className="block text-sm font-semibold text-ink">Due Date</label>
             <input
               type="date"
               value={data.dueDate}

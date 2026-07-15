@@ -22,15 +22,17 @@ export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
   if (!upiId) return null;
 
   return (
-    <div className="flex justify-center">
-      <QRCodeCanvas
-        value={upiUrl}
-        size={128}
-        level="H"
-        includeMargin={true}
-        fgColor="#000000"
-        bgColor="#ffffff"
-      />
+    <div className="flex justify-center print:block" style={{ breakInside: "avoid" }}>
+      <div style={{ display: "inline-block" }}>
+        <QRCodeCanvas
+          value={upiUrl}
+          size={128}
+          level="H"
+          includeMargin={true}
+          fgColor="#000000"
+          bgColor="#ffffff"
+        />
+      </div>
     </div>
   );
 }
