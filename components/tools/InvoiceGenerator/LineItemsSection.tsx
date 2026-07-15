@@ -26,145 +26,201 @@ export function LineItemsSection({
         Line Items
       </h3>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="border-b-2 border-muted-line/20">
-              <th className="px-3 py-2 text-left text-xs font-semibold text-ink">
-                Description
-              </th>
-              <th className="px-3 py-2 text-center text-xs font-semibold text-ink">
-                Qty
-              </th>
-              <th className="px-3 py-2 text-center text-xs font-semibold text-ink">
-                Unit
-              </th>
-              <th className="px-3 py-2 text-right text-xs font-semibold text-ink">
-                Rate (₹)
-              </th>
-              <th className="px-3 py-2 text-center text-xs font-semibold text-ink">
-                Disc %
-              </th>
-              <th className="px-3 py-2 text-center text-xs font-semibold text-ink">
-                Tax %
-              </th>
-              <th className="px-3 py-2 text-right text-xs font-semibold text-ink">
-                Amount
-              </th>
-              <th className="px-3 py-2 w-9"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => {
-              const calculated = calculateLineItem(item, taxMode);
-              return (
-                <tr key={item.id} className="border-b border-muted-line/10">
-                  <td className="px-3 py-2">
-                    <input
-                      type="text"
-                      value={item.description}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, { description: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      placeholder="Item description"
-                    />
-                  </td>
-                  <td className="px-3 py-2">
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, {
-                          quantity: Math.max(0, parseFloat(e.target.value) || 0),
-                        })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      inputMode="decimal"
-                      min="0"
-                      step="0.01"
-                    />
-                  </td>
-                  <td className="px-3 py-2">
-                    <input
-                      type="text"
-                      value={item.unit}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, { unit: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      placeholder="Unit"
-                      maxLength={10}
-                    />
-                  </td>
-                  <td className="px-3 py-2">
-                    <input
-                      type="number"
-                      value={item.rate}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, {
-                          rate: Math.max(0, parseFloat(e.target.value) || 0),
-                        })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-right text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      inputMode="decimal"
-                      min="0"
-                      step="0.01"
-                    />
-                  </td>
-                  <td className="px-3 py-2">
-                    <input
-                      type="number"
-                      value={item.discountPercent}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, {
-                          discountPercent: Math.max(
-                            0,
-                            Math.min(100, parseFloat(e.target.value) || 0)
-                          ),
-                        })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      inputMode="decimal"
-                      min="0"
-                      max="100"
-                      step="0.01"
-                    />
-                  </td>
-                  <td className="px-3 py-2">
-                    <input
-                      type="number"
-                      value={item.taxRate}
-                      onChange={(e) =>
-                        onUpdateItem(item.id, {
-                          taxRate: Math.max(0, parseFloat(e.target.value) || 0),
-                        })
-                      }
-                      className="w-full rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                      inputMode="decimal"
-                      min="0"
-                      step="0.01"
-                    />
-                  </td>
-                  <td className="px-3 py-2 text-right text-sm font-semibold text-ink">
-                    {formatCurrency(calculated.amount)}
-                  </td>
-                  <td className="px-3 py-2">
-                    <button
-                      type="button"
-                      onClick={() => onRemoveItem(item.id)}
-                      disabled={items.length <= 1}
-                      className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-warm transition hover:bg-cream hover:text-ink disabled:cursor-not-allowed disabled:opacity-30"
-                      aria-label="Remove item"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="space-y-4 rounded-xl border border-muted-line/20 bg-cream/30 p-4 sm:p-6">
+        {/* Column Headers */}
+        <div className="hidden grid-cols-12 gap-3 sm:grid">
+          <div className="col-span-3">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Description
+            </label>
+          </div>
+          <div className="col-span-1">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Qty
+            </label>
+          </div>
+          <div className="col-span-1">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Unit
+            </label>
+          </div>
+          <div className="col-span-2">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Rate (₹)
+            </label>
+          </div>
+          <div className="col-span-1">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Disc %
+            </label>
+          </div>
+          <div className="col-span-1">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Tax %
+            </label>
+          </div>
+          <div className="col-span-2">
+            <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              Amount
+            </label>
+          </div>
+          <div className="col-span-1"></div>
+        </div>
+
+        {/* Line Items */}
+        <div className="space-y-4">
+          {items.map((item) => {
+            const calculated = calculateLineItem(item, taxMode);
+            return (
+              <div
+                key={item.id}
+                className="space-y-3 rounded-lg border border-muted-line/20 bg-white p-4 sm:space-y-0 sm:grid sm:grid-cols-12 sm:gap-3 sm:border-0 sm:bg-transparent sm:p-0"
+              >
+                {/* Description - Full width on mobile, col-span-3 on desktop */}
+                <div className="sm:col-span-3">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    value={item.description}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, { description: e.target.value })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    placeholder="Item description"
+                  />
+                </div>
+
+                {/* Qty - col-span-1 */}
+                <div className="sm:col-span-1">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Quantity
+                  </label>
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, {
+                        quantity: Math.max(0, parseFloat(e.target.value) || 0),
+                      })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    inputMode="decimal"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                {/* Unit - col-span-1 */}
+                <div className="sm:col-span-1">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Unit
+                  </label>
+                  <input
+                    type="text"
+                    value={item.unit}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, { unit: e.target.value })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    placeholder="Qty"
+                    maxLength={10}
+                  />
+                </div>
+
+                {/* Rate - col-span-2 */}
+                <div className="sm:col-span-2">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Rate (₹)
+                  </label>
+                  <input
+                    type="number"
+                    value={item.rate}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, {
+                        rate: Math.max(0, parseFloat(e.target.value) || 0),
+                      })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-right text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    inputMode="decimal"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                {/* Discount % - col-span-1 */}
+                <div className="sm:col-span-1">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Disc %
+                  </label>
+                  <input
+                    type="number"
+                    value={item.discountPercent}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, {
+                        discountPercent: Math.max(
+                          0,
+                          Math.min(100, parseFloat(e.target.value) || 0)
+                        ),
+                      })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    inputMode="decimal"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                  />
+                </div>
+
+                {/* Tax % - col-span-1 */}
+                <div className="sm:col-span-1">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Tax %
+                  </label>
+                  <input
+                    type="number"
+                    value={item.taxRate}
+                    onChange={(e) =>
+                      onUpdateItem(item.id, {
+                        taxRate: Math.max(0, parseFloat(e.target.value) || 0),
+                      })
+                    }
+                    className="mt-1 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo sm:mt-0"
+                    inputMode="decimal"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                {/* Amount - col-span-2 */}
+                <div className="sm:col-span-2">
+                  <label className="text-xs font-semibold text-ink sm:hidden">
+                    Amount
+                  </label>
+                  <div className="mt-1 flex items-center justify-between rounded-lg border border-muted-line/40 bg-cream-paper px-3 py-2.5 sm:mt-0">
+                    <span className="text-sm font-semibold text-ink">
+                      {formatCurrency(calculated.amount)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Remove Button - col-span-1 */}
+                <div className="flex sm:col-span-1 sm:items-end">
+                  <button
+                    type="button"
+                    onClick={() => onRemoveItem(item.id)}
+                    disabled={items.length <= 1}
+                    className="w-full rounded-lg border border-muted-line/40 bg-white p-2.5 text-muted-warm transition hover:bg-cream hover:text-ink disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto sm:bg-transparent sm:border-0 sm:p-0"
+                    aria-label="Remove item"
+                  >
+                    <X className="h-5 w-5 sm:h-4 sm:w-4" />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <button
