@@ -1,4 +1,9 @@
-import { QRCodeSVG } from "qrcode.react";
+import dynamic from "next/dynamic";
+
+// Use Canvas for better PDF export compatibility
+const QRCodeCanvas = dynamic(() => import("qrcode.react").then((mod) => mod.QRCodeCanvas), {
+  ssr: false,
+});
 
 interface UPIQRCodeProps {
   upiId: string;
@@ -18,7 +23,7 @@ export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
 
   return (
     <div className="flex justify-center">
-      <QRCodeSVG
+      <QRCodeCanvas
         value={upiUrl}
         size={128}
         level="H"

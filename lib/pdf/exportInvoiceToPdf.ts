@@ -15,6 +15,9 @@ export async function exportInvoiceToPdf(
     const scale = options?.scale || 2;
     const quality = options?.quality || 0.95;
 
+    // Wait for any dynamic content (like QR codes) to render
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     // Capture the invoice element as canvas
     const canvas = await html2canvas(element, {
       scale,
@@ -22,6 +25,7 @@ export async function exportInvoiceToPdf(
       logging: false,
       backgroundColor: "#ffffff",
       allowTaint: true,
+      foreignObjectRendering: true,
     });
 
     // Get canvas dimensions
