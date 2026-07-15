@@ -70,6 +70,29 @@ export function InvoiceGeneratorTool() {
     }));
   };
 
+  const incrementInvoiceNumber = (currentNumber: string): string => {
+    // Match pattern: anything-digits (e.g., "qwe-123", "INV-001", "qwe-123-abc")
+    const match = currentNumber.match(/^(.+?)-(\d+)(.*)$/);
+
+    if (!match) {
+      // No pattern match - return as is
+      return currentNumber;
+    }
+
+    const prefix = match[1]; // e.g., "qwe"
+    const numPart = match[2]; // e.g., "123"
+    const suffix = match[3]; // e.g., "" or "-abc"
+
+    const currentNum = parseInt(numPart, 10);
+    const nextNum = currentNum + 1;
+
+    // Preserve padding (e.g., "001" → "002", "123" → "124")
+    const paddedNum = numPart.length === 1
+      ? nextNum.toString()
+      : nextNum.toString().padStart(numPart.length, "0");
+
+    return `${prefix}-${paddedNum}${suffix}`;
+  };
 
   const clearUnlockedFields = () => {
     // Clear only unlocked sections
@@ -81,6 +104,13 @@ export function InvoiceGeneratorTool() {
         poNumber: "",
         ewayBillNumber: "",
       });
+    } else {
+      // Invoice section is locked - auto-increment invoice number
+      const currentNumber = data.invoiceDetails.number;
+      const incrementedNumber = incrementInvoiceNumber(currentNumber);
+      if (incrementedNumber !== currentNumber) {
+        updateInvoiceDetails({ number: incrementedNumber });
+      }
     }
 
     if (!lockedSections.items) {
