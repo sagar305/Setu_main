@@ -231,7 +231,7 @@ export function LineItemsSection({
                     <label className="mb-1 block text-xs font-semibold text-ink">
                       Amount
                     </label>
-                    <div className="flex items-center justify-end rounded-lg border border-indigo/40 bg-indigo/5 px-4 py-2">
+                    <div className="flex items-center justify-end rounded-lg border border-indigo/40 bg-indigo/5 px-3 py-2">
                       <span className="font-bold text-indigo">
                         {formatCurrency(calculated.amount)}
                       </span>
@@ -242,7 +242,7 @@ export function LineItemsSection({
                     type="button"
                     onClick={() => onRemoveItem(item.id)}
                     disabled={items.length <= 1}
-                    className="rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="flex items-center justify-center rounded-lg border border-red-200 bg-red-50 h-8 w-8 text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
                     title="Remove item"
                   >
                     <Trash2 className="h-4 w-4" />
