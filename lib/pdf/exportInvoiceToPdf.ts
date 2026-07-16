@@ -3,6 +3,27 @@ import { jsPDF } from "jspdf";
 import { getInvoiceFileName } from "@/lib/invoice";
 import type { InvoiceData } from "@/lib/types/invoice";
 
+// Detects an all-white/empty capture so we fail loudly instead of
+// silently producing a blank PDF. Samples a downscaled copy for speed.
+function isCanvasBlank(canvas: HTMLCanvasElement): boolean {
+  const sample = document.createElement("canvas");
+  sample.width = 40;
+  sample.height = 40;
+  const ctx = sample.getContext("2d");
+  if (!ctx) return false;
+
+  ctx.drawImage(canvas, 0, 0, sample.width, sample.height);
+  const { data } = ctx.getImageData(0, 0, sample.width, sample.height);
+  for (let i = 0; i < data.length; i += 4) {
+    const isOpaque = data[i + 3] > 0;
+    const isNonWhite = data[i] < 250 || data[i + 1] < 250 || data[i + 2] < 250;
+    if (isOpaque && isNonWhite) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export async function exportInvoiceToPdf(
   data: InvoiceData,
   element: HTMLElement,
@@ -23,18 +44,22 @@ export async function exportInvoiceToPdf(
       throw new Error("Invoice preview is not visible or empty");
     }
 
-    // Capture the invoice element as canvas
+    // Capture the invoice element as canvas.
+    // Note: foreignObjectRendering must stay OFF — it renders blank
+    // canvases on iOS/Safari (WebKit). Scroll offsets are compensated so
+    // captures work when the preview is scrolled out of view on mobile.
     const canvas = await html2canvas(element, {
       scale,
       useCORS: true,
       logging: false,
       backgroundColor: "#ffffff",
-      allowTaint: true,
-      foreignObjectRendering: true,
+      scrollX: -window.scrollX,
+      scrollY: -window.scrollY,
+      windowWidth: document.documentElement.offsetWidth,
       windowHeight: element.scrollHeight,
     });
 
-    if (!canvas) {
+    if (!canvas || isCanvasBlank(canvas)) {
       throw new Error("Failed to capture invoice preview");
     }
 
@@ -98,17 +123,21 @@ export async function generateInvoicePdfBlob(
     // Capture the invoice element as canvas. No artificial delay here —
     // navigator.share() must run within the user-activation window, so
     // this path has to stay as fast as possible.
+    // Note: foreignObjectRendering must stay OFF — it renders blank
+    // canvases on iOS/Safari (WebKit). Scroll offsets are compensated so
+    // captures work when the preview is scrolled out of view on mobile.
     const canvas = await html2canvas(element, {
       scale,
       useCORS: true,
       logging: false,
       backgroundColor: "#ffffff",
-      allowTaint: true,
-      foreignObjectRendering: true,
+      scrollX: -window.scrollX,
+      scrollY: -window.scrollY,
+      windowWidth: document.documentElement.offsetWidth,
       windowHeight: element.scrollHeight,
     });
 
-    if (!canvas) {
+    if (!canvas || isCanvasBlank(canvas)) {
       throw new Error("Failed to capture invoice preview");
     }
 
