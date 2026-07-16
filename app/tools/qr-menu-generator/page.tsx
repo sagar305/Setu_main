@@ -72,6 +72,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Can I import my menu from Excel or CSV?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Upload an Excel (.xlsx, .xls) or CSV file with columns for Category, Item Name, Price, Description, and Type (Veg/Non-veg) and your whole menu is filled in at once. You can also export your current menu to Excel, update prices there, and re-import it — no retyping.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Does my menu data get uploaded to a server?",
       acceptedAnswer: {
         "@type": "Answer",

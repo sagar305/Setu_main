@@ -13,6 +13,9 @@ import {
   ExternalLink,
   Sparkles,
   RotateCcw,
+  FileUp,
+  FileDown,
+  Loader2,
 } from "lucide-react";
 import {
   buildMenuUrl,
@@ -26,6 +29,7 @@ import {
   type DietTag,
   type QrMenuData,
 } from "@/lib/qrmenu";
+import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
 
@@ -50,6 +54,8 @@ export function QrMenuGeneratorTool() {
   const [origin, setOrigin] = useState("");
   const [copied, setCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   // Load saved menu + resolve origin on the client only (avoids SSR mismatch)
   useEffect(() => {
@@ -163,6 +169,49 @@ export function QrMenuGeneratorTool() {
     if (!window.confirm("Clear the entire menu and start over?")) return;
     window.localStorage.removeItem(STORAGE_KEY);
     setMenu(createEmptyMenu());
+  };
+
+  // --- Excel / CSV import & export -------------------------------------------
+
+  const handleExport = async (format: "xlsx" | "csv") => {
+    try {
+      await exportMenuFile(menu, format);
+    } catch (err) {
+      console.error("Export failed:", err);
+      alert("Could not export the file. Please try again.");
+    }
+  };
+
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file later
+    if (!file) return;
+
+    setImporting(true);
+    try {
+      const categories = await importMenuFile(file);
+      if (!categories) {
+        alert(
+          "No menu items found in this file. Expected columns: Category, Item Name, Price, Description, Type — export your current menu once to get a ready-made template."
+        );
+        return;
+      }
+      const importedCount = categories.reduce((total, c) => total + c.items.length, 0);
+      if (
+        itemCount > 0 &&
+        !window.confirm(
+          `Replace your current ${itemCount} item(s) with the ${importedCount} item(s) from "${file.name}"? Restaurant details are kept.`
+        )
+      ) {
+        return;
+      }
+      setMenu((prev) => ({ ...prev, categories }));
+    } catch (err) {
+      console.error("Import failed:", err);
+      alert("Could not read this file. Please upload a valid .xlsx, .xls, or .csv file.");
+    } finally {
+      setImporting(false);
+    }
   };
 
   // --- QR export ------------------------------------------------------------
@@ -318,6 +367,54 @@ export function QrMenuGeneratorTool() {
                   className="h-8 w-8 cursor-pointer rounded-full border border-muted-line/40 bg-white p-0.5"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Excel / CSV import & export */}
+        <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-ink">Import / export items</h2>
+              <p className="mt-1 text-xs text-muted">
+                Edit your menu in Excel and re-import it anytime. Columns: Category, Item Name,
+                Price, Description, Type (Veg/Non-veg).
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <input
+                ref={importInputRef}
+                type="file"
+                accept=".xlsx,.xls,.csv"
+                onChange={handleImportFile}
+                className="hidden"
+              />
+              <button
+                onClick={() => importInputRef.current?.click()}
+                disabled={importing}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-indigo bg-indigo px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {importing ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <FileUp className="h-3.5 w-3.5" />
+                )}
+                Import Excel/CSV
+              </button>
+              <button
+                onClick={() => handleExport("xlsx")}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
+              >
+                <FileDown className="h-3.5 w-3.5" />
+                Export Excel
+              </button>
+              <button
+                onClick={() => handleExport("csv")}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
+              >
+                <FileDown className="h-3.5 w-3.5" />
+                Export CSV
+              </button>
             </div>
           </div>
         </div>
