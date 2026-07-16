@@ -231,7 +231,7 @@ export function UpiQrGeneratorTool() {
               <label className="mb-2 block text-sm font-semibold text-ink">
                 Logo on QR (Optional)
               </label>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-muted-line/40 bg-white p-1.5">
                   {logo ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -255,24 +255,24 @@ export function UpiQrGeneratorTool() {
 
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
                 >
-                  <Upload className="h-4 w-4" />
+                  <Upload className="h-4 w-4 flex-shrink-0" />
                   {logo ? "Replace Logo" : "Upload Logo"}
                 </button>
 
                 {logo ? (
                   <button
                     onClick={() => setLogo(null)}
-                    className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100"
+                    className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-4 w-4 flex-shrink-0" />
                     Remove
                   </button>
                 ) : (
                   <button
                     onClick={() => setLogo(SETU_LOGO_DATA_URL)}
-                    className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs font-semibold text-ink transition hover:bg-cream"
+                    className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs font-semibold text-ink transition hover:bg-cream"
                   >
                     Use Setu Logo
                   </button>
