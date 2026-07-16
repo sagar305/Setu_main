@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getToolsContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
-import { CalculatorCard } from "@/components/calculators/CalculatorCard";
+import { ToolCard } from "@/components/tools/ToolCard";
 import { CtaBanner } from "@/components/CtaBanner";
 import { FadeIn } from "@/components/motion/FadeIn";
 
@@ -60,7 +60,7 @@ export default function ToolsPage() {
               </FadeIn>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((item) => (
-                  <CalculatorCard key={item.slug} item={item as any} />
+                  <ToolCard key={item.slug} item={item} />
                 ))}
               </div>
             </div>
