@@ -134,7 +134,7 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
           <table className="w-full text-xs">
             <thead>
               <tr style={{ backgroundColor: data.brandColor, color: "white" }}>
-                <th className="px-4 py-3 text-left font-bold">Description</th>
+                <th className="px-4 py-3 text-left font-bold">Item Description</th>
                 <th className="px-4 py-3 text-center font-bold">Qty</th>
                 <th className="px-4 py-3 text-right font-bold">Rate</th>
                 <th className="px-4 py-3 text-center font-bold">Disc %</th>

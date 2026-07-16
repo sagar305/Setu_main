@@ -72,7 +72,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       <table className="mb-6 w-full border-collapse text-xs">
         <thead>
           <tr className="border-t-2 border-b border-black">
-            <th className="border-b border-gray-300 py-2 text-left font-bold">Description</th>
+            <th className="border-b border-gray-300 py-2 text-left font-bold">Item Description</th>
             <th className="border-b border-gray-300 py-2 text-center font-bold">Qty</th>
             <th className="border-b border-gray-300 py-2 text-center font-bold">Rate</th>
             <th className="border-b border-gray-300 py-2 text-center font-bold">Disc %</th>

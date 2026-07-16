@@ -96,7 +96,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
             <tr
               style={{ backgroundColor: data.brandColor + "10", borderTopWidth: "2px", borderBottomWidth: "2px" }}
             >
-              <th className="px-4 py-3 text-left font-bold">Item</th>
+              <th className="px-4 py-3 text-left font-bold">Item Description</th>
               <th className="px-4 py-3 text-center font-bold">Qty</th>
               <th className="px-4 py-3 text-right font-bold">Price</th>
               <th className="px-4 py-3 text-center font-bold">Disc %</th>
