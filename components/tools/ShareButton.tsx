@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Share2, Send } from "lucide-react";
-import { shareViaWeb, canShare, getWhatsAppShareUrl, getEmailShareUrl } from "@/lib/share";
+import { Share2, Loader2 } from "lucide-react";
+import { canShare, canShareFiles } from "@/lib/share";
 
 interface ShareButtonProps {
   title: string;
@@ -12,16 +12,10 @@ interface ShareButtonProps {
   generateFiles?: () => Promise<File[]>;
 }
 
-export function ShareButton({
-  title,
-  text,
-  invoiceNumber,
-  phoneNumber,
-  generateFiles,
-}: ShareButtonProps) {
+export function ShareButton({ title, text, generateFiles }: ShareButtonProps) {
   const [isSupported, setIsSupported] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isSharing, setIsSharing] = useState(false);
 
   useEffect(() => {
     setIsSupported(canShare());
@@ -34,39 +28,41 @@ export function ShareButton({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleWebShare = async () => {
-    const shareData: any = {
-      title,
-      text,
-    };
+  const handleShare = async () => {
+    if (isSharing) return;
+    setIsSharing(true);
 
+    let files: File[] = [];
     if (generateFiles) {
       try {
-        const files = await generateFiles();
-        if (files && files.length > 0) {
-          shareData.files = files;
-        }
+        files = await generateFiles();
       } catch (err) {
-        console.error("Failed to generate share files:", err);
+        alert(
+          err instanceof Error && err.message
+            ? err.message
+            : "Could not prepare the file to share. Please try again."
+        );
+        setIsSharing(false);
+        return;
       }
     }
 
-    const success = await shareViaWeb(shareData);
-    if (success) {
-      setShowMenu(false);
+    const shareData: ShareData = { title, text };
+    if (files.length > 0 && canShareFiles(files)) {
+      shareData.files = files;
     }
-  };
 
-  const handleWhatsAppShare = () => {
-    const whatsappUrl = getWhatsAppShareUrl(text, phoneNumber);
-    window.open(whatsappUrl, "_blank");
-    setShowMenu(false);
-  };
-
-  const handleEmailShare = () => {
-    const emailUrl = getEmailShareUrl(title, text);
-    window.location.href = emailUrl;
-    setShowMenu(false);
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      // AbortError means the user closed the share sheet — not an error
+      if (!(err instanceof Error && err.name === "AbortError")) {
+        console.error("Share failed:", err);
+        alert("Could not open the share menu. Please try again.");
+      }
+    } finally {
+      setIsSharing(false);
+    }
   };
 
   if (!isSupported || !isMobile) {
@@ -74,43 +70,18 @@ export function ShareButton({
   }
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setShowMenu(!showMenu)}
-        className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/10"
-        title="Share invoice"
-      >
+    <button
+      onClick={handleShare}
+      disabled={isSharing}
+      className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/10 disabled:cursor-not-allowed disabled:opacity-50"
+      title="Share"
+    >
+      {isSharing ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : (
         <Share2 className="h-4 w-4" />
-        <span className="hidden sm:inline">Share</span>
-      </button>
-
-      {showMenu && (
-        <div className="absolute right-0 top-full mt-2 z-50 rounded-lg border border-muted-line/20 bg-white shadow-lg overflow-hidden">
-          <button
-            onClick={handleWebShare}
-            className="w-full flex items-center gap-2 px-4 py-2 text-sm font-medium text-ink transition hover:bg-cream text-left"
-          >
-            <Share2 className="h-4 w-4" />
-            Share
-          </button>
-
-          <button
-            onClick={handleWhatsAppShare}
-            className="w-full flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-600 transition hover:bg-cream text-left"
-          >
-            <Send className="h-4 w-4" />
-            WhatsApp
-          </button>
-
-          <button
-            onClick={handleEmailShare}
-            className="w-full flex items-center gap-2 px-4 py-2 text-sm font-medium text-ink transition hover:bg-cream text-left border-t border-muted-line/10"
-          >
-            <span>✉</span>
-            Email
-          </button>
-        </div>
       )}
-    </div>
+      <span>{isSharing ? "Preparing..." : "Share"}</span>
+    </button>
   );
 }

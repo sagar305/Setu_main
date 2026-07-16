@@ -186,27 +186,26 @@ export function InvoiceGeneratorTool() {
   };
 
   const generateShareFiles = async () => {
-    try {
-      const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
-      const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
-      const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
+    const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
+    const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
+    const visiblePreview =
+      desktopPreview && desktopPreview.offsetHeight > 0
+        ? desktopPreview
+        : mobilePreview && mobilePreview.offsetHeight > 0
+          ? mobilePreview
+          : null;
 
-      if (!visiblePreview) {
-        return [];
-      }
-
-      const pdfBlob = await generateInvoicePdfBlob(data, visiblePreview);
-      if (!pdfBlob || pdfBlob.size === 0) {
-        return [];
-      }
-
-      const fileName = `Invoice-${data.invoiceDetails.number}.pdf`;
-      const file = new File([pdfBlob], fileName, { type: "application/pdf" });
-      return [file];
-    } catch (err) {
-      console.error("Error generating share files:", err);
-      return [];
+    if (!visiblePreview) {
+      throw new Error("Please turn on the invoice preview before sharing.");
     }
+
+    const pdfBlob = await generateInvoicePdfBlob(data, visiblePreview);
+    if (!pdfBlob || pdfBlob.size === 0) {
+      throw new Error("Could not generate the invoice PDF. Please try again.");
+    }
+
+    const fileName = `Invoice-${data.invoiceDetails.number || "draft"}.pdf`;
+    return [new File([pdfBlob], fileName, { type: "application/pdf" })];
   };
 
   const hasValidItems = data.lineItems.some(item => item.description.trim() !== "");

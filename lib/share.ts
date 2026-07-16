@@ -8,8 +8,16 @@ export async function shareViaWeb(data: {
     return false;
   }
 
+  const shareData: ShareData = { title: data.title, text: data.text };
+  if (data.url) {
+    shareData.url = data.url;
+  }
+  if (data.files && data.files.length > 0 && canShareFiles(data.files)) {
+    shareData.files = data.files;
+  }
+
   try {
-    await navigator.share(data);
+    await navigator.share(shareData);
     return true;
   } catch (err) {
     // User cancelled or share failed
@@ -19,6 +27,10 @@ export async function shareViaWeb(data: {
 
 export function canShare(): boolean {
   return !!navigator.share;
+}
+
+export function canShareFiles(files: File[]): boolean {
+  return !!(navigator.canShare && navigator.canShare({ files }));
 }
 
 export function getWhatsAppShareUrl(message: string, phoneNumber?: string): string {

@@ -100,6 +100,8 @@ export function UpiQrGeneratorTool() {
           }, "image/png");
         };
 
+        img.onerror = () => resolve([]);
+
         img.src = "data:image/svg+xml;base64," + btoa(svgData);
       });
     } catch (err) {

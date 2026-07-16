@@ -90,15 +90,14 @@ export async function generateInvoicePdfBlob(
     const scale = options?.scale || 2;
     const quality = options?.quality || 0.95;
 
-    // Wait for any dynamic content (like QR codes) to render
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
     // Check if element is visible and has content
     if (!element || element.offsetHeight === 0) {
       throw new Error("Invoice preview is not visible or empty");
     }
 
-    // Capture the invoice element as canvas
+    // Capture the invoice element as canvas. No artificial delay here —
+    // navigator.share() must run within the user-activation window, so
+    // this path has to stay as fast as possible.
     const canvas = await html2canvas(element, {
       scale,
       useCORS: true,
@@ -141,11 +140,9 @@ export async function generateInvoicePdfBlob(
       heightLeft -= 297;
     }
 
-    // Return as blob
-    const blob = pdf.output("blob");
-    return blob || new Blob();
+    return pdf.output("blob");
   } catch (error) {
     console.error("Error generating PDF blob:", error);
-    return new Blob();
+    return null;
   }
 }
