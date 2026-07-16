@@ -15,15 +15,16 @@ interface LineItemsSectionProps {
 }
 
 const parseNumericInput = (value: string): number => {
-  // Allow empty string to be handled as 0
-  if (value === "" || value === ".") return 0;
+  if (!value || value === ".") return 0;
   const num = parseFloat(value);
   return Number.isFinite(num) && num >= 0 ? Math.round(num * 100) / 100 : 0;
 };
 
-const handleDecimalInput = (value: string): string => {
-  // Allow numbers and a single decimal point
-  return value.replace(/[^0-9.]/g, "").replace(/\.(?=.*\.)/g, "");
+const formatNumericDisplay = (value: number | null | undefined): string => {
+  if (!value && value !== 0) return "";
+  if (value === 0) return "";
+  // Show full precision for display, parseNumericInput will handle rounding
+  return value.toString();
 };
 
 export function LineItemsSection({
@@ -85,11 +86,21 @@ export function LineItemsSection({
                     </label>
                     <input
                       type="text"
-                      value={item.quantity || ""}
+                      inputMode="decimal"
+                      value={formatNumericDisplay(item.quantity)}
                       onChange={(e) => {
-                        const filtered = handleDecimalInput(e.target.value);
-                        const num = parseNumericInput(filtered);
-                        onUpdateItem(item.id, { quantity: num });
+                        const val = e.target.value;
+                        // Only allow digits and one decimal point
+                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const parts = cleaned.split(".");
+                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+
+                        if (valid === "" || valid === ".") {
+                          onUpdateItem(item.id, { quantity: 0 });
+                        } else {
+                          const num = parseNumericInput(valid);
+                          onUpdateItem(item.id, { quantity: num });
+                        }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="1.00"
@@ -102,11 +113,20 @@ export function LineItemsSection({
                     </label>
                     <input
                       type="text"
-                      value={item.rate || ""}
+                      inputMode="decimal"
+                      value={formatNumericDisplay(item.rate)}
                       onChange={(e) => {
-                        const filtered = handleDecimalInput(e.target.value);
-                        const num = parseNumericInput(filtered);
-                        onUpdateItem(item.id, { rate: num });
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const parts = cleaned.split(".");
+                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+
+                        if (valid === "" || valid === ".") {
+                          onUpdateItem(item.id, { rate: 0 });
+                        } else {
+                          const num = parseNumericInput(valid);
+                          onUpdateItem(item.id, { rate: num });
+                        }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-right text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="0.00"
@@ -122,12 +142,21 @@ export function LineItemsSection({
                     </label>
                     <input
                       type="text"
-                      value={item.discountPercent || ""}
+                      inputMode="decimal"
+                      value={formatNumericDisplay(item.discountPercent)}
                       onChange={(e) => {
-                        const filtered = handleDecimalInput(e.target.value);
-                        let num = parseNumericInput(filtered);
-                        num = Math.min(100, num);
-                        onUpdateItem(item.id, { discountPercent: num });
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const parts = cleaned.split(".");
+                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+
+                        if (valid === "" || valid === ".") {
+                          onUpdateItem(item.id, { discountPercent: 0 });
+                        } else {
+                          let num = parseNumericInput(valid);
+                          num = Math.min(100, num);
+                          onUpdateItem(item.id, { discountPercent: num });
+                        }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="0.00"
@@ -140,11 +169,20 @@ export function LineItemsSection({
                     </label>
                     <input
                       type="text"
-                      value={item.taxRate || ""}
+                      inputMode="decimal"
+                      value={formatNumericDisplay(item.taxRate)}
                       onChange={(e) => {
-                        const filtered = handleDecimalInput(e.target.value);
-                        const num = parseNumericInput(filtered);
-                        onUpdateItem(item.id, { taxRate: num });
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const parts = cleaned.split(".");
+                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+
+                        if (valid === "" || valid === ".") {
+                          onUpdateItem(item.id, { taxRate: 0 });
+                        } else {
+                          const num = parseNumericInput(valid);
+                          onUpdateItem(item.id, { taxRate: num });
+                        }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                       placeholder="18.00"
