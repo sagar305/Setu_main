@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff, ChevronRight } from "lucide-react";
+import { Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff } from "lucide-react";
 import { InvoicePreview } from "./InvoicePreview";
 import { BusinessDetailsSection } from "./BusinessDetailsSection";
 import { ClientDetailsSection } from "./ClientDetailsSection";
@@ -207,12 +207,13 @@ export function InvoiceGeneratorTool() {
         <div className="sticky top-20 z-30 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white/95 backdrop-blur-sm p-4 shadow-sm">
           <div className="flex flex-wrap gap-3">
             <button
-              onClick={handleExportPDF}
-              disabled={isExporting || !hasValidItems}
+              onClick={handlePrint}
+              disabled={!hasValidItems}
               className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              title="Print invoice"
             >
-              <Download className="h-4 w-4" />
-              {isExporting ? "Generating PDF..." : "Download PDF"}
+              <Printer className="h-4 w-4" />
+              Print
             </button>
 
             <button
@@ -225,17 +226,7 @@ export function InvoiceGeneratorTool() {
               title="Print invoice and clear unlocked fields for next invoice"
             >
               <Printer className="h-4 w-4" />
-              Print & Clear
-            </button>
-
-            <button
-              onClick={clearUnlockedFields}
-              disabled={!hasValidItems}
-              className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
-              title="Clear unlocked fields and prepare for next invoice"
-            >
-              <ChevronRight className="h-4 w-4" />
-              Next Invoice
+              Print & Next
             </button>
 
             <button
