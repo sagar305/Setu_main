@@ -84,6 +84,7 @@ export function LineItemsSection({
                       Quantity
                     </label>
                     <input
+                      key={`${item.id}-quantity-${item.quantity}`}
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.quantity)}
@@ -120,6 +121,7 @@ export function LineItemsSection({
                       Rate (₹)
                     </label>
                     <input
+                      key={`${item.id}-rate-${item.rate}`}
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.rate)}
@@ -159,6 +161,7 @@ export function LineItemsSection({
                       Discount %
                     </label>
                     <input
+                      key={`${item.id}-discount-${item.discountPercent}`}
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.discountPercent)}
@@ -196,6 +199,7 @@ export function LineItemsSection({
                       Tax %
                     </label>
                     <input
+                      key={`${item.id}-tax-${item.taxRate}`}
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.taxRate)}
