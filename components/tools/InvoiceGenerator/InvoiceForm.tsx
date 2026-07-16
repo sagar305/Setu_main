@@ -17,6 +17,7 @@ interface InvoiceFormProps {
   onAddLineItem: () => void;
   onRemoveLineItem: (id: string) => void;
   onUpdateLineItem: (id: string, updates: Partial<LineItem>) => void;
+  onTaxModeChange: (mode: "inclusive" | "exclusive") => void;
   onNotesChange: (notes: string) => void;
   onTermsChange: (terms: string) => void;
 }
@@ -30,6 +31,7 @@ export function InvoiceForm({
   onAddLineItem,
   onRemoveLineItem,
   onUpdateLineItem,
+  onTaxModeChange,
   onNotesChange,
   onTermsChange,
 }: InvoiceFormProps) {
@@ -59,6 +61,7 @@ export function InvoiceForm({
       <LineItemsSection
         items={data.lineItems}
         taxMode={data.taxMode}
+        onTaxModeChange={onTaxModeChange}
         onAddItem={onAddLineItem}
         onRemoveItem={onRemoveLineItem}
         onUpdateItem={onUpdateLineItem}

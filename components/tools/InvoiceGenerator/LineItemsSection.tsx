@@ -8,6 +8,7 @@ import type { LineItem } from "@/lib/types/invoice";
 interface LineItemsSectionProps {
   items: LineItem[];
   taxMode: "inclusive" | "exclusive";
+  onTaxModeChange: (mode: "inclusive" | "exclusive") => void;
   onAddItem: () => void;
   onRemoveItem: (id: string) => void;
   onUpdateItem: (id: string, updates: Partial<LineItem>) => void;
@@ -21,15 +22,27 @@ const parseNumericInput = (value: string): number => {
 export function LineItemsSection({
   items,
   taxMode,
+  onTaxModeChange,
   onAddItem,
   onRemoveItem,
   onUpdateItem,
 }: LineItemsSectionProps) {
   return (
     <div>
-      <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-        Line Items
-      </h3>
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
+          Line Items
+        </h3>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={taxMode === "inclusive"}
+            onChange={(e) => onTaxModeChange(e.target.checked ? "inclusive" : "exclusive")}
+            className="h-4 w-4 rounded border-muted-line/40 text-indigo accent-indigo"
+          />
+          <span className="text-sm font-medium text-ink">Tax Inclusive</span>
+        </label>
+      </div>
 
       <div className="space-y-4 rounded-xl border border-muted-line/20 bg-cream/30 p-4 sm:p-6">
         {/* Line Items */}

@@ -31,6 +31,7 @@ export function InvoiceGeneratorTool() {
     updateTerms,
     updateTemplate,
     updateBrandColor,
+    updateTaxMode,
     reset,
     toggleLockSection,
     toggleSection,
@@ -310,6 +311,7 @@ export function InvoiceGeneratorTool() {
                 <LineItemsSection
                   items={data.lineItems}
                   taxMode={data.taxMode}
+                  onTaxModeChange={updateTaxMode}
                   onAddItem={addLineItem}
                   onRemoveItem={removeLineItem}
                   onUpdateItem={updateLineItem}
