@@ -1,0 +1,294 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import type { InvoiceData, LineItem, Fee, BusinessDetails, ClientDetails, InvoiceDetails, BankDetails } from "@/lib/types/invoice";
+
+const DEFAULT_INVOICE_DATA: InvoiceData = {
+  businessDetails: {
+    name: "",
+    address: "",
+    phone: "",
+    email: "",
+    gstin: "",
+  },
+  clientDetails: {
+    name: "",
+    address: "",
+    phone: "",
+    email: "",
+    gstin: "",
+  },
+  invoiceDetails: {
+    number: "INV-001",
+    date: new Date().toISOString().split("T")[0],
+    dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+    poNumber: "",
+    ewayBillNumber: "",
+  },
+  lineItems: [
+    {
+      id: "1",
+      description: "",
+      quantity: 1,
+      unit: "Qty",
+      rate: 0,
+      discountPercent: 0,
+      taxRate: 18,
+    },
+  ],
+  fees: [],
+  bankDetails: {
+    accountNo: "",
+    ifsc: "",
+    upiId: "",
+  },
+  notes: "",
+  terms: "",
+  template: "classic",
+  brandColor: "#26306B",
+  taxMode: "exclusive",
+};
+
+const STORAGE_KEY = "invoice_generator_data";
+const LOCK_STATUS_KEY = "invoice_generator_locks";
+
+const DEFAULT_LOCK_STATUS = {
+  business: false,
+  client: false,
+  invoice: false,
+  items: false,
+  fees: false,
+  bank: false,
+  notes: false,
+  template: false,
+};
+
+const DEFAULT_OPEN_SECTIONS = {
+  business: true,
+  client: false,
+  invoice: false,
+  items: true,
+  fees: false,
+  bank: false,
+  notes: false,
+  template: false,
+};
+
+export function useInvoiceData() {
+  const [data, setData] = useState<InvoiceData>(DEFAULT_INVOICE_DATA);
+  const [lockedSections, setLockedSections] = useState<Record<string, boolean>>(DEFAULT_LOCK_STATUS);
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(DEFAULT_OPEN_SECTIONS);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setData({
+          ...DEFAULT_INVOICE_DATA,
+          ...parsed,
+        });
+      } catch {
+        // If parsing fails, use defaults
+        setData(DEFAULT_INVOICE_DATA);
+      }
+    } else {
+      setData(DEFAULT_INVOICE_DATA);
+    }
+
+    // Load lock status
+    const storedLocks = localStorage.getItem(LOCK_STATUS_KEY);
+    if (storedLocks) {
+      try {
+        const parsed = JSON.parse(storedLocks);
+        setLockedSections({
+          ...DEFAULT_LOCK_STATUS,
+          ...parsed,
+        });
+      } catch {
+        setLockedSections(DEFAULT_LOCK_STATUS);
+      }
+    }
+
+    setIsLoaded(true);
+  }, []);
+
+  // Auto-save to localStorage whenever data changes
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+  }, [data, isLoaded]);
+
+  // Auto-save lock status to localStorage
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem(LOCK_STATUS_KEY, JSON.stringify(lockedSections));
+    }
+  }, [lockedSections, isLoaded]);
+
+  const updateBusinessDetails = (details: Partial<BusinessDetails>) => {
+    setData((prev) => ({
+      ...prev,
+      businessDetails: { ...prev.businessDetails, ...details },
+    }));
+  };
+
+  const updateClientDetails = (details: Partial<ClientDetails>) => {
+    setData((prev) => ({
+      ...prev,
+      clientDetails: { ...prev.clientDetails, ...details },
+    }));
+  };
+
+  const updateInvoiceDetails = (details: Partial<InvoiceDetails>) => {
+    setData((prev) => ({
+      ...prev,
+      invoiceDetails: { ...prev.invoiceDetails, ...details },
+    }));
+  };
+
+  const updateBankDetails = (details: Partial<BankDetails>) => {
+    setData((prev) => ({
+      ...prev,
+      bankDetails: { ...prev.bankDetails, ...details },
+    }));
+  };
+
+  const addLineItem = () => {
+    const newId = String(Math.max(...data.lineItems.map((item) => parseInt(item.id) || 0), 0) + 1);
+    setData((prev) => ({
+      ...prev,
+      lineItems: [
+        ...prev.lineItems,
+        {
+          id: newId,
+          description: "",
+          quantity: 1,
+          unit: "Qty",
+          rate: 0,
+          discountPercent: 0,
+          taxRate: 18,
+        },
+      ],
+    }));
+  };
+
+  const removeLineItem = (id: string) => {
+    if (data.lineItems.length > 1) {
+      setData((prev) => ({
+        ...prev,
+        lineItems: prev.lineItems.filter((item) => item.id !== id),
+      }));
+    }
+  };
+
+  const updateLineItem = (id: string, updates: Partial<LineItem>) => {
+    setData((prev) => ({
+      ...prev,
+      lineItems: prev.lineItems.map((item) =>
+        item.id === id ? { ...item, ...updates } : item
+      ),
+    }));
+  };
+
+  const updateNotes = (notes: string) => {
+    setData((prev) => ({ ...prev, notes }));
+  };
+
+  const updateTerms = (terms: string) => {
+    setData((prev) => ({ ...prev, terms }));
+  };
+
+  const updateTemplate = (template: "classic" | "modern" | "colorful") => {
+    setData((prev) => ({ ...prev, template }));
+  };
+
+  const updateBrandColor = (color: string) => {
+    setData((prev) => ({ ...prev, brandColor: color }));
+  };
+
+  const updateTaxMode = (mode: "inclusive" | "exclusive") => {
+    setData((prev) => ({ ...prev, taxMode: mode }));
+  };
+
+  const addFee = () => {
+    const newId = String(Math.max(...data.fees.map((fee) => parseInt(fee.id) || 0), 0) + 1);
+    setData((prev) => ({
+      ...prev,
+      fees: [
+        ...prev.fees,
+        {
+          id: newId,
+          name: "",
+          type: "fixed",
+          amount: 0,
+        },
+      ],
+    }));
+  };
+
+  const removeFee = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      fees: prev.fees.filter((fee) => fee.id !== id),
+    }));
+  };
+
+  const updateFee = (id: string, updates: Partial<Fee>) => {
+    setData((prev) => ({
+      ...prev,
+      fees: prev.fees.map((fee) =>
+        fee.id === id ? { ...fee, ...updates } : fee
+      ),
+    }));
+  };
+
+  const reset = () => {
+    setData(DEFAULT_INVOICE_DATA);
+    localStorage.removeItem(STORAGE_KEY);
+    setLockedSections(DEFAULT_LOCK_STATUS);
+    localStorage.removeItem(LOCK_STATUS_KEY);
+  };
+
+  const toggleLockSection = (section: string) => {
+    setLockedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  };
+
+  return {
+    data,
+    isLoaded,
+    lockedSections,
+    openSections,
+    updateBusinessDetails,
+    updateClientDetails,
+    updateInvoiceDetails,
+    updateBankDetails,
+    addLineItem,
+    removeLineItem,
+    updateLineItem,
+    addFee,
+    removeFee,
+    updateFee,
+    updateNotes,
+    updateTerms,
+    updateTemplate,
+    updateBrandColor,
+    updateTaxMode,
+    reset,
+    toggleLockSection,
+    toggleSection,
+  };
+}

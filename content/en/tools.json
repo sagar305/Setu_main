@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "Free Business Tools for Restaurants & Retail | Setu Technology",
+    "description": "Free online business tools for restaurants and small businesses — invoice generator, calculators, and more. No signup needed.",
+    "keywords": [
+      "business tools",
+      "free business tools",
+      "invoice generator",
+      "restaurant tools",
+      "small business tools"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Free Tools",
+    "headline": "Tools for running your business",
+    "subheadline": "Free, no-signup tools built for restaurant and retail operators — invoicing, calculators, and more."
+  },
+  "categories": [
+    {
+      "id": "invoicing",
+      "name": "Invoicing"
+    },
+    {
+      "id": "payment",
+      "name": "Payment"
+    }
+  ],
+  "items": [
+    {
+      "slug": "invoice-generator",
+      "name": "Invoice Generator",
+      "category": "invoicing",
+      "icon": "file-text",
+      "shortDescription": "Create, customize, and download professional invoices with GST support.",
+      "seo": {
+        "title": "Free Invoice Generator | GST Compliant | Setu Technology",
+        "description": "Free online invoice generator for small businesses and restaurants. Create GST-compliant invoices, customize templates, and download as PDF. No signup required.",
+        "keywords": [
+          "invoice generator",
+          "free invoice generator",
+          "online invoice creator",
+          "GST invoice generator",
+          "invoice template"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Invoice Generator",
+        "headline": "Invoice Generator",
+        "subheadline": "Create professional, GST-compliant invoices in minutes — no templates, no signup, just fill and download."
+      }
+    },
+    {
+      "slug": "upi-qr-generator",
+      "name": "Dynamic UPI QR Generator",
+      "category": "payment",
+      "icon": "qr-code",
+      "shortDescription": "Generate dynamic UPI QR codes with custom amounts and notes for instant payments.",
+      "seo": {
+        "title": "Free UPI QR Generator | Dynamic QR Codes | Setu Technology",
+        "description": "Generate dynamic UPI QR codes instantly. Enter your UPI ID, amount, and notes to create QR codes for payments. No signup required.",
+        "keywords": [
+          "UPI QR generator",
+          "dynamic QR code",
+          "UPI payment QR",
+          "free QR generator",
+          "instant payment QR"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — UPI QR Generator",
+        "headline": "Dynamic UPI QR Generator",
+        "subheadline": "Generate custom UPI QR codes with amounts and notes — share instantly for quick payments."
+      }
+    }
+  ]
+}
