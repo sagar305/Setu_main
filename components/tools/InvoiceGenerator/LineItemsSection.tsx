@@ -15,8 +15,15 @@ interface LineItemsSectionProps {
 }
 
 const parseNumericInput = (value: string): number => {
+  // Allow empty string to be handled as 0
+  if (value === "" || value === ".") return 0;
   const num = parseFloat(value);
   return Number.isFinite(num) && num >= 0 ? Math.round(num * 100) / 100 : 0;
+};
+
+const handleDecimalInput = (value: string): string => {
+  // Allow numbers and a single decimal point
+  return value.replace(/[^0-9.]/g, "").replace(/\.(?=.*\.)/g, "");
 };
 
 export function LineItemsSection({
@@ -77,11 +84,11 @@ export function LineItemsSection({
                       Quantity
                     </label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
                       value={item.quantity || ""}
                       onChange={(e) => {
-                        const num = parseNumericInput(e.target.value);
+                        const filtered = handleDecimalInput(e.target.value);
+                        const num = parseNumericInput(filtered);
                         onUpdateItem(item.id, { quantity: num });
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
@@ -94,11 +101,11 @@ export function LineItemsSection({
                       Rate (₹)
                     </label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
                       value={item.rate || ""}
                       onChange={(e) => {
-                        const num = parseNumericInput(e.target.value);
+                        const filtered = handleDecimalInput(e.target.value);
+                        const num = parseNumericInput(filtered);
                         onUpdateItem(item.id, { rate: num });
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-right text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
@@ -114,11 +121,11 @@ export function LineItemsSection({
                       Discount %
                     </label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
                       value={item.discountPercent || ""}
                       onChange={(e) => {
-                        let num = parseNumericInput(e.target.value);
+                        const filtered = handleDecimalInput(e.target.value);
+                        let num = parseNumericInput(filtered);
                         num = Math.min(100, num);
                         onUpdateItem(item.id, { discountPercent: num });
                       }}
@@ -132,11 +139,11 @@ export function LineItemsSection({
                       Tax %
                     </label>
                     <input
-                      type="number"
-                      step="0.01"
+                      type="text"
                       value={item.taxRate || ""}
                       onChange={(e) => {
-                        const num = parseNumericInput(e.target.value);
+                        const filtered = handleDecimalInput(e.target.value);
+                        const num = parseNumericInput(filtered);
                         onUpdateItem(item.id, { taxRate: num });
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
