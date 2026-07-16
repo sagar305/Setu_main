@@ -87,17 +87,27 @@ export function LineItemsSection({
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.quantity)}
-                      onBlur={(e) => {
+                      onChange={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
-                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+                        let valid = parts.length > 2 ? parts[0] + "." + parts.slice(1).join("") : cleaned;
+                        if (valid.endsWith(".") && valid.lastIndexOf(".") !== cleaned.lastIndexOf(".")) {
+                          valid = valid.slice(0, -1);
+                        }
+                        e.currentTarget.value = valid;
+                      }}
+                      onBlur={(e) => {
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
 
-                        if (valid === "" || valid === ".") {
+                        if (cleaned === "" || cleaned === ".") {
                           onUpdateItem(item.id, { quantity: 0 });
+                          e.currentTarget.value = "";
                         } else {
-                          const num = parseNumericInput(valid);
+                          const num = parseNumericInput(cleaned);
                           onUpdateItem(item.id, { quantity: num });
+                          e.currentTarget.value = formatNumericDisplay(num);
                         }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
@@ -113,17 +123,27 @@ export function LineItemsSection({
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.rate)}
-                      onBlur={(e) => {
+                      onChange={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
-                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+                        let valid = parts.length > 2 ? parts[0] + "." + parts.slice(1).join("") : cleaned;
+                        if (valid.endsWith(".") && valid.lastIndexOf(".") !== cleaned.lastIndexOf(".")) {
+                          valid = valid.slice(0, -1);
+                        }
+                        e.currentTarget.value = valid;
+                      }}
+                      onBlur={(e) => {
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
 
-                        if (valid === "" || valid === ".") {
+                        if (cleaned === "" || cleaned === ".") {
                           onUpdateItem(item.id, { rate: 0 });
+                          e.currentTarget.value = "";
                         } else {
-                          const num = parseNumericInput(valid);
+                          const num = parseNumericInput(cleaned);
                           onUpdateItem(item.id, { rate: num });
+                          e.currentTarget.value = formatNumericDisplay(num);
                         }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-right text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
@@ -142,18 +162,28 @@ export function LineItemsSection({
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.discountPercent)}
-                      onBlur={(e) => {
+                      onChange={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
-                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+                        let valid = parts.length > 2 ? parts[0] + "." + parts.slice(1).join("") : cleaned;
+                        if (valid.endsWith(".") && valid.lastIndexOf(".") !== cleaned.lastIndexOf(".")) {
+                          valid = valid.slice(0, -1);
+                        }
+                        e.currentTarget.value = valid;
+                      }}
+                      onBlur={(e) => {
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
 
-                        if (valid === "" || valid === ".") {
+                        if (cleaned === "" || cleaned === ".") {
                           onUpdateItem(item.id, { discountPercent: 0 });
+                          e.currentTarget.value = "";
                         } else {
-                          let num = parseNumericInput(valid);
+                          let num = parseNumericInput(cleaned);
                           num = Math.min(100, num);
                           onUpdateItem(item.id, { discountPercent: num });
+                          e.currentTarget.value = formatNumericDisplay(num);
                         }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
@@ -169,17 +199,27 @@ export function LineItemsSection({
                       type="text"
                       inputMode="decimal"
                       defaultValue={formatNumericDisplay(item.taxRate)}
-                      onBlur={(e) => {
+                      onChange={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
-                        const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
+                        let valid = parts.length > 2 ? parts[0] + "." + parts.slice(1).join("") : cleaned;
+                        if (valid.endsWith(".") && valid.lastIndexOf(".") !== cleaned.lastIndexOf(".")) {
+                          valid = valid.slice(0, -1);
+                        }
+                        e.currentTarget.value = valid;
+                      }}
+                      onBlur={(e) => {
+                        const val = e.target.value;
+                        const cleaned = val.replace(/[^0-9.]/g, "");
 
-                        if (valid === "" || valid === ".") {
+                        if (cleaned === "" || cleaned === ".") {
                           onUpdateItem(item.id, { taxRate: 0 });
+                          e.currentTarget.value = "";
                         } else {
-                          const num = parseNumericInput(valid);
+                          const num = parseNumericInput(cleaned);
                           onUpdateItem(item.id, { taxRate: num });
+                          e.currentTarget.value = formatNumericDisplay(num);
                         }
                       }}
                       className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-center text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
