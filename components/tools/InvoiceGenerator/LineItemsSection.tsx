@@ -77,8 +77,8 @@ export function LineItemsSection({
                       Quantity
                     </label>
                     <input
-                      type="text"
-                      inputMode="decimal"
+                      type="number"
+                      step="0.01"
                       value={item.quantity || ""}
                       onChange={(e) => {
                         const num = parseNumericInput(e.target.value);
@@ -94,8 +94,8 @@ export function LineItemsSection({
                       Rate (₹)
                     </label>
                     <input
-                      type="text"
-                      inputMode="decimal"
+                      type="number"
+                      step="0.01"
                       value={item.rate || ""}
                       onChange={(e) => {
                         const num = parseNumericInput(e.target.value);
@@ -114,8 +114,8 @@ export function LineItemsSection({
                       Discount %
                     </label>
                     <input
-                      type="text"
-                      inputMode="decimal"
+                      type="number"
+                      step="0.01"
                       value={item.discountPercent || ""}
                       onChange={(e) => {
                         let num = parseNumericInput(e.target.value);
@@ -132,8 +132,8 @@ export function LineItemsSection({
                       Tax %
                     </label>
                     <input
-                      type="text"
-                      inputMode="decimal"
+                      type="number"
+                      step="0.01"
                       value={item.taxRate || ""}
                       onChange={(e) => {
                         const num = parseNumericInput(e.target.value);
