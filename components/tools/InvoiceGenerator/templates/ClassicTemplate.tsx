@@ -121,16 +121,16 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             </div>
           ))}
 
-          {totals.totalFees > 0 && (
-            <>
-              {Object.entries(totals.feeBreakdown).map(([feeName, feeAmount]) => (
-                <div key={feeName} className="mb-1 flex justify-between border-b border-gray-300 py-1">
-                  <span>{feeName}:</span>
-                  <span className="font-bold">{formatCurrency(feeAmount)}</span>
-                </div>
-              ))}
-            </>
-          )}
+          {Object.entries(totals.feeBreakdown)
+            .filter(([_, feeAmount]) => feeAmount !== 0)
+            .map(([feeName, feeAmount]) => (
+            <div key={feeName} className="mb-1 flex justify-between border-b border-gray-300 py-1">
+              <span>{feeName}:</span>
+              <span className={`font-bold ${feeAmount < 0 ? "text-red-600" : ""}`}>
+                {feeAmount < 0 ? `-${formatCurrency(Math.abs(feeAmount))}` : formatCurrency(feeAmount)}
+              </span>
+            </div>
+          ))}
 
           <div
             className="mt-3 flex justify-between border-t-2 border-black py-2 text-sm font-bold"

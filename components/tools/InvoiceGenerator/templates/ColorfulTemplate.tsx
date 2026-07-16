@@ -191,16 +191,16 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
               </div>
             ))}
 
-            {totals.totalFees > 0 && (
-              <>
-                {Object.entries(totals.feeBreakdown).map(([feeName, feeAmount]) => (
-                  <div key={feeName} className="mb-2 flex justify-between border-b py-2 text-sm">
-                    <span className="opacity-80">{feeName}</span>
-                    <span className="font-bold">{formatCurrency(feeAmount)}</span>
-                  </div>
-                ))}
-              </>
-            )}
+            {Object.entries(totals.feeBreakdown)
+              .filter(([_, feeAmount]) => feeAmount !== 0)
+              .map(([feeName, feeAmount]) => (
+              <div key={feeName} className="mb-2 flex justify-between border-b py-2 text-sm">
+                <span className="opacity-80">{feeName}</span>
+                <span className={`font-bold ${feeAmount < 0 ? "text-red-600" : ""}`}>
+                  {feeAmount < 0 ? `-${formatCurrency(Math.abs(feeAmount))}` : formatCurrency(feeAmount)}
+                </span>
+              </div>
+            ))}
 
             <div
               className="mt-4 flex justify-between rounded-lg py-3 px-4 text-base font-bold"

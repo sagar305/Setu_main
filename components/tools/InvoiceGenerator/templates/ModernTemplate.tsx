@@ -151,16 +151,16 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               </div>
             ))}
 
-            {totals.totalFees > 0 && (
-              <>
-                {Object.entries(totals.feeBreakdown).map(([feeName, feeAmount]) => (
-                  <div key={feeName} className="mb-2 flex justify-between border-b py-2 text-sm">
-                    <span>{feeName}</span>
-                    <span className="font-semibold">{formatCurrency(feeAmount)}</span>
-                  </div>
-                ))}
-              </>
-            )}
+            {Object.entries(totals.feeBreakdown)
+              .filter(([_, feeAmount]) => feeAmount !== 0)
+              .map(([feeName, feeAmount]) => (
+              <div key={feeName} className="mb-2 flex justify-between border-b py-2 text-sm">
+                <span>{feeName}</span>
+                <span className={`font-semibold ${feeAmount < 0 ? "text-red-600" : ""}`}>
+                  {feeAmount < 0 ? `-${formatCurrency(Math.abs(feeAmount))}` : formatCurrency(feeAmount)}
+                </span>
+              </div>
+            ))}
 
             <div
               className="mt-3 flex justify-between py-3 text-lg font-bold"
