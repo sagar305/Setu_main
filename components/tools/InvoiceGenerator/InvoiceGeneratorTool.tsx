@@ -7,6 +7,7 @@ import { BusinessDetailsSection } from "./BusinessDetailsSection";
 import { ClientDetailsSection } from "./ClientDetailsSection";
 import { InvoiceDetailsSection } from "./InvoiceDetailsSection";
 import { LineItemsSection } from "./LineItemsSection";
+import { FeesSection } from "./FeesSection";
 import { BankDetailsSection } from "./BankDetailsSection";
 import { NotesAndTermsSection } from "./NotesAndTermsSection";
 import { TemplateSelector } from "./TemplateSelector";
@@ -27,6 +28,9 @@ export function InvoiceGeneratorTool() {
     addLineItem,
     removeLineItem,
     updateLineItem,
+    addFee,
+    removeFee,
+    updateFee,
     updateNotes,
     updateTerms,
     updateTemplate,
@@ -323,6 +327,23 @@ export function InvoiceGeneratorTool() {
                   onAddItem={addLineItem}
                   onRemoveItem={removeLineItem}
                   onUpdateItem={updateLineItem}
+                />
+              </AccordionSection>
+
+              {/* Fees */}
+              <AccordionSection
+                title="Fees"
+                icon={<Banknote className="h-5 w-5" />}
+                isOpen={openSections.fees}
+                onToggle={() => toggleSection("fees")}
+                isLocked={lockedSections.fees}
+                onToggleLock={() => toggleLockSection("fees")}
+              >
+                <FeesSection
+                  fees={data.fees}
+                  onAddFee={addFee}
+                  onRemoveFee={removeFee}
+                  onUpdateFee={updateFee}
                 />
               </AccordionSection>
 

@@ -1,5 +1,6 @@
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import type {
+  Fee,
   InvoiceData,
   InvoiceTotals,
   LineItem,
@@ -46,6 +47,7 @@ export function calculateLineItem(
 
 export function calculateTotals(
   lineItems: LineItem[],
+  fees: Fee[],
   taxMode: "inclusive" | "exclusive"
 ): InvoiceTotals {
   const calculated = lineItems.map((item) => calculateLineItem(item, taxMode));
@@ -53,7 +55,25 @@ export function calculateTotals(
   const subtotal = calculated.reduce((sum, item) => sum + item.taxableAmount, 0);
   const totalDiscount = calculated.reduce((sum, item) => sum + item.discountAmount, 0);
   const totalTax = calculated.reduce((sum, item) => sum + item.taxAmount, 0);
-  const grandTotal = calculated.reduce((sum, item) => sum + item.amount, 0);
+  const subtotalWithTax = calculated.reduce((sum, item) => sum + item.amount, 0);
+
+  // Calculate fees
+  const feeBreakdown: Record<string, number> = {};
+  let totalFees = 0;
+
+  fees.forEach((fee) => {
+    let feeAmount = 0;
+    if (fee.type === "percentage") {
+      feeAmount = (subtotalWithTax * fee.amount) / 100;
+    } else {
+      feeAmount = fee.amount;
+    }
+    feeAmount = Math.round(feeAmount * 100) / 100;
+    feeBreakdown[fee.name] = feeAmount;
+    totalFees += feeAmount;
+  });
+
+  const grandTotal = subtotalWithTax + totalFees;
 
   // Group tax by rate
   const taxByRate: Record<number, number> = {};
@@ -73,6 +93,8 @@ export function calculateTotals(
       ])
     ),
     totalTax: Math.round(totalTax * 100) / 100,
+    totalFees: Math.round(totalFees * 100) / 100,
+    feeBreakdown,
     grandTotal: Math.round(grandTotal * 100) / 100,
   };
 }

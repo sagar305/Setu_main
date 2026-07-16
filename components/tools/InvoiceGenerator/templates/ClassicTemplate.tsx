@@ -8,7 +8,7 @@ interface ClassicTemplateProps {
 }
 
 export function ClassicTemplate({ data }: ClassicTemplateProps) {
-  const totals = calculateTotals(data.lineItems, data.taxMode);
+  const totals = calculateTotals(data.lineItems, data.fees, data.taxMode);
   const amountWords = amountInWordsIndian(totals.grandTotal);
 
   return (
@@ -119,6 +119,17 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             </div>
           ))}
 
+          {totals.totalFees > 0 && (
+            <>
+              {Object.entries(totals.feeBreakdown).map(([feeName, feeAmount]) => (
+                <div key={feeName} className="mb-1 flex justify-between border-b border-gray-300 py-1">
+                  <span>{feeName}:</span>
+                  <span className="font-bold">{formatCurrency(feeAmount)}</span>
+                </div>
+              ))}
+            </>
+          )}
+
           <div
             className="mt-3 flex justify-between border-t-2 border-black py-2 text-sm font-bold"
             style={{ color: data.brandColor }}
@@ -155,7 +166,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
               <div className="flex justify-end">
                 <UPIQRCode
                   upiId={data.bankDetails.upiId}
-                  amount={calculateTotals(data.lineItems, data.taxMode).grandTotal}
+                  amount={calculateTotals(data.lineItems, data.fees, data.taxMode).grandTotal}
                   businessName={data.businessDetails.name}
                 />
               </div>

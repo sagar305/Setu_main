@@ -31,6 +31,13 @@ export interface LineItem {
   taxRate: number;
 }
 
+export interface Fee {
+  id: string;
+  name: string;
+  type: "percentage" | "fixed";
+  amount: number;
+}
+
 export interface InvoiceDetails {
   number: string;
   date: string;
@@ -44,6 +51,7 @@ export interface InvoiceData {
   clientDetails: ClientDetails;
   invoiceDetails: InvoiceDetails;
   lineItems: LineItem[];
+  fees: Fee[];
   bankDetails?: BankDetails;
   notes: string;
   terms: string;
@@ -57,6 +65,8 @@ export interface InvoiceTotals {
   totalDiscount: number;
   taxByRate: Record<number, number>;
   totalTax: number;
+  totalFees: number;
+  feeBreakdown: Record<string, number>;
   grandTotal: number;
 }
 

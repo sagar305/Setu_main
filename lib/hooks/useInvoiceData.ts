@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { InvoiceData, LineItem, BusinessDetails, ClientDetails, InvoiceDetails, BankDetails } from "@/lib/types/invoice";
+import type { InvoiceData, LineItem, Fee, BusinessDetails, ClientDetails, InvoiceDetails, BankDetails } from "@/lib/types/invoice";
 
 const DEFAULT_INVOICE_DATA: InvoiceData = {
   businessDetails: {
@@ -36,6 +36,7 @@ const DEFAULT_INVOICE_DATA: InvoiceData = {
       taxRate: 18,
     },
   ],
+  fees: [],
   bankDetails: {
     accountNo: "",
     ifsc: "",
@@ -56,6 +57,7 @@ const DEFAULT_LOCK_STATUS = {
   client: false,
   invoice: false,
   items: false,
+  fees: false,
   bank: false,
   notes: false,
   template: false,
@@ -66,6 +68,7 @@ const DEFAULT_OPEN_SECTIONS = {
   client: false,
   invoice: false,
   items: true,
+  fees: false,
   bank: false,
   notes: false,
   template: false,
@@ -211,6 +214,38 @@ export function useInvoiceData() {
     setData((prev) => ({ ...prev, taxMode: mode }));
   };
 
+  const addFee = () => {
+    const newId = String(Math.max(...data.fees.map((fee) => parseInt(fee.id) || 0), 0) + 1);
+    setData((prev) => ({
+      ...prev,
+      fees: [
+        ...prev.fees,
+        {
+          id: newId,
+          name: "",
+          type: "fixed",
+          amount: 0,
+        },
+      ],
+    }));
+  };
+
+  const removeFee = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      fees: prev.fees.filter((fee) => fee.id !== id),
+    }));
+  };
+
+  const updateFee = (id: string, updates: Partial<Fee>) => {
+    setData((prev) => ({
+      ...prev,
+      fees: prev.fees.map((fee) =>
+        fee.id === id ? { ...fee, ...updates } : fee
+      ),
+    }));
+  };
+
   const reset = () => {
     setData(DEFAULT_INVOICE_DATA);
     localStorage.removeItem(STORAGE_KEY);
@@ -244,6 +279,9 @@ export function useInvoiceData() {
     addLineItem,
     removeLineItem,
     updateLineItem,
+    addFee,
+    removeFee,
+    updateFee,
     updateNotes,
     updateTerms,
     updateTemplate,
