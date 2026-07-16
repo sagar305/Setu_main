@@ -23,6 +23,10 @@
     {
       "id": "payment",
       "name": "Payment"
+    },
+    {
+      "id": "menu",
+      "name": "Menu"
     }
   ],
   "items": [
@@ -70,6 +74,29 @@
         "eyebrow": "Free Tool — UPI QR Generator",
         "headline": "Dynamic UPI QR Generator",
         "subheadline": "Generate custom UPI QR codes with amounts and notes — share instantly for quick payments."
+      }
+    },
+    {
+      "slug": "qr-menu-generator",
+      "name": "QR Menu Generator",
+      "category": "menu",
+      "icon": "qr-code",
+      "shortDescription": "Create a digital menu QR code — the whole menu is stored inside the QR, no hosting needed.",
+      "seo": {
+        "title": "Free QR Menu Generator | Digital Menu QR Code | Setu Technology",
+        "description": "Create a digital menu QR code for your restaurant. The whole menu is stored inside the QR code — no hosting, no subscription, no signup.",
+        "keywords": [
+          "QR menu generator",
+          "digital menu QR code",
+          "restaurant QR menu",
+          "free QR menu",
+          "contactless menu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — QR Menu Generator",
+        "headline": "QR Menu Generator",
+        "subheadline": "Build your menu, get a print-ready QR code — the entire menu lives inside the QR itself."
       }
     }
   ]

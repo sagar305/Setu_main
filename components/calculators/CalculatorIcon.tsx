@@ -21,6 +21,7 @@ import {
   Target,
   CircleDollarSign,
   Smartphone,
+  QrCode,
 } from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
@@ -44,6 +45,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   target: Target,
   "circle-dollar-sign": CircleDollarSign,
   smartphone: Smartphone,
+  "qr-code": QrCode,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {
