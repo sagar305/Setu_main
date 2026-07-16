@@ -194,8 +194,8 @@ export function InvoiceGeneratorTool() {
         <div className="sticky top-20 z-30 flex flex-wrap gap-3 rounded-lg bg-white/95 backdrop-blur-sm p-4 shadow-sm">
           <button
             onClick={handleExportPDF}
-            disabled={isExporting}
-            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
+            disabled={isExporting || !hasValidItems}
+            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Download className="h-4 w-4" />
             {isExporting ? "Generating PDF..." : "Download PDF"}

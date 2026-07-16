@@ -18,6 +18,11 @@ export async function exportInvoiceToPdf(
     // Wait for any dynamic content (like QR codes) to render
     await new Promise((resolve) => setTimeout(resolve, 500));
 
+    // Check if element is visible and has content
+    if (!element || element.offsetHeight === 0) {
+      throw new Error("Invoice preview is not visible or empty");
+    }
+
     // Capture the invoice element as canvas
     const canvas = await html2canvas(element, {
       scale,
@@ -26,7 +31,12 @@ export async function exportInvoiceToPdf(
       backgroundColor: "#ffffff",
       allowTaint: true,
       foreignObjectRendering: true,
+      windowHeight: element.scrollHeight,
     });
+
+    if (!canvas) {
+      throw new Error("Failed to capture invoice preview");
+    }
 
     // Get canvas dimensions
     const imgWidth = 210; // A4 width in mm
@@ -34,7 +44,7 @@ export async function exportInvoiceToPdf(
 
     // Create PDF
     const pdf = new jsPDF({
-      orientation: imgHeight > imgWidth ? "portrait" : "portrait",
+      orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
@@ -63,6 +73,7 @@ export async function exportInvoiceToPdf(
     return true;
   } catch (error) {
     console.error("Error generating PDF:", error);
-    throw new Error("Failed to generate PDF. Please try again.");
+    const message = error instanceof Error ? error.message : "Failed to generate PDF";
+    throw new Error(message || "Failed to generate PDF. Please try again.");
   }
 }
