@@ -31,6 +31,7 @@ const emptyForm: ProductInput = {
   categoryId: "",
   costPrice: null,
   taxRate: null,
+  taxInclusive: false,
   trackStock: false,
   stock: 0,
   unit: "",
@@ -68,6 +69,7 @@ function ProductFormModal({
         categoryId: editing.categoryId,
         costPrice: editing.costPrice,
         taxRate: editing.taxRate,
+        taxInclusive: editing.taxInclusive ?? false,
         trackStock: editing.trackStock,
         stock: editing.stock,
         unit: editing.unit,
@@ -267,6 +269,25 @@ function ProductFormModal({
             placeholder="Optional"
             className={inputClass}
           />
+        </Field>
+        <Field
+          label="Tax type"
+          hint={
+            form.taxInclusive
+              ? "Tax is part of the price and shown as “Incl. tax”"
+              : "Tax is added on top at checkout"
+          }
+        >
+          <select
+            value={form.taxInclusive ? "inclusive" : "exclusive"}
+            onChange={(event) =>
+              setForm((f) => ({ ...f, taxInclusive: event.target.value === "inclusive" }))
+            }
+            className={inputClass}
+          >
+            <option value="exclusive">Added on top (exclusive)</option>
+            <option value="inclusive">Included in price (inclusive)</option>
+          </select>
         </Field>
         <div>
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">

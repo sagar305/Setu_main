@@ -28,6 +28,7 @@ export type Product = {
   categoryId: string;
   costPrice: number | null;
   taxRate: number | null; // null = use default tax from settings
+  taxInclusive: boolean; // true = selling price already includes tax
   trackStock: boolean;
   stock: number;
   unit: string;
@@ -66,7 +67,8 @@ export type Order = {
   discountType: "flat" | "percent";
   discountValue: number;
   discountAmount: number;
-  taxAmount: number;
+  taxAmount: number; // tax added on top of the price
+  includedTaxAmount: number; // tax already contained in item prices
   total: number;
   paymentMethodId: string;
   paymentMethodName: string;
@@ -83,6 +85,7 @@ export type OrderItem = {
   quantity: number;
   unit: string;
   taxRate: number;
+  taxInclusive: boolean;
   lineSubtotal: number; // price * quantity, before discount/tax
 };
 
@@ -99,6 +102,8 @@ export type InventoryLog = {
   createdAt: string;
 };
 
+export type ReceiptPaperSize = "80mm" | "58mm" | "a4";
+
 export type PosSettings = {
   id: "main";
   invoicePrefix: string;
@@ -107,6 +112,7 @@ export type PosSettings = {
   defaultTaxRate: number;
   receiptFooter: string;
   showBusinessInfoOnReceipt: boolean;
+  receiptPaperSize: ReceiptPaperSize;
   lastBackupAt: string | null;
 };
 
@@ -117,6 +123,7 @@ export type CartLine = {
   quantity: number;
   unit: string;
   taxRate: number;
+  taxInclusive: boolean;
 };
 
 export const CURRENCIES = [
@@ -162,6 +169,7 @@ export const DEFAULT_SETTINGS: PosSettings = {
   defaultTaxRate: 0,
   receiptFooter: "Thank you for your business!",
   showBusinessInfoOnReceipt: true,
+  receiptPaperSize: "80mm",
   lastBackupAt: null,
 };
 

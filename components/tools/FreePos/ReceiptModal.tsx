@@ -3,7 +3,12 @@
 import { forwardRef, useRef, useState } from "react";
 import { Download, Printer } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
-import { formatMoney, type Order, type OrderItem } from "@/lib/pos/types";
+import {
+  formatMoney,
+  type Order,
+  type OrderItem,
+  type ReceiptPaperSize,
+} from "@/lib/pos/types";
 import { exportReceiptToPdf } from "@/lib/pos/receiptPdf";
 import { Modal, primaryBtnClass, secondaryBtnClass } from "./ui";
 
@@ -106,6 +111,12 @@ export const ReceiptView = forwardRef<
           <span>{formatMoney(order.taxAmount, currency)}</span>
         </div>
       )}
+      {(order.includedTaxAmount ?? 0) > 0 && (
+        <div style={row("", "")}>
+          <span>Incl. tax</span>
+          <span>{formatMoney(order.includedTaxAmount, currency)}</span>
+        </div>
+      )}
       <div style={{ ...row("", "", true), marginTop: 4 }}>
         <span>TOTAL</span>
         <span>{formatMoney(order.total, currency)}</span>
@@ -124,15 +135,32 @@ export const ReceiptView = forwardRef<
   );
 });
 
+// Printable content width per paper size. Thermal rolls get a page exactly
+// as wide as the roll (with a small side gutter) and as tall as the receipt,
+// so drivers like Epson TM-series print continuously instead of onto A4.
+const PAPER_CONFIG: Record<ReceiptPaperSize, { pageWidthMm: number | null; contentWidthMm: number }> = {
+  "80mm": { pageWidthMm: 80, contentWidthMm: 72 },
+  "58mm": { pageWidthMm: 58, contentWidthMm: 52 },
+  a4: { pageWidthMm: null, contentWidthMm: 76 },
+};
+
+const MM_TO_PX = 96 / 25.4;
+
 /** Print the receipt through a hidden iframe so only the receipt prints. */
-function printReceipt(receiptEl: HTMLElement) {
+function printReceipt(receiptEl: HTMLElement, paperSize: ReceiptPaperSize) {
+  const paper = PAPER_CONFIG[paperSize] ?? PAPER_CONFIG["80mm"];
+
   const iframe = document.createElement("iframe");
   iframe.style.position = "fixed";
   iframe.style.right = "0";
   iframe.style.bottom = "0";
-  iframe.style.width = "0";
-  iframe.style.height = "0";
+  // Give the iframe the real content width so the height we measure below
+  // matches the printed layout; keep it invisible.
+  iframe.style.width = `${Math.ceil(paper.contentWidthMm * MM_TO_PX)}px`;
+  iframe.style.height = "10px";
   iframe.style.border = "0";
+  iframe.style.visibility = "hidden";
+  iframe.setAttribute("aria-hidden", "true");
   document.body.appendChild(iframe);
 
   const doc = iframe.contentDocument;
@@ -142,7 +170,15 @@ function printReceipt(receiptEl: HTMLElement) {
   }
   doc.open();
   doc.write(
-    `<!doctype html><html><head><title>Receipt</title><style>@page{margin:6mm}body{margin:0}</style></head><body>${receiptEl.outerHTML}</body></html>`
+    `<!doctype html><html><head><title>Receipt</title><style>
+      html, body { margin: 0; padding: 0; }
+      body > div {
+        box-sizing: border-box;
+        width: ${paper.contentWidthMm}mm !important;
+        max-width: ${paper.contentWidthMm}mm !important;
+        margin: 0 auto !important;
+      }
+    </style></head><body>${receiptEl.outerHTML}</body></html>`
   );
   doc.close();
 
@@ -151,6 +187,21 @@ function printReceipt(receiptEl: HTMLElement) {
   };
   iframe.onload = () => {
     try {
+      // Measure the laid-out receipt and size the page to match, so thermal
+      // printers feed exactly one receipt length instead of an A4 sheet.
+      const contentHeightPx = Math.max(
+        doc.body.scrollHeight,
+        doc.documentElement.scrollHeight
+      );
+      const pageStyle = doc.createElement("style");
+      if (paper.pageWidthMm) {
+        const heightMm = Math.ceil(contentHeightPx / MM_TO_PX) + 8;
+        pageStyle.textContent = `@page { size: ${paper.pageWidthMm}mm ${heightMm}mm; margin: 0; }`;
+      } else {
+        pageStyle.textContent = `@page { size: A4; margin: 12mm; }`;
+      }
+      doc.head.appendChild(pageStyle);
+
       iframe.contentWindow?.focus();
       iframe.contentWindow?.print();
     } finally {
@@ -171,20 +222,25 @@ export function ReceiptModal({
   onClose: () => void;
   title?: string;
 }) {
-  const { orderItems } = usePos();
+  const { orderItems, settings } = usePos();
   const receiptRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
 
   if (!order) return null;
   const items = orderItems.filter((item) => item.orderId === order.id);
+  const paperSize = settings.receiptPaperSize ?? "80mm";
 
   const handleDownload = async () => {
     if (!receiptRef.current) return;
     setError("");
     setDownloading(true);
     try {
-      await exportReceiptToPdf(receiptRef.current, order.invoiceNumber);
+      await exportReceiptToPdf(
+        receiptRef.current,
+        order.invoiceNumber,
+        paperSize === "58mm" ? 58 : 80
+      );
     } catch {
       setError("Could not generate the PDF. Please try again.");
     } finally {
@@ -207,7 +263,7 @@ export function ReceiptModal({
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <button
           type="button"
-          onClick={() => receiptRef.current && printReceipt(receiptRef.current)}
+          onClick={() => receiptRef.current && printReceipt(receiptRef.current, paperSize)}
           className={`${primaryBtnClass} flex-1`}
         >
           <Printer className="h-4 w-4" />

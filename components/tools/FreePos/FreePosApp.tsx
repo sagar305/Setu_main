@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BarChart3,
   LayoutDashboard,
+  Maximize2,
+  Minimize2,
   Package,
   Receipt,
   Search,
@@ -166,7 +168,13 @@ function GlobalSearch({ onNavigate }: { onNavigate: NavigateFn }) {
   );
 }
 
-function PosShell() {
+function PosShell({
+  fullscreen,
+  onToggleFullscreen,
+}: {
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+}) {
   const { business } = usePos();
   const [screen, setScreen] = useState<ScreenId>("dashboard");
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
@@ -206,7 +214,18 @@ function PosShell() {
             </span>
           )}
         </div>
-        <GlobalSearch onNavigate={navigate} />
+        <div className="flex items-center gap-2">
+          <GlobalSearch onNavigate={navigate} />
+          <button
+            type="button"
+            onClick={onToggleFullscreen}
+            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
+            title={fullscreen ? "Exit full screen" : "Full screen POS"}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
+          >
+            {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
 
       <nav
@@ -259,7 +278,13 @@ function PosShell() {
   );
 }
 
-function PosRouter() {
+function PosRouter({
+  fullscreen,
+  onToggleFullscreen,
+}: {
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+}) {
   const { status, errorMessage } = usePos();
 
   if (status === "loading") {
@@ -282,10 +307,12 @@ function PosRouter() {
   }
   if (status === "welcome") return <WelcomeScreen />;
   if (status === "setup") return <SetupScreen />;
-  return <PosShell />;
+  return <PosShell fullscreen={fullscreen} onToggleFullscreen={onToggleFullscreen} />;
 }
 
 export function FreePosApp() {
+  const [fullscreen, setFullscreen] = useState(false);
+
   // Cache the page for offline use once the browser is idle.
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") return;
@@ -295,10 +322,51 @@ export function FreePosApp() {
     });
   }, []);
 
+  const toggleFullscreen = () => {
+    const next = !fullscreen;
+    setFullscreen(next);
+    // Also ask the browser for real full screen (hides its chrome) where
+    // supported; the fixed overlay below works even where it isn't (iOS).
+    try {
+      if (next) {
+        document.documentElement.requestFullscreen?.()?.catch?.(() => {});
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen?.()?.catch?.(() => {});
+      }
+    } catch {
+      // Full screen is best-effort.
+    }
+  };
+
+  // Leaving browser full screen (e.g. via Esc) also leaves POS full screen.
+  useEffect(() => {
+    const onChange = () => {
+      if (!document.fullscreenElement) setFullscreen(false);
+    };
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  // Stop the page behind the overlay from scrolling.
+  useEffect(() => {
+    if (!fullscreen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [fullscreen]);
+
   return (
     <PosProvider>
-      <div className="rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6">
-        <PosRouter />
+      <div
+        className={
+          fullscreen
+            ? "pos-fullscreen fixed inset-0 z-[60] overflow-y-auto bg-cream-paper p-4 sm:p-6"
+            : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
+        }
+      >
+        <PosRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
       </div>
     </PosProvider>
   );

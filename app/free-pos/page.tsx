@@ -68,7 +68,7 @@ const faqSchema = {
       name: "Can I print receipts on a thermal printer?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Receipts are formatted for 80mm thermal printers and also print fine on normal printers. You can also download any receipt as a PDF.",
+        text: "Yes. Receipts print on 80mm and 58mm thermal roll printers (like Epson TM series) as well as regular A4 printers — pick your paper size in Settings. You can also download any receipt as a PDF.",
       },
     },
     {

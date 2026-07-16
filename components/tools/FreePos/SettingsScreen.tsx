@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Download, Plus, Trash2, Upload } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
-import { CURRENCIES, formatInvoiceNumber } from "@/lib/pos/types";
+import { CURRENCIES, formatInvoiceNumber, type ReceiptPaperSize } from "@/lib/pos/types";
 import {
   ConfirmDialog,
   Field,
@@ -102,6 +102,7 @@ export function SettingsScreen() {
   const [taxRateText, setTaxRateText] = useState(String(settings.defaultTaxRate));
   const [footer, setFooter] = useState(settings.receiptFooter);
   const [showBusinessInfo, setShowBusinessInfo] = useState(settings.showBusinessInfoOnReceipt);
+  const [paperSize, setPaperSize] = useState<ReceiptPaperSize>(settings.receiptPaperSize);
   const [posError, setPosError] = useState("");
   const [posSaved, setPosSaved] = useState(false);
 
@@ -112,6 +113,7 @@ export function SettingsScreen() {
     setTaxRateText(String(settings.defaultTaxRate));
     setFooter(settings.receiptFooter);
     setShowBusinessInfo(settings.showBusinessInfoOnReceipt);
+    setPaperSize(settings.receiptPaperSize ?? "80mm");
   }, [settings]);
 
   const savePosSettings = async () => {
@@ -133,6 +135,7 @@ export function SettingsScreen() {
       defaultTaxRate: taxRate,
       receiptFooter: footer,
       showBusinessInfoOnReceipt: showBusinessInfo,
+      receiptPaperSize: paperSize,
     });
     setPosSaved(true);
     setTimeout(() => setPosSaved(false), 2000);
@@ -300,6 +303,20 @@ export function SettingsScreen() {
               placeholder="Thank you for your business!"
               className={inputClass}
             />
+          </Field>
+          <Field
+            label="Receipt paper size"
+            hint="Pick your printer's roll width — used when printing receipts"
+          >
+            <select
+              value={paperSize}
+              onChange={(event) => setPaperSize(event.target.value as ReceiptPaperSize)}
+              className={inputClass}
+            >
+              <option value="80mm">Thermal 80mm (Epson TM &amp; most receipt printers)</option>
+              <option value="58mm">Thermal 58mm (compact printers)</option>
+              <option value="a4">A4 / regular printer</option>
+            </select>
           </Field>
           <label className="flex items-center gap-2 sm:col-span-2">
             <input

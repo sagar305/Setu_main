@@ -46,6 +46,7 @@ export type ProductInput = {
   categoryId: string;
   costPrice: number | null;
   taxRate: number | null;
+  taxInclusive: boolean;
   trackStock: boolean;
   stock: number;
   unit: string;
@@ -161,7 +162,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setOrderItems(orderItemRows);
     setPayments(paymentRows.sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
     setInventoryLogs(inventoryRows.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
-    setSettings(settingsRows.find((s) => s.id === "main") ?? DEFAULT_SETTINGS);
+    // Merge with defaults so records saved by older versions pick up new fields.
+    const storedSettings = settingsRows.find((s) => s.id === "main");
+    setSettings(storedSettings ? { ...DEFAULT_SETTINGS, ...storedSettings } : DEFAULT_SETTINGS);
 
     return loadedBusiness;
   }, []);
@@ -464,6 +467,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         discountValue: input.discountValue,
         discountAmount: totals.discountAmount,
         taxAmount: totals.taxAmount,
+        includedTaxAmount: totals.includedTaxAmount,
         total: totals.total,
         paymentMethodId: paymentMethod.id,
         paymentMethodName: paymentMethod.name,
@@ -480,6 +484,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         quantity: line.quantity,
         unit: line.unit,
         taxRate: line.taxRate,
+        taxInclusive: line.taxInclusive,
         lineSubtotal: Math.round(line.price * line.quantity * 100) / 100,
       }));
 

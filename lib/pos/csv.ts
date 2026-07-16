@@ -39,7 +39,7 @@ export function downloadCsv(filename: string, csv: string): void {
 export function productsCsv(products: Product[], categories: Category[]): string {
   const categoryName = (id: string) => categories.find((c) => c.id === id)?.name ?? "";
   return toCsv(
-    ["Name", "SKU", "Barcode", "Category", "Selling Price", "Cost Price", "Tax %", "Stock", "Unit", "Description"],
+    ["Name", "SKU", "Barcode", "Category", "Selling Price", "Cost Price", "Tax %", "Tax Type", "Stock", "Unit", "Description"],
     products.map((p) => [
       p.name,
       p.sku,
@@ -48,6 +48,7 @@ export function productsCsv(products: Product[], categories: Category[]): string
       p.sellingPrice,
       p.costPrice ?? "",
       p.taxRate ?? "",
+      p.taxInclusive ? "inclusive" : "exclusive",
       p.trackStock ? p.stock : "",
       p.unit,
       p.description,
@@ -64,7 +65,7 @@ export function customersCsv(customers: Customer[]): string {
 
 export function ordersCsv(orders: Order[]): string {
   return toCsv(
-    ["Invoice Number", "Date", "Customer", "Subtotal", "Discount", "Tax", "Total", "Payment Method", "Status"],
+    ["Invoice Number", "Date", "Customer", "Subtotal", "Discount", "Tax", "Included Tax", "Total", "Payment Method", "Status"],
     orders.map((o) => [
       o.invoiceNumber,
       new Date(o.date).toLocaleString(),
@@ -72,6 +73,7 @@ export function ordersCsv(orders: Order[]): string {
       o.subtotal,
       o.discountAmount,
       o.taxAmount,
+      o.includedTaxAmount ?? 0,
       o.total,
       o.paymentMethodName,
       o.status,

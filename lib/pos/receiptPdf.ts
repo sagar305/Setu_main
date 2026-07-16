@@ -2,13 +2,15 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 /**
- * Capture a rendered receipt element and download it as a PDF sized like an
- * 80mm thermal receipt (dynamic height). Uses the same html2canvas approach
- * as the invoice generator so currency glyphs (₹) render correctly.
+ * Capture a rendered receipt element and download it as a PDF sized like a
+ * thermal receipt (dynamic height, 80mm by default). Uses the same
+ * html2canvas approach as the invoice generator so currency glyphs (₹)
+ * render correctly.
  */
 export async function exportReceiptToPdf(
   element: HTMLElement,
-  invoiceNumber: string
+  invoiceNumber: string,
+  widthMm = 80
 ): Promise<void> {
   if (!element || element.offsetHeight === 0) {
     throw new Error("Receipt is not visible or empty.");
@@ -25,7 +27,6 @@ export async function exportReceiptToPdf(
     windowHeight: element.scrollHeight,
   });
 
-  const widthMm = 80;
   const heightMm = (canvas.height * widthMm) / canvas.width;
 
   const pdf = new jsPDF({

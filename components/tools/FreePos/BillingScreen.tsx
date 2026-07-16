@@ -67,6 +67,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           quantity: 1,
           unit: product.unit,
           taxRate: effectiveTaxRate(product),
+          taxInclusive: product.taxInclusive ?? false,
         },
       ];
     });
@@ -241,7 +242,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       </div>
 
       {/* Cart */}
-      <div className="min-w-0 h-fit rounded-2xl border border-muted-line/30 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+      <div className="pos-cart-sticky min-w-0 h-fit rounded-2xl border border-muted-line/30 bg-white p-5 shadow-sm lg:sticky lg:top-24">
         <h3 className="flex items-center gap-2 text-base font-bold text-ink">
           <ShoppingCart className="h-5 w-5 text-indigo" />
           Cart
@@ -264,7 +265,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                   <p className="truncate text-sm font-semibold text-ink">{line.name}</p>
                   <p className="text-xs text-muted">
                     {formatMoney(line.price, currency)}
-                    {line.taxRate > 0 && ` · ${line.taxRate}% tax`}
+                    {line.taxRate > 0 &&
+                      ` · ${line.taxRate}% tax${line.taxInclusive ? " incl." : ""}`}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
@@ -381,10 +383,16 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                   <dd>-{formatMoney(totals.discountAmount, currency)}</dd>
                 </div>
               )}
-              {settings.taxEnabled && (
+              {settings.taxEnabled && totals.taxAmount > 0 && (
                 <div className="flex justify-between text-muted">
                   <dt>Tax</dt>
                   <dd>{formatMoney(totals.taxAmount, currency)}</dd>
+                </div>
+              )}
+              {totals.includedTaxAmount > 0 && (
+                <div className="flex justify-between text-muted">
+                  <dt>Incl. tax</dt>
+                  <dd>{formatMoney(totals.includedTaxAmount, currency)}</dd>
                 </div>
               )}
               <div className="flex justify-between border-t border-muted-line/20 pt-2 text-base font-bold text-ink">
