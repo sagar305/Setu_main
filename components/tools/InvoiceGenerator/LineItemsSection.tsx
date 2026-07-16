@@ -54,10 +54,10 @@ export function LineItemsSection({
                 key={item.id}
                 className="rounded-lg border border-muted-line/20 bg-white p-4 sm:p-6"
               >
-                {/* First Row: Description (Full Width) */}
+                {/* First Row: Item Description (Full Width) */}
                 <div className="mb-4">
                   <label className="mb-2 block text-xs font-semibold text-ink">
-                    Description *
+                    Item Description
                   </label>
                   <input
                     type="text"

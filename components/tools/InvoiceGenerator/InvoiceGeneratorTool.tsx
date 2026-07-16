@@ -167,6 +167,8 @@ export function InvoiceGeneratorTool() {
     }
   };
 
+  const hasValidItems = data.lineItems.some(item => item.description.trim() !== "");
+
   if (!isLoaded) {
     return (
       <div className="flex h-64 items-center justify-center">
@@ -204,7 +206,8 @@ export function InvoiceGeneratorTool() {
               handlePrint();
               clearUnlockedFields();
             }}
-            className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100"
+            disabled={!hasValidItems}
+            className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100 disabled:cursor-not-allowed disabled:opacity-50"
             title="Print invoice and clear unlocked fields for next invoice"
           >
             <Printer className="h-4 w-4" />
@@ -213,7 +216,8 @@ export function InvoiceGeneratorTool() {
 
           <button
             onClick={clearUnlockedFields}
-            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700"
+            disabled={!hasValidItems}
+            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
             title="Clear unlocked fields and prepare for next invoice"
           >
             <ChevronRight className="h-4 w-4" />

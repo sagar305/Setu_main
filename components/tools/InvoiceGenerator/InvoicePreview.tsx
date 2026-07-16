@@ -10,11 +10,17 @@ interface InvoicePreviewProps {
 }
 
 export function InvoicePreview({ data }: InvoicePreviewProps) {
+  // Filter out items without description
+  const filteredData = {
+    ...data,
+    lineItems: data.lineItems.filter(item => item.description.trim() !== "")
+  };
+
   return (
     <div className="w-full">
-      {data.template === "classic" && <ClassicTemplate data={data} />}
-      {data.template === "modern" && <ModernTemplate data={data} />}
-      {data.template === "colorful" && <ColorfulTemplate data={data} />}
+      {filteredData.template === "classic" && <ClassicTemplate data={filteredData} />}
+      {filteredData.template === "modern" && <ModernTemplate data={filteredData} />}
+      {filteredData.template === "colorful" && <ColorfulTemplate data={filteredData} />}
     </div>
   );
 }
