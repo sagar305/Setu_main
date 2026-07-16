@@ -209,7 +209,7 @@ export function generateUPIUrl(
   }
 
   if (amount && amount > 0) {
-    params.set("am", Math.round(amount * 100) / 100); // Ensure 2 decimal places
+    params.set("am", String(Math.round(amount * 100) / 100)); // Ensure 2 decimal places
   }
 
   if (notes) {
