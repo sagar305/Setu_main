@@ -2,6 +2,7 @@ export async function shareViaWeb(data: {
   title: string;
   text: string;
   url?: string;
+  files?: File[];
 }): Promise<boolean> {
   if (!navigator.share) {
     return false;

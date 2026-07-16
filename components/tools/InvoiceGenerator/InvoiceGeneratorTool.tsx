@@ -14,7 +14,7 @@ import { TemplateSelector } from "./TemplateSelector";
 import { AccordionSection } from "./AccordionSection";
 import { ShareButton } from "@/components/tools/ShareButton";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
-import { exportInvoiceToPdf } from "@/lib/pdf/exportInvoiceToPdf";
+import { exportInvoiceToPdf, generateInvoicePdfBlob } from "@/lib/pdf/exportInvoiceToPdf";
 
 export function InvoiceGeneratorTool() {
   const {
@@ -185,6 +185,30 @@ export function InvoiceGeneratorTool() {
     }
   };
 
+  const generateShareFiles = async () => {
+    try {
+      const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
+      const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
+      const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
+
+      if (!visiblePreview) {
+        return [];
+      }
+
+      const pdfBlob = await generateInvoicePdfBlob(data, visiblePreview);
+      if (!pdfBlob || pdfBlob.size === 0) {
+        return [];
+      }
+
+      const fileName = `Invoice-${data.invoiceDetails.number}.pdf`;
+      const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+      return [file];
+    } catch (err) {
+      console.error("Error generating share files:", err);
+      return [];
+    }
+  };
+
   const hasValidItems = data.lineItems.some(item => item.description.trim() !== "");
 
   if (!isLoaded) {
@@ -244,8 +268,9 @@ export function InvoiceGeneratorTool() {
 
             <ShareButton
               title={`Invoice ${data.invoiceDetails.number}`}
-              text={`Invoice #${data.invoiceDetails.number} for ${data.businessDetails.name} - Amount: ₹${(data.lineItems.reduce((sum, item) => sum + item.quantity * item.rate, 0)).toFixed(2)}`}
+              text={`Invoice #${data.invoiceDetails.number} from ${data.businessDetails.name}`}
               invoiceNumber={data.invoiceDetails.number}
+              generateFiles={generateShareFiles}
             />
           </div>
 

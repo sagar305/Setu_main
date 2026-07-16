@@ -65,6 +65,49 @@ export function UpiQrGeneratorTool() {
     img.src = "data:image/svg+xml;base64," + btoa(svgData);
   };
 
+  const generateShareFiles = async () => {
+    try {
+      const qrElement = document.querySelector('[data-qr="upi"]') as HTMLElement;
+      if (!qrElement) return [];
+
+      const svg = qrElement.querySelector("svg");
+      if (!svg) return [];
+
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return [];
+
+      const img = new Image();
+      canvas.width = 300;
+      canvas.height = 300;
+
+      return new Promise<File[]>((resolve) => {
+        img.onload = () => {
+          ctx.fillStyle = "white";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const file = new File([blob], `upi-qr-${Date.now()}.png`, {
+                type: "image/png",
+              });
+              resolve([file]);
+            } else {
+              resolve([]);
+            }
+          }, "image/png");
+        };
+
+        img.src = "data:image/svg+xml;base64," + btoa(svgData);
+      });
+    } catch (err) {
+      console.error("Error generating QR share file:", err);
+      return [];
+    }
+  };
+
   return (
     <div className="mx-auto max-w-2xl px-6 py-8">
       <div className="space-y-8">
@@ -196,6 +239,7 @@ export function UpiQrGeneratorTool() {
                 <ShareButton
                   title="UPI QR Code"
                   text={`Send money via UPI: ${upiUrl}`}
+                  generateFiles={generateShareFiles}
                 />
               </div>
 

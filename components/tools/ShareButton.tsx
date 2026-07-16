@@ -9,6 +9,7 @@ interface ShareButtonProps {
   text: string;
   invoiceNumber?: string;
   phoneNumber?: string;
+  generateFiles?: () => Promise<File[]>;
 }
 
 export function ShareButton({
@@ -16,19 +17,41 @@ export function ShareButton({
   text,
   invoiceNumber,
   phoneNumber,
+  generateFiles,
 }: ShareButtonProps) {
   const [isSupported, setIsSupported] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setIsSupported(canShare());
+    // Check if device is mobile/tablet (less than 1024px width)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const handleWebShare = async () => {
-    const success = await shareViaWeb({
+    const shareData: any = {
       title,
       text,
-    });
+    };
+
+    if (generateFiles) {
+      try {
+        const files = await generateFiles();
+        if (files && files.length > 0) {
+          shareData.files = files;
+        }
+      } catch (err) {
+        console.error("Failed to generate share files:", err);
+      }
+    }
+
+    const success = await shareViaWeb(shareData);
     if (success) {
       setShowMenu(false);
     }
@@ -46,7 +69,7 @@ export function ShareButton({
     setShowMenu(false);
   };
 
-  if (!isSupported) {
+  if (!isSupported || !isMobile) {
     return null;
   }
 

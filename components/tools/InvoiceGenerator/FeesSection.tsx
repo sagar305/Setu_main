@@ -11,9 +11,9 @@ interface FeesSectionProps {
 }
 
 const parseNumericInput = (value: string): number => {
-  if (!value || value === ".") return 0;
+  if (!value || value === "." || value === "-") return 0;
   const num = parseFloat(value);
-  return Number.isFinite(num) && num >= 0 ? Math.round(num * 100) / 100 : 0;
+  return Number.isFinite(num) ? Math.round(num * 100) / 100 : 0;
 };
 
 const formatNumericDisplay = (value: number | null | undefined): string => {
@@ -107,7 +107,7 @@ export function FeesSection({
                       defaultValue={formatNumericDisplay(fee.amount)}
                       onChange={(e) => {
                         const val = e.target.value;
-                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const cleaned = val.replace(/[^0-9.-]/g, "");
                         const parts = cleaned.split(".");
                         let valid =
                           parts.length > 2
@@ -124,9 +124,9 @@ export function FeesSection({
                       }}
                       onBlur={(e) => {
                         const val = e.target.value;
-                        const cleaned = val.replace(/[^0-9.]/g, "");
+                        const cleaned = val.replace(/[^0-9.-]/g, "");
 
-                        if (cleaned === "" || cleaned === ".") {
+                        if (cleaned === "" || cleaned === "." || cleaned === "-") {
                           onUpdateFee(fee.id, { amount: 0 });
                           e.currentTarget.value = "";
                         } else {
