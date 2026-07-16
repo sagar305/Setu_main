@@ -12,7 +12,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
   const amountWords = amountInWordsIndian(totals.grandTotal);
 
   return (
-    <div className="bg-white text-sm" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div className="bg-white text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
       {/* Header with Brand Color */}
       <div className="flex items-center gap-6 p-8" style={{ backgroundColor: data.brandColor, color: "white" }}>
         {data.businessDetails.logo && (

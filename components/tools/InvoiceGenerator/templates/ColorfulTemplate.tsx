@@ -30,7 +30,7 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
   const lightBgColor = adjustBrightness(data.brandColor, 15);
 
   return (
-    <div className="bg-white text-sm" style={{ fontFamily: "Georgia, serif" }}>
+    <div className="bg-white text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
       {/* Colorful Header */}
       <div className="relative overflow-hidden p-8" style={{ backgroundColor: data.brandColor }}>
         <div

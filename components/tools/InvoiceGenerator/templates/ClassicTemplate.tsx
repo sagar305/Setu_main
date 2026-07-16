@@ -12,7 +12,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
   const amountWords = amountInWordsIndian(totals.grandTotal);
 
   return (
-    <div className="bg-white p-8 font-serif text-sm" style={{ fontFamily: "Georgia, serif" }}>
+    <div className="bg-white p-8 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
       {/* Header */}
       <div className="mb-8 flex items-start justify-between border-b-2 border-black pb-4">
         <div className="flex items-center gap-4">
