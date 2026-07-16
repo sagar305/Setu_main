@@ -1,10 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { Download, Copy, Check } from "lucide-react";
+import { useRef, useState } from "react";
+import { Download, Copy, Check, Upload, X } from "lucide-react";
 import { isValidUPIId, generateUPIUrl } from "@/lib/upi";
 import { UPIQRCode } from "../UpiQrGenerator/UPIQRCode";
 import { ShareButton } from "@/components/tools/ShareButton";
+
+const SETU_LOGO_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><rect width="120" height="120" rx="20" fill="#ECEAE3"/><path d="M18 98 L18 56 C18 40 28 31 46 31 L74 31 C92 31 102 40 102 56 L102 98" fill="none" stroke="#26306B" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+const SETU_LOGO_DATA_URL = `data:image/svg+xml,${encodeURIComponent(SETU_LOGO_SVG)}`;
+
+const loadImage = (src: string) =>
+  new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error("Failed to load image"));
+    img.src = src;
+  });
 
 export function UpiQrGeneratorTool() {
   const [upiId, setUpiId] = useState("");
@@ -12,6 +25,8 @@ export function UpiQrGeneratorTool() {
   const [notes, setNotes] = useState("");
   const [upiIdError, setUpiIdError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [logo, setLogo] = useState<string | null>(SETU_LOGO_DATA_URL);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const isUPIValid = upiId.trim() && isValidUPIId(upiId);
   const upiUrl = isUPIValid ? generateUPIUrl(upiId, amount ? parseFloat(amount) : 0, notes) : "";
@@ -35,79 +50,112 @@ export function UpiQrGeneratorTool() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadQR = () => {
-    const qrElement = document.querySelector('[data-qr="upi"]') as HTMLElement;
-    if (!qrElement) return;
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    const svg = qrElement.querySelector("svg");
-    if (!svg) return;
+    if (!file.type.startsWith("image/")) {
+      alert("Please choose an image file (PNG, JPG, or SVG).");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Logo image must be smaller than 2 MB.");
+      return;
+    }
 
-    const svgData = new XMLSerializer().serializeToString(svg);
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setLogo(reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+
+    // Allow re-selecting the same file later
+    e.target.value = "";
+  };
+
+  // Draws the QR code (and centered logo, if set) onto a 300x300 canvas.
+  // Shared by the download and share paths so both include the logo.
+  const renderQrCanvas = async (): Promise<HTMLCanvasElement | null> => {
+    const qrElement = document.querySelector('[data-qr="upi"]') as HTMLElement | null;
+    const svg = qrElement?.querySelector("svg");
+    if (!svg) return null;
+
     const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const img = new Image();
     canvas.width = 300;
     canvas.height = 300;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return null;
 
-    img.onload = () => {
+    try {
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const qrImg = await loadImage("data:image/svg+xml;base64," + btoa(svgData));
+
       ctx.fillStyle = "white";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(qrImg, 0, 0, canvas.width, canvas.height);
 
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = `upi-qr-${Date.now()}.png`;
-      link.click();
-    };
+      if (logo) {
+        const logoImg = await loadImage(logo);
 
-    img.src = "data:image/svg+xml;base64," + btoa(svgData);
+        // White rounded backdrop so the logo stays readable over QR modules
+        const box = 76;
+        const radius = 10;
+        const x = (canvas.width - box) / 2;
+        const y = (canvas.height - box) / 2;
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + box, y, x + box, y + box, radius);
+        ctx.arcTo(x + box, y + box, x, y + box, radius);
+        ctx.arcTo(x, y + box, x, y, radius);
+        ctx.arcTo(x, y, x + box, y, radius);
+        ctx.closePath();
+        ctx.fill();
+
+        // Fit the logo inside the backdrop, keeping its aspect ratio
+        const inner = 62;
+        const naturalW = logoImg.width || inner;
+        const naturalH = logoImg.height || inner;
+        const ratio = Math.min(inner / naturalW, inner / naturalH);
+        const w = naturalW * ratio;
+        const h = naturalH * ratio;
+        ctx.drawImage(logoImg, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+      }
+
+      return canvas;
+    } catch (err) {
+      console.error("Failed to render QR canvas:", err);
+      return null;
+    }
+  };
+
+  const handleDownloadQR = async () => {
+    const canvas = await renderQrCanvas();
+    if (!canvas) return;
+
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = `upi-qr-${Date.now()}.png`;
+    link.click();
   };
 
   const generateShareFiles = async () => {
-    try {
-      const qrElement = document.querySelector('[data-qr="upi"]') as HTMLElement;
-      if (!qrElement) return [];
+    const canvas = await renderQrCanvas();
+    if (!canvas) return [];
 
-      const svg = qrElement.querySelector("svg");
-      if (!svg) return [];
-
-      const svgData = new XMLSerializer().serializeToString(svg);
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return [];
-
-      const img = new Image();
-      canvas.width = 300;
-      canvas.height = 300;
-
-      return new Promise<File[]>((resolve) => {
-        img.onload = () => {
-          ctx.fillStyle = "white";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0);
-
-          canvas.toBlob((blob) => {
-            if (blob) {
-              const file = new File([blob], `upi-qr-${Date.now()}.png`, {
-                type: "image/png",
-              });
-              resolve([file]);
-            } else {
-              resolve([]);
-            }
-          }, "image/png");
-        };
-
-        img.onerror = () => resolve([]);
-
-        img.src = "data:image/svg+xml;base64," + btoa(svgData);
-      });
-    } catch (err) {
-      console.error("Error generating QR share file:", err);
-      return [];
-    }
+    return new Promise<File[]>((resolve) => {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          resolve([
+            new File([blob], `upi-qr-${Date.now()}.png`, { type: "image/png" }),
+          ]);
+        } else {
+          resolve([]);
+        }
+      }, "image/png");
+    });
   };
 
   return (
@@ -177,6 +225,63 @@ export function UpiQrGeneratorTool() {
               />
               <p className="mt-1 text-xs text-muted">{notes.length}/80 characters</p>
             </div>
+
+            {/* Logo Picker */}
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-ink">
+                Logo on QR (Optional)
+              </label>
+              <div className="flex items-center gap-3">
+                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-muted-line/40 bg-white p-1.5">
+                  {logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={logo}
+                      alt="QR logo"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-[10px] text-muted">No logo</span>
+                  )}
+                </div>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="hidden"
+                />
+
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
+                >
+                  <Upload className="h-4 w-4" />
+                  {logo ? "Replace Logo" : "Upload Logo"}
+                </button>
+
+                {logo ? (
+                  <button
+                    onClick={() => setLogo(null)}
+                    className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100"
+                  >
+                    <X className="h-4 w-4" />
+                    Remove
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setLogo(SETU_LOGO_DATA_URL)}
+                    className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs font-semibold text-ink transition hover:bg-cream"
+                  >
+                    Use Setu Logo
+                  </button>
+                )}
+              </div>
+              <p className="mt-1 text-xs text-muted">
+                Shown at the center of your QR code. Upload your business logo or remove it.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -188,7 +293,12 @@ export function UpiQrGeneratorTool() {
                 <h3 className="mb-4 text-lg font-semibold text-ink">Your QR Code</h3>
                 <div className="flex justify-center rounded-lg bg-gray-50 p-8">
                   <div data-qr="upi">
-                    <UPIQRCode upiId={upiId} amount={amount ? parseFloat(amount) : undefined} />
+                    <UPIQRCode
+                      upiId={upiId}
+                      amount={amount ? parseFloat(amount) : undefined}
+                      notes={notes}
+                      logo={logo}
+                    />
                   </div>
                 </div>
               </div>
@@ -240,15 +350,9 @@ export function UpiQrGeneratorTool() {
                 </button>
                 <ShareButton
                   title="UPI QR Code"
-                  text={`Send money via UPI: ${upiUrl}`}
+                  text={`Scan this QR code to pay ${upiId} via UPI`}
                   generateFiles={generateShareFiles}
                 />
-              </div>
-
-              {/* UPI URL Display */}
-              <div className="rounded-lg bg-gray-50 p-3">
-                <p className="mb-1 text-xs font-semibold text-muted">UPI Deep Link</p>
-                <p className="break-all text-xs text-ink font-mono">{upiUrl}</p>
               </div>
             </div>
           </div>
