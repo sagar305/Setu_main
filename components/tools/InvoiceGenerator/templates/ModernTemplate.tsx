@@ -142,7 +142,9 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               </div>
             )}
 
-            {Object.entries(totals.taxByRate).map(([rate, amount]) => (
+            {Object.entries(totals.taxByRate)
+              .filter(([_, amount]) => amount > 0)
+              .map(([rate, amount]) => (
               <div key={rate} className="mb-2 flex justify-between border-b py-2 text-sm">
                 <span>Tax @ {rate}%</span>
                 <span className="font-semibold">{formatCurrency(amount)}</span>

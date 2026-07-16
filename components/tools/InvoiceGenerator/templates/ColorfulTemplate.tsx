@@ -182,7 +182,9 @@ export function ColorfulTemplate({ data }: ColorfulTemplateProps) {
               </div>
             )}
 
-            {Object.entries(totals.taxByRate).map(([rate, amount]) => (
+            {Object.entries(totals.taxByRate)
+              .filter(([_, amount]) => amount > 0)
+              .map(([rate, amount]) => (
               <div key={rate} className="mb-2 flex justify-between border-b py-2 text-sm">
                 <span className="opacity-80">Tax @ {rate}%</span>
                 <span className="font-bold">{formatCurrency(amount)}</span>

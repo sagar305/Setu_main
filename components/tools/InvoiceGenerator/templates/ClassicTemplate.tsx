@@ -112,7 +112,9 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             </div>
           )}
 
-          {Object.entries(totals.taxByRate).map(([rate, amount]) => (
+          {Object.entries(totals.taxByRate)
+            .filter(([_, amount]) => amount > 0)
+            .map(([rate, amount]) => (
             <div key={rate} className="mb-1 flex justify-between border-b border-gray-300 py-1">
               <span>Tax @ {rate}%:</span>
               <span className="font-bold">{formatCurrency(amount)}</span>
