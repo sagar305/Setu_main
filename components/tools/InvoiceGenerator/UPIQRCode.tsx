@@ -23,7 +23,7 @@ export function UPIQRCode({ upiId, amount, businessName }: UPIQRCodeProps) {
     if (upiId) {
       QRCode.toString(upiUrl, {
         type: "svg",
-        width: 80,
+        width: 60,
         margin: 1,
         errorCorrectionLevel: "H",
         color: {
