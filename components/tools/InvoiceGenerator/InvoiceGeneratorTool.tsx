@@ -123,22 +123,23 @@ export function InvoiceGeneratorTool() {
     }
   };
 
+  // The off-screen export node renders the invoice at a fixed desktop
+  // width, so PDFs and prints look the same from mobile and desktop and
+  // never get cropped by the narrow on-screen preview.
+  const getExportElement = () =>
+    document.querySelector('[data-preview="export"]') as HTMLElement | null;
+
   const handleExportPDF = async () => {
     setIsExporting(true);
     setError(null);
 
     try {
-      // Find the visible preview element (either desktop or mobile)
-      const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
-      const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
-
-      const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
-
-      if (!visiblePreview) {
-        throw new Error("Invoice preview not found. Please make sure preview is visible.");
+      const exportElement = getExportElement();
+      if (!exportElement) {
+        throw new Error("Invoice preview not found. Please try again.");
       }
 
-      await exportInvoiceToPdf(data, visiblePreview);
+      await exportInvoiceToPdf(data, exportElement);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to export PDF");
     } finally {
@@ -147,12 +148,7 @@ export function InvoiceGeneratorTool() {
   };
 
   const handlePrint = () => {
-    // Find the visible preview element (either desktop or mobile)
-    const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
-    const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
-
-    const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
-
+    const visiblePreview = getExportElement();
     if (!visiblePreview) return;
 
     const printWindow = window.open("", "_blank");
@@ -186,20 +182,12 @@ export function InvoiceGeneratorTool() {
   };
 
   const generateShareFiles = async () => {
-    const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
-    const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
-    const visiblePreview =
-      desktopPreview && desktopPreview.offsetHeight > 0
-        ? desktopPreview
-        : mobilePreview && mobilePreview.offsetHeight > 0
-          ? mobilePreview
-          : null;
-
-    if (!visiblePreview) {
-      throw new Error("Please turn on the invoice preview before sharing.");
+    const exportElement = getExportElement();
+    if (!exportElement) {
+      throw new Error("Could not find the invoice to share. Please try again.");
     }
 
-    const pdfBlob = await generateInvoicePdfBlob(data, visiblePreview);
+    const pdfBlob = await generateInvoicePdfBlob(data, exportElement);
     if (!pdfBlob || pdfBlob.size === 0) {
       throw new Error("Could not generate the invoice PDF. Please try again.");
     }
@@ -468,6 +456,31 @@ export function InvoiceGeneratorTool() {
             </div>
           </div>
         )}
+
+        {/* Off-screen invoice used for PDF export, print, and share.
+            Rendered at a fixed desktop width (A4 at 96dpi) so the output
+            is never cropped or scaled by the narrow mobile preview. */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-10000px",
+            top: 0,
+            width: "794px",
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            data-preview="export"
+            className="bg-white p-8"
+            style={{
+              fontSize: "0.875rem",
+              lineHeight: "1.5",
+            }}
+          >
+            <InvoicePreview data={data} />
+          </div>
+        </div>
       </div>
     </div>
   );
