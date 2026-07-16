@@ -21,9 +21,8 @@ const parseNumericInput = (value: string): number => {
 };
 
 const formatNumericDisplay = (value: number | null | undefined): string => {
-  if (!value && value !== 0) return "";
+  if (value === null || value === undefined) return "";
   if (value === 0) return "";
-  // Show full precision for display, parseNumericInput will handle rounding
   return value.toString();
 };
 
@@ -87,10 +86,9 @@ export function LineItemsSection({
                     <input
                       type="text"
                       inputMode="decimal"
-                      value={formatNumericDisplay(item.quantity)}
-                      onChange={(e) => {
+                      defaultValue={formatNumericDisplay(item.quantity)}
+                      onBlur={(e) => {
                         const val = e.target.value;
-                        // Only allow digits and one decimal point
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
                         const valid = parts.length <= 2 ? cleaned : parts[0] + "." + parts.slice(1).join("");
@@ -114,8 +112,8 @@ export function LineItemsSection({
                     <input
                       type="text"
                       inputMode="decimal"
-                      value={formatNumericDisplay(item.rate)}
-                      onChange={(e) => {
+                      defaultValue={formatNumericDisplay(item.rate)}
+                      onBlur={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
@@ -143,8 +141,8 @@ export function LineItemsSection({
                     <input
                       type="text"
                       inputMode="decimal"
-                      value={formatNumericDisplay(item.discountPercent)}
-                      onChange={(e) => {
+                      defaultValue={formatNumericDisplay(item.discountPercent)}
+                      onBlur={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
@@ -170,8 +168,8 @@ export function LineItemsSection({
                     <input
                       type="text"
                       inputMode="decimal"
-                      value={formatNumericDisplay(item.taxRate)}
-                      onChange={(e) => {
+                      defaultValue={formatNumericDisplay(item.taxRate)}
+                      onBlur={(e) => {
                         const val = e.target.value;
                         const cleaned = val.replace(/[^0-9.]/g, "");
                         const parts = cleaned.split(".");
