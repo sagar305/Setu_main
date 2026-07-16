@@ -10,6 +10,7 @@
     "links": [
       { "label": "Products", "href": "/products" },
       { "label": "Calculators", "href": "/calculators" },
+      { "label": "Tools", "href": "/tools" },
       { "label": "About", "href": "/about" },
       { "label": "Blog", "href": "/blog" },
       { "label": "Contact", "href": "/contact" }
@@ -36,9 +37,16 @@
         ]
       },
       {
-        "heading": "Free Tools",
+        "heading": "Tools",
         "links": [
-          { "label": "Business Calculators", "href": "/calculators" },
+          { "label": "All Tools", "href": "/tools" },
+          { "label": "Invoice Generator", "href": "/tools/invoice-generator" }
+        ]
+      },
+      {
+        "heading": "Calculators",
+        "links": [
+          { "label": "All Calculators", "href": "/calculators" },
           { "label": "GST Calculator", "href": "/calculators/gst-calculator" },
           { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" }
         ]

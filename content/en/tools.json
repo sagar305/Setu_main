@@ -1,0 +1,49 @@
+{
+  "seo": {
+    "title": "Free Business Tools for Restaurants & Retail | Setu Technology",
+    "description": "Free online business tools for restaurants and small businesses — invoice generator, calculators, and more. No signup needed.",
+    "keywords": [
+      "business tools",
+      "free business tools",
+      "invoice generator",
+      "restaurant tools",
+      "small business tools"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Free Tools",
+    "headline": "Tools for running your business",
+    "subheadline": "Free, no-signup tools built for restaurant and retail operators — invoicing, calculators, and more."
+  },
+  "categories": [
+    {
+      "id": "invoicing",
+      "name": "Invoicing"
+    }
+  ],
+  "items": [
+    {
+      "slug": "invoice-generator",
+      "name": "Invoice Generator",
+      "category": "invoicing",
+      "icon": "file-text",
+      "shortDescription": "Create, customize, and download professional invoices with GST support.",
+      "seo": {
+        "title": "Free Invoice Generator | GST Compliant | Setu Technology",
+        "description": "Free online invoice generator for small businesses and restaurants. Create GST-compliant invoices, customize templates, and download as PDF. No signup required.",
+        "keywords": [
+          "invoice generator",
+          "free invoice generator",
+          "online invoice creator",
+          "GST invoice generator",
+          "invoice template"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Invoice Generator",
+        "headline": "Invoice Generator",
+        "subheadline": "Create professional, GST-compliant invoices in minutes — no templates, no signup, just fill and download."
+      }
+    }
+  ]
+}
