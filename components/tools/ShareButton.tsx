@@ -10,9 +10,10 @@ interface ShareButtonProps {
   invoiceNumber?: string;
   phoneNumber?: string;
   generateFiles?: () => Promise<File[]>;
+  className?: string;
 }
 
-export function ShareButton({ title, text, generateFiles }: ShareButtonProps) {
+export function ShareButton({ title, text, generateFiles, className }: ShareButtonProps) {
   const [isSupported, setIsSupported] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isPreparing, setIsPreparing] = useState(false);
@@ -112,11 +113,11 @@ export function ShareButton({ title, text, generateFiles }: ShareButtonProps) {
     <button
       onClick={handleClick}
       disabled={isPreparing}
-      className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
+      className={`inline-flex items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${
         pendingFiles
           ? "animate-pulse border-indigo bg-indigo text-white"
           : "border-indigo/30 bg-indigo/5 text-indigo hover:bg-indigo/10"
-      }`}
+      } ${className ?? ""}`}
       title="Share"
     >
       {isPreparing ? (

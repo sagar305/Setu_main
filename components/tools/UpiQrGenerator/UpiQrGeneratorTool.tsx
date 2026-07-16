@@ -324,26 +324,26 @@ export function UpiQrGeneratorTool() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <button
                   onClick={handleDownloadQR}
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-3 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-indigo bg-indigo px-4 py-3 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 sm:flex-1"
                 >
-                  <Download className="h-4 w-4" />
+                  <Download className="h-4 w-4 flex-shrink-0" />
                   Download QR
                 </button>
                 <button
                   onClick={handleCopyUPI}
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-3 font-semibold text-ink transition hover:bg-cream"
+                  className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-muted-line/40 bg-white px-4 py-3 font-semibold text-ink transition hover:bg-cream sm:flex-1"
                 >
                   {copied ? (
                     <>
-                      <Check className="h-4 w-4 text-green-600" />
+                      <Check className="h-4 w-4 flex-shrink-0 text-green-600" />
                       Copied!
                     </>
                   ) : (
                     <>
-                      <Copy className="h-4 w-4" />
+                      <Copy className="h-4 w-4 flex-shrink-0" />
                       Copy UPI URL
                     </>
                   )}
@@ -352,6 +352,7 @@ export function UpiQrGeneratorTool() {
                   title="UPI QR Code"
                   text={`Scan this QR code to pay ${upiId} via UPI`}
                   generateFiles={generateShareFiles}
+                  className="w-full whitespace-nowrap px-4 py-3 text-base sm:flex-1"
                 />
               </div>
             </div>
