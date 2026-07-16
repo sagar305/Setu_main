@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Download, Printer, RotateCcw, Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff, ChevronRight } from "lucide-react";
 import { InvoicePreview } from "./InvoicePreview";
 import { BusinessDetailsSection } from "./BusinessDetailsSection";
@@ -37,7 +37,6 @@ export function InvoiceGeneratorTool() {
     toggleSection,
   } = useInvoiceData();
 
-  const previewRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(true);
@@ -120,13 +119,21 @@ export function InvoiceGeneratorTool() {
   };
 
   const handleExportPDF = async () => {
-    if (!previewRef.current) return;
-
     setIsExporting(true);
     setError(null);
 
     try {
-      await exportInvoiceToPdf(data, previewRef.current);
+      // Find the visible preview element (either desktop or mobile)
+      const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
+      const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
+
+      const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
+
+      if (!visiblePreview) {
+        throw new Error("Invoice preview not found. Please make sure preview is visible.");
+      }
+
+      await exportInvoiceToPdf(data, visiblePreview);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to export PDF");
     } finally {
@@ -135,12 +142,18 @@ export function InvoiceGeneratorTool() {
   };
 
   const handlePrint = () => {
-    if (!previewRef.current) return;
+    // Find the visible preview element (either desktop or mobile)
+    const desktopPreview = document.querySelector('[data-preview="desktop"]') as HTMLElement | null;
+    const mobilePreview = document.querySelector('[data-preview="mobile"]') as HTMLElement | null;
+
+    const visiblePreview = desktopPreview && desktopPreview.offsetHeight > 0 ? desktopPreview : mobilePreview;
+
+    if (!visiblePreview) return;
 
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
 
-    printWindow.document.write(previewRef.current.innerHTML);
+    printWindow.document.write(visiblePreview.innerHTML);
     printWindow.document.close();
     printWindow.focus();
 
@@ -191,50 +204,50 @@ export function InvoiceGeneratorTool() {
         )}
 
         {/* Sticky Action Buttons */}
-        <div className="sticky top-20 z-30 flex flex-wrap gap-3 rounded-lg bg-white/95 backdrop-blur-sm p-4 shadow-sm">
-          <button
-            onClick={handleExportPDF}
-            disabled={isExporting || !hasValidItems}
-            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <Download className="h-4 w-4" />
-            {isExporting ? "Generating PDF..." : "Download PDF"}
-          </button>
+        <div className="sticky top-20 z-30 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white/95 backdrop-blur-sm p-4 shadow-sm">
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={handleExportPDF}
+              disabled={isExporting || !hasValidItems}
+              className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Download className="h-4 w-4" />
+              {isExporting ? "Generating PDF..." : "Download PDF"}
+            </button>
 
-          <button
-            onClick={() => {
-              handlePrint();
-              clearUnlockedFields();
-            }}
-            disabled={!hasValidItems}
-            className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100 disabled:cursor-not-allowed disabled:opacity-50"
-            title="Print invoice and clear unlocked fields for next invoice"
-          >
-            <Printer className="h-4 w-4" />
-            Print & Clear
-          </button>
+            <button
+              onClick={() => {
+                handlePrint();
+                clearUnlockedFields();
+              }}
+              disabled={!hasValidItems}
+              className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100 disabled:cursor-not-allowed disabled:opacity-50"
+              title="Print invoice and clear unlocked fields for next invoice"
+            >
+              <Printer className="h-4 w-4" />
+              Print & Clear
+            </button>
 
-          <button
-            onClick={clearUnlockedFields}
-            disabled={!hasValidItems}
-            className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
-            title="Clear unlocked fields and prepare for next invoice"
-          >
-            <ChevronRight className="h-4 w-4" />
-            Next Invoice
-          </button>
+            <button
+              onClick={clearUnlockedFields}
+              disabled={!hasValidItems}
+              className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+              title="Clear unlocked fields and prepare for next invoice"
+            >
+              <ChevronRight className="h-4 w-4" />
+              Next Invoice
+            </button>
 
-          <button
-            onClick={handleReset}
-            className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
-          >
-            <RotateCcw className="h-4 w-4" />
-            Reset All
-          </button>
-        </div>
+            <button
+              onClick={handleReset}
+              className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
+            >
+              <RotateCcw className="h-4 w-4" />
+              Reset All
+            </button>
+          </div>
 
-        {/* Preview Toggle Button */}
-        <div className="flex justify-end">
+          {/* Preview Toggle Button */}
           <button
             onClick={() => setShowPreview(!showPreview)}
             className="inline-flex items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 text-sm font-semibold text-muted transition hover:border-indigo hover:text-indigo"
@@ -378,7 +391,7 @@ export function InvoiceGeneratorTool() {
             <div className="hidden lg:block">
               <div className="sticky top-24 overflow-auto rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8" style={{ maxHeight: "calc(100vh - 200px)" }}>
                 <div
-                  ref={previewRef}
+                  data-preview="desktop"
                   className="bg-white"
                   style={{
                     fontSize: "0.875rem",
@@ -400,7 +413,7 @@ export function InvoiceGeneratorTool() {
                 Preview
               </h3>
               <div
-                ref={previewRef}
+                data-preview="mobile"
                 className="overflow-x-auto bg-white"
                 style={{
                   fontSize: "0.75rem",
