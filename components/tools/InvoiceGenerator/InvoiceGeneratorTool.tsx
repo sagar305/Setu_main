@@ -12,6 +12,7 @@ import { BankDetailsSection } from "./BankDetailsSection";
 import { NotesAndTermsSection } from "./NotesAndTermsSection";
 import { TemplateSelector } from "./TemplateSelector";
 import { AccordionSection } from "./AccordionSection";
+import { ShareButton } from "@/components/tools/ShareButton";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
 import { exportInvoiceToPdf } from "@/lib/pdf/exportInvoiceToPdf";
 
@@ -240,6 +241,12 @@ export function InvoiceGeneratorTool() {
               <RotateCcw className="h-4 w-4" />
               Reset All
             </button>
+
+            <ShareButton
+              title={`Invoice ${data.invoiceDetails.number}`}
+              text={`Invoice #${data.invoiceDetails.number} for ${data.businessDetails.name} - Amount: ₹${(data.lineItems.reduce((sum, item) => sum + item.quantity * item.rate, 0)).toFixed(2)}`}
+              invoiceNumber={data.invoiceDetails.number}
+            />
           </div>
 
           {/* Preview Toggle Button */}

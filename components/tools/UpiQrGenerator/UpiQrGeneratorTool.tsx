@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Download, Copy, Check } from "lucide-react";
 import { isValidUPIId, generateUPIUrl } from "@/lib/upi";
 import { UPIQRCode } from "../UpiQrGenerator/UPIQRCode";
+import { ShareButton } from "@/components/tools/ShareButton";
 
 export function UpiQrGeneratorTool() {
   const [upiId, setUpiId] = useState("");
@@ -192,6 +193,10 @@ export function UpiQrGeneratorTool() {
                     </>
                   )}
                 </button>
+                <ShareButton
+                  title="UPI QR Code"
+                  text={`Send money via UPI: ${upiUrl}`}
+                />
               </div>
 
               {/* UPI URL Display */}
