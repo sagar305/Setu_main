@@ -18,14 +18,16 @@ import {
 
 const emptyForm: CustomerInput = { name: "", phone: "", email: "", address: "", notes: "" };
 
-function CustomerFormModal({
+export function CustomerFormModal({
   open,
   onClose,
   editing,
+  onSaved,
 }: {
   open: boolean;
   onClose: () => void;
   editing: Customer | null;
+  onSaved?: (customer: Customer) => void;
 }) {
   const { createCustomer, updateCustomer } = usePos();
   const [form, setForm] = useState<CustomerInput>(emptyForm);
@@ -64,8 +66,10 @@ function CustomerFormModal({
       };
       if (editing) {
         await updateCustomer(editing.id, input);
+        onSaved?.({ ...editing, ...input });
       } else {
-        await createCustomer(input);
+        const created = await createCustomer(input);
+        onSaved?.(created);
       }
       onClose();
     } catch {

@@ -27,6 +27,7 @@ import {
   type CartLine,
   type Category,
   type Customer,
+  type HeldCart,
   type InventoryLog,
   type InventoryLogType,
   type Order,
@@ -70,6 +71,14 @@ export type CheckoutInput = {
   paymentMethodId: string;
 };
 
+export type HoldCartInput = {
+  lines: CartLine[];
+  discountType: "flat" | "percent";
+  discountValue: number;
+  customerId: string | null;
+  label: string;
+};
+
 type PosContextValue = {
   status: PosStatus;
   errorMessage: string;
@@ -82,6 +91,7 @@ type PosContextValue = {
   orderItems: OrderItem[];
   payments: PaymentMethod[];
   inventoryLogs: InventoryLog[];
+  heldCarts: HeldCart[];
 
   startSetup: () => void;
   backToWelcome: () => void;
@@ -110,6 +120,9 @@ type PosContextValue = {
   checkout: (input: CheckoutInput) => Promise<Order>;
   cancelOrder: (orderId: string) => Promise<void>;
 
+  holdCart: (input: HoldCartInput) => Promise<HeldCart>;
+  removeHeldCart: (id: string) => Promise<void>;
+
   exportBackup: () => Promise<void>;
   applyRestoredBackup: (backup: PosBackup) => Promise<void>;
   resetAll: () => Promise<void>;
@@ -129,6 +142,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [payments, setPayments] = useState<PaymentMethod[]>([]);
   const [inventoryLogs, setInventoryLogs] = useState<InventoryLog[]>([]);
+  const [heldCarts, setHeldCarts] = useState<HeldCart[]>([]);
 
   const loadAll = useCallback(async () => {
     const [
@@ -141,6 +155,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       paymentRows,
       inventoryRows,
       settingsRows,
+      heldCartRows,
     ] = await Promise.all([
       dbGetAll<Business>("business"),
       dbGetAll<Product>("products"),
@@ -151,6 +166,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       dbGetAll<PaymentMethod>("payments"),
       dbGetAll<InventoryLog>("inventory"),
       dbGetAll<PosSettings>("settings"),
+      dbGetAll<HeldCart>("held_carts"),
     ]);
 
     const loadedBusiness = businessRows.find((b) => b.id === "main") ?? null;
@@ -162,6 +178,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setOrderItems(orderItemRows);
     setPayments(paymentRows.sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
     setInventoryLogs(inventoryRows.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+    setHeldCarts(heldCartRows.sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
     // Merge with defaults so records saved by older versions pick up new fields.
     const storedSettings = settingsRows.find((s) => s.id === "main");
     setSettings(storedSettings ? { ...DEFAULT_SETTINGS, ...storedSettings } : DEFAULT_SETTINGS);
@@ -577,6 +594,35 @@ export function PosProvider({ children }: { children: ReactNode }) {
     [orderItems, orders, products]
   );
 
+  const holdCart = useCallback(
+    async (input: HoldCartInput) => {
+      if (input.lines.length === 0) {
+        throw new Error("The cart is empty.");
+      }
+      const customer = input.customerId
+        ? customers.find((c) => c.id === input.customerId) ?? null
+        : null;
+      const held: HeldCart = {
+        id: generateId(),
+        label: input.label.trim() || customer?.name || "",
+        lines: input.lines.map((line) => ({ ...line })),
+        discountType: input.discountType,
+        discountValue: input.discountValue,
+        customerId: customer?.id ?? null,
+        createdAt: nowIso(),
+      };
+      await dbBatch({ held_carts: [held] });
+      setHeldCarts((prev) => [...prev, held]);
+      return held;
+    },
+    [customers]
+  );
+
+  const removeHeldCart = useCallback(async (id: string) => {
+    await dbBatch({}, { held_carts: [id] });
+    setHeldCarts((prev) => prev.filter((h) => h.id !== id));
+  }, []);
+
   const exportBackup = useCallback(async () => {
     const backup = await createBackup();
     downloadBackupFile(backup);
@@ -604,6 +650,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setOrderItems([]);
     setPayments([]);
     setInventoryLogs([]);
+    setHeldCarts([]);
     setSettings(DEFAULT_SETTINGS);
     setStatus("welcome");
   }, []);
@@ -621,6 +668,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       orderItems,
       payments,
       inventoryLogs,
+      heldCarts,
       startSetup,
       backToWelcome,
       createBusiness,
@@ -641,6 +689,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
       updateSettings,
       checkout,
       cancelOrder,
+      holdCart,
+      removeHeldCart,
       exportBackup,
       applyRestoredBackup,
       resetAll,
@@ -657,6 +707,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       orderItems,
       payments,
       inventoryLogs,
+      heldCarts,
       startSetup,
       backToWelcome,
       createBusiness,
@@ -677,6 +728,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
       updateSettings,
       checkout,
       cancelOrder,
+      holdCart,
+      removeHeldCart,
       exportBackup,
       applyRestoredBackup,
       resetAll,

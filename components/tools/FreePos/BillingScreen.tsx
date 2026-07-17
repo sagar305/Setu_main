@@ -2,22 +2,43 @@
 
 import { useMemo, useRef, useState } from "react";
 import {
+  History,
   Minus,
   PackageSearch,
+  PauseCircle,
   Plus,
   ShoppingCart,
   Trash2,
+  UserPlus,
   UserRound,
 } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { calculateCartTotals } from "@/lib/pos/calc";
-import { formatMoney, type CartLine, type Order, type Product } from "@/lib/pos/types";
+import {
+  formatMoney,
+  type CartLine,
+  type HeldCart,
+  type Order,
+  type Product,
+} from "@/lib/pos/types";
 import type { NavigateFn } from "./nav";
 import { ReceiptModal } from "./ReceiptModal";
-import { EmptyState, inputClass, primaryBtnClass } from "./ui";
+import { CustomerFormModal } from "./CustomersScreen";
+import { EmptyState, Field, Modal, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
-  const { business, settings, products, categories, customers, payments, checkout } = usePos();
+  const {
+    business,
+    settings,
+    products,
+    categories,
+    customers,
+    payments,
+    checkout,
+    heldCarts,
+    holdCart,
+    removeHeldCart,
+  } = usePos();
   const currency = business?.currency ?? "INR";
 
   const [search, setSearch] = useState("");
@@ -30,6 +51,11 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [error, setError] = useState("");
   const [charging, setCharging] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
+  const [holdOpen, setHoldOpen] = useState(false);
+  const [holdNote, setHoldNote] = useState("");
+  const [heldListOpen, setHeldListOpen] = useState(false);
+  const [heldBusy, setHeldBusy] = useState(false);
+  const [customerFormOpen, setCustomerFormOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
   const effectiveTaxRate = (product: Product) =>
@@ -135,6 +161,66 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   };
 
   const selectedPaymentId = paymentMethodId || payments[0]?.id || "";
+
+  const clearCart = () => {
+    setLines([]);
+    setDiscountType("flat");
+    setDiscountValue(0);
+    setCustomerId("");
+    setError("");
+  };
+
+  const handleHold = async (label: string) => {
+    if (heldBusy || lines.length === 0) return;
+    setHeldBusy(true);
+    try {
+      await holdCart({
+        lines,
+        discountType,
+        discountValue,
+        customerId: customerId || null,
+        label,
+      });
+      clearCart();
+      setHoldNote("");
+      setHoldOpen(false);
+    } finally {
+      setHeldBusy(false);
+    }
+  };
+
+  const handleRecall = async (held: HeldCart) => {
+    if (heldBusy) return;
+    setHeldBusy(true);
+    try {
+      // Swap: park the current cart before recalling so nothing is lost.
+      if (lines.length > 0) {
+        await holdCart({
+          lines,
+          discountType,
+          discountValue,
+          customerId: customerId || null,
+          label: "",
+        });
+      }
+      setLines(held.lines.map((line) => ({ ...line })));
+      setDiscountType(held.discountType);
+      setDiscountValue(held.discountValue);
+      setCustomerId(
+        held.customerId && customers.some((c) => c.id === held.customerId)
+          ? held.customerId
+          : ""
+      );
+      setError("");
+      await removeHeldCart(held.id);
+      setHeldListOpen(false);
+    } finally {
+      setHeldBusy(false);
+    }
+  };
+
+  const heldCartSubtotal = (held: HeldCart) =>
+    held.lines.reduce((sum, line) => sum + line.price * line.quantity, 0);
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
@@ -250,6 +336,16 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             <span className="rounded-full bg-indigo/10 px-2 py-0.5 text-xs font-semibold text-indigo">
               {totals.itemCount} item{totals.itemCount === 1 ? "" : "s"}
             </span>
+          )}
+          {heldCarts.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setHeldListOpen(true)}
+              className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-saffron/50 bg-saffron/10 px-3 py-1 text-xs font-bold text-ink transition hover:bg-saffron/20"
+            >
+              <History className="h-3.5 w-3.5 text-saffron" />
+              Held · {heldCarts.length}
+            </button>
           )}
         </h3>
 
@@ -369,6 +465,15 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                   </option>
                 ))}
               </select>
+              <button
+                type="button"
+                onClick={() => setCustomerFormOpen(true)}
+                aria-label="Add new customer"
+                title="Add new customer"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
+              >
+                <UserPlus className="h-4 w-4" />
+              </button>
             </div>
 
             {/* Totals */}
@@ -430,14 +535,25 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               </p>
             )}
 
-            <button
-              type="button"
-              onClick={() => void handleCharge()}
-              disabled={charging || lines.length === 0}
-              className={`${primaryBtnClass} mt-4 w-full py-3 text-base`}
-            >
-              {charging ? "Saving…" : `Charge ${formatMoney(totals.total, currency)}`}
-            </button>
+            <div className="mt-4 flex gap-3">
+              <button
+                type="button"
+                onClick={() => setHoldOpen(true)}
+                title="Park this cart and serve another customer"
+                className={`${secondaryBtnClass} py-3`}
+              >
+                <PauseCircle className="h-4 w-4" />
+                Hold
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleCharge()}
+                disabled={charging || lines.length === 0}
+                className={`${primaryBtnClass} flex-1 py-3 text-base`}
+              >
+                {charging ? "Saving…" : `Charge ${formatMoney(totals.total, currency)}`}
+              </button>
+            </div>
           </>
         )}
       </div>
@@ -447,6 +563,96 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         open={completedOrder !== null}
         onClose={() => setCompletedOrder(null)}
         title="Sale complete"
+      />
+
+      {/* Hold current cart */}
+      <Modal open={holdOpen} onClose={() => setHoldOpen(false)} title="Hold this cart">
+        <p className="text-sm text-muted">
+          The cart is parked so you can serve someone else. Recall it anytime from the
+          <strong> Held</strong> button.
+        </p>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            void handleHold(holdNote);
+          }}
+          className="mt-4 space-y-4"
+        >
+          <Field label="Note (optional)" hint="Helps you find it again">
+            <input
+              type="text"
+              value={holdNote}
+              onChange={(event) => setHoldNote(event.target.value)}
+              placeholder="e.g. Table 4, Ramesh, blue shirt"
+              className={inputClass}
+              autoFocus
+            />
+          </Field>
+          <div className="flex justify-end gap-3">
+            <button type="button" onClick={() => setHoldOpen(false)} className={secondaryBtnClass}>
+              Cancel
+            </button>
+            <button type="submit" disabled={heldBusy} className={primaryBtnClass}>
+              <PauseCircle className="h-4 w-4" />
+              {heldBusy ? "Holding…" : "Hold cart"}
+            </button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Recall a held cart */}
+      <Modal open={heldListOpen} onClose={() => setHeldListOpen(false)} title="Held carts">
+        {lines.length > 0 && (
+          <p className="mb-3 rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-xs text-ink">
+            Your current cart will be held automatically when you recall one.
+          </p>
+        )}
+        {heldCarts.length === 0 ? (
+          <p className="py-6 text-center text-sm text-muted">No held carts.</p>
+        ) : (
+          <ul className="divide-y divide-muted-line/15 rounded-xl border border-muted-line/30">
+            {heldCarts.map((held) => {
+              const count = held.lines.reduce((sum, line) => sum + line.quantity, 0);
+              return (
+                <li key={held.id} className="flex items-center gap-3 px-4 py-3">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-ink">
+                      {held.label || `${count} item${count === 1 ? "" : "s"}`}
+                    </p>
+                    <p className="text-xs text-muted">
+                      {new Date(held.createdAt).toLocaleTimeString()} · {count} item
+                      {count === 1 ? "" : "s"} · {formatMoney(heldCartSubtotal(held), currency)}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => void handleRecall(held)}
+                    disabled={heldBusy}
+                    className={secondaryBtnClass}
+                  >
+                    Recall
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={`Delete held cart ${held.label || ""}`.trim()}
+                    onClick={() => void removeHeldCart(held.id)}
+                    className="text-muted/60 transition hover:text-red-500"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </Modal>
+
+      {/* Quick add customer, selected on save */}
+      <CustomerFormModal
+        open={customerFormOpen}
+        onClose={() => setCustomerFormOpen(false)}
+        editing={null}
+        onSaved={(customer) => setCustomerId(customer.id)}
       />
     </div>
   );

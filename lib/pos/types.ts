@@ -126,6 +126,17 @@ export type CartLine = {
   taxInclusive: boolean;
 };
 
+/** A parked (held) sale that can be recalled later on the billing screen. */
+export type HeldCart = {
+  id: string;
+  label: string;
+  lines: CartLine[];
+  discountType: "flat" | "percent";
+  discountValue: number;
+  customerId: string | null;
+  createdAt: string;
+};
+
 export const CURRENCIES = [
   { code: "INR", symbol: "₹", label: "Indian Rupee (₹)" },
   { code: "USD", symbol: "$", label: "US Dollar ($)" },

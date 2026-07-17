@@ -2,7 +2,9 @@
 // Database: POS_DATABASE with one object store per logical table.
 
 const DB_NAME = "POS_DATABASE";
-const DB_VERSION = 1;
+// v2 adds held_carts (hold/recall sales). The upgrade handler creates any
+// missing stores, so bumping the version migrates older databases in place.
+const DB_VERSION = 2;
 
 export const STORES = [
   "business",
@@ -14,6 +16,7 @@ export const STORES = [
   "payments",
   "inventory",
   "settings",
+  "held_carts",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
