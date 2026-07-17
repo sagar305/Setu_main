@@ -1,4 +1,4 @@
-// Data model for the Offline Browser POS (/free-pos).
+// Data model for the Browser Based POS (/products/browser-based-pos).
 // Everything is stored client-side in IndexedDB — no backend, no login.
 
 export type Business = {

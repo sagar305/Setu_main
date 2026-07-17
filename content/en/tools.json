@@ -35,16 +35,17 @@
   ],
   "items": [
     {
-      "slug": "free-pos",
-      "href": "/free-pos",
-      "name": "Offline Browser POS",
+      "slug": "browser-based-pos",
+      "href": "/products/browser-based-pos",
+      "name": "Browser Based POS",
       "category": "pos",
       "icon": "shopping-cart",
       "shortDescription": "Free POS that works offline in your browser — billing, inventory, customers and receipts. No login.",
       "seo": {
-        "title": "Free Offline POS for Small Business | Setu Technology",
+        "title": "Browser Based POS - Free & Offline | Setu Technology",
         "description": "Free browser-based POS system. Bill customers, manage products and inventory offline. No signup, no subscription — your data stays on your device.",
         "keywords": [
+          "browser based POS",
           "free POS",
           "offline POS",
           "browser POS",
@@ -53,8 +54,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Free Tool — Offline POS",
-        "headline": "Offline Browser POS",
+        "eyebrow": "Free Tool — Browser Based POS",
+        "headline": "Browser Based POS",
         "subheadline": "Bill customers, manage products and track inventory — right from your browser, even without internet."
       }
     },
