@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools",
     "/tools/invoice-generator",
     "/tools/upi-qr-generator",
+    "/free-pos",
     "/tools/qr-menu-generator",
     "/blog",
     "/contact",

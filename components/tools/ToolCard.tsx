@@ -4,9 +4,10 @@ import { CalculatorIcon } from "@/components/calculators/CalculatorIcon";
 import type { ToolItem } from "@/lib/content";
 
 export function ToolCard({ item }: { item: ToolItem }) {
+  const href = "href" in item && item.href ? item.href : `/tools/${item.slug}`;
   return (
     <Link
-      href={`/tools/${item.slug}`}
+      href={href}
       className="group flex flex-col rounded-2xl border border-muted-line/30 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo/30 hover:shadow-md"
     >
       <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream text-indigo">

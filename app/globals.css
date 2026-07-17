@@ -75,6 +75,12 @@ body {
   75% { opacity: 0.45; }
 }
 
+/* Free POS full-screen mode: the site nav is hidden behind the overlay, so
+   the sticky billing cart doesn't need to clear it. */
+.pos-fullscreen .pos-cart-sticky {
+  top: 1.5rem;
+}
+
 .blog-content {
   display: flex;
   flex-direction: column;
