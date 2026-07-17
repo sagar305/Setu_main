@@ -82,6 +82,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Can it sync my data to a Google Sheet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Connect your own Google Sheet (Settings → Google Sheet sync) and the POS automatically keeps your orders, products and customers updated in it. Data goes directly from your browser to your Google account — never through our servers. If your browser data is ever lost, you can restore the whole POS from that sheet.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Does it support barcode scanners?",
       acceptedAnswer: {
         "@type": "Answer",

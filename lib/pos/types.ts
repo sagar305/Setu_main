@@ -114,7 +114,16 @@ export type PosSettings = {
   showBusinessInfoOnReceipt: boolean;
   receiptPaperSize: ReceiptPaperSize;
   lastBackupAt: string | null;
+  /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
+  sheetSyncUrl: string;
 };
+
+/** Which slices of the workspace can be marked dirty for Sheet sync. */
+export type SyncSlice = "meta" | "products" | "customers" | "orders";
+
+export const SYNC_SLICES: SyncSlice[] = ["meta", "products", "customers", "orders"];
+
+export type SyncDirtyRow = { id: SyncSlice; dirtyAt: string };
 
 export type CartLine = {
   productId: string;
@@ -182,6 +191,7 @@ export const DEFAULT_SETTINGS: PosSettings = {
   showBusinessInfoOnReceipt: true,
   receiptPaperSize: "80mm",
   lastBackupAt: null,
+  sheetSyncUrl: "",
 };
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];

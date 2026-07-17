@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Download, Plus, Trash2, Upload } from "lucide-react";
+import { Copy, Download, Plus, RefreshCw, Sheet, Trash2, Upload } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
+import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import { CURRENCIES, formatInvoiceNumber, type ReceiptPaperSize } from "@/lib/pos/types";
 import {
   ConfirmDialog,
@@ -50,6 +51,11 @@ export function SettingsScreen() {
     exportBackup,
     applyRestoredBackup,
     resetAll,
+    sheetSync,
+    connectSheet,
+    disconnectSheet,
+    syncSheetNow,
+    resyncSheetAll,
   } = usePos();
 
   // Business profile
@@ -144,6 +150,35 @@ export function SettingsScreen() {
   // Payment methods
   const [newMethod, setNewMethod] = useState("");
   const [paymentError, setPaymentError] = useState("");
+
+  // Google Sheet sync
+  const [sheetUrlInput, setSheetUrlInput] = useState("");
+  const [sheetBusy, setSheetBusy] = useState(false);
+  const [sheetError, setSheetError] = useState("");
+  const [scriptCopied, setScriptCopied] = useState(false);
+
+  const handleConnectSheet = async () => {
+    setSheetError("");
+    setSheetBusy(true);
+    try {
+      await connectSheet(sheetUrlInput);
+      setSheetUrlInput("");
+    } catch (error) {
+      setSheetError(error instanceof Error ? error.message : "Could not connect.");
+    } finally {
+      setSheetBusy(false);
+    }
+  };
+
+  const handleCopyScript = async () => {
+    try {
+      await navigator.clipboard.writeText(APPS_SCRIPT_TEMPLATE);
+      setScriptCopied(true);
+      setTimeout(() => setScriptCopied(false), 2500);
+    } catch {
+      // Clipboard blocked — the manual textarea below still works.
+    }
+  };
 
   // Backup / restore
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -397,6 +432,129 @@ export function SettingsScreen() {
           <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
             {paymentError}
           </p>
+        )}
+      </Section>
+
+      <Section
+        title="Google Sheet sync"
+        description="Keep a Google Sheet automatically updated with your orders, products and customers — and restore from it if this browser's data is ever lost."
+      >
+        {sheetSync.url ? (
+          <div>
+            <p className="break-all text-sm text-muted">
+              Connected to: <span className="font-mono text-xs text-ink">{sheetSync.url}</span>
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              {sheetSync.syncing ? (
+                <span className="font-semibold text-indigo">Syncing…</span>
+              ) : sheetSync.dirtyCount > 0 ? (
+                <span className="font-semibold text-saffron">
+                  {sheetSync.dirtyCount} change group{sheetSync.dirtyCount === 1 ? "" : "s"} waiting to
+                  sync
+                </span>
+              ) : (
+                <span className="font-semibold text-emerald-600">Everything synced</span>
+              )}
+              {sheetSync.lastSyncAt && (
+                <span>
+                  {" "}
+                  · last synced {new Date(sheetSync.lastSyncAt).toLocaleString()}
+                </span>
+              )}
+            </p>
+            {sheetSync.lastError && (
+              <p className="mt-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+                {sheetSync.lastError}
+              </p>
+            )}
+            <div className="mt-3 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => void syncSheetNow()}
+                disabled={sheetSync.syncing}
+                className={primaryBtnClass}
+              >
+                <RefreshCw className="h-4 w-4" />
+                Sync now
+              </button>
+              <button
+                type="button"
+                onClick={() => void resyncSheetAll()}
+                disabled={sheetSync.syncing}
+                className={secondaryBtnClass}
+              >
+                Resync everything
+              </button>
+              <button
+                type="button"
+                onClick={() => void disconnectSheet()}
+                className={dangerBtnClass}
+              >
+                Disconnect
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <ol className="list-decimal space-y-1.5 pl-5 text-sm text-muted">
+              <li>Create (or open) a Google Sheet for your business data.</li>
+              <li>
+                In the sheet, open <strong>Extensions → Apps Script</strong>, delete any code
+                there and paste our script.
+              </li>
+              <li>
+                Click <strong>Deploy → New deployment → Web app</strong>, set{" "}
+                <em>Execute as: Me</em> and <em>Who has access: Anyone</em>, then deploy.
+              </li>
+              <li>Copy the web app URL and paste it below.</li>
+            </ol>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <button type="button" onClick={() => void handleCopyScript()} className={secondaryBtnClass}>
+                <Copy className="h-4 w-4" />
+                {scriptCopied ? "Copied ✓" : "Copy the script"}
+              </button>
+              <details className="text-sm text-muted">
+                <summary className="cursor-pointer font-semibold text-indigo">
+                  or view the script
+                </summary>
+                <textarea
+                  readOnly
+                  value={APPS_SCRIPT_TEMPLATE}
+                  rows={10}
+                  className="mt-2 w-full rounded-lg border border-muted-line/40 bg-cream-paper p-3 font-mono text-xs"
+                  onFocus={(event) => event.target.select()}
+                />
+              </details>
+            </div>
+            <div className="mt-4 flex max-w-xl flex-col gap-2 sm:flex-row">
+              <input
+                type="url"
+                value={sheetUrlInput}
+                onChange={(event) => setSheetUrlInput(event.target.value)}
+                placeholder="https://script.google.com/macros/s/…/exec"
+                className={inputClass}
+              />
+              <button
+                type="button"
+                onClick={() => void handleConnectSheet()}
+                disabled={sheetBusy || !sheetUrlInput.trim()}
+                className={`${primaryBtnClass} shrink-0`}
+              >
+                <Sheet className="h-4 w-4" />
+                {sheetBusy ? "Connecting…" : "Test & connect"}
+              </button>
+            </div>
+            {sheetError && (
+              <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+                {sheetError}
+              </p>
+            )}
+            <p className="mt-3 text-xs text-muted">
+              Treat the script URL like the sheet&apos;s share link — anyone who has it can read
+              and write the synced data. Sync is one-way (POS → Sheet); edits made in the sheet
+              don&apos;t change the POS.
+            </p>
+          </div>
         )}
       </Section>
 

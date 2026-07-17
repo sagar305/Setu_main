@@ -6,10 +6,20 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
-import { dbBatch, dbClearAll, dbGetAll } from "./db";
+import { dbBatch, dbClearAll, dbGetAll, type StoreName } from "./db";
+import {
+  buildBackupFromSheetPull,
+  buildTabPayloads,
+  isValidSyncUrl,
+  pullFromSheet,
+  pushToSheet,
+  testSheetConnection,
+  type WorkspaceSnapshot,
+} from "./sheetSync";
 import { calculateCartTotals } from "./calc";
 import {
   createBackup,
@@ -32,9 +42,12 @@ import {
   type InventoryLogType,
   type Order,
   type OrderItem,
+  SYNC_SLICES,
   type PaymentMethod,
   type PosSettings,
   type Product,
+  type SyncDirtyRow,
+  type SyncSlice,
 } from "./types";
 
 export type PosStatus = "loading" | "welcome" | "setup" | "ready" | "error";
@@ -123,6 +136,19 @@ type PosContextValue = {
   holdCart: (input: HoldCartInput) => Promise<HeldCart>;
   removeHeldCart: (id: string) => Promise<void>;
 
+  sheetSync: {
+    url: string;
+    dirtyCount: number;
+    syncing: boolean;
+    lastSyncAt: string | null;
+    lastError: string;
+  };
+  connectSheet: (url: string) => Promise<void>;
+  disconnectSheet: () => Promise<void>;
+  syncSheetNow: () => Promise<void>;
+  resyncSheetAll: () => Promise<void>;
+  restoreFromSheet: (url: string) => Promise<void>;
+
   exportBackup: () => Promise<void>;
   applyRestoredBackup: (backup: PosBackup) => Promise<void>;
   resetAll: () => Promise<void>;
@@ -143,6 +169,56 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const [payments, setPayments] = useState<PaymentMethod[]>([]);
   const [inventoryLogs, setInventoryLogs] = useState<InventoryLog[]>([]);
   const [heldCarts, setHeldCarts] = useState<HeldCart[]>([]);
+  const [dirtySlices, setDirtySlices] = useState<SyncSlice[]>([]);
+  const [sheetSyncing, setSheetSyncing] = useState(false);
+  const [sheetLastSyncAt, setSheetLastSyncAt] = useState<string | null>(null);
+  const [sheetLastError, setSheetLastError] = useState("");
+  const flushingRef = useRef(false);
+
+  // Latest workspace snapshot for the sync engine (avoids stale closures).
+  const snapshotRef = useRef<WorkspaceSnapshot | null>(null);
+  useEffect(() => {
+    snapshotRef.current = {
+      business,
+      settings,
+      categories,
+      payments,
+      products,
+      customers,
+      orders,
+      orderItems,
+    };
+  });
+
+  useEffect(() => {
+    try {
+      setSheetLastSyncAt(localStorage.getItem("pos_sheet_sync_last"));
+    } catch {
+      // localStorage unavailable — status just starts empty.
+    }
+  }, []);
+
+  const markDirtyState = useCallback((slices: SyncSlice[]) => {
+    if (slices.length === 0) return;
+    setDirtySlices((prev) => Array.from(new Set([...prev, ...slices])));
+  }, []);
+
+  /** Run a DB write and mark the given sync slices dirty in the same transaction. */
+  const batchWithSync = useCallback(
+    async (
+      writes: Partial<Record<StoreName, unknown[]>>,
+      deletes: Partial<Record<StoreName, string[]>>,
+      slices: SyncSlice[]
+    ) => {
+      const dirtyRows: SyncDirtyRow[] = slices.map((id) => ({ id, dirtyAt: nowIso() }));
+      await dbBatch(
+        slices.length ? { ...writes, sync_queue: dirtyRows } : writes,
+        deletes
+      );
+      markDirtyState(slices);
+    },
+    [markDirtyState]
+  );
 
   const loadAll = useCallback(async () => {
     const [
@@ -156,6 +232,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       inventoryRows,
       settingsRows,
       heldCartRows,
+      dirtyRows,
     ] = await Promise.all([
       dbGetAll<Business>("business"),
       dbGetAll<Product>("products"),
@@ -167,6 +244,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       dbGetAll<InventoryLog>("inventory"),
       dbGetAll<PosSettings>("settings"),
       dbGetAll<HeldCart>("held_carts"),
+      dbGetAll<SyncDirtyRow>("sync_queue"),
     ]);
 
     const loadedBusiness = businessRows.find((b) => b.id === "main") ?? null;
@@ -179,6 +257,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setPayments(paymentRows.sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
     setInventoryLogs(inventoryRows.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
     setHeldCarts(heldCartRows.sort((a, b) => a.createdAt.localeCompare(b.createdAt)));
+    setDirtySlices(dirtyRows.map((row) => row.id));
     // Merge with defaults so records saved by older versions pick up new fields.
     const storedSettings = settingsRows.find((s) => s.id === "main");
     setSettings(storedSettings ? { ...DEFAULT_SETTINGS, ...storedSettings } : DEFAULT_SETTINGS);
@@ -221,11 +300,15 @@ export function PosProvider({ children }: { children: ReactNode }) {
       }));
       const newSettings: PosSettings = { ...DEFAULT_SETTINGS };
 
-      await dbBatch({
-        business: [newBusiness],
-        payments: seededPayments,
-        settings: [newSettings],
-      });
+      await batchWithSync(
+        {
+          business: [newBusiness],
+          payments: seededPayments,
+          settings: [newSettings],
+        },
+        {},
+        ["meta"]
+      );
 
       setBusiness(newBusiness);
       setPayments(seededPayments);
@@ -239,7 +322,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     async (updates: Partial<Omit<Business, "id" | "createdAt">>) => {
       if (!business) return;
       const updated: Business = { ...business, ...updates };
-      await dbBatch({ business: [updated] });
+      await batchWithSync({ business: [updated] }, {}, ["meta"]);
       setBusiness(updated);
     },
     [business]
@@ -261,7 +344,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         createdAt: now,
       });
     }
-    await dbBatch({ products: [product], inventory: logs });
+    await batchWithSync({ products: [product], inventory: logs }, {}, ["products"]);
     setProducts((prev) => [...prev, product]);
     if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
     return product;
@@ -285,7 +368,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
           createdAt: nowIso(),
         });
       }
-      await dbBatch({ products: [updated], inventory: logs });
+      await batchWithSync({ products: [updated], inventory: logs }, {}, ["products"]);
       setProducts((prev) => prev.map((p) => (p.id === id ? updated : p)));
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
     },
@@ -307,14 +390,14 @@ export function PosProvider({ children }: { children: ReactNode }) {
         createdAt: now,
         updatedAt: now,
       };
-      await dbBatch({ products: [copy] });
+      await batchWithSync({ products: [copy] }, {}, ["products"]);
       setProducts((prev) => [...prev, copy]);
     },
     [products]
   );
 
   const deleteProduct = useCallback(async (id: string) => {
-    await dbBatch({}, { products: [id] });
+    await batchWithSync({}, { products: [id] }, ["products"]);
     setProducts((prev) => prev.filter((p) => p.id !== id));
   }, []);
 
@@ -335,7 +418,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         note,
         createdAt: nowIso(),
       };
-      await dbBatch({ products: [updated], inventory: [log] });
+      await batchWithSync({ products: [updated], inventory: [log] }, {}, ["products"]);
       setProducts((prev) => prev.map((p) => (p.id === productId ? updated : p)));
       setInventoryLogs((prev) => [log, ...prev]);
     },
@@ -344,7 +427,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
   const createCategory = useCallback(async (name: string) => {
     const category: Category = { id: generateId(), name: name.trim(), createdAt: nowIso() };
-    await dbBatch({ categories: [category] });
+    await batchWithSync({ categories: [category] }, {}, ["meta"]);
     setCategories((prev) => [...prev, category].sort((a, b) => a.name.localeCompare(b.name)));
     return category;
   }, []);
@@ -354,7 +437,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const existing = categories.find((c) => c.id === id);
       if (!existing) return;
       const updated: Category = { ...existing, name: name.trim() };
-      await dbBatch({ categories: [updated] });
+      await batchWithSync({ categories: [updated] }, {}, ["meta"]);
       setCategories((prev) =>
         prev.map((c) => (c.id === id ? updated : c)).sort((a, b) => a.name.localeCompare(b.name))
       );
@@ -367,7 +450,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const affected = products
         .filter((p) => p.categoryId === id)
         .map((p) => ({ ...p, categoryId: "" }));
-      await dbBatch({ products: affected }, { categories: [id] });
+      await batchWithSync({ products: affected }, { categories: [id] }, ["meta", "products"]);
       setCategories((prev) => prev.filter((c) => c.id !== id));
       if (affected.length) {
         setProducts((prev) =>
@@ -380,7 +463,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
   const createCustomer = useCallback(async (input: CustomerInput) => {
     const customer: Customer = { ...input, id: generateId(), createdAt: nowIso() };
-    await dbBatch({ customers: [customer] });
+    await batchWithSync({ customers: [customer] }, {}, ["customers"]);
     setCustomers((prev) => [...prev, customer]);
     return customer;
   }, []);
@@ -390,14 +473,14 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const existing = customers.find((c) => c.id === id);
       if (!existing) return;
       const updated: Customer = { ...existing, ...input };
-      await dbBatch({ customers: [updated] });
+      await batchWithSync({ customers: [updated] }, {}, ["customers"]);
       setCustomers((prev) => prev.map((c) => (c.id === id ? updated : c)));
     },
     [customers]
   );
 
   const deleteCustomer = useCallback(async (id: string) => {
-    await dbBatch({}, { customers: [id] });
+    await batchWithSync({}, { customers: [id] }, ["customers"]);
     setCustomers((prev) => prev.filter((c) => c.id !== id));
   }, []);
 
@@ -408,7 +491,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       isDefault: false,
       createdAt: nowIso(),
     };
-    await dbBatch({ payments: [method] });
+    await batchWithSync({ payments: [method] }, {}, ["meta"]);
     setPayments((prev) => [...prev, method]);
   }, []);
 
@@ -417,7 +500,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       if (payments.length <= 1) {
         throw new Error("At least one payment method is required.");
       }
-      await dbBatch({}, { payments: [id] });
+      await batchWithSync({}, { payments: [id] }, ["meta"]);
       setPayments((prev) => prev.filter((p) => p.id !== id));
     },
     [payments]
@@ -426,7 +509,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const updateSettings = useCallback(
     async (updates: Partial<Omit<PosSettings, "id">>) => {
       const updated: PosSettings = { ...settings, ...updates, id: "main" };
-      await dbBatch({ settings: [updated] });
+      await batchWithSync({ settings: [updated] }, {}, ["meta"]);
       setSettings(updated);
     },
     [settings]
@@ -527,13 +610,17 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
       const updatedSettings: PosSettings = { ...settings, nextInvoiceNumber: counter + 1 };
 
-      await dbBatch({
-        orders: [order],
-        order_items: items,
-        products: updatedProducts,
-        inventory: logs,
-        settings: [updatedSettings],
-      });
+      await batchWithSync(
+        {
+          orders: [order],
+          order_items: items,
+          products: updatedProducts,
+          inventory: logs,
+          settings: [updatedSettings],
+        },
+        {},
+        ["orders", "products", "meta"]
+      );
 
       setOrders((prev) => [order, ...prev]);
       setOrderItems((prev) => [...prev, ...items]);
@@ -581,7 +668,11 @@ export function PosProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      await dbBatch({ orders: [cancelled], products: updatedProducts, inventory: logs });
+      await batchWithSync(
+        { orders: [cancelled], products: updatedProducts, inventory: logs },
+        {},
+        ["orders", "products"]
+      );
 
       setOrders((prev) => prev.map((o) => (o.id === orderId ? cancelled : o)));
       if (updatedProducts.length) {
@@ -623,17 +714,133 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setHeldCarts((prev) => prev.filter((h) => h.id !== id));
   }, []);
 
+  // ---- Google Sheet sync engine -------------------------------------------
+
+  const runSheetFlush = useCallback(async () => {
+    const snapshot = snapshotRef.current;
+    const url = snapshot?.settings.sheetSyncUrl;
+    if (!snapshot || !url || flushingRef.current) return;
+    if (typeof navigator !== "undefined" && !navigator.onLine) return;
+
+    const queued = await dbGetAll<SyncDirtyRow>("sync_queue");
+    if (queued.length === 0) return;
+
+    flushingRef.current = true;
+    setSheetSyncing(true);
+    try {
+      const tabs = buildTabPayloads(queued.map((row) => row.id), snapshot);
+      await pushToSheet(url, tabs);
+
+      // Only clear flags that weren't re-dirtied while the push was in flight.
+      const current = await dbGetAll<SyncDirtyRow>("sync_queue");
+      const clearable = queued
+        .filter((row) =>
+          current.some((c) => c.id === row.id && c.dirtyAt === row.dirtyAt)
+        )
+        .map((row) => row.id);
+      if (clearable.length) {
+        await dbBatch({}, { sync_queue: clearable });
+      }
+      const remaining = await dbGetAll<SyncDirtyRow>("sync_queue");
+      setDirtySlices(remaining.map((row) => row.id));
+
+      const now = nowIso();
+      setSheetLastSyncAt(now);
+      setSheetLastError("");
+      try {
+        localStorage.setItem("pos_sheet_sync_last", now);
+      } catch {
+        // Status display only.
+      }
+    } catch (error) {
+      setSheetLastError(
+        error instanceof Error ? error.message : "Could not sync to the sheet."
+      );
+    } finally {
+      flushingRef.current = false;
+      setSheetSyncing(false);
+    }
+  }, []);
+
+  // Debounced auto-flush whenever something is dirty and a sheet is connected.
+  useEffect(() => {
+    if (status !== "ready" || !settings.sheetSyncUrl || dirtySlices.length === 0) return;
+    const timer = setTimeout(() => {
+      void runSheetFlush();
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [status, settings.sheetSyncUrl, dirtySlices, runSheetFlush]);
+
+  // Coming back online flushes anything that queued up while offline.
+  useEffect(() => {
+    const onOnline = () => {
+      void runSheetFlush();
+    };
+    window.addEventListener("online", onOnline);
+    return () => window.removeEventListener("online", onOnline);
+  }, [runSheetFlush]);
+
+  const connectSheet = useCallback(
+    async (url: string) => {
+      const trimmed = url.trim();
+      if (!isValidSyncUrl(trimmed)) {
+        throw new Error("Paste the full https:// web app URL from Apps Script.");
+      }
+      const test = await testSheetConnection(trimmed);
+      if (!test.ok) {
+        throw new Error(test.error || "Could not connect to the script.");
+      }
+      await updateSettings({ sheetSyncUrl: trimmed });
+      // First sync sends the whole workspace.
+      await batchWithSync({}, {}, SYNC_SLICES);
+    },
+    [updateSettings, batchWithSync]
+  );
+
+  const disconnectSheet = useCallback(async () => {
+    await updateSettings({ sheetSyncUrl: "" });
+    setSheetLastError("");
+  }, [updateSettings]);
+
+  const syncSheetNow = useCallback(async () => {
+    await runSheetFlush();
+  }, [runSheetFlush]);
+
+  const resyncSheetAll = useCallback(async () => {
+    await batchWithSync({}, {}, SYNC_SLICES);
+    await runSheetFlush();
+  }, [batchWithSync, runSheetFlush]);
+
+  const restoreFromSheet = useCallback(
+    async (url: string) => {
+      const trimmed = url.trim();
+      if (!isValidSyncUrl(trimmed)) {
+        throw new Error("Paste the full https:// web app URL from Apps Script.");
+      }
+      const pull = await pullFromSheet(trimmed);
+      const backup = buildBackupFromSheetPull(pull, trimmed);
+      await restoreBackup(backup);
+      const loadedBusiness = await loadAll();
+      setStatus(loadedBusiness ? "ready" : "welcome");
+    },
+    [loadAll]
+  );
+
   const exportBackup = useCallback(async () => {
     const backup = await createBackup();
     downloadBackupFile(backup);
     const updated: PosSettings = { ...settings, lastBackupAt: nowIso() };
-    await dbBatch({ settings: [updated] });
+    await batchWithSync({ settings: [updated] }, {}, ["meta"]);
     setSettings(updated);
   }, [settings]);
 
   const applyRestoredBackup = useCallback(
     async (backup: PosBackup) => {
       await restoreBackup(backup);
+      // The restored data is the new truth — push all of it on next flush.
+      await dbBatch({
+        sync_queue: SYNC_SLICES.map((id) => ({ id, dirtyAt: nowIso() })),
+      });
       const loadedBusiness = await loadAll();
       setStatus(loadedBusiness ? "ready" : "welcome");
     },
@@ -651,9 +858,22 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setPayments([]);
     setInventoryLogs([]);
     setHeldCarts([]);
+    setDirtySlices([]);
+    setSheetLastError("");
     setSettings(DEFAULT_SETTINGS);
     setStatus("welcome");
   }, []);
+
+  const sheetSync = useMemo(
+    () => ({
+      url: settings.sheetSyncUrl,
+      dirtyCount: dirtySlices.length,
+      syncing: sheetSyncing,
+      lastSyncAt: sheetLastSyncAt,
+      lastError: sheetLastError,
+    }),
+    [settings.sheetSyncUrl, dirtySlices.length, sheetSyncing, sheetLastSyncAt, sheetLastError]
+  );
 
   const value = useMemo<PosContextValue>(
     () => ({
@@ -691,6 +911,12 @@ export function PosProvider({ children }: { children: ReactNode }) {
       cancelOrder,
       holdCart,
       removeHeldCart,
+      sheetSync,
+      connectSheet,
+      disconnectSheet,
+      syncSheetNow,
+      resyncSheetAll,
+      restoreFromSheet,
       exportBackup,
       applyRestoredBackup,
       resetAll,
@@ -730,6 +956,12 @@ export function PosProvider({ children }: { children: ReactNode }) {
       cancelOrder,
       holdCart,
       removeHeldCart,
+      sheetSync,
+      connectSheet,
+      disconnectSheet,
+      syncSheetNow,
+      resyncSheetAll,
+      restoreFromSheet,
       exportBackup,
       applyRestoredBackup,
       resetAll,

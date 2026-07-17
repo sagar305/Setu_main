@@ -1,10 +1,14 @@
 // Minimal promise-based IndexedDB wrapper for the Offline Browser POS.
 // Database: POS_DATABASE with one object store per logical table.
 
+// This database doubles as the shared Business Workspace for the toolkit
+// ecosystem — other tools should access it through lib/workspace, never by
+// importing POS internals. The name is kept for existing users' data.
 const DB_NAME = "POS_DATABASE";
-// v2 adds held_carts (hold/recall sales). The upgrade handler creates any
-// missing stores, so bumping the version migrates older databases in place.
-const DB_VERSION = 2;
+// v2 adds held_carts (hold/recall sales); v3 adds sync_queue (Google Sheet
+// sync dirty-flags). The upgrade handler creates any missing stores, so
+// bumping the version migrates older databases in place.
+const DB_VERSION = 3;
 
 export const STORES = [
   "business",
@@ -17,6 +21,7 @@ export const STORES = [
   "inventory",
   "settings",
   "held_carts",
+  "sync_queue",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
