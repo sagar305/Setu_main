@@ -17,6 +17,10 @@
   },
   "categories": [
     {
+      "id": "workspace",
+      "name": "Business Setup"
+    },
+    {
       "id": "pos",
       "name": "Point of Sale"
     },
@@ -31,6 +35,26 @@
     {
       "id": "menu",
       "name": "Menu"
+    },
+    {
+      "id": "products",
+      "name": "Products & Labels"
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory & Purchases"
+    },
+    {
+      "id": "finance",
+      "name": "Finance"
+    },
+    {
+      "id": "customers",
+      "name": "Customers"
+    },
+    {
+      "id": "service",
+      "name": "Appointments"
     }
   ],
   "items": [
@@ -126,6 +150,210 @@
         "eyebrow": "Free Tool — QR Menu Generator",
         "headline": "QR Menu Generator",
         "subheadline": "Build your menu, get a print-ready QR code — the entire menu lives inside the QR itself."
+      }
+    },
+    {
+      "slug": "business-profile",
+      "name": "Business Profile",
+      "category": "workspace",
+      "icon": "store",
+      "shortDescription": "Save your business details once — every Setu tool reuses them automatically.",
+      "seo": {
+        "title": "Business Profile | Setu Technology",
+        "description": "Save business name, GSTIN, logo and contacts once. Every Setu tool reuses them.",
+        "keywords": ["business profile", "business setup"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Business Profile",
+        "headline": "Business Profile",
+        "subheadline": "Set up once. Nothing asks twice."
+      }
+    },
+    {
+      "slug": "receipt-designer",
+      "name": "Receipt Designer",
+      "category": "workspace",
+      "icon": "paintbrush",
+      "shortDescription": "Design your receipt template once — the Browser POS prints with it.",
+      "seo": {
+        "title": "Receipt Designer | Setu Technology",
+        "description": "Design thermal receipt templates reused across Setu tools.",
+        "keywords": ["receipt designer", "thermal receipt template"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Receipt Designer",
+        "headline": "Receipt Designer",
+        "subheadline": "Design once, print everywhere."
+      }
+    },
+    {
+      "slug": "barcode-generator",
+      "name": "Barcode Generator",
+      "category": "products",
+      "icon": "barcode",
+      "shortDescription": "Generate EAN-13, Code 128 and QR barcodes — download as PNG or PDF.",
+      "seo": {
+        "title": "Barcode Generator | Setu Technology",
+        "description": "Free EAN-13, Code 128 and QR barcode generator. PNG and PDF download.",
+        "keywords": ["barcode generator", "EAN-13", "Code 128"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Barcode Generator",
+        "headline": "Barcode Generator",
+        "subheadline": "EAN-13, Code 128 and QR — offline, no signup."
+      }
+    },
+    {
+      "slug": "label-printer",
+      "name": "Price Label Printer",
+      "category": "products",
+      "icon": "printer",
+      "shortDescription": "Print price and barcode labels on A4 sheets or thermal rolls.",
+      "seo": {
+        "title": "Price Label Printer | Setu Technology",
+        "description": "Print product price and barcode labels on A4 label sheets or thermal rolls.",
+        "keywords": ["label printer", "price labels", "barcode labels"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Label Printer",
+        "headline": "Price Label Printer",
+        "subheadline": "A4 sheets or thermal rolls, from your browser."
+      }
+    },
+    {
+      "slug": "stock-register",
+      "name": "Stock Register",
+      "category": "inventory",
+      "icon": "boxes",
+      "shortDescription": "Live stock levels, adjustments and movement history — shared with your POS.",
+      "seo": {
+        "title": "Stock Register | Setu Technology",
+        "description": "Live stock levels and movement history, one source of truth with the Browser POS.",
+        "keywords": ["stock register", "inventory tracker"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Stock Register",
+        "headline": "Stock Register",
+        "subheadline": "One source of truth with your POS."
+      }
+    },
+    {
+      "slug": "purchase-register",
+      "name": "Purchase Register",
+      "category": "inventory",
+      "icon": "clipboard-list",
+      "shortDescription": "Record supplier bills and update product stock with one confirmation.",
+      "seo": {
+        "title": "Purchase Register | Setu Technology",
+        "description": "Record purchases against suppliers and update stock automatically.",
+        "keywords": ["purchase register", "supplier bills"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Purchase Register",
+        "headline": "Purchase Register",
+        "subheadline": "Supplier bills in, stock updated."
+      }
+    },
+    {
+      "slug": "supplier-book",
+      "name": "Supplier Book",
+      "category": "inventory",
+      "icon": "truck",
+      "shortDescription": "All your vendors in one place — reused by the Purchase Register.",
+      "seo": {
+        "title": "Supplier Book | Setu Technology",
+        "description": "Keep supplier contacts, GSTIN and addresses in one reusable book.",
+        "keywords": ["supplier book", "vendor management"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Supplier Book",
+        "headline": "Supplier Book",
+        "subheadline": "Save vendors once, reuse everywhere."
+      }
+    },
+    {
+      "slug": "expense-tracker",
+      "name": "Expense Tracker",
+      "category": "finance",
+      "icon": "wallet",
+      "shortDescription": "Track expenses by category with monthly totals and CSV export.",
+      "seo": {
+        "title": "Expense Tracker | Setu Technology",
+        "description": "Free business expense tracker with categories and monthly totals.",
+        "keywords": ["expense tracker", "business expenses"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Expense Tracker",
+        "headline": "Expense Tracker",
+        "subheadline": "Every expense, categorised."
+      }
+    },
+    {
+      "slug": "cash-book",
+      "name": "Cash Book",
+      "category": "finance",
+      "icon": "hand-coins",
+      "shortDescription": "Daily cash in/out with automatic opening and closing balances.",
+      "seo": {
+        "title": "Cash Book | Setu Technology",
+        "description": "Simple daily cash book with automatic opening and closing balances.",
+        "keywords": ["cash book", "daily cash register"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Cash Book",
+        "headline": "Cash Book",
+        "subheadline": "The shop diary, minus the diary."
+      }
+    },
+    {
+      "slug": "profit-dashboard",
+      "name": "Profit Dashboard",
+      "category": "finance",
+      "icon": "bar-chart-3",
+      "shortDescription": "Real profit from your own sales, product costs and expenses.",
+      "seo": {
+        "title": "Profit Dashboard | Setu Technology",
+        "description": "Net profit from POS sales, cost of goods and actual expenses — with charts.",
+        "keywords": ["profit dashboard", "business profit"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Profit Dashboard",
+        "headline": "Profit Dashboard",
+        "subheadline": "Real numbers, not estimates."
+      }
+    },
+    {
+      "slug": "customer-ledger",
+      "name": "Customer Ledger",
+      "category": "customers",
+      "icon": "book-user",
+      "shortDescription": "Digital udhaar khata — credit, payments and balances per customer.",
+      "seo": {
+        "title": "Customer Ledger (Udhaar Khata) | Setu Technology",
+        "description": "Track credit given and payments received per customer, with balances.",
+        "keywords": ["udhaar khata", "customer ledger", "credit book"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Customer Ledger",
+        "headline": "Customer Ledger",
+        "subheadline": "Udhaar khata, digital."
+      }
+    },
+    {
+      "slug": "appointment-book",
+      "name": "Appointment Book",
+      "category": "service",
+      "icon": "calendar-days",
+      "shortDescription": "Day-wise bookings with durations, statuses and no-show tracking.",
+      "seo": {
+        "title": "Appointment Book | Setu Technology",
+        "description": "Free appointment book for salons, clinics, consultants and services.",
+        "keywords": ["appointment book", "appointment scheduler"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Appointment Book",
+        "headline": "Appointment Book",
+        "subheadline": "For every appointment-based business."
       }
     }
   ]

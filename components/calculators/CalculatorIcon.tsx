@@ -22,6 +22,17 @@ import {
   CircleDollarSign,
   Smartphone,
   QrCode,
+  Barcode,
+  Printer,
+  ClipboardList,
+  Truck,
+  CalendarDays,
+  Paintbrush,
+  BarChart3,
+  BookUser,
+  FileText,
+  NotebookPen,
+  Store,
 } from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
@@ -46,6 +57,17 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "circle-dollar-sign": CircleDollarSign,
   smartphone: Smartphone,
   "qr-code": QrCode,
+  barcode: Barcode,
+  printer: Printer,
+  "clipboard-list": ClipboardList,
+  truck: Truck,
+  "calendar-days": CalendarDays,
+  paintbrush: Paintbrush,
+  "bar-chart-3": BarChart3,
+  "book-user": BookUser,
+  "file-text": FileText,
+  "notebook-pen": NotebookPen,
+  store: Store,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {
