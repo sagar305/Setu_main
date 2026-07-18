@@ -21,8 +21,10 @@ import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { getInventory, updateStock } from "@/lib/toolkit/workspace";
 import type { InventoryLog } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 export function StockRegisterTool() {
+  const { t } = useI18n();
   const workspace = useWorkspaceConnection("stock-register");
   const [logs, setLogs] = useState<InventoryLog[]>([]);
   const [tab, setTab] = useState<"stock" | "history">("stock");
@@ -125,13 +127,13 @@ export function StockRegisterTool() {
                     Movement history
                   </SecondaryButton>
                 </div>
-                <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+                <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
               </div>
 
               {tab === "stock" ? (
                 <>
                   <TextInput
-                    placeholder="Search products…"
+                    placeholder={t("search")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="mb-4"
@@ -145,10 +147,10 @@ export function StockRegisterTool() {
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-muted-line/30 text-left text-muted">
-                            <th className="py-2 pr-4 font-semibold">Product</th>
+                            <th className="py-2 pr-4 font-semibold">{t("product")}</th>
                             <th className="py-2 pr-4 font-semibold">SKU</th>
-                            <th className="py-2 pr-4 text-right font-semibold">Stock</th>
-                            <th className="py-2 font-semibold">Unit</th>
+                            <th className="py-2 pr-4 text-right font-semibold">{t("stock")}</th>
+                            <th className="py-2 font-semibold">{t("unit")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -223,11 +225,11 @@ export function StockRegisterTool() {
             </Card>
 
             <Card className="h-fit">
-              <h2 className="mb-4 text-lg font-bold text-ink">Record adjustment</h2>
+              <h2 className="mb-4 text-lg font-bold text-ink">{t("addEntry")}</h2>
               <div className="space-y-4">
-                <Field label="Product">
+                <Field label={t("product")}>
                   <Select value={productId} onChange={(e) => setProductId(e.target.value)}>
-                    <option value="">Choose…</option>
+                    <option value="">—</option>
                     {products.map((p) => (
                       <option key={p.id} value={p.id}>
                         {p.name}
@@ -235,19 +237,19 @@ export function StockRegisterTool() {
                     ))}
                   </Select>
                 </Field>
-                <Field label="Direction">
+                <Field label={t("category")}>
                   <Select
                     value={direction}
                     onChange={(e) => setDirection(e.target.value as "add" | "reduce")}
                   >
-                    <option value="add">Stock in (+)</option>
-                    <option value="reduce">Stock out (−)</option>
+                    <option value="add">{t("stock")} (+)</option>
+                    <option value="reduce">{t("stock")} (−)</option>
                   </Select>
                 </Field>
-                <Field label="Quantity">
+                <Field label={t("quantity")}>
                   <NumberInput min={1} value={qty} onChange={(e) => setQty(e.target.value)} />
                 </Field>
-                <Field label="Note (optional)">
+                <Field label={t("notes")}>
                   <TextInput
                     value={note}
                     onChange={(e) => setNote(e.target.value)}

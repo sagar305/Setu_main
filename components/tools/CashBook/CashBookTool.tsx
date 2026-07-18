@@ -17,10 +17,12 @@ import { getBusiness } from "@/lib/toolkit/workspace";
 import type { CashEntry } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function CashBookTool() {
+  const { t } = useI18n();
   const { items: entries, loading, error, save, remove } = useEntityList<CashEntry>("cashbook");
   const [currency, setCurrency] = useState("INR");
 
@@ -112,18 +114,18 @@ export function CashBookTool() {
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Record entry</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("addEntry")}</h2>
         <div className="space-y-4">
-          <Field label="Date">
+          <Field label={t("date")}>
             <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </Field>
-          <Field label="Type">
+          <Field label={t("category")}>
             <Select value={type} onChange={(e) => setType(e.target.value as "in" | "out")}>
-              <option value="in">Cash in (+)</option>
-              <option value="out">Cash out (−)</option>
+              <option value="in">{t("cashIn")} (+)</option>
+              <option value="out">{t("cashOut")} (−)</option>
             </Select>
           </Field>
-          <Field label={`Amount (${currencySymbol(currency)})`}>
+          <Field label={`${t("amount")} (${currencySymbol(currency)})`}>
             <NumberInput
               min={0}
               step="0.01"
@@ -132,7 +134,7 @@ export function CashBookTool() {
               placeholder="0.00"
             />
           </Field>
-          <Field label="Description">
+          <Field label={t("description")}>
             <TextInput
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -140,7 +142,7 @@ export function CashBookTool() {
             />
           </Field>
           <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
-            Add entry
+            {t("addEntry")}
           </PrimaryButton>
         </div>
       </Card>
@@ -157,23 +159,23 @@ export function CashBookTool() {
               />
             </Field>
             <SecondaryButton onClick={exportCsv} disabled={entries.length === 0}>
-              Export full book (CSV)
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
 
           <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {stat("Opening", openingBalance, "text-ink")}
-            {stat("Cash in", dayIn, "text-emerald-600")}
-            {stat("Cash out", dayOut, "text-red-600")}
-            {stat("Closing", closingBalance, closingBalance >= 0 ? "text-ink" : "text-red-600")}
+            {stat(t("opening"), openingBalance, "text-ink")}
+            {stat(t("cashIn"), dayIn, "text-emerald-600")}
+            {stat(t("cashOut"), dayOut, "text-red-600")}
+            {stat(t("closing"), closingBalance, closingBalance >= 0 ? "text-ink" : "text-red-600")}
           </div>
 
           {error ? <p className="text-sm text-red-600">{error}</p> : null}
           {loading ? (
-            <p className="py-8 text-center text-sm text-muted">Loading…</p>
+            <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
           ) : dayEntries.length === 0 ? (
             <EmptyState
-              title="No entries on this day"
+              title={t("noEntries")}
               subtitle="Record cash in and cash out through the day — opening and closing balances are calculated automatically."
             />
           ) : (
@@ -206,7 +208,7 @@ export function CashBookTool() {
                       onClick={() => setDeleting(e)}
                       className="text-xs font-semibold text-red-500 hover:text-red-600"
                     >
-                      Delete
+                      {t("delete")}
                     </button>
                   </div>
                 </div>

@@ -5,6 +5,7 @@
 // product (UI Standards, Chapter 8).
 
 import { type ReactNode } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
@@ -106,8 +107,8 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmLabel = "Confirm",
-  cancelLabel = "Cancel",
+  confirmLabel,
+  cancelLabel,
   danger = true,
   onConfirm,
   onCancel,
@@ -121,7 +122,10 @@ export function ConfirmDialog({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
+  const { t } = useI18n();
   if (!open) return null;
+  const confirmText = confirmLabel ?? t("confirm");
+  const cancelText = cancelLabel ?? t("cancel");
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-6"
@@ -133,11 +137,11 @@ export function ConfirmDialog({
         <h3 className="text-lg font-bold text-ink">{title}</h3>
         <p className="mt-2 text-sm text-muted">{message}</p>
         <div className="mt-5 flex justify-end gap-3">
-          <SecondaryButton onClick={onCancel}>{cancelLabel}</SecondaryButton>
+          <SecondaryButton onClick={onCancel}>{cancelText}</SecondaryButton>
           {danger ? (
-            <DangerButton onClick={onConfirm}>{confirmLabel}</DangerButton>
+            <DangerButton onClick={onConfirm}>{confirmText}</DangerButton>
           ) : (
-            <PrimaryButton onClick={onConfirm}>{confirmLabel}</PrimaryButton>
+            <PrimaryButton onClick={onConfirm}>{confirmText}</PrimaryButton>
           )}
         </div>
       </div>

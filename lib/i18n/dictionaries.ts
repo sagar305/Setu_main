@@ -32,7 +32,61 @@ export type DictKey =
   | "currency"
   | "timezone"
   | "customer"
-  | "supplier";
+  | "supplier"
+  // Tool vocabulary — complete in en + hi; other languages fall back to
+  // English until their dictionaries are extended.
+  | "category"
+  | "description"
+  | "paymentMode"
+  | "quantity"
+  | "rate"
+  | "price"
+  | "stock"
+  | "unit"
+  | "product"
+  | "products"
+  | "customersLabel"
+  | "suppliersLabel"
+  | "expensesLabel"
+  | "balance"
+  | "opening"
+  | "closing"
+  | "cashIn"
+  | "cashOut"
+  | "creditGiven"
+  | "paymentReceived"
+  | "service"
+  | "durationMins"
+  | "scheduled"
+  | "completed"
+  | "cancelled"
+  | "noShow"
+  | "settled"
+  | "due"
+  | "advance"
+  | "addItem"
+  | "addEntry"
+  | "addExpense"
+  | "addCustomer"
+  | "addSupplier"
+  | "remove"
+  | "viewTable"
+  | "viewChart"
+  | "today"
+  | "last7Days"
+  | "last30Days"
+  | "customRange"
+  | "revenue"
+  | "costOfGoods"
+  | "grossProfit"
+  | "netProfit"
+  | "noEntries"
+  | "saved"
+  | "validUntil"
+  | "billNumber"
+  | "markCompleted"
+  | "reopen"
+  | "address";
 
 type Dict = Record<DictKey, string>;
 
@@ -63,6 +117,58 @@ const en: Dict = {
   timezone: "Timezone",
   customer: "Customer",
   supplier: "Supplier",
+  category: "Category",
+  description: "Description",
+  paymentMode: "Payment mode",
+  quantity: "Qty",
+  rate: "Rate",
+  price: "Price",
+  stock: "Stock",
+  unit: "Unit",
+  product: "Product",
+  products: "Products",
+  customersLabel: "Customers",
+  suppliersLabel: "Suppliers",
+  expensesLabel: "Expenses",
+  balance: "Balance",
+  opening: "Opening",
+  closing: "Closing",
+  cashIn: "Cash in",
+  cashOut: "Cash out",
+  creditGiven: "Credit given",
+  paymentReceived: "Payment received",
+  service: "Service",
+  durationMins: "Duration (minutes)",
+  scheduled: "scheduled",
+  completed: "completed",
+  cancelled: "cancelled",
+  noShow: "no-show",
+  settled: "settled",
+  due: "due",
+  advance: "advance",
+  addItem: "+ Add item",
+  addEntry: "Add entry",
+  addExpense: "Add expense",
+  addCustomer: "Add customer",
+  addSupplier: "Add supplier",
+  remove: "Remove",
+  viewTable: "View table",
+  viewChart: "View chart",
+  today: "Today",
+  last7Days: "Last 7 days",
+  last30Days: "Last 30 days",
+  customRange: "Custom",
+  revenue: "Revenue",
+  costOfGoods: "Cost of goods",
+  grossProfit: "Gross profit",
+  netProfit: "Net profit",
+  noEntries: "No entries yet",
+  saved: "Saved",
+  validUntil: "Valid until",
+  billNumber: "Bill number",
+  markCompleted: "Mark completed",
+  reopen: "Re-open",
+  address: "Address",
 };
 
 const hi: Dict = {
@@ -92,9 +198,61 @@ const hi: Dict = {
   timezone: "समय क्षेत्र",
   customer: "ग्राहक",
   supplier: "आपूर्तिकर्ता",
+  category: "श्रेणी",
+  description: "विवरण",
+  paymentMode: "भुगतान का तरीका",
+  quantity: "मात्रा",
+  rate: "दर",
+  price: "कीमत",
+  stock: "स्टॉक",
+  unit: "इकाई",
+  product: "उत्पाद",
+  products: "उत्पाद",
+  customersLabel: "ग्राहक",
+  suppliersLabel: "आपूर्तिकर्ता",
+  expensesLabel: "खर्च",
+  balance: "शेष",
+  opening: "प्रारंभिक",
+  closing: "समापन",
+  cashIn: "नकद आया",
+  cashOut: "नकद गया",
+  creditGiven: "उधार दिया",
+  paymentReceived: "भुगतान मिला",
+  service: "सेवा",
+  durationMins: "अवधि (मिनट)",
+  scheduled: "निर्धारित",
+  completed: "पूर्ण",
+  cancelled: "रद्द",
+  noShow: "नहीं आए",
+  settled: "चुकता",
+  due: "बकाया",
+  advance: "अग्रिम",
+  addItem: "+ आइटम जोड़ें",
+  addEntry: "एंट्री जोड़ें",
+  addExpense: "खर्च जोड़ें",
+  addCustomer: "ग्राहक जोड़ें",
+  addSupplier: "आपूर्तिकर्ता जोड़ें",
+  remove: "हटाएँ",
+  viewTable: "तालिका देखें",
+  viewChart: "चार्ट देखें",
+  today: "आज",
+  last7Days: "पिछले 7 दिन",
+  last30Days: "पिछले 30 दिन",
+  customRange: "कस्टम",
+  revenue: "आमदनी",
+  costOfGoods: "माल की लागत",
+  grossProfit: "सकल लाभ",
+  netProfit: "शुद्ध लाभ",
+  noEntries: "अभी कोई एंट्री नहीं",
+  saved: "सहेजा गया",
+  validUntil: "मान्य तिथि",
+  billNumber: "बिल नंबर",
+  markCompleted: "पूर्ण करें",
+  reopen: "फिर से खोलें",
+  address: "पता",
 };
 
-const bn: Dict = {
+const bn: Partial<Dict> = {
   workspaceFound: "এই ডিভাইসে ওয়ার্কস্পেস পাওয়া গেছে।",
   useWorkspace: "ওয়ার্কস্পেস ব্যবহার করুন",
   notNow: "এখন নয়",
@@ -123,7 +281,7 @@ const bn: Dict = {
   supplier: "সরবরাহকারী",
 };
 
-const ta: Dict = {
+const ta: Partial<Dict> = {
   workspaceFound: "இந்த சாதனத்தில் பணியிடம் கண்டறியப்பட்டது.",
   useWorkspace: "பணியிடத்தைப் பயன்படுத்து",
   notNow: "இப்போது வேண்டாம்",
@@ -152,7 +310,7 @@ const ta: Dict = {
   supplier: "சப்ளையர்",
 };
 
-const te: Dict = {
+const te: Partial<Dict> = {
   workspaceFound: "ఈ పరికరంలో వర్క్‌స్పేస్ కనుగొనబడింది.",
   useWorkspace: "వర్క్‌స్పేస్ ఉపయోగించండి",
   notNow: "ఇప్పుడు కాదు",
@@ -181,7 +339,7 @@ const te: Dict = {
   supplier: "సరఫరాదారు",
 };
 
-const mr: Dict = {
+const mr: Partial<Dict> = {
   workspaceFound: "या डिव्हाइसवर वर्कस्पेस सापडले.",
   useWorkspace: "वर्कस्पेस वापरा",
   notNow: "आत्ता नाही",
@@ -210,7 +368,7 @@ const mr: Dict = {
   supplier: "पुरवठादार",
 };
 
-const gu: Dict = {
+const gu: Partial<Dict> = {
   workspaceFound: "આ ડિવાઇસ પર વર્કસ્પેસ મળ્યું.",
   useWorkspace: "વર્કસ્પેસ વાપરો",
   notNow: "હમણાં નહીં",
@@ -239,7 +397,7 @@ const gu: Dict = {
   supplier: "સપ્લાયર",
 };
 
-const kn: Dict = {
+const kn: Partial<Dict> = {
   workspaceFound: "ಈ ಸಾಧನದಲ್ಲಿ ವರ್ಕ್‌ಸ್ಪೇಸ್ ಕಂಡುಬಂದಿದೆ.",
   useWorkspace: "ವರ್ಕ್‌ಸ್ಪೇಸ್ ಬಳಸಿ",
   notNow: "ಈಗ ಬೇಡ",
@@ -268,7 +426,7 @@ const kn: Dict = {
   supplier: "ಪೂರೈಕೆದಾರ",
 };
 
-const ml: Dict = {
+const ml: Partial<Dict> = {
   workspaceFound: "ഈ ഉപകരണത്തിൽ വർക്ക്സ്പേസ് കണ്ടെത്തി.",
   useWorkspace: "വർക്ക്സ്പേസ് ഉപയോഗിക്കുക",
   notNow: "ഇപ്പോൾ വേണ്ട",
@@ -297,7 +455,7 @@ const ml: Dict = {
   supplier: "വിതരണക്കാരൻ",
 };
 
-const pa: Dict = {
+const pa: Partial<Dict> = {
   workspaceFound: "ਇਸ ਡਿਵਾਈਸ 'ਤੇ ਵਰਕਸਪੇਸ ਮਿਲਿਆ।",
   useWorkspace: "ਵਰਕਸਪੇਸ ਵਰਤੋ",
   notNow: "ਹੁਣ ਨਹੀਂ",
@@ -326,7 +484,7 @@ const pa: Dict = {
   supplier: "ਸਪਲਾਇਰ",
 };
 
-const es: Dict = {
+const es: Partial<Dict> = {
   workspaceFound: "Espacio de trabajo encontrado en este dispositivo.",
   useWorkspace: "Usar espacio de trabajo",
   notNow: "Ahora no",
@@ -355,7 +513,7 @@ const es: Dict = {
   supplier: "Proveedor",
 };
 
-const fr: Dict = {
+const fr: Partial<Dict> = {
   workspaceFound: "Espace de travail trouvé sur cet appareil.",
   useWorkspace: "Utiliser l'espace de travail",
   notNow: "Pas maintenant",
@@ -384,7 +542,7 @@ const fr: Dict = {
   supplier: "Fournisseur",
 };
 
-const ar: Dict = {
+const ar: Partial<Dict> = {
   workspaceFound: "تم العثور على مساحة عمل على هذا الجهاز.",
   useWorkspace: "استخدام مساحة العمل",
   notNow: "ليس الآن",
@@ -413,7 +571,7 @@ const ar: Dict = {
   supplier: "المورّد",
 };
 
-const pt: Dict = {
+const pt: Partial<Dict> = {
   workspaceFound: "Espaço de trabalho encontrado neste dispositivo.",
   useWorkspace: "Usar espaço de trabalho",
   notNow: "Agora não",
@@ -442,7 +600,7 @@ const pt: Dict = {
   supplier: "Fornecedor",
 };
 
-const id: Dict = {
+const id: Partial<Dict> = {
   workspaceFound: "Ruang kerja ditemukan di perangkat ini.",
   useWorkspace: "Gunakan ruang kerja",
   notNow: "Nanti saja",
@@ -471,7 +629,7 @@ const id: Dict = {
   supplier: "Pemasok",
 };
 
-const de: Dict = {
+const de: Partial<Dict> = {
   workspaceFound: "Arbeitsbereich auf diesem Gerät gefunden.",
   useWorkspace: "Arbeitsbereich verwenden",
   notNow: "Nicht jetzt",
@@ -500,7 +658,7 @@ const de: Dict = {
   supplier: "Lieferant",
 };
 
-const zh: Dict = {
+const zh: Partial<Dict> = {
   workspaceFound: "在此设备上找到工作区。",
   useWorkspace: "使用工作区",
   notNow: "暂不",

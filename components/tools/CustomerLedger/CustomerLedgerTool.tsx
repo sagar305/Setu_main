@@ -24,10 +24,12 @@ import type { LedgerEntry } from "@/lib/toolkit/types";
 import type { Customer } from "@/lib/pos/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function CustomerLedgerTool() {
+  const { t } = useI18n();
   const workspace = useWorkspaceConnection("customer-ledger");
   const { items: entries, save, remove } = useEntityList<LedgerEntry>("ledger");
 
@@ -146,13 +148,13 @@ export function CustomerLedgerTool() {
           </span>
         </p>
         <SecondaryButton onClick={exportCsv} disabled={entries.length === 0}>
-          Export CSV
+          {t("exportCsv")}
         </SecondaryButton>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">Customers</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("customersLabel")}</h2>
 
           <div className="mb-4 space-y-2 rounded-lg border border-muted-line/30 p-3">
             <TextInput
@@ -166,7 +168,7 @@ export function CustomerLedgerTool() {
               placeholder="Phone (optional)"
             />
             <PrimaryButton className="w-full" onClick={addCustomer} disabled={!newName.trim()}>
-              Add customer
+              {t("addCustomer")}
             </PrimaryButton>
           </div>
 
@@ -198,7 +200,7 @@ export function CustomerLedgerTool() {
                         balance > 0 ? "text-red-600" : balance < 0 ? "text-emerald-600" : "text-muted"
                       }`}
                     >
-                      {balance === 0 ? "settled" : formatMoney(Math.abs(balance), currency)}
+                      {balance === 0 ? t("settled") : formatMoney(Math.abs(balance), currency)}
                     </span>
                   </button>
                 );
@@ -219,7 +221,7 @@ export function CustomerLedgerTool() {
                 <div>
                   <h2 className="text-lg font-bold text-ink">{selected.name}</h2>
                   <p className="text-sm text-muted">
-                    Balance:{" "}
+                    {t("balance")}:{" "}
                     <span
                       className={`font-bold ${
                         (balances.get(selected.id) ?? 0) > 0 ? "text-red-600" : "text-emerald-600"
@@ -227,9 +229,9 @@ export function CustomerLedgerTool() {
                     >
                       {formatMoney(Math.abs(balances.get(selected.id) ?? 0), currency)}
                       {(balances.get(selected.id) ?? 0) > 0
-                        ? " due"
+                        ? ` ${t("due")}`
                         : (balances.get(selected.id) ?? 0) < 0
-                          ? " advance"
+                          ? ` ${t("advance")}`
                           : ""}
                     </span>
                   </p>
@@ -237,20 +239,20 @@ export function CustomerLedgerTool() {
               </div>
 
               <div className="mb-5 grid gap-3 rounded-lg border border-muted-line/30 p-4 sm:grid-cols-[110px_1fr_130px_auto]">
-                <Field label="Type">
+                <Field label={t("category")}>
                   <Select value={type} onChange={(e) => setType(e.target.value as "credit" | "payment")}>
-                    <option value="credit">Credit given</option>
-                    <option value="payment">Payment received</option>
+                    <option value="credit">{t("creditGiven")}</option>
+                    <option value="payment">{t("paymentReceived")}</option>
                   </Select>
                 </Field>
-                <Field label="Note">
+                <Field label={t("notes")}>
                   <TextInput
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder="e.g. Groceries, part payment"
                   />
                 </Field>
-                <Field label={`Amount (${currencySymbol(currency)})`}>
+                <Field label={`${t("amount")} (${currencySymbol(currency)})`}>
                   <NumberInput
                     min={0}
                     step="0.01"
@@ -260,10 +262,10 @@ export function CustomerLedgerTool() {
                 </Field>
                 <div className="flex items-end">
                   <PrimaryButton onClick={addEntry} disabled={!canAdd}>
-                    Add
+                    {t("add")}
                   </PrimaryButton>
                 </div>
-                <Field label="Date">
+                <Field label={t("date")}>
                   <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 </Field>
               </div>
@@ -281,7 +283,7 @@ export function CustomerLedgerTool() {
                     >
                       <div>
                         <p className="text-sm font-medium text-ink">
-                          {e.type === "credit" ? "Credit given" : "Payment received"}
+                          {e.type === "credit" ? t("creditGiven") : t("paymentReceived")}
                           {e.note ? ` — ${e.note}` : ""}
                         </p>
                         <p className="text-xs text-muted">{e.date}</p>
@@ -300,7 +302,7 @@ export function CustomerLedgerTool() {
                           onClick={() => setDeleting(e)}
                           className="text-xs font-semibold text-red-500 hover:text-red-600"
                         >
-                          Delete
+                          {t("delete")}
                         </button>
                       </div>
                     </div>

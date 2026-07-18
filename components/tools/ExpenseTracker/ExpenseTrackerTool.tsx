@@ -18,11 +18,13 @@ import type { Expense, Supplier } from "@/lib/toolkit/types";
 import { EXPENSE_CATEGORIES } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 const monthOf = (isoDate: string) => isoDate.slice(0, 7);
 
 export function ExpenseTrackerTool() {
+  const { t } = useI18n();
   const { items: expenses, loading, error, save, remove } = useEntityList<Expense>("expenses");
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [currency, setCurrency] = useState("INR");
@@ -110,19 +112,19 @@ export function ExpenseTrackerTool() {
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Add expense</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("addExpense")}</h2>
         <div className="space-y-4">
-          <Field label="Date">
+          <Field label={t("date")}>
             <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </Field>
-          <Field label="Category">
+          <Field label={t("category")}>
             <Select value={category} onChange={(e) => setCategory(e.target.value)}>
               {EXPENSE_CATEGORIES.map((c) => (
                 <option key={c}>{c}</option>
               ))}
             </Select>
           </Field>
-          <Field label={`Amount (${currencySymbol(currency)})`}>
+          <Field label={`${t("amount")} (${currencySymbol(currency)})`}>
             <NumberInput
               min={0}
               step="0.01"
@@ -131,14 +133,14 @@ export function ExpenseTrackerTool() {
               placeholder="0.00"
             />
           </Field>
-          <Field label="Description">
+          <Field label={t("description")}>
             <TextInput
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Shop rent for July"
             />
           </Field>
-          <Field label="Payment mode">
+          <Field label={t("paymentMode")}>
             <Select value={paymentMode} onChange={(e) => setPaymentMode(e.target.value)}>
               {["Cash", "UPI", "Card", "Bank transfer"].map((m) => (
                 <option key={m}>{m}</option>
@@ -146,9 +148,9 @@ export function ExpenseTrackerTool() {
             </Select>
           </Field>
           {suppliers.length > 0 ? (
-            <Field label="Supplier (optional)">
+            <Field label={t("supplier")}>
               <Select value={supplierId} onChange={(e) => setSupplierId(e.target.value)}>
-                <option value="">None</option>
+                <option value="">—</option>
                 {suppliers.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.name}
@@ -158,7 +160,7 @@ export function ExpenseTrackerTool() {
             </Field>
           ) : null}
           <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
-            Add expense
+            {t("addExpense")}
           </PrimaryButton>
         </div>
       </Card>
@@ -175,13 +177,13 @@ export function ExpenseTrackerTool() {
             </Select>
             <div className="flex items-center gap-3">
               <p className="text-sm text-muted">
-                Total:{" "}
+                {t("total")}:{" "}
                 <span className="text-base font-bold text-ink">
                   {formatMoney(monthTotal, currency)}
                 </span>
               </p>
               <SecondaryButton onClick={exportCsv} disabled={inMonth.length === 0}>
-                Export CSV
+                {t("exportCsv")}
               </SecondaryButton>
             </div>
           </div>
@@ -201,10 +203,10 @@ export function ExpenseTrackerTool() {
 
           {error ? <p className="text-sm text-red-600">{error}</p> : null}
           {loading ? (
-            <p className="py-8 text-center text-sm text-muted">Loading…</p>
+            <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
           ) : inMonth.length === 0 ? (
             <EmptyState
-              title="No expenses this month"
+              title={t("noEntries")}
               subtitle="Record rent, salaries, purchases and bills — the Profit Dashboard uses them to show your real profit."
             />
           ) : (
@@ -212,10 +214,10 @@ export function ExpenseTrackerTool() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-muted-line/30 text-left text-muted">
-                    <th className="py-2 pr-4 font-semibold">Date</th>
-                    <th className="py-2 pr-4 font-semibold">Category</th>
-                    <th className="py-2 pr-4 font-semibold">Description</th>
-                    <th className="py-2 pr-4 text-right font-semibold">Amount</th>
+                    <th className="py-2 pr-4 font-semibold">{t("date")}</th>
+                    <th className="py-2 pr-4 font-semibold">{t("category")}</th>
+                    <th className="py-2 pr-4 font-semibold">{t("description")}</th>
+                    <th className="py-2 pr-4 text-right font-semibold">{t("amount")}</th>
                     <th className="py-2 font-semibold" />
                   </tr>
                 </thead>
@@ -234,7 +236,7 @@ export function ExpenseTrackerTool() {
                           onClick={() => setDeleting(e)}
                           className="text-xs font-semibold text-red-500 hover:text-red-600"
                         >
-                          Delete
+                          {t("delete")}
                         </button>
                       </td>
                     </tr>

@@ -15,10 +15,12 @@ import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { Supplier } from "@/lib/toolkit/types";
 import { generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 const BLANK = { name: "", phone: "", email: "", gstin: "", address: "", notes: "" };
 
 export function SupplierBookTool() {
+  const { t } = useI18n();
   const { items: suppliers, loading, error, save, remove } = useEntityList<Supplier>("suppliers");
   const [form, setForm] = useState(BLANK);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -70,23 +72,25 @@ export function SupplierBookTool() {
     <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
       <Card>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Suppliers ({suppliers.length})</h2>
+          <h2 className="text-lg font-bold text-ink">
+            {t("suppliersLabel")} ({suppliers.length})
+          </h2>
           <div className="flex gap-2">
             <TextInput
-              placeholder="Search…"
+              placeholder={t("search")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-44"
             />
             <SecondaryButton onClick={exportCsv} disabled={suppliers.length === 0}>
-              Export CSV
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
         </div>
 
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
         {loading ? (
-          <p className="py-8 text-center text-sm text-muted">Loading…</p>
+          <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
         ) : filtered.length === 0 ? (
           <EmptyState
             title={suppliers.length === 0 ? "No suppliers yet" : "No matches"}
@@ -112,12 +116,12 @@ export function SupplierBookTool() {
                   {s.address ? <p className="mt-0.5 text-sm text-muted">{s.address}</p> : null}
                 </div>
                 <div className="flex gap-2">
-                  <SecondaryButton onClick={() => startEdit(s)}>Edit</SecondaryButton>
+                  <SecondaryButton onClick={() => startEdit(s)}>{t("edit")}</SecondaryButton>
                   <SecondaryButton
                     className="border-red-200 text-red-600 hover:bg-red-50"
                     onClick={() => setDeleting(s)}
                   >
-                    Delete
+                    {t("delete")}
                   </SecondaryButton>
                 </div>
               </div>
@@ -128,13 +132,13 @@ export function SupplierBookTool() {
 
       <Card className="h-fit">
         <h2 className="mb-4 text-lg font-bold text-ink">
-          {editingId ? "Edit supplier" : "Add supplier"}
+          {editingId ? t("edit") : t("addSupplier")}
         </h2>
         <div className="space-y-4">
-          <Field label="Name *">
+          <Field label={`${t("name")} *`}>
             <TextInput value={form.name} onChange={set("name")} placeholder="Supplier name" />
           </Field>
-          <Field label="Phone">
+          <Field label={t("phone")}>
             <TextInput value={form.phone} onChange={set("phone")} placeholder="98765 43210" />
           </Field>
           <Field label="Email">
@@ -143,15 +147,15 @@ export function SupplierBookTool() {
           <Field label="GSTIN">
             <TextInput value={form.gstin} onChange={set("gstin")} placeholder="22AAAAA0000A1Z5" />
           </Field>
-          <Field label="Address">
+          <Field label={t("address")}>
             <TextArea value={form.address} onChange={set("address")} />
           </Field>
-          <Field label="Notes">
+          <Field label={t("notes")}>
             <TextArea value={form.notes} onChange={set("notes")} />
           </Field>
           <div className="flex gap-2">
             <PrimaryButton className="flex-1" onClick={submit} disabled={!form.name.trim()}>
-              {editingId ? "Save changes" : "Add supplier"}
+              {editingId ? t("saveChanges") : t("addSupplier")}
             </PrimaryButton>
             {editingId ? (
               <SecondaryButton
@@ -160,7 +164,7 @@ export function SupplierBookTool() {
                   setForm(BLANK);
                 }}
               >
-                Cancel
+                {t("cancel")}
               </SecondaryButton>
             ) : null}
           </div>
