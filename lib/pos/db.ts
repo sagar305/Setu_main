@@ -158,11 +158,22 @@ export async function dbBatch(
   await txDone(tx);
 }
 
-/** Wipe every store (used by restore-from-backup and full reset). */
+/** Wipe every store (used by full reset). */
 export async function dbClearAll(): Promise<void> {
   const db = await openPosDb();
   const tx = db.transaction([...STORES], "readwrite");
   for (const store of STORES) {
+    tx.objectStore(store).clear();
+  }
+  await txDone(tx);
+}
+
+/** Wipe only the given stores (used by selective restore-from-backup). */
+export async function dbClearStores(stores: StoreName[]): Promise<void> {
+  if (stores.length === 0) return;
+  const db = await openPosDb();
+  const tx = db.transaction(stores, "readwrite");
+  for (const store of stores) {
     tx.objectStore(store).clear();
   }
   await txDone(tx);

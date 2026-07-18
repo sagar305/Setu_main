@@ -306,7 +306,9 @@ export function buildBackupFromSheetPull(pull: SheetPullResult, url: string): Po
     settings: [settings],
     held_carts: [],
     sync_queue: [],
-  } satisfies Record<StoreName, unknown[]>;
+    // POS slices only — restore replaces these and leaves toolkit stores
+    // (expenses, suppliers, appointments, …) untouched.
+  } satisfies Partial<Record<StoreName, unknown[]>>;
   return {
     app: BACKUP_APP_MARKER,
     version: BACKUP_VERSION,
