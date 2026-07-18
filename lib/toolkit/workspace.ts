@@ -37,9 +37,89 @@ export type {
 } from "@/lib/workspace";
 
 import { isDangerousOp, type EntityName, type Permission } from "@/lib/toolkit/entities";
+import { dbDelete, dbGetAll, dbPut, type StoreName } from "@/lib/pos/db";
+import { updateStock } from "@/lib/workspace";
+import type {
+  Appointment,
+  CashEntry,
+  Expense,
+  LedgerEntry,
+  Purchase,
+  ReceiptTemplate,
+  Supplier,
+  WorkspaceAsset,
+} from "@/lib/toolkit/types";
 
 export type { EntityName, Permission };
 export { isDangerousOp };
+export type {
+  Appointment,
+  CashEntry,
+  Expense,
+  LedgerEntry,
+  Purchase,
+  ReceiptTemplate,
+  Supplier,
+  WorkspaceAsset,
+};
+
+// ---------------------------------------------------------------------------
+// Typed CRUD over the toolkit stores (POS_DATABASE v4)
+// ---------------------------------------------------------------------------
+
+export const getSuppliers = () => dbGetAll<Supplier>("suppliers");
+export const saveSupplier = (s: Supplier) => dbPut<Supplier>("suppliers", s);
+export const deleteSupplier = (id: string) => dbDelete("suppliers", id);
+
+export const getExpenses = () => dbGetAll<Expense>("expenses");
+export const saveExpense = (e: Expense) => dbPut<Expense>("expenses", e);
+export const deleteExpense = (id: string) => dbDelete("expenses", id);
+
+export const getCashEntries = () => dbGetAll<CashEntry>("cashbook");
+export const saveCashEntry = (e: CashEntry) => dbPut<CashEntry>("cashbook", e);
+export const deleteCashEntry = (id: string) => dbDelete("cashbook", id);
+
+export const getAppointments = () => dbGetAll<Appointment>("appointments");
+export const saveAppointment = (a: Appointment) => dbPut<Appointment>("appointments", a);
+export const deleteAppointment = (id: string) => dbDelete("appointments", id);
+
+export const getLedgerEntries = () => dbGetAll<LedgerEntry>("ledger");
+export const saveLedgerEntry = (e: LedgerEntry) => dbPut<LedgerEntry>("ledger", e);
+export const deleteLedgerEntry = (id: string) => dbDelete("ledger", id);
+
+export const getReceiptTemplates = () => dbGetAll<ReceiptTemplate>("receipt_templates");
+export const saveReceiptTemplate = (t: ReceiptTemplate) =>
+  dbPut<ReceiptTemplate>("receipt_templates", t);
+export const deleteReceiptTemplate = (id: string) => dbDelete("receipt_templates", id);
+
+export const getPurchases = () => dbGetAll<Purchase>("purchases");
+export const savePurchase = (p: Purchase) => dbPut<Purchase>("purchases", p);
+export const deletePurchase = (id: string) => dbDelete("purchases", id);
+
+export const getAssets = () => dbGetAll<WorkspaceAsset>("assets");
+export const saveAsset = (a: WorkspaceAsset) => dbPut<WorkspaceAsset>("assets", a);
+export const deleteAsset = (id: string) => dbDelete("assets", id);
+
+/** Generic list read used by the shared useEntityList hook. */
+export const listStore = <T,>(store: StoreName) => dbGetAll<T>(store);
+export const putRecord = <T,>(store: StoreName, record: T) => dbPut<T>(store, record);
+export const deleteRecord = (store: StoreName, id: string) => dbDelete(store, id);
+
+/**
+ * Apply a confirmed purchase to product stock (dangerous op — caller MUST have
+ * shown the confirmation first). Each linked line increases stock and records
+ * an inventory log entry.
+ */
+export async function applyPurchaseToStock(purchase: Purchase): Promise<void> {
+  for (const item of purchase.items) {
+    if (!item.productId || item.quantity <= 0) continue;
+    await updateStock(
+      item.productId,
+      item.quantity,
+      `Purchase ${purchase.billNumber || purchase.id.slice(0, 6)}`
+    );
+  }
+}
 
 /**
  * A tool's declared intent to use the workspace. Consent is per-tool and

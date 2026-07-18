@@ -6,9 +6,11 @@
 // importing POS internals. The name is kept for existing users' data.
 const DB_NAME = "POS_DATABASE";
 // v2 adds held_carts (hold/recall sales); v3 adds sync_queue (Google Sheet
-// sync dirty-flags). The upgrade handler creates any missing stores, so
-// bumping the version migrates older databases in place.
-const DB_VERSION = 3;
+// sync dirty-flags); v4 adds the Business Toolkit stores (suppliers, expenses,
+// cashbook, appointments, ledger, receipt_templates, purchases, quotations,
+// assets). The upgrade handler creates any missing stores, so bumping the
+// version migrates older databases in place.
+const DB_VERSION = 4;
 
 export const STORES = [
   "business",
@@ -22,6 +24,15 @@ export const STORES = [
   "settings",
   "held_carts",
   "sync_queue",
+  "suppliers",
+  "expenses",
+  "cashbook",
+  "appointments",
+  "ledger",
+  "receipt_templates",
+  "purchases",
+  "quotations",
+  "assets",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
@@ -49,6 +60,12 @@ export function openPosDb(): Promise<IDBDatabase> {
           }
           if (store === "inventory") {
             objectStore.createIndex("productId", "productId", { unique: false });
+          }
+          if (store === "ledger") {
+            objectStore.createIndex("customerId", "customerId", { unique: false });
+          }
+          if (store === "purchases") {
+            objectStore.createIndex("supplierId", "supplierId", { unique: false });
           }
         }
       }

@@ -71,11 +71,13 @@ export type EntityName =
   | "orders"
   | "order_items"
   | "invoices"
+  | "quotations"
   | "receipt_templates"
   | "expenses"
   | "cashbook"
   | "appointments"
   | "ledger"
+  | "purchases"
   | "inventory"
   | "payments"
   | "assets"
@@ -148,9 +150,9 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     label: "Suppliers",
     ownedBy: "workspace",
     primaryEditor: "supplier-book",
-    store: null,
+    store: "suppliers",
     dangerousOps: ["delete"],
-    status: "planned",
+    status: "live",
   },
   orders: {
     name: "orders",
@@ -179,50 +181,68 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     dangerousOps: ["delete"],
     status: "planned",
   },
+  quotations: {
+    name: "quotations",
+    label: "Quotations",
+    ownedBy: "workspace",
+    primaryEditor: "quotation-generator",
+    store: "quotations",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
   receipt_templates: {
     name: "receipt_templates",
     label: "Receipt Templates",
     ownedBy: "workspace",
     primaryEditor: "receipt-designer",
-    store: null,
+    store: "receipt_templates",
     dangerousOps: ["delete"],
-    status: "planned",
+    status: "live",
   },
   expenses: {
     name: "expenses",
     label: "Expenses",
     ownedBy: "workspace",
     primaryEditor: "expense-tracker",
-    store: null,
+    store: "expenses",
     dangerousOps: ["delete"],
-    status: "planned",
+    status: "live",
   },
   cashbook: {
     name: "cashbook",
     label: "Cash Book Entries",
     ownedBy: "workspace",
     primaryEditor: "cash-book",
-    store: null,
+    store: "cashbook",
     dangerousOps: ["delete"],
-    status: "planned",
+    status: "live",
   },
   appointments: {
     name: "appointments",
     label: "Appointments",
     ownedBy: "workspace",
     primaryEditor: "appointment-book",
-    store: null,
+    store: "appointments",
     dangerousOps: ["delete", "cancel"],
-    status: "planned",
+    status: "live",
   },
   ledger: {
     name: "ledger",
     label: "Customer Ledger (Udhaar)",
     ownedBy: "workspace",
     primaryEditor: "customer-ledger",
-    store: null,
+    store: "ledger",
     dangerousOps: ["delete", "adjust-balance"],
-    status: "planned",
+    status: "live",
+  },
+  purchases: {
+    name: "purchases",
+    label: "Purchases",
+    ownedBy: "workspace",
+    primaryEditor: "purchase-register",
+    store: "purchases",
+    dangerousOps: ["delete"],
+    status: "live",
   },
   inventory: {
     name: "inventory",
@@ -247,9 +267,9 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     label: "Shared Assets (Logo, QR designs)",
     ownedBy: "workspace",
     primaryEditor: "logo-manager",
-    store: null,
+    store: "assets",
     dangerousOps: ["delete"],
-    status: "planned",
+    status: "live",
   },
   settings: {
     name: "settings",
