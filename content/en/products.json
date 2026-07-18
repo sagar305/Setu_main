@@ -1,8 +1,8 @@
 {
   "seo": {
     "title": "Products | Setu Technology",
-    "description": "Explore Setu Technology's products — Setu Dine and Setu Queue for restaurants are live today, with Setu Retail and Setu Clinic coming soon.",
-    "keywords": ["Setu products", "Setu Dine", "Setu Queue", "Setu Retail", "Setu Clinic"]
+    "description": "Explore Setu Technology's products — the free Browser Based POS, plus Setu Dine and Setu Queue for restaurants, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": ["Setu products", "Browser Based POS", "Setu Dine", "Setu Queue", "Setu Retail", "Setu Clinic"]
   },
   "hero": {
     "eyebrow": "Products",
@@ -10,6 +10,22 @@
     "subheadline": "We started with restaurants. Here's what's live today, and what's coming next."
   },
   "products": [
+    {
+      "id": "browser-pos",
+      "status": "live",
+      "name": "Browser Based POS",
+      "headline": "Free offline POS, right in your browser",
+      "description": "A completely free point-of-sale for small businesses. Bill customers, manage products and inventory, hold and recall carts, and print thermal receipts — no login, no subscription, and it keeps working without internet. All data stays on your device, with one-click backup and restore.",
+      "features": [
+        "Fast billing with barcode scanner support",
+        "Works fully offline",
+        "Inventory & stock tracking",
+        "Customers & purchase history",
+        "Thermal (80mm/58mm) & A4 receipt printing",
+        "JSON backup / restore & CSV exports"
+      ],
+      "cta": { "label": "Open Browser Based POS — it's free", "href": "/products/browser-based-pos" }
+    },
     {
       "id": "pos",
       "status": "live",

@@ -8,6 +8,11 @@ const nextConfig = {
         destination: "/products/restaurant-pos",
         permanent: true,
       },
+      {
+        source: "/free-pos",
+        destination: "/products/browser-based-pos",
+        permanent: true,
+      },
     ];
   },
   async headers() {

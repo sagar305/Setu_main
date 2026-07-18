@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
 
 export const metadata: Metadata = {
-  title: "Free Offline POS for Small Business - No Login, Works in Browser",
+  title: "Browser Based POS - Free, Offline, No Login | Setu Technology",
   description:
     "Free browser-based POS system for small businesses. Bill customers, manage products, inventory and customers — works offline, no signup, no subscription. Your data stays on your device.",
   keywords: [
+    "browser based POS",
     "free POS",
     "offline POS",
     "browser POS",
@@ -16,20 +17,20 @@ export const metadata: Metadata = {
     "retail billing",
   ],
   alternates: {
-    canonical: "/free-pos",
+    canonical: "/products/browser-based-pos",
   },
   openGraph: {
-    title: "Free Offline Browser POS - No Login Required",
+    title: "Browser Based POS - Free, Offline, No Login",
     description:
       "Bill customers, manage products and inventory, print receipts. 100% free, works offline, data stays in your browser.",
-    url: "/free-pos",
+    url: "/products/browser-based-pos",
     type: "website",
     images: [
       {
         url: "/og/setu-og-image-1200x627.png",
         width: 1200,
         height: 627,
-        alt: "Setu Technology Free Offline POS",
+        alt: "Setu Technology Browser Based POS",
       },
     ],
   },
@@ -81,6 +82,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Can it sync my data to a Google Sheet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Connect your own Google Sheet (Settings → Google Sheet sync) and the POS automatically keeps your orders, products and customers updated in it. Data goes directly from your browser to your Google account — never through our servers. If your browser data is ever lost, you can restore the whole POS from that sheet.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Does it support barcode scanners?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -90,7 +99,7 @@ const faqSchema = {
   ],
 };
 
-export default function FreePosPage() {
+export default function BrowserBasedPosPage() {
   return (
     <>
       <script
@@ -105,7 +114,7 @@ export default function FreePosPage() {
             <span className="text-sm font-semibold text-indigo">Free Tool — Works Offline</span>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Free Offline Browser POS
+            Browser Based POS
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
             Bill customers, manage products and track inventory — right from your browser. No

@@ -31,7 +31,8 @@ import { chromium } from "/opt/node22/lib/node_modules/playwright/index.mjs";
 Flows worth driving:
 - Calculators/tools are client components with localStorage persistence — reload
   the page to check state survives.
-- `/free-pos` stores everything in IndexedDB (database POS_DATABASE). Full flow:
+- `/products/browser-based-pos` (the POS; `/free-pos` redirects there) stores
+  everything in IndexedDB (database POS_DATABASE). Full flow:
   welcome → create POS → add product → New Sale → charge → receipt modal →
   orders list → reload for persistence. Use a fresh browser context for a
   clean first-visit state. Downloads (backup JSON, CSV, receipt PDF) can be

@@ -1,16 +1,33 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ShoppingCart, Upload, WifiOff, Lock, IndianRupee } from "lucide-react";
+import { Sheet, ShoppingCart, Upload, WifiOff, Lock, IndianRupee } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile } from "@/lib/pos/backup";
-import { primaryBtnClass, secondaryBtnClass } from "./ui";
+import { inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 export function WelcomeScreen() {
-  const { startSetup, applyRestoredBackup } = usePos();
+  const { startSetup, applyRestoredBackup, restoreFromSheet } = usePos();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState("");
   const [importing, setImporting] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [sheetUrl, setSheetUrl] = useState("");
+  const [sheetRestoring, setSheetRestoring] = useState(false);
+
+  const handleSheetRestore = async () => {
+    setImportError("");
+    setSheetRestoring(true);
+    try {
+      await restoreFromSheet(sheetUrl);
+    } catch (error) {
+      setImportError(
+        error instanceof Error ? error.message : "Could not restore from this sheet."
+      );
+    } finally {
+      setSheetRestoring(false);
+    }
+  };
 
   const handleImportFile = async (file: File) => {
     setImportError("");
@@ -67,7 +84,36 @@ export function WelcomeScreen() {
             event.target.value = "";
           }}
         />
+        <button
+          type="button"
+          onClick={() => setSheetOpen((v) => !v)}
+          className={`${secondaryBtnClass} px-6 py-3`}
+        >
+          <Sheet className="h-4 w-4" />
+          Restore from Google Sheet
+        </button>
       </div>
+
+      {sheetOpen && (
+        <div className="mx-auto mt-4 flex max-w-lg flex-col gap-2 sm:flex-row">
+          <input
+            type="url"
+            value={sheetUrl}
+            onChange={(event) => setSheetUrl(event.target.value)}
+            placeholder="Paste your sheet's Apps Script web app URL"
+            className={inputClass}
+            autoFocus
+          />
+          <button
+            type="button"
+            onClick={() => void handleSheetRestore()}
+            disabled={sheetRestoring || !sheetUrl.trim()}
+            className={`${primaryBtnClass} shrink-0`}
+          >
+            {sheetRestoring ? "Restoring…" : "Restore"}
+          </button>
+        </div>
+      )}
 
       {importError && (
         <p className="mx-auto mt-4 max-w-md rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">

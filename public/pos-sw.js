@@ -1,8 +1,8 @@
-// Service worker for the Offline Browser POS (/free-pos).
+// Service worker for the Browser Based POS (/products/browser-based-pos).
 // Caches the POS page and its static assets so the app loads without internet.
 
-const CACHE_NAME = "setu-free-pos-v1";
-const POS_PATH = "/free-pos";
+const CACHE_NAME = "setu-free-pos-v2";
+const POS_PATH = "/products/browser-based-pos";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

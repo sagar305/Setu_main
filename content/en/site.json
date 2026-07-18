@@ -23,6 +23,7 @@
       {
         "heading": "Products",
         "links": [
+          { "label": "Browser Based POS (Free)", "href": "/products/browser-based-pos" },
           { "label": "Setu Dine", "href": "/products/restaurant-pos" },
           { "label": "Setu Queue", "href": "/products/queue" },
           { "label": "Setu Retail", "href": "/products/retail" }
