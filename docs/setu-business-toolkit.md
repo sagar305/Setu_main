@@ -111,20 +111,26 @@ Not everything on the roadmap is a destination app. Each entry is tagged:
 | QR Menu Generator | Restaurant | Restaurant POS |
 | UPI QR Generator | Payments | Platform |
 | GST Calculator | Finance | Platform |
+| Business Profile | Business Identity | Platform |
+| Receipt Designer | Sales & Billing | Platform |
+| Expense Tracker · Cash Book · Profit Dashboard | Finance | Platform |
+| Customer Ledger (Udhaar) | Customers | Retail POS |
+| Supplier Book · Purchase Register · Stock Register | Inventory | Retail POS |
+| Barcode Generator · Label Printer | Products | Retail POS |
+| Appointment Book | Service | Clinic |
 
-### Foundation (Phase 1)
+### Foundation (Phase 1) — SHIPPED
 
-Business Profile → Logo Manager → Receipt Designer → Expense Tracker →
-Cash Book → Appointment Book → Customer Ledger → Supplier Book.
-
-The **first tool to build** is the **Receipt Designer**: it creates the shared
-receipt-template entity that the POS and Invoice both consume — the original
-integration that motivated this whole document.
+Business Profile → Receipt Designer → Expense Tracker → Cash Book →
+Appointment Book → Customer Ledger → Supplier Book, plus the Phase 2
+pull-forwards (Barcode, Label Printer, Stock/Purchase Register, Profit
+Dashboard). Remaining from the original list: **Logo Manager**.
+Deferred pending decisions: **Quotation Generator** (own design vs invoice
+pipeline), **Kitchen Order Board** (needs a POS order-lifecycle change).
 
 ### Growth (Phase 2)
 
-Product Catalog → Barcode Generator → Label Printer → Stock Register →
-Purchase Register → Profit Dashboard.
+Product Catalog (surface) and the remaining catalog; see the registry.
 
 ### Dependency ordering
 
