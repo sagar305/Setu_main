@@ -10,6 +10,8 @@ export type Business = {
   email: string;
   taxNumber: string;
   logoDataUrl: string;
+  /** IANA zone, e.g. "Asia/Kolkata". Optional: pre-toolkit records lack it. */
+  timezone?: string;
   createdAt: string;
 };
 
@@ -146,6 +148,8 @@ export type HeldCart = {
   createdAt: string;
 };
 
+/** Compact starter list kept for POS setup fallback; the Business Profile
+ * offers every ISO currency via lib/toolkit/preferences.allCurrencies(). */
 export const CURRENCIES = [
   { code: "INR", symbol: "₹", label: "Indian Rupee (₹)" },
   { code: "USD", symbol: "$", label: "US Dollar ($)" },
@@ -156,18 +160,31 @@ export const CURRENCIES = [
 ] as const;
 
 export function currencySymbol(code: string): string {
-  return CURRENCIES.find((c) => c.code === code)?.symbol ?? code;
+  const known = CURRENCIES.find((c) => c.code === code)?.symbol;
+  if (known) return known;
+  try {
+    const parts = new Intl.NumberFormat("en", {
+      style: "currency",
+      currency: code,
+      currencyDisplay: "narrowSymbol",
+    }).formatToParts(1);
+    return parts.find((p) => p.type === "currency")?.value ?? code;
+  } catch {
+    return code;
+  }
 }
 
 export function formatMoney(value: number, currency: string): string {
-  const symbol = currencySymbol(currency);
-  if (!Number.isFinite(value)) return `${symbol}0.00`;
-  const abs = Math.abs(value);
-  const formatted = abs.toLocaleString(currency === "INR" ? "en-IN" : "en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-  return `${value < 0 ? "-" : ""}${symbol}${formatted}`;
+  const safe = Number.isFinite(value) ? value : 0;
+  try {
+    return new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en", {
+      style: "currency",
+      currency,
+      currencyDisplay: "narrowSymbol",
+    }).format(safe);
+  } catch {
+    return `${currencySymbol(currency)}${safe.toFixed(2)}`;
+  }
 }
 
 export function generateId(): string {

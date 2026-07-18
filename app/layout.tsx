@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { getSiteContent } from "@/lib/content";
+import { LanguageProvider } from "@/lib/i18n";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -69,9 +70,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <Nav site={site} />
-        <main>{children}</main>
-        <Footer site={site} />
+        <LanguageProvider>
+          <Nav site={site} />
+          <main>{children}</main>
+          <Footer site={site} />
+        </LanguageProvider>
       </body>
     </html>
   );

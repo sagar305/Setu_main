@@ -48,6 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/profit-dashboard",
     "/tools/customer-ledger",
     "/tools/appointment-book",
+    "/tools/quotation-generator",
     "/products/browser-based-pos",
     "/blog",
     "/contact",

@@ -153,6 +153,23 @@
       }
     },
     {
+      "slug": "quotation-generator",
+      "name": "Quotation Generator",
+      "category": "invoicing",
+      "icon": "notebook-pen",
+      "shortDescription": "Professional quotes with validity dates and status tracking — print or PDF.",
+      "seo": {
+        "title": "Quotation Generator | Setu Technology",
+        "description": "Create professional quotations with validity dates, tax and totals. Free, no signup.",
+        "keywords": ["quotation generator", "estimate maker", "quote template"]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Quotation Generator",
+        "headline": "Quotation Generator",
+        "subheadline": "Quotes with validity dates and status tracking."
+      }
+    },
+    {
       "slug": "business-profile",
       "name": "Business Profile",
       "category": "workspace",

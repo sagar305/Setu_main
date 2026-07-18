@@ -15,7 +15,14 @@ import {
 } from "@/components/toolkit/ui";
 import { getBusiness } from "@/lib/toolkit/workspace";
 import { dbPut } from "@/lib/pos/db";
-import { CURRENCIES, nowIso, type Business } from "@/lib/pos/types";
+import { nowIso, type Business } from "@/lib/pos/types";
+import {
+  allCurrencies,
+  allTimezones,
+  detectTimezone,
+  setPreferences,
+  type CurrencyInfo,
+} from "@/lib/toolkit/preferences";
 
 const BLANK = {
   name: "",
@@ -25,6 +32,7 @@ const BLANK = {
   currency: "INR",
   taxNumber: "",
   logoDataUrl: "",
+  timezone: "",
 };
 
 /** Downscale an uploaded logo to keep the workspace (and backups) small. */
@@ -55,8 +63,14 @@ export function BusinessProfileTool() {
   const [existing, setExisting] = useState<Business | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [saved, setSaved] = useState(false);
+  // Intl-derived lists are browser-only; resolve them after mount.
+  const [currencies, setCurrencies] = useState<CurrencyInfo[]>([]);
+  const [timezones, setTimezones] = useState<string[]>([]);
 
   useEffect(() => {
+    setCurrencies(allCurrencies());
+    setTimezones(allTimezones());
+    setForm((f) => ({ ...f, timezone: f.timezone || detectTimezone() }));
     getBusiness()
       .then((b) => {
         if (b) {
@@ -69,6 +83,7 @@ export function BusinessProfileTool() {
             currency: b.currency,
             taxNumber: b.taxNumber,
             logoDataUrl: b.logoDataUrl,
+            timezone: b.timezone || detectTimezone(),
           });
         }
       })
@@ -100,9 +115,12 @@ export function BusinessProfileTool() {
       id: "main",
       ...form,
       name: form.name.trim(),
+      timezone: form.timezone || detectTimezone(),
       createdAt: existing?.createdAt ?? nowIso(),
     };
     await dbPut<Business>("business", record);
+    // Calculators (no workspace of their own) follow the same choice.
+    setPreferences({ currency: record.currency, timezone: record.timezone });
     setExisting(record);
     setSaved(true);
   };
@@ -136,11 +154,28 @@ export function BusinessProfileTool() {
             </Field>
             <Field label="Currency">
               <Select value={form.currency} onChange={set("currency")}>
-                {CURRENCIES.map((c) => (
-                  <option key={c.code} value={c.code}>
-                    {c.label}
-                  </option>
-                ))}
+                {currencies.length === 0 ? (
+                  <option value={form.currency}>{form.currency}</option>
+                ) : (
+                  currencies.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.name} ({c.symbol})
+                    </option>
+                  ))
+                )}
+              </Select>
+            </Field>
+            <Field label="Timezone (auto-detected)">
+              <Select value={form.timezone} onChange={set("timezone")}>
+                {timezones.length === 0 ? (
+                  <option value={form.timezone}>{form.timezone || "Asia/Kolkata"}</option>
+                ) : (
+                  timezones.map((z) => (
+                    <option key={z} value={z}>
+                      {z.replace(/_/g, " ")}
+                    </option>
+                  ))
+                )}
               </Select>
             </Field>
             <div className="sm:col-span-2">

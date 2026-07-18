@@ -127,6 +127,36 @@ export type Purchase = {
   createdAt: string;
 };
 
+export type QuotationItem = {
+  id: string;
+  description: string;
+  quantity: number;
+  rate: number;
+  taxRate: number; // percent
+};
+
+export type QuotationStatus = "draft" | "sent" | "accepted" | "declined";
+
+export type Quotation = {
+  id: string;
+  number: string; // e.g. "QUO-00001"
+  date: string; // ISO date
+  validUntil: string; // ISO date
+  clientName: string;
+  clientPhone: string;
+  clientAddress: string;
+  customerId: string | null; // linked workspace customer, if any
+  items: QuotationItem[];
+  notes: string;
+  subtotal: number;
+  taxTotal: number;
+  total: number;
+  status: QuotationStatus;
+  createdByTool: ToolSlug;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type WorkspaceAsset = {
   id: string;
   kind: "logo" | "image" | "qr-design";
