@@ -6,6 +6,8 @@ import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import { CURRENCIES, formatInvoiceNumber, type ReceiptPaperSize } from "@/lib/pos/types";
+import { getReceiptTemplates } from "@/lib/toolkit/workspace";
+import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import {
   ConfirmDialog,
   Field,
@@ -109,6 +111,8 @@ export function SettingsScreen() {
   const [footer, setFooter] = useState(settings.receiptFooter);
   const [showBusinessInfo, setShowBusinessInfo] = useState(settings.showBusinessInfoOnReceipt);
   const [paperSize, setPaperSize] = useState<ReceiptPaperSize>(settings.receiptPaperSize);
+  const [templateId, setTemplateId] = useState(settings.receiptTemplateId ?? "");
+  const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
   const [posError, setPosError] = useState("");
   const [posSaved, setPosSaved] = useState(false);
 
@@ -120,7 +124,13 @@ export function SettingsScreen() {
     setFooter(settings.receiptFooter);
     setShowBusinessInfo(settings.showBusinessInfoOnReceipt);
     setPaperSize(settings.receiptPaperSize ?? "80mm");
+    setTemplateId(settings.receiptTemplateId ?? "");
   }, [settings]);
+
+  // Templates designed in the Receipt Designer live in the shared workspace.
+  useEffect(() => {
+    getReceiptTemplates().then(setTemplates).catch(() => {});
+  }, []);
 
   const savePosSettings = async () => {
     const nextNumber = parseInt(nextNumberText, 10);
@@ -142,6 +152,7 @@ export function SettingsScreen() {
       receiptFooter: footer,
       showBusinessInfoOnReceipt: showBusinessInfo,
       receiptPaperSize: paperSize,
+      receiptTemplateId: templateId,
     });
     setPosSaved(true);
     setTimeout(() => setPosSaved(false), 2000);
@@ -352,6 +363,33 @@ export function SettingsScreen() {
               <option value="58mm">Thermal 58mm (compact printers)</option>
               <option value="a4">A4 / regular printer</option>
             </select>
+          </Field>
+          <Field
+            label="Receipt design"
+            hint="Templates from the Receipt Designer — design once, the POS prints with it"
+          >
+            <select
+              value={templateId}
+              onChange={(event) => setTemplateId(event.target.value)}
+              className={inputClass}
+            >
+              <option value="">POS default receipt</option>
+              {templates.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name} ({t.paperSize})
+                </option>
+              ))}
+            </select>
+            <a
+              href="/tools/receipt-designer"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1 inline-block text-xs font-semibold text-indigo hover:underline"
+            >
+              {templates.length === 0
+                ? "Design your first receipt template →"
+                : "Open the Receipt Designer →"}
+            </a>
           </Field>
           <label className="flex items-center gap-2 sm:col-span-2">
             <input

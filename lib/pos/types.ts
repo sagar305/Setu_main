@@ -115,6 +115,8 @@ export type PosSettings = {
   receiptFooter: string;
   showBusinessInfoOnReceipt: boolean;
   receiptPaperSize: ReceiptPaperSize;
+  /** Saved Receipt Designer template to print with; "" = built-in default. */
+  receiptTemplateId?: string;
   lastBackupAt: string | null;
   /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
   sheetSyncUrl: string;
@@ -207,6 +209,7 @@ export const DEFAULT_SETTINGS: PosSettings = {
   receiptFooter: "Thank you for your business!",
   showBusinessInfoOnReceipt: true,
   receiptPaperSize: "80mm",
+  receiptTemplateId: "",
   lastBackupAt: null,
   sheetSyncUrl: "",
 };
