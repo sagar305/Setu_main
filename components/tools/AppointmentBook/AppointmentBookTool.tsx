@@ -49,6 +49,7 @@ export function AppointmentBookTool() {
   const [viewDate, setViewDate] = useState(todayIso());
   const [deleting, setDeleting] = useState<Appointment | null>(null);
   const [sharing, setSharing] = useState<SharedDoc | null>(null);
+  const [error, setError] = useState("");
   const currency = workspace.business?.currency ?? "INR";
 
   const shareAppointment = (a: Appointment) => {
@@ -82,8 +83,33 @@ export function AppointmentBookTool() {
 
   const canAdd = customerName.trim() && service.trim() && date && time;
 
+  const toMinutes = (hhmm: string) => {
+    const [h, m] = hhmm.split(":").map(Number);
+    return (h || 0) * 60 + (m || 0);
+  };
+
+  /** A scheduled appointment on the same day whose time range overlaps. */
+  const findConflict = (): Appointment | undefined => {
+    const start = toMinutes(time);
+    const end = start + (Number(duration) || 30);
+    return appointments.find((a) => {
+      if (a.status !== "scheduled" || a.date !== date) return false;
+      const aStart = toMinutes(a.time);
+      const aEnd = aStart + (a.durationMins || 30);
+      return start < aEnd && aStart < end; // half-open interval overlap
+    });
+  };
+
   const submit = async () => {
     if (!canAdd) return;
+    const clash = findConflict();
+    if (clash) {
+      setError(
+        `That slot overlaps with ${clash.customerName}'s ${clash.service} at ${clash.time} (${clash.durationMins} min). Pick another time.`
+      );
+      return;
+    }
+    setError("");
     await save({
       id: generateId(),
       customerId: customerId || null,
@@ -181,19 +207,46 @@ export function AppointmentBookTool() {
             <div className="grid grid-cols-3 gap-3">
               <div className="col-span-2">
                 <Field label={t("date")}>
-                  <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                  <TextInput
+                    type="date"
+                    value={date}
+                    onChange={(e) => {
+                      setDate(e.target.value);
+                      setError("");
+                    }}
+                  />
                 </Field>
               </div>
               <Field label="Time">
-                <TextInput type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                <TextInput
+                  type="time"
+                  value={time}
+                  onChange={(e) => {
+                    setTime(e.target.value);
+                    setError("");
+                  }}
+                />
               </Field>
             </div>
             <Field label={t("durationMins")}>
-              <NumberInput min={5} step={5} value={duration} onChange={(e) => setDuration(e.target.value)} />
+              <NumberInput
+                min={5}
+                step={5}
+                value={duration}
+                onChange={(e) => {
+                  setDuration(e.target.value);
+                  setError("");
+                }}
+              />
             </Field>
             <Field label={t("notes")}>
               <TextInput value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional" />
             </Field>
+            {error ? (
+              <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                {error}
+              </p>
+            ) : null}
             <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
               Book appointment
             </PrimaryButton>
