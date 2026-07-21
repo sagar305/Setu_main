@@ -32,6 +32,7 @@ const BLANK = {
   address: "",
   currency: "INR",
   taxNumber: "",
+  upiId: "",
   logoDataUrl: "",
   timezone: "",
 };
@@ -84,6 +85,7 @@ export function BusinessProfileTool() {
             address: b.address,
             currency: b.currency,
             taxNumber: b.taxNumber,
+            upiId: b.upiId ?? "",
             logoDataUrl: b.logoDataUrl,
             timezone: b.timezone || detectTimezone(),
           });
@@ -153,6 +155,9 @@ export function BusinessProfileTool() {
             </Field>
             <Field label="GSTIN / Tax number">
               <TextInput value={form.taxNumber} onChange={set("taxNumber")} placeholder="22AAAAA0000A1Z5" />
+            </Field>
+            <Field label="UPI ID (for payment links)">
+              <TextInput value={form.upiId} onChange={set("upiId")} placeholder="shopname@okhdfcbank" />
             </Field>
             <Field label={t("currency")}>
               <Select value={form.currency} onChange={set("currency")}>

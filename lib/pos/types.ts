@@ -10,6 +10,8 @@ export type Business = {
   email: string;
   taxNumber: string;
   logoDataUrl: string;
+  /** UPI ID for payments (e.g. "shop@okhdfcbank"). Optional. */
+  upiId?: string;
   /** IANA zone, e.g. "Asia/Kolkata". Optional: pre-toolkit records lack it. */
   timezone?: string;
   createdAt: string;

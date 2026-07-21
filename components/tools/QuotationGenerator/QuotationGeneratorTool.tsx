@@ -22,7 +22,10 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { Quotation, QuotationItem, QuotationStatus } from "@/lib/toolkit/types";
-import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "@/lib/pos/types";
+import { dbPut } from "@/lib/pos/db";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
@@ -63,10 +66,38 @@ export function QuotationGeneratorTool() {
   const [notes, setNotes] = useState("");
   const [deleting, setDeleting] = useState<Quotation | null>(null);
   const [savedMsg, setSavedMsg] = useState(false);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   const biz = workspace.business;
   const currency = biz?.currency ?? "INR";
   const symbol = currencySymbol(currency);
+
+  const toShareDoc = (q: Quotation): SharedDoc => ({
+    t: "quo",
+    b: businessToShare(biz, currency),
+    no: q.number,
+    dt: q.date,
+    vu: q.validUntil,
+    cn: q.clientName || undefined,
+    cp: q.clientPhone || undefined,
+    ca: q.clientAddress || undefined,
+    it: q.items.map((i) => ({
+      n: i.description,
+      q: i.quantity,
+      r: i.rate,
+      x: i.taxRate || undefined,
+    })),
+    sub: q.subtotal,
+    tax: q.taxTotal || undefined,
+    tot: q.total,
+    note: q.notes || undefined,
+  });
+
+  const saveUpiDefault = async (upiId: string) => {
+    if (!biz) return;
+    await dbPut<Business>("business", { ...biz, upiId });
+    await workspace.reload();
+  };
 
   const totals = useMemo(() => {
     let subtotal = 0;
@@ -372,6 +403,12 @@ export function QuotationGeneratorTool() {
               <SecondaryButton onClick={() => printQuote()} disabled={!canSave}>
                 Print / PDF
               </SecondaryButton>
+              <SecondaryButton
+                onClick={() => setSharing(toShareDoc(buildQuotation()))}
+                disabled={!canSave}
+              >
+                Share link
+              </SecondaryButton>
               <PrimaryButton onClick={saveQuote} disabled={!canSave}>
                 Save quotation
               </PrimaryButton>
@@ -408,6 +445,9 @@ export function QuotationGeneratorTool() {
                   <div className="mt-2 flex flex-wrap gap-2 text-xs font-semibold">
                     <button type="button" className="text-indigo" onClick={() => printQuote(q)}>
                       {t("print")}
+                    </button>
+                    <button type="button" className="text-indigo" onClick={() => setSharing(toShareDoc(q))}>
+                      Share
                     </button>
                     {q.status === "draft" ? (
                       <button type="button" className="text-indigo" onClick={() => setStatus(q, "sent")}>
@@ -453,6 +493,14 @@ export function QuotationGeneratorTool() {
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
+      />
+
+      <ShareDialog
+        open={sharing !== null}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share quotation"
+        onSaveUpiDefault={saveUpiDefault}
       />
     </div>
   );

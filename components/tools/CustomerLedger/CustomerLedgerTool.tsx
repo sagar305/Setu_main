@@ -22,8 +22,11 @@ import { useEntityList } from "@/lib/hooks/useEntityList";
 import { putRecord } from "@/lib/toolkit/workspace";
 import type { LedgerEntry } from "@/lib/toolkit/types";
 import type { Customer } from "@/lib/pos/types";
-import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "@/lib/pos/types";
+import { dbPut } from "@/lib/pos/db";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
@@ -42,8 +45,26 @@ export function CustomerLedgerTool() {
   const [note, setNote] = useState("");
   const [date, setDate] = useState(todayIso());
   const [deleting, setDeleting] = useState<LedgerEntry | null>(null);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   const currency = workspace.business?.currency ?? "INR";
+
+  const sendReminder = (customerName: string, customerPhone: string, balance: number) => {
+    setSharing({
+      t: "led",
+      b: businessToShare(workspace.business, currency),
+      cn: customerName,
+      cp: customerPhone || undefined,
+      bal: balance,
+      note: "Kindly clear the outstanding balance at your convenience. Thank you!",
+    });
+  };
+
+  const saveUpiDefault = async (upiId: string) => {
+    if (!workspace.business) return;
+    await dbPut<Business>("business", { ...workspace.business, upiId });
+    await workspace.reload();
+  };
 
   const balances = useMemo(() => {
     const map = new Map<string, number>();
@@ -236,6 +257,15 @@ export function CustomerLedgerTool() {
                     </span>
                   </p>
                 </div>
+                {(balances.get(selected.id) ?? 0) > 0 ? (
+                  <SecondaryButton
+                    onClick={() =>
+                      sendReminder(selected.name, selected.phone, balances.get(selected.id) ?? 0)
+                    }
+                  >
+                    Send reminder
+                  </SecondaryButton>
+                ) : null}
               </div>
 
               <div className="mb-5 grid gap-3 rounded-lg border border-muted-line/30 p-4 sm:grid-cols-[110px_1fr_130px_auto]">
@@ -330,6 +360,14 @@ export function CustomerLedgerTool() {
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
+      />
+
+      <ShareDialog
+        open={sharing !== null}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Send payment reminder"
+        onSaveUpiDefault={saveUpiDefault}
       />
     </div>
   );

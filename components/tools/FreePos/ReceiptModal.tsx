@@ -12,6 +12,9 @@ import {
 import { exportReceiptToPdf } from "@/lib/pos/receiptPdf";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
+import { Share2 } from "lucide-react";
 import { Modal, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 // The receipt is styled with inline styles only (no Tailwind classes) so it
@@ -251,11 +254,12 @@ export function ReceiptModal({
   onClose: () => void;
   title?: string;
 }) {
-  const { orderItems, settings } = usePos();
+  const { orderItems, settings, business, customers, updateBusiness } = usePos();
   const receiptRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
   const [template, setTemplate] = useState<ReceiptTemplate | null>(null);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   // Load the Receipt Designer template chosen in POS settings (if any).
   const templateId = settings.receiptTemplateId ?? "";
@@ -296,6 +300,32 @@ export function ReceiptModal({
     }
   };
 
+  const buildShare = (): SharedDoc => {
+    const currency = business?.currency ?? "INR";
+    const customerPhone = order.customerId
+      ? customers.find((c) => c.id === order.customerId)?.phone
+      : undefined;
+    return {
+      t: "inv",
+      b: businessToShare(business, currency),
+      no: order.invoiceNumber,
+      dt: order.date,
+      cn: order.customerName || undefined,
+      cp: customerPhone || undefined,
+      it: items.map((i) => ({
+        n: i.name,
+        q: i.quantity,
+        r: i.price,
+        x: i.taxRate || undefined,
+      })),
+      sub: order.subtotal,
+      dis: order.discountAmount || undefined,
+      tax: order.taxAmount || undefined,
+      tot: order.total,
+      pm: order.paymentMethodName || undefined,
+    };
+  };
+
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <div className="rounded-xl border border-muted-line/30 bg-cream-paper p-4">
@@ -326,7 +356,23 @@ export function ReceiptModal({
           <Download className="h-4 w-4" />
           {downloading ? "Preparing…" : "Download PDF"}
         </button>
+        <button
+          type="button"
+          onClick={() => setSharing(buildShare())}
+          className={`${secondaryBtnClass} flex-1`}
+        >
+          <Share2 className="h-4 w-4" />
+          Share link
+        </button>
       </div>
+
+      <ShareDialog
+        open={sharing !== null}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share invoice"
+        onSaveUpiDefault={(upiId) => void updateBusiness({ upiId })}
+      />
     </Modal>
   );
 }

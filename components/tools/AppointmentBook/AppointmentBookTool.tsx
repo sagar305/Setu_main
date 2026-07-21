@@ -16,8 +16,11 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { Appointment, AppointmentStatus } from "@/lib/toolkit/types";
-import { generateId, nowIso } from "@/lib/pos/types";
+import { generateId, nowIso, type Business } from "@/lib/pos/types";
+import { dbPut } from "@/lib/pos/db";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
@@ -45,6 +48,28 @@ export function AppointmentBookTool() {
 
   const [viewDate, setViewDate] = useState(todayIso());
   const [deleting, setDeleting] = useState<Appointment | null>(null);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
+  const currency = workspace.business?.currency ?? "INR";
+
+  const shareAppointment = (a: Appointment) => {
+    setSharing({
+      t: "apt",
+      b: businessToShare(workspace.business, currency),
+      cn: a.customerName,
+      cp: a.phone || undefined,
+      svc: a.service,
+      dt: a.date,
+      tm: a.time,
+      dur: a.durationMins || undefined,
+      note: a.notes || undefined,
+    });
+  };
+
+  const saveUpiDefault = async (upiId: string) => {
+    if (!workspace.business) return;
+    await dbPut<Business>("business", { ...workspace.business, upiId });
+    await workspace.reload();
+  };
 
   const pickCustomer = (id: string) => {
     setCustomerId(id);
@@ -242,6 +267,13 @@ export function AppointmentBookTool() {
                       >
                         Cancel
                       </button>
+                      <button
+                        type="button"
+                        className="rounded-md bg-indigo/10 px-3 py-1.5 text-indigo hover:bg-indigo/20"
+                        onClick={() => shareAppointment(a)}
+                      >
+                        Share
+                      </button>
                     </div>
                   ) : (
                     <div className="mt-3 flex gap-2 text-xs font-semibold">
@@ -251,6 +283,9 @@ export function AppointmentBookTool() {
                         onClick={() => setStatus(a, "scheduled")}
                       >
                         {t("reopen")}
+                      </button>
+                      <button type="button" className="text-indigo" onClick={() => shareAppointment(a)}>
+                        Share
                       </button>
                       <button type="button" className="text-red-500" onClick={() => setDeleting(a)}>
                         Delete
@@ -278,6 +313,15 @@ export function AppointmentBookTool() {
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
+      />
+
+      <ShareDialog
+        open={sharing !== null}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share appointment"
+        allowFee
+        onSaveUpiDefault={saveUpiDefault}
       />
     </div>
   );

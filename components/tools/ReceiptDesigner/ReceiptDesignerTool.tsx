@@ -18,7 +18,9 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
-import { generateId, nowIso } from "@/lib/pos/types";
+import { generateId, nowIso, type Business } from "@/lib/pos/types";
+import { dbPut } from "@/lib/pos/db";
+import { readLogoDataUrl } from "@/lib/toolkit/logo";
 import { useI18n } from "@/lib/i18n";
 
 type Draft = {
@@ -97,6 +99,29 @@ export function ReceiptDesignerTool() {
   };
 
   const biz = workspace.business;
+
+  // Upload / change the business logo from here. It saves to the shared
+  // business record, so the logo then appears on the receipt (and on invoices,
+  // shared links, and every other Setu tool).
+  const [logoError, setLogoError] = useState("");
+  const onLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file || !biz) return;
+    try {
+      const dataUrl = await readLogoDataUrl(file);
+      await dbPut<Business>("business", { ...biz, logoDataUrl: dataUrl });
+      await workspace.reload();
+      setLogoError("");
+    } catch {
+      setLogoError("That file could not be used as a logo.");
+    }
+  };
+  const clearLogo = async () => {
+    if (!biz) return;
+    await dbPut<Business>("business", { ...biz, logoDataUrl: "", updatedAt: nowIso() } as Business);
+    await workspace.reload();
+  };
   const sep =
     draft.separator === "dashed"
       ? "border-t border-dashed border-gray-400"
@@ -185,6 +210,50 @@ export function ReceiptDesignerTool() {
                 </label>
               ))}
             </div>
+
+            {/* Logo — shown when "Show logo" is on. Saves to the shared
+                business, so the same logo appears everywhere. */}
+            {draft.showLogo ? (
+              <div className="rounded-lg border border-muted-line/30 bg-cream-paper/40 p-3">
+                {!biz ? (
+                  <p className="text-xs text-muted">
+                    Connect your workspace (or set up your business) to add a logo.
+                  </p>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    {biz.logoDataUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={biz.logoDataUrl}
+                        alt="Business logo"
+                        className="h-12 w-12 rounded-md border border-muted-line/40 object-contain bg-white"
+                      />
+                    ) : (
+                      <div className="flex h-12 w-12 items-center justify-center rounded-md border border-dashed border-muted-line/50 text-lg font-bold text-indigo">
+                        {(biz.name || "S").charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <div className="flex flex-col gap-1">
+                      <label className="cursor-pointer text-sm font-semibold text-indigo hover:underline">
+                        {biz.logoDataUrl ? "Change logo" : "Upload logo"}
+                        <input type="file" accept="image/*" onChange={onLogoUpload} className="hidden" />
+                      </label>
+                      {biz.logoDataUrl ? (
+                        <button
+                          type="button"
+                          onClick={clearLogo}
+                          className="text-left text-xs font-semibold text-red-500 hover:text-red-600"
+                        >
+                          Remove logo
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
+                )}
+                {logoError ? <p className="mt-2 text-xs text-red-600">{logoError}</p> : null}
+              </div>
+            ) : null}
+
             <div className="flex items-center gap-3">
               <PrimaryButton onClick={submit}>
                 {editingId ? t("saveChanges") : t("save")}
