@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function TakeHomeSalaryCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [annualCtc, setAnnualCtc] = useState("600000");
   const [basicPct, setBasicPct] = useState("40");
   const [professionalTax, setProfessionalTax] = useState("200");

@@ -5,6 +5,7 @@ import { DynamicRowList, type RowColumn } from "@/components/calculators/Dynamic
 import { NumberField } from "@/components/calculators/NumberField";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 const COLUMNS: RowColumn[] = [
   { key: "name", label: "Name", type: "text", placeholder: "e.g. Riya" },
@@ -12,6 +13,7 @@ const COLUMNS: RowColumn[] = [
 ];
 
 export function TipSplitCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [method, setMethod] = useState<"equal" | "weighted">("equal");
   const [pool, setPool] = useState("5000");
   const [rows, setRows] = useState<Record<string, string>[]>([

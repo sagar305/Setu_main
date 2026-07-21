@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 type Bracket = { upTo: number; rate: number };
 
@@ -53,6 +54,7 @@ function calcOldRegime(grossIncome: number, deductions: number) {
 }
 
 export function IncomeTaxCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [grossIncome, setGrossIncome] = useState("1200000");
   const [deductions, setDeductions] = useState("150000");
 

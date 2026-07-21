@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function MarkupCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [costPrice, setCostPrice] = useState("100");
   const [markupPct, setMarkupPct] = useState("40");
 

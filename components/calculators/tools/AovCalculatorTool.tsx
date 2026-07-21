@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function AovCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [revenue, setRevenue] = useState("500000");
   const [orders, setOrders] = useState("1000");
   const [targetIncrease, setTargetIncrease] = useState("10");

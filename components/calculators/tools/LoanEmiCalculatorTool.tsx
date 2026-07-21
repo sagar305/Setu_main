@@ -5,8 +5,10 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function LoanEmiCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [loanAmount, setLoanAmount] = useState("500000");
   const [interestRate, setInterestRate] = useState("12");
   const [tenure, setTenure] = useState("24");

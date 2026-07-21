@@ -51,20 +51,24 @@ export function setPreferences(patch: Partial<Preferences>): void {
   }
 }
 
-// Server render and the first client render must agree (hydration), so the
-// preferred currency only takes effect after the app signals hydration is
-// done. Until then formatting falls back to INR on both sides.
-let hydrated = false;
+// The active currency for non-workspace formatters (lib/format). It defaults
+// to INR so server render and the first client render agree (hydration), then
+// client code sets it to the user's preference after mount via the
+// usePreferredCurrency hook / markHydrated. Never mutated on the server.
+let activeCurrency = "INR";
 
-/** Called once after mount (LanguageProvider) — preference formatting is safe now. */
+export function setActiveCurrency(code: string): void {
+  activeCurrency = code;
+}
+
+/** Called after mount (LanguageProvider) so preference formatting takes effect. */
 export function markHydrated(): void {
-  hydrated = true;
+  if (typeof window !== "undefined") activeCurrency = getPreferences().currency;
 }
 
 /** Currency the calculators should use when no workspace business overrides it. */
 export function getPreferredCurrency(): string {
-  if (!hydrated || typeof window === "undefined") return "INR";
-  return getPreferences().currency;
+  return activeCurrency;
 }
 
 /** Every IANA timezone the browser knows, with the detected one first. */

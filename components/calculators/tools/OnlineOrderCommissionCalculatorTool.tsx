@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function OnlineOrderCommissionCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [orderValue, setOrderValue] = useState("500");
   const [commissionPct, setCommissionPct] = useState("25");
   const [packaging, setPackaging] = useState("20");

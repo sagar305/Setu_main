@@ -5,10 +5,12 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 const GST_PRESETS = [5, 12, 18, 28];
 
 export function GstCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [mode, setMode] = useState<"add" | "remove">("add");
   const [amount, setAmount] = useState("1000");
   const [rate, setRate] = useState("18");

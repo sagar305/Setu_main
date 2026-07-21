@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function CacCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [spend, setSpend] = useState("50000");
   const [newCustomers, setNewCustomers] = useState("100");
   const [avgRevenue, setAvgRevenue] = useState("800");

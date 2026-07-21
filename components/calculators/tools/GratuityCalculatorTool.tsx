@@ -4,10 +4,12 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 const STATUTORY_CEILING = 2000000;
 
 export function GratuityCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [lastSalary, setLastSalary] = useState("30000");
   const [years, setYears] = useState("7");
 

@@ -6,6 +6,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Download, Plus, Trash2, ChefHat } from "lucide-react";
 import { formatCurrency, formatNumber } from "@/lib/format";
+import { usePreferredCurrencySymbol } from "@/lib/hooks/usePreferredCurrency";
 
 // Regex patterns for validation
 const PRICE_PATTERN = /^\d+(\.\d{1,2})?$/; // Integer or decimal with up to 2 places
@@ -28,6 +29,7 @@ interface ClassifiedItem extends MenuItem {
 }
 
 export function MenuEngineeringCalculatorTool() {
+  const cur = usePreferredCurrencySymbol();
   const [items, setItems] = useState<MenuItem[]>([
     { id: "1", name: "Butter Chicken", price: 350, cost: 100, popularity: 150 },
     { id: "2", name: "Paneer Tikka", price: 280, cost: 80, popularity: 120 },
@@ -496,9 +498,9 @@ export function MenuEngineeringCalculatorTool() {
             <thead className="bg-gray-100 border-b border-gray-200">
               <tr>
                 <th className="px-4 py-3 text-left font-bold text-gray-900">Item Name</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Price (₹)</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Cost (₹)</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin (₹)</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Price ({cur})</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Cost ({cur})</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin ({cur})</th>
                 <th className="px-4 py-3 text-right font-bold text-gray-900">Margin %</th>
                 <th className="px-4 py-3 text-right font-bold text-gray-900">Units Sold</th>
                 <th className="px-4 py-3 text-center font-bold text-gray-900">Classification</th>
@@ -508,9 +510,9 @@ export function MenuEngineeringCalculatorTool() {
               {analytics.classifiedItems.map((item) => (
                 <tr key={item.id} className={`${getClassificationColor(item.classification)}`}>
                   <td className="px-4 py-3 font-medium text-gray-900">{item.name}</td>
-                  <td className="px-4 py-3 text-right text-gray-700">₹{item.price}</td>
-                  <td className="px-4 py-3 text-right text-gray-700">₹{item.cost}</td>
-                  <td className="px-4 py-3 text-right font-bold text-gray-900">₹{item.contributionMargin}</td>
+                  <td className="px-4 py-3 text-right text-gray-700">{cur}{item.price}</td>
+                  <td className="px-4 py-3 text-right text-gray-700">{cur}{item.cost}</td>
+                  <td className="px-4 py-3 text-right font-bold text-gray-900">{cur}{item.contributionMargin}</td>
                   <td className="px-4 py-3 text-right font-bold text-gray-900">
                     {formatNumber(item.contributionMarginPercent)}%
                   </td>

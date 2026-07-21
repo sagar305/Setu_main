@@ -5,6 +5,7 @@ import { DynamicRowList, type RowColumn } from "@/components/calculators/Dynamic
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 const COLUMNS: RowColumn[] = [
   { key: "name", label: "Ingredient", type: "text", placeholder: "e.g. Paneer" },
@@ -12,6 +13,7 @@ const COLUMNS: RowColumn[] = [
 ];
 
 export function RecipeCostingCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [rows, setRows] = useState<Record<string, string>[]>([
     { name: "Paneer", cost: "60" },
     { name: "Spices & sauces", cost: "15" },

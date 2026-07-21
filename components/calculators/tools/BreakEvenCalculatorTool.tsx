@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 
 export function BreakEvenCalculatorTool() {
+  usePreferredCurrency(); // re-render when the business currency changes
   const [fixedCosts, setFixedCosts] = useState("50000");
   const [variableCost, setVariableCost] = useState("60");
   const [pricePerUnit, setPricePerUnit] = useState("100");

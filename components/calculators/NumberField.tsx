@@ -1,3 +1,7 @@
+"use client";
+
+import { usePreferredCurrencySymbol } from "@/lib/hooks/usePreferredCurrency";
+
 export function NumberField({
   label,
   value,
@@ -13,11 +17,15 @@ export function NumberField({
   suffix?: string;
   placeholder?: string;
 }) {
+  // A "₹" prefix means "the user's currency", so follow the Business Profile
+  // currency; any other prefix (%, hrs…) is shown as-is.
+  const currencySym = usePreferredCurrencySymbol();
+  const shownPrefix = prefix === "₹" ? currencySym : prefix;
   return (
     <label className="block">
       <span className="text-sm font-semibold text-ink">{label}</span>
       <div className="mt-2 flex items-center rounded-xl border border-muted-line/40 bg-white px-4 transition focus-within:border-indigo">
-        {prefix && <span className="mr-2 text-sm text-muted-warm">{prefix}</span>}
+        {shownPrefix && <span className="mr-2 text-sm text-muted-warm">{shownPrefix}</span>}
         <input
           type="number"
           inputMode="decimal"
