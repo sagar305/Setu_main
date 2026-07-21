@@ -178,8 +178,9 @@ export function ShareDialog({
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">Shareable link</p>
             <p className="mt-1 break-all rounded-lg bg-cream-paper/60 p-2 text-xs text-ink">{url}</p>
             {longLink ? (
-              <p className="mt-1 text-xs text-amber-600">
-                This link is long — some apps may trim it. Remove a few line items if it fails.
+              <p className="mt-1 text-xs text-muted">
+                The link is long because the whole document is inside it (nothing is stored online).
+                Prefer the QR code or the WhatsApp button below — both handle any length.
               </p>
             ) : null}
           </div>
