@@ -109,18 +109,24 @@ export const ReceiptView = forwardRef<
 
       <div style={line} />
 
-      {items.map((item) => (
-        <div key={item.id} style={{ marginBottom: 4 }}>
-          <div style={{ fontSize: 12 }}>{item.name}</div>
-          <div style={row("", "")}>
-            <span>
-              {item.quantity}
-              {item.unit ? ` ${item.unit}` : ""} × {formatMoney(item.price, currency)}
-            </span>
-            <span>{formatMoney(item.lineSubtotal, currency)}</span>
+      {items.map((item) => {
+        // Show the unit only when it's a real unit of measure (kg, pcs…),
+        // never a bare number — otherwise "1 × ₹100" reads as "1 100 × ₹100".
+        const unitLabel =
+          item.unit && !/^\d+(\.\d+)?$/.test(item.unit.trim()) ? ` ${item.unit.trim()}` : "";
+        return (
+          <div key={item.id} style={{ marginBottom: 4 }}>
+            <div style={{ fontSize: 12 }}>{item.name}</div>
+            <div style={row("", "")}>
+              <span>
+                {item.quantity}
+                {unitLabel} × {formatMoney(item.price, currency)}
+              </span>
+              <span>{formatMoney(item.lineSubtotal, currency)}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <div style={line} />
 
