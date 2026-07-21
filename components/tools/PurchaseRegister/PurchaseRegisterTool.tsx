@@ -19,6 +19,7 @@ import { applyPurchaseToStock, getSuppliers } from "@/lib/toolkit/workspace";
 import type { Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 type ItemRow = PurchaseItem & { key: string };
 
@@ -34,6 +35,7 @@ const blankItem = (): ItemRow => ({
 
 export function PurchaseRegisterTool() {
   const workspace = useWorkspaceConnection("purchase-register");
+  const { t } = useI18n();
   const { items: purchases, save, remove } = useEntityList<Purchase>("purchases");
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
 
@@ -169,7 +171,7 @@ export function PurchaseRegisterTool() {
         <Card className="h-fit">
           <h2 className="mb-4 text-lg font-bold text-ink">Record purchase</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Supplier">
+            <Field label={t("supplier")}>
               {suppliers.length > 0 ? (
                 <Select
                   value={supplierId}
@@ -202,7 +204,7 @@ export function PurchaseRegisterTool() {
                 />
               </Field>
             ) : (
-              <Field label="Bill number">
+              <Field label={t("billNumber")}>
                 <TextInput
                   value={billNumber}
                   onChange={(e) => setBillNumber(e.target.value)}
@@ -210,10 +212,10 @@ export function PurchaseRegisterTool() {
                 />
               </Field>
             )}
-            <Field label="Date">
+            <Field label={t("date")}>
               <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </Field>
-            <Field label="Payment mode">
+            <Field label={t("paymentMode")}>
               <Select value={paymentMode} onChange={(e) => setPaymentMode(e.target.value)}>
                 {["Cash", "UPI", "Card", "Bank transfer", "Credit"].map((m) => (
                   <option key={m}>{m}</option>
@@ -244,14 +246,14 @@ export function PurchaseRegisterTool() {
                     </Select>
                   </Field>
                 ) : null}
-                <Field label="Item name">
+                <Field label={t("name")}>
                   <TextInput
                     value={item.name}
                     onChange={(e) => updateItem(item.key, { name: e.target.value })}
                     placeholder="Item"
                   />
                 </Field>
-                <Field label="Qty">
+                <Field label={t("quantity")}>
                   <NumberInput
                     min={0}
                     value={item.quantity || ""}
@@ -272,16 +274,16 @@ export function PurchaseRegisterTool() {
                   disabled={items.length === 1}
                   className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
             ))}
           </div>
           <SecondaryButton className="mt-3" onClick={() => setItems((p) => [...p, blankItem()])}>
-            + Add item
+            {t("addItem")}
           </SecondaryButton>
 
-          <Field label="Notes">
+          <Field label={t("notes")}>
             <TextInput
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
@@ -291,7 +293,7 @@ export function PurchaseRegisterTool() {
           </Field>
 
           <div className="mt-5 flex items-center justify-between border-t border-muted-line/30 pt-4">
-            <p className="text-lg font-bold text-ink">Total: {formatMoney(total, currency)}</p>
+            <p className="text-lg font-bold text-ink">{t("total")}: {formatMoney(total, currency)}</p>
             <PrimaryButton onClick={submit} disabled={!canSave}>
               Save purchase
             </PrimaryButton>
@@ -303,7 +305,7 @@ export function PurchaseRegisterTool() {
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-bold text-ink">Recent purchases</h2>
             <SecondaryButton onClick={exportCsv} disabled={purchases.length === 0}>
-              Export CSV
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
           {sorted.length === 0 ? (
@@ -334,7 +336,7 @@ export function PurchaseRegisterTool() {
                     onClick={() => setDeleting(p)}
                     className="mt-2 text-xs font-semibold text-red-500 hover:text-red-600"
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
               ))}

@@ -15,6 +15,7 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { currencySymbol, generateId } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
 
 type LabelRow = {
   id: string;
@@ -60,6 +61,7 @@ function barcodeDataUrl(value: string): string | null {
 
 export function LabelPrinterTool() {
   const workspace = useWorkspaceConnection("label-printer");
+  const { t } = useI18n();
   const [formatId, setFormatId] = useState("a4-65");
   const [rows, setRows] = useState<LabelRow[]>([]);
   const [showName, setShowName] = useState(true);
@@ -189,14 +191,14 @@ export function LabelPrinterTool() {
                   key={row.id}
                   className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_90px_1fr_70px_auto]"
                 >
-                  <Field label="Name">
+                  <Field label={t("name")}>
                     <TextInput
                       value={row.name}
                       onChange={(e) => updateRow(row.id, { name: e.target.value })}
                       placeholder="Product name"
                     />
                   </Field>
-                  <Field label="Price">
+                  <Field label={t("price")}>
                     <TextInput
                       value={row.price}
                       onChange={(e) => updateRow(row.id, { price: e.target.value })}
@@ -210,7 +212,7 @@ export function LabelPrinterTool() {
                       placeholder="SKU-001"
                     />
                   </Field>
-                  <Field label="Qty">
+                  <Field label={t("quantity")}>
                     <NumberInput
                       min={1}
                       value={row.qty}
@@ -223,7 +225,7 @@ export function LabelPrinterTool() {
                     className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600"
                     aria-label="Remove label"
                   >
-                    Remove
+                    {t("remove")}
                   </button>
                 </div>
               ))}
@@ -273,7 +275,7 @@ export function LabelPrinterTool() {
               {totalLabels === 1 ? "" : "s"} ready
             </p>
             <PrimaryButton className="mt-3 w-full" onClick={print} disabled={totalLabels === 0}>
-              Print labels
+              {t("print")}
             </PrimaryButton>
             <p className="mt-2 text-xs text-muted">
               Opens your browser&apos;s print dialog — choose the printer and paper there.

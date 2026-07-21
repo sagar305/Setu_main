@@ -18,6 +18,7 @@ import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { Appointment, AppointmentStatus } from "@/lib/toolkit/types";
 import { generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
@@ -30,6 +31,7 @@ const STATUS_STYLES: Record<AppointmentStatus, string> = {
 
 export function AppointmentBookTool() {
   const workspace = useWorkspaceConnection("appointment-book");
+  const { t } = useI18n();
   const { items: appointments, save, remove } = useEntityList<Appointment>("appointments");
 
   const [customerId, setCustomerId] = useState("");
@@ -141,10 +143,10 @@ export function AppointmentBookTool() {
                 placeholder="Customer name"
               />
             </Field>
-            <Field label="Phone">
+            <Field label={t("phone")}>
               <TextInput value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="98765 43210" />
             </Field>
-            <Field label="Service *">
+            <Field label={`${t("service")} *`}>
               <TextInput
                 value={service}
                 onChange={(e) => setService(e.target.value)}
@@ -153,7 +155,7 @@ export function AppointmentBookTool() {
             </Field>
             <div className="grid grid-cols-3 gap-3">
               <div className="col-span-2">
-                <Field label="Date">
+                <Field label={t("date")}>
                   <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 </Field>
               </div>
@@ -161,10 +163,10 @@ export function AppointmentBookTool() {
                 <TextInput type="time" value={time} onChange={(e) => setTime(e.target.value)} />
               </Field>
             </div>
-            <Field label="Duration (minutes)">
+            <Field label={t("durationMins")}>
               <NumberInput min={5} step={5} value={duration} onChange={(e) => setDuration(e.target.value)} />
             </Field>
-            <Field label="Notes">
+            <Field label={t("notes")}>
               <TextInput value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional" />
             </Field>
             <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
@@ -187,7 +189,7 @@ export function AppointmentBookTool() {
               </p>
             </div>
             <SecondaryButton onClick={exportCsv} disabled={appointments.length === 0}>
-              Export CSV
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
 
@@ -224,7 +226,7 @@ export function AppointmentBookTool() {
                         className="rounded-md bg-emerald-100 px-3 py-1.5 text-emerald-700 hover:bg-emerald-200"
                         onClick={() => setStatus(a, "completed")}
                       >
-                        Mark completed
+                        {t("markCompleted")}
                       </button>
                       <button
                         type="button"
@@ -248,7 +250,7 @@ export function AppointmentBookTool() {
                         className="text-indigo"
                         onClick={() => setStatus(a, "scheduled")}
                       >
-                        Re-open
+                        {t("reopen")}
                       </button>
                       <button type="button" className="text-red-500" onClick={() => setDeleting(a)}>
                         Delete

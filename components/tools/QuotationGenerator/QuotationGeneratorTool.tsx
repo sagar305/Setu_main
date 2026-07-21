@@ -23,6 +23,7 @@ import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { Quotation, QuotationItem, QuotationStatus } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 const plusDays = (days: number) => {
@@ -48,6 +49,7 @@ const STATUS_STYLES: Record<QuotationStatus, string> = {
 
 export function QuotationGeneratorTool() {
   const workspace = useWorkspaceConnection("quotation-generator");
+  const { t } = useI18n();
   const { items: quotations, save, remove } = useEntityList<Quotation>("quotations");
 
   const [number, setNumber] = useState(`QUO-${String(Date.now()).slice(-5)}`);
@@ -244,10 +246,10 @@ export function QuotationGeneratorTool() {
             <Field label="Quote number">
               <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
             </Field>
-            <Field label="Date">
+            <Field label={t("date")}>
               <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </Field>
-            <Field label="Valid until">
+            <Field label={t("validUntil")}>
               <TextInput
                 type="date"
                 value={validUntil}
@@ -279,10 +281,10 @@ export function QuotationGeneratorTool() {
                 }}
               />
             </Field>
-            <Field label="Phone">
+            <Field label={t("phone")}>
               <TextInput value={clientPhone} onChange={(e) => setClientPhone(e.target.value)} />
             </Field>
-            <Field label="Address">
+            <Field label={t("address")}>
               <TextInput value={clientAddress} onChange={(e) => setClientAddress(e.target.value)} />
             </Field>
           </div>
@@ -295,7 +297,7 @@ export function QuotationGeneratorTool() {
                 className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_70px_100px_80px_auto]"
               >
                 {workspace.connected && workspace.products.length > 0 ? (
-                  <Field label="Pick product">
+                  <Field label={t("product")}>
                     <Select value="" onChange={(e) => e.target.value && pickProduct(item.id, e.target.value)}>
                       <option value="">Choose…</option>
                       {workspace.products.map((p) => (
@@ -306,20 +308,20 @@ export function QuotationGeneratorTool() {
                     </Select>
                   </Field>
                 ) : null}
-                <Field label="Description">
+                <Field label={t("description")}>
                   <TextInput
                     value={item.description}
                     onChange={(e) => updateItem(item.id, { description: e.target.value })}
                   />
                 </Field>
-                <Field label="Qty">
+                <Field label={t("quantity")}>
                   <NumberInput
                     min={0}
                     value={item.quantity || ""}
                     onChange={(e) => updateItem(item.id, { quantity: Number(e.target.value) || 0 })}
                   />
                 </Field>
-                <Field label={`Rate (${symbol})`}>
+                <Field label={`${t("rate")} (${symbol})`}>
                   <NumberInput
                     min={0}
                     step="0.01"
@@ -346,7 +348,7 @@ export function QuotationGeneratorTool() {
             ))}
           </div>
           <SecondaryButton className="mt-3" onClick={() => setItems((p) => [...p, blankItem()])}>
-            + Add item
+            {t("addItem")}
           </SecondaryButton>
 
           <div className="mt-4">
@@ -361,9 +363,8 @@ export function QuotationGeneratorTool() {
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
             <div className="text-sm text-muted">
-              Subtotal {formatMoney(totals.subtotal, currency)} · Tax{" "}
-              {formatMoney(totals.taxTotal, currency)} ·{" "}
-              <span className="text-lg font-bold text-ink">
+              {formatMoney(totals.subtotal, currency)} + {formatMoney(totals.taxTotal, currency)}{" "}
+              = <span className="text-lg font-bold text-ink">{t("total")}{" "}
                 {formatMoney(totals.total, currency)}
               </span>
             </div>
@@ -406,7 +407,7 @@ export function QuotationGeneratorTool() {
                   <p className="mt-1 text-sm font-bold text-ink">{formatMoney(q.total, currency)}</p>
                   <div className="mt-2 flex flex-wrap gap-2 text-xs font-semibold">
                     <button type="button" className="text-indigo" onClick={() => printQuote(q)}>
-                      Print
+                      {t("print")}
                     </button>
                     {q.status === "draft" ? (
                       <button type="button" className="text-indigo" onClick={() => setStatus(q, "sent")}>
@@ -432,7 +433,7 @@ export function QuotationGeneratorTool() {
                       </>
                     ) : null}
                     <button type="button" className="text-red-500" onClick={() => setDeleting(q)}>
-                      Delete
+                      {t("delete")}
                     </button>
                   </div>
                 </div>

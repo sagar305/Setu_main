@@ -23,6 +23,7 @@ import {
   setPreferences,
   type CurrencyInfo,
 } from "@/lib/toolkit/preferences";
+import { useI18n } from "@/lib/i18n";
 
 const BLANK = {
   name: "",
@@ -60,6 +61,7 @@ function readLogo(file: File): Promise<string> {
 
 export function BusinessProfileTool() {
   const [form, setForm] = useState(BLANK);
+  const { t } = useI18n();
   const [existing, setExisting] = useState<Business | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -143,7 +145,7 @@ export function BusinessProfileTool() {
             <Field label="Business name *">
               <TextInput value={form.name} onChange={set("name")} placeholder="Sharma Stores" />
             </Field>
-            <Field label="Phone">
+            <Field label={t("phone")}>
               <TextInput value={form.phone} onChange={set("phone")} placeholder="98765 43210" />
             </Field>
             <Field label="Email">
@@ -152,7 +154,7 @@ export function BusinessProfileTool() {
             <Field label="GSTIN / Tax number">
               <TextInput value={form.taxNumber} onChange={set("taxNumber")} placeholder="22AAAAA0000A1Z5" />
             </Field>
-            <Field label="Currency">
+            <Field label={t("currency")}>
               <Select value={form.currency} onChange={set("currency")}>
                 {currencies.length === 0 ? (
                   <option value={form.currency}>{form.currency}</option>
@@ -179,7 +181,7 @@ export function BusinessProfileTool() {
               </Select>
             </Field>
             <div className="sm:col-span-2">
-              <Field label="Address">
+              <Field label={t("address")}>
                 <TextArea value={form.address} onChange={set("address")} />
               </Field>
             </div>
@@ -195,7 +197,7 @@ export function BusinessProfileTool() {
             </div>
             <div className="sm:col-span-2 flex items-center gap-3">
               <PrimaryButton onClick={save} disabled={!form.name.trim()}>
-                {existing ? "Save changes" : "Create workspace"}
+                {existing ? t("saveChanges") : "Create workspace"}
               </PrimaryButton>
               {saved ? <p className="text-sm font-medium text-emerald-600">Saved ✓</p> : null}
             </div>

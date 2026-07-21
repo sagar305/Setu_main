@@ -15,6 +15,7 @@ import { getExpenses, getOrderItems, getOrders } from "@/lib/toolkit/workspace";
 import type { Expense } from "@/lib/toolkit/types";
 import type { Order, OrderItem } from "@/lib/pos/types";
 import { formatMoney } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
 
 const REVENUE = "#4F46E5";
 const EXPENSE = "#D97706";
@@ -46,6 +47,7 @@ function eachDay(start: string, end: string): string[] {
 
 export function ProfitDashboardTool() {
   const workspace = useWorkspaceConnection("profit-dashboard");
+  const { t } = useI18n();
   const [orders, setOrders] = useState<Order[]>([]);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -115,11 +117,11 @@ export function ProfitDashboardTool() {
   const maxCat = Math.max(...data.byCategory.map(([, v]) => v), 1);
 
   const tiles: { label: string; value: number; strong?: boolean }[] = [
-    { label: "Revenue", value: data.revenue },
-    { label: "Cost of goods", value: data.cogs },
-    { label: "Gross profit", value: data.grossProfit },
-    { label: "Expenses", value: data.expenseTotal },
-    { label: "Net profit", value: data.netProfit, strong: true },
+    { label: t("revenue"), value: data.revenue },
+    { label: t("costOfGoods"), value: data.cogs },
+    { label: t("grossProfit"), value: data.grossProfit },
+    { label: t("expensesLabel"), value: data.expenseTotal },
+    { label: t("netProfit"), value: data.netProfit, strong: true },
   ];
 
   return (
@@ -133,10 +135,10 @@ export function ProfitDashboardTool() {
       <div className="mb-6 flex flex-wrap items-center gap-2">
         {(
           [
-            ["today", "Today"],
-            ["7d", "Last 7 days"],
-            ["30d", "Last 30 days"],
-            ["custom", "Custom"],
+            ["today", t("today")],
+            ["7d", t("last7Days")],
+            ["30d", t("last30Days")],
+            ["custom", t("customRange")],
           ] as const
         ).map(([key, label]) => (
           <button
@@ -206,7 +208,7 @@ export function ProfitDashboardTool() {
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-base font-bold text-ink">Revenue by day</h2>
                 <SecondaryButton onClick={() => setShowTable((v) => !v)}>
-                  {showTable ? "View chart" : "View table"}
+                  {showTable ? t("viewChart") : t("viewTable")}
                 </SecondaryButton>
               </div>
 

@@ -14,6 +14,7 @@ import {
 } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
+import { useI18n } from "@/lib/i18n";
 
 type BarcodeKind = "CODE128" | "EAN13" | "QR";
 
@@ -25,6 +26,7 @@ const KIND_HINTS: Record<BarcodeKind, string> = {
 
 export function BarcodeGeneratorTool() {
   const workspace = useWorkspaceConnection("barcode-generator");
+  const { t } = useI18n();
   const [kind, setKind] = useState<BarcodeKind>("CODE128");
   const [value, setValue] = useState("");
   const [label, setLabel] = useState("");
@@ -169,10 +171,10 @@ export function BarcodeGeneratorTool() {
           {error ? <p className="mt-3 text-sm font-medium text-red-600">{error}</p> : null}
           <div className="mt-4 flex gap-3">
             <PrimaryButton onClick={downloadPng} disabled={!value.trim() || !!error}>
-              Download PNG
+              {t("download")} PNG
             </PrimaryButton>
             <SecondaryButton onClick={downloadPdf} disabled={!value.trim() || !!error}>
-              Download PDF
+              {t("download")} PDF
             </SecondaryButton>
           </div>
         </Card>

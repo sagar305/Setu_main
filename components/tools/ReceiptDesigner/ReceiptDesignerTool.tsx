@@ -19,6 +19,7 @@ import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { generateId, nowIso } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
 
 type Draft = {
   name: string;
@@ -48,6 +49,7 @@ const DEFAULTS: Draft = {
 
 export function ReceiptDesignerTool() {
   const workspace = useWorkspaceConnection("receipt-designer");
+  const { t } = useI18n();
   const { items: templates, save, remove } = useEntityList<ReceiptTemplate>("receipt_templates");
   const [draft, setDraft] = useState<Draft>(DEFAULTS);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -120,7 +122,7 @@ export function ReceiptDesignerTool() {
             {editingId ? <SecondaryButton onClick={startNew}>+ New</SecondaryButton> : null}
           </div>
           <div className="space-y-4">
-            <Field label="Template name">
+            <Field label={t("name")}>
               <TextInput value={draft.name} onChange={(e) => set("name", e.target.value)} />
             </Field>
             <div className="grid grid-cols-2 gap-3">
@@ -185,7 +187,7 @@ export function ReceiptDesignerTool() {
             </div>
             <div className="flex items-center gap-3">
               <PrimaryButton onClick={submit}>
-                {editingId ? "Save changes" : "Save template"}
+                {editingId ? t("saveChanges") : t("save")}
               </PrimaryButton>
               {savedMsg ? (
                 <p className="text-sm font-medium text-emerald-600">
@@ -269,29 +271,29 @@ export function ReceiptDesignerTool() {
             </p>
           ) : (
             <div className="space-y-2">
-              {templates.map((t) => (
+              {templates.map((tpl) => (
                 <div
-                  key={t.id}
+                  key={tpl.id}
                   className={`flex items-center justify-between rounded-lg border px-3 py-2.5 ${
-                    editingId === t.id ? "border-indigo/50 bg-indigo/5" : "border-muted-line/30"
+                    editingId === tpl.id ? "border-indigo/50 bg-indigo/5" : "border-muted-line/30"
                   }`}
                 >
                   <div className="flex items-center gap-2">
                     <span
                       className="h-3 w-3 rounded-full"
-                      style={{ backgroundColor: t.accentColor }}
+                      style={{ backgroundColor: tpl.accentColor }}
                     />
                     <div>
-                      <p className="text-sm font-semibold text-ink">{t.name}</p>
-                      <p className="text-xs text-muted">{t.paperSize}</p>
+                      <p className="text-sm font-semibold text-ink">{tpl.name}</p>
+                      <p className="text-xs text-muted">{tpl.paperSize}</p>
                     </div>
                   </div>
                   <div className="flex gap-2 text-xs font-semibold">
-                    <button type="button" className="text-indigo" onClick={() => startEdit(t)}>
-                      Edit
+                    <button type="button" className="text-indigo" onClick={() => startEdit(tpl)}>
+                      {t("edit")}
                     </button>
-                    <button type="button" className="text-red-500" onClick={() => setDeleting(t)}>
-                      Delete
+                    <button type="button" className="text-red-500" onClick={() => setDeleting(tpl)}>
+                      {t("delete")}
                     </button>
                   </div>
                 </div>
