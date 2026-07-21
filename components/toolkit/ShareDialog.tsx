@@ -17,7 +17,7 @@ import {
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
 import { getWhatsAppShareUrl, shareViaWeb, canShare } from "@/lib/share";
-import { isValidUPIId } from "@/lib/upi";
+import { isValidUPIId, supportsUpi } from "@/lib/upi";
 
 function withOverrides(doc: SharedDoc, upiId: string, fee: number | null): SharedDoc {
   const b = { ...doc.b, u: upiId.trim() || undefined };
@@ -115,10 +115,14 @@ export function ShareDialog({
     await shareViaWeb({ title: docTitle(effectiveDoc), text: message });
   };
 
+  // UPI is an India/INR rail; only offer the payment setup for INR documents.
+  const upiEnabled = supportsUpi(currency);
+
   return (
     <Modal open={open} onClose={onClose} title={title ?? "Share"}>
       <div className="space-y-4">
-        {/* Payment setup */}
+        {/* Payment setup — INR only */}
+        {upiEnabled ? (
         <div className="rounded-lg border border-muted-line/30 p-3">
           <label className="block text-sm font-semibold text-ink">
             UPI ID for payment {amount > 0 ? "" : "(optional)"}
@@ -162,6 +166,7 @@ export function ShareDialog({
             </div>
           ) : null}
         </div>
+        ) : null}
 
         {/* Link + QR */}
         <div className="flex items-center gap-3">

@@ -398,7 +398,10 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     writes: ["inventory", "expenses"],
     dependsOn: ["supplier-book", "stock-register"],
     paidPath: "retail-pos",
-    integrations: [{ with: "stock-register", ux: "Update stock from recorded purchases" }],
+    integrations: [
+      { with: "stock-register", ux: "Update stock from recorded purchases" },
+      { with: "expense-tracker", ux: "Optionally log a purchase as a business expense" },
+    ],
   },
   {
     slug: "stock-register",

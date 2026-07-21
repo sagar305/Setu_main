@@ -15,6 +15,7 @@ import {
   type SharedDoc,
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
+import { supportsUpi } from "@/lib/upi";
 import { UpiPayButton } from "@/components/toolkit/UpiPayButton";
 
 function BusinessHeader({ b, accent = "#26306B" }: { b: ShareBusiness; accent?: string }) {
@@ -178,7 +179,7 @@ export function ShareViewer() {
         ) : null}
       </div>
 
-      {b.u && amount > 0 ? (
+      {b.u && amount > 0 && supportsUpi(currency) ? (
         <UpiPayButton
           upiId={b.u}
           amount={amount}

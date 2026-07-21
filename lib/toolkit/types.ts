@@ -122,6 +122,8 @@ export type Purchase = {
   paymentMode: string;
   /** Whether the user confirmed applying this purchase to product stock. */
   stockApplied: boolean;
+  /** Id of the linked Expense record, when this purchase was also logged as an expense. */
+  expenseId?: string;
   notes: string;
   createdByTool: ToolSlug;
   createdAt: string;

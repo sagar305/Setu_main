@@ -15,8 +15,8 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
-import { applyPurchaseToStock, getSuppliers } from "@/lib/toolkit/workspace";
-import type { Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
+import { applyPurchaseToStock, getSuppliers, saveExpense, deleteExpense } from "@/lib/toolkit/workspace";
+import type { Expense, Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
@@ -45,6 +45,7 @@ export function PurchaseRegisterTool() {
   const [date, setDate] = useState(todayIso());
   const [paymentMode, setPaymentMode] = useState("Cash");
   const [notes, setNotes] = useState("");
+  const [recordExpense, setRecordExpense] = useState(true);
   const [items, setItems] = useState<ItemRow[]>([blankItem()]);
 
   const [pendingStock, setPendingStock] = useState<Purchase | null>(null);
@@ -107,6 +108,41 @@ export function PurchaseRegisterTool() {
     };
   };
 
+  // Save the purchase, optionally applying stock and optionally mirroring it
+  // into the Expense Tracker (category "Purchases") linked back via expenseId.
+  const finalize = async (purchase: Purchase, applyStock: boolean) => {
+    if (applyStock) {
+      await applyPurchaseToStock(purchase);
+      purchase.stockApplied = true;
+      await workspace.reload();
+    }
+    if (recordExpense) {
+      const expense: Expense = {
+        id: generateId(),
+        date: purchase.date,
+        category: "Purchases",
+        description: `Purchase${purchase.billNumber ? ` ${purchase.billNumber}` : ""} from ${
+          purchase.supplierName || "supplier"
+        }`,
+        amount: purchase.total,
+        paymentMode: purchase.paymentMode,
+        supplierId: purchase.supplierId,
+        createdByTool: "purchase-register",
+        createdAt: nowIso(),
+        updatedAt: nowIso(),
+      };
+      await saveExpense(expense);
+      purchase.expenseId = expense.id;
+    }
+    await save(purchase);
+    setMessage(
+      `Purchase of ${formatMoney(purchase.total, currency)} recorded${
+        applyStock ? ", stock updated" : ""
+      }${recordExpense ? ", added to expenses" : ""}.`
+    );
+    resetForm();
+  };
+
   const submit = async () => {
     if (!canSave) return;
     const purchase = buildPurchase();
@@ -115,28 +151,15 @@ export function PurchaseRegisterTool() {
       // Stock change is a dangerous op — always confirm first (spec Q7).
       setPendingStock(purchase);
     } else {
-      await save(purchase);
-      setMessage(`Purchase of ${formatMoney(purchase.total, currency)} recorded.`);
-      resetForm();
+      await finalize(purchase, false);
     }
   };
 
   const confirmWithStock = async (applyStock: boolean) => {
     const purchase = pendingStock;
     if (!purchase) return;
-    if (applyStock) {
-      await applyPurchaseToStock(purchase);
-      purchase.stockApplied = true;
-      await workspace.reload();
-    }
-    await save(purchase);
-    setMessage(
-      `Purchase of ${formatMoney(purchase.total, currency)} recorded${
-        applyStock ? " and stock updated" : ""
-      }.`
-    );
+    await finalize(purchase, applyStock);
     setPendingStock(null);
-    resetForm();
   };
 
   const exportCsv = () =>
@@ -292,6 +315,22 @@ export function PurchaseRegisterTool() {
             />
           </Field>
 
+          <label className="mt-4 flex items-start gap-2 rounded-lg border border-muted-line/30 bg-cream-paper/40 p-3">
+            <input
+              type="checkbox"
+              checked={recordExpense}
+              onChange={(e) => setRecordExpense(e.target.checked)}
+              className="mt-0.5 h-4 w-4 accent-indigo"
+            />
+            <span className="text-sm text-ink">
+              Also record as a business expense
+              <span className="block text-xs text-muted">
+                Adds it to the Expense Tracker (category: Purchases). Turn this off for resale stock
+                whose cost you track via product cost price, so it isn&apos;t counted twice in profit.
+              </span>
+            </span>
+          </label>
+
           <div className="mt-5 flex items-center justify-between border-t border-muted-line/30 pt-4">
             <p className="text-lg font-bold text-ink">{t("total")}: {formatMoney(total, currency)}</p>
             <PrimaryButton onClick={submit} disabled={!canSave}>
@@ -363,12 +402,15 @@ export function PurchaseRegisterTool() {
           deleting
             ? `Delete the ${formatMoney(deleting.total, currency)} purchase from ${
                 deleting.supplierName || "unknown supplier"
-              }? Stock already applied from it is NOT reversed.`
+              }?${deleting.expenseId ? " Its linked expense will also be removed." : ""} Stock already applied from it is NOT reversed.`
             : ""
         }
         confirmLabel="Delete"
         onConfirm={async () => {
-          if (deleting) await remove(deleting.id);
+          if (deleting) {
+            if (deleting.expenseId) await deleteExpense(deleting.expenseId).catch(() => {});
+            await remove(deleting.id);
+          }
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
