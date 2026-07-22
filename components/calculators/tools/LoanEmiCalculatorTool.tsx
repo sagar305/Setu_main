@@ -6,8 +6,10 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function LoanEmiCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [loanAmount, setLoanAmount] = useState("500000");
   const [interestRate, setInterestRate] = useState("12");
@@ -37,17 +39,17 @@ export function LoanEmiCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Loan amount" value={loanAmount} onChange={setLoanAmount} prefix="₹" />
-        <NumberField label="Annual interest rate" value={interestRate} onChange={setInterestRate} suffix="%" />
+        <NumberField label={t("emiLoanAmount")} value={loanAmount} onChange={setLoanAmount} prefix="₹" />
+        <NumberField label={t("emiInterestRate")} value={interestRate} onChange={setInterestRate} suffix="%" />
         <div>
-          <NumberField label="Tenure" value={tenure} onChange={setTenure} />
+          <NumberField label={t("emiTenure")} value={tenure} onChange={setTenure} />
           <div className="mt-2">
             <SegmentedControl
               value={tenureUnit}
               onChange={setTenureUnit}
               options={[
-                { label: "Months", value: "months" },
-                { label: "Years", value: "years" },
+                { label: t("emiMonths"), value: "months" },
+                { label: t("emiYears"), value: "years" },
               ]}
             />
           </div>
@@ -55,9 +57,9 @@ export function LoanEmiCalculatorTool() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Monthly EMI" value={formatCurrency(result.emi)} emphasis />
-        <ResultStat label="Total interest" value={formatCurrency(result.totalInterest)} />
-        <ResultStat label="Total payment" value={formatCurrency(result.totalPayment)} />
+        <ResultStat label={t("emiMonthly")} value={formatCurrency(result.emi)} emphasis />
+        <ResultStat label={t("emiTotalInterest")} value={formatCurrency(result.totalInterest)} />
+        <ResultStat label={t("emiTotalPayment")} value={formatCurrency(result.totalPayment)} />
       </div>
     </div>
   );

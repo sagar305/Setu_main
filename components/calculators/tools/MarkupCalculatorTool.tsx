@@ -5,8 +5,10 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function MarkupCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [costPrice, setCostPrice] = useState("100");
   const [markupPct, setMarkupPct] = useState("40");
@@ -23,14 +25,14 @@ export function MarkupCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Cost price" value={costPrice} onChange={setCostPrice} prefix="₹" />
-        <NumberField label="Target markup" value={markupPct} onChange={setMarkupPct} suffix="%" />
+        <NumberField label={t("mkCostPrice")} value={costPrice} onChange={setCostPrice} prefix="₹" />
+        <NumberField label={t("mkTargetMarkup")} value={markupPct} onChange={setMarkupPct} suffix="%" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Selling price" value={formatCurrency(result.sellingPrice)} emphasis />
-        <ResultStat label="Profit per unit" value={formatCurrency(result.profit)} />
-        <ResultStat label="Resulting margin" value={`${formatNumber(result.marginPct)}%`} />
+        <ResultStat label={t("mkSellingPrice")} value={formatCurrency(result.sellingPrice)} emphasis />
+        <ResultStat label={t("mkProfitPerUnit")} value={formatCurrency(result.profit)} />
+        <ResultStat label={t("mkResultingMargin")} value={`${formatNumber(result.marginPct)}%`} />
       </div>
     </div>
   );

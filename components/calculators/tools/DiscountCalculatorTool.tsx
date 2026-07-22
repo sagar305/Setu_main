@@ -5,8 +5,10 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function DiscountCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [originalPrice, setOriginalPrice] = useState("1000");
   const [discountPct, setDiscountPct] = useState("20");
@@ -22,13 +24,13 @@ export function DiscountCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Original price" value={originalPrice} onChange={setOriginalPrice} prefix="₹" />
-        <NumberField label="Discount" value={discountPct} onChange={setDiscountPct} suffix="%" />
+        <NumberField label={t("discOriginalPrice")} value={originalPrice} onChange={setOriginalPrice} prefix="₹" />
+        <NumberField label={t("discDiscount")} value={discountPct} onChange={setDiscountPct} suffix="%" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="You save" value={formatCurrency(result.discountAmount)} />
-        <ResultStat label="Final price" value={formatCurrency(result.finalPrice)} emphasis />
+        <ResultStat label={t("discYouSave")} value={formatCurrency(result.discountAmount)} />
+        <ResultStat label={t("discFinalPrice")} value={formatCurrency(result.finalPrice)} emphasis />
       </div>
     </div>
   );

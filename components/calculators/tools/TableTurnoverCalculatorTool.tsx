@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatNumber, parseNumber } from "@/lib/format";
+import { useI18n } from "@/lib/i18n";
 
 export function TableTurnoverCalculatorTool() {
+  const { t } = useI18n();
   const [covers, setCovers] = useState("120");
   const [tables, setTables] = useState("20");
   const [hours, setHours] = useState("4");
@@ -22,14 +24,14 @@ export function TableTurnoverCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-3">
-        <NumberField label="Covers served" value={covers} onChange={setCovers} />
-        <NumberField label="Number of tables" value={tables} onChange={setTables} />
-        <NumberField label="Service length" value={hours} onChange={setHours} suffix="hrs" />
+        <NumberField label={t("ttCovers")} value={covers} onChange={setCovers} />
+        <NumberField label={t("ttTables")} value={tables} onChange={setTables} />
+        <NumberField label={t("ttServiceLength")} value={hours} onChange={setHours} suffix={t("unitHrs")} />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Table turnover rate" value={`${formatNumber(result.turnoverRate)}x`} emphasis />
-        <ResultStat label="Avg. turn time" value={`${formatNumber(result.avgTurnMinutes, 0)} min`} />
+        <ResultStat label={t("ttRate")} value={`${formatNumber(result.turnoverRate)}x`} emphasis />
+        <ResultStat label={t("ttAvgTurn")} value={`${formatNumber(result.avgTurnMinutes, 0)} ${t("unitMin")}`} />
       </div>
     </div>
   );

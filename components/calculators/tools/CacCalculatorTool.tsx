@@ -5,8 +5,10 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function CacCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [spend, setSpend] = useState("50000");
   const [newCustomers, setNewCustomers] = useState("100");
@@ -24,14 +26,14 @@ export function CacCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Marketing & sales spend" value={spend} onChange={setSpend} prefix="₹" />
-        <NumberField label="New customers acquired" value={newCustomers} onChange={setNewCustomers} />
-        <NumberField label="Average revenue per customer (optional)" value={avgRevenue} onChange={setAvgRevenue} prefix="₹" />
+        <NumberField label={t("cacSpend")} value={spend} onChange={setSpend} prefix="₹" />
+        <NumberField label={t("cacNewCustomers")} value={newCustomers} onChange={setNewCustomers} />
+        <NumberField label={t("cacAvgRevenue")} value={avgRevenue} onChange={setAvgRevenue} prefix="₹" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Customer acquisition cost" value={formatCurrency(result.cac)} emphasis />
-        <ResultStat label="Revenue-to-CAC ratio" value={result.hasRevenue ? `${formatNumber(result.ratio)}x` : "—"} />
+        <ResultStat label={t("cacCost")} value={formatCurrency(result.cac)} emphasis />
+        <ResultStat label={t("cacRatio")} value={result.hasRevenue ? `${formatNumber(result.ratio)}x` : "—"} />
       </div>
     </div>
   );

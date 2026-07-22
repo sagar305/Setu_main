@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import { Download, Plus, Trash2, ChefHat } from "lucide-react";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { usePreferredCurrencySymbol } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 // Regex patterns for validation
 const PRICE_PATTERN = /^\d+(\.\d{1,2})?$/; // Integer or decimal with up to 2 places
@@ -29,6 +30,7 @@ interface ClassifiedItem extends MenuItem {
 }
 
 export function MenuEngineeringCalculatorTool() {
+  const { t } = useI18n();
   const cur = usePreferredCurrencySymbol();
   const [items, setItems] = useState<MenuItem[]>([
     { id: "1", name: "Butter Chicken", price: 350, cost: 100, popularity: 150 },
@@ -306,10 +308,10 @@ export function MenuEngineeringCalculatorTool() {
 
   const getClassificationBadge = (classification: ClassificationCategory) => {
     const badges = {
-      star: "⭐ Star",
-      "cash-cow": "🐄 Cash Cow",
-      puzzle: "🧩 Puzzle",
-      dog: "🐕 Dog",
+      star: `⭐ ${t("meStarBadge")}`,
+      "cash-cow": `🐄 ${t("meCashCowBadge")}`,
+      puzzle: `🧩 ${t("mePuzzleBadge")}`,
+      dog: `🐕 ${t("meDogBadge")}`,
     };
     return badges[classification];
   };
@@ -320,18 +322,18 @@ export function MenuEngineeringCalculatorTool() {
       <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
         <div className="mb-6 flex items-center gap-3">
           <ChefHat className="h-6 w-6 text-blue-600" />
-          <h3 className="text-2xl font-bold text-ink">Menu Items</h3>
+          <h3 className="text-2xl font-bold text-ink">{t("meMenuItems")}</h3>
         </div>
 
         <div className="space-y-4">
           {items.map((item, idx) => (
             <div key={item.id} className="rounded-lg border border-gray-300 bg-gray-50 p-4">
               <div className="mb-5 flex items-center justify-between">
-                <span className="text-sm font-bold text-gray-600">Item #{idx + 1}</span>
+                <span className="text-sm font-bold text-gray-600">{t("meItemNo")} #{idx + 1}</span>
                 <button
                   onClick={() => deleteItem(item.id)}
                   className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
-                  title="Delete"
+                  title={t("delete")}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -342,13 +344,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Item Name */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Item Name
+                    {t("meItemName")}
                   </label>
                   <input
                     type="text"
                     value={item.name}
                     onChange={(e) => updateItem(item.id, "name", e.target.value)}
-                    placeholder="Item name"
+                    placeholder={t("meItemNamePlaceholder")}
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -356,13 +358,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Price */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Price (Rs)
+                    {t("mePrice")} ({cur})
                   </label>
                   <input
                     type="text"
                     value={item.price === 0 ? "" : item.price}
                     onChange={(e) => updateItem(item.id, "price", e.target.value)}
-                    placeholder="e.g. 100.50"
+                    placeholder={t("mePricePlaceholder")}
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -373,13 +375,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Cost */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Cost (Rs)
+                    {t("meCost")} ({cur})
                   </label>
                   <input
                     type="text"
                     value={item.cost === 0 ? "" : item.cost}
                     onChange={(e) => updateItem(item.id, "cost", e.target.value)}
-                    placeholder="e.g. 50.25"
+                    placeholder={t("meCostPlaceholder")}
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -387,13 +389,13 @@ export function MenuEngineeringCalculatorTool() {
                 {/* Units Sold */}
                 <div className="flex flex-col">
                   <label className="block text-xs font-bold text-gray-700 mb-2">
-                    Units Sold
+                    {t("meUnitsSold")}
                   </label>
                   <input
                     type="text"
                     value={item.popularity === 0 ? "" : item.popularity}
                     onChange={(e) => updateItem(item.id, "popularity", e.target.value)}
-                    placeholder="e.g. 100"
+                    placeholder={t("meUnitsPlaceholder")}
                     className="w-full rounded border border-gray-400 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                 </div>
@@ -407,35 +409,35 @@ export function MenuEngineeringCalculatorTool() {
           className="mt-6 flex items-center justify-center gap-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-colors"
         >
           <Plus className="h-4 w-4" />
-          Add Menu Item
+          {t("meAddItem")}
         </button>
       </div>
 
       {/* Summary Statistics */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-gray-200 bg-blue-50 p-6">
-          <div className="text-xs font-bold uppercase text-blue-700">Total Revenue</div>
+          <div className="text-xs font-bold uppercase text-blue-700">{t("meTotalRevenue")}</div>
           <div className="mt-2 text-2xl font-bold text-blue-900">
             {formatCurrency(analytics.totalRevenue)}
           </div>
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-orange-50 p-6">
-          <div className="text-xs font-bold uppercase text-orange-700">Total Cost</div>
+          <div className="text-xs font-bold uppercase text-orange-700">{t("meTotalCost")}</div>
           <div className="mt-2 text-2xl font-bold text-orange-900">
             {formatCurrency(analytics.totalCost)}
           </div>
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-green-50 p-6">
-          <div className="text-xs font-bold uppercase text-green-700">Total Contribution</div>
+          <div className="text-xs font-bold uppercase text-green-700">{t("meTotalContribution")}</div>
           <div className="mt-2 text-2xl font-bold text-green-900">
             {formatCurrency(analytics.totalContribution)}
           </div>
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-purple-50 p-6">
-          <div className="text-xs font-bold uppercase text-purple-700">Avg Margin %</div>
+          <div className="text-xs font-bold uppercase text-purple-700">{t("meAvgMargin")}</div>
           <div className="mt-2 text-2xl font-bold text-purple-900">
             {formatNumber(analytics.averageContributionMargin)}%
           </div>
@@ -446,30 +448,30 @@ export function MenuEngineeringCalculatorTool() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-yellow-300 bg-yellow-50 p-6">
           <div className="text-4xl mb-2">⭐</div>
-          <div className="text-sm font-bold text-yellow-900">Stars</div>
+          <div className="text-sm font-bold text-yellow-900">{t("meStars")}</div>
           <div className="mt-2 text-2xl font-bold text-yellow-700">{analytics.stars.length}</div>
-          <div className="mt-2 text-xs text-yellow-700">High margin + High popularity</div>
+          <div className="mt-2 text-xs text-yellow-700">{t("meStarsDesc")}</div>
         </div>
 
         <div className="rounded-lg border border-green-300 bg-green-50 p-6">
           <div className="text-4xl mb-2">🐄</div>
-          <div className="text-sm font-bold text-green-900">Cash Cows</div>
+          <div className="text-sm font-bold text-green-900">{t("meCashCows")}</div>
           <div className="mt-2 text-2xl font-bold text-green-700">{analytics.cashCows.length}</div>
-          <div className="mt-2 text-xs text-green-700">High margin + Low popularity</div>
+          <div className="mt-2 text-xs text-green-700">{t("meCashCowsDesc")}</div>
         </div>
 
         <div className="rounded-lg border border-orange-300 bg-orange-50 p-6">
           <div className="text-4xl mb-2">🧩</div>
-          <div className="text-sm font-bold text-orange-900">Puzzles</div>
+          <div className="text-sm font-bold text-orange-900">{t("mePuzzles")}</div>
           <div className="mt-2 text-2xl font-bold text-orange-700">{analytics.puzzles.length}</div>
-          <div className="mt-2 text-xs text-orange-700">Low margin + High popularity</div>
+          <div className="mt-2 text-xs text-orange-700">{t("mePuzzlesDesc")}</div>
         </div>
 
         <div className="rounded-lg border border-red-300 bg-red-50 p-6">
           <div className="text-4xl mb-2">🐕</div>
-          <div className="text-sm font-bold text-red-900">Dogs</div>
+          <div className="text-sm font-bold text-red-900">{t("meDogs")}</div>
           <div className="mt-2 text-2xl font-bold text-red-700">{analytics.dogs.length}</div>
-          <div className="mt-2 text-xs text-red-700">Low margin + Low popularity</div>
+          <div className="mt-2 text-xs text-red-700">{t("meDogsDesc")}</div>
         </div>
       </div>
 
@@ -480,14 +482,14 @@ export function MenuEngineeringCalculatorTool() {
           className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-green-600 hover:bg-green-700 px-6 py-3 font-semibold text-white transition-colors"
         >
           <Download className="h-4 w-4" />
-          Export to Excel
+          {t("meExportExcel")}
         </button>
         <button
           onClick={exportToPDF}
           className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-red-600 hover:bg-red-700 px-6 py-3 font-semibold text-white transition-colors"
         >
           <Download className="h-4 w-4" />
-          Export to PDF
+          {t("meExportPdf")}
         </button>
       </div>
 
@@ -497,13 +499,13 @@ export function MenuEngineeringCalculatorTool() {
           <table className="w-full text-sm">
             <thead className="bg-gray-100 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left font-bold text-gray-900">Item Name</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Price ({cur})</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Cost ({cur})</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin ({cur})</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Margin %</th>
-                <th className="px-4 py-3 text-right font-bold text-gray-900">Units Sold</th>
-                <th className="px-4 py-3 text-center font-bold text-gray-900">Classification</th>
+                <th className="px-4 py-3 text-left font-bold text-gray-900">{t("meItemName")}</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">{t("mePrice")} ({cur})</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">{t("meCost")} ({cur})</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">{t("meMargin")} ({cur})</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">{t("meMarginPct")}</th>
+                <th className="px-4 py-3 text-right font-bold text-gray-900">{t("meUnitsSold")}</th>
+                <th className="px-4 py-3 text-center font-bold text-gray-900">{t("meClassification")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -529,23 +531,23 @@ export function MenuEngineeringCalculatorTool() {
 
       {/* Information Section */}
       <div className="rounded-lg border border-blue-200 bg-blue-50 p-6">
-        <h3 className="text-lg font-bold text-blue-900 mb-4">How to Use</h3>
+        <h3 className="text-lg font-bold text-blue-900 mb-4">{t("meHowToUse")}</h3>
         <div className="grid gap-4 text-sm text-blue-800 sm:grid-cols-2">
           <div>
-            <div className="font-bold">⭐ Stars</div>
-            <p className="mt-1">High margin + High popularity. Promote these items.</p>
+            <div className="font-bold">⭐ {t("meStars")}</div>
+            <p className="mt-1">{t("meStarsTip")}</p>
           </div>
           <div>
-            <div className="font-bold">🐄 Cash Cows</div>
-            <p className="mt-1">High margin + Low popularity. Increase visibility.</p>
+            <div className="font-bold">🐄 {t("meCashCows")}</div>
+            <p className="mt-1">{t("meCashCowsTip")}</p>
           </div>
           <div>
-            <div className="font-bold">🧩 Puzzles</div>
-            <p className="mt-1">Low margin + High popularity. Raise prices or reduce costs.</p>
+            <div className="font-bold">🧩 {t("mePuzzles")}</div>
+            <p className="mt-1">{t("mePuzzlesTip")}</p>
           </div>
           <div>
-            <div className="font-bold">🐕 Dogs</div>
-            <p className="mt-1">Low margin + Low popularity. Remove or reposition.</p>
+            <div className="font-bold">🐕 {t("meDogs")}</div>
+            <p className="mt-1">{t("meDogsTip")}</p>
           </div>
         </div>
       </div>

@@ -6,14 +6,15 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-
-const COLUMNS: RowColumn[] = [
-  { key: "name", label: "Ingredient", type: "text", placeholder: "e.g. Paneer" },
-  { key: "cost", label: "Cost used", type: "number", prefix: "₹" },
-];
+import { useI18n } from "@/lib/i18n";
 
 export function RecipeCostingCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
+  const columns: RowColumn[] = [
+    { key: "name", label: t("rcIngredient"), type: "text", placeholder: t("rcIngredientPlaceholder") },
+    { key: "cost", label: t("rcCostUsed"), type: "number", prefix: "₹" },
+  ];
   const [rows, setRows] = useState<Record<string, string>[]>([
     { name: "Paneer", cost: "60" },
     { name: "Spices & sauces", cost: "15" },
@@ -33,17 +34,17 @@ export function RecipeCostingCalculatorTool() {
 
   return (
     <div>
-      <DynamicRowList rows={rows} columns={COLUMNS} onChange={setRows} addLabel="Add ingredient" minRows={1} />
+      <DynamicRowList rows={rows} columns={columns} onChange={setRows} addLabel={t("rcAddIngredient")} minRows={1} />
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <NumberField label="Servings this recipe yields" value={servings} onChange={setServings} />
-        <NumberField label="Target food cost %" value={targetFoodCostPct} onChange={setTargetFoodCostPct} suffix="%" />
+        <NumberField label={t("rcServings")} value={servings} onChange={setServings} />
+        <NumberField label={t("rcTargetFoodCost")} value={targetFoodCostPct} onChange={setTargetFoodCostPct} suffix="%" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Total recipe cost (all servings)" value={formatCurrency(result.totalCost)} />
-        <ResultStat label="Cost per serving" value={formatCurrency(result.costPerServing)} emphasis />
-        <ResultStat label="Suggested price per serving" value={formatCurrency(result.suggestedPrice)} />
+        <ResultStat label={t("rcTotalCost")} value={formatCurrency(result.totalCost)} />
+        <ResultStat label={t("rcCostPerServing")} value={formatCurrency(result.costPerServing)} emphasis />
+        <ResultStat label={t("rcSuggestedPrice")} value={formatCurrency(result.suggestedPrice)} />
       </div>
     </div>
   );
