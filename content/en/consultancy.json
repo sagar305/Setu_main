@@ -50,13 +50,13 @@
     "headline": "Software expertise",
     "subtext": "We work inside the tools you already use — or help you pick the right one.",
     "items": [
-      { "name": "QuickBooks", "detail": "Online & Desktop" },
-      { "name": "Xero", "detail": "Cloud accounting" },
-      { "name": "Zoho", "detail": "Zoho Books" },
-      { "name": "Appfolio", "detail": "Property management" },
-      { "name": "Resman", "detail": "Property management" },
-      { "name": "FreshBooks", "detail": "Invoicing & books" },
-      { "name": "Wave", "detail": "Small business accounting" }
+      { "name": "QuickBooks", "detail": "Online & Desktop", "color": "#2CA01C", "mark": "qb" },
+      { "name": "Xero", "detail": "Cloud accounting", "color": "#13B5EA", "mark": "X" },
+      { "name": "Zoho", "detail": "Zoho Books", "color": "#E42527", "mark": "Z" },
+      { "name": "Appfolio", "detail": "Property management", "color": "#1B9CD8", "mark": "A" },
+      { "name": "Resman", "detail": "Property management", "color": "#0060A9", "mark": "R" },
+      { "name": "FreshBooks", "detail": "Invoicing & books", "color": "#0075DD", "mark": "FB" },
+      { "name": "Wave", "detail": "Small business accounting", "color": "#2872E0", "mark": "W" }
     ]
   },
   "idealFor": {

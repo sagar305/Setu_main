@@ -32,20 +32,12 @@
         "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
       },
       {
-        "id": "retail",
-        "status": "coming-soon",
-        "name": "Setu Retail",
-        "headline": "Retail, run simply",
-        "description": "Inventory, billing and store management for retail businesses.",
-        "cta": { "label": "Learn more", "href": "/products/retail" }
-      },
-      {
-        "id": "consultancy",
+        "id": "browser-pos",
         "status": "live",
-        "name": "Setu Consultancy",
-        "headline": "Accounting, bookkeeping & payroll",
-        "description": "Outsourced accounting, bookkeeping and payroll for SMEs — weekly to yearly. Bank reconciliation, P&L, balance sheet and more, in QuickBooks, Xero, Zoho and beyond.",
-        "cta": { "label": "Explore Consultancy", "href": "/consultancy" }
+        "name": "Browser Based POS",
+        "headline": "Free billing, right in your browser",
+        "description": "A free, no-install point of sale that runs in any browser — start billing in minutes with nothing to download.",
+        "cta": { "label": "Try Browser POS", "href": "/products/browser-based-pos" }
       },
       {
         "id": "wildcard",
@@ -54,6 +46,24 @@
         "headline": "Don't see your industry?",
         "description": "Tell us what you run — we're building Setu for every kind of business.",
         "cta": { "label": "Tell us your need", "href": "/contact" }
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "headline": "Beyond software — services that run your back office",
+    "subtext": "Not just tools. Setu also runs the work for you, starting with accounting.",
+    "cards": [
+      {
+        "id": "consultancy",
+        "name": "Accounting, Bookkeeping & Payroll",
+        "description": "Outsourced accounting, bookkeeping and payroll for SMEs — weekly, bi-weekly, monthly, quarterly or yearly. Bank reconciliation, P&L, balance sheet, cash flow and more.",
+        "points": [
+          "Monthly bookkeeping & reconciliation",
+          "Profit & Loss, Balance Sheet, Cash Flow",
+          "QuickBooks, Xero, Zoho, FreshBooks & more"
+        ],
+        "cta": { "label": "Explore Consultancy", "href": "/consultancy" }
       }
     ]
   },
