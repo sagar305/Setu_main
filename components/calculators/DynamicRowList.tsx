@@ -1,4 +1,7 @@
+"use client";
+
 import { Plus, X } from "lucide-react";
+import { usePreferredCurrencySymbol } from "@/lib/hooks/usePreferredCurrency";
 
 export type RowColumn = {
   key: string;
@@ -22,6 +25,7 @@ export function DynamicRowList({
   addLabel?: string;
   minRows?: number;
 }) {
+  const currencySym = usePreferredCurrencySymbol();
   const updateRow = (index: number, key: string, value: string) => {
     onChange(rows.map((row, i) => (i === index ? { ...row, [key]: value } : row)));
   };
@@ -54,7 +58,11 @@ export function DynamicRowList({
                 key={column.key}
                 className="flex flex-1 items-center rounded-xl border border-muted-line/40 bg-white px-3 transition focus-within:border-indigo"
               >
-                {column.prefix && <span className="mr-1 text-sm text-muted-warm">{column.prefix}</span>}
+                {column.prefix && (
+                  <span className="mr-1 text-sm text-muted-warm">
+                    {column.prefix === "₹" ? currencySym : column.prefix}
+                  </span>
+                )}
                 <input
                   type={column.type === "number" ? "number" : "text"}
                   inputMode={column.type === "number" ? "decimal" : undefined}

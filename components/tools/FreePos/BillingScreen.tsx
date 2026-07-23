@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   History,
   Minus,
@@ -25,6 +25,9 @@ import type { NavigateFn } from "./nav";
 import { ReceiptModal } from "./ReceiptModal";
 import { CustomerFormModal } from "./CustomersScreen";
 import { EmptyState, Field, Modal, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
+
+/** Sentinel payment id for udhaar sales (never stored as a payment method). */
+const CREDIT_PAYMENT_ID = "__customer_credit__";
 
 export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const {
@@ -134,8 +137,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   const handleCharge = async () => {
     setError("");
-    const methodId = paymentMethodId || payments[0]?.id || "";
-    if (!methodId) {
+    const isCreditSale = paymentMethodId === CREDIT_PAYMENT_ID;
+    const methodId = isCreditSale ? "" : paymentMethodId || payments[0]?.id || "";
+    if (!isCreditSale && !methodId) {
       setError("Add a payment method in Settings first.");
       return;
     }
@@ -147,6 +151,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         discountValue,
         customerId: customerId || null,
         paymentMethodId: methodId,
+        creditSale: isCreditSale,
       });
       setCompletedOrder(order);
       setLines([]);
@@ -161,6 +166,15 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   };
 
   const selectedPaymentId = paymentMethodId || payments[0]?.id || "";
+
+  // Credit (udhaar) is only offered for SAVED customers — never walk-ins.
+  // If the customer is cleared while credit is selected, fall back to the
+  // default payment method.
+  useEffect(() => {
+    if (!customerId && paymentMethodId === CREDIT_PAYMENT_ID) {
+      setPaymentMethodId("");
+    }
+  }, [customerId, paymentMethodId]);
 
   const clearCart = () => {
     setLines([]);
@@ -526,7 +540,27 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     {method.name}
                   </button>
                 ))}
+                {customerId ? (
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethodId(CREDIT_PAYMENT_ID)}
+                    title="Record this sale as udhaar in the Customer Ledger"
+                    className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
+                      selectedPaymentId === CREDIT_PAYMENT_ID
+                        ? "bg-amber-600 text-white"
+                        : "border border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
+                    }`}
+                  >
+                    Credit (Udhaar)
+                  </button>
+                ) : null}
               </div>
+              {selectedPaymentId === CREDIT_PAYMENT_ID ? (
+                <p className="mt-2 text-xs text-amber-700">
+                  The full amount will be added to this customer&apos;s ledger balance instead of
+                  being collected now.
+                </p>
+              ) : null}
             </div>
 
             {error && (

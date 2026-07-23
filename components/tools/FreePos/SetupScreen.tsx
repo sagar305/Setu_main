@@ -14,6 +14,7 @@ export function SetupScreen() {
   const [currency, setCurrency] = useState("INR");
   const [email, setEmail] = useState("");
   const [taxNumber, setTaxNumber] = useState("");
+  const [upiId, setUpiId] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -41,6 +42,7 @@ export function SetupScreen() {
         currency,
         email: email.trim(),
         taxNumber: taxNumber.trim(),
+        upiId: upiId.trim(),
         logoDataUrl: "",
       });
     } catch {
@@ -123,6 +125,15 @@ export function SetupScreen() {
               value={taxNumber}
               onChange={(event) => setTaxNumber(event.target.value)}
               placeholder="Shown on receipts"
+              className={inputClass}
+            />
+          </Field>
+          <Field label="UPI ID (optional)" hint="For shared-invoice payment links">
+            <input
+              type="text"
+              value={upiId}
+              onChange={(event) => setUpiId(event.target.value)}
+              placeholder="shopname@okhdfcbank"
               className={inputClass}
             />
           </Field>

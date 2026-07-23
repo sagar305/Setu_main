@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatNumber, parseNumber } from "@/lib/format";
+import { useI18n } from "@/lib/i18n";
 
 export function InventoryTurnoverCalculatorTool() {
+  const { t } = useI18n();
   const [cogs, setCogs] = useState("600000");
   const [avgInventory, setAvgInventory] = useState("100000");
   const [periodDays, setPeriodDays] = useState("365");
@@ -22,14 +24,14 @@ export function InventoryTurnoverCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Cost of goods sold (period)" value={cogs} onChange={setCogs} prefix="₹" />
-        <NumberField label="Average inventory value" value={avgInventory} onChange={setAvgInventory} prefix="₹" />
-        <NumberField label="Days in period" value={periodDays} onChange={setPeriodDays} suffix="days" />
+        <NumberField label={t("invCogs")} value={cogs} onChange={setCogs} prefix="₹" />
+        <NumberField label={t("invAvgValue")} value={avgInventory} onChange={setAvgInventory} prefix="₹" />
+        <NumberField label={t("invDaysPeriod")} value={periodDays} onChange={setPeriodDays} suffix={t("unitDays")} />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Inventory turnover ratio" value={`${formatNumber(result.turnoverRatio)}x`} emphasis />
-        <ResultStat label="Days inventory outstanding" value={`${formatNumber(result.daysOutstanding, 0)} days`} />
+        <ResultStat label={t("invRatio")} value={`${formatNumber(result.turnoverRatio)}x`} emphasis />
+        <ResultStat label={t("invDio")} value={`${formatNumber(result.daysOutstanding, 0)} ${t("unitDays")}`} />
       </div>
     </div>
   );

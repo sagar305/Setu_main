@@ -4,8 +4,12 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function OnlineOrderCommissionCalculatorTool() {
+  const { t } = useI18n();
+  usePreferredCurrency(); // re-render when the business currency changes
   const [orderValue, setOrderValue] = useState("500");
   const [commissionPct, setCommissionPct] = useState("25");
   const [packaging, setPackaging] = useState("20");
@@ -27,19 +31,19 @@ export function OnlineOrderCommissionCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Order value" value={orderValue} onChange={setOrderValue} prefix="₹" />
-        <NumberField label="Platform commission" value={commissionPct} onChange={setCommissionPct} suffix="%" />
-        <NumberField label="GST on commission" value={commissionGstPct} onChange={setCommissionGstPct} suffix="%" />
-        <NumberField label="Payment gateway fee" value={gatewayPct} onChange={setGatewayPct} suffix="%" />
-        <NumberField label="Packaging cost" value={packaging} onChange={setPackaging} prefix="₹" />
+        <NumberField label={t("oocOrderValue")} value={orderValue} onChange={setOrderValue} prefix="₹" />
+        <NumberField label={t("ompCommission")} value={commissionPct} onChange={setCommissionPct} suffix="%" />
+        <NumberField label={t("ompGstOnComm")} value={commissionGstPct} onChange={setCommissionGstPct} suffix="%" />
+        <NumberField label={t("ompGatewayFee")} value={gatewayPct} onChange={setGatewayPct} suffix="%" />
+        <NumberField label={t("ompPackaging")} value={packaging} onChange={setPackaging} prefix="₹" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Total deductions" value={formatCurrency(result.totalDeductions)} />
-        <ResultStat label="Your real payout" value={formatCurrency(result.payout)} emphasis />
+        <ResultStat label={t("oocTotalDeductions")} value={formatCurrency(result.totalDeductions)} />
+        <ResultStat label={t("oocRealPayout")} value={formatCurrency(result.payout)} emphasis />
       </div>
       <div className="mt-4">
-        <ResultStat label="Take-home %" value={`${formatNumber(result.payoutPct)}%`} />
+        <ResultStat label={t("oocTakeHomePct")} value={`${formatNumber(result.payoutPct)}%`} />
       </div>
     </div>
   );

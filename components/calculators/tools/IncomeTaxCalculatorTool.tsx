@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 type Bracket = { upTo: number; rate: number };
 
@@ -53,6 +55,8 @@ function calcOldRegime(grossIncome: number, deductions: number) {
 }
 
 export function IncomeTaxCalculatorTool() {
+  const { t } = useI18n();
+  usePreferredCurrency(); // re-render when the business currency changes
   const [grossIncome, setGrossIncome] = useState("1200000");
   const [deductions, setDeductions] = useState("150000");
 
@@ -68,9 +72,9 @@ export function IncomeTaxCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Annual gross income" value={grossIncome} onChange={setGrossIncome} prefix="₹" />
+        <NumberField label={t("itGrossIncome")} value={grossIncome} onChange={setGrossIncome} prefix="₹" />
         <NumberField
-          label="Deductions claimed (old regime — 80C, HRA, etc.)"
+          label={t("itDeductions")}
           value={deductions}
           onChange={setDeductions}
           prefix="₹"
@@ -78,22 +82,20 @@ export function IncomeTaxCalculatorTool() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Old regime tax (incl. cess)" value={formatCurrency(result.oldRegime.tax)} />
-        <ResultStat label="New regime tax (incl. cess)" value={formatCurrency(result.newRegime.tax)} />
+        <ResultStat label={t("itOldRegime")} value={formatCurrency(result.oldRegime.tax)} />
+        <ResultStat label={t("itNewRegime")} value={formatCurrency(result.newRegime.tax)} />
       </div>
 
       <div className="mt-4">
         <ResultStat
-          label={`${result.better === "new" ? "New" : "Old"} regime saves you`}
+          label={result.better === "new" ? t("itNewSaves") : t("itOldSaves")}
           value={formatCurrency(result.savings)}
           emphasis
         />
       </div>
 
       <p className="mt-4 rounded-xl bg-saffron/15 p-4 text-xs leading-relaxed text-ink">
-        Estimate only, using FY 2025-26 (AY 2026-27) slabs and a simplified Section 87A rebate — it excludes
-        surcharge and several itemised deductions. Tax slabs typically change with each Union Budget, so verify
-        against the latest official slabs or a chartered accountant before filing or making a regime decision.
+        {t("itDisclaimer")}
       </p>
     </div>
   );

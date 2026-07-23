@@ -157,6 +157,15 @@ const VALID_PSP_PROVIDERS = [
   "zppl",
 ];
 
+// Currencies for which UPI payment is offered. UPI is an India (INR) rail —
+// even where cross-border UPI acceptance exists, the merchant is paid in INR.
+// Add more codes here if another currency's rail is ever supported.
+const UPI_CURRENCIES = new Set(["INR"]);
+
+export function supportsUpi(currency: string | undefined): boolean {
+  return !!currency && UPI_CURRENCIES.has(currency.toUpperCase());
+}
+
 export function isValidUPIId(upiId: string): boolean {
   if (!upiId || typeof upiId !== "string") {
     return false;

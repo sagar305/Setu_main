@@ -4,8 +4,12 @@ import { useMemo, useState } from "react";
 import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function TakeHomeSalaryCalculatorTool() {
+  const { t } = useI18n();
+  usePreferredCurrency(); // re-render when the business currency changes
   const [annualCtc, setAnnualCtc] = useState("600000");
   const [basicPct, setBasicPct] = useState("40");
   const [professionalTax, setProfessionalTax] = useState("200");
@@ -25,20 +29,19 @@ export function TakeHomeSalaryCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Annual CTC" value={annualCtc} onChange={setAnnualCtc} prefix="₹" />
-        <NumberField label="Basic salary (% of CTC)" value={basicPct} onChange={setBasicPct} suffix="%" />
-        <NumberField label="Monthly professional tax" value={professionalTax} onChange={setProfessionalTax} prefix="₹" />
+        <NumberField label={t("thCtc")} value={annualCtc} onChange={setAnnualCtc} prefix="₹" />
+        <NumberField label={t("thBasic")} value={basicPct} onChange={setBasicPct} suffix="%" />
+        <NumberField label={t("thProfTax")} value={professionalTax} onChange={setProfessionalTax} prefix="₹" />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Monthly take-home" value={formatCurrency(result.monthlyTakeHome)} emphasis />
-        <ResultStat label="Employee PF deducted" value={formatCurrency(result.employeePf)} />
-        <ResultStat label="Annual take-home" value={formatCurrency(result.annualTakeHome)} />
+        <ResultStat label={t("thMonthly")} value={formatCurrency(result.monthlyTakeHome)} emphasis />
+        <ResultStat label={t("thPf")} value={formatCurrency(result.employeePf)} />
+        <ResultStat label={t("thAnnual")} value={formatCurrency(result.annualTakeHome)} />
       </div>
 
       <p className="mt-4 text-xs leading-relaxed text-muted-warm">
-        Estimate based on typical PF and professional tax assumptions — actual take-home depends on your exact salary
-        structure and any income tax TDS deducted.
+        {t("thNote")}
       </p>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Download, Printer } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import {
@@ -10,23 +10,40 @@ import {
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
 import { exportReceiptToPdf } from "@/lib/pos/receiptPdf";
+import { getReceiptTemplates } from "@/lib/toolkit/workspace";
+import type { ReceiptTemplate } from "@/lib/toolkit/types";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
+import { Share2 } from "lucide-react";
 import { Modal, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 // The receipt is styled with inline styles only (no Tailwind classes) so it
 // can be copied into a print iframe and captured by html2canvas as-is.
 const mono = "'Courier New', ui-monospace, Menlo, monospace";
 
-const line: React.CSSProperties = {
-  borderTop: "1px dashed #9ca3af",
-  margin: "8px 0",
-};
+function separatorStyle(kind: ReceiptTemplate["separator"] | undefined): React.CSSProperties {
+  if (kind === "none") return { margin: "8px 0" };
+  return {
+    borderTop: `1px ${kind === "solid" ? "solid" : "dashed"} #9ca3af`,
+    margin: "8px 0",
+  };
+}
 
 export const ReceiptView = forwardRef<
   HTMLDivElement,
-  { order: Order; items: OrderItem[] }
->(function ReceiptView({ order, items }, ref) {
+  { order: Order; items: OrderItem[]; template?: ReceiptTemplate | null }
+>(function ReceiptView({ order, items, template }, ref) {
   const { business, settings } = usePos();
   const currency = business?.currency ?? "INR";
+
+  // A saved Receipt Designer template overrides the POS's built-in look;
+  // without one the receipt renders exactly as before.
+  const line = separatorStyle(template?.separator);
+  const accent = template?.accentColor || "#111111";
+  const showBizInfo = template ? template.showBusinessInfo : settings.showBusinessInfoOnReceipt;
+  const showGstin = template ? template.showGstin : true;
+  const boldTotals = template ? template.boldTotals : true;
+  const footerText = (template ? template.footerText : settings.receiptFooter) || "Thank you!";
 
   const row = (label: string, value: string, bold = false): React.CSSProperties => ({
     display: "flex",
@@ -52,12 +69,27 @@ export const ReceiptView = forwardRef<
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <div style={{ fontSize: 16, fontWeight: 700 }}>{business?.name ?? "Receipt"}</div>
-        {settings.showBusinessInfoOnReceipt && (
+        {template?.headerText ? (
+          <div style={{ fontSize: 12, fontWeight: 700, color: accent, letterSpacing: 1 }}>
+            {template.headerText}
+          </div>
+        ) : null}
+        {template?.showLogo && business?.logoDataUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={business.logoDataUrl}
+            alt=""
+            style={{ width: 44, height: 44, objectFit: "contain", margin: "4px auto" }}
+          />
+        ) : null}
+        <div style={{ fontSize: 16, fontWeight: 700, color: template ? accent : undefined }}>
+          {business?.name ?? "Receipt"}
+        </div>
+        {showBizInfo && (
           <div style={{ fontSize: 11, whiteSpace: "pre-wrap" }}>
             {business?.address && <div>{business.address}</div>}
             {business?.phone && <div>Ph: {business.phone}</div>}
-            {business?.taxNumber && <div>Tax No: {business.taxNumber}</div>}
+            {business?.taxNumber && showGstin && <div>Tax No: {business.taxNumber}</div>}
           </div>
         )}
       </div>
@@ -77,18 +109,24 @@ export const ReceiptView = forwardRef<
 
       <div style={line} />
 
-      {items.map((item) => (
-        <div key={item.id} style={{ marginBottom: 4 }}>
-          <div style={{ fontSize: 12 }}>{item.name}</div>
-          <div style={row("", "")}>
-            <span>
-              {item.quantity}
-              {item.unit ? ` ${item.unit}` : ""} × {formatMoney(item.price, currency)}
-            </span>
-            <span>{formatMoney(item.lineSubtotal, currency)}</span>
+      {items.map((item) => {
+        // Show the unit only when it's a real unit of measure (kg, pcs…),
+        // never a bare number — otherwise "1 × ₹100" reads as "1 100 × ₹100".
+        const unitLabel =
+          item.unit && !/^\d+(\.\d+)?$/.test(item.unit.trim()) ? ` ${item.unit.trim()}` : "";
+        return (
+          <div key={item.id} style={{ marginBottom: 4 }}>
+            <div style={{ fontSize: 12 }}>{item.name}</div>
+            <div style={row("", "")}>
+              <span>
+                {item.quantity}
+                {unitLabel} × {formatMoney(item.price, currency)}
+              </span>
+              <span>{formatMoney(item.lineSubtotal, currency)}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <div style={line} />
 
@@ -117,7 +155,7 @@ export const ReceiptView = forwardRef<
           <span>{formatMoney(order.includedTaxAmount, currency)}</span>
         </div>
       )}
-      <div style={{ ...row("", "", true), marginTop: 4 }}>
+      <div style={{ ...row("", "", boldTotals), marginTop: 4 }}>
         <span>TOTAL</span>
         <span>{formatMoney(order.total, currency)}</span>
       </div>
@@ -129,7 +167,7 @@ export const ReceiptView = forwardRef<
       <div style={line} />
 
       <div style={{ textAlign: "center", fontSize: 11, whiteSpace: "pre-wrap" }}>
-        {settings.receiptFooter || "Thank you!"}
+        {footerText}
       </div>
     </div>
   );
@@ -222,14 +260,34 @@ export function ReceiptModal({
   onClose: () => void;
   title?: string;
 }) {
-  const { orderItems, settings } = usePos();
+  const { orderItems, settings, business, customers, updateBusiness } = usePos();
   const receiptRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState("");
+  const [template, setTemplate] = useState<ReceiptTemplate | null>(null);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
+
+  // Load the Receipt Designer template chosen in POS settings (if any).
+  const templateId = settings.receiptTemplateId ?? "";
+  useEffect(() => {
+    if (!templateId) {
+      setTemplate(null);
+      return;
+    }
+    let cancelled = false;
+    getReceiptTemplates()
+      .then((all) => {
+        if (!cancelled) setTemplate(all.find((t) => t.id === templateId) ?? null);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [templateId]);
 
   if (!order) return null;
   const items = orderItems.filter((item) => item.orderId === order.id);
-  const paperSize = settings.receiptPaperSize ?? "80mm";
+  const paperSize: ReceiptPaperSize = template?.paperSize ?? settings.receiptPaperSize ?? "80mm";
 
   const handleDownload = async () => {
     if (!receiptRef.current) return;
@@ -248,10 +306,36 @@ export function ReceiptModal({
     }
   };
 
+  const buildShare = (): SharedDoc => {
+    const currency = business?.currency ?? "INR";
+    const customerPhone = order.customerId
+      ? customers.find((c) => c.id === order.customerId)?.phone
+      : undefined;
+    return {
+      t: "inv",
+      b: businessToShare(business, currency),
+      no: order.invoiceNumber,
+      dt: order.date,
+      cn: order.customerName || undefined,
+      cp: customerPhone || undefined,
+      it: items.map((i) => ({
+        n: i.name,
+        q: i.quantity,
+        r: i.price,
+        x: i.taxRate || undefined,
+      })),
+      sub: order.subtotal,
+      dis: order.discountAmount || undefined,
+      tax: order.taxAmount || undefined,
+      tot: order.total,
+      pm: order.paymentMethodName || undefined,
+    };
+  };
+
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <div className="rounded-xl border border-muted-line/30 bg-cream-paper p-4">
-        <ReceiptView ref={receiptRef} order={order} items={items} />
+        <ReceiptView ref={receiptRef} order={order} items={items} template={template} />
       </div>
 
       {error && (
@@ -278,7 +362,23 @@ export function ReceiptModal({
           <Download className="h-4 w-4" />
           {downloading ? "Preparing…" : "Download PDF"}
         </button>
+        <button
+          type="button"
+          onClick={() => setSharing(buildShare())}
+          className={`${secondaryBtnClass} flex-1`}
+        >
+          <Share2 className="h-4 w-4" />
+          Share link
+        </button>
       </div>
+
+      <ShareDialog
+        open={sharing !== null}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share invoice"
+        onSaveUpiDefault={(upiId) => void updateBusiness({ upiId })}
+      />
     </Modal>
   );
 }

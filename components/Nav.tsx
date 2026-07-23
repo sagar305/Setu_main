@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { LanguageSwitcher } from "@/components/toolkit/LanguageSwitcher";
 import type { SiteContent } from "@/lib/content";
 
 export function Nav({ site }: { site: SiteContent }) {
@@ -28,12 +29,15 @@ export function Nav({ site }: { site: SiteContent }) {
           ))}
         </nav>
 
-        <Link
-          href={site.nav.cta.href}
-          className="hidden rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink md:inline-block"
-        >
-          {site.nav.cta.label}
-        </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          <LanguageSwitcher />
+          <Link
+            href={site.nav.cta.href}
+            className="rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
+          >
+            {site.nav.cta.label}
+          </Link>
+        </div>
 
         <button
           type="button"
@@ -58,6 +62,9 @@ export function Nav({ site }: { site: SiteContent }) {
               {link.label}
             </Link>
           ))}
+          <div className="mt-2 px-3">
+            <LanguageSwitcher className="w-fit" />
+          </div>
           <Link
             href={site.nav.cta.href}
             onClick={() => setOpen(false)}

@@ -1,4 +1,4 @@
-import { STORES, dbClearAll, dbBatch, dbGetAll, type StoreName } from "./db";
+import { STORES, dbClearStores, dbBatch, dbGetAll, type StoreName } from "./db";
 
 export const BACKUP_APP_MARKER = "setu-free-pos";
 export const BACKUP_VERSION = 1;
@@ -7,7 +7,12 @@ export type PosBackup = {
   app: string;
   version: number;
   exportedAt: string;
-  data: Record<StoreName, unknown[]>;
+  /**
+   * Only the stores a backup actually contains. Older backups (and Google
+   * Sheet pulls) predate the toolkit stores — restore must leave stores that
+   * are absent here untouched, never wipe them.
+   */
+  data: Partial<Record<StoreName, unknown[]>>;
 };
 
 /** Read every store and produce the POS_BACKUP.json payload. */
@@ -83,9 +88,13 @@ export function validateBackup(raw: unknown): BackupValidation {
       version: candidate.version,
       exportedAt: typeof candidate.exportedAt === "string" ? candidate.exportedAt : "",
       data: STORES.reduce((acc, store) => {
-        acc[store] = (records[store] ?? []) as unknown[];
+        // Keep only sections the backup actually has, so restore can leave
+        // absent stores (e.g. toolkit data in a pre-v4 backup) untouched.
+        if (records[store] !== undefined) {
+          acc[store] = records[store] as unknown[];
+        }
         return acc;
-      }, {} as Record<StoreName, unknown[]>),
+      }, {} as Partial<Record<StoreName, unknown[]>>),
     },
   };
 }
@@ -98,8 +107,12 @@ export function parseBackupFile(text: string): BackupValidation {
   }
 }
 
-/** Replace the entire database with the backup contents. */
+/**
+ * Replace the stores present in the backup with its contents. Stores the
+ * backup does not carry (e.g. toolkit stores in an older POS backup or a
+ * Google Sheet pull) are left untouched.
+ */
 export async function restoreBackup(backup: PosBackup): Promise<void> {
-  await dbClearAll();
+  await dbClearStores(Object.keys(backup.data) as StoreName[]);
   await dbBatch(backup.data);
 }

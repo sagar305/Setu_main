@@ -21,6 +21,7 @@ import {
   type WorkspaceSnapshot,
 } from "./sheetSync";
 import { calculateCartTotals } from "./calc";
+import type { LedgerEntry } from "@/lib/toolkit/types";
 import {
   createBackup,
   downloadBackupFile,
@@ -82,6 +83,12 @@ export type CheckoutInput = {
   discountValue: number;
   customerId: string | null;
   paymentMethodId: string;
+  /**
+   * Udhaar sale: the total is recorded as credit in the shared Customer
+   * Ledger instead of being paid now. Requires a SAVED customer — walk-ins
+   * cannot take credit. When set, paymentMethodId is ignored.
+   */
+  creditSale?: boolean;
 };
 
 export type HoldCartInput = {
@@ -530,7 +537,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         }
       }
       const paymentMethod = payments.find((p) => p.id === input.paymentMethodId);
-      if (!paymentMethod) {
+      if (!input.creditSale && !paymentMethod) {
         throw new Error("Please choose a payment method.");
       }
 
@@ -554,6 +561,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const customer = input.customerId
         ? customers.find((c) => c.id === input.customerId) ?? null
         : null;
+      if (input.creditSale && !customer) {
+        throw new Error("Credit sales need a saved customer — pick one from the customer list.");
+      }
 
       const now = nowIso();
       const order: Order = {
@@ -569,11 +579,30 @@ export function PosProvider({ children }: { children: ReactNode }) {
         taxAmount: totals.taxAmount,
         includedTaxAmount: totals.includedTaxAmount,
         total: totals.total,
-        paymentMethodId: paymentMethod.id,
-        paymentMethodName: paymentMethod.name,
+        paymentMethodId: input.creditSale ? "credit" : paymentMethod!.id,
+        paymentMethodName: input.creditSale ? "Customer Credit" : paymentMethod!.name,
         status: "completed",
         createdAt: now,
       };
+
+      // Udhaar sale: record the credit in the shared Customer Ledger, in the
+      // same transaction as the order, so the Customer Ledger tool shows the
+      // balance immediately.
+      const ledgerEntries: LedgerEntry[] = input.creditSale
+        ? [
+            {
+              id: generateId(),
+              customerId: customer!.id,
+              customerName: customer!.name,
+              type: "credit",
+              amount: totals.total,
+              note: `POS sale ${invoiceNumber}`,
+              date: now.slice(0, 10),
+              createdByTool: "browser-pos",
+              createdAt: now,
+            },
+          ]
+        : [];
 
       const items: OrderItem[] = input.lines.map((line) => ({
         id: generateId(),
@@ -617,6 +646,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
           products: updatedProducts,
           inventory: logs,
           settings: [updatedSettings],
+          ledger: ledgerEntries,
         },
         {},
         ["orders", "products", "meta"]

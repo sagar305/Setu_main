@@ -5,13 +5,16 @@ import { DynamicRowList, type RowColumn } from "@/components/calculators/Dynamic
 import { NumberField } from "@/components/calculators/NumberField";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
-
-const COLUMNS: RowColumn[] = [
-  { key: "name", label: "Name", type: "text", placeholder: "e.g. Riya" },
-  { key: "weight", label: "Hours / shares", type: "number" },
-];
+import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function TipSplitCalculatorTool() {
+  const { t } = useI18n();
+  usePreferredCurrency(); // re-render when the business currency changes
+  const columns: RowColumn[] = [
+    { key: "name", label: t("name"), type: "text", placeholder: t("tsNamePlaceholder") },
+    { key: "weight", label: t("tsHoursShares"), type: "number" },
+  ];
   const [method, setMethod] = useState<"equal" | "weighted">("equal");
   const [pool, setPool] = useState("5000");
   const [rows, setRows] = useState<Record<string, string>[]>([
@@ -24,14 +27,14 @@ export function TipSplitCalculatorTool() {
     const total = parseNumber(pool);
     if (method === "equal") {
       const share = rows.length > 0 ? total / rows.length : 0;
-      return rows.map((row, index) => ({ name: row.name || `Staff ${index + 1}`, amount: share }));
+      return rows.map((row, index) => ({ name: row.name || `${t("tsStaff")} ${index + 1}`, amount: share }));
     }
     const totalWeight = rows.reduce((sum, row) => sum + parseNumber(row.weight), 0);
     return rows.map((row, index) => ({
-      name: row.name || `Staff ${index + 1}`,
+      name: row.name || `${t("tsStaff")} ${index + 1}`,
       amount: totalWeight > 0 ? total * (parseNumber(row.weight) / totalWeight) : 0,
     }));
-  }, [method, pool, rows]);
+  }, [method, pool, rows, t]);
 
   return (
     <div>
@@ -39,17 +42,17 @@ export function TipSplitCalculatorTool() {
         value={method}
         onChange={setMethod}
         options={[
-          { label: "Equal split", value: "equal" },
-          { label: "By hours / shares", value: "weighted" },
+          { label: t("tsEqual"), value: "equal" },
+          { label: t("tsWeighted"), value: "weighted" },
         ]}
       />
 
       <div className="mt-6">
-        <NumberField label="Total tip pool" value={pool} onChange={setPool} prefix="₹" />
+        <NumberField label={t("tsPool")} value={pool} onChange={setPool} prefix="₹" />
       </div>
 
       <div className="mt-6">
-        <DynamicRowList rows={rows} columns={COLUMNS} onChange={setRows} addLabel="Add staff member" minRows={1} />
+        <DynamicRowList rows={rows} columns={columns} onChange={setRows} addLabel={t("tsAddStaff")} minRows={1} />
       </div>
 
       <div className="mt-6 space-y-2">
