@@ -31,12 +31,6 @@ export function Nav({ site }: { site: SiteContent }) {
 
         <div className="hidden items-center gap-3 md:flex">
           <LanguageSwitcher />
-          <Link
-            href={site.nav.cta.href}
-            className="rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
-          >
-            {site.nav.cta.label}
-          </Link>
         </div>
 
         <button
