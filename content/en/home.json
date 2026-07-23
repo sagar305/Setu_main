@@ -40,6 +40,14 @@
         "cta": { "label": "Learn more", "href": "/products/retail" }
       },
       {
+        "id": "consultancy",
+        "status": "live",
+        "name": "Setu Consultancy",
+        "headline": "Accounting, bookkeeping & payroll",
+        "description": "Outsourced accounting, bookkeeping and payroll for SMEs — weekly to yearly. Bank reconciliation, P&L, balance sheet and more, in QuickBooks, Xero, Zoho and beyond.",
+        "cta": { "label": "Explore Consultancy", "href": "/consultancy" }
+      },
+      {
         "id": "wildcard",
         "status": "coming-soon",
         "name": "Setu for your business",
