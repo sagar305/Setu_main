@@ -50,13 +50,13 @@
     "headline": "Software expertise",
     "subtext": "We work inside the tools you already use — or help you pick the right one.",
     "items": [
-      { "name": "QuickBooks", "detail": "Online & Desktop", "color": "#2CA01C", "mark": "qb" },
-      { "name": "Xero", "detail": "Cloud accounting", "color": "#13B5EA", "mark": "X" },
-      { "name": "Zoho", "detail": "Zoho Books", "color": "#E42527", "mark": "Z" },
-      { "name": "Appfolio", "detail": "Property management", "color": "#1B9CD8", "mark": "A" },
-      { "name": "Resman", "detail": "Property management", "color": "#0060A9", "mark": "R" },
-      { "name": "FreshBooks", "detail": "Invoicing & books", "color": "#0075DD", "mark": "FB" },
-      { "name": "Wave", "detail": "Small business accounting", "color": "#2872E0", "mark": "W" }
+      { "name": "QuickBooks", "detail": "Online & Desktop", "color": "#2CA01C", "mark": "qb", "logo": "/logos/quickbooks.svg" },
+      { "name": "Xero", "detail": "Cloud accounting", "color": "#13B5EA", "mark": "X", "logo": "/logos/xero.svg" },
+      { "name": "Zoho", "detail": "Zoho Books", "color": "#E42527", "mark": "Z", "logo": "/logos/zoho.svg" },
+      { "name": "Appfolio", "detail": "Property management", "color": "#1B9CD8", "mark": "A", "logo": "" },
+      { "name": "Resman", "detail": "Property management", "color": "#0060A9", "mark": "R", "logo": "" },
+      { "name": "FreshBooks", "detail": "Invoicing & books", "color": "#0075DD", "mark": "FB", "logo": "" },
+      { "name": "Wave", "detail": "Small business accounting", "color": "#2872E0", "mark": "W", "logo": "" }
     ]
   },
   "idealFor": {

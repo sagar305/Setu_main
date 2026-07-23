@@ -128,12 +128,33 @@ export default function ConsultancyPage() {
               key={item.name}
               className="flex items-center gap-4 rounded-2xl border border-muted-line/30 bg-white p-5 transition hover:-translate-y-1 hover:border-indigo/20 hover:shadow-md"
             >
-              <span
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-base font-bold uppercase text-white"
-                style={{ backgroundColor: item.color }}
-                aria-hidden="true"
-              >
-                {item.mark}
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cream">
+                {item.logo ? (
+                  <span
+                    role="img"
+                    aria-label={`${item.name} logo`}
+                    className="h-7 w-7"
+                    style={{
+                      backgroundColor: item.color,
+                      WebkitMaskImage: `url(${item.logo})`,
+                      maskImage: `url(${item.logo})`,
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                    }}
+                  />
+                ) : (
+                  <span
+                    className="text-base font-bold uppercase"
+                    style={{ color: item.color }}
+                    aria-hidden="true"
+                  >
+                    {item.mark}
+                  </span>
+                )}
               </span>
               <span>
                 <span className="block text-lg font-semibold text-ink">{item.name}</span>
