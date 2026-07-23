@@ -5,10 +5,12 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 const STATUTORY_CEILING = 2000000;
 
 export function GratuityCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [lastSalary, setLastSalary] = useState("30000");
   const [years, setYears] = useState("7");
@@ -24,19 +26,17 @@ export function GratuityCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Last drawn monthly salary (basic + DA)" value={lastSalary} onChange={setLastSalary} prefix="₹" />
-        <NumberField label="Years of service" value={years} onChange={setYears} suffix="yrs" />
+        <NumberField label={t("gratSalary")} value={lastSalary} onChange={setLastSalary} prefix="₹" />
+        <NumberField label={t("gratYears")} value={years} onChange={setYears} suffix={t("unitYrs")} />
       </div>
 
       <div className="mt-6">
-        <ResultStat label="Estimated gratuity payable" value={formatCurrency(result.capped)} emphasis />
+        <ResultStat label={t("gratPayable")} value={formatCurrency(result.capped)} emphasis />
       </div>
 
       {result.exceedsCeiling && (
         <p className="mt-4 rounded-xl bg-saffron/15 p-4 text-xs leading-relaxed text-ink">
-          Your uncapped calculation works out to {formatCurrency(result.raw)}, above the statutory tax-exempt ceiling
-          of ₹20,00,000. This ceiling is revised periodically by the government — confirm the current limit before
-          treating this as a final figure.
+          {t("gratNote").replace("{amount}", formatCurrency(result.raw))}
         </p>
       )}
     </div>

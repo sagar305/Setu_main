@@ -15,17 +15,31 @@ import {
 import { getPreferences, markHydrated, setPreferences } from "@/lib/toolkit/preferences";
 import { isLanguageCode, LANGUAGES, type LanguageCode } from "./config";
 import { BASE_DICT, DICTIONARIES, type DictKey } from "./dictionaries";
+import { CALC_BASE, CALC_DICTIONARIES, type CalcDictKey } from "./calc-dictionaries";
+
+// `t` resolves against both the shared chrome dictionary and the calculator
+// dictionary; each falls back to its English base when a key is missing.
+type TKey = DictKey | CalcDictKey;
+
+function translate(lang: LanguageCode, key: TKey): string {
+  if (key in BASE_DICT) {
+    const k = key as DictKey;
+    return DICTIONARIES[lang]?.[k] ?? BASE_DICT[k];
+  }
+  const k = key as CalcDictKey;
+  return CALC_DICTIONARIES[lang]?.[k] ?? CALC_BASE[k];
+}
 
 type I18n = {
   lang: LanguageCode;
   setLang: (code: LanguageCode) => void;
-  t: (key: DictKey) => string;
+  t: (key: TKey) => string;
 };
 
 const I18nContext = createContext<I18n>({
   lang: "en",
   setLang: () => {},
-  t: (key) => BASE_DICT[key],
+  t: (key) => translate("en", key),
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -47,10 +61,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.dir = language?.dir ?? "ltr";
   };
 
-  const t = useCallback(
-    (key: DictKey) => DICTIONARIES[lang]?.[key] ?? BASE_DICT[key],
-    [lang]
-  );
+  const t = useCallback((key: TKey) => translate(lang, key), [lang]);
 
   return (
     <I18nContext.Provider value={{ lang, setLang: applyLang, t }}>
@@ -66,3 +77,4 @@ export function useI18n(): I18n {
 export { LANGUAGES } from "./config";
 export type { LanguageCode } from "./config";
 export type { DictKey } from "./dictionaries";
+export type { CalcDictKey } from "./calc-dictionaries";

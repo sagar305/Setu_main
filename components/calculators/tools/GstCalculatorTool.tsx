@@ -6,10 +6,12 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 const GST_PRESETS = [5, 12, 18, 28];
 
 export function GstCalculatorTool() {
+  const { t } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [mode, setMode] = useState<"add" | "remove">("add");
   const [amount, setAmount] = useState("1000");
@@ -35,20 +37,20 @@ export function GstCalculatorTool() {
         value={mode}
         onChange={setMode}
         options={[
-          { label: "Add GST", value: "add" },
-          { label: "Remove GST", value: "remove" },
+          { label: t("gstAdd"), value: "add" },
+          { label: t("gstRemove"), value: "remove" },
         ]}
       />
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <NumberField
-          label={mode === "add" ? "Amount (before GST)" : "Amount (including GST)"}
+          label={mode === "add" ? t("gstAmountBefore") : t("gstAmountIncl")}
           value={amount}
           onChange={setAmount}
           prefix="₹"
         />
         <div>
-          <NumberField label="GST Rate" value={rate} onChange={setRate} suffix="%" />
+          <NumberField label={t("gstRate")} value={rate} onChange={setRate} suffix="%" />
           <div className="mt-2 flex gap-2">
             {GST_PRESETS.map((preset) => (
               <button
@@ -69,9 +71,9 @@ export function GstCalculatorTool() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Base amount" value={formatCurrency(result.base)} />
-        <ResultStat label="GST amount" value={formatCurrency(result.gstAmount)} />
-        <ResultStat label="Total amount" value={formatCurrency(result.total)} emphasis />
+        <ResultStat label={t("gstBaseAmount")} value={formatCurrency(result.base)} />
+        <ResultStat label={t("gstAmountLabel")} value={formatCurrency(result.gstAmount)} />
+        <ResultStat label={t("gstTotalAmount")} value={formatCurrency(result.total)} emphasis />
       </div>
     </div>
   );
