@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/products/queue",
     "/products/retail",
     "/products/clinic",
+    "/consultancy",
     "/calculators",
     "/calculators/gst-calculator",
     "/calculators/profit-margin-calculator",

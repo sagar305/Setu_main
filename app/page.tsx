@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getHomeContent } from "@/lib/content";
 import { Hero } from "@/components/home/Hero";
 import { Products } from "@/components/home/Products";
+import { Services } from "@/components/home/Services";
 import { WhySetu } from "@/components/home/WhySetu";
 import { SocialProof } from "@/components/home/SocialProof";
 import { LatestBlogs } from "@/components/home/LatestBlogs";
@@ -46,6 +47,7 @@ export default function HomePage() {
     <>
       <Hero hero={content.hero} />
       <Products products={content.products} />
+      <Services services={content.services} />
       <WhySetu whySetu={content.whySetu} />
       <SocialProof socialProof={content.socialProof} />
       <LatestBlogs />

@@ -12,6 +12,7 @@ import retailData from "@/content/en/retail.json";
 import clinicData from "@/content/en/clinic.json";
 import calculatorsData from "@/content/en/calculators.json";
 import toolsData from "@/content/en/tools.json";
+import consultancyData from "@/content/en/consultancy.json";
 
 export type Cta = { label: string; href: string };
 
@@ -29,6 +30,7 @@ export type CalculatorsContent = typeof calculatorsData;
 export type CalculatorItem = CalculatorsContent["items"][number];
 export type ToolsContent = typeof toolsData;
 export type ToolItem = ToolsContent["items"][number];
+export type ConsultancyContent = typeof consultancyData;
 
 export function getSiteContent(): SiteContent {
   return siteData;
@@ -124,4 +126,8 @@ export function getToolsContent(): ToolsContent {
 
 export function getToolBySlug(slug: string): ToolItem | undefined {
   return toolsData.items.find((item) => item.slug === slug);
+}
+
+export function getConsultancyContent(): ConsultancyContent {
+  return consultancyData;
 }

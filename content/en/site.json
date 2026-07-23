@@ -9,6 +9,7 @@
   "nav": {
     "links": [
       { "label": "Products", "href": "/products" },
+      { "label": "Consultancy", "href": "/consultancy" },
       { "label": "Calculators", "href": "/calculators" },
       { "label": "Tools", "href": "/tools" },
       { "label": "About", "href": "/about" },
@@ -33,6 +34,7 @@
         "heading": "Company",
         "links": [
           { "label": "About", "href": "/about" },
+          { "label": "Consultancy", "href": "/consultancy" },
           { "label": "Blog", "href": "/blog" },
           { "label": "Contact", "href": "/contact" }
         ]

@@ -1,0 +1,81 @@
+{
+  "seo": {
+    "title": "Accounting, Bookkeeping & Payroll Services | Setu Technology",
+    "description": "Outsourced accounting, bookkeeping and payroll services for SMEs — weekly, bi-weekly, monthly, quarterly or yearly. Expertise in QuickBooks, Xero, Zoho, Appfolio, Resman, FreshBooks and Wave.",
+    "keywords": [
+      "accounting services",
+      "bookkeeping services",
+      "payroll services",
+      "outsourced accounting for SMEs",
+      "QuickBooks bookkeeping",
+      "Xero accounting",
+      "bank reconciliation services"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Consultancy",
+    "headline": "Accounting, Bookkeeping & Payroll Services",
+    "subheadline": "We provide Accounting, Bookkeeping and Payroll services tailored to your needs — on a weekly, bi-weekly, monthly, quarterly or yearly basis. From day-to-day transactions to financial statements, we keep your books accurate and audit-ready."
+  },
+  "overview": {
+    "headline": "Complete maintenance of your books of accounts",
+    "intro": "Our services cover all aspects of maintenance of books of accounts, including:",
+    "items": [
+      "Recording of all transactions related to expenses, income, assets & liabilities",
+      "Preparation of general ledger and subsidiary ledgers",
+      "Assets accounting and maintenance of fixed assets register",
+      "Accounts receivables and age-wise reporting to management",
+      "Accounts payables including overdue liabilities",
+      "Bank reconciliation",
+      "Trial balance",
+      "Income statement (Profit & Loss)",
+      "Balance sheet",
+      "Cash flow statement"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Services included",
+    "subtext": "A clear, ongoing scope so you always know what's covered.",
+    "items": [
+      "Monthly bookkeeping (ongoing)",
+      "Bank & credit card reconciliation",
+      "Categorization of income & expenses",
+      "Chart of accounts review",
+      "Monthly Profit & Loss & Balance Sheet",
+      "Journal entries & adjustments",
+      "AR/AP tracking (basic)"
+    ]
+  },
+  "software": {
+    "headline": "Software expertise",
+    "subtext": "We work inside the tools you already use — or help you pick the right one.",
+    "items": [
+      { "name": "QuickBooks", "detail": "Online & Desktop", "color": "#2CA01C", "mark": "qb", "logo": "/logos/quickbooks.svg" },
+      { "name": "Xero", "detail": "Cloud accounting", "color": "#13B5EA", "mark": "X", "logo": "/logos/xero.svg" },
+      { "name": "Zoho", "detail": "Zoho Books", "color": "#E42527", "mark": "Z", "logo": "/logos/zoho.svg" },
+      { "name": "Appfolio", "detail": "Property management", "color": "#1B9CD8", "mark": "A", "logo": "" },
+      { "name": "Resman", "detail": "Property management", "color": "#0060A9", "mark": "R", "logo": "" },
+      { "name": "FreshBooks", "detail": "Invoicing & books", "color": "#0075DD", "mark": "FB", "logo": "" },
+      { "name": "Wave", "detail": "Small business accounting", "color": "#2872E0", "mark": "W", "logo": "" }
+    ]
+  },
+  "idealFor": {
+    "headline": "Ideal for",
+    "subtext": "Built for growing businesses that want clean books without a full in-house finance team.",
+    "items": [
+      "Small & Medium Businesses (SMEs)",
+      "Service-based businesses",
+      "E-commerce, Real Estate, healthcare and professional services"
+    ]
+  },
+  "frequency": {
+    "headline": "On your schedule",
+    "subtext": "Choose the cadence that fits how your business runs.",
+    "options": ["Weekly", "Bi-weekly", "Monthly", "Quarterly", "Yearly"]
+  },
+  "cta": {
+    "headline": "Ready to hand off your books?",
+    "subtext": "Tell us about your business and we'll put together an accounting and bookkeeping plan that fits your needs.",
+    "cta": { "label": "Talk to us", "href": "/contact" }
+  }
+}
