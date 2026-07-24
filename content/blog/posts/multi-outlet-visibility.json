@@ -1,0 +1,43 @@
+{
+  "slug": "multi-outlet-visibility",
+  "title": "How to Know Which Restaurant Outlet Is Actually Making Money",
+  "seoTitle": "How to Know Which Restaurant Outlet Is Actually Making Money",
+  "metaDescription": "Most multi-outlet restaurant owners track total sales, not per-outlet performance. Here's exactly what to measure — and what to do when one location is quietly losing money.",
+  "excerpt": "Why most multi-outlet owners are flying blind on per-location performance, and what to track instead.",
+  "keywords": [
+    "multi outlet restaurant management",
+    "restaurant outlet performance tracking"
+  ],
+  "date": "2026-06-22",
+  "category": "Operations",
+  "thumbnail": null,
+  "connectedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I know which restaurant outlet is actually profitable?",
+      "answer": "Track revenue, cost and contribution per outlet — not just total sales. A high-revenue outlet can be your least profitable once its rent, staff and food cost are set against its own covers."
+    },
+    {
+      "question": "Why does eyeballing performance stop working past one outlet?",
+      "answer": "Rent, staffing and local footfall rarely match across locations, so a single instinct for 'how we're doing' hides an underperforming outlet inside a healthy total."
+    },
+    {
+      "question": "What numbers should a multi-outlet owner check weekly?",
+      "answer": "Revenue per cover, contribution margin and break-even progress per outlet — so a location drifting below break-even shows up in weeks, not at year-end."
+    }
+  ],
+  "bodyHtml": "<p>Running more than one restaurant outlet is a different game from running one. The complexity doesn't just double — it multiplies. And the most dangerous part isn't managing the chaos. It's thinking you have visibility when you don't.</p><p>Most multi-outlet owners we talk to are managing performance through end-of-day phone calls with managers, WhatsApp messages, and a rough mental map of which location \"feels\" busier. The problem isn't effort — they're working hard. The problem is that none of this tells you what's actually happening with money.</p><p>This article walks through what to measure, what to ignore, and how to spot a quietly underperforming outlet before it becomes a serious problem.</p><h2>Why Most Multi-Outlet Owners Are Flying Blind</h2><p>The default state for most multi-outlet restaurant businesses in India is fragmented data. Each outlet has its own billing register, or its own POS terminal that doesn't talk to the others. End-of-day reports are printed locally, handed to a manager, and consolidated — manually — into a spreadsheet by someone in accounts.</p><p>By the time that data reaches the owner, it's a day old, it's been aggregated into totals, and the nuance is gone. You see ₹85,000 in sales from Outlet 2 yesterday. But was that good or bad? Compared to what? Against what food cost? With how many staff on shift?</p><p>Total sales tells you almost nothing useful on its own.</p><h2>What You're Missing When You Rely on Phone Calls</h2><p>A manager reporting to you has a natural incentive to present their outlet in the best light. This isn't dishonesty — it's human. What you hear is total sales, busy periods and \"it was a good day.\" What you don't hear:</p><ul><li>The two tables that walked out because service was slow</li><li>The dish that's been returned twice this week</li><li>The staff member who's consistently leaving 30 minutes early and skewing the labour cost</li><li>The outlet that's doing high sales but has food costs quietly creeping above 35%</li></ul><p>Phone calls give you narrative. You need data.</p><h2>The 5 Metrics to Track Per Outlet — Not Just Total Sales</h2><p>Once you move to per-outlet visibility, these are the numbers that actually tell you what's happening:</p><h3>1. Revenue Per Cover</h3><p>Total sales divided by number of covers (customers served). This tells you whether high revenue is coming from more customers or higher spend per customer — two very different situations that call for different responses.</p><p>If Outlet 1 has revenue per cover of ₹480 and Outlet 2 is ₹310, that's not just a curiosity. It's a question: is Outlet 2's menu priced differently? Is upselling not happening? Is a different customer type walking in?</p><h3>2. Food Cost Percentage</h3><p>Food cost as a percentage of revenue. Healthy range for most Indian restaurants: 28–35%. Above 38% and something is wrong — over-portioning, supplier price creep, theft, or waste.</p><p>The issue with tracking this per outlet is you need both sales data and purchase/inventory data in one place. Most manual setups can't do this cleanly.</p><h3>3. Average Order Value (AOV)</h3><p>Total revenue divided by number of orders. Watching this per outlet over time shows you whether menu changes, promotions or staff training are actually moving the needle.</p><p>If you run a promotion at Outlet 3 and AOV doesn't change, the promotion isn't working as intended. If it drops, you're cannibalising full-price orders.</p><h3>4. Table Turnover Rate</h3><p>How many times each table is occupied per service. Low turnover at a normally busy outlet usually points to a kitchen bottleneck or slow service — both of which cost money even when the till looks fine.</p><h3>5. Shift-Level Sales</h3><p>Breaking revenue down by shift (morning, afternoon, evening) per outlet shows you where the real demand is. Many owners are staffing lunch shifts at the same level as dinner when the dinner shift is doing 4x the volume. That's a direct labour cost problem hiding in an aggregated daily total.</p><h2>What a Real Multi-Outlet Dashboard Should Show You</h2><p>A good multi-outlet view doesn't require you to pull reports or call managers. It shows you — in real time or at the start of your day — a side-by-side comparison of every outlet across the metrics that matter.</p><p>What you should be able to do from a single screen:</p><ul><li>Compare yesterday's sales across all outlets at a glance</li><li>Drill into any outlet to see order-level detail</li><li>See which outlet's food cost is trending up this week</li><li>Check whether a new menu item is performing differently across locations</li><li>Spot which outlet is down vs. the same day last week</li></ul><p>If you're opening spreadsheets to answer any of these questions, you don't have real visibility. You have data you're turning into visibility manually — and that's where things get missed.</p><h2>How Setu POS Gives You Outlet-by-Outlet Visibility</h2><p>Setu POS is built for multi-outlet restaurant operations. Every outlet runs on the same system, so sales, orders and performance data flow into one dashboard automatically — no consolidation, no manual exports.</p><p>You can see per-outlet revenue, order count and performance from one screen. When one location has a bad day, you know before your manager calls you. When a new dish is selling differently across outlets, you see it in the data, not in a conversation three days later.</p><p>If you're managing more than one restaurant outlet and you're still relying on EOD reports and phone calls, the problem isn't your team — it's the setup.</p><p><a href=\"/products/restaurant-pos\">See how Setu POS handles multi-outlet management →</a></p>"
+}

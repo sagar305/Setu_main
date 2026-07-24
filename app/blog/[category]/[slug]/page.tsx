@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogCategoryUrl, getBlogContent, getBlogPostBySlug, getBlogPostUrl, slugifyCategory } from "@/lib/content";
+import {
+  getBlogCategoryUrl,
+  getBlogConnectedTools,
+  getBlogContent,
+  getBlogPostBySlug,
+  getBlogPostUrl,
+  getLatestBlogPosts,
+  getRelatedBlogPostsByCategory,
+  slugifyCategory,
+} from "@/lib/content";
+import { extractHeadings } from "@/lib/blog";
+import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
+import { BlogFaq } from "@/components/blog/BlogFaq";
+import { BlogSidebar } from "@/components/blog/BlogSidebar";
+import { BlogCard } from "@/components/blog/BlogCard";
 
 const content = getBlogContent();
 
@@ -75,6 +89,11 @@ export default async function BlogPostPage({
   const post = getBlogPostBySlug(slug);
   if (!post || slugifyCategory(post.category) !== category) notFound();
 
+  const { html, headings } = extractHeadings(post.bodyHtml);
+  const latestPosts = getLatestBlogPosts(5, post.slug);
+  const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
+  const connectedTools = getBlogConnectedTools(post).slice(0, 5);
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -86,25 +105,73 @@ export default async function BlogPostPage({
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,
   };
 
+  const faqSchema =
+    post.faq && post.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
+
   return (
-    <article className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
 
       <Link href="/blog" className="text-sm font-semibold text-indigo hover:underline">
         ← Back to blog
       </Link>
 
-      <div className="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-warm">
-        <Link href={getBlogCategoryUrl(slugifyCategory(post.category))} className="hover:text-indigo">
-          {post.category}
-        </Link>
-        <span aria-hidden="true">·</span>
-        <time dateTime={post.date}>{formatDate(post.date)}</time>
+      <div className="mt-8 grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)_300px] lg:gap-12">
+        {/* Left: sticky in-page navigation */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24">
+            <BlogTableOfContents headings={headings} />
+          </div>
+        </aside>
+
+        {/* Center: the article */}
+        <article className="min-w-0">
+          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted-warm">
+            <Link href={getBlogCategoryUrl(slugifyCategory(post.category))} className="hover:text-indigo">
+              {post.category}
+            </Link>
+            <span aria-hidden="true">·</span>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+          </div>
+
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">{post.title}</h1>
+
+          <div className="blog-content mt-8" dangerouslySetInnerHTML={{ __html: html }} />
+
+          {post.faq && <BlogFaq items={post.faq} />}
+
+          {relatedPosts.length > 0 && (
+            <section className="mt-14 border-t border-muted-line/30 pt-10">
+              <h2 className="text-2xl font-bold tracking-tight text-ink">
+                More from {post.category}
+              </h2>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                {relatedPosts.map((related) => (
+                  <BlogCard key={related.slug} post={related} />
+                ))}
+              </div>
+            </section>
+          )}
+        </article>
+
+        {/* Right: latest posts + connected tools/calculators */}
+        <aside className="min-w-0">
+          <BlogSidebar latestPosts={latestPosts} tools={connectedTools} />
+        </aside>
       </div>
-
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">{post.title}</h1>
-
-      <div className="blog-content mt-8" dangerouslySetInnerHTML={{ __html: post.bodyHtml }} />
-    </article>
+    </div>
   );
 }

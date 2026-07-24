@@ -15,15 +15,23 @@ export function Services({ services }: { services: HomeContent["services"] }) {
           <p className="mt-4 text-lg text-muted">{services.subtext}</p>
         </FadeIn>
 
-        <FadeInStagger className="mt-12 grid gap-6 lg:grid-cols-2">
+        <FadeInStagger className="mt-12 flex flex-col gap-6">
           {services.cards.map((card) => (
             <FadeInStaggerItem
               key={card.id}
-              className="flex flex-col gap-4 rounded-2xl border border-indigo/15 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="grid gap-6 rounded-2xl border border-indigo/15 bg-white p-8 shadow-sm transition hover:shadow-md md:grid-cols-2 md:items-center md:gap-10 md:p-10"
             >
-              <h3 className="text-xl font-semibold text-ink">{card.name}</h3>
-              <p className="text-base leading-relaxed text-muted">{card.description}</p>
-              <ul className="mt-1 flex flex-col gap-3">
+              <div className="flex flex-col gap-4">
+                <h3 className="text-2xl font-semibold text-ink">{card.name}</h3>
+                <p className="text-base leading-relaxed text-muted">{card.description}</p>
+                <Link
+                  href={card.cta.href}
+                  className="mt-2 inline-block self-start rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
+                >
+                  {card.cta.label} →
+                </Link>
+              </div>
+              <ul className="flex flex-col gap-3 md:border-l md:border-muted-line/20 md:pl-10">
                 {card.points.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo/10 text-indigo">
@@ -33,12 +41,6 @@ export function Services({ services }: { services: HomeContent["services"] }) {
                   </li>
                 ))}
               </ul>
-              <Link
-                href={card.cta.href}
-                className="mt-auto inline-block self-start rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
-              >
-                {card.cta.label} →
-              </Link>
             </FadeInStaggerItem>
           ))}
         </FadeInStagger>

@@ -9,43 +9,77 @@
     "headline": "Business software built for how you actually work",
     "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
     "primaryCta": { "label": "See Setu Dine", "href": "/products/restaurant-pos" },
-    "secondaryCta": { "label": "Learn about Setu", "href": "#products" }
+    "secondaryCta": { "label": "Explore free tools", "href": "#tools" }
   },
-  "products": {
-    "headline": "One platform, built for every kind of business",
-    "subtext": "We build for every kind of business, starting with restaurants — and we're not stopping there.",
+  "tools": {
+    "eyebrow": "Free Tools",
+    "headline": "Free tools to run your business",
+    "subtext": "No signup, no install — start using them right in your browser.",
     "cards": [
       {
-        "id": "pos",
-        "status": "live",
-        "name": "Setu Dine",
-        "headline": "Table-service restaurants, sorted",
-        "description": "Billing, kitchen workflow, table management and multi-outlet dashboards — for restaurants where customers sit down and staff take their orders.",
-        "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
-      },
-      {
-        "id": "queue",
-        "status": "live",
-        "name": "Setu Queue",
-        "headline": "Counter-service restaurants, sorted",
-        "description": "Counter billing, token management, kitchen routing and customer pickup display — for QSRs, food courts and canteens where customers order at the counter.",
-        "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
-      },
-      {
         "id": "browser-pos",
-        "status": "live",
         "name": "Browser Based POS",
-        "headline": "Free billing, right in your browser",
+        "tagline": "Billing, right in your browser",
         "description": "A free, no-install point of sale that runs in any browser — start billing in minutes with nothing to download.",
         "cta": { "label": "Try Browser POS", "href": "/products/browser-based-pos" }
       },
       {
-        "id": "wildcard",
-        "status": "coming-soon",
-        "name": "Setu for your business",
-        "headline": "Don't see your industry?",
-        "description": "Tell us what you run — we're building Setu for every kind of business.",
-        "cta": { "label": "Tell us your need", "href": "/contact" }
+        "id": "qr-menu-generator",
+        "name": "QR Menu Generator",
+        "tagline": "Your menu in a QR code",
+        "description": "Build your menu and get a print-ready QR code — the entire menu lives inside the QR itself, no hosting needed.",
+        "cta": { "label": "Create QR Menu", "href": "/tools/qr-menu-generator" }
+      },
+      {
+        "id": "invoice-generator",
+        "name": "Invoice Generator",
+        "tagline": "GST-ready invoices",
+        "description": "Create professional, GST-compliant invoices in minutes — fill, customise and download as PDF. No signup.",
+        "cta": { "label": "Create Invoice", "href": "/tools/invoice-generator" }
+      },
+      {
+        "id": "more",
+        "variant": "more",
+        "name": "More free tools",
+        "tagline": "Explore the full toolkit",
+        "description": "UPI QR, barcodes, stock and purchase registers, cash book, customer ledger and more — all free.",
+        "cta": { "label": "See all tools", "href": "/tools" }
+      }
+    ]
+  },
+  "calculators": {
+    "eyebrow": "Free Calculators",
+    "headline": "Business calculators, built for operators",
+    "subtext": "Quick answers for the numbers you check every week — no signup, just results.",
+    "cards": [
+      {
+        "id": "recipe-costing-calculator",
+        "name": "Recipe Costing Calculator",
+        "tagline": "Know your true plate cost",
+        "description": "Break a dish down to its ingredient costs and see the real cost per plate before you price it.",
+        "cta": { "label": "Open calculator", "href": "/calculators/recipe-costing-calculator" }
+      },
+      {
+        "id": "gst-calculator",
+        "name": "GST Calculator",
+        "tagline": "Add or remove GST instantly",
+        "description": "Add GST to a base price or pull GST out of a final price, for any slab — get the split in a tap.",
+        "cta": { "label": "Open calculator", "href": "/calculators/gst-calculator" }
+      },
+      {
+        "id": "online-menu-price-calculator",
+        "name": "Online Menu Price Calculator",
+        "tagline": "Price for Zomato & Swiggy",
+        "description": "Work back from the margin you need after commission, packaging and discounts to the price you should list.",
+        "cta": { "label": "Open calculator", "href": "/calculators/online-menu-price-calculator" }
+      },
+      {
+        "id": "more",
+        "variant": "more",
+        "name": "More calculators",
+        "tagline": "Margins, tax, loans and more",
+        "description": "Break-even, food cost %, markup, loan EMI, take-home salary and more — all free to use.",
+        "cta": { "label": "See all calculators", "href": "/calculators" }
       }
     ]
   },
