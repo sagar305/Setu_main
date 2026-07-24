@@ -55,6 +55,22 @@
     {
       "id": "service",
       "name": "Appointments"
+    },
+    {
+      "id": "documents",
+      "name": "Business Documents"
+    },
+    {
+      "id": "bookkeeping",
+      "name": "Bookkeeping"
+    },
+    {
+      "id": "statements",
+      "name": "Financial Statements & Reports"
+    },
+    {
+      "id": "analysis",
+      "name": "Financial Analysis"
     }
   ],
   "items": [
@@ -161,7 +177,11 @@
       "seo": {
         "title": "Quotation Generator | Setu Technology",
         "description": "Create professional quotations with validity dates, tax and totals. Free, no signup.",
-        "keywords": ["quotation generator", "estimate maker", "quote template"]
+        "keywords": [
+          "quotation generator",
+          "estimate maker",
+          "quote template"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Quotation Generator",
@@ -178,7 +198,10 @@
       "seo": {
         "title": "Business Profile | Setu Technology",
         "description": "Save business name, GSTIN, logo and contacts once. Every Setu tool reuses them.",
-        "keywords": ["business profile", "business setup"]
+        "keywords": [
+          "business profile",
+          "business setup"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Business Profile",
@@ -195,7 +218,10 @@
       "seo": {
         "title": "Receipt Designer | Setu Technology",
         "description": "Design thermal receipt templates reused across Setu tools.",
-        "keywords": ["receipt designer", "thermal receipt template"]
+        "keywords": [
+          "receipt designer",
+          "thermal receipt template"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Receipt Designer",
@@ -212,7 +238,11 @@
       "seo": {
         "title": "Barcode Generator | Setu Technology",
         "description": "Free EAN-13, Code 128 and QR barcode generator. PNG and PDF download.",
-        "keywords": ["barcode generator", "EAN-13", "Code 128"]
+        "keywords": [
+          "barcode generator",
+          "EAN-13",
+          "Code 128"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Barcode Generator",
@@ -229,7 +259,11 @@
       "seo": {
         "title": "Price Label Printer | Setu Technology",
         "description": "Print product price and barcode labels on A4 label sheets or thermal rolls.",
-        "keywords": ["label printer", "price labels", "barcode labels"]
+        "keywords": [
+          "label printer",
+          "price labels",
+          "barcode labels"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Label Printer",
@@ -246,7 +280,10 @@
       "seo": {
         "title": "Stock Register | Setu Technology",
         "description": "Live stock levels and movement history, one source of truth with the Browser POS.",
-        "keywords": ["stock register", "inventory tracker"]
+        "keywords": [
+          "stock register",
+          "inventory tracker"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Stock Register",
@@ -263,7 +300,10 @@
       "seo": {
         "title": "Purchase Register | Setu Technology",
         "description": "Record purchases against suppliers and update stock automatically.",
-        "keywords": ["purchase register", "supplier bills"]
+        "keywords": [
+          "purchase register",
+          "supplier bills"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Purchase Register",
@@ -280,7 +320,10 @@
       "seo": {
         "title": "Supplier Book | Setu Technology",
         "description": "Keep supplier contacts, GSTIN and addresses in one reusable book.",
-        "keywords": ["supplier book", "vendor management"]
+        "keywords": [
+          "supplier book",
+          "vendor management"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Supplier Book",
@@ -297,7 +340,10 @@
       "seo": {
         "title": "Expense Tracker | Setu Technology",
         "description": "Free business expense tracker with categories and monthly totals.",
-        "keywords": ["expense tracker", "business expenses"]
+        "keywords": [
+          "expense tracker",
+          "business expenses"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Expense Tracker",
@@ -314,7 +360,10 @@
       "seo": {
         "title": "Cash Book | Setu Technology",
         "description": "Simple daily cash book with automatic opening and closing balances.",
-        "keywords": ["cash book", "daily cash register"]
+        "keywords": [
+          "cash book",
+          "daily cash register"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Cash Book",
@@ -331,7 +380,10 @@
       "seo": {
         "title": "Profit Dashboard | Setu Technology",
         "description": "Net profit from POS sales, cost of goods and actual expenses — with charts.",
-        "keywords": ["profit dashboard", "business profit"]
+        "keywords": [
+          "profit dashboard",
+          "business profit"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Profit Dashboard",
@@ -348,7 +400,11 @@
       "seo": {
         "title": "Customer Ledger (Udhaar Khata) | Setu Technology",
         "description": "Track credit given and payments received per customer, with balances.",
-        "keywords": ["udhaar khata", "customer ledger", "credit book"]
+        "keywords": [
+          "udhaar khata",
+          "customer ledger",
+          "credit book"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Customer Ledger",
@@ -365,12 +421,411 @@
       "seo": {
         "title": "Appointment Book | Setu Technology",
         "description": "Free appointment book for salons, clinics, consultants and services.",
-        "keywords": ["appointment book", "appointment scheduler"]
+        "keywords": [
+          "appointment book",
+          "appointment scheduler"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Appointment Book",
         "headline": "Appointment Book",
         "subheadline": "For every appointment-based business."
+      }
+    },
+    {
+      "slug": "credit-note-generator",
+      "href": "/tools/credit-note-generator",
+      "name": "Credit Note Generator",
+      "category": "documents",
+      "icon": "file-minus",
+      "shortDescription": "Issue GST-ready credit notes for returns and billing adjustments. Instant PDF, no signup.",
+      "seo": {
+        "title": "Credit Note Generator - Free Tool | Setu Technology",
+        "description": "Issue GST-ready credit notes for returns and billing adjustments. Instant PDF, no signup.",
+        "keywords": [
+          "credit note generator",
+          "GST credit note",
+          "credit note format"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Credit Note Generator",
+        "headline": "Credit Note Generator",
+        "subheadline": "Reference the invoice, list the items, print the PDF."
+      }
+    },
+    {
+      "slug": "debit-note-generator",
+      "href": "/tools/debit-note-generator",
+      "name": "Debit Note Generator",
+      "category": "documents",
+      "icon": "file-plus",
+      "shortDescription": "Create debit notes for purchase returns, short supply and rate differences. Instant PDF.",
+      "seo": {
+        "title": "Debit Note Generator - Free Tool | Setu Technology",
+        "description": "Create debit notes for purchase returns, short supply and rate differences. Instant PDF.",
+        "keywords": [
+          "debit note generator",
+          "purchase return note",
+          "debit note format"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Debit Note Generator",
+        "headline": "Debit Note Generator",
+        "subheadline": "Notify suppliers of returns and disputes with a clean, itemised note."
+      }
+    },
+    {
+      "slug": "purchase-order-generator",
+      "href": "/tools/purchase-order-generator",
+      "name": "Purchase Order Generator",
+      "category": "documents",
+      "icon": "clipboard-list",
+      "shortDescription": "Authorize supplier purchases formally — items, rates, delivery date and terms on one PO.",
+      "seo": {
+        "title": "Purchase Order Generator - Free Tool | Setu Technology",
+        "description": "Authorize supplier purchases formally — items, rates, delivery date and terms on one PO.",
+        "keywords": [
+          "purchase order generator",
+          "PO maker",
+          "purchase order format"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Purchase Order Generator",
+        "headline": "Purchase Order Generator",
+        "subheadline": "Put the order in writing before money moves."
+      }
+    },
+    {
+      "slug": "sales-order-generator",
+      "href": "/tools/sales-order-generator",
+      "name": "Sales Order Generator",
+      "category": "documents",
+      "icon": "file-text",
+      "shortDescription": "Confirm customer orders before dispatch — items, prices and delivery date in one document.",
+      "seo": {
+        "title": "Sales Order Generator - Free Tool | Setu Technology",
+        "description": "Confirm customer orders before dispatch — items, prices and delivery date in one document.",
+        "keywords": [
+          "sales order generator",
+          "order confirmation",
+          "sales order format"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Sales Order Generator",
+        "headline": "Sales Order Generator",
+        "subheadline": "Lock in what was ordered before anything ships."
+      }
+    },
+    {
+      "slug": "chart-of-accounts",
+      "href": "/tools/chart-of-accounts",
+      "name": "Chart of Accounts",
+      "category": "bookkeeping",
+      "icon": "list-checks",
+      "shortDescription": "Build your account list from a ready small-business template — codes, types, CSV export.",
+      "seo": {
+        "title": "Chart of Accounts - Free Tool | Setu Technology",
+        "description": "Build your account list from a ready small-business template — codes, types, CSV export.",
+        "keywords": [
+          "chart of accounts",
+          "COA template",
+          "account codes"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Chart of Accounts",
+        "headline": "Chart of Accounts",
+        "subheadline": "The backbone of your books, ready to shape to your business."
+      }
+    },
+    {
+      "slug": "journal-entry",
+      "href": "/tools/journal-entry",
+      "name": "Journal Entry",
+      "category": "bookkeeping",
+      "icon": "notebook-pen",
+      "shortDescription": "Double-entry bookkeeping with automatic debit/credit balancing. Feeds ledger & trial balance.",
+      "seo": {
+        "title": "Journal Entry - Free Tool | Setu Technology",
+        "description": "Double-entry bookkeeping with automatic debit/credit balancing. Feeds ledger & trial balance.",
+        "keywords": [
+          "journal entry",
+          "double entry bookkeeping",
+          "accounting journal"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Journal Entry",
+        "headline": "Journal Entry",
+        "subheadline": "Debits on the left, credits on the right, always balanced."
+      }
+    },
+    {
+      "slug": "general-ledger",
+      "href": "/tools/general-ledger",
+      "name": "General Ledger",
+      "category": "bookkeeping",
+      "icon": "book-open",
+      "shortDescription": "Account-wise ledgers with running balances, built automatically from your journal.",
+      "seo": {
+        "title": "General Ledger - Free Tool | Setu Technology",
+        "description": "Account-wise ledgers with running balances, built automatically from your journal.",
+        "keywords": [
+          "general ledger",
+          "ledger account",
+          "running balance"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — General Ledger",
+        "headline": "General Ledger",
+        "subheadline": "Pick an account, see every posting and the running balance."
+      }
+    },
+    {
+      "slug": "bank-reconciliation",
+      "href": "/tools/bank-reconciliation",
+      "name": "Bank Reconciliation",
+      "category": "bookkeeping",
+      "icon": "arrow-left-right",
+      "shortDescription": "Match your bank statement to your books — uncleared cheques, deposits in transit, charges.",
+      "seo": {
+        "title": "Bank Reconciliation - Free Tool | Setu Technology",
+        "description": "Match your bank statement to your books — uncleared cheques, deposits in transit, charges.",
+        "keywords": [
+          "bank reconciliation",
+          "BRS",
+          "reconcile bank statement"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Bank Reconciliation",
+        "headline": "Bank Reconciliation",
+        "subheadline": "List the reconciling items until bank and book agree."
+      }
+    },
+    {
+      "slug": "trial-balance",
+      "href": "/tools/trial-balance",
+      "name": "Trial Balance",
+      "category": "bookkeeping",
+      "icon": "scale",
+      "shortDescription": "Auto-built from your journal — every account's net balance, totalled and checked.",
+      "seo": {
+        "title": "Trial Balance - Free Tool | Setu Technology",
+        "description": "Auto-built from your journal — every account's net balance, totalled and checked.",
+        "keywords": [
+          "trial balance",
+          "trial balance format",
+          "debit credit check"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Trial Balance",
+        "headline": "Trial Balance",
+        "subheadline": "Every account's net balance, totalled and checked."
+      }
+    },
+    {
+      "slug": "profit-loss-statement",
+      "href": "/tools/profit-loss-statement",
+      "name": "Profit & Loss Statement",
+      "category": "statements",
+      "icon": "trending-up",
+      "shortDescription": "Build a P&L — revenue to net profit with margins computed live. Print PDF or export CSV.",
+      "seo": {
+        "title": "Profit & Loss Statement - Free Tool | Setu Technology",
+        "description": "Build a P&L — revenue to net profit with margins computed live. Print PDF or export CSV.",
+        "keywords": [
+          "profit and loss statement",
+          "P&L maker",
+          "income statement"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Profit & Loss Statement",
+        "headline": "Profit & Loss Statement",
+        "subheadline": "Revenue at the top, net profit at the bottom, margins live."
+      }
+    },
+    {
+      "slug": "balance-sheet",
+      "href": "/tools/balance-sheet",
+      "name": "Balance Sheet",
+      "category": "statements",
+      "icon": "layers",
+      "shortDescription": "Assets, liabilities and equity with a live balance check. A4 print and CSV export.",
+      "seo": {
+        "title": "Balance Sheet - Free Tool | Setu Technology",
+        "description": "Assets, liabilities and equity with a live balance check. A4 print and CSV export.",
+        "keywords": [
+          "balance sheet maker",
+          "balance sheet format",
+          "assets liabilities equity"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Balance Sheet",
+        "headline": "Balance Sheet",
+        "subheadline": "What you own, what you owe, and what's left — always balanced."
+      }
+    },
+    {
+      "slug": "cash-flow-statement",
+      "href": "/tools/cash-flow-statement",
+      "name": "Cash Flow Statement",
+      "category": "statements",
+      "icon": "refresh-cw",
+      "shortDescription": "Operating, investing and financing flows from opening to closing cash. Print or export.",
+      "seo": {
+        "title": "Cash Flow Statement - Free Tool | Setu Technology",
+        "description": "Operating, investing and financing flows from opening to closing cash. Print or export.",
+        "keywords": [
+          "cash flow statement",
+          "cash flow format",
+          "operating investing financing"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Cash Flow Statement",
+        "headline": "Cash Flow Statement",
+        "subheadline": "Where cash came from and where it went."
+      }
+    },
+    {
+      "slug": "customer-statement",
+      "href": "/tools/customer-statement",
+      "name": "Customer Statement",
+      "category": "statements",
+      "icon": "book-user",
+      "shortDescription": "Statement of account per customer — invoices, payments and running balance. Print to PDF.",
+      "seo": {
+        "title": "Customer Statement - Free Tool | Setu Technology",
+        "description": "Statement of account per customer — invoices, payments and running balance. Print to PDF.",
+        "keywords": [
+          "customer statement",
+          "statement of account",
+          "debtor statement"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Customer Statement",
+        "headline": "Customer Statement",
+        "subheadline": "Every invoice, payment and adjustment with a running balance."
+      }
+    },
+    {
+      "slug": "invoice-aging-report",
+      "href": "/tools/invoice-aging-report",
+      "name": "Invoice Aging Report",
+      "category": "statements",
+      "icon": "clock",
+      "shortDescription": "Unpaid customer invoices in aging buckets — current to 90+ days, by customer. CSV export.",
+      "seo": {
+        "title": "Invoice Aging Report - Free Tool | Setu Technology",
+        "description": "Unpaid customer invoices in aging buckets — current to 90+ days, by customer. CSV export.",
+        "keywords": [
+          "invoice aging report",
+          "accounts receivable aging",
+          "AR aging"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Invoice Aging Report",
+        "headline": "Invoice Aging Report",
+        "subheadline": "Who owes you, how much, and how overdue."
+      }
+    },
+    {
+      "slug": "accounts-payable-aging",
+      "href": "/tools/accounts-payable-aging",
+      "name": "Accounts Payable Aging",
+      "category": "statements",
+      "icon": "truck",
+      "shortDescription": "Unpaid supplier bills bucketed by age — pay the right people at the right time. CSV export.",
+      "seo": {
+        "title": "Accounts Payable Aging - Free Tool | Setu Technology",
+        "description": "Unpaid supplier bills bucketed by age — pay the right people at the right time. CSV export.",
+        "keywords": [
+          "accounts payable aging",
+          "AP aging report",
+          "supplier bills"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Accounts Payable Aging",
+        "headline": "Accounts Payable Aging",
+        "subheadline": "Every unpaid supplier bill, bucketed by age."
+      }
+    },
+    {
+      "slug": "budget-vs-actual",
+      "href": "/tools/budget-vs-actual",
+      "name": "Budget vs Actual",
+      "category": "analysis",
+      "icon": "target",
+      "shortDescription": "Plan vs reality by category with variance and variance % computed live. CSV export.",
+      "seo": {
+        "title": "Budget vs Actual - Free Tool | Setu Technology",
+        "description": "Plan vs reality by category with variance and variance % computed live. CSV export.",
+        "keywords": [
+          "budget vs actual",
+          "variance report",
+          "budget tracker"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Budget vs Actual",
+        "headline": "Budget vs Actual",
+        "subheadline": "Variances computed and colour-coded as you type."
+      }
+    },
+    {
+      "slug": "abc-analysis",
+      "href": "/tools/abc-analysis",
+      "name": "ABC Analysis",
+      "category": "analysis",
+      "icon": "chart-pie",
+      "shortDescription": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule.",
+      "seo": {
+        "title": "ABC Analysis - Free Tool | Setu Technology",
+        "description": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule.",
+        "keywords": [
+          "ABC analysis",
+          "inventory classification",
+          "pareto analysis"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — ABC Analysis",
+        "headline": "ABC Analysis",
+        "subheadline": "Rank items by annual value and manage class A tightly."
+      }
+    },
+    {
+      "slug": "vendor-comparison",
+      "href": "/tools/vendor-comparison",
+      "name": "Vendor Comparison",
+      "category": "analysis",
+      "icon": "git-compare",
+      "shortDescription": "Compare suppliers on price, delivery, credit and quality with weighted scoring.",
+      "seo": {
+        "title": "Vendor Comparison - Free Tool | Setu Technology",
+        "description": "Compare suppliers on price, delivery, credit and quality with weighted scoring.",
+        "keywords": [
+          "vendor comparison",
+          "supplier scorecard",
+          "vendor selection"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Vendor Comparison",
+        "headline": "Vendor Comparison",
+        "subheadline": "Let the weighted score pick the vendor."
       }
     }
   ]

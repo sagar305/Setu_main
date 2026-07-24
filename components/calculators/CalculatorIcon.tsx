@@ -33,6 +33,14 @@ import {
   FileText,
   NotebookPen,
   Store,
+  FileMinus,
+  FilePlus,
+  ListChecks,
+  BookOpen,
+  ArrowLeftRight,
+  Layers,
+  PieChart,
+  GitCompare,
 } from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
@@ -68,6 +76,14 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "file-text": FileText,
   "notebook-pen": NotebookPen,
   store: Store,
+  "file-minus": FileMinus,
+  "file-plus": FilePlus,
+  "list-checks": ListChecks,
+  "book-open": BookOpen,
+  "arrow-left-right": ArrowLeftRight,
+  layers: Layers,
+  "chart-pie": PieChart,
+  "git-compare": GitCompare,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {

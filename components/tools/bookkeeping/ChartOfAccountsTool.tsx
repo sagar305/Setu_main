@@ -1,0 +1,173 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import {
+  Card,
+  ConfirmDialog,
+  Field,
+  PrimaryButton,
+  SecondaryButton,
+  Select,
+  TextInput,
+} from "@/components/toolkit/ui";
+import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import {
+  ACCOUNT_TYPES,
+  COA_STORAGE_KEY,
+  DEFAULT_ACCOUNTS,
+  type Account,
+  type AccountType,
+} from "@/lib/bookkeeping";
+
+const TYPE_STYLES: Record<AccountType, string> = {
+  asset: "bg-emerald-100 text-emerald-700",
+  liability: "bg-red-100 text-red-600",
+  equity: "bg-indigo/10 text-indigo",
+  income: "bg-sky-100 text-sky-700",
+  expense: "bg-amber-100 text-amber-700",
+};
+
+export function ChartOfAccountsTool() {
+  const [accounts, setAccounts, loaded] = useLocalStore<Account[]>(
+    COA_STORAGE_KEY,
+    DEFAULT_ACCOUNTS
+  );
+  const [code, setCode] = useState("");
+  const [name, setName] = useState("");
+  const [type, setType] = useState<AccountType>("asset");
+  const [deleting, setDeleting] = useState<Account | null>(null);
+
+  const canAdd = code.trim().length > 0 && name.trim().length > 0;
+
+  const addAccount = () => {
+    if (!canAdd) return;
+    setAccounts((prev) => [
+      ...prev,
+      { id: generateLocalId(), code: code.trim(), name: name.trim(), type },
+    ]);
+    setCode("");
+    setName("");
+  };
+
+  const grouped = useMemo(() => {
+    const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
+    return ACCOUNT_TYPES.map((t) => ({
+      ...t,
+      accounts: sorted.filter((a) => a.type === t.value),
+    })).filter((g) => g.accounts.length > 0);
+  }, [accounts]);
+
+  const exportCsv = () =>
+    downloadCsv(
+      "chart-of-accounts.csv",
+      toCsv(
+        ["Code", "Account Name", "Type"],
+        [...accounts]
+          .sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }))
+          .map((a) => [a.code, a.name, a.type])
+      )
+    );
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
+      <Card className="h-fit">
+        <h2 className="mb-4 text-lg font-bold text-ink">Add account</h2>
+        <div className="space-y-4">
+          <Field label="Account code">
+            <TextInput value={code} onChange={(e) => setCode(e.target.value)} placeholder="e.g. 1300" />
+          </Field>
+          <Field label="Account name">
+            <TextInput
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Prepaid Insurance"
+            />
+          </Field>
+          <Field label="Type">
+            <Select value={type} onChange={(e) => setType(e.target.value as AccountType)}>
+              {ACCOUNT_TYPES.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <PrimaryButton className="w-full" onClick={addAccount} disabled={!canAdd}>
+            Add account
+          </PrimaryButton>
+          <p className="text-xs text-muted">
+            Convention: 1000s assets, 2000s liabilities, 3000s equity, 4000s income, 5000s expenses.
+            The Journal Entry, General Ledger and Trial Balance tools use this chart automatically.
+          </p>
+        </div>
+      </Card>
+
+      <Card>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold text-ink">Your chart of accounts</h2>
+          <SecondaryButton onClick={exportCsv} disabled={accounts.length === 0}>
+            Export CSV
+          </SecondaryButton>
+        </div>
+
+        {!loaded ? (
+          <p className="py-8 text-center text-sm text-muted">Loading…</p>
+        ) : (
+          <div className="space-y-6">
+            {grouped.map((group) => (
+              <div key={group.value}>
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                  {group.label} accounts
+                </h3>
+                <div className="space-y-1.5">
+                  {group.accounts.map((account) => (
+                    <div
+                      key={account.id}
+                      className="flex items-center justify-between rounded-lg border border-muted-line/30 px-4 py-2.5"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-12 text-sm font-semibold text-muted">{account.code}</span>
+                        <span className="text-sm font-medium text-ink">{account.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_STYLES[account.type]}`}
+                        >
+                          {account.type}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setDeleting(account)}
+                          className="text-xs font-semibold text-red-500 hover:text-red-600"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
+
+      <ConfirmDialog
+        open={deleting !== null}
+        title="Delete account?"
+        message={
+          deleting
+            ? `Delete ${deleting.code} · ${deleting.name}? Journal entries posted to it will show "(deleted account)".`
+            : ""
+        }
+        confirmLabel="Delete"
+        onConfirm={() => {
+          if (deleting) setAccounts((prev) => prev.filter((a) => a.id !== deleting.id));
+          setDeleting(null);
+        }}
+        onCancel={() => setDeleting(null)}
+      />
+    </div>
+  );
+}

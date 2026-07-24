@@ -19,11 +19,26 @@
     "subheadline": "Quick, free tools for the numbers you check every week — pricing, margins, tax and more. No signup, just answers."
   },
   "categories": [
-    { "id": "pricing-profit", "name": "Pricing & Profit" },
-    { "id": "restaurant-ops", "name": "Restaurant Operations" },
-    { "id": "retail-ops", "name": "Retail Operations" },
-    { "id": "tax-finance", "name": "Tax & Finance" },
-    { "id": "growth-marketing", "name": "Growth & Marketing" }
+    {
+      "id": "pricing-profit",
+      "name": "Pricing & Profit"
+    },
+    {
+      "id": "restaurant-ops",
+      "name": "Restaurant Operations"
+    },
+    {
+      "id": "retail-ops",
+      "name": "Retail Operations"
+    },
+    {
+      "id": "tax-finance",
+      "name": "Tax & Finance"
+    },
+    {
+      "id": "growth-marketing",
+      "name": "Growth & Marketing"
+    }
   ],
   "items": [
     {
@@ -35,7 +50,13 @@
       "seo": {
         "title": "GST Calculator — Add or Remove GST Online Free | Setu Technology",
         "description": "Free GST calculator to add GST to a base amount or remove GST from a final price, for any GST rate. Get the tax amount and total instantly.",
-        "keywords": ["GST calculator", "GST calculator online", "add GST", "remove GST", "GST amount calculator India"]
+        "keywords": [
+          "GST calculator",
+          "GST calculator online",
+          "add GST",
+          "remove GST",
+          "GST amount calculator India"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — GST Calculator",
@@ -73,7 +94,10 @@
       "cta": {
         "headline": "Let Setu Dine handle tax on every bill",
         "subtext": "Setu Dine applies the right GST automatically on every order — no manual calculation, no mistakes.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -85,7 +109,12 @@
       "seo": {
         "title": "Profit Margin Calculator — Free Online Tool | Setu Technology",
         "description": "Calculate profit margin and markup percentage from your cost price and selling price. Free profit margin calculator for retail and restaurant businesses.",
-        "keywords": ["profit margin calculator", "margin calculator", "profit calculator", "markup vs margin"]
+        "keywords": [
+          "profit margin calculator",
+          "margin calculator",
+          "profit calculator",
+          "markup vs margin"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Profit Margin Calculator",
@@ -123,7 +152,10 @@
       "cta": {
         "headline": "See your real margins, automatically",
         "subtext": "Setu Dine tracks cost and sales together, so you always know your margin without doing the maths yourself.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -135,7 +167,11 @@
       "seo": {
         "title": "Markup Calculator — Find Your Selling Price | Setu Technology",
         "description": "Free markup calculator. Enter your cost price and target markup percentage to instantly find the selling price and profit per unit.",
-        "keywords": ["markup calculator", "selling price calculator", "cost plus pricing calculator"]
+        "keywords": [
+          "markup calculator",
+          "selling price calculator",
+          "cost plus pricing calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Markup Calculator",
@@ -173,7 +209,10 @@
       "cta": {
         "headline": "Price every item with confidence",
         "subtext": "Setu Dine keeps cost and pricing data together so you can update prices without losing track of margin.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -185,7 +224,11 @@
       "seo": {
         "title": "Break-Even Point Calculator — Free Online Tool | Setu Technology",
         "description": "Calculate your break-even point in units and revenue. Free break-even calculator for restaurants, retail stores and small businesses.",
-        "keywords": ["break-even calculator", "break even point calculator", "break-even analysis"]
+        "keywords": [
+          "break-even calculator",
+          "break even point calculator",
+          "break-even analysis"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Break-Even Calculator",
@@ -223,7 +266,10 @@
       "cta": {
         "headline": "Track sales against your break-even, daily",
         "subtext": "Setu Dine gives you real-time sales data, so you always know where you stand against your numbers.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -235,7 +281,12 @@
       "seo": {
         "title": "Food Cost Percentage Calculator — Free for Restaurants | Setu Technology",
         "description": "Free food cost percentage calculator for restaurants. Enter ingredient cost and menu price to find food cost % and profit per dish instantly.",
-        "keywords": ["food cost calculator", "food cost percentage", "restaurant food cost", "menu pricing calculator"]
+        "keywords": [
+          "food cost calculator",
+          "food cost percentage",
+          "restaurant food cost",
+          "menu pricing calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Food Cost Calculator",
@@ -273,7 +324,10 @@
       "cta": {
         "headline": "Cost every dish accurately, automatically",
         "subtext": "Setu Dine connects recipes to inventory, so food cost stays accurate as ingredient prices change.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -285,7 +339,11 @@
       "seo": {
         "title": "Discount Calculator — Final Price & Savings | Setu Technology",
         "description": "Free discount calculator. Enter the original price and discount percentage to instantly see the final price and amount saved.",
-        "keywords": ["discount calculator", "percentage off calculator", "sale price calculator"]
+        "keywords": [
+          "discount calculator",
+          "percentage off calculator",
+          "sale price calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Discount Calculator",
@@ -323,7 +381,10 @@
       "cta": {
         "headline": "Run offers without the manual maths",
         "subtext": "Setu Dine applies coupons and discounts automatically at billing, every time.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -335,7 +396,12 @@
       "seo": {
         "title": "Business Loan EMI Calculator — Free Online Tool | Setu Technology",
         "description": "Free business loan EMI calculator. Enter loan amount, interest rate and tenure to instantly see your monthly EMI, total interest and total repayment.",
-        "keywords": ["loan EMI calculator", "business loan calculator", "EMI calculator", "loan calculator India"]
+        "keywords": [
+          "loan EMI calculator",
+          "business loan calculator",
+          "EMI calculator",
+          "loan calculator India"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Loan EMI Calculator",
@@ -373,7 +439,10 @@
       "cta": {
         "headline": "Funding a new outlet? We can help you plan it",
         "subtext": "Talk to us about what it takes to open and run a new location with Setu Dine in place from day one.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -385,7 +454,11 @@
       "seo": {
         "title": "Table Turnover Rate Calculator — Free for Restaurants | Setu Technology",
         "description": "Free table turnover rate calculator for restaurants. Enter covers served, number of tables and service hours to find turnover rate and average turn time.",
-        "keywords": ["table turnover rate calculator", "restaurant table turnover", "covers per table calculator"]
+        "keywords": [
+          "table turnover rate calculator",
+          "restaurant table turnover",
+          "covers per table calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Table Turnover Calculator",
@@ -423,7 +496,10 @@
       "cta": {
         "headline": "See every table's status, live",
         "subtext": "Setu Dine tracks table status in real time, so your floor staff always know what's free.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -435,7 +511,12 @@
       "seo": {
         "title": "Take-Home Salary Calculator — CTC to In-Hand Salary | Setu Technology",
         "description": "Free take-home salary calculator. Enter your CTC to estimate monthly in-hand salary after PF, professional tax and other standard deductions.",
-        "keywords": ["take home salary calculator", "CTC to in hand salary calculator", "in hand salary calculator India", "salary calculator"]
+        "keywords": [
+          "take home salary calculator",
+          "CTC to in hand salary calculator",
+          "in hand salary calculator India",
+          "salary calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Take-Home Salary Calculator",
@@ -473,7 +554,10 @@
       "cta": {
         "headline": "Staffing a new location? Plan the numbers first",
         "subtext": "Setu Dine gives you the sales and labour-cost data to know if a new hire pays for itself.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -485,7 +569,12 @@
       "seo": {
         "title": "Income Tax Calculator (FY 2025-26) — Old vs New Regime | Setu Technology",
         "description": "Free income tax calculator for FY 2025-26 (AY 2026-27). Compare old regime vs new regime tax and see which saves you more. Estimate only — verify against the latest Budget.",
-        "keywords": ["income tax calculator", "income tax calculator FY 2025-26", "old vs new tax regime calculator", "income tax calculator India"]
+        "keywords": [
+          "income tax calculator",
+          "income tax calculator FY 2025-26",
+          "old vs new tax regime calculator",
+          "income tax calculator India"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Income Tax Calculator",
@@ -523,7 +612,10 @@
       "cta": {
         "headline": "Run your business, not your tax spreadsheet",
         "subtext": "Setu Dine keeps your sales and expense data organised, so tax season is less of a scramble.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -535,7 +627,12 @@
       "seo": {
         "title": "Gratuity Calculator — Payment of Gratuity Act | Setu Technology",
         "description": "Free gratuity calculator. Enter last drawn salary and years of service to estimate gratuity payable under the Payment of Gratuity Act, 1972.",
-        "keywords": ["gratuity calculator", "gratuity calculator India", "payment of gratuity act calculator", "gratuity formula"]
+        "keywords": [
+          "gratuity calculator",
+          "gratuity calculator India",
+          "payment of gratuity act calculator",
+          "gratuity formula"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Gratuity Calculator",
@@ -573,7 +670,10 @@
       "cta": {
         "headline": "Planning your staffing budget?",
         "subtext": "Setu Dine gives you the sales data to plan staffing and long-term payroll costs around what your outlet can support.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -585,7 +685,12 @@
       "seo": {
         "title": "Online Food Delivery Commission Calculator | Setu Technology",
         "description": "Free online order commission calculator for restaurants. Enter order value, platform commission and other charges to see your real payout per order.",
-        "keywords": ["food delivery commission calculator", "Swiggy Zomato commission calculator", "online order payout calculator", "restaurant aggregator commission"]
+        "keywords": [
+          "food delivery commission calculator",
+          "Swiggy Zomato commission calculator",
+          "online order payout calculator",
+          "restaurant aggregator commission"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Online Order Commission Calculator",
@@ -623,7 +728,10 @@
       "cta": {
         "headline": "Manage every aggregator from one screen",
         "subtext": "Setu Dine brings orders from all your delivery platforms into a single kitchen view.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -635,7 +743,13 @@
       "seo": {
         "title": "Zomato Swiggy Menu Price Calculator | Setu Technology",
         "description": "Free online menu price calculator for restaurants. Enter the amount you want to take home and find the listed price that covers commission, GST on commission, gateway fees and GST on the item.",
-        "keywords": ["zomato menu price calculator", "swiggy price calculator", "online menu price after commission", "delivery app pricing calculator", "reverse commission calculator"]
+        "keywords": [
+          "zomato menu price calculator",
+          "swiggy price calculator",
+          "online menu price after commission",
+          "delivery app pricing calculator",
+          "reverse commission calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Online Menu Price Calculator",
@@ -674,7 +788,10 @@
       "cta": {
         "headline": "Manage every aggregator from one screen",
         "subtext": "Setu Dine brings orders from all your delivery platforms into a single kitchen view.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -686,7 +803,12 @@
       "seo": {
         "title": "Recipe Costing Calculator — Cost Per Serving | Setu Technology",
         "description": "Free recipe costing calculator for restaurants. Add ingredients and quantities to find total recipe cost, cost per serving and a suggested menu price.",
-        "keywords": ["recipe costing calculator", "recipe cost calculator", "menu costing", "cost per serving calculator"]
+        "keywords": [
+          "recipe costing calculator",
+          "recipe cost calculator",
+          "menu costing",
+          "cost per serving calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Recipe Costing Calculator",
@@ -724,7 +846,10 @@
       "cta": {
         "headline": "Recipes that update cost automatically",
         "subtext": "Setu Dine links recipes to live ingredient prices, so cost per plate stays accurate without manual recalculation.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -736,7 +861,12 @@
       "seo": {
         "title": "Liquor Pour Cost Calculator — Bar Cost Control | Setu Technology",
         "description": "Free liquor pour cost calculator for bars and restaurants. Enter bottle cost, pour size and selling price to find pour cost % and profit per drink.",
-        "keywords": ["pour cost calculator", "liquor cost calculator", "bar cost calculator", "pour cost percentage"]
+        "keywords": [
+          "pour cost calculator",
+          "liquor cost calculator",
+          "bar cost calculator",
+          "pour cost percentage"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Liquor Pour Cost Calculator",
@@ -774,7 +904,10 @@
       "cta": {
         "headline": "Control bar costs the same way you control food cost",
         "subtext": "Setu Dine tracks inventory consumption against sales, so over-pouring and wastage show up fast.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -786,7 +919,12 @@
       "seo": {
         "title": "Tip Split Calculator — Fair Tip Pooling for Staff | Setu Technology",
         "description": "Free tip split calculator. Add staff and hours or shares to split a tip pool fairly — equal split, by hours worked, or by points.",
-        "keywords": ["tip split calculator", "tip pooling calculator", "tip sharing calculator", "restaurant tip calculator"]
+        "keywords": [
+          "tip split calculator",
+          "tip pooling calculator",
+          "tip sharing calculator",
+          "restaurant tip calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Tip Split Calculator",
@@ -824,7 +962,10 @@
       "cta": {
         "headline": "Payroll and tips, without the side spreadsheet",
         "subtext": "Setu Dine tracks shift hours and sales by staff member, so you've always got the numbers tip splits need.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -836,7 +977,12 @@
       "seo": {
         "title": "Inventory Turnover Ratio Calculator — Free Tool | Setu Technology",
         "description": "Free inventory turnover calculator for retail businesses. Enter cost of goods sold and average inventory to find turnover ratio and days of inventory on hand.",
-        "keywords": ["inventory turnover calculator", "inventory turnover ratio", "days inventory outstanding calculator", "stock turnover calculator"]
+        "keywords": [
+          "inventory turnover calculator",
+          "inventory turnover ratio",
+          "days inventory outstanding calculator",
+          "stock turnover calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Inventory Turnover Calculator",
@@ -874,7 +1020,10 @@
       "cta": {
         "headline": "Want early access to Setu Retail?",
         "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches, with inventory tracking built in.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": {
+          "label": "Get notified",
+          "href": "/contact"
+        }
       }
     },
     {
@@ -886,7 +1035,12 @@
       "seo": {
         "title": "Stock Reorder Point Calculator — Avoid Stockouts | Setu Technology",
         "description": "Free reorder point calculator for retail. Enter average daily sales, lead time and safety stock to find the stock level that should trigger reordering.",
-        "keywords": ["reorder point calculator", "stock reorder point", "inventory reorder calculator", "safety stock calculator"]
+        "keywords": [
+          "reorder point calculator",
+          "stock reorder point",
+          "inventory reorder calculator",
+          "safety stock calculator"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Stock Reorder Point Calculator",
@@ -924,7 +1078,10 @@
       "cta": {
         "headline": "Want early access to Setu Retail?",
         "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches, with reorder alerts built in.",
-        "cta": { "label": "Get notified", "href": "/contact" }
+        "cta": {
+          "label": "Get notified",
+          "href": "/contact"
+        }
       }
     },
     {
@@ -936,7 +1093,12 @@
       "seo": {
         "title": "Customer Acquisition Cost (CAC) Calculator | Setu Technology",
         "description": "Free CAC calculator. Enter marketing spend and new customers acquired to find your customer acquisition cost, and compare it against revenue per customer.",
-        "keywords": ["CAC calculator", "customer acquisition cost calculator", "marketing cost per customer", "CAC formula"]
+        "keywords": [
+          "CAC calculator",
+          "customer acquisition cost calculator",
+          "marketing cost per customer",
+          "CAC formula"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — CAC Calculator",
@@ -974,7 +1136,10 @@
       "cta": {
         "headline": "Know which customers are worth keeping",
         "subtext": "Setu Dine tracks repeat customers and order history, so you can see which channels bring in customers who actually come back.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -986,7 +1151,12 @@
       "seo": {
         "title": "Average Order Value (AOV) Calculator | Setu Technology",
         "description": "Free AOV calculator. Enter total revenue and number of orders to find your average order value, and see the revenue impact of increasing it.",
-        "keywords": ["average order value calculator", "AOV calculator", "AOV formula", "ecommerce average order value"]
+        "keywords": [
+          "average order value calculator",
+          "AOV calculator",
+          "AOV formula",
+          "ecommerce average order value"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — AOV Calculator",
@@ -1024,7 +1194,10 @@
       "cta": {
         "headline": "Spot upsell opportunities automatically",
         "subtext": "Setu Dine surfaces combo and add-on prompts at billing, so lifting AOV doesn't rely on staff remembering to ask.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     },
     {
@@ -1090,7 +1263,426 @@
       "cta": {
         "headline": "Optimize your menu with real-time data",
         "subtext": "Setu Dine tracks every item's cost and sales automatically, so you can run menu engineering analysis daily and spot profit-killing items before they hurt your bottom line.",
-        "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "vat-calculator",
+      "name": "VAT Calculator",
+      "category": "tax-finance",
+      "icon": "percent",
+      "shortDescription": "Add VAT to a net price or extract VAT from a gross amount, for any rate worldwide.",
+      "seo": {
+        "title": "VAT Calculator — Add or Remove VAT Online Free | Setu Technology",
+        "description": "Free VAT calculator. Add VAT to a net amount or extract VAT from a gross price for any rate — 5%, 12.5%, 15%, 20%, 23% and more. Instant net, VAT and gross figures.",
+        "keywords": [
+          "VAT calculator",
+          "add VAT",
+          "remove VAT",
+          "VAT amount calculator",
+          "reverse VAT calculator",
+          "20% VAT calculator"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — VAT Calculator",
+        "headline": "VAT Calculator",
+        "subheadline": "Add VAT to a net price or pull VAT out of a gross amount — pick any rate and get the net, tax and gross split instantly."
+      },
+      "about": {
+        "headline": "Why use a VAT calculator",
+        "paragraphs": [
+          "If you sell to customers or buy from suppliers in countries that use VAT — the UK, EU, UAE, South Africa and 170+ others — you constantly need to move between net and gross prices. Doing it by hand is error-prone, especially with rates like 12.5% or 23%.",
+          "This calculator works both directions. Enter a net amount to see the VAT and gross total, or enter a VAT-inclusive price to recover the net amount and the tax inside it. Quick-select buttons cover the most common rates worldwide, and you can type any custom rate."
+        ]
+      },
+      "faq": {
+        "headline": "VAT calculator FAQs",
+        "items": [
+          {
+            "question": "How do I add VAT to a price?",
+            "answer": "Multiply the net price by the VAT rate and add it on. At 20% VAT, a 100 net price carries 20 of VAT for a 120 gross total. This calculator does it instantly for any rate."
+          },
+          {
+            "question": "How do I remove VAT from a gross amount?",
+            "answer": "Divide the gross amount by (1 + rate). A 120 gross price at 20% VAT is 120 ÷ 1.20 = 100 net, with 20 of VAT. Never subtract the percentage directly — that gives the wrong answer."
+          },
+          {
+            "question": "What's the difference between VAT and GST?",
+            "answer": "They work the same way — a tax on the value added at each stage. Different countries just use different names and rates. India uses GST (use our GST calculator for CGST/SGST splits); the UK, EU and many others use VAT."
+          },
+          {
+            "question": "Which VAT rate should I use?",
+            "answer": "Use the standard rate of the country where the sale is taxed — for example 20% in the UK, 19% in Germany, 5% in the UAE. Many countries also have reduced rates for essentials; check the category of your goods or services."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "sales-tax-calculator",
+      "name": "Sales Tax Calculator",
+      "category": "tax-finance",
+      "icon": "landmark",
+      "shortDescription": "Work out US-style sales tax — combine state and local rates, add tax or extract it from a total.",
+      "seo": {
+        "title": "Sales Tax Calculator — State + Local Rates | Setu Technology",
+        "description": "Free sales tax calculator. Combine state and local tax rates, add tax to a pre-tax price or back the tax out of a total paid. Instant results, no signup.",
+        "keywords": [
+          "sales tax calculator",
+          "US sales tax",
+          "state tax calculator",
+          "reverse sales tax calculator",
+          "tax on purchase calculator"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Sales Tax Calculator",
+        "headline": "Sales Tax Calculator",
+        "subheadline": "Combine state and local rates, then add tax to a price or extract the tax from a total you already paid."
+      },
+      "about": {
+        "headline": "How US sales tax works",
+        "paragraphs": [
+          "Unlike VAT or GST, US sales tax is added at the register and varies by state, county and city. The rate you charge is usually the state rate plus any local rates that apply at the point of sale — which is why two shops a few miles apart can charge different tax.",
+          "Enter the state rate and any local/city rate, and this calculator shows the combined rate, the tax amount and the total. Flip it around to extract the tax from a receipt total when you're doing your books or claiming expenses."
+        ]
+      },
+      "faq": {
+        "headline": "Sales tax calculator FAQs",
+        "items": [
+          {
+            "question": "How do I calculate sales tax on a purchase?",
+            "answer": "Multiply the pre-tax price by the combined tax rate. A $100 purchase at a combined 8% rate carries $8 of tax for a $108 total."
+          },
+          {
+            "question": "How do I work out the pre-tax price from a total?",
+            "answer": "Divide the total by (1 + combined rate). A $108 total at 8% is $108 ÷ 1.08 = $100 pre-tax and $8 of tax."
+          },
+          {
+            "question": "Why do I need separate state and local rates?",
+            "answer": "Most US states let counties, cities and special districts add their own sales tax on top of the state rate. The rate the customer pays is the combined total at the sale location, so this calculator takes both and adds them for you."
+          },
+          {
+            "question": "Do all US states charge sales tax?",
+            "answer": "No — Alaska, Delaware, Montana, New Hampshire and Oregon have no state-wide sales tax (though some Alaska localities charge their own). Every other state has a state rate, typically between 4% and 7.25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "roi-calculator",
+      "name": "ROI Calculator",
+      "category": "tax-finance",
+      "icon": "trending-up",
+      "shortDescription": "Measure return on investment — net profit, ROI % and annualized return for any spend.",
+      "seo": {
+        "title": "ROI Calculator — Return on Investment & Annualized ROI | Setu Technology",
+        "description": "Free ROI calculator. Enter the amount invested and the amount returned to get net profit, ROI percentage and annualized ROI over any holding period.",
+        "keywords": [
+          "ROI calculator",
+          "return on investment calculator",
+          "annualized ROI",
+          "investment return calculator",
+          "ROI formula"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — ROI Calculator",
+        "headline": "ROI Calculator",
+        "subheadline": "Enter what you put in and what you got back — see net profit, ROI % and the annualized return for the period."
+      },
+      "about": {
+        "headline": "Why ROI matters for every business decision",
+        "paragraphs": [
+          "Whether it's new kitchen equipment, a marketing campaign, or stock for the season, every rupee you deploy should earn its keep. ROI puts all of those choices on one scale: what did the money return relative to what it cost?",
+          "The plain ROI percentage tells you the total gain. The annualized figure matters when comparing options with different timelines — a 40% return over 4 years is much weaker than 25% in one year. Enter the holding period and this calculator computes both."
+        ]
+      },
+      "faq": {
+        "headline": "ROI calculator FAQs",
+        "items": [
+          {
+            "question": "How is ROI calculated?",
+            "answer": "ROI = (amount returned − amount invested) ÷ amount invested × 100. Invest ₹1,00,000 and get back ₹1,40,000, and your ROI is 40%."
+          },
+          {
+            "question": "What is annualized ROI?",
+            "answer": "It converts a total return into a per-year compound rate: (returned ÷ invested)^(1 ÷ years) − 1. A 40% total return over 2 years is about 18.3% per year — useful for comparing investments of different lengths."
+          },
+          {
+            "question": "What is a good ROI for a small business?",
+            "answer": "It depends on the risk and your alternatives. As a rough bar, an investment should beat what the same money could earn safely (bank FD rates) by a wide enough margin to justify the effort and risk — many small-business owners look for 15–30%+ annually on operational investments."
+          },
+          {
+            "question": "Does this include ongoing costs?",
+            "answer": "Include them in the invested amount, or subtract them from the returned amount — either way, ROI is only as honest as the numbers you feed it. For marketing, our CAC calculator complements this by tracking cost per customer."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "depreciation-calculator",
+      "name": "Depreciation Calculator",
+      "category": "tax-finance",
+      "icon": "chart-pie",
+      "shortDescription": "Straight-line or written-down-value depreciation with a full year-by-year schedule.",
+      "seo": {
+        "title": "Depreciation Calculator — Straight Line & WDV Schedule | Setu Technology",
+        "description": "Free depreciation calculator. Compute straight-line or written-down-value (declining balance) depreciation with a full year-by-year schedule of book values.",
+        "keywords": [
+          "depreciation calculator",
+          "straight line depreciation",
+          "WDV depreciation",
+          "declining balance depreciation",
+          "asset depreciation schedule"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Depreciation Calculator",
+        "headline": "Depreciation Calculator",
+        "subheadline": "Enter the asset cost, salvage value and life — get the annual depreciation and a full year-by-year schedule, straight-line or WDV."
+      },
+      "about": {
+        "headline": "Two methods, one schedule",
+        "paragraphs": [
+          "Depreciation spreads an asset's cost over its useful life, and the method changes the shape of the expense. Straight-line splits the cost evenly each year — simple and common for furniture, fittings and equipment. Written down value (declining balance) applies a fixed percentage to the remaining book value, front-loading the expense — the approach the Indian Income Tax Act uses for most asset blocks.",
+          "This calculator produces the full schedule for either method: opening value, depreciation and closing book value for every year, so you can drop the numbers straight into your accounts or compare methods before choosing."
+        ]
+      },
+      "faq": {
+        "headline": "Depreciation calculator FAQs",
+        "items": [
+          {
+            "question": "How does straight-line depreciation work?",
+            "answer": "Annual depreciation = (cost − salvage value) ÷ useful life. A ₹5,00,000 machine with ₹50,000 salvage over 5 years depreciates ₹90,000 per year."
+          },
+          {
+            "question": "How does written down value (WDV) work?",
+            "answer": "Each year you depreciate a fixed percentage of the remaining book value. At 25% WDV, a ₹5,00,000 asset depreciates ₹1,25,000 in year one, then 25% of ₹3,75,000 in year two, and so on — bigger deductions early, smaller later."
+          },
+          {
+            "question": "Which method should I use?",
+            "answer": "For Indian income-tax purposes, WDV at prescribed block rates is standard for most businesses. For your own management accounts, straight-line is simpler and shows a steady cost. Companies reporting under the Companies Act follow Schedule II useful lives. When in doubt, ask your CA."
+          },
+          {
+            "question": "What is salvage (residual) value?",
+            "answer": "The amount you expect the asset to be worth at the end of its useful life — resale or scrap value. Depreciation stops once the book value reaches it."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "payment-terms-calculator",
+      "name": "Payment Terms Calculator",
+      "category": "tax-finance",
+      "icon": "clock",
+      "shortDescription": "Due dates for net terms, early-payment discount savings and the real cost of paying late.",
+      "seo": {
+        "title": "Payment Terms Calculator — Net 30, 2/10 Discounts & Due Dates | Setu Technology",
+        "description": "Free payment terms calculator. Get the exact due date for net 15/30/45/60 terms, the savings from early-payment discounts like 2/10 net 30, and the annualized cost of skipping them.",
+        "keywords": [
+          "payment terms calculator",
+          "net 30 calculator",
+          "2/10 net 30",
+          "early payment discount",
+          "invoice due date calculator",
+          "trade credit cost"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Payment Terms Calculator",
+        "headline": "Payment Terms Calculator",
+        "subheadline": "Turn terms like \"2/10 net 30\" into real dates and rupees — due date, early-payment savings, and what skipping the discount actually costs."
+      },
+      "about": {
+        "headline": "Decode invoice terms in seconds",
+        "paragraphs": [
+          "Terms like \"net 30\" or \"2/10 net 45\" pack a due date, a discount and an implicit interest rate into a few characters. This calculator unpacks them: the exact calendar due date from the invoice date, the discount amount if you pay within the window, and the annualized cost of choosing not to.",
+          "That last number surprises people. Skipping a 2% discount to hold cash for 20 extra days is equivalent to borrowing at over 36% per year — far more expensive than most working-capital finance. Knowing that lets you decide with numbers, whether you're the buyer or the seller setting terms."
+        ]
+      },
+      "faq": {
+        "headline": "Payment terms FAQs",
+        "items": [
+          {
+            "question": "What does 2/10 net 30 mean?",
+            "answer": "Pay within 10 days and take a 2% discount off the invoice; otherwise the full amount is due in 30 days from the invoice date."
+          },
+          {
+            "question": "How is the cost of skipping a discount calculated?",
+            "answer": "Cost ≈ (discount % ÷ (100 − discount %)) × (365 ÷ extra days of credit) × 100. For 2/10 net 30, that's (2 ÷ 98) × (365 ÷ 20) ≈ 37% per year — what the extra 20 days of credit effectively costs."
+          },
+          {
+            "question": "Is the due date counted from the invoice date or delivery date?",
+            "answer": "Usually the invoice date, unless the contract says otherwise (some use end-of-month terms, written \"net 30 EOM\"). This calculator counts calendar days from the invoice date you enter."
+          },
+          {
+            "question": "Should I offer early-payment discounts to my customers?",
+            "answer": "If cash flow is tight or debtors pay slowly, a small discount can pull cash in dramatically faster and cut follow-up effort. Price it consciously — the same annualized-cost math applies to you as the seller."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "purchase-price-variance-calculator",
+      "name": "Purchase Price Variance Calculator",
+      "category": "retail-ops",
+      "icon": "scale",
+      "shortDescription": "Compare actual vs standard purchase prices and see the total variance instantly.",
+      "seo": {
+        "title": "Purchase Price Variance (PPV) Calculator | Setu Technology",
+        "description": "Free PPV calculator. Compare the actual price paid against the standard or budgeted price to get variance per unit, variance % and total purchase price variance.",
+        "keywords": [
+          "purchase price variance calculator",
+          "PPV calculator",
+          "price variance formula",
+          "procurement variance",
+          "standard cost variance"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — PPV Calculator",
+        "headline": "Purchase Price Variance Calculator",
+        "subheadline": "Standard price vs actual price × quantity — see per-unit, percentage and total variance, flagged favourable or unfavourable."
+      },
+      "about": {
+        "headline": "Catch cost creep before it eats your margin",
+        "paragraphs": [
+          "Purchase price variance measures the gap between what you planned to pay for materials or stock and what you actually paid. Suppliers raise rates quietly, order sizes change, market prices move — PPV is how buying teams spot it early and quantify the impact.",
+          "A positive (unfavourable) variance means purchases cost more than the standard — margin is leaking on the way in. A negative (favourable) variance means you beat the plan. Track it per item and per supplier, and feed persistent variances back into your pricing or renegotiation."
+        ]
+      },
+      "faq": {
+        "headline": "PPV calculator FAQs",
+        "items": [
+          {
+            "question": "How is purchase price variance calculated?",
+            "answer": "PPV = (actual price − standard price) × quantity purchased. Buying 500 units at ₹110 against a ₹100 standard gives an unfavourable variance of ₹5,000."
+          },
+          {
+            "question": "What is the standard price?",
+            "answer": "The benchmark you planned around — a budgeted rate, a negotiated contract price, or last period's average cost. Consistency matters more than which one you choose."
+          },
+          {
+            "question": "Is a favourable variance always good?",
+            "answer": "Usually, but check why. A cheaper price from lower quality, bigger-than-needed bulk orders, or missed delivery windows can cost more downstream than the variance saves."
+          },
+          {
+            "question": "How often should I review PPV?",
+            "answer": "Monthly works for most small businesses — often enough to catch supplier increases before they compound, without drowning in noise. Review your highest-spend items first (our ABC analysis tool helps rank them)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
+      }
+    },
+    {
+      "slug": "financial-ratio-calculator",
+      "name": "Financial Ratio Calculator",
+      "category": "tax-finance",
+      "icon": "piggy-bank",
+      "shortDescription": "Liquidity, leverage, margin and efficiency ratios from your balance sheet and P&L figures.",
+      "seo": {
+        "title": "Financial Ratio Calculator — Current, Quick, D/E & Margins | Setu Technology",
+        "description": "Free financial ratio analyzer. Enter balance sheet and P&L figures to get the current ratio, quick ratio, debt-to-equity, gross & net margins, inventory turnover and receivable days.",
+        "keywords": [
+          "financial ratio calculator",
+          "current ratio calculator",
+          "quick ratio",
+          "debt to equity ratio",
+          "ratio analysis",
+          "business health check"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Ratio Analyzer",
+        "headline": "Financial Ratio Calculator",
+        "subheadline": "Seven key ratios from a handful of figures — liquidity, leverage, margins and efficiency in one view."
+      },
+      "about": {
+        "headline": "A health check-up for your business",
+        "paragraphs": [
+          "Individual numbers on a balance sheet say little on their own — ratios put them in context. Can you cover near-term bills (current and quick ratios)? Are you over-borrowed (debt to equity)? Is the core trade profitable (gross and net margins)? Is cash stuck in stock or with customers (inventory turnover and receivable days)?",
+          "Banks and investors compute exactly these ratios when they look at your accounts, so it pays to see them first. Enter the figures from your latest balance sheet and P&L — or build those statements with our free Balance Sheet and P&L tools — and read the results with the benchmarks provided."
+        ]
+      },
+      "faq": {
+        "headline": "Financial ratio FAQs",
+        "items": [
+          {
+            "question": "What is a good current ratio?",
+            "answer": "Between 1.5 and 3 is comfortable for most businesses. Below 1 means current liabilities exceed current assets — a liquidity warning. Far above 3 may mean idle cash or overstocked inventory."
+          },
+          {
+            "question": "Why exclude inventory in the quick ratio?",
+            "answer": "Stock can take months to turn into cash and may sell below book value under pressure. The quick ratio ((current assets − inventory) ÷ current liabilities) tests whether you could pay near-term bills without relying on selling stock."
+          },
+          {
+            "question": "What does debt-to-equity tell me?",
+            "answer": "How much of the business is financed by borrowing versus the owners' money. Under 1 is conservative, 1–2 is common; above 2 means lenders carry more of the risk and new credit gets harder and pricier."
+          },
+          {
+            "question": "What are receivable days (DSO)?",
+            "answer": "Accounts receivable ÷ annual revenue × 365 — the average number of days customers take to pay. If your payment terms are 30 days but DSO is 55, collections need attention (our Invoice Aging tool shows exactly where)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Numbers that track themselves",
+        "subtext": "Setu's POS and business tools record sales, costs and tax automatically, so reports build themselves while you work.",
+        "cta": {
+          "label": "Book a demo",
+          "href": "/book-demo?product=Setu%20Dine"
+        }
       }
     }
   ]
