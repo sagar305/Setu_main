@@ -14,7 +14,9 @@ import {
   SecondaryButton,
   TextInput,
 } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -72,6 +74,9 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 export function AgingReportTool({ kind }: { kind: AgingKind }) {
   const labels = LABELS[kind];
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace(
+    kind === "receivable" ? "invoice-aging-report" : "accounts-payable-aging"
+  );
   const [docs, setDocs, loaded] = useLocalStore<AgingDoc[]>(`setu-aging-${kind}`, []);
 
   const [party, setParty] = useState("");
@@ -79,6 +84,43 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
   const [dueDate, setDueDate] = useState(todayIso());
   const [amount, setAmount] = useState("");
   const [deleting, setDeleting] = useState<AgingDoc | null>(null);
+
+  // Receivables come from customers still carrying a positive ledger balance
+  // (using their oldest credit's date as the aging reference). Payables come
+  // from recorded purchases, aged from the bill date.
+  const pullFromWorkspace = () => {
+    if (kind === "receivable") {
+      const byCustomer = new Map<string, { name: string; balance: number; oldest: string }>();
+      for (const e of workspace.ledger) {
+        const row =
+          byCustomer.get(e.customerId) ??
+          { name: e.customerName, balance: 0, oldest: e.date };
+        row.balance += e.type === "credit" ? e.amount : -e.amount;
+        if (e.type === "credit" && e.date < row.oldest) row.oldest = e.date;
+        row.name = e.customerName || row.name;
+        byCustomer.set(e.customerId, row);
+      }
+      const pulled: AgingDoc[] = [...byCustomer.values()]
+        .filter((r) => r.balance > 0.005)
+        .map((r) => ({
+          id: generateLocalId(),
+          party: r.name,
+          number: "",
+          dueDate: r.oldest,
+          amount: r.balance,
+        }));
+      setDocs(pulled);
+    } else {
+      const pulled: AgingDoc[] = workspace.purchases.map((p) => ({
+        id: generateLocalId(),
+        party: p.supplierName,
+        number: p.billNumber,
+        dueDate: p.date,
+        amount: p.total,
+      }));
+      setDocs(pulled);
+    }
+  };
 
   const money = (v: number) => formatMoney(v, currency);
   const amountNum = Number(amount);
@@ -143,9 +185,26 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
   const sortedDocs = [...docs].sort((a, b) => a.dueDate.localeCompare(b.dueDate));
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message={
+          kind === "receivable"
+            ? "Pull outstanding balances straight from your customer ledger."
+            : "Pull unpaid bills straight from your purchase register."
+        }
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
       <Card className="h-fit">
         <h2 className="mb-4 text-lg font-bold text-ink">Add unpaid {labels.doc.toLowerCase()}</h2>
+        {workspace.connected ? (
+          <div className="mb-4">
+            <SecondaryButton onClick={pullFromWorkspace}>
+              ↻ {kind === "receivable" ? "Pull from Customer Ledger" : "Pull from Purchase Register"}
+            </SecondaryButton>
+          </div>
+        ) : null}
         <div className="space-y-4">
           <Field label={`${labels.party} name *`}>
             <TextInput value={party} onChange={(e) => setParty(e.target.value)} />
@@ -308,6 +367,7 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
         }}
         onCancel={() => setDeleting(null)}
       />
+      </div>
     </div>
   );
 }

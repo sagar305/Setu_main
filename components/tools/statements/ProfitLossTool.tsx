@@ -2,9 +2,11 @@
 
 import { useMemo } from "react";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
   LineSectionEditor,
@@ -37,9 +39,38 @@ const INITIAL: PlState = {
 
 export function ProfitLossTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("profit-loss-statement");
   const [state, setState] = useLocalStore<PlState>("setu-stmt-pl", INITIAL);
 
   const money = (v: number) => formatMoney(v, currency);
+
+  // Build the P&L from recorded workspace data: net sales from completed
+  // orders, COGS from purchases, and expenses grouped by category.
+  const pullFromWorkspace = () => {
+    const completed = workspace.orders.filter((o) => o.status === "completed");
+    const netSales = completed.reduce((s, o) => s + (o.subtotal - o.discountAmount), 0);
+    const purchasesTotal = workspace.purchases.reduce((s, p) => s + p.total, 0);
+
+    const byCategory = new Map<string, number>();
+    for (const e of workspace.expenses) {
+      // Purchases logged as expenses are already counted under COGS.
+      if (e.category === "Purchases") continue;
+      byCategory.set(e.category, (byCategory.get(e.category) ?? 0) + e.amount);
+    }
+    const expenseLines: StatementLine[] = [...byCategory.entries()].map(([label, amount]) => ({
+      id: generateId(),
+      label,
+      amount,
+    }));
+
+    setState((s) => ({
+      ...s,
+      businessName: s.businessName || workspace.business?.name || "",
+      revenue: [{ id: generateId(), label: "Sales", amount: netSales }],
+      cogs: [{ id: generateId(), label: "Purchases", amount: purchasesTotal }],
+      expenses: expenseLines.length > 0 ? expenseLines : s.expenses,
+    }));
+  };
 
   const r = useMemo(() => {
     const revenue = sumLines(state.revenue);
@@ -100,7 +131,13 @@ export function ProfitLossTool() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message="Build this P&L automatically from your recorded sales, purchases and expenses."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <Card className="h-fit">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Business name">
@@ -117,6 +154,14 @@ export function ProfitLossTool() {
             />
           </Field>
         </div>
+
+        {workspace.connected ? (
+          <div className="mt-4">
+            <SecondaryButton onClick={pullFromWorkspace}>
+              ↻ Pull from recorded sales, purchases &amp; expenses
+            </SecondaryButton>
+          </div>
+        ) : null}
 
         <div className="mt-6 space-y-6">
           <LineSectionEditor
@@ -188,6 +233,7 @@ export function ProfitLossTool() {
         </div>
         <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
       </Card>
+      </div>
     </div>
   );
 }

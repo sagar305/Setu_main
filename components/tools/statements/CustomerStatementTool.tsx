@@ -12,7 +12,9 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -45,6 +47,7 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function CustomerStatementTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("customer-statement");
   const [state, setState, loaded] = useLocalStore<StatementState>("setu-stmt-customer", {
     businessName: "",
     customerName: "",
@@ -56,11 +59,38 @@ export function CustomerStatementTool() {
   const [type, setType] = useState<TxnType>("invoice");
   const [reference, setReference] = useState("");
   const [amount, setAmount] = useState("");
+  const [pickedCustomer, setPickedCustomer] = useState("");
   const [deleting, setDeleting] = useState<Txn | null>(null);
 
   const money = (v: number) => formatMoney(v, currency);
   const amountNum = Number(amount);
   const canAdd = Number.isFinite(amountNum) && amountNum > 0;
+
+  // Build the statement from a saved customer's ledger: each "credit" (udhaar
+  // given) becomes an invoice line, each "payment" a payment line.
+  const loadFromLedger = (customerId: string) => {
+    setPickedCustomer(customerId);
+    if (!customerId) return;
+    const customer = workspace.customers.find((c) => c.id === customerId);
+    const entries = workspace.ledger.filter((e) => e.customerId === customerId);
+    const txns: Txn[] = entries
+      .slice()
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .map((e) => ({
+        id: generateLocalId(),
+        date: e.date,
+        type: e.type === "credit" ? "invoice" : "payment",
+        reference: e.note,
+        amount: e.amount,
+      }));
+    setState((s) => ({
+      ...s,
+      businessName: s.businessName || workspace.business?.name || "",
+      customerName: customer?.name || s.customerName,
+      openingBalance: 0,
+      txns,
+    }));
+  };
 
   const addTxn = () => {
     if (!canAdd) return;
@@ -163,11 +193,29 @@ export function CustomerStatementTool() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message="Pick a saved customer to build their statement straight from your ledger."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <div className="space-y-6">
         <Card>
           <h2 className="mb-4 text-lg font-bold text-ink">Statement details</h2>
           <div className="space-y-4">
+            {workspace.connected && workspace.customers.length > 0 ? (
+              <Field label="Load a saved customer's ledger">
+                <Select value={pickedCustomer} onChange={(e) => loadFromLedger(e.target.value)}>
+                  <option value="">Type details below…</option>
+                  {workspace.customers.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            ) : null}
             <Field label="Your business name">
               <TextInput
                 value={state.businessName}
@@ -317,6 +365,7 @@ export function CustomerStatementTool() {
         }}
         onCancel={() => setDeleting(null)}
       />
+      </div>
     </div>
   );
 }

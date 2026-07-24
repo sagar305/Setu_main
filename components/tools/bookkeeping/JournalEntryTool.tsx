@@ -12,14 +12,12 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
-import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
-  COA_STORAGE_KEY,
   DEFAULT_ACCOUNTS,
-  JOURNAL_STORAGE_KEY,
   accountLabel,
   type Account,
   type JournalEntry,
@@ -28,12 +26,15 @@ import {
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
-const blankLine = (): JournalLine => ({ id: generateLocalId(), accountId: "", debit: 0, credit: 0 });
+const blankLine = (): JournalLine => ({ id: generateId(), accountId: "", debit: 0, credit: 0 });
 
 export function JournalEntryTool() {
   const { code: currency } = usePreferredCurrency();
-  const [accounts] = useLocalStore<Account[]>(COA_STORAGE_KEY, DEFAULT_ACCOUNTS);
-  const [entries, setEntries] = useLocalStore<JournalEntry[]>(JOURNAL_STORAGE_KEY, []);
+  // Same shared stores as the Chart of Accounts and Trial Balance tools.
+  const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
+  const accounts = coaAccounts.length > 0 ? coaAccounts : DEFAULT_ACCOUNTS;
+  const { items: entries, save: saveEntry, remove: removeEntry } =
+    useEntityList<JournalEntry>("journal_entries");
 
   const [date, setDate] = useState(todayIso());
   const [narration, setNarration] = useState("");
@@ -64,16 +65,13 @@ export function JournalEntryTool() {
 
   const post = () => {
     if (!canPost) return;
-    setEntries((prev) => [
-      {
-        id: generateLocalId(),
-        date,
-        narration: narration.trim(),
-        lines: validLines,
-        createdAt: new Date().toISOString(),
-      },
-      ...prev,
-    ]);
+    void saveEntry({
+      id: generateId(),
+      date,
+      narration: narration.trim(),
+      lines: validLines,
+      createdAt: new Date().toISOString(),
+    });
     setNarration("");
     setLines([blankLine(), blankLine()]);
     setSavedMsg(true);
@@ -247,7 +245,7 @@ export function JournalEntryTool() {
         }
         confirmLabel="Delete"
         onConfirm={() => {
-          if (deleting) setEntries((prev) => prev.filter((e) => e.id !== deleting.id));
+          if (deleting) void removeEntry(deleting.id);
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}

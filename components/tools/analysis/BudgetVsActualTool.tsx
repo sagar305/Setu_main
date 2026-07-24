@@ -8,7 +8,9 @@ import {
   SecondaryButton,
   TextInput,
 } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -31,11 +33,31 @@ const INITIAL: BvaState = {
 
 export function BudgetVsActualTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("budget-vs-actual");
   const [state, setState] = useLocalStore<BvaState>("setu-budget-vs-actual", INITIAL);
   const money = (v: number) => formatMoney(v, currency);
 
   const update = (id: string, patch: Partial<BudgetRow>) =>
     setState((s) => ({ ...s, rows: s.rows.map((r) => (r.id === id ? { ...r, ...patch } : r)) }));
+
+  // Fill the "actual" column from recorded expenses, grouped by category,
+  // matching existing rows by name and appending any new categories.
+  const pullActuals = () => {
+    const byCategory = new Map<string, number>();
+    for (const e of workspace.expenses) {
+      byCategory.set(e.category, (byCategory.get(e.category) ?? 0) + e.amount);
+    }
+    setState((s) => {
+      const rows = s.rows.map((r) =>
+        byCategory.has(r.category) ? { ...r, actual: byCategory.get(r.category)! } : r
+      );
+      const existing = new Set(s.rows.map((r) => r.category.toLowerCase()));
+      const added = [...byCategory.entries()]
+        .filter(([cat]) => !existing.has(cat.toLowerCase()))
+        .map(([cat, amount]) => ({ id: generateLocalId(), category: cat, budget: 0, actual: amount }));
+      return { ...s, rows: [...rows, ...added] };
+    });
+  };
 
   const computed = useMemo(() => {
     const rows = state.rows.map((r) => {
@@ -77,7 +99,13 @@ export function BudgetVsActualTool() {
     );
 
   return (
-    <Card>
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message="Fill the actual column automatically from your recorded expenses by category."
+      />
+
+      <Card>
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div className="w-full max-w-xs">
           <Field label="Period">
@@ -89,6 +117,9 @@ export function BudgetVsActualTool() {
           </Field>
         </div>
         <div className="flex gap-2">
+          {workspace.connected ? (
+            <SecondaryButton onClick={pullActuals}>↻ Pull actuals from expenses</SecondaryButton>
+          ) : null}
           <SecondaryButton onClick={() => setState((s) => ({ ...s, rows: [...s.rows, blankRow()] }))}>
             + Add row
           </SecondaryButton>
@@ -186,6 +217,7 @@ export function BudgetVsActualTool() {
         For spending categories, red (actual above budget) means over-spent. For revenue rows, read
         it in reverse — actual above budget is good news. Data saves automatically in this browser.
       </p>
-    </Card>
+      </Card>
+    </div>
   );
 }

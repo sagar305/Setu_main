@@ -2,7 +2,9 @@
 
 import { useMemo } from "react";
 import { Card, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -24,6 +26,7 @@ const CLASS_STYLES: Record<string, string> = {
 
 export function AbcAnalysisTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("abc-analysis");
   const [items, setItems] = useLocalStore<AbcItem[]>("setu-abc-analysis", [
     blankItem(),
     blankItem(),
@@ -33,6 +36,19 @@ export function AbcAnalysisTool() {
 
   const update = (id: string, patch: Partial<AbcItem>) =>
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
+
+  // Load the product list from the workspace. Unit cost comes from the
+  // product's cost price; annual quantity is left for the user (the catalogue
+  // tracks current stock, not annual usage).
+  const pullProducts = () => {
+    const pulled: AbcItem[] = workspace.products.map((p) => ({
+      id: generateLocalId(),
+      name: p.name,
+      annualQty: 0,
+      unitCost: p.costPrice ?? p.sellingPrice ?? 0,
+    }));
+    if (pulled.length > 0) setItems(pulled);
+  };
 
   const analysis = useMemo(() => {
     const valued = items
@@ -76,10 +92,17 @@ export function AbcAnalysisTool() {
 
   return (
     <div className="space-y-6">
+      <WorkspaceBanner
+        connection={workspace}
+        message="Load your product list from the workspace, then fill in each item's annual usage."
+      />
       <Card>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-lg font-bold text-ink">Inventory items</h2>
           <div className="flex gap-2">
+            {workspace.connected ? (
+              <SecondaryButton onClick={pullProducts}>↻ Pull products</SecondaryButton>
+            ) : null}
             <SecondaryButton onClick={() => setItems((prev) => [...prev, blankItem()])}>
               + Add item
             </SecondaryButton>

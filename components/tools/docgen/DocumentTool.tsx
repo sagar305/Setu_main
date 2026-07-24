@@ -2,8 +2,11 @@
 
 // Shared engine for the accounting document generators — Credit Note, Debit
 // Note, Purchase Order and Sales Order. One form + print pipeline, configured
-// per document type. Everything stays in localStorage; printing opens the
-// browser's print-to-PDF dialog.
+// per document type. Business details autofill from the shared Business
+// Profile; customers/suppliers/products are picked from the workspace (with
+// consent). Saved documents live in the shared `documents` store, so every
+// document tool sees the same history. Printing opens the browser's
+// print-to-PDF dialog.
 
 import { useMemo, useState } from "react";
 import {
@@ -14,66 +17,86 @@ import {
   NumberInput,
   PrimaryButton,
   SecondaryButton,
+  Select,
   TextArea,
   TextInput,
 } from "@/components/toolkit/ui";
-import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
-import { currencySymbol, formatMoney } from "@/lib/pos/types";
-import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
+import { useEntityList } from "@/lib/hooks/useEntityList";
+import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import type { ToolSlug } from "@/lib/toolkit/registry";
 
 export type DocType = "credit-note" | "debit-note" | "purchase-order" | "sales-order";
 
+type PartyKind = "customer" | "supplier";
+
 type DocConfig = {
+  slug: ToolSlug;
   printTitle: string;
   numberPrefix: string;
+  partyKind: PartyKind;
   partyLabel: string;
   refLabel: string | null;
   reasonLabel: string | null;
   secondDateLabel: string | null;
   footerNote: string;
   accent: string;
+  workspaceMsg: string;
 };
 
 const CONFIGS: Record<DocType, DocConfig> = {
   "credit-note": {
+    slug: "credit-note-generator",
     printTitle: "CREDIT NOTE",
     numberPrefix: "CN",
+    partyKind: "customer",
     partyLabel: "Customer",
     refLabel: "Against invoice no.",
     reasonLabel: "Reason (return / adjustment)",
     secondDateLabel: null,
     footerNote: "This credit note adjusts the referenced invoice.",
     accent: "#166534",
+    workspaceMsg: "Autofill your business details and pick a saved customer and products.",
   },
   "debit-note": {
+    slug: "debit-note-generator",
     printTitle: "DEBIT NOTE",
     numberPrefix: "DN",
+    partyKind: "supplier",
     partyLabel: "Supplier",
     refLabel: "Against bill / invoice no.",
     reasonLabel: "Reason (return / short supply / rate difference)",
     secondDateLabel: null,
     footerNote: "This debit note is issued against the referenced purchase.",
     accent: "#9a3412",
+    workspaceMsg: "Autofill your business details and pick a saved supplier and products.",
   },
   "purchase-order": {
+    slug: "purchase-order-generator",
     printTitle: "PURCHASE ORDER",
     numberPrefix: "PO",
+    partyKind: "supplier",
     partyLabel: "Supplier",
     refLabel: "Quotation ref (optional)",
     reasonLabel: null,
     secondDateLabel: "Expected delivery date",
     footerNote: "Please confirm acceptance of this purchase order and the delivery date.",
     accent: "#26306B",
+    workspaceMsg: "Autofill your business details and pick a saved supplier and products.",
   },
   "sales-order": {
+    slug: "sales-order-generator",
     printTitle: "SALES ORDER",
     numberPrefix: "SO",
+    partyKind: "customer",
     partyLabel: "Customer",
     refLabel: "Customer PO ref (optional)",
     reasonLabel: null,
     secondDateLabel: "Expected delivery date",
     footerNote: "This sales order confirms the items and prices agreed before dispatch.",
     accent: "#26306B",
+    workspaceMsg: "Autofill your business details and pick a saved customer and products.",
   },
 };
 
@@ -81,6 +104,7 @@ type LineItem = { id: string; description: string; quantity: number; rate: numbe
 
 type SavedDoc = {
   id: string;
+  docType: DocType;
   number: string;
   date: string;
   secondDate: string;
@@ -94,13 +118,12 @@ type SavedDoc = {
   subtotal: number;
   taxTotal: number;
   total: number;
+  createdByTool: ToolSlug;
   createdAt: string;
 };
 
-type BusinessInfo = { name: string; address: string; phone: string; gstin: string };
-
 const blankItem = (): LineItem => ({
-  id: generateLocalId(),
+  id: generateId(),
   description: "",
   quantity: 1,
   rate: 0,
@@ -111,19 +134,17 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function DocumentTool({ docType }: { docType: DocType }) {
   const cfg = CONFIGS[docType];
-  const { code: currency, symbol } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace(cfg.slug);
+  const { items: allDocs, save, remove } = useEntityList<SavedDoc>("documents");
 
-  const [business, setBusiness] = useLocalStore<BusinessInfo>("setu-doc-business", {
-    name: "",
-    address: "",
-    phone: "",
-    gstin: "",
-  });
-  const [saved, setSaved] = useLocalStore<SavedDoc[]>(`setu-doc-${docType}`, []);
+  const biz = workspace.business;
+  const currency = biz?.currency ?? "INR";
+  const symbol = currencySymbol(currency);
 
   const [number, setNumber] = useState(`${cfg.numberPrefix}-${String(Date.now()).slice(-5)}`);
   const [date, setDate] = useState(todayIso());
   const [secondDate, setSecondDate] = useState("");
+  const [partyId, setPartyId] = useState("");
   const [partyName, setPartyName] = useState("");
   const [partyAddress, setPartyAddress] = useState("");
   const [partyGstin, setPartyGstin] = useState("");
@@ -133,6 +154,14 @@ export function DocumentTool({ docType }: { docType: DocType }) {
   const [notes, setNotes] = useState("");
   const [savedMsg, setSavedMsg] = useState(false);
   const [deleting, setDeleting] = useState<SavedDoc | null>(null);
+
+  const savedDocs = useMemo(
+    () =>
+      allDocs
+        .filter((d) => d.docType === docType)
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+    [allDocs, docType]
+  );
 
   const totals = useMemo(() => {
     let subtotal = 0;
@@ -148,11 +177,43 @@ export function DocumentTool({ docType }: { docType: DocType }) {
   const validItems = items.filter((i) => i.description.trim() && i.quantity > 0);
   const canSave = partyName.trim().length > 0 && validItems.length > 0;
 
+  const pickParty = (id: string) => {
+    setPartyId(id);
+    if (cfg.partyKind === "customer") {
+      const c = workspace.customers.find((x) => x.id === id);
+      if (c) {
+        setPartyName(c.name);
+        setPartyAddress(c.address);
+      }
+    } else {
+      const s = workspace.suppliers.find((x) => x.id === id);
+      if (s) {
+        setPartyName(s.name);
+        setPartyAddress(s.address);
+        setPartyGstin(s.gstin);
+      }
+    }
+  };
+
+  const pickProduct = (itemId: string, productId: string) => {
+    const p = workspace.products.find((x) => x.id === productId);
+    if (!p) return;
+    const rate = cfg.partyKind === "supplier" ? p.costPrice ?? p.sellingPrice : p.sellingPrice;
+    setItems((prev) =>
+      prev.map((i) =>
+        i.id === itemId
+          ? { ...i, description: p.name, rate: rate ?? 0, taxRate: p.taxRate ?? 0 }
+          : i
+      )
+    );
+  };
+
   const updateItem = (id: string, patch: Partial<LineItem>) =>
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
 
   const buildDoc = (): SavedDoc => ({
-    id: generateLocalId(),
+    id: generateId(),
+    docType,
     number: number.trim() || `${cfg.numberPrefix}-${String(Date.now()).slice(-5)}`,
     date,
     secondDate,
@@ -166,12 +227,13 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     subtotal: totals.subtotal,
     taxTotal: totals.taxTotal,
     total: totals.total,
-    createdAt: new Date().toISOString(),
+    createdByTool: cfg.slug,
+    createdAt: nowIso(),
   });
 
   const saveDoc = () => {
     if (!canSave) return;
-    setSaved((prev) => [buildDoc(), ...prev].slice(0, 50));
+    void save(buildDoc());
     setSavedMsg(true);
   };
 
@@ -227,10 +289,10 @@ export function DocumentTool({ docType }: { docType: DocType }) {
           <p class="no">${esc(d.number)}</p>
         </div>
         <div class="biz">
-          <p class="bn">${esc(business.name)}</p>
-          ${business.address ? `<p>${esc(business.address)}</p>` : ""}
-          ${business.phone ? `<p>${esc(business.phone)}</p>` : ""}
-          ${business.gstin ? `<p>GSTIN: ${esc(business.gstin)}</p>` : ""}
+          <p class="bn">${esc(biz?.name ?? "")}</p>
+          ${biz?.address ? `<p>${esc(biz.address)}</p>` : ""}
+          ${biz?.phone ? `<p>${esc(biz.phone)}</p>` : ""}
+          ${biz?.taxNumber ? `<p>GSTIN: ${esc(biz.taxNumber)}</p>` : ""}
         </div>
       </div>
       <div class="wrap">
@@ -261,7 +323,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
         <div class="sign"><div class="box"><div class="line"></div>Authorised signatory</div></div>
         <div class="foot">
           <span>${esc(cfg.footerNote)}</span>
-          <span>${esc(business.name)}</span>
+          <span>${esc(biz?.name ?? "")}</span>
         </div>
       </div>
       <script>window.onload = () => window.print();</script>
@@ -273,192 +335,225 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     win.document.close();
   };
 
+  const partyOptions = cfg.partyKind === "customer" ? workspace.customers : workspace.suppliers;
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-      <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Your business</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Business name">
-            <TextInput
-              value={business.name}
-              onChange={(e) => setBusiness((b) => ({ ...b, name: e.target.value }))}
-            />
-          </Field>
-          <Field label="Phone">
-            <TextInput
-              value={business.phone}
-              onChange={(e) => setBusiness((b) => ({ ...b, phone: e.target.value }))}
-            />
-          </Field>
-          <Field label="Address">
-            <TextInput
-              value={business.address}
-              onChange={(e) => setBusiness((b) => ({ ...b, address: e.target.value }))}
-            />
-          </Field>
-          <Field label="GSTIN (optional)">
-            <TextInput
-              value={business.gstin}
-              onChange={(e) => setBusiness((b) => ({ ...b, gstin: e.target.value }))}
-            />
-          </Field>
-        </div>
+    <div>
+      <WorkspaceBanner connection={workspace} message={cfg.workspaceMsg} />
 
-        <h2 className="mb-4 mt-6 text-lg font-bold text-ink">Document details</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Number">
-            <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
-          </Field>
-          <Field label="Date">
-            <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-          </Field>
-          {cfg.secondDateLabel ? (
-            <Field label={cfg.secondDateLabel}>
-              <TextInput
-                type="date"
-                value={secondDate}
-                onChange={(e) => setSecondDate(e.target.value)}
-              />
-            </Field>
-          ) : null}
-          {cfg.refLabel ? (
-            <Field label={cfg.refLabel}>
-              <TextInput value={refNumber} onChange={(e) => setRefNumber(e.target.value)} />
-            </Field>
-          ) : null}
-        </div>
-
-        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{cfg.partyLabel}</h3>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <Field label={`${cfg.partyLabel} name *`}>
-            <TextInput value={partyName} onChange={(e) => setPartyName(e.target.value)} />
-          </Field>
-          <Field label="Address">
-            <TextInput value={partyAddress} onChange={(e) => setPartyAddress(e.target.value)} />
-          </Field>
-          <Field label="GSTIN (optional)">
-            <TextInput value={partyGstin} onChange={(e) => setPartyGstin(e.target.value)} />
-          </Field>
-        </div>
-
-        {cfg.reasonLabel ? (
-          <div className="mt-4">
-            <Field label={cfg.reasonLabel}>
-              <TextInput
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
-                placeholder="e.g. Goods returned, rate difference, damaged in transit"
-              />
-            </Field>
-          </div>
-        ) : null}
-
-        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Items</h3>
-        <div className="space-y-3">
-          {items.map((item) => (
-            <div
-              key={item.id}
-              className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_80px_110px_80px_auto]"
-            >
-              <Field label="Description">
-                <TextInput
-                  value={item.description}
-                  onChange={(e) => updateItem(item.id, { description: e.target.value })}
-                />
-              </Field>
-              <Field label="Qty">
-                <NumberInput
-                  min={0}
-                  value={item.quantity || ""}
-                  onChange={(e) => updateItem(item.id, { quantity: Number(e.target.value) || 0 })}
-                />
-              </Field>
-              <Field label={`Rate (${symbol})`}>
-                <NumberInput
-                  min={0}
-                  step="0.01"
-                  value={item.rate || ""}
-                  onChange={(e) => updateItem(item.id, { rate: Number(e.target.value) || 0 })}
-                />
-              </Field>
-              <Field label="Tax %">
-                <NumberInput
-                  min={0}
-                  value={item.taxRate || ""}
-                  onChange={(e) => updateItem(item.id, { taxRate: Number(e.target.value) || 0 })}
-                />
-              </Field>
-              <button
-                type="button"
-                onClick={() => setItems((prev) => prev.filter((i) => i.id !== item.id))}
-                disabled={items.length === 1}
-                className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
-              >
-                Remove
-              </button>
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+        <Card className="h-fit">
+          {biz ? (
+            <div className="mb-5 rounded-xl bg-cream-paper/60 px-4 py-3 text-sm">
+              <span className="text-muted">Issuing as </span>
+              <span className="font-semibold text-ink">{biz.name || "your business"}</span>
+              {biz.taxNumber ? <span className="text-muted"> · GSTIN {biz.taxNumber}</span> : null}
             </div>
-          ))}
-        </div>
-        <SecondaryButton className="mt-3" onClick={() => setItems((p) => [...p, blankItem()])}>
-          + Add item
-        </SecondaryButton>
+          ) : (
+            <div className="mb-5 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-700">
+              Set up your{" "}
+              <a href="/tools/business-profile" className="font-semibold underline">
+                Business Profile
+              </a>{" "}
+              once to put your name, address and GSTIN on every document automatically.
+            </div>
+          )}
 
-        <div className="mt-4">
-          <Field label="Notes & terms">
-            <TextArea value={notes} onChange={(e) => setNotes(e.target.value)} />
-          </Field>
-        </div>
-
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
-          <div className="text-sm text-muted">
-            {formatMoney(totals.subtotal, currency)} + {formatMoney(totals.taxTotal, currency)} tax ={" "}
-            <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
+          <h2 className="mb-4 text-lg font-bold text-ink">Document details</h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Field label="Number">
+              <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
+            </Field>
+            <Field label="Date">
+              <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            </Field>
+            {cfg.secondDateLabel ? (
+              <Field label={cfg.secondDateLabel}>
+                <TextInput
+                  type="date"
+                  value={secondDate}
+                  onChange={(e) => setSecondDate(e.target.value)}
+                />
+              </Field>
+            ) : null}
+            {cfg.refLabel ? (
+              <Field label={cfg.refLabel}>
+                <TextInput value={refNumber} onChange={(e) => setRefNumber(e.target.value)} />
+              </Field>
+            ) : null}
           </div>
-          <div className="flex gap-2">
-            <SecondaryButton onClick={() => printDoc()} disabled={!canSave}>
-              Print / PDF
-            </SecondaryButton>
-            <PrimaryButton onClick={saveDoc} disabled={!canSave}>
-              Save
-            </PrimaryButton>
-          </div>
-        </div>
-        {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Saved ✓</p> : null}
-      </Card>
 
-      <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Saved documents</h2>
-        {saved.length === 0 ? (
-          <EmptyState
-            title="Nothing saved yet"
-            subtitle="Documents you save appear here — stored only in this browser, never uploaded."
-          />
-        ) : (
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{cfg.partyLabel}</h3>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {workspace.connected && partyOptions.length > 0 ? (
+              <Field label={`Pick a saved ${cfg.partyLabel.toLowerCase()}`}>
+                <Select value={partyId} onChange={(e) => pickParty(e.target.value)}>
+                  <option value="">Type details below…</option>
+                  {partyOptions.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            ) : null}
+            <Field label={`${cfg.partyLabel} name *`}>
+              <TextInput
+                value={partyName}
+                onChange={(e) => {
+                  setPartyName(e.target.value);
+                  setPartyId("");
+                }}
+              />
+            </Field>
+            <Field label="Address">
+              <TextInput value={partyAddress} onChange={(e) => setPartyAddress(e.target.value)} />
+            </Field>
+            <Field label="GSTIN (optional)">
+              <TextInput value={partyGstin} onChange={(e) => setPartyGstin(e.target.value)} />
+            </Field>
+          </div>
+
+          {cfg.reasonLabel ? (
+            <div className="mt-4">
+              <Field label={cfg.reasonLabel}>
+                <TextInput
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                  placeholder="e.g. Goods returned, rate difference, damaged in transit"
+                />
+              </Field>
+            </div>
+          ) : null}
+
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Items</h3>
           <div className="space-y-3">
-            {saved.slice(0, 20).map((docItem) => (
-              <div key={docItem.id} className="rounded-lg border border-muted-line/30 p-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="font-semibold text-ink">{docItem.number}</p>
-                    <p className="text-xs text-muted">
-                      {docItem.partyName} · {docItem.date}
-                    </p>
-                  </div>
-                  <p className="text-sm font-bold text-ink">{formatMoney(docItem.total, currency)}</p>
-                </div>
-                <div className="mt-2 flex gap-3 text-xs font-semibold">
-                  <button type="button" className="text-indigo" onClick={() => printDoc(docItem)}>
-                    Print
-                  </button>
-                  <button type="button" className="text-red-500" onClick={() => setDeleting(docItem)}>
-                    Delete
-                  </button>
-                </div>
+            {items.map((item) => (
+              <div
+                key={item.id}
+                className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_70px_100px_70px_auto]"
+              >
+                {workspace.connected && workspace.products.length > 0 ? (
+                  <Field label="Product">
+                    <Select
+                      value=""
+                      onChange={(e) => e.target.value && pickProduct(item.id, e.target.value)}
+                    >
+                      <option value="">Choose…</option>
+                      {workspace.products.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.name}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+                ) : null}
+                <Field label="Description">
+                  <TextInput
+                    value={item.description}
+                    onChange={(e) => updateItem(item.id, { description: e.target.value })}
+                  />
+                </Field>
+                <Field label="Qty">
+                  <NumberInput
+                    min={0}
+                    value={item.quantity || ""}
+                    onChange={(e) => updateItem(item.id, { quantity: Number(e.target.value) || 0 })}
+                  />
+                </Field>
+                <Field label={`Rate (${symbol})`}>
+                  <NumberInput
+                    min={0}
+                    step="0.01"
+                    value={item.rate || ""}
+                    onChange={(e) => updateItem(item.id, { rate: Number(e.target.value) || 0 })}
+                  />
+                </Field>
+                <Field label="Tax %">
+                  <NumberInput
+                    min={0}
+                    value={item.taxRate || ""}
+                    onChange={(e) => updateItem(item.id, { taxRate: Number(e.target.value) || 0 })}
+                  />
+                </Field>
+                <button
+                  type="button"
+                  onClick={() => setItems((prev) => prev.filter((i) => i.id !== item.id))}
+                  disabled={items.length === 1}
+                  className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
-        )}
-      </Card>
+          <SecondaryButton className="mt-3" onClick={() => setItems((p) => [...p, blankItem()])}>
+            + Add item
+          </SecondaryButton>
+
+          <div className="mt-4">
+            <Field label="Notes & terms">
+              <TextArea value={notes} onChange={(e) => setNotes(e.target.value)} />
+            </Field>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
+            <div className="text-sm text-muted">
+              {formatMoney(totals.subtotal, currency)} + {formatMoney(totals.taxTotal, currency)} tax
+              = <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
+            </div>
+            <div className="flex gap-2">
+              <SecondaryButton onClick={() => printDoc()} disabled={!canSave}>
+                Print / PDF
+              </SecondaryButton>
+              <PrimaryButton onClick={saveDoc} disabled={!canSave}>
+                Save
+              </PrimaryButton>
+            </div>
+          </div>
+          {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Saved ✓</p> : null}
+        </Card>
+
+        <Card className="h-fit">
+          <h2 className="mb-4 text-lg font-bold text-ink">Saved documents</h2>
+          {savedDocs.length === 0 ? (
+            <EmptyState
+              title="Nothing saved yet"
+              subtitle="Documents you save appear here — stored in your private workspace on this device, never uploaded."
+            />
+          ) : (
+            <div className="space-y-3">
+              {savedDocs.slice(0, 20).map((docItem) => (
+                <div key={docItem.id} className="rounded-lg border border-muted-line/30 p-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="font-semibold text-ink">{docItem.number}</p>
+                      <p className="text-xs text-muted">
+                        {docItem.partyName} · {docItem.date}
+                      </p>
+                    </div>
+                    <p className="text-sm font-bold text-ink">
+                      {formatMoney(docItem.total, currency)}
+                    </p>
+                  </div>
+                  <div className="mt-2 flex gap-3 text-xs font-semibold">
+                    <button type="button" className="text-indigo" onClick={() => printDoc(docItem)}>
+                      Print
+                    </button>
+                    <button
+                      type="button"
+                      className="text-red-500"
+                      onClick={() => setDeleting(docItem)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </Card>
+      </div>
 
       <ConfirmDialog
         open={deleting !== null}
@@ -466,7 +561,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
         message={deleting ? `Delete ${deleting.number} for ${deleting.partyName}?` : ""}
         confirmLabel="Delete"
         onConfirm={() => {
-          if (deleting) setSaved((prev) => prev.filter((s) => s.id !== deleting.id));
+          if (deleting) void remove(deleting.id);
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}

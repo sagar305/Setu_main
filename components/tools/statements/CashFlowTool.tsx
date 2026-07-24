@@ -2,9 +2,11 @@
 
 import { useMemo } from "react";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
   LineSectionEditor,
@@ -36,9 +38,30 @@ const INITIAL: CfState = {
 
 export function CashFlowTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("cash-flow-statement");
   const [state, setState] = useLocalStore<CfState>("setu-stmt-cf", INITIAL);
   const money = (v: number) => formatMoney(v, currency);
   const patch = (p: Partial<CfState>) => setState((s) => ({ ...s, ...p }));
+
+  // Operating cash from the cash book: total in as an inflow, total out as an
+  // outflow (negative). Investing/financing stay manual — the cash book
+  // doesn't classify them.
+  const pullFromWorkspace = () => {
+    const cashIn = workspace.cashEntries
+      .filter((e) => e.type === "in")
+      .reduce((s, e) => s + e.amount, 0);
+    const cashOut = workspace.cashEntries
+      .filter((e) => e.type === "out")
+      .reduce((s, e) => s + e.amount, 0);
+    setState((s) => ({
+      ...s,
+      businessName: s.businessName || workspace.business?.name || "",
+      operating: [
+        { id: generateId(), label: "Cash received (cash book)", amount: cashIn },
+        { id: generateId(), label: "Cash paid out (cash book)", amount: -cashOut },
+      ],
+    }));
+  };
 
   const r = useMemo(() => {
     const operating = sumLines(state.operating);
@@ -90,7 +113,13 @@ export function CashFlowTool() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message="Pull operating cash straight from your recorded cash book entries."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <Card className="h-fit">
         <div className="grid gap-4 sm:grid-cols-3">
           <Field label="Business name">
@@ -114,6 +143,14 @@ export function CashFlowTool() {
             />
           </Field>
         </div>
+
+        {workspace.connected ? (
+          <div className="mt-4">
+            <SecondaryButton onClick={pullFromWorkspace}>
+              ↻ Pull operating cash from cash book
+            </SecondaryButton>
+          </div>
+        ) : null}
 
         <p className="mt-4 rounded-xl bg-cream-paper/50 px-4 py-3 text-xs text-muted">
           Enter inflows as positive numbers and outflows as negative (e.g. −25000 for equipment
@@ -170,6 +207,7 @@ export function CashFlowTool() {
         </div>
         <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
       </Card>
+      </div>
     </div>
   );
 }

@@ -2,14 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { Card, EmptyState, Field, SecondaryButton, Select } from "@/components/toolkit/ui";
-import { useLocalStore } from "@/lib/hooks/useLocalStore";
+import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
-  COA_STORAGE_KEY,
   DEFAULT_ACCOUNTS,
-  JOURNAL_STORAGE_KEY,
   isDebitNormal,
   ledgerRows,
   type Account,
@@ -18,8 +16,10 @@ import {
 
 export function GeneralLedgerTool() {
   const { code: currency } = usePreferredCurrency();
-  const [accounts] = useLocalStore<Account[]>(COA_STORAGE_KEY, DEFAULT_ACCOUNTS);
-  const [entries, , loaded] = useLocalStore<JournalEntry[]>(JOURNAL_STORAGE_KEY, []);
+  const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
+  const accounts = coaAccounts.length > 0 ? coaAccounts : DEFAULT_ACCOUNTS;
+  const { items: entries, loading } = useEntityList<JournalEntry>("journal_entries");
+  const loaded = !loading;
   const [accountId, setAccountId] = useState("");
 
   const sortedAccounts = useMemo(

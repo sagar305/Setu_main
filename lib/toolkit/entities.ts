@@ -81,7 +81,10 @@ export type EntityName =
   | "inventory"
   | "payments"
   | "assets"
-  | "settings";
+  | "settings"
+  | "coa_accounts"
+  | "journal_entries"
+  | "documents";
 
 /**
  * Permission tiers a tool holds against an entity it does not own (Chapter 5,
@@ -278,6 +281,33 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     primaryEditor: "browser-pos",
     store: "settings",
     dangerousOps: ["change-gst-settings", "reset"],
+    status: "live",
+  },
+  coa_accounts: {
+    name: "coa_accounts",
+    label: "Chart of Accounts",
+    ownedBy: "workspace",
+    primaryEditor: "chart-of-accounts",
+    store: "coa_accounts",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  journal_entries: {
+    name: "journal_entries",
+    label: "Journal Entries",
+    ownedBy: "workspace",
+    primaryEditor: "journal-entry",
+    store: "journal_entries",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  documents: {
+    name: "documents",
+    label: "Business Documents (Credit/Debit Notes, Orders)",
+    ownedBy: "workspace",
+    primaryEditor: "credit-note-generator",
+    store: "documents",
+    dangerousOps: ["delete"],
     status: "live",
   },
 };

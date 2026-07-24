@@ -2,9 +2,11 @@
 
 import { useMemo } from "react";
 import { Card, Field, SecondaryButton, TextInput } from "@/components/toolkit/ui";
+import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
+import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
   LineSectionEditor,
@@ -37,9 +39,37 @@ const INITIAL: BsState = {
 
 export function BalanceSheetTool() {
   const { code: currency } = usePreferredCurrency();
+  const workspace = useFinanceWorkspace("balance-sheet");
   const [state, setState] = useLocalStore<BsState>("setu-stmt-bs", INITIAL);
   const money = (v: number) => formatMoney(v, currency);
   const patch = (p: Partial<BsState>) => setState((s) => ({ ...s, ...p }));
+
+  // Fill the figures we can derive: cash from the cash book's net position,
+  // receivables from customers who still owe on their ledger.
+  const pullFromWorkspace = () => {
+    const cash = workspace.cashEntries.reduce(
+      (s, e) => s + (e.type === "in" ? e.amount : -e.amount),
+      0
+    );
+    const balByCustomer = new Map<string, number>();
+    for (const e of workspace.ledger) {
+      const signed = e.type === "credit" ? e.amount : -e.amount;
+      balByCustomer.set(e.customerId, (balByCustomer.get(e.customerId) ?? 0) + signed);
+    }
+    const receivables = [...balByCustomer.values()].reduce((s, b) => s + Math.max(0, b), 0);
+
+    setState((s) => ({
+      ...s,
+      businessName: s.businessName || workspace.business?.name || "",
+      currentAssets: [
+        { id: generateId(), label: "Cash & bank", amount: cash },
+        { id: generateId(), label: "Accounts receivable", amount: receivables },
+        ...s.currentAssets.filter(
+          (l) => l.label !== "Cash & bank" && l.label !== "Accounts receivable"
+        ),
+      ],
+    }));
+  };
 
   const r = useMemo(() => {
     const currentAssets = sumLines(state.currentAssets);
@@ -111,8 +141,21 @@ export function BalanceSheetTool() {
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div>
+      <WorkspaceBanner
+        connection={workspace}
+        message="Pull cash from your cash book and receivables from outstanding customer udhaar."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-2">
       <Card className="h-fit">
+        {workspace.connected ? (
+          <div className="mb-4">
+            <SecondaryButton onClick={pullFromWorkspace}>
+              ↻ Pull cash &amp; receivables from workspace
+            </SecondaryButton>
+          </div>
+        ) : null}
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Business name">
             <TextInput
@@ -194,6 +237,7 @@ export function BalanceSheetTool() {
         </div>
         <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
       </Card>
+      </div>
     </div>
   );
 }

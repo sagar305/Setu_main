@@ -8,9 +8,11 @@ const DB_NAME = "POS_DATABASE";
 // v2 adds held_carts (hold/recall sales); v3 adds sync_queue (Google Sheet
 // sync dirty-flags); v4 adds the Business Toolkit stores (suppliers, expenses,
 // cashbook, appointments, ledger, receipt_templates, purchases, quotations,
-// assets). The upgrade handler creates any missing stores, so bumping the
-// version migrates older databases in place.
-const DB_VERSION = 4;
+// assets). v5 adds the accounting stores (coa_accounts, journal_entries,
+// documents) for the bookkeeping and document tools. The upgrade handler
+// creates any missing stores, so bumping the version migrates older databases
+// in place.
+const DB_VERSION = 5;
 
 export const STORES = [
   "business",
@@ -33,6 +35,9 @@ export const STORES = [
   "purchases",
   "quotations",
   "assets",
+  "coa_accounts",
+  "journal_entries",
+  "documents",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];

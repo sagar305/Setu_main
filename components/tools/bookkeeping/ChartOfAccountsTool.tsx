@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Card,
   ConfirmDialog,
@@ -10,11 +10,11 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
-import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useEntityList } from "@/lib/hooks/useEntityList";
+import { generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
   ACCOUNT_TYPES,
-  COA_STORAGE_KEY,
   DEFAULT_ACCOUNTS,
   type Account,
   type AccountType,
@@ -29,23 +29,30 @@ const TYPE_STYLES: Record<AccountType, string> = {
 };
 
 export function ChartOfAccountsTool() {
-  const [accounts, setAccounts, loaded] = useLocalStore<Account[]>(
-    COA_STORAGE_KEY,
-    DEFAULT_ACCOUNTS
-  );
+  // Chart of Accounts is a SHARED workspace entity — the Journal Entry, General
+  // Ledger and Trial Balance tools read the same store. First-time users get a
+  // ready-made small-business chart seeded once.
+  const { items: accounts, loading, save, remove } = useEntityList<Account>("coa_accounts");
+  const seededRef = useRef(false);
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState<AccountType>("asset");
   const [deleting, setDeleting] = useState<Account | null>(null);
 
+  useEffect(() => {
+    if (loading || seededRef.current || accounts.length > 0) return;
+    seededRef.current = true;
+    (async () => {
+      for (const account of DEFAULT_ACCOUNTS) await save(account);
+    })();
+  }, [loading, accounts.length, save]);
+
+  const loaded = !loading;
   const canAdd = code.trim().length > 0 && name.trim().length > 0;
 
   const addAccount = () => {
     if (!canAdd) return;
-    setAccounts((prev) => [
-      ...prev,
-      { id: generateLocalId(), code: code.trim(), name: name.trim(), type },
-    ]);
+    void save({ id: generateId(), code: code.trim(), name: name.trim(), type });
     setCode("");
     setName("");
   };
@@ -163,7 +170,7 @@ export function ChartOfAccountsTool() {
         }
         confirmLabel="Delete"
         onConfirm={() => {
-          if (deleting) setAccounts((prev) => prev.filter((a) => a.id !== deleting.id));
+          if (deleting) void remove(deleting.id);
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
