@@ -16,7 +16,6 @@ import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { BlogThumbnail } from "@/components/blog/BlogThumbnail";
 
 const content = getBlogContent();
 
@@ -166,9 +165,13 @@ export default async function BlogPostPage({
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">{post.title}</h1>
 
           {post.thumbnail && (
-            <div className="mt-8 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-muted-line/20">
-              <BlogThumbnail post={post} />
-            </div>
+            // Full image at its natural aspect ratio so nothing is cropped.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={post.thumbnail}
+              alt={post.title}
+              className="mt-8 w-full rounded-2xl border border-muted-line/20"
+            />
           )}
 
           <div className="blog-content mt-8" dangerouslySetInnerHTML={{ __html: html }} />
