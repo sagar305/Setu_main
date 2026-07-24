@@ -89,7 +89,24 @@ let blogIndexCache: BlogIndex | null = null;
 function loadBlogIndex(): BlogIndex {
   if (!blogIndexCache) {
     const raw = fs.readFileSync(path.join(BLOG_DIR, "index.json"), "utf8");
-    blogIndexCache = JSON.parse(raw) as BlogIndex;
+    const index = JSON.parse(raw) as BlogIndex;
+
+    // The per-post file (posts/<slug>.json) is the source of truth for the
+    // thumbnail. Overlay it onto the listing summaries so a thumbnail set there
+    // shows on the blog cards (list, "latest posts", "more from category")
+    // without also having to edit index.json.
+    index.posts = index.posts.map((post) => {
+      if (post.thumbnail) return post;
+      const file = path.join(BLOG_POSTS_DIR, `${post.slug}.json`);
+      try {
+        const full = JSON.parse(fs.readFileSync(file, "utf8")) as { thumbnail?: string | null };
+        return full.thumbnail ? { ...post, thumbnail: full.thumbnail } : post;
+      } catch {
+        return post;
+      }
+    });
+
+    blogIndexCache = index;
   }
   return blogIndexCache;
 }

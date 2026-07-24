@@ -45,6 +45,34 @@ export async function generateMetadata({
 
   const url = getBlogPostUrl(post);
 
+  // Use the post's own thumbnail as the social share card when one is set;
+  // otherwise fall back to the default Setu OG images. Relative paths resolve
+  // against metadataBase (set in the root layout) to absolute URLs for crawlers.
+  const defaultOgImages = [
+    {
+      url: "/og/setu-og-image-1200x627.png",
+      width: 1200,
+      height: 627,
+      alt: "Setu Technology - Setu for your business",
+    },
+    {
+      url: "/og/setu-og-image-800x418.png",
+      width: 800,
+      height: 418,
+      alt: "Setu Technology - Setu for your business",
+    },
+    {
+      url: "/og/setu-og-image-500x261.png",
+      width: 500,
+      height: 261,
+      alt: "Setu Technology - Setu for your business",
+    },
+  ];
+
+  const shareImages = post.thumbnail
+    ? [{ url: post.thumbnail, alt: post.title }]
+    : defaultOgImages;
+
   return {
     title: post.seoTitle ?? `${post.title} | Setu Technology Blog`,
     description: post.metaDescription ?? post.excerpt,
@@ -56,26 +84,13 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
-      images: [
-        {
-          url: "/og/setu-og-image-1200x627.png",
-          width: 1200,
-          height: 627,
-          alt: "Setu Technology - Setu for your business",
-        },
-        {
-          url: "/og/setu-og-image-800x418.png",
-          width: 800,
-          height: 418,
-          alt: "Setu Technology - Setu for your business",
-        },
-        {
-          url: "/og/setu-og-image-500x261.png",
-          width: 500,
-          height: 261,
-          alt: "Setu Technology - Setu for your business",
-        },
-      ],
+      images: shareImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.seoTitle ?? post.title,
+      description: post.metaDescription ?? post.excerpt,
+      images: shareImages.map((image) => image.url),
     },
   };
 }
