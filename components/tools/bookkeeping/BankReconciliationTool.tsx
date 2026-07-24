@@ -7,12 +7,15 @@ import {
   Field,
   NumberInput,
   PrimaryButton,
+  SecondaryButton,
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
+import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { printStatement, type PrintRow } from "@/components/tools/statements/shared";
 
 // Reconciling items, grouped by which balance they adjust.
 type ItemKind =
@@ -96,6 +99,54 @@ export function BankReconciliationTool() {
 
   const kindLabel = (k: ItemKind) => KIND_OPTIONS.find((o) => o.value === k)?.label ?? k;
 
+  const exportCsv = () =>
+    downloadCsv(
+      "bank-reconciliation.csv",
+      toCsv(
+        ["Item", "Type", "Amount"],
+        [
+          ["Bank statement balance", "", state.bankBalance.toFixed(2)],
+          ["Book balance", "", state.bookBalance.toFixed(2)],
+          ...state.items.map((i) => [i.description, kindLabel(i.kind), i.amount.toFixed(2)]),
+          ["Adjusted bank balance", "", result.adjustedBank.toFixed(2)],
+          ["Adjusted book balance", "", result.adjustedBook.toFixed(2)],
+          ["Difference", "", result.difference.toFixed(2)],
+        ]
+      )
+    );
+
+  const printRecon = () => {
+    const money = (v: number) => formatMoney(v, currency);
+    const section = (kind: ItemKind, heading: string): PrintRow[] => {
+      const rows = state.items.filter((i) => i.kind === kind);
+      if (rows.length === 0) return [];
+      return [
+        { label: heading, value: "", kind: "heading" },
+        ...rows.map((i) => ({ label: i.description || kindLabel(i.kind), value: money(i.amount) })),
+      ];
+    };
+    printStatement({
+      docTitle: "Bank Reconciliation Statement",
+      businessName: "",
+      periodLabel: `As of ${new Date().toLocaleDateString("en-IN")}`,
+      rows: [
+        { label: "Bank statement balance", value: money(state.bankBalance), kind: "subtotal" },
+        ...section("deposit-in-transit", "Add: Deposits in transit"),
+        ...section("outstanding-payment", "Less: Outstanding cheques / payments"),
+        { label: "Adjusted bank balance", value: money(result.adjustedBank), kind: "total" },
+        { label: "Book / cash book balance", value: money(state.bookBalance), kind: "subtotal" },
+        ...section("bank-credit", "Add: Bank credits not in books"),
+        ...section("bank-debit", "Less: Bank charges not in books"),
+        { label: "Adjusted book balance", value: money(result.adjustedBook), kind: "total" },
+        {
+          label: result.reconciled ? "Reconciled" : "Unreconciled difference",
+          value: result.reconciled ? "✓" : money(result.difference),
+          kind: "subtotal",
+        },
+      ],
+    });
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <div className="space-y-6">
@@ -162,7 +213,13 @@ export function BankReconciliationTool() {
       </div>
 
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Reconciliation</h2>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-lg font-bold text-ink">Reconciliation</h2>
+          <div className="flex gap-2">
+            <SecondaryButton onClick={printRecon}>Print / PDF</SecondaryButton>
+            <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+          </div>
+        </div>
 
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div className="rounded-xl bg-cream-paper/70 p-4 text-center">

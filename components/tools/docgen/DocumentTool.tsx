@@ -25,6 +25,7 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import type { ToolSlug } from "@/lib/toolkit/registry";
 
 export type DocType = "credit-note" | "debit-note" | "purchase-order" | "sales-order";
@@ -39,11 +40,16 @@ type DocConfig = {
   partyLabel: string;
   refLabel: string | null;
   reasonLabel: string | null;
+  /** Common reasons offered as quick-picks (credit/debit notes). */
+  reasonOptions?: string[];
   secondDateLabel: string | null;
   footerNote: string;
   accent: string;
   workspaceMsg: string;
 };
+
+/** Units offered on line items (matches common billing practice). */
+const UNITS = ["Pcs", "Kg", "g", "L", "ml", "m", "Box", "Dozen", "Hours", "Days", "Service"];
 
 const CONFIGS: Record<DocType, DocConfig> = {
   "credit-note": {
@@ -54,6 +60,14 @@ const CONFIGS: Record<DocType, DocConfig> = {
     partyLabel: "Customer",
     refLabel: "Against invoice no.",
     reasonLabel: "Reason (return / adjustment)",
+    reasonOptions: [
+      "Return of goods",
+      "Pricing error",
+      "Duplicate payment",
+      "Post-sale discount",
+      "Damaged in transit",
+      "Goodwill adjustment",
+    ],
     secondDateLabel: null,
     footerNote: "This credit note adjusts the referenced invoice.",
     accent: "#166534",
@@ -67,6 +81,14 @@ const CONFIGS: Record<DocType, DocConfig> = {
     partyLabel: "Supplier",
     refLabel: "Against bill / invoice no.",
     reasonLabel: "Reason (return / short supply / rate difference)",
+    reasonOptions: [
+      "Goods returned",
+      "Short delivery",
+      "Damaged goods",
+      "Rate difference / overcharge",
+      "Quality issue",
+      "Wrong items supplied",
+    ],
     secondDateLabel: null,
     footerNote: "This debit note is issued against the referenced purchase.",
     accent: "#9a3412",
@@ -100,7 +122,14 @@ const CONFIGS: Record<DocType, DocConfig> = {
   },
 };
 
-type LineItem = { id: string; description: string; quantity: number; rate: number; taxRate: number };
+type LineItem = {
+  id: string;
+  description: string;
+  unit?: string;
+  quantity: number;
+  rate: number;
+  taxRate: number;
+};
 
 type SavedDoc = {
   id: string;
@@ -116,6 +145,8 @@ type SavedDoc = {
   items: LineItem[];
   notes: string;
   subtotal: number;
+  /** Flat discount applied after the subtotal (older records lack it). */
+  discount?: number;
   taxTotal: number;
   total: number;
   createdByTool: ToolSlug;
@@ -125,6 +156,7 @@ type SavedDoc = {
 const blankItem = (): LineItem => ({
   id: generateId(),
   description: "",
+  unit: "Pcs",
   quantity: 1,
   rate: 0,
   taxRate: 0,
@@ -151,6 +183,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
   const [refNumber, setRefNumber] = useState("");
   const [reason, setReason] = useState("");
   const [items, setItems] = useState<LineItem[]>([blankItem()]);
+  const [discount, setDiscount] = useState(0);
   const [notes, setNotes] = useState("");
   const [savedMsg, setSavedMsg] = useState(false);
   const [deleting, setDeleting] = useState<SavedDoc | null>(null);
@@ -171,8 +204,9 @@ export function DocumentTool({ docType }: { docType: DocType }) {
       subtotal += line;
       taxTotal += line * ((item.taxRate || 0) / 100);
     }
-    return { subtotal, taxTotal, total: subtotal + taxTotal };
-  }, [items]);
+    const disc = Math.min(discount || 0, subtotal);
+    return { subtotal, discount: disc, taxTotal, total: subtotal - disc + taxTotal };
+  }, [items, discount]);
 
   const validItems = items.filter((i) => i.description.trim() && i.quantity > 0);
   const canSave = partyName.trim().length > 0 && validItems.length > 0;
@@ -225,6 +259,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     items: validItems,
     notes: notes.trim(),
     subtotal: totals.subtotal,
+    discount: totals.discount,
     taxTotal: totals.taxTotal,
     total: totals.total,
     createdByTool: cfg.slug,
@@ -237,6 +272,51 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     setSavedMsg(true);
   };
 
+  /** Clear the form for a fresh document (business details stay). */
+  const resetForm = () => {
+    setNumber(`${cfg.numberPrefix}-${String(Date.now()).slice(-5)}`);
+    setDate(todayIso());
+    setSecondDate("");
+    setPartyId("");
+    setPartyName("");
+    setPartyAddress("");
+    setPartyGstin("");
+    setRefNumber("");
+    setReason("");
+    setItems([blankItem()]);
+    setDiscount(0);
+    setNotes("");
+    setSavedMsg(false);
+  };
+
+  /** Export the current document as CSV (opens in Excel / Google Sheets). */
+  const exportCsv = () => {
+    const d = buildDoc();
+    const rows: unknown[][] = [
+      ["Date", d.date],
+      [cfg.partyLabel, d.partyName],
+      ...(d.refNumber ? [["Ref", d.refNumber]] : []),
+      ...(d.reason ? [["Reason", d.reason]] : []),
+      [],
+      ["#", "Description", "Unit", "Qty", "Rate", "Tax %", "Amount"],
+      ...d.items.map((i, n) => [
+        n + 1,
+        i.description,
+        i.unit ?? "",
+        i.quantity,
+        i.rate.toFixed(2),
+        i.taxRate || 0,
+        (i.quantity * i.rate * (1 + i.taxRate / 100)).toFixed(2),
+      ]),
+      [],
+      ["Subtotal", d.subtotal.toFixed(2)],
+      ...(d.discount ? [["Discount", `-${d.discount.toFixed(2)}`]] : []),
+      ["Tax", d.taxTotal.toFixed(2)],
+      ["Total", d.total.toFixed(2)],
+    ];
+    downloadCsv(`${d.number}.csv`, toCsv([cfg.printTitle, d.number], rows));
+  };
+
   const printDoc = (doc?: SavedDoc) => {
     const d = doc ?? buildDoc();
     const money = (v: number) => formatMoney(v, currency);
@@ -245,7 +325,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
         (i, n) => `<tr>
           <td class="c">${n + 1}</td>
           <td>${esc(i.description)}</td>
-          <td class="r">${i.quantity}</td>
+          <td class="r">${i.quantity}${i.unit ? " " + esc(i.unit) : ""}</td>
           <td class="r">${money(i.rate)}</td>
           <td class="r">${i.taxRate ? i.taxRate + "%" : "—"}</td>
           <td class="r">${money(i.quantity * i.rate * (1 + i.taxRate / 100))}</td>
@@ -316,6 +396,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
         </table>
         <div class="totals">
           <div><span>Subtotal</span><span>${money(d.subtotal)}</span></div>
+          ${d.discount ? `<div><span>Discount</span><span>−${money(d.discount)}</span></div>` : ""}
           <div><span>Tax</span><span>${money(d.taxTotal)}</span></div>
           <div class="grand"><span>Total</span><span>${money(d.total)}</span></div>
         </div>
@@ -415,12 +496,22 @@ export function DocumentTool({ docType }: { docType: DocType }) {
           </div>
 
           {cfg.reasonLabel ? (
-            <div className="mt-4">
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <Field label="Common reasons">
+                <Select value="" onChange={(e) => e.target.value && setReason(e.target.value)}>
+                  <option value="">Pick a reason…</option>
+                  {(cfg.reasonOptions ?? []).map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
               <Field label={cfg.reasonLabel}>
                 <TextInput
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  placeholder="e.g. Goods returned, rate difference, damaged in transit"
+                  placeholder="Or type your own reason"
                 />
               </Field>
             </div>
@@ -431,7 +522,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_70px_100px_70px_auto]"
+                className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_90px_70px_100px_70px_auto]"
               >
                 {workspace.connected && workspace.products.length > 0 ? (
                   <Field label="Product">
@@ -453,6 +544,18 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                     value={item.description}
                     onChange={(e) => updateItem(item.id, { description: e.target.value })}
                   />
+                </Field>
+                <Field label="Unit">
+                  <Select
+                    value={item.unit ?? "Pcs"}
+                    onChange={(e) => updateItem(item.id, { unit: e.target.value })}
+                  >
+                    {UNITS.map((u) => (
+                      <option key={u} value={u}>
+                        {u}
+                      </option>
+                    ))}
+                  </Select>
                 </Field>
                 <Field label="Qty">
                   <NumberInput
@@ -491,18 +594,33 @@ export function DocumentTool({ docType }: { docType: DocType }) {
             + Add item
           </SecondaryButton>
 
-          <div className="mt-4">
+          <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_180px]">
             <Field label="Notes & terms">
               <TextArea value={notes} onChange={(e) => setNotes(e.target.value)} />
+            </Field>
+            <Field label={`Discount (${symbol})`}>
+              <NumberInput
+                min={0}
+                step="0.01"
+                value={discount || ""}
+                onChange={(e) => setDiscount(Number(e.target.value) || 0)}
+                placeholder="0.00"
+              />
             </Field>
           </div>
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
             <div className="text-sm text-muted">
-              {formatMoney(totals.subtotal, currency)} + {formatMoney(totals.taxTotal, currency)} tax
-              = <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
+              {formatMoney(totals.subtotal, currency)}
+              {totals.discount > 0 ? ` − ${formatMoney(totals.discount, currency)} discount` : ""} +{" "}
+              {formatMoney(totals.taxTotal, currency)} tax ={" "}
+              <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
+              <SecondaryButton onClick={resetForm}>Reset</SecondaryButton>
+              <SecondaryButton onClick={exportCsv} disabled={!canSave}>
+                Export CSV
+              </SecondaryButton>
               <SecondaryButton onClick={() => printDoc()} disabled={!canSave}>
                 Print / PDF
               </SecondaryButton>

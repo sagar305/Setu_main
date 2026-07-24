@@ -15,20 +15,35 @@ import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 
-type BudgetRow = { id: string; category: string; budget: number; actual: number };
+type RowType = "expense" | "revenue";
+
+type BudgetRow = {
+  id: string;
+  category: string;
+  /** Older saved rows lack it — treated as "expense". */
+  type?: RowType;
+  budget: number;
+  actual: number;
+};
 
 type BvaState = { period: string; rows: BudgetRow[] };
 
-const blankRow = (category = ""): BudgetRow => ({
+const blankRow = (category = "", type: RowType = "expense"): BudgetRow => ({
   id: generateLocalId(),
   category,
+  type,
   budget: 0,
   actual: 0,
 });
 
 const INITIAL: BvaState = {
   period: "",
-  rows: [blankRow("Sales"), blankRow("Rent"), blankRow("Salaries"), blankRow("Marketing")],
+  rows: [
+    blankRow("Sales", "revenue"),
+    blankRow("Rent"),
+    blankRow("Salaries"),
+    blankRow("Marketing"),
+  ],
 };
 
 export function BudgetVsActualTool() {
@@ -63,7 +78,12 @@ export function BudgetVsActualTool() {
     const rows = state.rows.map((r) => {
       const variance = r.actual - r.budget;
       const pct = r.budget !== 0 ? (variance / Math.abs(r.budget)) * 100 : 0;
-      return { ...r, variance, pct };
+      // Favourability depends on the row's nature: spending above budget is
+      // bad; revenue above budget is good.
+      const rowType: RowType = r.type ?? "expense";
+      const favourable =
+        variance === 0 ? null : rowType === "expense" ? variance < 0 : variance > 0;
+      return { ...r, rowType, variance, pct, favourable };
     });
     const totals = rows.reduce(
       (acc, r) => ({ budget: acc.budget + r.budget, actual: acc.actual + r.actual }),
@@ -76,16 +96,18 @@ export function BudgetVsActualTool() {
     downloadCsv(
       "budget-vs-actual.csv",
       toCsv(
-        ["Category", "Budget", "Actual", "Variance", "Variance %"],
+        ["Category", "Type", "Budget", "Actual", "Variance", "Variance %", "Favourable?"],
         [
           ...computed.rows
             .filter((r) => r.category)
             .map((r) => [
               r.category,
+              r.rowType,
               r.budget.toFixed(2),
               r.actual.toFixed(2),
               r.variance.toFixed(2),
               `${r.pct.toFixed(1)}%`,
+              r.favourable === null ? "" : r.favourable ? "Yes" : "No",
             ]),
           [
             "TOTAL",
@@ -134,6 +156,7 @@ export function BudgetVsActualTool() {
           <thead>
             <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
               <th className="py-2 pr-3">Category</th>
+              <th className="py-2 pr-3">Type</th>
               <th className="py-2 pr-3 text-right">Budget</th>
               <th className="py-2 pr-3 text-right">Actual</th>
               <th className="py-2 pr-3 text-right">Variance</th>
@@ -150,6 +173,16 @@ export function BudgetVsActualTool() {
                     onChange={(e) => update(row.id, { category: e.target.value })}
                     placeholder="Category"
                   />
+                </td>
+                <td className="py-2 pr-3">
+                  <select
+                    value={row.rowType}
+                    onChange={(e) => update(row.id, { type: e.target.value as RowType })}
+                    className="rounded-lg border border-muted-line/40 bg-white px-2 py-2 text-sm text-ink outline-none focus:border-indigo"
+                  >
+                    <option value="expense">Expense</option>
+                    <option value="revenue">Revenue</option>
+                  </select>
                 </td>
                 <td className="py-2 pr-3">
                   <NumberInput
@@ -169,14 +202,22 @@ export function BudgetVsActualTool() {
                 </td>
                 <td
                   className={`py-2 pr-3 text-right font-medium ${
-                    row.variance > 0 ? "text-red-600" : row.variance < 0 ? "text-emerald-600" : "text-muted"
+                    row.favourable === null
+                      ? "text-muted"
+                      : row.favourable
+                        ? "text-emerald-600"
+                        : "text-red-600"
                   }`}
                 >
                   {money(row.variance)}
                 </td>
                 <td
                   className={`py-2 pr-3 text-right ${
-                    row.variance > 0 ? "text-red-600" : row.variance < 0 ? "text-emerald-600" : "text-muted"
+                    row.favourable === null
+                      ? "text-muted"
+                      : row.favourable
+                        ? "text-emerald-600"
+                        : "text-red-600"
                   }`}
                 >
                   {row.budget !== 0 ? `${row.pct.toFixed(1)}%` : "—"}
@@ -197,6 +238,7 @@ export function BudgetVsActualTool() {
             ))}
             <tr className="border-t-2 border-indigo/30 font-bold text-ink">
               <td className="py-2 pr-3">Total</td>
+              <td className="py-2 pr-3" />
               <td className="py-2 pr-3 text-right">{money(computed.totals.budget)}</td>
               <td className="py-2 pr-3 text-right">{money(computed.totals.actual)}</td>
               <td
@@ -214,8 +256,8 @@ export function BudgetVsActualTool() {
       </div>
 
       <p className="mt-4 text-xs text-muted">
-        For spending categories, red (actual above budget) means over-spent. For revenue rows, read
-        it in reverse — actual above budget is good news. Data saves automatically in this browser.
+        Green = favourable (under-spent on expenses, over-achieved on revenue); red = unfavourable.
+        Data saves automatically in this browser.
       </p>
       </Card>
     </div>

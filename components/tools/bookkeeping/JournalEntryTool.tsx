@@ -23,6 +23,11 @@ import {
   type JournalEntry,
   type JournalLine,
 } from "@/lib/bookkeeping";
+import {
+  JOURNAL_SCENARIOS,
+  SCENARIO_CATEGORIES,
+  type JournalScenario,
+} from "@/lib/journalScenarios";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
@@ -41,6 +46,37 @@ export function JournalEntryTool() {
   const [lines, setLines] = useState<JournalLine[]>([blankLine(), blankLine()]);
   const [deleting, setDeleting] = useState<JournalEntry | null>(null);
   const [savedMsg, setSavedMsg] = useState(false);
+
+  // Scenario library — pick a real-world transaction and the correct
+  // debit/credit lines load, ready to edit.
+  const [scenarioSearch, setScenarioSearch] = useState("");
+  const [scenarioCategory, setScenarioCategory] = useState("");
+  const [loadedScenario, setLoadedScenario] = useState<JournalScenario | null>(null);
+
+  const filteredScenarios = useMemo(() => {
+    const q = scenarioSearch.trim().toLowerCase();
+    return JOURNAL_SCENARIOS.filter(
+      (s) =>
+        (!scenarioCategory || s.category === scenarioCategory) &&
+        (!q || s.name.toLowerCase().includes(q) || s.narration.toLowerCase().includes(q))
+    );
+  }, [scenarioSearch, scenarioCategory]);
+
+  const loadScenario = (s: JournalScenario) => {
+    const available = new Set(accounts.map((a) => a.id));
+    setNarration(s.narration);
+    setLines(
+      s.lines.map((l) => ({
+        id: generateId(),
+        // If the user's chart no longer has this account, leave it unpicked.
+        accountId: available.has(l.accountId) ? l.accountId : "",
+        debit: l.side === "debit" ? l.amount : 0,
+        credit: l.side === "credit" ? l.amount : 0,
+      }))
+    );
+    setLoadedScenario(s);
+    setSavedMsg(false);
+  };
 
   const sortedAccounts = useMemo(
     () => [...accounts].sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true })),
@@ -102,6 +138,79 @@ export function JournalEntryTool() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+      <div className="space-y-6">
+      <Card>
+        <h2 className="mb-1 text-lg font-bold text-ink">Scenario library</h2>
+        <p className="mb-3 text-sm text-muted">
+          Not sure which account to debit or credit? Pick the transaction — the correct entry loads
+          below, ready to edit.
+        </p>
+        <TextInput
+          value={scenarioSearch}
+          onChange={(e) => setScenarioSearch(e.target.value)}
+          placeholder="Search scenarios… (e.g. depreciation, GST, salary, loan)"
+        />
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            onClick={() => setScenarioCategory("")}
+            className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+              scenarioCategory === ""
+                ? "border-indigo bg-indigo text-cream-paper"
+                : "border-muted-line/40 text-ink/70 hover:border-indigo/40"
+            }`}
+          >
+            All ({JOURNAL_SCENARIOS.length})
+          </button>
+          {SCENARIO_CATEGORIES.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setScenarioCategory(scenarioCategory === c ? "" : c)}
+              className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+                scenarioCategory === c
+                  ? "border-indigo bg-indigo text-cream-paper"
+                  : "border-muted-line/40 text-ink/70 hover:border-indigo/40"
+              }`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3 grid max-h-56 gap-2 overflow-y-auto sm:grid-cols-2">
+          {filteredScenarios.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => loadScenario(s)}
+              className={`rounded-lg border p-2.5 text-left transition ${
+                loadedScenario?.id === s.id
+                  ? "border-indigo/50 bg-indigo/5"
+                  : "border-muted-line/30 hover:border-indigo/40"
+              }`}
+            >
+              <p className="text-sm font-semibold text-ink">{s.name}</p>
+              <p className="text-xs text-muted">{s.category}</p>
+            </button>
+          ))}
+          {filteredScenarios.length === 0 ? (
+            <p className="py-4 text-sm text-muted">No scenarios match that search.</p>
+          ) : null}
+        </div>
+        {loadedScenario ? (
+          <div className="mt-3 space-y-2 rounded-xl bg-cream-paper/60 p-4 text-sm">
+            <p>
+              <span className="font-semibold text-ink">Why this entry: </span>
+              <span className="text-muted">{loadedScenario.explanation}</span>
+            </p>
+            <p>
+              <span className="font-semibold text-red-600">Common mistake: </span>
+              <span className="text-muted">{loadedScenario.mistake}</span>
+            </p>
+          </div>
+        ) : null}
+      </Card>
+
       <Card className="h-fit">
         <h2 className="mb-4 text-lg font-bold text-ink">New journal entry</h2>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -191,6 +300,7 @@ export function JournalEntryTool() {
         </div>
         {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Entry posted ✓</p> : null}
       </Card>
+      </div>
 
       <Card className="h-fit">
         <div className="mb-4 flex items-center justify-between gap-3">

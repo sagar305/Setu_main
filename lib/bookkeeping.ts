@@ -65,6 +65,100 @@ export const DEFAULT_ACCOUNTS: Account[] = [
   { id: "a-5900", code: "5900", name: "Miscellaneous Expense", type: "expense" },
 ];
 
+// ---------------------------------------------------------------------------
+// Industry chart templates. Each starts from the general small-business chart
+// and swaps in the accounts that industry actually uses.
+// ---------------------------------------------------------------------------
+
+const acct = (code: string, name: string, type: AccountType): Account => ({
+  id: `a-${code}`,
+  code,
+  name,
+  type,
+});
+
+export type IndustryTemplate = { id: string; name: string; accounts: Account[] };
+
+export const INDUSTRY_TEMPLATES: IndustryTemplate[] = [
+  { id: "general", name: "General small business", accounts: DEFAULT_ACCOUNTS },
+  {
+    id: "retail",
+    name: "Retail / Store",
+    accounts: [
+      ...DEFAULT_ACCOUNTS,
+      acct("1210", "Goods in Transit", "asset"),
+      acct("4010", "Online Marketplace Sales", "income"),
+      acct("5010", "Freight & Cartage Inward", "expense"),
+      acct("5410", "Packaging Material", "expense"),
+      acct("5420", "Shop Consumables", "expense"),
+    ],
+  },
+  {
+    id: "restaurant",
+    name: "Restaurant / F&B",
+    accounts: [
+      ...DEFAULT_ACCOUNTS,
+      acct("1210", "Kitchen Stock (Perishables)", "asset"),
+      acct("4010", "Online Order Sales (Zomato/Swiggy)", "income"),
+      acct("5010", "Food & Beverage Cost", "expense"),
+      acct("5410", "Aggregator Commission", "expense"),
+      acct("5420", "Kitchen Fuel (LPG)", "expense"),
+      acct("5430", "Cleaning & Consumables", "expense"),
+    ],
+  },
+  {
+    id: "services",
+    name: "Services / Consulting",
+    accounts: [
+      ...DEFAULT_ACCOUNTS.filter((a) => a.id !== "a-1200" && a.id !== "a-5000"),
+      acct("4010", "Consulting / Service Fees", "income"),
+      acct("5010", "Subcontractor Costs", "expense"),
+      acct("5410", "Software Subscriptions", "expense"),
+      acct("5420", "Travel & Conveyance", "expense"),
+      acct("5430", "Professional Fees (CA/Legal)", "expense"),
+    ],
+  },
+  {
+    id: "saas",
+    name: "SaaS / Software",
+    accounts: [
+      ...DEFAULT_ACCOUNTS.filter((a) => a.id !== "a-1200" && a.id !== "a-5000"),
+      acct("1300", "Deferred Revenue Receivable", "asset"),
+      acct("2300", "Deferred / Unearned Revenue", "liability"),
+      acct("4010", "Subscription Revenue", "income"),
+      acct("5010", "Hosting & Infrastructure", "expense"),
+      acct("5410", "Software & API Subscriptions", "expense"),
+      acct("5420", "Payment Gateway Fees", "expense"),
+    ],
+  },
+  {
+    id: "manufacturing",
+    name: "Manufacturing",
+    accounts: [
+      ...DEFAULT_ACCOUNTS,
+      acct("1210", "Raw Materials", "asset"),
+      acct("1220", "Work in Progress", "asset"),
+      acct("1230", "Finished Goods", "asset"),
+      acct("5010", "Direct Labour", "expense"),
+      acct("5020", "Factory Overheads", "expense"),
+      acct("5410", "Repairs & Maintenance (Plant)", "expense"),
+    ],
+  },
+  {
+    id: "ecommerce",
+    name: "E-commerce / D2C",
+    accounts: [
+      ...DEFAULT_ACCOUNTS,
+      acct("1210", "Stock with Marketplace Warehouses", "asset"),
+      acct("4010", "Marketplace Sales (Amazon/Flipkart)", "income"),
+      acct("4020", "Own Website Sales", "income"),
+      acct("5010", "Shipping & Fulfilment", "expense"),
+      acct("5410", "Marketplace Commission & Fees", "expense"),
+      acct("5420", "Returns & Refunds Cost", "expense"),
+    ],
+  },
+];
+
 export function accountLabel(accounts: Account[], id: string): string {
   const a = accounts.find((x) => x.id === id);
   return a ? `${a.code} · ${a.name}` : "(deleted account)";

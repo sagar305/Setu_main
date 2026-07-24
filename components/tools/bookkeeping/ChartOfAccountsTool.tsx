@@ -16,6 +16,7 @@ import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
   ACCOUNT_TYPES,
   DEFAULT_ACCOUNTS,
+  INDUSTRY_TEMPLATES,
   type Account,
   type AccountType,
 } from "@/lib/bookkeeping";
@@ -38,6 +39,16 @@ export function ChartOfAccountsTool() {
   const [name, setName] = useState("");
   const [type, setType] = useState<AccountType>("asset");
   const [deleting, setDeleting] = useState<Account | null>(null);
+  const [templateId, setTemplateId] = useState("general");
+  const [confirmTemplate, setConfirmTemplate] = useState(false);
+
+  // Replace the whole chart with an industry template (confirmed first).
+  const applyTemplate = async () => {
+    const template = INDUSTRY_TEMPLATES.find((t) => t.id === templateId);
+    if (!template) return;
+    for (const account of accounts) await remove(account.id);
+    for (const account of template.accounts) await save(account);
+  };
 
   useEffect(() => {
     if (loading || seededRef.current || accounts.length > 0) return;
@@ -79,6 +90,22 @@ export function ChartOfAccountsTool() {
   return (
     <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
       <Card className="h-fit">
+        <h2 className="mb-4 text-lg font-bold text-ink">Start from a template</h2>
+        <div className="mb-6 space-y-3">
+          <Field label="Industry">
+            <Select value={templateId} onChange={(e) => setTemplateId(e.target.value)}>
+              {INDUSTRY_TEMPLATES.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.name} ({t.accounts.length} accounts)
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <SecondaryButton className="w-full" onClick={() => setConfirmTemplate(true)}>
+            Load this template
+          </SecondaryButton>
+        </div>
+
         <h2 className="mb-4 text-lg font-bold text-ink">Add account</h2>
         <div className="space-y-4">
           <Field label="Account code">
@@ -174,6 +201,18 @@ export function ChartOfAccountsTool() {
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
+      />
+
+      <ConfirmDialog
+        open={confirmTemplate}
+        title="Replace your chart of accounts?"
+        message={`Load the "${INDUSTRY_TEMPLATES.find((t) => t.id === templateId)?.name}" template? Your current accounts will be replaced. Journal entries keep their history but postings to removed accounts will show "(deleted account)".`}
+        confirmLabel="Load template"
+        onConfirm={async () => {
+          setConfirmTemplate(false);
+          await applyTemplate();
+        }}
+        onCancel={() => setConfirmTemplate(false)}
       />
     </div>
   );

@@ -81,7 +81,9 @@ export function BalanceSheetTool() {
     const equity = sumLines(state.equity);
     const totalLiabEquity = totalLiabilities + equity;
     const difference = totalAssets - totalLiabEquity;
+    const workingCapital = currentAssets - currentLiabilities;
     return {
+      workingCapital,
       currentAssets,
       fixedAssets,
       totalAssets,
@@ -206,6 +208,12 @@ export function BalanceSheetTool() {
           <Row label="Long-term liabilities" value={money(r.longTermLiabilities)} />
           <Row label="Total equity" value={money(r.equity)} />
           <Row label="Liabilities + equity" value={money(r.totalLiabEquity)} strong />
+          <div className="flex justify-between pt-1 text-muted">
+            <span>Working capital</span>
+            <span className={r.workingCapital >= 0 ? "font-semibold text-emerald-600" : "font-semibold text-red-600"}>
+              {money(r.workingCapital)}
+            </span>
+          </div>
         </div>
 
         <div
