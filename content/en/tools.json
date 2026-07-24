@@ -211,22 +211,23 @@
     },
     {
       "slug": "receipt-designer",
-      "name": "Receipt Designer",
+      "name": "Receipt Generator",
       "category": "workspace",
       "icon": "paintbrush",
-      "shortDescription": "Design your receipt template once — the Browser POS prints with it.",
+      "shortDescription": "Design a receipt, fill in a sale and print it — and the Browser POS prints with the same design.",
       "seo": {
-        "title": "Receipt Designer | Setu Technology",
-        "description": "Design thermal receipt templates reused across Setu tools.",
+        "title": "Receipt Generator | Setu Technology",
+        "description": "Design a thermal receipt, fill in a sale and print it — reuse the design across Setu tools.",
         "keywords": [
-          "receipt designer",
+          "receipt generator",
+          "receipt maker",
           "thermal receipt template"
         ]
       },
       "hero": {
-        "eyebrow": "Free Tool — Receipt Designer",
-        "headline": "Receipt Designer",
-        "subheadline": "Design once, print everywhere."
+        "eyebrow": "Free Tool — Receipt Generator",
+        "headline": "Receipt Generator",
+        "subheadline": "Design once, fill in a sale and print — everywhere."
       }
     },
     {

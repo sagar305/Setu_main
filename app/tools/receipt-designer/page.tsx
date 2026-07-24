@@ -3,21 +3,22 @@ import { ReceiptDesignerTool } from "@/components/tools/ReceiptDesigner/ReceiptD
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Receipt Designer | Thermal Receipt Templates | Setu Technology",
+  title: "Free Receipt Generator | Make & Print Receipts | Setu Technology",
   description:
-    "Design your shop's receipt — logo, colors, header, footer — and reuse it in the Setu Browser POS. 80mm/58mm thermal and A4. Free, offline, no signup.",
+    "Design your shop's receipt — logo, colors, header, footer — then fill in a sale and print a real receipt. Reuse the same design in the Setu Browser POS. 80mm/58mm thermal and A4. Free, offline, no signup.",
   keywords: [
-    "receipt designer",
+    "receipt generator",
+    "receipt maker",
     "thermal receipt template",
     "80mm receipt design",
-    "custom receipt maker",
+    "print receipt online",
     "POS receipt template",
   ],
   alternates: { canonical: "/tools/receipt-designer" },
   openGraph: {
-    title: "Free Receipt Designer — Design Once, Print Everywhere",
+    title: "Free Receipt Generator — Design, Fill & Print",
     description:
-      "Design a branded receipt template and reuse it across Setu tools. Offline, no signup.",
+      "Design a branded receipt, fill in a sale and print it — and reuse the design across Setu tools. Offline, no signup.",
     url: "/tools/receipt-designer",
     type: "website",
     images: [
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
         url: "/og/setu-og-image-1200x627.png",
         width: 1200,
         height: 627,
-        alt: "Setu Technology Receipt Designer",
+        alt: "Setu Technology Receipt Generator",
       },
     ],
   },
@@ -76,10 +77,10 @@ export default function ReceiptDesignerPage() {
             <span className="text-sm font-semibold text-indigo">Free Tool</span>
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Receipt Designer
+            Receipt Generator
           </h1>
           <p className="mt-4 text-xl text-muted">
-            Design your receipt once — the POS prints with it. No redesign, no copy.
+            Design your receipt, fill in a sale and print it — and the same design prints from the POS too.
           </p>
         </div>
       </section>

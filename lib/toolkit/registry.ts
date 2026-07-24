@@ -182,7 +182,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
   },
   {
     slug: "receipt-designer",
-    name: "Receipt Designer",
+    name: "Receipt Generator",
     category: "sales-billing",
     kind: "app",
     tier: "foundation",

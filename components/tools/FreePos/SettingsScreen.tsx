@@ -366,7 +366,7 @@ export function SettingsScreen() {
           </Field>
           <Field
             label="Receipt design"
-            hint="Templates from the Receipt Designer — design once, the POS prints with it"
+            hint="Templates from the Receipt Generator — design once, the POS prints with it"
           >
             <select
               value={templateId}
@@ -388,7 +388,7 @@ export function SettingsScreen() {
             >
               {templates.length === 0
                 ? "Design your first receipt template →"
-                : "Open the Receipt Designer →"}
+                : "Open the Receipt Generator →"}
             </a>
           </Field>
           <label className="flex items-center gap-2 sm:col-span-2">
