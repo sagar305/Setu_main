@@ -7,7 +7,7 @@ import { HeroVisual } from "@/components/home/HeroVisual";
 
 export function Hero({ hero }: { hero: HomeContent["hero"] }) {
   return (
-    <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-20 pt-16 md:grid-cols-2 md:items-center md:pt-24">
+    <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-12 pt-16 md:grid-cols-2 md:items-center md:pt-20">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}

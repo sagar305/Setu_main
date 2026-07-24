@@ -1,0 +1,146 @@
+{
+  "seo": {
+    "title": "Blog | Setu Technology",
+    "description": "Thought leadership and practical tips for restaurant and business operators across the globe, from Setu Technology.",
+    "keywords": [
+      "restaurant management tips",
+      "GST billing software",
+      "Setu Technology blog"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Blog",
+    "headline": "Practical thinking for business operators",
+    "subheadline": "Notes on running better operations, from the team building software for it."
+  },
+  "posts": [
+    {
+      "slug": "ai-in-sme-finance-2026-month-end-close",
+      "title": "AI in SME Finance in 2026: What It Actually Automates in Your Books (and What Still Needs a Human)",
+      "excerpt": "AI adoption in finance teams has more than doubled since 2024. Here's a grounded look at what it actually automates in month-end close, what the data says about ROI, and where a human still has to check the work.",
+      "date": "2026-07-24",
+      "category": "Business Finance",
+      "thumbnail": null
+    },
+    {
+      "slug": "outsourced-bookkeeping-vs-in-house-2026",
+      "title": "Outsourced Bookkeeping vs. In-House: The Real 2026 Cost Math (and the Lock-In Risk Nobody Talks About)",
+      "excerpt": "Everyone compares outsourced bookkeeping to in-house on price alone. Almost nobody asks what happens to your books if the platform you outsourced to disappears. Here's both sides of that math.",
+      "date": "2026-07-23",
+      "category": "Accounting",
+      "thumbnail": null
+    },
+    {
+      "slug": "restaurant-new-outlet-break-even-2026",
+      "title": "Break-Even Analysis for a New Restaurant Outlet in 2026: The Real Numbers Before You Sign a Lease",
+      "excerpt": "Opening a new outlet feels like a lease and a launch date. It's actually a break-even equation — and most owners sign the lease before they've run it.",
+      "date": "2026-07-21",
+      "category": "Operations",
+      "thumbnail": null
+    },
+    {
+      "slug": "service-charge-tip-pooling-ccpa-2026",
+      "title": "Service Charge Is Now Voluntary in India: How Restaurants Should Run Tip Pooling in 2026",
+      "excerpt": "Restaurants can no longer quietly add a 10% service charge and split it however they like. Here's how CCPA's 2026 crackdown changes tip pooling, and how to split a shrinking, unpredictable tip pool fairly across staff.",
+      "date": "2026-07-16",
+      "category": "Compliance",
+      "thumbnail": null
+    },
+    {
+      "slug": "restaurant-customer-retention-cac-aov-2026",
+      "title": "Restaurant Customer Retention in 2026: Why Chasing New Diners Is Quietly More Expensive Than Keeping the Ones You Have",
+      "excerpt": "Most restaurant owners can quote their aggregator ad spend from memory. Almost none can tell you what share of last month's covers were repeat customers. Here's the CAC vs AOV math that should change how you spend on customer acquisition in 2026.",
+      "date": "2026-07-14",
+      "category": "Operations",
+      "thumbnail": null
+    },
+    {
+      "slug": "menu-engineering-pos-data-2026",
+      "title": "Menu Engineering in 2026: Why 15-25% of Your Menu Is Quietly Losing Money (And Your POS Already Has the Data to Fix It)",
+      "excerpt": "Most restaurant owners can tell you their bestseller. Almost none can tell you which items are actually profitable. Here's how to use POS sales data to run real menu engineering in 2026 — and stop guessing at pricing.",
+      "date": "2026-07-09",
+      "category": "Menu Ops",
+      "thumbnail": null
+    },
+    {
+      "slug": "table-turnover-time-restaurants-2026",
+      "title": "Table Turnover Time in 2026: Why Slow Dine-In Service Is Quietly Capping Your Restaurant's Revenue",
+      "excerpt": "You can't add more tables to a full dining room. But you can turn the ones you have faster. Here's what's actually slowing down table turnover in 2026, and the fixes that don't require a bigger floor plan.",
+      "date": "2026-07-08",
+      "category": "Dine-In Ops",
+      "thumbnail": null
+    },
+    {
+      "slug": "zomato-swiggy-menu-pricing-2026",
+      "title": "Zomato & Swiggy Menu Pricing in 2026: Why the Same Price as Dine-In Is Quietly Eating Your Margin",
+      "excerpt": "Most restaurants copy their dine-in price straight onto Zomato and Swiggy. Here's why that quietly loses margin on every online order, and how to price each dish correctly in 2026.",
+      "date": "2026-07-07",
+      "category": "Aggregator Ops",
+      "thumbnail": null
+    },
+    {
+      "slug": "restaurant-inventory-wastage-margins-2026",
+      "title": "Restaurant Inventory Leakage in 2026: Why 8–12% of Your Food Purchases Are Disappearing (And How to Plug It)",
+      "excerpt": "Most restaurant owners can quote their food cost percentage from memory. Almost none can tell you how much of it disappears before it ever reaches a bill. Here's where that gap hides, and how to close it.",
+      "date": "2026-07-06",
+      "category": "Inventory Ops",
+      "thumbnail": null
+    },
+    {
+      "slug": "qsr-food-court-pos-2026-token-kitchen-display",
+      "title": "Food Courts and QSRs in 2026: Why Token Systems and Kitchen Displays Decide Who Wins the Lunch Rush",
+      "excerpt": "Table-service restaurants can absorb a slow ticket. A QSR or food court stall can't — the queue is standing right there. Here's what actually shortens the line in 2026, and how to evaluate a counter-service POS.",
+      "date": "2026-07-03",
+      "category": "QSR Ops",
+      "thumbnail": null
+    },
+    {
+      "slug": "why-restaurants-switching-pos-2026",
+      "title": "Why Indian Restaurants Are Switching POS Systems in 2026 — And What to Look For",
+      "excerpt": "Thousands of Indian restaurant owners are re-evaluating their POS in 2026 — not because their software broke, but because their business grew and their software didn't. Here's what to look for when switching.",
+      "date": "2026-06-30",
+      "category": "Operations",
+      "thumbnail": null
+    },
+    {
+      "slug": "why-we-build",
+      "title": "We're Not Building a POS. We're Building the Operating System for Every Business.",
+      "excerpt": "We started with restaurants, not because that's where we're stopping, but because that's where the problem was most visible. The story of why Setu builds the way it does.",
+      "date": "2026-06-25",
+      "category": "Company",
+      "thumbnail": null
+    },
+    {
+      "slug": "petpooja-alternatives-2026",
+      "title": "Petpooja Alternatives in 2026: What Restaurant Operators Are Switching To (And Why)",
+      "excerpt": "What's driving restaurants to leave Petpooja in 2026, what to look for in a replacement, and how the alternatives compare.",
+      "date": "2026-06-24",
+      "category": "Operations",
+      "thumbnail": null
+    },
+    {
+      "slug": "gst-billing-checklist-for-restaurants",
+      "title": "GST Billing Checklist for Restaurants in India (2026)",
+      "excerpt": "The most common GST billing mistakes restaurants make, and a complete checklist to fix them before your next audit.",
+      "date": "2026-06-23",
+      "category": "Compliance",
+      "thumbnail": null
+    },
+    {
+      "slug": "multi-outlet-visibility",
+      "title": "How to Know Which Restaurant Outlet Is Actually Making Money",
+      "excerpt": "Why most multi-outlet owners are flying blind on per-location performance, and what to track instead.",
+      "date": "2026-06-22",
+      "category": "Operations",
+      "thumbnail": null
+    },
+    {
+      "slug": "kitchen-order-accuracy",
+      "title": "Restaurant Kitchen Order Accuracy: Why Peak-Hour Errors Happen and How to Fix Them",
+      "excerpt": "A breakdown of where kitchen order accuracy actually breaks down during peak hours.",
+      "date": "2026-06-21",
+      "category": "Kitchen Ops",
+      "thumbnail": null
+    }
+  ]
+}

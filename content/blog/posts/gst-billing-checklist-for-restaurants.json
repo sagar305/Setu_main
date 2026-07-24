@@ -1,0 +1,38 @@
+{
+  "slug": "gst-billing-checklist-for-restaurants",
+  "title": "GST Billing Checklist for Restaurants in India (2026)",
+  "seoTitle": "GST Billing Checklist for Restaurants in India (2026)",
+  "metaDescription": "The most common GST billing mistakes restaurants make — and a complete checklist to fix them before your next audit. Written for Indian restaurant owners.",
+  "excerpt": "The most common GST billing mistakes restaurants make, and a complete checklist to fix them before your next audit.",
+  "keywords": [
+    "GST billing checklist for restaurants India"
+  ],
+  "date": "2026-06-23",
+  "category": "Compliance",
+  "thumbnail": null,
+  "connectedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What must a GST-compliant restaurant bill include?",
+      "answer": "Your GSTIN, an invoice number and date, the correct GST rate split into CGST and SGST, a clear taxable value, and the total — all generated consistently rather than hand-written."
+    },
+    {
+      "question": "What GST rate applies to restaurants in India?",
+      "answer": "Rates vary by restaurant type and whether input tax credit is claimed; the checklist is about applying the correct slab consistently on every bill and keeping the split auditable, not guessing per order."
+    },
+    {
+      "question": "How do I avoid GST billing mistakes at a restaurant?",
+      "answer": "Use billing that applies the right rate automatically, keep sequential invoice numbers, and reconcile UPI and cash tips and sales together — since payroll and GST records increasingly get cross-checked in audits."
+    }
+  ],
+  "bodyHtml": "<p>GST compliance is one of the most overlooked parts of running a restaurant — until an audit forces the issue. Most billing mistakes aren't intentional. They come from manual processes, outdated billing setups, and assumptions about tax rates that haven't been checked in months.</p><p>The good news: most GST errors are preventable. This checklist covers the most common gaps restaurant owners miss, so you can fix them before they become a problem.</p><h2>Why GST Billing Trips Up Restaurant Owners</h2><p>The restaurant industry has one of the more complex GST structures in India. Unlike a single-rate product business, restaurants deal with multiple rate categories that shift based on how the food is served — and getting that wrong on even a fraction of bills adds up fast.</p><p>There's also the reconciliation problem. Monthly GSTR filings require what was billed to match what was collected and what was paid. When billing is manual or split across systems, reconciling that data at month-end becomes a hunt through notebooks, registers and Excel files. That's where errors surface — and where auditors look first.</p><h2>The GST Billing Checklist</h2><p>Work through each item below. If you can't confidently answer yes to all of them, that's where your exposure is.</p><h3>1. Are you applying the correct tax rate by service type?</h3><p>This is the most common mistake. GST rates for restaurants differ based on:</p><ul><li><strong>Dine-in at AC restaurants:</strong> 5% GST (no input tax credit) for standalone restaurants</li><li><strong>Dine-in at non-AC restaurants:</strong> 5% GST</li><li><strong>Hotel restaurants (room tariff above ₹7,500):</strong> 18% GST with ITC</li><li><strong>Takeaway / parcel orders:</strong> 5% GST</li><li><strong>Packaged food items:</strong> Separate HSN-based rate depending on the item</li></ul><p>If your billing system applies a single flat rate across everything, you're likely billing incorrectly on a portion of every order.</p><h3>2. Are GSTIN details printed correctly on every B2B invoice?</h3><p>When a business customer needs to claim input tax credit on a meal — a corporate lunch, a catering order — they need a tax invoice with your GSTIN and their GSTIN correctly printed. Missing or incorrect GSTIN details on B2B bills means your customer can't claim ITC, which can damage the relationship and lead to disputes.</p><p>Check: does your billing system auto-populate verified GSTIN details, or does staff enter them manually?</p><h3>3. Are HSN/SAC codes on your invoices?</h3><p>From April 2021, businesses with annual turnover above ₹5 crore are required to mention 6-digit HSN codes on invoices. Restaurants typically use SAC code <strong>996331</strong> for dine-in restaurant services and SAC code <strong>996332</strong> for takeaway.</p><p>If your invoices are missing these, update your billing template.</p><h3>4. Is your monthly billing output matching your GSTR-1 filings?</h3><p>Your GSTR-1 (outward supply return) should match the total taxable value and GST collected from your billing system exactly. If you're doing this reconciliation manually at month-end, even small discrepancies — a voided bill that wasn't accounted for, a wrong rate applied — compound across hundreds of transactions.</p><p>A billing system that generates a GSTR-1 ready report as you go means no surprises at filing time.</p><h3>5. Are you tracking reverse charge mechanism (RCM) correctly?</h3><p>If you purchase from unregistered suppliers — a local vegetable vendor, a freelance delivery person — you may be liable to pay GST under the reverse charge mechanism. Many restaurant owners are unaware of this or track it loosely.</p><p>Check: do you have a list of your suppliers and their GST registration status? Are RCM liabilities being recorded?</p><h3>6. Are cancelled or modified bills handled correctly?</h3><p>Every voided bill, refund or discount should be accounted for with a proper credit note if GST was collected. Unaccounted cancellations show up as discrepancies between your billing total and your GSTR filings.</p><p>Check: does your billing system generate credit notes automatically, or are cancellations handled informally?</p><h3>7. Are you maintaining digital records for at least 6 years?</h3><p>The GST Act requires businesses to maintain records of all invoices, returns and financial statements for a minimum of 6 years from the last date of filing the annual return. Paper registers and notebook-based billing don't satisfy this cleanly.</p><h2>Common Mistakes to Avoid Before Your Next Audit</h2><ul><li><strong>Mixing dine-in and takeaway rates</strong> — applying 5% across all orders is technically correct, but if you're in a hotel or have an AC restaurant above the threshold, this becomes non-compliance.</li><li><strong>No invoice number continuity</strong> — invoices should be numbered sequentially with no gaps. Missing numbers prompt scrutiny.</li><li><strong>Not filing nil returns</strong> — if you had a month with zero sales or were closed, you still need to file. Missed nil filings attract late fees.</li><li><strong>Manual discount tracking</strong> — discounts that are applied post-billing without a proper credit note create mismatches in your output tax figures.</li></ul><h2>How Billing Software Removes the GST Guesswork</h2><p>The simplest fix for most of these problems is a billing system that handles tax logic automatically — so the right rates are applied at the point of billing, invoices are generated with the correct format, and month-end reports are already in the shape GSTR-1 expects.</p><p>Setu POS has a built-in tax engine designed specifically for Indian restaurants. GST rates are configured once for each menu category and applied automatically on every bill — dine-in, takeaway, or parcel — so you're not relying on staff to remember the rules during a Friday rush.</p><p><a href=\"/products/restaurant-pos\">See how Setu POS handles GST billing →</a></p>"
+}

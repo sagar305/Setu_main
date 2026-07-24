@@ -9,6 +9,13 @@
     "headline": "Let's talk about your business",
     "subheadline": "Questions about Setu Dine, partnership enquiries, or telling us what you need next — we read every message."
   },
+  "variants": {
+    "consultancy": {
+      "eyebrow": "Consultancy",
+      "headline": "Let's talk about your books",
+      "subheadline": "Questions about outsourced accounting, bookkeeping or payroll — or working out the right cadence and setup for your business. We read every message."
+    }
+  },
   "form": {
     "fields": [
       { "name": "name", "label": "Name", "type": "text", "required": true },

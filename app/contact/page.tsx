@@ -37,14 +37,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+type ContactVariant = { eyebrow: string; headline: string; subheadline: string };
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ topic?: string }>;
+}) {
+  const { topic } = await searchParams;
+  const variants: Record<string, ContactVariant> = content.variants ?? {};
+  const hero = (topic && variants[topic]) || content.hero;
+
   return (
     <>
-      <PageHero
-        eyebrow={content.hero.eyebrow}
-        headline={content.hero.headline}
-        subheadline={content.hero.subheadline}
-      />
+      <PageHero eyebrow={hero.eyebrow} headline={hero.headline} subheadline={hero.subheadline} />
 
       <section className="mx-auto max-w-2xl px-6 py-12">
         <ContactForm form={content.form} />
