@@ -101,41 +101,6 @@
       }
     ]
   },
-  "whySetu": {
-    "headline": "Why operators in India and beyond choose Setu",
-    "subtext": "Built for global businesses, not retrofitted from somewhere else.",
-    "items": [
-      {
-        "heading": "Built for global businesses",
-        "icon": "map-pin",
-        "body": "Not a Western product retrofitted. Built from the ground up for local tax rules, local payment methods, multi-currency and local languages."
-      },
-      {
-        "heading": "One system, every outlet",
-        "icon": "layers",
-        "body": "Whether you have 1 location or 20, Setu scales without adding complexity."
-      },
-      {
-        "heading": "Owned by operators",
-        "icon": "wrench",
-        "body": "Every feature in Setu exists because a real business owner needed it."
-      },
-      {
-        "heading": "Support that answers",
-        "icon": "headset",
-        "body": "Real humans, fast responses. Not a ticket system that replies in 5 days."
-      }
-    ]
-  },
-  "socialProof": {
-    "headline": "Built for how your business actually runs",
-    "stats": [
-      { "value": "Tax-ready", "label": "Compliant billing, out of the box" },
-      { "value": "Multi-outlet", "label": "One dashboard, every location" },
-      { "value": "Global", "label": "Markets we build for" },
-      { "value": "Real humans", "label": "Support, not ticket queues" }
-    ]
-  },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",

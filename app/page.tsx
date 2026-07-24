@@ -3,8 +3,6 @@ import { getHomeContent } from "@/lib/content";
 import { Hero } from "@/components/home/Hero";
 import { ShowcaseGrid } from "@/components/home/ShowcaseGrid";
 import { Services } from "@/components/home/Services";
-import { WhySetu } from "@/components/home/WhySetu";
-import { SocialProof } from "@/components/home/SocialProof";
 import { LatestBlogs } from "@/components/home/LatestBlogs";
 import { CtaBanner } from "@/components/CtaBanner";
 
@@ -46,11 +44,9 @@ export default function HomePage() {
   return (
     <>
       <Hero hero={content.hero} />
-      <ShowcaseGrid id="tools" section={content.tools} className="bg-white" />
-      <ShowcaseGrid id="calculators" section={content.calculators} className="bg-cream" />
+      <ShowcaseGrid id="tools" section={content.tools} className="bg-cream" />
+      <ShowcaseGrid id="calculators" section={content.calculators} className="bg-white" />
       <Services services={content.services} />
-      <WhySetu whySetu={content.whySetu} />
-      <SocialProof socialProof={content.socialProof} />
       <LatestBlogs />
       <CtaBanner {...content.ctaBanner} />
     </>

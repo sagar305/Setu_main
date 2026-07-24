@@ -76,6 +76,6 @@
   "cta": {
     "headline": "Ready to hand off your books?",
     "subtext": "Tell us about your business and we'll put together an accounting and bookkeeping plan that fits your needs.",
-    "cta": { "label": "Talk to us", "href": "/contact" }
+    "cta": { "label": "Talk to us", "href": "/contact?topic=consultancy" }
   }
 }

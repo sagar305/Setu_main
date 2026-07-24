@@ -29,14 +29,14 @@ export function ShowcaseGrid({
 }) {
   return (
     <section id={id} className={className}>
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-6xl px-6 py-16">
         <FadeIn className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-warm">{section.eyebrow}</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink">{section.headline}</h2>
           <p className="mt-4 text-lg text-muted">{section.subtext}</p>
         </FadeIn>
 
-        <FadeInStagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <FadeInStagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {section.cards.map((card) => {
             const isMore = card.variant === "more";
             return (
