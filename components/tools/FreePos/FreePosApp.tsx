@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BarChart3,
   LayoutDashboard,
+  Lock,
   Maximize2,
   Minimize2,
   Package,
@@ -15,6 +16,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PosProvider, usePos } from "@/lib/pos/store";
+import { LockScreen } from "./LockScreen";
 import type { NavigateFn, ScreenId } from "./nav";
 import { WelcomeScreen } from "./WelcomeScreen";
 import { SetupScreen } from "./SetupScreen";
@@ -175,10 +177,48 @@ function PosShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
-  const { business } = usePos();
+  const { business, settings } = usePos();
   const [screen, setScreen] = useState<ScreenId>("dashboard");
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
   const [offline, setOffline] = useState(false);
+
+  // Counter lock. When a PIN is set the POS starts locked, so opening the tab
+  // asks for it; it can also be locked by hand or after an idle timeout.
+  const hasPin = Boolean(settings.pinHash && settings.pinSalt);
+  const [locked, setLocked] = useState(false);
+  const unlockedOnceRef = useRef(false);
+
+  // Lock as soon as we learn a PIN exists (settings arrive async on load).
+  useEffect(() => {
+    if (hasPin && !unlockedOnceRef.current) setLocked(true);
+    if (!hasPin) setLocked(false);
+  }, [hasPin]);
+
+  const lockNow = () => {
+    if (hasPin) setLocked(true);
+  };
+
+  // Idle auto-lock. Any real interaction resets the timer.
+  const autoLockMinutes = settings.autoLockMinutes ?? 0;
+  useEffect(() => {
+    if (!hasPin || locked || autoLockMinutes <= 0) return;
+    let timer = window.setTimeout(() => setLocked(true), autoLockMinutes * 60_000);
+    const reset = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => setLocked(true), autoLockMinutes * 60_000);
+    };
+    const events: (keyof DocumentEventMap)[] = [
+      "pointerdown",
+      "keydown",
+      "wheel",
+      "touchstart",
+    ];
+    events.forEach((e) => document.addEventListener(e, reset, { passive: true }));
+    return () => {
+      window.clearTimeout(timer);
+      events.forEach((e) => document.removeEventListener(e, reset));
+    };
+  }, [hasPin, locked, autoLockMinutes]);
 
   useEffect(() => {
     setOffline(!navigator.onLine);
@@ -216,6 +256,17 @@ function PosShell({
         </div>
         <div className="flex items-center gap-2">
           <GlobalSearch onNavigate={navigate} />
+          {hasPin && (
+            <button
+              type="button"
+              onClick={lockNow}
+              aria-label="Lock the counter"
+              title="Lock the counter"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
+            >
+              <Lock className="h-4 w-4" />
+            </button>
+          )}
           <button
             type="button"
             onClick={onToggleFullscreen}
@@ -271,9 +322,21 @@ function PosShell({
           <ReportsScreen />
         </div>
         <div className={screen === "settings" ? "" : "hidden"}>
-          <SettingsScreen />
+          <SettingsScreen onLockNow={lockNow} />
         </div>
       </div>
+
+      {locked && (
+        <LockScreen
+          businessName={business?.name ?? ""}
+          pinHash={settings.pinHash ?? ""}
+          pinSalt={settings.pinSalt ?? ""}
+          onUnlock={() => {
+            unlockedOnceRef.current = true;
+            setLocked(false);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,11 +1,36 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Copy, Download, Plus, RefreshCw, Sheet, Trash2, Upload } from "lucide-react";
+import {
+  Copy,
+  Download,
+  ExternalLink,
+  Lock,
+  Plus,
+  RefreshCw,
+  Sheet,
+  Trash2,
+  Unlock,
+  Upload,
+} from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
-import { CURRENCIES, formatInvoiceNumber, type ReceiptPaperSize } from "@/lib/pos/types";
+import {
+  CURRENCIES,
+  formatInvoiceNumber,
+  type PosSettings,
+  type ReceiptPaperSize,
+} from "@/lib/pos/types";
+import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
+import {
+  PIN_MAX_LENGTH,
+  PIN_MIN_LENGTH,
+  generateSalt,
+  hashPin,
+  isValidPinFormat,
+  verifyPin,
+} from "@/lib/pos/pin";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import {
@@ -40,7 +65,7 @@ function SavedFlash({ show }: { show: boolean }) {
   return <span className="text-sm font-semibold text-emerald-600">Saved ✓</span>;
 }
 
-export function SettingsScreen() {
+export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   const {
     business,
     settings,
@@ -597,6 +622,31 @@ export function SettingsScreen() {
       </Section>
 
       <Section
+        title="Connected tools"
+        description="Every tool here shares this POS's data — switch one on and it already knows your business, customers, products and sales when you open it. Some also unlock features inside the POS."
+      >
+        <ConnectedToolsPanel
+          enabled={settings.connectedTools ?? []}
+          onToggle={(slug, on) => {
+            const current = settings.connectedTools ?? [];
+            const next = on ? [...current, slug] : current.filter((s) => s !== slug);
+            void updateSettings({ connectedTools: next });
+          }}
+        />
+      </Section>
+
+      <Section
+        title="Counter lock"
+        description="Set a PIN to protect the till. The POS asks for it when it opens and whenever the screen is locked — nothing on screen responds until the right PIN is entered."
+      >
+        <CounterLockPanel
+          settings={settings}
+          onSave={(updates) => updateSettings(updates)}
+          onLockNow={onLockNow}
+        />
+      </Section>
+
+      <Section
         title="Backup & restore"
         description="Your data lives only in this browser. Export a backup regularly and keep it somewhere safe."
       >
@@ -682,6 +732,255 @@ export function SettingsScreen() {
         }}
         onCancel={() => setResetOpen(false)}
       />
+    </div>
+  );
+}
+
+/**
+ * The catalog of tools that can attach to POS data. Each row explains what
+ * data flows in, and flags the ones that also unlock a POS feature — so an
+ * owner can see what's available without leaving Settings.
+ */
+function ConnectedToolsPanel({
+  enabled,
+  onToggle,
+}: {
+  enabled: string[];
+  onToggle: (slug: string, on: boolean) => void;
+}) {
+  return (
+    <div className="space-y-6">
+      {POS_TOOL_CATEGORIES.map((category) => {
+        const tools = POS_TOOLS.filter((t) => t.category === category);
+        if (tools.length === 0) return null;
+        return (
+          <div key={category}>
+            <h4 className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">{category}</h4>
+            <div className="space-y-2">
+              {tools.map((tool) => {
+                const on = enabled.includes(tool.slug);
+                return (
+                  <div
+                    key={tool.slug}
+                    className={`rounded-xl border p-3 transition ${
+                      on ? "border-indigo/40 bg-indigo/5" : "border-muted-line/30 bg-white"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-sm font-bold text-ink">{tool.name}</p>
+                          {tool.unlocks && (
+                            <span className="rounded-full bg-saffron/20 px-2 py-0.5 text-[11px] font-semibold text-ink">
+                              Unlocks a POS feature
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-0.5 text-sm text-muted">{tool.description}</p>
+                        <p className="mt-1 text-xs text-muted/80">
+                          <span className="font-semibold">Uses: </span>
+                          {tool.usesPosData}
+                        </p>
+                        {tool.unlocks && (
+                          <p className="mt-1 text-xs font-medium text-indigo">{tool.unlocks}</p>
+                        )}
+                        {on && (
+                          <a
+                            href={tool.route}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
+                          >
+                            Open {tool.name}
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                      <label className="flex shrink-0 cursor-pointer items-center gap-2">
+                        <span className="text-xs font-semibold text-muted">{on ? "On" : "Off"}</span>
+                        <input
+                          type="checkbox"
+                          checked={on}
+                          onChange={(event) => onToggle(tool.slug, event.target.checked)}
+                          className="h-4 w-4 accent-indigo"
+                          aria-label={`${on ? "Disable" : "Enable"} ${tool.name}`}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** PIN setup + auto-lock timing for the counter lock screen. */
+function CounterLockPanel({
+  settings,
+  onSave,
+  onLockNow,
+}: {
+  settings: PosSettings;
+  onSave: (updates: Partial<Omit<PosSettings, "id">>) => Promise<void>;
+  onLockNow?: () => void;
+}) {
+  const hasPin = Boolean(settings.pinHash);
+  const [pin, setPin] = useState("");
+  const [confirmPin, setConfirmPin] = useState("");
+  const [currentPin, setCurrentPin] = useState("");
+  const [error, setError] = useState("");
+  const [saved, setSaved] = useState(false);
+
+  const flash = () => {
+    setSaved(true);
+    window.setTimeout(() => setSaved(false), 2000);
+  };
+
+  const savePin = async () => {
+    setError("");
+    if (hasPin) {
+      const ok = await verifyPin(currentPin, settings.pinSalt ?? "", settings.pinHash ?? "");
+      if (!ok) {
+        setError("Current PIN is incorrect.");
+        return;
+      }
+    }
+    if (!isValidPinFormat(pin)) {
+      setError(`PIN must be ${PIN_MIN_LENGTH}–${PIN_MAX_LENGTH} digits.`);
+      return;
+    }
+    if (pin !== confirmPin) {
+      setError("The two PINs don't match.");
+      return;
+    }
+    const salt = generateSalt();
+    await onSave({ pinHash: await hashPin(pin, salt), pinSalt: salt });
+    setPin("");
+    setConfirmPin("");
+    setCurrentPin("");
+    flash();
+  };
+
+  const removePin = async () => {
+    setError("");
+    const ok = await verifyPin(currentPin, settings.pinSalt ?? "", settings.pinHash ?? "");
+    if (!ok) {
+      setError("Enter your current PIN to remove it.");
+      return;
+    }
+    await onSave({ pinHash: "", pinSalt: "", autoLockMinutes: 0 });
+    setCurrentPin("");
+    setPin("");
+    setConfirmPin("");
+    flash();
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <span
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+            hasPin ? "bg-emerald-100 text-emerald-700" : "bg-cream text-muted"
+          }`}
+        >
+          {hasPin ? <Lock className="h-3.5 w-3.5" /> : <Unlock className="h-3.5 w-3.5" />}
+          {hasPin ? "PIN is set" : "No PIN set"}
+        </span>
+        {hasPin && onLockNow && (
+          <button type="button" onClick={onLockNow} className={secondaryBtnClass}>
+            <Lock className="h-4 w-4" />
+            Lock screen now
+          </button>
+        )}
+        <SavedFlash show={saved} />
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        {hasPin && (
+          <Field label="Current PIN">
+            <input
+              type="password"
+              inputMode="numeric"
+              autoComplete="off"
+              value={currentPin}
+              onChange={(event) => setCurrentPin(event.target.value.replace(/\D/g, ""))}
+              className={inputClass}
+              placeholder="••••"
+            />
+          </Field>
+        )}
+        <Field label={hasPin ? "New PIN" : "PIN"} hint={`${PIN_MIN_LENGTH}–${PIN_MAX_LENGTH} digits`}>
+          <input
+            type="password"
+            inputMode="numeric"
+            autoComplete="new-password"
+            value={pin}
+            onChange={(event) => setPin(event.target.value.replace(/\D/g, ""))}
+            className={inputClass}
+            placeholder="••••"
+          />
+        </Field>
+        <Field label="Confirm PIN">
+          <input
+            type="password"
+            inputMode="numeric"
+            autoComplete="new-password"
+            value={confirmPin}
+            onChange={(event) => setConfirmPin(event.target.value.replace(/\D/g, ""))}
+            className={inputClass}
+            placeholder="••••"
+          />
+        </Field>
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        <button type="button" onClick={() => void savePin()} className={primaryBtnClass}>
+          {hasPin ? "Change PIN" : "Set PIN"}
+        </button>
+        {hasPin && (
+          <button type="button" onClick={() => void removePin()} className={dangerBtnClass}>
+            Remove PIN
+          </button>
+        )}
+      </div>
+
+      {error && (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      )}
+
+      <div className="max-w-xs border-t border-muted-line/20 pt-4">
+        <Field
+          label="Auto-lock when idle"
+          hint={hasPin ? undefined : "Set a PIN first to use auto-lock."}
+        >
+          <select
+            value={settings.autoLockMinutes ?? 0}
+            disabled={!hasPin}
+            onChange={(event) => {
+              void onSave({ autoLockMinutes: Number(event.target.value) });
+              flash();
+            }}
+            className={inputClass}
+          >
+            <option value={0}>Never</option>
+            <option value={1}>After 1 minute</option>
+            <option value={5}>After 5 minutes</option>
+            <option value={15}>After 15 minutes</option>
+            <option value={30}>After 30 minutes</option>
+          </select>
+        </Field>
+      </div>
+
+      <p className="text-xs text-muted">
+        The PIN is stored hashed in this browser and never leaves your device. It protects the
+        counter from casual access — it is not encryption, so keep taking backups.
+      </p>
     </div>
   );
 }

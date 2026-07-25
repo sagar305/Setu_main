@@ -117,11 +117,24 @@ export type PosSettings = {
   receiptFooter: string;
   showBusinessInfoOnReceipt: boolean;
   receiptPaperSize: ReceiptPaperSize;
-  /** Saved Receipt Designer template to print with; "" = built-in default. */
+  /** Saved Receipt Generator template to print with; "" = built-in default. */
   receiptTemplateId?: string;
   lastBackupAt: string | null;
   /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
   sheetSyncUrl: string;
+  /**
+   * Slugs of the connected tools the user has switched on (lib/pos/posTools).
+   * Some of these also unlock POS features — e.g. "customer-ledger" is what
+   * puts the Credit (Udhaar) payment option on the billing screen.
+   * Undefined on records written before this feature existed.
+   */
+  connectedTools?: string[];
+  /** SHA-256 (salted) of the counter PIN; "" or undefined = no PIN set. */
+  pinHash?: string;
+  /** Random salt for the PIN hash. */
+  pinSalt?: string;
+  /** Lock the screen after this many idle minutes; 0 = never. */
+  autoLockMinutes?: number;
 };
 
 /** Which slices of the workspace can be marked dirty for Sheet sync. */
@@ -214,6 +227,12 @@ export const DEFAULT_SETTINGS: PosSettings = {
   receiptTemplateId: "",
   lastBackupAt: null,
   sheetSyncUrl: "",
+  // Customer Ledger is on by default so existing users keep the Credit
+  // (Udhaar) option they already had on the billing screen.
+  connectedTools: ["customer-ledger"],
+  pinHash: "",
+  pinSalt: "",
+  autoLockMinutes: 0,
 };
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
