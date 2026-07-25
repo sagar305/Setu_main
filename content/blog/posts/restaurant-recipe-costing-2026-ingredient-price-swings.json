@@ -1,0 +1,52 @@
+{
+  "slug": "restaurant-recipe-costing-2026-ingredient-price-swings",
+  "title": "Recipe Costing in 2026: Why a Dish You Costed Once Is Quietly Losing You Money Right Now",
+  "seoTitle": "Recipe Costing Calculator 2026: Why Ingredient Price Swings Break Your Food Cost %",
+  "metaDescription": "Tomato prices are up 31% year-on-year and edible oil is climbing too - but most restaurants costed their recipes once, months ago, and never touched the numbers again. Here's how to recost properly, and how often to actually do it.",
+  "excerpt": "Tomato prices are up 31% year-on-year and edible oil is climbing too - but most restaurants costed their recipes once, months ago, and never touched the numbers again. Here's how to fix that.",
+  "keywords": [
+    "recipe costing calculator",
+    "restaurant recipe costing India",
+    "food cost percentage calculator",
+    "how to cost a recipe restaurant",
+    "ingredient price increase restaurant margin",
+    "recipe cost card template",
+    "Setu Dine"
+  ],
+  "date": "2026-07-25",
+  "category": "Menu Ops",
+  "thumbnail": "/blog/thumbnails/restaurant-recipe-costing-2026-ingredient-price-swings.png",
+  "connectedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How often should restaurants recost their recipes?",
+      "answer": "High-volatility ingredients like tomatoes, onions, edible oil and LPG should be reviewed monthly or whenever prices move by more than 10–15%. More stable ingredients can usually be reviewed quarterly."
+    },
+    {
+      "question": "What is the formula for recipe costing?",
+      "answer": "Add the current cost of every ingredient used in the recipe, divide by the number of portions to get the cost per portion, then divide that figure by your target food cost percentage to calculate an appropriate selling price."
+    },
+    {
+      "question": "Why does food cost percentage increase even when menu prices stay the same?",
+      "answer": "Ingredient, cooking fuel and packaging costs change over time. If menu prices stay fixed while recipe costs increase, the food cost percentage rises and restaurant profit margins gradually shrink."
+    }
+  ],
+  "bodyHtml": "<p>Tomato prices in India climbed 31% year-on-year to &#8377;42/kg in June 2026, up from &#8377;32/kg a year earlier, according to CRISIL Intelligence's Roti Rice Rate report &mdash; with edible oil and LPG cylinder prices moving roughly 10% higher over the same period. That report tracks what a home kitchen pays for a plate of food. A restaurant kitchen buys the same tomatoes, the same edible oil, and cooks over the same LPG connections &mdash; just at a scale where a 31% swing on one ingredient can quietly move a dish's food cost percentage by several points without anyone touching the menu price.</p>\n\n<p>Most restaurants only discover that shift when someone finally re-runs the numbers &mdash; often months after the dish was first costed, if it was costed with real precision at all.</p>\n\n<h2>The problem with costing a recipe once and moving on</h2>\n\n<p>Recipe costing usually happens once: when a dish is added to the menu, or when a new outlet opens. The ingredient prices at that moment become \"the cost\" of the dish in everyone's head, and the menu price gets set against them. Then ingredient prices move &mdash; sometimes gradually, sometimes the way tomato has in 2026 &mdash; and the dish's actual food cost % quietly drifts away from the number the price was originally set against, while the menu still shows the old price.</p>\n\n<p>Here's what that drift looks like on paper. Say a tomato-based paneer curry uses 150g of tomato per portion. Costed back when tomato was &#8377;32/kg, that's roughly &#8377;4.80 of the total recipe cost. At June 2026's &#8377;42/kg, the same 150g now costs roughly &#8377;6.30 &mdash; a difference that looks trivial on a single plate. Multiply it across 40 portions a day, every day, across a menu where five or six dishes lean on a tomato-based gravy, and the \"trivial\" difference stops being trivial. And that's before accounting for the edible oil in the gravy and the LPG used to cook it, both up roughly 10% over the same stretch.</p>\n\n<h2>How to cost a recipe correctly, from scratch</h2>\n\n<p>A recipe cost is only as accurate as the inputs behind it. The formula is simple; the discipline is in how it's fed:</p>\n\n<ul>\n<li>List every ingredient in the recipe by the exact quantity used per portion &mdash; grams and millilitres, not \"a handful\" or \"some\"</li>\n<li>Price each ingredient at its current market cost, not whatever you happened to pay on your last purchase order</li>\n<li>Include everything the dish actually needs to reach the plate &mdash; cooking oil, spices, garnish, and packaging if it's going out for delivery</li>\n<li>Total ingredient cost &divide; number of portions the recipe yields = cost per portion</li>\n<li>Cost per portion &divide; target food cost % = the price that dish needs to sell at to hit that target</li>\n</ul>\n\n<h2>A worked example, done properly</h2>\n\n<p>Take a dal makhani portion, recosted at June 2026 wholesale prices, with a 30% target food cost:</p>\n\n<table><thead><tr><th>Ingredient</th><th>Quantity used</th><th>Cost</th></tr></thead><tbody><tr><td>Black lentils &amp; kidney beans</td><td>120g</td><td>&#8377;22</td></tr><tr><td>Butter &amp; cream</td><td>60g / 40ml</td><td>&#8377;28</td></tr><tr><td>Tomato (puree &amp; fresh)</td><td>100g</td><td>&#8377;4.20</td></tr><tr><td>Cooking oil, ghee</td><td>15ml</td><td>&#8377;6</td></tr><tr><td>Spices, garnish</td><td>&mdash;</td><td>&#8377;9</td></tr><tr><td><strong>Total cost per portion</strong></td><td></td><td><strong>&#8377;69.20</strong></td></tr></tbody></table>\n\n<p>At a 30% target food cost, that portion needs to sell at roughly &#8377;231 to hit target. If the menu was last priced when tomato, oil and LPG all sat lower, the dish may currently be listed anywhere from &#8377;10&ndash;20 under that &mdash; a gap that's easy to miss on one dish and expensive across a full month of covers.</p>\n\n<h2>How often you should actually be recosting</h2>\n\n<p>\"Once a year\" is the default for most restaurants, and it's not enough &mdash; not when a single ingredient category can move 31% inside twelve months. A more useful rule is to split ingredients by volatility:</p>\n\n<ul>\n<li><strong>High-volatility inputs</strong> &mdash; tomato, onion, edible oil, LPG, and any seasonal produce &mdash; deserve a price check monthly, or immediately after a >10&ndash;15% market move, since these are exactly the categories that move fastest and hit the most dishes at once</li>\n<li><strong>Stable inputs</strong> &mdash; packaged dry spices, staples with long shelf lives, branded packaging &mdash; can reasonably be reviewed quarterly</li>\n<li><strong>Any dish that leans heavily on one volatile ingredient</strong> (a tomato-based gravy, anything fried in a large quantity of oil) should be flagged for a check whenever that specific ingredient moves, regardless of the general schedule</li>\n</ul>\n\n<h2>What to do once recosting shows you're underwater</h2>\n\n<p>Finding the gap is only useful if it changes something. The usual options, roughly in order of how disruptive they are to the customer:</p>\n\n<ul>\n<li><strong>Absorb it short-term</strong> if the price spike looks temporary &mdash; tomato prices in India are seasonal and do come back down, and reprinting a menu for a two-month spike isn't always worth it</li>\n<li><strong>Adjust the recipe spec slightly</strong> &mdash; portion size, garnish quantity, or a cheaper cut without changing the dish's identity</li>\n<li><strong>Reprice the specific dish</strong> rather than the whole menu, when the ingredient driving the gap is concentrated in a handful of items</li>\n<li><strong>Substitute where it doesn't compromise the dish</strong> &mdash; switching a fresh-tomato base to a stable-priced tinned puree for high-volume prep, for instance</li>\n</ul>\n\n<p>The one option that doesn't work is doing nothing and hoping the gap closes itself. It usually doesn't &mdash; it just sits quietly inside your food cost % until someone finally runs the numbers again.</p>\n\n<h2>Making this a habit, not a one-time exercise</h2>\n\n<p>The hard part of recipe costing was never the arithmetic &mdash; it's remembering to redo it. A recipe costing calculator makes the math instant once you have current prices in front of you; what actually protects your margin is treating that recalculation as routine, especially for the handful of ingredients that move the most.</p>\n\n<p>If your online delivery pricing is set separately from your dine-in menu, it's worth checking that too &mdash; the same ingredient swings hit both, but the commission and packaging costs on delivery orders mean the gap shows up differently there.</p>\n\n<p><a href=\"/calculators/recipe-costing-calculator\">Recost a dish with Setu's free Recipe Costing Calculator &rarr;</a></p>\n<p><a href=\"/blog/aggregator-ops/zomato-swiggy-menu-pricing-2026\">See how the same cost swings affect your Zomato and Swiggy pricing &rarr;</a></p>\n<p><a href=\"/book-demo?product=Setu%20Dine\">See how Setu Dine keeps live ingredient and recipe costs in one place &rarr;</a></p>"
+}
