@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
+import { PREMIUM_QR_MENU_URL } from "@/lib/qrmenu";
 
 export const metadata: Metadata = {
   title: "Free QR Menu Generator for Restaurants | No Signup, No Hosting",
@@ -68,6 +69,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "A QR code holds about 2,900 characters, and we compress your menu to make the most of it. Typically that fits 60–100 items depending on how long your descriptions are. The capacity meter shows how much room is left, and for very large menus you can create separate QR codes for food and drinks.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I get a QR code that does not change when I update my menu?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes — that is what the premium QR menu tool is for. Your menu is stored online and the QR code holds only a short permanent link, so scanning it always shows your latest menu. Change a price, mark a dish sold out or swap in a seasonal menu and the printed QR code keeps working, so you never reprint your table tents. It also removes the size limit and adds photos, sold-out toggles and daily scan counts. The free tool on this page stores the whole menu inside the QR code itself, which is why a new QR is generated whenever the menu changes.",
       },
     },
     {
@@ -254,6 +263,43 @@ export default function QrMenuGeneratorPage() {
                 <span>Hotel room-service cards and banquet menus</span>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-ink">
+              Need a QR code that never changes?
+            </h2>
+            <p className="mb-4 text-muted">
+              Because this free tool stores your whole menu inside the QR code, a new code is
+              generated every time you edit the menu — and the menu has to fit in about 2,900
+              characters. If you would rather print a QR code once and never touch it again, the
+              premium QR menu keeps your menu online and puts only a short permanent link in the
+              code.
+            </p>
+            <ul className="mb-4 space-y-2 text-muted">
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>The same QR code stays valid after every price or dish change</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>No size limit — add as many categories and dishes as you need</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>Dish photos, sold-out toggles, and multiple menus you can switch between</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>See how many people opened your menu each day</span>
+              </li>
+            </ul>
+            <a
+              href={PREMIUM_QR_MENU_URL}
+              className="inline-block rounded-lg border border-indigo bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            >
+              Try the premium QR menu
+            </a>
           </div>
 
           <div>
