@@ -83,17 +83,6 @@ export const QR_CAPACITY_MAX = 2900;
 
 export const MENU_PATH = "/menu";
 
-/**
- * The premium QR menu tool, where the menu is stored server-side and the QR
- * encodes a permanent link instead of the menu itself — so the printed code
- * survives every edit and there is no size limit.
- *
- * TODO: needs input — the premium app's domain has not been decided yet. Set
- * NEXT_PUBLIC_PREMIUM_QR_MENU_URL once it is; the fallback is a placeholder.
- */
-export const PREMIUM_QR_MENU_URL =
-  process.env.NEXT_PUBLIC_PREMIUM_QR_MENU_URL || "https://menu.setutechnology.com/signup";
-
 export function createId(): string {
   return Math.random().toString(36).slice(2, 10);
 }

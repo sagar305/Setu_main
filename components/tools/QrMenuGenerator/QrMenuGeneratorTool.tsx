@@ -25,13 +25,13 @@ import {
   createEmptyMenu,
   createEmptyVariant,
   createSampleMenu,
-  PREMIUM_QR_MENU_URL,
   QR_CAPACITY_M,
   QR_CAPACITY_MAX,
   type DietTag,
   type QrMenuData,
   type QrVariant,
 } from "@/lib/qrmenu";
+import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
 import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
@@ -730,7 +730,7 @@ export function QrMenuGeneratorTool() {
                   working every time you change a price or a dish.
                 </p>
                 <a
-                  href={PREMIUM_QR_MENU_URL}
+                  href={QR_MENU_PRODUCT_PATH}
                   className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-indigo bg-indigo px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
@@ -818,7 +818,7 @@ export function QrMenuGeneratorTool() {
               {!overCapacity && capacityPercent > 80 && (
                 <p className="mt-1.5 text-xs text-amber-600">
                   Getting close to the limit — keep descriptions short, or{" "}
-                  <a href={PREMIUM_QR_MENU_URL} className="font-semibold underline">
+                  <a href={QR_MENU_PRODUCT_PATH} className="font-semibold underline">
                     switch to the premium tool
                   </a>{" "}
                   for an unlimited menu behind a QR code that never changes.

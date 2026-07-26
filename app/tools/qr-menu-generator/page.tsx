@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
-import { PREMIUM_QR_MENU_URL } from "@/lib/qrmenu";
+import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
 
 export const metadata: Metadata = {
   title: "Free QR Menu Generator for Restaurants | No Signup, No Hosting",
@@ -295,7 +295,7 @@ export default function QrMenuGeneratorPage() {
               </li>
             </ul>
             <a
-              href={PREMIUM_QR_MENU_URL}
+              href={QR_MENU_PRODUCT_PATH}
               className="inline-block rounded-lg border border-indigo bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
             >
               Try the premium QR menu
