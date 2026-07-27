@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "QR Menu — A QR Code That Never Changes | Setu Technology",
-    "description": "Print your QR code once. Change prices, mark dishes sold out or swap in a seasonal menu — the printed code keeps working. Dish photos, variations, and daily scan counts. From ₹49/month.",
+    "description": "Print your QR code once. Change prices, mark dishes sold out or swap in a seasonal menu — the printed code keeps working. Dish photos, variations, and daily scan counts. Free for your first year.",
     "keywords": [
       "QR menu",
       "digital menu for restaurants",
@@ -90,9 +90,10 @@
     }
   ],
   "pricing": {
-    "title": "Priced like a cup of chai",
-    "subtitle": "One restaurant, everything included. No per-scan fees, no setup cost, no commission on your orders.",
-    "note": "Prices shown in your region's currency. Annual billing works out to two months free.",
+    "badge": "Free for your first year",
+    "title": "Free for a year. Then priced like a cup of chai.",
+    "subtitle": "Every restaurant that signs up now gets a full year of premium at no cost — every feature, no card needed. These are the prices that take over afterwards.",
+    "note": "Prices shown in your region's currency, charged only after your free year ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
     "plans": [
       {
         "region": "India",
@@ -149,8 +150,12 @@
       "answer": "No, and that is deliberate. The link is what every printed QR code points to, so allowing it to change would silently break signage you have already paid to print. Everything else — your name, logo, colour, currency, dishes — can be changed freely."
     },
     {
-      "question": "What happens if I stop paying?",
-      "answer": "Your menu stops being served and your QR codes show a friendly message instead. Your data is kept, so resubscribing brings the same menu back on the same link."
+      "question": "Is it really free for a year?",
+      "answer": "Yes. Sign up now and premium costs nothing for twelve months — every feature included, no card required, and nothing charged when the year ends unless you choose to continue. We will email you well before that date."
+    },
+    {
+      "question": "What happens when the free year ends?",
+      "answer": "Your menu keeps being served, so printed QR codes carry on working. Editing pauses until you subscribe, and your data is kept exactly as it was, so continuing brings everything back on the same permanent link."
     }
   ]
 }

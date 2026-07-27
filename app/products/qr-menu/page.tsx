@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Check,
   PlayCircle,
+  Gift,
 } from "lucide-react";
 import { getQrMenuContent } from "@/lib/content";
 import {
@@ -193,10 +194,15 @@ export default function QrMenuProductPage() {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="mx-auto max-w-5xl px-6 py-16">
+      {/* scroll-mt keeps the heading clear of the sticky nav on a #pricing link */}
+      <section id="pricing" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-16">
         <FadeIn>
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-ink">{content.pricing.title}</h2>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-saffron/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-ink">
+              <Gift className="h-3.5 w-3.5" />
+              {content.pricing.badge}
+            </span>
+            <h2 className="mt-4 text-3xl font-bold text-ink">{content.pricing.title}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted">{content.pricing.subtitle}</p>
           </div>
         </FadeIn>
@@ -210,7 +216,16 @@ export default function QrMenuProductPage() {
                 </p>
 
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-ink">{plan.monthlyLabel}</span>
+                  <span className="text-4xl font-bold text-ink">Free</span>
+                  <span className="text-sm text-muted">for 12 months</span>
+                </div>
+
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-muted-warm">
+                  Then
+                </p>
+
+                <div className="mt-1 flex items-baseline gap-2">
+                  <span className="text-2xl font-bold text-ink">{plan.monthlyLabel}</span>
                   <span className="text-sm text-muted">/ month</span>
                 </div>
 
@@ -286,8 +301,9 @@ export default function QrMenuProductPage() {
           <div className="rounded-2xl border border-indigo/15 bg-white p-10 text-center shadow-sm">
             <h2 className="text-2xl font-bold text-ink">Print it once. Really.</h2>
             <p className="mx-auto mt-3 max-w-xl text-muted">
-              From {content.pricing.plans[0].monthlyLabel} a month, your table tents stop being
-              something you reprint every time a price moves.
+              Free for your first year, then {content.pricing.plans[0].monthlyLabel} a month.
+              Either way, your table tents stop being something you reprint every time a price
+              moves.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <a
