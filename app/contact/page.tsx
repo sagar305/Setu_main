@@ -37,6 +37,14 @@ export const metadata: Metadata = {
   },
 };
 
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: content.seo.title,
+  description: content.seo.description,
+  url: "https://setutechnology.com/contact",
+};
+
 type ContactVariant = { eyebrow: string; headline: string; subheadline: string };
 
 export default async function ContactPage({
@@ -50,6 +58,11 @@ export default async function ContactPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+      />
+
       <PageHero eyebrow={hero.eyebrow} headline={hero.headline} subheadline={hero.subheadline} />
 
       <section className="mx-auto max-w-2xl px-6 py-12">

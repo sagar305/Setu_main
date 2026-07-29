@@ -37,9 +37,27 @@ export const metadata: Metadata = {
   },
 };
 
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: content.seo.title,
+  description: content.seo.description,
+  url: "https://setutechnology.com/about",
+  mainEntity: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
+  },
+};
+
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}

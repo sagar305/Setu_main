@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/calculators/gratuity-calculator",
     "/calculators/online-order-commission-calculator",
     "/calculators/online-menu-price-calculator",
+    "/calculators/menu-engineering-calculator",
     "/calculators/recipe-costing-calculator",
     "/calculators/liquor-cost-calculator",
     "/calculators/tip-split-calculator",

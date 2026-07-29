@@ -39,6 +39,20 @@ export const metadata: Metadata = {
   },
 };
 
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Accounting, Bookkeeping & Payroll Services",
+  name: "Setu Technology Accounting & Bookkeeping Consultancy",
+  provider: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
+  },
+  areaServed: "Global",
+  description: content.seo.description,
+};
+
 function CheckItem({ children }: { children: React.ReactNode }) {
   return (
     <FadeInStaggerItem className="flex items-start gap-3">
@@ -53,6 +67,11 @@ function CheckItem({ children }: { children: React.ReactNode }) {
 export default function ConsultancyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}

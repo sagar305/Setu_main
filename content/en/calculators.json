@@ -284,7 +284,7 @@
       "shortDescription": "Work out the final price and savings for any discount or offer.",
       "seo": {
         "title": "Discount Calculator — Final Price & Savings | Setu Technology",
-        "description": "Free discount calculator. Enter the original price and discount percentage to instantly see the final price and amount saved.",
+        "description": "Calculate the discounted price and amount saved instantly. Enter the original price and discount percentage to see the final price and total savings in seconds.",
         "keywords": ["discount calculator", "percentage off calculator", "sale price calculator"]
       },
       "hero": {
@@ -634,7 +634,7 @@
       "shortDescription": "Find the price to upload on Zomato, Swiggy or any app so you still take home your target amount after commission and GST.",
       "seo": {
         "title": "Zomato Swiggy Menu Price Calculator | Setu Technology",
-        "description": "Free online menu price calculator for restaurants. Enter the amount you want to take home and find the listed price that covers commission, GST on commission, gateway fees and GST on the item.",
+        "description": "Free online menu price calculator for restaurants. Enter your target take-home amount and find the listed price that covers commission, GST and gateway fees.",
         "keywords": ["zomato menu price calculator", "swiggy price calculator", "online menu price after commission", "delivery app pricing calculator", "reverse commission calculator"]
       },
       "hero": {

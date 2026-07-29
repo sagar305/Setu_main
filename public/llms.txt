@@ -1,0 +1,25 @@
+# Setu Technology
+
+> Business operational software — restaurant POS (Setu Dine), QSR (Setu Queue),
+> retail (Setu Retail), clinic (Setu Clinic) — plus free tools/calculators and
+> outsourced accounting/bookkeeping/payroll consultancy.
+
+## Products
+
+- Setu Dine: https://setutechnology.com/products/restaurant-pos
+- Setu Queue: https://setutechnology.com/products/queue
+- Setu Retail: https://setutechnology.com/products/retail
+- Setu Clinic: https://setutechnology.com/products/clinic
+
+## Free Tools & Calculators
+
+https://setutechnology.com/tools
+https://setutechnology.com/calculators
+
+## Consultancy
+
+https://setutechnology.com/consultancy
+
+## Blog
+
+https://setutechnology.com/blog

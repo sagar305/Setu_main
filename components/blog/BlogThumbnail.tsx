@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ThumbnailPost = {
   title: string;
   category: string;
@@ -29,13 +31,16 @@ export function BlogThumbnail({
   className?: string;
 }) {
   if (post.thumbnail) {
-    // eslint-disable-next-line @next/next/no-img-element
+    // The thumbnails vary between 1.5:1 and 1.9:1, so `object-contain` keeps
+    // each one whole inside the card's fixed box and letterboxes the rest
+    // against the cream background instead of cropping the image.
     return (
-      <img
+      <Image
         src={post.thumbnail}
         alt={post.title}
-        loading="lazy"
-        className={`h-full w-full object-cover ${className}`}
+        fill
+        sizes="(max-width: 768px) 100vw, 400px"
+        className={`bg-cream object-contain ${className}`}
       />
     );
   }

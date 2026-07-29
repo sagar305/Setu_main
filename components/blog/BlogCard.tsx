@@ -16,7 +16,8 @@ export function BlogCard({ post }: { post: BlogPostSummary }) {
 
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-muted-line/20 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      <Link href={url} className="block aspect-[40/21] w-full overflow-hidden">
+      {/* `relative` positions the fill-mode <Image> inside BlogThumbnail. */}
+      <Link href={url} className="relative block aspect-[40/21] w-full overflow-hidden">
         <BlogThumbnail post={post} />
       </Link>
       <div className="flex flex-1 flex-col p-6">
