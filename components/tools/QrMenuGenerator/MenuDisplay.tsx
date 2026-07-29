@@ -1,5 +1,5 @@
 import { Phone, MapPin } from "lucide-react";
-import type { QrMenuData, DietTag } from "@/lib/qrmenu";
+import { hasVariant, type QrMenuData, type DietTag } from "@/lib/qrmenu";
 
 // FSSAI-style diet markers: green square + dot for veg, red square + triangle
 // for non-veg — instantly recognisable to Indian diners.
@@ -88,7 +88,9 @@ export function MenuDisplay({ menu }: { menu: QrMenuData }) {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-3">
                         <h3 className="font-semibold text-ink">{item.name}</h3>
-                        {item.price.trim() && (
+                        {/* Variants carry their own prices, so showing the
+                            single price alongside them would contradict it. */}
+                        {item.price.trim() && !hasVariant(item) && (
                           <span className="whitespace-nowrap font-semibold text-ink">
                             {/^[0-9]/.test(item.price.trim()) ? `₹${item.price.trim()}` : item.price.trim()}
                           </span>
@@ -98,6 +100,34 @@ export function MenuDisplay({ menu }: { menu: QrMenuData }) {
                         <p className="mt-1 text-sm leading-relaxed text-muted">
                           {item.description}
                         </p>
+                      )}
+                      {hasVariant(item) && (
+                        <div className="mt-2">
+                          {item.variant?.name.trim() && (
+                            <p className="text-xs font-bold uppercase tracking-wide text-muted">
+                              {item.variant.name}
+                            </p>
+                          )}
+                          <ul className="mt-1 space-y-1 border-l-2 border-muted-line/30 pl-2">
+                            {item.variant?.options
+                              .filter((option) => option.name.trim())
+                              .map((option, optionIndex) => (
+                                <li
+                                  key={`${option.name}-${optionIndex}`}
+                                  className="flex justify-between gap-3 text-sm"
+                                >
+                                  <span className="text-ink">{option.name}</span>
+                                  {option.price.trim() && (
+                                    <span className="whitespace-nowrap font-semibold text-ink">
+                                      {/^[0-9]/.test(option.price.trim())
+                                        ? `₹${option.price.trim()}`
+                                        : option.price.trim()}
+                                    </span>
+                                  )}
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
                       )}
                     </div>
                   </li>

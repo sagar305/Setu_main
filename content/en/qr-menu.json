@@ -1,0 +1,161 @@
+{
+  "seo": {
+    "title": "QR Menu — A QR Code That Never Changes | Setu Technology",
+    "description": "Print your QR code once. Change prices, mark dishes sold out or swap in a seasonal menu — the printed code keeps working. Dish photos, variations, and daily scan counts. Free for your first year.",
+    "keywords": [
+      "QR menu",
+      "digital menu for restaurants",
+      "permanent QR code menu",
+      "restaurant QR code menu India",
+      "contactless menu",
+      "QR menu with photos",
+      "menu management software"
+    ],
+    "ogTitle": "QR Menu — print once, change the menu forever",
+    "ogDescription": "Your menu lives online and the QR holds only a short permanent link, so a price change never means a reprint."
+  },
+  "hero": {
+    "eyebrow": "Premium",
+    "headline": "Print the QR once. Change the menu forever.",
+    "subheadline": "Your menu lives online and the QR code holds only a short permanent link. Change a price at 11pm and the table tents are already right — no reprinting, no stickers, no new codes."
+  },
+  "problem": {
+    "title": "Why most QR menus need reprinting",
+    "body": "Free QR menu tools pack your whole menu inside the QR image itself. It is a neat trick — no hosting, nothing to expire — but it means the code is the menu. Change one price and you get a different code, so every table tent, counter sticker and delivery bag has to be redone. It also caps you at roughly 2,900 characters, about 60–100 dishes.",
+    "resolution": "Setu QR Menu turns that around. The code points to a permanent link, and the menu behind it is yours to change whenever you like."
+  },
+  "features": [
+    {
+      "icon": "QrCode",
+      "title": "One permanent code",
+      "description": "Your link is fixed at signup and can never change. Print it on table tents, menus and packaging once and never think about it again."
+    },
+    {
+      "icon": "IndianRupee",
+      "title": "Change prices instantly",
+      "description": "Edit a price and it reaches the next diner who scans. No republish step, no waiting, no reprint."
+    },
+    {
+      "icon": "Ban",
+      "title": "Sold-out toggles",
+      "description": "Ran out of prawns? Flip a switch and the dish shows as sold out instead of disappointing someone at the table."
+    },
+    {
+      "icon": "Layers",
+      "title": "Sizes and variations",
+      "description": "Half or full, small or large, paneer or chicken — add as many priced options as a dish needs, with your own labels."
+    },
+    {
+      "icon": "ImageIcon",
+      "title": "Dish and category photos",
+      "description": "Add a photo to any dish and a banner to any section. Diners order more when they can see the food."
+    },
+    {
+      "icon": "Infinity",
+      "title": "No size limit",
+      "description": "The QR only carries a link, so your menu can be as long as you like. Hundreds of dishes are no problem."
+    },
+    {
+      "icon": "BarChart3",
+      "title": "Daily scan counts",
+      "description": "See how many people opened your menu each day, so you know whether the table tents are actually working."
+    },
+    {
+      "icon": "Files",
+      "title": "Multiple menus",
+      "description": "Keep lunch, dinner and seasonal menus side by side and switch which one is live — the same QR follows along."
+    },
+    {
+      "icon": "Palette",
+      "title": "Your brand",
+      "description": "Your logo, your colour, your currency. The menu looks like your restaurant, not like a template."
+    }
+  ],
+  "howItWorks": [
+    {
+      "title": "Create your account",
+      "description": "Sign up with your email and pick your permanent menu link, like /m/sharmas-kitchen. This is the only thing you can never change, so choose it once."
+    },
+    {
+      "title": "Build your menu",
+      "description": "Add categories and dishes, or import an Excel sheet. Already used our free tool? Paste its link and everything comes across, including your tagline, phone and brand colour."
+    },
+    {
+      "title": "Print the QR",
+      "description": "Download a print-ready QR and put it on tables, counters and delivery bags."
+    },
+    {
+      "title": "Change whatever, whenever",
+      "description": "Prices, dishes, photos, a whole seasonal menu. The printed code never needs to change again."
+    }
+  ],
+  "pricing": {
+    "badge": "Free for your first year",
+    "title": "Free for a year. Then priced like a cup of chai.",
+    "subtitle": "Every restaurant that signs up now gets a full year of premium at no cost — every feature, no card needed. These are the prices that take over afterwards.",
+    "note": "Prices shown in your region's currency, charged only after your free year ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
+    "plans": [
+      {
+        "region": "India",
+        "currency": "INR",
+        "symbol": "₹",
+        "monthly": "49",
+        "yearly": "499",
+        "monthlyLabel": "₹49",
+        "yearlyLabel": "₹499",
+        "saveLabel": "Save ₹89 a year"
+      },
+      {
+        "region": "Rest of the world",
+        "currency": "USD",
+        "symbol": "$",
+        "monthly": "0.99",
+        "yearly": "9.99",
+        "monthlyLabel": "$0.99",
+        "yearlyLabel": "$9.99",
+        "saveLabel": "Save $1.89 a year"
+      }
+    ],
+    "includes": [
+      "A permanent QR code",
+      "Unlimited dishes and categories",
+      "Dish photos and category banners",
+      "Sizes and variations",
+      "Sold-out toggles",
+      "Multiple menus",
+      "Daily scan analytics",
+      "Excel import and export",
+      "Your logo, colour and currency"
+    ]
+  },
+  "faq": [
+    {
+      "question": "What happens to my QR code when I change the menu?",
+      "answer": "Nothing — that is the whole point. The code carries a short permanent link, not the menu, so editing prices, adding dishes or switching to a different menu leaves it untouched. Print once and never reprint."
+    },
+    {
+      "question": "How is this different from the free QR menu generator?",
+      "answer": "The free tool stores your entire menu inside the QR image, so a new code is produced every time you edit, and the menu is capped at roughly 2,900 characters. Here the menu is stored online, so the code stays fixed, there is no size limit, and you get photos, variations, sold-out toggles, multiple menus and scan analytics."
+    },
+    {
+      "question": "Can I move my menu over from the free tool?",
+      "answer": "Yes. Paste the menu link from the free tool and every dish comes across, along with your tagline, phone number, address and brand colour. You can also import an Excel or CSV sheet."
+    },
+    {
+      "question": "Do my customers need an app?",
+      "answer": "No. Any phone camera opens the menu in the browser. The page is deliberately light so it loads fast on a weak connection."
+    },
+    {
+      "question": "Can I change my menu link later?",
+      "answer": "No, and that is deliberate. The link is what every printed QR code points to, so allowing it to change would silently break signage you have already paid to print. Everything else — your name, logo, colour, currency, dishes — can be changed freely."
+    },
+    {
+      "question": "Is it really free for a year?",
+      "answer": "Yes. Sign up now and premium costs nothing for twelve months — every feature included, no card required, and nothing charged when the year ends unless you choose to continue. We will email you well before that date."
+    },
+    {
+      "question": "What happens when the free year ends?",
+      "answer": "Your menu keeps being served, so printed QR codes carry on working. Editing pauses until you subscribe, and your data is kept exactly as it was, so continuing brings everything back on the same permanent link."
+    }
+  ]
+}

@@ -119,6 +119,9 @@ export function rowsToCategories(rows: Cell[][]): QrMenuCategory[] | null {
       price: cell(row, cols.price),
       description: cell(row, cols.description),
       tag: cols.tag >= 0 ? parseTag(row[cols.tag]) : "",
+      // The sheet format has no variant columns, and an import replaces items
+      // wholesale, so variants on the previous items are not carried over.
+      variant: null,
     });
   }
 
