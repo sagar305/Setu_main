@@ -31,16 +31,16 @@ export function BlogThumbnail({
   className?: string;
 }) {
   if (post.thumbnail) {
-    // The thumbnails vary between 1.5:1 and 1.9:1, so `object-contain` keeps
-    // each one whole inside the card's fixed box and letterboxes the rest
-    // against the cream background instead of cropping the image.
+    // `object-cover` so the image fills the card edge to edge with no
+    // letterboxing. The card box is 3:2 to match the native ratio of most
+    // thumbnails, so for those there is nothing left over to crop.
     return (
       <Image
         src={post.thumbnail}
         alt={post.title}
         fill
         sizes="(max-width: 768px) 100vw, 400px"
-        className={`bg-cream object-contain ${className}`}
+        className={`bg-cream object-cover ${className}`}
       />
     );
   }
