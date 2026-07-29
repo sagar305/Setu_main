@@ -20,6 +20,7 @@ import { getQrMenuContent } from "@/lib/content";
 import {
   QR_MENU_APP_ENABLED,
   QR_MENU_DEMO_URL,
+  QR_MENU_SIGNUP_IS_EXTERNAL,
   QR_MENU_SIGNUP_LABEL,
   QR_MENU_SIGNUP_URL,
 } from "@/lib/premiumLinks";
@@ -72,6 +73,34 @@ const ICONS: Record<string, ComponentType<{ className?: string }>> = {
   Palette,
 };
 
+/**
+ * The signup target is the app on another subdomain normally, but falls back to
+ * an in-site path when the app is switched off — so it needs a plain anchor in
+ * one case and a Next <Link> in the other.
+ */
+function SignupCta({ className }: { className: string }) {
+  const label = (
+    <>
+      {QR_MENU_SIGNUP_LABEL}
+      <ArrowRight className="h-4 w-4" />
+    </>
+  );
+
+  if (QR_MENU_SIGNUP_IS_EXTERNAL) {
+    return (
+      <a href={QR_MENU_SIGNUP_URL} className={className}>
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={QR_MENU_SIGNUP_URL} className={className}>
+      {label}
+    </Link>
+  );
+}
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -113,13 +142,7 @@ export default function QrMenuProductPage() {
               <PlayCircle className="h-4 w-4" />
               Try the live demo
             </a>
-            <Link
-              href={QR_MENU_SIGNUP_URL}
-              className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
-            >
-              {QR_MENU_SIGNUP_LABEL}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <SignupCta className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5" />
           </div>
           {!QR_MENU_APP_ENABLED && (
             <p className="mt-3 text-center text-xs text-muted">
@@ -256,6 +279,19 @@ export default function QrMenuProductPage() {
                 </li>
               ))}
             </ul>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <SignupCta className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700" />
+              <a
+                href={QR_MENU_DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
+              >
+                <PlayCircle className="h-4 w-4" />
+                Or try the demo first
+              </a>
+            </div>
+
             <p className="mt-6 text-xs text-muted">{content.pricing.note}</p>
           </div>
         </FadeIn>
@@ -315,13 +351,7 @@ export default function QrMenuProductPage() {
                 <PlayCircle className="h-4 w-4" />
                 Try the live demo
               </a>
-              <Link
-                href={QR_MENU_SIGNUP_URL}
-                className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
-              >
-                {QR_MENU_SIGNUP_LABEL}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <SignupCta className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5" />
             </div>
           </div>
         </FadeIn>
