@@ -1,0 +1,37 @@
+{
+  "slug": "bank-reconciliation-checklist-sme-2026",
+  "title": "Bank Reconciliation Checklist for Global SMEs in 2026: The Monthly Habit That Catches Fraud Before It Compounds",
+  "seoTitle": "Bank Reconciliation Checklist 2026: SME Fraud Prevention Guide",
+  "metaDescription": "US businesses lose an average of 5% of gross revenue to fraud every year, and small businesses get hit hardest. A proper bank reconciliation checklist \u2014 done monthly, by someone other than the person writing checks \u2014 is still the cheapest defense.",
+  "excerpt": "Bank reconciliation looks like busywork until the month it catches a forged check or a duplicate charge. Here's the checklist that actually protects an SME's cash position \u2014 and why the person doing it matters as much as the process.",
+  "keywords": [
+    "bank reconciliation checklist",
+    "bank reconciliation small business",
+    "outsourced bookkeeping",
+    "fraud prevention SME",
+    "monthly bank reconciliation",
+    "Setu Technology"
+  ],
+  "date": "2026-07-29",
+  "category": "Accounting",
+  "thumbnail": "/blog/thumbnails/bank-reconciliation-checklist-sme-2026.jpeg",
+  "connectedTools": [
+    { "type": "tool", "slug": "cash-book" },
+    { "type": "tool", "slug": "expense-tracker" }
+  ],
+  "faq": [
+    {
+      "question": "How often should a small business reconcile its bank account?",
+      "answer": "Monthly is the minimum \u2014 tied to your accounting close cycle. But if your transaction volume is high or you've had control issues before, weekly or even daily reconciliation is worth the extra time: businesses that reconcile weekly or daily catch discrepancies roughly 47% faster than those reconciling only at month-end."
+    },
+    {
+      "question": "Who should actually perform the bank reconciliation?",
+      "answer": "Not the same person who records transactions or writes checks. This is the single most important control in the whole process \u2014 if one person both handles the money and reconciles the account, fraud and honest errors alike can go undetected for months. At minimum, have a second person review the completed reconciliation before it's filed."
+    },
+    {
+      "question": "Isn't bank reconciliation just part of bookkeeping?",
+      "answer": "No \u2014 bookkeeping is recording transactions; reconciliation is the independent check that verifies those records actually match what the bank shows. A business can have perfectly organized books that are still wrong, because reconciliation is what catches the gap between what was recorded and what actually cleared."
+    }
+  ],
+  "bodyHtml": "<p>US businesses lose an average of 5% of gross revenue to fraud every year, according to the Association of Certified Fraud Examiners \u2014 and small businesses are hit with the highest frequency of incidents, not the lowest, because they're the ones least likely to have a second set of eyes on the books. Bank reconciliation is the cheapest control an SME has against that number, and it's also the one most likely to get skipped when things get busy.</p><h2>What Reconciliation Actually Checks</h2><p>Bank reconciliation compares your accounting records against your actual bank statement, line by line, to confirm the two agree. It starts with the bank's ending balance, adds deposits in transit and subtracts outstanding checks or payments, and arrives at an adjusted bank balance. Separately, it starts with your book balance, adds any income the bank has recorded that your books haven't, subtracts any charges you haven't recorded yet, and arrives at an adjusted book balance. If the two adjusted balances don't match, something in the books or the bank feed needs explaining \u2014 not filing away.</p><h2>The Checklist</h2><ul><li>Pull the current bank statement and your internal ledger for the same period.</li><li>Match every transaction on both sides \u2014 deposits, withdrawals, transfers, card charges.</li><li>List deposits in transit (recorded in your books, not yet cleared by the bank).</li><li>List outstanding checks or payments (issued but not yet cleared).</li><li>Record bank fees, interest, and any charges the bank applied that you hadn't logged yet.</li><li>Investigate every unmatched line individually \u2014 don't write off small discrepancies as rounding.</li><li>Confirm no unfamiliar payees, altered amounts, or unauthorized transfers appear anywhere in the period.</li><li>Have someone other than the preparer review and sign off before it's filed.</li></ul><h2>Why Who Does It Matters as Much as How Often</h2><p>Segregation of duties is the control that actually makes reconciliation work as fraud prevention, not just error-checking. If the same person receives payments, records them, and reconciles the account, there's no independent check left in the process \u2014 an altered check amount or an unfamiliar payee can sit unnoticed for months. For a small team where one person genuinely handles everything, the fix doesn't have to be a new hire: an outsourced reconciliation review, done by someone outside the day-to-day cash handling, restores the same independence.</p><h2>How Often Is Actually Often Enough</h2><p>Monthly, tied to your close cycle, is the accepted minimum. But frequency should scale with risk and volume: businesses reconciling weekly or daily catch discrepancies roughly 47% faster than those waiting for month-end, because small errors get caught before they compound into a pile of unexplained transactions. For most SMEs, weekly reconciliation on the operating account and monthly on lower-activity accounts is a reasonable middle ground \u2014 the point isn't perfection, it's not letting three months of drift build up before anyone looks.</p><h2>When It's Better Outsourced</h2><p>Reconciliation is exactly the kind of recurring, detail-heavy task that benefits from being handled by someone whose full attention is the books, not squeezed in between running the business. Setu Technology's <a href=\"/consultancy\">accounting and bookkeeping consultancy</a> handles monthly reconciliation as a core part of the service \u2014 across QuickBooks, Xero, Zoho, and several other platforms \u2014 alongside the bank/credit card reconciliation, categorization, and monthly P&amp;L that make the rest of your books trustworthy. Track daily cash movement yourself in the meantime with the free <a href=\"/tools/cash-book\">Cash Book</a> and <a href=\"/tools/expense-tracker\">Expense Tracker</a> tools.</p>"
+}
