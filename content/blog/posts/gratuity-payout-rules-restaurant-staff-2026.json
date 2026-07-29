@@ -1,0 +1,47 @@
+{
+  "slug": "gratuity-payout-rules-restaurant-staff-2026",
+  "title": "Gratuity Rules for Restaurant Staff in 2026: What Every Owner Must Pay (And How the 15/26 Formula Actually Works)",
+  "seoTitle": "Gratuity Calculator 2026: Restaurant Staff Payout Rules & Formula",
+  "metaDescription": "Cross 10 employees and the Payment of Gratuity Act applies for good — even if headcount later drops. Here's the 15/26 formula, the new 1-year rule for contract staff, and how restaurants get this wrong.",
+  "excerpt": "Restaurants churn staff faster than almost any industry — which is exactly why gratuity math trips owners up. Here's the real formula, the new fixed-term rule, and what a missed payment actually costs.",
+  "keywords": [
+    "gratuity calculator India",
+    "restaurant staff gratuity",
+    "payment of gratuity act 1972",
+    "gratuity formula 15 26",
+    "gratuity for restaurant employees",
+    "Setu Dine"
+  ],
+  "date": "2026-07-28",
+  "category": "Compliance",
+  "thumbnail": "/blog/thumbnails/gratuity-payout-rules-restaurant-staff-2026.jpeg",
+  "connectedTools": [
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Does gratuity apply if my restaurant has fewer than 10 employees?",
+      "answer": "The Payment of Gratuity Act, 1972 applies to any establishment that has had 10 or more employees at any point — and once you cross that threshold, the Act keeps applying even if headcount later drops below 10. Below 10 employees and you've never crossed it, gratuity isn't a statutory requirement, though many owners pay it voluntarily using a slightly different formula (a 30-day divisor instead of 26)."
+    },
+    {
+      "question": "What counts as “salary” for the gratuity calculation?",
+      "answer": "Only Basic Pay and Dearness Allowance (DA). Overtime, service charge, tips, bonuses, and HRA are excluded, even if they make up a large share of a restaurant employee's actual take-home pay."
+    },
+    {
+      "question": "Do seasonal or contract kitchen staff qualify for gratuity?",
+      "answer": "This changed recently. Under the Code on Social Security, 2020 (effective November 2025), fixed-term contract employees now qualify for pro-rata gratuity after just 1 year of service, instead of the 5 years required for permanent staff. For restaurants that lean on seasonal or contract kitchen and service staff, this is a real shift in who's owed what."
+    }
+  ],
+  "bodyHtml": "<p>Restaurants lose front-of-house and kitchen staff faster than almost any other industry — which is exactly why gratuity is the compliance item most owners get wrong. It isn't a bonus, and it isn't discretionary. Once an establishment has employed 10 or more people at any point, the Payment of Gratuity Act, 1972 applies to it permanently, even if headcount later drops back below 10. There's no opting out by shrinking the team.</p><p>Most owners find out how the math actually works the first time a five-year employee resigns — and by then, a wrong number isn't just an HR embarrassment. It's a legal entitlement the employee can contest.</p><h2>What the Act Actually Requires</h2><p>Gratuity becomes payable when an employee completes 5 years of continuous service (or 4 years and 240 days, under a separate provision) and then retires, resigns, or is terminated for reasons other than misconduct. It's also payable immediately on death or disablement, with the 5-year requirement waived entirely. Once it's due, the employer has 30 days to pay it — miss that window, and the unpaid amount accrues interest at 10% per year until it's settled.</p><h2>The 15/26 Formula Most Restaurants Get Wrong</h2><p>For establishments covered under the Act, the formula is:</p><p>Gratuity = (Last Drawn Basic + DA) × 15 × Years of Service ÷ 26</p><p>The ‘26’ represents working days in a month (a four-week month minus weekly offs), and the ‘15’ represents 15 days of pay for every completed year served. Two details trip owners up every time: only Basic + DA counts — not the tips, service charge, or overtime that often make up a big share of a restaurant employee's real pay — and any service beyond 6 months in the final year rounds up to a full year.</p><p>Take a floor manager with a Basic + DA of &#8377;25,000/month who resigns after 7 years and 8 months. Rounded up to 8 years: &#8377;25,000 × 15 × 8 ÷ 26 = &#8377;1,15,385. Get the rounding wrong — count it as 7 years because “it's not quite 8” — and the payout is short by over &#8377;14,000, on a single employee.</p><h2>The New Rule That Actually Changes Things for Restaurants</h2><p>Restaurants and QSR chains lean on contract and seasonal staff more than most industries — festival-season hires, banquet staff, delivery-linked roles. Under the Code on Social Security, 2020, which took effect in November 2025, fixed-term contract employees are now eligible for pro-rata gratuity after just 1 year of service, instead of the 5 years required for permanent staff. Hire someone on a 1-year banquet season contract, and they're entitled to gratuity when that contract ends — something most restaurant payroll processes still aren't set up to catch.</p><h2>What Getting It Wrong Actually Costs</h2><p>Beyond the 10% annual interest on late payment, a wrong gratuity number is one of the more common triggers for a labour dispute in the restaurant industry, precisely because staff turnover is high and the calculation touches every departing employee. A single miscounted year of service, or a payout calculated on gross salary instead of Basic + DA, is the kind of error that looks small on one payslip and expensive across a whole staff roster.</p><h2>Where This Fits Into Running the Floor</h2><p>Gratuity is a downstream number — it depends on getting Basic + DA and exact tenure right for every employee, which is a payroll data problem before it's a gratuity problem. Setu Dine's staff and shift records exist for exactly this reason: they're the source of truth for tenure and pay structure, so the number isn't reconstructed from memory when someone hands in notice. Run the actual math on our free <a href=\"/calculators/gratuity-calculator\">Gratuity Calculator</a>, and check take-home pay implications with the <a href=\"/calculators/take-home-salary-calculator\">Take-Home Salary Calculator</a>.</p>"
+}
