@@ -37,11 +37,24 @@ export const metadata: Metadata = {
   },
 };
 
+const blogCollectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Setu Technology Blog",
+  description: content.seo.description,
+  url: "https://setutechnology.com/blog",
+};
+
 export default function BlogPage() {
   const categories = getBlogCategories();
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogCollectionSchema) }}
+      />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}

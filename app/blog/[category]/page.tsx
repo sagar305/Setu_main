@@ -62,8 +62,20 @@ export default async function BlogCategoryPage({
 
   const posts = getBlogPostsByCategorySlug(categorySlug);
 
+  const categoryCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${category.name} — Setu Technology Blog`,
+    url: `https://setutechnology.com${getBlogCategoryUrl(category.slug)}`,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(categoryCollectionSchema) }}
+      />
+
       <PageHero
         eyebrow="Blog"
         headline={category.name}

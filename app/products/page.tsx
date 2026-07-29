@@ -37,9 +37,45 @@ export const metadata: Metadata = {
   },
 };
 
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Setu Dine",
+      url: "https://setutechnology.com/products/restaurant-pos",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Setu Queue",
+      url: "https://setutechnology.com/products/queue",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Setu Retail",
+      url: "https://setutechnology.com/products/retail",
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: "Setu Clinic",
+      url: "https://setutechnology.com/products/clinic",
+    },
+  ],
+};
+
 export default function ProductsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}

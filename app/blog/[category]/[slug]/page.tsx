@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -12,6 +13,7 @@ import {
   slugifyCategory,
 } from "@/lib/content";
 import { extractHeadings } from "@/lib/blog";
+import { getPublicImageSize } from "@/lib/image-size";
 import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
@@ -108,6 +110,7 @@ export default async function BlogPostPage({
   const latestPosts = getLatestBlogPosts(5, post.slug);
   const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
   const connectedTools = getBlogConnectedTools(post).slice(0, 5);
+  const thumbnailSize = post.thumbnail ? getPublicImageSize(post.thumbnail) : null;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -164,13 +167,18 @@ export default async function BlogPostPage({
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">{post.title}</h1>
 
-          {post.thumbnail && (
-            // Full image at its natural aspect ratio so nothing is cropped.
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+          {post.thumbnail && thumbnailSize && (
+            // Full image at its natural aspect ratio so nothing is cropped —
+            // the real intrinsic size is read off the file in /public, so the
+            // reserved box matches the image and nothing shifts on load.
+            <Image
               src={post.thumbnail}
               alt={post.title}
-              className="mt-8 w-full rounded-2xl border border-muted-line/20"
+              width={thumbnailSize.width}
+              height={thumbnailSize.height}
+              sizes="(max-width: 1024px) 100vw, 720px"
+              priority
+              className="mt-8 h-auto w-full rounded-2xl border border-muted-line/20"
             />
           )}
 
