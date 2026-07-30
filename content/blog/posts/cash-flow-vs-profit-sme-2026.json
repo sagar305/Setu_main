@@ -1,0 +1,38 @@
+{
+  "slug": "cash-flow-vs-profit-sme-2026",
+  "title": "Cash Flow vs. Profit in 2026: Why a Profitable SME Can Still Run Out of Money",
+  "seoTitle": "Cash Flow vs Profit 2026: Why Profitable Businesses Still Fail",
+  "metaDescription": "82% of small business failures cite cash flow problems, not a lack of profit. The median small business holds just 27 days of cash buffer. Here's the real difference between profit and cash \u2014 and the pattern that catches profitable SMEs off guard.",
+  "excerpt": "A profitable month on paper and an empty bank account aren't a contradiction \u2014 they're the most common way small businesses actually fail. Here's the receivables trap, the 27-day number, and how to see the gap coming.",
+  "keywords": [
+    "cash flow vs profit",
+    "small business cash flow",
+    "why profitable business fails",
+    "cash flow management SME",
+    "accounts receivable cash flow",
+    "Setu Technology"
+  ],
+  "date": "2026-07-30",
+  "category": "Business Finance",
+  "thumbnail": "/blog/thumbnails/cash-flow-vs-profit-sme-2026.jpeg",
+  "connectedTools": [
+    { "type": "tool", "slug": "profit-dashboard" },
+    { "type": "tool", "slug": "cash-book" },
+    { "type": "calculator", "slug": "break-even-calculator" }
+  ],
+  "faq": [
+    {
+      "question": "What's the actual difference between profit and cash flow?",
+      "answer": "Profit is an accounting figure \u2014 revenue minus expenses over a period, recorded on an accrual basis, often including sales where no money has changed hands yet. Cash flow is the literal movement of money in and out of your bank account. A business can show strong profit on paper from a large invoiced sale while having no actual cash to make payroll until that invoice is paid."
+    },
+    {
+      "question": "How much cash buffer should a small business actually keep?",
+      "answer": "Benchmarks vary, but a useful reference point: the median small business holds about 27 days of cash buffer, and under 13 days is considered a high-risk zone where a single slow-paying client or unexpected cost can tip the business into crisis. Many advisors suggest working toward 1\u20133 months of operating expenses in reserve as a healthier target."
+    },
+    {
+      "question": "Why can a growing, profitable business still run out of cash?",
+      "answer": "The most common pattern is the receivables trap: the business sells more on credit, revenue rises, but accounts receivable rises faster than cash collected \u2014 so the company is profitable and growing on paper while its bank balance quietly shrinks."
+    }
+  ],
+  "bodyHtml": "<p>82% of small business failures cite cash flow problems as a key cause \u2014 not a lack of profit, not a bad product, cash flow. The median small business holds just 27 days of cash buffer, according to a JPMorgan Chase Institute analysis of transaction data across roughly 600,000 small business accounts, meaning if inflows stopped tomorrow, most businesses could cover about four weeks of outflows before real trouble starts. A business can be genuinely, provably profitable and still be one slow-paying client away from missing payroll.</p><h2>Profit Is an Accounting Figure. Cash Is What's Actually in the Bank.</h2><p>Profit is calculated on an accrual basis: revenue counts the moment it's earned, whether or not the customer has actually paid yet. Cash flow only counts money that has physically moved into or out of your account. The gap between the two is timing \u2014 and timing is where otherwise healthy businesses get caught. A large signed contract can make a quarter look excellent on the income statement while the business struggles to cover rent because the client's payment terms are 60 or 90 days out.</p><h2>The Receivables Trap</h2><p>This is the most common shape the problem takes. A business grows by selling more on credit terms \u2014 more invoices, bigger clients, longer payment cycles. Revenue climbs. But accounts receivable climbs faster than cash actually collected, because more of that growing revenue is sitting unpaid at any given moment. The business is profitable and expanding on paper while its bank balance quietly falls, and by the time anyone notices, the gap has usually been building for months. A single customer representing a large share of revenue and paying slowly makes the same trap worse \u2014 the business ends up financing that client's payment terms out of its own cash reserve without ever deciding to.</p><h2>Inventory and Capital Spending Create the Same Mismatch</h2><p>Two other patterns produce the identical timing gap. Inventory ties up cash the moment it's purchased, well before it's sold and converted back into revenue \u2014 a restaurant or retailer that stocks up ahead of a busy season can look cash-poor in exactly the weeks it looks busiest. And capital spending \u2014 a new outlet, new equipment, a system upgrade \u2014 hits the bank account immediately, while the returns it's meant to generate arrive gradually over the following months or years. None of these are mistakes on their own. They only become a crisis when nobody is tracking the gap they create.</p><h2>The 27-Day Number Worth Actually Knowing</h2><p>A useful way to think about cash buffer, drawing on Federal Reserve and JPMorgan Chase Institute data: under 13 days of buffer is a high-risk zone where any negative shock \u2014 a slow month, a late invoice, an equipment failure \u2014 can be genuinely fatal. 13\u201327 days is below median: functional, but fragile. 27\u201360 days is a healthier range for most service and retail businesses. None of this requires guesswork \u2014 it's a number every business can calculate from its own bank data at any point.</p><h2>How to See the Gap Coming</h2><p>The businesses that avoid the receivables trap aren't the ones that never grow \u2014 they're the ones that track cash and profit as two separate numbers, on a rolling basis, instead of assuming a profitable month means a healthy bank balance. A simple weekly habit does most of the work: check actual cash position against a rolling 90-day projection, and flag the gap the moment it widens rather than the month it becomes urgent. Setu's <a href=\"/tools/profit-dashboard\">Profit Dashboard</a> and <a href=\"/tools/cash-book\">Cash Book</a> tools exist for exactly this \u2014 seeing cash and profit side by side instead of relying on the income statement alone. If you're planning growth that might create this exact timing gap, run the numbers first with the <a href=\"/calculators/break-even-calculator\">Break-Even Calculator</a>.</p>"
+}
