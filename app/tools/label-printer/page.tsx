@@ -3,7 +3,7 @@ import { LabelPrinterTool } from "@/components/tools/LabelPrinter/LabelPrinterTo
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Price Label Printer | Barcode Labels on A4 & Thermal | Setu Technology",
+  title: "Free Price Label Printer | A4 & Thermal Labels | Setu",
   description:
     "Print price and barcode labels for your products — A4 label sheets (65/40/24 per sheet) or thermal rolls. Free, offline, no signup.",
   keywords: [

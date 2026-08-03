@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run check:seo",
+    "build:only": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:seo": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

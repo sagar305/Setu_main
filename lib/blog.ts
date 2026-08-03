@@ -26,9 +26,22 @@ export type BlogPost = BlogPostSummary & {
   bodyHtml: string;
 };
 
+/**
+ * Hand-written SEO copy for a category listing page. Kept per category rather
+ * than generated from the category name so each page says something real about
+ * what a reader will find there.
+ */
+export type BlogCategoryMeta = {
+  title: string;
+  description: string;
+  /** Shown under the category name in the page hero. */
+  intro: string;
+};
+
 export type BlogIndex = {
   seo: { title: string; description: string; keywords: string[] };
   hero: { eyebrow: string; headline: string; subheadline: string };
+  categories: Record<string, BlogCategoryMeta>;
   posts: BlogPostSummary[];
 };
 

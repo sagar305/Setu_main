@@ -3,7 +3,7 @@ import { StockRegisterTool } from "@/components/tools/StockRegister/StockRegiste
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Stock Register | Live Inventory & Adjustments | Setu Technology",
+  title: "Free Stock Register | Live Inventory & Adjustments | Setu",
   description:
     "See live stock levels, record stock in/out and review every movement — shared with your Setu Browser POS. Free, offline, no signup.",
   keywords: [

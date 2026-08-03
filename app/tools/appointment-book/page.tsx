@@ -3,7 +3,7 @@ import { AppointmentBookTool } from "@/components/tools/AppointmentBook/Appointm
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Appointment Book | Salons, Clinics & Services | Setu Technology",
+  title: "Free Appointment Book | Salons, Clinics & Services | Setu",
   description:
     "Book and manage appointments — day view, statuses, durations, no-shows. For salons, clinics, consultants and repair shops. Free, offline, no signup.",
   keywords: [

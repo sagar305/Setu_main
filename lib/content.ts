@@ -75,11 +75,13 @@ export type {
   BlogPostSummary,
   BlogPost,
   BlogIndex,
+  BlogCategoryMeta,
   BlogConnectedToolLink,
 } from "@/lib/blog";
 export { slugifyCategory, getBlogPostUrl, getBlogCategoryUrl } from "@/lib/blog";
 
 import type {
+  BlogCategoryMeta,
   BlogConnectedToolLink,
   BlogIndex,
   BlogPost,
@@ -135,6 +137,11 @@ export function getBlogCategories(): { name: string; slug: string }[] {
     seen.set(slugifyCategory(post.category), post.category);
   }
   return Array.from(seen, ([slug, name]) => ({ slug, name }));
+}
+
+/** Hand-written SEO copy for a category listing page, if one is defined. */
+export function getBlogCategoryMeta(categorySlug: string): BlogCategoryMeta | undefined {
+  return loadBlogIndex().categories?.[categorySlug];
 }
 
 export function getBlogPostsByCategorySlug(categorySlug: string): BlogPostSummary[] {

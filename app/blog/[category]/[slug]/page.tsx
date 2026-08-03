@@ -123,6 +123,27 @@ export default async function BlogPostPage({
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://setutechnology.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://setutechnology.com/blog" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.category,
+        item: `https://setutechnology.com${getBlogCategoryUrl(slugifyCategory(post.category))}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+        item: `https://setutechnology.com${getBlogPostUrl(post)}`,
+      },
+    ],
+  };
+
   const faqSchema =
     post.faq && post.faq.length > 0
       ? {
@@ -139,6 +160,10 @@ export default async function BlogPostPage({
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}

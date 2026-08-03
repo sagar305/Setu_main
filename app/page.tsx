@@ -40,9 +40,31 @@ export const metadata: Metadata = {
   },
 };
 
+// Declares the site name for search engines and points them at /search, which
+// is what enables the sitelinks search box.
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Setu Technology",
+  alternateName: "Setu",
+  url: "https://setutechnology.com",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://setutechnology.com/search?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <Hero hero={content.hero} />
       <ShowcaseGrid id="tools" section={content.tools} className="bg-cream" />
       <ShowcaseGrid id="calculators" section={content.calculators} className="bg-white" />

@@ -36,7 +36,8 @@ export function MenuViewer() {
   }
 
   if (state.status === "ready") {
-    return <MenuDisplay menu={state.menu} />;
+    // On /menu the restaurant name is the page's main heading.
+    return <MenuDisplay menu={state.menu} nameHeadingLevel="h1" />;
   }
 
   return (

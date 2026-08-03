@@ -3,7 +3,7 @@ import { BusinessProfileTool } from "@/components/tools/BusinessProfile/Business
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Business Profile | One Setup for Every Setu Tool | Setu Technology",
+  title: "Business Profile | One Setup for Every Setu Tool | Setu",
   description:
     "Save your business name, GSTIN, logo and contact details once — every Setu tool reuses them automatically. Free, offline, no signup.",
   keywords: [

@@ -25,7 +25,18 @@ function DietMark({ tag }: { tag: DietTag }) {
   );
 }
 
-export function MenuDisplay({ menu }: { menu: QrMenuData }) {
+/**
+ * The restaurant name is the page's main heading on the public /menu viewer,
+ * but inside the generator it is only a preview label on a page that already
+ * has its own <h1>. Callers pick the level so each page keeps exactly one h1.
+ */
+export function MenuDisplay({
+  menu,
+  nameHeadingLevel: NameHeading = "h2",
+}: {
+  menu: QrMenuData;
+  nameHeadingLevel?: "h1" | "h2";
+}) {
   const accent = menu.accent || "#26306B";
   const categories = menu.categories.filter(
     (category) => category.name.trim() || category.items.some((item) => item.name.trim())
@@ -35,9 +46,9 @@ export function MenuDisplay({ menu }: { menu: QrMenuData }) {
     <div className="overflow-hidden rounded-2xl border border-muted-line/30 bg-white shadow-sm">
       {/* Header */}
       <div className="px-6 py-8 text-center text-white" style={{ backgroundColor: accent }}>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+        <NameHeading className="text-2xl font-bold tracking-tight sm:text-3xl">
           {menu.restaurantName.trim() || "Your Restaurant"}
-        </h1>
+        </NameHeading>
         {menu.tagline.trim() && (
           <p className="mt-2 text-sm text-white/80 sm:text-base">{menu.tagline}</p>
         )}

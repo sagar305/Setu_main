@@ -4,8 +4,9 @@ import { PageHero } from "@/components/PageHero";
 import { BookDemoForm } from "@/components/BookDemoForm";
 
 export const metadata: Metadata = {
-  title: "Book a demo | Setu Technology",
-  description: "Book a free demo of Setu's products — pick a date and time and we'll get back to confirm.",
+  title: "Book a Free Demo | Setu Technology",
+  description:
+    "Book a free demo of Setu Dine, Setu Queue or Setu Retail. Pick a date and time that suits you and our team will get back to confirm your slot.",
   alternates: { canonical: "/book-demo" },
   openGraph: {
     title: "Book a demo | Setu Technology",

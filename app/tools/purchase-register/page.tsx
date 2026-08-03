@@ -3,7 +3,7 @@ import { PurchaseRegisterTool } from "@/components/tools/PurchaseRegister/Purcha
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Purchase Register | Record Supplier Bills | Setu Technology",
+  title: "Free Purchase Register | Record Supplier Bills | Setu",
   description:
     "Record purchase bills against suppliers, link items to your products and update stock automatically. Free, offline, no signup.",
   keywords: [

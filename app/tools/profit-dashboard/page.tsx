@@ -3,7 +3,7 @@ import { ProfitDashboardTool } from "@/components/tools/ProfitDashboard/ProfitDa
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Profit Dashboard | Real Profit from Sales & Expenses | Setu Technology",
+  title: "Free Profit Dashboard | Sales Minus Real Costs | Setu",
   description:
     "See your real business profit — revenue from your POS sales, minus cost of goods and actual expenses. Charts, date ranges, offline, no signup.",
   keywords: [

@@ -3,7 +3,7 @@ import { CustomerLedgerTool } from "@/components/tools/CustomerLedger/CustomerLe
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Customer Ledger (Udhaar Khata) | Credit & Payments | Setu Technology",
+  title: "Free Customer Ledger — Digital Udhaar Khata | Setu",
   description:
     "Digital udhaar khata — track credit given and payments received per customer, with running balances. Free, offline, no signup.",
   keywords: [

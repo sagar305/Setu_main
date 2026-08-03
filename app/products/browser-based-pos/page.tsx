@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
 
 export const metadata: Metadata = {
-  title: "Browser Based POS - Free, Offline, No Login | Setu Technology",
+  title: "Browser Based POS — Free, Offline, No Login | Setu",
   description:
-    "Free browser-based POS system for small businesses. Bill customers, manage products, inventory and customers — works offline, no signup, no subscription. Your data stays on your device.",
+    "Free browser-based POS for small businesses. Bill customers, manage products and inventory — works offline, no signup, no subscription, data stays on device.",
   keywords: [
     "browser based POS",
     "free POS",

@@ -3,7 +3,7 @@ import { ReceiptDesignerTool } from "@/components/tools/ReceiptDesigner/ReceiptD
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Receipt Designer | Thermal Receipt Templates | Setu Technology",
+  title: "Free Receipt Designer | Thermal Receipt Templates | Setu",
   description:
     "Design your shop's receipt — logo, colors, header, footer — and reuse it in the Setu Browser POS. 80mm/58mm thermal and A4. Free, offline, no signup.",
   keywords: [

@@ -3,7 +3,7 @@ import { QuotationGeneratorTool } from "@/components/tools/QuotationGenerator/Qu
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Quotation Generator | Estimates & Quotes | Setu Technology",
+  title: "Free Quotation Generator | Estimates & Quotes | Setu",
   description:
     "Create professional quotations and estimates with validity dates, tax and totals. Print or save as PDF. Free, offline, no signup.",
   keywords: [

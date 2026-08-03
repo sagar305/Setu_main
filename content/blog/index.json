@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Blog | Setu Technology",
-    "description": "Thought leadership and practical tips for restaurant and business operators across the globe, from Setu Technology.",
+    "title": "Setu Blog | Restaurant & Small Business Operations",
+    "description": "Practical guides on restaurant and small business operations — POS, menu costing, GST billing, inventory and cash flow. Written for operators, by Setu.",
     "keywords": [
       "restaurant management tips",
       "GST billing software",
@@ -12,6 +12,63 @@
     "eyebrow": "Blog",
     "headline": "Practical thinking for business operators",
     "subheadline": "Notes on running better operations, from the team building software for it."
+  },
+  "categories": {
+    "business-finance": {
+      "title": "Business Finance for SMEs | Cash Flow & Profit | Setu",
+      "description": "Cash flow, profit and the finance habits that keep small businesses solvent. Where the money actually goes, and the numbers worth checking every month.",
+      "intro": "Cash flow, profit and the finance habits that keep a small business solvent."
+    },
+    "accounting": {
+      "title": "Accounting & Bookkeeping Guides for SMEs | Setu Blog",
+      "description": "Bookkeeping that holds up at audit \u2014 reconciliation checklists, in-house vs outsourced cost math, and month-end close routines for small business owners.",
+      "intro": "Bookkeeping, reconciliation and month-end close, written for owners rather than auditors."
+    },
+    "compliance": {
+      "title": "GST, Gratuity & Restaurant Compliance Guides | Setu",
+      "description": "GST billing rules, gratuity payouts and service charge law, explained for restaurant owners. What you must pay, what you must print, and what gets fined.",
+      "intro": "GST billing, gratuity and service charge rules, explained for restaurant owners."
+    },
+    "menu-ops": {
+      "title": "Menu Costing & Menu Engineering for Restaurants | Setu",
+      "description": "Recipe costing, menu engineering and pricing calls. How to find the dishes quietly losing margin and reprice them before your next menu print run.",
+      "intro": "Recipe costing, menu engineering and the pricing calls that decide your margin."
+    },
+    "operations": {
+      "title": "Restaurant Operations Guides | POS, Outlets & Growth",
+      "description": "Running and growing a restaurant \u2014 choosing a POS, opening a second outlet, break-even math and customer retention. Field notes for multi-outlet owners.",
+      "intro": "Choosing a POS, opening outlets, and knowing which location actually makes money."
+    },
+    "dine-in-ops": {
+      "title": "Dine-In Operations | Table Turnover & Service Speed",
+      "description": "Dine-in service, table turnover and floor flow. How faster seating, QR ordering and quicker payments lift covers per shift without adding a single table.",
+      "intro": "Table turnover, service speed and getting more covers out of the same floor."
+    },
+    "aggregator-ops": {
+      "title": "Zomato & Swiggy Aggregator Operations Guides | Setu",
+      "description": "Running delivery profitably on Zomato and Swiggy \u2014 commission math, online menu pricing, and the margin leaks that surface only after the payout lands.",
+      "intro": "Commissions, online menu pricing and keeping margin on aggregator orders."
+    },
+    "inventory-ops": {
+      "title": "Restaurant Inventory & Stock Control Guides | Setu Blog",
+      "description": "Stock control, wastage and purchase discipline. Where food purchases disappear between the supplier invoice and the plate, and how to close that gap.",
+      "intro": "Stock control, wastage and where food purchases quietly disappear."
+    },
+    "qsr-ops": {
+      "title": "QSR & Food Court Operations | Tokens and Kitchen Flow",
+      "description": "Counter-service speed for QSRs, food courts and cloud kitchens. Token systems, kitchen display routing, and the queue decisions that win the lunch rush.",
+      "intro": "Counter speed, token systems and kitchen flow for QSRs and cloud kitchens."
+    },
+    "company": {
+      "title": "Inside Setu Technology | Why We Build What We Build",
+      "description": "Notes from the Setu team on what we are building and why \u2014 the product decisions, the operator problems behind them, and where the roadmap goes next.",
+      "intro": "Notes from the team on what we are building, and why we build it this way."
+    },
+    "kitchen-ops": {
+      "title": "Kitchen Operations | Order Accuracy & Peak-Hour Flow",
+      "description": "Kitchen throughput and order accuracy under pressure. Why peak-hour errors happen, where tickets get lost, and the fixes that hold up on a busy night.",
+      "intro": "Order accuracy, ticket flow and holding the kitchen together at peak hour."
+    }
   },
   "posts": [
     {

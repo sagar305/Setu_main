@@ -3,7 +3,7 @@ import { SupplierBookTool } from "@/components/tools/SupplierBook/SupplierBookTo
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Supplier Book | Vendor Contacts & GSTIN | Setu Technology",
+  title: "Free Supplier Book | Vendor Contacts & GSTIN | Setu",
   description:
     "Keep all your supplier and vendor details in one place — contacts, GSTIN, addresses and notes. Free, offline, no signup, reusable across Setu tools.",
   keywords: [

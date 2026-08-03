@@ -3,7 +3,7 @@ import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTra
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Expense Tracker for Small Business | Setu Technology",
+  title: "Free Expense Tracker for Small Business | Setu",
   description:
     "Track business expenses by category — rent, salaries, purchases, bills. Monthly totals, CSV export. Free, offline, no signup.",
   keywords: [

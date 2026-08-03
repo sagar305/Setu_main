@@ -3,7 +3,7 @@ import { BarcodeGeneratorTool } from "@/components/tools/BarcodeGenerator/Barcod
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 
 export const metadata: Metadata = {
-  title: "Free Barcode Generator | EAN-13, Code 128 & QR | Setu Technology",
+  title: "Free Barcode Generator | EAN-13, Code 128 & QR | Setu",
   description:
     "Generate EAN-13, Code 128 and QR barcodes for free. Use your saved products, download as PNG or PDF. Works offline, no signup required.",
   keywords: [
