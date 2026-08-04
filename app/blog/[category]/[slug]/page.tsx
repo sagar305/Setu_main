@@ -10,8 +10,11 @@ import {
   getBlogPostUrl,
   getLatestBlogPosts,
   getRelatedBlogPostsByCategory,
+  getTeamMember,
+  blogAuthorSlug,
   slugifyCategory,
 } from "@/lib/content";
+import { personSchema } from "@/lib/schema";
 import { extractHeadings } from "@/lib/blog";
 import { getPublicImageSize } from "@/lib/image-size";
 import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
@@ -86,6 +89,7 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       images: shareImages,
     },
     twitter: {
@@ -110,6 +114,7 @@ export default async function BlogPostPage({
   const latestPosts = getLatestBlogPosts(5, post.slug);
   const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
   const connectedTools = getBlogConnectedTools(post).slice(0, 5);
+  const postAuthor = getTeamMember(blogAuthorSlug(slugifyCategory(post.category)));
   const thumbnailSize = post.thumbnail ? getPublicImageSize(post.thumbnail) : null;
 
   const articleSchema = {
@@ -118,9 +123,35 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.metaDescription ?? post.excerpt,
     datePublished: post.date,
-    author: { "@type": "Organization", name: "Setu Technology" },
+    // Equal to datePublished until the post's content actually changes; kept
+    // current by `npm run sync:post-dates`.
+    dateModified: post.updated ?? post.date,
+    // Credited in structured data only — deliberately not rendered as a byline.
+    // Finance categories are the CEO's; everything else is the CMO's.
+    author: postAuthor ? personSchema(postAuthor) : { "@type": "Organization", name: "Setu Technology" },
     publisher: { "@type": "Organization", name: "Setu Technology" },
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://setutechnology.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://setutechnology.com/blog" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.category,
+        item: `https://setutechnology.com${getBlogCategoryUrl(slugifyCategory(post.category))}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+        item: `https://setutechnology.com${getBlogPostUrl(post)}`,
+      },
+    ],
   };
 
   const faqSchema =
@@ -139,6 +170,10 @@ export default async function BlogPostPage({
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}

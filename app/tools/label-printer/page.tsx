@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { LabelPrinterTool } from "@/components/tools/LabelPrinter/LabelPrinterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Price Label Printer | Barcode Labels on A4 & Thermal | Setu Technology",
+  title: "Free Price Label Printer | A4 & Thermal Labels | Setu",
   description:
     "Print price and barcode labels for your products — A4 label sheets (65/40/24 per sheet) or thermal rolls. Free, offline, no signup.",
   keywords: [
@@ -74,6 +75,7 @@ const faqSchema = {
 export default function LabelPrinterPage() {
   return (
     <>
+      <ToolSchema slug="label-printer" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

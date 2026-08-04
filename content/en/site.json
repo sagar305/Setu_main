@@ -27,6 +27,7 @@
           { "label": "Browser Based POS (Free)", "href": "/products/browser-based-pos" },
           { "label": "Setu Dine", "href": "/products/restaurant-pos" },
           { "label": "Setu Queue", "href": "/products/queue" },
+          { "label": "Setu QR Menu", "href": "/products/qr-menu" },
           { "label": "Setu Retail", "href": "/products/retail" }
         ]
       },
@@ -34,6 +35,7 @@
         "heading": "Company",
         "links": [
           { "label": "About", "href": "/about" },
+          { "label": "Team", "href": "/team" },
           { "label": "Consultancy", "href": "/consultancy" },
           { "label": "Blog", "href": "/blog" },
           { "label": "Contact", "href": "/contact" }
@@ -43,7 +45,10 @@
         "heading": "Tools",
         "links": [
           { "label": "All Tools", "href": "/tools" },
-          { "label": "Invoice Generator", "href": "/tools/invoice-generator" }
+          { "label": "Invoice Generator", "href": "/tools/invoice-generator" },
+          { "label": "QR Menu Generator", "href": "/tools/qr-menu-generator" },
+          { "label": "UPI QR Generator", "href": "/tools/upi-qr-generator" },
+          { "label": "Barcode Generator", "href": "/tools/barcode-generator" }
         ]
       },
       {
@@ -51,7 +56,9 @@
         "links": [
           { "label": "All Calculators", "href": "/calculators" },
           { "label": "GST Calculator", "href": "/calculators/gst-calculator" },
-          { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" }
+          { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" },
+          { "label": "Income Tax Calculator", "href": "/calculators/income-tax-calculator" },
+          { "label": "Loan EMI Calculator", "href": "/calculators/loan-emi-calculator" }
         ]
       }
     ],

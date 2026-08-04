@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { InvoiceGeneratorTool } from "@/components/tools/InvoiceGenerator/InvoiceGeneratorTool";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Invoice Generator - GST Compliant Invoices",
   description:
-    "Create professional GST-compliant invoices for free. No signup required. Features: multiple templates, automatic calculations, UPI support, and instant PDF download.",
+    "Create professional GST-compliant invoices free. Multiple templates, automatic tax calculations, UPI support and instant PDF download. No signup required.",
   keywords: [
     "free invoice generator",
     "invoice maker",
@@ -84,6 +85,7 @@ const faqSchema = {
 export default function InvoiceGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="invoice-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

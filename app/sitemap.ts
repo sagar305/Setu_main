@@ -6,6 +6,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/about",
+    "/team",
+    "/pricing",
+    "/sitemap",
     "/products",
     "/products/qr-menu",
     "/products/restaurant-pos",
@@ -65,6 +68,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1 : 0.7,
   }));
 
+  // Live QR menu demo. Lives on its own subdomain, so it needs an absolute URL
+  // rather than a path appended to `base`.
+  const externalEntries: MetadataRoute.Sitemap = [
+    {
+      url: "https://demo.qr-menu.setutechnology.com/",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+  ];
+
   const blogEntries: MetadataRoute.Sitemap = getBlogContent().posts.map((post) => ({
     url: `${base}${getBlogPostUrl(post)}`,
     lastModified: new Date(post.date),
@@ -79,5 +93,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...blogEntries, ...categoryEntries];
+  return [...staticEntries, ...externalEntries, ...blogEntries, ...categoryEntries];
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
+import { freeOffer } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Browser Based POS - Free, Offline, No Login | Setu Technology",
+  title: "Browser Based POS — Free, Offline, No Login | Setu",
   description:
-    "Free browser-based POS system for small businesses. Bill customers, manage products, inventory and customers — works offline, no signup, no subscription. Your data stays on your device.",
+    "Free browser-based POS for small businesses. Bill customers, manage products and inventory — works offline, no signup, no subscription, data stays on device.",
   keywords: [
     "browser based POS",
     "free POS",
@@ -33,6 +34,22 @@ export const metadata: Metadata = {
         alt: "Setu Technology Browser Based POS",
       },
     ],
+  },
+};
+
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Setu Browser Based POS",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description:
+    "Free browser-based point-of-sale for small businesses. Bill customers, manage products and inventory, and print thermal receipts. Works offline, with all data stored on the device.",
+  offers: freeOffer({ url: "/products/browser-based-pos" }),
+  provider: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
   },
 };
 
@@ -102,6 +119,10 @@ const faqSchema = {
 export default function BrowserBasedPosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

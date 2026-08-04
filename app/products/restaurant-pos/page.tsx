@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getRestaurantPosContent } from "@/lib/content";
+import { getPricingPlan } from "@/lib/content";
+import { planOffers } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
 import { Faq } from "@/components/Faq";
+import { ProductPricing } from "@/components/ProductPricing";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 const content = getRestaurantPosContent();
@@ -47,6 +50,12 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web, Android, iOS",
   description: content.seo.description,
+  offers: planOffers(getPricingPlan("setu-dine")!),
+  provider: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
+  },
 };
 
 const faqSchema = {
@@ -83,6 +92,8 @@ export default function RestaurantPosPage() {
       </section>
 
       <RestaurantPosShowcase features={content.features} />
+
+      <ProductPricing pricing={content.pricing} />
 
       <Faq headline={content.faq.headline} items={content.faq.items} />
 

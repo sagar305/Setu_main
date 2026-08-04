@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { ProfitDashboardTool } from "@/components/tools/ProfitDashboard/ProfitDashboardTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Profit Dashboard | Real Profit from Sales & Expenses | Setu Technology",
+  title: "Free Profit Dashboard | Sales Minus Real Costs | Setu",
   description:
     "See your real business profit — revenue from your POS sales, minus cost of goods and actual expenses. Charts, date ranges, offline, no signup.",
   keywords: [
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function ProfitDashboardPage() {
   return (
     <>
+      <ToolSchema slug="profit-dashboard" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

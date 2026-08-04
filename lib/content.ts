@@ -16,6 +16,8 @@ import clinicData from "@/content/en/clinic.json";
 import calculatorsData from "@/content/en/calculators.json";
 import toolsData from "@/content/en/tools.json";
 import consultancyData from "@/content/en/consultancy.json";
+import teamData from "@/content/en/team.json";
+import pricingData from "@/content/en/pricing.json";
 
 export type Cta = { label: string; href: string };
 
@@ -75,11 +77,13 @@ export type {
   BlogPostSummary,
   BlogPost,
   BlogIndex,
+  BlogCategoryMeta,
   BlogConnectedToolLink,
 } from "@/lib/blog";
 export { slugifyCategory, getBlogPostUrl, getBlogCategoryUrl } from "@/lib/blog";
 
 import type {
+  BlogCategoryMeta,
   BlogConnectedToolLink,
   BlogIndex,
   BlogPost,
@@ -135,6 +139,11 @@ export function getBlogCategories(): { name: string; slug: string }[] {
     seen.set(slugifyCategory(post.category), post.category);
   }
   return Array.from(seen, ([slug, name]) => ({ slug, name }));
+}
+
+/** Hand-written SEO copy for a category listing page, if one is defined. */
+export function getBlogCategoryMeta(categorySlug: string): BlogCategoryMeta | undefined {
+  return loadBlogIndex().categories?.[categorySlug];
 }
 
 export function getBlogPostsByCategorySlug(categorySlug: string): BlogPostSummary[] {
@@ -239,4 +248,37 @@ export function getToolBySlug(slug: string): ToolItem | undefined {
 
 export function getConsultancyContent(): ConsultancyContent {
   return consultancyData;
+}
+
+// ---------------------------------------------------------------------------
+// Team
+// ---------------------------------------------------------------------------
+
+export type { TeamContent, TeamMember, TeamSocialLink } from "@/lib/team";
+export { blogAuthorSlug, FINANCE_AUTHOR_SLUG, GENERAL_AUTHOR_SLUG } from "@/lib/team";
+
+import type { TeamContent, TeamMember } from "@/lib/team";
+
+export function getTeamContent(): TeamContent {
+  return teamData as TeamContent;
+}
+
+export function getTeamMember(slug: string): TeamMember | undefined {
+  return getTeamContent().members.find((member) => member.slug === slug);
+}
+
+// ---------------------------------------------------------------------------
+// Pricing
+// ---------------------------------------------------------------------------
+
+export type { PricingContent, PricingPlan, PricingRegionId } from "@/lib/pricing";
+
+import type { PricingContent, PricingPlan } from "@/lib/pricing";
+
+export function getPricingContent(): PricingContent {
+  return pricingData as PricingContent;
+}
+
+export function getPricingPlan(slug: string): PricingPlan | undefined {
+  return getPricingContent().plans.find((plan) => plan.slug === slug);
 }

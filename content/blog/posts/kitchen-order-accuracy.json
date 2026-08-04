@@ -1,8 +1,8 @@
 {
   "slug": "kitchen-order-accuracy",
   "title": "Restaurant Kitchen Order Accuracy: Why Peak-Hour Errors Happen and How to Fix Them",
-  "seoTitle": "Restaurant Kitchen Order Accuracy: Why Peak-Hour Errors Happen and How to Fix Them",
-  "metaDescription": "Peak-hour kitchen mistakes don't come from one big failure — they come from small friction points that only show up under pressure. Here's what breaks and how to fix it.",
+  "seoTitle": "Kitchen Order Accuracy: Fix Peak-Hour Restaurant Errors",
+  "metaDescription": "Peak-hour kitchen errors come from small friction points that only show under pressure. What breaks in restaurant order accuracy — and how to fix it.",
   "excerpt": "A breakdown of where kitchen order accuracy actually breaks down during peak hours.",
   "keywords": [
     "kitchen order accuracy restaurant",
@@ -10,6 +10,7 @@
     "reduce kitchen mistakes"
   ],
   "date": "2026-06-21",
+  "updated": "2026-06-21",
   "category": "Kitchen Ops",
   "thumbnail": "/blog/thumbnails/kitchen-order-accuracy.jpeg",
   "connectedTools": [

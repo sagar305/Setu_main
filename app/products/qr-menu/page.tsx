@@ -16,7 +16,8 @@ import {
   PlayCircle,
   Gift,
 } from "lucide-react";
-import { getQrMenuContent } from "@/lib/content";
+import { getQrMenuContent, getPricingPlan } from "@/lib/content";
+import { planOffers } from "@/lib/schema";
 import {
   QR_MENU_APP_ENABLED,
   QR_MENU_DEMO_URL,
@@ -101,6 +102,21 @@ function SignupCta({ className }: { className: string }) {
   );
 }
 
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Setu QR Menu",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: content.seo.description,
+  offers: planOffers(getPricingPlan("qr-menu")!),
+  provider: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
+  },
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -114,6 +130,10 @@ const faqSchema = {
 export default function QrMenuProductPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

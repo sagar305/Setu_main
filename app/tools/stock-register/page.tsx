@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { StockRegisterTool } from "@/components/tools/StockRegister/StockRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Stock Register | Live Inventory & Adjustments | Setu Technology",
+  title: "Free Stock Register | Live Inventory & Adjustments | Setu",
   description:
     "See live stock levels, record stock in/out and review every movement — shared with your Setu Browser POS. Free, offline, no signup.",
   keywords: [
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function StockRegisterPage() {
   return (
     <>
+      <ToolSchema slug="stock-register" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

@@ -76,6 +76,37 @@
       "body": "Customers scan a QR code at the table to track their order status live and call a waiter for help, no app or login needed."
     }
   ],
+  "pricing": {
+    "badge": "First month free",
+    "title": "Free for a month. Then one price for the whole business.",
+    "subtitle": "Not per outlet, not per till. One subscription covers your entire business, whether you run one outlet or twenty.",
+    "freeDuration": "for the first month",
+    "scopeNote": "One business account. Every outlet, every user, everything below included.",
+    "note": "Prices include GST and are charged only after your free month ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
+    "plans": [
+      {
+        "region": "India",
+        "monthlyLabel": "₹499",
+        "yearlyLabel": "₹4,999",
+        "saveLabel": "Save ₹989 a year"
+      },
+      {
+        "region": "Rest of the world",
+        "monthlyLabel": "$4.99",
+        "yearlyLabel": "$49.99",
+        "saveLabel": "Save $9.89 a year"
+      }
+    ],
+    "includes": [
+      "Billing with a built-in tax engine",
+      "Kitchen order tickets and routing",
+      "Table and floor management",
+      "Multi-outlet dashboards",
+      "Customer management",
+      "Coupons and discounts"
+    ],
+    "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Dine" }
+  },
   "faq": {
     "headline": "Frequently asked questions",
     "items": [

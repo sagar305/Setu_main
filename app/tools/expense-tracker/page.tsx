@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTrackerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Expense Tracker for Small Business | Setu Technology",
+  title: "Free Expense Tracker for Small Business | Setu",
   description:
     "Track business expenses by category — rent, salaries, purchases, bills. Monthly totals, CSV export. Free, offline, no signup.",
   keywords: [
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function ExpenseTrackerPage() {
   return (
     <>
+      <ToolSchema slug="expense-tracker" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

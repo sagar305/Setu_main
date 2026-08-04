@@ -51,13 +51,31 @@ export const metadata: Metadata = {
   },
 };
 
+// Identity signals for search engines and AI models. A thin Organization block
+// makes it easy to confuse this company with similarly named ones, so keep the
+// description, contact point and profile links here specific and current.
+//
+// `sameAs` is derived from the footer's social links so a profile only has to
+// be added in one place — and so this list can never drift into listing a
+// profile the site itself does not link to.
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Setu Technology",
+  alternateName: "Setu",
   url: "https://setutechnology.com",
   logo: "https://setutechnology.com/icon.svg",
-  sameAs: ["https://www.instagram.com/setu.technology"],
+  description:
+    "Setu Technology builds operational software for businesses — restaurant billing and POS, kitchen and queue management, QR menus, and a free suite of business calculators and tools. Started with restaurants, expanding to retail and clinics.",
+  foundingDate: "2026-06-21",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "hello@setutechnology.com",
+    url: "https://setutechnology.com/contact",
+    availableLanguage: ["English"],
+  },
+  sameAs: getSiteContent().footer.social.map((profile) => profile.href),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

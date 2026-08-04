@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { UpiQrGeneratorTool } from "@/components/tools/UpiQrGenerator/UpiQrGeneratorTool";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Dynamic UPI QR Generator | Instant Payment Codes",
@@ -84,6 +85,7 @@ const faqSchema = {
 export default function UpiQrGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="upi-qr-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
