@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { getQueueContent } from "@/lib/content";
+import { quoteOffer } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { QueueShowcase } from "@/components/QueueShowcase";
 import { QueueHeroVisual } from "@/components/QueueHeroVisual";
@@ -65,10 +66,10 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: content.seo.schemaDescription,
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-  },
+  offers: quoteOffer({
+    url: "/book-demo?product=Setu%20Queue",
+    description: "Pricing is provided on request — book a free demo for a quote.",
+  }),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",

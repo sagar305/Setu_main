@@ -20,6 +20,12 @@ export type BlogPostSummary = {
 export type BlogPost = BlogPostSummary & {
   seoTitle?: string;
   metaDescription?: string;
+  /**
+   * Last time the post's actual content changed, maintained by
+   * `npm run sync:post-dates`. Falls back to `date` when absent, so a post that
+   * has never been edited reports dateModified === datePublished.
+   */
+  updated?: string;
   keywords?: string[];
   connectedTools: BlogConnectedTool[];
   faq: BlogFaqItem[];

@@ -8,7 +8,9 @@
     "build:only": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check:seo": "node scripts/check-seo.mjs"
+    "check:seo": "node scripts/check-seo.mjs",
+    "sync:post-dates": "node scripts/sync-post-dates.mjs",
+    "check:post-dates": "node scripts/sync-post-dates.mjs --check"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

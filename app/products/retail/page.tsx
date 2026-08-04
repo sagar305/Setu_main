@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getRetailContent } from "@/lib/content";
+import { quoteOffer } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { FadeIn } from "@/components/motion/FadeIn";
 
@@ -45,10 +46,11 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: content.seo.description,
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/PreOrder",
-  },
+  offers: quoteOffer({
+    url: "/contact",
+    description: "Setu Retail has not launched yet. Pricing will be announced at launch.",
+    availability: "PreOrder",
+  }),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",

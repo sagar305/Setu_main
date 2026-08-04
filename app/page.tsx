@@ -5,6 +5,7 @@ import { ShowcaseGrid } from "@/components/home/ShowcaseGrid";
 import { Services } from "@/components/home/Services";
 import { LatestBlogs } from "@/components/home/LatestBlogs";
 import { CtaBanner } from "@/components/CtaBanner";
+import { Faq } from "@/components/Faq";
 
 const content = getHomeContent();
 
@@ -58,6 +59,19 @@ const websiteSchema = {
   },
 };
 
+// The homepage is the page most likely to be cited for "what is Setu" queries,
+// so the answers are structured as well as rendered. The questions are shown on
+// the page below — FAQPage schema must describe visible content.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: content.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default function HomePage() {
   return (
     <>
@@ -65,11 +79,16 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Hero hero={content.hero} />
       <ShowcaseGrid id="tools" section={content.tools} className="bg-cream" />
       <ShowcaseGrid id="calculators" section={content.calculators} className="bg-white" />
       <Services services={content.services} />
       <LatestBlogs />
+      <Faq headline={content.faq.headline} items={content.faq.items} />
       <CtaBanner {...content.ctaBanner} />
     </>
   );

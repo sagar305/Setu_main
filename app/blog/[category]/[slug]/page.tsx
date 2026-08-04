@@ -86,6 +86,7 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       images: shareImages,
     },
     twitter: {
@@ -118,6 +119,9 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.metaDescription ?? post.excerpt,
     datePublished: post.date,
+    // Equal to datePublished until the post's content actually changes; kept
+    // current by `npm run sync:post-dates`.
+    dateModified: post.updated ?? post.date,
     author: { "@type": "Organization", name: "Setu Technology" },
     publisher: { "@type": "Organization", name: "Setu Technology" },
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,

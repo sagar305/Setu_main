@@ -101,6 +101,35 @@
       }
     ]
   },
+  "faq": {
+    "headline": "Frequently asked questions",
+    "items": [
+      {
+        "question": "What is Setu Technology?",
+        "answer": "Setu Technology builds operational software for businesses — billing, inventory, kitchen and front-desk workflows. It started with restaurant software and is expanding to retail and clinics."
+      },
+      {
+        "question": "What products does Setu offer?",
+        "answer": "Setu Dine for restaurant billing and kitchen workflow, Setu Queue for quick service counters and food courts, Setu QR Menu for digital menus, and a free Browser Based POS."
+      },
+      {
+        "question": "Who is Setu Dine built for?",
+        "answer": "Restaurants running anything from a single outlet to a full chain. It covers billing, kitchen order tickets, table management, coupons and multi-outlet dashboards with a built-in tax engine."
+      },
+      {
+        "question": "Are Setu's calculators and tools free?",
+        "answer": "Yes. Every calculator and tool on the site is free and needs no signup or login. They run in your browser, and your data stays on your device instead of going to a server."
+      },
+      {
+        "question": "Is Setu available outside India?",
+        "answer": "Yes. Setu builds for businesses globally, with a tax engine designed around Indian billing rules alongside support for restaurants and businesses operating in other countries."
+      },
+      {
+        "question": "Does Setu offer accounting services?",
+        "answer": "Yes. Setu runs an outsourced accounting, bookkeeping and payroll practice for small businesses, on weekly to yearly cycles, across QuickBooks, Xero, Zoho, FreshBooks and more."
+      }
+    ]
+  },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
