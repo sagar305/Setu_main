@@ -6,6 +6,7 @@ import { planOffers } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
 import { Faq } from "@/components/Faq";
+import { ProductPricing } from "@/components/ProductPricing";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 const content = getRestaurantPosContent();
@@ -91,6 +92,8 @@ export default function RestaurantPosPage() {
       </section>
 
       <RestaurantPosShowcase features={content.features} />
+
+      <ProductPricing pricing={content.pricing} />
 
       <Faq headline={content.faq.headline} items={content.faq.items} />
 

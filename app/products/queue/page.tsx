@@ -20,6 +20,7 @@ import { PageHero } from "@/components/PageHero";
 import { QueueShowcase } from "@/components/QueueShowcase";
 import { QueueHeroVisual } from "@/components/QueueHeroVisual";
 import { Faq } from "@/components/Faq";
+import { ProductPricing } from "@/components/ProductPricing";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
 const content = getQueueContent();
@@ -305,6 +306,8 @@ export default function QueuePage() {
           </FadeIn>
         </div>
       </section>
+
+      <ProductPricing pricing={content.pricing} />
 
       <Faq headline={content.faq.headline} items={content.faq.items} />
 

@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run check:seo",
+    "build": "npm run check:pricing && next build && npm run check:seo",
     "build:only": "next build",
     "start": "next start",
     "lint": "next lint",
     "check:seo": "node scripts/check-seo.mjs",
+    "check:pricing": "node scripts/check-pricing.mjs",
     "sync:post-dates": "node scripts/sync-post-dates.mjs",
     "check:post-dates": "node scripts/sync-post-dates.mjs --check"
   },
