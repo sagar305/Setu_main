@@ -69,6 +69,10 @@ for (const file of fs.readdirSync(POSTS_DIR).sort()) {
     updated = today;
   }
 
+  // A post whose publish date moved forward (drafted early, published later)
+  // would otherwise report dateModified before datePublished.
+  if (updated < post.date) updated = post.date;
+
   if (updated === post.updated && known === hash) continue;
 
   changed.push(`${slug}: updated=${updated}${post.updated ? ` (was ${post.updated})` : " (new)"}`);
