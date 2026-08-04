@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import type { BlogPostSummary } from "@/lib/blog";
-import { BlogCard } from "@/components/blog/BlogCard";
+import { PaginatedPostList } from "@/components/blog/PaginatedPostList";
 
 type Category = { name: string; slug: string };
 
@@ -60,17 +60,10 @@ export function BlogSearchList({
           : `${posts.length} articles`}
       </p>
 
-      {filtered.length > 0 ? (
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-6 rounded-2xl border border-dashed border-muted-line/40 bg-white/60 p-10 text-center">
-          <p className="text-muted">No articles match your search. Try a different title.</p>
-        </div>
-      )}
+      <PaginatedPostList
+        posts={filtered}
+        emptyMessage="No articles match your search. Try a different title."
+      />
     </>
   );
 }

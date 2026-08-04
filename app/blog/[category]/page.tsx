@@ -8,7 +8,7 @@ import {
   getBlogPostsByCategorySlug,
 } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
-import { BlogCard } from "@/components/blog/BlogCard";
+import { PaginatedPostList } from "@/components/blog/PaginatedPostList";
 
 export function generateStaticParams() {
   return getBlogCategories().map((category) => ({ category: category.slug }));
@@ -123,11 +123,10 @@ export default async function BlogCategoryPage({
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
+        <PaginatedPostList
+          posts={posts}
+          emptyMessage={`No articles in ${category.name} yet.`}
+        />
       </section>
     </>
   );
