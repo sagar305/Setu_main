@@ -17,6 +17,7 @@ import calculatorsData from "@/content/en/calculators.json";
 import toolsData from "@/content/en/tools.json";
 import consultancyData from "@/content/en/consultancy.json";
 import teamData from "@/content/en/team.json";
+import pricingData from "@/content/en/pricing.json";
 
 export type Cta = { label: string; href: string };
 
@@ -264,4 +265,20 @@ export function getTeamContent(): TeamContent {
 
 export function getTeamMember(slug: string): TeamMember | undefined {
   return getTeamContent().members.find((member) => member.slug === slug);
+}
+
+// ---------------------------------------------------------------------------
+// Pricing
+// ---------------------------------------------------------------------------
+
+export type { PricingContent, PricingPlan, PricingRegionId } from "@/lib/pricing";
+
+import type { PricingContent, PricingPlan } from "@/lib/pricing";
+
+export function getPricingContent(): PricingContent {
+  return pricingData as PricingContent;
+}
+
+export function getPricingPlan(slug: string): PricingPlan | undefined {
+  return getPricingContent().plans.find((plan) => plan.slug === slug);
 }

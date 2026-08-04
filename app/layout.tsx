@@ -67,9 +67,11 @@ const organizationSchema = {
   logo: "https://setutechnology.com/icon.svg",
   description:
     "Setu Technology builds operational software for businesses — restaurant billing and POS, kitchen and queue management, QR menus, and a free suite of business calculators and tools. Started with restaurants, expanding to retail and clinics.",
+  foundingDate: "2026-06-21",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
+    email: "hello@setutechnology.com",
     url: "https://setutechnology.com/contact",
     availableLanguage: ["English"],
   },

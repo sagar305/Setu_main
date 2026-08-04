@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getRestaurantPosContent } from "@/lib/content";
-import { quoteOffer } from "@/lib/schema";
+import { getPricingPlan } from "@/lib/content";
+import { planOffers } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
 import { Faq } from "@/components/Faq";
@@ -48,10 +49,7 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web, Android, iOS",
   description: content.seo.description,
-  offers: quoteOffer({
-    url: "/book-demo?product=Setu%20Dine",
-    description: "Pricing is provided on request — book a free demo for a quote.",
-  }),
+  offers: planOffers(getPricingPlan("setu-dine")!),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",

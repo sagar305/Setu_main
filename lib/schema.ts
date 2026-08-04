@@ -5,8 +5,14 @@
 // edit rather than five.
 
 import type { TeamMember } from "@/lib/team";
+import type { PricingPlan } from "@/lib/pricing";
 
 const SITE_URL = "https://setutechnology.com";
+
+const REGIONS = [
+  { id: "IN", currency: "INR" },
+  { id: "INTL", currency: "USD" },
+] as const;
 
 export const TEAM_PAGE_PATH = "/team";
 
@@ -49,6 +55,46 @@ export function freeOffer({ url }: { url: string }) {
     availability: "https://schema.org/InStock",
     url: `${SITE_URL}${url}`,
   };
+}
+
+/**
+ * Offers for a subscription plan: one Offer per currency × billing period.
+ *
+ * Prices are per business account and GST-inclusive, which is recorded on the
+ * UnitPriceSpecification (`valueAddedTaxIncluded`) as well as in the page copy.
+ * Returns undefined for products that are not purchasable yet.
+ */
+export function planOffers(plan: PricingPlan) {
+  if (!plan.price) return undefined;
+
+  const periods = [
+    { key: "monthly", months: 1 },
+    { key: "yearly", months: 12 },
+  ] as const;
+
+  const trialNote = plan.trial ? `${plan.trial}. ` : "";
+
+  return REGIONS.flatMap(({ id, currency }) =>
+    periods.map(({ key, months }) => {
+      const amount = plan.price![id][key];
+      return {
+        "@type": "Offer",
+        price: String(amount),
+        priceCurrency: currency,
+        availability: "https://schema.org/InStock",
+        url: `${SITE_URL}/pricing`,
+        description: `${trialNote}Billed per business account, inclusive of GST.`,
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: amount,
+          priceCurrency: currency,
+          valueAddedTaxIncluded: true,
+          billingDuration: months,
+          unitCode: "MON",
+        },
+      };
+    }),
+  );
 }
 
 /**
