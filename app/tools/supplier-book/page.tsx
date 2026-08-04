@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SupplierBookTool } from "@/components/tools/SupplierBook/SupplierBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Supplier Book | Vendor Contacts & GSTIN | Setu",
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function SupplierBookPage() {
   return (
     <>
+      <ToolSchema slug="supplier-book" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

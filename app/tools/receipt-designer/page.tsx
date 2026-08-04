@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ReceiptDesignerTool } from "@/components/tools/ReceiptDesigner/ReceiptDesignerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Receipt Designer | Thermal Receipt Templates | Setu",
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function ReceiptDesignerPage() {
   return (
     <>
+      <ToolSchema slug="receipt-designer" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

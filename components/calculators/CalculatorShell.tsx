@@ -5,10 +5,24 @@ import { Faq } from "@/components/Faq";
 import { CtaBanner } from "@/components/CtaBanner";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { CalculatorCard } from "@/components/calculators/CalculatorCard";
-import { getRelatedCalculators, type CalculatorItem } from "@/lib/content";
+import {
+  getRelatedCalculators,
+  getTeamMember,
+  FINANCE_AUTHOR_SLUG,
+  type CalculatorItem,
+} from "@/lib/content";
+import { toolApplicationSchema } from "@/lib/schema";
 
 export function CalculatorShell({ item, children }: { item: CalculatorItem; children: ReactNode }) {
   const related = getRelatedCalculators(item.slug, 3);
+
+  // One block here covers every calculator page.
+  const applicationSchema = toolApplicationSchema({
+    name: item.name,
+    description: item.shortDescription,
+    path: `/calculators/${item.slug}`,
+    author: getTeamMember(FINANCE_AUTHOR_SLUG),
+  });
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -22,6 +36,10 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(applicationSchema) }}
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <PageHero eyebrow={item.hero.eyebrow} headline={item.hero.headline} subheadline={item.hero.subheadline} />

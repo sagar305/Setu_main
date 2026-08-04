@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BarcodeGeneratorTool } from "@/components/tools/BarcodeGenerator/BarcodeGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Barcode Generator | EAN-13, Code 128 & QR | Setu",
@@ -74,6 +75,7 @@ const faqSchema = {
 export default function BarcodeGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="barcode-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

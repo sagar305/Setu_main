@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BusinessProfileTool } from "@/components/tools/BusinessProfile/BusinessProfileTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Business Profile | One Setup for Every Setu Tool | Setu",
@@ -56,6 +57,7 @@ const faqSchema = {
 export default function BusinessProfilePage() {
   return (
     <>
+      <ToolSchema slug="business-profile" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

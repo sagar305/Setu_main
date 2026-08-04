@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AppointmentBookTool } from "@/components/tools/AppointmentBook/AppointmentBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Appointment Book | Salons, Clinics & Services | Setu",
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function AppointmentBookPage() {
   return (
     <>
+      <ToolSchema slug="appointment-book" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

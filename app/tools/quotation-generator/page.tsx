@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { QuotationGeneratorTool } from "@/components/tools/QuotationGenerator/QuotationGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Quotation Generator | Estimates & Quotes | Setu",
@@ -74,6 +75,7 @@ const faqSchema = {
 export default function QuotationGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="quotation-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

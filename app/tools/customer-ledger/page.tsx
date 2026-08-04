@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CustomerLedgerTool } from "@/components/tools/CustomerLedger/CustomerLedgerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Customer Ledger — Digital Udhaar Khata | Setu",
@@ -66,6 +67,7 @@ const faqSchema = {
 export default function CustomerLedgerPage() {
   return (
     <>
+      <ToolSchema slug="customer-ledger" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

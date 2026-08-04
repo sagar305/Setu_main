@@ -10,8 +10,11 @@ import {
   getBlogPostUrl,
   getLatestBlogPosts,
   getRelatedBlogPostsByCategory,
+  getTeamMember,
+  blogAuthorSlug,
   slugifyCategory,
 } from "@/lib/content";
+import { personSchema } from "@/lib/schema";
 import { extractHeadings } from "@/lib/blog";
 import { getPublicImageSize } from "@/lib/image-size";
 import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
@@ -111,6 +114,7 @@ export default async function BlogPostPage({
   const latestPosts = getLatestBlogPosts(5, post.slug);
   const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
   const connectedTools = getBlogConnectedTools(post).slice(0, 5);
+  const postAuthor = getTeamMember(blogAuthorSlug(slugifyCategory(post.category)));
   const thumbnailSize = post.thumbnail ? getPublicImageSize(post.thumbnail) : null;
 
   const articleSchema = {
@@ -122,7 +126,9 @@ export default async function BlogPostPage({
     // Equal to datePublished until the post's content actually changes; kept
     // current by `npm run sync:post-dates`.
     dateModified: post.updated ?? post.date,
-    author: { "@type": "Organization", name: "Setu Technology" },
+    // Credited in structured data only — deliberately not rendered as a byline.
+    // Finance categories are the CEO's; everything else is the CMO's.
+    author: postAuthor ? personSchema(postAuthor) : { "@type": "Organization", name: "Setu Technology" },
     publisher: { "@type": "Organization", name: "Setu Technology" },
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,
   };

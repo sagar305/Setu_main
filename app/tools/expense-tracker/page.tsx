@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTrackerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Expense Tracker for Small Business | Setu",
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function ExpenseTrackerPage() {
   return (
     <>
+      <ToolSchema slug="expense-tracker" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

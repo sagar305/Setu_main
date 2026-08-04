@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProfitDashboardTool } from "@/components/tools/ProfitDashboard/ProfitDashboardTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free Profit Dashboard | Sales Minus Real Costs | Setu",
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function ProfitDashboardPage() {
   return (
     <>
+      <ToolSchema slug="profit-dashboard" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

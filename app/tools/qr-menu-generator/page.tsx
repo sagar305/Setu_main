@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
 import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
   title: "Free QR Menu Generator for Restaurants | No Signup",
@@ -109,6 +110,7 @@ const faqSchema = {
 export default function QrMenuGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="qr-menu-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

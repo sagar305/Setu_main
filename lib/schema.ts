@@ -4,7 +4,39 @@
 // so swapping the quote-based pattern for real published prices is a single
 // edit rather than five.
 
+import type { TeamMember } from "@/lib/team";
+
 const SITE_URL = "https://setutechnology.com";
+
+export const TEAM_PAGE_PATH = "/team";
+
+/** Canonical profile URL for a team member. */
+export function teamMemberUrl(member: Pick<TeamMember, "slug">) {
+  return `${SITE_URL}${TEAM_PAGE_PATH}#${member.slug}`;
+}
+
+/**
+ * Person JSON-LD for a team member. Optional fields are only emitted when the
+ * data actually exists, so an unfilled bio or photo never produces an empty
+ * property that claims something we don't have.
+ */
+export function personSchema(member: TeamMember) {
+  return {
+    "@type": "Person",
+    name: member.name,
+    url: teamMemberUrl(member),
+    jobTitle: member.role,
+    ...(member.education.length > 0 ? { honorificSuffix: member.education.join(", ") } : {}),
+    ...(member.image ? { image: `${SITE_URL}${member.image}` } : {}),
+    ...(member.bio ? { description: member.bio } : {}),
+    ...(member.social.length > 0 ? { sameAs: member.social.map((s) => s.href) } : {}),
+    worksFor: {
+      "@type": "Organization",
+      name: "Setu Technology",
+      url: SITE_URL,
+    },
+  };
+}
 
 type Availability = "InStock" | "PreOrder";
 
@@ -46,6 +78,44 @@ export function quoteOffer({
       "@type": "PriceSpecification",
       priceCurrency: "INR",
       description,
+    },
+  };
+}
+
+/**
+ * WebApplication JSON-LD for a free browser-based calculator or tool.
+ *
+ * These pages previously carried only FAQPage schema, so nothing described the
+ * tool itself, who built it, or that it costs nothing. `author` is a
+ * CreativeWork property and WebApplication is a CreativeWork, so crediting a
+ * named person here is valid and gives AI systems an accountable source.
+ */
+export function toolApplicationSchema({
+  name,
+  description,
+  path,
+  author,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  author: TeamMember | undefined;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    browserRequirements: "Requires JavaScript. Runs in any modern browser.",
+    offers: freeOffer({ url: path }),
+    ...(author ? { author: personSchema(author) } : {}),
+    publisher: {
+      "@type": "Organization",
+      name: "Setu Technology",
+      url: SITE_URL,
     },
   };
 }
