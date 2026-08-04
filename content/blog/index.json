@@ -14,6 +14,14 @@
     "subheadline": "Notes on running better operations, from the team building software for it."
   },
   "posts": [
+      {
+      "slug": "qr-menu-generator-2026-reprinting-problem",
+      "title": "The Hidden Cost of a Free QR Menu in 2026: Every Price Change Means Reprinting Every Code",
+      "excerpt": "A free QR menu that packs your whole menu inside the code is brilliant until your first price change. Here's why 2026's ingredient price swings are exposing that gap, and how a permanent-link QR code fixes it without losing the free tool you started with.",
+      "date": "2026-08-04",
+      "category": "Menu Ops",
+      "thumbnail": "/blog/thumbnails/qr-menu-generator-2026-reprinting-problem.jpeg"
+    },
     {
       "slug": "cash-flow-vs-profit-sme-2026",
       "title": "Cash Flow vs. Profit in 2026: Why a Profitable SME Can Still Run Out of Money",
