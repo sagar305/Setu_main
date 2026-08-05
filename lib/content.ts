@@ -101,10 +101,11 @@ function loadBlogIndex(): BlogIndex {
     const raw = fs.readFileSync(path.join(BLOG_DIR, "index.json"), "utf8");
     const index = JSON.parse(raw) as BlogIndex;
 
-    // The per-post file (posts/<slug>.json) is the source of truth for the
-    // thumbnail. Overlay it onto the listing summaries so a thumbnail set there
-    // shows on the blog cards (list, "latest posts", "more from category")
-    // without also having to edit index.json.
+    // Listing cards and the article read different images on purpose: the card
+    // crops to 3:2 while social platforms crop a shared link to about 1.91:1,
+    // so index.json points at /blog/thumbnails/listing/<slug> and the post file
+    // at /blog/thumbnails/<slug>. Where index.json has no thumbnail, fall back
+    // to the post's own image so older posts keep working with one file.
     index.posts = index.posts.map((post) => {
       if (post.thumbnail) return post;
       const file = path.join(BLOG_POSTS_DIR, `${post.slug}.json`);

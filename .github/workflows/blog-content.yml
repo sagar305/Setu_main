@@ -1,0 +1,74 @@
+name: Blog content
+
+# Blog posts are often added straight through the GitHub UI, where npm scripts
+# cannot be run. This fills in each post's `updated` date and content
+# fingerprint automatically, then runs the same checks `npm run build` runs
+# locally, so a post with an over-length title or a missing category block is
+# caught here rather than at deploy time.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "scripts/**"
+      - "package.json"
+      - ".github/workflows/blog-content.yml"
+  pull_request:
+    paths:
+      - "content/**"
+      - "scripts/**"
+      - "package.json"
+      - ".github/workflows/blog-content.yml"
+  workflow_dispatch:
+
+jobs:
+  sync-dates:
+    # Only on push: a pull request from a fork cannot be pushed back to.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fill in post dates and fingerprints
+        run: npm run sync:post-dates
+
+      - name: Commit any changes
+        run: |
+          if [ -z "$(git status --porcelain content/blog)" ]; then
+            echo "Post dates already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blog
+          # [skip ci] stops this commit from triggering the workflow again.
+          git commit -m "Update blog post dates [skip ci]"
+          git push
+
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Runs check:pricing, the Next build, and check:seo.
+      - name: Build and run site checks
+        run: npm run build
