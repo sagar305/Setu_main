@@ -72,12 +72,20 @@
   },
   "posts": [
       {
-      "slug": "qr-menu-generator-2026-reprinting-problem",
-      "title": "The Hidden Cost of a Free QR Menu in 2026: Every Price Change Means Reprinting Every Code",
-      "excerpt": "A free QR menu that packs your whole menu inside the code is brilliant until your first price change. Here's why 2026's ingredient price swings are exposing that gap, and how a permanent-link QR code fixes it without losing the free tool you started with.",
-      "date": "2026-08-04",
-      "category": "Menu Ops",
-      "thumbnail": "/blog/thumbnails/qr-menu-generator-2026-reprinting-problem.jpeg"
+        "slug": "payroll-compliance-2026-outsourcing-checklist",
+        "title": "Payroll Compliance Just Got Harder in 2026: What Outsourcing Actually Buys You",
+        "excerpt": "New reporting codes, expanding state privacy laws and stricter e-filing penalties have made 2026 the most complex year yet for payroll compliance. Here's what changed, and what outsourcing actually buys you against it.",
+        "date": "2026-08-04",
+        "category": "Accounting",
+        "thumbnail": "/blog/thumbnails/listing/payroll-compliance-2026-outsourcing-checklist.jpeg"
+      },
+      {
+        "slug": "qr-menu-generator-2026-reprinting-problem",
+        "title": "The Hidden Cost of a Free QR Menu in 2026: Every Price Change Means Reprinting Every Code",
+        "excerpt": "A free QR menu that packs your whole menu inside the code is brilliant until your first price change. Here's why 2026's ingredient price swings are exposing that gap, and how a permanent-link QR code fixes it without losing the free tool you started with.",
+        "date": "2026-08-04",
+        "category": "Menu Ops",
+        "thumbnail": "/blog/thumbnails/qr-menu-generator-2026-reprinting-problem.jpeg"
     },
     {
       "slug": "cash-flow-vs-profit-sme-2026",
