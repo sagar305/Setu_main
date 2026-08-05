@@ -39,20 +39,33 @@ Add an entry to the **top** of the `posts` array in `content/blog/index.json`
   "excerpt": "One or two sentences, shown on the blog listing card.",
   "date": "2026-08-05",
   "category": "Menu Ops",
-  "thumbnail": "/blog/thumbnails/your-new-post.jpeg"
+  "thumbnail": "/blog/thumbnails/listing/your-new-post.jpeg"
 }
 ```
 
 Skip this and the post has no page and appears nowhere — the file alone is not
 enough.
 
-## 3. Add the thumbnail
+## 3. Add the two images
 
-Upload to `public/blog/thumbnails/<slug>.jpeg`, sized **1536×1024 (3:2)**.
+The listing card and the article read **different** files, so each can be sized
+for its own job:
 
-Anything wider gets its left and right edges cropped on the listing cards, so
-keep text inside the middle of the frame. Set `"thumbnail": null` if you have
-no image; a coloured placeholder is shown instead.
+| Image | Set in | Upload to | Size |
+| --- | --- | --- | --- |
+| Listing card | `index.json` | `public/blog/thumbnails/listing/<slug>.jpeg` | **1536×1024 (3:2)** |
+| Article + social share | `posts/<slug>.json` | `public/blog/thumbnails/<slug>.jpeg` | **1200×630 (1.91:1)** |
+
+Why two: the listing card crops to 3:2, while Facebook, LinkedIn and X crop
+shared links to roughly 1.91:1. One file cannot suit both — a 3:2 image loses
+its top and bottom when shared, and a 1.91:1 image loses its left and right
+edges on the cards. Keep any text near the middle of each frame.
+
+The article hero shows its image at whatever shape it is, so nothing is cropped
+there.
+
+Set either to `null` if you have no image. If `index.json` has no thumbnail, the
+listing falls back to the article image.
 
 ## What the Action does after you commit
 
