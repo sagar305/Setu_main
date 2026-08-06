@@ -15,6 +15,38 @@ import {
   Check,
   PlayCircle,
   Gift,
+  ShieldCheck,
+  FileCheck,
+  Megaphone,
+  Clock,
+  Images,
+  BookOpen,
+  Plus,
+  ListChecks,
+  Tags,
+  Leaf,
+  FileSpreadsheet,
+  LayoutTemplate,
+  SwatchBook,
+  PanelTop,
+  Store,
+  Search,
+  Calculator,
+  Sparkles,
+  Heart,
+  MapPin,
+  Star,
+  Share2,
+  Rows3,
+  ChevronsDownUp,
+  ListFilter,
+  Copy,
+  Eye,
+  Sparkle,
+  TriangleAlert,
+  BadgeCheck,
+  CalendarClock,
+  KeyRound,
 } from "lucide-react";
 import { getQrMenuContent, getPricingPlan } from "@/lib/content";
 import { planOffers } from "@/lib/schema";
@@ -72,7 +104,94 @@ const ICONS: Record<string, ComponentType<{ className?: string }>> = {
   BarChart3,
   Files,
   Palette,
+  ShieldCheck,
+  FileCheck,
+  Megaphone,
+  Clock,
+  Images,
+  BookOpen,
+  Plus,
+  ListChecks,
+  Tags,
+  Leaf,
+  FileSpreadsheet,
+  LayoutTemplate,
+  SwatchBook,
+  PanelTop,
+  Store,
+  Search,
+  Calculator,
+  Sparkles,
+  Heart,
+  MapPin,
+  Star,
+  Share2,
+  Rows3,
+  ChevronsDownUp,
+  ListFilter,
+  Copy,
+  Eye,
+  Sparkle,
+  TriangleAlert,
+  BadgeCheck,
+  CalendarClock,
+  KeyRound,
 };
+
+type FeatureItem = { icon: string; title: string; description: string };
+
+type Section = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  items: readonly FeatureItem[];
+};
+
+function SectionIntro({ section, onDark = false }: { section: Section; onDark?: boolean }) {
+  return (
+    <FadeIn>
+      <div className="mx-auto max-w-2xl text-center">
+        <p
+          className={`text-xs font-semibold uppercase tracking-[0.3em] ${
+            onDark ? "text-saffron" : "text-muted-warm"
+          }`}
+        >
+          {section.eyebrow}
+        </p>
+        <h2
+          className={`mt-4 text-3xl font-bold tracking-tight ${onDark ? "text-cream-paper" : "text-ink"}`}
+        >
+          {section.title}
+        </h2>
+        <p className={`mt-4 leading-relaxed ${onDark ? "text-cream-paper/80" : "text-muted"}`}>
+          {section.subtitle}
+        </p>
+      </div>
+    </FadeIn>
+  );
+}
+
+/** The card grid shared by the trust, dish-depth and branding sections. */
+function FeatureCards({ items }: { items: readonly FeatureItem[] }) {
+  return (
+    <FadeInStagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => {
+        const Icon = ICONS[item.icon] ?? QrCode;
+        return (
+          <FadeInStaggerItem key={item.title}>
+            <div className="h-full rounded-xl border border-muted-line/20 bg-white p-6 shadow-sm transition hover:border-indigo/30 hover:shadow-md">
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo/10">
+                <Icon className="h-5 w-5 text-indigo" />
+              </div>
+              <h3 className="mb-2 font-bold text-ink">{item.title}</h3>
+              <p className="text-sm leading-relaxed text-muted">{item.description}</p>
+            </div>
+          </FadeInStaggerItem>
+        );
+      })}
+    </FadeInStagger>
+  );
+}
 
 /**
  * The signup target is the app on another subdomain normally, but falls back to
@@ -211,6 +330,52 @@ export default function QrMenuProductPage() {
         </FadeInStagger>
       </section>
 
+      {/* Trust signals a diner checks before ordering */}
+      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro section={content.trust} />
+          <FeatureCards items={content.trust.items} />
+        </div>
+      </section>
+
+      {/* How deep a single dish goes */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <SectionIntro section={content.depth} />
+        <FeatureCards items={content.depth.items} />
+      </section>
+
+      {/* Templates, colours and business types */}
+      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro section={content.brand} />
+          <FeatureCards items={content.brand.items} />
+        </div>
+      </section>
+
+      {/* The diner's side of the scan */}
+      <section className="bg-indigo py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro section={content.diner} onDark />
+
+          <FadeInStagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {content.diner.items.map((item) => {
+              const Icon = ICONS[item.icon] ?? QrCode;
+              return (
+                <FadeInStaggerItem key={item.title}>
+                  <div className="h-full rounded-xl border border-cream-paper/15 bg-white/5 p-6">
+                    <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-saffron/20">
+                      <Icon className="h-5 w-5 text-saffron" />
+                    </div>
+                    <h3 className="mb-2 font-bold text-cream-paper">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-cream-paper/75">{item.description}</p>
+                  </div>
+                </FadeInStaggerItem>
+              );
+            })}
+          </FadeInStagger>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="border-t border-muted-line/20 bg-cream-paper py-16">
         <div className="mx-auto max-w-4xl px-6">
@@ -232,6 +397,30 @@ export default function QrMenuProductPage() {
                 </div>
               </FadeInStaggerItem>
             ))}
+          </FadeInStagger>
+        </div>
+      </section>
+
+      {/* Editor quality-of-life, for menus that have got long */}
+      <section className="border-t border-muted-line/20 bg-white py-16">
+        <div className="mx-auto max-w-5xl px-6">
+          <SectionIntro section={content.operator} />
+
+          <FadeInStagger className="mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+            {content.operator.items.map((item) => {
+              const Icon = ICONS[item.icon] ?? QrCode;
+              return (
+                <FadeInStaggerItem key={item.title}>
+                  <div className="flex min-w-0 gap-3">
+                    <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-indigo" />
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-ink">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{item.description}</p>
+                    </div>
+                  </div>
+                </FadeInStaggerItem>
+              );
+            })}
           </FadeInStagger>
         </div>
       </section>
