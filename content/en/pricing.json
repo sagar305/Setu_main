@@ -53,7 +53,9 @@
         "Dish photos, sizes and variations",
         "Mark items sold out instantly",
         "Multiple menus per outlet",
-        "Daily scan counts"
+        "Daily scan counts",
+        "Hygiene grade, hours and gallery",
+        "Three templates, eight editable colours"
       ],
       "cta": { "label": "Create your QR menu", "href": "/tools/qr-menu-generator" }
     },

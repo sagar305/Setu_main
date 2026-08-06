@@ -8,7 +8,7 @@
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
     "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
-    "primaryCta": { "label": "See Setu Dine", "href": "/products/restaurant-pos" },
+    "primaryCta": { "label": "Explore products", "href": "/products" },
     "secondaryCta": { "label": "Explore free tools", "href": "#tools" }
   },
   "tools": {

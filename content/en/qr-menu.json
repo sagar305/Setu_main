@@ -9,7 +9,11 @@
       "restaurant QR code menu India",
       "contactless menu",
       "QR menu with photos",
-      "menu management software"
+      "menu management software",
+      "restaurant hygiene grade on menu",
+      "digital menu for salon and spa",
+      "QR menu templates",
+      "veg non veg menu marks"
     ],
     "ogTitle": "QR Menu — print once, change the menu forever",
     "ogDescription": "Your menu lives online and the QR holds only a short permanent link, so a price change never means a reprint."
@@ -71,6 +75,206 @@
       "description": "Your logo, your colour, your currency. The menu looks like your restaurant, not like a template."
     }
   ],
+  "trust": {
+    "eyebrow": "What a diner is deciding",
+    "title": "The things people check before they order",
+    "subtitle": "A menu is not only prices. For someone who has never eaten with you, it is the thing they use to decide whether to trust you at all.",
+    "items": [
+      {
+        "icon": "ShieldCheck",
+        "title": "Your hygiene grade, beside your name",
+        "description": "Show your official grade — A, B, C or D — right next to the business name, where someone deciding whether to order will actually see it."
+      },
+      {
+        "icon": "FileCheck",
+        "title": "The certificate, one tap away",
+        "description": "Upload the certificate as an image or a PDF and a diner can open the document itself, instead of taking your word for the letter."
+      },
+      {
+        "icon": "Megaphone",
+        "title": "A pinned notice at the top",
+        "description": "GST extra. 5% service charge. Kitchen closes at 10:30. Put it where it gets read before the order rather than argued about after the bill."
+      },
+      {
+        "icon": "Clock",
+        "title": "Opening hours with a live badge",
+        "description": "Set your hours for each day and the menu works out whether you are open, showing an Open now badge on its own. Fewer calls asking."
+      },
+      {
+        "icon": "Images",
+        "title": "A gallery of up to twelve photos",
+        "description": "The room, the counter, the tandoor, the plates. Photos that do not belong to any one dish get a gallery of their own."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "An About Us page behind the menu",
+        "description": "Who you are, who cooks, what year you opened. One tap from the menu, for the diners who want to know before they order."
+      }
+    ]
+  },
+  "depth": {
+    "eyebrow": "Dishes",
+    "title": "A dish is more than a name and a price",
+    "subtitle": "Sizes and variations are where most menus stop. This is what sits underneath them.",
+    "items": [
+      {
+        "icon": "Plus",
+        "title": "Add-on pricing",
+        "description": "Options that add to the dish price instead of replacing it. Extra cheese +₹40, add a scoop +₹30 — the diner sees what it comes to."
+      },
+      {
+        "icon": "ListChecks",
+        "title": "Pick-several option groups",
+        "description": "Toppings, sides, spice level. Some groups take a single choice, others take as many as the diner wants — you decide that per group."
+      },
+      {
+        "icon": "Tags",
+        "title": "Up to three labels a dish",
+        "description": "Bestseller, Chef's special, Spicy, New. Up to three labels per dish, each with its own icon, so the menu points somewhere instead of lying flat."
+      },
+      {
+        "icon": "Leaf",
+        "title": "Veg and non-veg marks",
+        "description": "The green and brown marks Indian diners look for first, drawn the way the FSSAI convention expects. On a menu in India this is not decoration."
+      },
+      {
+        "icon": "FileSpreadsheet",
+        "title": "Excel that survives the round trip",
+        "description": "Export to Excel, change a hundred prices in a spreadsheet, import it back. Variations and labels come back intact rather than flattened into plain rows."
+      }
+    ]
+  },
+  "brand": {
+    "eyebrow": "Templates and branding",
+    "title": "Three templates, your colours, eleven kinds of business",
+    "subtitle": "The menu should look like your place, not like the software it was built in.",
+    "items": [
+      {
+        "icon": "LayoutTemplate",
+        "title": "Three menu templates",
+        "description": "Classic, Bistro and Trattoria lay the same dishes out in quite different ways. Switch whenever you like — your dishes stay exactly where they are."
+      },
+      {
+        "icon": "SwatchBook",
+        "title": "Eight colours you can edit",
+        "description": "Each template gives you eight editable colour tokens, not one brand colour stretched over everything. Match your signage properly instead of getting close."
+      },
+      {
+        "icon": "PanelTop",
+        "title": "A banner behind the menu header",
+        "description": "Your room, your counter or your best plate sits behind the header. It is the first thing anyone sees in the second after the scan."
+      },
+      {
+        "icon": "Tags",
+        "title": "Cuisine chips under your name",
+        "description": "North Indian, Chinese, Bakery. Small chips under the business name tell a diner what to expect before they scroll a single category."
+      },
+      {
+        "icon": "Store",
+        "title": "Not only restaurants",
+        "description": "Eleven business types to choose from, salons, spas and retail shops included. Pick yours and the menu reads like your price list, not someone else's food menu."
+      }
+    ]
+  },
+  "diner": {
+    "eyebrow": "After the scan",
+    "title": "What the person holding the phone gets",
+    "subtitle": "Everything above is for you. This is the menu your diner actually holds.",
+    "items": [
+      {
+        "icon": "Search",
+        "title": "Search across the whole menu",
+        "description": "Type paneer and get every match, in names and descriptions alike. On a long menu that is the difference between ordering and giving up."
+      },
+      {
+        "icon": "Calculator",
+        "title": "A price calculator on every dish",
+        "description": "A quantity stepper on the dish, with the total worked out as it goes. Handy for a table of six, and for anyone keeping an eye on the bill."
+      },
+      {
+        "icon": "Sparkles",
+        "title": "A recommendations carousel",
+        "description": "The dishes you want ordered, in a swipeable row at the top of the menu, in front of everyone who scans."
+      },
+      {
+        "icon": "Heart",
+        "title": "Favourites, kept on their own phone",
+        "description": "A regular marks what they always order and it is there next time. Stored on their device, with no account to make and nothing for you to hold."
+      },
+      {
+        "icon": "MapPin",
+        "title": "An address that opens Maps",
+        "description": "Tap the address and Google Maps or Apple Maps opens with directions. The shortest route from a forwarded menu link to someone walking in."
+      },
+      {
+        "icon": "Star",
+        "title": "A link to your reviews",
+        "description": "Send a happy diner to the place where a review counts, while the meal is still in front of them rather than three days later."
+      },
+      {
+        "icon": "Share2",
+        "title": "A share sheet",
+        "description": "Diners forward the menu to whoever is joining them. Your menu travels on WhatsApp without you having to send anything."
+      }
+    ]
+  },
+  "operator": {
+    "eyebrow": "In the editor",
+    "title": "Built for the day your menu hits a hundred dishes",
+    "subtitle": "Nobody wants to scroll a hundred open forms to change one price.",
+    "items": [
+      {
+        "icon": "Rows3",
+        "title": "Dish rows fold to one line",
+        "description": "Every dish collapses to a summary line — name, price, status. Open only the one you came to change."
+      },
+      {
+        "icon": "ChevronsDownUp",
+        "title": "Collapsible categories",
+        "description": "Fold a category away, or expand and collapse the whole menu in a click."
+      },
+      {
+        "icon": "ListFilter",
+        "title": "Search and filter while editing",
+        "description": "Find a dish by name or narrow the editor to one category instead of hunting down the page."
+      },
+      {
+        "icon": "Copy",
+        "title": "Duplicate a menu to draft safely",
+        "description": "Copy the live menu, rework the copy at your own pace, switch when it is ready. Nobody scanning sees the draft."
+      },
+      {
+        "icon": "Eye",
+        "title": "Live preview beside the editor",
+        "description": "The diner's view sits next to the form and moves as you type. No publish-and-check loop."
+      },
+      {
+        "icon": "Sparkle",
+        "title": "Choose what gets recommended",
+        "description": "Pick the category that feeds the recommendations carousel, so the dishes you push are the ones you chose."
+      },
+      {
+        "icon": "TriangleAlert",
+        "title": "It tells you when a save fails",
+        "description": "If a setting does not reach the server you are told about it. Silence is never treated as success."
+      },
+      {
+        "icon": "BadgeCheck",
+        "title": "Your grading authority, your wording",
+        "description": "MCD, FSSAI, BMC or whoever grades you — set the issuing authority so the badge on your menu says the right thing."
+      },
+      {
+        "icon": "CalendarClock",
+        "title": "The grade retires itself",
+        "description": "Give the certificate its expiry date and the grade leaves the menu when it lapses. A stale grade on display is worse than no grade."
+      },
+      {
+        "icon": "KeyRound",
+        "title": "Password reset by OTP",
+        "description": "Locked out at nine on a Saturday? A one-time code to your email gets you back into the editor."
+      }
+    ]
+  },
   "howItWorks": [
     {
       "title": "Create your account",
@@ -120,12 +324,18 @@
       "A permanent QR code",
       "Unlimited dishes and categories",
       "Dish photos and category banners",
-      "Sizes and variations",
+      "Sizes, variations and add-on pricing",
       "Sold-out toggles",
-      "Multiple menus",
+      "Multiple menus, and duplicates to draft in",
       "Daily scan analytics",
       "Excel import and export",
-      "Your logo, colour and currency"
+      "Your logo, colour and currency",
+      "Three templates, eight editable colours",
+      "Hygiene grade and certificate",
+      "Opening hours and an Open now badge",
+      "Photo gallery and About Us page",
+      "Dish labels, veg and non-veg marks",
+      "Diner search, favourites and sharing"
     ]
   },
   "faq": [
@@ -140,6 +350,22 @@
     {
       "question": "Can I move my menu over from the free tool?",
       "answer": "Yes. Paste the menu link from the free tool and every dish comes across, along with your tagline, phone number, address and brand colour. You can also import an Excel or CSV sheet."
+    },
+    {
+      "question": "Can I show my hygiene grade on the menu?",
+      "answer": "Yes. Your official grade — A, B, C or D — sits beside your business name, and you can upload the certificate itself as an image or a PDF for diners to open. Set the issuing authority to whoever grades you, MCD, FSSAI, BMC or another, and give the certificate its expiry date: the grade takes itself off the menu when it lapses, so an out-of-date grade is never on display."
+    },
+    {
+      "question": "Is this only for restaurants?",
+      "answer": "No. There are eleven business types to choose from, including salons, spas and retail shops. Pick yours and the menu presents itself as your price list rather than as a food menu — same permanent QR code, same editor, same photos and variations."
+    },
+    {
+      "question": "Can I make the menu look like my brand?",
+      "answer": "Three templates — Classic, Bistro and Trattoria — each with eight colour tokens you can edit, so you match your signage rather than approximating it with a single accent colour. Add a banner image behind the menu header, your logo, and cuisine chips under your business name."
+    },
+    {
+      "question": "What does a diner get besides the list of dishes?",
+      "answer": "Search across every dish name and description, a quantity stepper on each dish that totals as they go, a recommendations carousel, favourites saved on their own phone with no account, an address that opens Google or Apple Maps, a link to your reviews, and a share sheet so they can forward the menu to whoever is joining them."
     },
     {
       "question": "Do my customers need an app?",
