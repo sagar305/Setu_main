@@ -88,6 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/abc-analysis",
     "/tools/vendor-comparison",
     "/products/browser-based-pos",
+    "/products/free-restaurant-pos",
     "/blog",
     "/glossary",
     "/contact",

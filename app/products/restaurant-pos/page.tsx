@@ -97,6 +97,27 @@ export default function RestaurantPosPage() {
 
       <Faq headline={content.faq.headline} items={content.faq.items} />
 
+      {/* One restaurant on one device does not need a subscription — say so
+          plainly rather than making them find out after a demo call. */}
+      <section className="border-y border-muted-line/20 bg-cream-paper py-12">
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-ink">
+            Running a single restaurant? Try it free first.
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            Free Dine is a complete restaurant POS for one outlet on one device — tables, kitchen
+            tickets, split bills and GST — free forever, with no signup. Setu Dine is what you move
+            to when you need several outlets, devices or staff logins.
+          </p>
+          <Link
+            href="/products/free-restaurant-pos"
+            className="mt-6 inline-block rounded-full border border-indigo px-6 py-2.5 text-sm font-semibold text-indigo transition hover:bg-indigo hover:text-cream-paper"
+          >
+            Open the free restaurant POS →
+          </Link>
+        </div>
+      </section>
+
       <section className="bg-indigo py-16 text-center text-cream-paper">
         <div className="mx-auto max-w-2xl px-6">
           <h2 className="text-3xl font-bold tracking-tight">{content.cta.headline}</h2>
