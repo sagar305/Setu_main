@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { calculateCartTotals } from "@/lib/pos/calc";
+import { isToolEnabled } from "@/lib/pos/posTools";
 import {
   formatMoney,
   type CartLine,
@@ -43,6 +44,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     removeHeldCart,
   } = usePos();
   const currency = business?.currency ?? "INR";
+  // Credit (udhaar) only appears when the Customer Ledger tool is switched on
+  // in Settings → Connected tools.
+  const creditEnabled = isToolEnabled(settings.connectedTools, "customer-ledger");
 
   const [search, setSearch] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -167,14 +171,15 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   const selectedPaymentId = paymentMethodId || payments[0]?.id || "";
 
-  // Credit (udhaar) is only offered for SAVED customers — never walk-ins.
-  // If the customer is cleared while credit is selected, fall back to the
-  // default payment method.
+  // Credit (udhaar) is only offered for SAVED customers — never walk-ins —
+  // and only while the Customer Ledger tool is connected. If either stops
+  // being true while credit is selected, fall back to the default method so a
+  // sale can never post as udhaar once the option is gone.
   useEffect(() => {
-    if (!customerId && paymentMethodId === CREDIT_PAYMENT_ID) {
+    if ((!customerId || !creditEnabled) && paymentMethodId === CREDIT_PAYMENT_ID) {
       setPaymentMethodId("");
     }
-  }, [customerId, paymentMethodId]);
+  }, [customerId, creditEnabled, paymentMethodId]);
 
   const clearCart = () => {
     setLines([]);
@@ -540,7 +545,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     {method.name}
                   </button>
                 ))}
-                {customerId ? (
+                {customerId && creditEnabled ? (
                   <button
                     type="button"
                     onClick={() => setPaymentMethodId(CREDIT_PAYMENT_ID)}
