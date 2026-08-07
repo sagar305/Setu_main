@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 
 export const metadata: Metadata = {
-  title: "Free Purchase Order Generator | Setu Technology",
+  title: "Free Purchase Order Generator | Setu",
   description: "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup.",
   keywords: ["purchase order generator", "PO maker", "purchase order format", "free purchase order template", "PO PDF"],
   alternates: { canonical: "/tools/purchase-order-generator" },

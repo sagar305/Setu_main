@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ProfitLossTool } from "@/components/tools/statements/ProfitLossTool";
 
 export const metadata: Metadata = {
-  title: "Free Profit & Loss Statement | Setu Technology",
+  title: "Free Profit & Loss Statement | Setu",
   description: "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup.",
   keywords: ["profit and loss statement", "P&L maker", "income statement online", "profit loss format", "free P&L template"],
   alternates: { canonical: "/tools/profit-loss-statement" },

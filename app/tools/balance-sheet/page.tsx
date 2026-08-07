@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BalanceSheetTool } from "@/components/tools/statements/BalanceSheetTool";
 
 export const metadata: Metadata = {
-  title: "Free Balance Sheet Maker | Setu Technology",
+  title: "Free Balance Sheet Maker | Setu",
   description: "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup.",
   keywords: ["balance sheet maker", "balance sheet format", "balance sheet online free", "assets liabilities equity", "small business balance sheet"],
   alternates: { canonical: "/tools/balance-sheet" },

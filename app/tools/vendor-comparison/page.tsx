@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { VendorComparisonTool } from "@/components/tools/analysis/VendorComparisonTool";
 
 export const metadata: Metadata = {
-  title: "Free Vendor Comparison Tool | Setu Technology",
+  title: "Free Vendor Comparison Tool | Setu",
   description: "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup.",
   keywords: ["vendor comparison", "supplier comparison tool", "supplier scorecard", "vendor selection criteria", "weighted supplier scoring"],
   alternates: { canonical: "/tools/vendor-comparison" },

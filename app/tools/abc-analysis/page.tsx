@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AbcAnalysisTool } from "@/components/tools/analysis/AbcAnalysisTool";
 
 export const metadata: Metadata = {
-  title: "Free ABC Analysis Calculator | Setu Technology",
+  title: "Free ABC Analysis Calculator | Setu",
   description: "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup.",
   keywords: ["ABC analysis", "inventory classification", "ABC inventory method", "pareto inventory analysis", "stock control ABC"],
   alternates: { canonical: "/tools/abc-analysis" },

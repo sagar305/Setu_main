@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JournalEntryTool } from "@/components/tools/bookkeeping/JournalEntryTool";
 
 export const metadata: Metadata = {
-  title: "Free Journal Entry Tool | Setu Technology",
+  title: "Free Journal Entry Tool | Setu",
   description: "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup.",
   keywords: ["journal entry", "double entry bookkeeping", "accounting journal online", "debit credit entry", "bookkeeping journal free"],
   alternates: { canonical: "/tools/journal-entry" },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BudgetVsActualTool } from "@/components/tools/analysis/BudgetVsActualTool";
 
 export const metadata: Metadata = {
-  title: "Free Budget vs Actual Tracker | Setu Technology",
+  title: "Free Budget vs Actual Tracker | Setu",
   description: "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup.",
   keywords: ["budget vs actual", "variance report", "budget tracker business", "budget variance analysis", "monthly budget comparison"],
   alternates: { canonical: "/tools/budget-vs-actual" },

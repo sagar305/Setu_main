@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CustomerStatementTool } from "@/components/tools/statements/CustomerStatementTool";
 
 export const metadata: Metadata = {
-  title: "Free Customer Statement Generator | Setu Technology",
+  title: "Free Customer Statement Generator | Setu",
   description: "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup.",
   keywords: ["customer statement", "statement of account", "customer account statement format", "outstanding balance statement", "debtor statement"],
   alternates: { canonical: "/tools/customer-statement" },

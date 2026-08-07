@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 
 export const metadata: Metadata = {
-  title: "Free Sales Order Generator | Setu Technology",
+  title: "Free Sales Order Generator | Setu",
   description: "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup.",
   keywords: ["sales order generator", "sales order format", "order confirmation document", "SO maker", "free sales order template"],
   alternates: { canonical: "/tools/sales-order-generator" },

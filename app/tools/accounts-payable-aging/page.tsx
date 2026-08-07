@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AgingReportTool } from "@/components/tools/aging/AgingReportTool";
 
 export const metadata: Metadata = {
-  title: "Free Accounts Payable Aging Report | Setu Technology",
+  title: "Free Accounts Payable Aging Report | Setu",
   description: "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup.",
   keywords: ["accounts payable aging", "AP aging report", "supplier bills tracker", "creditor aging", "payables report"],
   alternates: { canonical: "/tools/accounts-payable-aging" },

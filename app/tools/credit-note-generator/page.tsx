@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 
 export const metadata: Metadata = {
-  title: "Free Credit Note Generator | GST-Ready PDF | Setu Technology",
+  title: "Free Credit Note Generator | GST-Ready PDF | Setu",
   description: "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup.",
   keywords: ["credit note generator", "credit note format", "GST credit note", "credit note against invoice", "free credit note maker"],
   alternates: { canonical: "/tools/credit-note-generator" },
