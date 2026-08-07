@@ -1,0 +1,32 @@
+{
+  "seo": {
+    "title": "Leadership Team | Setu Technology",
+    "description": "Meet the people behind Setu Technology — the leadership team building operational software for restaurants, retail and small businesses in India and beyond.",
+    "keywords": ["Setu Technology team", "Setu Technology leadership", "Setu Technology founders"]
+  },
+  "hero": {
+    "eyebrow": "Team",
+    "headline": "The people behind Setu",
+    "subheadline": "A small team building operational software with the operators who use it."
+  },
+  "members": [
+    {
+      "slug": "suman-bansal",
+      "name": "Suman Bansal",
+      "role": "Chief Executive Officer",
+      "education": [],
+      "image": null,
+      "bio": "",
+      "social": []
+    },
+    {
+      "slug": "mayuri-agarwal",
+      "name": "Mayuri Agarwal",
+      "role": "Chief Marketing Officer",
+      "education": ["PhD", "B.Com", "B.Ed", "M.Ed"],
+      "image": null,
+      "bio": "",
+      "social": []
+    }
+  ]
+}

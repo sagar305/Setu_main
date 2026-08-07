@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { CashBookTool } from "@/components/tools/CashBook/CashBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Cash Book | Daily Cash In/Out & Closing Balance | Setu Technology",
+  title: "Free Cash Book | Daily Cash In/Out & Closing Balance | Setu",
   description:
     "Simple daily cash book for your shop — record cash in and out, get opening and closing balances automatically. Free, offline, no signup.",
   keywords: [
@@ -66,6 +67,7 @@ const faqSchema = {
 export default function CashBookPage() {
   return (
     <>
+      <ToolSchema slug="cash-book" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
+import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free QR Menu Generator for Restaurants | No Signup, No Hosting",
+  title: "Free QR Menu Generator for Restaurants | No Signup",
   description:
-    "Create a digital menu QR code for your restaurant in minutes. The whole menu is stored inside the QR code — no hosting, no subscription, no signup. Print and go.",
+    "Create a digital menu QR code in minutes. The whole menu is stored inside the QR code — no hosting, no subscription, no signup. Print it and go.",
   keywords: [
     "QR menu generator",
     "digital menu QR code",
@@ -72,6 +74,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Can I get a QR code that does not change when I update my menu?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes — that is what the premium QR menu tool is for. Your menu is stored online and the QR code holds only a short permanent link, so scanning it always shows your latest menu. Change a price, mark a dish sold out or swap in a seasonal menu and the printed QR code keeps working, so you never reprint your table tents. It also removes the size limit and adds photos, sold-out toggles and daily scan counts. The free tool on this page stores the whole menu inside the QR code itself, which is why a new QR is generated whenever the menu changes.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Can I import my menu from Excel or CSV?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -100,6 +110,7 @@ const faqSchema = {
 export default function QrMenuGeneratorPage() {
   return (
     <>
+      <ToolSchema slug="qr-menu-generator" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -254,6 +265,43 @@ export default function QrMenuGeneratorPage() {
                 <span>Hotel room-service cards and banquet menus</span>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-4 text-2xl font-bold text-ink">
+              Need a QR code that never changes?
+            </h2>
+            <p className="mb-4 text-muted">
+              Because this free tool stores your whole menu inside the QR code, a new code is
+              generated every time you edit the menu — and the menu has to fit in about 2,900
+              characters. If you would rather print a QR code once and never touch it again, the
+              premium QR menu keeps your menu online and puts only a short permanent link in the
+              code.
+            </p>
+            <ul className="mb-4 space-y-2 text-muted">
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>The same QR code stays valid after every price or dish change</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>No size limit — add as many categories and dishes as you need</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>Dish photos, sold-out toggles, and multiple menus you can switch between</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-indigo">✓</span>
+                <span>See how many people opened your menu each day</span>
+              </li>
+            </ul>
+            <a
+              href={QR_MENU_PRODUCT_PATH}
+              className="inline-block rounded-lg border border-indigo bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            >
+              Try the premium QR menu
+            </a>
           </div>
 
           <div>

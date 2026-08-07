@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -9,9 +10,13 @@ import {
   getBlogPostUrl,
   getLatestBlogPosts,
   getRelatedBlogPostsByCategory,
+  getTeamMember,
+  blogAuthorSlug,
   slugifyCategory,
 } from "@/lib/content";
+import { personSchema } from "@/lib/schema";
 import { extractHeadings } from "@/lib/blog";
+import { getPublicImageSize } from "@/lib/image-size";
 import { BlogTableOfContents } from "@/components/blog/BlogTableOfContents";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
@@ -84,6 +89,7 @@ export async function generateMetadata({
       url,
       type: "article",
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       images: shareImages,
     },
     twitter: {
@@ -108,6 +114,8 @@ export default async function BlogPostPage({
   const latestPosts = getLatestBlogPosts(5, post.slug);
   const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
   const connectedTools = getBlogConnectedTools(post).slice(0, 5);
+  const postAuthor = getTeamMember(blogAuthorSlug(slugifyCategory(post.category)));
+  const thumbnailSize = post.thumbnail ? getPublicImageSize(post.thumbnail) : null;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -115,9 +123,35 @@ export default async function BlogPostPage({
     headline: post.title,
     description: post.metaDescription ?? post.excerpt,
     datePublished: post.date,
-    author: { "@type": "Organization", name: "Setu Technology" },
+    // Equal to datePublished until the post's content actually changes; kept
+    // current by `npm run sync:post-dates`.
+    dateModified: post.updated ?? post.date,
+    // Credited in structured data only — deliberately not rendered as a byline.
+    // Finance categories are the CEO's; everything else is the CMO's.
+    author: postAuthor ? personSchema(postAuthor) : { "@type": "Organization", name: "Setu Technology" },
     publisher: { "@type": "Organization", name: "Setu Technology" },
     mainEntityOfPage: `https://setutechnology.com${getBlogPostUrl(post)}`,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://setutechnology.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://setutechnology.com/blog" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.category,
+        item: `https://setutechnology.com${getBlogCategoryUrl(slugifyCategory(post.category))}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+        item: `https://setutechnology.com${getBlogPostUrl(post)}`,
+      },
+    ],
   };
 
   const faqSchema =
@@ -136,6 +170,10 @@ export default async function BlogPostPage({
   return (
     <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
@@ -164,13 +202,18 @@ export default async function BlogPostPage({
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">{post.title}</h1>
 
-          {post.thumbnail && (
-            // Full image at its natural aspect ratio so nothing is cropped.
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+          {post.thumbnail && thumbnailSize && (
+            // Full image at its natural aspect ratio so nothing is cropped —
+            // the real intrinsic size is read off the file in /public, so the
+            // reserved box matches the image and nothing shifts on load.
+            <Image
               src={post.thumbnail}
               alt={post.title}
-              className="mt-8 w-full rounded-2xl border border-muted-line/20"
+              width={thumbnailSize.width}
+              height={thumbnailSize.height}
+              sizes="(max-width: 1024px) 100vw, 720px"
+              priority
+              className="mt-8 h-auto w-full rounded-2xl border border-muted-line/20"
             />
           )}
 

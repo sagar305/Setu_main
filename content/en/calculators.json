@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Free Business Calculators for Restaurants & Retail | Setu Technology",
-    "description": "Free online calculators for restaurants and small businesses — GST, profit margin, markup, break-even, food cost %, discount, loan EMI and table turnover rate. No signup needed.",
+    "title": "Free Business Calculators for Restaurants & Retail | Setu",
+    "description": "Free online calculators for restaurants and small businesses — GST, profit margin, markup, break-even, food cost, discount, loan EMI and more. No signup.",
     "keywords": [
       "business calculators",
       "restaurant calculators",
@@ -48,7 +48,7 @@
       "icon": "percent",
       "shortDescription": "Add or remove GST from any amount in a tap, for any tax slab.",
       "seo": {
-        "title": "GST Calculator — Add or Remove GST Online Free | Setu Technology",
+        "title": "GST Calculator — Add or Remove GST Online Free | Setu",
         "description": "Free GST calculator to add GST to a base amount or remove GST from a final price, for any GST rate. Get the tax amount and total instantly.",
         "keywords": [
           "GST calculator",
@@ -107,7 +107,7 @@
       "icon": "trending-up",
       "shortDescription": "Work out your profit margin and markup % from cost and selling price.",
       "seo": {
-        "title": "Profit Margin Calculator — Free Online Tool | Setu Technology",
+        "title": "Profit Margin Calculator — Free Online Tool | Setu",
         "description": "Calculate profit margin and markup percentage from your cost price and selling price. Free profit margin calculator for retail and restaurant businesses.",
         "keywords": [
           "profit margin calculator",
@@ -165,7 +165,7 @@
       "icon": "tag",
       "shortDescription": "Find the selling price you need to hit a target markup over cost.",
       "seo": {
-        "title": "Markup Calculator — Find Your Selling Price | Setu Technology",
+        "title": "Markup Calculator — Find Your Selling Price | Setu",
         "description": "Free markup calculator. Enter your cost price and target markup percentage to instantly find the selling price and profit per unit.",
         "keywords": [
           "markup calculator",
@@ -222,7 +222,7 @@
       "icon": "scale",
       "shortDescription": "Find out how many units you need to sell to cover your costs.",
       "seo": {
-        "title": "Break-Even Point Calculator — Free Online Tool | Setu Technology",
+        "title": "Break-Even Point Calculator — Free Online Tool | Setu",
         "description": "Calculate your break-even point in units and revenue. Free break-even calculator for restaurants, retail stores and small businesses.",
         "keywords": [
           "break-even calculator",
@@ -279,7 +279,7 @@
       "icon": "chef-hat",
       "shortDescription": "Check if a dish's ingredient cost is in a healthy range for its menu price.",
       "seo": {
-        "title": "Food Cost Percentage Calculator — Free for Restaurants | Setu Technology",
+        "title": "Food Cost Percentage Calculator for Restaurants | Setu",
         "description": "Free food cost percentage calculator for restaurants. Enter ingredient cost and menu price to find food cost % and profit per dish instantly.",
         "keywords": [
           "food cost calculator",
@@ -337,13 +337,9 @@
       "icon": "badge-percent",
       "shortDescription": "Work out the final price and savings for any discount or offer.",
       "seo": {
-        "title": "Discount Calculator — Final Price & Savings | Setu Technology",
-        "description": "Free discount calculator. Enter the original price and discount percentage to instantly see the final price and amount saved.",
-        "keywords": [
-          "discount calculator",
-          "percentage off calculator",
-          "sale price calculator"
-        ]
+        "title": "Discount Calculator — Final Price & Savings | Setu",
+        "description": "Calculate the discounted price and amount saved instantly. Enter the original price and discount percentage to see the final price and total savings in seconds.",
+        "keywords": ["discount calculator", "percentage off calculator", "sale price calculator"]
       },
       "hero": {
         "eyebrow": "Free Tool — Discount Calculator",
@@ -394,7 +390,7 @@
       "icon": "landmark",
       "shortDescription": "Estimate your monthly EMI, total interest and total payment on a business loan.",
       "seo": {
-        "title": "Business Loan EMI Calculator — Free Online Tool | Setu Technology",
+        "title": "Business Loan EMI Calculator — Free Online Tool | Setu",
         "description": "Free business loan EMI calculator. Enter loan amount, interest rate and tenure to instantly see your monthly EMI, total interest and total repayment.",
         "keywords": [
           "loan EMI calculator",
@@ -452,7 +448,7 @@
       "icon": "clock",
       "shortDescription": "See how many times each table turns over during service, and your average turn time.",
       "seo": {
-        "title": "Table Turnover Rate Calculator — Free for Restaurants | Setu Technology",
+        "title": "Table Turnover Rate Calculator — Free for Restaurants | Setu",
         "description": "Free table turnover rate calculator for restaurants. Enter covers served, number of tables and service hours to find turnover rate and average turn time.",
         "keywords": [
           "table turnover rate calculator",
@@ -509,7 +505,7 @@
       "icon": "wallet",
       "shortDescription": "See your monthly in-hand salary after PF, professional tax and other deductions from CTC.",
       "seo": {
-        "title": "Take-Home Salary Calculator — CTC to In-Hand Salary | Setu Technology",
+        "title": "Take-Home Salary Calculator — CTC to In-Hand Salary | Setu",
         "description": "Free take-home salary calculator. Enter your CTC to estimate monthly in-hand salary after PF, professional tax and other standard deductions.",
         "keywords": [
           "take home salary calculator",
@@ -567,14 +563,9 @@
       "icon": "receipt",
       "shortDescription": "Estimate income tax under the old vs new regime for FY 2025-26.",
       "seo": {
-        "title": "Income Tax Calculator (FY 2025-26) — Old vs New Regime | Setu Technology",
-        "description": "Free income tax calculator for FY 2025-26 (AY 2026-27). Compare old regime vs new regime tax and see which saves you more. Estimate only — verify against the latest Budget.",
-        "keywords": [
-          "income tax calculator",
-          "income tax calculator FY 2025-26",
-          "old vs new tax regime calculator",
-          "income tax calculator India"
-        ]
+        "title": "Income Tax Calculator FY 2025-26 — Old vs New Regime | Setu",
+        "description": "Free income tax calculator for FY 2025-26 (AY 2026-27). Compare old vs new regime and see which saves you more. Estimate only — verify against the Budget.",
+        "keywords": ["income tax calculator", "income tax calculator FY 2025-26", "old vs new tax regime calculator", "income tax calculator India"]
       },
       "hero": {
         "eyebrow": "Free Tool — Income Tax Calculator",
@@ -625,7 +616,7 @@
       "icon": "piggy-bank",
       "shortDescription": "Estimate gratuity payable under the Payment of Gratuity Act based on salary and years of service.",
       "seo": {
-        "title": "Gratuity Calculator — Payment of Gratuity Act | Setu Technology",
+        "title": "Gratuity Calculator — Payment of Gratuity Act | Setu",
         "description": "Free gratuity calculator. Enter last drawn salary and years of service to estimate gratuity payable under the Payment of Gratuity Act, 1972.",
         "keywords": [
           "gratuity calculator",
@@ -683,7 +674,7 @@
       "icon": "shopping-cart",
       "shortDescription": "See your real payout after platform commission, packaging and payment gateway charges on an online order.",
       "seo": {
-        "title": "Online Food Delivery Commission Calculator | Setu Technology",
+        "title": "Online Food Delivery Commission Calculator | Setu",
         "description": "Free online order commission calculator for restaurants. Enter order value, platform commission and other charges to see your real payout per order.",
         "keywords": [
           "food delivery commission calculator",
@@ -741,15 +732,9 @@
       "icon": "smartphone",
       "shortDescription": "Find the price to upload on Zomato, Swiggy or any app so you still take home your target amount after commission and GST.",
       "seo": {
-        "title": "Zomato Swiggy Menu Price Calculator | Setu Technology",
-        "description": "Free online menu price calculator for restaurants. Enter the amount you want to take home and find the listed price that covers commission, GST on commission, gateway fees and GST on the item.",
-        "keywords": [
-          "zomato menu price calculator",
-          "swiggy price calculator",
-          "online menu price after commission",
-          "delivery app pricing calculator",
-          "reverse commission calculator"
-        ]
+        "title": "Zomato Swiggy Menu Price Calculator | Setu",
+        "description": "Free online menu price calculator for restaurants. Enter your target take-home amount and find the listed price that covers commission, GST and gateway fees.",
+        "keywords": ["zomato menu price calculator", "swiggy price calculator", "online menu price after commission", "delivery app pricing calculator", "reverse commission calculator"]
       },
       "hero": {
         "eyebrow": "Free Tool — Online Menu Price Calculator",
@@ -801,7 +786,7 @@
       "icon": "utensils-crossed",
       "shortDescription": "Cost out a recipe ingredient by ingredient to find true cost per serving.",
       "seo": {
-        "title": "Recipe Costing Calculator — Cost Per Serving | Setu Technology",
+        "title": "Recipe Costing Calculator — Cost Per Serving | Setu",
         "description": "Free recipe costing calculator for restaurants. Add ingredients and quantities to find total recipe cost, cost per serving and a suggested menu price.",
         "keywords": [
           "recipe costing calculator",
@@ -859,7 +844,7 @@
       "icon": "martini",
       "shortDescription": "Find your pour cost percentage and profit on every drink you pour.",
       "seo": {
-        "title": "Liquor Pour Cost Calculator — Bar Cost Control | Setu Technology",
+        "title": "Liquor Pour Cost Calculator — Bar Cost Control | Setu",
         "description": "Free liquor pour cost calculator for bars and restaurants. Enter bottle cost, pour size and selling price to find pour cost % and profit per drink.",
         "keywords": [
           "pour cost calculator",
@@ -917,7 +902,7 @@
       "icon": "hand-coins",
       "shortDescription": "Split a shared tip pool fairly across staff by hours, shares or equally.",
       "seo": {
-        "title": "Tip Split Calculator — Fair Tip Pooling for Staff | Setu Technology",
+        "title": "Tip Split Calculator — Fair Tip Pooling for Staff | Setu",
         "description": "Free tip split calculator. Add staff and hours or shares to split a tip pool fairly — equal split, by hours worked, or by points.",
         "keywords": [
           "tip split calculator",
@@ -975,7 +960,7 @@
       "icon": "boxes",
       "shortDescription": "Find how many times your inventory sells through in a period, and how many days of stock you're holding.",
       "seo": {
-        "title": "Inventory Turnover Ratio Calculator — Free Tool | Setu Technology",
+        "title": "Inventory Turnover Ratio Calculator — Free Tool | Setu",
         "description": "Free inventory turnover calculator for retail businesses. Enter cost of goods sold and average inventory to find turnover ratio and days of inventory on hand.",
         "keywords": [
           "inventory turnover calculator",
@@ -1033,7 +1018,7 @@
       "icon": "refresh-cw",
       "shortDescription": "Find the exact stock level that should trigger your next reorder.",
       "seo": {
-        "title": "Stock Reorder Point Calculator — Avoid Stockouts | Setu Technology",
+        "title": "Stock Reorder Point Calculator — Avoid Stockouts | Setu",
         "description": "Free reorder point calculator for retail. Enter average daily sales, lead time and safety stock to find the stock level that should trigger reordering.",
         "keywords": [
           "reorder point calculator",
@@ -1091,7 +1076,7 @@
       "icon": "target",
       "shortDescription": "Find out exactly how much you're spending to acquire each new customer.",
       "seo": {
-        "title": "Customer Acquisition Cost (CAC) Calculator | Setu Technology",
+        "title": "Customer Acquisition Cost (CAC) Calculator | Setu",
         "description": "Free CAC calculator. Enter marketing spend and new customers acquired to find your customer acquisition cost, and compare it against revenue per customer.",
         "keywords": [
           "CAC calculator",
@@ -1149,7 +1134,7 @@
       "icon": "circle-dollar-sign",
       "shortDescription": "Find your average order value, and see the revenue impact of nudging it up.",
       "seo": {
-        "title": "Average Order Value (AOV) Calculator | Setu Technology",
+        "title": "Average Order Value (AOV) Calculator | Setu",
         "description": "Free AOV calculator. Enter total revenue and number of orders to find your average order value, and see the revenue impact of increasing it.",
         "keywords": [
           "average order value calculator",
@@ -1207,8 +1192,8 @@
       "icon": "chart-pie",
       "shortDescription": "Analyze your menu items by profit and popularity to identify stars, cash cows, puzzles and dogs.",
       "seo": {
-        "title": "Menu Engineering Calculator — Restaurant Menu Analysis Tool | Setu Technology",
-        "description": "Free menu engineering calculator for restaurants. Input menu items, prices, costs and popularity to identify profit drivers, optimize pricing, and increase margins.",
+        "title": "Menu Engineering Calculator for Restaurant Menus | Setu",
+        "description": "Free menu engineering calculator for restaurants. Enter prices, costs and popularity to find your profit drivers and fix the items losing you margin.",
         "keywords": [
           "menu engineering calculator",
           "restaurant menu analysis",

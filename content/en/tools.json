@@ -1,6 +1,6 @@
 {
   "seo": {
-    "title": "Free Business Tools for Restaurants & Retail | Setu Technology",
+    "title": "Free Business Tools for Restaurants & Retail | Setu",
     "description": "Free online business tools for restaurants and small businesses — invoice generator, calculators, and more. No signup needed.",
     "keywords": [
       "business tools",
@@ -279,7 +279,7 @@
       "icon": "boxes",
       "shortDescription": "Live stock levels, adjustments and movement history — shared with your POS.",
       "seo": {
-        "title": "Stock Register | Setu Technology",
+        "title": "Free Stock Register | Track Live Inventory Levels",
         "description": "Live stock levels and movement history, one source of truth with the Browser POS.",
         "keywords": [
           "stock register",
@@ -319,7 +319,7 @@
       "icon": "truck",
       "shortDescription": "All your vendors in one place — reused by the Purchase Register.",
       "seo": {
-        "title": "Supplier Book | Setu Technology",
+        "title": "Free Supplier Book | Manage Vendor Contacts & GSTIN",
         "description": "Keep supplier contacts, GSTIN and addresses in one reusable book.",
         "keywords": [
           "supplier book",
@@ -359,7 +359,7 @@
       "icon": "hand-coins",
       "shortDescription": "Daily cash in/out with automatic opening and closing balances.",
       "seo": {
-        "title": "Cash Book | Setu Technology",
+        "title": "Free Cash Book Tool | Track Daily Cash In & Out",
         "description": "Simple daily cash book with automatic opening and closing balances.",
         "keywords": [
           "cash book",
@@ -400,12 +400,8 @@
       "shortDescription": "Digital udhaar khata — credit, payments and balances per customer.",
       "seo": {
         "title": "Customer Ledger (Udhaar Khata) | Setu Technology",
-        "description": "Track credit given and payments received per customer, with balances.",
-        "keywords": [
-          "udhaar khata",
-          "customer ledger",
-          "credit book"
-        ]
+        "description": "Track customer balances, payments and dues in one free ledger. No signup — add customers, log transactions and see who owes what, instantly, in your browser.",
+        "keywords": ["udhaar khata", "customer ledger", "credit book"]
       },
       "hero": {
         "eyebrow": "Free Tool — Customer Ledger",

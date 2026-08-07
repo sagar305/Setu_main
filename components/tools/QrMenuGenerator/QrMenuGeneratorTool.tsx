@@ -23,12 +23,15 @@ import {
   createEmptyCategory,
   createEmptyItem,
   createEmptyMenu,
+  createEmptyVariant,
   createSampleMenu,
   QR_CAPACITY_M,
   QR_CAPACITY_MAX,
   type DietTag,
   type QrMenuData,
+  type QrVariant,
 } from "@/lib/qrmenu";
+import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
 import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
@@ -148,6 +151,69 @@ export function QrMenuGeneratorTool() {
           : c
       ),
     }));
+
+  // --- variants (one user-named group per dish in the free tool) -------------
+
+  const updateItemVariant = (
+    categoryId: string,
+    itemId: string,
+    update: (variant: QrVariant | null) => QrVariant | null
+  ) =>
+    setMenu((prev) => ({
+      ...prev,
+      categories: prev.categories.map((c) =>
+        c.id === categoryId
+          ? {
+              ...c,
+              items: c.items.map((item) =>
+                item.id === itemId ? { ...item, variant: update(item.variant) } : item
+              ),
+            }
+          : c
+      ),
+    }));
+
+  const addVariant = (categoryId: string, itemId: string) =>
+    updateItemVariant(categoryId, itemId, () => createEmptyVariant());
+
+  const removeVariant = (categoryId: string, itemId: string) =>
+    updateItemVariant(categoryId, itemId, () => null);
+
+  const renameVariant = (categoryId: string, itemId: string, name: string) =>
+    updateItemVariant(categoryId, itemId, (variant) =>
+      variant ? { ...variant, name } : variant
+    );
+
+  const addVariantOption = (categoryId: string, itemId: string) =>
+    updateItemVariant(categoryId, itemId, (variant) =>
+      variant ? { ...variant, options: [...variant.options, { name: "", price: "" }] } : variant
+    );
+
+  const updateVariantOption = (
+    categoryId: string,
+    itemId: string,
+    optionIndex: number,
+    field: "name" | "price",
+    value: string
+  ) =>
+    updateItemVariant(categoryId, itemId, (variant) =>
+      variant
+        ? {
+            ...variant,
+            options: variant.options.map((option, index) =>
+              index === optionIndex ? { ...option, [field]: value } : option
+            ),
+          }
+        : variant
+    );
+
+  const removeVariantOption = (categoryId: string, itemId: string, optionIndex: number) =>
+    updateItemVariant(categoryId, itemId, (variant) => {
+      if (!variant) return variant;
+      const options = variant.options.filter((_, index) => index !== optionIndex);
+      // Dropping the last option leaves nothing to price, so drop the group.
+      return options.length > 0 ? { ...variant, options } : null;
+    });
 
   const removeItem = (categoryId: string, itemId: string) =>
     setMenu((prev) => ({
@@ -512,6 +578,95 @@ export function QrMenuGeneratorTool() {
                     maxLength={120}
                     className={`${inputClass} mt-2`}
                   />
+
+                  {/* Variants: one user-named group per dish. Each option
+                      carries its own price and replaces the price above. */}
+                  {item.variant ? (
+                    <div className="mt-2 rounded-lg border border-indigo/20 bg-white p-3">
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={item.variant.name}
+                          onChange={(e) => renameVariant(category.id, item.id, e.target.value)}
+                          placeholder="Variation name (e.g. Size, Filling)"
+                          maxLength={40}
+                          className={`${inputClass} font-semibold`}
+                        />
+                        <button
+                          onClick={() => removeVariant(category.id, item.id)}
+                          title="Remove variations"
+                          aria-label="Remove variations"
+                          className="rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      <div className="mt-2 space-y-2">
+                        {item.variant.options.map((option, optionIndex) => (
+                          <div key={optionIndex} className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_110px_36px]">
+                            <input
+                              type="text"
+                              value={option.name}
+                              onChange={(e) =>
+                                updateVariantOption(
+                                  category.id,
+                                  item.id,
+                                  optionIndex,
+                                  "name",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Option (e.g. Half)"
+                              maxLength={40}
+                              className={inputClass}
+                            />
+                            <input
+                              type="text"
+                              inputMode="decimal"
+                              value={option.price}
+                              onChange={(e) =>
+                                updateVariantOption(
+                                  category.id,
+                                  item.id,
+                                  optionIndex,
+                                  "price",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="₹ Price"
+                              maxLength={12}
+                              className={inputClass}
+                            />
+                            <button
+                              onClick={() => removeVariantOption(category.id, item.id, optionIndex)}
+                              title="Remove option"
+                              aria-label="Remove option"
+                              className="flex items-center justify-center rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={() => addVariantOption(category.id, item.id)}
+                        className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-1.5 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                        Add option
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => addVariant(category.id, item.id)}
+                      className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-cream"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                      Add variations (size, filling…)
+                    </button>
+                  )}
                 </div>
               ))}
               <button
@@ -567,6 +722,21 @@ export function QrMenuGeneratorTool() {
                 Shorten dish descriptions or remove some items — or split the menu into two QR
                 codes (e.g. Food and Drinks).
               </p>
+              <div className="mt-3 rounded-lg border border-indigo/20 bg-white p-3 text-ink">
+                <p className="text-sm font-semibold">Or remove the limit entirely</p>
+                <p className="mt-1 text-xs text-muted">
+                  With the premium tool your menu is stored online and the QR code holds only a
+                  short permanent link — so there is no size limit, and the printed code keeps
+                  working every time you change a price or a dish.
+                </p>
+                <a
+                  href={QR_MENU_PRODUCT_PATH}
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-indigo bg-indigo px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700"
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Try the premium QR menu
+                </a>
+              </div>
             </div>
           )}
 
@@ -647,7 +817,11 @@ export function QrMenuGeneratorTool() {
               </div>
               {!overCapacity && capacityPercent > 80 && (
                 <p className="mt-1.5 text-xs text-amber-600">
-                  Getting close to the limit — keep descriptions short.
+                  Getting close to the limit — keep descriptions short, or{" "}
+                  <a href={QR_MENU_PRODUCT_PATH} className="font-semibold underline">
+                    switch to the premium tool
+                  </a>{" "}
+                  for an unlimited menu behind a QR code that never changes.
                 </p>
               )}
             </div>

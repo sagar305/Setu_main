@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Setu Queue — The QSR Operating System | Recipe, Kitchen & Food Cost Management",
-    "description": "Setu Queue is the operating system for modern QSRs — counter billing, kitchen display, recipe-driven inventory and real-time food cost tracking. Built for cafés, QSR chains, cloud kitchens and food courts.",
+    "title": "Setu Queue — QSR & Cloud Kitchen POS System",
+    "description": "Setu Queue is the operating system for modern QSRs — counter billing, kitchen display and real-time food cost tracking for cloud kitchens and cafes.",
     "keywords": ["Setu Queue", "QSR POS India", "cafe POS India", "cloud kitchen software", "food court POS", "kitchen display system", "food cost management software", "recipe management POS", "offline POS India"],
     "ogTitle": "Setu Queue — The QSR Operating System",
     "ogDescription": "Counter billing, kitchen display, recipe-driven inventory and real-time food cost — built for cafés, QSR chains, cloud kitchens and food courts.",
@@ -142,6 +142,37 @@
       }
     ],
     "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you."
+  },
+  "pricing": {
+    "badge": "First month free",
+    "title": "Free for a month. Then one price for the whole business.",
+    "subtitle": "Not per counter, not per outlet. One subscription covers your entire business, from a single kiosk to a full food court.",
+    "freeDuration": "for the first month",
+    "scopeNote": "One business account. Every counter, every user, everything below included.",
+    "note": "Prices include GST and are charged only after your free month ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
+    "plans": [
+      {
+        "region": "India",
+        "monthlyLabel": "₹499",
+        "yearlyLabel": "₹4,999",
+        "saveLabel": "Save ₹989 a year"
+      },
+      {
+        "region": "Rest of the world",
+        "monthlyLabel": "$4.99",
+        "yearlyLabel": "$49.99",
+        "saveLabel": "Save $9.89 a year"
+      }
+    ],
+    "includes": [
+      "Counter billing built for speed",
+      "Token management",
+      "Kitchen display routing",
+      "Customer pickup display",
+      "Real-time food cost tracking",
+      "Sales and item reporting"
+    ],
+    "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Queue" }
   },
   "faq": {
     "headline": "Frequently asked questions",

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { PurchaseRegisterTool } from "@/components/tools/PurchaseRegister/PurchaseRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
+import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Purchase Register | Record Supplier Bills | Setu Technology",
+  title: "Free Purchase Register | Record Supplier Bills | Setu",
   description:
     "Record purchase bills against suppliers, link items to your products and update stock automatically. Free, offline, no signup.",
   keywords: [
@@ -65,6 +66,7 @@ const faqSchema = {
 export default function PurchaseRegisterPage() {
   return (
     <>
+      <ToolSchema slug="purchase-register" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

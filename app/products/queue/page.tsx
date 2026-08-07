@@ -14,10 +14,13 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { getQueueContent } from "@/lib/content";
+import { getPricingPlan } from "@/lib/content";
+import { planOffers } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { QueueShowcase } from "@/components/QueueShowcase";
 import { QueueHeroVisual } from "@/components/QueueHeroVisual";
 import { Faq } from "@/components/Faq";
+import { ProductPricing } from "@/components/ProductPricing";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 
 const content = getQueueContent();
@@ -65,10 +68,7 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: content.seo.schemaDescription,
-  offers: {
-    "@type": "Offer",
-    availability: "https://schema.org/InStock",
-  },
+  offers: planOffers(getPricingPlan("setu-queue")!),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",
@@ -306,6 +306,8 @@ export default function QueuePage() {
           </FadeIn>
         </div>
       </section>
+
+      <ProductPricing pricing={content.pricing} />
 
       <Faq headline={content.faq.headline} items={content.faq.items} />
 

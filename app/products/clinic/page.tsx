@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getClinicContent } from "@/lib/content";
+import { quoteOffer } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { FadeIn } from "@/components/motion/FadeIn";
 
@@ -38,9 +39,33 @@ export const metadata: Metadata = {
   },
 };
 
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Setu Clinic",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description: content.seo.description,
+  offers: quoteOffer({
+    url: "/contact",
+    description: "Setu Clinic has not launched yet. Pricing will be announced at launch.",
+    availability: "PreOrder",
+  }),
+  provider: {
+    "@type": "Organization",
+    name: "Setu Technology",
+    url: "https://setutechnology.com",
+  },
+};
+
 export default function ClinicPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+      />
+
       <PageHero
         eyebrow={content.hero.eyebrow}
         headline={content.hero.headline}

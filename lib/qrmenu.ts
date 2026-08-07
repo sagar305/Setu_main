@@ -10,12 +10,30 @@ import LZString from "lz-string";
 
 export type DietTag = "" | "veg" | "nonveg";
 
+export interface QrVariantOption {
+  name: string;
+  /** A full price, not a difference from the item's price. */
+  price: string;
+}
+
+/**
+ * One user-named set of choices for a dish, e.g. "Size" with Small/Large.
+ * The free tool allows a single group per dish; the premium tool allows
+ * several. Each option carries its own price, so variants replace the item's
+ * single price rather than adding to it.
+ */
+export interface QrVariant {
+  name: string;
+  options: QrVariantOption[];
+}
+
 export interface QrMenuItem {
   id: string;
   name: string;
   price: string;
   description: string;
   tag: DietTag;
+  variant: QrVariant | null;
 }
 
 export interface QrMenuCategory {
@@ -33,8 +51,16 @@ export interface QrMenuData {
   categories: QrMenuCategory[];
 }
 
-// Compact wire format: [name, price, description, tag(0|1|2)]
-type WireItem = [string, string, string, number];
+// Compact wire format: [name, price, description, tag(0|1|2)] with an optional
+// 5th element for variants: [groupName, [[optionName, price], ...]].
+//
+// The 5th element is only written when a dish actually has variants, so menus
+// without them encode to exactly the same bytes as before and QR codes printed
+// from earlier versions still decode here.
+type WireVariant = [string, [string, string][]];
+type WireItem =
+  | [string, string, string, number]
+  | [string, string, string, number, WireVariant];
 interface WireCategory {
   n: string;
   i: WireItem[];
@@ -62,7 +88,16 @@ export function createId(): string {
 }
 
 export function createEmptyItem(): QrMenuItem {
-  return { id: createId(), name: "", price: "", description: "", tag: "" };
+  return { id: createId(), name: "", price: "", description: "", tag: "", variant: null };
+}
+
+export function createEmptyVariant(): QrVariant {
+  return { name: "", options: [{ name: "", price: "" }] };
+}
+
+/** Variants replace the single price, so only count ones with a named option. */
+export function hasVariant(item: QrMenuItem): boolean {
+  return Boolean(item.variant?.options.some((option) => option.name.trim()));
 }
 
 export function createEmptyCategory(name = ""): QrMenuCategory {
@@ -92,14 +127,26 @@ function toWire(menu: QrMenuData): WireMenu {
         n: category.name.trim(),
         i: category.items
           .filter((item) => item.name.trim())
-          .map(
-            (item): WireItem => [
+          .map((item): WireItem => {
+            const base: [string, string, string, number] = [
               item.name.trim(),
               item.price.trim(),
               item.description.trim(),
               TAG_TO_NUM[item.tag] ?? 0,
-            ]
-          ),
+            ];
+
+            const options = (item.variant?.options ?? [])
+              .filter((option) => option.name.trim())
+              .map((option): [string, string] => [
+                option.name.trim(),
+                option.price.trim(),
+              ]);
+
+            // Omit the element entirely when there are no variants, so menus
+            // without them cost nothing extra in the QR payload.
+            if (options.length === 0) return base;
+            return [...base, [item.variant?.name.trim() ?? "", options]];
+          }),
       }))
       .filter((category) => category.n || category.i.length > 0),
   };
@@ -108,6 +155,24 @@ function toWire(menu: QrMenuData): WireMenu {
   if (menu.address.trim()) wire.a = menu.address.trim();
   if (menu.accent && menu.accent !== "#26306B") wire.h = menu.accent;
   return wire;
+}
+
+function parseWireVariant(raw: WireVariant | undefined): QrVariant | null {
+  if (!Array.isArray(raw)) return null;
+
+  const [name, options] = raw;
+  if (!Array.isArray(options)) return null;
+
+  const parsed = options
+    .filter((option): option is [string, string] => Array.isArray(option))
+    .map((option) => ({
+      name: typeof option[0] === "string" ? option[0] : "",
+      price: typeof option[1] === "string" ? option[1] : "",
+    }))
+    .filter((option) => option.name);
+
+  if (parsed.length === 0) return null;
+  return { name: typeof name === "string" ? name : "", options: parsed };
 }
 
 function fromWire(wire: WireMenu): QrMenuData {
@@ -126,6 +191,8 @@ function fromWire(wire: WireMenu): QrMenuData {
         price: typeof item[1] === "string" ? item[1] : "",
         description: typeof item[2] === "string" ? item[2] : "",
         tag: NUM_TO_TAG[item[3]] ?? "",
+        // Absent on QR codes generated before variants existed.
+        variant: parseWireVariant(item[4]),
       })),
     })),
   };
@@ -191,6 +258,7 @@ export function createSampleMenu(): QrMenuData {
             price: "249",
             description: "Char-grilled cottage cheese with mint chutney",
             tag: "veg",
+            variant: null,
           },
           {
             id: createId(),
@@ -198,6 +266,7 @@ export function createSampleMenu(): QrMenuData {
             price: "299",
             description: "Spicy deep-fried chicken, curry leaf tempering",
             tag: "nonveg",
+            variant: null,
           },
           {
             id: createId(),
@@ -205,6 +274,7 @@ export function createSampleMenu(): QrMenuData {
             price: "79",
             description: "",
             tag: "veg",
+            variant: null,
           },
         ],
       },
@@ -218,6 +288,7 @@ export function createSampleMenu(): QrMenuData {
             price: "279",
             description: "Slow-cooked black lentils in creamy tomato gravy",
             tag: "veg",
+            variant: null,
           },
           {
             id: createId(),
@@ -225,13 +296,21 @@ export function createSampleMenu(): QrMenuData {
             price: "349",
             description: "Tandoori chicken in rich makhani gravy",
             tag: "nonveg",
+            variant: null,
           },
           {
             id: createId(),
             name: "Veg Biryani",
-            price: "229",
+            price: "",
             description: "Fragrant basmati rice with seasonal vegetables",
             tag: "veg",
+            variant: {
+              name: "Size",
+              options: [
+                { name: "Half", price: "229" },
+                { name: "Full", price: "379" },
+              ],
+            },
           },
         ],
       },
@@ -239,9 +318,9 @@ export function createSampleMenu(): QrMenuData {
         id: createId(),
         name: "Breads & Rice",
         items: [
-          { id: createId(), name: "Butter Naan", price: "59", description: "", tag: "veg" },
-          { id: createId(), name: "Garlic Naan", price: "69", description: "", tag: "veg" },
-          { id: createId(), name: "Jeera Rice", price: "149", description: "", tag: "veg" },
+          { id: createId(), name: "Butter Naan", price: "59", description: "", tag: "veg", variant: null },
+          { id: createId(), name: "Garlic Naan", price: "69", description: "", tag: "veg", variant: null },
+          { id: createId(), name: "Jeera Rice", price: "149", description: "", tag: "veg", variant: null },
         ],
       },
       {
@@ -254,8 +333,9 @@ export function createSampleMenu(): QrMenuData {
             price: "99",
             description: "Served warm with rabri",
             tag: "veg",
+            variant: null,
           },
-          { id: createId(), name: "Masala Chaas", price: "59", description: "", tag: "veg" },
+          { id: createId(), name: "Masala Chaas", price: "59", description: "", tag: "veg", variant: null },
         ],
       },
     ],

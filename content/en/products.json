@@ -1,8 +1,16 @@
 {
   "seo": {
-    "title": "Products | Setu Technology",
-    "description": "Explore Setu Technology's products — the free Browser Based POS, plus Setu Dine and Setu Queue for restaurants, with Setu Retail and Setu Clinic coming soon.",
-    "keywords": ["Setu products", "Browser Based POS", "Setu Dine", "Setu Queue", "Setu Retail", "Setu Clinic"]
+    "title": "Products | POS, QR Menu & Business Software | Setu",
+    "description": "Explore Setu's products — the free Browser Based POS and QR Menu, plus Setu Dine and Setu Queue for restaurants, with Setu Retail and Setu Clinic coming soon.",
+    "keywords": [
+      "Setu products",
+      "Browser Based POS",
+      "Setu QR Menu",
+      "Setu Dine",
+      "Setu Queue",
+      "Setu Retail",
+      "Setu Clinic"
+    ]
   },
   "hero": {
     "eyebrow": "Products",
@@ -24,7 +32,31 @@
         "Thermal (80mm/58mm) & A4 receipt printing",
         "JSON backup / restore & CSV exports"
       ],
-      "cta": { "label": "Open Browser Based POS — it's free", "href": "/products/browser-based-pos" }
+      "cta": {
+        "label": "Open Browser Based POS — it's free",
+        "href": "/products/browser-based-pos"
+      }
+    },
+    {
+      "id": "qr-menu",
+      "status": "live",
+      "name": "Setu QR Menu",
+      "headline": "A QR code that never needs reprinting",
+      "description": "Your menu lives online and the printed QR code holds only a short permanent link. Change a price, mark a dish sold out or swap in a seasonal menu — the code on your tables keeps working. Dish photos, sizes and variations, multiple menus and daily scan counts — free for your first year.",
+      "features": [
+        "One permanent QR code, printed once",
+        "Instant price and menu changes",
+        "Sold-out toggles & dish photos",
+        "Sizes and variations per dish",
+        "Multiple menus you can switch between",
+        "Daily scan analytics",
+        "Hygiene grade and certificate on the menu",
+        "Three templates with editable colours"
+      ],
+      "cta": {
+        "label": "Explore Setu QR Menu",
+        "href": "/products/qr-menu"
+      }
     },
     {
       "id": "pos",
@@ -40,7 +72,10 @@
         "QR order tracking & waiter call",
         "Coupons & discounts"
       ],
-      "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+      "cta": {
+        "label": "Explore Setu Dine",
+        "href": "/products/restaurant-pos"
+      }
     },
     {
       "id": "queue",
@@ -55,7 +90,10 @@
         "Customer pickup display",
         "Real-time queue dashboard"
       ],
-      "cta": { "label": "Explore Setu Queue", "href": "/products/queue" }
+      "cta": {
+        "label": "Explore Setu Queue",
+        "href": "/products/queue"
+      }
     },
     {
       "id": "retail",
@@ -63,7 +101,10 @@
       "name": "Setu Retail",
       "headline": "Retail store management, coming soon",
       "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
-      "cta": { "label": "Explore Setu Retail", "href": "/products/retail" }
+      "cta": {
+        "label": "Explore Setu Retail",
+        "href": "/products/retail"
+      }
     },
     {
       "id": "wildcard",
@@ -71,7 +112,10 @@
       "name": "Setu for your business",
       "headline": "Building for your industry next",
       "description": "If you don't see your industry yet, tell us what you run. We're building Setu for every kind of business, one industry at a time.",
-      "cta": { "label": "Tell us your need", "href": "/contact" }
+      "cta": {
+        "label": "Tell us your need",
+        "href": "/contact"
+      }
     }
   ]
 }

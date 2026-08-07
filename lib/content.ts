@@ -10,11 +10,14 @@ import productsData from "@/content/en/products.json";
 import contactData from "@/content/en/contact.json";
 import restaurantPosData from "@/content/en/restaurant-pos.json";
 import queueData from "@/content/en/queue.json";
+import qrMenuData from "@/content/en/qr-menu.json";
 import retailData from "@/content/en/retail.json";
 import clinicData from "@/content/en/clinic.json";
 import calculatorsData from "@/content/en/calculators.json";
 import toolsData from "@/content/en/tools.json";
 import consultancyData from "@/content/en/consultancy.json";
+import teamData from "@/content/en/team.json";
+import pricingData from "@/content/en/pricing.json";
 
 export type Cta = { label: string; href: string };
 
@@ -25,6 +28,7 @@ export type ProductsContent = typeof productsData;
 export type ContactContent = typeof contactData;
 export type RestaurantPosContent = typeof restaurantPosData;
 export type QueueContent = typeof queueData;
+export type QrMenuContent = typeof qrMenuData;
 export type RetailContent = typeof retailData;
 export type ClinicContent = typeof clinicData;
 export type CalculatorsContent = typeof calculatorsData;
@@ -49,6 +53,10 @@ export function getProductsContent(): ProductsContent {
   return productsData;
 }
 
+export function getQrMenuContent(): QrMenuContent {
+  return qrMenuData;
+}
+
 // ---------------------------------------------------------------------------
 // Blog
 //
@@ -69,11 +77,13 @@ export type {
   BlogPostSummary,
   BlogPost,
   BlogIndex,
+  BlogCategoryMeta,
   BlogConnectedToolLink,
 } from "@/lib/blog";
 export { slugifyCategory, getBlogPostUrl, getBlogCategoryUrl } from "@/lib/blog";
 
 import type {
+  BlogCategoryMeta,
   BlogConnectedToolLink,
   BlogIndex,
   BlogPost,
@@ -91,10 +101,11 @@ function loadBlogIndex(): BlogIndex {
     const raw = fs.readFileSync(path.join(BLOG_DIR, "index.json"), "utf8");
     const index = JSON.parse(raw) as BlogIndex;
 
-    // The per-post file (posts/<slug>.json) is the source of truth for the
-    // thumbnail. Overlay it onto the listing summaries so a thumbnail set there
-    // shows on the blog cards (list, "latest posts", "more from category")
-    // without also having to edit index.json.
+    // Listing cards and the article read different images on purpose: the card
+    // crops to 3:2 while social platforms crop a shared link to about 1.91:1,
+    // so index.json points at /blog/thumbnails/listing/<slug> and the post file
+    // at /blog/thumbnails/<slug>. Where index.json has no thumbnail, fall back
+    // to the post's own image so older posts keep working with one file.
     index.posts = index.posts.map((post) => {
       if (post.thumbnail) return post;
       const file = path.join(BLOG_POSTS_DIR, `${post.slug}.json`);
@@ -129,6 +140,11 @@ export function getBlogCategories(): { name: string; slug: string }[] {
     seen.set(slugifyCategory(post.category), post.category);
   }
   return Array.from(seen, ([slug, name]) => ({ slug, name }));
+}
+
+/** Hand-written SEO copy for a category listing page, if one is defined. */
+export function getBlogCategoryMeta(categorySlug: string): BlogCategoryMeta | undefined {
+  return loadBlogIndex().categories?.[categorySlug];
 }
 
 export function getBlogPostsByCategorySlug(categorySlug: string): BlogPostSummary[] {
@@ -233,4 +249,37 @@ export function getToolBySlug(slug: string): ToolItem | undefined {
 
 export function getConsultancyContent(): ConsultancyContent {
   return consultancyData;
+}
+
+// ---------------------------------------------------------------------------
+// Team
+// ---------------------------------------------------------------------------
+
+export type { TeamContent, TeamMember, TeamSocialLink } from "@/lib/team";
+export { blogAuthorSlug, FINANCE_AUTHOR_SLUG, GENERAL_AUTHOR_SLUG } from "@/lib/team";
+
+import type { TeamContent, TeamMember } from "@/lib/team";
+
+export function getTeamContent(): TeamContent {
+  return teamData as TeamContent;
+}
+
+export function getTeamMember(slug: string): TeamMember | undefined {
+  return getTeamContent().members.find((member) => member.slug === slug);
+}
+
+// ---------------------------------------------------------------------------
+// Pricing
+// ---------------------------------------------------------------------------
+
+export type { PricingContent, PricingPlan, PricingRegionId } from "@/lib/pricing";
+
+import type { PricingContent, PricingPlan } from "@/lib/pricing";
+
+export function getPricingContent(): PricingContent {
+  return pricingData as PricingContent;
+}
+
+export function getPricingPlan(slug: string): PricingPlan | undefined {
+  return getPricingContent().plans.find((plan) => plan.slug === slug);
 }
