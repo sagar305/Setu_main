@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ChartOfAccountsTool } from "@/components/tools/bookkeeping/ChartOfAccountsTool";
 
 export const metadata: Metadata = {
-  title: "Free Chart of Accounts Builder | Small Business COA | Setu Technology",
+  title: "Free Chart of Accounts Builder | Setu Technology",
   description: "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup.",
   keywords: ["chart of accounts", "COA template", "chart of accounts for small business", "account codes", "bookkeeping accounts list"],
   alternates: { canonical: "/tools/chart-of-accounts" },

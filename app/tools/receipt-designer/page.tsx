@@ -4,9 +4,9 @@ import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 
 export const metadata: Metadata = {
-  title: "Free Receipt Designer | Make & Print Receipts | Setu",
+  title: "Free Receipt Generator | Make & Print Receipts | Setu",
   description:
-    "Design your shop's receipt — logo, colors, header, footer — then fill in a sale and print a real receipt. Reuse the same design in the Setu Browser POS. 80mm/58mm thermal and A4. Free, offline, no signup.",
+    "Design your shop's receipt — logo, colours, header and footer — then fill in a sale and print it. The same design prints from the Setu POS too.",
   keywords: [
     "receipt generator",
     "receipt maker",

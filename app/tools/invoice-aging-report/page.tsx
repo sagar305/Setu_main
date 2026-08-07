@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AgingReportTool } from "@/components/tools/aging/AgingReportTool";
 
 export const metadata: Metadata = {
-  title: "Free Invoice Aging Report | Accounts Receivable Buckets | Setu Technology",
+  title: "Free Invoice Aging Report | Setu Technology",
   description: "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup.",
   keywords: ["invoice aging report", "accounts receivable aging", "AR aging", "overdue invoices report", "debtor aging analysis"],
   alternates: { canonical: "/tools/invoice-aging-report" },

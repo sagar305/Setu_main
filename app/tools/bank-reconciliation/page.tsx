@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BankReconciliationTool } from "@/components/tools/bookkeeping/BankReconciliationTool";
 
 export const metadata: Metadata = {
-  title: "Free Bank Reconciliation Tool | Match Bank & Book Balance | Setu Technology",
+  title: "Free Bank Reconciliation Tool | Setu Technology",
   description: "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup.",
   keywords: ["bank reconciliation", "bank reconciliation statement", "BRS format", "reconcile bank statement", "bank book difference"],
   alternates: { canonical: "/tools/bank-reconciliation" },

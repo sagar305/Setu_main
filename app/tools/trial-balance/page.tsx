@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { TrialBalanceTool } from "@/components/tools/bookkeeping/TrialBalanceTool";
 
 export const metadata: Metadata = {
-  title: "Free Trial Balance Generator | Auto-Built from Your Journal | Setu Technology",
+  title: "Free Trial Balance Generator | Setu Technology",
   description: "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup.",
   keywords: ["trial balance", "trial balance format", "trial balance online", "debit credit balance check", "bookkeeping trial balance"],
   alternates: { canonical: "/tools/trial-balance" },

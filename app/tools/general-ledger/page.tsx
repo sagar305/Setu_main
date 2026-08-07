@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GeneralLedgerTool } from "@/components/tools/bookkeeping/GeneralLedgerTool";
 
 export const metadata: Metadata = {
-  title: "Free General Ledger | Account-wise Running Balance | Setu Technology",
+  title: "Free General Ledger Tool | Setu Technology",
   description: "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup.",
   keywords: ["general ledger", "ledger account online", "running balance ledger", "account ledger free", "bookkeeping ledger"],
   alternates: { canonical: "/tools/general-ledger" },

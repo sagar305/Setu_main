@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 
 export const metadata: Metadata = {
-  title: "Free Debit Note Generator | Purchase Returns PDF | Setu Technology",
+  title: "Free Debit Note Generator | Setu Technology",
   description: "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup.",
   keywords: ["debit note generator", "debit note format", "purchase return note", "GST debit note", "free debit note maker"],
   alternates: { canonical: "/tools/debit-note-generator" },

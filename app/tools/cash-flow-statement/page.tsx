@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CashFlowTool } from "@/components/tools/statements/CashFlowTool";
 
 export const metadata: Metadata = {
-  title: "Free Cash Flow Statement Maker | Operating, Investing, Financing | Setu Technology",
+  title: "Free Cash Flow Statement Maker | Setu Technology",
   description: "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup.",
   keywords: ["cash flow statement", "cash flow format", "cash flow online free", "operating investing financing", "small business cash flow"],
   alternates: { canonical: "/tools/cash-flow-statement" },

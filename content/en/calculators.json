@@ -1261,8 +1261,8 @@
       "icon": "percent",
       "shortDescription": "Add VAT to a net price or extract VAT from a gross amount, for any rate worldwide.",
       "seo": {
-        "title": "VAT Calculator — Add or Remove VAT Online Free | Setu Technology",
-        "description": "Free VAT calculator. Add VAT to a net amount or extract VAT from a gross price for any rate — 5%, 12.5%, 15%, 20%, 23% and more. Instant net, VAT and gross figures.",
+        "title": "VAT Calculator — Add or Remove VAT | Setu Technology",
+        "description": "Free VAT calculator. Add VAT to a net amount or extract it from a gross price, with standard rates for 65+ countries built in. Instant results.",
         "keywords": [
           "VAT calculator",
           "add VAT",
@@ -1380,7 +1380,7 @@
       "icon": "trending-up",
       "shortDescription": "Measure return on investment — net profit, ROI % and annualized return for any spend.",
       "seo": {
-        "title": "ROI Calculator — Return on Investment & Annualized ROI | Setu Technology",
+        "title": "ROI Calculator — Return on Investment | Setu Technology",
         "description": "Free ROI calculator. Enter the amount invested and the amount returned to get net profit, ROI percentage and annualized ROI over any holding period.",
         "keywords": [
           "ROI calculator",
@@ -1439,7 +1439,7 @@
       "icon": "chart-pie",
       "shortDescription": "Straight-line or written-down-value depreciation with a full year-by-year schedule.",
       "seo": {
-        "title": "Depreciation Calculator — Straight Line & WDV Schedule | Setu Technology",
+        "title": "Depreciation Calculator & Schedule | Setu Technology",
         "description": "Free depreciation calculator. Compute straight-line or written-down-value (declining balance) depreciation with a full year-by-year schedule of book values.",
         "keywords": [
           "depreciation calculator",
@@ -1498,8 +1498,8 @@
       "icon": "clock",
       "shortDescription": "Due dates for net terms, early-payment discount savings and the real cost of paying late.",
       "seo": {
-        "title": "Payment Terms Calculator — Net 30, 2/10 Discounts & Due Dates | Setu Technology",
-        "description": "Free payment terms calculator. Get the exact due date for net 15/30/45/60 terms, the savings from early-payment discounts like 2/10 net 30, and the annualized cost of skipping them.",
+        "title": "Payment Terms Calculator — Net 30 | Setu Technology",
+        "description": "Free payment terms calculator. Get exact due dates for net 15/30/45/60 terms, early-payment discount savings, and the real cost of skipping them.",
         "keywords": [
           "payment terms calculator",
           "net 30 calculator",
@@ -1559,7 +1559,7 @@
       "shortDescription": "Compare actual vs standard purchase prices and see the total variance instantly.",
       "seo": {
         "title": "Purchase Price Variance (PPV) Calculator | Setu Technology",
-        "description": "Free PPV calculator. Compare the actual price paid against the standard or budgeted price to get variance per unit, variance % and total purchase price variance.",
+        "description": "Free PPV calculator. Compare actual prices paid against standard or budgeted prices to get variance per unit, variance % and total purchase variance.",
         "keywords": [
           "purchase price variance calculator",
           "PPV calculator",
@@ -1617,8 +1617,8 @@
       "icon": "piggy-bank",
       "shortDescription": "Liquidity, leverage, margin and efficiency ratios from your balance sheet and P&L figures.",
       "seo": {
-        "title": "Financial Ratio Calculator — Current, Quick, D/E & Margins | Setu Technology",
-        "description": "Free financial ratio analyzer. Enter balance sheet and P&L figures to get the current ratio, quick ratio, debt-to-equity, gross & net margins, inventory turnover and receivable days.",
+        "title": "Financial Ratio Calculator | Setu Technology",
+        "description": "Free financial ratio calculator. Enter balance sheet and P&L figures to get current ratio, quick ratio, debt-to-equity, margins and receivable days.",
         "keywords": [
           "financial ratio calculator",
           "current ratio calculator",
