@@ -1,0 +1,53 @@
+{
+  "slug": "cloud-kitchen",
+  "term": "Cloud Kitchen",
+  "category": "restaurant-ops",
+  "aliases": [
+    "dark kitchen",
+    "ghost kitchen"
+  ],
+  "short": "A delivery-only kitchen with no dining area.",
+  "seoTitle": "Cloud Kitchen — Meaning and Example for Businesses",
+  "metaDescription": "A cloud kitchen is a delivery-only operation with no dining room and no walk-in trade. The model trades rent and service labour for commission and packaging.",
+  "updated": "2026-08-07",
+  "definition": "A cloud kitchen is a delivery-only operation with no dining room and no walk-in trade. It sells entirely through aggregators or its own ordering channel, often running several brands from the same kitchen.",
+  "bodyHtml": "<h2>Why Cloud Kitchen matters</h2><p>The model trades rent and service labour for commission and packaging. Whether that is a better deal depends entirely on order volume and how much of it comes through your own channel rather than a platform.</p><h2>How Cloud Kitchen works in practice</h2><p>Watch commission as a share of revenue and the share of orders that are direct. Multiple brands from one kitchen raise utilisation but complicate stock and station planning.</p>",
+  "faq": [
+    {
+      "question": "Are cloud kitchens cheaper to run?",
+      "answer": "Lower rent and service labour, but higher commission, packaging and marketing spend — the net depends on your channel mix."
+    },
+    {
+      "question": "Do cloud kitchens need a POS?",
+      "answer": "Yes. Order aggregation, KOT routing and per-brand reporting are harder without one, not easier."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "aggregator-commission",
+    "qsr",
+    "takeaway",
+    "unit-economics"
+  ]
+}

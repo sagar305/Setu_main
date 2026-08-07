@@ -1,0 +1,57 @@
+{
+  "slug": "stockout",
+  "term": "Stockout",
+  "category": "retail-inventory",
+  "aliases": [
+    "out of stock",
+    "stock-out"
+  ],
+  "short": "Having no stock of something a customer wants to buy.",
+  "seoTitle": "Stockout — Meaning, Formula and Example",
+  "metaDescription": "A stockout is a demand you cannot meet because the item is not on the shelf. They are only measurable if someone records the request or the shelf gap.",
+  "updated": "2026-08-07",
+  "definition": "A stockout is a demand you cannot meet because the item is not on the shelf. The immediate cost is the lost sale; the larger cost is the customer who buys it elsewhere and stays there.",
+  "bodyHtml": "<h2>Why Stockout matters</h2><p>Stockouts are invisible in the sales report — a sale that never happened leaves no record. They are only measurable if someone records the request or the shelf gap.</p><h2>Stockout formula</h2><p class=\"glossary-formula\">Stockout rate % = SKUs out of stock ÷ Total active SKUs × 100</p><p>Measured on a shelf check, since the system rarely shows it directly.</p><h2>How Stockout works in practice</h2><p>Log requests you could not fulfil, even informally, and review them against reorder points. Repeated stockouts on the same SKU mean the reorder point or the safety stock is wrong.</p>",
+  "faq": [
+    {
+      "question": "How do I measure lost sales from stockouts?",
+      "answer": "Approximate it with average daily sales of the item times the days it was unavailable."
+    },
+    {
+      "question": "Which stockouts matter most?",
+      "answer": "Fast-moving staples that bring customers in. A stockout on a C item is an inconvenience; on an A item it is a lost trip."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "reorder-point",
+    "safety-stock",
+    "lead-time",
+    "par-level"
+  ],
+  "formula": {
+    "expression": "Stockout rate % = SKUs out of stock ÷ Total active SKUs × 100",
+    "note": "Measured on a shelf check, since the system rarely shows it directly."
+  }
+}

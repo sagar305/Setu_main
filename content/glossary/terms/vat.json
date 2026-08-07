@@ -1,0 +1,56 @@
+{
+  "slug": "vat",
+  "term": "VAT",
+  "category": "gst-tax",
+  "aliases": [
+    "Value Added Tax"
+  ],
+  "short": "A consumption tax charged on the value added at each stage of sale.",
+  "seoTitle": "VAT — Meaning, Formula and Example",
+  "metaDescription": "VAT, or Value Added Tax, is a consumption tax charged at each stage of the supply chain on the value added at that stage, with credit for tax paid on inputs.",
+  "updated": "2026-08-07",
+  "definition": "VAT, or Value Added Tax, is a consumption tax charged at each stage of the supply chain on the value added at that stage, with credit for tax paid on inputs. India replaced state VAT with GST, but VAT remains the standard model across the Gulf, Europe, the UK and much of Asia.",
+  "bodyHtml": "<h2>Why VAT matters</h2><p>Businesses selling into VAT jurisdictions have to quote, invoice and file under local VAT rules, and the arithmetic of extracting VAT from an inclusive price is the same as with GST.</p><h2>VAT formula</h2><p class=\"glossary-formula\">VAT = Net price × VAT rate ÷ 100</p><p>From a VAT-inclusive price, divide by (100 + rate) and multiply by the rate to extract the tax.</p><h2>How VAT works in practice</h2><p>Register where local turnover thresholds require it, apply the correct local rate, and keep tax-compliant invoices with the VAT number of both parties. Rates and filing frequencies vary by country.</p>",
+  "faq": [
+    {
+      "question": "Is VAT still charged in India?",
+      "answer": "Not on most goods and services since GST replaced it, though a few items such as fuel and alcohol remain outside GST."
+    },
+    {
+      "question": "Is VAT the same as sales tax?",
+      "answer": "No. VAT is collected at each stage with input credit; sales tax is typically collected once at the final retail sale."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "gst",
+    "sales-tax",
+    "tax-inclusive-pricing",
+    "input-tax-credit"
+  ],
+  "formula": {
+    "expression": "VAT = Net price × VAT rate ÷ 100",
+    "note": "From a VAT-inclusive price, divide by (100 + rate) and multiply by the rate to extract the tax."
+  }
+}

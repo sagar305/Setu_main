@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LabelPrinterTool } from "@/components/tools/LabelPrinter/LabelPrinterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Price Label Printer | A4 & Thermal Labels | Setu",
@@ -101,6 +102,9 @@ export default function LabelPrinterPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="label-printer" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="label-printer" />
       </section>
     </>
   );

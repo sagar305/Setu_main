@@ -1,0 +1,54 @@
+{
+  "slug": "browser-storage",
+  "term": "Browser Storage",
+  "category": "pos-tech",
+  "aliases": [
+    "local storage",
+    "localStorage",
+    "on-device storage"
+  ],
+  "short": "Data saved inside your own browser rather than on a server.",
+  "seoTitle": "Browser Storage — Meaning and Example for Businesses",
+  "metaDescription": "Browser storage keeps application data inside the browser on your own device using mechanisms such as localStorage and IndexedDB.",
+  "updated": "2026-08-07",
+  "definition": "Browser storage keeps application data inside the browser on your own device using mechanisms such as localStorage and IndexedDB. Nothing is sent to a server, so the data stays where it was created.",
+  "bodyHtml": "<h2>Why Browser Storage matters</h2><p>For small business tools this is a genuine privacy advantage: invoice and customer data never leaves the device. The trade-off is that clearing browser data, or switching devices, loses everything not exported.</p><h2>How Browser Storage works in practice</h2><p>Export or back up regularly, since browser storage is tied to one browser on one device. Treat the export file as the real record and the browser copy as the working one.</p>",
+  "faq": [
+    {
+      "question": "Is data in browser storage safe?",
+      "answer": "It never leaves your device, so it is private. It is also only as safe as the device itself, which is why exports matter."
+    },
+    {
+      "question": "What happens if I clear my browser data?",
+      "answer": "Anything stored locally is deleted. Regular exports are the only protection."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "offline-mode",
+    "cloud-backup",
+    "csv-export",
+    "point-of-sale"
+  ]
+}

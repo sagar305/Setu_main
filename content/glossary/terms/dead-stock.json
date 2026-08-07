@@ -1,0 +1,57 @@
+{
+  "slug": "dead-stock",
+  "term": "Dead Stock",
+  "category": "retail-inventory",
+  "aliases": [
+    "obsolete stock",
+    "non-moving stock"
+  ],
+  "short": "Goods that have not sold and probably will not.",
+  "seoTitle": "Dead Stock — Meaning, Formula and Example",
+  "metaDescription": "Goods that have not sold and probably will not. It occupies both cash and shelf space. See the formula, an example and the free Setu tools that use Dead Stock.",
+  "updated": "2026-08-07",
+  "definition": "Dead stock is inventory that has not moved for a long period and is unlikely to sell at its normal price — discontinued lines, wrong buys, expired seasonal goods. It occupies both cash and shelf space.",
+  "bodyHtml": "<h2>Why Dead Stock matters</h2><p>Dead stock is a loss that has already happened but has not been recognised. Carrying it at full cost overstates both assets and profit, and it keeps consuming space that a selling line could use.</p><h2>Dead Stock formula</h2><p class=\"glossary-formula\">Days since last sale = Today − Date of last sale for that SKU</p><p>Anything past your category threshold is a candidate for markdown.</p><h2>How Dead Stock works in practice</h2><p>Run an ageing report by SKU and act at fixed thresholds: promote, bundle, mark down, return to the supplier where terms allow, and write off what genuinely cannot sell.</p>",
+  "faq": [
+    {
+      "question": "When does slow stock become dead stock?",
+      "answer": "Set a threshold per category — 90 days for fashion, longer for hardware — and apply it consistently."
+    },
+    {
+      "question": "Should I write off dead stock?",
+      "answer": "Once it cannot realistically be sold, yes. Carrying it inflates assets and hides the true margin."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "markdown",
+    "inventory-turnover",
+    "shrinkage",
+    "abc-analysis"
+  ],
+  "formula": {
+    "expression": "Days since last sale = Today − Date of last sale for that SKU",
+    "note": "Anything past your category threshold is a candidate for markdown."
+  }
+}

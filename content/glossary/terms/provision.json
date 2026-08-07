@@ -1,0 +1,52 @@
+{
+  "slug": "provision",
+  "term": "Provision",
+  "category": "accounting",
+  "aliases": [
+    "provisioning"
+  ],
+  "short": "An estimated liability recognised before the exact amount is known.",
+  "seoTitle": "Provision — Meaning and Example for Businesses",
+  "metaDescription": "An estimated liability recognised before the exact amount is known. Providing early keeps the books honest about what is coming.",
+  "updated": "2026-08-07",
+  "definition": "A provision is an amount set aside for a liability that is probable but not yet certain in amount or timing — doubtful debts, warranty claims, gratuity, or a disputed demand.",
+  "bodyHtml": "<h2>Why Provision matters</h2><p>Providing early keeps the books honest about what is coming. It also stops one bad quarter from absorbing a loss that actually accumulated over years.</p><h2>How Provision works in practice</h2><p>Base provisions on evidence — an ageing analysis for doubtful debts, an actuarial estimate for gratuity — and review them each period, releasing what is no longer needed.</p>",
+  "faq": [
+    {
+      "question": "Is a provision the same as a reserve?",
+      "answer": "No. A provision is for a known likely obligation; a reserve is an appropriation of profit."
+    },
+    {
+      "question": "How do I provide for doubtful debts?",
+      "answer": "Commonly as a percentage by ageing bucket, with higher rates applied to older balances."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "bad-debt",
+    "accrued-expense",
+    "aging-report",
+    "gratuity"
+  ]
+}

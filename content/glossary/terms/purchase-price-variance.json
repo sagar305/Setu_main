@@ -1,0 +1,57 @@
+{
+  "slug": "purchase-price-variance",
+  "term": "Purchase Price Variance",
+  "category": "retail-inventory",
+  "aliases": [
+    "PPV",
+    "price variance"
+  ],
+  "short": "The gap between the price you expected to pay and what you paid.",
+  "seoTitle": "Purchase Price Variance — Meaning, Formula and Example",
+  "metaDescription": "Purchase price variance is the difference between the standard or expected price of an item and the price actually paid, multiplied by the quantity bought.",
+  "updated": "2026-08-07",
+  "definition": "Purchase price variance is the difference between the standard or expected price of an item and the price actually paid, multiplied by the quantity bought. It quantifies supplier price drift.",
+  "bodyHtml": "<h2>Why Purchase Price Variance matters</h2><p>Supplier prices move quietly, item by item, and recipes and retail prices rarely move with them. PPV is how a kitchen or shop notices a cost rise before the month-end margin does.</p><h2>Purchase Price Variance formula</h2><p class=\"glossary-formula\">PPV = (Actual price − Standard price) × Quantity purchased</p><p>A positive result is adverse: you paid more than expected.</p><h2>How Purchase Price Variance works in practice</h2><p>Compare each purchase against the expected rate, and review the largest variances by value weekly. Persistent adverse variance on one line means renegotiating, resourcing or repricing.</p><h2>Worked example</h2><p>Buying 200 kg of oil at ₹132 against a standard ₹125 is a ₹1,400 adverse variance for the month.</p>",
+  "faq": [
+    {
+      "question": "How do I set a standard price?",
+      "answer": "Use a recent representative purchase rate and revise it periodically, rather than an aspirational number."
+    },
+    {
+      "question": "Is a favourable variance always good?",
+      "answer": "Not if it came from a lower grade or a substituted item, which is why quality should be checked alongside price."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "purchase-price-variance-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "landed-cost",
+    "supplier",
+    "purchase-order",
+    "recipe-costing"
+  ],
+  "formula": {
+    "expression": "PPV = (Actual price − Standard price) × Quantity purchased",
+    "note": "A positive result is adverse: you paid more than expected."
+  }
+}

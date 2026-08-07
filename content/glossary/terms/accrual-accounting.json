@@ -1,0 +1,53 @@
+{
+  "slug": "accrual-accounting",
+  "term": "Accrual Accounting",
+  "category": "accounting",
+  "aliases": [
+    "accrual basis",
+    "mercantile basis"
+  ],
+  "short": "Recording income and expenses when they occur, not when paid.",
+  "seoTitle": "Accrual Accounting — Meaning and Example for Businesses",
+  "metaDescription": "Accrual accounting records income when it is earned and expenses when they are incurred, regardless of when money changes hands.",
+  "updated": "2026-08-07",
+  "definition": "Accrual accounting records income when it is earned and expenses when they are incurred, regardless of when money changes hands. A December sale paid in February is December's income.",
+  "bodyHtml": "<h2>Why Accrual Accounting matters</h2><p>Accrual gives a truthful picture of a period's performance. Cash-basis records make a month look brilliant simply because an old invoice was finally paid.</p><h2>How Accrual Accounting works in practice</h2><p>It requires adjusting entries at period end for accrued expenses, prepayments and income earned but not billed. That work is exactly what makes month-on-month comparison meaningful.</p>",
+  "faq": [
+    {
+      "question": "Which basis should a small business use?",
+      "answer": "Accrual for management reporting once there is credit involved; the statutory position depends on entity type and turnover."
+    },
+    {
+      "question": "What is the main downside of accrual?",
+      "answer": "It shows profit that has not been collected, so it must always be read alongside cash flow."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "cash-basis-accounting",
+    "accrued-expense",
+    "prepaid-expense",
+    "accounts-receivable"
+  ]
+}

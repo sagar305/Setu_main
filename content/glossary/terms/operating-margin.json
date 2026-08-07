@@ -1,0 +1,56 @@
+{
+  "slug": "operating-margin",
+  "term": "Operating Margin",
+  "category": "pricing-profit",
+  "aliases": [
+    "operating profit margin"
+  ],
+  "short": "Operating profit as a percentage of sales.",
+  "seoTitle": "Operating Margin — Meaning, Formula and Example",
+  "metaDescription": "Operating margin is operating profit as a percentage of revenue — what is left after both direct costs and running costs, but before interest and tax.",
+  "updated": "2026-08-07",
+  "definition": "Operating margin is operating profit as a percentage of revenue — what is left after both direct costs and running costs, but before interest and tax. It measures how efficiently the core business converts sales into profit.",
+  "bodyHtml": "<h2>Why Operating Margin matters</h2><p>Operating margin is the cleanest single measure of operational health, because it captures both pricing and cost control while ignoring how the business is financed.</p><h2>Operating Margin formula</h2><p class=\"glossary-formula\">Operating margin % = Operating profit ÷ Revenue × 100</p><p>Operating profit is gross profit minus operating expenses.</p><h2>How Operating Margin works in practice</h2><p>Track it monthly on the same definition. A gross margin that holds steady while operating margin slides points at overhead growth rather than at pricing or purchasing.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between operating and net margin?",
+      "answer": "Net margin also deducts interest and tax, so it reflects financing and tax position as well as operations."
+    },
+    {
+      "question": "Is a falling operating margin always bad?",
+      "answer": "Not if it is a deliberate investment phase, but it should be a decision rather than a discovery."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "profit-margin",
+    "ebitda",
+    "operating-expense",
+    "gross-profit"
+  ],
+  "formula": {
+    "expression": "Operating margin % = Operating profit ÷ Revenue × 100",
+    "note": "Operating profit is gross profit minus operating expenses."
+  }
+}

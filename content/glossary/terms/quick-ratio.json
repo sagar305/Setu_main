@@ -1,0 +1,57 @@
+{
+  "slug": "quick-ratio",
+  "term": "Quick Ratio",
+  "category": "accounting",
+  "aliases": [
+    "acid test ratio",
+    "acid-test"
+  ],
+  "short": "Liquidity measured without counting inventory.",
+  "seoTitle": "Quick Ratio — Meaning, Formula and Example",
+  "metaDescription": "The quick ratio, or acid test, divides current assets excluding inventory by current liabilities. Liquidity measured without counting inventory.",
+  "updated": "2026-08-07",
+  "definition": "The quick ratio, or acid test, divides current assets excluding inventory by current liabilities. It asks whether short-term obligations could be met without having to sell stock first.",
+  "bodyHtml": "<h2>Why Quick Ratio matters</h2><p>For businesses holding slow or seasonal stock, the quick ratio is the more honest liquidity measure. Inventory is only as liquid as its demand, which is exactly what is uncertain in a squeeze.</p><h2>Quick Ratio formula</h2><p class=\"glossary-formula\">Quick ratio = (Current assets − Inventory) ÷ Current liabilities</p><p>Some versions also exclude prepaid expenses.</p><h2>How Quick Ratio works in practice</h2><p>Track it alongside the current ratio. A wide and widening gap between the two means an increasing share of the balance sheet is stock that has not yet found a buyer.</p>",
+  "faq": [
+    {
+      "question": "Why exclude inventory?",
+      "answer": "Because converting it to cash quickly usually means discounting it, if it can be sold at all."
+    },
+    {
+      "question": "Which ratio do lenders prefer?",
+      "answer": "They look at both, and pay closer attention to the quick ratio in inventory-heavy businesses."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "current-ratio",
+    "working-capital",
+    "inventory-turnover",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "Quick ratio = (Current assets − Inventory) ÷ Current liabilities",
+    "note": "Some versions also exclude prepaid expenses."
+  }
+}

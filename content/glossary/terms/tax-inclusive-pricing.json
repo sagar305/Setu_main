@@ -1,0 +1,57 @@
+{
+  "slug": "tax-inclusive-pricing",
+  "term": "Tax Inclusive Pricing",
+  "category": "gst-tax",
+  "aliases": [
+    "inclusive of tax",
+    "GST inclusive"
+  ],
+  "short": "Displaying one price that already contains the tax.",
+  "seoTitle": "Tax Inclusive Pricing — Meaning, Formula and Example",
+  "metaDescription": "Tax inclusive pricing means the price shown to the customer already contains GST, so the bill total equals the menu or shelf price.",
+  "updated": "2026-08-07",
+  "definition": "Tax inclusive pricing means the price shown to the customer already contains GST, so the bill total equals the menu or shelf price. The tax is then extracted from that figure rather than added on top.",
+  "bodyHtml": "<h2>Why Tax Inclusive Pricing matters</h2><p>Menus, retail shelf tags and consumer-facing price lists usually work best inclusive, because customers dislike a total that grows at the counter. But the taxable value still has to be backed out correctly for your returns.</p><h2>Tax Inclusive Pricing formula</h2><p class=\"glossary-formula\">Taxable value = Inclusive price × 100 ÷ (100 + GST rate)</p><p>The GST amount is the inclusive price minus that taxable value.</p><h2>How Tax Inclusive Pricing works in practice</h2><p>To extract tax from an inclusive price, divide by one plus the rate. Where a business sells at multiple rates, doing this per line rather than on the bill total is the only way the split stays accurate.</p><h2>Worked example</h2><p>A ₹236 inclusive price at 18% breaks down to ₹200 taxable value and ₹36 GST.</p>",
+  "faq": [
+    {
+      "question": "Should restaurant menu prices include GST?",
+      "answer": "Menus commonly show inclusive prices for a cleaner customer experience, while the bill still shows the tax split."
+    },
+    {
+      "question": "How do I remove GST from a total?",
+      "answer": "Divide the total by one plus the rate — for 18%, divide by 1.18 — and the difference is the tax."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-exclusive-pricing",
+    "taxable-value",
+    "gst",
+    "mrp"
+  ],
+  "formula": {
+    "expression": "Taxable value = Inclusive price × 100 ÷ (100 + GST rate)",
+    "note": "The GST amount is the inclusive price minus that taxable value."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "sales-tax",
+  "term": "Sales Tax",
+  "category": "gst-tax",
+  "aliases": [
+    "retail sales tax"
+  ],
+  "short": "A tax added at the point of final sale to the consumer.",
+  "seoTitle": "Sales Tax — Meaning, Formula and Example",
+  "metaDescription": "A tax added at the point of final sale to the consumer. Unlike VAT or GST, it is generally collected once rather than at every stage.",
+  "updated": "2026-08-07",
+  "definition": "Sales tax is a consumption tax added at the point of the final retail sale, most familiar from the United States, where state and local rates stack into one combined rate. Unlike VAT or GST, it is generally collected once rather than at every stage.",
+  "bodyHtml": "<h2>Why Sales Tax matters</h2><p>Businesses billing customers in sales-tax jurisdictions need the combined rate for the buyer's location, which can differ street by street. Under-collecting leaves the seller carrying the shortfall.</p><h2>Sales Tax formula</h2><p class=\"glossary-formula\">Sales tax = Price × combined tax rate ÷ 100</p><p>Combine state, county and city rates before applying them.</p><h2>How Sales Tax works in practice</h2><p>Apply the destination rate where the rules require it, keep exemption certificates for resale customers, and file by the frequency your registration specifies.</p>",
+  "faq": [
+    {
+      "question": "Is sales tax charged on services?",
+      "answer": "It depends on the jurisdiction. Many tax goods broadly and services selectively."
+    },
+    {
+      "question": "How is sales tax different from GST?",
+      "answer": "GST is collected through the chain with input credit; sales tax is charged once at the final sale."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "vat",
+    "gst",
+    "tax-exclusive-pricing",
+    "mrp"
+  ],
+  "formula": {
+    "expression": "Sales tax = Price × combined tax rate ÷ 100",
+    "note": "Combine state, county and city rates before applying them."
+  }
+}

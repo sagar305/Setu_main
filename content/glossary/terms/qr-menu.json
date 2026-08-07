@@ -1,0 +1,53 @@
+{
+  "slug": "qr-menu",
+  "term": "QR Menu",
+  "category": "pos-tech",
+  "aliases": [
+    "digital menu",
+    "scan to order menu"
+  ],
+  "short": "A menu customers open by scanning a code at the table.",
+  "seoTitle": "QR Menu — Meaning and Example for Businesses",
+  "metaDescription": "A QR menu is a digital menu customers open by scanning a code at the table. It can be view-only or extend to ordering and payment from the same screen.",
+  "updated": "2026-08-07",
+  "definition": "A QR menu is a digital menu customers open by scanning a code at the table. It can be view-only or extend to ordering and payment from the same screen.",
+  "bodyHtml": "<h2>Why QR Menu matters</h2><p>Prices and availability change constantly, and reprinting menus is slow and expensive. A digital menu updates instantly, and an item marked unavailable stops being ordered immediately.</p><h2>How QR Menu works in practice</h2><p>Keep the menu fast to load on a weak connection and readable on a small screen. Where ordering is enabled, it also shortens the gap between seating and the kitchen receiving the order.</p>",
+  "faq": [
+    {
+      "question": "Do QR menus replace printed menus?",
+      "answer": "Many restaurants keep a few printed copies for guests who prefer them, and use QR as the default."
+    },
+    {
+      "question": "Can customers order from a QR menu?",
+      "answer": "They can where ordering is enabled, which removes waiting for a server to take the order."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "table-management",
+    "menu-engineering",
+    "table-turnover-rate",
+    "dynamic-qr-code"
+  ]
+}

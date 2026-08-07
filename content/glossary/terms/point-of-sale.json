@@ -1,0 +1,53 @@
+{
+  "slug": "point-of-sale",
+  "term": "Point of Sale",
+  "category": "pos-tech",
+  "aliases": [
+    "POS",
+    "POS system"
+  ],
+  "short": "The system where a sale is rung up, billed and recorded.",
+  "seoTitle": "Point of Sale — Meaning and Example for Businesses",
+  "metaDescription": "A point of sale, or POS, is the system where a sale is rung up, taxed, billed and recorded. The system where a sale is rung up, billed and recorded.",
+  "updated": "2026-08-07",
+  "definition": "A point of sale, or POS, is the system where a sale is rung up, taxed, billed and recorded. Modern POS software also handles inventory deduction, customer records, kitchen routing and reporting.",
+  "bodyHtml": "<h2>Why Point of Sale matters</h2><p>The POS is the source of truth for what was sold, at what price and to whom. Every downstream report — food cost, GST return, menu mix — is only as good as what the POS captured.</p><h2>How Point of Sale works in practice</h2><p>Choose on the reporting you will actually use and on how it behaves when the internet fails, not on feature count. Billing that stops during an outage costs more than any subscription saves.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a POS and billing software?",
+      "answer": "In practice they overlap. POS usually implies the full counter setup including hardware, inventory and customer records."
+    },
+    {
+      "question": "Does a small shop need a POS?",
+      "answer": "Once stock, GST and staff are involved, yes. Notebook billing stops scaling well before most owners expect."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "billing-software",
+    "offline-mode",
+    "kot",
+    "thermal-printer"
+  ]
+}

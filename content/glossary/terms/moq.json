@@ -1,0 +1,52 @@
+{
+  "slug": "moq",
+  "term": "Minimum Order Quantity",
+  "category": "retail-inventory",
+  "aliases": [
+    "MOQ"
+  ],
+  "short": "The smallest quantity a supplier will accept in one order.",
+  "seoTitle": "Minimum Order Quantity — Meaning and Example for Businesses",
+  "metaDescription": "Minimum order quantity, or MOQ, is the smallest quantity a supplier is willing to sell in a single order. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Minimum order quantity, or MOQ, is the smallest quantity a supplier is willing to sell in a single order. It exists to make production or delivery worthwhile for them, and it constrains how finely a buyer can order.",
+  "bodyHtml": "<h2>Why Minimum Order Quantity matters</h2><p>A high MOQ on a slow-moving item creates dead stock by design. It is often the real reason a shop has three years of some SKU sitting in the back.</p><h2>How Minimum Order Quantity works in practice</h2><p>Compare the MOQ against your monthly usage before agreeing to stock a line. Where the MOQ exceeds a few months of sales, negotiate, share the order with another buyer, or decline the line.</p>",
+  "faq": [
+    {
+      "question": "Can MOQs be negotiated?",
+      "answer": "Often yes, especially for a first order or in exchange for a longer commitment on faster-moving lines."
+    },
+    {
+      "question": "How do I judge whether an MOQ is acceptable?",
+      "answer": "Divide it by expected monthly usage. More than about three months of cover is usually a warning."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "economic-order-quantity",
+    "dead-stock",
+    "supplier",
+    "working-capital"
+  ]
+}

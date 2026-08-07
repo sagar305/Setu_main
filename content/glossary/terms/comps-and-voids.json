@@ -1,0 +1,54 @@
+{
+  "slug": "comps-and-voids",
+  "term": "Comps and Voids",
+  "category": "restaurant-ops",
+  "aliases": [
+    "comps",
+    "voids",
+    "complimentary and cancelled bills"
+  ],
+  "short": "Complimentary items and cancelled bills, and the controls around them.",
+  "seoTitle": "Comps and Voids — Meaning and Example for Businesses",
+  "metaDescription": "A comp is an item given free to a guest, usually for service recovery or hospitality. A void is an item or bill cancelled before payment.",
+  "updated": "2026-08-07",
+  "definition": "A comp is an item given free to a guest, usually for service recovery or hospitality. A void is an item or bill cancelled before payment. Both remove revenue from a sale that consumed stock.",
+  "bodyHtml": "<h2>Why Comps and Voids matters</h2><p>Comps and voids are the classic route for revenue leakage, because a cancelled bill leaves no customer to complain. Unmonitored, they also make food cost look inexplicably high.</p><h2>How Comps and Voids works in practice</h2><p>Require a reason code and an authorising user on every comp and void, and review a weekly report by staff member. The pattern, not the individual entry, is what tells you something is wrong.</p>",
+  "faq": [
+    {
+      "question": "Why track comps if they are good hospitality?",
+      "answer": "Because you still paid for the food. Tracking keeps it a deliberate cost rather than an invisible one."
+    },
+    {
+      "question": "What is a warning sign in void reports?",
+      "answer": "Voids concentrated on one user, one shift or one payment mode, particularly after the bill was printed."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "kot",
+    "wastage",
+    "audit-trail",
+    "shrinkage"
+  ]
+}

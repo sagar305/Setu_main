@@ -1,0 +1,53 @@
+{
+  "slug": "barcode-scanner",
+  "term": "Barcode Scanner",
+  "category": "pos-tech",
+  "aliases": [
+    "scanner",
+    "barcode reader"
+  ],
+  "short": "A device that reads a barcode and enters the item instantly.",
+  "seoTitle": "Barcode Scanner — Meaning and Example for Businesses",
+  "metaDescription": "A barcode scanner reads a printed barcode and enters the corresponding item into the billing screen. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A barcode scanner reads a printed barcode and enters the corresponding item into the billing screen. Most behave as keyboards, so they work with any software that accepts typed input.",
+  "bodyHtml": "<h2>Why Barcode Scanner matters</h2><p>Scanning is faster than searching and, more importantly, accurate. Typed item entry produces wrong prices and wrong stock deductions in roughly equal measure.</p><h2>How Barcode Scanner works in practice</h2><p>Ensure every sellable item has a scannable code, including loose goods packed in store. Items without codes become the slow, error-prone path staff take under pressure.</p>",
+  "faq": [
+    {
+      "question": "Do I need a special scanner for my software?",
+      "answer": "Most USB scanners emulate a keyboard and work with anything that accepts typed input."
+    },
+    {
+      "question": "What about items without a barcode?",
+      "answer": "Print your own labels for loose or repacked goods so the whole range is scannable."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "barcode",
+    "sku",
+    "point-of-sale",
+    "stock-take"
+  ]
+}

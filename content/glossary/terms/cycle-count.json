@@ -1,0 +1,53 @@
+{
+  "slug": "cycle-count",
+  "term": "Cycle Count",
+  "category": "retail-inventory",
+  "aliases": [
+    "cycle counting",
+    "perpetual count"
+  ],
+  "short": "Counting a small slice of stock often instead of everything at once.",
+  "seoTitle": "Cycle Count — Meaning and Example for Businesses",
+  "metaDescription": "Cycle counting checks a small subset of items frequently — daily or weekly — instead of counting everything at once. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Cycle counting checks a small subset of items frequently — daily or weekly — instead of counting everything at once. Fast-moving and high-value lines are counted often, slow lines rarely.",
+  "bodyHtml": "<h2>Why Cycle Count matters</h2><p>Full counts are disruptive, so they get postponed, and problems age. Cycle counts catch discrepancies within days, when the paperwork to explain them still exists.</p><h2>How Cycle Count works in practice</h2><p>Use ABC analysis to set frequency: A items weekly, B monthly, C quarterly. Rotate through the list so everything is covered over a cycle, and investigate variances the same week.</p>",
+  "faq": [
+    {
+      "question": "Does cycle counting replace a full stock take?",
+      "answer": "It reduces how much a full count finds, but most businesses still do a full count at year end."
+    },
+    {
+      "question": "Which items should be counted most often?",
+      "answer": "The ones where value times movement is highest — that is what ABC analysis identifies."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "stock-take",
+    "abc-analysis",
+    "shrinkage",
+    "sku"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "slug": "labour-cost-percentage",
+  "term": "Labour Cost Percentage",
+  "category": "restaurant-ops",
+  "aliases": [
+    "labor cost percentage",
+    "labour cost %",
+    "labour costing"
+  ],
+  "short": "Total staff cost as a percentage of sales.",
+  "seoTitle": "Labour Cost Percentage — Meaning, Formula and Example",
+  "metaDescription": "Total staff cost as a percentage of sales. It measures how much of every rupee of revenue goes to the people who produced it.",
+  "updated": "2026-08-07",
+  "definition": "Labour cost percentage is total staff cost — wages, overtime, bonuses, statutory contributions and staff meals — expressed as a percentage of sales for the same period. It measures how much of every rupee of revenue goes to the people who produced it.",
+  "bodyHtml": "<h2>Why Labour Cost Percentage matters</h2><p>Labour is the second largest controllable cost in most restaurants and the one that reacts fastest to a rostering decision. Two outlets with identical menus can differ by five points of labour purely on how shifts are planned.</p><h2>Labour Cost Percentage formula</h2><p class=\"glossary-formula\">Labour cost % = Total labour cost ÷ Sales × 100</p><p>Include employer PF and ESI contributions, not just take-home pay.</p><h2>How Labour Cost Percentage works in practice</h2><p>Measure it by day-part, not just monthly. A healthy monthly average routinely hides a badly overstaffed weekday lunch, and only the day-part view makes that visible.</p><h2>Worked example</h2><p>₹2,40,000 of total staff cost on ₹9,50,000 of sales is a labour cost of about 25%.</p><h2>Common mistakes with Labour Cost Percentage</h2><ul><li>Counting take-home pay only and ignoring employer contributions.</li><li>Rostering to a fixed headcount rather than to expected covers.</li><li>Judging the month as a whole instead of by shift and day-part.</li></ul>",
+  "faq": [
+    {
+      "question": "What is a good labour cost percentage?",
+      "answer": "Quick-service formats generally run leaner than full-service ones; the useful comparison is your own trend by day-part."
+    },
+    {
+      "question": "Should the owner's salary be included?",
+      "answer": "Yes, if the owner works shifts. Excluding it makes labour look artificially low and distorts break-even."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "prime-cost",
+    "food-cost-percentage",
+    "covers",
+    "ctc"
+  ],
+  "formula": {
+    "expression": "Labour cost % = Total labour cost ÷ Sales × 100",
+    "note": "Include employer PF and ESI contributions, not just take-home pay."
+  }
+}

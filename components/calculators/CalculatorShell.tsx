@@ -6,15 +6,25 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { CalculatorCard } from "@/components/calculators/CalculatorCard";
 import {
+  createGlossaryLinker,
   getRelatedCalculators,
   getTeamMember,
   FINANCE_AUTHOR_SLUG,
   type CalculatorItem,
 } from "@/lib/content";
 import { toolApplicationSchema } from "@/lib/schema";
+import { GlossaryText } from "@/components/glossary/GlossaryText";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export function CalculatorShell({ item, children }: { item: CalculatorItem; children: ReactNode }) {
   const related = getRelatedCalculators(item.slug, 3);
+
+  // Terms used in the explainer copy below link to their glossary definitions.
+  const glossary = createGlossaryLinker({ maxLinks: 6 });
+  const aboutParagraphs = item.about.paragraphs.map((paragraph) => ({
+    key: paragraph,
+    segments: glossary.text(paragraph),
+  }));
 
   // One block here covers every calculator page.
   const applicationSchema = toolApplicationSchema({
@@ -53,11 +63,15 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
       <section className="mx-auto max-w-3xl px-6 pb-12">
         <FadeIn>
           <h2 className="text-2xl font-bold tracking-tight text-ink">{item.about.headline}</h2>
-          {item.about.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="mt-4 text-lg leading-relaxed text-muted">
-              {paragraph}
+          {aboutParagraphs.map((paragraph) => (
+            <p key={paragraph.key} className="mt-4 text-lg leading-relaxed text-muted">
+              <GlossaryText segments={paragraph.segments} />
             </p>
           ))}
+        </FadeIn>
+
+        <FadeIn className="mt-10">
+          <GlossaryTermsStrip type="calculator" slug={item.slug} />
         </FadeIn>
 
         <FadeIn className="mt-8">

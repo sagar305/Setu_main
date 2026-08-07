@@ -1,0 +1,53 @@
+{
+  "slug": "sku",
+  "term": "SKU",
+  "category": "retail-inventory",
+  "aliases": [
+    "Stock Keeping Unit",
+    "stock keeping unit"
+  ],
+  "short": "A unique code for one exact sellable variant.",
+  "seoTitle": "SKU — Meaning and Example for Businesses",
+  "metaDescription": "An SKU, or stock keeping unit, is a unique code for one exact sellable variant — a specific product in a specific size, colour and pack.",
+  "updated": "2026-08-07",
+  "definition": "An SKU, or stock keeping unit, is a unique code for one exact sellable variant — a specific product in a specific size, colour and pack. Two variants of the same product are two SKUs.",
+  "bodyHtml": "<h2>Why SKU matters</h2><p>SKUs are the unit everything else counts in. Stock levels, reorder points, margin analysis and sales reporting all depend on being able to tell a 500 ml bottle from a 1 litre one.</p><h2>How SKU works in practice</h2><p>Build codes that a human can read at a glance — brand, category, size — and never reuse a retired code for a new product. Reuse silently merges two products' sales history into one misleading line.</p><h2>Worked example</h2><p>AMU-MLK-500 and AMU-MLK-1000 are separate SKUs for the same brand of milk in two pack sizes.</p>",
+  "faq": [
+    {
+      "question": "Is an SKU the same as a barcode?",
+      "answer": "No. A barcode is a scannable number, often assigned by the manufacturer; an SKU is your own internal identifier."
+    },
+    {
+      "question": "How many SKUs should a small shop have?",
+      "answer": "As many as it genuinely sells. Every extra SKU is stock, shelf space and counting time, which is what ABC analysis is for."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "barcode",
+    "abc-analysis",
+    "stock-take",
+    "dead-stock"
+  ]
+}

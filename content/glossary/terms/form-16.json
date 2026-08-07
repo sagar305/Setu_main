@@ -1,0 +1,53 @@
+{
+  "slug": "form-16",
+  "term": "Form 16",
+  "category": "payroll-hr",
+  "aliases": [
+    "Form16",
+    "TDS certificate"
+  ],
+  "short": "The annual TDS certificate an employer issues to an employee.",
+  "seoTitle": "Form 16 — Meaning and Example for Businesses",
+  "metaDescription": "Form 16 is the annual certificate an employer issues to an employee showing salary paid and tax deducted at source during the financial year.",
+  "updated": "2026-08-07",
+  "definition": "Form 16 is the annual certificate an employer issues to an employee showing salary paid and tax deducted at source during the financial year. It is the primary document for filing a salaried income tax return.",
+  "bodyHtml": "<h2>Why Form 16 matters</h2><p>Employees cannot easily file returns without it, and issuing it late creates avoidable pressure on staff at filing time. It also evidences that deducted tax was actually deposited.</p><h2>How Form 16 works in practice</h2><p>Issue after the quarterly TDS statements for the year are filed, and make sure the details match the employee's tax credit statement. Mismatches are usually PAN errors made months earlier.</p>",
+  "faq": [
+    {
+      "question": "What if no tax was deducted?",
+      "answer": "Where no TDS was deducted, Form 16 may not be issued, though a salary certificate can still be provided."
+    },
+    {
+      "question": "What is the difference between Form 16 and Form 16A?",
+      "answer": "Form 16 covers salary TDS; Form 16A covers TDS on non-salary payments such as rent or professional fees."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "tds",
+    "income-tax",
+    "payslip",
+    "pan"
+  ]
+}

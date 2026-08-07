@@ -1,0 +1,57 @@
+{
+  "slug": "prepaid-expense",
+  "term": "Prepaid Expense",
+  "category": "accounting",
+  "aliases": [
+    "prepayment",
+    "advance expense"
+  ],
+  "short": "A cost paid in advance for a future period.",
+  "seoTitle": "Prepaid Expense — Meaning, Formula and Example",
+  "metaDescription": "A prepaid expense is a payment made in advance for something that will be consumed later — annual insurance, a software subscription, rent paid ahead.",
+  "updated": "2026-08-07",
+  "definition": "A prepaid expense is a payment made in advance for something that will be consumed later — annual insurance, a software subscription, rent paid ahead. Until consumed, it is an asset rather than an expense.",
+  "bodyHtml": "<h2>Why Prepaid Expense matters</h2><p>Charging a twelve-month payment entirely to one month ruins that month's result and understates the eleven that follow. Prepayments put each month's cost where it belongs.</p><h2>Prepaid Expense formula</h2><p class=\"glossary-formula\">Monthly charge = Total prepayment ÷ Number of periods covered</p><p>The unreleased balance stays on the balance sheet as an asset.</p><h2>How Prepaid Expense works in practice</h2><p>Record the payment as an asset and release one month's worth into expense each period. Annual insurance, licences and maintenance contracts are the most common cases in small businesses.</p>",
+  "faq": [
+    {
+      "question": "Is a prepaid expense an asset?",
+      "answer": "Yes, until it is consumed. It represents a service you have paid for and not yet received."
+    },
+    {
+      "question": "Does a security deposit count as a prepayment?",
+      "answer": "No. A refundable deposit is a separate asset, not a cost being consumed over time."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "accrued-expense",
+    "accrual-accounting",
+    "fixed-asset",
+    "budget-variance"
+  ],
+  "formula": {
+    "expression": "Monthly charge = Total prepayment ÷ Number of periods covered",
+    "note": "The unreleased balance stays on the balance sheet as an asset."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "mdr",
+  "term": "MDR",
+  "category": "payments-finance",
+  "aliases": [
+    "Merchant Discount Rate",
+    "merchant discount rate"
+  ],
+  "short": "The percentage a merchant pays to accept a card or digital payment.",
+  "seoTitle": "MDR — Meaning, Formula and Example",
+  "metaDescription": "MDR, the merchant discount rate, is the percentage deducted from a transaction for accepting a card or certain digital payments.",
+  "updated": "2026-08-07",
+  "definition": "MDR, the merchant discount rate, is the percentage deducted from a transaction for accepting a card or certain digital payments. It is shared between the acquiring bank, the card network and the issuing bank.",
+  "bodyHtml": "<h2>Why MDR matters</h2><p>On thin margins, MDR is a real cost. A 1.5% deduction on a 5% net margin business is nearly a third of the profit on that sale, which is why UPI adoption moved so quickly.</p><h2>MDR formula</h2><p class=\"glossary-formula\">Net received = Transaction value × (1 − MDR) − fixed fees</p><p>Blend the rates by mix to get your true cost of accepting payments.</p><h2>How MDR works in practice</h2><p>Know your effective rate by instrument — credit cards typically cost more than debit — and read the deduction in the settlement report rather than the headline rate quoted at signup.</p>",
+  "faq": [
+    {
+      "question": "Is there MDR on UPI?",
+      "answer": "Person-to-merchant UPI has not carried MDR the way cards do, which is a major reason merchants prefer it."
+    },
+    {
+      "question": "Can MDR be negotiated?",
+      "answer": "Rates are partly regulated and partly commercial; volume gives some room on the commercial portion."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "payment-gateway",
+    "settlement",
+    "upi",
+    "unit-economics"
+  ],
+  "formula": {
+    "expression": "Net received = Transaction value × (1 − MDR) − fixed fees",
+    "note": "Blend the rates by mix to get your true cost of accepting payments."
+  }
+}

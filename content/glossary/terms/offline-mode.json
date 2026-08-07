@@ -1,0 +1,53 @@
+{
+  "slug": "offline-mode",
+  "term": "Offline Mode",
+  "category": "pos-tech",
+  "aliases": [
+    "offline billing",
+    "offline-first"
+  ],
+  "short": "Software that keeps working when the internet does not.",
+  "seoTitle": "Offline Mode — Meaning and Example for Businesses",
+  "metaDescription": "Offline mode lets software keep working without an internet connection, storing data locally and syncing when connectivity returns.",
+  "updated": "2026-08-07",
+  "definition": "Offline mode lets software keep working without an internet connection, storing data locally and syncing when connectivity returns. For billing, it is the difference between a slow evening and a stopped one.",
+  "bodyHtml": "<h2>Why Offline Mode matters</h2><p>Internet outages are routine in Indian markets and basements, and they arrive during peak hours. Billing that depends on a live connection stops the business exactly when it is busiest.</p><h2>How Offline Mode works in practice</h2><p>Test it properly: turn off the connection during a quiet hour and complete a full billing cycle. Also confirm what happens on reconnection, since sync conflicts are where offline systems actually fail.</p>",
+  "faq": [
+    {
+      "question": "Is offline billing legal for GST?",
+      "answer": "Yes. What matters is the invoice content and record-keeping, not whether the device was online — though e-invoicing, where applicable, needs connectivity to register."
+    },
+    {
+      "question": "What happens to data when offline?",
+      "answer": "It is stored on the device and synced later, which is why backup and export matter."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "browser-storage",
+    "cloud-backup",
+    "point-of-sale",
+    "csv-export"
+  ]
+}

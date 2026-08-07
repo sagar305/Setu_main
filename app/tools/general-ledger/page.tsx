@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeneralLedgerTool } from "@/components/tools/bookkeeping/GeneralLedgerTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free General Ledger Tool | Setu",
@@ -75,6 +76,9 @@ export default function GeneralLedgerPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <GeneralLedgerTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="general-ledger" />
       </section>
     </>
   );

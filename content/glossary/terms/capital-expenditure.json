@@ -1,0 +1,57 @@
+{
+  "slug": "capital-expenditure",
+  "term": "Capital Expenditure",
+  "category": "accounting",
+  "aliases": [
+    "CAPEX",
+    "capital expense"
+  ],
+  "short": "Money spent acquiring or improving long-lived assets.",
+  "seoTitle": "Capital Expenditure — Meaning, Formula and Example",
+  "metaDescription": "Capital expenditure is money spent acquiring or improving long-lived assets — a new outlet fit-out, kitchen equipment, a delivery vehicle.",
+  "updated": "2026-08-07",
+  "definition": "Capital expenditure is money spent acquiring or improving long-lived assets — a new outlet fit-out, kitchen equipment, a delivery vehicle. It is capitalised on the balance sheet rather than expensed in one period.",
+  "bodyHtml": "<h2>Why Capital Expenditure matters</h2><p>Capex decisions commit cash for years and are largely irreversible. They belong to a payback and return analysis, not to a monthly expense conversation.</p><h2>Capital Expenditure formula</h2><p class=\"glossary-formula\">Payback period = Initial investment ÷ Annual cash inflow generated</p><p>Compare against the asset's useful life before committing.</p><h2>How Capital Expenditure works in practice</h2><p>Evaluate each with a payback period and, for larger commitments, an ROI. Remember that capex consumes cash immediately while only depreciation appears in the P&L, which is why a profitable year can still be a cash-poor one.</p>",
+  "faq": [
+    {
+      "question": "Is a repair capex or an expense?",
+      "answer": "Routine repairs are expenses; improvements that extend life or capacity are capitalised."
+    },
+    {
+      "question": "Why does capex not appear in my P&L?",
+      "answer": "Only the depreciation does. The cash outflow shows up in the cash flow statement instead."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "fixed-asset",
+    "depreciation",
+    "payback-period",
+    "roi"
+  ],
+  "formula": {
+    "expression": "Payback period = Initial investment ÷ Annual cash inflow generated",
+    "note": "Compare against the asset's useful life before committing."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "kot",
+  "term": "KOT",
+  "category": "restaurant-ops",
+  "aliases": [
+    "Kitchen Order Ticket",
+    "kitchen order token"
+  ],
+  "short": "The order slip that tells the kitchen what to cook.",
+  "seoTitle": "KOT — Meaning and Example for Businesses",
+  "metaDescription": "The order slip that tells the kitchen what to cook. It is the operational record that a dish was ordered. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A KOT, or Kitchen Order Ticket, is the instruction sent from the floor to the kitchen listing items, quantities, modifiers and the table or order it belongs to. It is the operational record that a dish was ordered.",
+  "bodyHtml": "<h2>Why KOT matters</h2><p>KOTs are the control point between service and billing. When food leaves the kitchen without one, it also leaves without a bill, and that gap is the most common form of revenue leakage in restaurants.</p><h2>How KOT works in practice</h2><p>Generate KOTs from the billing system rather than by hand, so every ticket is numbered and every ticket maps to a bill. Modifiers such as spice level or no onion belong on the ticket, not in a shouted instruction.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a KOT and a bill?",
+      "answer": "A KOT instructs the kitchen; the bill charges the customer. Every KOT should ultimately be traceable to a bill."
+    },
+    {
+      "question": "Should complimentary items get a KOT?",
+      "answer": "Yes, marked as complimentary — that is how comps stay visible in your stock and cost reports."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "kitchen-display-system",
+    "ticket-time",
+    "comps-and-voids",
+    "modifier"
+  ]
+}

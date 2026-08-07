@@ -1,5 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getBlogCategories, getBlogCategoryUrl, getBlogContent, getBlogPostUrl } from "@/lib/content";
+import {
+  getBlogCategories,
+  getBlogCategoryUrl,
+  getBlogContent,
+  getBlogPostUrl,
+  getGlossaryTermUrl,
+  getGlossaryTerms,
+} from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://setutechnology.com";
@@ -82,6 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/vendor-comparison",
     "/products/browser-based-pos",
     "/blog",
+    "/glossary",
     "/contact",
     "/book-demo",
   ];
@@ -118,5 +126,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...externalEntries, ...blogEntries, ...categoryEntries];
+  const glossaryEntries: MetadataRoute.Sitemap = getGlossaryTerms().map((term) => ({
+    url: `${base}${getGlossaryTermUrl(term.slug)}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
+  return [
+    ...staticEntries,
+    ...externalEntries,
+    ...blogEntries,
+    ...categoryEntries,
+    ...glossaryEntries,
+  ];
 }

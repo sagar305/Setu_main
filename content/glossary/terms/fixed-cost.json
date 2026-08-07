@@ -1,0 +1,53 @@
+{
+  "slug": "fixed-cost",
+  "term": "Fixed Cost",
+  "category": "pricing-profit",
+  "aliases": [
+    "fixed costs",
+    "fixed expense"
+  ],
+  "short": "Costs that stay the same whether you sell anything or not.",
+  "seoTitle": "Fixed Cost — Meaning and Example for Businesses",
+  "metaDescription": "Costs that stay the same whether you sell anything or not. They accrue whether the shutter is up or down. Fixed costs set the height of the bar every month.",
+  "updated": "2026-08-07",
+  "definition": "Fixed costs are the expenses that do not change with sales volume within a given period — rent, licence fees, insurance, core salaries, internet and the accountant's retainer. They accrue whether the shutter is up or down.",
+  "bodyHtml": "<h2>Why Fixed Cost matters</h2><p>Fixed costs set the height of the bar every month. They determine break-even, they are what makes a slow month painful, and they are the reason volume matters so much in low-margin trades.</p><h2>How Fixed Cost works in practice</h2><p>List them once and total them monthly. Anything that arrives as an annual bill should be divided by twelve so the monthly picture is honest rather than lumpy.</p><h2>Worked example</h2><p>₹1,20,000 rent, ₹2,00,000 salaries and ₹30,000 of utilities and licences mean ₹3,50,000 of contribution is needed before any profit exists.</p>",
+  "faq": [
+    {
+      "question": "Are salaries fixed or variable?",
+      "answer": "Core staff are fixed; extra shift hands hired for busy weekends behave as variable costs."
+    },
+    {
+      "question": "Is rent always a fixed cost?",
+      "answer": "Not always. Revenue-share rents in malls are partly variable, which changes the break-even maths."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "variable-cost",
+    "break-even-point",
+    "overhead",
+    "operating-expense"
+  ]
+}

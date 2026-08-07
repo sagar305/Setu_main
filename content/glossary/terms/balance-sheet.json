@@ -1,0 +1,56 @@
+{
+  "slug": "balance-sheet",
+  "term": "Balance Sheet",
+  "category": "accounting",
+  "aliases": [
+    "statement of financial position"
+  ],
+  "short": "What a business owns and owes on one specific date.",
+  "seoTitle": "Balance Sheet — Meaning, Formula and Example",
+  "metaDescription": "A balance sheet is a snapshot on one date of what a business owns, what it owes and what belongs to the owners. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A balance sheet is a snapshot on one date of what a business owns, what it owes and what belongs to the owners. Assets always equal liabilities plus equity, which is where the name comes from.",
+  "bodyHtml": "<h2>Why Balance Sheet matters</h2><p>The P&L shows performance over a period; the balance sheet shows condition at a moment. Lenders read it first, because it reveals debt, working capital and how much of the business is genuinely owned.</p><h2>Balance Sheet formula</h2><p class=\"glossary-formula\">Assets = Liabilities + Equity</p><p>Any imbalance means the underlying entries are incomplete.</p><h2>How Balance Sheet works in practice</h2><p>Read it as a whole. Rising stock and receivables alongside a shrinking bank balance tells the story of a profitable business quietly running out of cash.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a balance sheet and a P&L?",
+      "answer": "The balance sheet is a position on a date; the P&L covers a period of trading."
+    },
+    {
+      "question": "Why does profit not appear on the balance sheet directly?",
+      "answer": "It does, inside retained earnings, which accumulates profits left in the business."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "profit-and-loss-statement",
+    "working-capital",
+    "retained-earnings",
+    "fixed-asset"
+  ],
+  "formula": {
+    "expression": "Assets = Liabilities + Equity",
+    "note": "Any imbalance means the underlying entries are incomplete."
+  }
+}

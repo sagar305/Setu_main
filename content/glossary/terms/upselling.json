@@ -1,0 +1,57 @@
+{
+  "slug": "upselling",
+  "term": "Upselling",
+  "category": "growth-marketing",
+  "aliases": [
+    "upsell",
+    "up-selling"
+  ],
+  "short": "Offering a larger or premium version of what is being bought.",
+  "seoTitle": "Upselling — Meaning, Formula and Example",
+  "metaDescription": "Upselling offers a larger, better or premium version of what a customer is already buying — a bigger size, a premium ingredient, an extended warranty.",
+  "updated": "2026-08-07",
+  "definition": "Upselling offers a larger, better or premium version of what a customer is already buying — a bigger size, a premium ingredient, an extended warranty. It raises order value on a decision already made.",
+  "bodyHtml": "<h2>Why Upselling matters</h2><p>The customer has already chosen to buy, so the incremental cost of the offer is a sentence. Upsells typically carry higher margins than the base item, which is why they move profit faster than revenue.</p><h2>Upselling formula</h2><p class=\"glossary-formula\">Attach rate % = Orders containing the upsell ÷ Total orders × 100</p><p>Multiply by the upsell's contribution to value the opportunity.</p><h2>How Upselling works in practice</h2><p>Script it as a specific suggestion rather than a question — naming an item works, asking if they want anything else does not. Train it into the ordering flow and measure attach rate by staff member.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between upselling and cross-selling?",
+      "answer": "Upselling improves the item being bought; cross-selling adds a different item alongside it."
+    },
+    {
+      "question": "Does upselling annoy customers?",
+      "answer": "Only when it is generic. A relevant, specific suggestion usually reads as helpful."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "cross-selling",
+    "average-order-value",
+    "basket-size",
+    "bundle-pricing"
+  ],
+  "formula": {
+    "expression": "Attach rate % = Orders containing the upsell ÷ Total orders × 100",
+    "note": "Multiply by the upsell's contribution to value the opportunity."
+  }
+}

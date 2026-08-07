@@ -1,0 +1,56 @@
+{
+  "slug": "credit-limit",
+  "term": "Credit Limit",
+  "category": "payments-finance",
+  "aliases": [
+    "customer credit limit"
+  ],
+  "short": "The maximum outstanding you allow a customer to carry.",
+  "seoTitle": "Credit Limit — Meaning, Formula and Example",
+  "metaDescription": "A credit limit is the maximum amount a business allows a single customer to owe at any time. Concentrated credit is where bad debts come from.",
+  "updated": "2026-08-07",
+  "definition": "A credit limit is the maximum amount a business allows a single customer to owe at any time. Beyond it, further supply is stopped until payments bring the balance back down.",
+  "bodyHtml": "<h2>Why Credit Limit matters</h2><p>Concentrated credit is where bad debts come from. One customer at three times a sensible limit can take a year's profit with them when they fail.</p><h2>Credit Limit formula</h2><p class=\"glossary-formula\">Available credit = Credit limit − Current outstanding − Orders in progress</p><p>Include undelivered orders, or the limit is understated.</p><h2>How Credit Limit works in practice</h2><p>Set limits from the customer's payment history and your own exposure tolerance, review them periodically, and enforce them at the point of order rather than at the point of collection.</p>",
+  "faq": [
+    {
+      "question": "How do I set a credit limit for a new customer?",
+      "answer": "Start small, supply against advance or on delivery, and raise it once a payment record exists."
+    },
+    {
+      "question": "What if a good customer exceeds their limit?",
+      "answer": "Treat it as a decision to review the limit, not as a reason to ignore it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "payment-terms",
+    "accounts-receivable",
+    "bad-debt",
+    "days-sales-outstanding"
+  ],
+  "formula": {
+    "expression": "Available credit = Credit limit − Current outstanding − Orders in progress",
+    "note": "Include undelivered orders, or the limit is understated."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "settlement",
+  "term": "Settlement",
+  "category": "payments-finance",
+  "aliases": [
+    "payout",
+    "settlement cycle"
+  ],
+  "short": "The transfer of collected money into the merchant's bank account.",
+  "seoTitle": "Settlement — Meaning, Formula and Example",
+  "metaDescription": "The transfer of collected money into the merchant's bank account. The gap between a sale and its settlement is working capital you are financing.",
+  "updated": "2026-08-07",
+  "definition": "Settlement is the transfer of money collected on your behalf — by a card network, gateway or delivery aggregator — into your bank account, usually net of commission, charges and taxes, on a defined cycle.",
+  "bodyHtml": "<h2>Why Settlement matters</h2><p>The gap between a sale and its settlement is working capital you are financing. On aggregator sales, the settlement statement is also the only place the real deductions become visible.</p><h2>Settlement formula</h2><p class=\"glossary-formula\">Net settlement = Gross sales − Commission − Payment charges − Taxes withheld − Adjustments</p><p>Divide by gross sales to get your realisation rate.</p><h2>How Settlement works in practice</h2><p>Reconcile every payout against the orders it covers, line by line where possible. Missing orders and unexplained deductions are common enough that the check pays for itself.</p>",
+  "faq": [
+    {
+      "question": "Why is my payout lower than my sales?",
+      "answer": "Commission, payment charges, promotional funding, taxes withheld and prior-period adjustments all come out before settlement."
+    },
+    {
+      "question": "How long do settlements take?",
+      "answer": "UPI is near-instant; cards and aggregators run on cycles of a few days, which is a real cash flow consideration."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "mdr",
+    "aggregator-commission",
+    "payment-gateway",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "Net settlement = Gross sales − Commission − Payment charges − Taxes withheld − Adjustments",
+    "note": "Divide by gross sales to get your realisation rate."
+  }
+}

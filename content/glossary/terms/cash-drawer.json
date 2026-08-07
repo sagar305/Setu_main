@@ -1,0 +1,57 @@
+{
+  "slug": "cash-drawer",
+  "term": "Cash Drawer",
+  "category": "pos-tech",
+  "aliases": [
+    "till",
+    "cash till"
+  ],
+  "short": "The lockable drawer holding counter cash, opened by the POS.",
+  "seoTitle": "Cash Drawer — Meaning, Formula and Example",
+  "metaDescription": "A cash drawer is the lockable drawer at a counter holding notes and coins, usually triggered to open by the billing system when a cash payment is recorded.",
+  "updated": "2026-08-07",
+  "definition": "A cash drawer is the lockable drawer at a counter holding notes and coins, usually triggered to open by the billing system when a cash payment is recorded.",
+  "bodyHtml": "<h2>Why Cash Drawer matters</h2><p>Linking the drawer to the POS creates a record of every opening. Drawers that open freely, without a corresponding bill, are the oldest form of counter leakage there is.</p><h2>Cash Drawer formula</h2><p class=\"glossary-formula\">Expected cash = Opening float + Cash sales − Cash payouts</p><p>The difference against the counted amount is the shift variance.</p><h2>How Cash Drawer works in practice</h2><p>Count the float at open and close of each shift, record it, and investigate differences the same day. Reconciling by shift makes a discrepancy traceable to a person and a period.</p>",
+  "faq": [
+    {
+      "question": "How much float should a counter hold?",
+      "answer": "Enough for change through a peak period, and no more — usually a small fixed amount agreed per counter."
+    },
+    {
+      "question": "What if the till is short?",
+      "answer": "Record it and investigate the same shift. Netting shortages off against surpluses hides the pattern."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "petty-cash",
+    "point-of-sale",
+    "audit-trail",
+    "comps-and-voids"
+  ],
+  "formula": {
+    "expression": "Expected cash = Opening float + Cash sales − Cash payouts",
+    "note": "The difference against the counted amount is the shift variance."
+  }
+}

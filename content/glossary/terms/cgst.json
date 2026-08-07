@@ -1,0 +1,57 @@
+{
+  "slug": "cgst",
+  "term": "CGST",
+  "category": "gst-tax",
+  "aliases": [
+    "Central GST",
+    "Central Goods and Services Tax"
+  ],
+  "short": "The central government's half of GST on a sale within one state.",
+  "seoTitle": "CGST — Meaning, Formula and Example",
+  "metaDescription": "CGST is the Central Goods and Services Tax — the portion of GST on an intra-state supply that goes to the central government.",
+  "updated": "2026-08-07",
+  "definition": "CGST is the Central Goods and Services Tax — the portion of GST on an intra-state supply that goes to the central government. It is always charged alongside SGST at half the total rate each, so an 18% supply carries 9% CGST and 9% SGST.",
+  "bodyHtml": "<h2>Why CGST matters</h2><p>Invoices have to show the CGST and SGST split separately rather than one combined GST line. Auditors and customers both read the split, and returns are filed against those separate heads.</p><h2>CGST formula</h2><p class=\"glossary-formula\">CGST = Taxable value × (GST rate ÷ 2) ÷ 100</p><p>Applies only when the place of supply is in the same state as your registration.</p><h2>How CGST works in practice</h2><p>Your billing setup should hold one GST rate per item and split it automatically once it knows the supply is intra-state. If a bill shows a single lumped GST figure, the template needs fixing before it reaches a business customer.</p>",
+  "faq": [
+    {
+      "question": "Is CGST charged on interstate sales?",
+      "answer": "No. Interstate supplies carry IGST at the full rate instead of a CGST and SGST split."
+    },
+    {
+      "question": "Can I claim input credit of CGST against SGST?",
+      "answer": "No. CGST credit is used against CGST and IGST liability, not against SGST, which is why the split is tracked separately."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "sgst",
+    "igst",
+    "gst",
+    "place-of-supply"
+  ],
+  "formula": {
+    "expression": "CGST = Taxable value × (GST rate ÷ 2) ÷ 100",
+    "note": "Applies only when the place of supply is in the same state as your registration."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "debit-note",
+  "term": "Debit Note",
+  "category": "gst-tax",
+  "aliases": [
+    "supplementary invoice"
+  ],
+  "short": "A document that increases the value of an invoice already issued.",
+  "seoTitle": "Debit Note — Meaning and Example for Businesses",
+  "metaDescription": "A document that increases the value of an invoice already issued. It works as a supplementary invoice. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A debit note is issued by a supplier to increase the taxable value or tax on an earlier invoice — typically after an undercharge, a rate correction or an extra quantity supplied. It works as a supplementary invoice.",
+  "bodyHtml": "<h2>Why Debit Note matters</h2><p>Undercharging is discovered more often than anyone likes, and a debit note is the clean way to correct it. Adjusting the next invoice instead breaks the link between documents and confuses both sets of books.</p><h2>How Debit Note works in practice</h2><p>Reference the original invoice, state the reason, and report it in the period's return so the additional liability is captured. Your customer can claim the extra credit on the strength of the same document.</p>",
+  "faq": [
+    {
+      "question": "Who issues a debit note, buyer or seller?",
+      "answer": "In GST terms it is the supplier who issues it to increase the value of a supply, though buyers often raise their own debit notes commercially."
+    },
+    {
+      "question": "Is there a time limit for debit notes?",
+      "answer": "Unlike credit notes, debit notes increase liability, so they can generally be issued when the correction is discovered."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "debit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "credit-note",
+    "tax-invoice",
+    "gstr-1",
+    "purchase-return"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "shrinkage",
+  "term": "Shrinkage",
+  "category": "retail-inventory",
+  "aliases": [
+    "stock shrinkage",
+    "inventory shrinkage"
+  ],
+  "short": "Stock that disappears between receiving and selling.",
+  "seoTitle": "Shrinkage — Meaning, Formula and Example",
+  "metaDescription": "Shrinkage is the gap between the stock the records say you should have and the stock actually counted. Stock that disappears between receiving and selling.",
+  "updated": "2026-08-07",
+  "definition": "Shrinkage is the gap between the stock the records say you should have and the stock actually counted. It comes from theft, damage, spoilage, receiving errors and mis-scanned sales.",
+  "bodyHtml": "<h2>Why Shrinkage matters</h2><p>Shrinkage is pure loss — the goods were paid for and produced no revenue. Small percentages matter enormously in thin-margin retail, where a 2% shrink can equal a large share of net profit.</p><h2>Shrinkage formula</h2><p class=\"glossary-formula\">Shrinkage % = (Book stock value − Counted stock value) ÷ Sales × 100</p><p>Track it per category, since causes differ across the range.</p><h2>How Shrinkage works in practice</h2><p>Measure it per category so the cause is identifiable, and separate known causes such as recorded damage from unexplained loss. Unexplained shrink concentrated in one category or shift is worth investigating specifically.</p>",
+  "faq": [
+    {
+      "question": "What is a normal shrinkage rate?",
+      "answer": "Grocery and convenience formats commonly see a low single-digit percentage; the trend matters more than the absolute."
+    },
+    {
+      "question": "How do I reduce shrinkage?",
+      "answer": "Accurate receiving, scan-based selling, tighter control of high-value lines, and regular cycle counts."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "stock-take",
+    "wastage",
+    "dead-stock",
+    "cycle-count"
+  ],
+  "formula": {
+    "expression": "Shrinkage % = (Book stock value − Counted stock value) ÷ Sales × 100",
+    "note": "Track it per category, since causes differ across the range."
+  }
+}

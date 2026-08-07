@@ -1,0 +1,57 @@
+{
+  "slug": "double-entry-bookkeeping",
+  "term": "Double-Entry Bookkeeping",
+  "category": "accounting",
+  "aliases": [
+    "double entry bookkeeping",
+    "double entry accounting"
+  ],
+  "short": "Recording every transaction twice, as a debit and a matching credit.",
+  "seoTitle": "Double-Entry Bookkeeping — Meaning, Formula and Example",
+  "metaDescription": "Double-entry bookkeeping records every transaction in two places: a debit in one account and an equal credit in another.",
+  "updated": "2026-08-07",
+  "definition": "Double-entry bookkeeping records every transaction in two places: a debit in one account and an equal credit in another. Because the two sides must always match, the books carry their own error check.",
+  "bodyHtml": "<h2>Why Double-Entry Bookkeeping matters</h2><p>Single-entry cash notes tell you money moved but not why, and never balance. Double entry is what makes a trial balance, a balance sheet and any meaningful financial statement possible.</p><h2>Double-Entry Bookkeeping formula</h2><p class=\"glossary-formula\">Assets = Liabilities + Equity</p><p>The accounting equation that stays true after every correctly posted entry.</p><h2>How Double-Entry Bookkeeping works in practice</h2><p>Every entry answers two questions — what did the business receive, and where did it come from. Buying stock on credit increases inventory and increases what is owed to the supplier, with no cash involved at all.</p>",
+  "faq": [
+    {
+      "question": "Do small businesses need double entry?",
+      "answer": "Once there is credit, stock or a loan involved, yes. A pure cash book stops explaining the business quickly."
+    },
+    {
+      "question": "What if my trial balance does not tally?",
+      "answer": "Something was posted one-sided or with mismatched amounts. The difference itself often hints at the error."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    }
+  ],
+  "relatedTerms": [
+    "debit-entry",
+    "credit-entry",
+    "journal-entry",
+    "trial-balance"
+  ],
+  "formula": {
+    "expression": "Assets = Liabilities + Equity",
+    "note": "The accounting equation that stays true after every correctly posted entry."
+  }
+}

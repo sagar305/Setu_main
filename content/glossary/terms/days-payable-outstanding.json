@@ -1,0 +1,56 @@
+{
+  "slug": "days-payable-outstanding",
+  "term": "Days Payable Outstanding",
+  "category": "payments-finance",
+  "aliases": [
+    "DPO"
+  ],
+  "short": "The average number of days you take to pay suppliers.",
+  "seoTitle": "Days Payable Outstanding — Meaning, Formula and Example",
+  "metaDescription": "Days payable outstanding measures how long, on average, a business takes to pay its suppliers after being invoiced. DPO is the other half of the cash cycle.",
+  "updated": "2026-08-07",
+  "definition": "Days payable outstanding measures how long, on average, a business takes to pay its suppliers after being invoiced. Higher DPO means suppliers are financing more of your operations.",
+  "bodyHtml": "<h2>Why Days Payable Outstanding matters</h2><p>DPO is the other half of the cash cycle. Extending it is the cheapest financing available, but pushing beyond agreed terms costs goodwill, priority and eventually the terms themselves.</p><h2>Days Payable Outstanding formula</h2><p class=\"glossary-formula\">DPO = Accounts payable ÷ Credit purchases × Days in the period</p><p>Read alongside DSO and days of stock.</p><h2>How Days Payable Outstanding works in practice</h2><p>Use the terms you agreed rather than paying early out of habit, and compare DPO with DSO. If you pay in 20 days and collect in 50, the gap is being funded from your own pocket.</p>",
+  "faq": [
+    {
+      "question": "Is a high DPO good?",
+      "answer": "Up to your agreed terms, yes. Beyond them it damages supply reliability and pricing."
+    },
+    {
+      "question": "How does DPO affect the cash conversion cycle?",
+      "answer": "It shortens it directly — every extra day of supplier credit is a day less of self-funding."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "days-sales-outstanding",
+    "cash-conversion-cycle",
+    "accounts-payable",
+    "payment-terms"
+  ],
+  "formula": {
+    "expression": "DPO = Accounts payable ÷ Credit purchases × Days in the period",
+    "note": "Read alongside DSO and days of stock."
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VendorComparisonTool } from "@/components/tools/analysis/VendorComparisonTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Vendor Comparison Tool | Setu",
@@ -75,6 +76,9 @@ export default function VendorComparisonPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <VendorComparisonTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="vendor-comparison" />
       </section>
     </>
   );

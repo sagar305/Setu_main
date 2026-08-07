@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CashFlowTool } from "@/components/tools/statements/CashFlowTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Cash Flow Statement Maker | Setu",
@@ -75,6 +76,9 @@ export default function CashFlowStatementPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <CashFlowTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="cash-flow-statement" />
       </section>
     </>
   );

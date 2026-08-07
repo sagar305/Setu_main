@@ -1,0 +1,56 @@
+{
+  "slug": "markdown",
+  "term": "Markdown",
+  "category": "pricing-profit",
+  "aliases": [
+    "price reduction"
+  ],
+  "short": "A permanent price cut used to clear stock that is not moving.",
+  "seoTitle": "Markdown — Meaning, Formula and Example",
+  "metaDescription": "A markdown is a permanent reduction in an item's selling price, usually to clear slow-moving, seasonal or near-expiry stock.",
+  "updated": "2026-08-07",
+  "definition": "A markdown is a permanent reduction in an item's selling price, usually to clear slow-moving, seasonal or near-expiry stock. Unlike a promotional discount, the price does not go back up.",
+  "bodyHtml": "<h2>Why Markdown matters</h2><p>Markdowns recover cash from stock that would otherwise become dead. Taken early they cost a little margin; delayed until the goods are unsellable, they cost the entire purchase.</p><h2>Markdown formula</h2><p class=\"glossary-formula\">Markdown % = (Original price − New price) ÷ Original price × 100</p><p>Cumulative markdowns should be measured against the original price, not the last reduced one.</p><h2>How Markdown works in practice</h2><p>Set an ageing rule per category — for instance, review anything unsold after 60 days — and mark down in steps rather than waiting for a clearance event. Record the markdown so the margin report reflects reality.</p>",
+  "faq": [
+    {
+      "question": "When should I mark stock down?",
+      "answer": "As soon as the ageing report says it will not sell at full price. Waiting reduces what the goods can still fetch."
+    },
+    {
+      "question": "How is markdown different from discount?",
+      "answer": "A markdown resets the price permanently; a discount is a temporary reduction from a price that remains in force."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "dead-stock",
+    "discount",
+    "shrinkage",
+    "inventory-turnover"
+  ],
+  "formula": {
+    "expression": "Markdown % = (Original price − New price) ÷ Original price × 100",
+    "note": "Cumulative markdowns should be measured against the original price, not the last reduced one."
+  }
+}

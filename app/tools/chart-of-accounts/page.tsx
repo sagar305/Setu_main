@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ChartOfAccountsTool } from "@/components/tools/bookkeeping/ChartOfAccountsTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Chart of Accounts Builder | Setu",
@@ -75,6 +76,9 @@ export default function ChartOfAccountsPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <ChartOfAccountsTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="chart-of-accounts" />
       </section>
     </>
   );

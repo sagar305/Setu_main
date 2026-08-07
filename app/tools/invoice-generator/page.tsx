@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InvoiceGeneratorTool } from "@/components/tools/InvoiceGenerator/InvoiceGeneratorTool";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Invoice Generator - GST Compliant Invoices",
@@ -244,6 +245,9 @@ export default function InvoiceGeneratorPage() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="invoice-generator" />
       </section>
     </>
   );

@@ -1,0 +1,57 @@
+{
+  "slug": "average-cover",
+  "term": "Average Cover",
+  "category": "restaurant-ops",
+  "aliases": [
+    "average spend per head",
+    "APC"
+  ],
+  "short": "Average spend per guest in a period.",
+  "seoTitle": "Average Cover — Meaning, Formula and Example",
+  "metaDescription": "Average cover, or average spend per head, is total sales divided by the number of guests served. Raising average cover is usually cheaper than raising footfall.",
+  "updated": "2026-08-07",
+  "definition": "Average cover, or average spend per head, is total sales divided by the number of guests served. It is the restaurant version of average order value and the cleanest measure of how well a menu and a floor team sell.",
+  "bodyHtml": "<h2>Why Average Cover matters</h2><p>Raising average cover is usually cheaper than raising footfall. A ₹40 lift per head across 4,000 monthly covers is ₹1,60,000 with no extra marketing spend at all.</p><h2>Average Cover formula</h2><p class=\"glossary-formula\">Average cover = Total sales ÷ Covers</p><p>Compute it per day-part and per channel rather than as one blended figure.</p><h2>How Average Cover works in practice</h2><p>Move it with menu structure and service habits: suggested pairings, sides, desserts and beverages. Track it by day-part, because a weekday lunch average tells you nothing about a Saturday dinner.</p>",
+  "faq": [
+    {
+      "question": "How do I increase average cover?",
+      "answer": "Beverages and desserts are the usual levers, followed by well-placed combos and trained recommendations."
+    },
+    {
+      "question": "Is average cover the same as average order value?",
+      "answer": "The idea is the same; average cover is per guest, while order value is per bill."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "covers",
+    "average-order-value",
+    "upselling",
+    "menu-mix"
+  ],
+  "formula": {
+    "expression": "Average cover = Total sales ÷ Covers",
+    "note": "Compute it per day-part and per channel rather than as one blended figure."
+  }
+}

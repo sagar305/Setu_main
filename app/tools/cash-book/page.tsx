@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CashBookTool } from "@/components/tools/CashBook/CashBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Cash Book | Daily Cash In/Out & Closing Balance | Setu",
@@ -91,6 +92,9 @@ export default function CashBookPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="cash-book" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="cash-book" />
       </section>
     </>
   );

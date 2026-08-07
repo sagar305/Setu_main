@@ -1,0 +1,57 @@
+{
+  "slug": "overdraft",
+  "term": "Overdraft",
+  "category": "payments-finance",
+  "aliases": [
+    "OD",
+    "cash credit"
+  ],
+  "short": "A credit limit on your current account you can dip into as needed.",
+  "seoTitle": "Overdraft — Meaning, Formula and Example",
+  "metaDescription": "A credit limit on your current account you can dip into as needed. See the formula, an example and the free Setu tools that use Overdraft.",
+  "updated": "2026-08-07",
+  "definition": "An overdraft is a facility allowing a business to draw beyond its current account balance up to an approved limit, with interest charged only on the amount actually used and only for the days it is used.",
+  "bodyHtml": "<h2>Why Overdraft matters</h2><p>Overdrafts suit fluctuating needs — a festive stock buy, a delayed payment — far better than a term loan, because idle limits cost nothing beyond the facility fee.</p><h2>Overdraft formula</h2><p class=\"glossary-formula\">Interest = Amount drawn × Rate × Days used ÷ 365</p><p>Charged only on utilisation, not on the sanctioned limit.</p><h2>How Overdraft works in practice</h2><p>Watch utilisation: a facility that never returns to zero has become a term loan at overdraft rates, which is an expensive way to fund a structural gap.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between an overdraft and cash credit?",
+      "answer": "Both are revolving facilities; cash credit is typically secured against stock and receivables with periodic statements."
+    },
+    {
+      "question": "Is a permanently used overdraft a problem?",
+      "answer": "Usually yes. It signals a structural funding gap that short-term credit is not the right instrument for."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "working-capital-loan",
+    "working-capital",
+    "collateral",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "Interest = Amount drawn × Rate × Days used ÷ 365",
+    "note": "Charged only on utilisation, not on the sanctioned limit."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "financial-year",
+  "term": "Financial Year",
+  "category": "accounting",
+  "aliases": [
+    "fiscal year",
+    "FY"
+  ],
+  "short": "The twelve-month period a business reports its accounts for.",
+  "seoTitle": "Financial Year — Meaning and Example for Businesses",
+  "metaDescription": "A financial year is the twelve-month period a business reports its accounts for. The twelve-month period a business reports its accounts for.",
+  "updated": "2026-08-07",
+  "definition": "A financial year is the twelve-month period a business reports its accounts for. In India it runs from 1 April to 31 March, and is written in forms such as FY 2025-26.",
+  "bodyHtml": "<h2>Why Financial Year matters</h2><p>Almost every deadline, threshold and invoice series is tied to the financial year. Invoice numbering restarts with it, and turnover thresholds for registration and e-invoicing are measured across it.</p><h2>How Financial Year works in practice</h2><p>Plan the year-end sequence in advance: stock count, receivable and payable confirmations, depreciation, accruals, and the invoice series reset on 1 April.</p>",
+  "faq": [
+    {
+      "question": "Why does India use April to March?",
+      "answer": "It is the statutory year set by law, and tax rules, returns and thresholds are all aligned to it."
+    },
+    {
+      "question": "Is the assessment year different?",
+      "answer": "Yes. The assessment year is the year in which the previous financial year's income is assessed to tax."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "invoice-numbering",
+    "trial-balance",
+    "income-tax",
+    "audit-trail"
+  ]
+}

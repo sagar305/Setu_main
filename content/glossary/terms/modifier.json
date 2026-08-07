@@ -1,0 +1,53 @@
+{
+  "slug": "modifier",
+  "term": "Modifier",
+  "category": "restaurant-ops",
+  "aliases": [
+    "item modifier",
+    "add-on"
+  ],
+  "short": "A customisation attached to an ordered item.",
+  "seoTitle": "Modifier — Meaning and Example for Businesses",
+  "metaDescription": "A modifier is a customisation attached to an item at ordering — extra cheese, no onion, medium spice, a larger size. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A modifier is a customisation attached to an item at ordering — extra cheese, no onion, medium spice, a larger size. Modifiers may be free or priced, and priced ones carry their own cost.",
+  "bodyHtml": "<h2>Why Modifier matters</h2><p>Modifiers are where accuracy and margin quietly leak. Free add-ons with real ingredient cost erode plate margin, and unrecorded preferences are a leading cause of remakes.</p><h2>How Modifier works in practice</h2><p>Define modifiers in the menu structure with their own cost and price rather than as free-text notes, so both the kitchen ticket and the cost report reflect them.</p>",
+  "faq": [
+    {
+      "question": "Should modifiers be priced?",
+      "answer": "Anything with meaningful ingredient cost should be, even at a token price, or it drifts into a default expectation."
+    },
+    {
+      "question": "Why not use free-text notes?",
+      "answer": "Notes are unstructured, so nothing is costed, counted or consistently understood in the kitchen."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "kot",
+    "plate-cost",
+    "menu-mix",
+    "upselling"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "markup",
+  "term": "Markup",
+  "category": "pricing-profit",
+  "aliases": [
+    "mark-up",
+    "markup percentage"
+  ],
+  "short": "The amount added to cost, expressed as a percentage of cost.",
+  "seoTitle": "Markup — Meaning, Formula and Example",
+  "metaDescription": "Markup is the amount added to the cost of an item to arrive at its selling price, expressed as a percentage of that cost.",
+  "updated": "2026-08-07",
+  "definition": "Markup is the amount added to the cost of an item to arrive at its selling price, expressed as a percentage of that cost. It is how buyers and wholesalers usually think about pricing, because they start from what they paid.",
+  "bodyHtml": "<h2>Why Markup matters</h2><p>Markup and margin describe the same rupee of profit from opposite ends, and confusing them systematically underprices a business. A 50% markup is only a 33% margin, and applying a target margin as a markup quietly gives away the difference on every sale.</p><h2>Markup formula</h2><p class=\"glossary-formula\">Markup % = (Selling price − Cost) ÷ Cost × 100</p><p>To convert a target margin into a markup: markup = margin ÷ (100 − margin) × 100.</p><h2>How Markup works in practice</h2><p>Retailers typically set a standard markup per category, then adjust for competition and shelf life. Working from cost is fine as long as the resulting margin is checked, especially after a supplier price rise.</p><h2>Worked example</h2><p>An item costing ₹200 sold at ₹300 carries a 50% markup and a 33.3% margin.</p>",
+  "faq": [
+    {
+      "question": "Which should I use, markup or margin?",
+      "answer": "Use markup to set prices from cost and margin to judge whether the resulting price is profitable enough."
+    },
+    {
+      "question": "What is keystone pricing?",
+      "answer": "The retail convention of doubling cost — a 100% markup, which is a 50% margin."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "profit-margin",
+    "cost-price",
+    "selling-price",
+    "cost-plus-pricing"
+  ],
+  "formula": {
+    "expression": "Markup % = (Selling price − Cost) ÷ Cost × 100",
+    "note": "To convert a target margin into a markup: markup = margin ÷ (100 − margin) × 100."
+  }
+}

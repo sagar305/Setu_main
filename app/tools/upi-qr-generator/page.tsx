@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { UpiQrGeneratorTool } from "@/components/tools/UpiQrGenerator/UpiQrGeneratorTool";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Dynamic UPI QR Generator | Instant Payment Codes",
@@ -259,6 +260,9 @@ export default function UpiQrGeneratorPage() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="upi-qr-generator" />
       </section>
     </>
   );

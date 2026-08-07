@@ -1,0 +1,53 @@
+{
+  "slug": "chart-of-accounts",
+  "term": "Chart of Accounts",
+  "category": "accounting",
+  "aliases": [
+    "COA",
+    "account master"
+  ],
+  "short": "The master list of every account your books record against.",
+  "seoTitle": "Chart of Accounts — Meaning and Example for Businesses",
+  "metaDescription": "The master list of every account your books record against. The chart decides what your reports can tell you. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "The chart of accounts is the master list of every account a business records transactions against, grouped into assets, liabilities, equity, income and expenses, usually with a numeric code per account.",
+  "bodyHtml": "<h2>Why Chart of Accounts matters</h2><p>The chart decides what your reports can tell you. Lump every purchase into one expense account and no report will ever explain where the money went.</p><h2>How Chart of Accounts works in practice</h2><p>Keep it as short as the business allows while separating anything you want to see on a report. Leave gaps in the numbering so new accounts slot in without renumbering the whole list.</p><h2>Worked example</h2><p>A common convention runs 1000s for assets, 2000s liabilities, 3000s equity, 4000s income and 5000s expenses.</p>",
+  "faq": [
+    {
+      "question": "How many accounts should a small business have?",
+      "answer": "Enough to answer your recurring questions and no more — usually a few dozen, not hundreds."
+    },
+    {
+      "question": "Can I change the chart of accounts later?",
+      "answer": "Yes, but merging or renaming accounts mid-year breaks comparisons, so do it at a year boundary where possible."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "general-ledger",
+    "journal-entry",
+    "trial-balance",
+    "double-entry-bookkeeping"
+  ]
+}

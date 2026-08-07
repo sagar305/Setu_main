@@ -1,0 +1,57 @@
+{
+  "slug": "loyalty-program",
+  "term": "Loyalty Program",
+  "category": "growth-marketing",
+  "aliases": [
+    "loyalty programme",
+    "rewards program"
+  ],
+  "short": "A structured reward for customers who keep coming back.",
+  "seoTitle": "Loyalty Program — Meaning, Formula and Example",
+  "metaDescription": "A loyalty program rewards repeat purchase — points, stamps, tiers or cashback — to make returning more attractive than switching.",
+  "updated": "2026-08-07",
+  "definition": "A loyalty program rewards repeat purchase — points, stamps, tiers or cashback — to make returning more attractive than switching. It also creates a customer record, which is often the more valuable outcome.",
+  "bodyHtml": "<h2>Why Loyalty Program matters</h2><p>Loyalty schemes are a margin decision. A 5% reward costs 5% of every sale it touches, so it only pays if it genuinely changes behaviour rather than discounting loyal customers who would have returned anyway.</p><h2>Loyalty Program formula</h2><p class=\"glossary-formula\">Program cost % = Value of rewards redeemed ÷ Sales to members × 100</p><p>Compare against the incremental sales from members.</p><h2>How Loyalty Program works in practice</h2><p>Keep the mechanic simple enough to explain in one sentence, and measure the incremental visits it produced rather than the points issued. Reward frequency where visits are the constraint, and basket size where spend is.</p>",
+  "faq": [
+    {
+      "question": "Do loyalty programs actually work?",
+      "answer": "When they change frequency, yes. When they mostly reward customers who already returned, they are a discount."
+    },
+    {
+      "question": "What is the simplest scheme to run?",
+      "answer": "A stamp or visit-based reward, since it needs no wallet, no app and no explanation."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "retention-rate",
+    "repeat-rate",
+    "coupon-code",
+    "customer-lifetime-value"
+  ],
+  "formula": {
+    "expression": "Program cost % = Value of rewards redeemed ÷ Sales to members × 100",
+    "note": "Compare against the incremental sales from members."
+  }
+}

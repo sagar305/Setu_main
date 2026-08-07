@@ -1,0 +1,53 @@
+{
+  "slug": "bonus",
+  "term": "Statutory Bonus",
+  "category": "payroll-hr",
+  "aliases": [
+    "annual bonus",
+    "Diwali bonus"
+  ],
+  "short": "An annual payment to eligible employees, minimum set by law.",
+  "seoTitle": "Statutory Bonus — Meaning and Example for Businesses",
+  "metaDescription": "An annual payment to eligible employees, minimum set by law. Many businesses pay it around the festive season. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Statutory bonus is an annual payment to eligible employees under the Payment of Bonus Act, subject to a minimum percentage of wages and a wage eligibility ceiling. Many businesses pay it around the festive season.",
+  "bodyHtml": "<h2>Why Statutory Bonus matters</h2><p>Bonus is a legal obligation for covered establishments rather than a discretionary gift, and it is often paid on top of whatever informal festive payments a business already makes.</p><h2>How Statutory Bonus works in practice</h2><p>Budget for it through the year rather than absorbing it in one month, and keep the statutory bonus distinct from discretionary incentives in both records and communication.</p>",
+  "faq": [
+    {
+      "question": "Who is eligible for statutory bonus?",
+      "answer": "Employees earning up to the prescribed wage ceiling who have worked the minimum number of days in the year."
+    },
+    {
+      "question": "Is a performance incentive the same as statutory bonus?",
+      "answer": "No. Performance pay is contractual or discretionary; statutory bonus is a legal minimum for covered employees."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gross-salary",
+    "payroll",
+    "minimum-wages",
+    "leave-encashment"
+  ]
+}

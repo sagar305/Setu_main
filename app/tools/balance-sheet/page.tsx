@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BalanceSheetTool } from "@/components/tools/statements/BalanceSheetTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Balance Sheet Maker | Setu",
@@ -75,6 +76,9 @@ export default function BalanceSheetPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <BalanceSheetTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="balance-sheet" />
       </section>
     </>
   );

@@ -1,0 +1,53 @@
+{
+  "slug": "receipt",
+  "term": "Receipt",
+  "category": "pos-tech",
+  "aliases": [
+    "bill receipt",
+    "sales receipt"
+  ],
+  "short": "The printed or digital proof of a completed sale.",
+  "seoTitle": "Receipt — Meaning and Example for Businesses",
+  "metaDescription": "A receipt is the document given to a customer as proof of a completed sale, showing items, amounts, tax and payment mode.",
+  "updated": "2026-08-07",
+  "definition": "A receipt is the document given to a customer as proof of a completed sale, showing items, amounts, tax and payment mode. It may double as the tax invoice where the prescribed particulars are included.",
+  "bodyHtml": "<h2>Why Receipt matters</h2><p>Receipts are the customer's record and often the business's only proof of what was sold at what price. For returns and warranty claims, the receipt is the entire evidence.</p><h2>How Receipt works in practice</h2><p>Include everything a tax invoice needs when serving business customers, and keep a digital copy regardless. A QR code for payment or reviews on the receipt costs nothing and gets read.</p>",
+  "faq": [
+    {
+      "question": "Is a receipt the same as a tax invoice?",
+      "answer": "Only if it carries all the prescribed particulars. A simple payment acknowledgement is not a tax invoice."
+    },
+    {
+      "question": "Should I offer digital receipts?",
+      "answer": "They cost nothing to send, cannot fade, and give you a customer contact for later."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-invoice",
+    "thermal-printer",
+    "billing-software",
+    "invoice-numbering"
+  ]
+}

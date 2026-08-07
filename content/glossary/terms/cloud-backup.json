@@ -1,0 +1,53 @@
+{
+  "slug": "cloud-backup",
+  "term": "Cloud Backup",
+  "category": "pos-tech",
+  "aliases": [
+    "backup and restore",
+    "data backup"
+  ],
+  "short": "A copy of your business data kept somewhere else.",
+  "seoTitle": "Cloud Backup — Meaning and Example for Businesses",
+  "metaDescription": "Cloud backup keeps a copy of business data outside the device it was created on, so a lost, stolen or failed device does not take the records with it.",
+  "updated": "2026-08-07",
+  "definition": "Cloud backup keeps a copy of business data outside the device it was created on, so a lost, stolen or failed device does not take the records with it.",
+  "bodyHtml": "<h2>Why Cloud Backup matters</h2><p>Devices fail at the worst possible time, and the data lost is usually invoices, stock and customer records that cannot be reconstructed. Backups are cheap insurance against an uninsurable loss.</p><h2>How Cloud Backup works in practice</h2><p>Back up on a schedule you do not have to remember, verify a restore occasionally, and keep at least one copy you control. A backup nobody has ever restored is a hope, not a plan.</p>",
+  "faq": [
+    {
+      "question": "How often should I back up?",
+      "answer": "Daily for transactional data. Weekly is acceptable only for records that rarely change."
+    },
+    {
+      "question": "Is exporting to a file a backup?",
+      "answer": "Yes, provided the file is stored somewhere other than the device that produced it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "browser-storage",
+    "csv-export",
+    "offline-mode",
+    "audit-trail"
+  ]
+}

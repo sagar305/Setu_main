@@ -1,0 +1,53 @@
+{
+  "slug": "advance-payment",
+  "term": "Advance Payment",
+  "category": "payments-finance",
+  "aliases": [
+    "advance",
+    "upfront payment"
+  ],
+  "short": "Money received before goods or services are delivered.",
+  "seoTitle": "Advance Payment — Meaning and Example for Businesses",
+  "metaDescription": "An advance payment is money received before delivery — a booking amount, a deposit on a custom order, a retainer. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "An advance payment is money received before delivery — a booking amount, a deposit on a custom order, a retainer. Until the supply happens it is a liability, not income.",
+  "bodyHtml": "<h2>Why Advance Payment matters</h2><p>Advances are the cleanest way to fund working capital, especially for custom or long-lead work. They also filter out customers who were never going to commit.</p><h2>How Advance Payment works in practice</h2><p>Record advances against the customer rather than as sales, adjust them when the invoice is raised, and note that GST can apply on advances for services. Ask for advances on anything customised, since the goods have no second buyer.</p>",
+  "faq": [
+    {
+      "question": "Is an advance income?",
+      "answer": "No. It is a liability until the goods or services are actually supplied."
+    },
+    {
+      "question": "Does GST apply to advances?",
+      "answer": "For services, tax is generally payable on receipt of advance; the treatment for goods differs, so check the current position."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "payment-terms",
+    "accounts-receivable",
+    "cash-flow",
+    "quotation"
+  ]
+}

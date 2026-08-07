@@ -1,0 +1,52 @@
+{
+  "slug": "service-charge",
+  "term": "Service Charge",
+  "category": "restaurant-ops",
+  "aliases": [
+    "restaurant service charge"
+  ],
+  "short": "An optional charge a restaurant adds for service.",
+  "seoTitle": "Service Charge — Meaning and Example for Businesses",
+  "metaDescription": "Service charge is an amount a restaurant adds to the bill for service, distinct from a government tax and from a voluntary tip.",
+  "updated": "2026-08-07",
+  "definition": "Service charge is an amount a restaurant adds to the bill for service, distinct from a government tax and from a voluntary tip. In India, consumer protection guidance has been clear that it cannot be added compulsorily or collected as if it were a tax.",
+  "bodyHtml": "<h2>Why Service Charge matters</h2><p>Service charge disputes are a common source of complaints and negative reviews. Presenting it as mandatory, or blending it into the taxable line, invites both consumer complaints and tax questions.</p><h2>How Service Charge works in practice</h2><p>If you levy it, disclose it clearly before ordering, keep it removable on request, and show it as a separate line rather than folded into the food total. How the collected amount is distributed to staff should also be documented.</p>",
+  "faq": [
+    {
+      "question": "Is service charge mandatory in India?",
+      "answer": "No. Guidance is explicit that it cannot be added compulsorily, and customers may ask for it to be removed."
+    },
+    {
+      "question": "Is service charge the same as a tip?",
+      "answer": "No. A tip is voluntary and given directly; a service charge is levied by the establishment."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "tip-split-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tip-pooling",
+    "taxable-value",
+    "dine-in",
+    "gst"
+  ]
+}

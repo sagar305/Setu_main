@@ -1,0 +1,52 @@
+{
+  "slug": "cohort-analysis",
+  "term": "Cohort Analysis",
+  "category": "growth-marketing",
+  "aliases": [
+    "cohort report"
+  ],
+  "short": "Tracking groups of customers who started in the same period.",
+  "seoTitle": "Cohort Analysis — Meaning and Example for Businesses",
+  "metaDescription": "Cohort analysis groups customers by when they first bought and tracks each group's behaviour over time. Blended averages hide direction.",
+  "updated": "2026-08-07",
+  "definition": "Cohort analysis groups customers by when they first bought and tracks each group's behaviour over time. It shows whether recent customers behave better or worse than earlier ones.",
+  "bodyHtml": "<h2>Why Cohort Analysis matters</h2><p>Blended averages hide direction. A retention figure can stay flat while every new cohort performs worse, because the older cohorts are still propping it up.</p><h2>How Cohort Analysis works in practice</h2><p>Compare month-one, month-three and month-six repeat rates across cohorts. A deteriorating pattern usually means the channel bringing customers in has changed, not the product.</p>",
+  "faq": [
+    {
+      "question": "How many cohorts do I need?",
+      "answer": "Six months of monthly cohorts is enough to see direction in most small businesses."
+    },
+    {
+      "question": "What does a declining cohort mean?",
+      "answer": "Usually a change in acquisition source or an operational drift, and it appears in cohorts long before it appears in totals."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    }
+  ],
+  "relatedTerms": [
+    "rfm-analysis",
+    "retention-rate",
+    "churn-rate",
+    "customer-lifetime-value"
+  ]
+}

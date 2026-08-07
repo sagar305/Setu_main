@@ -1,0 +1,57 @@
+{
+  "slug": "footfall",
+  "term": "Footfall",
+  "category": "growth-marketing",
+  "aliases": [
+    "walk-ins",
+    "foot traffic"
+  ],
+  "short": "The number of people entering your premises.",
+  "seoTitle": "Footfall — Meaning, Formula and Example",
+  "metaDescription": "Footfall is the number of people who physically enter a shop or restaurant in a period, whether or not they buy. The number of people entering your premises.",
+  "updated": "2026-08-07",
+  "definition": "Footfall is the number of people who physically enter a shop or restaurant in a period, whether or not they buy. It is the top of the funnel for any location-based business.",
+  "bodyHtml": "<h2>Why Footfall matters</h2><p>Footfall separates a traffic problem from a conversion problem. Steady footfall with falling sales points at the offer or the service, not at the location.</p><h2>Footfall formula</h2><p class=\"glossary-formula\">Conversion rate = Bills issued ÷ Footfall × 100</p><p>Sales per visitor = revenue ÷ footfall.</p><h2>How Footfall works in practice</h2><p>Count it even roughly — a manual counter at peak hours for a week is enough to establish a baseline. Track it against day-part and weather, since both explain more variation than most owners expect.</p>",
+  "faq": [
+    {
+      "question": "How do I increase footfall?",
+      "answer": "Visibility first — signage, listings and reviews — then a reason to visit at the specific hours you are quiet."
+    },
+    {
+      "question": "Is footfall useful for a delivery-only business?",
+      "answer": "Not directly. Listing views and impressions are the equivalent top-of-funnel measure."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "conversion-rate",
+    "covers",
+    "same-store-sales",
+    "google-business-profile"
+  ],
+  "formula": {
+    "expression": "Conversion rate = Bills issued ÷ Footfall × 100",
+    "note": "Sales per visitor = revenue ÷ footfall."
+  }
+}

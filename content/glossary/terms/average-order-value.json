@@ -1,0 +1,58 @@
+{
+  "slug": "average-order-value",
+  "term": "Average Order Value",
+  "category": "growth-marketing",
+  "aliases": [
+    "AOV",
+    "average bill value",
+    "average ticket size"
+  ],
+  "short": "Average revenue per order in a period.",
+  "seoTitle": "Average Order Value — Meaning, Formula and Example",
+  "metaDescription": "Average order value is total revenue divided by the number of orders in a period. Raising AOV is usually cheaper than raising footfall.",
+  "updated": "2026-08-07",
+  "definition": "Average order value is total revenue divided by the number of orders in a period. It measures how much a customer spends per visit, independent of how many customers there were.",
+  "bodyHtml": "<h2>Why Average Order Value matters</h2><p>Raising AOV is usually cheaper than raising footfall. A ₹30 lift across 3,000 monthly orders is ₹90,000 with no additional marketing spend at all.</p><h2>Average Order Value formula</h2><p class=\"glossary-formula\">AOV = Total revenue ÷ Number of orders</p><p>Track it alongside order count, since one can rise as the other falls.</p><h2>How Average Order Value works in practice</h2><p>Move it with add-ons, combos and trained recommendations rather than with price rises alone. Track it by channel and day-part, since delivery and dine-in behave very differently.</p>",
+  "faq": [
+    {
+      "question": "How do I increase average order value?",
+      "answer": "Attach high-margin add-ons, structure combos, and make the recommendation part of the ordering flow rather than optional."
+    },
+    {
+      "question": "Is a rising AOV always good?",
+      "answer": "Not if order count is falling faster. Read the two together."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    }
+  ],
+  "relatedTerms": [
+    "basket-size",
+    "upselling",
+    "customer-lifetime-value",
+    "average-cover"
+  ],
+  "formula": {
+    "expression": "AOV = Total revenue ÷ Number of orders",
+    "note": "Track it alongside order count, since one can rise as the other falls."
+  }
+}

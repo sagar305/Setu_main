@@ -1,0 +1,57 @@
+{
+  "slug": "break-even-point",
+  "term": "Break-Even Point",
+  "category": "pricing-profit",
+  "aliases": [
+    "breakeven",
+    "break even point"
+  ],
+  "short": "The sales level where total revenue exactly covers total costs.",
+  "seoTitle": "Break-Even Point — Meaning, Formula and Example",
+  "metaDescription": "The break-even point is the level of sales at which total revenue exactly equals total costs, so the business makes neither profit nor loss.",
+  "updated": "2026-08-07",
+  "definition": "The break-even point is the level of sales at which total revenue exactly equals total costs, so the business makes neither profit nor loss. It can be expressed in units, in covers, or in rupees of revenue.",
+  "bodyHtml": "<h2>Why Break-Even Point matters</h2><p>Break-even turns an abstract worry into a daily target. Knowing you need 62 covers a day to cover costs changes how you read a slow Tuesday, and it is the first number to compute before opening a new outlet.</p><h2>Break-Even Point formula</h2><p class=\"glossary-formula\">Break-even units = Fixed costs ÷ Contribution margin per unit</p><p>In revenue terms: fixed costs ÷ contribution margin ratio.</p><h2>How Break-Even Point works in practice</h2><p>Split costs into fixed and variable, work out contribution per unit, and divide fixed costs by it. Recompute whenever rent, salaries or supplier prices change, because break-even moves with every one of them.</p><h2>Worked example</h2><p>₹4,00,000 of monthly fixed costs against ₹160 contribution per cover needs 2,500 covers a month, or about 83 a day.</p>",
+  "faq": [
+    {
+      "question": "How do I find break-even in rupees?",
+      "answer": "Divide fixed costs by the contribution margin ratio rather than by contribution per unit."
+    },
+    {
+      "question": "Does break-even include the owner's salary?",
+      "answer": "It should. If the owner works in the business, leaving their pay out understates the true requirement."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "contribution-margin",
+    "fixed-cost",
+    "variable-cost",
+    "payback-period"
+  ],
+  "formula": {
+    "expression": "Break-even units = Fixed costs ÷ Contribution margin per unit",
+    "note": "In revenue terms: fixed costs ÷ contribution margin ratio."
+  }
+}

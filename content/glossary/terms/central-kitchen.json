@@ -1,0 +1,52 @@
+{
+  "slug": "central-kitchen",
+  "term": "Central Kitchen",
+  "category": "restaurant-ops",
+  "aliases": [
+    "commissary kitchen"
+  ],
+  "short": "A shared production kitchen supplying several outlets.",
+  "seoTitle": "Central Kitchen — Meaning and Example for Businesses",
+  "metaDescription": "A central kitchen is a shared facility that prepares semi-finished or finished items for several outlets. A shared production kitchen supplying several outlets.",
+  "updated": "2026-08-07",
+  "definition": "A central kitchen is a shared facility that prepares semi-finished or finished items for several outlets. Outlets then finish and serve, which standardises taste and moves labour and storage off the retail floor.",
+  "bodyHtml": "<h2>Why Central Kitchen matters</h2><p>Central production cuts per-outlet labour and improves consistency, but adds transfer, cold chain and reconciliation work. Untracked transfers make outlet-level food cost meaningless.</p><h2>How Central Kitchen works in practice</h2><p>Treat each transfer as a documented movement with a value, so the central kitchen issues stock and the outlet receives it. Without that, every outlet's stock count drifts and nobody can explain the gap.</p>",
+  "faq": [
+    {
+      "question": "When is a central kitchen worth it?",
+      "answer": "Usually from three or four outlets in one city, where the fixed cost is spread and transport is short."
+    },
+    {
+      "question": "How should transfers be valued?",
+      "answer": "At production cost including labour and yield loss, so outlet food cost reflects reality."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "stock-transfer",
+    "recipe-costing",
+    "cloud-kitchen",
+    "yield-percentage"
+  ]
+}

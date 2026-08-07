@@ -1,0 +1,2525 @@
+{
+  "seo": {
+    "title": "Business Glossary — GST, Accounting & POS Terms",
+    "description": "253 business terms explained in plain English — GST, margin, inventory, payroll, bookkeeping and POS jargon, each with a formula, example and free tool.",
+    "keywords": [
+      "business glossary",
+      "GST terms explained",
+      "accounting terms for small business",
+      "restaurant business terms",
+      "retail inventory glossary"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Glossary",
+    "headline": "Business terms, explained plainly",
+    "subheadline": "253 terms from the invoices, ledgers, menus and stock registers Indian business owners work with every day — each with a formula, an example and the free Setu tool that does the maths for you."
+  },
+  "categories": [
+    {
+      "id": "gst-tax",
+      "name": "GST & Tax",
+      "description": "GST slabs, invoice fields, returns and the tax vocabulary on every Indian bill."
+    },
+    {
+      "id": "pricing-profit",
+      "name": "Pricing & Profit",
+      "description": "Margin, markup, cost structure and the numbers that decide whether a sale is worth making."
+    },
+    {
+      "id": "restaurant-ops",
+      "name": "Restaurant Operations",
+      "description": "Food cost, menu engineering, covers and kitchen flow, for restaurant and cafe owners."
+    },
+    {
+      "id": "retail-inventory",
+      "name": "Retail & Inventory",
+      "description": "Stock control, purchasing, SKUs and the counting discipline behind accurate shelves."
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting & Bookkeeping",
+      "description": "Ledgers, journals, statements and the double-entry ideas your books are built on."
+    },
+    {
+      "id": "payments-finance",
+      "name": "Payments & Finance",
+      "description": "UPI, settlements, credit terms, loans and how cash actually reaches your bank account."
+    },
+    {
+      "id": "growth-marketing",
+      "name": "Growth & Customers",
+      "description": "Acquisition cost, order value, retention and the metrics behind repeat business."
+    },
+    {
+      "id": "payroll-hr",
+      "name": "Payroll & People",
+      "description": "Salary structure, statutory deductions and the payroll terms on every payslip."
+    },
+    {
+      "id": "pos-tech",
+      "name": "POS & Billing Tech",
+      "description": "Billing hardware, printers, offline mode and the software plumbing of a counter."
+    }
+  ],
+  "terms": [
+    {
+      "slug": "abc-analysis",
+      "term": "ABC Analysis",
+      "category": "retail-inventory",
+      "short": "Sorting stock into A, B and C classes by value contribution.",
+      "aliases": [
+        "ABC classification"
+      ]
+    },
+    {
+      "slug": "accounts-payable",
+      "term": "Accounts Payable",
+      "category": "accounting",
+      "short": "Money you owe suppliers for goods or services already received.",
+      "aliases": [
+        "AP",
+        "creditors",
+        "trade payables",
+        "sundry creditors"
+      ]
+    },
+    {
+      "slug": "accounts-receivable",
+      "term": "Accounts Receivable",
+      "category": "accounting",
+      "short": "Money customers owe you for goods or services already delivered.",
+      "aliases": [
+        "AR",
+        "debtors",
+        "trade receivables",
+        "sundry debtors"
+      ]
+    },
+    {
+      "slug": "accrual-accounting",
+      "term": "Accrual Accounting",
+      "category": "accounting",
+      "short": "Recording income and expenses when they occur, not when paid.",
+      "aliases": [
+        "accrual basis",
+        "mercantile basis"
+      ]
+    },
+    {
+      "slug": "accrued-expense",
+      "term": "Accrued Expense",
+      "category": "accounting",
+      "short": "A cost incurred but not yet billed or paid.",
+      "aliases": [
+        "accrual",
+        "outstanding expense"
+      ]
+    },
+    {
+      "slug": "advance-payment",
+      "term": "Advance Payment",
+      "category": "payments-finance",
+      "short": "Money received before goods or services are delivered.",
+      "aliases": [
+        "advance",
+        "upfront payment"
+      ]
+    },
+    {
+      "slug": "aggregator-commission",
+      "term": "Aggregator Commission",
+      "category": "restaurant-ops",
+      "short": "The cut a delivery platform takes from each order.",
+      "aliases": [
+        "delivery commission",
+        "platform commission"
+      ]
+    },
+    {
+      "slug": "aging-report",
+      "term": "Aging Report",
+      "category": "accounting",
+      "short": "Outstanding balances grouped by how long they have been due.",
+      "aliases": [
+        "ageing report",
+        "aging analysis",
+        "ageing analysis"
+      ]
+    },
+    {
+      "slug": "amortisation",
+      "term": "Amortisation",
+      "category": "accounting",
+      "short": "Spreading the cost of an intangible asset over its useful life.",
+      "aliases": [
+        "amortization"
+      ]
+    },
+    {
+      "slug": "amortisation-schedule",
+      "term": "Amortisation Schedule",
+      "category": "payments-finance",
+      "short": "A table showing how each EMI splits between interest and principal.",
+      "aliases": [
+        "loan schedule",
+        "repayment schedule"
+      ]
+    },
+    {
+      "slug": "api-integration",
+      "term": "API Integration",
+      "category": "pos-tech",
+      "short": "Two systems exchanging data automatically.",
+      "aliases": [
+        "API",
+        "system integration"
+      ]
+    },
+    {
+      "slug": "attrition",
+      "term": "Attrition",
+      "category": "payroll-hr",
+      "short": "The rate at which employees leave and must be replaced.",
+      "aliases": [
+        "staff turnover",
+        "employee turnover"
+      ]
+    },
+    {
+      "slug": "audit-trail",
+      "term": "Audit Trail",
+      "category": "accounting",
+      "short": "A tamper-evident record of who changed what, and when.",
+      "aliases": [
+        "audit log"
+      ]
+    },
+    {
+      "slug": "average-cover",
+      "term": "Average Cover",
+      "category": "restaurant-ops",
+      "short": "Average spend per guest in a period.",
+      "aliases": [
+        "average spend per head",
+        "APC"
+      ]
+    },
+    {
+      "slug": "average-order-value",
+      "term": "Average Order Value",
+      "category": "growth-marketing",
+      "short": "Average revenue per order in a period.",
+      "aliases": [
+        "AOV",
+        "average bill value",
+        "average ticket size"
+      ]
+    },
+    {
+      "slug": "bad-debt",
+      "term": "Bad Debt",
+      "category": "accounting",
+      "short": "A receivable you have accepted will not be collected.",
+      "aliases": [
+        "bad debts",
+        "irrecoverable debt"
+      ]
+    },
+    {
+      "slug": "balance-sheet",
+      "term": "Balance Sheet",
+      "category": "accounting",
+      "short": "What a business owns and owes on one specific date.",
+      "aliases": [
+        "statement of financial position"
+      ]
+    },
+    {
+      "slug": "bank-reconciliation",
+      "term": "Bank Reconciliation",
+      "category": "accounting",
+      "short": "Matching your cash book against the bank statement.",
+      "aliases": [
+        "bank rec",
+        "bank reco"
+      ]
+    },
+    {
+      "slug": "barcode",
+      "term": "Barcode",
+      "category": "retail-inventory",
+      "short": "A scannable code that identifies a product at the till.",
+      "aliases": [
+        "bar code",
+        "EAN",
+        "UPC"
+      ]
+    },
+    {
+      "slug": "barcode-scanner",
+      "term": "Barcode Scanner",
+      "category": "pos-tech",
+      "short": "A device that reads a barcode and enters the item instantly.",
+      "aliases": [
+        "scanner",
+        "barcode reader"
+      ]
+    },
+    {
+      "slug": "basic-salary",
+      "term": "Basic Salary",
+      "category": "payroll-hr",
+      "short": "The core fixed component that other pay elements are built on.",
+      "aliases": [
+        "basic pay"
+      ]
+    },
+    {
+      "slug": "basket-size",
+      "term": "Basket Size",
+      "category": "growth-marketing",
+      "short": "How many items an average customer buys in one visit.",
+      "aliases": [
+        "items per bill",
+        "units per transaction"
+      ]
+    },
+    {
+      "slug": "batch-number",
+      "term": "Batch Number",
+      "category": "retail-inventory",
+      "short": "A code identifying goods produced or received together.",
+      "aliases": [
+        "lot number",
+        "batch code"
+      ]
+    },
+    {
+      "slug": "bill-of-supply",
+      "term": "Bill of Supply",
+      "category": "gst-tax",
+      "short": "The document used when no GST can be charged on a supply.",
+      "aliases": [
+        "bill of supply invoice"
+      ]
+    },
+    {
+      "slug": "billing-software",
+      "term": "Billing Software",
+      "category": "pos-tech",
+      "short": "Software that produces compliant bills and keeps a record of them.",
+      "aliases": [
+        "invoicing software",
+        "billing system"
+      ]
+    },
+    {
+      "slug": "break-even-point",
+      "term": "Break-Even Point",
+      "category": "pricing-profit",
+      "short": "The sales level where total revenue exactly covers total costs.",
+      "aliases": [
+        "breakeven",
+        "break even point"
+      ]
+    },
+    {
+      "slug": "browser-storage",
+      "term": "Browser Storage",
+      "category": "pos-tech",
+      "short": "Data saved inside your own browser rather than on a server.",
+      "aliases": [
+        "local storage",
+        "localStorage",
+        "on-device storage"
+      ]
+    },
+    {
+      "slug": "budget-variance",
+      "term": "Budget Variance",
+      "category": "accounting",
+      "short": "The difference between what you budgeted and what actually happened.",
+      "aliases": [
+        "budget vs actual variance"
+      ]
+    },
+    {
+      "slug": "bundle-pricing",
+      "term": "Bundle Pricing",
+      "category": "pricing-profit",
+      "short": "Selling several items together at a single lower price.",
+      "aliases": [
+        "combo pricing",
+        "meal deal pricing"
+      ]
+    },
+    {
+      "slug": "capital-expenditure",
+      "term": "Capital Expenditure",
+      "category": "accounting",
+      "short": "Money spent acquiring or improving long-lived assets.",
+      "aliases": [
+        "CAPEX",
+        "capital expense"
+      ]
+    },
+    {
+      "slug": "cash-basis-accounting",
+      "term": "Cash Basis Accounting",
+      "category": "accounting",
+      "short": "Recording income and expenses only when money moves.",
+      "aliases": [
+        "cash accounting",
+        "cash basis"
+      ]
+    },
+    {
+      "slug": "cash-conversion-cycle",
+      "term": "Cash Conversion Cycle",
+      "category": "payments-finance",
+      "short": "Days between paying for stock and collecting from customers.",
+      "aliases": [
+        "CCC",
+        "cash cycle"
+      ]
+    },
+    {
+      "slug": "cash-drawer",
+      "term": "Cash Drawer",
+      "category": "pos-tech",
+      "short": "The lockable drawer holding counter cash, opened by the POS.",
+      "aliases": [
+        "till",
+        "cash till"
+      ]
+    },
+    {
+      "slug": "cash-flow",
+      "term": "Cash Flow",
+      "category": "payments-finance",
+      "short": "The actual movement of money in and out of the business.",
+      "aliases": [
+        "cashflow"
+      ]
+    },
+    {
+      "slug": "cash-flow-statement",
+      "term": "Cash Flow Statement",
+      "category": "accounting",
+      "short": "Where cash actually came from and went during a period.",
+      "aliases": [
+        "statement of cash flows"
+      ]
+    },
+    {
+      "slug": "cash-on-delivery",
+      "term": "Cash on Delivery",
+      "category": "payments-finance",
+      "short": "Payment collected from the customer at the point of delivery.",
+      "aliases": [
+        "COD"
+      ]
+    },
+    {
+      "slug": "central-kitchen",
+      "term": "Central Kitchen",
+      "category": "restaurant-ops",
+      "short": "A shared production kitchen supplying several outlets.",
+      "aliases": [
+        "commissary kitchen"
+      ]
+    },
+    {
+      "slug": "cess",
+      "term": "Cess",
+      "category": "gst-tax",
+      "short": "An additional levy charged on top of tax for a specific purpose.",
+      "aliases": [
+        "compensation cess"
+      ]
+    },
+    {
+      "slug": "cgst",
+      "term": "CGST",
+      "category": "gst-tax",
+      "short": "The central government's half of GST on a sale within one state.",
+      "aliases": [
+        "Central GST",
+        "Central Goods and Services Tax"
+      ]
+    },
+    {
+      "slug": "chargeback",
+      "term": "Chargeback",
+      "category": "payments-finance",
+      "short": "A card payment reversed by the customer's bank after a dispute.",
+      "aliases": [
+        "payment dispute"
+      ]
+    },
+    {
+      "slug": "chart-of-accounts",
+      "term": "Chart of Accounts",
+      "category": "accounting",
+      "short": "The master list of every account your books record against.",
+      "aliases": [
+        "COA",
+        "account master"
+      ]
+    },
+    {
+      "slug": "cheque-bounce",
+      "term": "Cheque Bounce",
+      "category": "payments-finance",
+      "short": "A cheque returned unpaid, usually for insufficient funds.",
+      "aliases": [
+        "dishonoured cheque",
+        "cheque dishonour"
+      ]
+    },
+    {
+      "slug": "churn-rate",
+      "term": "Churn Rate",
+      "category": "growth-marketing",
+      "short": "The share of customers who stop buying from you.",
+      "aliases": [
+        "customer churn",
+        "attrition rate"
+      ]
+    },
+    {
+      "slug": "closing-stock",
+      "term": "Closing Stock",
+      "category": "retail-inventory",
+      "short": "The value of stock on hand at the end of a period.",
+      "aliases": [
+        "closing inventory",
+        "ending inventory"
+      ]
+    },
+    {
+      "slug": "cloud-backup",
+      "term": "Cloud Backup",
+      "category": "pos-tech",
+      "short": "A copy of your business data kept somewhere else.",
+      "aliases": [
+        "backup and restore",
+        "data backup"
+      ]
+    },
+    {
+      "slug": "cloud-kitchen",
+      "term": "Cloud Kitchen",
+      "category": "restaurant-ops",
+      "short": "A delivery-only kitchen with no dining area.",
+      "aliases": [
+        "dark kitchen",
+        "ghost kitchen"
+      ]
+    },
+    {
+      "slug": "cohort-analysis",
+      "term": "Cohort Analysis",
+      "category": "growth-marketing",
+      "short": "Tracking groups of customers who started in the same period.",
+      "aliases": [
+        "cohort report"
+      ]
+    },
+    {
+      "slug": "collateral",
+      "term": "Collateral",
+      "category": "payments-finance",
+      "short": "An asset pledged to a lender as security for a loan.",
+      "aliases": [
+        "security",
+        "loan security"
+      ]
+    },
+    {
+      "slug": "composition-scheme",
+      "term": "Composition Scheme",
+      "category": "gst-tax",
+      "short": "A simplified GST route where small businesses pay a flat rate on turnover.",
+      "aliases": [
+        "composition dealer"
+      ]
+    },
+    {
+      "slug": "comps-and-voids",
+      "term": "Comps and Voids",
+      "category": "restaurant-ops",
+      "short": "Complimentary items and cancelled bills, and the controls around them.",
+      "aliases": [
+        "comps",
+        "voids",
+        "complimentary and cancelled bills"
+      ]
+    },
+    {
+      "slug": "consignment-stock",
+      "term": "Consignment Stock",
+      "category": "retail-inventory",
+      "short": "Supplier-owned stock you only pay for once it sells.",
+      "aliases": [
+        "consignment inventory",
+        "sale or return"
+      ]
+    },
+    {
+      "slug": "contra-entry",
+      "term": "Contra Entry",
+      "category": "accounting",
+      "short": "A transfer between your own cash and bank accounts.",
+      "aliases": [
+        "contra transaction"
+      ]
+    },
+    {
+      "slug": "contribution-margin",
+      "term": "Contribution Margin",
+      "category": "pricing-profit",
+      "short": "What each sale contributes toward fixed costs after variable costs.",
+      "aliases": [
+        "contribution per unit"
+      ]
+    },
+    {
+      "slug": "conversion-rate",
+      "term": "Conversion Rate",
+      "category": "growth-marketing",
+      "short": "The share of visitors or enquiries that become sales.",
+      "aliases": [
+        "conversion %"
+      ]
+    },
+    {
+      "slug": "cogs",
+      "term": "Cost of Goods Sold",
+      "category": "pricing-profit",
+      "short": "The direct cost of the goods actually sold in a period.",
+      "aliases": [
+        "COGS",
+        "cost of sales"
+      ]
+    },
+    {
+      "slug": "cost-price",
+      "term": "Cost Price",
+      "category": "pricing-profit",
+      "short": "What an item cost you before any margin is added.",
+      "aliases": [
+        "cost of purchase",
+        "buying price"
+      ]
+    },
+    {
+      "slug": "cost-plus-pricing",
+      "term": "Cost-Plus Pricing",
+      "category": "pricing-profit",
+      "short": "Setting price by adding a fixed percentage to cost.",
+      "aliases": [
+        "cost plus pricing"
+      ]
+    },
+    {
+      "slug": "coupon-code",
+      "term": "Coupon Code",
+      "category": "growth-marketing",
+      "short": "A code that unlocks a specific offer at checkout.",
+      "aliases": [
+        "promo code",
+        "discount code"
+      ]
+    },
+    {
+      "slug": "covers",
+      "term": "Covers",
+      "category": "restaurant-ops",
+      "short": "The number of guests served in a period.",
+      "aliases": [
+        "number of covers",
+        "guest count"
+      ]
+    },
+    {
+      "slug": "credit-entry",
+      "term": "Credit Entry",
+      "category": "accounting",
+      "short": "The right side of a journal entry, recorded as Cr.",
+      "aliases": [
+        "credit side"
+      ]
+    },
+    {
+      "slug": "credit-limit",
+      "term": "Credit Limit",
+      "category": "payments-finance",
+      "short": "The maximum outstanding you allow a customer to carry.",
+      "aliases": [
+        "customer credit limit"
+      ]
+    },
+    {
+      "slug": "credit-note",
+      "term": "Credit Note",
+      "category": "gst-tax",
+      "short": "A document that reduces the value of an invoice already issued.",
+      "aliases": [
+        "GST credit note",
+        "sales return note"
+      ]
+    },
+    {
+      "slug": "cross-selling",
+      "term": "Cross-Selling",
+      "category": "growth-marketing",
+      "short": "Offering a complementary item alongside the purchase.",
+      "aliases": [
+        "cross sell",
+        "cross-sell"
+      ]
+    },
+    {
+      "slug": "csv-export",
+      "term": "CSV Export",
+      "category": "pos-tech",
+      "short": "Downloading your data as a spreadsheet-readable file.",
+      "aliases": [
+        "CSV file",
+        "data export"
+      ]
+    },
+    {
+      "slug": "ctc",
+      "term": "CTC",
+      "category": "payroll-hr",
+      "short": "The employer's total annual cost of employing someone.",
+      "aliases": [
+        "Cost to Company",
+        "cost to company"
+      ]
+    },
+    {
+      "slug": "current-ratio",
+      "term": "Current Ratio",
+      "category": "accounting",
+      "short": "Current assets divided by current liabilities.",
+      "aliases": [
+        "working capital ratio"
+      ]
+    },
+    {
+      "slug": "customer-acquisition-cost",
+      "term": "Customer Acquisition Cost",
+      "category": "growth-marketing",
+      "short": "What it costs, on average, to win one new customer.",
+      "aliases": [
+        "CAC",
+        "acquisition cost"
+      ]
+    },
+    {
+      "slug": "customer-lifetime-value",
+      "term": "Customer Lifetime Value",
+      "category": "growth-marketing",
+      "short": "The total profit expected from a customer over the whole relationship.",
+      "aliases": [
+        "LTV",
+        "CLV",
+        "lifetime value"
+      ]
+    },
+    {
+      "slug": "cycle-count",
+      "term": "Cycle Count",
+      "category": "retail-inventory",
+      "short": "Counting a small slice of stock often instead of everything at once.",
+      "aliases": [
+        "cycle counting",
+        "perpetual count"
+      ]
+    },
+    {
+      "slug": "days-payable-outstanding",
+      "term": "Days Payable Outstanding",
+      "category": "payments-finance",
+      "short": "The average number of days you take to pay suppliers.",
+      "aliases": [
+        "DPO"
+      ]
+    },
+    {
+      "slug": "days-sales-outstanding",
+      "term": "Days Sales Outstanding",
+      "category": "payments-finance",
+      "short": "The average number of days customers take to pay you.",
+      "aliases": [
+        "DSO"
+      ]
+    },
+    {
+      "slug": "dead-stock",
+      "term": "Dead Stock",
+      "category": "retail-inventory",
+      "short": "Goods that have not sold and probably will not.",
+      "aliases": [
+        "obsolete stock",
+        "non-moving stock"
+      ]
+    },
+    {
+      "slug": "dearness-allowance",
+      "term": "Dearness Allowance",
+      "category": "payroll-hr",
+      "short": "A cost-of-living component that rises with inflation.",
+      "aliases": [
+        "DA"
+      ]
+    },
+    {
+      "slug": "debit-entry",
+      "term": "Debit Entry",
+      "category": "accounting",
+      "short": "The left side of a journal entry, recorded as Dr.",
+      "aliases": [
+        "debit side"
+      ]
+    },
+    {
+      "slug": "debit-note",
+      "term": "Debit Note",
+      "category": "gst-tax",
+      "short": "A document that increases the value of an invoice already issued.",
+      "aliases": [
+        "supplementary invoice"
+      ]
+    },
+    {
+      "slug": "debt-to-equity-ratio",
+      "term": "Debt-to-Equity Ratio",
+      "category": "accounting",
+      "short": "How much of the business is funded by debt versus owners' money.",
+      "aliases": [
+        "debt equity ratio",
+        "D/E ratio"
+      ]
+    },
+    {
+      "slug": "depreciation",
+      "term": "Depreciation",
+      "category": "accounting",
+      "short": "Spreading an asset's cost across the years it is used.",
+      "aliases": [
+        "asset depreciation"
+      ]
+    },
+    {
+      "slug": "dine-in",
+      "term": "Dine-In",
+      "category": "restaurant-ops",
+      "short": "Food ordered and eaten on the premises.",
+      "aliases": [
+        "dine in",
+        "eat-in"
+      ]
+    },
+    {
+      "slug": "discount",
+      "term": "Discount",
+      "category": "pricing-profit",
+      "short": "A reduction from the normal price of a product or service.",
+      "aliases": [
+        "price discount"
+      ]
+    },
+    {
+      "slug": "double-entry-bookkeeping",
+      "term": "Double-Entry Bookkeeping",
+      "category": "accounting",
+      "short": "Recording every transaction twice, as a debit and a matching credit.",
+      "aliases": [
+        "double entry bookkeeping",
+        "double entry accounting"
+      ]
+    },
+    {
+      "slug": "dynamic-qr-code",
+      "term": "Dynamic QR Code",
+      "category": "payments-finance",
+      "short": "A payment QR that already carries the exact bill amount.",
+      "aliases": [
+        "dynamic QR"
+      ]
+    },
+    {
+      "slug": "e-invoicing",
+      "term": "E-Invoicing",
+      "category": "gst-tax",
+      "short": "Reporting invoices to the government portal to get them authenticated.",
+      "aliases": [
+        "electronic invoicing",
+        "e-invoice"
+      ]
+    },
+    {
+      "slug": "e-way-bill",
+      "term": "E-Way Bill",
+      "category": "gst-tax",
+      "short": "The electronic permit needed to move goods above a threshold value.",
+      "aliases": [
+        "eway bill",
+        "electronic way bill"
+      ]
+    },
+    {
+      "slug": "ebitda",
+      "term": "EBITDA",
+      "category": "pricing-profit",
+      "short": "Operating earnings before interest, tax, depreciation and amortisation.",
+      "aliases": [
+        "earnings before interest tax depreciation and amortisation"
+      ]
+    },
+    {
+      "slug": "economic-order-quantity",
+      "term": "Economic Order Quantity",
+      "category": "retail-inventory",
+      "short": "The order size that minimises ordering plus holding costs.",
+      "aliases": [
+        "EOQ"
+      ]
+    },
+    {
+      "slug": "emi",
+      "term": "EMI",
+      "category": "payments-finance",
+      "short": "A fixed monthly loan repayment covering interest and principal.",
+      "aliases": [
+        "Equated Monthly Instalment",
+        "equated monthly instalment"
+      ]
+    },
+    {
+      "slug": "equity",
+      "term": "Equity",
+      "category": "accounting",
+      "short": "What the owners would be left with after all debts are paid.",
+      "aliases": [
+        "owners equity",
+        "shareholders equity",
+        "net worth"
+      ]
+    },
+    {
+      "slug": "esi",
+      "term": "ESI",
+      "category": "payroll-hr",
+      "short": "Statutory health and disability insurance for lower-wage employees.",
+      "aliases": [
+        "Employees State Insurance",
+        "ESIC"
+      ]
+    },
+    {
+      "slug": "expiry-tracking",
+      "term": "Expiry Tracking",
+      "category": "retail-inventory",
+      "short": "Monitoring shelf life so stock is used before it expires.",
+      "aliases": [
+        "expiry date tracking",
+        "shelf life tracking"
+      ]
+    },
+    {
+      "slug": "fifo",
+      "term": "FIFO",
+      "category": "retail-inventory",
+      "short": "Selling and valuing the oldest stock first.",
+      "aliases": [
+        "First In First Out",
+        "first in first out"
+      ]
+    },
+    {
+      "slug": "financial-year",
+      "term": "Financial Year",
+      "category": "accounting",
+      "short": "The twelve-month period a business reports its accounts for.",
+      "aliases": [
+        "fiscal year",
+        "FY"
+      ]
+    },
+    {
+      "slug": "fixed-asset",
+      "term": "Fixed Asset",
+      "category": "accounting",
+      "short": "A long-lived item bought to use rather than to sell.",
+      "aliases": [
+        "fixed assets",
+        "capital asset"
+      ]
+    },
+    {
+      "slug": "fixed-cost",
+      "term": "Fixed Cost",
+      "category": "pricing-profit",
+      "short": "Costs that stay the same whether you sell anything or not.",
+      "aliases": [
+        "fixed costs",
+        "fixed expense"
+      ]
+    },
+    {
+      "slug": "flat-rate-interest",
+      "term": "Flat Rate Interest",
+      "category": "payments-finance",
+      "short": "Interest charged on the original amount for the whole tenure.",
+      "aliases": [
+        "flat interest rate"
+      ]
+    },
+    {
+      "slug": "food-cost-percentage",
+      "term": "Food Cost Percentage",
+      "category": "restaurant-ops",
+      "short": "The share of food sales consumed by the ingredients behind them.",
+      "aliases": [
+        "food cost %",
+        "food cost ratio"
+      ]
+    },
+    {
+      "slug": "food-cost-variance",
+      "term": "Food Cost Variance",
+      "category": "restaurant-ops",
+      "short": "The gap between what stock should have been used and what was.",
+      "aliases": [
+        "theoretical vs actual food cost"
+      ]
+    },
+    {
+      "slug": "footfall",
+      "term": "Footfall",
+      "category": "growth-marketing",
+      "short": "The number of people entering your premises.",
+      "aliases": [
+        "walk-ins",
+        "foot traffic"
+      ]
+    },
+    {
+      "slug": "form-16",
+      "term": "Form 16",
+      "category": "payroll-hr",
+      "short": "The annual TDS certificate an employer issues to an employee.",
+      "aliases": [
+        "Form16",
+        "TDS certificate"
+      ]
+    },
+    {
+      "slug": "general-ledger",
+      "term": "General Ledger",
+      "category": "accounting",
+      "short": "Every transaction sorted into the account it belongs to.",
+      "aliases": [
+        "GL",
+        "ledger"
+      ]
+    },
+    {
+      "slug": "grn",
+      "term": "Goods Receipt Note",
+      "category": "retail-inventory",
+      "short": "The record confirming what was physically received.",
+      "aliases": [
+        "GRN",
+        "goods received note"
+      ]
+    },
+    {
+      "slug": "google-business-profile",
+      "term": "Google Business Profile",
+      "category": "growth-marketing",
+      "short": "The free listing that puts a business on Google Search and Maps.",
+      "aliases": [
+        "Google My Business",
+        "GMB"
+      ]
+    },
+    {
+      "slug": "gratuity",
+      "term": "Gratuity",
+      "category": "payroll-hr",
+      "short": "A lump sum paid to employees who complete long service.",
+      "aliases": [
+        "gratuity payment"
+      ]
+    },
+    {
+      "slug": "gross-profit",
+      "term": "Gross Profit",
+      "category": "pricing-profit",
+      "short": "Sales minus the direct cost of what was sold.",
+      "aliases": [
+        "gross income"
+      ]
+    },
+    {
+      "slug": "gross-salary",
+      "term": "Gross Salary",
+      "category": "payroll-hr",
+      "short": "Total earnings before any deductions.",
+      "aliases": [
+        "gross pay"
+      ]
+    },
+    {
+      "slug": "gross-sales",
+      "term": "Gross Sales",
+      "category": "pricing-profit",
+      "short": "Total billed sales before returns and discounts.",
+      "aliases": [
+        "gross turnover"
+      ]
+    },
+    {
+      "slug": "gst",
+      "term": "GST",
+      "category": "gst-tax",
+      "short": "India's single indirect tax on the supply of goods and services.",
+      "aliases": [
+        "Goods and Services Tax"
+      ]
+    },
+    {
+      "slug": "gstin",
+      "term": "GSTIN",
+      "category": "gst-tax",
+      "short": "The 15-character registration number that identifies a GST-registered business.",
+      "aliases": [
+        "GST number",
+        "GST identification number"
+      ]
+    },
+    {
+      "slug": "gstr-1",
+      "term": "GSTR-1",
+      "category": "gst-tax",
+      "short": "The monthly or quarterly return listing everything you sold.",
+      "aliases": [
+        "outward supply return"
+      ]
+    },
+    {
+      "slug": "gstr-2b",
+      "term": "GSTR-2B",
+      "category": "gst-tax",
+      "short": "The auto-drafted statement of the input tax credit available to you.",
+      "aliases": [
+        "auto-drafted credit statement"
+      ]
+    },
+    {
+      "slug": "gstr-3b",
+      "term": "GSTR-3B",
+      "category": "gst-tax",
+      "short": "The summary return where GST liability is declared and paid.",
+      "aliases": [
+        "summary return"
+      ]
+    },
+    {
+      "slug": "happy-hour",
+      "term": "Happy Hour",
+      "category": "restaurant-ops",
+      "short": "A discounted window used to fill slow trading periods.",
+      "aliases": [
+        "happy hours"
+      ]
+    },
+    {
+      "slug": "hra",
+      "term": "HRA",
+      "category": "payroll-hr",
+      "short": "A salary allowance for rent, partly exempt from income tax.",
+      "aliases": [
+        "House Rent Allowance",
+        "house rent allowance"
+      ]
+    },
+    {
+      "slug": "hsn-code",
+      "term": "HSN Code",
+      "category": "gst-tax",
+      "short": "The international product code that fixes the GST rate on goods.",
+      "aliases": [
+        "Harmonised System of Nomenclature",
+        "HSN"
+      ]
+    },
+    {
+      "slug": "igst",
+      "term": "IGST",
+      "category": "gst-tax",
+      "short": "The single GST charged on interstate supplies instead of a CGST plus SGST split.",
+      "aliases": [
+        "Integrated GST",
+        "Integrated Goods and Services Tax"
+      ]
+    },
+    {
+      "slug": "income-tax",
+      "term": "Income Tax",
+      "category": "payroll-hr",
+      "short": "Tax on the income of a person or business for a financial year.",
+      "aliases": [
+        "personal income tax"
+      ]
+    },
+    {
+      "slug": "input-tax-credit",
+      "term": "Input Tax Credit",
+      "category": "gst-tax",
+      "short": "The GST you paid on purchases, set off against the GST you collected on sales.",
+      "aliases": [
+        "ITC",
+        "input credit"
+      ]
+    },
+    {
+      "slug": "interest-rate",
+      "term": "Interest Rate",
+      "category": "payments-finance",
+      "short": "The percentage cost of borrowing money for a period.",
+      "aliases": [
+        "rate of interest"
+      ]
+    },
+    {
+      "slug": "inventory-turnover",
+      "term": "Inventory Turnover",
+      "category": "retail-inventory",
+      "short": "How many times you sell and replace your stock in a period.",
+      "aliases": [
+        "stock turnover",
+        "inventory turnover ratio"
+      ]
+    },
+    {
+      "slug": "invoice-numbering",
+      "term": "Invoice Numbering",
+      "category": "gst-tax",
+      "short": "The sequential series that identifies each invoice you issue.",
+      "aliases": [
+        "invoice series",
+        "invoice number series"
+      ]
+    },
+    {
+      "slug": "irn",
+      "term": "Invoice Reference Number",
+      "category": "gst-tax",
+      "short": "The unique hash the invoice portal returns when an e-invoice is registered.",
+      "aliases": [
+        "IRN"
+      ]
+    },
+    {
+      "slug": "journal-entry",
+      "term": "Journal Entry",
+      "category": "accounting",
+      "short": "A dated record of one transaction, with its debits and credits.",
+      "aliases": [
+        "journal voucher"
+      ]
+    },
+    {
+      "slug": "kitchen-display-system",
+      "term": "Kitchen Display System",
+      "category": "restaurant-ops",
+      "short": "A screen that replaces printed tickets in the kitchen.",
+      "aliases": [
+        "KDS",
+        "kitchen display"
+      ]
+    },
+    {
+      "slug": "kot",
+      "term": "KOT",
+      "category": "restaurant-ops",
+      "short": "The order slip that tells the kitchen what to cook.",
+      "aliases": [
+        "Kitchen Order Ticket",
+        "kitchen order token"
+      ]
+    },
+    {
+      "slug": "labour-cost-percentage",
+      "term": "Labour Cost Percentage",
+      "category": "restaurant-ops",
+      "short": "Total staff cost as a percentage of sales.",
+      "aliases": [
+        "labor cost percentage",
+        "labour cost %",
+        "labour costing"
+      ]
+    },
+    {
+      "slug": "landed-cost",
+      "term": "Landed Cost",
+      "category": "pricing-profit",
+      "short": "The total cost of getting goods into your store, not just the invoice price.",
+      "aliases": [
+        "fully landed cost"
+      ]
+    },
+    {
+      "slug": "lead-time",
+      "term": "Lead Time",
+      "category": "retail-inventory",
+      "short": "The time between placing an order and receiving the goods.",
+      "aliases": [
+        "supplier lead time",
+        "delivery lead time"
+      ]
+    },
+    {
+      "slug": "leave-encashment",
+      "term": "Leave Encashment",
+      "category": "payroll-hr",
+      "short": "Paying an employee for unused leave.",
+      "aliases": [
+        "leave salary"
+      ]
+    },
+    {
+      "slug": "lifo",
+      "term": "LIFO",
+      "category": "retail-inventory",
+      "short": "Valuing sales at the most recent purchase cost first.",
+      "aliases": [
+        "Last In First Out",
+        "last in first out"
+      ]
+    },
+    {
+      "slug": "loyalty-program",
+      "term": "Loyalty Program",
+      "category": "growth-marketing",
+      "short": "A structured reward for customers who keep coming back.",
+      "aliases": [
+        "loyalty programme",
+        "rewards program"
+      ]
+    },
+    {
+      "slug": "markdown",
+      "term": "Markdown",
+      "category": "pricing-profit",
+      "short": "A permanent price cut used to clear stock that is not moving.",
+      "aliases": [
+        "price reduction"
+      ]
+    },
+    {
+      "slug": "markup",
+      "term": "Markup",
+      "category": "pricing-profit",
+      "short": "The amount added to cost, expressed as a percentage of cost.",
+      "aliases": [
+        "mark-up",
+        "markup percentage"
+      ]
+    },
+    {
+      "slug": "mdr",
+      "term": "MDR",
+      "category": "payments-finance",
+      "short": "The percentage a merchant pays to accept a card or digital payment.",
+      "aliases": [
+        "Merchant Discount Rate",
+        "merchant discount rate"
+      ]
+    },
+    {
+      "slug": "menu-engineering",
+      "term": "Menu Engineering",
+      "category": "restaurant-ops",
+      "short": "Ranking dishes by popularity and profit to redesign the menu.",
+      "aliases": [
+        "menu analysis"
+      ]
+    },
+    {
+      "slug": "menu-mix",
+      "term": "Menu Mix",
+      "category": "restaurant-ops",
+      "short": "The share of total sales each dish accounts for.",
+      "aliases": [
+        "sales mix",
+        "item mix"
+      ]
+    },
+    {
+      "slug": "menu-price-padding",
+      "term": "Menu Price Padding",
+      "category": "restaurant-ops",
+      "short": "Raising online menu prices to absorb commission and packaging.",
+      "aliases": [
+        "online price padding",
+        "menu markup for delivery"
+      ]
+    },
+    {
+      "slug": "moq",
+      "term": "Minimum Order Quantity",
+      "category": "retail-inventory",
+      "short": "The smallest quantity a supplier will accept in one order.",
+      "aliases": [
+        "MOQ"
+      ]
+    },
+    {
+      "slug": "minimum-wages",
+      "term": "Minimum Wages",
+      "category": "payroll-hr",
+      "short": "The lowest wage legally payable for a category of work.",
+      "aliases": [
+        "minimum wage"
+      ]
+    },
+    {
+      "slug": "modifier",
+      "term": "Modifier",
+      "category": "restaurant-ops",
+      "short": "A customisation attached to an ordered item.",
+      "aliases": [
+        "item modifier",
+        "add-on"
+      ]
+    },
+    {
+      "slug": "mrp",
+      "term": "MRP",
+      "category": "pricing-profit",
+      "short": "The highest price a packaged product may legally be sold for in India.",
+      "aliases": [
+        "Maximum Retail Price"
+      ]
+    },
+    {
+      "slug": "multi-outlet-management",
+      "term": "Multi-Outlet Management",
+      "category": "pos-tech",
+      "short": "Running several locations with comparable data and control.",
+      "aliases": [
+        "multi-branch management",
+        "chain management"
+      ]
+    },
+    {
+      "slug": "net-30",
+      "term": "Net 30",
+      "category": "payments-finance",
+      "short": "Payment due in full thirty days from the invoice date.",
+      "aliases": [
+        "net 15",
+        "net 45",
+        "net 60"
+      ]
+    },
+    {
+      "slug": "net-present-value",
+      "term": "Net Present Value",
+      "category": "payments-finance",
+      "short": "Future cash flows discounted back to what they are worth today.",
+      "aliases": [
+        "NPV"
+      ]
+    },
+    {
+      "slug": "net-profit",
+      "term": "Net Profit",
+      "category": "pricing-profit",
+      "short": "What remains after every cost, including tax and interest.",
+      "aliases": [
+        "bottom line",
+        "net income"
+      ]
+    },
+    {
+      "slug": "net-sales",
+      "term": "Net Sales",
+      "category": "pricing-profit",
+      "short": "Sales after returns, cancellations and discounts.",
+      "aliases": [
+        "net turnover"
+      ]
+    },
+    {
+      "slug": "nil-return",
+      "term": "Nil Return",
+      "category": "gst-tax",
+      "short": "A return filed for a period with no transactions to report.",
+      "aliases": [
+        "nil filing"
+      ]
+    },
+    {
+      "slug": "no-show",
+      "term": "No-Show",
+      "category": "restaurant-ops",
+      "short": "A booked party that never arrives.",
+      "aliases": [
+        "no show",
+        "reservation no-show"
+      ]
+    },
+    {
+      "slug": "offline-mode",
+      "term": "Offline Mode",
+      "category": "pos-tech",
+      "short": "Software that keeps working when the internet does not.",
+      "aliases": [
+        "offline billing",
+        "offline-first"
+      ]
+    },
+    {
+      "slug": "online-reviews",
+      "term": "Online Reviews",
+      "category": "growth-marketing",
+      "short": "Public customer ratings that shape whether new customers try you.",
+      "aliases": [
+        "customer reviews",
+        "ratings and reviews"
+      ]
+    },
+    {
+      "slug": "opening-stock",
+      "term": "Opening Stock",
+      "category": "retail-inventory",
+      "short": "The value of stock on hand at the start of a period.",
+      "aliases": [
+        "opening inventory"
+      ]
+    },
+    {
+      "slug": "operating-expense",
+      "term": "Operating Expense",
+      "category": "pricing-profit",
+      "short": "The day-to-day costs of running the business, below gross profit.",
+      "aliases": [
+        "OPEX",
+        "operating expenses"
+      ]
+    },
+    {
+      "slug": "operating-margin",
+      "term": "Operating Margin",
+      "category": "pricing-profit",
+      "short": "Operating profit as a percentage of sales.",
+      "aliases": [
+        "operating profit margin"
+      ]
+    },
+    {
+      "slug": "overdraft",
+      "term": "Overdraft",
+      "category": "payments-finance",
+      "short": "A credit limit on your current account you can dip into as needed.",
+      "aliases": [
+        "OD",
+        "cash credit"
+      ]
+    },
+    {
+      "slug": "overhead",
+      "term": "Overhead",
+      "category": "pricing-profit",
+      "short": "Running costs not tied to any one product or sale.",
+      "aliases": [
+        "overheads",
+        "indirect cost"
+      ]
+    },
+    {
+      "slug": "overtime",
+      "term": "Overtime",
+      "category": "payroll-hr",
+      "short": "Extra pay for hours worked beyond normal working hours.",
+      "aliases": [
+        "OT",
+        "overtime pay"
+      ]
+    },
+    {
+      "slug": "pan",
+      "term": "PAN",
+      "category": "gst-tax",
+      "short": "The ten-character income tax identity of a person or business.",
+      "aliases": [
+        "Permanent Account Number"
+      ]
+    },
+    {
+      "slug": "par-level",
+      "term": "Par Level",
+      "category": "retail-inventory",
+      "short": "The standard quantity of an item to keep on hand.",
+      "aliases": [
+        "par stock"
+      ]
+    },
+    {
+      "slug": "payback-period",
+      "term": "Payback Period",
+      "category": "payments-finance",
+      "short": "How long an investment takes to return its own cost.",
+      "aliases": [
+        "payback"
+      ]
+    },
+    {
+      "slug": "payment-gateway",
+      "term": "Payment Gateway",
+      "category": "payments-finance",
+      "short": "The service that authorises and routes online card and wallet payments.",
+      "aliases": [
+        "payment processor"
+      ]
+    },
+    {
+      "slug": "payment-terms",
+      "term": "Payment Terms",
+      "category": "payments-finance",
+      "short": "The agreed deadline and conditions for paying an invoice.",
+      "aliases": [
+        "credit terms",
+        "trade terms"
+      ]
+    },
+    {
+      "slug": "payroll",
+      "term": "Payroll",
+      "category": "payroll-hr",
+      "short": "The process of paying staff and handling every statutory deduction.",
+      "aliases": [
+        "salary processing"
+      ]
+    },
+    {
+      "slug": "payslip",
+      "term": "Payslip",
+      "category": "payroll-hr",
+      "short": "The monthly statement of earnings and deductions given to an employee.",
+      "aliases": [
+        "salary slip",
+        "pay slip"
+      ]
+    },
+    {
+      "slug": "petty-cash",
+      "term": "Petty Cash",
+      "category": "accounting",
+      "short": "A small cash float for minor day-to-day payments.",
+      "aliases": [
+        "cash in hand",
+        "imprest cash"
+      ]
+    },
+    {
+      "slug": "place-of-supply",
+      "term": "Place of Supply",
+      "category": "gst-tax",
+      "short": "The location that decides whether a supply is intra-state or interstate.",
+      "aliases": [
+        "POS rules"
+      ]
+    },
+    {
+      "slug": "plate-cost",
+      "term": "Plate Cost",
+      "category": "restaurant-ops",
+      "short": "The total ingredient cost of one served portion.",
+      "aliases": [
+        "dish cost",
+        "portion cost"
+      ]
+    },
+    {
+      "slug": "point-of-sale",
+      "term": "Point of Sale",
+      "category": "pos-tech",
+      "short": "The system where a sale is rung up, billed and recorded.",
+      "aliases": [
+        "POS",
+        "POS system"
+      ]
+    },
+    {
+      "slug": "portion-control",
+      "term": "Portion Control",
+      "category": "restaurant-ops",
+      "short": "Serving a consistent, measured quantity every single time.",
+      "aliases": [
+        "portioning"
+      ]
+    },
+    {
+      "slug": "pour-cost",
+      "term": "Pour Cost",
+      "category": "restaurant-ops",
+      "short": "The cost of liquor poured as a percentage of beverage sales.",
+      "aliases": [
+        "liquor cost percentage",
+        "beverage cost percentage"
+      ]
+    },
+    {
+      "slug": "prepaid-expense",
+      "term": "Prepaid Expense",
+      "category": "accounting",
+      "short": "A cost paid in advance for a future period.",
+      "aliases": [
+        "prepayment",
+        "advance expense"
+      ]
+    },
+    {
+      "slug": "price-elasticity",
+      "term": "Price Elasticity",
+      "category": "pricing-profit",
+      "short": "How much demand changes when you change the price.",
+      "aliases": [
+        "price elasticity of demand"
+      ]
+    },
+    {
+      "slug": "prime-cost",
+      "term": "Prime Cost",
+      "category": "restaurant-ops",
+      "short": "Food cost plus labour cost, the two biggest controllables.",
+      "aliases": [
+        "prime costs"
+      ]
+    },
+    {
+      "slug": "principal",
+      "term": "Principal",
+      "category": "payments-finance",
+      "short": "The borrowed amount itself, excluding interest.",
+      "aliases": [
+        "loan principal"
+      ]
+    },
+    {
+      "slug": "professional-tax",
+      "term": "Professional Tax",
+      "category": "payroll-hr",
+      "short": "A small state-level tax deducted from salaries.",
+      "aliases": [
+        "PT",
+        "P Tax"
+      ]
+    },
+    {
+      "slug": "profit-and-loss-statement",
+      "term": "Profit and Loss Statement",
+      "category": "accounting",
+      "short": "Income and expenses over a period, ending in profit or loss.",
+      "aliases": [
+        "P&L",
+        "income statement",
+        "profit and loss account"
+      ]
+    },
+    {
+      "slug": "profit-margin",
+      "term": "Profit Margin",
+      "category": "pricing-profit",
+      "short": "Profit expressed as a percentage of the selling price.",
+      "aliases": [
+        "margin",
+        "margin percentage"
+      ]
+    },
+    {
+      "slug": "provident-fund",
+      "term": "Provident Fund",
+      "category": "payroll-hr",
+      "short": "A statutory retirement saving with employer and employee contributions.",
+      "aliases": [
+        "PF",
+        "EPF",
+        "Employees Provident Fund"
+      ]
+    },
+    {
+      "slug": "provision",
+      "term": "Provision",
+      "category": "accounting",
+      "short": "An estimated liability recognised before the exact amount is known.",
+      "aliases": [
+        "provisioning"
+      ]
+    },
+    {
+      "slug": "psychological-pricing",
+      "term": "Psychological Pricing",
+      "category": "pricing-profit",
+      "short": "Setting prices to read cheaper than they are.",
+      "aliases": [
+        "charm pricing"
+      ]
+    },
+    {
+      "slug": "purchase-order",
+      "term": "Purchase Order",
+      "category": "retail-inventory",
+      "short": "A formal order to a supplier stating what you agreed to buy.",
+      "aliases": [
+        "PO"
+      ]
+    },
+    {
+      "slug": "purchase-price-variance",
+      "term": "Purchase Price Variance",
+      "category": "retail-inventory",
+      "short": "The gap between the price you expected to pay and what you paid.",
+      "aliases": [
+        "PPV",
+        "price variance"
+      ]
+    },
+    {
+      "slug": "purchase-return",
+      "term": "Purchase Return",
+      "category": "retail-inventory",
+      "short": "Goods sent back to a supplier after receipt.",
+      "aliases": [
+        "return to vendor",
+        "purchase returns"
+      ]
+    },
+    {
+      "slug": "qr-menu",
+      "term": "QR Menu",
+      "category": "pos-tech",
+      "short": "A menu customers open by scanning a code at the table.",
+      "aliases": [
+        "digital menu",
+        "scan to order menu"
+      ]
+    },
+    {
+      "slug": "qsr",
+      "term": "QSR",
+      "category": "restaurant-ops",
+      "short": "A counter-service format built around speed and throughput.",
+      "aliases": [
+        "Quick Service Restaurant",
+        "quick service restaurant"
+      ]
+    },
+    {
+      "slug": "queue-management",
+      "term": "Queue Management",
+      "category": "pos-tech",
+      "short": "Organising who waits, for how long, and what they are told.",
+      "aliases": [
+        "queue system",
+        "waitlist management"
+      ]
+    },
+    {
+      "slug": "quick-ratio",
+      "term": "Quick Ratio",
+      "category": "accounting",
+      "short": "Liquidity measured without counting inventory.",
+      "aliases": [
+        "acid test ratio",
+        "acid-test"
+      ]
+    },
+    {
+      "slug": "quotation",
+      "term": "Quotation",
+      "category": "pricing-profit",
+      "short": "A priced offer sent before the work or supply happens.",
+      "aliases": [
+        "quote",
+        "estimate"
+      ]
+    },
+    {
+      "slug": "receipt",
+      "term": "Receipt",
+      "category": "pos-tech",
+      "short": "The printed or digital proof of a completed sale.",
+      "aliases": [
+        "bill receipt",
+        "sales receipt"
+      ]
+    },
+    {
+      "slug": "recipe-costing",
+      "term": "Recipe Costing",
+      "category": "restaurant-ops",
+      "short": "Working out exactly what one plate of a dish costs to make.",
+      "aliases": [
+        "dish costing",
+        "menu costing"
+      ]
+    },
+    {
+      "slug": "reducing-balance-interest",
+      "term": "Reducing Balance Interest",
+      "category": "payments-finance",
+      "short": "Interest charged only on the outstanding loan balance.",
+      "aliases": [
+        "reducing balance rate",
+        "diminishing balance interest"
+      ]
+    },
+    {
+      "slug": "referral-program",
+      "term": "Referral Program",
+      "category": "growth-marketing",
+      "short": "Rewarding existing customers for bringing new ones.",
+      "aliases": [
+        "refer a friend",
+        "referral scheme"
+      ]
+    },
+    {
+      "slug": "refund",
+      "term": "Refund",
+      "category": "payments-finance",
+      "short": "Returning money to a customer for a cancelled or returned sale.",
+      "aliases": [
+        "money back"
+      ]
+    },
+    {
+      "slug": "reorder-point",
+      "term": "Reorder Point",
+      "category": "retail-inventory",
+      "short": "The stock level at which you place the next order.",
+      "aliases": [
+        "reorder level",
+        "ROP"
+      ]
+    },
+    {
+      "slug": "repeat-rate",
+      "term": "Repeat Rate",
+      "category": "growth-marketing",
+      "short": "The share of customers who buy more than once.",
+      "aliases": [
+        "repeat purchase rate",
+        "repeat customer rate"
+      ]
+    },
+    {
+      "slug": "retained-earnings",
+      "term": "Retained Earnings",
+      "category": "accounting",
+      "short": "Profits kept in the business rather than paid out.",
+      "aliases": [
+        "accumulated profits",
+        "reserves and surplus"
+      ]
+    },
+    {
+      "slug": "retention-rate",
+      "term": "Retention Rate",
+      "category": "growth-marketing",
+      "short": "The share of customers who keep buying from you.",
+      "aliases": [
+        "customer retention rate"
+      ]
+    },
+    {
+      "slug": "return-on-ad-spend",
+      "term": "Return on Ad Spend",
+      "category": "growth-marketing",
+      "short": "Revenue generated for every rupee of advertising spent.",
+      "aliases": [
+        "ROAS",
+        "marketing ROI"
+      ]
+    },
+    {
+      "slug": "revenue",
+      "term": "Revenue",
+      "category": "pricing-profit",
+      "short": "The total value of what you sold before any costs.",
+      "aliases": [
+        "turnover",
+        "sales revenue"
+      ]
+    },
+    {
+      "slug": "reverse-charge-mechanism",
+      "term": "Reverse Charge Mechanism",
+      "category": "gst-tax",
+      "short": "Rules where the buyer, not the seller, pays the GST on a purchase.",
+      "aliases": [
+        "RCM",
+        "reverse charge"
+      ]
+    },
+    {
+      "slug": "rfm-analysis",
+      "term": "RFM Analysis",
+      "category": "growth-marketing",
+      "short": "Scoring customers by recency, frequency and spend.",
+      "aliases": [
+        "recency frequency monetary analysis"
+      ]
+    },
+    {
+      "slug": "roi",
+      "term": "ROI",
+      "category": "payments-finance",
+      "short": "The gain from an investment relative to what it cost.",
+      "aliases": [
+        "Return on Investment",
+        "return on investment"
+      ]
+    },
+    {
+      "slug": "role-based-access",
+      "term": "Role-Based Access",
+      "category": "pos-tech",
+      "short": "Giving each user only the access their job requires.",
+      "aliases": [
+        "user roles",
+        "access control",
+        "user permissions"
+      ]
+    },
+    {
+      "slug": "sac-code",
+      "term": "SAC Code",
+      "category": "gst-tax",
+      "short": "The service classification code that fixes the GST rate on a service.",
+      "aliases": [
+        "Services Accounting Code",
+        "SAC"
+      ]
+    },
+    {
+      "slug": "safety-stock",
+      "term": "Safety Stock",
+      "category": "retail-inventory",
+      "short": "Extra stock held to absorb demand spikes and late deliveries.",
+      "aliases": [
+        "buffer stock"
+      ]
+    },
+    {
+      "slug": "sales-return",
+      "term": "Sales Return",
+      "category": "retail-inventory",
+      "short": "Goods a customer sends back after being billed.",
+      "aliases": [
+        "customer return",
+        "sales returns"
+      ]
+    },
+    {
+      "slug": "sales-tax",
+      "term": "Sales Tax",
+      "category": "gst-tax",
+      "short": "A tax added at the point of final sale to the consumer.",
+      "aliases": [
+        "retail sales tax"
+      ]
+    },
+    {
+      "slug": "same-store-sales",
+      "term": "Same-Store Sales",
+      "category": "growth-marketing",
+      "short": "Sales growth measured only at outlets open in both periods.",
+      "aliases": [
+        "like-for-like sales",
+        "SSSG"
+      ]
+    },
+    {
+      "slug": "self-ordering",
+      "term": "Self-Ordering",
+      "category": "pos-tech",
+      "short": "Customers placing their own orders without staff.",
+      "aliases": [
+        "self order",
+        "scan and order"
+      ]
+    },
+    {
+      "slug": "sell-through-rate",
+      "term": "Sell-Through Rate",
+      "category": "retail-inventory",
+      "short": "The share of received stock sold within a period.",
+      "aliases": [
+        "sell through rate"
+      ]
+    },
+    {
+      "slug": "selling-price",
+      "term": "Selling Price",
+      "category": "pricing-profit",
+      "short": "The price a customer actually pays for one unit.",
+      "aliases": [
+        "sale price",
+        "list price"
+      ]
+    },
+    {
+      "slug": "service-charge",
+      "term": "Service Charge",
+      "category": "restaurant-ops",
+      "short": "An optional charge a restaurant adds for service.",
+      "aliases": [
+        "restaurant service charge"
+      ]
+    },
+    {
+      "slug": "settlement",
+      "term": "Settlement",
+      "category": "payments-finance",
+      "short": "The transfer of collected money into the merchant's bank account.",
+      "aliases": [
+        "payout",
+        "settlement cycle"
+      ]
+    },
+    {
+      "slug": "sgst",
+      "term": "SGST",
+      "category": "gst-tax",
+      "short": "The state government's half of GST on a sale within one state.",
+      "aliases": [
+        "State GST",
+        "State Goods and Services Tax",
+        "UTGST"
+      ]
+    },
+    {
+      "slug": "shift-roster",
+      "term": "Shift Roster",
+      "category": "payroll-hr",
+      "short": "The planned schedule of who works which shift.",
+      "aliases": [
+        "staff roster",
+        "duty roster",
+        "shift schedule"
+      ]
+    },
+    {
+      "slug": "shrinkage",
+      "term": "Shrinkage",
+      "category": "retail-inventory",
+      "short": "Stock that disappears between receiving and selling.",
+      "aliases": [
+        "stock shrinkage",
+        "inventory shrinkage"
+      ]
+    },
+    {
+      "slug": "sku",
+      "term": "SKU",
+      "category": "retail-inventory",
+      "short": "A unique code for one exact sellable variant.",
+      "aliases": [
+        "Stock Keeping Unit",
+        "stock keeping unit"
+      ]
+    },
+    {
+      "slug": "special-allowance",
+      "term": "Special Allowance",
+      "category": "payroll-hr",
+      "short": "The balancing salary component after basic and named allowances.",
+      "aliases": [
+        "other allowance"
+      ]
+    },
+    {
+      "slug": "static-qr-code",
+      "term": "Static QR Code",
+      "category": "payments-finance",
+      "short": "A fixed payment QR where the customer enters the amount.",
+      "aliases": [
+        "static QR",
+        "counter QR"
+      ]
+    },
+    {
+      "slug": "bonus",
+      "term": "Statutory Bonus",
+      "category": "payroll-hr",
+      "short": "An annual payment to eligible employees, minimum set by law.",
+      "aliases": [
+        "annual bonus",
+        "Diwali bonus"
+      ]
+    },
+    {
+      "slug": "stock-take",
+      "term": "Stock Take",
+      "category": "retail-inventory",
+      "short": "Physically counting everything you hold and comparing it with the books.",
+      "aliases": [
+        "stocktake",
+        "physical stock count",
+        "physical count"
+      ]
+    },
+    {
+      "slug": "stock-transfer",
+      "term": "Stock Transfer",
+      "category": "retail-inventory",
+      "short": "Moving stock between outlets, stores or a central kitchen.",
+      "aliases": [
+        "inter-branch transfer",
+        "outlet transfer"
+      ]
+    },
+    {
+      "slug": "stockout",
+      "term": "Stockout",
+      "category": "retail-inventory",
+      "short": "Having no stock of something a customer wants to buy.",
+      "aliases": [
+        "out of stock",
+        "stock-out"
+      ]
+    },
+    {
+      "slug": "straight-line-depreciation",
+      "term": "Straight-Line Depreciation",
+      "category": "accounting",
+      "short": "Charging the same depreciation amount every year.",
+      "aliases": [
+        "SLM",
+        "straight line method"
+      ]
+    },
+    {
+      "slug": "supplier",
+      "term": "Supplier",
+      "category": "retail-inventory",
+      "short": "A business you buy goods or services from.",
+      "aliases": [
+        "vendor"
+      ]
+    },
+    {
+      "slug": "suspense-account",
+      "term": "Suspense Account",
+      "category": "accounting",
+      "short": "A temporary holding account for entries you cannot yet classify.",
+      "aliases": [
+        "suspense"
+      ]
+    },
+    {
+      "slug": "table-management",
+      "term": "Table Management",
+      "category": "pos-tech",
+      "short": "Tracking table status so the floor is used efficiently.",
+      "aliases": [
+        "floor management",
+        "table plan"
+      ]
+    },
+    {
+      "slug": "table-turnover-rate",
+      "term": "Table Turnover Rate",
+      "category": "restaurant-ops",
+      "short": "How many times a table is used during a service period.",
+      "aliases": [
+        "table turnover",
+        "seat turnover"
+      ]
+    },
+    {
+      "slug": "take-home-salary",
+      "term": "Take-Home Salary",
+      "category": "payroll-hr",
+      "short": "What actually reaches the employee's bank account.",
+      "aliases": [
+        "net salary",
+        "in-hand salary",
+        "net pay"
+      ]
+    },
+    {
+      "slug": "takeaway",
+      "term": "Takeaway",
+      "category": "restaurant-ops",
+      "short": "Food packed for the customer to carry away.",
+      "aliases": [
+        "parcel",
+        "takeout",
+        "pickup order"
+      ]
+    },
+    {
+      "slug": "tan",
+      "term": "TAN",
+      "category": "gst-tax",
+      "short": "The registration number required to deduct and deposit TDS.",
+      "aliases": [
+        "Tax Deduction Account Number"
+      ]
+    },
+    {
+      "slug": "tax-exclusive-pricing",
+      "term": "Tax Exclusive Pricing",
+      "category": "gst-tax",
+      "short": "Quoting a price to which tax is added at billing.",
+      "aliases": [
+        "exclusive of tax",
+        "plus GST"
+      ]
+    },
+    {
+      "slug": "tax-inclusive-pricing",
+      "term": "Tax Inclusive Pricing",
+      "category": "gst-tax",
+      "short": "Displaying one price that already contains the tax.",
+      "aliases": [
+        "inclusive of tax",
+        "GST inclusive"
+      ]
+    },
+    {
+      "slug": "tax-invoice",
+      "term": "Tax Invoice",
+      "category": "gst-tax",
+      "short": "The GST document that lets your customer claim input tax credit.",
+      "aliases": [
+        "GST invoice"
+      ]
+    },
+    {
+      "slug": "taxable-value",
+      "term": "Taxable Value",
+      "category": "gst-tax",
+      "short": "The value GST is charged on, after discounts and before tax.",
+      "aliases": [
+        "assessable value",
+        "net value"
+      ]
+    },
+    {
+      "slug": "tcs",
+      "term": "TCS",
+      "category": "gst-tax",
+      "short": "Tax the seller collects from the buyer on specified transactions.",
+      "aliases": [
+        "tax collected at source"
+      ]
+    },
+    {
+      "slug": "tds",
+      "term": "TDS",
+      "category": "gst-tax",
+      "short": "Income tax withheld by the payer before a payment is made.",
+      "aliases": [
+        "tax deducted at source"
+      ]
+    },
+    {
+      "slug": "thermal-printer",
+      "term": "Thermal Printer",
+      "category": "pos-tech",
+      "short": "A printer that burns an image onto heat-sensitive paper.",
+      "aliases": [
+        "receipt printer",
+        "bill printer"
+      ]
+    },
+    {
+      "slug": "ticket-time",
+      "term": "Ticket Time",
+      "category": "restaurant-ops",
+      "short": "How long an order takes from acceptance to ready.",
+      "aliases": [
+        "kitchen ticket time",
+        "prep time"
+      ]
+    },
+    {
+      "slug": "tip-pooling",
+      "term": "Tip Pooling",
+      "category": "restaurant-ops",
+      "short": "Collecting tips together and dividing them by an agreed rule.",
+      "aliases": [
+        "tip pool",
+        "tip sharing"
+      ]
+    },
+    {
+      "slug": "token-system",
+      "term": "Token System",
+      "category": "pos-tech",
+      "short": "Numbered tokens that tell customers when their order is ready.",
+      "aliases": [
+        "token number",
+        "order token"
+      ]
+    },
+    {
+      "slug": "trial-balance",
+      "term": "Trial Balance",
+      "category": "accounting",
+      "short": "A list of all ledger balances, checking debits equal credits.",
+      "aliases": [
+        "TB"
+      ]
+    },
+    {
+      "slug": "unit-economics",
+      "term": "Unit Economics",
+      "category": "pricing-profit",
+      "short": "The profit and cost of a single sale, order or customer.",
+      "aliases": [
+        "per-unit economics"
+      ]
+    },
+    {
+      "slug": "upi",
+      "term": "UPI",
+      "category": "payments-finance",
+      "short": "India's instant bank-to-bank payment system.",
+      "aliases": [
+        "Unified Payments Interface"
+      ]
+    },
+    {
+      "slug": "upi-id",
+      "term": "UPI ID",
+      "category": "payments-finance",
+      "short": "The name@bank address money is sent to on UPI.",
+      "aliases": [
+        "VPA",
+        "virtual payment address",
+        "UPI handle"
+      ]
+    },
+    {
+      "slug": "upselling",
+      "term": "Upselling",
+      "category": "growth-marketing",
+      "short": "Offering a larger or premium version of what is being bought.",
+      "aliases": [
+        "upsell",
+        "up-selling"
+      ]
+    },
+    {
+      "slug": "variable-cost",
+      "term": "Variable Cost",
+      "category": "pricing-profit",
+      "short": "Costs that rise and fall directly with what you sell.",
+      "aliases": [
+        "variable costs"
+      ]
+    },
+    {
+      "slug": "vat",
+      "term": "VAT",
+      "category": "gst-tax",
+      "short": "A consumption tax charged on the value added at each stage of sale.",
+      "aliases": [
+        "Value Added Tax"
+      ]
+    },
+    {
+      "slug": "vendor-reconciliation",
+      "term": "Vendor Reconciliation",
+      "category": "retail-inventory",
+      "short": "Matching your supplier ledger against the supplier's own statement.",
+      "aliases": [
+        "supplier reconciliation"
+      ]
+    },
+    {
+      "slug": "wastage",
+      "term": "Wastage",
+      "category": "restaurant-ops",
+      "short": "Stock that is paid for but never sold.",
+      "aliases": [
+        "food waste",
+        "spoilage"
+      ]
+    },
+    {
+      "slug": "weighted-average-cost",
+      "term": "Weighted Average Cost",
+      "category": "retail-inventory",
+      "short": "Valuing stock at the blended average of what you paid.",
+      "aliases": [
+        "moving average cost",
+        "average cost method"
+      ]
+    },
+    {
+      "slug": "whatsapp-marketing",
+      "term": "WhatsApp Marketing",
+      "category": "growth-marketing",
+      "short": "Reaching customers through WhatsApp messages and broadcasts.",
+      "aliases": [
+        "WhatsApp broadcast"
+      ]
+    },
+    {
+      "slug": "working-capital",
+      "term": "Working Capital",
+      "category": "accounting",
+      "short": "Current assets minus current liabilities — the cash cushion for operations.",
+      "aliases": [
+        "net working capital"
+      ]
+    },
+    {
+      "slug": "working-capital-loan",
+      "term": "Working Capital Loan",
+      "category": "payments-finance",
+      "short": "Borrowing to fund stock, receivables and day-to-day operations.",
+      "aliases": [
+        "working capital finance"
+      ]
+    },
+    {
+      "slug": "written-down-value",
+      "term": "Written-Down Value",
+      "category": "accounting",
+      "short": "Depreciating a fixed percentage of the reducing book value.",
+      "aliases": [
+        "WDV",
+        "reducing balance method",
+        "diminishing balance"
+      ]
+    },
+    {
+      "slug": "yield-percentage",
+      "term": "Yield Percentage",
+      "category": "restaurant-ops",
+      "short": "How much of a purchased ingredient survives to reach the plate.",
+      "aliases": [
+        "yield %",
+        "usable yield"
+      ]
+    }
+  ]
+}

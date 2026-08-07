@@ -1,0 +1,56 @@
+{
+  "slug": "opening-stock",
+  "term": "Opening Stock",
+  "category": "retail-inventory",
+  "aliases": [
+    "opening inventory"
+  ],
+  "short": "The value of stock on hand at the start of a period.",
+  "seoTitle": "Opening Stock — Meaning, Formula and Example",
+  "metaDescription": "Opening stock is the quantity and value of inventory held at the start of an accounting period. Opening stock anchors the entire period's cost of sales.",
+  "updated": "2026-08-07",
+  "definition": "Opening stock is the quantity and value of inventory held at the start of an accounting period. It equals the previous period's closing stock and is the first term in the cost of goods sold calculation.",
+  "bodyHtml": "<h2>Why Opening Stock matters</h2><p>Opening stock anchors the entire period's cost of sales. If last month's count was wrong, this month's gross profit is wrong too, in the opposite direction.</p><h2>Opening Stock formula</h2><p class=\"glossary-formula\">COGS = Opening stock + Purchases − Closing stock</p><p>Opening stock of a period is always the closing stock of the one before.</p><h2>How Opening Stock works in practice</h2><p>Carry it forward from the closing count rather than re-estimating it, and value it on the same basis every period — weighted average or FIFO — so the comparison holds.</p>",
+  "faq": [
+    {
+      "question": "What if I never counted opening stock?",
+      "answer": "Do a full count now and treat it as the opening balance; the first period after that will be the first accurate one."
+    },
+    {
+      "question": "Should opening stock include goods in transit?",
+      "answer": "Only if ownership has passed to you, which depends on the purchase terms."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "closing-stock",
+    "cogs",
+    "stock-take",
+    "weighted-average-cost"
+  ],
+  "formula": {
+    "expression": "COGS = Opening stock + Purchases − Closing stock",
+    "note": "Opening stock of a period is always the closing stock of the one before."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "google-business-profile",
+  "term": "Google Business Profile",
+  "category": "growth-marketing",
+  "aliases": [
+    "Google My Business",
+    "GMB"
+  ],
+  "short": "The free listing that puts a business on Google Search and Maps.",
+  "seoTitle": "Google Business Profile — Meaning and Example for Businesses",
+  "metaDescription": "A Google Business Profile is the free listing that shows a business on Google Search and Maps, carrying its address, hours, photos, reviews and links.",
+  "updated": "2026-08-07",
+  "definition": "A Google Business Profile is the free listing that shows a business on Google Search and Maps, carrying its address, hours, photos, reviews and links. For local businesses it is often the single largest source of discovery.",
+  "bodyHtml": "<h2>Why Google Business Profile matters</h2><p>Most local searches end at the map pack, not at a website. An incomplete or outdated profile loses customers who were already looking for exactly what you sell.</p><h2>How Google Business Profile works in practice</h2><p>Keep hours accurate — especially on holidays — add photos regularly, and reply to reviews. Categories and service attributes decide which searches you appear in, so they are worth setting carefully.</p>",
+  "faq": [
+    {
+      "question": "Does a Google Business Profile cost anything?",
+      "answer": "No. It is free, and for most local businesses it outperforms paid advertising for discovery."
+    },
+    {
+      "question": "How do I improve local ranking?",
+      "answer": "Complete information, consistent name and address across the web, regular photos, and a steady flow of genuine reviews."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "online-reviews",
+    "footfall",
+    "conversion-rate",
+    "whatsapp-marketing"
+  ]
+}

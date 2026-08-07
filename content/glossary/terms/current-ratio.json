@@ -1,0 +1,56 @@
+{
+  "slug": "current-ratio",
+  "term": "Current Ratio",
+  "category": "accounting",
+  "aliases": [
+    "working capital ratio"
+  ],
+  "short": "Current assets divided by current liabilities.",
+  "seoTitle": "Current Ratio — Meaning, Formula and Example",
+  "metaDescription": "The current ratio divides current assets by current liabilities to measure whether a business can meet its short-term obligations from short-term resources.",
+  "updated": "2026-08-07",
+  "definition": "The current ratio divides current assets by current liabilities to measure whether a business can meet its short-term obligations from short-term resources. A ratio near or below one signals strain.",
+  "bodyHtml": "<h2>Why Current Ratio matters</h2><p>It is the first liquidity check a lender runs. It is also easy to misread, because a high ratio built on unsold stock and uncollected invoices is not real strength.</p><h2>Current Ratio formula</h2><p class=\"glossary-formula\">Current ratio = Current assets ÷ Current liabilities</p><p>Compare it against the quick ratio to see how much depends on inventory.</p><h2>How Current Ratio works in practice</h2><p>Read it with the quick ratio and with stock ageing. If the gap between the two ratios is wide, most of the apparent liquidity is stock rather than cash.</p>",
+  "faq": [
+    {
+      "question": "What is a good current ratio?",
+      "answer": "Comfortably above one for most trading businesses, with the right level varying by sector and credit cycle."
+    },
+    {
+      "question": "Can the ratio be too high?",
+      "answer": "Yes. It can indicate idle cash, excess stock or receivables nobody is chasing."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "quick-ratio",
+    "working-capital",
+    "debt-to-equity-ratio",
+    "balance-sheet"
+  ],
+  "formula": {
+    "expression": "Current ratio = Current assets ÷ Current liabilities",
+    "note": "Compare it against the quick ratio to see how much depends on inventory."
+  }
+}

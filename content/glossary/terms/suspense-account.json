@@ -1,0 +1,52 @@
+{
+  "slug": "suspense-account",
+  "term": "Suspense Account",
+  "category": "accounting",
+  "aliases": [
+    "suspense"
+  ],
+  "short": "A temporary holding account for entries you cannot yet classify.",
+  "seoTitle": "Suspense Account — Meaning and Example for Businesses",
+  "metaDescription": "A temporary holding account for entries you cannot yet classify. It is meant to be emptied. Suspense is useful for a week and dangerous for a year.",
+  "updated": "2026-08-07",
+  "definition": "A suspense account temporarily holds transactions that cannot yet be classified — an unidentified bank credit, a difference in the trial balance, a payment with no reference. It is meant to be emptied.",
+  "bodyHtml": "<h2>Why Suspense Account matters</h2><p>Suspense is useful for a week and dangerous for a year. Balances left there hide misposted revenue, duplicate payments and genuine errors, and they always surface at the worst moment.</p><h2>How Suspense Account works in practice</h2><p>Review the account monthly and clear every item to where it belongs. A persistent balance means someone stopped asking what a transaction actually was.</p>",
+  "faq": [
+    {
+      "question": "Is a suspense account allowed?",
+      "answer": "As a temporary working account, yes. Carrying a balance into the financial statements is a problem."
+    },
+    {
+      "question": "What usually ends up in suspense?",
+      "answer": "Unidentified bank receipts, part-payments without references, and the balancing difference from a one-sided entry."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "trial-balance",
+    "bank-reconciliation",
+    "journal-entry",
+    "audit-trail"
+  ]
+}

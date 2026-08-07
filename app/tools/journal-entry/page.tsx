@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JournalEntryTool } from "@/components/tools/bookkeeping/JournalEntryTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Journal Entry Tool | Setu",
@@ -75,6 +76,9 @@ export default function JournalEntryPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <JournalEntryTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="journal-entry" />
       </section>
     </>
   );

@@ -1,0 +1,52 @@
+{
+  "slug": "whatsapp-marketing",
+  "term": "WhatsApp Marketing",
+  "category": "growth-marketing",
+  "aliases": [
+    "WhatsApp broadcast"
+  ],
+  "short": "Reaching customers through WhatsApp messages and broadcasts.",
+  "seoTitle": "WhatsApp Marketing — Meaning and Example for Businesses",
+  "metaDescription": "WhatsApp marketing uses the messaging app to reach customers directly with offers, order updates and reminders. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "WhatsApp marketing uses the messaging app to reach customers directly with offers, order updates and reminders. In India it typically achieves far higher open rates than email.",
+  "bodyHtml": "<h2>Why WhatsApp Marketing matters</h2><p>It is the channel customers actually read, which makes it powerful for win-back and time-sensitive offers. It is also the fastest channel to abuse, and unsubscribes are permanent.</p><h2>How WhatsApp Marketing works in practice</h2><p>Send when there is something genuinely worth reading, segment rather than broadcasting to everyone, and make opting out easy. Respect the platform's rules on consent and message categories.</p>",
+  "faq": [
+    {
+      "question": "How often should I message customers?",
+      "answer": "Rarely enough that each message is welcome — typically no more than a few times a month."
+    },
+    {
+      "question": "What works best on WhatsApp?",
+      "answer": "Time-bound offers, order updates and win-back messages to customers who have lapsed."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "loyalty-program",
+    "retention-rate",
+    "coupon-code",
+    "rfm-analysis"
+  ]
+}

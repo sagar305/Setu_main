@@ -1,0 +1,57 @@
+{
+  "slug": "queue-management",
+  "term": "Queue Management",
+  "category": "pos-tech",
+  "aliases": [
+    "queue system",
+    "waitlist management"
+  ],
+  "short": "Organising who waits, for how long, and what they are told.",
+  "seoTitle": "Queue Management — Meaning, Formula and Example",
+  "metaDescription": "Organising who waits, for how long, and what they are told. Most walkaways happen because the wait is unknown, not because it is long.",
+  "updated": "2026-08-07",
+  "definition": "Queue management organises waiting customers — a waitlist, an estimated wait, a notification when the table or order is ready — instead of leaving people standing at the entrance.",
+  "bodyHtml": "<h2>Why Queue Management matters</h2><p>Most walkaways happen because the wait is unknown, not because it is long. Telling someone it is twenty minutes and messaging them when ready converts a walkaway into a cover.</p><h2>Queue Management formula</h2><p class=\"glossary-formula\">Estimated wait = Parties ahead × Average table turn time ÷ Number of comparable tables</p><p>Track estimate accuracy, since credibility is what makes waiting acceptable.</p><h2>How Queue Management works in practice</h2><p>Capture the party size and phone number, give an honest estimate, and notify when ready. Recording actual waits against estimates makes the next estimate credible.</p>",
+  "faq": [
+    {
+      "question": "Does a queue system reduce walkaways?",
+      "answer": "Materially, because customers who know the wait and can leave and return are far more likely to stay in the queue."
+    },
+    {
+      "question": "What data should a queue system capture?",
+      "answer": "Party size, contact number, quoted wait and actual wait — the last one is what improves the rest."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "token-system",
+    "table-turnover-rate",
+    "no-show",
+    "footfall"
+  ],
+  "formula": {
+    "expression": "Estimated wait = Parties ahead × Average table turn time ÷ Number of comparable tables",
+    "note": "Track estimate accuracy, since credibility is what makes waiting acceptable."
+  }
+}

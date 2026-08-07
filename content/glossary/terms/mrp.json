@@ -1,0 +1,56 @@
+{
+  "slug": "mrp",
+  "term": "MRP",
+  "category": "pricing-profit",
+  "aliases": [
+    "Maximum Retail Price"
+  ],
+  "short": "The highest price a packaged product may legally be sold for in India.",
+  "seoTitle": "MRP — Meaning, Formula and Example",
+  "metaDescription": "MRP, or Maximum Retail Price, is the highest price at which a packaged commodity may be sold to a consumer in India, inclusive of all taxes.",
+  "updated": "2026-08-07",
+  "definition": "MRP, or Maximum Retail Price, is the highest price at which a packaged commodity may be sold to a consumer in India, inclusive of all taxes. It must be printed on the pack, and selling above it is an offence.",
+  "bodyHtml": "<h2>Why MRP matters</h2><p>For retailers, MRP caps the upside on packaged goods, so margin has to be won at the buying end. For manufacturers, setting MRP fixes the whole chain's margin structure at once.</p><h2>MRP formula</h2><p class=\"glossary-formula\">Taxable value = MRP × 100 ÷ (100 + GST rate)</p><p>Applies where the item is sold at MRP with no further discount.</p><h2>How MRP works in practice</h2><p>Because MRP is tax-inclusive, the taxable value has to be backed out of it for billing and returns. Discounting below MRP is always allowed; the printed figure is a ceiling, not a fixed price.</p>",
+  "faq": [
+    {
+      "question": "Can a shop charge more than MRP for chilled drinks?",
+      "answer": "No. MRP is a legal maximum regardless of service or storage, though separately priced service can apply in some settings."
+    },
+    {
+      "question": "Does MRP include GST?",
+      "answer": "Yes. MRP is inclusive of all taxes by definition."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "selling-price",
+    "tax-inclusive-pricing",
+    "discount",
+    "markdown"
+  ],
+  "formula": {
+    "expression": "Taxable value = MRP × 100 ÷ (100 + GST rate)",
+    "note": "Applies where the item is sold at MRP with no further discount."
+  }
+}

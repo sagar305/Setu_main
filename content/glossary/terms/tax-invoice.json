@@ -1,0 +1,52 @@
+{
+  "slug": "tax-invoice",
+  "term": "Tax Invoice",
+  "category": "gst-tax",
+  "aliases": [
+    "GST invoice"
+  ],
+  "short": "The GST document that lets your customer claim input tax credit.",
+  "seoTitle": "Tax Invoice — Meaning and Example for Businesses",
+  "metaDescription": "The GST document that lets your customer claim input tax credit. It is the document a customer needs to claim input tax credit.",
+  "updated": "2026-08-07",
+  "definition": "A tax invoice is the document a registered supplier issues for a taxable supply, carrying prescribed particulars — both GSTINs, a serial number and date, description, HSN or SAC, taxable value, rate and the tax split. It is the document a customer needs to claim input tax credit.",
+  "bodyHtml": "<h2>Why Tax Invoice matters</h2><p>If the invoice is missing prescribed particulars, the customer's credit claim is at risk and the document may not stand up in scrutiny. A tidy template is cheaper than the correspondence a bad one generates.</p><h2>How Tax Invoice works in practice</h2><p>Keep numbering sequential within a financial year and generate invoices from one system, so no gaps or duplicates appear. Where e-invoicing applies, the tax invoice must also carry the IRN and signed QR code.</p><h2>Common mistakes with Tax Invoice</h2><ul><li>Missing or wrong customer GSTIN on B2B bills.</li><li>Gaps or restarts in the invoice number series mid-year.</li><li>A single combined GST line instead of the CGST and SGST split.</li></ul>",
+  "faq": [
+    {
+      "question": "What must a tax invoice contain?",
+      "answer": "Supplier and customer details including GSTINs, a serial number and date, item description with HSN or SAC, taxable value, rate, the tax split and the total."
+    },
+    {
+      "question": "Is a receipt the same as a tax invoice?",
+      "answer": "No. A payment receipt acknowledges money received; a tax invoice records the supply and the tax on it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "bill-of-supply",
+    "invoice-numbering",
+    "gstin",
+    "credit-note"
+  ]
+}

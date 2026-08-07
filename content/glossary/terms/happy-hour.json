@@ -1,0 +1,56 @@
+{
+  "slug": "happy-hour",
+  "term": "Happy Hour",
+  "category": "restaurant-ops",
+  "aliases": [
+    "happy hours"
+  ],
+  "short": "A discounted window used to fill slow trading periods.",
+  "seoTitle": "Happy Hour — Meaning, Formula and Example",
+  "metaDescription": "Happy hour is a defined period of discounted pricing, usually on beverages, designed to draw customers into otherwise slow hours.",
+  "updated": "2026-08-07",
+  "definition": "Happy hour is a defined period of discounted pricing, usually on beverages, designed to draw customers into otherwise slow hours. It is a contribution play rather than a margin play.",
+  "bodyHtml": "<h2>Why Happy Hour matters</h2><p>During slow hours, fixed costs are running regardless. A discounted drink that still covers its variable cost adds contribution that would not otherwise exist — but only if it is not cannibalising full-price trade.</p><h2>Happy Hour formula</h2><p class=\"glossary-formula\">Incremental contribution = Extra units sold × Discounted contribution per unit</p><p>Subtract contribution lost on customers who would have paid full price anyway.</p><h2>How Happy Hour works in practice</h2><p>Set the window where footfall is genuinely weak, end it before the peak begins, and compare contribution per hour before and after. Pair discounted drinks with full-margin food to protect the average.</p>",
+  "faq": [
+    {
+      "question": "Does happy hour lose money?",
+      "answer": "Not if the discounted price still exceeds variable cost and the volume is genuinely incremental."
+    },
+    {
+      "question": "How long should a happy hour run?",
+      "answer": "Long enough to build a habit, but ending before your natural peak so it does not discount your best hours."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "liquor-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "pour-cost",
+    "contribution-margin",
+    "discount",
+    "footfall"
+  ],
+  "formula": {
+    "expression": "Incremental contribution = Extra units sold × Discounted contribution per unit",
+    "note": "Subtract contribution lost on customers who would have paid full price anyway."
+  }
+}

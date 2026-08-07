@@ -1,0 +1,57 @@
+{
+  "slug": "lead-time",
+  "term": "Lead Time",
+  "category": "retail-inventory",
+  "aliases": [
+    "supplier lead time",
+    "delivery lead time"
+  ],
+  "short": "The time between placing an order and receiving the goods.",
+  "seoTitle": "Lead Time — Meaning, Formula and Example",
+  "metaDescription": "Lead time is the elapsed time between placing a purchase order and having the goods available to sell. Quoted lead times and actual ones frequently differ.",
+  "updated": "2026-08-07",
+  "definition": "Lead time is the elapsed time between placing a purchase order and having the goods available to sell. It includes the supplier's processing time, transport and your own receiving and put-away.",
+  "bodyHtml": "<h2>Why Lead Time matters</h2><p>Every reorder point depends on lead time, so an optimistic figure produces stockouts no matter how carefully the rest is calculated. Quoted lead times and actual ones frequently differ.</p><h2>Lead Time formula</h2><p class=\"glossary-formula\">Lead time demand = Average daily usage × Lead time in days</p><p>This is the core of the reorder point.</p><h2>How Lead Time works in practice</h2><p>Record the actual gap between order and availability for each supplier over a few orders and use the observed figure. Track variability too, because an unpredictable supplier costs more in buffer stock than a slow but reliable one.</p>",
+  "faq": [
+    {
+      "question": "Should I use the supplier's quoted lead time?",
+      "answer": "Only as a starting point. Use your own measured average once you have a few orders of history."
+    },
+    {
+      "question": "How do I reduce lead time?",
+      "answer": "A local secondary supplier for critical lines often helps more than negotiating with the primary one."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "reorder-point",
+    "safety-stock",
+    "purchase-order",
+    "stockout"
+  ],
+  "formula": {
+    "expression": "Lead time demand = Average daily usage × Lead time in days",
+    "note": "This is the core of the reorder point."
+  }
+}

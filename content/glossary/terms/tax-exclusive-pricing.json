@@ -1,0 +1,57 @@
+{
+  "slug": "tax-exclusive-pricing",
+  "term": "Tax Exclusive Pricing",
+  "category": "gst-tax",
+  "aliases": [
+    "exclusive of tax",
+    "plus GST"
+  ],
+  "short": "Quoting a price to which tax is added at billing.",
+  "seoTitle": "Tax Exclusive Pricing — Meaning, Formula and Example",
+  "metaDescription": "Tax exclusive pricing quotes the base price and adds GST as a separate line at billing, so the customer pays more than the listed figure.",
+  "updated": "2026-08-07",
+  "definition": "Tax exclusive pricing quotes the base price and adds GST as a separate line at billing, so the customer pays more than the listed figure. It is the norm in B2B trade, wholesale and professional services.",
+  "bodyHtml": "<h2>Why Tax Exclusive Pricing matters</h2><p>Business customers prefer exclusive quotes because they reclaim the tax as credit and compare suppliers on the base price. Quoting exclusive to a consumer, though, usually reads as a hidden charge.</p><h2>Tax Exclusive Pricing formula</h2><p class=\"glossary-formula\">Invoice total = Base price + (Base price × GST rate ÷ 100)</p><p>The base price is the taxable value reported in your returns.</p><h2>How Tax Exclusive Pricing works in practice</h2><p>Say which basis a quotation uses, in words, on the document. Most disputes over quotations come down to one side reading a number as inclusive and the other as exclusive.</p>",
+  "faq": [
+    {
+      "question": "Which is better for my business?",
+      "answer": "Consumer-facing sales usually work better inclusive; B2B quotes are conventionally exclusive."
+    },
+    {
+      "question": "Do I have to state the basis on a quotation?",
+      "answer": "It is not always mandatory, but stating it prevents the most common billing dispute there is."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-inclusive-pricing",
+    "taxable-value",
+    "quotation",
+    "gst"
+  ],
+  "formula": {
+    "expression": "Invoice total = Base price + (Base price × GST rate ÷ 100)",
+    "note": "The base price is the taxable value reported in your returns."
+  }
+}

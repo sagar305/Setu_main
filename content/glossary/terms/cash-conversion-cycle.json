@@ -1,0 +1,57 @@
+{
+  "slug": "cash-conversion-cycle",
+  "term": "Cash Conversion Cycle",
+  "category": "payments-finance",
+  "aliases": [
+    "CCC",
+    "cash cycle"
+  ],
+  "short": "Days between paying for stock and collecting from customers.",
+  "seoTitle": "Cash Conversion Cycle — Meaning, Formula and Example",
+  "metaDescription": "The cash conversion cycle measures how many days pass between paying for inventory and collecting the cash from selling it.",
+  "updated": "2026-08-07",
+  "definition": "The cash conversion cycle measures how many days pass between paying for inventory and collecting the cash from selling it. It combines days of stock, days sales outstanding and days payable outstanding.",
+  "bodyHtml": "<h2>Why Cash Conversion Cycle matters</h2><p>The cycle is the number that explains why a profitable business needs a loan. A long cycle means every rupee of growth requires funding before it returns.</p><h2>Cash Conversion Cycle formula</h2><p class=\"glossary-formula\">CCC = Days of inventory + DSO − DPO</p><p>A negative result means customers pay you before your suppliers are due.</p><h2>How Cash Conversion Cycle works in practice</h2><p>Attack whichever component is longest: clear slow stock, tighten collections, or use supplier terms fully. Businesses with a negative cycle collect before they pay and effectively grow on their suppliers' money.</p><h2>Worked example</h2><p>45 days of stock plus a 40-day DSO less a 30-day DPO is a 55-day cycle to fund.</p>",
+  "faq": [
+    {
+      "question": "What is a good cash conversion cycle?",
+      "answer": "Shorter is better, and negative is excellent — common in cash-and-carry retail and quick service formats."
+    },
+    {
+      "question": "Which lever is easiest to move?",
+      "answer": "Usually stock, since it is entirely under your own control."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "working-capital",
+    "days-sales-outstanding",
+    "days-payable-outstanding",
+    "inventory-turnover"
+  ],
+  "formula": {
+    "expression": "CCC = Days of inventory + DSO − DPO",
+    "note": "A negative result means customers pay you before your suppliers are due."
+  }
+}

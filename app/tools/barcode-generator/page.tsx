@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BarcodeGeneratorTool } from "@/components/tools/BarcodeGenerator/BarcodeGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Barcode Generator | EAN-13, Code 128 & QR | Setu",
@@ -120,6 +121,9 @@ export default function BarcodeGeneratorPage() {
           </div>
           <SuggestedTools current="barcode-generator" />
         </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="barcode-generator" />
       </section>
     </>
   );

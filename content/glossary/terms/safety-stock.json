@@ -1,0 +1,56 @@
+{
+  "slug": "safety-stock",
+  "term": "Safety Stock",
+  "category": "retail-inventory",
+  "aliases": [
+    "buffer stock"
+  ],
+  "short": "Extra stock held to absorb demand spikes and late deliveries.",
+  "seoTitle": "Safety Stock — Meaning, Formula and Example",
+  "metaDescription": "Safety stock is the buffer held above expected demand to absorb two kinds of surprise: a sales spike, and a supplier arriving late.",
+  "updated": "2026-08-07",
+  "definition": "Safety stock is the buffer held above expected demand to absorb two kinds of surprise: a sales spike, and a supplier arriving late. It is the price of not running out.",
+  "bodyHtml": "<h2>Why Safety Stock matters</h2><p>Safety stock is a deliberate trade between the cost of holding stock and the cost of losing a sale. The right level depends on how variable your demand and lead times actually are, not on how cautious you feel.</p><h2>Safety Stock formula</h2><p class=\"glossary-formula\">Safety stock ≈ (Maximum daily usage × Maximum lead time) − (Average daily usage × Average lead time)</p><p>Simple, and enough for most small businesses.</p><h2>How Safety Stock works in practice</h2><p>Hold more where the item is critical, cheap to store and long-lived; hold less where it is perishable or expensive. Reviewing which items actually caused stockouts last quarter beats applying a blanket rule.</p>",
+  "faq": [
+    {
+      "question": "How much safety stock is too much?",
+      "answer": "When holding cost and spoilage risk outweigh the margin on the sales it protects."
+    },
+    {
+      "question": "Do perishables need safety stock?",
+      "answer": "Very little. For short shelf-life goods, ordering more often beats holding a buffer."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "reorder-point",
+    "lead-time",
+    "stockout",
+    "par-level"
+  ],
+  "formula": {
+    "expression": "Safety stock ≈ (Maximum daily usage × Maximum lead time) − (Average daily usage × Average lead time)",
+    "note": "Simple, and enough for most small businesses."
+  }
+}

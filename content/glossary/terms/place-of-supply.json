@@ -1,0 +1,52 @@
+{
+  "slug": "place-of-supply",
+  "term": "Place of Supply",
+  "category": "gst-tax",
+  "aliases": [
+    "POS rules"
+  ],
+  "short": "The location that decides whether a supply is intra-state or interstate.",
+  "seoTitle": "Place of Supply — Meaning and Example for Businesses",
+  "metaDescription": "Place of supply is the legally determined location of a transaction for GST purposes. The location that decides whether a supply is intra-state or interstate.",
+  "updated": "2026-08-07",
+  "definition": "Place of supply is the legally determined location of a transaction for GST purposes. It decides whether you charge CGST plus SGST or IGST, and which state ultimately receives the tax — regardless of where your office happens to be.",
+  "bodyHtml": "<h2>Why Place of Supply matters</h2><p>Every wrong place-of-supply call produces a wrong tax head on the invoice, which the customer's credit claim then fails on. Correcting it later means credit notes and amendments rather than a quick edit.</p><h2>How Place of Supply works in practice</h2><p>For goods the place of supply is generally where the movement ends. For services, the default is the recipient's location for registered customers, with special rules for immovable property, restaurants, events and transport, where the physical location of the service governs.</p><h2>Worked example</h2><p>A restaurant meal is taxed where the restaurant is, even if the diner is registered in another state.</p>",
+  "faq": [
+    {
+      "question": "Does the billing address decide the place of supply?",
+      "answer": "Not always. Delivery location and the nature of the service can override the billing address."
+    },
+    {
+      "question": "What about services delivered online?",
+      "answer": "Registered recipients are generally taxed at their location, with specific rules for unregistered consumers."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "igst",
+    "cgst",
+    "sgst",
+    "gst"
+  ]
+}

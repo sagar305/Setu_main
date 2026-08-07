@@ -1,0 +1,52 @@
+{
+  "slug": "refund",
+  "term": "Refund",
+  "category": "payments-finance",
+  "aliases": [
+    "money back"
+  ],
+  "short": "Returning money to a customer for a cancelled or returned sale.",
+  "seoTitle": "Refund — Meaning and Example for Businesses",
+  "metaDescription": "A refund returns money to a customer for a cancelled order, a returned item or a service not delivered. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A refund returns money to a customer for a cancelled order, a returned item or a service not delivered. It reverses the payment and, where a tax invoice was issued, should be accompanied by a credit note.",
+  "bodyHtml": "<h2>Why Refund matters</h2><p>Refunds handled informally leave sales overstated and GST paid on money you gave back. Handled slowly, they also turn a recoverable complaint into a review and a chargeback.</p><h2>How Refund works in practice</h2><p>Refund to the original payment method where possible, issue the credit note against the original invoice, and record the reason. Refund reasons are one of the most useful quality signals a business collects.</p>",
+  "faq": [
+    {
+      "question": "Do I need a credit note for every refund?",
+      "answer": "For any refund against a tax invoice, yes — that is what reverses the tax."
+    },
+    {
+      "question": "Should refunds go back to the original payment mode?",
+      "answer": "Wherever possible. It reduces disputes and keeps reconciliation clean."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "credit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "credit-note",
+    "chargeback",
+    "sales-return",
+    "settlement"
+  ]
+}

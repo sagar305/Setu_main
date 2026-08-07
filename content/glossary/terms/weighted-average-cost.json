@@ -1,0 +1,57 @@
+{
+  "slug": "weighted-average-cost",
+  "term": "Weighted Average Cost",
+  "category": "retail-inventory",
+  "aliases": [
+    "moving average cost",
+    "average cost method"
+  ],
+  "short": "Valuing stock at the blended average of what you paid.",
+  "seoTitle": "Weighted Average Cost — Meaning, Formula and Example",
+  "metaDescription": "Weighted average cost values inventory at the blended average rate of all units held, recalculated as each purchase arrives.",
+  "updated": "2026-08-07",
+  "definition": "Weighted average cost values inventory at the blended average rate of all units held, recalculated as each purchase arrives. Every unit of an item then carries the same cost regardless of which consignment it came from.",
+  "bodyHtml": "<h2>Why Weighted Average Cost matters</h2><p>Where purchase prices move constantly — vegetables, commodities, imported goods — average costing gives a stable, defensible cost base without tracking each consignment separately.</p><h2>Weighted Average Cost formula</h2><p class=\"glossary-formula\">Weighted average cost = Total value of stock on hand ÷ Total units on hand</p><p>Recomputed on every purchase receipt.</p><h2>How Weighted Average Cost works in practice</h2><p>Recalculate after each receipt rather than monthly, so the rate used in costing reflects what you have actually paid. Most stock systems do this automatically once landed costs are entered.</p><h2>Worked example</h2><p>50 units at ₹40 plus 50 at ₹50 gives a weighted average of ₹45 per unit.</p>",
+  "faq": [
+    {
+      "question": "Is weighted average acceptable in India?",
+      "answer": "Yes. It is one of the standard permitted methods, alongside FIFO."
+    },
+    {
+      "question": "Does averaging hide price rises?",
+      "answer": "It smooths them, which is why purchase price variance should be tracked separately."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "purchase-price-variance-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "fifo",
+    "landed-cost",
+    "purchase-price-variance",
+    "cost-price"
+  ],
+  "formula": {
+    "expression": "Weighted average cost = Total value of stock on hand ÷ Total units on hand",
+    "note": "Recomputed on every purchase receipt."
+  }
+}

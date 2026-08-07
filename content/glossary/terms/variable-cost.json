@@ -1,0 +1,56 @@
+{
+  "slug": "variable-cost",
+  "term": "Variable Cost",
+  "category": "pricing-profit",
+  "aliases": [
+    "variable costs"
+  ],
+  "short": "Costs that rise and fall directly with what you sell.",
+  "seoTitle": "Variable Cost — Meaning, Formula and Example",
+  "metaDescription": "Variable costs move directly with sales volume — ingredients, packaging, payment gateway charges, aggregator commission and per-order delivery cost.",
+  "updated": "2026-08-07",
+  "definition": "Variable costs move directly with sales volume — ingredients, packaging, payment gateway charges, aggregator commission and per-order delivery cost. Sell nothing and they are close to zero.",
+  "bodyHtml": "<h2>Why Variable Cost matters</h2><p>Variable cost per unit is what sets contribution margin, and therefore what decides whether an extra order or a discounted campaign is worth doing.</p><h2>Variable Cost formula</h2><p class=\"glossary-formula\">Total variable cost = Variable cost per unit × Units sold</p><p>Selling price minus variable cost per unit gives contribution margin.</p><h2>How Variable Cost works in practice</h2><p>Work them out per unit rather than as a monthly total, because the per-unit figure is what pricing decisions need. Watch for costs that quietly became variable, such as commission on a growing share of online orders.</p>",
+  "faq": [
+    {
+      "question": "Is electricity a variable cost?",
+      "answer": "Partly. There is a base load regardless of sales plus a portion that rises with activity, which makes it semi-variable."
+    },
+    {
+      "question": "Is aggregator commission a variable cost?",
+      "answer": "Yes, and a large one — it scales exactly with the orders it is charged on."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "fixed-cost",
+    "contribution-margin",
+    "cogs",
+    "break-even-point"
+  ],
+  "formula": {
+    "expression": "Total variable cost = Variable cost per unit × Units sold",
+    "note": "Selling price minus variable cost per unit gives contribution margin."
+  }
+}

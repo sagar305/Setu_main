@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ReceiptDesignerTool } from "@/components/tools/ReceiptDesigner/ReceiptDesignerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Receipt Generator | Make & Print Receipts | Setu",
@@ -93,6 +94,9 @@ export default function ReceiptDesignerPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="receipt-designer" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="receipt-designer" />
       </section>
     </>
   );

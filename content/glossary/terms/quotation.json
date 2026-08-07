@@ -1,0 +1,53 @@
+{
+  "slug": "quotation",
+  "term": "Quotation",
+  "category": "pricing-profit",
+  "aliases": [
+    "quote",
+    "estimate"
+  ],
+  "short": "A priced offer sent before the work or supply happens.",
+  "seoTitle": "Quotation — Meaning and Example for Businesses",
+  "metaDescription": "A quotation is a formal priced offer sent to a customer before a sale, setting out items, quantities, rates, taxes, validity and terms.",
+  "updated": "2026-08-07",
+  "definition": "A quotation is a formal priced offer sent to a customer before a sale, setting out items, quantities, rates, taxes, validity and terms. Accepted, it becomes the basis for the order and the eventual invoice.",
+  "bodyHtml": "<h2>Why Quotation matters</h2><p>Most billing disputes start in the quotation — an unstated tax basis, an open-ended validity, or a scope line loose enough to read two ways. A tight quote costs ten minutes and saves weeks of argument.</p><h2>How Quotation works in practice</h2><p>State clearly whether prices are inclusive or exclusive of GST, give the quote a number and a validity date, and carry the accepted quotation through to the invoice unchanged so the customer sees the same figures twice.</p>",
+  "faq": [
+    {
+      "question": "Is a quotation legally binding?",
+      "answer": "Generally it is an offer rather than a contract, and binding once accepted within its validity period on the stated terms."
+    },
+    {
+      "question": "Should a quotation show GST?",
+      "answer": "Yes. Showing the tax separately removes the single most common misunderstanding about the final payable amount."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-exclusive-pricing",
+    "purchase-order",
+    "tax-invoice",
+    "payment-terms"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "return-on-ad-spend",
+  "term": "Return on Ad Spend",
+  "category": "growth-marketing",
+  "aliases": [
+    "ROAS",
+    "marketing ROI"
+  ],
+  "short": "Revenue generated for every rupee of advertising spent.",
+  "seoTitle": "Return on Ad Spend — Meaning, Formula and Example",
+  "metaDescription": "Return on ad spend measures the revenue generated for each rupee of advertising. ROAS is the standard campaign metric and a misleading one on its own.",
+  "updated": "2026-08-07",
+  "definition": "Return on ad spend measures the revenue generated for each rupee of advertising. A ROAS of 4 means ₹4 of revenue for every ₹1 spent — revenue, importantly, not profit.",
+  "bodyHtml": "<h2>Why Return on Ad Spend matters</h2><p>ROAS is the standard campaign metric and a misleading one on its own. On a 25% contribution margin, a ROAS of 4 exactly breaks even, so the headline number can look strong while earning nothing.</p><h2>Return on Ad Spend formula</h2><p class=\"glossary-formula\">ROAS = Revenue attributed to ads ÷ Ad spend</p><p>Break-even ROAS = 1 ÷ contribution margin.</p><h2>How Return on Ad Spend works in practice</h2><p>Convert ROAS into contribution before judging a campaign: multiply revenue by contribution margin and compare with the spend. Then check whether the revenue was genuinely incremental.</p><h2>Worked example</h2><p>At a 30% contribution margin, break-even is a ROAS of about 3.3 — anything below that loses money.</p>",
+  "faq": [
+    {
+      "question": "What ROAS should I target?",
+      "answer": "Above your break-even ROAS, which is one divided by your contribution margin."
+    },
+    {
+      "question": "Is ROAS the same as ROI?",
+      "answer": "No. ROAS uses revenue; ROI uses profit, which is the number that matters."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "customer-acquisition-cost",
+    "roi",
+    "contribution-margin",
+    "conversion-rate"
+  ],
+  "formula": {
+    "expression": "ROAS = Revenue attributed to ads ÷ Ad spend",
+    "note": "Break-even ROAS = 1 ÷ contribution margin."
+  }
+}

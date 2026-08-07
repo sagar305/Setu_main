@@ -1,0 +1,57 @@
+{
+  "slug": "covers",
+  "term": "Covers",
+  "category": "restaurant-ops",
+  "aliases": [
+    "number of covers",
+    "guest count"
+  ],
+  "short": "The number of guests served in a period.",
+  "seoTitle": "Covers — Meaning, Formula and Example",
+  "metaDescription": "A cover is one guest served. Covers separate two very different reasons for a revenue change: fewer guests, or the same guests spending less.",
+  "updated": "2026-08-07",
+  "definition": "A cover is one guest served. Restaurants count covers per shift, day and month, and use the figure as the denominator for average spend, labour productivity and forecasting.",
+  "bodyHtml": "<h2>Why Covers matters</h2><p>Covers separate two very different reasons for a revenue change: fewer guests, or the same guests spending less. The fix is completely different in each case.</p><h2>Covers formula</h2><p class=\"glossary-formula\">Average cover = Total sales ÷ Number of covers</p><p>Covers per labour hour is the standard productivity measure.</p><h2>How Covers works in practice</h2><p>Record covers per shift alongside sales, so average cover and labour cost per cover can be tracked. Reservation and queue systems capture the count automatically; paper systems rarely do.</p>",
+  "faq": [
+    {
+      "question": "Is a cover the same as a table?",
+      "answer": "No. One table of four is four covers."
+    },
+    {
+      "question": "Why track covers if I already track bills?",
+      "answer": "Bill counts hide party size, so a drop in group bookings looks identical to a drop in walk-ins."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "average-cover",
+    "table-turnover-rate",
+    "labour-cost-percentage",
+    "footfall"
+  ],
+  "formula": {
+    "expression": "Average cover = Total sales ÷ Number of covers",
+    "note": "Covers per labour hour is the standard productivity measure."
+  }
+}

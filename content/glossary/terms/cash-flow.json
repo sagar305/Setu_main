@@ -1,0 +1,56 @@
+{
+  "slug": "cash-flow",
+  "term": "Cash Flow",
+  "category": "payments-finance",
+  "aliases": [
+    "cashflow"
+  ],
+  "short": "The actual movement of money in and out of the business.",
+  "seoTitle": "Cash Flow — Meaning, Formula and Example",
+  "metaDescription": "Cash flow is the movement of money into and out of a business over a period. Businesses fail from running out of cash, not from making losses on paper.",
+  "updated": "2026-08-07",
+  "definition": "Cash flow is the movement of money into and out of a business over a period. Positive cash flow means more came in than went out — a different question entirely from whether the business was profitable.",
+  "bodyHtml": "<h2>Why Cash Flow matters</h2><p>Businesses fail from running out of cash, not from making losses on paper. Profit pays the owner eventually; cash pays the salaries this Friday.</p><h2>Cash Flow formula</h2><p class=\"glossary-formula\">Net cash flow = Cash inflows − Cash outflows for the period</p><p>Operating cash flow excludes loans and capital spending.</p><h2>How Cash Flow works in practice</h2><p>Forecast weekly for the next quarter, listing expected collections and committed payments. Even a rough forecast surfaces the tight week early enough to do something about it.</p>",
+  "faq": [
+    {
+      "question": "Why is my business profitable but short of cash?",
+      "answer": "Stock, unpaid invoices, loan repayments and owner drawings all consume cash without reducing profit."
+    },
+    {
+      "question": "How far ahead should I forecast?",
+      "answer": "Thirteen weeks is the standard working horizon — long enough to act, short enough to be credible."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cash-conversion-cycle",
+    "working-capital",
+    "net-profit",
+    "cash-flow-statement"
+  ],
+  "formula": {
+    "expression": "Net cash flow = Cash inflows − Cash outflows for the period",
+    "note": "Operating cash flow excludes loans and capital spending."
+  }
+}

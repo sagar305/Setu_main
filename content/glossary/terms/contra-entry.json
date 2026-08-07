@@ -1,0 +1,52 @@
+{
+  "slug": "contra-entry",
+  "term": "Contra Entry",
+  "category": "accounting",
+  "aliases": [
+    "contra transaction"
+  ],
+  "short": "A transfer between your own cash and bank accounts.",
+  "seoTitle": "Contra Entry — Meaning and Example for Businesses",
+  "metaDescription": "A transfer between your own cash and bank accounts. Nothing is earned or spent. See the formula, an example and the free Setu tools that use Contra Entry.",
+  "updated": "2026-08-07",
+  "definition": "A contra entry records a movement between a business's own accounts — cash deposited into the bank, cash withdrawn for the till, or a transfer between two bank accounts. Nothing is earned or spent.",
+  "bodyHtml": "<h2>Why Contra Entry matters</h2><p>Contra entries are frequently miscoded as income or expense, which inflates both sides of the P&L. A shop depositing daily takings can double-count an entire month's revenue this way.</p><h2>How Contra Entry works in practice</h2><p>Post them as transfers between asset accounts, never through income or expense. In a cash book they appear on both sides, which is why they are marked as contra rather than totalled.</p><h2>Worked example</h2><p>Depositing ₹50,000 of takings debits the bank and credits cash in hand — no revenue is recorded.</p>",
+  "faq": [
+    {
+      "question": "Is a bank deposit income?",
+      "answer": "No. The income was recorded when the sale happened; the deposit only moves money between your own accounts."
+    },
+    {
+      "question": "Do contra entries affect profit?",
+      "answer": "Never. They move value between asset accounts and leave profit untouched."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "petty-cash",
+    "cash-flow",
+    "bank-reconciliation",
+    "journal-entry"
+  ]
+}

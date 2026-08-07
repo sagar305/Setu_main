@@ -1,0 +1,57 @@
+{
+  "slug": "same-store-sales",
+  "term": "Same-Store Sales",
+  "category": "growth-marketing",
+  "aliases": [
+    "like-for-like sales",
+    "SSSG"
+  ],
+  "short": "Sales growth measured only at outlets open in both periods.",
+  "seoTitle": "Same-Store Sales — Meaning, Formula and Example",
+  "metaDescription": "Same-store sales compares revenue only at outlets that were open across both periods being compared. Total revenue growth flatters any expanding business.",
+  "updated": "2026-08-07",
+  "definition": "Same-store sales compares revenue only at outlets that were open across both periods being compared. It strips out the growth that came purely from opening new locations.",
+  "bodyHtml": "<h2>Why Same-Store Sales matters</h2><p>Total revenue growth flatters any expanding business. Same-store sales answers the harder question: are the outlets you already had performing better than last year?</p><h2>Same-Store Sales formula</h2><p class=\"glossary-formula\">Same-store growth % = (Current period sales − Prior period sales) ÷ Prior period sales × 100</p><p>Include only outlets trading in both periods.</p><h2>How Same-Store Sales works in practice</h2><p>Compare against the same period last year to neutralise seasonality, and exclude outlets that were closed for renovation. Flat same-store sales alongside rising totals means growth is being bought, not earned.</p>",
+  "faq": [
+    {
+      "question": "Why exclude new outlets?",
+      "answer": "New outlets grow revenue by definition. Including them hides whether the existing business is improving."
+    },
+    {
+      "question": "What if an outlet was closed for a month?",
+      "answer": "Exclude it from the comparison, or the result reflects closure rather than performance."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "footfall",
+    "average-order-value",
+    "conversion-rate",
+    "revenue"
+  ],
+  "formula": {
+    "expression": "Same-store growth % = (Current period sales − Prior period sales) ÷ Prior period sales × 100",
+    "note": "Include only outlets trading in both periods."
+  }
+}

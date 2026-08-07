@@ -1,0 +1,56 @@
+{
+  "slug": "amortisation",
+  "term": "Amortisation",
+  "category": "accounting",
+  "aliases": [
+    "amortization"
+  ],
+  "short": "Spreading the cost of an intangible asset over its useful life.",
+  "seoTitle": "Amortisation — Meaning, Formula and Example",
+  "metaDescription": "Amortisation spreads the cost of an intangible asset — software licences, goodwill, trademarks, a franchise fee — across the years it benefits.",
+  "updated": "2026-08-07",
+  "definition": "Amortisation spreads the cost of an intangible asset — software licences, goodwill, trademarks, a franchise fee — across the years it benefits. It is depreciation's counterpart for things you cannot touch.",
+  "bodyHtml": "<h2>Why Amortisation matters</h2><p>Intangibles are a growing share of small business spending, from a POS licence to a brand fee. Expensing them entirely up front distorts the year of purchase and flatters every year after.</p><h2>Amortisation formula</h2><p class=\"glossary-formula\">Annual amortisation = Cost of intangible asset ÷ Useful life in years</p><p>Usually straight-line over the contract or licence period.</p><h2>How Amortisation works in practice</h2><p>Use straight-line over the licence or contract term unless something else clearly fits better. The same word also describes a loan repayment schedule, which is a related but separate idea.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between amortisation and depreciation?",
+      "answer": "Amortisation applies to intangible assets, depreciation to physical ones."
+    },
+    {
+      "question": "Is loan amortisation the same thing?",
+      "answer": "No. That refers to the schedule of principal and interest across a loan's repayments."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "depreciation",
+    "fixed-asset",
+    "amortisation-schedule",
+    "capital-expenditure"
+  ],
+  "formula": {
+    "expression": "Annual amortisation = Cost of intangible asset ÷ Useful life in years",
+    "note": "Usually straight-line over the contract or licence period."
+  }
+}

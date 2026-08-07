@@ -1,0 +1,57 @@
+{
+  "slug": "inventory-turnover",
+  "term": "Inventory Turnover",
+  "category": "retail-inventory",
+  "aliases": [
+    "stock turnover",
+    "inventory turnover ratio"
+  ],
+  "short": "How many times you sell and replace your stock in a period.",
+  "seoTitle": "Inventory Turnover — Meaning, Formula and Example",
+  "metaDescription": "Inventory turnover is how many times average stock is sold and replaced over a period. Stock is cash in another form. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Inventory turnover is how many times average stock is sold and replaced over a period. High turnover means capital is recycling quickly; low turnover means cash is sitting on shelves.",
+  "bodyHtml": "<h2>Why Inventory Turnover matters</h2><p>Stock is cash in another form. A business with slow turnover can be profitable on paper while permanently short of money, because the profit is tied up in goods that have not sold.</p><h2>Inventory Turnover formula</h2><p class=\"glossary-formula\">Inventory turnover = COGS ÷ Average stock at cost</p><p>Days of stock = 365 ÷ turnover.</p><h2>How Inventory Turnover works in practice</h2><p>Compute it by category, not for the whole shop. A blended figure hides the fast-moving lines carrying the slow ones, which is exactly the information a buying decision needs.</p><h2>Worked example</h2><p>₹48,00,000 of annual COGS against ₹6,00,000 average stock is a turnover of 8, or about 46 days of stock.</p>",
+  "faq": [
+    {
+      "question": "What is a good inventory turnover?",
+      "answer": "It varies enormously — a bakery turns stock daily, a jeweller a few times a year. Compare to your own history and to your credit terms."
+    },
+    {
+      "question": "How do I improve turnover?",
+      "answer": "Cut order quantities on slow lines, clear dead stock, and buy more often in smaller lots where the supplier allows it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "dead-stock",
+    "cogs",
+    "reorder-point",
+    "working-capital"
+  ],
+  "formula": {
+    "expression": "Inventory turnover = COGS ÷ Average stock at cost",
+    "note": "Days of stock = 365 ÷ turnover."
+  }
+}

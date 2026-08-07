@@ -1,0 +1,57 @@
+{
+  "slug": "closing-stock",
+  "term": "Closing Stock",
+  "category": "retail-inventory",
+  "aliases": [
+    "closing inventory",
+    "ending inventory"
+  ],
+  "short": "The value of stock on hand at the end of a period.",
+  "seoTitle": "Closing Stock — Meaning, Formula and Example",
+  "metaDescription": "Closing stock is the quantity and value of inventory remaining at the end of a period, established by counting and valuing what is physically there.",
+  "updated": "2026-08-07",
+  "definition": "Closing stock is the quantity and value of inventory remaining at the end of a period, established by counting and valuing what is physically there. It appears as a current asset on the balance sheet.",
+  "bodyHtml": "<h2>Why Closing Stock matters</h2><p>Closing stock is the single largest lever on reported profit in a trading business. Overstate it and profit rises artificially; understate it and a good month reads as a bad one.</p><h2>Closing Stock formula</h2><p class=\"glossary-formula\">Closing stock = Opening stock + Purchases − COGS</p><p>The physical count is the authority; this identity is a cross-check.</p><h2>How Closing Stock works in practice</h2><p>Count physically rather than deriving it from the system, and value at cost, or net realisable value where that is lower. Damaged and expired goods should be written off rather than counted at full cost.</p>",
+  "faq": [
+    {
+      "question": "Can I estimate closing stock?",
+      "answer": "Only for interim reporting. Period-end profit needs a real count."
+    },
+    {
+      "question": "How do I value damaged goods?",
+      "answer": "At what they can realistically be sold for, or write them off entirely if they cannot be sold."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "opening-stock",
+    "cogs",
+    "stock-take",
+    "shrinkage"
+  ],
+  "formula": {
+    "expression": "Closing stock = Opening stock + Purchases − COGS",
+    "note": "The physical count is the authority; this identity is a cross-check."
+  }
+}

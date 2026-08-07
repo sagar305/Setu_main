@@ -201,6 +201,207 @@ export function getBlogConnectedTools(post: BlogPost): BlogConnectedToolLink[] {
   return links;
 }
 
+// ---------------------------------------------------------------------------
+// Glossary
+//
+// Same layout as the blog (see /content/glossary):
+//   - index.json          -> landing SEO/hero, categories, term summaries
+//   - terms/<slug>.json   -> full entry (definition, body, FAQ, related tools)
+// Everything is read at build time; the pages are statically rendered.
+// ---------------------------------------------------------------------------
+
+const GLOSSARY_DIR = path.join(process.cwd(), "content", "glossary");
+const GLOSSARY_TERMS_DIR = path.join(GLOSSARY_DIR, "terms");
+
+export type {
+  GlossaryCategory,
+  GlossaryFaqItem,
+  GlossaryIndex,
+  GlossaryMatcher,
+  GlossarySegment,
+  GlossaryTerm,
+  GlossaryTermSummary,
+  GlossaryToolLink,
+  GlossaryToolRef,
+} from "@/lib/glossary";
+export { getGlossaryTermUrl, glossaryInitial } from "@/lib/glossary";
+
+import type {
+  GlossaryCategory,
+  GlossaryIndex,
+  GlossaryLinkState,
+  GlossaryMatcher,
+  GlossarySegment,
+  GlossaryTerm,
+  GlossaryTermSummary,
+  GlossaryToolLink,
+  GlossaryToolRef,
+} from "@/lib/glossary";
+import {
+  buildGlossaryMatcher,
+  createGlossaryLinkState,
+  linkGlossaryHtml,
+  segmentGlossaryText,
+} from "@/lib/glossary";
+
+let glossaryIndexCache: GlossaryIndex | null = null;
+
+function loadGlossaryIndex(): GlossaryIndex {
+  if (!glossaryIndexCache) {
+    const raw = fs.readFileSync(path.join(GLOSSARY_DIR, "index.json"), "utf8");
+    glossaryIndexCache = JSON.parse(raw) as GlossaryIndex;
+  }
+  return glossaryIndexCache;
+}
+
+export function getGlossaryContent(): GlossaryIndex {
+  return loadGlossaryIndex();
+}
+
+export function getGlossaryTerms(): GlossaryTermSummary[] {
+  return loadGlossaryIndex().terms;
+}
+
+export function getGlossaryCategories(): GlossaryCategory[] {
+  return loadGlossaryIndex().categories;
+}
+
+export function getGlossaryCategory(id: string): GlossaryCategory | undefined {
+  return loadGlossaryIndex().categories.find((category) => category.id === id);
+}
+
+export function getGlossaryTermBySlug(slug: string): GlossaryTerm | undefined {
+  // Guard against path traversal via the [slug] route segment.
+  if (!/^[a-z0-9-]+$/i.test(slug)) return undefined;
+  const file = path.join(GLOSSARY_TERMS_DIR, `${slug}.json`);
+  if (!fs.existsSync(file)) return undefined;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as GlossaryTerm;
+}
+
+/** Term summaries for a list of slugs, in the order given, skipping unknowns. */
+export function getGlossaryTermSummaries(slugs: string[]): GlossaryTermSummary[] {
+  const bySlug = new Map(loadGlossaryIndex().terms.map((term) => [term.slug, term]));
+  return slugs.map((slug) => bySlug.get(slug)).filter((term): term is GlossaryTermSummary => Boolean(term));
+}
+
+/** Resolve a term's tool/calculator references to displayable links. */
+export function getGlossaryToolLinks(refs: GlossaryToolRef[], limit = 5): GlossaryToolLink[] {
+  const links: GlossaryToolLink[] = [];
+  for (const ref of refs ?? []) {
+    if (links.length >= limit) break;
+    if (ref.type === "calculator") {
+      const calc = getCalculatorBySlug(ref.slug);
+      if (calc) {
+        links.push({
+          type: "calculator",
+          slug: ref.slug,
+          name: calc.name,
+          description: calc.shortDescription,
+          href: `/calculators/${ref.slug}`,
+        });
+      }
+    } else {
+      const tool = getToolBySlug(ref.slug);
+      if (tool) {
+        links.push({
+          type: "tool",
+          slug: ref.slug,
+          name: tool.name,
+          description: tool.shortDescription,
+          href: "href" in tool && tool.href ? tool.href : `/tools/${ref.slug}`,
+        });
+      }
+    }
+  }
+  return links;
+}
+
+// Reverse index: which glossary terms name a given tool or calculator. Built
+// once by reading every term file, so tool pages can link the vocabulary that
+// belongs to them without each page hardcoding a list.
+let glossaryTermsByToolCache: Map<string, GlossaryTermSummary[]> | null = null;
+
+function loadGlossaryTermsByTool(): Map<string, GlossaryTermSummary[]> {
+  if (glossaryTermsByToolCache) return glossaryTermsByToolCache;
+
+  const summaries = new Map(loadGlossaryIndex().terms.map((term) => [term.slug, term]));
+  // Rank carries how prominently a term names the tool: a term that lists it
+  // first is more about that tool than one listing it fifth, so tool pages show
+  // the closest vocabulary rather than whatever sorts first alphabetically.
+  const index = new Map<string, { summary: GlossaryTermSummary; rank: number }[]>();
+
+  for (const file of fs.readdirSync(GLOSSARY_TERMS_DIR)) {
+    if (!file.endsWith(".json")) continue;
+    const term = JSON.parse(
+      fs.readFileSync(path.join(GLOSSARY_TERMS_DIR, file), "utf8"),
+    ) as GlossaryTerm;
+    const summary = summaries.get(term.slug);
+    if (!summary) continue;
+    (term.relatedTools ?? []).forEach((ref, rank) => {
+      const key = `${ref.type}:${ref.slug}`;
+      const entry = { summary, rank };
+      const bucket = index.get(key);
+      if (bucket) bucket.push(entry);
+      else index.set(key, [entry]);
+    });
+  }
+
+  const ranked = new Map<string, GlossaryTermSummary[]>();
+  for (const [key, bucket] of index) {
+    bucket.sort((a, b) => a.rank - b.rank || a.summary.term.localeCompare(b.summary.term));
+    ranked.set(
+      key,
+      bucket.map((entry) => entry.summary),
+    );
+  }
+
+  glossaryTermsByToolCache = ranked;
+  return ranked;
+}
+
+/** Glossary terms that reference a given tool or calculator. */
+export function getGlossaryTermsForTool(
+  type: "tool" | "calculator",
+  slug: string,
+  limit = 8,
+): GlossaryTermSummary[] {
+  return (loadGlossaryTermsByTool().get(`${type}:${slug}`) ?? []).slice(0, limit);
+}
+
+// --- Auto-linking -----------------------------------------------------------
+
+let glossaryMatcherCache: GlossaryMatcher | null = null;
+
+function getGlossaryMatcher(): GlossaryMatcher {
+  if (!glossaryMatcherCache) {
+    glossaryMatcherCache = buildGlossaryMatcher(loadGlossaryIndex().terms);
+  }
+  return glossaryMatcherCache;
+}
+
+export type GlossaryLinker = {
+  /** Link glossary terms inside an HTML string (blog bodies, term bodies). */
+  html: (input: string) => string;
+  /** Split a plain-text paragraph into text and link segments. */
+  text: (input: string) => GlossarySegment[];
+};
+
+/**
+ * One linker per rendered page. State is shared across every call so a term is
+ * linked at most once on the page, and `maxLinks` keeps articles readable
+ * rather than turning every other noun into a link.
+ */
+export function createGlossaryLinker(
+  options: { maxLinks?: number; exclude?: string[] } = {},
+): GlossaryLinker {
+  const matcher = getGlossaryMatcher();
+  const state: GlossaryLinkState = createGlossaryLinkState(options.maxLinks ?? 14, options.exclude ?? []);
+  return {
+    html: (input: string) => linkGlossaryHtml(input, matcher, state),
+    text: (input: string) => segmentGlossaryText(input, matcher, state),
+  };
+}
+
 export function getContactContent(): ContactContent {
   return contactData;
 }

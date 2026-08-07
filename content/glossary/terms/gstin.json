@@ -1,0 +1,53 @@
+{
+  "slug": "gstin",
+  "term": "GSTIN",
+  "category": "gst-tax",
+  "aliases": [
+    "GST number",
+    "GST identification number"
+  ],
+  "short": "The 15-character registration number that identifies a GST-registered business.",
+  "seoTitle": "GSTIN — Meaning and Example for Businesses",
+  "metaDescription": "GSTIN is the 15-character Goods and Services Tax Identification Number issued to every registered business. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "GSTIN is the 15-character Goods and Services Tax Identification Number issued to every registered business. It encodes the state code, the business PAN, an entity number for that PAN within the state, and a check digit, which is why a valid GSTIN can be sanity-checked before you save it.",
+  "bodyHtml": "<h2>Why GSTIN matters</h2><p>Your GSTIN must appear on every tax invoice you issue, and your customer's GSTIN must appear on B2B bills for them to claim input tax credit. A missing or mistyped GSTIN is the most common reason a customer's credit claim fails and the invoice comes back to you.</p><h2>How GSTIN works in practice</h2><p>Store your GSTIN once in your billing profile so it prints on every document, and capture the customer's GSTIN at the point of billing for business customers. Check the first two digits against the customer's state, because that pair decides whether you charge CGST plus SGST or IGST.</p><h2>Worked example</h2><p>In 27AAAAA0000A1Z5, the leading 27 is the state code for Maharashtra and the ten characters after it are the business PAN.</p>",
+  "faq": [
+    {
+      "question": "Is GSTIN the same as a GST number?",
+      "answer": "Yes. GSTIN is the formal name for what most people simply call their GST number."
+    },
+    {
+      "question": "What happens if the customer GSTIN on an invoice is wrong?",
+      "answer": "The invoice will not match in your customer's returns, so they cannot claim input tax credit on it. You will usually need to issue a corrected document."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "gst",
+    "tax-invoice",
+    "pan",
+    "input-tax-credit"
+  ]
+}

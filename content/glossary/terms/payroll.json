@@ -1,0 +1,52 @@
+{
+  "slug": "payroll",
+  "term": "Payroll",
+  "category": "payroll-hr",
+  "aliases": [
+    "salary processing"
+  ],
+  "short": "The process of paying staff and handling every statutory deduction.",
+  "seoTitle": "Payroll — Meaning and Example for Businesses",
+  "metaDescription": "The process of paying staff and handling every statutory deduction. Late statutory deposits attract interest and penalties regardless of why the delay happened.",
+  "updated": "2026-08-07",
+  "definition": "Payroll is the whole process of paying employees: calculating gross pay, applying statutory deductions such as provident fund, ESI, professional tax and TDS, paying net salary, and depositing and reporting the deductions.",
+  "bodyHtml": "<h2>Why Payroll matters</h2><p>Payroll is the largest recurring payment most businesses make and the one with the tightest deadlines. Late statutory deposits attract interest and penalties regardless of why the delay happened.</p><h2>How Payroll works in practice</h2><p>Fix a monthly calendar: attendance cut-off, payslip issue, salary payment, statutory deposits and returns. Keep attendance and payroll on one record, since reconstructing a month of attendance later is where errors enter.</p>",
+  "faq": [
+    {
+      "question": "What are the main statutory deductions in India?",
+      "answer": "Provident fund, ESI where applicable, professional tax in states that levy it, and TDS on salary above the taxable threshold."
+    },
+    {
+      "question": "Do small businesses need formal payroll?",
+      "answer": "Once there are employees, yes. Payslips and records are both a legal requirement and the only defence in a dispute."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "ctc",
+    "gross-salary",
+    "take-home-salary",
+    "payslip"
+  ]
+}

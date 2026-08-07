@@ -1,0 +1,54 @@
+{
+  "slug": "role-based-access",
+  "term": "Role-Based Access",
+  "category": "pos-tech",
+  "aliases": [
+    "user roles",
+    "access control",
+    "user permissions"
+  ],
+  "short": "Giving each user only the access their job requires.",
+  "seoTitle": "Role-Based Access — Meaning and Example for Businesses",
+  "metaDescription": "Giving each user only the access their job requires. Each user logs in as themselves. Shared logins destroy accountability.",
+  "updated": "2026-08-07",
+  "definition": "Role-based access assigns permissions by role rather than by person — a cashier bills, a manager approves discounts and voids, an owner sees reports and settings. Each user logs in as themselves.",
+  "bodyHtml": "<h2>Why Role-Based Access matters</h2><p>Shared logins destroy accountability. Without individual users, no void, discount or price override can be traced to anyone, and the audit trail becomes decorative.</p><h2>How Role-Based Access works in practice</h2><p>Give each person their own login, restrict discounts, voids and price edits to supervisors, and review those actions weekly. Remove access the same day someone leaves.</p>",
+  "faq": [
+    {
+      "question": "Why not use one shared login for the counter?",
+      "answer": "Because every action then belongs to everybody, and no discrepancy can be traced."
+    },
+    {
+      "question": "Which actions should require approval?",
+      "answer": "Discounts, voids after printing, price overrides and back-dated entries."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "audit-trail",
+    "comps-and-voids",
+    "multi-outlet-management",
+    "point-of-sale"
+  ]
+}

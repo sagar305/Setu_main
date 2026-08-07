@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CustomerLedgerTool } from "@/components/tools/CustomerLedger/CustomerLedgerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Customer Ledger — Digital Udhaar Khata | Setu",
@@ -93,6 +94,9 @@ export default function CustomerLedgerPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="customer-ledger" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="customer-ledger" />
       </section>
     </>
   );

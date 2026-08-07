@@ -1,0 +1,53 @@
+{
+  "slug": "sac-code",
+  "term": "SAC Code",
+  "category": "gst-tax",
+  "aliases": [
+    "Services Accounting Code",
+    "SAC"
+  ],
+  "short": "The service classification code that fixes the GST rate on a service.",
+  "seoTitle": "SAC Code — Meaning and Example for Businesses",
+  "metaDescription": "A SAC code, or Services Accounting Code, classifies services for GST the way HSN codes classify goods. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A SAC code, or Services Accounting Code, classifies services for GST the way HSN codes classify goods. Restaurant service, consultancy, transport and repairs each sit under their own SAC, and the code determines the applicable rate.",
+  "bodyHtml": "<h2>Why SAC Code matters</h2><p>Service businesses that leave SAC codes off invoices create the same filing gap that missing HSN codes create for goods sellers, and inconsistent codes across bills make the return summary impossible to reconcile.</p><h2>How SAC Code works in practice</h2><p>Set the SAC on each service line in your catalogue. Restaurants commonly bill dine-in service under 996331 and use a separate code for outdoor catering, so keeping them apart at the item level saves rework later.</p>",
+  "faq": [
+    {
+      "question": "What SAC code do restaurants use?",
+      "answer": "Dine-in restaurant service is commonly billed under SAC 996331, with different codes for catering and other food service arrangements."
+    },
+    {
+      "question": "Do I need both HSN and SAC codes?",
+      "answer": "Only if you sell both goods and services — for example a cafe that also retails packaged coffee beans."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "hsn-code",
+    "gst",
+    "tax-invoice",
+    "gstin"
+  ]
+}

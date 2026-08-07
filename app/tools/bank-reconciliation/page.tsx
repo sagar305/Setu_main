@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BankReconciliationTool } from "@/components/tools/bookkeeping/BankReconciliationTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Bank Reconciliation Tool | Setu",
@@ -75,6 +76,9 @@ export default function BankReconciliationPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <BankReconciliationTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="bank-reconciliation" />
       </section>
     </>
   );

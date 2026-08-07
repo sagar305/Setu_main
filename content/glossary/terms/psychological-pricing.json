@@ -1,0 +1,52 @@
+{
+  "slug": "psychological-pricing",
+  "term": "Psychological Pricing",
+  "category": "pricing-profit",
+  "aliases": [
+    "charm pricing"
+  ],
+  "short": "Setting prices to read cheaper than they are.",
+  "seoTitle": "Psychological Pricing — Meaning and Example for Businesses",
+  "metaDescription": "Psychological pricing sets prices at figures that read cheaper than they are — ₹199 instead of ₹200, or dropping the currency symbol on a menu.",
+  "updated": "2026-08-07",
+  "definition": "Psychological pricing sets prices at figures that read cheaper than they are — ₹199 instead of ₹200, or dropping the currency symbol on a menu. It works on how price is perceived rather than on what it costs.",
+  "bodyHtml": "<h2>Why Psychological Pricing matters</h2><p>The technique is nearly free and measurably effective in consumer settings, and it also shapes comparison: an expensive item placed next to a mid-priced one makes the latter look reasonable.</p><h2>How Psychological Pricing works in practice</h2><p>Use charm endings in retail and casual dining, and round numbers in premium settings where value signals matter more. Menu design compounds the effect through position and the absence of a currency column.</p>",
+  "faq": [
+    {
+      "question": "Does ₹199 really sell better than ₹200?",
+      "answer": "In consumer contexts it generally does. In premium and B2B settings it can cheapen the offer."
+    },
+    {
+      "question": "Should menus show the rupee symbol?",
+      "answer": "Many restaurants drop it deliberately, since removing the currency cue softens price comparison."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "price-elasticity",
+    "menu-engineering",
+    "selling-price",
+    "bundle-pricing"
+  ]
+}

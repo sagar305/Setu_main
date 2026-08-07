@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ProfitDashboardTool } from "@/components/tools/ProfitDashboard/ProfitDashboardTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Profit Dashboard | Sales Minus Real Costs | Setu",
@@ -92,6 +93,9 @@ export default function ProfitDashboardPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="profit-dashboard" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="profit-dashboard" />
       </section>
     </>
   );

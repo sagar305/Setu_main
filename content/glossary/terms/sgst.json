@@ -1,0 +1,58 @@
+{
+  "slug": "sgst",
+  "term": "SGST",
+  "category": "gst-tax",
+  "aliases": [
+    "State GST",
+    "State Goods and Services Tax",
+    "UTGST"
+  ],
+  "short": "The state government's half of GST on a sale within one state.",
+  "seoTitle": "SGST — Meaning, Formula and Example",
+  "metaDescription": "SGST is the State Goods and Services Tax — the half of GST on an intra-state supply that goes to the state where the supply happens.",
+  "updated": "2026-08-07",
+  "definition": "SGST is the State Goods and Services Tax — the half of GST on an intra-state supply that goes to the state where the supply happens. Union territories charge the equivalent UTGST instead, at the same rate.",
+  "bodyHtml": "<h2>Why SGST matters</h2><p>SGST is what makes your local sales revenue for your own state government, and it is the head your state authority checks during scrutiny. It must be printed and filed separately from CGST even though the two are always equal.</p><h2>SGST formula</h2><p class=\"glossary-formula\">SGST = Taxable value × (GST rate ÷ 2) ÷ 100</p><p>Equal to CGST on the same invoice line, and replaced by UTGST in union territories.</p><h2>How SGST works in practice</h2><p>Because SGST follows the place of supply rather than your office address, a branch billing from another state charges that state's SGST. Multi-outlet businesses usually register separately in each state for exactly this reason.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between SGST and UTGST?",
+      "answer": "They work identically. UTGST applies in union territories without their own legislature, SGST applies in states."
+    },
+    {
+      "question": "Who receives SGST collected on my bills?",
+      "answer": "The state where the supply takes place, determined by the place of supply rules rather than by where your head office is."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cgst",
+    "igst",
+    "place-of-supply",
+    "gst"
+  ],
+  "formula": {
+    "expression": "SGST = Taxable value × (GST rate ÷ 2) ÷ 100",
+    "note": "Equal to CGST on the same invoice line, and replaced by UTGST in union territories."
+  }
+}

@@ -145,3 +145,27 @@ body {
   color: #0E1124;
   font-weight: 700;
 }
+
+/* Glossary — the formula callout inside a term's body, and the inline links the
+   auto-linker injects into blog posts, calculator copy and glossary entries. */
+.glossary-formula {
+  border-left: 3px solid #26306B;
+  background-color: rgba(38, 48, 107, 0.05);
+  border-radius: 0.5rem;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  color: #0E1124;
+  line-height: 1.6;
+}
+
+.glossary-link {
+  color: #26306B;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+.glossary-link:hover {
+  text-decoration-style: solid;
+}

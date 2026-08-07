@@ -1,0 +1,52 @@
+{
+  "slug": "purchase-order",
+  "term": "Purchase Order",
+  "category": "retail-inventory",
+  "aliases": [
+    "PO"
+  ],
+  "short": "A formal order to a supplier stating what you agreed to buy.",
+  "seoTitle": "Purchase Order — Meaning and Example for Businesses",
+  "metaDescription": "A purchase order is a document sent to a supplier specifying items, quantities, agreed rates, delivery date and terms. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A purchase order is a document sent to a supplier specifying items, quantities, agreed rates, delivery date and terms. Accepted, it becomes the commercial agreement the delivery and invoice are checked against.",
+  "bodyHtml": "<h2>Why Purchase Order matters</h2><p>Without a PO, disputes come down to memory. It is also the only clean way to catch a supplier billing above the agreed rate, which is common and rarely deliberate.</p><h2>How Purchase Order works in practice</h2><p>Raise a numbered PO for anything above a threshold you set, and match the invoice to it before payment. Where rates were negotiated verbally, the PO is what records them.</p>",
+  "faq": [
+    {
+      "question": "Do small businesses need purchase orders?",
+      "answer": "For regular suppliers and larger values, yes. The discipline pays for itself the first time a rate is billed wrongly."
+    },
+    {
+      "question": "What if the supplier delivers more than ordered?",
+      "answer": "Record the actual receipt, and either return the excess or agree a revised order — do not pay on the invoice alone."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "grn",
+    "purchase-price-variance",
+    "lead-time",
+    "quotation"
+  ]
+}

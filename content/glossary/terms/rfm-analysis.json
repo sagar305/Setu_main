@@ -1,0 +1,52 @@
+{
+  "slug": "rfm-analysis",
+  "term": "RFM Analysis",
+  "category": "growth-marketing",
+  "aliases": [
+    "recency frequency monetary analysis"
+  ],
+  "short": "Scoring customers by recency, frequency and spend.",
+  "seoTitle": "RFM Analysis — Meaning and Example for Businesses",
+  "metaDescription": "Scoring customers by recency, frequency and spend. It turns a customer list into a priority list. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "RFM analysis scores each customer on three axes — how recently they bought, how often, and how much they spend — and groups them into segments that deserve different treatment.",
+  "bodyHtml": "<h2>Why RFM Analysis matters</h2><p>It turns a customer list into a priority list. The customers worth a personal call, a win-back offer or nothing at all are usually obvious once scored, and invisible before.</p><h2>How RFM Analysis works in practice</h2><p>Score each axis from one to five and combine them. High recency and frequency are your regulars; high monetary value with poor recency is the win-back list, and usually the most profitable campaign you can run.</p>",
+  "faq": [
+    {
+      "question": "What data does RFM need?",
+      "answer": "Only the customer identifier, purchase dates and amounts — a phone number at billing is enough."
+    },
+    {
+      "question": "Which segment should I contact first?",
+      "answer": "High-value customers who have not returned recently. They already like you and have simply stopped."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "cohort-analysis",
+    "customer-lifetime-value",
+    "retention-rate",
+    "loyalty-program"
+  ]
+}

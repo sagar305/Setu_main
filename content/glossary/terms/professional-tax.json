@@ -1,0 +1,53 @@
+{
+  "slug": "professional-tax",
+  "term": "Professional Tax",
+  "category": "payroll-hr",
+  "aliases": [
+    "PT",
+    "P Tax"
+  ],
+  "short": "A small state-level tax deducted from salaries.",
+  "seoTitle": "Professional Tax — Meaning and Example for Businesses",
+  "metaDescription": "Professional tax is a state-level tax on employment, deducted from salary by the employer and paid to the state government.",
+  "updated": "2026-08-07",
+  "definition": "Professional tax is a state-level tax on employment, deducted from salary by the employer and paid to the state government. Rates, slabs and applicability vary by state, and some states do not levy it at all.",
+  "bodyHtml": "<h2>Why Professional Tax matters</h2><p>The amounts are small but the compliance is real: registration, monthly or annual deposits and returns, per state where you employ people. Multi-state employers routinely miss a state.</p><h2>How Professional Tax works in practice</h2><p>Register in each state where you have employees, apply that state's slab, and deposit on its schedule. Payroll software handles the variation better than a spreadsheet does.</p>",
+  "faq": [
+    {
+      "question": "Which states levy professional tax?",
+      "answer": "Several states including Maharashtra, Karnataka, West Bengal and Tamil Nadu; others do not levy it at all."
+    },
+    {
+      "question": "Who deposits professional tax?",
+      "answer": "The employer deducts it from salary and deposits it with the state."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "take-home-salary",
+    "payroll",
+    "tds",
+    "gross-salary"
+  ]
+}

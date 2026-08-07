@@ -1,0 +1,57 @@
+{
+  "slug": "debt-to-equity-ratio",
+  "term": "Debt-to-Equity Ratio",
+  "category": "accounting",
+  "aliases": [
+    "debt equity ratio",
+    "D/E ratio"
+  ],
+  "short": "How much of the business is funded by debt versus owners' money.",
+  "seoTitle": "Debt-to-Equity Ratio — Meaning, Formula and Example",
+  "metaDescription": "The debt-to-equity ratio compares total borrowings with owners' equity, showing how much of the business is financed by lenders rather than by its owners.",
+  "updated": "2026-08-07",
+  "definition": "The debt-to-equity ratio compares total borrowings with owners' equity, showing how much of the business is financed by lenders rather than by its owners. Higher means more leverage and more risk.",
+  "bodyHtml": "<h2>Why Debt-to-Equity Ratio matters</h2><p>Leverage magnifies both directions. Cheap borrowing lifts returns while trade is good and forces repayments that do not pause when trade is not.</p><h2>Debt-to-Equity Ratio formula</h2><p class=\"glossary-formula\">Debt-to-equity = Total debt ÷ Shareholders' equity</p><p>Interest coverage = operating profit ÷ interest expense.</p><h2>How Debt-to-Equity Ratio works in practice</h2><p>Read it with interest coverage, since the ability to service debt matters more than the ratio itself. Lenders usually set covenants around both.</p>",
+  "faq": [
+    {
+      "question": "What is a safe debt-to-equity ratio?",
+      "answer": "It varies widely by sector; asset-heavy businesses sustain more debt than service ones."
+    },
+    {
+      "question": "Should owner loans count as debt?",
+      "answer": "Formally yes, though lenders often treat long-term owner funding as quasi-equity."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "current-ratio",
+    "working-capital",
+    "emi",
+    "retained-earnings"
+  ],
+  "formula": {
+    "expression": "Debt-to-equity = Total debt ÷ Shareholders' equity",
+    "note": "Interest coverage = operating profit ÷ interest expense."
+  }
+}

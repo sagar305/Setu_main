@@ -1,0 +1,53 @@
+{
+  "slug": "hsn-code",
+  "term": "HSN Code",
+  "category": "gst-tax",
+  "aliases": [
+    "Harmonised System of Nomenclature",
+    "HSN"
+  ],
+  "short": "The international product code that fixes the GST rate on goods.",
+  "seoTitle": "HSN Code — Meaning and Example for Businesses",
+  "metaDescription": "An HSN code is a numeric code from the Harmonised System of Nomenclature that classifies a product for tax purposes. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "An HSN code is a numeric code from the Harmonised System of Nomenclature that classifies a product for tax purposes. GST rates are mapped to HSN codes, so the code you assign a product decides the rate it is billed at and the summary you report in returns.",
+  "bodyHtml": "<h2>Why HSN Code matters</h2><p>Invoices above the prescribed turnover thresholds must carry HSN codes, and the HSN summary is a required section of GSTR-1. Products stored without codes force a manual scramble at filing time.</p><h2>How HSN Code works in practice</h2><p>Assign the code once on the product master in your catalogue rather than typing it per invoice. Four, six or eight digits are required depending on your turnover, so pick the depth your slab needs and stay consistent.</p><h2>Worked example</h2><p>Packaged namkeen and similar snacks are commonly classified under HSN 2106, which then carries that heading's GST rate on every bill.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between HSN and SAC codes?",
+      "answer": "HSN codes classify goods; SAC codes classify services. A restaurant billing food service uses SAC, a shop selling packaged goods uses HSN."
+    },
+    {
+      "question": "How many HSN digits do I need on an invoice?",
+      "answer": "It depends on your annual turnover slab — smaller businesses report fewer digits, larger ones report six digits or more."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "sac-code",
+    "gst",
+    "tax-invoice",
+    "taxable-value"
+  ]
+}

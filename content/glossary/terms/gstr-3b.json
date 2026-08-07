@@ -1,0 +1,52 @@
+{
+  "slug": "gstr-3b",
+  "term": "GSTR-3B",
+  "category": "gst-tax",
+  "aliases": [
+    "summary return"
+  ],
+  "short": "The summary return where GST liability is declared and paid.",
+  "seoTitle": "GSTR-3B — Meaning and Example for Businesses",
+  "metaDescription": "The summary return where GST liability is declared and paid. Unlike GSTR-1 it is summarised rather than invoice-wise. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "GSTR-3B is the periodic summary return that declares total outward supplies, input tax credit claimed and tax payable, and through which the payment is actually made. Unlike GSTR-1 it is summarised rather than invoice-wise.",
+  "bodyHtml": "<h2>Why GSTR-3B matters</h2><p>GSTR-3B is where money leaves your account, and the figures in it are matched against GSTR-1 and your auto-drafted credit statement. Persistent mismatches are one of the fastest routes to a notice.</p><h2>How GSTR-3B works in practice</h2><p>Reconcile three numbers before filing: sales as billed, sales as reported in GSTR-1, and credit as available in GSTR-2B. Doing this monthly turns a year-end reconciliation project into a ten-minute check.</p>",
+  "faq": [
+    {
+      "question": "Do I file both GSTR-1 and GSTR-3B?",
+      "answer": "Yes. GSTR-1 reports invoice details, GSTR-3B declares and pays the summarised liability for the period."
+    },
+    {
+      "question": "What happens if GSTR-3B is filed late?",
+      "answer": "Late fees accrue per day and interest applies on the unpaid tax, and subsequent filings can be blocked until the backlog is cleared."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-1",
+    "gstr-2b",
+    "input-tax-credit",
+    "nil-return"
+  ]
+}

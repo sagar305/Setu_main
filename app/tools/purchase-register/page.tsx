@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PurchaseRegisterTool } from "@/components/tools/PurchaseRegister/PurchaseRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Purchase Register | Record Supplier Bills | Setu",
@@ -92,6 +93,9 @@ export default function PurchaseRegisterPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="purchase-register" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="purchase-register" />
       </section>
     </>
   );

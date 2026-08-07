@@ -1,0 +1,53 @@
+{
+  "slug": "cost-price",
+  "term": "Cost Price",
+  "category": "pricing-profit",
+  "aliases": [
+    "cost of purchase",
+    "buying price"
+  ],
+  "short": "What an item cost you before any margin is added.",
+  "seoTitle": "Cost Price — Meaning and Example for Businesses",
+  "metaDescription": "Cost price is what an item costs your business before any margin is added. The most common omission is freight, and the second is wastage.",
+  "updated": "2026-08-07",
+  "definition": "Cost price is what an item costs your business before any margin is added. For a retailer it is the purchase price plus the costs of getting the goods onto the shelf; for a kitchen it is the cost of the ingredients in the finished dish.",
+  "bodyHtml": "<h2>Why Cost Price matters</h2><p>Every pricing and margin figure is built on cost price, so an understated cost silently overstates profit across the whole catalogue. The most common omission is freight, and the second is wastage.</p><h2>How Cost Price works in practice</h2><p>Record cost against each purchase rather than relying on the last remembered rate, and revisit it whenever a supplier revises prices. Where costs move constantly, a weighted average of recent purchases is steadier than the latest invoice.</p>",
+  "faq": [
+    {
+      "question": "Should GST be part of cost price?",
+      "answer": "Not if you can claim it as input tax credit. If you cannot, the tax is a genuine cost and belongs in the figure."
+    },
+    {
+      "question": "What is the difference between cost price and landed cost?",
+      "answer": "Landed cost adds freight, duties and handling to the purchase price, so it is the fuller figure."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "landed-cost",
+    "selling-price",
+    "markup",
+    "weighted-average-cost"
+  ]
+}

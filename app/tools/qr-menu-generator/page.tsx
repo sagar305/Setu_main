@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
 import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free QR Menu Generator for Restaurants | No Signup",
@@ -329,6 +330,9 @@ export default function QrMenuGeneratorPage() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="qr-menu-generator" />
       </section>
     </>
   );

@@ -1,0 +1,53 @@
+{
+  "slug": "accrued-expense",
+  "term": "Accrued Expense",
+  "category": "accounting",
+  "aliases": [
+    "accrual",
+    "outstanding expense"
+  ],
+  "short": "A cost incurred but not yet billed or paid.",
+  "seoTitle": "Accrued Expense — Meaning and Example for Businesses",
+  "metaDescription": "A cost incurred but not yet billed or paid. Comparisons between months become meaningless. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "An accrued expense is a cost the business has already incurred but has not yet been billed or paid for — electricity consumed, salaries earned, or interest accumulated at period end.",
+  "bodyHtml": "<h2>Why Accrued Expense matters</h2><p>Leaving accruals out makes a month look more profitable than it was, and dumps the cost into whichever month the bill happens to arrive. Comparisons between months become meaningless.</p><h2>How Accrued Expense works in practice</h2><p>At each period end, list costs consumed but not invoiced, post them as accruals, and reverse them when the actual bill arrives. Rent, utilities, salaries and interest are the usual four.</p><h2>Worked example</h2><p>March electricity billed in April is accrued in March, so March carries the cost it actually consumed.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between an accrual and a provision?",
+      "answer": "An accrual is a known cost awaiting its bill; a provision is an estimate for an obligation whose amount is uncertain."
+    },
+    {
+      "question": "Do I need accruals for a small business?",
+      "answer": "For meaningful monthly comparison, yes — at least for the large recurring costs."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "prepaid-expense",
+    "provision",
+    "accrual-accounting",
+    "journal-entry"
+  ]
+}

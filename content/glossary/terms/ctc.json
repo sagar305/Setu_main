@@ -1,0 +1,57 @@
+{
+  "slug": "ctc",
+  "term": "CTC",
+  "category": "payroll-hr",
+  "aliases": [
+    "Cost to Company",
+    "cost to company"
+  ],
+  "short": "The employer's total annual cost of employing someone.",
+  "seoTitle": "CTC — Meaning, Formula and Example",
+  "metaDescription": "The employer's total annual cost of employing someone. It is not what the employee receives. See the formula, an example and the free Setu tools that use CTC.",
+  "updated": "2026-08-07",
+  "definition": "CTC, or cost to company, is the total annual cost of employing a person — salary, allowances, employer contributions to provident fund, gratuity provision, insurance and any benefits. It is not what the employee receives.",
+  "bodyHtml": "<h2>Why CTC matters</h2><p>The gap between CTC and take-home pay is the most common source of disappointment at joining. Stating both figures in the offer prevents a conversation that otherwise happens in week one.</p><h2>CTC formula</h2><p class=\"glossary-formula\">CTC = Gross salary + Employer PF + Gratuity provision + Insurance + Other benefits</p><p>Take-home is gross salary less employee deductions and tax.</p><h2>How CTC works in practice</h2><p>Build CTC from its components and show the employee the breakdown to net pay. Employer contributions and gratuity provisions belong in CTC because they are genuine costs, even though they never reach the bank account.</p><h2>Worked example</h2><p>A ₹6,00,000 CTC can translate to roughly ₹43,000–46,000 a month in hand, depending on structure and deductions.</p>",
+  "faq": [
+    {
+      "question": "Why is my take-home so much lower than CTC?",
+      "answer": "Employer contributions and provisions are part of CTC but never reach you, and employee deductions come out of the rest."
+    },
+    {
+      "question": "Should variable pay be in CTC?",
+      "answer": "Only if it is genuinely expected. Including an aggressive bonus target inflates CTC and damages trust."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "gross-salary",
+    "take-home-salary",
+    "basic-salary",
+    "provident-fund"
+  ],
+  "formula": {
+    "expression": "CTC = Gross salary + Employer PF + Gratuity provision + Insurance + Other benefits",
+    "note": "Take-home is gross salary less employee deductions and tax."
+  }
+}

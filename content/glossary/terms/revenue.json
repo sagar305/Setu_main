@@ -1,0 +1,57 @@
+{
+  "slug": "revenue",
+  "term": "Revenue",
+  "category": "pricing-profit",
+  "aliases": [
+    "turnover",
+    "sales revenue"
+  ],
+  "short": "The total value of what you sold before any costs.",
+  "seoTitle": "Revenue — Meaning, Formula and Example",
+  "metaDescription": "Revenue is the total value of goods and services sold in a period, before any costs are deducted. The total value of what you sold before any costs.",
+  "updated": "2026-08-07",
+  "definition": "Revenue is the total value of goods and services sold in a period, before any costs are deducted. It is also called turnover or top line, and in GST terms it maps to your outward supplies.",
+  "bodyHtml": "<h2>Why Revenue matters</h2><p>Revenue is the headline number everyone quotes and the least informative one on its own. Growing revenue with falling margin is a common and expensive way to get busier without earning more.</p><h2>Revenue formula</h2><p class=\"glossary-formula\">Net revenue = Gross sales − Returns − Discounts</p><p>Excludes GST collected, which is not income but tax held on the government's behalf.</p><h2>How Revenue works in practice</h2><p>Read revenue net of returns and discounts, and separate it by channel — dine-in, delivery, wholesale — because each has its own cost structure. Revenue also sets GST registration and filing thresholds.</p>",
+  "faq": [
+    {
+      "question": "Does revenue include GST?",
+      "answer": "No. Tax collected is a liability, not income, so revenue is measured net of it."
+    },
+    {
+      "question": "Is revenue the same as cash received?",
+      "answer": "Not under accrual accounting. Credit sales are revenue when billed, whatever date the money arrives."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gross-sales",
+    "net-sales",
+    "gross-profit",
+    "accrual-accounting"
+  ],
+  "formula": {
+    "expression": "Net revenue = Gross sales − Returns − Discounts",
+    "note": "Excludes GST collected, which is not income but tax held on the government's behalf."
+  }
+}

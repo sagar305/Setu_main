@@ -1,0 +1,53 @@
+{
+  "slug": "token-system",
+  "term": "Token System",
+  "category": "pos-tech",
+  "aliases": [
+    "token number",
+    "order token"
+  ],
+  "short": "Numbered tokens that tell customers when their order is ready.",
+  "seoTitle": "Token System — Meaning and Example for Businesses",
+  "metaDescription": "A token system issues a number with each order and calls or displays it when the order is ready. Both slow service more than the kitchen does.",
+  "updated": "2026-08-07",
+  "definition": "A token system issues a number with each order and calls or displays it when the order is ready. It is standard in quick service restaurants, food courts and pharmacy counters.",
+  "bodyHtml": "<h2>Why Token System matters</h2><p>Tokens remove crowding at the counter and the constant interruption of customers asking whether their order is ready. Both slow service more than the kitchen does.</p><h2>How Token System works in practice</h2><p>Display the token prominently, keep the sequence visible, and show an approximate wait where possible. Crowds form when people cannot see progress, not merely when they are waiting.</p>",
+  "faq": [
+    {
+      "question": "Do I need a display screen for tokens?",
+      "answer": "It helps at volume. A printed token and a called number work perfectly well at smaller counters."
+    },
+    {
+      "question": "How is a token different from a queue system?",
+      "answer": "A token orders the service sequence; a queue system also manages waiting, estimates and notifications."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "queue-management",
+    "qsr",
+    "ticket-time",
+    "kitchen-display-system"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "net-profit",
+  "term": "Net Profit",
+  "category": "pricing-profit",
+  "aliases": [
+    "bottom line",
+    "net income"
+  ],
+  "short": "What remains after every cost, including tax and interest.",
+  "seoTitle": "Net Profit — Meaning, Formula and Example",
+  "metaDescription": "Net profit is what remains of revenue after every cost is deducted — direct costs, operating expenses, depreciation, interest and tax.",
+  "updated": "2026-08-07",
+  "definition": "Net profit is what remains of revenue after every cost is deducted — direct costs, operating expenses, depreciation, interest and tax. It is the bottom line in the strictest sense, and the figure that ultimately belongs to the owners.",
+  "bodyHtml": "<h2>Why Net Profit matters</h2><p>Net profit is the only measure that says whether the business as a whole made money. Healthy gross margins routinely hide a net loss when rent, salaries and interest are counted properly.</p><h2>Net Profit formula</h2><p class=\"glossary-formula\">Net profit = Gross profit − Operating expenses − Depreciation − Interest − Tax</p><p>Expressed over revenue it becomes net profit margin.</p><h2>How Net Profit works in practice</h2><p>Read net profit alongside cash flow, not instead of it. A business can be profitable on paper and still be unable to pay salaries if customers have not settled their invoices.</p>",
+  "faq": [
+    {
+      "question": "Why is my net profit positive but my bank balance falling?",
+      "answer": "Profit is not cash. Receivables, stock purchases, loan principal repayments and owner drawings all consume cash without appearing as expenses."
+    },
+    {
+      "question": "Is depreciation deducted before net profit?",
+      "answer": "Yes. It is a real cost of using up assets, even though no cash moves in that month."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gross-profit",
+    "ebitda",
+    "operating-expense",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "Net profit = Gross profit − Operating expenses − Depreciation − Interest − Tax",
+    "note": "Expressed over revenue it becomes net profit margin."
+  }
+}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  createGlossaryLinker,
   getBlogCategoryUrl,
   getBlogConnectedTools,
   getBlogContent,
@@ -110,7 +111,10 @@ export default async function BlogPostPage({
   const post = getBlogPostBySlug(slug);
   if (!post || slugifyCategory(post.category) !== category) notFound();
 
-  const { html, headings } = extractHeadings(post.bodyHtml);
+  // Glossary terms used in the article body link to their definitions — first
+  // mention only, capped, and never inside headings or existing links.
+  const glossary = createGlossaryLinker({ maxLinks: 12 });
+  const { html, headings } = extractHeadings(glossary.html(post.bodyHtml));
   const latestPosts = getLatestBlogPosts(5, post.slug);
   const relatedPosts = getRelatedBlogPostsByCategory(post.category, post.slug, 4);
   const connectedTools = getBlogConnectedTools(post).slice(0, 5);

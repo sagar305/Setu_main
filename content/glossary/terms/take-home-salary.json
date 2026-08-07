@@ -1,0 +1,58 @@
+{
+  "slug": "take-home-salary",
+  "term": "Take-Home Salary",
+  "category": "payroll-hr",
+  "aliases": [
+    "net salary",
+    "in-hand salary",
+    "net pay"
+  ],
+  "short": "What actually reaches the employee's bank account.",
+  "seoTitle": "Take-Home Salary — Meaning, Formula and Example",
+  "metaDescription": "Take-home salary is what actually reaches the bank account after every deduction — provident fund, ESI, professional tax, TDS and any recoveries.",
+  "updated": "2026-08-07",
+  "definition": "Take-home salary is what actually reaches the bank account after every deduction — provident fund, ESI, professional tax, TDS and any recoveries. It is also called net or in-hand salary.",
+  "bodyHtml": "<h2>Why Take-Home Salary matters</h2><p>Take-home is the only number an employee can spend, which is why offers stated only in CTC create friction. It also changes across the year as TDS is adjusted.</p><h2>Take-Home Salary formula</h2><p class=\"glossary-formula\">Take-home = Gross salary − PF − ESI − Professional tax − TDS − Other deductions</p><p>Employer contributions never form part of take-home.</p><h2>How Take-Home Salary works in practice</h2><p>Show the full path from CTC to net pay in the offer and on every payslip. Where take-home matters more to a candidate than headline CTC, the salary structure can often be adjusted to help.</p>",
+  "faq": [
+    {
+      "question": "Why does my take-home change month to month?",
+      "answer": "Usually TDS adjustments as the year progresses, or variable components such as overtime and incentives."
+    },
+    {
+      "question": "Can take-home be increased without raising CTC?",
+      "answer": "Sometimes, by restructuring components — though it may reduce retirement savings, so the trade-off should be explained."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "gross-salary",
+    "ctc",
+    "provident-fund",
+    "professional-tax"
+  ],
+  "formula": {
+    "expression": "Take-home = Gross salary − PF − ESI − Professional tax − TDS − Other deductions",
+    "note": "Employer contributions never form part of take-home."
+  }
+}

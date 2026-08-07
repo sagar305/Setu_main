@@ -1,0 +1,56 @@
+{
+  "slug": "unit-economics",
+  "term": "Unit Economics",
+  "category": "pricing-profit",
+  "aliases": [
+    "per-unit economics"
+  ],
+  "short": "The profit and cost of a single sale, order or customer.",
+  "seoTitle": "Unit Economics — Meaning, Formula and Example",
+  "metaDescription": "Unit economics is the profit and loss of one unit — a single order, cover, subscription or customer — with all the costs that unit genuinely triggers.",
+  "updated": "2026-08-07",
+  "definition": "Unit economics is the profit and loss of one unit — a single order, cover, subscription or customer — with all the costs that unit genuinely triggers. It answers whether growth makes the business better or merely bigger.",
+  "bodyHtml": "<h2>Why Unit Economics matters</h2><p>Businesses with negative unit economics get worse as they grow. A delivery order that loses money after commission, packaging and discount loses more money at ten times the volume.</p><h2>Unit Economics formula</h2><p class=\"glossary-formula\">Contribution per order = Order value − Direct cost − Commission − Packaging − Payment charges</p><p>A negative result means each additional order deepens the loss.</p><h2>How Unit Economics works in practice</h2><p>Take an average order value, deduct direct cost, commission, packaging, payment charges and the promotional discount, and see what is left. Do it separately per channel, because dine-in and aggregator orders are entirely different businesses.</p><h2>Worked example</h2><p>A ₹400 online order with ₹140 food cost, ₹90 commission, ₹25 packaging and a ₹40 discount contributes ₹105 before fixed costs.</p>",
+  "faq": [
+    {
+      "question": "Should marketing be in unit economics?",
+      "answer": "Include the acquisition cost attributable to that order if you are measuring a new customer rather than a repeat one."
+    },
+    {
+      "question": "Which channel should I compare against?",
+      "answer": "Compare each channel against itself over time; comparing dine-in with delivery on margin alone is misleading."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "contribution-margin",
+    "aggregator-commission",
+    "customer-acquisition-cost",
+    "average-order-value"
+  ],
+  "formula": {
+    "expression": "Contribution per order = Order value − Direct cost − Commission − Packaging − Payment charges",
+    "note": "A negative result means each additional order deepens the loss."
+  }
+}

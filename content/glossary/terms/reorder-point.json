@@ -1,0 +1,57 @@
+{
+  "slug": "reorder-point",
+  "term": "Reorder Point",
+  "category": "retail-inventory",
+  "aliases": [
+    "reorder level",
+    "ROP"
+  ],
+  "short": "The stock level at which you place the next order.",
+  "seoTitle": "Reorder Point — Meaning, Formula and Example",
+  "metaDescription": "The reorder point is the stock level at which a fresh order must be placed so that new stock arrives before the shelf runs empty.",
+  "updated": "2026-08-07",
+  "definition": "The reorder point is the stock level at which a fresh order must be placed so that new stock arrives before the shelf runs empty. It combines demand during the supplier's lead time with a safety buffer.",
+  "bodyHtml": "<h2>Why Reorder Point matters</h2><p>Ordering by memory produces both stockouts and overstock, often for the same items in different months. A reorder point turns purchasing into a rule rather than a recollection.</p><h2>Reorder Point formula</h2><p class=\"glossary-formula\">Reorder point = (Average daily usage × Lead time in days) + Safety stock</p><p>Use realistic lead times, including the days an order sits before dispatch.</p><h2>How Reorder Point works in practice</h2><p>Set it per item from average daily usage, the supplier's realistic lead time, and a safety stock that reflects how variable both are. Review it seasonally rather than annually.</p><h2>Worked example</h2><p>Selling 12 units a day with a 5-day lead time and 20 units of safety stock gives a reorder point of 80.</p>",
+  "faq": [
+    {
+      "question": "What if my supplier is unreliable?",
+      "answer": "Increase safety stock rather than the reorder point calculation itself, and track actual lead times per supplier."
+    },
+    {
+      "question": "Should reorder points change seasonally?",
+      "answer": "Yes. Festive demand can double daily usage, and a static reorder point guarantees a stockout at the worst time."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "safety-stock",
+    "lead-time",
+    "stockout",
+    "economic-order-quantity"
+  ],
+  "formula": {
+    "expression": "Reorder point = (Average daily usage × Lead time in days) + Safety stock",
+    "note": "Use realistic lead times, including the days an order sits before dispatch."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "dine-in",
+  "term": "Dine-In",
+  "category": "restaurant-ops",
+  "aliases": [
+    "dine in",
+    "eat-in"
+  ],
+  "short": "Food ordered and eaten on the premises.",
+  "seoTitle": "Dine-In — Meaning and Example for Businesses",
+  "metaDescription": "Dine-in is food ordered and consumed at the restaurant, as distinct from takeaway and delivery. Food ordered and eaten on the premises.",
+  "updated": "2026-08-07",
+  "definition": "Dine-in is food ordered and consumed at the restaurant, as distinct from takeaway and delivery. It carries the highest service cost and usually the highest average spend, and it has its own tax and operational rules.",
+  "bodyHtml": "<h2>Why Dine-In matters</h2><p>Dine-in, takeaway and delivery are three businesses sharing a kitchen. Their costs, margins and even tax treatment differ, so blending them into one profit figure hides which one is carrying the others.</p><h2>How Dine-In works in practice</h2><p>Tag every order with its channel at billing so sales, food cost and contribution can be read per channel. Table turnover, service labour and ambience costs belong to dine-in specifically.</p>",
+  "faq": [
+    {
+      "question": "Is GST different for dine-in and takeaway?",
+      "answer": "The applicable rate depends on the establishment type and the nature of the supply, so billing should be able to distinguish channels."
+    },
+    {
+      "question": "Why separate dine-in reporting?",
+      "answer": "Because delivery commission and packaging make online orders a structurally different margin, and a blended report hides it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "takeaway",
+    "covers",
+    "table-turnover-rate",
+    "aggregator-commission"
+  ]
+}

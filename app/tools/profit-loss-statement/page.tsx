@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ProfitLossTool } from "@/components/tools/statements/ProfitLossTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Profit & Loss Statement | Setu",
@@ -75,6 +76,9 @@ export default function ProfitLossStatementPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <ProfitLossTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="profit-loss-statement" />
       </section>
     </>
   );

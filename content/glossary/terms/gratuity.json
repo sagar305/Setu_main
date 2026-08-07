@@ -1,0 +1,56 @@
+{
+  "slug": "gratuity",
+  "term": "Gratuity",
+  "category": "payroll-hr",
+  "aliases": [
+    "gratuity payment"
+  ],
+  "short": "A lump sum paid to employees who complete long service.",
+  "seoTitle": "Gratuity — Meaning, Formula and Example",
+  "metaDescription": "Gratuity is a lump sum payable to an employee on leaving after completing the qualifying period of continuous service, generally five years.",
+  "updated": "2026-08-07",
+  "definition": "Gratuity is a lump sum payable to an employee on leaving after completing the qualifying period of continuous service, generally five years. It is calculated on last drawn basic pay plus dearness allowance and years served.",
+  "bodyHtml": "<h2>Why Gratuity matters</h2><p>Gratuity accrues silently from the first year and lands as a large payment years later. Businesses that never provide for it are hit by the whole amount at once, usually when several long-serving staff leave together.</p><h2>Gratuity formula</h2><p class=\"glossary-formula\">Gratuity = Last drawn basic plus DA × 15 ÷ 26 × Completed years of service</p><p>Fifteen days of wages for each completed year, using a 26-day month.</p><h2>How Gratuity works in practice</h2><p>Provide for the accruing liability annually rather than treating it as a surprise. In restaurants and retail, where long tenures are common among core staff, the accumulated liability can be substantial.</p><h2>Worked example</h2><p>₹30,000 last drawn basic after 7 years gives roughly ₹1,21,000.</p>",
+  "faq": [
+    {
+      "question": "Is gratuity payable before five years?",
+      "answer": "The qualifying period is generally five years of continuous service, with exceptions such as death or disablement."
+    },
+    {
+      "question": "Is gratuity taxable?",
+      "answer": "It is exempt up to prescribed limits, with the balance taxable as salary income."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    }
+  ],
+  "relatedTerms": [
+    "provident-fund",
+    "basic-salary",
+    "provision",
+    "ctc"
+  ],
+  "formula": {
+    "expression": "Gratuity = Last drawn basic plus DA × 15 ÷ 26 × Completed years of service",
+    "note": "Fifteen days of wages for each completed year, using a 26-day month."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "payback-period",
+  "term": "Payback Period",
+  "category": "payments-finance",
+  "aliases": [
+    "payback"
+  ],
+  "short": "How long an investment takes to return its own cost.",
+  "seoTitle": "Payback Period — Meaning, Formula and Example",
+  "metaDescription": "The payback period is the time an investment takes to generate enough cash to recover its initial cost. How long an investment takes to return its own cost.",
+  "updated": "2026-08-07",
+  "definition": "The payback period is the time an investment takes to generate enough cash to recover its initial cost. It is the simplest investment test and the one small businesses use most.",
+  "bodyHtml": "<h2>Why Payback Period matters</h2><p>Payback speaks the language of survival rather than of theory. For a business with limited cash, how fast money comes back often matters more than how much comes back eventually.</p><h2>Payback Period formula</h2><p class=\"glossary-formula\">Payback period = Initial investment ÷ Net cash inflow per period</p><p>Ignores everything that happens after payback, so pair it with ROI.</p><h2>How Payback Period works in practice</h2><p>Use monthly cash generated, not accounting profit, and compare payback against the asset's useful life. Anything that pays back close to the end of its life is a poor use of capital.</p><h2>Worked example</h2><p>A ₹3,00,000 machine generating ₹40,000 a month of extra cash pays back in about 7.5 months.</p>",
+  "faq": [
+    {
+      "question": "What payback period is acceptable?",
+      "answer": "Depends on the asset and your cash position — equipment paying back within a year is generally comfortable."
+    },
+    {
+      "question": "What does payback miss?",
+      "answer": "Everything after the payback point, and the time value of money, which is why NPV exists."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "roi",
+    "capital-expenditure",
+    "net-present-value",
+    "break-even-point"
+  ],
+  "formula": {
+    "expression": "Payback period = Initial investment ÷ Net cash inflow per period",
+    "note": "Ignores everything that happens after payback, so pair it with ROI."
+  }
+}

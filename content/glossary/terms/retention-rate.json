@@ -1,0 +1,56 @@
+{
+  "slug": "retention-rate",
+  "term": "Retention Rate",
+  "category": "growth-marketing",
+  "aliases": [
+    "customer retention rate"
+  ],
+  "short": "The share of customers who keep buying from you.",
+  "seoTitle": "Retention Rate — Meaning, Formula and Example",
+  "metaDescription": "Retention rate is the percentage of existing customers who continue to buy over a period. It is the complement of churn and the foundation of lifetime value.",
+  "updated": "2026-08-07",
+  "definition": "Retention rate is the percentage of existing customers who continue to buy over a period. It is the complement of churn and the foundation of lifetime value.",
+  "bodyHtml": "<h2>Why Retention Rate matters</h2><p>Retention is the cheapest growth there is. Keeping an existing customer costs a fraction of acquiring a new one, and retained customers usually spend more per visit.</p><h2>Retention Rate formula</h2><p class=\"glossary-formula\">Retention rate % = Customers retained at period end ÷ Customers at start × 100</p><p>Exclude new customers acquired during the period.</p><h2>How Retention Rate works in practice</h2><p>Improve it with the ordinary things: consistency, service recovery when something goes wrong, and a reason to come back. Measure it by cohort so a good month is not confused with a durable improvement.</p>",
+  "faq": [
+    {
+      "question": "What improves retention fastest?",
+      "answer": "Consistency and how failures are handled. A well-handled complaint often produces a more loyal customer than a flawless visit."
+    },
+    {
+      "question": "Is retention or acquisition more important?",
+      "answer": "Retention, almost always. It costs less and compounds, but it produces slower headline growth."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "churn-rate",
+    "repeat-rate",
+    "loyalty-program",
+    "customer-lifetime-value"
+  ],
+  "formula": {
+    "expression": "Retention rate % = Customers retained at period end ÷ Customers at start × 100",
+    "note": "Exclude new customers acquired during the period."
+  }
+}

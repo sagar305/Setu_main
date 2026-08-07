@@ -1,0 +1,53 @@
+{
+  "slug": "cheque-bounce",
+  "term": "Cheque Bounce",
+  "category": "payments-finance",
+  "aliases": [
+    "dishonoured cheque",
+    "cheque dishonour"
+  ],
+  "short": "A cheque returned unpaid, usually for insufficient funds.",
+  "seoTitle": "Cheque Bounce — Meaning and Example for Businesses",
+  "metaDescription": "A cheque bounce is a cheque returned unpaid by the bank, most often for insufficient funds or a signature mismatch. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A cheque bounce is a cheque returned unpaid by the bank, most often for insufficient funds or a signature mismatch. It carries bank charges for both parties and specific legal consequences in India.",
+  "bodyHtml": "<h2>Why Cheque Bounce matters</h2><p>A bounced cheque is both a cash flow event and a warning sign. Customers whose cheques bounce once frequently do so again, and the paperwork window for legal remedy is short.</p><h2>How Cheque Bounce works in practice</h2><p>Record the bounce and its charges against the customer, restore the outstanding invoice, and follow the statutory notice timeline if you intend to pursue it. Repeat offenders should move to advance payment.</p>",
+  "faq": [
+    {
+      "question": "What are the legal consequences of a bounced cheque in India?",
+      "answer": "Dishonour for insufficient funds is an offence under the Negotiable Instruments Act, subject to a strict notice and filing timeline."
+    },
+    {
+      "question": "Should I re-present a bounced cheque?",
+      "answer": "Once, if the customer confirms funds are available — but the invoice should stay open until it clears."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "bad-debt",
+    "credit-limit",
+    "accounts-receivable",
+    "bank-reconciliation"
+  ]
+}

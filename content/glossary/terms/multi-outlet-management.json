@@ -1,0 +1,53 @@
+{
+  "slug": "multi-outlet-management",
+  "term": "Multi-Outlet Management",
+  "category": "pos-tech",
+  "aliases": [
+    "multi-branch management",
+    "chain management"
+  ],
+  "short": "Running several locations with comparable data and control.",
+  "seoTitle": "Multi-Outlet Management — Meaning and Example for Businesses",
+  "metaDescription": "Running several locations with comparable data and control. Most multi-outlet problems are measurement problems first. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Multi-outlet management is running several branches with consistent processes and comparable reporting — shared menus and prices where appropriate, outlet-level costs, and one consolidated view.",
+  "bodyHtml": "<h2>Why Multi-Outlet Management matters</h2><p>Without comparable data, an owner cannot tell whether an outlet is genuinely weaker or simply reporting differently. Most multi-outlet problems are measurement problems first.</p><h2>How Multi-Outlet Management works in practice</h2><p>Standardise the item master, tax setup and expense categories across outlets before comparing anything. Track stock transfers between outlets properly, since untracked movements distort every outlet's margin.</p>",
+  "faq": [
+    {
+      "question": "Should each outlet have its own GST registration?",
+      "answer": "Registration is state-wise, so outlets in different states need separate registrations."
+    },
+    {
+      "question": "How do I compare outlets fairly?",
+      "answer": "Use percentages of sales rather than absolute figures, and account for rent and format differences."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "stock-transfer",
+    "central-kitchen",
+    "same-store-sales",
+    "role-based-access"
+  ]
+}

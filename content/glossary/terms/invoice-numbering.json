@@ -1,0 +1,53 @@
+{
+  "slug": "invoice-numbering",
+  "term": "Invoice Numbering",
+  "category": "gst-tax",
+  "aliases": [
+    "invoice series",
+    "invoice number series"
+  ],
+  "short": "The sequential series that identifies each invoice you issue.",
+  "seoTitle": "Invoice Numbering — Meaning and Example for Businesses",
+  "metaDescription": "Invoice numbering is the consecutive series a business uses to identify its invoices. The sequential series that identifies each invoice you issue.",
+  "updated": "2026-08-07",
+  "definition": "Invoice numbering is the consecutive series a business uses to identify its invoices. Under GST the series must be unique within a financial year and may run up to sixteen characters, with letters, digits, slashes and hyphens allowed.",
+  "bodyHtml": "<h2>Why Invoice Numbering matters</h2><p>Gaps, duplicates and restarts are among the first things scrutiny looks for, because they suggest bills issued outside the books. A clean series is also what makes credit notes and payment matching traceable.</p><h2>How Invoice Numbering works in practice</h2><p>Generate numbers from one system rather than several notebooks. Separate series per outlet or document type are fine as long as each is internally sequential and identifiable, such as OUT1/25-26/0001.</p><h2>Common mistakes with Invoice Numbering</h2><ul><li>Restarting numbering mid-year after switching billing systems.</li><li>Handwritten bills running in parallel with system-generated ones.</li><li>Reusing a cancelled invoice number for a different sale.</li></ul>",
+  "faq": [
+    {
+      "question": "Can I restart invoice numbers each financial year?",
+      "answer": "Yes, and it is the normal practice, provided the series is unique within that year."
+    },
+    {
+      "question": "What if an invoice is cancelled?",
+      "answer": "Leave the number cancelled in the series rather than reissuing it, and record the cancellation."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-invoice",
+    "credit-note",
+    "irn",
+    "audit-trail"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "overhead",
+  "term": "Overhead",
+  "category": "pricing-profit",
+  "aliases": [
+    "overheads",
+    "indirect cost"
+  ],
+  "short": "Running costs not tied to any one product or sale.",
+  "seoTitle": "Overhead — Meaning, Formula and Example",
+  "metaDescription": "Running costs not tied to any one product or sale. It sits below gross profit in the accounts. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Overhead is the cost of running the business that cannot be traced to a specific product or sale — rent, administration, utilities, software, professional fees. It sits below gross profit in the accounts.",
+  "bodyHtml": "<h2>Why Overhead matters</h2><p>Overhead is what gross profit has to cover before anything reaches the owner. Businesses usually control direct costs carefully and let overhead drift, which is why it deserves an annual line-by-line review.</p><h2>Overhead formula</h2><p class=\"glossary-formula\">Overhead recovery per unit = Total overhead ÷ Expected units sold</p><p>Recompute when volume assumptions change, or the recovery is silently wrong.</p><h2>How Overhead works in practice</h2><p>For pricing, overhead is often recovered as a percentage of sales or an allocation per unit. Rough allocation is fine; ignoring it entirely is not, because it makes every product look more profitable than it is.</p>",
+  "faq": [
+    {
+      "question": "Is overhead the same as fixed cost?",
+      "answer": "They overlap heavily but are not identical. Overhead is about traceability; fixed cost is about behaviour with volume."
+    },
+    {
+      "question": "How do I reduce overhead?",
+      "answer": "Start with the recurring subscriptions and service contracts nobody has reviewed in a year — that is usually the quickest win."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "fixed-cost",
+    "operating-expense",
+    "gross-profit",
+    "unit-economics"
+  ],
+  "formula": {
+    "expression": "Overhead recovery per unit = Total overhead ÷ Expected units sold",
+    "note": "Recompute when volume assumptions change, or the recovery is silently wrong."
+  }
+}

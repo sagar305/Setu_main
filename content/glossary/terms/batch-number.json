@@ -1,0 +1,53 @@
+{
+  "slug": "batch-number",
+  "term": "Batch Number",
+  "category": "retail-inventory",
+  "aliases": [
+    "lot number",
+    "batch code"
+  ],
+  "short": "A code identifying goods produced or received together.",
+  "seoTitle": "Batch Number — Meaning and Example for Businesses",
+  "metaDescription": "A batch number identifies a group of items manufactured or received together. Without it, a single bad consignment means checking or discarding everything.",
+  "updated": "2026-08-07",
+  "definition": "A batch number identifies a group of items manufactured or received together. It links a unit on the shelf back to its production run, supplier consignment and expiry date.",
+  "bodyHtml": "<h2>Why Batch Number matters</h2><p>Batch tracking is what makes a recall, a quality complaint or an expiry sweep manageable. Without it, a single bad consignment means checking or discarding everything.</p><h2>How Batch Number works in practice</h2><p>Capture the batch at receiving, keep it on the stock record, and print it on labels for own-packed goods. Pair it with expiry tracking so the oldest batch is always picked first.</p>",
+  "faq": [
+    {
+      "question": "Which businesses need batch tracking?",
+      "answer": "Food, pharmacy, cosmetics and anything with an expiry date or a regulatory recall obligation."
+    },
+    {
+      "question": "Is a batch number the same as a serial number?",
+      "answer": "No. A batch covers many units produced together; a serial number identifies one individual unit."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "expiry-tracking",
+    "fifo",
+    "grn",
+    "sku"
+  ]
+}

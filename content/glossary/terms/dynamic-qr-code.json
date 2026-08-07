@@ -1,0 +1,52 @@
+{
+  "slug": "dynamic-qr-code",
+  "term": "Dynamic QR Code",
+  "category": "payments-finance",
+  "aliases": [
+    "dynamic QR"
+  ],
+  "short": "A payment QR that already carries the exact bill amount.",
+  "seoTitle": "Dynamic QR Code — Meaning and Example for Businesses",
+  "metaDescription": "A dynamic QR code encodes the specific amount and reference for one transaction, so the customer scans and confirms without typing anything.",
+  "updated": "2026-08-07",
+  "definition": "A dynamic QR code encodes the specific amount and reference for one transaction, so the customer scans and confirms without typing anything. Each bill gets its own code.",
+  "bodyHtml": "<h2>Why Dynamic QR Code matters</h2><p>Typed amounts are where payment errors live — a missing zero, a wrong bill matched to a payment. A dynamic code removes both, and speeds up the queue at the same time.</p><h2>How Dynamic QR Code works in practice</h2><p>Generate the code from the bill at the moment of payment and include a reference so the credit can be matched back automatically. It is the standard for counters, table-side payment and delivery.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a dynamic and a static QR?",
+      "answer": "A dynamic code carries the amount and reference for one bill; a static code is a fixed display where the customer types the amount."
+    },
+    {
+      "question": "Do I need special hardware?",
+      "answer": "No. A dynamic code can be shown on the billing screen or printed on the receipt."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "static-qr-code",
+    "upi",
+    "settlement",
+    "table-turnover-rate"
+  ]
+}

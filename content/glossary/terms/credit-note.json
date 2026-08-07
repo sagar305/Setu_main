@@ -1,0 +1,53 @@
+{
+  "slug": "credit-note",
+  "term": "Credit Note",
+  "category": "gst-tax",
+  "aliases": [
+    "GST credit note",
+    "sales return note"
+  ],
+  "short": "A document that reduces the value of an invoice already issued.",
+  "seoTitle": "Credit Note — Meaning and Example for Businesses",
+  "metaDescription": "A credit note is issued by a supplier to reduce the value of an earlier invoice — for a return, a shortfall, a post-sale discount or an overcharge.",
+  "updated": "2026-08-07",
+  "definition": "A credit note is issued by a supplier to reduce the value of an earlier invoice — for a return, a shortfall, a post-sale discount or an overcharge. It reverses part or all of the original taxable value and the tax on it.",
+  "bodyHtml": "<h2>Why Credit Note matters</h2><p>Without a credit note, a return or discount never reaches your GST records, so you keep paying tax on revenue you did not retain. It is also what lets your customer reverse the corresponding credit cleanly.</p><h2>How Credit Note works in practice</h2><p>Reference the original invoice number and date on the note, and report it in the return for the period. There is a time limit tied to the annual return of the relevant financial year after which the tax adjustment is no longer available.</p>",
+  "faq": [
+    {
+      "question": "Is a credit note the same as a refund?",
+      "answer": "No. The credit note adjusts the documented value; the refund is the money actually returned, which may follow separately."
+    },
+    {
+      "question": "Can I issue a credit note for a discount given later?",
+      "answer": "Yes, subject to the conditions for post-sale discounts, including the customer reversing the related credit."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "credit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "debit-note",
+    "tax-invoice",
+    "gstr-1",
+    "sales-return"
+  ]
+}

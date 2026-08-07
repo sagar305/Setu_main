@@ -1,0 +1,52 @@
+{
+  "slug": "supplier",
+  "term": "Supplier",
+  "category": "retail-inventory",
+  "aliases": [
+    "vendor"
+  ],
+  "short": "A business you buy goods or services from.",
+  "seoTitle": "Supplier — Meaning and Example for Businesses",
+  "metaDescription": "A supplier, or vendor, is a business you buy goods or services from on agreed rates and terms. Supplier terms are as important to cash flow as customer terms.",
+  "updated": "2026-08-07",
+  "definition": "A supplier, or vendor, is a business you buy goods or services from on agreed rates and terms. Supplier records hold contact details, GSTIN, agreed prices, credit terms and the history of what has been bought and paid.",
+  "bodyHtml": "<h2>Why Supplier matters</h2><p>Supplier terms are as important to cash flow as customer terms. A supplier offering 30 days is financing your stock, while one demanding advance payment is being financed by you.</p><h2>How Supplier works in practice</h2><p>Keep a supplier master with GSTIN, credit terms, lead time and rate history, and reconcile balances periodically. Two suppliers per critical line is the cheapest insurance against a supply failure.</p>",
+  "faq": [
+    {
+      "question": "How many suppliers should I have per item?",
+      "answer": "At least two for anything critical, even if one gets most of the volume."
+    },
+    {
+      "question": "What should a supplier record contain?",
+      "answer": "GSTIN and PAN, contact details, agreed rates, credit terms, lead time, and the outstanding balance."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "vendor-reconciliation",
+    "purchase-order",
+    "accounts-payable",
+    "lead-time"
+  ]
+}

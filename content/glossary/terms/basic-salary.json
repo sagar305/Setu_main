@@ -1,0 +1,56 @@
+{
+  "slug": "basic-salary",
+  "term": "Basic Salary",
+  "category": "payroll-hr",
+  "aliases": [
+    "basic pay"
+  ],
+  "short": "The core fixed component that other pay elements are built on.",
+  "seoTitle": "Basic Salary — Meaning, Formula and Example",
+  "metaDescription": "Basic salary is the core fixed component of pay, before allowances. Wage regulations also limit how far it can be minimised.",
+  "updated": "2026-08-07",
+  "definition": "Basic salary is the core fixed component of pay, before allowances. Provident fund, gratuity, HRA limits, bonus and overtime are all calculated from it, which makes it the most consequential number in a salary structure.",
+  "bodyHtml": "<h2>Why Basic Salary matters</h2><p>Setting basic pay low reduces employer contributions in the short term and reduces the employee's retirement savings and gratuity in the long term. Wage regulations also limit how far it can be minimised.</p><h2>Basic Salary formula</h2><p class=\"glossary-formula\">PF contribution = Basic salary (plus DA where applicable) × 12%</p><p>Gratuity is also computed on basic plus DA.</p><h2>How Basic Salary works in practice</h2><p>Keep basic as a consistent share of gross across roles, and review it against current wage rules. Ad-hoc structures per employee become impossible to administer as headcount grows.</p>",
+  "faq": [
+    {
+      "question": "What percentage of gross should basic be?",
+      "answer": "Commonly around 40–50%, with wage regulations placing limits on how low it can go."
+    },
+    {
+      "question": "Why does basic salary matter so much?",
+      "answer": "Because provident fund, gratuity, bonus and overtime are all derived from it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "hra",
+    "provident-fund",
+    "gratuity",
+    "gross-salary"
+  ],
+  "formula": {
+    "expression": "PF contribution = Basic salary (plus DA where applicable) × 12%",
+    "note": "Gratuity is also computed on basic plus DA."
+  }
+}

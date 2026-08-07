@@ -1,0 +1,56 @@
+{
+  "slug": "days-sales-outstanding",
+  "term": "Days Sales Outstanding",
+  "category": "payments-finance",
+  "aliases": [
+    "DSO"
+  ],
+  "short": "The average number of days customers take to pay you.",
+  "seoTitle": "Days Sales Outstanding — Meaning, Formula and Example",
+  "metaDescription": "Days sales outstanding measures how long, on average, customers take to pay after being invoiced. DSO is the clearest early warning of a cash squeeze.",
+  "updated": "2026-08-07",
+  "definition": "Days sales outstanding measures how long, on average, customers take to pay after being invoiced. It converts the receivables balance into a number of days, which is far easier to act on than a rupee total.",
+  "bodyHtml": "<h2>Why Days Sales Outstanding matters</h2><p>DSO is the clearest early warning of a cash squeeze. It rises before the bank balance falls, so watching it gives you weeks of notice.</p><h2>Days Sales Outstanding formula</h2><p class=\"glossary-formula\">DSO = Accounts receivable ÷ Credit sales × Days in the period</p><p>Compare against your standard credit period to see the true slippage.</p><h2>How Days Sales Outstanding works in practice</h2><p>Track it monthly against your stated terms. A DSO well above the terms you agreed means collections, not credit policy, is where the problem sits.</p><h2>Worked example</h2><p>₹12,00,000 of receivables on ₹36,00,000 of quarterly credit sales is a DSO of about 30 days.</p>",
+  "faq": [
+    {
+      "question": "What is a good DSO?",
+      "answer": "Close to your stated payment terms. Terms of 30 days with a DSO of 55 means the terms are not being enforced."
+    },
+    {
+      "question": "How do I reduce DSO?",
+      "answer": "Invoice the same day, include a payment link, and follow up the day after due — most of the gain is in the first week."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "days-payable-outstanding",
+    "cash-conversion-cycle",
+    "accounts-receivable",
+    "aging-report"
+  ],
+  "formula": {
+    "expression": "DSO = Accounts receivable ÷ Credit sales × Days in the period",
+    "note": "Compare against your standard credit period to see the true slippage."
+  }
+}

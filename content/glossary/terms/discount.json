@@ -1,0 +1,56 @@
+{
+  "slug": "discount",
+  "term": "Discount",
+  "category": "pricing-profit",
+  "aliases": [
+    "price discount"
+  ],
+  "short": "A reduction from the normal price of a product or service.",
+  "seoTitle": "Discount — Meaning, Formula and Example",
+  "metaDescription": "A discount is a reduction from the normal price, offered to win a sale, clear stock, reward volume or settle an invoice early.",
+  "updated": "2026-08-07",
+  "definition": "A discount is a reduction from the normal price, offered to win a sale, clear stock, reward volume or settle an invoice early. It can be given at the time of billing or agreed afterwards, and the two are treated differently for tax.",
+  "bodyHtml": "<h2>Why Discount matters</h2><p>Discounts come straight out of margin, so a 10% discount on a 30% margin gives away a third of the profit on that sale. Volume rarely makes up the difference unless the extra sales are genuinely incremental.</p><h2>Discount formula</h2><p class=\"glossary-formula\">Discounted price = List price × (100 − discount %) ÷ 100</p><p>Successive discounts multiply rather than add: 10% then 10% is 19%, not 20%.</p><h2>How Discount works in practice</h2><p>Discounts allowed at the time of supply reduce the taxable value on the invoice. Discounts agreed later need a credit note to have the same effect, so ad-hoc post-sale reductions create tax you have already paid on money you never kept.</p><h2>Worked example</h2><p>A 15% discount on a ₹1,000 item priced at a 40% margin cuts the profit from ₹400 to ₹250.</p>",
+  "faq": [
+    {
+      "question": "How much extra volume does a discount need?",
+      "answer": "Enough to replace the lost contribution. Deep discounts on thin margins usually need multiples of the original volume."
+    },
+    {
+      "question": "Do discounts reduce GST payable?",
+      "answer": "Only if allowed at the time of supply on the invoice, or documented later through a credit note."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "markdown",
+    "taxable-value",
+    "credit-note",
+    "profit-margin"
+  ],
+  "formula": {
+    "expression": "Discounted price = List price × (100 − discount %) ÷ 100",
+    "note": "Successive discounts multiply rather than add: 10% then 10% is 19%, not 20%."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "expiry-tracking",
+  "term": "Expiry Tracking",
+  "category": "retail-inventory",
+  "aliases": [
+    "expiry date tracking",
+    "shelf life tracking"
+  ],
+  "short": "Monitoring shelf life so stock is used before it expires.",
+  "seoTitle": "Expiry Tracking — Meaning and Example for Businesses",
+  "metaDescription": "Monitoring shelf life so stock is used before it expires. Expired stock is a total loss and, in food and pharmacy, a compliance risk.",
+  "updated": "2026-08-07",
+  "definition": "Expiry tracking records the use-by or best-before date of each batch and flags items approaching it, so they can be sold, discounted or removed before they become worthless.",
+  "bodyHtml": "<h2>Why Expiry Tracking matters</h2><p>Expired stock is a total loss and, in food and pharmacy, a compliance risk. Most expiry write-offs are avoidable with a week's notice, which is exactly what tracking provides.</p><h2>How Expiry Tracking works in practice</h2><p>Store the expiry date with the batch at receiving, and review a near-expiry report weekly. Discounting seven days out recovers far more than discovering the problem on the expiry date itself.</p>",
+  "faq": [
+    {
+      "question": "How early should near-expiry stock be discounted?",
+      "answer": "Early enough for the remaining shelf life to sell the quantity you hold — typically one to two weeks for fast-moving food."
+    },
+    {
+      "question": "Can expired stock be returned to the supplier?",
+      "answer": "Sometimes, under agreed expiry return terms, which are worth negotiating for short shelf-life goods."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "batch-number",
+    "fifo",
+    "wastage",
+    "dead-stock"
+  ]
+}

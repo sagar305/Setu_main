@@ -1,0 +1,53 @@
+{
+  "slug": "consignment-stock",
+  "term": "Consignment Stock",
+  "category": "retail-inventory",
+  "aliases": [
+    "consignment inventory",
+    "sale or return"
+  ],
+  "short": "Supplier-owned stock you only pay for once it sells.",
+  "seoTitle": "Consignment Stock — Meaning and Example for Businesses",
+  "metaDescription": "Consignment stock sits in your store but remains the supplier's property until it is sold. The trade-off is usually a thinner margin.",
+  "updated": "2026-08-07",
+  "definition": "Consignment stock sits in your store but remains the supplier's property until it is sold. You pay only for what sells, and unsold goods go back rather than being written off.",
+  "bodyHtml": "<h2>Why Consignment Stock matters</h2><p>Consignment removes the cash risk of stocking new or slow lines, which is why it is common for books, jewellery and new brands entering a store. The trade-off is usually a thinner margin.</p><h2>How Consignment Stock works in practice</h2><p>Keep consignment goods identifiable and counted separately from owned stock, and reconcile sales with the supplier on an agreed cycle. It should not appear as your inventory on the balance sheet.</p>",
+  "faq": [
+    {
+      "question": "Is consignment stock my asset?",
+      "answer": "No. It belongs to the supplier until sold, so it should not be valued as your inventory."
+    },
+    {
+      "question": "What is the catch with consignment?",
+      "answer": "Margins are usually lower, and the counting and reconciliation work is real, especially across several suppliers."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "supplier",
+    "dead-stock",
+    "stock-take",
+    "working-capital"
+  ]
+}

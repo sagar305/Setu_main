@@ -1,0 +1,56 @@
+{
+  "slug": "net-sales",
+  "term": "Net Sales",
+  "category": "pricing-profit",
+  "aliases": [
+    "net turnover"
+  ],
+  "short": "Sales after returns, cancellations and discounts.",
+  "seoTitle": "Net Sales — Meaning, Formula and Example",
+  "metaDescription": "Net sales is gross sales minus returns, cancellations and discounts — the revenue a business actually retains from trading.",
+  "updated": "2026-08-07",
+  "definition": "Net sales is gross sales minus returns, cancellations and discounts — the revenue a business actually retains from trading. It is the figure gross profit is calculated against.",
+  "bodyHtml": "<h2>Why Net Sales matters</h2><p>Margin percentages computed on gross sales overstate performance. Net sales is the only base that reflects what customers really paid after everything given back.</p><h2>Net Sales formula</h2><p class=\"glossary-formula\">Net sales = Gross sales − Sales returns − Discounts − Cancellations</p><p>This is the denominator for gross margin.</p><h2>How Net Sales works in practice</h2><p>Reconcile net sales with the taxable value reported in your GST returns each month. A persistent gap usually points to discounts recorded outside the billing system.</p>",
+  "faq": [
+    {
+      "question": "Which figure should I use for margin?",
+      "answer": "Net sales. Using gross sales inflates every margin percentage you report."
+    },
+    {
+      "question": "Do aggregator commissions reduce net sales?",
+      "answer": "They are usually shown as a cost rather than a deduction from sales, but the contribution view matters more than the presentation."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gross-sales",
+    "revenue",
+    "gross-profit",
+    "sales-return"
+  ],
+  "formula": {
+    "expression": "Net sales = Gross sales − Sales returns − Discounts − Cancellations",
+    "note": "This is the denominator for gross margin."
+  }
+}
