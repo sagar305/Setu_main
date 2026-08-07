@@ -28,7 +28,7 @@ import {
   primaryBtnClass,
   secondaryBtnClass,
 } from "./ui";
-import { printNode, printedAt } from "./printing";
+import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
 
 /**
  * Four numbers an owner wants at midnight, and nothing else. Every figure is
@@ -331,10 +331,7 @@ export function ReportsScreen() {
 
     return (
       <Modal open={open} onClose={onClose} title="Day close">
-        <div
-          className="rounded-xl border border-muted-line/40 bg-white p-4"
-          style={{ fontFamily: "ui-monospace, Menlo, Consolas, monospace", fontSize: "12px", color: "#000" }}
-        >
+        <div className={`rounded-xl border border-muted-line/40 p-4 ${PREVIEW_CLASS}`}>
           <div ref={printRef}>
             <div className="c">
               <p className="lg b" style={{ margin: 0 }}>

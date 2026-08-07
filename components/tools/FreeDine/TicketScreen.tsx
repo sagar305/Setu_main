@@ -641,7 +641,11 @@ function TicketPanel({
         </button>
       </div>
 
-      <div className="mt-4 hidden gap-2 lg:flex">
+      {/* On a phone the fixed bar below offers one action — Send while a round
+          is waiting, Bill once everything has gone. Both must also live here,
+          or a table holding an unsent round (a bottled drink the kitchen never
+          needs) could not be billed at all. */}
+      <div className={`mt-4 gap-2 ${bare ? "flex" : "hidden lg:flex"}`}>
         <button
           type="button"
           onClick={() => void onFire()}

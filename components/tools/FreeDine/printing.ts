@@ -23,6 +23,69 @@ export const PAPER_CONTENT_MM: Record<PaperSize, number> = {
   a4: 190,
 };
 
+/**
+ * The layout rules a receipt document needs, shared by the print iframe and
+ * the on-screen preview.
+ *
+ * These live in one string rather than in Tailwind classes because the print
+ * iframe is a bare document with no stylesheet of its own — and because the
+ * preview must be styled by the very same rules. When they were only in the
+ * iframe, the printed slip was right while the on-screen copy ran together as
+ * "Subtotal540.00", which matters: a kitchen with no printer reads the KOT off
+ * the screen (FR-5.5).
+ */
+const DOC_RULES = `
+  table { width: 100%; border-collapse: collapse; }
+  td, th { padding: 1px 0; vertical-align: top; }
+  .r { text-align: right; }
+  .c { text-align: center; }
+  .b { font-weight: 700; }
+  .lg { font-size: 15px; }
+  .xl { font-size: 19px; }
+  .sm { font-size: 10px; }
+  .muted { color: #333; }
+  .rule { border-top: 1px dashed #000; margin: 4px 0; }
+  .solid { border-top: 1px solid #000; margin: 4px 0; }
+  .row { display: flex; justify-content: space-between; gap: 8px; }
+  .wrap { word-break: break-word; }
+  ul { margin: 0; padding-left: 14px; }
+`;
+
+/** Prefix every selector so the rules cannot leak into the rest of the page. */
+function scopeCss(css: string, prefix: string): string {
+  return css
+    .split("}")
+    .map((block) => {
+      const [selector, body] = block.split("{");
+      if (!body) return "";
+      const scoped = selector
+        .split(",")
+        .map((part) => `${prefix} ${part.trim()}`)
+        .join(", ");
+      return `${scoped}{${body}}`;
+    })
+    .join("\n");
+}
+
+export const PREVIEW_CLASS = "dine-doc";
+
+/**
+ * Stylesheet for the on-screen receipt previews. Rendered once by the app
+ * shell, so every preview is styled by the same rules the printer gets.
+ */
+export function previewStyleSheet(): string {
+  return `
+    .${PREVIEW_CLASS} {
+      background: #fff;
+      color: #000;
+      font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    ${scopeCss(DOC_RULES, `.${PREVIEW_CLASS}`)}
+  `;
+}
+
 function documentStyles(paper: PaperSize): string {
   const width = PAPER_WIDTH_MM[paper];
   const content = PAPER_CONTENT_MM[paper];
@@ -46,20 +109,7 @@ function documentStyles(paper: PaperSize): string {
       print-color-adjust: exact;
     }
     body { width: ${content}mm; padding: ${isRoll ? "3mm 2mm" : "0"}; }
-    table { width: 100%; border-collapse: collapse; }
-    td, th { padding: 1px 0; vertical-align: top; }
-    .r { text-align: right; }
-    .c { text-align: center; }
-    .b { font-weight: 700; }
-    .lg { font-size: ${isRoll ? "15px" : "17px"}; }
-    .xl { font-size: ${isRoll ? "19px" : "22px"}; }
-    .sm { font-size: ${isRoll ? "10px" : "11px"}; }
-    .muted { color: #333; }
-    .rule { border-top: 1px dashed #000; margin: 4px 0; }
-    .solid { border-top: 1px solid #000; margin: 4px 0; }
-    .row { display: flex; justify-content: space-between; gap: 8px; }
-    .wrap { word-break: break-word; }
-    ul { margin: 0; padding-left: 14px; }
+    ${DOC_RULES}
   `;
 }
 

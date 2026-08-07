@@ -24,6 +24,7 @@ import { TablesScreen } from "./TablesScreen";
 import { BillsScreen } from "./BillsScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
+import { previewStyleSheet } from "./printing";
 
 const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Receipt }[] = [
   { id: "floor", label: "Floor", icon: LayoutGrid },
@@ -262,6 +263,9 @@ export function FreeDineApp() {
 
   return (
     <DineProvider>
+      {/* One copy of the receipt rules for every on-screen preview, so what
+          the kitchen reads on the screen matches what the printer produces. */}
+      <style dangerouslySetInnerHTML={{ __html: previewStyleSheet() }} />
       <div
         className={
           fullscreen

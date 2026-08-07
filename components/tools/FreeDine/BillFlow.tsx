@@ -7,7 +7,7 @@ import { amountDue } from "@/lib/dine/calc";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { lineUnitPrice, type DineBill } from "@/lib/dine/types";
 import { BillView, billShareText } from "./BillView";
-import { PAPER_CONTENT_MM, printNode } from "./printing";
+import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode } from "./printing";
 import {
   Field,
   Modal,
@@ -393,14 +393,8 @@ function BillCard({
       {/* Rendered off-screen so print and PDF capture identical markup. */}
       <div className="pointer-events-none absolute -left-[9999px] top-0" aria-hidden="true">
         <div
-          style={{
-            width: `${PAPER_CONTENT_MM[settings.billPaperSize]}mm`,
-            background: "#fff",
-            color: "#000",
-            fontFamily: "ui-monospace, Menlo, Consolas, monospace",
-            fontSize: "12px",
-            padding: "4mm",
-          }}
+          className={PREVIEW_CLASS}
+          style={{ width: `${PAPER_CONTENT_MM[settings.billPaperSize]}mm`, padding: "4mm" }}
         >
           <BillView
             ref={printRef}

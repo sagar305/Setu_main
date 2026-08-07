@@ -7,7 +7,7 @@ import { formatPaise } from "@/lib/dine/money";
 import { billsCsv, downloadCsv } from "@/lib/dine/csv";
 import { ORDER_TYPE_LABELS, type DineBill } from "@/lib/dine/types";
 import { BillView } from "./BillView";
-import { PAPER_CONTENT_MM, printNode, printedAt } from "./printing";
+import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode, printedAt } from "./printing";
 import {
   EmptyState,
   Field,
@@ -220,13 +220,8 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
     return (
       <Modal open onClose={onClose} title={bill.billLabel}>
         <div
-          className="mx-auto rounded-xl border border-muted-line/40 bg-white p-4"
-          style={{
-            maxWidth: `${PAPER_CONTENT_MM[settings.billPaperSize] + 16}mm`,
-            fontFamily: "ui-monospace, Menlo, Consolas, monospace",
-            fontSize: "12px",
-            color: "#000",
-          }}
+          className={`mx-auto rounded-xl border border-muted-line/40 p-4 ${PREVIEW_CLASS}`}
+          style={{ maxWidth: `${PAPER_CONTENT_MM[settings.billPaperSize] + 16}mm` }}
         >
           <BillView
             ref={printRef}

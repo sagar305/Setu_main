@@ -5,7 +5,7 @@ import { Printer, RotateCcw } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { ORDER_TYPE_LABELS, type DineKot } from "@/lib/dine/types";
 import { Modal, primaryBtnClass, secondaryBtnClass, tapTargetClass } from "./ui";
-import { printNode, printedAt } from "./printing";
+import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
 
 /**
  * The Kitchen Order Ticket.
@@ -50,7 +50,7 @@ export function KotModal({
       title={kot.isCancellation ? "Cancellation slip" : `Kitchen ticket · ${kot.kotLabel}`}
     >
       <div className="rounded-xl border border-muted-line/40 bg-white p-4">
-        <div ref={printRef}>
+        <div ref={printRef} className={PREVIEW_CLASS}>
           <div className="c">
             {kot.isCancellation && (
               <p className="xl b" style={{ margin: "0 0 4px" }}>
