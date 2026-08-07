@@ -27,10 +27,14 @@
       "features": [
         "Fast billing with barcode scanner support",
         "Works fully offline",
-        "Inventory & stock tracking",
+        "Hold and recall carts mid-rush",
+        "Credit (udhaar) sales and customer ledger",
+        "Inventory & stock tracking with movement log",
         "Customers & purchase history",
+        "Sales, payment and best-seller reports",
         "Thermal (80mm/58mm) & A4 receipt printing",
-        "JSON backup / restore & CSV exports"
+        "PIN counter lock with idle auto-lock",
+        "JSON backup / restore, CSV exports & Google Sheet sync"
       ],
       "cta": {
         "label": "Open Browser Based POS — it's free",

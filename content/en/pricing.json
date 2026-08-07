@@ -30,7 +30,11 @@
       "features": [
         "Billing, products and inventory",
         "Hold and recall carts",
+        "Credit (udhaar) sales",
+        "Reports and CSV exports",
         "Thermal receipt printing",
+        "PIN counter lock",
+        "Google Sheet sync and restore",
         "Works offline, no login",
         "Data stays on your device"
       ],
