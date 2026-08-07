@@ -1,0 +1,52 @@
+{
+  "slug": "composition-scheme",
+  "term": "Composition Scheme",
+  "category": "gst-tax",
+  "aliases": [
+    "composition dealer"
+  ],
+  "short": "A simplified GST route where small businesses pay a flat rate on turnover.",
+  "seoTitle": "Composition Scheme — Meaning and Example for Businesses",
+  "metaDescription": "A simplified GST route where small businesses pay a flat rate on turnover. In exchange they cannot collect GST from customers or claim input tax credit.",
+  "updated": "2026-08-07",
+  "definition": "The composition scheme lets eligible small businesses pay GST at a low flat rate on turnover instead of the normal rate on each supply, with far lighter filing. In exchange they cannot collect GST from customers or claim input tax credit.",
+  "bodyHtml": "<h2>Why Composition Scheme matters</h2><p>For a small shop or restaurant selling mainly to consumers, the scheme cuts compliance work sharply. For anyone selling to businesses it is usually the wrong choice, because customers get no credit from your bills.</p><h2>How Composition Scheme works in practice</h2><p>A composition dealer issues a bill of supply rather than a tax invoice, and must state on it that they are not eligible to collect tax. Crossing the turnover limit or making certain interstate supplies pushes you out of the scheme.</p><h2>Common mistakes with Composition Scheme</h2><ul><li>Issuing a tax invoice and collecting GST while registered under the scheme.</li><li>Assuming input tax credit can still be claimed on purchases.</li><li>Missing the turnover limit and continuing to bill at the composition rate.</li></ul>",
+  "faq": [
+    {
+      "question": "Can restaurants use the composition scheme?",
+      "answer": "Eligible small restaurants can opt in at a concessional flat rate, provided they stay within the turnover limit and other conditions."
+    },
+    {
+      "question": "Can a composition dealer sell online?",
+      "answer": "Supplies through e-commerce operators are generally not permitted under the scheme, which rules it out for most aggregator-led businesses."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "bill-of-supply",
+    "gst",
+    "tax-invoice",
+    "input-tax-credit"
+  ]
+}

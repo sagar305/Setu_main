@@ -1,0 +1,53 @@
+{
+  "slug": "cross-selling",
+  "term": "Cross-Selling",
+  "category": "growth-marketing",
+  "aliases": [
+    "cross sell",
+    "cross-sell"
+  ],
+  "short": "Offering a complementary item alongside the purchase.",
+  "seoTitle": "Cross-Selling — Meaning and Example for Businesses",
+  "metaDescription": "Cross-selling offers a complementary product alongside what a customer is buying — a drink with a meal, a case with a phone, a dessert with a main.",
+  "updated": "2026-08-07",
+  "definition": "Cross-selling offers a complementary product alongside what a customer is buying — a drink with a meal, a case with a phone, a dessert with a main. It adds a separate item rather than upgrading the existing one.",
+  "bodyHtml": "<h2>Why Cross-Selling matters</h2><p>Cross-sells are where basket size grows. They are also usually high-margin, since drinks, sides and accessories generally carry better margins than the anchor item.</p><h2>How Cross-Selling works in practice</h2><p>Pair items deliberately based on what already sells together, and place the suggestion where the decision happens — on the menu, at the counter, at checkout.</p>",
+  "faq": [
+    {
+      "question": "How do I find good cross-sell pairs?",
+      "answer": "Look at what already appears together in bills, then make those combinations easier to choose."
+    },
+    {
+      "question": "Is a combo the same as a cross-sell?",
+      "answer": "A combo is a pre-built cross-sell with a bundled price, which usually converts better than an ad-hoc suggestion."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "upselling",
+    "bundle-pricing",
+    "basket-size",
+    "average-order-value"
+  ]
+}

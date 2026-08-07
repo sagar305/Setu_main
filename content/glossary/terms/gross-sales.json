@@ -1,0 +1,52 @@
+{
+  "slug": "gross-sales",
+  "term": "Gross Sales",
+  "category": "pricing-profit",
+  "aliases": [
+    "gross turnover"
+  ],
+  "short": "Total billed sales before returns and discounts.",
+  "seoTitle": "Gross Sales — Meaning and Example for Businesses",
+  "metaDescription": "Gross sales is the total value billed to customers in a period, before deducting returns, cancellations and discounts. Gross sales flatters.",
+  "updated": "2026-08-07",
+  "definition": "Gross sales is the total value billed to customers in a period, before deducting returns, cancellations and discounts. It is the widest measure of trading activity.",
+  "bodyHtml": "<h2>Why Gross Sales matters</h2><p>Gross sales flatters. A business with heavy returns or steep promotional discounting can report strong gross sales while the money actually kept is far lower.</p><h2>How Gross Sales works in practice</h2><p>Always publish gross and net sales together, with returns and discounts visible between them. That gap is one of the most useful diagnostics a small business has.</p>",
+  "faq": [
+    {
+      "question": "Is gross sales the same as revenue?",
+      "answer": "Revenue usually means net sales. Gross sales is the figure before deductions."
+    },
+    {
+      "question": "Should cancelled bills count in gross sales?",
+      "answer": "No. A cancelled bill was never a sale and should be excluded rather than netted off."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "net-sales",
+    "revenue",
+    "sales-return",
+    "discount"
+  ]
+}

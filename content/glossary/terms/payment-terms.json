@@ -1,0 +1,57 @@
+{
+  "slug": "payment-terms",
+  "term": "Payment Terms",
+  "category": "payments-finance",
+  "aliases": [
+    "credit terms",
+    "trade terms"
+  ],
+  "short": "The agreed deadline and conditions for paying an invoice.",
+  "seoTitle": "Payment Terms — Meaning, Formula and Example",
+  "metaDescription": "Payment terms state when an invoice must be paid and under what conditions — days allowed, early payment discounts, and any interest on late payment.",
+  "updated": "2026-08-07",
+  "definition": "Payment terms state when an invoice must be paid and under what conditions — days allowed, early payment discounts, and any interest on late payment. They are agreed before supply, not after.",
+  "bodyHtml": "<h2>Why Payment Terms matters</h2><p>Terms decide your cash cycle. Selling on 45 days while buying on 15 means financing the gap yourself, which is exactly how growing businesses run out of money.</p><h2>Payment Terms formula</h2><p class=\"glossary-formula\">Cash gap in days = Days sales outstanding − Days payable outstanding</p><p>A positive gap is working capital you are funding.</p><h2>How Payment Terms works in practice</h2><p>State terms on the quotation and repeat them on the invoice with a specific due date rather than a vague number of days. Ambiguity always resolves in the payer's favour.</p>",
+  "faq": [
+    {
+      "question": "What does Net 30 mean?",
+      "answer": "Payment is due in full 30 days from the invoice date."
+    },
+    {
+      "question": "Can I charge interest on late payments?",
+      "answer": "If the terms say so and the customer accepted them, yes — and Indian law provides specific protection for micro and small enterprises."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "net-30",
+    "days-sales-outstanding",
+    "accounts-receivable",
+    "credit-limit"
+  ],
+  "formula": {
+    "expression": "Cash gap in days = Days sales outstanding − Days payable outstanding",
+    "note": "A positive gap is working capital you are funding."
+  }
+}

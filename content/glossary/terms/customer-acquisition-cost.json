@@ -1,0 +1,57 @@
+{
+  "slug": "customer-acquisition-cost",
+  "term": "Customer Acquisition Cost",
+  "category": "growth-marketing",
+  "aliases": [
+    "CAC",
+    "acquisition cost"
+  ],
+  "short": "What it costs, on average, to win one new customer.",
+  "seoTitle": "Customer Acquisition Cost — Meaning, Formula and Example",
+  "metaDescription": "Customer acquisition cost is total sales and marketing spend for a period divided by the number of new customers it produced.",
+  "updated": "2026-08-07",
+  "definition": "Customer acquisition cost is total sales and marketing spend for a period divided by the number of new customers it produced. It is the price of growth, measured per customer.",
+  "bodyHtml": "<h2>Why Customer Acquisition Cost matters</h2><p>CAC only means something next to what a customer is worth. Spending ₹400 to win a customer who spends ₹300 once is a loss; the same ₹400 for someone who returns monthly is a bargain.</p><h2>Customer Acquisition Cost formula</h2><p class=\"glossary-formula\">CAC = Total acquisition spend ÷ Number of new customers acquired</p><p>Compare against customer lifetime value; a ratio below one-third is a common health mark.</p><h2>How Customer Acquisition Cost works in practice</h2><p>Include everything: ads, discounts funded to attract first orders, listing fees and the staff time spent on marketing. Measure by channel, because a blended figure hides the one channel that is subsidising the rest.</p><h2>Worked example</h2><p>₹60,000 of monthly marketing producing 150 new customers is a CAC of ₹400.</p>",
+  "faq": [
+    {
+      "question": "Should discounts count as acquisition cost?",
+      "answer": "Yes, when they exist to win first-time customers. A funded first-order discount is marketing spend by another name."
+    },
+    {
+      "question": "What is a good CAC?",
+      "answer": "One comfortably below the profit a customer generates over their lifetime, which is why LTV must be measured too."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    }
+  ],
+  "relatedTerms": [
+    "customer-lifetime-value",
+    "average-order-value",
+    "repeat-rate",
+    "roi"
+  ],
+  "formula": {
+    "expression": "CAC = Total acquisition spend ÷ Number of new customers acquired",
+    "note": "Compare against customer lifetime value; a ratio below one-third is a common health mark."
+  }
+}

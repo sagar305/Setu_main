@@ -1,0 +1,57 @@
+{
+  "slug": "aggregator-commission",
+  "term": "Aggregator Commission",
+  "category": "restaurant-ops",
+  "aliases": [
+    "delivery commission",
+    "platform commission"
+  ],
+  "short": "The cut a delivery platform takes from each order.",
+  "seoTitle": "Aggregator Commission — Meaning, Formula and Example",
+  "metaDescription": "Aggregator commission is the percentage a delivery platform deducts from each order before settling the rest to the restaurant.",
+  "updated": "2026-08-07",
+  "definition": "Aggregator commission is the percentage a delivery platform deducts from each order before settling the rest to the restaurant. Payment charges, promotional funding and taxes usually come out alongside it.",
+  "bodyHtml": "<h2>Why Aggregator Commission matters</h2><p>Commission is the largest single deduction in online food delivery and the reason menu prices online are usually higher than in the restaurant. Ignoring it makes delivery look profitable when it is not.</p><h2>Aggregator Commission formula</h2><p class=\"glossary-formula\">Net payout = Order value − Commission − Payment charges − Promotion share − Taxes</p><p>Divide net payout by order value to get your true realisation rate.</p><h2>How Aggregator Commission works in practice</h2><p>Reconcile every payout statement against your own order records. Between commission, discount share, packaging and payment charges, the effective deduction is commonly far higher than the headline rate.</p><h2>Worked example</h2><p>A ₹500 order with 22% commission, ₹15 payment charges and a ₹50 funded discount nets roughly ₹325 before food cost.</p>",
+  "faq": [
+    {
+      "question": "How much do delivery platforms charge?",
+      "answer": "Rates vary by city, category and negotiated terms, and the effective deduction is always higher than the headline commission."
+    },
+    {
+      "question": "Should online menu prices be higher?",
+      "answer": "Usually yes, enough to cover commission and packaging while staying credible against nearby listings."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "menu-price-padding",
+    "unit-economics",
+    "settlement",
+    "tcs"
+  ],
+  "formula": {
+    "expression": "Net payout = Order value − Commission − Payment charges − Promotion share − Taxes",
+    "note": "Divide net payout by order value to get your true realisation rate."
+  }
+}

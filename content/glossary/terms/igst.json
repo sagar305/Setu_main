@@ -1,0 +1,57 @@
+{
+  "slug": "igst",
+  "term": "IGST",
+  "category": "gst-tax",
+  "aliases": [
+    "Integrated GST",
+    "Integrated Goods and Services Tax"
+  ],
+  "short": "The single GST charged on interstate supplies instead of a CGST plus SGST split.",
+  "seoTitle": "IGST — Meaning, Formula and Example",
+  "metaDescription": "IGST is the Integrated Goods and Services Tax charged when the supplier and the place of supply are in different states, or on imports.",
+  "updated": "2026-08-07",
+  "definition": "IGST is the Integrated Goods and Services Tax charged when the supplier and the place of supply are in different states, or on imports. It is levied at the full rate as one line rather than split, and the centre later apportions it to the consuming state.",
+  "bodyHtml": "<h2>Why IGST matters</h2><p>Getting the IGST-versus-CGST-plus-SGST call wrong is a common and expensive error. Charging IGST on a local sale, or a split on an interstate one, forces a corrected document and can block your customer's credit claim.</p><h2>IGST formula</h2><p class=\"glossary-formula\">IGST = Taxable value × GST rate ÷ 100</p><p>Charged whole, with no CGST or SGST line on the same item.</p><h2>How IGST works in practice</h2><p>The test is the place of supply, not where the payment came from. For goods it is normally where delivery ends; for many services it is the recipient's registered address. Your invoice template should pick the heads automatically once the customer state is entered.</p>",
+  "faq": [
+    {
+      "question": "Is IGST higher than CGST plus SGST?",
+      "answer": "No. The total tax is the same rate either way; only the heads it is collected under differ."
+    },
+    {
+      "question": "Which tax applies to exports?",
+      "answer": "Exports are zero-rated, either shipped under a bond or letter of undertaking without tax, or with IGST paid and refunded."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cgst",
+    "sgst",
+    "place-of-supply",
+    "gst"
+  ],
+  "formula": {
+    "expression": "IGST = Taxable value × GST rate ÷ 100",
+    "note": "Charged whole, with no CGST or SGST line on the same item."
+  }
+}

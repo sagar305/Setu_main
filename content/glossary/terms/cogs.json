@@ -1,0 +1,57 @@
+{
+  "slug": "cogs",
+  "term": "Cost of Goods Sold",
+  "category": "pricing-profit",
+  "aliases": [
+    "COGS",
+    "cost of sales"
+  ],
+  "short": "The direct cost of the goods actually sold in a period.",
+  "seoTitle": "Cost of Goods Sold — Meaning, Formula and Example",
+  "metaDescription": "Cost of goods sold, or COGS, is the direct cost of the products actually sold during a period. The direct cost of the goods actually sold in a period.",
+  "updated": "2026-08-07",
+  "definition": "Cost of goods sold, or COGS, is the direct cost of the products actually sold during a period. It is derived from stock movement rather than from purchases, because buying stock is not the same as selling it.",
+  "bodyHtml": "<h2>Why Cost of Goods Sold matters</h2><p>COGS drives gross profit and, in a kitchen or shop, is the largest controllable cost there is. Using purchases as a substitute makes every month with a big delivery look like a disaster and every month without one look brilliant.</p><h2>Cost of Goods Sold formula</h2><p class=\"glossary-formula\">COGS = Opening stock + Purchases − Closing stock</p><p>Include freight and non-creditable taxes in purchases for an accurate figure.</p><h2>How Cost of Goods Sold works in practice</h2><p>Compute it from opening stock plus purchases minus closing stock, which means an actual stock count at period end. Restaurants often run this weekly on high-value categories such as meat and liquor rather than monthly on everything.</p><h2>Worked example</h2><p>₹80,000 opening stock, ₹4,20,000 purchases and ₹95,000 closing stock give a COGS of ₹4,05,000 for the month.</p>",
+  "faq": [
+    {
+      "question": "Is COGS the same as purchases?",
+      "answer": "No. Purchases are what you bought; COGS is what you sold, adjusted for the change in stock."
+    },
+    {
+      "question": "Does wastage go into COGS?",
+      "answer": "It ends up there through the stock count, which is why separately tracking wastage is the only way to see it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gross-profit",
+    "closing-stock",
+    "wastage",
+    "inventory-turnover"
+  ],
+  "formula": {
+    "expression": "COGS = Opening stock + Purchases − Closing stock",
+    "note": "Include freight and non-creditable taxes in purchases for an accurate figure."
+  }
+}

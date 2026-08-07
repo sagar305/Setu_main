@@ -1,0 +1,57 @@
+{
+  "slug": "sales-return",
+  "term": "Sales Return",
+  "category": "retail-inventory",
+  "aliases": [
+    "customer return",
+    "sales returns"
+  ],
+  "short": "Goods a customer sends back after being billed.",
+  "seoTitle": "Sales Return — Meaning, Formula and Example",
+  "metaDescription": "A sales return is stock a customer returns after billing, whether damaged, wrong or simply unwanted. Goods a customer sends back after being billed.",
+  "updated": "2026-08-07",
+  "definition": "A sales return is stock a customer returns after billing, whether damaged, wrong or simply unwanted. It reduces net sales, brings the goods back into stock, and reverses the tax charged through a credit note.",
+  "bodyHtml": "<h2>Why Sales Return matters</h2><p>Returns handled informally leave three things wrong at once: overstated sales, understated stock and GST paid on revenue you did not keep.</p><h2>Sales Return formula</h2><p class=\"glossary-formula\">Return rate % = Value of returns ÷ Gross sales × 100</p><p>Track it by product to find quality or description problems.</p><h2>How Sales Return works in practice</h2><p>Issue a credit note against the original invoice, take the goods back into stock at cost, and separate resaleable returns from write-offs so stock value stays honest.</p>",
+  "faq": [
+    {
+      "question": "Do I need a credit note for a return?",
+      "answer": "Yes, if a tax invoice was issued. That is what reverses the GST on the original sale."
+    },
+    {
+      "question": "Should returned goods go back at full value?",
+      "answer": "Only if genuinely resaleable. Damaged returns should be written down or written off."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "credit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "credit-note",
+    "purchase-return",
+    "net-sales",
+    "shrinkage"
+  ],
+  "formula": {
+    "expression": "Return rate % = Value of returns ÷ Gross sales × 100",
+    "note": "Track it by product to find quality or description problems."
+  }
+}

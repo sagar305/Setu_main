@@ -1,0 +1,54 @@
+{
+  "slug": "net-30",
+  "term": "Net 30",
+  "category": "payments-finance",
+  "aliases": [
+    "net 15",
+    "net 45",
+    "net 60"
+  ],
+  "short": "Payment due in full thirty days from the invoice date.",
+  "seoTitle": "Net 30 — Meaning and Example for Businesses",
+  "metaDescription": "Net 30 means the full invoice amount is due thirty days from the invoice date. Net terms look standard but are rarely neutral.",
+  "updated": "2026-08-07",
+  "definition": "Net 30 means the full invoice amount is due thirty days from the invoice date. The same convention gives Net 15, Net 45 and Net 60, and variants such as 2/10 Net 30 add an early payment discount.",
+  "bodyHtml": "<h2>Why Net 30 matters</h2><p>Net terms look standard but are rarely neutral. Every extra fifteen days of terms is stock and salaries you have funded on the customer's behalf.</p><h2>How Net 30 works in practice</h2><p>Print the actual due date rather than only the term, and start follow-up the day after it passes. Where an early payment discount is offered, compare its annualised cost against your own cost of funds.</p><h2>Worked example</h2><p>2/10 Net 30 means a 2% discount for paying within 10 days, with the full amount otherwise due in 30.</p>",
+  "faq": [
+    {
+      "question": "Does Net 30 run from invoice date or delivery?",
+      "answer": "Conventionally from the invoice date, which is why invoicing promptly matters."
+    },
+    {
+      "question": "Is offering 2/10 Net 30 worth it?",
+      "answer": "The annualised cost of that discount is high, so use it only where cash timing genuinely justifies it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "payment-terms",
+    "days-sales-outstanding",
+    "accounts-receivable",
+    "discount"
+  ]
+}

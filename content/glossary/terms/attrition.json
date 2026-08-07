@@ -1,0 +1,57 @@
+{
+  "slug": "attrition",
+  "term": "Attrition",
+  "category": "payroll-hr",
+  "aliases": [
+    "staff turnover",
+    "employee turnover"
+  ],
+  "short": "The rate at which employees leave and must be replaced.",
+  "seoTitle": "Attrition — Meaning, Formula and Example",
+  "metaDescription": "Attrition is the rate at which employees leave a business over a period. High attrition is expensive in ways that never appear as a line in the accounts.",
+  "updated": "2026-08-07",
+  "definition": "Attrition is the rate at which employees leave a business over a period. It is measured as leavers against average headcount, and in hospitality and retail it is typically high.",
+  "bodyHtml": "<h2>Why Attrition matters</h2><p>Every departure costs hiring time, training and a period of lower productivity, plus the service inconsistency customers notice. High attrition is expensive in ways that never appear as a line in the accounts.</p><h2>Attrition formula</h2><p class=\"glossary-formula\">Attrition % = Employees who left ÷ Average headcount × 100</p><p>Annualise for comparison across periods.</p><h2>How Attrition works in practice</h2><p>Measure it by role and tenure band. Attrition concentrated in the first ninety days is a hiring and onboarding problem; attrition among long-tenured staff is a management one.</p>",
+  "faq": [
+    {
+      "question": "What does attrition really cost?",
+      "answer": "Recruitment, training, overtime cover and lost productivity — commonly a large multiple of a month's salary for the role."
+    },
+    {
+      "question": "How do I reduce attrition?",
+      "answer": "Predictable rosters, timely pay, a clear progression path and competent immediate supervisors do more than pay rises alone."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "shift-roster",
+    "labour-cost-percentage",
+    "payroll",
+    "gratuity"
+  ],
+  "formula": {
+    "expression": "Attrition % = Employees who left ÷ Average headcount × 100",
+    "note": "Annualise for comparison across periods."
+  }
+}

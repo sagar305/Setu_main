@@ -1,0 +1,57 @@
+{
+  "slug": "amortisation-schedule",
+  "term": "Amortisation Schedule",
+  "category": "payments-finance",
+  "aliases": [
+    "loan schedule",
+    "repayment schedule"
+  ],
+  "short": "A table showing how each EMI splits between interest and principal.",
+  "seoTitle": "Amortisation Schedule — Meaning, Formula and Example",
+  "metaDescription": "An amortisation schedule lists every instalment of a loan with the split between interest and principal and the balance remaining after each payment.",
+  "updated": "2026-08-07",
+  "definition": "An amortisation schedule lists every instalment of a loan with the split between interest and principal and the balance remaining after each payment. It shows exactly how a loan unwinds over its tenure.",
+  "bodyHtml": "<h2>Why Amortisation Schedule matters</h2><p>The schedule reveals what the EMI hides: most early payments are interest. It is also what tells you the real saving from prepaying in month twelve rather than month forty.</p><h2>Amortisation Schedule formula</h2><p class=\"glossary-formula\">Closing balance = Opening balance + Interest for the period − EMI paid</p><p>Repeat monthly until the balance reaches zero.</p><h2>How Amortisation Schedule works in practice</h2><p>Get the schedule at sanction and keep it with the loan file. Use it to book interest correctly in the books, since only the interest portion is an expense.</p>",
+  "faq": [
+    {
+      "question": "Why is my loan balance barely moving?",
+      "answer": "Early instalments are mostly interest. The principal portion grows steadily as the balance falls."
+    },
+    {
+      "question": "Does prepayment change the schedule?",
+      "answer": "Yes. It either shortens the tenure or reduces the EMI, and the schedule is reissued."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "emi",
+    "principal",
+    "reducing-balance-interest",
+    "amortisation"
+  ],
+  "formula": {
+    "expression": "Closing balance = Opening balance + Interest for the period − EMI paid",
+    "note": "Repeat monthly until the balance reaches zero."
+  }
+}

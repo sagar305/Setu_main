@@ -1,0 +1,52 @@
+{
+  "slug": "pan",
+  "term": "PAN",
+  "category": "gst-tax",
+  "aliases": [
+    "Permanent Account Number"
+  ],
+  "short": "The ten-character income tax identity of a person or business.",
+  "seoTitle": "PAN — Meaning and Example for Businesses",
+  "metaDescription": "PAN, the Permanent Account Number, is the ten-character alphanumeric identifier issued by the income tax department to a person or entity.",
+  "updated": "2026-08-07",
+  "definition": "PAN, the Permanent Account Number, is the ten-character alphanumeric identifier issued by the income tax department to a person or entity. It is the spine of tax identity in India and is embedded inside every GSTIN.",
+  "bodyHtml": "<h2>Why PAN matters</h2><p>Every tax credit, TDS entry and high-value transaction is tracked against PAN. A mismatched PAN in vendor records is the usual reason a deduction fails to show up in someone's tax statement.</p><h2>How PAN works in practice</h2><p>Capture PAN in your customer and supplier masters alongside GSTIN, and check that the ten characters inside a GSTIN match the PAN on file. That single check catches most data-entry errors at source.</p>",
+  "faq": [
+    {
+      "question": "How is PAN related to GSTIN?",
+      "answer": "Characters three to twelve of a GSTIN are the entity's PAN, which is why a state's registrations all share the same core."
+    },
+    {
+      "question": "Does a proprietor need a separate business PAN?",
+      "answer": "No. A sole proprietorship uses the proprietor's own PAN."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "gstin",
+    "tds",
+    "income-tax",
+    "tan"
+  ]
+}

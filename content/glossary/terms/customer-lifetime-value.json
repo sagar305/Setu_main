@@ -1,0 +1,58 @@
+{
+  "slug": "customer-lifetime-value",
+  "term": "Customer Lifetime Value",
+  "category": "growth-marketing",
+  "aliases": [
+    "LTV",
+    "CLV",
+    "lifetime value"
+  ],
+  "short": "The total profit expected from a customer over the whole relationship.",
+  "seoTitle": "Customer Lifetime Value — Meaning, Formula and Example",
+  "metaDescription": "Customer lifetime value is the total profit a customer is expected to generate across the entire relationship, not from a single purchase.",
+  "updated": "2026-08-07",
+  "definition": "Customer lifetime value is the total profit a customer is expected to generate across the entire relationship, not from a single purchase. It combines average order value, purchase frequency and how long the customer stays.",
+  "bodyHtml": "<h2>Why Customer Lifetime Value matters</h2><p>LTV is what makes acquisition spending rational. Without it, every marketing rupee is judged against one transaction, which systematically underinvests in retention-driven businesses.</p><h2>Customer Lifetime Value formula</h2><p class=\"glossary-formula\">LTV = Average order contribution × Orders per year × Expected years retained</p><p>Compare with CAC to see whether acquisition is profitable.</p><h2>How Customer Lifetime Value works in practice</h2><p>Compute it on contribution rather than on revenue, so the number reflects money actually kept. Segment by customer type, since a regular weekday customer and a festive one-off are not the same asset.</p><h2>Worked example</h2><p>A customer contributing ₹120 per visit, visiting twice a month for two years, is worth about ₹5,760.</p>",
+  "faq": [
+    {
+      "question": "What is a healthy LTV to CAC ratio?",
+      "answer": "Three to one is a widely used benchmark, though the right level depends on payback speed."
+    },
+    {
+      "question": "Should LTV use revenue or profit?",
+      "answer": "Profit, or at least contribution. Revenue-based LTV overstates what a customer is worth."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    }
+  ],
+  "relatedTerms": [
+    "customer-acquisition-cost",
+    "retention-rate",
+    "repeat-rate",
+    "churn-rate"
+  ],
+  "formula": {
+    "expression": "LTV = Average order contribution × Orders per year × Expected years retained",
+    "note": "Compare with CAC to see whether acquisition is profitable."
+  }
+}

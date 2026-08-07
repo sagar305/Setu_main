@@ -1,0 +1,57 @@
+{
+  "slug": "yield-percentage",
+  "term": "Yield Percentage",
+  "category": "restaurant-ops",
+  "aliases": [
+    "yield %",
+    "usable yield"
+  ],
+  "short": "How much of a purchased ingredient survives to reach the plate.",
+  "seoTitle": "Yield Percentage — Meaning, Formula and Example",
+  "metaDescription": "Yield percentage is the usable portion of an ingredient after cleaning, trimming, peeling and cooking, expressed as a percentage of the purchased weight.",
+  "updated": "2026-08-07",
+  "definition": "Yield percentage is the usable portion of an ingredient after cleaning, trimming, peeling and cooking, expressed as a percentage of the purchased weight. A chicken bought whole yields far less than its billed weight in servable meat.",
+  "bodyHtml": "<h2>Why Yield Percentage matters</h2><p>Costing at the purchase rate rather than the yielded rate understates every dish using that ingredient. On high-waste items such as fish, leafy vegetables and whole meats, the error is large.</p><h2>Yield Percentage formula</h2><p class=\"glossary-formula\">Yield % = Usable weight ÷ Purchased weight × 100</p><p>True cost per usable kg = purchase rate ÷ yield %.</p><h2>How Yield Percentage works in practice</h2><p>Test yield once per ingredient per supplier: weigh in, prepare as usual, weigh out. Store the factor in the recipe sheet so all costings apply it automatically.</p><h2>Worked example</h2><p>Paneer bought at ₹360/kg with a 92% yield actually costs about ₹391 per usable kilogram.</p>",
+  "faq": [
+    {
+      "question": "Which ingredients need yield testing most?",
+      "answer": "Anything trimmed, peeled or cooked down — meat, fish, leafy greens and whole spices."
+    },
+    {
+      "question": "Does yield change by supplier?",
+      "answer": "Yes, noticeably. Yield testing is one of the fairest ways to compare two suppliers quoting different rates."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "recipe-costing",
+    "plate-cost",
+    "wastage",
+    "purchase-price-variance"
+  ],
+  "formula": {
+    "expression": "Yield % = Usable weight ÷ Purchased weight × 100",
+    "note": "True cost per usable kg = purchase rate ÷ yield %."
+  }
+}

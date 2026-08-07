@@ -1,0 +1,56 @@
+{
+  "slug": "trial-balance",
+  "term": "Trial Balance",
+  "category": "accounting",
+  "aliases": [
+    "TB"
+  ],
+  "short": "A list of all ledger balances, checking debits equal credits.",
+  "seoTitle": "Trial Balance — Meaning, Formula and Example",
+  "metaDescription": "A trial balance lists the closing balance of every ledger account with debits in one column and credits in the other. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A trial balance lists the closing balance of every ledger account with debits in one column and credits in the other. If the two totals agree, the books are arithmetically consistent.",
+  "bodyHtml": "<h2>Why Trial Balance matters</h2><p>The trial balance is the gateway to the financial statements and the fastest way to catch a one-sided posting. It is also where obviously wrong balances stand out, such as a negative bank or a stale suspense account.</p><h2>Trial Balance formula</h2><p class=\"glossary-formula\">Total debits = Total credits</p><p>Agreement proves arithmetic, not correctness.</p><h2>How Trial Balance works in practice</h2><p>Run it monthly, not annually. Scan for balances that should not exist — a credit balance in an asset account, or anything still sitting in suspense.</p>",
+  "faq": [
+    {
+      "question": "Does a tallied trial balance mean the books are correct?",
+      "answer": "No. An entry posted to the wrong account of the same type still tallies perfectly."
+    },
+    {
+      "question": "What if it does not tally?",
+      "answer": "Look for one-sided entries, transposed digits, and the difference itself — a gap divisible by nine often means transposition."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "general-ledger",
+    "balance-sheet",
+    "suspense-account",
+    "double-entry-bookkeeping"
+  ],
+  "formula": {
+    "expression": "Total debits = Total credits",
+    "note": "Agreement proves arithmetic, not correctness."
+  }
+}

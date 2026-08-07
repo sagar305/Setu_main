@@ -1,0 +1,52 @@
+{
+  "slug": "menu-engineering",
+  "term": "Menu Engineering",
+  "category": "restaurant-ops",
+  "aliases": [
+    "menu analysis"
+  ],
+  "short": "Ranking dishes by popularity and profit to redesign the menu.",
+  "seoTitle": "Menu Engineering — Meaning and Example for Businesses",
+  "metaDescription": "Ranking dishes by popularity and profit to redesign the menu. Most menus are inherited rather than designed. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Menu engineering classifies every dish by two measures — how popular it is and how much contribution it earns — then uses the resulting quadrants to decide what to promote, reprice, rework or remove.",
+  "bodyHtml": "<h2>Why Menu Engineering matters</h2><p>Most menus are inherited rather than designed. Menu engineering usually finds a handful of dishes that are popular but barely profitable, and repricing or reworking just those moves the whole month.</p><h2>How Menu Engineering works in practice</h2><p>Classify dishes into stars (popular and profitable), plowhorses (popular, low margin), puzzles (profitable, unpopular) and dogs (neither). Promote stars, rework plowhorses, reposition puzzles and cut dogs.</p><h2>Worked example</h2><p>A plowhorse selling 400 plates a month at ₹40 contribution gains ₹8,000 from a ₹20 price rise, if volume holds.</p>",
+  "faq": [
+    {
+      "question": "How often should I run menu engineering?",
+      "answer": "Quarterly, and after any significant ingredient price move or menu redesign."
+    },
+    {
+      "question": "What do I do with a dog?",
+      "answer": "Remove it unless it serves a purpose — a vegetarian option for groups, or an ingredient that other dishes share."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "menu-mix",
+    "contribution-margin",
+    "recipe-costing",
+    "price-elasticity"
+  ]
+}

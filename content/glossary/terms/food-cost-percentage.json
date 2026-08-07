@@ -1,0 +1,58 @@
+{
+  "slug": "food-cost-percentage",
+  "term": "Food Cost Percentage",
+  "category": "restaurant-ops",
+  "aliases": [
+    "food cost %",
+    "food cost ratio"
+  ],
+  "short": "The share of food sales consumed by the ingredients behind them.",
+  "seoTitle": "Food Cost Percentage — Meaning, Formula and Example",
+  "metaDescription": "Food cost percentage is the cost of the ingredients used, expressed as a percentage of food sales. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Food cost percentage is the cost of the ingredients used, expressed as a percentage of food sales. It is the single most watched number in a kitchen because it moves daily with purchase prices, portioning and waste.",
+  "bodyHtml": "<h2>Why Food Cost Percentage matters</h2><p>A few points of food cost is usually the whole difference between a profitable restaurant and a struggling one. On ₹10 lakh of monthly food sales, three points is ₹30,000 of margin lost or found.</p><h2>Food Cost Percentage formula</h2><p class=\"glossary-formula\">Food cost % = Cost of food used ÷ Food sales × 100</p><p>Cost of food used is opening stock plus purchases minus closing stock.</p><h2>How Food Cost Percentage works in practice</h2><p>Measure it from stock movement rather than from purchases, and run it weekly on high-value categories. A rising percentage with stable recipes points at portioning, wastage or theft rather than at the menu.</p><h2>Worked example</h2><p>₹2,90,000 of food used against ₹9,00,000 of food sales is a food cost of 32.2%.</p><h2>Common mistakes with Food Cost Percentage</h2><ul><li>Using purchases instead of stock consumed, which swings wildly month to month.</li><li>Including beverages in food sales, which understates the true food figure.</li><li>Never counting stock, so the percentage is an estimate dressed as a measurement.</li></ul>",
+  "faq": [
+    {
+      "question": "What is a good food cost percentage?",
+      "answer": "Most full-service Indian restaurants target the high twenties to mid thirties, but the right number depends on your menu, format and pricing."
+    },
+    {
+      "question": "Why did my food cost jump this month?",
+      "answer": "Usually one of four things: supplier price rises, larger portions, higher wastage, or a stock count that was not done properly last month."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "prime-cost",
+    "recipe-costing",
+    "wastage",
+    "portion-control",
+    "cogs"
+  ],
+  "formula": {
+    "expression": "Food cost % = Cost of food used ÷ Food sales × 100",
+    "note": "Cost of food used is opening stock plus purchases minus closing stock."
+  }
+}

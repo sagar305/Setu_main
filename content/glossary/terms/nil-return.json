@@ -1,0 +1,52 @@
+{
+  "slug": "nil-return",
+  "term": "Nil Return",
+  "category": "gst-tax",
+  "aliases": [
+    "nil filing"
+  ],
+  "short": "A return filed for a period with no transactions to report.",
+  "seoTitle": "Nil Return — Meaning and Example for Businesses",
+  "metaDescription": "A nil return is a GST return filed for a tax period in which there were no outward supplies, no credit claimed and no tax payable.",
+  "updated": "2026-08-07",
+  "definition": "A nil return is a GST return filed for a tax period in which there were no outward supplies, no credit claimed and no tax payable. It still has to be filed, because the obligation follows registration rather than activity.",
+  "bodyHtml": "<h2>Why Nil Return matters</h2><p>Owners who close for a season or pause a business routinely skip filing, and late fees accrue per return per day regardless. Restoring a lapsed registration costs far more than the two minutes filing would have taken.</p><h2>How Nil Return works in practice</h2><p>File nil returns on time even during a shutdown, and if you genuinely intend to stop trading, cancel the registration rather than leaving it dormant.</p>",
+  "faq": [
+    {
+      "question": "Do I file a nil return if I had no sales?",
+      "answer": "Yes. As long as the registration is active, the return is due whether or not there were transactions."
+    },
+    {
+      "question": "What is the penalty for missing a nil return?",
+      "answer": "A per-day late fee applies, subject to a cap, and pending returns can block subsequent filings."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-3b",
+    "gstr-1",
+    "gst",
+    "composition-scheme"
+  ]
+}

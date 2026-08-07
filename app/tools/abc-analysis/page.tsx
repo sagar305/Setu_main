@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AbcAnalysisTool } from "@/components/tools/analysis/AbcAnalysisTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free ABC Analysis Calculator | Setu",
@@ -75,6 +76,9 @@ export default function AbcAnalysisPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <AbcAnalysisTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="abc-analysis" />
       </section>
     </>
   );

@@ -1,0 +1,57 @@
+{
+  "slug": "profit-margin",
+  "term": "Profit Margin",
+  "category": "pricing-profit",
+  "aliases": [
+    "margin",
+    "margin percentage"
+  ],
+  "short": "Profit expressed as a percentage of the selling price.",
+  "seoTitle": "Profit Margin — Meaning, Formula and Example",
+  "metaDescription": "Profit margin is profit expressed as a percentage of the selling price. It is also the figure lenders, investors and franchise partners ask for first.",
+  "updated": "2026-08-07",
+  "definition": "Profit margin is profit expressed as a percentage of the selling price. It answers a simple question — out of every hundred rupees a customer pays you, how many do you keep — and it is the number that makes products of different prices comparable.",
+  "bodyHtml": "<h2>Why Profit Margin matters</h2><p>Margin is the yardstick for pricing decisions, because a rupee of profit means nothing without knowing the sale it came from. It is also the figure lenders, investors and franchise partners ask for first.</p><h2>Profit Margin formula</h2><p class=\"glossary-formula\">Profit margin % = (Selling price − Cost) ÷ Selling price × 100</p><p>Divide by the selling price, not the cost — dividing by cost gives markup instead.</p><h2>How Profit Margin works in practice</h2><p>Margin can be measured at three levels: gross margin after direct costs, operating margin after running costs, and net margin after everything including tax. Quoting one when someone means another is the most common source of confusion in a pricing conversation.</p><h2>Worked example</h2><p>Sell for ₹500 what costs ₹350 and you keep ₹150, a 30% margin — while the same numbers represent a markup of about 43%.</p>",
+  "faq": [
+    {
+      "question": "Is a 30% margin the same as a 30% markup?",
+      "answer": "No. A 30% margin on a ₹500 sale is ₹150 profit on ₹350 cost, which is roughly a 43% markup."
+    },
+    {
+      "question": "What is a good profit margin for a small business?",
+      "answer": "It varies widely by trade — grocery retail runs thin, services run high. Track your own trend rather than an industry average."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "markup",
+    "gross-profit",
+    "net-profit",
+    "contribution-margin"
+  ],
+  "formula": {
+    "expression": "Profit margin % = (Selling price − Cost) ÷ Selling price × 100",
+    "note": "Divide by the selling price, not the cost — dividing by cost gives markup instead."
+  }
+}

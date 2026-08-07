@@ -1,0 +1,52 @@
+{
+  "slug": "tan",
+  "term": "TAN",
+  "category": "gst-tax",
+  "aliases": [
+    "Tax Deduction Account Number"
+  ],
+  "short": "The registration number required to deduct and deposit TDS.",
+  "seoTitle": "TAN — Meaning and Example for Businesses",
+  "metaDescription": "The registration number required to deduct and deposit TDS. It is separate from PAN and required of every deductor. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "TAN, the Tax Deduction and Collection Account Number, is a ten-character number a business needs in order to deduct TDS, deposit it and file the quarterly statements. It is separate from PAN and required of every deductor.",
+  "bodyHtml": "<h2>Why TAN matters</h2><p>A business that starts paying rent, contractors or salaries above the thresholds needs a TAN before the first deduction is due. Depositing TDS without one is not possible, and the delay accrues interest.</p><h2>How TAN works in practice</h2><p>Quote TAN on every TDS challan, quarterly statement and certificate you issue. Small businesses often apply for it only when the first deduction obligation appears, which is usually a month too late.</p>",
+  "faq": [
+    {
+      "question": "Can I use PAN instead of TAN for TDS?",
+      "answer": "Not for regular deductions. Certain property transactions are the exception, where PAN is used with a specific form."
+    },
+    {
+      "question": "Do I need TAN if I have no employees?",
+      "answer": "Only if you make other payments requiring deduction, such as rent or contractor bills above the thresholds."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "tds",
+    "pan",
+    "form-16",
+    "payroll"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "slug": "equity",
+  "term": "Equity",
+  "category": "accounting",
+  "aliases": [
+    "owners equity",
+    "shareholders equity",
+    "net worth"
+  ],
+  "short": "What the owners would be left with after all debts are paid.",
+  "seoTitle": "Equity — Meaning, Formula and Example",
+  "metaDescription": "Equity is what belongs to the owners: total assets minus total liabilities. Equity is the honest measure of what a business is worth on its own books.",
+  "updated": "2026-08-07",
+  "definition": "Equity is what belongs to the owners: total assets minus total liabilities. It comprises capital introduced plus accumulated retained earnings, less any drawings or distributions.",
+  "bodyHtml": "<h2>Why Equity matters</h2><p>Equity is the honest measure of what a business is worth on its own books. Growing equity means the business is building value rather than merely turning over cash.</p><h2>Equity formula</h2><p class=\"glossary-formula\">Equity = Assets − Liabilities</p><p>Also: capital introduced + retained earnings − drawings.</p><h2>How Equity works in practice</h2><p>Watch capital introduced separately from retained earnings. A rising equity balance driven only by fresh owner money is a very different story from one driven by profits.</p>",
+  "faq": [
+    {
+      "question": "Is equity the same as the business's market value?",
+      "answer": "No. Book equity reflects recorded costs, not what a buyer would pay."
+    },
+    {
+      "question": "What does negative equity mean?",
+      "answer": "Liabilities exceed assets, usually after accumulated losses — a serious solvency signal."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "retained-earnings",
+    "balance-sheet",
+    "debt-to-equity-ratio",
+    "fixed-asset"
+  ],
+  "formula": {
+    "expression": "Equity = Assets − Liabilities",
+    "note": "Also: capital introduced + retained earnings − drawings."
+  }
+}

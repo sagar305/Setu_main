@@ -1,0 +1,53 @@
+{
+  "slug": "stock-transfer",
+  "term": "Stock Transfer",
+  "category": "retail-inventory",
+  "aliases": [
+    "inter-branch transfer",
+    "outlet transfer"
+  ],
+  "short": "Moving stock between outlets, stores or a central kitchen.",
+  "seoTitle": "Stock Transfer — Meaning and Example for Businesses",
+  "metaDescription": "A stock transfer moves inventory from one location to another — outlet to outlet, central kitchen to branch, or main store to counter.",
+  "updated": "2026-08-07",
+  "definition": "A stock transfer moves inventory from one location to another — outlet to outlet, central kitchen to branch, or main store to counter. It changes where stock sits without being a sale or a purchase.",
+  "bodyHtml": "<h2>Why Stock Transfer matters</h2><p>Untracked transfers destroy location-level reporting. The sending outlet looks like it lost stock and the receiving one like it gained margin, and neither figure is usable.</p><h2>How Stock Transfer works in practice</h2><p>Document each transfer with quantities and value, and require acknowledgement on receipt. Multi-outlet businesses should reconcile transfers monthly, since disputes are easier to settle while the delivery is remembered.</p>",
+  "faq": [
+    {
+      "question": "Do stock transfers attract GST?",
+      "answer": "Transfers between separately registered branches can be treated as supplies. Movements within one registration generally are not."
+    },
+    {
+      "question": "How should transfers be valued?",
+      "answer": "At cost, or at production cost for items made in a central kitchen, so outlet margins stay meaningful."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "central-kitchen",
+    "grn",
+    "stock-take",
+    "par-level"
+  ]
+}

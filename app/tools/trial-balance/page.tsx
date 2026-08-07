@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TrialBalanceTool } from "@/components/tools/bookkeeping/TrialBalanceTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Trial Balance Generator | Setu",
@@ -75,6 +76,9 @@ export default function TrialBalancePage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <TrialBalanceTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="trial-balance" />
       </section>
     </>
   );

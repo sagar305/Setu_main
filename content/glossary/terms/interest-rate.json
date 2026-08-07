@@ -1,0 +1,52 @@
+{
+  "slug": "interest-rate",
+  "term": "Interest Rate",
+  "category": "payments-finance",
+  "aliases": [
+    "rate of interest"
+  ],
+  "short": "The percentage cost of borrowing money for a period.",
+  "seoTitle": "Interest Rate — Meaning and Example for Businesses",
+  "metaDescription": "An interest rate is the cost of borrowing, expressed as a percentage of the amount owed per period. The percentage cost of borrowing money for a period.",
+  "updated": "2026-08-07",
+  "definition": "An interest rate is the cost of borrowing, expressed as a percentage of the amount owed per period. It may be quoted as flat or reducing, annual or monthly, fixed or floating — and those distinctions change the real cost substantially.",
+  "bodyHtml": "<h2>Why Interest Rate matters</h2><p>Two loans quoting the same number can cost very different amounts. A 12% flat rate is roughly a 21% reducing rate, which is the single most common misunderstanding in small business lending.</p><h2>How Interest Rate works in practice</h2><p>Always convert quotes to the same basis before comparing, and include processing fees and insurance in the effective cost. Ask for the total amount repayable — it is the least ambiguous question there is.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between flat and reducing interest?",
+      "answer": "Flat charges interest on the original amount throughout; reducing charges it on the outstanding balance, which falls each month."
+    },
+    {
+      "question": "What is a floating rate?",
+      "answer": "One tied to a benchmark, so it moves with the market and changes your EMI or tenure over time."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "flat-rate-interest",
+    "reducing-balance-interest",
+    "emi",
+    "principal"
+  ]
+}

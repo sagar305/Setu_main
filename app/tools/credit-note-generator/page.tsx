@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Credit Note Generator | GST-Ready PDF | Setu",
@@ -75,6 +76,9 @@ export default function CreditNoteGeneratorPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <DocumentTool docType="credit-note" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="credit-note-generator" />
       </section>
     </>
   );

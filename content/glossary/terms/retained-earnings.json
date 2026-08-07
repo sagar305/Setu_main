@@ -1,0 +1,57 @@
+{
+  "slug": "retained-earnings",
+  "term": "Retained Earnings",
+  "category": "accounting",
+  "aliases": [
+    "accumulated profits",
+    "reserves and surplus"
+  ],
+  "short": "Profits kept in the business rather than paid out.",
+  "seoTitle": "Retained Earnings — Meaning, Formula and Example",
+  "metaDescription": "Retained earnings are the accumulated profits a business has kept rather than distributed to its owners. Profits kept in the business rather than paid out.",
+  "updated": "2026-08-07",
+  "definition": "Retained earnings are the accumulated profits a business has kept rather than distributed to its owners. They appear under equity on the balance sheet and grow with each profitable year.",
+  "bodyHtml": "<h2>Why Retained Earnings matters</h2><p>Retained earnings are the cheapest growth capital there is — no interest, no dilution. They are also the clearest measure of whether a business has genuinely built value over time.</p><h2>Retained Earnings formula</h2><p class=\"glossary-formula\">Closing retained earnings = Opening + Net profit − Dividends or drawings</p><p>Accumulated losses reduce the balance and can turn it negative.</p><h2>How Retained Earnings works in practice</h2><p>They rise by profit and fall by losses and distributions. A business with years of profit and no retained earnings has been paying everything out, which limits its ability to fund its own growth.</p>",
+  "faq": [
+    {
+      "question": "Are retained earnings cash?",
+      "answer": "No. They may be sitting in stock, equipment or receivables rather than in the bank."
+    },
+    {
+      "question": "Can retained earnings be negative?",
+      "answer": "Yes. Accumulated losses exceeding past profits produce a negative balance."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "net-profit",
+    "balance-sheet",
+    "equity",
+    "capital-expenditure"
+  ],
+  "formula": {
+    "expression": "Closing retained earnings = Opening + Net profit − Dividends or drawings",
+    "note": "Accumulated losses reduce the balance and can turn it negative."
+  }
+}

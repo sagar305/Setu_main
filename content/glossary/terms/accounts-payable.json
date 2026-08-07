@@ -1,0 +1,59 @@
+{
+  "slug": "accounts-payable",
+  "term": "Accounts Payable",
+  "category": "accounting",
+  "aliases": [
+    "AP",
+    "creditors",
+    "trade payables",
+    "sundry creditors"
+  ],
+  "short": "Money you owe suppliers for goods or services already received.",
+  "seoTitle": "Accounts Payable — Meaning, Formula and Example",
+  "metaDescription": "Accounts payable is what a business owes its suppliers for goods and services already received but not yet paid. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Accounts payable is what a business owes its suppliers for goods and services already received but not yet paid. It is a liability, and in practice it is short-term finance extended by your suppliers.",
+  "bodyHtml": "<h2>Why Accounts Payable matters</h2><p>Payables are the cheapest working capital available, and also the easiest relationship to damage. Paying too early wastes cash; paying late without warning costs goodwill and, eventually, terms.</p><h2>Accounts Payable formula</h2><p class=\"glossary-formula\">Days payable outstanding = Accounts payable ÷ Credit purchases × Days in period</p><p>Read alongside DSO to see whether suppliers are financing your customers.</p><h2>How Accounts Payable works in practice</h2><p>Age payables the way you age receivables, and pay to terms rather than to whoever calls loudest. Where early-payment discounts are offered, compare the discount against the value of holding the cash.</p>",
+  "faq": [
+    {
+      "question": "Should I always take the early payment discount?",
+      "answer": "Compare the annualised value of the discount with your cost of cash — often it is worth taking, but not always."
+    },
+    {
+      "question": "What if I cannot pay on time?",
+      "answer": "Tell the supplier before the due date. Terms survive a warned delay far better than a silent one."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "vendor-reconciliation",
+    "payment-terms",
+    "working-capital"
+  ],
+  "formula": {
+    "expression": "Days payable outstanding = Accounts payable ÷ Credit purchases × Days in period",
+    "note": "Read alongside DSO to see whether suppliers are financing your customers."
+  }
+}

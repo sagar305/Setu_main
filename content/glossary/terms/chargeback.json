@@ -1,0 +1,52 @@
+{
+  "slug": "chargeback",
+  "term": "Chargeback",
+  "category": "payments-finance",
+  "aliases": [
+    "payment dispute"
+  ],
+  "short": "A card payment reversed by the customer's bank after a dispute.",
+  "seoTitle": "Chargeback — Meaning and Example for Businesses",
+  "metaDescription": "A card payment reversed by the customer's bank after a dispute. The defence is documentation, prepared before the dispute exists.",
+  "updated": "2026-08-07",
+  "definition": "A chargeback is a reversal of a card payment initiated by the customer's bank, usually after a dispute over a transaction the customer says they did not make or did not receive.",
+  "bodyHtml": "<h2>Why Chargeback matters</h2><p>A chargeback takes back the money after the goods have gone, and repeated chargebacks put a merchant account at risk. The defence is documentation, prepared before the dispute exists.</p><h2>How Chargeback works in practice</h2><p>Keep the order record, delivery proof and communication for every card transaction, and respond within the deadline. Clear billing descriptors and prompt refunds prevent most disputes from starting.</p>",
+  "faq": [
+    {
+      "question": "How is a chargeback different from a refund?",
+      "answer": "A refund is initiated by you; a chargeback is forced through the customer's bank, often with a fee attached."
+    },
+    {
+      "question": "How do I reduce chargebacks?",
+      "answer": "Recognisable billing names, delivery proof, responsive support and refunding genuine complaints quickly."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "credit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "refund",
+    "payment-gateway",
+    "settlement",
+    "sales-return"
+  ]
+}

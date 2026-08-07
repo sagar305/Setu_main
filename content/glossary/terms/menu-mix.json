@@ -1,0 +1,57 @@
+{
+  "slug": "menu-mix",
+  "term": "Menu Mix",
+  "category": "restaurant-ops",
+  "aliases": [
+    "sales mix",
+    "item mix"
+  ],
+  "short": "The share of total sales each dish accounts for.",
+  "seoTitle": "Menu Mix — Meaning, Formula and Example",
+  "metaDescription": "Menu mix is the distribution of sales across items — what share of covers each dish accounts for. Menu mix is the only way to see that shift.",
+  "updated": "2026-08-07",
+  "definition": "Menu mix is the distribution of sales across items — what share of covers each dish accounts for. It is the popularity half of menu engineering and drives the blended food cost of the whole restaurant.",
+  "bodyHtml": "<h2>Why Menu Mix matters</h2><p>Blended food cost can rise without any recipe or price changing, purely because customers shifted toward lower-margin dishes. Menu mix is the only way to see that shift.</p><h2>Menu Mix formula</h2><p class=\"glossary-formula\">Item mix % = Units sold of item ÷ Total units sold × 100</p><p>Weighting contribution by mix gives the blended contribution per cover.</p><h2>How Menu Mix works in practice</h2><p>Pull item-wise sales counts from your POS monthly and compare them with contribution per item. Where the mix is drifting toward plowhorses, menu layout and staff recommendations are the fastest levers.</p>",
+  "faq": [
+    {
+      "question": "Why did my food cost rise with no price change?",
+      "answer": "Almost always a menu mix shift toward dishes with higher food cost percentages."
+    },
+    {
+      "question": "How does menu design change the mix?",
+      "answer": "Position, boxing and staff recommendations measurably shift what people order, which is why layout is a margin decision."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "menu-engineering",
+    "food-cost-percentage",
+    "contribution-margin",
+    "average-cover"
+  ],
+  "formula": {
+    "expression": "Item mix % = Units sold of item ÷ Total units sold × 100",
+    "note": "Weighting contribution by mix gives the blended contribution per cover."
+  }
+}

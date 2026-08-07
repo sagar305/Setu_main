@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AppointmentBookTool } from "@/components/tools/AppointmentBook/AppointmentBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Appointment Book | Salons, Clinics & Services | Setu",
@@ -92,6 +93,9 @@ export default function AppointmentBookPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="appointment-book" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="appointment-book" />
       </section>
     </>
   );

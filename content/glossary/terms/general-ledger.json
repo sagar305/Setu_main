@@ -1,0 +1,53 @@
+{
+  "slug": "general-ledger",
+  "term": "General Ledger",
+  "category": "accounting",
+  "aliases": [
+    "GL",
+    "ledger"
+  ],
+  "short": "Every transaction sorted into the account it belongs to.",
+  "seoTitle": "General Ledger — Meaning and Example for Businesses",
+  "metaDescription": "The general ledger holds every posted transaction organised by account, so each account shows its opening balance, movements and closing balance.",
+  "updated": "2026-08-07",
+  "definition": "The general ledger holds every posted transaction organised by account, so each account shows its opening balance, movements and closing balance. It is the book the financial statements are built from.",
+  "bodyHtml": "<h2>Why General Ledger matters</h2><p>The ledger is where questions get answered. A P&L says repairs cost ₹1.8 lakh; only the ledger says which repairs, on what dates, paid to whom.</p><h2>How General Ledger works in practice</h2><p>Review the largest expense ledgers monthly rather than only at year end. Odd entries are far easier to explain within weeks of posting than at audit.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a journal and a ledger?",
+      "answer": "The journal records transactions in date order; the ledger reorganises the same entries by account."
+    },
+    {
+      "question": "What is a subsidiary ledger?",
+      "answer": "A detailed ledger for one control account, such as customer-wise balances behind accounts receivable."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    }
+  ],
+  "relatedTerms": [
+    "journal-entry",
+    "trial-balance",
+    "chart-of-accounts",
+    "audit-trail"
+  ]
+}

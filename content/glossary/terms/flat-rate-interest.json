@@ -1,0 +1,56 @@
+{
+  "slug": "flat-rate-interest",
+  "term": "Flat Rate Interest",
+  "category": "payments-finance",
+  "aliases": [
+    "flat interest rate"
+  ],
+  "short": "Interest charged on the original amount for the whole tenure.",
+  "seoTitle": "Flat Rate Interest — Meaning, Formula and Example",
+  "metaDescription": "Flat rate interest is charged on the original loan amount for the entire tenure, regardless of how much has already been repaid.",
+  "updated": "2026-08-07",
+  "definition": "Flat rate interest is charged on the original loan amount for the entire tenure, regardless of how much has already been repaid. The instalment stays the same, but so does the interest base.",
+  "bodyHtml": "<h2>Why Flat Rate Interest matters</h2><p>Flat rates make loans look cheaper than they are. A 12% flat rate over three years costs roughly what a 21% reducing rate would, which is a large difference on a real loan.</p><h2>Flat Rate Interest formula</h2><p class=\"glossary-formula\">Total interest = Principal × Flat rate × Years</p><p>EMI = (principal + total interest) ÷ number of months.</p><h2>How Flat Rate Interest works in practice</h2><p>Flat quoting is common in equipment finance and some non-bank lending. Convert to the effective reducing rate, or simply compare the total amount repayable across offers.</p><h2>Worked example</h2><p>₹5,00,000 at 12% flat for 3 years is ₹1,80,000 of interest — far more than a 12% reducing loan would cost.</p>",
+  "faq": [
+    {
+      "question": "Why do lenders quote flat rates?",
+      "answer": "Because the number looks smaller. It is not dishonest, but it is not comparable to a reducing rate."
+    },
+    {
+      "question": "How do I compare two loans fairly?",
+      "answer": "Ask both lenders for the total amount repayable including all fees."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "reducing-balance-interest",
+    "interest-rate",
+    "emi",
+    "principal"
+  ],
+  "formula": {
+    "expression": "Total interest = Principal × Flat rate × Years",
+    "note": "EMI = (principal + total interest) ÷ number of months."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "special-allowance",
+  "term": "Special Allowance",
+  "category": "payroll-hr",
+  "aliases": [
+    "other allowance"
+  ],
+  "short": "The balancing salary component after basic and named allowances.",
+  "seoTitle": "Special Allowance — Meaning and Example for Businesses",
+  "metaDescription": "Special allowance is the residual salary component used to make gross pay reach the agreed figure once basic pay and named allowances are set.",
+  "updated": "2026-08-07",
+  "definition": "Special allowance is the residual salary component used to make gross pay reach the agreed figure once basic pay and named allowances are set. It is fully taxable and carries no specific purpose.",
+  "bodyHtml": "<h2>Why Special Allowance matters</h2><p>It is the flexible part of a salary structure, which also makes it the part most often used to keep basic pay artificially low — something wage regulations increasingly constrain.</p><h2>How Special Allowance works in practice</h2><p>Treat it as the balancing figure rather than the main component. A structure where special allowance dominates invites questions from both employees and regulators.</p>",
+  "faq": [
+    {
+      "question": "Is special allowance taxable?",
+      "answer": "Yes, fully, unless it corresponds to a specifically exempt allowance."
+    },
+    {
+      "question": "Does special allowance count for provident fund?",
+      "answer": "Wage definitions have been interpreted broadly, so allowances paid universally can count — worth checking your structure."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "basic-salary",
+    "hra",
+    "gross-salary",
+    "dearness-allowance"
+  ]
+}

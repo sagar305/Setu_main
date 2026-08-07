@@ -1,0 +1,56 @@
+{
+  "slug": "food-cost-variance",
+  "term": "Food Cost Variance",
+  "category": "restaurant-ops",
+  "aliases": [
+    "theoretical vs actual food cost"
+  ],
+  "short": "The gap between what stock should have been used and what was.",
+  "seoTitle": "Food Cost Variance — Meaning, Formula and Example",
+  "metaDescription": "The gap between what stock should have been used and what was. The gap is waste, over-portioning, theft or mis-costing. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Food cost variance is the difference between theoretical usage — what recipes say should have been consumed for the dishes sold — and actual usage measured by stock count. The gap is waste, over-portioning, theft or mis-costing.",
+  "bodyHtml": "<h2>Why Food Cost Variance matters</h2><p>Food cost percentage tells you there is a problem; variance tells you where it is. It is the difference between a symptom and a diagnosis.</p><h2>Food Cost Variance formula</h2><p class=\"glossary-formula\">Variance = Actual usage − Theoretical usage</p><p>Value it at cost and express it as a percentage of theoretical usage.</p><h2>How Food Cost Variance works in practice</h2><p>Run it per item on high-value ingredients weekly. A consistent gap on one ingredient points somewhere specific, while a small gap spread across everything usually means the recipe sheets need updating.</p><h2>Worked example</h2><p>Sales imply 42 kg of chicken but the count shows 48 kg used — a 6 kg variance worth about ₹1,500 at ₹250/kg.</p>",
+  "faq": [
+    {
+      "question": "What causes food cost variance?",
+      "answer": "Over-portioning, waste, unrecorded staff meals, theft, or recipe sheets that no longer match how the dish is made."
+    },
+    {
+      "question": "How often should I measure it?",
+      "answer": "Weekly on your top few ingredients by value; monthly on everything else."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "food-cost-percentage",
+    "wastage",
+    "stock-take",
+    "portion-control"
+  ],
+  "formula": {
+    "expression": "Variance = Actual usage − Theoretical usage",
+    "note": "Value it at cost and express it as a percentage of theoretical usage."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "no-show",
+  "term": "No-Show",
+  "category": "restaurant-ops",
+  "aliases": [
+    "no show",
+    "reservation no-show"
+  ],
+  "short": "A booked party that never arrives.",
+  "seoTitle": "No-Show — Meaning, Formula and Example",
+  "metaDescription": "A no-show is a confirmed reservation whose guests never arrive. It is one of the few losses that is entirely avoidable with a reminder.",
+  "updated": "2026-08-07",
+  "definition": "A no-show is a confirmed reservation whose guests never arrive. The table is held, turned away from walk-ins, and produces nothing — a direct loss of the revenue that seat could have earned.",
+  "bodyHtml": "<h2>Why No-Show matters</h2><p>On a full Saturday, a handful of no-shows removes several thousand rupees of covers that were available and refused. It is one of the few losses that is entirely avoidable with a reminder.</p><h2>No-Show formula</h2><p class=\"glossary-formula\">No-show rate % = No-shows ÷ Total reservations × 100</p><p>Multiply by average cover and party size to value the loss.</p><h2>How No-Show works in practice</h2><p>Confirm by message a few hours ahead, hold tables for a stated grace period, and track the no-show rate by source. Repeat offenders and particular booking channels usually account for most of it.</p>",
+  "faq": [
+    {
+      "question": "Should I take a deposit?",
+      "answer": "For large parties and peak slots it is reasonable, and stating the policy at booking usually reduces no-shows on its own."
+    },
+    {
+      "question": "How long should a table be held?",
+      "answer": "Fifteen to twenty minutes is common, provided the policy is communicated when the booking is made."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "covers",
+    "table-turnover-rate",
+    "footfall",
+    "average-cover"
+  ],
+  "formula": {
+    "expression": "No-show rate % = No-shows ÷ Total reservations × 100",
+    "note": "Multiply by average cover and party size to value the loss."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "depreciation",
+  "term": "Depreciation",
+  "category": "accounting",
+  "aliases": [
+    "asset depreciation"
+  ],
+  "short": "Spreading an asset's cost across the years it is used.",
+  "seoTitle": "Depreciation — Meaning, Formula and Example",
+  "metaDescription": "Depreciation spreads the cost of a fixed asset across the years it is expected to be useful, instead of charging the whole amount in the year of purchase.",
+  "updated": "2026-08-07",
+  "definition": "Depreciation spreads the cost of a fixed asset across the years it is expected to be useful, instead of charging the whole amount in the year of purchase. It is a non-cash expense that reduces both profit and the asset's book value.",
+  "bodyHtml": "<h2>Why Depreciation matters</h2><p>Without depreciation, buying an oven makes one month look terrible and every following month look artificially good. It is also a genuine cost: equipment wears out and must eventually be replaced.</p><h2>Depreciation formula</h2><p class=\"glossary-formula\">Straight-line depreciation = (Cost − Salvage value) ÷ Useful life in years</p><p>Written-down value instead applies a fixed percentage to the reducing balance.</p><h2>How Depreciation works in practice</h2><p>Pick a method and useful life per asset class and apply it consistently. Note that accounting depreciation and the rates permitted for tax often differ, so two schedules are normal.</p><h2>Worked example</h2><p>A ₹3,00,000 oven with a ₹30,000 salvage value over 6 years depreciates at ₹45,000 a year.</p>",
+  "faq": [
+    {
+      "question": "Is depreciation a cash expense?",
+      "answer": "No cash moves, but the cost is real — the asset is being consumed and will need replacing."
+    },
+    {
+      "question": "Which method should I use?",
+      "answer": "Straight line is simplest and suits assets used evenly; written-down value front-loads the charge and often matches tax treatment."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "straight-line-depreciation",
+    "written-down-value",
+    "fixed-asset",
+    "capital-expenditure"
+  ],
+  "formula": {
+    "expression": "Straight-line depreciation = (Cost − Salvage value) ÷ Useful life in years",
+    "note": "Written-down value instead applies a fixed percentage to the reducing balance."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "sell-through-rate",
+  "term": "Sell-Through Rate",
+  "category": "retail-inventory",
+  "aliases": [
+    "sell through rate"
+  ],
+  "short": "The share of received stock sold within a period.",
+  "seoTitle": "Sell-Through Rate — Meaning, Formula and Example",
+  "metaDescription": "Sell-through rate is the percentage of stock received in a period that was sold within it. Sell-through is the buyer's scorecard.",
+  "updated": "2026-08-07",
+  "definition": "Sell-through rate is the percentage of stock received in a period that was sold within it. It answers whether a buy was the right size, which turnover alone does not.",
+  "bodyHtml": "<h2>Why Sell-Through Rate matters</h2><p>Sell-through is the buyer's scorecard. A line with a low sell-through was over-bought regardless of how well it eventually sells, because the cash sat idle in the meantime.</p><h2>Sell-Through Rate formula</h2><p class=\"glossary-formula\">Sell-through % = Units sold ÷ Units received × 100</p><p>Measured over the period the stock was meant to sell in.</p><h2>How Sell-Through Rate works in practice</h2><p>Measure it per line per season and use it to size the next order. It is particularly useful for fashion, festive and seasonal goods, where a second chance to sell does not exist.</p><h2>Worked example</h2><p>Receiving 200 units and selling 130 in the season is a 65% sell-through, leaving 70 units for markdown.</p>",
+  "faq": [
+    {
+      "question": "What is a good sell-through rate?",
+      "answer": "For seasonal goods, high enough that leftovers clear at a modest markdown rather than a clearance."
+    },
+    {
+      "question": "How is it different from inventory turnover?",
+      "answer": "Turnover measures the whole stock's velocity; sell-through judges one specific buy."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "inventory-turnover",
+    "dead-stock",
+    "markdown",
+    "moq"
+  ],
+  "formula": {
+    "expression": "Sell-through % = Units sold ÷ Units received × 100",
+    "note": "Measured over the period the stock was meant to sell in."
+  }
+}

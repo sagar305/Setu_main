@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BusinessProfileTool } from "@/components/tools/BusinessProfile/BusinessProfileTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Business Profile | One Setup for Every Setu Tool | Setu",
@@ -83,6 +84,9 @@ export default function BusinessProfilePage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="business-profile" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="business-profile" />
       </section>
     </>
   );

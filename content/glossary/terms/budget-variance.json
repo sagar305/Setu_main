@@ -1,0 +1,56 @@
+{
+  "slug": "budget-variance",
+  "term": "Budget Variance",
+  "category": "accounting",
+  "aliases": [
+    "budget vs actual variance"
+  ],
+  "short": "The difference between what you budgeted and what actually happened.",
+  "seoTitle": "Budget Variance — Meaning, Formula and Example",
+  "metaDescription": "Budget variance is the difference between a budgeted figure and the actual result for the same line and period. A budget nobody compares against is a wish.",
+  "updated": "2026-08-07",
+  "definition": "Budget variance is the difference between a budgeted figure and the actual result for the same line and period. A favourable variance improves profit; an adverse one reduces it.",
+  "bodyHtml": "<h2>Why Budget Variance matters</h2><p>A budget nobody compares against is a wish. Variance analysis is what turns it into a management tool, by pointing at the specific lines that moved rather than at the total.</p><h2>Budget Variance formula</h2><p class=\"glossary-formula\">Variance = Actual − Budget</p><p>Variance % = variance ÷ budget × 100, which makes small and large lines comparable.</p><h2>How Budget Variance works in practice</h2><p>Review variances monthly, largest first by value, and separate volume effects from rate effects. Sales being 10% below budget is a different problem from costs being 10% above it.</p>",
+  "faq": [
+    {
+      "question": "How often should budgets be reviewed?",
+      "answer": "Monthly for variances, with a re-forecast quarterly if the assumptions have genuinely changed."
+    },
+    {
+      "question": "Should I revise the budget when it is missed?",
+      "answer": "Keep the original for accountability and hold a separate re-forecast, so both the target and the expectation are visible."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "operating-expense",
+    "prepaid-expense",
+    "profit-and-loss-statement",
+    "purchase-price-variance"
+  ],
+  "formula": {
+    "expression": "Variance = Actual − Budget",
+    "note": "Variance % = variance ÷ budget × 100, which makes small and large lines comparable."
+  }
+}

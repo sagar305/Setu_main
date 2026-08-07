@@ -1,0 +1,52 @@
+{
+  "slug": "payment-gateway",
+  "term": "Payment Gateway",
+  "category": "payments-finance",
+  "aliases": [
+    "payment processor"
+  ],
+  "short": "The service that authorises and routes online card and wallet payments.",
+  "seoTitle": "Payment Gateway — Meaning and Example for Businesses",
+  "metaDescription": "A payment gateway authorises and routes online payments between the customer's bank, the card network or wallet, and the merchant's account.",
+  "updated": "2026-08-07",
+  "definition": "A payment gateway authorises and routes online payments between the customer's bank, the card network or wallet, and the merchant's account. It handles authentication and passes back a success or failure.",
+  "bodyHtml": "<h2>Why Payment Gateway matters</h2><p>For online orders, the gateway determines both what you pay in charges and how many customers complete checkout. Failed authentications are a silent, measurable loss of sales.</p><h2>How Payment Gateway works in practice</h2><p>Compare gateways on effective cost including per-transaction fees and settlement delay, and on success rates by payment mode. Reconcile gateway settlement reports against orders rather than trusting the dashboard total.</p>",
+  "faq": [
+    {
+      "question": "Is a payment gateway needed for UPI at a counter?",
+      "answer": "No. A UPI QR settles bank to bank directly without a gateway."
+    },
+    {
+      "question": "What does a gateway actually charge?",
+      "answer": "A per-transaction percentage that varies by instrument, plus fixed fees — always compare on the effective blended rate."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "mdr",
+    "settlement",
+    "chargeback",
+    "upi"
+  ]
+}

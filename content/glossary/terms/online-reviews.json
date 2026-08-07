@@ -1,0 +1,53 @@
+{
+  "slug": "online-reviews",
+  "term": "Online Reviews",
+  "category": "growth-marketing",
+  "aliases": [
+    "customer reviews",
+    "ratings and reviews"
+  ],
+  "short": "Public customer ratings that shape whether new customers try you.",
+  "seoTitle": "Online Reviews — Meaning and Example for Businesses",
+  "metaDescription": "Online reviews are public customer ratings and comments on Google, delivery platforms and social media. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Online reviews are public customer ratings and comments on Google, delivery platforms and social media. They function as the modern shopfront: most new customers read them before deciding.",
+  "bodyHtml": "<h2>Why Online Reviews matters</h2><p>Rating changes move order volume measurably on delivery platforms, and a run of poor reviews suppresses discovery long after the underlying problem is fixed.</p><h2>How Online Reviews works in practice</h2><p>Ask satisfied customers at the moment of satisfaction, respond to negative reviews factually and quickly, and treat recurring complaints as an operations report rather than a reputation problem.</p>",
+  "faq": [
+    {
+      "question": "How do I get more reviews?",
+      "answer": "Ask at the point of payment, ideally with a QR code that opens the review page directly."
+    },
+    {
+      "question": "Should I respond to bad reviews?",
+      "answer": "Yes — briefly, factually and without argument. The response is read by future customers more than by the reviewer."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "google-business-profile",
+    "conversion-rate",
+    "retention-rate",
+    "footfall"
+  ]
+}

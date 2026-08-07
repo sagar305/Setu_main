@@ -1,0 +1,56 @@
+{
+  "slug": "economic-order-quantity",
+  "term": "Economic Order Quantity",
+  "category": "retail-inventory",
+  "aliases": [
+    "EOQ"
+  ],
+  "short": "The order size that minimises ordering plus holding costs.",
+  "seoTitle": "Economic Order Quantity — Meaning, Formula and Example",
+  "metaDescription": "Economic order quantity, or EOQ, is the order size that minimises the combined cost of placing orders and holding stock.",
+  "updated": "2026-08-07",
+  "definition": "Economic order quantity, or EOQ, is the order size that minimises the combined cost of placing orders and holding stock. Order too little too often and ordering costs dominate; order too much and holding costs do.",
+  "bodyHtml": "<h2>Why Economic Order Quantity matters</h2><p>EOQ gives a defensible answer to how much to buy at once, instead of ordering to fill a truck or to hit a discount threshold that quietly costs more in held stock than it saves.</p><h2>Economic Order Quantity formula</h2><p class=\"glossary-formula\">EOQ = √(2 × Annual demand × Cost per order ÷ Holding cost per unit per year)</p><p>Holding cost includes capital tied up, storage and spoilage risk.</p><h2>How Economic Order Quantity works in practice</h2><p>Treat the formula as a guide rather than a rule, since real purchasing also involves supplier minimums, slab discounts and shelf life. It is most useful for steady, non-perishable, high-volume lines.</p>",
+  "faq": [
+    {
+      "question": "Does EOQ work for perishables?",
+      "answer": "Poorly. Shelf life caps the order size long before the formula's optimum is reached."
+    },
+    {
+      "question": "Is a bulk discount always worth taking?",
+      "answer": "Only if the discount exceeds the extra holding, spoilage and cash-lockup cost of the larger order."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    }
+  ],
+  "relatedTerms": [
+    "reorder-point",
+    "moq",
+    "inventory-turnover",
+    "working-capital"
+  ],
+  "formula": {
+    "expression": "EOQ = √(2 × Annual demand × Cost per order ÷ Holding cost per unit per year)",
+    "note": "Holding cost includes capital tied up, storage and spoilage risk."
+  }
+}

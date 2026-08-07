@@ -1,0 +1,58 @@
+{
+  "slug": "provident-fund",
+  "term": "Provident Fund",
+  "category": "payroll-hr",
+  "aliases": [
+    "PF",
+    "EPF",
+    "Employees Provident Fund"
+  ],
+  "short": "A statutory retirement saving with employer and employee contributions.",
+  "seoTitle": "Provident Fund — Meaning, Formula and Example",
+  "metaDescription": "A statutory retirement saving with employer and employee contributions. It also represents a real cost in CTC and a real deduction from take-home pay.",
+  "updated": "2026-08-07",
+  "definition": "The Employees' Provident Fund is a statutory retirement scheme where both employee and employer contribute a percentage of basic pay plus dearness allowance each month, and the accumulated balance earns interest.",
+  "bodyHtml": "<h2>Why Provident Fund matters</h2><p>PF is a legal obligation once thresholds are met, and it is one of the most closely enforced. It also represents a real cost in CTC and a real deduction from take-home pay.</p><h2>Provident Fund formula</h2><p class=\"glossary-formula\">Employee contribution = 12% of basic plus DA</p><p>The employer contributes an equal amount, part of which is directed to the pension scheme.</p><h2>How Provident Fund works in practice</h2><p>Deposit within the monthly deadline and file the return; delays attract interest and damages. Employees can track their balance against their universal account number, which follows them across jobs.</p>",
+  "faq": [
+    {
+      "question": "Is PF mandatory for all businesses?",
+      "answer": "It applies once the establishment crosses the prescribed employee threshold, with voluntary coverage possible below it."
+    },
+    {
+      "question": "Can an employee opt out of PF?",
+      "answer": "Only in limited cases, typically where salary at joining exceeds the wage ceiling and there is no existing PF membership."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "esi",
+    "basic-salary",
+    "ctc",
+    "take-home-salary"
+  ],
+  "formula": {
+    "expression": "Employee contribution = 12% of basic plus DA",
+    "note": "The employer contributes an equal amount, part of which is directed to the pension scheme."
+  }
+}

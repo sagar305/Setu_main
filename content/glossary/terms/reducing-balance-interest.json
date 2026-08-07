@@ -1,0 +1,57 @@
+{
+  "slug": "reducing-balance-interest",
+  "term": "Reducing Balance Interest",
+  "category": "payments-finance",
+  "aliases": [
+    "reducing balance rate",
+    "diminishing balance interest"
+  ],
+  "short": "Interest charged only on the outstanding loan balance.",
+  "seoTitle": "Reducing Balance Interest — Meaning, Formula and Example",
+  "metaDescription": "Reducing balance interest is charged on the outstanding principal, which falls with every repayment. Interest charged only on the outstanding loan balance.",
+  "updated": "2026-08-07",
+  "definition": "Reducing balance interest is charged on the outstanding principal, which falls with every repayment. As the balance shrinks, so does the interest portion of each instalment.",
+  "bodyHtml": "<h2>Why Reducing Balance Interest matters</h2><p>This is the fair and standard basis for most institutional lending. Comparing a reducing rate against a flat rate as though they were the same makes an expensive loan look cheap.</p><h2>Reducing Balance Interest formula</h2><p class=\"glossary-formula\">Interest for the month = Outstanding principal × Annual rate ÷ 12</p><p>Recomputed every month as the principal falls.</p><h2>How Reducing Balance Interest works in practice</h2><p>Bank term loans and most regulated lending use reducing balance. When a lender quotes a flat rate instead, ask for the equivalent reducing rate or the total repayable amount before comparing.</p>",
+  "faq": [
+    {
+      "question": "Is reducing balance always better than flat?",
+      "answer": "At the same quoted number, yes, substantially. The comparison only makes sense after converting to one basis."
+    },
+    {
+      "question": "How do I convert a flat rate to reducing?",
+      "answer": "Approximately, a flat rate is close to double the equivalent reducing rate over a typical tenure."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "flat-rate-interest",
+    "emi",
+    "interest-rate",
+    "amortisation-schedule"
+  ],
+  "formula": {
+    "expression": "Interest for the month = Outstanding principal × Annual rate ÷ 12",
+    "note": "Recomputed every month as the principal falls."
+  }
+}

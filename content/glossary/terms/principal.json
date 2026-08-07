@@ -1,0 +1,56 @@
+{
+  "slug": "principal",
+  "term": "Principal",
+  "category": "payments-finance",
+  "aliases": [
+    "loan principal"
+  ],
+  "short": "The borrowed amount itself, excluding interest.",
+  "seoTitle": "Principal — Meaning, Formula and Example",
+  "metaDescription": "Principal is the amount actually borrowed, separate from the interest charged on it. Only principal repayment reduces debt; interest is the cost of carrying it.",
+  "updated": "2026-08-07",
+  "definition": "Principal is the amount actually borrowed, separate from the interest charged on it. Each EMI repays a slice of principal alongside the month's interest, and the outstanding principal is what future interest is computed on.",
+  "bodyHtml": "<h2>Why Principal matters</h2><p>Only principal repayment reduces debt; interest is the cost of carrying it. This is also why loan repayments do not appear in the P&L — the principal portion is a balance sheet movement, not an expense.</p><h2>Principal formula</h2><p class=\"glossary-formula\">Outstanding principal = Original principal − Principal repaid to date</p><p>Interest for a month = outstanding principal × monthly rate.</p><h2>How Principal works in practice</h2><p>Track the outstanding principal separately from the total EMI when planning cash flow, and remember that prepayment reduces principal directly, cutting all the future interest it would have generated.</p>",
+  "faq": [
+    {
+      "question": "Is EMI an expense in my P&L?",
+      "answer": "Only the interest portion. The principal portion reduces the loan liability on the balance sheet."
+    },
+    {
+      "question": "Why is early-year EMI mostly interest?",
+      "answer": "Because interest is charged on a larger outstanding principal at the start of the tenure."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "emi",
+    "interest-rate",
+    "amortisation-schedule",
+    "working-capital-loan"
+  ],
+  "formula": {
+    "expression": "Outstanding principal = Original principal − Principal repaid to date",
+    "note": "Interest for a month = outstanding principal × monthly rate."
+  }
+}

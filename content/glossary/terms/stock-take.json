@@ -1,0 +1,58 @@
+{
+  "slug": "stock-take",
+  "term": "Stock Take",
+  "category": "retail-inventory",
+  "aliases": [
+    "stocktake",
+    "physical stock count",
+    "physical count"
+  ],
+  "short": "Physically counting everything you hold and comparing it with the books.",
+  "seoTitle": "Stock Take — Meaning, Formula and Example",
+  "metaDescription": "A stock take is a physical count of everything held, compared against what the records say should be there. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A stock take is a physical count of everything held, compared against what the records say should be there. The difference is shrinkage, and the count itself resets the book position to reality.",
+  "bodyHtml": "<h2>Why Stock Take matters</h2><p>Without a count, cost of goods sold is an estimate and gross profit is a guess. Most inventory problems are only discovered through counting, usually later than anyone would like.</p><h2>Stock Take formula</h2><p class=\"glossary-formula\">Shrinkage = Book quantity − Counted quantity</p><p>Valued at cost, this is the loss for the period.</p><h2>How Stock Take works in practice</h2><p>Count when the shop is closed or trading is stopped, in a fixed sequence, with two people on high-value lines. Investigate large differences before adjusting rather than posting the adjustment and moving on.</p>",
+  "faq": [
+    {
+      "question": "How often should I do a stock take?",
+      "answer": "Full counts monthly or quarterly, with weekly cycle counts on high-value or fast-moving lines."
+    },
+    {
+      "question": "What is a cycle count?",
+      "answer": "Counting a subset of items frequently, so problems surface early without shutting the business for a full count."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "cycle-count",
+    "shrinkage",
+    "closing-stock",
+    "dead-stock"
+  ],
+  "formula": {
+    "expression": "Shrinkage = Book quantity − Counted quantity",
+    "note": "Valued at cost, this is the loss for the period."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "lifo",
+  "term": "LIFO",
+  "category": "retail-inventory",
+  "aliases": [
+    "Last In First Out",
+    "last in first out"
+  ],
+  "short": "Valuing sales at the most recent purchase cost first.",
+  "seoTitle": "LIFO — Meaning and Example for Businesses",
+  "metaDescription": "Valuing sales at the most recent purchase cost first. It is a valuation convention rather than a physical practice. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "LIFO, or last in first out, assumes the most recently purchased stock is sold first, so cost of goods sold reflects recent prices and older costs remain in closing stock. It is a valuation convention rather than a physical practice.",
+  "bodyHtml": "<h2>Why LIFO matters</h2><p>LIFO matches current costs against current revenue, which some businesses prefer when prices are rising. It is not permitted under Indian accounting standards, so it appears mainly in comparison and in imported textbooks.</p><h2>How LIFO works in practice</h2><p>Indian businesses generally use FIFO or weighted average. Understanding LIFO still helps when reading foreign financial statements or software defaults built for other markets.</p>",
+  "faq": [
+    {
+      "question": "Can I use LIFO in India?",
+      "answer": "Not for statutory financial statements under Indian accounting standards."
+    },
+    {
+      "question": "Why does LIFO exist at all?",
+      "answer": "It reduces reported profit when prices rise, which some tax regimes historically permitted."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "fifo",
+    "weighted-average-cost",
+    "closing-stock",
+    "cogs"
+  ]
+}

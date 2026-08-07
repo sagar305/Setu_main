@@ -1,0 +1,57 @@
+{
+  "slug": "coupon-code",
+  "term": "Coupon Code",
+  "category": "growth-marketing",
+  "aliases": [
+    "promo code",
+    "discount code"
+  ],
+  "short": "A code that unlocks a specific offer at checkout.",
+  "seoTitle": "Coupon Code — Meaning, Formula and Example",
+  "metaDescription": "A coupon code is a text code that applies a specific discount at checkout. Untracked blanket discounts teach you nothing.",
+  "updated": "2026-08-07",
+  "definition": "A coupon code is a text code that applies a specific discount at checkout. Because each code can be tracked, coupons are how offline and online campaigns are measured.",
+  "bodyHtml": "<h2>Why Coupon Code matters</h2><p>Coupons are measurable discounting — they tell you which campaign, channel or partner actually produced sales. Untracked blanket discounts teach you nothing.</p><h2>Coupon Code formula</h2><p class=\"glossary-formula\">Campaign contribution = Incremental sales × Contribution margin − Discount value given</p><p>Only sales that would not have happened otherwise count as incremental.</p><h2>How Coupon Code works in practice</h2><p>Use a distinct code per channel and campaign, set an expiry and a usage cap, and check whether redemptions were incremental. Codes leaking onto deal sites is a common and expensive failure.</p>",
+  "faq": [
+    {
+      "question": "Should coupon codes expire?",
+      "answer": "Yes. An expiry creates urgency and stops old campaigns discounting sales you would have made anyway."
+    },
+    {
+      "question": "How do I stop code abuse?",
+      "answer": "Usage caps, per-customer limits and unique codes for high-value offers."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "discount",
+    "loyalty-program",
+    "conversion-rate",
+    "referral-program"
+  ],
+  "formula": {
+    "expression": "Campaign contribution = Incremental sales × Contribution margin − Discount value given",
+    "note": "Only sales that would not have happened otherwise count as incremental."
+  }
+}

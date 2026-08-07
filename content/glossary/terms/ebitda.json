@@ -1,0 +1,56 @@
+{
+  "slug": "ebitda",
+  "term": "EBITDA",
+  "category": "pricing-profit",
+  "aliases": [
+    "earnings before interest tax depreciation and amortisation"
+  ],
+  "short": "Operating earnings before interest, tax, depreciation and amortisation.",
+  "seoTitle": "EBITDA — Meaning, Formula and Example",
+  "metaDescription": "EBITDA is earnings before interest, tax, depreciation and amortisation. It is also the usual basis for valuation multiples in a sale or fundraise.",
+  "updated": "2026-08-07",
+  "definition": "EBITDA is earnings before interest, tax, depreciation and amortisation. It strips out financing and accounting choices to show what the underlying operation earns, which is why buyers and lenders lean on it.",
+  "bodyHtml": "<h2>Why EBITDA matters</h2><p>EBITDA makes two businesses comparable when one is leased and financed and the other is owned outright. It is also the usual basis for valuation multiples in a sale or fundraise.</p><h2>EBITDA formula</h2><p class=\"glossary-formula\">EBITDA = Net profit + Interest + Tax + Depreciation + Amortisation</p><p>Equivalently: operating profit plus depreciation and amortisation.</p><h2>How EBITDA works in practice</h2><p>Read it as an operating measure, not as cash. It ignores loan repayments and the very real cost of replacing equipment, so a business with strong EBITDA and heavy debt can still run out of money.</p>",
+  "faq": [
+    {
+      "question": "Is EBITDA the same as cash flow?",
+      "answer": "No. It excludes working capital movements, loan principal and capital spending, all of which consume cash."
+    },
+    {
+      "question": "Why do buyers value on EBITDA?",
+      "answer": "It approximates operating earnings independent of how the current owner financed and depreciated the business."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "net-profit",
+    "operating-margin",
+    "depreciation",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "EBITDA = Net profit + Interest + Tax + Depreciation + Amortisation",
+    "note": "Equivalently: operating profit plus depreciation and amortisation."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "landed-cost",
+  "term": "Landed Cost",
+  "category": "pricing-profit",
+  "aliases": [
+    "fully landed cost"
+  ],
+  "short": "The total cost of getting goods into your store, not just the invoice price.",
+  "seoTitle": "Landed Cost — Meaning, Formula and Example",
+  "metaDescription": "The total cost of getting goods into your store, not just the invoice price. It is the honest cost base for pricing. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Landed cost is the full cost of getting a purchase into your premises: the supplier's price plus freight, loading, duties, non-creditable taxes, insurance and handling. It is the honest cost base for pricing.",
+  "bodyHtml": "<h2>Why Landed Cost matters</h2><p>Pricing off the invoice price alone quietly erases margin on anything heavy, imported or shipped far. On low-margin goods, freight alone can be the difference between profit and loss.</p><h2>Landed Cost formula</h2><p class=\"glossary-formula\">Landed cost = Purchase price + Freight + Duties + Handling + Non-creditable taxes</p><p>Divide by quantity received for the per-unit figure used in pricing.</p><h2>How Landed Cost works in practice</h2><p>Allocate shared freight across a consignment by value or weight, and store the landed figure against the item rather than in a separate note. Otherwise the adjustment gets forgotten the moment prices are next reviewed.</p><h2>Worked example</h2><p>₹50,000 of goods with ₹3,000 freight and ₹1,000 unloading lands at ₹54,000 — an 8% higher cost base than the invoice suggests.</p>",
+  "faq": [
+    {
+      "question": "Should GST be included in landed cost?",
+      "answer": "Only the portion you cannot claim as input tax credit."
+    },
+    {
+      "question": "How do I split freight across mixed items?",
+      "answer": "By value or by weight, whichever better reflects what drove the freight bill."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "calculator",
+      "slug": "purchase-price-variance-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cost-price",
+    "purchase-price-variance",
+    "weighted-average-cost",
+    "cogs"
+  ],
+  "formula": {
+    "expression": "Landed cost = Purchase price + Freight + Duties + Handling + Non-creditable taxes",
+    "note": "Divide by quantity received for the per-unit figure used in pricing."
+  }
+}

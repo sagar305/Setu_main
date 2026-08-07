@@ -1,0 +1,53 @@
+{
+  "slug": "csv-export",
+  "term": "CSV Export",
+  "category": "pos-tech",
+  "aliases": [
+    "CSV file",
+    "data export"
+  ],
+  "short": "Downloading your data as a spreadsheet-readable file.",
+  "seoTitle": "CSV Export — Meaning and Example for Businesses",
+  "metaDescription": "A CSV export downloads data as a plain comma-separated file that opens in any spreadsheet application. Downloading your data as a spreadsheet-readable file.",
+  "updated": "2026-08-07",
+  "definition": "A CSV export downloads data as a plain comma-separated file that opens in any spreadsheet application. It is the lowest common denominator for moving data between systems.",
+  "bodyHtml": "<h2>Why CSV Export matters</h2><p>Export capability is what stops software from holding your business hostage. Any tool without a usable export becomes a trap the day you want to change it or hand data to your accountant.</p><h2>How CSV Export works in practice</h2><p>Check before adopting any tool that it exports the data you would actually need — transactions, masters and balances. Sending your accountant a CSV beats screenshots by a wide margin.</p>",
+  "faq": [
+    {
+      "question": "Why does my CSV open wrongly in Excel?",
+      "answer": "Usually a delimiter or encoding mismatch. Importing rather than double-clicking, and choosing UTF-8, fixes most cases."
+    },
+    {
+      "question": "What should I export before switching software?",
+      "answer": "Transactions, item and customer masters, outstanding balances and stock positions."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    }
+  ],
+  "relatedTerms": [
+    "cloud-backup",
+    "browser-storage",
+    "api-integration",
+    "audit-trail"
+  ]
+}

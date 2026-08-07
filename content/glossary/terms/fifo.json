@@ -1,0 +1,53 @@
+{
+  "slug": "fifo",
+  "term": "FIFO",
+  "category": "retail-inventory",
+  "aliases": [
+    "First In First Out",
+    "first in first out"
+  ],
+  "short": "Selling and valuing the oldest stock first.",
+  "seoTitle": "FIFO — Meaning and Example for Businesses",
+  "metaDescription": "FIFO, or first in first out, assumes the oldest stock is sold first. As a valuation basis it also keeps closing stock close to current replacement cost.",
+  "updated": "2026-08-07",
+  "definition": "FIFO, or first in first out, assumes the oldest stock is sold first. As a physical practice it moves older goods before newer ones; as a valuation method it costs sales at the oldest purchase rates, leaving recent costs in closing stock.",
+  "bodyHtml": "<h2>Why FIFO matters</h2><p>For anything perishable, FIFO is not optional — it is the difference between selling stock and writing it off. As a valuation basis it also keeps closing stock close to current replacement cost.</p><h2>How FIFO works in practice</h2><p>Physically rotate on receiving: new stock behind, old in front, with dates visible. In the books, apply the basis consistently, because switching methods between periods makes gross profit incomparable.</p><h2>Worked example</h2><p>With 100 units bought at ₹40 then 100 at ₹45, FIFO costs the first 100 sold at ₹40 and leaves ₹45 stock on the shelf.</p>",
+  "faq": [
+    {
+      "question": "Is FIFO required for GST or income tax?",
+      "answer": "The consistency of the method matters more than the choice; changing methods to flatter profit invites questions."
+    },
+    {
+      "question": "Which is better, FIFO or weighted average?",
+      "answer": "FIFO suits perishables and rising-cost items; weighted average is simpler when purchase rates fluctuate constantly."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "lifo",
+    "weighted-average-cost",
+    "batch-number",
+    "expiry-tracking"
+  ]
+}

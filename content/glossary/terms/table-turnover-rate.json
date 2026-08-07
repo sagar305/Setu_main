@@ -1,0 +1,57 @@
+{
+  "slug": "table-turnover-rate",
+  "term": "Table Turnover Rate",
+  "category": "restaurant-ops",
+  "aliases": [
+    "table turnover",
+    "seat turnover"
+  ],
+  "short": "How many times a table is used during a service period.",
+  "seoTitle": "Table Turnover Rate — Meaning, Formula and Example",
+  "metaDescription": "Table turnover rate is how many parties a table seats during a service period. Turnover is how a restaurant grows revenue without adding a single seat.",
+  "updated": "2026-08-07",
+  "definition": "Table turnover rate is how many parties a table seats during a service period. A table used three times over a dinner service has a turnover of three, and turnover multiplied by average cover gives the revenue that table produced.",
+  "bodyHtml": "<h2>Why Table Turnover Rate matters</h2><p>Turnover is how a restaurant grows revenue without adding a single seat. Cutting fifteen minutes from an average dinner sitting can add a whole extra turn on the busiest tables.</p><h2>Table Turnover Rate formula</h2><p class=\"glossary-formula\">Table turnover rate = Parties served ÷ Number of tables</p><p>Measured per service period, since lunch and dinner behave differently.</p><h2>How Table Turnover Rate works in practice</h2><p>Break the sitting into stages — seating, ordering, kitchen, payment — and time each. The bottleneck is usually payment and order-taking rather than the kitchen, which is why QR ordering and quick UPI settlement move the number most.</p><h2>Worked example</h2><p>Forty tables serving 96 parties over dinner is a turnover of 2.4; adding half a turn at a ₹900 average cover is about ₹18,000 a night.</p>",
+  "faq": [
+    {
+      "question": "Does faster turnover hurt the guest experience?",
+      "answer": "Only when it is rushed at the table. Most of the time saved comes from waiting, not from eating."
+    },
+    {
+      "question": "What slows turnover the most?",
+      "answer": "Waiting for the bill and waiting to order. Both are solvable without touching the kitchen."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "covers",
+    "average-cover",
+    "ticket-time",
+    "dine-in"
+  ],
+  "formula": {
+    "expression": "Table turnover rate = Parties served ÷ Number of tables",
+    "note": "Measured per service period, since lunch and dinner behave differently."
+  }
+}

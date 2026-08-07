@@ -1,0 +1,57 @@
+{
+  "slug": "tip-pooling",
+  "term": "Tip Pooling",
+  "category": "restaurant-ops",
+  "aliases": [
+    "tip pool",
+    "tip sharing"
+  ],
+  "short": "Collecting tips together and dividing them by an agreed rule.",
+  "seoTitle": "Tip Pooling — Meaning, Formula and Example",
+  "metaDescription": "Collecting tips together and dividing them by an agreed rule. The rule has to be written down, or it becomes the most argued-about part of the job.",
+  "updated": "2026-08-07",
+  "definition": "Tip pooling collects tips into a common pool and distributes them among staff by an agreed rule — equally, by hours worked, or by weighted points across front and back of house.",
+  "bodyHtml": "<h2>Why Tip Pooling matters</h2><p>Pooling recognises that a good meal involves the kitchen as much as the server, and it removes the resentment that comes from section-based luck. The rule has to be written down, or it becomes the most argued-about part of the job.</p><h2>Tip Pooling formula</h2><p class=\"glossary-formula\">Share per person = Total tip pool × Individual points ÷ Total points</p><p>Hours-worked weighting is the simplest defensible basis.</p><h2>How Tip Pooling works in practice</h2><p>Agree the basis in advance, publish the split, and record digital tips separately from cash. Digital tips arrive with the payment and must be tracked so they reach staff intact.</p>",
+  "faq": [
+    {
+      "question": "Should kitchen staff share in tips?",
+      "answer": "Many restaurants include them precisely because service quality depends on the kitchen; the important part is agreeing it openly."
+    },
+    {
+      "question": "How are UPI tips handled?",
+      "answer": "They land with the payment, so they must be tracked in the till and paid out separately rather than absorbed into sales."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "tip-split-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "service-charge",
+    "labour-cost-percentage",
+    "payroll",
+    "covers"
+  ],
+  "formula": {
+    "expression": "Share per person = Total tip pool × Individual points ÷ Total points",
+    "note": "Hours-worked weighting is the simplest defensible basis."
+  }
+}

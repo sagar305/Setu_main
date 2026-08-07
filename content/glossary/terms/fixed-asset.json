@@ -1,0 +1,53 @@
+{
+  "slug": "fixed-asset",
+  "term": "Fixed Asset",
+  "category": "accounting",
+  "aliases": [
+    "fixed assets",
+    "capital asset"
+  ],
+  "short": "A long-lived item bought to use rather than to sell.",
+  "seoTitle": "Fixed Asset — Meaning and Example for Businesses",
+  "metaDescription": "A fixed asset is a long-lived item bought to be used in the business rather than sold — kitchen equipment, furniture, vehicles, computers, fit-outs.",
+  "updated": "2026-08-07",
+  "definition": "A fixed asset is a long-lived item bought to be used in the business rather than sold — kitchen equipment, furniture, vehicles, computers, fit-outs. Its cost is recovered through depreciation over its useful life.",
+  "bodyHtml": "<h2>Why Fixed Asset matters</h2><p>Fixed assets tie up cash for years, and they quietly disappear from attention once installed. A fixed asset register is the only reliable way to know what you own and what it is now worth.</p><h2>How Fixed Asset works in practice</h2><p>Maintain a register with purchase date, cost, location, depreciation method and book value. Verify it physically once a year — small businesses routinely carry assets that were scrapped years ago.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between a fixed asset and an expense?",
+      "answer": "An expense is consumed within the period; a fixed asset delivers benefit over several years and is capitalised."
+    },
+    {
+      "question": "Do I need a fixed asset register?",
+      "answer": "Yes, once you own more than a handful. Insurance, depreciation and disposals all depend on it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "depreciation",
+    "capital-expenditure",
+    "balance-sheet",
+    "written-down-value"
+  ]
+}

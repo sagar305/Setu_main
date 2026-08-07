@@ -1,0 +1,58 @@
+{
+  "slug": "shift-roster",
+  "term": "Shift Roster",
+  "category": "payroll-hr",
+  "aliases": [
+    "staff roster",
+    "duty roster",
+    "shift schedule"
+  ],
+  "short": "The planned schedule of who works which shift.",
+  "seoTitle": "Shift Roster — Meaning, Formula and Example",
+  "metaDescription": "A shift roster is the planned schedule of which staff work which hours across a week. The planned schedule of who works which shift.",
+  "updated": "2026-08-07",
+  "definition": "A shift roster is the planned schedule of which staff work which hours across a week. In hospitality and retail it is the main lever on labour cost, because it decides how staffing matches demand.",
+  "bodyHtml": "<h2>Why Shift Roster matters</h2><p>Rostering to headcount rather than to expected demand is how labour cost percentage drifts upward. The waste is rarely dramatic — it is two extra people on a quiet Tuesday, every Tuesday.</p><h2>Shift Roster formula</h2><p class=\"glossary-formula\">Labour hours needed = Forecast covers ÷ Covers served per labour hour</p><p>Compare against rostered hours to see the gap.</p><h2>How Shift Roster works in practice</h2><p>Build the roster from forecast covers or footfall by day-part, publish it early enough to be fair, and review actual against planned hours weekly. Small mismatches repeated daily are what the monthly number is made of.</p>",
+  "faq": [
+    {
+      "question": "How far ahead should rosters be published?",
+      "answer": "At least a week. Late rosters cost goodwill and produce last-minute overtime."
+    },
+    {
+      "question": "How do I know if I am overstaffed?",
+      "answer": "Compare covers or sales per labour hour across day-parts; the weak slots stand out immediately."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "labour-cost-percentage",
+    "overtime",
+    "covers",
+    "payroll"
+  ],
+  "formula": {
+    "expression": "Labour hours needed = Forecast covers ÷ Covers served per labour hour",
+    "note": "Compare against rostered hours to see the gap."
+  }
+}

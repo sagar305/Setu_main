@@ -1,0 +1,56 @@
+{
+  "slug": "income-tax",
+  "term": "Income Tax",
+  "category": "payroll-hr",
+  "aliases": [
+    "personal income tax"
+  ],
+  "short": "Tax on the income of a person or business for a financial year.",
+  "seoTitle": "Income Tax — Meaning, Formula and Example",
+  "metaDescription": "Income tax is levied on the income of individuals and businesses for a financial year. It is worth computing both rather than assuming.",
+  "updated": "2026-08-07",
+  "definition": "Income tax is levied on the income of individuals and businesses for a financial year. Salaried individuals in India choose between the old regime with exemptions and deductions and the new regime with lower slab rates and fewer deductions.",
+  "bodyHtml": "<h2>Why Income Tax matters</h2><p>The regime choice changes take-home pay materially, and it depends on how much a person actually claims in exemptions. It is worth computing both rather than assuming.</p><h2>Income Tax formula</h2><p class=\"glossary-formula\">Tax payable = Tax on total income after deductions − TDS already deducted − Advance tax paid</p><p>Interest applies where advance tax instalments fall short.</p><h2>How Income Tax works in practice</h2><p>Estimate annual income early in the year so TDS is spread evenly instead of concentrated in the final quarter. Business income additionally involves advance tax instalments through the year.</p>",
+  "faq": [
+    {
+      "question": "Which tax regime should I choose?",
+      "answer": "Compute both. The old regime usually wins with substantial HRA, home loan interest and deductions; otherwise the new regime often does."
+    },
+    {
+      "question": "What is advance tax?",
+      "answer": "Tax paid in instalments through the year on income where TDS does not cover the liability, typical for business income."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    }
+  ],
+  "relatedTerms": [
+    "tds",
+    "form-16",
+    "hra",
+    "financial-year"
+  ],
+  "formula": {
+    "expression": "Tax payable = Tax on total income after deductions − TDS already deducted − Advance tax paid",
+    "note": "Interest applies where advance tax instalments fall short."
+  }
+}

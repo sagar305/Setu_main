@@ -1,0 +1,56 @@
+{
+  "slug": "prime-cost",
+  "term": "Prime Cost",
+  "category": "restaurant-ops",
+  "aliases": [
+    "prime costs"
+  ],
+  "short": "Food cost plus labour cost, the two biggest controllables.",
+  "seoTitle": "Prime Cost — Meaning, Formula and Example",
+  "metaDescription": "Prime cost is the sum of cost of goods sold and total labour cost, including wages, overtime and statutory contributions.",
+  "updated": "2026-08-07",
+  "definition": "Prime cost is the sum of cost of goods sold and total labour cost, including wages, overtime and statutory contributions. In restaurant management it is treated as the master control number.",
+  "bodyHtml": "<h2>Why Prime Cost matters</h2><p>Food and labour are the two largest costs a restaurant can actually influence week to week. Rent is fixed by a lease, but prime cost responds to rostering, portioning and purchasing decisions immediately.</p><h2>Prime Cost formula</h2><p class=\"glossary-formula\">Prime cost % = (COGS + Total labour cost) ÷ Total sales × 100</p><p>Include employer contributions and casual staff in labour, not just payroll salaries.</p><h2>How Prime Cost works in practice</h2><p>Track prime cost weekly as a percentage of sales rather than monthly. Weekly visibility catches an overstaffed roster or a supplier price rise while the month can still be saved.</p><h2>Worked example</h2><p>₹3,00,000 food cost and ₹2,40,000 labour on ₹9,50,000 sales gives a prime cost of about 57%.</p>",
+  "faq": [
+    {
+      "question": "What prime cost should a restaurant target?",
+      "answer": "Full-service formats commonly aim below the low sixties as a percentage of sales, but the right target depends on format and rent."
+    },
+    {
+      "question": "Why combine food and labour into one number?",
+      "answer": "Because they trade off: extra prep staff can cut waste, and convenience products cut labour but raise food cost."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "food-cost-percentage",
+    "labour-cost-percentage",
+    "cogs",
+    "break-even-point"
+  ],
+  "formula": {
+    "expression": "Prime cost % = (COGS + Total labour cost) ÷ Total sales × 100",
+    "note": "Include employer contributions and casual staff in labour, not just payroll salaries."
+  }
+}

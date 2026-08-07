@@ -1,0 +1,56 @@
+{
+  "slug": "conversion-rate",
+  "term": "Conversion Rate",
+  "category": "growth-marketing",
+  "aliases": [
+    "conversion %"
+  ],
+  "short": "The share of visitors or enquiries that become sales.",
+  "seoTitle": "Conversion Rate — Meaning, Formula and Example",
+  "metaDescription": "The share of visitors or enquiries that become sales. It measures how well interest becomes revenue. Conversion is usually cheaper to improve than traffic.",
+  "updated": "2026-08-07",
+  "definition": "Conversion rate is the percentage of people who take the action you wanted — visitors who buy, enquiries that become orders, listing views that become deliveries. It measures how well interest becomes revenue.",
+  "bodyHtml": "<h2>Why Conversion Rate matters</h2><p>Conversion is usually cheaper to improve than traffic. Doubling footfall is expensive; converting a few more of the people already in front of you is often free.</p><h2>Conversion Rate formula</h2><p class=\"glossary-formula\">Conversion rate % = Conversions ÷ Total opportunities × 100</p><p>Measure it per stage, not only end to end.</p><h2>How Conversion Rate works in practice</h2><p>Measure at each step of the journey so the drop-off point is visible. For a shop that means footfall to bills; for a delivery listing, views to orders.</p><h2>Worked example</h2><p>300 footfall producing 90 bills is a 30% conversion rate.</p>",
+  "faq": [
+    {
+      "question": "How do I measure footfall conversion in a shop?",
+      "answer": "Count people entering against bills issued. Even a manual count for a week is revealing."
+    },
+    {
+      "question": "What is a good conversion rate?",
+      "answer": "Highly category-dependent. Improving your own number matters more than matching a benchmark."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "footfall",
+    "customer-acquisition-cost",
+    "average-order-value",
+    "online-reviews"
+  ],
+  "formula": {
+    "expression": "Conversion rate % = Conversions ÷ Total opportunities × 100",
+    "note": "Measure it per stage, not only end to end."
+  }
+}

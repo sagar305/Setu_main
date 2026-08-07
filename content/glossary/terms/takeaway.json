@@ -1,0 +1,54 @@
+{
+  "slug": "takeaway",
+  "term": "Takeaway",
+  "category": "restaurant-ops",
+  "aliases": [
+    "parcel",
+    "takeout",
+    "pickup order"
+  ],
+  "short": "Food packed for the customer to carry away.",
+  "seoTitle": "Takeaway — Meaning and Example for Businesses",
+  "metaDescription": "Takeaway, also called parcel, is food packed for the customer to collect and consume elsewhere. Food packed for the customer to carry away.",
+  "updated": "2026-08-07",
+  "definition": "Takeaway, also called parcel, is food packed for the customer to collect and consume elsewhere. It avoids delivery commission but adds packaging cost and needs a counter flow that does not block dine-in service.",
+  "bodyHtml": "<h2>Why Takeaway matters</h2><p>Takeaway is usually the most profitable off-premise channel because there is no aggregator cut. It is also the easiest to under-price, since packaging is rarely built into the menu price.</p><h2>How Takeaway works in practice</h2><p>Cost packaging into every takeaway item and give the channel its own pickup point and token flow so waiting customers do not congest the dining area.</p>",
+  "faq": [
+    {
+      "question": "Should takeaway prices match dine-in?",
+      "answer": "Many restaurants match them and absorb packaging; others price a small premium. Either way the packaging cost should be known."
+    },
+    {
+      "question": "How do I keep takeaway from slowing dine-in?",
+      "answer": "A separate pickup counter and a token or queue display, so collection never competes with table service."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "dine-in",
+    "cloud-kitchen",
+    "aggregator-commission",
+    "plate-cost"
+  ]
+}

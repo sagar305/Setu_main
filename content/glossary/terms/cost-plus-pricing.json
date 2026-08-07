@@ -1,0 +1,56 @@
+{
+  "slug": "cost-plus-pricing",
+  "term": "Cost-Plus Pricing",
+  "category": "pricing-profit",
+  "aliases": [
+    "cost plus pricing"
+  ],
+  "short": "Setting price by adding a fixed percentage to cost.",
+  "seoTitle": "Cost-Plus Pricing — Meaning, Formula and Example",
+  "metaDescription": "Cost-plus pricing sets the selling price by adding a fixed percentage to the cost of a product or service. Setting price by adding a fixed percentage to cost.",
+  "updated": "2026-08-07",
+  "definition": "Cost-plus pricing sets the selling price by adding a fixed percentage to the cost of a product or service. It is the simplest pricing method there is, and the default in wholesale, contracting and much of retail.",
+  "bodyHtml": "<h2>Why Cost-Plus Pricing matters</h2><p>Cost-plus guarantees a margin on every sale as long as the costs are accurate, which is exactly its weakness: it ignores what customers will pay and rewards inefficiency by passing higher costs straight through.</p><h2>Cost-Plus Pricing formula</h2><p class=\"glossary-formula\">Price = Cost × (1 + markup %)</p><p>For a target margin instead, divide cost by one minus the margin.</p><h2>How Cost-Plus Pricing works in practice</h2><p>Use it as a floor rather than an answer. Compute the cost-plus price, then test it against competitors and against what the item is worth to the customer before printing the menu or the price list.</p>",
+  "faq": [
+    {
+      "question": "Is cost-plus pricing bad?",
+      "answer": "It is safe rather than bad. It protects margin but leaves money on the table for anything customers value highly."
+    },
+    {
+      "question": "What should the plus be?",
+      "answer": "Enough to cover overheads and the profit you need, which means knowing your fixed costs before choosing the percentage."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "markup",
+    "landed-cost",
+    "price-elasticity",
+    "selling-price"
+  ],
+  "formula": {
+    "expression": "Price = Cost × (1 + markup %)",
+    "note": "For a target margin instead, divide cost by one minus the margin."
+  }
+}

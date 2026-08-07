@@ -1,0 +1,56 @@
+{
+  "slug": "abc-analysis",
+  "term": "ABC Analysis",
+  "category": "retail-inventory",
+  "aliases": [
+    "ABC classification"
+  ],
+  "short": "Sorting stock into A, B and C classes by value contribution.",
+  "seoTitle": "ABC Analysis — Meaning, Formula and Example",
+  "metaDescription": "Sorting stock into A, B and C classes by value contribution. Attention is finite. See the formula, an example and the free Setu tools that use ABC Analysis.",
+  "updated": "2026-08-07",
+  "definition": "ABC analysis sorts inventory into three classes by annual consumption value: a small group of A items that account for most of the value, a middle B group, and a long tail of C items worth little individually.",
+  "bodyHtml": "<h2>Why ABC Analysis matters</h2><p>Attention is finite. ABC analysis says where to spend it — tight counting and negotiation on A items, light-touch rules on C items — instead of treating every SKU as equally important.</p><h2>ABC Analysis formula</h2><p class=\"glossary-formula\">Annual consumption value = Annual units used × Unit cost</p><p>Rank descending and take the cumulative share to draw the class boundaries.</p><h2>How ABC Analysis works in practice</h2><p>Rank items by annual usage value, take the cumulative percentage, and cut at roughly 70–80% for A and the next 15–20% for B. Set counting frequency, safety stock and review cadence by class.</p>",
+  "faq": [
+    {
+      "question": "How often should ABC classes be refreshed?",
+      "answer": "Twice a year is usually enough, unless the range changes substantially."
+    },
+    {
+      "question": "Should C items be dropped?",
+      "answer": "Not automatically. Some are low value but essential, which is why class is a guide to attention rather than to range."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "cycle-count",
+    "dead-stock",
+    "inventory-turnover",
+    "sku"
+  ],
+  "formula": {
+    "expression": "Annual consumption value = Annual units used × Unit cost",
+    "note": "Rank descending and take the cumulative share to draw the class boundaries."
+  }
+}

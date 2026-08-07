@@ -1,0 +1,53 @@
+{
+  "slug": "ticket-time",
+  "term": "Ticket Time",
+  "category": "restaurant-ops",
+  "aliases": [
+    "kitchen ticket time",
+    "prep time"
+  ],
+  "short": "How long an order takes from acceptance to ready.",
+  "seoTitle": "Ticket Time — Meaning and Example for Businesses",
+  "metaDescription": "Ticket time is the elapsed time between an order reaching the kitchen and the food being ready to serve or dispatch. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Ticket time is the elapsed time between an order reaching the kitchen and the food being ready to serve or dispatch. It is measured per ticket and reported as an average per station, channel or day-part.",
+  "bodyHtml": "<h2>Why Ticket Time matters</h2><p>Ticket time drives both table turnover and delivery ratings. Aggregators penalise slow preparation, and diners judge a restaurant on the wait far more than on the plating.</p><h2>How Ticket Time works in practice</h2><p>Measure by station rather than as one restaurant-wide average, since a single slow section sets the pace for every mixed ticket. Look at the worst tenth of tickets, not the mean, because those are the ones customers complain about.</p>",
+  "faq": [
+    {
+      "question": "What is a good ticket time?",
+      "answer": "It depends entirely on format — a QSR counts in minutes, a fine-dining kitchen paces courses deliberately."
+    },
+    {
+      "question": "Why is my average fine but customers still complain?",
+      "answer": "Averages hide outliers. Track the slowest decile, which is where complaints actually come from."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "kitchen-display-system",
+    "kot",
+    "table-turnover-rate",
+    "qsr"
+  ]
+}

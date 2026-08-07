@@ -1,0 +1,56 @@
+{
+  "slug": "par-level",
+  "term": "Par Level",
+  "category": "retail-inventory",
+  "aliases": [
+    "par stock"
+  ],
+  "short": "The standard quantity of an item to keep on hand.",
+  "seoTitle": "Par Level — Meaning, Formula and Example",
+  "metaDescription": "Par level is the standard quantity of an item that should be on hand at the start of each service or trading day. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Par level is the standard quantity of an item that should be on hand at the start of each service or trading day. Anything below par gets ordered or prepped back up to it.",
+  "bodyHtml": "<h2>Why Par Level matters</h2><p>Par levels turn stock decisions into a checklist that any staff member can run. They are especially effective in kitchens and bars, where ordering judgement otherwise sits with one person.</p><h2>Par Level formula</h2><p class=\"glossary-formula\">Order quantity = Par level − Current stock on hand</p><p>Set par from peak usage rather than from the average.</p><h2>How Par Level works in practice</h2><p>Set par from peak-period usage plus a small buffer, and review seasonally. Counting to par at open and close is a two-minute routine that removes most day-to-day shortages.</p>",
+  "faq": [
+    {
+      "question": "How is par level different from a reorder point?",
+      "answer": "Par is a target you top back up to; a reorder point is a trigger to place an order."
+    },
+    {
+      "question": "Where do par levels work best?",
+      "answer": "Bars, kitchens and consumables — anywhere daily topping up is more practical than periodic ordering."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "stock-reorder-point-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "abc-analysis"
+    }
+  ],
+  "relatedTerms": [
+    "reorder-point",
+    "safety-stock",
+    "stockout",
+    "stock-transfer"
+  ],
+  "formula": {
+    "expression": "Order quantity = Par level − Current stock on hand",
+    "note": "Set par from peak usage rather than from the average."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "vendor-reconciliation",
+  "term": "Vendor Reconciliation",
+  "category": "retail-inventory",
+  "aliases": [
+    "supplier reconciliation"
+  ],
+  "short": "Matching your supplier ledger against the supplier's own statement.",
+  "seoTitle": "Vendor Reconciliation — Meaning and Example for Businesses",
+  "metaDescription": "Matching your supplier ledger against the supplier's own statement. Supplier disputes get harder with age. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Vendor reconciliation compares your record of what you owe a supplier against their statement of what they say you owe, and explains every difference — unrecorded invoices, missing credit notes, payments in transit.",
+  "bodyHtml": "<h2>Why Vendor Reconciliation matters</h2><p>Supplier disputes get harder with age. Reconciling quarterly turns a year-long argument into a short list of items both sides can still remember and evidence.</p><h2>How Vendor Reconciliation works in practice</h2><p>Request a statement, match invoice by invoice, and list differences by cause rather than as one net figure. Missing credit notes for returns are usually the largest single category.</p>",
+  "faq": [
+    {
+      "question": "How often should I reconcile with suppliers?",
+      "answer": "Quarterly for regular suppliers, and always before agreeing a large settlement or closing an account."
+    },
+    {
+      "question": "What causes most differences?",
+      "answer": "Unrecorded credit notes for returns, invoices never received, and payments applied to the wrong invoice."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "supplier",
+    "accounts-payable",
+    "purchase-return",
+    "gstr-2b"
+  ]
+}

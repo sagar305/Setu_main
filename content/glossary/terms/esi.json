@@ -1,0 +1,53 @@
+{
+  "slug": "esi",
+  "term": "ESI",
+  "category": "payroll-hr",
+  "aliases": [
+    "Employees State Insurance",
+    "ESIC"
+  ],
+  "short": "Statutory health and disability insurance for lower-wage employees.",
+  "seoTitle": "ESI — Meaning and Example for Businesses",
+  "metaDescription": "Statutory health and disability insurance for lower-wage employees. Missing coverage for eligible staff is a compliance exposure that grows quietly.",
+  "updated": "2026-08-07",
+  "definition": "Employees' State Insurance is a statutory scheme providing medical care, sickness benefit and related cover to employees earning below a wage ceiling, funded by contributions from both employer and employee.",
+  "bodyHtml": "<h2>Why ESI matters</h2><p>ESI applicability is driven by both establishment size and individual wages, so it changes as pay rises. Missing coverage for eligible staff is a compliance exposure that grows quietly.</p><h2>How ESI works in practice</h2><p>Check applicability whenever wages are revised, since an employee can move out of coverage mid-year. Contributions are deposited monthly with a return, on the same discipline as provident fund.</p>",
+  "faq": [
+    {
+      "question": "Who is covered by ESI?",
+      "answer": "Employees earning up to the prescribed wage ceiling in covered establishments; the ceiling is revised from time to time."
+    },
+    {
+      "question": "What does ESI provide?",
+      "answer": "Medical treatment for the employee and dependants, plus sickness, maternity and disability benefits."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "provident-fund",
+    "gross-salary",
+    "payroll",
+    "minimum-wages"
+  ]
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CustomerStatementTool } from "@/components/tools/statements/CustomerStatementTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Customer Statement Generator | Setu",
@@ -75,6 +76,9 @@ export default function CustomerStatementPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <CustomerStatementTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="customer-statement" />
       </section>
     </>
   );

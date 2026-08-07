@@ -1,0 +1,53 @@
+{
+  "slug": "purchase-return",
+  "term": "Purchase Return",
+  "category": "retail-inventory",
+  "aliases": [
+    "return to vendor",
+    "purchase returns"
+  ],
+  "short": "Goods sent back to a supplier after receipt.",
+  "seoTitle": "Purchase Return — Meaning and Example for Businesses",
+  "metaDescription": "A purchase return is stock sent back to a supplier because it is damaged, wrong, short-dated or surplus. Goods sent back to a supplier after receipt.",
+  "updated": "2026-08-07",
+  "definition": "A purchase return is stock sent back to a supplier because it is damaged, wrong, short-dated or surplus. It reduces both the stock on hand and the amount payable to that supplier.",
+  "bodyHtml": "<h2>Why Purchase Return matters</h2><p>Returns that are not documented are the most common cause of a supplier ledger that will not reconcile — you deducted the value, the supplier never credited it, and both sides argue months later.</p><h2>How Purchase Return works in practice</h2><p>Raise a return document referencing the original invoice, obtain the supplier's credit note, and post both against the supplier account so the ledger and the stock record move together.</p>",
+  "faq": [
+    {
+      "question": "Does a purchase return need GST paperwork?",
+      "answer": "The supplier issues a credit note for the tax adjustment; your input credit is reduced correspondingly."
+    },
+    {
+      "question": "What if the supplier will not accept a return?",
+      "answer": "Keep the goods on your books and treat the loss visibly rather than netting it off future payments."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "debit-note-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "sales-return",
+    "debit-note",
+    "grn",
+    "vendor-reconciliation"
+  ]
+}

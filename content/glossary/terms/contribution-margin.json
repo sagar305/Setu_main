@@ -1,0 +1,56 @@
+{
+  "slug": "contribution-margin",
+  "term": "Contribution Margin",
+  "category": "pricing-profit",
+  "aliases": [
+    "contribution per unit"
+  ],
+  "short": "What each sale contributes toward fixed costs after variable costs.",
+  "seoTitle": "Contribution Margin — Meaning, Formula and Example",
+  "metaDescription": "Contribution margin is selling price minus variable cost, per unit or per order. What each sale contributes toward fixed costs after variable costs.",
+  "updated": "2026-08-07",
+  "definition": "Contribution margin is selling price minus variable cost, per unit or per order. It is the amount each sale contributes toward covering fixed costs, and once fixed costs are covered, every further unit of contribution is profit.",
+  "bodyHtml": "<h2>Why Contribution Margin matters</h2><p>Contribution margin, not gross margin, is what decides whether an extra order is worth taking, whether a discount campaign makes sense, and which menu item earns its place at peak hours.</p><h2>Contribution Margin formula</h2><p class=\"glossary-formula\">Contribution margin = Selling price − Variable cost per unit</p><p>Contribution margin ratio = contribution ÷ selling price × 100.</p><h2>How Contribution Margin works in practice</h2><p>A dish with a lower margin percentage can still be the better seller if it contributes more rupees per plate. Ranking by contribution in rupees, then checking volume, is the core of menu and range decisions.</p><h2>Worked example</h2><p>A ₹250 dish with ₹90 of ingredients contributes ₹160 per plate, so 300 plates cover ₹48,000 of fixed costs.</p>",
+  "faq": [
+    {
+      "question": "How is contribution margin different from gross profit?",
+      "answer": "Gross profit deducts all direct costs; contribution margin deducts only costs that vary with volume."
+    },
+    {
+      "question": "Can I sell below full cost?",
+      "answer": "Sometimes. As long as the price exceeds variable cost and fixed costs are already covered, the sale still adds contribution."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "break-even-point",
+    "variable-cost",
+    "fixed-cost",
+    "menu-engineering"
+  ],
+  "formula": {
+    "expression": "Contribution margin = Selling price − Variable cost per unit",
+    "note": "Contribution margin ratio = contribution ÷ selling price × 100."
+  }
+}

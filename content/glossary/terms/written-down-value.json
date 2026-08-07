@@ -1,0 +1,58 @@
+{
+  "slug": "written-down-value",
+  "term": "Written-Down Value",
+  "category": "accounting",
+  "aliases": [
+    "WDV",
+    "reducing balance method",
+    "diminishing balance"
+  ],
+  "short": "Depreciating a fixed percentage of the reducing book value.",
+  "seoTitle": "Written-Down Value — Meaning, Formula and Example",
+  "metaDescription": "Written-down value, or the reducing balance method, applies a fixed percentage to an asset's remaining book value each year.",
+  "updated": "2026-08-07",
+  "definition": "Written-down value, or the reducing balance method, applies a fixed percentage to an asset's remaining book value each year. The charge is largest in the first year and shrinks thereafter.",
+  "bodyHtml": "<h2>Why Written-Down Value matters</h2><p>WDV matches the real pattern of value loss for vehicles, computers and electronics, and it is the basis Indian income tax computation generally follows for blocks of assets.</p><h2>Written-Down Value formula</h2><p class=\"glossary-formula\">Depreciation for the year = Opening book value × Depreciation rate</p><p>Book value carries forward as the next year's opening value.</p><h2>How Written-Down Value works in practice</h2><p>Because the base reduces every year, the asset never quite reaches zero on paper. When it is finally disposed of, the difference between sale proceeds and book value is the gain or loss.</p><h2>Worked example</h2><p>A ₹1,00,000 laptop at 40% WDV depreciates ₹40,000 in year one and ₹24,000 in year two.</p>",
+  "faq": [
+    {
+      "question": "Why do my tax and accounting depreciation differ?",
+      "answer": "They use different rates and methods, so keeping two schedules is normal rather than a mistake."
+    },
+    {
+      "question": "Which assets suit WDV?",
+      "answer": "Anything that loses most of its value early — vehicles, computers, phones and electronics."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "depreciation",
+    "straight-line-depreciation",
+    "fixed-asset",
+    "capital-expenditure"
+  ],
+  "formula": {
+    "expression": "Depreciation for the year = Opening book value × Depreciation rate",
+    "note": "Book value carries forward as the next year's opening value."
+  }
+}

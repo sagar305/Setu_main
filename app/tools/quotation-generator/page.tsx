@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { QuotationGeneratorTool } from "@/components/tools/QuotationGenerator/QuotationGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Quotation Generator | Estimates & Quotes | Setu",
@@ -101,6 +102,9 @@ export default function QuotationGeneratorPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="quotation-generator" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="quotation-generator" />
       </section>
     </>
   );

@@ -1,0 +1,57 @@
+{
+  "slug": "bank-reconciliation",
+  "term": "Bank Reconciliation",
+  "category": "accounting",
+  "aliases": [
+    "bank rec",
+    "bank reco"
+  ],
+  "short": "Matching your cash book against the bank statement.",
+  "seoTitle": "Bank Reconciliation — Meaning, Formula and Example",
+  "metaDescription": "Matching your cash book against the bank statement. Reconciliation is the strongest routine control a small business has.",
+  "updated": "2026-08-07",
+  "definition": "Bank reconciliation compares the cash book against the bank statement for a period and explains every difference — uncleared cheques, bank charges, direct credits and posting errors.",
+  "bodyHtml": "<h2>Why Bank Reconciliation matters</h2><p>Reconciliation is the strongest routine control a small business has. Unrecorded charges, duplicate payments and missing deposits surface here and almost nowhere else.</p><h2>Bank Reconciliation formula</h2><p class=\"glossary-formula\">Adjusted bank balance = Statement balance + Deposits in transit − Outstanding cheques</p><p>This should equal the corrected cash book balance.</p><h2>How Bank Reconciliation works in practice</h2><p>Reconcile monthly, or weekly if transaction volume is high. Start from the bank balance, add deposits not yet credited, subtract cheques not yet presented, and account for everything that remains.</p>",
+  "faq": [
+    {
+      "question": "How often should I reconcile?",
+      "answer": "Monthly at minimum. Businesses with many daily settlements benefit from weekly."
+    },
+    {
+      "question": "What if there is a difference I cannot explain?",
+      "answer": "Investigate rather than posting a balancing entry. Unexplained differences are usually errors or missing transactions."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "cash-flow",
+    "audit-trail",
+    "settlement",
+    "petty-cash"
+  ],
+  "formula": {
+    "expression": "Adjusted bank balance = Statement balance + Deposits in transit − Outstanding cheques",
+    "note": "This should equal the corrected cash book balance."
+  }
+}

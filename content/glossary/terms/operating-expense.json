@@ -1,0 +1,57 @@
+{
+  "slug": "operating-expense",
+  "term": "Operating Expense",
+  "category": "pricing-profit",
+  "aliases": [
+    "OPEX",
+    "operating expenses"
+  ],
+  "short": "The day-to-day costs of running the business, below gross profit.",
+  "seoTitle": "Operating Expense — Meaning, Formula and Example",
+  "metaDescription": "The day-to-day costs of running the business, below gross profit. They are what gross profit has to cover. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Operating expenses are the day-to-day costs of running a business that are not part of the direct cost of sales — salaries, rent, marketing, utilities, repairs and administration. They are what gross profit has to cover.",
+  "bodyHtml": "<h2>Why Operating Expense matters</h2><p>Operating expenses are where most cost control actually happens, because direct costs are largely set by suppliers and recipes. They also creep, since each addition looks small on its own.</p><h2>Operating Expense formula</h2><p class=\"glossary-formula\">Operating profit = Gross profit − Operating expenses</p><p>Adding depreciation back gives an approximation of EBITDA.</p><h2>How Operating Expense works in practice</h2><p>Track them by category month on month rather than as one lump, so a rising line is visible early. Comparing each category as a percentage of sales makes growth-driven increases distinguishable from genuine drift.</p>",
+  "faq": [
+    {
+      "question": "Is buying equipment an operating expense?",
+      "answer": "No. Equipment is capital expenditure, recovered through depreciation over its useful life."
+    },
+    {
+      "question": "What is a healthy expense ratio?",
+      "answer": "It depends on the trade. Track your own ratio against last year rather than an external benchmark."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "overhead",
+    "net-profit",
+    "ebitda",
+    "fixed-cost"
+  ],
+  "formula": {
+    "expression": "Operating profit = Gross profit − Operating expenses",
+    "note": "Adding depreciation back gives an approximation of EBITDA."
+  }
+}

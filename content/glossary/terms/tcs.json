@@ -1,0 +1,52 @@
+{
+  "slug": "tcs",
+  "term": "TCS",
+  "category": "gst-tax",
+  "aliases": [
+    "tax collected at source"
+  ],
+  "short": "Tax the seller collects from the buyer on specified transactions.",
+  "seoTitle": "TCS — Meaning and Example for Businesses",
+  "metaDescription": "Tax the seller collects from the buyer on specified transactions. Left unreconciled, it looks like a permanent commission loss instead of a credit.",
+  "updated": "2026-08-07",
+  "definition": "TCS, or tax collected at source, is tax a seller collects from the buyer on specified transactions — certain goods, high-value sales and, under GST, supplies made through e-commerce operators — and deposits with the government.",
+  "bodyHtml": "<h2>Why TCS matters</h2><p>Sellers on aggregator platforms often see TCS deducted from their payouts without recognising it as their own tax already paid. Left unreconciled, it looks like a permanent commission loss instead of a credit.</p><h2>How TCS works in practice</h2><p>Reconcile the TCS shown in your platform statements against your tax account each quarter, and claim it against your liability. Under GST, the operator's collection also appears in your electronic cash ledger.</p>",
+  "faq": [
+    {
+      "question": "Is TCS an extra cost to my business?",
+      "answer": "No. It is your own tax collected in advance, and it offsets your final liability once reconciled."
+    },
+    {
+      "question": "Who collects TCS on aggregator orders?",
+      "answer": "The e-commerce operator collects it on the net taxable supplies made through the platform."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "tds",
+    "aggregator-commission",
+    "gst",
+    "settlement"
+  ]
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { StockRegisterTool } from "@/components/tools/StockRegister/StockRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Stock Register | Live Inventory & Adjustments | Setu",
@@ -91,6 +92,9 @@ export default function StockRegisterPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="stock-register" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="stock-register" />
       </section>
     </>
   );

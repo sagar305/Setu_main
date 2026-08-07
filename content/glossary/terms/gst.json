@@ -1,0 +1,57 @@
+{
+  "slug": "gst",
+  "term": "GST",
+  "category": "gst-tax",
+  "aliases": [
+    "Goods and Services Tax"
+  ],
+  "short": "India's single indirect tax on the supply of goods and services.",
+  "seoTitle": "GST — Meaning, Formula and Example",
+  "metaDescription": "GST, or Goods and Services Tax, is the indirect tax charged on almost every supply of goods and services in India. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "GST, or Goods and Services Tax, is the indirect tax charged on almost every supply of goods and services in India. It replaced a stack of older taxes such as VAT, service tax and excise with one tax collected at each stage of the supply chain, where each business pays tax on the value it adds and claims credit for the tax it already paid on purchases.",
+  "bodyHtml": "<h2>Why GST matters</h2><p>GST decides the final price on every bill you issue and the credit you can claim on every purchase you make. Charge the wrong rate and you either lose margin absorbing the difference or under-collect and pay it out of pocket at filing time.</p><h2>GST formula</h2><p class=\"glossary-formula\">GST amount = Taxable value × GST rate ÷ 100</p><p>To pull GST out of a price that already includes it, divide by (100 + rate) and multiply by the rate.</p><h2>How GST works in practice</h2><p>On a sale inside your own state, GST splits into CGST and SGST at half the rate each. On an interstate sale it stays whole as IGST. Your billing system should apply the rate per item, print the split on the invoice, and total it up in a shape your monthly return expects.</p><h2>Worked example</h2><p>A ₹1,000 taxable sale at 18% GST inside your state carries ₹180 of GST — ₹90 CGST and ₹90 SGST — for a ₹1,180 invoice total.</p>",
+  "faq": [
+    {
+      "question": "What are the main GST rates in India?",
+      "answer": "The common slabs are 0%, 5%, 12%, 18% and 28%, with the applicable rate depending on the goods or service supplied and, for restaurants, on the type of establishment."
+    },
+    {
+      "question": "Do I need GST registration for a small shop?",
+      "answer": "Registration is driven by turnover thresholds and by whether you sell interstate or through online platforms. Below the threshold and selling only locally, registration is optional but often still useful for claiming input credit."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gstin",
+    "input-tax-credit",
+    "cgst",
+    "igst",
+    "tax-invoice"
+  ],
+  "formula": {
+    "expression": "GST amount = Taxable value × GST rate ÷ 100",
+    "note": "To pull GST out of a price that already includes it, divide by (100 + rate) and multiply by the rate."
+  }
+}

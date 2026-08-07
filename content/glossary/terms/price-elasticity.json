@@ -1,0 +1,56 @@
+{
+  "slug": "price-elasticity",
+  "term": "Price Elasticity",
+  "category": "pricing-profit",
+  "aliases": [
+    "price elasticity of demand"
+  ],
+  "short": "How much demand changes when you change the price.",
+  "seoTitle": "Price Elasticity — Meaning, Formula and Example",
+  "metaDescription": "Price elasticity of demand measures how much the quantity sold changes when the price changes. Elasticity decides where to raise prices.",
+  "updated": "2026-08-07",
+  "definition": "Price elasticity of demand measures how much the quantity sold changes when the price changes. Elastic items lose volume quickly when prices rise; inelastic ones barely move, which is where price increases are safest.",
+  "bodyHtml": "<h2>Why Price Elasticity matters</h2><p>Elasticity decides where to raise prices. Signature dishes, staples and convenience purchases usually absorb a rise; commodity items that customers can price-compare do not.</p><h2>Price Elasticity formula</h2><p class=\"glossary-formula\">Elasticity = % change in quantity sold ÷ % change in price</p><p>A result beyond −1 means demand is elastic and revenue falls when prices rise.</p><h2>How Price Elasticity works in practice</h2><p>You rarely need a formal figure. Raise the price of one item, watch volume for a few weeks against a comparable item you left alone, and let the result guide the next change.</p><h2>Worked example</h2><p>A 10% price rise that costs 4% of volume is inelastic, so revenue and margin both improve.</p>",
+  "faq": [
+    {
+      "question": "Which menu items can I reprice safely?",
+      "answer": "Popular items with no close comparison elsewhere, and low-cost add-ons, tend to be the least sensitive."
+    },
+    {
+      "question": "How often should prices change?",
+      "answer": "Small, regular adjustments are absorbed far better than one large annual jump."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "psychological-pricing",
+    "menu-engineering",
+    "selling-price",
+    "discount"
+  ],
+  "formula": {
+    "expression": "Elasticity = % change in quantity sold ÷ % change in price",
+    "note": "A result beyond −1 means demand is elastic and revenue falls when prices rise."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "api-integration",
+  "term": "API Integration",
+  "category": "pos-tech",
+  "aliases": [
+    "API",
+    "system integration"
+  ],
+  "short": "Two systems exchanging data automatically.",
+  "seoTitle": "API Integration — Meaning and Example for Businesses",
+  "metaDescription": "Two systems exchanging data automatically. Manual re-entry between systems is slow and produces mismatches nobody notices until reconciliation.",
+  "updated": "2026-08-07",
+  "definition": "An API integration lets two systems exchange data automatically — a POS sending sales to accounting software, or an aggregator pushing orders into a kitchen display — without anyone retyping anything.",
+  "bodyHtml": "<h2>Why API Integration matters</h2><p>Manual re-entry between systems is slow and produces mismatches nobody notices until reconciliation. Integrations remove both, though they add a dependency to maintain.</p><h2>How API Integration works in practice</h2><p>Integrate the flows with real daily volume — orders in, sales out — and leave low-volume tasks manual. Every integration needs a plan for what happens when it silently stops working.</p>",
+  "faq": [
+    {
+      "question": "Do I need an API for a small business?",
+      "answer": "Only where re-entry volume justifies it. Below that, a CSV export is usually enough."
+    },
+    {
+      "question": "What breaks integrations most often?",
+      "answer": "Changed credentials and changed data formats on either side, which is why silent failures need monitoring."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "csv-export",
+    "cloud-backup",
+    "aggregator-commission",
+    "point-of-sale"
+  ]
+}

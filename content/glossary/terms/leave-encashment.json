@@ -1,0 +1,56 @@
+{
+  "slug": "leave-encashment",
+  "term": "Leave Encashment",
+  "category": "payroll-hr",
+  "aliases": [
+    "leave salary"
+  ],
+  "short": "Paying an employee for unused leave.",
+  "seoTitle": "Leave Encashment — Meaning, Formula and Example",
+  "metaDescription": "Leave encashment is payment for accumulated but unused leave, either during employment or at exit. Accumulated leave is a liability that grows quietly.",
+  "updated": "2026-08-07",
+  "definition": "Leave encashment is payment for accumulated but unused leave, either during employment or at exit. The policy sets which leave types accumulate, how much may carry forward and how it is valued.",
+  "bodyHtml": "<h2>Why Leave Encashment matters</h2><p>Accumulated leave is a liability that grows quietly. Long-serving staff can carry balances worth months of salary, which surfaces as a large payment at exit.</p><h2>Leave Encashment formula</h2><p class=\"glossary-formula\">Encashment = Daily wage × Number of unused leave days</p><p>Daily wage is usually basic plus DA divided by the working days in the month.</p><h2>How Leave Encashment works in practice</h2><p>Cap accumulation, encourage leave to actually be taken, and provide for the outstanding balance in the accounts. Tax treatment differs between encashment during service and at retirement.</p>",
+  "faq": [
+    {
+      "question": "Is leave encashment taxable?",
+      "answer": "During service it is generally taxable; at retirement, exemptions apply subject to limits and employee category."
+    },
+    {
+      "question": "Should leave accumulation be capped?",
+      "answer": "Yes. Uncapped accumulation creates a growing liability and staff who never actually rest."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "gratuity",
+    "payroll",
+    "overtime",
+    "provision"
+  ],
+  "formula": {
+    "expression": "Encashment = Daily wage × Number of unused leave days",
+    "note": "Daily wage is usually basic plus DA divided by the working days in the month."
+  }
+}

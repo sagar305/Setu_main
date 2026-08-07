@@ -1,0 +1,53 @@
+{
+  "slug": "reverse-charge-mechanism",
+  "term": "Reverse Charge Mechanism",
+  "category": "gst-tax",
+  "aliases": [
+    "RCM",
+    "reverse charge"
+  ],
+  "short": "Rules where the buyer, not the seller, pays the GST on a purchase.",
+  "seoTitle": "What Is Reverse Charge Mechanism? Meaning and Example",
+  "metaDescription": "The reverse charge mechanism shifts the responsibility for paying GST from the supplier to the recipient. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "The reverse charge mechanism shifts the responsibility for paying GST from the supplier to the recipient. It applies to notified supplies and to certain purchases from unregistered suppliers, where the buyer pays the tax directly to the government and then claims it as credit if eligible.",
+  "bodyHtml": "<h2>Why Reverse Charge Mechanism matters</h2><p>RCM is easy to miss because nothing on the supplier's bill flags it. Unrecorded reverse charge liability surfaces during scrutiny as unpaid tax with interest attached, long after the purchase itself is forgotten.</p><h2>How Reverse Charge Mechanism works in practice</h2><p>Tag the supplies you buy under reverse charge in your purchase register — goods transport, legal services from advocates and similar notified categories — so the liability is captured as the bill is entered rather than reconstructed at filing time.</p>",
+  "faq": [
+    {
+      "question": "Do I pay reverse charge in cash?",
+      "answer": "Reverse charge liability is normally discharged in cash rather than by using existing credit, and the credit for it becomes available afterwards."
+    },
+    {
+      "question": "Does buying vegetables from an unregistered vendor attract RCM?",
+      "answer": "Reverse charge on purchases from unregistered suppliers applies only to notified categories, so it depends on what is being bought rather than on the supplier alone."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "input-tax-credit",
+    "gst",
+    "gstr-3b",
+    "tax-invoice"
+  ]
+}

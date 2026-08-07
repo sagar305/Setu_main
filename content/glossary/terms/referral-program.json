@@ -1,0 +1,57 @@
+{
+  "slug": "referral-program",
+  "term": "Referral Program",
+  "category": "growth-marketing",
+  "aliases": [
+    "refer a friend",
+    "referral scheme"
+  ],
+  "short": "Rewarding existing customers for bringing new ones.",
+  "seoTitle": "Referral Program — Meaning, Formula and Example",
+  "metaDescription": "A referral program rewards existing customers for introducing new ones, usually with a benefit for both sides. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A referral program rewards existing customers for introducing new ones, usually with a benefit for both sides. It converts satisfaction into acquisition at a known cost.",
+  "bodyHtml": "<h2>Why Referral Program matters</h2><p>Referred customers typically convert better, spend more and stay longer, because they arrive with a recommendation attached. The cost per acquisition is also fixed and known in advance.</p><h2>Referral Program formula</h2><p class=\"glossary-formula\">Referral CAC = Total reward value paid ÷ New customers referred</p><p>Compare with paid channel CAC before scaling either.</p><h2>How Referral Program works in practice</h2><p>Make the reward worth mentioning, the mechanic simple, and the ask well timed — right after a good experience. Track referral CAC against paid channels to see which is genuinely cheaper.</p>",
+  "faq": [
+    {
+      "question": "Should both sides be rewarded?",
+      "answer": "Usually yes. A two-sided reward removes the awkwardness of asking and gives the new customer a reason to act."
+    },
+    {
+      "question": "How do I track referrals offline?",
+      "answer": "A unique code or the referring customer's phone number captured at billing."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "customer-acquisition-cost",
+    "coupon-code",
+    "loyalty-program",
+    "online-reviews"
+  ],
+  "formula": {
+    "expression": "Referral CAC = Total reward value paid ÷ New customers referred",
+    "note": "Compare with paid channel CAC before scaling either."
+  }
+}

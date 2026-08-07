@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Purchase Order Generator | Setu",
@@ -75,6 +76,9 @@ export default function PurchaseOrderGeneratorPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <DocumentTool docType="purchase-order" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="purchase-order-generator" />
       </section>
     </>
   );

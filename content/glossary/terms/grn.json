@@ -1,0 +1,53 @@
+{
+  "slug": "grn",
+  "term": "Goods Receipt Note",
+  "category": "retail-inventory",
+  "aliases": [
+    "GRN",
+    "goods received note"
+  ],
+  "short": "The record confirming what was physically received.",
+  "seoTitle": "Goods Receipt Note — Meaning and Example for Businesses",
+  "metaDescription": "A goods receipt note, or GRN, records what was physically received against a purchase order — quantities, condition and any shortages.",
+  "updated": "2026-08-07",
+  "definition": "A goods receipt note, or GRN, records what was physically received against a purchase order — quantities, condition and any shortages. It is the document that turns a delivery into a stock entry.",
+  "bodyHtml": "<h2>Why Goods Receipt Note matters</h2><p>The GRN is the control point between the order and the invoice. Paying against an invoice without checking the receipt is how businesses pay for goods that never arrived or arrived short.</p><h2>How Goods Receipt Note works in practice</h2><p>Count and inspect at the point of delivery, note short or damaged quantities on the GRN before signing, and match order, receipt and invoice before payment is released.</p>",
+  "faq": [
+    {
+      "question": "What is three-way matching?",
+      "answer": "Matching the purchase order, the goods receipt note and the supplier invoice before paying — the standard control against overpayment."
+    },
+    {
+      "question": "What if the delivery is short?",
+      "answer": "Record the actual quantity received on the GRN and raise the shortage with the supplier before the invoice is processed."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "purchase-order",
+    "purchase-return",
+    "vendor-reconciliation",
+    "batch-number"
+  ]
+}

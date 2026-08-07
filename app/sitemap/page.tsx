@@ -33,6 +33,7 @@ function buildSections(): Section[] {
         { label: "Pricing", href: "/pricing" },
         { label: "Contact", href: "/contact" },
         { label: "Book a demo", href: "/book-demo" },
+        { label: "Business glossary", href: "/glossary" },
       ],
     },
     {

@@ -1,0 +1,57 @@
+{
+  "slug": "basket-size",
+  "term": "Basket Size",
+  "category": "growth-marketing",
+  "aliases": [
+    "items per bill",
+    "units per transaction"
+  ],
+  "short": "How many items an average customer buys in one visit.",
+  "seoTitle": "Basket Size — Meaning, Formula and Example",
+  "metaDescription": "Basket size is the average number of items per bill. Basket size explains movements in order value. How many items an average customer buys in one visit.",
+  "updated": "2026-08-07",
+  "definition": "Basket size is the average number of items per bill. It sits alongside average order value: one measures how much a customer spends, the other how many things they buy.",
+  "bodyHtml": "<h2>Why Basket Size matters</h2><p>Basket size explains movements in order value. A rising AOV from price increases is a very different signal from one driven by customers buying more items.</p><h2>Basket Size formula</h2><p class=\"glossary-formula\">Basket size = Total items sold ÷ Number of bills</p><p>Read alongside AOV to separate price effects from volume effects.</p><h2>How Basket Size works in practice</h2><p>Track both together. If basket size is flat while AOV rises, growth is coming from price, which has a ceiling that item count does not.</p>",
+  "faq": [
+    {
+      "question": "How do I increase basket size?",
+      "answer": "Placement, bundles and cross-sell prompts at the point of decision."
+    },
+    {
+      "question": "Which matters more, basket size or AOV?",
+      "answer": "AOV is the revenue outcome; basket size explains how you got there."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "average-order-value",
+    "cross-selling",
+    "upselling",
+    "bundle-pricing"
+  ],
+  "formula": {
+    "expression": "Basket size = Total items sold ÷ Number of bills",
+    "note": "Read alongside AOV to separate price effects from volume effects."
+  }
+}

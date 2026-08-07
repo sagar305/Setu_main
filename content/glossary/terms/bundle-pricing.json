@@ -1,0 +1,57 @@
+{
+  "slug": "bundle-pricing",
+  "term": "Bundle Pricing",
+  "category": "pricing-profit",
+  "aliases": [
+    "combo pricing",
+    "meal deal pricing"
+  ],
+  "short": "Selling several items together at a single lower price.",
+  "seoTitle": "Bundle Pricing — Meaning, Formula and Example",
+  "metaDescription": "Bundle pricing sells several items together for one price lower than their combined individual prices. Selling several items together at a single lower price.",
+  "updated": "2026-08-07",
+  "definition": "Bundle pricing sells several items together for one price lower than their combined individual prices. Combo meals, service packages and starter kits are all bundles.",
+  "bodyHtml": "<h2>Why Bundle Pricing matters</h2><p>A good bundle raises the average order value and moves the items you want to sell, while the discount is judged against the bundle rather than against any single item's price.</p><h2>Bundle Pricing formula</h2><p class=\"glossary-formula\">Bundle contribution = Bundle price − Total variable cost of all items</p><p>Compare it with the contribution of the items sold separately at expected volumes.</p><h2>How Bundle Pricing works in practice</h2><p>Build bundles around a high-margin anchor so the discount is funded by the mix, and check the contribution of the bundle as a whole rather than of each component.</p><h2>Worked example</h2><p>A ₹249 combo of a ₹180 burger and a ₹90 drink discounts ₹21 but usually adds a drink that would not otherwise have been ordered.</p>",
+  "faq": [
+    {
+      "question": "Do combos reduce profit?",
+      "answer": "Only if they replace full-price purchases. When they add items to the basket, contribution usually rises."
+    },
+    {
+      "question": "How do I price a combo?",
+      "answer": "Start from the combined variable cost, set the contribution you need, then check the discount reads as worthwhile to the customer."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "average-order-value",
+    "contribution-margin",
+    "upselling",
+    "psychological-pricing"
+  ],
+  "formula": {
+    "expression": "Bundle contribution = Bundle price − Total variable cost of all items",
+    "note": "Compare it with the contribution of the items sold separately at expected volumes."
+  }
+}

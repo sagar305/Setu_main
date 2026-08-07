@@ -1,0 +1,52 @@
+{
+  "slug": "dearness-allowance",
+  "term": "Dearness Allowance",
+  "category": "payroll-hr",
+  "aliases": [
+    "DA"
+  ],
+  "short": "A cost-of-living component that rises with inflation.",
+  "seoTitle": "Dearness Allowance — Meaning and Example for Businesses",
+  "metaDescription": "Dearness allowance is a cost-of-living component paid mainly in government and public sector employment, revised periodically against an inflation index.",
+  "updated": "2026-08-07",
+  "definition": "Dearness allowance is a cost-of-living component paid mainly in government and public sector employment, revised periodically against an inflation index. It counts alongside basic pay for provident fund and gratuity.",
+  "bodyHtml": "<h2>Why Dearness Allowance matters</h2><p>Where DA applies, it changes the base for retirement benefits every time it is revised, so payroll must track those revisions rather than treating pay as static.</p><h2>How Dearness Allowance works in practice</h2><p>Private sector structures often fold this into a special allowance instead. Where DA exists, apply revisions from the effective date, including any arrears.</p>",
+  "faq": [
+    {
+      "question": "Do private companies pay DA?",
+      "answer": "Most do not, using consolidated allowances instead. It is standard in government employment."
+    },
+    {
+      "question": "Is DA taxable?",
+      "answer": "Yes, it is fully taxable as salary income."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "basic-salary",
+    "special-allowance",
+    "gross-salary",
+    "provident-fund"
+  ]
+}

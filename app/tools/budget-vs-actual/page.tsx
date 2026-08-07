@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BudgetVsActualTool } from "@/components/tools/analysis/BudgetVsActualTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Budget vs Actual Tracker | Setu",
@@ -75,6 +76,9 @@ export default function BudgetVsActualPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <BudgetVsActualTool />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="budget-vs-actual" />
       </section>
     </>
   );

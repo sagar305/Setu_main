@@ -1,0 +1,57 @@
+{
+  "slug": "wastage",
+  "term": "Wastage",
+  "category": "restaurant-ops",
+  "aliases": [
+    "food waste",
+    "spoilage"
+  ],
+  "short": "Stock that is paid for but never sold.",
+  "seoTitle": "Wastage — Meaning, Formula and Example",
+  "metaDescription": "Wastage is stock that is bought and paid for but never sold — spoilage, over-preparation, trimming loss, spillage, staff meals and returned dishes.",
+  "updated": "2026-08-07",
+  "definition": "Wastage is stock that is bought and paid for but never sold — spoilage, over-preparation, trimming loss, spillage, staff meals and returned dishes. It is a real cost that hides inside food cost unless recorded separately.",
+  "bodyHtml": "<h2>Why Wastage matters</h2><p>Wastage is invisible in the accounts by default: it simply makes food cost look worse without saying why. Recording it by reason converts a vague problem into a specific, fixable one.</p><h2>Wastage formula</h2><p class=\"glossary-formula\">Wastage % = Value of wasted stock ÷ Value of stock used × 100</p><p>Tracked per category, it points straight at the culprit.</p><h2>How Wastage works in practice</h2><p>Keep a wastage log at the pass with item, quantity and reason. A week of honest logging usually shows most of the loss coming from two or three dishes or one over-prepped prep item.</p><h2>Worked example</h2><p>₹18,000 of monthly wastage against ₹4,00,000 of stock used is 4.5% — roughly one and a half points of food cost.</p>",
+  "faq": [
+    {
+      "question": "What is an acceptable wastage percentage?",
+      "answer": "Lower than most kitchens assume. The target matters less than the trend and knowing which items cause it."
+    },
+    {
+      "question": "Do staff meals count as wastage?",
+      "answer": "Record them separately. They are a legitimate cost but not a controllable loss, and mixing the two hides real spoilage."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "food-cost-percentage",
+    "portion-control",
+    "shrinkage",
+    "dead-stock"
+  ],
+  "formula": {
+    "expression": "Wastage % = Value of wasted stock ÷ Value of stock used × 100",
+    "note": "Tracked per category, it points straight at the culprit."
+  }
+}

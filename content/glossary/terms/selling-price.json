@@ -1,0 +1,57 @@
+{
+  "slug": "selling-price",
+  "term": "Selling Price",
+  "category": "pricing-profit",
+  "aliases": [
+    "sale price",
+    "list price"
+  ],
+  "short": "The price a customer actually pays for one unit.",
+  "seoTitle": "Selling Price — Meaning, Formula and Example",
+  "metaDescription": "Selling price is the amount a customer pays for one unit of a product or service. Selling price is where cost, competition and positioning meet.",
+  "updated": "2026-08-07",
+  "definition": "Selling price is the amount a customer pays for one unit of a product or service. Depending on the trade it may be quoted inclusive or exclusive of tax, and it is the denominator in every margin calculation.",
+  "bodyHtml": "<h2>Why Selling Price matters</h2><p>Selling price is where cost, competition and positioning meet. Setting it from cost alone ignores what the market will bear; setting it from competitors alone ignores whether you can afford to sell at that price.</p><h2>Selling Price formula</h2><p class=\"glossary-formula\">Selling price = Cost ÷ (1 − target margin as a decimal)</p><p>Using cost × (1 + markup) instead gives a price based on markup, which is a different number.</p><h2>How Selling Price works in practice</h2><p>Work out the price your target margin needs, compare it to the market, and treat any gap as information — either your costs are out of line or your positioning has to justify the difference.</p>",
+  "faq": [
+    {
+      "question": "How do I price for a 40% margin?",
+      "answer": "Divide cost by 0.6. A ₹300 cost needs a ₹500 price."
+    },
+    {
+      "question": "Should the selling price include GST?",
+      "answer": "For consumer-facing sales an inclusive price is usual; B2B quotes are typically exclusive."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "cost-price",
+    "mrp",
+    "profit-margin",
+    "tax-inclusive-pricing"
+  ],
+  "formula": {
+    "expression": "Selling price = Cost ÷ (1 − target margin as a decimal)",
+    "note": "Using cost × (1 + markup) instead gives a price based on markup, which is a different number."
+  }
+}

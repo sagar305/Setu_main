@@ -1,0 +1,57 @@
+{
+  "slug": "straight-line-depreciation",
+  "term": "Straight-Line Depreciation",
+  "category": "accounting",
+  "aliases": [
+    "SLM",
+    "straight line method"
+  ],
+  "short": "Charging the same depreciation amount every year.",
+  "seoTitle": "Straight-Line Depreciation — Meaning, Formula and Example",
+  "metaDescription": "Straight-line depreciation charges an equal amount every year over an asset's useful life, after allowing for any expected salvage value.",
+  "updated": "2026-08-07",
+  "definition": "Straight-line depreciation charges an equal amount every year over an asset's useful life, after allowing for any expected salvage value. It is the simplest and most widely used method.",
+  "bodyHtml": "<h2>Why Straight-Line Depreciation matters</h2><p>Equal annual charges make budgeting and comparison easy, and suit assets that are used steadily — furniture, fit-outs, buildings and most kitchen equipment.</p><h2>Straight-Line Depreciation formula</h2><p class=\"glossary-formula\">Annual depreciation = (Cost − Salvage value) ÷ Useful life</p><p>Book value declines in a straight line to the salvage value.</p><h2>How Straight-Line Depreciation works in practice</h2><p>Estimate useful life honestly rather than optimistically. Setting a long life to protect current profit only defers the correction to a later write-off.</p><h2>Worked example</h2><p>₹1,20,000 of furniture with no salvage value over 10 years is ₹12,000 a year.</p>",
+  "faq": [
+    {
+      "question": "When is straight line the wrong choice?",
+      "answer": "For assets that lose value fastest early on, such as vehicles and computers, where written-down value fits better."
+    },
+    {
+      "question": "Can I change methods later?",
+      "answer": "Changes are possible but must be disclosed and applied consistently, so they should be rare."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "depreciation",
+    "written-down-value",
+    "fixed-asset",
+    "amortisation"
+  ],
+  "formula": {
+    "expression": "Annual depreciation = (Cost − Salvage value) ÷ Useful life",
+    "note": "Book value declines in a straight line to the salvage value."
+  }
+}

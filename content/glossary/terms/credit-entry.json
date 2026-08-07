@@ -1,0 +1,52 @@
+{
+  "slug": "credit-entry",
+  "term": "Credit Entry",
+  "category": "accounting",
+  "aliases": [
+    "credit side"
+  ],
+  "short": "The right side of a journal entry, recorded as Cr.",
+  "seoTitle": "Credit Entry — Meaning and Example for Businesses",
+  "metaDescription": "A credit entry is the right-hand side of a double-entry transaction, written as Cr. The right side of a journal entry, recorded as Cr.",
+  "updated": "2026-08-07",
+  "definition": "A credit entry is the right-hand side of a double-entry transaction, written as Cr. Credits increase liabilities, income and equity, and decrease assets and expenses.",
+  "bodyHtml": "<h2>Why Credit Entry matters</h2><p>Credits are where income and borrowings live, so misreading them is how sales get double-counted or a loan receipt is mistaken for revenue.</p><h2>How Credit Entry works in practice</h2><p>A sale on credit credits the sales account and debits the customer's account, recognising income without any cash movement. The cash comes later, as a separate entry.</p><h2>Worked example</h2><p>A ₹20,000 credit sale credits sales income and debits accounts receivable.</p>",
+  "faq": [
+    {
+      "question": "Does a credit entry mean money received?",
+      "answer": "Not necessarily. Recording a sale on credit raises income with no cash movement at all."
+    },
+    {
+      "question": "Which accounts normally carry credit balances?",
+      "answer": "Liabilities, income and equity accounts."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "debit-entry",
+    "double-entry-bookkeeping",
+    "accounts-receivable",
+    "journal-entry"
+  ]
+}

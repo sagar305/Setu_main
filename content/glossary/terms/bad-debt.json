@@ -1,0 +1,57 @@
+{
+  "slug": "bad-debt",
+  "term": "Bad Debt",
+  "category": "accounting",
+  "aliases": [
+    "bad debts",
+    "irrecoverable debt"
+  ],
+  "short": "A receivable you have accepted will not be collected.",
+  "seoTitle": "Bad Debt — Meaning, Formula and Example",
+  "metaDescription": "A bad debt is an amount owed by a customer that the business has accepted will not be recovered. Writing them off is painful once and honest thereafter.",
+  "updated": "2026-08-07",
+  "definition": "A bad debt is an amount owed by a customer that the business has accepted will not be recovered. It is written off against profit, removing the receivable from the balance sheet.",
+  "bodyHtml": "<h2>Why Bad Debt matters</h2><p>Carrying uncollectable invoices overstates assets and profit at the same time. Writing them off is painful once and honest thereafter.</p><h2>Bad Debt formula</h2><p class=\"glossary-formula\">Bad debt % = Bad debts written off ÷ Credit sales × 100</p><p>Rising ratios point at credit policy, not just at difficult customers.</p><h2>How Bad Debt works in practice</h2><p>Set a policy — for example, provide against anything past 180 days and write off past a year unless recovery is genuinely in progress. Every write-off is also feedback about the credit decision that created it.</p>",
+  "faq": [
+    {
+      "question": "When should I write off a bad debt?",
+      "answer": "When recovery efforts have realistically ended. Until then, a provision is the better treatment."
+    },
+    {
+      "question": "Can GST be recovered on a bad debt?",
+      "answer": "GST law does not generally provide for reversal of tax on bad debts, which is why credit control matters more, not less."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "provision",
+    "aging-report",
+    "payment-terms"
+  ],
+  "formula": {
+    "expression": "Bad debt % = Bad debts written off ÷ Credit sales × 100",
+    "note": "Rising ratios point at credit policy, not just at difficult customers."
+  }
+}

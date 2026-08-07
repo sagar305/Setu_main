@@ -1,0 +1,52 @@
+{
+  "slug": "portion-control",
+  "term": "Portion Control",
+  "category": "restaurant-ops",
+  "aliases": [
+    "portioning"
+  ],
+  "short": "Serving a consistent, measured quantity every single time.",
+  "seoTitle": "Portion Control — Meaning and Example for Businesses",
+  "metaDescription": "Serving a consistent, measured quantity every single time. Portioning is where costed recipes meet reality. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Portion control is the practice of serving a consistent measured quantity of each item every time, using scales, scoops, ladles and standardised containers rather than judgement.",
+  "bodyHtml": "<h2>Why Portion Control matters</h2><p>Portioning is where costed recipes meet reality. A gravy ladled ten percent heavy on every plate turns a 30% food cost into 33% without anything else changing, and nobody notices until the month closes.</p><h2>How Portion Control works in practice</h2><p>Standardise the serving tools per dish, weigh a sample of plates during service, and retrain when portions drift. Consistency also protects the guest experience, since customers notice a smaller plate faster than they notice a price rise.</p><h2>Worked example</h2><p>A 20 g overpour of a ₹400/kg sauce on 120 plates a day costs about ₹28,800 a year.</p>",
+  "faq": [
+    {
+      "question": "How do I check portioning without slowing service?",
+      "answer": "Spot-weigh a few plates at random during a shift rather than auditing everything."
+    },
+    {
+      "question": "Is portion control the same as shrinking portions?",
+      "answer": "No. It means serving the costed portion accurately; reducing the costed portion is a separate pricing decision."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "plate-cost",
+    "yield-percentage",
+    "food-cost-percentage",
+    "wastage"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "cash-flow-statement",
+  "term": "Cash Flow Statement",
+  "category": "accounting",
+  "aliases": [
+    "statement of cash flows"
+  ],
+  "short": "Where cash actually came from and went during a period.",
+  "seoTitle": "Cash Flow Statement — Meaning, Formula and Example",
+  "metaDescription": "A cash flow statement tracks actual cash movement over a period, split into operating, investing and financing activities.",
+  "updated": "2026-08-07",
+  "definition": "A cash flow statement tracks actual cash movement over a period, split into operating, investing and financing activities. It explains the gap between reported profit and the change in the bank balance.",
+  "bodyHtml": "<h2>Why Cash Flow Statement matters</h2><p>Profitable businesses fail from cash, not from losses. This statement is what shows that profit was consumed by stock, receivables or loan repayments rather than reaching the bank.</p><h2>Cash Flow Statement formula</h2><p class=\"glossary-formula\">Operating cash flow = Net profit + Non-cash expenses − Increase in working capital</p><p>Investing and financing flows are listed separately.</p><h2>How Cash Flow Statement works in practice</h2><p>Start with net profit, adjust for non-cash items such as depreciation, then for movements in stock, receivables and payables. The operating section is the one that matters most for a small business.</p>",
+  "faq": [
+    {
+      "question": "Why is my profit high but cash low?",
+      "answer": "Usually stock build-up, unpaid customer invoices, loan principal repayments or owner drawings — none of which appear as expenses."
+    },
+    {
+      "question": "Which section matters most?",
+      "answer": "Operating. A business that cannot generate cash from operations is being funded by borrowing or by its owners."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "cash-flow",
+    "working-capital",
+    "net-profit",
+    "accounts-receivable"
+  ],
+  "formula": {
+    "expression": "Operating cash flow = Net profit + Non-cash expenses − Increase in working capital",
+    "note": "Investing and financing flows are listed separately."
+  }
+}

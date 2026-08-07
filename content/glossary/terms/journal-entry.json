@@ -1,0 +1,52 @@
+{
+  "slug": "journal-entry",
+  "term": "Journal Entry",
+  "category": "accounting",
+  "aliases": [
+    "journal voucher"
+  ],
+  "short": "A dated record of one transaction, with its debits and credits.",
+  "seoTitle": "Journal Entry — Meaning and Example for Businesses",
+  "metaDescription": "A journal entry records one transaction with its date, the accounts debited and credited, the amounts, and a narration explaining what happened.",
+  "updated": "2026-08-07",
+  "definition": "A journal entry records one transaction with its date, the accounts debited and credited, the amounts, and a narration explaining what happened. It is the atomic unit of the books.",
+  "bodyHtml": "<h2>Why Journal Entry matters</h2><p>Journal entries are where the explanation lives. Six months on, the narration is often the only thing that makes a ₹40,000 adjustment intelligible to anyone, including you.</p><h2>How Journal Entry works in practice</h2><p>Write narrations that state why, not just what. Adjusting entries for depreciation, accruals and prepayments are made at period end and are the ones most often reconstructed later.</p>",
+  "faq": [
+    {
+      "question": "What makes a good narration?",
+      "answer": "Enough context to identify the transaction without opening the supporting document — party, reference and reason."
+    },
+    {
+      "question": "Can a journal entry have more than two lines?",
+      "answer": "Yes. A compound entry can touch several accounts as long as total debits equal total credits."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "general-ledger",
+    "double-entry-bookkeeping",
+    "audit-trail",
+    "contra-entry"
+  ]
+}

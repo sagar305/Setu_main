@@ -1,0 +1,53 @@
+{
+  "slug": "payslip",
+  "term": "Payslip",
+  "category": "payroll-hr",
+  "aliases": [
+    "salary slip",
+    "pay slip"
+  ],
+  "short": "The monthly statement of earnings and deductions given to an employee.",
+  "seoTitle": "Payslip — Meaning and Example for Businesses",
+  "metaDescription": "A payslip is the statement issued to an employee each pay period showing earnings, deductions and net pay. Their absence is a compliance problem in itself.",
+  "updated": "2026-08-07",
+  "definition": "A payslip is the statement issued to an employee each pay period showing earnings, deductions and net pay. It is a legal requirement in most cases and the employee's proof of income.",
+  "bodyHtml": "<h2>Why Payslip matters</h2><p>Payslips are what employees need for loans, rentals and visas, and they are the first document produced in any wage dispute. Their absence is a compliance problem in itself.</p><h2>How Payslip works in practice</h2><p>Issue every month, with each component and deduction shown separately rather than as a lump. Keep copies, since employees frequently ask for older months long after leaving.</p>",
+  "faq": [
+    {
+      "question": "Is a payslip legally required?",
+      "answer": "In most employment situations, yes — providing wage statements is a statutory obligation."
+    },
+    {
+      "question": "What should a payslip contain?",
+      "answer": "Employee details, period, each earning component, each deduction, net pay and the payment date."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "gross-salary",
+    "take-home-salary",
+    "form-16",
+    "payroll"
+  ]
+}

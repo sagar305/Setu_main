@@ -1,0 +1,53 @@
+{
+  "slug": "static-qr-code",
+  "term": "Static QR Code",
+  "category": "payments-finance",
+  "aliases": [
+    "static QR",
+    "counter QR"
+  ],
+  "short": "A fixed payment QR where the customer enters the amount.",
+  "seoTitle": "Static QR Code — Meaning and Example for Businesses",
+  "metaDescription": "A static QR code encodes only the payee address, so the customer scans it and types the amount themselves. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A static QR code encodes only the payee address, so the customer scans it and types the amount themselves. It is the printed sticker on a counter, a table or a delivery bag.",
+  "bodyHtml": "<h2>Why Static QR Code matters</h2><p>Static codes are free, need no integration and work everywhere, which is why they are ubiquitous. The trade-off is that amounts are typed by customers and payments arrive without a bill reference.</p><h2>How Static QR Code works in practice</h2><p>Use static codes where volume is low or hardware is absent, and reconcile the day's credits against the day's bills. For busy counters, dynamic codes remove the matching problem entirely.</p>",
+  "faq": [
+    {
+      "question": "Are static QR codes safe?",
+      "answer": "The code itself only identifies the payee. The real risk is a sticker being replaced, so check yours periodically."
+    },
+    {
+      "question": "Why do payments not match my bills?",
+      "answer": "Because customers type the amount, small differences and missed payments are common — daily reconciliation is the fix."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "dynamic-qr-code",
+    "upi",
+    "upi-id",
+    "bank-reconciliation"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "working-capital-loan",
+  "term": "Working Capital Loan",
+  "category": "payments-finance",
+  "aliases": [
+    "working capital finance"
+  ],
+  "short": "Borrowing to fund stock, receivables and day-to-day operations.",
+  "seoTitle": "Working Capital Loan — Meaning and Example for Businesses",
+  "metaDescription": "Borrowing to fund stock, receivables and day-to-day operations. It is usually short-term and often revolving. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A working capital loan funds day-to-day operations — buying stock, paying salaries, bridging the gap until customers pay — rather than buying long-lived assets. It is usually short-term and often revolving.",
+  "bodyHtml": "<h2>Why Working Capital Loan matters</h2><p>Growth consumes working capital before it produces profit, so borrowing to fund the gap can be entirely rational. Borrowing to fund persistent losses is not, and the two are easy to confuse.</p><h2>How Working Capital Loan works in practice</h2><p>Size the facility from the cash conversion cycle rather than from what a lender offers. If the cycle can be shortened instead, that is cheaper than any rate on offer.</p>",
+  "faq": [
+    {
+      "question": "How much working capital finance do I need?",
+      "answer": "Enough to cover the cash gap between paying suppliers and collecting from customers, plus a modest buffer."
+    },
+    {
+      "question": "Is an overdraft or a term loan better for working capital?",
+      "answer": "An overdraft matches fluctuating needs and charges interest only on what is used; a term loan suits a known, sustained requirement."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "overdraft",
+    "working-capital",
+    "cash-conversion-cycle",
+    "collateral"
+  ]
+}

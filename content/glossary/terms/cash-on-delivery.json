@@ -1,0 +1,56 @@
+{
+  "slug": "cash-on-delivery",
+  "term": "Cash on Delivery",
+  "category": "payments-finance",
+  "aliases": [
+    "COD"
+  ],
+  "short": "Payment collected from the customer at the point of delivery.",
+  "seoTitle": "Cash on Delivery — Meaning, Formula and Example",
+  "metaDescription": "Cash on delivery, or COD, is payment collected when the goods reach the customer rather than at ordering. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Cash on delivery, or COD, is payment collected when the goods reach the customer rather than at ordering. The money then travels back through the delivery partner before reaching the merchant.",
+  "bodyHtml": "<h2>Why Cash on Delivery matters</h2><p>COD widens the customer base but carries a higher rejection rate, a cash handling risk and a delayed settlement. Each of those is a cost that rarely appears in the order-level margin.</p><h2>Cash on Delivery formula</h2><p class=\"glossary-formula\">COD rejection rate % = Rejected COD orders ÷ Total COD orders × 100</p><p>Multiply by the cost of delivery and return to value the leakage.</p><h2>How Cash on Delivery works in practice</h2><p>Track COD rejection rate separately and reconcile remittances against delivered orders. Where rejections are high, a partial advance at ordering usually cuts them sharply.</p>",
+  "faq": [
+    {
+      "question": "Why is COD more expensive than prepaid?",
+      "answer": "Rejections, return shipping, cash handling and delayed settlement all add cost that prepaid orders avoid."
+    },
+    {
+      "question": "How do I reduce COD rejections?",
+      "answer": "Confirm the order by message before dispatch and consider a token advance on high-value orders."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "settlement",
+    "advance-payment",
+    "sales-return",
+    "cash-flow"
+  ],
+  "formula": {
+    "expression": "COD rejection rate % = Rejected COD orders ÷ Total COD orders × 100",
+    "note": "Multiply by the cost of delivery and return to value the leakage."
+  }
+}

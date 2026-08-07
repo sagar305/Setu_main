@@ -1,0 +1,57 @@
+{
+  "slug": "emi",
+  "term": "EMI",
+  "category": "payments-finance",
+  "aliases": [
+    "Equated Monthly Instalment",
+    "equated monthly instalment"
+  ],
+  "short": "A fixed monthly loan repayment covering interest and principal.",
+  "seoTitle": "EMI — Meaning, Formula and Example",
+  "metaDescription": "An EMI, or equated monthly instalment, is the fixed amount paid every month to repay a loan over its term. The two questions have very different answers.",
+  "updated": "2026-08-07",
+  "definition": "An EMI, or equated monthly instalment, is the fixed amount paid every month to repay a loan over its term. Each instalment covers interest for the month plus a portion of principal, with the split shifting toward principal over time.",
+  "bodyHtml": "<h2>Why EMI matters</h2><p>EMI affordability is what decides whether a business loan is sensible, and the total interest paid is what decides whether it was worth it. The two questions have very different answers.</p><h2>EMI formula</h2><p class=\"glossary-formula\">EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1)</p><p>P is principal, r the monthly interest rate, and n the number of months.</p><h2>How EMI works in practice</h2><p>Compare offers on total interest across the tenure, not on EMI alone — a longer tenure lowers the EMI and raises the total cost. Check prepayment charges before signing, since early repayment is often the best return available.</p><h2>Worked example</h2><p>₹10,00,000 at 12% a year over 5 years is an EMI of about ₹22,244 and roughly ₹3.3 lakh of total interest.</p>",
+  "faq": [
+    {
+      "question": "Does a longer tenure make a loan cheaper?",
+      "answer": "It lowers the monthly outflow and raises the total interest paid — cheaper per month, more expensive overall."
+    },
+    {
+      "question": "Should I prepay a business loan?",
+      "answer": "Often yes, if there are no heavy prepayment charges and you have no higher-return use for the cash."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "principal",
+    "interest-rate",
+    "amortisation-schedule",
+    "reducing-balance-interest"
+  ],
+  "formula": {
+    "expression": "EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1)",
+    "note": "P is principal, r the monthly interest rate, and n the number of months."
+  }
+}

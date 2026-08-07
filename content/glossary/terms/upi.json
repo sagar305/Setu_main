@@ -1,0 +1,52 @@
+{
+  "slug": "upi",
+  "term": "UPI",
+  "category": "payments-finance",
+  "aliases": [
+    "Unified Payments Interface"
+  ],
+  "short": "India's instant bank-to-bank payment system.",
+  "seoTitle": "UPI — Meaning and Example for Businesses",
+  "metaDescription": "India's instant bank-to-bank payment system. For merchants it settles directly to the bank account, usually within seconds.",
+  "updated": "2026-08-07",
+  "definition": "UPI, the Unified Payments Interface, moves money instantly between bank accounts through a mobile app, using a virtual payment address instead of account numbers. For merchants it settles directly to the bank account, usually within seconds.",
+  "bodyHtml": "<h2>Why UPI matters</h2><p>UPI removed the two things that kept small businesses on cash: change management and card machine costs. For most counters it is now the default payment mode rather than an alternative.</p><h2>How UPI works in practice</h2><p>Accept it through a QR code at the counter — static for fixed displays, dynamic for per-bill amounts. Reconcile UPI credits against bills daily, because a customer's failed payment and a successful one look identical to a busy cashier.</p>",
+  "faq": [
+    {
+      "question": "Does UPI cost merchants anything?",
+      "answer": "Person-to-merchant UPI transactions have not carried merchant discount charges the way cards do, which is a large part of its adoption."
+    },
+    {
+      "question": "How fast does UPI settle?",
+      "answer": "Credit is typically near-instant to the linked bank account, unlike card settlements that arrive in batches."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "upi-id",
+    "dynamic-qr-code",
+    "static-qr-code",
+    "settlement"
+  ]
+}

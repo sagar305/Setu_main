@@ -1,0 +1,57 @@
+{
+  "slug": "recipe-costing",
+  "term": "Recipe Costing",
+  "category": "restaurant-ops",
+  "aliases": [
+    "dish costing",
+    "menu costing"
+  ],
+  "short": "Working out exactly what one plate of a dish costs to make.",
+  "seoTitle": "Recipe Costing — Meaning, Formula and Example",
+  "metaDescription": "Working out exactly what one plate of a dish costs to make. Without recipe costing, menu prices are guesses. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Recipe costing works out the cost of producing one portion of a dish by pricing each ingredient at its purchase rate, adjusting for yield and waste, and adding consumables such as packaging and garnish.",
+  "bodyHtml": "<h2>Why Recipe Costing matters</h2><p>Without recipe costing, menu prices are guesses. It is the only way to know which dishes carry margin, and the only defensible basis for repricing when supplier costs move.</p><h2>Recipe Costing formula</h2><p class=\"glossary-formula\">Plate cost = Σ (Ingredient quantity × Rate ÷ Yield %) + Consumables</p><p>Divide plate cost by the menu price to get that dish's food cost percentage.</p><h2>How Recipe Costing works in practice</h2><p>Cost each ingredient at its as-purchased rate, apply a yield factor for peeling, trimming and cooking loss, and recost the sheet whenever a key ingredient's price moves more than a few percent.</p><h2>Worked example</h2><p>A biryani with ₹78 of ingredients, ₹6 of packaging and ₹4 of garnish costs ₹88 a plate, so a ₹280 menu price runs at a 31% food cost.</p>",
+  "faq": [
+    {
+      "question": "How often should I recost recipes?",
+      "answer": "Quarterly as routine, and immediately for any dish whose main ingredient has moved sharply in price."
+    },
+    {
+      "question": "Should labour be part of recipe cost?",
+      "answer": "Usually not in the plate cost itself. Kitchen labour is tracked separately and combined with food cost as prime cost."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    }
+  ],
+  "relatedTerms": [
+    "plate-cost",
+    "yield-percentage",
+    "food-cost-percentage",
+    "menu-engineering"
+  ],
+  "formula": {
+    "expression": "Plate cost = Σ (Ingredient quantity × Rate ÷ Yield %) + Consumables",
+    "note": "Divide plate cost by the menu price to get that dish's food cost percentage."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "slug": "accounts-receivable",
+  "term": "Accounts Receivable",
+  "category": "accounting",
+  "aliases": [
+    "AR",
+    "debtors",
+    "trade receivables",
+    "sundry debtors"
+  ],
+  "short": "Money customers owe you for goods or services already delivered.",
+  "seoTitle": "Accounts Receivable — Meaning, Formula and Example",
+  "metaDescription": "Accounts receivable is the total owed to a business by customers for goods or services already supplied on credit. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Accounts receivable is the total owed to a business by customers for goods or services already supplied on credit. It is an asset, and it is the money your business has effectively lent to its customers.",
+  "bodyHtml": "<h2>Why Accounts Receivable matters</h2><p>Receivables are the most common cash trap in small business. Every rupee outstanding is a rupee you have financed, and the longer it ages the less likely it is to be collected in full.</p><h2>Accounts Receivable formula</h2><p class=\"glossary-formula\">Days sales outstanding = Accounts receivable ÷ Credit sales × Days in period</p><p>Rising DSO means collections are slipping even if sales look healthy.</p><h2>How Accounts Receivable works in practice</h2><p>Age receivables by bucket and chase by age rather than by size. Statements sent monthly and a call at the first missed due date recover more than any letter sent at ninety days.</p>",
+  "faq": [
+    {
+      "question": "How do I reduce receivables?",
+      "answer": "Shorter stated terms, invoices sent the same day, a payment link on the invoice, and consistent follow-up from day one past due."
+    },
+    {
+      "question": "When should a receivable be written off?",
+      "answer": "When collection is genuinely improbable. Carrying it indefinitely overstates assets and profit."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-payable",
+    "aging-report",
+    "bad-debt",
+    "days-sales-outstanding"
+  ],
+  "formula": {
+    "expression": "Days sales outstanding = Accounts receivable ÷ Credit sales × Days in period",
+    "note": "Rising DSO means collections are slipping even if sales look healthy."
+  }
+}

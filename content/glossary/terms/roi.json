@@ -1,0 +1,57 @@
+{
+  "slug": "roi",
+  "term": "ROI",
+  "category": "payments-finance",
+  "aliases": [
+    "Return on Investment",
+    "return on investment"
+  ],
+  "short": "The gain from an investment relative to what it cost.",
+  "seoTitle": "ROI — Meaning, Formula and Example",
+  "metaDescription": "Return on investment expresses the gain from an investment as a percentage of its cost. Without it, capital goes to whatever feels most urgent.",
+  "updated": "2026-08-07",
+  "definition": "Return on investment expresses the gain from an investment as a percentage of its cost. It is used for equipment, outlets, marketing campaigns and any decision where money is committed to produce a return.",
+  "bodyHtml": "<h2>Why ROI matters</h2><p>ROI makes unlike options comparable — a new oven against a marketing push against paying down a loan. Without it, capital goes to whatever feels most urgent.</p><h2>ROI formula</h2><p class=\"glossary-formula\">ROI % = (Gain from investment − Cost of investment) ÷ Cost of investment × 100</p><p>Annualise it before comparing investments of different durations.</p><h2>How ROI works in practice</h2><p>Be honest about the denominator: include installation, training and the working capital the investment locks up. For anything spanning years, pair ROI with a payback period.</p><h2>Worked example</h2><p>₹2,00,000 spent producing ₹2,60,000 of additional profit is a 30% ROI.</p>",
+  "faq": [
+    {
+      "question": "What is a good ROI?",
+      "answer": "Higher than your cost of capital and than the next best use of the same money, including simply repaying debt."
+    },
+    {
+      "question": "Why include working capital in the cost?",
+      "answer": "Because stock and receivables tied up by the investment are cash you cannot use elsewhere."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "payback-period",
+    "capital-expenditure",
+    "net-present-value",
+    "customer-acquisition-cost"
+  ],
+  "formula": {
+    "expression": "ROI % = (Gain from investment − Cost of investment) ÷ Cost of investment × 100",
+    "note": "Annualise it before comparing investments of different durations."
+  }
+}

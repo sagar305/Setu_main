@@ -1,0 +1,57 @@
+{
+  "slug": "pour-cost",
+  "term": "Pour Cost",
+  "category": "restaurant-ops",
+  "aliases": [
+    "liquor cost percentage",
+    "beverage cost percentage"
+  ],
+  "short": "The cost of liquor poured as a percentage of beverage sales.",
+  "seoTitle": "Pour Cost — Meaning, Formula and Example",
+  "metaDescription": "Pour cost is the cost of beverages served expressed as a percentage of beverage sales. Pour cost is the only number that catches this reliably.",
+  "updated": "2026-08-07",
+  "definition": "Pour cost is the cost of beverages served expressed as a percentage of beverage sales. It is the bar equivalent of food cost, and typically much lower — which is why bar margin subsidises many restaurants.",
+  "bodyHtml": "<h2>Why Pour Cost matters</h2><p>Bars lose money in small, invisible increments: a heavy pour, an unrecorded complimentary drink, a bottle that walks. Pour cost is the only number that catches this reliably.</p><h2>Pour Cost formula</h2><p class=\"glossary-formula\">Pour cost % = Cost of beverages used ÷ Beverage sales × 100</p><p>Run it separately for spirits, beer and wine, since each behaves differently.</p><h2>How Pour Cost works in practice</h2><p>Measure by weighing or metering bottles at open and close on high-value spirits, and compare theoretical usage from sales against actual usage. Consistent gaps mean over-pouring or unbilled drinks.</p><h2>Worked example</h2><p>₹1,05,000 of liquor used against ₹4,20,000 of beverage sales is a 25% pour cost.</p>",
+  "faq": [
+    {
+      "question": "What is a normal pour cost?",
+      "answer": "Spirits usually run far leaner than beer, so a blended figure hides more than it shows — track categories separately."
+    },
+    {
+      "question": "How do I stop over-pouring?",
+      "answer": "Jiggers or measured pourers, plus a weekly variance check between theoretical and actual usage."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "liquor-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "food-cost-percentage",
+    "wastage",
+    "happy-hour",
+    "stock-take"
+  ],
+  "formula": {
+    "expression": "Pour cost % = Cost of beverages used ÷ Beverage sales × 100",
+    "note": "Run it separately for spirits, beer and wine, since each behaves differently."
+  }
+}

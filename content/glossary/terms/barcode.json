@@ -1,0 +1,54 @@
+{
+  "slug": "barcode",
+  "term": "Barcode",
+  "category": "retail-inventory",
+  "aliases": [
+    "bar code",
+    "EAN",
+    "UPC"
+  ],
+  "short": "A scannable code that identifies a product at the till.",
+  "seoTitle": "Barcode — Meaning and Example for Businesses",
+  "metaDescription": "A barcode is a machine-readable representation of a product number, printed on the pack or on a shelf label. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A barcode is a machine-readable representation of a product number, printed on the pack or on a shelf label. Retail commonly uses EAN-13 and UPC-A for manufactured goods, and internal codes for loose or own-packed items.",
+  "bodyHtml": "<h2>Why Barcode matters</h2><p>Scanning removes the two slowest and most error-prone steps at a counter: finding the item and typing the price. It also keeps stock deduction accurate, because the scan is what moves the count.</p><h2>How Barcode works in practice</h2><p>Use the manufacturer's barcode where one exists, and generate your own for loose goods, kitchen packs and bundles. Print labels with the code, name and price so shelf and system stay aligned.</p>",
+  "faq": [
+    {
+      "question": "Can I create my own barcodes?",
+      "answer": "Yes, for internal use. Codes for products sold through other retailers should come from a registered prefix."
+    },
+    {
+      "question": "What barcode format should I use?",
+      "answer": "EAN-13 is the norm for retail goods; Code 128 is common for internal labels and short shelf-life packs."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "sku",
+    "mrp",
+    "stock-take",
+    "batch-number"
+  ]
+}

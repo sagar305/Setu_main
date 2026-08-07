@@ -1,0 +1,53 @@
+{
+  "slug": "collateral",
+  "term": "Collateral",
+  "category": "payments-finance",
+  "aliases": [
+    "security",
+    "loan security"
+  ],
+  "short": "An asset pledged to a lender as security for a loan.",
+  "seoTitle": "Collateral — Meaning and Example for Businesses",
+  "metaDescription": "Collateral is an asset pledged to a lender as security — property, equipment, stock or fixed deposits. An asset pledged to a lender as security for a loan.",
+  "updated": "2026-08-07",
+  "definition": "Collateral is an asset pledged to a lender as security — property, equipment, stock or fixed deposits. If the loan is not repaid, the lender can enforce against the pledged asset.",
+  "bodyHtml": "<h2>Why Collateral matters</h2><p>Collateral usually lowers the interest rate, because it lowers the lender's risk. It also raises the personal stakes, particularly when the security is a home rather than a business asset.</p><h2>How Collateral works in practice</h2><p>Understand exactly what is pledged and under what conditions enforcement is triggered. Unsecured and government-guaranteed schemes cost more but leave personal assets outside the lender's reach.</p>",
+  "faq": [
+    {
+      "question": "Can I get a business loan without collateral?",
+      "answer": "Yes — unsecured lending and guaranteed schemes exist, typically at higher rates and lower amounts."
+    },
+    {
+      "question": "Is stock acceptable as collateral?",
+      "answer": "For working capital facilities it often is, usually with a margin and periodic stock statements."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "working-capital-loan",
+    "overdraft",
+    "debt-to-equity-ratio",
+    "fixed-asset"
+  ]
+}

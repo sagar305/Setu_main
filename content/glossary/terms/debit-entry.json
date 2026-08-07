@@ -1,0 +1,52 @@
+{
+  "slug": "debit-entry",
+  "term": "Debit Entry",
+  "category": "accounting",
+  "aliases": [
+    "debit side"
+  ],
+  "short": "The left side of a journal entry, recorded as Dr.",
+  "seoTitle": "Debit Entry — Meaning and Example for Businesses",
+  "metaDescription": "A debit entry is the left-hand side of a double-entry transaction, written as Dr. In your own books, cash coming in is a debit.",
+  "updated": "2026-08-07",
+  "definition": "A debit entry is the left-hand side of a double-entry transaction, written as Dr. Debits increase assets and expenses and decrease liabilities, income and equity — it is a direction, not a judgement about good or bad.",
+  "bodyHtml": "<h2>Why Debit Entry matters</h2><p>Most bookkeeping confusion starts with debits, largely because a bank statement uses the word from the bank's point of view rather than yours. In your own books, cash coming in is a debit.</p><h2>How Debit Entry works in practice</h2><p>Learn the rule by account type rather than memorising cases: assets and expenses increase with debits, everything else increases with credits. Every entry needs debits equal to credits.</p><h2>Worked example</h2><p>Paying ₹5,000 rent debits the rent expense account and credits the bank account.</p>",
+  "faq": [
+    {
+      "question": "Why does my bank statement call a withdrawal a debit?",
+      "answer": "Because it is written from the bank's books, where your deposit is their liability. In your books the signs are reversed."
+    },
+    {
+      "question": "Is a debit always an increase?",
+      "answer": "Only for assets and expenses. For liabilities, income and equity a debit is a decrease."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "credit-entry",
+    "double-entry-bookkeeping",
+    "journal-entry",
+    "general-ledger"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "minimum-wages",
+  "term": "Minimum Wages",
+  "category": "payroll-hr",
+  "aliases": [
+    "minimum wage"
+  ],
+  "short": "The lowest wage legally payable for a category of work.",
+  "seoTitle": "Minimum Wages — Meaning and Example for Businesses",
+  "metaDescription": "The lowest wage legally payable for a category of work. Paying below the notified minimum is an offence, and the rates change without individual notice.",
+  "updated": "2026-08-07",
+  "definition": "Minimum wages are the lowest rates legally payable for a category of work, notified by state governments by skill level, industry and region, and revised periodically.",
+  "bodyHtml": "<h2>Why Minimum Wages matters</h2><p>Paying below the notified minimum is an offence, and the rates change without individual notice. Businesses that set pay once and forget it drift into non-compliance quietly.</p><h2>How Minimum Wages works in practice</h2><p>Check the notification for your state and industry at least annually, and structure pay so the total meets the minimum for the correct skill category. Records of wages and hours are part of the obligation.</p>",
+  "faq": [
+    {
+      "question": "Do minimum wages differ by state?",
+      "answer": "Yes, substantially, and by skill category, industry and sometimes zone within a state."
+    },
+    {
+      "question": "Does the minimum apply to part-time staff?",
+      "answer": "Yes, on a proportionate basis for the hours actually worked."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "overtime",
+    "payroll",
+    "basic-salary",
+    "esi"
+  ]
+}

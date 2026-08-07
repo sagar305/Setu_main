@@ -1,0 +1,53 @@
+{
+  "slug": "qsr",
+  "term": "QSR",
+  "category": "restaurant-ops",
+  "aliases": [
+    "Quick Service Restaurant",
+    "quick service restaurant"
+  ],
+  "short": "A counter-service format built around speed and throughput.",
+  "seoTitle": "QSR — Meaning and Example for Businesses",
+  "metaDescription": "A QSR, or quick service restaurant, is a counter-service format built around fast preparation, limited menus and high throughput.",
+  "updated": "2026-08-07",
+  "definition": "A QSR, or quick service restaurant, is a counter-service format built around fast preparation, limited menus and high throughput. Food courts, burger chains and most takeaway-led outlets fall into this category.",
+  "bodyHtml": "<h2>Why QSR matters</h2><p>QSR economics live on throughput. With lower average spend, profit comes from serving more people per hour, which makes queue time and ticket time the metrics that matter most.</p><h2>How QSR works in practice</h2><p>Keep the menu narrow enough for consistent short ticket times, use tokens or a queue display so customers do not crowd the counter, and measure orders per hour by day-part rather than sales alone.</p>",
+  "faq": [
+    {
+      "question": "How is a QSR different from a cafe?",
+      "answer": "QSR optimises for throughput and short dwell time; a cafe monetises longer stays and higher spend per head."
+    },
+    {
+      "question": "What is the key QSR metric?",
+      "answer": "Orders served per hour during peak, and the ticket time behind it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "ticket-time",
+    "kitchen-display-system",
+    "token-system",
+    "cloud-kitchen"
+  ]
+}

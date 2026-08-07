@@ -1,0 +1,56 @@
+{
+  "slug": "working-capital",
+  "term": "Working Capital",
+  "category": "accounting",
+  "aliases": [
+    "net working capital"
+  ],
+  "short": "Current assets minus current liabilities — the cash cushion for operations.",
+  "seoTitle": "Working Capital — Meaning, Formula and Example",
+  "metaDescription": "Current assets minus current liabilities — the cash cushion for operations. Most of it sits in stock and receivables. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "Working capital is current assets minus current liabilities: the short-term resources available to run day-to-day operations after near-term obligations are met. Most of it sits in stock and receivables.",
+  "bodyHtml": "<h2>Why Working Capital matters</h2><p>Working capital is where growth consumes cash. Doubling sales usually means doubling stock and receivables first, which is why fast-growing businesses so often feel poorer than they are.</p><h2>Working Capital formula</h2><p class=\"glossary-formula\">Working capital = Current assets − Current liabilities</p><p>Cash conversion cycle = DSO + days of stock − DPO.</p><h2>How Working Capital works in practice</h2><p>Manage the three levers directly: hold less stock, collect faster, and use supplier terms fully. Each frees cash without borrowing a rupee.</p>",
+  "faq": [
+    {
+      "question": "How much working capital do I need?",
+      "answer": "Enough to cover the gap between paying suppliers and collecting from customers — which the cash conversion cycle measures."
+    },
+    {
+      "question": "Can working capital be too high?",
+      "answer": "Yes. Excess stock and slow collections are idle cash dressed up as assets."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "current-ratio",
+    "cash-conversion-cycle",
+    "accounts-receivable",
+    "inventory-turnover"
+  ],
+  "formula": {
+    "expression": "Working capital = Current assets − Current liabilities",
+    "note": "Cash conversion cycle = DSO + days of stock − DPO."
+  }
+}

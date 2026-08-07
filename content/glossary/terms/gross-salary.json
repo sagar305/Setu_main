@@ -1,0 +1,56 @@
+{
+  "slug": "gross-salary",
+  "term": "Gross Salary",
+  "category": "payroll-hr",
+  "aliases": [
+    "gross pay"
+  ],
+  "short": "Total earnings before any deductions.",
+  "seoTitle": "Gross Salary — Meaning, Formula and Example",
+  "metaDescription": "Gross salary is total earnings before deductions — basic pay plus allowances such as HRA, dearness allowance, special allowance and any bonus.",
+  "updated": "2026-08-07",
+  "definition": "Gross salary is total earnings before deductions — basic pay plus allowances such as HRA, dearness allowance, special allowance and any bonus. It sits between CTC and take-home pay.",
+  "bodyHtml": "<h2>Why Gross Salary matters</h2><p>Gross salary is the base for most statutory calculations and the figure that appears at the top of a payslip. Employees usually quote it, employers usually quote CTC, and neither is take-home.</p><h2>Gross Salary formula</h2><p class=\"glossary-formula\">Gross salary = Basic + HRA + DA + Allowances + Bonus</p><p>Net pay = gross salary − employee deductions − TDS.</p><h2>How Gross Salary works in practice</h2><p>Structure it deliberately, because the split between basic pay and allowances changes provident fund, gratuity and tax outcomes for both sides.</p>",
+  "faq": [
+    {
+      "question": "Is gross salary the same as CTC?",
+      "answer": "No. CTC also includes employer contributions and provisions that never reach the employee."
+    },
+    {
+      "question": "Does gross salary include overtime?",
+      "answer": "Overtime is usually shown separately as it varies month to month."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "ctc",
+    "take-home-salary",
+    "basic-salary",
+    "payslip"
+  ],
+  "formula": {
+    "expression": "Gross salary = Basic + HRA + DA + Allowances + Bonus",
+    "note": "Net pay = gross salary − employee deductions − TDS."
+  }
+}

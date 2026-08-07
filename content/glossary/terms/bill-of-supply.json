@@ -1,0 +1,52 @@
+{
+  "slug": "bill-of-supply",
+  "term": "Bill of Supply",
+  "category": "gst-tax",
+  "aliases": [
+    "bill of supply invoice"
+  ],
+  "short": "The document used when no GST can be charged on a supply.",
+  "seoTitle": "Bill of Supply — Meaning and Example for Businesses",
+  "metaDescription": "The document used when no GST can be charged on a supply. It carries no tax amount and confers no input tax credit. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A bill of supply is issued instead of a tax invoice when a supplier cannot charge GST — typically a composition dealer, or a supply of exempt goods and services. It carries no tax amount and confers no input tax credit.",
+  "bodyHtml": "<h2>Why Bill of Supply matters</h2><p>Using a tax invoice where a bill of supply is required, or the reverse, misstates the tax position on the face of the document and confuses customers who try to claim credit from it.</p><h2>How Bill of Supply works in practice</h2><p>Keep a separate document series for bills of supply so the two never share numbering. A composition dealer's bill of supply must also declare that the supplier is not eligible to collect tax on supplies.</p>",
+  "faq": [
+    {
+      "question": "Can a customer claim credit from a bill of supply?",
+      "answer": "No. No tax is charged on it, so there is nothing to claim."
+    },
+    {
+      "question": "When do exempt goods need a bill of supply?",
+      "answer": "Whenever a registered person supplies exempt or nil-rated goods or services, in place of a tax invoice."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-invoice",
+    "composition-scheme",
+    "gst",
+    "invoice-numbering"
+  ]
+}

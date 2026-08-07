@@ -1,0 +1,57 @@
+{
+  "slug": "hra",
+  "term": "HRA",
+  "category": "payroll-hr",
+  "aliases": [
+    "House Rent Allowance",
+    "house rent allowance"
+  ],
+  "short": "A salary allowance for rent, partly exempt from income tax.",
+  "seoTitle": "HRA — Meaning, Formula and Example",
+  "metaDescription": "House rent allowance is a salary component paid toward rented accommodation. A salary allowance for rent, partly exempt from income tax.",
+  "updated": "2026-08-07",
+  "definition": "House rent allowance is a salary component paid toward rented accommodation. Under the old tax regime a portion is exempt from income tax, subject to conditions based on rent paid, salary and city.",
+  "bodyHtml": "<h2>Why HRA matters</h2><p>HRA is one of the larger exemptions available to salaried employees who rent, which makes it central to structuring pay tax-efficiently under the old regime.</p><h2>HRA formula</h2><p class=\"glossary-formula\">Exemption = least of (HRA received, Rent − 10% of salary, 50% or 40% of salary)</p><p>Salary here means basic plus dearness allowance.</p><h2>How HRA works in practice</h2><p>The exemption is the least of three amounts: actual HRA received, rent paid less 10% of salary, and 50% of salary in metro cities or 40% elsewhere. Rent receipts and, above a threshold, the landlord's PAN are needed.</p>",
+  "faq": [
+    {
+      "question": "Can I claim HRA under the new tax regime?",
+      "answer": "The HRA exemption is available under the old regime; the new regime trades exemptions for lower slab rates."
+    },
+    {
+      "question": "Can I claim HRA for rent paid to a parent?",
+      "answer": "It is possible where the arrangement is genuine, rent is actually paid and the parent declares the income."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "basic-salary",
+    "income-tax",
+    "gross-salary",
+    "special-allowance"
+  ],
+  "formula": {
+    "expression": "Exemption = least of (HRA received, Rent − 10% of salary, 50% or 40% of salary)",
+    "note": "Salary here means basic plus dearness allowance."
+  }
+}

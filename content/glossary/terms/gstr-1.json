@@ -1,0 +1,52 @@
+{
+  "slug": "gstr-1",
+  "term": "GSTR-1",
+  "category": "gst-tax",
+  "aliases": [
+    "outward supply return"
+  ],
+  "short": "The monthly or quarterly return listing everything you sold.",
+  "seoTitle": "GSTR-1 — Meaning and Example for Businesses",
+  "metaDescription": "The monthly or quarterly return listing everything you sold. It is what feeds your customers' input tax credit. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "GSTR-1 is the return in which a registered business reports its outward supplies — invoice-wise for B2B sales, summarised for B2C, plus credit notes, debit notes and an HSN summary. It is what feeds your customers' input tax credit.",
+  "bodyHtml": "<h2>Why GSTR-1 matters</h2><p>What you file in GSTR-1 becomes visible to every one of your business customers. Miss an invoice and their credit disappears; report one twice and your own liability inflates.</p><h2>How GSTR-1 works in practice</h2><p>The clean version of this workflow is a billing system that already holds invoice numbers, GSTINs, taxable values, rates and HSN codes, so the return is an export rather than a retyping exercise.</p>",
+  "faq": [
+    {
+      "question": "How often is GSTR-1 filed?",
+      "answer": "Monthly for larger taxpayers, quarterly for those opted into the quarterly filing scheme with monthly tax payment."
+    },
+    {
+      "question": "Can I revise a filed GSTR-1?",
+      "answer": "There is no revision as such. Corrections are made through amendments in a later period's return."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-3b",
+    "gstr-2b",
+    "tax-invoice",
+    "credit-note"
+  ]
+}

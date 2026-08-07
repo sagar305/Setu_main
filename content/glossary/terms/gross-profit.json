@@ -1,0 +1,56 @@
+{
+  "slug": "gross-profit",
+  "term": "Gross Profit",
+  "category": "pricing-profit",
+  "aliases": [
+    "gross income"
+  ],
+  "short": "Sales minus the direct cost of what was sold.",
+  "seoTitle": "Gross Profit — Meaning, Formula and Example",
+  "metaDescription": "Gross profit is sales revenue minus the direct cost of the goods or services sold. Gross profit is the money available to cover everything else.",
+  "updated": "2026-08-07",
+  "definition": "Gross profit is sales revenue minus the direct cost of the goods or services sold. It measures how much a business keeps from trading before rent, salaries, marketing and other running costs are considered.",
+  "bodyHtml": "<h2>Why Gross Profit matters</h2><p>Gross profit is the money available to cover everything else. If it does not comfortably exceed fixed costs, no amount of expense control turns the business profitable — the pricing or the buying has to change.</p><h2>Gross Profit formula</h2><p class=\"glossary-formula\">Gross profit = Net sales − Cost of goods sold</p><p>Expressed as a percentage of sales it becomes gross margin.</p><h2>How Gross Profit works in practice</h2><p>Direct costs mean ingredients and packaging for a restaurant, purchase cost for a shop, and delivery labour where it varies with volume. Keeping the definition stable month to month matters more than getting the boundary philosophically right.</p>",
+  "faq": [
+    {
+      "question": "Is gross profit the same as revenue?",
+      "answer": "No. Revenue is the total billed; gross profit is what remains after the direct cost of delivering it."
+    },
+    {
+      "question": "Should salaries be in cost of goods sold?",
+      "answer": "Kitchen or production wages often are; office and management salaries usually sit below gross profit as operating costs."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cogs",
+    "net-profit",
+    "profit-margin",
+    "operating-expense"
+  ],
+  "formula": {
+    "expression": "Gross profit = Net sales − Cost of goods sold",
+    "note": "Expressed as a percentage of sales it becomes gross margin."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "audit-trail",
+  "term": "Audit Trail",
+  "category": "accounting",
+  "aliases": [
+    "audit log"
+  ],
+  "short": "A tamper-evident record of who changed what, and when.",
+  "seoTitle": "Audit Trail — Meaning and Example for Businesses",
+  "metaDescription": "An audit trail is the chronological record of every entry, edit and deletion in a system, along with who made it and when.",
+  "updated": "2026-08-07",
+  "definition": "An audit trail is the chronological record of every entry, edit and deletion in a system, along with who made it and when. In accounting software it is what makes after-the-fact changes visible.",
+  "bodyHtml": "<h2>Why Audit Trail matters</h2><p>An audit trail protects the business as much as it constrains staff. It settles the question of whether a bill was voided, a rate changed or a payment reversed, without anyone having to rely on memory.</p><h2>How Audit Trail works in practice</h2><p>Keep edit logging switched on, review void and discount reports regularly, and give each user their own login. Shared logins destroy the trail entirely, which is usually the first thing an auditor notices.</p>",
+  "faq": [
+    {
+      "question": "Why do individual logins matter?",
+      "answer": "Without them, every action traces to one shared account and the trail identifies nobody."
+    },
+    {
+      "question": "What should be reviewed regularly?",
+      "answer": "Voids, discounts, price overrides and back-dated entries — the four places most leakage appears."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "journal-entry",
+    "comps-and-voids",
+    "invoice-numbering",
+    "bank-reconciliation"
+  ]
+}

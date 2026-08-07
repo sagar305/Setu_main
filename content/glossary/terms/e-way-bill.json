@@ -1,0 +1,53 @@
+{
+  "slug": "e-way-bill",
+  "term": "E-Way Bill",
+  "category": "gst-tax",
+  "aliases": [
+    "eway bill",
+    "electronic way bill"
+  ],
+  "short": "The electronic permit needed to move goods above a threshold value.",
+  "seoTitle": "E-Way Bill — Meaning and Example for Businesses",
+  "metaDescription": "An e-way bill is an electronically generated document required for moving consignments of goods above a specified value.",
+  "updated": "2026-08-07",
+  "definition": "An e-way bill is an electronically generated document required for moving consignments of goods above a specified value. It carries a unique number along with the invoice, transporter and vehicle details, and must accompany the goods in transit.",
+  "bodyHtml": "<h2>Why E-Way Bill matters</h2><p>Goods stopped in transit without a valid e-way bill can be detained and penalised, and the penalty usually lands on the consignment owner rather than the transporter.</p><h2>How E-Way Bill works in practice</h2><p>Generate the bill from the invoice data before dispatch, and update the vehicle details if the consignment changes trucks mid-route. Each e-way bill also has a validity period tied to the distance to be covered.</p>",
+  "faq": [
+    {
+      "question": "Is an e-way bill needed for every delivery?",
+      "answer": "No. It applies above a consignment value threshold, with exemptions for certain goods and short local movements."
+    },
+    {
+      "question": "Who generates the e-way bill?",
+      "answer": "Usually the supplier, but the recipient or the transporter can generate it depending on who arranges the movement."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-invoice",
+    "gst",
+    "place-of-supply",
+    "e-invoicing"
+  ]
+}

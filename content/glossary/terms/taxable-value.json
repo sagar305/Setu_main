@@ -1,0 +1,57 @@
+{
+  "slug": "taxable-value",
+  "term": "Taxable Value",
+  "category": "gst-tax",
+  "aliases": [
+    "assessable value",
+    "net value"
+  ],
+  "short": "The value GST is charged on, after discounts and before tax.",
+  "seoTitle": "Taxable Value — Meaning, Formula and Example",
+  "metaDescription": "Taxable value is the amount on which GST is calculated for a supply. An error here quietly propagates through all of them.",
+  "updated": "2026-08-07",
+  "definition": "Taxable value is the amount on which GST is calculated for a supply. It is the price charged after any discount given at or before the time of supply, and before the tax itself is added.",
+  "bodyHtml": "<h2>Why Taxable Value matters</h2><p>Every downstream number depends on this base — the tax charged, the invoice total, the value reported in returns and the credit your customer claims. An error here quietly propagates through all of them.</p><h2>Taxable Value formula</h2><p class=\"glossary-formula\">Taxable value = Gross price − Discount at the time of supply</p><p>Add incidental charges recovered from the customer before applying the tax rate.</p><h2>How Taxable Value works in practice</h2><p>Discounts agreed at the time of billing reduce taxable value; discounts given afterwards need a credit note to have the same effect. Freight, packing and similar charges recovered from the customer generally form part of the value.</p>",
+  "faq": [
+    {
+      "question": "Are delivery charges part of taxable value?",
+      "answer": "Charges you recover from the customer as part of the supply generally are, and are taxed at the same rate as the main supply."
+    },
+    {
+      "question": "How do post-sale discounts affect taxable value?",
+      "answer": "They reduce it only through a credit note, subject to the conditions for such discounts."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "tax-inclusive-pricing",
+    "credit-note",
+    "gst",
+    "tax-invoice"
+  ],
+  "formula": {
+    "expression": "Taxable value = Gross price − Discount at the time of supply",
+    "note": "Add incidental charges recovered from the customer before applying the tax rate."
+  }
+}

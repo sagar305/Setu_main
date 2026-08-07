@@ -1,0 +1,53 @@
+{
+  "slug": "self-ordering",
+  "term": "Self-Ordering",
+  "category": "pos-tech",
+  "aliases": [
+    "self order",
+    "scan and order"
+  ],
+  "short": "Customers placing their own orders without staff.",
+  "seoTitle": "Self-Ordering — Meaning and Example for Businesses",
+  "metaDescription": "Customers placing their own orders without staff. Order-taking is often the slowest step in service, and it is the one most dependent on staffing at peak.",
+  "updated": "2026-08-07",
+  "definition": "Self-ordering lets customers place orders themselves — through a QR menu, a kiosk or a counter screen — with the order going straight to the kitchen or counter without a staff member taking it.",
+  "bodyHtml": "<h2>Why Self-Ordering matters</h2><p>Order-taking is often the slowest step in service, and it is the one most dependent on staffing at peak. Self-ordering removes the bottleneck and reduces mis-heard orders.</p><h2>How Self-Ordering works in practice</h2><p>Make the flow short enough to complete on a phone in a minute, keep item names unambiguous, and offer add-ons at the right step. Keep staff ordering available for guests who prefer it.</p>",
+  "faq": [
+    {
+      "question": "Does self-ordering increase order value?",
+      "answer": "Often yes. Prompts are consistent, and customers browse the full menu without feeling rushed."
+    },
+    {
+      "question": "Does it replace service staff?",
+      "answer": "It shifts them from order-taking to service and recovery, which is usually where they add more value."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "qr-menu",
+    "table-turnover-rate",
+    "upselling",
+    "token-system"
+  ]
+}

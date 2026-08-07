@@ -1,0 +1,53 @@
+{
+  "slug": "thermal-printer",
+  "term": "Thermal Printer",
+  "category": "pos-tech",
+  "aliases": [
+    "receipt printer",
+    "bill printer"
+  ],
+  "short": "A printer that burns an image onto heat-sensitive paper.",
+  "seoTitle": "Thermal Printer — Meaning and Example for Businesses",
+  "metaDescription": "A thermal printer prints by heating specially coated paper rather than using ink. A printer that burns an image onto heat-sensitive paper.",
+  "updated": "2026-08-07",
+  "definition": "A thermal printer prints by heating specially coated paper rather than using ink. Receipt printers come in 58 mm and 80 mm widths and are the standard at billing counters and kitchen stations.",
+  "bodyHtml": "<h2>Why Thermal Printer matters</h2><p>No ink, few moving parts and fast printing make thermal the default for high-volume billing. The catch is that thermal paper fades, so it is a poor medium for records that must last.</p><h2>How Thermal Printer works in practice</h2><p>Match the receipt template to the paper width, or the layout wraps badly. Keep a digital copy of every bill, since a thermal receipt may be unreadable within a year.</p>",
+  "faq": [
+    {
+      "question": "Why do thermal receipts fade?",
+      "answer": "The print is a heat reaction on coated paper, which degrades with heat, light and time."
+    },
+    {
+      "question": "Which width should I use?",
+      "answer": "80 mm is the common counter standard; 58 mm suits compact and handheld setups."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "receipt",
+    "point-of-sale",
+    "kot",
+    "barcode"
+  ]
+}

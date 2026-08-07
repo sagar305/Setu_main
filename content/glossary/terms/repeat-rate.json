@@ -1,0 +1,57 @@
+{
+  "slug": "repeat-rate",
+  "term": "Repeat Rate",
+  "category": "growth-marketing",
+  "aliases": [
+    "repeat purchase rate",
+    "repeat customer rate"
+  ],
+  "short": "The share of customers who buy more than once.",
+  "seoTitle": "Repeat Rate — Meaning, Formula and Example",
+  "metaDescription": "Repeat rate is the percentage of customers who make more than one purchase in a period. It is the simplest measure of whether a business earns a second visit.",
+  "updated": "2026-08-07",
+  "definition": "Repeat rate is the percentage of customers who make more than one purchase in a period. It is the simplest measure of whether a business earns a second visit.",
+  "bodyHtml": "<h2>Why Repeat Rate matters</h2><p>Repeat customers cost nothing to acquire and typically spend more. A business with a low repeat rate is on an acquisition treadmill, buying every sale it makes.</p><h2>Repeat Rate formula</h2><p class=\"glossary-formula\">Repeat rate % = Customers with more than one purchase ÷ Total customers × 100</p><p>Measure over a window that matches your natural purchase cycle.</p><h2>How Repeat Rate works in practice</h2><p>Measuring it requires identifying customers, usually by phone number at billing. Once that exists, the split between first-time and returning revenue becomes the most useful chart on the dashboard.</p>",
+  "faq": [
+    {
+      "question": "How do I track repeat customers without an app?",
+      "answer": "Capture the phone number at billing. That single field enables repeat rate, retention and win-back campaigns."
+    },
+    {
+      "question": "What is a good repeat rate?",
+      "answer": "It depends on the category — a daily cafe should be far higher than a furniture shop. Track your own trend."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "retention-rate",
+    "churn-rate",
+    "customer-lifetime-value",
+    "loyalty-program"
+  ],
+  "formula": {
+    "expression": "Repeat rate % = Customers with more than one purchase ÷ Total customers × 100",
+    "note": "Measure over a window that matches your natural purchase cycle."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "cash-basis-accounting",
+  "term": "Cash Basis Accounting",
+  "category": "accounting",
+  "aliases": [
+    "cash accounting",
+    "cash basis"
+  ],
+  "short": "Recording income and expenses only when money moves.",
+  "seoTitle": "Cash Basis Accounting — Meaning and Example for Businesses",
+  "metaDescription": "Cash basis accounting records income when money is received and expenses when they are paid. Its simplicity is real, and so is its blindness.",
+  "updated": "2026-08-07",
+  "definition": "Cash basis accounting records income when money is received and expenses when they are paid. It is simple, matches the bank statement, and is common in small service businesses with little credit.",
+  "bodyHtml": "<h2>Why Cash Basis Accounting matters</h2><p>Its simplicity is real, and so is its blindness. Nothing on a cash-basis report reveals that a large supplier bill is due or that half of last month's sales are still unpaid.</p><h2>How Cash Basis Accounting works in practice</h2><p>It works while trading is largely cash and stock is minimal. Once customers buy on credit or stock is held, the accrual picture becomes necessary to see the business clearly.</p>",
+  "faq": [
+    {
+      "question": "Is cash basis allowed for tax?",
+      "answer": "Availability depends on entity type, turnover and the applicable rules, so it is worth confirming for your specific case."
+    },
+    {
+      "question": "Can I run both?",
+      "answer": "Many businesses keep accrual books and read a cash summary alongside, which is the practical answer."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accrual-accounting",
+    "cash-flow",
+    "petty-cash",
+    "profit-and-loss-statement"
+  ]
+}

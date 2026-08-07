@@ -1,0 +1,57 @@
+{
+  "slug": "overtime",
+  "term": "Overtime",
+  "category": "payroll-hr",
+  "aliases": [
+    "OT",
+    "overtime pay"
+  ],
+  "short": "Extra pay for hours worked beyond normal working hours.",
+  "seoTitle": "Overtime — Meaning, Formula and Example",
+  "metaDescription": "Overtime is work beyond normal working hours, paid at a premium rate set by labour law — commonly double the ordinary wage rate.",
+  "updated": "2026-08-07",
+  "definition": "Overtime is work beyond normal working hours, paid at a premium rate set by labour law — commonly double the ordinary wage rate. Records of hours worked are a legal requirement, not an optional practice.",
+  "bodyHtml": "<h2>Why Overtime matters</h2><p>Overtime is one of the largest hidden costs in restaurants and retail. Persistent overtime usually signals a rostering problem, and it is almost always more expensive than hiring for the gap.</p><h2>Overtime formula</h2><p class=\"glossary-formula\">Overtime pay = Ordinary hourly wage × Overtime multiplier × Overtime hours</p><p>Statutory rates commonly require double the ordinary rate.</p><h2>How Overtime works in practice</h2><p>Track hours per employee weekly, not monthly, and compare the overtime bill against the cost of an additional part-time hand. Repeated overtime on the same shift is a scheduling defect.</p>",
+  "faq": [
+    {
+      "question": "Is overtime mandatory to pay?",
+      "answer": "For covered employees, yes, at the statutorily prescribed rate, and hours must be recorded."
+    },
+    {
+      "question": "Can overtime be paid as a fixed allowance?",
+      "answer": "Fixed allowances rarely satisfy the requirement, since the entitlement depends on actual hours worked."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "labour-cost-percentage",
+    "payroll",
+    "minimum-wages",
+    "shift-roster"
+  ],
+  "formula": {
+    "expression": "Overtime pay = Ordinary hourly wage × Overtime multiplier × Overtime hours",
+    "note": "Statutory rates commonly require double the ordinary rate."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "plate-cost",
+  "term": "Plate Cost",
+  "category": "restaurant-ops",
+  "aliases": [
+    "dish cost",
+    "portion cost"
+  ],
+  "short": "The total ingredient cost of one served portion.",
+  "seoTitle": "Plate Cost — Meaning, Formula and Example",
+  "metaDescription": "Plate cost is the total cost of everything that reaches the customer in one serving — main ingredients, sauces, garnish, oil and packaging.",
+  "updated": "2026-08-07",
+  "definition": "Plate cost is the total cost of everything that reaches the customer in one serving — main ingredients, sauces, garnish, oil and packaging. It is the output of recipe costing and the input to menu pricing.",
+  "bodyHtml": "<h2>Why Plate Cost matters</h2><p>Plate cost is what makes a menu price defensible. Two dishes at the same price can differ by a hundred rupees in plate cost, and only one of them is worth promoting.</p><h2>Plate Cost formula</h2><p class=\"glossary-formula\">Plate cost = Ingredient cost + Garnish + Consumables + Packaging</p><p>Menu price should be set from plate cost and a target food cost percentage.</p><h2>How Plate Cost works in practice</h2><p>Include the small things: the extra chutney, the paper liner, the delivery container. Individually trivial, they routinely add five to ten percent to the real cost of a portion.</p>",
+  "faq": [
+    {
+      "question": "Should packaging be in plate cost?",
+      "answer": "For delivery orders, absolutely. It is a real per-order cost that only appears when you count it."
+    },
+    {
+      "question": "How do I use plate cost to set a menu price?",
+      "answer": "Divide plate cost by your target food cost percentage — a ₹90 plate at a 30% target implies a ₹300 menu price."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "recipe-costing",
+    "food-cost-percentage",
+    "portion-control",
+    "menu-engineering"
+  ],
+  "formula": {
+    "expression": "Plate cost = Ingredient cost + Garnish + Consumables + Packaging",
+    "note": "Menu price should be set from plate cost and a target food cost percentage."
+  }
+}

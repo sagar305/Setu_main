@@ -1,0 +1,57 @@
+{
+  "slug": "petty-cash",
+  "term": "Petty Cash",
+  "category": "accounting",
+  "aliases": [
+    "cash in hand",
+    "imprest cash"
+  ],
+  "short": "A small cash float for minor day-to-day payments.",
+  "seoTitle": "Petty Cash — Meaning, Formula and Example",
+  "metaDescription": "Petty cash is a small float of physical cash kept for minor expenses — auto fare, courier charges, a last-minute purchase.",
+  "updated": "2026-08-07",
+  "definition": "Petty cash is a small float of physical cash kept for minor expenses — auto fare, courier charges, a last-minute purchase. It is usually run on an imprest system, topped back up to a fixed amount.",
+  "bodyHtml": "<h2>Why Petty Cash matters</h2><p>Petty cash is small enough to be ignored and leaky enough to matter. Unvouchered spending accumulates quietly and is the hardest category to reconstruct at year end.</p><h2>Petty Cash formula</h2><p class=\"glossary-formula\">Cash on hand + Vouchers held = Imprest float</p><p>Any shortfall is an unrecorded payment.</p><h2>How Petty Cash works in practice</h2><p>Fix the float, require a voucher for every payment, and reimburse only against vouchers so the box always totals cash plus vouchers. Count it weekly, by someone who does not hold the key.</p>",
+  "faq": [
+    {
+      "question": "How much petty cash should I hold?",
+      "answer": "About two weeks of small expenses — enough to avoid constant top-ups, small enough to limit exposure."
+    },
+    {
+      "question": "Who should hold petty cash?",
+      "answer": "One named person, with counts done by someone else. Separating custody from checking is the whole control."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "bank-reconciliation",
+    "contra-entry",
+    "audit-trail",
+    "cash-basis-accounting"
+  ],
+  "formula": {
+    "expression": "Cash on hand + Vouchers held = Imprest float",
+    "note": "Any shortfall is an unrecorded payment."
+  }
+}

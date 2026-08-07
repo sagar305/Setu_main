@@ -1,0 +1,57 @@
+{
+  "slug": "menu-price-padding",
+  "term": "Menu Price Padding",
+  "category": "restaurant-ops",
+  "aliases": [
+    "online price padding",
+    "menu markup for delivery"
+  ],
+  "short": "Raising online menu prices to absorb commission and packaging.",
+  "seoTitle": "Menu Price Padding — Meaning, Formula and Example",
+  "metaDescription": "Raising online menu prices to absorb commission and packaging. Without padding, every online order earns materially less than the same dish sold in-house.",
+  "updated": "2026-08-07",
+  "definition": "Menu price padding is setting higher prices on delivery platforms than in the restaurant, so that commission, packaging and funded discounts still leave the intended margin.",
+  "bodyHtml": "<h2>Why Menu Price Padding matters</h2><p>Without padding, every online order earns materially less than the same dish sold in-house. With too much padding, listings look expensive next to competitors and conversion falls.</p><h2>Menu Price Padding formula</h2><p class=\"glossary-formula\">Online price = Target net price ÷ (1 − commission rate)</p><p>Add packaging cost before applying the divisor.</p><h2>How Menu Price Padding works in practice</h2><p>Work backwards from the net realisation you need after commission and packaging, then sanity-check the result against comparable listings nearby. Pad by category rather than uniformly, since low-value items suffer most.</p><h2>Worked example</h2><p>To net ₹300 at a 22% commission, the listed price needs to be about ₹385 before packaging.</p>",
+  "faq": [
+    {
+      "question": "Is it legal to charge more online?",
+      "answer": "Menu pricing is commercial, though platform agreements may include parity terms — read yours before setting prices."
+    },
+    {
+      "question": "How much padding is too much?",
+      "answer": "When your listing stops converting against comparable restaurants nearby, which shows up quickly in order volume."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "aggregator-commission",
+    "unit-economics",
+    "selling-price",
+    "price-elasticity"
+  ],
+  "formula": {
+    "expression": "Online price = Target net price ÷ (1 − commission rate)",
+    "note": "Add packaging cost before applying the divisor."
+  }
+}

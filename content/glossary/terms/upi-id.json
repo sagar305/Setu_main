@@ -1,0 +1,54 @@
+{
+  "slug": "upi-id",
+  "term": "UPI ID",
+  "category": "payments-finance",
+  "aliases": [
+    "VPA",
+    "virtual payment address",
+    "UPI handle"
+  ],
+  "short": "The name@bank address money is sent to on UPI.",
+  "seoTitle": "UPI ID — Meaning and Example for Businesses",
+  "metaDescription": "A UPI ID, also called a virtual payment address or VPA, is the address a UPI payment is sent to — something like business@bank.",
+  "updated": "2026-08-07",
+  "definition": "A UPI ID, also called a virtual payment address or VPA, is the address a UPI payment is sent to — something like business@bank. It maps to a bank account without exposing the account number or IFSC.",
+  "bodyHtml": "<h2>Why UPI ID matters</h2><p>The UPI ID is what a customer's money lands on, so a single wrong character sends the payment to a stranger. It is worth verifying once, carefully, and then never retyping it.</p><h2>How UPI ID works in practice</h2><p>Generate your QR code from the stored ID rather than typing it per display, and check the payee name shown in the customer's app before printing a batch of codes.</p>",
+  "faq": [
+    {
+      "question": "Can one business have several UPI IDs?",
+      "answer": "Yes, and separate IDs per outlet or counter make reconciliation considerably easier."
+    },
+    {
+      "question": "Is a UPI ID safe to share publicly?",
+      "answer": "It reveals no account number, so displaying it to receive payments is normal practice."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "upi",
+    "static-qr-code",
+    "dynamic-qr-code",
+    "settlement"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "input-tax-credit",
+  "term": "Input Tax Credit",
+  "category": "gst-tax",
+  "aliases": [
+    "ITC",
+    "input credit"
+  ],
+  "short": "The GST you paid on purchases, set off against the GST you collected on sales.",
+  "seoTitle": "Input Tax Credit — Meaning, Formula and Example",
+  "metaDescription": "Input tax credit is the GST a business has already paid on its purchases and expenses, which it can set off against the GST it collects on sales.",
+  "updated": "2026-08-07",
+  "definition": "Input tax credit is the GST a business has already paid on its purchases and expenses, which it can set off against the GST it collects on sales. Only the difference is paid to the government, which is what stops tax stacking at every stage of the chain.",
+  "bodyHtml": "<h2>Why Input Tax Credit matters</h2><p>ITC is often the difference between a healthy month and a painful one. Credit you fail to claim is a straight cost, and credit claimed on invoices your supplier never filed gets reversed with interest.</p><h2>Input Tax Credit formula</h2><p class=\"glossary-formula\">GST payable = Output GST on sales − Input tax credit on purchases</p><p>A negative result carries forward as credit rather than becoming a refund in most cases.</p><h2>How Input Tax Credit works in practice</h2><p>Claiming ITC needs a valid tax invoice carrying your GSTIN, goods or services actually received, and the supplier having reported the invoice so it appears in your auto-drafted statement. Match your purchase register against that statement every month rather than at year end.</p><h2>Worked example</h2><p>Collect ₹18,000 GST on sales and pay ₹11,000 GST on purchases in the same month, and ₹7,000 is what you actually remit.</p><h2>Common mistakes with Input Tax Credit</h2><ul><li>Claiming credit on invoices from suppliers who have not filed their returns.</li><li>Forgetting that credit is blocked on some expenses, such as certain motor vehicles and personal consumption.</li><li>Ignoring the reversal rules when a supplier is not paid within the prescribed period.</li></ul>",
+  "faq": [
+    {
+      "question": "Can restaurants claim input tax credit?",
+      "answer": "Standalone restaurants billing at the 5% concessional rate generally cannot claim ITC. Establishments billing at 18%, such as those in higher-tariff hotels, usually can."
+    },
+    {
+      "question": "What if my supplier does not file their return?",
+      "answer": "The invoice will not appear in your auto-drafted credit statement, and the credit is not available until they report it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gst",
+    "gstr-2b",
+    "tax-invoice",
+    "reverse-charge-mechanism"
+  ],
+  "formula": {
+    "expression": "GST payable = Output GST on sales − Input tax credit on purchases",
+    "note": "A negative result carries forward as credit rather than becoming a refund in most cases."
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AgingReportTool } from "@/components/tools/aging/AgingReportTool";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Accounts Payable Aging Report | Setu",
@@ -75,6 +76,9 @@ export default function AccountsPayableAgingPage() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <AgingReportTool kind="payable" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="accounts-payable-aging" />
       </section>
     </>
   );

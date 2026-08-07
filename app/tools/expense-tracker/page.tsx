@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTrackerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
+import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = {
   title: "Free Expense Tracker for Small Business | Setu",
@@ -92,6 +93,9 @@ export default function ExpenseTrackerPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <SuggestedTools current="expense-tracker" />
+      </section>
+      <section className="mx-auto max-w-4xl px-6 pb-16">
+        <GlossaryTermsStrip type="tool" slug="expense-tracker" />
       </section>
     </>
   );

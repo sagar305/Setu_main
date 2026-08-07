@@ -1,0 +1,53 @@
+{
+  "slug": "e-invoicing",
+  "term": "E-Invoicing",
+  "category": "gst-tax",
+  "aliases": [
+    "electronic invoicing",
+    "e-invoice"
+  ],
+  "short": "Reporting invoices to the government portal to get them authenticated.",
+  "seoTitle": "E-Invoicing — Meaning and Example for Businesses",
+  "metaDescription": "Reporting invoices to the government portal to get them authenticated. The invoice you give the customer then carries that authentication.",
+  "updated": "2026-08-07",
+  "definition": "E-invoicing is the process of reporting a B2B invoice to the government's invoice registration portal, which validates it and returns an invoice reference number and a signed QR code. The invoice you give the customer then carries that authentication.",
+  "bodyHtml": "<h2>Why E-Invoicing matters</h2><p>Where e-invoicing applies, an invoice without a valid reference number is not treated as a valid document at all, which blocks your customer's input tax credit and can invalidate the transaction in returns.</p><h2>How E-Invoicing works in practice</h2><p>Applicability is driven by turnover thresholds that have moved downward over time, so smaller businesses keep coming into scope. Once you are in, the reported invoice data also auto-populates parts of your GSTR-1.</p>",
+  "faq": [
+    {
+      "question": "Does e-invoicing apply to B2C sales?",
+      "answer": "The reporting requirement is for B2B and export invoices; B2C sales have separate QR code requirements for larger businesses."
+    },
+    {
+      "question": "Can an e-invoice be cancelled?",
+      "answer": "It can be cancelled on the portal within a short window; after that the correction has to go through a credit note."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "vat-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "irn",
+    "tax-invoice",
+    "gstr-1",
+    "e-way-bill"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "table-management",
+  "term": "Table Management",
+  "category": "pos-tech",
+  "aliases": [
+    "floor management",
+    "table plan"
+  ],
+  "short": "Tracking table status so the floor is used efficiently.",
+  "seoTitle": "Table Management — Meaning and Example for Businesses",
+  "metaDescription": "Tracking table status so the floor is used efficiently. Empty tables that nobody knows are empty are the most common cause of a queue at the door.",
+  "updated": "2026-08-07",
+  "definition": "Table management tracks the state of every table — free, seated, ordered, billed, being cleared — so hosts can seat parties quickly and servers can see what needs attention.",
+  "bodyHtml": "<h2>Why Table Management matters</h2><p>Empty tables that nobody knows are empty are the most common cause of a queue at the door. Visibility, not capacity, is usually the constraint on a busy evening.</p><h2>How Table Management works in practice</h2><p>Keep status updates part of the service flow rather than a separate task, and match party size to table size. Seating a couple at a six-top on a Saturday costs real covers.</p>",
+  "faq": [
+    {
+      "question": "How does table management increase revenue?",
+      "answer": "By raising turnover — faster seating and clearing produce more covers from the same floor."
+    },
+    {
+      "question": "Is it useful for a small restaurant?",
+      "answer": "Below about fifteen tables the host usually holds it in their head; beyond that, a system pays for itself."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    }
+  ],
+  "relatedTerms": [
+    "table-turnover-rate",
+    "queue-management",
+    "covers",
+    "dine-in"
+  ]
+}

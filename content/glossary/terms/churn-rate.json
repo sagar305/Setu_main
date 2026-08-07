@@ -1,0 +1,57 @@
+{
+  "slug": "churn-rate",
+  "term": "Churn Rate",
+  "category": "growth-marketing",
+  "aliases": [
+    "customer churn",
+    "attrition rate"
+  ],
+  "short": "The share of customers who stop buying from you.",
+  "seoTitle": "Churn Rate — Meaning, Formula and Example",
+  "metaDescription": "Churn rate is the percentage of customers who stop buying over a period. Churn compounds quietly. The share of customers who stop buying from you.",
+  "updated": "2026-08-07",
+  "definition": "Churn rate is the percentage of customers who stop buying over a period. For subscription businesses it is measurable directly; for retail and restaurants it is inferred from the absence of repeat purchases.",
+  "bodyHtml": "<h2>Why Churn Rate matters</h2><p>Churn compounds quietly. Losing 5% of customers a month means replacing the entire base within two years just to stand still.</p><h2>Churn Rate formula</h2><p class=\"glossary-formula\">Churn rate % = Customers lost in period ÷ Customers at start of period × 100</p><p>Retention rate is simply 100 minus churn.</p><h2>How Churn Rate works in practice</h2><p>Define churn against your natural purchase cycle — no purchase in ninety days means something different for a cafe than for a jeweller. Then look at what the churned cohort had in common.</p>",
+  "faq": [
+    {
+      "question": "How is churn measured in a restaurant?",
+      "answer": "By absence of repeat visits within a defined window, which is why capturing customer identity at billing matters."
+    },
+    {
+      "question": "Is some churn unavoidable?",
+      "answer": "Yes. People move and habits change; what matters is churn you can influence, such as service failures."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "business-profile"
+    }
+  ],
+  "relatedTerms": [
+    "retention-rate",
+    "repeat-rate",
+    "customer-lifetime-value",
+    "cohort-analysis"
+  ],
+  "formula": {
+    "expression": "Churn rate % = Customers lost in period ÷ Customers at start of period × 100",
+    "note": "Retention rate is simply 100 minus churn."
+  }
+}

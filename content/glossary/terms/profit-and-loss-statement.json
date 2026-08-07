@@ -1,0 +1,54 @@
+{
+  "slug": "profit-and-loss-statement",
+  "term": "Profit and Loss Statement",
+  "category": "accounting",
+  "aliases": [
+    "P&L",
+    "income statement",
+    "profit and loss account"
+  ],
+  "short": "Income and expenses over a period, ending in profit or loss.",
+  "seoTitle": "What Is Profit and Loss Statement? Meaning and Example",
+  "metaDescription": "A profit and loss statement summarises income and expenses over a period and arrives at profit or loss. The P&L is the fastest read on whether trading works.",
+  "updated": "2026-08-07",
+  "definition": "A profit and loss statement summarises income and expenses over a period and arrives at profit or loss. It runs from revenue through cost of goods sold to gross profit, then through operating expenses to net profit.",
+  "bodyHtml": "<h2>Why Profit and Loss Statement matters</h2><p>The P&L is the fastest read on whether trading works. Compared month against month, it also shows which specific cost has drifted, rather than just that money is tight.</p><h2>How Profit and Loss Statement works in practice</h2><p>Compare each line as a percentage of sales, not only in rupees, so growth-driven increases are distinguishable from real cost creep. Read it beside the cash flow statement, since profit and cash rarely move together.</p>",
+  "faq": [
+    {
+      "question": "Is the P&L the same as cash flow?",
+      "answer": "No. It records income when earned and expenses when incurred, regardless of when money moves."
+    },
+    {
+      "question": "What period should a P&L cover?",
+      "answer": "Monthly for management, quarterly for trends, annually for statutory reporting."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "balance-sheet",
+    "gross-profit",
+    "net-profit",
+    "cash-flow-statement"
+  ]
+}

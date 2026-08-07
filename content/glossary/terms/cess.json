@@ -1,0 +1,52 @@
+{
+  "slug": "cess",
+  "term": "Cess",
+  "category": "gst-tax",
+  "aliases": [
+    "compensation cess"
+  ],
+  "short": "An additional levy charged on top of tax for a specific purpose.",
+  "seoTitle": "Cess — Meaning and Example for Businesses",
+  "metaDescription": "A cess is an additional levy charged over and above the base tax and earmarked for a specific purpose. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A cess is an additional levy charged over and above the base tax and earmarked for a specific purpose. Under GST, compensation cess applies to a small set of goods such as tobacco, aerated drinks and certain vehicles, on top of the usual rate.",
+  "bodyHtml": "<h2>Why Cess matters</h2><p>Cess is easy to overlook when setting up product masters, because it applies to a narrow list. Missing it on a cess-bearing item means under-collecting tax on every sale of that item.</p><h2>How Cess works in practice</h2><p>Where cess applies it is charged on the taxable value alongside GST and shown as its own line. Credit of compensation cess can only be used against cess liability, not against GST.</p>",
+  "faq": [
+    {
+      "question": "Does cess apply to restaurant food?",
+      "answer": "Not to ordinary restaurant service. Aerated drinks and tobacco sold in an outlet can attract it as goods."
+    },
+    {
+      "question": "Can I use cess credit against GST?",
+      "answer": "No. Compensation cess credit is ring-fenced and can only be set off against cess liability."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "sales-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    }
+  ],
+  "relatedTerms": [
+    "gst",
+    "taxable-value",
+    "input-tax-credit",
+    "hsn-code"
+  ]
+}

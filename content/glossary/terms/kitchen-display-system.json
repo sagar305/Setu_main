@@ -1,0 +1,53 @@
+{
+  "slug": "kitchen-display-system",
+  "term": "Kitchen Display System",
+  "category": "restaurant-ops",
+  "aliases": [
+    "KDS",
+    "kitchen display"
+  ],
+  "short": "A screen that replaces printed tickets in the kitchen.",
+  "seoTitle": "Kitchen Display System — Meaning and Example for Businesses",
+  "metaDescription": "A screen that replaces printed tickets in the kitchen. Paper tickets get lost, smudged and reordered by hand. Part of the free Setu business glossary.",
+  "updated": "2026-08-07",
+  "definition": "A kitchen display system, or KDS, is a screen in the kitchen that shows incoming orders in place of printed tickets, routing items to the right section and timing each ticket as it ages.",
+  "bodyHtml": "<h2>Why Kitchen Display System matters</h2><p>Paper tickets get lost, smudged and reordered by hand. A KDS keeps sequence honest, shows which tickets are ageing, and gives you real preparation times rather than remembered ones.</p><h2>How Kitchen Display System works in practice</h2><p>Route by station so the tandoor and the cold section each see only their own items, and set colour thresholds by ticket age. In multi-channel kitchens, routing dine-in and delivery to separate lanes prevents one surge from stalling the other.</p>",
+  "faq": [
+    {
+      "question": "Is a KDS better than a printer?",
+      "answer": "For volume and multi-channel kitchens, clearly. A single-section kitchen with low volume may do fine on paper."
+    },
+    {
+      "question": "What does a KDS measure?",
+      "answer": "Ticket times per station and per channel, which is the data behind any serious speed improvement."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "receipt-designer"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "kot",
+    "ticket-time",
+    "qsr",
+    "cloud-kitchen"
+  ]
+}

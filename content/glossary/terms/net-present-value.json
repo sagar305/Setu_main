@@ -1,0 +1,56 @@
+{
+  "slug": "net-present-value",
+  "term": "Net Present Value",
+  "category": "payments-finance",
+  "aliases": [
+    "NPV"
+  ],
+  "short": "Future cash flows discounted back to what they are worth today.",
+  "seoTitle": "Net Present Value — Meaning, Formula and Example",
+  "metaDescription": "Net present value discounts an investment's future cash flows back to today's value at a chosen rate, then subtracts the initial cost.",
+  "updated": "2026-08-07",
+  "definition": "Net present value discounts an investment's future cash flows back to today's value at a chosen rate, then subtracts the initial cost. A positive NPV means the investment creates value at that rate.",
+  "bodyHtml": "<h2>Why Net Present Value matters</h2><p>A rupee next year is worth less than a rupee today, and for multi-year commitments — a new outlet, a long lease — ignoring that distorts the decision.</p><h2>Net Present Value formula</h2><p class=\"glossary-formula\">NPV = Σ (Cash flow in year t ÷ (1 + r)^t) − Initial investment</p><p>r is the discount rate representing your cost of capital.</p><h2>How Net Present Value works in practice</h2><p>Use a discount rate that reflects your genuine cost of capital, then test how sensitive the result is to it. If a small change in the rate flips the answer, the decision is close and deserves more caution than arithmetic.</p>",
+  "faq": [
+    {
+      "question": "What discount rate should I use?",
+      "answer": "Your realistic cost of capital — a blend of borrowing cost and the return you expect on your own money."
+    },
+    {
+      "question": "Is NPV better than payback?",
+      "answer": "It is more complete, but harder to estimate. Most small businesses use payback first and NPV for large commitments."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "loan-emi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "upi-qr-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "roi",
+    "payback-period",
+    "capital-expenditure",
+    "interest-rate"
+  ],
+  "formula": {
+    "expression": "NPV = Σ (Cash flow in year t ÷ (1 + r)^t) − Initial investment",
+    "note": "r is the discount rate representing your cost of capital."
+  }
+}

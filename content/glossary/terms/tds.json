@@ -1,0 +1,56 @@
+{
+  "slug": "tds",
+  "term": "TDS",
+  "category": "gst-tax",
+  "aliases": [
+    "tax deducted at source"
+  ],
+  "short": "Income tax withheld by the payer before a payment is made.",
+  "seoTitle": "TDS — Meaning, Formula and Example",
+  "metaDescription": "Income tax withheld by the payer before a payment is made. See the formula, an example and the free Setu tools that use TDS.",
+  "updated": "2026-08-07",
+  "definition": "TDS, or tax deducted at source, is income tax withheld by the person making a payment — on rent, contractor bills, professional fees, salary and other specified payments — and deposited with the government on the recipient's behalf.",
+  "bodyHtml": "<h2>Why TDS matters</h2><p>If you are the payer, failing to deduct or deposit TDS brings interest, penalties and disallowance of the expense. If you are the recipient, the deducted amount is money you have already paid, claimable against your final tax.</p><h2>TDS formula</h2><p class=\"glossary-formula\">TDS = Payment amount × applicable TDS rate ÷ 100</p><p>Deduct on the amount before GST for most payment types.</p><h2>How TDS works in practice</h2><p>Deduct at the prescribed rate when crediting or paying, deposit by the due date, and file the quarterly statement so the credit reflects in the recipient's tax account. Rates and thresholds differ by payment type.</p>",
+  "faq": [
+    {
+      "question": "Is TDS the same as GST TDS?",
+      "answer": "No. Income tax TDS is withheld on payments generally; GST TDS applies to specified deductors on certain supplies under GST law."
+    },
+    {
+      "question": "Where do I see TDS deducted against my PAN?",
+      "answer": "In your annual tax statement, which is what you reconcile before filing your income tax return."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "tcs",
+    "pan",
+    "income-tax",
+    "form-16"
+  ],
+  "formula": {
+    "expression": "TDS = Payment amount × applicable TDS rate ÷ 100",
+    "note": "Deduct on the amount before GST for most payment types."
+  }
+}

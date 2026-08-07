@@ -1,0 +1,58 @@
+{
+  "slug": "aging-report",
+  "term": "Aging Report",
+  "category": "accounting",
+  "aliases": [
+    "ageing report",
+    "aging analysis",
+    "ageing analysis"
+  ],
+  "short": "Outstanding balances grouped by how long they have been due.",
+  "seoTitle": "Aging Report — Meaning, Formula and Example",
+  "metaDescription": "An aging report groups outstanding invoices into buckets by how long they have been overdue — current, 1–30 days, 31–60, 61–90 and beyond.",
+  "updated": "2026-08-07",
+  "definition": "An aging report groups outstanding invoices into buckets by how long they have been overdue — current, 1–30 days, 31–60, 61–90 and beyond. It exists for both receivables and payables.",
+  "bodyHtml": "<h2>Why Aging Report matters</h2><p>A single total tells you how much is outstanding; the ageing tells you how worried to be. Recovery odds fall sharply with each bucket, which is why age matters more than amount.</p><h2>Aging Report formula</h2><p class=\"glossary-formula\">Days overdue = Today − Invoice due date</p><p>Bucket every open invoice by that figure.</p><h2>How Aging Report works in practice</h2><p>Chase by bucket, starting with balances just past due where recovery is easiest. On the payables side, use the same report to pay to terms rather than to pressure.</p>",
+  "faq": [
+    {
+      "question": "How often should I run an aging report?",
+      "answer": "Weekly for receivables in a credit business, monthly at the very least."
+    },
+    {
+      "question": "Which bucket should I focus on?",
+      "answer": "The 1–30 day bucket. Collection rates drop steeply once invoices pass ninety days."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "accounts-payable",
+    "bad-debt",
+    "days-sales-outstanding"
+  ],
+  "formula": {
+    "expression": "Days overdue = Today − Invoice due date",
+    "note": "Bucket every open invoice by that figure."
+  }
+}

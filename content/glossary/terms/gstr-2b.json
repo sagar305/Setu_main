@@ -1,0 +1,52 @@
+{
+  "slug": "gstr-2b",
+  "term": "GSTR-2B",
+  "category": "gst-tax",
+  "aliases": [
+    "auto-drafted credit statement"
+  ],
+  "short": "The auto-drafted statement of the input tax credit available to you.",
+  "seoTitle": "GSTR-2B — Meaning and Example for Businesses",
+  "metaDescription": "The auto-drafted statement of the input tax credit available to you. It is the reference point for how much credit can legitimately be claimed.",
+  "updated": "2026-08-07",
+  "definition": "GSTR-2B is a static, auto-drafted statement generated for each tax period listing the input tax credit available to a business based on what its suppliers have reported. It is the reference point for how much credit can legitimately be claimed.",
+  "bodyHtml": "<h2>Why GSTR-2B matters</h2><p>Credit claimed beyond what GSTR-2B shows is the single most common mismatch in GST scrutiny. Reconciling against it turns supplier non-compliance into something you can chase in the same month rather than discover a year later.</p><h2>How GSTR-2B works in practice</h2><p>Match your purchase register line by line against GSTR-2B, and keep a short list of suppliers whose invoices repeatedly fail to appear. That list is usually a better negotiating tool than any reminder email.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between GSTR-2A and GSTR-2B?",
+      "answer": "GSTR-2A is dynamic and keeps updating as suppliers file, while GSTR-2B is a static snapshot for the period."
+    },
+    {
+      "question": "Can I claim credit that is missing from GSTR-2B?",
+      "answer": "Not reliably. Until the supplier reports the invoice, the credit is not considered available."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "input-tax-credit",
+    "gstr-1",
+    "gstr-3b",
+    "vendor-reconciliation"
+  ]
+}
