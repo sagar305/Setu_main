@@ -74,6 +74,23 @@ function menuItemForSync(item: DineMenuItem): DineMenuItem {
   return { ...item, imageDataUrl: "" };
 }
 
+/**
+ * Settings, minus everything that is a credential rather than a setting.
+ *
+ * The sheet is only as private as its URL, and that URL gets pasted into
+ * chats, shared with an accountant, and — if QR ordering is ever built on top
+ * — printed on a table tent. The counter PIN is stored as a salted SHA-256,
+ * which sounds reassuring until you notice the PIN is four digits: with the
+ * salt in the same cell, every possible PIN can be tried in well under a
+ * second. So the hash, its salt and the sync URL itself never leave the
+ * device. A restore from a sheet therefore comes back with no PIN set, which
+ * is the safe direction to fail in.
+ */
+function settingsForSync(settings: DineSettings): Omit<DineSettings, "pinHash" | "pinSalt"> {
+  const { pinHash: _pinHash, pinSalt: _pinSalt, ...rest } = settings;
+  return { ...rest, sheetSyncUrl: "" };
+}
+
 function metaTab(meta: DineMetaSnapshot): TabPayload {
   const business = meta.business ? { ...meta.business, logoDataUrl: "" } : null;
   return {
@@ -81,7 +98,7 @@ function metaTab(meta: DineMetaSnapshot): TabPayload {
     headers: ["Key", "Value"],
     rows: [
       ["business", JSON.stringify(business)],
-      ["settings", JSON.stringify(meta.settings)],
+      ["settings", JSON.stringify(settingsForSync(meta.settings))],
       ["categories", JSON.stringify(meta.categories)],
       ["areas", JSON.stringify(meta.areas)],
       ["tables", JSON.stringify(meta.tables)],
@@ -470,9 +487,15 @@ export function buildBackupFromDineSheetPull(
       "This sheet has no synced restaurant profile yet. Connect Free Dine to it and sync at least once first."
     );
   }
-  const settings: DineSettings = pull.meta.settings
-    ? { ...DEFAULT_DINE_SETTINGS, ...pull.meta.settings, sheetSyncUrl: url }
-    : { ...DEFAULT_DINE_SETTINGS, sheetSyncUrl: url };
+  const settings: DineSettings = {
+    ...DEFAULT_DINE_SETTINGS,
+    ...(pull.meta.settings ?? {}),
+    // The sheet never carries these, so take the defaults rather than
+    // whatever a hand-edited cell claims.
+    pinHash: "",
+    pinSalt: "",
+    sheetSyncUrl: url,
+  };
 
   return {
     app: DINE_BACKUP_MARKER,
