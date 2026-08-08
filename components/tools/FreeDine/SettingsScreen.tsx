@@ -3,13 +3,16 @@
 import { useState } from "react";
 import {
   Building2,
+  ChefHat,
   Download,
+  ExternalLink,
   Lock,
   Percent,
   Printer,
   Receipt,
   Sheet,
   TriangleAlert,
+  Unlock,
 } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { daysSinceBackup } from "@/lib/dine/backup";
@@ -419,6 +422,68 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               ))}
             </select>
           </Field>
+        )}
+      </Card>
+
+      <Card icon={ChefHat} title="Kitchen screen">
+        <p className="text-sm text-muted">
+          Open this in a second tab and leave it on the pass. Rounds appear the moment you send
+          them, and marking food ready shows up on your floor.
+        </p>
+
+        <div className="flex flex-wrap gap-3">
+          <a
+            href="/products/free-restaurant-pos/kitchen"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={secondaryBtnClass}
+          >
+            <ExternalLink className="h-4 w-4" />
+            Open kitchen screen
+          </a>
+
+          {settings.kitchenLocked ? (
+            <button
+              type="button"
+              onClick={() => void updateSettings({ kitchenLocked: false })}
+              className={primaryBtnClass}
+            >
+              <Unlock className="h-4 w-4" />
+              Unlock the kitchen screen
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => void updateSettings({ kitchenLocked: true })}
+              disabled={!settings.pinHash}
+              title={
+                settings.pinHash
+                  ? "Lock the kitchen screen so staff cannot leave it"
+                  : "Set a counter PIN first — it is what unlocks the screen"
+              }
+              className={primaryBtnClass}
+            >
+              <Lock className="h-4 w-4" />
+              Lock the kitchen screen
+            </button>
+          )}
+        </div>
+
+        {!settings.pinHash && (
+          <p className="text-xs text-muted">
+            Set a counter PIN above first — it is what unlocks the kitchen screen again.
+          </p>
+        )}
+
+        {settings.kitchenLocked && (
+          <p className="rounded-xl bg-indigo/5 p-3 text-xs leading-relaxed text-ink">
+            The kitchen screen is locked. Its way back to the counter is hidden, the back gesture
+            is blocked and closing the tab warns first — but a browser tab can never truly trap
+            someone, so anyone who reaches the address bar can still leave. On a tablet you want to
+            lock down properly, pair this with the device&apos;s own kiosk mode: screen pinning on
+            Android, Guided Access on iPad, or launching Chrome with{" "}
+            <code className="rounded bg-white px-1 py-0.5">--kiosk</code> on a PC.
+          </p>
         )}
       </Card>
 

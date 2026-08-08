@@ -109,10 +109,15 @@ function DineShell({
             target="_blank"
             rel="noopener noreferrer"
             title="Open the kitchen screen in a new tab"
-            className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full border border-muted-line/40 bg-white px-3 text-xs font-semibold text-muted transition hover:border-indigo/40 hover:text-indigo"
+            className={`inline-flex h-9 shrink-0 items-center gap-2 rounded-full border px-3 text-xs font-semibold transition ${
+              settings.kitchenLocked
+                ? "border-indigo/40 bg-indigo/10 text-indigo"
+                : "border-muted-line/40 bg-white text-muted hover:border-indigo/40 hover:text-indigo"
+            }`}
           >
             <ChefHat className="h-4 w-4" />
             <span className="hidden sm:inline">Kitchen screen</span>
+            {settings.kitchenLocked && <Lock className="h-3 w-3" aria-label="locked" />}
           </a>
           {hasPin && (
             <button

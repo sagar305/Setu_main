@@ -345,6 +345,16 @@ export type DineSettings = {
   pinSalt: string;
   /** Lock after this many idle minutes; 0 = never. */
   autoLockMinutes: number;
+
+  /**
+   * Kiosk lock for the kitchen screen, set from the counter.
+   *
+   * Lives in settings rather than in the kitchen tab's own storage so the
+   * counter can lock and unlock the pass without walking over to it — the
+   * change reaches the kitchen tab through the same live sync as everything
+   * else. Unlocking needs the counter PIN.
+   */
+  kitchenLocked: boolean;
 };
 
 export const DEFAULT_DINE_SETTINGS: DineSettings = {
@@ -380,6 +390,7 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   pinHash: "",
   pinSalt: "",
   autoLockMinutes: 0,
+  kitchenLocked: false,
 };
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
