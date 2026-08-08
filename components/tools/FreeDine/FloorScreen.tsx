@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Bike, Clock, LayoutGrid, Plus, ShoppingBag, Utensils } from "lucide-react";
+import { Bike, ChefHat, Clock, LayoutGrid, Plus, ShoppingBag } from "lucide-react";
 import { useDine, type FloorTable } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
 import { ORDER_TYPE_LABELS, type DineTicket } from "@/lib/dine/types";
@@ -187,6 +187,12 @@ export function FloorScreen({
                       {row.itemCount} item{row.itemCount === 1 ? "" : "s"}
                     </span>
                   </span>
+                  {row.readyCount > 0 && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-green-800">
+                      <ChefHat className="h-2.5 w-2.5" aria-hidden="true" />
+                      Food ready
+                    </span>
+                  )}
                   {row.unfiredCount > 0 && (
                     <span className="inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-red-700">
                       {row.unfiredCount} not sent

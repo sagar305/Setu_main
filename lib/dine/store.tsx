@@ -27,11 +27,13 @@ import {
 
 import {
   DINE_STORES,
+  dineAllocate,
   dineBatch,
   dineClearAll,
   dineGetAll,
   type DineStoreName,
 } from "./db";
+import { createDineBroadcast, type DineBroadcast } from "./sync";
 import {
   createDineBackup,
   downloadDineBackup,
@@ -55,6 +57,7 @@ import {
   formatSeriesNumber,
   generateId,
   isBillable,
+  kotStatusOf,
   lineTotal,
   lineUnitPrice,
   nowIso,
@@ -76,6 +79,7 @@ import {
   type DineTicket,
   type DineTicketItem,
   type DineVariation,
+  type KotStatus,
   type OrderType,
   type SplitMode,
 } from "./types";
@@ -94,6 +98,8 @@ export type FloorTable = {
   openedAt: string | null;
   itemCount: number;
   unfiredCount: number;
+  /** Rounds the kitchen has marked ready but nobody has carried out yet. */
+  readyCount: number;
 };
 
 export type SetupInput = {
@@ -211,6 +217,7 @@ type DineContextValue = {
   cancelTicketItem: (itemId: string, reason: string) => Promise<DineKot | null>;
   fireRound: (ticketId: string) => Promise<DineKot | null>;
   reprintKot: (kotId: string) => Promise<void>;
+  setKotStatus: (kotId: string, status: KotStatus) => Promise<void>;
   setTicketDiscount: (
     ticketId: string,
     discountType: "flat" | "percent",
@@ -286,6 +293,48 @@ export function DineProvider({ children }: { children: ReactNode }) {
     settingsRef.current = settings;
   }, [settings]);
 
+  // Cross-tab live sync. Created lazily so the provider can render on the
+  // server, and torn down with the provider.
+  const broadcastRef = useRef<DineBroadcast | null>(null);
+  const broadcast = useRef((): DineBroadcast => {
+    if (!broadcastRef.current) broadcastRef.current = createDineBroadcast();
+    return broadcastRef.current;
+  }).current;
+
+  useEffect(() => {
+    return () => {
+      broadcastRef.current?.close();
+      broadcastRef.current = null;
+    };
+  }, []);
+
+  /** Tell the other tabs which stores moved. */
+  const announce = useCallback((stores: DineStoreName[]) => {
+    broadcast().post(Array.from(new Set(stores)));
+  }, [broadcast]);
+
+  /**
+   * Write, then announce.
+   *
+   * Every mutation goes through here rather than calling dineBatch directly,
+   * so there is no way to add a feature that saves correctly but leaves the
+   * kitchen screen showing yesterday's orders.
+   *
+   * Deliberately stable for the life of the provider — it closes over nothing
+   * but refs. Dozens of actions capture it, and if it were ever rebuilt on a
+   * render those actions would go stale in ways that are miserable to trace.
+   */
+  const commit = useCallback(
+    async (
+      writes: Partial<Record<DineStoreName, unknown[]>>,
+      deletes: Partial<Record<DineStoreName, string[]>> = {}
+    ) => {
+      await dineBatch(writes, deletes);
+      announce([...Object.keys(writes), ...Object.keys(deletes)] as DineStoreName[]);
+    },
+    [announce]
+  );
+
   const loadAll = useCallback(async () => {
     const [
       businessRows,
@@ -346,6 +395,86 @@ export function DineProvider({ children }: { children: ReactNode }) {
     return businessRows[0] ?? null;
   }, []);
 
+  /**
+   * Re-read the stores another tab just changed.
+   *
+   * Only the named stores are read, so the kitchen screen refreshing after a
+   * round is fired costs two small reads rather than reloading the menu, the
+   * bills and the whole sales history.
+   */
+  const reloadStores = useCallback(async (stores: DineStoreName[]) => {
+    const wanted = new Set(stores);
+    await Promise.all(
+      Array.from(wanted).map(async (store) => {
+        switch (store) {
+          case "dine_business":
+            setBusiness((await dineGetAll<DineBusiness>(store))[0] ?? null);
+            return;
+          case "dine_settings": {
+            const row = (await dineGetAll<DineSettings>(store))[0];
+            const next = { ...DEFAULT_DINE_SETTINGS, ...(row ?? {}) };
+            settingsRef.current = next;
+            setSettings(next);
+            return;
+          }
+          case "dine_categories":
+            setCategories(await dineGetAll<DineCategory>(store));
+            return;
+          case "dine_areas":
+            setAreas(await dineGetAll<DineArea>(store));
+            return;
+          case "dine_tables":
+            setTables(await dineGetAll<DineTable>(store));
+            return;
+          case "dine_menu_items":
+            setMenuItems(await dineGetAll<DineMenuItem>(store));
+            return;
+          case "dine_variations":
+            setVariations(await dineGetAll<DineVariation>(store));
+            return;
+          case "dine_modifier_groups":
+            setModifierGroups(await dineGetAll<DineModifierGroup>(store));
+            return;
+          case "dine_modifiers":
+            setModifiers(await dineGetAll<DineModifier>(store));
+            return;
+          case "dine_tickets":
+            setTickets(await dineGetAll<DineTicket>(store));
+            return;
+          case "dine_ticket_items":
+            setTicketItems(await dineGetAll<DineTicketItem>(store));
+            return;
+          case "dine_kots":
+            setKots(await dineGetAll<DineKot>(store));
+            return;
+          case "dine_bills":
+            setBills(await dineGetAll<DineBill>(store));
+            return;
+          case "dine_bill_items":
+            setBillItems(await dineGetAll<DineBillItem>(store));
+            return;
+          case "dine_bill_payments":
+            setBillPayments(await dineGetAll<DineBillPayment>(store));
+            return;
+          case "dine_payment_methods":
+            setPaymentMethods(await dineGetAll<DinePaymentMethod>(store));
+            return;
+          case "dine_customers":
+            setCustomers(await dineGetAll<DineCustomer>(store));
+            return;
+        }
+      })
+    );
+  }, []);
+
+  // Listen for other tabs' writes for as long as this provider is mounted.
+  useEffect(() => {
+    const unsubscribe = broadcast().subscribe((stores) => {
+      void reloadStores(stores);
+    });
+    return unsubscribe;
+  }, [broadcast, reloadStores]);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -372,7 +501,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const writeSettings = useCallback(async (updates: Partial<Omit<DineSettings, "id">>) => {
     const next = { ...settingsRef.current, ...updates, id: "main" as const };
     settingsRef.current = next;
-    await dineBatch({ dine_settings: [next] });
+    await commit({ dine_settings: [next] });
     setSettings(next);
     return next;
   }, []);
@@ -483,7 +612,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
 
       const settingsRecord: DineSettings = { ...DEFAULT_DINE_SETTINGS };
 
-      await dineBatch({
+      await commit({
         dine_business: [record],
         dine_settings: [settingsRecord],
         dine_payment_methods: paymentRows,
@@ -517,7 +646,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setBusiness((previous) => {
         if (!previous) return previous;
         const next = { ...previous, ...updates };
-        void dineBatch({ dine_business: [next] });
+        void commit({ dine_business: [next] });
         return next;
       });
     },
@@ -543,7 +672,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         sortOrder: categories.length,
         createdAt: nowIso(),
       };
-      await dineBatch({ dine_categories: [record] });
+      await commit({ dine_categories: [record] });
       setCategories((previous) => [...previous, record]);
       return record;
     },
@@ -556,7 +685,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         category.id === id ? { ...category, name: name.trim() } : category
       );
       const changed = next.find((category) => category.id === id);
-      if (changed) void dineBatch({ dine_categories: [changed] });
+      if (changed) void commit({ dine_categories: [changed] });
       return next;
     });
   }, []);
@@ -582,7 +711,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const moved = orphaned.map((item) => ({ ...item, categoryId: fallback!.id }));
       if (moved.length > 0) writes.dine_menu_items = moved;
 
-      await dineBatch(writes, { dine_categories: [id] });
+      await commit(writes, { dine_categories: [id] });
       setCategories((previous) => {
         const kept = previous.filter((category) => category.id !== id);
         const added = writes.dine_categories as DineCategory[] | undefined;
@@ -603,7 +732,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         ...category,
         sortOrder: orderedIds.indexOf(category.id),
       }));
-      void dineBatch({ dine_categories: next });
+      void commit({ dine_categories: next });
       return next.sort((a, b) => a.sortOrder - b.sortOrder);
     });
   }, []);
@@ -682,7 +811,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       };
       const children = writeItemChildren(record.id, input);
 
-      await dineBatch({
+      await commit({
         dine_menu_items: [record],
         dine_variations: children.variationRows,
         dine_modifier_groups: children.groupRows,
@@ -717,7 +846,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       };
       const children = writeItemChildren(id, input);
 
-      await dineBatch(
+      await commit(
         {
           dine_menu_items: [record],
           dine_variations: children.variationRows,
@@ -760,7 +889,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const groupIds = modifierGroups
         .filter((group) => group.menuItemId === id)
         .map((group) => group.id);
-      await dineBatch(
+      await commit(
         {},
         {
           dine_menu_items: [id],
@@ -788,7 +917,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         item.id === id ? { ...item, available, updatedAt: nowIso() } : item
       );
       const changed = next.find((item) => item.id === id);
-      if (changed) void dineBatch({ dine_menu_items: [changed] });
+      if (changed) void commit({ dine_menu_items: [changed] });
       return next;
     });
   }, []);
@@ -879,7 +1008,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
           }
         : {};
 
-      await dineBatch(
+      await commit(
         {
           dine_categories: categoryRows,
           dine_menu_items: menuRows,
@@ -914,7 +1043,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         sortOrder: areas.length,
         createdAt: nowIso(),
       };
-      await dineBatch({ dine_areas: [record] });
+      await commit({ dine_areas: [record] });
       setAreas((previous) => [...previous, record]);
       return record;
     },
@@ -925,7 +1054,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setAreas((previous) => {
       const next = previous.map((area) => (area.id === id ? { ...area, name: name.trim() } : area));
       const changed = next.find((area) => area.id === id);
-      if (changed) void dineBatch({ dine_areas: [changed] });
+      if (changed) void commit({ dine_areas: [changed] });
       return next;
     });
   }, []);
@@ -933,7 +1062,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const deleteArea = useCallback(
     async (id: string) => {
       const doomed = tables.filter((table) => table.areaId === id).map((table) => table.id);
-      await dineBatch({}, { dine_areas: [id], dine_tables: doomed });
+      await commit({}, { dine_areas: [id], dine_tables: doomed });
       setAreas((previous) => previous.filter((area) => area.id !== id));
       setTables((previous) => previous.filter((table) => table.areaId !== id));
     },
@@ -950,7 +1079,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         sortOrder: tables.filter((table) => table.areaId === areaId).length,
         createdAt: nowIso(),
       };
-      await dineBatch({ dine_tables: [record] });
+      await commit({ dine_tables: [record] });
       setTables((previous) => [...previous, record]);
       return record;
     },
@@ -963,13 +1092,13 @@ export function DineProvider({ children }: { children: ReactNode }) {
         table.id === id ? { ...table, name: name.trim(), seats: Math.max(seats, 1) } : table
       );
       const changed = next.find((table) => table.id === id);
-      if (changed) void dineBatch({ dine_tables: [changed] });
+      if (changed) void commit({ dine_tables: [changed] });
       return next;
     });
   }, []);
 
   const deleteTable = useCallback(async (id: string) => {
-    await dineBatch({}, { dine_tables: [id] });
+    await commit({}, { dine_tables: [id] });
     setTables((previous) => previous.filter((table) => table.id !== id));
   }, []);
 
@@ -986,7 +1115,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         createdAt: at,
       }));
       if (rows.length === 0) return;
-      await dineBatch({ dine_tables: rows });
+      await commit({ dine_tables: rows });
       setTables((previous) => [...previous, ...rows]);
     },
     [tables]
@@ -996,39 +1125,57 @@ export function DineProvider({ children }: { children: ReactNode }) {
   // Tickets
   // ---------------------------------------------------------------------
 
+  /** Read the live settings inside the transaction that bumps a counter. */
+  const settingsFrom = useCallback((stored: DineSettings | undefined): DineSettings => {
+    return { ...DEFAULT_DINE_SETTINGS, ...(stored ?? settingsRef.current) };
+  }, []);
+
   const openTicket = useCallback(
     async (orderType: OrderType, tableId: string | null) => {
       const at = nowIso();
-      const current = settingsRef.current;
-      const record: DineTicket = {
-        id: generateId(),
-        ticketNumber: current.nextTicketNumber,
-        orderType,
-        tableId: orderType === "dine-in" ? tableId : null,
-        customerId: null,
-        customerName: "",
-        deliveryAddress: "",
-        status: "open",
-        roundsFired: 0,
-        discountType: "percent",
-        discountValue: 0,
-        discountReason: "",
-        serviceChargeOn: current.serviceChargeDefaultOn,
-        note: "",
-        openedAt: at,
-        settledAt: null,
-        mergedIntoId: null,
-        createdAt: at,
-      };
-      const nextSettings = { ...current, nextTicketNumber: current.nextTicketNumber + 1 };
-      settingsRef.current = nextSettings;
 
-      await dineBatch({ dine_tickets: [record], dine_settings: [nextSettings] });
+      const { record, nextSettings } = await dineAllocate<
+        DineSettings,
+        { record: DineTicket; nextSettings: DineSettings }
+      >("dine_settings", "main", ["dine_tickets"], (stored) => {
+        const current = settingsFrom(stored);
+        const ticket: DineTicket = {
+          id: generateId(),
+          ticketNumber: current.nextTicketNumber,
+          orderType,
+          tableId: orderType === "dine-in" ? tableId : null,
+          customerId: null,
+          customerName: "",
+          deliveryAddress: "",
+          status: "open",
+          roundsFired: 0,
+          discountType: "percent",
+          discountValue: 0,
+          discountReason: "",
+          serviceChargeOn: current.serviceChargeDefaultOn,
+          note: "",
+          openedAt: at,
+          settledAt: null,
+          mergedIntoId: null,
+          createdAt: at,
+        };
+        const settingsRow: DineSettings = {
+          ...current,
+          nextTicketNumber: current.nextTicketNumber + 1,
+        };
+        return {
+          writes: { dine_tickets: [ticket], dine_settings: [settingsRow] },
+          result: { record: ticket, nextSettings: settingsRow },
+        };
+      });
+
+      settingsRef.current = nextSettings;
+      announce(["dine_tickets", "dine_settings"]);
       setTickets((previous) => [...previous, record]);
       setSettings(nextSettings);
       return record;
     },
-    []
+    [announce, settingsFrom]
   );
 
   const addTicketItems = useCallback(
@@ -1067,7 +1214,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         };
       });
 
-      await dineBatch({ dine_ticket_items: rows });
+      await commit({ dine_ticket_items: rows });
       setTicketItems((previous) => [...previous, ...rows]);
     },
     [menuItems, tickets, variations]
@@ -1082,7 +1229,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
           : item
       );
       const changed = next.find((item) => item.id === itemId);
-      if (changed) void dineBatch({ dine_ticket_items: [changed] });
+      if (changed) void commit({ dine_ticket_items: [changed] });
       return next;
     });
   }, []);
@@ -1091,7 +1238,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setTicketItems((previous) => {
       const next = previous.map((item) => (item.id === itemId ? { ...item, note } : item));
       const changed = next.find((item) => item.id === itemId);
-      if (changed) void dineBatch({ dine_ticket_items: [changed] });
+      if (changed) void commit({ dine_ticket_items: [changed] });
       return next;
     });
   }, []);
@@ -1102,25 +1249,64 @@ export function DineProvider({ children }: { children: ReactNode }) {
       // A fired item has already reached the kitchen; pulling it is a cancel,
       // with a record, not a delete (FR-4.4).
       if (!item || item.firedAt !== null) return;
-      await dineBatch({}, { dine_ticket_items: [itemId] });
+      await commit({}, { dine_ticket_items: [itemId] });
       setTicketItems((previous) => previous.filter((row) => row.id !== itemId));
     },
     [ticketItems]
   );
 
-  /** Allocate the next KOT number, resetting the series on a new business day. */
-  const nextKot = useCallback((at: string) => {
-    const current = settingsRef.current;
-    const businessDate = businessDateOf(at, current.dayStartHour);
-    const fresh = current.kotSeriesDate !== businessDate;
-    const number = fresh ? 1 : current.nextKotNumber;
-    const nextSettings: DineSettings = {
-      ...current,
-      nextKotNumber: number + 1,
-      kotSeriesDate: businessDate,
-    };
-    return { number, businessDate, nextSettings };
-  }, []);
+  /**
+   * Allocate a KOT number and write the whole round in one transaction.
+   *
+   * The number is read from the stored settings *inside* the transaction, not
+   * from this tab's copy, so a counter tab and a second till tab firing at the
+   * same moment cannot both mint KOT-0007. The series resets on a new business
+   * day, which is why the date is decided here too.
+   */
+  const allocateKot = useCallback(
+    async (
+      at: string,
+      seed: { ticketId: string; roundNumber: number; isCancellation: boolean },
+      extraStores: DineStoreName[],
+      build: (kot: DineKot) => Partial<Record<DineStoreName, unknown[]>>
+    ) => {
+      return dineAllocate<DineSettings, { kot: DineKot; nextSettings: DineSettings }>(
+        "dine_settings",
+        "main",
+        ["dine_kots", ...extraStores],
+        (stored) => {
+          const current = settingsFrom(stored);
+          const businessDate = businessDateOf(at, current.dayStartHour);
+          const fresh = current.kotSeriesDate !== businessDate;
+          const number = fresh ? 1 : current.nextKotNumber;
+          const nextSettings: DineSettings = {
+            ...current,
+            nextKotNumber: number + 1,
+            kotSeriesDate: businessDate,
+          };
+          const kot: DineKot = {
+            id: generateId(),
+            ticketId: seed.ticketId,
+            kotNumber: number,
+            kotLabel: formatSeriesNumber(current.kotPrefix, number),
+            roundNumber: seed.roundNumber,
+            businessDate,
+            printedAt: at,
+            reprintCount: 0,
+            isCancellation: seed.isCancellation,
+            status: "new",
+            statusAt: at,
+            createdAt: at,
+          };
+          return {
+            writes: { ...build(kot), dine_kots: [kot], dine_settings: [nextSettings] },
+            result: { kot, nextSettings },
+          };
+        }
+      );
+    },
+    [settingsFrom]
+  );
 
   const fireRound = useCallback(
     async (ticketId: string) => {
@@ -1133,30 +1319,18 @@ export function DineProvider({ children }: { children: ReactNode }) {
       if (pending.length === 0) return null;
 
       const at = nowIso();
-      const { number, businessDate, nextSettings } = nextKot(at);
-      settingsRef.current = nextSettings;
-
       const firedItems = pending.map((item) => ({ ...item, firedAt: at }));
-      const kot: DineKot = {
-        id: generateId(),
-        ticketId,
-        kotNumber: number,
-        kotLabel: formatSeriesNumber(nextSettings.kotPrefix, number),
-        roundNumber: round,
-        businessDate,
-        printedAt: at,
-        reprintCount: 0,
-        isCancellation: false,
-        createdAt: at,
-      };
       const nextTicket: DineTicket = { ...ticket, roundsFired: round };
 
-      await dineBatch({
-        dine_ticket_items: firedItems,
-        dine_kots: [kot],
-        dine_tickets: [nextTicket],
-        dine_settings: [nextSettings],
-      });
+      const { kot, nextSettings } = await allocateKot(
+        at,
+        { ticketId, roundNumber: round, isCancellation: false },
+        ["dine_ticket_items", "dine_tickets"],
+        () => ({ dine_ticket_items: firedItems, dine_tickets: [nextTicket] })
+      );
+
+      settingsRef.current = nextSettings;
+      announce(["dine_ticket_items", "dine_tickets", "dine_kots", "dine_settings"]);
 
       setTicketItems((previous) =>
         previous.map((item) => firedItems.find((row) => row.id === item.id) ?? item)
@@ -1166,7 +1340,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       return kot;
     },
-    [nextKot, ticketItems, tickets]
+    [allocateKot, announce, ticketItems, tickets]
   );
 
   /**
@@ -1185,34 +1359,23 @@ export function DineProvider({ children }: { children: ReactNode }) {
 
       const at = nowIso();
       const cancelled = { ...item, cancelledAt: at, cancelReason: reason };
-      const { number, businessDate, nextSettings } = nextKot(at);
+
+      const { kot, nextSettings } = await allocateKot(
+        at,
+        { ticketId: item.ticketId, roundNumber: item.roundNumber, isCancellation: true },
+        ["dine_ticket_items"],
+        () => ({ dine_ticket_items: [cancelled] })
+      );
+
       settingsRef.current = nextSettings;
-
-      const kot: DineKot = {
-        id: generateId(),
-        ticketId: item.ticketId,
-        kotNumber: number,
-        kotLabel: formatSeriesNumber(nextSettings.kotPrefix, number),
-        roundNumber: item.roundNumber,
-        businessDate,
-        printedAt: at,
-        reprintCount: 0,
-        isCancellation: true,
-        createdAt: at,
-      };
-
-      await dineBatch({
-        dine_ticket_items: [cancelled],
-        dine_kots: [kot],
-        dine_settings: [nextSettings],
-      });
+      announce(["dine_ticket_items", "dine_kots", "dine_settings"]);
 
       setTicketItems((previous) => previous.map((row) => (row.id === itemId ? cancelled : row)));
       setKots((previous) => [...previous, kot]);
       setSettings(nextSettings);
       return kot;
     },
-    [nextKot, removeTicketItem, ticketItems]
+    [allocateKot, announce, removeTicketItem, ticketItems]
   );
 
   const reprintKot = useCallback(async (kotId: string) => {
@@ -1221,10 +1384,31 @@ export function DineProvider({ children }: { children: ReactNode }) {
         kot.id === kotId ? { ...kot, reprintCount: kot.reprintCount + 1 } : kot
       );
       const changed = next.find((kot) => kot.id === kotId);
-      if (changed) void dineBatch({ dine_kots: [changed] });
+      if (changed) void commit({ dine_kots: [changed] });
       return next;
     });
   }, []);
+
+  /**
+   * Move a fired round along in the kitchen (FR-5.5, kitchen screen).
+   *
+   * Purely a kitchen-facing signal — nothing in billing, tax or reporting
+   * reads it, so a restaurant that only prints slips is unaffected by it
+   * existing.
+   */
+  const setKotStatus = useCallback(
+    async (kotId: string, status: KotStatus) => {
+      setKots((previous) => {
+        const next = previous.map((kot) =>
+          kot.id === kotId ? { ...kot, status, statusAt: nowIso() } : kot
+        );
+        const changed = next.find((kot) => kot.id === kotId);
+        if (changed) void commit({ dine_kots: [changed] });
+        return next;
+      });
+    },
+    [commit]
+  );
 
   /** Patch a ticket in place, persisting the change. */
   const patchTicket = useCallback((ticketId: string, updates: Partial<DineTicket>) => {
@@ -1233,7 +1417,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         ticket.id === ticketId ? { ...ticket, ...updates } : ticket
       );
       const changed = next.find((ticket) => ticket.id === ticketId);
-      if (changed) void dineBatch({ dine_tickets: [changed] });
+      if (changed) void commit({ dine_tickets: [changed] });
       return next;
     });
   }, []);
@@ -1311,7 +1495,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         settledAt: nowIso(),
       };
 
-      await dineBatch({
+      await commit({
         dine_ticket_items: movedItems,
         dine_kots: movedKots,
         dine_tickets: [nextTarget, nextSource],
@@ -1421,6 +1605,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const splitMode: SplitMode = plan.mode;
       const billRows: DineBill[] = [];
       const billItemRows: DineBillItem[] = [];
+      // Placeholder numbers; the real series is allocated in the write below.
       let nextBillNumber = current.nextBillNumber;
 
       parts.forEach((part, index) => {
@@ -1487,17 +1672,44 @@ export function DineProvider({ children }: { children: ReactNode }) {
         part.items.forEach((item) => claimedItems.push({ ...item, billId }));
       });
 
-      const nextSettings: DineSettings = { ...current, nextBillNumber };
-      settingsRef.current = nextSettings;
       const nextTicket: DineTicket = { ...ticket, status: "billed" };
 
-      await dineBatch({
-        dine_bills: billRows,
-        dine_bill_items: billItemRows,
-        dine_ticket_items: claimedItems,
-        dine_tickets: [nextTicket],
-        dine_settings: [nextSettings],
-      });
+      // Re-read the counter inside the write so two tills billing different
+      // tables at once cannot hand out the same bill number. The rows were
+      // built optimistically above; only their numbers are corrected here.
+      const nextSettings = await dineAllocate<DineSettings, DineSettings>(
+        "dine_settings",
+        "main",
+        ["dine_bills", "dine_bill_items", "dine_ticket_items", "dine_tickets"],
+        (stored) => {
+          const live = settingsFrom(stored);
+          let number = live.nextBillNumber;
+          for (const bill of billRows) {
+            bill.billNumber = number;
+            bill.billLabel = formatSeriesNumber(live.billPrefix, number);
+            number += 1;
+          }
+          const settingsRow: DineSettings = { ...live, nextBillNumber: number };
+          return {
+            writes: {
+              dine_bills: billRows,
+              dine_bill_items: billItemRows,
+              dine_ticket_items: claimedItems,
+              dine_tickets: [nextTicket],
+              dine_settings: [settingsRow],
+            },
+            result: settingsRow,
+          };
+        }
+      );
+      settingsRef.current = nextSettings;
+      announce([
+        "dine_bills",
+        "dine_bill_items",
+        "dine_ticket_items",
+        "dine_tickets",
+        "dine_settings",
+      ]);
 
       setBills((previous) => [...previous, ...billRows]);
       setBillItems((previous) => [...previous, ...billItemRows]);
@@ -1510,7 +1722,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       return billRows;
     },
-    [areas, tables, ticketItems, tickets]
+    [announce, areas, settingsFrom, tables, ticketItems, tickets]
   );
 
   /** Undo billing while nothing has been paid, so a table can keep ordering. */
@@ -1527,7 +1739,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         .map((item) => ({ ...item, billId: null }));
       const nextTicket: DineTicket = { ...ticket, status: "open" };
 
-      await dineBatch(
+      await commit(
         { dine_ticket_items: releasedItems, dine_tickets: [nextTicket] },
         {
           dine_bills: billIds,
@@ -1598,7 +1810,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         writes.dine_tickets = [nextTicket];
       }
 
-      await dineBatch(writes);
+      await commit(writes);
 
       setBillPayments((previous) => [...previous, ...paymentRows]);
       setBills((previous) => previous.map((row) => (row.id === billId ? nextBill : row)));
@@ -1621,7 +1833,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         cancelledAt: nowIso(),
         cancelReason: reason,
       };
-      await dineBatch({ dine_bills: [next] });
+      await commit({ dine_bills: [next] });
       setBills((previous) => previous.map((row) => (row.id === billId ? next : row)));
     },
     [bills]
@@ -1634,7 +1846,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const createCustomer = useCallback(
     async (input: Omit<DineCustomer, "id" | "createdAt">) => {
       const record: DineCustomer = { ...input, id: generateId(), createdAt: nowIso() };
-      await dineBatch({ dine_customers: [record] });
+      await commit({ dine_customers: [record] });
       setCustomers((previous) => [...previous, record]);
       return record;
     },
@@ -1648,7 +1860,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
           customer.id === id ? { ...customer, ...input } : customer
         );
         const changed = next.find((customer) => customer.id === id);
-        if (changed) void dineBatch({ dine_customers: [changed] });
+        if (changed) void commit({ dine_customers: [changed] });
         return next;
       });
     },
@@ -1656,7 +1868,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
   );
 
   const deleteCustomer = useCallback(async (id: string) => {
-    await dineBatch({}, { dine_customers: [id] });
+    await commit({}, { dine_customers: [id] });
     setCustomers((previous) => previous.filter((customer) => customer.id !== id));
   }, []);
 
@@ -1669,14 +1881,14 @@ export function DineProvider({ children }: { children: ReactNode }) {
         sortOrder: paymentMethods.length,
         createdAt: nowIso(),
       };
-      await dineBatch({ dine_payment_methods: [record] });
+      await commit({ dine_payment_methods: [record] });
       setPaymentMethods((previous) => [...previous, record]);
     },
     [paymentMethods.length]
   );
 
   const deletePaymentMethod = useCallback(async (id: string) => {
-    await dineBatch({}, { dine_payment_methods: [id] });
+    await commit({}, { dine_payment_methods: [id] });
     setPaymentMethods((previous) => previous.filter((method) => method.id !== id));
   }, []);
 
@@ -1780,9 +1992,15 @@ export function DineProvider({ children }: { children: ReactNode }) {
           openedAt: ticket?.openedAt ?? null,
           itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
           unfiredCount: items.filter((item) => item.firedAt === null).length,
+          readyCount: ticket
+            ? kots.filter(
+                (kot) =>
+                  kot.ticketId === ticket.id && !kot.isCancellation && kotStatusOf(kot) === "ready"
+              ).length
+            : 0,
         };
       });
-  }, [areas, openTickets, settings, tables, ticketItems]);
+  }, [areas, kots, openTickets, settings, tables, ticketItems]);
 
   const todayDate = useMemo(
     () => businessDateOf(nowIso(), settings.dayStartHour),
@@ -1843,6 +2061,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
     cancelTicketItem,
     fireRound,
     reprintKot,
+    setKotStatus,
     setTicketDiscount,
     setTicketServiceCharge,
     setTicketCustomer,

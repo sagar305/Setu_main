@@ -8,6 +8,7 @@ import {
   ChefHat,
   ClipboardList,
   Clock,
+  MonitorSmartphone,
   DatabaseBackup,
   Download,
   HandCoins,
@@ -79,6 +80,7 @@ const HIGHLIGHTS: { icon: ComponentType<{ className?: string }>; label: string }
   { icon: WifiOff, label: "Works offline" },
   { icon: LayoutGrid, label: "Table management" },
   { icon: ChefHat, label: "KOT printing" },
+  { icon: MonitorSmartphone, label: "Live kitchen screen" },
   { icon: Split, label: "Split & merge bills" },
   { icon: Percent, label: "GST with CGST/SGST" },
   { icon: Salad, label: "Half / full & add-ons" },
@@ -104,6 +106,12 @@ const SERVICE: Feature[] = [
     title: "KOT, one round at a time",
     description:
       "Sending a round prints a kitchen ticket with only that round on it, and no prices. Reprint it with one tap. No printer? The kitchen reads it off the screen, which is what most small kitchens do anyway.",
+  },
+  {
+    icon: MonitorSmartphone,
+    title: "A live kitchen screen, if you want one",
+    description:
+      "Open the kitchen screen in a second tab and leave it on the pass. Rounds appear the instant the counter sends them, and marking food ready shows up on the floor — no server, no second subscription, just two tabs reading the same browser storage.",
   },
   {
     icon: TriangleAlert,
@@ -274,6 +282,7 @@ const DIFFERENCES: { capability: string; retail: string; dine: string }[] = [
   { capability: "Open bills per table", retail: "Hold and recall only", dine: "First-class" },
   { capability: "Tables and floor areas", retail: "—", dine: "Yes" },
   { capability: "Kitchen tickets (KOT)", retail: "—", dine: "Per round, no prices" },
+  { capability: "Live kitchen screen", retail: "—", dine: "Second tab, same device" },
   { capability: "Half / full, add-ons", retail: "—", dine: "Yes" },
   { capability: "Split and merge bills", retail: "—", dine: "Yes" },
   { capability: "Service charge", retail: "—", dine: "Yes" },
@@ -319,6 +328,11 @@ const FAQ_ITEMS = [
       "Yes — 80mm and 58mm thermal, and A4 for restaurants without a kitchen printer. The KOT carries only the round you just sent and no prices. If you have no printer at all, the kitchen can read it off the screen, which is what most small kitchens do.",
   },
   {
+    question: "Is there a kitchen display screen?",
+    answer:
+      "Yes. Open the kitchen screen in a second browser tab on the same device and leave it on the pass. Rounds appear the moment the counter taps Send, and when the kitchen marks a round ready the waiter sees it on the floor. Both tabs read the same browser storage, so it needs no server, no account and no second device — and it keeps working offline like the rest of the app.",
+  },
+  {
     question: "Can I split a bill?",
     answer:
       "Three ways: by moving dishes onto separate bills, by an even share, or by amounts the table gives you. Each part gets its own bill number, prints on its own and is paid on its own, and the parts always add back to the original total exactly.",
@@ -357,6 +371,7 @@ const softwareApplicationSchema = {
     "Table and floor area management with live running totals",
     "Open tickets that survive a browser restart",
     "Kitchen order tickets printed per round, without prices",
+    "Live kitchen screen in a second tab, updating without a server",
     "Item variations (half/full) and modifier groups (add-ons)",
     "Split bills by item, equal share or amount",
     "Merge tables into one bill",

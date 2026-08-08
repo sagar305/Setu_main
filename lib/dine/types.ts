@@ -164,6 +164,15 @@ export type DineTicketItem = {
   createdAt: string;
 };
 
+/**
+ * Where a fired round has got to in the kitchen.
+ *
+ * Only meaningful when someone is watching the kitchen screen. A restaurant
+ * that just prints slips never touches it, and every KOT simply stays "new" —
+ * which is why nothing in billing or reporting reads this field.
+ */
+export type KotStatus = "new" | "preparing" | "ready" | "served";
+
 export type DineKot = {
   id: string;
   ticketId: string;
@@ -177,8 +186,22 @@ export type DineKot = {
   reprintCount: number;
   /** Set when this KOT is a cancellation notice for pulled items. */
   isCancellation: boolean;
+  /** Undefined on rounds fired before the kitchen screen existed. */
+  status?: KotStatus;
+  statusAt?: string;
   createdAt: string;
 };
+
+export const KOT_STATUS_LABELS: Record<KotStatus, string> = {
+  new: "New",
+  preparing: "Cooking",
+  ready: "Ready",
+  served: "Served",
+};
+
+export function kotStatusOf(kot: Pick<DineKot, "status">): KotStatus {
+  return kot.status ?? "new";
+}
 
 /** One tax slab's worth of a bill, so the GST breakup prints per rate. */
 export type DineTaxLine = {

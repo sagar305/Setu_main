@@ -167,6 +167,13 @@ export function printNode(node: HTMLElement | null, paper: PaperSize, title: str
   return true;
 }
 
+/** Clock time only, for the kitchen screen's cards. */
+export function timeOnly(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+}
+
 /** Human date/time for a receipt header. */
 export function printedAt(iso: string): string {
   const date = new Date(iso);

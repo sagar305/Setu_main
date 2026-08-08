@@ -166,6 +166,51 @@ export async function dineBatch(
   await txDone(tx);
 }
 
+/**
+ * Read a record, decide what to write from it, and write — all inside one
+ * transaction.
+ *
+ * This exists for the numbering counters. Free Dine can be open in several
+ * tabs at once (the counter and the kitchen screen, at least), and each tab
+ * holds its own copy of the settings in memory. Allocating a KOT or bill
+ * number from that copy means two tabs firing at the same moment both read
+ * "next is 7" and both write 7 — two different rounds carrying one ticket
+ * number, which is the sort of thing nobody notices until a guest disputes a
+ * bill.
+ *
+ * IndexedDB serialises overlapping readwrite transactions on the same store,
+ * so reading the counter *inside* the transaction that bumps it makes the
+ * allocation atomic across tabs.
+ */
+export async function dineAllocate<TRecord, TResult>(
+  keyStore: DineStoreName,
+  keyId: string,
+  alsoWrite: DineStoreName[],
+  plan: (current: TRecord | undefined) => {
+    writes: Partial<Record<DineStoreName, unknown[]>>;
+    result: TResult;
+  }
+): Promise<TResult> {
+  const db = await openDineDb();
+  const stores = Array.from(new Set<DineStoreName>([keyStore, ...alsoWrite]));
+  const tx = db.transaction(stores, "readwrite");
+
+  const current = await requestToPromise(
+    tx.objectStore(keyStore).get(keyId) as IDBRequest<TRecord | undefined>
+  );
+  const { writes, result } = plan(current);
+
+  for (const store of Object.keys(writes) as DineStoreName[]) {
+    const objectStore = tx.objectStore(store);
+    for (const value of writes[store] ?? []) {
+      objectStore.put(value);
+    }
+  }
+
+  await txDone(tx);
+  return result;
+}
+
 /** Wipe every Dine store. Never touches the Browser Based POS database. */
 export async function dineClearAll(): Promise<void> {
   const db = await openDineDb();

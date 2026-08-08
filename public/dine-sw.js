@@ -9,12 +9,15 @@
 
 const CACHE_NAME = "setu-free-dine-v1";
 const DINE_PATH = "/products/free-restaurant-pos";
+// The kitchen screen runs in its own tab and must survive an outage too.
+const KITCHEN_PATH = "/products/free-restaurant-pos/kitchen";
+const APP_PATHS = [DINE_PATH, KITCHEN_PATH];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.add(DINE_PATH))
+      .then((cache) => cache.addAll(APP_PATHS))
       .catch(() => {})
       .then(() => self.skipWaiting())
   );
@@ -44,22 +47,24 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  const isDinePage = url.pathname === DINE_PATH || url.pathname === `${DINE_PATH}/`;
+  const appPath = APP_PATHS.find(
+    (path) => url.pathname === path || url.pathname === `${path}/`
+  );
   const isStaticAsset = url.pathname.startsWith("/_next/static/");
 
-  if (isDinePage) {
+  if (appPath) {
     // Network-first so a restaurant picks up fixes, cache fallback for offline.
     event.respondWith(
       fetch(request)
         .then((response) => {
           if (response.ok) {
             const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(DINE_PATH, copy));
+            caches.open(CACHE_NAME).then((cache) => cache.put(appPath, copy));
           }
           return response;
         })
         .catch(() =>
-          caches.match(DINE_PATH).then(
+          caches.match(appPath).then(
             (cached) =>
               cached ||
               new Response("You are offline and Free Dine is not cached yet.", {

@@ -11,6 +11,7 @@ import {
   Settings,
   UtensilsCrossed,
   Grid3x3,
+  ChefHat,
 } from "lucide-react";
 import { DineProvider, useDine } from "@/lib/dine/store";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
@@ -100,6 +101,19 @@ function DineShell({
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Opens in a second tab so the pass can keep it up while the
+              counter carries on here. Both tabs read the same database and
+              tell each other what changed. */}
+          <a
+            href="/products/free-restaurant-pos/kitchen"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open the kitchen screen in a new tab"
+            className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full border border-muted-line/40 bg-white px-3 text-xs font-semibold text-muted transition hover:border-indigo/40 hover:text-indigo"
+          >
+            <ChefHat className="h-4 w-4" />
+            <span className="hidden sm:inline">Kitchen screen</span>
+          </a>
           {hasPin && (
             <button
               type="button"
