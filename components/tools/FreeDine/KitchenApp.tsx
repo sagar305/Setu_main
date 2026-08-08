@@ -1,11 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChefHat, Lock, Maximize2, Minimize2, Unlock } from "lucide-react";
+import { ArrowLeft, ChefHat, Lock, Maximize2, Minimize2 } from "lucide-react";
 import { DineProvider, useDine } from "@/lib/dine/store";
 import { KitchenScreen } from "./KitchenScreen";
-import { KitchenUnlockDialog } from "./KitchenUnlockDialog";
 import { primaryBtnClass } from "./ui";
 
 /**
@@ -20,7 +19,7 @@ import { primaryBtnClass } from "./ui";
 function KitchenBody() {
   const { status, errorMessage, settings, updateSettings } = useDine();
   const [expanded, setExpanded] = useState(false);
-  const [unlockOpen, setUnlockOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const locked = settings.kitchenLocked;
   const hasPin = Boolean(settings.pinHash);
@@ -28,15 +27,19 @@ function KitchenBody() {
   /**
    * Kiosk mode.
    *
-   * A web page cannot actually trap someone in a tab, and pretending otherwise
-   * would be worse than useless — so this does the three things a browser does
-   * allow, and the Settings copy is honest about the rest:
+   * Nothing on this screen can lift the lock — there is deliberately no
+   * unlock button and no PIN pad here, because a PIN pad on the pass is a PIN
+   * pad the kitchen staff will eventually watch someone type. The counter is
+   * the only way out.
+   *
+   * What the browser does allow, this does:
    *   - every way out of the screen is removed from the UI
    *   - the back gesture is swallowed by re-pushing the history entry
    *   - closing or reloading raises the browser's own "leave site?" prompt
-   * Anyone determined can still reach the address bar. For a locked-down
-   * tablet, the operating system's kiosk mode is the real answer, and the
-   * counter says so.
+   * A web page still cannot truly trap anyone: whoever reaches the address bar
+   * can leave, and pretending otherwise would be worse than useless. For a
+   * tablet an owner wants genuinely locked down, the operating system's kiosk
+   * mode is the real answer, and the counter's Settings says so.
    */
   useEffect(() => {
     if (!locked) return;
@@ -57,6 +60,30 @@ function KitchenBody() {
   // Locking always fills the screen; a half-window kiosk is not a kiosk.
   useEffect(() => {
     if (locked) setExpanded(true);
+  }, [locked]);
+
+  /**
+   * Take the rest of the page out of play while locked.
+   *
+   * The overlay covers the site's own header and footer, but covering is not
+   * removing: their links stay in the focus order, so a keyboard Tab followed
+   * by Enter walked straight out of the locked screen onto the marketing site.
+   * `inert` is what actually removes a subtree from focus, clicks and the
+   * accessibility tree, so the pass has nothing to tab into but its own orders.
+   */
+  useEffect(() => {
+    if (!locked || !rootRef.current) return;
+    const root = rootRef.current;
+    const siblings = Array.from(document.body.children).filter(
+      (node) => node !== root && !node.contains(root)
+    ) as HTMLElement[];
+    const previouslyInert = siblings.map((node) => node.hasAttribute("inert"));
+    for (const node of siblings) node.setAttribute("inert", "");
+    return () => {
+      siblings.forEach((node, index) => {
+        if (!previouslyInert[index]) node.removeAttribute("inert");
+      });
+    };
   }, [locked]);
 
   const requestBrowserFullscreen = useCallback((on: boolean) => {
@@ -126,10 +153,12 @@ function KitchenBody() {
           Set the restaurant up on the counter first. This screen then shows every round the moment
           it is sent.
         </p>
-        <Link href="/products/free-restaurant-pos" className={`${primaryBtnClass} mt-6`}>
-          <ArrowLeft className="h-4 w-4" />
-          Go to the counter
-        </Link>
+        {!locked && (
+          <Link href="/products/free-restaurant-pos" className={`${primaryBtnClass} mt-6`}>
+            <ArrowLeft className="h-4 w-4" />
+            Go to the counter
+          </Link>
+        )}
       </div>
     );
   } else {
@@ -138,6 +167,8 @@ function KitchenBody() {
 
   return (
     <div
+      ref={rootRef}
+      data-dine-kitchen-root=""
       className={
         expanded
           ? "fixed inset-0 z-[80] overflow-y-auto bg-cream-paper p-4 sm:p-6"
@@ -165,14 +196,9 @@ function KitchenBody() {
             <span className="hidden text-xs text-muted sm:inline">Free Dine — kitchen screen</span>
 
             {locked ? (
-              <button
-                type="button"
-                onClick={() => setUnlockOpen(true)}
-                className="inline-flex h-9 items-center gap-2 rounded-full border border-muted-line/40 bg-white px-3 text-xs font-semibold text-muted transition hover:border-indigo/40 hover:text-indigo"
-              >
-                <Unlock className="h-4 w-4" />
-                Unlock
-              </button>
+              // Not a button. Telling the kitchen where the lock lifts is
+              // information; giving them a control that lifts it is not a lock.
+              <span className="text-xs text-muted">Unlock at the counter</span>
             ) : (
               <>
                 {hasPin && status === "ready" && (
@@ -203,16 +229,6 @@ function KitchenBody() {
         {content}
       </div>
 
-      <KitchenUnlockDialog
-        open={unlockOpen}
-        onClose={() => setUnlockOpen(false)}
-        onUnlocked={() => {
-          setUnlockOpen(false);
-          void updateSettings({ kitchenLocked: false });
-        }}
-        pinHash={settings.pinHash}
-        pinSalt={settings.pinSalt}
-      />
     </div>
   );
 }

@@ -471,17 +471,21 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
 
         {!settings.pinHash && (
           <p className="text-xs text-muted">
-            Set a counter PIN above first — it is what unlocks the kitchen screen again.
+            Set a counter PIN above first. Locking the pass is only worth doing if this counter is
+            itself protected.
           </p>
         )}
 
         {settings.kitchenLocked && (
           <p className="rounded-xl bg-indigo/5 p-3 text-xs leading-relaxed text-ink">
-            The kitchen screen is locked. Its way back to the counter is hidden, the back gesture
-            is blocked and closing the tab warns first — but a browser tab can never truly trap
-            someone, so anyone who reaches the address bar can still leave. On a tablet you want to
-            lock down properly, pair this with the device&apos;s own kiosk mode: screen pinning on
-            Android, Guided Access on iPad, or launching Chrome with{" "}
+            <strong className="font-bold">
+              This button is the only way to unlock it.
+            </strong>{" "}
+            The kitchen screen carries no unlock control and no PIN pad of its own — its way back
+            to the counter is hidden, the back gesture is blocked, and closing the tab warns first.
+            A browser tab still cannot truly trap anyone, so whoever reaches the address bar can
+            leave. On a tablet you want properly locked down, pair this with the device&apos;s own
+            kiosk mode: screen pinning on Android, Guided Access on iPad, or launching Chrome with{" "}
             <code className="rounded bg-white px-1 py-0.5">--kiosk</code> on a PC.
           </p>
         )}
