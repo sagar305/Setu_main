@@ -341,6 +341,17 @@ export type DineSettings = {
   /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
   sheetSyncUrl: string;
 
+  /**
+   * Publish diners into the shared Business Workspace so the Customer Ledger
+   * and the other toolkit tools see the same people.
+   *
+   * One-way on purpose. Free Dine keeps its own dine_customers as the record
+   * it relies on, and copies each one across; that way the Ledger gets a
+   * complete contact list, while a reset or restore in another tool can never
+   * take the restaurant's regulars with it.
+   */
+  shareCustomersWithLedger: boolean;
+
   pinHash: string;
   pinSalt: string;
   /** Lock after this many idle minutes; 0 = never. */
@@ -386,6 +397,7 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
 
   lastBackupAt: null,
   sheetSyncUrl: "",
+  shareCustomersWithLedger: true,
 
   pinHash: "",
   pinSalt: "",
@@ -394,6 +406,20 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
 };
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
+
+/**
+ * Slices of the workspace that can be marked dirty for Sheet sync.
+ *
+ * Open tickets and KOTs are deliberately absent: they are work in progress,
+ * they churn every few seconds during service, and pushing them would burn the
+ * sync on data nobody reports on. The JSON backup is the complete copy; the
+ * Sheet carries the configuration and the settled sales.
+ */
+export type DineSyncSlice = "meta" | "menu" | "customers" | "bills";
+
+export const DINE_SYNC_SLICES: DineSyncSlice[] = ["meta", "menu", "customers", "bills"];
+
+export type DineSyncDirtyRow = { id: DineSyncSlice; dirtyAt: string };
 
 export const ORDER_TYPE_LABELS: Record<OrderType, string> = {
   "dine-in": "Dine-in",

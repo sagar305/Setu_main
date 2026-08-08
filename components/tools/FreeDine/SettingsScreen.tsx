@@ -10,14 +10,17 @@ import {
   Percent,
   Printer,
   Receipt,
+  RefreshCw,
   Sheet,
   TriangleAlert,
   Unlock,
+  Users,
 } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
 import { CURRENCIES, type OrderType, type PaperSize } from "@/lib/dine/types";
+import { APPS_SCRIPT_TEMPLATE } from "@/lib/dine/sheetSync";
 import { RestoreBackupButton } from "./RestoreBackupButton";
 import {
   ConfirmDialog,
@@ -41,7 +44,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
     business,
     settings,
     bills,
+    customers,
     paymentMethods,
+    sheetSync,
+    connectSheet,
+    disconnectSheet,
+    syncSheetNow,
+    resyncSheetAll,
+    restoreFromSheet,
     updateBusiness,
     updateSettings,
     addPaymentMethod,
@@ -491,6 +501,61 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         )}
       </Card>
 
+      <Card icon={Users} title="Customers and the Customer Ledger">
+        <p className="text-sm text-muted">
+          Naming a diner on a ticket saves them here, and copies them into your shared workspace so
+          the{" "}
+          <a
+            href="/tools/customer-ledger"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-indigo underline underline-offset-2"
+          >
+            Customer Ledger
+          </a>{" "}
+          and the other Setu tools see the same people.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.shareCustomersWithLedger}
+            onChange={(event) =>
+              void updateSettings({ shareCustomersWithLedger: event.target.checked })
+            }
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">
+              Share diners with the Customer Ledger
+            </span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Copies name, phone and address across as you save them. It is one-way — Free Dine
+              keeps its own copy, so clearing another tool can never take your regulars with it.
+              Switch this off and diners stay in Free Dine only.
+            </span>
+          </span>
+        </label>
+
+        <p className="text-xs text-muted">
+          {customers.length} diner{customers.length === 1 ? "" : "s"} saved.
+        </p>
+      </Card>
+
+      <SheetSyncCard
+        url={sheetSync.url}
+        dirtyCount={sheetSync.dirtyCount}
+        syncing={sheetSync.syncing}
+        lastSyncAt={sheetSync.lastSyncAt}
+        lastError={sheetSync.lastError}
+        callsToday={sheetSync.callsToday}
+        onConnect={connectSheet}
+        onDisconnect={disconnectSheet}
+        onSyncNow={syncSheetNow}
+        onResyncAll={resyncSheetAll}
+        onRestore={restoreFromSheet}
+      />
+
       <Card icon={Sheet} title="Backup and safety">
         <p className="text-sm text-muted">
           Free Dine keeps everything in this browser. A backup file is the one thing standing
@@ -540,6 +605,236 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         }}
       />
     </div>
+  );
+}
+
+/**
+ * Google Sheet sync.
+ *
+ * A safety net and a reporting feed, not a link between devices — the copy
+ * says so, because a restaurant that believed otherwise would put two tablets
+ * on one sheet and quietly lose orders to last-write-wins.
+ */
+function SheetSyncCard({
+  url,
+  dirtyCount,
+  syncing,
+  lastSyncAt,
+  lastError,
+  callsToday,
+  onConnect,
+  onDisconnect,
+  onSyncNow,
+  onResyncAll,
+  onRestore,
+}: {
+  url: string;
+  dirtyCount: number;
+  syncing: boolean;
+  lastSyncAt: string | null;
+  lastError: string;
+  callsToday: number;
+  onConnect: (url: string) => Promise<void>;
+  onDisconnect: () => Promise<void>;
+  onSyncNow: () => Promise<void>;
+  onResyncAll: () => Promise<void>;
+  onRestore: (url: string) => Promise<void>;
+}) {
+  const [draftUrl, setDraftUrl] = useState(url);
+  const [restoreUrl, setRestoreUrl] = useState("");
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [showScript, setShowScript] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [confirmRestore, setConfirmRestore] = useState(false);
+
+  const run = async (job: () => Promise<void>) => {
+    setBusy(true);
+    setError("");
+    try {
+      await job();
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "That did not work.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <Card icon={Sheet} title="Google Sheet sync">
+      <p className="text-sm text-muted">
+        Push your menu, diners and settled bills into a Google Sheet you own. It is the second
+        safety net alongside the backup file, and it gives you your sales in a spreadsheet you can
+        pivot however you like.
+      </p>
+
+      <p className="rounded-xl bg-cream/60 p-3 text-xs leading-relaxed text-ink">
+        <strong className="font-bold">This is not multi-device sync.</strong> Each push rewrites
+        whole tabs, so two devices pointed at one sheet would overwrite each other and lose orders.
+        Use it from one device. Running a second till or a second outlet is what{" "}
+        <a
+          href="/products/restaurant-pos"
+          className="font-semibold text-indigo underline underline-offset-2"
+        >
+          Setu Dine
+        </a>{" "}
+        is for.
+      </p>
+
+      {url ? (
+        <>
+          <div className="rounded-xl border border-muted-line/30 bg-white p-3 text-xs">
+            <p className="break-all font-mono text-muted">{url}</p>
+            <p className="mt-2 text-muted">
+              {lastSyncAt
+                ? `Last synced ${new Date(lastSyncAt).toLocaleString()}.`
+                : "Not synced yet."}{" "}
+              {dirtyCount > 0
+                ? `${dirtyCount} change${dirtyCount === 1 ? "" : "s"} waiting.`
+                : "Everything is up to date."}
+            </p>
+            <p className="mt-1 text-muted/80">
+              {callsToday} sheet call{callsToday === 1 ? "" : "s"} from this browser today.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => void run(onSyncNow)}
+              disabled={busy || syncing}
+              className={primaryBtnClass}
+            >
+              <RefreshCw className={`h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
+              {syncing ? "Syncing…" : "Sync now"}
+            </button>
+            <button
+              type="button"
+              onClick={() => void run(onResyncAll)}
+              disabled={busy || syncing}
+              className={secondaryBtnClass}
+            >
+              Re-send everything
+            </button>
+            <button
+              type="button"
+              onClick={() => void run(onDisconnect)}
+              disabled={busy}
+              className={secondaryBtnClass}
+            >
+              Disconnect
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="space-y-3">
+          <Field
+            label="Apps Script web-app URL"
+            hint="Deploy the script below in your own sheet, then paste the URL here."
+          >
+            <input
+              value={draftUrl}
+              onChange={(event) => setDraftUrl(event.target.value)}
+              placeholder="https://script.google.com/macros/s/…/exec"
+              className={inputClass}
+            />
+          </Field>
+          <button
+            type="button"
+            onClick={() => void run(() => onConnect(draftUrl))}
+            disabled={busy || !draftUrl.trim()}
+            className={primaryBtnClass}
+          >
+            {busy ? "Connecting…" : "Connect sheet"}
+          </button>
+        </div>
+      )}
+
+      {(error || lastError) && <p className="text-xs text-red-600">{error || lastError}</p>}
+
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowScript((previous) => !previous)}
+          className="text-sm font-semibold text-indigo"
+        >
+          {showScript ? "Hide the setup script" : "Show the setup script"}
+        </button>
+        {showScript && (
+          <div className="mt-3 space-y-2">
+            <ol className="list-decimal space-y-1 pl-5 text-xs text-muted">
+              <li>Open your Google Sheet, then Extensions → Apps Script.</li>
+              <li>Replace everything with the script below and save.</li>
+              <li>
+                Deploy → New deployment → Web app. Execute as <strong>Me</strong>, access{" "}
+                <strong>Anyone</strong>.
+              </li>
+              <li>Copy the Web app URL and paste it above.</li>
+            </ol>
+            <p className="text-xs text-muted">
+              Treat that URL like the share link of the sheet — anyone holding it can read and
+              write it.
+            </p>
+            <button
+              type="button"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(APPS_SCRIPT_TEMPLATE);
+                  setCopied(true);
+                  window.setTimeout(() => setCopied(false), 2000);
+                } catch {
+                  setError("Could not copy — select the script and copy it by hand.");
+                }
+              }}
+              className={secondaryBtnClass}
+            >
+              {copied ? "Copied" : "Copy script"}
+            </button>
+            <pre className="max-h-56 overflow-auto rounded-xl bg-ink p-3 text-[11px] leading-relaxed text-cream">
+              {APPS_SCRIPT_TEMPLATE}
+            </pre>
+          </div>
+        )}
+      </div>
+
+      <div className="border-t border-muted-line/20 pt-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+          Restore from a sheet
+        </p>
+        <p className="mt-1 text-xs text-muted">
+          Rebuilds this browser from a sheet you synced earlier — menu, floor, diners and bills.
+          Anything open on the pass right now is left alone.
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <input
+            value={restoreUrl}
+            onChange={(event) => setRestoreUrl(event.target.value)}
+            placeholder="https://script.google.com/macros/s/…/exec"
+            className={`${inputClass} max-w-md`}
+          />
+          <button
+            type="button"
+            onClick={() => setConfirmRestore(true)}
+            disabled={busy || !restoreUrl.trim()}
+            className={secondaryBtnClass}
+          >
+            Restore
+          </button>
+        </div>
+      </div>
+
+      <ConfirmDialog
+        open={confirmRestore}
+        title="Restore from this sheet?"
+        message="Your menu, floor, diners and bills in this browser are replaced by the sheet's copy. Take a backup first if you are not sure."
+        confirmLabel="Restore"
+        onCancel={() => setConfirmRestore(false)}
+        onConfirm={async () => {
+          setConfirmRestore(false);
+          await run(() => onRestore(restoreUrl));
+        }}
+      />
+    </Card>
   );
 }
 

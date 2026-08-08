@@ -35,6 +35,17 @@ import {
 } from "./db";
 import { createDineBroadcast, type DineBroadcast } from "./sync";
 import {
+  buildBackupFromDineSheetPull,
+  buildDineTabPayloads,
+  isValidSyncUrl,
+  pullFromDineSheet,
+  pushToDineSheet,
+  testDineSheetConnection,
+  type DineWorkspaceSnapshot,
+} from "./sheetSync";
+import { dbPut as workspacePut } from "@/lib/pos/db";
+import type { Customer as WorkspaceCustomer } from "@/lib/pos/types";
+import {
   createDineBackup,
   downloadDineBackup,
   restoreDineBackup,
@@ -52,6 +63,7 @@ import {
 import {
   DEFAULT_DINE_SETTINGS,
   DEFAULT_PAYMENT_METHODS,
+  DINE_SYNC_SLICES,
   businessDateOf,
   effectiveTaxRate,
   formatSeriesNumber,
@@ -79,6 +91,8 @@ import {
   type DineTicket,
   type DineTicketItem,
   type DineVariation,
+  type DineSyncDirtyRow,
+  type DineSyncSlice,
   type KotStatus,
   type OrderType,
   type SplitMode,
@@ -251,6 +265,21 @@ type DineContextValue = {
   setPin: (pin: string) => Promise<void>;
   clearPin: () => Promise<void>;
 
+  sheetSync: {
+    url: string;
+    dirtyCount: number;
+    syncing: boolean;
+    lastSyncAt: string | null;
+    lastError: string;
+    /** Pushes this browser has made to the sheet today, for the quota note. */
+    callsToday: number;
+  };
+  connectSheet: (url: string) => Promise<void>;
+  disconnectSheet: () => Promise<void>;
+  syncSheetNow: () => Promise<void>;
+  resyncSheetAll: () => Promise<void>;
+  restoreFromSheet: (url: string) => Promise<void>;
+
   exportBackup: () => Promise<void>;
   applyRestoredBackup: (backup: DineBackup) => Promise<void>;
   resetAll: () => Promise<void>;
@@ -261,6 +290,33 @@ type DineContextValue = {
   openTickets: DineTicket[];
   todayDate: string;
 };
+
+/**
+ * Which sync slice each store belongs to.
+ *
+ * Ticket, KOT and sync-queue stores map to nothing on purpose: they are work
+ * in progress that churns every few seconds during service, and pushing them
+ * would spend the sheet on data nobody reports on.
+ */
+const STORE_TO_SLICE: Partial<Record<DineStoreName, DineSyncSlice>> = {
+  dine_business: "meta",
+  dine_settings: "meta",
+  dine_categories: "meta",
+  dine_areas: "meta",
+  dine_tables: "meta",
+  dine_payment_methods: "meta",
+  dine_menu_items: "menu",
+  dine_variations: "menu",
+  dine_modifier_groups: "menu",
+  dine_modifiers: "menu",
+  dine_customers: "customers",
+  dine_bills: "bills",
+  dine_bill_items: "bills",
+  dine_bill_payments: "bills",
+};
+
+const SYNC_CALLS_KEY = "dine_sheet_calls";
+const SYNC_LAST_KEY = "dine_sheet_sync_last";
 
 const DineContext = createContext<DineContextValue | null>(null);
 
@@ -285,6 +341,11 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const [billPayments, setBillPayments] = useState<DineBillPayment[]>([]);
   const [paymentMethods, setPaymentMethods] = useState<DinePaymentMethod[]>([]);
   const [customers, setCustomers] = useState<DineCustomer[]>([]);
+  const [dirtySlices, setDirtySlices] = useState<DineSyncSlice[]>([]);
+  const [sheetSyncing, setSheetSyncing] = useState(false);
+  const [sheetLastSyncAt, setSheetLastSyncAt] = useState<string | null>(null);
+  const [sheetLastError, setSheetLastError] = useState("");
+  const [sheetCallsToday, setSheetCallsToday] = useState(0);
 
   // Settings are read inside callbacks that must not go stale between renders
   // (firing a KOT reads the counter, bumps it, and writes it back).
@@ -329,8 +390,18 @@ export function DineProvider({ children }: { children: ReactNode }) {
       writes: Partial<Record<DineStoreName, unknown[]>>,
       deletes: Partial<Record<DineStoreName, string[]>> = {}
     ) => {
-      await dineBatch(writes, deletes);
-      announce([...Object.keys(writes), ...Object.keys(deletes)] as DineStoreName[]);
+      const touched = [...Object.keys(writes), ...Object.keys(deletes)] as DineStoreName[];
+      // Mark the sheet slices dirty in the same transaction as the change, so
+      // a crash between the two cannot leave a sale that never gets synced.
+      const slices = Array.from(
+        new Set(touched.map((store) => STORE_TO_SLICE[store]).filter(Boolean) as DineSyncSlice[])
+      );
+      const dirtyRows: DineSyncDirtyRow[] = slices.map((id) => ({ id, dirtyAt: nowIso() }));
+      await dineBatch(slices.length ? { ...writes, dine_sync_queue: dirtyRows } : writes, deletes);
+      announce(touched);
+      if (slices.length) {
+        setDirtySlices((previous) => Array.from(new Set([...previous, ...slices])));
+      }
     },
     [announce]
   );
@@ -354,6 +425,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       billPaymentRows,
       paymentRows,
       customerRows,
+      dirtyRows,
     ] = await Promise.all([
       dineGetAll<DineBusiness>("dine_business"),
       dineGetAll<DineSettings>("dine_settings"),
@@ -372,6 +444,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       dineGetAll<DineBillPayment>("dine_bill_payments"),
       dineGetAll<DinePaymentMethod>("dine_payment_methods"),
       dineGetAll<DineCustomer>("dine_customers"),
+      dineGetAll<DineSyncDirtyRow>("dine_sync_queue"),
     ]);
 
     setBusiness(businessRows[0] ?? null);
@@ -391,6 +464,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setBillPayments(billPaymentRows);
     setPaymentMethods(paymentRows);
     setCustomers(customerRows);
+    setDirtySlices(dirtyRows.map((row) => row.id).filter((id) => DINE_SYNC_SLICES.includes(id)));
 
     return businessRows[0] ?? null;
   }, []);
@@ -465,6 +539,40 @@ export function DineProvider({ children }: { children: ReactNode }) {
         }
       })
     );
+  }, []);
+
+  // Latest snapshot for the sync engine, kept in a ref so a sync started from
+  // a callback never pushes a stale copy of the workspace.
+  const snapshotRef = useRef<DineWorkspaceSnapshot | null>(null);
+  useEffect(() => {
+    snapshotRef.current = {
+      business,
+      settings,
+      categories,
+      areas,
+      tables,
+      paymentMethods,
+      menuItems,
+      variations,
+      modifierGroups,
+      modifiers,
+      customers,
+      bills,
+      billItems,
+      billPayments,
+    };
+  });
+
+  useEffect(() => {
+    try {
+      setSheetLastSyncAt(window.localStorage.getItem(SYNC_LAST_KEY));
+      const raw = window.localStorage.getItem(SYNC_CALLS_KEY);
+      const parsed = raw ? (JSON.parse(raw) as { date: string; count: number }) : null;
+      const today = new Date().toISOString().slice(0, 10);
+      setSheetCallsToday(parsed && parsed.date === today ? parsed.count : 0);
+    } catch {
+      // localStorage can be blocked; the status just starts empty.
+    }
   }, []);
 
   // Listen for other tabs' writes for as long as this provider is mounted.
@@ -1122,6 +1230,70 @@ export function DineProvider({ children }: { children: ReactNode }) {
   );
 
   // ---------------------------------------------------------------------
+  // Customers
+  // ---------------------------------------------------------------------
+
+  /**
+   * Copy a diner into the shared Business Workspace, where the Customer Ledger
+   * and the rest of the toolkit read their contacts.
+   *
+   * One-way, and best-effort: Free Dine's own dine_customers stays the record
+   * it relies on. If the workspace database is unavailable — or another tool
+   * clears it — the restaurant still has its regulars, and the next edit
+   * republishes. The id is shared so the two sides stay the same person.
+   */
+  const publishCustomer = useCallback(async (customer: DineCustomer) => {
+    if (!settingsRef.current.shareCustomersWithLedger) return;
+    const record: WorkspaceCustomer = {
+      id: customer.id,
+      name: customer.name,
+      phone: customer.phone,
+      email: customer.email,
+      address: customer.address,
+      notes: customer.notes,
+      createdAt: customer.createdAt,
+    };
+    try {
+      await workspacePut("customers", record);
+    } catch {
+      // The ledger link is a convenience, never a reason to fail a sale.
+    }
+  }, []);
+
+  const createCustomer = useCallback(
+    async (input: Omit<DineCustomer, "id" | "createdAt">) => {
+      const record: DineCustomer = { ...input, id: generateId(), createdAt: nowIso() };
+      await commit({ dine_customers: [record] });
+      setCustomers((previous) => [...previous, record]);
+      void publishCustomer(record);
+      return record;
+    },
+    [commit, publishCustomer]
+  );
+
+  const updateCustomer = useCallback(
+    async (id: string, input: Omit<DineCustomer, "id" | "createdAt">) => {
+      setCustomers((previous) => {
+        const next = previous.map((customer) =>
+          customer.id === id ? { ...customer, ...input } : customer
+        );
+        const changed = next.find((customer) => customer.id === id);
+        if (changed) {
+          void commit({ dine_customers: [changed] });
+          void publishCustomer(changed);
+        }
+        return next;
+      });
+    },
+    [commit, publishCustomer]
+  );
+
+  const deleteCustomer = useCallback(async (id: string) => {
+    await commit({}, { dine_customers: [id] });
+    setCustomers((previous) => previous.filter((customer) => customer.id !== id));
+  }, []);
+
+  // ---------------------------------------------------------------------
   // Tickets
   // ---------------------------------------------------------------------
 
@@ -1441,11 +1613,44 @@ export function DineProvider({ children }: { children: ReactNode }) {
     [patchTicket]
   );
 
+  /**
+   * Attach a diner to a ticket, creating the customer record if this is a new
+   * name — which is what puts a regular into the Customer Ledger without
+   * anyone having to add them twice.
+   */
   const setTicketCustomer = useCallback(
     async (ticketId: string, customerId: string | null, name: string, address: string) => {
-      patchTicket(ticketId, { customerId, customerName: name, deliveryAddress: address });
+      const trimmed = name.trim();
+      let linkedId = customerId;
+
+      if (!linkedId && trimmed) {
+        const existing = customers.find(
+          (customer) => customer.name.trim().toLowerCase() === trimmed.toLowerCase()
+        );
+        if (existing) {
+          linkedId = existing.id;
+          if (address.trim() && address.trim() !== existing.address) {
+            await updateCustomer(existing.id, { ...existing, address: address.trim() });
+          }
+        } else {
+          const created = await createCustomer({
+            name: trimmed,
+            phone: "",
+            email: "",
+            address: address.trim(),
+            notes: "",
+          });
+          linkedId = created.id;
+        }
+      }
+
+      patchTicket(ticketId, {
+        customerId: linkedId,
+        customerName: trimmed,
+        deliveryAddress: address,
+      });
     },
-    [patchTicket]
+    [createCustomer, customers, patchTicket, updateCustomer]
   );
 
   const setTicketNote = useCallback(
@@ -1840,37 +2045,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
   );
 
   // ---------------------------------------------------------------------
-  // Customers, payment methods, security
+  // Payment methods and security
   // ---------------------------------------------------------------------
-
-  const createCustomer = useCallback(
-    async (input: Omit<DineCustomer, "id" | "createdAt">) => {
-      const record: DineCustomer = { ...input, id: generateId(), createdAt: nowIso() };
-      await commit({ dine_customers: [record] });
-      setCustomers((previous) => [...previous, record]);
-      return record;
-    },
-    []
-  );
-
-  const updateCustomer = useCallback(
-    async (id: string, input: Omit<DineCustomer, "id" | "createdAt">) => {
-      setCustomers((previous) => {
-        const next = previous.map((customer) =>
-          customer.id === id ? { ...customer, ...input } : customer
-        );
-        const changed = next.find((customer) => customer.id === id);
-        if (changed) void commit({ dine_customers: [changed] });
-        return next;
-      });
-    },
-    []
-  );
-
-  const deleteCustomer = useCallback(async (id: string) => {
-    await commit({}, { dine_customers: [id] });
-    setCustomers((previous) => previous.filter((customer) => customer.id !== id));
-  }, []);
 
   const addPaymentMethod = useCallback(
     async (name: string) => {
@@ -1908,6 +2084,117 @@ export function DineProvider({ children }: { children: ReactNode }) {
   // ---------------------------------------------------------------------
   // Data safety
   // ---------------------------------------------------------------------
+
+  /** Count a call against today's tally, so the UI can show sheet usage. */
+  const countSheetCall = useCallback(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    setSheetCallsToday((previous) => {
+      const next = previous + 1;
+      try {
+        window.localStorage.setItem(SYNC_CALLS_KEY, JSON.stringify({ date: today, count: next }));
+      } catch {
+        // Counting is a convenience; losing it changes nothing.
+      }
+      return next;
+    });
+  }, []);
+
+  const markSynced = useCallback(async (slices: DineSyncSlice[]) => {
+    const at = nowIso();
+    setSheetLastSyncAt(at);
+    try {
+      window.localStorage.setItem(SYNC_LAST_KEY, at);
+    } catch {
+      // Status only.
+    }
+    await dineBatch({}, { dine_sync_queue: slices });
+    setDirtySlices((previous) => previous.filter((slice) => !slices.includes(slice)));
+  }, []);
+
+  /**
+   * Push the dirty slices to the sheet.
+   *
+   * Whole tabs are rewritten rather than appended, which makes a push
+   * idempotent and — more usefully — makes deletions propagate. A menu item
+   * removed here disappears from the sheet on the next sync instead of
+   * lingering as a row nobody can explain.
+   */
+  const pushSlices = useCallback(
+    async (slices: DineSyncSlice[]) => {
+      const url = settingsRef.current.sheetSyncUrl;
+      const snapshot = snapshotRef.current;
+      if (!url || !snapshot || slices.length === 0) return;
+
+      setSheetSyncing(true);
+      setSheetLastError("");
+      try {
+        await pushToDineSheet(url, buildDineTabPayloads(snapshot, slices));
+        countSheetCall();
+        await markSynced(slices);
+      } catch (error) {
+        setSheetLastError(
+          error instanceof Error ? error.message : "Could not reach the sheet."
+        );
+      } finally {
+        setSheetSyncing(false);
+      }
+    },
+    [countSheetCall, markSynced]
+  );
+
+  const connectSheet = useCallback(
+    async (url: string) => {
+      const trimmed = url.trim();
+      if (!isValidSyncUrl(trimmed)) {
+        throw new Error("That does not look like an Apps Script web-app URL.");
+      }
+      const result = await testDineSheetConnection(trimmed);
+      countSheetCall();
+      if (!result.ok) throw new Error(result.error ?? "Could not reach the sheet.");
+      await writeSettings({ sheetSyncUrl: trimmed });
+      // A freshly connected sheet is empty, so everything is dirty.
+      setDirtySlices([...DINE_SYNC_SLICES]);
+      await dineBatch({
+        dine_sync_queue: DINE_SYNC_SLICES.map((id) => ({ id, dirtyAt: nowIso() })),
+      });
+    },
+    [countSheetCall, writeSettings]
+  );
+
+  const disconnectSheet = useCallback(async () => {
+    await writeSettings({ sheetSyncUrl: "" });
+    setSheetLastError("");
+  }, [writeSettings]);
+
+  const syncSheetNow = useCallback(async () => {
+    await pushSlices(dirtySlices.length ? dirtySlices : [...DINE_SYNC_SLICES]);
+  }, [dirtySlices, pushSlices]);
+
+  const resyncSheetAll = useCallback(async () => {
+    await pushSlices([...DINE_SYNC_SLICES]);
+  }, [pushSlices]);
+
+  const restoreFromSheet = useCallback(
+    async (url: string) => {
+      const trimmed = url.trim();
+      if (!isValidSyncUrl(trimmed)) {
+        throw new Error("That does not look like an Apps Script web-app URL.");
+      }
+      setSheetSyncing(true);
+      setSheetLastError("");
+      try {
+        const pull = await pullFromDineSheet(trimmed);
+        countSheetCall();
+        const backup = buildBackupFromDineSheetPull(pull, trimmed);
+        await restoreDineBackup(backup);
+        const restored = await loadAll();
+        setStatus(restored ? "ready" : "welcome");
+      } finally {
+        setSheetSyncing(false);
+      }
+    },
+    [countSheetCall, loadAll]
+  );
 
   const exportBackup = useCallback(async () => {
     const backup = await createDineBackup();
@@ -2084,6 +2371,20 @@ export function DineProvider({ children }: { children: ReactNode }) {
 
     setPin,
     clearPin,
+
+    sheetSync: {
+      url: settings.sheetSyncUrl,
+      dirtyCount: dirtySlices.length,
+      syncing: sheetSyncing,
+      lastSyncAt: sheetLastSyncAt,
+      lastError: sheetLastError,
+      callsToday: sheetCallsToday,
+    },
+    connectSheet,
+    disconnectSheet,
+    syncSheetNow,
+    resyncSheetAll,
+    restoreFromSheet,
 
     exportBackup,
     applyRestoredBackup,

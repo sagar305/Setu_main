@@ -7,7 +7,10 @@
 // needing a migration of the retail POS at all.
 
 const DB_NAME = "DINE_DATABASE";
-const DB_VERSION = 1;
+// v2 adds dine_sync_queue (Google Sheet dirty-flags). The upgrade handler
+// creates any missing store, so bumping this migrates an existing database in
+// place without touching its rows.
+const DB_VERSION = 2;
 
 export const DINE_STORES = [
   "dine_business",
@@ -27,6 +30,7 @@ export const DINE_STORES = [
   "dine_bill_payments",
   "dine_payment_methods",
   "dine_customers",
+  "dine_sync_queue",
 ] as const;
 
 export type DineStoreName = (typeof DINE_STORES)[number];
