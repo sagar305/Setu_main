@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run check:pricing && next build && npm run check:seo",
+    "build": "npm run check:pricing && npm run check:dine && next build && npm run check:seo",
     "build:only": "next build",
     "start": "next start",
     "lint": "next lint",
     "check:seo": "node scripts/check-seo.mjs",
     "check:pricing": "node scripts/check-pricing.mjs",
     "sync:post-dates": "node scripts/sync-post-dates.mjs",
-    "check:post-dates": "node scripts/sync-post-dates.mjs --check"
+    "check:post-dates": "node scripts/sync-post-dates.mjs --check",
+    "check:dine": "node scripts/check-dine.mjs"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

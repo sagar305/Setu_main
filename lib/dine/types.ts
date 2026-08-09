@@ -9,11 +9,105 @@
 // MONEY: every amount here is an integer in the currency's minor unit (paise).
 // See lib/dine/money.ts — no field on this page is ever a rupee float.
 
+import type { BaseUnit } from "./units";
+
 export type OrderType = "dine-in" | "takeaway" | "delivery";
 
 export type FoodType = "veg" | "nonveg" | "egg";
 
 export type PaperSize = "80mm" | "58mm" | "a4";
+
+// ---------------------------------------------------------------------------
+// Raw materials and recipes
+// ---------------------------------------------------------------------------
+
+/**
+ * Something bought and stored, not sold: carrots, milk, ghee, paper cups.
+ *
+ * A restaurant's stock is raw material, not finished dishes — nobody has "12
+ * Gajar Halwa" in a cupboard. Dishes consume materials through their recipe,
+ * which is what makes the numbers survive a menu with sizes and add-ons.
+ */
+export type DineMaterial = {
+  id: string;
+  name: string;
+  /** g, ml or pc — see lib/dine/units. */
+  baseUnit: BaseUnit;
+  /** How it is bought ("5 kg sack"); "" when it is only ever bought loose. */
+  packLabel: string;
+  /** Base units in one pack, stored scaled. 0 when there is no pack. */
+  baseUnitsPerPack: number;
+  /** On-hand quantity, in thousandths of the base unit. */
+  stockQty: number;
+  /** Warn at or below this. 0 = never warn. */
+  reorderLevel: number;
+  /** Weighted-average cost, in paise per COST_SCALE stored units. */
+  costPerUnit: number;
+  note: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * What a recipe line hangs off.
+ *
+ * Three levels, because consumption follows what the guest actually chose:
+ *  - "item"      the dish's base recipe
+ *  - "variation" replaces the base entirely when that size is ordered, since a
+ *                half plate uses less rice but the same raita
+ *  - "modifier"  a delta added on top, which may be negative ("no onion")
+ */
+export type RecipeOwnerType = "item" | "variation" | "modifier";
+
+export type DineRecipeLine = {
+  id: string;
+  ownerType: RecipeOwnerType;
+  ownerId: string;
+  materialId: string;
+  /** Per one unit of the dish, in thousandths of the material's base unit. */
+  quantity: number;
+  sortOrder: number;
+};
+
+/**
+ * Every movement of stock, appended and never edited.
+ *
+ * A running total on its own cannot answer "why is the ghee down to 400 g",
+ * which is the only question anyone actually asks it. The ledger can.
+ */
+export type StockMoveReason =
+  | "opening"
+  | "purchase"
+  | "consume"
+  | "wastage"
+  | "adjust";
+
+export type DineStockMove = {
+  id: string;
+  materialId: string;
+  /** Denormalised so history survives the material being renamed or deleted. */
+  materialName: string;
+  reason: StockMoveReason;
+  /** Signed: positive is stock in, negative is stock out. */
+  change: number;
+  balanceAfter: number;
+  /** Cost per unit at the time, so history can be valued after prices move. */
+  costPerUnit: number;
+  /** Ticket, KOT or bill this came from, when it came from one. */
+  refId: string;
+  refLabel: string;
+  note: string;
+  businessDate: string;
+  createdAt: string;
+};
+
+export const STOCK_MOVE_LABELS: Record<StockMoveReason, string> = {
+  opening: "Opening stock",
+  purchase: "Stock added",
+  consume: "Used in orders",
+  wastage: "Wastage",
+  adjust: "Stock take",
+};
 
 export type DineBusiness = {
   id: "main";
@@ -352,6 +446,16 @@ export type DineSettings = {
    */
   shareCustomersWithLedger: boolean;
 
+  /**
+   * Track raw materials and recipes.
+   *
+   * Off by default. A restaurant that only wants to bill should never be shown
+   * a low-stock warning for a cupboard it never told us about, and turning
+   * this on is a real commitment — recipes have to be entered before any of
+   * the numbers mean anything.
+   */
+  inventoryEnabled: boolean;
+
   pinHash: string;
   pinSalt: string;
   /** Lock after this many idle minutes; 0 = never. */
@@ -398,6 +502,7 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   lastBackupAt: null,
   sheetSyncUrl: "",
   shareCustomersWithLedger: true,
+  inventoryEnabled: false,
 
   pinHash: "",
   pinSalt: "",

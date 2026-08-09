@@ -7,10 +7,11 @@
 // needing a migration of the retail POS at all.
 
 const DB_NAME = "DINE_DATABASE";
-// v2 adds dine_sync_queue (Google Sheet dirty-flags). The upgrade handler
-// creates any missing store, so bumping this migrates an existing database in
-// place without touching its rows.
-const DB_VERSION = 2;
+// v2 adds dine_sync_queue (Google Sheet dirty-flags); v3 adds the raw-material
+// stores (materials, recipe lines, stock moves). The upgrade handler creates
+// any missing store, so bumping this migrates an existing database in place
+// without touching its rows.
+const DB_VERSION = 3;
 
 export const DINE_STORES = [
   "dine_business",
@@ -31,6 +32,9 @@ export const DINE_STORES = [
   "dine_payment_methods",
   "dine_customers",
   "dine_sync_queue",
+  "dine_materials",
+  "dine_recipe_lines",
+  "dine_stock_moves",
 ] as const;
 
 export type DineStoreName = (typeof DINE_STORES)[number];
@@ -49,6 +53,14 @@ const INDEXES: Partial<Record<DineStoreName, [name: string, keyPath: string][]>>
   ],
   dine_bill_items: [["billId", "billId"]],
   dine_bill_payments: [["billId", "billId"]],
+  dine_recipe_lines: [
+    ["ownerId", "ownerId"],
+    ["materialId", "materialId"],
+  ],
+  dine_stock_moves: [
+    ["materialId", "materialId"],
+    ["businessDate", "businessDate"],
+  ],
 };
 
 let dbPromise: Promise<IDBDatabase> | null = null;
