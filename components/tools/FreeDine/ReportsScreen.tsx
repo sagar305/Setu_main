@@ -10,14 +10,17 @@ import {
   downloadCsv,
   hourlySalesCsv,
   itemReportCsv,
+  materialUsageCsv,
 } from "@/lib/dine/csv";
 import {
   businessDates,
   hourlySales,
   itemReport,
+  materialUsage,
   summarise,
   taxSlabTotals,
 } from "@/lib/dine/reports";
+import { formatQty } from "@/lib/dine/units";
 import {
   EmptyState,
   Field,
@@ -36,7 +39,8 @@ import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
  * cannot drift away from the bills it summarises (AC-6).
  */
 export function ReportsScreen() {
-  const { bills, billItems, billPayments, business, settings, todayDate } = useDine();
+  const { bills, billItems, billPayments, business, settings, todayDate, materials, stockMoves } =
+    useDine();
   const currency = business?.currency ?? "INR";
 
   const dates = useMemo(() => businessDates(bills), [bills]);
@@ -65,6 +69,12 @@ export function ReportsScreen() {
   const items = useMemo(() => itemReport(ranged, rangedItems), [ranged, rangedItems]);
   const hourly = useMemo(() => hourlySales(ranged), [ranged]);
   const busiestHour = hourly.reduce((best, row) => (row.revenue > best.revenue ? row : best), hourly[0]);
+  const usage = useMemo(
+    () => (settings.inventoryEnabled ? materialUsage(stockMoves, materials, from, to) : []),
+    [from, materials, settings.inventoryEnabled, stockMoves, to]
+  );
+  const soldCost = useMemo(() => items.reduce((sum, row) => sum + row.cost, 0), [items]);
+  const soldRevenue = useMemo(() => items.reduce((sum, row) => sum + row.revenue, 0), [items]);
 
   if (bills.length === 0) {
     return (
@@ -284,6 +294,12 @@ export function ReportsScreen() {
                   <th className="py-2 font-semibold text-muted">Dish</th>
                   <th className="py-2 text-right font-semibold text-muted">Qty</th>
                   <th className="py-2 text-right font-semibold text-muted">Revenue</th>
+                  {soldCost > 0 && (
+                    <>
+                      <th className="py-2 text-right font-semibold text-muted">Cost</th>
+                      <th className="py-2 text-right font-semibold text-muted">Margin</th>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -294,6 +310,20 @@ export function ReportsScreen() {
                     <td className="py-2 text-right font-semibold text-ink">
                       {formatPaise(row.revenue, currency)}
                     </td>
+                    {soldCost > 0 && (
+                      <>
+                        <td className="py-2 text-right text-muted">
+                          {row.cost > 0 ? formatPaise(row.cost, currency) : "—"}
+                        </td>
+                        <td className="py-2 text-right font-semibold text-ink">
+                          {row.cost > 0
+                            ? `${formatPaise(row.revenue - row.cost, currency)} (${Math.round(
+                                ((row.revenue - row.cost) / Math.max(row.revenue, 1)) * 100
+                              )}%)`
+                            : "—"}
+                        </td>
+                      </>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -301,6 +331,90 @@ export function ReportsScreen() {
           </div>
         )}
       </div>
+
+      {settings.inventoryEnabled && (
+        <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-bold text-ink">What the kitchen got through</h3>
+              <p className="text-xs text-muted">
+                Read from the stock ledger, not from the recipes — so a short stock take shows up
+                as a variance instead of quietly disappearing.
+              </p>
+            </div>
+            <button
+              type="button"
+              disabled={usage.length === 0}
+              onClick={() => downloadCsv(`material-usage-${from}.csv`, materialUsageCsv(usage))}
+              className="text-xs font-semibold text-indigo disabled:opacity-40"
+            >
+              Export
+            </button>
+          </div>
+
+          {soldCost > 0 && (
+            <p className="mt-2 text-sm text-ink">
+              Food cost on what sold:{" "}
+              <strong>
+                {formatPaise(soldCost, currency)} of {formatPaise(soldRevenue, currency)} (
+                {Math.round((soldCost / Math.max(soldRevenue, 1)) * 100)}%)
+              </strong>
+            </p>
+          )}
+
+          {usage.length === 0 ? (
+            <p className="mt-3 text-sm text-muted">
+              Nothing moved in this range. Give your dishes recipes on the Menu screen and stock
+              will start coming out as rounds are sent.
+            </p>
+          ) : (
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full min-w-[560px] text-sm">
+                <thead>
+                  <tr className="border-b border-muted-line/20 text-left">
+                    <th className="py-2 font-semibold text-muted">Material</th>
+                    <th className="py-2 text-right font-semibold text-muted">Used</th>
+                    <th className="py-2 text-right font-semibold text-muted">Wasted</th>
+                    <th className="py-2 text-right font-semibold text-muted">Received</th>
+                    <th className="py-2 text-right font-semibold text-muted">Stock take</th>
+                    <th className="py-2 text-right font-semibold text-muted">Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usage.map((row) => (
+                    <tr key={row.materialId} className="border-b border-muted-line/10 last:border-0">
+                      <td className="py-2 text-ink">{row.name}</td>
+                      <td className="py-2 text-right text-muted">
+                        {row.used > 0 ? formatQty(row.used, row.unit) : "—"}
+                      </td>
+                      <td
+                        className={`py-2 text-right ${row.wasted > 0 ? "font-semibold text-red-600" : "text-muted"}`}
+                      >
+                        {row.wasted > 0 ? formatQty(row.wasted, row.unit) : "—"}
+                      </td>
+                      <td className="py-2 text-right text-muted">
+                        {row.received > 0 ? formatQty(row.received, row.unit) : "—"}
+                      </td>
+                      <td
+                        className={`py-2 text-right ${
+                          row.variance < 0 ? "font-semibold text-red-600" : "text-muted"
+                        }`}
+                      >
+                        {row.variance !== 0
+                          ? `${row.variance > 0 ? "+" : "−"}${formatQty(Math.abs(row.variance), row.unit)}`
+                          : "—"}
+                      </td>
+                      <td className="py-2 text-right font-semibold text-ink">
+                        {formatPaise(row.cost, currency)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
 
       <ZReportModal
         open={zOpen}

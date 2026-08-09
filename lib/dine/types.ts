@@ -353,6 +353,17 @@ export type DineBillItem = {
   id: string;
   billId: string;
   ticketItemId: string | null;
+  /** Kept so a sold line can be traced back to its recipe. */
+  menuItemId?: string;
+  variationId?: string | null;
+  /**
+   * What the ingredients cost when this was sold, per unit, in paise.
+   *
+   * Stored rather than recomputed: pricing a sale from March at today's
+   * average cost would make last month's margin move every time a sack of
+   * rice gets more expensive.
+   */
+  unitCost?: number;
   name: string;
   variationName: string;
   modifiers: AppliedModifier[];

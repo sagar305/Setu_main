@@ -9,6 +9,9 @@ import {
   ClipboardList,
   Clock,
   MonitorSmartphone,
+  Boxes,
+  Carrot,
+  Scale,
   DatabaseBackup,
   Download,
   HandCoins,
@@ -84,6 +87,7 @@ const HIGHLIGHTS: { icon: ComponentType<{ className?: string }>; label: string }
   { icon: Split, label: "Split & merge bills" },
   { icon: Percent, label: "GST with CGST/SGST" },
   { icon: Salad, label: "Half / full & add-ons" },
+  { icon: Boxes, label: "Recipes & raw material stock" },
   { icon: Printer, label: "80mm / 58mm / A4" },
   { icon: Lock, label: "PIN counter lock" },
 ];
@@ -211,6 +215,45 @@ const BILLING: Feature[] = [
   },
 ];
 
+const KITCHEN: Feature[] = [
+  {
+    icon: Carrot,
+    title: "Count ingredients, not dishes",
+    description:
+      "Nobody has twelve Gajar Halwa in a cupboard — they have carrots, milk and ghee. Give each dish a recipe and sending a round to the kitchen takes exactly those out of stock.",
+  },
+  {
+    icon: Salad,
+    title: "Half plates use less rice, not less raita",
+    description:
+      "A size can carry its own recipe rather than a percentage of the base, because scaling everything by 0.6 quietly gets the garnish wrong. Add-ons adjust it further — extra cheese is thirty more grams, no onion is ten fewer.",
+  },
+  {
+    icon: Scale,
+    title: "Kilos in, grams out",
+    description:
+      "Buy a 5 kg sack, cook in 250 g portions. The conversion happens once, where it belongs, so stock never ends up mysteriously negative.",
+  },
+  {
+    icon: Percent,
+    title: "Food cost while you type it",
+    description:
+      "The recipe editor prices the dish as you build it, at your actual average cost. A 60% food cost is obvious while you are still looking at the recipe, not three months later.",
+  },
+  {
+    icon: TriangleAlert,
+    title: "Wastage that stays visible",
+    description:
+      "A dish cancelled after it reached the kitchen was cooked, so the ingredients do not come back. They move from 'used' to 'wasted' instead, which is the number worth watching.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Stock takes that show the gap",
+    description:
+      "Count the shelf, enter what is really there, and the difference is recorded rather than smoothed away. Running out never blocks a sale — it only warns, because the cook can see the fridge and the app cannot.",
+  },
+];
+
 const TRUST: Feature[] = [
   {
     icon: BarChart3,
@@ -265,6 +308,13 @@ const SECTIONS: { eyebrow: string; title: string; subtitle: string; items: Featu
     items: MENU,
   },
   {
+    eyebrow: "Kitchen",
+    title: "Recipes and raw material stock",
+    subtitle:
+      "Optional, and off until you want it. Turn it on and every dish you send deducts what it actually uses.",
+    items: KITCHEN,
+  },
+  {
     eyebrow: "Billing",
     title: "The awkward part, handled",
     subtitle: "Splitting, merging, service charge and a GST bill that adds up to the paisa.",
@@ -287,7 +337,11 @@ const DIFFERENCES: { capability: string; retail: string; dine: string }[] = [
   { capability: "Split and merge bills", retail: "—", dine: "Yes" },
   { capability: "Service charge", retail: "—", dine: "Yes" },
   { capability: "Barcode scanning", retail: "Yes", dine: "Not how restaurants work" },
-  { capability: "Stock tracking", retail: "Yes", dine: "Out of scope" },
+  {
+    capability: "Stock tracking",
+    retail: "Finished products",
+    dine: "Raw materials, via recipes",
+  },
 ];
 
 const FREE_VS_PAID: { feature: string; free: string; paid: string }[] = [
@@ -333,6 +387,16 @@ const FAQ_ITEMS = [
       "Yes. Open the kitchen screen in a second browser tab on the same device and leave it on the pass. Rounds appear the moment the counter taps Send, and when the kitchen marks a round ready the waiter sees it on the floor. Both tabs read the same browser storage, so it needs no server, no account and no second device — and it keeps working offline like the rest of the app.",
   },
   {
+    question: "Can it track my ingredients, not just sales?",
+    answer:
+      "Yes, if you want it — stock tracking is off until you switch it on. You count raw materials like rice, paneer and ghee, and give each dish a recipe. Sending a round to the kitchen then deducts exactly what that dish uses, following the size and the add-ons the guest chose: a half biryani takes less rice but the same raita, extra cheese takes thirty more grams. You get food cost per dish, a wastage figure, low-stock warnings and stock takes that show the gap between the shelf and the books.",
+  },
+  {
+    question: "What happens if I run out of something mid-service?",
+    answer:
+      "You get a warning, never a block. The cook can see the fridge and the app cannot, so Free Dine will not stop you selling a dish because a number says the paneer ran out. Stock can go negative and a stock take will put it right.",
+  },
+  {
     question: "Can I split a bill?",
     answer:
       "Three ways: by moving dishes onto separate bills, by an even share, or by amounts the table gives you. Each part gets its own bill number, prints on its own and is paid on its own, and the parts always add back to the original total exactly.",
@@ -372,6 +436,10 @@ const softwareApplicationSchema = {
     "Open tickets that survive a browser restart",
     "Kitchen order tickets printed per round, without prices",
     "Live kitchen screen in a second tab, updating without a server",
+    "Raw material stock with per-dish recipes",
+    "Recipes that follow the chosen size and add-ons",
+    "Weighted-average ingredient costing and food-cost percentage",
+    "Wastage tracking and stock takes with variance",
     "Item variations (half/full) and modifier groups (add-ons)",
     "Split bills by item, equal share or amount",
     "Merge tables into one bill",

@@ -18,6 +18,7 @@
 
 import { toMajor } from "./money";
 import { DEFAULT_DINE_SETTINGS } from "./types";
+import { fromQty } from "./units";
 import type {
   DineArea,
   DineBill,
@@ -31,10 +32,14 @@ import type {
   DineModifierGroup,
   DinePaymentMethod,
   DineSettings,
+  DineMaterial,
+  DineRecipeLine,
+  DineStockMove,
   DineSyncSlice,
   DineTable,
   DineVariation,
 } from "./types";
+import { STOCK_MOVE_LABELS } from "./types";
 import { DINE_BACKUP_MARKER, DINE_BACKUP_VERSION, type DineBackup } from "./backup";
 
 export type DineMetaSnapshot = {
@@ -55,6 +60,9 @@ export type DineWorkspaceSnapshot = DineMetaSnapshot & {
   bills: DineBill[];
   billItems: DineBillItem[];
   billPayments: DineBillPayment[];
+  materials: DineMaterial[];
+  recipeLines: DineRecipeLine[];
+  stockMoves: DineStockMove[];
 };
 
 type TabPayload = { tab: string; headers: string[]; rows: (string | number | boolean)[][] };
@@ -67,6 +75,9 @@ export const DINE_SHEET_TABS = {
   bills: "Bills",
   billItems: "Bill Items",
   billPayments: "Payments",
+  materials: "Materials",
+  recipes: "Recipes",
+  stockMoves: "Stock Movements",
 } as const;
 
 /** Images would blow past the 50k-character cell limit, so they stay local. */
@@ -278,6 +289,87 @@ function billPaymentsTab(payments: DineBillPayment[], bills: DineBill[]): TabPay
   };
 }
 
+function materialsTab(materials: DineMaterial[]): TabPayload {
+  return {
+    tab: DINE_SHEET_TABS.materials,
+    headers: ["Material", "Unit", "In Stock", "Reorder At", "Bought As", "Units Per Pack", "_json"],
+    rows: materials.map((material) => [
+      material.name,
+      material.baseUnit,
+      fromQty(material.stockQty),
+      material.reorderLevel > 0 ? fromQty(material.reorderLevel) : "",
+      material.packLabel,
+      material.baseUnitsPerPack > 0 ? fromQty(material.baseUnitsPerPack) : "",
+      JSON.stringify(material),
+    ]),
+  };
+}
+
+/**
+ * Recipes, named rather than referenced.
+ *
+ * A sheet full of "ownerId 8f3c-…" helps nobody, so the readable columns say
+ * which dish and which size or add-on the line belongs to. The restore still
+ * reads only _json, so the naming can be as loose as it likes.
+ */
+function recipesTab(
+  lines: DineRecipeLine[],
+  items: DineMenuItem[],
+  variations: DineVariation[],
+  modifiers: DineModifier[],
+  materials: DineMaterial[]
+): TabPayload {
+  const itemName = (id: string) => items.find((row) => row.id === id)?.name ?? "";
+  const materialById = new Map(materials.map((material) => [material.id, material]));
+
+  const describe = (line: DineRecipeLine): { dish: string; applies: string } => {
+    if (line.ownerType === "item") return { dish: itemName(line.ownerId), applies: "Base recipe" };
+    if (line.ownerType === "variation") {
+      const variation = variations.find((row) => row.id === line.ownerId);
+      return {
+        dish: variation ? itemName(variation.menuItemId) : "",
+        applies: variation ? `Size: ${variation.name}` : "Size",
+      };
+    }
+    const modifier = modifiers.find((row) => row.id === line.ownerId);
+    return { dish: "", applies: modifier ? `Add-on: ${modifier.name}` : "Add-on" };
+  };
+
+  return {
+    tab: DINE_SHEET_TABS.recipes,
+    headers: ["Dish", "Applies To", "Material", "Quantity", "Unit", "_json"],
+    rows: lines.map((line) => {
+      const label = describe(line);
+      const material = materialById.get(line.materialId);
+      return [
+        label.dish,
+        label.applies,
+        material?.name ?? "",
+        fromQty(line.quantity),
+        material?.baseUnit ?? "",
+        JSON.stringify(line),
+      ];
+    }),
+  };
+}
+
+function stockMovesTab(moves: DineStockMove[]): TabPayload {
+  return {
+    tab: DINE_SHEET_TABS.stockMoves,
+    headers: ["Date", "Business Date", "Material", "Why", "Change", "Balance After", "Note", "_json"],
+    rows: moves.map((move) => [
+      move.createdAt,
+      move.businessDate,
+      move.materialName,
+      STOCK_MOVE_LABELS[move.reason],
+      fromQty(move.change),
+      fromQty(move.balanceAfter),
+      [move.refLabel, move.note].filter(Boolean).join(" · "),
+      JSON.stringify(move),
+    ]),
+  };
+}
+
 export function buildDineTabPayloads(
   snapshot: DineWorkspaceSnapshot,
   slices: DineSyncSlice[]
@@ -300,6 +392,19 @@ export function buildDineTabPayloads(
     tabs.push(billsTab(snapshot.bills));
     tabs.push(billItemsTab(snapshot.billItems, snapshot.bills));
     tabs.push(billPaymentsTab(snapshot.billPayments, snapshot.bills));
+  }
+  if (slices.includes("inventory")) {
+    tabs.push(materialsTab(snapshot.materials));
+    tabs.push(
+      recipesTab(
+        snapshot.recipeLines,
+        snapshot.menuItems,
+        snapshot.variations,
+        snapshot.modifiers,
+        snapshot.materials
+      )
+    );
+    tabs.push(stockMovesTab(snapshot.stockMoves));
   }
   return tabs;
 }
@@ -375,6 +480,9 @@ export type DineSheetPullResult = {
   bills: DineBill[];
   billItems: DineBillItem[];
   billPayments: DineBillPayment[];
+  materials: DineMaterial[];
+  recipeLines: DineRecipeLine[];
+  stockMoves: DineStockMove[];
 };
 
 function parseJsonColumn<T>(rows: unknown[][]): T[] {
@@ -467,6 +575,9 @@ export async function pullFromDineSheet(url: string): Promise<DineSheetPullResul
     bills: parseJsonColumn<DineBill>(body.tabs[DINE_SHEET_TABS.bills] ?? []),
     billItems: parseJsonColumn<DineBillItem>(body.tabs[DINE_SHEET_TABS.billItems] ?? []),
     billPayments: parseJsonColumn<DineBillPayment>(body.tabs[DINE_SHEET_TABS.billPayments] ?? []),
+    materials: parseJsonColumn<DineMaterial>(body.tabs[DINE_SHEET_TABS.materials] ?? []),
+    recipeLines: parseJsonColumn<DineRecipeLine>(body.tabs[DINE_SHEET_TABS.recipes] ?? []),
+    stockMoves: parseJsonColumn<DineStockMove>(body.tabs[DINE_SHEET_TABS.stockMoves] ?? []),
   };
 }
 
@@ -516,6 +627,9 @@ export function buildBackupFromDineSheetPull(
       dine_bills: pull.bills,
       dine_bill_items: pull.billItems,
       dine_bill_payments: pull.billPayments,
+      dine_materials: pull.materials,
+      dine_recipe_lines: pull.recipeLines,
+      dine_stock_moves: pull.stockMoves,
     },
   };
 }
@@ -578,7 +692,10 @@ function writeTab_(name, values, keepExisting) {
 }
 
 function pullAll_() {
-  var names = ["Meta", "Menu", "Menu Options", "Customers", "Bills", "Bill Items", "Payments"];
+  var names = [
+    "Meta", "Menu", "Menu Options", "Customers", "Bills", "Bill Items", "Payments",
+    "Materials", "Recipes", "Stock Movements"
+  ];
   var ss = SpreadsheetApp.getActive();
   var tabs = {};
   for (var i = 0; i < names.length; i++) {

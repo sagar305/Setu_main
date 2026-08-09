@@ -38,6 +38,7 @@ import {
   consumptionForTicketItem,
   indexRecipes,
   mergeConsumption,
+  recipeCost,
   type Consumption,
   type RecipeIndex,
 } from "./recipe";
@@ -625,6 +626,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
       bills,
       billItems,
       billPayments,
+      materials,
+      recipeLines,
+      stockMoves,
     };
   });
 
@@ -2246,10 +2250,19 @@ export function DineProvider({ children }: { children: ReactNode }) {
         });
 
         part.items.forEach((item, itemIndex) => {
+          const unitCost = current.inventoryEnabled
+            ? recipeCost(
+                consumptionForTicketItem({ ...item, quantity: 1 }, recipeIndexRef.current),
+                materialsRef.current
+              )
+            : 0;
           billItemRows.push({
             id: generateId(),
             billId,
             ticketItemId: item.id,
+            menuItemId: item.menuItemId,
+            variationId: item.variationId,
+            unitCost,
             name: item.name,
             variationName: item.variationName,
             modifiers: item.modifiers,

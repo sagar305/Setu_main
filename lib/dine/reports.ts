@@ -7,7 +7,15 @@
 // Cancelled bills are excluded from every revenue figure and counted separately
 // — an owner needs to see that ₹4,000 was voided, not have it quietly vanish.
 
-import { businessDateOf, type DineBill, type DineBillItem, type DineBillPayment } from "./types";
+import { valueOf } from "./units";
+import {
+  businessDateOf,
+  type DineBill,
+  type DineBillItem,
+  type DineBillPayment,
+  type DineMaterial,
+  type DineStockMove,
+} from "./types";
 
 export type DaySummary = {
   businessDate: string;
@@ -77,6 +85,8 @@ export type ItemReportRow = {
   name: string;
   quantity: number;
   revenue: number;
+  /** Ingredient cost of what was sold, in paise. 0 when nothing is costed. */
+  cost: number;
 };
 
 /**
@@ -92,9 +102,10 @@ export function itemReport(bills: DineBill[], items: DineBillItem[]): ItemReport
   for (const item of items) {
     if (!paidIds.has(item.billId)) continue;
     const name = item.variationName ? `${item.name} (${item.variationName})` : item.name;
-    const row = rows.get(name) ?? { name, quantity: 0, revenue: 0 };
+    const row = rows.get(name) ?? { name, quantity: 0, revenue: 0, cost: 0 };
     row.quantity += item.quantity;
     row.revenue += item.lineTotal;
+    row.cost += (item.unitCost ?? 0) * item.quantity;
     rows.set(name, row);
   }
 
@@ -149,4 +160,82 @@ export function taxSlabTotals(bills: DineBill[]): TaxSlabRow[] {
     }
   }
   return Array.from(slabs.values()).sort((a, b) => a.rate - b.rate);
+}
+
+
+export type MaterialUsageRow = {
+  materialId: string;
+  name: string;
+  unit: DineMaterial["baseUnit"];
+  /** Consumed by orders, as a positive quantity. */
+  used: number;
+  /** Thrown away, as a positive quantity. */
+  wasted: number;
+  /** Received in the period. */
+  received: number;
+  /** Stock-take correction: negative means the shelf held less than the books. */
+  variance: number;
+  /** Value of what was used and wasted, in paise. */
+  cost: number;
+};
+
+/**
+ * What the kitchen actually got through, from the stock ledger rather than
+ * from the recipes.
+ *
+ * Deriving usage by multiplying dishes sold by their recipes would only ever
+ * restate what the recipes claim. Reading the ledger instead means a stock
+ * take that came up short shows as a variance rather than quietly disappearing
+ * — which is the whole reason an owner turns this on.
+ */
+export function materialUsage(
+  moves: DineStockMove[],
+  materials: DineMaterial[],
+  from: string,
+  to: string
+): MaterialUsageRow[] {
+  const byId = new Map(materials.map((material) => [material.id, material]));
+  const rows = new Map<string, MaterialUsageRow>();
+
+  for (const move of moves) {
+    if (move.businessDate < from || move.businessDate > to) continue;
+    const material = byId.get(move.materialId);
+    const row =
+      rows.get(move.materialId) ??
+      ({
+        materialId: move.materialId,
+        name: move.materialName,
+        unit: material?.baseUnit ?? "g",
+        used: 0,
+        wasted: 0,
+        received: 0,
+        variance: 0,
+        cost: 0,
+      } satisfies MaterialUsageRow);
+
+    if (move.reason === "consume") row.used -= move.change;
+    else if (move.reason === "wastage") row.wasted -= move.change;
+    else if (move.reason === "purchase" || move.reason === "opening") row.received += move.change;
+    else if (move.reason === "adjust") row.variance += move.change;
+
+    rows.set(move.materialId, row);
+  }
+
+  for (const row of rows.values()) {
+    const material = byId.get(row.materialId);
+    row.cost = material ? valueOf(row.used + row.wasted, material.costPerUnit) : 0;
+  }
+
+  return Array.from(rows.values())
+    .filter((row) => row.used !== 0 || row.wasted !== 0 || row.received !== 0 || row.variance !== 0)
+    .sort((a, b) => b.cost - a.cost);
+}
+
+/** Total wastage value in a period, in paise — the number worth watching. */
+export function wastageValue(rows: MaterialUsageRow[], materials: DineMaterial[]): number {
+  const byId = new Map(materials.map((material) => [material.id, material]));
+  return rows.reduce((sum, row) => {
+    const material = byId.get(row.materialId);
+    return sum + (material ? valueOf(row.wasted, material.costPerUnit) : 0);
+  }, 0);
 }
