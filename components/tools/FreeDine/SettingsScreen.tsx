@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  Boxes,
   Building2,
   ChefHat,
   Download,
@@ -497,6 +498,39 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             leave. On a tablet you want properly locked down, pair this with the device&apos;s own
             kiosk mode: screen pinning on Android, Guided Access on iPad, or launching Chrome with{" "}
             <code className="rounded bg-white px-1 py-0.5">--kiosk</code> on a PC.
+          </p>
+        )}
+      </Card>
+
+      <Card icon={Boxes} title="Raw materials and recipes">
+        <p className="text-sm text-muted">
+          Count what you buy — rice, paneer, ghee — and give each dish a recipe. Sending a round to
+          the kitchen then deducts exactly what that dish uses, following the size and add-ons the
+          guest chose.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.inventoryEnabled}
+            onChange={(event) => void updateSettings({ inventoryEnabled: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">Track stock and recipes</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Adds a Stock screen and a Recipe button on every dish. Off by default, because it is a
+              real commitment — the numbers mean nothing until each dish has a recipe, and a
+              half-entered one is worse than none.
+            </span>
+          </span>
+        </label>
+
+        {settings.inventoryEnabled && (
+          <p className="text-xs text-muted">
+            Stock comes out when a round is sent to the kitchen, not when the bill is paid. A dish
+            cancelled after that is recorded as wastage rather than returned — it was cooked.
+            Running out never blocks a sale; it only warns.
           </p>
         )}
       </Card>

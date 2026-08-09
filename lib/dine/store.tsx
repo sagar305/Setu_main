@@ -1682,7 +1682,39 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const at = nowIso();
       const round = ticket.roundsFired + 1;
 
-      const rows: DineTicketItem[] = inputs.map((input) => {
+      // Tapping the same dish twice should read as "x2", not as two identical
+      // lines. Only un-fired lines in the current round can absorb it — a line
+      // already sent to the kitchen is history and must not change under it.
+      const sameLine = (item: DineTicketItem, input: AddItemInput) =>
+        item.menuItemId === input.menuItemId &&
+        item.variationId === (input.variationId ?? null) &&
+        item.note.trim() === input.note.trim() &&
+        item.firedAt === null &&
+        item.cancelledAt === null &&
+        item.roundNumber === round &&
+        item.modifiers.length === input.modifiers.length &&
+        item.modifiers.every((modifier) =>
+          input.modifiers.some((chosen) => chosen.id === modifier.id)
+        );
+
+      const existing = ticketItems.filter((item) => item.ticketId === ticketId);
+      const merged: DineTicketItem[] = [];
+      const fresh: AddItemInput[] = [];
+      for (const input of inputs) {
+        const match =
+          merged.find((item) => sameLine(item, input)) ??
+          existing.find((item) => sameLine(item, input));
+        if (match) {
+          const bumped = { ...match, quantity: match.quantity + Math.max(input.quantity, 1) };
+          const at = merged.findIndex((item) => item.id === match.id);
+          if (at === -1) merged.push(bumped);
+          else merged[at] = bumped;
+        } else {
+          fresh.push(input);
+        }
+      }
+
+      const rows: DineTicketItem[] = fresh.map((input) => {
         const menuItem = menuItems.find((item) => item.id === input.menuItemId);
         const variation = input.variationId
           ? variations.find((row) => row.id === input.variationId) ?? null
@@ -1710,10 +1742,14 @@ export function DineProvider({ children }: { children: ReactNode }) {
         };
       });
 
-      await commit({ dine_ticket_items: rows });
-      setTicketItems((previous) => [...previous, ...rows]);
+      if (rows.length === 0 && merged.length === 0) return;
+      await commit({ dine_ticket_items: [...merged, ...rows] });
+      setTicketItems((previous) => [
+        ...previous.map((item) => merged.find((row) => row.id === item.id) ?? item),
+        ...rows,
+      ]);
     },
-    [menuItems, tickets, variations]
+    [commit, menuItems, ticketItems, tickets, variations]
   );
 
   const updateTicketItemQuantity = useCallback(async (itemId: string, quantity: number) => {

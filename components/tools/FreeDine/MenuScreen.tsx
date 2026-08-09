@@ -14,6 +14,7 @@ import { useDine, type MenuItemInput } from "@/lib/dine/store";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { downloadCsv, menuCsv, parseMenuCsv } from "@/lib/dine/csv";
 import { FOOD_TYPE_LABELS, type DineMenuItem, type FoodType } from "@/lib/dine/types";
+import { RecipeBadge, RecipeModal } from "./RecipeModal";
 import {
   ConfirmDialog,
   EmptyState,
@@ -53,6 +54,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
   const [deleteTarget, setDeleteTarget] = useState<DineMenuItem | null>(null);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [importReport, setImportReport] = useState<string[]>([]);
+  const [recipeFor, setRecipeFor] = useState<DineMenuItem | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const orderedCategories = useMemo(
@@ -242,6 +244,19 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
                   </div>
                 </div>
 
+                {settings.inventoryEnabled && (
+                  <div className="mt-2 flex items-center justify-between gap-2">
+                    <RecipeBadge item={item} />
+                    <button
+                      type="button"
+                      onClick={() => setRecipeFor(item)}
+                      className="text-xs font-semibold text-indigo"
+                    >
+                      Recipe
+                    </button>
+                  </div>
+                )}
+
                 {/* FR-2.5: sold out at 8pm, back on the menu tomorrow. */}
                 <label className="mt-2 flex cursor-pointer items-center gap-2 text-xs font-semibold text-muted">
                   <input
@@ -278,6 +293,8 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
           setDeleteTarget(null);
         }}
       />
+
+      {recipeFor && <RecipeModal item={recipeFor} onClose={() => setRecipeFor(null)} />}
 
       <CategoriesModal
         open={categoriesOpen}

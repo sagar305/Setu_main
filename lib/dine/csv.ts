@@ -12,8 +12,13 @@
 // person types. They are converted to paise on the way in.
 
 import { formatPlain, parseAmount, toMajor } from "./money";
+import { fromQty, formatQty } from "./units";
 import {
   FOOD_TYPE_LABELS,
+  STOCK_MOVE_LABELS,
+  type DineMaterial,
+  type DineRecipeLine,
+  type DineStockMove,
   type DineBill,
   type DineBillItem,
   type DineCategory,
@@ -384,5 +389,96 @@ export function billItemsCsv(bills: DineBill[], items: DineBillItem[]): string {
       "Status",
     ],
     rows
+  );
+}
+
+
+export function materialsCsv(materials: DineMaterial[]): string {
+  return toCsv(
+    [
+      "Material",
+      "Unit",
+      "In Stock",
+      "Reorder At",
+      "Bought As",
+      "Units Per Pack",
+      "Cost Per 1000 Units",
+      "Stock Value",
+      "Note",
+    ],
+    materials.map((material) => [
+      material.name,
+      material.baseUnit,
+      fromQty(material.stockQty),
+      material.reorderLevel > 0 ? fromQty(material.reorderLevel) : "",
+      material.packLabel,
+      material.baseUnitsPerPack > 0 ? fromQty(material.baseUnitsPerPack) : "",
+      toMajor(material.costPerUnit),
+      toMajor(Math.round((material.stockQty * material.costPerUnit) / 1_000_000)),
+      material.note,
+    ])
+  );
+}
+
+export function stockMovesCsv(moves: DineStockMove[]): string {
+  return toCsv(
+    ["Date", "Business Date", "Material", "Why", "Change", "Balance After", "Reference", "Note"],
+    moves
+      .slice()
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+      .map((move) => [
+        new Date(move.createdAt).toLocaleString(),
+        move.businessDate,
+        move.materialName,
+        STOCK_MOVE_LABELS[move.reason],
+        fromQty(move.change),
+        fromQty(move.balanceAfter),
+        move.refLabel,
+        move.note,
+      ])
+  );
+}
+
+/**
+ * Recipes, one row per line, with the owner named rather than referenced.
+ *
+ * A spreadsheet of "ownerId 8f3c-..." helps nobody, so the export says
+ * "Chicken Biryani / Half" and the import is not expected to round-trip — this
+ * is for an owner checking their own recipes, and for the accountant.
+ */
+export function recipesCsv(
+  lines: DineRecipeLine[],
+  labelFor: (line: DineRecipeLine) => { dish: string; applies: string },
+  materials: DineMaterial[]
+): string {
+  const byId = new Map(materials.map((material) => [material.id, material]));
+  return toCsv(
+    ["Dish", "Applies To", "Material", "Quantity", "Unit"],
+    lines.map((line) => {
+      const label = labelFor(line);
+      const material = byId.get(line.materialId);
+      return [
+        label.dish,
+        label.applies,
+        material?.name ?? "(deleted)",
+        fromQty(line.quantity),
+        material?.baseUnit ?? "",
+      ];
+    })
+  );
+}
+
+/** Material usage over a period, for the usage and variance report. */
+export function materialUsageCsv(
+  rows: { name: string; unit: DineMaterial["baseUnit"]; used: number; wasted: number; cost: number }[]
+): string {
+  return toCsv(
+    ["Material", "Used", "Wasted", "Cost"],
+    rows.map((row) => [
+      row.name,
+      formatQty(row.used, row.unit),
+      formatQty(row.wasted, row.unit),
+      toMajor(row.cost),
+    ])
   );
 }
