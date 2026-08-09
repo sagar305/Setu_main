@@ -28,11 +28,20 @@ import {
 import {
   DINE_STORES,
   dineAllocate,
+  dineApplyStock,
   dineBatch,
   dineClearAll,
   dineGetAll,
   type DineStoreName,
 } from "./db";
+import {
+  consumptionForTicketItem,
+  indexRecipes,
+  mergeConsumption,
+  type Consumption,
+  type RecipeIndex,
+} from "./recipe";
+import { blendCost, costPerUnitFrom, type BaseUnit } from "./units";
 import { createDineBroadcast, type DineBroadcast } from "./sync";
 import {
   buildBackupFromDineSheetPull,
@@ -91,7 +100,12 @@ import {
   type DineTicket,
   type DineTicketItem,
   type DineVariation,
+  type DineMaterial,
+  type DineRecipeLine,
+  type DineStockMove,
   type DineSyncDirtyRow,
+  type RecipeOwnerType,
+  type StockMoveReason,
   type DineSyncSlice,
   type KotStatus,
   type OrderType,
@@ -139,6 +153,15 @@ export type MenuItemInput = {
     maxSelect: number;
     options: { id?: string; name: string; priceDelta: number }[];
   }[];
+};
+
+export type MaterialInput = {
+  name: string;
+  baseUnit: BaseUnit;
+  packLabel: string;
+  baseUnitsPerPack: number;
+  reorderLevel: number;
+  note: string;
 };
 
 export type AddItemInput = {
@@ -265,6 +288,24 @@ type DineContextValue = {
   setPin: (pin: string) => Promise<void>;
   clearPin: () => Promise<void>;
 
+  materials: DineMaterial[];
+  recipeLines: DineRecipeLine[];
+  stockMoves: DineStockMove[];
+  recipeIndex: RecipeIndex;
+
+  createMaterial: (input: MaterialInput) => Promise<DineMaterial>;
+  updateMaterial: (id: string, input: MaterialInput) => Promise<void>;
+  deleteMaterial: (id: string) => Promise<void>;
+  /** Replace every recipe line for one owner (item, variation or modifier). */
+  setRecipe: (
+    ownerType: RecipeOwnerType,
+    ownerId: string,
+    lines: { materialId: string; quantity: number }[]
+  ) => Promise<void>;
+  addStock: (materialId: string, quantity: number, totalCost: number, note: string) => Promise<void>;
+  recordWastage: (materialId: string, quantity: number, note: string) => Promise<void>;
+  setStockLevel: (materialId: string, actualQuantity: number, note: string) => Promise<void>;
+
   sheetSync: {
     url: string;
     dirtyCount: number;
@@ -310,6 +351,9 @@ const STORE_TO_SLICE: Partial<Record<DineStoreName, DineSyncSlice>> = {
   dine_modifier_groups: "menu",
   dine_modifiers: "menu",
   dine_customers: "customers",
+  dine_materials: "inventory",
+  dine_recipe_lines: "inventory",
+  dine_stock_moves: "inventory",
   dine_bills: "bills",
   dine_bill_items: "bills",
   dine_bill_payments: "bills",
@@ -341,6 +385,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const [billPayments, setBillPayments] = useState<DineBillPayment[]>([]);
   const [paymentMethods, setPaymentMethods] = useState<DinePaymentMethod[]>([]);
   const [customers, setCustomers] = useState<DineCustomer[]>([]);
+  const [materials, setMaterials] = useState<DineMaterial[]>([]);
+  const [recipeLines, setRecipeLines] = useState<DineRecipeLine[]>([]);
+  const [stockMoves, setStockMoves] = useState<DineStockMove[]>([]);
   const [dirtySlices, setDirtySlices] = useState<DineSyncSlice[]>([]);
   const [sheetSyncing, setSheetSyncing] = useState(false);
   const [sheetLastSyncAt, setSheetLastSyncAt] = useState<string | null>(null);
@@ -426,6 +473,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
       paymentRows,
       customerRows,
       dirtyRows,
+      materialRows,
+      recipeRows,
+      stockMoveRows,
     ] = await Promise.all([
       dineGetAll<DineBusiness>("dine_business"),
       dineGetAll<DineSettings>("dine_settings"),
@@ -445,6 +495,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
       dineGetAll<DinePaymentMethod>("dine_payment_methods"),
       dineGetAll<DineCustomer>("dine_customers"),
       dineGetAll<DineSyncDirtyRow>("dine_sync_queue"),
+      dineGetAll<DineMaterial>("dine_materials"),
+      dineGetAll<DineRecipeLine>("dine_recipe_lines"),
+      dineGetAll<DineStockMove>("dine_stock_moves"),
     ]);
 
     setBusiness(businessRows[0] ?? null);
@@ -464,6 +517,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setBillPayments(billPaymentRows);
     setPaymentMethods(paymentRows);
     setCustomers(customerRows);
+    setMaterials(materialRows);
+    setRecipeLines(recipeRows);
+    setStockMoves(stockMoveRows);
     setDirtySlices(dirtyRows.map((row) => row.id).filter((id) => DINE_SYNC_SLICES.includes(id)));
 
     return businessRows[0] ?? null;
@@ -535,6 +591,15 @@ export function DineProvider({ children }: { children: ReactNode }) {
             return;
           case "dine_customers":
             setCustomers(await dineGetAll<DineCustomer>(store));
+            return;
+          case "dine_materials":
+            setMaterials(await dineGetAll<DineMaterial>(store));
+            return;
+          case "dine_recipe_lines":
+            setRecipeLines(await dineGetAll<DineRecipeLine>(store));
+            return;
+          case "dine_stock_moves":
+            setStockMoves(await dineGetAll<DineStockMove>(store));
             return;
         }
       })
@@ -1294,6 +1359,265 @@ export function DineProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // ---------------------------------------------------------------------
+  // Raw materials, recipes and stock
+  // ---------------------------------------------------------------------
+
+  const recipeIndex = useMemo(() => indexRecipes(recipeLines), [recipeLines]);
+
+  const materialsById = useMemo(
+    () => new Map(materials.map((material) => [material.id, material])),
+    [materials]
+  );
+  const materialsRef = useRef(materialsById);
+  useEffect(() => {
+    materialsRef.current = materialsById;
+  }, [materialsById]);
+
+  const recipeIndexRef = useRef(recipeIndex);
+  useEffect(() => {
+    recipeIndexRef.current = recipeIndex;
+  }, [recipeIndex]);
+
+  const createMaterial = useCallback(
+    async (input: MaterialInput) => {
+      const at = nowIso();
+      const record: DineMaterial = {
+        id: generateId(),
+        name: input.name.trim(),
+        baseUnit: input.baseUnit,
+        packLabel: input.packLabel.trim(),
+        baseUnitsPerPack: Math.max(input.baseUnitsPerPack, 0),
+        stockQty: 0,
+        reorderLevel: Math.max(input.reorderLevel, 0),
+        costPerUnit: 0,
+        note: input.note,
+        createdAt: at,
+        updatedAt: at,
+      };
+      await commit({ dine_materials: [record] });
+      setMaterials((previous) => [...previous, record]);
+      return record;
+    },
+    [commit]
+  );
+
+  const updateMaterial = useCallback(
+    async (id: string, input: MaterialInput) => {
+      setMaterials((previous) => {
+        const next = previous.map((material) =>
+          material.id === id
+            ? {
+                ...material,
+                name: input.name.trim(),
+                baseUnit: input.baseUnit,
+                packLabel: input.packLabel.trim(),
+                baseUnitsPerPack: Math.max(input.baseUnitsPerPack, 0),
+                reorderLevel: Math.max(input.reorderLevel, 0),
+                note: input.note,
+                updatedAt: nowIso(),
+              }
+            : material
+        );
+        const changed = next.find((material) => material.id === id);
+        if (changed) void commit({ dine_materials: [changed] });
+        return next;
+      });
+    },
+    [commit]
+  );
+
+  const deleteMaterial = useCallback(
+    async (id: string) => {
+      // Recipe lines pointing at a deleted material would silently consume
+      // nothing, so they go with it. The stock ledger stays: it carries its own
+      // copy of the name, and history should not rewrite itself.
+      const doomedLines = recipeLines.filter((line) => line.materialId === id);
+      await commit(
+        {},
+        {
+          dine_materials: [id],
+          dine_recipe_lines: doomedLines.map((line) => line.id),
+        }
+      );
+      setMaterials((previous) => previous.filter((material) => material.id !== id));
+      setRecipeLines((previous) => previous.filter((line) => line.materialId !== id));
+    },
+    [commit, recipeLines]
+  );
+
+  const setRecipe = useCallback<DineContextValue["setRecipe"]>(
+    async (ownerType, ownerId, lines) => {
+      const existing = recipeLines.filter(
+        (line) => line.ownerType === ownerType && line.ownerId === ownerId
+      );
+      const rows: DineRecipeLine[] = lines
+        .filter((line) => line.materialId && line.quantity !== 0)
+        .map((line, index) => ({
+          id: generateId(),
+          ownerType,
+          ownerId,
+          materialId: line.materialId,
+          quantity: line.quantity,
+          sortOrder: index,
+        }));
+
+      await commit(
+        { dine_recipe_lines: rows },
+        { dine_recipe_lines: existing.map((line) => line.id) }
+      );
+      setRecipeLines((previous) => [
+        ...previous.filter(
+          (line) => !(line.ownerType === ownerType && line.ownerId === ownerId)
+        ),
+        ...rows,
+      ]);
+    },
+    [commit, recipeLines]
+  );
+
+  /**
+   * Apply a set of stock changes and append their ledger rows.
+   *
+   * Balances are read inside the write (see dineApplyStock), so two tabs
+   * firing rounds at once cannot both subtract from the same starting figure.
+   */
+  const applyStock = useCallback(
+    async (
+      entries: {
+        materialId: string;
+        change: number;
+        reason: StockMoveReason;
+        note?: string;
+        refId?: string;
+        refLabel?: string;
+        /** Cost per unit of the incoming stock; only used by purchases. */
+        incomingCost?: number;
+      }[]
+    ) => {
+      const real = entries.filter((entry) => entry.change !== 0 || entry.reason === "adjust");
+      if (real.length === 0) return;
+
+      const at = nowIso();
+      const businessDate = businessDateOf(at, settingsRef.current.dayStartHour);
+
+      const result = await dineApplyStock<DineMaterial>(
+        real.map((entry) => entry.materialId),
+        (current) => {
+          const touched = new Map<string, DineMaterial>();
+          const moves: DineStockMove[] = [];
+
+          for (const entry of real) {
+            const material = touched.get(entry.materialId) ?? current.get(entry.materialId);
+            if (!material) continue;
+
+            const costPerUnit =
+              entry.reason === "purchase" && entry.incomingCost !== undefined
+                ? blendCost(
+                    Math.max(material.stockQty, 0),
+                    material.costPerUnit,
+                    entry.change,
+                    entry.incomingCost
+                  )
+                : material.costPerUnit;
+
+            const next: DineMaterial = {
+              ...material,
+              stockQty: material.stockQty + entry.change,
+              costPerUnit,
+              updatedAt: at,
+            };
+            touched.set(next.id, next);
+
+            moves.push({
+              id: generateId(),
+              materialId: next.id,
+              materialName: next.name,
+              reason: entry.reason,
+              change: entry.change,
+              balanceAfter: next.stockQty,
+              costPerUnit,
+              refId: entry.refId ?? "",
+              refLabel: entry.refLabel ?? "",
+              note: entry.note ?? "",
+              businessDate,
+              createdAt: at,
+            });
+          }
+
+          return { materials: Array.from(touched.values()), moves };
+        }
+      );
+
+      const updated = result.materials as DineMaterial[];
+      const moves = result.moves as DineStockMove[];
+      if (updated.length === 0) return;
+
+      setMaterials((previous) =>
+        previous.map((material) => updated.find((row) => row.id === material.id) ?? material)
+      );
+      setStockMoves((previous) => [...previous, ...moves]);
+      announce(["dine_materials", "dine_stock_moves"]);
+    },
+    [announce]
+  );
+
+  /** Deduct what a set of ticket lines consumes, once they reach the kitchen. */
+  const consumeForItems = useCallback(
+    async (items: DineTicketItem[], refId: string, refLabel: string) => {
+      if (!settingsRef.current.inventoryEnabled) return;
+      const consumption = mergeConsumption(
+        items.map((item) => consumptionForTicketItem(item, recipeIndexRef.current))
+      );
+      if (consumption.length === 0) return;
+      await applyStock(
+        consumption.map((entry: Consumption) => ({
+          materialId: entry.materialId,
+          change: -entry.quantity,
+          reason: "consume" as const,
+          refId,
+          refLabel,
+        }))
+      );
+    },
+    [applyStock]
+  );
+
+  const addStock = useCallback(
+    async (materialId: string, quantity: number, totalCost: number, note: string) => {
+      if (quantity <= 0) return;
+      await applyStock([
+        {
+          materialId,
+          change: quantity,
+          reason: "purchase",
+          note,
+          incomingCost: totalCost > 0 ? costPerUnitFrom(totalCost, quantity) : undefined,
+        },
+      ]);
+    },
+    [applyStock]
+  );
+
+  const recordWastage = useCallback(
+    async (materialId: string, quantity: number, note: string) => {
+      if (quantity <= 0) return;
+      await applyStock([{ materialId, change: -quantity, reason: "wastage", note }]);
+    },
+    [applyStock]
+  );
+
+  /** Stock take: set the counted figure, recording the variance as the move. */
+  const setStockLevel = useCallback(
+    async (materialId: string, actualQuantity: number, note: string) => {
+      const material = materialsRef.current.get(materialId);
+      if (!material) return;
+      const change = actualQuantity - material.stockQty;
+      await applyStock([{ materialId, change, reason: "adjust", note }]);
+    },
+    [applyStock]
+  );
+
+  // ---------------------------------------------------------------------
   // Tickets
   // ---------------------------------------------------------------------
 
@@ -1504,6 +1828,11 @@ export function DineProvider({ children }: { children: ReactNode }) {
       settingsRef.current = nextSettings;
       announce(["dine_ticket_items", "dine_tickets", "dine_kots", "dine_settings"]);
 
+      // Deduct on fire rather than on settle: the moment the round reaches the
+      // kitchen the ingredients are committed, whether or not the guest ever
+      // pays for them.
+      await consumeForItems(firedItems, kot.id, kot.kotLabel);
+
       setTicketItems((previous) =>
         previous.map((item) => firedItems.find((row) => row.id === item.id) ?? item)
       );
@@ -1512,7 +1841,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       return kot;
     },
-    [allocateKot, announce, ticketItems, tickets]
+    [allocateKot, announce, consumeForItems, ticketItems, tickets]
   );
 
   /**
@@ -1542,12 +1871,42 @@ export function DineProvider({ children }: { children: ReactNode }) {
       settingsRef.current = nextSettings;
       announce(["dine_ticket_items", "dine_kots", "dine_settings"]);
 
+      // The material was deducted when the round fired and it is not coming
+      // back — the dish was cooked. What changes is why it left: this pair of
+      // moves takes it out of "used in orders" and puts it into "wastage",
+      // leaving stock untouched, so the waste report tells the truth about a
+      // dish that was made and thrown away.
+      if (settingsRef.current.inventoryEnabled) {
+        const wasted = consumptionForTicketItem(cancelled, recipeIndexRef.current);
+        if (wasted.length > 0) {
+          const reasonNote = reason.trim() || "Cancelled after firing";
+          await applyStock([
+            ...wasted.map((entry) => ({
+              materialId: entry.materialId,
+              change: entry.quantity,
+              reason: "consume" as const,
+              note: "Reclassified as wastage",
+              refId: item.ticketId,
+              refLabel: kot.kotLabel,
+            })),
+            ...wasted.map((entry) => ({
+              materialId: entry.materialId,
+              change: -entry.quantity,
+              reason: "wastage" as const,
+              note: reasonNote,
+              refId: item.ticketId,
+              refLabel: kot.kotLabel,
+            })),
+          ]);
+        }
+      }
+
       setTicketItems((previous) => previous.map((row) => (row.id === itemId ? cancelled : row)));
       setKots((previous) => [...previous, kot]);
       setSettings(nextSettings);
       return kot;
     },
-    [allocateKot, announce, removeTicketItem, ticketItems]
+    [allocateKot, announce, applyStock, removeTicketItem, ticketItems]
   );
 
   const reprintKot = useCallback(async (kotId: string) => {
@@ -2231,6 +2590,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setBillPayments([]);
     setPaymentMethods([]);
     setCustomers([]);
+    setMaterials([]);
+    setRecipeLines([]);
+    setStockMoves([]);
     setStatus("welcome");
   }, []);
 
@@ -2371,6 +2733,19 @@ export function DineProvider({ children }: { children: ReactNode }) {
 
     setPin,
     clearPin,
+
+    materials,
+    recipeLines,
+    stockMoves,
+    recipeIndex,
+
+    createMaterial,
+    updateMaterial,
+    deleteMaterial,
+    setRecipe,
+    addStock,
+    recordWastage,
+    setStockLevel,
 
     sheetSync: {
       url: settings.sheetSyncUrl,

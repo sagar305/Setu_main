@@ -520,9 +520,15 @@ export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
  * sync on data nobody reports on. The JSON backup is the complete copy; the
  * Sheet carries the configuration and the settled sales.
  */
-export type DineSyncSlice = "meta" | "menu" | "customers" | "bills";
+export type DineSyncSlice = "meta" | "menu" | "customers" | "bills" | "inventory";
 
-export const DINE_SYNC_SLICES: DineSyncSlice[] = ["meta", "menu", "customers", "bills"];
+export const DINE_SYNC_SLICES: DineSyncSlice[] = [
+  "meta",
+  "menu",
+  "customers",
+  "bills",
+  "inventory",
+];
 
 export type DineSyncDirtyRow = { id: DineSyncSlice; dirtyAt: string };
 

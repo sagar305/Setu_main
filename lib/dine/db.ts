@@ -227,6 +227,45 @@ export async function dineAllocate<TRecord, TResult>(
   return result;
 }
 
+/**
+ * Adjust stock levels and append their ledger rows in one transaction.
+ *
+ * The balances are read *inside* the write for the same reason the numbering
+ * counters are: two tabs firing rounds at the same moment would each read
+ * "1000 g of rice", each subtract 100, and each write 900 — losing a portion's
+ * worth of consumption. Stock is at least reconcilable by a stock take, unlike
+ * a duplicated bill number, but silently drifting inventory is exactly what
+ * makes an owner stop trusting the feature.
+ */
+export async function dineApplyStock<TMaterial>(
+  materialIds: string[],
+  plan: (current: Map<string, TMaterial>) => {
+    materials: TMaterial[];
+    moves: unknown[];
+  }
+): Promise<{ materials: TMaterial[]; moves: unknown[] }> {
+  const unique = Array.from(new Set(materialIds));
+  if (unique.length === 0) return { materials: [], moves: [] };
+
+  const db = await openDineDb();
+  const tx = db.transaction(["dine_materials", "dine_stock_moves"], "readwrite");
+  const store = tx.objectStore("dine_materials");
+
+  const current = new Map<string, TMaterial>();
+  for (const id of unique) {
+    const record = await requestToPromise(store.get(id) as IDBRequest<TMaterial | undefined>);
+    if (record) current.set(id, record);
+  }
+
+  const result = plan(current);
+  for (const material of result.materials) store.put(material);
+  const moveStore = tx.objectStore("dine_stock_moves");
+  for (const move of result.moves) moveStore.put(move);
+
+  await txDone(tx);
+  return result;
+}
+
 /** Wipe every Dine store. Never touches the Browser Based POS database. */
 export async function dineClearAll(): Promise<void> {
   const db = await openDineDb();
