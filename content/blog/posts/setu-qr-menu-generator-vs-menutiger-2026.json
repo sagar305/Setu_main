@@ -12,7 +12,7 @@
     "MenuTiger pricing",
     "restaurant QR menu no subscription"
   ],
-  "date": "2026-08-09",
+  "date": "2026-08-11",
   "category": "Menu Ops",
   "thumbnail": "/blog/thumbnails/setu-qr-menu-generator-vs-menutiger-2026.jpg",
   "connectedTools": ["qr-menu-generator", "upi-qr-generator", "browser-based-pos"],
