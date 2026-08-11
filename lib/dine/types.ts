@@ -434,6 +434,15 @@ export type DineSettings = {
 
   receiptFooter: string;
   showBusinessInfoOnBill: boolean;
+  /**
+   * A layout designed in the Receipt Designer, applied to the bill.
+   *
+   * Templates live in the shared workspace alongside the Customer Ledger's
+   * contacts — they are a toolkit tool's output, not the retail POS's data, so
+   * a restaurant can design one look and use it everywhere. "" = the built-in
+   * layout.
+   */
+  billTemplateId: string;
 
   /**
    * Hour (0-23, local) at which the business day rolls over. A restaurant that
@@ -507,6 +516,7 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
 
   receiptFooter: "Thank you for dining with us!",
   showBusinessInfoOnBill: true,
+  billTemplateId: "",
 
   dayStartHour: 0,
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Boxes,
   Building2,
@@ -22,6 +22,8 @@ import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
 import { CURRENCIES, type OrderType, type PaperSize } from "@/lib/dine/types";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/dine/sheetSync";
+import { getReceiptTemplates } from "@/lib/toolkit/workspace";
+import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { RestoreBackupButton } from "./RestoreBackupButton";
 import {
   ConfirmDialog,
@@ -327,6 +329,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className={inputClass}
           />
         </Field>
+
+        <BillTemplatePicker
+          value={settings.billTemplateId}
+          onChange={(id) => void updateSettings({ billTemplateId: id })}
+        />
       </Card>
 
       <Card icon={Receipt} title="Payment methods">
@@ -869,6 +876,84 @@ function SheetSyncCard({
         }}
       />
     </Card>
+  );
+}
+
+/**
+ * Choose a bill layout designed in the Receipt Designer.
+ *
+ * Templates live in the shared workspace, so a restaurant designs its look
+ * once and every Setu tool that prints uses it. Picking one takes over the
+ * paper size, colour, header, footer and separators — the fields below stay as
+ * the fallback for when no template is chosen.
+ */
+function BillTemplatePicker({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (id: string) => void;
+}) {
+  const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getReceiptTemplates()
+      .then((all) => {
+        if (cancelled) return;
+        setTemplates(all);
+        setLoaded(true);
+      })
+      .catch(() => {
+        if (!cancelled) setLoaded(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <Field
+      label="Bill design"
+      hint="Designed in the Receipt Designer and shared across your Setu tools."
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className={`${inputClass} max-w-xs`}
+        >
+          <option value="">Built-in layout</option>
+          {templates.map((template) => (
+            <option key={template.id} value={template.id}>
+              {template.name} ({template.paperSize})
+            </option>
+          ))}
+        </select>
+        <a
+          href="/tools/receipt-designer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo"
+        >
+          <ExternalLink className="h-4 w-4" />
+          {templates.length > 0 ? "Design another" : "Design one"}
+        </a>
+      </div>
+      {loaded && templates.length === 0 && (
+        <p className="mt-1 text-xs text-muted">
+          No designs saved yet. The Receipt Designer sets the colour, header, footer, logo and
+          separators; save one there and it appears here.
+        </p>
+      )}
+      {value !== "" && (
+        <p className="mt-1 text-xs text-muted">
+          The design decides the paper size, colour, header, footer and separators. The settings
+          above apply when no design is chosen.
+        </p>
+      )}
+    </Field>
   );
 }
 

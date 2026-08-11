@@ -6,7 +6,7 @@ import { useDine, type SplitPlan, type TenderInput } from "@/lib/dine/store";
 import { amountDue } from "@/lib/dine/calc";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { lineUnitPrice, type DineBill } from "@/lib/dine/types";
-import { BillView, billShareText } from "./BillView";
+import { BillView, billShareText, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode } from "./printing";
 import {
   Field,
@@ -321,6 +321,8 @@ function BillCard({
   onPay: () => void;
 }) {
   const { billItems, billPayments, business, settings } = useDine();
+  const template = useBillTemplate();
+  const paperSize = template?.paperSize ?? settings.billPaperSize;
   const printRef = useRef<HTMLDivElement>(null);
   const [sharing, setSharing] = useState(false);
 
@@ -394,7 +396,7 @@ function BillCard({
       <div className="pointer-events-none absolute -left-[9999px] top-0" aria-hidden="true">
         <div
           className={PREVIEW_CLASS}
-          style={{ width: `${PAPER_CONTENT_MM[settings.billPaperSize]}mm`, padding: "4mm" }}
+          style={{ width: `${PAPER_CONTENT_MM[paperSize]}mm`, padding: "4mm" }}
         >
           <BillView
             ref={printRef}
@@ -403,6 +405,7 @@ function BillCard({
             payments={payments}
             business={business}
             settings={settings}
+            template={template}
           />
         </div>
       </div>
@@ -416,7 +419,7 @@ function BillCard({
         )}
         <button
           type="button"
-          onClick={() => printNode(printRef.current, settings.billPaperSize, bill.billLabel)}
+          onClick={() => printNode(printRef.current, paperSize, bill.billLabel)}
           className={`${secondaryBtnClass} ${tapTargetClass}`}
         >
           <Printer className="h-4 w-4" />

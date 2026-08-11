@@ -42,7 +42,7 @@ import {
   type Consumption,
   type RecipeIndex,
 } from "./recipe";
-import { blendCost, costPerUnitFrom, type BaseUnit } from "./units";
+import { blendCost, costPerUnitFrom, toQty, type BaseUnit } from "./units";
 import { createDineBroadcast, type DineBroadcast } from "./sync";
 import {
   buildBackupFromDineSheetPull,
@@ -68,7 +68,9 @@ import {
   DEFAULT_AREA_NAME,
   DEFAULT_TABLE_COUNT,
   DEFAULT_TABLE_SEATS,
+  SAMPLE_MATERIALS,
   SAMPLE_MENU,
+  type SampleRecipeLine,
 } from "./sampleMenu";
 import {
   DEFAULT_DINE_SETTINGS,
@@ -724,8 +726,55 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const variationRows: DineVariation[] = [];
       const groupRows: DineModifierGroup[] = [];
       const modifierRows: DineModifier[] = [];
+      const materialRows: DineMaterial[] = [];
+      const recipeRows: DineRecipeLine[] = [];
 
       if (seedSampleMenu) {
+        // Materials are seeded whether or not stock tracking is switched on, so
+        // that turning it on lands on a menu that is already costed rather than
+        // on an empty cupboard. They carry an indicative opening price with no
+        // stock behind it, which is what makes the plate costs and food-cost
+        // percentages readable on day one; the first real purchase replaces it,
+        // since a weighted average over zero stock is just whatever was bought.
+        const materialIdByName = new Map<string, string>();
+        for (const material of SAMPLE_MATERIALS) {
+          const packQty = toQty(material.packSize);
+          const record: DineMaterial = {
+            id: generateId(),
+            name: material.name,
+            baseUnit: material.unit,
+            packLabel: material.packLabel,
+            baseUnitsPerPack: packQty,
+            stockQty: 0,
+            reorderLevel: toQty(material.reorderLevel),
+            costPerUnit: costPerUnitFrom(material.packPrice, packQty),
+            note: "",
+            createdAt,
+            updatedAt: createdAt,
+          };
+          materialRows.push(record);
+          materialIdByName.set(material.name, record.id);
+        }
+
+        const addRecipe = (
+          ownerType: RecipeOwnerType,
+          ownerId: string,
+          lines: SampleRecipeLine[] | undefined
+        ) => {
+          lines?.forEach((line, index) => {
+            const materialId = materialIdByName.get(line.material);
+            if (!materialId) return;
+            recipeRows.push({
+              id: generateId(),
+              ownerType,
+              ownerId,
+              materialId,
+              quantity: toQty(line.qty),
+              sortOrder: index,
+            });
+          });
+        };
+
         SAMPLE_MENU.forEach((category, categoryIndex) => {
           const categoryRecord: DineCategory = {
             id: generateId(),
@@ -752,15 +801,20 @@ export function DineProvider({ children }: { children: ReactNode }) {
               updatedAt: createdAt,
             };
             menuRows.push(menuItem);
+            addRecipe("item", menuItem.id, item.recipe);
 
             item.variations?.forEach((variation, variationIndex) => {
-              variationRows.push({
+              const variationRecord: DineVariation = {
                 id: generateId(),
                 menuItemId: menuItem.id,
                 name: variation.name,
                 price: variation.price,
                 sortOrder: variationIndex,
-              });
+              };
+              variationRows.push(variationRecord);
+              // Only sizes that differ carry their own lines; "Full" inherits
+              // the base, which is the behaviour worth demonstrating.
+              addRecipe("variation", variationRecord.id, variation.recipe);
             });
 
             item.modifierGroups?.forEach((group, groupIndex) => {
@@ -774,13 +828,15 @@ export function DineProvider({ children }: { children: ReactNode }) {
               };
               groupRows.push(groupRecord);
               group.options.forEach((option, optionIndex) => {
-                modifierRows.push({
+                const modifierRecord: DineModifier = {
                   id: generateId(),
                   groupId: groupRecord.id,
                   name: option.name,
                   priceDelta: option.priceDelta,
                   sortOrder: optionIndex,
-                });
+                };
+                modifierRows.push(modifierRecord);
+                addRecipe("modifier", modifierRecord.id, option.recipe);
               });
             });
           });
@@ -800,6 +856,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
         dine_variations: variationRows,
         dine_modifier_groups: groupRows,
         dine_modifiers: modifierRows,
+        dine_materials: materialRows,
+        dine_recipe_lines: recipeRows,
       });
 
       setBusiness(record);
@@ -813,6 +871,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setVariations(variationRows);
       setModifierGroups(groupRows);
       setModifiers(modifierRows);
+      setMaterials(materialRows);
+      setRecipeLines(recipeRows);
       setStatus("ready");
     },
     []
