@@ -72,12 +72,20 @@
   },
   "posts": [
         {
-        "slug": "small-business-late-payments-2026-cash-flow",
-        "title": "Small Business Late Payments Hit a Record High in 2026: What $17.7K in Unpaid Invoices Is Actually Costing Owners",
-        "excerpt": "Nearly 3 in 5 small businesses now have invoices overdue by 30 days or more, up from under half last year. Here's what's driving the record, what it costs downstream, and the fixes the data says actually work.",
-        "date": "2026-08-06",
-        "category": "Business Finance",
-        "thumbnail": "/blog/thumbnails/listing/small-business-late-payments-2026-cash-flow.jpeg"
+          "slug": "setu-qr-menu-generator-vs-menutiger-2026",
+          "title": "MenuTiger Charges $17/Month for a QR Code Menu. Here's What You Get for Free Instead.",
+          "excerpt": "MenuTiger's free plan gives you 49 items and 200 orders before it pushes you to a $17/month plan. Setu's QR Menu Generator skips the hosting entirely — the whole menu lives inside the QR code itself. Here's an honest comparison of what each actually does.",
+          "date": "2026-08-11",
+          "category": "Menu Ops",
+          "thumbnail": "/blog/thumbnails/lisitng/setu-qr-menu-generator-vs-menutiger-2026.jpg"
+        },
+        {
+          "slug": "small-business-late-payments-2026-cash-flow",
+          "title": "Small Business Late Payments Hit a Record High in 2026: What $17.7K in Unpaid Invoices Is Actually Costing Owners",
+          "excerpt": "Nearly 3 in 5 small businesses now have invoices overdue by 30 days or more, up from under half last year. Here's what's driving the record, what it costs downstream, and the fixes the data says actually work.",
+          "date": "2026-08-06",
+          "category": "Business Finance",
+          "thumbnail": "/blog/thumbnails/listing/small-business-late-payments-2026-cash-flow.jpeg"
       },
       {
         "slug": "payroll-compliance-2026-outsourcing-checklist",
