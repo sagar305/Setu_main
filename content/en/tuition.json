@@ -1,0 +1,41 @@
+{
+  "seo": {
+    "title": "Setu Tuition — Coaching Class Management Software",
+    "description": "Setu Tuition is coaching class management software for attendance, fees, parent messaging and results, built for tuition teachers in India. Coming soon.",
+    "keywords": [
+      "Setu Tuition",
+      "coaching class management software",
+      "tuition management software India",
+      "tuition fees management software",
+      "coaching institute software"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Tuition — Coming Soon",
+    "headline": "Coaching Class Management Software for Tuition Teachers & Institutes",
+    "subheadline": "Attendance, fees, parent communication and results for tuition classes of any size — from a single home tutor to a multi-batch coaching institute."
+  },
+  "body": {
+    "headline": "What we're building",
+    "paragraphs": [
+      "The free Tuition Class Manager already runs a class end to end in the browser — students, batches, daily attendance, monthly fees, receipts and test results, entirely offline and without a login. Setu Tuition is what comes next when one teacher becomes a team.",
+      "Automated WhatsApp reminders that go out on their own instead of one tap per parent, a parent login that always shows the live fee and attendance position, multiple teachers with their own access, online fee collection that reconciles itself, and every branch of an institute visible in one place.",
+      "It is built on the same platform behind Setu Dine and the Browser Based POS, so the data you enter in the free tool today comes with you."
+    ]
+  },
+  "cta": {
+    "headline": "Want early access to Setu Tuition?",
+    "subtext": "Tell us about your class and we'll notify you as soon as Setu Tuition launches.",
+    "cta": {
+      "label": "Get notified",
+      "href": "/contact"
+    }
+  },
+  "crossSell": {
+    "text": "You don't have to wait — the free Tuition Class Manager works today, offline and without signup.",
+    "cta": {
+      "label": "Open the free tuition software",
+      "href": "/products/free-tuition-software"
+    }
+  }
+}

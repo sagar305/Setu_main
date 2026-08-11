@@ -58,6 +58,8 @@ export type ToolSlug =
   // Service businesses
   | "appointment-book"
   | "queue-management"
+  // Education
+  | "tuition-manager"
   // Payments / utilities
   | "upi-qr-generator"
   | "gst-calculator"
@@ -109,12 +111,19 @@ export type ToolCategory =
   | "finance"
   | "restaurant"
   | "service"
+  | "education"
   | "payments"
   | "documents"
   | "ai";
 
 /** Which paid Setu product this tool naturally leads a user toward (Q1). */
-export type PaidPath = "restaurant-pos" | "retail-pos" | "clinic" | "queue" | "platform";
+export type PaidPath =
+  | "restaurant-pos"
+  | "retail-pos"
+  | "clinic"
+  | "queue"
+  | "tuition"
+  | "platform";
 
 export type Integration = {
   /** The other tool involved. */
@@ -247,6 +256,36 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
       { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+    ],
+  },
+  {
+    slug: "tuition-manager",
+    name: "Tuition Class Manager",
+    category: "education",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-tuition-software",
+    owns: "students",
+    reads: ["business"],
+    writes: [
+      "students",
+      "batches",
+      "attendance",
+      "fee_dues",
+      "fee_payments",
+      "tests",
+      "marks",
+      "student_notes",
+      "enquiries",
+      "holidays",
+    ],
+    dependsOn: ["business-profile"],
+    paidPath: "tuition",
+    integrations: [
+      { with: "business-profile", ux: "Fee receipts carry your name, phone and UPI ID" },
+      { with: "upi-qr-generator", ux: "Parents pay a fee reminder straight from the link" },
+      { with: "expense-tracker", ux: "Track what the class costs against what it collects" },
     ],
   },
   {

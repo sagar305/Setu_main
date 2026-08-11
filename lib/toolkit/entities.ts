@@ -84,7 +84,18 @@ export type EntityName =
   | "settings"
   | "coa_accounts"
   | "journal_entries"
-  | "documents";
+  | "documents"
+  // Tuition Class Manager
+  | "students"
+  | "batches"
+  | "attendance"
+  | "fee_dues"
+  | "fee_payments"
+  | "tests"
+  | "marks"
+  | "student_notes"
+  | "enquiries"
+  | "holidays";
 
 /**
  * Permission tiers a tool holds against an entity it does not own (Chapter 5,
@@ -307,6 +318,97 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     ownedBy: "workspace",
     primaryEditor: "credit-note-generator",
     store: "documents",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  students: {
+    name: "students",
+    label: "Students",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "students",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  batches: {
+    name: "batches",
+    label: "Batches / Classes",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "batches",
+    // Deleting a batch un-enrols its students and changes what they owe.
+    dangerousOps: ["delete", "change-fee"],
+    status: "live",
+  },
+  attendance: {
+    name: "attendance",
+    label: "Attendance",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "attendance",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  fee_dues: {
+    name: "fee_dues",
+    label: "Fee Dues",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "fee_dues",
+    dangerousOps: ["delete", "waive"],
+    status: "live",
+  },
+  fee_payments: {
+    name: "fee_payments",
+    label: "Fee Payments",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "fee_payments",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  tests: {
+    name: "tests",
+    label: "Tests",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "tests",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  marks: {
+    name: "marks",
+    label: "Test Marks",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "marks",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  student_notes: {
+    name: "student_notes",
+    label: "Student Diary Notes",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "student_notes",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  enquiries: {
+    name: "enquiries",
+    label: "Admission Enquiries",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "enquiries",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  holidays: {
+    name: "holidays",
+    label: "Holidays",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "holidays",
     dangerousOps: ["delete"],
     status: "live",
   },

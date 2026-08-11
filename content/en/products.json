@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Products | POS, QR Menu & Business Software | Setu",
-    "description": "Explore Setu's products — the free Browser Based POS and QR Menu, plus Setu Dine and Setu Queue for restaurants, with Setu Retail and Setu Clinic coming soon.",
+    "description": "Explore Setu's products — the free Browser Based POS, QR Menu and Tuition Class Manager, plus Setu Dine and Setu Queue, with Retail and Clinic coming soon.",
     "keywords": [
       "Setu products",
       "Browser Based POS",
@@ -9,7 +9,9 @@
       "Setu Dine",
       "Setu Queue",
       "Setu Retail",
-      "Setu Clinic"
+      "Setu Clinic",
+      "Setu Tuition",
+      "Tuition Class Manager"
     ]
   },
   "hero": {
@@ -63,6 +65,29 @@
       }
     },
     {
+      "id": "free-tuition",
+      "status": "live",
+      "name": "Tuition Class Manager",
+      "headline": "Free tuition software, right in your browser",
+      "description": "A completely free class manager for tuition teachers and coaching classes. Students and batches, daily attendance, monthly fees that add themselves up, WhatsApp reminders to parents, test marks and shareable fee receipts — no login, no subscription, and it keeps working without internet.",
+      "features": [
+        "Batch-wise daily attendance in seconds",
+        "Works fully offline",
+        "Automatic monthly fee dues, concessions and one-off charges",
+        "Numbered fee receipts with shareable links and UPI payment",
+        "WhatsApp fee reminders and absence notices to parents",
+        "Tests with whole-batch marks entry and result sharing",
+        "Dated diary reminders and admission enquiry register",
+        "Attendance and collection reports with CSV exports",
+        "Bulk student import, PIN lock and backup / restore",
+        "Google Sheet sync as your own backup"
+      ],
+      "cta": {
+        "label": "Open the Tuition Class Manager — it's free",
+        "href": "/products/free-tuition-software"
+      }
+    },
+    {
       "id": "pos",
       "status": "live",
       "name": "Setu Dine",
@@ -108,6 +133,17 @@
       "cta": {
         "label": "Explore Setu Retail",
         "href": "/products/retail"
+      }
+    },
+    {
+      "id": "tuition",
+      "status": "coming-soon",
+      "name": "Setu Tuition",
+      "headline": "Coaching class management, coming soon",
+      "description": "Automated parent messaging, a live parent view, multiple teachers, online fee collection and multi-branch reporting for tuition classes and coaching institutes.",
+      "cta": {
+        "label": "Explore Setu Tuition",
+        "href": "/products/tuition"
       }
     },
     {

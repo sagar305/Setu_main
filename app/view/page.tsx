@@ -4,7 +4,7 @@ import { ShareViewer } from "@/components/toolkit/ShareViewer";
 export const metadata: Metadata = {
   title: "Shared document | Setu Technology",
   description:
-    "View a shared invoice, quotation, appointment or payment reminder created with a free Setu tool.",
+    "View a shared invoice, quotation, appointment, fee receipt, report or payment reminder created with a free Setu tool.",
   // Every shared document renders on this one route with its data in the URL
   // fragment, so there is nothing meaningful (or private) to index here.
   robots: { index: false, follow: true },
