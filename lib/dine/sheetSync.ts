@@ -26,7 +26,6 @@ import type {
   DineBillPayment,
   DineBusiness,
   DineCategory,
-  DineCreditEntry,
   DineCustomer,
   DineMenuItem,
   DineModifier,
@@ -66,7 +65,6 @@ export type DineWorkspaceSnapshot = DineMetaSnapshot & {
   recipeLines: DineRecipeLine[];
   stockMoves: DineStockMove[];
   reservations: DineReservation[];
-  creditEntries: DineCreditEntry[];
 };
 
 type TabPayload = { tab: string; headers: string[]; rows: (string | number | boolean)[][] };
@@ -83,7 +81,6 @@ export const DINE_SHEET_TABS = {
   recipes: "Recipes",
   stockMoves: "Stock Movements",
   reservations: "Bookings",
-  creditLedger: "Khata",
 } as const;
 
 /** Images would blow past the 50k-character cell limit, so they stay local. */
@@ -264,25 +261,6 @@ function reservationsTab(reservations: DineReservation[]): TabPayload {
   };
 }
 
-/** The khata as a signed ledger; the balance on each diner is its total. */
-function creditLedgerTab(entries: DineCreditEntry[]): TabPayload {
-  return {
-    tab: DINE_SHEET_TABS.creditLedger,
-    headers: ["Date", "Business Date", "Diner", "Why", "Change", "Bill", "Taken As", "Note", "_json"],
-    rows: entries.map((entry) => [
-      entry.createdAt,
-      entry.businessDate,
-      entry.customerName,
-      entry.reason,
-      toMajor(entry.change),
-      entry.billLabel,
-      entry.methodName,
-      entry.note,
-      JSON.stringify(entry),
-    ]),
-  };
-}
-
 function billsTab(bills: DineBill[]): TabPayload {
   return {
     tab: DINE_SHEET_TABS.bills,
@@ -451,10 +429,7 @@ export function buildDineTabPayloads(
       )
     );
   }
-  if (slices.includes("customers")) {
-    tabs.push(customersTab(snapshot.customers));
-    tabs.push(creditLedgerTab(snapshot.creditEntries));
-  }
+  if (slices.includes("customers")) tabs.push(customersTab(snapshot.customers));
   if (slices.includes("reservations")) tabs.push(reservationsTab(snapshot.reservations));
   if (slices.includes("bills")) {
     tabs.push(billsTab(snapshot.bills));
@@ -554,13 +529,12 @@ export type DineSheetPullResult = {
   /**
    * Absent — not empty — when the sheet has no such tab.
    *
-   * These two arrived with script v2. A restaurant still running v1 pulls a
-   * response with no Bookings or Khata tab at all, and an empty array there
-   * would read as "there are none" and wipe both stores. undefined means "this
-   * sheet knows nothing about them", which restore leaves alone.
+   * Bookings arrived with script v2. A restaurant still running v1 pulls a
+   * response with no Bookings tab at all, and an empty array there would read
+   * as "there are none" and wipe every booking. undefined means "this sheet
+   * knows nothing about them", which restore leaves alone.
    */
   reservations?: DineReservation[];
-  creditEntries?: DineCreditEntry[];
 };
 
 function parseJsonColumn<T>(rows: unknown[][]): T[] {
@@ -659,9 +633,6 @@ export async function pullFromDineSheet(url: string): Promise<DineSheetPullResul
     reservations: body.tabs[DINE_SHEET_TABS.reservations]
       ? parseJsonColumn<DineReservation>(body.tabs[DINE_SHEET_TABS.reservations])
       : undefined,
-    creditEntries: body.tabs[DINE_SHEET_TABS.creditLedger]
-      ? parseJsonColumn<DineCreditEntry>(body.tabs[DINE_SHEET_TABS.creditLedger])
-      : undefined,
   };
 }
 
@@ -716,7 +687,6 @@ export function buildBackupFromDineSheetPull(
       dine_stock_moves: pull.stockMoves,
       // Only when the sheet actually carried them — see DineSheetPullResult.
       ...(pull.reservations ? { dine_reservations: pull.reservations } : {}),
-      ...(pull.creditEntries ? { dine_credit_entries: pull.creditEntries } : {}),
     },
   };
 }
@@ -781,7 +751,7 @@ function writeTab_(name, values, keepExisting) {
 function pullAll_() {
   var names = [
     "Meta", "Menu", "Menu Options", "Customers", "Bills", "Bill Items", "Payments",
-    "Materials", "Recipes", "Stock Movements", "Bookings", "Khata"
+    "Materials", "Recipes", "Stock Movements", "Bookings"
   ];
   var ss = SpreadsheetApp.getActive();
   var tabs = {};

@@ -545,11 +545,20 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         )}
       </Card>
 
-      <Card icon={BookUser} title="Running accounts (khata)">
+      <Card icon={BookUser} title="Credit (udhaar)">
         <p className="text-sm text-muted">
-          Let regulars eat now and pay later. You choose who gets an account and what they may run
-          up; their bills can then be settled &ldquo;on account&rdquo;, and what everyone owes is
-          tracked on the Khata screen.
+          Let regulars eat now and pay later. What they owe is not kept here — it goes into the
+          shared{" "}
+          <a
+            href="/tools/customer-ledger"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-indigo underline underline-offset-2"
+          >
+            Customer Ledger
+          </a>
+          , the same book the Browser Based POS writes its udhaar sales to. One balance per person
+          for the whole business, settled and chased in one place.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
@@ -562,17 +571,18 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           <span>
             <span className="block text-sm font-semibold text-ink">Allow bills on account</span>
             <span className="mt-0.5 block text-xs text-muted">
-              Adds a Khata screen and an &ldquo;On account&rdquo; tender at payment. Off by default,
-              so nobody can be sent away without paying by tapping the wrong button.
+              Adds an &ldquo;On account&rdquo; tender at payment, for saved customers you have
+              marked as allowed. Off by default, so nobody can be sent away without paying by
+              tapping the wrong button.
             </span>
           </span>
         </label>
 
         {settings.creditEnabled && (
           <p className="text-xs text-muted">
-            Credit is per diner, not global: a diner has to be marked as allowed before their bill
-            can go on account. A limit warns the counter rather than blocking the bill — the middle
-            of a family finishing dinner is the wrong moment to refuse.
+            Only a saved customer can run a tab — never a walk-in — and you tick who is allowed when
+            you attach them to a table. The payment screen shows what they already owe before you
+            add to it. Settling, reminders and statements all happen in the Customer Ledger.
           </p>
         )}
       </Card>
@@ -671,8 +681,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
 
       <Card icon={Users} title="Customers and the Customer Ledger">
         <p className="text-sm text-muted">
-          Naming a diner on a ticket saves them here, and copies them into your shared workspace so
-          the{" "}
+          One customer book for the whole business. Saving a diner on a ticket copies them into your
+          shared workspace, and regulars first saved at the shop till or in the{" "}
           <a
             href="/tools/customer-ledger"
             target="_blank"
@@ -681,7 +691,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           >
             Customer Ledger
           </a>{" "}
-          and the other Setu tools see the same people.
+          appear in the picker here — so &ldquo;select a customer&rdquo; finds the same people
+          everywhere.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
@@ -698,9 +709,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               Share diners with the Customer Ledger
             </span>
             <span className="mt-0.5 block text-xs text-muted">
-              Copies name, phone and address across as you save them. It is one-way — Free Dine
-              keeps its own copy, so clearing another tool can never take your regulars with it.
-              Switch this off and diners stay in Free Dine only.
+              Copies name, phone and address across as you save them, and brings the other tools&apos;
+              customers in here. Free Dine keeps its own copy either way, so clearing another tool
+              can never take your regulars with it. Switch this off and diners stay in Free Dine
+              only — but bills can no longer go on account, because the ledger they would post to is
+              the shared one.
             </span>
           </span>
         </label>

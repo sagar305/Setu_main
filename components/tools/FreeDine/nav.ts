@@ -4,7 +4,6 @@ export type ScreenId =
   | "tables"
   | "stock"
   | "bookings"
-  | "khata"
   | "bills"
   | "reports"
   | "settings";

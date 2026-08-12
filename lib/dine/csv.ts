@@ -14,7 +14,6 @@
 import { formatPlain, parseAmount, toMajor } from "./money";
 import { fromQty, formatQty } from "./units";
 import {
-  CREDIT_REASON_LABELS,
   FOOD_TYPE_LABELS,
   RESERVATION_STATUS_LABELS,
   STOCK_MOVE_LABELS,
@@ -24,7 +23,6 @@ import {
   type DineBill,
   type DineBillItem,
   type DineCategory,
-  type DineCreditEntry,
   type DineMenuItem,
   type DineReservation,
   type DineModifier,
@@ -484,41 +482,6 @@ export function materialUsageCsv(
       formatQty(row.wasted, row.unit),
       toMajor(row.cost),
     ])
-  );
-}
-
-/**
- * The khata as a ledger.
- *
- * A signed Change column plus a running Balance, because the reason anyone
- * exports this is a disagreement about what somebody owes — and that argument
- * is settled by walking the history, not by looking at a total.
- */
-export function creditLedgerCsv(entries: DineCreditEntry[], currency: string): string {
-  const ordered = entries
-    .slice()
-    .sort(
-      (a, b) => a.customerName.localeCompare(b.customerName) || a.createdAt.localeCompare(b.createdAt)
-    );
-
-  const balances = new Map<string, number>();
-  return toCsv(
-    ["Date", "Business Date", "Diner", "Why", "Change", "Balance After", "Bill", "Taken As", "Note"],
-    ordered.map((entry) => {
-      const running = (balances.get(entry.customerId) ?? 0) + entry.change;
-      balances.set(entry.customerId, running);
-      return [
-        entry.createdAt,
-        entry.businessDate,
-        entry.customerName,
-        CREDIT_REASON_LABELS[entry.reason],
-        toMajor(entry.change),
-        toMajor(running),
-        entry.billLabel,
-        entry.methodName,
-        entry.note,
-      ];
-    })
   );
 }
 

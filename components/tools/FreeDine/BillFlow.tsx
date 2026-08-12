@@ -6,7 +6,7 @@ import { useDine, type SplitPlan, type TenderInput } from "@/lib/dine/store";
 import { amountDue } from "@/lib/dine/calc";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { kindOf, lineUnitPrice, type DineBill } from "@/lib/dine/types";
-import { overLimitBy } from "@/lib/dine/credit";
+import { balanceOf } from "@/lib/dine/credit";
 import { BillView, billShareText, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode } from "./printing";
 import {
@@ -473,7 +473,8 @@ async function billPdfBlob(node: HTMLElement): Promise<Blob> {
  * total whatever form they took.
  */
 function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }) {
-  const { paymentMethods, business, settings, customers, tickets, bills, payBill } = useDine();
+  const { paymentMethods, business, settings, customers, tickets, bills, ledgerEntries, payBill } =
+    useDine();
   const currency = business?.currency ?? "INR";
 
   const ticket = tickets.find((row) => row.id === bill.ticketId) ?? null;
@@ -492,6 +493,8 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
   const creditAllowed = Boolean(
     settings.creditEnabled && creditMethod && diner && diner.creditAllowed
   );
+  // What they already owe across the whole business, from the shared ledger.
+  const owedAlready = diner ? balanceOf(ledgerEntries, diner.id) : 0;
 
   const [tenders, setTenders] = useState<{ methodId: string; amount: string }[]>(() => {
     const rows: { methodId: string; amount: string }[] = [];
@@ -506,7 +509,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
     return rows;
   });
   const [busy, setBusy] = useState(false);
-  const [confirmOver, setConfirmOver] = useState(false);
+  const [error, setError] = useState("");
 
   const entered = tenders.reduce((sum, tender) => sum + parseAmount(tender.amount), 0);
   const remaining = amountDue(bill.total, [{ amount: entered }]);
@@ -533,7 +536,6 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
     })
     .reduce((sum, tender) => sum + parseAmount(tender.amount), 0);
 
-  const over = diner && onAccount > 0 ? overLimitBy(diner, onAccount) : 0;
   const advanceOverspent = Math.max(advanceSpent - advanceAvailable, 0);
 
   // Settling the last part of a ticket closes it, which discharges any advance
@@ -550,20 +552,19 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
     (onAccount > 0 && !creditAllowed);
 
   const submit = async () => {
-    // Going past a limit is the owner's call, not the software's — a family
-    // finishing dinner is the wrong moment to refuse, so it asks once.
-    if (over > 0 && !confirmOver) {
-      setConfirmOver(true);
-      return;
-    }
     setBusy(true);
     try {
       const rows: TenderInput[] = tenders
         .map((tender) => ({ methodId: tender.methodId, amount: parseAmount(tender.amount) }))
         .filter((tender) => tender.amount > 0 && tender.methodId);
       if (rows.length === 0) return;
+      setError("");
       await payBill(bill.id, rows);
       onClose();
+    } catch (caught) {
+      setError(
+        caught instanceof Error ? caught.message : "Could not record this payment."
+      );
     } finally {
       setBusy(false);
     }
@@ -668,14 +669,34 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
           </p>
         )}
 
-        {over > 0 && (
+        {onAccount > 0 && creditAllowed && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
             <p className="font-semibold">
-              This puts {diner?.name} {formatPaise(over, currency)} past their{" "}
-              {formatPaise(diner?.creditLimit ?? 0, currency)} limit.
+              {formatPaise(onAccount, currency)} goes on {diner?.name}&apos;s account.
             </p>
-            <p>{confirmOver ? "Tap again to allow it." : "You can still allow it."}</p>
+            <p>
+              {owedAlready > 0
+                ? `They already owe ${formatPaise(owedAlready, currency)} — this takes them to ${formatPaise(
+                    owedAlready + onAccount,
+                    currency
+                  )}.`
+                : "Nothing outstanding on their account before this."}
+            </p>
+            <a
+              href="/tools/customer-ledger"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline underline-offset-2"
+            >
+              Settle it in the Customer Ledger
+            </a>
           </div>
+        )}
+
+        {error && (
+          <p className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-700">
+            {error}
+          </p>
         )}
 
         <div className="rounded-xl bg-cream-paper p-3 text-sm">
@@ -710,7 +731,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
             <Check className="h-4 w-4" />
-            {busy ? "Saving…" : over > 0 && !confirmOver ? "Over the limit — allow?" : "Mark paid"}
+            {busy ? "Saving…" : "Mark paid"}
           </button>
         </div>
       </div>

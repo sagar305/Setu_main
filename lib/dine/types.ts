@@ -436,71 +436,16 @@ export type DineCustomer = {
   createdAt: string;
 
   /**
-   * May this diner eat now and pay later (khata)?
+   * May this diner eat now and pay later (udhaar)?
    *
-   * Off for everyone by default. Credit is a decision an owner makes about a
-   * particular person — a regular, a nearby office, a family account — and
-   * defaulting it on would let any walk-in leave without paying by tapping the
-   * wrong tender.
+   * The only credit field kept here, because it is a policy this restaurant
+   * holds about a person rather than a fact about them: the same customer may
+   * have an account at the restaurant and not at the shop next door. What they
+   * actually owe is not stored anywhere in Free Dine — it is the sum of their
+   * entries in the shared Customer Ledger, which is the one book every Setu
+   * tool reads and writes.
    */
   creditAllowed: boolean;
-  /** Ceiling on what they may owe, in paise. 0 = no ceiling. */
-  creditLimit: number;
-  /**
-   * What they owe right now, in paise. Positive = the restaurant is owed.
-   *
-   * Kept on the diner as well as in dine_credit_entries because the floor and
-   * the payment screen need it on every render, and summing a year of entries
-   * to draw a badge is the kind of thing that is fine in month one and slow in
-   * month twelve. The ledger stays the record of truth; this is its running
-   * total, updated in the same transaction as the entry that moves it.
-   */
-  creditBalance: number;
-};
-
-/** Why a diner's balance moved. */
-export type CreditReason =
-  | "bill"
-  | "settlement"
-  | "opening"
-  | "adjustment"
-  | "writeoff"
-  | "deposit";
-
-export const CREDIT_REASON_LABELS: Record<CreditReason, string> = {
-  bill: "Bill on account",
-  settlement: "Payment received",
-  opening: "Opening balance",
-  adjustment: "Adjustment",
-  writeoff: "Written off",
-  deposit: "Booking advance",
-};
-
-/**
- * One movement in a diner's khata.
- *
- * Double-entry in spirit: `change` is signed, positive when the diner owes
- * more. The sum of a diner's entries always equals their creditBalance, which
- * is what makes the running total safe to trust and a stock-take equivalent
- * possible if it ever drifts.
- */
-export type DineCreditEntry = {
-  id: string;
-  customerId: string;
-  /** Frozen at the time, so a renamed diner does not rewrite their history. */
-  customerName: string;
-  reason: CreditReason;
-  /** Signed, in paise. Positive increases what the diner owes. */
-  change: number;
-  /** Set when this entry came from putting a bill on account. */
-  billId: string | null;
-  billLabel: string;
-  /** How a settlement was taken (Cash, UPI); "" for charges. */
-  methodId: string;
-  methodName: string;
-  note: string;
-  businessDate: string;
-  createdAt: string;
 };
 
 export type ReservationStatus = "booked" | "seated" | "completed" | "cancelled" | "no-show";

@@ -13,7 +13,6 @@ import {
   Grid3x3,
   ChefHat,
   Boxes,
-  BookUser,
   CalendarClock,
 } from "lucide-react";
 import { DineProvider, useDine } from "@/lib/dine/store";
@@ -28,7 +27,6 @@ import { TablesScreen } from "./TablesScreen";
 import { BillsScreen } from "./BillsScreen";
 import { InventoryScreen } from "./InventoryScreen";
 import { ReservationsScreen } from "./ReservationsScreen";
-import { CreditScreen } from "./CreditScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 import { previewStyleSheet } from "./printing";
@@ -39,7 +37,6 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Receipt }[] = [
   { id: "tables", label: "Tables", icon: Grid3x3 },
   { id: "stock", label: "Stock", icon: Boxes },
   { id: "bookings", label: "Bookings", icon: CalendarClock },
-  { id: "khata", label: "Khata", icon: BookUser },
   { id: "bills", label: "Bills", icon: Receipt },
   { id: "reports", label: "Reports", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings },
@@ -191,9 +188,6 @@ function DineShell({
             </div>
             <div className={screen === "bookings" ? "" : "hidden"}>
               <ReservationsScreen onOpenTicket={setOpenTicketId} />
-            </div>
-            <div className={screen === "khata" ? "" : "hidden"}>
-              <CreditScreen />
             </div>
             <div className={screen === "bills" ? "" : "hidden"}>
               <BillsScreen externalQuery={query?.screen === "bills" ? query.value : undefined} />

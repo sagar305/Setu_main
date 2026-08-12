@@ -35,6 +35,7 @@ import {
   MessageCircle,
   Wallet,
   BookUser,
+  UserRound,
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
@@ -279,21 +280,21 @@ const GUESTS: Feature[] = [
   },
   {
     icon: BookUser,
-    title: "Khata for the regulars",
+    title: "Udhaar, in the ledger you already have",
     description:
-      "Let a regular, a nearby office or a family account eat now and pay later. You choose who, and how much they may run up; a limit warns the counter rather than refusing a family halfway through dinner.",
+      "Let a regular eat now and pay later. It is not a separate khata: the bill posts to the shared Customer Ledger, the same book the Browser Based POS writes its udhaar sales to — so a customer who runs a tab at the counter and at the table has one balance, not two that disagree.",
+  },
+  {
+    icon: UserRound,
+    title: "One customer book",
+    description:
+      "Pick a saved customer at the table, or add one with a name and phone number in the same breath. Regulars first saved at the shop till or in the Customer Ledger are already in the list, and the payment screen shows what they owe before you add to it.",
   },
   {
     icon: Receipt,
-    title: "A ledger, not a number",
+    title: "Settle it in one place",
     description:
-      "Every charge and every payment is an entry, and what someone owes is always the sum of them. When there is a disagreement about a khata, you settle it by walking the history — which is the only thing that ever settles one.",
-  },
-  {
-    icon: MessageCircle,
-    title: "Nudge without nagging",
-    description:
-      "A one-tap WhatsApp reminder with the balance, how long it has been running and your UPI id. Written to be sent as-is to someone you want back next week.",
+      "Payments, reminders and statements happen in the Customer Ledger for the whole business at once, rather than one screen per product. Free Dine's job is to put the charge in the right book and get out of the way.",
   },
 ];
 
@@ -361,7 +362,7 @@ const SECTIONS: { eyebrow: string; title: string; subtitle: string; items: Featu
     eyebrow: "Guests",
     title: "Bookings and running accounts",
     subtitle:
-      "Hold tables ahead of time, take an advance if you want one, and let regulars run a khata. Both optional, both off until you turn them on.",
+      "Hold tables ahead of time, take an advance if you want one, and let regulars pay later through the shared Customer Ledger. Both optional, both off until you turn them on.",
     items: GUESTS,
   },
   {
@@ -393,7 +394,11 @@ const DIFFERENCES: { capability: string; retail: string; dine: string }[] = [
     dine: "Raw materials, via recipes",
   },
   { capability: "Table bookings", retail: "—", dine: "Free or with an advance" },
-  { capability: "Pay later (khata)", retail: "—", dine: "Per diner, with a limit" },
+  {
+    capability: "Pay later (udhaar)",
+    retail: "Customer Ledger",
+    dine: "Same Customer Ledger",
+  },
 ];
 
 const FREE_VS_PAID: { feature: string; free: string; paid: string }[] = [
@@ -481,10 +486,15 @@ const FAQ_ITEMS = [
   {
     question: "Can regulars eat now and pay later?",
     answer:
-      "Yes. Turn on running accounts and mark which diners may use one, with an optional limit. Their bills can then be settled 'on account', and the Khata screen shows what everyone owes and how long it has been running. A limit warns the counter rather than blocking the bill, because the middle of a family finishing dinner is the wrong moment to refuse.",
+      "Yes, through the shared Customer Ledger rather than a separate khata inside the till. Turn on credit, attach a saved customer to the table and mark them as allowed, and their bill can be settled 'on account'. The charge posts to the Customer Ledger — the same book the Browser Based POS writes udhaar sales to — so a customer who runs a tab at the shop and at the table has one balance. Settling and reminders happen there, for the whole business at once.",
   },
   {
-    question: "Does money owed on khata count as sales?",
+    question: "Can I pick a saved customer at the table?",
+    answer:
+      "Yes. The customer picker lists everyone in your shared book with their phone number, so a regular first saved at the shop till or in the Customer Ledger is already there. You can also add a new one with a name and phone in the same step, without leaving the table.",
+  },
+  {
+    question: "Does money owed on account count as sales?",
     answer:
       "The bill counts as a sale on the day it was rung up, because the food left the kitchen that day. What changes is the cash: the reports show what is owed on account and what is held as booking advances separately from the takings, so you can tell the difference between a good night and a night everyone put on a tab.",
   },
@@ -516,8 +526,8 @@ const softwareApplicationSchema = {
     "Table bookings, free or against an advance",
     "WhatsApp confirmations, reminders and cancellations",
     "Advances carried onto the guest's bill",
-    "Customer credit (khata) with per-diner limits",
-    "Khata ledger with ageing and WhatsApp reminders",
+    "Credit (udhaar) posted to the shared Customer Ledger",
+    "Saved-customer picker with phone numbers",
     "Split bills by item, equal share or amount",
     "Merge tables into one bill",
     "GST with per-item rates and CGST/SGST breakup",

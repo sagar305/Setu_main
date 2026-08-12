@@ -49,7 +49,7 @@ export function ReportsScreen() {
     todayDate,
     materials,
     stockMoves,
-    customers,
+    ledgerEntries,
     reservations,
   } = useDine();
   const currency = business?.currency ?? "INR";
@@ -211,8 +211,8 @@ export function ReportsScreen() {
             {settings.creditEnabled && (
               <StatCard
                 label="Owed on account"
-                value={formatPaise(totalOutstanding(customers), currency)}
-                sub={`${customers.filter((row) => row.creditBalance > 0).length} diner(s), as of now`}
+                value={formatPaise(totalOutstanding(ledgerEntries), currency)}
+                sub="In the shared Customer Ledger"
               />
             )}
             {settings.reservationsEnabled && (
