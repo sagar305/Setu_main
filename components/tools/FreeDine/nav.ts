@@ -3,6 +3,8 @@ export type ScreenId =
   | "menu"
   | "tables"
   | "stock"
+  | "bookings"
+  | "khata"
   | "bills"
   | "reports"
   | "settings";

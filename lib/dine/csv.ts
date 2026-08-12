@@ -14,7 +14,9 @@
 import { formatPlain, parseAmount, toMajor } from "./money";
 import { fromQty, formatQty } from "./units";
 import {
+  CREDIT_REASON_LABELS,
   FOOD_TYPE_LABELS,
+  RESERVATION_STATUS_LABELS,
   STOCK_MOVE_LABELS,
   type DineMaterial,
   type DineRecipeLine,
@@ -22,7 +24,9 @@ import {
   type DineBill,
   type DineBillItem,
   type DineCategory,
+  type DineCreditEntry,
   type DineMenuItem,
+  type DineReservation,
   type DineModifier,
   type DineModifierGroup,
   type DineVariation,
@@ -480,5 +484,81 @@ export function materialUsageCsv(
       formatQty(row.wasted, row.unit),
       toMajor(row.cost),
     ])
+  );
+}
+
+/**
+ * The khata as a ledger.
+ *
+ * A signed Change column plus a running Balance, because the reason anyone
+ * exports this is a disagreement about what somebody owes — and that argument
+ * is settled by walking the history, not by looking at a total.
+ */
+export function creditLedgerCsv(entries: DineCreditEntry[], currency: string): string {
+  const ordered = entries
+    .slice()
+    .sort(
+      (a, b) => a.customerName.localeCompare(b.customerName) || a.createdAt.localeCompare(b.createdAt)
+    );
+
+  const balances = new Map<string, number>();
+  return toCsv(
+    ["Date", "Business Date", "Diner", "Why", "Change", "Balance After", "Bill", "Taken As", "Note"],
+    ordered.map((entry) => {
+      const running = (balances.get(entry.customerId) ?? 0) + entry.change;
+      balances.set(entry.customerId, running);
+      return [
+        entry.createdAt,
+        entry.businessDate,
+        entry.customerName,
+        CREDIT_REASON_LABELS[entry.reason],
+        toMajor(entry.change),
+        toMajor(running),
+        entry.billLabel,
+        entry.methodName,
+        entry.note,
+      ];
+    })
+  );
+}
+
+/** Bookings, with the advance split into what was asked and what arrived. */
+export function reservationsCsv(reservations: DineReservation[], currency: string): string {
+  return toCsv(
+    [
+      "When",
+      "Business Date",
+      "Guest",
+      "Phone",
+      "Guests",
+      "Table",
+      "Area",
+      "Minutes",
+      "Status",
+      "Advance Asked",
+      "Advance Paid",
+      "Advance Outcome",
+      "Occasion",
+      "Note",
+    ],
+    reservations
+      .slice()
+      .sort((a, b) => a.startsAt.localeCompare(b.startsAt))
+      .map((row) => [
+        row.startsAt,
+        row.businessDate,
+        row.guestName,
+        row.phone,
+        row.partySize,
+        row.tableName,
+        row.areaName,
+        row.durationMinutes,
+        RESERVATION_STATUS_LABELS[row.status],
+        toMajor(row.depositRequired),
+        toMajor(row.depositPaid),
+        row.depositOutcome,
+        row.occasion,
+        row.note,
+      ])
   );
 }

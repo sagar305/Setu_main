@@ -8,10 +8,10 @@
 
 const DB_NAME = "DINE_DATABASE";
 // v2 adds dine_sync_queue (Google Sheet dirty-flags); v3 adds the raw-material
-// stores (materials, recipe lines, stock moves). The upgrade handler creates
-// any missing store, so bumping this migrates an existing database in place
-// without touching its rows.
-const DB_VERSION = 3;
+// stores (materials, recipe lines, stock moves); v4 adds bookings and the
+// khata ledger. The upgrade handler creates any missing store, so bumping this
+// migrates an existing database in place without touching its rows.
+const DB_VERSION = 4;
 
 export const DINE_STORES = [
   "dine_business",
@@ -35,6 +35,8 @@ export const DINE_STORES = [
   "dine_materials",
   "dine_recipe_lines",
   "dine_stock_moves",
+  "dine_reservations",
+  "dine_credit_entries",
 ] as const;
 
 export type DineStoreName = (typeof DINE_STORES)[number];
@@ -59,6 +61,15 @@ const INDEXES: Partial<Record<DineStoreName, [name: string, keyPath: string][]>>
   ],
   dine_stock_moves: [
     ["materialId", "materialId"],
+    ["businessDate", "businessDate"],
+  ],
+  dine_reservations: [
+    ["tableId", "tableId"],
+    ["businessDate", "businessDate"],
+    ["customerId", "customerId"],
+  ],
+  dine_credit_entries: [
+    ["customerId", "customerId"],
     ["businessDate", "businessDate"],
   ],
 };
@@ -264,6 +275,54 @@ export async function dineApplyStock<TMaterial>(
 
   await txDone(tx);
   return result;
+}
+
+/**
+ * Move diners' credit balances and write everything the change belongs with,
+ * in one transaction.
+ *
+ * Same reasoning as dineApplyStock, with more at stake. Two tabs putting bills
+ * on the same office account at once would each read "owes 2,400", each add
+ * their own charge, and each write their own answer — losing one of the two
+ * bills from what the diner owes. Reading the balances *inside* the write
+ * makes that impossible.
+ *
+ * Unlike stock, this also takes the rest of the change (the bill, its tenders,
+ * the ticket, the ledger entry) and writes it here too. A bill that is marked
+ * paid on account while the charge fails to land is a meal given away, so the
+ * two cannot be allowed to be separate transactions.
+ */
+export async function dineApplyCredit<TCustomer>(
+  customerIds: string[],
+  alsoWrite: DineStoreName[],
+  plan: (current: Map<string, TCustomer>) => Partial<Record<DineStoreName, unknown[]>>
+): Promise<Partial<Record<DineStoreName, unknown[]>>> {
+  const unique = Array.from(new Set(customerIds));
+  const db = await openDineDb();
+  const stores = Array.from(
+    new Set<DineStoreName>(["dine_customers", "dine_credit_entries", ...alsoWrite])
+  );
+  const tx = db.transaction(stores, "readwrite");
+
+  const customerStore = tx.objectStore("dine_customers");
+  const current = new Map<string, TCustomer>();
+  for (const id of unique) {
+    const record = await requestToPromise(
+      customerStore.get(id) as IDBRequest<TCustomer | undefined>
+    );
+    if (record) current.set(id, record);
+  }
+
+  const writes = plan(current);
+  for (const store of Object.keys(writes) as DineStoreName[]) {
+    const objectStore = tx.objectStore(store);
+    for (const value of writes[store] ?? []) {
+      objectStore.put(value);
+    }
+  }
+
+  await txDone(tx);
+  return writes;
 }
 
 /** Wipe every Dine store. Never touches the Browser Based POS database. */

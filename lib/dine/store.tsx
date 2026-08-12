@@ -28,6 +28,7 @@ import {
 import {
   DINE_STORES,
   dineAllocate,
+  dineApplyCredit,
   dineApplyStock,
   dineBatch,
   dineClearAll,
@@ -43,6 +44,7 @@ import {
   type RecipeIndex,
 } from "./recipe";
 import { blendCost, costPerUnitFrom, toQty, type BaseUnit } from "./units";
+import { formatSlot } from "./reservation";
 import { createDineBroadcast, type DineBroadcast } from "./sync";
 import {
   buildBackupFromDineSheetPull,
@@ -73,6 +75,8 @@ import {
   type SampleRecipeLine,
 } from "./sampleMenu";
 import {
+  ADVANCE_METHOD_NAME,
+  CREDIT_METHOD_NAME,
   DEFAULT_DINE_SETTINGS,
   DEFAULT_PAYMENT_METHODS,
   DINE_SYNC_SLICES,
@@ -81,6 +85,7 @@ import {
   formatSeriesNumber,
   generateId,
   isBillable,
+  kindOf,
   kotStatusOf,
   lineTotal,
   lineUnitPrice,
@@ -92,8 +97,10 @@ import {
   type DineBillPayment,
   type DineBusiness,
   type DineCategory,
+  type DineCreditEntry,
   type DineCustomer,
   type DineKot,
+  type DineReservation,
   type DineMenuItem,
   type DineModifier,
   type DineModifierGroup,
@@ -107,6 +114,8 @@ import {
   type DineRecipeLine,
   type DineStockMove,
   type DineSyncDirtyRow,
+  type CreditReason,
+  type PaymentMethodKind,
   type RecipeOwnerType,
   type StockMoveReason,
   type DineSyncSlice,
@@ -118,7 +127,14 @@ import {
 export type DineStatus = "loading" | "welcome" | "setup" | "ready" | "error";
 
 /** Derived state of a table on the floor (FR-3.2) — never stored, always computed. */
-export type TableState = "free" | "occupied" | "billed";
+/**
+ * How a table reads on the floor.
+ *
+ * "reserved" is a display state only: it is a free table held by a booking,
+ * which depends on the current time, and floorTables is a memo with no clock
+ * in it. The floor screen derives it and passes it to the badge.
+ */
+export type TableState = "free" | "occupied" | "billed" | "reserved";
 
 export type FloorTable = {
   table: DineTable;
@@ -182,6 +198,36 @@ export type SplitPlan =
   | { mode: "amount"; amounts: number[] };
 
 export type TenderInput = { methodId: string; amount: number; note?: string };
+
+/**
+ * Editable fields of a diner.
+ *
+ * creditBalance is absent on purpose — see updateCustomer. What someone owes
+ * is the sum of their ledger, and no form gets to overwrite it.
+ */
+export type CustomerInput = {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  notes: string;
+  creditAllowed?: boolean;
+  creditLimit?: number;
+};
+
+export type ReservationInput = {
+  customerId?: string | null;
+  guestName: string;
+  phone: string;
+  partySize: number;
+  tableId: string | null;
+  /** Local ISO timestamp. */
+  startsAt: string;
+  durationMinutes: number;
+  depositRequired: number;
+  occasion: string;
+  note: string;
+};
 
 type DineContextValue = {
   status: DineStatus;
@@ -281,9 +327,45 @@ type DineContextValue = {
   payBill: (billId: string, tenders: TenderInput[]) => Promise<void>;
   cancelBill: (billId: string, reason: string) => Promise<void>;
 
-  createCustomer: (input: Omit<DineCustomer, "id" | "createdAt">) => Promise<DineCustomer>;
-  updateCustomer: (id: string, input: Omit<DineCustomer, "id" | "createdAt">) => Promise<void>;
+  createCustomer: (input: CustomerInput) => Promise<DineCustomer>;
+  updateCustomer: (id: string, input: CustomerInput) => Promise<void>;
   deleteCustomer: (id: string) => Promise<void>;
+
+  creditEntries: DineCreditEntry[];
+  /** Take money against what a diner owes. */
+  settleCredit: (
+    customerId: string,
+    amount: number,
+    methodId: string,
+    note: string
+  ) => Promise<void>;
+  /** Opening balance, correction, or writing a bad debt off. */
+  adjustCredit: (
+    customerId: string,
+    change: number,
+    reason: CreditReason,
+    note: string
+  ) => Promise<void>;
+
+  reservations: DineReservation[];
+  createReservation: (input: ReservationInput) => Promise<DineReservation>;
+  updateReservation: (id: string, input: ReservationInput) => Promise<DineReservation | null>;
+  takeReservationDeposit: (
+    id: string,
+    amount: number,
+    methodId: string
+  ) => Promise<DineReservation | null>;
+  seatReservation: (id: string, tableId?: string | null) => Promise<DineTicket | null>;
+  cancelReservation: (
+    id: string,
+    reason: string,
+    depositOutcome?: "refunded" | "forfeited"
+  ) => Promise<DineReservation | null>;
+  markReservationNoShow: (
+    id: string,
+    depositOutcome?: "refunded" | "forfeited"
+  ) => Promise<DineReservation | null>;
+  deleteReservation: (id: string) => Promise<void>;
 
   addPaymentMethod: (name: string) => Promise<void>;
   deletePaymentMethod: (id: string) => Promise<void>;
@@ -336,6 +418,23 @@ type DineContextValue = {
 };
 
 /**
+ * Fill in the credit fields on a diner saved before credit existed.
+ *
+ * Applied on every read rather than as a one-off migration, because rows also
+ * arrive from a backup file and from a Google Sheet pulled back into a fresh
+ * browser — a migration that only ran on upgrade would miss both, and an
+ * undefined balance turns every total in the Khata screen into NaN.
+ */
+function withCreditDefaults(customer: DineCustomer): DineCustomer {
+  return {
+    ...customer,
+    creditAllowed: customer.creditAllowed ?? false,
+    creditLimit: customer.creditLimit ?? 0,
+    creditBalance: customer.creditBalance ?? 0,
+  };
+}
+
+/**
  * Which sync slice each store belongs to.
  *
  * Ticket, KOT and sync-queue stores map to nothing on purpose: they are work
@@ -354,6 +453,8 @@ const STORE_TO_SLICE: Partial<Record<DineStoreName, DineSyncSlice>> = {
   dine_modifier_groups: "menu",
   dine_modifiers: "menu",
   dine_customers: "customers",
+  dine_credit_entries: "customers",
+  dine_reservations: "reservations",
   dine_materials: "inventory",
   dine_recipe_lines: "inventory",
   dine_stock_moves: "inventory",
@@ -388,6 +489,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
   const [billPayments, setBillPayments] = useState<DineBillPayment[]>([]);
   const [paymentMethods, setPaymentMethods] = useState<DinePaymentMethod[]>([]);
   const [customers, setCustomers] = useState<DineCustomer[]>([]);
+  const [creditEntries, setCreditEntries] = useState<DineCreditEntry[]>([]);
+  const [reservations, setReservations] = useState<DineReservation[]>([]);
   const [materials, setMaterials] = useState<DineMaterial[]>([]);
   const [recipeLines, setRecipeLines] = useState<DineRecipeLine[]>([]);
   const [stockMoves, setStockMoves] = useState<DineStockMove[]>([]);
@@ -403,6 +506,33 @@ export function DineProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     settingsRef.current = settings;
   }, [settings]);
+
+  // Same reason: the credit and booking actions read these from inside
+  // callbacks that are deliberately stable for the life of the provider.
+  const customersRef = useRef(customers);
+  useEffect(() => {
+    customersRef.current = customers;
+  }, [customers]);
+
+  const paymentMethodsRef = useRef(paymentMethods);
+  useEffect(() => {
+    paymentMethodsRef.current = paymentMethods;
+  }, [paymentMethods]);
+
+  const reservationsRef = useRef(reservations);
+  useEffect(() => {
+    reservationsRef.current = reservations;
+  }, [reservations]);
+
+  const tablesRef = useRef(tables);
+  useEffect(() => {
+    tablesRef.current = tables;
+  }, [tables]);
+
+  const areasRef = useRef(areas);
+  useEffect(() => {
+    areasRef.current = areas;
+  }, [areas]);
 
   // Cross-tab live sync. Created lazily so the provider can render on the
   // server, and torn down with the provider.
@@ -479,6 +609,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
       materialRows,
       recipeRows,
       stockMoveRows,
+      reservationRows,
+      creditRows,
     ] = await Promise.all([
       dineGetAll<DineBusiness>("dine_business"),
       dineGetAll<DineSettings>("dine_settings"),
@@ -501,6 +633,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
       dineGetAll<DineMaterial>("dine_materials"),
       dineGetAll<DineRecipeLine>("dine_recipe_lines"),
       dineGetAll<DineStockMove>("dine_stock_moves"),
+      dineGetAll<DineReservation>("dine_reservations"),
+      dineGetAll<DineCreditEntry>("dine_credit_entries"),
     ]);
 
     setBusiness(businessRows[0] ?? null);
@@ -519,7 +653,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
     setBillItems(billItemRows);
     setBillPayments(billPaymentRows);
     setPaymentMethods(paymentRows);
-    setCustomers(customerRows);
+    setCustomers(customerRows.map(withCreditDefaults));
+    setCreditEntries(creditRows);
+    setReservations(reservationRows);
     setMaterials(materialRows);
     setRecipeLines(recipeRows);
     setStockMoves(stockMoveRows);
@@ -593,7 +729,13 @@ export function DineProvider({ children }: { children: ReactNode }) {
             setPaymentMethods(await dineGetAll<DinePaymentMethod>(store));
             return;
           case "dine_customers":
-            setCustomers(await dineGetAll<DineCustomer>(store));
+            setCustomers((await dineGetAll<DineCustomer>(store)).map(withCreditDefaults));
+            return;
+          case "dine_credit_entries":
+            setCreditEntries(await dineGetAll<DineCreditEntry>(store));
+            return;
+          case "dine_reservations":
+            setReservations(await dineGetAll<DineReservation>(store));
             return;
           case "dine_materials":
             setMaterials(await dineGetAll<DineMaterial>(store));
@@ -631,6 +773,8 @@ export function DineProvider({ children }: { children: ReactNode }) {
       materials,
       recipeLines,
       stockMoves,
+      reservations,
+      creditEntries,
     };
   });
 
@@ -1390,8 +1534,19 @@ export function DineProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const createCustomer = useCallback(
-    async (input: Omit<DineCustomer, "id" | "createdAt">) => {
-      const record: DineCustomer = { ...input, id: generateId(), createdAt: nowIso() };
+    async (input: CustomerInput) => {
+      const record: DineCustomer = {
+        id: generateId(),
+        createdAt: nowIso(),
+        name: input.name,
+        phone: input.phone,
+        email: input.email,
+        address: input.address,
+        notes: input.notes,
+        creditAllowed: input.creditAllowed ?? false,
+        creditLimit: input.creditLimit ?? 0,
+        creditBalance: 0,
+      };
       await commit({ dine_customers: [record] });
       setCustomers((previous) => [...previous, record]);
       void publishCustomer(record);
@@ -1400,11 +1555,31 @@ export function DineProvider({ children }: { children: ReactNode }) {
     [commit, publishCustomer]
   );
 
+  /**
+   * Edit a diner's details and credit terms.
+   *
+   * Deliberately cannot touch creditBalance. What someone owes is the sum of
+   * their ledger, and a form that could overwrite it directly would let a
+   * mis-tap erase a debt with no entry explaining where it went. Moving a
+   * balance goes through adjustCredit, which writes the entry that accounts
+   * for it.
+   */
   const updateCustomer = useCallback(
-    async (id: string, input: Omit<DineCustomer, "id" | "createdAt">) => {
+    async (id: string, input: CustomerInput) => {
       setCustomers((previous) => {
         const next = previous.map((customer) =>
-          customer.id === id ? { ...customer, ...input } : customer
+          customer.id === id
+            ? {
+                ...customer,
+                name: input.name,
+                phone: input.phone,
+                email: input.email,
+                address: input.address,
+                notes: input.notes,
+                creditAllowed: input.creditAllowed ?? customer.creditAllowed,
+                creditLimit: input.creditLimit ?? customer.creditLimit,
+              }
+            : customer
         );
         const changed = next.find((customer) => customer.id === id);
         if (changed) {
@@ -1417,10 +1592,136 @@ export function DineProvider({ children }: { children: ReactNode }) {
     [commit, publishCustomer]
   );
 
-  const deleteCustomer = useCallback(async (id: string) => {
-    await commit({}, { dine_customers: [id] });
-    setCustomers((previous) => previous.filter((customer) => customer.id !== id));
-  }, []);
+  /** Refuses while money is outstanding — deleting the diner loses the debt. */
+  const deleteCustomer = useCallback(
+    async (id: string) => {
+      const customer = customersRef.current.find((row) => row.id === id);
+      if (customer && customer.creditBalance !== 0) return;
+      await commit({}, { dine_customers: [id] });
+      setCustomers((previous) => previous.filter((customer) => customer.id !== id));
+    },
+    [commit]
+  );
+
+  /**
+   * Move a diner's balance and write the entry that explains it, atomically.
+   *
+   * The balance is read inside the write (see dineApplyCredit), so two tabs
+   * charging the same account at the same moment cannot both start from the
+   * same figure. `alsoWrite` carries whatever else belongs with the change —
+   * for a bill on account that is the bill, its tenders and the ticket, all of
+   * which have to land with the charge or not at all.
+   */
+  const postCredit = useCallback(
+    async (
+      entryInput: Omit<DineCreditEntry, "id" | "customerName" | "businessDate" | "createdAt">,
+      alsoWrite: Partial<Record<DineStoreName, unknown[]>> = {}
+    ): Promise<DineCreditEntry | null> => {
+      if (entryInput.change === 0) return null;
+      const at = nowIso();
+      const businessDate = businessDateOf(at, settingsRef.current.dayStartHour);
+      const extraStores = Object.keys(alsoWrite) as DineStoreName[];
+
+      let entry: DineCreditEntry | null = null;
+      let nextCustomer: DineCustomer | null = null;
+
+      const writes = await dineApplyCredit<DineCustomer>(
+        [entryInput.customerId],
+        [...extraStores, "dine_sync_queue"],
+        (current) => {
+          const stored = current.get(entryInput.customerId);
+          if (!stored) return alsoWrite;
+          const customer = withCreditDefaults(stored);
+
+          entry = {
+            ...entryInput,
+            id: generateId(),
+            customerName: customer.name,
+            businessDate,
+            createdAt: at,
+          };
+          nextCustomer = {
+            ...customer,
+            creditBalance: customer.creditBalance + entryInput.change,
+          };
+
+          // Same dirty-marking commit() does, since this bypasses it to keep
+          // the read and the write inside one transaction.
+          const slices = Array.from(
+            new Set(
+              [...extraStores, "dine_customers", "dine_credit_entries"]
+                .map((store) => STORE_TO_SLICE[store as DineStoreName])
+                .filter(Boolean) as DineSyncSlice[]
+            )
+          );
+          const dirtyRows: DineSyncDirtyRow[] = slices.map((id) => ({ id, dirtyAt: at }));
+
+          return {
+            ...alsoWrite,
+            dine_customers: [nextCustomer],
+            dine_credit_entries: [entry],
+            dine_sync_queue: dirtyRows,
+          };
+        }
+      );
+
+      announce(Object.keys(writes) as DineStoreName[]);
+      const slices = Array.from(
+        new Set(
+          (Object.keys(writes) as DineStoreName[])
+            .map((store) => STORE_TO_SLICE[store])
+            .filter(Boolean) as DineSyncSlice[]
+        )
+      );
+      if (slices.length) {
+        setDirtySlices((previous) => Array.from(new Set([...previous, ...slices])));
+      }
+
+      if (entry) setCreditEntries((previous) => [...previous, entry as DineCreditEntry]);
+      if (nextCustomer) {
+        const saved = nextCustomer as DineCustomer;
+        setCustomers((previous) => previous.map((row) => (row.id === saved.id ? saved : row)));
+      }
+      return entry;
+    },
+    [announce]
+  );
+
+  /** Take money against what a diner owes. */
+  const settleCredit = useCallback(
+    async (customerId: string, amount: number, methodId: string, note: string) => {
+      if (amount <= 0) return;
+      const method = paymentMethodsRef.current.find((row) => row.id === methodId);
+      await postCredit({
+        customerId,
+        reason: "settlement",
+        change: -amount,
+        billId: null,
+        billLabel: "",
+        methodId,
+        methodName: method?.name ?? "Cash",
+        note,
+      });
+    },
+    [postCredit]
+  );
+
+  /** An opening balance, a correction, or writing a bad debt off. */
+  const adjustCredit = useCallback(
+    async (customerId: string, change: number, reason: CreditReason, note: string) => {
+      await postCredit({
+        customerId,
+        reason,
+        change,
+        billId: null,
+        billLabel: "",
+        methodId: "",
+        methodName: "",
+        note,
+      });
+    },
+    [postCredit]
+  );
 
   // ---------------------------------------------------------------------
   // Raw materials, recipes and stock
@@ -2192,6 +2493,225 @@ export function DineProvider({ children }: { children: ReactNode }) {
   );
 
   // ---------------------------------------------------------------------
+  // Reservations
+  // ---------------------------------------------------------------------
+
+  /**
+   * Take a booking.
+   *
+   * The deposit is only *asked for* here. Money is recorded by
+   * takeReservationDeposit when it actually arrives, so a table booked over
+   * the phone with "₹500 advance, they'll pay on UPI tonight" never counts
+   * cash the restaurant does not hold.
+   */
+  const createReservation = useCallback(
+    async (input: ReservationInput) => {
+      const at = nowIso();
+      const table = input.tableId ? tablesRef.current.find((row) => row.id === input.tableId) : null;
+      const area = table ? areasRef.current.find((row) => row.id === table.areaId) : null;
+
+      let customerId = input.customerId ?? null;
+      if (!customerId && input.guestName.trim()) {
+        const match = customersRef.current.find(
+          (row) =>
+            row.phone.replace(/\D/g, "") !== "" &&
+            row.phone.replace(/\D/g, "") === input.phone.replace(/\D/g, "")
+        );
+        if (match) customerId = match.id;
+      }
+
+      const record: DineReservation = {
+        id: generateId(),
+        customerId,
+        guestName: input.guestName.trim(),
+        phone: input.phone.trim(),
+        partySize: Math.max(input.partySize, 1),
+        tableId: table?.id ?? null,
+        tableName: table?.name ?? "",
+        areaName: area?.name ?? "",
+        startsAt: input.startsAt,
+        durationMinutes: Math.max(input.durationMinutes, 15),
+        status: "booked",
+        depositRequired: Math.max(input.depositRequired, 0),
+        depositPaid: 0,
+        depositMethodId: "",
+        depositMethodName: "",
+        depositPaidAt: null,
+        depositOutcome: "",
+        ticketId: null,
+        occasion: input.occasion.trim(),
+        note: input.note.trim(),
+        cancelReason: "",
+        businessDate: businessDateOf(input.startsAt, settingsRef.current.dayStartHour),
+        createdAt: at,
+        updatedAt: at,
+      };
+
+      await commit({ dine_reservations: [record] });
+      setReservations((previous) => [...previous, record]);
+      return record;
+    },
+    [commit]
+  );
+
+  const patchReservation = useCallback(
+    async (id: string, patch: Partial<DineReservation>) => {
+      const current = reservationsRef.current.find((row) => row.id === id);
+      if (!current) return null;
+      const next: DineReservation = { ...current, ...patch, updatedAt: nowIso() };
+      await commit({ dine_reservations: [next] });
+      setReservations((previous) => previous.map((row) => (row.id === id ? next : row)));
+      return next;
+    },
+    [commit]
+  );
+
+  const updateReservation = useCallback(
+    async (id: string, input: ReservationInput) => {
+      const table = input.tableId ? tablesRef.current.find((row) => row.id === input.tableId) : null;
+      const area = table ? areasRef.current.find((row) => row.id === table.areaId) : null;
+      return patchReservation(id, {
+        customerId: input.customerId ?? null,
+        guestName: input.guestName.trim(),
+        phone: input.phone.trim(),
+        partySize: Math.max(input.partySize, 1),
+        tableId: table?.id ?? null,
+        tableName: table?.name ?? "",
+        areaName: area?.name ?? "",
+        startsAt: input.startsAt,
+        durationMinutes: Math.max(input.durationMinutes, 15),
+        depositRequired: Math.max(input.depositRequired, 0),
+        occasion: input.occasion.trim(),
+        note: input.note.trim(),
+        businessDate: businessDateOf(input.startsAt, settingsRef.current.dayStartHour),
+      });
+    },
+    [patchReservation]
+  );
+
+  /**
+   * Record an advance against a booking.
+   *
+   * Not a sale, and deliberately not a bill: this is money held against a meal
+   * that has not happened. It becomes revenue when it comes off the ticket the
+   * party eats (see seatReservation), or it is refunded or forfeited when they
+   * do not come. Booking a table on a regular's khata is allowed too, which is
+   * why a credit tender posts to the ledger instead.
+   */
+  const takeReservationDeposit = useCallback(
+    async (id: string, amount: number, methodId: string) => {
+      if (amount <= 0) return null;
+      const current = reservationsRef.current.find((row) => row.id === id);
+      if (!current) return null;
+      const method = paymentMethodsRef.current.find((row) => row.id === methodId);
+
+      if (method && kindOf(method) === "credit") {
+        if (!current.customerId) return null;
+        await postCredit({
+          customerId: current.customerId,
+          reason: "deposit",
+          change: amount,
+          billId: null,
+          billLabel: "",
+          methodId,
+          methodName: method.name,
+          note: `Advance for ${formatSlot(current.startsAt)}`,
+        });
+      }
+
+      return patchReservation(id, {
+        depositPaid: current.depositPaid + amount,
+        depositRequired: Math.max(current.depositRequired, current.depositPaid + amount),
+        depositMethodId: methodId,
+        depositMethodName: method?.name ?? "Cash",
+        depositPaidAt: nowIso(),
+      });
+    },
+    [patchReservation, postCredit]
+  );
+
+  /**
+   * The party has arrived: open their ticket and carry the advance onto it.
+   *
+   * The advance travels with the meal rather than staying on the booking so
+   * whoever settles the bill sees it without needing to know a reservation
+   * existed. A booking with no table gets seated wherever the floor puts them.
+   */
+  const seatReservation = useCallback(
+    async (id: string, tableId?: string | null) => {
+      const current = reservationsRef.current.find((row) => row.id === id);
+      if (!current || current.status !== "booked") return null;
+
+      const seatAt = tableId ?? current.tableId;
+      const ticket = await openTicket("dine-in", seatAt ?? null);
+
+      const patches: Partial<DineTicket> = {
+        reservationId: current.id,
+        customerId: current.customerId,
+        customerName: current.guestName,
+      };
+      if (current.depositPaid > 0) {
+        patches.advanceAmount = current.depositPaid;
+        patches.advanceNote = `Booking advance · ${formatSlot(current.startsAt)}`;
+      }
+      await patchTicket(ticket.id, patches);
+
+      const table = seatAt ? tablesRef.current.find((row) => row.id === seatAt) : null;
+      const area = table ? areasRef.current.find((row) => row.id === table.areaId) : null;
+      await patchReservation(id, {
+        status: "seated",
+        ticketId: ticket.id,
+        tableId: table?.id ?? current.tableId,
+        tableName: table?.name ?? current.tableName,
+        areaName: area?.name ?? current.areaName,
+        depositOutcome: current.depositPaid > 0 ? "applied" : current.depositOutcome,
+      });
+      return ticket;
+    },
+    [openTicket, patchReservation, patchTicket]
+  );
+
+  /**
+   * Cancel a booking and say what happens to any advance.
+   *
+   * Refunding and keeping are both real answers, and the guest is told which
+   * one in the cancellation message, so the choice is made here rather than
+   * left implicit.
+   */
+  const cancelReservation = useCallback(
+    async (id: string, reason: string, depositOutcome: "refunded" | "forfeited" = "refunded") => {
+      const current = reservationsRef.current.find((row) => row.id === id);
+      if (!current) return null;
+      return patchReservation(id, {
+        status: "cancelled",
+        cancelReason: reason,
+        depositOutcome: current.depositPaid > 0 ? depositOutcome : "",
+      });
+    },
+    [patchReservation]
+  );
+
+  const markReservationNoShow = useCallback(
+    async (id: string, depositOutcome: "refunded" | "forfeited" = "forfeited") => {
+      const current = reservationsRef.current.find((row) => row.id === id);
+      if (!current) return null;
+      return patchReservation(id, {
+        status: "no-show",
+        depositOutcome: current.depositPaid > 0 ? depositOutcome : "",
+      });
+    },
+    [patchReservation]
+  );
+
+  const deleteReservation = useCallback(
+    async (id: string) => {
+      await commit({}, { dine_reservations: [id] });
+      setReservations((previous) => previous.filter((row) => row.id !== id));
+    },
+    [commit]
+  );
+
+  // ---------------------------------------------------------------------
   // Billing
   // ---------------------------------------------------------------------
 
@@ -2463,6 +2983,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
             amount: tender.amount,
             note: tender.note ?? "",
             createdAt: at,
+            kind: method ? kindOf(method) : "normal",
           };
         });
       if (paymentRows.length === 0) return;
@@ -2480,10 +3001,54 @@ export function DineProvider({ children }: { children: ReactNode }) {
       let nextTicket: DineTicket | null = null;
       if (ticket && siblings.length === 0) {
         nextTicket = { ...ticket, status: "settled", settledAt: at };
-        writes.dine_tickets = [nextTicket];
       }
 
-      await commit(writes);
+      // An advance is money already taken at booking time; spending it here is
+      // what turns it from money held into revenue, so it must not stay on the
+      // ticket where a second bill could spend it again.
+      //
+      // Whatever is left when the ticket closes has to go too. A guest who put
+      // down 500 and ate 40 is owed 460 back at the counter — leaving it on a
+      // settled ticket would be a number nobody can ever spend, which reads as
+      // money the restaurant still holds when it does not.
+      const advanceSpent = paymentRows
+        .filter((row) => kindOf({ kind: row.kind }) === "advance")
+        .reduce((sum, row) => sum + row.amount, 0);
+      const held = ticket?.advanceAmount ?? 0;
+      if (ticket && (advanceSpent > 0 || (nextTicket && held > 0))) {
+        const base = nextTicket ?? ticket;
+        // Settling the ticket discharges the rest; a part-bill keeps it for
+        // the next split.
+        const remaining = nextTicket ? 0 : Math.max(held - advanceSpent, 0);
+        nextTicket = { ...base, advanceAmount: remaining };
+      }
+      if (nextTicket) writes.dine_tickets = [nextTicket];
+
+      // Putting a bill on account moves what the diner owes. That has to land
+      // in the same transaction as the bill being marked paid — a bill settled
+      // on credit with no charge behind it is a meal given away.
+      const onAccount = paymentRows
+        .filter((row) => kindOf({ kind: row.kind }) === "credit")
+        .reduce((sum, row) => sum + row.amount, 0);
+
+      if (onAccount > 0 && bill.customerId) {
+        const creditMethod = paymentRows.find((row) => kindOf({ kind: row.kind }) === "credit");
+        await postCredit(
+          {
+            customerId: bill.customerId,
+            reason: "bill",
+            change: onAccount,
+            billId: bill.id,
+            billLabel: bill.billLabel,
+            methodId: creditMethod?.methodId ?? "",
+            methodName: creditMethod?.methodName ?? "",
+            note: "",
+          },
+          writes
+        );
+      } else {
+        await commit(writes);
+      }
 
       setBillPayments((previous) => [...previous, ...paymentRows]);
       setBills((previous) => previous.map((row) => (row.id === billId ? nextBill : row)));
@@ -2492,7 +3057,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         setTickets((previous) => previous.map((row) => (row.id === settled.id ? settled : row)));
       }
     },
-    [bills, paymentMethods, tickets]
+    [bills, commit, paymentMethods, postCredit, tickets]
   );
 
   /** FR-6.9: a settled bill can be voided, but the record always survives. */
@@ -2524,6 +3089,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         isDefault: false,
         sortOrder: paymentMethods.length,
         createdAt: nowIso(),
+        kind: "normal",
       };
       await commit({ dine_payment_methods: [record] });
       setPaymentMethods((previous) => [...previous, record]);
@@ -2531,10 +3097,61 @@ export function DineProvider({ children }: { children: ReactNode }) {
     [paymentMethods.length]
   );
 
+  /** Built-in tenders are wired into billing by kind, so they cannot go. */
   const deletePaymentMethod = useCallback(async (id: string) => {
+    const method = paymentMethodsRef.current.find((row) => row.id === id);
+    if (method?.builtIn) return;
     await commit({}, { dine_payment_methods: [id] });
     setPaymentMethods((previous) => previous.filter((method) => method.id !== id));
   }, []);
+
+  /**
+   * Make sure the reserved tenders exist for whichever features are on.
+   *
+   * Created on demand rather than seeded at setup so a restaurant that never
+   * turns credit on never sees an "On account" option — and so turning it on
+   * years later still works, including in a browser restored from a backup
+   * written before either feature existed.
+   */
+  const ensureReservedMethods = useCallback(
+    async (want: { credit: boolean; advance: boolean }) => {
+      const existing = paymentMethodsRef.current;
+      const missing: DinePaymentMethod[] = [];
+      const at = nowIso();
+      const needs: [PaymentMethodKind, string, boolean][] = [
+        ["credit", CREDIT_METHOD_NAME, want.credit],
+        ["advance", ADVANCE_METHOD_NAME, want.advance],
+      ];
+
+      for (const [kind, name, wanted] of needs) {
+        if (!wanted) continue;
+        if (existing.some((row) => kindOf(row) === kind)) continue;
+        missing.push({
+          id: generateId(),
+          name,
+          isDefault: false,
+          sortOrder: existing.length + missing.length,
+          createdAt: at,
+          kind,
+          builtIn: true,
+        });
+      }
+      if (missing.length === 0) return;
+      await commit({ dine_payment_methods: missing });
+      setPaymentMethods((previous) => [...previous, ...missing]);
+    },
+    [commit]
+  );
+
+  // Keep them in step with the feature switches, including after a restore.
+  useEffect(() => {
+    if (status !== "ready") return;
+    if (!settings.creditEnabled && !settings.reservationsEnabled) return;
+    void ensureReservedMethods({
+      credit: settings.creditEnabled,
+      advance: settings.reservationsEnabled,
+    });
+  }, [ensureReservedMethods, settings.creditEnabled, settings.reservationsEnabled, status]);
 
   const setPin = useCallback(
     async (pin: string) => {
@@ -2836,6 +3453,19 @@ export function DineProvider({ children }: { children: ReactNode }) {
     createCustomer,
     updateCustomer,
     deleteCustomer,
+
+    creditEntries,
+    settleCredit,
+    adjustCredit,
+
+    reservations,
+    createReservation,
+    updateReservation,
+    takeReservationDeposit,
+    seatReservation,
+    cancelReservation,
+    markReservationNoShow,
+    deleteReservation,
 
     addPaymentMethod,
     deletePaymentMethod,

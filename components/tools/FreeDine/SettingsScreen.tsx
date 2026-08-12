@@ -16,8 +16,11 @@ import {
   TriangleAlert,
   Unlock,
   Users,
+  BookUser,
+  CalendarClock,
 } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
+import { formatPlain, parseAmount } from "@/lib/dine/money";
 import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
 import { CURRENCIES, type OrderType, type PaperSize } from "@/lib/dine/types";
@@ -539,6 +542,130 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             cancelled after that is recorded as wastage rather than returned — it was cooked.
             Running out never blocks a sale; it only warns.
           </p>
+        )}
+      </Card>
+
+      <Card icon={BookUser} title="Running accounts (khata)">
+        <p className="text-sm text-muted">
+          Let regulars eat now and pay later. You choose who gets an account and what they may run
+          up; their bills can then be settled &ldquo;on account&rdquo;, and what everyone owes is
+          tracked on the Khata screen.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.creditEnabled}
+            onChange={(event) => void updateSettings({ creditEnabled: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">Allow bills on account</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Adds a Khata screen and an &ldquo;On account&rdquo; tender at payment. Off by default,
+              so nobody can be sent away without paying by tapping the wrong button.
+            </span>
+          </span>
+        </label>
+
+        {settings.creditEnabled && (
+          <p className="text-xs text-muted">
+            Credit is per diner, not global: a diner has to be marked as allowed before their bill
+            can go on account. A limit warns the counter rather than blocking the bill — the middle
+            of a family finishing dinner is the wrong moment to refuse.
+          </p>
+        )}
+      </Card>
+
+      <Card icon={CalendarClock} title="Table bookings">
+        <p className="text-sm text-muted">
+          Hold a table ahead of time, free or against an advance, and send the guest a confirmation
+          on WhatsApp. Anything you take as an advance comes off their bill when they sit down.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.reservationsEnabled}
+            onChange={(event) => void updateSettings({ reservationsEnabled: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">Take bookings</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Adds a Bookings screen, marks held tables on the floor, and seats a booking when you
+              tap its table.
+            </span>
+          </span>
+        </label>
+
+        {settings.reservationsEnabled && (
+          <>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Field label="Usual length (minutes)" hint="Pre-filled on a new booking.">
+                <input
+                  inputMode="numeric"
+                  value={String(settings.reservationDefaultMinutes)}
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationDefaultMinutes: Number(event.target.value) || 90,
+                    })
+                  }
+                  className={inputClass}
+                />
+              </Field>
+              <Field
+                label="Hold either side (minutes)"
+                hint="A table shows as reserved this long before, and a party counts as late this long after."
+              >
+                <input
+                  inputMode="numeric"
+                  value={String(settings.reservationHoldMinutes)}
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationHoldMinutes: Number(event.target.value) || 0,
+                    })
+                  }
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Usual advance" hint="Pre-filled on a new booking. Blank for free bookings.">
+                <input
+                  inputMode="decimal"
+                  value={
+                    settings.reservationDefaultDeposit > 0
+                      ? formatPlain(settings.reservationDefaultDeposit)
+                      : ""
+                  }
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationDefaultDeposit: parseAmount(event.target.value),
+                    })
+                  }
+                  placeholder="No advance"
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+
+            <Field
+              label="WhatsApp country code"
+              hint="Put on the front of a local number when opening WhatsApp. 91 for India."
+            >
+              <input
+                inputMode="numeric"
+                value={settings.whatsappDialCode}
+                onChange={(event) => void updateSettings({ whatsappDialCode: event.target.value })}
+                className={inputClass}
+              />
+            </Field>
+
+            <p className="text-xs text-muted">
+              WhatsApp opens with the message written out and waits for you to send it — the
+              restaurant&apos;s own number, its own chat history, and no diner&apos;s phone number
+              ever leaves this browser.
+            </p>
+          </>
         )}
       </Card>
 

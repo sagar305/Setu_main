@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { BarChart3, Download, Printer } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
+import { totalOutstanding } from "@/lib/dine/credit";
 import { formatPaise } from "@/lib/dine/money";
 import {
   billItemsCsv,
@@ -39,8 +40,18 @@ import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
  * cannot drift away from the bills it summarises (AC-6).
  */
 export function ReportsScreen() {
-  const { bills, billItems, billPayments, business, settings, todayDate, materials, stockMoves } =
-    useDine();
+  const {
+    bills,
+    billItems,
+    billPayments,
+    business,
+    settings,
+    todayDate,
+    materials,
+    stockMoves,
+    customers,
+    reservations,
+  } = useDine();
   const currency = business?.currency ?? "INR";
 
   const dates = useMemo(() => businessDates(bills), [bills]);
@@ -187,6 +198,38 @@ export function ReportsScreen() {
           }
         />
       </div>
+
+      {(settings.creditEnabled || settings.reservationsEnabled) && (
+        <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
+          <h3 className="text-sm font-bold text-ink">Money that is not in the drawer</h3>
+          <p className="mt-1 text-xs text-muted">
+            Sales above count every bill in full, however it was settled. These two are what has
+            been promised rather than paid, and what has been paid for meals not yet eaten — neither
+            belongs in a day&apos;s takings.
+          </p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {settings.creditEnabled && (
+              <StatCard
+                label="Owed on account"
+                value={formatPaise(totalOutstanding(customers), currency)}
+                sub={`${customers.filter((row) => row.creditBalance > 0).length} diner(s), as of now`}
+              />
+            )}
+            {settings.reservationsEnabled && (
+              <StatCard
+                label="Advances held"
+                value={formatPaise(
+                  reservations
+                    .filter((row) => row.status === "booked")
+                    .reduce((sum, row) => sum + row.depositPaid, 0),
+                  currency
+                )}
+                sub="Against bookings still to come"
+              />
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">

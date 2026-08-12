@@ -230,6 +230,18 @@ export type DineTicket = {
   /** Set when this ticket was absorbed into another by a merge (FR-6.6). */
   mergedIntoId: string | null;
   createdAt: string;
+
+  /** The booking this table was seated from, when it came from one. */
+  reservationId?: string | null;
+  /**
+   * Booking advance already collected, in paise, waiting to come off the bill.
+   *
+   * Carried onto the ticket at seating rather than left on the reservation so
+   * that whoever settles the bill sees it without having to know a booking
+   * existed — the money is attached to the meal it belongs to.
+   */
+  advanceAmount?: number;
+  advanceNote?: string;
 };
 
 export type DineTicketItem = {
@@ -386,6 +398,12 @@ export type DineBillPayment = {
   amount: number;
   note: string;
   createdAt: string;
+  /**
+   * Frozen from the method at the time, because it decides whether this tender
+   * was cash in the drawer today. A method renamed or re-kinded next year must
+   * not rewrite what last Tuesday's takings were.
+   */
+  kind?: PaymentMethodKind;
 };
 
 export type DinePaymentMethod = {
@@ -394,7 +412,19 @@ export type DinePaymentMethod = {
   isDefault: boolean;
   sortOrder: number;
   createdAt: string;
+  /** Absent on rows written before credit existed; read it through kindOf. */
+  kind?: PaymentMethodKind;
+  /**
+   * Built in and undeletable. The khata and advance tenders are wired into the
+   * billing logic by kind, so letting someone delete them from Settings would
+   * silently break putting a bill on account.
+   */
+  builtIn?: boolean;
 };
+
+export function kindOf(method: Pick<DinePaymentMethod, "kind">): PaymentMethodKind {
+  return method.kind ?? "normal";
+}
 
 export type DineCustomer = {
   id: string;
@@ -404,7 +434,148 @@ export type DineCustomer = {
   address: string;
   notes: string;
   createdAt: string;
+
+  /**
+   * May this diner eat now and pay later (khata)?
+   *
+   * Off for everyone by default. Credit is a decision an owner makes about a
+   * particular person — a regular, a nearby office, a family account — and
+   * defaulting it on would let any walk-in leave without paying by tapping the
+   * wrong tender.
+   */
+  creditAllowed: boolean;
+  /** Ceiling on what they may owe, in paise. 0 = no ceiling. */
+  creditLimit: number;
+  /**
+   * What they owe right now, in paise. Positive = the restaurant is owed.
+   *
+   * Kept on the diner as well as in dine_credit_entries because the floor and
+   * the payment screen need it on every render, and summing a year of entries
+   * to draw a badge is the kind of thing that is fine in month one and slow in
+   * month twelve. The ledger stays the record of truth; this is its running
+   * total, updated in the same transaction as the entry that moves it.
+   */
+  creditBalance: number;
 };
+
+/** Why a diner's balance moved. */
+export type CreditReason =
+  | "bill"
+  | "settlement"
+  | "opening"
+  | "adjustment"
+  | "writeoff"
+  | "deposit";
+
+export const CREDIT_REASON_LABELS: Record<CreditReason, string> = {
+  bill: "Bill on account",
+  settlement: "Payment received",
+  opening: "Opening balance",
+  adjustment: "Adjustment",
+  writeoff: "Written off",
+  deposit: "Booking advance",
+};
+
+/**
+ * One movement in a diner's khata.
+ *
+ * Double-entry in spirit: `change` is signed, positive when the diner owes
+ * more. The sum of a diner's entries always equals their creditBalance, which
+ * is what makes the running total safe to trust and a stock-take equivalent
+ * possible if it ever drifts.
+ */
+export type DineCreditEntry = {
+  id: string;
+  customerId: string;
+  /** Frozen at the time, so a renamed diner does not rewrite their history. */
+  customerName: string;
+  reason: CreditReason;
+  /** Signed, in paise. Positive increases what the diner owes. */
+  change: number;
+  /** Set when this entry came from putting a bill on account. */
+  billId: string | null;
+  billLabel: string;
+  /** How a settlement was taken (Cash, UPI); "" for charges. */
+  methodId: string;
+  methodName: string;
+  note: string;
+  businessDate: string;
+  createdAt: string;
+};
+
+export type ReservationStatus = "booked" | "seated" | "completed" | "cancelled" | "no-show";
+
+export const RESERVATION_STATUS_LABELS: Record<ReservationStatus, string> = {
+  booked: "Booked",
+  seated: "Seated",
+  completed: "Completed",
+  cancelled: "Cancelled",
+  "no-show": "No-show",
+};
+
+/** Bookings still holding a table. Cancelled and finished ones release it. */
+export const ACTIVE_RESERVATION_STATUSES: ReservationStatus[] = ["booked", "seated"];
+
+/**
+ * A table booked ahead of time.
+ *
+ * Deposits are the reason this is not just a calendar. A booking may be free
+ * (depositRequired = 0) or paid, and money taken to hold a table is not a sale
+ * — it is money held against a meal that has not happened. So a deposit is
+ * recorded here, never as a bill, and only becomes revenue when it is applied
+ * to the ticket the party actually eats. Keeping the two apart is what stops
+ * a Saturday of bookings inflating Friday's sales.
+ */
+export type DineReservation = {
+  id: string;
+  /** Linked diner, when they are a known one. */
+  customerId: string | null;
+  guestName: string;
+  phone: string;
+  partySize: number;
+  /** Held table; null means "any table", decided on arrival. */
+  tableId: string | null;
+  tableName: string;
+  areaName: string;
+  /** Local ISO timestamp of the booking. */
+  startsAt: string;
+  durationMinutes: number;
+  status: ReservationStatus;
+
+  /** Advance asked for, in paise. 0 = a free booking. */
+  depositRequired: number;
+  /** Advance actually taken, in paise. */
+  depositPaid: number;
+  depositMethodId: string;
+  depositMethodName: string;
+  depositPaidAt: string | null;
+  /**
+   * What happened to a paid advance when the booking ended without a meal.
+   * "" while it is still in play, "applied" once it has come off a bill.
+   */
+  depositOutcome: "" | "applied" | "refunded" | "forfeited";
+
+  /** The ticket opened when the party was seated. */
+  ticketId: string | null;
+  occasion: string;
+  note: string;
+  cancelReason: string;
+  /** Business day the booking falls on, for the day sheet. */
+  businessDate: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * What a tender actually is.
+ *
+ * "normal" moves money now (cash, UPI, card). The other two do not, and the
+ * difference matters: "credit" settles a bill by adding to what a diner owes,
+ * and "advance" settles it with money already taken as a booking deposit.
+ * Both must still appear as tenders so a bill's payments add up to its total,
+ * but neither is cash in the drawer today.
+ */
+export type PaymentMethodKind = "normal" | "credit" | "advance";
 
 export type DineSettings = {
   id: "main";
@@ -476,6 +647,39 @@ export type DineSettings = {
    */
   inventoryEnabled: boolean;
 
+  /**
+   * Let diners eat now and pay later (khata).
+   *
+   * Off by default, like stock. Turning it on adds an "On account" tender to
+   * the payment screen and a Khata screen to the nav; leaving it off keeps a
+   * cash-only restaurant from ever seeing a way to let someone walk out
+   * without paying.
+   */
+  creditEnabled: boolean;
+
+  /** Book tables ahead, with or without an advance. Off by default. */
+  reservationsEnabled: boolean;
+  /** Minutes a booking is expected to run, pre-filled on the form. */
+  reservationDefaultMinutes: number;
+  /** Advance pre-filled on a new booking, in paise. 0 = free by default. */
+  reservationDefaultDeposit: number;
+  /**
+   * How long a table is held either side of a booking.
+   *
+   * Used twice, deliberately: a free table starts showing as reserved this
+   * many minutes before the booking, and a party is flagged late this many
+   * minutes after it. One number the owner has to reason about, not two.
+   */
+  reservationHoldMinutes: number;
+  /**
+   * Dial code prefixed to a local number when opening WhatsApp.
+   *
+   * Diners' phone numbers get typed as ten digits at a counter, and wa.me
+   * needs the country on the front or it opens an empty chat. Only applied to
+   * numbers that do not already carry one.
+   */
+  whatsappDialCode: string;
+
   pinHash: string;
   pinSalt: string;
   /** Lock after this many idle minutes; 0 = never. */
@@ -525,6 +729,14 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   shareCustomersWithLedger: true,
   inventoryEnabled: false,
 
+  creditEnabled: false,
+
+  reservationsEnabled: false,
+  reservationDefaultMinutes: 90,
+  reservationDefaultDeposit: 0,
+  reservationHoldMinutes: 30,
+  whatsappDialCode: "91",
+
   pinHash: "",
   pinSalt: "",
   autoLockMinutes: 0,
@@ -532,6 +744,10 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
 };
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
+
+/** Reserved tender names. Created on demand, never editable, never deletable. */
+export const CREDIT_METHOD_NAME = "On account (khata)";
+export const ADVANCE_METHOD_NAME = "Booking advance";
 
 /**
  * Slices of the workspace that can be marked dirty for Sheet sync.
@@ -541,7 +757,13 @@ export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
  * sync on data nobody reports on. The JSON backup is the complete copy; the
  * Sheet carries the configuration and the settled sales.
  */
-export type DineSyncSlice = "meta" | "menu" | "customers" | "bills" | "inventory";
+export type DineSyncSlice =
+  | "meta"
+  | "menu"
+  | "customers"
+  | "bills"
+  | "inventory"
+  | "reservations";
 
 export const DINE_SYNC_SLICES: DineSyncSlice[] = [
   "meta",
@@ -549,6 +771,7 @@ export const DINE_SYNC_SLICES: DineSyncSlice[] = [
   "customers",
   "bills",
   "inventory",
+  "reservations",
 ];
 
 export type DineSyncDirtyRow = { id: DineSyncSlice; dirtyAt: string };

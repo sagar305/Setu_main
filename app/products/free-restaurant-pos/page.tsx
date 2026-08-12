@@ -31,6 +31,10 @@ import {
   Utensils,
   UtensilsCrossed,
   WifiOff,
+  CalendarClock,
+  MessageCircle,
+  Wallet,
+  BookUser,
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
@@ -254,6 +258,45 @@ const KITCHEN: Feature[] = [
   },
 ];
 
+const GUESTS: Feature[] = [
+  {
+    icon: CalendarClock,
+    title: "Book a table, free or against an advance",
+    description:
+      "Hold a table for a window, not a moment — so a 7:30 booking for two hours warns you before you promise the same table at 8. Take an advance or don't; both are normal.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Confirm on WhatsApp, from your own number",
+    description:
+      "The confirmation, the reminder and the cancellation open in WhatsApp with the message written out, waiting for you to send. No API, no gateway fee, and no diner's phone number ever leaves the browser.",
+  },
+  {
+    icon: Wallet,
+    title: "The advance comes off their bill",
+    description:
+      "Money taken to hold a table is money held, not a sale — so it stays out of that day's takings and lands on the bill the night they actually eat. Whoever settles it sees the advance without needing to know a booking happened.",
+  },
+  {
+    icon: BookUser,
+    title: "Khata for the regulars",
+    description:
+      "Let a regular, a nearby office or a family account eat now and pay later. You choose who, and how much they may run up; a limit warns the counter rather than refusing a family halfway through dinner.",
+  },
+  {
+    icon: Receipt,
+    title: "A ledger, not a number",
+    description:
+      "Every charge and every payment is an entry, and what someone owes is always the sum of them. When there is a disagreement about a khata, you settle it by walking the history — which is the only thing that ever settles one.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Nudge without nagging",
+    description:
+      "A one-tap WhatsApp reminder with the balance, how long it has been running and your UPI id. Written to be sent as-is to someone you want back next week.",
+  },
+];
+
 const TRUST: Feature[] = [
   {
     icon: BarChart3,
@@ -315,6 +358,13 @@ const SECTIONS: { eyebrow: string; title: string; subtitle: string; items: Featu
     items: KITCHEN,
   },
   {
+    eyebrow: "Guests",
+    title: "Bookings and running accounts",
+    subtitle:
+      "Hold tables ahead of time, take an advance if you want one, and let regulars run a khata. Both optional, both off until you turn them on.",
+    items: GUESTS,
+  },
+  {
     eyebrow: "Billing",
     title: "The awkward part, handled",
     subtitle: "Splitting, merging, service charge and a GST bill that adds up to the paisa.",
@@ -342,6 +392,8 @@ const DIFFERENCES: { capability: string; retail: string; dine: string }[] = [
     retail: "Finished products",
     dine: "Raw materials, via recipes",
   },
+  { capability: "Table bookings", retail: "—", dine: "Free or with an advance" },
+  { capability: "Pay later (khata)", retail: "—", dine: "Per diner, with a limit" },
 ];
 
 const FREE_VS_PAID: { feature: string; free: string; paid: string }[] = [
@@ -417,6 +469,26 @@ const FAQ_ITEMS = [
       "No. They are separate products with separate databases. A retail counter and a dining room need different menus, different customers and different bill numbers, so nothing crosses between them — and resetting or restoring one never touches the other.",
   },
   {
+    question: "Can I take table bookings, and charge an advance?",
+    answer:
+      "Yes, and either way. A booking can be free or ask for an advance, and the advance is treated as money held rather than as a sale — so it stays out of that day's takings and comes off the guest's bill on the night they eat. Tapping a held table on the floor seats the booking with the guest's name and advance already attached.",
+  },
+  {
+    question: "How does the WhatsApp confirmation work?",
+    answer:
+      "It opens WhatsApp with the message already written — the slot, the party size, the table and any advance — and waits for you to press send. It goes from your own number and stays in your own chat history. There is no WhatsApp Business API, nothing to pay for, and no diner's phone number is ever sent to a server.",
+  },
+  {
+    question: "Can regulars eat now and pay later?",
+    answer:
+      "Yes. Turn on running accounts and mark which diners may use one, with an optional limit. Their bills can then be settled 'on account', and the Khata screen shows what everyone owes and how long it has been running. A limit warns the counter rather than blocking the bill, because the middle of a family finishing dinner is the wrong moment to refuse.",
+  },
+  {
+    question: "Does money owed on khata count as sales?",
+    answer:
+      "The bill counts as a sale on the day it was rung up, because the food left the kitchen that day. What changes is the cash: the reports show what is owed on account and what is held as booking advances separately from the takings, so you can tell the difference between a good night and a night everyone put on a tab.",
+  },
+  {
     question: "Can I move my data to paid Setu Dine later?",
     answer:
       "Yes. Your menu exports as a CSV and your whole workspace exports as a JSON backup, so a restaurant that outgrows the free version can bring its menu and history along rather than starting over.",
@@ -441,6 +513,11 @@ const softwareApplicationSchema = {
     "Weighted-average ingredient costing and food-cost percentage",
     "Wastage tracking and stock takes with variance",
     "Item variations (half/full) and modifier groups (add-ons)",
+    "Table bookings, free or against an advance",
+    "WhatsApp confirmations, reminders and cancellations",
+    "Advances carried onto the guest's bill",
+    "Customer credit (khata) with per-diner limits",
+    "Khata ledger with ageing and WhatsApp reminders",
     "Split bills by item, equal share or amount",
     "Merge tables into one bill",
     "GST with per-item rates and CGST/SGST breakup",

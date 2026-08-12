@@ -5,7 +5,8 @@ import { Check, Printer, Receipt, Share2, Split, Undo2 } from "lucide-react";
 import { useDine, type SplitPlan, type TenderInput } from "@/lib/dine/store";
 import { amountDue } from "@/lib/dine/calc";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
-import { lineUnitPrice, type DineBill } from "@/lib/dine/types";
+import { kindOf, lineUnitPrice, type DineBill } from "@/lib/dine/types";
+import { overLimitBy } from "@/lib/dine/credit";
 import { BillView, billShareText, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode } from "./printing";
 import {
@@ -461,19 +462,100 @@ async function billPdfBlob(node: HTMLElement): Promise<Blob> {
   return pdf.output("blob");
 }
 
+/**
+ * Taking payment.
+ *
+ * Three kinds of tender end up here and only one of them is money arriving
+ * now. A booking advance was collected days ago and is being spent; an "on
+ * account" tender is not payment at all but a promise, which is why it needs a
+ * diner attached and warns when it takes them past their limit. Both still
+ * have to appear as tenders, because a bill's payments must add up to its
+ * total whatever form they took.
+ */
 function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }) {
-  const { paymentMethods, business, payBill } = useDine();
+  const { paymentMethods, business, settings, customers, tickets, bills, payBill } = useDine();
   const currency = business?.currency ?? "INR";
 
-  const [tenders, setTenders] = useState<{ methodId: string; amount: string }[]>(() => [
-    { methodId: paymentMethods[0]?.id ?? "", amount: formatPlain(bill.total) },
-  ]);
+  const ticket = tickets.find((row) => row.id === bill.ticketId) ?? null;
+  const diner = bill.customerId ? customers.find((row) => row.id === bill.customerId) ?? null : null;
+
+  const advanceMethod = paymentMethods.find((method) => kindOf(method) === "advance") ?? null;
+  const creditMethod = paymentMethods.find((method) => kindOf(method) === "credit") ?? null;
+
+  // An advance is already the restaurant's money, so it goes on the bill
+  // without being asked for — the counter should not have to remember that a
+  // booking happened. Capped at the bill, since the rest belongs to the other
+  // splits.
+  const advanceAvailable = Math.min(ticket?.advanceAmount ?? 0, bill.total);
+  const canUseAdvance = Boolean(advanceMethod) && advanceAvailable > 0;
+
+  const creditAllowed = Boolean(
+    settings.creditEnabled && creditMethod && diner && diner.creditAllowed
+  );
+
+  const [tenders, setTenders] = useState<{ methodId: string; amount: string }[]>(() => {
+    const rows: { methodId: string; amount: string }[] = [];
+    if (canUseAdvance && advanceMethod) {
+      rows.push({ methodId: advanceMethod.id, amount: formatPlain(advanceAvailable) });
+    }
+    const rest = bill.total - (canUseAdvance ? advanceAvailable : 0);
+    if (rest > 0 || rows.length === 0) {
+      const cash = paymentMethods.find((method) => kindOf(method) === "normal");
+      rows.push({ methodId: cash?.id ?? paymentMethods[0]?.id ?? "", amount: formatPlain(rest) });
+    }
+    return rows;
+  });
   const [busy, setBusy] = useState(false);
+  const [confirmOver, setConfirmOver] = useState(false);
 
   const entered = tenders.reduce((sum, tender) => sum + parseAmount(tender.amount), 0);
   const remaining = amountDue(bill.total, [{ amount: entered }]);
 
+  const selectable = (current: string) =>
+    paymentMethods.filter((method) => {
+      const kind = kindOf(method);
+      if (kind === "advance") return canUseAdvance || method.id === current;
+      if (kind === "credit") return creditAllowed || method.id === current;
+      return true;
+    });
+
+  const onAccount = tenders
+    .filter((tender) => {
+      const method = paymentMethods.find((row) => row.id === tender.methodId);
+      return method ? kindOf(method) === "credit" : false;
+    })
+    .reduce((sum, tender) => sum + parseAmount(tender.amount), 0);
+
+  const advanceSpent = tenders
+    .filter((tender) => {
+      const method = paymentMethods.find((row) => row.id === tender.methodId);
+      return method ? kindOf(method) === "advance" : false;
+    })
+    .reduce((sum, tender) => sum + parseAmount(tender.amount), 0);
+
+  const over = diner && onAccount > 0 ? overLimitBy(diner, onAccount) : 0;
+  const advanceOverspent = Math.max(advanceSpent - advanceAvailable, 0);
+
+  // Settling the last part of a ticket closes it, which discharges any advance
+  // still held. If the guest put down more than they ate, that difference is
+  // theirs — and this is the last moment anyone will be looking at it.
+  const lastPart = !bills.some(
+    (row) => row.ticketId === bill.ticketId && row.id !== bill.id && row.status === "unpaid"
+  );
+  const unspentAdvance = lastPart ? Math.max((ticket?.advanceAmount ?? 0) - advanceSpent, 0) : 0;
+
+  const blocked =
+    entered <= 0 ||
+    advanceOverspent > 0 ||
+    (onAccount > 0 && !creditAllowed);
+
   const submit = async () => {
+    // Going past a limit is the owner's call, not the software's — a family
+    // finishing dinner is the wrong moment to refuse, so it asks once.
+    if (over > 0 && !confirmOver) {
+      setConfirmOver(true);
+      return;
+    }
     setBusy(true);
     try {
       const rows: TenderInput[] = tenders
@@ -504,7 +586,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
               className={`${inputClass} flex-1`}
               aria-label="Payment method"
             >
-              {paymentMethods.map((method) => (
+              {selectable(tender.methodId).map((method) => (
                 <option key={method.id} value={method.id}>
                   {method.name}
                 </option>
@@ -556,11 +638,57 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
           Pay with another method
         </button>
 
+        {canUseAdvance && (
+          <p className="rounded-xl bg-indigo/5 p-3 text-xs text-indigo">
+            {formatPaise(advanceAvailable, currency)} was already taken as a booking advance and has
+            been applied to this bill.
+          </p>
+        )}
+
+        {settings.creditEnabled && !creditAllowed && (
+          <p className="text-xs text-muted">
+            {!diner
+              ? "Link a diner to this table to settle on account."
+              : `${diner.name} is not set up for a running account — turn it on for them in Khata.`}
+          </p>
+        )}
+
+        {unspentAdvance > 0 && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
+            <p className="font-semibold">
+              {formatPaise(unspentAdvance, currency)} of their advance is unspent.
+            </p>
+            <p>Hand it back — settling this bill closes the table and clears it.</p>
+          </div>
+        )}
+
+        {advanceOverspent > 0 && (
+          <p className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-700">
+            That is {formatPaise(advanceOverspent, currency)} more advance than was ever collected.
+          </p>
+        )}
+
+        {over > 0 && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
+            <p className="font-semibold">
+              This puts {diner?.name} {formatPaise(over, currency)} past their{" "}
+              {formatPaise(diner?.creditLimit ?? 0, currency)} limit.
+            </p>
+            <p>{confirmOver ? "Tap again to allow it." : "You can still allow it."}</p>
+          </div>
+        )}
+
         <div className="rounded-xl bg-cream-paper p-3 text-sm">
           <div className="flex justify-between">
             <span className="text-muted">Entered</span>
             <span className="font-bold text-ink">{formatPaise(entered, currency)}</span>
           </div>
+          {onAccount > 0 && (
+            <div className="flex justify-between">
+              <span className="text-muted">Going on account</span>
+              <span className="font-bold text-ink">{formatPaise(onAccount, currency)}</span>
+            </div>
+          )}
           <div className="flex justify-between">
             <span className="text-muted">{remaining >= 0 ? "Still due" : "Change"}</span>
             <span
@@ -578,11 +706,11 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
           <button
             type="button"
             onClick={() => void submit()}
-            disabled={busy || entered <= 0}
+            disabled={busy || blocked}
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
             <Check className="h-4 w-4" />
-            {busy ? "Saving…" : "Mark paid"}
+            {busy ? "Saving…" : over > 0 && !confirmOver ? "Over the limit — allow?" : "Mark paid"}
           </button>
         </div>
       </div>
