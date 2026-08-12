@@ -9,6 +9,7 @@ import { studentBalance, studentMonthlyFee } from "./calc";
 import {
   ATTENDANCE_LABELS,
   formatMonth,
+  studentCustomFields,
   type AttendanceRecord,
   type Batch,
   type FeeDue,
@@ -43,6 +44,9 @@ export function studentsCsv(students: Student[], batches: Batch[]): string {
       "Join Date",
       "Monthly Fee",
       "Status",
+      "Left On",
+      "Left Reason",
+      "Custom Fields",
       "Notes",
     ],
     students.map((s) => [
@@ -56,7 +60,12 @@ export function studentsCsv(students: Student[], batches: Batch[]): string {
       s.altPhone,
       s.joinDate,
       studentMonthlyFee(s, batches).total,
-      s.status,
+      s.status === "active" ? "Attending" : "Left",
+      s.leftOn ?? "",
+      s.leaveReason ?? "",
+      studentCustomFields(s)
+        .map((field) => `${field.label}: ${field.value}`)
+        .join(" | "),
       s.notes,
     ])
   );

@@ -42,6 +42,7 @@ import {
   type TuitionBackup,
 } from "./backup";
 import type { ParsedStudentRow } from "./csv";
+import { blockingConflicts, describeConflict, findBatchConflicts } from "./batchRules";
 import {
   attendanceId,
   currentMonthKey,
@@ -124,6 +125,8 @@ type TuitionContextValue = {
   createStudent: (input: StudentInput) => Promise<Student>;
   updateStudent: (id: string, input: StudentInput) => Promise<void>;
   deleteStudent: (id: string) => Promise<void>;
+  markStudentLeft: (id: string, leftOn: string, reason: string) => Promise<void>;
+  reinstateStudent: (id: string) => Promise<void>;
   importStudents: (rows: ParsedStudentRow[]) => Promise<number>;
 
   saveAttendance: (
@@ -381,27 +384,44 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
 
   // ---- Batches -------------------------------------------------------------
 
+  /**
+   * One teacher cannot run the same batch twice, or two batches at the same
+   * time. The rule lives here as well as in the form so it holds however a
+   * batch is created.
+   */
+  const assertBatchAllowed = useCallback(
+    (input: BatchInput, ignoreId?: string) => {
+      const blocking = blockingConflicts(findBatchConflicts(batches, input, ignoreId));
+      if (blocking.length > 0) {
+        throw new Error(describeConflict(blocking[0]));
+      }
+    },
+    [batches]
+  );
+
   const createBatch = useCallback(
     async (input: BatchInput) => {
+      assertBatchAllowed(input);
       const batch: Batch = { ...input, id: generateId(), createdAt: nowIso(), updatedAt: nowIso() };
       await batchWithSync({ batches: [batch] }, {}, ["t_meta"]);
       setBatches((prev) => [...prev, batch].sort((a, b) => a.startTime.localeCompare(b.startTime)));
       return batch;
     },
-    [batchWithSync]
+    [batchWithSync, assertBatchAllowed]
   );
 
   const updateBatch = useCallback(
     async (id: string, input: BatchInput) => {
       const existing = batches.find((b) => b.id === id);
       if (!existing) return;
+      assertBatchAllowed(input, id);
       const next: Batch = { ...existing, ...input, updatedAt: nowIso() };
       await batchWithSync({ batches: [next] }, {}, ["t_meta"]);
       setBatches((prev) =>
         prev.map((b) => (b.id === id ? next : b)).sort((a, b) => a.startTime.localeCompare(b.startTime))
       );
     },
-    [batches, batchWithSync]
+    [batches, batchWithSync, assertBatchAllowed]
   );
 
   /** Removing a batch un-enrols its students; their history is kept. */
@@ -483,6 +503,49 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     [attendance, dues, payments, marks, notes, batchWithSync]
   );
 
+  /**
+   * The student stopped coming. Their record, attendance, fees and marks are
+   * all kept — they simply drop off the roll, no new dues are raised after the
+   * month they left, and anything they still owe stays on the fees screen.
+   */
+  const markStudentLeft = useCallback(
+    async (id: string, leftOn: string, reason: string) => {
+      const existing = students.find((s) => s.id === id);
+      if (!existing) return;
+      const next: Student = {
+        ...existing,
+        status: "inactive",
+        leftOn: leftOn || todayIso(),
+        leaveReason: reason,
+        updatedAt: nowIso(),
+      };
+      await batchWithSync({ students: [next] }, {}, ["t_students"]);
+      setStudents((prev) => prev.map((s) => (s.id === id ? next : s)));
+    },
+    [students, batchWithSync]
+  );
+
+  /** They came back — put them on the roll again and resume monthly dues. */
+  const reinstateStudent = useCallback(
+    async (id: string) => {
+      const existing = students.find((s) => s.id === id);
+      if (!existing) return;
+      const next: Student = {
+        ...existing,
+        status: "active",
+        leftOn: "",
+        leaveReason: "",
+        // Dues resume from today; the months they were away are not back-billed.
+        rejoinedOn: todayIso(),
+        updatedAt: nowIso(),
+      };
+      await batchWithSync({ students: [next] }, {}, ["t_students"]);
+      setStudents((prev) => prev.map((s) => (s.id === id ? next : s)));
+      duesGeneratedRef.current = false;
+    },
+    [students, batchWithSync]
+  );
+
   const importStudents = useCallback(
     async (rows: ParsedStudentRow[]) => {
       if (rows.length === 0) return 0;
@@ -506,6 +569,10 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
         concessionValue: 0,
         customMonthlyFee: row.customMonthlyFee,
         status: "active",
+        leftOn: "",
+        leaveReason: "",
+        rejoinedOn: "",
+        custom: [],
         notes: "",
         createdAt: nowIso(),
         updatedAt: nowIso(),
@@ -570,7 +637,8 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const now = nowIso();
       const created: FeeDue[] = [];
       for (const student of students) {
-        if (student.status !== "active") continue;
+        // Students who have left are included: missingDuePeriods stops at the
+        // month they left, so their final month is still raised.
         for (const missing of missingDuePeriods(student, dues, target)) {
           created.push(
             buildTuitionDue(student, batches, missing, settings.feeDueDay, now)
@@ -1068,6 +1136,8 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       createStudent,
       updateStudent,
       deleteStudent,
+      markStudentLeft,
+      reinstateStudent,
       importStudents,
       saveAttendance,
       markAbsenceNotified,
@@ -1127,6 +1197,8 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       createStudent,
       updateStudent,
       deleteStudent,
+      markStudentLeft,
+      reinstateStudent,
       importStudents,
       saveAttendance,
       markAbsenceNotified,

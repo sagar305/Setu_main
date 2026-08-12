@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Plus, Trash2 } from "lucide-react";
 import { useTuition, type StudentInput } from "@/lib/tuition/store";
 import { studentMonthlyFee } from "@/lib/tuition/calc";
 import { formatMoney } from "@/lib/pos/types";
-import { todayIso, type Student } from "@/lib/tuition/types";
+import {
+  COMMON_CUSTOM_FIELDS,
+  generateId,
+  todayIso,
+  type Student,
+} from "@/lib/tuition/types";
 import { Field, inputClass, Modal, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
 
 const EMPTY: StudentInput = {
@@ -25,6 +31,10 @@ const EMPTY: StudentInput = {
   concessionValue: 0,
   customMonthlyFee: null,
   status: "active",
+  leftOn: "",
+  leaveReason: "",
+  rejoinedOn: "",
+  custom: [],
   notes: "",
 };
 
@@ -52,7 +62,8 @@ export function StudentForm({
       void id;
       void createdAt;
       void updatedAt;
-      setForm(rest);
+      // Records saved before custom fields existed have no array to spread.
+      setForm({ ...rest, custom: Array.isArray(rest.custom) ? rest.custom : [] });
       setCustomFee(student.customMonthlyFee !== null ? String(student.customMonthlyFee) : "");
     } else {
       setForm({ ...EMPTY, joinDate: todayIso() });
@@ -101,6 +112,10 @@ export function StudentForm({
       customMonthlyFee:
         customFee.trim() === "" || Number.isNaN(Number(customFee)) ? null : Number(customFee),
       concessionValue: Number(form.concessionValue) || 0,
+      // Drop rows the teacher started and left blank.
+      custom: form.custom
+        .map((field) => ({ ...field, label: field.label.trim(), value: field.value.trim() }))
+        .filter((field) => field.label || field.value),
     };
     try {
       if (student) await updateStudent(student.id, payload);
@@ -245,16 +260,45 @@ export function StudentForm({
           <Field label="Status">
             <select
               value={form.status}
-              onChange={(event) =>
-                setForm((p) => ({ ...p, status: event.target.value as Student["status"] }))
-              }
+              onChange={(event) => {
+                const status = event.target.value as Student["status"];
+                setForm((p) => ({
+                  ...p,
+                  status,
+                  // Leaving without a date would leave fees running forever.
+                  leftOn: status === "inactive" ? p.leftOn || todayIso() : "",
+                  leaveReason: status === "inactive" ? p.leaveReason : "",
+                }));
+              }}
               className={inputClass}
             >
-              <option value="active">Active</option>
-              <option value="inactive">Left / inactive</option>
+              <option value="active">Currently attending</option>
+              <option value="inactive">Left</option>
             </select>
           </Field>
         </div>
+
+        {form.status === "inactive" && (
+          <div className="grid gap-4 rounded-xl border border-muted-line/30 bg-cream-paper p-4 sm:grid-cols-2">
+            <Field label="Left on" hint="Fees stop after this month">
+              <input
+                type="date"
+                value={form.leftOn}
+                onChange={(event) => setForm((p) => ({ ...p, leftOn: event.target.value }))}
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Reason (optional)">
+              <input
+                type="text"
+                value={form.leaveReason}
+                onChange={(event) => setForm((p) => ({ ...p, leaveReason: event.target.value }))}
+                placeholder="e.g. shifted city, board exams over"
+                className={inputClass}
+              />
+            </Field>
+          </div>
+        )}
 
         <div className="rounded-xl border border-muted-line/30 bg-cream-paper p-4">
           <div className="grid gap-4 sm:grid-cols-3">
@@ -310,6 +354,83 @@ export function StudentForm({
               )}
             </div>
           </div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+              Your own fields
+            </span>
+            <button
+              type="button"
+              onClick={() =>
+                setForm((p) => ({
+                  ...p,
+                  custom: [...p.custom, { id: generateId(), label: "", value: "" }],
+                }))
+              }
+              className="inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Add a field
+            </button>
+          </div>
+          <p className="mt-1 text-xs text-muted/80">
+            Anything you want to remember — school test marks, a board roll number, weak topics.
+          </p>
+
+          {form.custom.length > 0 && (
+            <ul className="mt-2 space-y-2">
+              {form.custom.map((field, index) => (
+                <li key={field.id} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={field.label}
+                    onChange={(event) => {
+                      const label = event.target.value;
+                      setForm((p) => ({
+                        ...p,
+                        custom: p.custom.map((f, i) => (i === index ? { ...f, label } : f)),
+                      }));
+                    }}
+                    placeholder="Field name"
+                    list="tuition-custom-field-names"
+                    className={`${inputClass} sm:w-56`}
+                    aria-label={`Field name ${index + 1}`}
+                  />
+                  <input
+                    type="text"
+                    value={field.value}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      setForm((p) => ({
+                        ...p,
+                        custom: p.custom.map((f, i) => (i === index ? { ...f, value } : f)),
+                      }));
+                    }}
+                    placeholder="Value — e.g. Maths 78/100"
+                    className={`${inputClass} flex-1`}
+                    aria-label={`Field value ${index + 1}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setForm((p) => ({ ...p, custom: p.custom.filter((_, i) => i !== index) }))
+                    }
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-muted-line/40 text-muted transition hover:border-red-300 hover:text-red-600"
+                    aria-label={`Remove field ${index + 1}`}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <datalist id="tuition-custom-field-names">
+            {COMMON_CUSTOM_FIELDS.map((name) => (
+              <option key={name} value={name} />
+            ))}
+          </datalist>
         </div>
 
         <Field label="Notes">

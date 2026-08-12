@@ -16,6 +16,11 @@ import {
 import { useTuition } from "@/lib/tuition/store";
 import { parseBackupFile, type TuitionBackup } from "@/lib/tuition/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/tuition/sheetSync";
+import {
+  blockingConflicts,
+  describeConflict,
+  findBatchConflicts,
+} from "@/lib/tuition/batchRules";
 import { MESSAGE_PLACEHOLDERS } from "@/lib/tuition/messages";
 import {
   PIN_MAX_LENGTH,
@@ -250,11 +255,20 @@ function BatchesSection() {
   const [form, setForm] = useState(EMPTY_BATCH);
   const [confirmDelete, setConfirmDelete] = useState<Batch | null>(null);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [acceptedWarning, setAcceptedWarning] = useState(false);
   const currency = business?.currency ?? "INR";
+
+  // Checked as the teacher types, so a clash is visible before they save.
+  const conflicts = findBatchConflicts(batches, form, editing?.id);
+  const blocking = blockingConflicts(conflicts);
+  const warning = conflicts.find((conflict) => conflict.kind === "same-subject");
 
   const openNew = () => {
     setEditing(null);
     setForm(EMPTY_BATCH);
+    setError("");
+    setAcceptedWarning(false);
     setOpen(true);
   };
 
@@ -265,18 +279,27 @@ function BatchesSection() {
     void updatedAt;
     setEditing(batch);
     setForm(rest);
+    setError("");
+    setAcceptedWarning(false);
     setOpen(true);
   };
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!form.name.trim()) return;
+    if (blocking.length > 0) {
+      setError(describeConflict(blocking[0]));
+      return;
+    }
     setSaving(true);
+    setError("");
     try {
       const payload = { ...form, name: form.name.trim(), monthlyFee: Number(form.monthlyFee) || 0 };
       if (editing) await updateBatch(editing.id, payload);
       else await createBatch(payload);
       setOpen(false);
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : "Could not save this batch.");
     } finally {
       setSaving(false);
     }
@@ -294,7 +317,7 @@ function BatchesSection() {
   return (
     <Section
       title="Batches"
-      description="A batch is a class with its own timing and its own fee. A student enrolled in two batches pays both fees."
+      description="A batch is a class you take, with its own timing and its own fee. A student enrolled in two batches pays both fees. Two batches cannot run at the same time — you can only be in one place."
     >
       {batches.length === 0 ? (
         <p className="rounded-xl bg-cream-paper p-4 text-sm text-muted">
@@ -453,11 +476,43 @@ function BatchesSection() {
             />
             Batch is running
           </label>
+
+          {blocking.length > 0 && (
+            <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {describeConflict(blocking[0])}
+            </p>
+          )}
+
+          {blocking.length === 0 && warning && (
+            <div className="rounded-lg border border-saffron/40 bg-saffron/10 px-4 py-3">
+              <p className="text-sm text-ink">{describeConflict(warning)}</p>
+              <label className="mt-2 flex items-center gap-2 text-sm text-muted">
+                <input
+                  type="checkbox"
+                  checked={acceptedWarning}
+                  onChange={(event) => setAcceptedWarning(event.target.checked)}
+                  className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
+                />
+                This is a separate group at a different time
+              </label>
+            </div>
+          )}
+
+          {error && blocking.length === 0 && (
+            <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
+            </p>
+          )}
+
           <div className="flex justify-end gap-3">
             <button type="button" onClick={() => setOpen(false)} className={secondaryBtnClass}>
               Cancel
             </button>
-            <button type="submit" disabled={saving} className={primaryBtnClass}>
+            <button
+              type="submit"
+              disabled={saving || blocking.length > 0 || (Boolean(warning) && !acceptedWarning)}
+              className={primaryBtnClass}
+            >
               {saving ? "Saving…" : editing ? "Save changes" : "Add batch"}
             </button>
           </div>

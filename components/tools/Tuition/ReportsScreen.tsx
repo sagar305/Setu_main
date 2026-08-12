@@ -65,13 +65,14 @@ export function ReportsScreen() {
     [activeStudents, batches]
   );
 
+  // Everyone who owes, including students who have left.
   const totalOutstanding = useMemo(
     () =>
-      activeStudents.reduce(
+      students.reduce(
         (sum, student) => sum + studentBalance(student.id, dues, payments).outstanding,
         0
       ),
-    [activeStudents, dues, payments]
+    [students, dues, payments]
   );
 
   const rows = useMemo(

@@ -67,13 +67,17 @@ export function FeesScreen() {
 
   const rows: Row[] = useMemo(
     () =>
-      students
-        .filter((student) => student.status === "active")
-        .map((student) => ({
-          student,
-          balance: studentBalance(student.id, dues, payments),
-        })),
+      students.map((student) => ({
+        student,
+        balance: studentBalance(student.id, dues, payments),
+      })),
     [students, dues, payments]
+  );
+
+  /** Students still on the roll — a leaver only stays visible while they owe. */
+  const currentRows = useMemo(
+    () => rows.filter((row) => row.student.status === "active"),
+    [rows]
   );
 
   const pending = useMemo(
@@ -201,7 +205,7 @@ export function FeesScreen() {
           type="button"
           onClick={() => void handleGenerate()}
           className={secondaryBtnClass}
-          title="Raise this month's tuition dues for every active student"
+          title="Raise this month's tuition dues for everyone on the roll"
         >
           <RefreshCw className="h-4 w-4" />
           {generating > 0 ? `${generating} dues raised` : "Generate dues"}
@@ -259,7 +263,14 @@ export function FeesScreen() {
                   className="flex flex-col gap-3 rounded-xl border border-muted-line/30 bg-white p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-bold text-ink">{row.student.name}</p>
+                    <p className="truncate text-sm font-bold text-ink">
+                      {row.student.name}
+                      {row.student.status !== "active" && (
+                        <span className="ml-2 rounded-full bg-cream-paper px-2 py-0.5 text-[10px] font-semibold uppercase text-muted">
+                          Left
+                        </span>
+                      )}
+                    </p>
                     <p className="truncate text-xs text-muted">
                       {row.balance.dues
                         .filter((d) => d.remaining > 0)
@@ -312,14 +323,14 @@ export function FeesScreen() {
         )}
       </section>
 
-      {rows.length > 0 && (
+      {currentRows.length > 0 && (
         <section className="mt-8">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-ink">All students</h3>
             <span className="text-xs text-muted">Collect a fee or add a one-off charge</span>
           </div>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-            {rows.map((row) => (
+            {currentRows.map((row) => (
               <li
                 key={row.student.id}
                 className="flex min-w-0 items-center justify-between gap-3 rounded-xl border border-muted-line/30 bg-white p-3"

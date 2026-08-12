@@ -90,6 +90,8 @@ function studentsTab(students: Student[], batches: Batch[]): TabPayload {
       "Parent Phone",
       "Join Date",
       "Status",
+      "Left On",
+      "Custom Fields",
       "_json",
     ],
     rows: students.map((s) => [
@@ -100,7 +102,11 @@ function studentsTab(students: Student[], batches: Batch[]): TabPayload {
       s.parentName,
       s.parentPhone,
       s.joinDate,
-      s.status,
+      s.status === "active" ? "Attending" : "Left",
+      s.leftOn ?? "",
+      (Array.isArray(s.custom) ? s.custom : [])
+        .map((field) => `${field.label}: ${field.value}`)
+        .join(" | "),
       JSON.stringify(s),
     ]),
   };

@@ -38,6 +38,17 @@ export type Batch = {
 
 export type StudentStatus = "active" | "inactive";
 
+/**
+ * Anything else the teacher wants to remember about a student — school test
+ * marks, a board roll number, which bus they take. Free-form on purpose: no
+ * two teachers track the same things.
+ */
+export type CustomField = {
+  id: string;
+  label: string;
+  value: string;
+};
+
 export type Student = {
   id: string;
   name: string;
@@ -64,10 +75,32 @@ export type Student = {
   /** Replaces the batch-fee sum entirely when set; null = use the batches. */
   customMonthlyFee: number | null;
   status: StudentStatus;
+  /** YYYY-MM-DD the student stopped coming; "" while they still attend.
+   *  Fees stop being raised after this month. */
+  leftOn: string;
+  leaveReason: string;
+  /** Set when a student who had left comes back. Dues resume from this month
+   *  instead of their original joining month, so the gap is not back-billed. */
+  rejoinedOn: string;
+  /** Teacher's own fields — school marks, notes, anything. */
+  custom: CustomField[];
   notes: string;
   createdAt: string;
   updatedAt: string;
 };
+
+/** Records written before these fields existed load without them. */
+export function studentCustomFields(student: Student): CustomField[] {
+  return Array.isArray(student.custom) ? student.custom : [];
+}
+
+export const COMMON_CUSTOM_FIELDS = [
+  "School test marks",
+  "School roll number",
+  "Board / medium",
+  "Weak areas",
+  "Target exam",
+];
 
 // ---------------------------------------------------------------------------
 // Attendance

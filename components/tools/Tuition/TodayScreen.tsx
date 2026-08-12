@@ -40,10 +40,11 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     [attendance, today]
   );
 
+  // Students who have left stay here while they still owe — money does not
+  // disappear because someone stopped coming.
   const pending = useMemo(
     () =>
       students
-        .filter((s) => s.status === "active")
         .map((student) => ({ student, balance: studentBalance(student.id, dues, payments) }))
         .filter((row) => row.balance.outstanding > 0)
         .sort(

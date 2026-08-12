@@ -6,8 +6,10 @@ import {
   MessageCircle,
   Pencil,
   Phone,
+  RotateCcw,
   Share2,
   Trash2,
+  UserMinus,
 } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
 import {
@@ -23,6 +25,8 @@ import {
   currentMonthKey,
   formatDate,
   formatMonth,
+  studentCustomFields,
+  todayIso,
   type Student,
 } from "@/lib/tuition/types";
 import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
@@ -31,6 +35,7 @@ import {
   ConfirmDialog,
   Modal,
   dangerBtnClass,
+  inputClass,
   primaryBtnClass,
   secondaryBtnClass,
 } from "@/components/tools/FreePos/ui";
@@ -65,10 +70,15 @@ export function StudentDetail({
     tests,
     marks,
     deleteStudent,
+    markStudentLeft,
+    reinstateStudent,
   } = useTuition();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [shareDoc, setShareDoc] = useState<SharedDoc | null>(null);
   const [reminderOpen, setReminderOpen] = useState(false);
+  const [leaveOpen, setLeaveOpen] = useState(false);
+  const [leftOn, setLeftOn] = useState(todayIso());
+  const [leaveReason, setLeaveReason] = useState("");
   const currency = business?.currency ?? "INR";
   const period = currentMonthKey();
 
@@ -101,6 +111,8 @@ export function StudentDetail({
   if (!student || !balance || !fee) return null;
 
   const enrolled = batches.filter((b) => student.batchIds.includes(b.id));
+  const hasLeft = student.status !== "active";
+  const customFields = studentCustomFields(student);
   const absentDates = monthRecords
     .filter((r) => r.status === "absent")
     .map((r) => formatDate(r.date).replace(/ \d{4}$/, ""));
@@ -144,6 +156,29 @@ export function StudentDetail({
   return (
     <>
       <Modal open={Boolean(student)} onClose={onClose} title={student.name} wide>
+        {hasLeft && (
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-muted-line/40 bg-cream-paper px-4 py-3">
+            <p className="text-sm text-ink">
+              <span className="font-bold">Left</span>
+              {student.leftOn ? ` on ${formatDate(student.leftOn)}` : ""}
+              {student.leaveReason ? ` · ${student.leaveReason}` : ""}
+              {balance.outstanding > 0 && (
+                <span className="ml-2 font-semibold text-red-600">
+                  still owes {formatMoney(balance.outstanding, currency)}
+                </span>
+              )}
+            </p>
+            <button
+              type="button"
+              onClick={() => void reinstateStudent(student.id)}
+              className={`${secondaryBtnClass} px-3 py-1.5`}
+            >
+              <RotateCcw className="h-4 w-4" />
+              They&apos;re back
+            </button>
+          </div>
+        )}
+
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm text-muted">
@@ -221,7 +256,42 @@ export function StudentDetail({
             <CalendarCheck className="h-4 w-4" />
             Share attendance report
           </button>
+          {!hasLeft && (
+            <button
+              type="button"
+              onClick={() => {
+                setLeftOn(todayIso());
+                setLeaveReason("");
+                setLeaveOpen(true);
+              }}
+              className={secondaryBtnClass}
+            >
+              <UserMinus className="h-4 w-4" />
+              Student left
+            </button>
+          )}
         </div>
+
+        {customFields.length > 0 && (
+          <section className="mt-6">
+            <h4 className="text-xs font-bold uppercase tracking-wide text-muted">
+              Your own fields
+            </h4>
+            <dl className="mt-2 grid gap-2 sm:grid-cols-2">
+              {customFields.map((field) => (
+                <div
+                  key={field.id}
+                  className="rounded-xl border border-muted-line/30 bg-white px-3 py-2"
+                >
+                  <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    {field.label || "Note"}
+                  </dt>
+                  <dd className="text-sm text-ink">{field.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
 
         <section className="mt-6">
           <h4 className="text-xs font-bold uppercase tracking-wide text-muted">Fee dues</h4>
@@ -355,6 +425,68 @@ export function StudentDetail({
         onClose={() => setReminderOpen(false)}
         onSent={() => {}}
       />
+
+      <Modal
+        open={leaveOpen}
+        onClose={() => setLeaveOpen(false)}
+        title={`${student.name} has left`}
+      >
+        <p className="text-sm text-muted">
+          They come off the roll and off every batch&apos;s attendance list. Their record,
+          attendance, fees and marks are all kept, no fee is raised after the month they left, and
+          anything still pending stays on the Fees screen.
+        </p>
+        <div className="mt-4 space-y-4">
+          <label className="block">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
+              Last day
+            </span>
+            <input
+              type="date"
+              value={leftOn}
+              onChange={(event) => setLeftOn(event.target.value)}
+              className={inputClass}
+            />
+          </label>
+          <label className="block">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
+              Reason (optional)
+            </span>
+            <input
+              type="text"
+              value={leaveReason}
+              onChange={(event) => setLeaveReason(event.target.value)}
+              placeholder="e.g. shifted city, board exams over"
+              className={inputClass}
+            />
+          </label>
+          {balance.outstanding > 0 && (
+            <p className="rounded-lg bg-saffron/10 px-3 py-2 text-xs text-ink">
+              {formatMoney(balance.outstanding, currency)} is still pending. It stays on the fees
+              list so you can follow it up — waive the dues there if you are writing it off.
+            </p>
+          )}
+        </div>
+        <div className="mt-5 flex justify-end gap-3">
+          <button
+            type="button"
+            onClick={() => setLeaveOpen(false)}
+            className={secondaryBtnClass}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              void markStudentLeft(student.id, leftOn, leaveReason.trim());
+              setLeaveOpen(false);
+            }}
+            className={primaryBtnClass}
+          >
+            Mark as left
+          </button>
+        </div>
+      </Modal>
 
       <ConfirmDialog
         open={confirmDelete}

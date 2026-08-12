@@ -4,23 +4,23 @@
     "description": "Setu Tuition is coaching class management software for attendance, fees, parent messaging and results, built for tuition teachers in India. Coming soon.",
     "keywords": [
       "Setu Tuition",
-      "coaching class management software",
+      "tuition class management software",
       "tuition management software India",
       "tuition fees management software",
-      "coaching institute software"
+      "tuition teacher app"
     ]
   },
   "hero": {
     "eyebrow": "Setu Tuition — Coming Soon",
-    "headline": "Coaching Class Management Software for Tuition Teachers & Institutes",
-    "subheadline": "Attendance, fees, parent communication and results for tuition classes of any size — from a single home tutor to a multi-batch coaching institute."
+    "headline": "Tuition Class Management Software for Teachers",
+    "subheadline": "Attendance, fees, parent communication and results for the class you take yourself — built around one teacher and their students, not an office full of staff."
   },
   "body": {
     "headline": "What we're building",
     "paragraphs": [
-      "The free Tuition Class Manager already runs a class end to end in the browser — students, batches, daily attendance, monthly fees, receipts and test results, entirely offline and without a login. Setu Tuition is what comes next when one teacher becomes a team.",
-      "Automated WhatsApp reminders that go out on their own instead of one tap per parent, a parent login that always shows the live fee and attendance position, multiple teachers with their own access, online fee collection that reconciles itself, and every branch of an institute visible in one place.",
-      "It is built on the same platform behind Setu Dine and the Browser Based POS, so the data you enter in the free tool today comes with you."
+      "The free Tuition Class Manager already runs a class end to end in the browser — students, batches, daily attendance, monthly fees, receipts and test results, entirely offline and without a login. Setu Tuition is what comes next when the browser itself becomes the limit.",
+      "Automated WhatsApp reminders that go out on their own instead of one tap per parent, a parent view that always shows the live fee and attendance position instead of a snapshot, online fee collection that reconciles itself against the right month, and your class synced across your phone, tablet and laptop rather than living in one browser.",
+      "It stays a single teacher's tool. Staff rosters, teacher attendance and salary management belong to a different kind of product, and we are deliberately not building this into one."
     ]
   },
   "cta": {

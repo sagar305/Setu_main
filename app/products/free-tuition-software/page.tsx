@@ -11,6 +11,7 @@ import {
   FileSpreadsheet,
   GraduationCap,
   Link2,
+  ListPlus,
   Lock,
   MessageCircle,
   NotebookPen,
@@ -22,6 +23,7 @@ import {
   ShieldCheck,
   TrendingUp,
   Upload,
+  UserMinus,
   UserPlus,
   Users,
   Wallet,
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     "tuition fees management app",
     "student attendance app free",
     "tuition fee receipt format",
-    "coaching institute management software free",
+    "tuition teacher software free",
     "home tutor app India",
   ],
   alternates: {
@@ -124,7 +126,7 @@ const FEES: Feature[] = [
     icon: Wallet,
     title: "Fees that add themselves up",
     description:
-      "The fee comes from the batch. Every active student's monthly due is raised automatically from their joining month onwards — no spreadsheet to maintain.",
+      "The fee comes from the batch. Every student's monthly due is raised automatically from their joining month onwards — no spreadsheet to maintain.",
   },
   {
     icon: Percent,
@@ -199,6 +201,18 @@ const RUNNING: Feature[] = [
       "Every parent who calls or visits, with a follow-up date. The ones you call back are the ones who join.",
   },
   {
+    icon: UserMinus,
+    title: "When a student leaves",
+    description:
+      "Mark the last day and they come off the roll and every attendance list. No further fee is raised, their history stays, and anything still pending stays on the fees list until it is paid or written off. If they come back, one tap puts them back.",
+  },
+  {
+    icon: ListPlus,
+    title: "Your own fields on a student",
+    description:
+      "Keep whatever you actually track — school test marks, a board roll number, weak topics, which bus they take. Add your own fields per student and they export with everything else.",
+  },
+  {
     icon: TrendingUp,
     title: "Reports that answer real questions",
     description:
@@ -246,6 +260,16 @@ const FAQ_ITEMS = [
       "Add your UPI ID in Settings and every fee receipt and reminder link carries a Pay now button and a UPI QR. The parent pays straight into your account — the money never passes through Setu. You then record the payment in the app.",
   },
   {
+    question: "What happens when a student leaves?",
+    answer:
+      "Mark the last day and they come off the roll and off every batch's attendance list. No fee is raised for any month after that, but their whole history — attendance, payments, marks — is kept, and anything they still owe stays on the fees screen so it does not quietly vanish. Waive the dues there if you are writing it off. If they come back later, one tap puts them back and fees resume from that month, not from the months they were away.",
+  },
+  {
+    question: "Can I track my own things about a student?",
+    answer:
+      "Yes. Add your own fields to any student — school test marks, a board roll number, weak topics, whatever you actually track. They show on the student, export to CSV and sync to your Google Sheet with everything else.",
+  },
+  {
     question: "What happens to my data if I clear my browser?",
     answer:
       "It is gone, which is why the app pushes you to take a backup or connect a Google Sheet. Both restore a full class onto a new device or a new browser in one step.",
@@ -256,9 +280,9 @@ const FAQ_ITEMS = [
       "Yes. Marking attendance, collecting fees, entering marks and everything else works fully offline. Only sending a WhatsApp message and syncing to Google Sheets need a connection, and changes queue up until you are back online.",
   },
   {
-    question: "Can I use it for a coaching institute with many batches?",
+    question: "Can I run several batches?",
     answer:
-      "Yes — batches, per-batch fees, per-batch attendance and per-batch tests are all built in, and there is no limit on students. What it does not do yet is separate logins for other teachers or a view across multiple branches; that is what Setu Tuition adds.",
+      "Yes — as many batches as you actually take, each with its own days, timing and fee, and no limit on students. It is built around one teacher, so it will not let you create the same batch twice or two batches that run at the same time. If you need staff rosters, teacher attendance or salary management, this is not that product.",
   },
   {
     question: "Do the receipt links expose my students' data?",
@@ -284,6 +308,8 @@ const softwareApplicationSchema = {
     "Fee reminders for every pending parent",
     "Tests with whole-batch marks entry and result sharing",
     "Dated diary reminders per student",
+    "Student-left handling that stops fees but keeps history",
+    "Custom fields per student, e.g. school test marks",
     "Admission enquiry register with follow-ups",
     "Attendance and collection reports with CSV export",
     "Bulk student import from CSV or a pasted list",
@@ -469,8 +495,8 @@ export default function FreeTuitionSoftwarePage() {
               <p className="mt-4 leading-relaxed text-muted">
                 Because everything runs in your browser with no account, the app cannot send a
                 message on its own, cannot show parents a page that updates by itself, and cannot
-                be used by two teachers on two devices with the same data. Those need a server —
-                and that is exactly what{" "}
+                keep your own phone and laptop in step. Those need a server — and that is exactly
+                what{" "}
                 <Link href="/products/tuition" className="font-semibold text-indigo hover:underline">
                   Setu Tuition
                 </Link>{" "}

@@ -71,24 +71,19 @@ const PAID_ADDITIONS = [
       "Shared links are a snapshot of the moment they were made. Parents get a page that always shows the current fee position, attendance and results.",
   },
   {
-    title: "More than one teacher",
-    description:
-      "Separate logins for the teachers who take your batches, with what each of them can see and change under your control.",
-  },
-  {
     title: "Online fee collection",
     description:
       "Parents pay from the reminder itself and the payment reconciles against the right month on its own — no manual entry, no receipt to type.",
   },
   {
-    title: "Every branch in one place",
+    title: "Your class on every device",
     description:
-      "Run more than one centre from a single account, with batch, attendance and collection numbers rolled up across all of them.",
+      "Cloud sync between your own phone, tablet and laptop, instead of one browser holding the only copy of everything.",
   },
   {
-    title: "Your data, everywhere",
+    title: "Years of history, kept",
     description:
-      "Cloud sync across every device you and your staff use, instead of one browser holding the only copy.",
+      "Past batches, old students and previous years stay searchable without weighing down the class you are teaching now.",
   },
 ];
 
@@ -136,8 +131,8 @@ export default function TuitionPage() {
               What the paid product adds
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-muted">
-              The free Tuition Class Manager is free forever for one teacher. Setu Tuition is for
-              the things a browser on its own genuinely cannot do.
+              The free Tuition Class Manager is free forever. Setu Tuition is for the things a
+              browser on its own genuinely cannot do — still for one teacher, not an institute.
             </p>
           </FadeIn>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

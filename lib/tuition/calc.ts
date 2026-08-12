@@ -99,22 +99,42 @@ export function buildTuitionDue(
   };
 }
 
+export function hasLeft(student: Student): boolean {
+  return student.status !== "active";
+}
+
 /**
  * Which monthly dues are missing for a student — from their joining month up
  * to the current month. Dues already generated are never rebuilt, so a later
  * fee change does not rewrite history.
+ *
+ * A student who has left is billed up to and including the month they left
+ * (the month they attended part of); nothing is raised after that. The teacher
+ * can waive that last due if they gave it free.
  */
 export function missingDuePeriods(
   student: Student,
   existingDues: FeeDue[],
   upToPeriod = monthKey(todayIso())
 ): string[] {
-  if (student.status !== "active") return [];
-  const start = student.joinDate ? monthKey(student.joinDate) : upToPeriod;
+  // A student who left and came back is billed from the month they returned.
+  const anchor = student.rejoinedOn || student.joinDate;
+  const start = anchor ? monthKey(anchor) : upToPeriod;
+
+  let end = upToPeriod;
+  if (hasLeft(student)) {
+    // No leaving date recorded (or a record written before the field existed)
+    // means we cannot know when to stop, so we stop now.
+    if (!student.leftOn) return [];
+    const leftMonth = monthKey(student.leftOn);
+    end = leftMonth < upToPeriod ? leftMonth : upToPeriod;
+  }
+  if (end < start) return [];
+
   const have = new Set(
     existingDues.filter((d) => d.studentId === student.id && d.kind === "tuition").map((d) => d.period)
   );
-  return monthsBetween(start, upToPeriod).filter((period) => !have.has(period));
+  return monthsBetween(start, end).filter((period) => !have.has(period));
 }
 
 // ---------------------------------------------------------------------------

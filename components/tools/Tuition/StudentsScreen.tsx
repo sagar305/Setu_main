@@ -6,7 +6,7 @@ import { useTuition } from "@/lib/tuition/store";
 import { studentBalance, studentMonthlyFee } from "@/lib/tuition/calc";
 import { downloadCsv, studentsCsv } from "@/lib/tuition/csv";
 import { formatMoney } from "@/lib/pos/types";
-import type { Student } from "@/lib/tuition/types";
+import { formatDate, type Student } from "@/lib/tuition/types";
 import {
   EmptyState,
   inputClass,
@@ -177,7 +177,9 @@ export function StudentsScreen({
                         .join(" · ") || "No batch"}
                     </p>
                     <p className="truncate text-xs text-muted">
-                      {student.parentPhone || "No parent number"}
+                      {student.status !== "active" && student.leftOn
+                        ? `Left ${formatDate(student.leftOn)}`
+                        : student.parentPhone || "No parent number"}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
