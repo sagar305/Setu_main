@@ -22,6 +22,7 @@ import {
   type ClinicSettings,
   type Doctor,
   type Patient,
+  type ReceiptPaperSize,
   type RxPaperSize,
   type Visit,
 } from "./types";
@@ -527,4 +528,177 @@ export function describeFrequency(frequency: string): string {
   const perDay = dosesPerDay(frequency);
   if (perDay === null) return "";
   return `${perDay} per day`;
+}
+
+// ---------------------------------------------------------------------------
+// Receipts
+// ---------------------------------------------------------------------------
+
+/**
+ * Receipts are a different physical object from a prescription: a 58/80mm roll
+ * on a thermal printer, where the driver takes the page width literally. They
+ * get their own document rules and their own monospace face.
+ */
+const RECEIPT_WIDTH_MM: Record<ReceiptPaperSize, number> = {
+  "58mm": 58,
+  "80mm": 80,
+  a4: 210,
+};
+
+const RECEIPT_CONTENT_MM: Record<ReceiptPaperSize, number> = {
+  "58mm": 50,
+  "80mm": 72,
+  a4: 190,
+};
+
+const RECEIPT_RULES = `
+  * { box-sizing: border-box; }
+  body { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; line-height: 1.45; color: #000; background: #fff; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 1px 0; vertical-align: top; }
+  .r { text-align: right; }
+  .c { text-align: center; }
+  .b { font-weight: 700; }
+  .lg { font-size: 15px; }
+  .sm { font-size: 10px; }
+  .rule { border-top: 1px dashed #000; margin: 4px 0; }
+  .solid { border-top: 1px solid #000; margin: 4px 0; }
+  .row { display: flex; justify-content: space-between; gap: 8px; }
+  .qr { display: block; margin: 6px auto 0; width: 110px; height: 110px; }
+`;
+
+export type ReceiptContext = {
+  business: Business | null;
+  settings: ClinicSettings;
+  patient: Patient | null;
+  doctorName: string;
+  receiptNo: string;
+  date: string;
+  lines: { label: string; amount: number }[];
+  discount: number;
+  total: number;
+  paid: number;
+  paymentMode: string;
+  currencySymbol: string;
+  /** Data URL of the UPI QR, when a UPI ID is configured. */
+  upiQrDataUrl?: string;
+};
+
+function money(value: number, symbol: string): string {
+  return `${symbol}${value.toFixed(2)}`;
+}
+
+export function buildReceiptHtml(ctx: ReceiptContext): string {
+  const { business, patient, currencySymbol: sym } = ctx;
+  const due = Math.max(0, ctx.total - ctx.paid);
+
+  const lineRows = ctx.lines
+    .map(
+      (line) =>
+        `<tr><td>${escapeHtml(line.label)}</td><td class="r">${money(line.amount, sym)}</td></tr>`
+    )
+    .join("");
+
+  return `
+    <div class="c">
+      <div class="b lg">${escapeHtml(business?.name ?? "")}</div>
+      ${business?.address ? `<div class="sm">${escapeHtml(business.address)}</div>` : ""}
+      ${business?.phone ? `<div class="sm">${escapeHtml(business.phone)}</div>` : ""}
+    </div>
+    <div class="rule"></div>
+    <div class="row sm"><span>Receipt</span><span>${escapeHtml(ctx.receiptNo)}</span></div>
+    <div class="row sm"><span>Date</span><span>${escapeHtml(formatDate(ctx.date))}</span></div>
+    ${
+      patient
+        ? `<div class="row sm"><span>Patient</span><span>${escapeHtml(patient.name)}</span></div>
+           <div class="row sm"><span>File no.</span><span>${escapeHtml(patient.code)}</span></div>`
+        : ""
+    }
+    ${
+      ctx.doctorName
+        ? `<div class="row sm"><span>Doctor</span><span>${escapeHtml(ctx.doctorName)}</span></div>`
+        : ""
+    }
+    <div class="rule"></div>
+    <table>${lineRows}</table>
+    <div class="rule"></div>
+    ${
+      ctx.discount > 0
+        ? `<div class="row"><span>Discount</span><span>-${money(ctx.discount, sym)}</span></div>`
+        : ""
+    }
+    <div class="row b"><span>Total</span><span>${money(ctx.total, sym)}</span></div>
+    <div class="row"><span>Paid (${escapeHtml(ctx.paymentMode)})</span><span>${money(
+      ctx.paid,
+      sym
+    )}</span></div>
+    ${due > 0 ? `<div class="row b"><span>Balance due</span><span>${money(due, sym)}</span></div>` : ""}
+    ${ctx.upiQrDataUrl ? `<img class="qr" src="${ctx.upiQrDataUrl}" alt="">` : ""}
+    ${ctx.upiQrDataUrl ? `<div class="c sm">Scan to pay by UPI</div>` : ""}
+    <div class="solid"></div>
+    <div class="c sm">Thank you — get well soon.</div>
+  `;
+}
+
+export function printReceipt(ctx: ReceiptContext): boolean {
+  if (typeof document === "undefined") return false;
+  const paper = ctx.settings.receiptPaperSize;
+  const isRoll = paper !== "a4";
+
+  const frame = document.createElement("iframe");
+  frame.setAttribute("aria-hidden", "true");
+  frame.style.position = "fixed";
+  frame.style.right = "0";
+  frame.style.bottom = "0";
+  frame.style.width = "0";
+  frame.style.height = "0";
+  frame.style.border = "0";
+  document.body.appendChild(frame);
+
+  const frameDocument = frame.contentWindow?.document;
+  if (!frameDocument) {
+    document.body.removeChild(frame);
+    return false;
+  }
+
+  const styles = `
+    @page { size: ${isRoll ? `${RECEIPT_WIDTH_MM[paper]}mm auto` : "A4"}; margin: ${
+      isRoll ? "0" : "12mm"
+    }; }
+    html, body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { width: ${RECEIPT_CONTENT_MM[paper]}mm; padding: ${isRoll ? "3mm 2mm" : "0"}; }
+    ${RECEIPT_RULES}
+  `;
+
+  frameDocument.open();
+  frameDocument.write(
+    `<!doctype html><html><head><meta charset="utf-8"><title>${escapeHtml(
+      ctx.receiptNo
+    )}</title><style>${styles}</style></head><body>${buildReceiptHtml(ctx)}</body></html>`
+  );
+  frameDocument.close();
+
+  const run = () => {
+    try {
+      frame.contentWindow?.focus();
+      frame.contentWindow?.print();
+    } catch {
+      // Printing is best-effort; the on-screen copy is still readable.
+    }
+    window.setTimeout(() => {
+      if (frame.parentNode) document.body.removeChild(frame);
+    }, 1000);
+  };
+
+  if (frameDocument.readyState === "complete") {
+    window.setTimeout(run, 50);
+  } else {
+    frame.onload = () => window.setTimeout(run, 50);
+  }
+  return true;
+}
+
+/** The on-screen receipt preview uses the same rules as the printed roll. */
+export function receiptPreviewStyleSheet(): string {
+  return RECEIPT_RULES.replace(/\bbody\b/g, ".clinic-receipt");
 }
