@@ -74,6 +74,7 @@ export type ToolSlug =
   | "journal-entry"
   | "general-ledger"
   | "bank-reconciliation"
+  | "bank-statement-analyzer"
   | "trial-balance"
   // Statements & reports
   | "profit-loss-statement"
@@ -671,6 +672,25 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: [],
     paidPath: "platform",
     integrations: [{ with: "cash-book", ux: "Reconcile against your recorded cash book" }],
+  },
+
+  {
+    slug: "bank-statement-analyzer",
+    name: "Bank Statement Analyzer",
+    category: "finance",
+    kind: "app",
+    tier: "growth",
+    status: "built",
+    route: "/tools/bank-statement-analyzer",
+    reads: [],
+    writes: [],
+    dependsOn: [],
+    paidPath: "platform",
+    integrations: [
+      { with: "bank-reconciliation", ux: "Hand off to the manual BRS workflow" },
+      { with: "cash-book", ux: "Compare statement cash entries with the cash book" },
+      { with: "expense-tracker", ux: "Classified debits line up with tracked expenses" },
+    ],
   },
 
   // ---- Statements & reports ----------------------------------------------

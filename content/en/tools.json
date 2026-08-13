@@ -401,7 +401,11 @@
       "seo": {
         "title": "Customer Ledger (Udhaar Khata) | Setu Technology",
         "description": "Track customer balances, payments and dues in one free ledger. No signup — add customers, log transactions and see who owes what, instantly, in your browser.",
-        "keywords": ["udhaar khata", "customer ledger", "credit book"]
+        "keywords": [
+          "udhaar khata",
+          "customer ledger",
+          "credit book"
+        ]
       },
       "hero": {
         "eyebrow": "Free Tool — Customer Ledger",
@@ -603,6 +607,28 @@
         "eyebrow": "Free Tool — Bank Reconciliation",
         "headline": "Bank Reconciliation",
         "subheadline": "List the reconciling items until bank and book agree."
+      }
+    },
+    {
+      "slug": "bank-statement-analyzer",
+      "href": "/tools/bank-statement-analyzer",
+      "name": "Bank Statement Analyzer",
+      "category": "finance",
+      "icon": "landmark",
+      "shortDescription": "Analyze, classify and review bank statements privately in your browser.",
+      "seo": {
+        "title": "Bank Statement Analyzer - Free Tool | Setu Technology",
+        "description": "Analyze, classify and review bank statements privately in your browser.",
+        "keywords": [
+          "bank statement analyzer",
+          "bank statement to excel",
+          "statement analysis"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Bank Statement Analyzer",
+        "headline": "Bank Statement Analyzer",
+        "subheadline": "Import, classify and analyse statements without uploading them anywhere."
       }
     },
     {

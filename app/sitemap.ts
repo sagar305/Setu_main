@@ -78,6 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/journal-entry",
     "/tools/general-ledger",
     "/tools/bank-reconciliation",
+    "/tools/bank-statement-analyzer",
     "/tools/trial-balance",
     "/tools/profit-loss-statement",
     "/tools/balance-sheet",
