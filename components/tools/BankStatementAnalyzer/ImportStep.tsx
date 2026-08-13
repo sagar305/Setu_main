@@ -24,6 +24,7 @@ import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerPr
 import { ColumnMapper } from "@/components/tools/BankStatementAnalyzer/ColumnMapper";
 import { ProgressPanel, type ProgressState } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import { PrivacyNote, ProcessingNote } from "@/components/tools/BankStatementAnalyzer/PrivacyNote";
+import { SampleDownload } from "@/components/tools/BankStatementAnalyzer/SampleDownload";
 import {
   PdfPasswordRequiredError,
   detectFormat,
@@ -201,6 +202,10 @@ export function ImportStep() {
               <SecondaryButton onClick={loadDemo} disabled={busy}>
                 Try a demo statement
               </SecondaryButton>
+            </div>
+
+            <div className="mt-6 border-t border-muted-line/30 pt-5">
+              <SampleDownload compact />
             </div>
           </div>
 

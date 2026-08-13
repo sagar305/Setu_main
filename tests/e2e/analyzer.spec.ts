@@ -7,6 +7,7 @@
 
 import { expect, test } from "@playwright/test";
 import { join } from "node:path";
+import { DEMO_TOTALS } from "../../lib/bankStatement/demo/sampleStatement";
 
 const fixtures = join(process.cwd(), "tests", "fixtures", "generic");
 
@@ -58,9 +59,11 @@ test("imports a text-layer PDF, reconstructing rows from positioned text", async
   await expect(page.getByText("statement-04.pdf")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByRole("button", { name: /Import 12 transactions/ })).toBeVisible();
 
-  // The header block has to survive extraction too.
+  // The narration column has to come through intact. This fixture clips each
+  // cell to its own column width, as a real statement does, so the assertion
+  // uses a narration that fits rather than one the layout would truncate.
   await expect(page.getByText("VALID", { exact: true }).first()).toBeVisible();
-  await expect(page.getByText("NEFT CR/MERIDIAN RETAIL PVT LTD/INV-4101")).toBeVisible();
+  await expect(page.getByText("NEFT DR/SALARY/RAHUL MEHTA")).toBeVisible();
 
   await page.getByRole("button", { name: /Import 12 transactions/ }).click();
   await expect(page.getByText("Imported statements (1)")).toBeVisible();
@@ -147,3 +150,39 @@ async function makeEncryptedPdf(): Promise<ArrayBuffer> {
   doc.text("Locked statement", 40, 60);
   return doc.output("arraybuffer");
 }
+
+// The round trip that matters: the sample we hand out has to survive our own
+// parser. It is generated as a real multi-page statement with RIGHT-aligned
+// amount columns, so this also proves the PDF column reconstruction copes with
+// the way banks actually print numbers.
+test.describe("downloadable sample statement", () => {
+  for (const [format, button, extension] of [
+    ["PDF", "Sample PDF", "pdf"],
+    ["Excel", "Sample Excel", "xlsx"],
+    ["CSV", "Sample CSV", "csv"],
+  ] as const) {
+    test(`${format} sample downloads and re-imports to ${DEMO_TOTALS.count} transactions`, async ({
+      page,
+    }, testInfo) => {
+      await page.goto(ANALYZER);
+
+      const downloadPromise = page.waitForEvent("download");
+      await page.getByRole("button", { name: button }).first().click();
+      const download = await downloadPromise;
+      expect(download.suggestedFilename()).toBe(`setu-sample-bank-statement.${extension}`);
+
+      const saved = testInfo.outputPath(`sample.${extension}`);
+      await download.saveAs(saved);
+
+      // Feed it straight back in through the ordinary import path.
+      await page.goto(`${ANALYZER}/import`);
+      await page.locator('input[type="file"]').setInputFiles(saved);
+
+      await expect(
+        page.getByRole("button", { name: new RegExp(`Import ${DEMO_TOTALS.count} transactions`) })
+      ).toBeVisible({ timeout: 60_000 });
+      // Extraction must reconcile against the statement's own running balance.
+      await expect(page.getByText("VALID", { exact: true }).first()).toBeVisible();
+    });
+  }
+});

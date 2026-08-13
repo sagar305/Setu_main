@@ -56,7 +56,12 @@ doc.setFont("helvetica", "normal");
 y += 18;
 for (const row of ROWS) {
   row.forEach((cell, index) => {
-    if (cell !== "") doc.text(cell, COLUMNS[index], y);
+    if (cell === "") return;
+    // Clip each cell to its own column. Without this the long narrations
+    // physically overrun the withdrawal column, which no real statement does —
+    // and a fixture that overlaps is testing a layout that does not exist.
+    const limit = (COLUMNS[index + 1] ?? 560) - COLUMNS[index] - 8;
+    doc.text(doc.splitTextToSize(cell, limit)[0] ?? "", COLUMNS[index], y);
   });
   y += 16;
 }

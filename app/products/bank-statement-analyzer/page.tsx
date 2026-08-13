@@ -44,6 +44,7 @@ import {
 } from "lucide-react";
 import { ImportStep } from "@/components/tools/BankStatementAnalyzer/ImportStep";
 import { StepNav } from "@/components/tools/BankStatementAnalyzer/StepNav";
+import { SampleDownload } from "@/components/tools/BankStatementAnalyzer/SampleDownload";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
@@ -661,6 +662,10 @@ export default function BankStatementAnalyzerPage() {
             >
               Load the demo statement
             </Link>
+
+            <div className="mt-10 border-t border-muted-line/30 pt-8">
+              <SampleDownload />
+            </div>
           </FadeIn>
         </div>
       </section>

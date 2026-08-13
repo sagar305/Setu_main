@@ -24,7 +24,7 @@ export class PdfPasswordRequiredError extends Error {
   }
 }
 
-type TextItem = { text: string; x: number; y: number; width: number };
+export type TextItem = { text: string; x: number; y: number; width: number };
 
 export type PdfExtraction = {
   rows: RawRow[];
@@ -119,9 +119,16 @@ export async function extractPdf(
     const lines = groupIntoLines(items);
     pageText.push(lines.map((line) => line.map((i) => i.text).join(" ")).join("\n"));
 
-    const boundaries = columnBoundaries(lines);
+    // Prefer the whitespace projection — it handles right-aligned amount
+    // columns, which is how most banks print them. Fall back to left-edge
+    // clustering only when the projection cannot find a column structure.
+    const ranges = columnRanges(lines);
+    const boundaries = ranges.length >= 2 ? null : leftEdgeBoundaries(lines);
+
     lines.forEach((line, index) => {
-      const cells = splitIntoColumns(line, boundaries);
+      const cells = boundaries
+        ? splitIntoColumns(line, boundaries)
+        : splitIntoRanges(line, ranges);
       if (cells.every((cell) => cell === "")) return;
       rows.push({ cells, page: pageNumber, row: index + 1 });
     });
@@ -139,7 +146,7 @@ export async function extractPdf(
 }
 
 /** Cluster items into lines by y, then order each line left to right. */
-function groupIntoLines(items: TextItem[]): TextItem[][] {
+export function groupIntoLines(items: TextItem[]): TextItem[][] {
   if (items.length === 0) return [];
 
   const sorted = [...items].sort((a, b) => b.y - a.y || a.x - b.x);
@@ -163,11 +170,82 @@ function groupIntoLines(items: TextItem[]): TextItem[][] {
 }
 
 /**
- * Find the x positions that repeat across many lines — those are the column
- * starts. Positions are rounded into 4pt buckets so slight kerning differences
- * between rows still land together.
+ * Work out where the columns are.
+ * ---------------------------------------------------------------------------
+ * Clustering the LEFT edge of each text run only works when every column is
+ * left-aligned. Real statements right-align the amount columns, so a short
+ * amount ("710.00") starts far to the right of a long one ("1,38,162.00") and
+ * left-edge clustering scatters them across the wrong columns.
+ *
+ * So instead of guessing where text starts, we find where text never appears:
+ * project every run onto the horizontal axis, and the vertical strips of
+ * whitespace that survive across the whole page are the column separators.
+ * That works the same for left-, right- and centre-aligned columns.
  */
-function columnBoundaries(lines: TextItem[][]): number[] {
+export type ColumnRange = { start: number; end: number };
+
+/** Whitespace narrower than this is a word gap, not a column separator. */
+const MIN_SEPARATOR = 4;
+
+export function columnRanges(lines: TextItem[][]): ColumnRange[] {
+  // Only rows that look like table rows get a vote. A wide letterhead line
+  // would otherwise paint over every separator on the page.
+  const tableLines = lines.filter((line) => line.length >= 3);
+  if (tableLines.length < 3) return [];
+
+  let maxX = 0;
+  for (const line of tableLines) {
+    for (const item of line) maxX = Math.max(maxX, item.x + item.width);
+  }
+  if (maxX <= 0) return [];
+
+  // 1pt bins: covered[i] is how many table rows have text over that point.
+  const covered = new Uint32Array(Math.ceil(maxX) + 2);
+  for (const line of tableLines) {
+    for (const item of line) {
+      const from = Math.max(0, Math.floor(item.x));
+      const to = Math.min(covered.length - 1, Math.ceil(item.x + item.width));
+      for (let i = from; i <= to; i += 1) covered[i] += 1;
+    }
+  }
+
+  // A bin counts as occupied only if a real share of rows cover it. Without
+  // this, one outlier line closes a separator for the whole page: a header
+  // label like "Withdrawal Amt." is wide enough to overhang the reference
+  // column, and that single row would fuse the two columns together.
+  const occupied = Math.max(2, Math.ceil(tableLines.length * 0.08));
+
+  // Contiguous runs of occupied bins are candidate columns.
+  const runs: ColumnRange[] = [];
+  let runStart = -1;
+  for (let i = 0; i < covered.length; i += 1) {
+    if (covered[i] >= occupied) {
+      if (runStart === -1) runStart = i;
+    } else if (runStart !== -1) {
+      runs.push({ start: runStart, end: i });
+      runStart = -1;
+    }
+  }
+  if (runStart !== -1) runs.push({ start: runStart, end: covered.length - 1 });
+
+  // Merge runs separated by a gap too narrow to be a real column separator —
+  // those are the spaces between words inside one cell.
+  const merged: ColumnRange[] = [];
+  for (const run of runs) {
+    const previous = merged[merged.length - 1];
+    if (previous && run.start - previous.end < MIN_SEPARATOR) previous.end = run.end;
+    else merged.push({ ...run });
+  }
+
+  return merged;
+}
+
+/**
+ * Fallback for pages where the whitespace projection finds nothing usable
+ * (a single dense column, or too few rows): cluster left edges, which is
+ * correct for a plain left-aligned layout.
+ */
+export function leftEdgeBoundaries(lines: TextItem[][]): number[] {
   const buckets = new Map<number, number>();
   for (const line of lines) {
     if (line.length < 2) continue;
@@ -183,7 +261,6 @@ function columnBoundaries(lines: TextItem[][]): number[] {
     .map(([position]) => position)
     .sort((a, b) => a - b);
 
-  // Merge starts that sit within 12pt of each other — same column, ragged text.
   const merged: number[] = [];
   for (const start of starts) {
     if (merged.length === 0 || start - merged[merged.length - 1] > 12) merged.push(start);
@@ -191,7 +268,39 @@ function columnBoundaries(lines: TextItem[][]): number[] {
   return merged;
 }
 
-function splitIntoColumns(line: TextItem[], boundaries: number[]): string[] {
+/** Assign a line's runs to columns by where the middle of each run sits. */
+export function splitIntoRanges(line: TextItem[], ranges: ColumnRange[]): string[] {
+  const cells: string[] = new Array(ranges.length).fill("");
+  for (const item of line) {
+    const centre = item.x + item.width / 2;
+    let column = -1;
+    for (let i = 0; i < ranges.length; i += 1) {
+      if (centre >= ranges[i].start && centre <= ranges[i].end) {
+        column = i;
+        break;
+      }
+    }
+    // Outside every column (rare — a stray glyph): fall back to the nearest.
+    if (column === -1) {
+      let best = Number.POSITIVE_INFINITY;
+      for (let i = 0; i < ranges.length; i += 1) {
+        const distance = Math.min(
+          Math.abs(centre - ranges[i].start),
+          Math.abs(centre - ranges[i].end)
+        );
+        if (distance < best) {
+          best = distance;
+          column = i;
+        }
+      }
+    }
+    if (column < 0) continue;
+    cells[column] = cells[column] ? `${cells[column]} ${item.text}` : item.text;
+  }
+  return cells.map((cell) => sanitiseCell(cell));
+}
+
+export function splitIntoColumns(line: TextItem[], boundaries: number[]): string[] {
   if (boundaries.length === 0) {
     return [sanitiseCell(line.map((item) => item.text).join(" "))];
   }
