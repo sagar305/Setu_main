@@ -36,6 +36,7 @@ import {
   Wallet,
   BookUser,
   UserRound,
+  Palette,
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
@@ -213,6 +214,12 @@ const BILLING: Feature[] = [
       "One bill can take as many tenders as it needs. Add your own methods too — Swiggy, Zomato, Sodexo.",
   },
   {
+    icon: Palette,
+    title: "Design the bill once",
+    description:
+      "Lay out your bill in the Receipt Designer — accent colour, logo, header and footer, paper size — and pick it in Settings. It is the same template the rest of the Setu tools use, so one look carries across everything you hand a customer.",
+  },
+  {
     icon: Share2,
     title: "Print, PDF or WhatsApp",
     description:
@@ -250,6 +257,12 @@ const KITCHEN: Feature[] = [
     title: "Wastage that stays visible",
     description:
       "A dish cancelled after it reached the kitchen was cooked, so the ingredients do not come back. They move from 'used' to 'wasted' instead, which is the number worth watching.",
+  },
+  {
+    icon: Lock,
+    title: "Lock the pass",
+    description:
+      "The kitchen screen goes full screen and locks from the counter — no nav, no way back to the till, and nothing a stray tap can change. Tab and Enter cannot walk out of it either. Only the counter PIN releases it.",
   },
   {
     icon: ClipboardList,
@@ -322,6 +335,18 @@ const TRUST: Feature[] = [
     title: "Backup, and a nag when you forget",
     description:
       "Your data lives in this browser, which is why there is no login — and why one JSON file is the difference between a cleared cache and losing your year. Free Dine reminds you weekly.",
+  },
+  {
+    icon: Sheet,
+    title: "Your own Google Sheet, as the safety net",
+    description:
+      "Push the menu, sales, diners, stock and bookings into a sheet you own, and pull the lot back to rebuild a browser that lost its data. It is your spreadsheet and your Apps Script — no Setu server sits in the middle, and the sheet doubles as the reporting feed for anyone who lives in Excel.",
+  },
+  {
+    icon: Download,
+    title: "Everything leaves as CSV",
+    description:
+      "Menu, bills, bill lines, stock movements, recipes, bookings and the day's numbers all export as CSV, and the menu imports back. Nothing you put in is trapped.",
   },
   {
     icon: Lock,
@@ -518,6 +543,7 @@ const softwareApplicationSchema = {
     "Open tickets that survive a browser restart",
     "Kitchen order tickets printed per round, without prices",
     "Live kitchen screen in a second tab, updating without a server",
+    "Kitchen screen lockable as a kiosk from the counter",
     "Raw material stock with per-dish recipes",
     "Recipes that follow the chosen size and add-ons",
     "Weighted-average ingredient costing and food-cost percentage",
@@ -534,8 +560,11 @@ const softwareApplicationSchema = {
     "Optional service charge, off by default",
     "Multiple payment methods on one bill",
     "Thermal (80mm/58mm) and A4 bill and KOT printing",
+    "Bill layouts designed in the Receipt Designer",
     "Day summary, item report, hourly sales and printable day close",
     "CSV menu import and export",
+    "CSV exports for bills, stock, recipes and bookings",
+    "Google Sheet sync and restore, to a sheet you own",
     "PIN counter lock with idle auto-lock",
     "JSON backup and restore",
     "Works offline, no login required",

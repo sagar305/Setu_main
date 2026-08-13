@@ -27,6 +27,11 @@ export function ShowcaseGrid({
   section: ShowcaseSection;
   className?: string;
 }) {
+  // Four across only divides evenly for multiples of four; anything else
+  // leaves the last card stranded alone in its row, which reads as a mistake
+  // rather than as the end of the list. Three across covers the rest.
+  const columns = section.cards.length % 4 === 0 ? "lg:grid-cols-4" : "lg:grid-cols-3";
+
   return (
     <section id={id} className={className}>
       <div className="mx-auto max-w-6xl px-6 py-16">
@@ -36,7 +41,7 @@ export function ShowcaseGrid({
           <p className="mt-4 text-lg text-muted">{section.subtext}</p>
         </FadeIn>
 
-        <FadeInStagger className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <FadeInStagger className={`mt-10 grid gap-6 sm:grid-cols-2 ${columns}`}>
           {section.cards.map((card) => {
             const isMore = card.variant === "more";
             return (

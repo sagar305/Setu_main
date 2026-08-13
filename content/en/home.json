@@ -2,14 +2,25 @@
   "seo": {
     "title": "Setu Technology | Business Software Built for Every Operator",
     "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu Dine for restaurants. Retail and clinics next.",
-    "keywords": ["Setu Technology", "business management software India", "restaurant POS India", "Setu Dine"]
+    "keywords": [
+      "Setu Technology",
+      "business management software India",
+      "restaurant POS India",
+      "Setu Dine"
+    ]
   },
   "hero": {
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
     "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
-    "primaryCta": { "label": "Explore products", "href": "/products" },
-    "secondaryCta": { "label": "Explore free tools", "href": "#tools" }
+    "primaryCta": {
+      "label": "Explore products",
+      "href": "/products"
+    },
+    "secondaryCta": {
+      "label": "Explore free tools",
+      "href": "#tools"
+    }
   },
   "tools": {
     "eyebrow": "Free Tools",
@@ -21,21 +32,40 @@
         "name": "Browser Based POS",
         "tagline": "Billing, right in your browser",
         "description": "A free, no-install point of sale that runs in any browser — start billing in minutes with nothing to download.",
-        "cta": { "label": "Try Browser POS", "href": "/products/browser-based-pos" }
+        "cta": {
+          "label": "Try Browser POS",
+          "href": "/products/browser-based-pos"
+        }
+      },
+      {
+        "id": "free-dine",
+        "name": "Free Dine",
+        "tagline": "A restaurant POS, free",
+        "description": "Tables, kitchen tickets, split bills and GST — a full dining-room till that runs in your browser with no login.",
+        "cta": {
+          "label": "Try Free Dine",
+          "href": "/products/free-restaurant-pos"
+        }
       },
       {
         "id": "qr-menu-generator",
         "name": "QR Menu Generator",
         "tagline": "Your menu in a QR code",
         "description": "Build your menu and get a print-ready QR code — the entire menu lives inside the QR itself, no hosting needed.",
-        "cta": { "label": "Create QR Menu", "href": "/tools/qr-menu-generator" }
+        "cta": {
+          "label": "Create QR Menu",
+          "href": "/tools/qr-menu-generator"
+        }
       },
       {
         "id": "invoice-generator",
         "name": "Invoice Generator",
         "tagline": "GST-ready invoices",
         "description": "Create professional, GST-compliant invoices in minutes — fill, customise and download as PDF. No signup.",
-        "cta": { "label": "Create Invoice", "href": "/tools/invoice-generator" }
+        "cta": {
+          "label": "Create Invoice",
+          "href": "/tools/invoice-generator"
+        }
       },
       {
         "id": "more",
@@ -43,7 +73,10 @@
         "name": "More free tools",
         "tagline": "Explore the full toolkit",
         "description": "UPI QR, barcodes, stock and purchase registers, cash book, customer ledger and more — all free.",
-        "cta": { "label": "See all tools", "href": "/tools" }
+        "cta": {
+          "label": "See all tools",
+          "href": "/tools"
+        }
       }
     ]
   },
@@ -57,21 +90,30 @@
         "name": "Recipe Costing Calculator",
         "tagline": "Know your true plate cost",
         "description": "Break a dish down to its ingredient costs and see the real cost per plate before you price it.",
-        "cta": { "label": "Open calculator", "href": "/calculators/recipe-costing-calculator" }
+        "cta": {
+          "label": "Open calculator",
+          "href": "/calculators/recipe-costing-calculator"
+        }
       },
       {
         "id": "gst-calculator",
         "name": "GST Calculator",
         "tagline": "Add or remove GST instantly",
         "description": "Add GST to a base price or pull GST out of a final price, for any slab — get the split in a tap.",
-        "cta": { "label": "Open calculator", "href": "/calculators/gst-calculator" }
+        "cta": {
+          "label": "Open calculator",
+          "href": "/calculators/gst-calculator"
+        }
       },
       {
         "id": "online-menu-price-calculator",
         "name": "Online Menu Price Calculator",
         "tagline": "Price for Zomato & Swiggy",
         "description": "Work back from the margin you need after commission, packaging and discounts to the price you should list.",
-        "cta": { "label": "Open calculator", "href": "/calculators/online-menu-price-calculator" }
+        "cta": {
+          "label": "Open calculator",
+          "href": "/calculators/online-menu-price-calculator"
+        }
       },
       {
         "id": "more",
@@ -79,7 +121,10 @@
         "name": "More calculators",
         "tagline": "Margins, tax, loans and more",
         "description": "Break-even, food cost %, markup, loan EMI, take-home salary and more — all free to use.",
-        "cta": { "label": "See all calculators", "href": "/calculators" }
+        "cta": {
+          "label": "See all calculators",
+          "href": "/calculators"
+        }
       }
     ]
   },
@@ -97,7 +142,10 @@
           "Profit & Loss, Balance Sheet, Cash Flow",
           "QuickBooks, Xero, Zoho, FreshBooks & more"
         ],
-        "cta": { "label": "Explore Consultancy", "href": "/consultancy" }
+        "cta": {
+          "label": "Explore Consultancy",
+          "href": "/consultancy"
+        }
       }
     ]
   },
@@ -110,7 +158,7 @@
       },
       {
         "question": "What products does Setu offer?",
-        "answer": "Setu Dine for restaurant billing and kitchen workflow, Setu Queue for quick service counters and food courts, Setu QR Menu for digital menus, and a free Browser Based POS."
+        "answer": "Setu Dine for restaurant billing and kitchen workflow, Setu Queue for quick service counters and food courts, Setu QR Menu for digital menus, and two free products that run in your browser — the Browser Based POS for shops and Free Dine for restaurants."
       },
       {
         "question": "Who is Setu Dine built for?",
@@ -133,6 +181,9 @@
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
-    "cta": { "label": "Book your free demo", "href": "/book-demo?product=Setu%20Dine" }
+    "cta": {
+      "label": "Book your free demo",
+      "href": "/book-demo?product=Setu%20Dine"
+    }
   }
 }

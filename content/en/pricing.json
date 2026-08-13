@@ -1,8 +1,12 @@
 {
   "seo": {
     "title": "Pricing | Setu Technology Plans for Every Business",
-    "description": "Simple pricing for Setu Dine, Setu Queue and Setu QR Menu. Free tools, free trials, and per-business plans in rupees or dollars. All prices include GST.",
-    "keywords": ["Setu Technology pricing", "restaurant POS pricing India", "QR menu pricing"]
+    "description": "Pricing for Setu Dine, Setu Queue and Setu QR Menu, plus the free Browser Based POS and Free Dine. Free trials and per-business plans, all inclusive of GST.",
+    "keywords": [
+      "Setu Technology pricing",
+      "restaurant POS pricing India",
+      "QR menu pricing"
+    ]
   },
   "hero": {
     "eyebrow": "Pricing",
@@ -11,8 +15,18 @@
   },
   "billingNote": "All prices are per business account and include GST. Yearly billing is charged once for twelve months.",
   "regions": [
-    { "id": "IN", "label": "India (₹)", "currency": "INR", "symbol": "₹" },
-    { "id": "INTL", "label": "International ($)", "currency": "USD", "symbol": "$" }
+    {
+      "id": "IN",
+      "label": "India (₹)",
+      "currency": "INR",
+      "symbol": "₹"
+    },
+    {
+      "id": "INTL",
+      "label": "International ($)",
+      "currency": "USD",
+      "symbol": "$"
+    }
   ],
   "plans": [
     {
@@ -24,8 +38,14 @@
       "freeNote": "Free forever",
       "trial": null,
       "price": {
-        "IN": { "monthly": 0, "yearly": 0 },
-        "INTL": { "monthly": 0, "yearly": 0 }
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
       },
       "features": [
         "Billing, products and inventory",
@@ -38,7 +58,45 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
-      "cta": { "label": "Open the POS", "href": "/products/browser-based-pos" }
+      "cta": {
+        "label": "Open the POS",
+        "href": "/products/browser-based-pos"
+      }
+    },
+    {
+      "slug": "free-dine",
+      "name": "Free Dine",
+      "href": "/products/free-restaurant-pos",
+      "status": "free",
+      "summary": "A full dining-room till — tables, KOTs, split bills and GST — that runs in your browser.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Tables, floor areas and open tickets",
+        "Kitchen order tickets and a live kitchen screen",
+        "Split and merge bills",
+        "GST with CGST/SGST breakup",
+        "Raw-material stock and recipes",
+        "Table bookings with WhatsApp confirmations",
+        "Credit (udhaar) via the Customer Ledger",
+        "Reports, CSV exports and Google Sheet sync",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "cta": {
+        "label": "Open Free Dine",
+        "href": "/products/free-restaurant-pos"
+      }
     },
     {
       "slug": "qr-menu",
@@ -49,8 +107,14 @@
       "freeNote": "Free for your first year",
       "trial": "First year free",
       "price": {
-        "IN": { "monthly": 49, "yearly": 499 },
-        "INTL": { "monthly": 0.99, "yearly": 9.99 }
+        "IN": {
+          "monthly": 49,
+          "yearly": 499
+        },
+        "INTL": {
+          "monthly": 0.99,
+          "yearly": 9.99
+        }
       },
       "features": [
         "Permanent QR — never reprint",
@@ -61,7 +125,10 @@
         "Hygiene grade, hours and gallery",
         "Three templates, eight editable colours"
       ],
-      "cta": { "label": "Create your QR menu", "href": "/tools/qr-menu-generator" }
+      "cta": {
+        "label": "Create your QR menu",
+        "href": "/tools/qr-menu-generator"
+      }
     },
     {
       "slug": "setu-dine",
@@ -72,8 +139,14 @@
       "freeNote": "First month free",
       "trial": "1 month free",
       "price": {
-        "IN": { "monthly": 499, "yearly": 4999 },
-        "INTL": { "monthly": 4.99, "yearly": 49.99 }
+        "IN": {
+          "monthly": 499,
+          "yearly": 4999
+        },
+        "INTL": {
+          "monthly": 4.99,
+          "yearly": 49.99
+        }
       },
       "features": [
         "Billing with a built-in tax engine",
@@ -82,7 +155,10 @@
         "Multi-outlet dashboards",
         "Customer management and coupons"
       ],
-      "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Dine" }
+      "cta": {
+        "label": "Book a free demo",
+        "href": "/book-demo?product=Setu%20Dine"
+      }
     },
     {
       "slug": "setu-queue",
@@ -93,8 +169,14 @@
       "freeNote": "First month free",
       "trial": "1 month free",
       "price": {
-        "IN": { "monthly": 499, "yearly": 4999 },
-        "INTL": { "monthly": 4.99, "yearly": 49.99 }
+        "IN": {
+          "monthly": 499,
+          "yearly": 4999
+        },
+        "INTL": {
+          "monthly": 4.99,
+          "yearly": 49.99
+        }
       },
       "features": [
         "Counter billing built for speed",
@@ -103,7 +185,10 @@
         "Customer pickup display",
         "Real-time food cost tracking"
       ],
-      "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Queue" }
+      "cta": {
+        "label": "Book a free demo",
+        "href": "/book-demo?product=Setu%20Queue"
+      }
     },
     {
       "slug": "setu-retail",
@@ -119,7 +204,10 @@
         "Store billing",
         "Store operations reporting"
       ],
-      "cta": { "label": "Get notified at launch", "href": "/contact" }
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
     },
     {
       "slug": "setu-clinic",
@@ -135,7 +223,10 @@
         "Patient records",
         "Front-desk operations"
       ],
-      "cta": { "label": "Get notified at launch", "href": "/contact" }
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
     }
   ],
   "faq": {
@@ -155,7 +246,7 @@
       },
       {
         "question": "Are the calculators and tools free?",
-        "answer": "Yes. Every calculator and tool on the site is free with no signup, and the Browser Based POS is free forever. Only Dine, Queue and QR Menu are paid."
+        "answer": "Yes. Every calculator and tool on the site is free with no signup, and both browser products — the Browser Based POS for shops and Free Dine for restaurants — are free forever. Only Setu Dine, Setu Queue and Setu QR Menu are paid."
       }
     ]
   }
