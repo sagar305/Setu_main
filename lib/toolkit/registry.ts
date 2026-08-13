@@ -681,7 +681,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     kind: "app",
     tier: "growth",
     status: "built",
-    route: "/tools/bank-statement-analyzer",
+    route: "/products/bank-statement-analyzer",
     reads: [],
     writes: [],
     dependsOn: [],

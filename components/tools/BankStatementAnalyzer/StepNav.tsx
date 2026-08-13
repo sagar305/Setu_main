@@ -8,18 +8,22 @@ import { usePathname } from "next/navigation";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 
 const STEPS = [
-  { href: "/tools/bank-statement-analyzer/import", label: "Import" },
-  { href: "/tools/bank-statement-analyzer/review", label: "Review" },
-  { href: "/tools/bank-statement-analyzer/analyze", label: "Analyze" },
-  { href: "/tools/bank-statement-analyzer/reconcile", label: "Reconcile" },
-  { href: "/tools/bank-statement-analyzer/export", label: "Export" },
+  { href: "/products/bank-statement-analyzer/import", label: "Import" },
+  { href: "/products/bank-statement-analyzer/review", label: "Review" },
+  { href: "/products/bank-statement-analyzer/analyze", label: "Analyze" },
+  { href: "/products/bank-statement-analyzer/reconcile", label: "Reconcile" },
+  { href: "/products/bank-statement-analyzer/export", label: "Export" },
 ];
 
 export function StepNav() {
   const pathname = usePathname();
   const { transactions, loaded } = useAnalyzer();
   const hasData = transactions.length > 0;
-  const activeIndex = STEPS.findIndex((step) => pathname === step.href);
+  // The product page hosts the import step itself, so the base route counts as
+  // step 1 rather than leaving the stepper with nothing highlighted.
+  const base = "/products/bank-statement-analyzer";
+  const activeIndex =
+    pathname === base ? 0 : STEPS.findIndex((step) => pathname === step.href);
 
   return (
     <nav aria-label="Analyzer steps" className="mb-8">

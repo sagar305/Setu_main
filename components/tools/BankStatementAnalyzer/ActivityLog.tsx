@@ -55,7 +55,7 @@ export function ActivityLog() {
           <DangerButton onClick={() => setClearing(true)}>Clear all local data</DangerButton>
           <SecondaryButton
             onClick={() => {
-              window.location.href = "/tools/bank-statement-analyzer/export";
+              window.location.href = "/products/bank-statement-analyzer/export";
             }}
           >
             Export first

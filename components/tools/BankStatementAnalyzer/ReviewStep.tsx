@@ -145,7 +145,7 @@ export function ReviewStep() {
           Import a statement — or load the demo — and it will appear here.
         </p>
         <Link
-          href="/tools/bank-statement-analyzer/import"
+          href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
           Go to import
@@ -168,7 +168,7 @@ export function ReviewStep() {
             Undo
           </SecondaryButton>
           <Link
-            href="/tools/bank-statement-analyzer/analyze"
+            href="/products/bank-statement-analyzer/analyze"
             className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
           >
             Analyze

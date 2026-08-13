@@ -10,7 +10,7 @@ import { join } from "node:path";
 
 const fixtures = join(process.cwd(), "tests", "fixtures", "generic");
 
-const ANALYZER = "/tools/bank-statement-analyzer";
+const ANALYZER = "/products/bank-statement-analyzer";
 
 /** Start every test from a clean browser so state never leaks between them. */
 test.beforeEach(async ({ page }) => {
@@ -28,17 +28,16 @@ test.beforeEach(async ({ page }) => {
 
 test("landing page states the privacy promise and offers the demo", async ({ page }) => {
   await page.goto(ANALYZER);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Bank Statement Analyzer for Chartered Accountants"
-  );
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Bank Statement Analyzer");
   await expect(page.getByText("Your financial data stays on your device.")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Upload Statement" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Try Sample Statement" })).toBeVisible();
+  // Listed as a free product, so the product page carries the app itself.
+  await expect(page.getByRole("button", { name: "Try a demo statement" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "No AI. No upload. No account." })).toBeVisible();
 });
 
 test("demo statement loads and reports the published figures", async ({ page }) => {
   await page.goto(ANALYZER);
-  await page.getByRole("link", { name: "Try Sample Statement" }).click();
+  await page.getByRole("button", { name: "Try a demo statement" }).click();
 
   await expect(page.getByText("Imported statements (1)")).toBeVisible({ timeout: 20_000 });
   await expect(page.getByRole("link", { name: /Review 247 transactions/ })).toBeVisible();

@@ -13,6 +13,16 @@ const nextConfig = {
         destination: "/products/browser-based-pos",
         permanent: true,
       },
+      {
+        source: "/tools/bank-statement-analyzer",
+        destination: "/products/bank-statement-analyzer",
+        permanent: true,
+      },
+      {
+        source: "/tools/bank-statement-analyzer/:path*",
+        destination: "/products/bank-statement-analyzer/:path*",
+        permanent: true,
+      },
     ];
   },
   async headers() {

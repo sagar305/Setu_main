@@ -317,7 +317,7 @@ export function ImportStep() {
             </h3>
             {transactions.length > 0 ? (
               <Link
-                href="/tools/bank-statement-analyzer/review"
+                href="/products/bank-statement-analyzer/review"
                 className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
               >
                 Review {transactions.length.toLocaleString("en-IN")} transactions

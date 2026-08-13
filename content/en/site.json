@@ -8,15 +8,39 @@
   },
   "nav": {
     "links": [
-      { "label": "Products", "href": "/products" },
-      { "label": "Consultancy", "href": "/consultancy" },
-      { "label": "Calculators", "href": "/calculators" },
-      { "label": "Tools", "href": "/tools" },
-      { "label": "About", "href": "/about" },
-      { "label": "Blog", "href": "/blog" },
-      { "label": "Contact", "href": "/contact" }
+      {
+        "label": "Products",
+        "href": "/products"
+      },
+      {
+        "label": "Consultancy",
+        "href": "/consultancy"
+      },
+      {
+        "label": "Calculators",
+        "href": "/calculators"
+      },
+      {
+        "label": "Tools",
+        "href": "/tools"
+      },
+      {
+        "label": "About",
+        "href": "/about"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
     ],
-    "cta": { "label": "Book a Demo", "href": "/book-demo?product=Setu%20Dine" }
+    "cta": {
+      "label": "Book a Demo",
+      "href": "/book-demo?product=Setu%20Dine"
+    }
   },
   "footer": {
     "description": "Setu Technology builds practical, operator-first software for businesses across the globe.",
@@ -24,49 +48,125 @@
       {
         "heading": "Products",
         "links": [
-          { "label": "Browser Based POS (Free)", "href": "/products/browser-based-pos" },
-          { "label": "Setu Dine", "href": "/products/restaurant-pos" },
-          { "label": "Setu Queue", "href": "/products/queue" },
-          { "label": "Setu QR Menu", "href": "/products/qr-menu" },
-          { "label": "Setu Retail", "href": "/products/retail" }
+          {
+            "label": "Browser Based POS (Free)",
+            "href": "/products/browser-based-pos"
+          },
+          {
+            "label": "Bank Statement Analyzer (Free)",
+            "href": "/products/bank-statement-analyzer"
+          },
+          {
+            "label": "Setu Dine",
+            "href": "/products/restaurant-pos"
+          },
+          {
+            "label": "Setu Queue",
+            "href": "/products/queue"
+          },
+          {
+            "label": "Setu QR Menu",
+            "href": "/products/qr-menu"
+          },
+          {
+            "label": "Setu Retail",
+            "href": "/products/retail"
+          }
         ]
       },
       {
         "heading": "Company",
         "links": [
-          { "label": "About", "href": "/about" },
-          { "label": "Team", "href": "/team" },
-          { "label": "Consultancy", "href": "/consultancy" },
-          { "label": "Blog", "href": "/blog" },
-          { "label": "Glossary", "href": "/glossary" },
-          { "label": "Contact", "href": "/contact" }
+          {
+            "label": "About",
+            "href": "/about"
+          },
+          {
+            "label": "Team",
+            "href": "/team"
+          },
+          {
+            "label": "Consultancy",
+            "href": "/consultancy"
+          },
+          {
+            "label": "Blog",
+            "href": "/blog"
+          },
+          {
+            "label": "Glossary",
+            "href": "/glossary"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
         ]
       },
       {
         "heading": "Tools",
         "links": [
-          { "label": "All Tools", "href": "/tools" },
-          { "label": "Invoice Generator", "href": "/tools/invoice-generator" },
-          { "label": "QR Menu Generator", "href": "/tools/qr-menu-generator" },
-          { "label": "UPI QR Generator", "href": "/tools/upi-qr-generator" },
-          { "label": "Barcode Generator", "href": "/tools/barcode-generator" }
+          {
+            "label": "All Tools",
+            "href": "/tools"
+          },
+          {
+            "label": "Invoice Generator",
+            "href": "/tools/invoice-generator"
+          },
+          {
+            "label": "QR Menu Generator",
+            "href": "/tools/qr-menu-generator"
+          },
+          {
+            "label": "UPI QR Generator",
+            "href": "/tools/upi-qr-generator"
+          },
+          {
+            "label": "Barcode Generator",
+            "href": "/tools/barcode-generator"
+          }
         ]
       },
       {
         "heading": "Calculators",
         "links": [
-          { "label": "All Calculators", "href": "/calculators" },
-          { "label": "GST Calculator", "href": "/calculators/gst-calculator" },
-          { "label": "Profit Margin Calculator", "href": "/calculators/profit-margin-calculator" },
-          { "label": "Income Tax Calculator", "href": "/calculators/income-tax-calculator" },
-          { "label": "Loan EMI Calculator", "href": "/calculators/loan-emi-calculator" }
+          {
+            "label": "All Calculators",
+            "href": "/calculators"
+          },
+          {
+            "label": "GST Calculator",
+            "href": "/calculators/gst-calculator"
+          },
+          {
+            "label": "Profit Margin Calculator",
+            "href": "/calculators/profit-margin-calculator"
+          },
+          {
+            "label": "Income Tax Calculator",
+            "href": "/calculators/income-tax-calculator"
+          },
+          {
+            "label": "Loan EMI Calculator",
+            "href": "/calculators/loan-emi-calculator"
+          }
         ]
       }
     ],
     "social": [
-      { "label": "Instagram", "href": "https://www.instagram.com/setu.technology" },
-      { "label": "YouTube", "href": "https://www.youtube.com/@setu.technology" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/company/setu-technology" }
+      {
+        "label": "Instagram",
+        "href": "https://www.instagram.com/setu.technology"
+      },
+      {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@setu.technology"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/company/setu-technology"
+      }
     ],
     "copyright": "© 2026 Setu Technology. Made in India."
   }
