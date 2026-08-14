@@ -550,7 +550,7 @@ function PendingReview({
           <div className="mt-4">
             <ColumnMapper
               headers={headers ?? []}
-              sampleRow={rawRows?.[0]?.cells}
+              sampleRows={(rawRows ?? []).slice(0, 40).map((row) => row.cells)}
               mapping={mapping}
               onChange={onMappingChange}
             />

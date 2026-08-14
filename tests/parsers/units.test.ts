@@ -165,3 +165,49 @@ describe("bank adapters", () => {
     expect(adapter.id).toBe("generic");
   });
 });
+
+describe("header synonyms — the shapes real statements use", () => {
+  // Every one of these failed to map on a real statement.
+  it("ignores currency decoration in the header", () => {
+    expect(detectMapping(["Txn Date", "Description", "Debit (₹)", "Credit (₹)", "Balance (₹)"], [])).toMatchObject({
+      date: 0,
+      narration: 1,
+      debit: 2,
+      credit: 3,
+      balance: 4,
+    });
+    expect(detectMapping(["Date", "Particulars", "Debit (Rs.)", "Credit (Rs.)", "Balance (INR)"], [])).toMatchObject({
+      debit: 2,
+      credit: 3,
+      balance: 4,
+    });
+    expect(detectMapping(["Date", "Details", "Amount (₹)"], [])).toMatchObject({ amount: 2 });
+  });
+
+  it("reads a reference header written in either order", () => {
+    expect(detectMapping(["Date", "Narration", "Chq/Ref No", "Amount"], []).reference).toBe(2);
+    expect(detectMapping(["Date", "Narration", "Ref No./Cheque No.", "Amount"], []).reference).toBe(2);
+    expect(detectMapping(["Date", "Narration", "Cheque No./Ref No.", "Amount"], []).reference).toBe(2);
+  });
+
+  it("recognises a header row whose amount columns carry a rupee sign", () => {
+    expect(
+      looksLikeHeaderRow(["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Branch Code", "Debit (₹)", "Credit (₹)", "Balance (₹)"])
+    ).toBe(true);
+  });
+
+  // A branch or office code is a short integer with no decimal point. Treated
+  // as money, it was inferred as the debit column and shifted every real debit
+  // into credit — a silent sign inversion.
+  it("does not infer a short code column as an amount", () => {
+    const rows = [
+      { cells: ["01/12/2025", "UPI/PAYMENT", "2216", "1248.00", "124232.00"] },
+      { cells: ["02/12/2025", "NEFT CREDIT", "4430", "2499.00", "121733.00"] },
+      { cells: ["03/12/2025", "ATM WITHDRAWAL", "9922", "5000.00", "116733.00"] },
+    ];
+    const mapping = detectMapping([], rows);
+    expect(mapping.debit).not.toBe(2);
+    expect(mapping.credit).not.toBe(2);
+    expect(mapping.amount).not.toBe(2);
+  });
+});

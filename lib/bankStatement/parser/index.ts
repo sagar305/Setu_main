@@ -17,7 +17,7 @@ import type {
 import { parseCsv } from "@/lib/bankStatement/parser/csv";
 import { parseWorkbook } from "@/lib/bankStatement/parser/excel";
 import { extractPdf, PdfPasswordRequiredError } from "@/lib/bankStatement/parser/pdf";
-import { detectMapping, findHeaderRow } from "@/lib/bankStatement/parser/columns";
+import { detectMapping, findHeaderRow, looksLikeHeaderRow } from "@/lib/bankStatement/parser/columns";
 import { extractMetadata } from "@/lib/bankStatement/parser/metadata";
 import { selectAdapter, type BankAdapter } from "@/lib/bankStatement/parser/banks";
 import { normalise } from "@/lib/bankStatement/normalization/normalizer";
@@ -125,7 +125,11 @@ export async function parseStatementFile(
   // Split the preamble from the table.
   const headerIndex = findHeaderRow(extraction.rows);
   const headers = headerIndex >= 0 ? extraction.rows[headerIndex].cells : [];
-  const dataRows = headerIndex >= 0 ? extraction.rows.slice(headerIndex + 1) : extraction.rows;
+  // Multi-page statements repeat the column header on every page. Left in, a
+  // header row has no date and no amount, so it looks like wrapped narration
+  // and gets glued onto the last transaction of the previous page.
+  const dataRows = (headerIndex >= 0 ? extraction.rows.slice(headerIndex + 1) : extraction.rows)
+    .filter((row) => !looksLikeHeaderRow(row.cells));
 
   const mapping = options.mapping ?? buildMapping(headers, dataRows, detected ?? adapter);
 
@@ -140,7 +144,7 @@ export async function parseStatementFile(
   const currency = metadata.currency ?? "INR";
 
   options.onProgress?.("Normalising transactions");
-  const { transactions, rejected, skipped } = normalise({
+  const { transactions, rejected, skipped, balanceMarkers } = normalise({
     rows: dataRows,
     mapping,
     dateFormat,
@@ -150,6 +154,11 @@ export async function parseStatementFile(
 
   const sorted = [...transactions].sort((a, b) => a.date.localeCompare(b.date));
 
+  // The statement's own opening/closing markers outrank anything scraped from
+  // the letterhead, because they sit in the table next to the figures.
+  const openingMarker = balanceMarkers.find((marker) => /OPENING|BROUGHT\s*FORWARD|B\/F/i.test(marker.narration));
+  const closingMarker = [...balanceMarkers].reverse().find((marker) => /CLOSING|CARRIED\s*FORWARD|C\/F/i.test(marker.narration));
+
   const report = validate({
     transactions: sorted,
     rejected: rejected.map((item) => ({
@@ -158,8 +167,8 @@ export async function parseStatementFile(
       page: item.row.page,
     })),
     skipped: skipped.length,
-    declaredOpening: metadata.openingBalance,
-    declaredClosing: metadata.closingBalance,
+    declaredOpening: openingMarker?.balance ?? metadata.openingBalance,
+    declaredClosing: closingMarker?.balance ?? metadata.closingBalance,
   });
 
   const parseStatus = parseStatusFrom(report);
@@ -177,8 +186,9 @@ export async function parseStatementFile(
     ifsc: metadata.ifsc,
     startDate: metadata.startDate ?? sorted[0]?.date,
     endDate: metadata.endDate ?? sorted[sorted.length - 1]?.date,
-    openingBalance: metadata.openingBalance,
-    closingBalance: metadata.closingBalance ?? sorted[sorted.length - 1]?.balance,
+    openingBalance: openingMarker?.balance ?? metadata.openingBalance,
+    closingBalance:
+      closingMarker?.balance ?? metadata.closingBalance ?? sorted[sorted.length - 1]?.balance,
     transactionCount: sorted.length,
     currency,
     sourceFormat: format,

@@ -186,3 +186,21 @@ test.describe("downloadable sample statement", () => {
     });
   }
 });
+
+// The ruled-table layout, end to end in a real browser. This is the one that
+// needs PDF.js's operator list, which only works on the legacy build.
+test("imports a ruled-table PDF with stacked headers and wrapped dates", async ({ page }) => {
+  await page.goto(`${ANALYZER}/import`);
+  await page.locator('input[type="file"]').setInputFiles(join(fixtures, "statement-05-ruled.pdf"));
+
+  await expect(page.getByRole("button", { name: /Import 26 transactions/ })).toBeVisible({
+    timeout: 60_000,
+  });
+  await expect(page.getByText("VALID", { exact: true }).first()).toBeVisible();
+
+  // All eight columns must be offered, named from the reassembled header.
+  const referenceSelect = page.locator("select").filter({ hasText: "Ref No./Cheque No." }).first();
+  await expect(referenceSelect).toBeVisible();
+  const options = await referenceSelect.locator("option").allTextContents();
+  expect(options.filter((o) => o !== "Not in this file")).toHaveLength(8);
+});

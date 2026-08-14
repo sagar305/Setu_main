@@ -13,6 +13,7 @@
 
 import type { RawRow } from "@/lib/bankStatement/types";
 import { sanitiseCell } from "@/lib/bankStatement/utils/text";
+import { gridFromOperatorList, rowsFromGrid, type TableGrid } from "@/lib/bankStatement/parser/grid";
 
 export class PdfPasswordRequiredError extends Error {
   /** True when the user supplied a password and it was wrong. */
@@ -39,15 +40,30 @@ type PdfJsModule = typeof import("pdfjs-dist");
 
 let pdfjsPromise: Promise<PdfJsModule> | null = null;
 
-/** Load PDF.js and point it at its worker. Browser only. */
+/**
+ * Load PDF.js and point it at its worker. Browser only.
+ *
+ * We deliberately use the LEGACY build. The modern one calls
+ * `Map.prototype.getOrInsertComputed` inside getOperatorList() — a very new
+ * proposal method — so reading a page's drawn table rules throws on anything
+ * but a bleeding-edge browser. The legacy bundle carries the polyfills, which
+ * also buys us Safari and older Chrome/Edge for every other stage. A CA should
+ * not need this month's browser to read a bank statement.
+ */
 async function loadPdfjs(): Promise<PdfJsModule> {
   if (!pdfjsPromise) {
     pdfjsPromise = (async () => {
-      const pdfjs = await import("pdfjs-dist");
-      pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-        "pdfjs-dist/build/pdf.worker.min.mjs",
-        import.meta.url
-      ).toString();
+      const pdfjs = (await import(
+        /* webpackChunkName: "pdfjs-legacy" */ "pdfjs-dist/legacy/build/pdf.mjs"
+      )) as unknown as PdfJsModule;
+      // Leave an already-configured worker alone, so a host that knows better
+      // (a headless harness, say) can point PDF.js at its own copy.
+      if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+        pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+          "pdfjs-dist/legacy/build/pdf.worker.min.mjs",
+          import.meta.url
+        ).toString();
+      }
       return pdfjs;
     })();
   }
@@ -94,6 +110,13 @@ export async function extractPdf(
   const pageText: string[] = [];
   let textItemCount = 0;
 
+  // Column geometry is the same on every page and is remembered, but ROW rules
+  // are per page — the table sits higher once the letterhead is gone — so they
+  // are read fresh each time. Borrowing page 1's rows drops everything that
+  // falls outside them, silently, which is the worst failure this tool can have.
+  let columns: TableGrid["columns"] | null = null;
+  let gridUnavailable = false;
+
   for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
     options.onProgress?.(pageNumber, pageCount);
 
@@ -114,14 +137,42 @@ export async function extractPdf(
       });
     }
     textItemCount += items.length;
-    page.cleanup();
 
     const lines = groupIntoLines(items);
     pageText.push(lines.map((line) => line.map((i) => i.text).join(" ")).join("\n"));
 
-    // Prefer the whitespace projection — it handles right-aligned amount
-    // columns, which is how most banks print them. Fall back to left-edge
-    // clustering only when the projection cannot find a column structure.
+    // 1 — the table the document drew, if it drew one. This is the only
+    // strategy that survives rows split across several baselines.
+    let pageGrid: TableGrid | null = null;
+    if (!gridUnavailable) {
+      try {
+        const operatorList = await page.getOperatorList();
+        pageGrid = gridFromOperatorList(operatorList, pdfjs.OPS.constructPath);
+        if (pageGrid) columns = columns ?? pageGrid.columns;
+        else if (columns) {
+          // This page drew no rules of its own — keep the known columns and
+          // let the row bands be derived from the text.
+          pageGrid = { columns, horizontals: [] };
+        } else if (pageNumber >= 3) {
+          // Three pages in with no rules anywhere: stop paying for op lists.
+          gridUnavailable = true;
+        }
+      } catch {
+        gridUnavailable = true; // no operator list available — use geometry
+      }
+    } else if (columns) {
+      pageGrid = { columns, horizontals: [] };
+    }
+
+    const gridRows = pageGrid ? rowsFromGrid(items, pageGrid, pageNumber) : [];
+    if (gridRows.length > 0) {
+      rows.push(...gridRows);
+      page.cleanup();
+      continue;
+    }
+
+    // 2 — no usable grid: infer columns from where text never appears, which
+    // handles right-aligned amounts. 3 — failing that, cluster left edges.
     const ranges = columnRanges(lines);
     const boundaries = ranges.length >= 2 ? null : leftEdgeBoundaries(lines);
 
@@ -132,6 +183,7 @@ export async function extractPdf(
       if (cells.every((cell) => cell === "")) return;
       rows.push({ cells, page: pageNumber, row: index + 1 });
     });
+    page.cleanup();
   }
 
   // Destroying the loading task tears down the document and its worker port.

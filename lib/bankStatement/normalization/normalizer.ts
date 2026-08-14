@@ -36,6 +36,12 @@ export type NormaliseResult = {
   skipped: { row: RawRow; reason: string }[];
   /** Rows that continued a previous transaction's narration. */
   continuations: number;
+  /**
+   * Rows stating a balance without moving money — OPENING BALANCE, CLOSING
+   * BALANCE, brought/carried forward. They are not transactions, but they are
+   * the statement's own declaration of where the chain starts and ends.
+   */
+  balanceMarkers: { date: string; balance: number; narration: string }[];
 };
 
 let counter = 0;
@@ -60,6 +66,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
   const transactions: Transaction[] = [];
   const rejected: { row: RawRow; reason: string }[] = [];
   const skipped: { row: RawRow; reason: string }[] = [];
+  const balanceMarkers: { date: string; balance: number; narration: string }[] = [];
   let continuations = 0;
 
   for (const row of rows) {
@@ -108,6 +115,19 @@ export function normalise(input: NormaliseInput): NormaliseResult {
       if (isDebit) debit = Math.abs(amountRaw);
       else credit = Math.abs(amountRaw);
     } else {
+      // A dated row with a balance but no debit or credit is a balance
+      // marker, not a failed extraction — no money moved, so nothing is lost
+      // by setting it aside, and the balance itself is worth keeping.
+      const markerBalance = parseAmount(cell(row, mapping.balance));
+      if (markerBalance !== null) {
+        balanceMarkers.push({
+          date,
+          balance: round2(markerBalance),
+          narration: narrationText,
+        });
+        skipped.push({ row, reason: "Balance marker row — no money moved" });
+        continue;
+      }
       rejected.push({ row, reason: "No amount on the row" });
       continue;
     }
@@ -156,5 +176,5 @@ export function normalise(input: NormaliseInput): NormaliseResult {
     });
   }
 
-  return { transactions, rejected, skipped, continuations };
+  return { transactions, rejected, skipped, continuations, balanceMarkers };
 }

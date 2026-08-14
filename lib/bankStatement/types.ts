@@ -131,9 +131,9 @@ export type ValidationReport = {
   /** Rows we could not resolve. */
   unresolved: number;
   /**
-   * Rows that carried a date but an explicit zero amount — an opening carry
-   * forward, a nil entry. No money moved, so nothing is lost by skipping them;
-   * they are reported separately so the count is never mistaken for a failure.
+   * Rows that carried a date but moved no money — an opening or closing
+   * balance marker, a nil entry. Nothing is lost by skipping them; they are
+   * reported separately so the count is never mistaken for a failure.
    */
   skippedRows: number;
 

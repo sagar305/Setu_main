@@ -1,0 +1,30 @@
+{
+  "description": "Ruled-table PDF reproducing the layout of a real Indian bank statement that broke the parser. Regenerate with: node tests/fixtures/generic/make-ruled-statement-pdf.mjs",
+  "reproduces": [
+    "a drawn table grid — column and row rules as vector paths",
+    "8 columns including a numeric Branch Code that is not money",
+    "a header stacked across baselines (Value/Date, Branch/Code, Credit/(₹))",
+    "Ref No./Cheque No. — the reverse of the usual Chq/Ref No",
+    "each transaction spanning three baselines because the date column wraps",
+    "the column header repeated on every page",
+    "OPENING BALANCE and CLOSING BALANCE rows with no debit or credit",
+    "landscape orientation and multiple pages"
+  ],
+  "transactionCount": 26,
+  "pages": 3,
+  "openingBalance": 125480,
+  "closingBalance": 170121,
+  "totalDebits": 92359,
+  "totalCredits": 137000,
+  "parseStatus": "VALID",
+  "balanceBreaks": 0,
+  "skippedRows": 2,
+  "mapping": { "date": 0, "valueDate": 1, "narration": 2, "reference": 3, "debit": 5, "credit": 6, "balance": 7 },
+  "firstTransaction": {
+    "date": "2025-12-01",
+    "narration": "UPI/5123/Quickmart/Order#8831",
+    "debit": 1248,
+    "credit": 0,
+    "balance": 124232
+  }
+}

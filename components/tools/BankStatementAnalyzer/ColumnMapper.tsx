@@ -19,22 +19,40 @@ const FIELDS: { key: keyof ColumnMapping; label: string; hint?: string }[] = [
 
 export function ColumnMapper({
   headers,
-  sampleRow,
+  sampleRows = [],
   mapping,
   onChange,
 }: {
   headers: string[];
-  sampleRow?: string[];
+  /** Extracted data rows, used both to size the list and to label it. */
+  sampleRows?: string[][];
   mapping: ColumnMapping;
   onChange: (mapping: ColumnMapping) => void;
 }) {
-  const columnCount = Math.max(headers.length, sampleRow?.length ?? 0);
-  const options = Array.from({ length: columnCount }, (_, index) => ({
-    value: index,
-    label: headers[index]?.trim()
-      ? `${index + 1}. ${headers[index]}`
-      : `Column ${index + 1}${sampleRow?.[index] ? ` — “${sampleRow[index].slice(0, 24)}”` : ""}`,
-  }));
+  // Every column that exists anywhere in the file, not just in the header or
+  // the first row — a narrow first row must never hide the later columns.
+  const columnCount = Math.max(
+    headers.length,
+    ...sampleRows.map((row) => row.length),
+    0
+  );
+
+  const options = Array.from({ length: columnCount }, (_, index) => {
+    // Label by header where we have one; otherwise by what the column holds,
+    // taking the first couple of non-empty values from anywhere in the sample.
+    const samples: string[] = [];
+    for (const row of sampleRows) {
+      const value = row[index]?.trim();
+      if (value && !samples.includes(value)) samples.push(value);
+      if (samples.length === 2) break;
+    }
+    const header = headers[index]?.trim();
+    const preview = samples.length > 0 ? ` — ${samples.map((s) => `“${s.slice(0, 18)}”`).join(", ")}` : "";
+    return {
+      value: index,
+      label: header ? `${index + 1}. ${header}` : `Column ${index + 1}${preview}`,
+    };
+  });
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
