@@ -1,10 +1,17 @@
 // The classification pipeline (spec §13).
 // ---------------------------------------------------------------------------
-//   user rule  →  known party  →  keyword pattern  →  structural heuristic  →  uncategorised
+//   user rule  →  learned correction  →  known party  →  keyword pattern
+//              →  structural heuristic  →  uncategorised
 //
 // Deterministic throughout: same input, same output, no model, no network. The
 // confidence returned describes *classification* confidence only — never how
 // well the file parsed (decision 20).
+//
+// The on-device semantic model sits *below* this file, not inside it: whatever
+// this pipeline leaves uncategorised is what the AI pass is offered
+// (lib/bankStatement/ai, components/.../useAiCategorisation.ts). Everything a
+// rule, a correction or a pattern already answered is never sent to a model at
+// all — which is both faster and the priority order the tool promises.
 
 import type {
   ClassificationRule,
@@ -15,6 +22,7 @@ import type {
 } from "@/lib/bankStatement/types";
 import { findMatchingRule } from "@/lib/bankStatement/classification/rulesEngine";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
+import { recall, type LearnedMemory } from "@/lib/bankStatement/ai/learned";
 
 export type Classification = {
   category?: string;
@@ -139,10 +147,32 @@ export function sourceLabel(source: ClassificationSource): string {
       return "User rule";
     case "MANUAL":
       return "Set by you";
+    case "MEMORY":
+      return "Learned from you";
     case "HEURISTIC":
       return "Pattern match";
+    case "AI":
+      return "On-device AI";
     default:
       return "Unclassified";
+  }
+}
+
+/** The short badge shown in the table's source column. */
+export function sourceBadge(source: ClassificationSource): string {
+  switch (source) {
+    case "RULE":
+      return "Rule";
+    case "MANUAL":
+      return "You";
+    case "MEMORY":
+      return "Learned";
+    case "HEURISTIC":
+      return "Pattern";
+    case "AI":
+      return "AI";
+    default:
+      return "—";
   }
 }
 
@@ -169,7 +199,8 @@ export function buildPartyMemory(transactions: Transaction[]): PartyMemory {
 export function classify(
   transaction: Transaction,
   rules: ClassificationRule[],
-  partyMemory: PartyMemory = new Map()
+  partyMemory: PartyMemory = new Map(),
+  learned: LearnedMemory = new Map()
 ): Classification {
   const narration = normaliseText(transaction.narration);
   const isCash = CASH_KEYWORDS.some((keyword) => narration.includes(keyword));
@@ -191,23 +222,40 @@ export function classify(
     };
   }
 
-  // 2 — a party this CA has already classified by hand.
+  // 2 — a merchant this CA has already corrected. Their own answer, on their
+  // own machine: it outranks every pattern and the model alike.
+  const remembered = recall(learned, transaction);
+  if (remembered) {
+    return {
+      category: remembered.category,
+      classificationType: remembered.classificationType,
+      classificationSource: "MEMORY",
+      // High, but not the 100 a rule gets: a rule is a stated intention, this
+      // is an inference from one past edit.
+      confidence: 95,
+      gstRelevant: "NOT_MARKED",
+      isTransfer: remembered.classificationType === "TRANSFER" || looksTransfer,
+      isCashTransaction: isCash,
+    };
+  }
+
+  // 3 — a party this CA has already classified by hand.
   if (transaction.partyName) {
-    const remembered = partyMemory.get(normaliseText(transaction.partyName));
-    if (remembered) {
+    const seen = partyMemory.get(normaliseText(transaction.partyName));
+    if (seen) {
       return {
-        category: remembered.category,
-        classificationType: remembered.classificationType,
+        category: seen.category,
+        classificationType: seen.classificationType,
         classificationSource: "HEURISTIC",
         confidence: 88,
         gstRelevant: "NOT_MARKED",
-        isTransfer: remembered.classificationType === "TRANSFER",
+        isTransfer: seen.classificationType === "TRANSFER",
         isCashTransaction: isCash,
       };
     }
   }
 
-  // 3 — keyword patterns.
+  // 4 — keyword patterns.
   let best: { pattern: Pattern; keyword: string } | null = null;
   for (const pattern of PATTERNS) {
     if (pattern.direction && pattern.direction !== transaction.transactionType) continue;
@@ -228,7 +276,7 @@ export function classify(
     };
   }
 
-  // 4 — structural heuristics, deliberately low confidence.
+  // 5 — structural heuristics, deliberately low confidence.
   if (isCash) {
     return {
       category: transaction.transactionType === "CREDIT" ? "cash-deposit" : "cash-withdrawal",
@@ -241,7 +289,8 @@ export function classify(
     };
   }
 
-  // 5 — nothing matched. Say so rather than inventing a category.
+  // 6 — nothing matched. Say so rather than inventing a category — this is
+  // exactly the set the AI pass is then offered.
   return {
     classificationType: "UNKNOWN",
     classificationSource: "UNCLASSIFIED",
@@ -252,12 +301,20 @@ export function classify(
   };
 }
 
-/** Apply a classification to a transaction in place. */
+/**
+ * Apply a classification to a transaction in place.
+ *
+ * This re-describes the row completely, so anything the semantic model left on
+ * it — its flag for review, its similarity — is cleared: a rule or a pattern
+ * has now answered, and the model's account of the row no longer applies.
+ */
 export function applyClassification(
   transaction: Transaction,
   classification: Classification,
   highValueThreshold: number
 ): void {
+  transaction.needsReview = undefined;
+  transaction.aiSimilarity = undefined;
   transaction.category = classification.category;
   transaction.subCategory = classification.subCategory;
   transaction.classificationType = classification.classificationType;

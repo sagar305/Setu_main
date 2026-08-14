@@ -14,7 +14,8 @@ import type {
   ReconciliationSession,
   Transaction,
 } from "@/lib/bankStatement/types";
-import { defaultCategories } from "@/lib/bankStatement/classification/categories";
+import { defaultCategories, mergeWithDefaults } from "@/lib/bankStatement/classification/categories";
+import { DEFAULT_AI_THRESHOLDS, LEARNED_KEY } from "@/lib/bankStatement/ai/config";
 import {
   clearAll as clearTransactionDb,
   deleteTransactions,
@@ -31,12 +32,17 @@ const KEYS = {
   settings: "settings",
   audit: "audit",
   reconciliation: "reconciliation",
+  // What the CA has taught the categoriser by correcting rows. Listed here so
+  // "Clear all local data" wipes it with everything else (§19).
+  learned: LEARNED_KEY,
 } as const;
 
 export const DEFAULT_SETTINGS: AnalyzerSettings = {
   highValueThreshold: 100000, // ₹1,00,000 (decision 17)
   includeDuplicatesInTotals: false, // decision 16
   reviewConfidenceThreshold: 70, // below "medium" needs review (decision 20)
+  aiAutoThreshold: DEFAULT_AI_THRESHOLDS.auto,
+  aiReviewThreshold: DEFAULT_AI_THRESHOLDS.review,
 };
 
 // --- statements ------------------------------------------------------------
@@ -82,9 +88,15 @@ export function writeRules(rules: ClassificationRule[]): void {
 
 // --- categories ------------------------------------------------------------
 
+/**
+ * The CA's categories, reconciled with the built-in tree. Their renames,
+ * ordering and archiving survive; descriptions and categories added in a later
+ * release are filled in rather than lost (see mergeWithDefaults).
+ */
 export function readCategories(): Category[] {
   const stored = readLocal<Category[] | null>(TOOL, KEYS.categories, null);
-  return stored && stored.length > 0 ? stored : defaultCategories();
+  if (!stored || stored.length === 0) return defaultCategories();
+  return mergeWithDefaults(stored);
 }
 
 export function writeCategories(categories: Category[]): void {

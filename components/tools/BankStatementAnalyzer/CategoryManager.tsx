@@ -52,6 +52,12 @@ export function CategoryManager() {
     actions.saveCategory({ ...category, name: trimmed });
   };
 
+  const describe = (category: Category, next: string) => {
+    const trimmed = next.trim();
+    if (trimmed === (category.description ?? "")) return;
+    actions.saveCategory({ ...category, description: trimmed || undefined });
+  };
+
   const move = (category: Category, direction: -1 | 1) => {
     const sorted = [...categories].sort((a, b) => a.order - b.order);
     const index = sorted.findIndex((item) => item.id === category.id);
@@ -80,7 +86,9 @@ export function CategoryManager() {
     <Card>
       <h3 className="text-lg font-bold text-ink">Categories</h3>
       <p className="mt-1 text-sm text-muted">
-        Rename, reorder or archive to match how you write up a set of books.
+        Rename, reorder or archive to match how you write up a set of books. The description under
+        each one is what automatic categorisation matches a transaction against — the more plainly it
+        says what belongs here, the better it places things.
       </p>
 
       <div className="mt-4 flex flex-wrap items-end gap-3">
@@ -131,10 +139,11 @@ export function CategoryManager() {
                   return (
                     <li
                       key={category.id}
-                      className={`flex flex-wrap items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 ${
+                      className={`rounded-lg border border-muted-line/30 px-3 py-2 ${
                         category.archived ? "opacity-60" : ""
                       }`}
                     >
+                      <div className="flex flex-wrap items-center gap-2">
                       <input
                         defaultValue={category.name}
                         onBlur={(event) => rename(category, event.target.value)}
@@ -173,6 +182,14 @@ export function CategoryManager() {
                           Delete
                         </button>
                       ) : null}
+                      </div>
+                      <input
+                        defaultValue={category.description ?? ""}
+                        onBlur={(event) => describe(category, event.target.value)}
+                        placeholder="Describe what belongs here, for automatic categorisation"
+                        className="mt-1 w-full rounded border-0 bg-transparent px-1 py-0.5 text-xs text-muted outline-none focus:bg-cream-paper/60"
+                        aria-label={`Description for ${category.name}`}
+                      />
                     </li>
                   );
                 })}

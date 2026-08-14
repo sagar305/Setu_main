@@ -11,7 +11,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import type { Category, Transaction } from "@/lib/bankStatement/types";
 import { formatDate } from "@/lib/bankStatement/utils/dates";
 import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
-import { confidenceBand, sourceLabel } from "@/lib/bankStatement/classification/classifier";
+import { confidenceBand, sourceBadge, sourceLabel } from "@/lib/bankStatement/classification/classifier";
 
 const ROW_HEIGHT = 56;
 const OVERSCAN = 8;
@@ -90,7 +90,7 @@ export function TransactionTable({
         <span className="w-24 shrink-0 text-right">Credit</span>
         <span className="w-40 shrink-0">Category</span>
         <span className="w-28 shrink-0">Type</span>
-        <span className="w-24 shrink-0">Confidence</span>
+        <span className="w-28 shrink-0">Confidence</span>
         <span className="w-16 shrink-0" />
       </div>
 
@@ -127,6 +127,17 @@ export function TransactionTable({
       ) : null}
     </div>
   );
+}
+
+/**
+ * What the confidence pill means on hover. An AI row also reports the raw
+ * cosine similarity, because the percentage beside it is a calibrated score
+ * rather than the model's own number and the two should never be confused.
+ */
+function confidenceTitle(transaction: Transaction): string {
+  const base = `${sourceLabel(transaction.classificationSource)} · ${transaction.confidence ?? 0}%`;
+  if (transaction.classificationSource !== "AI" || transaction.aiSimilarity === undefined) return base;
+  return `${base} (model similarity ${transaction.aiSimilarity.toFixed(2)})`;
 }
 
 function Row({
@@ -182,6 +193,9 @@ function Row({
           {transaction.isDuplicate && transaction.duplicateOverride !== "KEEP" ? (
             <span className="ml-2 font-semibold text-amber-700">⚠ Possible duplicate</span>
           ) : null}
+          {transaction.needsReview ? (
+            <span className="ml-2 font-semibold text-amber-700">Needs review</span>
+          ) : null}
           {transaction.rowStatus && transaction.rowStatus !== "VALID" ? (
             <span className="ml-2 font-semibold text-red-600" title={transaction.rowIssue}>
               ⚠ {transaction.rowStatus}
@@ -204,6 +218,10 @@ function Row({
             category: event.target.value || undefined,
             classificationSource: "MANUAL",
             confidence: 100,
+            // The CA has spoken: the row is no longer anything to review, and
+            // the model's own score no longer describes it.
+            needsReview: false,
+            aiSimilarity: undefined,
           })
         }
         className="w-40 shrink-0 rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-xs text-ink outline-none focus:border-indigo"
@@ -241,12 +259,15 @@ function Row({
         ))}
       </select>
 
-      <span className="w-24 shrink-0">
+      <span className="flex w-28 shrink-0 items-center gap-1.5">
         <span
           className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${bandStyle}`}
-          title={`${sourceLabel(transaction.classificationSource)} · ${transaction.confidence ?? 0}%`}
+          title={confidenceTitle(transaction)}
         >
           {transaction.confidence ?? 0}%
+        </span>
+        <span className="truncate text-[11px] text-muted" title={sourceLabel(transaction.classificationSource)}>
+          {sourceBadge(transaction.classificationSource)}
         </span>
       </span>
 

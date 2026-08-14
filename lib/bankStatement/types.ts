@@ -15,8 +15,21 @@ export type TransactionType = "DEBIT" | "CREDIT";
  */
 export type ClassificationType = "BUSINESS" | "PERSONAL" | "TRANSFER" | "UNKNOWN";
 
-/** Where the current classification came from — shown next to the confidence. */
-export type ClassificationSource = "RULE" | "MANUAL" | "HEURISTIC" | "UNCLASSIFIED";
+/**
+ * Where the current classification came from — shown next to the confidence.
+ *
+ * The order below is the order of authority: a rule the CA wrote beats what the
+ * CA taught this browser by correcting a row, which beats a keyword pattern,
+ * which beats the on-device semantic model. MANUAL outranks everything because
+ * it is the CA saying so directly.
+ */
+export type ClassificationSource =
+  | "RULE"
+  | "MANUAL"
+  | "MEMORY"
+  | "HEURISTIC"
+  | "AI"
+  | "UNCLASSIFIED";
 
 /** GST posture. Identification only — this tool draws no compliance conclusions. */
 export type GstFlag = "RELEVANT" | "POTENTIAL" | "NOT_MARKED";
@@ -57,6 +70,20 @@ export type Transaction = {
   /** Classification confidence 0–100. Never describes parser correctness. */
   confidence?: number;
   matchedRuleId?: string;
+
+  /**
+   * Set when a category was applied but the CA should still look at it — the
+   * semantic model's middle band. Distinct from a low confidence number: this
+   * says "acted, but check me", not "did not know".
+   */
+  needsReview?: boolean;
+
+  /**
+   * Raw cosine similarity (0–1) behind an AI classification, kept alongside the
+   * calibrated score so the thresholds can be retuned against real statements
+   * without re-running the model.
+   */
+  aiSimilarity?: number;
 
   isDuplicate?: boolean;
   /** Set when the CA overrides the duplicate flag either way. */
@@ -172,6 +199,15 @@ export type Category = {
   name: string;
   group: CategoryGroup;
   parentId?: string;
+  /**
+   * What belongs in this category, in plain English. Read by a human as a
+   * tooltip, and embedded by the on-device model as the thing a transaction is
+   * compared against — a category with no description can only be matched on
+   * its name, so this is functional text, not commentary.
+   */
+  description?: string;
+  /** A few merchants or narrations that belong here, used the same way. */
+  examples?: string[];
   /** Built-in categories ship with the tool; users may add their own. */
   builtIn: boolean;
   archived: boolean;
@@ -231,6 +267,13 @@ export type ClassificationRule = {
   priority: number;
   enabled: boolean;
   createdAt: string;
+  /**
+   * Where the rule came from. "AI_APPROVED" marks one written by confirming a
+   * suggestion in the AI review queue — deterministic from then on, and the
+   * reason the same merchant never needs the model again. Absent on rules saved
+   * before this existed, which are the CA's own.
+   */
+  origin?: "USER" | "AI_APPROVED";
 };
 
 // ---------------------------------------------------------------------------
@@ -251,6 +294,15 @@ export type AnalyzerSettings = {
   includeDuplicatesInTotals: boolean;
   /** Below this classification confidence a transaction needs CA review. */
   reviewConfidenceThreshold: number;
+  /**
+   * Thresholds for the on-device semantic model, on the same 0–100 scale.
+   * At or above `aiAutoThreshold` the category is applied outright; down to
+   * `aiReviewThreshold` it is applied but flagged; below that the transaction
+   * is left uncategorised rather than guessed at. Both are adjustable because
+   * the right values can only be found against real statements.
+   */
+  aiAutoThreshold: number;
+  aiReviewThreshold: number;
 };
 
 export type AuditEntry = {

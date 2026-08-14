@@ -5,6 +5,15 @@
 // the machine, or if a bank adapter has been promoted without fixtures to back
 // it up. It is deliberately a source scan: a runtime test would only prove that
 // the paths it happened to exercise stayed local.
+//
+// One thing does cross the network, and it is worth naming precisely rather
+// than hiding behind the word "local": when the CA asks for AI categorisation,
+// the embedding model's own weights are downloaded once from the model host by
+// @huggingface/transformers, and cached by the browser. That download happens
+// before any transaction is read and carries none of them. The tests below pin
+// that boundary in place — the library may be imported from exactly one file,
+// the message that crosses into the worker may carry only a narration, and the
+// UI has to keep saying so.
 
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
@@ -106,5 +115,59 @@ describe("bank adapters stay honest", () => {
         ).toContain(adapter.id);
       }
     }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The AI boundary (see the note at the top of this file).
+// ---------------------------------------------------------------------------
+
+const AI_LIBRARY = "@huggingface/transformers";
+
+describe("on-device categorisation stays on the device", () => {
+  it("imports the model library from the worker and nowhere else", () => {
+    const importers = FILES.filter((file) =>
+      stripComments(readFileSync(file, "utf8")).includes(AI_LIBRARY)
+    );
+    expect(importers.map((file) => file.split("/").pop())).toEqual(["transaction-ai.worker.ts"]);
+  });
+
+  it("sends the worker a narration and a direction, and nothing else", () => {
+    // If a field is added to this type it has to be justified here, in the
+    // test that exists to keep amounts and account details out of it.
+    const protocol = readFileSync(
+      join(process.cwd(), "lib", "bankStatement", "ai", "protocol.ts"),
+      "utf8"
+    );
+    const declaration = protocol.match(/export type AiRequestItem = \{([\s\S]*?)\};/);
+    expect(declaration, "AiRequestItem is no longer declared as expected").not.toBeNull();
+
+    const fields = (declaration as RegExpMatchArray)[1]
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0 && !line.startsWith("//") && !line.startsWith("*") && !line.startsWith("/*"))
+      .map((line) => line.split(/[?:]/)[0].trim());
+
+    expect(fields.sort()).toEqual(["direction", "id", "narration"]);
+  });
+
+  it("keeps what the CA taught it out of every export", () => {
+    // Learned corrections are the CA's own judgements about their client's
+    // spending. They belong in this browser and in no file that leaves it.
+    for (const file of [
+      join(process.cwd(), "lib", "bankStatement", "export", "excel.ts"),
+      join(process.cwd(), "lib", "bankStatement", "export", "pdf.ts"),
+    ]) {
+      expect(stripComments(readFileSync(file, "utf8"))).not.toMatch(/learned/i);
+    }
+  });
+
+  it("tells the CA about the model download rather than implying there is none", () => {
+    const panel = readFileSync(
+      join(process.cwd(), "components", "tools", "BankStatementAnalyzer", "AiCategorisationPanel.tsx"),
+      "utf8"
+    );
+    expect(panel).toMatch(/downloaded once/i);
+    expect(panel).toMatch(/never sent/i);
   });
 });
