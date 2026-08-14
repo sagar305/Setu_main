@@ -58,6 +58,12 @@ class AiCategoriser {
     }
   >();
 
+  /** Clustering requests, kept apart because they resolve to a different shape. */
+  private clustering = new Map<
+    number,
+    { resolve: (clusters: string[][]) => void; reject: (error: Error) => void }
+  >();
+
   private readyWaiters: { resolve: () => void; reject: (error: Error) => void }[] = [];
 
   subscribe(listener: Listener): () => void {
@@ -135,6 +141,24 @@ class AiCategoriser {
     );
   }
 
+  /**
+   * Ask which of these transactions belong together — used on the ones the
+   * model declined to categorise, to find the categories the list is missing.
+   * Reuses the embeddings classification already computed.
+   */
+  clusterUnmatched(items: AiRequestItem[], profiles: CategoryProfile[]): Promise<string[][]> {
+    if (items.length === 0) return Promise.resolve([]);
+
+    return this.start(profiles).then(
+      () =>
+        new Promise<string[][]>((resolve, reject) => {
+          const requestId = this.nextRequestId++;
+          this.clustering.set(requestId, { resolve, reject });
+          this.send({ type: "CLUSTER_TRANSACTIONS", requestId, items });
+        })
+    );
+  }
+
   /** Abandon every in-flight batch. The model stays loaded. */
   cancelAll(): void {
     for (const requestId of this.pending.keys()) {
@@ -177,10 +201,21 @@ class AiCategoriser {
         break;
       }
 
+      case "CLUSTERS": {
+        const entry = this.clustering.get(message.requestId);
+        this.clustering.delete(message.requestId);
+        entry?.resolve(message.clusters);
+        break;
+      }
+
       case "ERROR": {
         const entry = this.pending.get(message.requestId);
         this.pending.delete(message.requestId);
         entry?.reject(new Error(message.message));
+
+        const grouping = this.clustering.get(message.requestId);
+        this.clustering.delete(message.requestId);
+        grouping?.reject(new Error(message.message));
         break;
       }
     }
@@ -195,6 +230,9 @@ class AiCategoriser {
 
     for (const entry of this.pending.values()) entry.reject(new Error(error));
     this.pending.clear();
+
+    for (const entry of this.clustering.values()) entry.reject(new Error(error));
+    this.clustering.clear();
   }
 }
 

@@ -27,7 +27,9 @@
 import { BACKEND_CANDIDATES, EMBED_BATCH_SIZE, MODEL_ID } from "@/lib/bankStatement/ai/config";
 import type { CategoryProfile } from "@/lib/bankStatement/ai/categoryProfiles";
 import { profilesFingerprint } from "@/lib/bankStatement/ai/categoryProfiles";
-import { narrationToSentence } from "@/lib/bankStatement/ai/narration";
+import { merchantKey, narrationToSentence } from "@/lib/bankStatement/ai/narration";
+import { clusterByMeaning } from "@/lib/bankStatement/ai/clustering";
+import { CLUSTERING } from "@/lib/bankStatement/ai/config";
 import { scoreTransaction } from "@/lib/bankStatement/ai/scoring";
 import type {
   AiBackend,
@@ -285,6 +287,48 @@ async function classify(message: Extract<MainToWorkerMessage, { type: "CLASSIFY_
   }
 }
 
+/**
+ * Group the transactions the model would not place.
+ *
+ * One entry per distinct merchant, not per transaction: twenty rows from one
+ * shop are one merchant and must not look like a pattern on their own. The
+ * embeddings are the same ones classification already computed, so this costs
+ * an embedding pass only over merchants that were never seen.
+ */
+async function cluster(message: Extract<MainToWorkerMessage, { type: "CLUSTER_TRANSACTIONS" }>) {
+  const { requestId, items } = message;
+
+  try {
+    const { embedder } = await getEmbedder();
+
+    const byMerchant = new Map<string, string>();
+    for (const item of items) {
+      const key = merchantKey(item.narration, item.direction);
+      if (!byMerchant.has(key)) {
+        byMerchant.set(key, narrationToSentence(item.narration, item.direction));
+      }
+    }
+
+    const missing = [...byMerchant.values()].filter((sentence) => !sentenceCache.has(sentence));
+    if (missing.length > 0) {
+      const vectors = await embedAll(embedder, missing);
+      missing.forEach((sentence, index) => sentenceCache.set(sentence, vectors[index]));
+    }
+
+    const clusterable = [...byMerchant.entries()]
+      .map(([key, sentence]) => ({ key, embedding: sentenceCache.get(sentence) }))
+      .filter((entry): entry is { key: string; embedding: Float32Array } => entry.embedding !== undefined);
+
+    post({
+      type: "CLUSTERS",
+      requestId,
+      clusters: clusterByMeaning(clusterable, CLUSTERING.similarity),
+    });
+  } catch (error) {
+    post({ type: "ERROR", requestId, message: describe(error) });
+  }
+}
+
 // --- message loop ----------------------------------------------------------
 
 self.addEventListener("message", (event: MessageEvent<MainToWorkerMessage>) => {
@@ -305,6 +349,10 @@ self.addEventListener("message", (event: MessageEvent<MainToWorkerMessage>) => {
 
     case "CLASSIFY_TRANSACTIONS":
       void classify(message);
+      break;
+
+    case "CLUSTER_TRANSACTIONS":
+      void cluster(message);
       break;
 
     case "CANCEL":

@@ -14,6 +14,7 @@ import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/Progress
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 import { useAiCategorisation } from "@/components/tools/BankStatementAnalyzer/useAiCategorisation";
 import { AiReviewQueue } from "@/components/tools/BankStatementAnalyzer/AiReviewQueue";
+import { AiCategorySuggestions } from "@/components/tools/BankStatementAnalyzer/AiCategorySuggestions";
 import { categoryName } from "@/lib/bankStatement/classification/categories";
 
 export function AiCategorisationPanel() {
@@ -26,6 +27,9 @@ export function AiCategorisationPanel() {
     error,
     pendingCount,
     awaitingApproval,
+    newCategories,
+    dismissSuggestion,
+    clearSuggestion,
     busy,
     ready,
     categorise,
@@ -178,6 +182,8 @@ export function AiCategorisationPanel() {
                   }
                 : run.stage === "applying"
                   ? { label: "Applying categories" }
+                  : run.stage === "grouping"
+                  ? { label: "Looking for categories you do not have" }
                   : {
                       label: client.message ?? "Reading transactions on this device…",
                       current: client.percent,
@@ -298,6 +304,12 @@ export function AiCategorisationPanel() {
     </Card>
 
     <AiReviewQueue groups={awaitingApproval} />
+
+    <AiCategorySuggestions
+      suggestions={newCategories}
+      onDismiss={dismissSuggestion}
+      onAccepted={clearSuggestion}
+    />
     </div>
   );
 }

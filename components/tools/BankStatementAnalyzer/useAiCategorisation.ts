@@ -14,6 +14,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 import { buildCategoryProfiles } from "@/lib/bankStatement/ai/categoryProfiles";
 import { groupSuggestions, needsAiCategorisation } from "@/lib/bankStatement/ai/approval";
+import { significantClusters } from "@/lib/bankStatement/ai/clustering";
+import {
+  buildSuggestion,
+  isUnmatchedByAi,
+  type CategorySuggestion,
+} from "@/lib/bankStatement/ai/categorySuggestion";
+import { merchantKey } from "@/lib/bankStatement/ai/narration";
+import { CLUSTERING } from "@/lib/bankStatement/ai/config";
 import { aiSupported, getAiCategoriser, type AiClientState } from "@/lib/bankStatement/ai/client";
 import { outcomeFor } from "@/lib/bankStatement/ai/scoring";
 import type { AiRequestItem } from "@/lib/bankStatement/ai/protocol";
@@ -33,7 +41,7 @@ export type AiRunSummary = {
 
 export type AiRunState = {
   /** What is happening right now, for the progress panel. */
-  stage: "idle" | "loading" | "classifying" | "applying";
+  stage: "idle" | "loading" | "classifying" | "applying" | "grouping";
   current?: number;
   total?: number;
 };
@@ -45,6 +53,8 @@ export function useAiCategorisation() {
   const [run, setRun] = useState<AiRunState>({ stage: "idle" });
   const [summary, setSummary] = useState<AiRunSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [newCategories, setNewCategories] = useState<CategorySuggestion[]>([]);
+  const [dismissed, setDismissed] = useState<Set<string>>(new Set());
 
   const running = useRef(false);
 
@@ -137,6 +147,46 @@ export function useAiCategorisation() {
         [...patches.keys()]
       );
 
+      // The rows the model declined are not just failures — taken together they
+      // are the shape of a category the list does not have. Ask the worker to
+      // group them, reusing the embeddings it just computed.
+      const unresolved = pending.filter((transaction) => {
+        const patch = patches.get(transaction.id);
+        return patch !== undefined && patch.category === undefined;
+      });
+
+      if (unresolved.length >= CLUSTERING.minMerchants) {
+        setRun({ stage: "grouping" });
+        try {
+          const clusters = await getAiCategoriser().clusterUnmatched(
+            unresolved.map((transaction) => ({
+              id: transaction.id,
+              narration: transaction.narration,
+              direction: transaction.transactionType,
+            })),
+            profiles
+          );
+
+          const byKey = new Map<string, Transaction[]>();
+          for (const transaction of unresolved) {
+            const key = merchantKey(transaction.narration, transaction.transactionType);
+            const bucket = byKey.get(key);
+            if (bucket) bucket.push(transaction);
+            else byKey.set(key, [transaction]);
+          }
+
+          setNewCategories(
+            significantClusters(clusters, CLUSTERING.minMerchants, CLUSTERING.maxSuggestions)
+              .map((keys) => buildSuggestion(keys.flatMap((key) => byKey.get(key) ?? [])))
+              .filter((suggestion) => suggestion.transactions.length > 0)
+          );
+        } catch {
+          // Finding missing categories is a bonus pass. If it fails, the
+          // categorisation the CA actually asked for still stands.
+          setNewCategories([]);
+        }
+      }
+
       setSummary(tally);
       actions.log(
         "AI categorisation run",
@@ -182,6 +232,12 @@ export function useAiCategorisation() {
     error,
     pendingCount: pending.length,
     awaitingApproval,
+    /** Categories the list appears to be missing, drawn from what fit nothing. */
+    newCategories: newCategories.filter((suggestion) => !dismissed.has(suggestion.key)),
+    dismissSuggestion: (key: string) =>
+      setDismissed((current) => new Set(current).add(key)),
+    clearSuggestion: (key: string) =>
+      setNewCategories((current) => current.filter((suggestion) => suggestion.key !== key)),
     busy: run.stage !== "idle",
     categorise,
     download,

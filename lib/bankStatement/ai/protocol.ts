@@ -48,9 +48,24 @@ export type ClassifyMessage = {
   profiles: CategoryProfile[];
 };
 
+/**
+ * Ask which of these transactions belong together. Sent only for the ones the
+ * model already declined to categorise, so the answer is "here are the kinds of
+ * spending your category list is missing".
+ */
+export type ClusterMessage = {
+  type: "CLUSTER_TRANSACTIONS";
+  requestId: number;
+  items: AiRequestItem[];
+};
+
 export type CancelMessage = { type: "CANCEL"; requestId: number };
 
-export type MainToWorkerMessage = InitModelMessage | ClassifyMessage | CancelMessage;
+export type MainToWorkerMessage =
+  | InitModelMessage
+  | ClassifyMessage
+  | ClusterMessage
+  | CancelMessage;
 
 // --- worker → main thread --------------------------------------------------
 
@@ -78,6 +93,13 @@ export type ResultMessage = {
   results: AiResultItem[];
 };
 
+/** Groups of merchant keys, biggest first. The page maps them back to rows. */
+export type ClustersMessage = {
+  type: "CLUSTERS";
+  requestId: number;
+  clusters: string[][];
+};
+
 export type ErrorMessage = { type: "ERROR"; requestId: number; message: string };
 
 export type WorkerToMainMessage =
@@ -86,4 +108,5 @@ export type WorkerToMainMessage =
   | ModelErrorMessage
   | ProgressMessage
   | ResultMessage
+  | ClustersMessage
   | ErrorMessage;

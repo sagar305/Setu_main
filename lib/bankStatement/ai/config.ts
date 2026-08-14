@@ -89,3 +89,30 @@ export const LEARNED_LIMIT = 400;
  * merchant the CA keeps changing their mind about does not thrash.
  */
 export const LEARNED_MIN_COUNT = 1;
+
+/**
+ * Finding the categories the CA does not yet have.
+ * ---------------------------------------------------------------------------
+ * When the model declines to place a transaction, that is a signal in itself.
+ * If several *different* merchants are all declined and all sit close to each
+ * other in embedding space, they are one kind of spending the category list is
+ * missing. These knobs decide how confident we have to be before saying so.
+ */
+export const CLUSTERING = {
+  /**
+   * How close two merchants must sit to be called the same kind of thing.
+   * Higher means tighter, fewer, more obviously-related groups. This compares
+   * two transaction sentences rather than a transaction and a category, so it
+   * runs higher than the classification thresholds — the same phrasing on both
+   * sides scores better than prose against a category description.
+   */
+  similarity: 0.55,
+  /**
+   * Distinct merchants needed before a group is worth proposing. Two merchants
+   * that happen to look alike are a coincidence; three are a pattern, and a
+   * category the CA has to name and maintain should clear a real bar.
+   */
+  minMerchants: 3,
+  /** Never propose more than this at once — nobody wants ten new categories. */
+  maxSuggestions: 3,
+} as const;
