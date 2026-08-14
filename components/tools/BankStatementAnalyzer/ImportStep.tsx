@@ -31,6 +31,11 @@ import {
   parseStatementFile,
 } from "@/lib/bankStatement/parser";
 import { describeMappingGaps, isMappingUsable } from "@/lib/bankStatement/parser/columns";
+import {
+  describeFailure,
+  formatDiagnostics,
+  type ImportFailure,
+} from "@/lib/bankStatement/utils/diagnostics";
 import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 import { buildDemoData } from "@/lib/bankStatement/demo/sampleStatement";
 import type {
@@ -62,6 +67,12 @@ export function ImportStep() {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [removing, setRemoving] = useState<string | null>(null);
   const [largeFileNotice, setLargeFileNotice] = useState<string | null>(null);
+  const [failure, setFailure] = useState<ImportFailure | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  // The last stage the parser reported, so a failure can say where it happened
+  // rather than only what the exception was.
+  const stageRef = useRef("Reading file");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -72,17 +83,22 @@ export function ImportStep() {
     ) => {
       setBusy(true);
       setError(null);
+      setFailure(null);
+      setCopied(false);
       setPasswordError(null);
+      stageRef.current = "Reading file";
       try {
         const outcome = await parseStatementFile(file, {
           ...options,
-          onProgress: (stage, current, total) =>
+          onProgress: (stage, current, total) => (
+            (stageRef.current = stage),
             setProgress({
               label: stage,
               current,
               total,
               unit: stage === "Parsing statement" ? "page" : undefined,
-            }),
+            })
+          ),
         });
         setPending({ file, outcome });
         setMapping(outcome.mapping ?? null);
@@ -95,6 +111,7 @@ export function ImportStep() {
           setPasswordError(caught.incorrect ? "Incorrect password. Please try again." : null);
         } else {
           setError(caught instanceof Error ? caught.message : "This file could not be read.");
+          setFailure(describeFailure(caught, stageRef.current, file));
         }
       } finally {
         setBusy(false);
@@ -243,9 +260,43 @@ export function ImportStep() {
         <Card className="border-red-200">
           <div className="flex gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
-            <div>
+            <div className="min-w-0 flex-1">
               <h3 className="font-bold text-ink">We could not read that file</h3>
               <p className="mt-1 text-sm text-muted">{error}</p>
+
+              {failure ? (
+                <>
+                  <p className="mt-2 text-sm text-muted">
+                    It failed while <strong className="text-ink">{failure.stage.toLowerCase()}</strong>.
+                    If this is a PDF, a CSV or Excel copy of the same statement usually imports
+                    cleanly — most banks offer one alongside the PDF.
+                  </p>
+
+                  <details className="mt-3">
+                    <summary className="cursor-pointer text-sm font-semibold text-indigo">
+                      Technical details
+                    </summary>
+                    <p className="mt-2 text-xs text-muted">
+                      Nothing from your statement is in here — no narrations, no amounts, not even
+                      the file name. Only which step failed and what this browser supports.
+                    </p>
+                    <pre className="mt-2 max-h-56 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-cream-paper/70 p-3 text-[11px] leading-relaxed text-muted">
+                      {formatDiagnostics(failure)}
+                    </pre>
+                    <SecondaryButton
+                      className="mt-2 !px-3 !py-1.5 !text-xs"
+                      onClick={() => {
+                        void window.navigator.clipboard
+                          ?.writeText(formatDiagnostics(failure))
+                          .then(() => setCopied(true))
+                          .catch(() => setCopied(false));
+                      }}
+                    >
+                      {copied ? "Copied" : "Copy details"}
+                    </SecondaryButton>
+                  </details>
+                </>
+              ) : null}
             </div>
           </div>
         </Card>
