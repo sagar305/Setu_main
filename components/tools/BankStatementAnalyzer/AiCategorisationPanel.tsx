@@ -7,8 +7,8 @@
 // the only thing that starts it, and everything the tool did before — rules,
 // patterns, categorising by hand — is untouched whether it is used or not.
 
-import { useState } from "react";
-import { Sparkles, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Download, Sparkles, ShieldCheck, WifiOff } from "lucide-react";
 import { Card, Field, NumberInput, PrimaryButton, SecondaryButton } from "@/components/toolkit/ui";
 import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
@@ -18,8 +18,21 @@ import { categoryName } from "@/lib/bankStatement/classification/categories";
 
 export function AiCategorisationPanel() {
   const { settings, categories, learned, actions } = useAnalyzer();
-  const { supported, client, run, summary, error, pendingCount, awaitingApproval, busy, categorise, cancel } =
-    useAiCategorisation();
+  const {
+    supported,
+    client,
+    run,
+    summary,
+    error,
+    pendingCount,
+    awaitingApproval,
+    busy,
+    ready,
+    categorise,
+    download,
+    cancel,
+  } = useAiCategorisation();
+  const online = useOnlineStatus();
 
   const [showSettings, setShowSettings] = useState(false);
 
@@ -28,52 +41,123 @@ export function AiCategorisationPanel() {
   return (
     <div className="space-y-4">
     <Card className="border-indigo/20">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-[240px] flex-1">
-          <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
-            <Sparkles className="h-4 w-4 text-indigo" aria-hidden="true" />
-            Categorise the rest automatically
-          </h3>
-          <p className="mt-1 text-sm text-muted">
-            {pendingCount > 0 ? (
-              <>
-                <strong className="text-ink">{pendingCount.toLocaleString("en-IN")}</strong>{" "}
-                transaction{pendingCount === 1 ? "" : "s"} your rules and the keyword patterns could
-                not place. A small language model runs inside this browser and matches each one
-                against your category descriptions by meaning, not by exact keyword. Nothing it
-                suggests is applied for good until you approve it — and once you do, it is saved as
-                a rule, so the same merchant never needs the model again.
-              </>
-            ) : (
-              <>Every transaction already has a category from a rule, a pattern or your own edits.</>
-            )}
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {busy ? (
-            <SecondaryButton onClick={cancel}>Stop</SecondaryButton>
+      <div className="min-w-[240px] flex-1">
+        <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
+          <Sparkles className="h-4 w-4 text-indigo" aria-hidden="true" />
+          Categorise the rest automatically
+        </h3>
+        <p className="mt-1 text-sm text-muted">
+          {pendingCount > 0 ? (
+            <>
+              <strong className="text-ink">{pendingCount.toLocaleString("en-IN")}</strong>{" "}
+              transaction{pendingCount === 1 ? "" : "s"} your rules and the keyword patterns could
+              not place. A small language model runs inside this browser and matches each one
+              against your category descriptions by meaning, not by exact keyword. Nothing it
+              suggests is applied for good until you approve it — and once you do, it is saved as a
+              rule, so the same merchant never needs the model again.
+            </>
           ) : (
-            <PrimaryButton onClick={() => void categorise()} disabled={!supported || pendingCount === 0}>
-              Categorise with AI
-            </PrimaryButton>
+            <>Every transaction already has a category from a rule, a pattern or your own edits.</>
           )}
-          <SecondaryButton onClick={() => setShowSettings((open) => !open)}>
-            {showSettings ? "Hide settings" : "Settings"}
-          </SecondaryButton>
-        </div>
+        </p>
       </div>
 
-      {/* The honest version of the privacy claim: the model file is downloaded,
-          the statement is not uploaded. Both halves said plainly. */}
-      <p className="mt-3 inline-flex items-start gap-2 rounded-xl bg-emerald-50 px-3 py-2 text-xs text-emerald-800">
-        <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-        <span>
-          The model file (about 15–25 MB) is downloaded once from the model host and cached by your
-          browser. After that it runs entirely on this device — your transactions are read in this
-          browser and are never sent to a model host, a server, or anyone else.
-        </span>
-      </p>
+      {/* Two presses, not one, and deliberately so.
+          -----------------------------------------------------------------
+          Downloading the model is the only moment this feature touches the
+          network. Doing it on its own button — before any transaction is
+          involved — means a CA can watch exactly what happens and when, and
+          can then disconnect before categorising anything. A single button
+          that quietly did both would give them nothing to check. */}
+      <ol className="mt-4 space-y-3">
+        <li className="rounded-xl border border-muted-line/30 p-4">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="min-w-[220px] flex-1">
+              <p className="text-sm font-bold text-ink">
+                Step 1 · Download the model{ready ? " — done" : ""}
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                {ready ? (
+                  <>
+                    Loaded and running on this device. Nothing further will be downloaded, and no
+                    part of your statement was involved in this step.
+                  </>
+                ) : (
+                  <>
+                    A one-time download of the model file itself (about 15–25 MB), from the model
+                    host. This is the only time this feature uses the network, and it sends nothing
+                    about your statement — it has not been read at this point.
+                  </>
+                )}
+              </p>
+            </div>
+            {ready ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                Downloaded
+              </span>
+            ) : (
+              <PrimaryButton
+                onClick={() => void download()}
+                disabled={!supported || client.phase === "loading"}
+              >
+                <span className="flex items-center gap-1.5">
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  {client.phase === "loading" ? "Downloading…" : "Download AI model"}
+                </span>
+              </PrimaryButton>
+            )}
+          </div>
+
+          {ready ? (
+            <p className="mt-3 flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-800">
+              <WifiOff className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              <span>
+                <strong>If you have any doubt, turn your internet off now.</strong> The model is
+                loaded in this browser and categorising below will still work with no connection at
+                all — which is the simplest way to see for yourself that nothing is being uploaded.
+                Your browser has also cached the file, so a later visit normally skips this step.
+              </span>
+            </p>
+          ) : null}
+        </li>
+
+        <li className="rounded-xl border border-muted-line/30 p-4">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="min-w-[220px] flex-1">
+              <p className="text-sm font-bold text-ink">Step 2 · Categorise on this device</p>
+              <p className="mt-1 text-xs text-muted">
+                {ready
+                  ? "Reads the narrations in this browser and suggests a category for each. Works with the network disconnected."
+                  : "Available once the model is on this device. No transaction is read before then."}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {busy ? (
+                <SecondaryButton onClick={cancel}>Stop</SecondaryButton>
+              ) : (
+                <PrimaryButton
+                  onClick={() => void categorise()}
+                  disabled={!supported || !ready || pendingCount === 0}
+                >
+                  Categorise with AI
+                </PrimaryButton>
+              )}
+              <SecondaryButton onClick={() => setShowSettings((open) => !open)}>
+                {showSettings ? "Hide settings" : "Settings"}
+              </SecondaryButton>
+            </div>
+          </div>
+
+          {ready && !online ? (
+            <p className="mt-3 flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-800">
+              <WifiOff className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              You are offline, and this still works. Your statement is being read entirely on this
+              device.
+            </p>
+          ) : null}
+        </li>
+      </ol>
 
       {!supported ? (
         <p className="mt-3 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
@@ -95,7 +179,7 @@ export function AiCategorisationPanel() {
                 : run.stage === "applying"
                   ? { label: "Applying categories" }
                   : {
-                      label: client.message ?? "Preparing AI categorisation…",
+                      label: client.message ?? "Reading transactions on this device…",
                       current: client.percent,
                       total: client.percent === undefined ? undefined : 100,
                     }
@@ -216,6 +300,29 @@ export function AiCategorisationPanel() {
     <AiReviewQueue groups={awaitingApproval} />
     </div>
   );
+}
+
+/**
+ * Whether the browser thinks it has a connection. Read-only — it inspects a
+ * flag the browser already maintains and makes no request of its own. It is
+ * here so that a CA who disconnects to check us gets told, on the spot, that
+ * the feature carried on working.
+ */
+function useOnlineStatus(): boolean {
+  const [online, setOnline] = useState(true);
+
+  useEffect(() => {
+    const update = () => setOnline(window.navigator.onLine);
+    update();
+    window.addEventListener("online", update);
+    window.addEventListener("offline", update);
+    return () => {
+      window.removeEventListener("online", update);
+      window.removeEventListener("offline", update);
+    };
+  }, []);
+
+  return online;
 }
 
 function Tally({

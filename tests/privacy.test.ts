@@ -162,12 +162,35 @@ describe("on-device categorisation stays on the device", () => {
     }
   });
 
-  it("tells the CA about the model download rather than implying there is none", () => {
+  // The download is a separate, explicit press, and the UI has to keep saying
+  // three things about it: that it happens, that it carries none of the
+  // statement, and that the CA can disconnect afterwards to see for themselves.
+  // Collapsing it back into the categorise button would take the check away.
+  it("keeps the model download as its own step, and says what it does", () => {
+    // JSX wraps prose across lines, so the copy is matched as one flowing
+    // string rather than as it happens to be indented today.
     const panel = readFileSync(
       join(process.cwd(), "components", "tools", "BankStatementAnalyzer", "AiCategorisationPanel.tsx"),
       "utf8"
+    ).replace(/\s+/g, " ");
+    expect(panel, "no separate download control").toMatch(/Download AI model/);
+    expect(panel, "does not say the download carries none of the statement").toMatch(
+      /sends nothing about your statement/i
     );
-    expect(panel).toMatch(/downloaded once/i);
-    expect(panel).toMatch(/never sent/i);
+    expect(panel, "does not offer the offline check").toMatch(/turn your internet off/i);
+  });
+
+  it("only starts the model from the two places that are allowed to", () => {
+    // `start()` is what constructs the worker and pulls the model in. It may be
+    // reached from the download button and from classify() — anywhere else and
+    // the download would stop being something the CA chose.
+    const hook = stripComments(
+      readFileSync(
+        join(process.cwd(), "components", "tools", "BankStatementAnalyzer", "useAiCategorisation.ts"),
+        "utf8"
+      )
+    );
+    const starts = hook.match(/\.start\(/g) ?? [];
+    expect(starts.length).toBe(1);
   });
 });

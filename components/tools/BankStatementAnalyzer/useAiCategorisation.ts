@@ -150,6 +150,24 @@ export function useAiCategorisation() {
     }
   }, [actions, categories, pending, profiles, settings.aiAutoThreshold, settings.aiReviewThreshold]);
 
+  /**
+   * Download the model, and do nothing else.
+   *
+   * Kept as its own action, deliberately: the download is the one moment this
+   * feature touches the network, so it gets its own button and its own press.
+   * A CA who wants to satisfy themselves that their statement is not being
+   * uploaded can do it here — download, disconnect, then categorise — and the
+   * separation is what makes that check possible.
+   */
+  const download = useCallback(async () => {
+    setError(null);
+    try {
+      await getAiCategoriser().start(profiles);
+    } catch (failure) {
+      setError(failure instanceof Error ? failure.message : String(failure));
+    }
+  }, [profiles]);
+
   const cancel = useCallback(() => {
     getAiCategoriser().cancelAll();
     setRun({ stage: "idle" });
@@ -166,6 +184,9 @@ export function useAiCategorisation() {
     awaitingApproval,
     busy: run.stage !== "idle",
     categorise,
+    download,
     cancel,
+    /** True once the model is loaded — nothing else will be downloaded. */
+    ready: client.phase === "ready",
   };
 }
