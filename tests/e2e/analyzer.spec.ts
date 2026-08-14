@@ -204,3 +204,33 @@ test("imports a ruled-table PDF with stacked headers and wrapped dates", async (
   const options = await referenceSelect.locator("option").allTextContents();
   expect(options.filter((o) => o !== "Not in this file")).toHaveLength(8);
 });
+
+// One condition, several keywords, ORed — so a category is one rule rather
+// than one rule per merchant.
+test("a rule condition accepts several keywords, any of which matches", async ({ page }) => {
+  await page.goto(`${ANALYZER}/import?demo=1`);
+  await expect(page.getByText("Imported statements (1)")).toBeVisible({ timeout: 25_000 });
+
+  await page.goto(`${ANALYZER}/review`);
+  await page.getByRole("button", { name: /Rules \(/ }).click();
+  await page.getByRole("button", { name: "New rule" }).click();
+  await page.getByPlaceholder("e.g. Swiggy → Business Meals").fill("Food and ads");
+
+  const keywords = page.getByLabel("Keywords, any of which matches");
+  for (const word of ["SWIGGY", "GOOGLE ADS", "IRCTC"]) {
+    await keywords.fill(word);
+    await keywords.press("Enter");
+  }
+
+  // Each keyword becomes a removable chip, and the live count covers all three.
+  await expect(page.getByText("SWIGGY", { exact: true })).toBeVisible();
+  await expect(page.getByText("GOOGLE ADS", { exact: true })).toBeVisible();
+  const summary = await page.getByText(/matches .* of the/).innerText();
+  const matched = Number(summary.replace(/\s+/g, " ").match(/matches (\d+) of/)?.[1] ?? "0");
+  expect(matched).toBeGreaterThan(3);
+
+  await page.getByRole("button", { name: "Save rule" }).click();
+  await expect(
+    page.getByText(/narration contains any of "SWIGGY", "GOOGLE ADS", "IRCTC"/)
+  ).toBeVisible({ timeout: 20_000 });
+});

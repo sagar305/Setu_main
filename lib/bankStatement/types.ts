@@ -201,8 +201,18 @@ export type RuleOperator =
 export type RuleCondition = {
   field: RuleField;
   operator: RuleOperator;
-  /** Text for narration/reference/direction; number for amount; ISO for date. */
+  /**
+   * Text for narration/reference/direction; number for amount; ISO for date.
+   * Kept for rules saved before `values` existed, and as the first entry of it.
+   */
   value: string;
+  /**
+   * Several alternatives for this one condition, matched with OR: "narration
+   * contains ANY of Swiggy, Zomato, Dominos". Conditions are still ANDed with
+   * each other — this is the OR that lives *inside* a condition, so one rule
+   * can cover a whole category instead of one rule per keyword.
+   */
+  values?: string[];
   /** Second bound for `between`. */
   value2?: string;
 };

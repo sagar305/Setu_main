@@ -4,7 +4,14 @@
 import { describe, expect, it } from "vitest";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import { buildPartyMemory, classify, confidenceBand } from "@/lib/bankStatement/classification/classifier";
-import { conditionMatches, findMatchingRule, ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
+import {
+  conditionMatches,
+  conditionValues,
+  countMatches,
+  describeCondition,
+  findMatchingRule,
+  ruleFromTransaction,
+} from "@/lib/bankStatement/classification/rulesEngine";
 import { defaultCategories } from "@/lib/bankStatement/classification/categories";
 
 function transaction(overrides: Partial<Transaction> = {}): Transaction {
@@ -78,10 +85,12 @@ describe("rules engine", () => {
       "r-new",
       "2025-04-01T00:00:00.000Z"
     );
+    // Drafted in the list form, so more keywords can be added without a rewrite.
     expect(draft.conditions[0]).toEqual({
       field: "narration",
       operator: "contains",
       value: "ABC ENTERPRISE",
+      values: ["ABC ENTERPRISE"],
     });
     expect(draft.result.category).toBe("purchases");
   });
@@ -177,5 +186,94 @@ describe("categories", () => {
     expect(categories.find((category) => category.id === "sales")?.group).toBe("INCOME");
     expect(categories.find((category) => category.id === "own-account-transfer")?.group).toBe("TRANSFER");
     expect(categories.find((category) => category.id === "cash-deposit")?.group).toBe("CASH");
+  });
+});
+
+// One condition, several keywords, ORed. This is what makes a category
+// expressible as one rule instead of one rule per merchant.
+describe("keyword lists inside a condition", () => {
+  const meals = rule({
+    name: "Business Meals",
+    conditions: [
+      {
+        field: "narration",
+        operator: "contains",
+        value: "SWIGGY",
+        values: ["SWIGGY", "ZOMATO", "DOMINOS"],
+      },
+    ],
+    result: { category: "office-expenses", classificationType: "BUSINESS" },
+  });
+
+  it("matches when any one of the keywords is present", () => {
+    for (const narration of [
+      "UPI/DR/SWIGGY INSTAMART",
+      "UPI/DR/ZOMATO ONLINE",
+      "POS/DOMINOS PIZZA/MUM",
+    ]) {
+      expect(findMatchingRule(transaction({ narration }), [meals])?.id).toBe("r1");
+    }
+  });
+
+  it("does not match when none of them is present", () => {
+    expect(findMatchingRule(transaction({ narration: "UPI/DR/BIGBASKET" }), [meals])).toBeNull();
+  });
+
+  it("counts every transaction the list would claim", () => {
+    const rows = [
+      transaction({ id: "a", narration: "UPI/DR/SWIGGY" }),
+      transaction({ id: "b", narration: "UPI/DR/ZOMATO" }),
+      transaction({ id: "c", narration: "UPI/DR/UNRELATED" }),
+    ];
+    expect(countMatches(rows, meals)).toBe(2);
+  });
+
+  // Conditions still AND with each other — only the alternatives inside one
+  // condition are ORed.
+  it("still requires every condition to hold", () => {
+    const expensive = rule({
+      conditions: [
+        { field: "narration", operator: "contains", value: "", values: ["SWIGGY", "ZOMATO"] },
+        { field: "amount", operator: "greaterThan", value: "1000" },
+      ],
+    });
+    expect(findMatchingRule(transaction({ narration: "UPI/ZOMATO", debit: 1500 }), [expensive])).not.toBeNull();
+    expect(findMatchingRule(transaction({ narration: "UPI/ZOMATO", debit: 200 }), [expensive])).toBeNull();
+  });
+
+  it("works with operators other than contains", () => {
+    const startsWith = rule({
+      conditions: [{ field: "narration", operator: "startsWith", value: "", values: ["NEFT", "IMPS", "RTGS"] }],
+    });
+    expect(conditionMatches(transaction({ narration: "IMPS/P2A/RENT" }), startsWith.conditions[0])).toBe(true);
+    expect(conditionMatches(transaction({ narration: "UPI/P2A/RENT" }), startsWith.conditions[0])).toBe(false);
+  });
+
+  // Rules saved before keyword lists existed carry only `value`.
+  it("keeps rules saved before the list form working", () => {
+    const legacy = rule({ conditions: [{ field: "narration", operator: "contains", value: "SWIGGY" }] });
+    expect(conditionValues(legacy.conditions[0])).toEqual(["SWIGGY"]);
+    expect(findMatchingRule(transaction({ narration: "UPI/DR/SWIGGY" }), [legacy])).not.toBeNull();
+  });
+
+  it("treats a condition with no keywords as no match, never as match-all", () => {
+    const empty = rule({ conditions: [{ field: "narration", operator: "contains", value: "", values: [] }] });
+    expect(findMatchingRule(transaction({ narration: "ANYTHING AT ALL" }), [empty])).toBeNull();
+  });
+
+  it("describes itself the way the rules list reads", () => {
+    expect(describeCondition(meals.conditions[0])).toBe(
+      'narration contains any of "SWIGGY", "ZOMATO", "DOMINOS"'
+    );
+    expect(describeCondition({ field: "amount", operator: "greaterThan", value: "1000" })).toBe(
+      'amount is more than "1000"'
+    );
+  });
+
+  // A range is a range — the second bound must not be read as an alternative.
+  it("leaves between as a range", () => {
+    const range = { field: "amount", operator: "between", value: "100", value2: "500" } as const;
+    expect(conditionMatches(transaction({ debit: 300 }), range)).toBe(true);
+    expect(conditionMatches(transaction({ debit: 900 }), range)).toBe(false);
   });
 });

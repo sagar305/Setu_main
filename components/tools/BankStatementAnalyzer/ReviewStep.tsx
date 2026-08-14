@@ -15,7 +15,7 @@ import { CategoryManager } from "@/components/tools/BankStatementAnalyzer/Catego
 import { ActivityLog } from "@/components/tools/BankStatementAnalyzer/ActivityLog";
 import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
-import { ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
+import { describeCondition, ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
 import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
@@ -451,7 +451,7 @@ export function ReviewStep() {
                   setEditingRule({
                     id: generateLocalId(),
                     name: "",
-                    conditions: [{ field: "narration", operator: "contains", value: "" }],
+                    conditions: [{ field: "narration", operator: "contains", value: "", values: [] }],
                     result: {},
                     priority: 100,
                     enabled: true,
@@ -480,9 +480,7 @@ export function ReviewStep() {
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-semibold text-ink">{rule.name}</p>
                         <p className="truncate text-xs text-muted">
-                          {rule.conditions
-                            .map((condition) => `${condition.field} ${condition.operator} "${condition.value}"`)
-                            .join(" and ")}
+                          {rule.conditions.map(describeCondition).join(" and ")}
                         </p>
                       </div>
                       <span className="text-xs text-muted">Priority {rule.priority}</span>
