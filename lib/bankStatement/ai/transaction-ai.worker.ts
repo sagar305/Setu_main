@@ -111,6 +111,17 @@ async function loadEmbedder(): Promise<{ embedder: Embedder; backend: AiBackend 
   // produces a confusing 404 before the real download.
   env.allowLocalModels = false;
 
+  // Multi-threaded WASM needs the page to be cross-origin isolated (COOP+COEP),
+  // and this site is not: those headers would break embeds and third-party
+  // images elsewhere for a speed-up on one optional feature. The runtime
+  // otherwise defaults to several threads, tries, warns in the console and
+  // falls back to one anyway — so ask for one up front and skip the noise.
+  // If the site ever does become isolated, the default is left alone.
+  const wasmBackend = env.backends.onnx?.wasm;
+  if (wasmBackend && !self.crossOriginIsolated) {
+    wasmBackend.numThreads = 1;
+  }
+
   // Reasons, deduplicated: six candidates failing for one reason ("offline")
   // should read as one problem, not as six.
   const failures = new Set<string>();
