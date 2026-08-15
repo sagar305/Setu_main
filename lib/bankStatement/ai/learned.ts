@@ -7,8 +7,14 @@
 //
 // It never leaves this browser. It is not sent anywhere, it is not merged with
 // anyone else's, and "Clear all local data" removes it with everything else.
+//
+// Stored in IndexedDB rather than localStorage: corrections accumulate for as
+// long as the CA keeps working and have no natural bound, which is exactly the
+// kind of data localStorage should not be holding. Anything written by an
+// earlier version is migrated across on first read and the old key removed.
 
 import { readLocal, writeLocal } from "@/lib/toolkit/storage";
+import { loadAiRecord, saveAiRecord } from "@/lib/bankStatement/storage/db";
 import { LEARNED_KEY, LEARNED_LIMIT, LEARNED_MIN_COUNT } from "@/lib/bankStatement/ai/config";
 import { merchantKey } from "@/lib/bankStatement/ai/narration";
 import type { ClassificationType, Transaction } from "@/lib/bankStatement/types";
@@ -88,10 +94,42 @@ export function trim(memory: LearnedMemory): LearnedEntry[] {
 
 const TOOL = "bank-statement-analyzer";
 
-export function readLearned(): LearnedMemory {
-  return toMemory(readLocal<LearnedEntry[]>(TOOL, LEARNED_KEY, []));
+/**
+ * Read the corrections, migrating anything an earlier version left in
+ * localStorage. The migration runs once: the old key is cleared as soon as its
+ * contents are safely in IndexedDB.
+ */
+export async function readLearned(): Promise<LearnedMemory> {
+  let stored: LearnedEntry[] = [];
+  try {
+    stored = await loadAiRecord<LearnedEntry[]>(LEARNED_KEY, []);
+  } catch {
+    // IndexedDB blocked (private mode). Fall back to whatever localStorage has
+    // rather than losing what the CA taught us for this session.
+    return toMemory(readLocal<LearnedEntry[]>(TOOL, LEARNED_KEY, []));
+  }
+
+  if (stored.length === 0) {
+    const legacy = readLocal<LearnedEntry[]>(TOOL, LEARNED_KEY, []);
+    if (legacy.length > 0) {
+      try {
+        await saveAiRecord(LEARNED_KEY, legacy);
+        writeLocal(TOOL, LEARNED_KEY, []);
+        return toMemory(legacy);
+      } catch {
+        return toMemory(legacy);
+      }
+    }
+  }
+
+  return toMemory(stored);
 }
 
-export function writeLearned(memory: LearnedMemory): void {
-  writeLocal(TOOL, LEARNED_KEY, trim(memory));
+export async function writeLearned(memory: LearnedMemory): Promise<void> {
+  try {
+    await saveAiRecord(LEARNED_KEY, trim(memory));
+  } catch {
+    // Best effort, as everywhere else in this tool: a browser that refuses
+    // storage still categorises, it just forgets between sessions.
+  }
 }

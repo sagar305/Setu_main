@@ -172,6 +172,15 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     let cancelled = false;
     (async () => {
       const statements = readStatements();
+      // Corrections live in IndexedDB now, so they are read alongside the
+      // transactions rather than synchronously with the rest of the settings.
+      let learned: LearnedMemory = new Map();
+      try {
+        learned = await readLearned();
+      } catch {
+        learned = new Map();
+      }
+
       let transactions: Transaction[] = [];
       try {
         transactions = await readTransactions(statements.map((statement) => statement.id));
@@ -191,7 +200,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
         audit: readAudit(),
         reconciliation: readReconciliation(),
         activeStatementIds: statements.map((statement) => statement.id),
-        learned: readLearned(),
+        learned,
       });
     })();
 
@@ -302,7 +311,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
             now
           );
         }
-        writeLearned(memory);
+        await writeLearned(memory);
         setState((current) => ({ ...current, learned: memory }));
       }
 
@@ -345,7 +354,13 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       await mapInChunks(
         pending,
         (transaction) => {
-          const classification = classify(transaction, snapshot.rules, memory, snapshot.learned);
+          const classification = classify(
+            transaction,
+            snapshot.rules,
+            memory,
+            snapshot.learned,
+            snapshot.categories
+          );
 
           // A rule, a correction or a pattern outranks the semantic model and
           // takes the row over. But when none of them has anything to say, a
@@ -497,7 +512,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       // 2 — the learned correction, which covers the rows a rule cannot.
       let memory = current.learned;
       memory = learn(memory, representative, categoryId, representative.classificationType, now);
-      writeLearned(memory);
+      await writeLearned(memory);
 
       setState((state) => ({ ...state, rules, learned: memory }));
       stateRef.current = { ...stateRef.current, rules, learned: memory };
@@ -607,7 +622,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
 
   const forgetLearned = useCallback((key: string) => {
     const memory = unlearn(stateRef.current.learned, key);
-    writeLearned(memory);
+    void writeLearned(memory);
     setState((current) => ({ ...current, learned: memory }));
     appendAudit("Learned category forgotten");
     setState((current) => ({ ...current, audit: readAudit() }));

@@ -24,13 +24,19 @@
 
 /// <reference lib="webworker" />
 
-import { BACKEND_CANDIDATES, EMBED_BATCH_SIZE, MODEL_ID } from "@/lib/bankStatement/ai/config";
+import { EMBED_BATCH_SIZE } from "@/lib/bankStatement/ai/config";
+import {
+  TransformersEmbeddingProvider,
+  type EmbeddingProvider,
+} from "@/lib/bankStatement/ai/embeddingProvider";
+import type { EmbeddingModelId } from "@/lib/bankStatement/ai/models";
 import type { CategoryProfile } from "@/lib/bankStatement/ai/categoryProfiles";
 import { profilesFingerprint } from "@/lib/bankStatement/ai/categoryProfiles";
 import { merchantKey, narrationToSentence } from "@/lib/bankStatement/ai/narration";
 import { clusterByMeaning } from "@/lib/bankStatement/ai/clustering";
 import { CLUSTERING } from "@/lib/bankStatement/ai/config";
 import { scoreTransaction } from "@/lib/bankStatement/ai/scoring";
+import { loadAiRecord, saveAiRecord } from "@/lib/bankStatement/storage/db";
 import type {
   AiBackend,
   AiResultItem,
@@ -40,19 +46,14 @@ import type {
 
 declare const self: DedicatedWorkerGlobalScope;
 
-/** Minimal shape of the feature-extraction pipeline we use. */
-type Embedder = (
-  texts: string[],
-  options: { pooling: "mean"; normalize: boolean }
-) => Promise<{ dims: number[]; data: Float32Array | number[] }>;
-
 function post(message: WorkerToMainMessage): void {
   self.postMessage(message);
 }
 
 // --- model loading ---------------------------------------------------------
 
-let embedderPromise: Promise<{ embedder: Embedder; backend: AiBackend }> | null = null;
+let providerPromise: Promise<EmbeddingProvider> | null = null;
+let providerSettings: { model?: EmbeddingModelId; expectedBatchSize?: number } = {};
 
 /**
  * Turn the library's per-file download events into one honest percentage.
@@ -92,131 +93,110 @@ function formatMb(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-/**
- * Load the model once, trying the device/precision combinations in order.
- *
- * The fallback chain is the whole point: WebGPU is not everywhere, fp16 is not
- * on every GPU that does have WebGPU, and a model repository need not publish
- * every quantisation. Rather than detect all of that, we try the best option
- * and keep the first one that actually loads.
- */
-async function loadEmbedder(): Promise<{ embedder: Embedder; backend: AiBackend }> {
-  post({ type: "MODEL_LOADING", message: "Preparing AI categorisation…" });
-
-  // Dynamic, so the library lands in its own chunk and is only ever downloaded
-  // by a browser that reaches this line.
-  const { pipeline, env } = await import(
-    /* webpackChunkName: "transformers" */ "@huggingface/transformers"
-  );
-
-  // There is no local model server to fall back to — asking for one only
-  // produces a confusing 404 before the real download.
-  env.allowLocalModels = false;
-
-  // Multi-threaded WASM needs the page to be cross-origin isolated (COOP+COEP),
-  // and this site is not: those headers would break embeds and third-party
-  // images elsewhere for a speed-up on one optional feature. The runtime
-  // otherwise defaults to several threads, tries, warns in the console and
-  // falls back to one anyway — so ask for one up front and skip the noise.
-  // If the site ever does become isolated, the default is left alone.
-  const wasmBackend = env.backends.onnx?.wasm;
-  if (wasmBackend && !self.crossOriginIsolated) {
-    wasmBackend.numThreads = 1;
-  }
-
-  // Reasons, deduplicated: six candidates failing for one reason ("offline")
-  // should read as one problem, not as six.
-  const failures = new Set<string>();
-
-  for (const candidate of BACKEND_CANDIDATES) {
-    try {
-      const extractor = (await pipeline("feature-extraction", MODEL_ID, {
-        device: candidate.device,
-        dtype: candidate.dtype,
-        progress_callback: createProgressReporter(),
-      })) as unknown as Embedder;
-
-      // Loading can succeed while the first inference fails — a WebGPU adapter
-      // that reports fp16 it cannot actually run, say. So prove it works before
-      // telling the page it is ready.
-      await extractor(["warm up"], { pooling: "mean", normalize: true });
-
-      return { embedder: extractor, backend: { device: candidate.device, dtype: candidate.dtype } };
-    } catch (error) {
-      failures.add(describe(error));
-    }
-  }
-
-  throw new Error(
-    `The categorisation model could not be loaded in this browser — it may need a working connection the first time, or this device may not have enough memory. (${[...failures].join("; ")})`
-  );
-}
-
 function describe(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function getEmbedder(): Promise<{ embedder: Embedder; backend: AiBackend }> {
-  // Once per worker, therefore once per browser session: every later batch
-  // reuses this promise rather than initialising anything again.
-  if (!embedderPromise) {
-    embedderPromise = loadEmbedder().catch((error) => {
-      embedderPromise = null; // let the CA retry after fixing whatever it was
-      throw error;
+/**
+ * The one provider for this worker, therefore for this browser session.
+ *
+ * Which model, which device and which quantisation are all decided inside the
+ * provider — this file no longer knows any of them, which is what lets the
+ * model be swapped or benchmarked without touching classification.
+ */
+function getProvider(): Promise<EmbeddingProvider> {
+  if (!providerPromise) {
+    post({ type: "MODEL_LOADING", message: "Preparing AI categorisation…" });
+
+    const provider = new TransformersEmbeddingProvider({
+      model: providerSettings.model,
+      expectedBatchSize: providerSettings.expectedBatchSize,
+      batchSize: EMBED_BATCH_SIZE,
+      onProgress: createProgressReporter(),
     });
+
+    providerPromise = provider
+      .initialize()
+      .then(() => provider)
+      .catch((error) => {
+        providerPromise = null; // let the CA retry after fixing whatever it was
+        throw error;
+      });
   }
-  return embedderPromise;
+  return providerPromise;
 }
 
 // --- embedding -------------------------------------------------------------
 
 /**
- * Embed a list of sentences, in batches so a long list neither blows up memory
- * nor starves the progress messages.
+ * Embed a list of sentences. Batching lives in the provider, so this is only
+ * here to keep the call sites unchanged.
  */
-async function embedAll(
-  embedder: Embedder,
-  sentences: string[],
-  onProgress?: (done: number) => void
-): Promise<Float32Array[]> {
-  const out: Float32Array[] = [];
-
-  for (let start = 0; start < sentences.length; start += EMBED_BATCH_SIZE) {
-    const batch = sentences.slice(start, start + EMBED_BATCH_SIZE);
-    const tensor = await embedder(batch, { pooling: "mean", normalize: true });
-
-    const width = tensor.dims[tensor.dims.length - 1];
-    const data = tensor.data instanceof Float32Array ? tensor.data : Float32Array.from(tensor.data);
-    for (let i = 0; i < batch.length; i += 1) {
-      out.push(data.slice(i * width, (i + 1) * width));
-    }
-
-    onProgress?.(Math.min(start + batch.length, sentences.length));
-  }
-
-  return out;
+async function embedAll(provider: EmbeddingProvider, sentences: string[]): Promise<Float32Array[]> {
+  return provider.embed(sentences);
 }
 
 // --- category embeddings, computed once ------------------------------------
+//
+// Three tiers, cheapest first: the worker's own memory, then IndexedDB, then
+// the model. The middle tier is what stops a page reload from spending a second
+// re-embedding thirty-five category descriptions that have not changed.
 
-let categoryCache: { fingerprint: string; embeddings: Map<string, Float32Array> } | null = null;
+let categoryCache: { key: string; embeddings: Map<string, Float32Array> } | null = null;
+
+/** FNV-1a. The fingerprint is every category description concatenated; this
+ * turns it into something short enough to be a storage key. */
+function hash(value: string): string {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < value.length; i += 1) {
+    h ^= value.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0).toString(36);
+}
+
+/**
+ * Identity of a set of category embeddings: which model produced them, at what
+ * width, for which category descriptions. Change any of the three and the
+ * stored vectors are meaningless, so all three are in the key.
+ */
+function cacheKey(provider: EmbeddingProvider, profiles: CategoryProfile[]): string {
+  const info = provider.getModelInfo();
+  return `category-embeddings:${info.name}:${info.dimensions}:${hash(profilesFingerprint(profiles))}`;
+}
 
 async function categoryEmbeddings(
-  embedder: Embedder,
+  provider: EmbeddingProvider,
   profiles: CategoryProfile[]
 ): Promise<Map<string, Float32Array>> {
-  const fingerprint = profilesFingerprint(profiles);
-  if (categoryCache && categoryCache.fingerprint === fingerprint) return categoryCache.embeddings;
+  const key = cacheKey(provider, profiles);
+  if (categoryCache && categoryCache.key === key) return categoryCache.embeddings;
+
+  try {
+    const stored = await loadAiRecord<[string, Float32Array][]>(key, []);
+    if (stored.length === profiles.length) {
+      const embeddings = new Map(stored);
+      categoryCache = { key, embeddings };
+      return embeddings;
+    }
+  } catch {
+    // No IndexedDB, or a record we cannot read. Recomputing is always safe.
+  }
 
   const vectors = await embedAll(
-    embedder,
+    provider,
     profiles.map((profile) => profile.text)
   );
 
   const embeddings = new Map<string, Float32Array>();
   profiles.forEach((profile, index) => embeddings.set(profile.id, vectors[index]));
 
-  categoryCache = { fingerprint, embeddings };
+  categoryCache = { key, embeddings };
+  try {
+    await saveAiRecord(key, [...embeddings.entries()]);
+  } catch {
+    // Best effort — an uncached run is slower, not broken.
+  }
   return embeddings;
 }
 
@@ -239,8 +219,8 @@ async function classify(message: Extract<MainToWorkerMessage, { type: "CLASSIFY_
   const { requestId, items, profiles } = message;
 
   try {
-    const { embedder } = await getEmbedder();
-    const categories = await categoryEmbeddings(embedder, profiles);
+    const provider = await getProvider();
+    const categories = await categoryEmbeddings(provider, profiles);
 
     // One sentence per transaction, then deduplicated: identical sentences are
     // embedded once and the vector shared.
@@ -255,7 +235,7 @@ async function classify(message: Extract<MainToWorkerMessage, { type: "CLASSIFY_
         return;
       }
       const batch = missing.slice(start, start + EMBED_BATCH_SIZE);
-      const vectors = await embedAll(embedder, batch);
+      const vectors = await embedAll(provider, batch);
       batch.forEach((sentence, index) => sentenceCache.set(sentence, vectors[index]));
       post({
         type: "PROGRESS",
@@ -299,7 +279,7 @@ async function cluster(message: Extract<MainToWorkerMessage, { type: "CLUSTER_TR
   const { requestId, items } = message;
 
   try {
-    const { embedder } = await getEmbedder();
+    const provider = await getProvider();
 
     const byMerchant = new Map<string, string>();
     for (const item of items) {
@@ -311,7 +291,7 @@ async function cluster(message: Extract<MainToWorkerMessage, { type: "CLUSTER_TR
 
     const missing = [...byMerchant.values()].filter((sentence) => !sentenceCache.has(sentence));
     if (missing.length > 0) {
-      const vectors = await embedAll(embedder, missing);
+      const vectors = await embedAll(provider, missing);
       missing.forEach((sentence, index) => sentenceCache.set(sentence, vectors[index]));
     }
 
@@ -338,9 +318,13 @@ self.addEventListener("message", (event: MessageEvent<MainToWorkerMessage>) => {
     case "INIT_MODEL":
       void (async () => {
         try {
-          const { embedder, backend } = await getEmbedder();
-          await categoryEmbeddings(embedder, message.profiles);
-          post({ type: "MODEL_READY", backend });
+          providerSettings = {
+            model: message.model,
+            expectedBatchSize: message.expectedBatchSize,
+          };
+          const provider = await getProvider();
+          await categoryEmbeddings(provider, message.profiles);
+          post({ type: "MODEL_READY", backend: provider.getModelInfo() });
         } catch (error) {
           post({ type: "MODEL_ERROR", message: describe(error) });
         }

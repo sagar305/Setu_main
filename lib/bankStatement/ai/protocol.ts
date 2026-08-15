@@ -10,8 +10,11 @@
 // privacy claim is to check.
 
 import type { CategoryProfile } from "@/lib/bankStatement/ai/categoryProfiles";
+import type { ModelInfo } from "@/lib/bankStatement/ai/embeddingProvider";
+import type { EmbeddingModelId } from "@/lib/bankStatement/ai/models";
 
-export type AiBackend = { device: "webgpu" | "wasm"; dtype: string };
+/** What the worker ended up running. Reported so the panel can say. */
+export type AiBackend = ModelInfo;
 
 /** One transaction, as the worker needs to see it. */
 export type AiRequestItem = {
@@ -38,6 +41,13 @@ export type AiResultItem = {
 export type InitModelMessage = {
   type: "INIT_MODEL";
   profiles: CategoryProfile[];
+  /** Which model to try. Omitted means the registry's default. */
+  model?: EmbeddingModelId;
+  /**
+   * Roughly how many transactions this session will embed. Decides whether
+   * starting a GPU is worth its fixed cost — see WEBGPU_BATCH_THRESHOLD.
+   */
+  expectedBatchSize?: number;
 };
 
 export type ClassifyMessage = {

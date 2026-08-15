@@ -6,30 +6,9 @@
 // the model identifier is only consulted when the CA asks for AI categorisation
 // and the worker actually starts (see ./client.ts).
 
-/**
- * Sentence-embedding model. Small on purpose — 6 layers, 384 dimensions, a few
- * tens of MB quantised. It is used to *compare* meanings, never to generate
- * text, so nothing it could hallucinate can reach a category.
- */
-export const MODEL_ID = "Xenova/all-MiniLM-L6-v2";
-
-/**
- * Device/precision candidates, best first. The worker walks this list and keeps
- * the first combination that loads, so a browser without WebGPU — or a model
- * repository that never published a q4 file — degrades instead of failing.
- *
- * q4 is preferred for download size (roughly half of q8). It is also the
- * lossiest: if real statements show the score separating categories poorly,
- * moving q8 to the front of this list is the first thing to try.
- */
-export const BACKEND_CANDIDATES: { device: "webgpu" | "wasm"; dtype: "q4f16" | "q4" | "q8" | "fp32" }[] = [
-  { device: "webgpu", dtype: "q4f16" },
-  { device: "webgpu", dtype: "q4" },
-  { device: "webgpu", dtype: "q8" },
-  { device: "wasm", dtype: "q4" },
-  { device: "wasm", dtype: "q8" },
-  { device: "wasm", dtype: "fp32" },
-];
+// The model, its repository and the device/precision order all live in
+// ./models.ts now. They are deliberately not duplicated here: two places to
+// name a model is one place to change it and still get the old one.
 
 /** Transactions embedded per worker pass, between progress messages. */
 export const EMBED_BATCH_SIZE = 32;
@@ -79,8 +58,14 @@ export const DEFAULT_AI_THRESHOLDS = {
 /** localStorage key (within the tool's namespace) for learned corrections. */
 export const LEARNED_KEY = "ai-learned";
 
-/** How many learned corrections to keep. Oldest-used are dropped first. */
-export const LEARNED_LIMIT = 400;
+/**
+ * How many learned corrections to keep. Oldest-used are dropped first.
+ *
+ * Generous because these now live in IndexedDB rather than localStorage — the
+ * old limit existed to protect a 5 MB quota, not because a CA stops being right
+ * after four hundred corrections. Still bounded, so it cannot grow for ever.
+ */
+export const LEARNED_LIMIT = 5000;
 
 /**
  * How many times a merchant must have been corrected the same way before the

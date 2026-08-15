@@ -17,6 +17,7 @@ import type {
   WorkerToMainMessage,
 } from "@/lib/bankStatement/ai/protocol";
 import type { CategoryProfile } from "@/lib/bankStatement/ai/categoryProfiles";
+import type { EmbeddingModelId } from "@/lib/bankStatement/ai/models";
 
 export type AiPhase = "idle" | "loading" | "ready" | "error";
 
@@ -85,7 +86,10 @@ class AiCategoriser {
    * Spin the worker up and load the model. Safe to call repeatedly: after the
    * first call this resolves immediately from the already-loaded model.
    */
-  start(profiles: CategoryProfile[]): Promise<void> {
+  start(
+    profiles: CategoryProfile[],
+    options: { model?: EmbeddingModelId; expectedBatchSize?: number } = {}
+  ): Promise<void> {
     if (this.state.phase === "ready") return Promise.resolve();
 
     if (!aiSupported()) {
@@ -113,7 +117,12 @@ class AiCategoriser {
 
     if (this.state.phase !== "loading") {
       this.setState({ phase: "loading", message: "Preparing AI categorisation…", error: undefined });
-      this.send({ type: "INIT_MODEL", profiles });
+      this.send({
+        type: "INIT_MODEL",
+        profiles,
+        model: options.model,
+        expectedBatchSize: options.expectedBatchSize,
+      });
     }
 
     return waiter;
@@ -131,7 +140,7 @@ class AiCategoriser {
   ): Promise<AiResultItem[]> {
     if (items.length === 0) return Promise.resolve([]);
 
-    return this.start(profiles).then(
+    return this.start(profiles, { expectedBatchSize: items.length }).then(
       () =>
         new Promise<AiResultItem[]>((resolve, reject) => {
           const requestId = this.nextRequestId++;
@@ -149,7 +158,7 @@ class AiCategoriser {
   clusterUnmatched(items: AiRequestItem[], profiles: CategoryProfile[]): Promise<string[][]> {
     if (items.length === 0) return Promise.resolve([]);
 
-    return this.start(profiles).then(
+    return this.start(profiles, { expectedBatchSize: items.length }).then(
       () =>
         new Promise<string[][]>((resolve, reject) => {
           const requestId = this.nextRequestId++;

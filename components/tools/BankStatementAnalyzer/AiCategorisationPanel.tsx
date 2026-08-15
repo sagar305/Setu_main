@@ -214,8 +214,10 @@ export function AiCategorisationPanel() {
 
       {client.phase === "ready" && client.backend ? (
         <p className="mt-3 text-xs text-muted">
-          Running on {client.backend.device === "webgpu" ? "your GPU (WebGPU)" : "the CPU (WebAssembly)"} ·{" "}
-          {client.backend.dtype} weights · loaded once for this browser session.
+          {client.backend.name} · running on{" "}
+          {client.backend.device === "webgpu" ? "your GPU (WebGPU)" : "the CPU (WebAssembly)"} ·{" "}
+          {client.backend.quantization} weights · {client.backend.dimensions} dimensions · loaded
+          once for this browser session.
         </p>
       ) : null}
 

@@ -125,11 +125,15 @@ describe("bank adapters stay honest", () => {
 const AI_LIBRARY = "@huggingface/transformers";
 
 describe("on-device categorisation stays on the device", () => {
-  it("imports the model library from the worker and nowhere else", () => {
+  // One file, and only one, may touch the model library. It used to be the
+  // worker; it is now the provider the worker loads, which is the whole point
+  // of the abstraction — everything above it deals in vectors and cannot reach
+  // the network even by accident.
+  it("imports the model library from exactly one module", () => {
     const importers = FILES.filter((file) =>
       stripComments(readFileSync(file, "utf8")).includes(AI_LIBRARY)
     );
-    expect(importers.map((file) => file.split("/").pop())).toEqual(["transaction-ai.worker.ts"]);
+    expect(importers.map((file) => file.split("/").pop())).toEqual(["embeddingProvider.ts"]);
   });
 
   it("sends the worker a narration and a direction, and nothing else", () => {

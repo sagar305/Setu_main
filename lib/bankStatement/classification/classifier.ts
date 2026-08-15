@@ -1,7 +1,12 @@
 // The classification pipeline (spec §13).
 // ---------------------------------------------------------------------------
-//   user rule  →  learned correction  →  known party  →  keyword pattern
-//              →  structural heuristic  →  uncategorised
+//   user rule  →  learned correction  →  known merchant  →  known party
+//              →  keyword pattern  →  structural heuristic  →  uncategorised
+//
+// The CA's own correction sits above the shipped merchant list deliberately.
+// The specification put them the other way round, but a merchant list that
+// outranked a correction could never be corrected: the CA would change Netflix
+// to Software, and the next run would change it straight back.
 //
 // Deterministic throughout: same input, same output, no model, no network. The
 // confidence returned describes *classification* confidence only — never how
@@ -14,6 +19,7 @@
 // all — which is both faster and the priority order the tool promises.
 
 import type {
+  Category,
   ClassificationRule,
   ClassificationSource,
   ClassificationType,
@@ -23,6 +29,7 @@ import type {
 import { findMatchingRule } from "@/lib/bankStatement/classification/rulesEngine";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
 import { recall, type LearnedMemory } from "@/lib/bankStatement/ai/learned";
+import { merchantCategoryFor } from "@/lib/bankStatement/ai/merchantMemory";
 
 export type Classification = {
   category?: string;
@@ -149,6 +156,8 @@ export function sourceLabel(source: ClassificationSource): string {
       return "Set by you";
     case "MEMORY":
       return "Learned from you";
+    case "MERCHANT":
+      return "Known merchant";
     case "HEURISTIC":
       return "Pattern match";
     case "AI":
@@ -167,6 +176,8 @@ export function sourceBadge(source: ClassificationSource): string {
       return "You";
     case "MEMORY":
       return "Learned";
+    case "MERCHANT":
+      return "Merchant";
     case "HEURISTIC":
       return "Pattern";
     case "AI":
@@ -200,7 +211,12 @@ export function classify(
   transaction: Transaction,
   rules: ClassificationRule[],
   partyMemory: PartyMemory = new Map(),
-  learned: LearnedMemory = new Map()
+  learned: LearnedMemory = new Map(),
+  /**
+   * The CA's categories. Needed only so a shipped merchant mapping is refused
+   * when it points at a category they archived or renamed away.
+   */
+  categories: Category[] = []
 ): Classification {
   const narration = normaliseText(transaction.narration);
   const isCash = CASH_KEYWORDS.some((keyword) => narration.includes(keyword));
@@ -239,7 +255,28 @@ export function classify(
     };
   }
 
-  // 3 — a party this CA has already classified by hand.
+  // 3 — a merchant the tool ships an answer for. Netflix is Entertainment;
+  // there is nothing for a model to work out, and asking one would produce a
+  // less certain answer more slowly.
+  const knownMerchant = merchantCategoryFor(
+    transaction.narration,
+    transaction.transactionType,
+    categories
+  );
+  if (knownMerchant) {
+    return {
+      category: knownMerchant.categoryId,
+      classificationType: "UNKNOWN",
+      classificationSource: "MERCHANT",
+      // Below a rule and below the CA's own correction, above anything inferred.
+      confidence: 90,
+      gstRelevant: "NOT_MARKED",
+      isTransfer: looksTransfer,
+      isCashTransaction: isCash,
+    };
+  }
+
+  // 4 — a party this CA has already classified by hand.
   if (transaction.partyName) {
     const seen = partyMemory.get(normaliseText(transaction.partyName));
     if (seen) {
@@ -255,7 +292,7 @@ export function classify(
     }
   }
 
-  // 4 — keyword patterns.
+  // 5 — keyword patterns.
   let best: { pattern: Pattern; keyword: string } | null = null;
   for (const pattern of PATTERNS) {
     if (pattern.direction && pattern.direction !== transaction.transactionType) continue;
@@ -276,7 +313,7 @@ export function classify(
     };
   }
 
-  // 5 — structural heuristics, deliberately low confidence.
+  // 6 — structural heuristics, deliberately low confidence.
   if (isCash) {
     return {
       category: transaction.transactionType === "CREDIT" ? "cash-deposit" : "cash-withdrawal",
@@ -289,7 +326,7 @@ export function classify(
     };
   }
 
-  // 6 — nothing matched. Say so rather than inventing a category — this is
+  // 7 — nothing matched. Say so rather than inventing a category — this is
   // exactly the set the AI pass is then offered.
   return {
     classificationType: "UNKNOWN",

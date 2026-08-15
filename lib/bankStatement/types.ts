@@ -27,6 +27,7 @@ export type ClassificationSource =
   | "RULE"
   | "MANUAL"
   | "MEMORY"
+  | "MERCHANT"
   | "HEURISTIC"
   | "AI"
   | "UNCLASSIFIED";
