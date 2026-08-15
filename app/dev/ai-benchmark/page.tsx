@@ -1,14 +1,20 @@
 // Development-only: compare embedding models on labelled transactions.
 // ---------------------------------------------------------------------------
-// Not a product surface. `force-dynamic` keeps it out of the prerender, and the
-// notFound() below means it does not exist at all in a production build — so a
-// CA can never reach it and it costs them nothing.
+// Not a product surface. notFound() below means the route does not exist in a
+// production build, so a CA can never reach it.
+//
+// It must stay STATIC. Marking it dynamic makes it a serverless function, and a
+// function's file trace follows this page's imports down to
+// @huggingface/transformers and therefore to onnxruntime-node — 211 MB of
+// native binaries that only ever run in a browser. That produced a 394 MB
+// function and broke deployment. Prerendered, it resolves to a 404 at build
+// time and no function is emitted at all.
 
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { AiBenchmarkRunner } from "@/components/tools/BankStatementAnalyzer/AiBenchmarkRunner";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "AI model benchmark",

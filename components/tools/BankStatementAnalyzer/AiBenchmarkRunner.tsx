@@ -6,10 +6,18 @@
 // effort spent styling it is effort not spent on the screens a CA actually
 // uses. It downloads both models, which is why it is not something a user can
 // stumble into.
+//
+// The benchmark module is imported on the click, never at the top of the file.
+// A static import would put @huggingface/transformers in this component's
+// module graph, and Next traces a client component's graph into the server
+// build — which dragged onnxruntime-node and sharp's libvips binaries into the
+// route's file trace and produced a 394 MB function. Loading it on demand keeps
+// it in its own async chunk, exactly as the worker does.
 
 import { useState } from "react";
 import { PrimaryButton } from "@/components/toolkit/ui";
-import { benchmarkAll, formatComparison, type BenchmarkResult } from "@/lib/bankStatement/ai/benchmark";
+// Type only — erased at compile time, so importing it pulls in nothing.
+import type { BenchmarkResult } from "@/lib/bankStatement/ai/benchmark";
 import { parseDataset, STARTER_DATASET } from "@/lib/bankStatement/ai/benchmarkDataset";
 
 const PLACEHOLDER = STARTER_DATASET.slice(0, 3)
@@ -19,6 +27,7 @@ const PLACEHOLDER = STARTER_DATASET.slice(0, 3)
 export function AiBenchmarkRunner() {
   const [pasted, setPasted] = useState("");
   const [results, setResults] = useState<BenchmarkResult[] | null>(null);
+  const [comparison, setComparison] = useState("");
   const [running, setRunning] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +38,10 @@ export function AiBenchmarkRunner() {
     setError(null);
     setResults(null);
     try {
-      setResults(await benchmarkAll(dataset));
+      const { benchmarkAll, formatComparison } = await import("@/lib/bankStatement/ai/benchmark");
+      const measured = await benchmarkAll(dataset);
+      setResults(measured);
+      setComparison(formatComparison(measured));
     } catch (failure) {
       setError(failure instanceof Error ? failure.message : String(failure));
     } finally {
@@ -69,7 +81,7 @@ export function AiBenchmarkRunner() {
       {results ? (
         <>
           <pre className="overflow-x-auto rounded-lg bg-cream-paper/70 p-4 text-xs">
-            {formatComparison(results)}
+            {comparison}
           </pre>
 
           {results.map((result) => (
