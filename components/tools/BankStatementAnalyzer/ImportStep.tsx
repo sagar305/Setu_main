@@ -22,6 +22,7 @@ import {
 } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 import { ColumnMapper } from "@/components/tools/BankStatementAnalyzer/ColumnMapper";
+import { StatementGrid } from "@/components/tools/BankStatementAnalyzer/StatementGrid";
 import { ProgressPanel, type ProgressState } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import { PrivacyNote, ProcessingNote } from "@/components/tools/BankStatementAnalyzer/PrivacyNote";
 import { SampleDownload } from "@/components/tools/BankStatementAnalyzer/SampleDownload";
@@ -31,6 +32,7 @@ import {
   parseStatementFile,
 } from "@/lib/bankStatement/parser";
 import { describeMappingGaps, isMappingUsable } from "@/lib/bankStatement/parser/columns";
+import { isRowPlanEmpty, type RowPlan } from "@/lib/bankStatement/parser/rowPlan";
 import {
   describeFailure,
   formatDiagnostics,
@@ -62,6 +64,7 @@ export function ImportStep() {
   const [pending, setPending] = useState<Pending | null>(null);
   const [mapping, setMapping] = useState<ColumnMapping | null>(null);
   const [dateFormat, setDateFormat] = useState<DateFormat | null>(null);
+  const [rowPlan, setRowPlan] = useState<RowPlan>({});
   const [passwordFor, setPasswordFor] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState<string | null>(null);
@@ -79,11 +82,17 @@ export function ImportStep() {
   const run = useCallback(
     async (
       file: File,
-      options: { password?: string; mapping?: ColumnMapping; dateFormat?: DateFormat } = {}
+      options: {
+        password?: string;
+        mapping?: ColumnMapping;
+        dateFormat?: DateFormat;
+        rowPlan?: RowPlan;
+      } = {}
     ) => {
       setBusy(true);
       setError(null);
       setFailure(null);
+      if (options.rowPlan === undefined) setRowPlan({});
       setCopied(false);
       setPasswordError(null);
       stageRef.current = "Reading file";
@@ -176,8 +185,12 @@ export function ImportStep() {
 
   const remap = useCallback(() => {
     if (!pending || !mapping) return;
-    void run(pending.file, { mapping, dateFormat: dateFormat ?? undefined });
-  }, [dateFormat, mapping, pending, run]);
+    void run(pending.file, {
+      mapping,
+      dateFormat: dateFormat ?? undefined,
+      rowPlan: isRowPlanEmpty(rowPlan) ? undefined : rowPlan,
+    });
+  }, [dateFormat, mapping, pending, rowPlan, run]);
 
   return (
     <div className="space-y-6">
@@ -349,6 +362,8 @@ export function ImportStep() {
           pending={pending}
           mapping={mapping}
           dateFormat={dateFormat}
+          rowPlan={rowPlan}
+          onRowPlanChange={setRowPlan}
           onMappingChange={setMapping}
           onDateFormatChange={(value) => {
             setDateFormat(value);
@@ -470,6 +485,8 @@ function PendingReview({
   pending,
   mapping,
   dateFormat,
+  rowPlan,
+  onRowPlanChange,
   onMappingChange,
   onDateFormatChange,
   onRemap,
@@ -480,6 +497,8 @@ function PendingReview({
   pending: Pending;
   mapping: ColumnMapping | null;
   dateFormat: DateFormat | null;
+  rowPlan: RowPlan;
+  onRowPlanChange: (plan: RowPlan) => void;
   onMappingChange: (mapping: ColumnMapping) => void;
   onDateFormatChange: (format: DateFormat) => void;
   onRemap: () => void;
@@ -487,7 +506,7 @@ function PendingReview({
   onCancel: () => void;
   busy: boolean;
 }) {
-  const { statement, transactions, headers, rawRows, ambiguousDateFormat } = pending.outcome;
+  const { statement, transactions, headers, rawRows, grid, ambiguousDateFormat } = pending.outcome;
   const report = statement.validation;
   const summary = summariseParse(report, statement.parseStatus);
   const gaps = mapping ? describeMappingGaps(mapping) : [];
@@ -611,6 +630,32 @@ function PendingReview({
               Re-read with this mapping
             </SecondaryButton>
           </div>
+        </Card>
+      ) : null}
+
+      {grid && grid.length > 0 && mapping ? (
+        <Card>
+          <details open={statement.parseStatus !== "VALID"}>
+            <summary className="cursor-pointer text-lg font-bold text-ink">
+              Fix the columns and rows
+            </summary>
+            <p className="mt-1 text-sm text-muted">
+              Every row we found in the file, exactly as we read it. Use this when the numbers above
+              look wrong — mark where the table starts, hide the rows that are not transactions, and
+              join any narration that wrapped onto a second line.
+            </p>
+            <div className="mt-4">
+              <StatementGrid
+                grid={grid}
+                mapping={mapping}
+                plan={rowPlan}
+                onMappingChange={onMappingChange}
+                onPlanChange={onRowPlanChange}
+                onApply={onRemap}
+                busy={busy}
+              />
+            </div>
+          </details>
         </Card>
       ) : null}
 

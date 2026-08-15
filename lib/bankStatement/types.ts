@@ -469,4 +469,13 @@ export type ParseOutcome = {
   mapping?: ColumnMapping;
   headers?: string[];
   rawRows?: RawRow[];
+  /**
+   * Every row the extractor found, before the header split and before any row
+   * plan was applied — including the letterhead and the footer.
+   *
+   * This is what the repair grid shows. `rawRows` above is the parser's own
+   * view (data rows only, truncated) and is deliberately left alone so nothing
+   * that already reads it changes behaviour.
+   */
+  grid?: RawRow[];
 };
