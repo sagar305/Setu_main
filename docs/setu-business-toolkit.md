@@ -120,6 +120,7 @@ Not everything on the roadmap is a destination app. Each entry is tagged:
 | Barcode Generator · Label Printer | Products | Retail POS |
 | Appointment Book | Service | Clinic |
 | Tuition Class Manager | Education | Tuition |
+| Bank Statement Analyzer | Finance | Platform |
 
 ### Foundation (Phase 1) — SHIPPED
 

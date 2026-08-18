@@ -59,6 +59,7 @@ export type ToolSlug =
   // Service businesses
   | "appointment-book"
   | "queue-management"
+  | "clinic-manager"
   // Education
   | "tuition-manager"
   // Payments / utilities
@@ -75,6 +76,7 @@ export type ToolSlug =
   | "journal-entry"
   | "general-ledger"
   | "bank-reconciliation"
+  | "bank-statement-analyzer"
   | "trial-balance"
   // Statements & reports
   | "profit-loss-statement"
@@ -257,6 +259,24 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
       { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+    ],
+  },
+  {
+    slug: "clinic-manager",
+    name: "Clinic Manager",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-clinic-software",
+    owns: "clinic_patients",
+    reads: ["business", "customers"],
+    writes: ["clinic_patients", "clinic_visits", "clinic_appointments", "clinic_bills"],
+    dependsOn: ["business-profile"],
+    paidPath: "clinic",
+    integrations: [
+      { with: "appointment-book", ux: "Keep non-medical bookings in the generic day view" },
+      { with: "upi-qr-generator", ux: "Collect the consultation fee by UPI at the desk" },
     ],
   },
   {
@@ -672,6 +692,25 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: [],
     paidPath: "platform",
     integrations: [{ with: "cash-book", ux: "Reconcile against your recorded cash book" }],
+  },
+
+  {
+    slug: "bank-statement-analyzer",
+    name: "Bank Statement Analyzer",
+    category: "finance",
+    kind: "app",
+    tier: "growth",
+    status: "built",
+    route: "/tools/bank-statement-analyzer",
+    reads: [],
+    writes: [],
+    dependsOn: [],
+    paidPath: "platform",
+    integrations: [
+      { with: "bank-reconciliation", ux: "Hand off to the manual BRS workflow" },
+      { with: "cash-book", ux: "Compare statement cash entries with the cash book" },
+      { with: "expense-tracker", ux: "Classified debits line up with tracked expenses" },
+    ],
   },
 
   // ---- Statements & reports ----------------------------------------------

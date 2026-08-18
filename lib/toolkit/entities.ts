@@ -95,6 +95,15 @@ export type EntityName =
   | "marks"
   | "student_notes"
   | "enquiries"
+  | "holidays"
+  // Clinic Manager. Clinical records are workspace-owned like everything else,
+  // but they are the most sensitive rows the workspace holds — a tool reading
+  // them is reading someone's diagnosis.
+  | "clinic_doctors"
+  | "clinic_patients"
+  | "clinic_appointments"
+  | "clinic_visits"
+  | "clinic_bills";
   | "holidays";
 
 /**
@@ -409,6 +418,53 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     ownedBy: "workspace",
     primaryEditor: "tuition-manager",
     store: "holidays",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  clinic_doctors: {
+    name: "clinic_doctors",
+    label: "Doctors",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_doctors",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  clinic_patients: {
+    name: "clinic_patients",
+    label: "Patients",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_patients",
+    dangerousOps: ["delete", "merge"],
+    status: "live",
+  },
+  clinic_appointments: {
+    name: "clinic_appointments",
+    label: "Clinic Appointments",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_appointments",
+    dangerousOps: ["delete", "cancel"],
+    status: "live",
+  },
+  clinic_visits: {
+    name: "clinic_visits",
+    label: "Consultations",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    // A finalised visit is the clinical record a prescription was printed
+    // from. Editing one after the fact is not a silent update.
+    dangerousOps: ["delete", "edit-finalised"],
+    store: "clinic_visits",
+    status: "live",
+  },
+  clinic_bills: {
+    name: "clinic_bills",
+    label: "Clinic Bills",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_bills",
     dangerousOps: ["delete"],
     status: "live",
   },

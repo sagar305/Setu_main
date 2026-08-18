@@ -1,0 +1,27 @@
+{
+  "description": "Synthetic HDFC-style CSV with split withdrawal/deposit columns and a running balance.",
+  "transactionCount": 12,
+  "openingBalance": 125000,
+  "closingBalance": 160000,
+  "totalDebits": 71936,
+  "totalCredits": 106936,
+  "parseStatus": "VALID",
+  "balanceBreaks": 0,
+  "startDate": "2025-04-01",
+  "endDate": "2025-04-30",
+  "firstTransaction": {
+    "date": "2025-04-01",
+    "narration": "NEFT CR/MERIDIAN RETAIL PVT LTD/INV-4101",
+    "debit": 0,
+    "credit": 50000,
+    "balance": 175000
+  },
+  "lastTransaction": {
+    "date": "2025-04-28",
+    "narration": "INT.PD:SB INTEREST CREDIT",
+    "debit": 0,
+    "credit": 1236,
+    "balance": 160000
+  },
+  "note": "startDate/endDate come from the declared statement period (01/04 to 30/04), which is authoritative \u2014 not from the first and last transaction dates."
+}
