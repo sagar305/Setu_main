@@ -1,10 +1,12 @@
 {
   "seo": {
-    "title": "Products | POS, QR Menu & Business Software | Setu",
-    "description": "Explore Setu's products — the free Browser Based POS, QR Menu and Tuition Class Manager, plus Setu Dine and Setu Queue, with Retail and Clinic coming soon.",
+    "title": "Products | Free POS, Restaurant Billing & QR Menu | Setu",
+    "description": "Setu's products: the free Browser Based POS and Free Dine restaurant POS, plus Setu QR Menu, Setu Dine and Setu Queue. Setu Retail and Clinic coming soon.",
     "keywords": [
       "Setu products",
       "Browser Based POS",
+      "Free Dine",
+      "free restaurant POS",
       "Setu QR Menu",
       "Setu Dine",
       "Setu Queue",
@@ -41,6 +43,34 @@
       "cta": {
         "label": "Open Browser Based POS — it's free",
         "href": "/products/browser-based-pos"
+      }
+    },
+    {
+      "id": "free-dine",
+      "status": "live",
+      "name": "Free Dine",
+      "headline": "A free restaurant POS that runs in your browser",
+      "description": "A complete dining-room till, free and with no login. Tables and floor areas, bills that stay open for an hour, kitchen order tickets per round, and a live kitchen screen in a second tab. Split and merge bills, GST with the CGST/SGST breakup, raw-material stock driven by recipes, table bookings with WhatsApp confirmations, and udhaar through the shared Customer Ledger. Everything stays on your device, and it keeps billing with the internet down.",
+      "features": [
+        "Tables and floor areas with live running totals",
+        "Open tickets that survive a browser restart",
+        "Kitchen order tickets per round, without prices",
+        "Live kitchen screen in a second tab, lockable as a kiosk",
+        "Half/full sizes and add-on groups",
+        "Split bills by item, share or amount — and merge tables",
+        "GST with per-item rates and CGST/SGST breakup",
+        "Raw-material stock with per-dish recipes and food cost",
+        "Table bookings, free or against an advance",
+        "WhatsApp confirmations and reminders from your own number",
+        "Credit (udhaar) posted to the shared Customer Ledger",
+        "Thermal (80mm/58mm) and A4 bills, designed in the Receipt Designer",
+        "Day summary, item report, hourly sales and printable day close",
+        "Backup, CSV exports and Google Sheet sync",
+        "Works offline, no login required"
+      ],
+      "cta": {
+        "label": "Open Free Dine — it's free",
+        "href": "/products/free-restaurant-pos"
       }
     },
     {

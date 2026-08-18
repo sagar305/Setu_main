@@ -41,6 +41,7 @@ function buildSections(): Section[] {
       links: [
         { label: "All products", href: "/products" },
         { label: "Browser Based POS", href: "/products/browser-based-pos" },
+        { label: "Free Dine — Free Restaurant POS", href: "/products/free-restaurant-pos" },
         { label: "Setu QR Menu", href: "/products/qr-menu" },
         { label: "Setu Dine", href: "/products/restaurant-pos" },
         { label: "Setu Queue", href: "/products/queue" },

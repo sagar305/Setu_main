@@ -1,10 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Bike, ChefHat, Clock, LayoutGrid, Plus, ShoppingBag } from "lucide-react";
+import {
+  Bike,
+  CalendarClock,
+  ChefHat,
+  Clock,
+  LayoutGrid,
+  Plus,
+  ShoppingBag,
+} from "lucide-react";
 import { useDine, type FloorTable } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
-import { ORDER_TYPE_LABELS, type DineTicket } from "@/lib/dine/types";
+import { ORDER_TYPE_LABELS, type DineReservation, type DineTicket } from "@/lib/dine/types";
+import { formatSlot, holdingTable, isLate, upcoming } from "@/lib/dine/reservation";
 import type { NavigateFn } from "./nav";
 import {
   EmptyState,
@@ -30,7 +39,16 @@ export function FloorScreen({
   onOpenTicket: (ticketId: string) => void;
   onNavigate: NavigateFn;
 }) {
-  const { areas, floorTables, openTickets, openTicket, business, settings } = useDine();
+  const {
+    areas,
+    floorTables,
+    openTickets,
+    openTicket,
+    reservations,
+    seatReservation,
+    business,
+    settings,
+  } = useDine();
   const currency = business?.currency ?? "INR";
   const [areaId, setAreaId] = useState<string>("all");
 
@@ -51,6 +69,25 @@ export function FloorScreen({
     [openTickets]
   );
 
+  // Which free tables are spoken for, worked out here rather than in the store
+  // because it depends on the clock this screen already ticks.
+  const heldBy = useMemo(() => {
+    if (!settings.reservationsEnabled) return new Map<string, DineReservation>();
+    const map = new Map<string, DineReservation>();
+    for (const row of floorTables) {
+      if (row.state !== "free") continue;
+      const booking = holdingTable(reservations, row.table.id, now, settings.reservationHoldMinutes);
+      if (booking) map.set(row.table.id, booking);
+    }
+    return map;
+  }, [floorTables, now, reservations, settings.reservationHoldMinutes, settings.reservationsEnabled]);
+
+  // The next couple of hours, so the counter can see who is about to walk in.
+  const arriving = useMemo(
+    () => (settings.reservationsEnabled ? upcoming(reservations, now, 120) : []),
+    [now, reservations, settings.reservationsEnabled]
+  );
+
   const running = floorTables.filter((row) => row.state !== "free");
   const runningTotal = running.reduce((sum, row) => sum + row.runningTotal, 0);
 
@@ -63,6 +100,16 @@ export function FloorScreen({
     if (row.ticket) {
       onOpenTicket(row.ticket.id);
       return;
+    }
+    // Tapping a held table seats the booking, so the advance and the guest's
+    // name come with them instead of being retyped.
+    const booking = heldBy.get(row.table.id);
+    if (booking) {
+      const seated = await seatReservation(booking.id, row.table.id);
+      if (seated) {
+        onOpenTicket(seated.id);
+        return;
+      }
     }
     const ticket = await openTicket("dine-in", row.table.id);
     onOpenTicket(ticket.id);
@@ -101,6 +148,34 @@ export function FloorScreen({
           </div>
         }
       />
+
+      {arriving.length > 0 && (
+        <div className="rounded-2xl border border-purple-200 bg-purple-50 p-3">
+          <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-purple-800">
+            <CalendarClock className="h-3.5 w-3.5" />
+            Arriving soon
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {arriving.slice(0, 6).map((booking) => (
+              <button
+                key={booking.id}
+                type="button"
+                onClick={() => onNavigate("bookings")}
+                className={`${tapTargetClass} rounded-xl border border-purple-200 bg-white px-3 py-2 text-left text-xs`}
+              >
+                <span className="block font-bold text-ink">
+                  {booking.guestName || "Guest"} · {booking.partySize} pax
+                </span>
+                <span className="text-muted">
+                  {formatSlot(booking.startsAt).replace(/^.*?, /, "")}
+                  {booking.tableName ? ` · ${booking.tableName}` : " · any table"}
+                  {isLate(booking, now, settings.reservationHoldMinutes) ? " · late" : ""}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {areas.length > 1 && (
         <div className="-mx-1 flex gap-1 overflow-x-auto pb-1" role="tablist" aria-label="Areas">
@@ -161,18 +236,26 @@ export function FloorScreen({
               type="button"
               onClick={() => void openTable(row)}
               className={`flex min-h-[112px] flex-col justify-between rounded-2xl border p-3 text-left shadow-sm transition ${tableCardClass(
-                row.state
+                heldBy.has(row.table.id) ? "reserved" : row.state
               )}`}
             >
               <div className="flex items-start justify-between gap-2">
                 <span className="text-base font-bold text-ink">{row.table.name}</span>
-                <TableStateBadge state={row.state} />
+                <TableStateBadge state={heldBy.has(row.table.id) ? "reserved" : row.state} />
               </div>
 
               {row.state === "free" ? (
-                <span className="text-xs text-muted">
-                  {row.table.seats} seat{row.table.seats === 1 ? "" : "s"}
-                </span>
+                heldBy.has(row.table.id) ? (
+                  <span className="text-xs font-semibold text-purple-800">
+                    {heldBy.get(row.table.id)!.guestName || "Guest"} ·{" "}
+                    {formatSlot(heldBy.get(row.table.id)!.startsAt).replace(/^.*?, /, "")} ·{" "}
+                    {heldBy.get(row.table.id)!.partySize} pax
+                  </span>
+                ) : (
+                  <span className="text-xs text-muted">
+                    {row.table.seats} seat{row.table.seats === 1 ? "" : "s"}
+                  </span>
+                )
               ) : (
                 <div className="space-y-1">
                   <span className="block text-sm font-bold text-ink">

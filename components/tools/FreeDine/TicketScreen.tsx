@@ -425,10 +425,11 @@ export function TicketScreen({
       <CustomerModal
         open={customerOpen}
         onClose={() => setCustomerOpen(false)}
+        ticketId={ticketId}
+        customerId={ticket.customerId}
         initialName={ticket.customerName}
         initialAddress={ticket.deliveryAddress}
         showAddress={ticket.orderType === "delivery"}
-        onSave={(name, address) => void setTicketCustomer(ticketId, ticket.customerId, name, address)}
       />
 
       <Modal open={mergeOpen} onClose={() => setMergeOpen(false)} title="Merge another table in">
@@ -870,41 +871,180 @@ function DiscountModal({
   );
 }
 
+/**
+ * Who is at this table.
+ *
+ * Built the way the Browser Based POS builds it: pick a saved customer from the
+ * list, or add a new one with a name and a phone number in the same breath. The
+ * customer book is the shared one every Setu tool reads, so a regular saved at
+ * the shop counter is already here — and the phone number is what makes the
+ * WhatsApp reminders and the Customer Ledger worth anything later.
+ */
 function CustomerModal({
   open,
   onClose,
+  ticketId,
+  customerId,
   initialName,
   initialAddress,
   showAddress,
-  onSave,
 }: {
   open: boolean;
   onClose: () => void;
+  ticketId: string;
+  customerId: string | null;
   initialName: string;
   initialAddress: string;
   showAddress: boolean;
-  onSave: (name: string, address: string) => void;
 }) {
-  const [name, setName] = useState(initialName);
+  const { customers, settings, createCustomer, updateCustomer, setTicketCustomerById, setTicketCustomer } =
+    useDine();
+
+  const [selectedId, setSelectedId] = useState(customerId ?? "");
   const [address, setAddress] = useState(initialAddress);
+  const [adding, setAdding] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [creditAllowed, setCreditAllowed] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     if (!open) return;
-    setName(initialName);
+    setSelectedId(customerId ?? "");
     setAddress(initialAddress);
-  }, [initialAddress, initialName, open]);
+    // A ticket carrying a typed-in name that was never saved starts the form
+    // off, rather than making someone type it twice.
+    const unsaved = !customerId && initialName.trim().length > 0;
+    setAdding(unsaved);
+    setName(unsaved ? initialName : "");
+    setPhone("");
+    setCreditAllowed(false);
+  }, [customerId, initialAddress, initialName, open]);
+
+  const sorted = useMemo(
+    () => customers.slice().sort((a, b) => a.name.localeCompare(b.name)),
+    [customers]
+  );
+  const selected = sorted.find((row) => row.id === selectedId) ?? null;
+
+  const save = async () => {
+    setBusy(true);
+    try {
+      if (adding) {
+        if (!name.trim()) return;
+        const created = await createCustomer({
+          name: name.trim(),
+          phone: phone.trim(),
+          email: "",
+          address: showAddress ? address.trim() : "",
+          notes: "",
+          creditAllowed,
+        });
+        await setTicketCustomerById(ticketId, created.id, address.trim());
+      } else if (selectedId) {
+        if (selected && creditAllowed !== selected.creditAllowed) {
+          await updateCustomer(selectedId, { ...selected, creditAllowed });
+        }
+        await setTicketCustomerById(ticketId, selectedId, address.trim());
+      } else {
+        // "Walk-in" clears the link but keeps any delivery address typed here.
+        await setTicketCustomer(ticketId, null, "", address.trim());
+      }
+      onClose();
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <Modal open={open} onClose={onClose} title="Customer">
       <div className="space-y-4">
-        <Field label="Name">
-          <input
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            className={inputClass}
-            autoFocus
-          />
-        </Field>
+        {!adding ? (
+          <>
+            <Field label="Saved customer">
+              <select
+                value={selectedId}
+                onChange={(event) => {
+                  setSelectedId(event.target.value);
+                  const match = customers.find((row) => row.id === event.target.value);
+                  setCreditAllowed(match?.creditAllowed ?? false);
+                }}
+                className={inputClass}
+                autoFocus
+              >
+                <option value="">Walk-in guest</option>
+                {sorted.map((customer) => (
+                  <option key={customer.id} value={customer.id}>
+                    {customer.name}
+                    {customer.phone ? ` (${customer.phone})` : ""}
+                  </option>
+                ))}
+              </select>
+            </Field>
+            <button
+              type="button"
+              onClick={() => {
+                setAdding(true);
+                setName("");
+                setPhone("");
+              }}
+              className="flex items-center gap-1.5 text-sm font-semibold text-indigo"
+            >
+              <UserPlus className="h-4 w-4" />
+              Add a new customer
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Name" required>
+                <input
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  className={inputClass}
+                  autoFocus
+                />
+              </Field>
+              <Field label="Phone" hint="For WhatsApp and the Customer Ledger.">
+                <input
+                  inputMode="tel"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  placeholder="98765 43210"
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+            {customers.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setAdding(false)}
+                className="text-sm font-semibold text-indigo"
+              >
+                Pick a saved customer instead
+              </button>
+            )}
+          </>
+        )}
+
+        {settings.creditEnabled && (adding || selectedId) && (
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 p-3">
+            <input
+              type="checkbox"
+              checked={creditAllowed}
+              onChange={(event) => setCreditAllowed(event.target.checked)}
+              className="mt-0.5 h-4 w-4"
+            />
+            <span className="text-sm">
+              <span className="font-semibold text-ink">May eat now and pay later</span>
+              <span className="block text-xs text-muted">
+                Their bill can be settled &ldquo;on account&rdquo;, which posts to the shared
+                Customer Ledger.
+              </span>
+            </span>
+          </label>
+        )}
+
         {showAddress && (
           <Field label="Delivery address">
             <textarea
@@ -915,16 +1055,15 @@ function CustomerModal({
             />
           </Field>
         )}
+
         <div className="flex justify-end">
           <button
             type="button"
-            onClick={() => {
-              onSave(name.trim(), address.trim());
-              onClose();
-            }}
+            onClick={() => void save()}
+            disabled={busy || (adding && !name.trim())}
             className={primaryBtnClass}
           >
-            Save
+            {busy ? "Saving…" : "Save"}
           </button>
         </div>
       </div>

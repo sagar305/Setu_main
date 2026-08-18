@@ -52,6 +52,7 @@ export type ToolSlug =
   | "profit-dashboard"
   | "gst-reports"
   // Restaurant
+  | "free-dine"
   | "qr-menu-generator"
   | "kitchen-order-board"
   | "recipe-manager"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Boxes,
   Building2,
@@ -16,12 +16,17 @@ import {
   TriangleAlert,
   Unlock,
   Users,
+  BookUser,
+  CalendarClock,
 } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
+import { formatPlain, parseAmount } from "@/lib/dine/money";
 import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
 import { CURRENCIES, type OrderType, type PaperSize } from "@/lib/dine/types";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/dine/sheetSync";
+import { getReceiptTemplates } from "@/lib/toolkit/workspace";
+import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { RestoreBackupButton } from "./RestoreBackupButton";
 import {
   ConfirmDialog,
@@ -327,6 +332,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className={inputClass}
           />
         </Field>
+
+        <BillTemplatePicker
+          value={settings.billTemplateId}
+          onChange={(id) => void updateSettings({ billTemplateId: id })}
+        />
       </Card>
 
       <Card icon={Receipt} title="Payment methods">
@@ -535,10 +545,144 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         )}
       </Card>
 
+      <Card icon={BookUser} title="Credit (udhaar)">
+        <p className="text-sm text-muted">
+          Let regulars eat now and pay later. What they owe is not kept here — it goes into the
+          shared{" "}
+          <a
+            href="/tools/customer-ledger"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-indigo underline underline-offset-2"
+          >
+            Customer Ledger
+          </a>
+          , the same book the Browser Based POS writes its udhaar sales to. One balance per person
+          for the whole business, settled and chased in one place.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.creditEnabled}
+            onChange={(event) => void updateSettings({ creditEnabled: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">Allow bills on account</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Adds an &ldquo;On account&rdquo; tender at payment, for saved customers you have
+              marked as allowed. Off by default, so nobody can be sent away without paying by
+              tapping the wrong button.
+            </span>
+          </span>
+        </label>
+
+        {settings.creditEnabled && (
+          <p className="text-xs text-muted">
+            Only a saved customer can run a tab — never a walk-in — and you tick who is allowed when
+            you attach them to a table. The payment screen shows what they already owe before you
+            add to it. Settling, reminders and statements all happen in the Customer Ledger.
+          </p>
+        )}
+      </Card>
+
+      <Card icon={CalendarClock} title="Table bookings">
+        <p className="text-sm text-muted">
+          Hold a table ahead of time, free or against an advance, and send the guest a confirmation
+          on WhatsApp. Anything you take as an advance comes off their bill when they sit down.
+        </p>
+
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
+          <input
+            type="checkbox"
+            checked={settings.reservationsEnabled}
+            onChange={(event) => void updateSettings({ reservationsEnabled: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#26306B]"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-ink">Take bookings</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              Adds a Bookings screen, marks held tables on the floor, and seats a booking when you
+              tap its table.
+            </span>
+          </span>
+        </label>
+
+        {settings.reservationsEnabled && (
+          <>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Field label="Usual length (minutes)" hint="Pre-filled on a new booking.">
+                <input
+                  inputMode="numeric"
+                  value={String(settings.reservationDefaultMinutes)}
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationDefaultMinutes: Number(event.target.value) || 90,
+                    })
+                  }
+                  className={inputClass}
+                />
+              </Field>
+              <Field
+                label="Hold either side (minutes)"
+                hint="A table shows as reserved this long before, and a party counts as late this long after."
+              >
+                <input
+                  inputMode="numeric"
+                  value={String(settings.reservationHoldMinutes)}
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationHoldMinutes: Number(event.target.value) || 0,
+                    })
+                  }
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Usual advance" hint="Pre-filled on a new booking. Blank for free bookings.">
+                <input
+                  inputMode="decimal"
+                  value={
+                    settings.reservationDefaultDeposit > 0
+                      ? formatPlain(settings.reservationDefaultDeposit)
+                      : ""
+                  }
+                  onChange={(event) =>
+                    void updateSettings({
+                      reservationDefaultDeposit: parseAmount(event.target.value),
+                    })
+                  }
+                  placeholder="No advance"
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+
+            <Field
+              label="WhatsApp country code"
+              hint="Put on the front of a local number when opening WhatsApp. 91 for India."
+            >
+              <input
+                inputMode="numeric"
+                value={settings.whatsappDialCode}
+                onChange={(event) => void updateSettings({ whatsappDialCode: event.target.value })}
+                className={inputClass}
+              />
+            </Field>
+
+            <p className="text-xs text-muted">
+              WhatsApp opens with the message written out and waits for you to send it — the
+              restaurant&apos;s own number, its own chat history, and no diner&apos;s phone number
+              ever leaves this browser.
+            </p>
+          </>
+        )}
+      </Card>
+
       <Card icon={Users} title="Customers and the Customer Ledger">
         <p className="text-sm text-muted">
-          Naming a diner on a ticket saves them here, and copies them into your shared workspace so
-          the{" "}
+          One customer book for the whole business. Saving a diner on a ticket copies them into your
+          shared workspace, and regulars first saved at the shop till or in the{" "}
           <a
             href="/tools/customer-ledger"
             target="_blank"
@@ -547,7 +691,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           >
             Customer Ledger
           </a>{" "}
-          and the other Setu tools see the same people.
+          appear in the picker here — so &ldquo;select a customer&rdquo; finds the same people
+          everywhere.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
@@ -564,9 +709,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               Share diners with the Customer Ledger
             </span>
             <span className="mt-0.5 block text-xs text-muted">
-              Copies name, phone and address across as you save them. It is one-way — Free Dine
-              keeps its own copy, so clearing another tool can never take your regulars with it.
-              Switch this off and diners stay in Free Dine only.
+              Copies name, phone and address across as you save them, and brings the other tools&apos;
+              customers in here. Free Dine keeps its own copy either way, so clearing another tool
+              can never take your regulars with it. Switch this off and diners stay in Free Dine
+              only — but bills can no longer go on account, because the ledger they would post to is
+              the shared one.
             </span>
           </span>
         </label>
@@ -869,6 +1016,84 @@ function SheetSyncCard({
         }}
       />
     </Card>
+  );
+}
+
+/**
+ * Choose a bill layout designed in the Receipt Designer.
+ *
+ * Templates live in the shared workspace, so a restaurant designs its look
+ * once and every Setu tool that prints uses it. Picking one takes over the
+ * paper size, colour, header, footer and separators — the fields below stay as
+ * the fallback for when no template is chosen.
+ */
+function BillTemplatePicker({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (id: string) => void;
+}) {
+  const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getReceiptTemplates()
+      .then((all) => {
+        if (cancelled) return;
+        setTemplates(all);
+        setLoaded(true);
+      })
+      .catch(() => {
+        if (!cancelled) setLoaded(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return (
+    <Field
+      label="Bill design"
+      hint="Designed in the Receipt Designer and shared across your Setu tools."
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className={`${inputClass} max-w-xs`}
+        >
+          <option value="">Built-in layout</option>
+          {templates.map((template) => (
+            <option key={template.id} value={template.id}>
+              {template.name} ({template.paperSize})
+            </option>
+          ))}
+        </select>
+        <a
+          href="/tools/receipt-designer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo"
+        >
+          <ExternalLink className="h-4 w-4" />
+          {templates.length > 0 ? "Design another" : "Design one"}
+        </a>
+      </div>
+      {loaded && templates.length === 0 && (
+        <p className="mt-1 text-xs text-muted">
+          No designs saved yet. The Receipt Designer sets the colour, header, footer, logo and
+          separators; save one there and it appears here.
+        </p>
+      )}
+      {value !== "" && (
+        <p className="mt-1 text-xs text-muted">
+          The design decides the paper size, colour, header, footer and separators. The settings
+          above apply when no design is chosen.
+        </p>
+      )}
+    </Field>
   );
 }
 

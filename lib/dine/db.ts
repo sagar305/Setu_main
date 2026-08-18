@@ -8,10 +8,14 @@
 
 const DB_NAME = "DINE_DATABASE";
 // v2 adds dine_sync_queue (Google Sheet dirty-flags); v3 adds the raw-material
-// stores (materials, recipe lines, stock moves). The upgrade handler creates
-// any missing store, so bumping this migrates an existing database in place
-// without touching its rows.
-const DB_VERSION = 3;
+// stores (materials, recipe lines, stock moves); v4 adds bookings. The upgrade
+// handler creates any missing store, so bumping this migrates an existing
+// database in place without touching its rows.
+//
+// There is deliberately no credit store. What a diner owes lives in the shared
+// Customer Ledger, so a regular who runs a tab here and at the counter has one
+// balance — see lib/dine/credit.ts.
+const DB_VERSION = 4;
 
 export const DINE_STORES = [
   "dine_business",
@@ -35,6 +39,7 @@ export const DINE_STORES = [
   "dine_materials",
   "dine_recipe_lines",
   "dine_stock_moves",
+  "dine_reservations",
 ] as const;
 
 export type DineStoreName = (typeof DINE_STORES)[number];
@@ -60,6 +65,11 @@ const INDEXES: Partial<Record<DineStoreName, [name: string, keyPath: string][]>>
   dine_stock_moves: [
     ["materialId", "materialId"],
     ["businessDate", "businessDate"],
+  ],
+  dine_reservations: [
+    ["tableId", "tableId"],
+    ["businessDate", "businessDate"],
+    ["customerId", "customerId"],
   ],
 };
 
