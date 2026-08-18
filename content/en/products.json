@@ -48,6 +48,29 @@
       }
     },
     {
+      "id": "bank-statement-analyzer",
+      "status": "live",
+      "name": "Bank Statement Analyzer",
+      "headline": "Free bank statement analysis, right in your browser",
+      "description": "A completely free bank statement analyser for chartered accountants and anyone who keeps a set of books. Import a PDF, Excel or CSV statement, classify every transaction with rules you control, reconcile against your ledger and export CA reports — no login, no subscription, and the statement is never uploaded anywhere.",
+      "features": [
+        "Imports PDF, XLSX, XLS and CSV — including password-protected PDFs",
+        "Nothing is uploaded: parsing and analysis run in your browser",
+        "Extraction checked against the statement's own running balance",
+        "Deterministic rules-based classification with visible confidence",
+        "Business, personal and transfer marking separate from the category",
+        "Several statements analysed together, with duplicates excluded",
+        "Monthly cash flow, expense, income and counterparty analysis",
+        "Cash, high-value, bank charge, interest and transfer reports",
+        "Ledger reconciliation with exact, date-window and fuzzy matching",
+        "Excel workbook, PDF report and CSV exports generated on device"
+      ],
+      "cta": {
+        "label": "Open Bank Statement Analyzer — it's free",
+        "href": "/products/bank-statement-analyzer"
+      }
+    },
+    {
       "id": "free-dine",
       "status": "live",
       "name": "Free Dine",

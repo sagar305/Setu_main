@@ -130,7 +130,7 @@ export function validate(input: ValidationInput): ValidationReport {
   if (skipped > 0) {
     issues.push({
       severity: "warning",
-      message: `${skipped} row${skipped === 1 ? "" : "s"} carried a zero amount and were not counted as transactions.`,
+      message: `${skipped} row${skipped === 1 ? "" : "s"} moved no money — an opening or closing balance, or a nil entry — and ${skipped === 1 ? "was" : "were"} not counted as a transaction.`,
     });
   }
 

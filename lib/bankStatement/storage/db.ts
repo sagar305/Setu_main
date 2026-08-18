@@ -10,8 +10,18 @@
 // stays in namespaced localStorage — see ./store.ts.
 
 const DATABASE_NAME = "setu_bank_statement_analyzer";
-const DATABASE_VERSION = 1;
+const DATABASE_VERSION = 2;
 const TRANSACTION_STORE = "transactions";
+
+/**
+ * What the categoriser has learned, and the category embeddings it computed.
+ *
+ * In IndexedDB rather than localStorage because neither has a natural bound:
+ * corrections accumulate for as long as the CA keeps working, and one set of
+ * category embeddings is ~35 × 384 floats. Keeping them out of localStorage is
+ * what lets the correction history stop being capped at an arbitrary number.
+ */
+const AI_STORE = "aiMemory";
 
 export type StoredTransactionBatch = {
   /** Statement id — one record holds that statement's whole transaction list. */
@@ -32,27 +42,60 @@ function openDatabase(): Promise<IDBDatabase> {
       if (!database.objectStoreNames.contains(TRANSACTION_STORE)) {
         database.createObjectStore(TRANSACTION_STORE, { keyPath: "statementId" });
       }
+      if (!database.objectStoreNames.contains(AI_STORE)) {
+        database.createObjectStore(AI_STORE, { keyPath: "key" });
+      }
     };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
   });
 }
 
-async function withStore<T>(
+async function withNamedStore<T>(
+  storeName: string,
   mode: IDBTransactionMode,
   run: (store: IDBObjectStore) => IDBRequest
 ): Promise<T> {
   const database = await openDatabase();
   try {
     return await new Promise<T>((resolve, reject) => {
-      const transaction = database.transaction(TRANSACTION_STORE, mode);
-      const request = run(transaction.objectStore(TRANSACTION_STORE));
+      const transaction = database.transaction(storeName, mode);
+      const request = run(transaction.objectStore(storeName));
       request.onsuccess = () => resolve(request.result as T);
       request.onerror = () => reject(request.error);
     });
   } finally {
     database.close();
   }
+}
+
+function withStore<T>(
+  mode: IDBTransactionMode,
+  run: (store: IDBObjectStore) => IDBRequest
+): Promise<T> {
+  return withNamedStore<T>(TRANSACTION_STORE, mode, run);
+}
+
+// --- AI memory -------------------------------------------------------------
+
+/** Read one AI memory record. Returns the fallback when there is none. */
+export async function loadAiRecord<T>(key: string, fallback: T): Promise<T> {
+  const record = await withNamedStore<{ key: string; value: T } | undefined>(
+    AI_STORE,
+    "readonly",
+    (store) => store.get(key)
+  );
+  return record ? record.value : fallback;
+}
+
+export async function saveAiRecord<T>(key: string, value: T): Promise<void> {
+  await withNamedStore<IDBValidKey>(AI_STORE, "readwrite", (store) =>
+    store.put({ key, value, updatedAt: new Date().toISOString() })
+  );
+}
+
+export async function deleteAiRecord(key: string): Promise<void> {
+  await withNamedStore<undefined>(AI_STORE, "readwrite", (store) => store.delete(key));
 }
 
 export async function saveTransactions(
@@ -83,4 +126,5 @@ export async function listStatementIds(): Promise<string[]> {
 /** Wipe the tool's IndexedDB entirely — used by "Clear all local data" (§19). */
 export async function clearAll(): Promise<void> {
   await withStore<undefined>("readwrite", (store) => store.clear());
+  await withNamedStore<undefined>(AI_STORE, "readwrite", (store) => store.clear());
 }

@@ -28,7 +28,7 @@ export function AnalyzeStep() {
         <h2 className="text-xl font-bold text-ink">Nothing to analyse yet</h2>
         <p className="mt-2 text-sm text-muted">Import a statement first.</p>
         <Link
-          href="/tools/bank-statement-analyzer/import"
+          href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
           Go to import
@@ -51,7 +51,7 @@ export function AnalyzeStep() {
           </p>
         </div>
         <Link
-          href="/tools/bank-statement-analyzer/export"
+          href="/products/bank-statement-analyzer/export"
           className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
           Export reports
@@ -246,7 +246,7 @@ export function AnalyzeStep() {
           empty="Everything is categorised."
           action={
             <Link
-              href="/tools/bank-statement-analyzer/review"
+              href="/products/bank-statement-analyzer/review"
               className="text-sm font-semibold text-indigo hover:underline"
             >
               Review them
