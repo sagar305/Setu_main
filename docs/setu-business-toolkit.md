@@ -59,6 +59,7 @@ Browser POS / QR Menu ─────► Restaurant POS
 Invoice / Ledger / Labels ─► Retail POS
 Appointment Book ──────────► Clinic Management
 Queue Management ──────────► Restaurant / Clinic
+Tuition Class Manager ─────► Setu Tuition
 ```
 
 The funnel target is the **Setu Platform**, routed by business type — encoded
@@ -118,6 +119,7 @@ Not everything on the roadmap is a destination app. Each entry is tagged:
 | Supplier Book · Purchase Register · Stock Register | Inventory | Retail POS |
 | Barcode Generator · Label Printer | Products | Retail POS |
 | Appointment Book | Service | Clinic |
+| Tuition Class Manager | Education | Tuition |
 
 ### Foundation (Phase 1) — SHIPPED
 
@@ -169,6 +171,9 @@ workspace/
   inventory           payments         settings
   (planned) suppliers · invoices · receipt_templates ·
             expenses · cashbook · appointments · ledger · assets
+  (tuition) students · batches · attendance · fee_dues ·
+            fee_payments · tests · marks · student_notes ·
+            enquiries · holidays · tuition_settings
 ```
 
 ### Two-tier storage (the rule that prevents drift)
@@ -277,6 +282,7 @@ A view of the `integrations` declared in `lib/toolkit/registry.ts`
 | Appointment Book | Invoice Generator | Invoice after the appointment |
 | Appointment Book | Queue Management | Walk-in → appointment |
 | Expense Tracker | Profit Dashboard | Profit uses actual expenses |
+| Tuition Class Manager | UPI QR Generator | Parents pay a fee reminder from the link |
 | Business Profile | Every tool | Auto-fill business details |
 
 *(Full catalog generated from the registry.)*

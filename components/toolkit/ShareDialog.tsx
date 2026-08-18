@@ -31,6 +31,7 @@ export function ShareDialog({
   doc,
   title,
   allowFee = false,
+  recipientLabel = "customer",
   onSaveUpiDefault,
 }: {
   open: boolean;
@@ -39,6 +40,8 @@ export function ShareDialog({
   title?: string;
   /** Show an advance/booking-fee input (appointments). */
   allowFee?: boolean;
+  /** Who the link is going to — "parent" in the Tuition Class Manager. */
+  recipientLabel?: string;
   /** Called when the user opts to save an entered UPI as the business default. */
   onSaveUpiDefault?: (upiId: string) => void;
 }) {
@@ -188,7 +191,7 @@ export function ShareDialog({
 
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={onWhatsApp} className={`${primaryBtnClass} flex-1`}>
-            WhatsApp{phone ? " to customer" : ""}
+            WhatsApp{phone ? ` to ${recipientLabel}` : ""}
           </button>
           <button type="button" onClick={copy} className={`${secondaryBtnClass} flex-1`}>
             {copied ? "Copied ✓" : "Copy link"}

@@ -9,10 +9,12 @@ const DB_NAME = "POS_DATABASE";
 // sync dirty-flags); v4 adds the Business Toolkit stores (suppliers, expenses,
 // cashbook, appointments, ledger, receipt_templates, purchases, quotations,
 // assets). v5 adds the accounting stores (coa_accounts, journal_entries,
-// documents) for the bookkeeping and document tools. The upgrade handler
-// creates any missing stores, so bumping the version migrates older databases
-// in place.
-const DB_VERSION = 5;
+// documents) for the bookkeeping and document tools. v6 adds the tuition
+// stores (students, batches, attendance, fee_dues, fee_payments, tests,
+// marks, student_notes, enquiries, holidays) for the Tuition Class Manager.
+// The upgrade handler creates any missing stores, so bumping the version
+// migrates older databases in place.
+const DB_VERSION = 6;
 
 export const STORES = [
   "business",
@@ -38,6 +40,17 @@ export const STORES = [
   "coa_accounts",
   "journal_entries",
   "documents",
+  "students",
+  "batches",
+  "attendance",
+  "fee_dues",
+  "fee_payments",
+  "tests",
+  "marks",
+  "student_notes",
+  "enquiries",
+  "holidays",
+  "tuition_settings",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
@@ -71,6 +84,17 @@ export function openPosDb(): Promise<IDBDatabase> {
           }
           if (store === "purchases") {
             objectStore.createIndex("supplierId", "supplierId", { unique: false });
+          }
+          if (store === "attendance") {
+            objectStore.createIndex("date", "date", { unique: false });
+            objectStore.createIndex("studentId", "studentId", { unique: false });
+          }
+          if (store === "fee_dues" || store === "fee_payments" || store === "student_notes") {
+            objectStore.createIndex("studentId", "studentId", { unique: false });
+          }
+          if (store === "marks") {
+            objectStore.createIndex("testId", "testId", { unique: false });
+            objectStore.createIndex("studentId", "studentId", { unique: false });
           }
         }
       }

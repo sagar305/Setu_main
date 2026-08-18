@@ -98,11 +98,59 @@ export type SharedAppointment = {
   fee?: number; // optional advance / booking fee to collect
 };
 
+/** Fee payment receipt from the Tuition Class Manager. */
+export type SharedFeeReceipt = {
+  t: "fee";
+  b: ShareBusiness;
+  no: string; // receipt number
+  dt: string; // date (ISO)
+  sn: string; // student name
+  cp?: string; // parent phone
+  cls?: string; // class / grade
+  amt: number; // amount received
+  mode?: string; // payment mode
+  tw?: string[]; // what the payment was towards
+  bal?: number; // balance still pending, if any
+};
+
+/** Test result shared with a parent. */
+export type SharedMarks = {
+  t: "mrk";
+  b: ShareBusiness;
+  sn: string; // student name
+  cp?: string;
+  tn: string; // test name
+  sub?: string; // subject
+  dt: string; // test date
+  mk: number | null; // null = did not appear
+  max: number;
+  avg?: number; // class average
+  rnk?: number; // rank
+  outOf?: number; // students who appeared
+  rem?: string; // teacher's remark
+};
+
+/** Monthly attendance summary shared with a parent. */
+export type SharedAttendance = {
+  t: "att";
+  b: ShareBusiness;
+  sn: string;
+  cp?: string;
+  pd: string; // period label, e.g. "Aug 2026"
+  prs: number; // classes attended
+  tot: number; // classes held
+  pct: number; // percentage
+  abs?: string[]; // dates missed
+};
+
 export type SharedDoc =
   | SharedInvoice
   | SharedQuotation
   | SharedLedger
-  | SharedAppointment;
+  | SharedAppointment
+  | SharedFeeReceipt
+  | SharedMarks
+  | SharedAttendance;
 
 // ---------------------------------------------------------------------------
 // Encode / decode
@@ -149,6 +197,12 @@ export function docTitle(doc: SharedDoc): string {
       return `Payment reminder`;
     case "apt":
       return `Appointment`;
+    case "fee":
+      return `Fee receipt ${doc.no}`;
+    case "mrk":
+      return `Test result`;
+    case "att":
+      return `Attendance report`;
   }
 }
 
@@ -163,6 +217,12 @@ export function payableAmount(doc: SharedDoc): number {
       return doc.bal;
     case "apt":
       return doc.fee ?? 0;
+    // A receipt offers "pay now" only for whatever is still pending.
+    case "fee":
+      return doc.bal ?? 0;
+    case "mrk":
+    case "att":
+      return 0;
   }
 }
 

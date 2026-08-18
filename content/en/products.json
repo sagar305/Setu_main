@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Products | Free POS, Restaurant Billing & QR Menu | Setu",
-    "description": "Setu's products: the free Browser Based POS and Free Dine restaurant POS, plus Setu QR Menu, Setu Dine and Setu Queue. Setu Retail and Clinic coming soon.",
+    "title": "Products | POS, QR Menu & Business Software | Setu",
+    "description": "Explore Setu's products — the free Browser Based POS, QR Menu, Free Dine restaurant and Tuition Class Manager, plus Setu Dine and Setu Queue, with Retail and Clinic coming soon.",
     "keywords": [
       "Setu products",
       "Browser Based POS",
@@ -11,7 +11,9 @@
       "Setu Dine",
       "Setu Queue",
       "Setu Retail",
-      "Setu Clinic"
+      "Setu Clinic",
+      "Setu Tuition",
+      "Tuition Class Manager"
     ]
   },
   "hero": {
@@ -93,6 +95,29 @@
       }
     },
     {
+      "id": "free-tuition",
+      "status": "live",
+      "name": "Tuition Class Manager",
+      "headline": "Free tuition software, right in your browser",
+      "description": "A completely free class manager for a tuition teacher. Students and batches, daily attendance, monthly fees that add themselves up, WhatsApp reminders to parents, test marks and shareable fee receipts — no login, no subscription, and it keeps working without internet.",
+      "features": [
+        "Batch-wise daily attendance in seconds",
+        "Works fully offline",
+        "Automatic monthly fee dues, concessions and one-off charges",
+        "Numbered fee receipts with shareable links and UPI payment",
+        "WhatsApp fee reminders and absence notices to parents",
+        "Tests with whole-batch marks entry and result sharing",
+        "Student-left handling that stops fees but keeps the history",
+        "Your own custom fields per student, e.g. school test marks",
+        "Dated diary reminders and admission enquiry register",
+        "Bulk student import, PIN lock, backup and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Tuition Class Manager — it's free",
+        "href": "/products/free-tuition-software"
+      }
+    },
+    {
       "id": "pos",
       "status": "live",
       "name": "Setu Dine",
@@ -138,6 +163,17 @@
       "cta": {
         "label": "Explore Setu Retail",
         "href": "/products/retail"
+      }
+    },
+    {
+      "id": "tuition",
+      "status": "coming-soon",
+      "name": "Setu Tuition",
+      "headline": "Coaching class management, coming soon",
+      "description": "Automated parent messaging, a live parent view, online fee collection and cloud sync across your own devices — still built around one teacher, not an institute.",
+      "cta": {
+        "label": "Explore Setu Tuition",
+        "href": "/products/tuition"
       }
     },
     {
