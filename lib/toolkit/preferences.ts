@@ -7,6 +7,16 @@ export type Preferences = {
   language: string; // BCP-47 code, e.g. "en", "hi"
   currency: string; // ISO 4217 code, e.g. "INR"
   timezone: string; // IANA zone, e.g. "Asia/Kolkata"
+  /**
+   * Whether the tools may offer to shorten a share link.
+   *
+   * On by default, but this only controls whether the *offer* appears —
+   * shortening never happens until the user presses the button on a given
+   * share, because it is the one thing that puts document data on a server.
+   * Turned off, the tools hand out the long self-contained link silently and
+   * say nothing about shortening at all.
+   */
+  shortLinks: boolean;
 };
 
 const KEY = "setu:preferences";
@@ -26,12 +36,19 @@ function detectLanguage(): string {
 }
 
 export function defaultPreferences(): Preferences {
-  return { language: detectLanguage(), currency: "INR", timezone: detectTimezone() };
+  return {
+    language: detectLanguage(),
+    currency: "INR",
+    timezone: detectTimezone(),
+    shortLinks: true,
+  };
 }
 
 export function getPreferences(): Preferences {
   const defaults = defaultPreferences();
-  if (typeof window === "undefined") return { language: "en", currency: "INR", timezone: "Asia/Kolkata" };
+  if (typeof window === "undefined") {
+    return { language: "en", currency: "INR", timezone: "Asia/Kolkata", shortLinks: true };
+  }
   try {
     const raw = window.localStorage.getItem(KEY);
     return raw ? { ...defaults, ...(JSON.parse(raw) as Partial<Preferences>) } : defaults;

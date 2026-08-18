@@ -4,6 +4,13 @@
 // (to the customer's number when known), copy, and native share, and shows a
 // QR of the link. A UPI ID can be overridden here (and optionally saved as the
 // business default), and appointments can carry an optional advance fee.
+//
+// The link starts out self-contained: the whole document rides in the fragment
+// and nothing is uploaded. Pressing "Shorten" — and only pressing it — stores
+// the document with the shortener and swaps in a ten-character link. If that
+// fails, or the browser is offline, the long link stays and the dialog says so
+// instead of silently doing nothing. With the preference turned off, no part of
+// this appears at all.
 
 import { useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
@@ -17,6 +24,8 @@ import {
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
 import { getWhatsAppShareUrl, shareViaWeb, canShare } from "@/lib/share";
+import { encodeDoc } from "@/lib/toolkit/shareLink";
+import { useShortenLink } from "@/lib/toolkit/useShortenLink";
 import { isValidUPIId, supportsUpi } from "@/lib/upi";
 
 function withOverrides(doc: SharedDoc, upiId: string, fee: number | null): SharedDoc {
@@ -65,10 +74,22 @@ export function ShareDialog({
     [doc, upiId, fee]
   );
 
-  const url = useMemo(() => {
+  const shortener = useShortenLink();
+
+  const longUrl = useMemo(() => {
     if (!effectiveDoc || typeof window === "undefined") return "";
     return buildShareUrl(effectiveDoc, window.location.origin);
   }, [effectiveDoc]);
+
+  // A short code stands for one exact document. The moment the UPI ID or the
+  // advance fee is edited it stands for the wrong one, so it is dropped and the
+  // user shortens again if they still want to.
+  const { reset } = shortener;
+  useEffect(() => {
+    reset();
+  }, [longUrl, reset]);
+
+  const url = shortener.shortUrl ?? longUrl;
 
   useEffect(() => {
     if (!url) return;
@@ -180,7 +201,39 @@ export function ShareDialog({
           <div className="min-w-0 flex-1">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">Shareable link</p>
             <p className="mt-1 break-all rounded-lg bg-cream-paper/60 p-2 text-xs text-ink">{url}</p>
-            {longLink ? (
+
+            {shortener.offered && !shortener.shortUrl ? (
+              <div className="mt-2">
+                <button
+                  type="button"
+                  onClick={() => shortener.shorten(encodeDoc(effectiveDoc), "doc")}
+                  disabled={shortener.status === "working"}
+                  className="rounded-lg border border-indigo/30 px-3 py-1.5 text-xs font-semibold text-indigo disabled:opacity-60"
+                >
+                  {shortener.status === "working" ? "Shortening…" : "Shorten link"}
+                </button>
+
+                {shortener.status === "error" && shortener.failure === "offline" ? (
+                  <p className="mt-1 text-xs text-amber-600">
+                    Shortening needs an internet connection. The full link below works offline —
+                    send that instead.
+                  </p>
+                ) : null}
+
+                {shortener.status === "error" && shortener.failure !== "offline" ? (
+                  <p className="mt-1 text-xs text-amber-600">
+                    Couldn&apos;t shorten — using the full link.
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
+
+            {shortener.shortUrl ? (
+              <p className="mt-1 text-xs text-muted">
+                Shortened. This copy is stored online and deleted 180 days after it was last opened —
+                so the recipient needs an internet connection to open it.
+              </p>
+            ) : longLink ? (
               <p className="mt-1 text-xs text-muted">
                 The link is long because the whole document is inside it (nothing is stored online).
                 Prefer the QR code or the WhatsApp button below — both handle any length.
@@ -204,8 +257,9 @@ export function ShareDialog({
         </div>
 
         <p className="text-xs text-muted">
-          The whole document travels inside the link — nothing is uploaded. The recipient can view it
-          and pay by UPI without any app or login.
+          {shortener.shortUrl
+            ? "A copy of this document is stored so the link can stay short. The recipient can view it and pay by UPI without any app or login."
+            : "The whole document travels inside the link — nothing is uploaded. The recipient can view it and pay by UPI without any app or login."}
         </p>
       </div>
     </Modal>

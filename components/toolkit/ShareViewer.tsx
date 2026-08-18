@@ -1,11 +1,20 @@
 "use client";
 
-// Public read-only viewer for a shared document. Decodes the #d=<payload>
-// fragment (client-side only — the data never reaches a server) and renders
-// the invoice / quotation / reminder / appointment, with a UPI pay control
-// when an amount is owed and the business has a UPI ID.
+// Public read-only viewer for a shared document.
+//
+// Two link shapes arrive here, and the difference matters to the reader:
+//
+//   /view#d=<payload>   the whole document is in the link. Nothing was ever
+//                       uploaded, and the page renders with no network at all —
+//                       so it still opens on a phone with no signal.
+//   /view/<code>        the sender chose to shorten. The document was stored by
+//                       the shortener, and this page has to fetch it, which
+//                       means the reader needs a connection.
+//
+// The footer says which of the two happened rather than claiming the stronger
+// promise in both cases.
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   decodeDoc,
   docTitle,
@@ -15,6 +24,7 @@ import {
   type SharedDoc,
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
+import { resolveShortLink } from "@/lib/toolkit/shortLink";
 import { supportsUpi } from "@/lib/upi";
 import { UpiPayButton } from "@/components/toolkit/UpiPayButton";
 
@@ -74,30 +84,117 @@ function Row({ label, value, bold }: { label: string; value: string; bold?: bool
   );
 }
 
-export function ShareViewer() {
-  const [doc, setDoc] = useState<SharedDoc | null>(null);
-  const [ready, setReady] = useState(false);
+function Notice({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mx-auto max-w-md rounded-2xl border border-muted-line/30 bg-white p-8 text-center">
+      <h1 className="text-lg font-bold text-ink">{title}</h1>
+      <div className="mt-2 text-sm text-muted">{children}</div>
+    </div>
+  );
+}
 
+type LoadState = "loading" | "ready" | "broken" | "expired" | "failed";
+
+/**
+ * @param code Present when the reader followed a shortened /view/<code> link.
+ *             Absent for a self-contained /view#d= link.
+ */
+export function ShareViewer({ code }: { code?: string } = {}) {
+  const [doc, setDoc] = useState<SharedDoc | null>(null);
+  const [state, setState] = useState<LoadState>("loading");
+  const [attempt, setAttempt] = useState(0);
+
+  // Self-contained link: everything needed is already in the URL.
   useEffect(() => {
-    const read = () => setDoc(decodeDoc(window.location.hash || window.location.search));
+    if (code) return undefined;
+
+    const read = () => {
+      const decoded = decodeDoc(window.location.hash || window.location.search);
+      setDoc(decoded);
+      setState(decoded ? "ready" : "broken");
+    };
     read();
-    setReady(true);
     // Re-decode if the fragment changes (e.g. the link is edited in place).
     window.addEventListener("hashchange", read);
     return () => window.removeEventListener("hashchange", read);
-  }, []);
+  }, [code]);
 
-  if (!ready) return null;
+  // Shortened link: fetch the stored payload, then decode it exactly as a
+  // fragment would have been decoded.
+  useEffect(() => {
+    if (!code) return undefined;
+    let cancelled = false;
+
+    setState("loading");
+    resolveShortLink(code)
+      .then((link) => {
+        if (cancelled) return;
+        if (!link) {
+          // Unknown and expired are the same answer from the service, and the
+          // same thing to the reader: the link no longer resolves.
+          setState("expired");
+          return;
+        }
+        const decoded = decodeDoc(link.payload);
+        setDoc(decoded);
+        setState(decoded ? "ready" : "broken");
+      })
+      .catch(() => {
+        if (!cancelled) setState("failed");
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [code, attempt]);
+
+  const retry = useCallback(() => setAttempt((n) => n + 1), []);
+
+  if (state === "loading") {
+    return code ? (
+      <Notice title="Opening the link…">
+        <p>One moment.</p>
+      </Notice>
+    ) : null;
+  }
+
+  if (state === "expired") {
+    return (
+      <Notice title="This link has expired">
+        <p>
+          Shortened links are kept for 180 days after they were last opened, then deleted. Ask the
+          sender to share it again.
+        </p>
+      </Notice>
+    );
+  }
+
+  if (state === "failed") {
+    return (
+      <Notice title="Couldn&apos;t open this link">
+        <p>
+          This link needs an internet connection, because the document is stored rather than carried
+          inside the link. Check your connection and try again.
+        </p>
+        <button
+          type="button"
+          onClick={retry}
+          className="mt-4 rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white"
+        >
+          Try again
+        </button>
+      </Notice>
+    );
+  }
 
   if (!doc) {
     return (
-      <div className="mx-auto max-w-md rounded-2xl border border-muted-line/30 bg-white p-8 text-center">
-        <h1 className="text-lg font-bold text-ink">This link is empty or broken</h1>
-        <p className="mt-2 text-sm text-muted">
+      <Notice title="This link is empty or broken">
+        <p>
           The document data lives inside the link itself. Ask the sender to share it again — the full
           link may have been cut off.
         </p>
-      </div>
+      </Notice>
     );
   }
 
@@ -252,6 +349,115 @@ export function ShareViewer() {
           </>
         ) : null}
 
+        {doc.t === "rx" ? (
+          <>
+            {doc.dr ? (
+              <div className="mt-1 text-center text-sm text-muted">
+                <p className="font-semibold text-ink">{doc.dr}</p>
+                {doc.drq ? <p className="text-xs">{doc.drq}</p> : null}
+                {doc.reg ? <p className="text-xs">Reg. No: {doc.reg}</p> : null}
+              </div>
+            ) : null}
+
+            <div className="mt-4 flex flex-wrap justify-between gap-x-4 gap-y-1 border-y border-muted-line/30 py-2 text-sm">
+              <span className="font-semibold text-ink">{doc.pn}</span>
+              {doc.ag ? <span className="text-muted">{doc.ag}</span> : null}
+              {doc.fl ? <span className="text-muted">File: {doc.fl}</span> : null}
+              <span className="text-muted">{doc.dt?.slice(0, 10)}</span>
+            </div>
+
+            {doc.alg && doc.alg.length > 0 ? (
+              <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-bold uppercase tracking-wide text-red-700">
+                Allergies: {doc.alg.join(", ")}
+              </p>
+            ) : null}
+
+            {doc.vit && doc.vit.length > 0 ? (
+              <p className="mt-2 text-xs text-muted">{doc.vit.join(" · ")}</p>
+            ) : null}
+
+            {doc.dx ? (
+              <div className="mt-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">Diagnosis</p>
+                <p className="mt-1 whitespace-pre-line text-sm text-ink">{doc.dx}</p>
+              </div>
+            ) : null}
+
+            {doc.med.length > 0 ? (
+              <div className="mt-4">
+                <p className="text-lg font-bold text-indigo">℞</p>
+                <div className="mt-1 overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-muted-line/30 text-left text-muted">
+                        <th className="py-2 pr-3 font-semibold">Medicine</th>
+                        <th className="py-2 pr-3 font-semibold">Dosage</th>
+                        <th className="py-2 font-semibold">Duration</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {doc.med.map((line, i) => (
+                        <tr key={i} className="border-b border-muted-line/20 align-top">
+                          <td className="py-2 pr-3">
+                            <span className="font-semibold text-ink">
+                              {i + 1}. {line.n}
+                            </span>
+                            {line.nt ? (
+                              <span className="block text-xs text-muted">{line.nt}</span>
+                            ) : null}
+                            {line.q ? (
+                              <span className="block text-xs text-muted">Qty: {line.q}</span>
+                            ) : null}
+                          </td>
+                          <td className="py-2 pr-3 text-muted">{line.f ?? ""}</td>
+                          <td className="py-2 text-muted">{line.d ?? ""}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ) : null}
+
+            {doc.inv && doc.inv.length > 0 ? (
+              <div className="mt-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">
+                  Investigations advised
+                </p>
+                <ol className="mt-1 list-decimal pl-5 text-sm text-ink">
+                  {doc.inv.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
+
+            {doc.adv ? (
+              <div className="mt-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">Advice</p>
+                <p className="mt-1 whitespace-pre-line text-sm text-ink">{doc.adv}</p>
+              </div>
+            ) : null}
+
+            {doc.fu ? (
+              <p className="mt-4 text-center text-sm font-semibold text-indigo">
+                Review after {doc.fu} days
+              </p>
+            ) : null}
+
+            {doc.ft ? (
+              <p className="mt-4 border-t border-muted-line/30 pt-3 text-center text-xs text-muted">
+                {doc.ft}
+              </p>
+            ) : null}
+
+            <p className="mt-3 text-center text-xs text-muted">
+              This is a copy of a prescription issued by your doctor. Take medicines only as
+              directed, and ask the clinic if anything here is unclear.
+            </p>
+          </>
+        ) : null}
+
         {doc.t === "att" ? (
           <>
             <p className="mt-3 text-center text-sm text-muted">{doc.pd}</p>
@@ -293,7 +499,10 @@ export function ShareViewer() {
         <a href="/tools" className="font-semibold text-indigo">
           Setu
         </a>{" "}
-        tool. Your data stays in the link — nothing is stored on a server.
+        tool.{" "}
+        {code
+          ? "This is a shortened link, so the document is stored until 180 days after it was last opened."
+          : "Your data stays in the link — nothing is stored on a server."}
       </p>
     </div>
   );
