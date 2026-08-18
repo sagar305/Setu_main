@@ -105,7 +105,13 @@ export function ShareViewer() {
   const currency = b.cur;
   const amount = payableAmount(doc);
   const payNote =
-    doc.t === "inv" || doc.t === "quo" ? doc.no : doc.t === "led" ? "Payment" : "Advance";
+    doc.t === "inv" || doc.t === "quo" || doc.t === "fee"
+      ? doc.no
+      : doc.t === "led"
+        ? "Payment"
+        : doc.t === "apt"
+          ? "Advance"
+          : "Payment";
 
   return (
     <div className="mx-auto max-w-lg space-y-5">
@@ -176,6 +182,99 @@ export function ShareViewer() {
             {doc.dur ? <Row label="Duration" value={`${doc.dur} min`} /> : null}
             {doc.note ? <p className="pt-1 text-xs text-muted">{doc.note}</p> : null}
           </div>
+        ) : null}
+
+        {doc.t === "fee" ? (
+          <>
+            <div className="mt-3 flex justify-between text-sm text-muted">
+              <span>{doc.no}</span>
+              <span>{doc.dt?.slice(0, 10)}</span>
+            </div>
+            <div className="mt-4 rounded-xl bg-cream-paper p-4 text-center">
+              <p className="text-sm text-muted">Received with thanks from</p>
+              <p className="mt-1 text-lg font-bold text-ink">{doc.sn}</p>
+              {doc.cls ? <p className="text-xs text-muted">{doc.cls}</p> : null}
+              <p className="mt-3 text-3xl font-bold text-indigo">
+                {formatMoney(doc.amt, currency)}
+              </p>
+            </div>
+            <div className="mt-4 space-y-1">
+              {doc.tw && doc.tw.length > 0 ? (
+                <Row label="Towards" value={doc.tw.join(", ")} />
+              ) : null}
+              {doc.mode ? <Row label="Paid by" value={doc.mode} /> : null}
+              {doc.bal && doc.bal > 0 ? (
+                <Row label="Still pending" value={formatMoney(doc.bal, currency)} bold />
+              ) : (
+                <p className="pt-2 text-center text-sm font-semibold text-emerald-600">
+                  No dues pending
+                </p>
+              )}
+            </div>
+          </>
+        ) : null}
+
+        {doc.t === "mrk" ? (
+          <>
+            <div className="mt-3 flex justify-between text-sm text-muted">
+              <span>{doc.tn}</span>
+              <span>{doc.dt?.slice(0, 10)}</span>
+            </div>
+            <div className="mt-4 rounded-xl bg-cream-paper p-4 text-center">
+              <p className="text-lg font-bold text-ink">{doc.sn}</p>
+              {doc.sub ? <p className="text-xs text-muted">{doc.sub}</p> : null}
+              {doc.mk === null ? (
+                <p className="mt-3 text-xl font-bold text-saffron">Did not appear</p>
+              ) : (
+                <>
+                  <p className="mt-3 text-3xl font-bold text-indigo">
+                    {doc.mk}
+                    <span className="text-lg text-muted"> / {doc.max}</span>
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-muted">
+                    {doc.max ? Math.round((doc.mk / doc.max) * 1000) / 10 : 0}%
+                  </p>
+                </>
+              )}
+            </div>
+            <div className="mt-4 space-y-1">
+              {doc.avg !== undefined ? (
+                <Row label="Class average" value={`${doc.avg} / ${doc.max}`} />
+              ) : null}
+              {doc.rnk ? (
+                <Row
+                  label="Rank"
+                  value={doc.outOf ? `${doc.rnk} of ${doc.outOf}` : String(doc.rnk)}
+                />
+              ) : null}
+            </div>
+            {doc.rem ? <p className="mt-3 text-sm text-ink">{doc.rem}</p> : null}
+          </>
+        ) : null}
+
+        {doc.t === "att" ? (
+          <>
+            <p className="mt-3 text-center text-sm text-muted">{doc.pd}</p>
+            <div className="mt-4 rounded-xl bg-cream-paper p-4 text-center">
+              <p className="text-lg font-bold text-ink">{doc.sn}</p>
+              <p
+                className={`mt-3 text-4xl font-bold ${
+                  doc.pct >= 75 ? "text-emerald-600" : "text-saffron"
+                }`}
+              >
+                {doc.pct}%
+              </p>
+              <p className="mt-1 text-sm text-muted">
+                Present for {doc.prs} of {doc.tot} classes
+              </p>
+            </div>
+            {doc.abs && doc.abs.length > 0 ? (
+              <div className="mt-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">Days missed</p>
+                <p className="mt-1 text-sm text-ink">{doc.abs.join(", ")}</p>
+              </div>
+            ) : null}
+          </>
         ) : null}
       </div>
 

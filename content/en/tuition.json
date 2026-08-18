@@ -1,0 +1,41 @@
+{
+  "seo": {
+    "title": "Setu Tuition — Coaching Class Management Software",
+    "description": "Setu Tuition is coaching class management software for attendance, fees, parent messaging and results, built for tuition teachers in India. Coming soon.",
+    "keywords": [
+      "Setu Tuition",
+      "tuition class management software",
+      "tuition management software India",
+      "tuition fees management software",
+      "tuition teacher app"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Tuition — Coming Soon",
+    "headline": "Tuition Class Management Software for Teachers",
+    "subheadline": "Attendance, fees, parent communication and results for the class you take yourself — built around one teacher and their students, not an office full of staff."
+  },
+  "body": {
+    "headline": "What we're building",
+    "paragraphs": [
+      "The free Tuition Class Manager already runs a class end to end in the browser — students, batches, daily attendance, monthly fees, receipts and test results, entirely offline and without a login. Setu Tuition is what comes next when the browser itself becomes the limit.",
+      "Automated WhatsApp reminders that go out on their own instead of one tap per parent, a parent view that always shows the live fee and attendance position instead of a snapshot, online fee collection that reconciles itself against the right month, and your class synced across your phone, tablet and laptop rather than living in one browser.",
+      "It stays a single teacher's tool. Staff rosters, teacher attendance and salary management belong to a different kind of product, and we are deliberately not building this into one."
+    ]
+  },
+  "cta": {
+    "headline": "Want early access to Setu Tuition?",
+    "subtext": "Tell us about your class and we'll notify you as soon as Setu Tuition launches.",
+    "cta": {
+      "label": "Get notified",
+      "href": "/contact"
+    }
+  },
+  "crossSell": {
+    "text": "You don't have to wait — the free Tuition Class Manager works today, offline and without signup.",
+    "cta": {
+      "label": "Open the free tuition software",
+      "href": "/products/free-tuition-software"
+    }
+  }
+}

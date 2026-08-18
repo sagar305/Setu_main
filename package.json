@@ -4,16 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run check:pricing && next build && npm run check:seo",
+    "build": "npm run check:pricing && npm run check:dine && next build && npm run check:seo",
     "build:only": "next build",
     "start": "next start",
     "lint": "next lint",
     "check:seo": "node scripts/check-seo.mjs",
     "check:pricing": "node scripts/check-pricing.mjs",
     "sync:post-dates": "node scripts/sync-post-dates.mjs",
-    "check:post-dates": "node scripts/sync-post-dates.mjs --check"
+    "check:post-dates": "node scripts/sync-post-dates.mjs --check",
+    "check:dine": "node scripts/check-dine.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "html2canvas": "^1.4.1",
     "jsbarcode": "^3.12.3",
     "jspdf": "^4.2.1",
@@ -21,6 +25,7 @@
     "lz-string": "^1.5.0",
     "motion": "^12.40.0",
     "next": "15.5.19",
+    "pdfjs-dist": "^6.2.108",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
@@ -30,6 +35,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@types/jsbarcode": "^3.11.4",
     "@types/node": "^20.14.0",
     "@types/qrcode": "^1.5.6",
@@ -38,6 +44,7 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "vitest": "^4.1.10"
   }
 }

@@ -1,15 +1,21 @@
 {
   "seo": {
     "title": "Products | POS, QR Menu & Business Software | Setu",
-    "description": "Explore Setu's products — the free Browser Based POS and QR Menu, plus Setu Dine and Setu Queue for restaurants, with Setu Retail and Setu Clinic coming soon.",
+    "description": "Explore Setu products — the free Browser Based POS, QR Menu, Free Dine, Tuition Class Manager and Clinic Manager, plus Setu Dine, Setu Queue and Retail soon.",
     "keywords": [
       "Setu products",
       "Browser Based POS",
+      "Free Dine",
+      "free restaurant POS",
       "Setu QR Menu",
       "Setu Dine",
       "Setu Queue",
       "Setu Retail",
-      "Setu Clinic"
+      "Setu Clinic",
+      "Setu Tuition",
+      "Tuition Class Manager",
+      "Free Clinic Manager",
+      "free clinic management software"
     ]
   },
   "hero": {
@@ -42,6 +48,57 @@
       }
     },
     {
+      "id": "bank-statement-analyzer",
+      "status": "live",
+      "name": "Bank Statement Analyzer",
+      "headline": "Free bank statement analysis, right in your browser",
+      "description": "A completely free bank statement analyser for chartered accountants and anyone who keeps a set of books. Import a PDF, Excel or CSV statement, classify every transaction with rules you control, reconcile against your ledger and export CA reports — no login, no subscription, and the statement is never uploaded anywhere.",
+      "features": [
+        "Imports PDF, XLSX, XLS and CSV — including password-protected PDFs",
+        "Nothing is uploaded: parsing and analysis run in your browser",
+        "Extraction checked against the statement's own running balance",
+        "Deterministic rules-based classification with visible confidence",
+        "Business, personal and transfer marking separate from the category",
+        "Several statements analysed together, with duplicates excluded",
+        "Monthly cash flow, expense, income and counterparty analysis",
+        "Cash, high-value, bank charge, interest and transfer reports",
+        "Ledger reconciliation with exact, date-window and fuzzy matching",
+        "Excel workbook, PDF report and CSV exports generated on device"
+      ],
+      "cta": {
+        "label": "Open Bank Statement Analyzer — it's free",
+        "href": "/products/bank-statement-analyzer"
+      }
+    },
+    {
+      "id": "free-dine",
+      "status": "live",
+      "name": "Free Dine",
+      "headline": "A free restaurant POS that runs in your browser",
+      "description": "A complete dining-room till, free and with no login. Tables and floor areas, bills that stay open for an hour, kitchen order tickets per round, and a live kitchen screen in a second tab. Split and merge bills, GST with the CGST/SGST breakup, raw-material stock driven by recipes, table bookings with WhatsApp confirmations, and udhaar through the shared Customer Ledger. Everything stays on your device, and it keeps billing with the internet down.",
+      "features": [
+        "Tables and floor areas with live running totals",
+        "Open tickets that survive a browser restart",
+        "Kitchen order tickets per round, without prices",
+        "Live kitchen screen in a second tab, lockable as a kiosk",
+        "Half/full sizes and add-on groups",
+        "Split bills by item, share or amount — and merge tables",
+        "GST with per-item rates and CGST/SGST breakup",
+        "Raw-material stock with per-dish recipes and food cost",
+        "Table bookings, free or against an advance",
+        "WhatsApp confirmations and reminders from your own number",
+        "Credit (udhaar) posted to the shared Customer Ledger",
+        "Thermal (80mm/58mm) and A4 bills, designed in the Receipt Designer",
+        "Day summary, item report, hourly sales and printable day close",
+        "Backup, CSV exports and Google Sheet sync",
+        "Works offline, no login required"
+      ],
+      "cta": {
+        "label": "Open Free Dine — it's free",
+        "href": "/products/free-restaurant-pos"
+      }
+    },
+    {
       "id": "qr-menu",
       "status": "live",
       "name": "Setu QR Menu",
@@ -60,6 +117,56 @@
       "cta": {
         "label": "Explore Setu QR Menu",
         "href": "/products/qr-menu"
+      }
+    },
+    {
+      "id": "free-tuition",
+      "status": "live",
+      "name": "Tuition Class Manager",
+      "headline": "Free tuition software, right in your browser",
+      "description": "A completely free class manager for a tuition teacher. Students and batches, daily attendance, monthly fees that add themselves up, WhatsApp reminders to parents, test marks and shareable fee receipts — no login, no subscription, and it keeps working without internet.",
+      "features": [
+        "Batch-wise daily attendance in seconds",
+        "Works fully offline",
+        "Automatic monthly fee dues, concessions and one-off charges",
+        "Numbered fee receipts with shareable links and UPI payment",
+        "WhatsApp fee reminders and absence notices to parents",
+        "Tests with whole-batch marks entry and result sharing",
+        "Student-left handling that stops fees but keeps the history",
+        "Your own custom fields per student, e.g. school test marks",
+        "Dated diary reminders and admission enquiry register",
+        "Bulk student import, PIN lock, backup and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Tuition Class Manager — it's free",
+        "href": "/products/free-tuition-software"
+      }
+    },
+    {
+      "id": "free-clinic",
+      "status": "live",
+      "name": "Free Clinic Manager",
+      "headline": "Free clinic and prescription software, right in your browser",
+      "description": "A completely free clinic manager for a single doctor or a small practice. Prescriptions that print as sharp, selectable text, patient records with vitals and history, appointments on a live day screen, and billing with automatic follow-up fees and UPI receipts — no login, no subscription, no patient limit, and it keeps working without internet.",
+      "features": [
+        "Prescriptions printed as real selectable text, A4 or A5",
+        "Protocols — save a whole prescription, load it on the next patient in one tap",
+        "Complaints, findings and diagnosis autocomplete from your own past writing",
+        "Vitals with BMI computed as you type and the last reading shown",
+        "One day screen in token order, with live wait timers",
+        "Appointments inside your own hours, with WhatsApp reminders in one run",
+        "Follow-ups booked on finalise, plus a report of who has not returned",
+        "Follow-up fees applied automatically inside your window",
+        "Numbered receipts on 58mm, 80mm or A4, with a UPI QR to pay from",
+        "Dues tracking with WhatsApp reminders to patients",
+        "Investigation slips printed as a separate signed A5",
+        "Patient charts with weight and BP trends, and bulk register import",
+        "Footfall, revenue, top diagnoses and no-show reports, all exportable to CSV",
+        "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Clinic Manager — it's free",
+        "href": "/products/free-clinic-software"
       }
     },
     {
@@ -108,6 +215,17 @@
       "cta": {
         "label": "Explore Setu Retail",
         "href": "/products/retail"
+      }
+    },
+    {
+      "id": "tuition",
+      "status": "coming-soon",
+      "name": "Setu Tuition",
+      "headline": "Coaching class management, coming soon",
+      "description": "Automated parent messaging, a live parent view, online fee collection and cloud sync across your own devices — still built around one teacher, not an institute.",
+      "cta": {
+        "label": "Explore Setu Tuition",
+        "href": "/products/tuition"
       }
     },
     {

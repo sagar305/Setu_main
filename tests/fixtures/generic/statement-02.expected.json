@@ -1,0 +1,15 @@
+{
+  "description": "Semicolon-delimited statement with a single amount column and a Dr/Cr indicator.",
+  "transactionCount": 6,
+  "totalDebits": 33449,
+  "totalCredits": 41000,
+  "parseStatus": "VALID",
+  "balanceBreaks": 0,
+  "note": "The zero-amount opening carry-forward row is dropped, not counted, so the count is 6 not 7.",
+  "firstTransaction": {
+    "date": "2025-05-04",
+    "debit": 850,
+    "credit": 0,
+    "balance": 79150
+  }
+}

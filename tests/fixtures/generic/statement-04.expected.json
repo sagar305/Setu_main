@@ -1,0 +1,10 @@
+{
+  "description": "Synthetic PDF with no table structure — only positioned text runs. Exercises the geometric row/column reconstruction in parser/pdf.ts. Regenerate with: node tests/fixtures/generic/make-statement-pdf.mjs",
+  "transactionCount": 12,
+  "openingBalance": 125000,
+  "closingBalance": 160000,
+  "totalDebits": 71936,
+  "totalCredits": 106936,
+  "parseStatus": "VALID",
+  "balanceBreaks": 0
+}

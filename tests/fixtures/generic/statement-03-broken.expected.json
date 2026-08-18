@@ -1,0 +1,7 @@
+{
+  "description": "A statement with a missing row: the balance drops by 7,000 more than the 11/06 debit explains, so the running balance stops following. The parser must report UNRESOLVED rather than presenting four tidy transactions.",
+  "transactionCount": 4,
+  "parseStatus": "UNRESOLVED",
+  "balanceBreaks": 1,
+  "firstBreakOn": "2025-06-11"
+}

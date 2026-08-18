@@ -84,7 +84,26 @@ export type EntityName =
   | "settings"
   | "coa_accounts"
   | "journal_entries"
-  | "documents";
+  | "documents"
+  // Tuition Class Manager
+  | "students"
+  | "batches"
+  | "attendance"
+  | "fee_dues"
+  | "fee_payments"
+  | "tests"
+  | "marks"
+  | "student_notes"
+  | "enquiries"
+  | "holidays"
+  // Clinic Manager. Clinical records are workspace-owned like everything else,
+  // but they are the most sensitive rows the workspace holds — a tool reading
+  // them is reading someone's diagnosis.
+  | "clinic_doctors"
+  | "clinic_patients"
+  | "clinic_appointments"
+  | "clinic_visits"
+  | "clinic_bills";
 
 /**
  * Permission tiers a tool holds against an entity it does not own (Chapter 5,
@@ -307,6 +326,144 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     ownedBy: "workspace",
     primaryEditor: "credit-note-generator",
     store: "documents",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  students: {
+    name: "students",
+    label: "Students",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "students",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  batches: {
+    name: "batches",
+    label: "Batches / Classes",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "batches",
+    // Deleting a batch un-enrols its students and changes what they owe.
+    dangerousOps: ["delete", "change-fee"],
+    status: "live",
+  },
+  attendance: {
+    name: "attendance",
+    label: "Attendance",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "attendance",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  fee_dues: {
+    name: "fee_dues",
+    label: "Fee Dues",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "fee_dues",
+    dangerousOps: ["delete", "waive"],
+    status: "live",
+  },
+  fee_payments: {
+    name: "fee_payments",
+    label: "Fee Payments",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "fee_payments",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  tests: {
+    name: "tests",
+    label: "Tests",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "tests",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  marks: {
+    name: "marks",
+    label: "Test Marks",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "marks",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  student_notes: {
+    name: "student_notes",
+    label: "Student Diary Notes",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "student_notes",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  enquiries: {
+    name: "enquiries",
+    label: "Admission Enquiries",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "enquiries",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  holidays: {
+    name: "holidays",
+    label: "Holidays",
+    ownedBy: "workspace",
+    primaryEditor: "tuition-manager",
+    store: "holidays",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  clinic_doctors: {
+    name: "clinic_doctors",
+    label: "Doctors",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_doctors",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  clinic_patients: {
+    name: "clinic_patients",
+    label: "Patients",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_patients",
+    dangerousOps: ["delete", "merge"],
+    status: "live",
+  },
+  clinic_appointments: {
+    name: "clinic_appointments",
+    label: "Clinic Appointments",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_appointments",
+    dangerousOps: ["delete", "cancel"],
+    status: "live",
+  },
+  clinic_visits: {
+    name: "clinic_visits",
+    label: "Consultations",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    // A finalised visit is the clinical record a prescription was printed
+    // from. Editing one after the fact is not a silent update.
+    dangerousOps: ["delete", "edit-finalised"],
+    store: "clinic_visits",
+    status: "live",
+  },
+  clinic_bills: {
+    name: "clinic_bills",
+    label: "Clinic Bills",
+    ownedBy: "workspace",
+    primaryEditor: "clinic-manager",
+    store: "clinic_bills",
     dangerousOps: ["delete"],
     status: "live",
   },

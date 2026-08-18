@@ -9,10 +9,18 @@ const DB_NAME = "POS_DATABASE";
 // sync dirty-flags); v4 adds the Business Toolkit stores (suppliers, expenses,
 // cashbook, appointments, ledger, receipt_templates, purchases, quotations,
 // assets). v5 adds the accounting stores (coa_accounts, journal_entries,
-// documents) for the bookkeeping and document tools. The upgrade handler
-// creates any missing stores, so bumping the version migrates older databases
-// in place.
-const DB_VERSION = 5;
+// documents) for the bookkeeping and document tools. v6 adds the tuition
+// stores (students, batches, attendance, fee_dues, fee_payments, tests,
+// marks, student_notes, enquiries, holidays) for the Tuition Class Manager.
+// v7 adds the clinic stores (clinic_doctors, clinic_patients,
+// clinic_appointments, clinic_visits, clinic_medicines, clinic_protocols,
+// clinic_charges, clinic_bills, clinic_settings) for the Free Clinic Manager.
+// Those are prefixed because `appointments` already belongs to the Appointment
+// Book tool with an incompatible shape, and the rest would be too generic to
+// hand to one tool in a database every tool shares.
+// The upgrade handler creates any missing stores, so bumping the version
+// migrates older databases in place.
+const DB_VERSION = 7;
 
 export const STORES = [
   "business",
@@ -38,6 +46,26 @@ export const STORES = [
   "coa_accounts",
   "journal_entries",
   "documents",
+  "students",
+  "batches",
+  "attendance",
+  "fee_dues",
+  "fee_payments",
+  "tests",
+  "marks",
+  "student_notes",
+  "enquiries",
+  "holidays",
+  "tuition_settings",
+  "clinic_doctors",
+  "clinic_patients",
+  "clinic_appointments",
+  "clinic_visits",
+  "clinic_medicines",
+  "clinic_protocols",
+  "clinic_charges",
+  "clinic_bills",
+  "clinic_settings",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
@@ -71,6 +99,30 @@ export function openPosDb(): Promise<IDBDatabase> {
           }
           if (store === "purchases") {
             objectStore.createIndex("supplierId", "supplierId", { unique: false });
+          }
+          if (store === "attendance") {
+            objectStore.createIndex("date", "date", { unique: false });
+            objectStore.createIndex("studentId", "studentId", { unique: false });
+          }
+          if (store === "fee_dues" || store === "fee_payments" || store === "student_notes") {
+            objectStore.createIndex("studentId", "studentId", { unique: false });
+          }
+          if (store === "marks") {
+            objectStore.createIndex("testId", "testId", { unique: false });
+            objectStore.createIndex("studentId", "studentId", { unique: false });
+          }
+          // The clinic queries by day far more than by anything else: the
+          // Today screen and the appointment book both open on a date.
+          if (store === "clinic_appointments") {
+            objectStore.createIndex("date", "date", { unique: false });
+            objectStore.createIndex("patientId", "patientId", { unique: false });
+          }
+          if (store === "clinic_visits" || store === "clinic_bills") {
+            objectStore.createIndex("patientId", "patientId", { unique: false });
+          }
+          if (store === "clinic_patients") {
+            objectStore.createIndex("phone", "phone", { unique: false });
+            objectStore.createIndex("code", "code", { unique: false });
           }
         }
       }

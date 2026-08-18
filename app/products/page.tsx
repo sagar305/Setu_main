@@ -44,26 +44,50 @@ const itemListSchema = {
     {
       "@type": "ListItem",
       position: 1,
+      name: "Browser Based POS",
+      url: "https://setutechnology.com/products/browser-based-pos",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Free Dine — Free Restaurant POS",
+      url: "https://setutechnology.com/products/free-restaurant-pos",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Setu QR Menu",
+      url: "https://setutechnology.com/products/qr-menu",
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: "Tuition Class Manager",
+      url: "https://setutechnology.com/products/free-tuition-software",
+    },
+    {
+      "@type": "ListItem",
+      position: 5,
+      name: "Free Clinic Manager",
+      url: "https://setutechnology.com/products/free-clinic-software",
+    },
+    {
+      "@type": "ListItem",
+      position: 6,
       name: "Setu Dine",
       url: "https://setutechnology.com/products/restaurant-pos",
     },
     {
       "@type": "ListItem",
-      position: 2,
+      position: 7,
       name: "Setu Queue",
       url: "https://setutechnology.com/products/queue",
     },
     {
       "@type": "ListItem",
-      position: 3,
+      position: 8,
       name: "Setu Retail",
       url: "https://setutechnology.com/products/retail",
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      name: "Setu Clinic",
-      url: "https://setutechnology.com/products/clinic",
     },
   ],
 };

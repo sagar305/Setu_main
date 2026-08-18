@@ -52,12 +52,16 @@ export type ToolSlug =
   | "profit-dashboard"
   | "gst-reports"
   // Restaurant
+  | "free-dine"
   | "qr-menu-generator"
   | "kitchen-order-board"
   | "recipe-manager"
   // Service businesses
   | "appointment-book"
   | "queue-management"
+  | "clinic-manager"
+  // Education
+  | "tuition-manager"
   // Payments / utilities
   | "upi-qr-generator"
   | "gst-calculator"
@@ -72,6 +76,7 @@ export type ToolSlug =
   | "journal-entry"
   | "general-ledger"
   | "bank-reconciliation"
+  | "bank-statement-analyzer"
   | "trial-balance"
   // Statements & reports
   | "profit-loss-statement"
@@ -109,12 +114,19 @@ export type ToolCategory =
   | "finance"
   | "restaurant"
   | "service"
+  | "education"
   | "payments"
   | "documents"
   | "ai";
 
 /** Which paid Setu product this tool naturally leads a user toward (Q1). */
-export type PaidPath = "restaurant-pos" | "retail-pos" | "clinic" | "queue" | "platform";
+export type PaidPath =
+  | "restaurant-pos"
+  | "retail-pos"
+  | "clinic"
+  | "queue"
+  | "tuition"
+  | "platform";
 
 export type Integration = {
   /** The other tool involved. */
@@ -247,6 +259,54 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
       { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+    ],
+  },
+  {
+    slug: "clinic-manager",
+    name: "Clinic Manager",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-clinic-software",
+    owns: "clinic_patients",
+    reads: ["business", "customers"],
+    writes: ["clinic_patients", "clinic_visits", "clinic_appointments", "clinic_bills"],
+    dependsOn: ["business-profile"],
+    paidPath: "clinic",
+    integrations: [
+      { with: "appointment-book", ux: "Keep non-medical bookings in the generic day view" },
+      { with: "upi-qr-generator", ux: "Collect the consultation fee by UPI at the desk" },
+    ],
+  },
+  {
+    slug: "tuition-manager",
+    name: "Tuition Class Manager",
+    category: "education",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-tuition-software",
+    owns: "students",
+    reads: ["business"],
+    writes: [
+      "students",
+      "batches",
+      "attendance",
+      "fee_dues",
+      "fee_payments",
+      "tests",
+      "marks",
+      "student_notes",
+      "enquiries",
+      "holidays",
+    ],
+    dependsOn: ["business-profile"],
+    paidPath: "tuition",
+    integrations: [
+      { with: "business-profile", ux: "Fee receipts carry your name, phone and UPI ID" },
+      { with: "upi-qr-generator", ux: "Parents pay a fee reminder straight from the link" },
+      { with: "expense-tracker", ux: "Track what the class costs against what it collects" },
     ],
   },
   {
@@ -632,6 +692,25 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: [],
     paidPath: "platform",
     integrations: [{ with: "cash-book", ux: "Reconcile against your recorded cash book" }],
+  },
+
+  {
+    slug: "bank-statement-analyzer",
+    name: "Bank Statement Analyzer",
+    category: "finance",
+    kind: "app",
+    tier: "growth",
+    status: "built",
+    route: "/products/bank-statement-analyzer",
+    reads: [],
+    writes: [],
+    dependsOn: [],
+    paidPath: "platform",
+    integrations: [
+      { with: "bank-reconciliation", ux: "Hand off to the manual BRS workflow" },
+      { with: "cash-book", ux: "Compare statement cash entries with the cash book" },
+      { with: "expense-tracker", ux: "Classified debits line up with tracked expenses" },
+    ],
   },
 
   // ---- Statements & reports ----------------------------------------------
