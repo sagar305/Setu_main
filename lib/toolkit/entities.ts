@@ -104,6 +104,7 @@ export type EntityName =
   | "clinic_appointments"
   | "clinic_visits"
   | "clinic_bills";
+  | "holidays";
 
 /**
  * Permission tiers a tool holds against an entity it does not own (Chapter 5,
