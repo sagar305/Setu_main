@@ -1,10 +1,20 @@
 // User rules — deterministic, ordered, and entirely local (spec §12).
-// A rule fires only when every one of its conditions holds. Rules are tried in
-// priority order, highest first, and the first match wins.
+// ---------------------------------------------------------------------------
+// Two levels of logic, deliberately:
+//
+//   • Conditions are ANDed. "narration contains RENT" AND "amount > 10000".
+//   • The alternatives INSIDE one condition are ORed. "narration contains any
+//     of Swiggy, Zomato, Dominos" is one condition, not three rules.
+//
+// That second level is what makes a category practical to express: a CA thinks
+// "these fifteen merchants are all Business Meals", not "fifteen rules".
+//
+// Rules are tried in priority order, highest first, and the first match wins.
 
 import type {
   ClassificationRule,
   RuleCondition,
+  RuleOperator,
   Transaction,
 } from "@/lib/bankStatement/types";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
@@ -26,11 +36,35 @@ function fieldValue(transaction: Transaction, condition: RuleCondition): string 
   }
 }
 
+/**
+ * Every alternative this condition will accept. `values` is authoritative when
+ * present; `value` keeps rules saved before it existed working unchanged.
+ */
+export function conditionValues(condition: RuleCondition): string[] {
+  const list = (condition.values ?? []).map((entry) => entry.trim()).filter(Boolean);
+  if (list.length > 0) return list;
+  const single = condition.value?.trim();
+  return single ? [single] : [];
+}
+
+/** True when ANY of the condition's alternatives matches. */
 export function conditionMatches(transaction: Transaction, condition: RuleCondition): boolean {
+  const alternatives = conditionValues(condition);
+  if (alternatives.length === 0) return false;
+  // `between` is a range, not a list — it reads value/value2 directly.
+  if (condition.operator === "between") return matchesOne(transaction, condition, alternatives[0]);
+  return alternatives.some((alternative) => matchesOne(transaction, condition, alternative));
+}
+
+function matchesOne(
+  transaction: Transaction,
+  condition: RuleCondition,
+  alternative: string
+): boolean {
   const value = fieldValue(transaction, condition);
   const target = condition.field === "narration" || condition.field === "reference" || condition.field === "direction"
-    ? normaliseText(condition.value)
-    : condition.value.trim();
+    ? normaliseText(alternative)
+    : alternative.trim();
 
   switch (condition.operator) {
     case "contains":
@@ -62,6 +96,28 @@ export function ruleMatches(transaction: Transaction, rule: ClassificationRule):
   if (rule.conditions.length === 0) return false;
   return rule.conditions.every((condition) => conditionMatches(transaction, condition));
 }
+
+/** One condition, phrased the way it reads in the rules list. */
+export function describeCondition(condition: RuleCondition): string {
+  const alternatives = conditionValues(condition);
+  const operator =
+    condition.operator === "between"
+      ? `is between "${alternatives[0] ?? ""}" and "${condition.value2 ?? ""}"`
+      : alternatives.length > 1
+        ? `${OPERATOR_PHRASE[condition.operator]} any of ${alternatives.map((a) => `"${a}"`).join(", ")}`
+        : `${OPERATOR_PHRASE[condition.operator]} "${alternatives[0] ?? ""}"`;
+  return `${condition.field} ${operator}`;
+}
+
+const OPERATOR_PHRASE: Record<RuleOperator, string> = {
+  contains: "contains",
+  startsWith: "starts with",
+  endsWith: "ends with",
+  equals: "is",
+  greaterThan: "is more than",
+  lessThan: "is less than",
+  between: "is between",
+};
 
 /** Highest priority first; ties broken by creation order for stability. */
 export function sortRules(rules: ClassificationRule[]): ClassificationRule[] {
@@ -99,7 +155,7 @@ export function ruleFromTransaction(
     id,
     name: `Rule for ${anchor}`.slice(0, 60),
     conditions: [
-      { field: "narration", operator: "contains", value: anchor.toUpperCase() },
+      { field: "narration", operator: "contains", value: anchor.toUpperCase(), values: [anchor.toUpperCase()] },
     ],
     result: {
       category: transaction.category,

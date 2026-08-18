@@ -12,6 +12,21 @@ import { normaliseText } from "@/lib/bankStatement/utils/text";
 
 type Field = keyof ColumnMapping;
 
+/**
+ * Headers arrive decorated: "Debit (₹)", "Balance (Rs.)", "Amount (INR)",
+ * "Credit (in Rs)". The decoration says nothing about which field it is, so it
+ * comes off before matching — otherwise every amount column on a ₹-annotated
+ * statement fails to map.
+ */
+function stripDecoration(header: string): string {
+  return normaliseText(header)
+    .replace(/\(\s*(₹|RS\.?|INR|IN\s*RS\.?|IN\s*₹)\s*\)/g, " ")
+    .replace(/[₹]/g, " ")
+    .replace(/[.]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /** Header synonyms seen across Indian bank statements and accounting exports. */
 const HEADER_SYNONYMS: { field: Field; patterns: RegExp[] }[] = [
   {
@@ -26,8 +41,10 @@ const HEADER_SYNONYMS: { field: Field; patterns: RegExp[] }[] = [
   {
     field: "reference",
     patterns: [
-      // "Chq/Ref No", "Cheque - Reference Number", "Ref No", …
+      // "Chq/Ref No", "Ref No./Cheque No.", "Cheque - Reference Number", "Ref No"
       /^(CHQ|CHEQUE)?[/\- ]*(REF|REFERENCE)[/\- ]*(NO|NUMBER)?$/,
+      /^(REF|REFERENCE)[/\- ]*(NO|NUMBER)?[/\- ]*(CHQ|CHEQUE)[/\- ]*(NO|NUMBER)?$/,
+      /^(CHQ|CHEQUE)[/\- ]*(NO|NUMBER)?[/\- ]*(REF|REFERENCE)[/\- ]*(NO|NUMBER)?$/,
       /^REF\s*NO$/,
       /^UTR$/,
       /^TRANSACTION\s*ID$/,
@@ -55,7 +72,7 @@ export function looksLikeHeaderRow(cells: string[]): boolean {
 
   let hits = 0;
   for (const cell of filled) {
-    const text = normaliseText(cell).replace(/[.]/g, "");
+    const text = stripDecoration(cell);
     for (const { patterns } of HEADER_SYNONYMS) {
       if (patterns.some((pattern) => pattern.test(text))) {
         hits += 1;
@@ -84,7 +101,7 @@ export function mapFromHeaders(headers: string[]): ColumnMapping {
   const mapping: ColumnMapping = {};
 
   headers.forEach((header, index) => {
-    const text = normaliseText(header).replace(/[.]/g, "");
+    const text = stripDecoration(header);
     if (!text) return;
     for (const { field, patterns } of HEADER_SYNONYMS) {
       if (mapping[field] !== undefined) continue;
@@ -115,6 +132,7 @@ export function inferFromContent(rows: RawRow[], mapping: ColumnMapping): Column
   const stats = Array.from({ length: width }, (_, column) => {
     let dates = 0;
     let amounts = 0;
+    let codes = 0;
     let text = 0;
     let filled = 0;
     for (const row of sample) {
@@ -122,10 +140,14 @@ export function inferFromContent(rows: RawRow[], mapping: ColumnMapping): Column
       if (cell === "") continue;
       filled += 1;
       if (looksLikeDate(cell)) dates += 1;
+      // A short unbroken integer with no decimal point is a code (branch,
+      // office, cheque), not an amount. Treating it as money is how a branch
+      // code ends up mapped as the debit column.
+      else if (/^\d{1,6}$/.test(cell)) codes += 1;
       else if (looksLikeAmount(cell)) amounts += 1;
       else text += 1;
     }
-    return { column, dates, amounts, text, filled };
+    return { column, dates, amounts, codes, text, filled };
   });
 
   if (result.date === undefined) {

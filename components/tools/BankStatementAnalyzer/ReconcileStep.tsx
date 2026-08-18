@@ -159,7 +159,7 @@ export function ReconcileStep() {
           Reconciliation compares an imported bank statement against your books.
         </p>
         <Link
-          href="/tools/bank-statement-analyzer/import"
+          href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
           Go to import

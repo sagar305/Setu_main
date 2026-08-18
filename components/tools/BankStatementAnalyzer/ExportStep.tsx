@@ -28,7 +28,7 @@ export function ExportStep() {
         <h2 className="text-xl font-bold text-ink">Nothing to export yet</h2>
         <p className="mt-2 text-sm text-muted">Import a statement first.</p>
         <Link
-          href="/tools/bank-statement-analyzer/import"
+          href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
           Go to import

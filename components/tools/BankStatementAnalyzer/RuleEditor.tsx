@@ -24,8 +24,9 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
-import { countMatches } from "@/lib/bankStatement/classification/rulesEngine";
+import { conditionValues, countMatches } from "@/lib/bankStatement/classification/rulesEngine";
 import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { KeywordInput } from "@/components/tools/BankStatementAnalyzer/KeywordInput";
 
 const FIELD_LABELS: Record<RuleField, string> = {
   narration: "Narration",
@@ -82,7 +83,9 @@ export function RuleEditor({
     }));
 
   const options = activeCategories(categories);
-  const valid = draft.name.trim() !== "" && draft.conditions.every((c) => c.value.trim() !== "");
+  const valid =
+    draft.name.trim() !== "" &&
+    draft.conditions.every((condition) => conditionValues(condition).length > 0);
 
   return (
     <Card>
@@ -105,6 +108,11 @@ export function RuleEditor({
 
         <div>
           <span className="mb-1.5 block text-sm font-semibold text-ink">Conditions (all must match)</span>
+          <p className="mb-3 text-xs text-muted">
+            Give one condition several keywords and <strong>any one of them</strong> satisfies it —
+            so a whole category is one rule, not one rule per merchant. Press Enter or comma to add
+            each keyword.
+          </p>
           <div className="space-y-3">
             {draft.conditions.map((condition, index) => (
               <div key={index} className="grid gap-2 sm:grid-cols-[130px_140px_1fr_auto]">
@@ -140,33 +148,45 @@ export function RuleEditor({
                 <div className="flex gap-2">
                   {condition.field === "direction" ? (
                     <Select
-                      value={condition.value}
-                      onChange={(event) => setCondition(index, { value: event.target.value })}
+                      value={conditionValues(condition)[0] ?? "DEBIT"}
+                      onChange={(event) =>
+                        setCondition(index, { value: event.target.value, values: [event.target.value] })
+                      }
                       aria-label="Value"
                     >
                       <option value="DEBIT">Debit</option>
                       <option value="CREDIT">Credit</option>
                     </Select>
-                  ) : condition.field === "amount" ? (
+                  ) : condition.field === "amount" && condition.operator !== "equals" ? (
                     <NumberInput
-                      value={condition.value}
-                      onChange={(event) => setCondition(index, { value: event.target.value })}
+                      value={conditionValues(condition)[0] ?? ""}
+                      onChange={(event) =>
+                        setCondition(index, { value: event.target.value, values: [event.target.value] })
+                      }
                       placeholder="0.00"
                       aria-label="Value"
                     />
                   ) : condition.field === "date" ? (
                     <TextInput
                       type="date"
-                      value={condition.value}
-                      onChange={(event) => setCondition(index, { value: event.target.value })}
+                      value={conditionValues(condition)[0] ?? ""}
+                      onChange={(event) =>
+                        setCondition(index, { value: event.target.value, values: [event.target.value] })
+                      }
                       aria-label="Value"
                     />
                   ) : (
-                    <TextInput
-                      value={condition.value}
-                      onChange={(event) => setCondition(index, { value: event.target.value })}
-                      placeholder="e.g. SWIGGY"
-                      aria-label="Value"
+                    // Narration, reference and "amount is" accept a list —
+                    // any one of them satisfies the condition.
+                    <KeywordInput
+                      values={conditionValues(condition)}
+                      onChange={(values) =>
+                        setCondition(index, { values, value: values[0] ?? "" })
+                      }
+                      placeholder={
+                        condition.field === "amount" ? "e.g. 199 — Enter to add" : "e.g. SWIGGY — Enter to add"
+                      }
+                      ariaLabel="Keywords, any of which matches"
                     />
                   )}
 
@@ -213,7 +233,7 @@ export function RuleEditor({
                 ...draft,
                 conditions: [
                   ...draft.conditions,
-                  { field: "narration", operator: "contains", value: "" },
+                  { field: "narration", operator: "contains", value: "", values: [] },
                 ],
               })
             }
