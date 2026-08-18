@@ -35,6 +35,7 @@ import type {
   DineMaterial,
   DineRecipeLine,
   DineStockMove,
+  DineReservation,
   DineSyncSlice,
   DineTable,
   DineVariation,
@@ -63,6 +64,7 @@ export type DineWorkspaceSnapshot = DineMetaSnapshot & {
   materials: DineMaterial[];
   recipeLines: DineRecipeLine[];
   stockMoves: DineStockMove[];
+  reservations: DineReservation[];
 };
 
 type TabPayload = { tab: string; headers: string[]; rows: (string | number | boolean)[][] };
@@ -78,6 +80,7 @@ export const DINE_SHEET_TABS = {
   materials: "Materials",
   recipes: "Recipes",
   stockMoves: "Stock Movements",
+  reservations: "Bookings",
 } as const;
 
 /** Images would blow past the 50k-character cell limit, so they stay local. */
@@ -215,6 +218,45 @@ function customersTab(customers: DineCustomer[]): TabPayload {
       customer.notes,
       customer.createdAt,
       JSON.stringify(customer),
+    ]),
+  };
+}
+
+/**
+ * Bookings, with the advance broken into asked / received / what became of it.
+ *
+ * Worth its own tab rather than folding into Bills: an advance is money held
+ * against a meal that has not happened, so a sheet that mixed the two would
+ * show a Saturday of deposits as Friday's sales.
+ */
+function reservationsTab(reservations: DineReservation[]): TabPayload {
+  return {
+    tab: DINE_SHEET_TABS.reservations,
+    headers: [
+      "When",
+      "Business Date",
+      "Guest",
+      "Phone",
+      "Guests",
+      "Table",
+      "Status",
+      "Advance Asked",
+      "Advance Paid",
+      "Outcome",
+      "_json",
+    ],
+    rows: reservations.map((row) => [
+      row.startsAt,
+      row.businessDate,
+      row.guestName,
+      row.phone,
+      row.partySize,
+      row.tableName,
+      row.status,
+      toMajor(row.depositRequired),
+      toMajor(row.depositPaid),
+      row.depositOutcome,
+      JSON.stringify(row),
     ]),
   };
 }
@@ -388,6 +430,7 @@ export function buildDineTabPayloads(
     );
   }
   if (slices.includes("customers")) tabs.push(customersTab(snapshot.customers));
+  if (slices.includes("reservations")) tabs.push(reservationsTab(snapshot.reservations));
   if (slices.includes("bills")) {
     tabs.push(billsTab(snapshot.bills));
     tabs.push(billItemsTab(snapshot.billItems, snapshot.bills));
@@ -483,6 +526,15 @@ export type DineSheetPullResult = {
   materials: DineMaterial[];
   recipeLines: DineRecipeLine[];
   stockMoves: DineStockMove[];
+  /**
+   * Absent — not empty — when the sheet has no such tab.
+   *
+   * Bookings arrived with script v2. A restaurant still running v1 pulls a
+   * response with no Bookings tab at all, and an empty array there would read
+   * as "there are none" and wipe every booking. undefined means "this sheet
+   * knows nothing about them", which restore leaves alone.
+   */
+  reservations?: DineReservation[];
 };
 
 function parseJsonColumn<T>(rows: unknown[][]): T[] {
@@ -578,6 +630,9 @@ export async function pullFromDineSheet(url: string): Promise<DineSheetPullResul
     materials: parseJsonColumn<DineMaterial>(body.tabs[DINE_SHEET_TABS.materials] ?? []),
     recipeLines: parseJsonColumn<DineRecipeLine>(body.tabs[DINE_SHEET_TABS.recipes] ?? []),
     stockMoves: parseJsonColumn<DineStockMove>(body.tabs[DINE_SHEET_TABS.stockMoves] ?? []),
+    reservations: body.tabs[DINE_SHEET_TABS.reservations]
+      ? parseJsonColumn<DineReservation>(body.tabs[DINE_SHEET_TABS.reservations])
+      : undefined,
   };
 }
 
@@ -630,6 +685,8 @@ export function buildBackupFromDineSheetPull(
       dine_materials: pull.materials,
       dine_recipe_lines: pull.recipeLines,
       dine_stock_moves: pull.stockMoves,
+      // Only when the sheet actually carried them — see DineSheetPullResult.
+      ...(pull.reservations ? { dine_reservations: pull.reservations } : {}),
     },
   };
 }
@@ -638,7 +695,7 @@ export function buildBackupFromDineSheetPull(
 // The script users paste into their Google Sheet (Extensions → Apps Script).
 // Kept free of backticks/template literals so it embeds cleanly here.
 // ---------------------------------------------------------------------------
-export const APPS_SCRIPT_TEMPLATE = `// Setu Free Dine — Google Sheet sync script (v1)
+export const APPS_SCRIPT_TEMPLATE = `// Setu Free Dine — Google Sheet sync script (v2)
 // 1. In your Google Sheet: Extensions -> Apps Script, replace everything with this file.
 // 2. Click Deploy -> New deployment -> type: Web app.
 //    - Execute as: Me
@@ -649,7 +706,7 @@ export const APPS_SCRIPT_TEMPLATE = `// Setu Free Dine — Google Sheet sync scr
 function doGet(e) {
   var action = (e && e.parameter && e.parameter.action) || "";
   if (action === "pull") return respond_(pullAll_());
-  return respond_({ ok: true, app: "setu-dine-sheet-sync", version: 1 });
+  return respond_({ ok: true, app: "setu-dine-sheet-sync", version: 2 });
 }
 
 function doPost(e) {
@@ -694,7 +751,7 @@ function writeTab_(name, values, keepExisting) {
 function pullAll_() {
   var names = [
     "Meta", "Menu", "Menu Options", "Customers", "Bills", "Bill Items", "Payments",
-    "Materials", "Recipes", "Stock Movements"
+    "Materials", "Recipes", "Stock Movements", "Bookings"
   ];
   var ss = SpreadsheetApp.getActive();
   var tabs = {};

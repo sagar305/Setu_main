@@ -6,7 +6,7 @@ import { useDine } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
 import { billsCsv, downloadCsv } from "@/lib/dine/csv";
 import { ORDER_TYPE_LABELS, type DineBill } from "@/lib/dine/types";
-import { BillView } from "./BillView";
+import { BillView, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode, printedAt } from "./printing";
 import {
   EmptyState,
@@ -22,6 +22,8 @@ import {
 
 export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
   const { bills, billItems, billPayments, business, settings, cancelBill } = useDine();
+  const template = useBillTemplate();
+  const paperSize = template?.paperSize ?? settings.billPaperSize;
   const currency = business?.currency ?? "INR";
 
   const [query, setQuery] = useState(externalQuery ?? "");
@@ -221,7 +223,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
       <Modal open onClose={onClose} title={bill.billLabel}>
         <div
           className={`mx-auto rounded-xl border border-muted-line/40 p-4 ${PREVIEW_CLASS}`}
-          style={{ maxWidth: `${PAPER_CONTENT_MM[settings.billPaperSize] + 16}mm` }}
+          style={{ maxWidth: `${PAPER_CONTENT_MM[paperSize] + 16}mm` }}
         >
           <BillView
             ref={printRef}
@@ -230,6 +232,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
             payments={payments}
             business={business}
             settings={settings}
+            template={template}
           />
         </div>
 
@@ -242,7 +245,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
           )}
           <button
             type="button"
-            onClick={() => printNode(printRef.current, settings.billPaperSize, bill.billLabel)}
+            onClick={() => printNode(printRef.current, paperSize, bill.billLabel)}
             className={primaryBtnClass}
           >
             <Printer className="h-4 w-4" />

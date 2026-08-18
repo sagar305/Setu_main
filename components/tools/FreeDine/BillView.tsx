@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { formatPaise, amountInWords, toMajor } from "@/lib/dine/money";
 import {
   ORDER_TYPE_LABELS,
@@ -10,7 +10,45 @@ import {
   type DineBusiness,
   type DineSettings,
 } from "@/lib/dine/types";
+import type { ReceiptTemplate } from "@/lib/toolkit/types";
+import { getReceiptTemplates } from "@/lib/toolkit/workspace";
+import { useDine } from "@/lib/dine/store";
 import { printedAt } from "./printing";
+
+/**
+ * The bill layout chosen in Settings, designed in the Receipt Designer.
+ *
+ * Templates live in the shared workspace rather than in Free Dine's own
+ * database — they are a toolkit tool's output, like the Customer Ledger's
+ * contacts, so a restaurant designs one look and uses it across the tools.
+ * Returns null when none is chosen or the workspace cannot be read, and the
+ * built-in layout takes over.
+ */
+export function useBillTemplate(): ReceiptTemplate | null {
+  const { settings } = useDine();
+  const templateId = settings.billTemplateId;
+  const [template, setTemplate] = useState<ReceiptTemplate | null>(null);
+
+  useEffect(() => {
+    if (!templateId) {
+      setTemplate(null);
+      return;
+    }
+    let cancelled = false;
+    getReceiptTemplates()
+      .then((all) => {
+        if (!cancelled) setTemplate(all.find((row) => row.id === templateId) ?? null);
+      })
+      .catch(() => {
+        // A missing workspace just means the built-in layout.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [templateId]);
+
+  return template;
+}
 
 /**
  * The guest's bill. Printed to a thermal roll or A4, and captured as a PDF by
@@ -29,17 +67,49 @@ export const BillView = forwardRef<
     payments: DineBillPayment[];
     business: DineBusiness | null;
     settings: DineSettings;
+    /** A layout designed in the Receipt Designer; null = the built-in one. */
+    template?: ReceiptTemplate | null;
   }
->(function BillView({ bill, items, payments, business, settings }, ref) {
+>(function BillView({ bill, items, payments, business, settings, template }, ref) {
   const currency = business?.currency ?? "INR";
   const money = (paise: number) => formatPaise(paise, currency).replace(/^[^\d-]+/, "");
   const showItems = items.length > 0;
 
+  // A designed template wins over the built-in defaults, field by field, so a
+  // restaurant that only changed the footer keeps everything else.
+  const accent = template?.accentColor || "#000000";
+  const showBusiness = template ? template.showBusinessInfo : settings.showBusinessInfoOnBill;
+  const showGstin = template ? template.showGstin : true;
+  const showLogo = template ? template.showLogo : false;
+  const footerText = template?.footerText || settings.receiptFooter;
+  const headerText = template?.headerText ?? "";
+  const boldTotals = template ? template.boldTotals : true;
+
+  // "none" still needs the vertical rhythm a rule was giving, or the sections
+  // run together into one block of text.
+  const separator = template?.separator ?? "dashed";
+  const Rule = ({ strong }: { strong?: boolean }) => {
+    if (separator === "none") return <div style={{ height: "4px" }} />;
+    if (separator === "solid" || strong) return <div className="solid" style={{ borderColor: accent }} />;
+    return <div className="rule" style={{ borderColor: accent }} />;
+  };
+
   return (
     <div ref={ref}>
-      {settings.showBusinessInfoOnBill && (
+      {showLogo && business?.logoDataUrl && (
         <div className="c">
-          <p className="lg b" style={{ margin: 0 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={business.logoDataUrl}
+            alt=""
+            style={{ maxHeight: "18mm", maxWidth: "100%", margin: "0 auto 2mm" }}
+          />
+        </div>
+      )}
+
+      {showBusiness && (
+        <div className="c">
+          <p className="lg b" style={{ margin: 0, color: accent }}>
             {business?.name ?? "Restaurant"}
           </p>
           {business?.address && (
@@ -52,7 +122,7 @@ export const BillView = forwardRef<
               {business.phone}
             </p>
           )}
-          {business?.gstin && (
+          {showGstin && business?.gstin && (
             <p className="sm b" style={{ margin: "2px 0 0" }}>
               GSTIN: {business.gstin}
             </p>
@@ -60,7 +130,13 @@ export const BillView = forwardRef<
         </div>
       )}
 
-      <div className="rule" />
+      {headerText && (
+        <p className="c sm" style={{ margin: "2px 0 0" }}>
+          {headerText}
+        </p>
+      )}
+
+      <Rule />
 
       <div className="row">
         <span className="b">{bill.billLabel}</span>
@@ -89,7 +165,7 @@ export const BillView = forwardRef<
         </p>
       )}
 
-      <div className="solid" />
+      <Rule strong />
 
       {showItems ? (
         <table>
@@ -131,7 +207,7 @@ export const BillView = forwardRef<
         </p>
       )}
 
-      <div className="rule" />
+      <Rule />
 
       <div className="row">
         <span>Subtotal</span>
@@ -157,7 +233,7 @@ export const BillView = forwardRef<
 
       {bill.taxBreakup.length > 0 && (
         <>
-          <div className="rule" />
+          <Rule />
           {bill.taxBreakup.map((slab) => (
             <div key={slab.rate}>
               <div className="row sm">
@@ -177,8 +253,8 @@ export const BillView = forwardRef<
         </>
       )}
 
-      <div className="solid" />
-      <div className="row xl b">
+      <Rule strong />
+      <div className={`row xl ${boldTotals ? "b" : ""}`} style={{ color: accent }}>
         <span>TOTAL</span>
         <span>{money(bill.total)}</span>
       </div>
@@ -193,7 +269,7 @@ export const BillView = forwardRef<
 
       {payments.length > 0 && (
         <>
-          <div className="rule" />
+          <Rule />
           {payments.map((payment) => (
             <div className="row sm" key={payment.id}>
               <span>{payment.methodName}</span>
@@ -209,9 +285,9 @@ export const BillView = forwardRef<
         </p>
       )}
 
-      <div className="rule" />
+      <Rule />
       <p className="c sm" style={{ margin: 0 }}>
-        {settings.receiptFooter}
+        {footerText}
       </p>
       {bill.serviceCharge > 0 && (
         <p className="c sm" style={{ margin: "4px 0 0" }}>

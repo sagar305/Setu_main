@@ -59,6 +59,14 @@ const TABLE_STATE_STYLES: Record<TableState, { label: string; chip: string; card
     chip: "bg-indigo/10 text-indigo border-indigo/40",
     card: "border-indigo/60 bg-indigo/5 hover:border-indigo",
   },
+  // A free table that is spoken for. Never produced by floorTables, which has
+  // no clock — the floor works it out from the bookings and the time, and
+  // passes it in, so the store stays free of anything that ticks.
+  reserved: {
+    label: "Reserved",
+    chip: "bg-purple-100 text-purple-800 border-purple-300",
+    card: "border-purple-300 bg-purple-50 hover:border-purple-500",
+  },
 };
 
 /**
