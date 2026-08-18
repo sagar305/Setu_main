@@ -23,6 +23,7 @@ import { selectAdapter, type BankAdapter } from "@/lib/bankStatement/parser/bank
 import { normalise } from "@/lib/bankStatement/normalization/normalizer";
 import { parseStatusFrom, validate } from "@/lib/bankStatement/normalization/validation";
 import { detectDateFormat } from "@/lib/bankStatement/utils/dates";
+import { applyRowPlan, isRowPlanEmpty, type RowPlan } from "@/lib/bankStatement/parser/rowPlan";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
 
 export { PdfPasswordRequiredError };
@@ -34,6 +35,12 @@ export type ParseOptions = {
   mapping?: ColumnMapping;
   /** Overrides detection when the CA has resolved an ambiguous date format. */
   dateFormat?: DateFormat;
+  /**
+   * The CA's corrections to the table's shape — where it starts and ends, which
+   * rows are not transactions, which are continuations. Applied before the
+   * header is looked for, because it is what decides where the header is.
+   */
+  rowPlan?: RowPlan;
   onProgress?: (stage: string, current?: number, total?: number) => void;
 };
 
@@ -47,6 +54,9 @@ export function detectFormat(fileName: string, type: string): SourceFormat | nul
   if (type.includes("ms-excel")) return "XLS";
   return null;
 }
+
+/** How many extracted rows the repair grid will show. */
+const MAX_GRID_ROWS = 5000;
 
 let statementCounter = 0;
 function nextStatementId(): string {
@@ -122,13 +132,21 @@ export async function parseStatementFile(
 
   const { adapter, detected } = selectAdapter(extraction.text);
 
+  // The CA's plan, where there is one, decides the table's extent before
+  // anything is detected — the header cannot be found above a start marker
+  // they have already told us is letterhead.
+  const plan = options.rowPlan ?? {};
+  const planned = isRowPlanEmpty(plan)
+    ? { rows: extraction.rows, headerIndex: -1 }
+    : applyRowPlan(extraction.rows, plan);
+
   // Split the preamble from the table.
-  const headerIndex = findHeaderRow(extraction.rows);
-  const headers = headerIndex >= 0 ? extraction.rows[headerIndex].cells : [];
+  const headerIndex = planned.headerIndex >= 0 ? planned.headerIndex : findHeaderRow(planned.rows);
+  const headers = headerIndex >= 0 ? planned.rows[headerIndex].cells : [];
   // Multi-page statements repeat the column header on every page. Left in, a
   // header row has no date and no amount, so it looks like wrapped narration
   // and gets glued onto the last transaction of the previous page.
-  const dataRows = (headerIndex >= 0 ? extraction.rows.slice(headerIndex + 1) : extraction.rows)
+  const dataRows = (headerIndex >= 0 ? planned.rows.slice(headerIndex + 1) : planned.rows)
     .filter((row) => !looksLikeHeaderRow(row.cells));
 
   const mapping = options.mapping ?? buildMapping(headers, dataRows, detected ?? adapter);
@@ -204,6 +222,9 @@ export async function parseStatementFile(
     mapping,
     headers,
     rawRows: dataRows.slice(0, 200),
+    // Bounded: the repair grid needs the whole file, but a runaway extraction
+    // should not be able to hold an unbounded copy of it in memory.
+    grid: extraction.rows.slice(0, MAX_GRID_ROWS),
   };
 }
 

@@ -22,6 +22,7 @@ import {
 } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 import { ColumnMapper } from "@/components/tools/BankStatementAnalyzer/ColumnMapper";
+import { StatementGrid } from "@/components/tools/BankStatementAnalyzer/StatementGrid";
 import { ProgressPanel, type ProgressState } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import { PrivacyNote, ProcessingNote } from "@/components/tools/BankStatementAnalyzer/PrivacyNote";
 import { SampleDownload } from "@/components/tools/BankStatementAnalyzer/SampleDownload";
@@ -31,6 +32,12 @@ import {
   parseStatementFile,
 } from "@/lib/bankStatement/parser";
 import { describeMappingGaps, isMappingUsable } from "@/lib/bankStatement/parser/columns";
+import { isRowPlanEmpty, type RowPlan } from "@/lib/bankStatement/parser/rowPlan";
+import {
+  describeFailure,
+  formatDiagnostics,
+  type ImportFailure,
+} from "@/lib/bankStatement/utils/diagnostics";
 import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 import { buildDemoData } from "@/lib/bankStatement/demo/sampleStatement";
 import type {
@@ -57,32 +64,50 @@ export function ImportStep() {
   const [pending, setPending] = useState<Pending | null>(null);
   const [mapping, setMapping] = useState<ColumnMapping | null>(null);
   const [dateFormat, setDateFormat] = useState<DateFormat | null>(null);
+  const [rowPlan, setRowPlan] = useState<RowPlan>({});
   const [passwordFor, setPasswordFor] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [removing, setRemoving] = useState<string | null>(null);
   const [largeFileNotice, setLargeFileNotice] = useState<string | null>(null);
+  const [failure, setFailure] = useState<ImportFailure | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  // The last stage the parser reported, so a failure can say where it happened
+  // rather than only what the exception was.
+  const stageRef = useRef("Reading file");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const run = useCallback(
     async (
       file: File,
-      options: { password?: string; mapping?: ColumnMapping; dateFormat?: DateFormat } = {}
+      options: {
+        password?: string;
+        mapping?: ColumnMapping;
+        dateFormat?: DateFormat;
+        rowPlan?: RowPlan;
+      } = {}
     ) => {
       setBusy(true);
       setError(null);
+      setFailure(null);
+      if (options.rowPlan === undefined) setRowPlan({});
+      setCopied(false);
       setPasswordError(null);
+      stageRef.current = "Reading file";
       try {
         const outcome = await parseStatementFile(file, {
           ...options,
-          onProgress: (stage, current, total) =>
+          onProgress: (stage, current, total) => (
+            (stageRef.current = stage),
             setProgress({
               label: stage,
               current,
               total,
               unit: stage === "Parsing statement" ? "page" : undefined,
-            }),
+            })
+          ),
         });
         setPending({ file, outcome });
         setMapping(outcome.mapping ?? null);
@@ -95,6 +120,7 @@ export function ImportStep() {
           setPasswordError(caught.incorrect ? "Incorrect password. Please try again." : null);
         } else {
           setError(caught instanceof Error ? caught.message : "This file could not be read.");
+          setFailure(describeFailure(caught, stageRef.current, file));
         }
       } finally {
         setBusy(false);
@@ -159,8 +185,12 @@ export function ImportStep() {
 
   const remap = useCallback(() => {
     if (!pending || !mapping) return;
-    void run(pending.file, { mapping, dateFormat: dateFormat ?? undefined });
-  }, [dateFormat, mapping, pending, run]);
+    void run(pending.file, {
+      mapping,
+      dateFormat: dateFormat ?? undefined,
+      rowPlan: isRowPlanEmpty(rowPlan) ? undefined : rowPlan,
+    });
+  }, [dateFormat, mapping, pending, rowPlan, run]);
 
   return (
     <div className="space-y-6">
@@ -243,9 +273,43 @@ export function ImportStep() {
         <Card className="border-red-200">
           <div className="flex gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
-            <div>
+            <div className="min-w-0 flex-1">
               <h3 className="font-bold text-ink">We could not read that file</h3>
               <p className="mt-1 text-sm text-muted">{error}</p>
+
+              {failure ? (
+                <>
+                  <p className="mt-2 text-sm text-muted">
+                    It failed while <strong className="text-ink">{failure.stage.toLowerCase()}</strong>.
+                    If this is a PDF, a CSV or Excel copy of the same statement usually imports
+                    cleanly — most banks offer one alongside the PDF.
+                  </p>
+
+                  <details className="mt-3">
+                    <summary className="cursor-pointer text-sm font-semibold text-indigo">
+                      Technical details
+                    </summary>
+                    <p className="mt-2 text-xs text-muted">
+                      Nothing from your statement is in here — no narrations, no amounts, not even
+                      the file name. Only which step failed and what this browser supports.
+                    </p>
+                    <pre className="mt-2 max-h-56 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-cream-paper/70 p-3 text-[11px] leading-relaxed text-muted">
+                      {formatDiagnostics(failure)}
+                    </pre>
+                    <SecondaryButton
+                      className="mt-2 !px-3 !py-1.5 !text-xs"
+                      onClick={() => {
+                        void window.navigator.clipboard
+                          ?.writeText(formatDiagnostics(failure))
+                          .then(() => setCopied(true))
+                          .catch(() => setCopied(false));
+                      }}
+                    >
+                      {copied ? "Copied" : "Copy details"}
+                    </SecondaryButton>
+                  </details>
+                </>
+              ) : null}
             </div>
           </div>
         </Card>
@@ -298,6 +362,8 @@ export function ImportStep() {
           pending={pending}
           mapping={mapping}
           dateFormat={dateFormat}
+          rowPlan={rowPlan}
+          onRowPlanChange={setRowPlan}
           onMappingChange={setMapping}
           onDateFormatChange={(value) => {
             setDateFormat(value);
@@ -419,6 +485,8 @@ function PendingReview({
   pending,
   mapping,
   dateFormat,
+  rowPlan,
+  onRowPlanChange,
   onMappingChange,
   onDateFormatChange,
   onRemap,
@@ -429,6 +497,8 @@ function PendingReview({
   pending: Pending;
   mapping: ColumnMapping | null;
   dateFormat: DateFormat | null;
+  rowPlan: RowPlan;
+  onRowPlanChange: (plan: RowPlan) => void;
   onMappingChange: (mapping: ColumnMapping) => void;
   onDateFormatChange: (format: DateFormat) => void;
   onRemap: () => void;
@@ -436,7 +506,7 @@ function PendingReview({
   onCancel: () => void;
   busy: boolean;
 }) {
-  const { statement, transactions, headers, rawRows, ambiguousDateFormat } = pending.outcome;
+  const { statement, transactions, headers, rawRows, grid, ambiguousDateFormat } = pending.outcome;
   const report = statement.validation;
   const summary = summariseParse(report, statement.parseStatus);
   const gaps = mapping ? describeMappingGaps(mapping) : [];
@@ -560,6 +630,32 @@ function PendingReview({
               Re-read with this mapping
             </SecondaryButton>
           </div>
+        </Card>
+      ) : null}
+
+      {grid && grid.length > 0 && mapping ? (
+        <Card>
+          <details open={statement.parseStatus !== "VALID"}>
+            <summary className="cursor-pointer text-lg font-bold text-ink">
+              Fix the columns and rows
+            </summary>
+            <p className="mt-1 text-sm text-muted">
+              Every row we found in the file, exactly as we read it. Use this when the numbers above
+              look wrong — mark where the table starts, hide the rows that are not transactions, and
+              join any narration that wrapped onto a second line.
+            </p>
+            <div className="mt-4">
+              <StatementGrid
+                grid={grid}
+                mapping={mapping}
+                plan={rowPlan}
+                onMappingChange={onMappingChange}
+                onPlanChange={onRowPlanChange}
+                onApply={onRemap}
+                busy={busy}
+              />
+            </div>
+          </details>
         </Card>
       ) : null}
 

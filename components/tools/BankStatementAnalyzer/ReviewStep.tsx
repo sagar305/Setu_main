@@ -6,6 +6,7 @@
 // glance what still needs attention.
 
 import { useCallback, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Card, ConfirmDialog, Field, PrimaryButton, SecondaryButton, Select, TextInput } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
@@ -21,7 +22,29 @@ import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
 
+// Loaded on the client, and only with this tab. Everything the AI feature needs
+// — the worker, the library, the model — hangs off this panel, so keeping it in
+// its own chunk is what stops the analyzer's first load from growing at all.
+const AiCategorisationPanel = dynamic(
+  () =>
+    import("@/components/tools/BankStatementAnalyzer/AiCategorisationPanel").then(
+      (module) => module.AiCategorisationPanel
+    ),
+  { ssr: false }
+);
+
 type Tab = "transactions" | "rules" | "categories" | "activity";
+
+/**
+ * Rows the CA still has to look at: nothing categorised, a confidence below
+ * their threshold, or a category the semantic model applied in its middle band
+ * and explicitly flagged.
+ */
+function needsAttention(transaction: Transaction, threshold: number): boolean {
+  if (!transaction.category) return true;
+  if (transaction.needsReview) return true;
+  return (transaction.confidence ?? 0) < threshold;
+}
 
 type Filters = {
   search: string;
@@ -67,10 +90,8 @@ export function ReviewStep() {
       if (filters.type && transaction.classificationType !== filters.type) return false;
       if (filters.direction && transaction.transactionType !== filters.direction) return false;
       if (filters.status === "duplicates" && !transaction.isDuplicate) return false;
-      if (filters.status === "needs-review") {
-        const needsReview =
-          !transaction.category || (transaction.confidence ?? 0) < settings.reviewConfidenceThreshold;
-        if (!needsReview) return false;
+      if (filters.status === "needs-review" && !needsAttention(transaction, settings.reviewConfidenceThreshold)) {
+        return false;
       }
       if (filters.status === "issues" && (transaction.rowStatus ?? "VALID") === "VALID") return false;
       if (filters.status === "high-value" && !transaction.isHighValue) return false;
@@ -80,9 +101,8 @@ export function ReviewStep() {
 
   const needsReview = useMemo(
     () =>
-      activeTransactions.filter(
-        (transaction) =>
-          !transaction.category || (transaction.confidence ?? 0) < settings.reviewConfidenceThreshold
+      activeTransactions.filter((transaction) =>
+        needsAttention(transaction, settings.reviewConfidenceThreshold)
       ).length,
     [activeTransactions, settings.reviewConfidenceThreshold]
   );
@@ -189,8 +209,8 @@ export function ReviewStep() {
       {needsReview > 0 ? (
         <p className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
           <strong>{needsReview.toLocaleString("en-IN")}</strong> transaction
-          {needsReview === 1 ? "" : "s"} are uncategorised or below {settings.reviewConfidenceThreshold}%
-          confidence.{" "}
+          {needsReview === 1 ? "" : "s"} are uncategorised, flagged for review, or below{" "}
+          {settings.reviewConfidenceThreshold}% confidence.{" "}
           <button
             type="button"
             className="font-semibold underline"
@@ -227,6 +247,8 @@ export function ReviewStep() {
 
       {tab === "transactions" ? (
         <>
+          <AiCategorisationPanel />
+
           <Card>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               <Field label="Search">
@@ -443,7 +465,8 @@ export function ReviewStep() {
               <div>
                 <h3 className="text-lg font-bold text-ink">Classification rules</h3>
                 <p className="mt-1 text-sm text-muted">
-                  Rules run before pattern matching and always win. They are stored on this device.
+                  Rules run before pattern matching and the AI model, and always win. Approving a
+                  suggestion adds one here automatically. They are stored on this device.
                 </p>
               </div>
               <PrimaryButton
@@ -478,7 +501,17 @@ export function ReviewStep() {
                       className="flex flex-wrap items-center gap-3 rounded-xl border border-muted-line/30 px-4 py-3"
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold text-ink">{rule.name}</p>
+                        <p className="truncate text-sm font-semibold text-ink">
+                          {rule.name}
+                          {rule.origin === "AI_APPROVED" ? (
+                            <span
+                              className="ml-2 rounded-full bg-indigo/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo"
+                              title="Written when you approved or corrected a suggestion. It runs before the model, so this merchant is never sent to it again."
+                            >
+                              From review
+                            </span>
+                          ) : null}
+                        </p>
                         <p className="truncate text-xs text-muted">
                           {rule.conditions.map(describeCondition).join(" and ")}
                         </p>

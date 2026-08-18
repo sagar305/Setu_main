@@ -3,7 +3,14 @@
 
 import { describe, expect, it } from "vitest";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
-import { buildPartyMemory, classify, confidenceBand } from "@/lib/bankStatement/classification/classifier";
+import {
+  applyClassification,
+  buildPartyMemory,
+  classify,
+  confidenceBand,
+  sourceBadge,
+  sourceLabel,
+} from "@/lib/bankStatement/classification/classifier";
 import {
   conditionMatches,
   conditionValues,
@@ -12,7 +19,7 @@ import {
   findMatchingRule,
   ruleFromTransaction,
 } from "@/lib/bankStatement/classification/rulesEngine";
-import { defaultCategories } from "@/lib/bankStatement/classification/categories";
+import { defaultCategories, mergeWithDefaults } from "@/lib/bankStatement/classification/categories";
 
 function transaction(overrides: Partial<Transaction> = {}): Transaction {
   return {
@@ -178,6 +185,40 @@ describe("classification pipeline", () => {
   });
 });
 
+describe("applying a classification", () => {
+  // A rule or a pattern taking over a row the model had answered must not leave
+  // the model's flag for review behind on it.
+  it("clears what the semantic model left on the row", () => {
+    const row = transaction({
+      category: "shopping",
+      classificationSource: "AI",
+      confidence: 74,
+      needsReview: true,
+      aiSimilarity: 0.42,
+    });
+
+    applyClassification(
+      row,
+      classify(transaction({ narration: "ACH DR/OFFICE RENT/SKYLINE" }), []),
+      100000
+    );
+
+    expect(row.category).toBe("rent");
+    expect(row.classificationSource).toBe("HEURISTIC");
+    expect(row.needsReview).toBeUndefined();
+    expect(row.aiSimilarity).toBeUndefined();
+  });
+
+  it("names every source it can be given", () => {
+    for (const source of ["RULE", "MANUAL", "MEMORY", "HEURISTIC", "AI", "UNCLASSIFIED"] as const) {
+      expect(sourceLabel(source)).toBeTruthy();
+      expect(sourceBadge(source)).toBeTruthy();
+    }
+    expect(sourceBadge("AI")).toBe("AI");
+    expect(sourceBadge("RULE")).toBe("Rule");
+  });
+});
+
 describe("categories", () => {
   it("ships the CA-oriented default tree", () => {
     const categories = defaultCategories();
@@ -186,6 +227,63 @@ describe("categories", () => {
     expect(categories.find((category) => category.id === "sales")?.group).toBe("INCOME");
     expect(categories.find((category) => category.id === "own-account-transfer")?.group).toBe("TRANSFER");
     expect(categories.find((category) => category.id === "cash-deposit")?.group).toBe("CASH");
+  });
+
+  it("describes every built-in category, so the model has something to match", () => {
+    for (const category of defaultCategories()) {
+      expect(category.description, `${category.id} has no description`).toBeTruthy();
+    }
+  });
+});
+
+// A CA who has been using the tool has their categories in localStorage
+// already. Adding descriptions and new built-ins must not disturb any of it.
+describe("category migration", () => {
+  it("keeps the CA's renames, ordering and archiving", () => {
+    const stored = [
+      { id: "rent", name: "Premises Rent", group: "EXPENSE" as const, builtIn: true, archived: true, order: 0 },
+      { id: "sales", name: "Sales", group: "INCOME" as const, builtIn: true, archived: false, order: 1 },
+    ];
+
+    const merged = mergeWithDefaults(stored);
+    const rent = merged.find((category) => category.id === "rent");
+    expect(rent?.name).toBe("Premises Rent");
+    expect(rent?.archived).toBe(true);
+    expect(rent?.order).toBe(0);
+  });
+
+  it("fills in the descriptions a stored category predates", () => {
+    const merged = mergeWithDefaults([
+      { id: "rent", name: "Rent", group: "EXPENSE" as const, builtIn: true, archived: false, order: 0 },
+    ]);
+    expect(merged.find((category) => category.id === "rent")?.description).toBeTruthy();
+  });
+
+  it("adds built-in categories introduced after the CA first used the tool", () => {
+    const merged = mergeWithDefaults([
+      { id: "rent", name: "Rent", group: "EXPENSE" as const, builtIn: true, archived: false, order: 0 },
+    ]);
+    expect(merged.some((category) => category.id === "food-and-groceries")).toBe(true);
+    // Appended, not inserted — the CA's own ordering is not reshuffled.
+    expect(merged[0].id).toBe("rent");
+  });
+
+  it("leaves a category the CA invented completely alone", () => {
+    const custom = {
+      id: "freight-inward",
+      name: "Freight Inward",
+      group: "EXPENSE" as const,
+      builtIn: false,
+      archived: false,
+      order: 0,
+      description: "My own wording",
+    };
+    const merged = mergeWithDefaults([custom]);
+    expect(merged.find((category) => category.id === "freight-inward")).toEqual(custom);
+  });
+
+  it("falls back to the full tree when there is nothing stored", () => {
+    expect(mergeWithDefaults([]).length).toBe(defaultCategories().length);
   });
 });
 

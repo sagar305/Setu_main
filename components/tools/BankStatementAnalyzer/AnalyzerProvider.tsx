@@ -23,6 +23,7 @@ import type {
   AnalyzerSettings,
   BankStatement,
   Category,
+  CategoryGroup,
   ClassificationRule,
   ReconciliationSession,
   Transaction,
@@ -49,6 +50,21 @@ import {
 import type { AuditEntry } from "@/lib/bankStatement/types";
 import { analyse } from "@/lib/bankStatement/analysis";
 import { applyClassification, buildPartyMemory, classify } from "@/lib/bankStatement/classification/classifier";
+import {
+  learn,
+  readLearned,
+  unlearn,
+  writeLearned,
+  type LearnedMemory,
+} from "@/lib/bankStatement/ai/learned";
+import {
+  aiApprovedRule,
+  findRuleForAnchor,
+  ruleAnchor,
+} from "@/lib/bankStatement/ai/approval";
+import { generateLocalId } from "@/lib/hooks/useLocalStore";
+import { merchantKey } from "@/lib/bankStatement/ai/narration";
+import { slugifyCategory } from "@/lib/bankStatement/classification/categories";
 import { markDuplicates } from "@/lib/bankStatement/normalization/deduplicator";
 import { mapInChunks } from "@/lib/bankStatement/utils/scheduler";
 
@@ -63,6 +79,11 @@ type AnalyzerState = {
   reconciliation: ReconciliationSession | null;
   /** Which statements the dashboard and reports cover (decision 13). */
   activeStatementIds: string[];
+  /**
+   * Merchant → category, as taught by the CA's own corrections. Held in state
+   * so the review screen can show and undo it; persisted to this browser only.
+   */
+  learned: LearnedMemory;
 };
 
 type AnalyzerActions = {
@@ -78,6 +99,29 @@ type AnalyzerActions = {
   deleteCategory: (categoryId: string) => { ok: boolean; inUse: number };
   updateSettings: (settings: AnalyzerSettings) => Promise<void>;
   saveReconciliation: (session: ReconciliationSession | null) => void;
+  /**
+   * Settle a suggestion the model made: the CA either confirms it or supplies
+   * the right category. Both outcomes write a rule for that merchant, so the
+   * model is never asked about it again.
+   */
+  resolveAiSuggestion: (
+    transactions: Transaction[],
+    categoryId: string,
+    approved: boolean
+  ) => Promise<{ ruleSaved: boolean; rows: number }>;
+  /**
+   * Accept a proposed category: create it, then settle every transaction in the
+   * cluster against it exactly as approving a suggestion would.
+   */
+  createCategoryFromSuggestion: (input: {
+    name: string;
+    description: string;
+    group: CategoryGroup;
+    examples: string[];
+    transactions: Transaction[];
+  }) => Promise<{ created: boolean; categoryId: string; rows: number; reason?: string }>;
+  /** Forget one thing the categoriser learned from a correction. */
+  forgetLearned: (key: string) => void;
   clearEverything: () => Promise<void>;
   log: (action: string, detail?: string) => void;
 };
@@ -108,6 +152,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     audit: [],
     reconciliation: null,
     activeStatementIds: [],
+    learned: new Map(),
   });
 
   // A mirror of the latest state so stable callbacks can read it without
@@ -127,6 +172,15 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     let cancelled = false;
     (async () => {
       const statements = readStatements();
+      // Corrections live in IndexedDB now, so they are read alongside the
+      // transactions rather than synchronously with the rest of the settings.
+      let learned: LearnedMemory = new Map();
+      try {
+        learned = await readLearned();
+      } catch {
+        learned = new Map();
+      }
+
       let transactions: Transaction[] = [];
       try {
         transactions = await readTransactions(statements.map((statement) => statement.id));
@@ -146,6 +200,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
         audit: readAudit(),
         reconciliation: readReconciliation(),
         activeStatementIds: statements.map((statement) => statement.id),
+        learned,
       });
     })();
 
@@ -206,15 +261,59 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
   const updateTransactions = useCallback(
     async (updater: (transaction: Transaction) => Transaction | null, ids: string[]) => {
       const target = new Set(ids);
-      let next: Transaction[] = [];
 
-      setState((current) => {
-        next = current.transactions.map((transaction) => {
-          if (!target.has(transaction.id)) return transaction;
-          return updater({ ...transaction }) ?? transaction;
-        });
-        return { ...current, transactions: next };
+      // The edit is applied here rather than inside the setState updater.
+      //
+      // React does not promise to run an updater synchronously — it may defer
+      // it to the next render — so anything computed inside one is not
+      // available to the code that follows. Reading from the state mirror
+      // instead makes the new rows available immediately, which is what both
+      // the write below and the learning above it depend on.
+      const previous = stateRef.current.transactions;
+      const next = previous.map((transaction) => {
+        if (!target.has(transaction.id)) return transaction;
+        return updater({ ...transaction }) ?? transaction;
       });
+
+      // The categories these rows carried before the edit, so a manual change
+      // can be recognised as a correction rather than as a repeat.
+      const before = new Map(
+        previous
+          .filter((transaction) => target.has(transaction.id))
+          .map((transaction) => [transaction.id, transaction.category])
+      );
+
+      // Keep the mirror in step now, not after the next commit, so two edits in
+      // quick succession both start from the newer list.
+      stateRef.current = { ...stateRef.current, transactions: next };
+      setState((current) => ({ ...current, transactions: next }));
+
+      // Learn from what the CA just did. A category they set by hand is ground
+      // truth: remember it against the merchant so the next statement carrying
+      // the same shop starts out right. Local only — nothing is sent anywhere.
+      const corrections = next.filter(
+        (transaction) =>
+          target.has(transaction.id) &&
+          transaction.classificationSource === "MANUAL" &&
+          transaction.category !== undefined &&
+          transaction.category !== before.get(transaction.id)
+      );
+
+      if (corrections.length > 0) {
+        const now = new Date().toISOString();
+        let memory = stateRef.current.learned;
+        for (const transaction of corrections) {
+          memory = learn(
+            memory,
+            transaction,
+            transaction.category as string,
+            transaction.classificationType,
+            now
+          );
+        }
+        await writeLearned(memory);
+        setState((current) => ({ ...current, learned: memory }));
+      }
 
       // Persist only the statements whose rows actually changed.
       const touched = new Set(
@@ -255,8 +354,32 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       await mapInChunks(
         pending,
         (transaction) => {
-          const classification = classify(transaction, snapshot.rules, memory);
-          applyClassification(transaction, classification, snapshot.settings.highValueThreshold);
+          const classification = classify(
+            transaction,
+            snapshot.rules,
+            memory,
+            snapshot.learned,
+            snapshot.categories
+          );
+
+          // A rule, a correction or a pattern outranks the semantic model and
+          // takes the row over. But when none of them has anything to say, a
+          // category the model already found must survive: re-running
+          // classification after saving a rule should add answers, never
+          // silently delete the ones that were already there.
+          const keepAiAnswer =
+            classification.classificationSource === "UNCLASSIFIED" &&
+            transaction.classificationSource === "AI" &&
+            transaction.category !== undefined;
+
+          if (keepAiAnswer) {
+            transaction.isHighValue =
+              Math.max(transaction.debit, transaction.credit) >=
+              snapshot.settings.highValueThreshold;
+          } else {
+            applyClassification(transaction, classification, snapshot.settings.highValueThreshold);
+          }
+
           return transaction;
         },
         { chunkSize: 400, onProgress }
@@ -347,6 +470,164 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     await persistAll(next);
   }, [persistAll]);
 
+  /**
+   * Approving or correcting a suggestion is where the tool actually gets
+   * faster. The decision is written twice over:
+   *
+   *   • as a rule, so classification answers this merchant deterministically
+   *     from now on and never reaches the model at all, and
+   *   • as a learned correction, so it still applies where a rule cannot be
+   *     written safely (a narration with no usable merchant text in it).
+   *
+   * Both live in this browser only.
+   */
+  const resolveAiSuggestion = useCallback(
+    async (transactions: Transaction[], categoryId: string, approved: boolean) => {
+      if (transactions.length === 0 || !categoryId) return { ruleSaved: false, rows: 0 };
+
+      const representative = transactions[0];
+      const now = new Date().toISOString();
+      const current = stateRef.current;
+
+      // 1 — the rule. Reuse the one this merchant already has rather than
+      // stacking a second, otherwise changing your mind leaves both answers in
+      // the list and the older one may still win on ties.
+      const anchor = ruleAnchor(representative);
+      let rules = current.rules;
+      let savedRule: ClassificationRule | null = null;
+
+      if (anchor) {
+        const existing = findRuleForAnchor(rules, anchor, representative.transactionType);
+        savedRule = existing
+          ? { ...existing, result: { ...existing.result, category: categoryId }, enabled: true }
+          : aiApprovedRule(representative, categoryId, generateLocalId(), now);
+
+        if (savedRule) {
+          const withoutOld = rules.filter((rule) => rule.id !== savedRule?.id);
+          rules = [...withoutOld, savedRule];
+          writeRules(rules);
+        }
+      }
+
+      // 2 — the learned correction, which covers the rows a rule cannot.
+      let memory = current.learned;
+      memory = learn(memory, representative, categoryId, representative.classificationType, now);
+      await writeLearned(memory);
+
+      setState((state) => ({ ...state, rules, learned: memory }));
+      stateRef.current = { ...stateRef.current, rules, learned: memory };
+
+      // 3 — the rows themselves, now answered deterministically.
+      const ids = transactions.map((transaction) => transaction.id);
+      await updateTransactions(
+        (transaction) => ({
+          ...transaction,
+          category: categoryId,
+          classificationSource: savedRule ? "RULE" : "MEMORY",
+          matchedRuleId: savedRule?.id,
+          confidence: savedRule ? 100 : 95,
+          needsReview: false,
+          aiSimilarity: undefined,
+        }),
+        ids
+      );
+
+      appendAudit(
+        approved ? "AI suggestion approved" : "AI suggestion corrected",
+        `${ids.length} transaction${ids.length === 1 ? "" : "s"}${savedRule ? " · rule saved" : ""}`
+      );
+      setState((state) => ({ ...state, audit: readAudit() }));
+
+      return { ruleSaved: savedRule !== null, rows: ids.length };
+    },
+    [updateTransactions]
+  );
+
+  /**
+   * Create a category the CA was never offered, and put the cluster in it.
+   *
+   * The description is carried through deliberately: a category is matched by
+   * its description, not its name, so one created here without it would be
+   * nearly unmatchable — which is the very problem this is meant to solve. The
+   * merchants become its examples for the same reason.
+   *
+   * Settling then goes through the ordinary approval path, one merchant at a
+   * time, so the cluster earns the same rules any other approval would.
+   */
+  const createCategoryFromSuggestion = useCallback(
+    async (input: {
+      name: string;
+      description: string;
+      group: CategoryGroup;
+      examples: string[];
+      transactions: Transaction[];
+    }) => {
+      const name = input.name.trim();
+      if (name === "") return { created: false, categoryId: "", rows: 0, reason: "A name is required." };
+
+      const current = stateRef.current;
+      const categoryId = slugifyCategory(name);
+      if (categoryId === "") {
+        return { created: false, categoryId: "", rows: 0, reason: "That name cannot be used." };
+      }
+
+      const clash = current.categories.find((category) => category.id === categoryId);
+      if (clash) {
+        return {
+          created: false,
+          categoryId,
+          rows: 0,
+          reason: `"${clash.name}" already exists — move these to it instead, or pick another name.`,
+        };
+      }
+
+      const category: Category = {
+        id: categoryId,
+        name,
+        group: input.group,
+        description: input.description.trim() || undefined,
+        examples: input.examples.length > 0 ? input.examples : undefined,
+        builtIn: false,
+        archived: false,
+        order: current.categories.reduce((max, entry) => Math.max(max, entry.order), -1) + 1,
+      };
+
+      const categories = [...current.categories, category].sort((a, b) => a.order - b.order);
+      writeCategories(categories);
+      setState((state) => ({ ...state, categories }));
+      stateRef.current = { ...stateRef.current, categories };
+      appendAudit("Category created from a suggestion", `${name} · ${input.transactions.length} rows`);
+
+      // One merchant at a time, so each gets its own rule rather than one rule
+      // that would have to match everything in the cluster at once.
+      const byMerchant = new Map<string, Transaction[]>();
+      for (const transaction of input.transactions) {
+        const key = merchantKey(transaction.narration, transaction.transactionType);
+        const bucket = byMerchant.get(key);
+        if (bucket) bucket.push(transaction);
+        else byMerchant.set(key, [transaction]);
+      }
+
+      let rows = 0;
+      for (const bucket of byMerchant.values()) {
+        const result = await resolveAiSuggestion(bucket, categoryId, false);
+        rows += result.rows;
+      }
+
+      setState((state) => ({ ...state, audit: readAudit() }));
+      return { created: true, categoryId, rows };
+    },
+    [resolveAiSuggestion]
+  );
+
+  const forgetLearned = useCallback((key: string) => {
+    const memory = unlearn(stateRef.current.learned, key);
+    void writeLearned(memory);
+    setState((current) => ({ ...current, learned: memory }));
+    appendAudit("Learned category forgotten");
+    setState((current) => ({ ...current, audit: readAudit() }));
+  }, []);
+
   const saveReconciliation = useCallback((session: ReconciliationSession | null) => {
     writeReconciliation(session);
     setState((current) => ({ ...current, reconciliation: session }));
@@ -364,6 +645,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       audit: [],
       reconciliation: null,
       activeStatementIds: [],
+      learned: new Map(),
     });
   }, []);
 
@@ -403,6 +685,9 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       deleteCategory,
       updateSettings,
       saveReconciliation,
+      resolveAiSuggestion,
+      createCategoryFromSuggestion,
+      forgetLearned,
       clearEverything,
       log,
     },
