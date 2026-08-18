@@ -87,13 +87,48 @@ export async function callShortener(
     });
 
     const text = await upstream.text();
+
+    // The shortener always answers JSON. Anything else came from whatever sits
+    // in front of it — a platform gateway page when the container is not
+    // running, for instance. Relaying that verbatim makes the failure look like
+    // it came from this site, so it is labelled as upstream instead.
+    let parsed: unknown = null;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      parsed = null;
+    }
+
+    const isShortenerReply =
+      parsed !== null && typeof parsed === "object" && !("request_id" in (parsed as object));
+
+    if (!isShortenerReply) {
+      return Response.json(
+        {
+          error: "shortener_upstream_error",
+          upstreamStatus: upstream.status,
+          // Truncated: a gateway error page can be a whole document.
+          upstreamBody: text.slice(0, 500),
+        },
+        { status: 502 }
+      );
+    }
+
+    // Status codes pass through unchanged so the browser can tell "expired"
+    // from "went wrong".
     return new Response(text, {
       status: upstream.status,
       headers: { "Content-Type": "application/json" },
     });
-  } catch {
-    // Railway asleep, DNS failure, TLS problem — the caller falls back to the
+  } catch (error) {
+    // Asleep container, DNS failure, TLS problem — the caller falls back to the
     // long self-contained link, so this is a soft failure by design.
-    return Response.json({ error: "shortener_unreachable" }, { status: 502 });
+    return Response.json(
+      {
+        error: "shortener_unreachable",
+        reason: error instanceof Error ? error.message : "unknown",
+      },
+      { status: 502 }
+    );
   }
 }
