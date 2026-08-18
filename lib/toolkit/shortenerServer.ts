@@ -16,6 +16,43 @@ export function shortenerConfig(): ShortenerConfig | null {
   return { baseUrl: baseUrl.replace(/\/+$/, ""), apiKey };
 }
 
+/**
+ * Which required variables this deployment is missing.
+ *
+ * Names only — never values. On a host where variables are scoped per
+ * environment (Vercel: Production / Preview / Development), a preview build can
+ * easily be missing what production has, and there is otherwise no way to see
+ * that from outside.
+ */
+export function missingShortenerEnv(): string[] {
+  const missing: string[] = [];
+  if (!process.env.SHORTENER_API_URL) missing.push("SHORTENER_API_URL");
+  if (!process.env.SHORTENER_API_KEY) missing.push("SHORTENER_API_KEY");
+  if (process.env.NEXT_PUBLIC_SHORT_LINKS_ENABLED !== "true") {
+    // Inlined at build time, so it is missing here whenever the build that
+    // produced this bundle did not have it set.
+    missing.push("NEXT_PUBLIC_SHORT_LINKS_ENABLED");
+  }
+  return missing;
+}
+
+/** Ask the shortener how it is doing, so one call diagnoses the whole chain. */
+export async function upstreamHealth(): Promise<unknown> {
+  const config = shortenerConfig();
+  if (!config) return { reachable: false, reason: "not_configured" };
+
+  try {
+    const response = await fetch(`${config.baseUrl}/health`, { cache: "no-store" });
+    const body = await response.json().catch(() => null);
+    return { reachable: true, status: response.status, body };
+  } catch (error) {
+    return {
+      reachable: false,
+      reason: error instanceof Error ? error.message : "unreachable",
+    };
+  }
+}
+
 export function isValidShortCode(value: string): boolean {
   return /^[A-Za-z0-9]{10}$/.test(value);
 }

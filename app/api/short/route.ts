@@ -1,10 +1,29 @@
 import { NextRequest } from "next/server";
-import { callShortener, payloadTooLarge } from "@/lib/toolkit/shortenerServer";
+import {
+  callShortener,
+  missingShortenerEnv,
+  payloadTooLarge,
+  upstreamHealth,
+} from "@/lib/toolkit/shortenerServer";
 
 // Creating a short link. The browser posts the same compressed payload it would
 // otherwise have put in the URL fragment; nothing here interprets it.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+/**
+ * Configuration check. Reports variable NAMES and the shortener's own health,
+ * never any value, so it is safe to open in a browser while setting the
+ * feature up.
+ */
+export async function GET() {
+  const missing = missingShortenerEnv();
+  return Response.json({
+    configured: missing.length === 0,
+    missingEnv: missing,
+    upstream: await upstreamHealth(),
+  });
+}
 
 export async function POST(request: NextRequest) {
   let body: { payload?: unknown; kind?: unknown };
