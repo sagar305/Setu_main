@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Products | POS, QR Menu & Business Software | Setu",
-    "description": "Explore Setu products — the free Browser Based POS, QR Menu, Free Dine and Tuition Class Manager, plus Setu Dine, Setu Queue, and Retail and Clinic soon.",
+    "description": "Explore Setu products — the free Browser Based POS, QR Menu, Free Dine, Tuition Class Manager and Clinic Manager, plus Setu Dine, Setu Queue and Retail soon.",
     "keywords": [
       "Setu products",
       "Browser Based POS",
@@ -13,7 +13,9 @@
       "Setu Retail",
       "Setu Clinic",
       "Setu Tuition",
-      "Tuition Class Manager"
+      "Tuition Class Manager",
+      "Free Clinic Manager",
+      "free clinic management software"
     ]
   },
   "hero": {
@@ -115,6 +117,33 @@
       "cta": {
         "label": "Open the Tuition Class Manager — it's free",
         "href": "/products/free-tuition-software"
+      }
+    },
+    {
+      "id": "free-clinic",
+      "status": "live",
+      "name": "Free Clinic Manager",
+      "headline": "Free clinic and prescription software, right in your browser",
+      "description": "A completely free clinic manager for a single doctor or a small practice. Prescriptions that print as sharp, selectable text, patient records with vitals and history, appointments on a live day screen, and billing with automatic follow-up fees and UPI receipts — no login, no subscription, no patient limit, and it keeps working without internet.",
+      "features": [
+        "Prescriptions printed as real selectable text, A4 or A5",
+        "Protocols — save a whole prescription, load it on the next patient in one tap",
+        "Complaints, findings and diagnosis autocomplete from your own past writing",
+        "Vitals with BMI computed as you type and the last reading shown",
+        "One day screen in token order, with live wait timers",
+        "Appointments inside your own hours, with WhatsApp reminders in one run",
+        "Follow-ups booked on finalise, plus a report of who has not returned",
+        "Follow-up fees applied automatically inside your window",
+        "Numbered receipts on 58mm, 80mm or A4, with a UPI QR to pay from",
+        "Dues tracking with WhatsApp reminders to patients",
+        "Investigation slips printed as a separate signed A5",
+        "Patient charts with weight and BP trends, and bulk register import",
+        "Footfall, revenue, top diagnoses and no-show reports, all exportable to CSV",
+        "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Clinic Manager — it's free",
+        "href": "/products/free-clinic-software"
       }
     },
     {
