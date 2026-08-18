@@ -52,12 +52,14 @@ export type ToolSlug =
   | "profit-dashboard"
   | "gst-reports"
   // Restaurant
+  | "free-dine"
   | "qr-menu-generator"
   | "kitchen-order-board"
   | "recipe-manager"
   // Service businesses
   | "appointment-book"
   | "queue-management"
+  | "clinic-manager"
   // Education
   | "tuition-manager"
   // Payments / utilities
@@ -257,6 +259,24 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
       { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+    ],
+  },
+  {
+    slug: "clinic-manager",
+    name: "Clinic Manager",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-clinic-software",
+    owns: "clinic_patients",
+    reads: ["business", "customers"],
+    writes: ["clinic_patients", "clinic_visits", "clinic_appointments", "clinic_bills"],
+    dependsOn: ["business-profile"],
+    paidPath: "clinic",
+    integrations: [
+      { with: "appointment-book", ux: "Keep non-medical bookings in the generic day view" },
+      { with: "upi-qr-generator", ux: "Collect the consultation fee by UPI at the desk" },
     ],
   },
   {

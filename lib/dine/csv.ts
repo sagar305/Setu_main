@@ -15,6 +15,7 @@ import { formatPlain, parseAmount, toMajor } from "./money";
 import { fromQty, formatQty } from "./units";
 import {
   FOOD_TYPE_LABELS,
+  RESERVATION_STATUS_LABELS,
   STOCK_MOVE_LABELS,
   type DineMaterial,
   type DineRecipeLine,
@@ -23,6 +24,7 @@ import {
   type DineBillItem,
   type DineCategory,
   type DineMenuItem,
+  type DineReservation,
   type DineModifier,
   type DineModifierGroup,
   type DineVariation,
@@ -480,5 +482,46 @@ export function materialUsageCsv(
       formatQty(row.wasted, row.unit),
       toMajor(row.cost),
     ])
+  );
+}
+
+/** Bookings, with the advance split into what was asked and what arrived. */
+export function reservationsCsv(reservations: DineReservation[], currency: string): string {
+  return toCsv(
+    [
+      "When",
+      "Business Date",
+      "Guest",
+      "Phone",
+      "Guests",
+      "Table",
+      "Area",
+      "Minutes",
+      "Status",
+      "Advance Asked",
+      "Advance Paid",
+      "Advance Outcome",
+      "Occasion",
+      "Note",
+    ],
+    reservations
+      .slice()
+      .sort((a, b) => a.startsAt.localeCompare(b.startsAt))
+      .map((row) => [
+        row.startsAt,
+        row.businessDate,
+        row.guestName,
+        row.phone,
+        row.partySize,
+        row.tableName,
+        row.areaName,
+        row.durationMinutes,
+        RESERVATION_STATUS_LABELS[row.status],
+        toMajor(row.depositRequired),
+        toMajor(row.depositPaid),
+        row.depositOutcome,
+        row.occasion,
+        row.note,
+      ])
   );
 }

@@ -31,6 +31,12 @@ import {
   Utensils,
   UtensilsCrossed,
   WifiOff,
+  CalendarClock,
+  MessageCircle,
+  Wallet,
+  BookUser,
+  UserRound,
+  Palette,
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
@@ -208,6 +214,12 @@ const BILLING: Feature[] = [
       "One bill can take as many tenders as it needs. Add your own methods too — Swiggy, Zomato, Sodexo.",
   },
   {
+    icon: Palette,
+    title: "Design the bill once",
+    description:
+      "Lay out your bill in the Receipt Designer — accent colour, logo, header and footer, paper size — and pick it in Settings. It is the same template the rest of the Setu tools use, so one look carries across everything you hand a customer.",
+  },
+  {
     icon: Share2,
     title: "Print, PDF or WhatsApp",
     description:
@@ -247,10 +259,55 @@ const KITCHEN: Feature[] = [
       "A dish cancelled after it reached the kitchen was cooked, so the ingredients do not come back. They move from 'used' to 'wasted' instead, which is the number worth watching.",
   },
   {
+    icon: Lock,
+    title: "Lock the pass",
+    description:
+      "The kitchen screen goes full screen and locks from the counter — no nav, no way back to the till, and nothing a stray tap can change. Tab and Enter cannot walk out of it either. Only the counter PIN releases it.",
+  },
+  {
     icon: ClipboardList,
     title: "Stock takes that show the gap",
     description:
       "Count the shelf, enter what is really there, and the difference is recorded rather than smoothed away. Running out never blocks a sale — it only warns, because the cook can see the fridge and the app cannot.",
+  },
+];
+
+const GUESTS: Feature[] = [
+  {
+    icon: CalendarClock,
+    title: "Book a table, free or against an advance",
+    description:
+      "Hold a table for a window, not a moment — so a 7:30 booking for two hours warns you before you promise the same table at 8. Take an advance or don't; both are normal.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Confirm on WhatsApp, from your own number",
+    description:
+      "The confirmation, the reminder and the cancellation open in WhatsApp with the message written out, waiting for you to send. No API, no gateway fee, and no diner's phone number ever leaves the browser.",
+  },
+  {
+    icon: Wallet,
+    title: "The advance comes off their bill",
+    description:
+      "Money taken to hold a table is money held, not a sale — so it stays out of that day's takings and lands on the bill the night they actually eat. Whoever settles it sees the advance without needing to know a booking happened.",
+  },
+  {
+    icon: BookUser,
+    title: "Udhaar, in the ledger you already have",
+    description:
+      "Let a regular eat now and pay later. It is not a separate khata: the bill posts to the shared Customer Ledger, the same book the Browser Based POS writes its udhaar sales to — so a customer who runs a tab at the counter and at the table has one balance, not two that disagree.",
+  },
+  {
+    icon: UserRound,
+    title: "One customer book",
+    description:
+      "Pick a saved customer at the table, or add one with a name and phone number in the same breath. Regulars first saved at the shop till or in the Customer Ledger are already in the list, and the payment screen shows what they owe before you add to it.",
+  },
+  {
+    icon: Receipt,
+    title: "Settle it in one place",
+    description:
+      "Payments, reminders and statements happen in the Customer Ledger for the whole business at once, rather than one screen per product. Free Dine's job is to put the charge in the right book and get out of the way.",
   },
 ];
 
@@ -278,6 +335,18 @@ const TRUST: Feature[] = [
     title: "Backup, and a nag when you forget",
     description:
       "Your data lives in this browser, which is why there is no login — and why one JSON file is the difference between a cleared cache and losing your year. Free Dine reminds you weekly.",
+  },
+  {
+    icon: Sheet,
+    title: "Your own Google Sheet, as the safety net",
+    description:
+      "Push the menu, sales, diners, stock and bookings into a sheet you own, and pull the lot back to rebuild a browser that lost its data. It is your spreadsheet and your Apps Script — no Setu server sits in the middle, and the sheet doubles as the reporting feed for anyone who lives in Excel.",
+  },
+  {
+    icon: Download,
+    title: "Everything leaves as CSV",
+    description:
+      "Menu, bills, bill lines, stock movements, recipes, bookings and the day's numbers all export as CSV, and the menu imports back. Nothing you put in is trapped.",
   },
   {
     icon: Lock,
@@ -315,6 +384,13 @@ const SECTIONS: { eyebrow: string; title: string; subtitle: string; items: Featu
     items: KITCHEN,
   },
   {
+    eyebrow: "Guests",
+    title: "Bookings and running accounts",
+    subtitle:
+      "Hold tables ahead of time, take an advance if you want one, and let regulars pay later through the shared Customer Ledger. Both optional, both off until you turn them on.",
+    items: GUESTS,
+  },
+  {
     eyebrow: "Billing",
     title: "The awkward part, handled",
     subtitle: "Splitting, merging, service charge and a GST bill that adds up to the paisa.",
@@ -341,6 +417,12 @@ const DIFFERENCES: { capability: string; retail: string; dine: string }[] = [
     capability: "Stock tracking",
     retail: "Finished products",
     dine: "Raw materials, via recipes",
+  },
+  { capability: "Table bookings", retail: "—", dine: "Free or with an advance" },
+  {
+    capability: "Pay later (udhaar)",
+    retail: "Customer Ledger",
+    dine: "Same Customer Ledger",
   },
 ];
 
@@ -417,6 +499,31 @@ const FAQ_ITEMS = [
       "No. They are separate products with separate databases. A retail counter and a dining room need different menus, different customers and different bill numbers, so nothing crosses between them — and resetting or restoring one never touches the other.",
   },
   {
+    question: "Can I take table bookings, and charge an advance?",
+    answer:
+      "Yes, and either way. A booking can be free or ask for an advance, and the advance is treated as money held rather than as a sale — so it stays out of that day's takings and comes off the guest's bill on the night they eat. Tapping a held table on the floor seats the booking with the guest's name and advance already attached.",
+  },
+  {
+    question: "How does the WhatsApp confirmation work?",
+    answer:
+      "It opens WhatsApp with the message already written — the slot, the party size, the table and any advance — and waits for you to press send. It goes from your own number and stays in your own chat history. There is no WhatsApp Business API, nothing to pay for, and no diner's phone number is ever sent to a server.",
+  },
+  {
+    question: "Can regulars eat now and pay later?",
+    answer:
+      "Yes, through the shared Customer Ledger rather than a separate khata inside the till. Turn on credit, attach a saved customer to the table and mark them as allowed, and their bill can be settled 'on account'. The charge posts to the Customer Ledger — the same book the Browser Based POS writes udhaar sales to — so a customer who runs a tab at the shop and at the table has one balance. Settling and reminders happen there, for the whole business at once.",
+  },
+  {
+    question: "Can I pick a saved customer at the table?",
+    answer:
+      "Yes. The customer picker lists everyone in your shared book with their phone number, so a regular first saved at the shop till or in the Customer Ledger is already there. You can also add a new one with a name and phone in the same step, without leaving the table.",
+  },
+  {
+    question: "Does money owed on account count as sales?",
+    answer:
+      "The bill counts as a sale on the day it was rung up, because the food left the kitchen that day. What changes is the cash: the reports show what is owed on account and what is held as booking advances separately from the takings, so you can tell the difference between a good night and a night everyone put on a tab.",
+  },
+  {
     question: "Can I move my data to paid Setu Dine later?",
     answer:
       "Yes. Your menu exports as a CSV and your whole workspace exports as a JSON backup, so a restaurant that outgrows the free version can bring its menu and history along rather than starting over.",
@@ -436,19 +543,28 @@ const softwareApplicationSchema = {
     "Open tickets that survive a browser restart",
     "Kitchen order tickets printed per round, without prices",
     "Live kitchen screen in a second tab, updating without a server",
+    "Kitchen screen lockable as a kiosk from the counter",
     "Raw material stock with per-dish recipes",
     "Recipes that follow the chosen size and add-ons",
     "Weighted-average ingredient costing and food-cost percentage",
     "Wastage tracking and stock takes with variance",
     "Item variations (half/full) and modifier groups (add-ons)",
+    "Table bookings, free or against an advance",
+    "WhatsApp confirmations, reminders and cancellations",
+    "Advances carried onto the guest's bill",
+    "Credit (udhaar) posted to the shared Customer Ledger",
+    "Saved-customer picker with phone numbers",
     "Split bills by item, equal share or amount",
     "Merge tables into one bill",
     "GST with per-item rates and CGST/SGST breakup",
     "Optional service charge, off by default",
     "Multiple payment methods on one bill",
     "Thermal (80mm/58mm) and A4 bill and KOT printing",
+    "Bill layouts designed in the Receipt Designer",
     "Day summary, item report, hourly sales and printable day close",
     "CSV menu import and export",
+    "CSV exports for bills, stock, recipes and bookings",
+    "Google Sheet sync and restore, to a sheet you own",
     "PIN counter lock with idle auto-lock",
     "JSON backup and restore",
     "Works offline, no login required",
