@@ -7,6 +7,7 @@ import {
   MessageCircle,
   Move,
   Plus,
+  Share2,
   X,
 } from "lucide-react";
 import { useClinic } from "@/lib/clinic/store";
@@ -18,6 +19,9 @@ import {
   timeToMinutes,
 } from "@/lib/clinic/calc";
 import { fillTemplate, whatsAppLink, type OutboundMessage } from "@/lib/clinic/messages";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { appointmentDoc } from "./share";
+import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import {
   STATUS_LABELS,
   addDays,
@@ -61,6 +65,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [cancelling, setCancelling] = useState<Appointment | null>(null);
   const [cancelReason, setCancelReason] = useState("");
   const [queueOpen, setQueueOpen] = useState(false);
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   const activeDoctors = useMemo(() => doctors.filter((d) => d.active), [doctors]);
   const columns = activeDoctors.length > 0 ? activeDoctors : doctors.slice(0, 1);
@@ -280,6 +285,27 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                     </span>
                                   </button>
                                   <div className="flex shrink-0 gap-0.5">
+                                    {patient ? (
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          setSharing(
+                                            appointmentDoc(
+                                              business,
+                                              patient,
+                                              appointment,
+                                              doctors.find((d) => d.id === appointment.doctorId) ??
+                                                null
+                                            )
+                                          )
+                                        }
+                                        aria-label="Share appointment"
+                                        title="Share appointment"
+                                        className="flex h-6 w-6 items-center justify-center rounded text-muted hover:text-indigo"
+                                      >
+                                        <Share2 className="h-3.5 w-3.5" />
+                                      </button>
+                                    ) : null}
                                     <button
                                       type="button"
                                       onClick={() => setMoving(appointment)}
@@ -359,6 +385,15 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             await markReminded([created.id]);
           }
         }}
+      />
+
+      <ShareDialog
+        open={Boolean(sharing)}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share appointment"
+        recipientLabel="patient"
+        allowFee
       />
 
       <Modal open={Boolean(moving)} onClose={() => setMoving(null)} title="Move appointment">

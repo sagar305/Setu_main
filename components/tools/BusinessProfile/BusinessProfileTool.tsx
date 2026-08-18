@@ -20,9 +20,11 @@ import {
   allCurrencies,
   allTimezones,
   detectTimezone,
+  getPreferences,
   setPreferences,
   type CurrencyInfo,
 } from "@/lib/toolkit/preferences";
+import { shortLinksConfigured } from "@/lib/toolkit/shortLink";
 import { useI18n } from "@/lib/i18n";
 
 const BLANK = {
@@ -238,6 +240,69 @@ export function BusinessProfileTool() {
           This is how your details appear on receipts, invoices and labels across Setu tools.
         </p>
       </Card>
+
+      <ShortLinkSetting />
     </div>
+  );
+}
+
+/**
+ * The one setting that changes where shared data lives, so it says plainly what
+ * turning it on allows — and it only allows the offer, never the upload. The
+ * card is hidden entirely when the site has no shortener configured, rather
+ * than showing a switch that would do nothing.
+ */
+function ShortLinkSetting() {
+  const [enabled, setEnabled] = useState(true);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setEnabled(getPreferences().shortLinks);
+    setLoaded(true);
+  }, []);
+
+  if (!loaded || !shortLinksConfigured()) return null;
+
+  return (
+    <Card className="lg:col-span-2">
+      <h2 className="mb-1 text-lg font-bold text-ink">Short links for sharing</h2>
+      <p className="mb-4 text-sm text-muted">
+        Normally a shared invoice, receipt or appointment travels entirely inside its own link, so
+        nothing is uploaded and the link still opens on a phone with no signal — but the link runs to
+        a few thousand characters.
+      </p>
+
+      <label className="flex items-start gap-3">
+        <input
+          type="checkbox"
+          checked={enabled}
+          onChange={(event) => {
+            setEnabled(event.target.checked);
+            setPreferences({ shortLinks: event.target.checked });
+          }}
+          className="mt-0.5 h-4 w-4 accent-indigo"
+        />
+        <span className="text-sm text-ink">
+          Offer to shorten share links
+          <span className="mt-1 block text-xs text-muted">
+            Adds a &ldquo;Shorten&rdquo; button to the share sheet. Nothing is shortened until you
+            press it, one share at a time.
+          </span>
+        </span>
+      </label>
+
+      <div className="mt-4 rounded-lg bg-cream-paper/60 p-3 text-xs text-muted">
+        <p className="font-semibold text-ink">What shortening changes</p>
+        <p className="mt-1">
+          To keep a link short, that document has to be saved on our server — a shortened link is
+          only a pointer to it. We delete it 180 days after the last time anyone opens it. Because
+          the document is no longer inside the link, whoever you send it to needs an internet
+          connection to open it.
+        </p>
+        <p className="mt-2">
+          Leave this off and every share stays fully self-contained, exactly as before.
+        </p>
+      </div>
+    </Card>
   );
 }

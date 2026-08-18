@@ -130,6 +130,49 @@ export type SharedMarks = {
   rem?: string; // teacher's remark
 };
 
+/**
+ * One prescribed medicine, pre-composed for display.
+ *
+ * The name arrives already joined ("TAB Paracetamol 500mg") because the clinic
+ * print layout composes it the same way — the viewer is meant to match the
+ * paper the patient may also be holding, not to re-derive it.
+ */
+export type ShareRxMedicine = {
+  n: string; // form + name + strength, already joined
+  f?: string; // frequency, e.g. "1-0-1"
+  d?: string; // duration, e.g. "5 days"
+  q?: string; // quantity
+  nt?: string; // timing and instructions
+};
+
+/**
+ * A prescription shared with the patient.
+ *
+ * Mirrors lib/clinic/print.ts so the screen and the printout say the same
+ * things in the same order. Clinical free text (diagnosis, advice) is carried
+ * as written; nothing is summarised or reworded on the way.
+ */
+export type SharedPrescription = {
+  t: "rx";
+  b: ShareBusiness;
+  pn: string; // patient name
+  cp?: string; // patient phone
+  ag?: string; // age / sex line as the printout renders it
+  fl?: string; // file number
+  dt: string; // visit date (ISO)
+  dr?: string; // doctor name
+  drq?: string; // qualifications · speciality
+  reg?: string; // registration number
+  vit?: string[]; // vitals, pre-formatted
+  alg?: string[]; // allergies
+  dx?: string; // diagnosis
+  med: ShareRxMedicine[];
+  inv?: string[]; // investigations advised
+  adv?: string; // advice
+  fu?: number; // follow-up in days
+  ft?: string; // clinic footer line
+};
+
 /** Monthly attendance summary shared with a parent. */
 export type SharedAttendance = {
   t: "att";
@@ -150,7 +193,8 @@ export type SharedDoc =
   | SharedAppointment
   | SharedFeeReceipt
   | SharedMarks
-  | SharedAttendance;
+  | SharedAttendance
+  | SharedPrescription;
 
 // ---------------------------------------------------------------------------
 // Encode / decode
@@ -203,6 +247,8 @@ export function docTitle(doc: SharedDoc): string {
       return `Test result`;
     case "att":
       return `Attendance report`;
+    case "rx":
+      return `Prescription`;
   }
 }
 
@@ -222,6 +268,8 @@ export function payableAmount(doc: SharedDoc): number {
       return doc.bal ?? 0;
     case "mrk":
     case "att":
+    // A prescription is never something to collect money against.
+    case "rx":
       return 0;
   }
 }

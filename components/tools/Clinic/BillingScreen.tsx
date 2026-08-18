@@ -9,6 +9,7 @@ import {
   Plus,
   Printer,
   Receipt,
+  Share2,
   Trash2,
 } from "lucide-react";
 import { currencySymbol, generateId } from "@/lib/pos/types";
@@ -18,6 +19,9 @@ import { billsCsv, downloadCsv } from "@/lib/clinic/csv";
 import { printReceipt, type ReceiptContext } from "@/lib/clinic/print";
 import { fillTemplate, whatsAppLink, type OutboundMessage } from "@/lib/clinic/messages";
 import { generateUPIUrl, isValidUPIId } from "@/lib/upi";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { receiptDoc } from "./share";
+import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import {
   formatDate,
   todayIso,
@@ -713,6 +717,7 @@ function BillComposer({
 function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => void }) {
   const { patients, doctors, business, settings } = useClinic();
   const [qr, setQr] = useState("");
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   const due = bill ? billDue(bill) : 0;
   const currency = business?.currency ?? "INR";
@@ -789,15 +794,33 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
         )}
       </div>
 
-      <div className="mt-4 flex justify-end gap-3">
+      <div className="mt-4 flex flex-wrap justify-end gap-3">
         <button type="button" onClick={onClose} className={secondaryBtnClass}>
           Close
         </button>
+        {patient ? (
+          <button
+            type="button"
+            onClick={() => setSharing(receiptDoc(business, patient, bill, currency))}
+            className={secondaryBtnClass}
+          >
+            <Share2 className="h-4 w-4" />
+            Share link
+          </button>
+        ) : null}
         <button type="button" onClick={() => printReceipt(context)} className={primaryBtnClass}>
           <Printer className="h-4 w-4" />
           Print receipt
         </button>
       </div>
+
+      <ShareDialog
+        open={Boolean(sharing)}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share receipt"
+        recipientLabel="patient"
+      />
     </Modal>
   );
 }

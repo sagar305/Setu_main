@@ -11,6 +11,7 @@ import {
   MessageCircle,
   Printer,
   Receipt,
+  Share2,
   Stethoscope,
 } from "lucide-react";
 import { useClinic, newRxLine, useHistorySuggestions } from "@/lib/clinic/store";
@@ -20,6 +21,9 @@ import {
   printPrescription,
 } from "@/lib/clinic/print";
 import { whatsAppLink } from "@/lib/clinic/messages";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import { prescriptionDoc } from "./share";
+import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import { computeBmi, formatAgeSex, parseBp } from "@/lib/clinic/calc";
 import {
   EMPTY_VITALS,
@@ -179,6 +183,7 @@ export function ConsultScreen({
   const [doneOpen, setDoneOpen] = useState(false);
   const [offerMedicine, setOfferMedicine] = useState<RxLine | null>(null);
   const [notice, setNotice] = useState("");
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
 
   /** Everything the pad currently holds, in Visit shape. */
   const draft = useMemo(
@@ -302,6 +307,13 @@ export function ConsultScreen({
       reason: "Follow-up",
     });
     setNotice(`Follow-up booked for ${formatDate(date)}.`);
+  };
+
+  // A rendered prescription the patient can open, rather than the plain-text
+  // dump below. Built from the same visit the printout uses.
+  const shareRxLink = () => {
+    if (!patient || !previewVisit) return;
+    setSharing(prescriptionDoc(business, settings, doctor, patient, previewVisit));
   };
 
   const shareOnWhatsApp = () => {
@@ -782,6 +794,10 @@ export function ConsultScreen({
             <Printer className="h-4 w-4" />
             Print prescription
           </button>
+          <button type="button" onClick={shareRxLink} className={secondaryBtnClass}>
+            <Share2 className="h-4 w-4" />
+            Share link
+          </button>
           <button type="button" onClick={shareOnWhatsApp} className={secondaryBtnClass}>
             <MessageCircle className="h-4 w-4" />
             Share on WhatsApp
@@ -859,6 +875,14 @@ export function ConsultScreen({
           </div>
         )}
       </Modal>
+
+      <ShareDialog
+        open={Boolean(sharing)}
+        onClose={() => setSharing(null)}
+        doc={sharing}
+        title="Share prescription"
+        recipientLabel="patient"
+      />
     </div>
   );
 }

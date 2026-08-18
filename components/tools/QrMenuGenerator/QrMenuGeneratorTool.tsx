@@ -16,10 +16,13 @@ import {
   FileUp,
   FileDown,
   Loader2,
+  Link2,
+  RefreshCw,
 } from "lucide-react";
 import {
   buildMenuUrl,
   countMenuItems,
+  encodeMenu,
   createEmptyCategory,
   createEmptyItem,
   createEmptyMenu,
@@ -32,6 +35,19 @@ import {
   type QrVariant,
 } from "@/lib/qrmenu";
 import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
+import {
+  clearPublishedMenu,
+  getPublishedMenu,
+  setPublishedMenu,
+  type PublishedMenu,
+} from "@/lib/qrmenu-publish";
+import {
+  ShortenError,
+  shortLinksConfigured,
+  shortenPayload,
+  shortMenuUrl,
+  updateShortLink,
+} from "@/lib/toolkit/shortLink";
 import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
@@ -60,6 +76,15 @@ export function QrMenuGeneratorTool() {
   const [importing, setImporting] = useState(false);
   const importInputRef = useRef<HTMLInputElement>(null);
 
+  // Publishing state. `published` is null until the restaurant opts in, which
+  // keeps the default behaviour exactly what it always was: the whole menu
+  // inside the QR code, no server involved.
+  const [published, setPublished] = useState<PublishedMenu | null>(null);
+  const [publishing, setPublishing] = useState(false);
+  const [publishError, setPublishError] = useState<string | null>(null);
+  const [useShortQr, setUseShortQr] = useState(false);
+  const [shortCopied, setShortCopied] = useState(false);
+
   // Load saved menu + resolve origin on the client only (avoids SSR mismatch)
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -72,6 +97,11 @@ export function QrMenuGeneratorTool() {
     } catch {
       // Corrupt saved data — start fresh
     }
+    const record = getPublishedMenu();
+    setPublished(record);
+    // Once a menu is published the printed QR is the short one, so that is what
+    // the tool shows by default.
+    setUseShortQr(Boolean(record));
     setHydrated(true);
   }, []);
 
@@ -93,12 +123,87 @@ export function QrMenuGeneratorTool() {
     [menu, origin]
   );
 
+  const encodedMenu = useMemo(() => encodeMenu(menu), [menu]);
+
+  const publishedUrl = published && origin ? shortMenuUrl(published.code, origin) : "";
+  // Edits made since the last publish. The printed QR still serves the old menu
+  // until the restaurant presses Update, so this has to be visible.
+  const hasUnpublishedChanges = Boolean(published) && published?.payload !== encodedMenu;
+
   const itemCount = countMenuItems(menu);
   const hasContent = menu.restaurantName.trim().length > 0 && itemCount > 0;
   const urlLength = menuUrl.length;
   const overCapacity = urlLength > QR_CAPACITY_MAX;
-  const qrLevel: "M" | "L" = urlLength <= QR_CAPACITY_M ? "M" : "L";
   const capacityPercent = Math.min(100, Math.round((urlLength / QR_CAPACITY_MAX) * 100));
+
+  // What the QR actually encodes. A published short link is ~40 characters, so
+  // the capacity limit stops applying the moment it is in use.
+  const showingShortQr = useShortQr && Boolean(publishedUrl);
+  const qrValue = showingShortQr ? publishedUrl : menuUrl;
+  const qrLevel: "M" | "L" = showingShortQr || urlLength <= QR_CAPACITY_M ? "M" : "L";
+  const qrBlocked = !showingShortQr && overCapacity;
+
+  const publish = async () => {
+    setPublishing(true);
+    setPublishError(null);
+    try {
+      if (published) {
+        await updateShortLink(published.code, encodedMenu, published.editToken);
+        const updated = { ...published, payload: encodedMenu };
+        setPublishedMenu(updated);
+        setPublished(updated);
+      } else {
+        const link = await shortenPayload(encodedMenu, "menu");
+        // A menu always comes back with an edit token; without it the menu
+        // could never be updated, so treat its absence as a failure.
+        if (!link.editToken) throw new ShortenError("failed", "No edit token returned.");
+        const record: PublishedMenu = {
+          code: link.code,
+          editToken: link.editToken,
+          payload: encodedMenu,
+          publishedAt: new Date().toISOString(),
+        };
+        setPublishedMenu(record);
+        setPublished(record);
+        setUseShortQr(true);
+      }
+    } catch (error) {
+      const reason = error instanceof ShortenError ? error.reason : "failed";
+      setPublishError(
+        reason === "offline"
+          ? "Publishing needs an internet connection. Your menu is unchanged."
+          : "Couldn\u2019t reach the server. Your menu is unchanged — try again."
+      );
+    } finally {
+      setPublishing(false);
+    }
+  };
+
+  const unpublish = () => {
+    // Forgetting the record throws away the edit key, and there is no way to
+    // get it back — any QR already printed would be frozen on its current menu.
+    const confirmed = window.confirm(
+      "Forget this published menu?\n\nThe edit key is stored only in this browser. " +
+        "Any QR code you have already printed will keep showing the current menu, but you " +
+        "will never be able to update it again."
+    );
+    if (!confirmed) return;
+
+    clearPublishedMenu();
+    setPublished(null);
+    setUseShortQr(false);
+    setPublishError(null);
+  };
+
+  const copyShortLink = async () => {
+    try {
+      await navigator.clipboard.writeText(publishedUrl);
+      setShortCopied(true);
+      setTimeout(() => setShortCopied(false), 2000);
+    } catch {
+      // Clipboard blocked — the link is on screen to copy by hand.
+    }
+  };
 
   // --- state updaters -------------------------------------------------------
 
@@ -715,7 +820,7 @@ export function QrMenuGeneratorTool() {
             </div>
           )}
 
-          {hasContent && overCapacity && (
+          {hasContent && qrBlocked && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
               <p className="font-semibold">Menu is too large for one QR code.</p>
               <p className="mt-1">
@@ -740,16 +845,24 @@ export function QrMenuGeneratorTool() {
             </div>
           )}
 
-          {hasContent && !overCapacity && menuUrl && (
+          {hasContent && !qrBlocked && qrValue && (
             <>
               <div className="flex justify-center rounded-lg bg-gray-50 p-6">
                 <div data-qr="menu">
-                  <QRCodeSVG value={menuUrl} size={240} level={qrLevel} marginSize={2} />
+                  <QRCodeSVG value={qrValue} size={240} level={qrLevel} marginSize={2} />
                 </div>
               </div>
               <p className="mt-3 text-center text-xs text-muted">
-                {itemCount} {itemCount === 1 ? "item" : "items"} · whole menu stored inside the QR
+                {itemCount} {itemCount === 1 ? "item" : "items"} ·{" "}
+                {showingShortQr
+                  ? "points to your published menu"
+                  : "whole menu stored inside the QR"}
               </p>
+              {showingShortQr && hasUnpublishedChanges ? (
+                <p className="mt-1 text-center text-xs font-semibold text-amber-600">
+                  This QR still shows the last published version.
+                </p>
+              ) : null}
 
               <div className="mt-4 flex flex-col gap-2">
                 <button
@@ -777,7 +890,7 @@ export function QrMenuGeneratorTool() {
                     )}
                   </button>
                   <a
-                    href={menuUrl}
+                    href={qrValue}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-sm font-semibold text-ink transition hover:bg-cream"
@@ -796,8 +909,134 @@ export function QrMenuGeneratorTool() {
             </>
           )}
 
-          {/* Capacity meter */}
-          {hasContent && (
+          {/* Publishing — optional, and off until the restaurant asks for it */}
+          {hasContent && shortLinksConfigured() && (
+            <div className="mt-5 rounded-lg border border-muted-line/30 bg-cream-paper/40 p-4">
+              <div className="flex items-center gap-2">
+                <Link2 className="h-4 w-4 text-indigo" aria-hidden="true" />
+                <h3 className="text-sm font-semibold text-ink">
+                  {published ? "Published menu" : "Publish for a permanent QR"}
+                </h3>
+              </div>
+
+              {!published ? (
+                <>
+                  <p className="mt-2 text-xs text-muted">
+                    Right now the whole menu is inside the QR code, so it works with no internet at
+                    all — but the code has to be reprinted whenever you change a price, and the menu
+                    has to stay small enough to fit.
+                  </p>
+                  <p className="mt-2 text-xs text-muted">
+                    Publishing stores the menu with us and puts a short link in the QR instead. The
+                    printed code never changes again, and the size limit disappears. Diners then
+                    need an internet connection to see it, and we delete the menu 180 days after the
+                    last time anyone scans it.
+                  </p>
+                  <button
+                    onClick={publish}
+                    disabled={publishing}
+                    className="mt-3 inline-flex items-center justify-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-60"
+                  >
+                    {publishing ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Publishing…
+                      </>
+                    ) : (
+                      <>
+                        <Link2 className="h-4 w-4" />
+                        Publish menu
+                      </>
+                    )}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="mt-2 break-all rounded-lg bg-white p-2 text-xs text-ink">
+                    {publishedUrl}
+                  </p>
+
+                  {hasUnpublishedChanges ? (
+                    <p className="mt-2 text-xs font-semibold text-amber-600">
+                      You have changes that customers can&rsquo;t see yet.
+                    </p>
+                  ) : (
+                    <p className="mt-2 text-xs text-emerald-700">
+                      Live and up to date — no need to reprint anything.
+                    </p>
+                  )}
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button
+                      onClick={publish}
+                      disabled={publishing || !hasUnpublishedChanges}
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-indigo bg-indigo px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
+                    >
+                      {publishing ? (
+                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      ) : (
+                        <RefreshCw className="h-3.5 w-3.5" />
+                      )}
+                      Update published menu
+                    </button>
+                    <button
+                      onClick={copyShortLink}
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs font-semibold text-ink transition hover:bg-cream"
+                    >
+                      {shortCopied ? (
+                        <>
+                          <Check className="h-3.5 w-3.5 text-green-600" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3.5 w-3.5" />
+                          Copy short link
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <label className="mt-3 flex items-start gap-2 text-xs text-muted">
+                    <input
+                      type="checkbox"
+                      checked={!useShortQr}
+                      onChange={(event) => setUseShortQr(!event.target.checked)}
+                      className="mt-0.5 h-3.5 w-3.5 accent-indigo"
+                    />
+                    <span>
+                      Show the self-contained QR instead — works with no internet, but it is size
+                      limited and has to be reprinted after every change.
+                    </span>
+                  </label>
+
+                  <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+                    <p className="font-semibold">Only this browser can update this menu.</p>
+                    <p className="mt-1">
+                      The key that proves it is yours is stored here and nowhere else. There is no
+                      login to recover it, so clearing this browser&rsquo;s data — or moving to
+                      another phone or computer — means the printed QR can never be changed again.
+                      Export your menu from the top of the page to keep a copy of the contents.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={unpublish}
+                    className="mt-3 text-xs font-semibold text-muted underline"
+                  >
+                    Stop using the published link
+                  </button>
+                </>
+              )}
+
+              {publishError ? (
+                <p className="mt-2 text-xs text-red-600">{publishError}</p>
+              ) : null}
+            </div>
+          )}
+
+          {/* Capacity meter — irrelevant once the QR holds a short link */}
+          {hasContent && !showingShortQr && (
             <div className="mt-5">
               <div className="mb-1 flex items-center justify-between text-xs text-muted">
                 <span>QR capacity used</span>
