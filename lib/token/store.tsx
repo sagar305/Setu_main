@@ -42,6 +42,7 @@ import {
   nextInQueue,
   nextResetAt,
   retentionCutoff,
+  tokensPastDeadline,
 } from "./calc";
 import {
   DEFAULT_SETTINGS,
@@ -67,6 +68,8 @@ export type IssueTokenInput = {
   note?: string;
   priority?: boolean;
   selfIssued?: boolean;
+  /** Set when this token replaces one that was skipped. */
+  reissuedFromId?: string | null;
 };
 
 type TokenContextValue = {
@@ -107,7 +110,8 @@ type TokenContextValue = {
   startServing: (tokenId: string) => Promise<void>;
   completeToken: (tokenId: string) => Promise<void>;
   skipToken: (tokenId: string) => Promise<void>;
-  restoreToken: (tokenId: string) => Promise<void>;
+  /** Re-issue a skipped token as a fresh number at the back of the line. */
+  markCameBack: (tokenId: string) => Promise<Token | null>;
   cancelToken: (tokenId: string) => Promise<void>;
   transferToken: (
     tokenId: string,
@@ -585,7 +589,8 @@ export function TokenProvider({ children }: { children: ReactNode }) {
         closedAt: null,
         recallCount: 0,
           selfIssued: input.selfIssued ?? false,
-          restoredAt: null,
+          reissuedFromId: input.reissuedFromId ?? null,
+          reissuedAsId: null,
         })
       );
 
@@ -704,24 +709,82 @@ export function TokenProvider({ children }: { children: ReactNode }) {
   );
 
   /**
-   * Put a skipped token back in the line, at the end.
+   * Somebody who missed their call has come back.
    *
-   * `issuedAt` is deliberately left alone: it is the moment this person walked
-   * in, and the wait they end up enduring is real and belongs in the reports.
-   * `restoredAt` carries the new place in the queue instead.
+   * They do not get their old number returned to them. A number that has
+   * already been called and announced to the room cannot be put back into the
+   * line without the display and the people in it disagreeing about what it
+   * means — so the skipped row stays skipped, exactly as it happened, and this
+   * person is handed a fresh token that joins behind everyone currently
+   * waiting. Their name and number come across so nobody is asked for them
+   * twice, and the two rows are linked so the history still reads as one
+   * person's visit.
+   *
+   * Priority does not carry over. Whatever earned it, they were called and did
+   * not come, and jumping the line a second time is the one thing the people
+   * who did wait would notice.
    */
-  const restoreToken = useCallback(
-    async (tokenId: string) => {
-      await patchToken(tokenId, {
-        status: "waiting",
-        counterId: null,
-        closedAt: null,
-        recallCount: 0,
-        restoredAt: nowIso(),
+  const markCameBack = useCallback(
+    async (tokenId: string): Promise<Token | null> => {
+      const skipped = tokensRef.current.find((row) => row.id === tokenId);
+      if (!skipped || skipped.status !== "skipped") return null;
+
+      const replacement = await issueToken({
+        serviceId: skipped.serviceId,
+        customerName: skipped.customerName,
+        phone: skipped.phone,
+        note: skipped.note,
+        priority: false,
+        reissuedFromId: skipped.id,
       });
+
+      await patchToken(skipped.id, { reissuedAsId: replacement.id });
+      return replacement;
     },
-    [patchToken]
+    [issueToken, patchToken]
   );
+
+  /**
+   * The grace window, enforced.
+   *
+   * Two things have to be true for this to be fair rather than merely tidy.
+   * It has to run even when nobody is looking at the app — a counter tab that
+   * was closed at 5:59 must not let a token sit "called" overnight — so the
+   * sweep runs on load as well as on a timer, and skips anything already past
+   * its deadline. And it has to be the same answer in every tab: both the
+   * counter and the display hold this provider, so the write is idempotent
+   * (only a token still at "called" is touched) and whichever tab gets there
+   * first is simply the one that did it.
+   */
+  const sweepExpiredCalls = useCallback(async () => {
+    const { autoSkipEnabled, autoSkipMinutes } = settingsRef.current;
+    if (!autoSkipEnabled) return;
+
+    const expired = tokensPastDeadline(tokensRef.current, autoSkipMinutes);
+    if (expired.length === 0) return;
+
+    const at = nowIso();
+    const skipped = expired.map((token) => ({
+      ...token,
+      status: "skipped" as const,
+      closedAt: at,
+    }));
+    await batchWithSync({ tokens: skipped });
+    const byId = new Map(skipped.map((token) => [token.id, token]));
+    setTokens((previous) => previous.map((token) => byId.get(token.id) ?? token));
+  }, [batchWithSync]);
+
+  useEffect(() => {
+    if (status !== "ready" || !settings.autoSkipEnabled) return;
+    // Every second, because the counter is showing a countdown from the same
+    // numbers and a skip that lands visibly late reads as a bug.
+    const timer = window.setInterval(() => void sweepExpiredCalls(), 1000);
+    return () => window.clearInterval(timer);
+  }, [status, settings.autoSkipEnabled, sweepExpiredCalls]);
+
+  useEffect(() => {
+    if (status === "ready") void sweepExpiredCalls();
+  }, [status, sweepExpiredCalls]);
 
   const cancelToken = useCallback(
     async (tokenId: string) => {
@@ -748,15 +811,17 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       }
       if (target.counterId !== undefined) patch.counterId = target.counterId;
 
-      // Sending someone to a different desk puts them back in a line, at the
-      // end of it — they are not "called" at the new counter until it calls.
+      // Sending someone to a different desk puts them back in a line — they
+      // are not "called" at the new counter until it calls. They keep the time
+      // they arrived, and so their place among the people already waiting:
+      // being sent to the wrong desk was not their mistake, and starting their
+      // wait again would punish them for it.
       if (target.serviceId && target.serviceId !== current.serviceId) {
         patch.status = "waiting";
         patch.counterId = target.counterId ?? null;
         patch.calledAt = null;
         patch.servingStartedAt = null;
         patch.recallCount = 0;
-        patch.restoredAt = nowIso();
       }
       await patchToken(tokenId, patch);
     },
@@ -888,7 +953,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     startServing,
     completeToken,
     skipToken,
-    restoreToken,
+    markCameBack,
     cancelToken,
     transferToken,
     resetDayNow,

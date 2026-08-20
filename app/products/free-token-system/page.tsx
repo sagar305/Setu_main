@@ -127,9 +127,9 @@ const COUNTER: Feature[] = [
   },
   {
     icon: SkipForward,
-    title: "Recall, skip, put back",
+    title: "A two-minute clock, then the queue moves on",
     description:
-      "Call again if they have not appeared. After the second call the app offers to skip them, and a skipped token goes back to the end of the line later with the time they actually arrived intact.",
+      "A called token counts down. One tap messages them that the clock is running; when it runs out the token skips itself, so the whole line is not held up by the person who wandered off. Call again at any time and the clock restarts.",
   },
   {
     icon: Repeat,
@@ -154,9 +154,9 @@ const AFTER: Feature[] = [
   },
   {
     icon: MessageCircle,
-    title: "WhatsApp when their turn is near",
+    title: "WhatsApp at every step",
     description:
-      "Every token carries a phone number, so the app can prepare the message the moment they are near the front; you tap send. Nothing is sent automatically, because an app with no server cannot honestly claim to.",
+      "The number when it is issued, a nudge when their turn is near, a warning when they have been called, and a note if they were skipped. The app writes each one and you tap send — nothing goes out on its own, because an app with no server cannot honestly claim to.",
   },
   {
     icon: QrCode,
@@ -218,6 +218,11 @@ const FAQ_ITEMS = [
     question: "Which languages can it announce in?",
     answer:
       "Hindi, English (India), Marathi, Tamil, Telugu, Bengali, Gujarati and Kannada are the ones we test. The picker also lists every voice your own device has. If a language is missing, the app tells you which voice it will use instead rather than failing quietly.",
+  },
+  {
+    question: "What happens if someone does not come when their number is called?",
+    answer:
+      "A called token counts down — two minutes by default, and you can change it or switch it off. There is a WhatsApp button to tell them the clock is running. If it runs out the token is skipped automatically so the queue keeps moving, and you can message them to say so. When they turn up, one tap gives them a fresh number behind everyone currently waiting; they do not get the old number back, because it has already been called out to the room.",
   },
   {
     question: "What happens to the numbering at the end of the day?",

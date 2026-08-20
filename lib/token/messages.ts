@@ -37,13 +37,18 @@ export type MessageContext = {
   businessName: string;
   tokens: Token[];
   counters: Counter[];
+  /** The grace window, for the "we are waiting for you" message. */
+  minutes?: number;
 };
 
 /** The values every queue template can use. */
 export function messageVars(context: MessageContext): Record<string, string> {
-  const { token, service, counter, businessName, tokens, counters } = context;
+  const { token, service, counter, businessName, tokens, counters, minutes } = context;
   const ahead = service ? waitingAhead(tokens, service.id) : 0;
-  const minutes = service
+  // Two different numbers, deliberately kept apart: {wait} is how long the
+  // queue is likely to take, {minutes} is how long this person has to reach
+  // the counter before the clock skips them.
+  const estimatedWait = service
     ? estimateWaitMinutes(
         ahead,
         service.avgServiceMinutes,
@@ -56,9 +61,10 @@ export function messageVars(context: MessageContext): Record<string, string> {
     token: tokenLabel(token, service),
     service: service?.name ?? "",
     business: businessName || "our counter",
-    wait: formatWait(minutes),
+    wait: formatWait(estimatedWait),
     ahead: String(ahead),
     counter: counter?.name ?? "",
+    minutes: minutes === undefined ? "" : String(minutes),
   };
 }
 

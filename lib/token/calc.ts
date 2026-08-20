@@ -97,23 +97,20 @@ export function nextTokenNumber(
  * Ordering
  * ---------------------------------------------------------------------- */
 
-/** What a token's place in the line is measured from. */
-export function queuedAt(token: Token): string {
-  return token.restoredAt ?? token.issuedAt;
-}
-
 /**
  * Priority first, then oldest first.
  *
  * Priority means a senior citizen, an emergency or someone with an
  * appointment. It jumps the *waiting* line only — a token already called or
  * being served is never re-ordered under the person standing at the counter.
+ *
+ * Somebody who missed their call and came back needs no special handling here:
+ * they hold a token issued just now, so being last is simply what the clock
+ * says.
  */
 export function compareQueue(a: Token, b: Token): number {
   if (a.priority !== b.priority) return a.priority ? -1 : 1;
-  const left = queuedAt(a);
-  const right = queuedAt(b);
-  if (left !== right) return left < right ? -1 : 1;
+  if (a.issuedAt !== b.issuedAt) return a.issuedAt < b.issuedAt ? -1 : 1;
   return a.number - b.number;
 }
 
@@ -154,6 +151,47 @@ export function waitingAhead(tokens: Token[], serviceId: string): number {
 
 export function shouldOfferSkip(token: Token): boolean {
   return token.recallCount >= RECALLS_BEFORE_SKIP;
+}
+
+/* -------------------------------------------------------------------------
+ * The grace window
+ * ---------------------------------------------------------------------- */
+
+/**
+ * The moment a called token runs out of time, or null when it is not counting.
+ *
+ * Measured from `calledAt`, so a Recall restarts it — asking somebody to come
+ * again and then skipping them on the original clock would be a trap rather
+ * than a warning. Only a token still sitting at "called" is counting: once
+ * Start serving is tapped the person is standing there, and nothing about a
+ * clock should be able to remove them.
+ */
+export function skipDeadline(token: Token, minutes: number): number | null {
+  if (token.status !== "called" || !token.calledAt) return null;
+  const calledAt = Date.parse(token.calledAt);
+  if (Number.isNaN(calledAt)) return null;
+  return calledAt + Math.max(0, minutes) * 60_000;
+}
+
+/** Seconds left before the grace window closes; 0 once it has. */
+export function secondsUntilSkip(token: Token, minutes: number, now = Date.now()): number | null {
+  const deadline = skipDeadline(token, minutes);
+  if (deadline === null) return null;
+  return Math.max(0, Math.ceil((deadline - now) / 1000));
+}
+
+/** Tokens whose grace window has closed and which the clock should now skip. */
+export function tokensPastDeadline(tokens: Token[], minutes: number, now = Date.now()): Token[] {
+  return tokens.filter((token) => {
+    const deadline = skipDeadline(token, minutes);
+    return deadline !== null && deadline <= now;
+  });
+}
+
+/** mm:ss, for the countdown on the counter's card. */
+export function formatCountdown(seconds: number): string {
+  const safe = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, "0")}`;
 }
 
 /* -------------------------------------------------------------------------

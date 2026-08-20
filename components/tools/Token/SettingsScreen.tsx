@@ -812,6 +812,40 @@ function AnnouncementSection() {
         </Field>
       </div>
 
+      <div className="mt-5 rounded-xl border border-muted-line/30 bg-cream-paper p-4">
+        <label className="flex items-center gap-2 text-sm font-semibold text-ink">
+          <input
+            type="checkbox"
+            checked={settings.autoSkipEnabled}
+            onChange={(e) => void updateSettings({ autoSkipEnabled: e.target.checked })}
+          />
+          Skip a called token automatically if nobody comes
+        </label>
+        {settings.autoSkipEnabled && (
+          <div className="mt-3 flex flex-wrap items-end gap-3">
+            <Field label="Minutes to reach the counter">
+              <input
+                className={`${inputClass} max-w-[7rem]`}
+                type="number"
+                min={1}
+                max={60}
+                value={settings.autoSkipMinutes}
+                onChange={(e) =>
+                  void updateSettings({
+                    autoSkipMinutes: Math.min(60, Math.max(1, Number(e.target.value) || 1)),
+                  })
+                }
+              />
+            </Field>
+          </div>
+        )}
+        <p className="mt-2 text-xs text-muted">
+          The counter shows the countdown, and there is a WhatsApp button to tell the customer the
+          clock is running before it runs out. When it does, they move to Skipped — and coming back
+          gets them a fresh number behind everyone currently waiting, never their old one.
+        </p>
+      </div>
+
       <button type="button" className={`${primaryBtnClass} mt-4`} onClick={test}>
         <Volume2 className="h-4 w-4" aria-hidden="true" />
         Test the announcement
@@ -906,6 +940,34 @@ function MessagesSection() {
                   ...settings.messageTemplates,
                   almostYourTurn: e.target.value,
                 },
+              })
+            }
+          />
+        </Field>
+        <Field
+          label="Called — we are waiting for you"
+          hint="Sent from the counter when their number is called. {minutes} is the grace window."
+        >
+          <textarea
+            className={`${inputClass} min-h-[80px]`}
+            value={settings.messageTemplates.waitingForYou}
+            onChange={(e) =>
+              void updateSettings({
+                messageTemplates: {
+                  ...settings.messageTemplates,
+                  waitingForYou: e.target.value,
+                },
+              })
+            }
+          />
+        </Field>
+        <Field label="Skipped — nobody came">
+          <textarea
+            className={`${inputClass} min-h-[80px]`}
+            value={settings.messageTemplates.skipped}
+            onChange={(e) =>
+              void updateSettings({
+                messageTemplates: { ...settings.messageTemplates, skipped: e.target.value },
               })
             }
           />

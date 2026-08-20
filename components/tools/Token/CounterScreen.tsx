@@ -16,16 +16,22 @@ import { countersForService, useToken } from "@/lib/token/store";
 import { readLocal, writeLocal } from "@/lib/toolkit/storage";
 import {
   activeCountersForService,
-  counterServes,
   estimateWaitMinutes,
+  formatCountdown,
   nextInQueue,
+  secondsUntilSkip,
   shouldOfferSkip,
   waitingQueue,
 } from "@/lib/token/calc";
 import { averageWaitMinutes } from "@/lib/token/calc";
 import { formatClock, formatMinutes } from "@/lib/token/reports";
 import { whatsAppLinkFor } from "@/lib/token/messages";
-import { ALMOST_YOUR_TURN_POSITION, tokenLabel, type Token } from "@/lib/token/types";
+import {
+  ALMOST_YOUR_TURN_POSITION,
+  tokenLabel,
+  type MessageTemplateKey,
+  type Token,
+} from "@/lib/token/types";
 import {
   ConfirmDialog,
   EmptyState,
@@ -42,6 +48,17 @@ import {
 const TOOL_KEY = "queue";
 /** How many of the waiting list the counter sees before it becomes a scroll. */
 const WAITING_LIST_LENGTH = 10;
+
+/** Now, once a second, for anything on this screen that counts. */
+function useTick(active: boolean): number {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    if (!active) return;
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [active]);
+  return now;
+}
 
 /** Minutes:seconds since a moment, ticking. The card's sense of urgency. */
 function useElapsed(since: string | null): string {
@@ -71,7 +88,7 @@ export function CounterScreen() {
     startServing,
     completeToken,
     skipToken,
-    restoreToken,
+    markCameBack,
     cancelToken,
     transferToken,
   } = useToken();
@@ -110,6 +127,11 @@ export function CounterScreen() {
   const upNext = nextInQueue(todayTokens, counter);
   const elapsed = useElapsed(current?.calledAt ?? null);
 
+  const counting = Boolean(settings.autoSkipEnabled && current?.status === "called");
+  const now = useTick(counting);
+  const secondsLeft =
+    counting && current ? secondsUntilSkip(current, settings.autoSkipMinutes, now) : null;
+
   const servedByMe = todayTokens.filter(
     (token) => token.counterId === counterId && token.status === "served"
   ).length;
@@ -118,6 +140,7 @@ export function CounterScreen() {
   const [jumpTarget, setJumpTarget] = useState<Token | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Token | null>(null);
   const [transferOpen, setTransferOpen] = useState(false);
+  const [reissued, setReissued] = useState<Token | null>(null);
   const [busy, setBusy] = useState(false);
 
   const run = async (action: () => Promise<unknown>) => {
@@ -129,14 +152,15 @@ export function CounterScreen() {
     }
   };
 
-  const notifyLink = (token: Token) =>
-    whatsAppLinkFor("almostYourTurn", settings, {
+  const messageLink = (token: Token, key: MessageTemplateKey) =>
+    whatsAppLinkFor(key, settings, {
       token,
       service: serviceById(token.serviceId),
-      counter,
+      counter: token.counterId ? counters.find((row) => row.id === token.counterId) : counter,
       businessName: business?.name ?? "",
       tokens: todayTokens,
       counters,
+      minutes: settings.autoSkipMinutes,
     });
 
   return (
@@ -190,10 +214,22 @@ export function CounterScreen() {
               </div>
               <div className="text-right">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  {current.status === "serving" ? "Serving for" : "Called"}
+                  {current.status === "serving"
+                    ? "Serving for"
+                    : secondsLeft !== null
+                      ? "Skips in"
+                      : "Called"}
                 </div>
-                <div className="text-2xl font-bold tabular-nums text-ink">
-                  {current.status === "serving" ? elapsed : formatClock(current.calledAt)}
+                <div
+                  className={`text-2xl font-bold tabular-nums ${
+                    secondsLeft !== null && secondsLeft <= 30 ? "text-red-600" : "text-ink"
+                  }`}
+                >
+                  {current.status === "serving"
+                    ? elapsed
+                    : secondsLeft !== null
+                      ? formatCountdown(secondsLeft)
+                      : formatClock(current.calledAt)}
                 </div>
               </div>
             </div>
@@ -229,6 +265,18 @@ export function CounterScreen() {
                   <Check className="h-4 w-4" aria-hidden="true" />
                   Done
                 </button>
+              )}
+
+              {current.status === "called" && current.phone && (
+                <a
+                  href={messageLink(current, "waitingForYou")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={chipBtnClass}
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                  We&apos;re waiting
+                </a>
               )}
 
               <button
@@ -270,6 +318,14 @@ export function CounterScreen() {
             {current.status === "called" && (
               <p className="mt-3 text-xs text-muted">
                 Tap <strong>Start serving</strong> when they reach you — Done appears after that.
+                {secondsLeft !== null && (
+                  <>
+                    {" "}
+                    If nobody comes, this token skips itself in{" "}
+                    <strong>{formatCountdown(secondsLeft)}</strong>. Tap{" "}
+                    <strong>We&apos;re waiting</strong> to tell them the clock is running.
+                  </>
+                )}
               </p>
             )}
           </div>
@@ -342,7 +398,7 @@ export function CounterScreen() {
                   </button>
                   {token.phone && index + 1 <= ALMOST_YOUR_TURN_POSITION && (
                     <a
-                      href={notifyLink(token)}
+                      href={messageLink(token, "almostYourTurn")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${chipBtnClass} shrink-0 px-2`}
@@ -363,6 +419,40 @@ export function CounterScreen() {
           </p>
         )}
       </SectionCard>
+
+      {reissued && (
+        <section className="rounded-2xl border-2 border-indigo bg-indigo/5 p-5 text-center">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+            New token for {reissued.customerName || "them"}
+          </p>
+          <p className="mt-1 text-5xl font-extrabold leading-none tracking-tight text-ink">
+            {tokenLabel(reissued, serviceById(reissued.serviceId))}
+          </p>
+          <p className="mt-2 text-sm text-muted">
+            They are behind everyone currently waiting.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            {reissued.phone && (
+              <a
+                href={messageLink(reissued, "tokenIssued")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={chipBtnClass}
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                Send the new number
+              </a>
+            )}
+            <button
+              type="button"
+              className={secondaryBtnClass}
+              onClick={() => setReissued(null)}
+            >
+              Done
+            </button>
+          </div>
+        </section>
+      )}
 
       <SkippedList />
 
@@ -468,13 +558,15 @@ export function CounterScreen() {
   );
 
   function SkippedList() {
-    const skipped = todayTokens.filter((token) => token.status === "skipped");
+    const skipped = todayTokens.filter(
+      (token) => token.status === "skipped" && !token.reissuedAsId
+    );
     if (skipped.length === 0) return null;
     return (
       <SectionCard title={`Skipped (${skipped.length})`}>
         <ul className="divide-y divide-muted-line/20">
           {skipped.map((token) => (
-            <li key={token.id} className="flex items-center justify-between gap-3 py-2.5">
+            <li key={token.id} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
               <span className="flex items-center gap-3">
                 <span className="text-lg font-extrabold text-ink">
                   {tokenLabel(token, serviceById(token.serviceId))}
@@ -483,21 +575,37 @@ export function CounterScreen() {
                   {token.customerName || serviceById(token.serviceId)?.name}
                 </span>
               </span>
-              <button
-                type="button"
-                className={chipBtnClass}
-                disabled={busy}
-                onClick={() => void run(() => restoreToken(token.id))}
-              >
-                <Undo2 className="h-4 w-4" aria-hidden="true" />
-                Put back
-              </button>
+              <span className="flex items-center gap-2">
+                {token.phone && (
+                  <a
+                    href={messageLink(token, "skipped")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={chipBtnClass}
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                    Tell them
+                  </a>
+                )}
+                <button
+                  type="button"
+                  className={chipBtnClass}
+                  disabled={busy}
+                  onClick={() => void run(async () => {
+                    const replacement = await markCameBack(token.id);
+                    if (replacement) setReissued(replacement);
+                  })}
+                >
+                  <Undo2 className="h-4 w-4" aria-hidden="true" />
+                  They came back
+                </button>
+              </span>
             </li>
           ))}
         </ul>
         <p className="pt-3 text-xs text-muted">
-          They rejoin at the end of the line. The time they first arrived is kept, so today&apos;s
-          average wait still tells the truth.
+          Coming back gets them a fresh number behind everyone currently waiting. The skipped one
+          stays in today&apos;s history, so the reports still show the call that went unanswered.
         </p>
       </SectionCard>
     );

@@ -6,6 +6,7 @@ import {
   businessDate,
   compareQueue,
   estimateWaitMinutes,
+  formatCountdown,
   formatWait,
   isoDate,
   nextInQueue,
@@ -13,8 +14,11 @@ import {
   nextTokenNumber,
   queuePosition,
   retentionCutoff,
+  secondsUntilSkip,
+  skipDeadline,
   spokenToken,
   suggestedServiceMinutes,
+  tokensPastDeadline,
   waitingQueue,
 } from "@/lib/token/calc";
 import type { Counter, Token } from "@/lib/token/types";
@@ -37,7 +41,8 @@ function token(overrides: Partial<Token> = {}): Token {
     closedAt: null,
     recallCount: 0,
     selfIssued: false,
-    restoredAt: null,
+    reissuedFromId: null,
+    reissuedAsId: null,
     ...overrides,
   };
 }
@@ -126,17 +131,29 @@ describe("call order", () => {
     expect(order).toEqual(["urgent", "early", "late"]);
   });
 
-  it("sends a restored token to the back without rewriting when it arrived", () => {
+  it("puts a re-issued token behind everyone waiting, by its new issue time", () => {
     const early = token({ id: "early", issuedAt: "2026-08-20T09:00:00.000Z" });
     const later = token({ id: "later", issuedAt: "2026-08-20T09:10:00.000Z" });
-    const restored = token({
-      id: "restored",
-      issuedAt: "2026-08-20T08:00:00.000Z",
-      restoredAt: "2026-08-20T09:20:00.000Z",
+    // Somebody who missed their call at 08:00 and came back at 09:20 holds a
+    // token issued at 09:20, so the clock alone puts them last.
+    const cameBack = token({
+      id: "came-back",
+      issuedAt: "2026-08-20T09:20:00.000Z",
+      reissuedFromId: "the-skipped-one",
     });
-    const order = [restored, early, later].sort(compareQueue).map((t) => t.id);
-    expect(order).toEqual(["early", "later", "restored"]);
-    expect(restored.issuedAt).toBe("2026-08-20T08:00:00.000Z");
+    const order = [cameBack, early, later].sort(compareQueue).map((t) => t.id);
+    expect(order).toEqual(["early", "later", "came-back"]);
+  });
+
+  it("does not let a re-issued token keep jumping the line on priority", () => {
+    const waiting = token({ id: "waiting", issuedAt: "2026-08-20T09:00:00.000Z" });
+    const cameBack = token({
+      id: "came-back",
+      issuedAt: "2026-08-20T09:20:00.000Z",
+      priority: false,
+      reissuedFromId: "the-skipped-one",
+    });
+    expect([cameBack, waiting].sort(compareQueue)[0].id).toBe("waiting");
   });
 
   it("only offers a counter the services it serves", () => {
@@ -166,6 +183,48 @@ describe("call order", () => {
     expect(queuePosition(rows, first)).toBe(1);
     expect(queuePosition(rows, second)).toBe(2);
     expect(queuePosition(rows, called)).toBe(0);
+  });
+});
+
+describe("the grace window", () => {
+  const called = (overrides = {}) =>
+    token({ status: "called", calledAt: "2026-08-20T09:00:00.000Z", ...overrides });
+
+  it("counts down from the moment the token was called", () => {
+    const at = Date.parse("2026-08-20T09:00:30.000Z");
+    expect(secondsUntilSkip(called(), 2, at)).toBe(90);
+    expect(formatCountdown(90)).toBe("1:30");
+  });
+
+  it("is not counting for a token nobody has called", () => {
+    expect(secondsUntilSkip(token(), 2)).toBeNull();
+    expect(skipDeadline(token(), 2)).toBeNull();
+  });
+
+  it("stops counting the moment serving starts", () => {
+    const serving = called({ status: "serving", servingStartedAt: "2026-08-20T09:00:20.000Z" });
+    expect(secondsUntilSkip(serving, 2)).toBeNull();
+  });
+
+  it("restarts from a recall, so a second call is not a trap", () => {
+    const at = Date.parse("2026-08-20T09:03:00.000Z");
+    const recalled = called({ calledAt: "2026-08-20T09:02:30.000Z", recallCount: 1 });
+    expect(secondsUntilSkip(recalled, 2, at)).toBe(90);
+  });
+
+  it("hands over only the tokens whose window has actually closed", () => {
+    const at = Date.parse("2026-08-20T09:02:01.000Z");
+    const expired = called({ id: "expired" });
+    const fresh = called({ id: "fresh", calledAt: "2026-08-20T09:01:30.000Z" });
+    const serving = called({ id: "serving", status: "serving" });
+    const ids = tokensPastDeadline([expired, fresh, serving], 2, at).map((t) => t.id);
+    expect(ids).toEqual(["expired"]);
+  });
+
+  it("closes the window exactly on the boundary, not a second late", () => {
+    const at = Date.parse("2026-08-20T09:02:00.000Z");
+    expect(tokensPastDeadline([called()], 2, at)).toHaveLength(1);
+    expect(secondsUntilSkip(called(), 2, at)).toBe(0);
   });
 });
 

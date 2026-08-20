@@ -1,11 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Ban, Download, Undo2 } from "lucide-react";
+import { Ban, Download, MessageCircle, Undo2 } from "lucide-react";
 import { useToken } from "@/lib/token/store";
 import { formatClock, formatMinutes, tokenRows } from "@/lib/token/reports";
 import { downloadCsv, tokensCsv } from "@/lib/token/csv";
-import { TOKEN_STATUS_LABELS, type TokenStatus } from "@/lib/token/types";
+import { whatsAppLinkFor } from "@/lib/token/messages";
+import {
+  TOKEN_STATUS_LABELS,
+  type MessageTemplateKey,
+  type Token,
+  type TokenStatus,
+} from "@/lib/token/types";
 import { ConfirmDialog, SectionCard, StatusChip, chipBtnClass, secondaryBtnClass } from "./ui";
 
 const STATUSES: TokenStatus[] = [
@@ -25,10 +31,30 @@ const STATUSES: TokenStatus[] = [
  * the whole ninety days.
  */
 export function HistoryScreen() {
-  const { todayTokens, services, counters, today, restoreToken, cancelToken } = useToken();
+  const {
+    todayTokens,
+    services,
+    counters,
+    today,
+    settings,
+    business,
+    markCameBack,
+    cancelToken,
+  } = useToken();
   const [serviceFilter, setServiceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<"all" | TokenStatus>("all");
   const [cancelId, setCancelId] = useState<string | null>(null);
+
+  const messageLink = (token: Token, key: MessageTemplateKey) =>
+    whatsAppLinkFor(key, settings, {
+      token,
+      service: services.find((row) => row.id === token.serviceId),
+      counter: counters.find((row) => row.id === token.counterId) ?? null,
+      businessName: business?.name ?? "",
+      tokens: todayTokens,
+      counters,
+      minutes: settings.autoSkipMinutes,
+    });
 
   const rows = useMemo(() => {
     const filtered = todayTokens.filter((token) => {
@@ -146,27 +172,44 @@ export function HistoryScreen() {
                     <td className="px-3 py-2.5 text-right tabular-nums text-muted">
                       {formatMinutes(row.serviceTime)}
                     </td>
-                    <td className="px-3 py-2.5 text-right">
-                      {row.token.status === "skipped" && (
-                        <button
-                          type="button"
-                          className={`${chipBtnClass} min-h-0 px-2 py-1`}
-                          onClick={() => void restoreToken(row.token.id)}
-                        >
-                          <Undo2 className="h-3.5 w-3.5" aria-hidden="true" />
-                          Put back
-                        </button>
-                      )}
-                      {(row.token.status === "waiting" || row.token.status === "called") && (
-                        <button
-                          type="button"
-                          className={`${chipBtnClass} min-h-0 px-2 py-1`}
-                          onClick={() => setCancelId(row.token.id)}
-                        >
-                          <Ban className="h-3.5 w-3.5" aria-hidden="true" />
-                          Cancel
-                        </button>
-                      )}
+                    <td className="px-3 py-2.5">
+                      <div className="flex items-center justify-end gap-1.5">
+                        {/* Sending somebody their number again is the most
+                            common thing anyone wants from this table — they
+                            lost the slip, or they never got the message. */}
+                        {row.token.phone && (
+                          <a
+                            href={messageLink(row.token, "tokenIssued")}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${chipBtnClass} min-h-0 px-2 py-1`}
+                            title="Send this token number on WhatsApp"
+                          >
+                            <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                            Send
+                          </a>
+                        )}
+                        {row.token.status === "skipped" && !row.token.reissuedAsId && (
+                          <button
+                            type="button"
+                            className={`${chipBtnClass} min-h-0 px-2 py-1`}
+                            onClick={() => void markCameBack(row.token.id)}
+                          >
+                            <Undo2 className="h-3.5 w-3.5" aria-hidden="true" />
+                            Came back
+                          </button>
+                        )}
+                        {(row.token.status === "waiting" || row.token.status === "called") && (
+                          <button
+                            type="button"
+                            className={`${chipBtnClass} min-h-0 px-2 py-1`}
+                            onClick={() => setCancelId(row.token.id)}
+                          >
+                            <Ban className="h-3.5 w-3.5" aria-hidden="true" />
+                            Cancel
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

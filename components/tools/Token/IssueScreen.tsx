@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, MessageCircle, Printer, QrCode, Star, Ticket } from "lucide-react";
 import { useToken } from "@/lib/token/store";
 import {
@@ -23,9 +23,6 @@ import {
   secondaryBtnClass,
 } from "./ui";
 
-/** How long the just-issued number stays on screen before the form returns. */
-const CONFIRMATION_MS = 2000;
-
 export function IssueScreen() {
   const { services, counters, todayTokens, settings, business, issueToken, serviceById } =
     useToken();
@@ -40,13 +37,10 @@ export function IssueScreen() {
   const [issuing, setIssuing] = useState(false);
   const [issued, setIssued] = useState<Token | null>(null);
   const [error, setError] = useState("");
-  const confirmationTimer = useRef(0);
 
   useEffect(() => {
     if (!serviceId && active.length > 0) setServiceId(active[0].id);
   }, [active, serviceId]);
-
-  useEffect(() => () => window.clearTimeout(confirmationTimer.current), []);
 
   const service = active.find((row) => row.id === serviceId);
   const estimate = service ? estimateForNewToken(todayTokens, service, counters) : 0;
@@ -86,11 +80,10 @@ export function IssueScreen() {
       setNote("");
       setPriority(false);
       setShowDetails(false);
-      // The number stays up for two seconds so the receptionist can read it
-      // out while handing the slip over, then the form comes back ready for
-      // the next person — this screen is used in bursts.
-      window.clearTimeout(confirmationTimer.current);
-      confirmationTimer.current = window.setTimeout(() => setIssued(null), CONFIRMATION_MS);
+      // The card stays until it is dismissed. It used to clear itself after two
+      // seconds, which took the Print and WhatsApp buttons with it before
+      // anyone could reach them — the number is only half the job, and handing
+      // it over is the other half.
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Could not issue a token.");
     } finally {

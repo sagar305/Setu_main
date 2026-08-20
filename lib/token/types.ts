@@ -59,17 +59,24 @@ export type Token = {
   /** Set when the token was issued by the customer's own phone via QR. */
   selfIssued: boolean;
   /**
-   * When a skipped token was put back in the line.
+   * The skipped token this one replaces, when somebody came back.
    *
-   * Restoring sends someone to the back of the queue, which is an ordering
-   * change, not a re-issue — so `issuedAt` is left alone and the wait this
-   * person actually endured stays in the reports honestly. Ordering reads
-   * `restoredAt ?? issuedAt`.
+   * A person who missed their call does not get their old number back — they
+   * are handed a fresh one and join behind everyone currently waiting. The
+   * skipped row stays exactly as it was, so the reports still show that a call
+   * went unanswered, and this pointer is what ties the two halves of that
+   * person's visit together.
    */
-  restoredAt: string | null;
+  reissuedFromId: string | null;
+  /** The replacement token, set on the skipped row. The other half of the link. */
+  reissuedAsId: string | null;
 };
 
-export type MessageTemplateKey = "tokenIssued" | "almostYourTurn";
+export type MessageTemplateKey =
+  | "tokenIssued"
+  | "almostYourTurn"
+  | "waitingForYou"
+  | "skipped";
 
 export type DisplayTheme = "light" | "dark" | "high-contrast";
 
@@ -85,6 +92,18 @@ export type TokenSettings = {
   voiceRate: number;
   /** Spoken pattern; {token} and {counter} substituted. */
   voiceTemplate: string;
+  /**
+   * Skip a called token automatically when nobody comes.
+   *
+   * A queue stalls on the person who wandered off, and a staff member with a
+   * customer in front of them is the last person who will remember to tap
+   * Skip. The clock does it instead — and the customer is told the clock is
+   * running before it runs out, which is what makes it fair rather than
+   * merely efficient.
+   */
+  autoSkipEnabled: boolean;
+  /** How long a called token has to reach the counter. */
+  autoSkipMinutes: number;
   chimeEnabled: boolean;
   chimeSound: "bell" | "ding" | "chime";
   /** Announce each call this many times. */
@@ -154,6 +173,10 @@ export const DEFAULT_MESSAGE_TEMPLATES: Record<MessageTemplateKey, string> = {
     "Namaste {name}, your token at {business} is {token} for {service}. About {wait} of waiting. Please be seated.",
   almostYourTurn:
     "{name}, your token {token} at {business} is next but one. Please come to the waiting area.",
+  waitingForYou:
+    "{name}, your token {token} has been called at {business}. Please come to {counter} within {minutes} minutes, or the token will be skipped.",
+  skipped:
+    "{name}, token {token} was called at {business} but nobody came, so it has been skipped. Please come to the counter and we will give you a new number.",
 };
 
 export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
@@ -164,6 +187,7 @@ export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
   { token: "{wait}", meaning: "Estimated wait, e.g. about 20 min" },
   { token: "{ahead}", meaning: "How many people are ahead" },
   { token: "{counter}", meaning: "Counter name, once called" },
+  { token: "{minutes}", meaning: "Minutes they have to reach the counter" },
 ];
 
 export const DEFAULT_SETTINGS: TokenSettings = {
@@ -176,6 +200,8 @@ export const DEFAULT_SETTINGS: TokenSettings = {
   voiceLang: "en-IN",
   voiceRate: 0.9,
   voiceTemplate: DEFAULT_VOICE_TEMPLATE,
+  autoSkipEnabled: true,
+  autoSkipMinutes: 2,
   chimeEnabled: true,
   chimeSound: "bell",
   announceRepeat: 2,
