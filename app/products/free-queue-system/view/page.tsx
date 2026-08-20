@@ -10,8 +10,9 @@ import { QueuePosterLanding } from "@/components/tools/Queue/PosterLanding";
  * phone that scans the poster has no way to reach the counter's queue — and a
  * page that pretended otherwise would show somebody a position in a queue that
  * does not exist on their phone. So it says the true thing instead: show this
- * to the counter. The live version, where a customer's own phone takes a
- * number and watches it move, is what the paid product adds.
+ * to the counter. A live version — a customer's own phone taking a number and
+ * watching it move — would need a server both devices share, which is outside
+ * what an offline app can do.
  *
  * Noindex: the business and service names arrive in the query string, so every
  * scan is a different URL with nothing worth indexing behind it.

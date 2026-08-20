@@ -212,7 +212,7 @@ const FAQ_ITEMS = [
   {
     question: "Can I run the counter on a phone and the display on a TV?",
     answer:
-      "Not in the free app. Two devices cannot share one browser's storage, so both surfaces have to be tabs on the same machine — a counter PC with a second monitor, or a laptop plugged into a TV. Genuine multi-device is what the paid Setu Queue adds.",
+      "Not in the free app. Two devices cannot share one browser's storage, so both surfaces have to be tabs on the same machine — a counter PC with a second monitor, or a laptop plugged into a TV. Keeping separate devices in step needs a server between them, which is the one thing an app with no account and no internet cannot do.",
   },
   {
     question: "Which languages can it announce in?",
@@ -227,7 +227,7 @@ const FAQ_ITEMS = [
   {
     question: "Can a customer scan a QR code and get their own token?",
     answer:
-      "The free app prints a poster whose QR opens a page telling them to show it at the counter — they still collect the number from you. A customer's phone issuing its own token with a live queue position needs a server, and that is the paid Setu Queue.",
+      "The free app prints a poster whose QR opens a page telling them to show it at the counter — they still collect the number from you. A customer's own phone taking a number and watching its position move would need a server both devices share, so it is not something an offline app can do honestly.",
   },
   {
     question: "Is my customers' data safe?",
@@ -430,24 +430,22 @@ export default function FreeQueueSystemPage() {
                 Everything runs in one browser with no account, so the counter and the display have
                 to be two tabs on the same machine. A receptionist&apos;s phone and a TV across the
                 room cannot share a queue, and a customer&apos;s own phone cannot take a number and
-                watch its position move. Those need a server — and that is what{" "}
-                <Link href="/products/queue" className="font-semibold text-indigo hover:underline">
-                  Setu Queue
-                </Link>{" "}
-                is for. Everything on this page stays free.
+                watch its position move. Both of those need a server keeping several devices in
+                step — the one thing an app that works offline and asks for no login cannot do.
+                Everything on this page is free, and stays free.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="/products/queue"
+                  href="/products/free-clinic-software"
                   className="inline-block rounded-full bg-indigo px-6 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
                 >
-                  See Setu Queue →
+                  Running a clinic? →
                 </Link>
                 <Link
-                  href="/products/free-clinic-software"
+                  href="/tools/appointment-book"
                   className="inline-block rounded-full border border-muted-line/30 px-6 py-2.5 text-sm font-semibold text-ink transition hover:border-indigo/40 hover:text-indigo"
                 >
-                  Running a clinic?
+                  Need appointments instead?
                 </Link>
                 <Link
                   href="/tools"

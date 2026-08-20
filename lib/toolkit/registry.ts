@@ -294,7 +294,10 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     reads: ["business"],
     writes: [],
     dependsOn: ["business-profile"],
-    paidPath: "queue",
+    // Not "queue": Setu Queue is the QSR counter POS, a different product for a
+    // different room. A waiting-room token system has no paid counterpart, so
+    // it funnels to the platform rather than to a product it is unrelated to.
+    paidPath: "platform",
     integrations: [
       { with: "appointment-book", ux: "Convert a walk-in token into an appointment" },
       { with: "clinic-manager", ux: "Call the waiting room from the same device as the consult" },

@@ -162,8 +162,8 @@ export type PosterContext = {
  * one browser's IndexedDB, and pretending otherwise would put a customer in
  * front of a screen that says they are seventh in a queue that does not exist
  * on this phone. It opens a page that tells them what to do instead: show it
- * at the counter. The live version is the paid product's, and the poster says
- * so in one line rather than hiding it.
+ * at the counter. A live version would need a server the two devices share, so
+ * the poster states what this one actually does rather than hiding it.
  */
 export function buildPosterHtml(ctx: PosterContext): string {
   return `

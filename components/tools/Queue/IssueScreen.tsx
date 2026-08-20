@@ -349,7 +349,7 @@ function QrPosterCard({ services, businessName }: { services: Service[]; busines
       </div>
       <p className="mt-3 text-xs text-muted">
         A customer&apos;s own phone issuing its own token, with a live position in the queue, needs
-        the two devices to share a queue — that is the paid Setu Queue.
+        a server the two devices share — which an app that works offline cannot honestly offer.
       </p>
     </SectionCard>
   );
