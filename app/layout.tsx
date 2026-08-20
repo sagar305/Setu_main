@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { getSiteContent } from "@/lib/content";
 import { LanguageProvider } from "@/lib/i18n";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             collects no personal data and never sees what users type into the
             calculators or tools, which keeps the on-device promise intact. */}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

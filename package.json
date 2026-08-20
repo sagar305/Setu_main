@@ -19,6 +19,7 @@
   "dependencies": {
     "@huggingface/transformers": "^4.2.0",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "html2canvas": "^1.4.1",
     "jsbarcode": "^3.12.3",
     "jspdf": "^4.2.1",
