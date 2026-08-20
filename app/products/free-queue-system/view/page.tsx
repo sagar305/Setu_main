@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Suspense } from "react";
+import { QueuePosterLanding } from "@/components/tools/Queue/PosterLanding";
+
+/**
+ * Where the waiting-area poster's QR code lands.
+ *
+ * It issues nothing. Two devices cannot share one browser's IndexedDB, so a
+ * phone that scans the poster has no way to reach the counter's queue — and a
+ * page that pretended otherwise would show somebody a position in a queue that
+ * does not exist on their phone. So it says the true thing instead: show this
+ * to the counter. The live version, where a customer's own phone takes a
+ * number and watches it move, is what the paid product adds.
+ *
+ * Noindex: the business and service names arrive in the query string, so every
+ * scan is a different URL with nothing worth indexing behind it.
+ */
+export const metadata: Metadata = {
+  title: "Join the queue | Setu",
+  description:
+    "Show this screen at the counter to collect your token number. Part of the Setu Free Token & Queue System.",
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/products/free-queue-system/view" },
+};
+
+export default function QueueViewPage() {
+  return (
+    <section className="mx-auto max-w-lg px-4 py-12 sm:px-6 sm:py-16">
+      <Suspense fallback={<p className="text-center text-muted">Loading…</p>}>
+        <QueuePosterLanding />
+      </Suspense>
+      <p className="mt-10 text-center text-xs text-muted">
+        Running a queue yourself?{" "}
+        <Link
+          href="/products/free-queue-system"
+          className="font-semibold text-indigo hover:underline"
+        >
+          The token system behind this is free.
+        </Link>
+      </p>
+    </section>
+  );
+}

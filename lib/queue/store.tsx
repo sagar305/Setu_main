@@ -34,6 +34,8 @@ import {
   type QueueStoreName,
 } from "./db";
 import { createQueueBroadcast, QUEUE_POLL_MS, QUEUE_STALE_MS, type QueueBroadcast } from "./sync";
+import { restoreBackup, type QueueBackup } from "./backup";
+import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
 import {
   businessDate,
   counterServes,
@@ -116,6 +118,10 @@ type QueueContextValue = {
   resetDayNow: () => Promise<void>;
   /** Wipe the queue database. Does not touch the shared workspace. */
   clearAllData: () => Promise<void>;
+  /** Replace the queue with a backup file's contents and re-read everything. */
+  applyRestoredBackup: (backup: QueueBackup) => Promise<void>;
+  /** Push the current snapshot to the owner's Google Sheet. */
+  syncToSheet: () => Promise<void>;
   reloadAll: () => Promise<void>;
 
   serviceById: (id: string) => Service | undefined;
@@ -792,6 +798,42 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     setSettings(nextSettings);
   }, [batchWithSync]);
 
+  const applyRestoredBackup = useCallback(
+    async (backup: QueueBackup) => {
+      await restoreBackup(backup);
+      broadcast().post(["queue_settings", "queue_services", "queue_counters", "queue_tokens"]);
+      await load();
+    },
+    [broadcast, load]
+  );
+
+  /**
+   * Push everything to the owner's sheet.
+   *
+   * One way only. Pulling would let a spreadsheet edit rewrite a live queue,
+   * and a queue is the one kind of record where a stale overwrite loses a
+   * person standing in the room.
+   */
+  const syncToSheet = useCallback(async () => {
+    const url = (settingsRef.current.sheetUrl ?? "").trim();
+    if (!url) throw new Error("Add your Google Sheet URL in Settings first.");
+    if (!isValidSyncUrl(url)) throw new Error("That does not look like an Apps Script URL.");
+
+    await pushToSheet(
+      url,
+      buildTabPayloads(ALL_SYNC_SLICES, {
+        business,
+        settings: settingsRef.current,
+        services,
+        counters: countersRef.current,
+        tokens: tokensRef.current,
+      })
+    );
+    const next: QueueSettings = { ...settingsRef.current, lastSyncAt: nowIso() };
+    setSettings(next);
+    await batchWithSync({ queue_settings: [next] });
+  }, [batchWithSync, business, services]);
+
   const clearAllData = useCallback(async () => {
     await queueClearAll();
     broadcast().post(["queue_settings", "queue_services", "queue_counters", "queue_tokens"]);
@@ -851,6 +893,8 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     transferToken,
     resetDayNow,
     clearAllData,
+    applyRestoredBackup,
+    syncToSheet,
     reloadAll,
     serviceById,
     counterById,

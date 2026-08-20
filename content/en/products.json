@@ -170,6 +170,30 @@
       }
     },
     {
+      "id": "free-queue",
+      "status": "live",
+      "name": "Free Token & Queue System",
+      "headline": "Free token and queue software, right in your browser",
+      "description": "A completely free token system for anywhere people wait in a line — clinics, labs, salons, service centres, bank branches. Hand out numbers, put a display screen in the waiting area, and let the app call each person out loud in Hindi, English or your own language. No login, no subscription, and it keeps working without internet.",
+      "features": [
+        "Calls the number out loud — “Token A forty-two, please proceed to Counter three”",
+        "Announcements in Hindi, English, Marathi, Tamil, Telugu, Bengali, Gujarati and Kannada",
+        "A waiting-room display for a TV or second monitor, in light, dark or high contrast",
+        "Chime and a flashing card for screens with no speech engine",
+        "Several services and counters, with priority for seniors and emergencies",
+        "Recall, skip and transfer — the token number stays with the person",
+        "Honest wait estimates from your own measured service times",
+        "Token slips on a 58mm printer, and an A4 QR poster for the waiting area",
+        "WhatsApp the token and an “almost your turn” nudge",
+        "Hourly load, no-show rate and counter-wise reports, exportable to CSV",
+        "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Token & Queue System — it's free",
+        "href": "/products/free-queue-system"
+      }
+    },
+    {
       "id": "pos",
       "status": "live",
       "name": "Setu Dine",

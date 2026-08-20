@@ -74,18 +74,24 @@ const itemListSchema = {
     {
       "@type": "ListItem",
       position: 6,
+      name: "Free Token & Queue System",
+      url: "https://setutechnology.com/products/free-queue-system",
+    },
+    {
+      "@type": "ListItem",
+      position: 7,
       name: "Setu Dine",
       url: "https://setutechnology.com/products/restaurant-pos",
     },
     {
       "@type": "ListItem",
-      position: 7,
+      position: 8,
       name: "Setu Queue",
       url: "https://setutechnology.com/products/queue",
     },
     {
       "@type": "ListItem",
-      position: 8,
+      position: 9,
       name: "Setu Retail",
       url: "https://setutechnology.com/products/retail",
     },

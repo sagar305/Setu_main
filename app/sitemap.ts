@@ -93,6 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/products/free-restaurant-pos",
     "/products/free-tuition-software",
     "/products/free-clinic-software",
+    "/products/free-queue-system",
     "/blog",
     "/glossary",
     "/contact",

@@ -280,6 +280,27 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     ],
   },
   {
+    slug: "queue-management",
+    name: "Free Token & Queue System",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/products/free-queue-system",
+    // Owns no shared entity: services, counters and tokens live in the queue's
+    // own QUEUE_DATABASE, because two tabs write to them all day and the names
+    // are too generic to claim in a database every tool shares. The business
+    // profile is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    paidPath: "queue",
+    integrations: [
+      { with: "appointment-book", ux: "Convert a walk-in token into an appointment" },
+      { with: "clinic-manager", ux: "Call the waiting room from the same device as the consult" },
+    ],
+  },
+  {
     slug: "tuition-manager",
     name: "Tuition Class Manager",
     category: "education",
