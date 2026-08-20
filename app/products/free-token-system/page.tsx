@@ -25,13 +25,13 @@ import {
   Volume2,
   WifiOff,
 } from "lucide-react";
-import { QueueApp } from "@/components/tools/Queue/QueueApp";
+import { TokenApp } from "@/components/tools/Token/TokenApp";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Free Token & Queue Management System — Setu",
+  title: "Free Token System for Clinics, Labs & Shops",
   description:
     "Free token system for clinics, labs, salons and shops. Calls each number out loud in Hindi or English, shows it on a TV, works offline with no signup.",
   keywords: [
@@ -46,20 +46,20 @@ export const metadata: Metadata = {
     "free token generator for shop",
   ],
   alternates: {
-    canonical: "/products/free-queue-system",
+    canonical: "/products/free-token-system",
   },
   openGraph: {
-    title: "Free Token & Queue System",
+    title: "Free Token System",
     description:
       "Hand out tokens, put a screen in the waiting area, and let the app call each number out loud. Free, offline, no signup.",
-    url: "/products/free-queue-system",
+    url: "/products/free-token-system",
     type: "website",
     images: [
       {
         url: "/og/setu-og-image-1200x627.png",
         width: 1200,
         height: 627,
-        alt: "Setu Free Token & Queue System",
+        alt: "Setu Free Token System",
       },
     ],
   },
@@ -111,7 +111,7 @@ const COUNTER: Feature[] = [
     icon: Ticket,
     title: "One tap to give a token",
     description:
-      "Pick the line, tap once, and the number comes up huge for two seconds while you hand over the slip. Name and phone are optional and folded away until you want them.",
+      "Pick the line, take the customer's name and number, and the token comes up huge for two seconds while you hand over the slip. Every token belongs to someone you can reach.",
   },
   {
     icon: Timer,
@@ -156,7 +156,7 @@ const AFTER: Feature[] = [
     icon: MessageCircle,
     title: "WhatsApp when their turn is near",
     description:
-      "Take a phone number and the app prepares the message; you tap send. Nothing is sent automatically, because an app with no server cannot honestly claim to.",
+      "Every token carries a phone number, so the app can prepare the message the moment they are near the front; you tap send. Nothing is sent automatically, because an app with no server cannot honestly claim to.",
   },
   {
     icon: QrCode,
@@ -239,7 +239,7 @@ const FAQ_ITEMS = [
 const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Setu Free Token & Queue System",
+  name: "Setu Free Token System",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web browser",
   description:
@@ -254,7 +254,7 @@ const softwareApplicationSchema = {
     "CSV export, JSON backup and Google Sheet sync",
     "Works offline, no login required",
   ],
-  offers: freeOffer({ url: "/products/free-queue-system" }),
+  offers: freeOffer({ url: "/products/free-token-system" }),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",
@@ -293,7 +293,7 @@ function FeatureCards({ items }: { items: Feature[] }) {
   );
 }
 
-export default function FreeQueueSystemPage() {
+export default function FreeTokenSystemPage() {
   return (
     <>
       <script
@@ -312,7 +312,7 @@ export default function FreeQueueSystemPage() {
               <span className="text-sm font-semibold text-indigo">Free Tool — Works Offline</span>
             </div>
             <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-              Free Token &amp; Queue System
+              Free Token System
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
               Stop shouting names across the waiting room. Hand out numbers, put a screen on the
@@ -339,7 +339,7 @@ export default function FreeQueueSystemPage() {
 
       {/* The app itself */}
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6">
-        <QueueApp />
+        <TokenApp />
       </section>
 
       <section className="border-t border-muted-line/20 bg-cream-paper py-16">

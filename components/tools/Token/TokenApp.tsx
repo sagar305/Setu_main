@@ -13,7 +13,7 @@ import {
   Ticket,
   WifiOff,
 } from "lucide-react";
-import { QueueProvider, useQueue } from "@/lib/queue/store";
+import { TokenProvider, useToken } from "@/lib/token/store";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
 import type { ScreenId } from "./nav";
@@ -33,14 +33,14 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Ticket }[] = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-function QueueShell({
+function TokenShell({
   fullscreen,
   onToggleFullscreen,
 }: {
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
-  const { business, settings, todayTokens } = useQueue();
+  const { business, settings, todayTokens } = useToken();
   const [screen, setScreen] = useState<ScreenId>("counter");
   const [offline, setOffline] = useState(false);
 
@@ -86,7 +86,7 @@ function QueueShell({
   if (locked) {
     return (
       <LockScreen
-        businessName={business?.name ?? "Queue"}
+        businessName={business?.name ?? "Token system"}
         pinHash={settings.pinHash ?? ""}
         pinSalt={settings.pinSalt ?? ""}
         onUnlock={() => {
@@ -103,7 +103,7 @@ function QueueShell({
     <div className="grid gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <h2 className="text-lg font-bold text-ink">{business?.name || "Queue"}</h2>
+          <h2 className="text-lg font-bold text-ink">{business?.name || "Token system"}</h2>
           {waiting > 0 && (
             <span className="rounded-full bg-indigo/10 px-2.5 py-0.5 text-xs font-bold text-indigo">
               {waiting} waiting
@@ -118,7 +118,7 @@ function QueueShell({
         </div>
         <div className="flex items-center gap-2">
           <a
-            href="/products/free-queue-system/display"
+            href="/products/free-token-system/display"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40 hover:text-indigo"
@@ -151,7 +151,7 @@ function QueueShell({
         </div>
       </div>
 
-      <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Queue sections">
+      <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Token system sections">
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
@@ -179,8 +179,8 @@ function QueueShell({
   );
 }
 
-function QueueBody() {
-  const { status, errorMessage } = useQueue();
+function TokenBody() {
+  const { status, errorMessage } = useToken();
   const [fullscreen, setFullscreen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -239,16 +239,16 @@ function QueueBody() {
       {status === "welcome" && <WelcomeScreen />}
       {status === "setup" && <SetupScreen />}
       {status === "ready" && (
-        <QueueShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+        <TokenShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
       )}
     </div>
   );
 }
 
-export function QueueApp() {
+export function TokenApp() {
   return (
-    <QueueProvider>
-      <QueueBody />
-    </QueueProvider>
+    <TokenProvider>
+      <TokenBody />
+    </TokenProvider>
   );
 }

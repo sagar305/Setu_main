@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
-import { retentionCutoff } from "@/lib/queue/calc";
+import { useToken } from "@/lib/token/store";
+import { retentionCutoff } from "@/lib/token/calc";
 import {
   demandByService,
   formatHourRange,
@@ -14,7 +14,7 @@ import {
   summarise,
   tokenRows,
   totalsByDay,
-} from "@/lib/queue/reports";
+} from "@/lib/token/reports";
 import {
   counterPerformanceCsv,
   dailyTotalsCsv,
@@ -22,8 +22,8 @@ import {
   hourLoadCsv,
   serviceDemandCsv,
   tokensCsv,
-} from "@/lib/queue/csv";
-import { TOKEN_RETENTION_DAYS } from "@/lib/queue/types";
+} from "@/lib/token/csv";
+import { TOKEN_RETENTION_DAYS } from "@/lib/token/types";
 import { SectionCard, chipBtnClass, secondaryBtnClass } from "./ui";
 
 const RANGES = [
@@ -33,7 +33,7 @@ const RANGES = [
 ] as const;
 
 export function ReportsScreen() {
-  const { tokens, services, counters, today } = useQueue();
+  const { tokens, services, counters, today } = useToken();
   const [rangeId, setRangeId] = useState<(typeof RANGES)[number]["id"]>("7");
   const range = RANGES.find((row) => row.id === rangeId) ?? RANGES[0];
 
@@ -79,7 +79,7 @@ export function ReportsScreen() {
           <button
             type="button"
             className={secondaryBtnClass}
-            onClick={() => downloadCsv(`queue-hourly-${today}.csv`, hourLoadCsv(hours))}
+            onClick={() => downloadCsv(`token-hourly-${today}.csv`, hourLoadCsv(hours))}
           >
             <Download className="h-4 w-4" aria-hidden="true" />
             CSV
@@ -126,7 +126,7 @@ export function ReportsScreen() {
             disabled={scoped.length === 0}
             onClick={() =>
               downloadCsv(
-                `queue-tokens-${today}.csv`,
+                `token-tokens-${today}.csv`,
                 tokensCsv(tokenRows(scoped, services, counters))
               )
             }
@@ -158,7 +158,7 @@ export function ReportsScreen() {
             className={secondaryBtnClass}
             disabled={byCounter.length === 0}
             onClick={() =>
-              downloadCsv(`queue-counters-${today}.csv`, counterPerformanceCsv(byCounter))
+              downloadCsv(`token-counters-${today}.csv`, counterPerformanceCsv(byCounter))
             }
           >
             <Download className="h-4 w-4" aria-hidden="true" />
@@ -208,7 +208,7 @@ export function ReportsScreen() {
             className={secondaryBtnClass}
             disabled={byService.length === 0}
             onClick={() =>
-              downloadCsv(`queue-services-${today}.csv`, serviceDemandCsv(byService))
+              downloadCsv(`token-services-${today}.csv`, serviceDemandCsv(byService))
             }
           >
             <Download className="h-4 w-4" aria-hidden="true" />
@@ -247,7 +247,7 @@ export function ReportsScreen() {
             type="button"
             className={secondaryBtnClass}
             disabled={days.length === 0}
-            onClick={() => downloadCsv(`queue-daily-${today}.csv`, dailyTotalsCsv(days))}
+            onClick={() => downloadCsv(`token-daily-${today}.csv`, dailyTotalsCsv(days))}
           >
             <Download className="h-4 w-4" aria-hidden="true" />
             CSV

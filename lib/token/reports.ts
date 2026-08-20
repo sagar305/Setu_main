@@ -133,7 +133,7 @@ export function demandByService(tokens: Token[], services: Service[]): ServiceDe
     .sort((a, b) => b.issued - a.issued);
 }
 
-export type QueueSummary = {
+export type DaySummary = {
   issued: number;
   served: number;
   skipped: number;
@@ -144,7 +144,7 @@ export type QueueSummary = {
   averageService: number | null;
 };
 
-export function summarise(tokens: Token[]): QueueSummary {
+export function summarise(tokens: Token[]): DaySummary {
   const served = tokens.filter((token) => token.status === "served").length;
   const skipped = tokens.filter((token) => token.status === "skipped").length;
   const cancelled = tokens.filter((token) => token.status === "cancelled").length;

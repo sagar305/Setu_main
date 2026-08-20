@@ -19,27 +19,27 @@
 // Only the names of the changed stores travel, never the data, so the two tabs
 // cannot disagree about the contents: the database stays the only truth.
 
-import type { QueueStoreName } from "./db";
+import type { TokenStoreName } from "./db";
 
-const CHANNEL_NAME = "setu-queue";
+const CHANNEL_NAME = "setu-token";
 /** Fallback key for browsers without BroadcastChannel; the value is a nonce. */
-const STORAGE_KEY = "setu-queue-change";
+const STORAGE_KEY = "setu-token-change";
 
 /** How often a display checks for work it might have missed. */
-export const QUEUE_POLL_MS = 2000;
+export const POLL_MS = 2000;
 /** How long without any signal before it re-reads everything regardless. */
-export const QUEUE_STALE_MS = 10_000;
+export const STALE_MS = 10_000;
 
-export type QueueChangeMessage = {
+export type TokenChangeMessage = {
   /** Random per-tab id, so a tab ignores the echo of its own write. */
   sender: string;
-  stores: QueueStoreName[];
+  stores: TokenStoreName[];
   at: number;
 };
 
-export type QueueBroadcast = {
-  post: (stores: QueueStoreName[]) => void;
-  subscribe: (handler: (stores: QueueStoreName[]) => void) => () => void;
+export type TokenBroadcast = {
+  post: (stores: TokenStoreName[]) => void;
+  subscribe: (handler: (stores: TokenStoreName[]) => void) => () => void;
   close: () => void;
 };
 
@@ -49,17 +49,17 @@ function randomId(): string {
 }
 
 /** A no-op channel for server rendering and for browsers with neither transport. */
-function inertBroadcast(): QueueBroadcast {
+function inertBroadcast(): TokenBroadcast {
   return { post: () => {}, subscribe: () => () => {}, close: () => {} };
 }
 
-export function createQueueBroadcast(): QueueBroadcast {
+export function createTokenBroadcast(): TokenBroadcast {
   if (typeof window === "undefined") return inertBroadcast();
 
   const sender = randomId();
-  const handlers = new Set<(stores: QueueStoreName[]) => void>();
+  const handlers = new Set<(stores: TokenStoreName[]) => void>();
 
-  const deliver = (message: QueueChangeMessage | null) => {
+  const deliver = (message: TokenChangeMessage | null) => {
     if (!message || message.sender === sender) return;
     if (!Array.isArray(message.stores) || message.stores.length === 0) return;
     for (const handler of handlers) handler(message.stores);
@@ -67,11 +67,11 @@ export function createQueueBroadcast(): QueueBroadcast {
 
   if (typeof BroadcastChannel !== "undefined") {
     const channel = new BroadcastChannel(CHANNEL_NAME);
-    channel.onmessage = (event) => deliver(event.data as QueueChangeMessage);
+    channel.onmessage = (event) => deliver(event.data as TokenChangeMessage);
     return {
       post: (stores) => {
         if (stores.length === 0) return;
-        channel.postMessage({ sender, stores, at: Date.now() } satisfies QueueChangeMessage);
+        channel.postMessage({ sender, stores, at: Date.now() } satisfies TokenChangeMessage);
       },
       subscribe: (handler) => {
         handlers.add(handler);
@@ -89,7 +89,7 @@ export function createQueueBroadcast(): QueueBroadcast {
   const onStorage = (event: StorageEvent) => {
     if (event.key !== STORAGE_KEY || !event.newValue) return;
     try {
-      deliver(JSON.parse(event.newValue) as QueueChangeMessage);
+      deliver(JSON.parse(event.newValue) as TokenChangeMessage);
     } catch {
       // A malformed payload costs one missed refresh; the poll picks it up.
     }
@@ -102,7 +102,7 @@ export function createQueueBroadcast(): QueueBroadcast {
       try {
         window.localStorage.setItem(
           STORAGE_KEY,
-          JSON.stringify({ sender, stores, at: Date.now() } satisfies QueueChangeMessage)
+          JSON.stringify({ sender, stores, at: Date.now() } satisfies TokenChangeMessage)
         );
       } catch {
         // Private mode can block localStorage; the poll still carries it.

@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { ListOrdered, Lock, Upload, Volume2, WifiOff } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
-import { parseBackupFile } from "@/lib/queue/backup";
+import { useToken } from "@/lib/token/store";
+import { parseBackupFile } from "@/lib/token/backup";
 import { primaryBtnClass, secondaryBtnClass } from "./ui";
 
 const POINTS = [
@@ -13,7 +13,7 @@ const POINTS = [
 ];
 
 export function WelcomeScreen() {
-  const { startSetup, applyRestoredBackup } = useQueue();
+  const { startSetup, applyRestoredBackup } = useToken();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState("");
   const [importing, setImporting] = useState(false);

@@ -10,7 +10,7 @@ import { ArrowRight, Ticket } from "lucide-react";
  * all the poster can carry — this page has no access to the counter's queue.
  * Both are rendered as plain text, never as markup.
  */
-export function QueuePosterLanding() {
+export function PosterLanding() {
   const params = useSearchParams();
   const business = (params.get("b") ?? "").slice(0, 80);
   const service = (params.get("s") ?? "").slice(0, 80);

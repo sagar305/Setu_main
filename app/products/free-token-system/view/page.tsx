@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { QueuePosterLanding } from "@/components/tools/Queue/PosterLanding";
+import { PosterLanding } from "@/components/tools/Token/PosterLanding";
 
 /**
  * Where the waiting-area poster's QR code lands.
@@ -20,21 +20,21 @@ import { QueuePosterLanding } from "@/components/tools/Queue/PosterLanding";
 export const metadata: Metadata = {
   title: "Join the queue | Setu",
   description:
-    "Show this screen at the counter to collect your token number. Part of the Setu Free Token & Queue System.",
+    "Show this screen at the counter to collect your token number. Part of the Setu Free Token System.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "/products/free-queue-system/view" },
+  alternates: { canonical: "/products/free-token-system/view" },
 };
 
-export default function QueueViewPage() {
+export default function TokenViewPage() {
   return (
     <section className="mx-auto max-w-lg px-4 py-12 sm:px-6 sm:py-16">
       <Suspense fallback={<p className="text-center text-muted">Loading…</p>}>
-        <QueuePosterLanding />
+        <PosterLanding />
       </Suspense>
       <p className="mt-10 text-center text-xs text-muted">
         Running a queue yourself?{" "}
         <Link
-          href="/products/free-queue-system"
+          href="/products/free-token-system"
           className="font-semibold text-indigo hover:underline"
         >
           The token system behind this is free.

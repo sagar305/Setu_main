@@ -9,33 +9,33 @@
 // these files already knows what this one is.
 
 import {
-  queueBatch,
-  queueClearStores,
-  queueGetAll,
-  QUEUE_STORES,
-  type QueueStoreName,
+  tokenBatch,
+  tokenClearStores,
+  tokenGetAll,
+  TOKEN_STORES,
+  type TokenStoreName,
 } from "./db";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import type { Business } from "@/lib/pos/types";
 
-export const BACKUP_APP_MARKER = "setu-queue";
+export const BACKUP_APP_MARKER = "setu-token";
 export const BACKUP_VERSION = 1;
 
-export const QUEUE_BACKUP_STORES: QueueStoreName[] = [...QUEUE_STORES];
+export const QUEUE_BACKUP_STORES: TokenStoreName[] = [...TOKEN_STORES];
 
-export type QueueBackup = {
+export type TokenBackup = {
   app: string;
   version: number;
   exportedAt: string;
   /** The shared business profile, carried along but stored outside this DB. */
   business: Business | null;
-  data: Partial<Record<QueueStoreName, unknown[]>>;
+  data: Partial<Record<TokenStoreName, unknown[]>>;
 };
 
-export async function createBackup(): Promise<QueueBackup> {
-  const data: Partial<Record<QueueStoreName, unknown[]>> = {};
+export async function createBackup(): Promise<TokenBackup> {
+  const data: Partial<Record<TokenStoreName, unknown[]>> = {};
   for (const store of QUEUE_BACKUP_STORES) {
-    data[store] = await queueGetAll(store);
+    data[store] = await tokenGetAll(store);
   }
   const business = (await dbGetAll<Business>("business")).find((row) => row.id === "main") ?? null;
   return {
@@ -47,12 +47,12 @@ export async function createBackup(): Promise<QueueBackup> {
   };
 }
 
-export function downloadBackupFile(backup: QueueBackup): void {
+export function downloadBackupFile(backup: TokenBackup): void {
   const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `setu-queue-backup-${backup.exportedAt.slice(0, 10)}.json`;
+  link.download = `setu-token-backup-${backup.exportedAt.slice(0, 10)}.json`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -60,12 +60,12 @@ export function downloadBackupFile(backup: QueueBackup): void {
 }
 
 export type BackupValidation =
-  | { ok: true; backup: QueueBackup }
+  | { ok: true; backup: TokenBackup }
   | { ok: false; error: string };
 
 export function validateBackup(raw: unknown): BackupValidation {
   if (!raw || typeof raw !== "object") return { ok: false, error: "That file is not a backup." };
-  const candidate = raw as Partial<QueueBackup>;
+  const candidate = raw as Partial<TokenBackup>;
   if (candidate.app !== BACKUP_APP_MARKER) {
     return {
       ok: false,
@@ -81,7 +81,7 @@ export function validateBackup(raw: unknown): BackupValidation {
   if (!candidate.data || typeof candidate.data !== "object") {
     return { ok: false, error: "That backup file has no data in it." };
   }
-  return { ok: true, backup: candidate as QueueBackup };
+  return { ok: true, backup: candidate as TokenBackup };
 }
 
 export function parseBackupFile(text: string): BackupValidation {
@@ -92,12 +92,12 @@ export function parseBackupFile(text: string): BackupValidation {
   }
 }
 
-export function backupSummary(backup: QueueBackup): { label: string; count: number }[] {
-  const labels: Record<QueueStoreName, string> = {
-    queue_services: "Services",
-    queue_counters: "Counters",
-    queue_tokens: "Tokens",
-    queue_settings: "Settings",
+export function backupSummary(backup: TokenBackup): { label: string; count: number }[] {
+  const labels: Record<TokenStoreName, string> = {
+    services: "Services",
+    counters: "Counters",
+    tokens: "Tokens",
+    settings: "Settings",
   };
   return QUEUE_BACKUP_STORES.map((store) => ({
     label: labels[store],
@@ -114,13 +114,13 @@ export function backupSummary(backup: QueueBackup): { label: string; count: numb
  * not already have one — a restore should not rename a shop that is already
  * using the POS under a different name.
  */
-export async function restoreBackup(backup: QueueBackup): Promise<void> {
+export async function restoreBackup(backup: TokenBackup): Promise<void> {
   const present = QUEUE_BACKUP_STORES.filter((store) => Array.isArray(backup.data[store]));
-  await queueClearStores(present);
+  await tokenClearStores(present);
 
-  const writes: Partial<Record<QueueStoreName, unknown[]>> = {};
+  const writes: Partial<Record<TokenStoreName, unknown[]>> = {};
   for (const store of present) writes[store] = backup.data[store] ?? [];
-  await queueBatch(writes);
+  await tokenBatch(writes);
 
   if (backup.business) {
     const existing = (await dbGetAll<Business>("business")).find((row) => row.id === "main");

@@ -2,17 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, MessageCircle, Printer, QrCode, Star, Ticket } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
+import { useToken } from "@/lib/token/store";
 import {
   activeCountersForService,
   estimateForNewToken,
   formatWait,
   waitingAhead,
-} from "@/lib/queue/calc";
-import { estimateWaitMinutes } from "@/lib/queue/calc";
-import { queueWhatsAppLink } from "@/lib/queue/messages";
-import { printQrPoster, printTokenSlip } from "@/lib/queue/print";
-import { tokenLabel, type Service, type Token } from "@/lib/queue/types";
+} from "@/lib/token/calc";
+import { estimateWaitMinutes } from "@/lib/token/calc";
+import { whatsAppLinkFor } from "@/lib/token/messages";
+import { printQrPoster, printTokenSlip } from "@/lib/token/print";
+import { tokenLabel, type Service, type Token } from "@/lib/token/types";
 import {
   Field,
   SectionCard,
@@ -28,7 +28,7 @@ const CONFIRMATION_MS = 2000;
 
 export function IssueScreen() {
   const { services, counters, todayTokens, settings, business, issueToken, serviceById } =
-    useQueue();
+    useToken();
 
   const active = services.filter((service) => service.active);
   const [serviceId, setServiceId] = useState("");
@@ -51,8 +51,25 @@ export function IssueScreen() {
   const service = active.find((row) => row.id === serviceId);
   const estimate = service ? estimateForNewToken(todayTokens, service, counters) : 0;
 
+  /**
+   * Ten digits, with the spacing and punctuation people actually type stripped
+   * out, and an optional +91 allowed in front. Anything stricter starts
+   * rejecting real numbers at a busy counter, which is worse than a typo.
+   */
+  const phoneDigits = phone.replace(/\D/g, "");
+  const phoneLooksRight = phoneDigits.length >= 10;
+  const canIssue = Boolean(service) && name.trim().length > 0 && phoneLooksRight;
+
   const handleIssue = async () => {
     if (!service) return;
+    if (!name.trim()) {
+      setError("A name is needed before a token can be issued.");
+      return;
+    }
+    if (!phoneLooksRight) {
+      setError("A phone number of at least 10 digits is needed before a token can be issued.");
+      return;
+    }
     setError("");
     setIssuing(true);
     try {
@@ -103,7 +120,7 @@ export function IssueScreen() {
             serviceById(issued.serviceId)?.avgServiceMinutes ?? 5,
             activeCountersForService(counters, issued.serviceId)
           )}
-          whatsAppHref={queueWhatsAppLink("tokenIssued", settings, {
+          whatsAppHref={whatsAppLinkFor("tokenIssued", settings, {
             token: issued,
             service: serviceById(issued.serviceId),
             businessName: business?.name ?? "",
@@ -162,6 +179,31 @@ export function IssueScreen() {
               Priority — senior citizen, emergency or appointment
             </button>
 
+            {/* Name and phone are required. Every token now belongs to a
+                named person with a number we can reach — which is what makes
+                the WhatsApp nudge and any follow-up possible at all. The note
+                stays folded away, because it is the one field that is genuinely
+                occasional. */}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Field label="Name" required>
+                <input
+                  className={inputClass}
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Customer's name"
+                />
+              </Field>
+              <Field label="Phone" required hint="Used to message them when their turn is near.">
+                <input
+                  className={inputClass}
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  inputMode="tel"
+                  placeholder="98765 43210"
+                />
+              </Field>
+            </div>
+
             <div>
               <button
                 type="button"
@@ -173,37 +215,18 @@ export function IssueScreen() {
                   className={`h-4 w-4 transition ${showDetails ? "rotate-180" : ""}`}
                   aria-hidden="true"
                 />
-                Add details
+                Add a note
               </button>
               {showDetails && (
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  <Field label="Name">
+                <div className="mt-3">
+                  <Field label="Note">
                     <input
                       className={inputClass}
-                      value={name}
-                      onChange={(event) => setName(event.target.value)}
-                      placeholder="Optional"
+                      value={note}
+                      onChange={(event) => setNote(event.target.value)}
+                      placeholder="Anything the counter should know"
                     />
                   </Field>
-                  <Field label="Phone" hint="Lets you send the token on WhatsApp.">
-                    <input
-                      className={inputClass}
-                      value={phone}
-                      onChange={(event) => setPhone(event.target.value)}
-                      inputMode="tel"
-                      placeholder="Optional"
-                    />
-                  </Field>
-                  <div className="sm:col-span-2">
-                    <Field label="Note">
-                      <input
-                        className={inputClass}
-                        value={note}
-                        onChange={(event) => setNote(event.target.value)}
-                        placeholder="Anything the counter should know"
-                      />
-                    </Field>
-                  </div>
                 </div>
               )}
             </div>
@@ -217,7 +240,7 @@ export function IssueScreen() {
             <button
               type="button"
               onClick={() => void handleIssue()}
-              disabled={issuing || !service}
+              disabled={issuing || !canIssue}
               className="inline-flex min-h-[64px] w-full items-center justify-center gap-2 rounded-xl bg-indigo px-5 text-lg font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Ticket className="h-6 w-6" aria-hidden="true" />
@@ -306,7 +329,7 @@ function QrPosterCard({ services, businessName }: { services: Service[]; busines
     setPrinting(true);
     try {
       const url = new URL(
-        "/products/free-queue-system/view",
+        "/products/free-token-system/view",
         window.location.origin
       );
       url.searchParams.set("b", businessName);

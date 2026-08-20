@@ -22,15 +22,15 @@ import {
 import {
   tokenLabel,
   type Counter,
-  type QueueSettings,
-  type QueueTemplateKey,
+  type TokenSettings,
+  type MessageTemplateKey,
   type Service,
   type Token,
 } from "./types";
 
 export { fillTemplate, smsLink, whatsAppLink };
 
-export type QueueMessageContext = {
+export type MessageContext = {
   token: Token;
   service: Service | undefined;
   counter?: Counter | null;
@@ -40,7 +40,7 @@ export type QueueMessageContext = {
 };
 
 /** The values every queue template can use. */
-export function messageVars(context: QueueMessageContext): Record<string, string> {
+export function messageVars(context: MessageContext): Record<string, string> {
   const { token, service, counter, businessName, tokens, counters } = context;
   const ahead = service ? waitingAhead(tokens, service.id) : 0;
   const minutes = service
@@ -62,19 +62,19 @@ export function messageVars(context: QueueMessageContext): Record<string, string
   };
 }
 
-export function buildQueueMessage(
-  key: QueueTemplateKey,
-  settings: QueueSettings,
-  context: QueueMessageContext
+export function buildMessage(
+  key: MessageTemplateKey,
+  settings: TokenSettings,
+  context: MessageContext
 ): string {
   return fillTemplate(settings.messageTemplates[key], messageVars(context));
 }
 
 /** A wa.me link for one token's message, or the chooser when we have no number. */
-export function queueWhatsAppLink(
-  key: QueueTemplateKey,
-  settings: QueueSettings,
-  context: QueueMessageContext
+export function whatsAppLinkFor(
+  key: MessageTemplateKey,
+  settings: TokenSettings,
+  context: MessageContext
 ): string {
-  return whatsAppLink(context.token.phone, buildQueueMessage(key, settings, context));
+  return whatsAppLink(context.token.phone, buildMessage(key, settings, context));
 }

@@ -12,7 +12,7 @@ import {
   Undo2,
   Volume2,
 } from "lucide-react";
-import { countersForService, useQueue } from "@/lib/queue/store";
+import { countersForService, useToken } from "@/lib/token/store";
 import { readLocal, writeLocal } from "@/lib/toolkit/storage";
 import {
   activeCountersForService,
@@ -21,11 +21,11 @@ import {
   nextInQueue,
   shouldOfferSkip,
   waitingQueue,
-} from "@/lib/queue/calc";
-import { averageWaitMinutes } from "@/lib/queue/calc";
-import { formatClock, formatMinutes } from "@/lib/queue/reports";
-import { queueWhatsAppLink } from "@/lib/queue/messages";
-import { ALMOST_YOUR_TURN_POSITION, tokenLabel, type Token } from "@/lib/queue/types";
+} from "@/lib/token/calc";
+import { averageWaitMinutes } from "@/lib/token/calc";
+import { formatClock, formatMinutes } from "@/lib/token/reports";
+import { whatsAppLinkFor } from "@/lib/token/messages";
+import { ALMOST_YOUR_TURN_POSITION, tokenLabel, type Token } from "@/lib/token/types";
 import {
   ConfirmDialog,
   EmptyState,
@@ -74,7 +74,7 @@ export function CounterScreen() {
     restoreToken,
     cancelToken,
     transferToken,
-  } = useQueue();
+  } = useToken();
 
   /**
    * Which counter this device is. Remembered locally rather than in the
@@ -130,7 +130,7 @@ export function CounterScreen() {
   };
 
   const notifyLink = (token: Token) =>
-    queueWhatsAppLink("almostYourTurn", settings, {
+    whatsAppLinkFor("almostYourTurn", settings, {
       token,
       service: serviceById(token.serviceId),
       counter,

@@ -1,6 +1,6 @@
 "use client";
 
-// Client-side store for the Free Token & Queue System.
+// Client-side store for the Free Token System.
 //
 // Two things make this different from the other Setu stores.
 //
@@ -27,14 +27,14 @@ import {
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import { nowIso as posNowIso, type Business } from "@/lib/pos/types";
 import {
-  queueAllocateToken,
-  queueBatch,
-  queueClearAll,
-  queueGetAll,
-  type QueueStoreName,
+  allocateToken,
+  tokenBatch,
+  tokenClearAll,
+  tokenGetAll,
+  type TokenStoreName,
 } from "./db";
-import { createQueueBroadcast, QUEUE_POLL_MS, QUEUE_STALE_MS, type QueueBroadcast } from "./sync";
-import { restoreBackup, type QueueBackup } from "./backup";
+import { createTokenBroadcast, POLL_MS, STALE_MS, type TokenBroadcast } from "./sync";
+import { restoreBackup, type TokenBackup } from "./backup";
 import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
 import {
   businessDate,
@@ -44,18 +44,18 @@ import {
   retentionCutoff,
 } from "./calc";
 import {
-  DEFAULT_QUEUE_SETTINGS,
+  DEFAULT_SETTINGS,
   SERVICE_COLOURS,
   TOKEN_RETENTION_DAYS,
   generateId,
   nowIso,
   type Counter,
-  type QueueSettings,
+  type TokenSettings,
   type Service,
   type Token,
 } from "./types";
 
-export type QueueStatus = "loading" | "welcome" | "setup" | "ready" | "error";
+export type AppStatus = "loading" | "welcome" | "setup" | "ready" | "error";
 
 export type ServiceInput = Omit<Service, "id" | "createdAt">;
 export type CounterInput = Omit<Counter, "id" | "createdAt">;
@@ -69,11 +69,11 @@ export type IssueTokenInput = {
   selfIssued?: boolean;
 };
 
-type QueueContextValue = {
-  status: QueueStatus;
+type TokenContextValue = {
+  status: AppStatus;
   errorMessage: string;
   business: Business | null;
-  settings: QueueSettings;
+  settings: TokenSettings;
   services: Service[];
   counters: Counter[];
   /** Every retained token, up to the ninety-day window. Reports reads this. */
@@ -91,7 +91,7 @@ type QueueContextValue = {
     counterName: string
   ) => Promise<void>;
   updateBusiness: (updates: Partial<Omit<Business, "id" | "createdAt">>) => Promise<void>;
-  updateSettings: (updates: Partial<Omit<QueueSettings, "id">>) => Promise<void>;
+  updateSettings: (updates: Partial<Omit<TokenSettings, "id">>) => Promise<void>;
 
   saveService: (input: ServiceInput, id?: string) => Promise<Service>;
   deleteService: (id: string) => Promise<void>;
@@ -119,7 +119,7 @@ type QueueContextValue = {
   /** Wipe the queue database. Does not touch the shared workspace. */
   clearAllData: () => Promise<void>;
   /** Replace the queue with a backup file's contents and re-read everything. */
-  applyRestoredBackup: (backup: QueueBackup) => Promise<void>;
+  applyRestoredBackup: (backup: TokenBackup) => Promise<void>;
   /** Push the current snapshot to the owner's Google Sheet. */
   syncToSheet: () => Promise<void>;
   reloadAll: () => Promise<void>;
@@ -128,22 +128,22 @@ type QueueContextValue = {
   counterById: (id: string) => Counter | undefined;
 };
 
-const QueueContext = createContext<QueueContextValue | null>(null);
+const TokenContext = createContext<TokenContextValue | null>(null);
 
-export function useQueue(): QueueContextValue {
-  const context = useContext(QueueContext);
-  if (!context) throw new Error("useQueue must be used inside a QueueProvider.");
+export function useToken(): TokenContextValue {
+  const context = useContext(TokenContext);
+  if (!context) throw new Error("useToken must be used inside a TokenProvider.");
   return context;
 }
 
 /** Statuses that mean a token is still live and someone is expected to appear. */
 const OPEN_STATUSES: Token["status"][] = ["waiting", "called", "serving"];
 
-export function QueueProvider({ children }: { children: ReactNode }) {
-  const [status, setStatus] = useState<QueueStatus>("loading");
+export function TokenProvider({ children }: { children: ReactNode }) {
+  const [status, setStatus] = useState<AppStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [business, setBusiness] = useState<Business | null>(null);
-  const [settings, setSettings] = useState<QueueSettings>(DEFAULT_QUEUE_SETTINGS);
+  const [settings, setSettings] = useState<TokenSettings>(DEFAULT_SETTINGS);
   const [services, setServices] = useState<Service[]>([]);
   const [counters, setCounters] = useState<Counter[]>([]);
   const [tokens, setTokens] = useState<Token[]>([]);
@@ -154,7 +154,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   // that was scheduled ten minutes ago otherwise sees the state of ten minutes
   // ago, which is exactly how a rollover silently stops working.
   const tokensRef = useRef<Token[]>([]);
-  const settingsRef = useRef<QueueSettings>(DEFAULT_QUEUE_SETTINGS);
+  const settingsRef = useRef<TokenSettings>(DEFAULT_SETTINGS);
   const countersRef = useRef<Counter[]>([]);
   useEffect(() => {
     tokensRef.current = tokens;
@@ -166,9 +166,9 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     countersRef.current = counters;
   }, [counters]);
 
-  const broadcastRef = useRef<QueueBroadcast | null>(null);
-  const broadcast = useRef((): QueueBroadcast => {
-    if (!broadcastRef.current) broadcastRef.current = createQueueBroadcast();
+  const broadcastRef = useRef<TokenBroadcast | null>(null);
+  const broadcast = useRef((): TokenBroadcast => {
+    if (!broadcastRef.current) broadcastRef.current = createTokenBroadcast();
     return broadcastRef.current;
   }).current;
 
@@ -182,12 +182,12 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   /** Write, then tell the other tab which stores moved. */
   const batchWithSync = useCallback(
     async (
-      writes: Partial<Record<QueueStoreName, unknown[]>>,
-      deletes: Partial<Record<QueueStoreName, string[]>> = {}
+      writes: Partial<Record<TokenStoreName, unknown[]>>,
+      deletes: Partial<Record<TokenStoreName, string[]>> = {}
     ) => {
-      await queueBatch(writes, deletes);
+      await tokenBatch(writes, deletes);
       broadcast().post(
-        Array.from(new Set([...Object.keys(writes), ...Object.keys(deletes)])) as QueueStoreName[]
+        Array.from(new Set([...Object.keys(writes), ...Object.keys(deletes)])) as TokenStoreName[]
       );
     },
     [broadcast]
@@ -222,7 +222,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
           ? `${token.note} · Auto-voided at day close`
           : "Auto-voided at day close",
       }));
-      await batchWithSync({ queue_tokens: voided });
+      await batchWithSync({ tokens: voided });
 
       const byId = new Map(voided.map((token) => [token.id, token]));
       return rows.map((token) => byId.get(token.id) ?? token);
@@ -236,7 +236,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
       const cutoff = retentionCutoff(currentDay, TOKEN_RETENTION_DAYS);
       const expired = rows.filter((token) => token.date < cutoff);
       if (expired.length === 0) return rows;
-      await batchWithSync({}, { queue_tokens: expired.map((token) => token.id) });
+      await batchWithSync({}, { tokens: expired.map((token) => token.id) });
       const expiredIds = new Set(expired.map((token) => token.id));
       return rows.filter((token) => !expiredIds.has(token.id));
     },
@@ -247,15 +247,15 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     try {
       const [storedSettings, storedServices, storedCounters, storedTokens, workspace] =
         await Promise.all([
-          queueGetAll<QueueSettings>("queue_settings"),
-          queueGetAll<Service>("queue_services"),
-          queueGetAll<Counter>("queue_counters"),
-          queueGetAll<Token>("queue_tokens"),
+          tokenGetAll<TokenSettings>("settings"),
+          tokenGetAll<Service>("services"),
+          tokenGetAll<Counter>("counters"),
+          tokenGetAll<Token>("tokens"),
           dbGetAll<Business>("business"),
         ]);
 
-      const merged: QueueSettings = {
-        ...DEFAULT_QUEUE_SETTINGS,
+      const merged: TokenSettings = {
+        ...DEFAULT_SETTINGS,
         ...(storedSettings.find((row) => row.id === "main") ?? {}),
       };
       const currentDay = businessDate(new Date(), merged.dailyResetHour);
@@ -289,22 +289,22 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   }, [load]);
 
   /** Re-read only the stores another tab says it changed. */
-  const reloadStores = useCallback(async (stores: QueueStoreName[]) => {
+  const reloadStores = useCallback(async (stores: TokenStoreName[]) => {
     const wanted = new Set(stores);
-    if (wanted.has("queue_settings")) {
-      const rows = await queueGetAll<QueueSettings>("queue_settings");
-      setSettings({ ...DEFAULT_QUEUE_SETTINGS, ...(rows.find((r) => r.id === "main") ?? {}) });
+    if (wanted.has("settings")) {
+      const rows = await tokenGetAll<TokenSettings>("settings");
+      setSettings({ ...DEFAULT_SETTINGS, ...(rows.find((r) => r.id === "main") ?? {}) });
     }
-    if (wanted.has("queue_services")) {
-      const rows = await queueGetAll<Service>("queue_services");
+    if (wanted.has("services")) {
+      const rows = await tokenGetAll<Service>("services");
       setServices(rows.slice().sort((a, b) => a.sortOrder - b.sortOrder));
     }
-    if (wanted.has("queue_counters")) setCounters(await queueGetAll<Counter>("queue_counters"));
-    if (wanted.has("queue_tokens")) setTokens(await queueGetAll<Token>("queue_tokens"));
+    if (wanted.has("counters")) setCounters(await tokenGetAll<Counter>("counters"));
+    if (wanted.has("tokens")) setTokens(await tokenGetAll<Token>("tokens"));
   }, []);
 
   const reloadAll = useCallback(async () => {
-    await reloadStores(["queue_settings", "queue_services", "queue_counters", "queue_tokens"]);
+    await reloadStores(["settings", "services", "counters", "tokens"]);
   }, [reloadStores]);
 
   // Channel 1: the instant path.
@@ -331,13 +331,13 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     if (status !== "ready") return;
     const timer = window.setInterval(() => {
       const silentFor = Date.now() - lastSignalRef.current;
-      if (silentFor >= QUEUE_STALE_MS) {
+      if (silentFor >= STALE_MS) {
         lastSignalRef.current = Date.now();
         void reloadAll();
       } else {
-        void reloadStores(["queue_tokens"]);
+        void reloadStores(["tokens"]);
       }
-    }, QUEUE_POLL_MS);
+    }, POLL_MS);
     return () => window.clearInterval(timer);
   }, [status, reloadAll, reloadStores]);
 
@@ -413,15 +413,15 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         active: true,
         createdAt: nowIso(),
       };
-      const nextSettings: QueueSettings = {
-        ...DEFAULT_QUEUE_SETTINGS,
+      const nextSettings: TokenSettings = {
+        ...DEFAULT_SETTINGS,
         displayTitle: profile.name ? `Welcome to ${profile.name}` : "",
       };
 
       await batchWithSync({
-        queue_settings: [nextSettings],
-        queue_services: [service],
-        queue_counters: [counter],
+        settings: [nextSettings],
+        services: [service],
+        counters: [counter],
       });
 
       setBusiness(nextBusiness);
@@ -447,10 +447,10 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   );
 
   const updateSettings = useCallback(
-    async (updates: Partial<Omit<QueueSettings, "id">>) => {
-      const next: QueueSettings = { ...settingsRef.current, ...updates, id: "main" };
+    async (updates: Partial<Omit<TokenSettings, "id">>) => {
+      const next: TokenSettings = { ...settingsRef.current, ...updates, id: "main" };
       setSettings(next);
-      await batchWithSync({ queue_settings: [next] });
+      await batchWithSync({ settings: [next] });
       // A changed reset hour can move what "today" means under a running tab.
       setToday(businessDate(new Date(), next.dailyResetHour));
     },
@@ -469,7 +469,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         id: existing?.id ?? generateId(),
         createdAt: existing?.createdAt ?? nowIso(),
       };
-      await batchWithSync({ queue_services: [service] });
+      await batchWithSync({ services: [service] });
       setServices((previous) => {
         const next = existing
           ? previous.map((row) => (row.id === service.id ? service : row))
@@ -497,13 +497,13 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         const service = services.find((row) => row.id === id);
         if (!service) return;
         const deactivated: Service = { ...service, active: false };
-        await batchWithSync({ queue_services: [deactivated] });
+        await batchWithSync({ services: [deactivated] });
         setServices((previous) =>
           previous.map((row) => (row.id === id ? deactivated : row))
         );
         return;
       }
-      await batchWithSync({}, { queue_services: [id] });
+      await batchWithSync({}, { services: [id] });
       setServices((previous) => previous.filter((row) => row.id !== id));
     },
     [batchWithSync, services]
@@ -517,7 +517,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         id: existing?.id ?? generateId(),
         createdAt: existing?.createdAt ?? nowIso(),
       };
-      await batchWithSync({ queue_counters: [counter] });
+      await batchWithSync({ counters: [counter] });
       setCounters((previous) =>
         existing
           ? previous.map((row) => (row.id === counter.id ? counter : row))
@@ -530,7 +530,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
 
   const deleteCounter = useCallback(
     async (id: string) => {
-      await batchWithSync({}, { queue_counters: [id] });
+      await batchWithSync({}, { counters: [id] });
       setCounters((previous) => previous.filter((row) => row.id !== id));
     },
     [batchWithSync]
@@ -543,7 +543,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   /** Apply a change to one token, in the database and in state. */
   const writeToken = useCallback(
     async (token: Token) => {
-      await batchWithSync({ queue_tokens: [token] });
+      await batchWithSync({ tokens: [token] });
       setTokens((previous) => previous.map((row) => (row.id === token.id ? token : row)));
     },
     [batchWithSync]
@@ -564,7 +564,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     async (input: IssueTokenInput) => {
       const day = businessDate(new Date(), settingsRef.current.dailyResetHour);
       const issuedAt = nowIso();
-      const token = await queueAllocateToken<Token>(
+      const token = await allocateToken<Token>(
         day,
         input.serviceId,
         settingsRef.current.lastResetAt,
@@ -589,7 +589,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         })
       );
 
-      broadcast().post(["queue_tokens"]);
+      broadcast().post(["tokens"]);
       setTokens((previous) => [...previous, token]);
       setToday(day);
       return token;
@@ -643,7 +643,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         (token) => token.id !== called.id
       );
 
-      await batchWithSync({ queue_tokens: [...closed, called] });
+      await batchWithSync({ tokens: [...closed, called] });
       const byId = new Map([...closed, called].map((token) => [token.id, token]));
       setTokens((previous) => previous.map((token) => byId.get(token.id) ?? token));
       return called;
@@ -786,11 +786,11 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     // The boundary, not a zeroed counter: numbering is derived from the tokens
     // issued since this moment, so nothing has to be deleted for the next
     // person to be number 1, and this morning's history stays intact.
-    const nextSettings: QueueSettings = { ...settingsRef.current, lastResetAt: at };
+    const nextSettings: TokenSettings = { ...settingsRef.current, lastResetAt: at };
 
     await batchWithSync({
-      queue_tokens: voided,
-      queue_settings: [nextSettings],
+      tokens: voided,
+      settings: [nextSettings],
     });
 
     const byId = new Map(voided.map((token) => [token.id, token]));
@@ -799,9 +799,9 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   }, [batchWithSync]);
 
   const applyRestoredBackup = useCallback(
-    async (backup: QueueBackup) => {
+    async (backup: TokenBackup) => {
       await restoreBackup(backup);
-      broadcast().post(["queue_settings", "queue_services", "queue_counters", "queue_tokens"]);
+      broadcast().post(["settings", "services", "counters", "tokens"]);
       await load();
     },
     [broadcast, load]
@@ -829,15 +829,15 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         tokens: tokensRef.current,
       })
     );
-    const next: QueueSettings = { ...settingsRef.current, lastSyncAt: nowIso() };
+    const next: TokenSettings = { ...settingsRef.current, lastSyncAt: nowIso() };
     setSettings(next);
-    await batchWithSync({ queue_settings: [next] });
+    await batchWithSync({ settings: [next] });
   }, [batchWithSync, business, services]);
 
   const clearAllData = useCallback(async () => {
-    await queueClearAll();
-    broadcast().post(["queue_settings", "queue_services", "queue_counters", "queue_tokens"]);
-    setSettings(DEFAULT_QUEUE_SETTINGS);
+    await tokenClearAll();
+    broadcast().post(["settings", "services", "counters", "tokens"]);
+    setSettings(DEFAULT_SETTINGS);
     setServices([]);
     setCounters([]);
     setTokens([]);
@@ -862,7 +862,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     [counters]
   );
 
-  const value: QueueContextValue = {
+  const value: TokenContextValue = {
     status,
     errorMessage,
     business,
@@ -900,7 +900,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
     counterById,
   };
 
-  return <QueueContext.Provider value={value}>{children}</QueueContext.Provider>;
+  return <TokenContext.Provider value={value}>{children}</TokenContext.Provider>;
 }
 
 /** Counters that can take a given service, for the transfer picker. */

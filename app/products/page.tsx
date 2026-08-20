@@ -74,8 +74,8 @@ const itemListSchema = {
     {
       "@type": "ListItem",
       position: 6,
-      name: "Free Token & Queue System",
-      url: "https://setutechnology.com/products/free-queue-system",
+      name: "Free Token System",
+      url: "https://setutechnology.com/products/free-token-system",
     },
     {
       "@type": "ListItem",

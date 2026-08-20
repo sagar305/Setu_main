@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
+import { useToken } from "@/lib/token/store";
 import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 /**
@@ -14,7 +14,7 @@ import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
  * has to be decided before the first token goes out.
  */
 export function SetupScreen() {
-  const { business, createQueue, backToWelcome } = useQueue();
+  const { business, createQueue, backToWelcome } = useToken();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [serviceName, setServiceName] = useState("General");

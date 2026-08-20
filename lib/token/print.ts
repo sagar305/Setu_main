@@ -13,9 +13,9 @@ import { escapeHtml } from "@/lib/clinic/print";
 import { formatWait } from "./calc";
 import { tokenLabel, type Service, type Token } from "./types";
 
-export type QueuePaper = "58mm" | "a4";
+export type PaperSize = "58mm" | "a4";
 
-function documentStyles(paper: QueuePaper): string {
+function documentStyles(paper: PaperSize): string {
   const page =
     paper === "58mm"
       ? "@page { size: 58mm auto; margin: 3mm; }"
@@ -71,7 +71,7 @@ function documentStyles(paper: QueuePaper): string {
 }
 
 /** Render HTML in a hidden frame and open the print dialog on it. */
-export function printHtml(html: string, paper: QueuePaper, title: string): boolean {
+export function printHtml(html: string, paper: PaperSize, title: string): boolean {
   if (typeof document === "undefined") return false;
 
   const frame = document.createElement("iframe");

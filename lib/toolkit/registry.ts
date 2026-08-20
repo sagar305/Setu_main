@@ -58,7 +58,7 @@ export type ToolSlug =
   | "recipe-manager"
   // Service businesses
   | "appointment-book"
-  | "queue-management"
+  | "token-system"
   | "clinic-manager"
   // Education
   | "tuition-manager"
@@ -258,7 +258,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     paidPath: "clinic",
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
-      { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+      { with: "token-system", ux: "Convert a walk-in into an appointment" },
     ],
   },
   {
@@ -280,15 +280,15 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     ],
   },
   {
-    slug: "queue-management",
-    name: "Free Token & Queue System",
+    slug: "token-system",
+    name: "Free Token System",
     category: "service",
     kind: "app",
     tier: "foundation",
     status: "built",
-    route: "/products/free-queue-system",
+    route: "/products/free-token-system",
     // Owns no shared entity: services, counters and tokens live in the queue's
-    // own QUEUE_DATABASE, because two tabs write to them all day and the names
+    // own TOKEN_DATABASE, because two tabs write to them all day and the names
     // are too generic to claim in a database every tool shares. The business
     // profile is the only thing it touches in the workspace, and only to read.
     reads: ["business"],

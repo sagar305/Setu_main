@@ -13,9 +13,9 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
+import { useToken } from "@/lib/token/store";
 import { generateSalt, hashPin, isValidPinFormat } from "@/lib/pos/pin";
-import { suggestedServiceMinutes } from "@/lib/queue/calc";
+import { suggestedServiceMinutes } from "@/lib/token/calc";
 import {
   chimeSupported,
   chooseVoice,
@@ -24,19 +24,19 @@ import {
   playChime,
   speakAnnouncement,
   speechSupported,
-} from "@/lib/queue/voice";
-import { createBackup, downloadBackupFile, parseBackupFile } from "@/lib/queue/backup";
-import { APPS_SCRIPT_TEMPLATE, isValidSyncUrl, testSheetConnection } from "@/lib/queue/sheetSync";
-import { MESSAGE_PLACEHOLDERS } from "@/lib/queue/types";
+} from "@/lib/token/voice";
+import { createBackup, downloadBackupFile, parseBackupFile } from "@/lib/token/backup";
+import { APPS_SCRIPT_TEMPLATE, isValidSyncUrl, testSheetConnection } from "@/lib/token/sheetSync";
+import { MESSAGE_PLACEHOLDERS } from "@/lib/token/types";
 import {
   DEFAULT_VOICE_TEMPLATE,
   HINDI_VOICE_TEMPLATE,
   SERVICE_COLOURS,
   VOICE_LANGUAGES,
   type Counter,
-  type QueueTheme,
+  type DisplayTheme,
   type Service,
-} from "@/lib/queue/types";
+} from "@/lib/token/types";
 import {
   ConfirmDialog,
   Field,
@@ -70,7 +70,7 @@ export function SettingsScreen() {
 /* ------------------------------------------------------------------ */
 
 function BusinessSection() {
-  const { business, updateBusiness } = useQueue();
+  const { business, updateBusiness } = useToken();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [saved, setSaved] = useState(false);
@@ -135,7 +135,7 @@ const EMPTY_SERVICE: ServiceDraft = {
 };
 
 function ServicesSection() {
-  const { services, tokens, today, saveService, deleteService } = useQueue();
+  const { services, tokens, today, saveService, deleteService } = useToken();
   const [editing, setEditing] = useState<Service | null>(null);
   const [draft, setDraft] = useState<ServiceDraft>({ ...EMPTY_SERVICE });
   const [adding, setAdding] = useState(false);
@@ -324,7 +324,7 @@ function ServiceMinutesField({
   service: Service | null;
   value: number;
   onChange: (value: number) => void;
-  tokens: ReturnType<typeof useQueue>["tokens"];
+  tokens: ReturnType<typeof useToken>["tokens"];
   today: string;
 }) {
   const suggestion = useMemo(
@@ -360,7 +360,7 @@ function ServiceMinutesField({
 /* ------------------------------------------------------------------ */
 
 function CountersSection() {
-  const { counters, services, saveCounter, deleteCounter } = useQueue();
+  const { counters, services, saveCounter, deleteCounter } = useToken();
   const [editing, setEditing] = useState<Counter | null>(null);
   const [adding, setAdding] = useState(false);
   const [draft, setDraft] = useState({
@@ -549,20 +549,20 @@ function CountersSection() {
 
 /* ------------------------------------------------------------------ */
 
-const THEMES: { id: QueueTheme; label: string; hint: string }[] = [
+const THEMES: { id: DisplayTheme; label: string; hint: string }[] = [
   { id: "light", label: "Light", hint: "Matches the rest of Setu" },
   { id: "dark", label: "Dark", hint: "Easier on a screen left on all day" },
   { id: "high-contrast", label: "High contrast", hint: "For a TV seen from far away" },
 ];
 
 function DisplaySection() {
-  const { settings, updateSettings } = useQueue();
+  const { settings, updateSettings } = useToken();
   return (
     <SectionCard
       title="Waiting-room display"
       action={
         <a
-          href="/products/free-queue-system/display"
+          href="/products/free-token-system/display"
           target="_blank"
           rel="noopener noreferrer"
           className={secondaryBtnClass}
@@ -641,7 +641,7 @@ function DisplaySection() {
  * that makes noise right now.
  */
 function AnnouncementSection() {
-  const { settings, updateSettings } = useQueue();
+  const { settings, updateSettings } = useToken();
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [tested, setTested] = useState<string>("");
 
@@ -824,7 +824,7 @@ function AnnouncementSection() {
 /* ------------------------------------------------------------------ */
 
 function DaySection() {
-  const { settings, updateSettings, resetDayNow, today } = useQueue();
+  const { settings, updateSettings, resetDayNow, today } = useToken();
   const [confirming, setConfirming] = useState(false);
 
   return (
@@ -881,7 +881,7 @@ function DaySection() {
 /* ------------------------------------------------------------------ */
 
 function MessagesSection() {
-  const { settings, updateSettings } = useQueue();
+  const { settings, updateSettings } = useToken();
   return (
     <SectionCard title="WhatsApp messages">
       <div className="grid gap-3">
@@ -930,7 +930,7 @@ function MessagesSection() {
 /* ------------------------------------------------------------------ */
 
 function SheetSection() {
-  const { settings, updateSettings, syncToSheet } = useQueue();
+  const { settings, updateSettings, syncToSheet } = useToken();
   const [url, setUrl] = useState(settings.sheetUrl ?? "");
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
@@ -1034,7 +1034,7 @@ function SheetSection() {
 /* ------------------------------------------------------------------ */
 
 function BackupSection() {
-  const { settings, updateSettings, applyRestoredBackup } = useQueue();
+  const { settings, updateSettings, applyRestoredBackup } = useToken();
   const fileRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
 
@@ -1089,7 +1089,7 @@ function BackupSection() {
 /* ------------------------------------------------------------------ */
 
 function LockSection() {
-  const { settings, updateSettings } = useQueue();
+  const { settings, updateSettings } = useToken();
   const [pin, setPin] = useState("");
   const [status, setStatus] = useState("");
   const hasPin = Boolean(settings.pinHash);
@@ -1166,7 +1166,7 @@ function LockSection() {
 /* ------------------------------------------------------------------ */
 
 function DangerSection() {
-  const { clearAllData } = useQueue();
+  const { clearAllData } = useToken();
   const [confirming, setConfirming] = useState(false);
 
   return (

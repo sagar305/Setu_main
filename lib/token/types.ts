@@ -1,4 +1,4 @@
-// Data model for the Free Token & Queue System (/products/free-queue-system).
+// Data model for the Free Token System (/products/free-token-system).
 //
 // The whole app is one day wide. Every screen except Reports asks the same
 // question — who is waiting *now* — so `Token.date` is the axis everything
@@ -69,11 +69,11 @@ export type Token = {
   restoredAt: string | null;
 };
 
-export type QueueTemplateKey = "tokenIssued" | "almostYourTurn";
+export type MessageTemplateKey = "tokenIssued" | "almostYourTurn";
 
-export type QueueTheme = "light" | "dark" | "high-contrast";
+export type DisplayTheme = "light" | "dark" | "high-contrast";
 
-export type QueueSettings = {
+export type TokenSettings = {
   id: "main";
   /** Tokens reset to 1 at this hour daily. */
   dailyResetHour: number;
@@ -89,9 +89,9 @@ export type QueueSettings = {
   chimeSound: "bell" | "ding" | "chime";
   /** Announce each call this many times. */
   announceRepeat: 1 | 2;
-  theme: QueueTheme;
+  theme: DisplayTheme;
   selfIssueEnabled: boolean;
-  messageTemplates: Record<QueueTemplateKey, string>;
+  messageTemplates: Record<MessageTemplateKey, string>;
   pinHash?: string;
   pinSalt?: string;
   autoLockMinutes?: number;
@@ -149,7 +149,7 @@ export const VOICE_LANGUAGES: { code: string; label: string }[] = [
 export const DEFAULT_VOICE_TEMPLATE = "Token {token}, please proceed to {counter}";
 export const HINDI_VOICE_TEMPLATE = "टोकन {token}, कृपया {counter} पर जाएं";
 
-export const DEFAULT_MESSAGE_TEMPLATES: Record<QueueTemplateKey, string> = {
+export const DEFAULT_MESSAGE_TEMPLATES: Record<MessageTemplateKey, string> = {
   tokenIssued:
     "Namaste {name}, your token at {business} is {token} for {service}. About {wait} of waiting. Please be seated.",
   almostYourTurn:
@@ -166,7 +166,7 @@ export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
   { token: "{counter}", meaning: "Counter name, once called" },
 ];
 
-export const DEFAULT_QUEUE_SETTINGS: QueueSettings = {
+export const DEFAULT_SETTINGS: TokenSettings = {
   id: "main",
   dailyResetHour: 0,
   displayTitle: "",

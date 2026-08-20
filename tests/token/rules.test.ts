@@ -16,8 +16,8 @@ import {
   spokenToken,
   suggestedServiceMinutes,
   waitingQueue,
-} from "@/lib/queue/calc";
-import type { Counter, Token } from "@/lib/queue/types";
+} from "@/lib/token/calc";
+import type { Counter, Token } from "@/lib/token/types";
 
 function token(overrides: Partial<Token> = {}): Token {
   return {

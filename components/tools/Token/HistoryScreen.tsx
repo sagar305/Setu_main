@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { Ban, Download, Undo2 } from "lucide-react";
-import { useQueue } from "@/lib/queue/store";
-import { formatClock, formatMinutes, tokenRows } from "@/lib/queue/reports";
-import { downloadCsv, tokensCsv } from "@/lib/queue/csv";
-import { TOKEN_STATUS_LABELS, type TokenStatus } from "@/lib/queue/types";
+import { useToken } from "@/lib/token/store";
+import { formatClock, formatMinutes, tokenRows } from "@/lib/token/reports";
+import { downloadCsv, tokensCsv } from "@/lib/token/csv";
+import { TOKEN_STATUS_LABELS, type TokenStatus } from "@/lib/token/types";
 import { ConfirmDialog, SectionCard, StatusChip, chipBtnClass, secondaryBtnClass } from "./ui";
 
 const STATUSES: TokenStatus[] = [
@@ -25,7 +25,7 @@ const STATUSES: TokenStatus[] = [
  * the whole ninety days.
  */
 export function HistoryScreen() {
-  const { todayTokens, services, counters, today, restoreToken, cancelToken } = useQueue();
+  const { todayTokens, services, counters, today, restoreToken, cancelToken } = useToken();
   const [serviceFilter, setServiceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState<"all" | TokenStatus>("all");
   const [cancelId, setCancelId] = useState<string | null>(null);
@@ -50,7 +50,7 @@ export function HistoryScreen() {
             type="button"
             className={secondaryBtnClass}
             disabled={rows.length === 0}
-            onClick={() => downloadCsv(`queue-${today}.csv`, tokensCsv(rows))}
+            onClick={() => downloadCsv(`token-${today}.csv`, tokensCsv(rows))}
           >
             <Download className="h-4 w-4" aria-hidden="true" />
             CSV

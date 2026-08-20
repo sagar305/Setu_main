@@ -1,12 +1,12 @@
 "use client";
 
-// Queue-specific UI atoms. The general primitives — buttons, Field, Modal,
+// Token-system UI atoms. The general primitives — buttons, Field, Modal,
 // EmptyState — are the same ones the POS and the clinic use, so all four
 // products look like one system.
 
 import type { ReactNode } from "react";
 import { Star } from "lucide-react";
-import { TOKEN_STATUS_LABELS, type Service, type Token, type TokenStatus } from "@/lib/queue/types";
+import { TOKEN_STATUS_LABELS, type Service, type Token, type TokenStatus } from "@/lib/token/types";
 
 export {
   inputClass,

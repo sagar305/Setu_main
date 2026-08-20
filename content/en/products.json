@@ -170,10 +170,10 @@
       }
     },
     {
-      "id": "free-queue",
+      "id": "free-token",
       "status": "live",
-      "name": "Free Token & Queue System",
-      "headline": "Free token and queue software, right in your browser",
+      "name": "Free Token System",
+      "headline": "Free token and display software, right in your browser",
       "description": "A completely free token system for anywhere people wait in a line — clinics, labs, salons, service centres, bank branches. Hand out numbers, put a display screen in the waiting area, and let the app call each person out loud in Hindi, English or your own language. No login, no subscription, and it keeps working without internet.",
       "features": [
         "Calls the number out loud — “Token A forty-two, please proceed to Counter three”",
@@ -189,8 +189,8 @@
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
       "cta": {
-        "label": "Open the Free Token & Queue System — it's free",
-        "href": "/products/free-queue-system"
+        "label": "Open the Free Token System — it's free",
+        "href": "/products/free-token-system"
       }
     },
     {

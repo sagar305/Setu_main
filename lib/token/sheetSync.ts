@@ -22,7 +22,7 @@ import {
   totalsByDay,
   demandByService,
 } from "./reports";
-import { TOKEN_STATUS_LABELS, type Counter, type QueueSettings, type Service, type Token } from "./types";
+import { TOKEN_STATUS_LABELS, type Counter, type TokenSettings, type Service, type Token } from "./types";
 
 type TabPayload = { tab: string; headers: string[]; rows: (string | number | boolean)[][] };
 
@@ -37,9 +37,9 @@ export const SHEET_TABS = {
 
 export const SHEET_TAB_NAMES = Object.values(SHEET_TABS);
 
-export type QueueSnapshot = {
+export type TokenSnapshot = {
   business: Business | null;
-  settings: QueueSettings;
+  settings: TokenSettings;
   services: Service[];
   counters: Counter[];
   tokens: Token[];
@@ -47,7 +47,7 @@ export type QueueSnapshot = {
 
 export type SyncSlice = keyof typeof SHEET_TABS;
 
-function metaTab(snapshot: QueueSnapshot): TabPayload {
+function metaTab(snapshot: TokenSnapshot): TabPayload {
   const { business, settings } = snapshot;
   return {
     tab: SHEET_TABS.meta,
@@ -64,7 +64,7 @@ function metaTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-function tokensTab(snapshot: QueueSnapshot): TabPayload {
+function tokensTab(snapshot: TokenSnapshot): TabPayload {
   const rows = tokenRows(snapshot.tokens, snapshot.services, snapshot.counters);
   return {
     tab: SHEET_TABS.tokens,
@@ -101,7 +101,7 @@ function tokensTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-function dailyTab(snapshot: QueueSnapshot): TabPayload {
+function dailyTab(snapshot: TokenSnapshot): TabPayload {
   return {
     tab: SHEET_TABS.daily,
     headers: ["Date", "Issued", "Served", "Skipped", "Cancelled"],
@@ -115,7 +115,7 @@ function dailyTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-function hourlyTab(snapshot: QueueSnapshot): TabPayload {
+function hourlyTab(snapshot: TokenSnapshot): TabPayload {
   return {
     tab: SHEET_TABS.hourly,
     headers: ["Hour", "Tokens issued"],
@@ -123,7 +123,7 @@ function hourlyTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-function countersTab(snapshot: QueueSnapshot): TabPayload {
+function countersTab(snapshot: TokenSnapshot): TabPayload {
   return {
     tab: SHEET_TABS.counters,
     headers: ["Counter", "Staff", "Served", "Avg wait (min)", "Avg service (min)"],
@@ -137,7 +137,7 @@ function countersTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-function servicesTab(snapshot: QueueSnapshot): TabPayload {
+function servicesTab(snapshot: TokenSnapshot): TabPayload {
   return {
     tab: SHEET_TABS.services,
     headers: ["Service", "Prefix", "Est. minutes", "Active", "Issued", "Served"],
@@ -155,8 +155,8 @@ function servicesTab(snapshot: QueueSnapshot): TabPayload {
   };
 }
 
-export function buildTabPayloads(slices: SyncSlice[], snapshot: QueueSnapshot): TabPayload[] {
-  const builders: Record<SyncSlice, (s: QueueSnapshot) => TabPayload> = {
+export function buildTabPayloads(slices: SyncSlice[], snapshot: TokenSnapshot): TabPayload[] {
+  const builders: Record<SyncSlice, (s: TokenSnapshot) => TabPayload> = {
     meta: metaTab,
     tokens: tokensTab,
     daily: dailyTab,
@@ -206,7 +206,7 @@ async function postToScript(url: string, payload: unknown): Promise<unknown> {
 
 export async function testSheetConnection(url: string): Promise<{ ok: boolean; error?: string }> {
   try {
-    const result = (await postToScript(url, { action: "test", app: "setu-queue" })) as {
+    const result = (await postToScript(url, { action: "test", app: "setu-token" })) as {
       ok?: boolean;
       error?: string;
     };
@@ -224,7 +224,7 @@ export async function testSheetConnection(url: string): Promise<{ ok: boolean; e
 }
 
 export async function pushToSheet(url: string, tabs: TabPayload[]): Promise<void> {
-  const result = (await postToScript(url, { action: "push", app: "setu-queue", tabs })) as {
+  const result = (await postToScript(url, { action: "push", app: "setu-token", tabs })) as {
     ok?: boolean;
     error?: string;
   };

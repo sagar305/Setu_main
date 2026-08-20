@@ -19,10 +19,10 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Maximize2, Volume2 } from "lucide-react";
-import { QueueProvider, useQueue } from "@/lib/queue/store";
-import { compareQueue, spokenToken } from "@/lib/queue/calc";
-import { chimeSupported, chooseVoice, loadVoices, playChime, speakAnnouncement, speechSupported, unlockAudio } from "@/lib/queue/voice";
-import { tokenLabel, type Token } from "@/lib/queue/types";
+import { TokenProvider, useToken } from "@/lib/token/store";
+import { compareQueue, spokenToken } from "@/lib/token/calc";
+import { chimeSupported, chooseVoice, loadVoices, playChime, speakAnnouncement, speechSupported, unlockAudio } from "@/lib/token/voice";
+import { tokenLabel, type Token } from "@/lib/token/types";
 import {
   COUNTER_CLAMP,
   DISPLAY_PALETTES,
@@ -58,7 +58,7 @@ function useClock(): string {
 }
 
 function DisplayBody() {
-  const { status, errorMessage, settings, services, counters, todayTokens, business } = useQueue();
+  const { status, errorMessage, settings, services, counters, todayTokens, business } = useToken();
   const palette = DISPLAY_PALETTES[settings.theme];
   const clock = useClock();
 
@@ -296,11 +296,11 @@ function DisplayBody() {
           page's main landmark, and two of them leaves a screen reader with no
           single "skip to the content" target. */}
       <section
-        data-queue-now-serving
+        data-token-now-serving
         className={`flex min-h-0 flex-1 flex-col items-center justify-center px-[3vw] ${
-          flashing ? "queue-flash" : ""
+          flashing ? "token-flash" : ""
         }`}
-        style={{ ["--queue-flash-colour" as string]: palette.flash }}
+        style={{ ["--token-flash-colour" as string]: palette.flash }}
         aria-live="polite"
         aria-label="Now serving"
       >
@@ -395,7 +395,7 @@ function DisplayBody() {
           className="shrink-0 overflow-hidden border-t py-[1vh]"
           style={{ borderColor: palette.line, fontSize: TICKER_CLAMP, color: palette.muted }}
         >
-          <span className="queue-ticker-track">{settings.tickerText}</span>
+          <span className="token-ticker-track">{settings.tickerText}</span>
         </div>
       )}
 
@@ -457,8 +457,8 @@ function FullScreenMessage({
 
 export function DisplayApp() {
   return (
-    <QueueProvider>
+    <TokenProvider>
       <DisplayBody />
-    </QueueProvider>
+    </TokenProvider>
   );
 }

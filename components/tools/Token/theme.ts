@@ -7,7 +7,7 @@
 // deliberately outside the brand: pure black behind pure white, with the
 // accent in amber, because a cheap panel in daylight loses everything else.
 
-import type { QueueTheme } from "@/lib/queue/types";
+import type { DisplayTheme } from "@/lib/token/types";
 
 export type DisplayPalette = {
   background: string;
@@ -19,7 +19,7 @@ export type DisplayPalette = {
   flash: string;
 };
 
-export const DISPLAY_PALETTES: Record<QueueTheme, DisplayPalette> = {
+export const DISPLAY_PALETTES: Record<DisplayTheme, DisplayPalette> = {
   light: {
     background: "#F2EFE7",
     panel: "#FFFFFF",
