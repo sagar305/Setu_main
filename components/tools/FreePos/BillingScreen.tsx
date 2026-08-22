@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { calculateCartTotals } from "@/lib/pos/calc";
+import { findProductByCode } from "@/lib/pos/scan";
 import { isToolEnabled } from "@/lib/pos/posTools";
 import {
   formatMoney,
@@ -25,6 +26,7 @@ import {
 import type { NavigateFn } from "./nav";
 import { ReceiptModal } from "./ReceiptModal";
 import { CustomerFormModal } from "./CustomersScreen";
+import { ScanButton, useCameraScanAvailable, type ScanFeedback } from "./BarcodeScanner";
 import { EmptyState, Field, Modal, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 /** Sentinel payment id for udhaar sales (never stored as a payment method). */
@@ -64,6 +66,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [heldBusy, setHeldBusy] = useState(false);
   const [customerFormOpen, setCustomerFormOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const cameraScanAvailable = useCameraScanAvailable();
 
   const effectiveTaxRate = (product: Product) =>
     settings.taxEnabled ? product.taxRate ?? settings.defaultTaxRate : 0;
@@ -107,18 +110,28 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   };
 
   const handleSearchEnter = () => {
-    const q = search.trim().toLowerCase();
-    if (!q) return;
+    if (!search.trim()) return;
     // Barcode-scanner friendly: exact barcode/SKU match adds instantly.
-    const exact = products.find(
-      (p) => p.barcode.toLowerCase() === q || p.sku.toLowerCase() === q
-    );
+    const exact = findProductByCode(products, search);
     const target = exact ?? (filteredProducts.length === 1 ? filteredProducts[0] : null);
     if (target) {
       addToCart(target);
       setSearch("");
       searchRef.current?.focus();
     }
+  };
+
+  /** A code read off the camera. Same rules as a laser scanner typing into the box. */
+  const handleScannedCode = (code: string): ScanFeedback => {
+    const product = findProductByCode(products, code);
+    if (!product) {
+      // Leave the code in the search box so it can be looked up or added.
+      setSearch(code);
+      return { ok: false, message: `No product with code ${code}` };
+    }
+    addToCart(product);
+    setSearch("");
+    return { ok: true, message: `Added ${product.name}` };
   };
 
   const setQuantity = (productId: string, quantity: number) => {
@@ -245,20 +258,29 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       {/* Product picker */}
       <div className="min-w-0">
-        <input
-          ref={searchRef}
-          type="search"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              event.preventDefault();
-              handleSearchEnter();
-            }
-          }}
-          placeholder="Search or scan — name, SKU, barcode…"
-          className={`${inputClass} py-3`}
-        />
+        <div className="relative">
+          <input
+            ref={searchRef}
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                handleSearchEnter();
+              }
+            }}
+            placeholder="Search or scan — name, SKU, barcode…"
+            className={`${inputClass} py-3 ${cameraScanAvailable ? "pr-14" : ""}`}
+          />
+          {/* Phones and tablets get their camera as the scanner. */}
+          <ScanButton
+            continuous
+            onScan={handleScannedCode}
+            label="Scan a barcode with the camera"
+            className="absolute right-1.5 top-1/2 h-10 w-10 -translate-y-1/2 border-transparent"
+          />
+        </div>
 
         {categories.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { usePos, type ProductInput } from "@/lib/pos/store";
 import { formatMoney, type Product } from "@/lib/pos/types";
+import { ScanButton, useCameraScanAvailable } from "./BarcodeScanner";
 import {
   ConfirmDialog,
   EmptyState,
@@ -57,6 +58,7 @@ function ProductFormModal({
   const [newCategory, setNewCategory] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  const cameraScanAvailable = useCameraScanAvailable();
 
   useEffect(() => {
     if (!open) return;
@@ -243,13 +245,21 @@ function ProductFormModal({
           />
         </Field>
         <Field label="Barcode">
-          <input
-            type="text"
-            value={form.barcode}
-            onChange={(event) => setForm((f) => ({ ...f, barcode: event.target.value }))}
-            placeholder="Scan or type"
-            className={inputClass}
-          />
+          <div className="relative">
+            <input
+              type="text"
+              value={form.barcode}
+              onChange={(event) => setForm((f) => ({ ...f, barcode: event.target.value }))}
+              placeholder="Scan or type"
+              className={`${inputClass} ${cameraScanAvailable ? "pr-12" : ""}`}
+            />
+            {/* On a phone or tablet the barcode can be read off the packet. */}
+            <ScanButton
+              onScan={(code) => setForm((f) => ({ ...f, barcode: code }))}
+              label="Scan the barcode with the camera"
+              className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 border-transparent"
+            />
+          </div>
         </Field>
         <Field
           label="Tax %"

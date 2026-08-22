@@ -1,7 +1,7 @@
 // Service worker for the Browser Based POS (/products/browser-based-pos).
 // Caches the POS page and its static assets so the app loads without internet.
 
-const CACHE_NAME = "setu-free-pos-v2";
+const CACHE_NAME = "setu-free-pos-v3";
 const POS_PATH = "/products/browser-based-pos";
 
 self.addEventListener("install", (event) => {
@@ -33,7 +33,10 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   const isPosPage = url.pathname === POS_PATH || url.pathname === `${POS_PATH}/`;
-  const isStaticAsset = url.pathname.startsWith("/_next/static/");
+  // Hashed build output, plus the version-stamped barcode decoder the camera
+  // scanner downloads on first use — both are immutable at their URL.
+  const isStaticAsset =
+    url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/vendor/zxing/");
 
   if (isPosPage) {
     // Network-first so users get updates, cache fallback for offline.

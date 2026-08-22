@@ -11,3 +11,6 @@ test-results
 playwright-report
 *.tmp.mjs
 *.tmp.ts
+
+# Vendored by scripts/vendor-zxing.mjs at install/build time
+public/vendor/zxing
