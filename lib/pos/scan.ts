@@ -15,6 +15,7 @@
 // assets it needs. The POS service worker caches it after the first scan so
 // scanning keeps working offline.
 
+import { isHandheldDevice } from "./device";
 import type { Product } from "./types";
 
 /**
@@ -82,16 +83,10 @@ export function isCameraScanSupported(): boolean {
 }
 
 /**
- * True on phones and tablets. Desktop tills are driven by a keyboard-wedge
- * scanner and a webcam pointing at the shopkeeper's face, so the camera button
- * would only be clutter there.
+ * Whether to show the camera button: a handheld device that can open a camera.
+ * Desktop tills are driven by a keyboard-wedge scanner and a webcam pointing at
+ * the shopkeeper's face, so the button would only be clutter there.
  */
-export function isHandheldDevice(): boolean {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") return false;
-  return window.matchMedia("(pointer: coarse)").matches;
-}
-
-/** Whether to show the camera button: a handheld device that can open a camera. */
 export function canOfferCameraScan(): boolean {
   return isCameraScanSupported() && isHandheldDevice();
 }

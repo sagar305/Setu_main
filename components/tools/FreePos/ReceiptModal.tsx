@@ -10,6 +10,7 @@ import {
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
 import { exportReceiptToPdf } from "@/lib/pos/receiptPdf";
+import { isHandheldDevice } from "@/lib/pos/device";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
@@ -184,16 +185,110 @@ const PAPER_CONFIG: Record<ReceiptPaperSize, { pageWidthMm: number | null; conte
 
 const MM_TO_PX = 96 / 25.4;
 
-/** Print the receipt through a hidden iframe so only the receipt prints. */
-function printReceipt(receiptEl: HTMLElement, paperSize: ReceiptPaperSize) {
-  const paper = PAPER_CONFIG[paperSize] ?? PAPER_CONFIG["80mm"];
+type PaperConfig = (typeof PAPER_CONFIG)[ReceiptPaperSize];
 
+/** What came of a print attempt — a blocked pop-up is worth telling the user about. */
+type PrintOutcome = { ok: true } | { ok: false; message: string };
+
+/**
+ * The receipt as a document a printer can take: the receipt markup, the page
+ * rules for the chosen roll, and a script that measures the laid-out receipt
+ * and prints it. Thermal rolls get a page exactly one receipt long so drivers
+ * feed the right amount of paper instead of an A4 sheet.
+ *
+ * `standalone` adds what a real browser tab needs and a hidden print iframe
+ * must not have: a viewport, a page around the receipt, and buttons to print
+ * again or close — a browser that ignores the automatic print() still leaves
+ * the shopkeeper one tap away from printing.
+ */
+function receiptPrintDocument(
+  receiptHtml: string,
+  paper: PaperConfig,
+  invoiceNumber: string,
+  standalone: boolean
+): string {
+  const pageRule = paper.pageWidthMm
+    ? ""
+    : "@page { size: A4; margin: 12mm; }";
+
+  const sizeScript = paper.pageWidthMm
+    ? `var sheet = document.getElementById("receipt");
+       var heightMm = Math.ceil(sheet.getBoundingClientRect().height / (96 / 25.4)) + 8;
+       var style = document.createElement("style");
+       style.textContent = "@page { size: ${paper.pageWidthMm}mm " + heightMm + "mm; margin: 0; }";
+       document.head.appendChild(style);`
+    : "";
+
+  const chrome = standalone
+    ? `<div class="toolbar">
+         <button type="button" onclick="window.print()">Print receipt</button>
+         <button type="button" class="ghost" onclick="window.close()">Close</button>
+       </div>`
+    : "";
+
+  return `<!doctype html><html><head><meta charset="utf-8" />
+    <title>Receipt ${escapeHtml(invoiceNumber)}</title>
+    ${standalone ? '<meta name="viewport" content="width=device-width, initial-scale=1" />' : ""}
+    <style>
+      html, body { margin: 0; padding: 0; background: #ffffff; }
+      #receipt {
+        box-sizing: border-box;
+        width: ${paper.contentWidthMm}mm;
+        max-width: ${paper.contentWidthMm}mm;
+        margin: 0 auto;
+      }
+      #receipt > div { width: 100% !important; max-width: 100% !important; }
+      ${pageRule}
+      ${
+        standalone
+          ? `html, body { min-height: 100%; background: #f4f1ea; }
+             body { font-family: system-ui, -apple-system, sans-serif; }
+             #receipt { background: #ffffff; padding: 8px 0; }
+             .toolbar {
+               position: sticky; bottom: 0; display: flex; gap: 10px; justify-content: center;
+               padding: 14px; background: #f4f1ea;
+             }
+             .toolbar button {
+               flex: 1 1 0; max-width: 220px; padding: 12px 16px; border-radius: 10px;
+               border: 0; background: #3730a3; color: #ffffff; font-size: 15px; font-weight: 600;
+             }
+             .toolbar button.ghost { background: #ffffff; color: #111827; border: 1px solid #d1d5db; }
+             @media print { .toolbar { display: none !important; } html, body { background: #ffffff; } }`
+          : ""
+      }
+    </style></head>
+    <body><div id="receipt">${receiptHtml}</div>${chrome}
+    <script>
+      window.addEventListener("load", function () {
+        ${sizeScript}
+        window.focus();
+        // A beat for layout and fonts, so the preview is not a blank page.
+        setTimeout(function () { window.print(); }, 100);
+      });
+    </script></body></html>`;
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"]/g, (character) => {
+    if (character === "&") return "&amp;";
+    if (character === "<") return "&lt;";
+    if (character === ">") return "&gt;";
+    return "&quot;";
+  });
+}
+
+/**
+ * Print from a hidden iframe, so the page around the receipt never reaches the
+ * printer. Desktop only: WebKit on iPhone and iPad ignores print() from a
+ * subframe, which is why phones and tablets take the route below instead.
+ */
+function printFromIframe(html: string, paper: PaperConfig): PrintOutcome {
   const iframe = document.createElement("iframe");
   iframe.style.position = "fixed";
   iframe.style.right = "0";
   iframe.style.bottom = "0";
-  // Give the iframe the real content width so the height we measure below
-  // matches the printed layout; keep it invisible.
+  // Give the iframe the real content width so the receipt lays out — and so
+  // measures — exactly as it will print; keep it invisible.
   iframe.style.width = `${Math.ceil(paper.contentWidthMm * MM_TO_PX)}px`;
   iframe.style.height = "10px";
   iframe.style.border = "0";
@@ -204,49 +299,50 @@ function printReceipt(receiptEl: HTMLElement, paperSize: ReceiptPaperSize) {
   const doc = iframe.contentDocument;
   if (!doc) {
     document.body.removeChild(iframe);
-    return;
+    return { ok: false, message: "Could not open the print view. Try Download PDF instead." };
   }
   doc.open();
-  doc.write(
-    `<!doctype html><html><head><title>Receipt</title><style>
-      html, body { margin: 0; padding: 0; }
-      body > div {
-        box-sizing: border-box;
-        width: ${paper.contentWidthMm}mm !important;
-        max-width: ${paper.contentWidthMm}mm !important;
-        margin: 0 auto !important;
-      }
-    </style></head><body>${receiptEl.outerHTML}</body></html>`
-  );
+  doc.write(html);
   doc.close();
 
-  const cleanup = () => {
+  // Give the print dialog time to grab the document before removal.
+  setTimeout(() => {
     if (iframe.parentNode) document.body.removeChild(iframe);
-  };
-  iframe.onload = () => {
-    try {
-      // Measure the laid-out receipt and size the page to match, so thermal
-      // printers feed exactly one receipt length instead of an A4 sheet.
-      const contentHeightPx = Math.max(
-        doc.body.scrollHeight,
-        doc.documentElement.scrollHeight
-      );
-      const pageStyle = doc.createElement("style");
-      if (paper.pageWidthMm) {
-        const heightMm = Math.ceil(contentHeightPx / MM_TO_PX) + 8;
-        pageStyle.textContent = `@page { size: ${paper.pageWidthMm}mm ${heightMm}mm; margin: 0; }`;
-      } else {
-        pageStyle.textContent = `@page { size: A4; margin: 12mm; }`;
-      }
-      doc.head.appendChild(pageStyle);
+  }, 60000);
+  return { ok: true };
+}
 
-      iframe.contentWindow?.focus();
-      iframe.contentWindow?.print();
-    } finally {
-      // Give the print dialog time to grab the document before removal.
-      setTimeout(cleanup, 60000);
-    }
-  };
+/**
+ * Print from a tab of its own. Phones and tablets need this: iOS Safari will
+ * not print a hidden iframe, and an in-app browser may not print automatically
+ * at all — in a tab the receipt is at least on screen with a Print button
+ * under it, and the browser's own share sheet can reach the printer.
+ */
+function printFromTab(html: string): PrintOutcome {
+  const tab = window.open("", "_blank");
+  if (!tab) {
+    return {
+      ok: false,
+      message:
+        "Your browser blocked the print window. Allow pop-ups for this site, or use Download PDF.",
+    };
+  }
+  tab.document.open();
+  tab.document.write(html);
+  tab.document.close();
+  return { ok: true };
+}
+
+/** Print the receipt, the way this device can actually print. */
+function printReceipt(
+  receiptEl: HTMLElement,
+  paperSize: ReceiptPaperSize,
+  invoiceNumber: string
+): PrintOutcome {
+  const paper = PAPER_CONFIG[paperSize] ?? PAPER_CONFIG["80mm"];
+  const handheld = isHandheldDevice();
+  const html = receiptPrintDocument(receiptEl.outerHTML, paper, invoiceNumber, handheld);
+  return handheld ? printFromTab(html) : printFromIframe(html, paper);
 }
 
 export function ReceiptModal({
@@ -347,7 +443,11 @@ export function ReceiptModal({
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <button
           type="button"
-          onClick={() => receiptRef.current && printReceipt(receiptRef.current, paperSize)}
+          onClick={() => {
+            if (!receiptRef.current) return;
+            const outcome = printReceipt(receiptRef.current, paperSize, order.invoiceNumber);
+            setError(outcome.ok ? "" : outcome.message);
+          }}
           className={`${primaryBtnClass} flex-1`}
         >
           <Printer className="h-4 w-4" />
