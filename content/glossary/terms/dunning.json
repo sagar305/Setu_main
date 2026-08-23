@@ -1,0 +1,45 @@
+{
+  "slug": "dunning",
+  "term": "Dunning",
+  "category": "accounting",
+  "aliases": [
+    "dunning process",
+    "payment chasing"
+  ],
+  "short": "The structured, scheduled process of chasing overdue invoices.",
+  "seoTitle": "Dunning — Meaning and a Collections Ladder That Works",
+  "metaDescription": "Dunning is the structured process of chasing overdue invoices on a schedule rather than by memory. A simple ladder that pulls days sales outstanding down.",
+  "updated": "2026-08-31",
+  "definition": "Dunning is the structured process of chasing overdue invoices — a defined sequence of reminders, statements and escalations triggered by how far past due an account is, rather than by when someone remembers.",
+  "bodyHtml": "<h2>A dunning ladder for a small business</h2><ul><li>7 days overdue — automated reminder</li><li>30 days — account statement sent</li><li>45 days — phone call from a named person</li><li>60 days — formal notice</li><li>90 days — credit hold and a recovery decision</li></ul><h2>Why it works</h2><p>The point is that it runs on a schedule, so collections do not depend on the owner's mood or availability. Businesses that dun consistently typically pull days sales outstanding down by several days, which is usually cheaper than any financing they could arrange instead.</p>",
+  "faq": [
+    {
+      "question": "Does dunning damage customer relationships?",
+      "answer": "Consistent, polite and predictable chasing tends to protect relationships. What damages them is silence followed by an angry call at 90 days."
+    },
+    {
+      "question": "When should I stop dunning and write off?",
+      "answer": "When the cost of chasing exceeds the likely recovery. At that point provide for it as a bad debt rather than carrying it at full value."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "aging-report",
+    "days-sales-outstanding",
+    "bad-debt"
+  ]
+}

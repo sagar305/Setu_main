@@ -1,0 +1,45 @@
+{
+  "slug": "udyam-registration",
+  "term": "Udyam Registration",
+  "category": "gst-tax",
+  "aliases": [
+    "Udyam",
+    "Udyam Registration Number"
+  ],
+  "short": "India's official online registration for MSME businesses.",
+  "seoTitle": "Udyam Registration — Meaning, Limits and Why It Matters",
+  "metaDescription": "Udyam Registration is India's official MSME registration. It sets your micro or small classification and unlocks the statutory delayed-payment protection.",
+  "updated": "2026-08-31",
+  "definition": "Udyam Registration is the Government of India's online registration for micro, small and medium enterprises, replacing the earlier Udyog Aadhaar system. It issues a Udyam Registration Number that records a business's MSME classification.",
+  "bodyHtml": "<h2>Why Udyam Registration matters commercially</h2><p>Registration is not just administrative. Statutory protection on delayed payments — including the 15/45-day deadline and the interest entitlement under the MSMED Act — depends on the supplier being registered. An unregistered supplier has the same invoice and none of the protection.</p><h2>Classification limits</h2><p>Thresholds were revised with effect from 1 April 2025, and both conditions must be met: micro is investment up to ₹2.5 crore and turnover up to ₹10 crore; small is investment up to ₹25 crore and turnover up to ₹100 crore. Medium enterprises sit outside the delayed-payment rule.</p><h2>What to do about it</h2><p>If you sell to larger businesses, put your Udyam number on every invoice. If you buy, collect and refresh your suppliers' Udyam details annually — classifications recorded before April 2025 may now be wrong.</p>",
+  "faq": [
+    {
+      "question": "Is Udyam Registration mandatory?",
+      "answer": "It is not mandatory to operate, but without it you cannot claim MSME benefits, including the statutory protection on delayed payments."
+    },
+    {
+      "question": "Do traders qualify for Udyam Registration?",
+      "answer": "Retail and wholesale traders have been able to register since 2 July 2021, though the delayed-payment protection is generally understood not to extend to pure trading."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "msme-45-day-payment-rule",
+    "gstin",
+    "payment-terms",
+    "supplier"
+  ]
+}

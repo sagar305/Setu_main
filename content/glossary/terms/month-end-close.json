@@ -1,0 +1,49 @@
+{
+  "slug": "month-end-close",
+  "term": "Month-End Close",
+  "category": "accounting",
+  "aliases": [
+    "monthly close",
+    "period close"
+  ],
+  "short": "The fixed process of finalising and publishing a month's books.",
+  "seoTitle": "Month-End Close — Meaning, Steps and Checklist",
+  "metaDescription": "The month-end close is the process of finalising a month's books: freezing the period, reconciling balances and publishing statements you can act on.",
+  "updated": "2026-08-31",
+  "definition": "The month-end close is the fixed process of finalising a month's books — freezing the period, reconciling every balance to an external source, posting adjusting entries, and producing financial statements you are willing to make decisions from.",
+  "bodyHtml": "<h2>Month-end close vs bookkeeping</h2><p>Bookkeeping records transactions as they happen. The close is the deadline at which recording stops and verification starts. Bookkeeping is continuous; the close is a date.</p><h2>What a month-end close covers</h2><ul><li>Purchase bills and expenses captured in full</li><li>Bank, cash, gateway and aggregator balances reconciled</li><li>Receivables and payables aged and reviewed</li><li>Accruals, prepayments, depreciation and payroll provisions posted</li><li>Closing stock valued against a physical count</li><li>Trial balance, profit and loss statement, balance sheet and cash flow statement produced</li></ul><h2>How long it should take</h2><p>Five working days is a reasonable target for an SME with one entity. The value of a close is timeliness, not perfection — numbers finished on the 5th change decisions, numbers finished on the 25th are history.</p>",
+  "faq": [
+    {
+      "question": "How long should a month-end close take?",
+      "answer": "Five working days for a single-entity SME; 8 to 10 for multi-entity businesses. Consistently past the 15th usually means unreconciled banks or missing purchase bills."
+    },
+    {
+      "question": "Do I need accrual accounting to close monthly?",
+      "answer": "No, but cash-basis monthly numbers swing whenever a large payment lands, which makes them poor for spotting trends."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    }
+  ],
+  "relatedTerms": [
+    "trial-balance",
+    "accrual-accounting",
+    "bank-reconciliation",
+    "cut-off"
+  ]
+}

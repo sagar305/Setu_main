@@ -1,0 +1,46 @@
+{
+  "slug": "invoice-financing",
+  "term": "Invoice Financing",
+  "category": "payments-finance",
+  "aliases": [
+    "bill discounting",
+    "invoice discounting",
+    "receivables financing"
+  ],
+  "short": "Borrowing against unpaid customer invoices to release cash early.",
+  "seoTitle": "Invoice Financing — Meaning, Cost and When to Use It",
+  "metaDescription": "Invoice financing, or bill discounting, advances cash against unpaid customer invoices. How it works, what it costs, and the cheaper fix to try first.",
+  "updated": "2026-08-31",
+  "definition": "Invoice financing, also called bill discounting or receivables financing, is borrowing against unpaid customer invoices: a lender advances a percentage of the invoice value now and settles when the customer pays, keeping a fee.",
+  "bodyHtml": "<h2>When invoice financing makes sense</h2><p>It converts accounts receivable into cash without a conventional term loan, which makes it attractive when a business is profitable but cash-tight — a large order to fund, or a customer on 90-day terms you cannot renegotiate.</p><h2>What it really costs</h2><p>Expressed as an annual rate, invoice financing is usually dearer than a working capital loan or an overdraft, because the fee is charged over a short advance period. Always convert the fee to an annualised figure before comparing.</p><h2>The cheaper fix first</h2><p>Compare it against solving the underlying problem. Cutting days sales outstanding by 15 days through consistent dunning costs nothing and permanently improves the position, where financing rents the cash every cycle.</p>",
+  "faq": [
+    {
+      "question": "Is invoice financing a loan?",
+      "answer": "Commercially it behaves like one — you receive cash now and repay from the customer's payment, with a fee. Treatment depends on whether the receivable is sold outright or pledged."
+    },
+    {
+      "question": "Is invoice financing expensive?",
+      "answer": "Annualised, usually more expensive than an overdraft or a working capital loan. It buys speed and flexibility rather than a cheap rate."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "working-capital-loan",
+    "cash-conversion-cycle",
+    "days-sales-outstanding"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "cut-off",
+  "term": "Cut-Off",
+  "category": "accounting",
+  "aliases": [
+    "cut-off date",
+    "accounting cut-off"
+  ],
+  "short": "Recording a transaction in the period it actually happened in.",
+  "seoTitle": "Cut-Off in Accounting — Meaning and Example",
+  "metaDescription": "Cut-off is the rule that a transaction belongs to the period it happened in, not the period the paperwork arrived. Why cut-off errors distort two months.",
+  "updated": "2026-08-31",
+  "definition": "Cut-off is the rule that a transaction is recorded in the period in which it actually occurred, not the period in which the paperwork arrived or the money moved.",
+  "bodyHtml": "<h2>Why cut-off errors matter</h2><p>Cut-off errors are the most common reason two consecutive months look strange. A March supplier bill posted in April makes March look profitable and April look bad, while the year total is unchanged. Anyone comparing months is then comparing noise.</p><h2>How to get cut-off right</h2><p>Under accrual accounting the test is when goods were received or the service was performed — evidenced by the goods receipt note or delivery date, not the invoice date or the payment date. At each month-end close, list the bills you expect but have not received and accrue for them rather than letting them slide into next month.</p>",
+  "faq": [
+    {
+      "question": "What is a cut-off error?",
+      "answer": "Recording a transaction in the wrong period — typically a purchase bill posted when it arrived rather than when the goods were received."
+    },
+    {
+      "question": "Does cut-off matter on cash basis?",
+      "answer": "Much less, because cash-basis books follow the payment date by design. It matters most under accrual accounting."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accrual-accounting",
+    "accrued-expense",
+    "prepaid-expense",
+    "month-end-close"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "plowhorse",
+  "term": "Plowhorse",
+  "category": "restaurant-ops",
+  "aliases": [
+    "plow horse"
+  ],
+  "short": "A popular dish that earns a below-average margin per plate.",
+  "seoTitle": "Plowhorse — Menu Engineering Meaning and What to Do",
+  "metaDescription": "In menu engineering a plowhorse sells in high volume but earns a below-average contribution margin. Why these dishes are the highest-leverage items on a menu.",
+  "updated": "2026-08-31",
+  "definition": "In classic menu engineering, a plowhorse is a dish that sells in high volume but carries a below-average contribution margin — popular, but not earning enough per plate.",
+  "bodyHtml": "<h2>Why plowhorses are worth fixing first</h2><p>The volume is what makes them worth attention: a small price increase or a small cost reduction multiplies across a lot of covers. The standard responses are a modest price rise, a recipe or portion control adjustment, or pairing the dish with a high-margin side.</p><h2>A note on terminology</h2><p>Labelling varies between tools. Setu's Menu Engineering Calculator calls this quadrant <strong>Puzzles</strong> (low margin, high popularity) and uses <strong>Cash Cows</strong> for high margin, low popularity — which the classic texts call Puzzles. Check which labelling a tool uses before acting on its advice.</p>",
+  "faq": [
+    {
+      "question": "Should I just raise the price of a plowhorse?",
+      "answer": "Usually a modest rise is the fastest fix, but check the dish is not the reason people choose you. Cutting plate cost achieves the same margin without testing demand."
+    },
+    {
+      "question": "Is a plowhorse a bad dish?",
+      "answer": "No — it is often the most popular thing you sell. It is simply the dish where a small change earns the most."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "menu-engineering",
+    "menu-mix",
+    "contribution-margin",
+    "food-cost-percentage"
+  ]
+}

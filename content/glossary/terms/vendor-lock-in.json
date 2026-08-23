@@ -1,0 +1,45 @@
+{
+  "slug": "vendor-lock-in",
+  "term": "Vendor Lock-In",
+  "category": "pos-tech",
+  "aliases": [
+    "lock-in",
+    "software lock-in"
+  ],
+  "short": "When leaving a software provider is expensive, slow or impossible.",
+  "seoTitle": "Vendor Lock-In — Meaning, Risks and How to Test for It",
+  "metaDescription": "Vendor lock-in is when leaving a software provider is expensive or impossible because your data is trapped. How to test for it before you commit to a product.",
+  "updated": "2026-08-31",
+  "definition": "Vendor lock-in is the situation where moving away from a software provider is expensive, slow or impossible — usually because your data sits in a proprietary format, there is no usable export, or the contract makes leaving costly.",
+  "bodyHtml": "<h2>Why vendor lock-in matters</h2><p>For a small business, lock-in shows up in one of three ways: your transaction history only opens inside the vendor's own app, an export exists but produces a backup file no other system can read, or a multi-year licence has to be written off to leave. The risk is not hypothetical — when a billing or bookkeeping provider shuts down, customers with no clean export lose years of records.</p><h2>How to test for vendor lock-in</h2><p>Ask any billing, accounting or point of sale vendor whether you can export parties, items and full transaction history to CSV or Excel. Then actually run that export in your first week, not in the week you decide to leave. An export a spreadsheet can open is the difference between switching and starting over.</p><h2>Lock-in and free tools</h2><p>Free browser tools invert the problem. There is no account to close and no licence to write off, but there is also no stored history — the file you download is the record. Neither model is automatically safer; what matters is knowing which one you are in.</p>",
+  "faq": [
+    {
+      "question": "How do I know if I'm locked in?",
+      "answer": "Try the export. If what comes out is a proprietary backup file only that vendor can read, you are locked in regardless of what the sales page says."
+    },
+    {
+      "question": "Is a free tool safer than a paid one?",
+      "answer": "Not automatically. A free tool has nothing to cancel, but it also stores nothing for you — you own the risk of keeping your own records."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "csv-export",
+    "cloud-backup",
+    "api-integration",
+    "billing-software"
+  ]
+}
