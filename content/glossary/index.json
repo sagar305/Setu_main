@@ -64,6 +64,34 @@
   ],
   "terms": [
     {
+      "slug": "gstr-9",
+      "term": "GSTR-9",
+      "category": "gst-tax",
+      "short": "The annual GST return that reconciles a year of GST filings.",
+      "aliases": [
+        "GST annual return"
+      ]
+    },
+    {
+      "slug": "tax-audit",
+      "term": "Tax Audit",
+      "category": "gst-tax",
+      "short": "A mandatory audit of accounts under Section 44AB when turnover crosses set limits.",
+      "aliases": [
+        "Section 44AB",
+        "tax audit report"
+      ]
+    },
+    {
+      "slug": "queue-abandonment",
+      "term": "Queue Abandonment",
+      "category": "restaurant-ops",
+      "short": "When a waiting customer gives up and leaves before being served.",
+      "aliases": [
+        "walkaway"
+      ]
+    },
+    {
     "slug": "vendor-lock-in",
     "term": "Vendor Lock-In",
     "category": "pos-tech",
