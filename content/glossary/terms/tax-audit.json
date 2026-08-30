@@ -1,0 +1,49 @@
+{
+  "slug": "tax-audit",
+  "term": "Tax Audit",
+  "category": "gst-tax",
+  "aliases": [
+    "Section 44AB",
+    "tax audit report"
+  ],
+  "short": "A mandatory audit of accounts under Section 44AB when turnover crosses set limits.",
+  "seoTitle": "Tax Audit (Section 44AB) — Meaning and Who It Applies To",
+  "metaDescription": "A tax audit is a mandatory examination of a business's accounts under Section 44AB of the Income-tax Act once turnover or receipts cross the prescribed limits.",
+  "updated": "2026-09-02",
+  "definition": "A tax audit is a mandatory audit of a business or profession's books of account under Section 44AB of the Income-tax Act, required once turnover or gross receipts exceed the prescribed limits, and reported by a chartered accountant in Form 3CA/3CB and Form 3CD.",
+  "bodyHtml": "<h2>When a tax audit is triggered</h2><p>The obligation turns on turnover or gross receipts crossing the Section 44AB thresholds, with a higher limit available where cash transactions are within prescribed bounds, and separate rules for professionals and for taxpayers opting out of presumptive taxation. Whether you cross the line is a fact-specific question best confirmed with your chartered accountant.</p><h2>What the auditor reports</h2><p>The audit results in a report — Form 3CA or 3CB — and a detailed statement of particulars in Form 3CD, which now breaks out items such as payments to micro and small enterprises overdue beyond the statutory window. Clean, reconciled books make this report quick; raw books make it expensive.</p><h2>Why it matters beyond compliance</h2><p>A tax audit is also a deadline that pulls the whole year's bookkeeping forward. Businesses that reconcile monthly reach audit season ready; those that do not spend September rebuilding a year of accounts under time pressure.</p>",
+  "faq": [
+    {
+      "question": "Who has to get a tax audit done?",
+      "answer": "Broadly, businesses and professionals whose turnover or receipts cross the Section 44AB limits, subject to the presumptive-taxation exceptions and the higher cash-limit threshold. The precise limit that applies is best confirmed with a chartered accountant."
+    },
+    {
+      "question": "What is the due date for a tax audit case?",
+      "answer": "For a tax-audit case, the income-tax return is generally due by 31 October of the assessment year, with the audit report filed by the prescribed date beforehand, unless the department extends it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-9",
+    "financial-year",
+    "tds",
+    "e-invoicing"
+  ]
+}

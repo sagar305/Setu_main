@@ -1,0 +1,44 @@
+{
+  "slug": "gstr-9",
+  "term": "GSTR-9",
+  "category": "gst-tax",
+  "aliases": [
+    "GST annual return"
+  ],
+  "short": "The annual GST return that reconciles a year of GST filings.",
+  "seoTitle": "GSTR-9 — Meaning, Applicability and Due Date",
+  "metaDescription": "GSTR-9 is the annual GST return that consolidates a financial year of GSTR-1 and GSTR-3B filings into one reconciled statement. Who files it, and when.",
+  "updated": "2026-09-02",
+  "definition": "GSTR-9 is the annual return under GST that consolidates a full financial year of a taxpayer's monthly and quarterly filings — GSTR-1 and GSTR-3B — into a single reconciled statement of outward supplies, input tax credit and tax paid.",
+  "bodyHtml": "<h2>Who has to file GSTR-9</h2><p>Filing is mandatory once aggregate turnover in the financial year crosses ₹2 crore. Below that it is optional. A separate reconciliation statement, GSTR-9C, applies once turnover crosses ₹5 crore and ties the annual return back to the audited financial statements.</p><h2>Why it is a reconciliation, not a fresh filing</h2><p>GSTR-9 does not re-declare the year; it reconciles what was already filed. If the monthly returns were clean and input tax credit was matched against GSTR-2B through the year, the annual return is straightforward. If they were not, GSTR-9 is where a year of mismatches surfaces at once — which is why the work belongs in the monthly close, not in December.</p><h2>The due date</h2><p>GSTR-9 for a financial year is generally due by 31 December of the following year, unless extended. Thresholds and dates change through notifications, so confirm the current position before filing.</p>",
+  "faq": [
+    {
+      "question": "Is GSTR-9 mandatory for every GST-registered business?",
+      "answer": "No. It is mandatory once aggregate turnover crosses ₹2 crore in the financial year. Below that threshold it is optional, though some businesses file it voluntarily for a clean record."
+    },
+    {
+      "question": "What is the difference between GSTR-9 and GSTR-9C?",
+      "answer": "GSTR-9 is the annual return itself. GSTR-9C is an additional reconciliation statement, required above ₹5 crore turnover, that reconciles the annual return with the audited accounts."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-1",
+    "gstr-3b",
+    "gstr-2b",
+    "input-tax-credit"
+  ]
+}
