@@ -2,27 +2,27 @@
 
 // Solidarity banner for the August 2026 Bhote Koshi / Rasuwa flood in Nepal.
 //
-// The donation link points at the Government of Nepal's Prime Minister
-// Disaster Relief Fund portal, which accepts domestic and international cards
-// as well as NEPALPAY QR, connectIPS and wallets. Nepal Police has warned about
-// fake relief QR codes and phishing pages, so only ever link the government
-// portal here — never a third-party collection page.
+// Donations go to the Government of Nepal's official relief portal. Nepal
+// Police has warned about fake relief QR codes and phishing collection pages,
+// so only ever link the government portal here — never a third-party page.
 //
-// This is a time-bound banner: remove it (and its render in app/layout.tsx)
-// once the relief appeal closes.
+// Whether this shows at all, and between which dates, is controlled by env
+// vars rather than code: see lib/reliefBanner.ts and .env.example.
 
 import { useEffect, useState } from "react";
 import { Heart, X } from "lucide-react";
+import { isBannerVisible, NEPAL_DONATE_URL } from "@/lib/reliefBanner";
 
-const DONATE_URL = "https://pmdrf.nchl.com.np/";
 const DISMISS_KEY = "setu.nepal-relief-banner.dismissed";
 
 export function NepalSupportBanner() {
-  // Render nothing until mount so the server HTML and the first client render
-  // agree — the dismissal only exists in localStorage.
+  // Render nothing until mount, so the server HTML and the first client render
+  // agree. The two things that decide visibility — the dismissal in
+  // localStorage and the visitor's clock — only exist in the browser.
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (!isBannerVisible(new Date())) return;
     try {
       if (window.localStorage.getItem(DISMISS_KEY) !== "1") setVisible(true);
     } catch {
@@ -52,15 +52,16 @@ export function NepalSupportBanner() {
         <p className="text-xs leading-relaxed sm:text-sm">
           <span className="font-semibold">We stand with Nepal.</span>{" "}
           <span className="text-cream-paper/85">
-            Our thoughts are with everyone affected by the floods.
+            Our tools are free and always will be — if they have helped your business,
+            please consider donating what you can to the flood relief effort.
           </span>{" "}
           <a
-            href={DONATE_URL}
+            href={NEPAL_DONATE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="whitespace-nowrap font-semibold text-saffron underline underline-offset-4 transition hover:brightness-110"
           >
-            Donate to the PM Disaster Relief Fund →
+            Donate at donate.gov.np →
           </a>
         </p>
       </div>
