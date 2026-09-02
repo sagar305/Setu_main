@@ -45,6 +45,7 @@ import {
   tokensPastDeadline,
 } from "./calc";
 import {
+  DEFAULT_MESSAGE_TEMPLATES,
   DEFAULT_SETTINGS,
   SERVICE_COLOURS,
   TOKEN_RETENTION_DAYS,
@@ -138,6 +139,30 @@ export function useToken(): TokenContextValue {
   const context = useContext(TokenContext);
   if (!context) throw new Error("useToken must be used inside a TokenProvider.");
   return context;
+}
+
+/**
+ * Fold a stored settings row onto the defaults.
+ *
+ * Deliberately not a plain spread. `messageTemplates` is a nested object, and a
+ * spread replaces it wholesale — so a device that saved its settings before a
+ * new template existed would come back with that key simply missing, and the
+ * first thing to ask for it got `undefined` where a string belongs. That is
+ * not a hypothetical: adding the "we are waiting for you" and "skipped"
+ * templates did exactly this to every queue already in use.
+ *
+ * Every new key added here from now on lands on old devices for the same
+ * reason.
+ */
+function mergeSettings(stored: Partial<TokenSettings> | undefined): TokenSettings {
+  return {
+    ...DEFAULT_SETTINGS,
+    ...(stored ?? {}),
+    messageTemplates: {
+      ...DEFAULT_MESSAGE_TEMPLATES,
+      ...(stored?.messageTemplates ?? {}),
+    },
+  };
 }
 
 /** Statuses that mean a token is still live and someone is expected to appear. */
@@ -258,10 +283,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
           dbGetAll<Business>("business"),
         ]);
 
-      const merged: TokenSettings = {
-        ...DEFAULT_SETTINGS,
-        ...(storedSettings.find((row) => row.id === "main") ?? {}),
-      };
+      const merged = mergeSettings(storedSettings.find((row) => row.id === "main"));
       const currentDay = businessDate(new Date(), merged.dailyResetHour);
 
       let rows = await purgeOldTokens(storedTokens, currentDay);
@@ -297,7 +319,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     const wanted = new Set(stores);
     if (wanted.has("settings")) {
       const rows = await tokenGetAll<TokenSettings>("settings");
-      setSettings({ ...DEFAULT_SETTINGS, ...(rows.find((r) => r.id === "main") ?? {}) });
+      setSettings(mergeSettings(rows.find((r) => r.id === "main")));
     }
     if (wanted.has("services")) {
       const rows = await tokenGetAll<Service>("services");

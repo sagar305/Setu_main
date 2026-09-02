@@ -20,6 +20,7 @@ import {
   activeCountersForService,
 } from "./calc";
 import {
+  DEFAULT_MESSAGE_TEMPLATES,
   tokenLabel,
   type Counter,
   type TokenSettings,
@@ -68,12 +69,23 @@ export function messageVars(context: MessageContext): Record<string, string> {
   };
 }
 
+/**
+ * Build one message.
+ *
+ * Falls back to the shipped default when a template is missing rather than
+ * handing `undefined` to fillTemplate, which throws. Settings are stored on the
+ * device and outlive the code that wrote them, so a key added in a later
+ * release is simply absent on a queue that has been running for months — the
+ * store folds the defaults back in, and this is the second line of defence for
+ * the day something slips past it.
+ */
 export function buildMessage(
   key: MessageTemplateKey,
   settings: TokenSettings,
   context: MessageContext
 ): string {
-  return fillTemplate(settings.messageTemplates[key], messageVars(context));
+  const template = settings.messageTemplates?.[key] ?? DEFAULT_MESSAGE_TEMPLATES[key] ?? "";
+  return fillTemplate(template, messageVars(context));
 }
 
 /** A wa.me link for one token's message, or the chooser when we have no number. */
