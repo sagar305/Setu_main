@@ -25,6 +25,20 @@ export type RentalItem = {
   totalQuantity: number;
   rateBasis: RateBasis;
   rate: number;
+  /**
+   * Fewest units that may go out on one booking.
+   *
+   * Nobody sends a lorry across town with one chair on it. The floor is a
+   * property of the item rather than the booking because it is about what is
+   * worth loading: one marquee is a job, one plate is not.
+   */
+  minOrderQuantity: number;
+  /**
+   * Advance this item needs before its stock is committed, as a share of the
+   * line. Null falls back to the book-wide figure in Settings — most items do,
+   * and the override exists for the marquee that nobody holds without money.
+   */
+  minAdvancePercent: number | null;
   /** Deposit taken per unit, refunded at return. */
   depositPerUnit: number;
   /** Charged per unit per day when returned late. */
@@ -211,6 +225,16 @@ export type RentalSettings = {
   defaultLateFeeBasis: "item-rate" | "fixed";
   /** Flat late fee per day for the whole booking, when the basis is "fixed". */
   fixedLateFeePerDay: number;
+  /**
+   * Advance required before a booking may be confirmed, as a percentage of its
+   * value. Items can ask for more of their own line; this is the floor for
+   * everything else, and for the transport, labour and tax on top.
+   *
+   * Zero — the default — means no advance is required, which is the only
+   * honest starting point: how much money to take before holding stock is a
+   * commercial decision, not one an app should make on an owner's behalf.
+   */
+  minAdvancePercent: number;
   /** Days a quotation stays valid — the figure the quotation message quotes. */
   quotationValidDays: number;
   taxEnabled: boolean;
@@ -341,6 +365,7 @@ export const DEFAULT_SETTINGS: RentalSettings = {
   countReturnDay: true,
   defaultLateFeeBasis: "item-rate",
   fixedLateFeePerDay: 0,
+  minAdvancePercent: 0,
   quotationValidDays: 7,
   taxEnabled: false,
   defaultTaxRate: 18,

@@ -455,6 +455,8 @@ export function RentalProvider({ children }: { children: ReactNode }) {
           totalQuantity: Math.max(0, firstItem.totalQuantity),
           rateBasis: "per-day",
           rate: Math.max(0, firstItem.rate),
+          minOrderQuantity: 1,
+          minAdvancePercent: null,
           depositPerUnit: 0,
           lateFeePerUnitPerDay: 0,
           replacementValue: 0,

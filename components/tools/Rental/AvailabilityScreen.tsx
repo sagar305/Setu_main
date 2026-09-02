@@ -92,7 +92,11 @@ export function AvailabilityScreen({ onOpenBooking }: { onOpenBooking?: (id: str
               className={inputClass}
               value={to}
               min={from}
-              onChange={(event) => setTo(event.target.value)}
+              onChange={(event) => {
+                const next = event.target.value;
+                setTo(next);
+                if (next < from) setFrom(next);
+              }}
             />
           </label>
           <div className="flex gap-1.5">

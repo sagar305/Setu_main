@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { formatMoney } from "@/lib/pos/types";
 import { useRental } from "@/lib/rental/store";
-import { balanceDue } from "@/lib/rental/calc";
+import { balanceDue, requiredAdvanceFor, round2 } from "@/lib/rental/calc";
 import { printQuotation } from "@/lib/rental/print";
 import {
   BOOKING_STATUS_LABELS,
@@ -36,10 +36,14 @@ import { ShareBookingModal } from "./ShareBookingModal";
 import {
   ConfirmDialog,
   EmptyState,
+  Field,
+  Modal,
   SearchInput,
   StatusChip,
   chipBtnClass,
+  inputClass,
   primaryBtnClass,
+  secondaryBtnClass,
 } from "./ui";
 
 const TABS: (BookingStatus | "all")[] = [
@@ -71,6 +75,7 @@ export function BookingsScreen({ initialBookingId }: { initialBookingId?: string
   const [dispatchFor, setDispatchFor] = useState<Booking | null>(null);
   const [returnFor, setReturnFor] = useState<Booking | null>(null);
   const [shareFor, setShareFor] = useState<Booking | null>(null);
+  const [advanceFor, setAdvanceFor] = useState<Booking | null>(null);
   const [confirmCancel, setConfirmCancel] = useState<Booking | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<Booking | null>(null);
   const [error, setError] = useState("");
@@ -249,7 +254,16 @@ export function BookingsScreen({ initialBookingId }: { initialBookingId?: string
                     <>
                       <button
                         type="button"
-                        onClick={() => void run(() => confirmBooking(booking.id))}
+                        onClick={() => {
+                          // Confirming is what commits the stock, so it is also
+                          // where the advance is due. Nothing to collect means
+                          // nothing to ask about.
+                          const outstanding = round2(
+                            requiredAdvanceFor(booking, settings, itemById) - booking.advancePaid
+                          );
+                          if (outstanding > 0) setAdvanceFor(booking);
+                          else void run(() => confirmBooking(booking.id));
+                        }}
                         className={primaryBtnClass}
                       >
                         Confirm
@@ -393,6 +407,19 @@ export function BookingsScreen({ initialBookingId }: { initialBookingId?: string
         onClose={() => setShareFor(null)}
       />
 
+      <AdvanceDialog
+        booking={advanceFor}
+        onClose={() => setAdvanceFor(null)}
+        onConfirm={async (amount, mode) => {
+          const target = advanceFor;
+          setAdvanceFor(null);
+          if (!target) return;
+          await run(() =>
+            confirmBooking(target.id, amount > 0 ? { amount, mode, kind: "advance" } : null)
+          );
+        }}
+      />
+
       <ConfirmDialog
         open={confirmCancel !== null}
         title="Cancel this booking?"
@@ -417,5 +444,111 @@ export function BookingsScreen({ initialBookingId }: { initialBookingId?: string
         }}
       />
     </div>
+  );
+}
+
+/**
+ * The advance asked for at the moment a booking is confirmed.
+ *
+ * It refuses below the minimum rather than warning, because the minimum is a
+ * commercial rule the owner set for themselves — a tool that lets you click
+ * past your own rule is not enforcing anything. Anyone who wants to hold stock
+ * without money sets the figure to zero in Settings.
+ */
+function AdvanceDialog({
+  booking,
+  onClose,
+  onConfirm,
+}: {
+  booking: Booking | null;
+  onClose: () => void;
+  onConfirm: (amount: number, mode: string) => void | Promise<void>;
+}) {
+  const { business, items, settings } = useRental();
+  const itemById = useMemo(() => new Map(items.map((item) => [item.id, item])), [items]);
+  const currency = business?.currency ?? "INR";
+
+  const required = booking
+    ? round2(requiredAdvanceFor(booking, settings, itemById) - booking.advancePaid)
+    : 0;
+
+  const [amount, setAmount] = useState("");
+  const [mode, setMode] = useState(settings.paymentModes[0] ?? "Cash");
+  const [error, setError] = useState("");
+
+  const key = booking?.id ?? "";
+  const [lastKey, setLastKey] = useState(key);
+  if (key !== lastKey) {
+    setLastKey(key);
+    setAmount(required > 0 ? String(required) : "");
+    setMode(settings.paymentModes[0] ?? "Cash");
+    setError("");
+  }
+
+  if (!booking) return null;
+
+  return (
+    <Modal open onClose={onClose} title={`Advance · ${booking.bookingNo}`}>
+      <div className="space-y-3">
+        <p className="text-sm text-muted">
+          Confirming holds the stock for these dates. This booking needs at least{" "}
+          <strong className="text-ink">{formatMoney(required, currency)}</strong> before it can be
+          confirmed.
+        </p>
+
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Advance received">
+            <input
+              className={inputClass}
+              inputMode="decimal"
+              value={amount}
+              onChange={(event) => setAmount(event.target.value)}
+              autoFocus
+            />
+          </Field>
+          <Field label="Mode">
+            <select
+              className={inputClass}
+              value={mode}
+              onChange={(event) => setMode(event.target.value)}
+            >
+              {settings.paymentModes.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+
+        {error ? (
+          <p className="text-sm font-semibold text-red-600" role="alert">
+            {error}
+          </p>
+        ) : null}
+
+        <div className="flex gap-2">
+          <button
+            type="button"
+            className={`${primaryBtnClass} flex-1`}
+            onClick={() => {
+              const value = Number(amount) || 0;
+              if (value + 0.001 < required) {
+                setError(
+                  `That is ${formatMoney(round2(required - value), currency)} short of the minimum advance.`
+                );
+                return;
+              }
+              void onConfirm(value, mode);
+            }}
+          >
+            Take advance & confirm
+          </button>
+          <button type="button" onClick={onClose} className={secondaryBtnClass}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </Modal>
   );
 }

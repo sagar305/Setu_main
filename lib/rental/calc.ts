@@ -126,6 +126,81 @@ export function bookingTotals(
 }
 
 /**
+ * The advance a booking must carry before its stock is committed.
+ *
+ * Worked out line by line, because the items are not equal: a marquee nobody
+ * holds without money can ask for its full value while the chairs on the same
+ * booking ask for a quarter. An item with no figure of its own falls back to
+ * the book-wide percentage, and that same percentage covers the transport,
+ * labour and tax on top, less the discount — otherwise a booking that is mostly
+ * delivery charge could be confirmed on almost nothing.
+ *
+ * Never more than the booking is worth: a hundred percent of a hire is the
+ * whole hire, not the hire plus its deposit. The deposit is separate money and
+ * is collected at dispatch.
+ */
+export function requiredAdvanceFor(
+  booking: Pick<
+    Booking,
+    "lines" | "transportCharge" | "labourCharge" | "discount" | "taxRate"
+  >,
+  settings: Pick<RentalSettings, "minAdvancePercent" | "taxEnabled">,
+  itemById: Map<string, RentalItem>
+): number {
+  const bookPercent = clampPercent(settings.minAdvancePercent);
+  if (bookPercent <= 0 && !booking.lines.some((line) => itemPercent(line, itemById) !== null)) {
+    return 0;
+  }
+
+  const totals = bookingTotals(booking, settings);
+
+  const onLines = booking.lines.reduce((sum, line) => {
+    const percent = itemPercent(line, itemById) ?? bookPercent;
+    return sum + (line.amount * percent) / 100;
+  }, 0);
+
+  // Everything that is not rent: transport, labour and tax, less the discount.
+  const extras = Math.max(0, totals.total - totals.subtotal);
+  const onExtras = (extras * bookPercent) / 100;
+
+  return round2(Math.min(totals.total, onLines + onExtras));
+}
+
+function itemPercent(
+  line: Pick<BookingLine, "itemId">,
+  itemById: Map<string, RentalItem>
+): number | null {
+  const percent = itemById.get(line.itemId)?.minAdvancePercent;
+  return percent === null || percent === undefined ? null : clampPercent(percent);
+}
+
+function clampPercent(value: number): number {
+  if (!Number.isFinite(value)) return 0;
+  return Math.min(100, Math.max(0, value));
+}
+
+/** What is still missing before a booking can be confirmed. Zero when it is met. */
+export function advanceShortfall(
+  booking: Booking,
+  settings: Pick<RentalSettings, "minAdvancePercent" | "taxEnabled">,
+  itemById: Map<string, RentalItem>,
+  /** Money about to be collected but not yet recorded on the booking. */
+  collectingNow = 0
+): number {
+  const required = requiredAdvanceFor(booking, settings, itemById);
+  const held = booking.payments
+    .filter((payment) => payment.kind === "advance" || payment.kind === "settlement")
+    .reduce((sum, payment) => sum + payment.amount, 0);
+  return round2(Math.max(0, required - held - Math.max(0, collectingNow)));
+}
+
+/** The fewest units of an item that may go out on one booking. */
+export function minOrderQuantityFor(item: RentalItem | undefined): number {
+  const value = item?.minOrderQuantity;
+  return Number.isFinite(value) && (value as number) > 0 ? Math.floor(value as number) : 1;
+}
+
+/**
  * Days late.
  *
  * Against the agreed return date, floored at zero, and counted to today while

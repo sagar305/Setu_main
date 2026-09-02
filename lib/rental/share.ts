@@ -16,7 +16,15 @@ import {
   type SharedRental,
 } from "@/lib/toolkit/shareLink";
 import type { Business } from "@/lib/pos/types";
-import { bookingTotals, settleBooking, type Settlement } from "./calc";
+import {
+  bookingTotals,
+  lateDaysFor,
+  lateFeeFor,
+  requiredAdvanceFor,
+  round2,
+  settleBooking,
+  type Settlement,
+} from "./calc";
 import {
   addDays,
   todayKey,
@@ -27,6 +35,9 @@ import {
 } from "./types";
 
 export type RentalShareStage = "quote" | "confirmed" | "settled";
+
+/** A reminder the link was sent to deliver, rather than a document. */
+export type RentalReminder = "dispatch" | "returnDue" | "overdue";
 
 /**
  * Which document a booking is at, unless the caller says otherwise.
@@ -47,7 +58,13 @@ export function rentalDoc(
   customer: Customer | undefined,
   settings: RentalSettings,
   itemById: Map<string, RentalItem>,
-  stage: RentalShareStage = stageFor(booking)
+  stage: RentalShareStage = stageFor(booking),
+  /**
+   * What the link was sent to say. A return reminder and an overdue chase are
+   * the same booking; without this they open as the same page and the customer
+   * has to work out why it arrived.
+   */
+  reminder: RentalReminder | null = null
 ): SharedRental {
   const totals = bookingTotals(booking, settings);
   const settlement: Settlement | null =
@@ -96,7 +113,36 @@ export function rentalDoc(
       stage === "quote"
         ? addDays(todayKey(), Math.max(1, settings.quotationValidDays))
         : undefined,
+    adue:
+      stage === "quote"
+        ? round2(
+            Math.max(0, requiredAdvanceFor(booking, settings, itemById) - booking.advancePaid)
+          ) || undefined
+        : undefined,
+    rm: reminderPayload(booking, settings, itemById, reminder),
     note: booking.note || undefined,
+  };
+}
+
+function reminderPayload(
+  booking: Booking,
+  settings: RentalSettings,
+  itemById: Map<string, RentalItem>,
+  reminder: RentalReminder | null
+): SharedRental["rm"] {
+  if (!reminder) return undefined;
+  if (reminder === "dispatch") {
+    return { k: "dispatch", d: booking.fromDate, c: booking.venueContact || undefined };
+  }
+  if (reminder === "returnDue") {
+    return { k: "returnDue", d: booking.toDate };
+  }
+  const lateDays = lateDaysFor(booking);
+  return {
+    k: "overdue",
+    d: booking.toDate,
+    ld: lateDays,
+    lf: lateFeeFor(booking, lateDays, settings, itemById) || undefined,
   };
 }
 

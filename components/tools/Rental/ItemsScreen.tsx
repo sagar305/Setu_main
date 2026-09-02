@@ -280,7 +280,7 @@ function ItemForm({
   categories: ItemCategory[];
   onClose: () => void;
 }) {
-  const { saveItem, addUnits } = useRental();
+  const { saveItem, addUnits, settings } = useRental();
   const fileRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState(() => blankItem(categories[0]?.id ?? ""));
   const [serials, setSerials] = useState("");
@@ -301,6 +301,9 @@ function ItemForm({
             totalQuantity: String(item.totalQuantity),
             rateBasis: item.rateBasis,
             rate: String(item.rate),
+            minOrderQuantity: String(item.minOrderQuantity || 1),
+            minAdvancePercent:
+              item.minAdvancePercent === null ? "" : String(item.minAdvancePercent),
             depositPerUnit: String(item.depositPerUnit || ""),
             lateFeePerUnitPerDay: String(item.lateFeePerUnitPerDay || ""),
             replacementValue: String(item.replacementValue || ""),
@@ -335,6 +338,11 @@ function ItemForm({
           totalQuantity: Math.max(0, Number(form.totalQuantity) || 0),
           rateBasis: form.rateBasis,
           rate: Number(form.rate) || 0,
+          minOrderQuantity: Math.max(1, Number(form.minOrderQuantity) || 1),
+          minAdvancePercent:
+            form.minAdvancePercent.trim() === ""
+              ? null
+              : Math.min(100, Math.max(0, Number(form.minAdvancePercent) || 0)),
           depositPerUnit: Number(form.depositPerUnit) || 0,
           lateFeePerUnitPerDay: Number(form.lateFeePerUnitPerDay) || 0,
           replacementValue: Number(form.replacementValue) || 0,
@@ -418,6 +426,32 @@ function ItemForm({
                 </option>
               ))}
             </select>
+          </Field>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Field
+            label="Minimum order quantity"
+            hint="Nobody sends a lorry out with one chair on it."
+          >
+            <input
+              className={inputClass}
+              inputMode="numeric"
+              value={form.minOrderQuantity}
+              onChange={(event) => patch({ minOrderQuantity: event.target.value })}
+            />
+          </Field>
+          <Field
+            label="Minimum advance %"
+            hint="Leave blank to use the figure in Settings."
+          >
+            <input
+              className={inputClass}
+              inputMode="decimal"
+              value={form.minAdvancePercent}
+              onChange={(event) => patch({ minAdvancePercent: event.target.value })}
+              placeholder={`${settings.minAdvancePercent}% (from Settings)`}
+            />
           </Field>
         </div>
 
@@ -651,6 +685,8 @@ function blankItem(categoryId: string) {
     totalQuantity: "",
     rateBasis: "per-day" as RateBasis,
     rate: "",
+    minOrderQuantity: "1",
+    minAdvancePercent: "",
     depositPerUnit: "",
     lateFeePerUnitPerDay: "",
     replacementValue: "",

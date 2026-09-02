@@ -14,7 +14,7 @@
 import { escapeHtml } from "@/lib/clinic/print";
 import { formatMoney } from "@/lib/pos/types";
 import type { Business } from "@/lib/pos/types";
-import { bookingTotals, type Settlement } from "./calc";
+import { bookingTotals, requiredAdvanceFor, type Settlement } from "./calc";
 import {
   BOOKING_STATUS_LABELS,
   RATE_BASIS_SUFFIX,
@@ -255,6 +255,10 @@ function totalsBlock(context: PrintContext): string {
 
 export function buildQuotationHtml(context: PrintContext): string {
   const { settings } = context;
+  const advanceDue = Math.max(
+    0,
+    requiredAdvanceFor(context.booking, settings, context.itemById) - context.booking.advancePaid
+  );
   return `
     ${header(context, "Quotation")}
     ${partyBlock(context)}
@@ -270,9 +274,15 @@ export function buildQuotationHtml(context: PrintContext): string {
     ${totalsBlock(context)}
     ${context.booking.note ? `<div class="note">${escapeHtml(context.booking.note)}</div>` : ""}
     <div class="terms">
-      Quotation valid for ${settings.quotationValidDays} days. Stock is held only once the
-      booking is confirmed and the advance is received. Deposit is refundable at return, less
-      any late, damage or loss charges.
+      Quotation valid for ${settings.quotationValidDays} days.
+      ${
+        advanceDue > 0
+          ? `Stock is held once an advance of <strong>${escapeHtml(
+              money(advanceDue, context)
+            )}</strong> is received.`
+          : "Stock is held only once the booking is confirmed."
+      }
+      Deposit is refundable at return, less any late, damage or loss charges.
     </div>
   `;
 }

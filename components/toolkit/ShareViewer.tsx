@@ -283,6 +283,42 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
         {doc.t === "rnt" ? (
           <>
+            {/* Why this link arrived, when it is a reminder rather than a
+                document. Stated before the figures, because it is the reason
+                the customer is looking at all. */}
+            {doc.rm ? (
+              <div
+                className={`mt-3 rounded-xl border p-3 text-sm ${
+                  doc.rm.k === "overdue"
+                    ? "border-red-300 bg-red-50 text-red-800"
+                    : "border-indigo/30 bg-indigo/5 text-ink"
+                }`}
+              >
+                {doc.rm.k === "overdue" ? (
+                  <p className="font-semibold">
+                    {doc.rm.ld
+                      ? `${doc.rm.ld} ${doc.rm.ld === 1 ? "day" : "days"} overdue`
+                      : "Overdue"}
+                    {doc.rm.d ? ` — these items were due back on ${doc.rm.d}` : ""}.
+                    {doc.rm.lf
+                      ? ` A late fee of ${formatMoney(doc.rm.lf, currency)} has built up so far.`
+                      : ""}
+                  </p>
+                ) : null}
+                {doc.rm.k === "returnDue" ? (
+                  <p className="font-semibold">
+                    These items are due back on {doc.rm.d}. Please arrange the return.
+                  </p>
+                ) : null}
+                {doc.rm.k === "dispatch" ? (
+                  <p className="font-semibold">
+                    Your order is being delivered on {doc.rm.d}.
+                    {doc.rm.c ? ` Our team will call ${doc.rm.c} on arrival.` : ""}
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
+
             <div className="mt-3 flex justify-between text-sm text-muted">
               <span>{doc.no}</span>
               <span>{doc.dt?.slice(0, 10)}</span>
@@ -321,6 +357,9 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               <Row label="Hire total" value={formatMoney(doc.tot, currency)} bold />
               {doc.dep ? <Row label="Deposit (refundable)" value={formatMoney(doc.dep, currency)} /> : null}
               {doc.adv ? <Row label="Received" value={formatMoney(doc.adv, currency)} /> : null}
+              {doc.st === "quote" && doc.adue ? (
+                <Row label="Advance to confirm" value={formatMoney(doc.adue, currency)} bold />
+              ) : null}
 
               {doc.st === "settled" ? (
                 <div className="mt-2 space-y-1 border-t border-muted-line/30 pt-2">

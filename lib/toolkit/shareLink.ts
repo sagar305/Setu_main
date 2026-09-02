@@ -226,6 +226,23 @@ export type SharedRental = {
   ref?: number; // deposit refunded
   due?: number; // still payable
   vu?: string; // quote valid until
+  /** Advance still to collect before the hire is committed. */
+  adue?: number;
+  /**
+   * What this link was sent to say, when it is a reminder rather than a
+   * document. Without it a "return due" and an "overdue" chase both open as an
+   * ordinary booking, and the customer has to guess why it was sent.
+   */
+  rm?: {
+    k: "dispatch" | "returnDue" | "overdue";
+    /** The date the reminder is about. */
+    d?: string;
+    /** Overdue only. */
+    ld?: number;
+    lf?: number;
+    /** Dispatch only — who the delivery team calls. */
+    c?: string;
+  };
   note?: string;
 };
 
@@ -294,6 +311,9 @@ export function docTitle(doc: SharedDoc): string {
     case "rx":
       return `Prescription`;
     case "rnt":
+      if (doc.rm?.k === "overdue") return `Overdue — ${doc.no}`;
+      if (doc.rm?.k === "returnDue") return `Return due — ${doc.no}`;
+      if (doc.rm?.k === "dispatch") return `Delivery — ${doc.no}`;
       return doc.st === "quote"
         ? `Quotation ${doc.no}`
         : doc.st === "settled"
@@ -320,7 +340,12 @@ export function payableAmount(doc: SharedDoc): number {
     // after the advance; a settled one asks for whatever the deposit did not
     // cover. A refund due to the customer is not something to collect.
     case "rnt":
-      if (doc.st === "quote") return doc.tot;
+      // An overdue chase asks for the late fee that has built up, not the whole
+      // hire — the hire may already be paid.
+      if (doc.rm?.k === "overdue") return Math.max(0, doc.lf ?? 0);
+      // A quote asks for the advance that would hold the stock, when one is
+      // required, and for the whole figure when none is.
+      if (doc.st === "quote") return doc.adue && doc.adue > 0 ? doc.adue : doc.tot;
       if (doc.st === "settled") return Math.max(0, doc.due ?? 0);
       return Math.max(0, doc.tot - (doc.adv ?? 0));
     case "mrk":

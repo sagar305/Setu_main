@@ -13,6 +13,8 @@ import {
   damageChargeFor,
   defaultLossCharge,
   depositsHeld,
+  minOrderQuantityFor,
+  requiredAdvanceFor,
   lateDaysFor,
   lateFeeFor,
   settleBooking,
@@ -39,6 +41,8 @@ function item(overrides: Partial<RentalItem> = {}): RentalItem {
     totalQuantity: 200,
     rateBasis: "per-day",
     rate: 15,
+    minOrderQuantity: 1,
+    minAdvancePercent: null,
     depositPerUnit: 0,
     lateFeePerUnitPerDay: 0,
     replacementValue: 300,
@@ -549,5 +553,106 @@ describe("deposits held", () => {
 
   it("ignores confirmed bookings — nothing has gone out, so nothing was taken", () => {
     expect(depositsHeld([withDeposit({ status: "confirmed" })])).toBe(0);
+  });
+});
+
+describe("minimum advance", () => {
+  const chairs = item({ id: "chair", minAdvancePercent: null });
+  const marquee = item({ id: "marquee", name: "Marquee", minAdvancePercent: 100 });
+  const itemById = new Map([
+    ["chair", chairs],
+    ["marquee", marquee],
+  ]);
+
+  const charges = { transportCharge: 0, labourCharge: 0, discount: 0, taxRate: 0 };
+
+  it("asks for nothing when no percentage is set anywhere", () => {
+    expect(
+      requiredAdvanceFor(
+        { lines: [line({ amount: 4000 })], ...charges },
+        { ...settings, minAdvancePercent: 0 },
+        itemById
+      )
+    ).toBe(0);
+  });
+
+  it("takes the book-wide percentage of the hire", () => {
+    expect(
+      requiredAdvanceFor(
+        { lines: [line({ amount: 4000 })], ...charges },
+        { ...settings, minAdvancePercent: 25 },
+        itemById
+      )
+    ).toBe(1000);
+  });
+
+  it("lets an item ask for more of its own line than the book-wide figure", () => {
+    // The marquee wants all of its ₹5,000; the chairs want a quarter of ₹4,000.
+    const required = requiredAdvanceFor(
+      {
+        lines: [line({ amount: 4000 }), line({ itemId: "marquee", amount: 5000 })],
+        ...charges,
+      },
+      { ...settings, minAdvancePercent: 25 },
+      itemById
+    );
+    expect(required).toBe(6000);
+  });
+
+  it("applies the book-wide percentage to transport, labour and tax as well", () => {
+    // Rent 4,000 at 25% = 1,000; transport and labour of 1,000 at 25% = 250.
+    const required = requiredAdvanceFor(
+      {
+        lines: [line({ amount: 4000 })],
+        transportCharge: 600,
+        labourCharge: 400,
+        discount: 0,
+        taxRate: 0,
+      },
+      { ...settings, minAdvancePercent: 25 },
+      itemById
+    );
+    expect(required).toBe(1250);
+  });
+
+  it("never asks for more than the hire is worth", () => {
+    const required = requiredAdvanceFor(
+      { lines: [line({ itemId: "marquee", amount: 5000 })], ...charges },
+      { ...settings, minAdvancePercent: 100 },
+      itemById
+    );
+    expect(required).toBe(5000);
+  });
+
+  it("is still required when the book-wide figure is zero but an item asks", () => {
+    expect(
+      requiredAdvanceFor(
+        { lines: [line({ itemId: "marquee", amount: 5000 })], ...charges },
+        { ...settings, minAdvancePercent: 0 },
+        itemById
+      )
+    ).toBe(5000);
+  });
+
+  it("treats an item percentage of zero as a deliberate nothing, not a fallback", () => {
+    const free = new Map([["chair", item({ minAdvancePercent: 0 })]]);
+    expect(
+      requiredAdvanceFor(
+        { lines: [line({ amount: 4000 })], ...charges },
+        { ...settings, minAdvancePercent: 50 },
+        free
+      )
+    ).toBe(0);
+  });
+});
+
+describe("minimum order quantity", () => {
+  it("defaults to one when unset or nonsense", () => {
+    expect(minOrderQuantityFor(item({ minOrderQuantity: 0 }))).toBe(1);
+    expect(minOrderQuantityFor(undefined)).toBe(1);
+  });
+
+  it("reads the item's own floor", () => {
+    expect(minOrderQuantityFor(item({ minOrderQuantity: 25 }))).toBe(25);
   });
 });

@@ -12,7 +12,13 @@ import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, Check, Plus, Search, Trash2, UserPlus } from "lucide-react";
 import { useRental } from "@/lib/rental/store";
 import { availabilityFor, buildIndex, freeUnits } from "@/lib/rental/availability";
-import { bookingTotals, chargeableUnitsFor, round2 } from "@/lib/rental/calc";
+import {
+  bookingTotals,
+  chargeableUnitsFor,
+  minOrderQuantityFor,
+  requiredAdvanceFor,
+  round2,
+} from "@/lib/rental/calc";
 import {
   RATE_BASIS_SUFFIX,
   formatDate,
@@ -40,6 +46,8 @@ type Draft = {
   taxRate: string;
   note: string;
   overCommitted: boolean;
+  advance: string;
+  advanceMode: string;
 };
 
 function lineFromItem(item: RentalItem, quantity: number): BookingLine {
@@ -82,6 +90,7 @@ export function BookingForm({
     customers,
     items,
     maintenanceLogs,
+    recordPayment,
     saveBooking,
     saveCustomer,
     settings,
@@ -123,6 +132,8 @@ export function BookingForm({
             taxRate: String(booking.taxRate || settings.defaultTaxRate),
             note: booking.note,
             overCommitted: booking.overCommitted,
+            advance: "",
+            advanceMode: booking.paymentMode || settings.paymentModes[0] || "",
           }
         : emptyDraft(today, settings.defaultTaxRate)
     );
@@ -169,6 +180,40 @@ export function BookingForm({
         settings
       ),
     [draft.discount, draft.labourCharge, draft.taxRate, draft.transportCharge, lines, settings]
+  );
+
+  const requiredAdvance = useMemo(
+    () =>
+      requiredAdvanceFor(
+        {
+          lines,
+          transportCharge: Number(draft.transportCharge) || 0,
+          labourCharge: Number(draft.labourCharge) || 0,
+          discount: Number(draft.discount) || 0,
+          taxRate: Number(draft.taxRate) || 0,
+        },
+        settings,
+        new Map(items.map((item) => [item.id, item]))
+      ),
+    [draft.discount, draft.labourCharge, draft.taxRate, draft.transportCharge, items, lines, settings]
+  );
+
+  /** Advance already recorded against this booking, from an earlier save. */
+  const advanceHeld = booking?.advancePaid ?? 0;
+  const advanceNow = Number(draft.advance) || 0;
+  const advanceShort = round2(Math.max(0, requiredAdvance - advanceHeld - advanceNow));
+
+  /** Lines below the item's minimum order quantity. */
+  const belowMinimum = useMemo(
+    () =>
+      lines
+        .map((line) => {
+          const item = items.find((row) => row.id === line.itemId);
+          const floor = minOrderQuantityFor(item);
+          return line.quantity < floor ? { line, floor } : null;
+        })
+        .filter((row): row is { line: BookingLine; floor: number } => row !== null),
+    [items, lines]
   );
 
   /** Lines that ask for more than exists on the tightest day of the window. */
@@ -220,7 +265,12 @@ export function BookingForm({
           ),
         };
       }
-      return { ...current, lines: [...current.lines, lineFromItem(item, 1)] };
+      // Start at the item's floor rather than at one, so the owner is not
+      // typing over a quantity the app was never going to accept.
+      return {
+        ...current,
+        lines: [...current.lines, lineFromItem(item, minOrderQuantityFor(item))],
+      };
     });
   };
 
@@ -264,6 +314,23 @@ export function BookingForm({
       setError("The return date cannot be before the start date.");
       return;
     }
+    if (belowMinimum.length > 0) {
+      setError(
+        belowMinimum
+          .map((row) => `${row.line.name} goes out in ${row.floor}s — ${row.line.quantity} is below the minimum.`)
+          .join(" ")
+      );
+      return;
+    }
+    // An enquiry is a quote and takes no money. The advance is what turns it
+    // into a commitment, so it is checked only when the stock is being held.
+    if (status === "confirmed" && advanceShort > 0) {
+      setError(
+        `This booking needs at least ${formatMoney(requiredAdvance, currency)} as advance — ` +
+          `${formatMoney(advanceShort, currency)} still to collect.`
+      );
+      return;
+    }
     // Over-committing is sometimes right — the owner may be sub-hiring, or know
     // stock is coming back early. It is never accidental: it has to be ticked.
     if (shortfalls.length > 0 && !draft.overCommitted) {
@@ -298,6 +365,13 @@ export function BookingForm({
         },
         booking?.id
       );
+      if (advanceNow > 0) {
+        await recordPayment(saved.id, {
+          amount: advanceNow,
+          mode: draft.advanceMode || settings.paymentModes[0] || "Cash",
+          kind: "advance",
+        });
+      }
       onSaved?.(saved);
       onClose();
     } catch (caught) {
@@ -426,7 +500,18 @@ export function BookingForm({
                 type="date"
                 className={inputClass}
                 value={draft.fromDate}
-                onChange={(event) => patch({ fromDate: event.target.value })}
+                onChange={(event) => {
+                  // Moving the start past the end has to carry the end with it.
+                  // `min` on the To field only guards that field's own picker —
+                  // it does nothing when the From date moves underneath it, and
+                  // an inverted window silently prices as one day and checks
+                  // availability on one day, which is worse than refusing it.
+                  const fromDate = event.target.value;
+                  patch({
+                    fromDate,
+                    toDate: draft.toDate && draft.toDate < fromDate ? fromDate : draft.toDate,
+                  });
+                }}
               />
             </Field>
             <Field label="To">
@@ -435,7 +520,10 @@ export function BookingForm({
                 className={inputClass}
                 value={draft.toDate}
                 min={draft.fromDate}
-                onChange={(event) => patch({ toDate: event.target.value })}
+                onChange={(event) => {
+                  const toDate = event.target.value;
+                  patch({ toDate, fromDate: toDate && toDate < draft.fromDate ? toDate : draft.fromDate });
+                }}
               />
             </Field>
           </div>
@@ -598,6 +686,12 @@ export function BookingForm({
                       </div>
                     </div>
 
+                    {item && line.quantity < minOrderQuantityFor(item) ? (
+                      <p className="mt-1.5 text-xs font-semibold text-amber-700">
+                        Minimum order is {minOrderQuantityFor(item)}.
+                      </p>
+                    ) : null}
+
                     {availability ? (
                       <p
                         className={`mt-1.5 text-xs ${over ? "font-semibold text-red-600" : "text-muted"}`}
@@ -689,6 +783,63 @@ export function BookingForm({
           </dl>
         </section>
 
+        {/* 5 — Advance */}
+        <section className="grid gap-3 sm:grid-cols-3">
+          <Field
+            label="Advance received"
+            hint={
+              requiredAdvance > 0
+                ? `At least ${formatMoney(requiredAdvance, currency)} to confirm`
+                : "Optional."
+            }
+          >
+            <input
+              className={`${inputClass} ${advanceShort > 0 && requiredAdvance > 0 ? "border-amber-400" : ""}`}
+              inputMode="decimal"
+              value={draft.advance}
+              onChange={(event) => patch({ advance: event.target.value })}
+              placeholder={requiredAdvance > 0 ? String(round2(Math.max(0, requiredAdvance - advanceHeld))) : "0"}
+            />
+          </Field>
+          <Field label="Mode">
+            <select
+              className={inputClass}
+              value={draft.advanceMode || settings.paymentModes[0] || ""}
+              onChange={(event) => patch({ advanceMode: event.target.value })}
+            >
+              {settings.paymentModes.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <div className="self-end pb-2 text-xs">
+            {advanceHeld > 0 ? (
+              <p className="text-muted">
+                {formatMoney(advanceHeld, currency)} already received
+              </p>
+            ) : null}
+            {requiredAdvance > 0 ? (
+              advanceShort > 0 ? (
+                <p className="font-semibold text-amber-700">
+                  {formatMoney(advanceShort, currency)} short of the minimum
+                </p>
+              ) : (
+                <p className="font-semibold text-green-700">Minimum advance met</p>
+              )
+            ) : null}
+          </div>
+        </section>
+
+        {belowMinimum.length > 0 ? (
+          <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-ink">
+            {belowMinimum
+              .map((row) => `${row.line.name} goes out in ${row.floor}s at a time.`)
+              .join(" ")}
+          </p>
+        ) : null}
+
         {shortfalls.length > 0 ? (
           <label className="flex items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 p-3">
             <input
@@ -776,5 +927,7 @@ function emptyDraft(today: string, defaultTaxRate: number): Draft {
     taxRate: String(defaultTaxRate),
     note: "",
     overCommitted: false,
+    advance: "",
+    advanceMode: "",
   };
 }

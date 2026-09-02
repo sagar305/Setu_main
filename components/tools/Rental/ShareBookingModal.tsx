@@ -22,7 +22,12 @@ import { useShortenLink } from "@/lib/toolkit/useShortenLink";
 import { canShare, shareViaWeb } from "@/lib/share";
 import { settleBooking } from "@/lib/rental/calc";
 import { fillTemplate, messageDate, plainAmount, smsLink, whatsAppLink, TEMPLATE_LABELS } from "@/lib/rental/messages";
-import { rentalDoc, stageFor, type RentalShareStage } from "@/lib/rental/share";
+import {
+  rentalDoc,
+  stageFor,
+  type RentalReminder,
+  type RentalShareStage,
+} from "@/lib/rental/share";
 import { useRental } from "@/lib/rental/store";
 import type { Booking, RentalTemplateKey } from "@/lib/rental/types";
 
@@ -33,6 +38,17 @@ const STAGE_FOR_TEMPLATE: Record<RentalTemplateKey, RentalShareStage> = {
   returnDue: "confirmed",
   overdue: "confirmed",
   settlement: "settled",
+};
+
+/**
+ * Three of the templates are reminders about a booking rather than the booking
+ * itself, and the link has to say which — otherwise every one of them opens as
+ * the same confirmation page.
+ */
+const REMINDER_FOR_TEMPLATE: Partial<Record<RentalTemplateKey, RentalReminder>> = {
+  dispatchReminder: "dispatch",
+  returnDue: "returnDue",
+  overdue: "overdue",
 };
 
 /** Which message the owner most likely wants, given where the booking is. */
@@ -83,7 +99,8 @@ export function ShareBookingModal({
       customer,
       settings,
       itemById,
-      STAGE_FOR_TEMPLATE[templateKey] ?? stageFor(booking)
+      STAGE_FOR_TEMPLATE[templateKey] ?? stageFor(booking),
+      REMINDER_FOR_TEMPLATE[templateKey] ?? null
     );
   }, [booking, business, customer, itemById, settings, templateKey]);
 

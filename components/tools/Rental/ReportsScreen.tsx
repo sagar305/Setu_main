@@ -102,7 +102,11 @@ export function ReportsScreen() {
               type="date"
               className={inputClass}
               value={from}
-              onChange={(event) => setFrom(event.target.value)}
+              onChange={(event) => {
+                const next = event.target.value;
+                setFrom(next);
+                if (to < next) setTo(next);
+              }}
             />
           </label>
           <label className="block">
@@ -114,7 +118,11 @@ export function ReportsScreen() {
               className={inputClass}
               value={to}
               min={from}
-              onChange={(event) => setTo(event.target.value)}
+              onChange={(event) => {
+                const next = event.target.value;
+                setTo(next);
+                if (next < from) setFrom(next);
+              }}
             />
           </label>
           <div className="flex gap-1.5">

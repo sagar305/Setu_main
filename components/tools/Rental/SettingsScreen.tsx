@@ -174,7 +174,7 @@ export function SettingsScreen() {
       </SectionCard>
 
       <SectionCard title="Charges">
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-4">
           <Field label="Late fee basis">
             <select
               className={inputClass}
@@ -201,6 +201,21 @@ export function SettingsScreen() {
               />
             </Field>
           ) : null}
+          <Field
+            label="Minimum advance %"
+            hint="Of the booking's value, before it can be confirmed. 0 = none."
+          >
+            <input
+              className={inputClass}
+              inputMode="decimal"
+              value={settings.minAdvancePercent}
+              onChange={(event) =>
+                void updateSettings({
+                  minAdvancePercent: Math.min(100, Math.max(0, Number(event.target.value) || 0)),
+                })
+              }
+            />
+          </Field>
           <Field label="Quotation valid for (days)">
             <input
               className={inputClass}
