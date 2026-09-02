@@ -248,16 +248,21 @@ export function BusinessProfileTool() {
 
 /**
  * The one setting that changes where shared data lives, so it says plainly what
- * turning it on allows — and it only allows the offer, never the upload. The
- * card is hidden entirely when the site has no shortener configured, rather
- * than showing a switch that would do nothing.
+ * turning it on allows. The first switch allows only the offer; the second — off
+ * unless it is asked for — is what turns the offer into something that happens
+ * on its own, and it says so in those words. The card is hidden entirely when
+ * the site has no shortener configured, rather than showing a switch that would
+ * do nothing.
  */
 function ShortLinkSetting() {
   const [enabled, setEnabled] = useState(true);
+  const [auto, setAuto] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setEnabled(getPreferences().shortLinks);
+    const preferences = getPreferences();
+    setEnabled(preferences.shortLinks);
+    setAuto(preferences.shortLinksAuto);
     setLoaded(true);
   }, []);
 
@@ -287,6 +292,26 @@ function ShortLinkSetting() {
           <span className="mt-1 block text-xs text-muted">
             Adds a &ldquo;Shorten&rdquo; button to the share sheet. Nothing is shortened until you
             press it, one share at a time.
+          </span>
+        </span>
+      </label>
+
+      <label className={`mt-3 flex items-start gap-3 ${enabled ? "" : "opacity-50"}`}>
+        <input
+          type="checkbox"
+          checked={auto && enabled}
+          disabled={!enabled}
+          onChange={(event) => {
+            setAuto(event.target.checked);
+            setPreferences({ shortLinksAuto: event.target.checked });
+          }}
+          className="mt-0.5 h-4 w-4 accent-indigo"
+        />
+        <span className="text-sm text-ink">
+          Shorten every link automatically
+          <span className="mt-1 block text-xs text-muted">
+            Skips the button: opening a share sheet uploads that document and hands you the short
+            link straight away. If it fails or you are offline, you get the full link instead.
           </span>
         </span>
       </label>

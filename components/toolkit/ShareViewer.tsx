@@ -202,7 +202,7 @@ export function ShareViewer({ code }: { code?: string } = {}) {
   const currency = b.cur;
   const amount = payableAmount(doc);
   const payNote =
-    doc.t === "inv" || doc.t === "quo" || doc.t === "fee"
+    doc.t === "inv" || doc.t === "quo" || doc.t === "fee" || doc.t === "rnt"
       ? doc.no
       : doc.t === "led"
         ? "Payment"
@@ -279,6 +279,72 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             {doc.dur ? <Row label="Duration" value={`${doc.dur} min`} /> : null}
             {doc.note ? <p className="pt-1 text-xs text-muted">{doc.note}</p> : null}
           </div>
+        ) : null}
+
+        {doc.t === "rnt" ? (
+          <>
+            <div className="mt-3 flex justify-between text-sm text-muted">
+              <span>{doc.no}</span>
+              <span>{doc.dt?.slice(0, 10)}</span>
+            </div>
+            {doc.vu ? (
+              <p className="mt-1 text-center text-xs font-semibold text-indigo">
+                Valid until {doc.vu.slice(0, 10)}
+              </p>
+            ) : null}
+            {doc.cn ? <p className="mt-2 text-sm text-ink">For: {doc.cn}</p> : null}
+
+            <div className="mt-3 rounded-xl bg-cream-paper p-3 text-sm">
+              {doc.ev ? <Row label="Event" value={doc.ev} /> : null}
+              {doc.vn ? <Row label="Venue" value={doc.vn} /> : null}
+              <Row
+                label="Hire period"
+                value={`${doc.fd}${doc.td && doc.td !== doc.fd ? ` to ${doc.td}` : ""}`}
+              />
+              {doc.ft || doc.tt ? (
+                <Row label="Time" value={[doc.ft, doc.tt].filter(Boolean).join(" – ")} />
+              ) : null}
+            </div>
+
+            <div className="my-4">
+              <ItemsTable items={doc.it} currency={currency} />
+            </div>
+
+            <div className="space-y-1">
+              <Row label="Rent" value={formatMoney(doc.sub, currency)} />
+              {doc.trn ? <Row label="Transport" value={formatMoney(doc.trn, currency)} /> : null}
+              {doc.lab ? <Row label="Labour" value={formatMoney(doc.lab, currency)} /> : null}
+              {doc.dis ? (
+                <Row label="Discount" value={`-${formatMoney(doc.dis, currency)}`} />
+              ) : null}
+              {doc.tax ? <Row label="Tax" value={formatMoney(doc.tax, currency)} /> : null}
+              <Row label="Hire total" value={formatMoney(doc.tot, currency)} bold />
+              {doc.dep ? <Row label="Deposit (refundable)" value={formatMoney(doc.dep, currency)} /> : null}
+              {doc.adv ? <Row label="Received" value={formatMoney(doc.adv, currency)} /> : null}
+
+              {doc.st === "settled" ? (
+                <div className="mt-2 space-y-1 border-t border-muted-line/30 pt-2">
+                  {doc.ld ? (
+                    <Row
+                      label={`Late return (${doc.ld} ${doc.ld === 1 ? "day" : "days"})`}
+                      value={formatMoney(doc.lf ?? 0, currency)}
+                    />
+                  ) : null}
+                  {doc.dmg ? <Row label="Damage" value={formatMoney(doc.dmg, currency)} /> : null}
+                  {doc.los ? <Row label="Loss" value={formatMoney(doc.los, currency)} /> : null}
+                  {doc.ref ? (
+                    <Row label="Deposit refunded" value={formatMoney(doc.ref, currency)} />
+                  ) : null}
+                  <Row
+                    label={(doc.due ?? 0) > 0 ? "Still payable" : "Settled in full"}
+                    value={formatMoney(doc.due ?? 0, currency)}
+                    bold
+                  />
+                </div>
+              ) : null}
+            </div>
+            {doc.note ? <p className="mt-3 text-xs text-muted">{doc.note}</p> : null}
+          </>
         ) : null}
 
         {doc.t === "fee" ? (

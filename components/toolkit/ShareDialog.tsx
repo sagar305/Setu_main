@@ -6,11 +6,15 @@
 // business default), and appointments can carry an optional advance fee.
 //
 // The link starts out self-contained: the whole document rides in the fragment
-// and nothing is uploaded. Pressing "Shorten" — and only pressing it — stores
-// the document with the shortener and swaps in a ten-character link. If that
-// fails, or the browser is offline, the long link stays and the dialog says so
-// instead of silently doing nothing. With the preference turned off, no part of
-// this appears at all.
+// and nothing is uploaded. Pressing "Shorten" stores the document with the
+// shortener and swaps in a ten-character link. If that fails, or the browser is
+// offline, the long link stays and the dialog says so instead of silently doing
+// nothing. With the preference turned off, no part of this appears at all.
+//
+// A user who has turned on "shorten every link automatically" gets the same
+// upload without the tap — the setting is the deliberate act, made once instead
+// of per share. It is still one shorten per document, it still falls back to the
+// long link on any failure, and the dialog still says which link is in hand.
 
 import { useEffect, useMemo, useState } from "react";
 import QRCode from "qrcode";
@@ -84,10 +88,18 @@ export function ShareDialog({
   // A short code stands for one exact document. The moment the UPI ID or the
   // advance fee is edited it stands for the wrong one, so it is dropped and the
   // user shortens again if they still want to.
-  const { reset } = shortener;
+  const { reset, shorten, auto, status: shortenStatus } = shortener;
   useEffect(() => {
     reset();
   }, [longUrl, reset]);
+
+  // Auto-shortening: do exactly what the button would do, once, as the sheet
+  // opens. `reset` above has already cleared the status if the document
+  // changed underneath, so this cannot re-upload the same document twice.
+  useEffect(() => {
+    if (!open || !auto || !effectiveDoc || shortenStatus !== "idle") return;
+    void shorten(encodeDoc(effectiveDoc), "doc");
+  }, [open, auto, effectiveDoc, shortenStatus, shorten]);
 
   const url = shortener.shortUrl ?? longUrl;
 
@@ -204,14 +216,20 @@ export function ShareDialog({
 
             {shortener.offered && !shortener.shortUrl ? (
               <div className="mt-2">
-                <button
-                  type="button"
-                  onClick={() => shortener.shorten(encodeDoc(effectiveDoc), "doc")}
-                  disabled={shortener.status === "working"}
-                  className="rounded-lg border border-indigo/30 px-3 py-1.5 text-xs font-semibold text-indigo disabled:opacity-60"
-                >
-                  {shortener.status === "working" ? "Shortening…" : "Shorten link"}
-                </button>
+                {shortener.auto ? (
+                  shortener.status === "working" ? (
+                    <p className="text-xs text-muted">Shortening…</p>
+                  ) : null
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => shortener.shorten(encodeDoc(effectiveDoc), "doc")}
+                    disabled={shortener.status === "working"}
+                    className="rounded-lg border border-indigo/30 px-3 py-1.5 text-xs font-semibold text-indigo disabled:opacity-60"
+                  >
+                    {shortener.status === "working" ? "Shortening…" : "Shorten link"}
+                  </button>
+                )}
 
                 {shortener.status === "error" && shortener.failure === "offline" ? (
                   <p className="mt-1 text-xs text-amber-600">

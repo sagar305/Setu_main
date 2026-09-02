@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getProductsContent } from "@/lib/content";
-import { tokenSystemEnabled } from "@/lib/featureFlags";
+import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
 
 const content = getProductsContent();
@@ -13,9 +13,11 @@ const content = getProductsContent();
  * schema below, so the page and the structured data telling Google what is on
  * it never disagree.
  */
-const visibleProducts = content.products.filter(
-  (product) => product.id !== "free-token" || tokenSystemEnabled()
-);
+const visibleProducts = content.products.filter((product) => {
+  if (product.id === "free-token") return tokenSystemEnabled();
+  if (product.id === "free-rental") return rentalSoftwareEnabled();
+  return true;
+});
 
 
 export const metadata: Metadata = {
@@ -63,6 +65,9 @@ const listedProducts: { name: string; path: string }[] = [
   { name: "Free Clinic Manager", path: "/products/free-clinic-software" },
   ...(tokenSystemEnabled()
     ? [{ name: "Free Token System", path: "/products/free-token-system" }]
+    : []),
+  ...(rentalSoftwareEnabled()
+    ? [{ name: "Free Rental & Hire Book", path: "/products/free-rental-software" }]
     : []),
   { name: "Setu Dine", path: "/products/restaurant-pos" },
   { name: "Setu Queue", path: "/products/queue" },

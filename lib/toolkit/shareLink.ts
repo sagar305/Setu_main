@@ -186,6 +186,49 @@ export type SharedAttendance = {
   abs?: string[]; // dates missed
 };
 
+/**
+ * A hire, shared with the customer.
+ *
+ * One shape covers the quotation, the confirmation and the settled note,
+ * because they are the same document at three moments and a customer who saved
+ * the first link should recognise the third. `st` says which moment it is, and
+ * the settlement figures are simply absent until there are any.
+ */
+export type SharedRental = {
+  t: "rnt";
+  b: ShareBusiness;
+  /** quote · confirmed · settled */
+  st: "quote" | "confirmed" | "settled";
+  no: string; // booking number
+  dt: string; // issued date (ISO)
+  cn?: string; // customer name
+  cp?: string; // customer phone
+  ev?: string; // event name
+  vn?: string; // venue
+  fd: string; // from date
+  td: string; // to date
+  ft?: string; // from time
+  tt?: string; // to time
+  it: ShareLineItem[];
+  sub: number;
+  trn?: number; // transport
+  lab?: number; // labour
+  dis?: number; // discount
+  tax?: number;
+  tot: number; // hire total
+  dep?: number; // deposit held
+  adv?: number; // advance / payments received
+  /** Settlement only. */
+  ld?: number; // late days
+  lf?: number; // late fee
+  dmg?: number; // damage charges
+  los?: number; // loss charges
+  ref?: number; // deposit refunded
+  due?: number; // still payable
+  vu?: string; // quote valid until
+  note?: string;
+};
+
 export type SharedDoc =
   | SharedInvoice
   | SharedQuotation
@@ -194,7 +237,8 @@ export type SharedDoc =
   | SharedFeeReceipt
   | SharedMarks
   | SharedAttendance
-  | SharedPrescription;
+  | SharedPrescription
+  | SharedRental;
 
 // ---------------------------------------------------------------------------
 // Encode / decode
@@ -249,6 +293,12 @@ export function docTitle(doc: SharedDoc): string {
       return `Attendance report`;
     case "rx":
       return `Prescription`;
+    case "rnt":
+      return doc.st === "quote"
+        ? `Quotation ${doc.no}`
+        : doc.st === "settled"
+          ? `Settlement ${doc.no}`
+          : `Booking ${doc.no}`;
   }
 }
 
@@ -266,6 +316,13 @@ export function payableAmount(doc: SharedDoc): number {
     // A receipt offers "pay now" only for whatever is still pending.
     case "fee":
       return doc.bal ?? 0;
+    // A quote asks for the whole figure; a live booking asks for the balance
+    // after the advance; a settled one asks for whatever the deposit did not
+    // cover. A refund due to the customer is not something to collect.
+    case "rnt":
+      if (doc.st === "quote") return doc.tot;
+      if (doc.st === "settled") return Math.max(0, doc.due ?? 0);
+      return Math.max(0, doc.tot - (doc.adv ?? 0));
     case "mrk":
     case "att":
     // A prescription is never something to collect money against.

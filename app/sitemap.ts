@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { tokenSystemEnabled } from "@/lib/featureFlags";
+import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -102,6 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // for a page that 404s teaches Google the site is unreliable, which is a
     // slow thing to undo.
     ...(tokenSystemEnabled() ? ["/products/free-token-system"] : []),
+    ...(rentalSoftwareEnabled() ? ["/products/free-rental-software"] : []),
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

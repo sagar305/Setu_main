@@ -37,3 +37,19 @@ function enabled(value: string | undefined): boolean {
 export function tokenSystemEnabled(): boolean {
   return enabled(process.env.TOKEN_SYSTEM_ENABLED);
 }
+
+/**
+ * The Free Rental & Hire Book (/products/free-rental-software).
+ *
+ * Off in production until launch. Set RENTAL_SOFTWARE_ENABLED=true in Vercel's
+ * Preview and Development environments to work on it; add it to Production and
+ * redeploy to launch. Changing the value alone does nothing — the flag is
+ * inlined at build time, so the redeploy is what ships it.
+ *
+ * Four places read this, and they have to agree: the route, the sitemap, the
+ * products page (its rendered list and its ItemList schema), and the toolkit
+ * registry.
+ */
+export function rentalSoftwareEnabled(): boolean {
+  return enabled(process.env.RENTAL_SOFTWARE_ENABLED);
+}

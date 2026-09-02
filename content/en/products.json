@@ -194,6 +194,30 @@
       }
     },
     {
+      "id": "free-rental",
+      "status": "live",
+      "name": "Free Rental & Hire Book",
+      "headline": "Free rental management software for tent houses and equipment hire",
+      "description": "A completely free hire book for tent houses, event decorators, furniture and party equipment rental, camera hire and construction tool hire. It tracks what is committed on every date, so you never promise the same 200 chairs to two weddings — and it settles damage, shortage and late fees against the deposit when the stock comes back. No login, no subscription, works offline.",
+      "features": [
+        "An availability calendar that answers \u201chow many are free on the 14th?\u201d in seconds",
+        "Free counts on the tightest single day of a range \u2014 never an average that hides a clash",
+        "A conflict list that surfaces every booking promising more stock than you own",
+        "Enquiry \u2192 confirmed \u2192 dispatched \u2192 returned, with a quotation at the front",
+        "Picking lists for the loading crew with no prices on them, and signed delivery challans",
+        "Return settlement: damaged, lost and late, all charged against the deposit",
+        "Per-item utilisation and return on cost \u2014 what to buy more of, what to sell off",
+        "Serial-numbered units for cameras and tools, one booking at a time, enforced",
+        "Maintenance logs that take stock out of availability while it is being repaired",
+        "WhatsApp quotes, confirmations and overdue chases with a link the customer can open",
+        "Works fully offline \u2014 PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Rental & Hire Book \u2014 it's free",
+        "href": "/products/free-rental-software"
+      }
+    },
+    {
       "id": "pos",
       "status": "live",
       "name": "Setu Dine",
