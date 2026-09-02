@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { tokenSystemEnabled } from "@/lib/featureFlags";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -93,11 +94,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/products/free-restaurant-pos",
     "/products/free-tuition-software",
     "/products/free-clinic-software",
-    "/products/free-token-system",
     "/blog",
     "/glossary",
     "/contact",
     "/book-demo",
+    // Unreleased routes are listed only when their flag is on. A sitemap entry
+    // for a page that 404s teaches Google the site is unreliable, which is a
+    // slow thing to undo.
+    ...(tokenSystemEnabled() ? ["/products/free-token-system"] : []),
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

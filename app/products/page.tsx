@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getProductsContent } from "@/lib/content";
+import { tokenSystemEnabled } from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
 
 const content = getProductsContent();
+
+/**
+ * Products the site is willing to admit exist.
+ *
+ * An unreleased product is dropped from the listing and from the ItemList
+ * schema below, so the page and the structured data telling Google what is on
+ * it never disagree.
+ */
+const visibleProducts = content.products.filter(
+  (product) => product.id !== "free-token" || tokenSystemEnabled()
+);
+
 
 export const metadata: Metadata = {
   title: content.seo.title,
@@ -37,65 +50,34 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The ItemList, in order, with positions numbered from the list rather than
+ * written by hand — an unreleased product appearing or disappearing must not
+ * leave a gap or a duplicate in the sequence.
+ */
+const listedProducts: { name: string; path: string }[] = [
+  { name: "Browser Based POS", path: "/products/browser-based-pos" },
+  { name: "Free Dine — Free Restaurant POS", path: "/products/free-restaurant-pos" },
+  { name: "Setu QR Menu", path: "/products/qr-menu" },
+  { name: "Tuition Class Manager", path: "/products/free-tuition-software" },
+  { name: "Free Clinic Manager", path: "/products/free-clinic-software" },
+  ...(tokenSystemEnabled()
+    ? [{ name: "Free Token System", path: "/products/free-token-system" }]
+    : []),
+  { name: "Setu Dine", path: "/products/restaurant-pos" },
+  { name: "Setu Queue", path: "/products/queue" },
+  { name: "Setu Retail", path: "/products/retail" },
+];
+
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Browser Based POS",
-      url: "https://setutechnology.com/products/browser-based-pos",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Free Dine — Free Restaurant POS",
-      url: "https://setutechnology.com/products/free-restaurant-pos",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "Setu QR Menu",
-      url: "https://setutechnology.com/products/qr-menu",
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      name: "Tuition Class Manager",
-      url: "https://setutechnology.com/products/free-tuition-software",
-    },
-    {
-      "@type": "ListItem",
-      position: 5,
-      name: "Free Clinic Manager",
-      url: "https://setutechnology.com/products/free-clinic-software",
-    },
-    {
-      "@type": "ListItem",
-      position: 6,
-      name: "Free Token System",
-      url: "https://setutechnology.com/products/free-token-system",
-    },
-    {
-      "@type": "ListItem",
-      position: 7,
-      name: "Setu Dine",
-      url: "https://setutechnology.com/products/restaurant-pos",
-    },
-    {
-      "@type": "ListItem",
-      position: 8,
-      name: "Setu Queue",
-      url: "https://setutechnology.com/products/queue",
-    },
-    {
-      "@type": "ListItem",
-      position: 9,
-      name: "Setu Retail",
-      url: "https://setutechnology.com/products/retail",
-    },
-  ],
+  itemListElement: listedProducts.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: product.name,
+    url: `https://setutechnology.com${product.path}`,
+  })),
 };
 
 export default function ProductsPage() {
@@ -114,7 +96,7 @@ export default function ProductsPage() {
 
       <section className="mx-auto max-w-5xl px-6 py-12">
         <div className="flex flex-col gap-10">
-          {content.products.map((product) => {
+          {visibleProducts.map((product) => {
             const isLive = product.status === "live";
             return (
               <div

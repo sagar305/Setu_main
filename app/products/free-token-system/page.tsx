@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { tokenSystemEnabled } from "@/lib/featureFlags";
 import Link from "next/link";
 import type { ComponentType } from "react";
 import {
@@ -30,7 +32,16 @@ import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
 
-export const metadata: Metadata = {
+/**
+ * Metadata is generated rather than exported flat, because a flat export is
+ * evaluated even when the component below calls notFound(). The rendered
+ * <head> was already correct, but the RSC payload embedded in the 404 still
+ * carried this page's title, description and OG tags — view-source on a page
+ * that does not exist yet was showing an unreleased product's marketing copy.
+ */
+export function generateMetadata(): Metadata {
+  if (!tokenSystemEnabled()) return {};
+  return {
   title: "Free Token System for Clinics, Labs & Shops",
   description:
     "Free token system for clinics, labs, salons and shops. Calls each number out loud in Hindi or English, shows it on a TV, works offline with no signup.",
@@ -64,6 +75,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+}
 
 type Feature = {
   icon: ComponentType<{ className?: string }>;
@@ -299,6 +311,8 @@ function FeatureCards({ items }: { items: Feature[] }) {
 }
 
 export default function FreeTokenSystemPage() {
+  if (!tokenSystemEnabled()) notFound();
+
   return (
     <>
       <script

@@ -13,6 +13,7 @@
 // (the "shell is chrome, never a dependency" rule).
 
 import type { EntityName } from "@/lib/toolkit/entities";
+import { tokenSystemEnabled } from "@/lib/featureFlags";
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -285,7 +286,10 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     category: "service",
     kind: "app",
     tier: "foundation",
-    status: "built",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: tokenSystemEnabled() ? "built" : "next",
     route: "/products/free-token-system",
     // Owns no shared entity: services, counters and tokens live in the queue's
     // own TOKEN_DATABASE, because two tabs write to them all day and the names

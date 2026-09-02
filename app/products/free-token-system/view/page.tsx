@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { tokenSystemEnabled } from "@/lib/featureFlags";
 import Link from "next/link";
 import { Suspense } from "react";
 import { PosterLanding } from "@/components/tools/Token/PosterLanding";
@@ -17,15 +19,27 @@ import { PosterLanding } from "@/components/tools/Token/PosterLanding";
  * Noindex: the business and service names arrive in the query string, so every
  * scan is a different URL with nothing worth indexing behind it.
  */
-export const metadata: Metadata = {
+/**
+ * Metadata is generated rather than exported flat, because a flat export is
+ * evaluated even when the component below calls notFound(). The rendered
+ * <head> was already correct, but the RSC payload embedded in the 404 still
+ * carried this page's title, description and OG tags — view-source on a page
+ * that does not exist yet was showing an unreleased product's marketing copy.
+ */
+export function generateMetadata(): Metadata {
+  if (!tokenSystemEnabled()) return {};
+  return {
   title: "Join the queue | Setu",
   description:
     "Show this screen at the counter to collect your token number. Part of the Setu Free Token System.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/products/free-token-system/view" },
 };
+}
 
 export default function TokenViewPage() {
+  if (!tokenSystemEnabled()) notFound();
+
   return (
     <section className="mx-auto max-w-lg px-4 py-12 sm:px-6 sm:py-16">
       <Suspense fallback={<p className="text-center text-muted">Loading…</p>}>
