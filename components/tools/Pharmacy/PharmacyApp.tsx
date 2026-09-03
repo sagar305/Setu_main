@@ -6,6 +6,8 @@ import {
   BarChart3,
   CalendarClock,
   Lock,
+  Maximize2,
+  Minimize2,
   Pill,
   RotateCcw,
   Settings,
@@ -42,7 +44,13 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Pill }[] = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-function PharmacyShell() {
+function PharmacyShell({
+  fullscreen,
+  onToggleFullscreen,
+}: {
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+}) {
   const { batches, business, settings, today } = usePharmacy();
   const [screen, setScreen] = useState<ScreenId>("sell");
   const [offline, setOffline] = useState(false);
@@ -150,16 +158,35 @@ function PharmacyShell() {
             </span>
           )}
         </div>
-        {hasPin && (
+        <div className="flex items-center gap-2">
+          {hasPin && (
+            <button
+              type="button"
+              onClick={() => setLocked(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40"
+            >
+              <Lock className="h-4 w-4" aria-hidden="true" />
+              Lock
+            </button>
+          )}
+          {/*
+            A counter machine runs this app all day, and the marketing page
+            above it is dead weight once the shop is open. Full screen gets the
+            browser chrome out of the way too where the browser allows it.
+          */}
           <button
             type="button"
-            onClick={() => setLocked(true)}
+            onClick={onToggleFullscreen}
             className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40"
           >
-            <Lock className="h-4 w-4" aria-hidden="true" />
-            Lock
+            {fullscreen ? (
+              <Minimize2 className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Maximize2 className="h-4 w-4" aria-hidden="true" />
+            )}
+            <span className="sr-only">{fullscreen ? "Exit full screen" : "Full screen"}</span>
           </button>
-        )}
+        </div>
       </div>
 
       <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Pharmacy sections">
@@ -193,9 +220,56 @@ function PharmacyShell() {
 
 function PharmacyBody() {
   const { status, errorMessage } = usePharmacy();
+  const [fullscreen, setFullscreen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Two things at once, deliberately.
+   *
+   * The in-page expansion is what actually matters — it fills the tab and drops
+   * the marketing page below. The browser's own fullscreen is asked for on top
+   * of that where it is allowed, and its failure is swallowed: iOS Safari does
+   * not grant it to a div at all, and the counter should not get an error for
+   * a nicety.
+   */
+  const toggleFullscreen = () => {
+    setFullscreen((value) => {
+      const next = !value;
+      // requestFullscreen rejects rather than throws when the browser refuses
+      // — iOS Safari never grants it to a div, and a permissions policy can
+      // block it — so the rejection is caught as well as the throw. Without the
+      // catch it surfaces as an unhandled rejection in the shop's console for a
+      // feature that has already degraded gracefully.
+      try {
+        if (next && rootRef.current && !document.fullscreenElement) {
+          void rootRef.current.requestFullscreen?.().catch(() => {});
+        } else if (!next && document.fullscreenElement) {
+          void document.exitFullscreen?.().catch(() => {});
+        }
+      } catch {
+        // Browser fullscreen is a nicety; the in-page expansion still applies.
+      }
+      return next;
+    });
+  };
+
+  // Escape and the browser's own exit control both leave fullscreen without
+  // telling React, so the button would otherwise be stuck saying "Exit".
+  useEffect(() => {
+    const onChange = () => {
+      if (!document.fullscreenElement) setFullscreen(false);
+    };
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
 
   return (
-    <div className="rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6">
+    <div
+      ref={rootRef}
+      className={`rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6 ${
+        fullscreen ? "fixed inset-0 z-[60] overflow-y-auto rounded-none" : ""
+      }`}
+    >
       {status === "loading" && (
         <p className="py-16 text-center text-sm text-muted">Opening your shop…</p>
       )}
@@ -219,7 +293,9 @@ function PharmacyBody() {
 
       {status === "welcome" && <WelcomeScreen />}
       {status === "setup" && <SetupScreen />}
-      {status === "ready" && <PharmacyShell />}
+      {status === "ready" && (
+        <PharmacyShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+      )}
     </div>
   );
 }

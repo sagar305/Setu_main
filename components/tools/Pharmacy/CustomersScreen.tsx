@@ -7,8 +7,9 @@ import { customerDues, customerLedger } from "@/lib/pharmacy/reports";
 import { customerDuesCsv, downloadCsv } from "@/lib/pharmacy/csv";
 import { duesMessages, refillMessages } from "@/lib/pharmacy/messages";
 import { SendQueue } from "@/components/tools/Tuition/SendQueue";
+import { BillModal } from "./BillModal";
 import { formatMoney } from "@/lib/pos/types";
-import { formatDate, todayKey, type Customer } from "@/lib/pharmacy/types";
+import { formatDate, todayKey, type Customer, type Sale } from "@/lib/pharmacy/types";
 import {
   ConfirmDialog,
   EmptyState,
@@ -44,6 +45,8 @@ export function CustomersScreen() {
   const [ledgerFor, setLedgerFor] = useState<Customer | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<Customer | null>(null);
   const [queue, setQueue] = useState<"refills" | "dues" | null>(null);
+  // A bill reopened from the ledger, so it can be printed or sent again.
+  const [openBill, setOpenBill] = useState<Sale | null>(null);
 
   const currency = business?.currency ?? "INR";
   const shopName = business?.name ?? "our pharmacy";
@@ -222,15 +225,19 @@ export function CustomersScreen() {
                   key={sale.id}
                   className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-muted-line/30 p-3"
                 >
-                  <div className="min-w-0">
+                  <button
+                    type="button"
+                    onClick={() => setOpenBill(sale)}
+                    className="min-w-0 flex-1 text-left"
+                  >
                     <p className="text-sm font-bold text-ink">{sale.invoiceNo}</p>
                     <p className="text-xs text-muted">
                       {formatDate(sale.date)} · {sale.paymentMode} ·{" "}
                       {formatMoney(sale.total, currency)}
                     </p>
-                  </div>
+                  </button>
                   {due > 0 ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex shrink-0 items-center gap-2">
                       <Pill tone="warn">{formatMoney(due, currency)} due</Pill>
                       <button
                         type="button"
@@ -282,6 +289,9 @@ export function CustomersScreen() {
           </div>
         )}
       </Modal>
+
+      {/* Reopened from a ledger row — print it again, or send the link. */}
+      <BillModal sale={openBill} onClose={() => setOpenBill(null)} />
 
       <SendQueue
         open={queue === "refills"}

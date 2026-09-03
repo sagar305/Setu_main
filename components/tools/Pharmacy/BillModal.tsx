@@ -1,53 +1,67 @@
 "use client";
 
-import { Check, MessageCircle, Printer } from "lucide-react";
+import { useState } from "react";
+import { Check, Printer, Share2 } from "lucide-react";
 import { usePharmacy } from "@/lib/pharmacy/store";
 import { printBill } from "@/lib/pharmacy/print";
-import { whatsAppLink } from "@/lib/pharmacy/messages";
+import { saleDoc } from "@/lib/pharmacy/share";
+import { ShareDialog } from "@/components/toolkit/ShareDialog";
+import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
-import { formatExpiry, type Sale } from "@/lib/pharmacy/types";
+import { formatDate, formatExpiry, type Sale } from "@/lib/pharmacy/types";
 import { Modal, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 /**
- * What the counter sees the moment a bill is done.
+ * A bill, after it is rung up and whenever it is looked at again.
  *
  * The total, big, and a print button — nothing else competes for the two
  * seconds before the next customer. Batch and expiry are on every line because
  * a customer asking "which lot is this?" at the counter is a question the app
  * should never make someone go looking for.
+ *
+ * `justSold` is the difference between the two moments it opens. Straight after
+ * a sale the closing button says "Next customer", because that is what the
+ * operator is about to do; reopened from a customer's ledger a week later it
+ * says "Close", because there is no queue.
  */
-export function BillModal({ sale, onClose }: { sale: Sale | null; onClose: () => void }) {
-  const { business, customerById, medicines, settings } = usePharmacy();
+export function BillModal({
+  sale,
+  justSold = false,
+  onClose,
+}: {
+  sale: Sale | null;
+  justSold?: boolean;
+  onClose: () => void;
+}) {
+  const { business, customerById, medicines, settings, updateBusiness } = usePharmacy();
+  const [sharing, setSharing] = useState<SharedDoc | null>(null);
+
   if (!sale) return null;
 
   const currency = business?.currency ?? "INR";
   const customer = sale.customerId ? (customerById(sale.customerId) ?? null) : null;
   const balance = Math.max(0, sale.total - (sale.paid || 0));
 
-  const message = [
-    `${business?.name || "Pharmacy"} — bill ${sale.invoiceNo}`,
-    ...sale.lines.map(
-      (line) => `${line.name} × ${line.quantity} — ${formatMoney(line.amount, currency)}`
-    ),
-    `Total: ${formatMoney(sale.total, currency)}`,
-    balance > 0 ? `Balance due: ${formatMoney(balance, currency)}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
   return (
     <Modal open onClose={onClose} title={`Bill ${sale.invoiceNo}`}>
       <div className="grid gap-4">
-        <div className="rounded-2xl border border-green-300 bg-green-50 p-4 text-center">
-          <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white">
-            <Check className="h-5 w-5" />
-          </span>
+        <div
+          className={`rounded-2xl border p-4 text-center ${
+            justSold ? "border-green-300 bg-green-50" : "border-muted-line/30 bg-cream-paper"
+          }`}
+        >
+          {justSold && (
+            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-green-600 text-white">
+              <Check className="h-5 w-5" />
+            </span>
+          )}
           <p className="mt-2 text-2xl font-bold text-ink">
             {formatMoney(sale.total, currency)}
           </p>
-          <p className="text-xs font-semibold text-green-800">
+          <p className={`text-xs font-semibold ${justSold ? "text-green-800" : "text-muted"}`}>
             {sale.paymentMode}
             {balance > 0 && ` · ${formatMoney(balance, currency)} still due`}
+            {!justSold && ` · ${formatDate(sale.date)}`}
           </p>
         </div>
 
@@ -89,21 +103,32 @@ export function BillModal({ sale, onClose }: { sale: Sale | null; onClose: () =>
             <Printer className="h-4 w-4" aria-hidden="true" />
             Print bill
           </button>
-          {customer?.phone && (
-            <a
-              href={whatsAppLink(customer.phone, message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={secondaryBtnClass}
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              WhatsApp
-            </a>
-          )}
+          <button
+            type="button"
+            onClick={() => setSharing(saleDoc(business, sale, customer, settings))}
+            className={`${secondaryBtnClass} sm:flex-1`}
+          >
+            <Share2 className="h-4 w-4" aria-hidden="true" />
+            Share link
+          </button>
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Next customer
+            {justSold ? "Next customer" : "Close"}
           </button>
         </div>
+
+        {/*
+          The share sheet handles WhatsApp (to this customer's number when we
+          know it), copy, native share and a QR of the link. The bill itself
+          rides in the fragment, so nothing is uploaded unless the owner has
+          turned link shortening on.
+        */}
+        <ShareDialog
+          open={sharing !== null}
+          onClose={() => setSharing(null)}
+          doc={sharing}
+          title="Share bill"
+          onSaveUpiDefault={(upiId) => void updateBusiness({ upiId })}
+        />
       </div>
     </Modal>
   );

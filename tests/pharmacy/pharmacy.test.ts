@@ -15,6 +15,7 @@ import {
 } from "@/lib/pharmacy/calc";
 import { gstSummary, marginByMedicine, scheduleRegister } from "@/lib/pharmacy/reports";
 import { parseMedicineImport } from "@/lib/pharmacy/csv";
+import { saleDoc, shareLineName } from "@/lib/pharmacy/share";
 import {
   DEFAULT_PHARMACY_SETTINGS,
   daysToExpiry,
@@ -474,5 +475,85 @@ describe("the medicine importer", () => {
   it("handles quoted commas inside a field", () => {
     const { rows } = parseMedicineImport('Name,Composition\n"Combiflam","Ibuprofen, Paracetamol"');
     expect(rows[0].composition).toBe("Ibuprofen, Paracetamol");
+  });
+});
+
+describe("the shared bill link", () => {
+  const sale: Sale = {
+    id: "s1",
+    invoiceNo: "PH-00001",
+    date: "2026-09-01",
+    customerId: "c1",
+    lines: [
+      {
+        id: "sl1",
+        medicineId: "m1",
+        batchId: "b1",
+        name: "Crocin Advance",
+        batchNo: "J4213",
+        expiry: "2027-06",
+        quantity: 1,
+        mrp: 20,
+        rate: 20,
+        discountPct: 0,
+        taxRate: 12,
+        amount: 20,
+      },
+    ],
+    discount: 0,
+    taxTotal: 2.14,
+    total: 20,
+    paid: 20,
+    paymentMode: "Cash",
+    prescription: null,
+    createdAt: "2026-09-01T10:00:00.000Z",
+  };
+  const customer = {
+    id: "c1",
+    name: "Ramesh Verma",
+    phone: "9876543210",
+    email: "",
+    address: "",
+    notes: "",
+    createdAt: "2026-01-01T00:00:00.000Z",
+  };
+
+  it("puts the batch and expiry where the viewer will show them", () => {
+    expect(shareLineName({ name: "Crocin Advance", batchNo: "J4213", expiry: "2027-06" })).toBe(
+      "Crocin Advance · B/No J4213 · Exp Jun 2027"
+    );
+  });
+
+  /**
+   * The shared viewer prices a line as qty × rate × (1 + tax/100). Sending a
+   * tax rate on an inclusive bill would show ₹22.40 against a ₹20 total, so an
+   * inclusive bill must travel without one.
+   */
+  it("sends no per-line tax on an inclusive bill, so the line matches the total", () => {
+    const doc = saleDoc(null, sale, customer, settings);
+    if (doc.t !== "inv") throw new Error("expected an invoice");
+    expect(settings.taxInclusive).toBe(true);
+    expect(doc.it[0].x).toBeUndefined();
+    expect(doc.tax).toBeUndefined();
+    const shownLine = doc.it[0].q * doc.it[0].r * (1 + (doc.it[0].x ?? 0) / 100);
+    expect(shownLine).toBe(doc.tot);
+    expect(doc.sub).toBe(doc.tot);
+  });
+
+  it("keeps per-line tax when the shop prices tax-exclusive", () => {
+    const doc = saleDoc(null, sale, customer, { ...settings, taxInclusive: false });
+    if (doc.t !== "inv") throw new Error("expected an invoice");
+    expect(doc.it[0].x).toBe(12);
+    expect(doc.tax).toBe(2.14);
+  });
+
+  it("carries the customer's number so the share sheet can reach them", () => {
+    const doc = saleDoc(null, sale, customer, settings);
+    expect(doc.t === "inv" && doc.cp).toBe("9876543210");
+  });
+
+  it("spells out the balance on a part-paid bill", () => {
+    const doc = saleDoc(null, { ...sale, paid: 15 }, customer, settings);
+    expect(doc.t === "inv" && doc.pm).toContain("balance due");
   });
 });

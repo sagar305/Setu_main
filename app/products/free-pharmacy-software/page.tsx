@@ -19,6 +19,7 @@ import {
   RotateCcw,
   ScanLine,
   Search,
+  Share2,
   Sheet,
   ShieldCheck,
   Stethoscope,
@@ -188,6 +189,12 @@ const BOOKS: Feature[] = [
       "Part-paid bills leave a balance against the customer, and the balance reminder goes out on WhatsApp from your own template when you decide to send it.",
   },
   {
+    icon: Share2,
+    title: "Send the bill as a link, on WhatsApp",
+    description:
+      "The whole bill travels inside the link — batch numbers, expiry dates and all — so nothing is uploaded and it opens on a phone with no signal. Send it to the customer's own number, or show them the QR across the counter.",
+  },
+  {
     icon: Printer,
     title: "Bills, notes and lists on your own paper",
     description:
@@ -241,6 +248,11 @@ const FAQ_ITEMS = [
       "No. There is a CSV importer that takes a pasted spreadsheet block as readily as a file, and it understands the column names distributor price lists and other billing software actually use — salt, generic, content, packing, MFR and so on. We deliberately do not ship a drug dataset: an error in a price list is an annoyance, and an error in a drug list is not.",
   },
   {
+    question: "Can I send a bill to a customer on WhatsApp?",
+    answer:
+      "Yes. Every bill has a Share link button, straight after the sale and again later from the customer's ledger. The whole bill — including batch numbers and expiry dates — is compressed into the link itself, so nothing is uploaded and it opens on a phone with no signal. It goes to the customer's own number when you have it, and there is a QR of the link to show across the counter.",
+  },
+  {
     question: "Do I need internet?",
     answer:
       "Only to open the page the first time. After that the counter works with the connection down, which is the point. Google Sheet sync and WhatsApp messages are the only parts that need one.",
@@ -274,6 +286,7 @@ const softwareApplicationSchema = {
     "Prescription capture and a printable scheduled-sales register",
     "Distributor purchase entry with scheme (free goods) costing",
     "Margin reporting against the batch each sale drew from",
+    "Shareable bill links over WhatsApp, with nothing uploaded",
     "GST summary by rate, stock value, movers and reorder lists",
     "CSV export, JSON backup and Google Sheet sync",
     "Works offline, no login required",

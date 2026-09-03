@@ -787,7 +787,7 @@ export function SellScreen() {
         onClose={() => setRxOpen(false)}
       />
 
-      <BillModal sale={completed} onClose={() => setCompleted(null)} />
+      <BillModal sale={completed} justSold onClose={() => setCompleted(null)} />
     </div>
   );
 }
