@@ -169,3 +169,56 @@ body {
 .glossary-link:hover {
   text-decoration-style: solid;
 }
+
+/* Queue display (/products/free-token-system/display).
+   Two animations for a screen that is left running on a waiting-room TV for
+   twelve hours at a stretch, so both are pure CSS: no timers, no re-renders,
+   nothing that accumulates. */
+
+/* The notice line along the bottom. One pass takes 60s — slow enough to read
+   from across a room, and long enough that it is never the thing drawing the
+   eye away from the number being called. */
+@keyframes token-ticker {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.token-ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: token-ticker 60s linear infinite;
+}
+
+/* The flash on a new call. Twice over 600ms, in the service's own colour,
+   which is set as a custom property by the component. This is also the last
+   fallback: on a device with no speech engine and no audio, the flash is the
+   only thing that tells the room something changed. */
+@keyframes token-flash {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  25%,
+  75% {
+    background-color: var(--token-flash-colour, rgba(38, 48, 107, 0.18));
+  }
+}
+
+.token-flash {
+  animation: token-flash 600ms ease-in-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .token-ticker-track {
+    animation: none;
+  }
+  .token-flash {
+    animation-iteration-count: 1;
+    animation-duration: 400ms;
+  }
+}

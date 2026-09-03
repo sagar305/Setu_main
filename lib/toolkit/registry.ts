@@ -13,6 +13,7 @@
 // (the "shell is chrome, never a dependency" rule).
 
 import type { EntityName } from "@/lib/toolkit/entities";
+import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -58,8 +59,9 @@ export type ToolSlug =
   | "recipe-manager"
   // Service businesses
   | "appointment-book"
-  | "queue-management"
+  | "token-system"
   | "clinic-manager"
+  | "rental-book"
   // Education
   | "tuition-manager"
   // Payments / utilities
@@ -258,7 +260,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     paidPath: "clinic",
     integrations: [
       { with: "invoice-generator", ux: "Generate an invoice after the appointment" },
-      { with: "queue-management", ux: "Convert a walk-in into an appointment" },
+      { with: "token-system", ux: "Convert a walk-in into an appointment" },
     ],
   },
   {
@@ -277,6 +279,61 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "appointment-book", ux: "Keep non-medical bookings in the generic day view" },
       { with: "upi-qr-generator", ux: "Collect the consultation fee by UPI at the desk" },
+    ],
+  },
+  {
+    slug: "rental-book",
+    name: "Free Rental & Hire Book",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: rentalSoftwareEnabled() ? "built" : "next",
+    route: "/products/free-rental-software",
+    // Owns no shared entity. Hire stock is not shop stock: an item here is a
+    // thing that goes out and comes back, committed against dates, and merging
+    // it into the workspace's products would mean a POS sale could quietly
+    // decrement a marquee that is out at a wedding. The business profile is the
+    // only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // No paid rental product exists yet — multi-godown, a driver app and online
+    // availability are the planned upsell, so this funnels to the platform.
+    paidPath: "platform",
+    integrations: [
+      { with: "invoice-generator", ux: "Raise a tax invoice for a settled hire" },
+      { with: "quotation-generator", ux: "Quote for a hire before it becomes a booking" },
+      { with: "upi-qr-generator", ux: "Collect the advance or the deposit by UPI" },
+    ],
+  },
+  {
+    slug: "token-system",
+    name: "Free Token System",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: tokenSystemEnabled() ? "built" : "next",
+    route: "/products/free-token-system",
+    // Owns no shared entity: services, counters and tokens live in the queue's
+    // own TOKEN_DATABASE, because two tabs write to them all day and the names
+    // are too generic to claim in a database every tool shares. The business
+    // profile is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // Not "queue": Setu Queue is the QSR counter POS, a different product for a
+    // different room. A waiting-room token system has no paid counterpart, so
+    // it funnels to the platform rather than to a product it is unrelated to.
+    paidPath: "platform",
+    integrations: [
+      { with: "appointment-book", ux: "Convert a walk-in token into an appointment" },
+      { with: "clinic-manager", ux: "Call the waiting room from the same device as the consult" },
     ],
   },
   {

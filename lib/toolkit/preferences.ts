@@ -17,6 +17,17 @@ export type Preferences = {
    * say nothing about shortening at all.
    */
   shortLinks: boolean;
+  /**
+   * Shorten every share link automatically, without being asked each time.
+   *
+   * Off by default, and only meaningful when `shortLinks` is on. Turning it on
+   * is the deliberate act that pressing "Shorten" used to be: from then on,
+   * opening a share sheet uploads that document to the shortener so the link
+   * can be ten characters. An owner who sends fifty booking confirmations a
+   * week does not want fifty extra taps — but nobody should be uploading
+   * documents because a default said so, which is why this starts off.
+   */
+  shortLinksAuto: boolean;
 };
 
 const KEY = "setu:preferences";
@@ -41,13 +52,20 @@ export function defaultPreferences(): Preferences {
     currency: "INR",
     timezone: detectTimezone(),
     shortLinks: true,
+    shortLinksAuto: false,
   };
 }
 
 export function getPreferences(): Preferences {
   const defaults = defaultPreferences();
   if (typeof window === "undefined") {
-    return { language: "en", currency: "INR", timezone: "Asia/Kolkata", shortLinks: true };
+    return {
+      language: "en",
+      currency: "INR",
+      timezone: "Asia/Kolkata",
+      shortLinks: true,
+      shortLinksAuto: false,
+    };
   }
   try {
     const raw = window.localStorage.getItem(KEY);

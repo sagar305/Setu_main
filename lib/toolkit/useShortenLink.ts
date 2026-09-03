@@ -1,11 +1,15 @@
 "use client";
 
-// The shorten-on-demand flow behind a share sheet.
+// The shorten flow behind a share sheet.
 //
-// Shortening is never automatic. The hook starts idle and only calls the
-// service when `shorten` is invoked, so a user who never presses the button
-// never uploads anything. Any failure leaves the caller holding the long
-// self-contained link, which always works.
+// The hook starts idle and only calls the service when `shorten` is invoked, so
+// nothing is uploaded until something asks for it. Two things ask: the user
+// pressing "Shorten", and — when they have turned the preference on — the share
+// sheet itself, once per document. `auto` reports which regime is in force; the
+// hook never shortens on its own.
+//
+// Any failure leaves the caller holding the long self-contained link, which
+// always works.
 
 import { useCallback, useEffect, useState } from "react";
 import { getPreferences, PREFS_CHANGED_EVENT } from "@/lib/toolkit/preferences";
@@ -26,6 +30,8 @@ export type UseShortenLink = {
   failure: ShortenFailure | null;
   /** True when the user has this turned on and the site has it configured. */
   offered: boolean;
+  /** True when the user asked for every share to be shortened without asking. */
+  auto: boolean;
   shorten: (payload: string, kind?: ShortLinkKind) => Promise<void>;
   /** Drop the short URL — used when the document changes underneath it. */
   reset: () => void;
@@ -36,11 +42,16 @@ export function useShortenLink(): UseShortenLink {
   const [shortUrl, setShortUrl] = useState<string | null>(null);
   const [failure, setFailure] = useState<ShortenFailure | null>(null);
   const [enabled, setEnabled] = useState(false);
+  const [autoPreference, setAutoPreference] = useState(false);
 
   // Read after mount only: the preference lives in localStorage, and reading it
   // during render would make the server and client markup disagree.
   useEffect(() => {
-    const read = () => setEnabled(getPreferences().shortLinks);
+    const read = () => {
+      const preferences = getPreferences();
+      setEnabled(preferences.shortLinks);
+      setAutoPreference(preferences.shortLinksAuto);
+    };
     read();
     window.addEventListener(PREFS_CHANGED_EVENT, read);
     return () => window.removeEventListener(PREFS_CHANGED_EVENT, read);
@@ -70,6 +81,7 @@ export function useShortenLink(): UseShortenLink {
     shortUrl,
     failure,
     offered: enabled && shortLinksConfigured(),
+    auto: enabled && autoPreference && shortLinksConfigured(),
     shorten,
     reset,
   };

@@ -6,7 +6,7 @@ import { isValidShortCode } from "@/lib/toolkit/shortenerServer";
 export const metadata: Metadata = {
   title: "Shared document | Setu Technology",
   description:
-    "View a shared invoice, quotation, appointment, prescription, fee receipt, report or payment reminder created with a free Setu tool.",
+    "View a shared invoice, quotation, hire booking, appointment, prescription, fee receipt, report or payment reminder created with a free Setu tool.",
   // One person's document, reachable by anyone holding the link. Nothing here
   // belongs in a search index.
   robots: { index: false, follow: false },
