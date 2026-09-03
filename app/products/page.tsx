@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getProductsContent } from "@/lib/content";
-import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
 
 const content = getProductsContent();
@@ -16,6 +20,7 @@ const content = getProductsContent();
 const visibleProducts = content.products.filter((product) => {
   if (product.id === "free-token") return tokenSystemEnabled();
   if (product.id === "free-rental") return rentalSoftwareEnabled();
+  if (product.id === "free-pharmacy") return pharmacySoftwareEnabled();
   return true;
 });
 
@@ -68,6 +73,9 @@ const listedProducts: { name: string; path: string }[] = [
     : []),
   ...(rentalSoftwareEnabled()
     ? [{ name: "Free Rental & Hire Book", path: "/products/free-rental-software" }]
+    : []),
+  ...(pharmacySoftwareEnabled()
+    ? [{ name: "Free Pharmacy POS", path: "/products/free-pharmacy-software" }]
     : []),
   { name: "Setu Dine", path: "/products/restaurant-pos" },
   { name: "Setu Queue", path: "/products/queue" },

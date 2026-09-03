@@ -53,3 +53,25 @@ export function tokenSystemEnabled(): boolean {
 export function rentalSoftwareEnabled(): boolean {
   return enabled(process.env.RENTAL_SOFTWARE_ENABLED);
 }
+
+/**
+ * The Free Pharmacy POS (/products/free-pharmacy-software).
+ *
+ * Off in production until launch. Set PHARMACY_SOFTWARE_ENABLED=true in
+ * Vercel's Preview and Development environments to work on it; add it to
+ * Production and redeploy to launch. Changing the value alone does nothing —
+ * the flag is inlined at build time, so the redeploy is what ships it.
+ *
+ * This one has a second reason to stay flagged. The app prints a
+ * scheduled-sales register and sits closer to regulated territory than anything
+ * else on the site, so the disclaimers on the marketing page, in the app and on
+ * the printed register should be read by someone who knows the Drugs and
+ * Cosmetics Rules before it is switched on.
+ *
+ * Four places read this, and they have to agree: the route, the sitemap, the
+ * products page (its rendered list and its ItemList schema), and the toolkit
+ * registry.
+ */
+export function pharmacySoftwareEnabled(): boolean {
+  return enabled(process.env.PHARMACY_SOFTWARE_ENABLED);
+}

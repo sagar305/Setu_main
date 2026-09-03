@@ -200,21 +200,45 @@
       "headline": "Free rental management software for tent houses and equipment hire",
       "description": "A completely free hire book for tent houses, event decorators, furniture and party equipment rental, camera hire and construction tool hire. It tracks what is committed on every date, so you never promise the same 200 chairs to two weddings — and it settles damage, shortage and late fees against the deposit when the stock comes back. No login, no subscription, works offline.",
       "features": [
-        "An availability calendar that answers \u201chow many are free on the 14th?\u201d in seconds",
-        "Free counts on the tightest single day of a range \u2014 never an average that hides a clash",
+        "An availability calendar that answers “how many are free on the 14th?” in seconds",
+        "Free counts on the tightest single day of a range — never an average that hides a clash",
         "A conflict list that surfaces every booking promising more stock than you own",
-        "Enquiry \u2192 confirmed \u2192 dispatched \u2192 returned, with a quotation at the front",
+        "Enquiry → confirmed → dispatched → returned, with a quotation at the front",
         "Picking lists for the loading crew with no prices on them, and signed delivery challans",
         "Return settlement: damaged, lost and late, all charged against the deposit",
-        "Per-item utilisation and return on cost \u2014 what to buy more of, what to sell off",
+        "Per-item utilisation and return on cost — what to buy more of, what to sell off",
         "Serial-numbered units for cameras and tools, one booking at a time, enforced",
         "Maintenance logs that take stock out of availability while it is being repaired",
         "WhatsApp quotes, confirmations and overdue chases with a link the customer can open",
-        "Works fully offline \u2014 PIN lock, backup / restore and Google Sheet sync"
+        "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
       "cta": {
-        "label": "Open the Free Rental & Hire Book \u2014 it's free",
+        "label": "Open the Free Rental & Hire Book — it's free",
         "href": "/products/free-rental-software"
+      }
+    },
+    {
+      "id": "free-pharmacy",
+      "status": "live",
+      "name": "Free Pharmacy POS",
+      "headline": "Free pharmacy billing software for medical stores, with expiry tracking",
+      "description": "A completely free billing and stock app for medical stores and chemist shops. Stock is held batch by batch rather than per medicine, so the counter always sells the strip that expires first, the batch number prints on the bill, and an expiry dashboard tells you what is about to be worthless while the distributor will still take it back. No login, no subscription, works offline.",
+      "features": [
+        "Batch-wise stock with month-precision expiry on every strip in the shop",
+        "Billing that picks the oldest-expiring batch and splits a quantity across batches by itself",
+        "An expiry dashboard bucketed by 30, 60 and 90 days, valued at what the stock cost you",
+        "Return lists grouped by supplier, with one tap to create the return note",
+        "One search box across brand name, salt and barcode, with same-salt substitutes",
+        "Distributor invoice entry in packs, with scheme goods costed into a blended rate",
+        "Prescription capture for Schedule H, H1 and X, and a printable scheduled-sales register",
+        "Margin read off the batch each sale actually drew from, not an average",
+        "GST summary by rate, stock value, movers and a suggested order list by supplier",
+        "Refill reminders and udhaar balances, sent on WhatsApp from your own templates",
+        "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Pharmacy POS — it's free",
+        "href": "/products/free-pharmacy-software"
       }
     },
     {

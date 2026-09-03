@@ -460,7 +460,15 @@ function normaliseForm(value: string): MedicineForm {
  * cannot produce; leaving it out is visible and fixable in the master.
  */
 function normaliseSchedule(value: string): ScheduleClass {
-  const text = value.trim().toUpperCase().replace(/^SCHEDULE\s*/, "").replace(/[()\s.-]/g, "");
+  // Strip the punctuation first, then the prefix: price lists write this as
+  // "Schedule H", "Sch. H1", "SCH-X" and "(H)" in roughly equal measure, and
+  // stripping in the other order leaves "SCH." wedged onto the front.
+  const text = value
+    .trim()
+    .toUpperCase()
+    .replace(/[()\s.\-]/g, "")
+    .replace(/^SCHEDULE/, "")
+    .replace(/^SCH/, "");
   if (text === "H") return "H";
   if (text === "H1") return "H1";
   if (text === "X") return "X";

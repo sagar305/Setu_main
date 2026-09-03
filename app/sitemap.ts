@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
-import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -103,6 +107,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // slow thing to undo.
     ...(tokenSystemEnabled() ? ["/products/free-token-system"] : []),
     ...(rentalSoftwareEnabled() ? ["/products/free-rental-software"] : []),
+    ...(pharmacySoftwareEnabled() ? ["/products/free-pharmacy-software"] : []),
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

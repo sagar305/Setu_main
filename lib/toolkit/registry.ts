@@ -13,7 +13,11 @@
 // (the "shell is chrome, never a dependency" rule).
 
 import type { EntityName } from "@/lib/toolkit/entities";
-import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -61,6 +65,7 @@ export type ToolSlug =
   | "appointment-book"
   | "token-system"
   | "clinic-manager"
+  | "pharmacy-pos"
   | "rental-book"
   // Education
   | "tuition-manager"
@@ -307,6 +312,34 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
       { with: "invoice-generator", ux: "Raise a tax invoice for a settled hire" },
       { with: "quotation-generator", ux: "Quote for a hire before it becomes a booking" },
       { with: "upi-qr-generator", ux: "Collect the advance or the deposit by UPI" },
+    ],
+  },
+  {
+    slug: "pharmacy-pos",
+    name: "Free Pharmacy POS",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: pharmacySoftwareEnabled() ? "built" : "next",
+    route: "/products/free-pharmacy-software",
+    // Owns no shared entity, and deliberately does not write the workspace's
+    // products. A medicine is not a product: its stock lives on batches with
+    // their own expiries and costs, and flattening that into a single `stock`
+    // number is exactly the information this app exists to keep. The business
+    // profile is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // The clinic+pharmacy bundle is the upsell, along with multi-counter — two
+    // tills sharing one shelf needs a server between them.
+    paidPath: "platform",
+    integrations: [
+      { with: "clinic-manager", ux: "Dispense against a prescription written next door" },
+      { with: "barcode-generator", ux: "Print shelf labels for the medicine master" },
+      { with: "upi-qr-generator", ux: "Collect at the counter by UPI" },
     ],
   },
   {
