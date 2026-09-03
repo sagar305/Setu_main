@@ -1,0 +1,50 @@
+{
+  "slug": "ep-cost",
+  "term": "EP Cost",
+  "category": "restaurant-ops",
+  "aliases": [
+    "edible portion cost",
+    "as-purchased cost",
+    "AP cost"
+  ],
+  "short": "What an ingredient costs per usable unit, after trim and cooking loss.",
+  "seoTitle": "EP Cost (Edible Portion Cost) — Formula and Example",
+  "metaDescription": "EP cost is what an ingredient costs per usable unit after trimming, peeling and cooking loss — as opposed to the AP cost you actually paid the supplier.",
+  "updated": "2026-08-31",
+  "definition": "EP cost, or edible portion cost, is what an ingredient costs per usable unit after trimming, peeling, deboning and cooking loss — as opposed to AP cost, the as-purchased price you paid the supplier.",
+  "bodyHtml": "<h2>Why EP cost matters</h2><p>Chicken bought at ₹220 per kg with a 70% usable yield has an EP cost of ₹314 per kg. Costing the dish at ₹220 understates it by about 43% — enough to turn a dish you believe is profitable into one that is not.</p><h2>Where the gap is largest</h2><p>Ingredients with low or variable yields do the most damage: whole fish, leafy vegetables, bone-in meat and anything that reduces heavily in cooking. These are exactly the ingredients most kitchens cost off the purchase invoice, which is why costing a menu off AP prices quietly destroys margin.</p>",
+  "faq": [
+    {
+      "question": "What is the difference between AP and EP cost?",
+      "answer": "AP cost is what you paid the supplier. EP cost is what the usable portion costs after waste. Menus should be costed on EP."
+    },
+    {
+      "question": "How do I find my yield percentage?",
+      "answer": "Weigh a delivery, weigh what is usable after prep, and divide. Do it three times and average — single measurements mislead."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "yield-percentage",
+    "plate-cost",
+    "landed-cost",
+    "wastage"
+  ],
+  "formula": {
+    "expression": "EP cost = AP cost ÷ Yield percentage",
+    "note": "A yield of 70% means dividing by 0.7, which raises the effective rate by roughly 43%."
+  }
+}

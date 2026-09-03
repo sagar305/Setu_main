@@ -1,0 +1,46 @@
+{
+  "slug": "msme-45-day-payment-rule",
+  "term": "MSME 45-Day Payment Rule",
+  "category": "gst-tax",
+  "aliases": [
+    "45-day payment rule",
+    "Section 43B(h)",
+    "Section 37(2)(g)"
+  ],
+  "short": "Buyers must pay registered micro and small suppliers within 15 or 45 days.",
+  "seoTitle": "MSME 45-Day Payment Rule — Meaning and Tax Effect",
+  "metaDescription": "Buyers must pay registered micro and small suppliers within 15 days, or 45 with a written agreement. Miss it and the expense is disallowed until you pay.",
+  "updated": "2026-08-31",
+  "definition": "A rule requiring buyers to pay registered micro and small suppliers within 15 days of acceptance where there is no written agreement, or within the agreed period capped at 45 days where there is one.",
+  "bodyHtml": "<h2>How the MSME 45-day payment rule is enforced</h2><p>It is enforced through income tax. An amount still unpaid at the year end is disallowed as a deduction for that year and becomes deductible only in the year it is actually paid. Unlike several other provisions, paying before the return due date does not restore the deduction for the earlier year.</p><h2>Where the rule now sits</h2><p>Known to most businesses as Section 43B(h) of the Income-tax Act, 1961, the provision carries into the Income-tax Act, 2025 as Section 37(2)(g) with effect from 1 April 2026. The section number changed; the deadline did not.</p><h2>Interest on delayed payment</h2><p>Delayed payment also attracts interest under Section 16 of the MSMED Act at three times the RBI Bank Rate, compounded monthly, and that interest is not deductible for tax.</p><p>Medium enterprises are outside the rule, and the protection is generally understood not to extend to pure traders. Confirm your own position with your CA.</p>",
+  "faq": [
+    {
+      "question": "What happens if I pay an MSME supplier late?",
+      "answer": "The expense is disallowed as a deduction in the year it was incurred and only becomes deductible in the year you actually pay. Interest under the MSMED Act also applies and is not deductible."
+    },
+    {
+      "question": "Can I agree longer terms with an MSME supplier?",
+      "answer": "No. A written agreement can extend the window beyond 15 days but not beyond 45, even with the supplier's consent."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "payment-terms-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "udyam-registration",
+    "payment-terms",
+    "days-payable-outstanding",
+    "working-capital"
+  ]
+}

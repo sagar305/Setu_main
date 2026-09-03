@@ -1,0 +1,44 @@
+{
+  "slug": "bank-feed",
+  "term": "Bank Feed",
+  "category": "accounting",
+  "aliases": [
+    "bank feeds"
+  ],
+  "short": "An automated connection pulling bank transactions into your books.",
+  "seoTitle": "Bank Feed — Meaning and How It Fits Reconciliation",
+  "metaDescription": "A bank feed pulls transactions from your bank straight into your accounting software. It removes typing, not judgement — entries still need categorising.",
+  "updated": "2026-08-31",
+  "definition": "A bank feed is an automated connection that pulls transactions from a bank account into accounting software, so entries appear without manual typing or statement imports.",
+  "bodyHtml": "<h2>What a bank feed does not do</h2><p>Feeds remove data entry but not judgement. Transactions still need categorising to the right head in your chart of accounts, and matching to invoices and bills. A feed left to run without review produces a fast set of wrong books.</p><h2>When there is no feed</h2><p>Where a live feed is not available, a statement parser does the same job in batch: it reads a PDF or CSV statement and categorises it into a workable ledger, ready for bank reconciliation. The review step is identical either way.</p>",
+  "faq": [
+    {
+      "question": "Does a bank feed replace reconciliation?",
+      "answer": "No. It supplies the transactions; reconciliation is still the act of agreeing your books to the bank balance and explaining the differences."
+    },
+    {
+      "question": "Are bank feeds safe?",
+      "answer": "They use read-only access through the bank or an aggregator. Check what access you are granting and revoke it when you stop using the software."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    }
+  ],
+  "relatedTerms": [
+    "bank-reconciliation",
+    "chart-of-accounts",
+    "csv-export",
+    "audit-trail"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "sub-recipe",
+  "term": "Sub-Recipe",
+  "category": "restaurant-ops",
+  "aliases": [
+    "base recipe",
+    "prep recipe"
+  ],
+  "short": "A component prepared in bulk and used across several dishes.",
+  "seoTitle": "Sub-Recipe — Meaning and How to Cost One",
+  "metaDescription": "A sub-recipe is a base gravy, stock or sauce made in bulk and used across several dishes. Costing it once and allocating it is where menu costing usually fails.",
+  "updated": "2026-08-31",
+  "definition": "A sub-recipe is a component prepared in bulk and used across several dishes — a base gravy, a stock, a spice mix, a sauce or a dough. It is costed once per batch and then charged into each finished dish at a per-unit rate.",
+  "bodyHtml": "<h2>Why sub-recipes break costing</h2><p>Sub-recipes are where restaurant costing usually goes wrong. If a base gravy is treated as a lump kitchen expense rather than costed and allocated, every dish using it is understated — and the error is invisible, because each individual recipe costing sheet looks correct on its own.</p><h2>How to cost a sub-recipe</h2><p>Cost the batch at landed cost, divide by usable output rather than raw input, and carry that rate into each dish exactly the way you would carry a raw ingredient. Re-cost the sub-recipe whenever any of its inputs move, since one change ripples through every dish that uses it.</p>",
+  "faq": [
+    {
+      "question": "How often should I re-cost a sub-recipe?",
+      "answer": "Whenever a major input price moves, and at least quarterly. One sub-recipe often feeds a third of the menu."
+    },
+    {
+      "question": "Does a sub-recipe need its own yield?",
+      "answer": "Yes. Reduction, straining and trim all mean usable output is lower than raw input, and costing on raw input understates every dish."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "food-cost-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "recipe-costing",
+    "plate-cost",
+    "central-kitchen",
+    "yield-percentage"
+  ]
+}

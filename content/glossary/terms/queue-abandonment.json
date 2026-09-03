@@ -1,0 +1,44 @@
+{
+  "slug": "queue-abandonment",
+  "term": "Queue Abandonment",
+  "category": "restaurant-ops",
+  "aliases": [
+    "walkaway"
+  ],
+  "short": "When a waiting customer gives up and leaves before being served.",
+  "seoTitle": "Queue Abandonment — Meaning and Cost for Restaurants",
+  "metaDescription": "Queue abandonment is when a waiting customer gives up and leaves before being served — a silent revenue loss because the walkout is never billed or recorded.",
+  "updated": "2026-09-02",
+  "definition": "Queue abandonment is when a customer who is waiting to be served gives up and leaves before reaching the front — for a restaurant, a walk-in guest who hears the wait, or endures it, and departs without being seated.",
+  "bodyHtml": "<h2>Why it is a hidden cost</h2><p>An abandoned queue leaves no trace in the books. There is no refund, no complaint and no cancelled order — only a guest who was never billed. That invisibility is why the cost goes unmanaged: it never appears as a loss on any report, even though it is lost peak-hour revenue plus the acquisition cost already spent to bring that guest to the door.</p><h2>What drives it</h2><p>Abandonment rises with the length of the wait, but far more with how unmanaged the wait feels. An honest quoted time and the freedom to step away hold a queue together; silence and uncertainty empty it. Most abandonment is a table-turnover or information problem rather than a true shortage of seats.</p><h2>How to measure it</h2><p>Count walkaways per service and by daypart, and track quoted wait against actual wait. A predictable spike points to a turnover or kitchen bottleneck at that hour, not to a need for more tables.</p>",
+  "faq": [
+    {
+      "question": "How is queue abandonment different from a no-show?",
+      "answer": "A no-show is a guest who booked and never arrived. Queue abandonment is a guest who did arrive, joined the wait, and left before being served. Both cost revenue, but they have different causes and fixes."
+    },
+    {
+      "question": "Does a digital waitlist reduce queue abandonment?",
+      "answer": "It reduces the abandonment caused by uncertainty — a guest given an honest wait and a text-back is likelier to stay. It does not create tables you lack, so a true capacity shortage still shows through."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "table-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "table-turnover-rate",
+    "no-show",
+    "footfall",
+    "queue-management"
+  ]
+}

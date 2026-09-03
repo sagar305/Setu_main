@@ -1,0 +1,53 @@
+{
+  "slug": "cash-runway",
+  "term": "Cash Runway",
+  "category": "payments-finance",
+  "aliases": [
+    "runway",
+    "cash burn runway"
+  ],
+  "short": "How many months a business can operate before it runs out of cash.",
+  "seoTitle": "Cash Runway — Meaning, Formula and Example",
+  "metaDescription": "Cash runway is how many months a business can operate at its current burn rate before the money runs out. The formula, and why profit does not protect it.",
+  "updated": "2026-08-31",
+  "definition": "Cash runway is how long a business can keep operating at its current rate of cash burn before it runs out of money, usually expressed in months.",
+  "bodyHtml": "<h2>Why cash runway matters</h2><p>It is the single most useful number a small business can carry in its head, and it is not the same as profit. A business can be profitable on paper and still have three months of runway if receivables are slow and stock is heavy.</p><h2>What shortens runway</h2><p>Runway shortens when days sales outstanding stretches, when stock builds up, or when payables get compressed by a statutory deadline. Track it monthly alongside the cash flow statement rather than calculating it once during a scare.</p>",
+  "faq": [
+    {
+      "question": "Is cash runway the same as profit?",
+      "answer": "No. Profit is an accounting result; runway is about cash timing. Profitable businesses run out of cash regularly."
+    },
+    {
+      "question": "What is a healthy cash runway?",
+      "answer": "There is no universal number, but under three months leaves no room to absorb a late payment or a slow season."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "cash-flow",
+    "working-capital",
+    "cash-conversion-cycle",
+    "break-even-point"
+  ],
+  "formula": {
+    "expression": "Cash runway (months) = Cash on hand ÷ Average monthly net cash outflow",
+    "note": "Use a three-month average outflow so one unusual month does not flatter or wreck the figure."
+  }
+}

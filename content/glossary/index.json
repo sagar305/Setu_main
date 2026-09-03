@@ -64,6 +64,155 @@
   ],
   "terms": [
     {
+      "slug": "gstr-9",
+      "term": "GSTR-9",
+      "category": "gst-tax",
+      "short": "The annual GST return that reconciles a year of GST filings.",
+      "aliases": [
+        "GST annual return"
+      ]
+    },
+    {
+      "slug": "tax-audit",
+      "term": "Tax Audit",
+      "category": "gst-tax",
+      "short": "A mandatory audit of accounts under Section 44AB when turnover crosses set limits.",
+      "aliases": [
+        "Section 44AB",
+        "tax audit report"
+      ]
+    },
+    {
+      "slug": "queue-abandonment",
+      "term": "Queue Abandonment",
+      "category": "restaurant-ops",
+      "short": "When a waiting customer gives up and leaves before being served.",
+      "aliases": [
+        "walkaway"
+      ]
+    },
+    {
+    "slug": "vendor-lock-in",
+    "term": "Vendor Lock-In",
+    "category": "pos-tech",
+    "short": "When leaving a software provider is expensive, slow or impossible.",
+    "aliases": [
+      "lock-in",
+      "software lock-in"
+    ]
+  },
+  {
+    "slug": "month-end-close",
+    "term": "Month-End Close",
+    "category": "accounting",
+    "short": "The fixed process of finalising and publishing a month's books.",
+    "aliases": [
+      "monthly close",
+      "period close"
+    ]
+  },
+  {
+    "slug": "cut-off",
+    "term": "Cut-Off",
+    "category": "accounting",
+    "short": "Recording a transaction in the period it actually happened in.",
+    "aliases": [
+      "cut-off date",
+      "accounting cut-off"
+    ]
+  },
+  {
+    "slug": "udyam-registration",
+    "term": "Udyam Registration",
+    "category": "gst-tax",
+    "short": "India's official online registration for MSME businesses.",
+    "aliases": [
+      "Udyam",
+      "Udyam Registration Number"
+    ]
+  },
+  {
+    "slug": "msme-45-day-payment-rule",
+    "term": "MSME 45-Day Payment Rule",
+    "category": "gst-tax",
+    "short": "Buyers must pay registered micro and small suppliers within 15 or 45 days.",
+    "aliases": [
+      "45-day payment rule",
+      "Section 43B(h)",
+      "Section 37(2)(g)"
+    ]
+  },
+  {
+    "slug": "cash-runway",
+    "term": "Cash Runway",
+    "category": "payments-finance",
+    "short": "How many months a business can operate before it runs out of cash.",
+    "aliases": [
+      "runway",
+      "cash burn runway"
+    ]
+  },
+  {
+    "slug": "sub-recipe",
+    "term": "Sub-Recipe",
+    "category": "restaurant-ops",
+    "short": "A component prepared in bulk and used across several dishes.",
+    "aliases": [
+      "base recipe",
+      "prep recipe"
+    ]
+  },
+  {
+    "slug": "ep-cost",
+    "term": "EP Cost",
+    "category": "restaurant-ops",
+    "short": "What an ingredient costs per usable unit, after trim and cooking loss.",
+    "aliases": [
+      "edible portion cost",
+      "as-purchased cost",
+      "AP cost"
+    ]
+  },
+  {
+    "slug": "plowhorse",
+    "term": "Plowhorse",
+    "category": "restaurant-ops",
+    "short": "A popular dish that earns a below-average margin per plate.",
+    "aliases": [
+      "plow horse"
+    ]
+  },
+  {
+    "slug": "dunning",
+    "term": "Dunning",
+    "category": "accounting",
+    "short": "The structured, scheduled process of chasing overdue invoices.",
+    "aliases": [
+      "dunning process",
+      "payment chasing"
+    ]
+  },
+  {
+    "slug": "bank-feed",
+    "term": "Bank Feed",
+    "category": "accounting",
+    "short": "An automated connection pulling bank transactions into your books.",
+    "aliases": [
+      "bank feeds"
+    ]
+  },
+  {
+    "slug": "invoice-financing",
+    "term": "Invoice Financing",
+    "category": "payments-finance",
+    "short": "Borrowing against unpaid customer invoices to release cash early.",
+    "aliases": [
+      "bill discounting",
+      "invoice discounting",
+      "receivables financing"
+    ]
+  },
+    {
       "slug": "abc-analysis",
       "term": "ABC Analysis",
       "category": "retail-inventory",
