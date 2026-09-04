@@ -16,6 +16,7 @@ import type { EntityName } from "@/lib/toolkit/entities";
 import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
+  repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
 
@@ -67,6 +68,7 @@ export type ToolSlug =
   | "clinic-manager"
   | "pharmacy-pos"
   | "rental-book"
+  | "repair-job-card"
   // Education
   | "tuition-manager"
   // Payments / utilities
@@ -312,6 +314,36 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
       { with: "invoice-generator", ux: "Raise a tax invoice for a settled hire" },
       { with: "quotation-generator", ux: "Quote for a hire before it becomes a booking" },
       { with: "upi-qr-generator", ux: "Collect the advance or the deposit by UPI" },
+    ],
+  },
+  {
+    slug: "repair-job-card",
+    name: "Free Repair Job Card",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: repairSoftwareEnabled() ? "built" : "next",
+    route: "/products/free-repair-shop-software",
+    // Owns no shared entity, and deliberately does not write the workspace's
+    // customers. A repair customer arrives attached to a device and a custody
+    // record, and merging them into the workspace would put intake photos and
+    // unlock codes inside a store every other tool reads. The business profile
+    // is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // The upsell is a customer-facing "track your repair" page and a
+    // multi-technician service-centre tier — both need a server, so this
+    // funnels to the platform.
+    paidPath: "platform",
+    integrations: [
+      { with: "browser-pos", ux: "Sell accessories over the same counter" },
+      { with: "label-printer", ux: "Print the device tag that tapes to the unit" },
+      { with: "invoice-generator", ux: "Raise a tax invoice for a completed repair" },
+      { with: "upi-qr-generator", ux: "Collect the repair charge by UPI at handover" },
     ],
   },
   {

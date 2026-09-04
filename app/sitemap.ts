@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
+  repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
 import {
@@ -108,6 +109,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(tokenSystemEnabled() ? ["/products/free-token-system"] : []),
     ...(rentalSoftwareEnabled() ? ["/products/free-rental-software"] : []),
     ...(pharmacySoftwareEnabled() ? ["/products/free-pharmacy-software"] : []),
+    ...(repairSoftwareEnabled() ? ["/products/free-repair-shop-software"] : []),
   ];
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({

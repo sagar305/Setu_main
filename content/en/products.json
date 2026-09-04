@@ -218,6 +218,31 @@
       }
     },
     {
+      "id": "free-repair",
+      "status": "live",
+      "name": "Free Repair Job Card",
+      "headline": "Free repair shop software with job cards, photos and a condition record",
+      "description": "A completely free job card app for mobile, laptop and appliance repair shops. Records the device's condition with photographs and a signature the moment it comes in, so \u201cthat scratch wasn't there before\u201d ends there \u2014 then tracks every device on one board that turns amber and red as jobs sit. No login, no subscription, works offline.",
+      "features": [
+        "Intake in ninety seconds: condition checklist, camera photos and a customer signature",
+        "An intake record that cannot be edited after the job is saved \u2014 that is the whole point",
+        "A board of every device in the shop, ageing to amber and red as the days pass",
+        "Search by IMEI, job number, phone or name, matching part of a serial as well as all of it",
+        "WhatsApp updates at every stage, from your own templates, sent by you rather than automatically",
+        "Job slip at A5 or 58mm, plus a device tag with the job number big enough to read across a bench",
+        "Parts stock with cost beside selling price, so the margin is visible while it can still be changed",
+        "Delivery with payment, signature and an invoice carrying the warranty expiry date",
+        "Warranty lookup by job number or IMEI, and claims that do not count as new revenue",
+        "The uncollected list \u2014 finished work nobody came back for, totalled and chased on a cycle",
+        "Margin, turnaround, technician throughput and which supplier's parts keep coming back",
+        "Works fully offline \u2014 PIN lock, backup / restore and Google Sheet sync"
+      ],
+      "cta": {
+        "label": "Open the Free Repair Job Card \u2014 it's free",
+        "href": "/products/free-repair-shop-software"
+      }
+    },
+    {
       "id": "free-pharmacy",
       "status": "live",
       "name": "Free Pharmacy POS",

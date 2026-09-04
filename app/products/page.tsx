@@ -4,6 +4,7 @@ import { getProductsContent } from "@/lib/content";
 import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
+  repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
@@ -21,6 +22,7 @@ const visibleProducts = content.products.filter((product) => {
   if (product.id === "free-token") return tokenSystemEnabled();
   if (product.id === "free-rental") return rentalSoftwareEnabled();
   if (product.id === "free-pharmacy") return pharmacySoftwareEnabled();
+  if (product.id === "free-repair") return repairSoftwareEnabled();
   return true;
 });
 
@@ -76,6 +78,9 @@ const listedProducts: { name: string; path: string }[] = [
     : []),
   ...(pharmacySoftwareEnabled()
     ? [{ name: "Free Pharmacy POS", path: "/products/free-pharmacy-software" }]
+    : []),
+  ...(repairSoftwareEnabled()
+    ? [{ name: "Free Repair Job Card", path: "/products/free-repair-shop-software" }]
     : []),
   { name: "Setu Dine", path: "/products/restaurant-pos" },
   { name: "Setu Queue", path: "/products/queue" },
