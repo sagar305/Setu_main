@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
+import Script from "next/script";
 import { NepalSupportBanner } from "@/components/NepalSupportBanner";
 import { Footer } from "@/components/Footer";
 import { getSiteContent } from "@/lib/content";
@@ -102,15 +103,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             calculators or tools, which keeps the on-device promise intact. */}
         <Analytics />
         <SpeedInsights />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FTL28EE7E"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-0FTL28EE7E');
-        </script>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-0FTL28EE7E"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-0FTL28EE7E');
+          `}
+        </Script>
       </body>
     </html>
   );
