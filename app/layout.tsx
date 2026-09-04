@@ -102,6 +102,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             calculators or tools, which keeps the on-device promise intact. */}
         <Analytics />
         <SpeedInsights />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FTL28EE7E"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-0FTL28EE7E');
+        </script>
       </body>
     </html>
   );
