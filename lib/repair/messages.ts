@@ -2,9 +2,14 @@
 //
 // Nothing here sends anything. The app has no server and no login, so it can
 // only prepare the text and hand it to WhatsApp — the counter taps send, one
-// customer at a time. That is a deliberate limit of the offline model, and it
-// is also why estimate approval cannot be read back: a customer replying "YES"
-// replies to a person, not to this app, and the technician ticks it manually.
+// customer at a time. That is a deliberate limit of the offline model.
+//
+// A customer's WhatsApp *reply* still cannot reach this app, and never will:
+// there is nothing running in between. When tracking links are switched on the
+// estimate message carries {{trackUrl}}, and the customer answers on that page
+// instead — which the shop polls. See lib/repair/tracking.ts. With tracking off
+// the token resolves to nothing, the message reads as it always did, and the
+// technician ticks the approval by hand.
 
 import { getWhatsAppShareUrl } from "@/lib/share";
 import type { Business } from "@/lib/pos/types";
@@ -109,6 +114,10 @@ export function jobVars(
     warrantyEnd: warrantyEndOf(job) ? formatDate(warrantyEndOf(job)) : "—",
     invoiceNo,
     upiId: business?.upiId ?? "",
+    // Blank when tracking is off, or when the link could not be minted because
+    // the shop was offline at intake. `fillTemplate` strips the token and the
+    // whitespace around it, so the same message reads correctly either way.
+    trackUrl: job.tracking?.url ?? "",
   };
 }
 

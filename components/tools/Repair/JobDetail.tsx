@@ -11,12 +11,15 @@
 // Everything below it is the working half: diagnosis, parts, labour, notes and
 // the timeline.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   AlertTriangle,
   ArrowLeft,
   BadgeCheck,
+  Copy,
+  ExternalLink,
   FileText,
+  Link2,
   MessageCircle,
   PackageCheck,
   Phone,
@@ -56,6 +59,7 @@ import {
   type PartUsage,
 } from "@/lib/repair/types";
 import { outboundFor, type OutboundMessage } from "@/lib/repair/messages";
+import { TrackingError, daysUntilExpiry } from "@/lib/repair/tracking";
 import {
   printDeviceTag,
   printEstimate,
@@ -96,6 +100,9 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
     markNotified,
     raiseWarrantyClaim,
     deleteJob,
+    publishJobTracking,
+    openEstimateForApproval,
+    checkEstimateDecision,
   } = useRepair();
 
   const job = jobById(jobId);
@@ -106,6 +113,9 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+  const [trackingBusy, setTrackingBusy] = useState(false);
+  const [trackingNote, setTrackingNote] = useState("");
+  const [copiedLink, setCopiedLink] = useState(false);
 
   // The working fields, edited locally and saved in one go — a technician types
   // a diagnosis in bursts and should not be writing to the database per keypress.
@@ -133,6 +143,36 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
     [jobs, job]
   );
 
+  /**
+   * Watch for the customer answering the estimate.
+   *
+   * There is no push and there cannot be one without a server of our own, so
+   * this polls while the job is open and an answer is genuinely outstanding —
+   * and stops the moment one arrives or the job moves on. Every thirty seconds
+   * is frequent enough that an approval lands while the counter is still
+   * looking at the job, and rare enough to be a negligible amount of traffic.
+   */
+  useEffect(() => {
+    const outstanding =
+      job?.status === "estimate-sent" &&
+      Boolean(job.tracking?.reply) &&
+      !job.tracking?.reply?.decision;
+    if (!job || !outstanding) return;
+
+    let cancelled = false;
+    const poll = () => {
+      // Failures are swallowed inside checkEstimateDecision — waiting longer is
+      // always the right answer, and an error here must not disturb the screen.
+      if (!cancelled) void checkEstimateDecision(job.id);
+    };
+    poll();
+    const timer = window.setInterval(poll, 30_000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [job, checkEstimateDecision]);
+
   if (!job) {
     return (
       <div className="py-16 text-center">
@@ -146,6 +186,10 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
 
   const money = (value: number) => formatMoney(value, currency);
   const totals = billTotals({ ...job, partsUsed, labourCharge: Number(labour) || 0 }, settings);
+  const tracking = job.tracking;
+  const awaitingReply =
+    job.status === "estimate-sent" && Boolean(tracking?.reply) && !tracking?.reply?.decision;
+  const expiryDays = tracking ? daysUntilExpiry(tracking) : null;
   const context: PrintContext = { business, job, customer, technician, settings, bill };
 
   const dirty =
@@ -425,6 +469,159 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             </p>
           )}
         </div>
+      )}
+
+      {/* Tracking link ---------------------------------------------------- */}
+      {settings.trackingEnabled && (
+        <SectionCard title="Customer tracking link">
+          {tracking ? (
+            <div className="grid gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <Link2 className="h-4 w-4 shrink-0 text-indigo" aria-hidden="true" />
+                <code className="min-w-0 flex-1 truncate rounded-lg bg-cream-paper px-2 py-1.5 text-xs text-ink">
+                  {tracking.url}
+                </code>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(tracking.url);
+                      setCopiedLink(true);
+                      window.setTimeout(() => setCopiedLink(false), 1600);
+                    } catch {
+                      // Clipboard blocked — the URL is on screen to copy by hand.
+                    }
+                  }}
+                  className={secondaryBtnClass}
+                >
+                  <Copy className="h-4 w-4" aria-hidden="true" />
+                  {copiedLink ? "Copied" : "Copy"}
+                </button>
+                <a
+                  href={tracking.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={secondaryBtnClass}
+                >
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  Open
+                </a>
+              </div>
+
+              <p className="text-xs text-muted">
+                The same address for the life of this job — every status change rewrites what it
+                says, so the customer can bookmark it.
+                {expiryDays !== null && expiryDays <= 14 && (
+                  <strong className="text-amber-700">
+                    {" "}
+                    It stops working in {expiryDays} {expiryDays === 1 ? "day" : "days"}.
+                  </strong>
+                )}
+              </p>
+
+              {tracking.pendingSince && (
+                <p className="flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
+                  <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  The last update did not reach the link — the customer is seeing older
+                  information. It will retry when you are back online.
+                </p>
+              )}
+
+              {/* The estimate reply channel. */}
+              {job.status === "estimate-sent" && (
+                <div className="rounded-lg border border-muted-line/30 bg-cream-paper p-3">
+                  {tracking.reply?.decision ? (
+                    <p
+                      className={`text-sm font-semibold ${
+                        tracking.reply.decision === "yes" ? "text-green-700" : "text-red-700"
+                      }`}
+                    >
+                      The customer {tracking.reply.decision === "yes" ? "approved" : "declined"}{" "}
+                      this estimate
+                      {tracking.reply.decidedAt
+                        ? ` on ${formatDateTime(tracking.reply.decidedAt)}`
+                        : ""}
+                      .
+                    </p>
+                  ) : awaitingReply ? (
+                    <p className="text-sm text-muted">
+                      Waiting for the customer to approve or decline on their tracking page. This
+                      checks every half minute while the job is open.
+                    </p>
+                  ) : (
+                    <>
+                      <p className="text-sm text-muted">
+                        Turn on Approve and Decline on the customer&apos;s page, so they can answer
+                        the estimate without ringing.
+                      </p>
+                      <button
+                        type="button"
+                        disabled={trackingBusy}
+                        onClick={async () => {
+                          setTrackingBusy(true);
+                          setTrackingNote("");
+                          setError("");
+                          try {
+                            await openEstimateForApproval(job.id);
+                            setTrackingNote("The customer can now answer on their page.");
+                          } catch (caught) {
+                            setError(
+                              caught instanceof TrackingError || caught instanceof Error
+                                ? caught.message
+                                : "Could not open the estimate for approval."
+                            );
+                          } finally {
+                            setTrackingBusy(false);
+                          }
+                        }}
+                        className={`${primaryBtnClass} mt-2`}
+                      >
+                        {trackingBusy ? "Working…" : "Let them answer on the link"}
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="grid gap-2">
+              <p className="text-sm text-muted">
+                {job.trackingQueuedAt
+                  ? "This job is waiting for a link — it could not be created, most likely because you were offline. It will be picked up automatically, or you can try now."
+                  : "This job has no tracking link yet."}
+              </p>
+              <button
+                type="button"
+                disabled={trackingBusy}
+                onClick={async () => {
+                  setTrackingBusy(true);
+                  setTrackingNote("");
+                  setError("");
+                  try {
+                    await publishJobTracking(job.id);
+                    setTrackingNote("Link created.");
+                  } catch (caught) {
+                    setError(
+                      caught instanceof TrackingError || caught instanceof Error
+                        ? caught.message
+                        : "Could not create the tracking link."
+                    );
+                  } finally {
+                    setTrackingBusy(false);
+                  }
+                }}
+                className={`${primaryBtnClass} w-fit`}
+              >
+                <Link2 className="h-4 w-4" aria-hidden="true" />
+                {trackingBusy ? "Creating…" : "Create the tracking link"}
+              </button>
+            </div>
+          )}
+
+          {trackingNote && (
+            <p className="mt-2 text-xs font-semibold text-green-700">{trackingNote}</p>
+          )}
+        </SectionCard>
       )}
 
       {/* Intake record --------------------------------------------------- */}

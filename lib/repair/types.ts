@@ -100,8 +100,57 @@ export type Job = {
   warrantyClaimOfJobId: string | null;
   billId: string | null;
   statusHistory: StatusChange[];
+  /**
+   * The customer-facing tracking link, when this job has one.
+   *
+   * Optional throughout, because jobs taken in before tracking existed — and
+   * jobs taken in offline, or by a shop that never switched it on — have none,
+   * and every screen has to cope with that rather than the database needing a
+   * migration.
+   *
+   * `trackingEditToken` is the shop's write credential for the code. It never
+   * leaves this device: it is not in the payload, not in the URL, and not in a
+   * backup that is shared. Losing it freezes the link on whatever it last said.
+   */
+  tracking?: JobTracking;
+  /**
+   * Set when a link was wanted but could not be minted — the shop was offline,
+   * or the service was down. It is the queue: `retryPendingTracking` looks for
+   * this and for `tracking.pendingSince`, and clears it once a link exists.
+   */
+  trackingQueuedAt?: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+/**
+ * What this job needs in order to keep one URL truthful.
+ *
+ * The public half (`code`) is what the customer holds. The private half
+ * (`editToken`) is what lets the shop rewrite it. The reply channel is a second,
+ * throwaway code that exists only while an estimate is waiting for an answer —
+ * see lib/repair/tracking.ts for why it is separate.
+ */
+export type JobTracking = {
+  code: string;
+  editToken: string;
+  /** The full https URL, as the shortener minted it. */
+  url: string;
+  publishedAt: string;
+  /** What the service said when it last answered. Links do not live for ever. */
+  expiresAt: string;
+  /** The payload behind `code` right now, so a pointless re-push can be skipped. */
+  pushedPayload?: string;
+  /** Set when a push failed — the job is queued to try again when next online. */
+  pendingSince?: string | null;
+  /** The estimate reply channel, minted when an estimate is sent. */
+  reply?: {
+    code: string;
+    editToken: string;
+    /** What the customer answered, once we have polled and seen it. */
+    decision?: "yes" | "no" | null;
+    decidedAt?: string | null;
+  } | null;
 };
 
 export type StatusChange = {
@@ -186,6 +235,14 @@ export type RepairSettings = {
   defaultTaxRate: number;
   paymentModes: string[];
   captureUnlockCode: boolean; // default false
+  /**
+   * Whether jobs get a customer-facing tracking link.
+   *
+   * Off by default, and the only setting in this app that causes anything to
+   * leave the device. A shop that leaves it off keeps the offline-only promise
+   * intact; a shop that switches it on is told plainly what gets uploaded.
+   */
+  trackingEnabled: boolean; // default false
   messageTemplates: Record<RepairTemplateKey, string>;
   receiptPaperSize: "58mm" | "80mm" | "a4";
   lastBackupAt: string | null;
@@ -380,12 +437,21 @@ export const DEFAULT_ACCESSORY_PRESETS: Record<string, string[]> = {
 // Messages
 // ---------------------------------------------------------------------------
 
+/**
+ * The defaults of §5, with {{trackUrl}} added to the three messages a customer
+ * is most likely to act on.
+ *
+ * The token resolves to nothing when tracking is off or the link has not been
+ * published yet, and `fillTemplate` strips it along with the whitespace it
+ * leaves behind — so the same template is correct for a shop that never turns
+ * tracking on, and these stay §5's wording plus one link.
+ */
 export const DEFAULT_MESSAGE_TEMPLATES: Record<RepairTemplateKey, string> = {
   received:
-    "{{shopName}}: received your {{device}} — job {{jobNo}}. We will update you. Est. ready {{promisedDate}}.",
+    "{{shopName}}: received your {{device}} — job {{jobNo}}. We will update you. Est. ready {{promisedDate}}. Track it here: {{trackUrl}}",
   estimateRequest:
-    "{{shopName}}: your {{device}} ({{jobNo}}) needs {{workSummary}}. Estimate ₹{{amount}}. Reply YES to approve.",
-  inRepair: "{{shopName}}: repair started on your {{device}} ({{jobNo}}).",
+    "{{shopName}}: your {{device}} ({{jobNo}}) needs {{workSummary}}. Estimate ₹{{amount}}. Approve or decline here: {{trackUrl}}",
+  inRepair: "{{shopName}}: repair started on your {{device}} ({{jobNo}}). {{trackUrl}}",
   awaitingParts:
     "{{shopName}}: we are waiting for a part for your {{device}} ({{jobNo}}). New estimated date: {{promisedDate}}.",
   ready:
@@ -408,6 +474,10 @@ export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
   { token: "{{warrantyEnd}}", meaning: "Date the repair warranty expires" },
   { token: "{{invoiceNo}}", meaning: "Invoice number" },
   { token: "{{upiId}}", meaning: "Your UPI ID, from the business profile" },
+  {
+    token: "{{trackUrl}}",
+    meaning: "The customer's tracking link — blank unless tracking is on",
+  },
 ];
 
 export const DEFAULT_PAYMENT_MODES = ["Cash", "UPI", "Card", "Bank transfer"];
@@ -434,6 +504,7 @@ export const DEFAULT_SETTINGS: RepairSettings = {
   defaultTaxRate: 18,
   paymentModes: DEFAULT_PAYMENT_MODES,
   captureUnlockCode: false,
+  trackingEnabled: false,
   messageTemplates: DEFAULT_MESSAGE_TEMPLATES,
   receiptPaperSize: "58mm",
   lastBackupAt: null,

@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { generateSalt, hashPin, isValidPinFormat } from "@/lib/pos/pin";
+import { shortLinksConfigured } from "@/lib/toolkit/shortLink";
 import { useRepair } from "@/lib/repair/store";
 import {
   backupSummary,
@@ -463,6 +464,58 @@ export function SettingsScreen() {
             )}
           </div>
         </div>
+      </SectionCard>
+
+      {/* Customer tracking ------------------------------------------------ */}
+      <SectionCard title="Customer tracking links">
+        <p className="mb-3 text-xs text-muted">
+          Gives every job a web address the customer can open to see where their device is. The
+          address never changes — each status change rewrites what it says — so they can bookmark
+          it, and the estimate can be approved or declined from the same page.
+        </p>
+
+        {!shortLinksConfigured() ? (
+          <p className="rounded-lg border border-muted-line/40 bg-cream-paper p-3 text-sm text-muted">
+            Tracking links are not available on this site. They need the link service to be
+            configured before the option can be switched on.
+          </p>
+        ) : (
+          <>
+            <label className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                className="mt-0.5 h-5 w-5 shrink-0 rounded border-muted-line/50 text-indigo focus:ring-indigo"
+                checked={settings.trackingEnabled}
+                onChange={(event) =>
+                  void updateSettings({ trackingEnabled: event.target.checked })
+                }
+              />
+              <span>
+                <span className="block text-sm font-semibold text-ink">
+                  Give customers a tracking link
+                </span>
+                <span className="block text-xs text-muted">
+                  Off by default. This is the only setting in this app that sends anything off this
+                  device.
+                </span>
+              </span>
+            </label>
+
+            {settings.trackingEnabled && (
+              <div className="mt-3">
+                <SensitiveNote>
+                  While this is on, each job&apos;s shop name, job number, device, status, promised
+                  date and amount are stored on the link service so the customer&apos;s page can
+                  read them. The intake photos, the signature, the unlock code, your diagnosis,
+                  your parts and their prices, and the customer&apos;s address are never sent.
+                  Anyone holding the link can see that job and answer its estimate, so treat it
+                  like the message you sent it in. Links do not last for ever — an old one stops
+                  working and the customer is told to ring you.
+                </SensitiveNote>
+              </div>
+            )}
+          </>
+        )}
       </SectionCard>
 
       {/* Money ----------------------------------------------------------- */}

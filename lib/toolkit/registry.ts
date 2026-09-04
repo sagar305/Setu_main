@@ -335,9 +335,10 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     reads: ["business"],
     writes: [],
     dependsOn: ["business-profile"],
-    // The upsell is a customer-facing "track your repair" page and a
-    // multi-technician service-centre tier — both need a server, so this
-    // funnels to the platform.
+    // The free app now carries a tracking link of its own, built on the
+    // shortener's mutable codes rather than a backend. The upsell is what that
+    // cannot do: several technicians sharing one board, push instead of
+    // polling, and links that do not expire — all of which need a server.
     paidPath: "platform",
     integrations: [
       { with: "browser-pos", ux: "Sell accessories over the same counter" },

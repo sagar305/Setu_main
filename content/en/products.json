@@ -235,6 +235,7 @@
         "Warranty lookup by job number or IMEI, and claims that do not count as new revenue",
         "The uncollected list \u2014 finished work nobody came back for, totalled and chased on a cycle",
         "Margin, turnaround, technician throughput and which supplier's parts keep coming back",
+        "An optional tracking link per job \u2014 one address that never changes, and the customer can approve an estimate from it",
         "Works fully offline \u2014 PIN lock, backup / restore and Google Sheet sync"
       ],
       "cta": {

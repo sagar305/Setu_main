@@ -51,6 +51,7 @@ function RepairShell() {
     today,
     markNotified,
     customerById,
+    retryPendingTracking,
   } = useRepair();
 
   const [screen, setScreen] = useState<ScreenId>("jobs");
@@ -98,13 +99,26 @@ function RepairShell() {
   useEffect(() => {
     setOffline(!navigator.onLine);
     const goOffline = () => setOffline(true);
-    const goOnline = () => setOffline(false);
+    // Coming back online is the moment to publish the tracking links that could
+    // not be minted at the counter. Failures stay queued, so this is safe to
+    // fire on every reconnection.
+    const goOnline = () => {
+      setOffline(false);
+      void retryPendingTracking();
+    };
     window.addEventListener("offline", goOffline);
     window.addEventListener("online", goOnline);
     return () => {
       window.removeEventListener("offline", goOffline);
       window.removeEventListener("online", goOnline);
     };
+  }, [retryPendingTracking]);
+
+  // And once on open, for a shop that was offline when the tab was last closed.
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && navigator.onLine) void retryPendingTracking();
+    // Deliberately once per mount: this is a catch-up, not a poll.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (locked) {

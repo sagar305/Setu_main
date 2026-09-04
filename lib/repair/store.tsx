@@ -35,6 +35,13 @@ import { restoreBackup, type RepairBackup } from "./backup";
 import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
 import { billTotals, round2, stockDeltas } from "./calc";
 import {
+  TrackingError,
+  mintReplyChannel,
+  publishTracking,
+  pushTracking,
+  readDecision,
+} from "./tracking";
+import {
   DEFAULT_SETTINGS,
   generateId,
   invoiceNumberFrom,
@@ -46,6 +53,7 @@ import {
   type Customer,
   type Job,
   type JobStatus,
+  type JobTracking,
   type Part,
   type RepairSettings,
   type Technician,
@@ -168,6 +176,15 @@ type RepairContextValue = {
   applyRestoredBackup: (backup: RepairBackup) => Promise<void>;
   syncToSheet: () => Promise<void>;
   reloadAll: () => Promise<void>;
+
+  /** Mint this job's tracking link, or re-push it after a failed attempt. */
+  publishJobTracking: (jobId: string) => Promise<Job>;
+  /** Open the estimate for an answer: mint the reply channel and push it. */
+  openEstimateForApproval: (jobId: string) => Promise<Job>;
+  /** Poll the reply channel. Returns the decision when one has been given. */
+  checkEstimateDecision: (jobId: string) => Promise<"yes" | "no" | null>;
+  /** Publish every job whose link is queued because the shop was offline. */
+  retryPendingTracking: () => Promise<number>;
 
   jobById: (id: string) => Job | undefined;
   customerById: (id: string) => Customer | undefined;
@@ -407,6 +424,56 @@ export function RepairProvider({ children }: { children: ReactNode }) {
    * Jobs
    * ------------------------------------------------------------------ */
 
+  /**
+   * Bring a job's tracking link in line with the job, and hand back the job
+   * carrying whatever the attempt produced.
+   *
+   * Never throws, and never blocks. Publishing needs the network, and the whole
+   * app is built to work without it — so a failure is recorded on the job as
+   * `pendingSince` and retried later rather than surfacing as an error over a
+   * write that already succeeded. The device is on the counter either way; the
+   * customer's link catching up ten minutes later costs nobody anything.
+   *
+   * Returns the same object when there is nothing to do, so callers can compare
+   * by identity and skip a pointless second write.
+   */
+  const applyTracking = useCallback(
+    async (job: Job, billForThisJob: Bill | null): Promise<Job> => {
+      if (!settings.trackingEnabled) return job;
+      if (typeof window === "undefined") return job;
+      const origin = window.location.origin;
+
+      try {
+        if (!job.tracking) {
+          const tracking = await publishTracking(job, business, settings, billForThisJob, origin);
+          return { ...job, tracking };
+        }
+        const tracking = await pushTracking(job.tracking, job, business, settings, billForThisJob);
+        return tracking === job.tracking ? job : { ...job, tracking };
+      } catch (error) {
+        // "disabled" and "not-configured" are settled facts rather than
+        // failures to retry, so they leave no queue entry behind.
+        const reason = error instanceof TrackingError ? error.reason : "failed";
+        if (reason === "disabled" || reason === "not-configured") return job;
+        if (job.tracking?.pendingSince || job.trackingQueuedAt) return job;
+        // A job that has no link yet records the intent on itself, so
+        // retryPendingTracking can find it again.
+        return job.tracking
+          ? { ...job, tracking: { ...job.tracking, pendingSince: nowIso() } }
+          : { ...job, trackingQueuedAt: nowIso() };
+      }
+    },
+    [business, settings]
+  );
+
+  /** Persist a tracking change that happened after the job itself was written. */
+  const persistTracking = useCallback(async (before: Job, after: Job) => {
+    if (before === after) return;
+    await repairBatch({ jobs: [after] });
+    setJobs((previous) => previous.map((job) => (job.id === after.id ? after : job)));
+  }, []);
+
+
   const createJob = useCallback(
     async (input: IntakeInput) => {
       const timestamp = nowIso();
@@ -450,9 +517,15 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
       setJobs((previous) => [...previous, job]);
       setSettings((previous) => ({ ...previous, nextJobNumber: previous.nextJobNumber + 1 }));
-      return job;
+
+      // The link is minted here so the "received" message can carry it. When
+      // the shop is offline the job still saves, the message still goes, and
+      // the link is queued — see retryPendingTracking.
+      const tracked = await applyTracking(job, null);
+      await persistTracking(job, tracked);
+      return tracked;
     },
-    [settings.jobPrefix, settings.defaultWarrantyDays]
+    [settings.jobPrefix, settings.defaultWarrantyDays, applyTracking, persistTracking]
   );
 
   /**
@@ -533,9 +606,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
       await repairBatch({ jobs: [updated] });
       setJobs((previous) => previous.map((job) => (job.id === id ? updated : job)));
-      return updated;
+
+      // The board has already moved. Bringing the customer's link up to date is
+      // a second, best-effort step — it cannot fail the status change.
+      const synced = await applyTracking(updated, billByJob.get(updated.id) ?? null);
+      await persistTracking(updated, synced);
+      return synced;
     },
-    [jobMap]
+    [jobMap, applyTracking, persistTracking, billByJob]
   );
 
   /** §4: a status change may be notified once; `notifiedAt` guards duplicates. */
@@ -617,7 +695,9 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       if (!input.bill) {
         await repairBatch({ jobs: [base] });
         setJobs((previous) => previous.map((job) => (job.id === id ? base : job)));
-        return base;
+        const syncedFree = await applyTracking(base, null);
+        await persistTracking(base, syncedFree);
+        return syncedFree;
       }
 
       const totals = billTotals(
@@ -671,9 +751,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         ...previous,
         nextInvoiceNumber: previous.nextInvoiceNumber + 1,
       }));
-      return delivered;
+
+      // The delivered payload carries the warranty end date and the invoice
+      // number, which is the version of the page a customer comes back to.
+      const synced = await applyTracking(delivered, bill);
+      await persistTracking(delivered, synced);
+      return synced;
     },
-    [jobMap, settings]
+    [jobMap, settings, applyTracking, persistTracking]
   );
 
   /**
@@ -816,6 +901,157 @@ export function RepairProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /* ---------------------------------------------------------------------
+   * Customer tracking links
+   * ------------------------------------------------------------------ */
+
+  /** Mint a link for a job that has none, or retry one that failed. */
+  const publishJobTracking = useCallback(
+    async (jobId: string) => {
+      const existing = jobMap.get(jobId);
+      if (!existing) throw new Error("That job no longer exists.");
+      if (typeof window === "undefined") throw new Error("Tracking needs a browser.");
+
+      const tracking = await publishTracking(
+        existing,
+        business,
+        settings,
+        billByJob.get(jobId) ?? null,
+        window.location.origin
+      );
+      const updated: Job = { ...existing, tracking, trackingQueuedAt: null };
+      await repairBatch({ jobs: [updated] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      return updated;
+    },
+    [jobMap, business, settings, billByJob]
+  );
+
+  /**
+   * Put the estimate in front of the customer to answer.
+   *
+   * Mints the reply channel — a second, throwaway code holding nothing but a
+   * yes/no — and pushes a payload that carries its token, which is what turns
+   * the tracking page's Approve and Decline buttons on. See tracking.ts for why
+   * the customer never receives the tracking link's own token.
+   */
+  const openEstimateForApproval = useCallback(
+    async (jobId: string) => {
+      const existing = jobMap.get(jobId);
+      if (!existing) throw new Error("That job no longer exists.");
+      if (typeof window === "undefined") throw new Error("Tracking needs a browser.");
+      if (!settings.trackingEnabled) {
+        throw new Error("Customer tracking links are switched off in Settings.");
+      }
+
+      const bill = billByJob.get(jobId) ?? null;
+
+      // A job quoted before it had a link gets one now — the estimate is the
+      // message the customer is most likely to act on, so it must carry a URL.
+      const base: JobTracking =
+        existing.tracking ??
+        (await publishTracking(existing, business, settings, bill, window.location.origin));
+
+      // Re-used rather than re-minted, so a re-sent estimate does not orphan a
+      // channel the customer may already have open on their phone.
+      const reply = base.reply ?? (await mintReplyChannel(existing, settings));
+      const withReply: JobTracking = {
+        ...base,
+        reply: { ...reply, decision: null, decidedAt: null },
+      };
+
+      const pushed = await pushTracking(
+        withReply,
+        { ...existing, tracking: withReply },
+        business,
+        settings,
+        bill
+      );
+
+      const updated: Job = { ...existing, tracking: pushed, trackingQueuedAt: null };
+      await repairBatch({ jobs: [updated] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      return updated;
+    },
+    [jobMap, business, settings, billByJob]
+  );
+
+  /**
+   * Has the customer answered the estimate yet?
+   *
+   * Polling, because there is no push and there cannot be one without a server
+   * of our own. Returns null for "no answer, or we could not tell" — a
+   * tracking failure must never be able to stall the board, so the caller
+   * simply carries on waiting.
+   *
+   * The answer moves the job itself: yes to `approved` (which stamps
+   * `estimateApprovedOn`), no to `returned-unrepaired`. The customer's write is
+   * a signal, never a status the shop has to accept blindly — it lands on the
+   * timeline like any other change.
+   */
+  const checkEstimateDecision = useCallback(
+    async (jobId: string) => {
+      const existing = jobMap.get(jobId);
+      const reply = existing?.tracking?.reply;
+      if (!existing || !reply || reply.decision) return null;
+
+      const answer = await readDecision(reply.code);
+      if (!answer) return null;
+
+      const recorded: Job = {
+        ...existing,
+        tracking: {
+          ...existing.tracking!,
+          reply: { ...reply, decision: answer.decision, decidedAt: answer.at },
+        },
+      };
+      await repairBatch({ jobs: [recorded] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? recorded : job)));
+
+      await setJobStatus(
+        jobId,
+        answer.decision === "yes" ? "approved" : "returned-unrepaired",
+        answer.decision === "yes"
+          ? "Approved by the customer on their tracking page"
+          : "Declined by the customer on their tracking page"
+      );
+      return answer.decision;
+    },
+    [jobMap, setJobStatus]
+  );
+
+  /**
+   * Work the queue of links that could not be published when they were wanted.
+   *
+   * Called when the app comes back online. Failures are left queued rather than
+   * cleared, so a shop that is offline all afternoon does not lose the links it
+   * was owed.
+   */
+  const retryPendingTracking = useCallback(async () => {
+    if (!settings.trackingEnabled || typeof window === "undefined") return 0;
+    const pending = jobs.filter(
+      (job) => job.trackingQueuedAt || job.tracking?.pendingSince
+    );
+    let done = 0;
+    for (const job of pending) {
+      try {
+        const synced = await applyTracking(
+          job.tracking ? { ...job, tracking: { ...job.tracking, pendingSince: null } } : job,
+          billByJob.get(job.id) ?? null
+        );
+        if (synced.tracking && !synced.tracking.pendingSince) {
+          const cleared: Job = { ...synced, trackingQueuedAt: null };
+          await repairBatch({ jobs: [cleared] });
+          setJobs((previous) => previous.map((row) => (row.id === job.id ? cleared : row)));
+          done += 1;
+        }
+      } catch {
+        // Still offline, or still down. It stays queued.
+      }
+    }
+    return done;
+  }, [jobs, settings.trackingEnabled, applyTracking, billByJob]);
+
+  /* ---------------------------------------------------------------------
    * Whole-database operations
    * ------------------------------------------------------------------ */
 
@@ -885,6 +1121,10 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      publishJobTracking,
+      openEstimateForApproval,
+      checkEstimateDecision,
+      retryPendingTracking,
       jobById: (id: string) => jobMap.get(id),
       customerById: (id: string) => customers.find((customer) => customer.id === id),
       partById: (id: string) => partMap.get(id),
@@ -926,6 +1166,10 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      publishJobTracking,
+      openEstimateForApproval,
+      checkEstimateDecision,
+      retryPendingTracking,
       jobMap,
       partMap,
       billByJob,

@@ -6,6 +6,7 @@ import type { ComponentType } from "react";
 import {
   BarChart3,
   Camera,
+  Link2,
   ClipboardList,
   FileSignature,
   Lock,
@@ -132,6 +133,12 @@ const BOARD: Feature[] = [
       "Move a card and the matching message is offered, already written: received, estimate, in repair, waiting for a part, ready. You tap send in WhatsApp — nothing goes out on its own — and the job's timeline records whether the customer was actually told.",
   },
   {
+    icon: Link2,
+    title: "One tracking link that never goes stale",
+    description:
+      "Optional, and off until you switch it on. Each job gets a web address you send once; every status change rewrites what it says, so the customer bookmarks one link instead of ringing. They can approve or decline an estimate from the same page, and the answer comes back into your board.",
+  },
+  {
     icon: Printer,
     title: "A slip for the customer and a tag for the device",
     description:
@@ -216,12 +223,17 @@ const FAQ_ITEMS = [
   {
     question: "Does the customer get a link to track their repair?",
     answer:
-      "Not in the free app. A page a customer can open themselves needs a server, and this app deliberately has none — which is also why it works with the internet down. What it does instead is prepare a WhatsApp update at every stage for you to send. A customer-facing status page is on the paid side.",
+      "Yes, if you switch it on. Turn on customer tracking links in Settings and every job gets a web address you can send with the first WhatsApp. The address never changes — each status change rewrites what it says — so the customer can bookmark it and always see where their device is, what was promised and what it will cost. It is off by default, because it is the only part of this app that sends anything off your device.",
   },
   {
-    question: "Can the app read a customer's reply approving an estimate?",
+    question: "Can the customer approve an estimate from that link?",
     answer:
-      "No. The estimate message asks them to reply YES, but that reply goes to your phone, not to this app — there is nothing running in between. When you hear back, move the job to Approved and the date is recorded. It is one tap, and it is the honest limit of an app with no server.",
+      "Yes. When you send an estimate you can turn on Approve and Decline on their page, and their answer comes back into your job card — approving moves the job to Approved and records the date, declining marks it returned unrepaired. It is not instant: the app checks for an answer while the job is open on your screen, so it lands within a minute of you looking rather than the moment they tap. A WhatsApp reply still cannot reach the app; the link is what makes an answer readable at all.",
+  },
+  {
+    question: "What exactly gets uploaded when tracking is on?",
+    answer:
+      "The shop name, job number, device, current status, the promised date and the amount — enough for the page to answer the question the customer opened it to ask. The intake photos, the signature, the unlock code, your diagnosis, your parts and their prices and the customer's address are never sent. Anyone holding the link can see that one job and answer its estimate, so treat the link like the message you sent it in. Leave the setting off and nothing leaves your device at all.",
   },
   {
     question: "Does it handle parts stock and billing?",
@@ -252,12 +264,13 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web browser",
   description:
-    "Free repair shop and job card software for Indian mobile, laptop and appliance repair businesses. Records the device's condition with photos and a signature at intake, tracks every repair on an ageing board, sends WhatsApp updates, bills parts and labour, and reports margin, turnaround and repeat failures. Works offline in the browser with no signup.",
+    "Free repair shop and job card software for Indian mobile, laptop and appliance repair businesses. Records the device's condition with photos and a signature at intake, tracks every repair on an ageing board, sends WhatsApp updates, optionally gives each customer a tracking link they can approve an estimate from, bills parts and labour, and reports margin, turnaround and repeat failures. Works offline in the browser with no signup.",
   featureList: [
     "Intake condition checklist with camera photos and a customer signature",
     "An intake record that cannot be edited after the job is saved",
     "Job board with ageing colours, filters and IMEI search",
     "WhatsApp status updates from your own message templates",
+    "An optional constant tracking link per job, with estimate approval from the page",
     "Job slip, device tag, estimate and invoice printing",
     "Parts stock with cost and selling prices, and low-stock warnings",
     "Delivery with payment, signature and a printed warranty expiry",
@@ -452,12 +465,15 @@ export default function FreeRepairShopSoftwarePage() {
                 are only as good as the thirty seconds somebody spends taking them.
               </p>
               <p className="mt-4 leading-relaxed text-muted">
-                Everything runs in one browser with no account, so the shop lives on one device: a
-                second machine cannot share the same board, and there is no page a customer can open
-                to track their own repair — both need a server between them. WhatsApp messages are
-                prepared for you to send, never sent automatically, and a customer&apos;s reply
-                approving an estimate cannot reach the app. Everything on this page is free, and
-                stays free.
+                Everything runs in one browser with no account, so the shop lives on one device
+                and a second machine cannot share the same board — that needs a server between
+                them. WhatsApp messages are prepared for you to send, never sent automatically, and
+                a reply to one still cannot reach the app. Customer tracking links are the single
+                exception to the offline rule, and they are off until you turn them on: while they
+                are on, each job&apos;s status and amount are stored so the customer&apos;s page can
+                read them, an answer to an estimate arrives when you next look rather than the
+                instant it is given, and a link eventually expires. Everything on this page is free,
+                and stays free.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
