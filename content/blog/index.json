@@ -71,6 +71,14 @@
     }
   },
   "posts": [
+                {
+                "slug": "restaurant-queue-cost-of-waiting-2026",
+                "title": "The Real Cost of Making Diners Wait: Queue Management in 2026",
+                "excerpt": "A queue outside looks like proof you're popular. Past a certain wait it is just guests deciding to eat elsewhere — and each one is a table you paid for sitting empty. Here's what making diners wait actually costs in 2026, and how to measure and fix it.",
+                "date": "2026-09-04",
+                "category": "Dine-In Ops",
+                "thumbnail": "/blog/thumbnails/listing/restaurant-queue-cost-of-waiting-2026.jpeg"
+              },
               {
                 "slug": "how-to-use-gst-calculator-2026",
                 "title": "How to Use a GST Calculator in 2026: Inclusive, Exclusive and the New Slabs",
