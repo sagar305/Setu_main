@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import { getHomeContent } from "@/lib/content";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  repairSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 import { Hero } from "@/components/home/Hero";
 import { ShowcaseGrid } from "@/components/home/ShowcaseGrid";
 import { Services } from "@/components/home/Services";
@@ -8,6 +14,21 @@ import { CtaBanner } from "@/components/CtaBanner";
 import { Faq } from "@/components/Faq";
 
 const content = getHomeContent();
+
+/**
+ * The product row skips anything not launched yet, so the homepage never
+ * links to a route the feature flags 404. The cards behind it close the gap,
+ * which is why the row is filtered rather than padded.
+ */
+const productCards = content.products.cards.filter((card) => {
+  if (card.id === "free-token") return tokenSystemEnabled();
+  if (card.id === "free-rental") return rentalSoftwareEnabled();
+  if (card.id === "free-pharmacy") return pharmacySoftwareEnabled();
+  if (card.id === "free-repair") return repairSoftwareEnabled();
+  return true;
+});
+
+const productsSection = { ...content.products, cards: productCards };
 
 export const metadata: Metadata = {
   title: content.seo.title,
@@ -84,6 +105,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Hero hero={content.hero} />
+      <ShowcaseGrid id="products" section={productsSection} className="bg-white" />
       <ShowcaseGrid id="tools" section={content.tools} className="bg-cream" />
       <ShowcaseGrid id="calculators" section={content.calculators} className="bg-white" />
       <Services services={content.services} />

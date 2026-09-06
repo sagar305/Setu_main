@@ -42,6 +42,10 @@
         "PIN counter lock with idle auto-lock",
         "JSON backup / restore, CSV exports & Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Retail",
+        "note": "Cloud database, several counters and staff logins."
+      },
       "cta": {
         "label": "Open Browser Based POS — it's free",
         "href": "/products/browser-based-pos"
@@ -93,6 +97,10 @@
         "Backup, CSV exports and Google Sheet sync",
         "Works offline, no login required"
       ],
+      "paidSoon": {
+        "name": "Setu Dine",
+        "note": "Cloud database, several outlets, devices and staff logins."
+      },
       "cta": {
         "label": "Open Free Dine — it's free",
         "href": "/products/free-restaurant-pos"
@@ -137,6 +145,10 @@
         "Dated diary reminders and admission enquiry register",
         "Bulk student import, PIN lock, backup and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Tuition",
+        "note": "Cloud database, a live parent view and online fee collection."
+      },
       "cta": {
         "label": "Open the Tuition Class Manager — it's free",
         "href": "/products/free-tuition-software"
@@ -164,6 +176,10 @@
         "Footfall, revenue, top diagnoses and no-show reports, all exportable to CSV",
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Clinic",
+        "note": "Cloud database, several doctors and branches on one record."
+      },
       "cta": {
         "label": "Open the Free Clinic Manager — it's free",
         "href": "/products/free-clinic-software"
@@ -188,6 +204,10 @@
         "Hourly load, no-show rate and counter-wise reports, exportable to CSV",
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Queue",
+        "note": "Cloud database, counter billing and kitchen routing."
+      },
       "cta": {
         "label": "Open the Free Token System — it's free",
         "href": "/products/free-token-system"
@@ -212,6 +232,10 @@
         "WhatsApp quotes, confirmations and overdue chases with a link the customer can open",
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Rental",
+        "note": "Cloud database, several branches and crew logins."
+      },
       "cta": {
         "label": "Open the Free Rental & Hire Book — it's free",
         "href": "/products/free-rental-software"
@@ -238,6 +262,10 @@
         "An optional tracking link per job — one address that never changes, and the customer can approve an estimate from it",
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Repair",
+        "note": "Cloud database, several branches and technician logins."
+      },
       "cta": {
         "label": "Open the Free Repair Job Card — it's free",
         "href": "/products/free-repair-shop-software"
@@ -262,6 +290,10 @@
         "Refill reminders and udhaar balances, sent on WhatsApp from your own templates",
         "Works fully offline — PIN lock, backup / restore and Google Sheet sync"
       ],
+      "paidSoon": {
+        "name": "Setu Pharmacy",
+        "note": "Cloud database, several counters and distributor sync."
+      },
       "cta": {
         "label": "Open the Free Pharmacy POS — it's free",
         "href": "/products/free-pharmacy-software"
@@ -324,6 +356,78 @@
       "cta": {
         "label": "Explore Setu Tuition",
         "href": "/products/tuition"
+      }
+    },
+    {
+      "id": "clinic",
+      "status": "coming-soon",
+      "name": "Setu Clinic",
+      "headline": "Clinic management, in development",
+      "description": "The paid clinic product the Free Clinic Manager grows into — the same prescriptions and patient records, held in a cloud database so several doctors, a front desk and more than one branch work off the same record.",
+      "features": [
+        "Cloud patient records shared across devices",
+        "Several doctors and branches on one account",
+        "Front-desk appointment scheduling",
+        "Role-based access for staff",
+        "Practice-wide reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "id": "pharmacy",
+      "status": "coming-soon",
+      "name": "Setu Pharmacy",
+      "headline": "Pharmacy billing, in development",
+      "description": "The paid medical-store product the Free Pharmacy POS grows into — batch-wise stock and expiry tracking in a cloud database, with several counters billing at once and distributor purchases syncing in.",
+      "features": [
+        "Cloud batch and expiry stock, shared across counters",
+        "Several counters billing at the same time",
+        "Distributor purchase and scheme-goods sync",
+        "Multi-branch stock transfers",
+        "Chain-wide GST and margin reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "id": "rental",
+      "status": "coming-soon",
+      "name": "Setu Rental",
+      "headline": "Rental and hire management, in development",
+      "description": "The paid hire product the Free Rental & Hire Book grows into — one availability calendar in a cloud database, so a second branch and the loading crew can never double-book the same stock.",
+      "features": [
+        "Cloud availability shared across branches",
+        "Crew logins for dispatch and returns",
+        "Stock transfers between branches",
+        "Customer portal for quotes and confirmations",
+        "Utilisation and return-on-cost reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "id": "repair",
+      "status": "coming-soon",
+      "name": "Setu Repair",
+      "headline": "Repair shop management, in development",
+      "description": "The paid job-card product the Free Repair Job Card grows into — intake records and device photos in a cloud database, with technician logins and every branch's board on one screen.",
+      "features": [
+        "Cloud job cards and intake photos",
+        "Technician logins with per-user throughput",
+        "Every branch's board on one screen",
+        "Parts stock shared across branches",
+        "Warranty and margin reporting across the chain"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
       }
     },
     {

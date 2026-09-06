@@ -57,20 +57,20 @@
           },
 { "label": "Free Dine — Restaurant POS (Free)", "href": "/products/free-restaurant-pos" },
           {
-            "label": "Setu Dine (Coming soon)",
-            "href": "/products/restaurant-pos"
+            "label": "Tuition Class Manager (Free)",
+            "href": "/products/free-tuition-software"
           },
           {
-            "label": "Setu Queue (Coming soon)",
-            "href": "/products/queue"
+            "label": "Clinic Manager (Free)",
+            "href": "/products/free-clinic-software"
           },
           {
             "label": "Setu QR Menu",
             "href": "/products/qr-menu"
           },
           {
-            "label": "Setu Retail (Coming soon)",
-            "href": "/products/retail"
+            "label": "All products",
+            "href": "/products"
           }
         ]
       },

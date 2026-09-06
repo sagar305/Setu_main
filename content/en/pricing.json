@@ -59,6 +59,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Retail",
+        "note": "Cloud database, several counters and staff logins."
+      },
       "cta": {
         "label": "Open the POS",
         "href": "/products/browser-based-pos"
@@ -127,6 +131,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Dine",
+        "note": "Cloud database, several outlets, devices and staff logins."
+      },
       "cta": {
         "label": "Open Free Dine",
         "href": "/products/free-restaurant-pos"
@@ -161,6 +169,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Tuition",
+        "note": "Cloud database, a live parent view and online fee collection."
+      },
       "cta": {
         "label": "Open the Class Manager",
         "href": "/products/free-tuition-software"
@@ -196,6 +208,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Clinic",
+        "note": "Cloud database, several doctors and branches on one record."
+      },
       "cta": {
         "label": "Open the Clinic Manager",
         "href": "/products/free-clinic-software"
@@ -231,6 +247,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Queue",
+        "note": "Cloud database, counter billing and kitchen routing."
+      },
       "cta": {
         "label": "Open the Token System",
         "href": "/products/free-token-system"
@@ -266,6 +286,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Rental",
+        "note": "Cloud database, several branches and crew logins."
+      },
       "cta": {
         "label": "Open the Hire Book",
         "href": "/products/free-rental-software"
@@ -301,6 +325,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Pharmacy",
+        "note": "Cloud database, several counters and distributor sync."
+      },
       "cta": {
         "label": "Open the Pharmacy POS",
         "href": "/products/free-pharmacy-software"
@@ -336,6 +364,10 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Repair",
+        "note": "Cloud database, several branches and technician logins."
+      },
       "cta": {
         "label": "Open the Job Card",
         "href": "/products/free-repair-shop-software"
@@ -447,6 +479,90 @@
         "Appointment scheduling",
         "Patient records",
         "Front-desk operations"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-tuition",
+      "name": "Setu Tuition",
+      "href": "/products/tuition",
+      "status": "in-development",
+      "summary": "The paid class manager the free Tuition Class Manager grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud database across your own devices",
+        "A live parent view of attendance and fees",
+        "Online fee collection",
+        "Automated parent messaging",
+        "Reporting across batches"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-pharmacy",
+      "name": "Setu Pharmacy",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid medical-store product the Free Pharmacy POS grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud batch and expiry stock, shared across counters",
+        "Several counters billing at the same time",
+        "Distributor purchase and scheme-goods sync",
+        "Multi-branch stock transfers",
+        "Chain-wide GST and margin reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-rental",
+      "name": "Setu Rental",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid hire product the Free Rental & Hire Book grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud availability shared across branches",
+        "Crew logins for dispatch and returns",
+        "Stock transfers between branches",
+        "Customer portal for quotes and confirmations",
+        "Utilisation and return-on-cost reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-repair",
+      "name": "Setu Repair",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid job-card product the Free Repair Job Card grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud job cards and intake photos",
+        "Technician logins with per-user throughput",
+        "Every branch's board on one screen",
+        "Parts stock shared across branches",
+        "Warranty and margin reporting across the chain"
       ],
       "cta": {
         "label": "Get notified at launch",

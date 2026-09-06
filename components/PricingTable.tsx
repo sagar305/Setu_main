@@ -127,6 +127,18 @@ export function PricingTable({ content }: { content: PricingContent }) {
                 ))}
               </ul>
 
+              {plan.paidSoon && (
+                <div className="mt-5 rounded-xl border border-muted-line/30 bg-cream/60 p-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-warm">
+                    Paid product coming soon
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-ink/80">
+                    <span className="font-semibold text-ink">{plan.paidSoon.name}</span> —{" "}
+                    {plan.paidSoon.note} Everything above stays free.
+                  </p>
+                </div>
+              )}
+
               <Link
                 href={plan.cta.href}
                 className={`mt-6 rounded-full px-5 py-2.5 text-center text-sm font-semibold transition ${

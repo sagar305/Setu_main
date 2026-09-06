@@ -22,18 +22,28 @@
       "href": "#tools"
     }
   },
-  "tools": {
-    "eyebrow": "Free Tools",
-    "headline": "Free tools to run your business",
-    "subtext": "No signup, no install — start using them right in your browser.",
+  "products": {
+    "eyebrow": "Products",
+    "headline": "Software for how your business actually runs",
+    "subtext": "One paid product, the rest free forever — all of them open in a browser with nothing to install.",
     "cards": [
       {
-        "id": "browser-pos",
-        "name": "Browser Based POS",
-        "tagline": "Billing, right in your browser",
-        "description": "A free, no-install point of sale that runs in any browser — start billing in minutes with nothing to download.",
+        "id": "qr-menu",
+        "name": "Setu QR Menu",
+        "tagline": "A QR code that never needs reprinting",
+        "description": "Your menu lives online and the printed code holds a permanent link — change a price or mark a dish sold out and the code on your tables keeps working.",
         "cta": {
-          "label": "Try Browser POS",
+          "label": "Explore Setu QR Menu",
+          "href": "/products/qr-menu"
+        }
+      },
+      {
+        "id": "browser-pos",
+        "name": "Browser Based Retail POS",
+        "tagline": "Billing, right in your browser",
+        "description": "A free, no-install point of sale for shops — billing, products, inventory and thermal receipts, working offline with no login.",
+        "cta": {
+          "label": "Open the Retail POS",
           "href": "/products/browser-based-pos"
         }
       },
@@ -43,8 +53,66 @@
         "tagline": "A restaurant POS, free",
         "description": "Tables, kitchen tickets, split bills and GST — a full dining-room till that runs in your browser with no login.",
         "cta": {
-          "label": "Try Free Dine",
+          "label": "Open Free Dine",
           "href": "/products/free-restaurant-pos"
+        }
+      },
+      {
+        "id": "free-tuition",
+        "name": "Tuition Class Manager",
+        "tagline": "Attendance, fees and parent reminders",
+        "description": "Batches, daily attendance, monthly fees that add themselves up and WhatsApp reminders to parents — free, and it works offline.",
+        "cta": {
+          "label": "Open the Class Manager",
+          "href": "/products/free-tuition-software"
+        }
+      },
+      {
+        "id": "free-repair",
+        "name": "Free Repair Job Card",
+        "tagline": "A condition record that settles disputes",
+        "description": "Photograph and sign off a device's condition at intake, then track every job on one board that ages to amber and red.",
+        "cta": {
+          "label": "Open the Job Card",
+          "href": "/products/free-repair-shop-software"
+        }
+      },
+      {
+        "id": "free-clinic",
+        "name": "Free Clinic Manager",
+        "tagline": "Prescriptions, patients and the front desk",
+        "description": "Prescriptions printed as sharp selectable text, patient records with vitals, appointments on a live day screen and UPI receipts.",
+        "cta": {
+          "label": "Open the Clinic Manager",
+          "href": "/products/free-clinic-software"
+        }
+      },
+      {
+        "id": "more",
+        "name": "More products",
+        "tagline": "Everything we have built",
+        "description": "Pharmacy billing, hire books, token displays and the paid products still in development — the full list lives here.",
+        "variant": "more",
+        "cta": {
+          "label": "See all products",
+          "href": "/products"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "eyebrow": "Free Tools",
+    "headline": "Free tools to run your business",
+    "subtext": "No signup, no install — start using them right in your browser.",
+    "cards": [
+      {
+        "id": "invoice-generator",
+        "name": "Invoice Generator",
+        "tagline": "GST invoices in a minute",
+        "description": "Build a GST invoice with CGST/SGST breakup, amount in words and a UPI QR to pay from, then download the PDF — nothing leaves your browser.",
+        "cta": {
+          "label": "Create an invoice",
+          "href": "/tools/invoice-generator"
         }
       },
       {
@@ -53,26 +121,26 @@
         "tagline": "Your menu in a QR code",
         "description": "Build your menu and get a print-ready QR code — the entire menu lives inside the QR itself, no hosting needed.",
         "cta": {
-          "label": "Create QR Menu",
+          "label": "Create a QR menu",
           "href": "/tools/qr-menu-generator"
         }
       },
       {
-        "id": "invoice-generator",
-        "name": "Invoice Generator",
-        "tagline": "GST-ready invoices",
-        "description": "Create professional, GST-compliant invoices in minutes — fill, customise and download as PDF. No signup.",
+        "id": "customer-ledger",
+        "name": "Customer Ledger",
+        "tagline": "Udhaar, without the notebook",
+        "description": "Track what every customer owes you, record payments against it and send a WhatsApp reminder with the running balance.",
         "cta": {
-          "label": "Create Invoice",
-          "href": "/tools/invoice-generator"
+          "label": "Open the Ledger",
+          "href": "/tools/customer-ledger"
         }
       },
       {
         "id": "more",
-        "variant": "more",
         "name": "More free tools",
-        "tagline": "Explore the full toolkit",
-        "description": "UPI QR, barcodes, stock and purchase registers, cash book, customer ledger and more — all free.",
+        "tagline": "Fifty-odd tools, all free",
+        "description": "Quotations, stock registers, cash books, balance sheets, label printing and more — every one of them free and offline.",
+        "variant": "more",
         "cta": {
           "label": "See all tools",
           "href": "/tools"

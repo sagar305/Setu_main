@@ -22,9 +22,10 @@ const content = {
   ...rawContent,
   plans: rawContent.plans.filter((plan) => {
     if (plan.slug === "free-token") return tokenSystemEnabled();
-    if (plan.slug === "free-rental") return rentalSoftwareEnabled();
-    if (plan.slug === "free-pharmacy") return pharmacySoftwareEnabled();
-    if (plan.slug === "free-repair") return repairSoftwareEnabled();
+    if (plan.slug === "free-rental" || plan.slug === "setu-rental") return rentalSoftwareEnabled();
+    if (plan.slug === "free-pharmacy" || plan.slug === "setu-pharmacy")
+      return pharmacySoftwareEnabled();
+    if (plan.slug === "free-repair" || plan.slug === "setu-repair") return repairSoftwareEnabled();
     return true;
   }),
 };
