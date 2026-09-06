@@ -12,7 +12,7 @@
   "hero": {
     "eyebrow": "Setu for your business",
     "headline": "Business software built for how you actually work",
-    "subheadline": "Setu builds operational software for businesses globally — starting with restaurants, expanding to every industry.",
+    "subheadline": "Billing, stock, patients and classes — free software that runs in your browser, with nothing to install and no signup.",
     "primaryCta": {
       "label": "Explore products",
       "href": "/products"
@@ -75,16 +75,6 @@
         "cta": {
           "label": "Open the Job Card",
           "href": "/products/free-repair-shop-software"
-        }
-      },
-      {
-        "id": "free-clinic",
-        "name": "Free Clinic Manager",
-        "tagline": "Prescriptions, patients and the front desk",
-        "description": "Prescriptions printed as sharp selectable text, patient records with vitals, appointments on a live day screen and UPI receipts.",
-        "cta": {
-          "label": "Open the Clinic Manager",
-          "href": "/products/free-clinic-software"
         }
       },
       {
