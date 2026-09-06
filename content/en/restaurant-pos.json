@@ -1,13 +1,13 @@
 {
   "seo": {
     "title": "Setu Dine — Restaurant POS & Billing Software",
-    "description": "Setu Dine is cloud-based restaurant management software — tax-compliant billing, kitchen order tracking and multi-outlet dashboards. Book a free demo.",
+    "description": "Setu Dine is cloud-based restaurant management software — tax-compliant billing, kitchen order tracking and multi-outlet dashboards. In development.",
     "keywords": ["Setu Dine", "restaurant POS India", "restaurant billing software", "restaurant management software", "kitchen order management", "multi outlet restaurant software", "cloud POS for restaurants"]
   },
   "hero": {
-    "eyebrow": "Setu Dine — Live",
+    "eyebrow": "Setu Dine — In development",
     "headline": "Restaurant Management Software for India & Global Operators",
-    "subheadline": "Restaurant management, done right: billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain, in India and worldwide."
+    "subheadline": "Restaurant management, done right: billing, kitchen workflow, table management, multi-outlet dashboards, customer management, coupons and a built-in tax engine — everything a restaurant needs to run smoothly, from a single outlet to a full chain. Still in development, so there is no pricing to quote yet. Here is what we are building."
   },
   "showcase": {
     "eyebrow": "Inside Setu Dine",
@@ -76,37 +76,6 @@
       "body": "Customers scan a QR code at the table to track their order status live and call a waiter for help, no app or login needed."
     }
   ],
-  "pricing": {
-    "badge": "First month free",
-    "title": "Free for a month. Then one price for the whole business.",
-    "subtitle": "Not per outlet, not per till. One subscription covers your entire business, whether you run one outlet or twenty.",
-    "freeDuration": "for the first month",
-    "scopeNote": "One business account. Every outlet, every user, everything below included.",
-    "note": "Prices include GST and are charged only after your free month ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
-    "plans": [
-      {
-        "region": "India",
-        "monthlyLabel": "₹499",
-        "yearlyLabel": "₹4,999",
-        "saveLabel": "Save ₹989 a year"
-      },
-      {
-        "region": "Rest of the world",
-        "monthlyLabel": "$4.99",
-        "yearlyLabel": "$49.99",
-        "saveLabel": "Save $9.89 a year"
-      }
-    ],
-    "includes": [
-      "Billing with a built-in tax engine",
-      "Kitchen order tickets and routing",
-      "Table and floor management",
-      "Multi-outlet dashboards",
-      "Customer management",
-      "Coupons and discounts"
-    ],
-    "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Dine" }
-  },
   "faq": {
     "headline": "Frequently asked questions",
     "items": [
@@ -140,17 +109,21 @@
       },
       {
         "question": "How do I get started with Setu Dine?",
-        "answer": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting for your restaurant."
+        "answer": "Setu Dine is still in development, so there is nothing to sign up for yet. Tell us about your restaurant and we will get in touch as soon as it launches. In the meantime, Free Dine is a complete dining-room till you can open right now — free forever, no signup."
       },
       {
         "question": "How is Setu Dine different from other restaurant POS systems?",
         "answer": "Setu Dine is built from the ground up for how restaurants actually operate in India and globally — local tax rules, local payment methods and multi-outlet operations are defaults, not add-ons. Every feature exists because a real restaurant owner needed it, not because it was on a feature checklist."
+      },
+      {
+        "question": "What does Setu Dine cost?",
+        "answer": "Setu Dine is not on sale yet, so there is no price to quote. Pricing will be published on the pricing page when it launches. Free Dine, the browser restaurant POS, is free forever."
       }
     ]
   },
   "cta": {
-    "headline": "See Setu Dine running in your restaurant",
-    "subtext": "Book a free 30-minute demo and we'll walk you through billing, kitchen workflow and multi-outlet reporting.",
-    "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Dine" }
+    "headline": "Want early access to Setu Dine?",
+    "subtext": "Tell us about your restaurant and we'll notify you as soon as Setu Dine launches.",
+    "cta": { "label": "Get notified", "href": "/contact" }
   }
 }

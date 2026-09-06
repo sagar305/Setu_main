@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Setu Technology | Business Software Built for Every Operator",
-    "description": "Setu — bridge for your business. Operational software built for how businesses actually run, starting with Setu Dine for restaurants. Retail and clinics next.",
+    "description": "Setu — bridge for your business. Free browser software built for how businesses actually run: a POS, a restaurant till, a clinic manager and calculators.",
     "keywords": [
       "Setu Technology",
       "business management software India",
@@ -158,11 +158,11 @@
       },
       {
         "question": "What products does Setu offer?",
-        "answer": "Setu Dine for restaurant billing and kitchen workflow, Setu Queue for quick service counters and food courts, Setu QR Menu for digital menus, and two free products that run in your browser — the Browser Based POS for shops and Free Dine for restaurants."
+        "answer": "Free browser products you can open right now — the Browser Based POS for shops, Free Dine for restaurants, the Bank Statement Analyzer, the Tuition Class Manager and the Clinic Manager — plus Setu QR Menu for digital menus. Setu Dine, Setu Queue and Setu Retail are in development."
       },
       {
         "question": "Who is Setu Dine built for?",
-        "answer": "Restaurants running anything from a single outlet to a full chain. It covers billing, kitchen order tickets, table management, coupons and multi-outlet dashboards with a built-in tax engine."
+        "answer": "Restaurants running anything from a single outlet to a full chain. It covers billing, kitchen order tickets, table management, coupons and multi-outlet dashboards with a built-in tax engine. It is still in development — Free Dine is the restaurant till you can use today."
       },
       {
         "question": "Are Setu's calculators and tools free?",
@@ -180,10 +180,10 @@
   },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
-    "subtext": "Book a free 30-minute demo. We'll show you exactly how Setu works for your business.",
+    "subtext": "Tell us what you run and we'll point you at the tool that fits — every one of them is free to open right now.",
     "cta": {
-      "label": "Book your free demo",
-      "href": "/book-demo?product=Setu%20Dine"
+      "label": "Talk to us",
+      "href": "/contact"
     }
   }
 }

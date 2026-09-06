@@ -10,6 +10,11 @@
  * A price that disagrees between the product page and the pricing page is a
  * commercial problem, not a typo, so this fails the build rather than warning.
  *
+ * A product that is not on sale has neither: no `price` in pricing.json and no
+ * `pricing` block on its page. That pair is fine — half of it is not. A page
+ * quoting a price the pricing page does not publish, or a plan whose price
+ * never reaches the page a customer reads, both fail here.
+ *
  * Run: node scripts/check-pricing.mjs   (wired into `npm run build`)
  */
 import fs from "node:fs";
@@ -34,6 +39,8 @@ function formatAmount(amount, regionId) {
 }
 
 const problems = [];
+/** Products deliberately carrying no price at all, on either side. */
+let unpriced = 0;
 
 for (const [file, slug] of Object.entries(PRODUCT_FILES)) {
   const plan = pricing.plans.find((p) => p.slug === slug);
@@ -41,14 +48,22 @@ for (const [file, slug] of Object.entries(PRODUCT_FILES)) {
     problems.push(`${file}: no plan "${slug}" in pricing.json`);
     continue;
   }
+  const block = JSON.parse(fs.readFileSync(file, "utf8")).pricing;
+
   if (!plan.price) {
-    problems.push(`${file}: plan "${slug}" has no price in pricing.json`);
+    // Not on sale. The page must not quote a price either.
+    if (block) {
+      problems.push(
+        `${file}: shows a pricing block, but plan "${slug}" has no price in pricing.json`,
+      );
+    } else {
+      unpriced += 1;
+    }
     continue;
   }
 
-  const block = JSON.parse(fs.readFileSync(file, "utf8")).pricing;
   if (!block) {
-    problems.push(`${file}: no pricing block to check`);
+    problems.push(`${file}: no pricing block to check, but plan "${slug}" is priced`);
     continue;
   }
 
@@ -88,6 +103,8 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
+const total = Object.keys(PRODUCT_FILES).length;
 console.log(
-  `check-pricing: ${Object.keys(PRODUCT_FILES).length} product pages agree with pricing.json.`,
+  `check-pricing: ${total} product pages agree with pricing.json ` +
+    `(${total - unpriced} priced, ${unpriced} not on sale).`,
 );

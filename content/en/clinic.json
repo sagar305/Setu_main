@@ -13,7 +13,7 @@
     "headline": "What we're building",
     "paragraphs": [
       "Setu Clinic brings the same operator-first approach behind Setu Dine to clinics — appointment scheduling that doesn't double-book, patient records your front desk can actually find, and a front-desk workflow built around how a real clinic day moves.",
-      "We're building it on the same multi-outlet architecture already running in Setu Dine, so multi-location clinics get visibility across every branch from day one."
+      "We're building it on the same multi-outlet architecture as Setu Dine, so multi-location clinics get visibility across every branch from day one."
     ]
   },
   "cta": {
@@ -22,7 +22,7 @@
     "cta": { "label": "Get notified", "href": "/contact" }
   },
   "crossSell": {
-    "text": "Running a restaurant instead? Setu Dine is live today.",
-    "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+    "text": "Running a clinic? The Free Clinic Manager is ready to use today, free forever.",
+    "cta": { "label": "Open the Free Clinic Manager", "href": "/products/free-clinic-software" }
   }
 }
