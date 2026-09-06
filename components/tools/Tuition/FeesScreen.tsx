@@ -41,6 +41,8 @@ import {
 } from "@/components/tools/FreePos/ui";
 import { feeReceiptDoc, shareUrlFor } from "./share";
 import { SendQueue } from "./SendQueue";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 type Row = { student: Student; balance: StudentBalance };
 
@@ -151,6 +153,8 @@ export function FeesScreen() {
     setTimeout(() => setGenerating(0), 3000);
   };
 
+  const review = useReviewPrompt();
+
   const afterPayment = (student: Student, payment: FeePayment) => {
     // Balance recomputed with the new payment included.
     const nextBalance = studentBalance(student.id, dues, [...payments, payment]);
@@ -171,6 +175,8 @@ export function FeesScreen() {
         }),
       },
     ]);
+    // Fee collected and the receipt raised: the collection cycle is finished.
+    review.complete();
   };
 
   return (
@@ -449,6 +455,12 @@ export function FeesScreen() {
         messages={queue ?? []}
         onClose={() => setQueue(null)}
         onSent={() => {}}
+      />
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
       />
     </div>
   );
