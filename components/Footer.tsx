@@ -60,6 +60,12 @@ export function Footer({ site }: { site: SiteContent }) {
             <Link href="/sitemap" className="transition hover:text-saffron">
               Sitemap
             </Link>
+            <Link href="/privacy" className="transition hover:text-saffron">
+              Privacy
+            </Link>
+            <Link href="/terms" className="transition hover:text-saffron">
+              Terms
+            </Link>
           </div>
         </div>
       </div>

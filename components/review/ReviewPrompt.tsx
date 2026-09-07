@@ -1,8 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Star, X } from "lucide-react";
 import { GOOGLE_REVIEW_URL } from "@/lib/review";
+import {
+  useReviewFunnel,
+  type DeclineMethod,
+  type ReviewVariant,
+} from "@/components/review/useReviewFunnel";
 
 const HEADLINE = "Did this help?";
 const BODY =
@@ -14,7 +19,7 @@ function ReviewActions({
   declineLabel,
 }: {
   onAccept: () => void;
-  onDecline: () => void;
+  onDecline: (method: DeclineMethod) => void;
   declineLabel: string;
 }) {
   return (
@@ -24,6 +29,7 @@ function ReviewActions({
         target="_blank"
         rel="noreferrer"
         onClick={onAccept}
+        data-analytics="review_google_link"
         className="inline-flex items-center gap-2 rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
       >
         <Star className="h-4 w-4" aria-hidden="true" />
@@ -31,7 +37,7 @@ function ReviewActions({
       </a>
       <button
         type="button"
-        onClick={onDecline}
+        onClick={() => onDecline("button")}
         className="rounded-full px-4 py-2.5 text-sm font-semibold text-muted transition hover:text-ink"
       >
         {declineLabel}
@@ -56,6 +62,22 @@ export function ReviewPrompt({
   onDecline: () => void;
   className?: string;
 }) {
+  const VARIANT: ReviewVariant = "inline";
+  const { trackAccept, trackDecline } = useReviewFunnel(open, VARIANT);
+
+  const handleAccept = useCallback(() => {
+    trackAccept();
+    onAccept();
+  }, [trackAccept, onAccept]);
+
+  const handleDecline = useCallback(
+    (method: DeclineMethod) => {
+      trackDecline(method);
+      onDecline();
+    },
+    [trackDecline, onDecline]
+  );
+
   if (!open) return null;
 
   return (
@@ -69,7 +91,7 @@ export function ReviewPrompt({
         </div>
         <button
           type="button"
-          onClick={onDecline}
+          onClick={() => handleDecline("close_x")}
           aria-label="Dismiss the review request"
           className="-mr-1 -mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-cream hover:text-ink"
         >
@@ -77,7 +99,7 @@ export function ReviewPrompt({
         </button>
       </div>
 
-      <ReviewActions onAccept={onAccept} onDecline={onDecline} declineLabel="No thanks" />
+      <ReviewActions onAccept={handleAccept} onDecline={handleDecline} declineLabel="No thanks" />
     </div>
   );
 }
@@ -99,14 +121,30 @@ export function ReviewPromptDialog({
   onAccept: () => void;
   onDecline: () => void;
 }) {
+  const VARIANT: ReviewVariant = "dialog";
+  const { trackAccept, trackDecline } = useReviewFunnel(open, VARIANT);
+
+  const handleAccept = useCallback(() => {
+    trackAccept();
+    onAccept();
+  }, [trackAccept, onAccept]);
+
+  const handleDecline = useCallback(
+    (method: DeclineMethod) => {
+      trackDecline(method);
+      onDecline();
+    },
+    [trackDecline, onDecline]
+  );
+
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onDecline();
+      if (event.key === "Escape") handleDecline("escape");
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, onDecline]);
+  }, [open, handleDecline]);
 
   if (!open) return null;
 
@@ -114,7 +152,7 @@ export function ReviewPromptDialog({
     <div
       className="fixed inset-0 z-[100] flex items-end justify-center bg-ink/40 p-4 sm:items-center"
       onClick={(event) => {
-        if (event.target === event.currentTarget) onDecline();
+        if (event.target === event.currentTarget) handleDecline("backdrop");
       }}
     >
       <div
@@ -134,7 +172,7 @@ export function ReviewPromptDialog({
           </div>
           <button
             type="button"
-            onClick={onDecline}
+            onClick={() => handleDecline("close_x")}
             aria-label="Dismiss the review request"
             className="-mr-1 -mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-cream hover:text-ink"
           >
@@ -145,8 +183,8 @@ export function ReviewPromptDialog({
         <p className="mt-4 text-sm leading-relaxed text-muted">{BODY}</p>
 
         <ReviewActions
-          onAccept={onAccept}
-          onDecline={onDecline}
+          onAccept={handleAccept}
+          onDecline={handleDecline}
           declineLabel="Maybe later"
         />
       </div>

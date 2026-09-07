@@ -9,6 +9,7 @@ import { getSiteContent } from "@/lib/content";
 import { LanguageProvider } from "@/lib/i18n";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             calculators or tools, which keeps the on-device promise intact. */}
         <Analytics />
         <SpeedInsights />
+        <AnalyticsProvider />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0FTL28EE7E"
           strategy="afterInteractive"
@@ -114,7 +116,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             function gtag(){window.dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-0FTL28EE7E');
+            // Page views are fired by AnalyticsProvider on every route
+            // change instead. Left to itself the tag counts only the first
+            // hard load and misses every <Link> navigation after it.
+            gtag('config', 'G-0FTL28EE7E', { send_page_view: false });
           `}
         </Script>
       </body>
