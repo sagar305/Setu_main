@@ -56,6 +56,25 @@ export function openAnalyticsDb(): Promise<IDBDatabase | null> {
 
     request.onsuccess = () => {
       const db = request.result;
+
+      // A database that exists at the current version but is missing its
+      // stores can never be repaired by an upgrade, because no upgrade is due.
+      // Left alone it would make every write fail silently for the life of the
+      // browser profile, which is the one failure mode worse than collecting
+      // nothing: collecting nothing while appearing to work. Throw it away and
+      // build it again.
+      const intact =
+        db.objectStoreNames.contains(QUEUE_STORE) && db.objectStoreNames.contains(META_STORE);
+      if (!intact) {
+        db.close();
+        dbPromise = null;
+        const wipe = indexedDB.deleteDatabase(DB_NAME);
+        wipe.onsuccess = () => resolve(null);
+        wipe.onerror = () => resolve(null);
+        wipe.onblocked = () => resolve(null);
+        return;
+      }
+
       // Another tab upgrading or clearing the database invalidates our handle.
       db.onversionchange = () => {
         db.close();

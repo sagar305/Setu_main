@@ -54,6 +54,31 @@ export function setOptedOut(optedOut: boolean): void {
 }
 
 /**
+ * How long to gather events before sending.
+ *
+ * Long enough that a burst — a page view, then the clicks that follow it —
+ * travels as one request rather than several, short enough that a visitor who
+ * leaves immediately has already been counted.
+ */
+const FLUSH_DEBOUNCE_MS = 2_000;
+
+let flushTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * Ask for a flush soon.
+ *
+ * Without this an event waits for the provider's interval tick, which is up to
+ * half a minute of exposure to a closed tab for no reason.
+ */
+function scheduleFlush(): void {
+  if (flushTimer !== null) return;
+  flushTimer = setTimeout(() => {
+    flushTimer = null;
+    void flush();
+  }, FLUSH_DEBOUNCE_MS);
+}
+
+/**
  * Queue one event.
  *
  * Fire and forget by design: the storage write is not awaited, so a click
@@ -83,6 +108,7 @@ export function trackEvent(name: string, props: EventProps = {}): void {
     };
 
     void enqueue(event);
+    scheduleFlush();
   } catch {
     // An event that cannot be built is not worth a broken page.
   }
