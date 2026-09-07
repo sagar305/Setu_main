@@ -48,6 +48,8 @@ import {
 import type { NavigateFn } from "./nav";
 import { MedicinePicker } from "./MedicinePicker";
 import { RxLineRow } from "./RxLineRow";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 
@@ -285,6 +287,8 @@ export function ConsultScreen({
     }
   };
 
+  const review = useReviewPrompt();
+
   const handleFinalise = async () => {
     if (!visit) return;
     await saveVisit(visit.id, draft);
@@ -293,6 +297,8 @@ export function ConsultScreen({
     const adHoc = medicines.find((line) => !line.medicineId && line.name.trim());
     setOfferMedicine(adHoc ?? null);
     setDoneOpen(true);
+    // Prescription written and the visit closed: the consult cycle is finished.
+    review.complete();
   };
 
   const handleBookFollowUp = async () => {
@@ -882,6 +888,12 @@ export function ConsultScreen({
         doc={sharing}
         title="Share prescription"
         recipientLabel="patient"
+      />
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
       />
     </div>
   );

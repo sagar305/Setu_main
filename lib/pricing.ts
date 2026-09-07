@@ -26,6 +26,12 @@ export type PricingPlan = {
   /** Null for products that are not yet purchasable. */
   price: Record<PricingRegionId, PricingAmounts> | null;
   features: string[];
+  /**
+   * The separate paid product this free one leads to, where there is one.
+   * It is a different, larger product rather than a paid tier of this plan,
+   * so the free plan's own price stays ₹0 and its features stay free.
+   */
+  paidSoon?: { name: string; note: string };
   cta: { label: string; href: string };
 };
 

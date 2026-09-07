@@ -27,6 +27,8 @@ import { dbPut } from "@/lib/pos/db";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 const plusDays = (days: number) => {
@@ -164,6 +166,8 @@ export function QuotationGeneratorTool() {
     setSavedMsg(true);
   };
 
+  const review = useReviewPrompt();
+
   const printQuote = (q?: Quotation) => {
     const quote = q ?? buildQuotation();
     const money = (v: number) => formatMoney(v, currency);
@@ -255,6 +259,8 @@ export function QuotationGeneratorTool() {
     if (!win) return;
     win.document.write(html);
     win.document.close();
+    // The quotation is printed or saved: the cycle is finished.
+    review.complete();
   };
 
   const setStatus = async (q: Quotation, status: QuotationStatus) =>
@@ -501,6 +507,12 @@ export function QuotationGeneratorTool() {
         doc={sharing}
         title="Share quotation"
         onSaveUpiDefault={saveUpiDefault}
+      />
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
       />
     </div>
   );

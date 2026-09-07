@@ -441,7 +441,7 @@ const FAQ_ITEMS = [
   {
     question: "Is this really free, or is it a trial?",
     answer:
-      "It is free forever for one restaurant on one device, and nothing is switched off after a month. Setu Dine, the paid product at ₹499/month, is the one that runs across several outlets, devices and staff logins — the limit is capacity, never features.",
+      "It is free forever for one restaurant on one device, and nothing is switched off after a month. Setu Dine, still in development, is the one that will run across several outlets, devices and staff logins — the limit is capacity, never features.",
   },
   {
     question: "Do I need to create an account?",
@@ -524,9 +524,9 @@ const FAQ_ITEMS = [
       "The bill counts as a sale on the day it was rung up, because the food left the kitchen that day. What changes is the cash: the reports show what is owed on account and what is held as booking advances separately from the takings, so you can tell the difference between a good night and a night everyone put on a tab.",
   },
   {
-    question: "Can I move my data to paid Setu Dine later?",
+    question: "Can I move my data to Setu Dine later?",
     answer:
-      "Yes. Your menu exports as a CSV and your whole workspace exports as a JSON backup, so a restaurant that outgrows the free version can bring its menu and history along rather than starting over.",
+      "Yes. Your menu exports as a CSV and your whole workspace exports as a JSON backup, so a restaurant that outgrows the free version can bring its menu and history along rather than starting over. Setu Dine is still in development, and nothing here depends on it launching.",
   },
 ];
 
@@ -744,7 +744,8 @@ export default function FreeRestaurantPosPage() {
               </h2>
               <p className="mx-auto mt-3 max-w-2xl text-lg text-muted">
                 The line is capacity, never features. Everything a single restaurant needs is here
-                and stays here. Setu Dine is the one that runs across outlets, devices and staff.
+                and stays here. Setu Dine, still in development, is the one that will run across
+                outlets, devices and staff.
               </p>
             </div>
           </FadeIn>
@@ -756,7 +757,7 @@ export default function FreeRestaurantPosPage() {
                   <tr className="border-b border-muted-line/20 bg-cream-paper text-left">
                     <th className="px-5 py-3 font-bold text-ink">Feature</th>
                     <th className="px-5 py-3 font-bold text-ink">Free Dine</th>
-                    <th className="px-5 py-3 font-bold text-ink">Setu Dine (₹499/mo)</th>
+                    <th className="px-5 py-3 font-bold text-ink">Setu Dine (in development)</th>
                   </tr>
                 </thead>
                 <tbody>

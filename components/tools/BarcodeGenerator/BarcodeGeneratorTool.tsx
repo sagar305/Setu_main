@@ -15,6 +15,8 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useI18n } from "@/lib/i18n";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 type BarcodeKind = "CODE128" | "EAN13" | "QR";
 
@@ -71,6 +73,8 @@ export function BarcodeGeneratorTool() {
   const fileBase = () =>
     (label || value || "barcode").replace(/[^\w-]+/g, "-").slice(0, 40) || "barcode";
 
+  const review = useReviewPrompt();
+
   const downloadPng = () => {
     const canvas = canvasRef.current;
     if (!canvas || !value.trim() || error) return;
@@ -78,6 +82,8 @@ export function BarcodeGeneratorTool() {
     link.download = `${fileBase()}.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
+    // The label is on their disk: the cycle is finished.
+    review.complete();
   };
 
   const downloadPdf = () => {
@@ -95,6 +101,7 @@ export function BarcodeGeneratorTool() {
     }
     doc.addImage(canvas.toDataURL("image/png"), "PNG", (pageW - imgW) / 2, y, imgW, imgH);
     doc.save(`${fileBase()}.pdf`);
+    review.complete();
   };
 
   const pickProduct = (id: string) => {
@@ -179,6 +186,12 @@ export function BarcodeGeneratorTool() {
           </div>
         </Card>
       </div>
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
+      />
     </div>
   );
 }

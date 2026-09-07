@@ -5,6 +5,8 @@ import { Download, Copy, Check, Upload, X } from "lucide-react";
 import { isValidUPIId, generateUPIUrl } from "@/lib/upi";
 import { UPIQRCode } from "../UpiQrGenerator/UPIQRCode";
 import { ShareButton } from "@/components/tools/ShareButton";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 const SETU_LOGO_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><rect width="120" height="120" rx="20" fill="#ECEAE3"/><path d="M18 98 L18 56 C18 40 28 31 46 31 L74 31 C92 31 102 40 102 56 L102 98" fill="none" stroke="#26306B" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -131,6 +133,8 @@ export function UpiQrGeneratorTool() {
     }
   };
 
+  const review = useReviewPrompt();
+
   const handleDownloadQR = async () => {
     const canvas = await renderQrCanvas();
     if (!canvas) return;
@@ -139,6 +143,8 @@ export function UpiQrGeneratorTool() {
     link.href = canvas.toDataURL("image/png");
     link.download = `upi-qr-${Date.now()}.png`;
     link.click();
+    // The QR is downloaded: the cycle is finished.
+    review.complete();
   };
 
   const generateShareFiles = async () => {
@@ -373,6 +379,12 @@ export function UpiQrGeneratorTool() {
           </div>
         )}
       </div>
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
+      />
     </div>
   );
 }

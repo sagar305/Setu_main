@@ -51,6 +51,8 @@ import {
 import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 const STORAGE_KEY = "setu-qr-menu-generator-v1";
 
@@ -414,6 +416,8 @@ export function QrMenuGeneratorTool() {
     }
   };
 
+  const review = useReviewPrompt();
+
   const handleDownloadQR = async () => {
     const canvas = await renderQrCanvas();
     if (!canvas) return;
@@ -422,6 +426,8 @@ export function QrMenuGeneratorTool() {
     const slug = menu.restaurantName.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-") || "menu";
     link.download = `${slug}-menu-qr.png`;
     link.click();
+    // The print-ready QR is downloaded: the cycle is finished.
+    review.complete();
   };
 
   const generateShareFiles = async () => {
@@ -1077,6 +1083,12 @@ export function QrMenuGeneratorTool() {
           </div>
         </div>
       </div>
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
+      />
     </div>
   );
 }

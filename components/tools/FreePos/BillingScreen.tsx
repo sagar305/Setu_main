@@ -26,6 +26,8 @@ import type { NavigateFn } from "./nav";
 import { ReceiptModal } from "./ReceiptModal";
 import { CustomerFormModal } from "./CustomersScreen";
 import { EmptyState, Field, Modal, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 /** Sentinel payment id for udhaar sales (never stored as a payment method). */
 const CREDIT_PAYMENT_ID = "__customer_credit__";
@@ -138,6 +140,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     const product = products.find((p) => p.id === line.productId);
     return product?.trackStock && line.quantity > product.stock;
   });
+
+  const review = useReviewPrompt();
 
   const handleCharge = async () => {
     setError("");
@@ -600,8 +604,18 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       <ReceiptModal
         order={completedOrder}
         open={completedOrder !== null}
-        onClose={() => setCompletedOrder(null)}
+        onClose={() => {
+          setCompletedOrder(null);
+          // The receipt is done with: the sale cycle is finished.
+          review.complete();
+        }}
         title="Sale complete"
+      />
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
       />
 
       {/* Hold current cart */}
