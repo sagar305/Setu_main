@@ -8,10 +8,10 @@
     "schemaDescription": "The operating system for modern QSRs — counter billing, kitchen display, recipe-driven inventory and real-time food cost management for cafés, QSR chains, cloud kitchens and food courts."
   },
   "hero": {
-    "eyebrow": "Setu Queue — Live",
+    "eyebrow": "Setu Queue — In development",
     "headline": "The operating system for modern QSRs",
-    "subheadline": "Run your counter, kitchen, recipes, inventory and customer pickup from one platform.\nKnow your food cost in real time.",
-    "primaryCta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" },
+    "subheadline": "Run your counter, kitchen, recipes, inventory and customer pickup from one platform.\nKnow your food cost in real time. Still in development — here is what we are building.",
+    "primaryCta": { "label": "Get notified at launch", "href": "/contact" },
     "secondaryCta": { "label": "See how it works", "href": "#how-it-works" }
   },
   "builtFor": {
@@ -38,7 +38,7 @@
     "headline": "Most POS systems know what you sold. Setu Queue knows what it cost.",
     "subtext": "Other systems track products and prices. Setu Queue tracks ingredients, recipes and the actual cost of every item you sell — automatically, on every order.",
     "chain": ["Ingredient", "Recipe", "Inventory deduction", "Food cost", "Profit per item"],
-    "note": "No other QSR POS in India does this properly at this price point."
+    "note": "No other QSR POS in India does this properly."
   },
   "showcase": {
     "eyebrow": "Inside Setu Queue",
@@ -141,38 +141,7 @@
         "keyFeature": "Token system & pickup display"
       }
     ],
-    "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you."
-  },
-  "pricing": {
-    "badge": "First month free",
-    "title": "Free for a month. Then one price for the whole business.",
-    "subtitle": "Not per counter, not per outlet. One subscription covers your entire business, from a single kiosk to a full food court.",
-    "freeDuration": "for the first month",
-    "scopeNote": "One business account. Every counter, every user, everything below included.",
-    "note": "Prices include GST and are charged only after your free month ends. Annual billing works out to roughly two months free. We will tell you before anything is charged.",
-    "plans": [
-      {
-        "region": "India",
-        "monthlyLabel": "₹499",
-        "yearlyLabel": "₹4,999",
-        "saveLabel": "Save ₹989 a year"
-      },
-      {
-        "region": "Rest of the world",
-        "monthlyLabel": "$4.99",
-        "yearlyLabel": "$49.99",
-        "saveLabel": "Save $9.89 a year"
-      }
-    ],
-    "includes": [
-      "Counter billing built for speed",
-      "Token management",
-      "Kitchen display routing",
-      "Customer pickup display",
-      "Real-time food cost tracking",
-      "Sales and item reporting"
-    ],
-    "cta": { "label": "Book a free demo", "href": "/book-demo?product=Setu%20Queue" }
+    "footnote": "If your customers sit down and a staff member serves them — Setu Dine is built for you. If your customers order at the counter and collect their food — Setu Queue is built for you. Both are still in development."
   },
   "faq": {
     "headline": "Frequently asked questions",
@@ -206,14 +175,14 @@
         "answer": "They are separate products for different restaurant models. Setu Queue is for counter-service restaurants (QSRs, cafés, food courts, cloud kitchens) where customers order at the counter and wait for pickup. Setu Dine is for table-service restaurants where customers are seated and served by staff. You choose the one that matches your service model."
       },
       {
-        "question": "Is there a demo available?",
-        "answer": "Yes. Book a free 30-minute demo and we'll walk through counter billing, recipe costing, kitchen display and the pickup screen for your specific setup."
+        "question": "When can I start using Setu Queue?",
+        "answer": "Setu Queue is still in development, so it is not on sale and there is no pricing to quote yet. Tell us about your counter and we will get in touch as soon as it launches."
       }
     ]
   },
   "cta": {
-    "headline": "See Setu Queue running in your QSR",
-    "subtext": "Book a free 30-minute demo — we'll walk through counter billing, kitchen display, recipe costing and the pickup screen for your setup.",
-    "cta": { "label": "Book a demo", "href": "/book-demo?product=Setu%20Queue" }
+    "headline": "Want early access to Setu Queue?",
+    "subtext": "Tell us about your QSR, café or food court and we'll notify you as soon as Setu Queue launches.",
+    "cta": { "label": "Get notified", "href": "/contact" }
   }
 }

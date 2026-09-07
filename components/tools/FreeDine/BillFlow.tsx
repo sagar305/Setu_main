@@ -18,6 +18,8 @@ import {
   secondaryBtnClass,
   tapTargetClass,
 } from "./ui";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 type Step = "split" | "bills";
 
@@ -58,6 +60,8 @@ export function BillFlow({
     [bills, ticketId]
   );
 
+  const review = useReviewPrompt();
+
   const [step, setStep] = useState<Step>(ticketBills.length > 0 ? "bills" : "split");
   const [mode, setMode] = useState<SplitPlan["mode"]>("full");
   const [parts, setParts] = useState(2);
@@ -73,9 +77,11 @@ export function BillFlow({
   useEffect(() => {
     if (ticketBills.length === 0) return;
     if (ticket?.status === "settled") {
+      // Every part paid and the table freed: the service cycle is finished.
+      review.complete();
       onSettled();
     }
-  }, [onSettled, ticket?.status, ticketBills.length]);
+  }, [onSettled, review, ticket?.status, ticketBills.length]);
 
   const createBills = async () => {
     setBusy(true);
@@ -308,6 +314,12 @@ export function BillFlow({
           onClose={() => setPayingBill(null)}
         />
       )}
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
+      />
     </>
   );
 }
@@ -735,6 +747,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
           </button>
         </div>
       </div>
+
     </Modal>
   );
 }

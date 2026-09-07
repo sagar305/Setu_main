@@ -3,8 +3,7 @@
     "name": "Setu Technology",
     "tagline": "Setu for your business",
     "domain": "setutechnology.com",
-    "posUrl": "/products/restaurant-pos",
-    "posDemoUrl": "/book-demo?product=Setu%20Dine"
+    "posUrl": "/products/restaurant-pos"
   },
   "nav": {
     "links": [
@@ -38,8 +37,8 @@
       }
     ],
     "cta": {
-      "label": "Book a Demo",
-      "href": "/book-demo?product=Setu%20Dine"
+      "label": "Talk to us",
+      "href": "/contact"
     }
   },
   "footer": {
@@ -58,20 +57,20 @@
           },
 { "label": "Free Dine — Restaurant POS (Free)", "href": "/products/free-restaurant-pos" },
           {
-            "label": "Setu Dine",
-            "href": "/products/restaurant-pos"
+            "label": "Tuition Class Manager (Free)",
+            "href": "/products/free-tuition-software"
           },
           {
-            "label": "Setu Queue",
-            "href": "/products/queue"
+            "label": "Clinic Manager (Free)",
+            "href": "/products/free-clinic-software"
           },
           {
             "label": "Setu QR Menu",
             "href": "/products/qr-menu"
           },
           {
-            "label": "Setu Retail",
-            "href": "/products/retail"
+            "label": "All products",
+            "href": "/products"
           }
         ]
       },

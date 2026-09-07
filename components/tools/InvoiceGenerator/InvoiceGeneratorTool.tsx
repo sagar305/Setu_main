@@ -15,6 +15,8 @@ import { AccordionSection } from "./AccordionSection";
 import { ShareButton } from "@/components/tools/ShareButton";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
 import { exportInvoiceToPdf, generateInvoicePdfBlob } from "@/lib/pdf/exportInvoiceToPdf";
+import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 export function InvoiceGeneratorTool() {
   const {
@@ -129,6 +131,8 @@ export function InvoiceGeneratorTool() {
   const getExportElement = () =>
     document.querySelector('[data-preview="export"]') as HTMLElement | null;
 
+  const review = useReviewPrompt();
+
   const handleExportPDF = async () => {
     setIsExporting(true);
     setError(null);
@@ -140,6 +144,8 @@ export function InvoiceGeneratorTool() {
       }
 
       await exportInvoiceToPdf(data, exportElement);
+      // The invoice is on their disk: the cycle is finished.
+      review.complete();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to export PDF");
     } finally {
@@ -482,6 +488,12 @@ export function InvoiceGeneratorTool() {
           </div>
         </div>
       </div>
+
+      <ReviewPromptDialog
+        open={review.open}
+        onAccept={review.accept}
+        onDecline={review.decline}
+      />
     </div>
   );
 }

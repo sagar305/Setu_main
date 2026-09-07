@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getRestaurantPosContent } from "@/lib/content";
-import { getPricingPlan } from "@/lib/content";
-import { planOffers } from "@/lib/schema";
+import { quoteOffer } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { RestaurantPosShowcase } from "@/components/RestaurantPosShowcase";
 import { Faq } from "@/components/Faq";
-import { ProductPricing } from "@/components/ProductPricing";
 import { FadeIn } from "@/components/motion/FadeIn";
 
 const content = getRestaurantPosContent();
@@ -50,7 +48,11 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web, Android, iOS",
   description: content.seo.description,
-  offers: planOffers(getPricingPlan("setu-dine")!),
+  offers: quoteOffer({
+    url: "/contact",
+    description: "Setu Dine has not launched yet. Pricing will be announced at launch.",
+    availability: "PreOrder",
+  }),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",
@@ -93,12 +95,10 @@ export default function RestaurantPosPage() {
 
       <RestaurantPosShowcase features={content.features} />
 
-      <ProductPricing pricing={content.pricing} />
-
       <Faq headline={content.faq.headline} items={content.faq.items} />
 
-      {/* One restaurant on one device does not need a subscription — say so
-          plainly rather than making them find out after a demo call. */}
+      {/* Setu Dine is not something anyone can use yet, so point at the one that
+          is — plainly, rather than leaving a visitor with nothing to open. */}
       <section className="border-y border-muted-line/20 bg-cream-paper py-12">
         <div className="mx-auto max-w-2xl px-6 text-center">
           <h2 className="text-2xl font-bold tracking-tight text-ink">
@@ -106,8 +106,8 @@ export default function RestaurantPosPage() {
           </h2>
           <p className="mt-3 text-base leading-relaxed text-muted">
             Free Dine is a complete restaurant POS for one outlet on one device — tables, kitchen
-            tickets, split bills and GST — free forever, with no signup. Setu Dine is what you move
-            to when you need several outlets, devices or staff logins.
+            tickets, split bills and GST — free forever, with no signup. It is ready today. Setu Dine
+            is what it grows into when you need several outlets, devices or staff logins.
           </p>
           <Link
             href="/products/free-restaurant-pos"

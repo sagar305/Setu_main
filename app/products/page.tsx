@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getProductsContent } from "@/lib/content";
-import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  repairSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
 
 const content = getProductsContent();
@@ -14,8 +19,14 @@ const content = getProductsContent();
  * it never disagree.
  */
 const visibleProducts = content.products.filter((product) => {
+  // A paid product with no page of its own travels with the free one it grows
+  // out of: announcing "Setu Pharmacy is coming" while the free Pharmacy POS is
+  // still unreleased would advertise a product nobody can see the shape of.
+  // Setu Queue is not in that group — it has had a live page all along.
   if (product.id === "free-token") return tokenSystemEnabled();
-  if (product.id === "free-rental") return rentalSoftwareEnabled();
+  if (product.id === "free-rental" || product.id === "rental") return rentalSoftwareEnabled();
+  if (product.id === "free-pharmacy" || product.id === "pharmacy") return pharmacySoftwareEnabled();
+  if (product.id === "free-repair" || product.id === "repair") return repairSoftwareEnabled();
   return true;
 });
 
@@ -69,9 +80,17 @@ const listedProducts: { name: string; path: string }[] = [
   ...(rentalSoftwareEnabled()
     ? [{ name: "Free Rental & Hire Book", path: "/products/free-rental-software" }]
     : []),
+  ...(pharmacySoftwareEnabled()
+    ? [{ name: "Free Pharmacy POS", path: "/products/free-pharmacy-software" }]
+    : []),
+  ...(repairSoftwareEnabled()
+    ? [{ name: "Free Repair Job Card", path: "/products/free-repair-shop-software" }]
+    : []),
   { name: "Setu Dine", path: "/products/restaurant-pos" },
   { name: "Setu Queue", path: "/products/queue" },
   { name: "Setu Retail", path: "/products/retail" },
+  { name: "Setu Tuition", path: "/products/tuition" },
+  { name: "Setu Clinic", path: "/products/clinic" },
 ];
 
 const itemListSchema = {
@@ -131,6 +150,18 @@ export default function ProductsPage() {
                       </li>
                     ))}
                   </ul>
+                )}
+
+                {"paidSoon" in product && product.paidSoon && (
+                  <div className="mt-6 rounded-xl border border-muted-line/30 bg-cream/60 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
+                      Paid product coming soon
+                    </p>
+                    <p className="mt-1 text-sm text-ink/80">
+                      <span className="font-semibold text-ink">{product.paidSoon.name}</span> —{" "}
+                      {product.paidSoon.note} Everything above stays free.
+                    </p>
+                  </div>
                 )}
 
                 <Link

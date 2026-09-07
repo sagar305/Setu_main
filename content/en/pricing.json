@@ -1,17 +1,18 @@
 {
   "seo": {
     "title": "Pricing | Setu Technology Plans for Every Business",
-    "description": "Pricing for Setu Dine, Setu Queue and Setu QR Menu, plus the free Browser Based POS and Free Dine. Free trials and per-business plans, all inclusive of GST.",
+    "description": "Pricing for Setu QR Menu, plus every free Setu product — the Browser Based POS, Free Dine, the Bank Statement Analyzer and more. Free forever, no signup.",
     "keywords": [
       "Setu Technology pricing",
-      "restaurant POS pricing India",
+      "free POS software India",
+      "free restaurant POS",
       "QR menu pricing"
     ]
   },
   "hero": {
     "eyebrow": "Pricing",
     "headline": "Priced per business, not per outlet",
-    "subheadline": "One plan covers your whole business. Start free, and only pay once the tool is earning its place."
+    "subheadline": "Most of what we build is free forever, with no signup. Setu QR Menu is the one paid product, priced per business — and free for your first year."
   },
   "billingNote": "All prices are per business account and include GST. Yearly billing is charged once for twelve months.",
   "regions": [
@@ -58,9 +59,46 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Retail",
+        "note": "Cloud database, several counters and staff logins."
+      },
       "cta": {
         "label": "Open the POS",
         "href": "/products/browser-based-pos"
+      }
+    },
+    {
+      "slug": "bank-statement-analyzer",
+      "name": "Bank Statement Analyzer",
+      "href": "/products/bank-statement-analyzer",
+      "status": "free",
+      "summary": "Import a bank statement, classify every transaction and export CA-ready reports — without the file leaving your browser.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Imports PDF, XLSX, XLS and CSV",
+        "Password-protected PDFs supported",
+        "Rules-based classification you control",
+        "Several statements analysed together",
+        "Cash flow, expense and counterparty analysis",
+        "Ledger reconciliation with fuzzy matching",
+        "Excel, PDF and CSV exports",
+        "Nothing is uploaded — parsing runs on device"
+      ],
+      "cta": {
+        "label": "Open the Analyzer",
+        "href": "/products/bank-statement-analyzer"
       }
     },
     {
@@ -93,9 +131,246 @@
         "Works offline, no login",
         "Data stays on your device"
       ],
+      "paidSoon": {
+        "name": "Setu Dine",
+        "note": "Cloud database, several outlets, devices and staff logins."
+      },
       "cta": {
         "label": "Open Free Dine",
         "href": "/products/free-restaurant-pos"
+      }
+    },
+    {
+      "slug": "free-tuition",
+      "name": "Tuition Class Manager",
+      "href": "/products/free-tuition-software",
+      "status": "free",
+      "summary": "Students, batches, attendance, monthly fees and parent reminders for a tuition teacher.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Batch-wise daily attendance",
+        "Automatic monthly fee dues and concessions",
+        "Numbered receipts with UPI payment links",
+        "WhatsApp fee reminders and absence notices",
+        "Tests with whole-batch marks entry",
+        "Diary reminders and enquiry register",
+        "Bulk import, PIN lock and Google Sheet sync",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Tuition",
+        "note": "Cloud database, a live parent view and online fee collection."
+      },
+      "cta": {
+        "label": "Open the Class Manager",
+        "href": "/products/free-tuition-software"
+      }
+    },
+    {
+      "slug": "free-clinic",
+      "name": "Free Clinic Manager",
+      "href": "/products/free-clinic-software",
+      "status": "free",
+      "summary": "Prescriptions, patient records, appointments and billing for a single doctor or a small practice.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Prescriptions printed as selectable text, A4 or A5",
+        "Protocols and autocomplete from your own past writing",
+        "Vitals with BMI and the last reading shown",
+        "A day screen in token order with live wait timers",
+        "Appointments with WhatsApp reminders",
+        "Automatic follow-up fees inside your window",
+        "Numbered receipts with a UPI QR to pay from",
+        "Footfall, revenue and no-show reports",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Clinic",
+        "note": "Cloud database, several doctors and branches on one record."
+      },
+      "cta": {
+        "label": "Open the Clinic Manager",
+        "href": "/products/free-clinic-software"
+      }
+    },
+    {
+      "slug": "free-token",
+      "name": "Free Token System",
+      "href": "/products/free-token-system",
+      "status": "free",
+      "summary": "Hand out numbers, put a display in the waiting area and let the app call each person out loud.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Calls the number out loud, in eight languages",
+        "A waiting-room display for a TV or second monitor",
+        "Several services and counters, with priority",
+        "Recall, skip and transfer",
+        "Wait estimates from your own service times",
+        "Token slips on 58mm and an A4 QR poster",
+        "WhatsApp the token and an almost-your-turn nudge",
+        "Hourly load and no-show reports",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Queue",
+        "note": "Cloud database, counter billing and kitchen routing."
+      },
+      "cta": {
+        "label": "Open the Token System",
+        "href": "/products/free-token-system"
+      }
+    },
+    {
+      "slug": "free-rental",
+      "name": "Free Rental & Hire Book",
+      "href": "/products/free-rental-software",
+      "status": "free",
+      "summary": "An availability calendar and hire book for tent houses, event decorators and equipment rental.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Availability on the tightest single day of a range",
+        "A conflict list for over-promised stock",
+        "Enquiry → confirmed → dispatched → returned",
+        "Picking lists and signed delivery challans",
+        "Damage, shortage and late fees against the deposit",
+        "Per-item utilisation and return on cost",
+        "Serial-numbered units and maintenance logs",
+        "WhatsApp quotes, confirmations and overdue chases",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Rental",
+        "note": "Cloud database, several branches and crew logins."
+      },
+      "cta": {
+        "label": "Open the Hire Book",
+        "href": "/products/free-rental-software"
+      }
+    },
+    {
+      "slug": "free-pharmacy",
+      "name": "Free Pharmacy POS",
+      "href": "/products/free-pharmacy-software",
+      "status": "free",
+      "summary": "Batch-wise billing and expiry tracking for medical stores and chemist shops.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Batch-wise stock with month-precision expiry",
+        "Billing that sells the oldest-expiring batch first",
+        "Expiry dashboard at 30, 60 and 90 days",
+        "Supplier-wise return lists",
+        "Search across brand, salt and barcode",
+        "Distributor invoice entry with scheme goods",
+        "Prescription capture and scheduled-sales register",
+        "GST summary, stock value and order list",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Pharmacy",
+        "note": "Cloud database, several counters and distributor sync."
+      },
+      "cta": {
+        "label": "Open the Pharmacy POS",
+        "href": "/products/free-pharmacy-software"
+      }
+    },
+    {
+      "slug": "free-repair",
+      "name": "Free Repair Job Card",
+      "href": "/products/free-repair-shop-software",
+      "status": "free",
+      "summary": "Job cards with a photographed condition record for mobile, laptop and appliance repair shops.",
+      "freeNote": "Free forever",
+      "trial": null,
+      "price": {
+        "IN": {
+          "monthly": 0,
+          "yearly": 0
+        },
+        "INTL": {
+          "monthly": 0,
+          "yearly": 0
+        }
+      },
+      "features": [
+        "Intake with condition checklist, photos and a signature",
+        "An intake record that cannot be edited afterwards",
+        "A board of every device, ageing to amber and red",
+        "Search by IMEI, job number, phone or name",
+        "WhatsApp updates from your own templates",
+        "Job slips at A5 or 58mm, plus device tags",
+        "Parts stock with cost beside selling price",
+        "Warranty lookup and an uncollected list",
+        "Works offline, no login",
+        "Data stays on your device"
+      ],
+      "paidSoon": {
+        "name": "Setu Repair",
+        "note": "Cloud database, several branches and technician logins."
+      },
+      "cta": {
+        "label": "Open the Job Card",
+        "href": "/products/free-repair-shop-software"
       }
     },
     {
@@ -134,20 +409,11 @@
       "slug": "setu-dine",
       "name": "Setu Dine",
       "href": "/products/restaurant-pos",
-      "status": "paid",
+      "status": "in-development",
       "summary": "Full restaurant management — billing, kitchen, tables and multi-outlet reporting.",
-      "freeNote": "First month free",
-      "trial": "1 month free",
-      "price": {
-        "IN": {
-          "monthly": 499,
-          "yearly": 4999
-        },
-        "INTL": {
-          "monthly": 4.99,
-          "yearly": 49.99
-        }
-      },
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
       "features": [
         "Billing with a built-in tax engine",
         "Kitchen order tickets and routing",
@@ -156,28 +422,19 @@
         "Customer management and coupons"
       ],
       "cta": {
-        "label": "Book a free demo",
-        "href": "/book-demo?product=Setu%20Dine"
+        "label": "Get notified at launch",
+        "href": "/contact"
       }
     },
     {
       "slug": "setu-queue",
       "name": "Setu Queue",
       "href": "/products/queue",
-      "status": "paid",
+      "status": "in-development",
       "summary": "Counter-service speed for QSRs, food courts and cloud kitchens.",
-      "freeNote": "First month free",
-      "trial": "1 month free",
-      "price": {
-        "IN": {
-          "monthly": 499,
-          "yearly": 4999
-        },
-        "INTL": {
-          "monthly": 4.99,
-          "yearly": 49.99
-        }
-      },
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
       "features": [
         "Counter billing built for speed",
         "Token management",
@@ -186,8 +443,8 @@
         "Real-time food cost tracking"
       ],
       "cta": {
-        "label": "Book a free demo",
-        "href": "/book-demo?product=Setu%20Queue"
+        "label": "Get notified at launch",
+        "href": "/contact"
       }
     },
     {
@@ -227,26 +484,114 @@
         "label": "Get notified at launch",
         "href": "/contact"
       }
+    },
+    {
+      "slug": "setu-tuition",
+      "name": "Setu Tuition",
+      "href": "/products/tuition",
+      "status": "in-development",
+      "summary": "The paid class manager the free Tuition Class Manager grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud database across your own devices",
+        "A live parent view of attendance and fees",
+        "Online fee collection",
+        "Automated parent messaging",
+        "Reporting across batches"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-pharmacy",
+      "name": "Setu Pharmacy",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid medical-store product the Free Pharmacy POS grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud batch and expiry stock, shared across counters",
+        "Several counters billing at the same time",
+        "Distributor purchase and scheme-goods sync",
+        "Multi-branch stock transfers",
+        "Chain-wide GST and margin reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-rental",
+      "name": "Setu Rental",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid hire product the Free Rental & Hire Book grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud availability shared across branches",
+        "Crew logins for dispatch and returns",
+        "Stock transfers between branches",
+        "Customer portal for quotes and confirmations",
+        "Utilisation and return-on-cost reporting"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
+    },
+    {
+      "slug": "setu-repair",
+      "name": "Setu Repair",
+      "href": "/products",
+      "status": "in-development",
+      "summary": "The paid job-card product the Free Repair Job Card grows into.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Cloud job cards and intake photos",
+        "Technician logins with per-user throughput",
+        "Every branch's board on one screen",
+        "Parts stock shared across branches",
+        "Warranty and margin reporting across the chain"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
     }
   ],
   "faq": {
     "headline": "Pricing questions",
     "items": [
       {
+        "question": "Which Setu products are free?",
+        "answer": "All of them except Setu QR Menu. The Browser Based POS, Free Dine, the Bank Statement Analyzer, the Tuition Class Manager and the Free Clinic Manager are free forever, need no signup, and keep your data on your device. Every calculator and tool on the site is free too."
+      },
+      {
         "question": "Is pricing per outlet or per business?",
-        "answer": "Per business account. One plan covers your whole business, however many outlets or staff logins you run, so growing does not change what you pay."
+        "answer": "Per business account. One Setu QR Menu plan covers your whole business, however many outlets or staff logins you run, so growing does not change what you pay."
       },
       {
         "question": "Do the prices include GST?",
         "answer": "Yes. Every price shown is inclusive of GST, so the amount you see is the amount you pay. There is no separate tax added at checkout."
       },
       {
-        "question": "What happens after the free trial ends?",
-        "answer": "Setu Dine and Setu Queue are free for the first month, and Setu QR Menu is free for the first year. After that you pick monthly or yearly billing."
+        "question": "What happens after the free year on Setu QR Menu ends?",
+        "answer": "You pick monthly or yearly billing. Nothing is charged during the first year, and we tell you before anything is charged after it."
       },
       {
-        "question": "Are the calculators and tools free?",
-        "answer": "Yes. Every calculator and tool on the site is free with no signup, and both browser products — the Browser Based POS for shops and Free Dine for restaurants — are free forever. Only Setu Dine, Setu Queue and Setu QR Menu are paid."
+        "question": "When can I buy Setu Dine or Setu Queue?",
+        "answer": "Both are still in development, so they are not on sale and there is no pricing to quote yet. Their product pages list everything they will do — tell us what you run and we will get in touch when they launch. Free Dine is the restaurant till you can use today, free forever."
       }
     ]
   }

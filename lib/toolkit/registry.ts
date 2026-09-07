@@ -13,7 +13,12 @@
 // (the "shell is chrome, never a dependency" rule).
 
 import type { EntityName } from "@/lib/toolkit/entities";
-import { rentalSoftwareEnabled, tokenSystemEnabled } from "@/lib/featureFlags";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  repairSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -61,7 +66,9 @@ export type ToolSlug =
   | "appointment-book"
   | "token-system"
   | "clinic-manager"
+  | "pharmacy-pos"
   | "rental-book"
+  | "repair-job-card"
   // Education
   | "tuition-manager"
   // Payments / utilities
@@ -307,6 +314,65 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
       { with: "invoice-generator", ux: "Raise a tax invoice for a settled hire" },
       { with: "quotation-generator", ux: "Quote for a hire before it becomes a booking" },
       { with: "upi-qr-generator", ux: "Collect the advance or the deposit by UPI" },
+    ],
+  },
+  {
+    slug: "repair-job-card",
+    name: "Free Repair Job Card",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: repairSoftwareEnabled() ? "built" : "next",
+    route: "/products/free-repair-shop-software",
+    // Owns no shared entity, and deliberately does not write the workspace's
+    // customers. A repair customer arrives attached to a device and a custody
+    // record, and merging them into the workspace would put intake photos and
+    // unlock codes inside a store every other tool reads. The business profile
+    // is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // The free app now carries a tracking link of its own, built on the
+    // shortener's mutable codes rather than a backend. The upsell is what that
+    // cannot do: several technicians sharing one board, push instead of
+    // polling, and links that do not expire — all of which need a server.
+    paidPath: "platform",
+    integrations: [
+      { with: "browser-pos", ux: "Sell accessories over the same counter" },
+      { with: "label-printer", ux: "Print the device tag that tapes to the unit" },
+      { with: "invoice-generator", ux: "Raise a tax invoice for a completed repair" },
+      { with: "upi-qr-generator", ux: "Collect the repair charge by UPI at handover" },
+    ],
+  },
+  {
+    slug: "pharmacy-pos",
+    name: "Free Pharmacy POS",
+    category: "service",
+    kind: "app",
+    tier: "foundation",
+    // "built" only once the flag is on. SuggestedTools filters on this, so a
+    // flagged-off product cannot surface as a "Related tool" pointing at a
+    // route that 404s.
+    status: pharmacySoftwareEnabled() ? "built" : "next",
+    route: "/products/free-pharmacy-software",
+    // Owns no shared entity, and deliberately does not write the workspace's
+    // products. A medicine is not a product: its stock lives on batches with
+    // their own expiries and costs, and flattening that into a single `stock`
+    // number is exactly the information this app exists to keep. The business
+    // profile is the only thing it touches in the workspace, and only to read.
+    reads: ["business"],
+    writes: [],
+    dependsOn: ["business-profile"],
+    // The clinic+pharmacy bundle is the upsell, along with multi-counter — two
+    // tills sharing one shelf needs a server between them.
+    paidPath: "platform",
+    integrations: [
+      { with: "clinic-manager", ux: "Dispense against a prescription written next door" },
+      { with: "barcode-generator", ux: "Print shelf labels for the medicine master" },
+      { with: "upi-qr-generator", ux: "Collect at the counter by UPI" },
     ],
   },
   {

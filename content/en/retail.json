@@ -13,7 +13,7 @@
     "headline": "What we're building",
     "paragraphs": [
       "Setu Retail brings the same operator-first approach behind Setu Dine to retail stores — inventory that stays accurate, billing that's fast at the counter, and visibility across every store location.",
-      "We're building it on the same multi-outlet architecture already running in Setu Dine, so retail chains get multi-store reporting from day one."
+      "We're building it on the same multi-outlet architecture as Setu Dine, so retail chains get multi-store reporting from day one."
     ]
   },
   "cta": {
@@ -22,7 +22,7 @@
     "cta": { "label": "Get notified", "href": "/contact" }
   },
   "crossSell": {
-    "text": "Already running a restaurant? Setu Dine is live today.",
-    "cta": { "label": "Explore Setu Dine", "href": "/products/restaurant-pos" }
+    "text": "Running a restaurant? Free Dine is a complete restaurant POS you can open today, free forever.",
+    "cta": { "label": "Open Free Dine", "href": "/products/free-restaurant-pos" }
   }
 }

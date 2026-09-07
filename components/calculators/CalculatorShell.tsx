@@ -13,6 +13,7 @@ import {
   type CalculatorItem,
 } from "@/lib/content";
 import { toolApplicationSchema } from "@/lib/schema";
+import { CalculatorReviewPrompt } from "@/components/review/CalculatorReviewPrompt";
 import { GlossaryText } from "@/components/glossary/GlossaryText";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
@@ -56,7 +57,13 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
 
       <section className="mx-auto max-w-2xl px-6 pb-12">
         <FadeIn>
-          <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">{children}</div>
+          {/* Wraps every calculator on the site, so the review ask follows a
+              worked-through number without each tool having to report one. */}
+          <CalculatorReviewPrompt>
+            <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
+              {children}
+            </div>
+          </CalculatorReviewPrompt>
         </FadeIn>
       </section>
 
