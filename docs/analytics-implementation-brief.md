@@ -34,6 +34,7 @@ Three hard requirements, in priority order:
 | `lib/tuition/store.tsx:920-990` | **The precedent to follow.** An existing durable queue: skip when `navigator.onLine` is false, debounced flush, re-check for rows re-dirtied mid-flight before clearing, and a `window.addEventListener("online", ...)` flush. Mirror this discipline. |
 | `lib/hooks/useLocalStore.ts` | House pattern for localStorage: load once on mount so SSR markup stays deterministic, swallow storage errors, never persist an untouched tool. |
 | `lib/pos/db.ts`, `lib/token/db.ts`, `lib/rental/db.ts`, `lib/dine/db.ts`, `lib/bankStatement/storage/db.ts` | Existing IndexedDB stores holding real user work. Analytics gets its **own** database and must never share these. |
+| `lib/review.ts`, `components/review/ReviewPrompt.tsx`, `lib/hooks/useReviewPrompt.ts` | The Google review ask, added on main. One shared `ReviewActions` button rendered across ten surfaces. See **The Google review funnel**. |
 | `tests/privacy.test.ts` | Fails the build if `gtag|dataLayer|analytics|posthog|mixpanel|Sentry` or `fetch|XMLHttpRequest|sendBeacon|WebSocket|axios` appear anywhere under `lib/bankStatement/**` or `components/tools/BankStatementAnalyzer/**`. **Do not weaken this test — extend it.** |
 | `scripts/check-seo.mjs` | Build gate. Every indexable page needs a title of 30-60 chars, a meta description of 120-160 chars, and exactly one `<h1>`. New legal pages must pass. |
 | `app/sitemap.ts`, `components/Footer.tsx` | Where new routes get registered and linked. |
@@ -117,12 +118,8 @@ Pure, framework-free, unit-testable. No React imports.
     explicitly. **`useSearchParams()` must sit inside a `<Suspense>` boundary
     or `next build` fails with a CSR-bailout error** — this is the most common
     way this feature breaks the build.
-  - One delegated `click` listener in the capture phase on `document`. It reads
-    a `data-analytics="..."` attribute from the nearest ancestor that has one.
-    For any `<a>` or `<button>` without one, it falls back to a generic event
-    carrying tag, role, `href`, and a truncated accessible label. This
-    fallback is what delivers "every page is detectable" without editing 200
-    components.
+  - The delegated click listener described under **How click tracking works**
+    below.
   - Scroll depth (25/50/75/100, once each per page), time-on-page on exit,
     outbound-link and file-download clicks, `window.onerror` /
     `unhandledrejection`.
@@ -153,6 +150,113 @@ calculator CTA and result-copy action, every tool open and export/download,
 book-demo and contact form start / submit / success / error, pricing table
 interactions, product-page CTAs, and search submissions. Add tool milestone
 events (`tool_opened`, `tool_completed`) at the page wrapper level.
+
+## How click tracking works
+
+There is **one** listener, attached once by `AnalyticsProvider`. No component
+gets an analytics `onClick`.
+
+```
+document.addEventListener("click", handler, { capture: true })
+document.addEventListener("auxclick", handler, { capture: true })
+```
+
+On each event the handler resolves what was clicked, in this order:
+
+1. **`event.composedPath()[0]`, not `event.target`.** The clickable thing is
+   usually a `<button>` or `<a>` wrapping a Lucide `<svg>`; the real target is
+   often the `<path>` inside the icon. Using the composed path also keeps this
+   correct if anything is ever rendered into a shadow root.
+2. **`.closest("[data-analytics]")`** — walk up to the nearest ancestor
+   carrying an explicit label. If found, that attribute is the event name, and
+   any `data-analytics-*` attributes on the same element become props. This is
+   the labelled path, used for everything whose name matters.
+3. **Fallback: `.closest('a, button, [role="button"], summary, [onclick]')`.**
+   If no label was declared, synthesise one from the element: tag, `type`,
+   `href` (origin + path only, query string dropped), and a truncated
+   accessible name from `aria-label` or `alt`. This is what makes every page
+   detectable without editing 200 components — an unlabelled button still
+   produces a usable row, and the labelled attribute is an upgrade rather than
+   a prerequisite.
+4. If neither matches, the click was on inert page furniture. Drop it.
+
+Four details that decide whether this actually works:
+
+- **Capture phase is mandatory.** A component calling `stopPropagation()` in
+  its own handler — the `ReviewPromptDialog` backdrop already does something
+  close to this — would make a bubble-phase listener never fire. Capture runs
+  top-down before the target's own handlers, so nothing can hide from it.
+- **`auxclick` is a separate event.** Middle-click and cmd/ctrl-click, i.e.
+  "open in a new tab", do **not** fire `click`. Without a second listener
+  every power user opening a link in a background tab is invisible.
+- **Never read `.value`, `.textContent`, or `.innerText`.** Only whitelisted
+  `data-*`, `aria-label`, and `alt`. `textContent` on a calculator result or a
+  POS line item would exfiltrate the user's own numbers, which breaks the
+  on-device promise. This is enforced by test, not by convention.
+- **Queue first, then navigate.** The handler writes to the IndexedDB queue and
+  returns. It never awaits, never calls `preventDefault`, and never delays a
+  navigation. Delivery is the flush layer's problem, and an event created a
+  millisecond before the tab closes is exactly the case the durable queue
+  exists for.
+
+Labelling a button therefore means adding one attribute:
+
+```tsx
+<a data-analytics="review_google_clicked" data-analytics-surface="invoice-generator" ...>
+```
+
+## The Google review funnel
+
+Main added this in `lib/review.ts`, `components/review/ReviewPrompt.tsx` and
+`lib/hooks/useReviewPrompt.ts`. The button is a single `<a href={GOOGLE_REVIEW_URL}
+target="_blank" onClick={onAccept}>` inside the shared `ReviewActions`
+component, rendered by both the inline `ReviewPrompt` and the modal
+`ReviewPromptDialog`, which are together mounted on **ten** surfaces: every
+calculator (via `CalculatorShell`), plus Invoice, Quotation, Barcode, UPI QR
+and QR Menu generators, Free POS billing, Free Dine bill flow, Clinic consult
+and Tuition fees.
+
+Because every surface funnels through `ReviewActions`, instrumenting it is one
+edit in one file — not ten.
+
+**A raw click count is the wrong metric and should not be built.** `lib/review.ts`
+only shows the prompt after a completion, at most once per visitor, with a
+45-day cooldown for people who ignore it. So the click count is governed mostly
+by how often the prompt was *shown*, and a number that moves because a tool got
+more traffic tells you nothing about whether the ask works. Emit the whole
+funnel:
+
+| Event | Fired from | Carries |
+|---|---|---|
+| `review_prompt_shown` | `useReviewPrompt.complete()`, when it flips `open` to true | `surface`, `variant` (`inline` \| `dialog`), `completions` |
+| `review_google_clicked` | `ReviewActions` accept handler | same, plus `seconds_since_shown` |
+| `review_prompt_declined` | decline handler | same, plus `method` (`button` \| `close_x` \| `escape` \| `backdrop`) |
+| `review_prompt_ignored` | derived server-side: shown, no accept or decline in the session | — |
+
+That gives you the click count you asked for **and** its denominator: clicks
+per prompt shown, broken down by which tool earned them. `surface` is the
+valuable dimension — it tells you which product actually converts goodwill into
+reviews, which a single total never will.
+
+Add a `surface: string` prop to `ReviewPrompt` and `ReviewPromptDialog` and
+thread it from each of the ten call sites. Pass `variant` automatically from
+which component is rendering.
+
+Three honest limits to state in the PR description rather than discover later:
+
+- **A click is not a review.** Google provides no callback. `review_google_clicked`
+  means "opened the review link", and the ratio of that to actual new reviews
+  on the listing is unknowable from here. Do not name the event or any dashboard
+  column `reviews`.
+- **`ratedAt` is set on click, not on review.** `useReviewPrompt.accept()`
+  already permanently stops asking the moment the link is opened. That is
+  existing product behaviour; do not change it as part of this work.
+- **A blocked popup still counts.** `onClick` fires whether or not the new tab
+  actually opened.
+
+Instrumenting this must not alter when the prompt appears, how often, or the
+finality of an answer. `tests/review.test.ts` covers that logic and must keep
+passing untouched.
 
 ## Non-negotiable constraints
 
