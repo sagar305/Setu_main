@@ -5,7 +5,14 @@ import { motion } from "motion/react";
 import type { HomeContent } from "@/lib/content";
 import { HeroVisual } from "@/components/home/HeroVisual";
 
-export function Hero({ hero }: { hero: HomeContent["hero"] }) {
+export function Hero({
+  hero,
+  hiddenProductIds = [],
+}: {
+  hero: HomeContent["hero"];
+  /** Panel entries whose feature flag is off — see HeroVisual. */
+  hiddenProductIds?: string[];
+}) {
   return (
     <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-12 pt-14 md:grid-cols-2 md:items-center md:gap-16 md:pb-14 md:pt-16">
       <motion.div
@@ -42,7 +49,7 @@ export function Hero({ hero }: { hero: HomeContent["hero"] }) {
         transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
         className="flex items-center justify-center md:justify-end"
       >
-        <HeroVisual />
+        <HeroVisual hiddenIds={hiddenProductIds} />
       </motion.div>
     </section>
   );

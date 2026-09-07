@@ -30,6 +30,19 @@ const productCards = content.products.cards.filter((card) => {
 
 const productsSection = { ...content.products, cards: productCards };
 
+/**
+ * Panel entries the hero must not rotate through.
+ *
+ * The flags are server-only, and HeroVisual is a client component, so the
+ * decision has to be made here and handed over as plain strings.
+ */
+const hiddenHeroProductIds = [
+  ...(tokenSystemEnabled() ? [] : ["free-token"]),
+  ...(rentalSoftwareEnabled() ? [] : ["free-rental"]),
+  ...(pharmacySoftwareEnabled() ? [] : ["free-pharmacy"]),
+  ...(repairSoftwareEnabled() ? [] : ["free-repair"]),
+];
+
 export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
@@ -104,7 +117,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <Hero hero={content.hero} />
+      <Hero hero={content.hero} hiddenProductIds={hiddenHeroProductIds} />
       <ShowcaseGrid id="products" section={productsSection} className="bg-cream" />
       <ShowcaseGrid id="tools" section={content.tools} className="bg-white" />
       <ShowcaseGrid id="calculators" section={content.calculators} className="bg-cream" />
