@@ -105,9 +105,9 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Hero hero={content.hero} />
-      <ShowcaseGrid id="products" section={productsSection} className="bg-white" />
-      <ShowcaseGrid id="tools" section={content.tools} className="bg-cream" />
-      <ShowcaseGrid id="calculators" section={content.calculators} className="bg-white" />
+      <ShowcaseGrid id="products" section={productsSection} className="bg-cream" />
+      <ShowcaseGrid id="tools" section={content.tools} className="bg-white" />
+      <ShowcaseGrid id="calculators" section={content.calculators} className="bg-cream" />
       <Services services={content.services} />
       <LatestBlogs />
       <Faq headline={content.faq.headline} items={content.faq.items} />
