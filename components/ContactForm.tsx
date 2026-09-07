@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import type { ContactContent } from "@/lib/content";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -11,6 +12,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
+    trackEvent("form_submitted", { form: "contact" });
 
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form));
@@ -22,9 +24,11 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
         body: JSON.stringify(data),
       });
       setStatus(res.ok ? "success" : "error");
+      trackEvent(res.ok ? "form_succeeded" : "form_failed", { form: "contact" });
       if (res.ok) form.reset();
     } catch {
       setStatus("error");
+      trackEvent("form_failed", { form: "contact" });
     }
   }
 

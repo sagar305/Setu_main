@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { useSearchParams } from "next/navigation";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -14,6 +15,7 @@ export function BookDemoForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
+    trackEvent("form_submitted", { form: "book_demo" });
     setErrorMessage("");
 
     const form = event.currentTarget;
@@ -29,13 +31,16 @@ export function BookDemoForm() {
 
       if (res.ok && result?.ok) {
         setStatus("success");
+        trackEvent("form_succeeded", { form: "book_demo" });
         form.reset();
       } else {
         setStatus("error");
+        trackEvent("form_failed", { form: "book_demo" });
         setErrorMessage(result?.error || "Something went wrong. Please try again.");
       }
     } catch {
       setStatus("error");
+      trackEvent("form_failed", { form: "book_demo" });
       setErrorMessage("Something went wrong. Please try again.");
     }
   }
