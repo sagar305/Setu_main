@@ -1,0 +1,45 @@
+{
+  "slug": "tds-return",
+  "term": "TDS Return",
+  "category": "gst-tax",
+  "aliases": [
+    "TDS statement",
+    "quarterly TDS return"
+  ],
+  "short": "The quarterly statement a deductor files reporting tax deducted and deposited.",
+  "seoTitle": "TDS Return — Meaning, Due Dates and Late Fee",
+  "metaDescription": "A TDS return is the quarterly statement a deductor files reporting the tax deducted, the payees and the challans used, so credit reaches the right taxpayer.",
+  "updated": "2026-09-06",
+  "definition": "A TDS return is the quarterly statement a deductor files with the income tax department, reporting the tax deducted during the quarter, who it was deducted from, and the challans through which it was deposited — the filing that makes the credit visible to the person it was deducted from.",
+  "bodyHtml": "<h2>Why the return matters as much as the deposit</h2><p>Depositing tax gets the money to the government. The return is what allocates it. Until a deductee appears in a filed return against a valid PAN, the deduction does not show in their tax credit statement, and they cannot claim it. A deposit without a return creates a dispute with your own vendor or employee.</p><h2>Quarterly due dates</h2><ul><li>April to June: 31 July</li><li>July to September: 31 October</li><li>October to December: 31 January</li><li>January to March: 31 May</li></ul><h2>Separate returns for separate payments</h2><p>Salary deductions and non-salary deductions to residents are reported on different statements, and payments to non-residents on another. Under the Income-tax Act, 2025 the form numbering was reworked alongside the section numbering, so the label shown on the filing portal may differ from the one used in earlier years — file from what the portal currently presents.</p><h2>Cost of filing late</h2><p>A late fee runs per day of delay, capped at the amount of tax deducted, with a further penalty possible where the return is not filed within the permitted window. Corrections are possible after filing, but each revision delays the credit reaching the deductee.</p>",
+  "faq": [
+    {
+      "question": "What happens if I deposit TDS but never file the return?",
+      "answer": "The money sits with the government unallocated. The deductee cannot see or claim the credit, and a daily late fee accrues until the return is filed, capped at the tax deducted."
+    },
+    {
+      "question": "Can a TDS return be revised?",
+      "answer": "Yes. Corrections to details such as a wrong PAN or a misquoted challan can be filed, but each revision delays credit reaching the deductee, so it is cheaper to collect PAN accurately at onboarding."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "tds",
+    "tan",
+    "pan",
+    "form-16"
+  ]
+}
