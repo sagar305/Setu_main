@@ -1,0 +1,45 @@
+{
+  "slug": "fixed-asset-register",
+  "term": "Fixed Asset Register",
+  "category": "accounting",
+  "aliases": [
+    "asset register"
+  ],
+  "short": "The schedule of every long-lived asset, its cost, and the depreciation charged so far.",
+  "seoTitle": "Fixed Asset Register — What It Records and Why",
+  "metaDescription": "A fixed asset register lists every long-lived asset with its cost, date of first use, depreciation rate and book value. Why it cannot be reconstructed later.",
+  "updated": "2026-09-07",
+  "definition": "A fixed asset register is the schedule listing every long-lived asset a business owns, with its cost, date of purchase and first use, expected life, depreciation method and rate, depreciation charged to date, and current book value.",
+  "bodyHtml": "<h2>What each row holds</h2><p>Description and identifier, supplier and invoice reference, cost including installation, date put to use, depreciation method and rate, accumulated depreciation, current written down value, and — once sold or scrapped — the disposal date and proceeds. Assets are often grouped by block so the tax computation can be run straight from the register.</p><h2>Why it cannot be reconstructed later</h2><p>Bank statements show that money left the account. They do not show when the asset was first put to use, what was capitalised versus expensed, or how much depreciation has already been claimed. Once the register is lost, next year's depreciation is a guess and the balance sheet carries a figure nobody can support. It is the single hardest document to recreate in an accounting handover, which is why it is the one to secure first.</p><h2>Where it is used</h2><p>Depreciation each period, the fixed asset note in the balance sheet, gain or loss on disposal, insurance cover, and any physical verification of assets. A register that has never been checked against the assets actually on the premises usually contains items that were scrapped years ago.</p>",
+  "faq": [
+    {
+      "question": "Is a fixed asset register mandatory?",
+      "answer": "Requirements vary by entity type and size, and companies face stricter expectations than sole proprietors. Regardless of the rule, depreciation cannot be computed correctly without one, so the practical answer is yes."
+    },
+    {
+      "question": "What is the difference between the register and the balance sheet figure?",
+      "answer": "The balance sheet shows one total for each asset class. The register is the detail behind it, asset by asset, and the two should agree to the rupee at every period end."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "fixed-asset",
+    "depreciation",
+    "written-down-value",
+    "residual-value",
+    "capital-expenditure"
+  ]
+}

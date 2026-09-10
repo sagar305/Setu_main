@@ -1,0 +1,49 @@
+{
+  "slug": "opening-balance",
+  "term": "Opening Balance",
+  "category": "accounting",
+  "aliases": [
+    "brought forward balance"
+  ],
+  "short": "The balance an account starts a period with, carried over from the last period's close.",
+  "seoTitle": "Opening Balance — Meaning and Why It Matters",
+  "metaDescription": "An opening balance is the amount an account starts a period with, carried forward from the previous close. Why wrong opening balances break a set of books.",
+  "updated": "2026-09-07",
+  "definition": "An opening balance is the amount an account holds at the start of an accounting period, carried forward unchanged from the closing balance of the period before it. Every ledger account, bank account and customer or supplier balance has one.",
+  "formula": {
+    "expression": "Opening Balance = Closing Balance of the Previous Period",
+    "note": "The identity has no exceptions. Where an opening balance differs from the prior close, either the prior period was reopened or an error was introduced."
+  },
+  "bodyHtml": "<h2>Why they decide everything</h2><p>A set of books is only as reliable as the figures it starts from. When a business changes accountants or migrates to new software, the opening balances are entered by hand or imported, and any difference is absorbed by a suspense account that then sits in the balance sheet for years. Every later disagreement about the accounts traces back to whether the opening set was agreed or assumed.</p><h2>Where they come from</h2><p>From a signed-off trial balance as at the changeover date, supported by the general ledger behind it, bank reconciliation statements, debtor and creditor ageing, loan schedules and the fixed asset register. A spreadsheet of balances without the ledger behind it is not enough, because nothing can be traced back to a transaction.</p><h2>How to check them</h2><p>Reconcile the bank for the first full period after the changeover. If the bank agrees without adjustment, the opening cash position was right, and cash is the balance most other errors eventually surface through.</p>",
+  "faq": [
+    {
+      "question": "What happens if opening balances are wrong?",
+      "answer": "The trial balance still balances, because the difference is usually parked in a suspense account, but the balance sheet no longer reflects reality. The error persists until someone traces it back and corrects it against the prior period's signed figures."
+    },
+    {
+      "question": "Who provides the opening balances when I change accountants?",
+      "answer": "The outgoing firm, as a trial balance at the agreed handover date, with the general ledger supporting it. The incoming firm should confirm in writing that it accepts those balances before processing the first month."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    }
+  ],
+  "relatedTerms": [
+    "trial-balance",
+    "general-ledger",
+    "suspense-account",
+    "cut-off",
+    "engagement-letter"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "engagement-letter",
+  "term": "Engagement Letter",
+  "category": "accounting",
+  "aliases": [
+    "letter of engagement"
+  ],
+  "short": "The written agreement setting out what your accountant will and will not do.",
+  "seoTitle": "Engagement Letter — What It Covers and Why",
+  "metaDescription": "An engagement letter is the written agreement between a business and its accountant, setting out scope, deliverables, timing, fees and who supplies what.",
+  "updated": "2026-09-07",
+  "definition": "An engagement letter is the written agreement between a business and its accountant or bookkeeper that defines the scope of work, what each side delivers and by when, the fee basis, and the period the engagement covers.",
+  "bodyHtml": "<h2>What a good one contains</h2><p>Scope stated by frequency — monthly bookkeeping, quarterly review and annual filing are separate jobs, and an engagement that says \"accounting services\" settles nothing. Alongside scope it should name the deliverables and the working day they arrive by, what the client supplies and by when, the fee basis and what falls outside it, the period covered with a start date, and who owns and can export the data file.</p><h2>Why the start date matters</h2><p>When a business changes firms, the engagement letters on both sides should agree on a single handover date: the outgoing firm responsible up to and including it, the incoming firm from the day after. Where that line is vague, periods get worked twice or missed entirely, and the gap usually surfaces at a filing deadline.</p><h2>Catch-up work is not the same engagement</h2><p>If months are unrecorded when the engagement starts, bringing them up to date is separate work with its own scope and fee. Agreeing that at the outset is far easier than negotiating it in month three, when the deadline is close and the leverage has moved.</p>",
+  "faq": [
+    {
+      "question": "Is an engagement letter legally required?",
+      "answer": "It is not a statutory requirement for every arrangement, but professional bodies expect their members to document the terms of an engagement, and it is the document both sides rely on when scope is disputed."
+    },
+    {
+      "question": "Can an engagement letter be changed mid-year?",
+      "answer": "Yes. Scope changes — adding payroll, moving from quarterly to monthly — are normally handled by a variation or a fresh letter, so the record stays accurate rather than resting on an email thread."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "opening-balance",
+    "month-end-close",
+    "trial-balance",
+    "chart-of-accounts"
+  ]
+}

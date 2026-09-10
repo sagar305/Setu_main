@@ -1,0 +1,45 @@
+{
+  "slug": "expense-report",
+  "term": "Expense Report",
+  "category": "accounting",
+  "aliases": [
+    "expense claim",
+    "reimbursement claim"
+  ],
+  "short": "A grouped set of business expenses an employee submits for approval and reimbursement.",
+  "seoTitle": "Expense Report — Meaning, Contents and Process",
+  "metaDescription": "An expense report groups the business costs an employee paid personally into one submission for approval and reimbursement. What it contains and how it flows.",
+  "updated": "2026-09-07",
+  "definition": "An expense report is a grouped submission of business costs an employee paid personally — travel, meals, fuel, supplies — presented with supporting bills for approval and reimbursement, and posted to the relevant expense accounts once approved.",
+  "bodyHtml": "<h2>What belongs on one</h2><p>Each line carries a date, an amount, a category, a business purpose and a reference to the supporting bill. The purpose is the line most often left blank and the one an auditor asks about first, because a bill on its own shows that money was spent, not that it was spent for the business.</p><h2>The approval chain</h2><p>Submission, review against the expense policy, approval, reimbursement, and posting to the books. The control sits at the review step: a limit enforced before the money is reimbursed is worth more than a report produced after it. Where nobody spends company money except the owner, there is no claim to approve and a simple expense log does the same job at no cost.</p><h2>Reimbursement is not an expense twice</h2><p>The expense is recognised when the cost is incurred; the reimbursement settles a liability to the employee. Recording both as expenses double-counts the same rupee, which is the most common error when claims are handled outside the accounting system.</p>",
+  "faq": [
+    {
+      "question": "How is an expense report different from an expense entry in the books?",
+      "answer": "An expense report is a claim submitted by a person and awaiting approval. The book entry is what happens after approval, when the cost is posted to an account and the amount owed to the employee is settled."
+    },
+    {
+      "question": "Does a small business need expense reports?",
+      "answer": "Only if people other than the owner spend company money. With a single spender there is nothing to approve, and a categorised expense log answers the same question with less process."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    }
+  ],
+  "relatedTerms": [
+    "operating-expense",
+    "petty-cash",
+    "audit-trail",
+    "accounts-payable"
+  ]
+}

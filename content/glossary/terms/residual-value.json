@@ -1,0 +1,50 @@
+{
+  "slug": "residual-value",
+  "term": "Residual Value",
+  "category": "accounting",
+  "aliases": [
+    "salvage value",
+    "scrap value"
+  ],
+  "short": "What an asset is expected to be worth at the end of its useful life.",
+  "seoTitle": "Residual Value — Meaning and Effect on Depreciation",
+  "metaDescription": "Residual value is what an asset is expected to fetch at the end of its useful life. It reduces the amount depreciated, so a wrong estimate distorts profit.",
+  "updated": "2026-09-07",
+  "definition": "Residual value is the amount a business expects to recover from an asset at the end of its useful life, whether by resale or as scrap. It is subtracted from cost to give the depreciable amount, so it directly reduces the depreciation charged each year.",
+  "formula": {
+    "expression": "Annual Straight-Line Depreciation = (Cost − Residual Value) ÷ Useful Life",
+    "note": "Set residual value to zero and the whole cost is depreciated, which overstates the yearly expense for equipment with a real second-hand market."
+  },
+  "bodyHtml": "<h2>Why the estimate matters</h2><p>An oven costing ₹3,00,000 with a residual value of ₹30,000 over a seven-year life depreciates at about ₹38,571 a year. Set the residual value to zero out of caution and the charge rises to about ₹42,857 — roughly 11% more expense every year, against an asset that will still be worth something. The estimate is a judgement, not a fact, and it should be revisited if market conditions change materially.</p><h2>Being conservative in one direction only</h2><p>The common pattern in an equipment decision is a residual value set to zero for prudence alongside optimistic volume assumptions. Prudence applied to one input and optimism to another produces a number that is neither cautious nor realistic. Pick one posture and hold it across the whole calculation.</p><h2>It does not apply to the tax computation</h2><p>Under the Indian Income Tax Act, depreciation is computed on the written down value of a block of assets at prescribed rates, not on a cost-less-residual-value basis. Residual value belongs to your own books; the block rate governs the return. Confirm the treatment with your CA.</p>",
+  "faq": [
+    {
+      "question": "Is residual value the same as salvage value?",
+      "answer": "In everyday use, yes — along with scrap value. All three describe what an asset is expected to be worth once the business has finished using it."
+    },
+    {
+      "question": "What residual value should I assume?",
+      "answer": "Whatever comparable used equipment actually sells for, if such a market exists. Where there is none, zero is reasonable. What is not reasonable is picking zero for equipment that clearly resells, purely to be safe."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    }
+  ],
+  "relatedTerms": [
+    "depreciation",
+    "straight-line-depreciation",
+    "written-down-value",
+    "fixed-asset",
+    "fixed-asset-register"
+  ]
+}
