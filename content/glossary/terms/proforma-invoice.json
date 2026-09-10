@@ -1,0 +1,44 @@
+{
+  "slug": "proforma-invoice",
+  "term": "Proforma Invoice",
+  "category": "accounting",
+  "aliases": [
+    "pro forma invoice"
+  ],
+  "short": "A request for payment issued before supply, which is not a tax document.",
+  "seoTitle": "Proforma Invoice — Meaning and When to Use One",
+  "metaDescription": "A proforma invoice requests payment before goods or services are supplied. It fixes price and terms but carries no GST and supports no input tax credit.",
+  "updated": "2026-09-06",
+  "definition": "A proforma invoice is a document sent before supply that sets out what will be delivered, at what price and on what terms, and asks for payment — typically an advance. It looks like an invoice but is not one: it creates no GST liability for you and supports no input tax credit for your customer.",
+  "bodyHtml": "<h2>Where it sits between a quotation and a tax invoice</h2><p>A quotation is an offer, open for acceptance and usually carrying a validity date. A proforma invoice is issued after the customer has agreed in principle and is ready to pay, but before the goods move or the work is done. A tax invoice is issued on or after supply and is the only one of the three that carries tax.</p><h2>When a proforma invoice earns its place</h2><ul><li>Taking an advance before starting work or releasing stock</li><li>Giving a buyer a document their finance team can raise a payment against</li><li>Supporting a customs, freight or import formality that needs a valued document</li><li>Confirming price, quantity and delivery terms in writing without triggering a tax point</li></ul><h2>What it must not do</h2><p>It should never be numbered in the tax invoice series, never be recorded as a sale, and never be given to a customer as support for an input tax credit claim. Mark it clearly as a proforma invoice so nobody in either business mistakes it for the real thing, and issue the tax invoice separately once supply happens.</p><h2>Common mistakes</h2><p>The two that cause real trouble are treating the advance received against a proforma invoice as revenue before supply, and never following it with a tax invoice at all — leaving the sale unrecorded and the customer unable to claim credit.</p>",
+  "faq": [
+    {
+      "question": "Does a proforma invoice attract GST?",
+      "answer": "No. It is not a tax invoice, so it creates no output tax liability on issue and gives the recipient nothing to claim credit against. Tax treatment of any advance you actually receive is a separate question for your accountant."
+    },
+    {
+      "question": "Can a proforma invoice be cancelled?",
+      "answer": "Yes, and without consequence — nothing has been recorded as a sale. Simply issue a revised one or drop it. Cancelling a tax invoice already issued is a different and more formal matter."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "quotation-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-order-generator"
+    }
+  ],
+  "relatedTerms": [
+    "quotation",
+    "tax-invoice",
+    "advance-payment",
+    "bill-of-supply"
+  ]
+}
