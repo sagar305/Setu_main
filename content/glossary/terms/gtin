@@ -1,0 +1,44 @@
+{
+  "slug": "gtin",
+  "term": "GTIN",
+  "category": "retail-inventory",
+  "aliases": [
+    "global trade item number"
+  ],
+  "short": "The globally unique number that identifies a product across every retailer.",
+  "seoTitle": "GTIN — Meaning, Formats and When You Need One",
+  "metaDescription": "A GTIN is the globally unique number identifying a product across retailers. Issued through GS1, it is separate from the item codes a shop invents for itself.",
+  "updated": "2026-09-06",
+  "definition": "A GTIN, or Global Trade Item Number, is the globally unique number that identifies a product wherever it is sold. It is issued through GS1 to the brand owner, and is what the barcode on a packaged retail product encodes — distinct from the internal item codes a shop invents for its own counter.",
+  "bodyHtml": "<h2>GTIN vs an internal item code</h2><p>A GTIN is unique worldwide and belongs to whoever registered it. An internal item code only has to be unique inside your own shop, costs nothing, and can be generated freely. Scanning at your own till needs the second; selling into someone else's shelf usually needs the first.</p><h2>The common formats</h2><ul><li>GTIN-13, printed as an EAN-13 barcode — the standard for retail products outside North America</li><li>GTIN-12, printed as a UPC-A barcode — the North American equivalent</li><li>GTIN-14, used to identify a case or outer carton rather than the selling unit</li><li>GTIN-8, a short form for packs too small to carry a full code</li></ul><h2>When you actually need one</h2><p>When you manufacture or brand a packaged product and want it stocked by organised retail, or listed on a marketplace that requires a verified product identifier. Registration runs through the national GS1 organisation and carries a fee, so it is a cost to plan for rather than a formality.</p><h2>What it is not</h2><p>A GTIN carries no price, no batch and no expiry — it identifies the product line only. Those attributes live in the retailer's own item record, which is why a stock register still matters after the barcode exists. Inventing a number that merely looks like a GTIN risks colliding with a real product and being rejected at listing.</p>",
+  "faq": [
+    {
+      "question": "Is a GTIN the same as a barcode?",
+      "answer": "No. The GTIN is the number; the barcode is one way of printing it so a scanner can read it. The same GTIN can appear as an EAN-13 on the pack and as plain digits in a catalogue file."
+    },
+    {
+      "question": "Can I use a GTIN for items I only sell in my own shop?",
+      "answer": "You can, but there is no reason to pay for one. An internal item code unique within your shop identifies stock at your own till just as well and costs nothing to create."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "label-printer"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "barcode",
+    "sku",
+    "barcode-scanner",
+    "batch-number"
+  ]
+}
