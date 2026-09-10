@@ -64,6 +64,34 @@
   ],
   "terms": [
     {
+      "slug": "gtin",
+      "term": "GTIN",
+      "category": "retail-inventory",
+      "short": "The globally unique number that identifies a product across every retailer.",
+      "aliases": [
+        "global trade item number"
+      ]
+    },
+    {
+      "slug": "proforma-invoice",
+      "term": "Proforma Invoice",
+      "category": "accounting",
+      "short": "A request for payment issued before supply, which is not a tax document.",
+      "aliases": [
+        "pro forma invoice"
+      ]
+    },
+    {
+      "slug": "tds-return",
+      "term": "TDS Return",
+      "category": "gst-tax",
+      "short": "The quarterly statement a deductor files reporting tax deducted and deposited.",
+      "aliases": [
+        "TDS statement",
+        "quarterly TDS return"
+      ]
+    },
+    {
       "slug": "engagement-letter",
       "term": "Engagement Letter",
       "category": "accounting",
