@@ -64,6 +64,53 @@
   ],
   "terms": [
     {
+      "slug": "engagement-letter",
+      "term": "Engagement Letter",
+      "category": "accounting",
+      "short": "The written agreement setting out what your accountant will and will not do.",
+      "aliases": [
+        "letter of engagement"
+      ]
+    },
+    {
+      "slug": "expense-report",
+      "term": "Expense Report",
+      "category": "accounting",
+      "short": "A grouped set of business expenses an employee submits for approval and reimbursement.",
+      "aliases": [
+        "expense claim",
+        "reimbursement claim"
+      ]
+    },
+    {
+      "slug": "fixed-asset-register",
+      "term": "Fixed Asset Register",
+      "category": "accounting",
+      "short": "The schedule of every long-lived asset, its cost, and the depreciation charged so far.",
+      "aliases": [
+        "asset register"
+      ]
+    },
+    {
+      "slug": "opening-balance",
+      "term": "Opening Balance",
+      "category": "accounting",
+      "short": "The balance an account starts a period with, carried over from the last period's close.",
+      "aliases": [
+        "brought forward balance"
+      ]
+    },
+    {
+      "slug": "residual-value",
+      "term": "Residual Value",
+      "category": "accounting",
+      "short": "What an asset is expected to be worth at the end of its useful life.",
+      "aliases": [
+        "salvage value",
+        "scrap value"
+      ]
+    },
+    {
       "slug": "gstr-9",
       "term": "GSTR-9",
       "category": "gst-tax",
