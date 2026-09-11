@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/team",
     "/pricing",
     "/sitemap",
+    "/privacy",
+    "/terms",
     "/products",
     "/products/qr-menu",
     "/products/restaurant-pos",
