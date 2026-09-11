@@ -173,3 +173,80 @@ export function toolApplicationSchema({
  * is genuine review data (G2, Capterra, or collected first-party feedback) —
  * never synthesise a rating to fill the field.
  */
+
+// ---------------------------------------------------------------------------
+// Homepage
+//
+// The homepage exists in 17 languages (see lib/i18n/home-locales.ts). Each
+// version describes itself: the WebSite node stays on the English root so the
+// sitelinks search box is declared once, while every translation emits a
+// WebPage that names its language and points back at that one WebSite.
+// ---------------------------------------------------------------------------
+
+/** WebSite node for the English root — also what enables the sitelinks search box. */
+export function webSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: "Setu Technology",
+    alternateName: "Setu",
+    url: SITE_URL,
+    inLanguage: "en",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+/** WebPage node for a translated homepage, naming the language it is written in. */
+export function localizedHomePageSchema({
+  path,
+  hreflang,
+  name,
+  description,
+}: {
+  path: string;
+  hreflang: string;
+  name: string;
+  description: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}${path}#webpage`,
+    url: `${SITE_URL}${path}`,
+    name,
+    description,
+    inLanguage: hreflang,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    publisher: { "@type": "Organization", name: "Setu Technology", url: SITE_URL },
+  };
+}
+
+/**
+ * FAQPage node. The questions must be the ones rendered on the page — schema
+ * that describes invisible content is a manual-action risk — so this always
+ * takes the same items the page shows, in the same language.
+ */
+export function faqPageSchema(
+  items: { question: string; answer: string }[],
+  { hreflang, path }: { hreflang: string; path: string },
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}${path}#faq`,
+    inLanguage: hreflang,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}

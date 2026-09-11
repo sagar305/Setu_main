@@ -1,0 +1,212 @@
+{
+  "seo": {
+    "title": "Setu Technology | Software para todo tipo de negócio",
+    "description": "Setu, a ponte do seu negócio. Software gratuito que roda no navegador: PDV para lojas, caixa de restaurante, gestor de clínica e calculadoras de negócio.",
+    "keywords": [
+      "Setu Technology",
+      "software de gestão de negócios",
+      "PDV para restaurante",
+      "software de faturamento grátis"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu para o seu negócio",
+    "headline": "Software feito para o jeito como você realmente trabalha",
+    "subheadline": "Faturamento, estoque, pacientes e turmas: software gratuito que abre no seu navegador, sem instalar nada e sem cadastro.",
+    "primaryCta": {
+      "label": "Ver produtos"
+    },
+    "secondaryCta": {
+      "label": "Ver ferramentas grátis"
+    }
+  },
+  "products": {
+    "eyebrow": "Produtos",
+    "headline": "Software para o jeito como o seu negócio funciona",
+    "subtext": "Um produto pago e o resto grátis para sempre — todos abrem no navegador, sem instalar nada.",
+    "cards": [
+      {
+        "tagline": "Um QR code que nunca precisa ser reimpresso",
+        "description": "Seu cardápio fica on-line e o código impresso guarda um link permanente: mude um preço ou marque um prato como esgotado e o código nas mesas continua funcionando.",
+        "cta": {
+          "label": "Conhecer o Setu QR Menu"
+        }
+      },
+      {
+        "name": "PDV de loja no navegador",
+        "tagline": "Faturamento direto no seu navegador",
+        "description": "Um ponto de venda gratuito e sem instalação para lojas: vendas, produtos, estoque e recibos térmicos, sem login e funcionando off-line.",
+        "cta": {
+          "label": "Abrir o PDV de loja"
+        }
+      },
+      {
+        "tagline": "Um PDV de restaurante, grátis",
+        "description": "Mesas, comandas de cozinha, contas divididas e impostos: um caixa completo de salão que roda no navegador sem login.",
+        "cta": {
+          "label": "Abrir o Free Dine"
+        }
+      },
+      {
+        "name": "Gestor de turmas de reforço",
+        "tagline": "Presença, mensalidades e avisos aos pais",
+        "description": "Turmas, presença diária, mensalidades que se somam sozinhas e lembretes por WhatsApp para os pais: grátis e também off-line.",
+        "cta": {
+          "label": "Abrir o gestor de turmas"
+        }
+      },
+      {
+        "name": "Ficha de reparo gratuita",
+        "tagline": "Um registro que encerra discussões",
+        "description": "Fotografe e colha a assinatura do estado do aparelho na entrada e acompanhe cada serviço em um quadro que fica âmbar e depois vermelho.",
+        "cta": {
+          "label": "Abrir a ficha de serviço"
+        }
+      },
+      {
+        "name": "Mais produtos",
+        "tagline": "Tudo o que já construímos",
+        "description": "Faturamento de farmácia, livros de locação, painéis de senha e os produtos pagos ainda em desenvolvimento: a lista completa está aqui.",
+        "cta": {
+          "label": "Ver todos os produtos"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "eyebrow": "Ferramentas grátis",
+    "headline": "Ferramentas gratuitas para tocar o seu negócio",
+    "subtext": "Sem cadastro, sem instalação: comece a usar direto no navegador.",
+    "cards": [
+      {
+        "name": "Gerador de notas",
+        "tagline": "Nota com impostos em um minuto",
+        "description": "Monte uma nota com o detalhamento dos impostos, o valor por extenso e um QR de pagamento e baixe o PDF: nada sai do seu navegador.",
+        "cta": {
+          "label": "Criar uma nota"
+        }
+      },
+      {
+        "name": "Gerador de cardápio QR",
+        "tagline": "Seu cardápio dentro de um QR code",
+        "description": "Monte o cardápio e receba um QR code pronto para impressão: o cardápio inteiro mora dentro do próprio QR, sem hospedagem.",
+        "cta": {
+          "label": "Criar um cardápio QR"
+        }
+      },
+      {
+        "name": "Caderneta de clientes",
+        "tagline": "Fiado, sem o caderno",
+        "description": "Acompanhe quanto cada cliente deve, registre os pagamentos e mande um lembrete por WhatsApp com o saldo em aberto.",
+        "cta": {
+          "label": "Abrir a caderneta"
+        }
+      },
+      {
+        "name": "Mais ferramentas grátis",
+        "tagline": "Mais de cinquenta, todas grátis",
+        "description": "Orçamentos, registros de estoque, livros-caixa, balanços, impressão de etiquetas e muito mais: todas gratuitas e off-line.",
+        "cta": {
+          "label": "Ver todas as ferramentas"
+        }
+      }
+    ]
+  },
+  "calculators": {
+    "eyebrow": "Calculadoras grátis",
+    "headline": "Calculadoras feitas para quem toca o negócio",
+    "subtext": "Respostas rápidas para os números que você confere toda semana: sem cadastro, só resultados.",
+    "cards": [
+      {
+        "name": "Calculadora de ficha técnica",
+        "tagline": "Saiba o custo real do prato",
+        "description": "Divida um prato nos custos de seus ingredientes e veja o custo real por porção antes de definir o preço.",
+        "cta": {
+          "label": "Abrir calculadora"
+        }
+      },
+      {
+        "name": "Calculadora de GST",
+        "tagline": "Some ou retire o imposto na hora",
+        "description": "Some o imposto a um preço base ou separe o imposto de um preço final, em qualquer alíquota: o detalhamento em um toque.",
+        "cta": {
+          "label": "Abrir calculadora"
+        }
+      },
+      {
+        "name": "Calculadora de preço para delivery",
+        "tagline": "Preço para os aplicativos",
+        "description": "Parta da margem que você precisa depois de comissão, embalagem e descontos e calcule de trás para frente o preço a anunciar.",
+        "cta": {
+          "label": "Abrir calculadora"
+        }
+      },
+      {
+        "name": "Mais calculadoras",
+        "tagline": "Margens, impostos, empréstimos e mais",
+        "description": "Ponto de equilíbrio, custo de mercadoria %, markup, parcela de empréstimo, salário líquido e muito mais: tudo grátis.",
+        "cta": {
+          "label": "Ver todas as calculadoras"
+        }
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Serviços",
+    "headline": "Além do software: serviços que tocam o seu back office",
+    "subtext": "Não são só ferramentas. A Setu também faz o trabalho por você, começando pela contabilidade.",
+    "cards": [
+      {
+        "name": "Contabilidade, escrituração e folha",
+        "description": "Contabilidade, escrituração e folha de pagamento terceirizadas para pequenas e médias empresas — semanal, quinzenal, mensal, trimestral ou anual. Conciliação bancária, DRE, balanço, fluxo de caixa e mais.",
+        "points": [
+          "Escrituração e conciliação mensais",
+          "DRE, balanço patrimonial, fluxo de caixa",
+          "QuickBooks, Xero, Zoho, FreshBooks e mais"
+        ],
+        "cta": {
+          "label": "Conhecer a consultoria"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "headline": "Perguntas frequentes",
+    "items": [
+      {
+        "question": "O que é a Setu Technology?",
+        "answer": "A Setu Technology cria software operacional para negócios: faturamento, estoque, cozinha e atendimento. Começou com software para restaurantes e está se expandindo para o varejo e as clínicas."
+      },
+      {
+        "question": "Quais produtos a Setu oferece?",
+        "answer": "Produtos gratuitos que você abre agora mesmo no navegador: o PDV de loja, o Free Dine para restaurantes, o analisador de extratos bancários, o gestor de turmas e o gestor de clínica, além do Setu QR Menu para cardápios digitais. Setu Dine, Setu Queue e Setu Retail estão em desenvolvimento."
+      },
+      {
+        "question": "Para quem o Setu Dine foi feito?",
+        "answer": "Para restaurantes, de uma única casa a uma rede inteira. Cobre faturamento, comandas de cozinha, gestão de mesas, cupons e painéis multiunidade, com motor de impostos embutido. Ainda está em desenvolvimento: o Free Dine é o caixa que você já pode usar hoje."
+      },
+      {
+        "question": "As calculadoras e ferramentas da Setu são grátis?",
+        "answer": "Sim. Toda calculadora e ferramenta do site é gratuita e não pede cadastro nem login. Elas rodam no seu navegador, e seus dados ficam no seu aparelho em vez de ir para um servidor."
+      },
+      {
+        "question": "A Setu está disponível fora da Índia?",
+        "answer": "Sim. A Setu constrói para negócios do mundo todo, com um motor de impostos desenhado em torno das regras de faturamento indianas e suporte a restaurantes e empresas que operam em outros países."
+      },
+      {
+        "question": "A Setu oferece serviços de contabilidade?",
+        "answer": "Sim. A Setu mantém um serviço terceirizado de contabilidade, escrituração e folha de pagamento para pequenas empresas, em ciclos de semanais a anuais, com QuickBooks, Xero, Zoho, FreshBooks e outros."
+      }
+    ]
+  },
+  "languageLinks": {
+    "headline": "Setu no seu idioma"
+  },
+  "ctaBanner": {
+    "headline": "Quer ver a Setu funcionando?",
+    "subtext": "Conte o que você toca e apontamos a ferramenta certa — todas elas abrem de graça agora mesmo.",
+    "cta": {
+      "label": "Fale com a gente"
+    }
+  }
+}

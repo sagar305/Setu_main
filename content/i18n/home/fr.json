@@ -1,0 +1,212 @@
+{
+  "seo": {
+    "title": "Setu Technology | Des logiciels pour chaque activité",
+    "description": "Setu, le pont de votre activité. Des logiciels gratuits dans le navigateur : caisse de magasin, caisse de restaurant, gestion de cabinet et calculatrices.",
+    "keywords": [
+      "Setu Technology",
+      "logiciel de gestion d'entreprise",
+      "caisse pour restaurant",
+      "logiciel de facturation gratuit"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu pour votre activité",
+    "headline": "Des logiciels pensés pour votre façon de travailler",
+    "subheadline": "Facturation, stock, patients et cours : des logiciels gratuits qui s'ouvrent dans votre navigateur, sans rien installer ni créer de compte.",
+    "primaryCta": {
+      "label": "Voir les produits"
+    },
+    "secondaryCta": {
+      "label": "Voir les outils gratuits"
+    }
+  },
+  "products": {
+    "eyebrow": "Produits",
+    "headline": "Des logiciels pour la façon dont tourne votre activité",
+    "subtext": "Un seul produit payant, tous les autres gratuits pour toujours : tous s'ouvrent dans un navigateur, sans rien installer.",
+    "cards": [
+      {
+        "tagline": "Un QR code qu'on ne réimprime jamais",
+        "description": "Votre carte vit en ligne et le code imprimé garde un lien permanent : changez un prix ou signalez un plat épuisé, le code sur les tables continue de fonctionner.",
+        "cta": {
+          "label": "Découvrir Setu QR Menu"
+        }
+      },
+      {
+        "name": "Caisse de magasin dans le navigateur",
+        "tagline": "La facturation, dans votre navigateur",
+        "description": "Une caisse gratuite et sans installation pour les commerces : facturation, produits, stock et tickets thermiques, sans compte et même hors ligne.",
+        "cta": {
+          "label": "Ouvrir la caisse magasin"
+        }
+      },
+      {
+        "tagline": "Une caisse de restaurant, gratuite",
+        "description": "Tables, bons de cuisine, additions partagées et taxes : une caisse de salle complète qui tourne dans le navigateur, sans connexion.",
+        "cta": {
+          "label": "Ouvrir Free Dine"
+        }
+      },
+      {
+        "name": "Gestion des cours particuliers",
+        "tagline": "Présences, frais et rappels aux parents",
+        "description": "Groupes, présences quotidiennes, frais mensuels qui se cumulent tout seuls et rappels WhatsApp aux parents : gratuit, et hors ligne aussi.",
+        "cta": {
+          "label": "Ouvrir la gestion des cours"
+        }
+      },
+      {
+        "name": "Fiche de réparation gratuite",
+        "tagline": "Un constat qui met fin aux litiges",
+        "description": "Photographiez et faites signer l'état de l'appareil à la réception, puis suivez chaque intervention sur un tableau qui passe à l'orange puis au rouge.",
+        "cta": {
+          "label": "Ouvrir la fiche de travail"
+        }
+      },
+      {
+        "name": "Plus de produits",
+        "tagline": "Tout ce que nous avons construit",
+        "description": "Facturation de pharmacie, registres de location, afficheurs de file d'attente et les produits payants encore en chantier : la liste complète est ici.",
+        "cta": {
+          "label": "Voir tous les produits"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "eyebrow": "Outils gratuits",
+    "headline": "Des outils gratuits pour faire tourner votre activité",
+    "subtext": "Sans compte, sans installation : utilisez-les directement dans votre navigateur.",
+    "cards": [
+      {
+        "name": "Générateur de factures",
+        "tagline": "Une facture avec taxes en une minute",
+        "description": "Créez une facture avec le détail des taxes, le montant en lettres et un QR de paiement, puis téléchargez le PDF : rien ne quitte votre navigateur.",
+        "cta": {
+          "label": "Créer une facture"
+        }
+      },
+      {
+        "name": "Générateur de carte QR",
+        "tagline": "Votre carte dans un QR code",
+        "description": "Composez votre carte et obtenez un QR code prêt à imprimer : toute la carte tient dans le QR lui-même, sans hébergement.",
+        "cta": {
+          "label": "Créer une carte QR"
+        }
+      },
+      {
+        "name": "Livre de comptes clients",
+        "tagline": "Les ardoises, sans le carnet",
+        "description": "Suivez ce que chaque client vous doit, enregistrez les règlements et envoyez un rappel WhatsApp avec le solde restant.",
+        "cta": {
+          "label": "Ouvrir le livre"
+        }
+      },
+      {
+        "name": "Plus d'outils gratuits",
+        "tagline": "Plus de cinquante outils, tous gratuits",
+        "description": "Devis, registres de stock, livres de caisse, bilans, impression d'étiquettes et bien plus : tous gratuits et hors ligne.",
+        "cta": {
+          "label": "Voir tous les outils"
+        }
+      }
+    ]
+  },
+  "calculators": {
+    "eyebrow": "Calculatrices gratuites",
+    "headline": "Des calculatrices faites pour les exploitants",
+    "subtext": "Des réponses rapides aux chiffres que vous suivez chaque semaine : sans compte, juste des résultats.",
+    "cards": [
+      {
+        "name": "Calculatrice de coût de recette",
+        "tagline": "Le vrai coût d'une assiette",
+        "description": "Décomposez un plat en coûts d'ingrédients et voyez le coût réel par assiette avant d'en fixer le prix.",
+        "cta": {
+          "label": "Ouvrir la calculatrice"
+        }
+      },
+      {
+        "name": "Calculatrice de GST",
+        "tagline": "Ajoutez ou retirez la taxe aussitôt",
+        "description": "Ajoutez la taxe à un prix hors taxe ou extrayez-la d'un prix final, pour n'importe quel taux : le détail en un geste.",
+        "cta": {
+          "label": "Ouvrir la calculatrice"
+        }
+      },
+      {
+        "name": "Calculatrice de prix pour la livraison",
+        "tagline": "Vos prix sur les plateformes",
+        "description": "Partez de la marge qu'il vous faut après commission, emballage et remises, et remontez jusqu'au prix à afficher.",
+        "cta": {
+          "label": "Ouvrir la calculatrice"
+        }
+      },
+      {
+        "name": "Plus de calculatrices",
+        "tagline": "Marges, taxes, prêts et plus encore",
+        "description": "Seuil de rentabilité, coût matière %, coefficient, mensualité de prêt, salaire net et bien plus : toutes gratuites.",
+        "cta": {
+          "label": "Voir toutes les calculatrices"
+        }
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "headline": "Au-delà du logiciel : des services qui tiennent votre administratif",
+    "subtext": "Pas seulement des outils. Setu fait aussi le travail pour vous, à commencer par la comptabilité.",
+    "cards": [
+      {
+        "name": "Comptabilité, tenue de livres et paie",
+        "description": "Comptabilité, tenue de livres et paie externalisées pour les PME : hebdomadaire, bimensuelle, mensuelle, trimestrielle ou annuelle. Rapprochement bancaire, compte de résultat, bilan, flux de trésorerie et plus.",
+        "points": [
+          "Tenue de livres et rapprochement mensuels",
+          "Compte de résultat, bilan, flux de trésorerie",
+          "QuickBooks, Xero, Zoho, FreshBooks et plus"
+        ],
+        "cta": {
+          "label": "Découvrir le conseil"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "headline": "Questions fréquentes",
+    "items": [
+      {
+        "question": "Qu'est-ce que Setu Technology ?",
+        "answer": "Setu Technology crée des logiciels d'exploitation pour les entreprises : facturation, stock, cuisine et accueil. Tout a commencé avec le logiciel pour restaurants, et s'étend aujourd'hui au commerce et aux cabinets médicaux."
+      },
+      {
+        "question": "Quels produits Setu propose-t-il ?",
+        "answer": "Des produits gratuits que vous pouvez ouvrir tout de suite dans le navigateur : la caisse de magasin, Free Dine pour les restaurants, l'analyseur de relevés bancaires, la gestion des cours et la gestion de cabinet, plus Setu QR Menu pour les cartes numériques. Setu Dine, Setu Queue et Setu Retail sont en développement."
+      },
+      {
+        "question": "À qui s'adresse Setu Dine ?",
+        "answer": "Aux restaurants, du point de vente unique à la chaîne complète. Il couvre la facturation, les bons de cuisine, la gestion des tables, les coupons et les tableaux de bord multi-sites, avec un moteur de taxes intégré. Il est encore en développement : Free Dine est la caisse utilisable dès aujourd'hui."
+      },
+      {
+        "question": "Les calculatrices et outils de Setu sont-ils gratuits ?",
+        "answer": "Oui. Chaque calculatrice et chaque outil du site est gratuit et ne demande ni compte ni connexion. Tout tourne dans votre navigateur, et vos données restent sur votre appareil au lieu de partir vers un serveur."
+      },
+      {
+        "question": "Setu est-il disponible hors de l'Inde ?",
+        "answer": "Oui. Setu construit pour des entreprises du monde entier, avec un moteur de taxes conçu autour des règles de facturation indiennes et la prise en charge des restaurants et commerces d'autres pays."
+      },
+      {
+        "question": "Setu propose-t-il des services comptables ?",
+        "answer": "Oui. Setu assure la comptabilité, la tenue de livres et la paie externalisées pour les petites entreprises, sur des cycles hebdomadaires à annuels, avec QuickBooks, Xero, Zoho, FreshBooks et d'autres."
+      }
+    ]
+  },
+  "languageLinks": {
+    "headline": "Setu dans votre langue"
+  },
+  "ctaBanner": {
+    "headline": "Envie de voir Setu à l'œuvre ?",
+    "subtext": "Dites-nous ce que vous gérez et nous vous indiquons l'outil qui convient : chacun s'ouvre gratuitement, tout de suite.",
+    "cta": {
+      "label": "Parlez-nous"
+    }
+  }
+}

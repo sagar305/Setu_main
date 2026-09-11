@@ -1,24 +1,43 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Globe } from "lucide-react";
 import { LANGUAGES, useI18n, type LanguageCode } from "@/lib/i18n";
+import { homeLangFromPath, homePathFor } from "@/lib/i18n/home-locales";
 
-// Translations only cover the interactive app surface — the tools and the
-// calculators. On every other route (home, products, blog, contact…) the copy
-// is English-only, so the switcher is shown disabled and pinned to English with
-// a tooltip explaining why, rather than pretending those pages can translate.
-function isTranslatablePath(pathname: string | null): boolean {
+// Two kinds of translated surface, and the switcher has to behave differently
+// on each:
+//
+//   - Tools and calculators translate in the browser, from the saved language
+//     preference. Changing the language there is a state change.
+//   - The homepage is translated server-side, one URL per language (`/`, `/hi`,
+//     `/bn` …), because copy that only appears after hydration cannot rank.
+//     Changing the language there is a navigation, and the URL — not the saved
+//     preference — decides what is on screen.
+//
+// Everywhere else the copy is English-only, so the switcher is shown disabled
+// and pinned to English rather than pretending those pages can translate.
+function isClientTranslatablePath(pathname: string | null): boolean {
   if (!pathname) return false;
   return pathname.startsWith("/tools") || pathname.startsWith("/calculators");
 }
 
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const { lang, setLang } = useI18n();
+  const router = useRouter();
   const pathname = usePathname();
-  const enabled = isTranslatablePath(pathname);
 
-  const disabledNote = "Language switching is available on tools & calculators only";
+  const homeLang = homeLangFromPath(pathname);
+  const enabled = homeLang !== null || isClientTranslatablePath(pathname);
+
+  const disabledNote = "Language switching is available on the homepage, tools & calculators only";
+
+  const handleChange = (code: LanguageCode) => {
+    setLang(code);
+    // On the homepage the translation lives at its own URL, so the choice has
+    // to move the reader there.
+    if (homeLang !== null) router.push(homePathFor(code));
+  };
 
   return (
     <label
@@ -30,11 +49,11 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       <Globe className="h-4 w-4 text-muted" aria-hidden="true" />
       <select
         aria-label="Language"
-        // On non-translatable pages, always display English regardless of the
-        // saved preference — the stored language is left untouched so it comes
-        // back when the user returns to a tool or calculator.
-        value={enabled ? lang : "en"}
-        onChange={(e) => setLang(e.target.value as LanguageCode)}
+        // On a homepage the URL is the truth. On the tools the saved preference
+        // is. Everywhere else, display English regardless of the saved language
+        // — which is left untouched so it comes back on the next tool page.
+        value={homeLang ?? (enabled ? lang : "en")}
+        onChange={(e) => handleChange(e.target.value as LanguageCode)}
         disabled={!enabled}
         aria-disabled={!enabled}
         title={enabled ? undefined : disabledNote}

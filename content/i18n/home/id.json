@@ -1,0 +1,212 @@
+{
+  "seo": {
+    "title": "Setu Technology | Software untuk Setiap Usaha",
+    "description": "Setu — jembatan untuk usaha Anda. Software gratis yang berjalan di peramban: POS toko, kasir restoran, pengelola klinik, dan kalkulator bisnis.",
+    "keywords": [
+      "Setu Technology",
+      "software manajemen usaha",
+      "POS restoran",
+      "software kasir gratis"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu untuk usaha Anda",
+    "headline": "Software yang dibuat mengikuti cara Anda bekerja",
+    "subheadline": "Penagihan, stok, pasien, dan kelas — software gratis yang berjalan di peramban Anda, tanpa instalasi dan tanpa pendaftaran.",
+    "primaryCta": {
+      "label": "Lihat produk"
+    },
+    "secondaryCta": {
+      "label": "Lihat alat gratis"
+    }
+  },
+  "products": {
+    "eyebrow": "Produk",
+    "headline": "Software untuk cara usaha Anda benar-benar berjalan",
+    "subtext": "Satu produk berbayar, sisanya gratis selamanya — semuanya terbuka di peramban tanpa perlu dipasang.",
+    "cards": [
+      {
+        "tagline": "Kode QR yang tak perlu dicetak ulang",
+        "description": "Menu Anda tersimpan daring dan kode yang dicetak memegang tautan permanen — ubah harga atau tandai satu menu habis, kode di meja tetap bekerja seperti biasa.",
+        "cta": {
+          "label": "Lihat Setu QR Menu"
+        }
+      },
+      {
+        "name": "POS Toko Berbasis Peramban",
+        "tagline": "Penagihan, langsung di peramban Anda",
+        "description": "Point of sale gratis tanpa instalasi untuk toko — penjualan, produk, stok, dan struk termal; jalan tanpa login dan tetap bekerja luring.",
+        "cta": {
+          "label": "Buka POS toko"
+        }
+      },
+      {
+        "tagline": "POS restoran, gratis",
+        "description": "Meja, tiket dapur, bagi tagihan, dan pajak — sistem kasir ruang makan lengkap yang berjalan di peramban tanpa login.",
+        "cta": {
+          "label": "Buka Free Dine"
+        }
+      },
+      {
+        "name": "Pengelola Kelas Bimbel",
+        "tagline": "Absensi, iuran, dan pengingat untuk orang tua",
+        "description": "Rombongan belajar, absensi harian, iuran bulanan yang terhitung sendiri, dan pengingat WhatsApp ke orang tua — gratis, dan bisa luring.",
+        "cta": {
+          "label": "Buka pengelola kelas"
+        }
+      },
+      {
+        "name": "Kartu Servis Perbaikan Gratis",
+        "tagline": "Catatan yang menyelesaikan perselisihan",
+        "description": "Foto dan mintakan tanda tangan kondisi perangkat saat diterima, lalu pantau setiap pekerjaan di satu papan yang menguning dan memerah seiring waktu.",
+        "cta": {
+          "label": "Buka kartu servis"
+        }
+      },
+      {
+        "name": "Produk lainnya",
+        "tagline": "Semua yang sudah kami bangun",
+        "description": "Penagihan apotek, buku sewa, layar nomor antrean, dan produk berbayar yang masih digarap — daftar lengkapnya ada di sini.",
+        "cta": {
+          "label": "Lihat semua produk"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "eyebrow": "Alat Gratis",
+    "headline": "Alat gratis untuk menjalankan usaha",
+    "subtext": "Tanpa daftar, tanpa pasang — langsung pakai di peramban Anda.",
+    "cards": [
+      {
+        "name": "Pembuat Faktur",
+        "tagline": "Faktur berpajak dalam satu menit",
+        "description": "Susun faktur dengan rincian pajak, nilai dalam huruf, dan QR pembayaran, lalu unduh PDF-nya — tidak ada data yang keluar dari peramban.",
+        "cta": {
+          "label": "Buat faktur"
+        }
+      },
+      {
+        "name": "Pembuat Menu QR",
+        "tagline": "Menu Anda di dalam kode QR",
+        "description": "Susun menu dan dapatkan kode QR siap cetak — seluruh menu tersimpan di dalam QR itu sendiri, tanpa perlu hosting.",
+        "cta": {
+          "label": "Buat menu QR"
+        }
+      },
+      {
+        "name": "Buku Piutang Pelanggan",
+        "tagline": "Utang pelanggan, tanpa buku tulis",
+        "description": "Pantau berapa utang tiap pelanggan, catat pembayarannya, dan kirim pengingat WhatsApp berisi sisa saldo.",
+        "cta": {
+          "label": "Buka buku piutang"
+        }
+      },
+      {
+        "name": "Alat gratis lainnya",
+        "tagline": "Lebih dari lima puluh alat, semua gratis",
+        "description": "Penawaran harga, buku stok, buku kas, neraca, cetak label, dan banyak lagi — semuanya gratis dan bisa dipakai luring.",
+        "cta": {
+          "label": "Lihat semua alat"
+        }
+      }
+    ]
+  },
+  "calculators": {
+    "eyebrow": "Kalkulator Gratis",
+    "headline": "Kalkulator bisnis untuk yang menjalankan usaha",
+    "subtext": "Jawaban cepat untuk angka yang Anda cek tiap minggu — tanpa daftar, langsung hasil.",
+    "cards": [
+      {
+        "name": "Kalkulator Biaya Resep",
+        "tagline": "Ketahui biaya asli per porsi",
+        "description": "Uraikan satu menu menjadi biaya bahannya dan lihat biaya nyata per porsi sebelum Anda menetapkan harga.",
+        "cta": {
+          "label": "Buka kalkulator"
+        }
+      },
+      {
+        "name": "Kalkulator GST",
+        "tagline": "Tambah atau keluarkan pajak seketika",
+        "description": "Tambahkan pajak ke harga dasar atau keluarkan pajak dari harga akhir, untuk tarif mana pun — rinciannya dalam satu ketukan.",
+        "cta": {
+          "label": "Buka kalkulator"
+        }
+      },
+      {
+        "name": "Kalkulator Harga Menu Online",
+        "tagline": "Harga untuk aplikasi pesan-antar",
+        "description": "Mulai dari margin yang Anda butuhkan setelah komisi, kemasan, dan diskon, lalu hitung mundur harga yang pantas dipasang.",
+        "cta": {
+          "label": "Buka kalkulator"
+        }
+      },
+      {
+        "name": "Kalkulator lainnya",
+        "tagline": "Margin, pajak, pinjaman, dan lainnya",
+        "description": "Titik impas, persentase biaya bahan, markup, angsuran pinjaman, gaji bersih, dan banyak lagi — semuanya gratis.",
+        "cta": {
+          "label": "Lihat semua kalkulator"
+        }
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Layanan",
+    "headline": "Lebih dari software — layanan yang menjalankan back office Anda",
+    "subtext": "Bukan sekadar alat. Setu juga mengerjakannya untuk Anda, dimulai dari pembukuan.",
+    "cards": [
+      {
+        "name": "Akuntansi, Pembukuan, dan Payroll",
+        "description": "Akuntansi, pembukuan, dan payroll alih daya untuk UKM — mingguan, dua mingguan, bulanan, triwulanan, atau tahunan. Rekonsiliasi bank, laba rugi, neraca, arus kas, dan lainnya.",
+        "points": [
+          "Pembukuan dan rekonsiliasi bulanan",
+          "Laba rugi, neraca, arus kas",
+          "QuickBooks, Xero, Zoho, FreshBooks, dan lainnya"
+        ],
+        "cta": {
+          "label": "Lihat layanan konsultasi"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "headline": "Pertanyaan yang sering diajukan",
+    "items": [
+      {
+        "question": "Apa itu Setu Technology?",
+        "answer": "Setu Technology membangun software operasional untuk usaha — penagihan, stok, alur kerja dapur, dan meja depan. Dimulai dari software restoran dan kini meluas ke ritel serta klinik."
+      },
+      {
+        "question": "Produk apa saja yang ditawarkan Setu?",
+        "answer": "Produk gratis yang bisa langsung dibuka di peramban — POS toko, Free Dine untuk restoran, penganalisis rekening koran, pengelola kelas bimbel, dan pengelola klinik — ditambah Setu QR Menu untuk menu digital. Setu Dine, Setu Queue, dan Setu Retail masih dikembangkan."
+      },
+      {
+        "question": "Setu Dine dibuat untuk siapa?",
+        "answer": "Untuk restoran, dari satu gerai sampai jaringan penuh. Mencakup penagihan, tiket pesanan dapur, pengaturan meja, kupon, dan dasbor multigerai dengan mesin pajak bawaan. Masih dikembangkan — Free Dine adalah kasir restoran yang bisa dipakai hari ini."
+      },
+      {
+        "question": "Apakah kalkulator dan alat Setu gratis?",
+        "answer": "Ya. Setiap kalkulator dan alat di situs ini gratis serta tidak memerlukan pendaftaran atau login. Semuanya berjalan di peramban Anda, dan data Anda tetap di perangkat, bukan dikirim ke server."
+      },
+      {
+        "question": "Apakah Setu tersedia di luar India?",
+        "answer": "Ya. Setu dibangun untuk usaha di seluruh dunia, dengan mesin pajak yang dirancang mengikuti aturan penagihan India sekaligus mendukung restoran dan usaha yang beroperasi di negara lain."
+      },
+      {
+        "question": "Apakah Setu menyediakan jasa akuntansi?",
+        "answer": "Ya. Setu menjalankan jasa akuntansi, pembukuan, dan payroll alih daya untuk usaha kecil, dengan siklus mingguan sampai tahunan, di QuickBooks, Xero, Zoho, FreshBooks, dan lainnya."
+      }
+    ]
+  },
+  "languageLinks": {
+    "headline": "Setu dalam bahasa Anda"
+  },
+  "ctaBanner": {
+    "headline": "Ingin melihat Setu bekerja?",
+    "subtext": "Ceritakan usaha Anda dan kami tunjukkan alat yang paling pas — semuanya bisa dibuka gratis sekarang juga.",
+    "cta": {
+      "label": "Hubungi kami"
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "seo": {
+    "title": "Setu Technology | Software für jedes Unternehmen",
+    "description": "Setu – die Brücke für Ihr Geschäft. Kostenlose Software direkt im Browser: Kasse für Läden, Restaurantkasse, Praxisverwaltung und Rechner fürs Geschäft.",
+    "keywords": [
+      "Setu Technology",
+      "Software für die Unternehmensverwaltung",
+      "Kassensystem Restaurant",
+      "kostenlose Rechnungssoftware"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu für Ihr Geschäft",
+    "headline": "Software, gebaut für Ihre tatsächliche Arbeitsweise",
+    "subheadline": "Rechnungen, Warenbestand, Patienten und Kurse: kostenlose Software, die im Browser läuft — nichts zu installieren, keine Anmeldung.",
+    "primaryCta": {
+      "label": "Produkte ansehen"
+    },
+    "secondaryCta": {
+      "label": "Kostenlose Tools ansehen"
+    }
+  },
+  "products": {
+    "eyebrow": "Produkte",
+    "headline": "Software dafür, wie Ihr Geschäft wirklich läuft",
+    "subtext": "Ein Produkt kostenpflichtig, alle anderen für immer kostenlos — alle öffnen sich im Browser, ohne Installation.",
+    "cards": [
+      {
+        "tagline": "Ein QR-Code, den Sie nie neu drucken",
+        "description": "Ihre Karte liegt online, der gedruckte Code hält einen dauerhaften Link: Ändern Sie einen Preis oder markieren Sie ein Gericht als ausverkauft — der Code auf den Tischen funktioniert weiter.",
+        "cta": {
+          "label": "Setu QR Menu ansehen"
+        }
+      },
+      {
+        "name": "Ladenkasse im Browser",
+        "tagline": "Kassieren, direkt im Browser",
+        "description": "Eine kostenlose Kasse ohne Installation für Läden: Verkauf, Artikel, Bestand und Thermobons — ohne Login und auch offline.",
+        "cta": {
+          "label": "Ladenkasse öffnen"
+        }
+      },
+      {
+        "tagline": "Eine Restaurantkasse, kostenlos",
+        "description": "Tische, Küchenbons, geteilte Rechnungen und Steuern: eine vollständige Gastraumkasse, die ohne Login im Browser läuft.",
+        "cta": {
+          "label": "Free Dine öffnen"
+        }
+      },
+      {
+        "name": "Nachhilfe-Kursverwaltung",
+        "tagline": "Anwesenheit, Gebühren und Elternerinnerungen",
+        "description": "Gruppen, tägliche Anwesenheit, Monatsgebühren, die sich von selbst summieren, und WhatsApp-Erinnerungen an die Eltern — kostenlos und auch offline.",
+        "cta": {
+          "label": "Kursverwaltung öffnen"
+        }
+      },
+      {
+        "name": "Kostenlose Reparaturauftragskarte",
+        "tagline": "Ein Zustandsprotokoll, das Streit beendet",
+        "description": "Fotografieren und quittieren Sie den Zustand des Geräts bei der Annahme und verfolgen Sie jeden Auftrag auf einer Tafel, die mit der Zeit gelb und rot wird.",
+        "cta": {
+          "label": "Auftragskarte öffnen"
+        }
+      },
+      {
+        "name": "Weitere Produkte",
+        "tagline": "Alles, was wir gebaut haben",
+        "description": "Apothekenabrechnung, Mietbücher, Nummernanzeigen und die kostenpflichtigen Produkte in Arbeit — die vollständige Liste steht hier.",
+        "cta": {
+          "label": "Alle Produkte ansehen"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "eyebrow": "Kostenlose Tools",
+    "headline": "Kostenlose Tools für Ihren Betrieb",
+    "subtext": "Keine Anmeldung, keine Installation — einfach im Browser loslegen.",
+    "cards": [
+      {
+        "name": "Rechnungsgenerator",
+        "tagline": "Rechnung mit Steuer in einer Minute",
+        "description": "Erstellen Sie eine Rechnung mit Steueraufschlüsselung, Betrag in Worten und Zahlungs-QR und laden Sie das PDF herunter — nichts verlässt Ihren Browser.",
+        "cta": {
+          "label": "Rechnung erstellen"
+        }
+      },
+      {
+        "name": "QR-Karten-Generator",
+        "tagline": "Ihre Speisekarte in einem QR-Code",
+        "description": "Bauen Sie Ihre Karte und erhalten Sie einen druckfertigen QR-Code — die ganze Karte steckt im Code selbst, ganz ohne Hosting.",
+        "cta": {
+          "label": "QR-Karte erstellen"
+        }
+      },
+      {
+        "name": "Kundenkonto-Buch",
+        "tagline": "Anschreiben lassen, ohne Heft",
+        "description": "Behalten Sie offene Beträge je Kunde im Blick, buchen Sie Zahlungen darauf und schicken Sie per WhatsApp eine Erinnerung mit dem Saldo.",
+        "cta": {
+          "label": "Buch öffnen"
+        }
+      },
+      {
+        "name": "Weitere kostenlose Tools",
+        "tagline": "Über fünfzig Tools, alle kostenlos",
+        "description": "Angebote, Bestandslisten, Kassenbücher, Bilanzen, Etikettendruck und mehr — jedes davon kostenlos und offline nutzbar.",
+        "cta": {
+          "label": "Alle Tools ansehen"
+        }
+      }
+    ]
+  },
+  "calculators": {
+    "eyebrow": "Kostenlose Rechner",
+    "headline": "Rechner, gebaut für Betreiber",
+    "subtext": "Schnelle Antworten auf die Zahlen, die Sie jede Woche prüfen — keine Anmeldung, nur Ergebnisse.",
+    "cards": [
+      {
+        "name": "Rezeptkalkulations-Rechner",
+        "tagline": "Die echten Kosten pro Teller",
+        "description": "Zerlegen Sie ein Gericht in seine Zutatenkosten und sehen Sie die echten Kosten pro Teller, bevor Sie den Preis festlegen.",
+        "cta": {
+          "label": "Rechner öffnen"
+        }
+      },
+      {
+        "name": "GST-Rechner",
+        "tagline": "Steuer sofort aufschlagen oder herausrechnen",
+        "description": "Schlagen Sie die Steuer auf einen Nettopreis auf oder rechnen Sie sie aus einem Endpreis heraus — die Aufteilung mit einem Tipp.",
+        "cta": {
+          "label": "Rechner öffnen"
+        }
+      },
+      {
+        "name": "Rechner für Lieferdienst-Preise",
+        "tagline": "Preise für Lieferplattformen",
+        "description": "Rechnen Sie von der Marge, die nach Provision, Verpackung und Rabatten bleiben soll, zurück auf den Preis, den Sie ausweisen.",
+        "cta": {
+          "label": "Rechner öffnen"
+        }
+      },
+      {
+        "name": "Weitere Rechner",
+        "tagline": "Margen, Steuern, Kredite und mehr",
+        "description": "Break-even, Wareneinsatz in %, Aufschlag, Kreditrate, Nettogehalt und vieles mehr — alle kostenlos nutzbar.",
+        "cta": {
+          "label": "Alle Rechner ansehen"
+        }
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Leistungen",
+    "headline": "Mehr als Software — Leistungen, die Ihr Backoffice führen",
+    "subtext": "Nicht nur Werkzeuge. Setu übernimmt die Arbeit auch für Sie, angefangen bei der Buchhaltung.",
+    "cards": [
+      {
+        "name": "Buchhaltung, Buchführung und Lohnabrechnung",
+        "description": "Ausgelagerte Buchhaltung, Buchführung und Lohnabrechnung für kleine und mittlere Unternehmen — wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. Bankabstimmung, GuV, Bilanz, Cashflow und mehr.",
+        "points": [
+          "Monatliche Buchführung und Abstimmung",
+          "GuV, Bilanz, Cashflow",
+          "QuickBooks, Xero, Zoho, FreshBooks und mehr"
+        ],
+        "cta": {
+          "label": "Beratung ansehen"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "headline": "Häufige Fragen",
+    "items": [
+      {
+        "question": "Was ist Setu Technology?",
+        "answer": "Setu Technology baut Software für den laufenden Betrieb von Unternehmen — Abrechnung, Warenbestand, Küche und Empfang. Angefangen hat es mit Restaurantsoftware, inzwischen kommen Einzelhandel und Praxen dazu."
+      },
+      {
+        "question": "Welche Produkte bietet Setu an?",
+        "answer": "Kostenlose Produkte, die Sie sofort im Browser öffnen können — die Ladenkasse, Free Dine für Restaurants, den Kontoauszug-Analysator, die Kursverwaltung und die Praxisverwaltung — dazu Setu QR Menu für digitale Speisekarten. Setu Dine, Setu Queue und Setu Retail sind in Entwicklung."
+      },
+      {
+        "question": "Für wen ist Setu Dine gebaut?",
+        "answer": "Für Restaurants, vom einzelnen Lokal bis zur ganzen Kette. Es deckt Abrechnung, Küchenbons, Tischverwaltung, Gutscheine und Dashboards über mehrere Standorte ab, mit eingebauter Steuerlogik. Es ist noch in Entwicklung — Free Dine ist die Kasse, die Sie heute schon nutzen können."
+      },
+      {
+        "question": "Sind die Rechner und Tools von Setu kostenlos?",
+        "answer": "Ja. Jeder Rechner und jedes Tool auf der Website ist kostenlos und braucht weder Anmeldung noch Login. Alles läuft in Ihrem Browser, und Ihre Daten bleiben auf Ihrem Gerät, statt an einen Server zu gehen."
+      },
+      {
+        "question": "Ist Setu auch außerhalb Indiens nutzbar?",
+        "answer": "Ja. Setu baut für Unternehmen weltweit — die Steuerlogik ist an den indischen Abrechnungsregeln entworfen, und Restaurants und Betriebe in anderen Ländern werden ebenfalls unterstützt."
+      },
+      {
+        "question": "Bietet Setu Buchhaltungsdienste an?",
+        "answer": "Ja. Setu betreibt ausgelagerte Buchhaltung, Buchführung und Lohnabrechnung für kleine Unternehmen, in Zyklen von wöchentlich bis jährlich, über QuickBooks, Xero, Zoho, FreshBooks und weitere."
+      }
+    ]
+  },
+  "languageLinks": {
+    "headline": "Setu in Ihrer Sprache"
+  },
+  "ctaBanner": {
+    "headline": "Setu in Aktion sehen?",
+    "subtext": "Sagen Sie uns, was Sie betreiben, und wir zeigen Ihnen das passende Werkzeug — jedes davon lässt sich sofort kostenlos öffnen.",
+    "cta": {
+      "label": "Sprechen Sie mit uns"
+    }
+  }
+}

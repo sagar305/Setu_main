@@ -5,6 +5,7 @@ import {
   repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
+import { HOME_LOCALES, homeLanguageAlternates, homePathFor } from "@/lib/i18n/home-locales";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -114,11 +115,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(repairSoftwareEnabled() ? ["/products/free-repair-shop-software"] : []),
   ];
 
+  // hreflang, expressed in the sitemap as well as in each page's <head>. Google
+  // reads either, but a sitemap states the whole cluster in one place, which is
+  // what gets a new translation discovered rather than crawled into by luck.
+  // x-default is a <head>-only signal, so it is dropped here.
+  const homeAlternates = Object.fromEntries(
+    Object.entries(homeLanguageAlternates())
+      .filter(([hreflang]) => hreflang !== "x-default")
+      .map(([hreflang, path]) => [hreflang, `${base}${path === "/" ? "" : path}`]),
+  );
+
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${base}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: route === "" ? 1 : 0.7,
+    ...(route === "" ? { alternates: { languages: homeAlternates } } : {}),
+  }));
+
+  // The translated homepages. Same priority as the English root, since each one
+  // is the entry point for its language rather than a lesser copy of `/`.
+  const localizedHomeEntries: MetadataRoute.Sitemap = HOME_LOCALES.map((code) => ({
+    url: `${base}${homePathFor(code)}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 1,
+    alternates: { languages: homeAlternates },
   }));
 
   // Live QR menu demo. Lives on its own subdomain, so it needs an absolute URL
@@ -155,6 +177,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticEntries,
+    ...localizedHomeEntries,
     ...externalEntries,
     ...blogEntries,
     ...categoryEntries,

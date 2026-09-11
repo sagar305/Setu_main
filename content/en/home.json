@@ -236,6 +236,9 @@
       }
     ]
   },
+  "languageLinks": {
+    "headline": "Setu in your language"
+  },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",
     "subtext": "Tell us what you run and we'll point you at the tool that fits — every one of them is free to open right now.",
