@@ -64,6 +64,54 @@
   ],
   "terms": [
     {
+      "slug": "invoice-management-system",
+      "term": "Invoice Management System",
+      "category": "gst-tax",
+      "short": "The GST portal facility where a buyer accepts, rejects or holds each supplier invoice.",
+      "aliases": [
+        "IMS"
+      ]
+    },
+    {
+      "slug": "itc-reversal",
+      "term": "ITC Reversal",
+      "category": "gst-tax",
+      "short": "Giving back input tax credit already claimed, because it was not or is no longer available.",
+      "aliases": [
+        "input tax credit reversal",
+        "credit reversal"
+      ]
+    },
+    {
+      "slug": "gstr-1a",
+      "term": "GSTR-1A",
+      "category": "gst-tax",
+      "short": "The optional amendment return used to correct outward supplies before filing the summary return.",
+      "aliases": [
+        "GSTR 1A"
+      ]
+    },
+    {
+      "slug": "variable-pay",
+      "term": "Variable Pay",
+      "category": "payroll-hr",
+      "short": "The part of a package that is paid only if a target is met.",
+      "aliases": [
+        "performance pay",
+        "performance bonus"
+      ]
+    },
+    {
+      "slug": "code-on-wages",
+      "term": "Code on Wages",
+      "category": "payroll-hr",
+      "short": "The law that consolidates India's wage rules and redefines what counts as wages.",
+      "aliases": [
+        "wage code",
+        "new wage code"
+      ]
+    },
+    {
       "slug": "gtin",
       "term": "GTIN",
       "category": "retail-inventory",
