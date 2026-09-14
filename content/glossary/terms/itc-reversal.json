@@ -1,0 +1,50 @@
+{
+  "slug": "itc-reversal",
+  "term": "ITC Reversal",
+  "category": "gst-tax",
+  "aliases": [
+    "input tax credit reversal",
+    "credit reversal"
+  ],
+  "short": "Giving back input tax credit already claimed, because it was not or is no longer available.",
+  "seoTitle": "ITC Reversal — Meaning, Reasons and Example",
+  "metaDescription": "Giving back input tax credit you already claimed because it was never eligible or is no longer available. The common reasons, with an example and free tools.",
+  "updated": "2026-09-13",
+  "definition": "ITC reversal is the process of giving back input tax credit that has already been claimed, either because it was never eligible or because a later event — non-payment to the supplier, a credit note, or use for an exempt supply — removed the entitlement. The reversal is reported in the summary return for the period in which it arises.",
+  "bodyHtml": "<h2>Why ITC reversal matters</h2><p>A reversal discovered by your own reconciliation costs you the credit. The same reversal discovered in scrutiny costs the credit plus interest and argument. The difference is almost entirely down to whether anyone is checking the purchase side monthly.</p><h2>Common reasons for reversal</h2><p>The usual ones are non-payment to the supplier within the prescribed window, credit taken on goods or services used for exempt or personal purposes, credit notes issued by the supplier after you claimed, and credit claimed on items that were blocked in the first place. Each has its own timing, and the payment-related one is often reclaimable once you settle the bill.</p><h2>How to stay ahead of it</h2><p>Keep an aging view of what you owe suppliers, because the reversal that catches most small businesses is the one tied to invoices left unpaid past the window. A payables list reviewed on a fixed day each month surfaces it while you can still just pay the bill.</p>",
+  "faq": [
+    {
+      "question": "Can reversed credit be claimed again?",
+      "answer": "Where the reversal was triggered by non-payment, the credit can generally be reclaimed once the supplier is paid. Reversals for ineligible or exempt use are not reclaimable."
+    },
+    {
+      "question": "Where is a reversal reported?",
+      "answer": "In the input tax credit section of the summary return for the period in which the reversal arises, rather than by amending the original claim."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    }
+  ],
+  "relatedTerms": [
+    "input-tax-credit",
+    "gstr-2b",
+    "gstr-3b",
+    "credit-note",
+    "invoice-management-system"
+  ]
+}

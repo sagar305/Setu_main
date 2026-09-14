@@ -1,0 +1,54 @@
+{
+  "slug": "variable-pay",
+  "term": "Variable Pay",
+  "category": "payroll-hr",
+  "aliases": [
+    "performance pay",
+    "performance bonus"
+  ],
+  "short": "The part of a package that is paid only if a target is met.",
+  "seoTitle": "Variable Pay — Meaning, Formula and Example",
+  "metaDescription": "The part of a salary package paid only when a target is met. See how it sits inside CTC, the formula, a worked example and the free Setu salary calculators.",
+  "updated": "2026-09-13",
+  "definition": "Variable pay is the portion of a compensation package that is paid only when a stated target is met — individual performance, team results, company profit, or a mix. It is included in cost to company at its target value, which is not the same as what will be paid.",
+  "formula": {
+    "expression": "Variable pay earned = Target variable pay × Achievement percentage",
+    "note": "CTC usually shows target variable pay at 100% achievement, so the package figure overstates typical earnings."
+  },
+  "bodyHtml": "<h2>Why variable pay matters</h2><p>It is the easiest way to make a package look larger than it reliably is. A candidate reads cost to company as a number they will receive; an aggressive variable component means the figure is a best case that may never occur twice in a row.</p><h2>Variable pay formula</h2><p class=\"glossary-formula\">Variable pay earned = Target variable pay × Achievement percentage</p><p>The package figure is normally built at full achievement, so ask what the last two years actually paid out.</p><h2>How it works in practice</h2><p>Keep it honest and it does its job: a genuine share of results, paid when results happen. Inflate it and you buy a joining, then lose the person in the first cycle where the payout disappoints. Stating the fixed and variable halves separately in an offer prevents that entirely, and costs nothing.</p><h2>Worked example</h2><p>On a ₹9,00,000 package with ₹90,000 of target variable pay, a 70% payout year pays ₹63,000 — and the package the candidate actually experienced was ₹8,73,000.</p>",
+  "faq": [
+    {
+      "question": "Should variable pay be included in CTC?",
+      "answer": "Only if it is genuinely expected to pay out. Including an aggressive target inflates the package and damages trust in the first payout cycle."
+    },
+    {
+      "question": "Is variable pay taxed differently?",
+      "answer": "No. It is salary income and is taxed in the year it is paid, which can push the withholding in that month noticeably higher."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    }
+  ],
+  "relatedTerms": [
+    "ctc",
+    "gross-salary",
+    "take-home-salary",
+    "basic-salary",
+    "bonus"
+  ]
+}

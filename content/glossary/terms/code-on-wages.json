@@ -1,0 +1,51 @@
+{
+  "slug": "code-on-wages",
+  "term": "Code on Wages",
+  "category": "payroll-hr",
+  "aliases": [
+    "wage code",
+    "new wage code"
+  ],
+  "short": "The law that consolidates India's wage rules and redefines what counts as wages.",
+  "seoTitle": "Code on Wages — Meaning and Payroll Impact",
+  "metaDescription": "The law consolidating India's wage rules and redefining wages so excluded allowances are capped. What it changes for basic pay, PF, gratuity and take-home.",
+  "updated": "2026-09-13",
+  "definition": "The Code on Wages, 2019 is one of the four labour codes brought into force on 21 November 2025. It consolidates earlier laws on minimum wages, payment of wages, bonus and equal remuneration, and sets a single definition of wages that limits how much of a package can sit in excluded allowances.",
+  "bodyHtml": "<h2>Why the Code on Wages matters</h2><p>Most Indian salary structures were built with a small basic and a large allowance, which kept provident fund and gratuity contributions low. A definition that caps excluded allowances pushes basic pay upward, and everything calculated on basic moves with it.</p><h2>What it changes in a payslip</h2><p>Raising basic raises both provident fund contributions and the gratuity base. Cost to company need not change at all, but monthly take-home falls while retirement savings rise. Employees frequently read this as a pay cut, which is why explaining it before the first restructured payslip is worth more than explaining it afterwards.</p><h2>What is still settling</h2><p>Central and state rules under the codes have been issued in stages and employers have restructured at different speeds. Treat the direction as settled and the detail as something to confirm for your own state and workforce before you model numbers on it.</p>",
+  "faq": [
+    {
+      "question": "Does the Code on Wages reduce take-home pay?",
+      "answer": "For structures that ran a low basic, usually yes, because contributions calculated on basic increase. The money moves into provident fund and gratuity rather than disappearing."
+    },
+    {
+      "question": "When did the labour codes come into force?",
+      "answer": "The four codes were brought into force on 21 November 2025. Detailed rules under them have followed in stages, and some vary by state."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "take-home-salary-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "gratuity-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "income-tax-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    }
+  ],
+  "relatedTerms": [
+    "basic-salary",
+    "ctc",
+    "provident-fund",
+    "gratuity",
+    "minimum-wages",
+    "variable-pay"
+  ]
+}
