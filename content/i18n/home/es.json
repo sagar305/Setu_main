@@ -20,6 +20,102 @@
       "label": "Ver herramientas gratis"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu para",
+    "badge": "Gratis para siempre",
+    "footnote": "Funciona en tu navegador · También sin conexión",
+    "industries": [
+      {
+        "name": "Restaurantes",
+        "points": [
+          "Mesas, zonas de sala y comandas de cocina",
+          "Cuentas divididas con el desglose de impuestos",
+          "Escandallos calculados sobre el stock real"
+        ]
+      },
+      {
+        "name": "Tiendas",
+        "product": "TPV en el navegador",
+        "points": [
+          "Cobro por código de barras, tickets en espera",
+          "Stock, clientes y fiado en un solo sitio",
+          "Tickets térmicos y en A4"
+        ]
+      },
+      {
+        "name": "Clínicas",
+        "product": "Gestor de clínica gratis",
+        "points": [
+          "Recetas impresas como texto seleccionable",
+          "Pantalla del día por turnos, con tiempos de espera",
+          "Recibos con un QR de pago"
+        ]
+      },
+      {
+        "name": "Clases particulares",
+        "product": "Gestor de clases",
+        "points": [
+          "Asistencia por grupos en segundos",
+          "Cuotas mensuales que se suman solas",
+          "Recordatorios por WhatsApp a las familias"
+        ]
+      },
+      {
+        "name": "Farmacias",
+        "product": "TPV de farmacia gratis",
+        "points": [
+          "Stock por lotes con caducidad en cada blíster",
+          "Factura primero el lote que caduca antes",
+          "Panel de caducidades a 30, 60 y 90 días"
+        ]
+      },
+      {
+        "name": "Talleres de reparación",
+        "product": "Ficha de reparación gratis",
+        "points": [
+          "Fotos del estado y firma en la recepción",
+          "Un tablero con cada aparato del taller",
+          "Resguardos, etiquetas y consulta de garantía"
+        ]
+      },
+      {
+        "name": "Alquiler de material",
+        "product": "Libro de alquileres gratis",
+        "points": [
+          "Un calendario de disponibilidad, día a día",
+          "Daños y demoras descontados de la fianza",
+          "Listas de preparación y albaranes firmados"
+        ]
+      },
+      {
+        "name": "Salas de espera",
+        "product": "Sistema de turnos gratis",
+        "points": [
+          "Llama el número en voz alta, en ocho idiomas",
+          "Una pantalla de sala de espera para el televisor",
+          "Estimaciones de espera con tus propios tiempos"
+        ]
+      },
+      {
+        "name": "Contables",
+        "product": "Analizador de extractos",
+        "points": [
+          "Importa extractos en PDF, XLSX y CSV",
+          "Clasificación por reglas que tú controlas",
+          "Nada se sube: se procesa en tu dispositivo"
+        ]
+      },
+      {
+        "name": "Cualquier negocio",
+        "product": "50+ herramientas gratis",
+        "points": [
+          "Facturas con impuestos y presupuestos",
+          "Libros de clientes, de caja y de stock",
+          "Balances y cuentas de resultados"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Productos",
     "headline": "Software para la forma en que funciona tu negocio",

@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "links": [
+      { "label": "Produk" },
+      { "label": "Konsultasi" },
+      { "label": "Kalkulator" },
+      { "label": "Alat" },
+      { "label": "Tentang" },
+      { "label": "Blog" },
+      { "label": "Kontak" }
+    ],
+    "cta": { "label": "Hubungi kami" },
+    "menu": { "open": "Buka menu", "close": "Tutup menu" }
+  },
+  "footer": {
+    "description": "Setu Technology membangun software yang praktis dan mengutamakan orang yang menjalankan usaha, untuk bisnis di seluruh dunia.",
+    "columns": [
+      {
+        "heading": "Produk",
+        "links": [
+          { "label": "POS berbasis peramban (gratis)" },
+          { "label": "Penganalisis rekening koran (gratis)" },
+          { "label": "Free Dine — POS restoran (gratis)" },
+          { "label": "Pengelola kelas bimbel (gratis)" },
+          { "label": "Pengelola klinik (gratis)" },
+          {},
+          { "label": "Semua produk" }
+        ]
+      },
+      {
+        "heading": "Perusahaan",
+        "links": [
+          { "label": "Tentang" },
+          { "label": "Tim" },
+          { "label": "Konsultasi" },
+          { "label": "Blog" },
+          { "label": "Glosarium" },
+          { "label": "Kontak" }
+        ]
+      },
+      {
+        "heading": "Alat",
+        "links": [
+          { "label": "Semua alat" },
+          { "label": "Pembuat faktur" },
+          { "label": "Pembuat menu QR" },
+          { "label": "Pembuat QR pembayaran" },
+          { "label": "Pembuat barcode" }
+        ]
+      },
+      {
+        "heading": "Kalkulator",
+        "links": [
+          { "label": "Semua kalkulator" },
+          { "label": "Kalkulator GST" },
+          { "label": "Kalkulator margin laba" },
+          { "label": "Kalkulator pajak penghasilan" },
+          { "label": "Kalkulator angsuran pinjaman" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Harga" },
+      { "label": "Tim" },
+      { "label": "Peta situs" },
+      { "label": "Privasi" },
+      { "label": "Ketentuan" }
+    ],
+    "copyright": "© 2026 Setu Technology. Dibuat di India."
+  }
+}

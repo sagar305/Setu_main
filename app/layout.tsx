@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import Script from "next/script";
 import { NepalSupportBanner } from "@/components/NepalSupportBanner";
 import { Footer } from "@/components/Footer";
+import { SiteFrame } from "@/components/SiteFrame";
 import { getSiteContent } from "@/lib/content";
 import { LanguageProvider } from "@/lib/i18n";
 import { Analytics } from "@vercel/analytics/next";
@@ -95,9 +96,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <LanguageProvider>
           <NepalSupportBanner />
-          <Nav site={site} />
-          <main>{children}</main>
-          <Footer site={site} />
+          {/* The translated homepages bring their own header and footer, in
+              their own language — see app/[lang]/layout.tsx. */}
+          <SiteFrame nav={<Nav site={site} />} footer={<Footer site={site} />}>
+            {children}
+          </SiteFrame>
         </LanguageProvider>
         {/* Vercel Web Analytics: cookieless page-view and referrer data. It
             collects no personal data and never sees what users type into the

@@ -20,6 +20,102 @@
       "label": "Lihat alat gratis"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu untuk",
+    "badge": "Gratis selamanya",
+    "footnote": "Berjalan di peramban Anda · Bisa luring",
+    "industries": [
+      {
+        "name": "Restoran",
+        "points": [
+          "Meja, area lantai, dan tiket dapur",
+          "Bagi tagihan dengan rincian pajak",
+          "Biaya menu dihitung dari stok terkini"
+        ]
+      },
+      {
+        "name": "Toko ritel",
+        "product": "POS berbasis peramban",
+        "points": [
+          "Penjualan dengan barcode, tahan dan panggil ulang",
+          "Stok, pelanggan, dan utang di satu tempat",
+          "Struk termal dan A4"
+        ]
+      },
+      {
+        "name": "Klinik",
+        "product": "Pengelola klinik gratis",
+        "points": [
+          "Resep dicetak sebagai teks yang bisa disalin",
+          "Layar harian urut nomor antrean, dengan waktu tunggu",
+          "Kuitansi dengan QR pembayaran"
+        ]
+      },
+      {
+        "name": "Kelas bimbel",
+        "product": "Pengelola kelas",
+        "points": [
+          "Absensi per rombongan dalam hitungan detik",
+          "Tunggakan iuran bulanan yang terhitung sendiri",
+          "Pengingat WhatsApp ke orang tua"
+        ]
+      },
+      {
+        "name": "Apotek",
+        "product": "POS apotek gratis",
+        "points": [
+          "Stok per batch dengan tanggal kedaluwarsa tiap strip",
+          "Menjual batch yang paling dekat kedaluwarsa lebih dulu",
+          "Dasbor kedaluwarsa 30, 60, dan 90 hari"
+        ]
+      },
+      {
+        "name": "Bengkel servis",
+        "product": "Kartu servis gratis",
+        "points": [
+          "Foto kondisi dan tanda tangan saat terima",
+          "Satu papan berisi setiap perangkat di bengkel",
+          "Slip kerja, label perangkat, dan cek garansi"
+        ]
+      },
+      {
+        "name": "Persewaan alat",
+        "product": "Buku sewa gratis",
+        "points": [
+          "Kalender ketersediaan, hari demi hari",
+          "Kerusakan dan denda telat dipotong dari deposit",
+          "Daftar ambil barang dan surat jalan bertanda tangan"
+        ]
+      },
+      {
+        "name": "Ruang tunggu",
+        "product": "Sistem antrean gratis",
+        "points": [
+          "Memanggil nomor dengan suara, dalam delapan bahasa",
+          "Layar ruang tunggu untuk TV",
+          "Perkiraan tunggu dari waktu layanan Anda sendiri"
+        ]
+      },
+      {
+        "name": "Akuntan",
+        "product": "Penganalisis rekening koran",
+        "points": [
+          "Membaca rekening koran PDF, XLSX, dan CSV",
+          "Klasifikasi dengan aturan yang Anda atur",
+          "Tidak ada yang diunggah — diproses di perangkat Anda"
+        ]
+      },
+      {
+        "name": "Semua usaha",
+        "product": "50+ alat gratis",
+        "points": [
+          "Faktur berpajak dan penawaran harga",
+          "Buku piutang, buku kas, dan buku stok",
+          "Neraca dan laporan laba rugi"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Produk",
     "headline": "Software untuk cara usaha Anda benar-benar berjalan",

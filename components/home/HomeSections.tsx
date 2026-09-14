@@ -51,7 +51,7 @@ export function HomeSections({ content, lang }: { content: HomeContent; lang: La
 
   return (
     <>
-      <Hero hero={content.hero} hiddenProductIds={hiddenHeroProductIds} />
+      <Hero hero={content.hero} panel={content.heroPanel} hiddenProductIds={hiddenHeroProductIds} />
       <ShowcaseGrid id="products" section={productsSection} className="bg-cream" />
       <ShowcaseGrid id="tools" section={content.tools} className="bg-white" />
       <ShowcaseGrid id="calculators" section={content.calculators} className="bg-cream" />

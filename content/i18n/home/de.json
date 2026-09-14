@@ -20,6 +20,102 @@
       "label": "Kostenlose Tools ansehen"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu für",
+    "badge": "Für immer kostenlos",
+    "footnote": "Läuft im Browser · Auch offline",
+    "industries": [
+      {
+        "name": "Restaurants",
+        "points": [
+          "Tische, Bereiche und Küchenbons",
+          "Geteilte Rechnungen mit Steueraufschlüsselung",
+          "Rezepte kalkuliert am laufenden Warenbestand"
+        ]
+      },
+      {
+        "name": "Ladengeschäfte",
+        "product": "Kasse im Browser",
+        "points": [
+          "Barcode-Kasse, Bons parken und zurückholen",
+          "Bestand, Kunden und Anschreiben an einem Ort",
+          "Thermo- und A4-Belege"
+        ]
+      },
+      {
+        "name": "Praxen",
+        "product": "Kostenlose Praxisverwaltung",
+        "points": [
+          "Rezepte als markierbarer Text gedruckt",
+          "Tagesansicht in Aufrufreihenfolge, mit Wartezeiten",
+          "Belege mit Zahlungs-QR"
+        ]
+      },
+      {
+        "name": "Nachhilfekurse",
+        "product": "Kursverwaltung",
+        "points": [
+          "Anwesenheit je Gruppe in Sekunden",
+          "Monatsgebühren, die sich von selbst summieren",
+          "WhatsApp-Erinnerungen an die Eltern"
+        ]
+      },
+      {
+        "name": "Apotheken",
+        "product": "Kostenlose Apothekenkasse",
+        "points": [
+          "Chargenbestand mit Verfall auf jedem Blister",
+          "Bucht zuerst die zuerst verfallende Charge",
+          "Verfallsübersicht nach 30, 60 und 90 Tagen"
+        ]
+      },
+      {
+        "name": "Reparaturwerkstätten",
+        "product": "Kostenlose Auftragskarte",
+        "points": [
+          "Zustandsfotos und Unterschrift bei der Annahme",
+          "Eine Tafel mit jedem Gerät in der Werkstatt",
+          "Auftragsscheine, Gerätetags und Garantiesuche"
+        ]
+      },
+      {
+        "name": "Verleih und Vermietung",
+        "product": "Kostenloses Mietbuch",
+        "points": [
+          "Ein Verfügbarkeitskalender, Tag für Tag",
+          "Schäden und Verzug von der Kaution abgezogen",
+          "Kommissionierlisten und unterschriebene Lieferscheine"
+        ]
+      },
+      {
+        "name": "Wartebereiche",
+        "product": "Kostenloses Aufrufsystem",
+        "points": [
+          "Ruft die Nummer laut auf, in acht Sprachen",
+          "Eine Wartezimmer-Anzeige für den Fernseher",
+          "Wartezeit-Schätzungen aus Ihren eigenen Zeiten"
+        ]
+      },
+      {
+        "name": "Buchhalter",
+        "product": "Kontoauszug-Analysator",
+        "points": [
+          "Liest Auszüge als PDF, XLSX und CSV",
+          "Regelbasierte Zuordnung, die Sie steuern",
+          "Nichts wird hochgeladen — alles bleibt auf dem Gerät"
+        ]
+      },
+      {
+        "name": "Jedes Unternehmen",
+        "product": "50+ kostenlose Tools",
+        "points": [
+          "Rechnungen mit Steuer und Angebote",
+          "Kunden-, Kassen- und Bestandsbücher",
+          "Bilanzen und Gewinn-und-Verlust-Rechnungen"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Produkte",
     "headline": "Software dafür, wie Ihr Geschäft wirklich läuft",

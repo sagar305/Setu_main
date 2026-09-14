@@ -20,6 +20,102 @@
       "label": "Voir les outils gratuits"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu pour",
+    "badge": "Gratuit pour toujours",
+    "footnote": "Tourne dans votre navigateur · Et hors ligne",
+    "industries": [
+      {
+        "name": "Restaurants",
+        "points": [
+          "Tables, zones de salle et bons de cuisine",
+          "Additions partagées avec le détail des taxes",
+          "Fiches techniques chiffrées sur le stock réel"
+        ]
+      },
+      {
+        "name": "Commerces",
+        "product": "Caisse dans le navigateur",
+        "points": [
+          "Encaissement par code-barres, tickets en attente",
+          "Stock, clients et ardoises au même endroit",
+          "Tickets thermiques et A4"
+        ]
+      },
+      {
+        "name": "Cabinets médicaux",
+        "product": "Gestion de cabinet gratuite",
+        "points": [
+          "Ordonnances imprimées en texte sélectionnable",
+          "Écran du jour dans l'ordre des tickets, avec les attentes",
+          "Reçus avec un QR de paiement"
+        ]
+      },
+      {
+        "name": "Cours particuliers",
+        "product": "Gestion des cours",
+        "points": [
+          "Présences par groupe en quelques secondes",
+          "Frais mensuels qui se cumulent tout seuls",
+          "Rappels WhatsApp aux parents"
+        ]
+      },
+      {
+        "name": "Pharmacies",
+        "product": "Caisse de pharmacie gratuite",
+        "points": [
+          "Stock par lot, avec la péremption sur chaque plaquette",
+          "Facture d'abord le lot qui périme le plus tôt",
+          "Tableau des péremptions à 30, 60 et 90 jours"
+        ]
+      },
+      {
+        "name": "Ateliers de réparation",
+        "product": "Fiche de réparation gratuite",
+        "points": [
+          "Photos de l'état et signature à la réception",
+          "Un tableau de tous les appareils de l'atelier",
+          "Bons de travail, étiquettes et recherche de garantie"
+        ]
+      },
+      {
+        "name": "Location de matériel",
+        "product": "Livre de location gratuit",
+        "points": [
+          "Un calendrier de disponibilité, jour par jour",
+          "Casse et retards déduits de la caution",
+          "Listes de préparation et bons de livraison signés"
+        ]
+      },
+      {
+        "name": "Salles d'attente",
+        "product": "Système de files gratuit",
+        "points": [
+          "Appelle le numéro à voix haute, en huit langues",
+          "Un affichage de salle d'attente pour un téléviseur",
+          "Estimations d'attente à partir de vos propres durées"
+        ]
+      },
+      {
+        "name": "Comptables",
+        "product": "Analyseur de relevés",
+        "points": [
+          "Importe les relevés PDF, XLSX et CSV",
+          "Classement par règles que vous maîtrisez",
+          "Rien n'est envoyé : tout est lu sur votre appareil"
+        ]
+      },
+      {
+        "name": "Toutes les activités",
+        "product": "50+ outils gratuits",
+        "points": [
+          "Factures avec taxes et devis",
+          "Livres de comptes, de caisse et de stock",
+          "Bilans et comptes de résultat"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Produits",
     "headline": "Des logiciels pour la façon dont tourne votre activité",

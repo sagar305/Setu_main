@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "links": [
+      { "label": "Productos" },
+      { "label": "Consultoría" },
+      { "label": "Calculadoras" },
+      { "label": "Herramientas" },
+      { "label": "Nosotros" },
+      { "label": "Blog" },
+      { "label": "Contacto" }
+    ],
+    "cta": { "label": "Habla con nosotros" },
+    "menu": { "open": "Abrir menú", "close": "Cerrar menú" }
+  },
+  "footer": {
+    "description": "Setu Technology crea software práctico, pensado primero en quien lleva el negocio, para empresas de todo el mundo.",
+    "columns": [
+      {
+        "heading": "Productos",
+        "links": [
+          { "label": "TPV en el navegador (gratis)" },
+          { "label": "Analizador de extractos bancarios (gratis)" },
+          { "label": "Free Dine — TPV de restaurante (gratis)" },
+          { "label": "Gestor de clases particulares (gratis)" },
+          { "label": "Gestor de clínica (gratis)" },
+          {},
+          { "label": "Todos los productos" }
+        ]
+      },
+      {
+        "heading": "Empresa",
+        "links": [
+          { "label": "Nosotros" },
+          { "label": "Equipo" },
+          { "label": "Consultoría" },
+          { "label": "Blog" },
+          { "label": "Glosario" },
+          { "label": "Contacto" }
+        ]
+      },
+      {
+        "heading": "Herramientas",
+        "links": [
+          { "label": "Todas las herramientas" },
+          { "label": "Generador de facturas" },
+          { "label": "Generador de cartas QR" },
+          { "label": "Generador de QR de pago" },
+          { "label": "Generador de códigos de barras" }
+        ]
+      },
+      {
+        "heading": "Calculadoras",
+        "links": [
+          { "label": "Todas las calculadoras" },
+          { "label": "Calculadora de GST" },
+          { "label": "Calculadora de margen" },
+          { "label": "Calculadora de IRPF" },
+          { "label": "Calculadora de cuota de préstamo" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Precios" },
+      { "label": "Equipo" },
+      { "label": "Mapa del sitio" },
+      { "label": "Privacidad" },
+      { "label": "Términos" }
+    ],
+    "copyright": "© 2026 Setu Technology. Hecho en India."
+  }
+}

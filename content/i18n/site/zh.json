@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "links": [
+      { "label": "产品" },
+      { "label": "咨询服务" },
+      { "label": "计算器" },
+      { "label": "工具" },
+      { "label": "关于我们" },
+      { "label": "博客" },
+      { "label": "联系我们" }
+    ],
+    "cta": { "label": "和我们聊聊" },
+    "menu": { "open": "打开菜单", "close": "关闭菜单" }
+  },
+  "footer": {
+    "description": "Setu Technology 为全球的生意打造实用的软件，先考虑每天真正在用它的人。",
+    "columns": [
+      {
+        "heading": "产品",
+        "links": [
+          { "label": "浏览器版 POS（免费）" },
+          { "label": "银行流水分析器（免费）" },
+          { "label": "Free Dine — 餐厅 POS（免费）" },
+          { "label": "补习班课务管理（免费）" },
+          { "label": "诊所管理（免费）" },
+          {},
+          { "label": "全部产品" }
+        ]
+      },
+      {
+        "heading": "公司",
+        "links": [
+          { "label": "关于我们" },
+          { "label": "团队" },
+          { "label": "咨询服务" },
+          { "label": "博客" },
+          { "label": "术语表" },
+          { "label": "联系我们" }
+        ]
+      },
+      {
+        "heading": "工具",
+        "links": [
+          { "label": "全部工具" },
+          { "label": "发票生成器" },
+          { "label": "二维码菜单生成器" },
+          { "label": "收款二维码生成器" },
+          { "label": "条形码生成器" }
+        ]
+      },
+      {
+        "heading": "计算器",
+        "links": [
+          { "label": "全部计算器" },
+          { "label": "GST 税额计算器" },
+          { "label": "利润率计算器" },
+          { "label": "个人所得税计算器" },
+          { "label": "贷款月供计算器" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "价格" },
+      { "label": "团队" },
+      { "label": "网站地图" },
+      { "label": "隐私" },
+      { "label": "条款" }
+    ],
+    "copyright": "© 2026 Setu Technology · 印度制造"
+  }
+}

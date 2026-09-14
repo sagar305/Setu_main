@@ -20,6 +20,102 @@
       "label": "Ver ferramentas grátis"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu para",
+    "badge": "Grátis para sempre",
+    "footnote": "Roda no seu navegador · Funciona off-line",
+    "industries": [
+      {
+        "name": "Restaurantes",
+        "points": [
+          "Mesas, áreas do salão e comandas de cozinha",
+          "Contas divididas com o detalhamento de impostos",
+          "Fichas técnicas custeadas pelo estoque real"
+        ]
+      },
+      {
+        "name": "Lojas",
+        "product": "PDV no navegador",
+        "points": [
+          "Venda por código de barras, contas em espera",
+          "Estoque, clientes e fiado num lugar só",
+          "Cupons térmicos e em A4"
+        ]
+      },
+      {
+        "name": "Clínicas",
+        "product": "Gestor de clínica grátis",
+        "points": [
+          "Receitas impressas como texto selecionável",
+          "Tela do dia por ordem de senha, com tempos de espera",
+          "Recibos com QR de pagamento"
+        ]
+      },
+      {
+        "name": "Aulas de reforço",
+        "product": "Gestor de turmas",
+        "points": [
+          "Presença por turma em segundos",
+          "Mensalidades que se somam sozinhas",
+          "Lembretes por WhatsApp para os pais"
+        ]
+      },
+      {
+        "name": "Farmácias",
+        "product": "PDV de farmácia grátis",
+        "points": [
+          "Estoque por lote, com validade em cada cartela",
+          "Vende primeiro o lote que vence antes",
+          "Painel de vencimentos em 30, 60 e 90 dias"
+        ]
+      },
+      {
+        "name": "Assistências técnicas",
+        "product": "Ficha de reparo grátis",
+        "points": [
+          "Fotos do estado e assinatura na entrada",
+          "Um quadro com cada aparelho da oficina",
+          "Ordens de serviço, etiquetas e busca de garantia"
+        ]
+      },
+      {
+        "name": "Locação de equipamentos",
+        "product": "Livro de locação grátis",
+        "points": [
+          "Um calendário de disponibilidade, dia a dia",
+          "Danos e atrasos descontados da caução",
+          "Listas de separação e canhotos assinados"
+        ]
+      },
+      {
+        "name": "Salas de espera",
+        "product": "Sistema de senhas grátis",
+        "points": [
+          "Chama a senha em voz alta, em oito idiomas",
+          "Um painel de sala de espera para a TV",
+          "Estimativas de espera com os seus próprios tempos"
+        ]
+      },
+      {
+        "name": "Contadores",
+        "product": "Analisador de extratos",
+        "points": [
+          "Importa extratos em PDF, XLSX e CSV",
+          "Classificação por regras que você controla",
+          "Nada é enviado — a leitura é no seu aparelho"
+        ]
+      },
+      {
+        "name": "Qualquer negócio",
+        "product": "50+ ferramentas grátis",
+        "points": [
+          "Notas com impostos e orçamentos",
+          "Livros de clientes, caixa e estoque",
+          "Balanços e demonstrações de resultado"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Produtos",
     "headline": "Software para o jeito como o seu negócio funciona",

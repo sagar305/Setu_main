@@ -22,6 +22,15 @@ function translationFor(lang: LanguageCode) {
   return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
 }
 
+const englishSite = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "content", "en", "site.json"), "utf8"),
+) as Record<string, any>;
+
+function siteTranslationFor(lang: LanguageCode) {
+  const file = path.join(process.cwd(), "content", "i18n", "site", `${lang}.json`);
+  return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
+}
+
 describe("home locale routing", () => {
   it("gives every switcher language a homepage URL, with English at the root", () => {
     expect(homePathFor("en")).toBe("/");
@@ -131,5 +140,69 @@ describe("home translation files", () => {
     expect(title.length).toBeLessThanOrEqual(limits.title[1]);
     expect(description.length).toBeGreaterThanOrEqual(limits.description[0]);
     expect(description.length).toBeLessThanOrEqual(limits.description[1]);
+  });
+});
+
+describe("hero panel translations", () => {
+  it.each(HOME_LOCALES)("%s keeps the industry list the component has icons for", (lang) => {
+    const merged = mergeTranslation(english, translationFor(lang));
+
+    // HeroVisual keys its icons off these ids, so a translation that dropped or
+    // reordered an entry would show the wrong icon — or none.
+    expect(merged.heroPanel.industries.map((i: any) => i.id)).toEqual(
+      english.heroPanel.industries.map((i: any) => i.id),
+    );
+    for (const [index, industry] of merged.heroPanel.industries.entries()) {
+      expect(industry.points).toHaveLength(english.heroPanel.industries[index].points.length);
+    }
+  });
+
+  it.each(HOME_LOCALES)("%s translates the panel copy", (lang) => {
+    const merged = mergeTranslation(english, translationFor(lang));
+
+    expect(merged.heroPanel.eyebrow).not.toBe(english.heroPanel.eyebrow);
+    expect(merged.heroPanel.badge).not.toBe(english.heroPanel.badge);
+    expect(merged.heroPanel.footnote).not.toBe(english.heroPanel.footnote);
+    expect(merged.heroPanel.industries.map((i: any) => i.name)).not.toEqual(
+      english.heroPanel.industries.map((i: any) => i.name),
+    );
+  });
+});
+
+describe("site chrome translations", () => {
+  it.each(HOME_LOCALES)("%s translates the header and footer", (lang) => {
+    const merged = mergeTranslation(englishSite, siteTranslationFor(lang));
+
+    expect(merged.nav.links.map((l: any) => l.label)).not.toEqual(
+      englishSite.nav.links.map((l: any) => l.label),
+    );
+    expect(merged.nav.cta.label).not.toBe(englishSite.nav.cta.label);
+    expect(merged.nav.menu.open).not.toBe(englishSite.nav.menu.open);
+    expect(merged.footer.description).not.toBe(englishSite.footer.description);
+    expect(merged.footer.copyright).not.toBe(englishSite.footer.copyright);
+    // Every column must be given a heading. Not that it differs from English:
+    // "Tools" is the German word for tools, and demanding a different string
+    // would push a translation into being wrong.
+    const translated = siteTranslationFor(lang);
+    expect(translated.footer.columns).toHaveLength(englishSite.footer.columns.length);
+    for (const column of translated.footer.columns) {
+      expect(column.heading.trim()).not.toBe("");
+    }
+  });
+
+  it.each(HOME_LOCALES)("%s leaves every chrome link target alone", (lang) => {
+    const merged = mergeTranslation(englishSite, siteTranslationFor(lang));
+
+    expect(merged.nav.links.map((l: any) => l.href)).toEqual(
+      englishSite.nav.links.map((l: any) => l.href),
+    );
+    expect(merged.footer.columns.map((c: any) => c.links.map((l: any) => l.href))).toEqual(
+      englishSite.footer.columns.map((c: any) => c.links.map((l: any) => l.href)),
+    );
+    expect(merged.footer.legal.map((l: any) => l.href)).toEqual(
+      englishSite.footer.legal.map((l: any) => l.href),
+    );
+    // Social profiles are accounts, not copy.
+    expect(merged.footer.social).toEqual(englishSite.footer.social);
   });
 });
