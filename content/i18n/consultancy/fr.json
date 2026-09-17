@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "Comptabilité, tenue de livres et paie | Setu Technology",
+    "description": "Comptabilité, tenue de livres et paie externalisées pour PME, de l'hebdomadaire à l'annuel. Expertise QuickBooks, Xero, Zoho, Appfolio, FreshBooks et Wave.",
+    "keywords": [
+      "services comptables",
+      "tenue de livres",
+      "gestion de la paie",
+      "comptabilité externalisée PME",
+      "tenue de livres QuickBooks",
+      "comptabilité Xero",
+      "rapprochement bancaire"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Conseil",
+    "headline": "Comptabilité, tenue de livres et paie",
+    "subheadline": "Nous assurons la comptabilité, la tenue de livres et la paie selon vos besoins — hebdomadaire, bimensuelle, mensuelle, trimestrielle ou annuelle. De l'écriture quotidienne aux états financiers, vos livres restent justes et prêts pour un audit."
+  },
+  "overview": {
+    "headline": "Tenue complète de vos livres comptables",
+    "intro": "Nos prestations couvrent tous les aspects de la tenue des livres, dont :",
+    "items": [
+      "Saisie de toutes les opérations de charges, produits, actifs et passifs",
+      "Établissement du grand livre et des livres auxiliaires",
+      "Comptabilité des actifs et tenue du registre des immobilisations",
+      "Comptes clients et balance âgée pour la direction",
+      "Comptes fournisseurs, y compris les échéances dépassées",
+      "Rapprochement bancaire",
+      "Balance générale",
+      "Compte de résultat",
+      "Bilan",
+      "Tableau des flux de trésorerie"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Prestations incluses",
+    "subtext": "Un périmètre clair et continu, pour savoir à tout moment ce qui est couvert.",
+    "items": [
+      "Tenue de livres mensuelle (en continu)",
+      "Rapprochement bancaire et cartes",
+      "Catégorisation des produits et charges",
+      "Revue du plan comptable",
+      "Résultat et bilan mensuels",
+      "Écritures et ajustements",
+      "Suivi clients/fournisseurs (de base)"
+    ]
+  },
+  "software": {
+    "headline": "Expertise logicielle",
+    "subtext": "Nous travaillons dans les outils que vous utilisez déjà — ou nous vous aidons à choisir le bon.",
+    "items": [
+      {
+        "detail": "En ligne et bureau"
+      },
+      {
+        "detail": "Comptabilité en ligne"
+      },
+      {
+        "detail": "Zoho Books"
+      },
+      {
+        "detail": "Gestion immobilière"
+      },
+      {
+        "detail": "Gestion immobilière"
+      },
+      {
+        "detail": "Facturation et comptes"
+      },
+      {
+        "detail": "Comptabilité des petites entreprises"
+      }
+    ]
+  },
+  "idealFor": {
+    "headline": "Pour qui",
+    "subtext": "Pensé pour les entreprises en croissance qui veulent des comptes propres sans équipe financière interne.",
+    "items": [
+      "Petites et moyennes entreprises (PME)",
+      "Activités de services",
+      "E-commerce, immobilier, santé et services professionnels"
+    ]
+  },
+  "frequency": {
+    "headline": "À votre rythme",
+    "subtext": "Choisissez la cadence qui correspond à votre activité.",
+    "options": [
+      "Hebdomadaire",
+      "Bimensuelle",
+      "Mensuelle",
+      "Trimestrielle",
+      "Annuelle"
+    ]
+  },
+  "cta": {
+    "headline": "Prêt à confier vos livres ?",
+    "subtext": "Parlez-nous de votre activité et nous bâtirons un plan de comptabilité et de tenue de livres qui vous convient.",
+    "cta": {
+      "label": "Parlez-nous"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "Buchhaltung, Buchführung und Lohn | Setu Technology",
+    "description": "Ausgelagerte Buchhaltung, Buchführung und Lohnabrechnung für KMU, wöchentlich bis jährlich. Erfahrung mit QuickBooks, Xero, Zoho, Appfolio, FreshBooks und Wave.",
+    "keywords": [
+      "Buchhaltungsdienstleistungen",
+      "Buchführung",
+      "Lohnabrechnung",
+      "ausgelagerte Buchhaltung für KMU",
+      "QuickBooks Buchführung",
+      "Xero Buchhaltung",
+      "Bankabstimmung"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Beratung",
+    "headline": "Buchhaltung, Buchführung und Lohnabrechnung",
+    "subheadline": "Wir übernehmen Buchhaltung, Buchführung und Lohnabrechnung nach Ihrem Bedarf — wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. Vom täglichen Beleg bis zum Jahresabschluss bleiben Ihre Bücher korrekt und prüfungsbereit."
+  },
+  "overview": {
+    "headline": "Vollständige Führung Ihrer Bücher",
+    "intro": "Unsere Leistungen decken alle Bereiche der Buchführung ab, darunter:",
+    "items": [
+      "Erfassung aller Vorgänge zu Aufwand, Ertrag, Vermögen und Verbindlichkeiten",
+      "Erstellung von Hauptbuch und Nebenbüchern",
+      "Anlagenbuchhaltung und Führung des Anlagenverzeichnisses",
+      "Forderungen und Altersstrukturberichte für die Geschäftsführung",
+      "Verbindlichkeiten einschließlich überfälliger Posten",
+      "Bankabstimmung",
+      "Summen- und Saldenliste",
+      "Gewinn- und Verlustrechnung",
+      "Bilanz",
+      "Kapitalflussrechnung"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Enthaltene Leistungen",
+    "subtext": "Ein klarer, laufender Umfang — Sie wissen jederzeit, was abgedeckt ist.",
+    "items": [
+      "Monatliche Buchführung (laufend)",
+      "Abstimmung von Bank und Kreditkarte",
+      "Kategorisierung von Erträgen und Aufwendungen",
+      "Prüfung des Kontenplans",
+      "Monatliche GuV und Bilanz",
+      "Buchungen und Anpassungen",
+      "Debitoren-/Kreditorenübersicht (Basis)"
+    ]
+  },
+  "software": {
+    "headline": "Software-Kompetenz",
+    "subtext": "Wir arbeiten in den Werkzeugen, die Sie ohnehin nutzen — oder helfen bei der Auswahl.",
+    "items": [
+      {
+        "detail": "Online und Desktop"
+      },
+      {
+        "detail": "Cloud-Buchhaltung"
+      },
+      {
+        "detail": "Zoho Books"
+      },
+      {
+        "detail": "Immobilienverwaltung"
+      },
+      {
+        "detail": "Immobilienverwaltung"
+      },
+      {
+        "detail": "Rechnungen und Bücher"
+      },
+      {
+        "detail": "Buchhaltung für Kleinunternehmen"
+      }
+    ]
+  },
+  "idealFor": {
+    "headline": "Passend für",
+    "subtext": "Für wachsende Unternehmen, die saubere Bücher wollen, ohne ein eigenes Finanzteam aufzubauen.",
+    "items": [
+      "Kleine und mittlere Unternehmen (KMU)",
+      "Dienstleistungsbetriebe",
+      "E-Commerce, Immobilien, Gesundheitswesen und freie Berufe"
+    ]
+  },
+  "frequency": {
+    "headline": "In Ihrem Takt",
+    "subtext": "Wählen Sie den Rhythmus, der zu Ihrem Betrieb passt.",
+    "options": [
+      "Wöchentlich",
+      "Zweiwöchentlich",
+      "Monatlich",
+      "Quartalsweise",
+      "Jährlich"
+    ]
+  },
+  "cta": {
+    "headline": "Bereit, die Bücher abzugeben?",
+    "subtext": "Erzählen Sie uns von Ihrem Unternehmen, und wir stellen einen passenden Buchhaltungs- und Buchführungsplan zusammen.",
+    "cta": {
+      "label": "Sprechen Sie mit uns"
+    }
+  }
+}

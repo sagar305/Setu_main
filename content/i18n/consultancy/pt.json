@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "Contabilidade, escrituração e folha | Setu Technology",
+    "description": "Contabilidade, escrituração e folha de pagamento terceirizadas para PMEs, de semanal a anual. Experiência em QuickBooks, Xero, Zoho e FreshBooks.",
+    "keywords": [
+      "serviços de contabilidade",
+      "serviços de escrituração",
+      "serviços de folha de pagamento",
+      "contabilidade terceirizada para PMEs",
+      "escrituração QuickBooks",
+      "contabilidade Xero",
+      "conciliação bancária"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Consultoria",
+    "headline": "Contabilidade, escrituração e folha de pagamento",
+    "subheadline": "Oferecemos contabilidade, escrituração e folha de pagamento sob medida — semanal, quinzenal, mensal, trimestral ou anual. Do lançamento do dia a dia às demonstrações financeiras, mantemos seus livros corretos e prontos para auditoria."
+  },
+  "overview": {
+    "headline": "Manutenção completa dos seus livros contábeis",
+    "intro": "Nossos serviços cobrem todos os aspectos da manutenção dos livros, incluindo:",
+    "items": [
+      "Registro de todas as operações de despesas, receitas, ativos e passivos",
+      "Elaboração do livro razão e dos razões auxiliares",
+      "Contabilidade de ativos e manutenção do registro do imobilizado",
+      "Contas a receber e relatórios por idade para a gestão",
+      "Contas a pagar, inclusive obrigações vencidas",
+      "Conciliação bancária",
+      "Balancete de verificação",
+      "Demonstração de resultado (DRE)",
+      "Balanço patrimonial",
+      "Demonstração dos fluxos de caixa"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Serviços incluídos",
+    "subtext": "Um escopo claro e contínuo, para você saber sempre o que está coberto.",
+    "items": [
+      "Escrituração mensal (contínua)",
+      "Conciliação de banco e cartão",
+      "Categorização de receitas e despesas",
+      "Revisão do plano de contas",
+      "DRE e balanço mensais",
+      "Lançamentos e ajustes",
+      "Controle de contas a pagar/receber (básico)"
+    ]
+  },
+  "software": {
+    "headline": "Domínio dos softwares",
+    "subtext": "Trabalhamos dentro das ferramentas que você já usa — ou ajudamos a escolher a certa.",
+    "items": [
+      {
+        "detail": "Online e desktop"
+      },
+      {
+        "detail": "Contabilidade na nuvem"
+      },
+      {
+        "detail": "Zoho Books"
+      },
+      {
+        "detail": "Gestão imobiliária"
+      },
+      {
+        "detail": "Gestão imobiliária"
+      },
+      {
+        "detail": "Faturamento e livros"
+      },
+      {
+        "detail": "Contabilidade para pequenos negócios"
+      }
+    ]
+  },
+  "idealFor": {
+    "headline": "Ideal para",
+    "subtext": "Feito para negócios em crescimento que querem livros limpos sem um time financeiro interno.",
+    "items": [
+      "Pequenas e médias empresas (PMEs)",
+      "Negócios de serviços",
+      "E-commerce, imobiliário, saúde e serviços profissionais"
+    ]
+  },
+  "frequency": {
+    "headline": "No seu ritmo",
+    "subtext": "Escolha a periodicidade que combina com o jeito que o seu negócio funciona.",
+    "options": [
+      "Semanal",
+      "Quinzenal",
+      "Mensal",
+      "Trimestral",
+      "Anual"
+    ]
+  },
+  "cta": {
+    "headline": "Pronto para passar seus livros adiante?",
+    "subtext": "Conte sobre o seu negócio e montamos um plano de contabilidade e escrituração que sirva para você.",
+    "cta": {
+      "label": "Fale com a gente"
+    }
+  }
+}

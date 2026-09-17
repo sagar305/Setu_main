@@ -1,0 +1,39 @@
+{
+  "seo": {
+    "title": "Kontak Setu Technology | Produk dan Kemitraan",
+    "description": "Hubungi Setu Technology — pertanyaan soal produk, ajakan kemitraan, atau untuk memberi tahu software apa yang usaha Anda butuhkan berikutnya.",
+    "keywords": [
+      "kontak Setu Technology",
+      "bantuan Setu Technology"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kontak",
+    "headline": "Mari bicara soal usaha Anda",
+    "subheadline": "Pertanyaan tentang Setu Dine, ajakan kemitraan, atau memberi tahu apa yang Anda butuhkan berikutnya — setiap pesan kami baca."
+  },
+  "variants": {
+    "consultancy": {
+      "eyebrow": "Konsultasi",
+      "headline": "Mari bicara soal pembukuan Anda",
+      "subheadline": "Pertanyaan tentang akuntansi, pembukuan, atau payroll alih daya — atau menentukan ritme dan penataan yang pas untuk usaha Anda. Setiap pesan kami baca."
+    }
+  },
+  "form": {
+    "fields": [
+      {
+        "label": "Nama"
+      },
+      {
+        "label": "Email"
+      },
+      {
+        "label": "Nama usaha"
+      },
+      {
+        "label": "Pesan"
+      }
+    ],
+    "submitLabel": "Kirim pesan"
+  }
+}
