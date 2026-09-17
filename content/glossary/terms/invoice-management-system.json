@@ -1,0 +1,49 @@
+{
+  "slug": "invoice-management-system",
+  "term": "Invoice Management System",
+  "category": "gst-tax",
+  "aliases": [
+    "IMS"
+  ],
+  "short": "The GST portal facility where a buyer accepts, rejects or holds each supplier invoice.",
+  "seoTitle": "Invoice Management System (IMS) in GST — Meaning",
+  "metaDescription": "The GST portal facility where a buyer accepts, rejects or holds each supplier invoice before the period's credit statement is drawn up. Meaning and example.",
+  "updated": "2026-09-13",
+  "definition": "The Invoice Management System is a facility on the GST portal where a registered buyer acts on each inward invoice a supplier has reported — accepting it, rejecting it, or keeping it pending — before the auto-drafted credit statement for the period is generated. Taking no action is treated as acceptance.",
+  "bodyHtml": "<h2>Why the Invoice Management System matters</h2><p>It moves the first review of supplier data from a spreadsheet at month end to the portal, on the portal's clock. A rejected invoice is visible to the supplier, which turns a chasing email into a recorded action, and an invoice left untouched still flows into your credit statement by default.</p><h2>How it works in practice</h2><p>Work through the pending list before the statement is drawn up for the period rather than after. Accept what matches your purchase register, reject what is genuinely wrong, and hold anything you have not verified. The habit only works if the purchase side is written down as bills arrive — matching against a register assembled from memory inherits every error the pile already had.</p><h2>What to watch</h2><p>Deadlines, default behaviour and the exact scope have been revised more than once since the facility appeared. Confirm the current position against the portal's own advisories or with your CA rather than against a comparison article.</p>",
+  "faq": [
+    {
+      "question": "What happens if I take no action on an invoice?",
+      "answer": "It is treated as accepted and flows into your credit statement for the period, so an unreviewed invoice still counts."
+    },
+    {
+      "question": "Can I reverse a rejection later?",
+      "answer": "Actions can generally be revised until the statement for the period is generated. After that the correction runs through the next period, so getting it right before generation is easier than fixing it afterwards."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-2b",
+    "input-tax-credit",
+    "gstr-1a",
+    "itc-reversal",
+    "vendor-reconciliation"
+  ]
+}

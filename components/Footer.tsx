@@ -51,21 +51,11 @@ export function Footer({ site }: { site: SiteContent }) {
         <div className="mt-14 flex flex-col gap-4 border-t border-muted-line/20 pt-6 text-xs text-muted-line sm:flex-row sm:items-center sm:justify-between">
           <span>{site.footer.copyright}</span>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link href="/pricing" className="transition hover:text-saffron">
-              Pricing
-            </Link>
-            <Link href="/team" className="transition hover:text-saffron">
-              Team
-            </Link>
-            <Link href="/sitemap" className="transition hover:text-saffron">
-              Sitemap
-            </Link>
-            <Link href="/privacy" className="transition hover:text-saffron">
-              Privacy
-            </Link>
-            <Link href="/terms" className="transition hover:text-saffron">
-              Terms
-            </Link>
+            {site.footer.legal.map((link) => (
+              <Link key={link.href} href={link.href} className="transition hover:text-saffron">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

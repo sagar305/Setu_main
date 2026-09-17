@@ -22,6 +22,30 @@ const LIMITS = {
   description: { min: 120, max: 160 },
 };
 
+// The translated homepages (app/[lang]/page.tsx, one route per language in
+// lib/i18n/config.ts) are measured against the same limits, with one exception:
+// a Chinese character carries roughly the information of an English word, so
+// 30-60 characters of Chinese is an essay, and Google truncates it long before
+// the English cut-off. Its limits are scaled to what a SERP actually shows.
+//
+// The language is taken from the route rather than from <html lang>, which the
+// root layout fixes at "en" for every prerendered page.
+const LOCALE_ROUTES = new Set([
+  "/hi", "/bn", "/ta", "/te", "/mr", "/gu", "/kn", "/ml", "/pa",
+  "/es", "/fr", "/ar", "/pt", "/id", "/de", "/zh",
+]);
+
+const LOCALE_LIMITS = {
+  "/zh": {
+    title: { min: 14, max: 34 },
+    description: { min: 50, max: 100 },
+  },
+};
+
+function limitsFor(route) {
+  return LOCALE_LIMITS[route] ?? LIMITS;
+}
+
 // Routes with no indexable content of their own. /menu and /view render data
 // carried in the URL fragment and /search is an internal result page — all three
 // are marked noindex, and Next's 404 page is not a real route.
@@ -80,7 +104,7 @@ for (const file of files.sort()) {
     fail("missing <title>");
   } else {
     const title = decode(titleMatch[1]);
-    const { min, max } = LIMITS.title;
+    const { min, max } = limitsFor(route).title;
     if (title.length < min || title.length > max) {
       fail(`title is ${title.length} chars, expected ${min}-${max}: "${title}"`);
     }
@@ -91,7 +115,7 @@ for (const file of files.sort()) {
     fail("missing meta description");
   } else {
     const description = decode(descMatch[1]);
-    const { min, max } = LIMITS.description;
+    const { min, max } = limitsFor(route).description;
     if (description.length < min || description.length > max) {
       fail(`description is ${description.length} chars, expected ${min}-${max}: "${description}"`);
     }
@@ -99,6 +123,21 @@ for (const file of files.sort()) {
 
   const h1Count = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1Count !== 1) fail(`found ${h1Count} <h1> elements, expected exactly 1`);
+
+  // Every homepage — English and each translation — has to publish the whole
+  // hreflang cluster plus x-default. A version that names only some of the
+  // others is a cluster Google drops, and it fails silently in production, so
+  // it is worth catching at build time.
+  if (route === "/" || LOCALE_ROUTES.has(route)) {
+    const expected = LOCALE_ROUTES.size + 2; // translations + English + x-default
+    // React serialises the attribute as hrefLang; HTML attribute names are
+    // case-insensitive, so match either spelling.
+    const alternates = (html.match(/rel="alternate"[^>]*hreflang=/gi) ?? []).length;
+    if (alternates < expected) {
+      fail(`has ${alternates} hreflang alternates, expected ${expected}`);
+    }
+    if (!/hreflang="x-default"/i.test(html)) fail("missing the x-default hreflang alternate");
+  }
 }
 
 if (problems.length > 0) {
@@ -108,4 +147,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log(`check-seo: ${checked} indexable pages passed title, description and h1 checks.`);
+console.log(`check-seo: ${checked} indexable pages passed title, description, h1 and hreflang checks.`);

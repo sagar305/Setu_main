@@ -7,9 +7,12 @@ import { HeroVisual } from "@/components/home/HeroVisual";
 
 export function Hero({
   hero,
+  panel,
   hiddenProductIds = [],
 }: {
   hero: HomeContent["hero"];
+  /** Copy for the rotating panel beside the headline. */
+  panel: HomeContent["heroPanel"];
   /** Panel entries whose feature flag is off — see HeroVisual. */
   hiddenProductIds?: string[];
 }) {
@@ -49,7 +52,7 @@ export function Hero({
         transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
         className="flex items-center justify-center md:justify-end"
       >
-        <HeroVisual hiddenIds={hiddenProductIds} />
+        <HeroVisual panel={panel} hiddenIds={hiddenProductIds} />
       </motion.div>
     </section>
   );

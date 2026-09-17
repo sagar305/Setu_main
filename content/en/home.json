@@ -22,6 +22,113 @@
       "href": "#tools"
     }
   },
+  "heroPanel": {
+    "eyebrow": "Setu for",
+    "badge": "Free forever",
+    "footnote": "Runs in your browser · Works offline",
+    "industries": [
+      {
+        "id": "free-dine",
+        "name": "Restaurants",
+        "product": "Free Dine",
+        "points": [
+          "Tables, floor areas and kitchen tickets",
+          "Split bills with the CGST/SGST breakup",
+          "Recipes costed against live stock"
+        ]
+      },
+      {
+        "id": "browser-pos",
+        "name": "Retail stores",
+        "product": "Browser Based POS",
+        "points": [
+          "Barcode billing, holds and recalls",
+          "Stock, customers and udhaar in one place",
+          "Thermal and A4 receipts"
+        ]
+      },
+      {
+        "id": "free-clinic",
+        "name": "Clinics",
+        "product": "Free Clinic Manager",
+        "points": [
+          "Prescriptions printed as selectable text",
+          "A day screen in token order, with wait timers",
+          "Receipts with a UPI QR to pay from"
+        ]
+      },
+      {
+        "id": "free-tuition",
+        "name": "Tuition classes",
+        "product": "Tuition Class Manager",
+        "points": [
+          "Batch-wise attendance in seconds",
+          "Monthly fee dues that add themselves up",
+          "WhatsApp reminders to parents"
+        ]
+      },
+      {
+        "id": "free-pharmacy",
+        "name": "Medical stores",
+        "product": "Free Pharmacy POS",
+        "points": [
+          "Batch-wise stock with expiry on every strip",
+          "Bills the oldest-expiring batch first",
+          "Expiry dashboard at 30, 60 and 90 days"
+        ]
+      },
+      {
+        "id": "free-repair",
+        "name": "Repair shops",
+        "product": "Free Repair Job Card",
+        "points": [
+          "Condition photos and a signature at intake",
+          "One board of every device in the shop",
+          "Job slips, device tags and warranty lookup"
+        ]
+      },
+      {
+        "id": "free-rental",
+        "name": "Tent houses & hire",
+        "product": "Free Rental & Hire Book",
+        "points": [
+          "An availability calendar, date by date",
+          "Damage and late fees against the deposit",
+          "Picking lists and signed delivery challans"
+        ]
+      },
+      {
+        "id": "free-token",
+        "name": "Waiting rooms",
+        "product": "Free Token System",
+        "points": [
+          "Calls the number out loud, in eight languages",
+          "A waiting-room display for a TV",
+          "Wait estimates from your own timings"
+        ]
+      },
+      {
+        "id": "bank-statement-analyzer",
+        "name": "Accountants",
+        "product": "Bank Statement Analyzer",
+        "points": [
+          "Imports PDF, XLSX and CSV statements",
+          "Rules-based classification you control",
+          "Nothing uploaded — it parses on your device"
+        ]
+      },
+      {
+        "id": "every-business",
+        "name": "Every business",
+        "product": "50+ free tools",
+        "points": [
+          "GST invoices and quotations",
+          "Ledgers, cash books and stock registers",
+          "Balance sheets and P&L statements"
+        ]
+      }
+    ]
+  },
   "products": {
     "eyebrow": "Products",
     "headline": "Software for how your business actually runs",
@@ -235,6 +342,9 @@
         "answer": "Yes. Setu runs an outsourced accounting, bookkeeping and payroll practice for small businesses, on weekly to yearly cycles, across QuickBooks, Xero, Zoho, FreshBooks and more."
       }
     ]
+  },
+  "languageLinks": {
+    "headline": "Setu in your language"
   },
   "ctaBanner": {
     "headline": "Ready to see Setu in action?",

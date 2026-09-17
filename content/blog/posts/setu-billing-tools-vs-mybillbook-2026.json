@@ -1,0 +1,60 @@
+{
+  "slug": "setu-billing-tools-vs-mybillbook-2026",
+  "title": "Setu vs myBillBook: Counter Billing and Stock for a Small Shop in 2026",
+  "seoTitle": "Setu vs myBillBook for Shop Billing in 2026",
+  "metaDescription": "myBillBook lists plans from ₹3,490 a year with a trial but no free tier. Setu's billing, stock and ledger tools are free. An honest 2026 comparison for shops.",
+  "excerpt": "myBillBook puts billing, stock and khata in one paid account, listed from ₹3,490 a year with a trial but no permanently free tier. Setu's billing, stock register and ledger tools are free with no cap. Here is how to tell which trade fits your shop.",
+  "keywords": [
+    "setu vs mybillbook",
+    "mybillbook pricing 2026",
+    "mybillbook alternative free",
+    "free billing software for shops India",
+    "retail billing and stock software 2026",
+    "GST billing app for small shop"
+  ],
+  "date": "2026-09-13",
+  "updated": "2026-09-13",
+  "category": "Operations",
+  "thumbnail": "/blog/thumbnails/setu-billing-tools-vs-mybillbook-2026.jpeg",
+  "connectedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "barcode-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Are Setu's billing and stock tools really free?",
+      "answer": "Yes. There is no account, no plan and no cap on invoices or stock items. They stay free because the records live in your browser rather than on a server Setu has to run, which is also why a weekly CSV export matters."
+    },
+    {
+      "question": "What does myBillBook cost in India?",
+      "answer": "As publicly listed in September 2026: Plus at ₹3,490 a year, Pro at ₹3,990 and Pro Max from about ₹6,840, with a free trial and a money-back window rather than a permanently free plan. Several comparison sites still quote older plan names, so confirm on the vendor's own pricing page."
+    },
+    {
+      "question": "Can I bill from two devices with a free browser tool?",
+      "answer": "Not with the same live data. Browser tools keep records on the browser that created them, so a second machine starts empty unless you move a CSV across. If two people need the same stock count at the same time, that is the point where paid software earns its money."
+    },
+    {
+      "question": "Do I need e-invoicing for a small retail shop?",
+      "answer": "Only if your aggregate turnover has crossed the notified threshold, which has been lowered more than once. Check the current figure against your own turnover. If it applies, you need portal-connected software, and no browser-only tool will do."
+    },
+    {
+      "question": "Can I run both at once while I decide?",
+      "answer": "Yes, and it is a reasonable way to evaluate. Keep the free Stock Register and Customer Ledger going alongside a trial, compare what each says at month end, and you will learn more about your own numbers than any feature list will tell you."
+    }
+  ],
+  "bodyHtml": "<p>A shop counter runs three jobs at once: ring up the sale, keep the stock count honest, and remember who still owes you money. Software that does one of those well and the other two badly is often worse than three separate things that each do their own job properly, because the trouble hides in the handoffs rather than in any single screen.</p><p>myBillBook is one of the more widely used billing apps in Indian retail, and it puts all three in one account on your phone. Setu answers the same three jobs with separate free browser tools that hand off to each other: an <a href=\"/tools/invoice-generator\">Invoice Generator</a> for the bill, a <a href=\"/tools/stock-register\">Stock Register</a> for what is on the shelf, and a <a href=\"/tools/customer-ledger\">Customer Ledger</a> for the khata. This post is about which of those two trades actually suits your shop in 2026.</p><h2>What myBillBook is built to do</h2><p>myBillBook is a billing-and-inventory app with a real business around it. You bill from a phone, a desktop app or the web, all pointing at the same account, so the person at the counter and the owner checking numbers at home are looking at one set of records. Invoices are GST-formatted, items carry stock counts with low-stock alerts, and barcodes can be generated, printed and scanned rather than typed. Payment reminders go out over SMS and WhatsApp on their own. Higher tiers add e-way bills, e-invoicing, recurring billing, a loyalty programme, POS billing and a Tally export for whoever does your books.</p><p>As publicly listed in September 2026, the India pricing runs: <strong>Plus</strong> at &#8377;3,490 a year, <strong>Pro</strong> at &#8377;3,990 a year, and <strong>Pro Max</strong> starting around &#8377;6,840 a year. Plus and Pro cover one business and one user plus a CA login; Pro Max starts at two businesses and three users and can be extended. There is a free trial and a money-back window, but no permanently free tier &mdash; the app is a paid product with a way to try it. Check <a href=\"https://mybillbook.in/pricing-plans\">mybillbook.in/pricing-plans</a> before you budget, because several comparison sites still list older plan names and prices that have not been true for a while.</p><p>For a shop doing meaningful volume, none of that is expensive. Under &#8377;300 a month for billing, stock and reminders across three devices is a fair price for the work it removes. The question is whether your shop is doing the volume that turns those features into saved time, or whether you would be paying a subscription to avoid a problem you do not yet have.</p><h2>What Setu's tools do instead</h2><p>Setu splits the same work into free browser tools with no account and no cap. The Invoice Generator produces a GST bill you can print or send. The Stock Register holds items, quantities and movements so the shelf count and the book count can be compared. The <a href=\"/tools/barcode-generator\">Barcode Generator</a> and the <a href=\"/tools/label-printer\">Price Label Printer</a> handle the labelling side, and the Customer Ledger tracks who has been billed and who has paid.</p><p>Nothing is metered. There is no plan, no seat count and no document limit, because the records live in your browser rather than on a server somebody has to run. That is also the honest catch: the data is on the machine you used, so exporting to CSV on a fixed day is not optional housekeeping, it is the backup.</p><p>What the free tools do not do matters as much as what they do. There is no automatic reminder that goes out while you sleep. There is no e-invoicing or IRN generation, and no e-way bill. There is no sync between the counter machine and your phone. There is no staff login with limited rights, no loyalty programme, and nobody on a support line when something behaves oddly on a Sunday afternoon. Each of those is a genuine feature, and needing one is a reasonable reason to pay for software.</p><h2>The honest comparison</h2><table><thead><tr><th>What you need</th><th>Setu tools</th><th>myBillBook</th></tr></thead><tbody><tr><td>Cost</td><td>Free, no limits</td><td>From &#8377;3,490 a year; trial only, no free tier</td></tr><tr><td>Signup</td><td>None</td><td>Account required</td></tr><tr><td>Same data on phone and counter</td><td>No &mdash; per browser</td><td>Yes, across devices</td></tr><tr><td>GST invoice</td><td>Yes</td><td>Yes</td></tr><tr><td>Stock counts and low-stock alerts</td><td>Register, manual review</td><td>Yes, with alerts</td></tr><tr><td>Barcode generate and print</td><td>Yes</td><td>Yes, plus scanning</td></tr><tr><td>Automatic SMS or WhatsApp reminders</td><td>No</td><td>Yes</td></tr><tr><td>E-invoicing, IRN and e-way bill</td><td>No</td><td>Yes, on the upper tier</td></tr><tr><td>Staff logins and activity trail</td><td>No</td><td>Yes, on the upper tier</td></tr><tr><td>Where your data sits</td><td>Your browser; you export it</td><td>Vendor's cloud; you export it</td></tr></tbody></table><p>Read that table for the row that is a problem this quarter, not the row that would be pleasant in two years. A single-counter shop billing thirty customers a day and knowing most of them by name has no use for staff activity tracking, and paying for it does not make the shop better.</p><h2>The three questions that actually decide it</h2><p><strong>Does more than one person, or more than one device, need the same numbers?</strong> This is the cleanest split in the whole comparison. Free browser tools keep their records on the browser that made them. The moment a second person at a second machine needs to see the same stock count, you are either emailing exports around or you are buying software. Emailing exports around works for a while and then quietly stops working, usually the week you are busiest.</p><p><strong>How many bills a day?</strong> Under roughly twenty, typing a bill and keeping a register is genuinely fine and the subscription saves you very little. Past fifty, barcode scanning at the counter and stock that decrements itself stop being conveniences and start being the difference between closing at eight and closing at nine.</p><p><strong>Are you inside e-invoicing or e-way bill territory?</strong> If your turnover has crossed the notified e-invoicing threshold, or you move goods often enough that e-way bills are routine, the decision is made for you. Those are portal-connected operations and no browser-only tool performs them. Confirm the current threshold against your own turnover rather than assuming last year's figure still applies &mdash; it has been lowered more than once.</p><h2>What free actually costs here</h2><p>Free is not the same as cheap, and it is worth naming the bill you pay in other currency. You pay in discipline: a weekly CSV export, kept somewhere that is not the same laptop. You pay in single-device working, which is fine for one counter and painful for two. You pay in doing your own chasing, because nothing sends a reminder on your behalf. And you pay in having no vendor to escalate to.</p><p>Against that, you keep a few things worth keeping. No renewal date. No plan tier deciding whether you can print a particular report. No account to lock, and no annual conversation about whether the price went up. For a shop whose volumes are steady and modest, that is a real trade and not a consolation prize.</p><h2>Where each one wins</h2><p><strong>myBillBook wins</strong> when your shop has more than one person touching the numbers, when barcodes and stock movement are daily work rather than occasional, when reminders going out automatically would actually recover money, or when e-invoicing and e-way bills are part of your compliance. At that point the subscription is cheaper than the hours.</p><p><strong>Setu's tools win</strong> when one person runs the counter, when bills are in the tens rather than the hundreds, when you would rather not hold another subscription, or when you are testing whether you need billing software at all before committing to one. They are also a sensible way to keep the ledger and stock register running alongside a paid app you are still evaluating &mdash; there is no cost to keeping a second, independent copy of the truth.</p><p>If what is actually bothering you is not the billing but the books behind it &mdash; purchases not tallying, GST returns assembled in a panic, a ledger nobody trusts &mdash; that is a different problem, and switching billing apps will not fix it. Our <a href=\"/consultancy\">accounting and bookkeeping service</a> exists for that. And if you want the other side of this comparison, the earlier piece on <a href=\"/blog/operations/setu-invoice-generator-vs-vyapar-2026\">Setu's Invoice Generator against Vyapar</a> covers a similar trade from the invoicing end.</p>"
+}

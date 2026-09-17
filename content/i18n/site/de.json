@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "links": [
+      { "label": "Produkte" },
+      { "label": "Beratung" },
+      { "label": "Rechner" },
+      { "label": "Tools" },
+      { "label": "Über uns" },
+      { "label": "Blog" },
+      { "label": "Kontakt" }
+    ],
+    "cta": { "label": "Sprechen Sie mit uns" },
+    "menu": { "open": "Menü öffnen", "close": "Menü schließen" }
+  },
+  "footer": {
+    "description": "Setu Technology baut praxisnahe Software für Unternehmen weltweit — gedacht zuerst für die Menschen, die den Betrieb führen.",
+    "columns": [
+      {
+        "heading": "Produkte",
+        "links": [
+          { "label": "Kasse im Browser (kostenlos)" },
+          { "label": "Kontoauszug-Analysator (kostenlos)" },
+          { "label": "Free Dine — Restaurantkasse (kostenlos)" },
+          { "label": "Nachhilfe-Kursverwaltung (kostenlos)" },
+          { "label": "Praxisverwaltung (kostenlos)" },
+          {},
+          { "label": "Alle Produkte" }
+        ]
+      },
+      {
+        "heading": "Unternehmen",
+        "links": [
+          { "label": "Über uns" },
+          { "label": "Team" },
+          { "label": "Beratung" },
+          { "label": "Blog" },
+          { "label": "Glossar" },
+          { "label": "Kontakt" }
+        ]
+      },
+      {
+        "heading": "Tools",
+        "links": [
+          { "label": "Alle Tools" },
+          { "label": "Rechnungsgenerator" },
+          { "label": "QR-Karten-Generator" },
+          { "label": "Zahlungs-QR-Generator" },
+          { "label": "Barcode-Generator" }
+        ]
+      },
+      {
+        "heading": "Rechner",
+        "links": [
+          { "label": "Alle Rechner" },
+          { "label": "GST-Rechner" },
+          { "label": "Margenrechner" },
+          { "label": "Einkommensteuer-Rechner" },
+          { "label": "Kreditraten-Rechner" }
+        ]
+      }
+    ],
+    "legal": [
+      { "label": "Preise" },
+      { "label": "Team" },
+      { "label": "Sitemap" },
+      { "label": "Datenschutz" },
+      { "label": "AGB" }
+    ],
+    "copyright": "© 2026 Setu Technology. Hergestellt in Indien."
+  }
+}

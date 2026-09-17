@@ -1,0 +1,49 @@
+{
+  "slug": "gstr-1a",
+  "term": "GSTR-1A",
+  "category": "gst-tax",
+  "aliases": [
+    "GSTR 1A"
+  ],
+  "short": "The optional amendment return used to correct outward supplies before filing the summary return.",
+  "seoTitle": "GSTR-1A — Meaning, Use and Deadline Explained",
+  "metaDescription": "The optional amendment return that lets you correct outward supplies after filing GSTR-1 but before the summary return for the same period. Meaning and example.",
+  "updated": "2026-09-13",
+  "definition": "GSTR-1A is an optional amendment return that lets a supplier correct or add records of outward supplies after GSTR-1 has been filed but before the summary return for the same tax period is submitted. Corrected values flow into the summary return automatically.",
+  "bodyHtml": "<h2>Why GSTR-1A matters</h2><p>Since the auto-populated liability in the summary return stopped being editable, the amendment return is the route for fixing a mistake in the same period rather than carrying it forward. Without it, an error found after filing outward supplies would sit in your numbers until the following month.</p><h2>How it works in practice</h2><p>File outward supplies, check the figures that populate the summary return, and if something is wrong — a wrong buyer GSTIN, a missed invoice, a wrong taxable value — correct it here before submitting. Your buyer's credit statement reflects the corrected record, which is why a buyer chasing a mismatch will often ask you to use it.</p><h2>What it cannot do</h2><p>It is not a general amendment window. It closes when the summary return for the period is filed, and corrections after that follow the ordinary amendment route in a later period.</p>",
+  "faq": [
+    {
+      "question": "Is filing GSTR-1A compulsory?",
+      "answer": "No. It is optional and only needed when something in the outward supplies already filed for the period is wrong or missing."
+    },
+    {
+      "question": "Until when can it be filed?",
+      "answer": "Until the summary return for the same tax period is filed. Once that is submitted, the window for same-period correction closes."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-1",
+    "gstr-3b",
+    "gstr-2b",
+    "tax-invoice",
+    "invoice-management-system"
+  ]
+}

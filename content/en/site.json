@@ -39,6 +39,10 @@
     "cta": {
       "label": "Talk to us",
       "href": "/contact"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
     }
   },
   "footer": {
@@ -55,7 +59,10 @@
             "label": "Bank Statement Analyzer (Free)",
             "href": "/products/bank-statement-analyzer"
           },
-{ "label": "Free Dine — Restaurant POS (Free)", "href": "/products/free-restaurant-pos" },
+          {
+            "label": "Free Dine — Restaurant POS (Free)",
+            "href": "/products/free-restaurant-pos"
+          },
           {
             "label": "Tuition Class Manager (Free)",
             "href": "/products/free-tuition-software"
@@ -166,6 +173,28 @@
       {
         "label": "LinkedIn",
         "href": "https://www.linkedin.com/company/setu-technology"
+      }
+    ],
+    "legal": [
+      {
+        "label": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "label": "Team",
+        "href": "/team"
+      },
+      {
+        "label": "Sitemap",
+        "href": "/sitemap"
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy"
+      },
+      {
+        "label": "Terms",
+        "href": "/terms"
       }
     ],
     "copyright": "© 2026 Setu Technology. Made in India."
