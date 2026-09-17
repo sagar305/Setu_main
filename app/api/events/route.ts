@@ -122,7 +122,11 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.POSTHOG_API_KEY;
-  const host = process.env.POSTHOG_HOST ?? "https://eu.i.posthog.com";
+  // US Cloud, matching the project this site forwards to. PostHog fixes a
+  // project's region when it is created and it cannot be moved afterwards, so
+  // a wrong host here is not a slow degradation — every batch is rejected
+  // outright by a region that has never heard of the key.
+  const host = process.env.POSTHOG_HOST ?? "https://us.i.posthog.com";
 
   if (!apiKey) {
     // Not configured. Acknowledging nothing keeps the events on the device;
