@@ -1684,6 +1684,71 @@
           "href": "/products/restaurant-pos"
         }
       }
+    },
+    {
+      "slug": "mdr-calculator",
+      "name": "MDR Calculator",
+      "category": "tax-finance",
+      "icon": "credit-card",
+      "shortDescription": "See the MDR charged on a payment and what actually settles to you, MDR inclusive or exclusive.",
+      "seo": {
+        "title": "MDR Calculator — Payment Gateway Charges | Setu",
+        "description": "Free MDR calculator for Indian merchants. Enter an amount MDR inclusive or exclusive to see the merchant discount rate, GST on it, and what you receive.",
+        "keywords": [
+          "MDR calculator",
+          "merchant discount rate calculator",
+          "payment gateway charges calculator",
+          "MDR inclusive exclusive",
+          "UPI MDR India",
+          "card transaction charges calculator"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — MDR Calculator",
+        "headline": "MDR Calculator",
+        "subheadline": "Work out the merchant discount rate on a payment, and what lands in your account once it and its GST come off."
+      },
+      "about": {
+        "headline": "What MDR actually costs you",
+        "paragraphs": [
+          "Merchant discount rate is the cut your acquirer keeps on every card or wallet collection, and GST is charged on that cut as well. On a ₹5,000 credit card sale at 2%, the MDR is ₹100 and the GST on it is another ₹18, so ₹4,882 settles rather than ₹5,000. Across a month of card volume that gap is real money, and most merchants only meet it in the settlement report.",
+          "Enter the amount two ways depending on what you know. MDR inclusive means the figure is what the customer pays, and the calculator tells you what you keep. MDR exclusive means the figure is what you want to land, and the calculator grosses the charge up so the net after MDR comes out exactly right — useful when you are recovering the charge from the customer or quoting a price that has to clear a fixed amount.",
+          "Not every rail costs the same. UPI funded from a bank account and RuPay debit carry zero MDR for merchants by regulation. Wallet and credit-card-on-UPI interchange only applies above ₹2,000 per transaction, which is why collecting a large amount across several smaller QR codes can bring the cost to nothing."
+        ]
+      },
+      "faq": {
+        "headline": "MDR calculator FAQs",
+        "items": [
+          {
+            "question": "What is MDR?",
+            "answer": "MDR, or merchant discount rate, is the fee a merchant pays to accept a digital payment. It is usually a percentage of the transaction value, sometimes with a flat fee on top, and it is deducted before the money settles into the merchant's account. GST applies on the MDR itself."
+          },
+          {
+            "question": "What is the difference between MDR inclusive and MDR exclusive?",
+            "answer": "MDR inclusive means the amount you entered is what the customer pays, and the MDR comes out of it, so you receive less. MDR exclusive means the amount you entered is what you want to receive, so the charge is grossed up to cover the MDR and its GST. Use exclusive when you need a specific figure to land in your account."
+          },
+          {
+            "question": "Is there MDR on UPI payments in India?",
+            "answer": "UPI payments funded from a bank account carry zero MDR for merchants, as do RuPay debit cards. Interchange of around 1.1% applies to wallet (PPI) and credit-card-on-UPI transactions, but only on transactions above ₹2,000."
+          },
+          {
+            "question": "How can I reduce what I pay in MDR?",
+            "answer": "Steer customers toward zero-MDR rails such as bank-funded UPI and RuPay debit, negotiate your rate with your acquirer once your volume justifies it, and keep individual UPI transactions at or below ₹2,000 where interchange does not apply. The linked QR splitter breaks a larger total into several sub-threshold QR codes."
+          },
+          {
+            "question": "Is GST charged on MDR?",
+            "answer": "Yes. GST at 18% is charged on the MDR itself, not on your sale. The calculator shows it as a separate line so you can see the full cost of collection, and registered businesses can generally claim it as input tax credit."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Collect payments without losing a cut",
+        "subtext": "Setu's free UPI tools let you take payments at the counter with no MDR and no signup.",
+        "cta": {
+          "label": "Try the UPI QR Generator",
+          "href": "/tools/upi-qr-generator"
+        }
+      }
     }
   ]
 }

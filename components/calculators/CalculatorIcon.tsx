@@ -41,6 +41,7 @@ import {
   Layers,
   PieChart,
   GitCompare,
+  CreditCard,
 } from "lucide-react";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
@@ -84,6 +85,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   layers: Layers,
   "chart-pie": PieChart,
   "git-compare": GitCompare,
+  "credit-card": CreditCard,
 };
 
 export function CalculatorIcon({ name, className }: { name: string; className?: string }) {

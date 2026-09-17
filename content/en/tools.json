@@ -146,6 +146,29 @@
       }
     },
     {
+      "slug": "upi-qr-split",
+      "name": "Zero-MDR UPI QR Splitter",
+      "category": "payment",
+      "icon": "qr-code",
+      "shortDescription": "Split a large payment into several sub-₹2,000 UPI QR codes so no MDR or interchange applies.",
+      "seo": {
+        "title": "Zero-MDR UPI QR Splitter | Free Tool | Setu Technology",
+        "description": "Split a payment into several sub-₹2,000 UPI QR codes so no interchange or MDR applies. Free, no signup, generated on your own device.",
+        "keywords": [
+          "zero MDR UPI",
+          "UPI QR splitter",
+          "split payment QR code",
+          "avoid MDR charges",
+          "UPI interchange 2000 limit"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Free Tool — Zero-MDR UPI QR Splitter",
+        "headline": "Zero-MDR UPI QR Splitter",
+        "subheadline": "Break a large payment into several sub-₹2,000 QR codes and collect the whole amount without losing a cut to MDR."
+      }
+    },
+    {
       "slug": "qr-menu-generator",
       "name": "QR Menu Generator",
       "category": "menu",
