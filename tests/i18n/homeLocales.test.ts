@@ -220,3 +220,77 @@ describe("site chrome translations", () => {
     expect(merged.footer.social).toEqual(englishSite.footer.social);
   });
 });
+
+describe("every translated page", () => {
+  const PAGES = [
+    "home",
+    "privacy",
+    "terms",
+    "contact",
+    "consultancy",
+    "products",
+    "tools",
+    "calculators",
+  ] as const;
+
+  function englishFor(key: string) {
+    const file =
+      key === "home"
+        ? path.join(process.cwd(), "content", "en", "home.json")
+        : path.join(process.cwd(), "content", "en", `${key}.json`);
+    return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
+  }
+
+  it("publishes only languages whose translation file exists", () => {
+    for (const key of PAGES) {
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        expect(fs.existsSync(file), `${key}/${lang}.json`).toBe(true);
+      }
+    }
+  });
+
+  it("gives every translation its own title and description, within SERP limits", () => {
+    // Same limits scripts/check-seo.mjs enforces on the built HTML.
+    for (const key of PAGES) {
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const seo = (JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>).seo;
+        expect(seo, `${key}/${lang} seo`).toBeTruthy();
+
+        const limits =
+          lang === "zh"
+            ? { title: [14, 34], description: [50, 100] }
+            : { title: [30, 60], description: [120, 160] };
+
+        expect(seo.title.length, `${key}/${lang} title`).toBeGreaterThanOrEqual(limits.title[0]);
+        expect(seo.title.length, `${key}/${lang} title`).toBeLessThanOrEqual(limits.title[1]);
+        expect(seo.description.length, `${key}/${lang} description`).toBeGreaterThanOrEqual(
+          limits.description[0],
+        );
+        expect(seo.description.length, `${key}/${lang} description`).toBeLessThanOrEqual(
+          limits.description[1],
+        );
+        expect(seo.title).not.toBe(englishFor(key).seo?.title);
+      }
+    }
+  });
+
+  it("never reshapes a page: list lengths follow the English content", () => {
+    for (const key of PAGES) {
+      const english = englishFor(key);
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const merged = mergeTranslation(
+          english,
+          JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>,
+        );
+        for (const field of ["items", "products", "sections", "categories"]) {
+          if (Array.isArray(english[field])) {
+            expect(merged[field].length, `${key}/${lang} ${field}`).toBe(english[field].length);
+          }
+        }
+      }
+    }
+  });
+});

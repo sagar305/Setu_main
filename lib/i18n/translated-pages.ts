@@ -13,7 +13,7 @@ export const TRANSLATED_PAGES: Record<PageKey, LanguageCode[]> = {
   terms: ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
   contact: ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
   consultancy: ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
-  products: [],
-  tools: [],
+  products: ["hi", "bn", "ta", "te"],
+  tools: ["hi", "bn", "ta", "es", "fr"],
   calculators: [],
 };

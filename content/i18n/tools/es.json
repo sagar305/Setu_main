@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "Herramientas gratis para hostelería y comercio | Setu",
+    "description": "Herramientas online gratuitas para restaurantes y pequeños negocios: generador de facturas, calculadoras y mucho más. Sin registro.",
+    "keywords": [
+      "herramientas para negocios",
+      "herramientas gratis",
+      "generador de facturas",
+      "herramientas para restaurantes",
+      "herramientas para pymes"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Herramientas gratis",
+    "headline": "Herramientas para llevar tu negocio",
+    "subheadline": "Herramientas gratuitas y sin registro, hechas para quien lleva un restaurante o una tienda: facturación, calculadoras y más."
+  },
+  "ctaBanner": {
+    "headline": "¿Y si los números se llevaran solos?",
+    "subtext": "Setu Dine registra ventas, costes e impuestos automáticamente, para que dediques menos tiempo a las calculadoras y más al negocio.",
+    "cta": {
+      "label": "Descubre Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Puesta en marcha"
+    },
+    {
+      "name": "Punto de venta"
+    },
+    {
+      "name": "Facturación"
+    },
+    {
+      "name": "Cobros"
+    },
+    {
+      "name": "Carta"
+    },
+    {
+      "name": "Productos y etiquetas"
+    },
+    {
+      "name": "Inventario y compras"
+    },
+    {
+      "name": "Finanzas"
+    },
+    {
+      "name": "Clientes"
+    },
+    {
+      "name": "Citas"
+    },
+    {
+      "name": "Documentos"
+    },
+    {
+      "name": "Teneduría de libros"
+    },
+    {
+      "name": "Estados e informes"
+    },
+    {
+      "name": "Análisis financiero"
+    }
+  ],
+  "items": [
+    {
+      "name": "TPV en el navegador",
+      "shortDescription": "TPV gratuito que funciona sin conexión en tu navegador: cobros, inventario, clientes y tickets. Sin cuenta."
+    },
+    {
+      "name": "Generador de facturas",
+      "shortDescription": "Crea, personaliza y descarga facturas profesionales con soporte de impuestos."
+    },
+    {
+      "name": "Generador de QR de pago",
+      "shortDescription": "Genera códigos QR de pago dinámicos con importe y concepto para cobrar al instante."
+    },
+    {
+      "name": "Generador de cartas QR",
+      "shortDescription": "Crea un QR con tu carta digital: la carta entera va dentro del QR, sin alojamiento."
+    },
+    {
+      "name": "Generador de presupuestos",
+      "shortDescription": "Presupuestos profesionales con fecha de validez y seguimiento de estado: imprime o guarda en PDF."
+    },
+    {
+      "name": "Perfil del negocio",
+      "shortDescription": "Guarda los datos de tu negocio una vez y todas las herramientas de Setu los reutilizan."
+    },
+    {
+      "name": "Generador de recibos",
+      "shortDescription": "Diseña un recibo, rellena una venta e imprime; el TPV del navegador imprime con el mismo diseño."
+    },
+    {
+      "name": "Generador de códigos de barras",
+      "shortDescription": "Genera códigos EAN-13, Code 128 y QR, y descárgalos en PNG o PDF."
+    },
+    {
+      "name": "Impresión de etiquetas",
+      "shortDescription": "Imprime etiquetas de precio y código de barras en hojas A4 o rollos térmicos."
+    },
+    {
+      "name": "Registro de stock",
+      "shortDescription": "Existencias al día, ajustes e historial de movimientos, compartido con tu TPV."
+    },
+    {
+      "name": "Registro de compras",
+      "shortDescription": "Anota las facturas de proveedor y actualiza el stock con una sola confirmación."
+    },
+    {
+      "name": "Libro de proveedores",
+      "shortDescription": "Todos tus proveedores en un sitio, reutilizados por el registro de compras."
+    },
+    {
+      "name": "Control de gastos",
+      "shortDescription": "Sigue los gastos por categoría con totales mensuales y exportación a CSV."
+    },
+    {
+      "name": "Libro de caja",
+      "shortDescription": "Entradas y salidas diarias de efectivo con saldos de apertura y cierre automáticos."
+    },
+    {
+      "name": "Panel de beneficios",
+      "shortDescription": "El beneficio real a partir de tus ventas, costes de producto y gastos."
+    },
+    {
+      "name": "Libro de clientes",
+      "shortDescription": "Cuenta de fiado digital: crédito, cobros y saldo por cliente."
+    },
+    {
+      "name": "Agenda de citas",
+      "shortDescription": "Reservas por día con duración, estados y seguimiento de ausencias."
+    },
+    {
+      "name": "Generador de notas de crédito",
+      "shortDescription": "Emite notas de crédito listas para impuestos por devoluciones y ajustes. PDF al momento, sin registro."
+    },
+    {
+      "name": "Generador de notas de débito",
+      "shortDescription": "Crea notas de débito por devoluciones de compra, faltas de servicio y diferencias de precio. PDF al momento."
+    },
+    {
+      "name": "Generador de órdenes de compra",
+      "shortDescription": "Autoriza compras a proveedor de forma formal: artículos, precios, fecha de entrega y condiciones en una OC."
+    },
+    {
+      "name": "Generador de órdenes de venta",
+      "shortDescription": "Confirma pedidos de clientes antes del envío: artículos, precios y fecha de entrega en un documento."
+    },
+    {
+      "name": "Plan de cuentas",
+      "shortDescription": "Monta tu plan de cuentas desde una plantilla para pequeños negocios: códigos, tipos y exportación CSV."
+    },
+    {
+      "name": "Asiento contable",
+      "shortDescription": "Partida doble con cuadre automático de debe y haber. Alimenta el mayor y el balance de sumas."
+    },
+    {
+      "name": "Libro mayor",
+      "shortDescription": "Mayores por cuenta con saldos corrientes, construidos automáticamente desde tus asientos."
+    },
+    {
+      "name": "Conciliación bancaria",
+      "shortDescription": "Cuadra tu extracto con los libros: cheques pendientes, depósitos en tránsito y comisiones."
+    },
+    {
+      "name": "Analizador de extractos",
+      "shortDescription": "Analiza, clasifica y revisa extractos bancarios de forma privada, en tu navegador."
+    },
+    {
+      "name": "Balance de sumas y saldos",
+      "shortDescription": "Construido solo desde tus asientos: el saldo neto de cada cuenta, sumado y comprobado."
+    },
+    {
+      "name": "Cuenta de resultados",
+      "shortDescription": "Monta la cuenta de resultados, de los ingresos al beneficio neto con márgenes en vivo. PDF o CSV."
+    },
+    {
+      "name": "Balance de situación",
+      "shortDescription": "Activo, pasivo y patrimonio con comprobación de cuadre en vivo. Impresión A4 y exportación CSV."
+    },
+    {
+      "name": "Estado de flujos de efectivo",
+      "shortDescription": "Flujos de explotación, inversión y financiación, de la caja inicial a la final. Imprime o exporta."
+    },
+    {
+      "name": "Extracto de cliente",
+      "shortDescription": "Estado de cuenta por cliente: facturas, cobros y saldo corriente. Imprime en PDF."
+    },
+    {
+      "name": "Informe de facturas vencidas",
+      "shortDescription": "Facturas de clientes sin cobrar por tramos de antigüedad, de corrientes a 90+ días. Exporta a CSV."
+    },
+    {
+      "name": "Antigüedad de pagos",
+      "shortDescription": "Facturas de proveedor pendientes por tramos de antigüedad: paga a quien toca cuando toca. CSV."
+    },
+    {
+      "name": "Presupuesto frente a real",
+      "shortDescription": "Plan frente a realidad por categoría, con desviación y % calculados en vivo. Exporta a CSV."
+    },
+    {
+      "name": "Análisis ABC",
+      "shortDescription": "Clasifica el inventario en A, B y C por valor de consumo anual: la regla 80/15/5."
+    },
+    {
+      "name": "Comparador de proveedores",
+      "shortDescription": "Compara proveedores por precio, entrega, crédito y calidad con puntuación ponderada."
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "Outils gratuits pour la restauration et le commerce | Setu",
+    "description": "Des outils en ligne gratuits pour les restaurants et les petites entreprises : générateur de factures, calculatrices et bien plus. Sans inscription.",
+    "keywords": [
+      "outils de gestion",
+      "outils gratuits",
+      "générateur de factures",
+      "outils pour restaurant",
+      "outils pour petite entreprise"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Outils gratuits",
+    "headline": "Des outils pour faire tourner votre activité",
+    "subheadline": "Des outils gratuits et sans compte, pensés pour les restaurateurs et les commerçants : facturation, calculatrices et plus encore."
+  },
+  "ctaBanner": {
+    "headline": "Et si les chiffres se tenaient tout seuls ?",
+    "subtext": "Setu Dine suit ventes, coûts et taxes automatiquement : moins de temps sur les calculatrices, plus sur votre activité.",
+    "cta": {
+      "label": "Découvrir Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Création d'entreprise"
+    },
+    {
+      "name": "Caisse"
+    },
+    {
+      "name": "Facturation"
+    },
+    {
+      "name": "Encaissement"
+    },
+    {
+      "name": "Carte"
+    },
+    {
+      "name": "Produits et étiquettes"
+    },
+    {
+      "name": "Stock et achats"
+    },
+    {
+      "name": "Finances"
+    },
+    {
+      "name": "Clients"
+    },
+    {
+      "name": "Rendez-vous"
+    },
+    {
+      "name": "Documents"
+    },
+    {
+      "name": "Tenue de livres"
+    },
+    {
+      "name": "États et rapports"
+    },
+    {
+      "name": "Analyse financière"
+    }
+  ],
+  "items": [
+    {
+      "name": "Caisse dans le navigateur",
+      "shortDescription": "Caisse gratuite qui fonctionne hors ligne dans votre navigateur : encaissement, stock, clients et tickets. Sans compte."
+    },
+    {
+      "name": "Générateur de factures",
+      "shortDescription": "Créez, personnalisez et téléchargez des factures professionnelles avec gestion des taxes."
+    },
+    {
+      "name": "Générateur de QR de paiement",
+      "shortDescription": "Générez des QR codes de paiement dynamiques avec montant et libellé pour encaisser tout de suite."
+    },
+    {
+      "name": "Générateur de carte QR",
+      "shortDescription": "Créez un QR code de carte : la carte entière tient dans le QR, sans hébergement."
+    },
+    {
+      "name": "Générateur de devis",
+      "shortDescription": "Des devis professionnels avec date de validité et suivi du statut : impression ou PDF."
+    },
+    {
+      "name": "Profil de l'entreprise",
+      "shortDescription": "Enregistrez vos informations une fois : tous les outils Setu les réutilisent automatiquement."
+    },
+    {
+      "name": "Générateur de reçus",
+      "shortDescription": "Dessinez un reçu, saisissez une vente et imprimez ; la caisse du navigateur imprime le même modèle."
+    },
+    {
+      "name": "Générateur de codes-barres",
+      "shortDescription": "Générez des codes EAN-13, Code 128 et QR, puis téléchargez-les en PNG ou PDF."
+    },
+    {
+      "name": "Impression d'étiquettes",
+      "shortDescription": "Imprimez des étiquettes de prix et de code-barres sur feuilles A4 ou rouleaux thermiques."
+    },
+    {
+      "name": "Registre de stock",
+      "shortDescription": "Stocks en temps réel, ajustements et historique des mouvements, partagés avec votre caisse."
+    },
+    {
+      "name": "Registre des achats",
+      "shortDescription": "Saisissez les factures fournisseurs et mettez à jour le stock en une seule validation."
+    },
+    {
+      "name": "Répertoire fournisseurs",
+      "shortDescription": "Tous vos fournisseurs au même endroit, réutilisés par le registre des achats."
+    },
+    {
+      "name": "Suivi des dépenses",
+      "shortDescription": "Suivez les dépenses par catégorie avec totaux mensuels et export CSV."
+    },
+    {
+      "name": "Livre de caisse",
+      "shortDescription": "Entrées et sorties d'espèces au jour le jour, avec soldes d'ouverture et de clôture automatiques."
+    },
+    {
+      "name": "Tableau de bord des marges",
+      "shortDescription": "Le bénéfice réel calculé à partir de vos ventes, du coût des produits et de vos charges."
+    },
+    {
+      "name": "Livre de comptes clients",
+      "shortDescription": "Ardoise numérique : crédit, règlements et solde par client."
+    },
+    {
+      "name": "Agenda des rendez-vous",
+      "shortDescription": "Réservations par jour avec durée, statut et suivi des absences."
+    },
+    {
+      "name": "Générateur d'avoirs",
+      "shortDescription": "Émettez des avoirs conformes pour retours et régularisations. PDF immédiat, sans inscription."
+    },
+    {
+      "name": "Générateur de notes de débit",
+      "shortDescription": "Créez des notes de débit pour retours d'achat, livraisons incomplètes et écarts de prix. PDF immédiat."
+    },
+    {
+      "name": "Générateur de bons de commande",
+      "shortDescription": "Autorisez formellement un achat fournisseur : articles, prix, date de livraison et conditions sur un seul bon."
+    },
+    {
+      "name": "Générateur de commandes clients",
+      "shortDescription": "Confirmez la commande avant expédition : articles, prix et date de livraison sur un seul document."
+    },
+    {
+      "name": "Plan comptable",
+      "shortDescription": "Construisez votre plan comptable depuis un modèle pour petite entreprise : codes, types, export CSV."
+    },
+    {
+      "name": "Écriture comptable",
+      "shortDescription": "Comptabilité en partie double avec équilibrage débit/crédit automatique. Alimente grand livre et balance."
+    },
+    {
+      "name": "Grand livre",
+      "shortDescription": "Grands livres par compte avec soldes progressifs, construits automatiquement depuis vos écritures."
+    },
+    {
+      "name": "Rapprochement bancaire",
+      "shortDescription": "Rapprochez relevé et comptabilité : chèques non débités, dépôts en transit, frais."
+    },
+    {
+      "name": "Analyseur de relevés",
+      "shortDescription": "Analysez, classez et vérifiez vos relevés bancaires en privé, dans votre navigateur."
+    },
+    {
+      "name": "Balance générale",
+      "shortDescription": "Construite depuis vos écritures : le solde net de chaque compte, totalisé et vérifié."
+    },
+    {
+      "name": "Compte de résultat",
+      "shortDescription": "Construisez le compte de résultat, du chiffre d'affaires au résultat net, marges en direct. PDF ou CSV."
+    },
+    {
+      "name": "Bilan",
+      "shortDescription": "Actif, passif et capitaux propres avec vérification de l'équilibre en direct. Impression A4 et export CSV."
+    },
+    {
+      "name": "Tableau des flux de trésorerie",
+      "shortDescription": "Flux d'exploitation, d'investissement et de financement, de la trésorerie d'ouverture à la clôture."
+    },
+    {
+      "name": "Relevé de compte client",
+      "shortDescription": "Relevé par client : factures, règlements et solde progressif. Impression en PDF."
+    },
+    {
+      "name": "Balance âgée clients",
+      "shortDescription": "Factures clients impayées par tranches d'ancienneté, de courant à 90+ jours. Export CSV."
+    },
+    {
+      "name": "Balance âgée fournisseurs",
+      "shortDescription": "Factures fournisseurs impayées par tranches d'ancienneté : payer les bonnes personnes au bon moment. CSV."
+    },
+    {
+      "name": "Budget et réalisé",
+      "shortDescription": "Prévu contre réalisé par catégorie, avec écart et % d'écart calculés en direct. Export CSV."
+    },
+    {
+      "name": "Analyse ABC",
+      "shortDescription": "Classez le stock en A, B et C selon la valeur de consommation annuelle : la règle 80/15/5."
+    },
+    {
+      "name": "Comparateur de fournisseurs",
+      "shortDescription": "Comparez les fournisseurs sur le prix, le délai, le crédit et la qualité avec une notation pondérée."
+    }
+  ]
+}
