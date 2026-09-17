@@ -98,6 +98,71 @@ describe("calculateMdr — edges", () => {
   });
 });
 
+describe("calculateMdr — UPI threshold and cap", () => {
+  // The rail NPCI switches on from 15 Oct 2026: 0.4% above Rs 2,000, charged on
+  // the full amount, capped at Rs 300.
+  const upi = { mode: "inclusive" as const, ratePct: 0.4, fixedFee: 0, gstPct: 18,
+                thresholdAmount: 2000, feeCap: 300 };
+
+  it("charges nothing at or below the threshold", () => {
+    for (const amount of [1, 1999, 2000]) {
+      const r = calculateMdr({ ...upi, amount });
+      expect(r.mdrFee).toBe(0);
+      expect(r.totalDeduction).toBe(0);
+      expect(r.youReceive).toBe(amount);
+      expect(r.belowThreshold).toBe(true);
+    }
+  });
+
+  it("matches NPCI's own published figures above the threshold", () => {
+    // Rs 12 on Rs 3,000 and Rs 200 on Rs 50,000 — i.e. 0.4% of the FULL amount,
+    // not of the slice above Rs 2,000.
+    expect(calculateMdr({ ...upi, amount: 2000.01 }).mdrFee).toBe(8);
+    expect(calculateMdr({ ...upi, amount: 3000 }).mdrFee).toBe(12);
+    expect(calculateMdr({ ...upi, amount: 50000 }).mdrFee).toBe(200);
+  });
+
+  it("pins the fee at the cap from Rs 75,000 upward", () => {
+    expect(calculateMdr({ ...upi, amount: 74999 }).capApplied).toBe(false);
+    const atCap = calculateMdr({ ...upi, amount: 75000 });
+    expect(atCap.mdrFee).toBe(300);
+    expect(atCap.capApplied).toBe(false); // exactly at the cap, not over it
+    const overCap = calculateMdr({ ...upi, amount: 500000 });
+    expect(overCap.mdrFee).toBe(300);
+    expect(overCap.capApplied).toBe(true);
+    expect(overCap.totalDeduction).toBe(354); // 300 + 18% GST
+  });
+
+  it("grosses up correctly on each side of the threshold and the cap", () => {
+    // Under the threshold: nothing to recover.
+    const small = calculateMdr({ ...upi, amount: 1500, mode: "exclusive" });
+    expect(small.customerPays).toBe(1500);
+
+    // Above it: the charge must clear the target net.
+    for (const target of [2000, 2500, 10000, 74000, 100000, 900000]) {
+      const r = calculateMdr({ ...upi, amount: target, mode: "exclusive" });
+      expect(r.feasible).toBe(true);
+      expect(r.youReceive).toBeGreaterThanOrEqual(target);
+      expect(r.youReceive).toBeLessThanOrEqual(target + 0.05);
+    }
+  });
+
+  it("stays solvable past the cap even at a rate that would otherwise be impossible", () => {
+    // Without a cap a 90% rate is unreachable; with one the deduction is fixed.
+    const r = calculateMdr({ ...upi, amount: 10000, mode: "exclusive", ratePct: 90 });
+    expect(r.feasible).toBe(true);
+    expect(r.youReceive).toBeGreaterThanOrEqual(10000);
+    expect(r.mdrFee).toBe(300);
+  });
+
+  it("picks the cheapest charge that still delivers the target", () => {
+    // Charging more than needed is a real cost to the customer, so the solver
+    // must not settle for the capped branch when the percentage branch is less.
+    const r = calculateMdr({ ...upi, amount: 10000, mode: "exclusive" });
+    expect(r.customerPays).toBeLessThan(10000 + 300 * 1.18);
+  });
+});
+
 describe("splitForZeroMdr", () => {
   it("fills each QR to the cap and puts the remainder on the last one", () => {
     const s = splitForZeroMdr(7500, 1999);
@@ -153,9 +218,16 @@ describe("MDR_PRESETS", () => {
     expect(MDR_PRESETS.filter((p) => p.ratePct === null)).toHaveLength(1);
   });
 
-  it("keeps the regulated zero-MDR rails at zero", () => {
-    for (const id of ["upi", "rupay-debit"]) {
+  it("keeps the rails that carry no MDR at zero", () => {
+    for (const id of ["rupay-debit", "upi-autopay"]) {
       expect(MDR_PRESETS.find((p) => p.id === id)?.ratePct).toBe(0);
     }
+  });
+
+  it("carries the UPI rail's threshold and cap", () => {
+    const upi = MDR_PRESETS.find((p) => p.id === "upi");
+    expect(upi?.ratePct).toBe(0.4);
+    expect(upi?.thresholdAmount).toBe(2000);
+    expect(upi?.feeCap).toBe(300);
   });
 });

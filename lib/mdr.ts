@@ -6,6 +6,11 @@
 //      flat per-transaction fee) — that is the MDR;
 //   2. GST is charged on the MDR itself (18% in India), not on the sale.
 //
+// Some rails only charge above a per-transaction threshold, and some cap the
+// fee, so both are modelled here rather than left to the caller. UPI merchant
+// payments from 15 October 2026 are the case that needs both: 0.4% above
+// ₹2,000, on the full amount, capped at ₹300.
+//
 // Everything here is pure arithmetic on rupees. Nothing in this module talks to
 // the network or to storage, so it is safe to unit-test and to import from both
 // a calculator tool and a QR tool.
@@ -30,12 +35,19 @@ export type MdrInput = {
   fixedFee: number;
   /** GST charged on the MDR itself. 18 in India. */
   gstPct: number;
+  /**
+   * MDR applies only to transactions *above* this value; at or below it the
+   * rail is free. Omit or pass 0 for a rail that charges from the first rupee.
+   */
+  thresholdAmount?: number;
+  /** Ceiling on the MDR before GST. Omit for an uncapped rail. */
+  feeCap?: number;
 };
 
 export type MdrResult = {
   /** What the customer is charged. */
   customerPays: number;
-  /** MDR before GST — percentage slice plus any flat fee. */
+  /** MDR before GST — percentage slice plus any flat fee, after any cap. */
   mdrFee: number;
   gstOnMdr: number;
   /** MDR + GST on it: everything the acquirer keeps. */
@@ -44,6 +56,10 @@ export type MdrResult = {
   youReceive: number;
   /** Total deduction as a percentage of what the customer paid. */
   effectivePct: number;
+  /** True when the charge sits at or under the rail's free threshold. */
+  belowThreshold: boolean;
+  /** True when the fee would have exceeded the rail's cap and was pinned to it. */
+  capApplied: boolean;
   /**
    * False when an `exclusive` target can never be reached because the MDR plus
    * its GST eats 100% or more of every rupee charged.
@@ -61,19 +77,63 @@ function ceilPaise(value: number): number {
   return Math.ceil((value - Number.EPSILON) * 100) / 100;
 }
 
+type Rail = { rate: number; gst: number; fixed: number; threshold: number; cap?: number };
+
 /** Every figure that follows once the charge is fixed. */
-function settle(customerPays: number, rate: number, gst: number, fixed: number) {
-  const mdrFee = toPaise(customerPays * rate + fixed);
+function settle(customerPays: number, rail: Rail) {
+  const { rate, gst, fixed, threshold, cap } = rail;
+
+  // Below the threshold the rail is free outright — the flat fee goes too.
+  const uncapped = customerPays <= threshold ? 0 : customerPays * rate + fixed;
+  const capApplied = cap !== undefined && uncapped > cap;
+
+  const mdrFee = toPaise(capApplied ? cap! : uncapped);
   const gstOnMdr = toPaise(mdrFee * gst);
   const totalDeduction = toPaise(mdrFee + gstOnMdr);
   const youReceive = toPaise(customerPays - totalDeduction);
-  return { mdrFee, gstOnMdr, totalDeduction, youReceive };
+
+  return {
+    mdrFee,
+    gstOnMdr,
+    totalDeduction,
+    youReceive,
+    belowThreshold: customerPays <= threshold,
+    capApplied,
+  };
 }
 
-export function calculateMdr({ amount, mode, ratePct, fixedFee, gstPct }: MdrInput): MdrResult {
-  const rate = Math.max(0, ratePct) / 100;
-  const gst = Math.max(0, gstPct) / 100;
-  const fixed = Math.max(0, fixedFee);
+/**
+ * Nudge a candidate charge up by a paise at a time until the net clears the
+ * target, since rounding the fee can otherwise leave the merchant a paise down.
+ * Returns null if it cannot get there in a few passes — that candidate's branch
+ * simply does not hold for this target.
+ */
+function reach(target: number, gross: number, rail: Rail) {
+  let charge = ceilPaise(gross);
+  let settled = settle(charge, rail);
+  for (let guard = 0; guard < 4 && settled.youReceive < target; guard += 1) {
+    charge = toPaise(charge + 0.01);
+    settled = settle(charge, rail);
+  }
+  return settled.youReceive < target ? null : { charge, settled };
+}
+
+export function calculateMdr({
+  amount,
+  mode,
+  ratePct,
+  fixedFee,
+  gstPct,
+  thresholdAmount = 0,
+  feeCap,
+}: MdrInput): MdrResult {
+  const rail: Rail = {
+    rate: Math.max(0, ratePct) / 100,
+    gst: Math.max(0, gstPct) / 100,
+    fixed: Math.max(0, fixedFee),
+    threshold: Math.max(0, thresholdAmount),
+    cap: feeCap === undefined ? undefined : Math.max(0, feeCap),
+  };
   const typed = Math.max(0, amount);
 
   const empty: MdrResult = {
@@ -83,6 +143,8 @@ export function calculateMdr({ amount, mode, ratePct, fixedFee, gstPct }: MdrInp
     totalDeduction: 0,
     youReceive: 0,
     effectivePct: 0,
+    belowThreshold: true,
+    capApplied: false,
     feasible: true,
   };
 
@@ -94,23 +156,34 @@ export function calculateMdr({ amount, mode, ratePct, fixedFee, gstPct }: MdrInp
   if (mode === "inclusive") {
     // The charge is exactly what was typed; everything else follows from it.
     customerPays = toPaise(typed);
-    settled = settle(customerPays, rate, gst, fixed);
+    settled = settle(customerPays, rail);
   } else {
-    // Solve gross - (gross*rate + fixed)*(1 + gst) = typed for gross.
-    const denominator = 1 - rate * (1 + gst);
-    if (denominator <= 0) return { ...empty, feasible: false };
+    // A threshold and a cap make the gross-up piecewise, so rather than reason
+    // about which branch applies, solve all three and take the cheapest charge
+    // that actually delivers the target.
+    //   A — the charge lands under the threshold, so nothing is deducted;
+    //   B — the percentage fee applies in full;
+    //   C — the fee is pinned at the cap, so the deduction is a constant.
+    const candidates: number[] = [typed];
 
-    // Round the charge UP to the next paise: the point of this mode is that the
-    // target lands in full, so the merchant must never finish a paise short.
-    customerPays = ceilPaise((typed + fixed * (1 + gst)) / denominator);
-    settled = settle(customerPays, rate, gst, fixed);
-
-    // Rounding the fee to paise can still shave the net under the target by a
-    // paise. Nudge the charge up until it clears. Two passes is the worst case.
-    for (let guard = 0; guard < 4 && settled.youReceive < typed; guard += 1) {
-      customerPays = toPaise(customerPays + 0.01);
-      settled = settle(customerPays, rate, gst, fixed);
+    const denominator = 1 - rail.rate * (1 + rail.gst);
+    if (denominator > 0) {
+      candidates.push((typed + rail.fixed * (1 + rail.gst)) / denominator);
     }
+    if (rail.cap !== undefined) {
+      candidates.push(typed + rail.cap * (1 + rail.gst));
+    }
+
+    let best: { charge: number; settled: ReturnType<typeof settle> } | null = null;
+    for (const candidate of candidates) {
+      if (!Number.isFinite(candidate) || candidate <= 0) continue;
+      const reached = reach(typed, candidate, rail);
+      if (reached && (!best || reached.charge < best.charge)) best = reached;
+    }
+
+    if (!best) return { ...empty, feasible: false };
+    customerPays = best.charge;
+    settled = best.settled;
   }
 
   const effectivePct = customerPays > 0 ? (settled.totalDeduction / customerPays) * 100 : 0;
@@ -124,6 +197,20 @@ export function calculateMdr({ amount, mode, ratePct, fixedFee, gstPct }: MdrInp
 }
 
 // ---------------------------------------------------------------------------
+// UPI rail constants
+// ---------------------------------------------------------------------------
+
+/**
+ * The per-transaction value above which UPI MDR applies. At or below it the
+ * merchant pays nothing — the rule that both the preset and the QR splitter
+ * below are built around.
+ */
+export const ZERO_MDR_THRESHOLD = 2000;
+
+/** Ceiling on UPI MDR per transaction — reached at ₹75,000 (0.4% of it). */
+export const UPI_MDR_FEE_CAP = 300;
+
+// ---------------------------------------------------------------------------
 // Rate presets
 // ---------------------------------------------------------------------------
 
@@ -132,6 +219,10 @@ export type MdrPreset = {
   label: string;
   /** Null means "the user supplies the rate" — nothing is pre-filled. */
   ratePct: number | null;
+  /** MDR applies only above this transaction value. */
+  thresholdAmount?: number;
+  /** Ceiling on the MDR before GST. */
+  feeCap?: number;
   note?: string;
 };
 
@@ -141,18 +232,38 @@ export type MdrPreset = {
  * is why each one stays editable after it is picked.
  */
 export const MDR_PRESETS: MdrPreset[] = [
-  { id: "upi", label: "UPI — bank account", ratePct: 0, note: "Zero MDR for merchants by regulation." },
-  { id: "rupay-debit", label: "RuPay debit card", ratePct: 0, note: "Zero MDR for merchants by regulation." },
+  {
+    id: "upi",
+    label: "UPI — merchant payment",
+    ratePct: 0.4,
+    thresholdAmount: ZERO_MDR_THRESHOLD,
+    feeCap: UPI_MDR_FEE_CAP,
+    note: "From 15 October 2026, UPI merchant payments above ₹2,000 carry 0.4% MDR on the full amount, capped at ₹300. At or below ₹2,000 there is no MDR, and merchants taking under ₹1 lakh a month by UPI QR stay exempt.",
+  },
+  {
+    id: "upi-autopay",
+    label: "UPI Autopay / recurring mandate",
+    ratePct: 0,
+    note: "NPCI has confirmed recurring UPI mandates carry no MDR, whatever the amount.",
+  },
+  {
+    id: "rupay-debit",
+    label: "RuPay debit card",
+    ratePct: 0,
+    note: "Zero MDR for merchants by regulation.",
+  },
   {
     id: "upi-ppi",
     label: "UPI via wallet / PPI",
     ratePct: 1.1,
-    note: "Interchange applies only above ₹2,000 per transaction — and then on the full amount, not just the excess.",
+    thresholdAmount: 2000,
+    note: "Interchange has applied to wallet payments above ₹2,000 since 2023, on the full amount rather than just the excess.",
   },
   {
     id: "upi-credit",
     label: "Credit card on UPI",
     ratePct: 1.1,
+    thresholdAmount: 2000,
     note: "Interchange applies only above ₹2,000 per transaction — and then on the full amount, not just the excess.",
   },
   { id: "debit", label: "Debit card — non-RuPay", ratePct: 0.9 },
@@ -165,12 +276,6 @@ export const MDR_PRESETS: MdrPreset[] = [
 // ---------------------------------------------------------------------------
 // Zero-MDR split
 // ---------------------------------------------------------------------------
-
-/**
- * The per-transaction value above which UPI interchange starts to apply on
- * wallet/PPI and credit-on-UPI rails. At or below it the merchant pays nothing.
- */
-export const ZERO_MDR_THRESHOLD = 2000;
 
 /**
  * Default ceiling for a single QR. Sits one rupee under the threshold so a

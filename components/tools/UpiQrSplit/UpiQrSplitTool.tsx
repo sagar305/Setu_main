@@ -8,7 +8,9 @@ import { generateUPIUrl, isValidUPIId } from "@/lib/upi";
 import {
   DEFAULT_QR_CAP,
   MAX_QR_CHUNKS,
+  UPI_MDR_FEE_CAP,
   ZERO_MDR_THRESHOLD,
+  calculateMdr,
   splitForZeroMdr,
 } from "@/lib/mdr";
 
@@ -30,7 +32,7 @@ export function UpiQrSplitTool() {
 
   const [total, setTotal] = useState("");
   const [capPerQr, setCapPerQr] = useState(String(DEFAULT_QR_CAP));
-  const [ratePct, setRatePct] = useState("1.1");
+  const [ratePct, setRatePct] = useState("0.4");
   const [upiId, setUpiId] = useState("");
   const [payeeName, setPayeeName] = useState("");
   const [notePrefix, setNotePrefix] = useState("");
@@ -72,12 +74,21 @@ export function UpiQrSplitTool() {
   const split = useMemo(() => splitForZeroMdr(totalValue, capValue), [totalValue, capValue]);
 
   // What the same total would have cost as one transaction above the threshold.
-  const mdrAvoided = useMemo(() => {
-    const rate = Math.max(0, Number(ratePct) || 0) / 100;
-    if (totalValue <= ZERO_MDR_THRESHOLD) return 0;
-    const fee = totalValue * rate;
-    return Math.round((fee * 1.18 + Number.EPSILON) * 100) / 100; // incl. 18% GST on the fee
-  }, [totalValue, ratePct]);
+  // Runs through the shared rail maths so the ₹300 cap is respected rather than
+  // overstating the saving on a large collection.
+  const mdrAvoided = useMemo(
+    () =>
+      calculateMdr({
+        amount: totalValue,
+        mode: "inclusive",
+        ratePct: Number(ratePct) || 0,
+        fixedFee: 0,
+        gstPct: 18,
+        thresholdAmount: ZERO_MDR_THRESHOLD,
+        feeCap: UPI_MDR_FEE_CAP,
+      }).totalDeduction,
+    [totalValue, ratePct],
+  );
 
   const upiTrimmed = upiId.trim();
   const upiValid = upiTrimmed.length > 0 && isValidUPIId(upiTrimmed);
@@ -129,8 +140,8 @@ export function UpiQrSplitTool() {
               />
             </div>
             <span className="mt-1.5 block text-xs text-muted">
-              Interchange starts above ₹{ZERO_MDR_THRESHOLD.toLocaleString("en-IN")}. The default sits
-              a rupee under it.
+              MDR starts above ₹{ZERO_MDR_THRESHOLD.toLocaleString("en-IN")}. The default sits a rupee
+              under it.
             </span>
             {capTooHigh && (
               <span className="mt-1.5 block text-xs font-semibold text-red-600">

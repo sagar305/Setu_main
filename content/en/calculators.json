@@ -1713,7 +1713,7 @@
         "paragraphs": [
           "Merchant discount rate is the cut your acquirer keeps on every card or wallet collection, and GST is charged on that cut as well. On a ₹5,000 credit card sale at 2%, the MDR is ₹100 and the GST on it is another ₹18, so ₹4,882 settles rather than ₹5,000. Across a month of card volume that gap is real money, and most merchants only meet it in the settlement report.",
           "Enter the amount two ways depending on what you know. MDR inclusive means the figure is what the customer pays, and the calculator tells you what you keep. MDR exclusive means the figure is what you want to land, and the calculator grosses the charge up so the net after MDR comes out exactly right — useful when you are recovering the charge from the customer or quoting a price that has to clear a fixed amount.",
-          "Not every rail costs the same. UPI funded from a bank account and RuPay debit carry zero MDR for merchants by regulation. Wallet and credit-card-on-UPI interchange only applies above ₹2,000 per transaction, which is why collecting a large amount across several smaller QR codes can bring the cost to nothing."
+          "Not every rail costs the same, and UPI is about to change. From 15 October 2026, UPI merchant payments above ₹2,000 carry 0.4% MDR on the full amount, capped at ₹300 per transaction. At or below ₹2,000 there is still no MDR, RuPay debit and UPI Autopay mandates stay exempt, and merchants taking under ₹1 lakh a month by UPI QR are exempt as well — which is why collecting a large amount across several smaller QR codes can bring the cost to nothing."
         ]
       },
       "faq": {
@@ -1729,21 +1729,21 @@
           },
           {
             "question": "Is there MDR on UPI payments in India?",
-            "answer": "UPI payments funded from a bank account carry zero MDR for merchants, as do RuPay debit cards. Interchange of around 1.1% applies to wallet (PPI) and credit-card-on-UPI transactions, but only on transactions above ₹2,000."
+            "answer": "Up to ₹2,000 there is none, and RuPay debit stays at zero by regulation. From 15 October 2026, UPI merchant payments above ₹2,000 attract 0.4% MDR, charged on the full transaction value and capped at ₹300. UPI Autopay and other recurring mandates are exempt, as are merchants receiving under ₹1 lakh a month through UPI QR."
           },
           {
             "question": "How can I reduce what I pay in MDR?",
-            "answer": "Steer customers toward zero-MDR rails such as bank-funded UPI and RuPay debit, negotiate your rate with your acquirer once your volume justifies it, and keep individual UPI transactions at or below ₹2,000 where interchange does not apply. The linked QR splitter breaks a larger total into several sub-threshold QR codes."
+            "answer": "Steer customers toward the rails that stay free — UPI at or below ₹2,000, RuPay debit and UPI Autopay mandates — and negotiate your card rate with your acquirer once your volume justifies it. Because the ₹2,000 threshold is per transaction, keeping individual UPI collections under it avoids the 0.4% entirely; the linked QR splitter breaks a larger total into sub-threshold QR codes."
           },
           {
             "question": "Is GST charged on MDR?",
-            "answer": "Yes. GST at 18% is charged on the MDR itself, not on your sale. The calculator shows it as a separate line so you can see the full cost of collection, and registered businesses can generally claim it as input tax credit."
+            "answer": "Yes. GST at 18% is charged on the MDR itself, not on your sale or on the UPI transaction. The calculator shows it as a separate line so you can see the full cost of collection, and GST-registered businesses can generally claim it as input tax credit."
           }
         ]
       },
       "cta": {
         "headline": "Collect payments without losing a cut",
-        "subtext": "Setu's free UPI tools let you take payments at the counter with no MDR and no signup.",
+        "subtext": "Setu's free UPI tools let you collect at the counter under the MDR threshold, with no signup.",
         "cta": {
           "label": "Try the UPI QR Generator",
           "href": "/tools/upi-qr-generator"

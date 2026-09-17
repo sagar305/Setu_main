@@ -15,8 +15,8 @@ export function MdrCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
   const [mode, setMode] = useState<MdrMode>("inclusive");
   const [amount, setAmount] = useState("5000");
-  const [presetId, setPresetId] = useState("credit");
-  const [ratePct, setRatePct] = useState("2");
+  const [presetId, setPresetId] = useState("upi");
+  const [ratePct, setRatePct] = useState("0.4");
   const [fixedFee, setFixedFee] = useState("0");
   const [gstPct, setGstPct] = useState("18");
 
@@ -28,6 +28,10 @@ export function MdrCalculatorTool() {
     if (preset && preset.ratePct !== null) setRatePct(String(preset.ratePct));
   }
 
+  const preset = MDR_PRESETS.find((p) => p.id === presetId);
+
+  // A rail's threshold and cap belong to the rail, not to the rate, so they keep
+  // applying even after the merchant edits the percentage to their own.
   const result = useMemo(
     () =>
       calculateMdr({
@@ -36,12 +40,16 @@ export function MdrCalculatorTool() {
         ratePct: parseNumber(ratePct),
         fixedFee: parseNumber(fixedFee),
         gstPct: parseNumber(gstPct),
+        thresholdAmount: preset?.thresholdAmount,
+        feeCap: preset?.feeCap,
       }),
-    [amount, mode, ratePct, fixedFee, gstPct],
+    [amount, mode, ratePct, fixedFee, gstPct, preset],
   );
 
-  const preset = MDR_PRESETS.find((p) => p.id === presetId);
-  const isZeroMdr = result.feasible && result.totalDeduction === 0 && result.customerPays > 0;
+  const hasAmount = result.feasible && result.customerPays > 0;
+  // Below the threshold is its own explanation; a flat 0% rail is a different one.
+  const showBelowThreshold = hasAmount && result.belowThreshold && !!preset?.thresholdAmount;
+  const isZeroMdr = hasAmount && result.totalDeduction === 0 && !showBelowThreshold;
 
   // The splitter works off the amount the customer actually pays, so a grossed-up
   // "exclusive" figure carries through rather than the net the merchant typed.
@@ -119,7 +127,11 @@ export function MdrCalculatorTool() {
             />
           </div>
 
+          {showBelowThreshold && (
+            <p className="mt-4 text-sm text-muted">{t("mdrBelowThreshold")}</p>
+          )}
           {isZeroMdr && <p className="mt-4 text-sm text-muted">{t("mdrZeroNote")}</p>}
+          {result.capApplied && <p className="mt-4 text-sm text-muted">{t("mdrCapApplied")}</p>}
         </>
       )}
 

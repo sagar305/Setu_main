@@ -44,7 +44,7 @@ const faqSchema = {
     {
       question: "How does splitting a payment avoid MDR?",
       answer:
-        "On UPI, interchange on wallet (PPI) and credit-card-on-UPI transactions applies only above ₹2,000 per transaction. A ₹7,500 collection taken as one payment crosses that line, but taken as four QR codes of ₹2,000 or less, each transaction sits under the threshold and no interchange applies.",
+        "UPI MDR applies only above ₹2,000 per transaction, and then to the full amount rather than just the excess. A ₹7,500 collection taken as one payment crosses that line and is charged on the whole ₹7,500, but taken as four QR codes of ₹2,000 or less, every transaction sits under the threshold and nothing is charged.",
     },
     {
       question: "Why is the default ₹1,999 and not ₹2,000?",
@@ -59,7 +59,7 @@ const faqSchema = {
     {
       question: "Do UPI payments from a bank account have MDR anyway?",
       answer:
-        "No — UPI funded from a bank account carries zero MDR for merchants regardless of amount, as does RuPay debit. The threshold matters for wallet (PPI) and credit-card-on-UPI payments, where interchange of around 1.1% applies above ₹2,000.",
+        "Up to ₹2,000, no. From 15 October 2026, UPI merchant payments above ₹2,000 carry 0.4% MDR on the full transaction value, capped at ₹300. RuPay debit and UPI Autopay mandates stay exempt, and so do merchants receiving under ₹1 lakh a month through UPI QR — so check whether the charge applies to you before splitting anything.",
     },
     {
       question: "Is it allowed to split a payment this way?",
@@ -113,16 +113,17 @@ export default function UpiQrSplitPage() {
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="mb-4 text-2xl font-bold text-ink">Why this works</h2>
           <p className="mb-4 text-muted">
-            UPI payments funded straight from a bank account carry zero MDR for merchants, and so do
-            RuPay debit cards. The cost shows up on two other rails: wallet (PPI) payments and credit
-            cards routed over UPI, where interchange of roughly 1.1% applies — but{" "}
-            <strong className="text-ink">only on transactions above ₹2,000</strong>.
+            From 15 October 2026, UPI merchant payments carry a 0.4% MDR — but{" "}
+            <strong className="text-ink">only on transactions above ₹2,000</strong>, and then on the
+            full amount rather than just the excess, capped at ₹300 per transaction. At or below
+            ₹2,000 there is no MDR at all. RuPay debit and UPI Autopay mandates stay exempt, and so
+            do merchants receiving under ₹1 lakh a month through UPI QR.
           </p>
           <p className="mb-4 text-muted">
             That threshold is per transaction, not per customer or per day. A ₹7,500 bill collected in
-            one go sits above it and attracts interchange plus 18% GST on that interchange. The same
-            ₹7,500 collected as four QR codes of ₹1,999, ₹1,999, ₹1,999 and ₹1,503 stays under the
-            line on every leg, and the full amount settles to you.
+            one go sits above it and is charged on the whole ₹7,500, plus 18% GST on that fee. The
+            same ₹7,500 collected as four QR codes of ₹1,999, ₹1,999, ₹1,999 and ₹1,503 stays under
+            the line on every leg, and the full amount settles to you.
           </p>
           <p className="text-muted">
             Work out what you are paying today with the{" "}
@@ -162,9 +163,9 @@ export default function UpiQrSplitPage() {
               Taking several separate payments from a customer is ordinary commercial practice, and
               nothing here bypasses any control in the payment system. Acquirer agreements differ,
               though, and some restrict deliberately structuring transactions to avoid fees. Check
-              your own merchant agreement before relying on this day to day — and remember that if
-              your customer is paying by bank-funded UPI or RuPay debit, there was no MDR to avoid in
-              the first place.
+              your own merchant agreement before relying on this day to day — and check first that
+              the charge even applies to you, since RuPay debit, UPI Autopay mandates and merchants
+              under ₹1 lakh a month on UPI QR are all exempt anyway.
             </p>
           </div>
 
