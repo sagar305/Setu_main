@@ -1,0 +1,82 @@
+{
+  "seo": {
+    "title": "Política de privacidad | Setu Technology",
+    "description": "Qué mide Setu Technology y qué nunca ve: tus facturas, extractos y datos de facturación se quedan en tu dispositivo. Aquí explicamos cómo desactivarlo."
+  },
+  "hero": {
+    "eyebrow": "Legal",
+    "headline": "Política de privacidad",
+    "subheadline": "Qué medimos, qué deliberadamente no podemos ver y cómo desactivarlo."
+  },
+  "lastUpdated": "Última actualización: 7 de septiembre de 2026.",
+  "translationNote": "Esta traducción se ofrece por comodidad. Si difiere de la versión en inglés, prevalece la versión en inglés.",
+  "sections": [
+    {
+      "heading": "La versión corta",
+      "paragraphs": [
+        "Las calculadoras y herramientas de este sitio hacen su trabajo dentro de tu navegador. Facturas, presupuestos, extractos bancarios, recibos, notas de pacientes y registros de cuotas se escriben en el almacenamiento de tu propio dispositivo y nunca se suben a nuestros servidores. No podemos leerlos, no podemos recuperarlos por ti, y borrar los datos del navegador los elimina para siempre.",
+        "Aparte de eso, contamos cómo se usa el sitio —qué páginas se abren, qué botones se pulsan— para saber qué herramientas merece la pena mejorar. Esa medición nunca incluye nada de lo que escribes."
+      ]
+    },
+    {
+      "heading": "Qué registramos",
+      "list": [
+        "Las páginas abiertas y la página desde la que llegaste.",
+        "Los botones y enlaces pulsados, identificados por el nombre que les damos en nuestro propio código, como “download invoice PDF”, nunca por lo que contienen en pantalla.",
+        "Hasta dónde bajaste en la página y, aproximadamente, cuánto te quedaste.",
+        "Si el dispositivo es un móvil o un ordenador, y desde qué país llegó la solicitud.",
+        "Un identificador aleatorio guardado en tu navegador, para reconocer una visita repetida como repetida.",
+        "Mensajes de error cuando algo del sitio falla."
+      ]
+    },
+    {
+      "heading": "Qué no registramos nunca",
+      "list": [
+        "Nada de lo que escribas en una calculadora, un generador o una aplicación de este sitio.",
+        "El contenido de facturas, presupuestos, cartas, recibos, extractos o registros.",
+        "Los archivos que subas. Los PDF de extractos bancarios se leen en tu navegador y nunca se nos envían.",
+        "Tu nombre, teléfono o correo, salvo que los escribas tú en el formulario de contacto o de demostración.",
+        "Tu dirección IP. Llega a nuestro servidor como parte de cualquier petición web, se usa solo para deducir el país y nunca se guarda."
+      ]
+    },
+    {
+      "heading": "Quién más lo ve",
+      "paragraphs": [
+        "La medición de uso la procesan **PostHog** (analítica), **Google Analytics** (analítica, que deja una cookie en tu navegador) y **Vercel**, que aloja el sitio y aporta cifras de tráfico y rendimiento sin cookies. Cada uno recibe los eventos descritos arriba y nada más.",
+        "Cuando envías el formulario de contacto o de demostración, lo que escribiste nos llega por correo a través de **Resend**. No vendemos datos a nadie ni los usamos para publicidad."
+      ]
+    },
+    {
+      "heading": "Cuánto tiempo lo conservamos",
+      "paragraphs": [
+        "Los eventos de uso individuales se borran a los 14 meses. Las cifras agregadas —visitas por mes, qué herramientas se usaron— se conservan indefinidamente, porque no contienen nada que pueda identificar a nadie. Las consultas de contacto y de demostración se guardan como correo mientras podamos necesitar responderlas."
+      ]
+    },
+    {
+      "heading": "Cómo desactivarlo",
+      "paragraphs": [
+        "Puedes desactivar la medición de uso aquí abajo. También respetamos automáticamente los ajustes “Do Not Track” y Global Privacy Control del navegador, así que si ya tienes alguno activado, aquí no se está registrando nada tuyo."
+      ]
+    },
+    {
+      "heading": "Tus derechos",
+      "paragraphs": [
+        "Conforme a la Ley de Protección de Datos Personales Digitales de la India de 2023, puedes preguntar qué datos personales tuyos tenemos, pedir que los corrijamos o los borremos, y reclamar por cómo los hemos tratado. Como la medición de uso está ligada a un identificador aleatorio del navegador y no a ti, normalmente no podemos vincularla a una persona ni aunque nos lo pidan: desactivarla arriba, o borrar los datos del sitio, es la vía más rápida.",
+        "Consultas y reclamaciones sobre protección de datos: [privacy@setutechnology.com](mailto:privacy@setutechnology.com). Respondemos en un plazo de 30 días."
+      ]
+    },
+    {
+      "heading": "Menores",
+      "paragraphs": [
+        "Estas son herramientas para llevar un negocio y no están dirigidas a menores. No recogemos a sabiendas datos de nadie menor de 18 años."
+      ]
+    },
+    {
+      "heading": "Cambios",
+      "paragraphs": [
+        "Si esta política cambia, actualizaremos la fecha que aparece arriba. Seguir usando el sitio después de un cambio significa que se aplica la política actualizada.",
+        "Consulta también nuestros [Términos de uso](/terms)."
+      ]
+    }
+  ]
+}

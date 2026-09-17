@@ -1,0 +1,82 @@
+{
+  "seo": {
+    "title": "Datenschutzerklärung | Setu Technology",
+    "description": "Was Setu Technology misst und was es nie sieht: Ihre Rechnungen, Auszüge und Abrechnungsdaten bleiben auf Ihrem Gerät. Und wie Sie die Messung abschalten."
+  },
+  "hero": {
+    "eyebrow": "Rechtliches",
+    "headline": "Datenschutzerklärung",
+    "subheadline": "Was wir messen, was wir bewusst nicht sehen können und wie Sie es abschalten."
+  },
+  "lastUpdated": "Zuletzt aktualisiert am 7. September 2026.",
+  "translationNote": "Diese Übersetzung dient der Bequemlichkeit. Weicht sie von der englischen Fassung ab, gilt die englische Fassung.",
+  "sections": [
+    {
+      "heading": "Die kurze Fassung",
+      "paragraphs": [
+        "Die Rechner und Werkzeuge auf dieser Website arbeiten in Ihrem Browser. Rechnungen, Angebote, Kontoauszüge, Belege, Patientennotizen und Gebührenaufzeichnungen werden in den Speicher Ihres eigenen Geräts geschrieben und nie zu uns hochgeladen. Wir können sie nicht lesen, nicht für Sie wiederherstellen, und wenn Sie Ihre Browserdaten löschen, sind sie endgültig weg.",
+        "Davon getrennt zählen wir, wie die Website genutzt wird — welche Seiten geöffnet, welche Schaltflächen gedrückt werden —, um zu wissen, welche Werkzeuge es lohnt zu verbessern. Diese Messung enthält nie etwas von dem, was Sie eingeben."
+      ]
+    },
+    {
+      "heading": "Was wir erfassen",
+      "list": [
+        "Geöffnete Seiten und die Seite, von der Sie kamen.",
+        "Gedrückte Schaltflächen und Links — erkannt an dem Namen, den wir ihnen in unserem eigenen Code geben, etwa „download invoice PDF“, nie an dem, was auf dem Bildschirm steht.",
+        "Wie weit Sie auf der Seite nach unten gescrollt haben und ungefähr wie lange Sie geblieben sind.",
+        "Ob das Gerät ein Telefon oder ein Computer ist und aus welchem Land die Anfrage kam.",
+        "Eine zufällige Kennung in Ihrem Browser, damit ein erneuter Besuch als erneuter Besuch erkennbar ist.",
+        "Fehlermeldungen, wenn auf der Website etwas kaputtgeht."
+      ]
+    },
+    {
+      "heading": "Was wir nie erfassen",
+      "list": [
+        "Alles, was in einen Rechner, Generator oder eine Anwendung auf dieser Website getippt wird.",
+        "Den Inhalt von Rechnungen, Angeboten, Speisekarten, Belegen, Auszügen oder Aufzeichnungen.",
+        "Hochgeladene Dateien. Kontoauszugs-PDFs werden in Ihrem Browser gelesen und nie an uns gesendet.",
+        "Ihren Namen, Ihre Telefonnummer oder E-Mail-Adresse, außer Sie tragen sie selbst in das Kontakt- oder Demo-Formular ein.",
+        "Ihre IP-Adresse. Sie erreicht unseren Server als Teil jeder Webanfrage, dient nur der Bestimmung des Landes und wird nie gespeichert."
+      ]
+    },
+    {
+      "heading": "Wer es sonst sieht",
+      "paragraphs": [
+        "Die Nutzungsmessung verarbeiten **PostHog** (Analyse), **Google Analytics** (Analyse, setzt ein Cookie in Ihrem Browser) und **Vercel**, wo die Website gehostet wird und woher cookiefreie Zugriffs- und Leistungszahlen stammen. Jeder erhält die oben beschriebenen Ereignisse und sonst nichts.",
+        "Wenn Sie das Kontakt- oder Demo-Formular absenden, erreicht uns Ihr Text per E-Mail über **Resend**. Wir verkaufen keine Daten und nutzen sie nicht für Werbung."
+      ]
+    },
+    {
+      "heading": "Wie lange wir es aufbewahren",
+      "paragraphs": [
+        "Einzelne Nutzungsereignisse werden nach 14 Monaten gelöscht. Zusammenfassende Zahlen — Besuche pro Monat, welche Werkzeuge genutzt wurden — bleiben unbefristet, weil sie nichts enthalten, womit sich jemand identifizieren ließe. Kontakt- und Demo-Anfragen bleiben als E-Mail so lange erhalten, wie wir sie beantworten müssen."
+      ]
+    },
+    {
+      "heading": "Abschalten",
+      "paragraphs": [
+        "Unten können Sie der Nutzungsmessung widersprechen. Die Browsereinstellungen „Do Not Track“ und Global Privacy Control beachten wir automatisch — wenn Sie eine davon gesetzt haben, zeichnet hier nichts Sie auf."
+      ]
+    },
+    {
+      "heading": "Ihre Rechte",
+      "paragraphs": [
+        "Nach dem indischen Digital Personal Data Protection Act 2023 können Sie fragen, welche personenbezogenen Daten von Ihnen wir haben, deren Berichtigung oder Löschung verlangen und sich über unseren Umgang damit beschweren. Da die Nutzungsmessung an eine zufällige Browserkennung und nicht an Sie gebunden ist, können wir sie in der Regel selbst auf Nachfrage keiner Person zuordnen — der Widerspruch oben oder das Löschen der Websitedaten ist der schnellere Weg.",
+        "Fragen und Beschwerden zum Datenschutz: [privacy@setutechnology.com](mailto:privacy@setutechnology.com). Wir antworten innerhalb von 30 Tagen."
+      ]
+    },
+    {
+      "heading": "Kinder",
+      "paragraphs": [
+        "Dies sind Werkzeuge für den Geschäftsbetrieb und richten sich nicht an Kinder. Wir erheben wissentlich keine Daten von Personen unter 18 Jahren."
+      ]
+    },
+    {
+      "heading": "Änderungen",
+      "paragraphs": [
+        "Ändert sich diese Erklärung, aktualisieren wir das Datum oben auf dieser Seite. Wer die Website nach einer Änderung weiter nutzt, für den gilt die aktualisierte Fassung.",
+        "Siehe auch unsere [Nutzungsbedingungen](/terms)."
+      ]
+    }
+  ]
+}

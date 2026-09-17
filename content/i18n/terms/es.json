@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "Términos de uso | Herramientas de Setu Technology",
+    "description": "Los términos para usar las calculadoras y herramientas gratuitas de Setu Technology: cómo se guardan tus datos en tu dispositivo y qué no garantizamos."
+  },
+  "hero": {
+    "eyebrow": "Legal",
+    "headline": "Términos de uso",
+    "subheadline": "El puñado de reglas que acompaña a estas herramientas."
+  },
+  "lastUpdated": "Última actualización: 7 de septiembre de 2026.",
+  "translationNote": "Esta traducción se ofrece por comodidad. Si difiere de la versión en inglés, prevalece la versión en inglés.",
+  "sections": [
+    {
+      "heading": "Quiénes somos",
+      "paragraphs": [
+        "Este sitio lo gestiona Setu Technology. Usarlo implica aceptar estos términos. Si no los aceptas, por favor no uses el sitio."
+      ]
+    },
+    {
+      "heading": "Las herramientas son gratuitas y se ofrecen tal cual",
+      "paragraphs": [
+        "Las calculadoras, generadores y aplicaciones de aquí se ofrecen de forma gratuita y sin garantía de ningún tipo. Son herramientas de trabajo, no asesoramiento profesional.",
+        "**En particular con impuestos, GST, nóminas y cifras financieras:** los tipos y las normas cambian, y una calculadora solo puede reflejar lo que era correcto cuando se escribió. Contrasta cualquier cosa importante con la ley vigente o con un contable cualificado antes de fiarte. No respondemos por una decisión tomada a partir de un número producido aquí."
+      ]
+    },
+    {
+      "heading": "Tus datos son tuyos, y la responsabilidad también",
+      "paragraphs": [
+        "El trabajo creado con estas herramientas se guarda en tu propio navegador, no en nuestros servidores. Eso tiene una consecuencia importante: **no conservamos ninguna copia y no podemos recuperar nada por ti.** Borrar los datos de navegación, usar el modo privado, cambiar de navegador o de dispositivo lo hará desaparecer. Exporta o descarga todo lo que necesites conservar.",
+        "Eres responsable de la exactitud y la legalidad de lo que introduces en las herramientas, incluida cualquier factura, recibo o registro que generes y entregues a otra persona."
+      ]
+    },
+    {
+      "heading": "Uso aceptable",
+      "paragraphs": [
+        "Te comprometes a no:"
+      ],
+      "list": [
+        "Usar el sitio para crear documentos falsos o fraudulentos.",
+        "Intentar romper, sobrecargar u obtener acceso no autorizado al sitio o a sus sistemas.",
+        "Extraer, revender o redistribuir las herramientas o su contenido como propios."
+      ]
+    },
+    {
+      "heading": "Disponibilidad",
+      "paragraphs": [
+        "Podemos cambiar, suspender o retirar cualquier parte del sitio en cualquier momento y sin aviso. Las herramientas gratuitas no llevan garantía de disponibilidad. Los productos de pago, si tienes alguno, se rigen por el acuerdo firmado en el momento de la compra, que prevalece sobre estos términos."
+      ]
+    },
+    {
+      "heading": "Sitios de terceros",
+      "paragraphs": [
+        "Cuando enlazamos fuera —a Google, a páginas de reseñas o a aplicaciones de pago— no controlamos esos servicios ni respondemos por ellos."
+      ]
+    },
+    {
+      "heading": "Nuestro contenido",
+      "paragraphs": [
+        "El diseño, los textos y el código de este sitio pertenecen a Setu Technology. Los documentos que creas con las herramientas te pertenecen a ti."
+      ]
+    },
+    {
+      "heading": "Ley aplicable",
+      "paragraphs": [
+        "Estos términos se rigen por las leyes de la India, y los tribunales de la India tienen jurisdicción exclusiva sobre cualquier disputa derivada de ellos."
+      ]
+    },
+    {
+      "heading": "Preguntas",
+      "paragraphs": [
+        "Escríbenos desde la [página de contacto](/contact). Para cualquier cuestión sobre datos, consulta nuestra [Política de Privacidad](/privacy)."
+      ]
+    }
+  ]
+}

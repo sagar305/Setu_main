@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "Conditions d'utilisation | Outils Setu Technology",
+    "description": "Conditions d'utilisation des calculatrices et outils gratuits de Setu Technology : vos données restent sur votre appareil, et ce que nous ne garantissons pas."
+  },
+  "hero": {
+    "eyebrow": "Mentions légales",
+    "headline": "Conditions d'utilisation",
+    "subheadline": "Les quelques règles qui accompagnent ces outils."
+  },
+  "lastUpdated": "Dernière mise à jour le 7 septembre 2026.",
+  "translationNote": "Cette traduction est fournie par commodité. En cas de divergence avec la version anglaise, c'est la version anglaise qui s'applique.",
+  "sections": [
+    {
+      "heading": "Qui nous sommes",
+      "paragraphs": [
+        "Ce site est exploité par Setu Technology. L'utiliser vaut acceptation de ces conditions. Si vous ne les acceptez pas, merci de ne pas utiliser le site."
+      ]
+    },
+    {
+      "heading": "Les outils sont gratuits et fournis en l'état",
+      "paragraphs": [
+        "Les calculatrices, générateurs et applications proposés ici le sont gratuitement et sans garantie d'aucune sorte. Ce sont des outils de travail, pas un conseil professionnel.",
+        "**En particulier pour la fiscalité, la TVA/GST, la paie et les chiffres financiers :** les taux et les règles changent, et une calculatrice ne peut refléter que ce qui était exact au moment où elle a été écrite. Vérifiez tout ce qui compte auprès de la loi en vigueur ou d'un comptable qualifié avant de vous y fier. Nous ne sommes pas responsables d'une décision prise sur la foi d'un chiffre produit ici."
+      ]
+    },
+    {
+      "heading": "Vos données sont à vous, et sous votre responsabilité",
+      "paragraphs": [
+        "Le travail créé dans ces outils est enregistré dans votre propre navigateur, pas sur nos serveurs. Cela a une conséquence importante : **nous n'en détenons aucune copie et ne pouvons rien récupérer pour vous.** Effacer vos données de navigation, utiliser la navigation privée, changer de navigateur ou d'appareil les fera disparaître. Exportez ou téléchargez tout ce que vous devez conserver.",
+        "Vous êtes responsable de l'exactitude et de la légalité de ce que vous saisissez dans les outils, y compris toute facture, note ou pièce que vous générez et remettez à un tiers."
+      ]
+    },
+    {
+      "heading": "Usage acceptable",
+      "paragraphs": [
+        "Vous vous engagez à ne pas :"
+      ],
+      "list": [
+        "Utiliser le site pour créer des documents faux ou frauduleux.",
+        "Tenter de casser, de surcharger ou d'accéder sans autorisation au site ou à ses systèmes.",
+        "Extraire, revendre ou redistribuer les outils ou leur contenu comme étant les vôtres."
+      ]
+    },
+    {
+      "heading": "Disponibilité",
+      "paragraphs": [
+        "Nous pouvons modifier, suspendre ou retirer toute partie du site à tout moment et sans préavis. Les outils gratuits ne s'accompagnent d'aucune garantie de disponibilité. Les produits payants, le cas échéant, sont régis par le contrat conclu lors de l'achat, qui prime sur ces conditions."
+      ]
+    },
+    {
+      "heading": "Les sites des autres",
+      "paragraphs": [
+        "Lorsque nous renvoyons ailleurs — vers Google, des pages d'avis ou des applications de paiement — nous ne contrôlons pas ces services et n'en sommes pas responsables."
+      ]
+    },
+    {
+      "heading": "Nos contenus",
+      "paragraphs": [
+        "La conception, les textes et le code de ce site appartiennent à Setu Technology. Les documents que vous créez avec les outils vous appartiennent."
+      ]
+    },
+    {
+      "heading": "Droit applicable",
+      "paragraphs": [
+        "Ces conditions sont régies par le droit indien, et les tribunaux indiens ont compétence exclusive pour tout litige qui en découlerait."
+      ]
+    },
+    {
+      "heading": "Questions",
+      "paragraphs": [
+        "Écrivez-nous depuis la [page de contact](/contact). Pour tout ce qui touche aux données, voyez notre [politique de confidentialité](/privacy)."
+      ]
+    }
+  ]
+}
