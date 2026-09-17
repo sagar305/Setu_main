@@ -1,0 +1,375 @@
+{
+  "seo": {
+    "title": "Produkte | Kasse, QR-Karte und Software | Setu",
+    "description": "Die Produkte von Setu: die kostenlose Browser-Kasse, die QR-Karte, Free Dine, die Nachhilfe- und die Praxisverwaltung, dazu Setu Dine und Queue in Entwicklung.",
+    "keywords": [
+      "Setu Produkte",
+      "Browser-Kasse",
+      "Free Dine",
+      "kostenlose Restaurantkasse",
+      "Setu QR Menu",
+      "Setu Dine",
+      "Setu Queue",
+      "Setu Retail",
+      "Setu Clinic",
+      "Setu Tuition",
+      "Nachhilfe-Kursverwaltung",
+      "kostenlose Praxisverwaltung",
+      "kostenlose Software für Praxisverwaltung"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Produkte",
+    "headline": "Ein Unternehmen, das für jede Branche baut",
+    "subheadline": "Wir haben mit Restaurants angefangen. Das hier läuft heute, und das kommt als Nächstes."
+  },
+  "labels": {
+    "comingSoon": "In Kürze",
+    "paidSoonEyebrow": "Kostenpflichtiges Produkt in Kürze",
+    "paidSoonSuffix": "Alles oben Genannte bleibt kostenlos."
+  },
+  "products": [
+    {
+      "name": "Browser-Kasse",
+      "headline": "Kostenlose Offline-Kasse, direkt im Browser",
+      "description": "Ein vollständig kostenloses Kassensystem für kleine Betriebe. Kunden abkassieren, Artikel und Bestand verwalten, Warenkörbe parken und zurückholen, Thermobelege drucken — ohne Anmeldung, ohne Abo, und es läuft auch ohne Internet weiter. Alle Daten bleiben auf Ihrem Gerät, mit Sicherung und Wiederherstellung per Klick.",
+      "features": [
+        "Schnelles Kassieren mit Barcode-Scanner",
+        "Läuft vollständig offline",
+        "Warenkörbe im größten Andrang parken und zurückholen",
+        "Verkäufe auf Rechnung und Kundenkonto",
+        "Bestandsführung mit Bewegungsprotokoll",
+        "Kunden und Kaufhistorie",
+        "Berichte zu Umsatz, Zahlarten und Verkaufsschlagern",
+        "Beleg-Druck thermisch (80 mm/58 mm) und A4",
+        "PIN-Sperre der Kasse mit automatischer Sperre bei Inaktivität",
+        "JSON-Sicherung und -Wiederherstellung, CSV-Export und Google-Sheets-Abgleich"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Kassen und Zugänge für das Team."
+      },
+      "cta": {
+        "label": "Browser-Kasse öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kontoauszug-Analyse",
+      "headline": "Kostenlose Kontoauszug-Analyse, direkt im Browser",
+      "description": "Eine vollständig kostenlose Kontoauszug-Analyse für Steuerberater und alle, die Bücher führen. Auszug als PDF, Excel oder CSV einlesen, jede Buchung nach Ihren eigenen Regeln klassifizieren, mit dem Hauptbuch abstimmen und Berichte exportieren — ohne Anmeldung, ohne Abo, und der Auszug wird nirgendwohin hochgeladen.",
+      "features": [
+        "Liest PDF, XLSX, XLS und CSV, auch passwortgeschützte PDFs",
+        "Nichts wird hochgeladen: Einlesen und Auswerten laufen in Ihrem Browser",
+        "Auslesen wird gegen den fortlaufenden Saldo des Auszugs geprüft",
+        "Deterministische Klassifizierung nach Regeln, mit sichtbarer Sicherheit",
+        "Kennzeichnung geschäftlich, privat und Umbuchung, getrennt von der Kategorie",
+        "Mehrere Auszüge gemeinsam ausgewertet, Doppelbuchungen ausgeschlossen",
+        "Monatliche Auswertung von Zahlungsfluss, Ausgaben, Einnahmen und Gegenparteien",
+        "Berichte zu Bargeld, hohen Beträgen, Bankgebühren, Zinsen und Umbuchungen",
+        "Abstimmung mit exakter, datumsnaher und unscharfer Zuordnung",
+        "Excel-Mappe, PDF-Bericht und CSV-Exporte werden auf dem Gerät erzeugt"
+      ],
+      "cta": {
+        "label": "Kontoauszug-Analyse öffnen — kostenlos"
+      }
+    },
+    {
+      "headline": "Eine kostenlose Restaurantkasse, die im Browser läuft",
+      "description": "Eine vollständige Gastraumkasse, kostenlos und ohne Anmeldung. Tische und Bereiche, Rechnungen, die eine Stunde offen bleiben, Küchenbons je Gang und ein Küchenbildschirm in Echtzeit im zweiten Tab. Rechnungen teilen und zusammenlegen, Steuer mit CGST/SGST-Aufteilung, Rohstoffbestand über Rezepturen, Tischreservierungen mit WhatsApp-Bestätigung und Anschreiben über das gemeinsame Kundenkonto. Alles bleibt auf Ihrem Gerät, und bei Internetausfall wird weiter kassiert.",
+      "features": [
+        "Tische und Bereiche mit laufenden Summen in Echtzeit",
+        "Offene Rechnungen, die einen Browser-Neustart überstehen",
+        "Küchenbons je Gang, ohne Preise",
+        "Küchenbildschirm in Echtzeit im zweiten Tab, als Kiosk sperrbar",
+        "Halbe und ganze Portionen sowie Beilagengruppen",
+        "Rechnung nach Artikel, Anteil oder Betrag teilen — und Tische zusammenlegen",
+        "Steuer je Artikel mit CGST/SGST-Aufteilung",
+        "Rohstoffbestand mit Rezeptur je Gericht und Wareneinsatz",
+        "Tischreservierungen, kostenlos oder gegen Anzahlung",
+        "WhatsApp-Bestätigungen und Erinnerungen von Ihrer eigenen Nummer",
+        "Anschreiben wird im gemeinsamen Kundenkonto verbucht",
+        "Thermische (80 mm/58 mm) und A4-Rechnungen, gestaltet im Beleg-Editor",
+        "Tagesübersicht, Artikelbericht, Umsatz nach Stunde und druckbarer Tagesabschluss",
+        "Sicherung, CSV-Exporte und Google-Sheets-Abgleich",
+        "Läuft offline, keine Anmeldung nötig"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Standorte, Geräte und Team-Zugänge."
+      },
+      "cta": {
+        "label": "Free Dine öffnen — kostenlos"
+      }
+    },
+    {
+      "headline": "Ein QR-Code, der nie neu gedruckt werden muss",
+      "description": "Ihre Karte liegt online, und der gedruckte QR-Code enthält nur einen kurzen, dauerhaften Link. Preis ändern, ein Gericht als ausverkauft markieren oder eine Saisonkarte einspielen — der Code auf den Tischen funktioniert weiter. Fotos der Gerichte, Größen und Varianten, mehrere Karten und tägliche Scan-Zahlen — im ersten Jahr kostenlos.",
+      "features": [
+        "Ein dauerhafter QR-Code, einmal gedruckt",
+        "Preise und Karte sofort ändern",
+        "Ausverkauft-Schalter und Fotos der Gerichte",
+        "Größen und Varianten je Gericht",
+        "Mehrere Karten, zwischen denen Sie wechseln",
+        "Tägliche Scan-Auswertung",
+        "Hygienenote und Zertifikat auf der Karte",
+        "Drei Vorlagen mit veränderbaren Farben"
+      ],
+      "cta": {
+        "label": "Setu QR Menu entdecken"
+      }
+    },
+    {
+      "name": "Nachhilfe-Kursverwaltung",
+      "headline": "Kostenlose Nachhilfe-Software, direkt im Browser",
+      "description": "Eine vollständig kostenlose Kursverwaltung für eine Nachhilfelehrkraft. Schülerinnen und Gruppen, tägliche Anwesenheit, Monatsbeiträge, die sich selbst aufsummieren, WhatsApp-Erinnerungen an die Eltern, Testnoten und teilbare Gebührenbelege — ohne Anmeldung, ohne Abo, und es läuft auch ohne Internet weiter.",
+      "features": [
+        "Tägliche Anwesenheit je Gruppe in Sekunden",
+        "Läuft vollständig offline",
+        "Monatsbeiträge, Ermäßigungen und Einmalgebühren automatisch berechnet",
+        "Nummerierte Belege mit teilbarem Link und UPI-Zahlung",
+        "WhatsApp-Erinnerungen zu Beiträgen und Fehlzeiten an die Eltern",
+        "Tests mit Noteneingabe für die ganze Gruppe und Ergebnisversand",
+        "Ein Austritt stoppt die Beiträge, behält aber die Historie",
+        "Eigene Felder je Kind, etwa die Noten aus der Schule",
+        "Datierte Erinnerungen im Tagebuch und ein Register der Anmeldeanfragen",
+        "Sammelimport, PIN-Sperre, Sicherung und Google-Sheets-Abgleich"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, Live-Ansicht für Eltern und Online-Beitragseinzug."
+      },
+      "cta": {
+        "label": "Kursverwaltung öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kostenlose Praxisverwaltung",
+      "headline": "Kostenlose Praxis- und Rezeptsoftware, direkt im Browser",
+      "description": "Eine vollständig kostenlose Praxisverwaltung für eine einzelne Ärztin oder eine kleine Praxis. Rezepte, die als scharfer, markierbarer Text drucken, Patientenakten mit Vitalwerten und Vorgeschichte, Termine auf einem Tagesbildschirm in Echtzeit und Abrechnung mit automatischer Folgegebühr und UPI-Belegen — ohne Anmeldung, ohne Abo, ohne Patientenlimit, und es läuft auch ohne Internet weiter.",
+      "features": [
+        "Rezepte als echter, markierbarer Text gedruckt, in A4 oder A5",
+        "Protokolle: ein ganzes Rezept speichern und beim nächsten Patienten mit einem Tipp laden",
+        "Beschwerden, Befunde und Diagnosen ergänzen sich aus Ihren eigenen früheren Einträgen",
+        "Vitalwerte mit BMI, der beim Tippen berechnet wird, und der letzten Messung im Blick",
+        "Ein Tagesbildschirm in Tokenreihenfolge, mit laufenden Wartezeiten",
+        "Termine in Ihren eigenen Sprechzeiten, mit WhatsApp-Erinnerungen in einem Durchgang",
+        "Folgetermin beim Abschluss gebucht, dazu ein Bericht, wer nicht wiedergekommen ist",
+        "Folgegebühr innerhalb Ihres Zeitfensters automatisch berechnet",
+        "Nummerierte Belege auf 58 mm, 80 mm oder A4, mit UPI-QR zum Bezahlen",
+        "Offene Posten mit WhatsApp-Erinnerungen an die Patienten",
+        "Untersuchungsscheine separat gedruckt und unterschrieben, in A5",
+        "Patientenkurven für Gewicht und Blutdruck sowie Sammelimport des Registers",
+        "Berichte zu Frequenz, Erlös, häufigen Diagnosen und Nichterscheinen, alle als CSV",
+        "Läuft vollständig offline — PIN-Sperre, Sicherung/Wiederherstellung und Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Ärzte und Standorte auf derselben Akte."
+      },
+      "cta": {
+        "label": "Praxisverwaltung öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kostenloses Ticketsystem",
+      "headline": "Kostenlose Ticket- und Anzeigesoftware, direkt im Browser",
+      "description": "Ein vollständig kostenloses Ticketsystem für überall dort, wo Menschen anstehen — Praxen, Labore, Salons, Servicecenter, Bankfilialen. Nummern ausgeben, einen Bildschirm ins Wartezimmer stellen und die App jede Person laut aufrufen lassen, auf Hindi, Englisch oder in Ihrer Sprache. Ohne Anmeldung, ohne Abo, und es läuft auch ohne Internet weiter.",
+      "features": [
+        "Ruft die Nummer laut auf — „Ticket A zweiundvierzig, bitte zu Schalter drei“",
+        "Ansagen auf Hindi, Englisch, Marathi, Tamil, Telugu, Bengali, Gujarati und Kannada",
+        "Eine Wartezimmer-Anzeige für Fernseher oder zweiten Monitor, hell, dunkel oder kontraststark",
+        "Gong und blinkende Karte für Bildschirme ohne Sprachausgabe",
+        "Mehrere Services und Schalter, mit Vorrang für Ältere und Notfälle",
+        "Erneut aufrufen, überspringen und übergeben — die Nummer bleibt bei der Person",
+        "Ehrliche Wartezeitschätzungen aus Ihren eigenen gemessenen Bearbeitungszeiten",
+        "Ticketzettel auf einem 58-mm-Drucker und ein A4-QR-Plakat fürs Wartezimmer",
+        "Ticket per WhatsApp und ein Hinweis „Sie sind gleich dran“",
+        "Berichte zu Auslastung je Stunde, Nichterscheinen und je Schalter, als CSV",
+        "Läuft vollständig offline — PIN-Sperre, Sicherung/Wiederherstellung und Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, Abrechnung am Schalter und Küchenweiterleitung."
+      },
+      "cta": {
+        "label": "Ticketsystem öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kostenloses Mietbuch",
+      "headline": "Kostenlose Vermietsoftware für Zeltverleih und Gerätevermietung",
+      "description": "Ein vollständig kostenloses Mietbuch für Zeltverleih, Eventdekoration, Möbel- und Partyausstattungsverleih, Kameraverleih und Baugeräteverleih. Es führt Buch darüber, was an jedem Datum zugesagt ist, damit dieselben 200 Stühle nie zwei Hochzeiten versprochen werden — und rechnet Schäden, Fehlmengen und Verspätungen beim Rücklauf gegen die Kaution ab. Ohne Anmeldung, ohne Abo, läuft offline.",
+      "features": [
+        "Ein Verfügbarkeitskalender, der in Sekunden beantwortet: „Wie viele sind am 14. frei?“",
+        "Freie Stückzahlen zählen am engsten Einzeltag eines Zeitraums — nie ein Mittelwert, der eine Kollision verdeckt",
+        "Eine Konfliktliste, die jede Buchung zeigt, die mehr zusagt, als Sie besitzen",
+        "Anfrage → bestätigt → ausgeliefert → zurück, mit einem Angebot am Anfang",
+        "Kommissionierlisten fürs Ladepersonal ohne Preise und unterschriebene Lieferscheine",
+        "Abrechnung beim Rücklauf: beschädigt, verloren und verspätet, alles gegen die Kaution",
+        "Auslastung und Rendite je Artikel — was nachkaufen, was abstoßen",
+        "Seriennummerierte Einheiten für Kameras und Werkzeuge, immer nur eine Buchung",
+        "Wartungsprotokolle, die Ware während der Reparatur aus der Verfügbarkeit nehmen",
+        "Angebote, Bestätigungen und Mahnungen per WhatsApp, mit einem Link für den Kunden",
+        "Läuft vollständig offline — PIN-Sperre, Sicherung/Wiederherstellung und Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Standorte und Zugänge fürs Team."
+      },
+      "cta": {
+        "label": "Mietbuch öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kostenlose Reparaturkarte",
+      "headline": "Kostenlose Werkstattsoftware mit Auftragskarten, Fotos und Zustandsaufnahme",
+      "description": "Eine vollständig kostenlose Auftragskarten-App für Handy-, Laptop- und Gerätewerkstätten. Sie hält den Zustand des Geräts mit Fotos und einer Unterschrift fest, sobald es hereinkommt, damit „der Kratzer war vorher nicht da“ dort endet — und verfolgt danach jedes Gerät auf einer Tafel, die mit den Tagen gelb und rot wird. Ohne Anmeldung, ohne Abo, läuft offline.",
+      "features": [
+        "Annahme in neunzig Sekunden: Zustandsliste, Kamerafotos und Unterschrift des Kunden",
+        "Eine Annahme, die nach dem Speichern nicht mehr änderbar ist — genau darum geht es",
+        "Eine Tafel mit jedem Gerät in der Werkstatt, die mit den Tagen gelb und rot wird",
+        "Suche nach IMEI, Auftragsnummer, Telefon oder Name, auch mit einem Teil der Seriennummer",
+        "WhatsApp-Nachrichten in jeder Phase, aus Ihren eigenen Vorlagen, von Ihnen gesendet statt automatisch",
+        "Auftragszettel in A5 oder 58 mm, dazu ein Geräteanhänger mit Nummer, groß genug quer über die Werkbank",
+        "Ersatzteilbestand mit Einkaufspreis neben Verkaufspreis, damit die Marge sichtbar ist, solange sie noch änderbar ist",
+        "Übergabe mit Zahlung, Unterschrift und einer Rechnung mit Garantieende",
+        "Garantieprüfung über Auftragsnummer oder IMEI, und Reklamationen zählen nicht als neuer Umsatz",
+        "Die Liste der nicht Abgeholten — fertige Arbeit, die niemand geholt hat, summiert und regelmäßig nachgefasst",
+        "Marge, Durchlaufzeit, Leistung je Techniker und wessen Teile immer wieder zurückkommen",
+        "Ein optionaler Verfolgungslink je Auftrag — eine Adresse, die sich nie ändert, über die der Kunde einen Kostenvoranschlag freigeben kann",
+        "Läuft vollständig offline — PIN-Sperre, Sicherung/Wiederherstellung und Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Standorte und Technikerzugänge."
+      },
+      "cta": {
+        "label": "Reparaturkarte öffnen — kostenlos"
+      }
+    },
+    {
+      "name": "Kostenlose Apotheken-Kasse",
+      "headline": "Kostenlose Abrechnungssoftware für Apotheken, mit Verfallsüberwachung",
+      "description": "Eine vollständig kostenlose Abrechnungs- und Bestands-App für Apotheken. Der Bestand wird chargenweise statt je Medikament geführt, sodass am Tresen immer die zuerst verfallende Packung verkauft wird, die Chargennummer auf dem Bon steht und eine Verfallsübersicht zeigt, was bald wertlos ist, solange der Großhandel es noch zurücknimmt. Ohne Anmeldung, ohne Abo, läuft offline.",
+      "features": [
+        "Chargenbestand mit monatsgenauem Verfall für jede Packung im Laden",
+        "Abrechnung, die die zuerst verfallende Charge wählt und eine Menge selbst auf Chargen aufteilt",
+        "Verfallsübersicht in Stufen von 30, 60 und 90 Tagen, bewertet zum Einkaufspreis",
+        "Retourenlisten nach Lieferant gruppiert, mit einem Tipp zum Retourenbeleg",
+        "Ein Suchfeld über Markenname, Wirkstoff und Barcode, mit wirkstoffgleichen Alternativen",
+        "Großhandelsrechnungen in Packungen erfassen, Naturalrabatte in einen Mischpreis gerechnet",
+        "Rezepterfassung für verschreibungspflichtige Klassen und ein druckbares Verkaufsregister",
+        "Marge aus der Charge, aus der der Verkauf tatsächlich kam, nicht aus einem Mittelwert",
+        "Steuerübersicht nach Satz, Bestandswert, Renner und Bestellvorschlag je Lieferant",
+        "Nachfüll-Erinnerungen und offene Beträge, per WhatsApp aus Ihren eigenen Vorlagen",
+        "Läuft vollständig offline — PIN-Sperre, Sicherung/Wiederherstellung und Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Cloud-Datenbank, mehrere Kassen und Großhandelsabgleich."
+      },
+      "cta": {
+        "label": "Apotheken-Kasse öffnen — kostenlos"
+      }
+    },
+    {
+      "headline": "Restaurantverwaltung, richtig gemacht — in Entwicklung",
+      "description": "Abrechnung, Küchenablauf, Tischverwaltung, Dashboards über mehrere Standorte, Kundenverwaltung, Gutscheine und eine eingebaute Steuerlogik — alles, was ein Restaurant zum reibungslosen Betrieb braucht, vom einzelnen Lokal bis zur ganzen Kette.",
+      "features": [
+        "Dashboard über mehrere Standorte",
+        "Küchenablauf und Bonweiterleitung",
+        "Tischverwaltung",
+        "Steuerfertige Abrechnungslogik",
+        "QR-Bestellverfolgung und Kellnerruf",
+        "Gutscheine und Rabatte"
+      ],
+      "cta": {
+        "label": "Setu Dine entdecken"
+      }
+    },
+    {
+      "headline": "Theken-Service im Schnellrestaurant, geregelt — in Entwicklung",
+      "description": "Abrechnung an der Theke, Ticketverwaltung, Küchenweiterleitung und Abholanzeige für Gäste — gebaut für Schnellrestaurants und Food Courts.",
+      "features": [
+        "Theken-Abrechnung mit automatischer Steuer",
+        "Ticketerstellung und Anzeige",
+        "Bonweiterleitung in die Küche",
+        "Abholanzeige für Gäste",
+        "Warteschlangen-Dashboard in Echtzeit"
+      ],
+      "cta": {
+        "label": "Setu Queue entdecken"
+      }
+    },
+    {
+      "headline": "Einzelhandelsverwaltung, in Kürze",
+      "description": "Bestandsführung, Abrechnung und Filialbetrieb, gebaut für Einzelhändler weltweit.",
+      "cta": {
+        "label": "Setu Retail entdecken"
+      }
+    },
+    {
+      "headline": "Verwaltung von Nachhilfeinstituten, in Kürze",
+      "description": "Automatische Elternnachrichten, eine Live-Ansicht für Eltern, Online-Beitragseinzug und Cloud-Abgleich über Ihre eigenen Geräte — weiterhin um eine Lehrkraft herum gebaut, nicht um ein Institut.",
+      "cta": {
+        "label": "Setu Tuition entdecken"
+      }
+    },
+    {
+      "headline": "Praxisverwaltung, in Entwicklung",
+      "description": "Das kostenpflichtige Produkt, in das die kostenlose Praxisverwaltung hineinwächst — dieselben Rezepte und Patientenakten, in einer Cloud-Datenbank, damit mehrere Ärzte, ein Empfang und mehr als ein Standort auf derselben Akte arbeiten.",
+      "features": [
+        "Cloud-Patientenakten, geräteübergreifend geteilt",
+        "Mehrere Ärzte und Standorte in einem Konto",
+        "Terminplanung am Empfang",
+        "Rollenbasierter Zugriff fürs Personal",
+        "Auswertungen über die ganze Praxis"
+      ],
+      "cta": {
+        "label": "Zum Start benachrichtigen"
+      }
+    },
+    {
+      "headline": "Apothekenabrechnung, in Entwicklung",
+      "description": "Das kostenpflichtige Produkt, in das die kostenlose Apotheken-Kasse hineinwächst — Chargenbestand und Verfallsüberwachung in einer Cloud-Datenbank, mit mehreren Kassen gleichzeitig und synchronisierten Großhandelseinkäufen.",
+      "features": [
+        "Chargen- und Verfallsbestand in der Cloud, über Kassen geteilt",
+        "Mehrere Kassen rechnen gleichzeitig ab",
+        "Abgleich von Großhandelseinkäufen und Naturalrabatten",
+        "Bestandsumlagerungen zwischen Filialen",
+        "Steuer- und Margenberichte über die ganze Kette"
+      ],
+      "cta": {
+        "label": "Zum Start benachrichtigen"
+      }
+    },
+    {
+      "headline": "Vermietverwaltung, in Entwicklung",
+      "description": "Das kostenpflichtige Produkt, in das das kostenlose Mietbuch hineinwächst — ein einziger Verfügbarkeitskalender in einer Cloud-Datenbank, damit ein zweiter Standort und das Ladepersonal dieselbe Ware nie doppelt vergeben können.",
+      "features": [
+        "Verfügbarkeit in der Cloud, über Standorte geteilt",
+        "Team-Zugänge für Auslieferung und Rücknahme",
+        "Umlagerungen zwischen Standorten",
+        "Kundenportal für Angebote und Bestätigungen",
+        "Berichte zu Auslastung und Rendite"
+      ],
+      "cta": {
+        "label": "Zum Start benachrichtigen"
+      }
+    },
+    {
+      "headline": "Werkstattverwaltung, in Entwicklung",
+      "description": "Das kostenpflichtige Produkt, in das die kostenlose Reparaturkarte hineinwächst — Annahmeprotokolle und Gerätefotos in einer Cloud-Datenbank, mit Technikerzugängen und der Tafel jedes Standorts auf einem Bildschirm.",
+      "features": [
+        "Auftragskarten und Annahmefotos in der Cloud",
+        "Technikerzugänge mit Leistung je Person",
+        "Die Tafel jedes Standorts auf einem Bildschirm",
+        "Ersatzteilbestand über Standorte geteilt",
+        "Garantie- und Margenberichte über die ganze Kette"
+      ],
+      "cta": {
+        "label": "Zum Start benachrichtigen"
+      }
+    },
+    {
+      "name": "Setu für Ihren Betrieb",
+      "headline": "Als Nächstes bauen wir für Ihre Branche",
+      "description": "Wenn Ihre Branche noch nicht dabei ist, sagen Sie uns, was Sie betreiben. Wir bauen Setu für jede Art von Betrieb, eine Branche nach der anderen.",
+      "cta": {
+        "label": "Sagen Sie uns, was Sie brauchen"
+      }
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "seo": {
+    "title": "Produtos | PDV, cardápio QR e software | Setu",
+    "description": "Conheça os produtos Setu: o PDV gratuito no navegador, o cardápio QR, o Free Dine, o gestor de aulas e o de clínica, além do Setu Dine e do Queue.",
+    "keywords": [
+      "produtos Setu",
+      "PDV no navegador",
+      "Free Dine",
+      "PDV gratuito para restaurante",
+      "Setu QR Menu",
+      "Setu Dine",
+      "Setu Queue",
+      "Setu Retail",
+      "Setu Clinic",
+      "Setu Tuition",
+      "gestor de aulas particulares",
+      "gestor de clínica gratuito",
+      "software gratuito de gestão de clínica"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Produtos",
+    "headline": "Uma empresa só, construindo para cada setor",
+    "subheadline": "Começamos pelos restaurantes. Aqui está o que já está no ar e o que vem a seguir."
+  },
+  "labels": {
+    "comingSoon": "Em breve",
+    "paidSoonEyebrow": "Produto pago em breve",
+    "paidSoonSuffix": "Tudo o que está acima continua grátis."
+  },
+  "products": [
+    {
+      "name": "PDV no navegador",
+      "headline": "PDV gratuito e offline, direto no seu navegador",
+      "description": "Um ponto de venda totalmente gratuito para pequenos negócios. Cobre dos clientes, controle produtos e estoque, segure e retome comandas, imprima recibos térmicos — sem login, sem assinatura, e continua funcionando sem internet. Todos os dados ficam no seu aparelho, com backup e restauração em um clique.",
+      "features": [
+        "Venda rápida com suporte a leitor de código de barras",
+        "Funciona totalmente offline",
+        "Segure e retome comandas no meio da correria",
+        "Vendas fiado e caderneta de clientes",
+        "Controle de estoque com histórico de movimentação",
+        "Clientes e histórico de compras",
+        "Relatórios de vendas, recebimentos e mais vendidos",
+        "Impressão de recibos térmicos (80 mm/58 mm) e A4",
+        "Bloqueio do caixa por PIN, com bloqueio automático por inatividade",
+        "Backup e restauração em JSON, exportação CSV e sincronização com Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, vários caixas e acessos para a equipe."
+      },
+      "cta": {
+        "label": "Abrir o PDV no navegador — é grátis"
+      }
+    },
+    {
+      "name": "Analisador de extrato bancário",
+      "headline": "Análise gratuita de extratos bancários, direto no seu navegador",
+      "description": "Um analisador de extratos totalmente gratuito para contadores e para quem mantém a escrituração. Importe um extrato em PDF, Excel ou CSV, classifique cada lançamento com regras que você define, concilie com o razão e exporte relatórios — sem login, sem assinatura, e o extrato nunca é enviado para lugar nenhum.",
+      "features": [
+        "Importa PDF, XLSX, XLS e CSV, inclusive PDFs protegidos por senha",
+        "Nada é enviado: leitura e análise acontecem no seu navegador",
+        "Extração conferida contra o próprio saldo corrente do extrato",
+        "Classificação determinística por regras, com o grau de confiança à vista",
+        "Marcação de empresa, pessoal e transferência, separada da categoria",
+        "Vários extratos analisados juntos, com duplicidades excluídas",
+        "Análise mensal de fluxo de caixa, despesas, receitas e contrapartes",
+        "Relatórios de dinheiro, valores altos, tarifas, juros e transferências",
+        "Conciliação com correspondência exata, por janela de datas e aproximada",
+        "Planilha Excel, relatório PDF e exportações CSV gerados no aparelho"
+      ],
+      "cta": {
+        "label": "Abrir o analisador de extrato — é grátis"
+      }
+    },
+    {
+      "headline": "Um PDV de restaurante gratuito que roda no navegador",
+      "description": "Um caixa de salão completo, grátis e sem login. Mesas e áreas do salão, contas que ficam abertas por uma hora, comandas de cozinha por rodada e uma tela de cozinha ao vivo em outra aba. Divida e junte contas, impostos com o rateio CGST/SGST, estoque de insumos puxado pelas fichas técnicas, reservas de mesa com confirmação por WhatsApp e fiado pela caderneta de clientes compartilhada. Tudo fica no seu aparelho e a venda continua mesmo sem internet.",
+      "features": [
+        "Mesas e áreas do salão com totais ao vivo",
+        "Contas abertas que sobrevivem a um reinício do navegador",
+        "Comandas de cozinha por rodada, sem preços",
+        "Tela de cozinha ao vivo em outra aba, travável como quiosque",
+        "Tamanhos meia/inteira e grupos de adicionais",
+        "Divida a conta por item, por parte ou por valor — e junte mesas",
+        "Impostos por item com rateio CGST/SGST",
+        "Estoque de insumos com ficha técnica por prato e custo de alimentos",
+        "Reservas de mesa, grátis ou contra um sinal",
+        "Confirmações e lembretes de WhatsApp do seu próprio número",
+        "O fiado é lançado na caderneta de clientes compartilhada",
+        "Contas térmicas (80 mm/58 mm) e A4, desenhadas no editor de recibos",
+        "Resumo do dia, relatório por item, vendas por hora e fechamento imprimível",
+        "Backup, exportações CSV e sincronização com Google Sheets",
+        "Funciona offline, sem precisar de login"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, várias lojas, aparelhos e acessos para a equipe."
+      },
+      "cta": {
+        "label": "Abrir o Free Dine — é grátis"
+      }
+    },
+    {
+      "headline": "Um QR code que nunca precisa ser reimpresso",
+      "description": "Seu cardápio fica on-line e o QR code impresso guarda apenas um link curto e permanente. Mude um preço, marque um prato esgotado ou coloque um cardápio de temporada — o código nas mesas continua funcionando. Fotos dos pratos, tamanhos e variações, vários cardápios e contagem diária de leituras — grátis no primeiro ano.",
+      "features": [
+        "Um único QR code permanente, impresso uma vez só",
+        "Mudanças instantâneas de preço e de cardápio",
+        "Marcação de esgotado e fotos dos pratos",
+        "Tamanhos e variações por prato",
+        "Vários cardápios entre os quais alternar",
+        "Análise diária de leituras",
+        "Nota e certificado de higiene no cardápio",
+        "Três modelos com cores editáveis"
+      ],
+      "cta": {
+        "label": "Conheça o Setu QR Menu"
+      }
+    },
+    {
+      "name": "Gestor de aulas particulares",
+      "headline": "Software gratuito para aulas particulares, direto no seu navegador",
+      "description": "Um gestor de turmas totalmente gratuito para o professor particular. Alunos e turmas, presença diária, mensalidades que se somam sozinhas, lembretes de WhatsApp para os responsáveis, notas das provas e recibos de mensalidade que dá para compartilhar — sem login, sem assinatura, e continua funcionando sem internet.",
+      "features": [
+        "Presença diária por turma em segundos",
+        "Funciona totalmente offline",
+        "Mensalidades em aberto calculadas sozinhas, descontos e cobranças avulsas",
+        "Recibos numerados com link para compartilhar e pagamento por UPI",
+        "Lembretes de mensalidade e avisos de falta aos responsáveis por WhatsApp",
+        "Provas com lançamento de notas da turma inteira e envio dos resultados",
+        "Saída de aluno interrompe a cobrança mas preserva o histórico",
+        "Seus próprios campos por aluno, como as notas da escola",
+        "Lembretes de agenda com data e registro de consultas de matrícula",
+        "Importação em massa de alunos, bloqueio por PIN, backup e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, visão ao vivo para os responsáveis e cobrança on-line."
+      },
+      "cta": {
+        "label": "Abrir o gestor de aulas — é grátis"
+      }
+    },
+    {
+      "name": "Gestor de clínica gratuito",
+      "headline": "Software gratuito de clínica e receitas, direto no seu navegador",
+      "description": "Um gestor de clínica totalmente gratuito para um médico sozinho ou um consultório pequeno. Receitas impressas como texto nítido e selecionável, prontuários com sinais vitais e histórico, agendamentos numa tela do dia ao vivo, e faturamento com taxa de retorno automática e recibos com UPI — sem login, sem assinatura, sem limite de pacientes, e continua funcionando sem internet.",
+      "features": [
+        "Receitas impressas como texto real selecionável, em A4 ou A5",
+        "Protocolos: salve uma receita inteira e aplique no próximo paciente com um toque",
+        "Queixas, achados e diagnósticos completados a partir do que você já escreveu",
+        "Sinais vitais com IMC calculado enquanto você digita e a última medição à vista",
+        "Uma tela do dia na ordem das senhas, com tempos de espera ao vivo",
+        "Agendamentos dentro do seu próprio horário, com lembretes de WhatsApp de uma vez",
+        "Retorno marcado ao finalizar, mais um relatório de quem não voltou",
+        "Taxa de retorno aplicada automaticamente dentro do seu prazo",
+        "Recibos numerados em 58 mm, 80 mm ou A4, com QR de UPI para pagar",
+        "Controle de pendências com lembretes de WhatsApp aos pacientes",
+        "Pedidos de exame impressos à parte, assinados, em A5",
+        "Gráficos de peso e pressão por paciente, e importação em massa do registro",
+        "Relatórios de movimento, receita, diagnósticos mais comuns e faltas, todos em CSV",
+        "Funciona offline: bloqueio por PIN, backup/restauração e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, vários médicos e unidades no mesmo prontuário."
+      },
+      "cta": {
+        "label": "Abrir o gestor de clínica — é grátis"
+      }
+    },
+    {
+      "name": "Sistema de senhas gratuito",
+      "headline": "Software gratuito de senhas e painel, direto no seu navegador",
+      "description": "Um sistema de senhas totalmente gratuito para qualquer lugar onde as pessoas esperam numa fila — clínicas, laboratórios, salões, centros de serviço, agências bancárias. Distribua números, coloque um painel na sala de espera e deixe o aplicativo chamar cada pessoa em voz alta, em híndi, inglês ou no seu próprio idioma. Sem login, sem assinatura, e continua funcionando sem internet.",
+      "features": [
+        "Chama o número em voz alta: “Senha A quarenta e dois, dirija-se ao guichê três”",
+        "Chamadas em híndi, inglês, marata, tâmil, télugo, bengali, guzerate e canarês",
+        "Um painel de sala de espera para TV ou segundo monitor, em claro, escuro ou alto contraste",
+        "Sinal sonoro e cartão piscando para telas sem sintetizador de voz",
+        "Vários serviços e guichês, com prioridade para idosos e emergências",
+        "Rechamar, pular e transferir — o número da senha acompanha a pessoa",
+        "Estimativas de espera honestas, tiradas dos seus tempos reais de atendimento",
+        "Senhas em impressora de 58 mm e um cartaz QR A4 para a sala de espera",
+        "Senha por WhatsApp e um aviso de “já é quase sua vez”",
+        "Relatórios de carga por hora, taxa de falta e por guichê, exportáveis em CSV",
+        "Funciona offline: bloqueio por PIN, backup/restauração e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, cobrança no guichê e envio para a cozinha."
+      },
+      "cta": {
+        "label": "Abrir o sistema de senhas — é grátis"
+      }
+    },
+    {
+      "name": "Livro de locação gratuito",
+      "headline": "Software gratuito de locação para tendas e aluguel de equipamentos",
+      "description": "Um livro de locação totalmente gratuito para locadoras de tendas, decoradores de eventos, aluguel de móveis e equipamento de festa, locação de câmeras e de ferramentas de obra. Ele acompanha o que está comprometido em cada data, então você nunca promete as mesmas 200 cadeiras para dois casamentos — e acerta avaria, falta e atraso contra a caução quando o material volta. Sem login, sem assinatura, funciona offline.",
+      "features": [
+        "Um calendário de disponibilidade que responde em segundos a “quantas estão livres no dia 14?”",
+        "As quantidades livres saem do dia mais apertado do período, nunca de uma média que esconda um conflito",
+        "Uma lista de conflitos que mostra cada reserva prometendo mais material do que você tem",
+        "Consulta → confirmado → despachado → devolvido, com um orçamento na frente",
+        "Listas de separação para a equipe de carga, sem preços, e romaneios assinados",
+        "Acerto na devolução: avariado, perdido e atrasado, tudo descontado da caução",
+        "Utilização e retorno sobre o custo por item — o que comprar mais e o que vender",
+        "Unidades com número de série para câmeras e ferramentas, uma reserva por vez",
+        "Registros de manutenção que tiram o material da disponibilidade enquanto está no conserto",
+        "Orçamentos, confirmações e cobranças por WhatsApp, com um link que o cliente abre",
+        "Funciona offline: bloqueio por PIN, backup/restauração e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, várias filiais e acessos para a equipe."
+      },
+      "cta": {
+        "label": "Abrir o livro de locação — é grátis"
+      }
+    },
+    {
+      "name": "Ordem de serviço gratuita",
+      "headline": "Software gratuito de assistência técnica, com ordens, fotos e laudo de entrada",
+      "description": "Um aplicativo de ordem de serviço totalmente gratuito para assistências de celular, notebook e eletrodoméstico. Registra o estado do aparelho com fotos e assinatura no momento em que ele entra, então o “esse risco não estava aí” acaba ali — e depois acompanha cada aparelho num painel que vai para o âmbar e o vermelho conforme os dias passam. Sem login, sem assinatura, funciona offline.",
+      "features": [
+        "Entrada em noventa segundos: checklist de estado, fotos da câmera e assinatura do cliente",
+        "Um laudo de entrada que não pode ser editado depois de salvo — é esse o ponto",
+        "Um painel com todo aparelho da oficina, envelhecendo para âmbar e vermelho",
+        "Busca por IMEI, número da OS, telefone ou nome, aceitando parte do número de série",
+        "Avisos de WhatsApp em cada etapa, com seus próprios modelos, enviados por você e não automaticamente",
+        "Comprovante em A5 ou 58 mm, mais uma etiqueta com o número grande o bastante para ler do outro lado da bancada",
+        "Estoque de peças com o custo ao lado do preço de venda, para ver a margem enquanto ainda dá para mudá-la",
+        "Entrega com pagamento, assinatura e uma nota com a data de fim da garantia",
+        "Consulta de garantia por número da OS ou IMEI, e atendimentos que não contam como receita nova",
+        "A lista de não retirados — serviço pronto que ninguém veio buscar, totalizado e cobrado por ciclo",
+        "Margem, prazo, produtividade por técnico e de qual fornecedor as peças voltam sempre",
+        "Um link de acompanhamento opcional por OS — um endereço que nunca muda, de onde o cliente aprova o orçamento",
+        "Funciona offline: bloqueio por PIN, backup/restauração e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, várias filiais e acessos para os técnicos."
+      },
+      "cta": {
+        "label": "Abrir a ordem de serviço — é grátis"
+      }
+    },
+    {
+      "name": "PDV de farmácia gratuito",
+      "headline": "Software gratuito de faturamento para farmácias, com controle de validade",
+      "description": "Um aplicativo de vendas e estoque totalmente gratuito para farmácias e drogarias. O estoque é mantido por lote e não por medicamento, então o balcão sempre vende a cartela que vence primeiro, o número do lote sai impresso no cupom, e um painel de validades avisa o que está prestes a perder o valor enquanto o distribuidor ainda aceita de volta. Sem login, sem assinatura, funciona offline.",
+      "features": [
+        "Estoque por lote com validade no mês exato em cada cartela da loja",
+        "Venda que escolhe o lote que vence primeiro e divide a quantidade entre lotes sozinha",
+        "Painel de validades em faixas de 30, 60 e 90 dias, valorizado pelo que o estoque custou",
+        "Listas de devolução agrupadas por fornecedor, com um toque para gerar a nota",
+        "Uma única busca por marca, princípio ativo e código de barras, com similares do mesmo princípio",
+        "Lançamento da nota do distribuidor em caixas, com bonificações diluídas num custo médio",
+        "Registro de receitas para os medicamentos controlados e um livro de vendas imprimível",
+        "Margem lida do lote de onde a venda realmente saiu, não de uma média",
+        "Resumo de impostos por alíquota, valor do estoque, giro e pedido sugerido por fornecedor",
+        "Lembretes de recompra e saldos de fiado, enviados por WhatsApp com seus modelos",
+        "Funciona offline: bloqueio por PIN, backup/restauração e Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Banco de dados na nuvem, vários balcões e sincronização com o distribuidor."
+      },
+      "cta": {
+        "label": "Abrir o PDV de farmácia — é grátis"
+      }
+    },
+    {
+      "headline": "Gestão de restaurante, bem feita — em desenvolvimento",
+      "description": "Faturamento, fluxo de cozinha, gestão de mesas, painéis multiloja, gestão de clientes, cupons e um motor de impostos embutido — tudo que um restaurante precisa para rodar bem, de uma loja só a uma rede inteira.",
+      "features": [
+        "Painel multiloja",
+        "Fluxo de cozinha e roteamento de pedidos",
+        "Gestão de mesas",
+        "Motor de faturamento pronto para impostos",
+        "Acompanhamento de pedido por QR e chamada de garçom",
+        "Cupons e descontos"
+      ],
+      "cta": {
+        "label": "Conheça o Setu Dine"
+      }
+    },
+    {
+      "headline": "Atendimento de balcão em fast-food, resolvido — em desenvolvimento",
+      "description": "Venda no balcão, gestão de senhas, roteamento para a cozinha e painel de retirada do cliente — feito para fast-food e praças de alimentação.",
+      "features": [
+        "Venda no balcão com impostos automáticos",
+        "Geração e exibição de senhas",
+        "Roteamento de pedidos para a cozinha",
+        "Painel de retirada do cliente",
+        "Painel de fila em tempo real"
+      ],
+      "cta": {
+        "label": "Conheça o Setu Queue"
+      }
+    },
+    {
+      "headline": "Gestão de loja de varejo, em breve",
+      "description": "Controle de estoque, faturamento e operação de loja feitos para negócios de varejo no mundo inteiro.",
+      "cta": {
+        "label": "Conheça o Setu Retail"
+      }
+    },
+    {
+      "headline": "Gestão de curso preparatório, em breve",
+      "description": "Mensagens automáticas aos responsáveis, visão ao vivo para os pais, cobrança on-line e sincronização na nuvem entre os seus aparelhos — ainda assim pensado para um professor, não para uma instituição.",
+      "cta": {
+        "label": "Conheça o Setu Tuition"
+      }
+    },
+    {
+      "headline": "Gestão de clínica, em desenvolvimento",
+      "description": "O produto pago em que o gestor de clínica gratuito se transforma — as mesmas receitas e prontuários, guardados num banco de dados na nuvem para que vários médicos, uma recepção e mais de uma unidade trabalhem no mesmo prontuário.",
+      "features": [
+        "Prontuários na nuvem compartilhados entre aparelhos",
+        "Vários médicos e unidades numa só conta",
+        "Agendamento pela recepção",
+        "Acesso por perfil para a equipe",
+        "Relatórios de todo o consultório"
+      ],
+      "cta": {
+        "label": "Avise-me no lançamento"
+      }
+    },
+    {
+      "headline": "Faturamento de farmácia, em desenvolvimento",
+      "description": "O produto pago em que o PDV de farmácia gratuito se transforma — estoque por lote e controle de validade num banco de dados na nuvem, com vários balcões vendendo ao mesmo tempo e as compras do distribuidor sincronizadas.",
+      "features": [
+        "Estoque por lote e validade na nuvem, compartilhado entre balcões",
+        "Vários balcões vendendo ao mesmo tempo",
+        "Sincronização de compras e bonificações do distribuidor",
+        "Transferências de estoque entre filiais",
+        "Relatórios de impostos e margem de toda a rede"
+      ],
+      "cta": {
+        "label": "Avise-me no lançamento"
+      }
+    },
+    {
+      "headline": "Gestão de locação, em desenvolvimento",
+      "description": "O produto pago em que o livro de locação gratuito se transforma — um único calendário de disponibilidade num banco de dados na nuvem, para que uma segunda filial e a equipe de carga nunca comprometam duas vezes o mesmo material.",
+      "features": [
+        "Disponibilidade na nuvem compartilhada entre filiais",
+        "Acessos da equipe para saída e devolução",
+        "Transferências de material entre filiais",
+        "Portal do cliente para orçamentos e confirmações",
+        "Relatórios de utilização e de retorno sobre o custo"
+      ],
+      "cta": {
+        "label": "Avise-me no lançamento"
+      }
+    },
+    {
+      "headline": "Gestão de assistência técnica, em desenvolvimento",
+      "description": "O produto pago em que a ordem de serviço gratuita se transforma — laudos de entrada e fotos dos aparelhos num banco de dados na nuvem, com acessos por técnico e o painel de cada filial numa só tela.",
+      "features": [
+        "Ordens e fotos de entrada na nuvem",
+        "Acessos por técnico com a produtividade de cada um",
+        "O painel de cada filial numa só tela",
+        "Estoque de peças compartilhado entre filiais",
+        "Relatórios de garantia e margem de toda a rede"
+      ],
+      "cta": {
+        "label": "Avise-me no lançamento"
+      }
+    },
+    {
+      "name": "Setu para o seu negócio",
+      "headline": "O próximo setor que vamos construir é o seu",
+      "description": "Se você ainda não vê o seu setor aqui, conte o que você toca. Estamos construindo o Setu para todo tipo de negócio, um setor de cada vez.",
+      "cta": {
+        "label": "Conte qual é a sua necessidade"
+      }
+    }
+  ]
+}

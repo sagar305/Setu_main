@@ -1,0 +1,375 @@
+{
+  "seo": {
+    "title": "Produk | POS, menu QR, dan perangkat lunak | Setu",
+    "description": "Jelajahi produk Setu: kasir gratis berbasis browser, menu QR, Free Dine, pengelola kelas bimbingan dan pengelola klinik, plus Setu Dine dan Queue.",
+    "keywords": [
+      "produk Setu",
+      "kasir berbasis browser",
+      "Free Dine",
+      "POS restoran gratis",
+      "Setu QR Menu",
+      "Setu Dine",
+      "Setu Queue",
+      "Setu Retail",
+      "Setu Clinic",
+      "Setu Tuition",
+      "pengelola kelas bimbingan",
+      "pengelola klinik gratis",
+      "perangkat lunak manajemen klinik gratis"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Produk",
+    "headline": "Satu perusahaan, membangun untuk tiap bidang usaha",
+    "subheadline": "Kami mulai dari restoran. Inilah yang sudah jalan hari ini, dan apa yang datang berikutnya."
+  },
+  "labels": {
+    "comingSoon": "Segera hadir",
+    "paidSoonEyebrow": "Produk berbayar segera hadir",
+    "paidSoonSuffix": "Semua yang di atas tetap gratis."
+  },
+  "products": [
+    {
+      "name": "Kasir berbasis browser",
+      "headline": "POS gratis dan offline, langsung di browser Anda",
+      "description": "Aplikasi kasir yang sepenuhnya gratis untuk usaha kecil. Tagih pelanggan, kelola produk dan stok, tahan lalu panggil kembali keranjang, dan cetak struk termal — tanpa login, tanpa langganan, dan tetap jalan meski tanpa internet. Semua data tetap di perangkat Anda, dengan cadangan dan pemulihan sekali klik.",
+      "features": [
+        "Penagihan cepat dengan dukungan pemindai barcode",
+        "Berjalan sepenuhnya offline",
+        "Tahan dan panggil kembali keranjang saat sedang ramai",
+        "Penjualan kredit dan buku piutang pelanggan",
+        "Pelacakan stok dan persediaan dengan riwayat pergerakan",
+        "Pelanggan dan riwayat pembelian",
+        "Laporan penjualan, pembayaran, dan barang terlaris",
+        "Cetak struk termal (80 mm/58 mm) dan A4",
+        "Kunci kasir dengan PIN, terkunci otomatis saat menganggur",
+        "Cadangan/pemulihan JSON, ekspor CSV, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa kasir, dan login staf."
+      },
+      "cta": {
+        "label": "Buka kasir browser — gratis"
+      }
+    },
+    {
+      "name": "Penganalisis rekening koran",
+      "headline": "Analisis rekening koran gratis, langsung di browser Anda",
+      "description": "Penganalisis rekening koran yang sepenuhnya gratis untuk akuntan dan siapa pun yang memegang pembukuan. Impor rekening koran PDF, Excel, atau CSV, klasifikasikan tiap transaksi dengan aturan Anda sendiri, cocokkan dengan buku besar, dan ekspor laporan — tanpa login, tanpa langganan, dan rekening koran tidak pernah diunggah ke mana pun.",
+      "features": [
+        "Mengimpor PDF, XLSX, XLS, dan CSV — termasuk PDF berpassword",
+        "Tidak ada yang diunggah: pembacaan dan analisis berjalan di browser Anda",
+        "Hasil pembacaan diuji terhadap saldo berjalan rekening koran itu sendiri",
+        "Klasifikasi berbasis aturan yang pasti, dengan tingkat keyakinan terlihat",
+        "Tanda usaha, pribadi, dan transfer, terpisah dari kategorinya",
+        "Beberapa rekening koran dianalisis bersama, tanpa transaksi ganda",
+        "Analisis bulanan arus kas, pengeluaran, pemasukan, dan lawan transaksi",
+        "Laporan tunai, nominal besar, biaya bank, bunga, dan transfer",
+        "Rekonsiliasi buku besar dengan pencocokan persis, rentang tanggal, dan mendekati",
+        "Buku kerja Excel, laporan PDF, dan ekspor CSV dibuat di perangkat"
+      ],
+      "cta": {
+        "label": "Buka penganalisis rekening koran — gratis"
+      }
+    },
+    {
+      "headline": "POS restoran gratis yang berjalan di browser",
+      "description": "Kasir ruang makan yang lengkap, gratis dan tanpa login. Meja dan area lantai, bon yang tetap terbuka sejam, tiket pesanan dapur tiap ronde, dan layar dapur langsung di tab kedua. Pisah dan gabungkan bon, pajak dengan rincian CGST/SGST, stok bahan baku yang mengikuti resep, pemesanan meja dengan konfirmasi WhatsApp, dan piutang lewat buku pelanggan bersama. Semua tetap di perangkat Anda, dan penagihan terus jalan meski internet mati.",
+      "features": [
+        "Meja dan area lantai dengan total berjalan secara langsung",
+        "Bon terbuka yang bertahan meski browser dimulai ulang",
+        "Tiket pesanan dapur tiap ronde, tanpa harga",
+        "Layar dapur langsung di tab kedua, bisa dikunci sebagai kios",
+        "Ukuran setengah/penuh dan grup tambahan",
+        "Pisah bon per item, per bagian, atau per nominal — dan gabungkan meja",
+        "Pajak per item dengan rincian CGST/SGST",
+        "Stok bahan baku dengan resep tiap hidangan dan biaya bahan",
+        "Pemesanan meja, gratis atau dengan uang muka",
+        "Konfirmasi dan pengingat WhatsApp dari nomor Anda sendiri",
+        "Piutang tercatat ke buku pelanggan bersama",
+        "Bon termal (80 mm/58 mm) dan A4, dirancang di perancang struk",
+        "Ringkasan harian, laporan item, penjualan per jam, dan tutup hari siap cetak",
+        "Cadangan, ekspor CSV, dan sinkronisasi Google Sheet",
+        "Berjalan offline, tanpa perlu login"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa gerai, perangkat, dan login staf."
+      },
+      "cta": {
+        "label": "Buka Free Dine — gratis"
+      }
+    },
+    {
+      "headline": "Kode QR yang tak pernah perlu dicetak ulang",
+      "description": "Menu Anda tersimpan daring dan kode QR yang dicetak hanya memuat satu tautan pendek yang permanen. Ubah harga, tandai satu hidangan habis, atau ganti dengan menu musiman — kode di meja tetap bekerja. Foto hidangan, ukuran dan varian, beberapa menu, dan hitungan pemindaian harian — gratis di tahun pertama.",
+      "features": [
+        "Satu kode QR permanen, dicetak sekali saja",
+        "Perubahan harga dan menu seketika",
+        "Penanda habis dan foto hidangan",
+        "Ukuran dan varian tiap hidangan",
+        "Beberapa menu yang bisa Anda tukar",
+        "Analitik pemindaian harian",
+        "Nilai dan sertifikat higiene di menu",
+        "Tiga templat dengan warna yang bisa diubah"
+      ],
+      "cta": {
+        "label": "Jelajahi Setu QR Menu"
+      }
+    },
+    {
+      "name": "Pengelola kelas bimbingan",
+      "headline": "Perangkat lunak bimbingan belajar gratis, langsung di browser",
+      "description": "Pengelola kelas yang sepenuhnya gratis untuk seorang guru bimbingan. Siswa dan kelompok, absensi harian, iuran bulanan yang terhitung sendiri, pengingat WhatsApp ke orang tua, nilai ulangan, dan kuitansi iuran yang bisa dibagikan — tanpa login, tanpa langganan, dan tetap jalan meski tanpa internet.",
+      "features": [
+        "Absensi harian per kelompok dalam hitungan detik",
+        "Berjalan sepenuhnya offline",
+        "Tagihan iuran bulanan otomatis, keringanan, dan biaya sekali bayar",
+        "Kuitansi bernomor dengan tautan berbagi dan pembayaran UPI",
+        "Pengingat iuran dan pemberitahuan absen ke orang tua lewat WhatsApp",
+        "Ulangan dengan pengisian nilai satu kelompok dan pembagian hasil",
+        "Siswa berhenti menghentikan iuran tetapi riwayatnya tetap tersimpan",
+        "Kolom buatan Anda sendiri per siswa, misalnya nilai di sekolah",
+        "Pengingat buku harian bertanggal dan buku permintaan pendaftaran",
+        "Impor siswa massal, kunci PIN, cadangan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, tampilan langsung untuk orang tua, dan penerimaan iuran daring."
+      },
+      "cta": {
+        "label": "Buka pengelola kelas bimbingan — gratis"
+      }
+    },
+    {
+      "name": "Pengelola klinik gratis",
+      "headline": "Perangkat lunak klinik dan resep gratis, langsung di browser",
+      "description": "Pengelola klinik yang sepenuhnya gratis untuk seorang dokter atau praktik kecil. Resep yang tercetak sebagai teks tajam dan bisa diseleksi, rekam medis dengan tanda vital dan riwayat, janji temu di layar harian langsung, serta penagihan dengan biaya kontrol otomatis dan kuitansi UPI — tanpa login, tanpa langganan, tanpa batas pasien, dan tetap jalan meski tanpa internet.",
+      "features": [
+        "Resep tercetak sebagai teks asli yang bisa diseleksi, A4 atau A5",
+        "Protokol — simpan satu resep utuh, muat ke pasien berikutnya dengan sekali ketuk",
+        "Keluhan, temuan, dan diagnosis terisi sendiri dari tulisan Anda sebelumnya",
+        "Tanda vital dengan BMI dihitung saat mengetik dan pengukuran terakhir tampil",
+        "Satu layar harian berurutan nomor, dengan penghitung tunggu langsung",
+        "Janji temu dalam jam praktik Anda, dengan pengingat WhatsApp sekali jalan",
+        "Kontrol ulang terjadwal saat resep difinalkan, plus laporan siapa yang belum kembali",
+        "Biaya kontrol diterapkan otomatis dalam rentang waktu Anda",
+        "Kuitansi bernomor di 58 mm, 80 mm, atau A4, dengan QR UPI untuk membayar",
+        "Pelacakan tunggakan dengan pengingat WhatsApp ke pasien",
+        "Lembar pemeriksaan dicetak terpisah dan bertanda tangan di A5",
+        "Grafik berat badan dan tekanan darah pasien, serta impor buku register massal",
+        "Laporan kunjungan, pendapatan, diagnosis terbanyak, dan ketidakhadiran, semua bisa diekspor ke CSV",
+        "Berjalan sepenuhnya offline — kunci PIN, cadangan/pemulihan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa dokter dan cabang pada satu rekam medis."
+      },
+      "cta": {
+        "label": "Buka pengelola klinik gratis — gratis"
+      }
+    },
+    {
+      "name": "Sistem antrean gratis",
+      "headline": "Perangkat lunak antrean dan tampilan gratis, langsung di browser",
+      "description": "Sistem antrean yang sepenuhnya gratis untuk mana pun tempat orang mengantre — klinik, laboratorium, salon, pusat servis, kantor cabang bank. Bagikan nomor, pasang layar di ruang tunggu, dan biarkan aplikasi memanggil tiap orang dengan suara, dalam bahasa Hindi, Inggris, atau bahasa Anda sendiri. Tanpa login, tanpa langganan, dan tetap jalan meski tanpa internet.",
+      "features": [
+        "Memanggil nomor dengan suara — “Nomor A empat puluh dua, silakan ke loket tiga”",
+        "Pengumuman dalam bahasa Hindi, Inggris, Marathi, Tamil, Telugu, Bengali, Gujarati, dan Kannada",
+        "Tampilan ruang tunggu untuk TV atau monitor kedua, dalam mode terang, gelap, atau kontras tinggi",
+        "Nada dan kartu berkedip untuk layar tanpa mesin suara",
+        "Beberapa layanan dan loket, dengan prioritas untuk lansia dan kondisi darurat",
+        "Panggil ulang, lewati, dan alihkan — nomor tetap mengikuti orangnya",
+        "Perkiraan waktu tunggu yang jujur dari waktu layanan Anda sendiri",
+        "Slip antrean di printer 58 mm, dan poster QR A4 untuk ruang tunggu",
+        "Kirim nomor lewat WhatsApp plus pengingat “sebentar lagi giliran Anda”",
+        "Laporan beban per jam, tingkat ketidakhadiran, dan per loket, bisa diekspor ke CSV",
+        "Berjalan sepenuhnya offline — kunci PIN, cadangan/pemulihan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, penagihan di loket, dan penerusan ke dapur."
+      },
+      "cta": {
+        "label": "Buka sistem antrean gratis — gratis"
+      }
+    },
+    {
+      "name": "Buku sewa gratis",
+      "headline": "Perangkat lunak persewaan gratis untuk penyewaan tenda dan peralatan",
+      "description": "Buku sewa yang sepenuhnya gratis untuk penyewaan tenda, dekorasi acara, penyewaan furnitur dan perlengkapan pesta, penyewaan kamera, dan penyewaan alat konstruksi. Ia melacak apa saja yang sudah dijanjikan pada tiap tanggal, sehingga 200 kursi yang sama tidak pernah dijanjikan ke dua pernikahan — dan ia menghitung kerusakan, kekurangan, serta keterlambatan terhadap uang jaminan saat barang kembali. Tanpa login, tanpa langganan, berjalan offline.",
+      "features": [
+        "Kalender ketersediaan yang menjawab “berapa yang kosong tanggal 14?” dalam hitungan detik",
+        "Jumlah kosong dihitung dari hari tersempit dalam satu rentang — bukan rata-rata yang menyembunyikan bentrok",
+        "Daftar bentrok yang memunculkan tiap pemesanan yang menjanjikan lebih dari yang Anda punya",
+        "Permintaan → dikonfirmasi → dikirim → kembali, dengan penawaran di depan",
+        "Daftar ambil barang untuk kru muat tanpa harga, dan surat jalan bertanda tangan",
+        "Penyelesaian saat kembali: rusak, hilang, dan telat, semua dipotong dari jaminan",
+        "Tingkat pakai dan imbal hasil atas biaya per barang — apa yang perlu ditambah, apa yang dilepas",
+        "Unit bernomor seri untuk kamera dan peralatan, satu pemesanan pada satu waktu",
+        "Catatan perawatan yang menarik barang dari ketersediaan selama diperbaiki",
+        "Penawaran, konfirmasi, dan penagihan lewat WhatsApp dengan tautan yang bisa dibuka pelanggan",
+        "Berjalan sepenuhnya offline — kunci PIN, cadangan/pemulihan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa cabang, dan login kru."
+      },
+      "cta": {
+        "label": "Buka buku sewa gratis — gratis"
+      }
+    },
+    {
+      "name": "Kartu servis gratis",
+      "headline": "Perangkat lunak bengkel servis gratis dengan kartu kerja, foto, dan catatan kondisi",
+      "description": "Aplikasi kartu kerja yang sepenuhnya gratis untuk bengkel servis ponsel, laptop, dan peralatan rumah tangga. Ia mencatat kondisi perangkat dengan foto dan tanda tangan begitu barang masuk, sehingga “goresan itu tadinya tidak ada” berhenti di situ — lalu melacak tiap perangkat di satu papan yang berubah kuning dan merah saat pekerjaan menumpuk. Tanpa login, tanpa langganan, berjalan offline.",
+      "features": [
+        "Penerimaan dalam sembilan puluh detik: daftar periksa kondisi, foto kamera, dan tanda tangan pelanggan",
+        "Catatan penerimaan yang tak bisa diubah setelah disimpan — memang itu intinya",
+        "Papan berisi tiap perangkat di bengkel, menguning lalu memerah seiring hari berlalu",
+        "Cari lewat IMEI, nomor kerja, telepon, atau nama, cocok dengan sebagian nomor seri sekalipun",
+        "Kabar WhatsApp di tiap tahap dari templat Anda sendiri, dikirim oleh Anda dan bukan otomatis",
+        "Slip kerja A5 atau 58 mm, plus label perangkat dengan nomor cukup besar untuk dibaca dari seberang meja kerja",
+        "Stok suku cadang dengan harga beli di samping harga jual, agar margin terlihat selagi masih bisa diubah",
+        "Penyerahan dengan pembayaran, tanda tangan, dan nota yang memuat tanggal berakhirnya garansi",
+        "Cek garansi lewat nomor kerja atau IMEI, dan klaim yang tidak dihitung sebagai pendapatan baru",
+        "Daftar belum diambil — pekerjaan selesai yang tak diambil siapa pun, ditotal dan ditagih berkala",
+        "Margin, waktu penyelesaian, hasil kerja tiap teknisi, dan suku cadang pemasok mana yang sering kembali",
+        "Tautan pelacakan opsional tiap pekerjaan — satu alamat yang tak pernah berubah, dan pelanggan bisa menyetujui perkiraan biaya dari sana",
+        "Berjalan sepenuhnya offline — kunci PIN, cadangan/pemulihan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa cabang, dan login teknisi."
+      },
+      "cta": {
+        "label": "Buka kartu servis gratis — gratis"
+      }
+    },
+    {
+      "name": "POS apotek gratis",
+      "headline": "Perangkat lunak penagihan apotek gratis, dengan pelacakan kedaluwarsa",
+      "description": "Aplikasi penagihan dan stok yang sepenuhnya gratis untuk apotek dan toko obat. Stok dipegang per batch, bukan per obat, sehingga kasir selalu menjual strip yang kedaluwarsa lebih dulu, nomor batch tercetak di struk, dan dasbor kedaluwarsa memberi tahu apa yang segera tak bernilai selagi distributor masih mau menerimanya kembali. Tanpa login, tanpa langganan, berjalan offline.",
+      "features": [
+        "Stok per batch dengan kedaluwarsa setepat bulan pada tiap strip di toko",
+        "Penagihan yang memilih batch kedaluwarsa terdekat dan membagi jumlah antar batch dengan sendirinya",
+        "Dasbor kedaluwarsa berkelompok 30, 60, dan 90 hari, dinilai pada harga beli Anda",
+        "Daftar retur dikelompokkan per pemasok, sekali ketuk untuk membuat nota retur",
+        "Satu kotak pencarian untuk merek, zat aktif, dan barcode, lengkap dengan substitusi zat yang sama",
+        "Entri faktur distributor dalam satuan pak, dengan barang bonus dihitung ke harga rata-rata",
+        "Pencatatan resep untuk golongan obat keras dan buku penjualan siap cetak",
+        "Margin dibaca dari batch yang benar-benar dipakai tiap penjualan, bukan rata-rata",
+        "Ringkasan pajak per tarif, nilai stok, barang laku, dan usulan pesanan per pemasok",
+        "Pengingat tebus ulang dan saldo utang, dikirim lewat WhatsApp dari templat Anda sendiri",
+        "Berjalan sepenuhnya offline — kunci PIN, cadangan/pemulihan, dan sinkronisasi Google Sheet"
+      ],
+      "paidSoon": {
+        "note": "Basis data awan, beberapa kasir, dan sinkronisasi distributor."
+      },
+      "cta": {
+        "label": "Buka POS apotek gratis — gratis"
+      }
+    },
+    {
+      "headline": "Manajemen restoran, dikerjakan dengan benar — dalam pengembangan",
+      "description": "Penagihan, alur kerja dapur, pengelolaan meja, dasbor lintas gerai, pengelolaan pelanggan, kupon, dan mesin pajak bawaan — semua yang dibutuhkan restoran agar berjalan mulus, dari satu gerai sampai satu jaringan penuh.",
+      "features": [
+        "Dasbor lintas gerai",
+        "Alur kerja dapur dan penerusan pesanan",
+        "Pengelolaan meja",
+        "Mesin penagihan siap pajak",
+        "Pelacakan pesanan lewat QR dan panggilan pelayan",
+        "Kupon dan diskon"
+      ],
+      "cta": {
+        "label": "Jelajahi Setu Dine"
+      }
+    },
+    {
+      "headline": "Layanan kasir QSR, tertata — dalam pengembangan",
+      "description": "Penagihan di kasir, pengelolaan nomor antrean, penerusan ke dapur, dan layar pengambilan pesanan — dibuat untuk restoran cepat saji dan pujasera.",
+      "features": [
+        "Penagihan kasir dengan pajak otomatis",
+        "Pembuatan dan tampilan nomor antrean",
+        "Penerusan pesanan ke dapur",
+        "Layar pengambilan pesanan",
+        "Dasbor antrean waktu nyata"
+      ],
+      "cta": {
+        "label": "Jelajahi Setu Queue"
+      }
+    },
+    {
+      "headline": "Manajemen toko ritel, segera hadir",
+      "description": "Pelacakan persediaan, penagihan, dan operasional toko yang dibuat untuk usaha ritel di seluruh dunia.",
+      "cta": {
+        "label": "Jelajahi Setu Retail"
+      }
+    },
+    {
+      "headline": "Manajemen bimbingan belajar, segera hadir",
+      "description": "Pesan otomatis ke orang tua, tampilan langsung untuk orang tua, penerimaan iuran daring, dan sinkronisasi awan antar perangkat Anda sendiri — tetap dibangun untuk satu guru, bukan untuk sebuah lembaga.",
+      "cta": {
+        "label": "Jelajahi Setu Tuition"
+      }
+    },
+    {
+      "headline": "Manajemen klinik, dalam pengembangan",
+      "description": "Produk klinik berbayar yang menjadi kelanjutan pengelola klinik gratis — resep dan rekam medis yang sama, disimpan di basis data awan agar beberapa dokter, meja depan, dan lebih dari satu cabang bekerja pada rekam medis yang sama.",
+      "features": [
+        "Rekam medis awan yang dipakai bersama antar perangkat",
+        "Beberapa dokter dan cabang dalam satu akun",
+        "Penjadwalan janji temu dari meja depan",
+        "Akses berbasis peran untuk staf",
+        "Pelaporan untuk seluruh praktik"
+      ],
+      "cta": {
+        "label": "Beri tahu saya saat diluncurkan"
+      }
+    },
+    {
+      "headline": "Penagihan apotek, dalam pengembangan",
+      "description": "Produk toko obat berbayar yang menjadi kelanjutan POS apotek gratis — stok per batch dan pelacakan kedaluwarsa di basis data awan, dengan beberapa kasir menagih bersamaan dan pembelian distributor tersinkron.",
+      "features": [
+        "Stok batch dan kedaluwarsa di awan, dipakai bersama antar kasir",
+        "Beberapa kasir menagih pada saat bersamaan",
+        "Sinkronisasi pembelian distributor dan barang bonus",
+        "Pemindahan stok antar cabang",
+        "Pelaporan pajak dan margin untuk seluruh jaringan"
+      ],
+      "cta": {
+        "label": "Beri tahu saya saat diluncurkan"
+      }
+    },
+    {
+      "headline": "Manajemen persewaan, dalam pengembangan",
+      "description": "Produk persewaan berbayar yang menjadi kelanjutan buku sewa gratis — satu kalender ketersediaan di basis data awan, sehingga cabang kedua dan kru muat tidak pernah bisa menjanjikan barang yang sama dua kali.",
+      "features": [
+        "Ketersediaan awan yang dipakai bersama antar cabang",
+        "Login kru untuk pengiriman dan pengembalian",
+        "Pemindahan barang antar cabang",
+        "Portal pelanggan untuk penawaran dan konfirmasi",
+        "Pelaporan tingkat pakai dan imbal hasil atas biaya"
+      ],
+      "cta": {
+        "label": "Beri tahu saya saat diluncurkan"
+      }
+    },
+    {
+      "headline": "Manajemen bengkel servis, dalam pengembangan",
+      "description": "Produk kartu kerja berbayar yang menjadi kelanjutan kartu servis gratis — catatan penerimaan dan foto perangkat di basis data awan, dengan login teknisi dan papan tiap cabang dalam satu layar.",
+      "features": [
+        "Kartu kerja dan foto penerimaan di awan",
+        "Login teknisi dengan hasil kerja tiap orang",
+        "Papan tiap cabang dalam satu layar",
+        "Stok suku cadang dipakai bersama antar cabang",
+        "Pelaporan garansi dan margin untuk seluruh jaringan"
+      ],
+      "cta": {
+        "label": "Beri tahu saya saat diluncurkan"
+      }
+    },
+    {
+      "name": "Setu untuk usaha Anda",
+      "headline": "Berikutnya kami bangun untuk bidang Anda",
+      "description": "Kalau bidang usaha Anda belum ada di sini, ceritakan apa yang Anda jalankan. Kami membangun Setu untuk segala jenis usaha, satu bidang pada satu waktu.",
+      "cta": {
+        "label": "Ceritakan kebutuhan Anda"
+      }
+    }
+  ]
+}
