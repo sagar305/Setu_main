@@ -83,7 +83,10 @@ export async function generateMetadata({
     title: post.seoTitle ?? `${post.title} | Setu Technology Blog`,
     description: post.metaDescription ?? post.excerpt,
     keywords: post.keywords,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      types: { "application/rss+xml": "/blog/rss.xml" },
+    },
     openGraph: {
       title: post.seoTitle ?? post.title,
       description: post.metaDescription ?? post.excerpt,
