@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "Kostenlose Business-Tools für Gastro & Handel | Setu",
+    "description": "Kostenlose Online-Tools für Gastronomie und kleine Betriebe — Rechnungsgenerator, Rechner und vieles mehr. Ganz ohne Anmeldung nutzbar.",
+    "keywords": [
+      "Business-Tools",
+      "kostenlose Business-Tools",
+      "Rechnungsgenerator",
+      "Tools für Gastronomie",
+      "Tools für kleine Betriebe"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kostenlose Tools",
+    "headline": "Werkzeuge für Ihren Betrieb",
+    "subheadline": "Kostenlose Tools ohne Anmeldung, gebaut für Gastronomie und Handel — Rechnungen, Rechner und mehr."
+  },
+  "ctaBanner": {
+    "headline": "Sollen sich die Zahlen selbst führen?",
+    "subtext": "Setu Dine erfasst Umsätze, Kosten und Steuern automatisch — weniger Zeit für Rechner, mehr Zeit für Ihren Betrieb.",
+    "cta": {
+      "label": "Setu Dine entdecken"
+    }
+  },
+  "categories": [
+    {
+      "name": "Betriebseinrichtung"
+    },
+    {
+      "name": "Kasse"
+    },
+    {
+      "name": "Rechnungen"
+    },
+    {
+      "name": "Zahlung"
+    },
+    {
+      "name": "Speisekarte"
+    },
+    {
+      "name": "Produkte und Etiketten"
+    },
+    {
+      "name": "Bestand und Einkauf"
+    },
+    {
+      "name": "Finanzen"
+    },
+    {
+      "name": "Kunden"
+    },
+    {
+      "name": "Termine"
+    },
+    {
+      "name": "Geschäftsdokumente"
+    },
+    {
+      "name": "Buchhaltung"
+    },
+    {
+      "name": "Abschlüsse und Berichte"
+    },
+    {
+      "name": "Finanzanalyse"
+    }
+  ],
+  "items": [
+    {
+      "name": "Browser-Kasse",
+      "shortDescription": "Kostenlose Kasse, die offline im Browser läuft — Bonieren, Bestand, Kunden und Belege. Ohne Login."
+    },
+    {
+      "name": "Rechnungsgenerator",
+      "shortDescription": "Professionelle Rechnungen mit Steuerunterstützung erstellen, anpassen und herunterladen."
+    },
+    {
+      "name": "Dynamischer UPI-QR-Generator",
+      "shortDescription": "Dynamische UPI-QR-Codes mit eigenem Betrag und Verwendungszweck für Sofortzahlungen."
+    },
+    {
+      "name": "QR-Speisekarten-Generator",
+      "shortDescription": "QR-Code für eine digitale Speisekarte — die ganze Karte steckt im Code, kein Hosting nötig."
+    },
+    {
+      "name": "Angebotsgenerator",
+      "shortDescription": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — Druck oder PDF."
+    },
+    {
+      "name": "Betriebsprofil",
+      "shortDescription": "Ihre Betriebsdaten einmal speichern — jedes Setu-Tool übernimmt sie automatisch."
+    },
+    {
+      "name": "Beleggenerator",
+      "shortDescription": "Beleg gestalten, Verkauf eintragen und drucken — die Browser-Kasse druckt im selben Layout."
+    },
+    {
+      "name": "Barcode-Generator",
+      "shortDescription": "EAN-13-, Code-128- und QR-Codes erzeugen — als PNG oder PDF herunterladen."
+    },
+    {
+      "name": "Preisetiketten-Druck",
+      "shortDescription": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen drucken."
+    },
+    {
+      "name": "Bestandsbuch",
+      "shortDescription": "Aktuelle Bestände, Korrekturen und Bewegungshistorie — gemeinsam mit Ihrer Kasse."
+    },
+    {
+      "name": "Einkaufsbuch",
+      "shortDescription": "Lieferantenrechnungen erfassen und den Warenbestand mit einer Bestätigung aktualisieren."
+    },
+    {
+      "name": "Lieferantenbuch",
+      "shortDescription": "Alle Lieferanten an einem Ort — das Einkaufsbuch greift direkt darauf zu."
+    },
+    {
+      "name": "Ausgaben-Tracker",
+      "shortDescription": "Ausgaben nach Kategorie erfassen, mit Monatssummen und CSV-Export."
+    },
+    {
+      "name": "Kassenbuch",
+      "shortDescription": "Tägliche Ein- und Auszahlungen mit automatischem Anfangs- und Endbestand."
+    },
+    {
+      "name": "Gewinn-Dashboard",
+      "shortDescription": "Echter Gewinn aus Ihren eigenen Umsätzen, Warenkosten und Ausgaben."
+    },
+    {
+      "name": "Kundenkonto",
+      "shortDescription": "Digitales Anschreibebuch — Kredit, Zahlungen und Saldo je Kunde."
+    },
+    {
+      "name": "Terminbuch",
+      "shortDescription": "Tagesgenaue Buchungen mit Dauer, Status und Erfassung von Nichterscheinen."
+    },
+    {
+      "name": "Gutschriftengenerator",
+      "shortDescription": "Steuerfertige Gutschriften für Retouren und Rechnungskorrekturen. Sofort als PDF, ohne Anmeldung."
+    },
+    {
+      "name": "Belastungsanzeigen-Generator",
+      "shortDescription": "Belastungsanzeigen für Retouren, Minderlieferung und Preisdifferenzen. Sofort als PDF."
+    },
+    {
+      "name": "Bestellgenerator",
+      "shortDescription": "Einkäufe formell freigeben — Artikel, Preise, Liefertermin und Konditionen in einer Bestellung."
+    },
+    {
+      "name": "Auftragsgenerator",
+      "shortDescription": "Kundenaufträge vor dem Versand bestätigen — Artikel, Preise und Liefertermin in einem Dokument."
+    },
+    {
+      "name": "Kontenplan",
+      "shortDescription": "Kontenliste aus einer fertigen Vorlage für kleine Betriebe — Nummern, Arten, CSV-Export."
+    },
+    {
+      "name": "Buchungssatz",
+      "shortDescription": "Doppelte Buchführung mit automatischem Soll-Haben-Ausgleich. Speist Hauptbuch und Saldenliste."
+    },
+    {
+      "name": "Hauptbuch",
+      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt."
+    },
+    {
+      "name": "Bankabstimmung",
+      "shortDescription": "Kontoauszug mit Ihrer Buchhaltung abgleichen — offene Schecks, schwebende Einzahlungen, Gebühren."
+    },
+    {
+      "name": "Kontoauszug-Analyse",
+      "shortDescription": "Kontoauszüge privat im Browser auswerten, klassifizieren und prüfen."
+    },
+    {
+      "name": "Saldenliste",
+      "shortDescription": "Automatisch aus Ihren Buchungen — Nettosaldo jedes Kontos, summiert und geprüft."
+    },
+    {
+      "name": "Gewinn- und Verlustrechnung",
+      "shortDescription": "GuV erstellen — vom Umsatz zum Jahresüberschuss, Margen live berechnet. PDF oder CSV."
+    },
+    {
+      "name": "Bilanz",
+      "shortDescription": "Aktiva, Passiva und Eigenkapital mit laufender Bilanzprüfung. A4-Druck und CSV-Export."
+    },
+    {
+      "name": "Kapitalflussrechnung",
+      "shortDescription": "Operative, Investitions- und Finanzierungsflüsse vom Anfangs- zum Endbestand. Druck oder Export."
+    },
+    {
+      "name": "Kundenkontoauszug",
+      "shortDescription": "Kontoauszug je Kunde — Rechnungen, Zahlungen und laufender Saldo. Druck als PDF."
+    },
+    {
+      "name": "Offene-Posten-Liste",
+      "shortDescription": "Offene Kundenrechnungen nach Altersklassen — von aktuell bis 90+ Tage, je Kunde. CSV-Export."
+    },
+    {
+      "name": "Kreditoren-Altersstruktur",
+      "shortDescription": "Offene Lieferantenrechnungen nach Alter — die Richtigen zur richtigen Zeit bezahlen. CSV-Export."
+    },
+    {
+      "name": "Plan-Ist-Vergleich",
+      "shortDescription": "Plan und Realität je Kategorie, mit Abweichung und Abweichung % live. CSV-Export."
+    },
+    {
+      "name": "ABC-Analyse",
+      "shortDescription": "Bestand nach Jahresverbrauchswert in die Klassen A, B und C einteilen — die 80/15/5-Regel."
+    },
+    {
+      "name": "Lieferantenvergleich",
+      "shortDescription": "Lieferanten nach Preis, Lieferung, Zahlungsziel und Qualität gewichtet vergleichen."
+    }
+  ]
+}

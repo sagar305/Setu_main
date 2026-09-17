@@ -1,0 +1,159 @@
+{
+  "seo": {
+    "title": "Calculateurs gratuits pour restaurants & commerces | Setu",
+    "description": "Calculateurs en ligne gratuits pour les restaurants et petits commerces : GST, marge, taux de marque, seuil de rentabilité, coût matière et prêts.",
+    "keywords": [
+      "calculateurs de gestion",
+      "calculateurs pour restaurants",
+      "calculateur de GST",
+      "calculateur de marge bénéficiaire",
+      "calculateur de coût matière",
+      "calculateur de seuil de rentabilité",
+      "calculateur de mensualité de prêt",
+      "outils de gestion gratuits"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Calculateurs gratuits",
+    "headline": "Des calculateurs pensés pour les exploitants",
+    "subheadline": "Des outils rapides et gratuits pour les chiffres que vous suivez chaque semaine : prix, marges, taxes et plus. Sans inscription, juste des réponses."
+  },
+  "ctaBanner": {
+    "headline": "Envie que les chiffres se suivent tout seuls ?",
+    "subtext": "Setu Dine suit automatiquement ventes, coûts et taxes : moins de temps sur les calculateurs, plus de temps pour votre affaire.",
+    "cta": {
+      "label": "Découvrir Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Prix et rentabilité"
+    },
+    {
+      "name": "Exploitation de restaurant"
+    },
+    {
+      "name": "Exploitation de commerce"
+    },
+    {
+      "name": "Fiscalité et finance"
+    },
+    {
+      "name": "Croissance et marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "Calculateur de GST",
+      "shortDescription": "Ajoutez ou retirez la GST d'un montant en un clic, pour n'importe quel taux."
+    },
+    {
+      "name": "Calculateur de marge bénéficiaire",
+      "shortDescription": "Calculez votre marge bénéficiaire et votre taux de marque à partir du coût et du prix de vente."
+    },
+    {
+      "name": "Calculateur de taux de marque",
+      "shortDescription": "Trouvez le prix de vente nécessaire pour atteindre un taux de marque cible sur le coût."
+    },
+    {
+      "name": "Calculateur de seuil de rentabilité",
+      "shortDescription": "Découvrez combien d'unités vous devez vendre pour couvrir vos coûts."
+    },
+    {
+      "name": "Calculateur de ratio de coût matière",
+      "shortDescription": "Vérifiez si le coût des ingrédients d'un plat reste sain par rapport à son prix au menu."
+    },
+    {
+      "name": "Calculateur de remise",
+      "shortDescription": "Calculez le prix final et l'économie réalisée pour n'importe quelle remise ou offre."
+    },
+    {
+      "name": "Calculateur de mensualité de prêt",
+      "shortDescription": "Estimez votre mensualité, les intérêts totaux et le coût total d'un prêt professionnel."
+    },
+    {
+      "name": "Calculateur de rotation des tables",
+      "shortDescription": "Voyez combien de fois chaque table tourne pendant le service et votre durée moyenne de rotation."
+    },
+    {
+      "name": "Calculateur de salaire net",
+      "shortDescription": "Voyez votre salaire net mensuel après cotisations, impôts et autres retenues sur le package."
+    },
+    {
+      "name": "Calculateur d'impôt sur le revenu",
+      "shortDescription": "Estimez l'impôt sur le revenu selon l'ancien ou le nouveau régime pour l'exercice 2025-26."
+    },
+    {
+      "name": "Calculateur de prime de fin de service",
+      "shortDescription": "Estimez la prime due selon la loi indienne, à partir du salaire et des années de service."
+    },
+    {
+      "name": "Calculateur de commission des commandes en ligne",
+      "shortDescription": "Voyez votre versement réel après commission de plateforme, emballage et frais de paiement."
+    },
+    {
+      "name": "Calculateur de prix au menu en ligne",
+      "shortDescription": "Trouvez le prix à publier sur les applis de livraison pour conserver votre montant cible après commission et taxes."
+    },
+    {
+      "name": "Calculateur de coût de recette",
+      "shortDescription": "Chiffrez une recette ingrédient par ingrédient pour connaître le vrai coût par portion."
+    },
+    {
+      "name": "Calculateur de coût des boissons",
+      "shortDescription": "Trouvez votre ratio de coût par verre et le bénéfice de chaque boisson servie."
+    },
+    {
+      "name": "Calculateur de partage des pourboires",
+      "shortDescription": "Répartissez équitablement la cagnotte de pourboires par heures, parts ou à parts égales."
+    },
+    {
+      "name": "Calculateur de rotation des stocks",
+      "shortDescription": "Découvrez combien de fois votre stock tourne sur une période et combien de jours de stock vous détenez."
+    },
+    {
+      "name": "Calculateur de point de commande",
+      "shortDescription": "Trouvez le niveau de stock exact qui doit déclencher votre prochaine commande."
+    },
+    {
+      "name": "Calculateur du coût d'acquisition client (CAC)",
+      "shortDescription": "Découvrez exactement combien vous dépensez pour acquérir chaque nouveau client."
+    },
+    {
+      "name": "Calculateur du panier moyen (AOV)",
+      "shortDescription": "Trouvez votre panier moyen et voyez l'effet sur le chiffre d'affaires si vous l'augmentez."
+    },
+    {
+      "name": "Calculateur d'ingénierie du menu",
+      "shortDescription": "Analysez vos plats par rentabilité et popularité pour repérer étoiles, vaches à lait, énigmes et poids morts."
+    },
+    {
+      "name": "Calculateur de TVA",
+      "shortDescription": "Ajoutez la TVA à un prix HT ou extrayez-la d'un montant TTC, pour n'importe quel taux."
+    },
+    {
+      "name": "Calculateur de taxe de vente",
+      "shortDescription": "Calculez la sales tax américaine : cumulez taux d'État et taux locaux, ajoutez-la ou extrayez-la."
+    },
+    {
+      "name": "Calculateur de ROI",
+      "shortDescription": "Mesurez le retour sur investissement : bénéfice net, ROI en % et rendement annualisé d'une dépense."
+    },
+    {
+      "name": "Calculateur d'amortissement",
+      "shortDescription": "Amortissement linéaire ou dégressif, avec un tableau complet année par année."
+    },
+    {
+      "name": "Calculateur de délais de paiement",
+      "shortDescription": "Échéances des conditions de paiement, économies d'escompte et coût réel d'un retard."
+    },
+    {
+      "name": "Calculateur d'écart sur prix d'achat",
+      "shortDescription": "Comparez prix d'achat réels et standards et voyez l'écart total instantanément."
+    },
+    {
+      "name": "Calculateur de ratios financiers",
+      "shortDescription": "Ratios de liquidité, d'endettement, de marge et d'efficacité à partir de votre bilan et de votre compte de résultat."
+    }
+  ]
+}

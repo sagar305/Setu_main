@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "Alat bisnis gratis untuk restoran & ritel | Setu",
+    "description": "Alat bisnis online gratis untuk restoran dan usaha kecil — pembuat faktur, kalkulator, dan banyak lagi. Tanpa perlu mendaftar akun apa pun.",
+    "keywords": [
+      "alat bisnis",
+      "alat bisnis gratis",
+      "pembuat faktur",
+      "alat restoran",
+      "alat usaha kecil"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Alat gratis",
+    "headline": "Alat untuk menjalankan usaha Anda",
+    "subheadline": "Alat gratis tanpa pendaftaran, dibuat untuk pengelola restoran dan ritel — faktur, kalkulator, dan lainnya."
+  },
+  "ctaBanner": {
+    "headline": "Ingin angkanya terhitung sendiri?",
+    "subtext": "Setu Dine melacak penjualan, biaya, dan pajak secara otomatis, agar waktu Anda lebih banyak untuk usaha daripada untuk kalkulator.",
+    "cta": {
+      "label": "Jelajahi Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Penyiapan usaha"
+    },
+    {
+      "name": "Kasir"
+    },
+    {
+      "name": "Faktur"
+    },
+    {
+      "name": "Pembayaran"
+    },
+    {
+      "name": "Menu"
+    },
+    {
+      "name": "Produk dan label"
+    },
+    {
+      "name": "Persediaan dan pembelian"
+    },
+    {
+      "name": "Keuangan"
+    },
+    {
+      "name": "Pelanggan"
+    },
+    {
+      "name": "Janji temu"
+    },
+    {
+      "name": "Dokumen usaha"
+    },
+    {
+      "name": "Pembukuan"
+    },
+    {
+      "name": "Laporan keuangan"
+    },
+    {
+      "name": "Analisis keuangan"
+    }
+  ],
+  "items": [
+    {
+      "name": "Kasir berbasis browser",
+      "shortDescription": "POS gratis yang jalan offline di browser — penjualan, stok, pelanggan, dan struk. Tanpa login."
+    },
+    {
+      "name": "Pembuat faktur",
+      "shortDescription": "Buat, sesuaikan, dan unduh faktur profesional lengkap dengan dukungan pajak."
+    },
+    {
+      "name": "Pembuat QR UPI dinamis",
+      "shortDescription": "Buat kode QR UPI dinamis dengan nominal dan catatan khusus untuk pembayaran instan."
+    },
+    {
+      "name": "Pembuat menu QR",
+      "shortDescription": "Buat kode QR menu digital — seluruh menu tersimpan di dalam QR, tanpa perlu hosting."
+    },
+    {
+      "name": "Pembuat penawaran",
+      "shortDescription": "Penawaran profesional dengan masa berlaku dan pelacakan status — cetak atau PDF."
+    },
+    {
+      "name": "Profil usaha",
+      "shortDescription": "Simpan detail usaha Anda sekali — setiap alat Setu memakainya secara otomatis."
+    },
+    {
+      "name": "Pembuat struk",
+      "shortDescription": "Rancang struk, isi transaksi, lalu cetak — POS browser pun mencetak dengan rancangan yang sama."
+    },
+    {
+      "name": "Pembuat barcode",
+      "shortDescription": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF."
+    },
+    {
+      "name": "Pencetak label harga",
+      "shortDescription": "Cetak label harga dan barcode di lembar A4 atau gulungan termal."
+    },
+    {
+      "name": "Buku stok",
+      "shortDescription": "Level stok langsung, penyesuaian, dan riwayat pergerakan — dipakai bersama POS Anda."
+    },
+    {
+      "name": "Buku pembelian",
+      "shortDescription": "Catat tagihan pemasok dan perbarui stok produk dengan satu konfirmasi."
+    },
+    {
+      "name": "Buku pemasok",
+      "shortDescription": "Semua pemasok Anda di satu tempat — dipakai ulang oleh buku pembelian."
+    },
+    {
+      "name": "Pelacak pengeluaran",
+      "shortDescription": "Lacak pengeluaran per kategori dengan total bulanan dan ekspor CSV."
+    },
+    {
+      "name": "Buku kas",
+      "shortDescription": "Kas masuk dan keluar harian dengan saldo awal dan akhir otomatis."
+    },
+    {
+      "name": "Dasbor laba",
+      "shortDescription": "Laba nyata dari penjualan, biaya produk, dan pengeluaran Anda sendiri."
+    },
+    {
+      "name": "Buku piutang pelanggan",
+      "shortDescription": "Buku utang digital — kredit, pembayaran, dan saldo tiap pelanggan."
+    },
+    {
+      "name": "Buku janji temu",
+      "shortDescription": "Pemesanan harian lengkap dengan durasi, status, dan catatan tidak hadir."
+    },
+    {
+      "name": "Pembuat nota kredit",
+      "shortDescription": "Terbitkan nota kredit siap pajak untuk retur dan koreksi tagihan. PDF seketika, tanpa daftar."
+    },
+    {
+      "name": "Pembuat nota debit",
+      "shortDescription": "Buat nota debit untuk retur pembelian, kekurangan kiriman, dan selisih harga. PDF seketika."
+    },
+    {
+      "name": "Pembuat purchase order",
+      "shortDescription": "Sahkan pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syarat dalam satu PO."
+    },
+    {
+      "name": "Pembuat sales order",
+      "shortDescription": "Kunci pesanan pelanggan sebelum dikirim — barang, harga, dan tanggal kirim dalam satu dokumen."
+    },
+    {
+      "name": "Bagan akun",
+      "shortDescription": "Susun daftar akun dari templat usaha kecil siap pakai — kode, jenis, dan ekspor CSV."
+    },
+    {
+      "name": "Jurnal umum",
+      "shortDescription": "Pembukuan berpasangan dengan debit/kredit seimbang otomatis. Mengisi buku besar dan neraca saldo."
+    },
+    {
+      "name": "Buku besar",
+      "shortDescription": "Buku besar per akun dengan saldo berjalan, tersusun otomatis dari jurnal Anda."
+    },
+    {
+      "name": "Rekonsiliasi bank",
+      "shortDescription": "Cocokkan rekening koran dengan pembukuan Anda — cek belum cair, setoran dalam perjalanan, biaya."
+    },
+    {
+      "name": "Penganalisis rekening koran",
+      "shortDescription": "Analisis, klasifikasikan, dan periksa rekening koran secara privat di browser Anda."
+    },
+    {
+      "name": "Neraca saldo",
+      "shortDescription": "Tersusun otomatis dari jurnal — saldo bersih tiap akun, dijumlah dan diperiksa."
+    },
+    {
+      "name": "Laporan laba rugi",
+      "shortDescription": "Susun laporan laba rugi — dari pendapatan ke laba bersih dengan margin langsung. PDF atau CSV."
+    },
+    {
+      "name": "Neraca",
+      "shortDescription": "Aset, liabilitas, dan ekuitas dengan pemeriksaan keseimbangan langsung. Cetak A4 dan ekspor CSV."
+    },
+    {
+      "name": "Laporan arus kas",
+      "shortDescription": "Arus operasi, investasi, dan pendanaan dari kas awal sampai akhir. Cetak atau ekspor."
+    },
+    {
+      "name": "Laporan akun pelanggan",
+      "shortDescription": "Laporan akun per pelanggan — faktur, pembayaran, dan saldo berjalan. Cetak ke PDF."
+    },
+    {
+      "name": "Laporan umur piutang",
+      "shortDescription": "Faktur pelanggan belum dibayar per rentang umur — lancar sampai 90+ hari. Ekspor CSV."
+    },
+    {
+      "name": "Umur utang usaha",
+      "shortDescription": "Tagihan pemasok belum dibayar dikelompokkan per umur — bayar yang tepat pada waktu yang tepat. Ekspor CSV."
+    },
+    {
+      "name": "Anggaran vs realisasi",
+      "shortDescription": "Rencana dan kenyataan per kategori dengan selisih dan selisih % dihitung langsung. Ekspor CSV."
+    },
+    {
+      "name": "Analisis ABC",
+      "shortDescription": "Kelompokkan persediaan ke kelas A, B, dan C berdasarkan nilai pemakaian tahunan — aturan 80/15/5."
+    },
+    {
+      "name": "Perbandingan pemasok",
+      "shortDescription": "Bandingkan pemasok dari harga, pengiriman, tempo, dan mutu dengan skor berbobot."
+    }
+  ]
+}

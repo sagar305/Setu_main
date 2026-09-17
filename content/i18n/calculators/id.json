@@ -1,0 +1,159 @@
+{
+  "seo": {
+    "title": "Kalkulator bisnis gratis untuk restoran & ritel | Setu",
+    "description": "Kalkulator online gratis untuk restoran dan usaha kecil: GST, margin laba, markup, titik impas, biaya bahan makanan, diskon, dan cicilan pinjaman.",
+    "keywords": [
+      "kalkulator bisnis",
+      "kalkulator restoran",
+      "kalkulator GST",
+      "kalkulator margin laba",
+      "kalkulator biaya bahan makanan",
+      "kalkulator titik impas",
+      "kalkulator cicilan pinjaman",
+      "alat bisnis gratis"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kalkulator gratis",
+    "headline": "Kalkulator bisnis, dibuat untuk pelaku usaha",
+    "subheadline": "Alat cepat dan gratis untuk angka yang Anda cek tiap minggu — harga, margin, pajak, dan lainnya. Tanpa daftar, langsung jawaban."
+  },
+  "ctaBanner": {
+    "headline": "Ingin angkanya terhitung sendiri?",
+    "subtext": "Setu Dine melacak penjualan, biaya, dan pajak secara otomatis, agar waktu Anda lebih banyak untuk usaha daripada untuk kalkulator.",
+    "cta": {
+      "label": "Jelajahi Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Harga dan laba"
+    },
+    {
+      "name": "Operasional restoran"
+    },
+    {
+      "name": "Operasional ritel"
+    },
+    {
+      "name": "Pajak dan keuangan"
+    },
+    {
+      "name": "Pertumbuhan dan pemasaran"
+    }
+  ],
+  "items": [
+    {
+      "name": "Kalkulator GST",
+      "shortDescription": "Tambah atau keluarkan GST dari nominal apa pun dalam sekali ketuk, untuk semua tarif."
+    },
+    {
+      "name": "Kalkulator margin laba",
+      "shortDescription": "Hitung margin laba dan persen markup Anda dari biaya dan harga jual."
+    },
+    {
+      "name": "Kalkulator markup",
+      "shortDescription": "Temukan harga jual yang dibutuhkan untuk mencapai target markup atas biaya."
+    },
+    {
+      "name": "Kalkulator titik impas",
+      "shortDescription": "Cari tahu berapa unit yang harus terjual untuk menutup seluruh biaya Anda."
+    },
+    {
+      "name": "Kalkulator persentase biaya bahan makanan",
+      "shortDescription": "Cek apakah biaya bahan sebuah menu masih wajar dibanding harga jualnya."
+    },
+    {
+      "name": "Kalkulator diskon",
+      "shortDescription": "Hitung harga akhir dan penghematan untuk diskon atau promo apa pun."
+    },
+    {
+      "name": "Kalkulator cicilan pinjaman usaha",
+      "shortDescription": "Perkirakan cicilan bulanan, total bunga, dan total pembayaran pinjaman usaha."
+    },
+    {
+      "name": "Kalkulator tingkat perputaran meja",
+      "shortDescription": "Lihat berapa kali tiap meja berganti tamu selama layanan, dan rata-rata durasinya."
+    },
+    {
+      "name": "Kalkulator gaji bersih",
+      "shortDescription": "Lihat gaji bersih bulanan setelah dana pensiun, pajak profesi, dan potongan lain dari CTC."
+    },
+    {
+      "name": "Kalkulator pajak penghasilan",
+      "shortDescription": "Perkirakan pajak penghasilan skema lama dan baru untuk tahun fiskal 2025-26."
+    },
+    {
+      "name": "Kalkulator uang penghargaan masa kerja",
+      "shortDescription": "Perkirakan uang penghargaan yang jadi hak Anda dari gaji dan masa kerja."
+    },
+    {
+      "name": "Kalkulator komisi pesanan online",
+      "shortDescription": "Lihat penerimaan nyata Anda setelah komisi platform, kemasan, dan biaya payment gateway."
+    },
+    {
+      "name": "Kalkulator harga menu online",
+      "shortDescription": "Temukan harga yang perlu dipasang di aplikasi pesan antar agar target Anda tetap utuh setelah komisi dan pajak."
+    },
+    {
+      "name": "Kalkulator biaya resep",
+      "shortDescription": "Hitung biaya resep bahan per bahan untuk tahu biaya asli per porsi."
+    },
+    {
+      "name": "Kalkulator pour cost minuman",
+      "shortDescription": "Temukan persentase pour cost dan laba di setiap gelas yang Anda sajikan."
+    },
+    {
+      "name": "Kalkulator bagi tip",
+      "shortDescription": "Bagi kumpulan tip secara adil ke staf berdasarkan jam kerja, bagian, atau rata."
+    },
+    {
+      "name": "Kalkulator perputaran persediaan",
+      "shortDescription": "Cari tahu berapa kali stok Anda terjual dalam satu periode, dan berapa hari stok tersisa."
+    },
+    {
+      "name": "Kalkulator titik pemesanan ulang",
+      "shortDescription": "Temukan level stok pasti yang harus memicu pemesanan berikutnya."
+    },
+    {
+      "name": "Kalkulator biaya akuisisi pelanggan (CAC)",
+      "shortDescription": "Cari tahu persis berapa biaya Anda untuk mendapatkan setiap pelanggan baru."
+    },
+    {
+      "name": "Kalkulator nilai pesanan rata-rata (AOV)",
+      "shortDescription": "Temukan nilai pesanan rata-rata Anda, dan dampaknya ke pendapatan bila dinaikkan."
+    },
+    {
+      "name": "Kalkulator menu engineering",
+      "shortDescription": "Analisis menu berdasarkan laba dan popularitas untuk menemukan star, cash cow, puzzle, dan dog."
+    },
+    {
+      "name": "Kalkulator PPN",
+      "shortDescription": "Tambahkan PPN ke harga neto atau keluarkan PPN dari nominal bruto, untuk tarif mana pun."
+    },
+    {
+      "name": "Kalkulator pajak penjualan",
+      "shortDescription": "Hitung sales tax ala AS: gabungkan tarif negara bagian dan lokal, tambahkan atau keluarkan."
+    },
+    {
+      "name": "Kalkulator ROI",
+      "shortDescription": "Ukur imbal hasil investasi: laba bersih, ROI persen, dan imbal hasil tahunan tiap pengeluaran."
+    },
+    {
+      "name": "Kalkulator penyusutan",
+      "shortDescription": "Penyusutan garis lurus atau saldo menurun lengkap dengan jadwal tahun per tahun."
+    },
+    {
+      "name": "Kalkulator termin pembayaran",
+      "shortDescription": "Tanggal jatuh tempo, hemat diskon bayar cepat, dan biaya nyata dari telat membayar."
+    },
+    {
+      "name": "Kalkulator selisih harga pembelian",
+      "shortDescription": "Bandingkan harga beli aktual dan standar, lalu lihat total selisihnya seketika."
+    },
+    {
+      "name": "Kalkulator rasio keuangan",
+      "shortDescription": "Rasio likuiditas, leverage, margin, dan efisiensi dari neraca serta laporan laba rugi."
+    }
+  ]
+}

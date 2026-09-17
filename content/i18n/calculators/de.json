@@ -1,0 +1,159 @@
+{
+  "seo": {
+    "title": "Kostenlose Rechner für Gastronomie & Handel | Setu",
+    "description": "Kostenlose Online-Rechner für Gastronomie und kleine Betriebe: GST, Gewinnmarge, Aufschlag, Break-even, Wareneinsatz, Rabatte und Kreditraten.",
+    "keywords": [
+      "Rechner für Unternehmen",
+      "Rechner für Gastronomie",
+      "GST-Rechner",
+      "Gewinnmargen-Rechner",
+      "Wareneinsatz-Rechner",
+      "Break-even-Rechner",
+      "Kreditraten-Rechner",
+      "kostenlose Business-Tools"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kostenlose Rechner",
+    "headline": "Rechner für alle, die den Laden führen",
+    "subheadline": "Schnelle, kostenlose Tools für die Zahlen, die Sie jede Woche prüfen — Preise, Margen, Steuern und mehr. Ohne Anmeldung, einfach Antworten."
+  },
+  "ctaBanner": {
+    "headline": "Sollen sich die Zahlen selbst führen?",
+    "subtext": "Setu Dine erfasst Umsätze, Kosten und Steuern automatisch — weniger Zeit für Rechner, mehr Zeit für Ihren Betrieb.",
+    "cta": {
+      "label": "Setu Dine entdecken"
+    }
+  },
+  "categories": [
+    {
+      "name": "Preis und Gewinn"
+    },
+    {
+      "name": "Gastronomiebetrieb"
+    },
+    {
+      "name": "Einzelhandelsbetrieb"
+    },
+    {
+      "name": "Steuern und Finanzen"
+    },
+    {
+      "name": "Wachstum und Marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "GST-Rechner",
+      "shortDescription": "GST mit einem Tipp zu jedem Betrag addieren oder herausrechnen, für jeden Steuersatz."
+    },
+    {
+      "name": "Gewinnmargen-Rechner",
+      "shortDescription": "Ermitteln Sie Gewinnmarge und Aufschlag in Prozent aus Kosten und Verkaufspreis."
+    },
+    {
+      "name": "Aufschlagsrechner",
+      "shortDescription": "Finden Sie den Verkaufspreis, den Sie für einen Zielaufschlag auf die Kosten brauchen."
+    },
+    {
+      "name": "Break-even-Rechner",
+      "shortDescription": "Finden Sie heraus, wie viele Einheiten Sie verkaufen müssen, um Ihre Kosten zu decken."
+    },
+    {
+      "name": "Wareneinsatz-Rechner",
+      "shortDescription": "Prüfen Sie, ob der Wareneinsatz eines Gerichts zum Menüpreis in einem gesunden Rahmen liegt."
+    },
+    {
+      "name": "Rabattrechner",
+      "shortDescription": "Berechnen Sie Endpreis und Ersparnis für jeden Rabatt oder jedes Angebot."
+    },
+    {
+      "name": "Kreditraten-Rechner",
+      "shortDescription": "Schätzen Sie Monatsrate, Gesamtzinsen und Gesamtzahlung eines Geschäftskredits."
+    },
+    {
+      "name": "Tischauslastungs-Rechner",
+      "shortDescription": "Sehen Sie, wie oft jeder Tisch im Service neu besetzt wird und wie lange eine Runde dauert."
+    },
+    {
+      "name": "Nettogehalts-Rechner",
+      "shortDescription": "Sehen Sie Ihr monatliches Nettogehalt nach Vorsorge, Berufssteuer und weiteren Abzügen."
+    },
+    {
+      "name": "Einkommensteuer-Rechner",
+      "shortDescription": "Schätzen Sie die Einkommensteuer nach altem und neuem Modell für das Steuerjahr 2025-26."
+    },
+    {
+      "name": "Abfindungsrechner",
+      "shortDescription": "Schätzen Sie die gesetzliche Abfindung aus Gehalt und Dienstjahren."
+    },
+    {
+      "name": "Provisionsrechner für Online-Bestellungen",
+      "shortDescription": "Sehen Sie Ihre echte Auszahlung nach Plattformprovision, Verpackung und Zahlungsgebühren."
+    },
+    {
+      "name": "Rechner für Online-Menüpreise",
+      "shortDescription": "Finden Sie den Preis für Lieferapps, damit nach Provision und Steuer Ihr Zielbetrag übrig bleibt."
+    },
+    {
+      "name": "Rezeptkalkulations-Rechner",
+      "shortDescription": "Kalkulieren Sie ein Rezept Zutat für Zutat und finden Sie die echten Kosten pro Portion."
+    },
+    {
+      "name": "Ausschankkosten-Rechner",
+      "shortDescription": "Ermitteln Sie Ihre Pour-Cost-Quote und den Gewinn bei jedem ausgeschenkten Drink."
+    },
+    {
+      "name": "Trinkgeld-Rechner",
+      "shortDescription": "Verteilen Sie den Trinkgeldtopf fair nach Stunden, Anteilen oder zu gleichen Teilen."
+    },
+    {
+      "name": "Lagerumschlags-Rechner",
+      "shortDescription": "Finden Sie heraus, wie oft Ihr Lager in einer Periode umschlägt und wie viele Tage Bestand Sie halten."
+    },
+    {
+      "name": "Meldebestands-Rechner",
+      "shortDescription": "Finden Sie den genauen Bestand, bei dem Sie neu bestellen sollten."
+    },
+    {
+      "name": "Rechner für Kundenakquisekosten (CAC)",
+      "shortDescription": "Finden Sie heraus, wie viel Sie genau für jeden neuen Kunden ausgeben."
+    },
+    {
+      "name": "Rechner für den durchschnittlichen Bestellwert (AOV)",
+      "shortDescription": "Ermitteln Sie Ihren Bestellwert und sehen Sie, was eine Steigerung beim Umsatz bringt."
+    },
+    {
+      "name": "Menu-Engineering-Rechner",
+      "shortDescription": "Analysieren Sie Gerichte nach Gewinn und Beliebtheit: Stars, Cash Cows, Puzzles und Poor Dogs."
+    },
+    {
+      "name": "Mehrwertsteuer-Rechner",
+      "shortDescription": "Mehrwertsteuer zum Nettopreis addieren oder aus dem Bruttobetrag herausrechnen, für jeden Satz."
+    },
+    {
+      "name": "Sales-Tax-Rechner",
+      "shortDescription": "Berechnen Sie US-Sales-Tax: Staats- und Kommunalsätze kombinieren, addieren oder herausrechnen."
+    },
+    {
+      "name": "ROI-Rechner",
+      "shortDescription": "Messen Sie die Rendite: Nettogewinn, ROI in Prozent und annualisierte Rendite jeder Ausgabe."
+    },
+    {
+      "name": "Abschreibungsrechner",
+      "shortDescription": "Lineare oder degressive Abschreibung mit vollständigem Plan Jahr für Jahr."
+    },
+    {
+      "name": "Zahlungsziel-Rechner",
+      "shortDescription": "Fälligkeiten, Skonto-Ersparnis und die echten Kosten verspäteter Zahlung."
+    },
+    {
+      "name": "Rechner für Einkaufspreisabweichung",
+      "shortDescription": "Vergleichen Sie tatsächliche und Standard-Einkaufspreise und sehen Sie die Abweichung sofort."
+    },
+    {
+      "name": "Finanzkennzahlen-Rechner",
+      "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV."
+    }
+  ]
+}

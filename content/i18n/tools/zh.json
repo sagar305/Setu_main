@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "餐饮与零售免费商用工具 | Setu",
+    "description": "为餐厅和小微企业提供的免费在线商用工具：发票生成器、各类计算器、账本与报表等等，全部无需注册即可直接使用。",
+    "keywords": [
+      "商用工具",
+      "免费商用工具",
+      "发票生成器",
+      "餐厅工具",
+      "小微企业工具"
+    ]
+  },
+  "hero": {
+    "eyebrow": "免费工具",
+    "headline": "帮你经营生意的工具",
+    "subheadline": "为餐厅和零售经营者打造的免费工具，无需注册——开票、计算器等等。"
+  },
+  "ctaBanner": {
+    "headline": "想让数字自己算好？",
+    "subtext": "Setu Dine 自动记录销售、成本和税费，让你少花时间在计算器上，多花时间在生意上。",
+    "cta": {
+      "label": "了解 Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "开店准备"
+    },
+    {
+      "name": "收银"
+    },
+    {
+      "name": "开票"
+    },
+    {
+      "name": "收款"
+    },
+    {
+      "name": "菜单"
+    },
+    {
+      "name": "商品与标签"
+    },
+    {
+      "name": "库存与采购"
+    },
+    {
+      "name": "财务"
+    },
+    {
+      "name": "客户"
+    },
+    {
+      "name": "预约"
+    },
+    {
+      "name": "业务单据"
+    },
+    {
+      "name": "记账"
+    },
+    {
+      "name": "财务报表"
+    },
+    {
+      "name": "财务分析"
+    }
+  ],
+  "items": [
+    {
+      "name": "浏览器收银台",
+      "shortDescription": "在浏览器里离线运行的免费收银系统——开单、库存、客户和小票。无需登录。"
+    },
+    {
+      "name": "发票生成器",
+      "shortDescription": "创建、自定义并下载支持税务的专业发票。"
+    },
+    {
+      "name": "动态 UPI 收款码生成器",
+      "shortDescription": "生成带金额和备注的动态 UPI 收款码，实现即时收款。"
+    },
+    {
+      "name": "菜单二维码生成器",
+      "shortDescription": "生成电子菜单二维码——整份菜单存在码里，无需托管。"
+    },
+    {
+      "name": "报价单生成器",
+      "shortDescription": "带有效期和状态跟踪的专业报价单——可打印或导出 PDF。"
+    },
+    {
+      "name": "商户资料",
+      "shortDescription": "商户信息只需保存一次——每个 Setu 工具都会自动沿用。"
+    },
+    {
+      "name": "小票生成器",
+      "shortDescription": "设计小票、录入销售并打印——浏览器收银台也用同一版式打印。"
+    },
+    {
+      "name": "条码生成器",
+      "shortDescription": "生成 EAN-13、Code 128 和二维码——可下载为 PNG 或 PDF。"
+    },
+    {
+      "name": "价格标签打印",
+      "shortDescription": "在 A4 纸或热敏纸卷上打印价格和条码标签。"
+    },
+    {
+      "name": "库存台账",
+      "shortDescription": "实时库存、调整记录和出入库历史——与收银台共用同一套数据。"
+    },
+    {
+      "name": "采购台账",
+      "shortDescription": "录入供应商账单，一次确认即可更新商品库存。"
+    },
+    {
+      "name": "供应商名册",
+      "shortDescription": "所有供应商集中一处——采购台账直接调用。"
+    },
+    {
+      "name": "支出记录",
+      "shortDescription": "按类别记录支出，带月度合计和 CSV 导出。"
+    },
+    {
+      "name": "现金日记账",
+      "shortDescription": "每日现金收支，自动计算期初和期末余额。"
+    },
+    {
+      "name": "利润看板",
+      "shortDescription": "基于你自己的销售、商品成本和支出算出的真实利润。"
+    },
+    {
+      "name": "客户往来账",
+      "shortDescription": "电子赊账本——每位客户的欠款、回款和余额。"
+    },
+    {
+      "name": "预约登记本",
+      "shortDescription": "按日预约管理，含时长、状态和爽约记录。"
+    },
+    {
+      "name": "贷项通知单生成器",
+      "shortDescription": "为退货和账单调整开具符合税务要求的贷项通知单。即时 PDF，无需注册。"
+    },
+    {
+      "name": "借项通知单生成器",
+      "shortDescription": "为采购退货、短交和价差开具借项通知单。即时 PDF。"
+    },
+    {
+      "name": "采购订单生成器",
+      "shortDescription": "正式确认向供应商的采购——商品、单价、交期和条款写在同一张采购单上。"
+    },
+    {
+      "name": "销售订单生成器",
+      "shortDescription": "发货前确认客户订单——商品、价格和交期写在同一份单据上。"
+    },
+    {
+      "name": "会计科目表",
+      "shortDescription": "从现成的小微企业模板搭建科目表——编码、类型和 CSV 导出。"
+    },
+    {
+      "name": "记账凭证",
+      "shortDescription": "借贷自动平衡的复式记账，直接汇入总账和试算表。"
+    },
+    {
+      "name": "总分类账",
+      "shortDescription": "按科目自动生成的分类账，附带逐笔累计余额。"
+    },
+    {
+      "name": "银行对账",
+      "shortDescription": "把银行流水与账簿核对——未兑现支票、在途存款和手续费。"
+    },
+    {
+      "name": "银行流水分析",
+      "shortDescription": "在浏览器里私密地分析、分类和复核银行流水。"
+    },
+    {
+      "name": "试算平衡表",
+      "shortDescription": "由凭证自动生成——每个科目的净额，合计并核验。"
+    },
+    {
+      "name": "利润表",
+      "shortDescription": "编制利润表——从收入到净利润，毛利率实时计算。可打印 PDF 或导出 CSV。"
+    },
+    {
+      "name": "资产负债表",
+      "shortDescription": "资产、负债和所有者权益，实时校验是否平衡。支持 A4 打印和 CSV 导出。"
+    },
+    {
+      "name": "现金流量表",
+      "shortDescription": "经营、投资和筹资活动现金流，从期初到期末。可打印或导出。"
+    },
+    {
+      "name": "客户对账单",
+      "shortDescription": "按客户出具对账单——发票、回款和累计余额。可打印为 PDF。"
+    },
+    {
+      "name": "应收账龄报告",
+      "shortDescription": "未收客户发票按账龄分档——从未逾期到 90 天以上，按客户列示。CSV 导出。"
+    },
+    {
+      "name": "应付账龄分析",
+      "shortDescription": "未付供应商账单按账龄分档——在对的时间付给对的人。CSV 导出。"
+    },
+    {
+      "name": "预算与实际对比",
+      "shortDescription": "按类别对比计划与实际，实时算出差异和差异率。CSV 导出。"
+    },
+    {
+      "name": "ABC 分析",
+      "shortDescription": "按年消耗金额把库存分为 A、B、C 三类——80/15/5 法则。"
+    },
+    {
+      "name": "供应商比价",
+      "shortDescription": "从价格、交付、账期和品质四方面加权打分比较供应商。"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "seo": {
+    "title": "Ferramentas grátis para restaurantes e lojas | Setu",
+    "description": "Ferramentas online gratuitas para restaurantes e pequenos negócios — gerador de faturas, calculadoras e muito mais. Sem precisar de cadastro.",
+    "keywords": [
+      "ferramentas para negócios",
+      "ferramentas grátis para negócios",
+      "gerador de faturas",
+      "ferramentas para restaurantes",
+      "ferramentas para pequenos negócios"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Ferramentas gratuitas",
+    "headline": "Ferramentas para tocar o seu negócio",
+    "subheadline": "Ferramentas gratuitas e sem cadastro, feitas para quem opera restaurantes e lojas — emissão de documentos, calculadoras e mais."
+  },
+  "ctaBanner": {
+    "headline": "Quer que os números se acompanhem sozinhos?",
+    "subtext": "O Setu Dine acompanha vendas, custos e impostos automaticamente, para você gastar menos tempo em calculadoras e mais tempo tocando o negócio.",
+    "cta": {
+      "label": "Conheça o Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Configuração do negócio"
+    },
+    {
+      "name": "Ponto de venda"
+    },
+    {
+      "name": "Faturamento"
+    },
+    {
+      "name": "Pagamento"
+    },
+    {
+      "name": "Cardápio"
+    },
+    {
+      "name": "Produtos e etiquetas"
+    },
+    {
+      "name": "Estoque e compras"
+    },
+    {
+      "name": "Finanças"
+    },
+    {
+      "name": "Clientes"
+    },
+    {
+      "name": "Agendamentos"
+    },
+    {
+      "name": "Documentos do negócio"
+    },
+    {
+      "name": "Contabilidade"
+    },
+    {
+      "name": "Demonstrações e relatórios"
+    },
+    {
+      "name": "Análise financeira"
+    }
+  ],
+  "items": [
+    {
+      "name": "PDV no navegador",
+      "shortDescription": "PDV gratuito que funciona offline no navegador — vendas, estoque, clientes e recibos. Sem login."
+    },
+    {
+      "name": "Gerador de faturas",
+      "shortDescription": "Crie, personalize e baixe faturas profissionais com suporte a impostos."
+    },
+    {
+      "name": "Gerador de QR UPI dinâmico",
+      "shortDescription": "Gere QR codes UPI dinâmicos com valores e observações para pagamentos instantâneos."
+    },
+    {
+      "name": "Gerador de cardápio QR",
+      "shortDescription": "Crie um QR code de cardápio digital — o cardápio inteiro fica dentro do QR, sem hospedagem."
+    },
+    {
+      "name": "Gerador de orçamentos",
+      "shortDescription": "Orçamentos profissionais com data de validade e acompanhamento de status — impressão ou PDF."
+    },
+    {
+      "name": "Perfil do negócio",
+      "shortDescription": "Salve os dados do seu negócio uma vez — toda ferramenta Setu reutiliza automaticamente."
+    },
+    {
+      "name": "Gerador de recibos",
+      "shortDescription": "Desenhe um recibo, lance a venda e imprima — o PDV do navegador imprime no mesmo desenho."
+    },
+    {
+      "name": "Gerador de códigos de barras",
+      "shortDescription": "Gere códigos EAN-13, Code 128 e QR — baixe como PNG ou PDF."
+    },
+    {
+      "name": "Impressora de etiquetas de preço",
+      "shortDescription": "Imprima etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas."
+    },
+    {
+      "name": "Registro de estoque",
+      "shortDescription": "Níveis de estoque ao vivo, ajustes e histórico de movimentação — compartilhado com o PDV."
+    },
+    {
+      "name": "Registro de compras",
+      "shortDescription": "Lance notas de fornecedores e atualize o estoque dos produtos com uma confirmação."
+    },
+    {
+      "name": "Livro de fornecedores",
+      "shortDescription": "Todos os seus fornecedores num só lugar — reaproveitado pelo registro de compras."
+    },
+    {
+      "name": "Controle de despesas",
+      "shortDescription": "Acompanhe despesas por categoria com totais mensais e exportação CSV."
+    },
+    {
+      "name": "Livro caixa",
+      "shortDescription": "Entradas e saídas diárias de caixa com saldos de abertura e fechamento automáticos."
+    },
+    {
+      "name": "Painel de lucro",
+      "shortDescription": "Lucro real a partir das suas vendas, custos de produto e despesas."
+    },
+    {
+      "name": "Razão de clientes",
+      "shortDescription": "Caderneta digital de fiado — crédito, pagamentos e saldo por cliente."
+    },
+    {
+      "name": "Agenda de atendimentos",
+      "shortDescription": "Reservas por dia com duração, status e registro de faltas."
+    },
+    {
+      "name": "Gerador de notas de crédito",
+      "shortDescription": "Emita notas de crédito para devoluções e ajustes de cobrança. PDF na hora, sem cadastro."
+    },
+    {
+      "name": "Gerador de notas de débito",
+      "shortDescription": "Crie notas de débito para devoluções de compra, falta de entrega e diferenças de preço. PDF na hora."
+    },
+    {
+      "name": "Gerador de ordem de compra",
+      "shortDescription": "Autorize compras de fornecedores formalmente — itens, preços, prazo e condições em uma OC."
+    },
+    {
+      "name": "Gerador de pedido de venda",
+      "shortDescription": "Confirme pedidos de clientes antes do envio — itens, preços e data de entrega num só documento."
+    },
+    {
+      "name": "Plano de contas",
+      "shortDescription": "Monte sua lista de contas a partir de um modelo pronto — códigos, tipos e exportação CSV."
+    },
+    {
+      "name": "Lançamento contábil",
+      "shortDescription": "Partidas dobradas com débito e crédito equilibrados automaticamente. Alimenta razão e balancete."
+    },
+    {
+      "name": "Livro razão",
+      "shortDescription": "Razões por conta com saldos correntes, montados automaticamente a partir dos lançamentos."
+    },
+    {
+      "name": "Conciliação bancária",
+      "shortDescription": "Concilie o extrato bancário com seus livros — cheques não compensados, depósitos em trânsito, tarifas."
+    },
+    {
+      "name": "Analisador de extrato bancário",
+      "shortDescription": "Analise, classifique e revise extratos bancários com privacidade no seu navegador."
+    },
+    {
+      "name": "Balancete de verificação",
+      "shortDescription": "Montado automaticamente dos lançamentos — saldo líquido de cada conta, somado e conferido."
+    },
+    {
+      "name": "Demonstração de resultado",
+      "shortDescription": "Monte a DRE — da receita ao lucro líquido com margens calculadas ao vivo. PDF ou CSV."
+    },
+    {
+      "name": "Balanço patrimonial",
+      "shortDescription": "Ativos, passivos e patrimônio com verificação de equilíbrio ao vivo. Impressão A4 e CSV."
+    },
+    {
+      "name": "Demonstração de fluxo de caixa",
+      "shortDescription": "Fluxos operacional, de investimento e de financiamento, do caixa inicial ao final. Imprima ou exporte."
+    },
+    {
+      "name": "Extrato do cliente",
+      "shortDescription": "Extrato de conta por cliente — faturas, pagamentos e saldo corrente. Imprima em PDF."
+    },
+    {
+      "name": "Relatório de aging de faturas",
+      "shortDescription": "Faturas em aberto por faixa de atraso — do corrente a 90+ dias, por cliente. Exportação CSV."
+    },
+    {
+      "name": "Aging de contas a pagar",
+      "shortDescription": "Contas de fornecedores em aberto por idade — pague as pessoas certas na hora certa. Exportação CSV."
+    },
+    {
+      "name": "Orçado vs realizado",
+      "shortDescription": "Plano e realidade por categoria, com variação e variação % calculadas ao vivo. Exportação CSV."
+    },
+    {
+      "name": "Análise ABC",
+      "shortDescription": "Classifique o estoque em A, B e C pelo valor de consumo anual — a regra 80/15/5."
+    },
+    {
+      "name": "Comparação de fornecedores",
+      "shortDescription": "Compare fornecedores em preço, entrega, prazo e qualidade com pontuação ponderada."
+    }
+  ]
+}

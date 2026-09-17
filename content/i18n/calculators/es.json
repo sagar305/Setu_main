@@ -1,0 +1,159 @@
+{
+  "seo": {
+    "title": "Calculadoras gratis para restaurantes y comercios | Setu",
+    "description": "Calculadoras online gratuitas para restaurantes y pequeños negocios: GST, margen de beneficio, markup, punto de equilibrio, coste de alimentos y cuotas.",
+    "keywords": [
+      "calculadoras de negocio",
+      "calculadoras para restaurantes",
+      "calculadora de GST",
+      "calculadora de margen de beneficio",
+      "calculadora de coste de alimentos",
+      "calculadora de punto de equilibrio",
+      "calculadora de cuota de préstamo",
+      "herramientas gratuitas para negocios"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Calculadoras gratuitas",
+    "headline": "Calculadoras de negocio, hechas para operadores",
+    "subheadline": "Herramientas rápidas y gratuitas para las cifras que revisas cada semana: precios, márgenes, impuestos y más. Sin registro, solo respuestas."
+  },
+  "ctaBanner": {
+    "headline": "¿Quieres que las cifras se calculen solas?",
+    "subtext": "Setu Dine registra ventas, costes e impuestos automáticamente, para que dediques menos tiempo a las calculadoras y más a tu negocio.",
+    "cta": {
+      "label": "Descubre Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Precios y beneficio"
+    },
+    {
+      "name": "Operativa de restaurantes"
+    },
+    {
+      "name": "Operativa de retail"
+    },
+    {
+      "name": "Impuestos y finanzas"
+    },
+    {
+      "name": "Crecimiento y marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "Calculadora de GST",
+      "shortDescription": "Añade o quita el GST de cualquier importe en un toque, para cualquier tramo impositivo."
+    },
+    {
+      "name": "Calculadora de margen de beneficio",
+      "shortDescription": "Calcula tu margen de beneficio y el % de markup a partir del coste y el precio de venta."
+    },
+    {
+      "name": "Calculadora de markup",
+      "shortDescription": "Encuentra el precio de venta necesario para alcanzar un markup objetivo sobre el coste."
+    },
+    {
+      "name": "Calculadora de punto de equilibrio",
+      "shortDescription": "Descubre cuántas unidades necesitas vender para cubrir tus costes."
+    },
+    {
+      "name": "Calculadora de porcentaje de coste de alimentos",
+      "shortDescription": "Comprueba si el coste de los ingredientes de un plato es razonable para su precio de carta."
+    },
+    {
+      "name": "Calculadora de descuentos",
+      "shortDescription": "Calcula el precio final y el ahorro de cualquier descuento u oferta."
+    },
+    {
+      "name": "Calculadora de cuota de préstamo (EMI)",
+      "shortDescription": "Estima la cuota mensual, los intereses totales y el pago total de un préstamo de negocio."
+    },
+    {
+      "name": "Calculadora de rotación de mesas",
+      "shortDescription": "Mira cuántas veces se ocupa cada mesa durante el servicio y tu tiempo medio de rotación."
+    },
+    {
+      "name": "Calculadora de sueldo neto",
+      "shortDescription": "Consulta tu sueldo neto mensual tras el fondo de pensiones, impuestos y otras deducciones del CTC."
+    },
+    {
+      "name": "Calculadora de impuesto sobre la renta",
+      "shortDescription": "Estima el impuesto sobre la renta con el régimen antiguo o el nuevo para el ejercicio 2025-26."
+    },
+    {
+      "name": "Calculadora de indemnización por servicio",
+      "shortDescription": "Estima la indemnización que corresponde según la ley india, a partir del sueldo y la antigüedad."
+    },
+    {
+      "name": "Calculadora de comisión de pedidos online",
+      "shortDescription": "Mira tu ingreso real tras la comisión de la plataforma, el envase y las tasas de la pasarela de pago."
+    },
+    {
+      "name": "Calculadora de precios de carta online",
+      "shortDescription": "Encuentra el precio a publicar en apps de reparto para conservar tu importe objetivo tras comisión e impuestos."
+    },
+    {
+      "name": "Calculadora de escandallo de recetas",
+      "shortDescription": "Calcula el coste de una receta ingrediente a ingrediente y halla el coste real por ración."
+    },
+    {
+      "name": "Calculadora de coste de bebidas servidas",
+      "shortDescription": "Halla tu porcentaje de coste por copa y el beneficio de cada bebida que sirves."
+    },
+    {
+      "name": "Calculadora de reparto de propinas",
+      "shortDescription": "Reparte un bote de propinas de forma justa por horas, partes o a partes iguales."
+    },
+    {
+      "name": "Calculadora de rotación de inventario",
+      "shortDescription": "Descubre cuántas veces rota tu inventario en un periodo y cuántos días de stock tienes."
+    },
+    {
+      "name": "Calculadora de punto de pedido",
+      "shortDescription": "Halla el nivel exacto de stock que debe activar tu próximo pedido."
+    },
+    {
+      "name": "Calculadora de coste de adquisición de clientes (CAC)",
+      "shortDescription": "Descubre exactamente cuánto gastas para conseguir cada nuevo cliente."
+    },
+    {
+      "name": "Calculadora de ticket medio (AOV)",
+      "shortDescription": "Halla tu valor medio de pedido y mira el impacto en ingresos de subirlo un poco."
+    },
+    {
+      "name": "Calculadora de ingeniería de menús",
+      "shortDescription": "Analiza tu carta por beneficio y popularidad para identificar estrellas, vacas, incógnitas y perros."
+    },
+    {
+      "name": "Calculadora de IVA",
+      "shortDescription": "Añade IVA a un precio neto o extrae el IVA de un importe bruto, para cualquier tipo del mundo."
+    },
+    {
+      "name": "Calculadora de impuesto sobre ventas",
+      "shortDescription": "Calcula el sales tax de EE. UU.: combina tipos estatales y locales, añádelo o extráelo de un total."
+    },
+    {
+      "name": "Calculadora de ROI",
+      "shortDescription": "Mide el retorno de la inversión: beneficio neto, % de ROI y rentabilidad anualizada de cualquier gasto."
+    },
+    {
+      "name": "Calculadora de amortización",
+      "shortDescription": "Amortización lineal o por valor decreciente con un cuadro completo año por año."
+    },
+    {
+      "name": "Calculadora de plazos de pago",
+      "shortDescription": "Fechas de vencimiento, ahorro por pronto pago y el coste real de pagar tarde."
+    },
+    {
+      "name": "Calculadora de desviación de precio de compra",
+      "shortDescription": "Compara precios de compra reales y estándar y ve la desviación total al instante."
+    },
+    {
+      "name": "Calculadora de ratios financieros",
+      "shortDescription": "Ratios de liquidez, apalancamiento, margen y eficiencia a partir de tu balance y tu cuenta de resultados."
+    }
+  ]
+}
