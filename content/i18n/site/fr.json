@@ -1,16 +1,35 @@
 {
   "nav": {
     "links": [
-      { "label": "Produits" },
-      { "label": "Conseil" },
-      { "label": "Calculatrices" },
-      { "label": "Outils" },
-      { "label": "À propos" },
-      { "label": "Blog" },
-      { "label": "Contact" }
+      {
+        "label": "Produits"
+      },
+      {
+        "label": "Conseil"
+      },
+      {
+        "label": "Calculatrices"
+      },
+      {
+        "label": "Outils"
+      },
+      {
+        "label": "À propos"
+      },
+      {
+        "label": "Blog"
+      },
+      {
+        "label": "Contact"
+      }
     ],
-    "cta": { "label": "Parlez-nous" },
-    "menu": { "open": "Ouvrir le menu", "close": "Fermer le menu" }
+    "cta": {
+      "label": "Parlez-nous"
+    },
+    "menu": {
+      "open": "Ouvrir le menu",
+      "close": "Fermer le menu"
+    }
   },
   "footer": {
     "description": "Setu Technology crée des logiciels concrets, pensés d'abord pour ceux qui tiennent la boutique, partout dans le monde.",
@@ -18,54 +37,111 @@
       {
         "heading": "Produits",
         "links": [
-          { "label": "Caisse dans le navigateur (gratuit)" },
-          { "label": "Analyseur de relevés bancaires (gratuit)" },
-          { "label": "Free Dine — caisse de restaurant (gratuit)" },
-          { "label": "Gestion des cours particuliers (gratuit)" },
-          { "label": "Gestion de cabinet (gratuit)" },
+          {
+            "label": "Caisse dans le navigateur (gratuit)"
+          },
+          {
+            "label": "Analyseur de relevés bancaires (gratuit)"
+          },
+          {
+            "label": "Free Dine — caisse de restaurant (gratuit)"
+          },
+          {
+            "label": "Gestion des cours particuliers (gratuit)"
+          },
+          {
+            "label": "Gestion de cabinet (gratuit)"
+          },
           {},
-          { "label": "Tous les produits" }
+          {
+            "label": "Tous les produits"
+          }
         ]
       },
       {
         "heading": "Entreprise",
         "links": [
-          { "label": "À propos" },
-          { "label": "Équipe" },
-          { "label": "Conseil" },
-          { "label": "Blog" },
-          { "label": "Glossaire" },
-          { "label": "Contact" }
+          {
+            "label": "À propos"
+          },
+          {
+            "label": "Équipe"
+          },
+          {
+            "label": "Conseil"
+          },
+          {
+            "label": "Blog"
+          },
+          {
+            "label": "Glossaire"
+          },
+          {
+            "label": "Contact"
+          }
         ]
       },
       {
         "heading": "Outils",
         "links": [
-          { "label": "Tous les outils" },
-          { "label": "Générateur de factures" },
-          { "label": "Générateur de carte QR" },
-          { "label": "Générateur de QR de paiement" },
-          { "label": "Générateur de codes-barres" }
+          {
+            "label": "Tous les outils"
+          },
+          {
+            "label": "Générateur de factures"
+          },
+          {
+            "label": "Générateur de carte QR"
+          },
+          {
+            "label": "Générateur de QR de paiement"
+          },
+          {
+            "label": "Générateur de codes-barres"
+          }
         ]
       },
       {
         "heading": "Calculatrices",
         "links": [
-          { "label": "Toutes les calculatrices" },
-          { "label": "Calculatrice de GST" },
-          { "label": "Calculatrice de marge" },
-          { "label": "Calculatrice d'impôt sur le revenu" },
-          { "label": "Calculatrice de mensualité" }
+          {
+            "label": "Toutes les calculatrices"
+          },
+          {
+            "label": "Calculatrice de GST"
+          },
+          {
+            "label": "Calculatrice de marge"
+          },
+          {
+            "label": "Calculatrice d'impôt sur le revenu"
+          },
+          {
+            "label": "Calculatrice de mensualité"
+          }
         ]
       }
     ],
     "legal": [
-      { "label": "Tarifs" },
-      { "label": "Équipe" },
-      { "label": "Plan du site" },
-      { "label": "Confidentialité" },
-      { "label": "Conditions" }
+      {
+        "label": "Tarifs"
+      },
+      {
+        "label": "Équipe"
+      },
+      {
+        "label": "Plan du site"
+      },
+      {
+        "label": "Confidentialité"
+      },
+      {
+        "label": "Conditions"
+      }
     ],
     "copyright": "© 2026 Setu Technology. Fabriqué en Inde."
+  },
+  "languageLinks": {
+    "headline": "Setu dans votre langue"
   }
 }

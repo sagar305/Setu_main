@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run check:pricing && npm run check:dine && next build && npm run check:seo",
+    "build": "npm run check:pricing && npm run check:dine && npm run check:translations && next build && npm run check:seo",
     "build:only": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -14,7 +14,9 @@
     "check:post-dates": "node scripts/sync-post-dates.mjs --check",
     "check:dine": "node scripts/check-dine.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "sync:translations": "node scripts/sync-translations.mjs",
+    "check:translations": "node scripts/sync-translations.mjs --check"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.2.0",

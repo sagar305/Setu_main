@@ -19,6 +19,8 @@ import toolsData from "@/content/en/tools.json";
 import consultancyData from "@/content/en/consultancy.json";
 import teamData from "@/content/en/team.json";
 import pricingData from "@/content/en/pricing.json";
+import privacyData from "@/content/en/privacy.json";
+import termsData from "@/content/en/terms.json";
 
 export type Cta = { label: string; href: string };
 
@@ -38,6 +40,36 @@ export type CalculatorItem = CalculatorsContent["items"][number];
 export type ToolsContent = typeof toolsData;
 export type ToolItem = ToolsContent["items"][number];
 export type ConsultancyContent = typeof consultancyData;
+
+/**
+ * The privacy policy and the terms of use share a shape — a hero, a date and a
+ * run of headed sections — so one type and one component cover both. Sections
+ * carry optional `paragraphs`, `list` and `optOut`, which is why the type is
+ * written out rather than inferred from one of the two files.
+ */
+export type LegalSection = {
+  id: string;
+  heading: string;
+  paragraphs?: string[];
+  list?: string[];
+  optOut?: boolean;
+};
+
+export type LegalContent = {
+  seo: { title: string; description: string };
+  hero: { eyebrow: string; headline: string; subheadline: string };
+  lastUpdated: string;
+  translationNote: string;
+  sections: LegalSection[];
+};
+
+export function getPrivacyContent(): LegalContent {
+  return privacyData as LegalContent;
+}
+
+export function getTermsContent(): LegalContent {
+  return termsData as LegalContent;
+}
 
 export function getSiteContent(): SiteContent {
   return siteData;

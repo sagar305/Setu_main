@@ -3,23 +3,23 @@
 import { usePathname, useRouter } from "next/navigation";
 import { Globe } from "lucide-react";
 import { LANGUAGES, useI18n, type LanguageCode } from "@/lib/i18n";
-import { homeLangFromPath, homePathFor } from "@/lib/i18n/home-locales";
+import { languagesFor, pageFromPath, pathFor } from "@/lib/i18n/pages";
 
 // Two kinds of translated surface, and the switcher has to behave differently
 // on each:
 //
 //   - Tools and calculators translate in the browser, from the saved language
 //     preference. Changing the language there is a state change.
-//   - The homepage is translated server-side, one URL per language (`/`, `/hi`,
-//     `/bn` …), because copy that only appears after hydration cannot rank.
-//     Changing the language there is a navigation, and the URL — not the saved
-//     preference — decides what is on screen.
+//   - Pages published in several languages (see lib/i18n/pages) are translated
+//     server-side, one URL per language — `/hi`, `/hi/privacy`, `/es/tools` —
+//     because copy that only appears after hydration cannot rank. Changing the
+//     language there is a navigation, and the URL decides what is on screen.
 //
 // Everywhere else the copy is English-only, so the switcher is shown disabled
 // and pinned to English rather than pretending those pages can translate.
 function isClientTranslatablePath(pathname: string | null): boolean {
   if (!pathname) return false;
-  return pathname.startsWith("/tools") || pathname.startsWith("/calculators");
+  return pathname.startsWith("/tools/") || pathname.startsWith("/calculators/");
 }
 
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
@@ -27,16 +27,21 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const homeLang = homeLangFromPath(pathname);
-  const enabled = homeLang !== null || isClientTranslatablePath(pathname);
+  const page = pageFromPath(pathname);
+  const enabled = page !== null || isClientTranslatablePath(pathname);
 
-  const disabledNote = "Language switching is available on the homepage, tools & calculators only";
+  // A translated page only offers the languages it has been translated into;
+  // the tools offer all of them, because their UI is translated from the
+  // shared dictionary rather than page copy.
+  const offered = page ? languagesFor(page.key) : LANGUAGES.map((l) => l.code);
+
+  const disabledNote = "Language switching is available on translated pages, tools & calculators";
 
   const handleChange = (code: LanguageCode) => {
     setLang(code);
-    // On the homepage the translation lives at its own URL, so the choice has
-    // to move the reader there.
-    if (homeLang !== null) router.push(homePathFor(code));
+    // On a translated page the other language lives at its own URL, so the
+    // choice has to move the reader there.
+    if (page) router.push(pathFor(page.key, code));
   };
 
   return (
@@ -49,10 +54,11 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       <Globe className="h-4 w-4 text-muted" aria-hidden="true" />
       <select
         aria-label="Language"
-        // On a homepage the URL is the truth. On the tools the saved preference
-        // is. Everywhere else, display English regardless of the saved language
-        // — which is left untouched so it comes back on the next tool page.
-        value={homeLang ?? (enabled ? lang : "en")}
+        // On a translated page the URL is the truth. On the tools the saved
+        // preference is. Everywhere else, display English regardless of the
+        // saved language — which is left untouched so it comes back on the next
+        // tool page.
+        value={page ? page.lang : enabled ? lang : "en"}
         onChange={(e) => handleChange(e.target.value as LanguageCode)}
         disabled={!enabled}
         aria-disabled={!enabled}
@@ -61,7 +67,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
           enabled ? "cursor-pointer" : "cursor-not-allowed"
         }`}
       >
-        {LANGUAGES.map((l) => (
+        {LANGUAGES.filter((l) => offered.includes(l.code)).map((l) => (
           <option key={l.code} value={l.code}>
             {l.name}
           </option>

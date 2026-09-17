@@ -22,28 +22,71 @@ const LIMITS = {
   description: { min: 120, max: 160 },
 };
 
-// The translated homepages (app/[lang]/page.tsx, one route per language in
-// lib/i18n/config.ts) are measured against the same limits, with one exception:
-// a Chinese character carries roughly the information of an English word, so
-// 30-60 characters of Chinese is an essay, and Google truncates it long before
-// the English cut-off. Its limits are scaled to what a SERP actually shows.
+// Translated pages (app/[lang]/…, one route per language) are measured against
+// the same limits, with one exception: a Chinese character carries roughly the
+// information of an English word, so 30-60 characters of Chinese is an essay,
+// and Google truncates it long before the English cut-off. Its limits are
+// scaled to what a SERP actually shows.
 //
 // The language is taken from the route rather than from <html lang>, which the
 // root layout fixes at "en" for every prerendered page.
-const LOCALE_ROUTES = new Set([
-  "/hi", "/bn", "/ta", "/te", "/mr", "/gu", "/kn", "/ml", "/pa",
-  "/es", "/fr", "/ar", "/pt", "/id", "/de", "/zh",
-]);
+//
+// Which pages exist in which languages is read from content/i18n — the same
+// place lib/i18n/translated-pages.ts is generated from — so a new translation
+// is covered by this check the moment its file lands.
+const I18N_DIR = path.join("content", "i18n");
+
+const PAGE_ROUTES = {
+  home: "/",
+  privacy: "/privacy",
+  terms: "/terms",
+  contact: "/contact",
+  consultancy: "/consultancy",
+  products: "/products",
+  tools: "/tools",
+  calculators: "/calculators",
+};
+
+/** English route -> the languages it is published in. */
+function readTranslations() {
+  const byRoute = new Map();
+  for (const [key, route] of Object.entries(PAGE_ROUTES)) {
+    const dir = path.join(I18N_DIR, key);
+    if (!fs.existsSync(dir)) continue;
+    const langs = fs
+      .readdirSync(dir)
+      .filter((file) => file.endsWith(".json"))
+      .map((file) => file.replace(/\.json$/, ""));
+    if (langs.length > 0) byRoute.set(route, langs);
+  }
+  return byRoute;
+}
+
+const TRANSLATIONS = readTranslations();
+
+/** Localized route -> the English route it mirrors. */
+const LOCALE_ROUTES = new Map(
+  [...TRANSLATIONS].flatMap(([route, langs]) =>
+    langs.map((lang) => [route === "/" ? `/${lang}` : `/${lang}${route}`, route]),
+  ),
+);
 
 const LOCALE_LIMITS = {
-  "/zh": {
+  zh: {
     title: { min: 14, max: 34 },
     description: { min: 50, max: 100 },
   },
 };
 
+/** The language a route is written in, or null for the English pages. */
+function langFor(route) {
+  const english = LOCALE_ROUTES.get(route);
+  return english === undefined ? null : route.split("/")[1];
+}
+
 function limitsFor(route) {
-  return LOCALE_LIMITS[route] ?? LIMITS;
+  const lang = langFor(route);
+  return (lang && LOCALE_LIMITS[lang]) || LIMITS;
 }
 
 // Routes with no indexable content of their own. /menu and /view render data
@@ -124,12 +167,14 @@ for (const file of files.sort()) {
   const h1Count = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1Count !== 1) fail(`found ${h1Count} <h1> elements, expected exactly 1`);
 
-  // Every homepage — English and each translation — has to publish the whole
-  // hreflang cluster plus x-default. A version that names only some of the
-  // others is a cluster Google drops, and it fails silently in production, so
-  // it is worth catching at build time.
-  if (route === "/" || LOCALE_ROUTES.has(route)) {
-    const expected = LOCALE_ROUTES.size + 2; // translations + English + x-default
+  // Every translated page — the English one and each translation — has to
+  // publish the whole hreflang cluster plus x-default. A version that names
+  // only some of the others is a cluster Google drops, and it fails silently in
+  // production, so it is worth catching at build time.
+  const englishRoute = LOCALE_ROUTES.get(route) ?? (TRANSLATIONS.has(route) ? route : null);
+  if (englishRoute) {
+    // Its translations, plus the English page, plus x-default.
+    const expected = TRANSLATIONS.get(englishRoute).length + 2;
     // React serialises the attribute as hrefLang; HTML attribute names are
     // case-insensitive, so match either spelling.
     const alternates = (html.match(/rel="alternate"[^>]*hreflang=/gi) ?? []).length;

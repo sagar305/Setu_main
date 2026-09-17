@@ -1,0 +1,83 @@
+{
+  "seo": {
+    "title": "Terms of Use | Setu Technology Tools",
+    "description": "The terms for using Setu Technology's free business calculators and tools, including how your data is stored on your own device and what we do not warrant."
+  },
+  "hero": {
+    "eyebrow": "Legal",
+    "headline": "Terms of Use",
+    "subheadline": "The short set of rules that come with using these tools."
+  },
+  "lastUpdated": "Last updated 7 September 2026.",
+  "translationNote": "This translation is provided for convenience. If it differs from the English version, the English version applies.",
+  "sections": [
+    {
+      "id": "who-we-are",
+      "heading": "Who we are",
+      "paragraphs": [
+        "This site is operated by Setu Technology. Using it means accepting these terms. If you do not accept them, please do not use the site."
+      ]
+    },
+    {
+      "id": "free-as-is",
+      "heading": "The tools are free, and provided as they are",
+      "paragraphs": [
+        "The calculators, generators and apps here are offered free of charge and without warranty of any kind. They are working tools, not professional advice.",
+        "**Tax, GST, payroll and financial figures in particular:** rates and rules change, and a calculator can only reflect what was correct when it was written. Check anything that matters against the current law or with a qualified accountant before you rely on it. We are not liable for a decision taken on the strength of a number produced here."
+      ]
+    },
+    {
+      "id": "your-data",
+      "heading": "Your data is yours, and it is your responsibility",
+      "paragraphs": [
+        "Work created in these tools is stored in your own browser, not on our servers. That has an important consequence: **we hold no copy and cannot recover anything for you.** Clearing your browsing data, using private browsing, switching browser or switching device will lose it. Export or download anything you need to keep.",
+        "You are responsible for the accuracy and legality of what you put into the tools, including any invoice, bill or record you generate and issue to someone else."
+      ]
+    },
+    {
+      "id": "acceptable-use",
+      "heading": "Acceptable use",
+      "paragraphs": ["You agree not to:"],
+      "list": [
+        "Use the site to create false or fraudulent documents.",
+        "Attempt to break, overload or gain unauthorised access to the site or its systems.",
+        "Scrape, resell or redistribute the tools or their content as your own."
+      ]
+    },
+    {
+      "id": "availability",
+      "heading": "Availability",
+      "paragraphs": [
+        "We may change, suspend or withdraw any part of the site at any time, without notice. Free tools carry no uptime guarantee. Paid products, where you have one, are governed by the agreement made at the time of purchase, which takes precedence over these terms."
+      ]
+    },
+    {
+      "id": "other-sites",
+      "heading": "Other people's sites",
+      "paragraphs": [
+        "Where we link elsewhere — including to Google, to review pages, or to payment apps — we do not control those services and are not responsible for them."
+      ]
+    },
+    {
+      "id": "our-content",
+      "heading": "Our content",
+      "paragraphs": [
+        "The design, text and code of this site belong to Setu Technology. The documents you create with the tools belong to you."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "heading": "Governing law",
+      "paragraphs": [
+        "These terms are governed by the laws of India, and the courts of India have exclusive jurisdiction over any dispute arising from them."
+      ]
+    },
+    {
+      "id": "questions",
+      "heading": "Questions",
+      "paragraphs": [
+        "Ask through the [contact page](/contact). For anything about data, see our [Privacy Policy](/privacy)."
+      ]
+    }
+  ]
+}

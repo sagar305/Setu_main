@@ -1,0 +1,92 @@
+{
+  "seo": {
+    "title": "Privacy Policy | Setu Technology",
+    "description": "What Setu Technology measures and what it never sees: your invoices, statements and billing data stay on your device. Read how to opt out."
+  },
+  "hero": {
+    "eyebrow": "Legal",
+    "headline": "Privacy Policy",
+    "subheadline": "What we measure, what we deliberately cannot see, and how to switch it off."
+  },
+  "lastUpdated": "Last updated 7 September 2026.",
+  "translationNote": "This translation is provided for convenience. If it differs from the English version, the English version applies.",
+  "sections": [
+    {
+      "id": "short-version",
+      "heading": "The short version",
+      "paragraphs": [
+        "The calculators and tools on this site do their work inside your browser. Invoices, quotations, bank statements, bills, patient notes and fee records are written to storage on your own device and are never uploaded to us. We cannot read them, we cannot recover them for you, and clearing your browser data deletes them for good.",
+        "Separately, we count how the site is used — which pages open, which buttons are pressed — so we know which tools are worth improving. That measurement never includes anything you type."
+      ]
+    },
+    {
+      "id": "what-we-record",
+      "heading": "What we record",
+      "list": [
+        "Pages opened, and the page you arrived from.",
+        "Buttons and links pressed — identified by the name we give them in our own code, such as “download invoice PDF”, never by what they contain on screen.",
+        "How far down a page you scrolled, and roughly how long you stayed.",
+        "Whether the device is a phone or a computer, and which country the request came from.",
+        "A random identifier stored in your browser, so a repeat visit is recognisable as a repeat visit.",
+        "Error messages when something on the site breaks."
+      ]
+    },
+    {
+      "id": "what-we-never-record",
+      "heading": "What we never record",
+      "list": [
+        "Anything typed into a calculator, generator or app on this site.",
+        "The contents of invoices, quotations, menus, bills, statements or records.",
+        "Uploaded files. Bank statement PDFs are read in your browser and never sent to us.",
+        "Your name, phone number or email, unless you type them into the contact or demo form yourself.",
+        "Your IP address. It reaches our server as part of any web request, is used only to work out the country, and is never written to storage."
+      ]
+    },
+    {
+      "id": "who-else-sees-it",
+      "heading": "Who else sees it",
+      "paragraphs": [
+        "Usage measurement is processed by **PostHog** (analytics), **Google Analytics** (analytics, which sets a cookie in your browser) and **Vercel**, who host the site and provide cookie-free traffic and performance figures. Each receives the events described above and nothing else.",
+        "When you submit the contact or demo form, what you wrote is emailed to us through **Resend**. We do not sell data to anyone, and we do not use it for advertising."
+      ]
+    },
+    {
+      "id": "how-long-we-keep-it",
+      "heading": "How long we keep it",
+      "paragraphs": [
+        "Individual usage events are deleted after 14 months. Summary figures — visits per month, which tools were used — are kept indefinitely, because they contain nothing that could identify anyone. Contact and demo enquiries are kept as email for as long as we may need to answer them."
+      ]
+    },
+    {
+      "id": "turning-it-off",
+      "heading": "Turning it off",
+      "paragraphs": [
+        "You can opt out of usage measurement below. We also honour the browser-level “Do Not Track” and Global Privacy Control settings automatically, so if you have already set either of those, nothing here is recording you."
+      ],
+      "optOut": true
+    },
+    {
+      "id": "your-rights",
+      "heading": "Your rights",
+      "paragraphs": [
+        "Under India’s Digital Personal Data Protection Act, 2023 you may ask what personal data of yours we hold, ask us to correct or erase it, and complain about how we have handled it. Because usage measurement is tied to a random browser identifier rather than to you, we usually cannot connect it to a person even if asked — opting out above, or clearing your site data, is the faster remedy.",
+        "Data protection queries and grievances: [privacy@setutechnology.com](mailto:privacy@setutechnology.com). We reply within 30 days."
+      ]
+    },
+    {
+      "id": "children",
+      "heading": "Children",
+      "paragraphs": [
+        "These are tools for running a business and are not directed at children. We do not knowingly collect data from anyone under 18."
+      ]
+    },
+    {
+      "id": "changes",
+      "heading": "Changes",
+      "paragraphs": [
+        "If this policy changes we will update the date at the top of this page. Continuing to use the site after a change means the updated policy applies.",
+        "See also our [Terms of Use](/terms)."
+      ]
+    }
+  ]
+}

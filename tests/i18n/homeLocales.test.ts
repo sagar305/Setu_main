@@ -4,13 +4,14 @@ import path from "node:path";
 
 import { LANGUAGES, type LanguageCode } from "@/lib/i18n/config";
 import {
-  HOME_LOCALES,
-  homeLangFromPath,
-  homeLanguageAlternates,
-  homePathFor,
   hreflangFor,
+  languageAlternates,
+  languagesFor,
+  localesFor,
   ogLocaleFor,
-} from "@/lib/i18n/home-locales";
+  pageFromPath,
+  pathFor,
+} from "@/lib/i18n/pages";
 import { mergeTranslation } from "@/lib/i18n/home-merge";
 
 const english = JSON.parse(
@@ -31,31 +32,44 @@ function siteTranslationFor(lang: LanguageCode) {
   return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
 }
 
+const HOME_LOCALES = localesFor("home");
+
 describe("home locale routing", () => {
   it("gives every switcher language a homepage URL, with English at the root", () => {
-    expect(homePathFor("en")).toBe("/");
+    expect(pathFor("home", "en")).toBe("/");
     expect(HOME_LOCALES).toEqual(LANGUAGES.filter((l) => l.code !== "en").map((l) => l.code));
-    for (const code of HOME_LOCALES) expect(homePathFor(code)).toBe(`/${code}`);
+    for (const code of HOME_LOCALES) expect(pathFor("home", code)).toBe(`/${code}`);
   });
 
-  it("reads the language back out of a homepage path, and rejects anything else", () => {
-    expect(homeLangFromPath("/")).toBe("en");
-    expect(homeLangFromPath("/hi")).toBe("hi");
-    expect(homeLangFromPath("/hi/")).toBe("hi");
-    expect(homeLangFromPath("/tools/invoice-generator")).toBeNull();
-    expect(homeLangFromPath("/about")).toBeNull();
-    expect(homeLangFromPath(null)).toBeNull();
+  it("reads the page and language back out of a path, and rejects anything else", () => {
+    expect(pageFromPath("/")).toEqual({ key: "home", lang: "en" });
+    expect(pageFromPath("/hi")).toEqual({ key: "home", lang: "hi" });
+    expect(pageFromPath("/hi/")).toEqual({ key: "home", lang: "hi" });
+    expect(pageFromPath("/privacy")).toEqual({ key: "privacy", lang: "en" });
+    expect(pageFromPath("/tools/invoice-generator")).toBeNull();
+    expect(pageFromPath("/about")).toBeNull();
+    expect(pageFromPath(null)).toBeNull();
+  });
+
+  it("only claims a translated page in a language it has been translated into", () => {
+    for (const lang of localesFor("privacy")) {
+      expect(pageFromPath(`/${lang}/privacy`)).toEqual({ key: "privacy", lang });
+    }
+    const missing = LANGUAGES.map((l) => l.code).filter(
+      (code) => code !== "en" && !localesFor("privacy").includes(code),
+    );
+    for (const lang of missing) expect(pageFromPath(`/${lang}/privacy`)).toBeNull();
   });
 
   it("publishes a complete hreflang cluster including x-default", () => {
-    const alternates = homeLanguageAlternates();
+    const alternates = languageAlternates("home");
     expect(alternates["x-default"]).toBe("/");
     expect(alternates.en).toBe("/");
     for (const code of HOME_LOCALES) {
       expect(alternates[hreflangFor(code)]).toBe(`/${code}`);
     }
-    // Every language, plus English and x-default sharing the root.
-    expect(Object.keys(alternates)).toHaveLength(LANGUAGES.length + 1);
+    // Every published language, plus English and x-default sharing the root.
+    expect(Object.keys(alternates)).toHaveLength(languagesFor("home").length + 1);
   });
 
   it("marks Chinese as Simplified and pairs each language with an OG territory", () => {

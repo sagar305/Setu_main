@@ -15,6 +15,14 @@
     "headline": "Tools for running your business",
     "subheadline": "Free, no-signup tools built for restaurant and retail operators — invoicing, calculators, and more."
   },
+  "ctaBanner": {
+    "headline": "Want the numbers to track themselves?",
+    "subtext": "Setu Dine tracks sales, cost and tax automatically, so you spend less time on calculators and more time running your business.",
+    "cta": {
+      "label": "Explore Setu Dine",
+      "href": "/products/restaurant-pos"
+    }
+  },
   "categories": [
     {
       "id": "workspace",

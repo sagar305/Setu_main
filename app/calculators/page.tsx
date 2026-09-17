@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { getCalculatorsContent } from "@/lib/content";
-import { PageHero } from "@/components/PageHero";
-import { CalculatorCard } from "@/components/calculators/CalculatorCard";
-import { CtaBanner } from "@/components/CtaBanner";
-import { FadeIn } from "@/components/motion/FadeIn";
+import { languageAlternates } from "@/lib/i18n/pages";
+import { CalculatorsSections } from "@/components/calculators/CalculatorsSections";
 
 const content = getCalculatorsContent();
 
@@ -11,7 +9,7 @@ export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
   keywords: content.seo.keywords,
-  alternates: { canonical: "/calculators" },
+  alternates: { canonical: "/calculators", languages: languageAlternates("calculators") },
   openGraph: {
     title: content.seo.title,
     description: content.seo.description,
@@ -40,39 +38,5 @@ export const metadata: Metadata = {
 };
 
 export default function CalculatorsPage() {
-  return (
-    <>
-      <PageHero
-        eyebrow={content.hero.eyebrow}
-        headline={content.hero.headline}
-        subheadline={content.hero.subheadline}
-      />
-
-      <section className="mx-auto max-w-5xl px-6 pb-20">
-        {content.categories.map((category) => {
-          const items = content.items.filter((item) => item.category === category.id);
-          if (items.length === 0) return null;
-
-          return (
-            <div key={category.id} className="mb-14">
-              <FadeIn>
-                <h2 className="text-xl font-bold tracking-tight text-ink">{category.name}</h2>
-              </FadeIn>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {items.map((item) => (
-                  <CalculatorCard key={item.slug} item={item} />
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </section>
-
-      <CtaBanner
-        headline="Want the numbers to track themselves?"
-        subtext="Setu Dine tracks sales, cost and tax automatically, so you spend less time on calculators and more time running your business."
-        cta={{ label: "Explore Setu Dine", href: "/products/restaurant-pos" }}
-      />
-    </>
-  );
+  return <CalculatorsSections content={content} lang="en" />;
 }

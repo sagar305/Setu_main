@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getContactContent } from "@/lib/content";
-import { PageHero } from "@/components/PageHero";
-import { ContactForm } from "@/components/ContactForm";
+import { languageAlternates } from "@/lib/i18n/pages";
+import { ContactSections } from "@/components/contact/ContactSections";
 
 const content = getContactContent();
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
   keywords: content.seo.keywords,
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "/contact", languages: languageAlternates("contact") },
   openGraph: {
     title: content.seo.title,
     description: content.seo.description,
@@ -63,11 +63,7 @@ export default async function ContactPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
       />
 
-      <PageHero eyebrow={hero.eyebrow} headline={hero.headline} subheadline={hero.subheadline} />
-
-      <section className="mx-auto max-w-2xl px-6 py-12">
-        <ContactForm form={content.form} />
-      </section>
+      <ContactSections content={content} hero={hero} lang="en" />
     </>
   );
 }

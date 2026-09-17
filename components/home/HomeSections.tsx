@@ -58,7 +58,7 @@ export function HomeSections({ content, lang }: { content: HomeContent; lang: La
       <Services services={content.services} />
       <LatestBlogs />
       <Faq headline={content.faq.headline} items={content.faq.items} />
-      <LanguageLinks current={lang} headline={content.languageLinks.headline} />
+      <LanguageLinks page="home" current={lang} />
       <CtaBanner {...content.ctaBanner} />
     </>
   );

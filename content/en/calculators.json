@@ -18,6 +18,14 @@
     "headline": "Business calculators, built for operators",
     "subheadline": "Quick, free tools for the numbers you check every week — pricing, margins, tax and more. No signup, just answers."
   },
+  "ctaBanner": {
+    "headline": "Want the numbers to track themselves?",
+    "subtext": "Setu Dine tracks sales, cost and tax automatically, so you spend less time on calculators and more time running your business.",
+    "cta": {
+      "label": "Explore Setu Dine",
+      "href": "/products/restaurant-pos"
+    }
+  },
   "categories": [
     {
       "id": "pricing-profit",

@@ -5,7 +5,7 @@ import {
   repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
-import { HOME_LOCALES, homeLanguageAlternates, homePathFor } from "@/lib/i18n/home-locales";
+import { PAGE_KEYS, languageAlternates, localesFor, pathFor } from "@/lib/i18n/pages";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -119,10 +119,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // reads either, but a sitemap states the whole cluster in one place, which is
   // what gets a new translation discovered rather than crawled into by luck.
   // x-default is a <head>-only signal, so it is dropped here.
-  const homeAlternates = Object.fromEntries(
-    Object.entries(homeLanguageAlternates())
-      .filter(([hreflang]) => hreflang !== "x-default")
-      .map(([hreflang, path]) => [hreflang, `${base}${path === "/" ? "" : path}`]),
+  const alternatesFor = (key: (typeof PAGE_KEYS)[number]) =>
+    Object.fromEntries(
+      Object.entries(languageAlternates(key))
+        .filter(([hreflang]) => hreflang !== "x-default")
+        .map(([hreflang, path]) => [hreflang, `${base}${path === "/" ? "" : path}`]),
+    );
+
+  // English paths that have translations, so the entry can carry the cluster.
+  const translatedRoutes = new Map(
+    PAGE_KEYS.filter((key) => localesFor(key).length > 0).map((key) => [
+      pathFor(key, "en") === "/" ? "" : pathFor(key, "en"),
+      alternatesFor(key),
+    ]),
   );
 
   const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
@@ -130,18 +139,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: route === "" ? 1 : 0.7,
-    ...(route === "" ? { alternates: { languages: homeAlternates } } : {}),
+    ...(translatedRoutes.has(route) ? { alternates: { languages: translatedRoutes.get(route) } } : {}),
   }));
 
-  // The translated homepages. Same priority as the English root, since each one
-  // is the entry point for its language rather than a lesser copy of `/`.
-  const localizedHomeEntries: MetadataRoute.Sitemap = HOME_LOCALES.map((code) => ({
-    url: `${base}${homePathFor(code)}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 1,
-    alternates: { languages: homeAlternates },
-  }));
+  // The translated pages. A translation carries the same priority as the page
+  // it mirrors, since each is the entry point for its language rather than a
+  // lesser copy of the English one.
+  const localizedEntries: MetadataRoute.Sitemap = PAGE_KEYS.flatMap((key) =>
+    localesFor(key).map((lang) => ({
+      url: `${base}${pathFor(key, lang)}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: key === "home" ? 1 : 0.7,
+      alternates: { languages: alternatesFor(key) },
+    })),
+  );
 
   // Live QR menu demo. Lives on its own subdomain, so it needs an absolute URL
   // rather than a path appended to `base`.
@@ -177,7 +189,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticEntries,
-    ...localizedHomeEntries,
+    ...localizedEntries,
     ...externalEntries,
     ...blogEntries,
     ...categoryEntries,

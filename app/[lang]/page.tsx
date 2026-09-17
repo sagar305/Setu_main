@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLanguageCode, type LanguageCode } from "@/lib/i18n/config";
 import {
-  HOME_LOCALES,
-  dirFor,
-  homeLanguageAlternates,
-  homePathFor,
   hreflangFor,
+  languageAlternates,
+  localesFor,
   ogLocaleFor,
-} from "@/lib/i18n/home-locales";
-import { getLocalizedHomeContent } from "@/lib/i18n/home-content";
+  pathFor,
+} from "@/lib/i18n/pages";
+import { getLocalizedContent } from "@/lib/i18n/page-content";
+import { getHomeContent } from "@/lib/content";
 import { faqPageSchema, localizedHomePageSchema } from "@/lib/schema";
 import { HomeSections } from "@/components/home/HomeSections";
-import { LocaleDocumentAttrs } from "@/components/home/LocaleDocumentAttrs";
 
 /**
  * The homepage in every language the toolkit switcher offers — `/hi`, `/bn`,
@@ -46,7 +45,7 @@ const OG_IMAGES = [
 ];
 
 export function generateStaticParams() {
-  return HOME_LOCALES.map((lang) => ({ lang }));
+  return localesFor("home").map((lang) => ({ lang }));
 }
 
 // This segment sits at the root, so without it every unknown one-segment path
@@ -55,7 +54,7 @@ export const dynamicParams = false;
 
 /** The param is a language code or the route does not exist. */
 function resolveLang(lang: string): LanguageCode {
-  if (!isLanguageCode(lang) || lang === "en" || !HOME_LOCALES.includes(lang)) notFound();
+  if (!isLanguageCode(lang) || lang === "en" || !localesFor("home").includes(lang)) notFound();
   return lang;
 }
 
@@ -65,8 +64,8 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const lang = resolveLang((await params).lang);
-  const content = getLocalizedHomeContent(lang);
-  const path = homePathFor(lang);
+  const content = getLocalizedContent("home", lang, getHomeContent());
+  const path = pathFor("home", lang);
 
   return {
     title: content.seo.title,
@@ -77,7 +76,7 @@ export async function generateMetadata({
       // The full cluster — English, every translation, and x-default — repeated
       // on each version, because hreflang is only honoured when the pages point
       // at each other both ways.
-      languages: homeLanguageAlternates(),
+      languages: languageAlternates("home"),
     },
     openGraph: {
       title: content.seo.title,
@@ -101,8 +100,8 @@ export default async function LocalizedHomePage({
   params: Promise<{ lang: string }>;
 }) {
   const lang = resolveLang((await params).lang);
-  const content = getLocalizedHomeContent(lang);
-  const path = homePathFor(lang);
+  const content = getLocalizedContent("home", lang, getHomeContent());
+  const path = pathFor("home", lang);
   const hreflang = hreflangFor(lang);
 
   const pageSchema = localizedHomePageSchema({
@@ -123,17 +122,6 @@ export default async function LocalizedHomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* Sets the document language during parsing, before hydration, so RTL
-          Arabic never renders left-to-right first. The root layout owns
-          <html> and has no dynamic segment to read the language from — see
-          LocaleDocumentAttrs, which keeps this correct across client-side
-          navigation. */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `document.documentElement.lang=${JSON.stringify(lang)};document.documentElement.dir=${JSON.stringify(dirFor(lang))}`,
-        }}
-      />
-      <LocaleDocumentAttrs lang={lang} dir={dirFor(lang)} />
       <HomeSections content={content} lang={lang} />
     </>
   );
