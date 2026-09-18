@@ -8,11 +8,13 @@ import {
   languageAlternates,
   languagesFor,
   localesFor,
+  localizedHref,
   ogLocaleFor,
   pageFromPath,
   pathFor,
 } from "@/lib/i18n/pages";
 import { mergeTranslation } from "@/lib/i18n/home-merge";
+import { localizeLinks } from "@/lib/i18n/localize-links";
 
 const english = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "content", "en", "home.json"), "utf8"),
@@ -292,5 +294,121 @@ describe("every translated page", () => {
         }
       }
     }
+  });
+
+  /**
+   * Lists merge by position, so a translation that is short by one entry does not
+   * fail loudly — it silently pairs every later translation with the wrong English
+   * item. Merging cannot reveal that, because it pads the tail from English, so the
+   * count has to be checked on the file as written. An entry inserted into the
+   * middle of an English list (rather than appended) is what makes this bite, and it
+   * is exactly the change most likely to arrive from someone else's branch.
+   */
+  it("keeps every translated list the same length as English in the file itself", () => {
+    for (const key of PAGES) {
+      const english = englishFor(key);
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const raw = JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
+        for (const field of ["items", "products", "sections", "categories"]) {
+          if (Array.isArray(english[field]) && raw[field] !== undefined) {
+            expect(
+              raw[field].length,
+              `content/i18n/${key}/${lang}.json ${field}: translated entries must line up ` +
+                `one-to-one with content/en/${key}.json`,
+            ).toBe(english[field].length);
+          }
+        }
+      }
+    }
+  });
+});
+
+describe("links stay in the reader's language", () => {
+  it("moves a link to the version of that page in this language", () => {
+    expect(localizedHref("/products", "hi")).toBe("/hi/products");
+    expect(localizedHref("/", "hi")).toBe("/hi");
+    expect(localizedHref("/calculators", "zh")).toBe("/zh/calculators");
+  });
+
+  it("keeps query strings and fragments", () => {
+    expect(localizedHref("/contact?topic=consultancy", "hi")).toBe("/hi/contact?topic=consultancy");
+    expect(localizedHref("/tools#top", "de")).toBe("/de/tools#top");
+  });
+
+  it("leaves English alone", () => {
+    expect(localizedHref("/products", "en")).toBe("/products");
+  });
+
+  /** Pointing at a translation that does not exist would be a link into a 404. */
+  it("leaves a page that has no version in this language on its English path", () => {
+    expect(localizedHref("/blog", "hi")).toBe("/blog");
+    expect(localizedHref("/tools/invoice-generator", "hi")).toBe("/tools/invoice-generator");
+    expect(localizedHref("/products/restaurant-pos", "hi")).toBe("/products/restaurant-pos");
+  });
+
+  it("leaves anything that is not an internal path alone", () => {
+    expect(localizedHref("https://example.com/products", "hi")).toBe("https://example.com/products");
+    expect(localizedHref("//example.com/products", "hi")).toBe("//example.com/products");
+    expect(localizedHref("mailto:hi@example.com", "hi")).toBe("mailto:hi@example.com");
+    expect(localizedHref("#faq", "hi")).toBe("#faq");
+  });
+
+  it("can be applied twice without changing the result", () => {
+    const once = localizedHref("/products", "hi");
+    expect(localizedHref(once, "hi")).toBe(once);
+  });
+
+  it("rewrites every href in a content tree, at any depth", () => {
+    const content = {
+      hero: { primaryCta: { href: "/products", label: "x" } },
+      cards: [{ cta: { href: "/tools" } }, { cta: { href: "/blog" } }],
+      social: [{ href: "https://x.com/setu" }],
+    };
+    const localized = localizeLinks(content, "hi");
+
+    expect(localized.hero.primaryCta.href).toBe("/hi/products");
+    expect(localized.cards[0].cta.href).toBe("/hi/tools");
+    expect(localized.cards[1].cta.href).toBe("/blog");
+    expect(localized.social[0].href).toBe("https://x.com/setu");
+    expect(localized.hero.primaryCta.label).toBe("x");
+  });
+
+  it("returns the English tree untouched, not a copy", () => {
+    const content = { cta: { href: "/products" } };
+    expect(localizeLinks(content, "en")).toBe(content);
+  });
+});
+
+describe("links written inline in body copy", () => {
+  it("localizes a markdown-style link inside a paragraph", () => {
+    const merged = localizeLinks(
+      { sections: [{ paragraphs: ["Siehe auch unsere [Nutzungsbedingungen](/terms)."] }] },
+      "de",
+    );
+    expect(merged.sections[0].paragraphs[0]).toBe(
+      "Siehe auch unsere [Nutzungsbedingungen](/de/terms).",
+    );
+  });
+
+  it("leaves an inline link to an untranslated page alone", () => {
+    const merged = localizeLinks({ p: "see the [blog](/blog)" }, "de");
+    expect(merged.p).toBe("see the [blog](/blog)");
+  });
+
+  it("leaves prose without links untouched", () => {
+    const text = "No links here, just **bold** and a bracket ] and a paren )";
+    expect(localizeLinks({ p: text }, "de").p).toBe(text);
+  });
+
+  /**
+   * RichText splits on its own pattern, so a target this rewrote into a shape it
+   * does not match would render as literal text instead of a link.
+   */
+  it("produces links RichText still recognises", () => {
+    const richTextPattern = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+    const localized = localizeLinks({ p: "our [privacy policy](/privacy) applies" }, "hi").p;
+    const parts = localized.split(richTextPattern).filter((part: string) => part !== "");
+    expect(parts).toContain("[privacy policy](/hi/privacy)");
   });
 });

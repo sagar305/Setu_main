@@ -80,6 +80,10 @@
       "shortDescription": "Dynamische UPI-QR-Codes mit eigenem Betrag und Verwendungszweck für Sofortzahlungen."
     },
     {
+      "name": "UPI-QR-Splitter ohne MDR",
+      "shortDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter 2.000 ₹ auf, damit weder MDR noch Interbankenentgelt anfallen."
+    },
+    {
       "name": "QR-Speisekarten-Generator",
       "shortDescription": "QR-Code für eine digitale Speisekarte — die ganze Karte steckt im Code, kein Hosting nötig."
     },

@@ -80,6 +80,10 @@
       "shortDescription": "Genera códigos QR de pago dinámicos con importe y concepto para cobrar al instante."
     },
     {
+      "name": "Divisor de QR UPI sin MDR",
+      "shortDescription": "Divide un pago grande en varios códigos QR de UPI por debajo de ₹2.000 para que no se aplique MDR ni intercambio."
+    },
+    {
       "name": "Generador de cartas QR",
       "shortDescription": "Crea un QR con tu carta digital: la carta entera va dentro del QR, sin alojamiento."
     },

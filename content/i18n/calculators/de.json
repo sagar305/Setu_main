@@ -154,6 +154,10 @@
     {
       "name": "Finanzkennzahlen-Rechner",
       "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV."
+    },
+    {
+      "name": "MDR-Rechner",
+      "shortDescription": "Sehen Sie, wie viel MDR auf eine Zahlung anfällt und was Ihnen tatsächlich gutgeschrieben wird — mit oder ohne MDR gerechnet."
     }
   ]
 }

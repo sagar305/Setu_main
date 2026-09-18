@@ -154,6 +154,10 @@
     {
       "name": "Kalkulator rasio keuangan",
       "shortDescription": "Rasio likuiditas, leverage, margin, dan efisiensi dari neraca serta laporan laba rugi."
+    },
+    {
+      "name": "Kalkulator MDR",
+      "shortDescription": "Lihat berapa MDR yang dipotong dari sebuah pembayaran dan berapa yang benar-benar masuk ke rekening Anda, sudah termasuk MDR atau belum."
     }
   ]
 }

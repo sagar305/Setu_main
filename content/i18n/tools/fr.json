@@ -80,6 +80,10 @@
       "shortDescription": "Générez des QR codes de paiement dynamiques avec montant et libellé pour encaisser tout de suite."
     },
     {
+      "name": "Diviseur de QR UPI sans MDR",
+      "shortDescription": "Divisez un gros paiement en plusieurs QR codes UPI sous 2 000 ₹ pour qu'aucune commission MDR ou d'interchange ne s'applique."
+    },
+    {
       "name": "Générateur de carte QR",
       "shortDescription": "Créez un QR code de carte : la carte entière tient dans le QR, sans hébergement."
     },

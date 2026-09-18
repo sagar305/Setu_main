@@ -154,6 +154,10 @@
     {
       "name": "Calculadora de índices financeiros",
       "shortDescription": "Índices de liquidez, alavancagem, margem e eficiência a partir do balanço e da DRE."
+    },
+    {
+      "name": "Calculadora de MDR",
+      "shortDescription": "Veja quanto de MDR é cobrado num pagamento e quanto realmente cai na sua conta, com MDR incluso ou por fora."
     }
   ]
 }

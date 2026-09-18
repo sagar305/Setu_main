@@ -154,6 +154,10 @@
     {
       "name": "Calculateur de ratios financiers",
       "shortDescription": "Ratios de liquidité, d'endettement, de marge et d'efficacité à partir de votre bilan et de votre compte de résultat."
+    },
+    {
+      "name": "Calculateur de MDR",
+      "shortDescription": "Voyez la commission MDR prélevée sur un paiement et ce qui vous revient réellement, MDR inclus ou exclu."
     }
   ]
 }

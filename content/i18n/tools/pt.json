@@ -80,6 +80,10 @@
       "shortDescription": "Gere QR codes UPI dinâmicos com valores e observações para pagamentos instantâneos."
     },
     {
+      "name": "Divisor de QR UPI sem MDR",
+      "shortDescription": "Divida um pagamento grande em vários QR codes UPI abaixo de ₹2.000 para que não incida MDR nem intercâmbio."
+    },
+    {
       "name": "Gerador de cardápio QR",
       "shortDescription": "Crie um QR code de cardápio digital — o cardápio inteiro fica dentro do QR, sem hospedagem."
     },

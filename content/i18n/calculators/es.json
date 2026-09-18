@@ -154,6 +154,10 @@
     {
       "name": "Calculadora de ratios financieros",
       "shortDescription": "Ratios de liquidez, apalancamiento, margen y eficiencia a partir de tu balance y tu cuenta de resultados."
+    },
+    {
+      "name": "Calculadora de MDR",
+      "shortDescription": "Mira cuánto MDR se cobra en un pago y cuánto te llega de verdad, con el MDR incluido o excluido."
     }
   ]
 }

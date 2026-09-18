@@ -80,6 +80,10 @@
       "shortDescription": "生成带金额和备注的动态 UPI 收款码，实现即时收款。"
     },
     {
+      "name": "零 MDR 的 UPI 收款码拆分工具",
+      "shortDescription": "把一笔大额收款拆成多个低于 ₹2,000 的 UPI 收款码，这样就不会产生 MDR 或交换费。"
+    },
+    {
       "name": "菜单二维码生成器",
       "shortDescription": "生成电子菜单二维码——整份菜单存在码里，无需托管。"
     },

@@ -80,6 +80,10 @@
       "shortDescription": "Buat kode QR UPI dinamis dengan nominal dan catatan khusus untuk pembayaran instan."
     },
     {
+      "name": "Pemisah QR UPI tanpa MDR",
+      "shortDescription": "Pecah pembayaran besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak dikenai MDR maupun biaya interchange."
+    },
+    {
       "name": "Pembuat menu QR",
       "shortDescription": "Buat kode QR menu digital — seluruh menu tersimpan di dalam QR, tanpa perlu hosting."
     },

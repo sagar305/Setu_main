@@ -154,6 +154,10 @@
     {
       "name": "财务比率计算器",
       "shortDescription": "根据资产负债表和损益表算出流动性、杠杆、利润和效率比率。"
+    },
+    {
+      "name": "MDR 计算器",
+      "shortDescription": "查看一笔收款要扣多少 MDR、实际到账多少——可按含 MDR 或不含 MDR 输入。"
     }
   ]
 }
