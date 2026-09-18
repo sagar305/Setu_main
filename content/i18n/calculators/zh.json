@@ -159,5 +159,9 @@
       "name": "MDR 计算器",
       "shortDescription": "查看一笔收款要扣多少 MDR、实际到账多少——可按含 MDR 或不含 MDR 输入。"
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← 全部计算器",
+    "moreCalculators": "更多计算器"
+  }
 }

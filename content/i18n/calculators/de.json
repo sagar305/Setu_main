@@ -159,5 +159,9 @@
       "name": "MDR-Rechner",
       "shortDescription": "Sehen Sie, wie viel MDR auf eine Zahlung anfällt und was Ihnen tatsächlich gutgeschrieben wird — mit oder ohne MDR gerechnet."
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← Alle Rechner",
+    "moreCalculators": "Weitere Rechner"
+  }
 }

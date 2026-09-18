@@ -48,6 +48,64 @@ function localesFor(key) {
 
 const entries = PAGE_KEYS.map((key) => [key, localesFor(key)]);
 
+// Pages that also have a page per item — one per calculator, one per tool.
+const ITEM_PAGES = ["calculators", "tools"];
+
+/**
+ * Whether an item's own page has been translated, as opposed to just its card
+ * on the listing.
+ *
+ * The listing needs a name and a one-line description; the item's page needs
+ * the copy a search engine indexes. Requiring the title, the description and
+ * the headline — plus the explainer and the FAQ wherever English has them —
+ * keeps a half-translated page from being published and then competing with
+ * the English one it was meant to serve alongside.
+ */
+function itemIsTranslated(english, translated) {
+  if (!translated) return false;
+  const has = (o, ...keys) => keys.every((k) => typeof o?.[k] === "string" && o[k].trim() !== "");
+
+  if (!has(translated.seo, "title", "description")) return false;
+  if (!has(translated.hero, "headline", "subheadline")) return false;
+
+  if (english.about && !(translated.about?.paragraphs?.length === english.about.paragraphs.length))
+    return false;
+  if (english.faq && !(translated.faq?.items?.length === english.faq.items.length)) return false;
+
+  return true;
+}
+
+function translatedItems(key) {
+  const englishFile = path.join("content", "en", `${key}.json`);
+  if (!fs.existsSync(englishFile)) return [];
+  const english = JSON.parse(fs.readFileSync(englishFile, "utf8")).items ?? [];
+
+  const byLang = new Map();
+  for (const lang of localesFor(key)) {
+    const file = path.join(CONTENT_DIR, key, `${lang}.json`);
+    byLang.set(lang, JSON.parse(fs.readFileSync(file, "utf8")).items ?? []);
+  }
+
+  return english.map((item, index) => [
+    item.slug,
+    LANGUAGE_ORDER.filter((lang) => {
+      const items = byLang.get(lang);
+      return items ? itemIsTranslated(item, items[index]) : false;
+    }),
+  ]);
+}
+
+const itemEntries = ITEM_PAGES.map((key) => [key, translatedItems(key)]);
+
+const itemBody = itemEntries
+  .map(([key, items]) => {
+    const rows = items
+      .map(([slug, locales]) => `    "${slug}": [${locales.map((l) => `"${l}"`).join(", ")}],`)
+      .join("\n");
+    return `  ${key}: {\n${rows}\n  },`;
+  })
+  .join("\n");
+
 const body = entries
   .map(([key, locales]) => {
     if (locales.length === 0) return `  ${key}: [],`;
@@ -67,6 +125,17 @@ import type { PageKey } from "./pages";
 export const TRANSLATED_PAGES: Record<PageKey, LanguageCode[]> = {
 ${body}
 };
+
+/**
+ * Which languages each individual calculator and tool page is published in.
+ *
+ * Separate from TRANSLATED_PAGES because the directory of calculators can be
+ * translated long before the twenty-nine pages it links to are, and a page is
+ * only listed here once its own copy has been translated.
+ */
+export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, LanguageCode[]>> = {
+${itemBody}
+};
 `;
 
 const current = fs.existsSync(OUT_FILE) ? fs.readFileSync(OUT_FILE, "utf8") : "";
@@ -85,4 +154,9 @@ if (process.argv.includes("--check")) {
   fs.writeFileSync(OUT_FILE, generated);
   console.log(`sync-translations: wrote ${OUT_FILE}`);
   for (const [key, locales] of entries) console.log(`  ${key}: ${locales.length} languages`);
+  for (const [key, items] of itemEntries) {
+    const done = items.filter(([, l]) => l.length > 0).length;
+    const full = items.filter(([, l]) => l.length === LANGUAGE_ORDER.length).length;
+    console.log(`  ${key} item pages: ${done}/${items.length} started, ${full} in all 16`);
+  }
 }

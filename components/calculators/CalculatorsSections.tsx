@@ -38,7 +38,7 @@ export function CalculatorsSections({
               </FadeIn>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((item) => (
-                  <CalculatorCard key={item.slug} item={item} />
+                  <CalculatorCard key={item.slug} item={item} lang={lang} />
                 ))}
               </div>
             </div>

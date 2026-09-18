@@ -5,7 +5,15 @@ import {
   repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
-import { PAGE_KEYS, languageAlternates, localesFor, pathFor } from "@/lib/i18n/pages";
+import {
+  PAGE_KEYS,
+  itemLanguageAlternates,
+  itemPathFor,
+  itemRoutesFor,
+  languageAlternates,
+  localesFor,
+  pathFor,
+} from "@/lib/i18n/pages";
 import {
   getBlogCategories,
   getBlogCategoryUrl,
@@ -157,6 +165,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
+  // A calculator or tool page in each language it has been translated into.
+  // Listed per item rather than per page, because these are published one item
+  // at a time — see TRANSLATED_ITEMS.
+  const localizedItemEntries: MetadataRoute.Sitemap = (["calculators", "tools"] as const).flatMap(
+    (key) =>
+      itemRoutesFor(key).map(({ lang, slug }) => ({
+        url: `${base}${itemPathFor(key, slug, lang)}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            Object.entries(itemLanguageAlternates(key, slug)).map(([code, path]) => [
+              code,
+              `${base}${path}`,
+            ]),
+          ),
+        },
+      })),
+  );
+
   // Live QR menu demo. Lives on its own subdomain, so it needs an absolute URL
   // rather than a path appended to `base`.
   const externalEntries: MetadataRoute.Sitemap = [
@@ -192,6 +221,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticEntries,
     ...localizedEntries,
+    ...localizedItemEntries,
     ...externalEntries,
     ...blogEntries,
     ...categoryEntries,

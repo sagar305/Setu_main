@@ -15,7 +15,7 @@
 // versions of the page they are on.
 
 import { LANGUAGES, type LanguageCode } from "./config";
-import { TRANSLATED_PAGES } from "./translated-pages";
+import { TRANSLATED_ITEMS, TRANSLATED_PAGES } from "./translated-pages";
 
 /** A page that can be published in more than one language. */
 export type PageKey =
@@ -134,6 +134,46 @@ export function languageAlternates(key: PageKey): Record<string, string> {
     en: PAGE_PATHS[key],
   };
   for (const lang of localesFor(key)) languages[hreflangFor(lang)] = pathFor(key, lang);
+  return languages;
+}
+
+/* ---------------------------------------------------------------------------
+ * Item pages: one per calculator, one per tool.
+ *
+ * These behave like the pages above but are published per item rather than per
+ * page, because a directory of twenty-nine calculators can be translated long
+ * before the twenty-nine pages it links to are. Each item's own page appears in
+ * a language only once that item's copy has been translated into it.
+ * ------------------------------------------------------------------------- */
+
+/** A page that has one sub-page per item. */
+export type ItemPageKey = "calculators" | "tools";
+
+/** Languages an individual item's page is published in. */
+export function itemLocalesFor(key: ItemPageKey, slug: string): LanguageCode[] {
+  return (TRANSLATED_ITEMS[key]?.[slug] ?? []) as LanguageCode[];
+}
+
+/** Path of an item's page in a given language. English keeps the plain path. */
+export function itemPathFor(key: ItemPageKey, slug: string, lang: LanguageCode): string {
+  const path = `${PAGE_PATHS[key]}/${slug}`;
+  return lang === "en" ? path : `/${lang}${path}`;
+}
+
+/** Every (language, slug) pair an item page is published for, for prerendering. */
+export function itemRoutesFor(key: ItemPageKey): { lang: LanguageCode; slug: string }[] {
+  return Object.entries(TRANSLATED_ITEMS[key] ?? {}).flatMap(([slug, langs]) =>
+    (langs as LanguageCode[]).map((lang) => ({ lang, slug })),
+  );
+}
+
+/** `alternates.languages` for one item's page, on the same terms as a page's. */
+export function itemLanguageAlternates(key: ItemPageKey, slug: string): Record<string, string> {
+  const english = itemPathFor(key, slug, "en");
+  const languages: Record<string, string> = { "x-default": english, en: english };
+  for (const lang of itemLocalesFor(key, slug)) {
+    languages[hreflangFor(lang)] = itemPathFor(key, slug, lang);
+  }
   return languages;
 }
 

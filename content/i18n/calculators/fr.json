@@ -159,5 +159,9 @@
       "name": "Calculateur de MDR",
       "shortDescription": "Voyez la commission MDR prélevée sur un paiement et ce qui vous revient réellement, MDR inclus ou exclu."
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← Tous les calculateurs",
+    "moreCalculators": "Plus de calculateurs"
+  }
 }

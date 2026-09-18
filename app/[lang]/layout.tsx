@@ -5,6 +5,7 @@ import { LocaleDocumentAttrs } from "@/components/home/LocaleDocumentAttrs";
 import { isLanguageCode } from "@/lib/i18n/config";
 import { PAGE_KEYS, dirFor, localesFor } from "@/lib/i18n/pages";
 import { getLocalizedSiteContent } from "@/lib/i18n/site-chrome";
+import { LanguageProvider } from "@/lib/i18n";
 
 /**
  * Header and footer for a translated homepage, in that page's language.
@@ -47,7 +48,13 @@ export default async function LocalizedHomeLayout({
       />
       <LocaleDocumentAttrs lang={lang} dir={dirFor(lang)} />
       <Nav site={site} lang={lang} />
-      <main>{children}</main>
+      {/* Nested inside the provider in the root layout, which has no dynamic
+          segment to read a language from. The inner one wins for this subtree,
+          so an interactive tool under /<lang>/ renders its own labels in that
+          language on the server rather than after hydration. */}
+      <LanguageProvider routeLang={lang}>
+        <main>{children}</main>
+      </LanguageProvider>
       <Footer site={site} />
     </>
   );

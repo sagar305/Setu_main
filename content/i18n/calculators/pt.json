@@ -159,5 +159,9 @@
       "name": "Calculadora de MDR",
       "shortDescription": "Veja quanto de MDR é cobrado num pagamento e quanto realmente cai na sua conta, com MDR incluso ou por fora."
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← Todas as calculadoras",
+    "moreCalculators": "Mais calculadoras"
+  }
 }

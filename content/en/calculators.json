@@ -1758,5 +1758,9 @@
         }
       }
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← All calculators",
+    "moreCalculators": "More calculators"
+  }
 }

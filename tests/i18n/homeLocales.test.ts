@@ -9,6 +9,10 @@ import {
   languagesFor,
   localesFor,
   localizedHref,
+  itemLanguageAlternates,
+  itemLocalesFor,
+  itemPathFor,
+  itemRoutesFor,
   ogLocaleFor,
   pageFromPath,
   pathFor,
@@ -410,5 +414,56 @@ describe("links written inline in body copy", () => {
     const localized = localizeLinks({ p: "our [privacy policy](/privacy) applies" }, "hi").p;
     const parts = localized.split(richTextPattern).filter((part: string) => part !== "");
     expect(parts).toContain("[privacy policy](/hi/privacy)");
+  });
+});
+
+describe("item pages: one per calculator, one per tool", () => {
+  it("keeps the English path for English and prefixes it otherwise", () => {
+    expect(itemPathFor("calculators", "gst-calculator", "en")).toBe("/calculators/gst-calculator");
+    expect(itemPathFor("calculators", "gst-calculator", "hi")).toBe(
+      "/hi/calculators/gst-calculator",
+    );
+  });
+
+  it("publishes an item only in the languages its own copy is translated into", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ) as Record<string, any>;
+
+      for (const item of english.items) {
+        for (const lang of itemLocalesFor(key, item.slug)) {
+          // The listing has to carry the item before its own page can.
+          expect(localesFor(key), `${key}/${item.slug} in ${lang}`).toContain(lang);
+        }
+      }
+    }
+  });
+
+  it("gives every published item page a complete, two-way hreflang cluster", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      for (const { slug, lang } of itemRoutesFor(key)) {
+        const alternates = itemLanguageAlternates(key, slug);
+        const english = itemPathFor(key, slug, "en");
+
+        // The English page carries the same cluster, so both directions agree.
+        expect(alternates["x-default"]).toBe(english);
+        expect(alternates.en).toBe(english);
+        expect(alternates[hreflangFor(lang)]).toBe(itemPathFor(key, slug, lang));
+        expect(Object.keys(alternates)).toHaveLength(itemLocalesFor(key, slug).length + 2);
+      }
+    }
+  });
+
+  /**
+   * A route is prerendered per (language, slug), and the tool it renders comes
+   * from the registry — a slug missing from it would build a page with no
+   * calculator on it.
+   */
+  it("has a tool in the registry for every calculator route it will build", async () => {
+    const { CALCULATOR_TOOLS } = await import("@/components/calculators/tools/registry");
+    for (const { slug } of itemRoutesFor("calculators")) {
+      expect(Object.keys(CALCULATOR_TOOLS), `registry is missing ${slug}`).toContain(slug);
+    }
   });
 });

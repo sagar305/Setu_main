@@ -159,5 +159,9 @@
       "name": "Kalkulator MDR",
       "shortDescription": "Lihat berapa MDR yang dipotong dari sebuah pembayaran dan berapa yang benar-benar masuk ke rekening Anda, sudah termasuk MDR atau belum."
     }
-  ]
+  ],
+  "labels": {
+    "allCalculators": "← Semua kalkulator",
+    "moreCalculators": "Kalkulator lainnya"
+  }
 }
