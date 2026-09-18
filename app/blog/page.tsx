@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getBlogCategories, getBlogContent } from "@/lib/content";
 import { PageHero } from "@/components/PageHero";
+import { Rss } from "lucide-react";
 import { BlogSearchList } from "@/components/blog/BlogSearchList";
 
 const content = getBlogContent();
@@ -9,7 +10,12 @@ export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
   keywords: content.seo.keywords,
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    // Advertises the feed to browsers and feed readers (and to LinkedIn, which
+    // can discover it from the page URL when adding an RSS source).
+    types: { "application/rss+xml": "/blog/rss.xml" },
+  },
   openGraph: {
     title: content.seo.title,
     description: content.seo.description,
@@ -63,6 +69,16 @@ export default function BlogPage() {
 
       <section className="mx-auto max-w-6xl px-6 py-12">
         <BlogSearchList posts={content.posts} categories={categories} />
+
+        <p className="mt-10 text-sm text-muted-warm">
+          <a
+            href="/blog/rss.xml"
+            className="inline-flex items-center gap-2 font-semibold text-ink transition hover:text-indigo"
+          >
+            <Rss className="h-4 w-4" aria-hidden="true" />
+            Subscribe via RSS
+          </a>
+        </p>
       </section>
     </>
   );

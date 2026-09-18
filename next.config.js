@@ -16,6 +16,23 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // The blog feed lives at /blog/rss.xml; point the addresses people and
+      // feed readers habitually guess at it rather than 404ing them.
+      {
+        source: "/rss.xml",
+        destination: "/blog/rss.xml",
+        permanent: true,
+      },
+      {
+        source: "/feed.xml",
+        destination: "/blog/rss.xml",
+        permanent: true,
+      },
+      {
+        source: "/blog/feed.xml",
+        destination: "/blog/rss.xml",
+        permanent: true,
+      },
       {
         source: "/products/dine",
         destination: "/products/restaurant-pos",

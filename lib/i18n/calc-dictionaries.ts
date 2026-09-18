@@ -154,6 +154,29 @@ export type CalcDictKey =
   | "oocTotalDeductions"
   | "oocRealPayout"
   | "oocTakeHomePct"
+  // MDR
+  | "mdrMode"
+  | "mdrModeInclusive"
+  | "mdrModeExclusive"
+  | "mdrAmountInclusive"
+  | "mdrAmountExclusive"
+  | "mdrInstrument"
+  | "mdrRate"
+  | "mdrFixedFee"
+  | "mdrGstOnFee"
+  | "mdrCustomerPays"
+  | "mdrFee"
+  | "mdrGstAmount"
+  | "mdrTotalDeduction"
+  | "mdrYouReceive"
+  | "mdrEffectivePct"
+  | "mdrInfeasible"
+  | "mdrZeroNote"
+  | "mdrBelowThreshold"
+  | "mdrCapApplied"
+  | "mdrSplitCta"
+  | "mdrSplitPitch"
+  | "mdrAssumption"
   // Recipe costing
   | "rcServings"
   | "rcTargetFoodCost"
@@ -339,6 +362,34 @@ const en: CalcDict = {
   oocTotalDeductions: "Total deductions",
   oocRealPayout: "Your real payout",
   oocTakeHomePct: "Take-home %",
+  mdrMode: "Amount you are entering",
+  mdrModeInclusive: "MDR inclusive",
+  mdrModeExclusive: "MDR exclusive",
+  mdrAmountInclusive: "Amount customer pays",
+  mdrAmountExclusive: "Amount you want to receive",
+  mdrInstrument: "Payment method",
+  mdrRate: "MDR rate",
+  mdrFixedFee: "Flat fee per transaction",
+  mdrGstOnFee: "GST on the MDR",
+  mdrCustomerPays: "Customer pays",
+  mdrFee: "MDR charged",
+  mdrGstAmount: "GST on MDR",
+  mdrTotalDeduction: "Total deducted",
+  mdrYouReceive: "You receive",
+  mdrEffectivePct: "Effective cost of collection",
+  mdrInfeasible:
+    "The MDR and the GST on it add up to 100% or more of every rupee charged, so no amount can settle the figure you asked for. Lower the MDR rate to continue.",
+  mdrZeroNote:
+    "This payment method carries no MDR for merchants, so the full amount settles to you.",
+  mdrBelowThreshold:
+    "No MDR at this amount — it sits at or below this method's threshold, so the full amount settles to you.",
+  mdrCapApplied:
+    "The MDR has hit this method's cap, so it stays flat however much larger the payment gets.",
+  mdrSplitCta: "Split this into zero-MDR QR codes",
+  mdrSplitPitch:
+    "UPI MDR only applies above \u20b92,000 per transaction. Collect the same total across several smaller QR codes and it goes to zero.",
+  mdrAssumption:
+    "Assumes MDR is charged as a percentage of the transaction value plus any flat fee, with GST on the MDR itself rather than on the sale. Your acquirer agreement is the authority \u2014 check a real settlement report before pricing against these numbers.",
   rcServings: "Servings this recipe yields",
   rcTargetFoodCost: "Target food cost %",
   rcTotalCost: "Total recipe cost (all servings)",
@@ -518,6 +569,24 @@ const hi: Partial<CalcDict> = {
   oocTotalDeductions: "कुल कटौतियाँ",
   oocRealPayout: "आपका वास्तविक भुगतान",
   oocTakeHomePct: "टेक-होम %",
+  mdrMode: "आप कौन सी राशि डाल रहे हैं",
+  mdrModeInclusive: "MDR सहित",
+  mdrModeExclusive: "MDR रहित",
+  mdrAmountInclusive: "ग्राहक द्वारा दी जाने वाली राशि",
+  mdrAmountExclusive: "आपको मिलने वाली राशि",
+  mdrInstrument: "भुगतान का तरीका",
+  mdrRate: "MDR दर",
+  mdrFixedFee: "प्रति लेनदेन निश्चित शुल्क",
+  mdrGstOnFee: "MDR पर GST",
+  mdrCustomerPays: "ग्राहक देगा",
+  mdrFee: "MDR शुल्क",
+  mdrGstAmount: "MDR पर GST",
+  mdrTotalDeduction: "कुल कटौती",
+  mdrYouReceive: "आपको मिलेगा",
+  mdrEffectivePct: "वसूली की प्रभावी लागत",
+  mdrBelowThreshold:
+    "इस राशि पर कोई MDR नहीं — यह सीमा से कम या बराबर है, इसलिए पूरी राशि आपको मिलेगी।",
+  mdrSplitCta: "इसे शून्य-MDR QR में बांटें",
   rcServings: "यह रेसिपी कितनी सर्विंग देती है",
   rcTargetFoodCost: "लक्षित फ़ूड कॉस्ट %",
   rcTotalCost: "कुल रेसिपी लागत (सभी सर्विंग)",

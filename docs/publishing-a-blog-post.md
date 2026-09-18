@@ -107,3 +107,46 @@ If you have the repo cloned:
 npm run sync:post-dates   # fill in dates and fingerprints
 npm run build             # run every check
 ```
+
+## The RSS feed and LinkedIn auto-posting
+
+Every published post is picked up automatically by the blog's RSS feed:
+
+```
+https://setutechnology.com/blog/rss.xml
+```
+
+It carries the 20 most recent posts from `content/blog/index.json` — title,
+link, the `metaDescription` (falling back to `excerpt`), publish date,
+category, author and the full article body. Nothing extra to do when you
+publish: the feed is rebuilt with the site on each deploy. `/rss.xml`,
+`/feed.xml` and `/blog/feed.xml` redirect to it.
+
+### Connecting it to a LinkedIn Page
+
+On the Setu LinkedIn Page, as an admin:
+
+1. Open the Page → **Admin tools** → **Content** → **RSS feeds**.
+2. **Add title**: `Setu Blog`.
+3. **Select category**: *Company blog*.
+4. **Add link**: paste `https://setutechnology.com/blog/rss.xml` — the feed URL
+   itself, not `/blog`. Do not use a redirect alias here.
+5. **How to share**: *Share manually* is the safer setting — LinkedIn notifies
+   you and you approve each post, so you can add your own framing. Pick *Share
+   automatically* only if you want every new post published to the Page
+   untouched.
+6. **Post text**: *Use description from RSS content*. That is the post's
+   `metaDescription`, so the sentence LinkedIn publishes is the one you wrote.
+
+LinkedIn only posts items it sees as new **after** the feed is connected, so
+connecting it will not back-post the existing archive.
+
+### Checking the feed
+
+```bash
+curl -s https://setutechnology.com/blog/rss.xml | head -40
+```
+
+Locally, `npm run dev` then open `http://localhost:3000/blog/rss.xml`. The
+feed is built in `app/blog/rss.xml/route.ts`; the XML helpers it uses live in
+`lib/rss.ts` and are covered by `tests/rss.test.ts`.
