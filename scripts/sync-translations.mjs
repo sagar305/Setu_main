@@ -197,8 +197,12 @@ if (process.argv.includes("--check")) {
     const full = items.filter(
       ([, l]) => l.length === LANGUAGE_ORDER.length,
     ).length;
+    const pages = items.reduce((n, [, l]) => n + l.length, 0);
+    const target = items.length * LANGUAGE_ORDER.length;
+    const pct = target === 0 ? 0 : Math.round((pages / target) * 100);
     console.log(
-      `  ${key} item pages: ${done}/${items.length} started, ${full} in all 16`,
+      `  ${key} item pages: ${pages}/${target} localized (${pct}%) — ` +
+        `${done}/${items.length} items started, ${full} complete in all 16`,
     );
   }
 }
