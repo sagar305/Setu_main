@@ -1,40 +1,10 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { InvoiceGeneratorTool } from "@/components/tools/InvoiceGenerator/InvoiceGeneratorTool";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Invoice Generator - GST Compliant Invoices",
-  description:
-    "Create professional GST-compliant invoices free. Multiple templates, automatic tax calculations, UPI support and instant PDF download. No signup required.",
-  keywords: [
-    "free invoice generator",
-    "invoice maker",
-    "GST invoice",
-    "invoice template",
-    "free invoice",
-    "online invoice generator",
-    "India invoice",
-  ],
-  alternates: {
-    canonical: "/tools/invoice-generator",
-  },
-  openGraph: {
-    title: "Free Invoice Generator - GST Compliant",
-    description:
-      "Create professional invoices with GST calculations. No login needed. Download as PDF instantly.",
-    url: "/tools/invoice-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Invoice Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("invoice-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

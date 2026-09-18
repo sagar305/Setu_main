@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { BudgetVsActualTool } from "@/components/tools/analysis/BudgetVsActualTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Budget vs Actual Tracker | Setu",
-  description: "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup.",
-  keywords: ["budget vs actual", "variance report", "budget tracker business", "budget variance analysis", "monthly budget comparison"],
-  alternates: { canonical: "/tools/budget-vs-actual" },
-  openGraph: {
-    title: "Budget vs Actual",
-    description: "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup.",
-    url: "/tools/budget-vs-actual",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("budget-vs-actual");
 
 const faqSchema = {
   "@context": "https://schema.org",

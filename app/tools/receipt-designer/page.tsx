@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { ReceiptDesignerTool } from "@/components/tools/ReceiptDesigner/ReceiptDesignerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Receipt Generator | Make & Print Receipts | Setu",
-  description:
-    "Design your shop's receipt — logo, colours, header and footer — then fill in a sale and print it. The same design prints from the Setu POS too.",
-  keywords: [
-    "receipt generator",
-    "receipt maker",
-    "thermal receipt template",
-    "80mm receipt design",
-    "print receipt online",
-    "POS receipt template",
-  ],
-  alternates: { canonical: "/tools/receipt-designer" },
-  openGraph: {
-    title: "Free Receipt Generator — Design, Fill & Print",
-    description:
-      "Design a branded receipt, fill in a sale and print it — and reuse the design across Setu tools. Offline, no signup.",
-    url: "/tools/receipt-designer",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Receipt Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("receipt-designer");
 
 const faqSchema = {
   "@context": "https://schema.org",

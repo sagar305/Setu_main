@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { CustomerLedgerTool } from "@/components/tools/CustomerLedger/CustomerLedgerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Customer Ledger — Digital Udhaar Khata | Setu",
-  description:
-    "Digital udhaar khata — track credit given and payments received per customer, with running balances. Free, offline, no signup.",
-  keywords: [
-    "udhaar khata",
-    "customer ledger",
-    "credit book",
-    "khata book free",
-    "customer credit tracker",
-    "udhar bahi khata",
-  ],
-  alternates: { canonical: "/tools/customer-ledger" },
-  openGraph: {
-    title: "Free Customer Ledger — Digital Udhaar Khata",
-    description:
-      "Track credit and payments per customer with automatic balances. Offline, no signup.",
-    url: "/tools/customer-ledger",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Customer Ledger",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("customer-ledger");
 
 const faqSchema = {
   "@context": "https://schema.org",

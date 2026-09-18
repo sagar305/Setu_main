@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { ProfitLossTool } from "@/components/tools/statements/ProfitLossTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Profit & Loss Statement | Setu",
-  description: "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup.",
-  keywords: ["profit and loss statement", "P&L maker", "income statement online", "profit loss format", "free P&L template"],
-  alternates: { canonical: "/tools/profit-loss-statement" },
-  openGraph: {
-    title: "Profit & Loss Statement",
-    description: "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup.",
-    url: "/tools/profit-loss-statement",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("profit-loss-statement");
 
 const faqSchema = {
   "@context": "https://schema.org",

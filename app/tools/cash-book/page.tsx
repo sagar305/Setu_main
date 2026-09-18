@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { CashBookTool } from "@/components/tools/CashBook/CashBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Cash Book | Daily Cash In/Out & Closing Balance | Setu",
-  description:
-    "Simple daily cash book for your shop — record cash in and out, get opening and closing balances automatically. Free, offline, no signup.",
-  keywords: [
-    "cash book",
-    "daily cash register",
-    "cash in out book",
-    "shop cash book free",
-    "rojnamcha",
-    "cash closing balance",
-  ],
-  alternates: { canonical: "/tools/cash-book" },
-  openGraph: {
-    title: "Free Daily Cash Book",
-    description:
-      "Record cash in/out and get opening & closing balances automatically. Offline, no signup.",
-    url: "/tools/cash-book",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Cash Book",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("cash-book");
 
 const faqSchema = {
   "@context": "https://schema.org",

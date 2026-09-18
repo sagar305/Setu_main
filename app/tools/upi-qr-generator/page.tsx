@@ -1,40 +1,10 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { UpiQrGeneratorTool } from "@/components/tools/UpiQrGenerator/UpiQrGeneratorTool";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Dynamic UPI QR Generator | Instant Payment Codes",
-  description:
-    "Generate dynamic UPI QR codes instantly. Enter your UPI ID, amount, and notes to create QR codes for quick payments. No signup required.",
-  keywords: [
-    "UPI QR generator",
-    "dynamic QR code",
-    "UPI payment QR",
-    "free QR generator",
-    "instant payment QR",
-    "UPI deep link",
-    "payment QR code",
-  ],
-  alternates: {
-    canonical: "/tools/upi-qr-generator",
-  },
-  openGraph: {
-    title: "Free Dynamic UPI QR Generator",
-    description:
-      "Generate custom UPI QR codes with amounts and notes instantly. Share for quick payments.",
-    url: "/tools/upi-qr-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology UPI QR Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("upi-qr-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { JournalEntryTool } from "@/components/tools/bookkeeping/JournalEntryTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Journal Entry Tool | Setu",
-  description: "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup.",
-  keywords: ["journal entry", "double entry bookkeeping", "accounting journal online", "debit credit entry", "bookkeeping journal free"],
-  alternates: { canonical: "/tools/journal-entry" },
-  openGraph: {
-    title: "Journal Entry",
-    description: "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup.",
-    url: "/tools/journal-entry",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("journal-entry");
 
 const faqSchema = {
   "@context": "https://schema.org",

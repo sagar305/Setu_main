@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { QuotationGeneratorTool } from "@/components/tools/QuotationGenerator/QuotationGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Quotation Generator | Estimates & Quotes | Setu",
-  description:
-    "Create professional quotations and estimates with validity dates, tax and totals. Print or save as PDF. Free, offline, no signup.",
-  keywords: [
-    "quotation generator",
-    "free quotation maker",
-    "estimate generator",
-    "quote template",
-    "quotation format",
-    "proforma quote",
-  ],
-  alternates: { canonical: "/tools/quotation-generator" },
-  openGraph: {
-    title: "Free Quotation Generator",
-    description:
-      "Create professional quotes with validity dates and totals — print or save as PDF. No signup.",
-    url: "/tools/quotation-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Quotation Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("quotation-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

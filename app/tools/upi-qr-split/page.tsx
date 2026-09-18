@@ -1,41 +1,12 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { Suspense } from "react";
 import Link from "next/link";
 import { UpiQrSplitTool } from "@/components/tools/UpiQrSplit/UpiQrSplitTool";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Zero-MDR UPI QR Splitter — Split a Payment | Setu",
-  description:
-    "Split a large payment into several sub-₹2,000 UPI QR codes so no interchange or MDR applies. Free, no signup, and every QR is generated on your own device.",
-  keywords: [
-    "zero MDR UPI",
-    "UPI QR splitter",
-    "split payment QR code",
-    "avoid MDR charges",
-    "UPI 2000 limit interchange",
-    "MDR free payment collection",
-  ],
-  alternates: {
-    canonical: "/tools/upi-qr-split",
-  },
-  openGraph: {
-    title: "Zero-MDR UPI QR Splitter",
-    description:
-      "Break a large payment into several sub-₹2,000 UPI QR codes and collect the full amount without paying MDR.",
-    url: "/tools/upi-qr-split",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology zero-MDR UPI QR splitter",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("upi-qr-split");
 
 const faqSchema = {
   "@context": "https://schema.org",

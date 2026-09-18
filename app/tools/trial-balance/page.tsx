@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { TrialBalanceTool } from "@/components/tools/bookkeeping/TrialBalanceTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Trial Balance Generator | Setu",
-  description: "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup.",
-  keywords: ["trial balance", "trial balance format", "trial balance online", "debit credit balance check", "bookkeeping trial balance"],
-  alternates: { canonical: "/tools/trial-balance" },
-  openGraph: {
-    title: "Trial Balance",
-    description: "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup.",
-    url: "/tools/trial-balance",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("trial-balance");
 
 const faqSchema = {
   "@context": "https://schema.org",

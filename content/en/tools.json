@@ -114,15 +114,19 @@
       "icon": "file-text",
       "shortDescription": "Create, customize, and download professional invoices with GST support.",
       "seo": {
-        "title": "Free Invoice Generator | GST Compliant | Setu Technology",
-        "description": "Free online invoice generator for small businesses and restaurants. Create GST-compliant invoices, customize templates, and download as PDF. No signup required.",
+        "title": "Free Invoice Generator - GST Compliant Invoices",
+        "description": "Create professional GST-compliant invoices free. Multiple templates, automatic tax calculations, UPI support and instant PDF download. No signup required.",
         "keywords": [
-          "invoice generator",
           "free invoice generator",
-          "online invoice creator",
-          "GST invoice generator",
-          "invoice template"
-        ]
+          "invoice maker",
+          "GST invoice",
+          "invoice template",
+          "free invoice",
+          "online invoice generator",
+          "India invoice"
+        ],
+        "ogTitle": "Free Invoice Generator - GST Compliant",
+        "ogDescription": "Create professional invoices with GST calculations. No login needed. Download as PDF instantly."
       },
       "hero": {
         "eyebrow": "Free Tool — Invoice Generator",
@@ -137,15 +141,19 @@
       "icon": "qr-code",
       "shortDescription": "Generate dynamic UPI QR codes with custom amounts and notes for instant payments.",
       "seo": {
-        "title": "Free UPI QR Generator | Dynamic QR Codes | Setu Technology",
-        "description": "Generate dynamic UPI QR codes instantly. Enter your UPI ID, amount, and notes to create QR codes for payments. No signup required.",
+        "title": "Free Dynamic UPI QR Generator | Instant Payment Codes",
+        "description": "Generate dynamic UPI QR codes instantly. Enter your UPI ID, amount, and notes to create QR codes for quick payments. No signup required.",
         "keywords": [
           "UPI QR generator",
           "dynamic QR code",
           "UPI payment QR",
           "free QR generator",
-          "instant payment QR"
-        ]
+          "instant payment QR",
+          "UPI deep link",
+          "payment QR code"
+        ],
+        "ogTitle": "Free Dynamic UPI QR Generator",
+        "ogDescription": "Generate custom UPI QR codes with amounts and notes instantly. Share for quick payments."
       },
       "hero": {
         "eyebrow": "Free Tool — UPI QR Generator",
@@ -160,15 +168,18 @@
       "icon": "qr-code",
       "shortDescription": "Split a large payment into several sub-₹2,000 UPI QR codes so no MDR or interchange applies.",
       "seo": {
-        "title": "Zero-MDR UPI QR Splitter | Free Tool | Setu Technology",
-        "description": "Split a payment into several sub-₹2,000 UPI QR codes so no interchange or MDR applies. Free, no signup, generated on your own device.",
+        "title": "Zero-MDR UPI QR Splitter — Split a Payment | Setu",
+        "description": "Split a large payment into several sub-₹2,000 UPI QR codes so no interchange or MDR applies. Free, no signup, and every QR is generated on your own device.",
         "keywords": [
           "zero MDR UPI",
           "UPI QR splitter",
           "split payment QR code",
           "avoid MDR charges",
-          "UPI interchange 2000 limit"
-        ]
+          "UPI 2000 limit interchange",
+          "MDR free payment collection"
+        ],
+        "ogTitle": "Zero-MDR UPI QR Splitter",
+        "ogDescription": "Break a large payment into several sub-₹2,000 UPI QR codes and collect the full amount without paying MDR."
       },
       "hero": {
         "eyebrow": "Free Tool — Zero-MDR UPI QR Splitter",
@@ -183,15 +194,19 @@
       "icon": "qr-code",
       "shortDescription": "Create a digital menu QR code — the whole menu is stored inside the QR, no hosting needed.",
       "seo": {
-        "title": "Free QR Menu Generator | Digital Menu QR Code | Setu Technology",
-        "description": "Create a digital menu QR code for your restaurant. The whole menu is stored inside the QR code — no hosting, no subscription, no signup.",
+        "title": "Free QR Menu Generator for Restaurants | No Signup",
+        "description": "Create a digital menu QR code in minutes. The whole menu is stored inside the QR code — no hosting, no subscription, no signup. Print it and go.",
         "keywords": [
           "QR menu generator",
           "digital menu QR code",
           "restaurant QR menu",
           "free QR menu",
-          "contactless menu"
-        ]
+          "contactless menu",
+          "menu QR code maker",
+          "digital menu for restaurants"
+        ],
+        "ogTitle": "Free QR Menu Generator for Restaurants",
+        "ogDescription": "Build your menu, get a QR code, print it. The entire menu lives inside the QR — no hosting or subscription needed."
       },
       "hero": {
         "eyebrow": "Free Tool — QR Menu Generator",
@@ -206,13 +221,18 @@
       "icon": "notebook-pen",
       "shortDescription": "Professional quotes with validity dates and status tracking — print or PDF.",
       "seo": {
-        "title": "Quotation Generator | Setu Technology",
-        "description": "Create professional quotations with validity dates, tax and totals. Free, no signup.",
+        "title": "Free Quotation Generator | Estimates & Quotes | Setu",
+        "description": "Create professional quotations and estimates with validity dates, tax and totals. Print or save as PDF. Free, offline, no signup.",
         "keywords": [
           "quotation generator",
-          "estimate maker",
-          "quote template"
-        ]
+          "free quotation maker",
+          "estimate generator",
+          "quote template",
+          "quotation format",
+          "proforma quote"
+        ],
+        "ogTitle": "Free Quotation Generator",
+        "ogDescription": "Create professional quotes with validity dates and totals — print or save as PDF. No signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Quotation Generator",
@@ -227,12 +247,16 @@
       "icon": "store",
       "shortDescription": "Save your business details once — every Setu tool reuses them automatically.",
       "seo": {
-        "title": "Business Profile | Setu Technology",
-        "description": "Save business name, GSTIN, logo and contacts once. Every Setu tool reuses them.",
+        "title": "Business Profile | One Setup for Every Setu Tool | Setu",
+        "description": "Save your business name, GSTIN, logo and contact details once — every Setu tool reuses them automatically. Free, offline, no signup.",
         "keywords": [
           "business profile",
-          "business setup"
-        ]
+          "business details setup",
+          "GSTIN profile",
+          "business logo setup"
+        ],
+        "ogTitle": "Business Profile — One Setup for Every Setu Tool",
+        "ogDescription": "Fill your business details once. POS, invoices, receipts and labels reuse them automatically."
       },
       "hero": {
         "eyebrow": "Free Tool — Business Profile",
@@ -247,13 +271,18 @@
       "icon": "paintbrush",
       "shortDescription": "Design a receipt, fill in a sale and print it — and the Browser POS prints with the same design.",
       "seo": {
-        "title": "Receipt Generator | Setu Technology",
-        "description": "Design a thermal receipt, fill in a sale and print it — reuse the design across Setu tools.",
+        "title": "Free Receipt Generator | Make & Print Receipts | Setu",
+        "description": "Design your shop's receipt — logo, colours, header and footer — then fill in a sale and print it. The same design prints from the Setu POS too.",
         "keywords": [
           "receipt generator",
           "receipt maker",
-          "thermal receipt template"
-        ]
+          "thermal receipt template",
+          "80mm receipt design",
+          "print receipt online",
+          "POS receipt template"
+        ],
+        "ogTitle": "Free Receipt Generator — Design, Fill & Print",
+        "ogDescription": "Design a branded receipt, fill in a sale and print it — and reuse the design across Setu tools. Offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Receipt Generator",
@@ -268,13 +297,18 @@
       "icon": "barcode",
       "shortDescription": "Generate EAN-13, Code 128 and QR barcodes — download as PNG or PDF.",
       "seo": {
-        "title": "Barcode Generator | Setu Technology",
-        "description": "Free EAN-13, Code 128 and QR barcode generator. PNG and PDF download.",
+        "title": "Free Barcode Generator | EAN-13, Code 128 & QR | Setu",
+        "description": "Generate EAN-13, Code 128 and QR barcodes for free. Use your saved products, download as PNG or PDF. Works offline, no signup required.",
         "keywords": [
           "barcode generator",
-          "EAN-13",
-          "Code 128"
-        ]
+          "free barcode generator",
+          "EAN-13 generator",
+          "Code 128 generator",
+          "product barcode",
+          "barcode maker online"
+        ],
+        "ogTitle": "Free Barcode Generator — EAN-13, Code 128 & QR",
+        "ogDescription": "Generate product barcodes in your browser and download as PNG or PDF. No signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Barcode Generator",
@@ -289,13 +323,18 @@
       "icon": "printer",
       "shortDescription": "Print price and barcode labels on A4 sheets or thermal rolls.",
       "seo": {
-        "title": "Price Label Printer | Setu Technology",
-        "description": "Print product price and barcode labels on A4 label sheets or thermal rolls.",
+        "title": "Free Price Label Printer | A4 & Thermal Labels | Setu",
+        "description": "Print price and barcode labels for your products — A4 label sheets (65/40/24 per sheet) or thermal rolls. Free, offline, no signup.",
         "keywords": [
           "label printer",
-          "price labels",
-          "barcode labels"
-        ]
+          "price label generator",
+          "barcode label printing",
+          "product labels A4",
+          "thermal label 50x25",
+          "shelf label generator"
+        ],
+        "ogTitle": "Free Price & Barcode Label Printer",
+        "ogDescription": "Print product labels on A4 label sheets or thermal rolls, right from your browser."
       },
       "hero": {
         "eyebrow": "Free Tool — Label Printer",
@@ -310,12 +349,17 @@
       "icon": "boxes",
       "shortDescription": "Live stock levels, adjustments and movement history — shared with your POS.",
       "seo": {
-        "title": "Free Stock Register | Track Live Inventory Levels",
-        "description": "Live stock levels and movement history, one source of truth with the Browser POS.",
+        "title": "Free Stock Register | Live Inventory & Adjustments | Setu",
+        "description": "See live stock levels, record stock in/out and review every movement — shared with your Setu Browser POS. Free, offline, no signup.",
         "keywords": [
           "stock register",
-          "inventory tracker"
-        ]
+          "inventory register",
+          "stock management free",
+          "stock in out register",
+          "inventory tracker offline"
+        ],
+        "ogTitle": "Free Stock Register — Live Inventory & Adjustments",
+        "ogDescription": "Live stock levels, adjustments and full movement history — shared with the Setu Browser POS."
       },
       "hero": {
         "eyebrow": "Free Tool — Stock Register",
@@ -330,12 +374,17 @@
       "icon": "clipboard-list",
       "shortDescription": "Record supplier bills and update product stock with one confirmation.",
       "seo": {
-        "title": "Purchase Register | Setu Technology",
-        "description": "Record purchases against suppliers and update stock automatically.",
+        "title": "Free Purchase Register | Record Supplier Bills | Setu",
+        "description": "Record purchase bills against suppliers, link items to your products and update stock automatically. Free, offline, no signup.",
         "keywords": [
           "purchase register",
-          "supplier bills"
-        ]
+          "purchase bill record",
+          "supplier purchases",
+          "purchase entry free",
+          "stock purchase register"
+        ],
+        "ogTitle": "Free Purchase Register — Supplier Bills & Stock",
+        "ogDescription": "Record purchases, reuse suppliers from your Supplier Book, and update product stock with one confirmation."
       },
       "hero": {
         "eyebrow": "Free Tool — Purchase Register",
@@ -350,12 +399,17 @@
       "icon": "truck",
       "shortDescription": "All your vendors in one place — reused by the Purchase Register.",
       "seo": {
-        "title": "Free Supplier Book | Manage Vendor Contacts & GSTIN",
-        "description": "Keep supplier contacts, GSTIN and addresses in one reusable book.",
+        "title": "Free Supplier Book | Vendor Contacts & GSTIN | Setu",
+        "description": "Keep all your supplier and vendor details in one place — contacts, GSTIN, addresses and notes. Free, offline, no signup, reusable across Setu tools.",
         "keywords": [
           "supplier book",
-          "vendor management"
-        ]
+          "vendor management free",
+          "supplier contacts",
+          "supplier GSTIN record",
+          "vendor register"
+        ],
+        "ogTitle": "Free Supplier Book — Vendor Contacts & GSTIN",
+        "ogDescription": "Save supplier details once, reuse them in the Purchase Register and every Setu tool."
       },
       "hero": {
         "eyebrow": "Free Tool — Supplier Book",
@@ -370,12 +424,17 @@
       "icon": "wallet",
       "shortDescription": "Track expenses by category with monthly totals and CSV export.",
       "seo": {
-        "title": "Expense Tracker | Setu Technology",
-        "description": "Free business expense tracker with categories and monthly totals.",
+        "title": "Free Expense Tracker for Small Business | Setu",
+        "description": "Track business expenses by category — rent, salaries, purchases, bills. Monthly totals, CSV export. Free, offline, no signup.",
         "keywords": [
           "expense tracker",
-          "business expenses"
-        ]
+          "business expense tracker free",
+          "shop expense record",
+          "expense register",
+          "kharcha tracker"
+        ],
+        "ogTitle": "Free Business Expense Tracker",
+        "ogDescription": "Track expenses by category with monthly totals and CSV export. Offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Expense Tracker",
@@ -390,12 +449,18 @@
       "icon": "hand-coins",
       "shortDescription": "Daily cash in/out with automatic opening and closing balances.",
       "seo": {
-        "title": "Free Cash Book Tool | Track Daily Cash In & Out",
-        "description": "Simple daily cash book with automatic opening and closing balances.",
+        "title": "Free Cash Book | Daily Cash In/Out & Closing Balance | Setu",
+        "description": "Simple daily cash book for your shop — record cash in and out, get opening and closing balances automatically. Free, offline, no signup.",
         "keywords": [
           "cash book",
-          "daily cash register"
-        ]
+          "daily cash register",
+          "cash in out book",
+          "shop cash book free",
+          "rojnamcha",
+          "cash closing balance"
+        ],
+        "ogTitle": "Free Daily Cash Book",
+        "ogDescription": "Record cash in/out and get opening & closing balances automatically. Offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Cash Book",
@@ -410,12 +475,17 @@
       "icon": "bar-chart-3",
       "shortDescription": "Real profit from your own sales, product costs and expenses.",
       "seo": {
-        "title": "Profit Dashboard | Setu Technology",
-        "description": "Net profit from POS sales, cost of goods and actual expenses — with charts.",
+        "title": "Free Profit Dashboard | Sales Minus Real Costs | Setu",
+        "description": "See your real business profit — revenue from your POS sales, minus cost of goods and actual expenses. Charts, date ranges, offline, no signup.",
         "keywords": [
           "profit dashboard",
-          "business profit"
-        ]
+          "business profit calculator",
+          "shop profit tracker",
+          "net profit small business",
+          "profit and loss free"
+        ],
+        "ogTitle": "Free Profit Dashboard — Real Profit, Real Numbers",
+        "ogDescription": "Revenue minus cost of goods minus actual expenses — computed from your own data, on your device."
       },
       "hero": {
         "eyebrow": "Free Tool — Profit Dashboard",
@@ -430,13 +500,18 @@
       "icon": "book-user",
       "shortDescription": "Digital udhaar khata — credit, payments and balances per customer.",
       "seo": {
-        "title": "Customer Ledger (Udhaar Khata) | Setu Technology",
-        "description": "Track customer balances, payments and dues in one free ledger. No signup — add customers, log transactions and see who owes what, instantly, in your browser.",
+        "title": "Free Customer Ledger — Digital Udhaar Khata | Setu",
+        "description": "Digital udhaar khata — track credit given and payments received per customer, with running balances. Free, offline, no signup.",
         "keywords": [
           "udhaar khata",
           "customer ledger",
-          "credit book"
-        ]
+          "credit book",
+          "khata book free",
+          "customer credit tracker",
+          "udhar bahi khata"
+        ],
+        "ogTitle": "Free Customer Ledger — Digital Udhaar Khata",
+        "ogDescription": "Track credit and payments per customer with automatic balances. Offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Customer Ledger",
@@ -451,12 +526,17 @@
       "icon": "calendar-days",
       "shortDescription": "Day-wise bookings with durations, statuses and no-show tracking.",
       "seo": {
-        "title": "Appointment Book | Setu Technology",
-        "description": "Free appointment book for salons, clinics, consultants and services.",
+        "title": "Free Appointment Book | Salons, Clinics & Services | Setu",
+        "description": "Book and manage appointments — day view, statuses, durations, no-shows. For salons, clinics, consultants and repair shops. Free, offline, no signup.",
         "keywords": [
           "appointment book",
-          "appointment scheduler"
-        ]
+          "free appointment scheduler",
+          "salon appointment book",
+          "clinic appointment register",
+          "appointment diary online"
+        ],
+        "ogTitle": "Free Appointment Book",
+        "ogDescription": "Day-wise appointment management for salons, clinics and services. Offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Appointment Book",
@@ -472,13 +552,17 @@
       "icon": "file-minus",
       "shortDescription": "Issue GST-ready credit notes for returns and billing adjustments. Instant PDF, no signup.",
       "seo": {
-        "title": "Credit Note Generator - Free Tool | Setu Technology",
-        "description": "Issue GST-ready credit notes for returns and billing adjustments. Instant PDF, no signup.",
+        "title": "Free Credit Note Generator | GST-Ready PDF | Setu",
+        "description": "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup.",
         "keywords": [
           "credit note generator",
+          "credit note format",
           "GST credit note",
-          "credit note format"
-        ]
+          "credit note against invoice",
+          "free credit note maker"
+        ],
+        "ogTitle": "Credit Note Generator",
+        "ogDescription": "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Credit Note Generator",
@@ -494,13 +578,17 @@
       "icon": "file-plus",
       "shortDescription": "Create debit notes for purchase returns, short supply and rate differences. Instant PDF.",
       "seo": {
-        "title": "Debit Note Generator - Free Tool | Setu Technology",
-        "description": "Create debit notes for purchase returns, short supply and rate differences. Instant PDF.",
+        "title": "Free Debit Note Generator | Setu",
+        "description": "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup.",
         "keywords": [
           "debit note generator",
+          "debit note format",
           "purchase return note",
-          "debit note format"
-        ]
+          "GST debit note",
+          "free debit note maker"
+        ],
+        "ogTitle": "Debit Note Generator",
+        "ogDescription": "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Debit Note Generator",
@@ -516,13 +604,17 @@
       "icon": "clipboard-list",
       "shortDescription": "Authorize supplier purchases formally — items, rates, delivery date and terms on one PO.",
       "seo": {
-        "title": "Purchase Order Generator - Free Tool | Setu Technology",
-        "description": "Authorize supplier purchases formally — items, rates, delivery date and terms on one PO.",
+        "title": "Free Purchase Order Generator | Setu",
+        "description": "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup.",
         "keywords": [
           "purchase order generator",
           "PO maker",
-          "purchase order format"
-        ]
+          "purchase order format",
+          "free purchase order template",
+          "PO PDF"
+        ],
+        "ogTitle": "Purchase Order Generator",
+        "ogDescription": "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Purchase Order Generator",
@@ -538,13 +630,17 @@
       "icon": "file-text",
       "shortDescription": "Confirm customer orders before dispatch — items, prices and delivery date in one document.",
       "seo": {
-        "title": "Sales Order Generator - Free Tool | Setu Technology",
-        "description": "Confirm customer orders before dispatch — items, prices and delivery date in one document.",
+        "title": "Free Sales Order Generator | Setu",
+        "description": "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup.",
         "keywords": [
           "sales order generator",
-          "order confirmation",
-          "sales order format"
-        ]
+          "sales order format",
+          "order confirmation document",
+          "SO maker",
+          "free sales order template"
+        ],
+        "ogTitle": "Sales Order Generator",
+        "ogDescription": "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Sales Order Generator",
@@ -560,13 +656,17 @@
       "icon": "list-checks",
       "shortDescription": "Build your account list from a ready small-business template — codes, types, CSV export.",
       "seo": {
-        "title": "Chart of Accounts - Free Tool | Setu Technology",
-        "description": "Build your account list from a ready small-business template — codes, types, CSV export.",
+        "title": "Free Chart of Accounts Builder | Setu",
+        "description": "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup.",
         "keywords": [
           "chart of accounts",
           "COA template",
-          "account codes"
-        ]
+          "chart of accounts for small business",
+          "account codes",
+          "bookkeeping accounts list"
+        ],
+        "ogTitle": "Chart of Accounts",
+        "ogDescription": "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Chart of Accounts",
@@ -582,13 +682,17 @@
       "icon": "notebook-pen",
       "shortDescription": "Double-entry bookkeeping with automatic debit/credit balancing. Feeds ledger & trial balance.",
       "seo": {
-        "title": "Journal Entry - Free Tool | Setu Technology",
-        "description": "Double-entry bookkeeping with automatic debit/credit balancing. Feeds ledger & trial balance.",
+        "title": "Free Journal Entry Tool | Setu",
+        "description": "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup.",
         "keywords": [
           "journal entry",
           "double entry bookkeeping",
-          "accounting journal"
-        ]
+          "accounting journal online",
+          "debit credit entry",
+          "bookkeeping journal free"
+        ],
+        "ogTitle": "Journal Entry",
+        "ogDescription": "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Journal Entry",
@@ -604,13 +708,17 @@
       "icon": "book-open",
       "shortDescription": "Account-wise ledgers with running balances, built automatically from your journal.",
       "seo": {
-        "title": "General Ledger - Free Tool | Setu Technology",
-        "description": "Account-wise ledgers with running balances, built automatically from your journal.",
+        "title": "Free General Ledger Tool | Setu",
+        "description": "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup.",
         "keywords": [
           "general ledger",
-          "ledger account",
-          "running balance"
-        ]
+          "ledger account online",
+          "running balance ledger",
+          "account ledger free",
+          "bookkeeping ledger"
+        ],
+        "ogTitle": "General Ledger",
+        "ogDescription": "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — General Ledger",
@@ -626,13 +734,17 @@
       "icon": "arrow-left-right",
       "shortDescription": "Match your bank statement to your books — uncleared cheques, deposits in transit, charges.",
       "seo": {
-        "title": "Bank Reconciliation - Free Tool | Setu Technology",
-        "description": "Match your bank statement to your books — uncleared cheques, deposits in transit, charges.",
+        "title": "Free Bank Reconciliation Tool | Setu",
+        "description": "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup.",
         "keywords": [
           "bank reconciliation",
-          "BRS",
-          "reconcile bank statement"
-        ]
+          "bank reconciliation statement",
+          "BRS format",
+          "reconcile bank statement",
+          "bank book difference"
+        ],
+        "ogTitle": "Bank Reconciliation",
+        "ogDescription": "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Bank Reconciliation",
@@ -670,13 +782,17 @@
       "icon": "scale",
       "shortDescription": "Auto-built from your journal — every account's net balance, totalled and checked.",
       "seo": {
-        "title": "Trial Balance - Free Tool | Setu Technology",
-        "description": "Auto-built from your journal — every account's net balance, totalled and checked.",
+        "title": "Free Trial Balance Generator | Setu",
+        "description": "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup.",
         "keywords": [
           "trial balance",
           "trial balance format",
-          "debit credit check"
-        ]
+          "trial balance online",
+          "debit credit balance check",
+          "bookkeeping trial balance"
+        ],
+        "ogTitle": "Trial Balance",
+        "ogDescription": "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Trial Balance",
@@ -692,13 +808,17 @@
       "icon": "trending-up",
       "shortDescription": "Build a P&L — revenue to net profit with margins computed live. Print PDF or export CSV.",
       "seo": {
-        "title": "Profit & Loss Statement - Free Tool | Setu Technology",
-        "description": "Build a P&L — revenue to net profit with margins computed live. Print PDF or export CSV.",
+        "title": "Free Profit & Loss Statement | Setu",
+        "description": "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup.",
         "keywords": [
           "profit and loss statement",
           "P&L maker",
-          "income statement"
-        ]
+          "income statement online",
+          "profit loss format",
+          "free P&L template"
+        ],
+        "ogTitle": "Profit & Loss Statement",
+        "ogDescription": "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Profit & Loss Statement",
@@ -714,13 +834,17 @@
       "icon": "layers",
       "shortDescription": "Assets, liabilities and equity with a live balance check. A4 print and CSV export.",
       "seo": {
-        "title": "Balance Sheet - Free Tool | Setu Technology",
-        "description": "Assets, liabilities and equity with a live balance check. A4 print and CSV export.",
+        "title": "Free Balance Sheet Maker | Setu",
+        "description": "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup.",
         "keywords": [
           "balance sheet maker",
           "balance sheet format",
-          "assets liabilities equity"
-        ]
+          "balance sheet online free",
+          "assets liabilities equity",
+          "small business balance sheet"
+        ],
+        "ogTitle": "Balance Sheet",
+        "ogDescription": "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Balance Sheet",
@@ -736,13 +860,17 @@
       "icon": "refresh-cw",
       "shortDescription": "Operating, investing and financing flows from opening to closing cash. Print or export.",
       "seo": {
-        "title": "Cash Flow Statement - Free Tool | Setu Technology",
-        "description": "Operating, investing and financing flows from opening to closing cash. Print or export.",
+        "title": "Free Cash Flow Statement Maker | Setu",
+        "description": "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup.",
         "keywords": [
           "cash flow statement",
           "cash flow format",
-          "operating investing financing"
-        ]
+          "cash flow online free",
+          "operating investing financing",
+          "small business cash flow"
+        ],
+        "ogTitle": "Cash Flow Statement",
+        "ogDescription": "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Cash Flow Statement",
@@ -758,13 +886,17 @@
       "icon": "book-user",
       "shortDescription": "Statement of account per customer — invoices, payments and running balance. Print to PDF.",
       "seo": {
-        "title": "Customer Statement - Free Tool | Setu Technology",
-        "description": "Statement of account per customer — invoices, payments and running balance. Print to PDF.",
+        "title": "Free Customer Statement Generator | Setu",
+        "description": "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup.",
         "keywords": [
           "customer statement",
           "statement of account",
+          "customer account statement format",
+          "outstanding balance statement",
           "debtor statement"
-        ]
+        ],
+        "ogTitle": "Customer Statement",
+        "ogDescription": "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Customer Statement",
@@ -780,13 +912,17 @@
       "icon": "clock",
       "shortDescription": "Unpaid customer invoices in aging buckets — current to 90+ days, by customer. CSV export.",
       "seo": {
-        "title": "Invoice Aging Report - Free Tool | Setu Technology",
-        "description": "Unpaid customer invoices in aging buckets — current to 90+ days, by customer. CSV export.",
+        "title": "Free Invoice Aging Report | Setu",
+        "description": "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup.",
         "keywords": [
           "invoice aging report",
           "accounts receivable aging",
-          "AR aging"
-        ]
+          "AR aging",
+          "overdue invoices report",
+          "debtor aging analysis"
+        ],
+        "ogTitle": "Invoice Aging Report",
+        "ogDescription": "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Invoice Aging Report",
@@ -802,13 +938,17 @@
       "icon": "truck",
       "shortDescription": "Unpaid supplier bills bucketed by age — pay the right people at the right time. CSV export.",
       "seo": {
-        "title": "Accounts Payable Aging - Free Tool | Setu Technology",
-        "description": "Unpaid supplier bills bucketed by age — pay the right people at the right time. CSV export.",
+        "title": "Free Accounts Payable Aging Report | Setu",
+        "description": "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup.",
         "keywords": [
           "accounts payable aging",
           "AP aging report",
-          "supplier bills"
-        ]
+          "supplier bills tracker",
+          "creditor aging",
+          "payables report"
+        ],
+        "ogTitle": "Accounts Payable Aging",
+        "ogDescription": "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Accounts Payable Aging",
@@ -824,13 +964,17 @@
       "icon": "target",
       "shortDescription": "Plan vs reality by category with variance and variance % computed live. CSV export.",
       "seo": {
-        "title": "Budget vs Actual - Free Tool | Setu Technology",
-        "description": "Plan vs reality by category with variance and variance % computed live. CSV export.",
+        "title": "Free Budget vs Actual Tracker | Setu",
+        "description": "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup.",
         "keywords": [
           "budget vs actual",
           "variance report",
-          "budget tracker"
-        ]
+          "budget tracker business",
+          "budget variance analysis",
+          "monthly budget comparison"
+        ],
+        "ogTitle": "Budget vs Actual",
+        "ogDescription": "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Budget vs Actual",
@@ -846,13 +990,17 @@
       "icon": "chart-pie",
       "shortDescription": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule.",
       "seo": {
-        "title": "ABC Analysis - Free Tool | Setu Technology",
-        "description": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule.",
+        "title": "Free ABC Analysis Calculator | Setu",
+        "description": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup.",
         "keywords": [
           "ABC analysis",
           "inventory classification",
-          "pareto analysis"
-        ]
+          "ABC inventory method",
+          "pareto inventory analysis",
+          "stock control ABC"
+        ],
+        "ogTitle": "ABC Analysis",
+        "ogDescription": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — ABC Analysis",
@@ -868,13 +1016,17 @@
       "icon": "git-compare",
       "shortDescription": "Compare suppliers on price, delivery, credit and quality with weighted scoring.",
       "seo": {
-        "title": "Vendor Comparison - Free Tool | Setu Technology",
-        "description": "Compare suppliers on price, delivery, credit and quality with weighted scoring.",
+        "title": "Free Vendor Comparison Tool | Setu",
+        "description": "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup.",
         "keywords": [
           "vendor comparison",
+          "supplier comparison tool",
           "supplier scorecard",
-          "vendor selection"
-        ]
+          "vendor selection criteria",
+          "weighted supplier scoring"
+        ],
+        "ogTitle": "Vendor Comparison",
+        "ogDescription": "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup."
       },
       "hero": {
         "eyebrow": "Free Tool — Vendor Comparison",

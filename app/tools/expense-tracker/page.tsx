@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTrackerTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Expense Tracker for Small Business | Setu",
-  description:
-    "Track business expenses by category — rent, salaries, purchases, bills. Monthly totals, CSV export. Free, offline, no signup.",
-  keywords: [
-    "expense tracker",
-    "business expense tracker free",
-    "shop expense record",
-    "expense register",
-    "kharcha tracker",
-  ],
-  alternates: { canonical: "/tools/expense-tracker" },
-  openGraph: {
-    title: "Free Business Expense Tracker",
-    description:
-      "Track expenses by category with monthly totals and CSV export. Offline, no signup.",
-    url: "/tools/expense-tracker",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Expense Tracker",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("expense-tracker");
 
 const faqSchema = {
   "@context": "https://schema.org",

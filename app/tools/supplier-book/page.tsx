@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { SupplierBookTool } from "@/components/tools/SupplierBook/SupplierBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Supplier Book | Vendor Contacts & GSTIN | Setu",
-  description:
-    "Keep all your supplier and vendor details in one place — contacts, GSTIN, addresses and notes. Free, offline, no signup, reusable across Setu tools.",
-  keywords: [
-    "supplier book",
-    "vendor management free",
-    "supplier contacts",
-    "supplier GSTIN record",
-    "vendor register",
-  ],
-  alternates: { canonical: "/tools/supplier-book" },
-  openGraph: {
-    title: "Free Supplier Book — Vendor Contacts & GSTIN",
-    description:
-      "Save supplier details once, reuse them in the Purchase Register and every Setu tool.",
-    url: "/tools/supplier-book",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Supplier Book",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("supplier-book");
 
 const faqSchema = {
   "@context": "https://schema.org",

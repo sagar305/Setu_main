@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { BalanceSheetTool } from "@/components/tools/statements/BalanceSheetTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Balance Sheet Maker | Setu",
-  description: "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup.",
-  keywords: ["balance sheet maker", "balance sheet format", "balance sheet online free", "assets liabilities equity", "small business balance sheet"],
-  alternates: { canonical: "/tools/balance-sheet" },
-  openGraph: {
-    title: "Balance Sheet",
-    description: "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup.",
-    url: "/tools/balance-sheet",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("balance-sheet");
 
 const faqSchema = {
   "@context": "https://schema.org",

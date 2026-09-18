@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { GeneralLedgerTool } from "@/components/tools/bookkeeping/GeneralLedgerTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free General Ledger Tool | Setu",
-  description: "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup.",
-  keywords: ["general ledger", "ledger account online", "running balance ledger", "account ledger free", "bookkeeping ledger"],
-  alternates: { canonical: "/tools/general-ledger" },
-  openGraph: {
-    title: "General Ledger",
-    description: "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup.",
-    url: "/tools/general-ledger",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("general-ledger");
 
 const faqSchema = {
   "@context": "https://schema.org",

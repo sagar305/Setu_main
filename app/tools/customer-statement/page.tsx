@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { CustomerStatementTool } from "@/components/tools/statements/CustomerStatementTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Customer Statement Generator | Setu",
-  description: "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup.",
-  keywords: ["customer statement", "statement of account", "customer account statement format", "outstanding balance statement", "debtor statement"],
-  alternates: { canonical: "/tools/customer-statement" },
-  openGraph: {
-    title: "Customer Statement",
-    description: "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup.",
-    url: "/tools/customer-statement",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("customer-statement");
 
 const faqSchema = {
   "@context": "https://schema.org",

@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { AgingReportTool } from "@/components/tools/aging/AgingReportTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Accounts Payable Aging Report | Setu",
-  description: "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup.",
-  keywords: ["accounts payable aging", "AP aging report", "supplier bills tracker", "creditor aging", "payables report"],
-  alternates: { canonical: "/tools/accounts-payable-aging" },
-  openGraph: {
-    title: "Accounts Payable Aging",
-    description: "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup.",
-    url: "/tools/accounts-payable-aging",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("accounts-payable-aging");
 
 const faqSchema = {
   "@context": "https://schema.org",

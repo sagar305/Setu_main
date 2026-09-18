@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Sales Order Generator | Setu",
-  description: "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup.",
-  keywords: ["sales order generator", "sales order format", "order confirmation document", "SO maker", "free sales order template"],
-  alternates: { canonical: "/tools/sales-order-generator" },
-  openGraph: {
-    title: "Sales Order Generator",
-    description: "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup.",
-    url: "/tools/sales-order-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("sales-order-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

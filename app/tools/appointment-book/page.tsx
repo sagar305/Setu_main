@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { AppointmentBookTool } from "@/components/tools/AppointmentBook/AppointmentBookTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Appointment Book | Salons, Clinics & Services | Setu",
-  description:
-    "Book and manage appointments — day view, statuses, durations, no-shows. For salons, clinics, consultants and repair shops. Free, offline, no signup.",
-  keywords: [
-    "appointment book",
-    "free appointment scheduler",
-    "salon appointment book",
-    "clinic appointment register",
-    "appointment diary online",
-  ],
-  alternates: { canonical: "/tools/appointment-book" },
-  openGraph: {
-    title: "Free Appointment Book",
-    description:
-      "Day-wise appointment management for salons, clinics and services. Offline, no signup.",
-    url: "/tools/appointment-book",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Appointment Book",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("appointment-book");
 
 const faqSchema = {
   "@context": "https://schema.org",

@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { ProfitDashboardTool } from "@/components/tools/ProfitDashboard/ProfitDashboardTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Profit Dashboard | Sales Minus Real Costs | Setu",
-  description:
-    "See your real business profit — revenue from your POS sales, minus cost of goods and actual expenses. Charts, date ranges, offline, no signup.",
-  keywords: [
-    "profit dashboard",
-    "business profit calculator",
-    "shop profit tracker",
-    "net profit small business",
-    "profit and loss free",
-  ],
-  alternates: { canonical: "/tools/profit-dashboard" },
-  openGraph: {
-    title: "Free Profit Dashboard — Real Profit, Real Numbers",
-    description:
-      "Revenue minus cost of goods minus actual expenses — computed from your own data, on your device.",
-    url: "/tools/profit-dashboard",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Profit Dashboard",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("profit-dashboard");
 
 const faqSchema = {
   "@context": "https://schema.org",

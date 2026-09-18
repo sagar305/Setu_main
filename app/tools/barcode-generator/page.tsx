@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { BarcodeGeneratorTool } from "@/components/tools/BarcodeGenerator/BarcodeGeneratorTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Barcode Generator | EAN-13, Code 128 & QR | Setu",
-  description:
-    "Generate EAN-13, Code 128 and QR barcodes for free. Use your saved products, download as PNG or PDF. Works offline, no signup required.",
-  keywords: [
-    "barcode generator",
-    "free barcode generator",
-    "EAN-13 generator",
-    "Code 128 generator",
-    "product barcode",
-    "barcode maker online",
-  ],
-  alternates: { canonical: "/tools/barcode-generator" },
-  openGraph: {
-    title: "Free Barcode Generator — EAN-13, Code 128 & QR",
-    description:
-      "Generate product barcodes in your browser and download as PNG or PDF. No signup.",
-    url: "/tools/barcode-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Barcode Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("barcode-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

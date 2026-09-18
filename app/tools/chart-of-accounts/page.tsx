@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { ChartOfAccountsTool } from "@/components/tools/bookkeeping/ChartOfAccountsTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Chart of Accounts Builder | Setu",
-  description: "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup.",
-  keywords: ["chart of accounts", "COA template", "chart of accounts for small business", "account codes", "bookkeeping accounts list"],
-  alternates: { canonical: "/tools/chart-of-accounts" },
-  openGraph: {
-    title: "Chart of Accounts",
-    description: "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup.",
-    url: "/tools/chart-of-accounts",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("chart-of-accounts");
 
 const faqSchema = {
   "@context": "https://schema.org",

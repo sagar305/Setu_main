@@ -1,38 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { LabelPrinterTool } from "@/components/tools/LabelPrinter/LabelPrinterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Price Label Printer | A4 & Thermal Labels | Setu",
-  description:
-    "Print price and barcode labels for your products — A4 label sheets (65/40/24 per sheet) or thermal rolls. Free, offline, no signup.",
-  keywords: [
-    "label printer",
-    "price label generator",
-    "barcode label printing",
-    "product labels A4",
-    "thermal label 50x25",
-    "shelf label generator",
-  ],
-  alternates: { canonical: "/tools/label-printer" },
-  openGraph: {
-    title: "Free Price & Barcode Label Printer",
-    description:
-      "Print product labels on A4 label sheets or thermal rolls, right from your browser.",
-    url: "/tools/label-printer",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Label Printer",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("label-printer");
 
 const faqSchema = {
   "@context": "https://schema.org",

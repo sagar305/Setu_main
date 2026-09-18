@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { BankReconciliationTool } from "@/components/tools/bookkeeping/BankReconciliationTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Bank Reconciliation Tool | Setu",
-  description: "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup.",
-  keywords: ["bank reconciliation", "bank reconciliation statement", "BRS format", "reconcile bank statement", "bank book difference"],
-  alternates: { canonical: "/tools/bank-reconciliation" },
-  openGraph: {
-    title: "Bank Reconciliation",
-    description: "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup.",
-    url: "/tools/bank-reconciliation",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("bank-reconciliation");
 
 const faqSchema = {
   "@context": "https://schema.org",

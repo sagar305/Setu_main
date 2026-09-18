@@ -1,36 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { BusinessProfileTool } from "@/components/tools/BusinessProfile/BusinessProfileTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Business Profile | One Setup for Every Setu Tool | Setu",
-  description:
-    "Save your business name, GSTIN, logo and contact details once — every Setu tool reuses them automatically. Free, offline, no signup.",
-  keywords: [
-    "business profile",
-    "business details setup",
-    "GSTIN profile",
-    "business logo setup",
-  ],
-  alternates: { canonical: "/tools/business-profile" },
-  openGraph: {
-    title: "Business Profile — One Setup for Every Setu Tool",
-    description:
-      "Fill your business details once. POS, invoices, receipts and labels reuse them automatically.",
-    url: "/tools/business-profile",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Business Profile",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("business-profile");
 
 const faqSchema = {
   "@context": "https://schema.org",

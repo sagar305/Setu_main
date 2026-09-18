@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Credit Note Generator | GST-Ready PDF | Setu",
-  description: "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup.",
-  keywords: ["credit note generator", "credit note format", "GST credit note", "credit note against invoice", "free credit note maker"],
-  alternates: { canonical: "/tools/credit-note-generator" },
-  openGraph: {
-    title: "Credit Note Generator",
-    description: "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup.",
-    url: "/tools/credit-note-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("credit-note-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

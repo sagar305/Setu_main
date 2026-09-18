@@ -58,7 +58,6 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "mdr-calculator": [],
   },
   tools: {
-    "browser-based-pos": [],
     "invoice-generator": [],
     "upi-qr-generator": [],
     "upi-qr-split": [],
@@ -84,7 +83,6 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "journal-entry": [],
     "general-ledger": [],
     "bank-reconciliation": [],
-    "bank-statement-analyzer": [],
     "trial-balance": [],
     "profit-loss-statement": [],
     "balance-sheet": [],

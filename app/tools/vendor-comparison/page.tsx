@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { VendorComparisonTool } from "@/components/tools/analysis/VendorComparisonTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Vendor Comparison Tool | Setu",
-  description: "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup.",
-  keywords: ["vendor comparison", "supplier comparison tool", "supplier scorecard", "vendor selection criteria", "weighted supplier scoring"],
-  alternates: { canonical: "/tools/vendor-comparison" },
-  openGraph: {
-    title: "Vendor Comparison",
-    description: "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup.",
-    url: "/tools/vendor-comparison",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("vendor-comparison");
 
 const faqSchema = {
   "@context": "https://schema.org",

@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { CashFlowTool } from "@/components/tools/statements/CashFlowTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Cash Flow Statement Maker | Setu",
-  description: "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup.",
-  keywords: ["cash flow statement", "cash flow format", "cash flow online free", "operating investing financing", "small business cash flow"],
-  alternates: { canonical: "/tools/cash-flow-statement" },
-  openGraph: {
-    title: "Cash Flow Statement",
-    description: "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup.",
-    url: "/tools/cash-flow-statement",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("cash-flow-statement");
 
 const faqSchema = {
   "@context": "https://schema.org",

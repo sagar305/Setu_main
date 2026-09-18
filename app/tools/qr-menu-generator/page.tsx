@@ -1,41 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { QrMenuGeneratorTool } from "@/components/tools/QrMenuGenerator/QrMenuGeneratorTool";
 import { QR_MENU_PRODUCT_PATH } from "@/lib/premiumLinks";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free QR Menu Generator for Restaurants | No Signup",
-  description:
-    "Create a digital menu QR code in minutes. The whole menu is stored inside the QR code — no hosting, no subscription, no signup. Print it and go.",
-  keywords: [
-    "QR menu generator",
-    "digital menu QR code",
-    "restaurant QR menu",
-    "free QR menu",
-    "contactless menu",
-    "menu QR code maker",
-    "digital menu for restaurants",
-  ],
-  alternates: {
-    canonical: "/tools/qr-menu-generator",
-  },
-  openGraph: {
-    title: "Free QR Menu Generator for Restaurants",
-    description:
-      "Build your menu, get a QR code, print it. The entire menu lives inside the QR — no hosting or subscription needed.",
-    url: "/tools/qr-menu-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology QR Menu Generator",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("qr-menu-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

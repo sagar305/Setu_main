@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { StockRegisterTool } from "@/components/tools/StockRegister/StockRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Stock Register | Live Inventory & Adjustments | Setu",
-  description:
-    "See live stock levels, record stock in/out and review every movement — shared with your Setu Browser POS. Free, offline, no signup.",
-  keywords: [
-    "stock register",
-    "inventory register",
-    "stock management free",
-    "stock in out register",
-    "inventory tracker offline",
-  ],
-  alternates: { canonical: "/tools/stock-register" },
-  openGraph: {
-    title: "Free Stock Register — Live Inventory & Adjustments",
-    description:
-      "Live stock levels, adjustments and full movement history — shared with the Setu Browser POS.",
-    url: "/tools/stock-register",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Stock Register",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("stock-register");
 
 const faqSchema = {
   "@context": "https://schema.org",

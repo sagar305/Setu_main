@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Debit Note Generator | Setu",
-  description: "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup.",
-  keywords: ["debit note generator", "debit note format", "purchase return note", "GST debit note", "free debit note maker"],
-  alternates: { canonical: "/tools/debit-note-generator" },
-  openGraph: {
-    title: "Debit Note Generator",
-    description: "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup.",
-    url: "/tools/debit-note-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("debit-note-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

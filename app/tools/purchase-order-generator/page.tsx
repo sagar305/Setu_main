@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Purchase Order Generator | Setu",
-  description: "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup.",
-  keywords: ["purchase order generator", "PO maker", "purchase order format", "free purchase order template", "PO PDF"],
-  alternates: { canonical: "/tools/purchase-order-generator" },
-  openGraph: {
-    title: "Purchase Order Generator",
-    description: "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup.",
-    url: "/tools/purchase-order-generator",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("purchase-order-generator");
 
 const faqSchema = {
   "@context": "https://schema.org",

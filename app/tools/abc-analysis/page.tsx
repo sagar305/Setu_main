@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { AbcAnalysisTool } from "@/components/tools/analysis/AbcAnalysisTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free ABC Analysis Calculator | Setu",
-  description: "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup.",
-  keywords: ["ABC analysis", "inventory classification", "ABC inventory method", "pareto inventory analysis", "stock control ABC"],
-  alternates: { canonical: "/tools/abc-analysis" },
-  openGraph: {
-    title: "ABC Analysis",
-    description: "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup.",
-    url: "/tools/abc-analysis",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("abc-analysis");
 
 const faqSchema = {
   "@context": "https://schema.org",

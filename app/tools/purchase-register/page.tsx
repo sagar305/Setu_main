@@ -1,37 +1,11 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { PurchaseRegisterTool } from "@/components/tools/PurchaseRegister/PurchaseRegisterTool";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Purchase Register | Record Supplier Bills | Setu",
-  description:
-    "Record purchase bills against suppliers, link items to your products and update stock automatically. Free, offline, no signup.",
-  keywords: [
-    "purchase register",
-    "purchase bill record",
-    "supplier purchases",
-    "purchase entry free",
-    "stock purchase register",
-  ],
-  alternates: { canonical: "/tools/purchase-register" },
-  openGraph: {
-    title: "Free Purchase Register — Supplier Bills & Stock",
-    description:
-      "Record purchases, reuse suppliers from your Supplier Book, and update product stock with one confirmation.",
-    url: "/tools/purchase-register",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology Purchase Register",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("purchase-register");
 
 const faqSchema = {
   "@context": "https://schema.org",

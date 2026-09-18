@@ -1,27 +1,9 @@
 import type { Metadata } from "next";
+import { toolMetadata } from "@/lib/i18n/item-metadata";
 import { AgingReportTool } from "@/components/tools/aging/AgingReportTool";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export const metadata: Metadata = {
-  title: "Free Invoice Aging Report | Setu",
-  description: "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup.",
-  keywords: ["invoice aging report", "accounts receivable aging", "AR aging", "overdue invoices report", "debtor aging analysis"],
-  alternates: { canonical: "/tools/invoice-aging-report" },
-  openGraph: {
-    title: "Invoice Aging Report",
-    description: "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup.",
-    url: "/tools/invoice-aging-report",
-    type: "website",
-    images: [
-      {
-        url: "/og/setu-og-image-1200x627.png",
-        width: 1200,
-        height: 627,
-        alt: "Setu Technology - Setu for your business",
-      },
-    ],
-  },
-};
+export const metadata: Metadata = toolMetadata("invoice-aging-report");
 
 const faqSchema = {
   "@context": "https://schema.org",

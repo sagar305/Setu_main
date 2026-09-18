@@ -30,8 +30,22 @@ const PAGE_KEYS = [
 
 // The switcher's language order, so the generated arrays read the way the UI does.
 const LANGUAGE_ORDER = [
-  "hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa",
-  "es", "fr", "ar", "pt", "id", "de", "zh",
+  "hi",
+  "bn",
+  "ta",
+  "te",
+  "mr",
+  "gu",
+  "kn",
+  "ml",
+  "pa",
+  "es",
+  "fr",
+  "ar",
+  "pt",
+  "id",
+  "de",
+  "zh",
 ];
 
 function localesFor(key) {
@@ -50,6 +64,7 @@ const entries = PAGE_KEYS.map((key) => [key, localesFor(key)]);
 
 // Pages that also have a page per item — one per calculator, one per tool.
 const ITEM_PAGES = ["calculators", "tools"];
+const PAGE_PATHS_FOR_ITEMS = { calculators: "/calculators", tools: "/tools" };
 
 /**
  * Whether an item's own page has been translated, as opposed to just its card
@@ -63,14 +78,22 @@ const ITEM_PAGES = ["calculators", "tools"];
  */
 function itemIsTranslated(english, translated) {
   if (!translated) return false;
-  const has = (o, ...keys) => keys.every((k) => typeof o?.[k] === "string" && o[k].trim() !== "");
+  const has = (o, ...keys) =>
+    keys.every((k) => typeof o?.[k] === "string" && o[k].trim() !== "");
 
   if (!has(translated.seo, "title", "description")) return false;
   if (!has(translated.hero, "headline", "subheadline")) return false;
 
-  if (english.about && !(translated.about?.paragraphs?.length === english.about.paragraphs.length))
+  if (
+    english.about &&
+    !(translated.about?.paragraphs?.length === english.about.paragraphs.length)
+  )
     return false;
-  if (english.faq && !(translated.faq?.items?.length === english.faq.items.length)) return false;
+  if (
+    english.faq &&
+    !(translated.faq?.items?.length === english.faq.items.length)
+  )
+    return false;
 
   return true;
 }
@@ -86,13 +109,20 @@ function translatedItems(key) {
     byLang.set(lang, JSON.parse(fs.readFileSync(file, "utf8")).items ?? []);
   }
 
-  return english.map((item, index) => [
-    item.slug,
-    LANGUAGE_ORDER.filter((lang) => {
-      const items = byLang.get(lang);
-      return items ? itemIsTranslated(item, items[index]) : false;
-    }),
-  ]);
+  return english
+    .filter(
+      (item) =>
+        !item.href || item.href === `${PAGE_PATHS_FOR_ITEMS[key]}/${item.slug}`,
+    )
+    .map((item) => [
+      item.slug,
+      LANGUAGE_ORDER.filter((lang) => {
+        const items = byLang.get(lang);
+        if (!items) return false;
+        const index = english.findIndex((x) => x.slug === item.slug);
+        return itemIsTranslated(item, items[index]);
+      }),
+    ]);
 }
 
 const itemEntries = ITEM_PAGES.map((key) => [key, translatedItems(key)]);
@@ -100,7 +130,10 @@ const itemEntries = ITEM_PAGES.map((key) => [key, translatedItems(key)]);
 const itemBody = itemEntries
   .map(([key, items]) => {
     const rows = items
-      .map(([slug, locales]) => `    "${slug}": [${locales.map((l) => `"${l}"`).join(", ")}],`)
+      .map(
+        ([slug, locales]) =>
+          `    "${slug}": [${locales.map((l) => `"${l}"`).join(", ")}],`,
+      )
       .join("\n");
     return `  ${key}: {\n${rows}\n  },`;
   })
@@ -138,7 +171,9 @@ ${itemBody}
 };
 `;
 
-const current = fs.existsSync(OUT_FILE) ? fs.readFileSync(OUT_FILE, "utf8") : "";
+const current = fs.existsSync(OUT_FILE)
+  ? fs.readFileSync(OUT_FILE, "utf8")
+  : "";
 
 if (process.argv.includes("--check")) {
   if (current !== generated) {
@@ -149,14 +184,21 @@ if (process.argv.includes("--check")) {
     process.exit(1);
   }
   const counts = entries.map(([key, l]) => `${key}=${l.length}`).join(" ");
-  console.log(`check-translations: translated-pages.ts is current (${counts}).`);
+  console.log(
+    `check-translations: translated-pages.ts is current (${counts}).`,
+  );
 } else {
   fs.writeFileSync(OUT_FILE, generated);
   console.log(`sync-translations: wrote ${OUT_FILE}`);
-  for (const [key, locales] of entries) console.log(`  ${key}: ${locales.length} languages`);
+  for (const [key, locales] of entries)
+    console.log(`  ${key}: ${locales.length} languages`);
   for (const [key, items] of itemEntries) {
     const done = items.filter(([, l]) => l.length > 0).length;
-    const full = items.filter(([, l]) => l.length === LANGUAGE_ORDER.length).length;
-    console.log(`  ${key} item pages: ${done}/${items.length} started, ${full} in all 16`);
+    const full = items.filter(
+      ([, l]) => l.length === LANGUAGE_ORDER.length,
+    ).length;
+    console.log(
+      `  ${key} item pages: ${done}/${items.length} started, ${full} in all 16`,
+    );
   }
 }
