@@ -14,6 +14,7 @@ import path from "node:path";
 import type { LanguageCode } from "./config";
 import type { PageKey } from "./pages";
 import { mergeTranslation } from "./home-merge";
+import { localizeLinks } from "./localize-links";
 
 const I18N_DIR = path.join(process.cwd(), "content", "i18n");
 
@@ -40,7 +41,9 @@ export function getLocalizedContent<T>(
   const cached = cache.get(id);
   if (cached) return cached as T;
 
-  const merged = mergeTranslation(english, loadTranslation(key, lang));
+  // Links are resolved after the merge, so a translation only ever has to carry
+  // strings — the href it inherits from English is pointed at this language here.
+  const merged = localizeLinks(mergeTranslation(english, loadTranslation(key, lang)), lang);
   cache.set(id, merged);
   return merged;
 }

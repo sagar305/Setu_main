@@ -73,6 +73,31 @@ export function pathFor(key: PageKey, lang: LanguageCode): string {
   return path === "/" ? `/${lang}` : `/${lang}${path}`;
 }
 
+/**
+ * The same destination, kept in the language the reader is already in.
+ *
+ * Content stores one href per link, written as the English path. Rendered as-is
+ * on a translated page, every link becomes a way out of the language: a reader
+ * on /hi/tools taps the header and lands on English /products. This maps such a
+ * link to /hi/products instead.
+ *
+ * A link is only moved when that page is actually published in this language.
+ * Pages outside the translated set — the blog, the glossary, an individual tool
+ * or calculator — stay on their English path, because the alternative is a link
+ * into a 404. Anything that is not an internal path we own (an anchor, a query,
+ * a mailto:, an external URL) is returned untouched.
+ */
+export function localizedHref(href: string, lang: LanguageCode): string {
+  if (lang === "en" || !href.startsWith("/") || href.startsWith("//")) return href;
+
+  const [path] = href.split(/[?#]/);
+  const clean = path.length > 1 ? path.replace(/\/+$/, "") : path;
+  const key = PAGE_KEYS.find((k) => PAGE_PATHS[k] === (clean === "" ? "/" : clean));
+  if (!key || !localesFor(key).includes(lang)) return href;
+
+  return pathFor(key, lang) + href.slice(path.length);
+}
+
 /** The page and language a pathname refers to, or null if it is not a published page. */
 export function pageFromPath(
   pathname: string | null | undefined,

@@ -15,6 +15,7 @@ import "server-only";
 import { getSiteContent, type SiteContent } from "@/lib/content";
 import type { LanguageCode } from "./config";
 import { mergeTranslation } from "./home-merge";
+import { localizeLinks } from "./localize-links";
 
 import ar from "@/content/i18n/site/ar.json";
 import bn from "@/content/i18n/site/bn.json";
@@ -42,8 +43,10 @@ const cache = new Map<LanguageCode, SiteContent>();
 /**
  * Site chrome in `lang`, overlaid on the English content.
  *
- * Anything a translation leaves out stays English, and link targets always come
- * from the English file — every version links to the same routes.
+ * Anything a translation leaves out stays English. Link targets come from the
+ * English file and are then resolved into this language, so the header and the
+ * footer keep a reader inside the language they are reading in wherever a
+ * translated version of the destination exists.
  */
 export function getLocalizedSiteContent(lang: LanguageCode): SiteContent {
   const english = getSiteContent();
@@ -52,7 +55,7 @@ export function getLocalizedSiteContent(lang: LanguageCode): SiteContent {
   const cached = cache.get(lang);
   if (cached) return cached;
 
-  const merged = mergeTranslation(english, TRANSLATIONS[lang]);
+  const merged = localizeLinks(mergeTranslation(english, TRANSLATIONS[lang]), lang);
   cache.set(lang, merged);
   return merged;
 }

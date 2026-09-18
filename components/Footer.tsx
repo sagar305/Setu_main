@@ -52,7 +52,10 @@ export function Footer({ site }: { site: SiteContent }) {
           <span>{site.footer.copyright}</span>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             {site.footer.legal.map((link) => (
-              <Link key={link.href} href={link.href} className="transition hover:text-saffron">
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition hover:text-saffron">
                 {link.label}
               </Link>
             ))}

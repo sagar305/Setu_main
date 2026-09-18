@@ -3,7 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { LocaleDocumentAttrs } from "@/components/home/LocaleDocumentAttrs";
 import { isLanguageCode } from "@/lib/i18n/config";
-import { PAGE_KEYS, dirFor, localesFor, pathFor } from "@/lib/i18n/pages";
+import { PAGE_KEYS, dirFor, localesFor } from "@/lib/i18n/pages";
 import { getLocalizedSiteContent } from "@/lib/i18n/site-chrome";
 
 /**
@@ -46,7 +46,7 @@ export default async function LocalizedHomeLayout({
         }}
       />
       <LocaleDocumentAttrs lang={lang} dir={dirFor(lang)} />
-      <Nav site={site} homeHref={pathFor("home", lang)} />
+      <Nav site={site} lang={lang} />
       <main>{children}</main>
       <Footer site={site} />
     </>
