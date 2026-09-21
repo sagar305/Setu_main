@@ -64,6 +64,61 @@
   ],
   "terms": [
     {
+      "slug": "implementation-fee",
+      "term": "Implementation Fee",
+      "category": "pos-tech",
+      "short": "The one-time charge to get software configured, loaded and your staff trained.",
+      "aliases": [
+        "onboarding fee",
+        "setup fee"
+      ]
+    },
+    {
+      "slug": "annual-maintenance-contract",
+      "term": "Annual Maintenance Contract",
+      "category": "pos-tech",
+      "short": "A yearly paid agreement covering repair, replacement and support for hardware or software.",
+      "aliases": [
+        "AMC"
+      ]
+    },
+    {
+      "slug": "books-of-accounts",
+      "term": "Books of Accounts",
+      "category": "accounting",
+      "short": "The complete set of records a business is required to keep of its transactions.",
+      "aliases": [
+        "books of account"
+      ]
+    },
+    {
+      "slug": "narration",
+      "term": "Narration",
+      "category": "accounting",
+      "short": "The short written explanation attached to an accounting entry saying what it was for.",
+      "aliases": [
+        "voucher narration"
+      ]
+    },
+    {
+      "slug": "statement-of-account",
+      "term": "Statement of Account",
+      "category": "accounting",
+      "short": "A dated summary of every invoice, payment and the closing balance for one customer.",
+      "aliases": [
+        "account statement"
+      ]
+    },
+    {
+      "slug": "collection-effectiveness-index",
+      "term": "Collection Effectiveness Index",
+      "category": "payments-finance",
+      "short": "The share of collectable receivables you actually collected in a period, as a percentage.",
+      "aliases": [
+        "CEI"
+      ]
+    },
+    {
       "slug": "invoice-management-system",
       "term": "Invoice Management System",
       "category": "gst-tax",
