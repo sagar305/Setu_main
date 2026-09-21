@@ -1,0 +1,44 @@
+{
+  "slug": "narration",
+  "term": "Narration",
+  "category": "accounting",
+  "aliases": [
+    "voucher narration"
+  ],
+  "short": "The short written explanation attached to an accounting entry saying what it was for.",
+  "seoTitle": "Narration in Accounting — Meaning and Examples",
+  "metaDescription": "A narration is the short note on an accounting entry saying what the transaction was for. Why a good one saves hours at audit, with weak and strong examples.",
+  "updated": "2026-09-20",
+  "definition": "A narration is the short written explanation recorded against an accounting entry — a line saying what the transaction actually was, who it involved and which document supports it — so that the entry can be understood later without asking the person who made it.",
+  "bodyHtml": "<h2>Why it is not optional housekeeping</h2><p>An amount and an account name tell you almost nothing a year later. The narration is what turns a ledger into something a new bookkeeper, a lender or an auditor can read without a conversation, and it is where most of the time in a catch-up or an audit is actually lost.</p><h2>A weak narration and a good one</h2><ul><li>Weak: Payment made</li><li>Weak: Expenses</li><li>Good: Rent for September 2026, Shop 4, paid by NEFT to Mehta Properties, ref 4471</li><li>Good: Purchase invoice PI-233 from Kumar Traders, 40 kg flour, GST 5%</li></ul><h2>What a good narration contains</h2><p>The period or date the transaction relates to, the other party by name, the document number, and anything unusual about it. Keep the pattern the same across the book — consistency is what makes a ledger searchable, and a searchable ledger is the difference between a two-hour close and a two-day one.</p>",
+  "faq": [
+    {
+      "question": "How long should a narration be?",
+      "answer": "One line that answers what, who and which document. Longer than that and people stop reading it; shorter and it stops being useful."
+    },
+    {
+      "question": "Does a narration matter if the bill is attached?",
+      "answer": "Yes, because you search the ledger before you open the attachment. The narration is the index; the bill is the evidence."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "journal-entry",
+    "general-ledger",
+    "audit-trail",
+    "books-of-accounts"
+  ]
+}

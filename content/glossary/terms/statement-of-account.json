@@ -1,0 +1,45 @@
+{
+  "slug": "statement-of-account",
+  "term": "Statement of Account",
+  "category": "accounting",
+  "aliases": [
+    "account statement"
+  ],
+  "short": "A dated summary of every invoice, payment and the closing balance for one customer.",
+  "seoTitle": "Statement of Account — What It Is and When to Send It",
+  "metaDescription": "A statement of account lists every invoice, payment and the closing balance for one customer over a period. Why it collects better than a payment reminder.",
+  "updated": "2026-09-20",
+  "definition": "A statement of account is a dated summary sent to one customer or supplier listing every invoice raised, every payment received and the resulting closing balance for a period — a full position rather than a demand for a single unpaid bill.",
+  "bodyHtml": "<h2>Why it collects better than a reminder</h2><p>A reminder invites a single answer: that invoice was paid, or never arrived. A statement answers that objection in advance by showing the whole account, which moves the conversation from whether the amount is owed to when it will be paid. It is also the document a customer's own accounts team needs in order to get you into a payment run.</p><h2>What it should show</h2><ul><li>The period covered and the opening balance</li><li>Each invoice with its date, number and amount</li><li>Each payment or credit note applied, with its date</li><li>The closing balance, and an ageing split of it</li><li>Your payment details and a named contact</li></ul><h2>When to send it</h2><p>On a fixed day each month to every customer carrying a balance, not only the overdue ones. Predictability is what makes it routine rather than confrontational — and a statement that arrives on the same date every month gets reconciled at the other end instead of ignored.</p>",
+  "faq": [
+    {
+      "question": "Is a statement of account the same as an invoice?",
+      "answer": "No. An invoice creates a single liability for a specific supply; a statement summarises the running position across many invoices and payments and creates nothing new."
+    },
+    {
+      "question": "Should a statement include unbilled work?",
+      "answer": "No — keep it to documents actually issued. Mixing in work in progress makes the closing balance something the customer can dispute and delays the part they would have paid."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "accounts-receivable",
+    "aging-report",
+    "dunning",
+    "days-sales-outstanding",
+    "collection-effectiveness-index"
+  ]
+}

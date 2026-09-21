@@ -1,0 +1,45 @@
+{
+  "slug": "books-of-accounts",
+  "term": "Books of Accounts",
+  "category": "accounting",
+  "aliases": [
+    "books of account"
+  ],
+  "short": "The complete set of records a business is required to keep of its transactions.",
+  "seoTitle": "Books of Accounts — What You Must Keep, and How Long",
+  "metaDescription": "Books of accounts are the records a business must keep of every transaction — ledgers, cash book, registers and vouchers. What is required and for how long.",
+  "updated": "2026-09-20",
+  "definition": "Books of accounts are the complete set of records in which a business writes down its transactions — the cash book, ledgers, journals, sales and purchase registers, stock records and the vouchers supporting each entry — kept in a form that lets the year's profit and financial position be worked out and checked.",
+  "bodyHtml": "<h2>What the set normally includes</h2><ul><li>Cash book and bank book</li><li>Journal, for entries that are not simple receipts or payments</li><li>General ledger, and subsidiary ledgers for customers and suppliers</li><li>Sales and purchase registers</li><li>Stock records, where you hold inventory</li><li>Vouchers, bills and receipts supporting every entry</li></ul><h2>Who has to keep them</h2><p>Under the income tax rules, maintenance becomes mandatory once income or turnover crosses notified limits, with specified professions covered on a separate basis; companies and registered persons under GST have their own obligations regardless. The limits have been revised more than once, so confirm the figures that apply to your constitution and turnover with your CA rather than working from a general article.</p><h2>How long to keep them</h2><p>Two rules run in parallel and the longer one governs. GST records are to be retained for seventy-two months from the due date of the annual return for the year they relate to — extended where an appeal or investigation is pending. Income tax rules generally require preservation for six years from the end of the relevant assessment year, and company law is longer still. Keeping everything digitally for at least eight years, filed by financial year, is the practical answer.</p>",
+  "faq": [
+    {
+      "question": "Can books of accounts be kept only digitally?",
+      "answer": "Generally yes, provided the records are complete, legible and can be produced when asked, with the supporting vouchers available. Keeping a second copy somewhere other than the machine that created them is the part people skip."
+    },
+    {
+      "question": "What is the difference between books of accounts and financial statements?",
+      "answer": "The books are the raw record of every transaction; the statements are the summary drawn from them at period end. You cannot produce a defensible statement without the books behind it."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "journal-entry"
+    }
+  ],
+  "relatedTerms": [
+    "chart-of-accounts",
+    "journal-entry",
+    "general-ledger",
+    "financial-year",
+    "narration"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "collection-effectiveness-index",
+  "term": "Collection Effectiveness Index",
+  "category": "payments-finance",
+  "aliases": [
+    "CEI"
+  ],
+  "short": "The share of collectable receivables you actually collected in a period, as a percentage.",
+  "seoTitle": "Collection Effectiveness Index (CEI) — Formula",
+  "metaDescription": "The collection effectiveness index measures what share of collectable receivables you actually collected. Formula, a worked example and why it beats DSO alone.",
+  "updated": "2026-09-20",
+  "definition": "The collection effectiveness index, or CEI, measures how much of what could have been collected in a period was actually collected, expressed as a percentage — so a falling sales month cannot flatter it the way it can flatter days sales outstanding.",
+  "formula": {
+    "expression": "CEI = (Opening receivables + Credit sales − Closing total receivables) ÷ (Opening receivables + Credit sales − Closing current receivables) × 100",
+    "note": "Closing current receivables are those not yet past due. The numerator is what you collected; the denominator is what was collectable."
+  },
+  "bodyHtml": "<h2>A worked example</h2><p>Opening receivables ₹8,40,000, credit sales for the month ₹12,00,000, closing receivables ₹9,60,000 of which ₹7,20,000 is still within terms.</p><ul><li>Collected: 8,40,000 + 12,00,000 − 9,60,000 = ₹10,80,000</li><li>Collectable: 8,40,000 + 12,00,000 − 7,20,000 = ₹13,20,000</li><li>CEI = 10,80,000 ÷ 13,20,000 × 100 = 81.8%</li></ul><h2>How to read it</h2><p>High eighties and above generally indicates a book being worked on a schedule. Figures in the sixties usually mean collections run on memory rather than a process. Because the measure is bounded at 100%, the trend across months is more informative than any single reading.</p><h2>Why not just use DSO</h2><p>Days sales outstanding falls when sales fall, even if collections got worse, because the denominator shrinks. CEI compares collections against what was collectable in the same period, so it isolates collections performance from sales performance. Tracking both together is the point: DSO tells you how long money takes, CEI tells you whether anyone is chasing it.</p>",
+  "faq": [
+    {
+      "question": "What is a good CEI?",
+      "answer": "Above roughly 80% is workmanlike for a small business and the high eighties is strong, but the comparison that matters is against your own previous months rather than a published benchmark."
+    },
+    {
+      "question": "How often should CEI be calculated?",
+      "answer": "Monthly, from the same aging report you use to chase. Calculated quarterly it is too slow to change anything; calculated weekly it is mostly noise."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-aging-report"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "financial-ratio-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "days-sales-outstanding",
+    "accounts-receivable",
+    "aging-report",
+    "dunning",
+    "statement-of-account"
+  ]
+}

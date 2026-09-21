@@ -1,0 +1,45 @@
+{
+  "slug": "implementation-fee",
+  "term": "Implementation Fee",
+  "category": "pos-tech",
+  "aliases": [
+    "onboarding fee",
+    "setup fee"
+  ],
+  "short": "The one-time charge to get software configured, loaded and your staff trained.",
+  "seoTitle": "Implementation Fee — What Software Setup Costs",
+  "metaDescription": "An implementation fee is the one-time charge for configuring software, loading your data and training staff. What it covers and how to compare it fairly.",
+  "updated": "2026-09-20",
+  "definition": "An implementation fee is the one-time charge a software vendor makes for getting the system usable — configuration, data and menu loading, hardware setup, integrations and staff training — separate from the recurring licence you pay afterwards.",
+  "bodyHtml": "<h2>What it usually covers</h2><ul><li>Configuring outlets, tax rates, users and print formats</li><li>Loading your item or menu master, and opening balances</li><li>Connecting integrations — payments, aggregators, accounting exports</li><li>On-site or remote training, and the first days of hand-holding</li></ul><h2>Why it matters when comparing quotes</h2><p>A monthly licence is easy to compare across vendors; an implementation fee is not, because it is quoted once and is often the larger number in year one. Two products at the same monthly price can differ by a factor of three on total first-year cost. The fair comparison is always the two-year total: licence × 24, plus implementation, plus hardware, plus per-integration charges.</p><h2>What to ask before you accept it</h2><p>Ask what specifically is included, what counts as a change request afterwards, how many training sessions you get, and whether a second outlet later attracts the fee again. Vendors will sometimes waive or stage it against a longer contract term — which is a trade, not a discount, because it lengthens your lock-in.</p>",
+  "faq": [
+    {
+      "question": "Is an implementation fee negotiable?",
+      "answer": "Often, but usually in exchange for something — a longer term, an annual prepayment or a case study. Ask what changes if you pay it in full up front versus staged against milestones."
+    },
+    {
+      "question": "Should free software have one?",
+      "answer": "No, and that is part of the trade. Self-serve software costs nothing to start and gives you no structured onboarding, so the setup time becomes yours instead of the vendor's."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "point-of-sale",
+    "vendor-lock-in",
+    "api-integration",
+    "annual-maintenance-contract"
+  ]
+}

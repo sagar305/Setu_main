@@ -1,0 +1,44 @@
+{
+  "slug": "annual-maintenance-contract",
+  "term": "Annual Maintenance Contract",
+  "category": "pos-tech",
+  "aliases": [
+    "AMC"
+  ],
+  "short": "A yearly paid agreement covering repair, replacement and support for hardware or software.",
+  "seoTitle": "Annual Maintenance Contract (AMC) — Meaning",
+  "metaDescription": "An annual maintenance contract is a yearly agreement covering repair, replacement and support for POS hardware or software. What it covers and what to check.",
+  "updated": "2026-09-20",
+  "definition": "An annual maintenance contract, or AMC, is a yearly paid agreement under which a vendor keeps your hardware or software working — covering breakdown repair, parts, periodic servicing and a defined support response — for a fixed fee agreed in advance.",
+  "bodyHtml": "<h2>Comprehensive versus non-comprehensive</h2><p>A comprehensive AMC includes spare parts and replacement; a non-comprehensive one covers labour and visits but bills parts separately. The price gap between the two is usually smaller than one printer head or one till replacement, which is the calculation worth doing before choosing.</p><h2>What to check in the wording</h2><ul><li>Response and resolution time, and whether it differs on Sundays and holidays</li><li>Whether a standby unit is provided while yours is being repaired</li><li>Which parts are excluded — batteries and consumables usually are</li><li>How many preventive visits a year are included</li><li>What happens to the fee if the equipment is replaced mid-term</li></ul><h2>When it is worth it</h2><p>An AMC is insurance, so it is worth most where downtime is expensive and the equipment is hard to replace the same day. A restaurant with one billing terminal on a Saturday night has a strong case. A shop with a spare laptop and a cloud product usually does not, and is better off keeping the money.</p>",
+  "faq": [
+    {
+      "question": "Is an AMC compulsory with POS hardware?",
+      "answer": "Not usually in the first year, when a manufacturer warranty normally applies. It becomes a real decision from year two, when the warranty lapses and the failure rate starts rising."
+    },
+    {
+      "question": "How is an AMC priced?",
+      "answer": "Commonly as a percentage of the equipment value per year, varying with whether parts are included and how fast a response you need. Get it quoted alongside the purchase rather than after, when your leverage is gone."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "expense-tracker"
+    },
+    {
+      "type": "calculator",
+      "slug": "depreciation-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "point-of-sale",
+    "thermal-printer",
+    "vendor-lock-in",
+    "implementation-fee"
+  ]
+}
