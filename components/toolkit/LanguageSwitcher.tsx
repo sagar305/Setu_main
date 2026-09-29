@@ -3,7 +3,14 @@
 import { usePathname, useRouter } from "next/navigation";
 import { Globe } from "lucide-react";
 import { LANGUAGES, useI18n, type LanguageCode } from "@/lib/i18n";
-import { languagesFor, pageFromPath, pathFor } from "@/lib/i18n/pages";
+import {
+  type ItemPageKey,
+  itemLocalesFor,
+  itemPathFor,
+  languagesFor,
+  pageFromPath,
+  pathFor,
+} from "@/lib/i18n/pages";
 
 // Two kinds of translated surface, and the switcher has to behave differently
 // on each:
@@ -28,12 +35,23 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const pathname = usePathname();
 
   const page = pageFromPath(pathname);
-  const enabled = page !== null || isClientTranslatablePath(pathname);
+
+  // An individual calculator or tool page carries its own set of languages, and
+  // until its copy is published in one of them there is nothing to navigate to
+  // — so it keeps translating in the browser, which its UI can already do in
+  // all sixteen.
+  const itemLangs = page?.slug ? itemLocalesFor(page.key as ItemPageKey, page.slug) : [];
+  const navigates = page !== null && (page.slug === undefined || itemLangs.length > 0);
+  const enabled = navigates || isClientTranslatablePath(pathname);
 
   // A translated page only offers the languages it has been translated into;
-  // the tools offer all of them, because their UI is translated from the
-  // shared dictionary rather than page copy.
-  const offered = page ? languagesFor(page.key) : LANGUAGES.map((l) => l.code);
+  // a page that translates in the browser offers all of them, because its UI
+  // comes from the shared dictionary rather than page copy.
+  const offered = navigates
+    ? page!.slug
+      ? ["en" as LanguageCode, ...itemLangs]
+      : languagesFor(page!.key)
+    : LANGUAGES.map((l) => l.code);
 
   const disabledNote = "Language switching is available on translated pages, tools & calculators";
 
@@ -41,7 +59,13 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
     setLang(code);
     // On a translated page the other language lives at its own URL, so the
     // choice has to move the reader there.
-    if (page) router.push(pathFor(page.key, code));
+    if (navigates && page) {
+      router.push(
+        page.slug
+          ? itemPathFor(page.key as ItemPageKey, page.slug, code)
+          : pathFor(page.key, code),
+      );
+    }
   };
 
   return (
@@ -58,7 +82,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
         // preference is. Everywhere else, display English regardless of the
         // saved language — which is left untouched so it comes back on the next
         // tool page.
-        value={page ? page.lang : enabled ? lang : "en"}
+        value={navigates && page ? page.lang : enabled ? lang : "en"}
         onChange={(e) => handleChange(e.target.value as LanguageCode)}
         disabled={!enabled}
         aria-disabled={!enabled}

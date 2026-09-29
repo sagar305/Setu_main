@@ -52,8 +52,8 @@ describe("home locale routing", () => {
     expect(pageFromPath("/hi")).toEqual({ key: "home", lang: "hi" });
     expect(pageFromPath("/hi/")).toEqual({ key: "home", lang: "hi" });
     expect(pageFromPath("/privacy")).toEqual({ key: "privacy", lang: "en" });
-    expect(pageFromPath("/tools/invoice-generator")).toBeNull();
     expect(pageFromPath("/about")).toBeNull();
+    expect(pageFromPath("/glossary/gst")).toBeNull();
     expect(pageFromPath(null)).toBeNull();
   });
 
@@ -465,5 +465,50 @@ describe("item pages: one per calculator, one per tool", () => {
     for (const { slug } of itemRoutesFor("calculators")) {
       expect(Object.keys(CALCULATOR_TOOLS), `registry is missing ${slug}`).toContain(slug);
     }
+  });
+});
+
+describe("an item's own page is a route the chrome and switcher must recognise", () => {
+  /**
+   * SiteFrame renders the English header unless the path resolves to a
+   * translated page, and app/[lang]/layout.tsx renders the localized one. A
+   * path it does not resolve therefore gets both — two headers, two footers and
+   * two <main> elements on the same page.
+   */
+  it("resolves an item page in both English and a translated language", () => {
+    expect(pageFromPath("/calculators/gst-calculator")).toEqual({
+      key: "calculators",
+      lang: "en",
+      slug: "gst-calculator",
+    });
+
+    for (const lang of itemLocalesFor("calculators", "gst-calculator")) {
+      expect(pageFromPath(`/${lang}/calculators/gst-calculator`)).toEqual({
+        key: "calculators",
+        lang,
+        slug: "gst-calculator",
+      });
+    }
+  });
+
+  it("refuses a language an item is not published in", () => {
+    const published = itemLocalesFor("calculators", "gst-calculator");
+    const missing = LANGUAGES.map((l) => l.code).filter(
+      (code) => code !== "en" && !published.includes(code),
+    );
+    for (const lang of missing) {
+      expect(pageFromPath(`/${lang}/calculators/gst-calculator`)).toBeNull();
+    }
+  });
+
+  it("does not mistake a path that merely starts the same way for an item", () => {
+    expect(pageFromPath("/calculators/not-a-real-calculator")).toBeNull();
+    expect(pageFromPath("/calculators/gst-calculator/extra")).toBeNull();
+    expect(pageFromPath("/hi/calculators/not-a-real-calculator")).toBeNull();
+  });
+
+  it("still resolves the listing pages themselves", () => {
+    expect(pageFromPath("/calculators")).toEqual({ key: "calculators", lang: "en" });
+    expect(pageFromPath("/hi/calculators")).toEqual({ key: "calculators", lang: "hi" });
   });
 });

@@ -98,25 +98,60 @@ export function localizedHref(href: string, lang: LanguageCode): string {
   return pathFor(key, lang) + href.slice(path.length);
 }
 
-/** The page and language a pathname refers to, or null if it is not a published page. */
+/**
+ * The page and language a pathname refers to, or null if it is not one of ours.
+ *
+ * `slug` comes back for an individual calculator's or tool's page, which is
+ * still the calculators or tools key but a different URL and its own set of
+ * languages. Callers that do not care can ignore it; the two that do — the
+ * chrome and the language switcher — both have to treat those routes as
+ * published pages rather than unknown paths, or a translated calculator page
+ * ends up wrapped in the English header as well as its own.
+ */
 export function pageFromPath(
   pathname: string | null | undefined,
-): { key: PageKey; lang: LanguageCode } | null {
+): { key: PageKey; lang: LanguageCode; slug?: string } | null {
   if (!pathname) return null;
   const clean = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 
   const english = PAGE_KEYS.find((key) => PAGE_PATHS[key] === (clean === "" ? "/" : clean));
   if (english) return { key: english, lang: "en" };
 
+  // An English item page: /calculators/<slug>, /tools/<slug>.
+  const englishItem = itemFromPath(clean);
+  if (englishItem) return { key: englishItem.key, lang: "en", slug: englishItem.slug };
+
   const [, first, ...rest] = clean.split("/");
   const lang = LANGUAGES.find((l) => l.code === first)?.code;
   if (!lang || lang === "en") return null;
 
   const remainder = rest.length === 0 ? "/" : `/${rest.join("/")}`;
-  const key = PAGE_KEYS.find((k) => PAGE_PATHS[k] === remainder);
-  if (!key || !localesFor(key).includes(lang)) return null;
 
-  return { key, lang };
+  const key = PAGE_KEYS.find((k) => PAGE_PATHS[k] === remainder);
+  if (key) return localesFor(key).includes(lang) ? { key, lang } : null;
+
+  // A translated item page: /<lang>/calculators/<slug>.
+  const item = itemFromPath(remainder);
+  if (item && itemLocalesFor(item.key, item.slug).includes(lang)) {
+    return { key: item.key, lang, slug: item.slug };
+  }
+
+  return null;
+}
+
+/** Splits `/calculators/<slug>` into its page and slug, if that item has a page. */
+function itemFromPath(path: string): { key: ItemPageKey; slug: string } | null {
+  for (const key of ["calculators", "tools"] as const) {
+    const prefix = `${PAGE_PATHS[key]}/`;
+    if (!path.startsWith(prefix)) continue;
+    const slug = path.slice(prefix.length);
+    // Known slugs come from the generated map, whose keys are every item that
+    // has a page of its own — so a glossary-style deeper path never matches.
+    if (slug !== "" && !slug.includes("/") && slug in (TRANSLATED_ITEMS[key] ?? {})) {
+      return { key, slug };
+    }
+  }
+  return null;
 }
 
 /**
