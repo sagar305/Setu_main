@@ -45,7 +45,58 @@
   "items": [
     {
       "name": "Kalkulator GST",
-      "shortDescription": "Tambah atau keluarkan GST dari nominal apa pun dalam sekali ketuk, untuk semua tarif."
+      "shortDescription": "Tambah atau keluarkan GST dari nominal apa pun dalam sekali ketuk, untuk semua tarif.",
+      "seo": {
+        "title": "Kalkulator GST — tambah atau keluarkan GST | Setu",
+        "description": "Kalkulator GST gratis untuk menambahkan GST ke nominal dasar atau mengeluarkannya dari harga akhir, pada tarif mana pun. Nilai pajak dan total langsung.",
+        "keywords": [
+          "kalkulator GST",
+          "kalkulator GST online",
+          "tambah GST",
+          "keluarkan GST",
+          "kalkulator nominal GST India"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator GST",
+        "headline": "Kalkulator GST",
+        "subheadline": "Tambahkan GST ke harga dasar atau keluarkan GST dari harga akhir — pilih tarifnya, rinciannya muncul seketika."
+      },
+      "about": {
+        "headline": "Kenapa kalkulator GST berguna",
+        "paragraphs": [
+          "GST muncul di mana-mana dalam pekerjaan harian sebuah usaha — menyebut harga ke pelanggan, memeriksa tagihan pemasok, atau menentukan apa yang ditulis di struk. Menghitung tiap tarif dengan tangan itu lambat dan mudah salah, terutama saat Anda berpindah-pindah antara 5%, 12%, 18%, dan 28%.",
+          "Kalkulator ini bekerja dua arah. Masukkan nominal dasar untuk melihat GST dan total setelah pajak ditambahkan, atau masukkan nominal akhir untuk melihat berapa harga dasar dan pajaknya sebelum GST masuk. Hitungan yang sama dijalankan Setu Dine secara otomatis di setiap struk, dan di sini tersedia sebagai alat gratis yang berdiri sendiri."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator GST",
+        "items": [
+          {
+            "question": "Bagaimana cara menghitung GST dari sebuah nominal?",
+            "answer": "Kalikan nominal dasar dengan tarif GST lalu bagi 100 untuk mendapat nilai pajaknya, kemudian tambahkan ke nominal dasar untuk totalnya. Misalnya ₹1.000 dengan GST 18% menambah ₹180, sehingga totalnya ₹1.180."
+          },
+          {
+            "question": "Bagaimana mengeluarkan GST dari harga akhir untuk mencari harga dasar?",
+            "answer": "Bagi nominal akhir dengan (1 + tarif GST/100). Untuk nominal akhir ₹1.180 dengan GST 18%, harga dasarnya ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Apa saja tarif GST yang umum di India?",
+            "answer": "Tarif yang paling umum adalah 5%, 12%, 18%, dan 28%, meski sebagian barang dan jasa berada di luar itu atau dibebaskan. Selalu periksa tarif yang berlaku untuk yang Anda tagihkan."
+          },
+          {
+            "question": "Apakah Setu Dine menghitung GST otomatis?",
+            "answer": "Ya. Setu Dine punya mesin pajak bawaan yang menerapkan GST yang benar di setiap struk secara otomatis, jadi Anda tak perlu menghitungnya manual tiap pesanan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Biarkan Setu Dine mengurus pajak di setiap struk",
+        "subtext": "Setu Dine menerapkan GST yang benar di setiap pesanan secara otomatis — tanpa hitung manual, tanpa salah.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator margin laba",

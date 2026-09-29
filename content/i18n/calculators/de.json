@@ -45,7 +45,58 @@
   "items": [
     {
       "name": "GST-Rechner",
-      "shortDescription": "GST mit einem Tipp zu jedem Betrag addieren oder herausrechnen, für jeden Steuersatz."
+      "shortDescription": "GST mit einem Tipp zu jedem Betrag addieren oder herausrechnen, für jeden Steuersatz.",
+      "seo": {
+        "title": "GST-Rechner — GST addieren oder herausrechnen | Setu",
+        "description": "Kostenloser GST-Rechner: GST zu einem Nettobetrag addieren oder aus einem Endpreis herausrechnen, für jeden Satz. Steuerbetrag und Summe sofort im Blick.",
+        "keywords": [
+          "GST-Rechner",
+          "GST-Rechner online",
+          "GST addieren",
+          "GST herausrechnen",
+          "GST-Betrag berechnen Indien"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — GST-Rechner",
+        "headline": "GST-Rechner",
+        "subheadline": "Addieren Sie GST zu einem Nettopreis oder rechnen Sie sie aus einem Endpreis heraus — Satz wählen, Aufteilung sofort sehen."
+      },
+      "about": {
+        "headline": "Wofür ein GST-Rechner gut ist",
+        "paragraphs": [
+          "GST taucht im Alltag eines Betriebs überall auf: wenn Sie einem Kunden einen Preis nennen, eine Lieferantenrechnung prüfen oder festlegen, was auf den Bon kommt. Für jeden Satz von Hand zu rechnen ist langsam und schnell falsch, besonders wenn Sie zwischen 5 %, 12 %, 18 % und 28 % hin und her wechseln.",
+          "Dieser Rechner funktioniert in beide Richtungen. Geben Sie einen Nettobetrag ein und sehen Sie GST und Summe mit Steuer, oder geben Sie einen Endbetrag ein und sehen Sie, wie hoch Nettopreis und Steuer vor dem Aufschlag waren. Genau diese Rechnung macht Setu Dine auf jedem Bon automatisch; hier steht sie als kostenloses, eigenständiges Tool."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum GST-Rechner",
+        "items": [
+          {
+            "question": "Wie berechne ich GST auf einen Betrag?",
+            "answer": "Multiplizieren Sie den Nettobetrag mit dem GST-Satz und teilen Sie durch 100 — das ist der Steuerbetrag; addieren Sie ihn dann zum Nettobetrag. Bei ₹1.000 und 18 % GST kommen ₹180 hinzu, in Summe ₹1.180."
+          },
+          {
+            "question": "Wie rechne ich GST aus einem Endpreis heraus?",
+            "answer": "Teilen Sie den Endbetrag durch (1 + GST-Satz/100). Bei einem Endbetrag von ₹1.180 und 18 % GST ergibt das einen Nettopreis von ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Welche GST-Sätze sind in Indien üblich?",
+            "answer": "Am häufigsten sind 5 %, 12 %, 18 % und 28 %, wobei einige Waren und Leistungen darunter nicht fallen oder befreit sind. Prüfen Sie immer den Satz, der für das Berechnete gilt."
+          },
+          {
+            "question": "Rechnet Setu Dine GST automatisch?",
+            "answer": "Ja. Setu Dine hat eine eingebaute Steuerlogik, die auf jedem Bon die richtige GST automatisch ansetzt — Sie müssen sie nicht für jede Bestellung von Hand ausrechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Die Steuer auf jedem Bon übernimmt Setu Dine",
+        "subtext": "Setu Dine setzt auf jeder Bestellung automatisch die richtige GST an — keine Handrechnung, keine Fehler.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Gewinnmargen-Rechner",

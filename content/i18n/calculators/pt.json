@@ -45,7 +45,58 @@
   "items": [
     {
       "name": "Calculadora de GST",
-      "shortDescription": "Adicione ou retire o GST de qualquer valor num toque, para qualquer faixa de imposto."
+      "shortDescription": "Adicione ou retire o GST de qualquer valor num toque, para qualquer faixa de imposto.",
+      "seo": {
+        "title": "Calculadora de GST — some ou retire o GST | Setu",
+        "description": "Calculadora de GST gratuita para somar o GST a um valor base ou retirá-lo de um preço final, com qualquer alíquota. Veja o imposto e o total na hora.",
+        "keywords": [
+          "calculadora de GST",
+          "calculadora de GST online",
+          "somar GST",
+          "retirar GST",
+          "calculadora de valor de GST Índia"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de GST",
+        "headline": "Calculadora de GST",
+        "subheadline": "Some o GST a um preço base ou separe o GST de um preço final — escolha a alíquota e veja a divisão na hora."
+      },
+      "about": {
+        "headline": "Para que serve uma calculadora de GST",
+        "paragraphs": [
+          "O GST aparece em tudo no dia a dia de um negócio: passar um preço ao cliente, conferir a nota de um fornecedor ou decidir o que lançar num cupom. Fazer a conta à mão para cada faixa é lento e erra fácil, principalmente quando você transita entre alíquotas como 5%, 12%, 18% e 28%.",
+          "Esta calculadora funciona nos dois sentidos. Informe um valor base para ver o GST e o total com o imposto somado, ou informe um valor final para ver qual era o preço base e o imposto antes de o GST entrar. É a mesma conta que o Setu Dine faz sozinho em cada cupom, disponível aqui como ferramenta gratuita e avulsa."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de GST",
+        "items": [
+          {
+            "question": "Como calculo o GST sobre um valor?",
+            "answer": "Multiplique o valor base pela alíquota do GST e divida por 100 para obter o imposto, depois some ao valor base para chegar ao total. Por exemplo, ₹1.000 a 18% de GST soma ₹180, totalizando ₹1.180."
+          },
+          {
+            "question": "Como retiro o GST de um preço final para achar o preço base?",
+            "answer": "Divida o valor final por (1 + alíquota do GST/100). Para um valor final de ₹1.180 a 18% de GST, o preço base é ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Quais são as faixas de GST comuns na Índia?",
+            "answer": "As faixas mais comuns são 5%, 12%, 18% e 28%, embora alguns bens e serviços fiquem fora delas ou sejam isentos. Confira sempre a alíquota que se aplica ao que você está faturando."
+          },
+          {
+            "question": "O Setu Dine calcula o GST automaticamente?",
+            "answer": "Sim. O Setu Dine tem um motor de impostos embutido que aplica o GST correto em cada cupom, então você não precisa calcular à mão pedido por pedido."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Deixe o Setu Dine cuidar do imposto de cada cupom",
+        "subtext": "O Setu Dine aplica o GST correto em cada pedido automaticamente — sem conta à mão, sem erro.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de margem de lucro",

@@ -78,10 +78,21 @@ const LOCALE_LIMITS = {
   },
 };
 
-/** The language a route is written in, or null for the English pages. */
+/** Every language any page is translated into. */
+const LANGS = new Set([...TRANSLATIONS.values()].flat());
+
+/**
+ * The language a route is written in, or null for the English pages.
+ *
+ * Taken from the first path segment rather than from the page map, so the
+ * pages under a language that are not one of the eight — an individual
+ * calculator, an individual tool — get that language's limits too. Reading it
+ * from the map meant a Chinese calculator page was measured against the English
+ * character counts and failed for being the right length.
+ */
 function langFor(route) {
-  const english = LOCALE_ROUTES.get(route);
-  return english === undefined ? null : route.split("/")[1];
+  const first = route.split("/")[1];
+  return LANGS.has(first) ? first : null;
 }
 
 function limitsFor(route) {

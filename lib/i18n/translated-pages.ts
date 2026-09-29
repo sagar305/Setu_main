@@ -27,7 +27,7 @@ export const TRANSLATED_PAGES: Record<PageKey, LanguageCode[]> = {
  */
 export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, LanguageCode[]>> = {
   calculators: {
-    "gst-calculator": ["hi", "bn", "ta"],
+    "gst-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "profit-margin-calculator": [],
     "markup-calculator": [],
     "break-even-calculator": [],

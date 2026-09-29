@@ -45,7 +45,58 @@
   "items": [
     {
       "name": "Calculadora de GST",
-      "shortDescription": "Añade o quita el GST de cualquier importe en un toque, para cualquier tramo impositivo."
+      "shortDescription": "Añade o quita el GST de cualquier importe en un toque, para cualquier tramo impositivo.",
+      "seo": {
+        "title": "Calculadora de GST — añadir o quitar GST gratis | Setu",
+        "description": "Calculadora de GST gratuita para añadir el GST a un importe base o quitarlo de un precio final, con cualquier tipo. Obtén el impuesto y el total al instante.",
+        "keywords": [
+          "calculadora de GST",
+          "calculadora de GST online",
+          "añadir GST",
+          "quitar GST",
+          "calculadora de importe de GST India"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de GST",
+        "headline": "Calculadora de GST",
+        "subheadline": "Añade el GST a un precio base o sácalo de un precio final: elige el tipo y ve el desglose al instante."
+      },
+      "about": {
+        "headline": "Para qué sirve una calculadora de GST",
+        "paragraphs": [
+          "El GST aparece por todas partes en el día a día de un negocio: al dar un precio a un cliente, al revisar la factura de un proveedor o al decidir qué poner en un ticket. Hacer la cuenta a mano para cada tramo es lento y fácil de errar, sobre todo cuando te mueves entre tipos como el 5 %, 12 %, 18 % y 28 %.",
+          "Esta calculadora funciona en los dos sentidos. Introduce un importe base para ver el GST y el total con el impuesto añadido, o introduce un importe final para ver cuál era el precio base y el impuesto antes de incluirlo. Es el mismo cálculo que Setu Dine hace solo en cada ticket, disponible aquí como herramienta gratuita e independiente."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de GST",
+        "items": [
+          {
+            "question": "¿Cómo calculo el GST de un importe?",
+            "answer": "Multiplica el importe base por el tipo de GST y divide entre 100 para obtener el impuesto, y súmalo al importe base para el total. Por ejemplo, ₹1.000 al 18 % de GST añade ₹180, con un total de ₹1.180."
+          },
+          {
+            "question": "¿Cómo quito el GST de un precio final para hallar el base?",
+            "answer": "Divide el importe final entre (1 + tipo de GST/100). Para un importe final de ₹1.180 al 18 % de GST, el precio base es ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "¿Cuáles son los tramos de GST habituales en India?",
+            "answer": "Los tramos más habituales son el 5 %, 12 %, 18 % y 28 %, aunque algunos bienes y servicios quedan fuera o están exentos. Comprueba siempre el tipo que se aplica a lo que estás facturando."
+          },
+          {
+            "question": "¿Setu Dine calcula el GST automáticamente?",
+            "answer": "Sí. Setu Dine lleva un motor de impuestos integrado que aplica el GST correcto en cada ticket, así que no tienes que calcularlo a mano en cada pedido."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Deja que Setu Dine lleve el impuesto de cada ticket",
+        "subtext": "Setu Dine aplica el GST correcto en cada pedido automáticamente: sin cálculos a mano y sin errores.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de margen de beneficio",

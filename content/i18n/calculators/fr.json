@@ -45,7 +45,58 @@
   "items": [
     {
       "name": "Calculateur de GST",
-      "shortDescription": "Ajoutez ou retirez la GST d'un montant en un clic, pour n'importe quel taux."
+      "shortDescription": "Ajoutez ou retirez la GST d'un montant en un clic, pour n'importe quel taux.",
+      "seo": {
+        "title": "Calculateur de GST — ajouter ou retirer la GST | Setu",
+        "description": "Calculateur de GST gratuit : ajoutez la GST à un montant de base ou retirez-la d'un prix final, à n'importe quel taux. Montant de taxe et total immédiats.",
+        "keywords": [
+          "calculateur de GST",
+          "calculateur de GST en ligne",
+          "ajouter la GST",
+          "retirer la GST",
+          "calculateur de montant de GST Inde"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de GST",
+        "headline": "Calculateur de GST",
+        "subheadline": "Ajoutez la GST à un prix de base ou extrayez-la d'un prix final : choisissez le taux et voyez la répartition immédiatement."
+      },
+      "about": {
+        "headline": "À quoi sert un calculateur de GST",
+        "paragraphs": [
+          "La GST revient partout dans le quotidien d'un commerce : annoncer un prix à un client, vérifier la facture d'un fournisseur, ou décider de ce qu'on inscrit sur un ticket. Refaire le calcul à la main pour chaque tranche est lent et se trompe vite, surtout quand on passe d'un taux à l'autre entre 5 %, 12 %, 18 % et 28 %.",
+          "Ce calculateur fonctionne dans les deux sens. Saisissez un montant de base pour voir la GST et le total taxe comprise, ou saisissez un montant final pour voir quels étaient le prix de base et la taxe avant qu'elle soit incluse. C'est le calcul que Setu Dine fait tout seul sur chaque ticket, disponible ici comme outil gratuit et autonome."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de GST",
+        "items": [
+          {
+            "question": "Comment calculer la GST sur un montant ?",
+            "answer": "Multipliez le montant de base par le taux de GST et divisez par 100 pour obtenir la taxe, puis ajoutez-la au montant de base pour le total. Par exemple, ₹1 000 à 18 % de GST ajoute ₹180, soit un total de ₹1 180."
+          },
+          {
+            "question": "Comment retirer la GST d'un prix final pour trouver le prix de base ?",
+            "answer": "Divisez le montant final par (1 + taux de GST/100). Pour un montant final de ₹1 180 à 18 % de GST, le prix de base est ₹1 180 ÷ 1,18 = ₹1 000."
+          },
+          {
+            "question": "Quelles sont les tranches de GST courantes en Inde ?",
+            "answer": "Les tranches les plus courantes sont 5 %, 12 %, 18 % et 28 %, même si certains biens et services en sortent ou en sont exonérés. Vérifiez toujours le taux qui s'applique à ce que vous facturez."
+          },
+          {
+            "question": "Setu Dine calcule-t-il la GST automatiquement ?",
+            "answer": "Oui. Setu Dine embarque un moteur fiscal qui applique la bonne GST sur chaque ticket, vous n'avez donc pas à la calculer à la main commande par commande."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Laissez Setu Dine gérer la taxe sur chaque ticket",
+        "subtext": "Setu Dine applique la bonne GST sur chaque commande automatiquement : aucun calcul à la main, aucune erreur.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de marge bénéficiaire",
