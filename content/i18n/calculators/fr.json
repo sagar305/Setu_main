@@ -215,7 +215,56 @@
     },
     {
       "name": "Calculateur de remise",
-      "shortDescription": "Calculez le prix final et l'économie réalisée pour n'importe quelle remise ou offre."
+      "shortDescription": "Calculez le prix final et l'économie réalisée pour n'importe quelle remise ou offre.",
+      "seo": {
+        "title": "Calculateur de remise — prix final et économie | Setu",
+        "description": "Calculez aussitôt le prix remisé et le montant économisé. Saisissez le prix initial et le pourcentage de remise pour voir le prix final et l'économie totale.",
+        "keywords": [
+          "calculateur de remise",
+          "calculateur de pourcentage de remise",
+          "calculateur de prix soldé"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de remise",
+        "headline": "Calculateur de remise",
+        "subheadline": "Saisissez le prix initial et le pourcentage de remise pour voir le prix final et exactement ce qui est économisé."
+      },
+      "about": {
+        "headline": "Utile des deux côtés du comptoir",
+        "paragraphs": [
+          "Quand vous lancez une promotion ou une offre avec code, il faut connaître le prix final que vous allez réellement encaisser — et ce qu'il coûte en marge. Ce calculateur donne les deux immédiatement, pour n'importe quel pourcentage de remise.",
+          "Il sert aussi à vérifier la remise proposée par un fournisseur sur une grosse commande, ou à répondre au « ça fait combien après la remise ? » d'un client sans sortir la calculatrice du téléphone."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de remise",
+        "items": [
+          {
+            "question": "Comment calculer un prix remisé ?",
+            "answer": "Montant de la remise = Prix initial × Remise % ÷ 100. Prix final = Prix initial − Montant de la remise. Un article à ₹500 remisé de 20 % fait économiser ₹100, soit un prix final de ₹400."
+          },
+          {
+            "question": "Quel effet une remise a-t-elle sur ma marge ?",
+            "answer": "La remise baisse votre prix de vente sans baisser votre coût : elle sort donc directement de la marge. Avant de lancer une promotion, vérifiez la marge sur le prix remisé dans le calculateur de marge pour confirmer que cela vaut encore la peine."
+          },
+          {
+            "question": "Peut-on cumuler deux remises ?",
+            "answer": "Appliquez-les l'une après l'autre plutôt que d'additionner les pourcentages : 20 % puis 10 % de plus ne font pas 30 % au total. Passez la première remise dans le calculateur, puis repassez le résultat avec la seconde."
+          },
+          {
+            "question": "Setu Dine applique-t-il seul remises et codes à l'encaissement ?",
+            "answer": "Oui. Setu Dine gère des codes et des remises paramétrables qui s'appliquent d'eux-mêmes sur le ticket : l'équipe n'a pas à calculer les offres à la main au comptoir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lancez vos offres sans calcul à la main",
+        "subtext": "Setu Dine applique codes et remises automatiquement à l'encaissement, chaque fois.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de mensualité de prêt",

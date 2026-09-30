@@ -215,7 +215,56 @@
     },
     {
       "name": "Rabattrechner",
-      "shortDescription": "Berechnen Sie Endpreis und Ersparnis für jeden Rabatt oder jedes Angebot."
+      "shortDescription": "Berechnen Sie Endpreis und Ersparnis für jeden Rabatt oder jedes Angebot.",
+      "seo": {
+        "title": "Rabattrechner — Endpreis und Ersparnis | Setu",
+        "description": "Berechnen Sie sofort den rabattierten Preis und die Ersparnis. Geben Sie Originalpreis und Rabatt in Prozent ein und sehen Sie Endpreis und Gesamtersparnis.",
+        "keywords": [
+          "Rabattrechner",
+          "Prozentrechner Rabatt",
+          "Aktionspreis berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rabattrechner",
+        "headline": "Rabattrechner",
+        "subheadline": "Geben Sie Originalpreis und Rabatt in Prozent ein und sehen Sie den Endpreis und genau wie viel gespart wird."
+      },
+      "about": {
+        "headline": "Auf beiden Seiten der Theke nützlich",
+        "paragraphs": [
+          "Wenn Sie eine Aktion oder ein Gutscheinangebot fahren, müssen Sie den Endpreis kennen, den Sie tatsächlich verlangen — und was er Sie an Marge kostet. Dieser Rechner liefert beides sofort, für jeden Rabattsatz.",
+          "Er hilft auch, das Rabattangebot eines Lieferanten auf eine größere Bestellung zu prüfen, oder die Frage eines Kunden „was kostet das mit Rabatt?\" zu beantworten, ohne zum Handy zu greifen."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Rabattrechner",
+        "items": [
+          {
+            "question": "Wie berechne ich einen rabattierten Preis?",
+            "answer": "Rabattbetrag = Originalpreis × Rabatt % ÷ 100. Endpreis = Originalpreis − Rabattbetrag. Ein Artikel zu ₹500 mit 20 % Rabatt spart ₹100 und kostet dann ₹400."
+          },
+          {
+            "question": "Wie wirkt ein Rabatt auf meine Gewinnmarge?",
+            "answer": "Der Rabatt senkt Ihren Verkaufspreis, nicht Ihre Kosten — er geht also direkt von der Marge ab. Prüfen Sie vor einer Aktion die Marge auf den rabattierten Preis im Margenrechner, um sicher zu sein, dass der Verkauf sich noch lohnt."
+          },
+          {
+            "question": "Kann ich zwei Rabatte kombinieren?",
+            "answer": "Wenden Sie sie nacheinander an, statt die Prozente zu addieren: 20 % und danach weitere 10 % sind nicht 30 % insgesamt. Rechnen Sie den ersten Rabatt, und das Ergebnis dann noch einmal mit dem zweiten."
+          },
+          {
+            "question": "Setzt Setu Dine Rabatte und Gutscheine beim Abrechnen selbst an?",
+            "answer": "Ja. Setu Dine kennt einstellbare Gutscheine und Rabatte, die auf dem Bon automatisch greifen — das Personal muss Aktionen an der Theke nicht von Hand rechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Aktionen fahren, ohne von Hand zu rechnen",
+        "subtext": "Setu Dine setzt Gutscheine und Rabatte beim Abrechnen jedes Mal automatisch an.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Kreditraten-Rechner",

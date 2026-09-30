@@ -215,7 +215,56 @@
     },
     {
       "name": "Kalkulator diskon",
-      "shortDescription": "Hitung harga akhir dan penghematan untuk diskon atau promo apa pun."
+      "shortDescription": "Hitung harga akhir dan penghematan untuk diskon atau promo apa pun.",
+      "seo": {
+        "title": "Kalkulator diskon — harga akhir dan penghematan | Setu",
+        "description": "Hitung seketika harga setelah diskon dan berapa yang dihemat. Masukkan harga asli dan persentase diskon untuk melihat harga akhir serta total penghematan.",
+        "keywords": [
+          "kalkulator diskon",
+          "kalkulator persentase diskon",
+          "kalkulator harga obral"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator diskon",
+        "headline": "Kalkulator diskon",
+        "subheadline": "Masukkan harga asli dan persentase diskon untuk melihat harga akhir dan persisnya berapa yang dihemat."
+      },
+      "about": {
+        "headline": "Berguna di kedua sisi meja kasir",
+        "paragraphs": [
+          "Saat menjalankan obral atau penawaran kupon, Anda perlu tahu harga akhir yang benar-benar akan ditagih — dan berapa biayanya dari margin. Kalkulator ini memberi keduanya seketika, untuk persentase diskon apa pun.",
+          "Berguna juga untuk memeriksa diskon yang ditawarkan pemasok pada pesanan besar, atau untuk menjawab pertanyaan pelanggan \"jadi berapa setelah diskon?\" tanpa mengambil kalkulator di ponsel."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator diskon",
+        "items": [
+          {
+            "question": "Bagaimana menghitung harga setelah diskon?",
+            "answer": "Nilai diskon = Harga asli × Diskon % ÷ 100. Harga akhir = Harga asli − Nilai diskon. Barang ₹500 dengan diskon 20% menghemat ₹100, sehingga harganya ₹400."
+          },
+          {
+            "question": "Bagaimana diskon memengaruhi margin laba saya?",
+            "answer": "Diskon menurunkan harga jual tetapi tidak menurunkan biaya, jadi langsung memotong margin. Sebelum menjalankan promo, periksa margin pada harga diskon di kalkulator margin laba untuk memastikan masih layak dijual."
+          },
+          {
+            "question": "Bisakah dua diskon ditumpuk?",
+            "answer": "Terapkan satu demi satu, bukan dengan menjumlahkan persentasenya — diskon 20% lalu 10% lagi bukan berarti total 30%. Hitung diskon pertama di kalkulator, lalu masukkan hasilnya lagi untuk diskon kedua."
+          },
+          {
+            "question": "Apakah Setu Dine menerapkan diskon dan kupon otomatis saat penagihan?",
+            "answer": "Ya. Setu Dine mendukung kupon dan diskon yang bisa diatur dan berlaku otomatis di struk, jadi staf tak perlu menghitung penawaran manual di kasir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jalankan promo tanpa hitung manual",
+        "subtext": "Setu Dine menerapkan kupon dan diskon otomatis saat penagihan, setiap kali.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator cicilan pinjaman usaha",

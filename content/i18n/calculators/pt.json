@@ -215,7 +215,56 @@
     },
     {
       "name": "Calculadora de desconto",
-      "shortDescription": "Calcule o preço final e a economia de qualquer desconto ou promoção."
+      "shortDescription": "Calcule o preço final e a economia de qualquer desconto ou promoção.",
+      "seo": {
+        "title": "Calculadora de desconto — preço final e economia | Setu",
+        "description": "Calcule na hora o preço com desconto e quanto se economiza. Informe o preço original e o percentual de desconto para ver o preço final e a economia total.",
+        "keywords": [
+          "calculadora de desconto",
+          "calculadora de percentual de desconto",
+          "calculadora de preço promocional"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de desconto",
+        "headline": "Calculadora de desconto",
+        "subheadline": "Informe o preço original e o percentual de desconto para ver o preço final e exatamente quanto se economiza."
+      },
+      "about": {
+        "headline": "Útil dos dois lados do balcão",
+        "paragraphs": [
+          "Quando você monta uma promoção ou uma oferta com cupom, precisa saber o preço final que vai cobrar de fato — e quanto isso custa em margem. Esta calculadora dá as duas coisas na hora, para qualquer percentual de desconto.",
+          "Também serve para conferir o desconto que um fornecedor oferece num pedido grande, ou para responder ao \"quanto fica com o desconto?\" do cliente sem pegar a calculadora do celular."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de desconto",
+        "items": [
+          {
+            "question": "Como calculo um preço com desconto?",
+            "answer": "Valor do desconto = Preço original × Desconto % ÷ 100. Preço final = Preço original − Valor do desconto. Um item de ₹500 com 20% de desconto economiza ₹100, ficando em ₹400."
+          },
+          {
+            "question": "Como um desconto afeta minha margem de lucro?",
+            "answer": "O desconto reduz seu preço de venda mas não o custo, então sai direto da margem. Antes de rodar uma promoção, confira a margem no preço com desconto na calculadora de margem para garantir que ainda vale a pena vender."
+          },
+          {
+            "question": "Posso juntar dois descontos?",
+            "answer": "Aplique um depois do outro, e não somando os percentuais: 20% seguido de mais 10% não é 30% no total. Passe o primeiro desconto pela calculadora e depois passe o resultado com o segundo."
+          },
+          {
+            "question": "O Setu Dine aplica descontos e cupons sozinho no faturamento?",
+            "answer": "Sim. O Setu Dine trabalha com cupons e descontos configuráveis que entram sozinhos no cupom, então a equipe não precisa calcular ofertas à mão no balcão."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Rode ofertas sem conta à mão",
+        "subtext": "O Setu Dine aplica cupons e descontos automaticamente no faturamento, sempre.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de prestação de empréstimo",

@@ -32,7 +32,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "markup-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "break-even-calculator": [],
     "food-cost-calculator": [],
-    "discount-calculator": [],
+    "discount-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "loan-emi-calculator": [],
     "table-turnover-calculator": [],
     "take-home-salary-calculator": [],
