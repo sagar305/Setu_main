@@ -154,7 +154,56 @@
     },
     {
       "name": "Calculadora de markup",
-      "shortDescription": "Encontre o preço de venda necessário para atingir um markup-alvo sobre o custo."
+      "shortDescription": "Encontre o preço de venda necessário para atingir um markup-alvo sobre o custo.",
+      "seo": {
+        "title": "Calculadora de markup — ache seu preço de venda | Setu",
+        "description": "Calculadora de markup gratuita. Informe o preço de custo e o markup desejado para achar na hora o preço de venda e o lucro por unidade.",
+        "keywords": [
+          "calculadora de markup",
+          "calculadora de preço de venda",
+          "calculadora de preço sobre custo"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de markup",
+        "headline": "Calculadora de markup",
+        "subheadline": "Informe seu custo e o markup % desejado para obter o preço de venda que você deveria cobrar."
+      },
+      "about": {
+        "headline": "Formar preço a partir do custo",
+        "paragraphs": [
+          "Formar preço somando um markup fixo ao custo é a maneira mais simples de precificar um produto novo ou um prato. O difícil é fazer isso de forma consistente em dezenas de itens ou pratos sem abrir uma calculadora em outra aba para cada um.",
+          "Esta ferramenta inverte a pergunta habitual da margem: em vez de conferir a margem de um preço que você já escolheu, você diz o markup que quer e ela devolve o preço a cobrar, junto com o lucro por unidade nesse preço."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de markup",
+        "items": [
+          {
+            "question": "Qual é a fórmula do markup?",
+            "answer": "Preço de venda = Preço de custo × (1 + Markup % ÷ 100). Por exemplo, um item de ₹100 de custo com markup de 40% sai a ₹140."
+          },
+          {
+            "question": "Markup de 50% é a mesma coisa que margem de 50%?",
+            "answer": "Não. Markup de 50% sobre ₹100 de custo dá preço de venda de ₹150, o que equivale a 33,3% de margem, não 50%. Markup e margem são calculados sobre bases diferentes."
+          },
+          {
+            "question": "Que markup usar em produtos de varejo?",
+            "answer": "Depende da categoria, da concorrência e do serviço ou valor agregado que acompanha o produto. Muitos varejistas começam na faixa de 30-50% de markup e ajustam conforme o que vende e o que o mercado aceita."
+          },
+          {
+            "question": "Serve também para precificar cardápio de restaurante?",
+            "answer": "Sim: informe o custo do prato como preço de custo e o markup desejado para obter um preço inicial de cardápio, e depois confira com a calculadora de percentual de custo de alimentos."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Precifique cada item com segurança",
+        "subtext": "O Setu Dine mantém custo e preço juntos, então você muda preços sem perder a margem de vista.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ponto de equilíbrio",

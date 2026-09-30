@@ -154,7 +154,56 @@
     },
     {
       "name": "Aufschlagsrechner",
-      "shortDescription": "Finden Sie den Verkaufspreis, den Sie für einen Zielaufschlag auf die Kosten brauchen."
+      "shortDescription": "Finden Sie den Verkaufspreis, den Sie für einen Zielaufschlag auf die Kosten brauchen.",
+      "seo": {
+        "title": "Aufschlagsrechner — Verkaufspreis ermitteln | Setu",
+        "description": "Kostenloser Aufschlagsrechner. Geben Sie Einkaufspreis und gewünschten Aufschlag in Prozent ein und erhalten Sie Verkaufspreis und Gewinn je Stück.",
+        "keywords": [
+          "Aufschlagsrechner",
+          "Verkaufspreis berechnen",
+          "Kalkulation mit Kostenaufschlag"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Aufschlagsrechner",
+        "headline": "Aufschlagsrechner",
+        "subheadline": "Geben Sie Ihre Kosten und den gewünschten Aufschlag % ein und erhalten Sie den Verkaufspreis, den Sie ansetzen sollten."
+      },
+      "about": {
+        "headline": "Preise von den Kosten aus aufbauen",
+        "paragraphs": [
+          "Einen festen Aufschlag auf die Kosten zu legen ist die einfachste Art, ein neues Produkt oder Gericht zu kalkulieren. Schwierig wird es, das über Dutzende Artikel oder Gerichte gleich zu halten, ohne für jeden einzelnen einen Rechner im zweiten Tab zu öffnen.",
+          "Dieses Tool dreht die übliche Margenfrage um: Statt die Marge eines schon gewählten Preises zu prüfen, nennen Sie den gewünschten Aufschlag und erhalten den anzusetzenden Preis — samt Gewinn je Stück zu diesem Preis."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Aufschlagsrechner",
+        "items": [
+          {
+            "question": "Wie lautet die Aufschlagsformel?",
+            "answer": "Verkaufspreis = Einkaufspreis × (1 + Aufschlag % ÷ 100). Ein Artikel mit ₹100 Kosten und 40 % Aufschlag kostet also ₹140."
+          },
+          {
+            "question": "Sind 50 % Aufschlag dasselbe wie 50 % Marge?",
+            "answer": "Nein. 50 % Aufschlag auf ₹100 Kosten ergeben einen Verkaufspreis von ₹150, und das sind 33,3 % Marge, nicht 50 %. Aufschlag und Marge rechnen auf unterschiedlichen Grundlagen."
+          },
+          {
+            "question": "Welchen Aufschlag sollte ich im Handel ansetzen?",
+            "answer": "Das hängt von der Warengruppe, dem Wettbewerb und der Leistung ab, die mit dem Produkt verkauft wird. Viele Händler starten im Bereich 30 bis 50 % und passen an, je nachdem was sich verkauft und was der Markt trägt."
+          },
+          {
+            "question": "Lässt sich das auch für Speisekarten nutzen?",
+            "answer": "Ja: Geben Sie die Tellerkosten als Einkaufspreis und Ihren Zielaufschlag ein, um einen Startpreis für die Karte zu erhalten, und prüfen Sie ihn danach mit dem Wareneinsatz-Rechner."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jeden Artikel sicher kalkulieren",
+        "subtext": "Setu Dine hält Kosten und Preise zusammen — Sie ändern Preise, ohne die Marge aus dem Blick zu verlieren.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Break-even-Rechner",

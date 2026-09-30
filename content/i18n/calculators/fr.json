@@ -154,7 +154,56 @@
     },
     {
       "name": "Calculateur de taux de marque",
-      "shortDescription": "Trouvez le prix de vente nécessaire pour atteindre un taux de marque cible sur le coût."
+      "shortDescription": "Trouvez le prix de vente nécessaire pour atteindre un taux de marque cible sur le coût.",
+      "seo": {
+        "title": "Calculateur de marque — trouvez votre prix de vente | Setu",
+        "description": "Calculateur de taux de marque gratuit. Saisissez votre prix de revient et la marque visée pour obtenir aussitôt le prix de vente et le bénéfice par unité.",
+        "keywords": [
+          "calculateur de taux de marque",
+          "calculateur de prix de vente",
+          "calcul du prix au coût majoré"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de marque",
+        "headline": "Calculateur de taux de marque",
+        "subheadline": "Saisissez votre coût et la marque % visée pour obtenir le prix de vente à pratiquer."
+      },
+      "about": {
+        "headline": "Fixer ses prix en partant du coût",
+        "paragraphs": [
+          "Fixer un prix en ajoutant une marque fixe au coût est la façon la plus simple de tarifer un nouveau produit ou un plat. Le difficile, c'est de le faire de la même manière sur des dizaines de références ou de recettes, sans ouvrir une calculatrice dans un autre onglet pour chacune.",
+          "Cet outil retourne la question habituelle de la marge : au lieu de vérifier la marge d'un prix déjà choisi, vous indiquez la marque souhaitée et il vous donne le prix à pratiquer, avec le bénéfice par unité à ce prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de marque",
+        "items": [
+          {
+            "question": "Quelle est la formule du taux de marque ?",
+            "answer": "Prix de vente = Prix de revient × (1 + Marque % ÷ 100). Par exemple, un article à ₹100 de coût avec 40 % de marque se vend ₹140."
+          },
+          {
+            "question": "50 % de marque, est-ce la même chose que 50 % de marge ?",
+            "answer": "Non. 50 % de marque sur ₹100 de coût donne un prix de vente de ₹150, soit une marge de 33,3 % et non de 50 %. Marque et marge se calculent sur des bases différentes."
+          },
+          {
+            "question": "Quelle marque appliquer sur des produits de détail ?",
+            "answer": "Cela dépend de la catégorie, de la concurrence et du service ou de la valeur ajoutée qui accompagne le produit. Beaucoup de commerçants démarrent entre 30 et 50 % de marque, puis ajustent selon ce qui se vend et ce que le marché accepte."
+          },
+          {
+            "question": "Peut-on s'en servir pour la carte d'un restaurant ?",
+            "answer": "Oui : entrez le coût de l'assiette comme prix de revient et la marque visée pour obtenir un prix de carte de départ, puis vérifiez-le avec le calculateur de ratio de coût matière."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Tarifez chaque article en confiance",
+        "subtext": "Setu Dine garde ensemble les données de coût et de prix : vous changez vos prix sans perdre la marge de vue.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de seuil de rentabilité",

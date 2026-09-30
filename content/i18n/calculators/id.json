@@ -154,7 +154,56 @@
     },
     {
       "name": "Kalkulator markup",
-      "shortDescription": "Temukan harga jual yang dibutuhkan untuk mencapai target markup atas biaya."
+      "shortDescription": "Temukan harga jual yang dibutuhkan untuk mencapai target markup atas biaya.",
+      "seo": {
+        "title": "Kalkulator markup — cari harga jual Anda | Setu",
+        "description": "Kalkulator markup gratis. Masukkan harga pokok dan markup yang Anda targetkan untuk langsung menemukan harga jual serta laba per unit.",
+        "keywords": [
+          "kalkulator markup",
+          "kalkulator harga jual",
+          "kalkulator penetapan harga atas biaya"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator markup",
+        "headline": "Kalkulator markup",
+        "subheadline": "Masukkan biaya dan markup % yang Anda targetkan untuk mendapat harga jual yang sebaiknya Anda pasang."
+      },
+      "about": {
+        "headline": "Menetapkan harga dari biaya ke atas",
+        "paragraphs": [
+          "Menambahkan markup tetap di atas biaya adalah cara paling sederhana untuk menetapkan harga produk atau menu baru. Bagian sulitnya adalah melakukannya secara konsisten untuk puluhan SKU atau hidangan, tanpa membuka kalkulator di tab lain untuk setiap satu.",
+          "Alat ini membalik pertanyaan margin yang biasa: daripada memeriksa margin pada harga yang sudah Anda pilih, Anda sebutkan markup yang diinginkan dan ia memberi harga yang perlu dipasang, beserta laba per unit pada harga itu."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator markup",
+        "items": [
+          {
+            "question": "Apa rumus markup?",
+            "answer": "Harga jual = Harga pokok × (1 + Markup % ÷ 100). Misalnya barang berbiaya ₹100 dengan markup 40% dijual ₹140."
+          },
+          {
+            "question": "Apakah markup 50% sama dengan margin 50%?",
+            "answer": "Bukan. Markup 50% atas biaya ₹100 memberi harga jual ₹150, yang berarti margin 33,3%, bukan 50%. Markup dan margin dihitung atas dasar yang berbeda."
+          },
+          {
+            "question": "Berapa markup yang cocok untuk produk ritel?",
+            "answer": "Tergantung kategori, persaingan, dan layanan atau nilai tambah yang menyertai produk. Banyak pedagang mulai di kisaran markup 30-50% lalu menyesuaikan dari apa yang terjual dan seberapa jauh pasar menerimanya."
+          },
+          {
+            "question": "Bisa dipakai untuk harga menu restoran juga?",
+            "answer": "Bisa: masukkan biaya per porsi sebagai harga pokok dan markup target Anda untuk mendapat harga menu awal, lalu periksa lagi dengan kalkulator persentase biaya bahan makanan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Tetapkan harga tiap barang dengan yakin",
+        "subtext": "Setu Dine menyimpan data biaya dan harga bersama, jadi Anda bisa mengubah harga tanpa kehilangan jejak margin.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator titik impas",

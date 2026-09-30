@@ -154,7 +154,56 @@
     },
     {
       "name": "Calculadora de markup",
-      "shortDescription": "Encuentra el precio de venta necesario para alcanzar un markup objetivo sobre el coste."
+      "shortDescription": "Encuentra el precio de venta necesario para alcanzar un markup objetivo sobre el coste.",
+      "seo": {
+        "title": "Calculadora de markup — halla tu precio de venta | Setu",
+        "description": "Calculadora de markup gratuita. Introduce tu precio de coste y el markup que buscas para hallar al instante el precio de venta y el beneficio por unidad.",
+        "keywords": [
+          "calculadora de markup",
+          "calculadora de precio de venta",
+          "calculadora de precio sobre coste"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de markup",
+        "headline": "Calculadora de markup",
+        "subheadline": "Introduce tu coste y el markup % que buscas para obtener el precio de venta que deberías cobrar."
+      },
+      "about": {
+        "headline": "Fijar precios partiendo del coste",
+        "paragraphs": [
+          "Poner precio sumando un markup fijo al coste es la forma más sencilla de tarifar un producto nuevo o un plato. La parte difícil es hacerlo de forma consistente en docenas de referencias o platos sin abrir una calculadora en otra pestaña para cada uno.",
+          "Esta herramienta da la vuelta a la pregunta habitual del margen: en vez de comprobar el margen de un precio que ya has elegido, le dices el markup que quieres y te devuelve el precio a cobrar, junto con el beneficio por unidad a ese precio."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de markup",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del markup?",
+            "answer": "Precio de venta = Precio de coste × (1 + Markup % ÷ 100). Por ejemplo, un artículo con ₹100 de coste y un markup del 40 % se vende a ₹140."
+          },
+          {
+            "question": "¿Un markup del 50 % es lo mismo que un margen del 50 %?",
+            "answer": "No. Un markup del 50 % sobre ₹100 de coste da un precio de venta de ₹150, que equivale a un margen del 33,3 %, no del 50 %. Markup y margen se calculan sobre bases distintas."
+          },
+          {
+            "question": "¿Qué markup debería usar en productos de tienda?",
+            "answer": "Depende de la categoría, de la competencia y del servicio o valor añadido que acompañe al producto. Muchos comercios empiezan en una franja de markup del 30-50 % y ajustan según lo que se vende y lo que el mercado tolera."
+          },
+          {
+            "question": "¿Sirve también para poner precio a una carta de restaurante?",
+            "answer": "Sí: pon el coste del plato como precio de coste y tu markup objetivo para obtener un precio de carta de partida, y después revísalo con la calculadora de porcentaje de coste de alimentos."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Pon precio a cada artículo con criterio",
+        "subtext": "Setu Dine mantiene juntos los datos de coste y precio, así puedes cambiar precios sin perder de vista el margen.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de punto de equilibrio",
