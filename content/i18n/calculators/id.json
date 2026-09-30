@@ -100,7 +100,57 @@
     },
     {
       "name": "Kalkulator margin laba",
-      "shortDescription": "Hitung margin laba dan persen markup Anda dari biaya dan harga jual."
+      "shortDescription": "Hitung margin laba dan persen markup Anda dari biaya dan harga jual.",
+      "seo": {
+        "title": "Kalkulator margin laba — alat online gratis | Setu",
+        "description": "Hitung margin laba dan persentase markup dari harga pokok dan harga jual Anda. Kalkulator margin laba gratis untuk usaha ritel dan restoran.",
+        "keywords": [
+          "kalkulator margin laba",
+          "kalkulator margin",
+          "kalkulator laba",
+          "markup vs margin"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator margin laba",
+        "headline": "Kalkulator margin laba",
+        "subheadline": "Masukkan harga pokok dan harga jual untuk melihat laba, margin %, dan markup % sekaligus."
+      },
+      "about": {
+        "headline": "Kenapa margin dan markup dua-duanya penting",
+        "paragraphs": [
+          "Margin laba memberi tahu berapa bagian dari harga jual Anda yang benar-benar laba — berguna untuk memeriksa apakah sebuah produk atau menu masih layak dijual di harga sekarang. Markup memberi tahu berapa yang Anda tambahkan di atas biaya, dan itulah yang Anda perlukan saat menyusun harga dari nol.",
+          "Kedua angka ini terlihat mirip tetapi tidak sama: markup 50% atas biaya hanya berarti margin 33% atas harga jual. Kalkulator ini menampilkan keduanya bersamaan, jadi Anda bisa menimbang keputusan harga tanpa tertukar."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator margin laba",
+        "items": [
+          {
+            "question": "Apa rumus margin laba?",
+            "answer": "Margin laba % = (Harga jual − Harga pokok) ÷ Harga jual × 100. Ini mengukur laba sebagai persentase dari harga jual."
+          },
+          {
+            "question": "Apa bedanya margin dan markup?",
+            "answer": "Margin adalah laba dibagi harga jual; markup adalah laba dibagi harga pokok. Labanya sama, penyebutnya berbeda — jadi nominal laba yang sama menghasilkan markup % yang lebih tinggi daripada margin %."
+          },
+          {
+            "question": "Berapa margin laba yang bagus untuk usaha kecil?",
+            "answer": "Sangat berbeda antar industri — restoran sering berjalan di margin bersih 10-15%, sementara di ritel bergantung kategorinya. Bandingkan dengan angka Anda sendiri sebelumnya dan patokan industri, bukan satu target yang berlaku untuk semua."
+          },
+          {
+            "question": "Sebaiknya menetapkan harga dari margin atau markup?",
+            "answer": "Sebagian besar usaha menetapkan harga dengan markup atas biaya, lalu memeriksa apakah margin yang dihasilkan memenuhi target laba. Melihat keduanya mencegah barang tertinggal di harga rendah hanya karena terlihat wajar di satu ukuran saja."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lihat margin Anda yang sebenarnya, otomatis",
+        "subtext": "Setu Dine mencatat biaya dan penjualan bersamaan, jadi Anda tahu margin tanpa menghitung sendiri.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator markup",

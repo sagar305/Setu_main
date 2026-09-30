@@ -100,7 +100,57 @@
     },
     {
       "name": "Calculateur de marge bénéficiaire",
-      "shortDescription": "Calculez votre marge bénéficiaire et votre taux de marque à partir du coût et du prix de vente."
+      "shortDescription": "Calculez votre marge bénéficiaire et votre taux de marque à partir du coût et du prix de vente.",
+      "seo": {
+        "title": "Calculateur de marge bénéficiaire — gratuit | Setu",
+        "description": "Calculez la marge bénéficiaire et le taux de marque depuis votre prix de revient et votre prix de vente. Outil gratuit pour commerce et restauration.",
+        "keywords": [
+          "calculateur de marge bénéficiaire",
+          "calculateur de marge",
+          "calculateur de bénéfice",
+          "taux de marque et marge"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de marge",
+        "headline": "Calculateur de marge bénéficiaire",
+        "subheadline": "Saisissez votre prix de revient et votre prix de vente pour voir d'un coup le bénéfice, la marge % et le taux de marque %."
+      },
+      "about": {
+        "headline": "Pourquoi la marge et le taux de marque comptent tous les deux",
+        "paragraphs": [
+          "La marge bénéficiaire vous dit quelle part de votre prix de vente est du bénéfice réel : utile pour vérifier qu'un produit ou un plat vaut encore la peine au prix actuel. Le taux de marque vous dit combien vous avez ajouté au-dessus du coût, ce qu'il faut quand vous fixez un prix de zéro.",
+          "Les deux chiffres se ressemblent sans être identiques : 50 % de marque sur le coût ne fait que 33 % de marge sur le prix de vente. Ce calculateur affiche les deux ensemble, pour revoir vos décisions de prix sans les confondre."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de marge",
+        "items": [
+          {
+            "question": "Quelle est la formule de la marge bénéficiaire ?",
+            "answer": "Marge % = (Prix de vente − Prix de revient) ÷ Prix de vente × 100. Elle mesure le bénéfice en pourcentage du prix de vente."
+          },
+          {
+            "question": "Quelle différence entre marge et taux de marque ?",
+            "answer": "La marge, c'est le bénéfice divisé par le prix de vente ; le taux de marque, c'est le bénéfice divisé par le coût. Même bénéfice, dénominateur différent : un montant donné produit donc un taux de marque supérieur à la marge."
+          },
+          {
+            "question": "Quelle marge viser pour une petite entreprise ?",
+            "answer": "Cela varie beaucoup selon le secteur : la restauration tourne souvent autour de 10 à 15 % de marge nette, et dans le commerce cela dépend de la catégorie. Comparez à vos propres chiffres passés et aux repères de votre métier plutôt qu'à un objectif universel."
+          },
+          {
+            "question": "Faut-il fixer ses prix à la marge ou au taux de marque ?",
+            "answer": "La plupart des entreprises fixent le prix en appliquant une marque sur le coût, puis vérifient que la marge obtenue atteint leur objectif. Regarder les deux évite de laisser sous-tarifés des articles qui paraissent corrects selon une mesure et pas selon l'autre."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Voyez vos vraies marges, sans rien calculer",
+        "subtext": "Setu Dine suit ensemble le coût et les ventes : vous connaissez votre marge sans faire le calcul vous-même.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de taux de marque",

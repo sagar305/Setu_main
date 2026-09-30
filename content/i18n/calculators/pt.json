@@ -100,7 +100,57 @@
     },
     {
       "name": "Calculadora de margem de lucro",
-      "shortDescription": "Descubra sua margem de lucro e o % de markup a partir do custo e do preço de venda."
+      "shortDescription": "Descubra sua margem de lucro e o % de markup a partir do custo e do preço de venda.",
+      "seo": {
+        "title": "Calculadora de margem de lucro — grátis | Setu",
+        "description": "Calcule a margem de lucro e o percentual de markup a partir do preço de custo e do preço de venda. Calculadora gratuita para varejo e restaurantes.",
+        "keywords": [
+          "calculadora de margem de lucro",
+          "calculadora de margem",
+          "calculadora de lucro",
+          "markup e margem"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de margem",
+        "headline": "Calculadora de margem de lucro",
+        "subheadline": "Informe o preço de custo e o preço de venda para ver lucro, margem % e markup % de uma vez."
+      },
+      "about": {
+        "headline": "Por que margem e markup importam os dois",
+        "paragraphs": [
+          "A margem de lucro diz qual parte do seu preço de venda é lucro de verdade — útil para checar se um produto ou prato ainda vale a pena no preço de hoje. O markup diz quanto você acrescentou sobre o custo, que é o que você precisa ao formar um preço do zero.",
+          "Os dois números se parecem mas não são iguais: 50% de markup sobre o custo dá apenas 33% de margem sobre o preço de venda. Esta calculadora mostra os dois juntos, para você revisar decisões de preço sem trocar um pelo outro."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de margem",
+        "items": [
+          {
+            "question": "Qual é a fórmula da margem de lucro?",
+            "answer": "Margem % = (Preço de venda − Preço de custo) ÷ Preço de venda × 100. Ela mede o lucro como percentual do preço de venda."
+          },
+          {
+            "question": "Qual a diferença entre margem e markup?",
+            "answer": "Margem é o lucro dividido pelo preço de venda; markup é o lucro dividido pelo custo. O lucro é o mesmo e o denominador muda, então um mesmo valor gera um markup % maior que a margem %."
+          },
+          {
+            "question": "Qual é uma boa margem para um negócio pequeno?",
+            "answer": "Varia muito por setor — restaurantes costumam operar com 10-15% de margem líquida, e no varejo depende da categoria. Compare com os seus próprios números anteriores e com as referências do setor, em vez de uma meta única."
+          },
+          {
+            "question": "Devo precificar por margem ou por markup?",
+            "answer": "A maioria dos negócios define o preço aplicando markup sobre o custo e depois confere se a margem resultante atinge a meta de lucro. Olhar os dois evita deixar barato um item que parece certo por uma medida e não pela outra."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Veja suas margens reais, automaticamente",
+        "subtext": "O Setu Dine acompanha custo e vendas juntos, então você sabe sua margem sem fazer a conta.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de markup",

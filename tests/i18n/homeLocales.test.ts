@@ -512,3 +512,28 @@ describe("an item's own page is a route the chrome and switcher must recognise",
     expect(pageFromPath("/hi/calculators")).toEqual({ key: "calculators", lang: "hi" });
   });
 });
+
+describe("translation files are clean text", () => {
+  /**
+   * A replacement character means some byte was lost on the way in — the string
+   * still looks plausible in a diff, and renders as a black diamond to the
+   * reader. It happened once in a Punjabi answer, inside a word, and neither the
+   * build nor the length checks noticed.
+   */
+  it("contains no replacement or non-characters", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/[�￾￿]/);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has a damaged character near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
+});

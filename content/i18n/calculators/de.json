@@ -100,7 +100,57 @@
     },
     {
       "name": "Gewinnmargen-Rechner",
-      "shortDescription": "Ermitteln Sie Gewinnmarge und Aufschlag in Prozent aus Kosten und Verkaufspreis."
+      "shortDescription": "Ermitteln Sie Gewinnmarge und Aufschlag in Prozent aus Kosten und Verkaufspreis.",
+      "seo": {
+        "title": "Gewinnmargen-Rechner — kostenloses Online-Tool | Setu",
+        "description": "Berechnen Sie Gewinnmarge und Aufschlag in Prozent aus Einkaufs- und Verkaufspreis. Kostenloser Gewinnmargen-Rechner für Handel und Gastronomie.",
+        "keywords": [
+          "Gewinnmargen-Rechner",
+          "Margenrechner",
+          "Gewinnrechner",
+          "Aufschlag und Marge"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Gewinnmargen-Rechner",
+        "headline": "Gewinnmargen-Rechner",
+        "subheadline": "Geben Sie Einkaufs- und Verkaufspreis ein und sehen Sie Gewinn, Marge % und Aufschlag % auf einmal."
+      },
+      "about": {
+        "headline": "Warum Marge und Aufschlag beide zählen",
+        "paragraphs": [
+          "Die Gewinnmarge sagt Ihnen, welcher Anteil Ihres Verkaufspreises echter Gewinn ist — nützlich, um zu prüfen, ob sich ein Artikel oder Gericht zum heutigen Preis überhaupt lohnt. Der Aufschlag sagt Ihnen, wie viel Sie auf die Kosten gelegt haben, und genau den brauchen Sie, wenn Sie einen Preis neu festlegen.",
+          "Die beiden Zahlen sehen ähnlich aus, sind aber nicht dasselbe: 50 % Aufschlag auf die Kosten sind nur 33 % Marge auf den Verkaufspreis. Dieser Rechner zeigt beide zusammen, damit Sie Preisentscheidungen prüfen können, ohne sie zu verwechseln."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Gewinnmargen-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Gewinnmarge?",
+            "answer": "Marge % = (Verkaufspreis − Einkaufspreis) ÷ Verkaufspreis × 100. Sie misst den Gewinn als Prozentsatz des Verkaufspreises."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen Marge und Aufschlag?",
+            "answer": "Die Marge ist der Gewinn geteilt durch den Verkaufspreis, der Aufschlag der Gewinn geteilt durch die Kosten. Gleicher Gewinn, anderer Nenner — derselbe Betrag ergibt also einen höheren Aufschlag als Marge."
+          },
+          {
+            "question": "Was ist eine gute Marge für einen kleinen Betrieb?",
+            "answer": "Das hängt stark von der Branche ab: Gastronomie liegt oft bei 10 bis 15 % Nettomarge, im Handel kommt es auf die Warengruppe an. Vergleichen Sie mit Ihren eigenen früheren Zahlen und den Kennzahlen Ihrer Branche statt mit einem einzigen allgemeinen Ziel."
+          },
+          {
+            "question": "Soll ich über die Marge oder den Aufschlag kalkulieren?",
+            "answer": "Die meisten Betriebe kalkulieren mit einem Aufschlag auf die Kosten und prüfen danach, ob die entstehende Marge das Gewinnziel erreicht. Beides anzusehen verhindert, dass Artikel zu günstig bleiben, die nach einem Maß in Ordnung wirken und nach dem anderen nicht."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ihre echten Margen, ganz von selbst",
+        "subtext": "Setu Dine erfasst Kosten und Umsätze gemeinsam — Sie kennen Ihre Marge, ohne sie auszurechnen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Aufschlagsrechner",

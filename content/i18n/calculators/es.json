@@ -100,7 +100,57 @@
     },
     {
       "name": "Calculadora de margen de beneficio",
-      "shortDescription": "Calcula tu margen de beneficio y el % de markup a partir del coste y el precio de venta."
+      "shortDescription": "Calcula tu margen de beneficio y el % de markup a partir del coste y el precio de venta.",
+      "seo": {
+        "title": "Calculadora de margen de beneficio — gratis | Setu",
+        "description": "Calcula el margen de beneficio y el porcentaje de markup a partir de tu precio de coste y tu precio de venta. Calculadora gratuita para comercio y restauración.",
+        "keywords": [
+          "calculadora de margen de beneficio",
+          "calculadora de margen",
+          "calculadora de beneficio",
+          "markup y margen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de margen",
+        "headline": "Calculadora de margen de beneficio",
+        "subheadline": "Introduce tu precio de coste y tu precio de venta para ver el beneficio, el margen % y el markup % de una vez."
+      },
+      "about": {
+        "headline": "Por qué importan tanto el margen como el markup",
+        "paragraphs": [
+          "El margen de beneficio te dice qué parte de tu precio de venta es beneficio real, útil para comprobar si un producto o un plato merece la pena al precio que tiene hoy. El markup te dice cuánto has añadido sobre el coste, que es lo que necesitas cuando fijas un precio desde cero.",
+          "Los dos números se parecen pero no son lo mismo: un markup del 50 % sobre el coste es solo un margen del 33 % sobre el precio de venta. Esta calculadora muestra ambos juntos, para que puedas revisar tus decisiones de precio sin confundir uno con el otro."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de margen",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del margen de beneficio?",
+            "answer": "Margen % = (Precio de venta − Precio de coste) ÷ Precio de venta × 100. Mide el beneficio como porcentaje del precio de venta."
+          },
+          {
+            "question": "¿Qué diferencia hay entre margen y markup?",
+            "answer": "El margen es el beneficio dividido entre el precio de venta; el markup es el beneficio dividido entre el coste. Usan el mismo beneficio pero distinto denominador, así que un mismo importe da un markup % mayor que el margen %."
+          },
+          {
+            "question": "¿Cuál es un buen margen para un negocio pequeño?",
+            "answer": "Varía mucho según el sector: la restauración suele moverse en un 10-15 % de margen neto, y en comercio depende de la categoría. Compáralo con tus propias cifras históricas y con las referencias de tu sector antes que con un único objetivo universal."
+          },
+          {
+            "question": "¿Debo fijar precios por margen o por markup?",
+            "answer": "La mayoría de los negocios fijan el precio aplicando un markup sobre el coste y después comprueban que el margen resultante cumple su objetivo de beneficio. Mirar los dos evita dejar baratos artículos que parecen bien por una medida y no por la otra."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Conoce tus márgenes reales, sin hacer nada",
+        "subtext": "Setu Dine registra coste y ventas a la vez, así que sabes tu margen sin tener que hacer la cuenta.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de markup",
