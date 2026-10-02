@@ -756,7 +756,57 @@
     },
     {
       "name": "Calculadora de rotación de inventario",
-      "shortDescription": "Descubre cuántas veces rota tu inventario en un periodo y cuántos días de stock tienes."
+      "shortDescription": "Descubre cuántas veces rota tu inventario en un periodo y cuántos días de stock tienes.",
+      "seo": {
+        "title": "Calculadora de Rotación de Inventario | Setu",
+        "description": "Calculadora gratuita de rotación de inventario para comercios. Introduce el coste de las ventas y el inventario medio para ver la rotación y los días de stock.",
+        "keywords": [
+          "calculadora de rotación de inventario",
+          "índice de rotación de inventario",
+          "días de inventario",
+          "calculadora de rotación de stock"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Rotación de Inventario",
+        "headline": "Calculadora de Rotación de Inventario",
+        "subheadline": "Introduce el coste de las mercancías vendidas y el valor medio del inventario para ver tu índice de rotación y los días de stock que tienes."
+      },
+      "about": {
+        "headline": "El dinero parado en una estantería es dinero que no puedes usar en otra parte",
+        "paragraphs": [
+          "La rotación de inventario indica cuántas veces vendes tu stock medio en un periodo dado. Un índice bajo suele significar dinero inmovilizado en producto que no se mueve; uno muy alto puede indicar riesgo de quedarte sin existencias. Ningún extremo es bueno por sí mismo: la cifra adecuada depende de tu categoría y de la facilidad con la que puedes reponer.",
+          "Introduce el coste de las mercancías vendidas de un periodo (mes o año) y el valor medio de tu inventario en ese mismo periodo para obtener el índice de rotación y los días de stock equivalentes. Sigue esta cifra en el tiempo, no de forma aislada: un índice que cae suele ser la primera señal de que se está acumulando producto lento o inmovilizado."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de rotación de inventario",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del índice de rotación de inventario?",
+            "answer": "Índice de rotación = coste de las mercancías vendidas ÷ valor medio del inventario, del mismo periodo. El inventario medio suele ser (inventario inicial + inventario final) ÷ 2."
+          },
+          {
+            "question": "¿Qué índice de rotación de inventario es bueno?",
+            "answer": "Varía mucho por categoría: los frescos y la moda rápida rotan mucho más que los muebles o la electrónica. Compara tu índice con tu propia evolución histórica y con las referencias de tu categoría, no con una cifra universal."
+          },
+          {
+            "question": "¿Qué significan los 'días de inventario'?",
+            "answer": "Es el índice de rotación convertido en días: aproximadamente cuántos días de ventas representa tu inventario medio actual. Se calcula como 365 ÷ índice de rotación, y una cifra que sube indica que el stock se mueve más despacio que antes."
+          },
+          {
+            "question": "¿Por qué está bajando mi rotación de inventario?",
+            "answer": "Las causas habituales son comprar en exceso adelantándose a la demanda, acumulación de referencias que no se mueven, caídas estacionales de la demanda, o precios que ya no son lo bastante competitivos para mover el stock al ritmo anterior."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "¿Quieres acceso anticipado a Setu Retail?",
+        "subtext": "Cuéntanos sobre tu comercio y te avisaremos en cuanto se lance Setu Retail, con control de inventario incluido.",
+        "cta": {
+          "label": "Quiero que me avisen"
+        }
+      }
     },
     {
       "name": "Calculadora de punto de pedido",

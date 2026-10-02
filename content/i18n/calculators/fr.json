@@ -756,7 +756,57 @@
     },
     {
       "name": "Calculateur de rotation des stocks",
-      "shortDescription": "Découvrez combien de fois votre stock tourne sur une période et combien de jours de stock vous détenez."
+      "shortDescription": "Découvrez combien de fois votre stock tourne sur une période et combien de jours de stock vous détenez.",
+      "seo": {
+        "title": "Calculateur de Rotation des Stocks | Setu",
+        "description": "Calculateur gratuit de rotation des stocks pour les commerces. Saisissez le coût des marchandises vendues et le stock moyen pour voir la rotation et les jours.",
+        "keywords": [
+          "calculateur rotation des stocks",
+          "taux de rotation des stocks",
+          "jours de stock",
+          "calculateur rotation marchandises"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Rotation des Stocks",
+        "headline": "Calculateur de Rotation des Stocks",
+        "subheadline": "Saisissez le coût des marchandises vendues et la valeur moyenne du stock pour voir votre taux de rotation et le nombre de jours de stock détenu."
+      },
+      "about": {
+        "headline": "L'argent immobilisé en rayon est de l'argent indisponible ailleurs",
+        "paragraphs": [
+          "La rotation des stocks indique combien de fois vous écoulez votre stock moyen sur une période donnée. Un taux faible signifie généralement de la trésorerie figée dans des produits qui ne tournent pas ; un taux très élevé peut signaler un risque de rupture. Aucun extrême n'est bon en soi : le bon chiffre dépend de votre catégorie et de la facilité de réapprovisionnement.",
+          "Saisissez le coût des marchandises vendues sur une période (mois ou année) et la valeur moyenne de votre stock sur cette même période pour obtenir votre taux de rotation et le nombre de jours de stock correspondant. Suivez ce chiffre dans le temps plutôt qu'isolément : un taux qui baisse est souvent le premier signe que du stock lent ou dormant s'accumule."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de rotation des stocks",
+        "items": [
+          {
+            "question": "Quelle est la formule du taux de rotation des stocks ?",
+            "answer": "Taux de rotation = coût des marchandises vendues ÷ valeur moyenne du stock, sur la même période. Le stock moyen vaut généralement (stock initial + stock final) ÷ 2."
+          },
+          {
+            "question": "Quel taux de rotation des stocks viser ?",
+            "answer": "Cela varie beaucoup selon la catégorie : le frais et la mode rapide tournent bien plus vite que le meuble ou l'électronique. Comparez votre taux à votre propre historique et aux repères de votre catégorie plutôt qu'à un chiffre universel."
+          },
+          {
+            "question": "Que signifient les « jours de stock » ?",
+            "answer": "C'est le taux de rotation converti en jours : à peu près combien de jours de ventes représente votre stock moyen actuel. Il se calcule par 365 ÷ taux de rotation, et un chiffre qui augmente signale que le stock s'écoule plus lentement qu'avant."
+          },
+          {
+            "question": "Pourquoi ma rotation des stocks baisse-t-elle ?",
+            "answer": "Les causes habituelles : surstockage en anticipation de la demande, accumulation de références qui ne tournent pas, baisse saisonnière de la demande, ou des prix devenus insuffisamment compétitifs pour écouler le stock au rythme précédent."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Envie d'un accès anticipé à Setu Retail ?",
+        "subtext": "Parlez-nous de votre commerce et nous vous préviendrons dès le lancement de Setu Retail, avec le suivi des stocks intégré.",
+        "cta": {
+          "label": "Être prévenu"
+        }
+      }
     },
     {
       "name": "Calculateur de point de commande",

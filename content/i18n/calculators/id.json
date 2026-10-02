@@ -756,7 +756,57 @@
     },
     {
       "name": "Kalkulator perputaran persediaan",
-      "shortDescription": "Cari tahu berapa kali stok Anda terjual dalam satu periode, dan berapa hari stok tersisa."
+      "shortDescription": "Cari tahu berapa kali stok Anda terjual dalam satu periode, dan berapa hari stok tersisa.",
+      "seo": {
+        "title": "Kalkulator Perputaran Persediaan — Gratis | Setu",
+        "description": "Kalkulator perputaran persediaan gratis untuk usaha ritel. Masukkan harga pokok penjualan dan persediaan rata-rata untuk melihat rasio dan hari persediaan.",
+        "keywords": [
+          "kalkulator perputaran persediaan",
+          "rasio perputaran persediaan",
+          "hari persediaan",
+          "kalkulator perputaran stok"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Perputaran Persediaan",
+        "headline": "Kalkulator Perputaran Persediaan",
+        "subheadline": "Masukkan harga pokok penjualan dan nilai persediaan rata-rata untuk melihat rasio perputaran dan berapa hari stok yang Anda tahan."
+      },
+      "about": {
+        "headline": "Uang yang tertahan di rak adalah uang yang tidak bisa Anda pakai di tempat lain",
+        "paragraphs": [
+          "Perputaran persediaan memberi tahu berapa kali Anda menjual habis persediaan rata-rata dalam satu periode. Rasio yang rendah biasanya berarti uang mengendap di barang yang lambat bergerak; rasio yang sangat tinggi bisa berarti Anda berisiko kehabisan stok. Tidak ada ujung yang otomatis bagus — angka yang tepat bergantung pada kategori Anda dan seberapa mudah Anda bisa mengisi ulang.",
+          "Masukkan harga pokok penjualan untuk satu periode (bulan atau tahun) dan nilai persediaan rata-rata pada periode yang sama untuk mendapat rasio perputaran serta jumlah hari stok yang setara. Pantaulah angka ini sepanjang waktu, bukan sekali saja — rasio yang menurun sering jadi tanda paling awal bahwa barang lambat atau mati sedang menumpuk."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator perputaran persediaan",
+        "items": [
+          {
+            "question": "Apa rumus rasio perputaran persediaan?",
+            "answer": "Rasio perputaran persediaan = harga pokok penjualan ÷ nilai persediaan rata-rata, untuk periode yang sama. Persediaan rata-rata biasanya (persediaan awal + persediaan akhir) ÷ 2."
+          },
+          {
+            "question": "Berapa rasio perputaran persediaan yang bagus?",
+            "answer": "Sangat berbeda antar kategori — barang mudah rusak dan fesyen cepat berputar jauh lebih cepat daripada mebel atau elektronik. Bandingkan rasio Anda dengan tren Anda sendiri dan tolok ukur kategori, bukan satu angka universal."
+          },
+          {
+            "question": "Apa arti 'hari persediaan'?",
+            "answer": "Itu rasio perputaran yang diubah menjadi hari — kira-kira berapa hari penjualan yang diwakili persediaan rata-rata Anda sekarang. Dihitung sebagai 365 ÷ rasio perputaran, dan angka yang naik menandakan stok bergerak lebih lambat dari sebelumnya."
+          },
+          {
+            "question": "Mengapa perputaran persediaan saya menurun?",
+            "answer": "Penyebab umum: membeli berlebih mendahului permintaan, menumpuknya barang yang lambat bergerak, permintaan yang turun karena musim, atau harga yang tidak lagi cukup bersaing untuk menggerakkan stok secepat sebelumnya."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ingin akses awal ke Setu Retail?",
+        "subtext": "Ceritakan tentang usaha ritel Anda dan kami kabari begitu Setu Retail diluncurkan, lengkap dengan pelacakan persediaan.",
+        "cta": {
+          "label": "Beri tahu saya"
+        }
+      }
     },
     {
       "name": "Kalkulator titik pemesanan ulang",

@@ -756,7 +756,57 @@
     },
     {
       "name": "Calculadora de giro de estoque",
-      "shortDescription": "Descubra quantas vezes seu estoque gira em um período e quantos dias de estoque você mantém."
+      "shortDescription": "Descubra quantas vezes seu estoque gira em um período e quantos dias de estoque você mantém.",
+      "seo": {
+        "title": "Calculadora de Giro de Estoque | Setu",
+        "description": "Calculadora gratuita de giro de estoque para o varejo. Informe o custo das mercadorias vendidas e o estoque médio para ver o giro e os dias de estoque.",
+        "keywords": [
+          "calculadora de giro de estoque",
+          "índice de giro de estoque",
+          "dias de estoque",
+          "calculadora de rotatividade de estoque"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Giro de Estoque",
+        "headline": "Calculadora de Giro de Estoque",
+        "subheadline": "Informe o custo das mercadorias vendidas e o valor médio do estoque para ver o seu índice de giro e os dias de estoque em mãos."
+      },
+      "about": {
+        "headline": "Dinheiro parado na prateleira é dinheiro que você não pode usar em outro lugar",
+        "paragraphs": [
+          "O giro de estoque mostra quantas vezes você vende o seu estoque médio num determinado período. Um índice baixo normalmente significa dinheiro preso em produto que não sai; um índice muito alto pode indicar risco de faltar mercadoria. Nenhum extremo é bom por si só: o número certo depende da sua categoria e da facilidade de reposição.",
+          "Informe o custo das mercadorias vendidas de um período (mês ou ano) e o valor médio do seu estoque no mesmo período para obter o índice de giro e o equivalente em dias de estoque. Acompanhe isso ao longo do tempo, não isoladamente: um índice em queda costuma ser o primeiro sinal de que está acumulando produto lento ou encalhado."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de giro de estoque",
+        "items": [
+          {
+            "question": "Qual é a fórmula do índice de giro de estoque?",
+            "answer": "Índice de giro = custo das mercadorias vendidas ÷ valor médio do estoque, do mesmo período. O estoque médio normalmente é (estoque inicial + estoque final) ÷ 2."
+          },
+          {
+            "question": "Qual é um bom índice de giro de estoque?",
+            "answer": "Varia muito por categoria: perecíveis e moda rápida giram muito mais que móveis ou eletrônicos. Compare o seu índice com o seu próprio histórico e com as referências da sua categoria, não com um número universal."
+          },
+          {
+            "question": "O que significam os 'dias de estoque'?",
+            "answer": "É o índice de giro convertido em dias: aproximadamente quantos dias de venda o seu estoque médio atual representa. Calcula-se como 365 ÷ índice de giro, e um número crescente sinaliza que o estoque está saindo mais devagar que antes."
+          },
+          {
+            "question": "Por que o meu giro de estoque está caindo?",
+            "answer": "As causas comuns são comprar demais antecipando a demanda, acúmulo de itens que não saem, queda sazonal de demanda, ou preços que já não são competitivos o bastante para mover o estoque no ritmo anterior."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Quer acesso antecipado ao Setu Retail?",
+        "subtext": "Conte sobre o seu varejo e avisamos assim que o Setu Retail for lançado, com controle de estoque incluído.",
+        "cta": {
+          "label": "Quero ser avisado"
+        }
+      }
     },
     {
       "name": "Calculadora de ponto de reposição",

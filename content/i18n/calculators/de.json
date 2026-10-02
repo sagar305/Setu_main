@@ -756,7 +756,57 @@
     },
     {
       "name": "Lagerumschlags-Rechner",
-      "shortDescription": "Finden Sie heraus, wie oft Ihr Lager in einer Periode umschlägt und wie viele Tage Bestand Sie halten."
+      "shortDescription": "Finden Sie heraus, wie oft Ihr Lager in einer Periode umschlägt und wie viele Tage Bestand Sie halten.",
+      "seo": {
+        "title": "Lagerumschlag-Rechner — kostenloses Tool | Setu",
+        "description": "Kostenloser Lagerumschlag-Rechner für den Handel. Wareneinsatz und durchschnittlichen Lagerwert eingeben und Umschlagshäufigkeit samt Lagerdauer in Tagen sehen.",
+        "keywords": [
+          "Lagerumschlag Rechner",
+          "Umschlagshäufigkeit Lager",
+          "Lagerdauer in Tagen",
+          "Lagerumschlag berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Lagerumschlag",
+        "headline": "Lagerumschlag-Rechner",
+        "subheadline": "Geben Sie Wareneinsatz und durchschnittlichen Lagerwert ein und sehen Sie Ihre Umschlagshäufigkeit und die Lagerdauer in Tagen."
+      },
+      "about": {
+        "headline": "Geld im Regal ist Geld, das Ihnen anderswo fehlt",
+        "paragraphs": [
+          "Der Lagerumschlag sagt, wie oft Sie Ihren durchschnittlichen Bestand in einem Zeitraum verkaufen. Eine niedrige Umschlagshäufigkeit bedeutet meist Kapital, das in langsam drehender Ware steckt; eine sehr hohe kann auf Risiko von Fehlbeständen hindeuten. Kein Extrem ist von sich aus gut — die passende Zahl hängt von Ihrer Warengruppe und davon ab, wie leicht Sie nachbestellen können.",
+          "Geben Sie den Wareneinsatz eines Zeitraums (Monat oder Jahr) und den durchschnittlichen Lagerwert desselben Zeitraums ein, um Umschlagshäufigkeit und die entsprechende Lagerdauer in Tagen zu erhalten. Beobachten Sie die Zahl über die Zeit statt einzeln: eine sinkende Umschlagshäufigkeit ist oft das früheste Anzeichen dafür, dass sich langsam drehende oder stehende Ware aufbaut."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Lagerumschlag-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Umschlagshäufigkeit?",
+            "answer": "Umschlagshäufigkeit = Wareneinsatz ÷ durchschnittlicher Lagerwert, im gleichen Zeitraum. Der durchschnittliche Bestand ist meist (Anfangsbestand + Endbestand) ÷ 2."
+          },
+          {
+            "question": "Welche Umschlagshäufigkeit ist gut?",
+            "answer": "Das unterscheidet sich stark nach Warengruppe: Frischware und schnelle Mode drehen weit häufiger als Möbel oder Elektronik. Vergleichen Sie Ihre Kennzahl mit dem eigenen Verlauf und den Werten Ihrer Warengruppe statt mit einer allgemeinen Zahl."
+          },
+          {
+            "question": "Was bedeutet die Lagerdauer in Tagen?",
+            "answer": "Es ist die Umschlagshäufigkeit in Tage umgerechnet: ungefähr wie viele Verkaufstage Ihr heutiger Durchschnittsbestand abdeckt. Sie ergibt sich aus 365 ÷ Umschlagshäufigkeit; eine steigende Zahl zeigt, dass die Ware langsamer abfließt als früher."
+          },
+          {
+            "question": "Warum sinkt mein Lagerumschlag?",
+            "answer": "Häufige Ursachen: zu viel Ware vor der Nachfrage eingekauft, Ansammlung langsam drehender Artikel, saisonale Nachfragerückgänge, oder Preise, die nicht mehr wettbewerbsfähig genug sind, um die Ware im früheren Tempo abzusetzen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Früher Zugang zu Setu Retail?",
+        "subtext": "Erzählen Sie uns von Ihrem Handelsgeschäft, und wir melden uns, sobald Setu Retail startet — mit Bestandsführung von Anfang an.",
+        "cta": {
+          "label": "Benachrichtigt werden"
+        }
+      }
     },
     {
       "name": "Meldebestands-Rechner",
