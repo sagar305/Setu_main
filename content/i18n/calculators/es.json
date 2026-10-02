@@ -736,7 +736,58 @@
     },
     {
       "name": "Calculadora de ROI",
-      "shortDescription": "Mide el retorno de la inversión: beneficio neto, % de ROI y rentabilidad anualizada de cualquier gasto."
+      "shortDescription": "Mide el retorno de la inversión: beneficio neto, % de ROI y rentabilidad anualizada de cualquier gasto.",
+      "seo": {
+        "title": "Calculadora de ROI — Retorno de la Inversión | Setu",
+        "description": "Calculadora de ROI gratuita. Introduce lo invertido y lo recuperado para obtener el beneficio neto, el porcentaje de ROI y el ROI anualizado del periodo.",
+        "keywords": [
+          "calculadora de ROI",
+          "retorno de la inversión",
+          "ROI anualizado",
+          "calculadora de rentabilidad",
+          "fórmula del ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de ROI",
+        "headline": "Calculadora de ROI",
+        "subheadline": "Introduce lo que pusiste y lo que recuperaste: verás el beneficio neto, el ROI en porcentaje y el retorno anualizado del periodo."
+      },
+      "about": {
+        "headline": "Por qué el ROI importa en cada decisión del negocio",
+        "paragraphs": [
+          "Sea equipamiento nuevo de cocina, una campaña de marketing o el stock de la temporada, cada euro que pones debería ganarse su sitio. El ROI pone todas esas decisiones en la misma escala: ¿qué devolvió el dinero en relación con lo que costó?",
+          "El porcentaje simple de ROI te dice la ganancia total. La cifra anualizada importa al comparar opciones con plazos distintos: un 40% en 4 años es mucho más flojo que un 25% en un año. Introduce el periodo y esta calculadora saca las dos."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de ROI",
+        "items": [
+          {
+            "question": "¿Cómo se calcula el ROI?",
+            "answer": "ROI = (importe recuperado − importe invertido) ÷ importe invertido × 100. Si inviertes 100.000 y recuperas 140.000, tu ROI es del 40%."
+          },
+          {
+            "question": "¿Qué es el ROI anualizado?",
+            "answer": "Convierte un retorno total en una tasa compuesta por año: (recuperado ÷ invertido)^(1 ÷ años) − 1. Un 40% total en 2 años equivale a cerca del 18,3% anual, útil para comparar inversiones de distinta duración."
+          },
+          {
+            "question": "¿Qué ROI es bueno para un negocio pequeño?",
+            "answer": "Depende del riesgo y de tus alternativas. Como regla aproximada, una inversión debería superar lo que ese mismo dinero podría ganar sin riesgo (un depósito a plazo) con margen suficiente para justificar el esfuerzo — muchos dueños de pequeños negocios buscan un 15–30% anual o más en inversiones operativas."
+          },
+          {
+            "question": "¿Incluye los costes recurrentes?",
+            "answer": "Inclúyelos en el importe invertido, o réstalos del importe recuperado: en cualquier caso, el ROI es tan honesto como las cifras que le des. Para marketing, nuestra calculadora de CAC lo complementa midiendo el coste por cliente."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El TPV y las herramientas de Setu registran ventas, costes e impuestos de forma automática, así los informes se hacen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de amortización",

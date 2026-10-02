@@ -736,7 +736,58 @@
     },
     {
       "name": "Calculateur de ROI",
-      "shortDescription": "Mesurez le retour sur investissement : bénéfice net, ROI en % et rendement annualisé d'une dépense."
+      "shortDescription": "Mesurez le retour sur investissement : bénéfice net, ROI en % et rendement annualisé d'une dépense.",
+      "seo": {
+        "title": "Calculateur de ROI — Retour sur Investissement | Setu",
+        "description": "Calculateur de ROI gratuit. Saisissez le montant investi et le montant récupéré pour obtenir le bénéfice net, le ROI en pourcentage et le ROI annualisé.",
+        "keywords": [
+          "calculateur de ROI",
+          "retour sur investissement",
+          "ROI annualisé",
+          "calculateur de rentabilité",
+          "formule du ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de ROI",
+        "headline": "Calculateur de ROI",
+        "subheadline": "Saisissez ce que vous avez engagé et ce que vous avez récupéré : bénéfice net, ROI en pourcentage et rendement annualisé de la période."
+      },
+      "about": {
+        "headline": "Pourquoi le ROI compte dans chaque décision",
+        "paragraphs": [
+          "Nouveau matériel de cuisine, campagne marketing, stock de saison : chaque euro engagé devrait gagner sa place. Le ROI met toutes ces décisions sur la même échelle — qu'a rapporté l'argent par rapport à ce qu'il a coûté ?",
+          "Le pourcentage brut de ROI donne le gain total. Le chiffre annualisé compte dès qu'on compare des options aux durées différentes : 40 % sur 4 ans est bien plus faible que 25 % en un an. Indiquez la durée et ce calculateur produit les deux."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de ROI",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le ROI ?",
+            "answer": "ROI = (montant récupéré − montant investi) ÷ montant investi × 100. Investissez 100 000 et récupérez 140 000 : votre ROI est de 40 %."
+          },
+          {
+            "question": "Qu'est-ce que le ROI annualisé ?",
+            "answer": "Il convertit un rendement total en taux composé annuel : (récupéré ÷ investi)^(1 ÷ années) − 1. Un rendement total de 40 % sur 2 ans fait environ 18,3 % par an — pratique pour comparer des placements de durées différentes."
+          },
+          {
+            "question": "Quel ROI viser pour une petite entreprise ?",
+            "answer": "Cela dépend du risque et de vos alternatives. En repère grossier, un investissement devrait dépasser ce que le même argent rapporterait sans risque (un dépôt à terme) avec une marge suffisante pour justifier l'effort — beaucoup de dirigeants visent 15 à 30 % et plus par an sur les investissements opérationnels."
+          },
+          {
+            "question": "Les coûts récurrents sont-ils inclus ?",
+            "answer": "Intégrez-les au montant investi, ou retranchez-les du montant récupéré : dans tous les cas, le ROI ne vaut que ce que valent les chiffres saisis. Pour le marketing, notre calculateur de CAC le complète en mesurant le coût par client."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur d'amortissement",

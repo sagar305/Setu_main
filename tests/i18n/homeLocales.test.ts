@@ -536,4 +536,28 @@ describe("translation files are clean text", () => {
       }
     }
   });
+
+  /**
+   * A stray CJK character is the other way a translation goes wrong silently: it
+   * survives JSON, passes the length checks and reads as a glyph the reader
+   * cannot place. It happened once in a French subheadline. Only zh is allowed
+   * to contain these ranges.
+   */
+  it("keeps CJK characters out of every language but zh", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        if (file === "zh.json") continue;
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/[\u3000-\u303f\u3400-\u9fff\uf900-\ufaff\uff01-\uff60]/);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has a stray CJK character near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
 });

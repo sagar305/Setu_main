@@ -736,7 +736,58 @@
     },
     {
       "name": "Kalkulator ROI",
-      "shortDescription": "Ukur imbal hasil investasi: laba bersih, ROI persen, dan imbal hasil tahunan tiap pengeluaran."
+      "shortDescription": "Ukur imbal hasil investasi: laba bersih, ROI persen, dan imbal hasil tahunan tiap pengeluaran.",
+      "seo": {
+        "title": "Kalkulator ROI — Imbal Hasil Investasi | Setu",
+        "description": "Kalkulator ROI gratis. Masukkan jumlah yang diinvestasikan dan yang kembali untuk mendapat laba bersih, persentase ROI, dan ROI tahunan untuk periode apa pun.",
+        "keywords": [
+          "kalkulator ROI",
+          "imbal hasil investasi",
+          "ROI tahunan",
+          "kalkulator pengembalian investasi",
+          "rumus ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator ROI",
+        "headline": "Kalkulator ROI",
+        "subheadline": "Masukkan yang Anda keluarkan dan yang Anda terima kembali: laba bersih, ROI dalam persen, dan imbal hasil tahunan untuk periode itu."
+      },
+      "about": {
+        "headline": "Kenapa ROI penting di setiap keputusan usaha",
+        "paragraphs": [
+          "Entah peralatan dapur baru, kampanye pemasaran, atau stok untuk musim ramai, setiap rupiah yang Anda keluarkan harus membayar dirinya sendiri. ROI menaruh semua pilihan itu pada satu skala: apa yang uang itu kembalikan dibanding biayanya?",
+          "Persentase ROI biasa memberi tahu total keuntungan. Angka tahunan baru penting saat Anda membandingkan pilihan dengan jangka waktu berbeda — imbal hasil 40% selama 4 tahun jauh lebih lemah daripada 25% dalam setahun. Masukkan periodenya dan kalkulator ini menghitung keduanya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator ROI",
+        "items": [
+          {
+            "question": "Bagaimana ROI dihitung?",
+            "answer": "ROI = (jumlah yang kembali − jumlah yang diinvestasikan) ÷ jumlah yang diinvestasikan × 100. Investasi 100.000 dan kembali 140.000 berarti ROI Anda 40%."
+          },
+          {
+            "question": "Apa itu ROI tahunan?",
+            "answer": "Ia mengubah imbal hasil total menjadi tingkat majemuk per tahun: (kembali ÷ diinvestasikan)^(1 ÷ tahun) − 1. Imbal hasil total 40% selama 2 tahun setara sekitar 18,3% per tahun — berguna untuk membandingkan investasi berdurasi berbeda."
+          },
+          {
+            "question": "Berapa ROI yang bagus untuk usaha kecil?",
+            "answer": "Bergantung pada risiko dan pilihan lain yang Anda punya. Sebagai patokan kasar, investasi harus mengalahkan apa yang uang itu bisa hasilkan dengan aman (bunga deposito) dengan selisih yang cukup untuk membenarkan usaha dan risikonya — banyak pemilik usaha kecil mengincar 15–30% atau lebih per tahun untuk investasi operasional."
+          },
+          {
+            "question": "Apakah biaya berjalan sudah termasuk?",
+            "answer": "Masukkan biaya itu ke jumlah yang diinvestasikan, atau kurangkan dari jumlah yang kembali — bagaimanapun, ROI hanya sejujur angka yang Anda berikan. Untuk pemasaran, kalkulator CAC kami melengkapinya dengan mengukur biaya per pelanggan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator penyusutan",

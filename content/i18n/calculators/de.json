@@ -736,7 +736,58 @@
     },
     {
       "name": "ROI-Rechner",
-      "shortDescription": "Messen Sie die Rendite: Nettogewinn, ROI in Prozent und annualisierte Rendite jeder Ausgabe."
+      "shortDescription": "Messen Sie die Rendite: Nettogewinn, ROI in Prozent und annualisierte Rendite jeder Ausgabe.",
+      "seo": {
+        "title": "ROI-Rechner — Rendite der Investition | Setu",
+        "description": "Kostenloser ROI-Rechner. Geben Sie eingesetzten und zurückerhaltenen Betrag ein und erhalten Sie Nettogewinn, ROI in Prozent und den annualisierten ROI.",
+        "keywords": [
+          "ROI Rechner",
+          "Rendite berechnen",
+          "annualisierter ROI",
+          "Investitionsrechner",
+          "ROI Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — ROI-Rechner",
+        "headline": "ROI-Rechner",
+        "subheadline": "Geben Sie ein, was Sie eingesetzt und was Sie zurückerhalten haben: Nettogewinn, ROI in Prozent und die annualisierte Rendite des Zeitraums."
+      },
+      "about": {
+        "headline": "Warum der ROI bei jeder Entscheidung zählt",
+        "paragraphs": [
+          "Ob neue Küchentechnik, eine Marketingkampagne oder Ware für die Saison — jeder eingesetzte Euro sollte sich verdienen. Der ROI bringt all diese Entscheidungen auf eine Skala: Was hat das Geld gegenüber seinen Kosten zurückgebracht?",
+          "Der schlichte ROI-Prozentwert zeigt den Gesamtgewinn. Die annualisierte Zahl zählt, sobald Sie Optionen mit unterschiedlichen Laufzeiten vergleichen: 40 % über 4 Jahre sind deutlich schwächer als 25 % in einem Jahr. Geben Sie den Zeitraum ein, und der Rechner liefert beides."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum ROI-Rechner",
+        "items": [
+          {
+            "question": "Wie wird der ROI berechnet?",
+            "answer": "ROI = (zurückerhaltener Betrag − eingesetzter Betrag) ÷ eingesetzter Betrag × 100. Setzen Sie 100.000 ein und erhalten 140.000 zurück, liegt Ihr ROI bei 40 %."
+          },
+          {
+            "question": "Was ist der annualisierte ROI?",
+            "answer": "Er rechnet eine Gesamtrendite in einen jährlichen Zinseszinssatz um: (zurückerhalten ÷ eingesetzt)^(1 ÷ Jahre) − 1. 40 % Gesamtrendite über 2 Jahre entsprechen etwa 18,3 % pro Jahr — hilfreich beim Vergleich unterschiedlich langer Anlagen."
+          },
+          {
+            "question": "Welcher ROI ist für ein kleines Unternehmen gut?",
+            "answer": "Das hängt vom Risiko und Ihren Alternativen ab. Als grobe Messlatte sollte eine Investition das, was dasselbe Geld sicher erbringen würde (Festgeldzinsen), so weit übertreffen, dass Aufwand und Risiko sich lohnen — viele Inhaber erwarten bei operativen Investitionen 15–30 % und mehr pro Jahr."
+          },
+          {
+            "question": "Sind laufende Kosten enthalten?",
+            "answer": "Rechnen Sie sie in den eingesetzten Betrag ein oder ziehen Sie sie vom zurückerhaltenen ab — in jedem Fall ist der ROI nur so ehrlich wie die Zahlen, die Sie eingeben. Fürs Marketing ergänzt ihn unser CAC-Rechner, der die Kosten je Kunde misst."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Abschreibungsrechner",
