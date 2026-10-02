@@ -326,7 +326,57 @@
     },
     {
       "name": "Kalkulator gaji bersih",
-      "shortDescription": "Lihat gaji bersih bulanan setelah dana pensiun, pajak profesi, dan potongan lain dari CTC."
+      "shortDescription": "Lihat gaji bersih bulanan setelah dana pensiun, pajak profesi, dan potongan lain dari CTC.",
+      "seo": {
+        "title": "Kalkulator Gaji Bersih — dari biaya ke take-home | Setu",
+        "description": "Kalkulator gaji bersih gratis. Masukkan biaya tahunan per karyawan untuk memperkirakan gaji bersih bulanan setelah iuran pensiun dan pajak daerah.",
+        "keywords": [
+          "kalkulator gaji bersih",
+          "hitung gaji bersih bulanan",
+          "kalkulator take home pay",
+          "kalkulator penggajian"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Gaji Bersih",
+        "headline": "Kalkulator Gaji Bersih",
+        "subheadline": "Masukkan biaya tahunan per karyawan untuk memperkirakan gaji bersih bulanan setelah potongan yang biasa."
+      },
+      "about": {
+        "headline": "Yang benar-benar masuk ke rekening setiap bulan",
+        "paragraphs": [
+          "Biaya total per karyawan hampir tidak pernah sama dengan uang yang masuk ke rekening. Iuran dana pensiun, pajak profesi, dan potongan lain diambil sebelum gaji dibayarkan, dan jarak antara biaya total dan gaji bersih sering mengejutkan karyawan baru — juga banyak pemilik usaha yang sedang menganggarkan posisi baru.",
+          "Kalkulator ini memberi perkiraan cepat gaji bersih bulanan dari biaya tahunan, dengan asumsi umum untuk dana pensiun dan pajak profesi. Angka sebenarnya bergantung pada struktur gaji Anda (gaji pokok, tunjangan rumah, tunjangan lain) dan kebijakan perusahaan, jadi anggap ini perkiraan untuk perencanaan, bukan slip gaji."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator gaji bersih",
+        "items": [
+          {
+            "question": "Apa bedanya biaya total karyawan dan gaji bersih?",
+            "answer": "Biaya total adalah seluruh pengeluaran perusahaan untuk satu karyawan: gaji pokok, tunjangan, iuran dana pensiun dari perusahaan, dan manfaat lain. Gaji bersih adalah uang yang benar-benar masuk ke rekening setiap bulan, setelah potongan seperti iuran karyawan, pajak profesi, dan pajak penghasilan jika berlaku."
+          },
+          {
+            "question": "Mengapa gaji bersih saya lebih kecil dari biaya total dibagi 12?",
+            "answer": "Karena biaya total mencakup iuran perusahaan yang tidak pernah sampai ke rekening karyawan, dan karena potongan seperti iuran karyawan, pajak profesi, dan pajak yang dipotong di muka dikurangkan dari gaji bruto sebelum dibayarkan."
+          },
+          {
+            "question": "Apakah ini akurat untuk slip gaji saya?",
+            "answer": "Ini perkiraan untuk perencanaan, berdasarkan asumsi umum dana pensiun dan pajak profesi. Gaji bersih Anda yang sebenarnya bergantung pada struktur gaji, wilayah, dan potongan tambahan seperti pajak penghasilan, jadi lihat slip gaji perusahaan atau tanya bagian SDM untuk angka pastinya."
+          },
+          {
+            "question": "Apakah potongan pajak penghasilan sudah termasuk?",
+            "answer": "Belum — kalkulator ini hanya memperkirakan potongan dana pensiun dan pajak profesi. Untuk perkiraan yang memasukkan pajak penghasilan, gunakan kalkulator pajak penghasilan bersama alat ini."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Merekrut untuk gerai baru? Lihat angkanya dulu",
+        "subtext": "Setu Dine memberi Anda data penjualan dan biaya tenaga kerja untuk tahu apakah karyawan baru menutup biayanya sendiri.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator pajak penghasilan",

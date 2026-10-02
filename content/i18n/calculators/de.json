@@ -326,7 +326,57 @@
     },
     {
       "name": "Nettogehalts-Rechner",
-      "shortDescription": "Sehen Sie Ihr monatliches Nettogehalt nach Vorsorge, Berufssteuer und weiteren Abzügen."
+      "shortDescription": "Sehen Sie Ihr monatliches Nettogehalt nach Vorsorge, Berufssteuer und weiteren Abzügen.",
+      "seo": {
+        "title": "Netto-Gehalt-Rechner — von Gesamtkosten zum Netto | Setu",
+        "description": "Kostenloser Netto-Gehalt-Rechner. Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Netto nach den üblichen Abzügen.",
+        "keywords": [
+          "Nettogehalt Rechner",
+          "Netto Gehalt berechnen",
+          "monatliches Nettogehalt",
+          "Lohnrechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Netto-Gehalt",
+        "headline": "Netto-Gehalt-Rechner",
+        "subheadline": "Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Nettogehalt nach den üblichen Abzügen."
+      },
+      "about": {
+        "headline": "Was jeden Monat wirklich auf dem Konto landet",
+        "paragraphs": [
+          "Die Gesamtkosten pro Mitarbeitenden sind so gut wie nie der Betrag, der auf einem Bankkonto landet. Beiträge zur Vorsorgekasse, die Berufssteuer und weitere Abzüge gehen ab, bevor das Gehalt ausgezahlt wird, und die Lücke zwischen Gesamtkosten und Netto überrascht viele neue Mitarbeitende — und viele Inhaber, die eine neue Stelle einplanen.",
+          "Dieser Rechner liefert eine schnelle Schätzung des monatlichen Nettogehalts aus den Jahreskosten, mit üblichen Annahmen für Vorsorgekasse und Berufssteuer. Die echten Zahlen hängen von Ihrer Gehaltsstruktur (Grundgehalt, Wohnzuschuss, Zulagen) und der Unternehmenspolitik ab — sehen Sie es also als Planungsschätzung, nicht als Lohnabrechnung."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Netto-Gehalt-Rechner",
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen Gesamtkosten und Nettogehalt?",
+            "answer": "Die Gesamtkosten sind alles, was ein Arbeitgeber für eine Person aufwendet: Grundgehalt, Zulagen, Arbeitgeberanteil zur Vorsorgekasse und weitere Leistungen. Das Nettogehalt ist der Betrag, der jeden Monat tatsächlich auf dem Konto eingeht — nach Abzügen wie dem Arbeitnehmeranteil, der Berufssteuer und, falls zutreffend, der Lohnsteuer."
+          },
+          {
+            "question": "Warum ist mein Netto niedriger als die Gesamtkosten geteilt durch 12?",
+            "answer": "Weil die Gesamtkosten Arbeitgeberbeiträge enthalten, die nie auf dem Konto der Person ankommen, und weil vom Bruttolohn vor der Auszahlung Abzüge wie Arbeitnehmeranteil, Berufssteuer und Lohnsteuer abgezogen werden."
+          },
+          {
+            "question": "Stimmt das genau mit meiner Lohnabrechnung überein?",
+            "answer": "Es ist eine Planungsschätzung auf Basis üblicher Annahmen für Vorsorgekasse und Berufssteuer. Ihr tatsächliches Netto hängt von Ihrer Gehaltsstruktur, Ihrer Region und zusätzlichen Abzügen wie der Lohnsteuer ab — die genaue Zahl steht auf Ihrer Lohnabrechnung oder nennt Ihnen die Personalabteilung."
+          },
+          {
+            "question": "Ist die Lohnsteuer darin enthalten?",
+            "answer": "Nein — dieser Rechner schätzt nur die Abzüge für Vorsorgekasse und Berufssteuer. Für eine Schätzung mit Lohnsteuer nutzen Sie zusätzlich den Einkommensteuer-Rechner."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Personal für einen neuen Standort? Erst die Zahlen",
+        "subtext": "Setu Dine liefert Ihnen Umsatz- und Personalkostendaten, damit Sie wissen, ob sich eine Neueinstellung selbst trägt.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Einkommensteuer-Rechner",

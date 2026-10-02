@@ -326,7 +326,57 @@
     },
     {
       "name": "Calculadora de salário líquido",
-      "shortDescription": "Veja seu salário líquido mensal após previdência, imposto profissional e demais descontos."
+      "shortDescription": "Veja seu salário líquido mensal após previdência, imposto profissional e demais descontos.",
+      "seo": {
+        "title": "Calculadora de Salário Líquido — do custo ao líquido | Setu",
+        "description": "Calculadora de salário líquido gratuita. Informe o custo anual por funcionário e estime o salário mensal líquido após os descontos habituais.",
+        "keywords": [
+          "calculadora de salário líquido",
+          "salário líquido mensal",
+          "cálculo de salário líquido",
+          "calculadora de folha de pagamento"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Salário Líquido",
+        "headline": "Calculadora de Salário Líquido",
+        "subheadline": "Informe o custo anual por funcionário e estime o salário mensal líquido após os descontos habituais."
+      },
+      "about": {
+        "headline": "O que de fato cai na conta todo mês",
+        "paragraphs": [
+          "O custo total por funcionário quase nunca é o valor que cai na conta bancária. Contribuições ao fundo de previdência, imposto profissional e outros descontos saem antes do pagamento do salário, e a diferença entre o custo total e o líquido surpreende muita gente recém-contratada — e muitos donos que estão orçando uma nova vaga.",
+          "Esta calculadora dá uma estimativa rápida do salário líquido mensal a partir do custo anual, usando premissas habituais de previdência e imposto profissional. Os números reais dependem da sua estrutura salarial (base, auxílio-moradia, adicionais) e da política da empresa, então trate isto como uma estimativa de planejamento, não como um holerite."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de salário líquido",
+        "items": [
+          {
+            "question": "Qual é a diferença entre custo total e salário líquido?",
+            "answer": "O custo total é tudo o que o empregador gasta com uma pessoa, incluindo salário base, adicionais, a parte patronal do fundo de previdência e outros benefícios. O salário líquido é o que realmente é depositado na conta todo mês, após descontos como a parte do funcionário, o imposto profissional e a retenção do imposto de renda, quando aplicável."
+          },
+          {
+            "question": "Por que meu líquido é menor que o custo total dividido por 12?",
+            "answer": "Porque o custo total inclui contribuições do empregador que nunca chegam à conta do funcionário, e porque descontos como a parte do funcionário, o imposto profissional e a retenção na fonte são subtraídos do bruto antes do pagamento."
+          },
+          {
+            "question": "Isso é exato para o meu holerite?",
+            "answer": "É uma estimativa de planejamento, baseada em premissas habituais de previdência e imposto profissional. Seu líquido real depende da sua estrutura salarial, do seu estado e de descontos adicionais como a retenção do imposto de renda, então consulte o holerite da empresa ou o RH para o número exato."
+          },
+          {
+            "question": "Isso inclui o desconto do imposto de renda?",
+            "answer": "Não — esta calculadora estima apenas os descontos de previdência e imposto profissional. Para uma estimativa que inclua o imposto de renda, use a calculadora de imposto de renda junto com esta ferramenta."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vai contratar para uma loja nova? Veja os números primeiro",
+        "subtext": "O Setu Dine te dá os dados de vendas e de custo de pessoal para saber se uma contratação se paga.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de imposto de renda",

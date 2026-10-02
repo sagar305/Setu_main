@@ -326,7 +326,57 @@
     },
     {
       "name": "Calculadora de sueldo neto",
-      "shortDescription": "Consulta tu sueldo neto mensual tras el fondo de pensiones, impuestos y otras deducciones del CTC."
+      "shortDescription": "Consulta tu sueldo neto mensual tras el fondo de pensiones, impuestos y otras deducciones del CTC.",
+      "seo": {
+        "title": "Calculadora de Sueldo Neto — de CTC a neto | Setu",
+        "description": "Calculadora de sueldo neto gratuita. Introduce el coste anual por empleado y estima el sueldo mensual neto tras aportaciones sociales e impuestos.",
+        "keywords": [
+          "calculadora de sueldo neto",
+          "calculadora de salario neto",
+          "sueldo neto mensual",
+          "calculadora de nómina"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Sueldo Neto",
+        "headline": "Calculadora de Sueldo Neto",
+        "subheadline": "Introduce el coste anual por empleado y estima el sueldo mensual neto tras las deducciones habituales."
+      },
+      "about": {
+        "headline": "Lo que de verdad llega a la cuenta cada mes",
+        "paragraphs": [
+          "El coste total por empleado (CTC) casi nunca es lo que llega a una cuenta bancaria. Las aportaciones al fondo de previsión, el impuesto profesional y otras deducciones se descuentan antes de pagar el sueldo, y la diferencia entre el coste total y el neto sorprende a muchas personas recién contratadas — y a muchos dueños que presupuestan un puesto nuevo.",
+          "Esta calculadora da una estimación rápida del sueldo mensual neto a partir del coste anual, usando supuestos habituales de fondo de previsión e impuesto profesional. Las cifras reales dependen de tu estructura salarial (base, vivienda, complementos) y de la política de la empresa, así que tómalo como una estimación para planificar, no como una nómina."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de sueldo neto",
+        "items": [
+          {
+            "question": "¿Cuál es la diferencia entre coste total y sueldo neto?",
+            "answer": "El coste total es lo que la empresa gasta por una persona, incluyendo el salario base, los complementos, la aportación de la empresa al fondo de previsión y otros beneficios. El sueldo neto es lo que de verdad se ingresa en la cuenta cada mes, después de deducciones como la aportación del empleado, el impuesto profesional y la retención del impuesto sobre la renta, si corresponde."
+          },
+          {
+            "question": "¿Por qué mi sueldo neto es menor que el coste total dividido entre 12?",
+            "answer": "Porque el coste total incluye aportaciones de la empresa que nunca llegan a la cuenta de la persona, y porque del salario bruto se restan deducciones como la aportación del empleado, el impuesto profesional y la retención antes de abonarlo."
+          },
+          {
+            "question": "¿Es exacta para mi nómina concreta?",
+            "answer": "Es una estimación para planificar, basada en supuestos habituales de fondo de previsión e impuesto profesional. Tu neto real depende de tu estructura salarial, tu región y deducciones adicionales como la retención del impuesto sobre la renta, así que consulta tu nómina o a tu área de personal para la cifra exacta."
+          },
+          {
+            "question": "¿Incluye la retención del impuesto sobre la renta?",
+            "answer": "No — esta calculadora estima solo las deducciones de fondo de previsión e impuesto profesional. Para una estimación que incluya el impuesto sobre la renta, usa la calculadora de impuesto sobre la renta junto con esta herramienta."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "¿Vas a contratar para un local nuevo? Primero los números",
+        "subtext": "Setu Dine te da los datos de ventas y coste de personal para saber si una contratación se paga a sí misma.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de impuesto sobre la renta",

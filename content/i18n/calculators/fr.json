@@ -326,7 +326,57 @@
     },
     {
       "name": "Calculateur de salaire net",
-      "shortDescription": "Voyez votre salaire net mensuel après cotisations, impôts et autres retenues sur le package."
+      "shortDescription": "Voyez votre salaire net mensuel après cotisations, impôts et autres retenues sur le package.",
+      "seo": {
+        "title": "Calculateur de Salaire Net — du coût total au net | Setu",
+        "description": "Calculateur de salaire net gratuit. Saisissez le coût annuel par salarié pour estimer le salaire mensuel net après cotisations et retenues usuelles.",
+        "keywords": [
+          "calculateur de salaire net",
+          "salaire net mensuel",
+          "calcul du net à payer",
+          "calculateur de paie"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Salaire Net",
+        "headline": "Calculateur de Salaire Net",
+        "subheadline": "Saisissez le coût annuel par salarié pour estimer le salaire mensuel net après les retenues usuelles."
+      },
+      "about": {
+        "headline": "Ce qui arrive réellement sur le compte chaque mois",
+        "paragraphs": [
+          "Le coût total employeur n'est presque jamais le montant qui arrive sur un compte bancaire. Les cotisations au fonds de prévoyance, la taxe professionnelle et d'autres retenues sont prélevées avant le versement du salaire, et l'écart entre le coût total et le net surprend beaucoup de nouvelles recrues — et beaucoup de patrons qui budgétisent un poste.",
+          "Ce calculateur donne une estimation rapide du salaire mensuel net à partir du coût annuel, selon les hypothèses usuelles de prévoyance et de taxe professionnelle. Les chiffres réels dépendent de votre structure de rémunération (base, logement, primes) et de la politique de l'entreprise : voyez-le comme une estimation pour planifier, pas comme un bulletin de paie."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de salaire net",
+        "items": [
+          {
+            "question": "Quelle est la différence entre coût total et salaire net ?",
+            "answer": "Le coût total est la dépense globale de l'employeur pour un salarié : salaire de base, primes, part patronale du fonds de prévoyance et autres avantages. Le salaire net est ce qui est effectivement versé sur le compte chaque mois, après retenues comme la part salariale, la taxe professionnelle et le prélèvement de l'impôt sur le revenu le cas échéant."
+          },
+          {
+            "question": "Pourquoi mon net est-il inférieur au coût total divisé par 12 ?",
+            "answer": "Parce que le coût total comprend des contributions patronales qui n'arrivent jamais sur le compte du salarié, et parce que des retenues comme la part salariale, la taxe professionnelle et le prélèvement à la source sont soustraites du brut avant versement."
+          },
+          {
+            "question": "Ce calcul correspond-il exactement à mon bulletin de paie ?",
+            "answer": "C'est une estimation pour planifier, fondée sur des hypothèses usuelles de prévoyance et de taxe professionnelle. Votre net réel dépend de votre structure de rémunération, de votre région et de retenues supplémentaires comme l'impôt prélevé à la source : pour le chiffre exact, reportez-vous à votre bulletin ou au service du personnel."
+          },
+          {
+            "question": "L'impôt sur le revenu est-il pris en compte ?",
+            "answer": "Non — ce calculateur estime uniquement les retenues de prévoyance et de taxe professionnelle. Pour une estimation incluant l'impôt sur le revenu, utilisez le calculateur d'impôt sur le revenu en complément."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous recrutez pour un nouveau point de vente ? Chiffrez d'abord",
+        "subtext": "Setu Dine vous donne les données de ventes et de coût du personnel pour savoir si un recrutement se rentabilise.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur d'impôt sur le revenu",
