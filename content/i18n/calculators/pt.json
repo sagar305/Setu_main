@@ -1521,7 +1521,59 @@
     },
     {
       "name": "Calculadora de índices financeiros",
-      "shortDescription": "Índices de liquidez, alavancagem, margem e eficiência a partir do balanço e da DRE."
+      "shortDescription": "Índices de liquidez, alavancagem, margem e eficiência a partir do balanço e da DRE.",
+      "seo": {
+        "title": "Calculadora de índices financeiros para empresas",
+        "description": "Calculadora de índices financeiros gratuita. Informe dados do balanço e da DRE para obter liquidez, endividamento, margens e prazo médio de recebimento.",
+        "keywords": [
+          "calculadora de índices financeiros",
+          "calculadora de liquidez corrente",
+          "liquidez seca",
+          "índice de endividamento",
+          "análise de índices",
+          "diagnóstico financeiro da empresa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Analisador de índices",
+        "headline": "Calculadora de índices financeiros",
+        "subheadline": "Sete índices essenciais a partir de poucos números: liquidez, endividamento, margens e eficiência em uma só tela."
+      },
+      "about": {
+        "headline": "Um check-up de saúde para o seu negócio",
+        "paragraphs": [
+          "Números isolados de um balanço dizem pouco sozinhos — os índices os colocam em contexto. Você consegue cobrir as contas de curto prazo (liquidez corrente e seca)? Está endividado demais (índice de endividamento)? A operação principal dá lucro (margens bruta e líquida)? O dinheiro está preso em estoque ou com clientes (giro de estoque e prazo de recebimento)?",
+          "Bancos e investidores calculam exatamente esses índices quando olham suas contas, então vale ver primeiro. Informe os números do seu balanço e DRE mais recentes — ou monte essas demonstrações com nossas ferramentas gratuitas de balanço e DRE — e leia os resultados junto das referências fornecidas."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre índices financeiros",
+        "items": [
+          {
+            "question": "Qual liquidez corrente é boa?",
+            "answer": "Entre 1,5 e 3 é confortável para a maioria dos negócios. Abaixo de 1, o passivo circulante supera o ativo circulante — um alerta de liquidez. Muito acima de 3 pode indicar caixa ocioso ou estoque em excesso."
+          },
+          {
+            "question": "Por que a liquidez seca exclui o estoque?",
+            "answer": "O estoque pode levar meses para virar dinheiro e, sob pressão, sair abaixo do valor contábil. A liquidez seca ((ativo circulante − estoque) ÷ passivo circulante) testa se você pagaria as contas próximas sem depender de vendê-lo."
+          },
+          {
+            "question": "O que o índice de endividamento me diz?",
+            "answer": "Quanto do negócio é financiado por dívida em comparação com o dinheiro dos sócios. Abaixo de 1 é conservador, 1–2 é comum; acima de 2, os credores assumem mais risco e crédito novo fica mais difícil e mais caro."
+          },
+          {
+            "question": "O que é prazo médio de recebimento (DSO)?",
+            "answer": "Contas a receber ÷ receita anual × 365 — a média de dias que os clientes levam para pagar. Se seu prazo é 30 dias mas o DSO é 55, a cobrança precisa de atenção (nossa ferramenta de aging de faturas mostra exatamente onde)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de MDR",

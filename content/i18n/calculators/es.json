@@ -1521,7 +1521,59 @@
     },
     {
       "name": "Calculadora de ratios financieros",
-      "shortDescription": "Ratios de liquidez, apalancamiento, margen y eficiencia a partir de tu balance y tu cuenta de resultados."
+      "shortDescription": "Ratios de liquidez, apalancamiento, margen y eficiencia a partir de tu balance y tu cuenta de resultados.",
+      "seo": {
+        "title": "Calculadora de ratios financieros para empresas",
+        "description": "Calculadora de ratios financieros gratuita. Introduce datos del balance y de resultados para obtener liquidez, endeudamiento, márgenes y días de cobro.",
+        "keywords": [
+          "calculadora de ratios financieros",
+          "calculadora de ratio de liquidez",
+          "ratio de liquidez inmediata",
+          "ratio de deuda sobre patrimonio",
+          "análisis de ratios",
+          "diagnóstico financiero de la empresa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Analizador de ratios",
+        "headline": "Calculadora de ratios financieros",
+        "subheadline": "Siete ratios clave a partir de unas pocas cifras: liquidez, endeudamiento, márgenes y eficiencia en una sola vista."
+      },
+      "about": {
+        "headline": "Un chequeo de salud para tu negocio",
+        "paragraphs": [
+          "Las cifras aisladas de un balance dicen poco por sí solas; los ratios las ponen en contexto. ¿Puedes cubrir los pagos a corto plazo (ratios de liquidez general e inmediata)? ¿Estás demasiado endeudado (deuda sobre patrimonio)? ¿El negocio principal es rentable (márgenes bruto y neto)? ¿Tienes el efectivo atrapado en existencias o en clientes (rotación de inventario y días de cobro)?",
+          "Bancos e inversores calculan exactamente estos ratios cuando revisan tus cuentas, así que conviene verlos antes tú. Introduce las cifras de tu último balance y cuenta de resultados —o elabora esos estados con nuestras herramientas gratuitas de balance y pérdidas y ganancias— y lee los resultados con las referencias que te damos."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre ratios financieros",
+        "items": [
+          {
+            "question": "¿Qué ratio de liquidez general es bueno?",
+            "answer": "Entre 1,5 y 3 resulta cómodo para la mayoría de los negocios. Por debajo de 1, el pasivo corriente supera al activo corriente: es un aviso de liquidez. Muy por encima de 3 puede indicar efectivo ocioso o exceso de existencias."
+          },
+          {
+            "question": "¿Por qué se excluyen las existencias en la liquidez inmediata?",
+            "answer": "Las existencias pueden tardar meses en convertirse en efectivo y, bajo presión, venderse por debajo de su valor contable. El ratio de liquidez inmediata ((activo corriente − existencias) ÷ pasivo corriente) comprueba si podrías pagar a corto plazo sin depender de venderlas."
+          },
+          {
+            "question": "¿Qué me dice la deuda sobre patrimonio?",
+            "answer": "Qué parte del negocio se financia con deuda frente al dinero de los socios. Por debajo de 1 es conservador y entre 1 y 2 es habitual; por encima de 2, los prestamistas asumen más riesgo y el crédito nuevo se vuelve más difícil y más caro."
+          },
+          {
+            "question": "¿Qué son los días de cobro (DSO)?",
+            "answer": "Cuentas por cobrar ÷ ingresos anuales × 365: los días que tardan de media tus clientes en pagar. Si tus condiciones son 30 días pero el DSO es 55, hay que atender el cobro (nuestra herramienta de antigüedad de facturas muestra exactamente dónde)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El POS y las herramientas de Setu registran ventas, costes e impuestos automáticamente, así que los informes se construyen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de MDR",

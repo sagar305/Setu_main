@@ -1521,7 +1521,59 @@
     },
     {
       "name": "Kalkulator rasio keuangan",
-      "shortDescription": "Rasio likuiditas, leverage, margin, dan efisiensi dari neraca serta laporan laba rugi."
+      "shortDescription": "Rasio likuiditas, leverage, margin, dan efisiensi dari neraca serta laporan laba rugi.",
+      "seo": {
+        "title": "Kalkulator Rasio Keuangan untuk Usaha",
+        "description": "Kalkulator rasio keuangan gratis. Masukkan angka neraca dan laba rugi untuk mendapat rasio lancar, rasio cepat, rasio utang, margin, dan hari piutang.",
+        "keywords": [
+          "kalkulator rasio keuangan",
+          "kalkulator rasio lancar",
+          "rasio cepat",
+          "rasio utang terhadap ekuitas",
+          "analisis rasio",
+          "cek kesehatan usaha"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Penganalisis Rasio",
+        "headline": "Kalkulator Rasio Keuangan",
+        "subheadline": "Tujuh rasio penting dari sedikit angka — likuiditas, beban utang, margin, dan efisiensi dalam satu tampilan."
+      },
+      "about": {
+        "headline": "Pemeriksaan kesehatan untuk usaha Anda",
+        "paragraphs": [
+          "Angka tunggal di neraca sendiri tidak banyak bercerita — rasio yang menempatkannya pada konteks. Mampukah Anda menutup tagihan jangka pendek (rasio lancar dan rasio cepat)? Apakah utang Anda berlebihan (utang terhadap ekuitas)? Apakah usaha intinya menguntungkan (margin kotor dan bersih)? Apakah uang tersangkut di stok atau di pelanggan (perputaran persediaan dan hari piutang)?",
+          "Bank dan investor menghitung persis rasio-rasio ini saat memeriksa laporan Anda, jadi sebaiknya Anda melihatnya lebih dulu. Masukkan angka dari neraca dan laba rugi terakhir Anda — atau susun laporan itu dengan alat neraca dan laba rugi gratis kami — lalu baca hasilnya bersama tolok ukur yang disediakan."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ rasio keuangan",
+        "items": [
+          {
+            "question": "Berapa rasio lancar yang baik?",
+            "answer": "Antara 1,5 dan 3 terasa nyaman bagi sebagian besar usaha. Di bawah 1 berarti kewajiban lancar melebihi aset lancar — peringatan likuiditas. Jauh di atas 3 bisa berarti kas menganggur atau persediaan berlebih."
+          },
+          {
+            "question": "Mengapa persediaan dikeluarkan dari rasio cepat?",
+            "answer": "Persediaan bisa butuh berbulan-bulan untuk menjadi uang dan, dalam tekanan, terjual di bawah nilai bukunya. Rasio cepat ((aset lancar − persediaan) ÷ kewajiban lancar) menguji apakah Anda bisa membayar tagihan terdekat tanpa bergantung pada penjualannya."
+          },
+          {
+            "question": "Apa yang diberitahukan rasio utang terhadap ekuitas?",
+            "answer": "Seberapa besar usaha dibiayai utang dibanding uang pemilik. Di bawah 1 tergolong hati-hati, 1–2 umum; di atas 2 berarti pemberi pinjaman menanggung lebih banyak risiko, dan kredit baru menjadi lebih sulit serta lebih mahal."
+          },
+          {
+            "question": "Apa itu hari piutang (DSO)?",
+            "answer": "Piutang usaha ÷ pendapatan tahunan × 365 — rata-rata jumlah hari pelanggan membayar. Kalau termin Anda 30 hari tetapi DSO 55, penagihan perlu diperhatikan (alat umur piutang kami menunjukkan persisnya di mana)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator MDR",

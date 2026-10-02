@@ -1521,7 +1521,59 @@
     },
     {
       "name": "Finanzkennzahlen-Rechner",
-      "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV."
+      "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV.",
+      "seo": {
+        "title": "Kennzahlen-Rechner für Unternehmen",
+        "description": "Kostenloser Kennzahlen-Rechner. Zahlen aus Bilanz und Gewinn- und Verlustrechnung eingeben und Liquidität, Verschuldung, Margen und Debitorentage erhalten.",
+        "keywords": [
+          "Finanzkennzahlen Rechner",
+          "Liquidität 3. Grades Rechner",
+          "Liquidität 2. Grades",
+          "Verschuldungsgrad",
+          "Kennzahlenanalyse",
+          "Finanzcheck Unternehmen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kennzahlen-Analyse",
+        "headline": "Kennzahlen-Rechner",
+        "subheadline": "Sieben zentrale Kennzahlen aus wenigen Zahlen — Liquidität, Verschuldung, Margen und Effizienz auf einen Blick."
+      },
+      "about": {
+        "headline": "Ein Gesundheitscheck für Ihr Unternehmen",
+        "paragraphs": [
+          "Einzelne Zahlen in einer Bilanz sagen allein wenig — Kennzahlen setzen sie in den Zusammenhang. Können Sie die nächsten Rechnungen decken (Liquidität 3. und 2. Grades)? Sind Sie überschuldet (Verschuldungsgrad)? Ist das Kerngeschäft profitabel (Brutto- und Nettomarge)? Steckt Geld im Lager oder bei Kunden fest (Lagerumschlag und Debitorentage)?",
+          "Banken und Investoren berechnen genau diese Kennzahlen, wenn sie Ihre Zahlen prüfen — es lohnt sich also, sie zuerst selbst zu sehen. Geben Sie die Werte aus Ihrer letzten Bilanz und Gewinn- und Verlustrechnung ein — oder erstellen Sie diese Abschlüsse mit unseren kostenlosen Bilanz- und GuV-Tools — und lesen Sie die Ergebnisse anhand der mitgelieferten Richtwerte."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Finanzkennzahlen",
+        "items": [
+          {
+            "question": "Was ist eine gute Liquidität 3. Grades?",
+            "answer": "Zwischen 1,5 und 3 ist für die meisten Betriebe komfortabel. Unter 1 übersteigen die kurzfristigen Verbindlichkeiten das Umlaufvermögen — ein Liquiditätswarnsignal. Deutlich über 3 kann auf ungenutzte Mittel oder zu hohe Lagerbestände hindeuten."
+          },
+          {
+            "question": "Warum bleibt das Lager bei der Liquidität 2. Grades außen vor?",
+            "answer": "Lagerbestände brauchen oft Monate, um zu Geld zu werden, und gehen unter Druck auch unter Buchwert weg. Die Liquidität 2. Grades ((Umlaufvermögen − Vorräte) ÷ kurzfristige Verbindlichkeiten) prüft, ob Sie die nächsten Rechnungen zahlen könnten, ohne auf den Verkauf von Beständen zu setzen."
+          },
+          {
+            "question": "Was sagt der Verschuldungsgrad aus?",
+            "answer": "Wie viel des Unternehmens über Fremdkapital statt über Eigenkapital finanziert ist. Unter 1 ist konservativ, 1–2 ist üblich; über 2 tragen die Kreditgeber mehr Risiko, und neue Kredite werden schwieriger und teurer."
+          },
+          {
+            "question": "Was sind Debitorentage (DSO)?",
+            "answer": "Forderungen ÷ Jahresumsatz × 365 — die durchschnittliche Zahl der Tage, die Kunden zum Bezahlen brauchen. Liegen Ihre Zahlungsbedingungen bei 30 Tagen, der DSO aber bei 55, braucht das Mahnwesen Aufmerksamkeit (unser Tool zur Offenen-Posten-Analyse zeigt genau, wo)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "MDR-Rechner",

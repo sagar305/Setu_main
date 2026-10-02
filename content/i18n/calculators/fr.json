@@ -1521,7 +1521,59 @@
     },
     {
       "name": "Calculateur de ratios financiers",
-      "shortDescription": "Ratios de liquidité, d'endettement, de marge et d'efficacité à partir de votre bilan et de votre compte de résultat."
+      "shortDescription": "Ratios de liquidité, d'endettement, de marge et d'efficacité à partir de votre bilan et de votre compte de résultat.",
+      "seo": {
+        "title": "Calculateur de ratios financiers pour entreprises",
+        "description": "Calculateur de ratios financiers gratuit. Saisissez vos données de bilan et de résultat pour obtenir liquidité, endettement, marges et délai de règlement.",
+        "keywords": [
+          "calculateur de ratios financiers",
+          "calculateur de ratio de liquidité générale",
+          "ratio de liquidité immédiate",
+          "ratio d'endettement",
+          "analyse par ratios",
+          "diagnostic financier d'entreprise"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Analyseur de ratios",
+        "headline": "Calculateur de ratios financiers",
+        "subheadline": "Sept ratios clés à partir de quelques chiffres : liquidité, endettement, marges et efficacité en une seule vue."
+      },
+      "about": {
+        "headline": "Un bilan de santé pour votre entreprise",
+        "paragraphs": [
+          "Les chiffres isolés d'un bilan disent peu de choses : les ratios les remettent en contexte. Pouvez-vous couvrir les échéances proches (ratios de liquidité générale et immédiate) ? Êtes-vous trop endetté (ratio d'endettement) ? L'activité de base est-elle rentable (marges brute et nette) ? La trésorerie est-elle immobilisée en stock ou chez les clients (rotation des stocks et délai de règlement) ?",
+          "Banques et investisseurs calculent précisément ces ratios quand ils examinent vos comptes : autant les voir avant eux. Saisissez les chiffres de votre dernier bilan et compte de résultat — ou construisez ces états avec nos outils gratuits de bilan et de compte de résultat — puis lisez les résultats à la lumière des repères fournis."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les ratios financiers",
+        "items": [
+          {
+            "question": "Quel ratio de liquidité générale viser ?",
+            "answer": "Entre 1,5 et 3, c'est confortable pour la plupart des entreprises. En dessous de 1, les dettes à court terme dépassent l'actif circulant : c'est un signal d'alerte. Bien au-dessus de 3, cela peut signaler de la trésorerie dormante ou des stocks excessifs."
+          },
+          {
+            "question": "Pourquoi exclure les stocks du ratio de liquidité immédiate ?",
+            "answer": "Les stocks peuvent prendre des mois à se transformer en trésorerie et se vendre sous leur valeur comptable en cas de pression. Le ratio de liquidité immédiate ((actif circulant − stocks) ÷ dettes à court terme) vérifie si vous pourriez honorer vos échéances proches sans compter sur leur vente."
+          },
+          {
+            "question": "Que m'apprend le ratio d'endettement ?",
+            "answer": "Quelle part de l'entreprise est financée par la dette plutôt que par les fonds des associés. En dessous de 1 c'est prudent, entre 1 et 2 c'est courant ; au-delà de 2, les prêteurs portent davantage le risque et le nouveau crédit devient plus difficile et plus cher."
+          },
+          {
+            "question": "Qu'est-ce que le délai de règlement (DSO) ?",
+            "answer": "Créances clients ÷ chiffre d'affaires annuel × 365 : le nombre moyen de jours que vos clients mettent à payer. Si vos conditions sont de 30 jours mais le DSO de 55, le recouvrement mérite attention (notre outil de balance âgée montre précisément où)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de MDR",
