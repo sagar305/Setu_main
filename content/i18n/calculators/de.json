@@ -533,7 +533,57 @@
     },
     {
       "name": "Abfindungsrechner",
-      "shortDescription": "Schätzen Sie die gesetzliche Abfindung aus Gehalt und Dienstjahren."
+      "shortDescription": "Schätzen Sie die gesetzliche Abfindung aus Gehalt und Dienstjahren.",
+      "seo": {
+        "title": "Abfindungsrechner — Gratuity-Gesetz Indien | Setu",
+        "description": "Kostenloser Rechner für die Gratuity in Indien. Letztes Gehalt und Dienstjahre eingeben und den nach dem Gesetz von 1972 fälligen Betrag schätzen.",
+        "keywords": [
+          "Gratuity Rechner",
+          "Abfindung Indien berechnen",
+          "Gratuity Gesetz Rechner",
+          "Gratuity Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Gratuity",
+        "headline": "Gratuity-Rechner",
+        "subheadline": "Geben Sie das letzte Gehalt und die Dienstjahre ein und schätzen Sie den beim Austritt fälligen Betrag."
+      },
+      "about": {
+        "headline": "Wie viel Gratuity zusteht — und wann",
+        "paragraphs": [
+          "Die Gratuity ist eine Einmalzahlung, die Arbeitgeber in Indien Beschäftigten mit mindestens 5 Jahren ununterbrochener Dienstzeit nach dem Gesetz über die Zahlung der Gratuity von 1972 schulden. Berechnet wird sie aus dem letzten Gehalt und den gesamten Dienstjahren — nicht aus dem Verdienst der ganzen Laufbahn.",
+          "Dieser Rechner wendet die Standardformel für Beschäftigte im Anwendungsbereich des Gesetzes an und hilft sowohl Beschäftigten, die ihren Anspruch beim Austritt abschätzen, als auch Inhabern, die die Gratuity-Verpflichtung langjähriger Mitarbeitender einplanen. Die gesetzliche Höchstgrenze wird regelmäßig angepasst — prüfen Sie daher die aktuelle Grenze, bevor Sie dies als endgültigen Abfindungsbetrag ansetzen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Gratuity-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Gratuity?",
+            "answer": "Gratuity = (letztes Monatsgehalt × 15 × Anzahl der Dienstjahre) ÷ 26, für Beschäftigte im Anwendungsbereich des Gesetzes. Gehalt meint hier in der Regel das Grundgehalt plus Teuerungszulage."
+          },
+          {
+            "question": "Habe ich Anspruch auf Gratuity?",
+            "answer": "Grundsätzlich haben Beschäftigte mit 5 oder mehr Jahren ununterbrochener Dienstzeit beim gleichen Arbeitgeber Anspruch, mit einigen Ausnahmen (etwa Tod oder Invalidität, wo die 5-Jahres-Bedingung nicht gilt)."
+          },
+          {
+            "question": "Gibt es eine Obergrenze?",
+            "answer": "Ja — das Gesetz setzt für die steuerfreie Gratuity eine gesetzliche Obergrenze, die die Regierung regelmäßig anpasst. Prüfen Sie die aktuelle Grenze, bevor Sie das Ergebnis als endgültigen, begrenzten Betrag behandeln."
+          },
+          {
+            "question": "Wie werden die Dienstjahre gezählt, wenn ich 7 Jahre und 8 Monate gearbeitet habe?",
+            "answer": "Nach dem Gesetz wird eine Dienstzeit von mehr als 6 Monaten über ein vollendetes Jahr hinaus in der Regel auf das nächste volle Jahr aufgerundet. 7 Jahre und 8 Monate gelten in der Rechnung also meist als 8 Jahre."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Planen Sie Ihr Personalbudget?",
+        "subtext": "Setu Dine liefert Ihnen die Umsatzdaten, um Personal und langfristige Lohnkosten an dem auszurichten, was Ihr Standort tragen kann.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Provisionsrechner für Online-Bestellungen",

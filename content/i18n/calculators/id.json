@@ -533,7 +533,57 @@
     },
     {
       "name": "Kalkulator uang penghargaan masa kerja",
-      "shortDescription": "Perkirakan uang penghargaan yang jadi hak Anda dari gaji dan masa kerja."
+      "shortDescription": "Perkirakan uang penghargaan yang jadi hak Anda dari gaji dan masa kerja.",
+      "seo": {
+        "title": "Kalkulator Gratuity (Uang Jasa) — UU 1972 | Setu",
+        "description": "Kalkulator gratuity gratis untuk India. Masukkan gaji terakhir dan masa kerja untuk memperkirakan jumlah yang wajib dibayar menurut UU Gratuity 1972.",
+        "keywords": [
+          "kalkulator gratuity",
+          "kalkulator uang jasa",
+          "UU gratuity India",
+          "rumus gratuity"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Gratuity",
+        "headline": "Kalkulator Gratuity (Uang Jasa)",
+        "subheadline": "Masukkan gaji terakhir dan masa kerja untuk memperkirakan gratuity yang menjadi hak saat keluar."
+      },
+      "about": {
+        "headline": "Berapa gratuity yang menjadi hak, dan kapan",
+        "paragraphs": [
+          "Gratuity adalah pembayaran sekaligus yang wajib diberikan pemberi kerja kepada karyawan yang telah menyelesaikan sekurangnya 5 tahun masa kerja berkelanjutan, menurut Undang-Undang Pembayaran Gratuity India tahun 1972. Perhitungannya memakai gaji terakhir karyawan dan total masa kerja — bukan seluruh penghasilan sepanjang karier.",
+          "Kalkulator ini menerapkan rumus standar bagi karyawan yang tercakup undang-undang tersebut, dan berguna baik bagi karyawan yang memperkirakan haknya saat keluar maupun bagi pemilik usaha yang menganggarkan kewajiban gratuity untuk staf lama. Batas atas menurut undang-undang direvisi dari waktu ke waktu, jadi pastikan batas yang berlaku sebelum memakai ini sebagai angka penyelesaian akhir."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator gratuity",
+        "items": [
+          {
+            "question": "Apa rumus perhitungan gratuity?",
+            "answer": "Gratuity = (gaji bulanan terakhir × 15 × jumlah tahun masa kerja) ÷ 26, untuk karyawan yang tercakup undang-undang. Gaji di sini biasanya berarti gaji pokok ditambah tunjangan kemahalan."
+          },
+          {
+            "question": "Apakah saya berhak atas gratuity?",
+            "answer": "Pada umumnya karyawan yang telah menyelesaikan 5 tahun atau lebih masa kerja berkelanjutan pada pemberi kerja yang sama berhak, dengan beberapa pengecualian (seperti kematian atau kecacatan, di mana syarat 5 tahun tidak berlaku)."
+          },
+          {
+            "question": "Apakah ada batas maksimum gratuity?",
+            "answer": "Ada — undang-undang menetapkan batas atas untuk gratuity yang bebas pajak, dan pemerintah merevisinya dari waktu ke waktu. Periksa batas yang berlaku sebelum menganggap hasil kalkulator ini sebagai angka akhir yang sudah dibatasi."
+          },
+          {
+            "question": "Kalau saya bekerja 7 tahun 8 bulan, bagaimana masa kerja dihitung?",
+            "answer": "Menurut undang-undang, masa kerja lebih dari 6 bulan di atas tahun penuh biasanya dibulatkan ke tahun berikutnya. Jadi 7 tahun 8 bulan umumnya dihitung sebagai 8 tahun."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Sedang menyusun anggaran karyawan?",
+        "subtext": "Setu Dine memberi Anda data penjualan untuk merencanakan jumlah karyawan dan biaya gaji jangka panjang sesuai kemampuan gerai Anda.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator komisi pesanan online",

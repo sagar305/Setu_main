@@ -533,7 +533,57 @@
     },
     {
       "name": "Calculadora de indemnización por servicio",
-      "shortDescription": "Estima la indemnización que corresponde según la ley india, a partir del sueldo y la antigüedad."
+      "shortDescription": "Estima la indemnización que corresponde según la ley india, a partir del sueldo y la antigüedad.",
+      "seo": {
+        "title": "Calculadora de Indemnización por Antigüedad | Setu",
+        "description": "Calculadora gratuita de gratificación por antigüedad en India. Introduce el último salario y los años de servicio para estimar el importe de la Ley de 1972.",
+        "keywords": [
+          "calculadora de gratificación",
+          "calculadora de indemnización por antigüedad",
+          "ley de gratificación India",
+          "fórmula de gratificación"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Gratificación",
+        "headline": "Calculadora de Gratificación por Antigüedad",
+        "subheadline": "Introduce el último salario cobrado y los años de servicio para estimar la gratificación que corresponde al salir."
+      },
+      "about": {
+        "headline": "Cuánta gratificación corresponde, y cuándo",
+        "paragraphs": [
+          "La gratificación es un pago único que los empleadores deben a las personas que han completado al menos 5 años de servicio continuo, según la Ley de Pago de Gratificación de 1972 de India. Se calcula a partir del último salario cobrado y del total de años de servicio, no de los ingresos de toda la carrera.",
+          "Esta calculadora aplica la fórmula estándar para las personas cubiertas por la Ley, y sirve tanto a quien quiere estimar lo que le corresponde al salir como al dueño que presupuesta la obligación de gratificación de su plantilla antigua. El tope legal se revisa periódicamente, así que confirma el límite vigente antes de tomar esto como importe final de liquidación."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de gratificación",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula de la gratificación?",
+            "answer": "Gratificación = (último salario mensual × 15 × número de años de servicio) ÷ 26, para las personas cubiertas por la Ley. Aquí salario suele significar el salario base más el complemento por carestía de vida."
+          },
+          {
+            "question": "¿Tengo derecho a gratificación?",
+            "answer": "En general sí tienen derecho quienes han completado 5 años o más de servicio continuo con el mismo empleador, con algunas excepciones (como fallecimiento o incapacidad, donde no se exige el requisito de los 5 años)."
+          },
+          {
+            "question": "¿Hay un importe máximo de gratificación?",
+            "answer": "Sí — la Ley fija un tope legal para la gratificación exenta de impuestos, que el gobierno revisa periódicamente. Comprueba el límite vigente antes de tratar el resultado de esta calculadora como una cifra final y ya topada."
+          },
+          {
+            "question": "Si trabajé 7 años y 8 meses, ¿cómo se cuentan los años de servicio?",
+            "answer": "Según la Ley, un periodo de más de 6 meses por encima de un año completo suele redondearse al año siguiente. Así, 7 años y 8 meses se tratarían normalmente como 8 años en el cálculo."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "¿Estás planificando el presupuesto de personal?",
+        "subtext": "Setu Dine te da los datos de ventas para dimensionar la plantilla y los costes de nómina a largo plazo según lo que tu local puede sostener.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de comisión de pedidos online",

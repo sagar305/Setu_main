@@ -533,7 +533,57 @@
     },
     {
       "name": "Calculateur de prime de fin de service",
-      "shortDescription": "Estimez la prime due selon la loi indienne, à partir du salaire et des années de service."
+      "shortDescription": "Estimez la prime due selon la loi indienne, à partir du salaire et des années de service.",
+      "seo": {
+        "title": "Calculateur d'Indemnité de Fin de Service | Setu",
+        "description": "Calculateur gratuit de l'indemnité de fin de service en Inde. Saisissez le dernier salaire et les années de service pour estimer le montant dû (loi de 1972).",
+        "keywords": [
+          "calculateur indemnité de fin de service",
+          "calcul gratuité Inde",
+          "loi sur la gratification",
+          "formule de l'indemnité"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Indemnité de Fin de Service",
+        "headline": "Calculateur d'Indemnité de Fin de Service",
+        "subheadline": "Saisissez le dernier salaire perçu et les années de service pour estimer l'indemnité due au départ."
+      },
+      "about": {
+        "headline": "Quel montant est dû, et à quel moment",
+        "paragraphs": [
+          "L'indemnité de fin de service est un versement unique que l'employeur doit aux salariés ayant accompli au moins 5 années de service continu, en vertu de la loi indienne de 1972 sur le paiement de la gratification. Elle se calcule à partir du dernier salaire perçu et du total des années de service, et non des revenus de toute la carrière.",
+          "Ce calculateur applique la formule standard pour les salariés couverts par la loi : utile au salarié qui estime ce qui lui est dû au départ comme au dirigeant qui budgétise l'engagement lié à une équipe ancienne. Le plafond légal est révisé périodiquement, confirmez donc la limite en vigueur avant de retenir ce montant comme solde définitif."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'indemnité",
+        "items": [
+          {
+            "question": "Quelle est la formule de l'indemnité ?",
+            "answer": "Indemnité = (dernier salaire mensuel × 15 × nombre d'années de service) ÷ 26, pour les salariés couverts par la loi. Le salaire désigne ici généralement le salaire de base plus l'indemnité de vie chère."
+          },
+          {
+            "question": "Y ai-je droit ?",
+            "answer": "En général, les salariés ayant accompli 5 années ou plus de service continu chez le même employeur y ont droit, avec quelques exceptions (décès ou invalidité, où la condition des 5 ans ne s'applique pas)."
+          },
+          {
+            "question": "Existe-t-il un plafond ?",
+            "answer": "Oui — la loi fixe un plafond légal pour la part exonérée d'impôt, que le gouvernement révise périodiquement. Vérifiez la limite en vigueur avant de considérer le résultat comme un montant final et plafonné."
+          },
+          {
+            "question": "Si j'ai travaillé 7 ans et 8 mois, comment compte-t-on les années de service ?",
+            "answer": "Selon la loi, une période de plus de 6 mois au-delà d'une année complète est généralement arrondie à l'année suivante. Ainsi, 7 ans et 8 mois sont habituellement comptés comme 8 ans."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous préparez votre budget de personnel ?",
+        "subtext": "Setu Dine vous donne les données de ventes pour dimensionner les effectifs et la masse salariale selon ce que votre établissement peut supporter.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de commission des commandes en ligne",
