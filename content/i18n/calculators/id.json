@@ -1142,7 +1142,58 @@
     },
     {
       "name": "Kalkulator penyusutan",
-      "shortDescription": "Penyusutan garis lurus atau saldo menurun lengkap dengan jadwal tahun per tahun."
+      "shortDescription": "Penyusutan garis lurus atau saldo menurun lengkap dengan jadwal tahun per tahun.",
+      "seo": {
+        "title": "Kalkulator dan Jadwal Penyusutan | Setu",
+        "description": "Kalkulator penyusutan gratis. Hitung penyusutan garis lurus atau saldo menurun, lengkap dengan jadwal nilai buku tahun demi tahun.",
+        "keywords": [
+          "kalkulator penyusutan",
+          "penyusutan garis lurus",
+          "penyusutan saldo menurun",
+          "penyusutan WDV",
+          "jadwal penyusutan aset"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Penyusutan",
+        "headline": "Kalkulator Penyusutan",
+        "subheadline": "Masukkan harga perolehan aset, nilai residu, dan masa manfaat — dapatkan penyusutan tahunan serta jadwal lengkap tahun demi tahun, garis lurus atau saldo menurun."
+      },
+      "about": {
+        "headline": "Dua metode, satu jadwal",
+        "paragraphs": [
+          "Penyusutan menyebar harga perolehan sebuah aset sepanjang masa manfaatnya, dan metodenya mengubah bentuk bebannya. Garis lurus membagi biaya sama rata setiap tahun — sederhana dan biasa dipakai untuk perabot, instalasi, dan peralatan. Saldo menurun mengenakan persentase tetap pada nilai buku yang tersisa sehingga beban menumpuk di tahun-tahun awal — inilah pendekatan yang dipakai undang-undang pajak penghasilan India untuk sebagian besar kelompok aset.",
+          "Kalkulator ini menghasilkan jadwal lengkap untuk kedua metode: nilai awal, penyusutan, dan nilai buku akhir untuk setiap tahun, jadi Anda bisa langsung memasukkan angkanya ke pembukuan atau membandingkan metode sebelum memilih."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator penyusutan",
+        "items": [
+          {
+            "question": "Bagaimana penyusutan garis lurus bekerja?",
+            "answer": "Penyusutan tahunan = (harga perolehan − nilai residu) ÷ masa manfaat. Mesin ₹5.00.000 dengan residu ₹50.000 selama 5 tahun menyusut ₹90.000 per tahun."
+          },
+          {
+            "question": "Bagaimana metode saldo menurun bekerja?",
+            "answer": "Setiap tahun Anda menyusutkan persentase tetap dari nilai buku yang tersisa. Pada 25%, aset ₹5.00.000 menyusut ₹1.25.000 di tahun pertama, lalu 25% dari ₹3.75.000 di tahun kedua, dan seterusnya — potongan lebih besar di awal, lebih kecil kemudian."
+          },
+          {
+            "question": "Metode mana yang sebaiknya saya pakai?",
+            "answer": "Untuk keperluan pajak penghasilan di India, saldo menurun pada tarif kelompok yang ditentukan adalah hal lazim bagi sebagian besar usaha. Untuk pembukuan manajemen Anda sendiri, garis lurus lebih sederhana dan menunjukkan biaya yang stabil. Perseroan yang melapor menurut undang-undang perseroan mengikuti masa manfaat pada Lampiran II. Kalau ragu, tanyakan ke akuntan Anda."
+          },
+          {
+            "question": "Apa itu nilai residu?",
+            "answer": "Jumlah yang Anda perkirakan masih bernilai pada akhir masa manfaat aset — nilai jual kembali atau nilai besi tua. Penyusutan berhenti begitu nilai buku mencapainya."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator termin pembayaran",

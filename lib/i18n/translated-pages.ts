@@ -51,7 +51,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "vat-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "sales-tax-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "roi-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
-    "depreciation-calculator": [],
+    "depreciation-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "payment-terms-calculator": [],
     "purchase-price-variance-calculator": [],
     "financial-ratio-calculator": [],

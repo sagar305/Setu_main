@@ -1142,7 +1142,58 @@
     },
     {
       "name": "Abschreibungsrechner",
-      "shortDescription": "Lineare oder degressive Abschreibung mit vollständigem Plan Jahr für Jahr."
+      "shortDescription": "Lineare oder degressive Abschreibung mit vollständigem Plan Jahr für Jahr.",
+      "seo": {
+        "title": "Abschreibungsrechner mit Abschreibungsplan | Setu",
+        "description": "Kostenloser Abschreibungsrechner. Lineare oder degressive Abschreibung berechnen, mit vollständigem Plan der Buchwerte Jahr für Jahr.",
+        "keywords": [
+          "Abschreibungsrechner",
+          "lineare Abschreibung",
+          "degressive Abschreibung",
+          "Restbuchwert Abschreibung",
+          "Abschreibungsplan Anlagevermögen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Abschreibung",
+        "headline": "Abschreibungsrechner",
+        "subheadline": "Geben Sie Anschaffungskosten, Restwert und Nutzungsdauer ein — Sie erhalten die jährliche Abschreibung und einen vollständigen Plan Jahr für Jahr, linear oder degressiv."
+      },
+      "about": {
+        "headline": "Zwei Methoden, ein Plan",
+        "paragraphs": [
+          "Abschreibung verteilt die Kosten eines Wirtschaftsguts über seine Nutzungsdauer, und die Methode verändert den Verlauf des Aufwands. Linear teilt die Kosten jedes Jahr gleichmäßig auf — einfach und üblich für Mobiliar, Einrichtung und Geräte. Degressiv wendet einen festen Prozentsatz auf den Restbuchwert an und zieht den Aufwand nach vorn — so verfährt das indische Einkommensteuergesetz für die meisten Anlagegruppen.",
+          "Dieser Rechner erstellt den vollständigen Plan für beide Methoden: Anfangswert, Abschreibung und Restbuchwert für jedes Jahr, damit Sie die Zahlen direkt in die Buchhaltung übernehmen oder die Methoden vor der Wahl vergleichen können."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Abschreibungsrechner",
+        "items": [
+          {
+            "question": "Wie funktioniert die lineare Abschreibung?",
+            "answer": "Jährliche Abschreibung = (Kosten − Restwert) ÷ Nutzungsdauer. Eine Maschine für ₹5.00.000 mit ₹50.000 Restwert über 5 Jahre schreibt ₹90.000 pro Jahr ab."
+          },
+          {
+            "question": "Wie funktioniert die degressive Abschreibung?",
+            "answer": "Jedes Jahr schreiben Sie einen festen Prozentsatz des Restbuchwerts ab. Bei 25 % schreibt ein Gut von ₹5.00.000 im ersten Jahr ₹1.25.000 ab, im zweiten dann 25 % von ₹3.75.000, und so weiter — anfangs größere, später kleinere Beträge."
+          },
+          {
+            "question": "Welche Methode soll ich nutzen?",
+            "answer": "Für die indische Einkommensteuer ist die degressive Abschreibung zu den vorgeschriebenen Gruppensätzen bei den meisten Betrieben Standard. Für die eigene Managementrechnung ist linear einfacher und zeigt einen gleichmäßigen Aufwand. Gesellschaften, die nach dem Gesellschaftsrecht berichten, folgen den Nutzungsdauern des Anhangs II. Im Zweifel fragen Sie Ihren Steuerberater."
+          },
+          {
+            "question": "Was ist der Restwert?",
+            "answer": "Der Betrag, den das Gut Ihrer Erwartung nach am Ende der Nutzungsdauer noch wert ist — Wiederverkaufs- oder Schrottwert. Die Abschreibung endet, sobald der Buchwert ihn erreicht."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Zahlungsziel-Rechner",

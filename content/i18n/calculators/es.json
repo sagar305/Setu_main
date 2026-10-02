@@ -1142,7 +1142,58 @@
     },
     {
       "name": "Calculadora de amortización",
-      "shortDescription": "Amortización lineal o por valor decreciente con un cuadro completo año por año."
+      "shortDescription": "Amortización lineal o por valor decreciente con un cuadro completo año por año.",
+      "seo": {
+        "title": "Calculadora y Cuadro de Amortización | Setu",
+        "description": "Calculadora de amortización gratuita. Calcula la amortización lineal o de saldo decreciente con un cuadro completo año por año de valores contables.",
+        "keywords": [
+          "calculadora de amortización",
+          "amortización lineal",
+          "amortización de saldo decreciente",
+          "amortización por saldo decreciente WDV",
+          "cuadro de amortización de activos"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Amortización",
+        "headline": "Calculadora de Amortización",
+        "subheadline": "Introduce el coste del activo, el valor residual y la vida útil: obtén la amortización anual y un cuadro completo año por año, lineal o de saldo decreciente."
+      },
+      "about": {
+        "headline": "Dos métodos, un cuadro",
+        "paragraphs": [
+          "La amortización reparte el coste de un activo a lo largo de su vida útil, y el método cambia la forma del gasto. El método lineal divide el coste a partes iguales cada año: sencillo y habitual para mobiliario, instalaciones y equipos. El saldo decreciente aplica un porcentaje fijo al valor contable restante y carga el gasto al principio: es el enfoque que la ley india del impuesto sobre la renta usa para la mayoría de los bloques de activos.",
+          "Esta calculadora produce el cuadro completo con cualquiera de los dos métodos: valor inicial, amortización y valor contable final de cada año, para que puedas llevar las cifras directamente a tu contabilidad o comparar métodos antes de elegir."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de amortización",
+        "items": [
+          {
+            "question": "¿Cómo funciona la amortización lineal?",
+            "answer": "Amortización anual = (coste − valor residual) ÷ vida útil. Una máquina de ₹5.00.000 con ₹50.000 de residual a 5 años amortiza ₹90.000 al año."
+          },
+          {
+            "question": "¿Cómo funciona el saldo decreciente?",
+            "answer": "Cada año amortizas un porcentaje fijo del valor contable restante. Al 25%, un activo de ₹5.00.000 amortiza ₹1.25.000 el primer año, luego el 25% de ₹3.75.000 el segundo, y así: deducciones mayores al principio y menores después."
+          },
+          {
+            "question": "¿Qué método debo usar?",
+            "answer": "A efectos del impuesto sobre la renta en India, el saldo decreciente a los tipos de bloque previstos es lo estándar para la mayoría de los negocios. Para tu contabilidad de gestión, el lineal es más simple y muestra un coste estable. Las sociedades que informan bajo la ley de sociedades siguen las vidas útiles del anexo II. En caso de duda, pregunta a tu asesor."
+          },
+          {
+            "question": "¿Qué es el valor residual?",
+            "answer": "Lo que esperas que valga el activo al final de su vida útil: valor de reventa o de desguace. La amortización se detiene cuando el valor contable llega a esa cifra."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El TPV y las herramientas de Setu registran ventas, costes e impuestos de forma automática, así los informes se hacen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de plazos de pago",

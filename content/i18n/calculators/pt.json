@@ -1142,7 +1142,58 @@
     },
     {
       "name": "Calculadora de depreciação",
-      "shortDescription": "Depreciação linear ou por saldo decrescente, com cronograma completo ano a ano."
+      "shortDescription": "Depreciação linear ou por saldo decrescente, com cronograma completo ano a ano.",
+      "seo": {
+        "title": "Calculadora e Cronograma de Depreciação | Setu",
+        "description": "Calculadora de depreciação gratuita. Calcule a depreciação linear ou pelo saldo decrescente com um cronograma completo, ano a ano, dos valores contábeis.",
+        "keywords": [
+          "calculadora de depreciação",
+          "depreciação linear",
+          "depreciação por saldo decrescente",
+          "depreciação WDV",
+          "cronograma de depreciação de ativos"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Depreciação",
+        "headline": "Calculadora de Depreciação",
+        "subheadline": "Informe o custo do ativo, o valor residual e a vida útil: obtenha a depreciação anual e um cronograma completo ano a ano, linear ou por saldo decrescente."
+      },
+      "about": {
+        "headline": "Dois métodos, um cronograma",
+        "paragraphs": [
+          "A depreciação distribui o custo de um ativo ao longo da sua vida útil, e o método muda o formato da despesa. O linear divide o custo igualmente cada ano: simples e comum para móveis, instalações e equipamentos. O saldo decrescente aplica um percentual fixo ao valor contábil restante e concentra a despesa no começo: é a abordagem que a lei indiana do imposto de renda usa para a maioria dos blocos de ativos.",
+          "Esta calculadora produz o cronograma completo por qualquer dos métodos: valor inicial, depreciação e valor contábil final de cada ano, para você levar os números direto para a contabilidade ou comparar os métodos antes de escolher."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de depreciação",
+        "items": [
+          {
+            "question": "Como funciona a depreciação linear?",
+            "answer": "Depreciação anual = (custo − valor residual) ÷ vida útil. Uma máquina de ₹5.00.000 com residual de ₹50.000 em 5 anos deprecia ₹90.000 por ano."
+          },
+          {
+            "question": "Como funciona o saldo decrescente?",
+            "answer": "A cada ano você deprecia um percentual fixo do valor contábil restante. A 25%, um ativo de ₹5.00.000 deprecia ₹1.25.000 no primeiro ano, depois 25% de ₹3.75.000 no segundo, e assim por diante: deduções maiores no começo e menores depois."
+          },
+          {
+            "question": "Qual método devo usar?",
+            "answer": "Para fins de imposto de renda na Índia, o saldo decrescente às taxas de bloco previstas é o padrão para a maioria das empresas. Para a sua contabilidade gerencial, o linear é mais simples e mostra um custo estável. Companhias que reportam pela lei das sociedades seguem as vidas úteis do anexo II. Na dúvida, pergunte ao seu contador."
+          },
+          {
+            "question": "O que é valor residual?",
+            "answer": "Quanto você espera que o ativo valha no fim da vida útil: valor de revenda ou de sucata. A depreciação para quando o valor contábil chega a ele."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de prazos de pagamento",

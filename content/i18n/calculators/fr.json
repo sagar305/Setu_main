@@ -1142,7 +1142,58 @@
     },
     {
       "name": "Calculateur d'amortissement",
-      "shortDescription": "Amortissement linéaire ou dégressif, avec un tableau complet année par année."
+      "shortDescription": "Amortissement linéaire ou dégressif, avec un tableau complet année par année.",
+      "seo": {
+        "title": "Calculateur et Tableau d'Amortissement | Setu",
+        "description": "Calculateur d'amortissement gratuit. Calculez l'amortissement linéaire ou dégressif avec un tableau complet année par année des valeurs comptables.",
+        "keywords": [
+          "calculateur d'amortissement",
+          "amortissement linéaire",
+          "amortissement dégressif",
+          "amortissement WDV",
+          "tableau d'amortissement des actifs"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Amortissement",
+        "headline": "Calculateur d'Amortissement",
+        "subheadline": "Saisissez le coût du bien, la valeur résiduelle et la durée d'utilité : obtenez l'amortissement annuel et un tableau complet année par année, linéaire ou dégressif."
+      },
+      "about": {
+        "headline": "Deux méthodes, un tableau",
+        "paragraphs": [
+          "L'amortissement répartit le coût d'un bien sur sa durée d'utilité, et la méthode change la forme de la charge. Le linéaire répartit le coût également chaque année : simple et courant pour le mobilier, les agencements et le matériel. Le dégressif applique un pourcentage fixe à la valeur comptable restante et concentre la charge au début : c'est l'approche retenue par la loi indienne sur l'impôt sur le revenu pour la plupart des blocs d'actifs.",
+          "Ce calculateur produit le tableau complet pour l'une ou l'autre méthode : valeur d'ouverture, amortissement et valeur comptable de clôture pour chaque année, afin de reporter les chiffres directement dans vos comptes ou de comparer les méthodes avant de choisir."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'amortissement",
+        "items": [
+          {
+            "question": "Comment fonctionne l'amortissement linéaire ?",
+            "answer": "Amortissement annuel = (coût − valeur résiduelle) ÷ durée d'utilité. Une machine de ₹5 00 000 avec ₹50 000 de résiduelle sur 5 ans s'amortit de ₹90 000 par an."
+          },
+          {
+            "question": "Comment fonctionne l'amortissement dégressif ?",
+            "answer": "Chaque année, vous amortissez un pourcentage fixe de la valeur comptable restante. À 25 %, un bien de ₹5 00 000 s'amortit de ₹1 25 000 la première année, puis de 25 % de ₹3 75 000 la deuxième, et ainsi de suite : des dotations plus fortes au début, plus faibles ensuite."
+          },
+          {
+            "question": "Quelle méthode utiliser ?",
+            "answer": "Pour l'impôt sur le revenu en Inde, le dégressif aux taux de bloc prescrits est la norme pour la plupart des entreprises. Pour votre comptabilité de gestion, le linéaire est plus simple et donne une charge stable. Les sociétés qui publient selon la loi sur les sociétés suivent les durées d'utilité de l'annexe II. En cas de doute, demandez à votre expert-comptable."
+          },
+          {
+            "question": "Qu'est-ce que la valeur résiduelle ?",
+            "answer": "Ce que vous estimez que le bien vaudra à la fin de sa durée d'utilité : valeur de revente ou de ferraille. L'amortissement s'arrête dès que la valeur comptable l'atteint."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de délais de paiement",
