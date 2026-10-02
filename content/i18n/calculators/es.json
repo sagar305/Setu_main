@@ -718,7 +718,57 @@
     },
     {
       "name": "Calculadora de ticket medio (AOV)",
-      "shortDescription": "Halla tu valor medio de pedido y mira el impacto en ingresos de subirlo un poco."
+      "shortDescription": "Halla tu valor medio de pedido y mira el impacto en ingresos de subirlo un poco.",
+      "seo": {
+        "title": "Calculadora de Valor Medio del Pedido (AOV) | Setu",
+        "description": "Calculadora de AOV gratuita. Introduce los ingresos totales y el número de pedidos para hallar tu valor medio del pedido y el efecto de subirlo.",
+        "keywords": [
+          "calculadora de valor medio del pedido",
+          "calculadora AOV",
+          "fórmula del AOV",
+          "valor medio del pedido en ecommerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de AOV",
+        "headline": "Calculadora de Valor Medio del Pedido",
+        "subheadline": "Introduce los ingresos totales y el número de pedidos para hallar tu AOV y ver cuánto vale una subida pequeña."
+      },
+      "about": {
+        "headline": "Una subida pequeña del AOV se multiplica rápido",
+        "paragraphs": [
+          "El valor medio del pedido (AOV) es lo que se gasta de media por pedido, y es una de las pocas palancas de ingresos que puedes mover sin captar un solo cliente nuevo. Una oferta de combo, una sugerencia de complemento bien colocada o un ajuste pequeño de precio pueden subir el AOV en todos los pedidos que ya recibes.",
+          "Introduce los ingresos totales y el número de pedidos de un periodo para hallar tu AOV actual, y después un porcentaje de subida objetivo para ver cuánto valdría esa mejora en ingresos extra con el mismo volumen de pedidos — útil para justificar si merece la pena un empuje de venta cruzada o un cambio de carta o de combos."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de AOV",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del valor medio del pedido?",
+            "answer": "AOV = ingresos totales ÷ número de pedidos, del mismo periodo. 5.00.000 de ingresos en 1.000 pedidos da un AOV de 500."
+          },
+          {
+            "question": "¿Cómo puedo subir el valor medio del pedido?",
+            "answer": "Las palancas habituales son las ofertas de combo o pack, sugerir un tamaño mayor o un complemento en el momento del pedido, umbrales de envío gratis a partir de cierto gasto, y proponer de forma visible productos que acompañen a lo que el cliente ya está pidiendo."
+          },
+          {
+            "question": "¿Por qué importa tanto una subida pequeña del AOV?",
+            "answer": "Porque se aplica a todos los pedidos que ya recibes, sin coste adicional de captación: una mejora del 10% sobre tu volumen actual se convierte directamente en ingresos extra, sin necesidad de un solo cliente nuevo."
+          },
+          {
+            "question": "¿Un AOV más alto es siempre mejor?",
+            "answer": "En ingresos normalmente sí, pero comprueba que no sea a costa de la frecuencia de pedido o de la satisfacción del cliente: empujar complementos con demasiada insistencia puede salir mal. Sigue el AOV junto a la tasa de pedidos repetidos para detectarlo pronto."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Detecta oportunidades de venta cruzada automáticamente",
+        "subtext": "Setu Dine muestra avisos de combo y complementos al cobrar, así subir el AOV no depende de que el personal se acuerde de preguntar.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ingeniería de menús",

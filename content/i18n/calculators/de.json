@@ -718,7 +718,57 @@
     },
     {
       "name": "Rechner für den durchschnittlichen Bestellwert (AOV)",
-      "shortDescription": "Ermitteln Sie Ihren Bestellwert und sehen Sie, was eine Steigerung beim Umsatz bringt."
+      "shortDescription": "Ermitteln Sie Ihren Bestellwert und sehen Sie, was eine Steigerung beim Umsatz bringt.",
+      "seo": {
+        "title": "Rechner für den durchschnittlichen Bestellwert (AOV) | Setu",
+        "description": "Kostenloser AOV-Rechner. Gesamtumsatz und Zahl der Bestellungen eingeben, den durchschnittlichen Bestellwert ermitteln und die Wirkung einer Steigerung sehen.",
+        "keywords": [
+          "durchschnittlicher Bestellwert Rechner",
+          "AOV Rechner",
+          "AOV Formel",
+          "durchschnittlicher Bestellwert E-Commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — AOV-Rechner",
+        "headline": "Rechner für den durchschnittlichen Bestellwert",
+        "subheadline": "Geben Sie Gesamtumsatz und Zahl der Bestellungen ein, ermitteln Sie Ihren AOV und sehen Sie, was eine kleine Steigerung wert ist."
+      },
+      "about": {
+        "headline": "Eine kleine AOV-Steigerung summiert sich schnell",
+        "paragraphs": [
+          "Der durchschnittliche Bestellwert (AOV) ist der Betrag, der pro Bestellung im Schnitt ausgegeben wird — und einer der wenigen Umsatzhebel, die Sie bewegen können, ohne einen einzigen neuen Kunden zu gewinnen. Ein Kombiangebot, ein gut platzierter Zusatzvorschlag oder eine kleine Preisanpassung kann den AOV über alle Bestellungen heben, die Sie heute schon bekommen.",
+          "Geben Sie Gesamtumsatz und Zahl der Bestellungen eines Zeitraums ein, um Ihren aktuellen AOV zu ermitteln, und dann eine Zielsteigerung in Prozent, um zu sehen, was diese Steigerung bei gleichem Bestellvolumen an Mehrumsatz bringt — nützlich, um zu beurteilen, ob eine Upselling-Initiative oder eine Änderung an Karte und Angeboten den Aufwand lohnt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum AOV-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für den durchschnittlichen Bestellwert?",
+            "answer": "AOV = Gesamtumsatz ÷ Zahl der Bestellungen, im gleichen Zeitraum. 5.00.000 Umsatz auf 1.000 Bestellungen ergeben einen AOV von 500."
+          },
+          {
+            "question": "Wie kann ich den durchschnittlichen Bestellwert steigern?",
+            "answer": "Gängige Hebel sind Kombi- oder Paketangebote, der Vorschlag einer größeren Portion oder eines Zusatzes im Bestellmoment, Schwellen für kostenlose Lieferung ab einem Mindestbetrag und das sichtbare Vorschlagen passender Artikel zu dem, was der Gast schon bestellt."
+          },
+          {
+            "question": "Warum fällt eine kleine AOV-Steigerung so stark ins Gewicht?",
+            "answer": "Weil sie für alle Bestellungen gilt, die Sie schon haben, ohne zusätzliche Akquisitionskosten: 10 % mehr AOV auf Ihrem bestehenden Volumen schlagen direkt als Mehrumsatz durch, ohne einen einzigen neuen Kunden."
+          },
+          {
+            "question": "Ist ein höherer AOV immer besser?",
+            "answer": "Für den Umsatz in der Regel ja, aber prüfen Sie, dass er nicht auf Kosten der Bestellhäufigkeit oder der Zufriedenheit geht — Zusätze zu forsch anzubieten kann nach hinten losgehen. Beobachten Sie den AOV deshalb zusammen mit der Wiederkaufrate."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Upselling-Chancen automatisch erkennen",
+        "subtext": "Setu Dine zeigt beim Kassieren Hinweise auf Kombis und Zusätze, damit ein höherer AOV nicht davon abhängt, dass das Team daran denkt.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Menu-Engineering-Rechner",

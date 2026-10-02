@@ -46,7 +46,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "inventory-turnover-calculator": [],
     "stock-reorder-point-calculator": [],
     "cac-calculator": [],
-    "aov-calculator": [],
+    "aov-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "menu-engineering-calculator": [],
     "vat-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "sales-tax-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],

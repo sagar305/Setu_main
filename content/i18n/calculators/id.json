@@ -718,7 +718,57 @@
     },
     {
       "name": "Kalkulator nilai pesanan rata-rata (AOV)",
-      "shortDescription": "Temukan nilai pesanan rata-rata Anda, dan dampaknya ke pendapatan bila dinaikkan."
+      "shortDescription": "Temukan nilai pesanan rata-rata Anda, dan dampaknya ke pendapatan bila dinaikkan.",
+      "seo": {
+        "title": "Kalkulator Nilai Pesanan Rata-rata (AOV) | Setu",
+        "description": "Kalkulator AOV gratis. Masukkan total pendapatan dan jumlah pesanan untuk menemukan nilai pesanan rata-rata, dan lihat dampak menaikkannya.",
+        "keywords": [
+          "kalkulator nilai pesanan rata-rata",
+          "kalkulator AOV",
+          "rumus AOV",
+          "nilai pesanan rata-rata e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator AOV",
+        "headline": "Kalkulator Nilai Pesanan Rata-rata",
+        "subheadline": "Masukkan total pendapatan dan jumlah pesanan untuk menemukan AOV Anda, dan lihat berapa nilainya kalau naik sedikit."
+      },
+      "about": {
+        "headline": "Kenaikan kecil pada AOV cepat menumpuk",
+        "paragraphs": [
+          "Nilai pesanan rata-rata (AOV) adalah jumlah yang dibelanjakan rata-rata per pesanan — dan termasuk sedikit tuas pendapatan yang bisa Anda gerakkan tanpa menambah satu pelanggan baru pun. Sebuah penawaran paket, saran tambahan yang ditaruh di tempat tepat, atau penyesuaian harga kecil bisa menaikkan AOV di semua pesanan yang sudah Anda terima.",
+          "Masukkan total pendapatan dan jumlah pesanan untuk satu periode guna menemukan AOV saat ini, lalu masukkan target kenaikan dalam persen untuk melihat berapa nilai kenaikan itu sebagai pendapatan tambahan pada volume pesanan yang sama — berguna untuk menilai apakah dorongan upselling atau perubahan menu dan paket sepadan dengan usahanya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator AOV",
+        "items": [
+          {
+            "question": "Apa rumus nilai pesanan rata-rata?",
+            "answer": "AOV = total pendapatan ÷ jumlah pesanan, untuk periode yang sama. Pendapatan 5.00.000 dari 1.000 pesanan memberi AOV 500."
+          },
+          {
+            "question": "Bagaimana cara menaikkan nilai pesanan rata-rata?",
+            "answer": "Tuas yang biasa dipakai: penawaran paket atau kombo, menawarkan ukuran lebih besar atau tambahan tepat saat pesanan dibuat, ambang gratis ongkir di atas belanja tertentu, dan menonjolkan item yang cocok dengan apa yang sudah dipesan pelanggan."
+          },
+          {
+            "question": "Mengapa kenaikan kecil pada AOV begitu berarti?",
+            "answer": "Karena ia berlaku untuk semua pesanan yang sudah Anda terima, tanpa biaya akuisisi tambahan — kenaikan 10% pada volume pesanan sekarang langsung menjadi pendapatan tambahan, tanpa perlu satu pelanggan baru."
+          },
+          {
+            "question": "Apakah AOV lebih tinggi selalu lebih baik?",
+            "answer": "Dari sisi pendapatan umumnya ya, tapi pastikan itu tidak mengorbankan frekuensi pesanan atau kepuasan pelanggan — mendorong tambahan terlalu keras bisa berbalik. Pantau AOV bersama tingkat pesanan ulang supaya terlihat lebih awal."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Temukan peluang upselling secara otomatis",
+        "subtext": "Setu Dine memunculkan saran paket dan tambahan saat penagihan, jadi menaikkan AOV tidak bergantung pada ingatan staf untuk menawarkan.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator menu engineering",

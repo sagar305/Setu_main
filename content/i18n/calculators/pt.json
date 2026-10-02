@@ -718,7 +718,57 @@
     },
     {
       "name": "Calculadora de ticket médio (AOV)",
-      "shortDescription": "Descubra seu ticket médio e veja o impacto na receita ao aumentá-lo um pouco."
+      "shortDescription": "Descubra seu ticket médio e veja o impacto na receita ao aumentá-lo um pouco.",
+      "seo": {
+        "title": "Calculadora de Ticket Médio (AOV) | Setu",
+        "description": "Calculadora de ticket médio gratuita. Informe a receita total e o número de pedidos para achar seu ticket médio e ver o efeito de aumentá-lo.",
+        "keywords": [
+          "calculadora de ticket médio",
+          "calculadora AOV",
+          "fórmula do ticket médio",
+          "ticket médio em e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de Ticket Médio",
+        "headline": "Calculadora de Ticket Médio",
+        "subheadline": "Informe a receita total e o número de pedidos para achar seu ticket médio e ver quanto vale um aumento pequeno."
+      },
+      "about": {
+        "headline": "Um aumento pequeno no ticket médio se multiplica rápido",
+        "paragraphs": [
+          "O ticket médio é o valor gasto em média por pedido — e é uma das poucas alavancas de receita que você consegue mover sem conquistar um único cliente novo. Uma oferta de combo, uma sugestão de adicional bem colocada ou um ajuste pequeno de preço podem elevar o ticket médio em todos os pedidos que você já recebe.",
+          "Informe a receita total e o número de pedidos de um período para achar o seu ticket médio atual e, depois, um percentual de aumento desejado para ver quanto essa melhora valeria em receita extra no mesmo volume de pedidos — útil para julgar se um esforço de venda adicional ou uma mudança de menu ou de combos vale o trabalho."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ticket médio",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ticket médio?",
+            "answer": "Ticket médio = receita total ÷ número de pedidos, do mesmo período. Uma receita de 5.00.000 em 1.000 pedidos dá um ticket médio de 500."
+          },
+          {
+            "question": "Como aumentar o ticket médio?",
+            "answer": "As alavancas comuns são ofertas de combo ou kit, sugerir um tamanho maior ou um adicional no momento do pedido, frete grátis acima de um valor mínimo e destacar itens que combinam com o que o cliente já está pedindo."
+          },
+          {
+            "question": "Por que um aumento pequeno no ticket médio importa tanto?",
+            "answer": "Porque ele vale para todos os pedidos que você já recebe, sem custo adicional de aquisição: uma melhora de 10% no seu volume atual vira receita extra direta, sem precisar de um único cliente novo."
+          },
+          {
+            "question": "Ticket médio mais alto é sempre melhor?",
+            "answer": "Para receita, normalmente sim, mas confira se não vem ao custo da frequência de pedidos ou da satisfação do cliente: empurrar adicionais com insistência demais pode sair pela culatra. Acompanhe o ticket médio ao lado da taxa de recompra para perceber isso cedo."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Encontre oportunidades de venda adicional automaticamente",
+        "subtext": "O Setu Dine mostra avisos de combo e adicionais na hora de fechar a conta, então aumentar o ticket médio não depende de a equipe lembrar de oferecer.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de engenharia de cardápio",

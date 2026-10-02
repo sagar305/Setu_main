@@ -718,7 +718,57 @@
     },
     {
       "name": "Calculateur du panier moyen (AOV)",
-      "shortDescription": "Trouvez votre panier moyen et voyez l'effet sur le chiffre d'affaires si vous l'augmentez."
+      "shortDescription": "Trouvez votre panier moyen et voyez l'effet sur le chiffre d'affaires si vous l'augmentez.",
+      "seo": {
+        "title": "Calculateur de Panier Moyen (AOV) | Setu",
+        "description": "Calculateur de panier moyen gratuit. Saisissez le chiffre d'affaires total et le nombre de commandes pour obtenir votre panier moyen et l'effet d'une hausse.",
+        "keywords": [
+          "calculateur de panier moyen",
+          "calculateur AOV",
+          "formule du panier moyen",
+          "panier moyen e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de Panier Moyen",
+        "headline": "Calculateur de Panier Moyen",
+        "subheadline": "Saisissez le chiffre d'affaires total et le nombre de commandes pour obtenir votre panier moyen et voir ce que vaut une petite hausse."
+      },
+      "about": {
+        "headline": "Une petite hausse du panier moyen se cumule vite",
+        "paragraphs": [
+          "Le panier moyen est le montant dépensé en moyenne par commande — et c'est l'un des rares leviers de chiffre d'affaires que vous pouvez actionner sans acquérir un seul nouveau client. Une offre combinée, une suggestion de supplément bien placée ou un léger ajustement de prix peuvent relever le panier moyen sur toutes les commandes que vous recevez déjà.",
+          "Saisissez votre chiffre d'affaires total et le nombre de commandes sur une période pour obtenir votre panier moyen actuel, puis un pourcentage de hausse visé pour voir ce que cette progression rapporterait à volume de commandes constant — pratique pour juger si un effort de montée en gamme ou un changement de carte ou de formules vaut la peine."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de panier moyen",
+        "items": [
+          {
+            "question": "Quelle est la formule du panier moyen ?",
+            "answer": "Panier moyen = chiffre d'affaires total ÷ nombre de commandes, sur la même période. 5 00 000 de chiffre d'affaires sur 1 000 commandes donne un panier moyen de 500."
+          },
+          {
+            "question": "Comment augmenter le panier moyen ?",
+            "answer": "Les leviers habituels : offres combinées ou formules, proposer une plus grande taille ou un supplément au moment de la commande, livraison offerte à partir d'un certain montant, et mettre en avant les produits qui accompagnent ce que le client commande déjà."
+          },
+          {
+            "question": "Pourquoi une petite hausse du panier moyen compte-t-elle autant ?",
+            "answer": "Parce qu'elle s'applique à toutes les commandes que vous recevez déjà, sans coût d'acquisition supplémentaire : une hausse de 10 % sur votre volume actuel devient directement du chiffre d'affaires en plus, sans un seul nouveau client."
+          },
+          {
+            "question": "Un panier moyen plus élevé est-il toujours préférable ?",
+            "answer": "Pour le chiffre d'affaires, en général oui, mais vérifiez que ce n'est pas au prix de la fréquence des commandes ou de la satisfaction des clients : pousser les suppléments avec trop d'insistance peut se retourner contre vous. Suivez le panier moyen à côté du taux de réachat pour le repérer tôt."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Repérez les occasions de vente additionnelle automatiquement",
+        "subtext": "Setu Dine fait remonter les suggestions de formules et de suppléments à l'encaissement : relever le panier moyen ne dépend plus de la mémoire de l'équipe.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur d'ingénierie du menu",
