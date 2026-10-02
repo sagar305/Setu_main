@@ -207,7 +207,56 @@
     },
     {
       "name": "Break-even-Rechner",
-      "shortDescription": "Finden Sie heraus, wie viele Einheiten Sie verkaufen müssen, um Ihre Kosten zu decken."
+      "shortDescription": "Finden Sie heraus, wie viele Einheiten Sie verkaufen müssen, um Ihre Kosten zu decken.",
+      "seo": {
+        "title": "Break-even-Rechner — kostenloses Online-Tool | Setu",
+        "description": "Berechnen Sie Ihren Break-even-Punkt in Stück und Umsatz. Kostenloser Break-even-Rechner für Restaurants, Einzelhandel und kleine Unternehmen.",
+        "keywords": [
+          "Break-even Rechner",
+          "Break-even-Punkt berechnen",
+          "Break-even-Analyse"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Break-even",
+        "headline": "Break-even-Rechner",
+        "subheadline": "Geben Sie Ihre Fixkosten, den Preis und die variablen Kosten pro Stück ein und sehen Sie genau, wie viel Sie verkaufen müssen, um die Kosten zu deckeln."
+      },
+      "about": {
+        "headline": "Kennen Sie Ihre Zahl, bevor der Monat beginnt",
+        "paragraphs": [
+          "Der Break-even-Punkt ist das Absatzniveau, bei dem der Umsatz genau Ihre Kosten deckt: darunter machen Sie Verlust, darüber trägt jedes weitere Stück direkt zum Gewinn bei. Es ist eine der nützlichsten Zahlen im Betrieb, weil sie Miete, Löhne und andere Fixkosten in ein konkretes Verkaufsziel übersetzt.",
+          "Geben Sie Ihre monatlichen Fixkosten (Miete, Löhne, Abos), Ihre variablen Kosten pro Stück (Zutaten, Verpackung, Kosten je Bestellung) und Ihren Verkaufspreis ein — dieser Rechner ermittelt die Stückzahl und den Umsatz, die Sie erreichen müssen, bevor Sie im Gewinn sind."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Break-even-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Break-even-Formel?",
+            "answer": "Break-even-Stückzahl = Fixkosten ÷ (Verkaufspreis pro Stück − variable Kosten pro Stück). Multiplizieren Sie das Ergebnis mit dem Verkaufspreis, um den Break-even-Umsatz zu erhalten."
+          },
+          {
+            "question": "Was zählt als Fixkosten, was als variable Kosten?",
+            "answer": "Fixkosten bleiben unabhängig vom Absatz etwa gleich: Miete, Löhne, Software-Abos. Variable Kosten steigen mit jedem verkauften Stück: Zutaten, Verpackung, Zahlungsgebühren pro Bestellung."
+          },
+          {
+            "question": "Warum ist Break-even für ein neues Restaurant oder Geschäft wichtig?",
+            "answer": "Es übersetzt Ihre Gemeinkosten in ein Tages- oder Monatsziel für den Umsatz. Damit lässt sich viel leichter beurteilen, ob ein Standort, ein Preis oder eine Personalstärke realistisch ist, bevor Sie sich festlegen."
+          },
+          {
+            "question": "Was ist der Deckungsbeitrag?",
+            "answer": "Der Deckungsbeitrag ist der Verkaufspreis minus die variablen Kosten pro Stück — der Betrag, mit dem jeder Verkauf zur Deckung der Fixkosten beiträgt. Je höher er ist, desto weniger Stück brauchen Sie bis zum Break-even."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Verfolgen Sie Ihren Umsatz täglich gegen den Break-even",
+        "subtext": "Setu Dine liefert Verkaufsdaten in Echtzeit, damit Sie immer wissen, wo Sie gegenüber Ihren Zahlen stehen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Wareneinsatz-Rechner",

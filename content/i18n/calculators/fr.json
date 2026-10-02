@@ -207,7 +207,56 @@
     },
     {
       "name": "Calculateur de seuil de rentabilité",
-      "shortDescription": "Découvrez combien d'unités vous devez vendre pour couvrir vos coûts."
+      "shortDescription": "Découvrez combien d'unités vous devez vendre pour couvrir vos coûts.",
+      "seo": {
+        "title": "Calculateur de Seuil de Rentabilité — Gratuit | Setu",
+        "description": "Calculez votre seuil de rentabilité en unités et en chiffre d'affaires. Calculateur gratuit pour restaurants, commerces et petites entreprises.",
+        "keywords": [
+          "calculateur seuil de rentabilité",
+          "seuil de rentabilité en unités",
+          "analyse du point mort"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Seuil de Rentabilité",
+        "headline": "Calculateur de Seuil de Rentabilité",
+        "subheadline": "Saisissez vos charges fixes, votre prix et votre coût variable unitaire pour voir exactement ce qu'il faut vendre pour couvrir vos coûts."
+      },
+      "about": {
+        "headline": "Connaissez votre chiffre avant le début du mois",
+        "paragraphs": [
+          "Votre seuil de rentabilité est le niveau de ventes où le chiffre d'affaires couvre exactement vos coûts : en dessous vous êtes en perte, au-dessus chaque unité supplémentaire contribue directement au bénéfice. C'est l'un des chiffres les plus utiles en gestion, car il transforme le loyer, les salaires et les autres charges fixes en un objectif de ventes concret.",
+          "Saisissez vos charges fixes mensuelles (loyer, salaires, abonnements), votre coût variable unitaire (ingrédients, emballage, coûts par commande) et votre prix de vente : ce calculateur en déduit les unités et le chiffre d'affaires à atteindre avant d'être en bénéfice."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de seuil de rentabilité",
+        "items": [
+          {
+            "question": "Quelle est la formule du seuil de rentabilité ?",
+            "answer": "Unités au seuil = charges fixes ÷ (prix de vente unitaire − coût variable unitaire). Multipliez le résultat par le prix de vente pour obtenir le chiffre d'affaires au seuil."
+          },
+          {
+            "question": "Qu'est-ce qu'une charge fixe par rapport à une charge variable ?",
+            "answer": "Les charges fixes restent à peu près les mêmes quel que soit le volume de ventes : loyer, salaires, abonnements logiciels. Les charges variables augmentent avec chaque unité vendue : ingrédients, emballage, frais de passerelle de paiement par commande."
+          },
+          {
+            "question": "Pourquoi le seuil de rentabilité compte-t-il pour un nouveau restaurant ou commerce ?",
+            "answer": "Il transforme vos frais généraux en objectif de ventes quotidien ou mensuel, ce qui rend bien plus facile de juger si un emplacement, un prix carte ou un effectif est réaliste avant de s'engager."
+          },
+          {
+            "question": "Qu'est-ce que la marge sur coûts variables ?",
+            "answer": "C'est le prix de vente moins le coût variable unitaire : ce que chaque vente apporte pour couvrir les charges fixes. Plus elle est élevée, moins il faut vendre d'unités pour atteindre le seuil."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Suivez vos ventes face au seuil, chaque jour",
+        "subtext": "Setu Dine vous donne des données de ventes en temps réel : vous savez toujours où vous en êtes par rapport à vos chiffres.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de ratio de coût matière",

@@ -207,7 +207,56 @@
     },
     {
       "name": "Calculadora de ponto de equilíbrio",
-      "shortDescription": "Descubra quantas unidades precisa vender para cobrir seus custos."
+      "shortDescription": "Descubra quantas unidades precisa vender para cobrir seus custos.",
+      "seo": {
+        "title": "Calculadora de Ponto de Equilíbrio — Grátis | Setu",
+        "description": "Calcule seu ponto de equilíbrio em unidades e receita. Calculadora de ponto de equilíbrio gratuita para restaurantes, lojas e pequenos negócios.",
+        "keywords": [
+          "calculadora de ponto de equilíbrio",
+          "ponto de equilíbrio em unidades",
+          "análise de ponto de equilíbrio"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Ponto de Equilíbrio",
+        "headline": "Calculadora de Ponto de Equilíbrio",
+        "subheadline": "Informe seus custos fixos, o preço e o custo variável por unidade para ver exatamente quanto precisa vender para cobrir os custos."
+      },
+      "about": {
+        "headline": "Tenha o seu número antes de o mês começar",
+        "paragraphs": [
+          "Seu ponto de equilíbrio é o nível de vendas em que a receita cobre exatamente os custos — vender menos é prejuízo, vender mais e cada unidade extra é contribuição direta ao lucro. É um dos números mais úteis de um negócio porque transforma aluguel, salários e os outros custos fixos em uma meta de vendas concreta.",
+          "Informe seus custos fixos mensais (aluguel, salários, assinaturas), seu custo variável por unidade (ingredientes, embalagem, custos por pedido) e seu preço de venda, e esta calculadora descobre as unidades e a receita que você precisa alcançar antes de entrar no lucro."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ponto de equilíbrio",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ponto de equilíbrio?",
+            "answer": "Unidades de equilíbrio = custos fixos ÷ (preço de venda por unidade − custo variável por unidade). Multiplique o resultado pelo preço de venda para obter a receita de equilíbrio."
+          },
+          {
+            "question": "O que é custo fixo e o que é custo variável?",
+            "answer": "Custos fixos ficam praticamente iguais independentemente do volume de vendas — aluguel, salários, assinaturas de software. Custos variáveis crescem com cada unidade vendida — ingredientes, embalagem, taxas de gateway de pagamento por pedido."
+          },
+          {
+            "question": "Por que o ponto de equilíbrio importa para um restaurante ou loja novos?",
+            "answer": "Ele transforma suas despesas gerais em uma meta de vendas diária ou mensal, o que torna muito mais fácil julgar se um ponto, um preço de menu ou um quadro de pessoal é realista antes de assumir o compromisso."
+          },
+          {
+            "question": "O que é margem de contribuição?",
+            "answer": "Margem de contribuição é o preço de venda menos o custo variável por unidade — o quanto cada venda contribui para cobrir os custos fixos. Quanto maior ela for, menos unidades você precisa vender para empatar."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Acompanhe as vendas contra o ponto de equilíbrio, todo dia",
+        "subtext": "O Setu Dine te dá dados de vendas em tempo real, então você sempre sabe como está em relação aos seus números.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de percentual de custo de alimentos",

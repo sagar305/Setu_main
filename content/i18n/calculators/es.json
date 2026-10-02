@@ -207,7 +207,56 @@
     },
     {
       "name": "Calculadora de punto de equilibrio",
-      "shortDescription": "Descubre cuántas unidades necesitas vender para cubrir tus costes."
+      "shortDescription": "Descubre cuántas unidades necesitas vender para cubrir tus costes.",
+      "seo": {
+        "title": "Calculadora de Punto de Equilibrio — Gratis | Setu",
+        "description": "Calcula tu punto de equilibrio en unidades e ingresos. Calculadora de punto de equilibrio gratuita para restaurantes, tiendas y pequeños negocios.",
+        "keywords": [
+          "calculadora de punto de equilibrio",
+          "punto de equilibrio en unidades",
+          "análisis de punto de equilibrio"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Punto de Equilibrio",
+        "headline": "Calculadora de Punto de Equilibrio",
+        "subheadline": "Introduce tus costes fijos, el precio y el coste variable por unidad para ver exactamente cuánto necesitas vender para cubrir costes."
+      },
+      "about": {
+        "headline": "Ten tu número antes de que empiece el mes",
+        "paragraphs": [
+          "Tu punto de equilibrio es el nivel de ventas en el que los ingresos cubren exactamente los costes: por debajo hay pérdidas, y por encima cada unidad extra es contribución pura al beneficio. Es uno de los números más útiles de un negocio porque convierte el alquiler, los sueldos y el resto de costes fijos en un objetivo de ventas concreto.",
+          "Introduce tus costes fijos mensuales (alquiler, sueldos, suscripciones), tu coste variable por unidad (ingredientes, envases, costes por pedido) y tu precio de venta, y esta calculadora saca las unidades y los ingresos que necesitas alcanzar antes de entrar en beneficio."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de punto de equilibrio",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del punto de equilibrio?",
+            "answer": "Unidades de equilibrio = costes fijos ÷ (precio de venta por unidad − coste variable por unidad). Multiplica el resultado por el precio de venta para obtener los ingresos de equilibrio."
+          },
+          {
+            "question": "¿Qué es un coste fijo y qué es un coste variable?",
+            "answer": "Los costes fijos se mantienen más o menos iguales sin importar el volumen de ventas: alquiler, sueldos, suscripciones de software. Los costes variables crecen con cada unidad vendida: ingredientes, envases, comisiones de pasarela de pago por pedido."
+          },
+          {
+            "question": "¿Por qué importa el punto de equilibrio en un restaurante o tienda nuevos?",
+            "answer": "Convierte tus gastos generales en un objetivo de ventas diario o mensual, lo que hace mucho más fácil juzgar si un local, un precio de carta o una plantilla son realistas antes de comprometerte."
+          },
+          {
+            "question": "¿Qué es el margen de contribución?",
+            "answer": "El margen de contribución es el precio de venta menos el coste variable por unidad: lo que cada venta aporta para cubrir los costes fijos. Cuanto mayor sea, con menos unidades vendidas alcanzas el equilibrio."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Sigue tus ventas frente al punto de equilibrio, cada día",
+        "subtext": "Setu Dine te da datos de ventas en tiempo real, así siempre sabes cómo vas respecto a tus números.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de porcentaje de coste de alimentos",

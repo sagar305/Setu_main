@@ -207,7 +207,56 @@
     },
     {
       "name": "Kalkulator titik impas",
-      "shortDescription": "Cari tahu berapa unit yang harus terjual untuk menutup seluruh biaya Anda."
+      "shortDescription": "Cari tahu berapa unit yang harus terjual untuk menutup seluruh biaya Anda.",
+      "seo": {
+        "title": "Kalkulator Titik Impas (BEP) — Alat Gratis | Setu",
+        "description": "Hitung titik impas Anda dalam unit dan pendapatan. Kalkulator BEP gratis untuk restoran, toko ritel, dan usaha kecil, tanpa perlu mendaftar.",
+        "keywords": [
+          "kalkulator titik impas",
+          "kalkulator BEP",
+          "analisis titik impas"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Titik Impas",
+        "headline": "Kalkulator Titik Impas (BEP)",
+        "subheadline": "Masukkan biaya tetap, harga jual, dan biaya variabel per unit untuk melihat persis berapa yang harus terjual agar biaya tertutup."
+      },
+      "about": {
+        "headline": "Ketahui angka Anda sebelum bulan dimulai",
+        "paragraphs": [
+          "Titik impas adalah tingkat penjualan di mana pendapatan tepat menutup biaya Anda — di bawah itu rugi, di atas itu setiap unit tambahan langsung menjadi kontribusi ke laba. Ini salah satu angka paling berguna dalam usaha, karena mengubah sewa, gaji, dan biaya tetap lain menjadi satu target penjualan yang konkret.",
+          "Masukkan biaya tetap bulanan (sewa, gaji, langganan), biaya variabel per unit (bahan, kemasan, biaya per pesanan), dan harga jual Anda, lalu kalkulator ini menghitung jumlah unit serta pendapatan yang harus dicapai sebelum Anda masuk ke laba."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator titik impas",
+        "items": [
+          {
+            "question": "Apa rumus titik impas?",
+            "answer": "Unit impas = biaya tetap ÷ (harga jual per unit − biaya variabel per unit). Kalikan hasilnya dengan harga jual untuk mendapat pendapatan impas."
+          },
+          {
+            "question": "Apa yang termasuk biaya tetap dan biaya variabel?",
+            "answer": "Biaya tetap kurang lebih sama besarnya berapa pun volume penjualan — sewa, gaji, langganan perangkat lunak. Biaya variabel naik mengikuti setiap unit yang terjual — bahan, kemasan, biaya gerbang pembayaran per pesanan."
+          },
+          {
+            "question": "Mengapa titik impas penting bagi restoran atau toko baru?",
+            "answer": "Karena ia mengubah biaya tetap Anda menjadi target penjualan harian atau bulanan, sehingga jauh lebih mudah menilai apakah sebuah lokasi, harga menu, atau jumlah karyawan realistis sebelum Anda memutuskan."
+          },
+          {
+            "question": "Apa itu margin kontribusi?",
+            "answer": "Margin kontribusi adalah harga jual dikurangi biaya variabel per unit — bagian yang disumbangkan setiap penjualan untuk menutup biaya tetap. Makin besar marginnya, makin sedikit unit yang perlu terjual untuk impas."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Pantau penjualan terhadap titik impas, setiap hari",
+        "subtext": "Setu Dine memberi Anda data penjualan waktu nyata, jadi Anda selalu tahu posisi Anda terhadap angka sendiri.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator persentase biaya bahan makanan",
