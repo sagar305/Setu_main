@@ -800,7 +800,57 @@
     },
     {
       "name": "Kalkulator pour cost minuman",
-      "shortDescription": "Temukan persentase pour cost dan laba di setiap gelas yang Anda sajikan."
+      "shortDescription": "Temukan persentase pour cost dan laba di setiap gelas yang Anda sajikan.",
+      "seo": {
+        "title": "Kalkulator Pour Cost Minuman — Kendali Biaya Bar",
+        "description": "Kalkulator pour cost gratis untuk bar dan restoran. Masukkan biaya botol, ukuran tuangan, dan harga jual untuk melihat pour cost % serta laba per minuman.",
+        "keywords": [
+          "kalkulator pour cost",
+          "kalkulator biaya minuman keras",
+          "kalkulator biaya bar",
+          "persentase pour cost"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Pour Cost Minuman",
+        "headline": "Kalkulator Pour Cost Minuman",
+        "subheadline": "Masukkan biaya botol, ukuran tuangan, dan harga jual untuk melihat pour cost % Anda dan laba per minuman."
+      },
+      "about": {
+        "headline": "Versi bar dari persentase biaya bahan dapur",
+        "paragraphs": [
+          "Pour cost bagi bar sama seperti persentase biaya bahan bagi dapur — bagian dari harga jual satu minuman yang terserap oleh minumannya sendiri. Angka inilah yang memberi tahu apakah harga dan ukuran tuangan Anda benar-benar menguntungkan, terutama kalau Anda ikut menghitung berapa tuangan yang dihasilkan satu botol.",
+          "Masukkan biaya botol, ukuran botol, ukuran tuangan yang benar-benar Anda sajikan, dan harga jual per minuman untuk mendapat pour cost %, laba per tuangan, serta berapa tuangan yang semestinya keluar dari setiap botol. Jalankan menu terlaris Anda di sini setiap kali pemasok mengubah harga."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator biaya minuman keras",
+        "items": [
+          {
+            "question": "Bagaimana persentase pour cost dihitung?",
+            "answer": "Pour cost % = (biaya per tuangan ÷ harga jual per tuangan) × 100, dengan biaya per tuangan = biaya botol ÷ (ukuran botol ÷ ukuran tuangan)."
+          },
+          {
+            "question": "Berapa persentase pour cost yang baik?",
+            "answer": "Sebagian besar bar menargetkan 18-24% untuk spirit, meski berbeda menurut kategori — produk premium dan craft sering sedikit di atas itu, sebagai tukar dengan harga dan nilai yang dianggap lebih tinggi."
+          },
+          {
+            "question": "Kenapa pour cost nyata saya tidak cocok dengan target?",
+            "answer": "Menuang berlebih adalah penyebab paling umum — tambahan 5-10 ml per minuman pun cepat menumpuk sepanjang malam yang sibuk. Ukuran tuangan yang tidak seragam, ceceran, serta minuman gratis atau kompensasi juga melebarkan jarak antara target dan kenyataan."
+          },
+          {
+            "question": "Berapa tuangan yang semestinya keluar dari satu botol?",
+            "answer": "Tuangan per botol = ukuran botol ÷ ukuran tuangan. Botol standar 750 ml yang dituang 30 ml per minuman semestinya menghasilkan 25 tuangan — bandingkan tuangan nyata dengan angka ini untuk menangkap tuangan berlebih atau pemborosan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kendalikan biaya bar seperti biaya bahan dapur",
+        "subtext": "Setu Dine mencocokkan pemakaian stok dengan penjualan, jadi tuangan berlebih dan pemborosan cepat terlihat.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator bagi tip",

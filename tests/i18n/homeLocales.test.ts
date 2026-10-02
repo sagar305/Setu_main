@@ -543,6 +543,24 @@ describe("translation files are clean text", () => {
    * cannot place. It happened once in a French subheadline. Only zh is allowed
    * to contain these ranges.
    */
+  it("keeps unassigned Unicode code points out of every translation file", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/\P{Assigned}/u);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has an unassigned code point ` +
+              `(U+${text.codePointAt(at)!.toString(16).toUpperCase().padStart(4, "0")}) near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
+
   it("keeps CJK characters out of every language but zh", () => {
     for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
       const base = path.join(process.cwd(), "content", "i18n", dir);

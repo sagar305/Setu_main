@@ -800,7 +800,57 @@
     },
     {
       "name": "Ausschankkosten-Rechner",
-      "shortDescription": "Ermitteln Sie Ihre Pour-Cost-Quote und den Gewinn bei jedem ausgeschenkten Drink."
+      "shortDescription": "Ermitteln Sie Ihre Pour-Cost-Quote und den Gewinn bei jedem ausgeschenkten Drink.",
+      "seo": {
+        "title": "Ausschankkosten-Rechner — Kostenkontrolle an der Bar",
+        "description": "Kostenloser Ausschankkosten-Rechner für Bars und Restaurants. Flaschenpreis, Ausschankmenge und Verkaufspreis eingeben und Ausschankkosten % sowie Gewinn sehen.",
+        "keywords": [
+          "Ausschankkosten Rechner",
+          "Spirituosenkosten Rechner",
+          "Barkosten Rechner",
+          "Ausschankkosten Prozent"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Ausschankkosten-Rechner",
+        "headline": "Ausschankkosten-Rechner",
+        "subheadline": "Geben Sie Flaschenpreis, Ausschankmenge und Verkaufspreis ein und sehen Sie Ihre Ausschankkosten in Prozent und den Gewinn pro Drink."
+      },
+      "about": {
+        "headline": "Das Gegenstück des Wareneinsatzes für die Bar",
+        "paragraphs": [
+          "Was der Wareneinsatz für die Küche ist, sind die Ausschankkosten für die Bar — der Anteil am Verkaufspreis eines Drinks, der auf die Spirituose selbst entfällt. Diese Zahl sagt Ihnen, ob Preise und Ausschankmengen wirklich rentabel sind, besonders wenn Sie mitrechnen, wie viele Ausschänke eine Flasche ergibt.",
+          "Geben Sie Flaschenpreis, Flaschengröße, die tatsächlich ausgeschenkte Menge und den Verkaufspreis pro Drink ein, und Sie erhalten Ausschankkosten %, Gewinn je Ausschank und wie viele Ausschänke jede Flasche ergeben sollte. Prüfen Sie Ihre Bestseller hier jedes Mal nach, wenn ein Lieferant den Preis ändert."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Spirituosenkosten",
+        "items": [
+          {
+            "question": "Wie werden die Ausschankkosten in Prozent berechnet?",
+            "answer": "Ausschankkosten % = (Kosten pro Ausschank ÷ Verkaufspreis pro Ausschank) × 100, wobei Kosten pro Ausschank = Flaschenpreis ÷ (Flaschengröße ÷ Ausschankmenge)."
+          },
+          {
+            "question": "Welcher Prozentsatz ist ein guter Wert?",
+            "answer": "Die meisten Bars peilen bei Spirituosen 18-24% an, je nach Kategorie unterschiedlich — Premium- und Craft-Produkte liegen oft etwas höher, dafür sind Preis und wahrgenommener Wert höher."
+          },
+          {
+            "question": "Warum stimmen meine echten Ausschankkosten nicht mit dem Ziel überein?",
+            "answer": "Zu großzügiges Eingießen ist die häufigste Ursache — selbst 5-10 ml mehr pro Drink summieren sich an einem vollen Abend schnell. Ungleiche Ausschankmengen, Verschütten sowie Freigetränke und Gutschriften vergrößern die Lücke zwischen Ziel und Realität ebenfalls."
+          },
+          {
+            "question": "Wie viele Ausschänke sollte eine Flasche ergeben?",
+            "answer": "Ausschänke je Flasche = Flaschengröße ÷ Ausschankmenge. Eine Standardflasche mit 750 ml bei 30 ml pro Drink sollte 25 Ausschänke ergeben — vergleichen Sie die tatsächliche Zahl damit, um zu großzügiges Eingießen oder Schwund zu erkennen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Barkosten so steuern wie den Wareneinsatz",
+        "subtext": "Setu Dine stellt den Lagerverbrauch den Verkäufen gegenüber, sodass zu großzügiges Eingießen und Schwund schnell auffallen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Trinkgeld-Rechner",

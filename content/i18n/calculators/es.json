@@ -800,7 +800,57 @@
     },
     {
       "name": "Calculadora de coste de bebidas servidas",
-      "shortDescription": "Halla tu porcentaje de coste por copa y el beneficio de cada bebida que sirves."
+      "shortDescription": "Halla tu porcentaje de coste por copa y el beneficio de cada bebida que sirves.",
+      "seo": {
+        "title": "Calculadora de coste de trago — control de barra",
+        "description": "Calculadora de coste de trago gratuita para bares y restaurantes. Introduce coste de la botella, medida y precio de venta para ver el coste % y el beneficio.",
+        "keywords": [
+          "calculadora de coste de trago",
+          "calculadora de coste de licor",
+          "calculadora de costes de barra",
+          "porcentaje de coste de trago"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de coste de trago",
+        "headline": "Calculadora de coste de trago",
+        "subheadline": "Introduce el coste de la botella, la medida del trago y el precio de venta para ver tu coste de trago % y el beneficio por copa."
+      },
+      "about": {
+        "headline": "La versión de barra del porcentaje de coste de alimentos",
+        "paragraphs": [
+          "El coste de trago es para una barra lo que el porcentaje de coste de alimentos es para una cocina: la parte del precio de venta de una copa que se va en el propio licor. Es el número que te dice si tus precios y tus medidas son realmente rentables, sobre todo cuando cuentas cuántos tragos da una botella.",
+          "Introduce el coste de la botella, su tamaño, la medida que sirves de verdad y el precio de venta por copa para obtener el coste de trago %, el beneficio por trago y cuántos tragos deberías sacar de cada botella. Pasa por aquí tus referencias más vendidas cada vez que un proveedor cambie un precio."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre el coste de licor",
+        "items": [
+          {
+            "question": "¿Cómo se calcula el porcentaje de coste de trago?",
+            "answer": "Coste de trago % = (coste por trago ÷ precio de venta por trago) × 100, donde el coste por trago = coste de la botella ÷ (tamaño de la botella ÷ medida del trago)."
+          },
+          {
+            "question": "¿Qué porcentaje de coste de trago es bueno?",
+            "answer": "La mayoría de las barras apuntan a un 18-24% en destilados, aunque varía según la categoría: las referencias premium y artesanales suelen quedar algo por encima a cambio de un precio y un valor percibido mayores."
+          },
+          {
+            "question": "¿Por qué mi coste de trago real no coincide con el objetivo?",
+            "answer": "Servir de más es la causa más común: incluso 5-10 ml extra por copa se acumulan rápido en una noche cargada. Medidas inconsistentes, derrames y copas invitadas o compensadas también ensanchan la brecha entre el objetivo y la realidad."
+          },
+          {
+            "question": "¿Cuántos tragos debería sacar de una botella?",
+            "answer": "Tragos por botella = tamaño de la botella ÷ medida del trago. Una botella estándar de 750 ml servida a 30 ml por copa debería dar 25 tragos; compara los tragos reales con esta cifra para detectar exceso de servicio o desperdicio."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Controla la barra igual que controlas la cocina",
+        "subtext": "Setu Dine compara el consumo de inventario con las ventas, así el exceso de servicio y el desperdicio salen a la luz rápido.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de reparto de propinas",

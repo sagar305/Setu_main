@@ -800,7 +800,57 @@
     },
     {
       "name": "Calculateur de coût des boissons",
-      "shortDescription": "Trouvez votre ratio de coût par verre et le bénéfice de chaque boisson servie."
+      "shortDescription": "Trouvez votre ratio de coût par verre et le bénéfice de chaque boisson servie.",
+      "seo": {
+        "title": "Calculateur de coût de dose — gestion du bar",
+        "description": "Calculateur de coût de dose gratuit pour bars et restaurants. Saisissez le coût de la bouteille, la dose et le prix de vente pour voir le coût en % et la marge.",
+        "keywords": [
+          "calculateur de coût de dose",
+          "calculateur de coût des spiritueux",
+          "calculateur de coûts de bar",
+          "pourcentage de coût de dose"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de coût de dose",
+        "headline": "Calculateur de coût de dose",
+        "subheadline": "Saisissez le coût de la bouteille, la dose servie et le prix de vente pour voir votre coût de dose en % et la marge par verre."
+      },
+      "about": {
+        "headline": "L'équivalent au bar du pourcentage de coût matière",
+        "paragraphs": [
+          "Le coût de dose est au bar ce que le coût matière est à la cuisine : la part du prix de vente d'un verre qui part dans l'alcool lui-même. C'est le chiffre qui dit si vos prix et vos doses sont réellement rentables, surtout quand on compte le nombre de doses que donne une bouteille.",
+          "Saisissez le coût de la bouteille, sa contenance, la dose que vous servez vraiment et le prix de vente par verre pour obtenir le coût de dose en %, la marge par dose et le nombre de doses attendu par bouteille. Repassez vos références les plus vendues dès qu'un fournisseur change un prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le coût des spiritueux",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le pourcentage de coût de dose ?",
+            "answer": "Coût de dose % = (coût par dose ÷ prix de vente par dose) × 100, où le coût par dose = coût de la bouteille ÷ (contenance ÷ taille de la dose)."
+          },
+          {
+            "question": "Quel pourcentage de coût de dose viser ?",
+            "answer": "La plupart des bars visent 18-24% sur les spiritueux, avec des variations selon la catégorie : les références premium et artisanales tournent souvent un peu plus haut, en échange d'un prix et d'une valeur perçue supérieurs."
+          },
+          {
+            "question": "Pourquoi mon coût de dose réel ne correspond-il pas à ma cible ?",
+            "answer": "Le sur-dosage est la cause la plus fréquente : même 5-10 ml de plus par verre s'additionnent vite sur une soirée chargée. Des doses irrégulières, les pertes et les verres offerts ou remisés creusent aussi l'écart entre la cible et le réel."
+          },
+          {
+            "question": "Combien de doses dois-je tirer d'une bouteille ?",
+            "answer": "Doses par bouteille = contenance ÷ taille de la dose. Une bouteille standard de 750 ml servie à 30 ml par verre devrait donner 25 doses ; comparez les doses réelles à ce chiffre pour repérer le sur-dosage ou le gaspillage."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Pilotez le bar comme vous pilotez le coût matière",
+        "subtext": "Setu Dine rapproche la consommation des stocks des ventes : sur-dosage et gaspillage ressortent vite.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de partage des pourboires",

@@ -800,7 +800,57 @@
     },
     {
       "name": "Calculadora de custo de dose de bebidas",
-      "shortDescription": "Descubra o percentual de custo por dose e o lucro em cada bebida servida."
+      "shortDescription": "Descubra o percentual de custo por dose e o lucro em cada bebida servida.",
+      "seo": {
+        "title": "Calculadora de custo de dose — controle do bar",
+        "description": "Calculadora de custo de dose gratuita para bares e restaurantes. Informe custo da garrafa, dose e preço de venda para ver o custo em % e o lucro por drink.",
+        "keywords": [
+          "calculadora de custo de dose",
+          "calculadora de custo de destilados",
+          "calculadora de custos de bar",
+          "percentual de custo de dose"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de custo de dose",
+        "headline": "Calculadora de custo de dose",
+        "subheadline": "Informe o custo da garrafa, o tamanho da dose e o preço de venda para ver seu custo de dose em % e o lucro por drink."
+      },
+      "about": {
+        "headline": "A versão do bar para o percentual de custo de alimentos",
+        "paragraphs": [
+          "O custo de dose é para o bar o que o percentual de custo de alimentos é para a cozinha: a parte do preço de venda de um drink que vai para o destilado em si. É o número que diz se seus preços e suas doses são realmente lucrativos, sobretudo quando você conta quantas doses saem de uma garrafa.",
+          "Informe o custo da garrafa, o volume dela, a dose que você realmente serve e o preço de venda por drink para obter o custo de dose em %, o lucro por dose e quantas doses deveria render cada garrafa. Passe seus rótulos mais vendidos por aqui sempre que um fornecedor mudar o preço."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre custo de destilados",
+        "items": [
+          {
+            "question": "Como se calcula o percentual de custo de dose?",
+            "answer": "Custo de dose % = (custo por dose ÷ preço de venda por dose) × 100, em que o custo por dose = custo da garrafa ÷ (volume da garrafa ÷ tamanho da dose)."
+          },
+          {
+            "question": "Qual percentual de custo de dose é bom?",
+            "answer": "A maioria dos bares busca 18-24% em destilados, embora varie por categoria: rótulos premium e artesanais costumam ficar um pouco acima, em troca de preço e valor percebido maiores."
+          },
+          {
+            "question": "Por que meu custo de dose real não bate com a meta?",
+            "answer": "Servir além da dose é a causa mais comum — mesmo 5-10 ml a mais por drink se acumulam rápido numa noite cheia. Doses irregulares, derramamento e drinks oferecidos ou cortesia também ampliam a diferença entre meta e realidade."
+          },
+          {
+            "question": "Quantas doses devo tirar de uma garrafa?",
+            "answer": "Doses por garrafa = volume da garrafa ÷ tamanho da dose. Uma garrafa padrão de 750 ml servida a 30 ml por drink deveria render 25 doses — compare as doses reais com esse número para identificar excesso ou desperdício."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Controle o bar como você controla a cozinha",
+        "subtext": "O Setu Dine confronta o consumo de estoque com as vendas, então excesso na dose e desperdício aparecem rápido.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de divisão de gorjetas",
