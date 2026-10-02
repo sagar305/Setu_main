@@ -627,7 +627,58 @@
     },
     {
       "name": "Calculadora de IVA",
-      "shortDescription": "Añade IVA a un precio neto o extrae el IVA de un importe bruto, para cualquier tipo del mundo."
+      "shortDescription": "Añade IVA a un precio neto o extrae el IVA de un importe bruto, para cualquier tipo del mundo.",
+      "seo": {
+        "title": "Calculadora de IVA — Añadir o Quitar IVA | Setu",
+        "description": "Calculadora de IVA gratuita. Añade IVA a un importe neto o extráelo de un precio con IVA, con los tipos estándar de más de 65 países incluidos.",
+        "keywords": [
+          "calculadora de IVA",
+          "añadir IVA",
+          "quitar IVA",
+          "calculadora de IVA inverso",
+          "calcular IVA 21%"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de IVA",
+        "headline": "Calculadora de IVA",
+        "subheadline": "Añade IVA a un precio neto o extrae el IVA de un importe con impuestos: elige cualquier tipo y obtén al instante el neto, el impuesto y el total."
+      },
+      "about": {
+        "headline": "Para qué sirve una calculadora de IVA",
+        "paragraphs": [
+          "Si vendes a clientes o compras a proveedores en países con IVA — España, el resto de la UE, el Reino Unido, los Emiratos, Sudáfrica y más de 170 otros — tienes que pasar constantemente del precio neto al precio con impuestos. Hacerlo a mano induce a error, sobre todo con tipos como el 12,5% o el 23%.",
+          "Esta calculadora funciona en los dos sentidos. Introduce un importe neto para ver el IVA y el total, o introduce un precio con IVA incluido para recuperar el neto y el impuesto que lleva dentro. Los botones de selección rápida cubren los tipos más habituales del mundo, y puedes escribir cualquier tipo personalizado."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de IVA",
+        "items": [
+          {
+            "question": "¿Cómo añado IVA a un precio?",
+            "answer": "Multiplica el precio neto por el tipo de IVA y súmalo. Con un IVA del 20%, un neto de 100 lleva 20 de IVA y da un total de 120. Esta calculadora lo hace al instante con cualquier tipo."
+          },
+          {
+            "question": "¿Cómo quito el IVA de un importe total?",
+            "answer": "Divide el importe total entre (1 + tipo). Un precio de 120 con IVA del 20% es 120 ÷ 1,20 = 100 de neto, con 20 de IVA. Nunca restes el porcentaje directamente: da un resultado incorrecto."
+          },
+          {
+            "question": "¿Qué diferencia hay entre IVA y GST?",
+            "answer": "Funcionan igual: un impuesto sobre el valor añadido en cada etapa. Los países solo usan nombres y tipos distintos. India aplica el GST (usa nuestra calculadora de GST para el desglose CGST/SGST); el Reino Unido, la UE y muchos otros aplican IVA."
+          },
+          {
+            "question": "¿Qué tipo de IVA debo usar?",
+            "answer": "El tipo general del país donde se grava la venta: por ejemplo el 20% en el Reino Unido, el 19% en Alemania, el 5% en los Emiratos. Muchos países también tienen tipos reducidos para productos esenciales; comprueba la categoría de tu bien o servicio."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El TPV y las herramientas de Setu registran ventas, costes e impuestos de forma automática, así los informes se hacen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de impuesto sobre ventas",

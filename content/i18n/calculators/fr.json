@@ -627,7 +627,58 @@
     },
     {
       "name": "Calculateur de TVA",
-      "shortDescription": "Ajoutez la TVA à un prix HT ou extrayez-la d'un montant TTC, pour n'importe quel taux."
+      "shortDescription": "Ajoutez la TVA à un prix HT ou extrayez-la d'un montant TTC, pour n'importe quel taux.",
+      "seo": {
+        "title": "Calculateur de TVA — Ajouter ou Retirer la TVA | Setu",
+        "description": "Calculateur de TVA gratuit. Ajoutez la TVA à un montant hors taxes ou extrayez-la d'un prix TTC, avec les taux standards de plus de 65 pays intégrés.",
+        "keywords": [
+          "calculateur de TVA",
+          "ajouter la TVA",
+          "retirer la TVA",
+          "calcul TVA inversée",
+          "calculer TVA 20%"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de TVA",
+        "headline": "Calculateur de TVA",
+        "subheadline": "Ajoutez la TVA à un prix hors taxes ou extrayez-la d'un montant TTC : choisissez un taux et obtenez aussitôt le HT, la taxe et le TTC."
+      },
+      "about": {
+        "headline": "À quoi sert un calculateur de TVA",
+        "paragraphs": [
+          "Si vous vendez à des clients ou achetez à des fournisseurs dans des pays à TVA — France, reste de l'UE, Royaume-Uni, Émirats, Afrique du Sud et plus de 170 autres — vous passez sans cesse du prix hors taxes au prix TTC. Le faire à la main est source d'erreurs, surtout avec des taux comme 12,5 % ou 23 %.",
+          "Ce calculateur fonctionne dans les deux sens. Saisissez un montant hors taxes pour voir la TVA et le total TTC, ou saisissez un prix TTC pour retrouver le montant hors taxes et la taxe qu'il contient. Les boutons de sélection rapide couvrent les taux les plus courants dans le monde, et vous pouvez saisir n'importe quel taux."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de TVA",
+        "items": [
+          {
+            "question": "Comment ajouter la TVA à un prix ?",
+            "answer": "Multipliez le prix hors taxes par le taux de TVA et ajoutez-le. À 20 % de TVA, un prix HT de 100 porte 20 de TVA, soit 120 TTC. Ce calculateur le fait aussitôt pour n'importe quel taux."
+          },
+          {
+            "question": "Comment retirer la TVA d'un montant TTC ?",
+            "answer": "Divisez le montant TTC par (1 + taux). Un prix de 120 TTC à 20 % de TVA donne 120 ÷ 1,20 = 100 HT, avec 20 de TVA. Ne soustrayez jamais le pourcentage directement : le résultat serait faux."
+          },
+          {
+            "question": "Quelle différence entre TVA et GST ?",
+            "answer": "Les deux fonctionnent de la même façon : une taxe sur la valeur ajoutée à chaque étape. Les pays utilisent simplement des noms et des taux différents. L'Inde applique la GST (utilisez notre calculateur GST pour la répartition CGST/SGST) ; le Royaume-Uni, l'UE et beaucoup d'autres appliquent la TVA."
+          },
+          {
+            "question": "Quel taux de TVA utiliser ?",
+            "answer": "Le taux normal du pays où la vente est taxée : par exemple 20 % au Royaume-Uni, 19 % en Allemagne, 5 % aux Émirats. Beaucoup de pays ont aussi des taux réduits sur les produits essentiels ; vérifiez la catégorie de votre bien ou service."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de taxe de vente",

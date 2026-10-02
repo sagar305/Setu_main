@@ -627,7 +627,58 @@
     },
     {
       "name": "Mehrwertsteuer-Rechner",
-      "shortDescription": "Mehrwertsteuer zum Nettopreis addieren oder aus dem Bruttobetrag herausrechnen, für jeden Satz."
+      "shortDescription": "Mehrwertsteuer zum Nettopreis addieren oder aus dem Bruttobetrag herausrechnen, für jeden Satz.",
+      "seo": {
+        "title": "Mehrwertsteuer-Rechner — MwSt. berechnen | Setu",
+        "description": "Kostenloser MwSt.-Rechner. Rechnen Sie die Mehrwertsteuer auf einen Nettobetrag auf oder aus einem Bruttopreis heraus — Standardsätze für über 65 Länder.",
+        "keywords": [
+          "Mehrwertsteuer Rechner",
+          "MwSt addieren",
+          "MwSt herausrechnen",
+          "Brutto Netto Rechner",
+          "19% MwSt berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — MwSt.-Rechner",
+        "headline": "Mehrwertsteuer-Rechner",
+        "subheadline": "Rechnen Sie die MwSt. auf einen Nettopreis auf oder aus einem Bruttobetrag heraus: Satz wählen und sofort Netto, Steuer und Brutto sehen."
+      },
+      "about": {
+        "headline": "Wozu ein Mehrwertsteuer-Rechner",
+        "paragraphs": [
+          "Wenn Sie an Kunden in Ländern mit Mehrwertsteuer verkaufen oder dort einkaufen — Deutschland, die übrige EU, Großbritannien, die Emirate, Südafrika und über 170 weitere — müssen Sie laufend zwischen Netto- und Bruttopreisen wechseln. Von Hand ist das fehleranfällig, gerade bei Sätzen wie 12,5 % oder 23 %.",
+          "Dieser Rechner arbeitet in beide Richtungen. Geben Sie einen Nettobetrag ein, um Steuer und Bruttosumme zu sehen, oder einen Bruttopreis, um Netto und enthaltene Steuer zurückzugewinnen. Schnellwahl-Buttons decken die weltweit gängigsten Sätze ab, und Sie können jeden eigenen Satz eintippen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Mehrwertsteuer-Rechner",
+        "items": [
+          {
+            "question": "Wie rechne ich die MwSt. auf einen Preis auf?",
+            "answer": "Multiplizieren Sie den Nettopreis mit dem Steuersatz und addieren Sie ihn. Bei 20 % MwSt. trägt ein Netto von 100 eine Steuer von 20, Brutto also 120. Der Rechner macht das für jeden Satz sofort."
+          },
+          {
+            "question": "Wie rechne ich die MwSt. aus einem Bruttobetrag heraus?",
+            "answer": "Teilen Sie den Bruttobetrag durch (1 + Satz). Ein Bruttopreis von 120 bei 20 % MwSt. ergibt 120 ÷ 1,20 = 100 Netto mit 20 Steuer. Ziehen Sie den Prozentsatz nie direkt ab — das ergibt ein falsches Ergebnis."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen MwSt. und GST?",
+            "answer": "Beide funktionieren gleich: eine Steuer auf den in jeder Stufe geschaffenen Wert. Die Länder verwenden nur andere Namen und Sätze. Indien nutzt GST (für die CGST/SGST-Aufteilung unseren GST-Rechner verwenden); Großbritannien, die EU und viele andere nutzen die Mehrwertsteuer."
+          },
+          {
+            "question": "Welchen Steuersatz soll ich nehmen?",
+            "answer": "Den Normalsatz des Landes, in dem der Umsatz besteuert wird — etwa 20 % in Großbritannien, 19 % in Deutschland, 5 % in den Emiraten. Viele Länder haben zusätzlich reduzierte Sätze für Grundbedarf; prüfen Sie die Kategorie Ihrer Ware oder Leistung."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Sales-Tax-Rechner",

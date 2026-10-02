@@ -627,7 +627,58 @@
     },
     {
       "name": "Calculadora de IVA",
-      "shortDescription": "Adicione IVA a um preço líquido ou extraia o IVA de um valor bruto, com qualquer alíquota."
+      "shortDescription": "Adicione IVA a um preço líquido ou extraia o IVA de um valor bruto, com qualquer alíquota.",
+      "seo": {
+        "title": "Calculadora de IVA — Adicionar ou Remover IVA | Setu",
+        "description": "Calculadora de IVA gratuita. Adicione IVA a um valor líquido ou retire-o de um preço com imposto, com as taxas padrão de mais de 65 países já incluídas.",
+        "keywords": [
+          "calculadora de IVA",
+          "adicionar IVA",
+          "remover IVA",
+          "calculadora de IVA inverso",
+          "calcular IVA 23%"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de IVA",
+        "headline": "Calculadora de IVA",
+        "subheadline": "Adicione IVA a um preço líquido ou retire o IVA de um valor com imposto: escolha qualquer taxa e veja na hora o líquido, o imposto e o total."
+      },
+      "about": {
+        "headline": "Para que serve uma calculadora de IVA",
+        "paragraphs": [
+          "Se você vende a clientes ou compra de fornecedores em países com IVA — Portugal, o resto da UE, o Reino Unido, os Emirados, a África do Sul e mais de 170 outros — precisa alternar o tempo todo entre preço líquido e preço com imposto. Fazer isso à mão dá margem a erro, sobretudo com taxas como 12,5% ou 23%.",
+          "Esta calculadora funciona nos dois sentidos. Informe um valor líquido para ver o IVA e o total, ou informe um preço com IVA incluído para recuperar o valor líquido e o imposto dentro dele. Os botões de seleção rápida cobrem as taxas mais comuns do mundo, e você pode digitar qualquer taxa personalizada."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de IVA",
+        "items": [
+          {
+            "question": "Como adiciono IVA a um preço?",
+            "answer": "Multiplique o preço líquido pela taxa de IVA e some. A 20% de IVA, um líquido de 100 carrega 20 de IVA e dá 120 no total. Esta calculadora faz isso na hora para qualquer taxa."
+          },
+          {
+            "question": "Como removo o IVA de um valor total?",
+            "answer": "Divida o valor total por (1 + taxa). Um preço de 120 com IVA de 20% é 120 ÷ 1,20 = 100 de líquido, com 20 de IVA. Nunca subtraia a percentagem diretamente — isso dá o resultado errado."
+          },
+          {
+            "question": "Qual é a diferença entre IVA e GST?",
+            "answer": "Funcionam da mesma forma: um imposto sobre o valor acrescentado em cada etapa. Os países apenas usam nomes e taxas diferentes. A Índia usa GST (use a nossa calculadora de GST para a divisão CGST/SGST); o Reino Unido, a UE e muitos outros usam IVA."
+          },
+          {
+            "question": "Que taxa de IVA devo usar?",
+            "answer": "A taxa normal do país onde a venda é tributada — por exemplo 20% no Reino Unido, 19% na Alemanha, 5% nos Emirados. Muitos países também têm taxas reduzidas para bens essenciais; confira a categoria do seu bem ou serviço."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de imposto sobre vendas",

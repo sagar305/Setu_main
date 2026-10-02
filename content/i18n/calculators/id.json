@@ -627,7 +627,58 @@
     },
     {
       "name": "Kalkulator PPN",
-      "shortDescription": "Tambahkan PPN ke harga neto atau keluarkan PPN dari nominal bruto, untuk tarif mana pun."
+      "shortDescription": "Tambahkan PPN ke harga neto atau keluarkan PPN dari nominal bruto, untuk tarif mana pun.",
+      "seo": {
+        "title": "Kalkulator PPN (VAT) — Tambah atau Hitung Balik | Setu",
+        "description": "Kalkulator PPN gratis. Tambahkan PPN ke nilai sebelum pajak atau keluarkan PPN dari harga termasuk pajak, dengan tarif standar 65+ negara di dalamnya.",
+        "keywords": [
+          "kalkulator PPN",
+          "tambah PPN",
+          "hitung PPN dari harga",
+          "kalkulator PPN terbalik",
+          "hitung PPN 11%"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator PPN",
+        "headline": "Kalkulator PPN (VAT)",
+        "subheadline": "Tambahkan PPN ke harga sebelum pajak atau keluarkan PPN dari harga termasuk pajak: pilih tarif apa pun dan lihat rincian nilai, pajak, dan total."
+      },
+      "about": {
+        "headline": "Kenapa memakai kalkulator PPN",
+        "paragraphs": [
+          "Kalau Anda menjual ke pelanggan atau membeli dari pemasok di negara yang memakai PPN — Inggris, Uni Eropa, Uni Emirat Arab, Afrika Selatan, dan 170 negara lainnya — Anda terus-menerus harus berpindah antara harga sebelum pajak dan harga termasuk pajak. Menghitungnya manual mudah salah, terutama pada tarif seperti 12,5% atau 23%.",
+          "Kalkulator ini bekerja dua arah. Masukkan nilai sebelum pajak untuk melihat PPN dan totalnya, atau masukkan harga yang sudah termasuk PPN untuk mendapatkan kembali nilai dasar beserta pajak di dalamnya. Tombol pilih cepat mencakup tarif paling umum di dunia, dan Anda bisa mengetik tarif apa pun."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator PPN",
+        "items": [
+          {
+            "question": "Bagaimana cara menambahkan PPN ke harga?",
+            "answer": "Kalikan harga sebelum pajak dengan tarif PPN lalu tambahkan. Pada tarif 20%, harga dasar 100 memuat PPN 20 sehingga totalnya 120. Kalkulator ini melakukannya seketika untuk tarif apa pun."
+          },
+          {
+            "question": "Bagaimana cara mengeluarkan PPN dari harga total?",
+            "answer": "Bagi harga total dengan (1 + tarif). Harga 120 dengan PPN 20% menjadi 120 ÷ 1,20 = 100 nilai dasar, dengan PPN 20. Jangan pernah langsung mengurangi persentasenya — hasilnya salah."
+          },
+          {
+            "question": "Apa bedanya VAT dan GST?",
+            "answer": "Keduanya bekerja sama saja: pajak atas nilai tambah di setiap tahap. Negara hanya memakai nama dan tarif berbeda. India memakai GST (gunakan kalkulator GST kami untuk pembagian CGST/SGST); Inggris, Uni Eropa, dan banyak negara lain memakai VAT."
+          },
+          {
+            "question": "Tarif PPN mana yang harus saya pakai?",
+            "answer": "Pakai tarif standar negara tempat penjualan itu dikenai pajak — misalnya 20% di Inggris, 19% di Jerman, 5% di Uni Emirat Arab. Banyak negara juga punya tarif lebih rendah untuk barang pokok; periksa kategori barang atau jasa Anda."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator pajak penjualan",

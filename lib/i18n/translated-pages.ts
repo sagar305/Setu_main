@@ -48,7 +48,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "cac-calculator": [],
     "aov-calculator": [],
     "menu-engineering-calculator": [],
-    "vat-calculator": [],
+    "vat-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "sales-tax-calculator": [],
     "roi-calculator": [],
     "depreciation-calculator": [],
