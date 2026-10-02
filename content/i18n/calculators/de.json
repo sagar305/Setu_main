@@ -746,7 +746,57 @@
     },
     {
       "name": "Rezeptkalkulations-Rechner",
-      "shortDescription": "Kalkulieren Sie ein Rezept Zutat für Zutat und finden Sie die echten Kosten pro Portion."
+      "shortDescription": "Kalkulieren Sie ein Rezept Zutat für Zutat und finden Sie die echten Kosten pro Portion.",
+      "seo": {
+        "title": "Rezeptkalkulation — Kosten pro Portion berechnen",
+        "description": "Kostenlose Rezeptkalkulation für die Gastronomie. Zutaten und Mengen eingeben und Gesamtkosten, Kosten pro Portion und einen Menüpreisvorschlag erhalten.",
+        "keywords": [
+          "Rezeptkalkulation Rechner",
+          "Rezeptkosten berechnen",
+          "Menükalkulation",
+          "Rechner Kosten pro Portion"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rezeptkalkulation",
+        "headline": "Rechner für Rezeptkalkulation",
+        "subheadline": "Tragen Sie jede Zutat mit ihrer Menge ein und sehen Sie die echten Kosten eines Rezepts, pro Portion."
+      },
+      "about": {
+        "headline": "Kalkulieren Sie das ganze Rezept, nicht nur die Hauptzutaten",
+        "paragraphs": [
+          "Die meisten Fehler bei Menüpreisen entstehen, weil ein Gericht nur über seine 2-3 Hauptzutaten kalkuliert und der Rest geschätzt wird. Öl, Gewürze, Garnitur und Verpackung sind einzeln klein, summieren sich aber — und über Hunderte Bestellungen im Monat vervielfacht sich diese Lücke.",
+          "Tragen Sie jede Zutat eines Rezepts mit Menge und Stückkosten ein und erhalten Sie exakte Gesamtkosten und Kosten pro Portion. Sind die echten Kosten bekannt, nutzen Sie sie zusammen mit dem Rechner für den Wareneinsatz, um einen Menüpreis zu setzen, der Ihre Marge schützt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zur Rezeptkalkulation",
+        "items": [
+          {
+            "question": "Warum sollte ich jede Zutat kalkulieren und nicht nur die Hauptzutaten?",
+            "answer": "Kleine Posten wie Öl, Gewürze, Saucen und Garnitur sind einzeln günstig, summieren sich aber im Rezept; verteilt auf Hunderte verkaufte Teller pro Monat kann diese Lücke die Marge deutlich auffressen, wenn sie nie erfasst wird."
+          },
+          {
+            "question": "Durch wie viele Portionen teile ich die Gesamtkosten?",
+            "answer": "Teilen Sie durch die tatsächliche Anzahl Portionen oder Teller, die das Rezept ergibt, nicht durch die Zahl der Zutaten. Ergibt ein Ansatz eine Basis für 10 Teller, rechnen Sie mit 10 Portionen."
+          },
+          {
+            "question": "Sind Lohn- oder Gemeinkosten enthalten?",
+            "answer": "Nein — hier werden nur die reinen Zutatenkosten berechnet. Lohn und Gemeinkosten kommen separat dazu; berücksichtigen Sie beide neben den Zutatenkosten, wenn Sie den endgültigen Menüpreis festlegen."
+          },
+          {
+            "question": "Kann ich das für jedes Gericht meiner Karte speichern?",
+            "answer": "Dieses Tool speichert nichts zwischen Sitzungen, notieren Sie die Kosten pro Portion also gleich mit. Setu Dine kann Rezeptkosten dauerhaft an Menüartikel hängen und aktualisiert sie automatisch, wenn sich Zutatenpreise ändern."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Rezepte, deren Kosten sich selbst aktualisieren",
+        "subtext": "Setu Dine verknüpft Rezepte mit aktuellen Zutatenpreisen, sodass die Kosten pro Teller ohne manuelles Nachrechnen stimmen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Ausschankkosten-Rechner",

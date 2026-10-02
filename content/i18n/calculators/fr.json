@@ -746,7 +746,57 @@
     },
     {
       "name": "Calculateur de coût de recette",
-      "shortDescription": "Chiffrez une recette ingrédient par ingrédient pour connaître le vrai coût par portion."
+      "shortDescription": "Chiffrez une recette ingrédient par ingrédient pour connaître le vrai coût par portion.",
+      "seo": {
+        "title": "Calculateur de coût de recette — coût par portion",
+        "description": "Calculateur de coût de recette gratuit pour la restauration. Ajoutez ingrédients et quantités pour voir le coût total, le coût par portion et un prix conseillé.",
+        "keywords": [
+          "calculateur de coût de recette",
+          "calcul du coût d'une recette",
+          "calcul des coûts du menu",
+          "calculateur de coût par portion"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de coût de recette",
+        "headline": "Calculateur de coût de recette",
+        "subheadline": "Ajoutez chaque ingrédient et sa quantité pour connaître le coût réel d'une recette, par portion."
+      },
+      "about": {
+        "headline": "Chiffrez toute la recette, pas seulement les ingrédients vedettes",
+        "paragraphs": [
+          "La plupart des erreurs de tarification viennent du fait de chiffrer un plat sur ses 2-3 ingrédients principaux et d'estimer le reste. Huile, épices, garniture et emballage sont minimes séparément, mais ils s'additionnent — et cet écart se multiplie sur des centaines de commandes par mois.",
+          "Ajoutez chaque ingrédient d'une recette avec sa quantité et son coût unitaire pour obtenir un coût total juste et le coût par portion. Une fois le coût réel connu, utilisez-le avec le calculateur de pourcentage de coût matière pour fixer un prix de menu qui protège votre marge."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le coût de recette",
+        "items": [
+          {
+            "question": "Pourquoi chiffrer tous les ingrédients et pas seulement les principaux ?",
+            "answer": "Les petits ingrédients — huile, épices, sauces, garniture — sont peu chers isolément mais s'additionnent dans une recette ; répartis sur des centaines d'assiettes vendues chaque mois, cet écart peut sérieusement éroder la marge s'il n'est jamais compté."
+          },
+          {
+            "question": "Par combien de portions diviser le coût total ?",
+            "answer": "Divisez par le nombre réel de portions ou d'assiettes que donne la recette, pas par le nombre d'ingrédients. Si une préparation en lot sert de base à 10 assiettes, retenez 10 portions."
+          },
+          {
+            "question": "Le coût de main-d'œuvre ou les frais généraux sont-ils inclus ?",
+            "answer": "Non : ce calcul porte uniquement sur le coût matière. Ajoutez la main-d'œuvre et les frais généraux séparément, et prenez-les en compte avec le coût matière pour fixer le prix final."
+          },
+          {
+            "question": "Puis-je l'enregistrer pour chaque plat de ma carte ?",
+            "answer": "Cet outil ne conserve pas les données entre deux sessions : notez le coût par portion de chaque plat au fur et à mesure. Setu Dine peut enregistrer durablement les coûts de recette par plat et les mettre à jour quand les prix des ingrédients changent."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des recettes dont le coût se met à jour tout seul",
+        "subtext": "Setu Dine relie les recettes aux prix actuels des ingrédients : le coût par assiette reste juste sans recalcul manuel.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de coût des boissons",

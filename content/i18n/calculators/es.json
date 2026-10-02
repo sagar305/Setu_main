@@ -746,7 +746,57 @@
     },
     {
       "name": "Calculadora de escandallo de recetas",
-      "shortDescription": "Calcula el coste de una receta ingrediente a ingrediente y halla el coste real por ración."
+      "shortDescription": "Calcula el coste de una receta ingrediente a ingrediente y halla el coste real por ración.",
+      "seo": {
+        "title": "Calculadora de coste de recetas — coste por ración",
+        "description": "Calculadora de coste de recetas gratuita para restaurantes. Añade ingredientes y cantidades para ver el coste total, el coste por ración y un precio sugerido.",
+        "keywords": [
+          "calculadora de coste de recetas",
+          "calculadora de coste de receta",
+          "escandallo de menú",
+          "calculadora de coste por ración"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de coste de recetas",
+        "headline": "Calculadora de coste de recetas",
+        "subheadline": "Añade cada ingrediente y su cantidad para conocer el coste real de una receta, por ración."
+      },
+      "about": {
+        "headline": "Cuesta la receta entera, no solo los ingredientes principales",
+        "paragraphs": [
+          "La mayoría de los errores al fijar precios de menú vienen de costear un plato por sus 2-3 ingredientes principales y estimar el resto. El aceite, las especias, la guarnición y el envase son pequeños por separado, pero suman — y esa diferencia se multiplica a lo largo de cientos de pedidos al mes.",
+          "Añade todos los ingredientes de una receta con su cantidad y coste unitario para obtener un coste total exacto y el coste por ración. Cuando conozcas el coste real, úsalo junto con la calculadora de porcentaje de coste de alimentos para fijar un precio de menú que proteja tu margen."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre el coste de recetas",
+        "items": [
+          {
+            "question": "¿Por qué debo costear todos los ingredientes y no solo los principales?",
+            "answer": "Ingredientes pequeños como el aceite, las especias, las salsas y la guarnición son baratos por separado, pero suman dentro de una receta; repartido entre cientos de platos vendidos cada mes, ese hueco puede erosionar el margen de forma apreciable si nunca se contabiliza."
+          },
+          {
+            "question": "¿Por cuántas raciones debo dividir el coste total?",
+            "answer": "Divide por el número real de raciones o platos que da la receta, no por el número de ingredientes. Si una elaboración en lote produce una base que se usa en 10 platos, utiliza 10 como número de raciones."
+          },
+          {
+            "question": "¿Incluye el coste de personal o los gastos generales?",
+            "answer": "No: esto calcula solo el coste de los ingredientes. Añade mano de obra y gastos generales por separado, y tenlos en cuenta junto al coste de ingredientes al fijar el precio final del menú."
+          },
+          {
+            "question": "¿Puedo guardarlo para cada plato de mi carta?",
+            "answer": "Esta herramienta no guarda datos entre sesiones, así que anota el coste por ración de cada plato a medida que avanzas. Setu Dine puede guardar los costes de receta asociados a cada plato de forma permanente y actualizarlos cuando cambian los precios de los ingredientes."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Recetas que actualizan su coste solas",
+        "subtext": "Setu Dine vincula las recetas a los precios actuales de los ingredientes, así el coste por plato se mantiene exacto sin recalcular a mano.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de coste de bebidas servidas",

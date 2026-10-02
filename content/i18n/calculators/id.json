@@ -746,7 +746,57 @@
     },
     {
       "name": "Kalkulator biaya resep",
-      "shortDescription": "Hitung biaya resep bahan per bahan untuk tahu biaya asli per porsi."
+      "shortDescription": "Hitung biaya resep bahan per bahan untuk tahu biaya asli per porsi.",
+      "seo": {
+        "title": "Kalkulator Biaya Resep — Biaya per Porsi",
+        "description": "Kalkulator biaya resep gratis untuk restoran. Tambahkan bahan dan jumlahnya untuk melihat total biaya resep, biaya per porsi, dan saran harga menu.",
+        "keywords": [
+          "kalkulator biaya resep",
+          "hitung biaya resep",
+          "perhitungan biaya menu",
+          "kalkulator biaya per porsi"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Biaya Resep",
+        "headline": "Kalkulator Biaya Resep",
+        "subheadline": "Tambahkan setiap bahan dan jumlahnya untuk mengetahui biaya sebenarnya sebuah resep, per porsi."
+      },
+      "about": {
+        "headline": "Hitung seluruh resep, bukan hanya bahan utamanya",
+        "paragraphs": [
+          "Sebagian besar kesalahan menetapkan harga menu berasal dari menghitung biaya hidangan hanya dari 2-3 bahan utama lalu menebak sisanya. Minyak, bumbu, hiasan, dan kemasan kecil-kecil saja, tapi menumpuk — dan selisih itu berlipat di ratusan pesanan setiap bulan.",
+          "Masukkan setiap bahan dalam resep beserta jumlah dan biaya satuannya untuk mendapat total biaya yang akurat dan biaya per porsi. Setelah tahu biaya sebenarnya, pakai angka itu bersama kalkulator persentase biaya bahan untuk menetapkan harga menu yang menjaga margin Anda."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator biaya resep",
+        "items": [
+          {
+            "question": "Kenapa harus menghitung semua bahan, bukan hanya yang utama?",
+            "answer": "Bahan kecil seperti minyak, bumbu, saus, dan hiasan memang murah satu per satu, tapi menumpuk dalam satu resep; disebar ke ratusan porsi yang terjual tiap bulan, selisih itu bisa menggerus margin cukup berarti kalau tak pernah dihitung."
+          },
+          {
+            "question": "Total biaya dibagi dengan berapa porsi?",
+            "answer": "Bagi dengan jumlah porsi atau piring yang benar-benar dihasilkan resep, bukan jumlah bahan yang dipakai. Kalau satu resep batch menghasilkan dasar yang dipakai untuk 10 piring, pakai 10 sebagai jumlah porsi."
+          },
+          {
+            "question": "Apakah ini termasuk biaya tenaga kerja atau overhead?",
+            "answer": "Tidak — ini hanya menghitung biaya bahan mentah. Tambahkan tenaga kerja dan overhead secara terpisah, dan pertimbangkan keduanya bersama biaya bahan saat menetapkan harga menu akhir."
+          },
+          {
+            "question": "Bisakah saya menyimpannya untuk setiap hidangan di menu?",
+            "answer": "Alat ini tidak menyimpan data antar sesi, jadi catat biaya per porsi tiap hidangan sambil jalan. Setu Dine bisa menyimpan biaya resep yang menempel pada item menu secara permanen dan memperbaruinya otomatis saat harga bahan berubah."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Resep yang biayanya terbarui sendiri",
+        "subtext": "Setu Dine menautkan resep ke harga bahan terkini, jadi biaya per porsi tetap akurat tanpa hitung ulang manual.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator pour cost minuman",

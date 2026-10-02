@@ -746,7 +746,57 @@
     },
     {
       "name": "Calculadora de ficha técnica de receitas",
-      "shortDescription": "Precifique uma receita ingrediente a ingrediente e encontre o custo real por porção."
+      "shortDescription": "Precifique uma receita ingrediente a ingrediente e encontre o custo real por porção.",
+      "seo": {
+        "title": "Calculadora de custo de receita — custo por porção",
+        "description": "Calculadora de custo de receita gratuita para restaurantes. Adicione ingredientes e quantidades para ver o custo total, o custo por porção e um preço sugerido.",
+        "keywords": [
+          "calculadora de custo de receita",
+          "calculadora de custo de ficha técnica",
+          "custeio de menu",
+          "calculadora de custo por porção"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de custo de receita",
+        "headline": "Calculadora de custo de receita",
+        "subheadline": "Adicione cada ingrediente e sua quantidade para descobrir o custo real de uma receita, por porção."
+      },
+      "about": {
+        "headline": "Custeie a receita inteira, não só os ingredientes principais",
+        "paragraphs": [
+          "A maioria dos erros de precificação vem de custear um prato pelos seus 2-3 ingredientes principais e estimar o resto. Óleo, temperos, guarnição e embalagem são pequenos isoladamente, mas somam — e essa diferença se multiplica ao longo de centenas de pedidos por mês.",
+          "Adicione todos os ingredientes da receita com quantidade e custo unitário para obter um custo total correto e o custo por porção. Com o custo real em mãos, use-o junto da calculadora de percentual de custo de alimentos para definir um preço de menu que protege sua margem."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre custo de receita",
+        "items": [
+          {
+            "question": "Por que custear todos os ingredientes e não só os principais?",
+            "answer": "Ingredientes pequenos como óleo, temperos, molhos e guarnição são baratos isoladamente, mas somam dentro de uma receita; espalhados por centenas de pratos vendidos no mês, essa diferença pode corroer a margem de forma relevante se nunca for contabilizada."
+          },
+          {
+            "question": "Por quantas porções devo dividir o custo total?",
+            "answer": "Divida pelo número real de porções ou pratos que a receita rende, não pelo número de ingredientes. Se uma preparação em lote gera uma base usada em 10 pratos, use 10 como número de porções."
+          },
+          {
+            "question": "Isso inclui mão de obra ou custos indiretos?",
+            "answer": "Não — aqui se calcula apenas o custo dos ingredientes. Some mão de obra e custos indiretos separadamente e considere os dois ao lado do custo de ingredientes ao definir o preço final."
+          },
+          {
+            "question": "Posso salvar isso para cada prato do meu menu?",
+            "answer": "Esta ferramenta não guarda dados entre sessões, então anote o custo por porção de cada prato conforme avança. O Setu Dine pode guardar os custos de receita junto dos itens do menu de forma permanente e atualizá-los quando os preços dos ingredientes mudam."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Receitas que atualizam o custo sozinhas",
+        "subtext": "O Setu Dine liga as receitas aos preços atuais dos ingredientes, então o custo por prato continua correto sem recálculo manual.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de custo de dose de bebidas",
