@@ -690,7 +690,59 @@
     },
     {
       "name": "Calculadora de precios de carta online",
-      "shortDescription": "Encuentra el precio a publicar en apps de reparto para conservar tu importe objetivo tras comisión e impuestos."
+      "shortDescription": "Encuentra el precio a publicar en apps de reparto para conservar tu importe objetivo tras comisión e impuestos.",
+      "seo": {
+        "title": "Calculadora de precios de menú para apps de reparto",
+        "description": "Calculadora de precios de menú online gratuita para restaurantes. Indica lo que quieres recibir y halla el precio a publicar que cubre comisión, GST y pasarela.",
+        "keywords": [
+          "calculadora de precios de menú para Zomato",
+          "calculadora de precios Swiggy",
+          "precio de menú online después de comisión",
+          "calculadora de precios para apps de reparto",
+          "calculadora de comisión inversa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de precios de menú online",
+        "headline": "Calculadora de precios de menú online",
+        "subheadline": "Dinos cuánto quieres recibir de verdad por un pedido online y calculamos el precio que necesitas publicar en la aplicación."
+      },
+      "about": {
+        "headline": "Calcula hacia atrás desde lo que quieres recibir",
+        "paragraphs": [
+          "Si publicas online el mismo precio que cobras en el local, la comisión, el impuesto sobre esa comisión, la pasarela de pago y el impuesto que debes por la venta se lo comen antes de que veas una rupia, así que lo que te queda online acaba muy por debajo de tu precio en sala.",
+          "Esta calculadora da la vuelta al cálculo habitual de comisiones: introduce lo que realmente quieres quedarte por plato, junto con los cargos de tu plataforma, y resuelve el precio publicado que te lleva ahí. Úsala cada vez que subas un plato nuevo a una app o la plataforma cambie su tramo de comisión.",
+          "Es un modelo simplificado: asume que la comisión y la pasarela se cobran sobre el precio publicado y que ese precio ya incluye el impuesto que cargas al cliente. Los acuerdos con las apps varían, así que compara el resultado con un informe de pagos real antes de aplicar los nuevos precios."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre precios de menú online",
+        "items": [
+          {
+            "question": "¿Por qué el precio que debo publicar es mayor que el de mi local?",
+            "answer": "Porque la comisión, el impuesto sobre esa comisión, la pasarela de pago y el impuesto que debes por la venta se descuentan del precio publicado antes de que te paguen. Para quedarte online con lo mismo que en el mostrador, el precio publicado tiene que absorber todos esos descuentos."
+          },
+          {
+            "question": "¿La comisión se cobra de verdad sobre el precio con impuestos incluidos?",
+            "answer": "Depende de la plataforma y de tu contrato: algunas cobran la comisión sobre la base (sin impuestos) y otras sobre el precio publicado completo. Esta calculadora supone que la comisión y la pasarela se aplican al precio publicado, el caso más común y más prudente. Revisa tu informe de pagos para confirmar cuál es el tuyo."
+          },
+          {
+            "question": "¿Y si ningún precio publicado cubre todos los cargos?",
+            "answer": "Si comisión, impuestos y tarifas suman el 100% o más del precio publicado, ningún precio recupera lo que quieres recibir: la calculadora lo avisa para que revises el margen online de ese plato en lugar de adivinar un precio."
+          },
+          {
+            "question": "¿Setu Dine puede sincronizar estos precios con mis plataformas de reparto?",
+            "answer": "Sí. Setu Dine te permite gestionar los precios del menú para sala y para varias apps desde una sola pantalla, así que los precios actualizados salen a todas partes a la vez."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gestiona todas las apps desde una pantalla",
+        "subtext": "Setu Dine reúne los pedidos de todas tus plataformas de reparto en una única vista de cocina.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de escandallo de recetas",

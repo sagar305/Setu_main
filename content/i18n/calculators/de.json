@@ -690,7 +690,59 @@
     },
     {
       "name": "Rechner für Online-Menüpreise",
-      "shortDescription": "Finden Sie den Preis für Lieferapps, damit nach Provision und Steuer Ihr Zielbetrag übrig bleibt."
+      "shortDescription": "Finden Sie den Preis für Lieferapps, damit nach Provision und Steuer Ihr Zielbetrag übrig bleibt.",
+      "seo": {
+        "title": "Menüpreis-Rechner für Lieferplattformen",
+        "description": "Kostenloser Rechner für Online-Menüpreise. Geben Sie Ihren Zielbetrag ein und finden Sie den Listenpreis, der Provision, Steuer und Zahlungsgebühren abdeckt.",
+        "keywords": [
+          "Zomato Menüpreis Rechner",
+          "Swiggy Preisrechner",
+          "Online-Menüpreis nach Provision",
+          "Preisrechner Lieferplattform",
+          "Rechner umgekehrte Provision"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rechner für Online-Menüpreise",
+        "headline": "Rechner für Online-Menüpreise",
+        "subheadline": "Sagen Sie uns, was von einer Online-Bestellung tatsächlich bei Ihnen ankommen soll — wir ermitteln den Preis, den Sie in der App listen müssen."
+      },
+      "about": {
+        "headline": "Rechnen Sie von Ihrem Zielbetrag zurück",
+        "paragraphs": [
+          "Listen Sie online denselben Preis wie an der Theke, zehren Provision, Steuer auf diese Provision, Zahlungsgebühren und die auf den Verkauf fällige Steuer daran, bevor eine Rupie bei Ihnen ankommt — Ihr Online-Erlös liegt dann deutlich unter Ihrem Preis im Lokal.",
+          "Dieser Rechner dreht die übliche Provisionsrechnung um: geben Sie ein, was Sie pro Gericht wirklich behalten wollen, dazu die Gebühren Ihrer Plattform, und er löst nach dem Listenpreis auf, der Sie dorthin bringt. Nutzen Sie ihn, wenn Sie ein neues Gericht einstellen oder eine Plattform ihre Provisionsstufe ändert.",
+          "Das ist ein vereinfachtes Modell — es nimmt an, dass Provision und Zahlungsgebühren auf den Listenpreis berechnet werden und dass dieser Listenpreis die von Ihnen erhobene Steuer enthält. Die Verträge der Plattformen unterscheiden sich, prüfen Sie das Ergebnis daher gegen eine echte Auszahlungsabrechnung, bevor Sie neue Menüpreise ausrollen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Online-Menüpreisen",
+        "items": [
+          {
+            "question": "Warum liegt der zu listende Preis über meinem Preis im Lokal?",
+            "answer": "Weil Provision, Steuer auf diese Provision, Zahlungsgebühren und die fällige Umsatzsteuer alle vom Listenpreis abgezogen werden, bevor Sie Geld erhalten. Damit online dasselbe übrig bleibt wie an der Theke, muss der Listenpreis all diese Abzüge tragen."
+          },
+          {
+            "question": "Wird die Provision wirklich auf den Preis inklusive Steuer berechnet?",
+            "answer": "Das hängt von der Plattform und Ihrem Vertrag ab — manche berechnen die Provision auf den Nettowert, andere auf den vollen Listenpreis. Dieser Rechner nimmt an, dass Provision und Zahlungsgebühren auf den Listenpreis anfallen; das ist der häufigere und vorsichtigere Fall. Prüfen Sie Ihre Auszahlungsabrechnung, was für Sie gilt."
+          },
+          {
+            "question": "Was, wenn kein Listenpreis alle Gebühren deckt?",
+            "answer": "Ergeben Provision, Steuer und Gebühren zusammen 100% oder mehr des Listenpreises, bringt kein Preis Ihren Zielbetrag — der Rechner weist darauf hin, damit Sie die Online-Marge des Gerichts überdenken statt einen Preis zu raten."
+          },
+          {
+            "question": "Kann Setu Dine diese Preise auf meine Lieferplattformen übertragen?",
+            "answer": "Ja. Mit Setu Dine verwalten Sie Menüpreise für das Lokal und mehrere Plattformen auf einem Bildschirm, sodass geänderte Preise überall gleichzeitig ausgehen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Alle Plattformen auf einem Bildschirm",
+        "subtext": "Setu Dine bündelt Bestellungen aus allen Ihren Lieferplattformen in einer einzigen Küchenansicht.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Rezeptkalkulations-Rechner",

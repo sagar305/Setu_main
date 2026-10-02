@@ -690,7 +690,59 @@
     },
     {
       "name": "Calculadora de preço de cardápio online",
-      "shortDescription": "Descubra o preço a publicar nos aplicativos de entrega para manter seu valor-alvo após comissão e imposto."
+      "shortDescription": "Descubra o preço a publicar nos aplicativos de entrega para manter seu valor-alvo após comissão e imposto.",
+      "seo": {
+        "title": "Calculadora de preço de menu para apps de entrega",
+        "description": "Calculadora de preço de menu online gratuita para restaurantes. Informe quanto quer receber e descubra o preço a publicar que cobre comissão, imposto e taxas.",
+        "keywords": [
+          "calculadora de preço de menu do Zomato",
+          "calculadora de preço do Swiggy",
+          "preço de menu online depois da comissão",
+          "calculadora de preços para apps de entrega",
+          "calculadora de comissão inversa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de preço de menu online",
+        "headline": "Calculadora de preço de menu online",
+        "subheadline": "Diga quanto você quer receber de fato por um pedido online e nós calculamos o preço que precisa publicar no aplicativo."
+      },
+      "about": {
+        "headline": "Calcule de trás para frente a partir do que quer receber",
+        "paragraphs": [
+          "Se você publicar online o mesmo preço que cobra no balcão, a comissão, o imposto sobre essa comissão, a taxa do gateway e o imposto devido na venda consomem o valor antes de você ver um centavo — e o que sobra online fica bem abaixo do seu preço no salão.",
+          "Esta calculadora inverte a conta usual de comissão: informe quanto quer realmente guardar por item, junto com as taxas da sua plataforma, e ela resolve o preço publicado que chega lá. Use sempre que cadastrar um item novo em um app ou a plataforma mudar a faixa de comissão.",
+          "É um modelo simplificado: assume que comissão e taxa de gateway incidem sobre o preço publicado e que esse preço já inclui o imposto que você cobra no item. Os contratos dos apps variam, então confronte o resultado com um relatório de repasse real antes de aplicar os novos preços."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre preço de menu online",
+        "items": [
+          {
+            "question": "Por que o preço que devo publicar é maior que o do salão?",
+            "answer": "Porque comissão, imposto sobre essa comissão, taxa de gateway e o imposto devido na venda são descontados do preço publicado antes de você receber. Para sobrar online o mesmo que no balcão, o preço publicado precisa absorver todos esses descontos."
+          },
+          {
+            "question": "A comissão é cobrada mesmo sobre o preço com imposto incluído?",
+            "answer": "Depende da plataforma e do seu contrato: algumas cobram comissão sobre a base (antes do imposto), outras sobre o preço publicado inteiro. Esta calculadora assume que comissão e gateway incidem no preço publicado, o caso mais comum e mais conservador. Confira seu relatório de repasse para saber qual vale no seu caso."
+          },
+          {
+            "question": "E se nenhum preço publicado cobrir todas as taxas?",
+            "answer": "Se comissão, impostos e taxas somarem 100% ou mais do preço publicado, nenhum preço devolve o valor que você quer receber — a calculadora avisa, para você repensar a margem online do item em vez de chutar um preço."
+          },
+          {
+            "question": "O Setu Dine sincroniza esses preços com meus apps de entrega?",
+            "answer": "Sim. O Setu Dine permite gerenciar os preços do menu do salão e de vários apps em uma única tela, então os preços atualizados saem para todos os canais de uma vez."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gerencie todos os apps em uma só tela",
+        "subtext": "O Setu Dine reúne os pedidos de todas as suas plataformas de entrega em uma única visão de cozinha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ficha técnica de receitas",

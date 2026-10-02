@@ -690,7 +690,59 @@
     },
     {
       "name": "Calculateur de prix au menu en ligne",
-      "shortDescription": "Trouvez le prix à publier sur les applis de livraison pour conserver votre montant cible après commission et taxes."
+      "shortDescription": "Trouvez le prix à publier sur les applis de livraison pour conserver votre montant cible après commission et taxes.",
+      "seo": {
+        "title": "Calculateur de prix de menu pour applis de livraison",
+        "description": "Calculateur de prix de menu en ligne gratuit. Indiquez ce que vous voulez toucher et trouvez le prix à afficher qui couvre commission, taxe et frais.",
+        "keywords": [
+          "calculateur de prix de menu Zomato",
+          "calculateur de prix Swiggy",
+          "prix de menu en ligne après commission",
+          "calculateur de tarification pour applis de livraison",
+          "calculateur de commission inversée"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de prix de menu en ligne",
+        "headline": "Calculateur de prix de menu en ligne",
+        "subheadline": "Dites-nous ce que vous voulez réellement toucher sur une commande en ligne, et nous calculons le prix à afficher dans l'appli."
+      },
+      "about": {
+        "headline": "Partez du montant que vous voulez toucher",
+        "paragraphs": [
+          "Si vous affichez en ligne le même prix qu'au comptoir, la commission, la taxe sur cette commission, les frais de paiement et la taxe due sur la vente grignotent le montant avant que vous ne touchiez une roupie : ce qu'il vous reste en ligne finit bien en dessous de votre prix en salle.",
+          "Ce calculateur inverse le calcul habituel de la commission : saisissez ce que vous voulez vraiment garder par plat, ainsi que les frais de votre plateforme, et il détermine le prix affiché qui vous y amène. Utilisez-le chaque fois que vous ajoutez un plat sur une appli ou qu'une plateforme change son palier de commission.",
+          "C'est un modèle simplifié : il suppose que la commission et les frais de paiement s'appliquent au prix affiché et que ce prix inclut déjà la taxe que vous facturez sur le plat. Les contrats des applis diffèrent, donc recoupez le résultat avec un vrai relevé de versement avant de déployer de nouveaux prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les prix de menu en ligne",
+        "items": [
+          {
+            "question": "Pourquoi le prix à afficher est-il plus élevé que mon prix en salle ?",
+            "answer": "Parce que la commission, la taxe sur cette commission, les frais de paiement et la taxe due sur la vente sont déduits du prix affiché avant que vous ne soyez payé. Pour toucher en ligne autant qu'au comptoir, le prix affiché doit absorber toutes ces retenues."
+          },
+          {
+            "question": "La commission porte-t-elle vraiment sur le prix taxes incluses ?",
+            "answer": "Cela dépend de la plateforme et de votre contrat : certaines prélèvent la commission sur la base hors taxe, d'autres sur le prix affiché entier. Ce calculateur suppose que la commission et les frais de paiement s'appliquent au prix affiché, le cas le plus courant et le plus prudent. Vérifiez votre relevé de versement pour savoir ce qui vous concerne."
+          },
+          {
+            "question": "Et si aucun prix affiché ne couvre tous les frais ?",
+            "answer": "Si commission, taxes et frais atteignent ensemble 100% ou plus du prix affiché, aucun prix ne permet d'obtenir le montant visé : le calculateur le signale, pour que vous revoyiez la marge en ligne du plat au lieu de deviner un prix."
+          },
+          {
+            "question": "Setu Dine peut-il synchroniser ces prix avec mes plateformes de livraison ?",
+            "answer": "Oui. Setu Dine permet de gérer les prix du menu pour la salle et plusieurs applis depuis un seul écran : les prix mis à jour partent partout en même temps."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gérez toutes les applis depuis un seul écran",
+        "subtext": "Setu Dine rassemble les commandes de toutes vos plateformes de livraison dans une seule vue cuisine.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de coût de recette",

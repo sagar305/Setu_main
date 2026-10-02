@@ -690,7 +690,59 @@
     },
     {
       "name": "Kalkulator harga menu online",
-      "shortDescription": "Temukan harga yang perlu dipasang di aplikasi pesan antar agar target Anda tetap utuh setelah komisi dan pajak."
+      "shortDescription": "Temukan harga yang perlu dipasang di aplikasi pesan antar agar target Anda tetap utuh setelah komisi dan pajak.",
+      "seo": {
+        "title": "Kalkulator Harga Menu untuk Aplikasi Pesan-Antar",
+        "description": "Kalkulator harga menu online gratis untuk restoran. Masukkan jumlah yang ingin Anda terima, lalu temukan harga tayang yang menutup komisi dan pajak.",
+        "keywords": [
+          "kalkulator harga menu Zomato",
+          "kalkulator harga Swiggy",
+          "harga menu online setelah komisi",
+          "kalkulator harga aplikasi pesan-antar",
+          "kalkulator komisi terbalik"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Harga Menu Online",
+        "headline": "Kalkulator Harga Menu Online",
+        "subheadline": "Sebutkan berapa yang benar-benar ingin Anda terima dari pesanan online, dan kami hitung harga yang perlu Anda tayangkan di aplikasi."
+      },
+      "about": {
+        "headline": "Hitung mundur dari target penerimaan Anda",
+        "paragraphs": [
+          "Kalau Anda menayangkan harga online yang sama dengan harga di kasir, komisi, pajak atas komisi itu, biaya gateway, dan pajak yang Anda setor atas penjualan semuanya memotongnya sebelum satu rupee pun sampai ke tangan Anda — sehingga penerimaan online jatuh jauh di bawah harga makan di tempat.",
+          "Kalkulator ini membalik perhitungan komisi yang biasa: masukkan jumlah yang benar-benar ingin Anda simpan per item, beserta biaya platform Anda, dan ia mencari harga tayang yang membawa Anda ke angka itu. Pakai setiap kali menambahkan item baru ke aplikasi atau platform mengubah tingkat komisinya.",
+          "Ini model yang disederhanakan — diasumsikan komisi dan biaya gateway dikenakan atas harga tayang, dan harga tayang itu sudah termasuk pajak yang Anda pungut atas item. Perjanjian tiap aplikasi berbeda, jadi cocokkan hasilnya dengan laporan pembayaran yang nyata sebelum menerapkan harga menu baru."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ harga menu online",
+        "items": [
+          {
+            "question": "Kenapa harga yang perlu saya tayangkan lebih tinggi dari harga makan di tempat?",
+            "answer": "Karena komisi, pajak atas komisi itu, biaya gateway, dan pajak yang Anda setor atas penjualan semuanya dipotong dari harga tayang sebelum Anda dibayar. Agar penerimaan online sama dengan di kasir, harga tayang harus menanggung semua potongan itu."
+          },
+          {
+            "question": "Apakah komisi benar-benar dihitung dari harga yang sudah termasuk pajak?",
+            "answer": "Bergantung pada platform dan perjanjian Anda — ada yang menghitung komisi dari nilai dasar (sebelum pajak), ada yang dari seluruh harga tayang. Kalkulator ini mengasumsikan komisi dan biaya gateway berlaku atas harga tayang, yang lebih umum dan lebih hati-hati. Periksa laporan pembayaran untuk memastikan mana yang berlaku bagi Anda."
+          },
+          {
+            "question": "Bagaimana kalau tidak ada harga tayang yang bisa menutup semua biaya?",
+            "answer": "Kalau komisi, pajak, dan biaya bersama-sama mencapai 100% atau lebih dari harga tayang, tidak ada harga yang bisa mengembalikan target penerimaan Anda — kalkulator akan menandainya, supaya Anda meninjau ulang margin online item itu alih-alih menebak harga."
+          },
+          {
+            "question": "Bisakah Setu Dine menyinkronkan harga ini ke platform pesan-antar saya?",
+            "answer": "Bisa. Setu Dine memungkinkan Anda mengelola harga menu untuk makan di tempat dan beberapa aplikasi dari satu layar, jadi harga yang diperbarui terkirim ke semua kanal sekaligus."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kelola semua aplikasi dari satu layar",
+        "subtext": "Setu Dine menyatukan pesanan dari semua platform pesan-antar Anda dalam satu tampilan dapur.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator biaya resep",
