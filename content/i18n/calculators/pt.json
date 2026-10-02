@@ -268,7 +268,57 @@
     },
     {
       "name": "Calculadora de prestação de empréstimo",
-      "shortDescription": "Estime a prestação mensal, os juros totais e o total pago em um empréstimo empresarial."
+      "shortDescription": "Estime a prestação mensal, os juros totais e o total pago em um empréstimo empresarial.",
+      "seo": {
+        "title": "Calculadora de EMI de Empréstimo — Grátis | Setu",
+        "description": "Calculadora gratuita de EMI de empréstimo empresarial. Informe o valor, a taxa de juros e o prazo para ver a prestação mensal, os juros e o total pago.",
+        "keywords": [
+          "calculadora de EMI",
+          "calculadora de empréstimo empresarial",
+          "calculadora de prestação",
+          "calculadora de financiamento"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de EMI",
+        "headline": "Calculadora de EMI de Empréstimo Empresarial",
+        "subheadline": "Informe o valor do empréstimo, a taxa de juros e o prazo para ver a prestação mensal, os juros totais e o total pago."
+      },
+      "about": {
+        "headline": "Saiba o valor mensal antes de assinar",
+        "paragraphs": [
+          "Seja capital de giro, financiamento de equipamentos ou uma linha de crédito para abrir uma nova loja, a prestação é o número que realmente aparece contra o seu fluxo de caixa todos os meses. Comparar propostas apenas pela taxa de juros pode enganar quando o prazo e os custos de contratação entram na conta.",
+          "Informe o valor do empréstimo, a taxa de juros anual e o prazo para obter a prestação pela fórmula padrão de saldo decrescente, junto com os juros totais que você pagará ao longo do empréstimo — útil para comparar duas propostas lado a lado."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de EMI",
+        "items": [
+          {
+            "question": "Qual é a fórmula da prestação?",
+            "answer": "Prestação = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), em que P é o valor do empréstimo, r é a taxa de juros mensal (taxa anual ÷ 12 ÷ 100) e n é o número de prestações mensais."
+          },
+          {
+            "question": "Isso inclui taxas de contratação ou outros encargos?",
+            "answer": "Não — o cálculo considera apenas o principal, a taxa de juros e o prazo. Some separadamente as taxas de contratação e outros encargos ao comparar o custo real de propostas diferentes."
+          },
+          {
+            "question": "A taxa que devo informar é a mesma que o banco anuncia?",
+            "answer": "Use a taxa de juros anual informada pelo credor. Se o credor anuncia uma taxa fixa em vez de uma taxa sobre saldo decrescente, a prestação real será diferente da mostrada aqui, porque empréstimos com taxa fixa cobram juros sobre todo o principal durante todo o prazo."
+          },
+          {
+            "question": "Como um prazo mais curto afeta os juros totais?",
+            "answer": "Um prazo mais curto significa prestação maior, mas juros totais bem menores, já que passa menos tempo com juros incidindo sobre o saldo devedor. Um prazo mais longo reduz a prestação, mas aumenta os juros pagos no total."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vai abrir uma nova loja? Podemos ajudar no planejamento",
+        "subtext": "Fale com a gente sobre o que é preciso para abrir e operar um novo ponto com o Setu Dine funcionando desde o primeiro dia.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de giro de mesas",

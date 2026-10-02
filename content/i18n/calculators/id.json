@@ -268,7 +268,57 @@
     },
     {
       "name": "Kalkulator cicilan pinjaman usaha",
-      "shortDescription": "Perkirakan cicilan bulanan, total bunga, dan total pembayaran pinjaman usaha."
+      "shortDescription": "Perkirakan cicilan bulanan, total bunga, dan total pembayaran pinjaman usaha.",
+      "seo": {
+        "title": "Kalkulator Angsuran Pinjaman Usaha — Gratis | Setu",
+        "description": "Kalkulator angsuran pinjaman usaha gratis. Masukkan jumlah pinjaman, suku bunga, dan tenor untuk melihat angsuran bulanan, total bunga, dan total bayar.",
+        "keywords": [
+          "kalkulator angsuran",
+          "kalkulator pinjaman usaha",
+          "hitung angsuran bulanan",
+          "kalkulator cicilan pinjaman"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Angsuran",
+        "headline": "Kalkulator Angsuran Pinjaman Usaha",
+        "subheadline": "Masukkan jumlah pinjaman, suku bunga, dan tenor untuk melihat angsuran bulanan, total bunga, dan total pembayaran."
+      },
+      "about": {
+        "headline": "Ketahui angka bulanannya sebelum tanda tangan",
+        "paragraphs": [
+          "Entah itu pinjaman modal kerja, pembiayaan mesin, atau plafon kredit untuk membuka gerai baru, angsuranlah angka yang benar-benar berhadapan dengan arus kas Anda setiap bulan. Membandingkan penawaran pinjaman hanya dari suku bunganya bisa menyesatkan begitu tenor dan biaya provisi ikut diperhitungkan.",
+          "Masukkan jumlah pinjaman, suku bunga tahunan, dan tenor untuk mendapat angsuran dengan rumus saldo menurun yang standar, lengkap dengan total bunga yang Anda bayar sepanjang masa pinjaman — berguna untuk membandingkan dua penawaran berdampingan."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator angsuran pinjaman",
+        "items": [
+          {
+            "question": "Apa rumus angsuran bulanan?",
+            "answer": "Angsuran = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), dengan P adalah jumlah pinjaman, r adalah suku bunga bulanan (bunga tahunan ÷ 12 ÷ 100), dan n adalah jumlah angsuran bulanan."
+          },
+          {
+            "question": "Apakah ini sudah termasuk biaya provisi atau biaya lain?",
+            "answer": "Tidak — perhitungan ini hanya memakai pokok pinjaman, suku bunga, dan tenor. Tambahkan biaya provisi dan biaya lain secara terpisah saat membandingkan biaya sebenarnya dari beberapa penawaran."
+          },
+          {
+            "question": "Apakah suku bunga yang saya masukkan sama dengan yang disebut bank?",
+            "answer": "Gunakan suku bunga tahunan seperti yang disebut pemberi pinjaman. Jika yang disebut adalah bunga flat, bukan bunga saldo menurun, angsuran sebenarnya akan berbeda dari yang ditampilkan di sini, karena bunga flat dihitung atas seluruh pokok selama tenor."
+          },
+          {
+            "question": "Bagaimana tenor yang lebih pendek mempengaruhi total bunga?",
+            "answer": "Tenor lebih pendek berarti angsuran lebih besar tetapi total bunga jauh lebih kecil, karena waktu bunga berjalan atas saldo terutang lebih singkat. Tenor lebih panjang menurunkan angsuran tetapi menaikkan total bunga yang dibayar."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Mau buka gerai baru? Kami bisa bantu merencanakannya",
+        "subtext": "Bicara dengan kami tentang apa yang dibutuhkan untuk membuka dan menjalankan lokasi baru dengan Setu Dine siap sejak hari pertama.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator tingkat perputaran meja",

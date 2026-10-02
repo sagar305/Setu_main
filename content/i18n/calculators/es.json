@@ -268,7 +268,57 @@
     },
     {
       "name": "Calculadora de cuota de préstamo (EMI)",
-      "shortDescription": "Estima la cuota mensual, los intereses totales y el pago total de un préstamo de negocio."
+      "shortDescription": "Estima la cuota mensual, los intereses totales y el pago total de un préstamo de negocio.",
+      "seo": {
+        "title": "Calculadora de cuota de préstamo — gratis | Setu",
+        "description": "Calculadora de cuota de préstamo de negocio gratuita. Introduce importe, tipo de interés y plazo para ver la cuota mensual, los intereses y el total a pagar.",
+        "keywords": [
+          "calculadora de cuota de préstamo",
+          "calculadora de préstamo de negocio",
+          "calculadora de cuotas",
+          "calculadora de préstamos"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de cuota",
+        "headline": "Calculadora de cuota de préstamo de negocio",
+        "subheadline": "Introduce el importe, el tipo de interés y el plazo para ver tu cuota mensual, los intereses totales y el total a devolver."
+      },
+      "about": {
+        "headline": "Conoce la cifra mensual antes de firmar",
+        "paragraphs": [
+          "Sea un préstamo de circulante, la financiación de un equipo o una línea de crédito para abrir un local nuevo, la cuota es la cifra que aparece de verdad frente a tu tesorería cada mes. Comparar ofertas solo por el tipo de interés puede engañar en cuanto entran en juego el plazo y los gastos de apertura.",
+          "Introduce el importe, el tipo de interés anual y el plazo para obtener la cuota con la fórmula estándar de saldo decreciente, junto con los intereses totales que pagarás a lo largo del préstamo: útil para poner dos ofertas una al lado de la otra."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de cuota",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula de la cuota?",
+            "answer": "Cuota = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), donde P es el importe del préstamo, r el tipo de interés mensual (tipo anual ÷ 12 ÷ 100) y n el número de cuotas mensuales."
+          },
+          {
+            "question": "¿Incluye comisiones de apertura u otros gastos?",
+            "answer": "No: calcula la cuota solo a partir del principal, el tipo de interés y el plazo. Suma por separado las comisiones y gastos cuando compares el coste real de distintas ofertas."
+          },
+          {
+            "question": "¿El tipo que debo introducir es el mismo que cita el banco?",
+            "answer": "Usa el tipo de interés anual tal como lo da la entidad. Si en vez de un tipo sobre saldo decreciente te citan un tipo fijo sobre el capital inicial, la cuota real será distinta de la que muestra esta calculadora, porque en ese caso los intereses se cobran sobre todo el principal durante todo el plazo."
+          },
+          {
+            "question": "¿Cómo afecta un plazo más corto a los intereses totales?",
+            "answer": "Un plazo más corto implica una cuota más alta pero bastante menos interés total, porque pasa menos tiempo acumulando intereses sobre el saldo pendiente. Un plazo más largo baja la cuota pero aumenta los intereses pagados en total."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "¿Abres un local nuevo? Podemos ayudarte a planearlo",
+        "subtext": "Hablemos de lo que hace falta para abrir y hacer funcionar un local nuevo con Setu Dine desde el primer día.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de rotación de mesas",

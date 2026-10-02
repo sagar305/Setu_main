@@ -268,7 +268,57 @@
     },
     {
       "name": "Calculateur de mensualité de prêt",
-      "shortDescription": "Estimez votre mensualité, les intérêts totaux et le coût total d'un prêt professionnel."
+      "shortDescription": "Estimez votre mensualité, les intérêts totaux et le coût total d'un prêt professionnel.",
+      "seo": {
+        "title": "Calculateur de mensualité de prêt — gratuit | Setu",
+        "description": "Calculateur gratuit de mensualité de prêt professionnel. Saisissez le montant, le taux et la durée pour voir la mensualité, les intérêts et le total dû.",
+        "keywords": [
+          "calculateur de mensualité",
+          "calculateur de prêt professionnel",
+          "calculateur d'échéance",
+          "simulateur de prêt"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de mensualité",
+        "headline": "Calculateur de mensualité de prêt professionnel",
+        "subheadline": "Saisissez le montant, le taux d'intérêt et la durée pour voir votre mensualité, les intérêts totaux et le total remboursé."
+      },
+      "about": {
+        "headline": "Connaître le chiffre mensuel avant de signer",
+        "paragraphs": [
+          "Qu'il s'agisse d'un prêt de trésorerie, du financement d'un équipement ou d'une ligne de crédit pour ouvrir un nouvel établissement, la mensualité est le chiffre qui se présente réellement devant votre trésorerie chaque mois. Comparer des offres sur le seul taux d'intérêt peut tromper dès que la durée et les frais de dossier entrent en jeu.",
+          "Saisissez le montant, le taux annuel et la durée pour obtenir la mensualité selon la formule classique du capital restant dû, ainsi que les intérêts totaux payés sur la vie du prêt — pratique pour mettre deux offres côte à côte."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de mensualité",
+        "items": [
+          {
+            "question": "Quelle est la formule de la mensualité ?",
+            "answer": "Mensualité = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), où P est le montant du prêt, r le taux mensuel (taux annuel ÷ 12 ÷ 100) et n le nombre de mensualités."
+          },
+          {
+            "question": "Les frais de dossier sont-ils inclus ?",
+            "answer": "Non : le calcul ne porte que sur le capital, le taux et la durée. Ajoutez séparément les frais de dossier et autres coûts quand vous comparez le coût réel de plusieurs offres."
+          },
+          {
+            "question": "Le taux à saisir est-il celui annoncé par la banque ?",
+            "answer": "Utilisez le taux annuel tel que le prêteur l'annonce. Si on vous annonce un taux fixe sur le capital initial plutôt qu'un taux sur capital restant dû, la mensualité réelle différera de celle affichée ici, car les intérêts portent alors sur tout le capital pendant toute la durée."
+          },
+          {
+            "question": "Quel effet une durée plus courte a-t-elle sur les intérêts totaux ?",
+            "answer": "Une durée plus courte signifie une mensualité plus élevée mais nettement moins d'intérêts au total, puisque les intérêts courent moins longtemps sur le capital restant. Une durée plus longue abaisse la mensualité mais augmente les intérêts payés en tout."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous ouvrez un nouvel établissement ? Parlons-en",
+        "subtext": "Discutons de ce qu'il faut pour ouvrir et faire tourner un nouveau point de vente avec Setu Dine en place dès le premier jour.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de rotation des tables",

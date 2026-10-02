@@ -268,7 +268,57 @@
     },
     {
       "name": "Kreditraten-Rechner",
-      "shortDescription": "Schätzen Sie Monatsrate, Gesamtzinsen und Gesamtzahlung eines Geschäftskredits."
+      "shortDescription": "Schätzen Sie Monatsrate, Gesamtzinsen und Gesamtzahlung eines Geschäftskredits.",
+      "seo": {
+        "title": "Kredit-Rechner für Unternehmen — kostenlos | Setu",
+        "description": "Kostenloser Rechner für Firmenkredite. Kreditbetrag, Zinssatz und Laufzeit eingeben und sofort Monatsrate, Gesamtzinsen und Gesamtzahlung sehen.",
+        "keywords": [
+          "Kreditrechner",
+          "Firmenkredit Rechner",
+          "Monatsrate berechnen",
+          "Ratenrechner Unternehmen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kreditrechner",
+        "headline": "Kredit-Rechner für Unternehmen",
+        "subheadline": "Geben Sie Kreditbetrag, Zinssatz und Laufzeit ein und sehen Sie Ihre Monatsrate, die Gesamtzinsen und die Gesamtzahlung."
+      },
+      "about": {
+        "headline": "Kennen Sie die Monatsrate, bevor Sie unterschreiben",
+        "paragraphs": [
+          "Ob Betriebsmittelkredit, Maschinenfinanzierung oder Kreditlinie für eine neue Filiale — die Monatsrate ist die Zahl, die jeden Monat tatsächlich gegen Ihren Cashflow läuft. Kreditangebote nur über den Zinssatz zu vergleichen, kann in die Irre führen, sobald Laufzeit und Bearbeitungskosten mit einfließen.",
+          "Geben Sie Kreditbetrag, Jahreszinssatz und Laufzeit ein und erhalten Sie die Rate nach der üblichen Annuitätenformel mit fallendem Restsaldo, dazu die Gesamtzinsen über die Laufzeit — praktisch, um zwei Angebote direkt nebeneinander zu vergleichen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Kreditrechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Monatsrate?",
+            "answer": "Rate = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), wobei P der Kreditbetrag ist, r der monatliche Zinssatz (Jahreszins ÷ 12 ÷ 100) und n die Anzahl der monatlichen Raten."
+          },
+          {
+            "question": "Sind Bearbeitungsgebühren oder andere Kosten enthalten?",
+            "answer": "Nein — gerechnet wird nur mit Kreditbetrag, Zinssatz und Laufzeit. Bearbeitungsgebühren und sonstige Kosten rechnen Sie separat dazu, wenn Sie die tatsächlichen Kosten verschiedener Angebote vergleichen."
+          },
+          {
+            "question": "Ist der einzugebende Zinssatz derselbe, den die Bank nennt?",
+            "answer": "Verwenden Sie den Jahreszinssatz, den der Kreditgeber nennt. Nennt er einen Festzins statt eines Zinses auf den fallenden Restsaldo, weicht die tatsächliche Rate von der hier gezeigten ab, denn bei Festzinskrediten fallen Zinsen über die gesamte Laufzeit auf den vollen Kreditbetrag an."
+          },
+          {
+            "question": "Wie wirkt sich eine kürzere Laufzeit auf die Gesamtzinsen aus?",
+            "answer": "Eine kürzere Laufzeit bedeutet eine höhere Rate, aber deutlich geringere Gesamtzinsen, weil weniger Zeit vergeht, in der Zinsen auf den Restsaldo anfallen. Eine längere Laufzeit senkt die Rate, erhöht aber die insgesamt gezahlten Zinsen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Neue Filiale geplant? Wir helfen bei der Planung",
+        "subtext": "Sprechen Sie mit uns darüber, was es braucht, um einen neuen Standort zu eröffnen und zu führen — mit Setu Dine ab dem ersten Tag.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Tischauslastungs-Rechner",
