@@ -456,6 +456,33 @@ describe("item pages: one per calculator, one per tool", () => {
   });
 
   /**
+   * The listing name is what a reader clicks, what the suggested-tools strip
+   * shows and what the JSON-LD publishes; the headline is the page's h1. When a
+   * translation gives the same tool two names the reader is told they landed
+   * somewhere else, so the two have to agree in every language they agree in in
+   * English — the invoice generator and two calculators deliberately differ.
+   */
+  it("gives each item one name in each language, h1 and listing alike", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ) as Record<string, any>;
+
+      for (const [index, item] of english.items.entries()) {
+        if (item.name !== item.hero?.headline) continue;
+
+        for (const lang of itemLocalesFor(key, item.slug)) {
+          const translated = JSON.parse(
+            fs.readFileSync(path.join(process.cwd(), "content", "i18n", key, `${lang}.json`), "utf8"),
+          ) as Record<string, any>;
+          const entry = translated.items[index];
+          expect(entry.hero.headline, `${key}/${lang} ${item.slug}`).toBe(entry.name);
+        }
+      }
+    }
+  });
+
+  /**
    * A route is prerendered per (language, slug), and the tool it renders comes
    * from the registry — a slug missing from it would build a page with no
    * calculator on it.

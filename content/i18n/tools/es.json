@@ -113,15 +113,117 @@
     },
     {
       "name": "Registro de stock",
-      "shortDescription": "Existencias al día, ajustes e historial de movimientos, compartido con tu TPV."
+      "shortDescription": "Existencias al día, ajustes e historial de movimientos, compartido con tu TPV.",
+      "seo": {
+        "title": "Registro de stock gratis — inventario en vivo",
+        "description": "Consulta el stock en tiempo real, registra entradas y salidas y revisa cada movimiento — compartido con tu TPV de navegador Setu. Gratis y sin registro.",
+        "keywords": [
+          "registro de stock",
+          "registro de inventario",
+          "control de stock gratis",
+          "registro de entradas y salidas",
+          "inventario sin conexión"
+        ],
+        "ogTitle": "Registro de stock",
+        "ogDescription": "Consulta el stock en tiempo real, registra entradas y salidas y revisa cada movimiento — compartido con tu TPV de navegador Setu. Gratis y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Registro de stock",
+        "headline": "Registro de stock",
+        "subheadline": "Stock en tiempo real, ajustes rápidos y un historial completo de movimientos — una sola verdad con tu TPV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿De dónde salen los datos de stock?",
+            "answer": "De tu espacio de trabajo Setu en este dispositivo: los mismos productos y el mismo stock que usa el TPV de navegador. Hay una sola fuente de verdad: un ajuste hecho aquí se ve al instante en el TPV, y cada venta del TPV aparece aquí en el historial de movimientos."
+          },
+          {
+            "question": "¿Se sube a algún sitio mi inventario?",
+            "answer": "No. Todo se queda en tu navegador, en tu dispositivo. Sin registro, sin nube y sin servidor."
+          },
+          {
+            "question": "¿Puedo exportar el registro?",
+            "answer": "Sí: descarga la lista de stock actual como archivo CSV, que se abre en Excel o Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Registro de compras",
-      "shortDescription": "Anota las facturas de proveedor y actualiza el stock con una sola confirmación."
+      "shortDescription": "Anota las facturas de proveedor y actualiza el stock con una sola confirmación.",
+      "seo": {
+        "title": "Registro de compras gratis — facturas de proveedor",
+        "description": "Registra las facturas de compra por proveedor, vincula los artículos a tus productos y el stock se actualiza solo. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "registro de compras",
+          "registro de facturas de compra",
+          "compras a proveedores",
+          "asiento de compra gratis",
+          "registro de compras de stock"
+        ],
+        "ogTitle": "Registro de compras",
+        "ogDescription": "Registra las facturas de compra por proveedor, vincula los artículos a tus productos y el stock se actualiza solo. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Registro de compras",
+        "headline": "Registro de compras",
+        "subheadline": "Registra facturas de proveedor, vincula productos y actualiza el stock con una sola confirmación."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Las compras actualizan el stock de mis productos?",
+            "answer": "Sí. Vincula las líneas de la compra con tus productos guardados y, tras una confirmación, las cantidades compradas se suman al stock: se ven al instante en el Registro de stock y en el TPV de navegador."
+          },
+          {
+            "question": "¿Tengo que volver a escribir los datos del proveedor?",
+            "answer": "No. Los proveedores guardados en el Libro de proveedores aparecen aquí en un desplegable. Guarda un proveedor una vez y reutilízalo siempre."
+          },
+          {
+            "question": "¿Mis datos de compra son privados?",
+            "answer": "Del todo. Todo se guarda en tu navegador, en tu dispositivo: sin registro, sin nube, y puedes exportar un CSV cuando quieras."
+          }
+        ]
+      }
     },
     {
       "name": "Libro de proveedores",
-      "shortDescription": "Todos tus proveedores en un sitio, reutilizados por el registro de compras."
+      "shortDescription": "Todos tus proveedores en un sitio, reutilizados por el registro de compras.",
+      "seo": {
+        "title": "Libro de proveedores gratis — contactos y GSTIN",
+        "description": "Guarda los datos de todos tus proveedores en un solo sitio: contacto, GSTIN, direcciones y notas. Gratis, sin conexión, sin registro y reutilizable.",
+        "keywords": [
+          "libro de proveedores",
+          "gestión de proveedores gratis",
+          "contactos de proveedores",
+          "registro de GSTIN de proveedor",
+          "registro de proveedores"
+        ],
+        "ogTitle": "Libro de proveedores",
+        "ogDescription": "Guarda los datos de todos tus proveedores en un solo sitio: contacto, GSTIN, direcciones y notas. Gratis, sin conexión, sin registro y reutilizable."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Libro de proveedores",
+        "headline": "Libro de proveedores",
+        "subheadline": "Todos tus proveedores en un sitio: se guardan una vez y los reutiliza cada herramienta de Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Dónde se guardan los datos de mis proveedores?",
+            "answer": "En tu navegador, en tu dispositivo, dentro de tu espacio de trabajo Setu. No se sube nada: sin registro y sin nube."
+          },
+          {
+            "question": "¿Qué otras herramientas usan mis proveedores?",
+            "answer": "El Registro de compras elige los proveedores directamente de este libro, así que nunca vuelves a escribir sus datos al registrar una factura de compra."
+          },
+          {
+            "question": "¿Puedo exportar mis proveedores?",
+            "answer": "Sí: exporta el libro entero como CSV, que se abre en Excel o Google Sheets cuando quieras."
+          }
+        ]
+      }
     },
     {
       "name": "Control de gastos",
@@ -137,7 +239,42 @@
     },
     {
       "name": "Libro de clientes",
-      "shortDescription": "Cuenta de fiado digital: crédito, cobros y saldo por cliente."
+      "shortDescription": "Cuenta de fiado digital: crédito, cobros y saldo por cliente.",
+      "seo": {
+        "title": "Libro de clientes gratis — crédito y saldos",
+        "description": "Libro de crédito digital: lleva el crédito dado y los pagos recibidos de cada cliente, con saldos al día. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "libro de crédito",
+          "cuenta corriente de clientes",
+          "libro de deudas",
+          "libro de cuentas gratis",
+          "control de crédito de clientes",
+          "udhaar khata"
+        ],
+        "ogTitle": "Libro de clientes",
+        "ogDescription": "Libro de crédito digital: lleva el crédito dado y los pagos recibidos de cada cliente, con saldos al día. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Libro de clientes",
+        "headline": "Libro de clientes",
+        "subheadline": "Tu libreta de crédito, en digital: crédito, pagos y saldo de cada cliente."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un libro de crédito digital?",
+            "answer": "La versión digital de la libreta de toda la vida: anota el crédito que das a un cliente y los pagos que hace, y el saldo de cada cliente se calcula solo."
+          },
+          {
+            "question": "¿Usa los clientes que ya tengo?",
+            "answer": "Sí. Si usas el TPV de navegador o el Generador de facturas de Setu en este dispositivo, el libro usa esa misma libreta de clientes compartida: añade un cliente una vez y úsalo en todas partes."
+          },
+          {
+            "question": "¿Mi libro es privado?",
+            "answer": "Del todo. Todos los datos se quedan en tu navegador, en tu dispositivo: sin registro y sin nube. Exporta una copia en CSV cuando quieras."
+          }
+        ]
+      }
     },
     {
       "name": "Agenda de citas",
@@ -455,7 +592,7 @@
       "name": "Balance de sumas y saldos",
       "shortDescription": "Construido solo desde tus asientos: el saldo neto de cada cuenta, sumado y comprobado.",
       "seo": {
-        "title": "Balance de comprobación gratuito — online",
+        "title": "Balance de sumas y saldos gratuito — online",
         "description": "Un balance de comprobación generado solo a partir de tus asientos: el saldo neto deudor o acreedor de cada cuenta, sumado y verificado. Gratis, sin registro.",
         "keywords": [
           "balance de comprobación",
@@ -464,12 +601,12 @@
           "comprobación debe haber",
           "balance de comprobación contable"
         ],
-        "ogTitle": "Balance de comprobación",
+        "ogTitle": "Balance de sumas y saldos",
         "ogDescription": "Un balance de comprobación generado solo a partir de tus asientos: el saldo neto deudor o acreedor de cada cuenta, sumado y verificado. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Balance de comprobación",
-        "headline": "Balance de comprobación",
+        "eyebrow": "Herramienta gratuita — Balance de sumas y saldos",
+        "headline": "Balance de sumas y saldos",
         "subheadline": "El saldo neto de cada cuenta en su lado deudor o acreedor — sumado, comprobado y listo para exportar."
       },
       "faq": {

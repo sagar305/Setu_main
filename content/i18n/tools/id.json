@@ -113,15 +113,117 @@
     },
     {
       "name": "Buku stok",
-      "shortDescription": "Level stok langsung, penyesuaian, dan riwayat pergerakan — dipakai bersama POS Anda."
+      "shortDescription": "Level stok langsung, penyesuaian, dan riwayat pergerakan — dipakai bersama POS Anda.",
+      "seo": {
+        "title": "Buku stok gratis — stok real-time",
+        "description": "Lihat sisa stok real-time, catat barang masuk dan keluar, dan periksa setiap pergerakan — berbagi data dengan Kasir berbasis browser Setu. Gratis, offline.",
+        "keywords": [
+          "buku stok",
+          "catatan stok",
+          "manajemen stok gratis",
+          "catatan barang masuk keluar",
+          "pencatat stok offline"
+        ],
+        "ogTitle": "Buku stok",
+        "ogDescription": "Lihat sisa stok real-time, catat barang masuk dan keluar, dan periksa setiap pergerakan — berbagi data dengan Kasir berbasis browser Setu. Gratis, offline."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Buku stok",
+        "headline": "Buku stok",
+        "subheadline": "Sisa stok real-time, koreksi cepat, dan riwayat pergerakan lengkap — satu sumber data dengan kasir Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Dari mana data stok diambil?",
+            "answer": "Dari ruang kerja bisnis Setu Anda di perangkat ini — produk dan stok yang sama dengan yang dipakai Kasir berbasis browser. Datanya satu: koreksi di sini langsung terlihat di kasir, dan setiap penjualan di kasir muncul di riwayat pergerakan di sini."
+          },
+          {
+            "question": "Apakah data stok saya diunggah ke mana pun?",
+            "answer": "Tidak. Semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, tanpa server."
+          },
+          {
+            "question": "Bisakah buku stok diekspor?",
+            "answer": "Bisa — unduh daftar stok saat ini sebagai berkas CSV yang terbuka di Excel atau Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Buku pembelian",
-      "shortDescription": "Catat tagihan pemasok dan perbarui stok produk dengan satu konfirmasi."
+      "shortDescription": "Catat tagihan pemasok dan perbarui stok produk dengan satu konfirmasi.",
+      "seo": {
+        "title": "Buku pembelian gratis — nota pemasok",
+        "description": "Catat nota pembelian atas nama pemasok, hubungkan barang dengan produk Anda, dan stok diperbarui otomatis. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku pembelian",
+          "catatan nota pembelian",
+          "pembelian dari pemasok",
+          "pencatatan pembelian gratis",
+          "buku pembelian stok"
+        ],
+        "ogTitle": "Buku pembelian",
+        "ogDescription": "Catat nota pembelian atas nama pemasok, hubungkan barang dengan produk Anda, dan stok diperbarui otomatis. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Buku pembelian",
+        "headline": "Buku pembelian",
+        "subheadline": "Catat nota pemasok, hubungkan produk, dan perbarui stok dengan satu konfirmasi."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apakah pembelian memperbarui stok produk saya?",
+            "answer": "Ya. Hubungkan baris pembelian dengan produk yang sudah Anda simpan; setelah satu konfirmasi, jumlah yang dibeli ditambahkan ke stok — langsung terlihat di Buku stok dan di Kasir berbasis browser."
+          },
+          {
+            "question": "Apakah data pemasok harus ditulis ulang?",
+            "answer": "Tidak. Pemasok yang tersimpan di Buku pemasok muncul di daftar pilihan di sini. Simpan sekali, pakai selamanya."
+          },
+          {
+            "question": "Apakah data pembelian saya pribadi?",
+            "answer": "Sepenuhnya. Semuanya disimpan di browser pada perangkat Anda — tanpa pendaftaran, tanpa cloud, dan Anda bisa ekspor CSV kapan saja."
+          }
+        ]
+      }
     },
     {
       "name": "Buku pemasok",
-      "shortDescription": "Semua pemasok Anda di satu tempat — dipakai ulang oleh buku pembelian."
+      "shortDescription": "Semua pemasok Anda di satu tempat — dipakai ulang oleh buku pembelian.",
+      "seo": {
+        "title": "Buku pemasok gratis — kontak dan GSTIN",
+        "description": "Simpan data semua pemasok Anda di satu tempat — kontak, GSTIN, alamat, dan catatan. Gratis, offline, tanpa pendaftaran, dan terpakai di semua alat Setu.",
+        "keywords": [
+          "buku pemasok",
+          "manajemen pemasok gratis",
+          "kontak pemasok",
+          "catatan GSTIN pemasok",
+          "daftar pemasok"
+        ],
+        "ogTitle": "Buku pemasok",
+        "ogDescription": "Simpan data semua pemasok Anda di satu tempat — kontak, GSTIN, alamat, dan catatan. Gratis, offline, tanpa pendaftaran, dan terpakai di semua alat Setu."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Buku pemasok",
+        "headline": "Buku pemasok",
+        "subheadline": "Semua pemasok Anda di satu tempat — disimpan sekali, dipakai setiap alat Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Di mana data pemasok saya disimpan?",
+            "answer": "Di browser pada perangkat Anda, di dalam ruang kerja bisnis Setu Anda. Tidak ada yang diunggah — tanpa pendaftaran, tanpa cloud."
+          },
+          {
+            "question": "Alat apa lagi yang memakai pemasok saya?",
+            "answer": "Buku pembelian memilih pemasok langsung dari buku ini, jadi Anda tidak perlu menulis ulang data pemasok saat mencatat nota pembelian."
+          },
+          {
+            "question": "Bisakah data pemasok diekspor?",
+            "answer": "Bisa — ekspor seluruh buku sebagai CSV yang terbuka di Excel atau Google Sheets kapan saja."
+          }
+        ]
+      }
     },
     {
       "name": "Pelacak pengeluaran",
@@ -137,7 +239,42 @@
     },
     {
       "name": "Buku piutang pelanggan",
-      "shortDescription": "Buku utang digital — kredit, pembayaran, dan saldo tiap pelanggan."
+      "shortDescription": "Buku utang digital — kredit, pembayaran, dan saldo tiap pelanggan.",
+      "seo": {
+        "title": "Buku piutang pelanggan gratis — utang",
+        "description": "Buku utang digital — pantau utang yang Anda berikan dan pembayaran yang masuk per pelanggan, dengan saldo berjalan. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku utang",
+          "buku piutang pelanggan",
+          "catatan utang",
+          "buku kas gratis",
+          "pencatat utang pelanggan",
+          "udhaar khata"
+        ],
+        "ogTitle": "Buku piutang pelanggan",
+        "ogDescription": "Buku utang digital — pantau utang yang Anda berikan dan pembayaran yang masuk per pelanggan, dengan saldo berjalan. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Buku piutang pelanggan",
+        "headline": "Buku piutang pelanggan",
+        "subheadline": "Buku utang Anda, versi digital — utang, pembayaran, dan saldo tiap pelanggan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu buku utang digital?",
+            "answer": "Versi digital dari buku utang yang biasa dipakai: catat utang yang Anda berikan ke pelanggan dan pembayaran yang ia lakukan, lalu saldo berjalan tiap pelanggan dihitung otomatis."
+          },
+          {
+            "question": "Apakah alat ini memakai pelanggan yang sudah ada?",
+            "answer": "Ya. Jika Anda memakai Kasir berbasis browser atau Pembuat faktur Setu di perangkat ini, buku ini memakai daftar pelanggan yang sama — tambahkan pelanggan sekali, pakai di mana saja."
+          },
+          {
+            "question": "Apakah buku saya pribadi?",
+            "answer": "Sepenuhnya. Semua data tetap di browser pada perangkat Anda — tanpa pendaftaran, tanpa cloud. Ekspor salinan CSV kapan saja."
+          }
+        ]
+      }
     },
     {
       "name": "Buku janji temu",
@@ -147,7 +284,7 @@
       "name": "Pembuat nota kredit",
       "shortDescription": "Terbitkan nota kredit siap pajak untuk retur dan koreksi tagihan. PDF seketika, tanpa daftar.",
       "seo": {
-        "title": "Generator Nota Kredit Gratis — PDF Seketika",
+        "title": "Pembuat nota kredit Gratis — PDF Seketika",
         "description": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
         "keywords": [
           "generator nota kredit",
@@ -156,12 +293,12 @@
           "nota kredit atas faktur",
           "buat nota kredit gratis"
         ],
-        "ogTitle": "Generator Nota Kredit",
+        "ogTitle": "Pembuat nota kredit",
         "ogDescription": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Generator Nota Kredit",
-        "headline": "Generator Nota Kredit",
+        "eyebrow": "Alat Gratis — Pembuat nota kredit",
+        "headline": "Pembuat nota kredit",
         "subheadline": "Tangani pengembalian dan penyesuaian tagihan secara profesional — rujuk fakturnya, rinci barangnya, cetak PDF-nya."
       },
       "faq": {
@@ -185,7 +322,7 @@
       "name": "Pembuat nota debit",
       "shortDescription": "Buat nota debit untuk retur pembelian, kekurangan kiriman, dan selisih harga. PDF seketika.",
       "seo": {
-        "title": "Generator Nota Debit Gratis — Retur Pembelian",
+        "title": "Pembuat nota debit Gratis — Retur Pembelian",
         "description": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran.",
         "keywords": [
           "generator nota debit",
@@ -194,12 +331,12 @@
           "nota debit pajak",
           "buat nota debit gratis"
         ],
-        "ogTitle": "Generator Nota Debit",
+        "ogTitle": "Pembuat nota debit",
         "ogDescription": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Generator Nota Debit",
-        "headline": "Generator Nota Debit",
+        "eyebrow": "Alat Gratis — Pembuat nota debit",
+        "headline": "Pembuat nota debit",
         "subheadline": "Mengembalikan barang atau mempersoalkan tagihan pemasok? Terbitkan nota debit yang rapi dan terperinci dalam satu menit."
       },
       "faq": {
@@ -223,7 +360,7 @@
       "name": "Pembuat purchase order",
       "shortDescription": "Sahkan pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syarat dalam satu PO.",
       "seo": {
-        "title": "Generator Purchase Order Gratis — Buat PO",
+        "title": "Pembuat purchase order Gratis — Buat PO",
         "description": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
         "keywords": [
           "generator purchase order",
@@ -232,12 +369,12 @@
           "template purchase order gratis",
           "purchase order PDF"
         ],
-        "ogTitle": "Generator Purchase Order",
+        "ogTitle": "Pembuat purchase order",
         "ogDescription": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Generator Purchase Order",
-        "headline": "Generator Purchase Order",
+        "eyebrow": "Alat Gratis — Pembuat purchase order",
+        "headline": "Pembuat purchase order",
         "subheadline": "Setujui pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syaratnya dalam satu PO yang rapi."
       },
       "faq": {
@@ -261,7 +398,7 @@
       "name": "Pembuat sales order",
       "shortDescription": "Kunci pesanan pelanggan sebelum dikirim — barang, harga, dan tanggal kirim dalam satu dokumen.",
       "seo": {
-        "title": "Generator Sales Order Gratis — Konfirmasi Pesanan",
+        "title": "Pembuat sales order Gratis — Konfirmasi Pesanan",
         "description": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran.",
         "keywords": [
           "generator sales order",
@@ -270,12 +407,12 @@
           "buat sales order",
           "template sales order gratis"
         ],
-        "ogTitle": "Generator Sales Order",
+        "ogTitle": "Pembuat sales order",
         "ogDescription": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Generator Sales Order",
-        "headline": "Generator Sales Order",
+        "eyebrow": "Alat Gratis — Pembuat sales order",
+        "headline": "Pembuat sales order",
         "subheadline": "Pastikan apa yang dipesan pelanggan — barang, harga, dan tanggal kirim — sebelum apa pun dikirim."
       },
       "faq": {
@@ -299,7 +436,7 @@
       "name": "Bagan akun",
       "shortDescription": "Susun daftar akun dari templat usaha kecil siap pakai — kode, jenis, dan ekspor CSV.",
       "seo": {
-        "title": "Pembuat Bagan Akun Gratis — Online",
+        "title": "Pembuat Bagan akun Gratis — Online",
         "description": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran.",
         "keywords": [
           "bagan akun",
@@ -308,12 +445,12 @@
           "kode akun",
           "daftar akun pembukuan"
         ],
-        "ogTitle": "Bagan Akun",
+        "ogTitle": "Bagan akun",
         "ogDescription": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Bagan Akun",
-        "headline": "Bagan Akun",
+        "eyebrow": "Alat Gratis — Bagan akun",
+        "headline": "Bagan akun",
         "subheadline": "Tulang punggung pembukuan Anda — daftar akun siap pakai yang bisa Anda bentuk sesuai usaha sendiri."
       },
       "faq": {
@@ -337,8 +474,8 @@
       "name": "Jurnal umum",
       "shortDescription": "Pembukuan berpasangan dengan debit/kredit seimbang otomatis. Mengisi buku besar dan neraca saldo.",
       "seo": {
-        "title": "Alat Jurnal Gratis — Pembukuan Berpasangan",
-        "description": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnalnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran.",
+        "title": "Alat Jurnal umum Gratis — Pembukuan Berpasangan",
+        "description": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnal umumnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran.",
         "keywords": [
           "jurnal akuntansi",
           "pembukuan berpasangan",
@@ -346,22 +483,22 @@
           "jurnal debit kredit",
           "buku jurnal gratis"
         ],
-        "ogTitle": "Jurnal",
-        "ogDescription": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnalnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran."
+        "ogTitle": "Jurnal umum",
+        "ogDescription": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnal umumnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Jurnal",
-        "headline": "Jurnal",
+        "eyebrow": "Alat Gratis — Jurnal umum",
+        "headline": "Jurnal umum",
         "subheadline": "Pembukuan berpasangan yang benar — debit di kiri, kredit di kanan, selalu seimbang."
       },
       "faq": {
         "items": [
           {
             "question": "Bagaimana debit dan kredit bekerja?",
-            "answer": "Setiap transaksi menyentuh sedikitnya dua akun, dan total debit harus sama dengan total kredit. Membayar sewa ₹10.000 lewat bank: debit Beban Sewa ₹10.000, kredit Bank ₹10.000. Jurnal yang tidak seimbang ditolak alat ini."
+            "answer": "Setiap transaksi menyentuh sedikitnya dua akun, dan total debit harus sama dengan total kredit. Membayar sewa ₹10.000 lewat bank: debit Beban Sewa ₹10.000, kredit Bank ₹10.000. Jurnal umum yang tidak seimbang ditolak alat ini."
           },
           {
-            "question": "Jurnal saya tersimpan di mana?",
+            "question": "Jurnal umum saya tersimpan di mana?",
             "answer": "Di sebuah buku jurnal dalam peramban Anda. Alat buku besar dan neraca saldo membaca jurnal yang sama, jadi pembukuan Anda tetap selaras di ketiganya."
           },
           {
@@ -375,7 +512,7 @@
       "name": "Buku besar",
       "shortDescription": "Buku besar per akun dengan saldo berjalan, tersusun otomatis dari jurnal Anda.",
       "seo": {
-        "title": "Alat Buku Besar Gratis — Online",
+        "title": "Alat Buku besar Gratis — Online",
         "description": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran.",
         "keywords": [
           "buku besar",
@@ -384,12 +521,12 @@
           "buku besar gratis",
           "buku besar pembukuan"
         ],
-        "ogTitle": "Buku Besar",
+        "ogTitle": "Buku besar",
         "ogDescription": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku Besar",
-        "headline": "Buku Besar",
+        "eyebrow": "Alat Gratis — Buku besar",
+        "headline": "Buku besar",
         "subheadline": "Pilih sebuah akun, lihat setiap posting beserta saldo berjalannya — tersusun sendiri dari jurnal Anda."
       },
       "faq": {
@@ -413,7 +550,7 @@
       "name": "Rekonsiliasi bank",
       "shortDescription": "Cocokkan rekening koran dengan pembukuan Anda — cek belum cair, setoran dalam perjalanan, biaya.",
       "seo": {
-        "title": "Alat Rekonsiliasi Bank Gratis — Online",
+        "title": "Alat Rekonsiliasi bank Gratis — Online",
         "description": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran.",
         "keywords": [
           "rekonsiliasi bank",
@@ -422,12 +559,12 @@
           "mencocokkan rekening bank",
           "selisih bank dan buku"
         ],
-        "ogTitle": "Rekonsiliasi Bank",
+        "ogTitle": "Rekonsiliasi bank",
         "ogDescription": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Rekonsiliasi Bank",
-        "headline": "Rekonsiliasi Bank",
+        "eyebrow": "Alat Gratis — Rekonsiliasi bank",
+        "headline": "Rekonsiliasi bank",
         "subheadline": "Bank menyebut satu angka, buku Anda angka lain — daftarkan pos-pos rekonsiliasinya sampai keduanya sepakat."
       },
       "faq": {
@@ -455,7 +592,7 @@
       "name": "Neraca saldo",
       "shortDescription": "Tersusun otomatis dari jurnal — saldo bersih tiap akun, dijumlah dan diperiksa.",
       "seo": {
-        "title": "Pembuat Neraca Saldo Gratis — Online",
+        "title": "Pembuat Neraca saldo Gratis — Online",
         "description": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran.",
         "keywords": [
           "neraca saldo",
@@ -464,12 +601,12 @@
           "pemeriksaan debit kredit",
           "neraca saldo pembukuan"
         ],
-        "ogTitle": "Neraca Saldo",
+        "ogTitle": "Neraca saldo",
         "ogDescription": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Neraca Saldo",
-        "headline": "Neraca Saldo",
+        "eyebrow": "Alat Gratis — Neraca saldo",
+        "headline": "Neraca saldo",
         "subheadline": "Saldo bersih tiap akun di sisi debit atau kreditnya — dijumlahkan, diperiksa, dan siap diekspor."
       },
       "faq": {
@@ -493,7 +630,7 @@
       "name": "Laporan laba rugi",
       "shortDescription": "Susun laporan laba rugi — dari pendapatan ke laba bersih dengan margin langsung. PDF atau CSV.",
       "seo": {
-        "title": "Laporan Laba Rugi Gratis — Pembuat P&L",
+        "title": "Laporan laba rugi Gratis — Pembuat P&L",
         "description": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis.",
         "keywords": [
           "laporan laba rugi",
@@ -502,12 +639,12 @@
           "format laba rugi",
           "template P&L gratis"
         ],
-        "ogTitle": "Laporan Laba Rugi",
+        "ogTitle": "Laporan laba rugi",
         "ogDescription": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Laporan Laba Rugi",
-        "headline": "Laporan Laba Rugi",
+        "eyebrow": "Alat Gratis — Laporan laba rugi",
+        "headline": "Laporan laba rugi",
         "subheadline": "Pendapatan di atas, laba bersih di bawah, dan setiap langkah di antaranya — margin dihitung langsung."
       },
       "faq": {
@@ -569,7 +706,7 @@
       "name": "Laporan arus kas",
       "shortDescription": "Arus operasi, investasi, dan pendanaan dari kas awal sampai akhir. Cetak atau ekspor.",
       "seo": {
-        "title": "Pembuat Laporan Arus Kas Gratis — Online",
+        "title": "Pembuat Laporan arus kas Gratis — Online",
         "description": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran.",
         "keywords": [
           "laporan arus kas",
@@ -578,12 +715,12 @@
           "operasi investasi pendanaan",
           "arus kas usaha kecil"
         ],
-        "ogTitle": "Laporan Arus Kas",
+        "ogTitle": "Laporan arus kas",
         "ogDescription": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Laporan Arus Kas",
-        "headline": "Laporan Arus Kas",
+        "eyebrow": "Alat Gratis — Laporan arus kas",
+        "headline": "Laporan arus kas",
         "subheadline": "Dari mana kas datang dan ke mana perginya — operasi, investasi, dan pendanaan, dari saldo awal ke saldo akhir."
       },
       "faq": {

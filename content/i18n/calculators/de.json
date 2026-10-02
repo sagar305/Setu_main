@@ -262,7 +262,7 @@
       "name": "Wareneinsatz-Rechner",
       "shortDescription": "Prüfen Sie, ob der Wareneinsatz eines Gerichts zum Menüpreis in einem gesunden Rahmen liegt.",
       "seo": {
-        "title": "Warenkosten-Rechner für Restaurants — kostenlos | Setu",
+        "title": "Wareneinsatz-Rechner für Restaurants — kostenlos | Setu",
         "description": "Kostenloser Rechner für den Warenkostenanteil. Zutatenkosten und Verkaufspreis eingeben und sofort Warenkostenquote und Gewinn pro Gericht sehen.",
         "keywords": [
           "Warenkosten Rechner",
@@ -273,7 +273,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Warenkosten",
-        "headline": "Warenkosten-Rechner",
+        "headline": "Wareneinsatz-Rechner",
         "subheadline": "Geben Sie Zutatenkosten und Verkaufspreis eines Gerichts ein und sehen Sie Warenkostenquote und Gewinn pro Teller."
       },
       "about": {
@@ -284,7 +284,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Warenkosten-Rechner",
+        "headline": "Häufige Fragen zum Wareneinsatz-Rechner",
         "items": [
           {
             "question": "Wie berechnet man die Warenkostenquote?",
@@ -369,7 +369,7 @@
       "name": "Kreditraten-Rechner",
       "shortDescription": "Schätzen Sie Monatsrate, Gesamtzinsen und Gesamtzahlung eines Geschäftskredits.",
       "seo": {
-        "title": "Kredit-Rechner für Unternehmen — kostenlos | Setu",
+        "title": "Kreditraten-Rechner — kostenlos | Setu",
         "description": "Kostenloser Rechner für Firmenkredite. Kreditbetrag, Zinssatz und Laufzeit eingeben und sofort Monatsrate, Gesamtzinsen und Gesamtzahlung sehen.",
         "keywords": [
           "Kreditrechner",
@@ -380,7 +380,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Kreditrechner",
-        "headline": "Kredit-Rechner für Unternehmen",
+        "headline": "Kreditraten-Rechner",
         "subheadline": "Geben Sie Kreditbetrag, Zinssatz und Laufzeit ein und sehen Sie Ihre Monatsrate, die Gesamtzinsen und die Gesamtzahlung."
       },
       "about": {
@@ -423,7 +423,7 @@
       "name": "Tischauslastungs-Rechner",
       "shortDescription": "Sehen Sie, wie oft jeder Tisch im Service neu besetzt wird und wie lange eine Runde dauert.",
       "seo": {
-        "title": "Tischumschlag-Rechner für Restaurants — kostenlos | Setu",
+        "title": "Tischauslastungs-Rechner für Restaurants — kostenlos | Setu",
         "description": "Kostenloser Rechner für den Tischumschlag. Servierte Gedecke, Anzahl der Tische und Servicestunden eingeben und Umschlagrate samt Belegungszeit sehen.",
         "keywords": [
           "Tischumschlag Rechner",
@@ -433,7 +433,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Tischumschlag",
-        "headline": "Tischumschlag-Rechner",
+        "headline": "Tischauslastungs-Rechner",
         "subheadline": "Geben Sie servierte Gedecke, Anzahl der Tische und Servicestunden ein und sehen Sie Ihre Umschlagrate und die durchschnittliche Belegungszeit."
       },
       "about": {
@@ -444,7 +444,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Tischumschlag-Rechner",
+        "headline": "Häufige Fragen zum Tischauslastungs-Rechner",
         "items": [
           {
             "question": "Wie berechnet man die Umschlagrate?",
@@ -476,8 +476,8 @@
       "name": "Nettogehalts-Rechner",
       "shortDescription": "Sehen Sie Ihr monatliches Nettogehalt nach Vorsorge, Berufssteuer und weiteren Abzügen.",
       "seo": {
-        "title": "Netto-Gehalt-Rechner — von Gesamtkosten zum Netto | Setu",
-        "description": "Kostenloser Netto-Gehalt-Rechner. Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Netto nach den üblichen Abzügen.",
+        "title": "Nettogehalts-Rechner — von Gesamtkosten zum Netto | Setu",
+        "description": "Kostenloser Nettogehalts-Rechner. Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Netto nach den üblichen Abzügen.",
         "keywords": [
           "Nettogehalt Rechner",
           "Netto Gehalt berechnen",
@@ -487,7 +487,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Netto-Gehalt",
-        "headline": "Netto-Gehalt-Rechner",
+        "headline": "Nettogehalts-Rechner",
         "subheadline": "Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Nettogehalt nach den üblichen Abzügen."
       },
       "about": {
@@ -498,7 +498,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Netto-Gehalt-Rechner",
+        "headline": "Häufige Fragen zum Nettogehalts-Rechner",
         "items": [
           {
             "question": "Was ist der Unterschied zwischen Gesamtkosten und Nettogehalt?",
@@ -595,7 +595,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Gratuity",
-        "headline": "Gratuity-Rechner",
+        "headline": "Abfindungsrechner",
         "subheadline": "Geben Sie das letzte Gehalt und die Dienstjahre ein und schätzen Sie den beim Austritt fälligen Betrag."
       },
       "about": {
@@ -606,7 +606,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Gratuity-Rechner",
+        "headline": "Häufige Fragen zum Abfindungsrechner",
         "items": [
           {
             "question": "Wie lautet die Formel für die Gratuity?",
@@ -759,7 +759,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Rezeptkalkulation",
-        "headline": "Rechner für Rezeptkalkulation",
+        "headline": "Rezeptkalkulations-Rechner",
         "subheadline": "Tragen Sie jede Zutat mit ihrer Menge ein und sehen Sie die echten Kosten eines Rezepts, pro Portion."
       },
       "about": {
@@ -910,8 +910,8 @@
       "name": "Lagerumschlags-Rechner",
       "shortDescription": "Finden Sie heraus, wie oft Ihr Lager in einer Periode umschlägt und wie viele Tage Bestand Sie halten.",
       "seo": {
-        "title": "Lagerumschlag-Rechner — kostenloses Tool | Setu",
-        "description": "Kostenloser Lagerumschlag-Rechner für den Handel. Wareneinsatz und durchschnittlichen Lagerwert eingeben und Umschlagshäufigkeit samt Lagerdauer in Tagen sehen.",
+        "title": "Lagerumschlags-Rechner — kostenloses Tool | Setu",
+        "description": "Kostenloser Lagerumschlags-Rechner für Händler. Wareneinsatz und durchschnittlichen Lagerwert eingeben und Umschlagshäufigkeit samt Lagerdauer in Tagen sehen.",
         "keywords": [
           "Lagerumschlag Rechner",
           "Umschlagshäufigkeit Lager",
@@ -921,7 +921,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Lagerumschlag",
-        "headline": "Lagerumschlag-Rechner",
+        "headline": "Lagerumschlags-Rechner",
         "subheadline": "Geben Sie Wareneinsatz und durchschnittlichen Lagerwert ein und sehen Sie Ihre Umschlagshäufigkeit und die Lagerdauer in Tagen."
       },
       "about": {
@@ -932,7 +932,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Lagerumschlag-Rechner",
+        "headline": "Häufige Fragen zum Lagerumschlags-Rechner",
         "items": [
           {
             "question": "Wie lautet die Formel für die Umschlagshäufigkeit?",
@@ -964,8 +964,8 @@
       "name": "Meldebestands-Rechner",
       "shortDescription": "Finden Sie den genauen Bestand, bei dem Sie neu bestellen sollten.",
       "seo": {
-        "title": "Meldebestand-Rechner — Fehlbestände vermeiden | Setu",
-        "description": "Kostenloser Meldebestand-Rechner für den Handel. Durchschnittlichen Tagesabsatz, Lieferzeit und Sicherheitsbestand eingeben und den Nachbestellpunkt erhalten.",
+        "title": "Meldebestands-Rechner — Fehlbestände vermeiden | Setu",
+        "description": "Kostenloser Meldebestands-Rechner für den Handel. Durchschnittlichen Tagesabsatz, Lieferzeit und Sicherheitsbestand eingeben und den Nachbestellpunkt erhalten.",
         "keywords": [
           "Meldebestand Rechner",
           "Meldebestand berechnen",
@@ -975,7 +975,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Meldebestand",
-        "headline": "Meldebestand-Rechner",
+        "headline": "Meldebestands-Rechner",
         "subheadline": "Geben Sie durchschnittlichen Tagesabsatz, Lieferzeit des Lieferanten und Sicherheitsbestand ein, um zu sehen, wann Sie nachbestellen sollten."
       },
       "about": {
@@ -986,7 +986,7 @@
         ]
       },
       "faq": {
-        "headline": "Häufige Fragen zum Meldebestand-Rechner",
+        "headline": "Häufige Fragen zum Meldebestands-Rechner",
         "items": [
           {
             "question": "Wie lautet die Formel für den Meldebestand?",
@@ -1412,7 +1412,7 @@
       "name": "Zahlungsziel-Rechner",
       "shortDescription": "Fälligkeiten, Skonto-Ersparnis und die echten Kosten verspäteter Zahlung.",
       "seo": {
-        "title": "Zahlungsbedingungen-Rechner — Netto 30",
+        "title": "Zahlungsziel-Rechner — Netto 30",
         "description": "Kostenloser Rechner für Zahlungsbedingungen: exaktes Fälligkeitsdatum bei netto 15/30/45/60, Skonto-Ersparnis und die echten Kosten des Verzichts.",
         "keywords": [
           "Zahlungsbedingungen Rechner",
@@ -1424,8 +1424,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Zahlungsbedingungen-Rechner",
-        "headline": "Zahlungsbedingungen-Rechner",
+        "eyebrow": "Kostenloses Tool — Zahlungsziel-Rechner",
+        "headline": "Zahlungsziel-Rechner",
         "subheadline": "Machen Sie aus Bedingungen wie „2/10 netto 30“ echte Daten und Beträge: Fälligkeitstag, Ersparnis bei früher Zahlung und was es wirklich kostet, das Skonto zu verfallen zu lassen."
       },
       "about": {
@@ -1523,8 +1523,8 @@
       "name": "Finanzkennzahlen-Rechner",
       "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV.",
       "seo": {
-        "title": "Kennzahlen-Rechner für Unternehmen",
-        "description": "Kostenloser Kennzahlen-Rechner. Zahlen aus Bilanz und Gewinn- und Verlustrechnung eingeben und Liquidität, Verschuldung, Margen und Debitorentage erhalten.",
+        "title": "Finanzkennzahlen-Rechner für Unternehmen",
+        "description": "Kostenloser Finanzkennzahlen-Rechner. Zahlen aus Bilanz und GuV eingeben und Liquidität, Verschuldung, Margen sowie Debitorentage auf einmal erhalten.",
         "keywords": [
           "Finanzkennzahlen Rechner",
           "Liquidität 3. Grades Rechner",
@@ -1536,7 +1536,7 @@
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Kennzahlen-Analyse",
-        "headline": "Kennzahlen-Rechner",
+        "headline": "Finanzkennzahlen-Rechner",
         "subheadline": "Sieben zentrale Kennzahlen aus wenigen Zahlen — Liquidität, Verschuldung, Margen und Effizienz auf einen Blick."
       },
       "about": {

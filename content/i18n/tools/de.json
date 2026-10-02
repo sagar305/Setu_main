@@ -113,15 +113,117 @@
     },
     {
       "name": "Bestandsbuch",
-      "shortDescription": "Aktuelle Bestände, Korrekturen und Bewegungshistorie — gemeinsam mit Ihrer Kasse."
+      "shortDescription": "Aktuelle Bestände, Korrekturen und Bewegungshistorie — gemeinsam mit Ihrer Browser-Kasse.",
+      "seo": {
+        "title": "Kostenloses Bestandsbuch — Lagerbestand live",
+        "description": "Aktuellen Lagerbestand sehen, Zu- und Abgänge erfassen und jede Bewegung prüfen — gemeinsam mit Ihrem Setu Browser-Kasse. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Bestandsbuch",
+          "Lagerbuch",
+          "Lagerverwaltung kostenlos",
+          "Bestandsbewegungen erfassen",
+          "Lagerbestand offline"
+        ],
+        "ogTitle": "Bestandsbuch",
+        "ogDescription": "Aktuellen Lagerbestand sehen, Zu- und Abgänge erfassen und jede Bewegung prüfen — gemeinsam mit Ihrem Setu Browser-Kasse. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Bestandsbuch",
+        "headline": "Bestandsbuch",
+        "subheadline": "Aktueller Bestand, schnelle Korrekturen und die vollständige Bewegungshistorie — eine Wahrheit mit Ihrer Browser-Kasse."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Woher kommen die Bestandsdaten?",
+            "answer": "Aus Ihrem Setu-Arbeitsbereich auf diesem Gerät — dieselben Artikel und derselbe Bestand, die das Browser-Kasse nutzt. Es gibt nur eine Wahrheit: eine Korrektur hier ist in der Kasse sofort sichtbar, und jeder Verkauf in der Kasse erscheint hier in der Bewegungshistorie."
+          },
+          {
+            "question": "Werden meine Bestandsdaten irgendwohin übertragen?",
+            "answer": "Nein. Alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, kein Server."
+          },
+          {
+            "question": "Kann ich das Bestandsbuch exportieren?",
+            "answer": "Ja — laden Sie die aktuelle Bestandsliste als CSV-Datei herunter, die sich in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
     },
     {
       "name": "Einkaufsbuch",
-      "shortDescription": "Lieferantenrechnungen erfassen und den Warenbestand mit einer Bestätigung aktualisieren."
+      "shortDescription": "Lieferantenrechnungen erfassen und den Warenbestand mit einer Bestätigung aktualisieren.",
+      "seo": {
+        "title": "Kostenloses Einkaufsbuch — Lieferantenrechnungen",
+        "description": "Lieferantenrechnungen erfassen, Positionen mit Ihren Artikeln verknüpfen und der Bestand wird automatisch fortgeschrieben. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Einkaufsbuch",
+          "Einkaufsrechnung erfassen",
+          "Lieferanteneinkäufe",
+          "Einkaufsbuchung kostenlos",
+          "Lagerzugang erfassen"
+        ],
+        "ogTitle": "Einkaufsbuch",
+        "ogDescription": "Lieferantenrechnungen erfassen, Positionen mit Ihren Artikeln verknüpfen und der Bestand wird automatisch fortgeschrieben. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Einkaufsbuch",
+        "headline": "Einkaufsbuch",
+        "subheadline": "Lieferantenrechnungen erfassen, Artikel verknüpfen und den Bestand mit einer Bestätigung fortschreiben."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Schreiben Einkäufe den Bestand meiner Artikel fort?",
+            "answer": "Ja. Verknüpfen Sie die Einkaufspositionen mit Ihren gespeicherten Artikeln; nach einer Bestätigung werden die gekauften Mengen dem Bestand zugebucht — sofort sichtbar im Bestandsbuch und im Browser-Kasse."
+          },
+          {
+            "question": "Muss ich Lieferantendaten erneut eingeben?",
+            "answer": "Nein. Im Lieferantenbuch gespeicherte Lieferanten erscheinen hier in einer Auswahlliste. Einmal speichern, immer wiederverwenden."
+          },
+          {
+            "question": "Bleiben meine Einkaufsdaten privat?",
+            "answer": "Vollständig. Alles wird in Ihrem Browser auf Ihrem Gerät gespeichert — keine Anmeldung, keine Cloud, und Sie können jederzeit eine CSV-Datei exportieren."
+          }
+        ]
+      }
     },
     {
       "name": "Lieferantenbuch",
-      "shortDescription": "Alle Lieferanten an einem Ort — das Einkaufsbuch greift direkt darauf zu."
+      "shortDescription": "Alle Lieferanten an einem Ort — das Einkaufsbuch greift direkt darauf zu.",
+      "seo": {
+        "title": "Kostenloses Lieferantenbuch — Kontakte, GSTIN",
+        "description": "Halten Sie alle Lieferantendaten an einem Ort — Kontakt, GSTIN, Adressen und Notizen. Kostenlos, offline, ohne Anmeldung, in jedem Setu-Tool nutzbar.",
+        "keywords": [
+          "Lieferantenbuch",
+          "Lieferantenverwaltung kostenlos",
+          "Lieferantenkontakte",
+          "Lieferanten-GSTIN",
+          "Lieferantenverzeichnis"
+        ],
+        "ogTitle": "Lieferantenbuch",
+        "ogDescription": "Halten Sie alle Lieferantendaten an einem Ort — Kontakt, GSTIN, Adressen und Notizen. Kostenlos, offline, ohne Anmeldung, in jedem Setu-Tool nutzbar."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Lieferantenbuch",
+        "headline": "Lieferantenbuch",
+        "subheadline": "Alle Lieferanten an einem Ort — einmal gespeichert, von jedem Setu-Tool wiederverwendet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wo werden meine Lieferantendaten gespeichert?",
+            "answer": "In Ihrem Browser auf Ihrem Gerät, innerhalb Ihres Setu-Arbeitsbereichs. Es wird nichts übertragen — keine Anmeldung, keine Cloud."
+          },
+          {
+            "question": "Welche anderen Tools nutzen meine Lieferanten?",
+            "answer": "Das Einkaufsbuch wählt Lieferanten direkt aus diesem Buch, Sie geben also beim Erfassen einer Einkaufsrechnung nie wieder Lieferantendaten ein."
+          },
+          {
+            "question": "Kann ich meine Lieferanten exportieren?",
+            "answer": "Ja — exportieren Sie das ganze Buch als CSV-Datei, die sich jederzeit in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
     },
     {
       "name": "Ausgaben-Tracker",
@@ -137,17 +239,52 @@
     },
     {
       "name": "Kundenkonto",
-      "shortDescription": "Digitales Anschreibebuch — Kredit, Zahlungen und Saldo je Kunde."
+      "shortDescription": "Digitales Anschreibebuch — Kredit, Zahlungen und Saldo je Kunde.",
+      "seo": {
+        "title": "Kostenloses Kundenkonto — Kredit und Saldo",
+        "description": "Digitales Kreditbuch — gewährter Kredit und erhaltene Zahlungen je Kunde, mit laufendem Saldo. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Kundenkonto",
+          "Kreditbuch",
+          "Schuldbuch",
+          "Kontobuch kostenlos",
+          "Kundenkredit verfolgen",
+          "udhaar khata"
+        ],
+        "ogTitle": "Kundenkonto",
+        "ogDescription": "Digitales Kreditbuch — gewährter Kredit und erhaltene Zahlungen je Kunde, mit laufendem Saldo. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kundenkonto",
+        "headline": "Kundenkonto",
+        "subheadline": "Ihr Kreditbuch, digital — Kredit, Zahlungen und Saldo je Kunde."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein digitales Kreditbuch?",
+            "answer": "Die digitale Form des gewohnten Kreditheftes: Erfassen Sie den Kredit, den Sie einem Kunden geben, und dessen Zahlungen; der laufende Saldo wird je Kunde automatisch berechnet."
+          },
+          {
+            "question": "Nutzt es meine vorhandenen Kunden?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät das Setu Browser-Kasse oder den Rechnungsgenerator nutzen, greift das Konto auf dasselbe gemeinsame Kundenverzeichnis zu — einmal anlegen, überall nutzen."
+          },
+          {
+            "question": "Bleibt mein Kundenkonto privat?",
+            "answer": "Vollständig. Alle Daten bleiben in Ihrem Browser auf Ihrem Gerät — keine Anmeldung, keine Cloud. Eine CSV-Sicherung können Sie jederzeit exportieren."
+          }
+        ]
+      }
     },
     {
       "name": "Terminbuch",
-      "shortDescription": "Tagesgenaue Buchungen mit Dauer, Status und Erfassung von Nichterscheinen."
+      "shortDescription": "Tagesgenaue Buchungssatzen mit Dauer, Status und Erfassung von Nichterscheinen."
     },
     {
       "name": "Gutschriftengenerator",
       "shortDescription": "Steuerfertige Gutschriften für Retouren und Rechnungskorrekturen. Sofort als PDF, ohne Anmeldung.",
       "seo": {
-        "title": "Kostenloser Gutschrift-Generator — PDF sofort",
+        "title": "Kostenloser Gutschriftengenerator — PDF sofort",
         "description": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung.",
         "keywords": [
           "Gutschrift Generator",
@@ -156,12 +293,12 @@
           "Gutschrift zur Rechnung",
           "Gutschrift kostenlos erstellen"
         ],
-        "ogTitle": "Gutschrift-Generator",
+        "ogTitle": "Gutschriftengenerator",
         "ogDescription": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Gutschrift-Generator",
-        "headline": "Gutschrift-Generator",
+        "eyebrow": "Kostenloses Tool — Gutschriftengenerator",
+        "headline": "Gutschriftengenerator",
         "subheadline": "Rücksendungen und Rechnungskorrekturen professionell abwickeln — Rechnung referenzieren, Posten auflisten, PDF drucken."
       },
       "faq": {
@@ -185,7 +322,7 @@
       "name": "Belastungsanzeigen-Generator",
       "shortDescription": "Belastungsanzeigen für Retouren, Minderlieferung und Preisdifferenzen. Sofort als PDF.",
       "seo": {
-        "title": "Kostenloser Generator für Lastschriftanzeigen",
+        "title": "Kostenloser Belastungsanzeigen-Generator",
         "description": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos.",
         "keywords": [
           "Lastschriftanzeige Generator",
@@ -194,12 +331,12 @@
           "Lastschriftanzeige Umsatzsteuer",
           "Belastungsanzeige kostenlos"
         ],
-        "ogTitle": "Generator für Lastschriftanzeigen",
+        "ogTitle": "Belastungsanzeigen-Generator",
         "ogDescription": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Generator für Lastschriftanzeigen",
-        "headline": "Generator für Lastschriftanzeigen",
+        "eyebrow": "Kostenloses Tool — Belastungsanzeigen-Generator",
+        "headline": "Belastungsanzeigen-Generator",
         "subheadline": "Ware geht zurück oder die Lieferantenrechnung stimmt nicht? Stellen Sie in einer Minute eine saubere, nach Posten aufgeschlüsselte Belastungsanzeige aus."
       },
       "faq": {
@@ -223,7 +360,7 @@
       "name": "Bestellgenerator",
       "shortDescription": "Einkäufe formell freigeben — Artikel, Preise, Liefertermin und Konditionen in einer Bestellung.",
       "seo": {
-        "title": "Kostenloser Bestellungs-Generator — PO erstellen",
+        "title": "Kostenloser Bestellgenerator — PO erstellen",
         "description": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung.",
         "keywords": [
           "Bestellung Generator",
@@ -232,12 +369,12 @@
           "kostenlose Bestellvorlage",
           "Bestellung PDF"
         ],
-        "ogTitle": "Bestellungs-Generator",
+        "ogTitle": "Bestellgenerator",
         "ogDescription": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Bestellungs-Generator",
-        "headline": "Bestellungs-Generator",
+        "eyebrow": "Kostenloses Tool — Bestellgenerator",
+        "headline": "Bestellgenerator",
         "subheadline": "Einkäufe bei Lieferanten formell freigeben — Artikel, Preise, Liefertermin und Bedingungen auf einer klaren Bestellung."
       },
       "faq": {
@@ -261,7 +398,7 @@
       "name": "Auftragsgenerator",
       "shortDescription": "Kundenaufträge vor dem Versand bestätigen — Artikel, Preise und Liefertermin in einem Dokument.",
       "seo": {
-        "title": "Kostenloser Generator für Auftragsbestätigungen",
+        "title": "Kostenloser Auftragsgenerator online",
         "description": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung.",
         "keywords": [
           "Auftragsbestätigung Generator",
@@ -270,12 +407,12 @@
           "Auftragsbestätigung erstellen",
           "kostenlose Auftragsvorlage"
         ],
-        "ogTitle": "Generator für Auftragsbestätigungen",
+        "ogTitle": "Auftragsgenerator",
         "ogDescription": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Generator für Auftragsbestätigungen",
-        "headline": "Generator für Auftragsbestätigungen",
+        "eyebrow": "Kostenloses Tool — Auftragsgenerator",
+        "headline": "Auftragsgenerator",
         "subheadline": "Halten Sie fest, was der Kunde bestellt hat — Artikel, Preise und Liefertermin — bevor etwas das Haus verlässt."
       },
       "faq": {
@@ -320,7 +457,7 @@
         "items": [
           {
             "question": "Was ist ein Kontenplan?",
-            "answer": "Die Hauptliste aller Konten, auf die Ihr Betrieb Geld verbucht — Aktiva, Verbindlichkeiten, Eigenkapital, Erträge und Aufwendungen. Jede Buchung läuft auf Konten aus dieser Liste."
+            "answer": "Die Hauptliste aller Konten, auf die Ihr Betrieb Geld verbucht — Aktiva, Verbindlichkeiten, Eigenkapital, Erträge und Aufwendungen. Jede Buchungssatz läuft auf Konten aus dieser Liste."
           },
           {
             "question": "Was bedeuten die Kontonummern?",
@@ -328,7 +465,7 @@
           },
           {
             "question": "Hängt das mit den anderen Buchhaltungstools zusammen?",
-            "answer": "Ja — die Tools für Buchungen, Hauptbuch und Saldenliste auf dieser Seite lesen denselben Kontenplan automatisch, und zwar alles in Ihrem Browser."
+            "answer": "Ja — die Tools für Buchungssatzen, Hauptbuch und Saldenliste auf dieser Seite lesen denselben Kontenplan automatisch, und zwar alles in Ihrem Browser."
           }
         ]
       }
@@ -337,31 +474,31 @@
       "name": "Buchungssatz",
       "shortDescription": "Doppelte Buchführung mit automatischem Soll-Haben-Ausgleich. Speist Hauptbuch und Saldenliste.",
       "seo": {
-        "title": "Kostenloses Buchungstool — doppelte Buchführung",
-        "description": "Erfassen Sie doppelte Buchungen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung.",
+        "title": "Kostenloses Buchungssatzstool — doppelte Buchführung",
+        "description": "Erfassen Sie doppelte Buchungssatzen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung.",
         "keywords": [
-          "Buchung erfassen",
+          "Buchungssatz erfassen",
           "doppelte Buchführung",
-          "Buchungsjournal online",
-          "Soll Haben Buchung",
-          "kostenloses Buchungsjournal"
+          "Buchungssatzsjournal online",
+          "Soll Haben Buchungssatz",
+          "kostenloses Buchungssatzsjournal"
         ],
-        "ogTitle": "Buchung",
-        "ogDescription": "Erfassen Sie doppelte Buchungen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung."
+        "ogTitle": "Buchungssatz",
+        "ogDescription": "Erfassen Sie doppelte Buchungssatzen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Buchung",
-        "headline": "Buchung",
+        "eyebrow": "Kostenloses Tool — Buchungssatz",
+        "headline": "Buchungssatz",
         "subheadline": "Echte doppelte Buchführung — Soll links, Haben rechts, immer im Gleichgewicht."
       },
       "faq": {
         "items": [
           {
             "question": "Wie funktionieren Soll und Haben?",
-            "answer": "Jeder Vorgang berührt mindestens zwei Konten, und die Summe im Soll muss der Summe im Haben entsprechen. Miete von ₹10.000 per Bank: Soll Mietaufwand ₹10.000, Haben Bank ₹10.000. Unausgeglichene Buchungen lässt das Tool nicht zu."
+            "answer": "Jeder Vorgang berührt mindestens zwei Konten, und die Summe im Soll muss der Summe im Haben entsprechen. Miete von ₹10.000 per Bank: Soll Mietaufwand ₹10.000, Haben Bank ₹10.000. Unausgeglichene Buchungssatzen lässt das Tool nicht zu."
           },
           {
-            "question": "Wohin gehen meine Buchungen?",
+            "question": "Wohin gehen meine Buchungssatzen?",
             "answer": "In ein Journal, das in Ihrem Browser liegt. Die Tools für Hauptbuch und Saldenliste lesen dasselbe Journal, sodass Ihre Bücher über alle drei hinweg zusammenpassen."
           },
           {
@@ -373,10 +510,10 @@
     },
     {
       "name": "Hauptbuch",
-      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt.",
+      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt.",
       "seo": {
         "title": "Kostenloses Hauptbuch-Tool — online",
-        "description": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "description": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
         "keywords": [
           "Hauptbuch",
           "Sachkonto online",
@@ -385,18 +522,18 @@
           "Hauptbuch Buchhaltung"
         ],
         "ogTitle": "Hauptbuch",
-        "ogDescription": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung."
+        "ogDescription": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
         "eyebrow": "Kostenloses Tool — Hauptbuch",
         "headline": "Hauptbuch",
-        "subheadline": "Konto auswählen und jede Buchung mit dem laufenden Saldo sehen — automatisch aus Ihrem Journal erzeugt."
+        "subheadline": "Konto auswählen und jede Buchungssatz mit dem laufenden Saldo sehen — automatisch aus Ihrem Journal erzeugt."
       },
       "faq": {
         "items": [
           {
             "question": "Woher kommen die Daten im Hauptbuch?",
-            "answer": "Aus dem Buchungstool dieser Seite. Jede erfasste Buchung erscheint im Hauptbuch jedes Kontos, das sie berührt — nichts muss neu eingetippt werden."
+            "answer": "Aus dem Buchungssatzstool dieser Seite. Jede erfasste Buchungssatz erscheint im Hauptbuch jedes Kontos, das sie berührt — nichts muss neu eingetippt werden."
           },
           {
             "question": "Was bedeutet der Soll-/Haben-Saldo?",
@@ -404,7 +541,7 @@
           },
           {
             "question": "Kann ich ein Konto exportieren?",
-            "answer": "Ja — exportieren Sie das Hauptbuch zu jedem Konto als CSV mit Datum, Buchungstext, Soll, Haben und laufendem Saldo."
+            "answer": "Ja — exportieren Sie das Hauptbuch zu jedem Konto als CSV mit Datum, Buchungssatzstext, Soll, Haben und laufendem Saldo."
           }
         ]
       }
@@ -438,11 +575,11 @@
           },
           {
             "question": "Wie oft sollte ich abstimmen?",
-            "answer": "Mindestens monatlich, sobald der Auszug kommt. Betriebe mit viel Bewegung stimmen wöchentlich ab — je früher Sie einen Fehler oder eine fehlende Buchung finden, desto leichter die Korrektur."
+            "answer": "Mindestens monatlich, sobald der Auszug kommt. Betriebe mit viel Bewegung stimmen wöchentlich ab — je früher Sie einen Fehler oder eine fehlende Buchungssatz finden, desto leichter die Korrektur."
           },
           {
             "question": "Was, wenn nach dem Anpassen eine Differenz bleibt?",
-            "answer": "Prüfen Sie auf vertauschte Ziffern (eine durch 9 teilbare Differenz ist das klassische Zeichen), doppelte Buchungen oder einen Vorgang auf der falschen Seite. Das Tool zeigt die Restdifferenz laufend an, während Sie Posten ergänzen."
+            "answer": "Prüfen Sie auf vertauschte Ziffern (eine durch 9 teilbare Differenz ist das klassische Zeichen), doppelte Buchungssatzen oder einen Vorgang auf der falschen Seite. Das Tool zeigt die Restdifferenz laufend an, während Sie Posten ergänzen."
           }
         ]
       }
@@ -453,10 +590,10 @@
     },
     {
       "name": "Saldenliste",
-      "shortDescription": "Automatisch aus Ihren Buchungen — Nettosaldo jedes Kontos, summiert und geprüft.",
+      "shortDescription": "Automatisch aus Ihren Buchungssatzen — Nettosaldo jedes Kontos, summiert und geprüft.",
       "seo": {
-        "title": "Kostenlose Summen- und Saldenliste",
-        "description": "Eine Summen- und Saldenliste, automatisch aus Ihren Buchungen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung.",
+        "title": "Kostenlose Saldenliste — online erstellen",
+        "description": "Eine Saldenliste, automatisch aus Ihren Buchungssatzen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung.",
         "keywords": [
           "Summen und Saldenliste",
           "Saldenliste Vorlage",
@@ -464,27 +601,27 @@
           "Soll Haben Prüfung",
           "Saldenliste Buchhaltung"
         ],
-        "ogTitle": "Summen- und Saldenliste",
-        "ogDescription": "Eine Summen- und Saldenliste, automatisch aus Ihren Buchungen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung."
+        "ogTitle": "Saldenliste",
+        "ogDescription": "Eine Saldenliste, automatisch aus Ihren Buchungssatzen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Summen- und Saldenliste",
-        "headline": "Summen- und Saldenliste",
+        "eyebrow": "Kostenloses Tool — Saldenliste",
+        "headline": "Saldenliste",
         "subheadline": "Je Konto der Saldo auf seiner Soll- oder Haben-Seite — summiert, geprüft und bereit zum Export."
       },
       "faq": {
         "items": [
           {
-            "question": "Was ist eine Summen- und Saldenliste?",
-            "answer": "Eine Liste aller Konten mit einem Saldo ungleich null, jeweils auf der Soll- oder Haben-Seite. Sind Ihre doppelten Buchungen richtig, entspricht die Summe der Soll- der Summe der Haben-Seite."
+            "question": "Was ist eine Saldenliste?",
+            "answer": "Eine Liste aller Konten mit einem Saldo ungleich null, jeweils auf der Soll- oder Haben-Seite. Sind Ihre doppelten Buchungssatzen richtig, entspricht die Summe der Soll- der Summe der Haben-Seite."
           },
           {
             "question": "Woher kommen die Zahlen?",
-            "answer": "Aus dem Buchungstool dieser Seite — die Liste wird aus Ihren erfassten Buchungen und Ihrem Kontenplan automatisch neu berechnet."
+            "answer": "Aus dem Buchungssatzstool dieser Seite — die Liste wird aus Ihren erfassten Buchungssatzen und Ihrem Kontenplan automatisch neu berechnet."
           },
           {
             "question": "Was, wenn sie nicht ausgeglichen ist?",
-            "answer": "Mit diesem Tool sollte sie es immer sein, weil unausgeglichene Buchungen nicht erfasst werden können. Haben Sie Daten anderswo importiert oder geändert, nennt der Differenzhinweis den Abstand zwischen beiden Seiten."
+            "answer": "Mit diesem Tool sollte sie es immer sein, weil unausgeglichene Buchungssatzen nicht erfasst werden können. Haben Sie Daten anderswo importiert oder geändert, nennt der Differenzhinweis den Abstand zwischen beiden Seiten."
           }
         ]
       }

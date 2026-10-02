@@ -113,15 +113,117 @@
     },
     {
       "name": "Registro de estoque",
-      "shortDescription": "Níveis de estoque ao vivo, ajustes e histórico de movimentação — compartilhado com o PDV."
+      "shortDescription": "Níveis de estoque ao vivo, ajustes e histórico de movimentação — compartilhado com o PDV.",
+      "seo": {
+        "title": "Registro de estoque grátis — estoque atual",
+        "description": "Veja o estoque atual, registre entradas e saídas e confira cada movimentação — compartilhado com o seu PDV de navegador Setu. Grátis e sem cadastro.",
+        "keywords": [
+          "registro de estoque",
+          "livro de estoque",
+          "controle de estoque grátis",
+          "registro de entradas e saídas",
+          "controle de estoque offline"
+        ],
+        "ogTitle": "Registro de estoque",
+        "ogDescription": "Veja o estoque atual, registre entradas e saídas e confira cada movimentação — compartilhado com o seu PDV de navegador Setu. Grátis e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Registro de estoque",
+        "headline": "Registro de estoque",
+        "subheadline": "Estoque atualizado, ajustes rápidos e todo o histórico de movimentações — uma só verdade com o seu PDV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "De onde vêm os dados de estoque?",
+            "answer": "Do seu espaço de trabalho Setu neste dispositivo: os mesmos produtos e o mesmo estoque que o PDV de navegador usa. Existe uma só fonte: um ajuste feito aqui aparece na hora no PDV, e cada venda do PDV entra aqui no histórico de movimentações."
+          },
+          {
+            "question": "Meus dados de estoque são enviados para algum lugar?",
+            "answer": "Não. Tudo fica no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem e sem servidor."
+          },
+          {
+            "question": "Posso exportar o registro?",
+            "answer": "Sim: baixe a lista de estoque atual como arquivo CSV, que abre no Excel ou no Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Registro de compras",
-      "shortDescription": "Lance notas de fornecedores e atualize o estoque dos produtos com uma confirmação."
+      "shortDescription": "Lance notas de fornecedores e atualize o estoque dos produtos com uma confirmação.",
+      "seo": {
+        "title": "Registro de compras grátis — notas de fornecedor",
+        "description": "Registre notas de compra por fornecedor, vincule os itens aos seus produtos e o estoque é atualizado sozinho. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "registro de compras",
+          "registro de nota de compra",
+          "compras de fornecedores",
+          "lançamento de compra grátis",
+          "registro de compras de estoque"
+        ],
+        "ogTitle": "Registro de compras",
+        "ogDescription": "Registre notas de compra por fornecedor, vincule os itens aos seus produtos e o estoque é atualizado sozinho. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Registro de compras",
+        "headline": "Registro de compras",
+        "subheadline": "Registre notas de fornecedor, vincule produtos e atualize o estoque com uma confirmação."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "As compras atualizam o estoque dos meus produtos?",
+            "answer": "Sim. Vincule as linhas da compra aos seus produtos salvos e, depois de uma confirmação, as quantidades compradas entram no estoque — aparecem na hora no Registro de estoque e no PDV de navegador."
+          },
+          {
+            "question": "Preciso digitar os dados do fornecedor de novo?",
+            "answer": "Não. Os fornecedores salvos no Livro de fornecedores aparecem aqui numa lista. Salve um fornecedor uma vez e reutilize sempre."
+          },
+          {
+            "question": "Meus dados de compra ficam privados?",
+            "answer": "Totalmente. Tudo é salvo no seu navegador, no seu dispositivo — sem cadastro, sem nuvem, e você exporta um CSV quando quiser."
+          }
+        ]
+      }
     },
     {
       "name": "Livro de fornecedores",
-      "shortDescription": "Todos os seus fornecedores num só lugar — reaproveitado pelo registro de compras."
+      "shortDescription": "Todos os seus fornecedores num só lugar — reaproveitado pelo registro de compras.",
+      "seo": {
+        "title": "Livro de fornecedores grátis — contatos, GSTIN",
+        "description": "Mantenha os dados de todos os seus fornecedores num só lugar: contato, GSTIN, endereços e observações. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "livro de fornecedores",
+          "cadastro de fornecedores grátis",
+          "contatos de fornecedores",
+          "GSTIN do fornecedor",
+          "registro de fornecedores"
+        ],
+        "ogTitle": "Livro de fornecedores",
+        "ogDescription": "Mantenha os dados de todos os seus fornecedores num só lugar: contato, GSTIN, endereços e observações. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Livro de fornecedores",
+        "headline": "Livro de fornecedores",
+        "subheadline": "Todos os seus fornecedores num só lugar — salvos uma vez e reaproveitados por cada ferramenta Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Onde ficam salvos os dados dos meus fornecedores?",
+            "answer": "No seu navegador, no seu dispositivo, dentro do seu espaço de trabalho Setu. Nada é enviado — sem cadastro e sem nuvem."
+          },
+          {
+            "question": "Quais outras ferramentas usam meus fornecedores?",
+            "answer": "O Registro de compras escolhe os fornecedores direto deste livro, então você nunca digita os dados do fornecedor de novo ao registrar uma nota de compra."
+          },
+          {
+            "question": "Posso exportar meus fornecedores?",
+            "answer": "Sim: exporte o livro inteiro em CSV, que abre no Excel ou no Google Sheets a qualquer momento."
+          }
+        ]
+      }
     },
     {
       "name": "Controle de despesas",
@@ -137,7 +239,42 @@
     },
     {
       "name": "Razão de clientes",
-      "shortDescription": "Caderneta digital de fiado — crédito, pagamentos e saldo por cliente."
+      "shortDescription": "Caderneta digital de fiado — crédito, pagamentos e saldo por cliente.",
+      "seo": {
+        "title": "Razão de clientes grátis — caderneta digital",
+        "description": "Caderneta digital: acompanhe o crédito dado e os pagamentos recebidos de cada cliente, com saldo em dia. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "caderneta digital",
+          "razão de clientes",
+          "livro de crédito",
+          "caderneta grátis",
+          "controle de crédito de clientes",
+          "udhaar khata"
+        ],
+        "ogTitle": "Razão de clientes",
+        "ogDescription": "Caderneta digital: acompanhe o crédito dado e os pagamentos recebidos de cada cliente, com saldo em dia. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Razão de clientes",
+        "headline": "Razão de clientes",
+        "subheadline": "A sua caderneta, em digital — crédito, pagamentos e saldo de cada cliente."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é uma caderneta digital?",
+            "answer": "A versão digital do caderninho de crédito de sempre: registre o crédito que você dá ao cliente e os pagamentos que ele faz, e o saldo de cada cliente é calculado sozinho."
+          },
+          {
+            "question": "Ela usa os clientes que eu já tenho?",
+            "answer": "Sim. Se você usa o PDV de navegador ou o Gerador de faturas da Setu neste dispositivo, a razão usa a mesma lista de clientes compartilhada — cadastre o cliente uma vez e use em todo lugar."
+          },
+          {
+            "question": "Minha caderneta fica privada?",
+            "answer": "Totalmente. Todos os dados ficam no seu navegador, no seu dispositivo — sem cadastro, sem nuvem. Exporte um backup em CSV quando quiser."
+          }
+        ]
+      }
     },
     {
       "name": "Agenda de atendimentos",
@@ -223,7 +360,7 @@
       "name": "Gerador de ordem de compra",
       "shortDescription": "Autorize compras de fornecedores formalmente — itens, preços, prazo e condições em uma OC.",
       "seo": {
-        "title": "Gerador de ordens de compra gratuito",
+        "title": "Gerador de ordem de compra gratuito",
         "description": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro.",
         "keywords": [
           "gerador de ordens de compra",
@@ -232,12 +369,12 @@
           "modelo de ordem de compra grátis",
           "ordem de compra PDF"
         ],
-        "ogTitle": "Gerador de ordens de compra",
+        "ogTitle": "Gerador de ordem de compra",
         "ogDescription": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de ordens de compra",
-        "headline": "Gerador de ordens de compra",
+        "eyebrow": "Ferramenta gratuita — Gerador de ordem de compra",
+        "headline": "Gerador de ordem de compra",
         "subheadline": "Autorize compras a fornecedores formalmente: itens, preços, data de entrega e condições em uma única ordem limpa."
       },
       "faq": {
@@ -261,7 +398,7 @@
       "name": "Gerador de pedido de venda",
       "shortDescription": "Confirme pedidos de clientes antes do envio — itens, preços e data de entrega num só documento.",
       "seo": {
-        "title": "Gerador de pedidos de venda gratuito",
+        "title": "Gerador de pedido de venda gratuito",
         "description": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro.",
         "keywords": [
           "gerador de pedidos de venda",
@@ -270,12 +407,12 @@
           "criar pedido de venda",
           "modelo de pedido de venda grátis"
         ],
-        "ogTitle": "Gerador de pedidos de venda",
+        "ogTitle": "Gerador de pedido de venda",
         "ogDescription": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de pedidos de venda",
-        "headline": "Gerador de pedidos de venda",
+        "eyebrow": "Ferramenta gratuita — Gerador de pedido de venda",
+        "headline": "Gerador de pedido de venda",
         "subheadline": "Confirme o que o cliente pediu — itens, preços e data de entrega — antes de despachar qualquer coisa."
       },
       "faq": {

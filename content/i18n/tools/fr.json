@@ -113,15 +113,117 @@
     },
     {
       "name": "Registre de stock",
-      "shortDescription": "Stocks en temps réel, ajustements et historique des mouvements, partagés avec votre caisse."
+      "shortDescription": "Stocks en temps réel, ajustements et historique des mouvements, partagés avec votre Caisse dans le navigateur.",
+      "seo": {
+        "title": "Registre de stock gratuit — stock en temps réel",
+        "description": "Consultez le stock en temps réel, enregistrez les entrées et sorties et vérifiez chaque mouvement — partagé avec la Caisse dans le navigateur. Gratuit.",
+        "keywords": [
+          "registre de stock",
+          "registre d'inventaire",
+          "gestion de stock gratuite",
+          "registre entrées sorties",
+          "suivi de stock hors ligne"
+        ],
+        "ogTitle": "Registre de stock",
+        "ogDescription": "Consultez le stock en temps réel, enregistrez les entrées et sorties et vérifiez chaque mouvement — partagé avec la Caisse dans le navigateur. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Registre de stock",
+        "headline": "Registre de stock",
+        "subheadline": "Un stock en temps réel, des corrections rapides et tout l'historique des mouvements — une seule vérité avec votre Caisse dans le navigateur."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "D'où viennent les données de stock ?",
+            "answer": "De votre espace de travail Setu sur cet appareil : les mêmes produits et le même stock que la Caisse dans le navigateur. Il n'y a qu'une seule vérité : une correction faite ici apparaît aussitôt dans la caisse, et chaque vente de la caisse apparaît ici dans l'historique des mouvements."
+          },
+          {
+            "question": "Mes données d'inventaire sont-elles envoyées quelque part ?",
+            "answer": "Non. Tout reste dans votre navigateur, sur votre appareil. Pas d'inscription, pas de cloud, pas de serveur."
+          },
+          {
+            "question": "Puis-je exporter le registre ?",
+            "answer": "Oui : téléchargez la liste du stock actuel en fichier CSV, qui s'ouvre dans Excel ou Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Registre des achats",
-      "shortDescription": "Saisissez les factures fournisseurs et mettez à jour le stock en une seule validation."
+      "shortDescription": "Saisissez les factures fournisseurs et mettez à jour le stock en une seule validation.",
+      "seo": {
+        "title": "Registre des achats gratuit — factures fournisseur",
+        "description": "Enregistrez les factures d'achat par fournisseur, reliez les lignes à vos produits et le stock se met à jour tout seul. Gratuit, hors ligne, sans inscription.",
+        "keywords": [
+          "registre des achats",
+          "enregistrement facture d'achat",
+          "achats fournisseurs",
+          "saisie d'achat gratuite",
+          "registre achats stock"
+        ],
+        "ogTitle": "Registre des achats",
+        "ogDescription": "Enregistrez les factures d'achat par fournisseur, reliez les lignes à vos produits et le stock se met à jour tout seul. Gratuit, hors ligne, sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Registre des achats",
+        "headline": "Registre des achats",
+        "subheadline": "Enregistrez les factures fournisseur, reliez vos produits et mettez le stock à jour en une confirmation."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Les achats mettent-ils à jour le stock de mes produits ?",
+            "answer": "Oui. Reliez les lignes d'achat à vos produits enregistrés : après une confirmation, les quantités achetées s'ajoutent au stock et apparaissent aussitôt dans le Registre de stock et dans la Caisse dans le navigateur."
+          },
+          {
+            "question": "Faut-il retaper les coordonnées du fournisseur ?",
+            "answer": "Non. Les fournisseurs enregistrés dans le Répertoire fournisseurs apparaissent ici dans une liste déroulante. Enregistrez-les une fois, réutilisez-les toujours."
+          },
+          {
+            "question": "Mes données d'achat restent-elles privées ?",
+            "answer": "Entièrement. Tout est enregistré dans votre navigateur, sur votre appareil : pas d'inscription, pas de cloud, et vous pouvez exporter un CSV à tout moment."
+          }
+        ]
+      }
     },
     {
       "name": "Répertoire fournisseurs",
-      "shortDescription": "Tous vos fournisseurs au même endroit, réutilisés par le registre des achats."
+      "shortDescription": "Tous vos fournisseurs au même endroit, réutilisés par le registre des achats.",
+      "seo": {
+        "title": "Répertoire fournisseurs gratuit — contacts, GSTIN",
+        "description": "Gardez les coordonnées de tous vos fournisseurs au même endroit : contact, GSTIN, adresses et notes. Gratuit, hors ligne et sans inscription.",
+        "keywords": [
+          "répertoire fournisseurs",
+          "gestion des fournisseurs gratuite",
+          "contacts fournisseurs",
+          "GSTIN fournisseur",
+          "registre des fournisseurs"
+        ],
+        "ogTitle": "Répertoire fournisseurs",
+        "ogDescription": "Gardez les coordonnées de tous vos fournisseurs au même endroit : contact, GSTIN, adresses et notes. Gratuit, hors ligne et sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Répertoire fournisseurs",
+        "headline": "Répertoire fournisseurs",
+        "subheadline": "Tous vos fournisseurs au même endroit — enregistrés une fois, repris par chaque outil Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Où sont enregistrées les données de mes fournisseurs ?",
+            "answer": "Dans votre navigateur, sur votre appareil, à l'intérieur de votre espace de travail Setu. Rien n'est envoyé : pas d'inscription, pas de cloud."
+          },
+          {
+            "question": "Quels autres outils utilisent mes fournisseurs ?",
+            "answer": "Le Registre des achats choisit les fournisseurs directement dans ce répertoire : vous ne retapez jamais leurs coordonnées en enregistrant une facture d'achat."
+          },
+          {
+            "question": "Puis-je exporter mes fournisseurs ?",
+            "answer": "Oui : exportez tout le répertoire en CSV, qui s'ouvre dans Excel ou Google Sheets à tout moment."
+          }
+        ]
+      }
     },
     {
       "name": "Suivi des dépenses",
@@ -137,7 +239,42 @@
     },
     {
       "name": "Livre de comptes clients",
-      "shortDescription": "Ardoise numérique : crédit, règlements et solde par client."
+      "shortDescription": "Ardoise numérique : crédit, règlements et solde par client.",
+      "seo": {
+        "title": "Livre de comptes clients gratuit — crédit",
+        "description": "Carnet de crédit numérique : suivez le crédit accordé et les paiements reçus pour chaque client, avec les soldes à jour. Gratuit et sans inscription.",
+        "keywords": [
+          "carnet de crédit",
+          "livre de comptes clients",
+          "livre de dettes",
+          "carnet de comptes gratuit",
+          "suivi du crédit client",
+          "udhaar khata"
+        ],
+        "ogTitle": "Livre de comptes clients",
+        "ogDescription": "Carnet de crédit numérique : suivez le crédit accordé et les paiements reçus pour chaque client, avec les soldes à jour. Gratuit et sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Livre de comptes clients",
+        "headline": "Livre de comptes clients",
+        "subheadline": "Votre carnet de crédit, en numérique — crédit, paiements et solde pour chaque client."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un carnet de crédit numérique ?",
+            "answer": "La version numérique du carnet de crédit habituel : notez le crédit accordé à un client et les paiements qu'il effectue, et le solde de chaque client se calcule tout seul."
+          },
+          {
+            "question": "Utilise-t-il mes clients existants ?",
+            "answer": "Oui. Si vous utilisez la Caisse dans le navigateur ou le Générateur de factures Setu sur cet appareil, le livre reprend le même carnet de clients partagé : ajoutez un client une fois, utilisez-le partout."
+          },
+          {
+            "question": "Mon carnet reste-t-il privé ?",
+            "answer": "Entièrement. Toutes les données restent dans votre navigateur, sur votre appareil : pas d'inscription, pas de cloud. Exportez une sauvegarde CSV à tout moment."
+          }
+        ]
+      }
     },
     {
       "name": "Agenda des rendez-vous",
@@ -261,7 +398,7 @@
       "name": "Générateur de commandes clients",
       "shortDescription": "Confirmez la commande avant expédition : articles, prix et date de livraison sur un seul document.",
       "seo": {
-        "title": "Générateur d'accusés de commande gratuit",
+        "title": "Générateur de commandes clients gratuit",
         "description": "Confirmez les commandes clients avant expédition avec un accusé de commande professionnel : articles, prix, date de livraison, PDF. Gratuit, sans inscription.",
         "keywords": [
           "générateur d'accusés de commande",
@@ -270,12 +407,12 @@
           "créer un accusé de commande",
           "modèle de commande client gratuit"
         ],
-        "ogTitle": "Générateur d'accusés de commande",
+        "ogTitle": "Générateur de commandes clients",
         "ogDescription": "Confirmez les commandes clients avant expédition avec un accusé de commande professionnel : articles, prix, date de livraison, PDF. Gratuit, sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Générateur d'accusés de commande",
-        "headline": "Générateur d'accusés de commande",
+        "eyebrow": "Outil gratuit — Générateur de commandes clients",
+        "headline": "Générateur de commandes clients",
         "subheadline": "Confirmez ce que le client a commandé — articles, prix et date de livraison — avant toute expédition."
       },
       "faq": {
@@ -540,12 +677,12 @@
           "actif passif capitaux propres",
           "bilan petite entreprise"
         ],
-        "ogTitle": "Bilan comptable",
+        "ogTitle": "Bilan",
         "ogDescription": "Construisez un bilan avec actif circulant et immobilisé, dettes et capitaux propres. Contrôle d'équilibre en direct, impression A4, export CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Bilan comptable",
-        "headline": "Bilan comptable",
+        "eyebrow": "Outil gratuit — Bilan",
+        "headline": "Bilan",
         "subheadline": "Ce que vous possédez, ce que vous devez et ce qui reste aux associés — vérifié en direct, donc toujours équilibré."
       },
       "faq": {
@@ -569,7 +706,7 @@
       "name": "Tableau des flux de trésorerie",
       "shortDescription": "Flux d'exploitation, d'investissement et de financement, de la trésorerie d'ouverture à la clôture.",
       "seo": {
-        "title": "Tableau de flux de trésorerie gratuit",
+        "title": "Tableau des flux de trésorerie gratuit",
         "description": "Construisez un tableau de flux de trésorerie par activités d'exploitation, d'investissement et de financement. Du solde initial au final, PDF et CSV. Gratuit.",
         "keywords": [
           "tableau de flux de trésorerie",
@@ -578,12 +715,12 @@
           "exploitation investissement financement",
           "trésorerie petite entreprise"
         ],
-        "ogTitle": "Tableau de flux de trésorerie",
+        "ogTitle": "Tableau des flux de trésorerie",
         "ogDescription": "Construisez un tableau de flux de trésorerie par activités d'exploitation, d'investissement et de financement. Du solde initial au final, PDF et CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Tableau de flux de trésorerie",
-        "headline": "Tableau de flux de trésorerie",
+        "eyebrow": "Outil gratuit — Tableau des flux de trésorerie",
+        "headline": "Tableau des flux de trésorerie",
         "subheadline": "D'où la trésorerie est venue et où elle est allée — exploitation, investissement et financement, du solde d'ouverture à celui de clôture."
       },
       "faq": {

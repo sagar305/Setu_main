@@ -209,7 +209,7 @@
       "name": "Calculadora de punto de equilibrio",
       "shortDescription": "Descubre cuántas unidades necesitas vender para cubrir tus costes.",
       "seo": {
-        "title": "Calculadora de Punto de Equilibrio — Gratis | Setu",
+        "title": "Calculadora de punto de equilibrio — Gratis | Setu",
         "description": "Calcula tu punto de equilibrio en unidades e ingresos. Calculadora de punto de equilibrio gratuita para restaurantes, tiendas y pequeños negocios.",
         "keywords": [
           "calculadora de punto de equilibrio",
@@ -219,7 +219,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Punto de Equilibrio",
-        "headline": "Calculadora de Punto de Equilibrio",
+        "headline": "Calculadora de punto de equilibrio",
         "subheadline": "Introduce tus costes fijos, el precio y el coste variable por unidad para ver exactamente cuánto necesitas vender para cubrir costes."
       },
       "about": {
@@ -262,7 +262,7 @@
       "name": "Calculadora de porcentaje de coste de alimentos",
       "shortDescription": "Comprueba si el coste de los ingredientes de un plato es razonable para su precio de carta.",
       "seo": {
-        "title": "Calculadora de Coste de Comida para Restaurantes | Setu",
+        "title": "Porcentaje de coste de alimentos para restaurantes",
         "description": "Calculadora gratuita del porcentaje de coste de comida. Introduce el coste de los ingredientes y el precio de carta para ver el % y el beneficio por plato.",
         "keywords": [
           "calculadora de coste de comida",
@@ -273,7 +273,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Coste de Comida",
-        "headline": "Calculadora de Coste de Comida",
+        "headline": "Calculadora de porcentaje de coste de alimentos",
         "subheadline": "Introduce el coste de los ingredientes de un plato y su precio de carta para ver su porcentaje de coste de comida y el beneficio por plato."
       },
       "about": {
@@ -370,7 +370,7 @@
       "shortDescription": "Estima la cuota mensual, los intereses totales y el pago total de un préstamo de negocio.",
       "seo": {
         "title": "Calculadora de cuota de préstamo — gratis | Setu",
-        "description": "Calculadora de cuota de préstamo de negocio gratuita. Introduce importe, tipo de interés y plazo para ver la cuota mensual, los intereses y el total a pagar.",
+        "description": "Calculadora de cuota de préstamo (EMI) gratuita. Introduce importe, tipo de interés y plazo para ver la cuota mensual, los intereses y el total a pagar.",
         "keywords": [
           "calculadora de cuota de préstamo",
           "calculadora de préstamo de negocio",
@@ -380,7 +380,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Calculadora de cuota",
-        "headline": "Calculadora de cuota de préstamo de negocio",
+        "headline": "Calculadora de cuota de préstamo (EMI)",
         "subheadline": "Introduce el importe, el tipo de interés y el plazo para ver tu cuota mensual, los intereses totales y el total a devolver."
       },
       "about": {
@@ -423,7 +423,7 @@
       "name": "Calculadora de rotación de mesas",
       "shortDescription": "Mira cuántas veces se ocupa cada mesa durante el servicio y tu tiempo medio de rotación.",
       "seo": {
-        "title": "Calculadora de Rotación de Mesas — Gratis | Setu",
+        "title": "Calculadora de rotación de mesas — Gratis | Setu",
         "description": "Calculadora gratuita de rotación de mesas para restaurantes. Introduce los cubiertos servidos, el número de mesas y las horas de servicio para ver la rotación.",
         "keywords": [
           "calculadora de rotación de mesas",
@@ -433,7 +433,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Rotación de Mesas",
-        "headline": "Calculadora de Rotación de Mesas",
+        "headline": "Calculadora de rotación de mesas",
         "subheadline": "Introduce los cubiertos servidos, el número de mesas y las horas de servicio para ver tu tasa de rotación y el tiempo medio por turno."
       },
       "about": {
@@ -476,7 +476,7 @@
       "name": "Calculadora de sueldo neto",
       "shortDescription": "Consulta tu sueldo neto mensual tras el fondo de pensiones, impuestos y otras deducciones del CTC.",
       "seo": {
-        "title": "Calculadora de Sueldo Neto — de CTC a neto | Setu",
+        "title": "Calculadora de sueldo neto — de CTC a neto | Setu",
         "description": "Calculadora de sueldo neto gratuita. Introduce el coste anual por empleado y estima el sueldo mensual neto tras aportaciones sociales e impuestos.",
         "keywords": [
           "calculadora de sueldo neto",
@@ -487,7 +487,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Sueldo Neto",
-        "headline": "Calculadora de Sueldo Neto",
+        "headline": "Calculadora de sueldo neto",
         "subheadline": "Introduce el coste anual por empleado y estima el sueldo mensual neto tras las deducciones habituales."
       },
       "about": {
@@ -530,7 +530,7 @@
       "name": "Calculadora de impuesto sobre la renta",
       "shortDescription": "Estima el impuesto sobre la renta con el régimen antiguo o el nuevo para el ejercicio 2025-26.",
       "seo": {
-        "title": "Calculadora de Impuesto sobre la Renta — India | Setu",
+        "title": "Calculadora de impuesto sobre la renta — India | Setu",
         "description": "Calculadora gratuita del impuesto sobre la renta en India para 2025-26. Compara el régimen antiguo y el nuevo y mira cuál sale más barato. Solo estimación.",
         "keywords": [
           "calculadora de impuesto sobre la renta",
@@ -541,7 +541,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Impuesto sobre la Renta",
-        "headline": "Calculadora de Impuesto sobre la Renta",
+        "headline": "Calculadora de impuesto sobre la renta",
         "subheadline": "Compara el impuesto del régimen antiguo y del nuevo sobre tus ingresos en el ejercicio 2025-26 y mira cuál sale más barato."
       },
       "about": {
@@ -595,7 +595,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Gratificación",
-        "headline": "Calculadora de Gratificación por Antigüedad",
+        "headline": "Calculadora de indemnización por servicio",
         "subheadline": "Introduce el último salario cobrado y los años de servicio para estimar la gratificación que corresponde al salir."
       },
       "about": {
@@ -649,7 +649,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Comisión de Pedidos Online",
-        "headline": "Calculadora de Comisión de Pedidos Online",
+        "headline": "Calculadora de comisión de pedidos online",
         "subheadline": "Introduce el valor del pedido y los cargos de la plataforma para ver exactamente cuánto te llevas de un pedido online."
       },
       "about": {
@@ -693,7 +693,7 @@
       "shortDescription": "Encuentra el precio a publicar en apps de reparto para conservar tu importe objetivo tras comisión e impuestos.",
       "seo": {
         "title": "Calculadora de precios de menú para apps de reparto",
-        "description": "Calculadora de precios de menú online gratuita para restaurantes. Indica lo que quieres recibir y halla el precio a publicar que cubre comisión, GST y pasarela.",
+        "description": "Calculadora gratuita de precios de carta para restaurantes. Indica lo que quieres recibir y halla el precio a publicar que cubre comisión, GST y pasarela.",
         "keywords": [
           "calculadora de precios de menú para Zomato",
           "calculadora de precios Swiggy",
@@ -703,8 +703,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Calculadora de precios de menú online",
-        "headline": "Calculadora de precios de menú online",
+        "eyebrow": "Herramienta gratuita — Calculadora de precios de carta online",
+        "headline": "Calculadora de precios de carta online",
         "subheadline": "Dinos cuánto quieres recibir de verdad por un pedido online y calculamos el precio que necesitas publicar en la aplicación."
       },
       "about": {
@@ -748,8 +748,8 @@
       "name": "Calculadora de escandallo de recetas",
       "shortDescription": "Calcula el coste de una receta ingrediente a ingrediente y halla el coste real por ración.",
       "seo": {
-        "title": "Calculadora de coste de recetas — coste por ración",
-        "description": "Calculadora de coste de recetas gratuita para restaurantes. Añade ingredientes y cantidades para ver el coste total, el coste por ración y un precio sugerido.",
+        "title": "Calculadora de escandallo de recetas — coste por ración",
+        "description": "Calculadora de escandallo de recetas gratuita para restaurantes. Añade ingredientes y cantidades para ver el coste total y el coste por ración.",
         "keywords": [
           "calculadora de coste de recetas",
           "calculadora de coste de receta",
@@ -758,8 +758,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Calculadora de coste de recetas",
-        "headline": "Calculadora de coste de recetas",
+        "eyebrow": "Herramienta gratuita — Calculadora de escandallo de recetas",
+        "headline": "Calculadora de escandallo de recetas",
         "subheadline": "Añade cada ingrediente y su cantidad para conocer el coste real de una receta, por ración."
       },
       "about": {
@@ -802,8 +802,8 @@
       "name": "Calculadora de coste de bebidas servidas",
       "shortDescription": "Halla tu porcentaje de coste por copa y el beneficio de cada bebida que sirves.",
       "seo": {
-        "title": "Calculadora de coste de trago — control de barra",
-        "description": "Calculadora de coste de trago gratuita para bares y restaurantes. Introduce coste de la botella, medida y precio de venta para ver el coste % y el beneficio.",
+        "title": "Calculadora de coste de bebidas servidas — control de barra",
+        "description": "Calculadora gratuita de coste de bebidas para bares y restaurantes. Introduce coste de la botella, medida y precio de venta para ver el coste % y el beneficio.",
         "keywords": [
           "calculadora de coste de trago",
           "calculadora de coste de licor",
@@ -812,8 +812,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Calculadora de coste de trago",
-        "headline": "Calculadora de coste de trago",
+        "eyebrow": "Herramienta gratuita — Calculadora de coste de bebidas servidas",
+        "headline": "Calculadora de coste de bebidas servidas",
         "subheadline": "Introduce el coste de la botella, la medida del trago y el precio de venta para ver tu coste de trago % y el beneficio por copa."
       },
       "about": {
@@ -856,7 +856,7 @@
       "name": "Calculadora de reparto de propinas",
       "shortDescription": "Reparte un bote de propinas de forma justa por horas, partes o a partes iguales.",
       "seo": {
-        "title": "Calculadora de Reparto de Propinas | Setu",
+        "title": "Calculadora de reparto de propinas | Setu",
         "description": "Calculadora gratuita de reparto de propinas. Añade personal y horas o puntos para repartir el bote con justicia: a partes iguales, por horas o por puntos.",
         "keywords": [
           "calculadora de reparto de propinas",
@@ -867,7 +867,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Reparto de Propinas",
-        "headline": "Calculadora de Reparto de Propinas",
+        "headline": "Calculadora de reparto de propinas",
         "subheadline": "Añade a tu personal y reparte un bote de propinas a partes iguales, por horas trabajadas o por puntos."
       },
       "about": {
@@ -910,7 +910,7 @@
       "name": "Calculadora de rotación de inventario",
       "shortDescription": "Descubre cuántas veces rota tu inventario en un periodo y cuántos días de stock tienes.",
       "seo": {
-        "title": "Calculadora de Rotación de Inventario | Setu",
+        "title": "Calculadora de rotación de inventario | Setu",
         "description": "Calculadora gratuita de rotación de inventario para comercios. Introduce el coste de las ventas y el inventario medio para ver la rotación y los días de stock.",
         "keywords": [
           "calculadora de rotación de inventario",
@@ -921,7 +921,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Rotación de Inventario",
-        "headline": "Calculadora de Rotación de Inventario",
+        "headline": "Calculadora de rotación de inventario",
         "subheadline": "Introduce el coste de las mercancías vendidas y el valor medio del inventario para ver tu índice de rotación y los días de stock que tienes."
       },
       "about": {
@@ -964,7 +964,7 @@
       "name": "Calculadora de punto de pedido",
       "shortDescription": "Halla el nivel exacto de stock que debe activar tu próximo pedido.",
       "seo": {
-        "title": "Calculadora de Punto de Pedido — Evita Faltas | Setu",
+        "title": "Calculadora de punto de pedido — Evita Faltas | Setu",
         "description": "Calculadora gratuita de punto de pedido para comercios. Introduce la venta media diaria, el plazo de entrega y el stock de seguridad para saber cuándo pedir.",
         "keywords": [
           "calculadora de punto de pedido",
@@ -975,7 +975,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Punto de Pedido",
-        "headline": "Calculadora de Punto de Pedido",
+        "headline": "Calculadora de punto de pedido",
         "subheadline": "Introduce la venta media diaria, el plazo de entrega del proveedor y el stock de seguridad para saber cuándo deberías reponer."
       },
       "about": {
@@ -1126,8 +1126,8 @@
       "name": "Calculadora de ingeniería de menús",
       "shortDescription": "Analiza tu carta por beneficio y popularidad para identificar estrellas, vacas, incógnitas y perros.",
       "seo": {
-        "title": "Calculadora de ingeniería de menú para restaurantes",
-        "description": "Calculadora de ingeniería de menú gratuita. Introduce precios, costes y popularidad para encontrar tus platos rentables y corregir los que te comen el margen.",
+        "title": "Calculadora de ingeniería de menús para restaurantes",
+        "description": "Calculadora de ingeniería de menús gratuita. Introduce precios, costes y popularidad para encontrar tus platos rentables y corregir los que te comen el margen.",
         "keywords": [
           "calculadora de ingeniería de menú",
           "análisis del menú de restaurante",
@@ -1139,8 +1139,8 @@
         ]
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Calculadora de ingeniería de menú",
-        "headline": "Calculadora de ingeniería de menú",
+        "eyebrow": "Herramienta gratuita — Calculadora de ingeniería de menús",
+        "headline": "Calculadora de ingeniería de menús",
         "subheadline": "Analiza tu menú por beneficio y popularidad: identifica las estrellas que promocionar, las vacas lecheras que destacar y los perros que retirar o a los que cambiar el precio."
       },
       "about": {
@@ -1247,7 +1247,7 @@
       "name": "Calculadora de impuesto sobre ventas",
       "shortDescription": "Calcula el sales tax de EE. UU.: combina tipos estatales y locales, añádelo o extráelo de un total.",
       "seo": {
-        "title": "Calculadora de Impuesto sobre Ventas (EE. UU.) | Setu",
+        "title": "Calculadora de impuesto sobre ventas (EE. UU.) | Setu",
         "description": "Calculadora gratuita de impuesto sobre ventas. Combina tipos estatales y locales, añade el impuesto a un precio o extráelo de un total pagado. Sin registro.",
         "keywords": [
           "calculadora de impuesto sobre ventas",
@@ -1259,7 +1259,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Impuesto sobre Ventas",
-        "headline": "Calculadora de Impuesto sobre Ventas",
+        "headline": "Calculadora de impuesto sobre ventas",
         "subheadline": "Combina los tipos estatal y local, y después añade el impuesto a un precio o extráelo de un total que ya pagaste."
       },
       "about": {
@@ -1369,7 +1369,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Amortización",
-        "headline": "Calculadora de Amortización",
+        "headline": "Calculadora de amortización",
         "subheadline": "Introduce el coste del activo, el valor residual y la vida útil: obtén la amortización anual y un cuadro completo año por año, lineal o de saldo decreciente."
       },
       "about": {
@@ -1468,7 +1468,7 @@
       "name": "Calculadora de desviación de precio de compra",
       "shortDescription": "Compara precios de compra reales y estándar y ve la desviación total al instante.",
       "seo": {
-        "title": "Calculadora de variación del precio de compra (PPV)",
+        "title": "Calculadora de desviación de precio de compra (PPV)",
         "description": "Calculadora PPV gratuita. Compara los precios realmente pagados con los precios estándar o presupuestados y obtén la variación por unidad, en % y total.",
         "keywords": [
           "calculadora de variación del precio de compra",
@@ -1480,7 +1480,7 @@
       },
       "hero": {
         "eyebrow": "Herramienta gratuita — Calculadora PPV",
-        "headline": "Calculadora de variación del precio de compra",
+        "headline": "Calculadora de desviación de precio de compra",
         "subheadline": "Precio estándar frente a precio real × cantidad: mira la variación por unidad, en porcentaje y total, marcada como favorable o desfavorable."
       },
       "about": {
