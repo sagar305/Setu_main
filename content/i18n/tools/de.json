@@ -145,19 +145,155 @@
     },
     {
       "name": "Gutschriftengenerator",
-      "shortDescription": "Steuerfertige Gutschriften für Retouren und Rechnungskorrekturen. Sofort als PDF, ohne Anmeldung."
+      "shortDescription": "Steuerfertige Gutschriften für Retouren und Rechnungskorrekturen. Sofort als PDF, ohne Anmeldung.",
+      "seo": {
+        "title": "Kostenloser Gutschrift-Generator — PDF sofort",
+        "description": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Gutschrift Generator",
+          "Gutschrift Vorlage",
+          "Gutschrift mit Umsatzsteuer",
+          "Gutschrift zur Rechnung",
+          "Gutschrift kostenlos erstellen"
+        ],
+        "ogTitle": "Gutschrift-Generator",
+        "ogDescription": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Gutschrift-Generator",
+        "headline": "Gutschrift-Generator",
+        "subheadline": "Rücksendungen und Rechnungskorrekturen professionell abwickeln — Rechnung referenzieren, Posten auflisten, PDF drucken."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wann sollte ich eine Gutschrift ausstellen?",
+            "answer": "Wenn Sie den Betrag einer bereits gestellten Rechnung senken müssen — zurückgesandte Ware, ein zu hoher Betrag, ein nachträglicher Rabatt oder ein Rechnungsfehler. Die Gutschrift verweist auf die Originalrechnung und hält die Minderung fest."
+          },
+          {
+            "question": "Erfüllt diese Gutschrift die steuerlichen Anforderungen?",
+            "answer": "Sie enthält die Felder, die die Praxis erwartet — Ihre Steuernummer, die des Kunden, den Verweis auf die Originalrechnung, Einzelposten mit Steuersätzen und einen klaren Grund. Melden Sie sie so, wie es Ihr Steuerberater vorgibt."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — alles bleibt im lokalen Speicher Ihres Browsers. Nichts wird auf einen Server geladen, und eine Anmeldung ist nicht nötig."
+          }
+        ]
+      }
     },
     {
       "name": "Belastungsanzeigen-Generator",
-      "shortDescription": "Belastungsanzeigen für Retouren, Minderlieferung und Preisdifferenzen. Sofort als PDF."
+      "shortDescription": "Belastungsanzeigen für Retouren, Minderlieferung und Preisdifferenzen. Sofort als PDF.",
+      "seo": {
+        "title": "Kostenloser Generator für Lastschriftanzeigen",
+        "description": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos.",
+        "keywords": [
+          "Lastschriftanzeige Generator",
+          "Belastungsanzeige Vorlage",
+          "Einkaufsrücksendung Anzeige",
+          "Lastschriftanzeige Umsatzsteuer",
+          "Belastungsanzeige kostenlos"
+        ],
+        "ogTitle": "Generator für Lastschriftanzeigen",
+        "ogDescription": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Generator für Lastschriftanzeigen",
+        "headline": "Generator für Lastschriftanzeigen",
+        "subheadline": "Ware geht zurück oder die Lieferantenrechnung stimmt nicht? Stellen Sie in einer Minute eine saubere, nach Posten aufgeschlüsselte Belastungsanzeige aus."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wofür dient eine Lastschriftanzeige?",
+            "answer": "Der Käufer stellt dem Lieferanten eine Lastschriftanzeige, um festzuhalten, dass seine Verbindlichkeit sinkt — zurückgesandte Ware, Fehlmenge, beschädigte Artikel oder eine Preisabweichung gegenüber der Lieferantenrechnung."
+          },
+          {
+            "question": "Was unterscheidet sie von einer Gutschrift?",
+            "answer": "Es sind die zwei Seiten derselben Korrektur: der Käufer stellt die Lastschriftanzeige an den Lieferanten, der Verkäufer antwortet mit (oder stellt direkt) eine Gutschrift. Was Sie ausstellen, hängt davon ab, auf welcher Seite des Geschäfts Sie stehen."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — die Belege werden nur im lokalen Speicher Ihres Browsers gespeichert. Nichts wird hochgeladen, und ein Konto ist nicht nötig."
+          }
+        ]
+      }
     },
     {
       "name": "Bestellgenerator",
-      "shortDescription": "Einkäufe formell freigeben — Artikel, Preise, Liefertermin und Konditionen in einer Bestellung."
+      "shortDescription": "Einkäufe formell freigeben — Artikel, Preise, Liefertermin und Konditionen in einer Bestellung.",
+      "seo": {
+        "title": "Kostenloser Bestellungs-Generator — PO erstellen",
+        "description": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Bestellung Generator",
+          "Bestellung erstellen",
+          "Bestellung Vorlage",
+          "kostenlose Bestellvorlage",
+          "Bestellung PDF"
+        ],
+        "ogTitle": "Bestellungs-Generator",
+        "ogDescription": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Bestellungs-Generator",
+        "headline": "Bestellungs-Generator",
+        "subheadline": "Einkäufe bei Lieferanten formell freigeben — Artikel, Preise, Liefertermin und Bedingungen auf einer klaren Bestellung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum eine Bestellung statt eines Anrufs?",
+            "answer": "Die Bestellung hält Artikel, Mengen, Preise und Liefertermin schriftlich fest, bevor Geld fließt. Sie verhindert das „das habe ich so nicht bestellt\" und gibt Ihnen einen Beleg, gegen den Sie die Lieferantenrechnung prüfen können."
+          },
+          {
+            "question": "Was gehört auf eine Bestellung?",
+            "answer": "Bestellnummer und Datum, Lieferantendaten, Einzelposten mit Mengen und vereinbarten Preisen, Steuern, der erwartete Liefertermin und etwaige Bedingungen — alles davon deckt dieses Tool ab."
+          },
+          {
+            "question": "Kann ich Bestellungen für später speichern?",
+            "answer": "Ja — gespeicherte Bestellungen bleiben im lokalen Speicher Ihres Browsers, Sie können sie also jederzeit neu drucken. Nichts wird auf einen Server geladen."
+          }
+        ]
+      }
     },
     {
       "name": "Auftragsgenerator",
-      "shortDescription": "Kundenaufträge vor dem Versand bestätigen — Artikel, Preise und Liefertermin in einem Dokument."
+      "shortDescription": "Kundenaufträge vor dem Versand bestätigen — Artikel, Preise und Liefertermin in einem Dokument.",
+      "seo": {
+        "title": "Kostenloser Generator für Auftragsbestätigungen",
+        "description": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Auftragsbestätigung Generator",
+          "Auftragsbestätigung Vorlage",
+          "Bestellbestätigung Dokument",
+          "Auftragsbestätigung erstellen",
+          "kostenlose Auftragsvorlage"
+        ],
+        "ogTitle": "Generator für Auftragsbestätigungen",
+        "ogDescription": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Generator für Auftragsbestätigungen",
+        "headline": "Generator für Auftragsbestätigungen",
+        "subheadline": "Halten Sie fest, was der Kunde bestellt hat — Artikel, Preise und Liefertermin — bevor etwas das Haus verlässt."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wofür dient eine Auftragsbestätigung?",
+            "answer": "Sie bestätigt den Kundenauftrag schriftlich, bevor Sie versenden oder abrechnen — Artikel, Mengen, Preise und Liefertermin sind damit fixiert, und beide Seiten sind sich von Anfang an einig."
+          },
+          {
+            "question": "Was unterscheidet sie von einer Rechnung?",
+            "answer": "Die Auftragsbestätigung bestätigt den Auftrag, die Rechnung fordert das Geld. Üblich ist, die Bestätigung bei Auftragseingang zu stellen und sie beim Versand in eine Rechnung zu überführen (das übernimmt unser kostenloser Rechnungsgenerator)."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — alles bleibt im lokalen Speicher Ihres Browsers, nichts wird hochgeladen, und eine Anmeldung ist nicht nötig."
+          }
+        ]
+      }
     },
     {
       "name": "Kontenplan",

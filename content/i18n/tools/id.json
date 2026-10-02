@@ -145,19 +145,155 @@
     },
     {
       "name": "Pembuat nota kredit",
-      "shortDescription": "Terbitkan nota kredit siap pajak untuk retur dan koreksi tagihan. PDF seketika, tanpa daftar."
+      "shortDescription": "Terbitkan nota kredit siap pajak untuk retur dan koreksi tagihan. PDF seketika, tanpa daftar.",
+      "seo": {
+        "title": "Generator Nota Kredit Gratis — PDF Seketika",
+        "description": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "generator nota kredit",
+          "format nota kredit",
+          "nota kredit pajak",
+          "nota kredit atas faktur",
+          "buat nota kredit gratis"
+        ],
+        "ogTitle": "Generator Nota Kredit",
+        "ogDescription": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Generator Nota Kredit",
+        "headline": "Generator Nota Kredit",
+        "subheadline": "Tangani pengembalian dan penyesuaian tagihan secara profesional — rujuk fakturnya, rinci barangnya, cetak PDF-nya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kapan saya perlu menerbitkan nota kredit?",
+            "answer": "Ketika Anda perlu mengurangi nilai faktur yang sudah diterbitkan — barang dikembalikan, tagihan kelebihan, diskon setelah penjualan, atau salah tagih. Nota kredit merujuk faktur aslinya dan mencatat pengurangannya."
+          },
+          {
+            "question": "Apakah nota kredit ini sesuai ketentuan pajak?",
+            "answer": "Nota ini memuat kolom yang biasa diharapkan — NPWP Anda, NPWP pelanggan, rujukan faktur asli, baris per barang beserta tarif pajaknya, dan alasan yang jelas. Laporkan dalam SPT Anda sesuai saran konsultan pajak Anda."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — semuanya tetap di penyimpanan lokal peramban Anda. Tidak ada yang diunggah ke server mana pun, dan tanpa pendaftaran."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat nota debit",
-      "shortDescription": "Buat nota debit untuk retur pembelian, kekurangan kiriman, dan selisih harga. PDF seketika."
+      "shortDescription": "Buat nota debit untuk retur pembelian, kekurangan kiriman, dan selisih harga. PDF seketika.",
+      "seo": {
+        "title": "Generator Nota Debit Gratis — Retur Pembelian",
+        "description": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "generator nota debit",
+          "format nota debit",
+          "nota retur pembelian",
+          "nota debit pajak",
+          "buat nota debit gratis"
+        ],
+        "ogTitle": "Generator Nota Debit",
+        "ogDescription": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Generator Nota Debit",
+        "headline": "Generator Nota Debit",
+        "subheadline": "Mengembalikan barang atau mempersoalkan tagihan pemasok? Terbitkan nota debit yang rapi dan terperinci dalam satu menit."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Nota debit dipakai untuk apa?",
+            "answer": "Pembeli menerbitkan nota debit kepada pemasok untuk mencatat berkurangnya utangnya — barang dikembalikan, kiriman kurang, barang rusak, atau ada selisih harga terhadap tagihan pemasok."
+          },
+          {
+            "question": "Apa bedanya nota debit dan nota kredit?",
+            "answer": "Keduanya dua sisi dari penyesuaian yang sama: pembeli menerbitkan nota debit kepada pemasok, lalu penjual menjawabnya dengan (atau langsung menerbitkan) nota kredit. Mana yang Anda terbitkan bergantung pada posisi Anda dalam transaksi."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — dokumen hanya disimpan di penyimpanan lokal peramban Anda. Tidak ada yang diunggah, dan tidak perlu akun."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat purchase order",
-      "shortDescription": "Sahkan pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syarat dalam satu PO."
+      "shortDescription": "Sahkan pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syarat dalam satu PO.",
+      "seo": {
+        "title": "Generator Purchase Order Gratis — Buat PO",
+        "description": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "generator purchase order",
+          "buat purchase order",
+          "format purchase order",
+          "template purchase order gratis",
+          "purchase order PDF"
+        ],
+        "ogTitle": "Generator Purchase Order",
+        "ogDescription": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Generator Purchase Order",
+        "headline": "Generator Purchase Order",
+        "subheadline": "Setujui pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syaratnya dalam satu PO yang rapi."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa pakai purchase order daripada telepon saja?",
+            "answer": "PO menuliskan barang, jumlah, harga, dan tanggal kirim sebelum uang bergerak. Ia mencegah perselisihan \"bukan itu yang saya pesan\" dan memberi Anda dokumen untuk mencocokkan tagihan pemasok."
+          },
+          {
+            "question": "Apa saja yang perlu ada di purchase order?",
+            "answer": "Nomor dan tanggal PO, data pemasok, baris per barang dengan jumlah dan harga yang disepakati, pajak, perkiraan tanggal kirim, serta syarat apa pun — semuanya tercakup di alat ini."
+          },
+          {
+            "question": "Bisakah PO disimpan untuk nanti?",
+            "answer": "Bisa — PO yang disimpan tetap ada di penyimpanan lokal peramban Anda, jadi bisa dicetak ulang kapan saja. Tidak ada yang diunggah ke server."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat sales order",
-      "shortDescription": "Kunci pesanan pelanggan sebelum dikirim — barang, harga, dan tanggal kirim dalam satu dokumen."
+      "shortDescription": "Kunci pesanan pelanggan sebelum dikirim — barang, harga, dan tanggal kirim dalam satu dokumen.",
+      "seo": {
+        "title": "Generator Sales Order Gratis — Konfirmasi Pesanan",
+        "description": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "generator sales order",
+          "format sales order",
+          "dokumen konfirmasi pesanan",
+          "buat sales order",
+          "template sales order gratis"
+        ],
+        "ogTitle": "Generator Sales Order",
+        "ogDescription": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Generator Sales Order",
+        "headline": "Generator Sales Order",
+        "subheadline": "Pastikan apa yang dipesan pelanggan — barang, harga, dan tanggal kirim — sebelum apa pun dikirim."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Sales order untuk apa?",
+            "answer": "Ia mengonfirmasi pesanan pelanggan secara tertulis sebelum Anda mengirim atau menagih — mengunci barang, jumlah, harga, dan tanggal kirim supaya kedua pihak sepakat sejak awal."
+          },
+          {
+            "question": "Apa bedanya sales order dengan faktur?",
+            "answer": "Sales order mengonfirmasi pesanan; faktur menagih pembayaran. Biasanya sales order diterbitkan saat pesanan dipastikan, lalu diubah menjadi faktur saat pengiriman (bagian itu ditangani generator faktur gratis kami)."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — semuanya tetap di penyimpanan lokal peramban Anda, tidak ada yang diunggah, dan tidak perlu mendaftar."
+          }
+        ]
+      }
     },
     {
       "name": "Bagan akun",

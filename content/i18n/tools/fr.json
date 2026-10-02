@@ -145,19 +145,155 @@
     },
     {
       "name": "Générateur d'avoirs",
-      "shortDescription": "Émettez des avoirs conformes pour retours et régularisations. PDF immédiat, sans inscription."
+      "shortDescription": "Émettez des avoirs conformes pour retours et régularisations. PDF immédiat, sans inscription.",
+      "seo": {
+        "title": "Générateur d'avoirs gratuit — PDF immédiat",
+        "description": "Créez des avoirs professionnels pour les retours et les ajustements. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit, hors ligne, sans inscription.",
+        "keywords": [
+          "générateur d'avoirs",
+          "modèle d'avoir",
+          "avoir avec TVA",
+          "avoir sur facture",
+          "créer un avoir gratuitement"
+        ],
+        "ogTitle": "Générateur d'avoirs",
+        "ogDescription": "Créez des avoirs professionnels pour les retours et les ajustements. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit, hors ligne, sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Générateur d'avoirs",
+        "headline": "Générateur d'avoirs",
+        "subheadline": "Traitez les retours et les régularisations de facturation proprement : référencez la facture, détaillez les lignes, imprimez le PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quand faut-il émettre un avoir ?",
+            "answer": "Quand vous devez réduire le montant d'une facture déjà émise : marchandise retournée, surfacturation, remise accordée après la vente ou erreur de facturation. L'avoir référence la facture d'origine et enregistre la réduction."
+          },
+          {
+            "question": "Cet avoir est-il conforme aux règles fiscales ?",
+            "answer": "Il porte les champs que la pratique attend : votre numéro fiscal, celui du client, la référence à la facture d'origine, des lignes détaillées avec leurs taux de taxe et un motif clair. Déclarez-le comme votre comptable vous l'indique."
+          },
+          {
+            "question": "Mes données restent-elles privées ?",
+            "answer": "Oui : tout reste dans le stockage local de votre navigateur. Rien n'est envoyé à un serveur et aucune inscription n'est nécessaire."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur de notes de débit",
-      "shortDescription": "Créez des notes de débit pour retours d'achat, livraisons incomplètes et écarts de prix. PDF immédiat."
+      "shortDescription": "Créez des notes de débit pour retours d'achat, livraisons incomplètes et écarts de prix. PDF immédiat.",
+      "seo": {
+        "title": "Générateur de notes de débit gratuit",
+        "description": "Créez des notes de débit pour les retours d'achat, les manquants et les écarts de prix. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit.",
+        "keywords": [
+          "générateur de notes de débit",
+          "modèle de note de débit",
+          "note de retour d'achat",
+          "note de débit avec TVA",
+          "créer une note de débit gratuitement"
+        ],
+        "ogTitle": "Générateur de notes de débit",
+        "ogDescription": "Créez des notes de débit pour les retours d'achat, les manquants et les écarts de prix. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Générateur de notes de débit",
+        "headline": "Générateur de notes de débit",
+        "subheadline": "Vous renvoyez de la marchandise ou contestez la facture d'un fournisseur ? Émettez une note de débit nette et détaillée en une minute."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "À quoi sert une note de débit ?",
+            "answer": "L'acheteur émet une note de débit à son fournisseur pour enregistrer une baisse de ce qu'il lui doit : marchandise retournée, quantité manquante, articles abîmés ou écart de prix par rapport à la facture du fournisseur."
+          },
+          {
+            "question": "Quelle différence avec un avoir ?",
+            "answer": "Ce sont les deux faces du même ajustement : l'acheteur émet la note de débit au fournisseur, et le vendeur répond par (ou émet directement) un avoir. Ce que vous émettez dépend du côté de l'opération où vous vous trouvez."
+          },
+          {
+            "question": "Mes données restent-elles privées ?",
+            "answer": "Oui : les documents sont enregistrés uniquement dans le stockage local de votre navigateur. Rien n'est envoyé et aucun compte n'est requis."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur de bons de commande",
-      "shortDescription": "Autorisez formellement un achat fournisseur : articles, prix, date de livraison et conditions sur un seul bon."
+      "shortDescription": "Autorisez formellement un achat fournisseur : articles, prix, date de livraison et conditions sur un seul bon.",
+      "seo": {
+        "title": "Générateur de bons de commande gratuit",
+        "description": "Créez des bons de commande professionnels avec date de livraison, lignes détaillées et taxes. Imprimez le PDF immédiatement. Gratuit et sans inscription.",
+        "keywords": [
+          "générateur de bons de commande",
+          "créer un bon de commande",
+          "modèle de bon de commande",
+          "modèle de bon de commande gratuit",
+          "bon de commande PDF"
+        ],
+        "ogTitle": "Générateur de bons de commande",
+        "ogDescription": "Créez des bons de commande professionnels avec date de livraison, lignes détaillées et taxes. Imprimez le PDF immédiatement. Gratuit et sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Générateur de bons de commande",
+        "headline": "Générateur de bons de commande",
+        "subheadline": "Validez formellement vos achats fournisseurs : articles, prix, date de livraison et conditions sur un seul bon de commande clair."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Pourquoi un bon de commande plutôt qu'un appel ?",
+            "answer": "Le bon fixe par écrit les articles, les quantités, les prix et la date de livraison avant que l'argent ne bouge. Il évite les « ce n'est pas ce que j'avais commandé » et vous donne une pièce à confronter à la facture du fournisseur."
+          },
+          {
+            "question": "Que doit contenir un bon de commande ?",
+            "answer": "Numéro et date du bon, coordonnées du fournisseur, lignes détaillées avec quantités et prix convenus, taxes, date de livraison prévue et les éventuelles conditions — tout cela est couvert par cet outil."
+          },
+          {
+            "question": "Puis-je enregistrer les bons pour plus tard ?",
+            "answer": "Oui : les bons enregistrés restent dans le stockage local de votre navigateur, vous pouvez donc les réimprimer à tout moment. Rien n'est envoyé à un serveur."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur de commandes clients",
-      "shortDescription": "Confirmez la commande avant expédition : articles, prix et date de livraison sur un seul document."
+      "shortDescription": "Confirmez la commande avant expédition : articles, prix et date de livraison sur un seul document.",
+      "seo": {
+        "title": "Générateur d'accusés de commande gratuit",
+        "description": "Confirmez les commandes clients avant expédition avec un accusé de commande professionnel : articles, prix, date de livraison, PDF. Gratuit, sans inscription.",
+        "keywords": [
+          "générateur d'accusés de commande",
+          "modèle d'accusé de commande",
+          "document de confirmation de commande",
+          "créer un accusé de commande",
+          "modèle de commande client gratuit"
+        ],
+        "ogTitle": "Générateur d'accusés de commande",
+        "ogDescription": "Confirmez les commandes clients avant expédition avec un accusé de commande professionnel : articles, prix, date de livraison, PDF. Gratuit, sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Générateur d'accusés de commande",
+        "headline": "Générateur d'accusés de commande",
+        "subheadline": "Confirmez ce que le client a commandé — articles, prix et date de livraison — avant toute expédition."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "À quoi sert un accusé de commande ?",
+            "answer": "Il confirme par écrit la commande d'un client avant l'expédition ou la facturation, en figeant les articles, les quantités, les prix et la date de livraison pour que les deux parties soient d'accord dès le départ."
+          },
+          {
+            "question": "En quoi diffère-t-il d'une facture ?",
+            "answer": "L'accusé confirme la commande ; la facture demande le paiement. On émet généralement l'accusé à la confirmation, puis on le transforme en facture à l'expédition (notre générateur de factures gratuit s'en charge)."
+          },
+          {
+            "question": "Mes données restent-elles privées ?",
+            "answer": "Oui : tout reste dans le stockage local de votre navigateur, rien n'est envoyé et aucune inscription n'est nécessaire."
+          }
+        ]
+      }
     },
     {
       "name": "Plan comptable",

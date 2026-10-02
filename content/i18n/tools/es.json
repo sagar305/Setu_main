@@ -145,19 +145,155 @@
     },
     {
       "name": "Generador de notas de crédito",
-      "shortDescription": "Emite notas de crédito listas para impuestos por devoluciones y ajustes. PDF al momento, sin registro."
+      "shortDescription": "Emite notas de crédito listas para impuestos por devoluciones y ajustes. PDF al momento, sin registro.",
+      "seo": {
+        "title": "Generador de notas de crédito gratuito",
+        "description": "Crea notas de crédito profesionales para devoluciones y ajustes. Campos de impuestos, líneas detalladas, PDF al instante. Gratis, sin conexión, sin registro.",
+        "keywords": [
+          "generador de notas de crédito",
+          "formato de nota de crédito",
+          "nota de crédito con impuestos",
+          "nota de crédito contra factura",
+          "crear nota de crédito gratis"
+        ],
+        "ogTitle": "Generador de notas de crédito",
+        "ogDescription": "Crea notas de crédito profesionales para devoluciones y ajustes. Campos de impuestos, líneas detalladas, PDF al instante. Gratis, sin conexión, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Generador de notas de crédito",
+        "headline": "Generador de notas de crédito",
+        "subheadline": "Gestiona devoluciones y ajustes de facturación con profesionalidad: referencia la factura, detalla los artículos, imprime el PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cuándo debo emitir una nota de crédito?",
+            "answer": "Cuando necesitas reducir el importe de una factura ya emitida: mercancía devuelta, un cobro excesivo, un descuento posterior a la venta o un error de facturación. La nota de crédito referencia la factura original y registra la reducción."
+          },
+          {
+            "question": "¿Esta nota de crédito cumple con la normativa fiscal?",
+            "answer": "Lleva los campos que la práctica fiscal espera: tu número de identificación fiscal, el del cliente, la referencia a la factura original, líneas detalladas con sus tipos de impuesto y un motivo claro. Declárala en tus impuestos como te indique tu asesor."
+          },
+          {
+            "question": "¿Mis datos son privados?",
+            "answer": "Sí: todo se queda en el almacenamiento local de tu navegador. Nada se sube a ningún servidor y no hace falta registrarse."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de notas de débito",
-      "shortDescription": "Crea notas de débito por devoluciones de compra, faltas de servicio y diferencias de precio. PDF al momento."
+      "shortDescription": "Crea notas de débito por devoluciones de compra, faltas de servicio y diferencias de precio. PDF al momento.",
+      "seo": {
+        "title": "Generador de notas de débito gratuito",
+        "description": "Crea notas de débito por devoluciones de compra, faltantes y diferencias de precio. Campos de impuestos, líneas detalladas y PDF al instante. Gratis.",
+        "keywords": [
+          "generador de notas de débito",
+          "formato de nota de débito",
+          "nota de devolución de compra",
+          "nota de débito con impuestos",
+          "crear nota de débito gratis"
+        ],
+        "ogTitle": "Generador de notas de débito",
+        "ogDescription": "Crea notas de débito por devoluciones de compra, faltantes y diferencias de precio. Campos de impuestos, líneas detalladas y PDF al instante. Gratis."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Generador de notas de débito",
+        "headline": "Generador de notas de débito",
+        "subheadline": "¿Devuelves mercancía o discutes la factura de un proveedor? Emite una nota de débito clara y detallada en un minuto."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Para qué sirve una nota de débito?",
+            "answer": "El comprador emite una nota de débito a su proveedor para registrar una reducción de lo que le debe: mercancía devuelta, cantidad incompleta, artículos dañados o una diferencia de precio frente a la factura del proveedor."
+          },
+          {
+            "question": "¿Qué diferencia hay entre una nota de débito y una de crédito?",
+            "answer": "Son las dos caras del mismo ajuste: el comprador emite la nota de débito al proveedor y el vendedor responde con (o emite directamente) una nota de crédito. Cuál te toca emitir depende del lado de la operación en que estés."
+          },
+          {
+            "question": "¿Mis datos son privados?",
+            "answer": "Sí: los documentos se guardan solo en el almacenamiento local de tu navegador. Nada se sube y no se necesita cuenta."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de órdenes de compra",
-      "shortDescription": "Autoriza compras a proveedor de forma formal: artículos, precios, fecha de entrega y condiciones en una OC."
+      "shortDescription": "Autoriza compras a proveedor de forma formal: artículos, precios, fecha de entrega y condiciones en una OC.",
+      "seo": {
+        "title": "Generador de órdenes de compra gratuito",
+        "description": "Crea órdenes de compra profesionales con fecha de entrega, líneas detalladas e impuestos. Imprime el PDF al instante. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "generador de órdenes de compra",
+          "crear orden de compra",
+          "formato de orden de compra",
+          "plantilla de orden de compra gratis",
+          "orden de compra PDF"
+        ],
+        "ogTitle": "Generador de órdenes de compra",
+        "ogDescription": "Crea órdenes de compra profesionales con fecha de entrega, líneas detalladas e impuestos. Imprime el PDF al instante. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Generador de órdenes de compra",
+        "headline": "Generador de órdenes de compra",
+        "subheadline": "Autoriza las compras a proveedores de forma formal: artículos, precios, fecha de entrega y condiciones en una sola orden clara."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Por qué usar una orden de compra en lugar de una llamada?",
+            "answer": "La orden deja por escrito los artículos, las cantidades, los precios y la fecha de entrega antes de que se mueva el dinero. Evita el «eso no es lo que pedí» y te da un documento con el que cotejar la factura del proveedor."
+          },
+          {
+            "question": "¿Qué debe incluir una orden de compra?",
+            "answer": "Número y fecha de la orden, datos del proveedor, líneas detalladas con cantidades y precios acordados, impuestos, fecha de entrega prevista y cualquier condición: todo ello lo cubre esta herramienta."
+          },
+          {
+            "question": "¿Puedo guardar las órdenes para más adelante?",
+            "answer": "Sí: las órdenes guardadas se quedan en el almacenamiento local de tu navegador, así que puedes reimprimirlas cuando quieras. Nada se sube a un servidor."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de órdenes de venta",
-      "shortDescription": "Confirma pedidos de clientes antes del envío: artículos, precios y fecha de entrega en un documento."
+      "shortDescription": "Confirma pedidos de clientes antes del envío: artículos, precios y fecha de entrega en un documento.",
+      "seo": {
+        "title": "Generador de órdenes de venta gratuito",
+        "description": "Confirma los pedidos de tus clientes antes del envío con una orden de venta profesional: artículos, precios, fecha de entrega y PDF. Gratis y sin registro.",
+        "keywords": [
+          "generador de órdenes de venta",
+          "formato de orden de venta",
+          "documento de confirmación de pedido",
+          "crear orden de venta",
+          "plantilla de orden de venta gratis"
+        ],
+        "ogTitle": "Generador de órdenes de venta",
+        "ogDescription": "Confirma los pedidos de tus clientes antes del envío con una orden de venta profesional: artículos, precios, fecha de entrega y PDF. Gratis y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Generador de órdenes de venta",
+        "headline": "Generador de órdenes de venta",
+        "subheadline": "Confirma lo que pidió el cliente — artículos, precios y fecha de entrega — antes de enviar nada."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Para qué sirve una orden de venta?",
+            "answer": "Confirma por escrito el pedido de un cliente antes de despachar o facturar, fijando artículos, cantidades, precios y fecha de entrega para que ambas partes estén de acuerdo desde el principio."
+          },
+          {
+            "question": "¿En qué se diferencia de una factura?",
+            "answer": "La orden de venta confirma el pedido; la factura reclama el pago. Lo habitual es emitir la orden al confirmar y convertirla en factura en el momento del envío (esa parte la cubre nuestro generador de facturas gratuito)."
+          },
+          {
+            "question": "¿Mis datos son privados?",
+            "answer": "Sí: todo se queda en el almacenamiento local de tu navegador, nada se sube y no hace falta registrarse."
+          }
+        ]
+      }
     },
     {
       "name": "Plan de cuentas",

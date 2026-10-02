@@ -145,19 +145,155 @@
     },
     {
       "name": "Gerador de notas de crédito",
-      "shortDescription": "Emita notas de crédito para devoluções e ajustes de cobrança. PDF na hora, sem cadastro."
+      "shortDescription": "Emita notas de crédito para devoluções e ajustes de cobrança. PDF na hora, sem cadastro.",
+      "seo": {
+        "title": "Gerador de notas de crédito gratuito",
+        "description": "Crie notas de crédito profissionais para devoluções e ajustes. Campos de imposto, linhas detalhadas, PDF na hora. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de notas de crédito",
+          "modelo de nota de crédito",
+          "nota de crédito com imposto",
+          "nota de crédito contra fatura",
+          "criar nota de crédito grátis"
+        ],
+        "ogTitle": "Gerador de notas de crédito",
+        "ogDescription": "Crie notas de crédito profissionais para devoluções e ajustes. Campos de imposto, linhas detalhadas, PDF na hora. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Gerador de notas de crédito",
+        "headline": "Gerador de notas de crédito",
+        "subheadline": "Trate devoluções e ajustes de faturamento com profissionalismo: referencie a fatura, detalhe os itens, imprima o PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quando devo emitir uma nota de crédito?",
+            "answer": "Quando precisa reduzir o valor de uma fatura já emitida: mercadoria devolvida, cobrança a mais, desconto concedido depois da venda ou erro de faturamento. A nota de crédito referencia a fatura original e registra a redução."
+          },
+          {
+            "question": "Esta nota de crédito atende às exigências fiscais?",
+            "answer": "Ela traz os campos que a prática fiscal espera: seu número de inscrição, o do cliente, a referência à fatura original, linhas detalhadas com as alíquotas e um motivo claro. Declare-a como seu contador orientar."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: tudo permanece no armazenamento local do seu navegador. Nada é enviado a servidor algum e não é preciso se cadastrar."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de notas de débito",
-      "shortDescription": "Crie notas de débito para devoluções de compra, falta de entrega e diferenças de preço. PDF na hora."
+      "shortDescription": "Crie notas de débito para devoluções de compra, falta de entrega e diferenças de preço. PDF na hora.",
+      "seo": {
+        "title": "Gerador de notas de débito gratuito",
+        "description": "Crie notas de débito para devoluções de compra, falta de mercadoria e diferenças de preço. Campos de imposto, linhas detalhadas e PDF na hora. Grátis.",
+        "keywords": [
+          "gerador de notas de débito",
+          "modelo de nota de débito",
+          "nota de devolução de compra",
+          "nota de débito com imposto",
+          "criar nota de débito grátis"
+        ],
+        "ogTitle": "Gerador de notas de débito",
+        "ogDescription": "Crie notas de débito para devoluções de compra, falta de mercadoria e diferenças de preço. Campos de imposto, linhas detalhadas e PDF na hora. Grátis."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Gerador de notas de débito",
+        "headline": "Gerador de notas de débito",
+        "subheadline": "Devolvendo mercadoria ou contestando a fatura de um fornecedor? Emita uma nota de débito limpa e detalhada em um minuto."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para que serve uma nota de débito?",
+            "answer": "O comprador emite uma nota de débito ao fornecedor para registrar a redução do que deve: mercadoria devolvida, quantidade a menos, itens danificados ou diferença de preço em relação à fatura do fornecedor."
+          },
+          {
+            "question": "Qual a diferença entre nota de débito e nota de crédito?",
+            "answer": "São os dois lados do mesmo ajuste: o comprador emite a nota de débito ao fornecedor e o vendedor responde com (ou emite diretamente) uma nota de crédito. Qual delas você emite depende do lado da operação em que está."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: os documentos são salvos apenas no armazenamento local do seu navegador. Nada é enviado e nenhuma conta é necessária."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de ordem de compra",
-      "shortDescription": "Autorize compras de fornecedores formalmente — itens, preços, prazo e condições em uma OC."
+      "shortDescription": "Autorize compras de fornecedores formalmente — itens, preços, prazo e condições em uma OC.",
+      "seo": {
+        "title": "Gerador de ordens de compra gratuito",
+        "description": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de ordens de compra",
+          "criar ordem de compra",
+          "modelo de ordem de compra",
+          "modelo de ordem de compra grátis",
+          "ordem de compra PDF"
+        ],
+        "ogTitle": "Gerador de ordens de compra",
+        "ogDescription": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Gerador de ordens de compra",
+        "headline": "Gerador de ordens de compra",
+        "subheadline": "Autorize compras a fornecedores formalmente: itens, preços, data de entrega e condições em uma única ordem limpa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que usar ordem de compra em vez de um telefonema?",
+            "answer": "A ordem registra por escrito os itens, as quantidades, os preços e a data de entrega antes de o dinheiro sair. Evita o \"não foi isso que eu pedi\" e dá um documento para conferir a fatura do fornecedor."
+          },
+          {
+            "question": "O que uma ordem de compra deve conter?",
+            "answer": "Número e data da ordem, dados do fornecedor, linhas detalhadas com quantidades e preços acordados, impostos, data de entrega prevista e quaisquer condições — tudo isso está nesta ferramenta."
+          },
+          {
+            "question": "Posso salvar as ordens para depois?",
+            "answer": "Sim: as ordens salvas ficam no armazenamento local do seu navegador, então você pode reimprimi-las quando quiser. Nada é enviado a um servidor."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de pedido de venda",
-      "shortDescription": "Confirme pedidos de clientes antes do envio — itens, preços e data de entrega num só documento."
+      "shortDescription": "Confirme pedidos de clientes antes do envio — itens, preços e data de entrega num só documento.",
+      "seo": {
+        "title": "Gerador de pedidos de venda gratuito",
+        "description": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro.",
+        "keywords": [
+          "gerador de pedidos de venda",
+          "modelo de pedido de venda",
+          "documento de confirmação de pedido",
+          "criar pedido de venda",
+          "modelo de pedido de venda grátis"
+        ],
+        "ogTitle": "Gerador de pedidos de venda",
+        "ogDescription": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Gerador de pedidos de venda",
+        "headline": "Gerador de pedidos de venda",
+        "subheadline": "Confirme o que o cliente pediu — itens, preços e data de entrega — antes de despachar qualquer coisa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para que serve um pedido de venda?",
+            "answer": "Ele confirma por escrito o pedido do cliente antes do despacho ou do faturamento, fixando itens, quantidades, preços e data de entrega para que os dois lados concordem desde o início."
+          },
+          {
+            "question": "Como ele difere de uma fatura?",
+            "answer": "O pedido de venda confirma o pedido; a fatura cobra o pagamento. Normalmente você emite o pedido na confirmação e o converte em fatura no despacho (essa parte o nosso gerador de faturas gratuito resolve)."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: tudo permanece no armazenamento local do seu navegador, nada é enviado e não é preciso se cadastrar."
+          }
+        ]
+      }
     },
     {
       "name": "Plano de contas",
