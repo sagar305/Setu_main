@@ -714,7 +714,57 @@
     },
     {
       "name": "Calculateur du coût d'acquisition client (CAC)",
-      "shortDescription": "Découvrez exactement combien vous dépensez pour acquérir chaque nouveau client."
+      "shortDescription": "Découvrez exactement combien vous dépensez pour acquérir chaque nouveau client.",
+      "seo": {
+        "title": "Calculateur de Coût d'Acquisition Client (CAC) | Setu",
+        "description": "Calculateur de CAC gratuit. Saisissez vos dépenses marketing et les nouveaux clients acquis pour obtenir votre coût d'acquisition et le comparer au revenu.",
+        "keywords": [
+          "calculateur de CAC",
+          "coût d'acquisition client",
+          "coût marketing par client",
+          "formule du CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de CAC",
+        "headline": "Calculateur de Coût d'Acquisition Client",
+        "subheadline": "Saisissez vos dépenses marketing et le nombre de nouveaux clients acquis pour obtenir votre coût par client."
+      },
+      "about": {
+        "headline": "Le chiffre qui dit si le marketing fonctionne",
+        "paragraphs": [
+          "Le coût d'acquisition client (CAC) est le montant moyen dépensé pour gagner un nouveau client, en comptant tous les coûts marketing et commerciaux engagés. Il ne veut dire quelque chose qu'à côté d'un second chiffre : ce que ce client vous rapporte réellement.",
+          "Saisissez vos dépenses totales sur une période et le nombre de nouveaux clients qu'elles ont amenés pour obtenir votre CAC. Si vous connaissez aussi le revenu moyen par client, ce calculateur affiche le rapport entre les deux — une vérification rapide pour savoir si une campagne ou un canal se rentabilise."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de CAC",
+        "items": [
+          {
+            "question": "Quelle est la formule du CAC ?",
+            "answer": "CAC = dépenses marketing et commerciales totales ÷ nombre de nouveaux clients acquis, sur la même période. Dépenser 50 000 pour acquérir 100 nouveaux clients donne un CAC de 500."
+          },
+          {
+            "question": "Quels coûts inclure dans les dépenses marketing ?",
+            "answer": "Incluez les achats d'espace publicitaire, les honoraires d'agence ou frais de plateforme, les remises promotionnelles servant uniquement à l'acquisition et une part raisonnable du coût de l'équipe commerciale le cas échéant : tout ce qui a été dépensé spécifiquement pour amener de nouveaux clients sur la période."
+          },
+          {
+            "question": "Quel est un bon CAC ?",
+            "answer": "Cela dépend entièrement de ce qu'un client vous rapporte dans le temps. Un CAC est sain s'il reste confortablement en dessous du revenu (idéalement récurrent) qu'un client type génère : il n'existe pas de bon chiffre universel."
+          },
+          {
+            "question": "Quelle différence entre le CAC et le panier moyen ?",
+            "answer": "Le CAC mesure ce que vous avez dépensé pour gagner un client ; le panier moyen mesure ce que ce client dépense par commande une fois acquis. Comparer les deux indique à peu près combien de commandes sont nécessaires pour amortir le coût d'acquisition."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Sachez quels clients valent la peine d'être gardés",
+        "subtext": "Setu Dine suit les clients fidèles et l'historique des commandes : vous voyez quels canaux amènent des clients qui reviennent vraiment.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur du panier moyen (AOV)",

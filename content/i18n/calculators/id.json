@@ -714,7 +714,57 @@
     },
     {
       "name": "Kalkulator biaya akuisisi pelanggan (CAC)",
-      "shortDescription": "Cari tahu persis berapa biaya Anda untuk mendapatkan setiap pelanggan baru."
+      "shortDescription": "Cari tahu persis berapa biaya Anda untuk mendapatkan setiap pelanggan baru.",
+      "seo": {
+        "title": "Kalkulator Biaya Akuisisi Pelanggan (CAC) | Setu",
+        "description": "Kalkulator CAC gratis. Masukkan belanja pemasaran dan jumlah pelanggan baru untuk menemukan biaya akuisisi dan membandingkannya dengan pendapatan per pelanggan.",
+        "keywords": [
+          "kalkulator CAC",
+          "biaya akuisisi pelanggan",
+          "biaya pemasaran per pelanggan",
+          "rumus CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator CAC",
+        "headline": "Kalkulator Biaya Akuisisi Pelanggan",
+        "subheadline": "Masukkan belanja pemasaran Anda dan jumlah pelanggan baru yang diperoleh untuk menemukan biaya per pelanggan."
+      },
+      "about": {
+        "headline": "Angka yang memberi tahu apakah pemasaran Anda bekerja",
+        "paragraphs": [
+          "Biaya akuisisi pelanggan (CAC) adalah jumlah rata-rata yang Anda keluarkan untuk mendapat satu pelanggan baru, mencakup semua biaya pemasaran dan penjualan yang terpakai untuk itu. Angka ini baru berarti kalau diletakkan di samping angka kedua: seberapa bernilai pelanggan itu bagi Anda.",
+          "Masukkan total belanja Anda selama satu periode dan jumlah pelanggan baru yang datang karenanya untuk mendapat CAC. Kalau Anda juga tahu rata-rata pendapatan per pelanggan, kalkulator ini menampilkan perbandingan keduanya — pemeriksaan cepat apakah sebuah kampanye atau kanal benar-benar menutup biayanya sendiri."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator CAC",
+        "items": [
+          {
+            "question": "Apa rumus CAC?",
+            "answer": "CAC = total belanja pemasaran dan penjualan ÷ jumlah pelanggan baru yang diperoleh, pada periode yang sama. Mengeluarkan 50.000 untuk mendapat 100 pelanggan baru memberi CAC 500."
+          },
+          {
+            "question": "Biaya apa saja yang masuk ke belanja pemasaran?",
+            "answer": "Masukkan belanja iklan, biaya agensi atau platform, diskon promosi yang murni untuk akuisisi, dan porsi yang wajar dari biaya tim penjualan bila relevan — semua yang dikeluarkan khusus untuk mendatangkan pelanggan baru pada periode itu."
+          },
+          {
+            "question": "Berapa CAC yang bagus?",
+            "answer": "Sepenuhnya bergantung pada nilai seorang pelanggan bagi Anda sepanjang waktu. CAC tergolong sehat kalau nyaman berada di bawah pendapatan (idealnya pendapatan berulang) yang dihasilkan pelanggan biasa — tidak ada satu angka 'bagus' yang berlaku untuk semua usaha."
+          },
+          {
+            "question": "Apa bedanya CAC dan nilai pesanan rata-rata?",
+            "answer": "CAC mengukur apa yang Anda keluarkan untuk mendapat pelanggan; nilai pesanan rata-rata mengukur apa yang pelanggan itu belanjakan per pesanan setelah didapat. Membandingkan keduanya memberi gambaran berapa pesanan yang diperlukan untuk menutup biaya akuisisi."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ketahui pelanggan mana yang layak dipertahankan",
+        "subtext": "Setu Dine mencatat pelanggan berulang dan riwayat pesanan, jadi Anda bisa melihat kanal mana yang membawa pelanggan yang benar-benar kembali.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator nilai pesanan rata-rata (AOV)",

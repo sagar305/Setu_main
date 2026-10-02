@@ -714,7 +714,57 @@
     },
     {
       "name": "Calculadora de custo de aquisição de cliente (CAC)",
-      "shortDescription": "Descubra exatamente quanto você gasta para conquistar cada novo cliente."
+      "shortDescription": "Descubra exatamente quanto você gasta para conquistar cada novo cliente.",
+      "seo": {
+        "title": "Calculadora de Custo de Aquisição (CAC) | Setu",
+        "description": "Calculadora de CAC gratuita. Informe o gasto em marketing e os clientes novos conquistados para achar seu custo de aquisição e comparar com a receita.",
+        "keywords": [
+          "calculadora de CAC",
+          "custo de aquisição de clientes",
+          "custo de marketing por cliente",
+          "fórmula do CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de CAC",
+        "headline": "Calculadora de Custo de Aquisição de Clientes",
+        "subheadline": "Informe seu gasto em marketing e os clientes novos conquistados para achar seu custo por cliente."
+      },
+      "about": {
+        "headline": "O número que diz se o marketing está funcionando",
+        "paragraphs": [
+          "O custo de aquisição de clientes (CAC) é quanto você gasta, em média, para conquistar um cliente novo, contando todos os custos de marketing e vendas envolvidos. Ele só significa algo ao lado de um segundo número: quanto esse cliente realmente vale para você.",
+          "Informe o gasto total de um período e o número de clientes novos que ele trouxe para obter o seu CAC. Se você também souber a receita média por cliente, esta calculadora mostra a relação entre os dois — uma checagem rápida de se uma campanha ou canal está se pagando."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de CAC",
+        "items": [
+          {
+            "question": "Qual é a fórmula do CAC?",
+            "answer": "CAC = gasto total em marketing e vendas ÷ número de clientes novos conquistados, no mesmo período. Gastar 50.000 para conquistar 100 clientes novos dá um CAC de 500."
+          },
+          {
+            "question": "Que custos devo incluir no gasto de marketing?",
+            "answer": "Inclua investimento em anúncios, honorários de agência ou taxas de plataforma, descontos promocionais usados só para aquisição e uma parcela razoável do custo do time comercial, se for o caso: tudo que foi gasto especificamente para trazer clientes novos no período."
+          },
+          {
+            "question": "Qual é um bom CAC?",
+            "answer": "Depende inteiramente de quanto um cliente vale para você ao longo do tempo. Um CAC é saudável se fica confortavelmente abaixo da receita (de preferência recorrente) que um cliente típico gera: não existe um número 'bom' fixo para todos os negócios."
+          },
+          {
+            "question": "Qual é a diferença entre CAC e ticket médio?",
+            "answer": "O CAC mede quanto você gastou para conquistar um cliente; o ticket médio mede quanto esse cliente gasta por pedido depois de conquistado. Comparar os dois indica aproximadamente quantos pedidos são necessários para recuperar o custo de aquisição."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Saiba quais clientes vale a pena manter",
+        "subtext": "O Setu Dine acompanha clientes recorrentes e histórico de pedidos, então você vê quais canais trazem clientes que realmente voltam.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ticket médio (AOV)",

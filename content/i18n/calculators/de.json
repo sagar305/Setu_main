@@ -714,7 +714,57 @@
     },
     {
       "name": "Rechner für Kundenakquisekosten (CAC)",
-      "shortDescription": "Finden Sie heraus, wie viel Sie genau für jeden neuen Kunden ausgeben."
+      "shortDescription": "Finden Sie heraus, wie viel Sie genau für jeden neuen Kunden ausgeben.",
+      "seo": {
+        "title": "Rechner für Kundenakquisitionskosten (CAC) | Setu",
+        "description": "Kostenloser CAC-Rechner. Marketingausgaben und gewonnene Neukunden eingeben, die Kundenakquisitionskosten ermitteln und mit dem Umsatz pro Kunde vergleichen.",
+        "keywords": [
+          "CAC Rechner",
+          "Kundenakquisitionskosten berechnen",
+          "Marketingkosten pro Kunde",
+          "CAC Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — CAC-Rechner",
+        "headline": "Rechner für Kundenakquisitionskosten",
+        "subheadline": "Geben Sie Ihre Marketingausgaben und die Zahl gewonnener Neukunden ein, um Ihre Kosten je Kunde zu ermitteln."
+      },
+      "about": {
+        "headline": "Die Zahl, die zeigt, ob Marketing wirkt",
+        "paragraphs": [
+          "Die Kundenakquisitionskosten (CAC) sind der Betrag, den Sie im Schnitt aufwenden, um einen neuen Kunden zu gewinnen — über alle Marketing- und Vertriebskosten, die dafür anfielen. Sinn ergibt die Zahl erst neben einer zweiten: wie viel dieser Kunde Ihnen tatsächlich wert ist.",
+          "Geben Sie Ihre Gesamtausgaben eines Zeitraums und die Zahl der dadurch gewonnenen Neukunden ein, um Ihren CAC zu erhalten. Kennen Sie zusätzlich den durchschnittlichen Umsatz pro Kunde, zeigt der Rechner das Verhältnis beider Werte — eine schnelle Prüfung, ob sich eine Kampagne oder ein Kanal wirklich trägt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum CAC-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die CAC-Formel?",
+            "answer": "CAC = gesamte Marketing- und Vertriebsausgaben ÷ Zahl der gewonnenen Neukunden, im gleichen Zeitraum. 50.000 Ausgaben für 100 neue Kunden ergeben einen CAC von 500."
+          },
+          {
+            "question": "Welche Kosten gehören zu den Marketingausgaben?",
+            "answer": "Werbeausgaben, Agentur- oder Plattformgebühren, Aktionsrabatte, die allein der Gewinnung dienen, und, wo sinnvoll, ein angemessener Anteil der Vertriebskosten — alles, was im Zeitraum gezielt für neue Kunden aufgewendet wurde."
+          },
+          {
+            "question": "Was ist ein guter CAC?",
+            "answer": "Das hängt ganz davon ab, was ein Kunde Ihnen über die Zeit wert ist. Ein CAC ist gesund, wenn er deutlich unter dem Umsatz liegt, den ein typischer Kunde erzeugt — idealerweise unter dem wiederkehrenden Umsatz. Eine allgemein gültige gute Zahl gibt es nicht."
+          },
+          {
+            "question": "Wie unterscheidet sich der CAC vom durchschnittlichen Bestellwert?",
+            "answer": "Der CAC misst, was Sie für die Gewinnung eines Kunden aufgewendet haben; der durchschnittliche Bestellwert misst, was dieser Kunde danach pro Bestellung ausgibt. Der Vergleich zeigt grob, wie viele Bestellungen nötig sind, um die Akquisitionskosten zurückzuverdienen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Wissen, welche Kunden sich lohnen",
+        "subtext": "Setu Dine verfolgt Stammkunden und Bestellhistorie, sodass Sie sehen, welche Kanäle Kunden bringen, die tatsächlich wiederkommen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Rechner für den durchschnittlichen Bestellwert (AOV)",
