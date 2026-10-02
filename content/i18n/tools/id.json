@@ -297,19 +297,155 @@
     },
     {
       "name": "Bagan akun",
-      "shortDescription": "Susun daftar akun dari templat usaha kecil siap pakai — kode, jenis, dan ekspor CSV."
+      "shortDescription": "Susun daftar akun dari templat usaha kecil siap pakai — kode, jenis, dan ekspor CSV.",
+      "seo": {
+        "title": "Pembuat Bagan Akun Gratis — Online",
+        "description": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "bagan akun",
+          "templat bagan akun",
+          "bagan akun usaha kecil",
+          "kode akun",
+          "daftar akun pembukuan"
+        ],
+        "ogTitle": "Bagan Akun",
+        "ogDescription": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Bagan Akun",
+        "headline": "Bagan Akun",
+        "subheadline": "Tulang punggung pembukuan Anda — daftar akun siap pakai yang bisa Anda bentuk sesuai usaha sendiri."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu bagan akun?",
+            "answer": "Daftar induk semua akun tempat usaha Anda mencatat uang — aset, liabilitas, ekuitas, pendapatan, dan beban. Setiap jurnal diposkan ke akun dari daftar ini."
+          },
+          {
+            "question": "Apa arti kode akun?",
+            "answer": "Kebiasaan umum: seri 1000 untuk aset, 2000 liabilitas, 3000 ekuitas, 4000 pendapatan, 5000 beban. Penomorannya menyisakan celah supaya akun baru bisa diselipkan nanti."
+          },
+          {
+            "question": "Apakah ini tersambung ke alat pembukuan lain?",
+            "answer": "Ya — alat jurnal, buku besar, dan neraca saldo di situs ini membaca bagan yang sama secara otomatis, semuanya di dalam peramban Anda."
+          }
+        ]
+      }
     },
     {
       "name": "Jurnal umum",
-      "shortDescription": "Pembukuan berpasangan dengan debit/kredit seimbang otomatis. Mengisi buku besar dan neraca saldo."
+      "shortDescription": "Pembukuan berpasangan dengan debit/kredit seimbang otomatis. Mengisi buku besar dan neraca saldo.",
+      "seo": {
+        "title": "Alat Jurnal Gratis — Pembukuan Berpasangan",
+        "description": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnalnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "jurnal akuntansi",
+          "pembukuan berpasangan",
+          "buku jurnal online",
+          "jurnal debit kredit",
+          "buku jurnal gratis"
+        ],
+        "ogTitle": "Jurnal",
+        "ogDescription": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnalnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Jurnal",
+        "headline": "Jurnal",
+        "subheadline": "Pembukuan berpasangan yang benar — debit di kiri, kredit di kanan, selalu seimbang."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana debit dan kredit bekerja?",
+            "answer": "Setiap transaksi menyentuh sedikitnya dua akun, dan total debit harus sama dengan total kredit. Membayar sewa ₹10.000 lewat bank: debit Beban Sewa ₹10.000, kredit Bank ₹10.000. Jurnal yang tidak seimbang ditolak alat ini."
+          },
+          {
+            "question": "Jurnal saya tersimpan di mana?",
+            "answer": "Di sebuah buku jurnal dalam peramban Anda. Alat buku besar dan neraca saldo membaca jurnal yang sama, jadi pembukuan Anda tetap selaras di ketiganya."
+          },
+          {
+            "question": "Bisakah jurnalnya diekspor?",
+            "answer": "Bisa — satu klik mengekspor seluruh jurnal sebagai CSV, siap untuk Excel, Google Sheets, atau akuntan Anda."
+          }
+        ]
+      }
     },
     {
       "name": "Buku besar",
-      "shortDescription": "Buku besar per akun dengan saldo berjalan, tersusun otomatis dari jurnal Anda."
+      "shortDescription": "Buku besar per akun dengan saldo berjalan, tersusun otomatis dari jurnal Anda.",
+      "seo": {
+        "title": "Alat Buku Besar Gratis — Online",
+        "description": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku besar",
+          "akun buku besar online",
+          "buku besar saldo berjalan",
+          "buku besar gratis",
+          "buku besar pembukuan"
+        ],
+        "ogTitle": "Buku Besar",
+        "ogDescription": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Buku Besar",
+        "headline": "Buku Besar",
+        "subheadline": "Pilih sebuah akun, lihat setiap posting beserta saldo berjalannya — tersusun sendiri dari jurnal Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Data buku besar datang dari mana?",
+            "answer": "Dari alat jurnal di situs ini. Setiap jurnal yang diposkan muncul di buku besar tiap akun yang disentuhnya — tanpa mengetik ulang."
+          },
+          {
+            "question": "Apa arti saldo Dr/Cr?",
+            "answer": "Akun aset dan beban biasanya bersaldo debit (Dr); akun liabilitas, ekuitas, dan pendapatan bersaldo kredit (Cr). Buku besar menampilkan saldo berjalan di sisi normal akun tersebut."
+          },
+          {
+            "question": "Bisakah buku besarnya diekspor?",
+            "answer": "Bisa — ekspor buku besar akun mana pun sebagai CSV lengkap dengan tanggal, keterangan, debit, kredit, dan saldo berjalan."
+          }
+        ]
+      }
     },
     {
       "name": "Rekonsiliasi bank",
-      "shortDescription": "Cocokkan rekening koran dengan pembukuan Anda — cek belum cair, setoran dalam perjalanan, biaya."
+      "shortDescription": "Cocokkan rekening koran dengan pembukuan Anda — cek belum cair, setoran dalam perjalanan, biaya.",
+      "seo": {
+        "title": "Alat Rekonsiliasi Bank Gratis — Online",
+        "description": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "rekonsiliasi bank",
+          "laporan rekonsiliasi bank",
+          "format rekonsiliasi bank",
+          "mencocokkan rekening bank",
+          "selisih bank dan buku"
+        ],
+        "ogTitle": "Rekonsiliasi Bank",
+        "ogDescription": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Rekonsiliasi Bank",
+        "headline": "Rekonsiliasi Bank",
+        "subheadline": "Bank menyebut satu angka, buku Anda angka lain — daftarkan pos-pos rekonsiliasinya sampai keduanya sepakat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa saldo bank dan buku saya tidak cocok?",
+            "answer": "Soal waktu dan yang terlewat: cek yang Anda terbitkan tapi belum cair, setoran yang belum dikreditkan bank, biaya dan bunga yang belum Anda catat. Masing-masing adalah satu pos rekonsiliasi."
+          },
+          {
+            "question": "Seberapa sering perlu rekonsiliasi?",
+            "answer": "Paling sedikit sebulan sekali, saat rekening koran datang. Usaha yang sibuk merekonsiliasi tiap minggu — makin cepat Anda menemukan salah catat atau catatan yang hilang, makin mudah membetulkannya."
+          },
+          {
+            "question": "Bagaimana kalau selisihnya masih ada setelah disesuaikan?",
+            "answer": "Periksa angka yang tertukar posisinya (selisih yang habis dibagi 9 adalah tandanya yang khas), catatan ganda, atau transaksi yang masuk ke sisi yang salah. Alat ini menampilkan selisih sisanya secara langsung sambil Anda menambahkan pos."
+          }
+        ]
+      }
     },
     {
       "name": "Penganalisis rekening koran",

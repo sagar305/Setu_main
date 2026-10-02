@@ -297,19 +297,155 @@
     },
     {
       "name": "Plan de cuentas",
-      "shortDescription": "Monta tu plan de cuentas desde una plantilla para pequeños negocios: códigos, tipos y exportación CSV."
+      "shortDescription": "Monta tu plan de cuentas desde una plantilla para pequeños negocios: códigos, tipos y exportación CSV.",
+      "seo": {
+        "title": "Generador de plan de cuentas gratuito",
+        "description": "Monta tu plan de cuentas desde una plantilla lista para pequeñas empresas. Añade, codifica y clasifica cuentas, y exporta a CSV. Gratis, sin registro.",
+        "keywords": [
+          "plan de cuentas",
+          "plantilla de plan de cuentas",
+          "plan de cuentas para pequeña empresa",
+          "códigos de cuenta",
+          "lista de cuentas contables"
+        ],
+        "ogTitle": "Plan de cuentas",
+        "ogDescription": "Monta tu plan de cuentas desde una plantilla lista para pequeñas empresas. Añade, codifica y clasifica cuentas, y exporta a CSV. Gratis, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Plan de cuentas",
+        "headline": "Plan de cuentas",
+        "subheadline": "La columna vertebral de tu contabilidad — una lista de cuentas lista para usar que puedes adaptar a tu negocio."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un plan de cuentas?",
+            "answer": "La lista maestra de todas las cuentas contra las que tu negocio registra dinero: activo, pasivo, patrimonio, ingresos y gastos. Todo asiento se imputa a cuentas de esta lista."
+          },
+          {
+            "question": "¿Qué significan los códigos de cuenta?",
+            "answer": "Una convención habitual: la serie 1000 para activo, 2000 pasivo, 3000 patrimonio, 4000 ingresos y 5000 gastos. La numeración deja huecos para poder encajar cuentas nuevas después."
+          },
+          {
+            "question": "¿Se conecta con las otras herramientas de contabilidad?",
+            "answer": "Sí: las herramientas de asientos, libro mayor y balance de comprobación de este sitio leen este mismo plan automáticamente, todo dentro de tu navegador."
+          }
+        ]
+      }
     },
     {
       "name": "Asiento contable",
-      "shortDescription": "Partida doble con cuadre automático de debe y haber. Alimenta el mayor y el balance de sumas."
+      "shortDescription": "Partida doble con cuadre automático de debe y haber. Alimenta el mayor y el balance de sumas.",
+      "seo": {
+        "title": "Herramienta de asientos contables gratuita",
+        "description": "Registra asientos por partida doble con cuadre automático de debe y haber. Alimentan el libro mayor y el balance de comprobación. Gratis, sin registro.",
+        "keywords": [
+          "asiento contable",
+          "contabilidad por partida doble",
+          "libro diario online",
+          "asiento debe haber",
+          "libro diario gratis"
+        ],
+        "ogTitle": "Asiento contable",
+        "ogDescription": "Registra asientos por partida doble con cuadre automático de debe y haber. Alimentan el libro mayor y el balance de comprobación. Gratis, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Asiento contable",
+        "headline": "Asiento contable",
+        "subheadline": "Contabilidad por partida doble de verdad — el debe a la izquierda, el haber a la derecha, siempre cuadrado."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cómo funcionan el debe y el haber?",
+            "answer": "Cada operación toca al menos dos cuentas, y el total del debe tiene que igualar el del haber. Si pagas ₹10.000 de alquiler por banco: debe Gasto de alquiler ₹10.000, haber Banco ₹10.000. La herramienta bloquea los asientos descuadrados."
+          },
+          {
+            "question": "¿A dónde van mis asientos?",
+            "answer": "A un libro diario guardado en tu navegador. Las herramientas de libro mayor y balance de comprobación leen ese mismo diario, así que tu contabilidad se mantiene coherente en las tres."
+          },
+          {
+            "question": "¿Puedo exportar el diario?",
+            "answer": "Sí: con un clic exportas el diario completo en CSV, listo para Excel, Google Sheets o tu contable."
+          }
+        ]
+      }
     },
     {
       "name": "Libro mayor",
-      "shortDescription": "Mayores por cuenta con saldos corrientes, construidos automáticamente desde tus asientos."
+      "shortDescription": "Mayores por cuenta con saldos corrientes, construidos automáticamente desde tus asientos.",
+      "seo": {
+        "title": "Herramienta de libro mayor gratuita",
+        "description": "Consulta el mayor de cualquier cuenta con saldos acumulados, generado solo a partir de tus asientos. Exportación a CSV. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "libro mayor",
+          "mayor de cuenta online",
+          "libro mayor con saldo acumulado",
+          "mayor de cuentas gratis",
+          "libro mayor contable"
+        ],
+        "ogTitle": "Libro mayor",
+        "ogDescription": "Consulta el mayor de cualquier cuenta con saldos acumulados, generado solo a partir de tus asientos. Exportación a CSV. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Libro mayor",
+        "headline": "Libro mayor",
+        "subheadline": "Elige una cuenta y ve cada apunte con su saldo acumulado — generado solo a partir de tu diario."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿De dónde salen los datos del mayor?",
+            "answer": "De la herramienta de asientos de este sitio. Cada asiento registrado aparece en el mayor de todas las cuentas a las que afecta, sin volver a teclear nada."
+          },
+          {
+            "question": "¿Qué significa el saldo Dr/Cr?",
+            "answer": "Las cuentas de activo y gasto suelen tener saldo deudor (Dr); las de pasivo, patrimonio e ingresos, saldo acreedor (Cr). El mayor muestra el saldo acumulado en el lado habitual de la cuenta."
+          },
+          {
+            "question": "¿Puedo exportar un mayor?",
+            "answer": "Sí: exporta el mayor de cualquier cuenta en CSV con fechas, conceptos, debe, haber y saldo acumulado."
+          }
+        ]
+      }
     },
     {
       "name": "Conciliación bancaria",
-      "shortDescription": "Cuadra tu extracto con los libros: cheques pendientes, depósitos en tránsito y comisiones."
+      "shortDescription": "Cuadra tu extracto con los libros: cheques pendientes, depósitos en tránsito y comisiones.",
+      "seo": {
+        "title": "Herramienta de conciliación bancaria gratuita",
+        "description": "Concilia tu extracto bancario con el libro de caja: cheques pendientes, remesas en tránsito y gastos bancarios, hasta que los saldos coincidan. Gratis.",
+        "keywords": [
+          "conciliación bancaria",
+          "estado de conciliación bancaria",
+          "formato de conciliación bancaria",
+          "conciliar extracto bancario",
+          "diferencia entre banco y libros"
+        ],
+        "ogTitle": "Conciliación bancaria",
+        "ogDescription": "Concilia tu extracto bancario con el libro de caja: cheques pendientes, remesas en tránsito y gastos bancarios, hasta que los saldos coincidan. Gratis."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Conciliación bancaria",
+        "headline": "Conciliación bancaria",
+        "subheadline": "El banco dice una cifra y tus libros otra — ve anotando las partidas de conciliación hasta que coincidan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Por qué no coinciden los saldos del banco y de mis libros?",
+            "answer": "Por desfases y omisiones: cheques que emitiste y aún no se han cobrado, ingresos que el banco todavía no ha abonado, comisiones e intereses que no has registrado. Cada uno es una partida de conciliación."
+          },
+          {
+            "question": "¿Con qué frecuencia debo conciliar?",
+            "answer": "Al menos una vez al mes, cuando llega el extracto. Los negocios con mucho movimiento concilian cada semana: cuanto antes detectes un error o un apunte que falta, más fácil es arreglarlo."
+          },
+          {
+            "question": "¿Y si queda una diferencia después de ajustar?",
+            "answer": "Busca dígitos transpuestos (una diferencia divisible entre 9 es la señal clásica), apuntes duplicados o una operación registrada en el lado equivocado. La herramienta muestra la diferencia que queda en vivo mientras añades partidas."
+          }
+        ]
+      }
     },
     {
       "name": "Analizador de extractos",

@@ -297,19 +297,155 @@
     },
     {
       "name": "Plano de contas",
-      "shortDescription": "Monte sua lista de contas a partir de um modelo pronto — códigos, tipos e exportação CSV."
+      "shortDescription": "Monte sua lista de contas a partir de um modelo pronto — códigos, tipos e exportação CSV.",
+      "seo": {
+        "title": "Gerador de plano de contas gratuito",
+        "description": "Monte seu plano de contas a partir de um modelo pronto para pequenos negócios. Inclua, codifique e classifique contas, exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "plano de contas",
+          "modelo de plano de contas",
+          "plano de contas para pequena empresa",
+          "códigos de conta",
+          "lista de contas contábeis"
+        ],
+        "ogTitle": "Plano de contas",
+        "ogDescription": "Monte seu plano de contas a partir de um modelo pronto para pequenos negócios. Inclua, codifique e classifique contas, exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Plano de contas",
+        "headline": "Plano de contas",
+        "subheadline": "A espinha dorsal da sua contabilidade — uma lista de contas pronta que você molda ao seu negócio."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um plano de contas?",
+            "answer": "A lista mestra de todas as contas contra as quais o seu negócio registra dinheiro: ativo, passivo, patrimônio líquido, receitas e despesas. Todo lançamento vai para contas desta lista."
+          },
+          {
+            "question": "O que significam os códigos de conta?",
+            "answer": "Uma convenção comum: a série 1000 para ativo, 2000 passivo, 3000 patrimônio líquido, 4000 receitas e 5000 despesas. A numeração deixa lacunas para encaixar contas novas depois."
+          },
+          {
+            "question": "Isso se conecta com as outras ferramentas contábeis?",
+            "answer": "Sim: as ferramentas de lançamentos, livro razão e balancete deste site leem este mesmo plano automaticamente, tudo dentro do seu navegador."
+          }
+        ]
+      }
     },
     {
       "name": "Lançamento contábil",
-      "shortDescription": "Partidas dobradas com débito e crédito equilibrados automaticamente. Alimenta razão e balancete."
+      "shortDescription": "Partidas dobradas com débito e crédito equilibrados automaticamente. Alimenta razão e balancete.",
+      "seo": {
+        "title": "Ferramenta de lançamentos contábeis grátis",
+        "description": "Registre lançamentos em partidas dobradas com fechamento automático de débito e crédito. Alimentam o livro razão e o balancete. Grátis, offline, sem cadastro.",
+        "keywords": [
+          "lançamento contábil",
+          "contabilidade por partidas dobradas",
+          "livro diário online",
+          "lançamento débito crédito",
+          "livro diário grátis"
+        ],
+        "ogTitle": "Lançamento contábil",
+        "ogDescription": "Registre lançamentos em partidas dobradas com fechamento automático de débito e crédito. Alimentam o livro razão e o balancete. Grátis, offline, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Lançamento contábil",
+        "headline": "Lançamento contábil",
+        "subheadline": "Contabilidade por partidas dobradas de verdade — débito à esquerda, crédito à direita, sempre fechando."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como funcionam débito e crédito?",
+            "answer": "Cada operação toca pelo menos duas contas, e o total dos débitos tem de igualar o dos créditos. Pagando ₹10.000 de aluguel pelo banco: débito Despesa de aluguel ₹10.000, crédito Banco ₹10.000. A ferramenta bloqueia lançamentos desbalanceados."
+          },
+          {
+            "question": "Para onde vão meus lançamentos?",
+            "answer": "Para um livro diário guardado no seu navegador. As ferramentas de livro razão e balancete leem esse mesmo diário, então sua contabilidade fica consistente nas três."
+          },
+          {
+            "question": "Posso exportar o diário?",
+            "answer": "Sim: com um clique você exporta o diário completo em CSV, pronto para Excel, Google Sheets ou seu contador."
+          }
+        ]
+      }
     },
     {
       "name": "Livro razão",
-      "shortDescription": "Razões por conta com saldos correntes, montados automaticamente a partir dos lançamentos."
+      "shortDescription": "Razões por conta com saldos correntes, montados automaticamente a partir dos lançamentos.",
+      "seo": {
+        "title": "Ferramenta de livro razão gratuita — online",
+        "description": "Veja o razão de qualquer conta com saldos acumulados, montado a partir dos seus lançamentos. Exportação em CSV. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "livro razão",
+          "conta do razão online",
+          "razão com saldo acumulado",
+          "livro razão grátis",
+          "razão contábil"
+        ],
+        "ogTitle": "Livro razão",
+        "ogDescription": "Veja o razão de qualquer conta com saldos acumulados, montado a partir dos seus lançamentos. Exportação em CSV. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Livro razão",
+        "headline": "Livro razão",
+        "subheadline": "Escolha uma conta e veja cada lançamento com o saldo acumulado — montado a partir do seu diário."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "De onde vêm os dados do razão?",
+            "answer": "Da ferramenta de lançamentos deste site. Cada lançamento registrado aparece no razão de todas as contas que ele toca — sem redigitar nada."
+          },
+          {
+            "question": "O que significa o saldo Dr/Cr?",
+            "answer": "Contas de ativo e despesa normalmente têm saldo devedor (Dr); contas de passivo, patrimônio líquido e receita têm saldo credor (Cr). O razão mostra o saldo acumulado no lado habitual da conta."
+          },
+          {
+            "question": "Posso exportar um razão?",
+            "answer": "Sim: exporte o razão de qualquer conta em CSV com datas, históricos, débitos, créditos e o saldo acumulado."
+          }
+        ]
+      }
     },
     {
       "name": "Conciliação bancária",
-      "shortDescription": "Concilie o extrato bancário com seus livros — cheques não compensados, depósitos em trânsito, tarifas."
+      "shortDescription": "Concilie o extrato bancário com seus livros — cheques não compensados, depósitos em trânsito, tarifas.",
+      "seo": {
+        "title": "Ferramenta de conciliação bancária gratuita",
+        "description": "Concilie seu extrato bancário com o livro caixa: cheques não compensados, depósitos em trânsito e tarifas, até os saldos baterem. Grátis, sem cadastro.",
+        "keywords": [
+          "conciliação bancária",
+          "demonstrativo de conciliação bancária",
+          "modelo de conciliação bancária",
+          "conciliar extrato bancário",
+          "diferença entre banco e livros"
+        ],
+        "ogTitle": "Conciliação bancária",
+        "ogDescription": "Concilie seu extrato bancário com o livro caixa: cheques não compensados, depósitos em trânsito e tarifas, até os saldos baterem. Grátis, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Conciliação bancária",
+        "headline": "Conciliação bancária",
+        "subheadline": "O banco diz um número, seus livros dizem outro — vá listando os itens de conciliação até os dois concordarem."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que os saldos do banco e dos livros não batem?",
+            "answer": "Prazos e omissões: cheques que você emitiu e ainda não compensaram, depósitos que o banco ainda não creditou, tarifas e juros que você não registrou. Cada um é um item de conciliação."
+          },
+          {
+            "question": "Com que frequência devo conciliar?",
+            "answer": "No mínimo uma vez por mês, quando o extrato chega. Negócios movimentados conciliam toda semana — quanto mais cedo você pega um erro ou um lançamento faltando, mais fácil é corrigir."
+          },
+          {
+            "question": "E se sobrar diferença depois de ajustar?",
+            "answer": "Procure dígitos trocados de posição (uma diferença divisível por 9 é o sinal clássico), lançamentos duplicados, ou uma operação registrada no lado errado. A ferramenta mostra a diferença restante ao vivo enquanto você adiciona itens."
+          }
+        ]
+      }
     },
     {
       "name": "Analisador de extrato bancário",

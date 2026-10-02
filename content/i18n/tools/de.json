@@ -297,19 +297,155 @@
     },
     {
       "name": "Kontenplan",
-      "shortDescription": "Kontenliste aus einer fertigen Vorlage für kleine Betriebe — Nummern, Arten, CSV-Export."
+      "shortDescription": "Kontenliste aus einer fertigen Vorlage für kleine Betriebe — Nummern, Arten, CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Kontenplan-Generator — online",
+        "description": "Bauen Sie Ihren Kontenplan aus einer Vorlage für kleine Betriebe. Konten anlegen, nummerieren und einordnen, als CSV exportieren. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Kontenplan",
+          "Kontenplan Vorlage",
+          "Kontenplan kleines Unternehmen",
+          "Kontonummern",
+          "Liste der Buchhaltungskonten"
+        ],
+        "ogTitle": "Kontenplan",
+        "ogDescription": "Bauen Sie Ihren Kontenplan aus einer Vorlage für kleine Betriebe. Konten anlegen, nummerieren und einordnen, als CSV exportieren. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kontenplan",
+        "headline": "Kontenplan",
+        "subheadline": "Das Rückgrat Ihrer Buchhaltung — eine fertige Kontenliste, die Sie auf Ihren Betrieb zuschneiden."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein Kontenplan?",
+            "answer": "Die Hauptliste aller Konten, auf die Ihr Betrieb Geld verbucht — Aktiva, Verbindlichkeiten, Eigenkapital, Erträge und Aufwendungen. Jede Buchung läuft auf Konten aus dieser Liste."
+          },
+          {
+            "question": "Was bedeuten die Kontonummern?",
+            "answer": "Eine verbreitete Konvention: 1000er für Aktiva, 2000er Verbindlichkeiten, 3000er Eigenkapital, 4000er Erträge, 5000er Aufwendungen. Die Nummerierung lässt Lücken, damit später neue Konten dazwischen passen."
+          },
+          {
+            "question": "Hängt das mit den anderen Buchhaltungstools zusammen?",
+            "answer": "Ja — die Tools für Buchungen, Hauptbuch und Saldenliste auf dieser Seite lesen denselben Kontenplan automatisch, und zwar alles in Ihrem Browser."
+          }
+        ]
+      }
     },
     {
       "name": "Buchungssatz",
-      "shortDescription": "Doppelte Buchführung mit automatischem Soll-Haben-Ausgleich. Speist Hauptbuch und Saldenliste."
+      "shortDescription": "Doppelte Buchführung mit automatischem Soll-Haben-Ausgleich. Speist Hauptbuch und Saldenliste.",
+      "seo": {
+        "title": "Kostenloses Buchungstool — doppelte Buchführung",
+        "description": "Erfassen Sie doppelte Buchungen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Buchung erfassen",
+          "doppelte Buchführung",
+          "Buchungsjournal online",
+          "Soll Haben Buchung",
+          "kostenloses Buchungsjournal"
+        ],
+        "ogTitle": "Buchung",
+        "ogDescription": "Erfassen Sie doppelte Buchungen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Buchung",
+        "headline": "Buchung",
+        "subheadline": "Echte doppelte Buchführung — Soll links, Haben rechts, immer im Gleichgewicht."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktionieren Soll und Haben?",
+            "answer": "Jeder Vorgang berührt mindestens zwei Konten, und die Summe im Soll muss der Summe im Haben entsprechen. Miete von ₹10.000 per Bank: Soll Mietaufwand ₹10.000, Haben Bank ₹10.000. Unausgeglichene Buchungen lässt das Tool nicht zu."
+          },
+          {
+            "question": "Wohin gehen meine Buchungen?",
+            "answer": "In ein Journal, das in Ihrem Browser liegt. Die Tools für Hauptbuch und Saldenliste lesen dasselbe Journal, sodass Ihre Bücher über alle drei hinweg zusammenpassen."
+          },
+          {
+            "question": "Kann ich mein Journal exportieren?",
+            "answer": "Ja — ein Klick exportiert das gesamte Journal als CSV, fertig für Excel, Google Sheets oder Ihren Steuerberater."
+          }
+        ]
+      }
     },
     {
       "name": "Hauptbuch",
-      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt."
+      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt.",
+      "seo": {
+        "title": "Kostenloses Hauptbuch-Tool — online",
+        "description": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Hauptbuch",
+          "Sachkonto online",
+          "Hauptbuch laufender Saldo",
+          "kostenloses Hauptbuch",
+          "Hauptbuch Buchhaltung"
+        ],
+        "ogTitle": "Hauptbuch",
+        "ogDescription": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Hauptbuch",
+        "headline": "Hauptbuch",
+        "subheadline": "Konto auswählen und jede Buchung mit dem laufenden Saldo sehen — automatisch aus Ihrem Journal erzeugt."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Woher kommen die Daten im Hauptbuch?",
+            "answer": "Aus dem Buchungstool dieser Seite. Jede erfasste Buchung erscheint im Hauptbuch jedes Kontos, das sie berührt — nichts muss neu eingetippt werden."
+          },
+          {
+            "question": "Was bedeutet der Soll-/Haben-Saldo?",
+            "answer": "Aktiv- und Aufwandskonten tragen normalerweise einen Soll-Saldo (Dr); Verbindlichkeits-, Eigenkapital- und Ertragskonten einen Haben-Saldo (Cr). Das Hauptbuch zeigt den laufenden Saldo auf der üblichen Seite des Kontos."
+          },
+          {
+            "question": "Kann ich ein Konto exportieren?",
+            "answer": "Ja — exportieren Sie das Hauptbuch zu jedem Konto als CSV mit Datum, Buchungstext, Soll, Haben und laufendem Saldo."
+          }
+        ]
+      }
     },
     {
       "name": "Bankabstimmung",
-      "shortDescription": "Kontoauszug mit Ihrer Buchhaltung abgleichen — offene Schecks, schwebende Einzahlungen, Gebühren."
+      "shortDescription": "Kontoauszug mit Ihrer Buchhaltung abgleichen — offene Schecks, schwebende Einzahlungen, Gebühren.",
+      "seo": {
+        "title": "Kostenloses Tool zur Bankabstimmung",
+        "description": "Stimmen Sie Ihren Kontoauszug mit dem Kassenbuch ab — nicht eingelöste Schecks, Einzahlungen auf dem Weg und Bankspesen, bis die Salden stimmen.",
+        "keywords": [
+          "Bankabstimmung",
+          "Bankabstimmung Aufstellung",
+          "Vorlage Bankabstimmung",
+          "Kontoauszug abstimmen",
+          "Differenz Bank und Buchhaltung"
+        ],
+        "ogTitle": "Bankabstimmung",
+        "ogDescription": "Stimmen Sie Ihren Kontoauszug mit dem Kassenbuch ab — nicht eingelöste Schecks, Einzahlungen auf dem Weg und Bankspesen, bis die Salden stimmen."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Bankabstimmung",
+        "headline": "Bankabstimmung",
+        "subheadline": "Die Bank nennt eine Zahl, Ihre Bücher eine andere — tragen Sie die Abstimmungsposten ein, bis beide übereinstimmen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum stimmen Bank- und Buchsaldo nicht überein?",
+            "answer": "Zeitversatz und Lücken: ausgestellte Schecks, die noch nicht eingelöst sind, Einzahlungen, die die Bank noch nicht gutgeschrieben hat, Spesen und Zinsen, die Sie noch nicht erfasst haben. Jedes davon ist ein Abstimmungsposten."
+          },
+          {
+            "question": "Wie oft sollte ich abstimmen?",
+            "answer": "Mindestens monatlich, sobald der Auszug kommt. Betriebe mit viel Bewegung stimmen wöchentlich ab — je früher Sie einen Fehler oder eine fehlende Buchung finden, desto leichter die Korrektur."
+          },
+          {
+            "question": "Was, wenn nach dem Anpassen eine Differenz bleibt?",
+            "answer": "Prüfen Sie auf vertauschte Ziffern (eine durch 9 teilbare Differenz ist das klassische Zeichen), doppelte Buchungen oder einen Vorgang auf der falschen Seite. Das Tool zeigt die Restdifferenz laufend an, während Sie Posten ergänzen."
+          }
+        ]
+      }
     },
     {
       "name": "Kontoauszug-Analyse",

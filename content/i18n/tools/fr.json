@@ -297,19 +297,155 @@
     },
     {
       "name": "Plan comptable",
-      "shortDescription": "Construisez votre plan comptable depuis un modèle pour petite entreprise : codes, types, export CSV."
+      "shortDescription": "Construisez votre plan comptable depuis un modèle pour petite entreprise : codes, types, export CSV.",
+      "seo": {
+        "title": "Générateur de plan comptable gratuit",
+        "description": "Construisez votre plan comptable depuis un modèle prêt pour les petites entreprises. Ajoutez, codez et classez les comptes, exportez en CSV. Gratuit.",
+        "keywords": [
+          "plan comptable",
+          "modèle de plan comptable",
+          "plan comptable petite entreprise",
+          "codes de comptes",
+          "liste des comptes comptables"
+        ],
+        "ogTitle": "Plan comptable",
+        "ogDescription": "Construisez votre plan comptable depuis un modèle prêt pour les petites entreprises. Ajoutez, codez et classez les comptes, exportez en CSV. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Plan comptable",
+        "headline": "Plan comptable",
+        "subheadline": "La colonne vertébrale de votre comptabilité — une liste de comptes prête à l'emploi, que vous adaptez à votre activité."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un plan comptable ?",
+            "answer": "La liste maîtresse de tous les comptes sur lesquels votre entreprise enregistre de l'argent : actif, dettes, capitaux propres, produits et charges. Chaque écriture s'impute à des comptes de cette liste."
+          },
+          {
+            "question": "Que signifient les codes de comptes ?",
+            "answer": "Une convention courante : la série 1000 pour l'actif, 2000 les dettes, 3000 les capitaux propres, 4000 les produits, 5000 les charges. La numérotation laisse des trous pour insérer de nouveaux comptes plus tard."
+          },
+          {
+            "question": "Est-ce relié aux autres outils de comptabilité ?",
+            "answer": "Oui : les outils d'écritures, de grand livre et de balance générale de ce site lisent automatiquement ce même plan, le tout dans votre navigateur."
+          }
+        ]
+      }
     },
     {
       "name": "Écriture comptable",
-      "shortDescription": "Comptabilité en partie double avec équilibrage débit/crédit automatique. Alimente grand livre et balance."
+      "shortDescription": "Comptabilité en partie double avec équilibrage débit/crédit automatique. Alimente grand livre et balance.",
+      "seo": {
+        "title": "Outil d'écritures comptables gratuit",
+        "description": "Saisissez des écritures en partie double avec équilibrage automatique du débit et du crédit. Elles alimentent le grand livre et la balance. Gratuit.",
+        "keywords": [
+          "écriture comptable",
+          "comptabilité en partie double",
+          "journal comptable en ligne",
+          "écriture débit crédit",
+          "journal comptable gratuit"
+        ],
+        "ogTitle": "Écriture comptable",
+        "ogDescription": "Saisissez des écritures en partie double avec équilibrage automatique du débit et du crédit. Elles alimentent le grand livre et la balance. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Écriture comptable",
+        "headline": "Écriture comptable",
+        "subheadline": "De la vraie comptabilité en partie double — le débit à gauche, le crédit à droite, toujours équilibré."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Comment fonctionnent le débit et le crédit ?",
+            "answer": "Chaque opération touche au moins deux comptes, et le total des débits doit égaler celui des crédits. Un loyer de ₹10 000 payé par banque : débit Charges de loyer ₹10 000, crédit Banque ₹10 000. L'outil bloque les écritures déséquilibrées."
+          },
+          {
+            "question": "Où vont mes écritures ?",
+            "answer": "Dans un journal conservé dans votre navigateur. Les outils de grand livre et de balance lisent ce même journal : votre comptabilité reste cohérente sur les trois."
+          },
+          {
+            "question": "Puis-je exporter mon journal ?",
+            "answer": "Oui : un clic exporte le journal complet en CSV, prêt pour Excel, Google Sheets ou votre comptable."
+          }
+        ]
+      }
     },
     {
       "name": "Grand livre",
-      "shortDescription": "Grands livres par compte avec soldes progressifs, construits automatiquement depuis vos écritures."
+      "shortDescription": "Grands livres par compte avec soldes progressifs, construits automatiquement depuis vos écritures.",
+      "seo": {
+        "title": "Outil de grand livre gratuit — en ligne",
+        "description": "Consultez le grand livre de n'importe quel compte avec les soldes progressifs, construit à partir de vos écritures. Export CSV. Gratuit, hors ligne.",
+        "keywords": [
+          "grand livre",
+          "compte de grand livre en ligne",
+          "grand livre solde progressif",
+          "grand livre gratuit",
+          "grand livre comptable"
+        ],
+        "ogTitle": "Grand livre",
+        "ogDescription": "Consultez le grand livre de n'importe quel compte avec les soldes progressifs, construit à partir de vos écritures. Export CSV. Gratuit, hors ligne."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Grand livre",
+        "headline": "Grand livre",
+        "subheadline": "Choisissez un compte et voyez chaque écriture avec son solde progressif — construit à partir de votre journal."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "D'où viennent les données du grand livre ?",
+            "answer": "De l'outil d'écritures de ce site. Chaque écriture enregistrée apparaît dans le grand livre de tous les comptes qu'elle touche — rien à ressaisir."
+          },
+          {
+            "question": "Que signifie le solde Dr/Cr ?",
+            "answer": "Les comptes d'actif et de charges ont normalement un solde débiteur (Dr) ; ceux de dettes, de capitaux propres et de produits, un solde créditeur (Cr). Le grand livre affiche le solde progressif du côté habituel du compte."
+          },
+          {
+            "question": "Puis-je exporter un grand livre ?",
+            "answer": "Oui : exportez le grand livre de n'importe quel compte en CSV avec dates, libellés, débits, crédits et solde progressif."
+          }
+        ]
+      }
     },
     {
       "name": "Rapprochement bancaire",
-      "shortDescription": "Rapprochez relevé et comptabilité : chèques non débités, dépôts en transit, frais."
+      "shortDescription": "Rapprochez relevé et comptabilité : chèques non débités, dépôts en transit, frais.",
+      "seo": {
+        "title": "Outil de rapprochement bancaire gratuit",
+        "description": "Rapprochez votre relevé bancaire de votre livre de caisse : chèques non débités, remises en cours et frais bancaires, jusqu'à ce que les soldes concordent.",
+        "keywords": [
+          "rapprochement bancaire",
+          "état de rapprochement bancaire",
+          "modèle de rapprochement bancaire",
+          "rapprocher un relevé bancaire",
+          "écart banque et comptabilité"
+        ],
+        "ogTitle": "Rapprochement bancaire",
+        "ogDescription": "Rapprochez votre relevé bancaire de votre livre de caisse : chèques non débités, remises en cours et frais bancaires, jusqu'à ce que les soldes concordent."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Rapprochement bancaire",
+        "headline": "Rapprochement bancaire",
+        "subheadline": "La banque annonce un chiffre, vos livres un autre — listez les éléments de rapprochement jusqu'à ce qu'ils concordent."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Pourquoi mes soldes bancaire et comptable diffèrent-ils ?",
+            "answer": "Décalages et oublis : des chèques émis non encore débités, des remises que la banque n'a pas encore créditées, des frais et intérêts que vous n'avez pas enregistrés. Chacun est un élément de rapprochement."
+          },
+          {
+            "question": "À quelle fréquence faut-il rapprocher ?",
+            "answer": "Au moins une fois par mois, à l'arrivée du relevé. Les entreprises très actives rapprochent chaque semaine : plus tôt vous repérez une erreur ou une écriture manquante, plus simple est la correction."
+          },
+          {
+            "question": "Et s'il reste un écart après ajustement ?",
+            "answer": "Cherchez des chiffres inversés (un écart divisible par 9 en est le signe classique), des écritures en double, ou une opération passée du mauvais côté. L'outil affiche l'écart résiduel en direct à mesure que vous ajoutez des éléments."
+          }
+        ]
+      }
     },
     {
       "name": "Analyseur de relevés",
