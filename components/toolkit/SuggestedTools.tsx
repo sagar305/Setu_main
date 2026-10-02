@@ -4,8 +4,12 @@
 import Link from "next/link";
 import { suggestedTools, type ToolSlug } from "@/lib/toolkit/registry";
 
-export function SuggestedTools({ current }: { current: ToolSlug }) {
-  const tools = suggestedTools(current).filter((t) => t.route && t.status === "built");
+export function SuggestedTools({ current }: { current: string }) {
+  // A slug the toolkit registry does not know simply has no integrations, so
+  // the cast cannot produce a wrong answer — only an empty strip.
+  const tools = suggestedTools(current as ToolSlug).filter(
+    (t) => t.route && t.status === "built",
+  );
   if (tools.length === 0) return null;
   return (
     <div>

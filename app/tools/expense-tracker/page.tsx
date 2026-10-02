@@ -1,76 +1,23 @@
 import type { Metadata } from "next";
+import { getToolBySlug, getToolsContent } from "@/lib/content";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { ExpenseTrackerTool } from "@/components/tools/ExpenseTracker/ExpenseTrackerTool";
-import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
-import { ToolSchema } from "@/components/toolkit/ToolSchema";
-import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = toolMetadata("expense-tracker");
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Is this expense tracker really free?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — free, unlimited entries, no signup. Your expense data stays in your browser on your device.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How does it connect to the Profit Dashboard?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Expenses you record here are automatically included in the Setu Profit Dashboard, so your profit is calculated from actual expenses — not estimates.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can I export my expenses?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — export any month as a CSV file that opens in Excel or Google Sheets.",
-      },
-    },
-  ],
-};
-
 export default function ExpenseTrackerPage() {
+  const item = getToolBySlug("expense-tracker")!;
+  const labels = getToolsContent().labels;
+
   return (
-    <>
-      <ToolSchema slug="expense-tracker" />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo/10 px-4 py-2">
-            <span className="text-sm font-semibold text-indigo">Free Tool</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Expense Tracker
-          </h1>
-          <p className="mt-4 text-xl text-muted">
-            Record every business expense by category — and see your real profit on the dashboard.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-12">
-        <ExpenseTrackerTool />
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <SuggestedTools current="expense-tracker" />
-      </section>
-      <section className="mx-auto max-w-4xl px-6 pb-16">
-        <GlossaryTermsStrip type="tool" slug="expense-tracker" />
-      </section>
-    </>
+    <ToolPageShell
+      item={item}
+      eyebrow={labels.freeTool}
+      schema
+      suggested
+    >
+      <ExpenseTrackerTool />
+    </ToolPageShell>
   );
 }

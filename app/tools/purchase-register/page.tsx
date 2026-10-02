@@ -1,76 +1,23 @@
 import type { Metadata } from "next";
+import { getToolBySlug, getToolsContent } from "@/lib/content";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { PurchaseRegisterTool } from "@/components/tools/PurchaseRegister/PurchaseRegisterTool";
-import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
-import { ToolSchema } from "@/components/toolkit/ToolSchema";
-import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = toolMetadata("purchase-register");
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Can purchases update my product stock?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Link purchase lines to your saved products and, after one confirmation, the purchased quantities are added to stock — visible instantly in the Stock Register and the Browser POS.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do I have to retype supplier details?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. Suppliers saved in the Supplier Book appear in a dropdown here. Save a vendor once, reuse forever.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is my purchase data private?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Completely. Everything is stored in your browser on your device — no signup, no cloud, and you can export a CSV any time.",
-      },
-    },
-  ],
-};
-
 export default function PurchaseRegisterPage() {
+  const item = getToolBySlug("purchase-register")!;
+  const labels = getToolsContent().labels;
+
   return (
-    <>
-      <ToolSchema slug="purchase-register" />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo/10 px-4 py-2">
-            <span className="text-sm font-semibold text-indigo">Free Tool</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            Purchase Register
-          </h1>
-          <p className="mt-4 text-xl text-muted">
-            Record supplier bills, link products, and update stock with one confirmation.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-12">
-        <PurchaseRegisterTool />
-      </section>
-
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <SuggestedTools current="purchase-register" />
-      </section>
-      <section className="mx-auto max-w-4xl px-6 pb-16">
-        <GlossaryTermsStrip type="tool" slug="purchase-register" />
-      </section>
-    </>
+    <ToolPageShell
+      item={item}
+      eyebrow={labels.freeTool}
+      schema
+      suggested
+    >
+      <PurchaseRegisterTool />
+    </ToolPageShell>
   );
 }

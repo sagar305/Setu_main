@@ -66,6 +66,10 @@
       "name": "Análisis financiero"
     }
   ],
+  "labels": {
+    "freeTool": "Herramienta gratuita",
+    "loading": "Cargando…"
+  },
   "items": [
     {
       "name": "TPV en el navegador",

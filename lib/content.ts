@@ -38,7 +38,60 @@ export type TuitionContent = typeof tuitionData;
 export type CalculatorsContent = typeof calculatorsData;
 export type CalculatorItem = CalculatorsContent["items"][number];
 export type ToolsContent = typeof toolsData;
-export type ToolItem = ToolsContent["items"][number];
+
+/**
+ * One block of the extra prose a few tool pages carry under the tool itself.
+ *
+ * Four of the thirty-five pages explain more than the hero does — why the MDR
+ * threshold works the way it does, what belongs on an invoice, how a QR menu is
+ * printed. That copy used to be JSX inside each page, where no translation
+ * could reach it. These six shapes cover all of it; paragraphs and intros
+ * accept `**bold**` and `[label](/path)`, rendered by ToolBody.
+ */
+export type ToolBodyBlock =
+  | {
+      kind: "features";
+      headline: string;
+      items: { icon: string; title: string; text: string }[];
+    }
+  | { kind: "steps"; headline: string; intro?: string; steps: string[] }
+  | {
+      kind: "checklist";
+      headline: string;
+      intro?: string;
+      items: string[];
+      cta?: Cta;
+    }
+  | { kind: "prose"; headline: string; paragraphs: string[]; tone?: "paper" }
+  | { kind: "note"; headline: string; text: string }
+  | { kind: "links"; headline: string; intro?: string; links: Cta[] };
+
+/**
+ * One tool, as the listing and its own page read it.
+ *
+ * Written out rather than inferred from tools.json because the items are not
+ * all the same shape: two of them are products with an `href` elsewhere and no
+ * page of their own, and only four carry `body`. Inferring would make every
+ * optional field unreachable without a cast at each use.
+ */
+export type ToolItem = {
+  slug: string;
+  href?: string;
+  name: string;
+  category: string;
+  icon: string;
+  shortDescription: string;
+  seo: {
+    title: string;
+    description: string;
+    keywords: string[];
+    ogTitle?: string;
+    ogDescription?: string;
+  };
+  hero: { eyebrow: string; headline: string; subheadline: string };
+  faq?: { items: { question: string; answer: string }[] };
+  body?: ToolBodyBlock[];
+};
 export type ConsultancyContent = typeof consultancyData;
 
 /**
@@ -482,8 +535,13 @@ export function getToolsContent(): ToolsContent {
   return toolsData;
 }
 
+/** The tools, typed as ToolItem — see that type for why the cast is needed. */
+export function getToolItems(): ToolItem[] {
+  return toolsData.items as ToolItem[];
+}
+
 export function getToolBySlug(slug: string): ToolItem | undefined {
-  return toolsData.items.find((item) => item.slug === slug);
+  return getToolItems().find((item) => item.slug === slug);
 }
 
 export function getConsultancyContent(): ConsultancyContent {

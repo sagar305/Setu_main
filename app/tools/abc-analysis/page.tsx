@@ -1,67 +1,21 @@
 import type { Metadata } from "next";
+import { getToolBySlug, getToolsContent } from "@/lib/content";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { AbcAnalysisTool } from "@/components/tools/analysis/AbcAnalysisTool";
-import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = toolMetadata("abc-analysis");
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What is ABC analysis?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "An inventory method based on the Pareto principle: class A items are the vital few (~80% of consumption value), B the middle (~15%), C the trivial many (~5%). Each class gets a matching level of control.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How are items classified?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Rank items by annual consumption value (annual quantity × unit cost), take the cumulative percentage of total value, and cut at 80% (A), 95% (B) and beyond (C) — exactly what this tool automates.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How should I treat each class?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A: tight control — frequent counts, careful reorder points, negotiated pricing. B: moderate, periodic review. C: simple rules and bulk orders. Pair with our Stock Reorder Point calculator for the A items.",
-      },
-    }
-  ],
-};
-
 export default function AbcAnalysisPage() {
+  const item = getToolBySlug("abc-analysis")!;
+  const labels = getToolsContent().labels;
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo/10 px-4 py-2">
-            <span className="text-sm font-semibold text-indigo">Free Tool</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">ABC Analysis</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
-            Not all stock deserves equal attention — rank items by annual value and manage class A tightly.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-16">
-        <AbcAnalysisTool />
-      </section>
-      <section className="mx-auto max-w-4xl px-6 pb-16">
-        <GlossaryTermsStrip type="tool" slug="abc-analysis" />
-      </section>
-    </>
+    <ToolPageShell
+      item={item}
+      eyebrow={labels.freeTool}
+    >
+      <AbcAnalysisTool />
+    </ToolPageShell>
   );
 }

@@ -66,6 +66,10 @@
       "name": "Analyse financière"
     }
   ],
+  "labels": {
+    "freeTool": "Outil gratuit",
+    "loading": "Chargement…"
+  },
   "items": [
     {
       "name": "Caisse dans le navigateur",

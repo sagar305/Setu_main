@@ -1,67 +1,21 @@
 import type { Metadata } from "next";
+import { getToolBySlug, getToolsContent } from "@/lib/content";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
-import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = toolMetadata("sales-order-generator");
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What is a sales order for?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "It confirms a customer's order in writing before you dispatch or invoice — locking in items, quantities, prices and the delivery date so both sides agree upfront.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How is a sales order different from an invoice?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "The sales order confirms the order; the invoice demands payment. Typically you issue the SO on confirmation, then convert it to an invoice at dispatch (our free Invoice Generator handles that part).",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is my data private?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — everything stays in your browser's local storage, nothing is uploaded, and no signup is needed.",
-      },
-    }
-  ],
-};
-
 export default function SalesOrderGeneratorPage() {
+  const item = getToolBySlug("sales-order-generator")!;
+  const labels = getToolsContent().labels;
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo/10 px-4 py-2">
-            <span className="text-sm font-semibold text-indigo">Free Tool</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">Sales Order Generator</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
-            Confirm what the customer ordered — items, prices and delivery date — before anything ships.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-16">
-        <DocumentTool docType="sales-order" />
-      </section>
-      <section className="mx-auto max-w-4xl px-6 pb-16">
-        <GlossaryTermsStrip type="tool" slug="sales-order-generator" />
-      </section>
-    </>
+    <ToolPageShell
+      item={item}
+      eyebrow={labels.freeTool}
+    >
+      <DocumentTool docType="sales-order" />
+    </ToolPageShell>
   );
 }

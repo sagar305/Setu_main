@@ -1,9 +1,16 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CalculatorIcon } from "@/components/calculators/CalculatorIcon";
-import type { ToolItem } from "@/lib/content";
+/** Just the fields a card shows, so a localized item can be passed straight in. */
+type CardItem = {
+  slug: string;
+  href?: string;
+  name: string;
+  icon: string;
+  shortDescription: string;
+};
 
-export function ToolCard({ item }: { item: ToolItem }) {
+export function ToolCard({ item }: { item: CardItem }) {
   const href = "href" in item && item.href ? item.href : `/tools/${item.slug}`;
   return (
     <Link

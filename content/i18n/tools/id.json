@@ -66,6 +66,10 @@
       "name": "Analisis keuangan"
     }
   ],
+  "labels": {
+    "freeTool": "Alat Gratis",
+    "loading": "Memuat…"
+  },
   "items": [
     {
       "name": "Kasir berbasis browser",

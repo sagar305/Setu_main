@@ -91,7 +91,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "invoice-aging-report": [],
     "accounts-payable-aging": [],
     "budget-vs-actual": [],
-    "abc-analysis": [],
+    "abc-analysis": ["hi"],
     "vendor-comparison": [],
   },
 };

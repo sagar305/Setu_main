@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { PageHero } from "@/components/PageHero";
-import { RichText } from "@/components/legal/RichText";
+import { RichText } from "@/components/RichText";
 import type { LegalContent } from "@/lib/content";
 
 /**

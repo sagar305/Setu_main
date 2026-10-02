@@ -1,67 +1,21 @@
 import type { Metadata } from "next";
+import { getToolBySlug, getToolsContent } from "@/lib/content";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
+import { ToolPageShell } from "@/components/tools/ToolPageShell";
 import { DocumentTool } from "@/components/tools/docgen/DocumentTool";
-import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
 export const metadata: Metadata = toolMetadata("purchase-order-generator");
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Why use a purchase order instead of a phone call?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A PO puts the items, quantities, rates and delivery date in writing before money moves. It prevents \"that's not what I ordered\" disputes and gives you a paper trail to check the supplier's bill against.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What should a purchase order include?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "PO number and date, supplier details, itemised lines with quantities and agreed rates, taxes, expected delivery date, and any terms — all of which this tool covers.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Can I save purchase orders for later?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes — saved POs stay in your browser's local storage so you can reprint them any time. Nothing is uploaded to a server.",
-      },
-    }
-  ],
-};
-
 export default function PurchaseOrderGeneratorPage() {
+  const item = getToolBySlug("purchase-order-generator")!;
+  const labels = getToolsContent().labels;
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      <section className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-        <div className="text-center">
-          <div className="mb-4 inline-block rounded-full bg-indigo/10 px-4 py-2">
-            <span className="text-sm font-semibold text-indigo">Free Tool</span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">Purchase Order Generator</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
-            Authorize supplier purchases formally — items, rates, delivery date and terms on one clean PO.
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-16">
-        <DocumentTool docType="purchase-order" />
-      </section>
-      <section className="mx-auto max-w-4xl px-6 pb-16">
-        <GlossaryTermsStrip type="tool" slug="purchase-order-generator" />
-      </section>
-    </>
+    <ToolPageShell
+      item={item}
+      eyebrow={labels.freeTool}
+    >
+      <DocumentTool docType="purchase-order" />
+    </ToolPageShell>
   );
 }

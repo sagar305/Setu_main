@@ -66,6 +66,10 @@
       "name": "Finanzanalyse"
     }
   ],
+  "labels": {
+    "freeTool": "Kostenloses Tool",
+    "loading": "Wird geladen…"
+  },
   "items": [
     {
       "name": "Browser-Kasse",

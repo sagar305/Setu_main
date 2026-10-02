@@ -66,6 +66,10 @@
       "name": "Análise financeira"
     }
   ],
+  "labels": {
+    "freeTool": "Ferramenta gratuita",
+    "loading": "Carregando…"
+  },
   "items": [
     {
       "name": "PDV no navegador",

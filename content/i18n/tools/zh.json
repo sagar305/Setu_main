@@ -66,6 +66,10 @@
       "name": "财务分析"
     }
   ],
+  "labels": {
+    "freeTool": "免费工具",
+    "loading": "加载中…"
+  },
   "items": [
     {
       "name": "浏览器收银台",

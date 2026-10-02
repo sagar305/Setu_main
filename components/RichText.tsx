@@ -2,15 +2,18 @@ import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 
 /**
- * The two pieces of inline markup the legal copy needs: **bold** and
+ * The two pieces of inline markup content copy may carry: **bold** and
  * [label](href).
  *
- * The privacy policy and terms used to be JSX, which meant none of their copy
- * could be translated. Moving them into content/en/*.json needs some way to
- * keep a bolded clause or a link to /terms inside a sentence — and a translator
- * has to be able to move it, because word order differs. Markdown's two
- * simplest forms do that without pulling in a parser, and without letting
- * content inject arbitrary HTML.
+ * The privacy policy, the terms and the prose under a few tools used to be JSX,
+ * which meant none of their copy could be translated. Moving them into
+ * content/en/*.json needs some way to keep a bolded clause or a link to /terms
+ * inside a sentence — and a translator has to be able to move it, because word
+ * order differs. Markdown's two simplest forms do that without pulling in a
+ * parser, and without letting content inject arbitrary HTML.
+ *
+ * The hrefs are written as English paths and rewritten for the reader's
+ * language upstream, by localizeLinks as the copy is loaded.
  */
 const PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
 
