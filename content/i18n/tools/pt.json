@@ -317,19 +317,155 @@
     },
     {
       "name": "Balancete de verificação",
-      "shortDescription": "Montado automaticamente dos lançamentos — saldo líquido de cada conta, somado e conferido."
+      "shortDescription": "Montado automaticamente dos lançamentos — saldo líquido de cada conta, somado e conferido.",
+      "seo": {
+        "title": "Balancete de verificação gratuito — online",
+        "description": "Um balancete gerado automaticamente a partir dos seus lançamentos: o saldo líquido devedor ou credor de cada conta, somado e conferido. Grátis, sem cadastro.",
+        "keywords": [
+          "balancete de verificação",
+          "modelo de balancete",
+          "balancete online",
+          "conferência débito crédito",
+          "balancete contábil"
+        ],
+        "ogTitle": "Balancete de verificação",
+        "ogDescription": "Um balancete gerado automaticamente a partir dos seus lançamentos: o saldo líquido devedor ou credor de cada conta, somado e conferido. Grátis, sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Balancete de verificação",
+        "headline": "Balancete de verificação",
+        "subheadline": "O saldo líquido de cada conta no seu lado devedor ou credor — somado, conferido e pronto para exportar."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um balancete de verificação?",
+            "answer": "Uma lista de todas as contas com saldo diferente de zero, mostradas no lado devedor ou credor. Se seus lançamentos em partidas dobradas estão certos, o total dos débitos iguala o dos créditos."
+          },
+          {
+            "question": "De onde vêm os números?",
+            "answer": "Da ferramenta de lançamentos deste site: o balancete se recalcula sozinho a partir dos seus lançamentos registrados, usando seu plano de contas."
+          },
+          {
+            "question": "E se não fechar?",
+            "answer": "Com esta ferramenta deveria sempre fechar, porque lançamentos desbalanceados não podem ser registrados. Se você importou ou editou dados em outro lugar, o aviso de diferença informa o quanto os dois lados se separam."
+          }
+        ]
+      }
     },
     {
       "name": "Demonstração de resultado",
-      "shortDescription": "Monte a DRE — da receita ao lucro líquido com margens calculadas ao vivo. PDF ou CSV."
+      "shortDescription": "Monte a DRE — da receita ao lucro líquido com margens calculadas ao vivo. PDF ou CSV.",
+      "seo": {
+        "title": "DRE gratuita — demonstração de resultado",
+        "description": "Monte uma DRE: receita, custo das mercadorias, despesas e lucro bruto, operacional e líquido com as margens. Imprima em PDF ou exporte CSV. Grátis.",
+        "keywords": [
+          "demonstração de resultado",
+          "gerador de DRE",
+          "DRE online",
+          "modelo de DRE",
+          "modelo de DRE grátis"
+        ],
+        "ogTitle": "Demonstração de resultado",
+        "ogDescription": "Monte uma DRE: receita, custo das mercadorias, despesas e lucro bruto, operacional e líquido com as margens. Imprima em PDF ou exporte CSV. Grátis."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Demonstração de resultado",
+        "headline": "Demonstração de resultado",
+        "subheadline": "Receita no topo, lucro líquido na base e cada passo no meio — com as margens calculadas ao vivo."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que entra em uma DRE?",
+            "answer": "Receita, menos custo das mercadorias vendidas (lucro bruto), menos despesas operacionais (lucro operacional), mais outras receitas, menos impostos: sobra o lucro líquido. Esta ferramenta calcula cada nível enquanto você digita."
+          },
+          {
+            "question": "Qual a diferença entre margem bruta e líquida?",
+            "answer": "A margem bruta mostra o quanto seu produto principal é lucrativo antes das despesas fixas; a líquida mostra o que de fato sobra depois de tudo. Margem bruta boa com líquida fina aponta para as despesas fixas."
+          },
+          {
+            "question": "Posso imprimir ou compartilhar a demonstração?",
+            "answer": "Sim: imprima um A4 limpo (ou salve como PDF na janela de impressão) e exporte os números em CSV. Os dados ficam no seu navegador."
+          }
+        ]
+      }
     },
     {
       "name": "Balanço patrimonial",
-      "shortDescription": "Ativos, passivos e patrimônio com verificação de equilíbrio ao vivo. Impressão A4 e CSV."
+      "shortDescription": "Ativos, passivos e patrimônio com verificação de equilíbrio ao vivo. Impressão A4 e CSV.",
+      "seo": {
+        "title": "Gerador de balanço patrimonial gratuito",
+        "description": "Monte um balanço patrimonial com ativo circulante e fixo, passivo e patrimônio líquido. Conferência do fechamento ao vivo, impressão A4 e CSV. Grátis.",
+        "keywords": [
+          "gerador de balanço patrimonial",
+          "modelo de balanço patrimonial",
+          "balanço patrimonial online grátis",
+          "ativo passivo patrimônio líquido",
+          "balanço para pequena empresa"
+        ],
+        "ogTitle": "Balanço patrimonial",
+        "ogDescription": "Monte um balanço patrimonial com ativo circulante e fixo, passivo e patrimônio líquido. Conferência do fechamento ao vivo, impressão A4 e CSV. Grátis."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Balanço patrimonial",
+        "headline": "Balanço patrimonial",
+        "subheadline": "O que você tem, o que você deve e o que sobra para os sócios — conferido ao vivo, então sempre fecha."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um balanço patrimonial?",
+            "answer": "Uma foto em uma data: ativo (o que a empresa possui), passivo (o que ela deve) e patrimônio líquido (a parte dos sócios). O ativo tem de ser igual ao passivo mais o patrimônio líquido."
+          },
+          {
+            "question": "Por que meu balanço não fecha?",
+            "answer": "A causa mais comum são os lucros acumulados esquecidos: o lucro de exercícios anteriores pertence ao patrimônio líquido. A ferramenta mostra a diferença exata para você achar a falha."
+          },
+          {
+            "question": "Qual a diferença entre ativo circulante e fixo?",
+            "answer": "O ativo circulante vira dinheiro dentro do ano (caixa, contas a receber, estoque); o fixo serve à empresa por mais tempo (equipamentos, móveis, veículos). O passivo se divide da mesma forma, pelo prazo de vencimento."
+          }
+        ]
+      }
     },
     {
       "name": "Demonstração de fluxo de caixa",
-      "shortDescription": "Fluxos operacional, de investimento e de financiamento, do caixa inicial ao final. Imprima ou exporte."
+      "shortDescription": "Fluxos operacional, de investimento e de financiamento, do caixa inicial ao final. Imprima ou exporte.",
+      "seo": {
+        "title": "Demonstração de fluxo de caixa gratuita",
+        "description": "Monte uma demonstração de fluxo de caixa por atividades operacionais, de investimento e de financiamento. Do saldo inicial ao final, PDF e CSV. Grátis.",
+        "keywords": [
+          "demonstração de fluxo de caixa",
+          "modelo de fluxo de caixa",
+          "fluxo de caixa online grátis",
+          "operacional investimento financiamento",
+          "fluxo de caixa pequena empresa"
+        ],
+        "ogTitle": "Demonstração de fluxo de caixa",
+        "ogDescription": "Monte uma demonstração de fluxo de caixa por atividades operacionais, de investimento e de financiamento. Do saldo inicial ao final, PDF e CSV. Grátis."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Demonstração de fluxo de caixa",
+        "headline": "Demonstração de fluxo de caixa",
+        "subheadline": "De onde o dinheiro veio e para onde foi — operacional, investimento e financiamento, do saldo inicial ao final."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que acompanhar o caixa separado do lucro?",
+            "answer": "Lucro é opinião, caixa é fato: uma empresa lucrativa pode ficar sem dinheiro se ele estiver preso em estoque ou em faturas não pagas. A demonstração de fluxo mostra o movimento real."
+          },
+          {
+            "question": "O que vai em cada seção?",
+            "answer": "Operacional: o dia a dia (recebimentos de clientes, pagamentos a fornecedores e salários). Investimento: compra ou venda de ativos. Financiamento: empréstimos tomados ou pagos, capital aportado, retiradas."
+          },
+          {
+            "question": "Como lanço as saídas?",
+            "answer": "Como números negativos — por exemplo −25000 para um equipamento comprado. Cada seção então apura seu próprio líquido e a demonstração vai do caixa inicial ao caixa final."
+          }
+        ]
+      }
     },
     {
       "name": "Extrato do cliente",

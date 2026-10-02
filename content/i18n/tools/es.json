@@ -317,19 +317,155 @@
     },
     {
       "name": "Balance de sumas y saldos",
-      "shortDescription": "Construido solo desde tus asientos: el saldo neto de cada cuenta, sumado y comprobado."
+      "shortDescription": "Construido solo desde tus asientos: el saldo neto de cada cuenta, sumado y comprobado.",
+      "seo": {
+        "title": "Balance de comprobación gratuito — online",
+        "description": "Un balance de comprobación generado solo a partir de tus asientos: el saldo neto deudor o acreedor de cada cuenta, sumado y verificado. Gratis, sin registro.",
+        "keywords": [
+          "balance de comprobación",
+          "formato de balance de comprobación",
+          "balance de sumas y saldos online",
+          "comprobación debe haber",
+          "balance de comprobación contable"
+        ],
+        "ogTitle": "Balance de comprobación",
+        "ogDescription": "Un balance de comprobación generado solo a partir de tus asientos: el saldo neto deudor o acreedor de cada cuenta, sumado y verificado. Gratis, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Balance de comprobación",
+        "headline": "Balance de comprobación",
+        "subheadline": "El saldo neto de cada cuenta en su lado deudor o acreedor — sumado, comprobado y listo para exportar."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un balance de comprobación?",
+            "answer": "Una lista de todas las cuentas con saldo distinto de cero, mostradas en su lado deudor o acreedor. Si tus asientos por partida doble están bien, el total del debe iguala el del haber."
+          },
+          {
+            "question": "¿De dónde salen las cifras?",
+            "answer": "De la herramienta de asientos de este sitio: el balance se recalcula solo a partir de tus asientos registrados, usando tu plan de cuentas."
+          },
+          {
+            "question": "¿Y si no cuadra?",
+            "answer": "Con esta herramienta siempre debería cuadrar, porque no se pueden registrar asientos descuadrados. Si has importado o editado datos en otro sitio, el aviso de diferencia te dice cuánto se separan los dos lados."
+          }
+        ]
+      }
     },
     {
       "name": "Cuenta de resultados",
-      "shortDescription": "Monta la cuenta de resultados, de los ingresos al beneficio neto con márgenes en vivo. PDF o CSV."
+      "shortDescription": "Monta la cuenta de resultados, de los ingresos al beneficio neto con márgenes en vivo. PDF o CSV.",
+      "seo": {
+        "title": "Cuenta de resultados gratuita — generador P&L",
+        "description": "Elabora una cuenta de resultados: ingresos, coste de ventas, gastos y beneficio bruto, operativo y neto con sus márgenes. Imprime en PDF o exporta CSV. Gratis.",
+        "keywords": [
+          "cuenta de resultados",
+          "generador de cuenta de resultados",
+          "estado de resultados online",
+          "formato de pérdidas y ganancias",
+          "plantilla P&L gratis"
+        ],
+        "ogTitle": "Cuenta de resultados",
+        "ogDescription": "Elabora una cuenta de resultados: ingresos, coste de ventas, gastos y beneficio bruto, operativo y neto con sus márgenes. Imprime en PDF o exporta CSV. Gratis."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Cuenta de resultados",
+        "headline": "Cuenta de resultados",
+        "subheadline": "Ingresos arriba, beneficio neto abajo y cada paso intermedio — con los márgenes calculados en vivo."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué entra en una cuenta de resultados?",
+            "answer": "Ingresos, menos coste de ventas (beneficio bruto), menos gastos de explotación (beneficio operativo), más otros ingresos, menos impuestos: queda el beneficio neto. Esta herramienta calcula cada nivel mientras escribes."
+          },
+          {
+            "question": "¿Qué diferencia hay entre margen bruto y neto?",
+            "answer": "El margen bruto indica lo rentable que es tu producto antes de los gastos generales; el neto, lo que de verdad queda después de todo. Un margen bruto sano con un neto escaso apunta a los gastos generales."
+          },
+          {
+            "question": "¿Puedo imprimir o compartir el estado?",
+            "answer": "Sí: imprime un documento A4 limpio (o guárdalo como PDF desde el diálogo de impresión) y exporta las cifras en CSV. Los datos se quedan en tu navegador."
+          }
+        ]
+      }
     },
     {
       "name": "Balance de situación",
-      "shortDescription": "Activo, pasivo y patrimonio con comprobación de cuadre en vivo. Impresión A4 y exportación CSV."
+      "shortDescription": "Activo, pasivo y patrimonio con comprobación de cuadre en vivo. Impresión A4 y exportación CSV.",
+      "seo": {
+        "title": "Generador de balance de situación gratuito",
+        "description": "Elabora un balance con activo corriente y fijo, pasivo y patrimonio. Comprobación del cuadre en vivo, impresión A4 y exportación CSV. Gratis, sin registro.",
+        "keywords": [
+          "generador de balance",
+          "formato de balance de situación",
+          "balance de situación online gratis",
+          "activo pasivo patrimonio",
+          "balance para pequeña empresa"
+        ],
+        "ogTitle": "Balance de situación",
+        "ogDescription": "Elabora un balance con activo corriente y fijo, pasivo y patrimonio. Comprobación del cuadre en vivo, impresión A4 y exportación CSV. Gratis, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Balance de situación",
+        "headline": "Balance de situación",
+        "subheadline": "Lo que tienes, lo que debes y lo que queda para los socios — comprobado en vivo, así siempre cuadra."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un balance de situación?",
+            "answer": "Una foto a una fecha: activo (lo que la empresa posee), pasivo (lo que debe) y patrimonio (la parte de los socios). El activo tiene que ser igual al pasivo más el patrimonio."
+          },
+          {
+            "question": "¿Por qué no cuadra mi balance?",
+            "answer": "La causa más frecuente son las reservas olvidadas: el beneficio acumulado de ejercicios pasados pertenece al patrimonio. La herramienta muestra la diferencia exacta para que encuentres el hueco."
+          },
+          {
+            "question": "¿Qué diferencia hay entre activo corriente y fijo?",
+            "answer": "El activo corriente se convierte en efectivo dentro del año (caja, clientes, existencias); el fijo sirve a la empresa durante más tiempo (equipos, mobiliario, vehículos). El pasivo se divide igual según cuándo vence."
+          }
+        ]
+      }
     },
     {
       "name": "Estado de flujos de efectivo",
-      "shortDescription": "Flujos de explotación, inversión y financiación, de la caja inicial a la final. Imprime o exporta."
+      "shortDescription": "Flujos de explotación, inversión y financiación, de la caja inicial a la final. Imprime o exporta.",
+      "seo": {
+        "title": "Estado de flujos de efectivo gratuito",
+        "description": "Elabora un estado de flujos de efectivo por actividades de explotación, inversión y financiación. De saldo inicial a final, PDF y CSV. Gratis, sin registro.",
+        "keywords": [
+          "estado de flujos de efectivo",
+          "formato de flujo de caja",
+          "flujo de caja online gratis",
+          "explotación inversión financiación",
+          "flujo de caja pequeña empresa"
+        ],
+        "ogTitle": "Estado de flujos de efectivo",
+        "ogDescription": "Elabora un estado de flujos de efectivo por actividades de explotación, inversión y financiación. De saldo inicial a final, PDF y CSV. Gratis, sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Estado de flujos de efectivo",
+        "headline": "Estado de flujos de efectivo",
+        "subheadline": "De dónde vino el efectivo y a dónde fue — explotación, inversión y financiación, del saldo inicial al final."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Por qué seguir el efectivo aparte del beneficio?",
+            "answer": "El beneficio es una opinión, el efectivo es un hecho: una empresa rentable puede quedarse sin caja si el dinero está atrapado en existencias o en facturas impagadas. El estado de flujos muestra el movimiento real."
+          },
+          {
+            "question": "¿Qué va en cada sección?",
+            "answer": "Explotación: el día a día (cobros de clientes, pagos a proveedores y nóminas). Inversión: compra o venta de activos. Financiación: préstamos recibidos o devueltos, aportaciones de capital y retiradas."
+          },
+          {
+            "question": "¿Cómo introduzco las salidas?",
+            "answer": "Como números negativos: por ejemplo −25000 por un equipo comprado. Cada sección hace su propio neto y el estado va del efectivo inicial al final."
+          }
+        ]
+      }
     },
     {
       "name": "Extracto de cliente",

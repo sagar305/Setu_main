@@ -317,19 +317,155 @@
     },
     {
       "name": "Balance générale",
-      "shortDescription": "Construite depuis vos écritures : le solde net de chaque compte, totalisé et vérifié."
+      "shortDescription": "Construite depuis vos écritures : le solde net de chaque compte, totalisé et vérifié.",
+      "seo": {
+        "title": "Balance générale gratuite — en ligne",
+        "description": "Une balance générale produite automatiquement à partir de vos écritures : le solde net débiteur ou créditeur de chaque compte, totalisé et vérifié. Gratuit.",
+        "keywords": [
+          "balance générale",
+          "modèle de balance générale",
+          "balance comptable en ligne",
+          "contrôle débit crédit",
+          "balance générale comptabilité"
+        ],
+        "ogTitle": "Balance générale",
+        "ogDescription": "Une balance générale produite automatiquement à partir de vos écritures : le solde net débiteur ou créditeur de chaque compte, totalisé et vérifié. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Balance générale",
+        "headline": "Balance générale",
+        "subheadline": "Le solde net de chaque compte du côté débit ou crédit — totalisé, vérifié et prêt à exporter."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'une balance générale ?",
+            "answer": "La liste de tous les comptes au solde non nul, présentés du côté débit ou crédit. Si vos écritures en partie double sont justes, le total des débits égale celui des crédits."
+          },
+          {
+            "question": "D'où viennent les chiffres ?",
+            "answer": "De l'outil d'écritures comptables de ce site : la balance se recalcule toute seule à partir de vos écritures enregistrées, selon votre plan comptable."
+          },
+          {
+            "question": "Et si elle n'est pas équilibrée ?",
+            "answer": "Avec cet outil elle devrait toujours l'être, puisqu'une écriture déséquilibrée ne peut pas être enregistrée. Si vous avez importé ou modifié des données ailleurs, le bandeau d'écart indique de combien les deux côtés diffèrent."
+          }
+        ]
+      }
     },
     {
       "name": "Compte de résultat",
-      "shortDescription": "Construisez le compte de résultat, du chiffre d'affaires au résultat net, marges en direct. PDF ou CSV."
+      "shortDescription": "Construisez le compte de résultat, du chiffre d'affaires au résultat net, marges en direct. PDF ou CSV.",
+      "seo": {
+        "title": "Compte de résultat gratuit — générateur",
+        "description": "Construisez un compte de résultat : chiffre d'affaires, coût des ventes, charges, résultats brut et net avec les marges. PDF ou export CSV. Gratuit.",
+        "keywords": [
+          "compte de résultat",
+          "générateur de compte de résultat",
+          "compte de résultat en ligne",
+          "modèle de compte de résultat",
+          "modèle P&L gratuit"
+        ],
+        "ogTitle": "Compte de résultat",
+        "ogDescription": "Construisez un compte de résultat : chiffre d'affaires, coût des ventes, charges, résultats brut et net avec les marges. PDF ou export CSV. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Compte de résultat",
+        "headline": "Compte de résultat",
+        "subheadline": "Le chiffre d'affaires en haut, le résultat net en bas, et chaque étape entre les deux — marges calculées en direct."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Que met-on dans un compte de résultat ?",
+            "answer": "Le chiffre d'affaires, moins le coût des ventes (résultat brut), moins les charges d'exploitation (résultat d'exploitation), plus les autres produits, moins l'impôt : il reste le résultat net. Cet outil calcule chaque niveau à mesure que vous saisissez."
+          },
+          {
+            "question": "Quelle différence entre marge brute et marge nette ?",
+            "answer": "La marge brute dit la rentabilité de votre produit avant les frais généraux ; la marge nette, ce qui reste vraiment après tout. Une marge brute saine avec une marge nette mince pointe vers les frais généraux."
+          },
+          {
+            "question": "Puis-je imprimer ou partager le document ?",
+            "answer": "Oui : imprimez un A4 propre (ou enregistrez-le en PDF depuis la boîte d'impression) et exportez les chiffres en CSV. Les données restent dans votre navigateur."
+          }
+        ]
+      }
     },
     {
       "name": "Bilan",
-      "shortDescription": "Actif, passif et capitaux propres avec vérification de l'équilibre en direct. Impression A4 et export CSV."
+      "shortDescription": "Actif, passif et capitaux propres avec vérification de l'équilibre en direct. Impression A4 et export CSV.",
+      "seo": {
+        "title": "Générateur de bilan comptable gratuit",
+        "description": "Construisez un bilan avec actif circulant et immobilisé, dettes et capitaux propres. Contrôle d'équilibre en direct, impression A4, export CSV. Gratuit.",
+        "keywords": [
+          "générateur de bilan",
+          "modèle de bilan comptable",
+          "bilan comptable en ligne gratuit",
+          "actif passif capitaux propres",
+          "bilan petite entreprise"
+        ],
+        "ogTitle": "Bilan comptable",
+        "ogDescription": "Construisez un bilan avec actif circulant et immobilisé, dettes et capitaux propres. Contrôle d'équilibre en direct, impression A4, export CSV. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Bilan comptable",
+        "headline": "Bilan comptable",
+        "subheadline": "Ce que vous possédez, ce que vous devez et ce qui reste aux associés — vérifié en direct, donc toujours équilibré."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un bilan comptable ?",
+            "answer": "Une photo à une date donnée : l'actif (ce que l'entreprise possède), les dettes (ce qu'elle doit) et les capitaux propres (la part des associés). L'actif doit égaler les dettes plus les capitaux propres."
+          },
+          {
+            "question": "Pourquoi mon bilan n'est-il pas équilibré ?",
+            "answer": "La cause la plus fréquente est l'oubli du report à nouveau : le bénéfice accumulé des exercices passés appartient aux capitaux propres. L'outil affiche l'écart exact pour que vous trouviez le trou."
+          },
+          {
+            "question": "Quelle différence entre actif circulant et immobilisé ?",
+            "answer": "L'actif circulant se transforme en trésorerie dans l'année (caisse, créances, stocks) ; l'actif immobilisé sert l'entreprise plus longtemps (matériel, mobilier, véhicules). Les dettes se répartissent de la même façon selon leur échéance."
+          }
+        ]
+      }
     },
     {
       "name": "Tableau des flux de trésorerie",
-      "shortDescription": "Flux d'exploitation, d'investissement et de financement, de la trésorerie d'ouverture à la clôture."
+      "shortDescription": "Flux d'exploitation, d'investissement et de financement, de la trésorerie d'ouverture à la clôture.",
+      "seo": {
+        "title": "Tableau de flux de trésorerie gratuit",
+        "description": "Construisez un tableau de flux de trésorerie par activités d'exploitation, d'investissement et de financement. Du solde initial au final, PDF et CSV. Gratuit.",
+        "keywords": [
+          "tableau de flux de trésorerie",
+          "modèle de flux de trésorerie",
+          "flux de trésorerie en ligne gratuit",
+          "exploitation investissement financement",
+          "trésorerie petite entreprise"
+        ],
+        "ogTitle": "Tableau de flux de trésorerie",
+        "ogDescription": "Construisez un tableau de flux de trésorerie par activités d'exploitation, d'investissement et de financement. Du solde initial au final, PDF et CSV. Gratuit."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Tableau de flux de trésorerie",
+        "headline": "Tableau de flux de trésorerie",
+        "subheadline": "D'où la trésorerie est venue et où elle est allée — exploitation, investissement et financement, du solde d'ouverture à celui de clôture."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Pourquoi suivre la trésorerie séparément du résultat ?",
+            "answer": "Le résultat est une opinion, la trésorerie un fait : une entreprise rentable peut manquer de liquidités si l'argent dort en stock ou en factures impayées. Le tableau de flux montre le mouvement réel."
+          },
+          {
+            "question": "Que met-on dans chaque section ?",
+            "answer": "Exploitation : le quotidien (encaissements clients, règlements fournisseurs et salaires). Investissement : achat ou cession d'actifs. Financement : emprunts reçus ou remboursés, apports de capital, prélèvements."
+          },
+          {
+            "question": "Comment saisir les sorties ?",
+            "answer": "En nombres négatifs — par exemple −25000 pour du matériel acheté. Chaque section fait ensuite son net et le tableau va de la trésorerie d'ouverture à celle de clôture."
+          }
+        ]
+      }
     },
     {
       "name": "Relevé de compte client",

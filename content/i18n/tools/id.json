@@ -317,19 +317,155 @@
     },
     {
       "name": "Neraca saldo",
-      "shortDescription": "Tersusun otomatis dari jurnal — saldo bersih tiap akun, dijumlah dan diperiksa."
+      "shortDescription": "Tersusun otomatis dari jurnal — saldo bersih tiap akun, dijumlah dan diperiksa.",
+      "seo": {
+        "title": "Pembuat Neraca Saldo Gratis — Online",
+        "description": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "neraca saldo",
+          "format neraca saldo",
+          "neraca saldo online",
+          "pemeriksaan debit kredit",
+          "neraca saldo pembukuan"
+        ],
+        "ogTitle": "Neraca Saldo",
+        "ogDescription": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Neraca Saldo",
+        "headline": "Neraca Saldo",
+        "subheadline": "Saldo bersih tiap akun di sisi debit atau kreditnya — dijumlahkan, diperiksa, dan siap diekspor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu neraca saldo?",
+            "answer": "Daftar semua akun yang saldonya bukan nol, ditampilkan di sisi debit atau kreditnya. Kalau jurnal berpasangan Anda benar, total debit sama dengan total kredit."
+          },
+          {
+            "question": "Angkanya dari mana?",
+            "answer": "Dari alat jurnal di situs ini — neraca saldo dihitung ulang sendiri dari jurnal yang Anda catat, mengikuti bagan akun Anda."
+          },
+          {
+            "question": "Bagaimana kalau tidak seimbang?",
+            "answer": "Dengan alat ini semestinya selalu seimbang, karena jurnal yang tidak seimbang tidak bisa dicatat. Kalau Anda mengimpor atau menyunting data di tempat lain, spanduk selisih memberi tahu seberapa jauh kedua sisi berbeda."
+          }
+        ]
+      }
     },
     {
       "name": "Laporan laba rugi",
-      "shortDescription": "Susun laporan laba rugi — dari pendapatan ke laba bersih dengan margin langsung. PDF atau CSV."
+      "shortDescription": "Susun laporan laba rugi — dari pendapatan ke laba bersih dengan margin langsung. PDF atau CSV.",
+      "seo": {
+        "title": "Laporan Laba Rugi Gratis — Pembuat P&L",
+        "description": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis.",
+        "keywords": [
+          "laporan laba rugi",
+          "pembuat laporan laba rugi",
+          "laporan laba rugi online",
+          "format laba rugi",
+          "template P&L gratis"
+        ],
+        "ogTitle": "Laporan Laba Rugi",
+        "ogDescription": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Laporan Laba Rugi",
+        "headline": "Laporan Laba Rugi",
+        "subheadline": "Pendapatan di atas, laba bersih di bawah, dan setiap langkah di antaranya — margin dihitung langsung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa saja yang masuk laporan laba rugi?",
+            "answer": "Pendapatan, dikurangi harga pokok penjualan (laba kotor), dikurangi beban operasional (laba operasional), ditambah pendapatan lain, dikurangi pajak — sisanya laba bersih. Alat ini menghitung setiap tingkat sambil Anda mengetik."
+          },
+          {
+            "question": "Apa bedanya margin kotor dan margin bersih?",
+            "answer": "Margin kotor menunjukkan seberapa untung produk inti Anda sebelum biaya tetap; margin bersih menunjukkan apa yang benar-benar tersisa setelah semuanya. Margin kotor sehat tapi bersihnya tipis menunjuk ke biaya tetap."
+          },
+          {
+            "question": "Bisakah laporannya dicetak atau dibagikan?",
+            "answer": "Bisa — cetak lembar A4 yang rapi (atau simpan sebagai PDF dari dialog cetak) dan ekspor angka-angkanya sebagai CSV. Datanya tetap di peramban Anda."
+          }
+        ]
+      }
     },
     {
       "name": "Neraca",
-      "shortDescription": "Aset, liabilitas, dan ekuitas dengan pemeriksaan keseimbangan langsung. Cetak A4 dan ekspor CSV."
+      "shortDescription": "Aset, liabilitas, dan ekuitas dengan pemeriksaan keseimbangan langsung. Cetak A4 dan ekspor CSV.",
+      "seo": {
+        "title": "Pembuat Neraca Gratis — Online",
+        "description": "Susun neraca dengan aset lancar dan tetap, liabilitas, serta ekuitas. Pemeriksaan keseimbangan langsung, cetak A4, ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat neraca",
+          "format neraca",
+          "neraca online gratis",
+          "aset liabilitas ekuitas",
+          "neraca usaha kecil"
+        ],
+        "ogTitle": "Neraca",
+        "ogDescription": "Susun neraca dengan aset lancar dan tetap, liabilitas, serta ekuitas. Pemeriksaan keseimbangan langsung, cetak A4, ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Neraca",
+        "headline": "Neraca",
+        "subheadline": "Apa yang Anda punya, apa yang Anda utang, dan apa yang tersisa bagi pemilik — diperiksa langsung, jadi selalu seimbang."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu neraca?",
+            "answer": "Potret pada satu tanggal: aset (yang dimiliki usaha), liabilitas (yang menjadi utangnya), dan ekuitas (bagian pemilik). Aset harus sama dengan liabilitas ditambah ekuitas."
+          },
+          {
+            "question": "Kenapa neraca saya tidak seimbang?",
+            "answer": "Penyebab paling umum adalah laba ditahan yang terlewat — laba terkumpul dari periode lalu masuk ke ekuitas. Alat ini menunjukkan selisih persisnya supaya Anda bisa menemukan celahnya."
+          },
+          {
+            "question": "Apa bedanya aset lancar dan aset tetap?",
+            "answer": "Aset lancar berubah menjadi kas dalam setahun (kas, piutang, persediaan); aset tetap melayani usaha lebih lama (peralatan, perabot, kendaraan). Liabilitas terbagi dengan cara yang sama menurut kapan jatuh temponya."
+          }
+        ]
+      }
     },
     {
       "name": "Laporan arus kas",
-      "shortDescription": "Arus operasi, investasi, dan pendanaan dari kas awal sampai akhir. Cetak atau ekspor."
+      "shortDescription": "Arus operasi, investasi, dan pendanaan dari kas awal sampai akhir. Cetak atau ekspor.",
+      "seo": {
+        "title": "Pembuat Laporan Arus Kas Gratis — Online",
+        "description": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "laporan arus kas",
+          "format arus kas",
+          "arus kas online gratis",
+          "operasi investasi pendanaan",
+          "arus kas usaha kecil"
+        ],
+        "ogTitle": "Laporan Arus Kas",
+        "ogDescription": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Laporan Arus Kas",
+        "headline": "Laporan Arus Kas",
+        "subheadline": "Dari mana kas datang dan ke mana perginya — operasi, investasi, dan pendanaan, dari saldo awal ke saldo akhir."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa arus kas dipantau terpisah dari laba?",
+            "answer": "Laba itu pendapat, kas itu fakta: usaha yang untung pun bisa kehabisan kas kalau uangnya tertahan di persediaan atau di tagihan yang belum dibayar. Laporan arus kas menunjukkan pergerakan yang sebenarnya."
+          },
+          {
+            "question": "Apa isi tiap bagiannya?",
+            "answer": "Operasi: perdagangan harian (penerimaan dari pelanggan, pembayaran ke pemasok dan gaji). Investasi: membeli atau menjual aset. Pendanaan: pinjaman yang diambil atau dilunasi, modal yang disetor, serta pengambilan pemilik."
+          },
+          {
+            "question": "Bagaimana cara memasukkan arus keluar?",
+            "answer": "Sebagai angka negatif — misalnya −25000 untuk peralatan yang dibeli. Tiap bagian lalu menghitung bersihnya sendiri, dan laporannya berjalan dari kas awal ke kas akhir."
+          }
+        ]
+      }
     },
     {
       "name": "Laporan akun pelanggan",
