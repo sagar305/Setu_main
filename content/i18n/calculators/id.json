@@ -702,7 +702,57 @@
     },
     {
       "name": "Kalkulator bagi tip",
-      "shortDescription": "Bagi kumpulan tip secara adil ke staf berdasarkan jam kerja, bagian, atau rata."
+      "shortDescription": "Bagi kumpulan tip secara adil ke staf berdasarkan jam kerja, bagian, atau rata.",
+      "seo": {
+        "title": "Kalkulator Pembagian Tip — Adil untuk Staf | Setu",
+        "description": "Kalkulator pembagian tip gratis. Tambahkan staf dan jam kerja atau poin untuk membagi kumpulan tip secara adil — rata, menurut jam kerja, atau menurut poin.",
+        "keywords": [
+          "kalkulator pembagian tip",
+          "kumpulan tip bersama",
+          "bagi tip menurut jam kerja",
+          "kalkulator tip restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Pembagian Tip",
+        "headline": "Kalkulator Pembagian Tip",
+        "subheadline": "Tambahkan staf Anda dan bagi kumpulan tip bersama secara rata, menurut jam kerja, atau menurut poin/bagian."
+      },
+      "about": {
+        "headline": "Pembagian tip yang staf pun melihat adil",
+        "paragraphs": [
+          "Membagi tip dengan tangan cepat jadi berantakan begitu Anda ikut memperhitungkan panjang shift atau peran yang berbeda. Pelayan yang menjalani shift ganda penuh dan yang menutup dua jam terakhir semestinya tidak menerima bagian sama — tetapi justru pada cara menimbangnya itulah sebagian besar perselisihan mulai.",
+          "Kalkulator ini membagi kumpulan tip dengan tiga cara: rata untuk semua orang, sebanding dengan jam kerja, atau dengan sistem poin/bagian di mana Anda menetapkan bobot untuk setiap peran atau orang. Tambahkan staf, pilih metodenya, dan pembagiannya langsung diperbarui."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pembagian tip",
+        "items": [
+          {
+            "question": "Apa bedanya pembagian rata dan pembagian berbasis poin?",
+            "answer": "Pembagian rata membelah kumpulan tip sama besar tanpa melihat peran atau jam kerja. Pembagian berbasis poin memberi setiap orang bobot (poin atau bagian) yang mencerminkan peran, masa kerja, atau jam kerja, lalu membagi kumpulan itu sebanding dengan bobot tersebut — biasa dipakai ketika peran depan dan pendukung dikumpulkan bersama."
+          },
+          {
+            "question": "Apakah staf dapur perlu ikut dalam kumpulan tip bersama pelayan?",
+            "answer": "Aturan dan kebiasaan pembagian tip berbeda menurut wilayah dan ketentuan tenaga kerja setempat — di beberapa yurisdiksi ada batasan siapa yang boleh ikut. Periksa apa yang diizinkan di tempat Anda beroperasi sebelum menentukan siapa yang berhak."
+          },
+          {
+            "question": "Bagaimana membagi tip secara adil menurut jam kerja?",
+            "answer": "Pakai metode 'menurut jam': masukkan jam kerja tiap orang untuk shift atau periode itu, dan kumpulan tip dibagi sebanding, sehingga yang bekerja dua kali lebih lama menerima kira-kira dua kali bagian."
+          },
+          {
+            "question": "Bisa dipakai untuk satu shift atau untuk tip seminggu penuh?",
+            "answer": "Keduanya — masukkan total kumpulan tip untuk periode yang Anda bagi (satu shift, satu hari, satu minggu) beserta jam kerja atau bagian untuk periode yang sama."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Penggajian dan tip, tanpa spreadsheet terpisah",
+        "subtext": "Setu Dine mencatat jam shift dan penjualan per staf, jadi angka yang dibutuhkan pembagian tip selalu ada.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator perputaran persediaan",

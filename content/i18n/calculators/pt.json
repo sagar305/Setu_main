@@ -702,7 +702,57 @@
     },
     {
       "name": "Calculadora de divisão de gorjetas",
-      "shortDescription": "Divida a caixinha de forma justa entre a equipe por horas, cotas ou igualmente."
+      "shortDescription": "Divida a caixinha de forma justa entre a equipe por horas, cotas ou igualmente.",
+      "seo": {
+        "title": "Calculadora de Divisão de Gorjetas | Setu",
+        "description": "Calculadora gratuita de divisão de gorjetas. Adicione a equipe e as horas ou pontos para dividir o bolo com justiça: em partes iguais, por horas ou por pontos.",
+        "keywords": [
+          "calculadora de divisão de gorjetas",
+          "bolo de gorjetas",
+          "divisão de gorjetas por horas",
+          "calculadora de gorjetas restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Divisão de Gorjetas",
+        "headline": "Calculadora de Divisão de Gorjetas",
+        "subheadline": "Adicione sua equipe e divida um bolo de gorjetas em partes iguais, por horas trabalhadas, ou por pontos/cotas."
+      },
+      "about": {
+        "headline": "Uma divisão de gorjetas que a equipe vê como justa",
+        "paragraphs": [
+          "Dividir gorjetas à mão fica confuso rápido quando entram turnos de durações diferentes ou funções diferentes. Quem fez um turno dobrado completo e quem cobriu as duas últimas horas não deveriam levar partes iguais — mas é exatamente em como ponderar isso que começam a maioria das discussões.",
+          "Esta calculadora divide o bolo de três formas: em partes iguais entre todos, proporcionalmente às horas trabalhadas, ou por um sistema de pontos em que você atribui um peso a cada função ou pessoa. Adicione a equipe, escolha o método, e a divisão se atualiza na hora."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de divisão de gorjetas",
+        "items": [
+          {
+            "question": "Qual é a diferença entre divisão igual e divisão por pontos?",
+            "answer": "A divisão igual reparte o bolo de forma uniforme, sem olhar função nem horas. A divisão por pontos dá a cada pessoa um peso (pontos ou cotas) refletindo função, tempo de casa ou horas, e reparte o bolo na proporção desses pesos — comum quando salão e apoio dividem o mesmo bolo."
+          },
+          {
+            "question": "A cozinha deve entrar no bolo junto com o salão?",
+            "answer": "As regras e os costumes da divisão de gorjetas variam por região e pela legislação trabalhista local: em alguns lugares há limites sobre quem pode participar. Confira o que é permitido onde você opera antes de decidir quem tem direito."
+          },
+          {
+            "question": "Como divido gorjetas com justiça por horas trabalhadas?",
+            "answer": "Use o método 'por horas': informe as horas de cada pessoa no turno ou período e o bolo é dividido proporcionalmente, de modo que quem trabalhou o dobro recebe cerca do dobro."
+          },
+          {
+            "question": "Posso usar para um turno só ou para as gorjetas de uma semana inteira?",
+            "answer": "Para os dois: informe o bolo total do período que está dividindo (um turno, um dia, uma semana) junto com as horas ou cotas desse mesmo período."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Folha e gorjetas, sem a planilha paralela",
+        "subtext": "O Setu Dine registra as horas de turno e as vendas por pessoa, então você sempre tem os números que a divisão precisa.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de giro de estoque",

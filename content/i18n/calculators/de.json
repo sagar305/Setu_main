@@ -702,7 +702,57 @@
     },
     {
       "name": "Trinkgeld-Rechner",
-      "shortDescription": "Verteilen Sie den Trinkgeldtopf fair nach Stunden, Anteilen oder zu gleichen Teilen."
+      "shortDescription": "Verteilen Sie den Trinkgeldtopf fair nach Stunden, Anteilen oder zu gleichen Teilen.",
+      "seo": {
+        "title": "Trinkgeld-Rechner — fairer Trinkgeldpool fürs Team | Setu",
+        "description": "Kostenloser Trinkgeld-Rechner. Team und Stunden oder Punkte eintragen und den Trinkgeldpool fair aufteilen — gleichmäßig, nach Arbeitsstunden oder nach Punkten.",
+        "keywords": [
+          "Trinkgeld Rechner",
+          "Trinkgeldpool aufteilen",
+          "Trinkgeld nach Stunden verteilen",
+          "Trinkgeld Rechner Gastronomie"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Trinkgeld-Rechner",
+        "headline": "Trinkgeld-Rechner",
+        "subheadline": "Tragen Sie Ihr Team ein und teilen Sie einen gemeinsamen Trinkgeldpool gleichmäßig, nach Arbeitsstunden oder nach Punkten/Anteilen auf."
+      },
+      "about": {
+        "headline": "Ein Trinkgeldpool, den das Team als fair erkennt",
+        "paragraphs": [
+          "Trinkgeld von Hand zu teilen wird schnell unübersichtlich, sobald unterschiedlich lange Schichten oder Rollen ins Spiel kommen. Wer eine komplette Doppelschicht gearbeitet hat, und wer die letzten zwei Stunden übernommen hat, sollten nicht gleich viel bekommen — doch genau bei der Frage, wie man das gewichtet, beginnen die meisten Streitigkeiten.",
+          "Dieser Rechner teilt den Pool auf drei Wege: gleichmäßig auf alle, anteilig nach Arbeitsstunden, oder über ein Punkte-/Anteilssystem, in dem Sie jeder Rolle oder Person ein Gewicht geben. Team eintragen, Methode wählen — die Aufteilung aktualisiert sich sofort."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Trinkgeld-Rechner",
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen gleichmäßiger und punktebasierter Aufteilung?",
+            "answer": "Gleichmäßig teilt den Pool unabhängig von Rolle und Stunden zu gleichen Teilen. Punktebasiert erhält jede Person ein Gewicht (Punkte oder Anteile) nach Rolle, Betriebszugehörigkeit oder Stunden, und der Pool wird im Verhältnis dieser Gewichte aufgeteilt — üblich, wenn Service und unterstützende Rollen gemeinsam poolen."
+          },
+          {
+            "question": "Sollte die Küche mit dem Service im Pool sein?",
+            "answer": "Regeln und Gepflogenheiten beim Trinkgeldpool unterscheiden sich je nach Region und örtlichem Arbeitsrecht — manche Rechtsordnungen schränken ein, wer teilnehmen darf. Prüfen Sie, was an Ihrem Standort zulässig ist, bevor Sie festlegen, wer berechtigt ist."
+          },
+          {
+            "question": "Wie teile ich Trinkgeld fair nach Arbeitsstunden?",
+            "answer": "Nutzen Sie die Methode „nach Stunden“: Tragen Sie die Stunden jeder Person für die Schicht oder den Zeitraum ein; der Pool wird anteilig geteilt, sodass jemand mit doppelter Arbeitszeit etwa den doppelten Anteil erhält."
+          },
+          {
+            "question": "Kann ich das für eine Schicht oder für die Trinkgelder einer ganzen Woche nutzen?",
+            "answer": "Für beides — tragen Sie den gesamten Pool des Zeitraums ein, den Sie aufteilen (eine Schicht, ein Tag, eine Woche), zusammen mit den Stunden oder Anteilen desselben Zeitraums."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lohn und Trinkgeld, ohne Zusatztabelle",
+        "subtext": "Setu Dine erfasst Schichtstunden und Umsätze je Mitarbeitenden, sodass Sie die Zahlen für die Trinkgeldaufteilung immer zur Hand haben.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Lagerumschlags-Rechner",

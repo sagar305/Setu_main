@@ -702,7 +702,57 @@
     },
     {
       "name": "Calculateur de partage des pourboires",
-      "shortDescription": "Répartissez équitablement la cagnotte de pourboires par heures, parts ou à parts égales."
+      "shortDescription": "Répartissez équitablement la cagnotte de pourboires par heures, parts ou à parts égales.",
+      "seo": {
+        "title": "Calculateur de Partage des Pourboires | Setu",
+        "description": "Calculateur gratuit de partage des pourboires. Ajoutez le personnel et les heures ou points pour répartir la cagnotte : à parts égales, aux heures, aux points.",
+        "keywords": [
+          "calculateur partage des pourboires",
+          "cagnotte de pourboires",
+          "partage des pourboires aux heures",
+          "calculateur pourboires restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Partage des Pourboires",
+        "headline": "Calculateur de Partage des Pourboires",
+        "subheadline": "Ajoutez votre équipe et répartissez une cagnotte de pourboires à parts égales, au prorata des heures travaillées, ou en points/parts."
+      },
+      "about": {
+        "headline": "Un partage des pourboires que l'équipe trouve juste",
+        "paragraphs": [
+          "Partager les pourboires à la main devient vite confus dès qu'il faut tenir compte de durées de service différentes ou de postes différents. Celui qui a fait un double service complet et celui qui a couvert les deux dernières heures ne devraient pas toucher la même part — mais c'est précisément sur la façon de pondérer que naissent la plupart des désaccords.",
+          "Ce calculateur répartit la cagnotte de trois façons : à parts égales entre tous, au prorata des heures travaillées, ou selon un système de points où vous attribuez un poids à chaque poste ou personne. Ajoutez votre équipe, choisissez une méthode, et la répartition se met à jour aussitôt."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de partage des pourboires",
+        "items": [
+          {
+            "question": "Quelle différence entre un partage à parts égales et un partage en points ?",
+            "answer": "À parts égales, la cagnotte est divisée uniformément, sans tenir compte du poste ni des heures. En points, chaque personne reçoit un poids (points ou parts) reflétant son poste, son ancienneté ou ses heures, et la cagnotte est divisée au prorata de ces poids — courant quand la salle et les postes de soutien partagent la même cagnotte."
+          },
+          {
+            "question": "Faut-il inclure la cuisine dans la cagnotte avec la salle ?",
+            "answer": "Les règles et usages du partage des pourboires varient selon la région et la réglementation du travail locale : certains endroits limitent qui peut participer. Vérifiez ce qui est permis là où vous exercez avant de décider qui est éligible."
+          },
+          {
+            "question": "Comment répartir équitablement aux heures travaillées ?",
+            "answer": "Utilisez la méthode « aux heures » : saisissez les heures de chacun pour le service ou la période, et la cagnotte est divisée au prorata, de sorte que celui qui a travaillé deux fois plus longtemps reçoit à peu près le double."
+          },
+          {
+            "question": "Puis-je l'utiliser pour un seul service ou pour les pourboires d'une semaine ?",
+            "answer": "Les deux : saisissez la cagnotte totale de la période que vous répartissez (un service, une journée, une semaine) avec les heures ou les parts correspondant à cette même période."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Paie et pourboires, sans tableur à côté",
+        "subtext": "Setu Dine suit les heures de service et les ventes par membre d'équipe : vous avez toujours les chiffres nécessaires au partage.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de rotation des stocks",

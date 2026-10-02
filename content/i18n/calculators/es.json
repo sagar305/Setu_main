@@ -702,7 +702,57 @@
     },
     {
       "name": "Calculadora de reparto de propinas",
-      "shortDescription": "Reparte un bote de propinas de forma justa por horas, partes o a partes iguales."
+      "shortDescription": "Reparte un bote de propinas de forma justa por horas, partes o a partes iguales.",
+      "seo": {
+        "title": "Calculadora de Reparto de Propinas | Setu",
+        "description": "Calculadora gratuita de reparto de propinas. Añade personal y horas o puntos para repartir el bote con justicia: a partes iguales, por horas o por puntos.",
+        "keywords": [
+          "calculadora de reparto de propinas",
+          "bote de propinas",
+          "reparto de propinas por horas",
+          "calculadora de propinas restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Reparto de Propinas",
+        "headline": "Calculadora de Reparto de Propinas",
+        "subheadline": "Añade a tu personal y reparte un bote de propinas a partes iguales, por horas trabajadas o por puntos."
+      },
+      "about": {
+        "headline": "Un reparto de propinas que el equipo ve justo",
+        "paragraphs": [
+          "Repartir propinas a mano se enreda rápido en cuanto hay turnos de distinta duración o puestos distintos. Quien ha hecho un turno doble completo y quien ha cubierto las dos últimas horas no deberían llevarse lo mismo, pero ponerse de acuerdo en cómo ponderarlo es justo donde empiezan la mayoría de las discusiones.",
+          "Esta calculadora reparte el bote de tres maneras: a partes iguales entre todos, proporcionalmente a las horas trabajadas, o por un sistema de puntos en el que asignas un peso a cada puesto o persona. Añade al equipo, elige el método y el reparto se actualiza al instante."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de reparto de propinas",
+        "items": [
+          {
+            "question": "¿Qué diferencia hay entre el reparto a partes iguales y el reparto por puntos?",
+            "answer": "A partes iguales divide el bote por igual sin mirar puesto ni horas. El reparto por puntos asigna a cada persona un peso (puntos o participaciones) según puesto, antigüedad u horas, y divide el bote en proporción a esos pesos — habitual cuando sala y apoyo comparten el mismo bote."
+          },
+          {
+            "question": "¿Debe entrar la cocina en el bote con la sala?",
+            "answer": "Las normas y costumbres del reparto de propinas cambian según la región y la legislación laboral local: en algunos sitios hay límites sobre quién puede participar. Comprueba qué está permitido donde operas antes de decidir quién tiene derecho."
+          },
+          {
+            "question": "¿Cómo reparto las propinas con justicia por horas trabajadas?",
+            "answer": "Usa el método 'por horas': introduce las horas de cada persona en ese turno o periodo y el bote se divide en proporción, de forma que quien trabajó el doble recibe aproximadamente el doble."
+          },
+          {
+            "question": "¿Sirve para un solo turno o para las propinas de toda una semana?",
+            "answer": "Para ambos: introduce el bote total del periodo que estés repartiendo (un turno, un día, una semana) junto con las horas o los puntos de ese mismo periodo."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Nómina y propinas, sin la hoja de cálculo aparte",
+        "subtext": "Setu Dine registra las horas de turno y las ventas por persona, así siempre tienes los números que el reparto necesita.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de rotación de inventario",
