@@ -421,7 +421,56 @@
     },
     {
       "name": "Tischauslastungs-Rechner",
-      "shortDescription": "Sehen Sie, wie oft jeder Tisch im Service neu besetzt wird und wie lange eine Runde dauert."
+      "shortDescription": "Sehen Sie, wie oft jeder Tisch im Service neu besetzt wird und wie lange eine Runde dauert.",
+      "seo": {
+        "title": "Tischumschlag-Rechner für Restaurants — kostenlos | Setu",
+        "description": "Kostenloser Rechner für den Tischumschlag. Servierte Gedecke, Anzahl der Tische und Servicestunden eingeben und Umschlagrate samt Belegungszeit sehen.",
+        "keywords": [
+          "Tischumschlag Rechner",
+          "Tischumschlag Restaurant",
+          "Gedecke pro Tisch"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Tischumschlag",
+        "headline": "Tischumschlag-Rechner",
+        "subheadline": "Geben Sie servierte Gedecke, Anzahl der Tische und Servicestunden ein und sehen Sie Ihre Umschlagrate und die durchschnittliche Belegungszeit."
+      },
+      "about": {
+        "headline": "Die Zahl hinter einem voll wirkenden Gastraum",
+        "paragraphs": [
+          "Die Umschlagrate sagt Ihnen, wie oft im Schnitt jeder Tisch während eines Service genutzt wurde. Sie misst direkt, wie effizient Ihr Gastraum Plätze in Gedecke verwandelt — und in Spitzenzeiten zählt sie genauso viel wie die Besucherzahl.",
+          "Geben Sie die servierten Gedecke, die Anzahl Ihrer Tische und die Dauer des Service ein: Der Rechner ermittelt Ihre Umschlagrate und die durchschnittliche Zeit, die jeder Tisch pro Umschlag belegt war — hilfreich, um zu erkennen, ob langsame Umschläge Ihren Umsatz an starken Abenden deckeln."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Tischumschlag-Rechner",
+        "items": [
+          {
+            "question": "Wie berechnet man die Umschlagrate?",
+            "answer": "Umschlagrate = servierte Gedecke ÷ Anzahl der Tische. Wurden in einem Service 120 Gedecke an 20 Tischen serviert, liegt die Rate bei 6 — jeder Tisch war im Schnitt 6-mal besetzt."
+          },
+          {
+            "question": "Welche Umschlagrate ist für ein Restaurant gut?",
+            "answer": "Das hängt stark vom Format ab: Schnellgastronomie und Casual Dining streben hohe Raten an (mehrere Umschläge pro Service), während die Spitzengastronomie bewusst mit niedriger Rate, längerem Aufenthalt und höherem Umsatz je Gedeck arbeitet. Vergleichen Sie mit Ihrem eigenen Format und Ihren früheren Zahlen."
+          },
+          {
+            "question": "Wie verbessere ich den Umschlag, ohne Gäste zu drängen?",
+            "answer": "Kürzere Küchenzeiten, zügiges Abrechnen und Bezahlen und ein Team, das die natürlichen Pausen einer Mahlzeit erkennt (statt eine Zeitgrenze zu setzen), verbessern den Umschlag meist nachhaltiger als Gäste zu drängen."
+          },
+          {
+            "question": "Zeigt Setu Dine den Tischstatus in Echtzeit?",
+            "answer": "Ja. Setu Dine zeigt den Tischstatus live über den ganzen Gastraum — frei, besetzt, abgerechnet —, sodass das Team immer weiß, welche Tische frei sind, ohne durch den Raum zu laufen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Der Status jedes Tisches, live",
+        "subtext": "Setu Dine verfolgt den Tischstatus in Echtzeit, damit Ihr Serviceteam immer weiß, was frei ist.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Nettogehalts-Rechner",

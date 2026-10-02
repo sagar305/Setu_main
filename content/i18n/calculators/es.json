@@ -421,7 +421,56 @@
     },
     {
       "name": "Calculadora de rotación de mesas",
-      "shortDescription": "Mira cuántas veces se ocupa cada mesa durante el servicio y tu tiempo medio de rotación."
+      "shortDescription": "Mira cuántas veces se ocupa cada mesa durante el servicio y tu tiempo medio de rotación.",
+      "seo": {
+        "title": "Calculadora de Rotación de Mesas — Gratis | Setu",
+        "description": "Calculadora gratuita de rotación de mesas para restaurantes. Introduce los cubiertos servidos, el número de mesas y las horas de servicio para ver la rotación.",
+        "keywords": [
+          "calculadora de rotación de mesas",
+          "rotación de mesas restaurante",
+          "cubiertos por mesa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Rotación de Mesas",
+        "headline": "Calculadora de Rotación de Mesas",
+        "subheadline": "Introduce los cubiertos servidos, el número de mesas y las horas de servicio para ver tu tasa de rotación y el tiempo medio por turno."
+      },
+      "about": {
+        "headline": "El número que hay detrás de una sala que parece llena",
+        "paragraphs": [
+          "La rotación de mesas te dice cuántas veces, de media, se usó cada mesa durante un servicio. Es una medida directa de la eficiencia con la que tu sala convierte asientos en cubiertos — y en las horas punta importa tanto como la afluencia.",
+          "Introduce los cubiertos servidos en total, el número de mesas que tienes y la duración del servicio, y esta calculadora saca tu tasa de rotación y el tiempo medio que cada mesa estuvo ocupada por turno — útil para ver si los turnos lentos están poniendo techo a tus ingresos en las noches fuertes."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de rotación de mesas",
+        "items": [
+          {
+            "question": "¿Cómo se calcula la rotación de mesas?",
+            "answer": "Rotación de mesas = cubiertos servidos ÷ número de mesas. Si se sirvieron 120 cubiertos en 20 mesas durante un servicio, la rotación es 6: cada mesa se usó 6 veces de media."
+          },
+          {
+            "question": "¿Qué rotación de mesas es buena en un restaurante?",
+            "answer": "Depende mucho del formato: el servicio rápido y el informal buscan rotaciones altas (varios turnos por servicio), mientras que la alta cocina funciona a propósito con rotación baja, estancias más largas y mayor gasto por cubierto. Compárate con tu propio formato y con tu histórico."
+          },
+          {
+            "question": "¿Cómo mejoro la rotación sin meter prisa a los clientes?",
+            "answer": "Tiempos de cocina más rápidos, cobro y pago eficientes, y personal entrenado para leer las pausas naturales de la comida (en lugar de imponer un límite de tiempo) suelen mejorar la rotación de forma más sostenible que apresurar a la gente."
+          },
+          {
+            "question": "¿Setu Dine puede seguir el estado de las mesas en tiempo real?",
+            "answer": "Sí. Setu Dine muestra el estado de las mesas en directo — libre, ocupada, cobrada — en toda la sala, así el personal siempre sabe qué mesas están libres sin tener que recorrerla."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "El estado de cada mesa, en directo",
+        "subtext": "Setu Dine sigue el estado de las mesas en tiempo real, así tu personal de sala siempre sabe qué está libre.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de sueldo neto",

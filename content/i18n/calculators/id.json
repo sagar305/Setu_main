@@ -421,7 +421,56 @@
     },
     {
       "name": "Kalkulator tingkat perputaran meja",
-      "shortDescription": "Lihat berapa kali tiap meja berganti tamu selama layanan, dan rata-rata durasinya."
+      "shortDescription": "Lihat berapa kali tiap meja berganti tamu selama layanan, dan rata-rata durasinya.",
+      "seo": {
+        "title": "Kalkulator Perputaran Meja Restoran — Gratis | Setu",
+        "description": "Kalkulator perputaran meja gratis untuk restoran. Masukkan jumlah porsi tersaji, jumlah meja, dan jam layanan untuk melihat tingkat perputaran dan durasinya.",
+        "keywords": [
+          "kalkulator perputaran meja",
+          "perputaran meja restoran",
+          "porsi per meja"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Perputaran Meja",
+        "headline": "Kalkulator Perputaran Meja",
+        "subheadline": "Masukkan jumlah porsi tersaji, jumlah meja, dan jam layanan untuk melihat tingkat perputaran dan rata-rata lama tiap putaran."
+      },
+      "about": {
+        "headline": "Angka di balik ruang makan yang tampak penuh",
+        "paragraphs": [
+          "Tingkat perputaran meja memberi tahu berapa kali rata-rata setiap meja terpakai selama satu periode layanan. Ini ukuran langsung seberapa efisien lantai Anda mengubah tempat duduk menjadi tamu terlayani — dan pada jam sibuk, angkanya sepenting jumlah pengunjung.",
+          "Masukkan total porsi tersaji, jumlah meja yang Anda miliki, dan panjang periode layanan, lalu kalkulator ini menghitung tingkat perputaran serta rata-rata lama setiap meja terisi per putaran — berguna untuk melihat apakah putaran yang lambat membatasi pendapatan Anda di malam-malam ramai."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator perputaran meja",
+        "items": [
+          {
+            "question": "Bagaimana tingkat perputaran meja dihitung?",
+            "answer": "Tingkat perputaran = total porsi tersaji ÷ jumlah meja. Kalau 120 porsi tersaji pada 20 meja dalam satu layanan, tingkat perputarannya 6 — setiap meja terpakai rata-rata 6 kali."
+          },
+          {
+            "question": "Berapa tingkat perputaran meja yang bagus untuk restoran?",
+            "answer": "Sangat bergantung pada formatnya: layanan cepat dan kasual mengincar perputaran tinggi (beberapa putaran per layanan), sedangkan fine dining memang berjalan dengan perputaran rendah, tamu duduk lebih lama, dan belanja per tamu lebih besar. Bandingkan dengan format Anda sendiri dan kinerja sebelumnya."
+          },
+          {
+            "question": "Bagaimana memperbaiki perputaran tanpa membuat pelanggan merasa diburu?",
+            "answer": "Waktu dapur yang lebih cepat, penagihan dan pembayaran yang efisien, serta staf yang terlatih membaca jeda alami dalam santapan (bukan menerapkan batas waktu) biasanya memperbaiki perputaran secara lebih berkelanjutan daripada memburu tamu."
+          },
+          {
+            "question": "Apakah Setu Dine bisa memantau status meja secara waktu nyata?",
+            "answer": "Bisa. Setu Dine menampilkan status meja secara langsung di seluruh lantai — kosong, terisi, sudah ditagih — jadi staf selalu tahu meja mana yang bebas tanpa harus berkeliling memeriksa."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Status setiap meja, langsung terlihat",
+        "subtext": "Setu Dine memantau status meja secara waktu nyata, jadi staf lantai Anda selalu tahu mana yang kosong.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator gaji bersih",

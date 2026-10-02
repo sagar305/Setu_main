@@ -421,7 +421,56 @@
     },
     {
       "name": "Calculateur de rotation des tables",
-      "shortDescription": "Voyez combien de fois chaque table tourne pendant le service et votre durée moyenne de rotation."
+      "shortDescription": "Voyez combien de fois chaque table tourne pendant le service et votre durée moyenne de rotation.",
+      "seo": {
+        "title": "Calculateur de Rotation des Tables — Gratuit | Setu",
+        "description": "Calculateur gratuit de rotation des tables pour restaurants. Saisissez les couverts servis, le nombre de tables et les heures de service pour voir la rotation.",
+        "keywords": [
+          "calculateur rotation des tables",
+          "rotation des tables restaurant",
+          "couverts par table"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Rotation des Tables",
+        "headline": "Calculateur de Rotation des Tables",
+        "subheadline": "Saisissez les couverts servis, le nombre de tables et les heures de service pour voir votre taux de rotation et la durée moyenne par rotation."
+      },
+      "about": {
+        "headline": "Le chiffre derrière une salle qui a l'air pleine",
+        "paragraphs": [
+          "La rotation des tables indique combien de fois, en moyenne, chaque table a été utilisée pendant un service. C'est une mesure directe de l'efficacité avec laquelle votre salle transforme les places en couverts — et aux heures de pointe, elle compte autant que la fréquentation.",
+          "Saisissez le total des couverts servis, le nombre de tables dont vous disposez et la durée du service : ce calculateur en déduit votre taux de rotation et la durée moyenne d'occupation de chaque table par rotation — pratique pour repérer si des rotations lentes plafonnent votre chiffre d'affaires les soirs chargés."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de rotation des tables",
+        "items": [
+          {
+            "question": "Comment calcule-t-on la rotation des tables ?",
+            "answer": "Rotation des tables = couverts servis ÷ nombre de tables. Si 120 couverts ont été servis sur 20 tables pendant un service, la rotation est de 6 : chaque table a servi 6 fois en moyenne."
+          },
+          {
+            "question": "Quel taux de rotation viser en restauration ?",
+            "answer": "Cela dépend beaucoup du format : la restauration rapide et décontractée vise une rotation élevée (plusieurs rotations par service), alors que la gastronomie assume une rotation basse, des repas plus longs et une dépense par couvert plus forte. Comparez-vous à votre propre format et à votre historique."
+          },
+          {
+            "question": "Comment améliorer la rotation sans presser les clients ?",
+            "answer": "Des temps de cuisine plus courts, un encaissement efficace et une équipe formée à repérer les pauses naturelles d'un repas (plutôt qu'à imposer une limite de temps) améliorent la rotation de façon plus durable que de presser les convives."
+          },
+          {
+            "question": "Setu Dine suit-il l'état des tables en temps réel ?",
+            "answer": "Oui. Setu Dine affiche l'état des tables en direct — libre, occupée, encaissée — sur toute la salle, pour que l'équipe sache toujours quelles tables sont libres sans faire le tour."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "L'état de chaque table, en direct",
+        "subtext": "Setu Dine suit l'état des tables en temps réel : votre équipe de salle sait toujours ce qui est libre.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de salaire net",

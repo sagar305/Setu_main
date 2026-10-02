@@ -421,7 +421,56 @@
     },
     {
       "name": "Calculadora de giro de mesas",
-      "shortDescription": "Veja quantas vezes cada mesa gira durante o serviço e o seu tempo médio de giro."
+      "shortDescription": "Veja quantas vezes cada mesa gira durante o serviço e o seu tempo médio de giro.",
+      "seo": {
+        "title": "Calculadora de Rotatividade de Mesas — Grátis | Setu",
+        "description": "Calculadora gratuita de rotatividade de mesas para restaurantes. Informe os couverts servidos, o número de mesas e as horas de serviço para ver a rotatividade.",
+        "keywords": [
+          "calculadora de rotatividade de mesas",
+          "rotatividade de mesas restaurante",
+          "couverts por mesa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Rotatividade de Mesas",
+        "headline": "Calculadora de Rotatividade de Mesas",
+        "subheadline": "Informe os couverts servidos, o número de mesas e as horas de serviço para ver sua taxa de rotatividade e o tempo médio por giro."
+      },
+      "about": {
+        "headline": "O número por trás de um salão que parece cheio",
+        "paragraphs": [
+          "A rotatividade de mesas diz quantas vezes, em média, cada mesa foi usada durante um período de serviço. É uma medida direta da eficiência com que o seu salão transforma assentos em couverts — e nos horários de pico ela pesa tanto quanto o movimento na porta.",
+          "Informe o total de couverts servidos, o número de mesas que você tem e a duração do serviço, e esta calculadora apura a sua taxa de rotatividade e o tempo médio que cada mesa ficou ocupada por giro — útil para perceber se giros lentos estão limitando a sua receita nas noites cheias."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de rotatividade de mesas",
+        "items": [
+          {
+            "question": "Como se calcula a rotatividade de mesas?",
+            "answer": "Rotatividade = couverts servidos ÷ número de mesas. Se 120 couverts foram servidos em 20 mesas durante um serviço, a rotatividade é 6: cada mesa foi usada 6 vezes em média."
+          },
+          {
+            "question": "Qual é uma boa rotatividade de mesas num restaurante?",
+            "answer": "Depende muito do formato: serviço rápido e casual buscam rotatividade alta (vários giros por serviço), enquanto a alta gastronomia opera de propósito com rotatividade baixa, permanências mais longas e gasto maior por couvert. Compare com o seu próprio formato e com o seu histórico."
+          },
+          {
+            "question": "Como melhorar a rotatividade sem apressar o cliente?",
+            "answer": "Tempos de cozinha mais rápidos, cobrança e pagamento ágeis e equipe treinada para ler as pausas naturais da refeição (em vez de impor limite de tempo) costumam melhorar a rotatividade de forma mais sustentável do que apressar os convidados."
+          },
+          {
+            "question": "O Setu Dine acompanha o status das mesas em tempo real?",
+            "answer": "Sim. O Setu Dine mostra o status das mesas ao vivo — livre, ocupada, com a conta fechada — em todo o salão, então a equipe sempre sabe o que está livre sem precisar circular para conferir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "O status de cada mesa, ao vivo",
+        "subtext": "O Setu Dine acompanha o status das mesas em tempo real, então a sua equipe de salão sempre sabe o que está livre.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de salário líquido",
