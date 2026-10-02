@@ -1197,7 +1197,59 @@
     },
     {
       "name": "Kalkulator termin pembayaran",
-      "shortDescription": "Tanggal jatuh tempo, hemat diskon bayar cepat, dan biaya nyata dari telat membayar."
+      "shortDescription": "Tanggal jatuh tempo, hemat diskon bayar cepat, dan biaya nyata dari telat membayar.",
+      "seo": {
+        "title": "Kalkulator Termin Pembayaran — Net 30",
+        "description": "Kalkulator termin pembayaran gratis: tanggal jatuh tempo pasti untuk net 15/30/45/60, hemat diskon bayar cepat, dan biaya nyata melewatkannya.",
+        "keywords": [
+          "kalkulator termin pembayaran",
+          "kalkulator net 30",
+          "2/10 net 30",
+          "diskon pembayaran lebih awal",
+          "kalkulator jatuh tempo faktur",
+          "biaya kredit dagang"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Termin Pembayaran",
+        "headline": "Kalkulator Termin Pembayaran",
+        "subheadline": "Ubah termin seperti \"2/10 net 30\" menjadi tanggal dan rupiah nyata — jatuh tempo, hemat dari bayar lebih awal, dan berapa sebenarnya biaya melewatkan diskonnya."
+      },
+      "about": {
+        "headline": "Pahami termin faktur dalam hitungan detik",
+        "paragraphs": [
+          "Termin seperti \"net 30\" atau \"2/10 net 45\" memadatkan tanggal jatuh tempo, diskon, dan bunga tersembunyi hanya dalam beberapa karakter. Kalkulator ini membukanya: tanggal jatuh tempo persis dari tanggal faktur, nilai diskon bila Anda bayar dalam masa itu, dan biaya setahunnya bila Anda memilih tidak.",
+          "Angka terakhir itulah yang mengejutkan. Melewatkan diskon 2% demi menahan kas 20 hari lebih lama setara dengan meminjam di atas 36% per tahun — jauh lebih mahal daripada sebagian besar pembiayaan modal kerja. Dengan tahu itu, Anda memutuskan pakai angka, baik sebagai pembeli maupun penjual yang menetapkan termin."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ termin pembayaran",
+        "items": [
+          {
+            "question": "Apa arti 2/10 net 30?",
+            "answer": "Bayar dalam 10 hari dan Anda dapat diskon 2% dari nilai faktur; jika tidak, seluruh tagihan jatuh tempo 30 hari sejak tanggal faktur."
+          },
+          {
+            "question": "Bagaimana biaya melewatkan diskon dihitung?",
+            "answer": "Biaya ≈ (% diskon ÷ (100 − % diskon)) × (365 ÷ hari kredit tambahan) × 100. Untuk 2/10 net 30 hasilnya (2 ÷ 98) × (365 ÷ 20) ≈ 37% per tahun — itulah biaya nyata dari 20 hari kredit tambahan."
+          },
+          {
+            "question": "Jatuh tempo dihitung dari tanggal faktur atau tanggal kirim?",
+            "answer": "Biasanya dari tanggal faktur, kecuali kontrak menyebut lain (ada yang memakai termin akhir bulan, ditulis \"net 30 EOM\"). Kalkulator ini menghitung hari kalender dari tanggal faktur yang Anda masukkan."
+          },
+          {
+            "question": "Perlukah saya menawarkan diskon bayar cepat ke pelanggan?",
+            "answer": "Kalau arus kas ketat atau pelanggan lambat bayar, diskon kecil bisa mempercepat masuknya uang secara drastis dan mengurangi kerja penagihan. Tetapkan dengan sadar — perhitungan biaya setahun yang sama juga berlaku bagi Anda sebagai penjual."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator selisih harga pembelian",

@@ -1197,7 +1197,59 @@
     },
     {
       "name": "Calculateur de délais de paiement",
-      "shortDescription": "Échéances des conditions de paiement, économies d'escompte et coût réel d'un retard."
+      "shortDescription": "Échéances des conditions de paiement, économies d'escompte et coût réel d'un retard.",
+      "seo": {
+        "title": "Calculateur de délais de paiement — net 30",
+        "description": "Calculateur de délais de paiement gratuit : date d'échéance exacte en net 15/30/45/60, économie liée à l'escompte et coût réel d'y renoncer.",
+        "keywords": [
+          "calculateur de délais de paiement",
+          "calculateur net 30",
+          "2/10 net 30",
+          "escompte pour paiement anticipé",
+          "calculateur de date d'échéance de facture",
+          "coût du crédit fournisseur"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de délais de paiement",
+        "headline": "Calculateur de délais de paiement",
+        "subheadline": "Traduisez des conditions comme « 2/10 net 30 » en dates et en euros réels : date d'échéance, économie en payant tôt et ce que coûte vraiment le fait de renoncer à l'escompte."
+      },
+      "about": {
+        "headline": "Décoder les conditions d'une facture en quelques secondes",
+        "paragraphs": [
+          "Des conditions comme « net 30 » ou « 2/10 net 45 » condensent en quelques caractères une date d'échéance, un escompte et un taux d'intérêt implicite. Ce calculateur les décompose : la date d'échéance exacte à partir de la date de facture, le montant de l'escompte si vous payez dans le délai, et le coût annualisé de ne pas le faire.",
+          "C'est ce dernier chiffre qui surprend. Renoncer à un escompte de 2% pour garder la trésorerie 20 jours de plus équivaut à emprunter à plus de 36% par an, bien plus cher que la plupart des financements de trésorerie. Le savoir vous permet de décider avec des chiffres, que vous soyez l'acheteur ou le vendeur qui fixe les conditions."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les délais de paiement",
+        "items": [
+          {
+            "question": "Que signifie 2/10 net 30 ?",
+            "answer": "Payez sous 10 jours et vous déduisez 2% de la facture ; sinon, le montant total est dû 30 jours après la date de facture."
+          },
+          {
+            "question": "Comment calcule-t-on le coût d'un escompte auquel on renonce ?",
+            "answer": "Coût ≈ (% d'escompte ÷ (100 − % d'escompte)) × (365 ÷ jours de crédit supplémentaires) × 100. Pour 2/10 net 30, cela donne (2 ÷ 98) × (365 ÷ 20) ≈ 37% par an, soit le coût réel de ces 20 jours de crédit en plus."
+          },
+          {
+            "question": "L'échéance part-elle de la date de facture ou de la livraison ?",
+            "answer": "En général de la date de facture, sauf mention contraire au contrat (certains utilisent des conditions fin de mois, notées « net 30 FDM »). Ce calculateur compte les jours calendaires à partir de la date de facture que vous saisissez."
+          },
+          {
+            "question": "Dois-je proposer un escompte à mes clients ?",
+            "answer": "Si la trésorerie est tendue ou si les clients paient lentement, un escompte modeste peut faire rentrer l'argent beaucoup plus vite et réduire les relances. Fixez-le en conscience : le même calcul de coût annualisé s'applique à vous en tant que vendeur."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur d'écart sur prix d'achat",

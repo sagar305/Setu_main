@@ -1197,7 +1197,59 @@
     },
     {
       "name": "Calculadora de prazos de pagamento",
-      "shortDescription": "Datas de vencimento, economia por pagamento antecipado e o custo real de pagar em atraso."
+      "shortDescription": "Datas de vencimento, economia por pagamento antecipado e o custo real de pagar em atraso.",
+      "seo": {
+        "title": "Calculadora de prazos de pagamento — 30 dias",
+        "description": "Calculadora de prazos de pagamento gratuita: vencimento exato de 15/30/45/60 dias, economia do desconto à vista e o custo real de dispensá-lo.",
+        "keywords": [
+          "calculadora de prazos de pagamento",
+          "calculadora net 30",
+          "2/10 net 30",
+          "desconto por pagamento antecipado",
+          "calculadora de data de vencimento de fatura",
+          "custo do crédito comercial"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de prazos de pagamento",
+        "headline": "Calculadora de prazos de pagamento",
+        "subheadline": "Transforme prazos como «2/10 net 30» em datas e valores reais: vencimento, economia ao pagar antes e quanto custa de fato dispensar o desconto."
+      },
+      "about": {
+        "headline": "Decifre os prazos de uma fatura em segundos",
+        "paragraphs": [
+          "Prazos como «net 30» ou «2/10 net 45» escondem em poucos caracteres uma data de vencimento, um desconto e uma taxa de juros implícita. Esta calculadora abre tudo isso: a data exata de vencimento a partir da data da fatura, o valor do desconto se você pagar dentro do prazo e o custo anualizado de não pagar.",
+          "É esse último número que surpreende. Dispensar um desconto de 2% para segurar o caixa por 20 dias extras equivale a tomar dinheiro emprestado a mais de 36% ao ano — bem mais caro que a maioria das linhas de capital de giro. Saber disso permite decidir com números, seja você o comprador ou o vendedor que define os prazos."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre prazos de pagamento",
+        "items": [
+          {
+            "question": "O que significa 2/10 net 30?",
+            "answer": "Pague em até 10 dias e ganhe 2% de desconto na fatura; caso contrário, o valor integral vence 30 dias após a data da fatura."
+          },
+          {
+            "question": "Como se calcula o custo de dispensar um desconto?",
+            "answer": "Custo ≈ (% de desconto ÷ (100 − % de desconto)) × (365 ÷ dias extras de crédito) × 100. Para 2/10 net 30, isso dá (2 ÷ 98) × (365 ÷ 20) ≈ 37% ao ano — o que esses 20 dias extras de crédito realmente custam."
+          },
+          {
+            "question": "O vencimento conta da data da fatura ou da entrega?",
+            "answer": "Normalmente da data da fatura, a menos que o contrato diga outra coisa (alguns usam prazos de fim de mês, escritos «net 30 FDM»). Esta calculadora conta dias corridos a partir da data da fatura que você informar."
+          },
+          {
+            "question": "Devo oferecer desconto por pagamento antecipado aos meus clientes?",
+            "answer": "Se o caixa está apertado ou os clientes pagam devagar, um desconto pequeno pode antecipar muito a entrada de dinheiro e reduzir a cobrança. Defina o valor com consciência — a mesma conta de custo anualizado vale para você como vendedor."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de variação de preço de compra",

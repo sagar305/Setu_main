@@ -1197,7 +1197,59 @@
     },
     {
       "name": "Calculadora de plazos de pago",
-      "shortDescription": "Fechas de vencimiento, ahorro por pronto pago y el coste real de pagar tarde."
+      "shortDescription": "Fechas de vencimiento, ahorro por pronto pago y el coste real de pagar tarde.",
+      "seo": {
+        "title": "Calculadora de plazos de pago — neto 30",
+        "description": "Calculadora de plazos de pago gratuita: fecha de vencimiento exacta de neto 15/30/45/60, ahorro por pago anticipado y el coste real de no usarlo.",
+        "keywords": [
+          "calculadora de plazos de pago",
+          "calculadora neto 30",
+          "2/10 neto 30",
+          "descuento por pago anticipado",
+          "calculadora de fecha de vencimiento de factura",
+          "coste del crédito comercial"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de plazos de pago",
+        "headline": "Calculadora de plazos de pago",
+        "subheadline": "Convierte plazos como «2/10 neto 30» en fechas y dinero reales: fecha de vencimiento, ahorro por pagar pronto y lo que cuesta de verdad renunciar al descuento."
+      },
+      "about": {
+        "headline": "Descifra los plazos de una factura en segundos",
+        "paragraphs": [
+          "Plazos como «neto 30» o «2/10 neto 45» encierran en unos pocos caracteres una fecha de vencimiento, un descuento y un tipo de interés implícito. Esta calculadora los desglosa: la fecha exacta de vencimiento a partir de la fecha de la factura, el importe del descuento si pagas dentro del plazo y el coste anualizado de no hacerlo.",
+          "Ese último número sorprende. Renunciar a un descuento del 2% para retener el efectivo 20 días más equivale a endeudarse a más del 36% anual, mucho más caro que casi cualquier financiación de capital de trabajo. Saberlo te permite decidir con números, seas el comprador o el vendedor que fija los plazos."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre plazos de pago",
+        "items": [
+          {
+            "question": "¿Qué significa 2/10 neto 30?",
+            "answer": "Paga en 10 días y obtienes un 2% de descuento sobre la factura; de lo contrario, el importe completo vence 30 días después de la fecha de la factura."
+          },
+          {
+            "question": "¿Cómo se calcula el coste de renunciar a un descuento?",
+            "answer": "Coste ≈ (% de descuento ÷ (100 − % de descuento)) × (365 ÷ días extra de crédito) × 100. Para 2/10 neto 30 sale (2 ÷ 98) × (365 ÷ 20) ≈ 37% anual, que es lo que cuestan en realidad esos 20 días extra de crédito."
+          },
+          {
+            "question": "¿El vencimiento se cuenta desde la fecha de la factura o desde la entrega?",
+            "answer": "Normalmente desde la fecha de la factura, salvo que el contrato diga otra cosa (algunos usan plazos a fin de mes, escritos «neto 30 FDM»). Esta calculadora cuenta días naturales desde la fecha de factura que introduzcas."
+          },
+          {
+            "question": "¿Debería ofrecer descuentos por pago anticipado a mis clientes?",
+            "answer": "Si el efectivo va justo o los clientes pagan tarde, un descuento pequeño puede acelerar mucho el cobro y reducir el trabajo de seguimiento. Ponle precio de forma consciente: como vendedor te aplica el mismo cálculo de coste anualizado."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El POS y las herramientas de Setu registran ventas, costes e impuestos automáticamente, así que los informes se construyen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de desviación de precio de compra",

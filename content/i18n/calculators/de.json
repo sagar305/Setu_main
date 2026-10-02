@@ -1197,7 +1197,59 @@
     },
     {
       "name": "Zahlungsziel-Rechner",
-      "shortDescription": "Fälligkeiten, Skonto-Ersparnis und die echten Kosten verspäteter Zahlung."
+      "shortDescription": "Fälligkeiten, Skonto-Ersparnis und die echten Kosten verspäteter Zahlung.",
+      "seo": {
+        "title": "Zahlungsbedingungen-Rechner — Netto 30",
+        "description": "Kostenloser Rechner für Zahlungsbedingungen: exaktes Fälligkeitsdatum bei netto 15/30/45/60, Skonto-Ersparnis und die echten Kosten des Verzichts.",
+        "keywords": [
+          "Zahlungsbedingungen Rechner",
+          "Netto-30-Rechner",
+          "2/10 netto 30",
+          "Skonto bei früher Zahlung",
+          "Rechner Fälligkeitsdatum Rechnung",
+          "Kosten des Lieferantenkredits"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Zahlungsbedingungen-Rechner",
+        "headline": "Zahlungsbedingungen-Rechner",
+        "subheadline": "Machen Sie aus Bedingungen wie „2/10 netto 30“ echte Daten und Beträge: Fälligkeitstag, Ersparnis bei früher Zahlung und was es wirklich kostet, das Skonto zu verfallen zu lassen."
+      },
+      "about": {
+        "headline": "Rechnungsbedingungen in Sekunden entschlüsseln",
+        "paragraphs": [
+          "Bedingungen wie „netto 30“ oder „2/10 netto 45“ packen ein Fälligkeitsdatum, ein Skonto und einen versteckten Zinssatz in wenige Zeichen. Dieser Rechner packt sie wieder aus: das genaue Fälligkeitsdatum ab Rechnungsdatum, den Skontobetrag bei Zahlung innerhalb der Frist und die auf das Jahr gerechneten Kosten, wenn Sie darauf verzichten.",
+          "Die letzte Zahl überrascht die meisten. Auf 2% Skonto zu verzichten, um das Geld 20 Tage länger zu halten, entspricht einem Kredit zu über 36% pro Jahr — weit teurer als fast jede Betriebsmittelfinanzierung. Wer das weiß, entscheidet mit Zahlen, ob als Käufer oder als Verkäufer, der die Bedingungen setzt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Zahlungsbedingungen",
+        "items": [
+          {
+            "question": "Was bedeutet 2/10 netto 30?",
+            "answer": "Zahlen Sie innerhalb von 10 Tagen, ziehen Sie 2% von der Rechnung ab; andernfalls ist der volle Betrag 30 Tage nach Rechnungsdatum fällig."
+          },
+          {
+            "question": "Wie werden die Kosten eines verfallenen Skontos berechnet?",
+            "answer": "Kosten ≈ (Skonto % ÷ (100 − Skonto %)) × (365 ÷ zusätzliche Kredittage) × 100. Für 2/10 netto 30 ergibt das (2 ÷ 98) × (365 ÷ 20) ≈ 37% pro Jahr — so viel kosten die 20 zusätzlichen Kredittage tatsächlich."
+          },
+          {
+            "question": "Zählt die Frist ab Rechnungsdatum oder ab Lieferdatum?",
+            "answer": "Normalerweise ab Rechnungsdatum, sofern der Vertrag nichts anderes sagt (manche nutzen Monatsendfristen, geschrieben als „netto 30 Monatsende“). Dieser Rechner zählt Kalendertage ab dem Rechnungsdatum, das Sie eingeben."
+          },
+          {
+            "question": "Sollte ich meinen Kunden Skonto für frühe Zahlung anbieten?",
+            "answer": "Wenn die Liquidität knapp ist oder Kunden langsam zahlen, bringt ein kleines Skonto das Geld deutlich schneller herein und spart Mahnaufwand. Kalkulieren Sie es bewusst — dieselbe Jahresrechnung gilt für Sie als Verkäufer."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Rechner für Einkaufspreisabweichung",
