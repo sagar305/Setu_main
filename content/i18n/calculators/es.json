@@ -380,7 +380,57 @@
     },
     {
       "name": "Calculadora de impuesto sobre la renta",
-      "shortDescription": "Estima el impuesto sobre la renta con el régimen antiguo o el nuevo para el ejercicio 2025-26."
+      "shortDescription": "Estima el impuesto sobre la renta con el régimen antiguo o el nuevo para el ejercicio 2025-26.",
+      "seo": {
+        "title": "Calculadora de Impuesto sobre la Renta — India | Setu",
+        "description": "Calculadora gratuita del impuesto sobre la renta en India para 2025-26. Compara el régimen antiguo y el nuevo y mira cuál sale más barato. Solo estimación.",
+        "keywords": [
+          "calculadora de impuesto sobre la renta",
+          "calculadora de impuestos India",
+          "régimen antiguo vs nuevo",
+          "calculadora IRPF India"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Impuesto sobre la Renta",
+        "headline": "Calculadora de Impuesto sobre la Renta",
+        "subheadline": "Compara el impuesto del régimen antiguo y del nuevo sobre tus ingresos en el ejercicio 2025-26 y mira cuál sale más barato."
+      },
+      "about": {
+        "headline": "Régimen antiguo o nuevo: decide con los números delante",
+        "paragraphs": [
+          "El sistema indio del impuesto sobre la renta permite a la mayoría de contribuyentes elegir entre el régimen antiguo (más deducciones, tramos más altos) y el nuevo (menos deducciones, tramos más bajos). La elección correcta depende por completo de cuántas deducciones y exenciones aplicas de verdad: no hay una respuesta universal.",
+          "Esta calculadora estima el impuesto de ambos regímenes para el ejercicio 2025-26 (año fiscal 2026-27) con los tramos y la deducción estándar que tenemos registrados, incluida la bonificación del artículo 87A. No contempla el recargo sobre rentas muy altas, los casos límite de la reducción marginal ni todas las deducciones posibles — y los tramos suelen revisarse cada año en los Presupuestos, así que verifica siempre los tramos oficiales más recientes o consulta a un asesor fiscal antes de presentar la declaración o elegir régimen."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de impuesto sobre la renta",
+        "items": [
+          {
+            "question": "¿Cuáles son los tramos del régimen nuevo en 2025-26?",
+            "answer": "En el régimen nuevo (ejercicio 2025-26 / año fiscal 2026-27): nada hasta ₹4.00.000; 5% de ₹4.00.001 a 8.00.000; 10% de ₹8.00.001 a 12.00.000; 15% de ₹12.00.001 a 16.00.000; 20% de ₹16.00.001 a 20.00.000; 25% de ₹20.00.001 a 24.00.000; y 30% por encima de ₹24.00.000. Los tramos cambian con cada Presupuesto, así que confírmalos en la notificación oficial más reciente antes de usarlos para declarar."
+          },
+          {
+            "question": "¿Qué es la bonificación del artículo 87A?",
+            "answer": "Es una bonificación que deja la cuota a cero para quienes están por debajo de un umbral de renta imponible. En el régimen nuevo de 2025-26 se aplica en general hasta ₹12.00.000 de renta imponible, y justo por encima se va reduciendo mediante la reducción marginal. Esta calculadora aplica una versión simplificada y no modela todos los casos límite."
+          },
+          {
+            "question": "¿Me conviene el régimen antiguo o el nuevo?",
+            "answer": "Depende de cuánto deduzcas: ayuda de vivienda, inversiones del artículo 80C, intereses del préstamo hipotecario, etc. Si tus deducciones elegibles son grandes, el régimen antiguo suele salir más barato; si deduces poco, normalmente ganan los tramos más bajos del nuevo. Compara los dos aquí con tus cifras reales."
+          },
+          {
+            "question": "¿Sustituye al consejo de un asesor fiscal?",
+            "answer": "No. Es una estimación simplificada solo para planificar: excluye el recargo, matices del impuesto adicional en algunos casos y varias deducciones detalladas. Para tu declaración real o una decisión de régimen con dinero en juego, verifica los tramos vigentes y consulta a un profesional cualificado."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Dedícate al negocio, no a la hoja de cálculo de impuestos",
+        "subtext": "Setu Dine mantiene ordenados tus datos de ventas y gastos, así la temporada de impuestos deja de ser una carrera.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de indemnización por servicio",

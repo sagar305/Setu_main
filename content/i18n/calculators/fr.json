@@ -380,7 +380,57 @@
     },
     {
       "name": "Calculateur d'impôt sur le revenu",
-      "shortDescription": "Estimez l'impôt sur le revenu selon l'ancien ou le nouveau régime pour l'exercice 2025-26."
+      "shortDescription": "Estimez l'impôt sur le revenu selon l'ancien ou le nouveau régime pour l'exercice 2025-26.",
+      "seo": {
+        "title": "Calculateur d'Impôt sur le Revenu — Inde 2025-26 | Setu",
+        "description": "Calculateur gratuit de l'impôt sur le revenu en Inde pour 2025-26. Comparez l'ancien et le nouveau régime et voyez lequel coûte moins. Estimation seulement.",
+        "keywords": [
+          "calculateur impôt sur le revenu",
+          "calculateur impôt Inde",
+          "ancien vs nouveau régime fiscal",
+          "calcul de l'impôt Inde"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Impôt sur le Revenu",
+        "headline": "Calculateur d'Impôt sur le Revenu",
+        "subheadline": "Comparez l'impôt de l'ancien et du nouveau régime sur vos revenus de l'exercice 2025-26 et voyez lequel coûte le moins cher."
+      },
+      "about": {
+        "headline": "Ancien ou nouveau régime : décidez chiffres en main",
+        "paragraphs": [
+          "Le système indien de l'impôt sur le revenu permet à la plupart des contribuables de choisir entre l'ancien régime (plus de déductions, taux de tranches plus élevés) et le nouveau (moins de déductions, taux plus bas). Le bon choix dépend entièrement du montant de déductions et d'exonérations que vous demandez réellement : il n'y a pas de réponse universelle.",
+          "Ce calculateur estime l'impôt dû dans les deux régimes pour l'exercice 2025-26 (année d'imposition 2026-27), avec les tranches et la déduction standard que nous avons en référence, y compris la réduction de l'article 87A. Il ne tient pas compte de la surtaxe sur les très hauts revenus, des cas limites de l'allègement marginal ni de toutes les déductions possibles — et les tranches sont généralement révisées chaque année au Budget : vérifiez donc toujours les tranches officielles les plus récentes ou consultez un expert-comptable avant de déclarer ou de choisir un régime."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'impôt sur le revenu",
+        "items": [
+          {
+            "question": "Quelles sont les tranches du nouveau régime en 2025-26 ?",
+            "answer": "Dans le nouveau régime (exercice 2025-26 / année d'imposition 2026-27) : néant jusqu'à ₹4 00 000 ; 5 % de ₹4 00 001 à 8 00 000 ; 10 % de ₹8 00 001 à 12 00 000 ; 15 % de ₹12 00 001 à 16 00 000 ; 20 % de ₹16 00 001 à 20 00 000 ; 25 % de ₹20 00 001 à 24 00 000 ; et 30 % au-delà de ₹24 00 000. Les tranches changent à chaque Budget : confirmez-les dans la notification officielle la plus récente avant de déclarer."
+          },
+          {
+            "question": "Qu'est-ce que la réduction de l'article 87A ?",
+            "answer": "C'est une réduction qui ramène l'impôt à zéro pour les contribuables situés sous un certain seuil de revenu imposable. Dans le nouveau régime 2025-26, elle s'applique en général jusqu'à ₹12 00 000 de revenu imposable, puis s'atténue juste au-dessus via l'allègement marginal. Ce calculateur en applique une version simplifiée et ne modélise pas tous les cas limites."
+          },
+          {
+            "question": "Dois-je choisir l'ancien ou le nouveau régime ?",
+            "answer": "Cela dépend du montant de vos déductions : aide au logement, placements de l'article 80C, intérêts d'emprunt immobilier, etc. Si vos déductions éligibles sont importantes, l'ancien régime est souvent moins coûteux ; si vous déduisez peu, les taux plus bas du nouveau régime l'emportent généralement. Comparez les deux ici avec vos chiffres réels."
+          },
+          {
+            "question": "Cela remplace-t-il l'avis d'un expert-comptable ?",
+            "answer": "Non. C'est une estimation simplifiée, destinée à la planification : elle exclut la surtaxe, certaines subtilités de la contribution additionnelle et plusieurs déductions détaillées. Pour votre déclaration réelle ou un choix de régime avec de l'argent en jeu, vérifiez les tranches en vigueur et consultez un professionnel qualifié."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Occupez-vous de votre affaire, pas de votre tableur fiscal",
+        "subtext": "Setu Dine garde vos données de ventes et de dépenses en ordre, pour que la période fiscale ne soit plus une course.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de prime de fin de service",

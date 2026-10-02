@@ -380,7 +380,57 @@
     },
     {
       "name": "Calculadora de imposto de renda",
-      "shortDescription": "Estime o imposto de renda no regime antigo ou no novo para o ano fiscal de 2025-26."
+      "shortDescription": "Estime o imposto de renda no regime antigo ou no novo para o ano fiscal de 2025-26.",
+      "seo": {
+        "title": "Calculadora de Imposto de Renda — Índia 2025-26 | Setu",
+        "description": "Calculadora gratuita de imposto de renda na Índia para 2025-26. Compare o regime antigo e o novo e veja qual sai mais barato. Apenas uma estimativa.",
+        "keywords": [
+          "calculadora de imposto de renda",
+          "calculadora de imposto Índia",
+          "regime antigo vs novo",
+          "cálculo de imposto de renda"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Imposto de Renda",
+        "headline": "Calculadora de Imposto de Renda",
+        "subheadline": "Compare o imposto do regime antigo e do novo sobre a sua renda no exercício 2025-26 e veja qual sai mais barato."
+      },
+      "about": {
+        "headline": "Regime antigo ou novo: decida com os números na mão",
+        "paragraphs": [
+          "O sistema indiano de imposto de renda permite que a maioria dos contribuintes escolha entre o regime antigo (mais deduções, alíquotas de faixa mais altas) e o novo (menos deduções, alíquotas mais baixas). A escolha certa depende inteiramente de quantas deduções e isenções você realmente usa — não existe resposta universal.",
+          "Esta calculadora estima o imposto devido nos dois regimes para o exercício 2025-26 (ano fiscal 2026-27), com as faixas e a dedução padrão que temos registradas, incluindo o abatimento do artigo 87A. Ela não considera o adicional sobre rendas muito altas, os casos limite do alívio marginal nem todas as deduções possíveis — e as faixas costumam ser revistas a cada Orçamento anual, então confirme sempre as faixas oficiais mais recentes ou consulte um contador antes de declarar ou escolher o regime."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de imposto de renda",
+        "items": [
+          {
+            "question": "Quais são as faixas do regime novo em 2025-26?",
+            "answer": "No regime novo (exercício 2025-26 / ano fiscal 2026-27): isento até ₹4.00.000; 5% de ₹4.00.001 a 8.00.000; 10% de ₹8.00.001 a 12.00.000; 15% de ₹12.00.001 a 16.00.000; 20% de ₹16.00.001 a 20.00.000; 25% de ₹20.00.001 a 24.00.000; e 30% acima de ₹24.00.000. As faixas mudam a cada Orçamento, então confirme na notificação oficial mais recente antes de usar isto para declarar."
+          },
+          {
+            "question": "O que é o abatimento do artigo 87A?",
+            "answer": "É um abatimento que zera o imposto devido para contribuintes abaixo de um certo limite de renda tributável. No regime novo de 2025-26 ele se aplica em geral até ₹12.00.000 de renda tributável, e logo acima disso vai diminuindo pelo alívio marginal. Esta calculadora aplica uma versão simplificada e não modela todos os casos limite."
+          },
+          {
+            "question": "Devo escolher o regime antigo ou o novo?",
+            "answer": "Depende de quanto você deduz — auxílio-moradia, investimentos do artigo 80C, juros do financiamento imobiliário e assim por diante. Se suas deduções elegíveis forem grandes, o regime antigo costuma sair mais barato; se você deduz pouco, as alíquotas menores do novo normalmente ganham. Compare os dois aqui com os seus números reais."
+          },
+          {
+            "question": "Isto substitui a orientação de um contador?",
+            "answer": "Não. É uma estimativa simplificada, apenas para planejamento: não inclui o adicional, nuances da contribuição em alguns casos e várias deduções detalhadas. Para a declaração real ou uma decisão de regime com dinheiro em jogo, confira as faixas vigentes e consulte um contador habilitado."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Cuide do negócio, não da planilha de impostos",
+        "subtext": "O Setu Dine mantém seus dados de vendas e despesas organizados, para a temporada de impostos deixar de ser uma correria.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de gratificação por tempo de serviço",

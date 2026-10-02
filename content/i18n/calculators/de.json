@@ -380,7 +380,57 @@
     },
     {
       "name": "Einkommensteuer-Rechner",
-      "shortDescription": "Schätzen Sie die Einkommensteuer nach altem und neuem Modell für das Steuerjahr 2025-26."
+      "shortDescription": "Schätzen Sie die Einkommensteuer nach altem und neuem Modell für das Steuerjahr 2025-26.",
+      "seo": {
+        "title": "Einkommensteuer-Rechner — Indien 2025-26 | Setu",
+        "description": "Kostenloser Einkommensteuer-Rechner für Indien 2025-26. Vergleichen Sie altes und neues Steuerregime und sehen Sie, welches günstiger ist. Nur Schätzung.",
+        "keywords": [
+          "Einkommensteuer Rechner",
+          "Steuerrechner Indien",
+          "altes vs neues Steuerregime",
+          "Einkommensteuer berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Einkommensteuer",
+        "headline": "Einkommensteuer-Rechner",
+        "subheadline": "Vergleichen Sie die Steuer nach altem und neuem Regime auf Ihr Einkommen im Steuerjahr 2025-26 und sehen Sie, welches günstiger ausfällt."
+      },
+      "about": {
+        "headline": "Altes oder neues Regime — entscheiden Sie mit Zahlen",
+        "paragraphs": [
+          "Im indischen Einkommensteuersystem können die meisten Steuerpflichtigen zwischen dem alten Regime (mehr Abzüge, höhere Stufensätze) und dem neuen Regime (weniger Abzüge, niedrigere Stufensätze) wählen. Was günstiger ist, hängt ganz davon ab, wie viele Abzüge und Freibeträge Sie tatsächlich geltend machen — eine allgemeingültige Antwort gibt es nicht.",
+          "Dieser Rechner schätzt die fällige Steuer in beiden Regimen für das Steuerjahr 2025-26 (Veranlagungsjahr 2026-27) anhand der bei uns erfassten aktuellen Stufen und des Pauschalabzugs, einschließlich der Ermäßigung nach Abschnitt 87A. Zuschläge auf sehr hohe Einkommen, Grenzfälle der Grenzentlastung und viele mögliche Abzüge sind nicht berücksichtigt — und die Stufen werden üblicherweise jedes Jahr im Haushalt angepasst. Prüfen Sie daher vor der Abgabe oder einer Regime-Entscheidung immer die aktuellen amtlichen Stufen oder fragen Sie einen Steuerberater."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Einkommensteuer-Rechner",
+        "items": [
+          {
+            "question": "Wie lauten die Stufen des neuen Regimes für 2025-26?",
+            "answer": "Im neuen Regime (Steuerjahr 2025-26 / Veranlagungsjahr 2026-27): bis ₹4.00.000 steuerfrei; 5 % von ₹4.00.001 bis 8.00.000; 10 % von ₹8.00.001 bis 12.00.000; 15 % von ₹12.00.001 bis 16.00.000; 20 % von ₹16.00.001 bis 20.00.000; 25 % von ₹20.00.001 bis 24.00.000; und 30 % über ₹24.00.000. Die Stufen ändern sich mit jedem Haushalt — prüfen Sie die aktuelle amtliche Bekanntmachung, bevor Sie sich für die Abgabe darauf verlassen."
+          },
+          {
+            "question": "Was ist die Ermäßigung nach Abschnitt 87A?",
+            "answer": "Eine Ermäßigung, die die Steuerlast für Steuerpflichtige unterhalb einer bestimmten Grenze des zu versteuernden Einkommens auf null senkt. Im neuen Regime für 2025-26 gilt sie in der Regel bis ₹12.00.000 zu versteuerndem Einkommen und läuft knapp darüber über die Grenzentlastung aus. Dieser Rechner nutzt eine vereinfachte Fassung und bildet nicht jeden Grenzfall ab."
+          },
+          {
+            "question": "Soll ich das alte oder das neue Regime wählen?",
+            "answer": "Das hängt davon ab, wie viel Sie absetzen — Wohnzuschuss, Anlagen nach Abschnitt 80C, Hypothekenzinsen und so weiter. Sind Ihre abzugsfähigen Posten hoch, ist das alte Regime oft günstiger; machen Sie wenig geltend, gewinnen meist die niedrigeren Stufensätze des neuen Regimes. Vergleichen Sie beides hier mit Ihren echten Zahlen."
+          },
+          {
+            "question": "Ersetzt das die Beratung durch einen Steuerberater?",
+            "answer": "Nein. Es ist eine vereinfachte Schätzung zur Planung: Zuschläge, Feinheiten der Abgabe in manchen Fällen und mehrere Einzelabzüge fehlen. Für die tatsächliche Abgabe oder eine Regime-Entscheidung mit echtem Geld prüfen Sie die aktuellen Stufen und fragen Sie eine qualifizierte Fachperson."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kümmern Sie sich ums Geschäft, nicht um die Steuertabelle",
+        "subtext": "Setu Dine hält Ihre Umsatz- und Ausgabendaten geordnet, damit die Steuerzeit keine Hetzjagd mehr ist.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Abfindungsrechner",

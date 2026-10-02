@@ -380,7 +380,57 @@
     },
     {
       "name": "Kalkulator pajak penghasilan",
-      "shortDescription": "Perkirakan pajak penghasilan skema lama dan baru untuk tahun fiskal 2025-26."
+      "shortDescription": "Perkirakan pajak penghasilan skema lama dan baru untuk tahun fiskal 2025-26.",
+      "seo": {
+        "title": "Kalkulator Pajak Penghasilan — India 2025-26 | Setu",
+        "description": "Kalkulator pajak penghasilan India gratis untuk 2025-26. Bandingkan rezim lama dan baru, lihat mana yang lebih murah. Hanya perkiraan — cek anggaran resmi.",
+        "keywords": [
+          "kalkulator pajak penghasilan",
+          "kalkulator pajak India",
+          "rezim lama vs baru",
+          "hitung pajak penghasilan"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Pajak Penghasilan",
+        "headline": "Kalkulator Pajak Penghasilan",
+        "subheadline": "Bandingkan pajak rezim lama dan rezim baru atas penghasilan Anda untuk tahun fiskal 2025-26 dan lihat mana yang lebih murah."
+      },
+      "about": {
+        "headline": "Rezim lama atau baru — putuskan dengan angka di depan Anda",
+        "paragraphs": [
+          "Sistem pajak penghasilan India memberi hampir semua wajib pajak pilihan antara rezim lama (lebih banyak pengurang, tarif lapisan lebih tinggi) dan rezim baru (lebih sedikit pengurang, tarif lebih rendah). Pilihan yang tepat sepenuhnya bergantung pada seberapa banyak pengurang dan pembebasan yang benar-benar Anda ambil — tidak ada satu jawaban untuk semua orang.",
+          "Kalkulator ini memperkirakan pajak terutang pada kedua rezim untuk tahun fiskal 2025-26 (tahun penilaian 2026-27), memakai lapisan tarif dan pengurang standar terbaru yang kami catat, termasuk keringanan Pasal 87A. Ia tidak menghitung pungutan tambahan atas penghasilan sangat tinggi, kasus batas keringanan marginal, maupun setiap pengurang yang mungkin — dan lapisan tarif biasanya direvisi tiap tahun dalam anggaran negara, jadi selalu cek lapisan resmi terbaru atau tanya akuntan sebelum melapor atau memilih rezim."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pajak penghasilan",
+        "items": [
+          {
+            "question": "Apa lapisan tarif rezim baru untuk 2025-26?",
+            "answer": "Pada rezim baru (2025-26 / tahun penilaian 2026-27): nol sampai ₹4.00.000; 5% dari ₹4.00.001-8.00.000; 10% dari ₹8.00.001-12.00.000; 15% dari ₹12.00.001-16.00.000; 20% dari ₹16.00.001-20.00.000; 25% dari ₹20.00.001-24.00.000; dan 30% di atas ₹24.00.000. Lapisan tarif berubah setiap anggaran negara, jadi pastikan lewat pemberitahuan resmi terbaru sebelum memakainya untuk melapor."
+          },
+          {
+            "question": "Apa itu keringanan Pasal 87A?",
+            "answer": "Keringanan yang membuat pajak terutang menjadi nol bagi wajib pajak di bawah ambang penghasilan kena pajak tertentu. Pada rezim baru 2025-26 umumnya berlaku sampai penghasilan kena pajak ₹12.00.000, dan sedikit di atas ambang itu berkurang bertahap melalui keringanan marginal. Kalkulator ini memakai versi sederhana dan tidak memodelkan semua kasus batas."
+          },
+          {
+            "question": "Sebaiknya saya pilih rezim lama atau baru?",
+            "answer": "Bergantung pada berapa besar pengurang yang Anda ambil — tunjangan rumah, investasi Pasal 80C, bunga kredit rumah, dan seterusnya. Kalau pengurang yang memenuhi syarat besar, rezim lama sering lebih murah; kalau Anda mengambil sedikit pengurang, tarif lebih rendah rezim baru biasanya menang. Bandingkan keduanya di sini dengan angka Anda sendiri."
+          },
+          {
+            "question": "Apakah ini menggantikan saran akuntan?",
+            "answer": "Tidak. Ini perkiraan sederhana untuk perencanaan saja — tidak memasukkan pungutan tambahan, detail cukai pada beberapa kasus, dan beberapa pengurang terperinci. Untuk pelaporan sebenarnya atau keputusan rezim yang menyangkut uang nyata, cek lapisan tarif terbaru dan konsultasikan dengan akuntan bersertifikat."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Urus usaha Anda, bukan spreadsheet pajak",
+        "subtext": "Setu Dine menjaga data penjualan dan pengeluaran Anda tetap rapi, sehingga musim pajak tidak lagi bikin kalang kabut.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator uang penghargaan masa kerja",

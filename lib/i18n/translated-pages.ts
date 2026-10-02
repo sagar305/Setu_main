@@ -36,7 +36,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "loan-emi-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "table-turnover-calculator": [],
     "take-home-salary-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
-    "income-tax-calculator": [],
+    "income-tax-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "gratuity-calculator": [],
     "online-order-commission-calculator": [],
     "online-menu-price-calculator": [],
