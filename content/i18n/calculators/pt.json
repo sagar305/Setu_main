@@ -636,7 +636,57 @@
     },
     {
       "name": "Calculadora de comissão de pedidos online",
-      "shortDescription": "Veja seu repasse real após comissão da plataforma, embalagem e taxas do gateway de pagamento."
+      "shortDescription": "Veja seu repasse real após comissão da plataforma, embalagem e taxas do gateway de pagamento.",
+      "seo": {
+        "title": "Calculadora de Comissão de Delivery | Setu",
+        "description": "Calculadora gratuita de comissão de pedidos online para restaurantes. Informe o valor do pedido, a comissão e os outros encargos para ver o repasse real.",
+        "keywords": [
+          "calculadora de comissão de delivery",
+          "comissão de aplicativos de comida",
+          "calculadora de repasse por pedido",
+          "comissão de agregadores"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Comissão de Pedidos Online",
+        "headline": "Calculadora de Comissão de Pedidos Online",
+        "subheadline": "Informe o valor do pedido e os encargos da plataforma para ver exatamente quanto sobra para você em um pedido online."
+      },
+      "about": {
+        "headline": "O que um pedido online realmente te paga",
+        "paragraphs": [
+          "As taxas de comissão divulgadas raramente contam a história completa. Somando o custo da embalagem, os encargos do gateway de pagamento e o imposto sobre a própria comissão, a diferença entre o que o cliente paga e o que cai na sua conta pode chegar a 30% ou mais.",
+          "Informe o valor do pedido e os encargos que valem na sua conta de agregador para ver o repasse real por pedido e o seu percentual efetivo. Rode alguns dos seus tamanhos de pedido mais comuns por aqui para saber se os pedidos online são tão lucrativos quanto o salão ou a retirada depois de todas as deduções."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de comissão de pedidos online",
+        "items": [
+          {
+            "question": "Como os aplicativos de delivery calculam a comissão?",
+            "answer": "A maioria cobra comissão como percentual do valor do pedido e pode somar o imposto correspondente sobre essa comissão. Encargos de embalagem e taxas de gateway de pagamento normalmente vêm separados e reduzem ainda mais o seu repasse."
+          },
+          {
+            "question": "Por que meu repasse real é tão menor que o valor do pedido?",
+            "answer": "Comissão, imposto sobre a comissão, custo de embalagem e taxas de gateway saem do valor do pedido antes de você receber. Num pedido típico essas deduções somadas costumam ficar entre 25% e 35% do valor, dependendo da plataforma e da categoria."
+          },
+          {
+            "question": "Devo precificar diferente nas plataformas de delivery?",
+            "answer": "Muitos restaurantes realmente embutem um acréscimo específico de delivery nos preços do menu no agregador para compensar a comissão, já que salão e delivery têm estruturas de custo bem diferentes. Use esta calculadora para checar se os seus preços de delivery atuais deixam uma margem sustentável."
+          },
+          {
+            "question": "O Setu Dine consegue gerenciar pedidos de várias plataformas?",
+            "answer": "Sim. O Setu Dine pode trazer pedidos de vários agregadores para uma única visão, então a sua cozinha não precisa se dividir entre um tablet por plataforma."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gerencie todos os agregadores em uma só tela",
+        "subtext": "O Setu Dine reúne os pedidos de todas as suas plataformas de delivery em uma única visão de cozinha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de preço de cardápio online",

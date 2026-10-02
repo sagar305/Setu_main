@@ -636,7 +636,57 @@
     },
     {
       "name": "Provisionsrechner für Online-Bestellungen",
-      "shortDescription": "Sehen Sie Ihre echte Auszahlung nach Plattformprovision, Verpackung und Zahlungsgebühren."
+      "shortDescription": "Sehen Sie Ihre echte Auszahlung nach Plattformprovision, Verpackung und Zahlungsgebühren.",
+      "seo": {
+        "title": "Provisionsrechner für Lieferdienste | Setu",
+        "description": "Kostenloser Provisionsrechner für Online-Bestellungen. Bestellwert, Plattformprovision und weitere Kosten eingeben und die echte Auszahlung je Bestellung sehen.",
+        "keywords": [
+          "Provisionsrechner Lieferdienst",
+          "Provision Lieferplattform",
+          "Auszahlung je Bestellung berechnen",
+          "Provision Vermittlungsplattform"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Provision bei Online-Bestellungen",
+        "headline": "Provisionsrechner für Online-Bestellungen",
+        "subheadline": "Geben Sie Bestellwert und Plattformkosten ein und sehen Sie genau, was Ihnen von einer Online-Bestellung bleibt."
+      },
+      "about": {
+        "headline": "Was eine Online-Bestellung tatsächlich einbringt",
+        "paragraphs": [
+          "Die genannten Provisionssätze erzählen selten die ganze Geschichte. Rechnet man Verpackungskosten, Gebühren des Zahlungsdienstes und die Steuer auf die Provision selbst hinzu, kann die Lücke zwischen dem Bestellwert, den der Gast zahlt, und dem, was auf Ihrem Konto landet, 30 % oder mehr betragen.",
+          "Geben Sie den Bestellwert und die bei Ihrem Plattformkonto geltenden Kosten ein, um die echte Auszahlung je Bestellung und Ihren effektiven Anteil zu sehen. Rechnen Sie einige Ihrer üblichen Bestellgrößen durch, um zu sehen, ob Online-Bestellungen nach allen Abzügen so rentabel sind wie Ihr Restaurant- oder Abholgeschäft."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Provisionsrechner",
+        "items": [
+          {
+            "question": "Wie berechnen Lieferplattformen ihre Provision?",
+            "answer": "Die meisten Plattformen nehmen eine Provision als Prozentsatz des Bestellwerts und können darauf zusätzlich die Steuer berechnen. Verpackungskosten und Gebühren des Zahlungsdienstes sind meist getrennt und schmälern Ihre Auszahlung weiter."
+          },
+          {
+            "question": "Warum ist meine Auszahlung so viel niedriger als der Bestellwert?",
+            "answer": "Provision, Steuer auf die Provision, Verpackungskosten und Zahlungsgebühren gehen vom Bestellwert ab, bevor Sie Geld erhalten. Bei einer typischen Bestellung machen diese Abzüge zusammen häufig 25 bis 35 % des Bestellwerts aus, je nach Plattform und Kategorie."
+          },
+          {
+            "question": "Sollte ich für Lieferplattformen anders kalkulieren?",
+            "answer": "Viele Betriebe bauen in ihre Plattformpreise tatsächlich einen eigenen Lieferaufschlag ein, um die Provision auszugleichen, denn Restaurantbetrieb und Lieferung haben sehr unterschiedliche Kostenstrukturen. Prüfen Sie mit diesem Rechner, ob Ihre heutigen Lieferpreise eine tragfähige Marge lassen."
+          },
+          {
+            "question": "Kann Setu Dine Bestellungen mehrerer Lieferplattformen verwalten?",
+            "answer": "Ja. Setu Dine kann Bestellungen mehrerer Plattformen in einer Ansicht zusammenführen, damit Ihre Küche nicht für jede Plattform ein eigenes Tablet bedienen muss."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Alle Plattformen über einen Bildschirm steuern",
+        "subtext": "Setu Dine bringt die Bestellungen aller Ihrer Lieferplattformen in eine gemeinsame Küchenansicht.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Rechner für Online-Menüpreise",

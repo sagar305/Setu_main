@@ -636,7 +636,57 @@
     },
     {
       "name": "Calculadora de comisión de pedidos online",
-      "shortDescription": "Mira tu ingreso real tras la comisión de la plataforma, el envase y las tasas de la pasarela de pago."
+      "shortDescription": "Mira tu ingreso real tras la comisión de la plataforma, el envase y las tasas de la pasarela de pago.",
+      "seo": {
+        "title": "Calculadora de Comisión de Reparto a Domicilio | Setu",
+        "description": "Calculadora gratuita de comisión de pedidos online para restaurantes. Introduce el valor del pedido, la comisión y otros cargos para ver tu ingreso real.",
+        "keywords": [
+          "calculadora de comisión de reparto",
+          "comisión de plataformas de comida",
+          "calculadora de ingreso por pedido",
+          "comisión de agregadores"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Comisión de Pedidos Online",
+        "headline": "Calculadora de Comisión de Pedidos Online",
+        "subheadline": "Introduce el valor del pedido y los cargos de la plataforma para ver exactamente cuánto te llevas de un pedido online."
+      },
+      "about": {
+        "headline": "Lo que un pedido online te paga de verdad",
+        "paragraphs": [
+          "Las comisiones anunciadas rara vez cuentan toda la historia. Una vez sumas el coste del envase, los cargos de la pasarela de pago y el impuesto sobre la propia comisión, la diferencia entre lo que paga el cliente y lo que acaba en tu cuenta puede ser del 30% o más.",
+          "Introduce el valor del pedido y los cargos que se aplican en tu cuenta de agregador para ver el ingreso real por pedido y tu porcentaje efectivo. Pasa por aquí algunos de tus tamaños de pedido habituales para ver si los pedidos online son tan rentables como tu salón o tu recogida una vez contadas todas las deducciones."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de comisión de pedidos online",
+        "items": [
+          {
+            "question": "¿Cómo calculan la comisión las plataformas de reparto?",
+            "answer": "La mayoría cobra una comisión como porcentaje del valor del pedido y puede añadir el impuesto correspondiente sobre esa comisión. Los cargos de envase y las comisiones de la pasarela de pago suelen ir aparte y reducen todavía más tu ingreso."
+          },
+          {
+            "question": "¿Por qué mi ingreso real es tan inferior al valor del pedido?",
+            "answer": "Comisión, impuesto sobre la comisión, coste del envase y comisiones de pasarela salen del valor del pedido antes de que te paguen. En un pedido típico, esas deducciones juntas suelen suponer entre el 25% y el 35% del valor del pedido, según la plataforma y la categoría."
+          },
+          {
+            "question": "¿Debería poner precios distintos en las plataformas de reparto?",
+            "answer": "Muchos restaurantes sí incorporan un recargo específico de reparto en los precios de su carta en el agregador para compensar la comisión, porque el salón y el domicilio tienen estructuras de coste muy distintas. Usa esta calculadora para comprobar si tus precios de reparto actuales te dejan un margen sostenible."
+          },
+          {
+            "question": "¿Setu Dine puede gestionar pedidos de varias plataformas?",
+            "answer": "Sí. Setu Dine puede traer los pedidos de varios agregadores a una sola vista, así tu cocina no tiene que ir haciendo juegos malabares con una tableta por plataforma."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gestiona todos los agregadores desde una pantalla",
+        "subtext": "Setu Dine reúne los pedidos de todas tus plataformas de reparto en una sola vista de cocina.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de precios de carta online",

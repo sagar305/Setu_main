@@ -636,7 +636,57 @@
     },
     {
       "name": "Kalkulator komisi pesanan online",
-      "shortDescription": "Lihat penerimaan nyata Anda setelah komisi platform, kemasan, dan biaya payment gateway."
+      "shortDescription": "Lihat penerimaan nyata Anda setelah komisi platform, kemasan, dan biaya payment gateway.",
+      "seo": {
+        "title": "Kalkulator Komisi Pesanan Online Restoran | Setu",
+        "description": "Kalkulator komisi pesanan online gratis untuk restoran. Masukkan nilai pesanan, komisi platform, dan biaya lain untuk melihat penerimaan nyata per pesanan.",
+        "keywords": [
+          "kalkulator komisi ojek online",
+          "komisi platform pesan antar",
+          "kalkulator penerimaan per pesanan",
+          "komisi aggregator restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Komisi Pesanan Online",
+        "headline": "Kalkulator Komisi Pesanan Online",
+        "subheadline": "Masukkan nilai pesanan dan biaya platform untuk melihat persis berapa yang Anda bawa pulang dari sebuah pesanan online."
+      },
+      "about": {
+        "headline": "Berapa sebenarnya yang dibayar sebuah pesanan online",
+        "paragraphs": [
+          "Tarif komisi yang diumumkan jarang menceritakan semuanya. Setelah Anda menambahkan biaya kemasan, biaya payment gateway, dan pajak atas komisinya sendiri, jarak antara nilai pesanan yang dibayar pelanggan dan yang benar-benar masuk ke rekening Anda bisa mencapai 30% atau lebih.",
+          "Masukkan nilai pesanan dan biaya yang berlaku di akun aggregator Anda untuk melihat penerimaan nyata per pesanan serta persentase bersih yang Anda bawa pulang. Coba beberapa ukuran pesanan yang biasa Anda terima, untuk tahu apakah pesanan online sama menguntungkannya dengan makan di tempat atau bungkus setelah semua potongan dihitung."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator komisi pesanan online",
+        "items": [
+          {
+            "question": "Bagaimana platform pesan antar menghitung komisi?",
+            "answer": "Sebagian besar platform mengenakan komisi sebagai persentase nilai pesanan, dan bisa menambahkan pajak atas komisi itu. Biaya kemasan dan biaya payment gateway biasanya terpisah dan makin mengurangi penerimaan Anda."
+          },
+          {
+            "question": "Mengapa penerimaan saya jauh lebih kecil dari nilai pesanan?",
+            "answer": "Komisi, pajak atas komisi, biaya kemasan, dan biaya payment gateway semuanya keluar dari nilai pesanan sebelum Anda dibayar. Pada pesanan biasa, potongan-potongan itu bersama-sama sering mencapai 25-35% dari nilai pesanan, tergantung platform dan kategorinya."
+          },
+          {
+            "question": "Apakah harga di platform pesan antar sebaiknya berbeda?",
+            "answer": "Banyak restoran memang menambahkan markup khusus pengantaran pada harga menu di aggregator untuk menutup komisi, karena struktur biaya makan di tempat dan pengantaran sangat berbeda. Pakai kalkulator ini untuk memeriksa apakah harga pengantaran Anda sekarang menyisakan margin yang bisa bertahan."
+          },
+          {
+            "question": "Apakah Setu Dine bisa mengelola pesanan dari beberapa platform?",
+            "answer": "Bisa. Setu Dine dapat menarik pesanan dari beberapa aggregator ke satu tampilan, jadi dapur Anda tidak perlu bergantian mengurus satu tablet per platform."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kelola semua aggregator dari satu layar",
+        "subtext": "Setu Dine menyatukan pesanan dari semua platform pengantaran Anda ke satu tampilan dapur.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator harga menu online",

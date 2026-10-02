@@ -636,7 +636,57 @@
     },
     {
       "name": "Calculateur de commission des commandes en ligne",
-      "shortDescription": "Voyez votre versement réel après commission de plateforme, emballage et frais de paiement."
+      "shortDescription": "Voyez votre versement réel après commission de plateforme, emballage et frais de paiement.",
+      "seo": {
+        "title": "Calculateur de Commission de Livraison | Setu",
+        "description": "Calculateur gratuit de commission sur les commandes en ligne pour restaurants. Saisissez le montant, la commission et les autres frais pour voir votre net.",
+        "keywords": [
+          "calculateur commission livraison",
+          "commission plateformes de livraison",
+          "calculateur revenu par commande",
+          "commission des agrégateurs"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Commission des Commandes en Ligne",
+        "headline": "Calculateur de Commission des Commandes en Ligne",
+        "subheadline": "Saisissez le montant de la commande et les frais de la plateforme pour voir exactement ce qu'il vous reste sur une commande en ligne."
+      },
+      "about": {
+        "headline": "Ce qu'une commande en ligne vous rapporte réellement",
+        "paragraphs": [
+          "Les taux de commission affichés racontent rarement toute l'histoire. Une fois ajoutés le coût de l'emballage, les frais de la passerelle de paiement et la taxe sur la commission elle-même, l'écart entre ce que paie le client et ce qui arrive sur votre compte peut atteindre 30 % ou plus.",
+          "Saisissez le montant de la commande et les frais applicables sur votre compte agrégateur pour voir le revenu réel par commande et votre pourcentage net effectif. Faites passer quelques-unes de vos tailles de commande habituelles pour savoir si les commandes en ligne sont aussi rentables que votre salle ou votre vente à emporter, déductions faites."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de commission des commandes en ligne",
+        "items": [
+          {
+            "question": "Comment les plateformes de livraison calculent-elles leur commission ?",
+            "answer": "La plupart prélèvent une commission en pourcentage du montant de la commande et peuvent y ajouter la taxe applicable sur cette commission. Les frais d'emballage et les frais de passerelle de paiement sont généralement distincts et réduisent encore votre revenu."
+          },
+          {
+            "question": "Pourquoi mon revenu réel est-il si inférieur au montant de la commande ?",
+            "answer": "Commission, taxe sur la commission, coût de l'emballage et frais de passerelle sortent du montant de la commande avant votre versement. Sur une commande type, ces déductions cumulées représentent couramment 25 à 35 % du montant, selon la plateforme et la catégorie."
+          },
+          {
+            "question": "Faut-il appliquer des prix différents sur les plateformes de livraison ?",
+            "answer": "Beaucoup de restaurants intègrent effectivement une majoration propre à la livraison dans les prix affichés chez l'agrégateur pour compenser la commission, car la salle et la livraison ont des structures de coûts très différentes. Vérifiez avec ce calculateur si vos prix de livraison actuels vous laissent une marge tenable."
+          },
+          {
+            "question": "Setu Dine peut-il gérer les commandes de plusieurs plateformes ?",
+            "answer": "Oui. Setu Dine peut rassembler les commandes de plusieurs agrégateurs dans une vue unique, pour que votre cuisine n'ait pas à jongler avec une tablette par plateforme."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gérez tous les agrégateurs depuis un seul écran",
+        "subtext": "Setu Dine rassemble les commandes de toutes vos plateformes de livraison dans une seule vue cuisine.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de prix au menu en ligne",
