@@ -810,7 +810,57 @@
     },
     {
       "name": "Meldebestands-Rechner",
-      "shortDescription": "Finden Sie den genauen Bestand, bei dem Sie neu bestellen sollten."
+      "shortDescription": "Finden Sie den genauen Bestand, bei dem Sie neu bestellen sollten.",
+      "seo": {
+        "title": "Meldebestand-Rechner — Fehlbestände vermeiden | Setu",
+        "description": "Kostenloser Meldebestand-Rechner für den Handel. Durchschnittlichen Tagesabsatz, Lieferzeit und Sicherheitsbestand eingeben und den Nachbestellpunkt erhalten.",
+        "keywords": [
+          "Meldebestand Rechner",
+          "Meldebestand berechnen",
+          "Nachbestellpunkt Lager",
+          "Sicherheitsbestand Rechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Meldebestand",
+        "headline": "Meldebestand-Rechner",
+        "subheadline": "Geben Sie durchschnittlichen Tagesabsatz, Lieferzeit des Lieferanten und Sicherheitsbestand ein, um zu sehen, wann Sie nachbestellen sollten."
+      },
+      "about": {
+        "headline": "Nachbestellen, bevor die Ware ausgeht — nicht danach",
+        "paragraphs": [
+          "Der Meldebestand ist der Lagerstand, bei dem eine neue Bestellung ausgelöst werden sollte: zu niedrig, und Sie riskieren, vor Eintreffen der Nachlieferung leer zu laufen; zu hoch, und Sie binden Kapital in überschüssigem Bestand.",
+          "Geben Sie den durchschnittlichen Tagesabsatz eines Artikels ein, wie viele Tage Ihr Lieferant üblicherweise braucht, und einen Sicherheitsbestand für Nachfragespitzen oder Lieferverzug — der Rechner nennt die genaue Stückzahl, bei der Ihre nächste Bestellung rausgehen sollte."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Meldebestand-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für den Meldebestand?",
+            "answer": "Meldebestand = (durchschnittlicher Tagesabsatz × Lieferzeit in Tagen) + Sicherheitsbestand. Es ist der Lagerstand, bei dem eine neue Bestellung ausgelöst werden sollte, damit die Nachlieferung vor dem Leerlaufen ankommt."
+          },
+          {
+            "question": "Wie lege ich den Sicherheitsbestand fest?",
+            "answer": "Der Sicherheitsbestand sollte Nachfrageschwankungen (stärkere Tage als im Schnitt) und Lieferverzögerungen abdecken. Ein üblicher Startpunkt sind einige Tage Durchschnittsabsatz, nach oben angepasst bei Artikeln mit unzuverlässigen Lieferanten oder schwankender Nachfrage."
+          },
+          {
+            "question": "Was, wenn die Lieferzeit stark schwankt?",
+            "answer": "Rechnen Sie mit Ihrer realistisch schlechtesten Lieferzeit statt mit dem besten Fall, und stützen Sie sich bei Artikeln mit unvorhersehbarer Lieferzeit auf einen größeren Sicherheitsbestand."
+          },
+          {
+            "question": "Sind saisonale Nachfragespitzen berücksichtigt?",
+            "answer": "Nicht direkt — gerechnet wird mit Ihrem durchschnittlichen Tagesabsatz. Für Saisonartikel rechnen Sie neu, und zwar mit dem für die kommende Saison erwarteten Tagesabsatz statt mit einem flachen Jahresmittel."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Früher Zugang zu Setu Retail?",
+        "subtext": "Erzählen Sie uns von Ihrem Handelsgeschäft, und wir melden uns, sobald Setu Retail startet — mit Nachbestell-Hinweisen von Anfang an.",
+        "cta": {
+          "label": "Benachrichtigt werden"
+        }
+      }
     },
     {
       "name": "Rechner für Kundenakquisekosten (CAC)",

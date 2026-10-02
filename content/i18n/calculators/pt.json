@@ -810,7 +810,57 @@
     },
     {
       "name": "Calculadora de ponto de reposição",
-      "shortDescription": "Encontre o nível exato de estoque que deve disparar sua próxima compra."
+      "shortDescription": "Encontre o nível exato de estoque que deve disparar sua próxima compra.",
+      "seo": {
+        "title": "Calculadora de Ponto de Pedido — Evite Faltas | Setu",
+        "description": "Calculadora gratuita de ponto de pedido para o varejo. Informe a venda média diária, o prazo do fornecedor e o estoque de segurança para saber quando repor.",
+        "keywords": [
+          "calculadora de ponto de pedido",
+          "ponto de pedido de estoque",
+          "calculadora de reposição de estoque",
+          "calculadora de estoque de segurança"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Ponto de Pedido",
+        "headline": "Calculadora de Ponto de Pedido",
+        "subheadline": "Informe a venda média diária, o prazo de entrega do fornecedor e o estoque de segurança para saber quando deve repor."
+      },
+      "about": {
+        "headline": "Reponha antes de acabar, não depois",
+        "paragraphs": [
+          "O ponto de pedido é o nível de estoque que deve disparar uma nova ordem de compra: baixo demais e você corre o risco de ficar sem produto antes de a reposição chegar; alto demais e prende dinheiro em estoque excedente.",
+          "Informe a venda média diária de um item, quantos dias o seu fornecedor costuma levar para entregar e um colchão de estoque de segurança para picos de demanda ou atrasos, e esta calculadora dá o número exato de unidades que deve disparar o seu próximo pedido."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ponto de pedido",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ponto de pedido?",
+            "answer": "Ponto de pedido = (venda média diária × prazo do fornecedor em dias) + estoque de segurança. É o nível de estoque em que um novo pedido deve ser colocado para a reposição chegar antes de acabar."
+          },
+          {
+            "question": "Como defino o estoque de segurança?",
+            "answer": "O estoque de segurança deve cobrir tanto a variação da demanda (dias mais movimentados que a média) quanto atrasos do fornecedor. Um ponto de partida comum é alguns dias de venda média, ampliado para itens com fornecedores pouco confiáveis ou demanda instável."
+          },
+          {
+            "question": "E se o prazo do meu fornecedor variar muito?",
+            "answer": "Use o seu pior prazo realista em vez do melhor caso ao calcular o ponto de pedido, e conte com um colchão de segurança maior para itens cujo prazo é imprevisível."
+          },
+          {
+            "question": "Isso considera picos sazonais de demanda?",
+            "answer": "Não diretamente: o cálculo usa a sua venda média diária. Para itens de estação, recalcule com a venda média diária esperada para a temporada que vem, em vez de uma média anual uniforme."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Quer acesso antecipado ao Setu Retail?",
+        "subtext": "Conte sobre o seu varejo e avisamos assim que o Setu Retail for lançado, com alertas de reposição incluídos.",
+        "cta": {
+          "label": "Quero ser avisado"
+        }
+      }
     },
     {
       "name": "Calculadora de custo de aquisição de cliente (CAC)",

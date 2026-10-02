@@ -810,7 +810,57 @@
     },
     {
       "name": "Kalkulator titik pemesanan ulang",
-      "shortDescription": "Temukan level stok pasti yang harus memicu pemesanan berikutnya."
+      "shortDescription": "Temukan level stok pasti yang harus memicu pemesanan berikutnya.",
+      "seo": {
+        "title": "Kalkulator Titik Pemesanan Ulang Stok | Setu",
+        "description": "Kalkulator titik pemesanan ulang gratis untuk ritel. Masukkan penjualan harian rata-rata, waktu tunggu, dan stok aman untuk tahu kapan harus memesan lagi.",
+        "keywords": [
+          "kalkulator titik pemesanan ulang",
+          "titik pemesanan ulang stok",
+          "kalkulator pengisian ulang persediaan",
+          "kalkulator stok aman"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Titik Pemesanan Ulang",
+        "headline": "Kalkulator Titik Pemesanan Ulang Stok",
+        "subheadline": "Masukkan penjualan harian rata-rata, waktu tunggu pemasok, dan stok aman untuk tahu kapan Anda sebaiknya memesan lagi."
+      },
+      "about": {
+        "headline": "Pesan sebelum stok habis, bukan setelahnya",
+        "paragraphs": [
+          "Titik pemesanan ulang adalah tingkat stok yang semestinya memicu pesanan pembelian baru — kalau terlalu rendah, Anda berisiko kehabisan sebelum barang baru tiba; kalau terlalu tinggi, uang Anda tertahan di persediaan berlebih.",
+          "Masukkan penjualan harian rata-rata sebuah barang, berapa hari pemasok Anda biasanya mengirim, dan bantalan stok aman untuk lonjakan permintaan atau keterlambatan kiriman, lalu kalkulator ini memberi jumlah unit tepat yang semestinya memicu pesanan Anda berikutnya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator titik pemesanan ulang",
+        "items": [
+          {
+            "question": "Apa rumus titik pemesanan ulang?",
+            "answer": "Titik pemesanan ulang = (penjualan harian rata-rata × waktu tunggu pemasok dalam hari) + stok aman. Itulah tingkat stok saat pesanan baru sebaiknya dibuat agar barang pengganti tiba sebelum stok habis."
+          },
+          {
+            "question": "Bagaimana menentukan angka stok aman?",
+            "answer": "Stok aman sebaiknya menutup baik ragam permintaan (hari yang lebih sibuk dari rata-rata) maupun keterlambatan pemasok. Titik awal yang umum adalah penjualan rata-rata beberapa hari, dinaikkan untuk barang dengan pemasok yang kurang andal atau permintaan yang bergejolak."
+          },
+          {
+            "question": "Bagaimana kalau waktu tunggu pemasok saya sangat berubah-ubah?",
+            "answer": "Pakai waktu tunggu terburuk yang realistis, bukan kasus terbaik, saat menghitung titik pemesanan ulang, dan andalkan bantalan stok aman yang lebih besar untuk barang yang waktu tunggunya sulit diperkirakan."
+          },
+          {
+            "question": "Apakah ini memperhitungkan lonjakan permintaan musiman?",
+            "answer": "Tidak secara langsung — perhitungan ini memakai angka penjualan harian rata-rata Anda. Untuk barang musiman, hitung ulang memakai penjualan harian rata-rata yang diperkirakan pada musim yang akan datang, bukan rata-rata tahunan yang rata."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ingin akses awal ke Setu Retail?",
+        "subtext": "Ceritakan tentang usaha ritel Anda dan kami kabari begitu Setu Retail diluncurkan, lengkap dengan peringatan pemesanan ulang.",
+        "cta": {
+          "label": "Beri tahu saya"
+        }
+      }
     },
     {
       "name": "Kalkulator biaya akuisisi pelanggan (CAC)",

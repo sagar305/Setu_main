@@ -810,7 +810,57 @@
     },
     {
       "name": "Calculateur de point de commande",
-      "shortDescription": "Trouvez le niveau de stock exact qui doit déclencher votre prochaine commande."
+      "shortDescription": "Trouvez le niveau de stock exact qui doit déclencher votre prochaine commande.",
+      "seo": {
+        "title": "Calculateur de Point de Commande — Gratuit | Setu",
+        "description": "Calculateur gratuit de point de commande. Saisissez les ventes par jour, le délai fournisseur et le stock de sécurité pour savoir quand commander.",
+        "keywords": [
+          "calculateur point de commande",
+          "point de commande stock",
+          "calculateur de réapprovisionnement",
+          "calculateur stock de sécurité"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Point de Commande",
+        "headline": "Calculateur de Point de Commande",
+        "subheadline": "Saisissez les ventes moyennes par jour, le délai de livraison du fournisseur et le stock de sécurité pour savoir quand réapprovisionner."
+      },
+      "about": {
+        "headline": "Commandez avant la rupture, pas après",
+        "paragraphs": [
+          "Le point de commande est le niveau de stock qui doit déclencher une nouvelle commande d'achat : trop bas, vous risquez la rupture avant l'arrivée du réassort ; trop haut, vous immobilisez de la trésorerie dans du stock excédentaire.",
+          "Saisissez les ventes moyennes par jour d'un article, le nombre de jours que met habituellement votre fournisseur, et un stock de sécurité pour les pics de demande ou les retards de livraison : ce calculateur vous donne le nombre exact d'unités qui doit déclencher votre prochaine commande."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de point de commande",
+        "items": [
+          {
+            "question": "Quelle est la formule du point de commande ?",
+            "answer": "Point de commande = (ventes moyennes par jour × délai fournisseur en jours) + stock de sécurité. C'est le niveau de stock auquel passer une nouvelle commande pour que le réassort arrive avant la rupture."
+          },
+          {
+            "question": "Comment fixer le stock de sécurité ?",
+            "answer": "Le stock de sécurité doit couvrir à la fois la variabilité de la demande (journées plus chargées que la moyenne) et les retards fournisseurs. Un point de départ courant est quelques jours de ventes moyennes, augmenté pour les articles aux fournisseurs peu fiables ou à la demande instable."
+          },
+          {
+            "question": "Et si le délai de mon fournisseur varie beaucoup ?",
+            "answer": "Retenez votre pire délai réaliste plutôt que le meilleur cas pour calculer le point de commande, et prévoyez un stock de sécurité plus large pour les articles dont le délai est imprévisible."
+          },
+          {
+            "question": "Les pics saisonniers sont-ils pris en compte ?",
+            "answer": "Pas directement : le calcul utilise vos ventes moyennes par jour. Pour les articles saisonniers, recalculez avec les ventes moyennes attendues pendant la saison à venir plutôt qu'une moyenne annuelle lissée."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Envie d'un accès anticipé à Setu Retail ?",
+        "subtext": "Parlez-nous de votre commerce et nous vous préviendrons dès le lancement de Setu Retail, avec les alertes de réassort intégrées.",
+        "cta": {
+          "label": "Être prévenu"
+        }
+      }
     },
     {
       "name": "Calculateur du coût d'acquisition client (CAC)",

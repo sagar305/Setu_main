@@ -810,7 +810,57 @@
     },
     {
       "name": "Calculadora de punto de pedido",
-      "shortDescription": "Halla el nivel exacto de stock que debe activar tu próximo pedido."
+      "shortDescription": "Halla el nivel exacto de stock que debe activar tu próximo pedido.",
+      "seo": {
+        "title": "Calculadora de Punto de Pedido — Evita Faltas | Setu",
+        "description": "Calculadora gratuita de punto de pedido para comercios. Introduce la venta media diaria, el plazo de entrega y el stock de seguridad para saber cuándo pedir.",
+        "keywords": [
+          "calculadora de punto de pedido",
+          "punto de pedido de stock",
+          "calculadora de reposición de inventario",
+          "calculadora de stock de seguridad"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Punto de Pedido",
+        "headline": "Calculadora de Punto de Pedido",
+        "subheadline": "Introduce la venta media diaria, el plazo de entrega del proveedor y el stock de seguridad para saber cuándo deberías reponer."
+      },
+      "about": {
+        "headline": "Repón antes de quedarte sin stock, no después",
+        "paragraphs": [
+          "El punto de pedido es el nivel de stock que debería disparar una nueva orden de compra: si lo pones demasiado bajo, corres el riesgo de quedarte sin producto antes de que llegue la reposición; si lo pones demasiado alto, inmovilizas dinero en inventario de más.",
+          "Introduce la venta media diaria de un artículo, los días que tarda normalmente tu proveedor y un colchón de stock de seguridad para picos de demanda o retrasos de entrega, y esta calculadora te da el número exacto de unidades que debería disparar tu siguiente pedido."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de punto de pedido",
+        "items": [
+          {
+            "question": "¿Cuál es la fórmula del punto de pedido?",
+            "answer": "Punto de pedido = (venta media diaria × plazo de entrega del proveedor en días) + stock de seguridad. Es el nivel de stock al que conviene cursar una nueva orden para que la reposición llegue antes de agotarse."
+          },
+          {
+            "question": "¿Cómo decido el stock de seguridad?",
+            "answer": "El stock de seguridad debe cubrir tanto la variabilidad de la demanda (días más fuertes de lo normal) como los retrasos del proveedor. Un punto de partida habitual son unos pocos días de venta media, ampliado para artículos con proveedores poco fiables o demanda volátil."
+          },
+          {
+            "question": "¿Y si el plazo de mi proveedor varía mucho?",
+            "answer": "Usa tu peor plazo realista en lugar del mejor caso al calcular el punto de pedido, y apóyate en un colchón de seguridad mayor para los artículos cuyo plazo es impredecible."
+          },
+          {
+            "question": "¿Tiene en cuenta los picos estacionales?",
+            "answer": "No directamente: usa tu cifra de venta media diaria. Para artículos de temporada, recalcula con la venta media diaria prevista para la temporada que viene en lugar de una media anual plana."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "¿Quieres acceso anticipado a Setu Retail?",
+        "subtext": "Cuéntanos sobre tu comercio y te avisaremos en cuanto se lance Setu Retail, con avisos de reposición incluidos.",
+        "cta": {
+          "label": "Quiero que me avisen"
+        }
+      }
     },
     {
       "name": "Calculadora de coste de adquisición de clientes (CAC)",
