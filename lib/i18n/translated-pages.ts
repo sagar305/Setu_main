@@ -49,7 +49,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "aov-calculator": [],
     "menu-engineering-calculator": [],
     "vat-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
-    "sales-tax-calculator": [],
+    "sales-tax-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "roi-calculator": [],
     "depreciation-calculator": [],
     "payment-terms-calculator": [],

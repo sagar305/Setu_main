@@ -682,7 +682,57 @@
     },
     {
       "name": "Calculateur de taxe de vente",
-      "shortDescription": "Calculez la sales tax américaine : cumulez taux d'État et taux locaux, ajoutez-la ou extrayez-la."
+      "shortDescription": "Calculez la sales tax américaine : cumulez taux d'État et taux locaux, ajoutez-la ou extrayez-la.",
+      "seo": {
+        "title": "Calculateur de Taxe de Vente (États-Unis) | Setu",
+        "description": "Calculateur gratuit de taxe de vente. Combinez les taux d'État et locaux, ajoutez la taxe à un prix hors taxe ou extrayez-la d'un total déjà payé.",
+        "keywords": [
+          "calculateur taxe de vente",
+          "sales tax États-Unis",
+          "calculateur taxe d'État",
+          "taxe de vente inversée"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Taxe de Vente",
+        "headline": "Calculateur de Taxe de Vente",
+        "subheadline": "Combinez le taux de l'État et le taux local, puis ajoutez la taxe à un prix ou extrayez-la d'un total que vous avez déjà payé."
+      },
+      "about": {
+        "headline": "Comment fonctionne la taxe de vente américaine",
+        "paragraphs": [
+          "Contrairement à la TVA ou à la GST, la taxe de vente américaine s'ajoute à la caisse et varie selon l'État, le comté et la ville. Le taux que vous facturez est en général celui de l'État plus les taux locaux applicables au lieu de vente — c'est pourquoi deux commerces à quelques kilomètres d'écart peuvent facturer une taxe différente.",
+          "Saisissez le taux de l'État et tout taux local ou municipal : ce calculateur affiche le taux combiné, le montant de la taxe et le total. Inversez-le pour extraire la taxe du total d'un reçu lorsque vous tenez votre comptabilité ou justifiez des frais."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de taxe de vente",
+        "items": [
+          {
+            "question": "Comment calculer la taxe de vente sur un achat ?",
+            "answer": "Multipliez le prix hors taxe par le taux combiné. Un achat de 100 $ à un taux combiné de 8 % porte 8 $ de taxe, soit un total de 108 $."
+          },
+          {
+            "question": "Comment retrouver le prix hors taxe à partir du total ?",
+            "answer": "Divisez le total par (1 + taux combiné). Un total de 108 $ à 8 % donne 108 $ ÷ 1,08 = 100 $ hors taxe et 8 $ de taxe."
+          },
+          {
+            "question": "Pourquoi faut-il le taux de l'État et le taux local séparément ?",
+            "answer": "La plupart des États autorisent les comtés, les villes et des districts spéciaux à ajouter leur propre taxe de vente au-dessus du taux de l'État. Le client paie le total combiné du lieu de vente : ce calculateur prend donc les deux et les additionne."
+          },
+          {
+            "question": "Tous les États américains appliquent-ils une taxe de vente ?",
+            "answer": "Non — l'Alaska, le Delaware, le Montana, le New Hampshire et l'Oregon n'ont pas de taxe de vente à l'échelle de l'État (certaines localités d'Alaska appliquent la leur). Tous les autres États ont un taux, généralement entre 4 % et 7,25 %."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de ROI",

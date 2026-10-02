@@ -682,7 +682,57 @@
     },
     {
       "name": "Sales-Tax-Rechner",
-      "shortDescription": "Berechnen Sie US-Sales-Tax: Staats- und Kommunalsätze kombinieren, addieren oder herausrechnen."
+      "shortDescription": "Berechnen Sie US-Sales-Tax: Staats- und Kommunalsätze kombinieren, addieren oder herausrechnen.",
+      "seo": {
+        "title": "Sales-Tax-Rechner — Staats- und Ortssätze | Setu",
+        "description": "Kostenloser Sales-Tax-Rechner für die USA. Staats- und Ortssätze kombinieren, Steuer auf einen Nettopreis aufschlagen oder aus einer Summe herausrechnen.",
+        "keywords": [
+          "Sales Tax Rechner",
+          "US Verkaufssteuer",
+          "Staatssteuer Rechner",
+          "Verkaufssteuer herausrechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Sales Tax",
+        "headline": "Sales-Tax-Rechner",
+        "subheadline": "Kombinieren Sie Staats- und Ortssatz und schlagen Sie die Steuer dann auf einen Preis auf — oder rechnen Sie sie aus einer bereits bezahlten Summe heraus."
+      },
+      "about": {
+        "headline": "So funktioniert die US-Verkaufssteuer",
+        "paragraphs": [
+          "Anders als Mehrwertsteuer oder GST kommt die US-Verkaufssteuer an der Kasse dazu und unterscheidet sich je nach Bundesstaat, County und Stadt. Der Satz, den Sie erheben, ist meist der Satz des Bundesstaats plus die am Verkaufsort geltenden Ortssätze — deshalb können zwei Läden wenige Kilometer auseinander unterschiedlich viel Steuer verlangen.",
+          "Geben Sie den Satz des Bundesstaats und etwaige Orts- oder Stadtsätze ein: Der Rechner zeigt den kombinierten Satz, den Steuerbetrag und die Summe. Umgekehrt rechnen Sie die Steuer aus einer Belegsumme heraus, etwa für die Buchhaltung oder eine Spesenabrechnung."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Sales-Tax-Rechner",
+        "items": [
+          {
+            "question": "Wie berechne ich die Verkaufssteuer auf einen Einkauf?",
+            "answer": "Multiplizieren Sie den Preis vor Steuern mit dem kombinierten Satz. Ein Einkauf von 100 $ bei kombiniert 8 % trägt 8 $ Steuer, Summe also 108 $."
+          },
+          {
+            "question": "Wie komme ich von der Summe auf den Preis vor Steuern?",
+            "answer": "Teilen Sie die Summe durch (1 + kombinierter Satz). Eine Summe von 108 $ bei 8 % ergibt 108 $ ÷ 1,08 = 100 $ vor Steuern und 8 $ Steuer."
+          },
+          {
+            "question": "Warum brauche ich Staats- und Ortssatz getrennt?",
+            "answer": "In den meisten US-Bundesstaaten dürfen Countys, Städte und Sonderbezirke eigene Verkaufssteuer auf den Satz des Bundesstaats aufschlagen. Der Kunde zahlt die kombinierte Summe am Verkaufsort — der Rechner nimmt daher beide und addiert sie."
+          },
+          {
+            "question": "Erheben alle US-Bundesstaaten Verkaufssteuer?",
+            "answer": "Nein — Alaska, Delaware, Montana, New Hampshire und Oregon haben keine landesweite Verkaufssteuer (einige Orte in Alaska erheben eine eigene). Alle anderen Bundesstaaten haben einen Satz, meist zwischen 4 % und 7,25 %."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "ROI-Rechner",

@@ -682,7 +682,57 @@
     },
     {
       "name": "Calculadora de impuesto sobre ventas",
-      "shortDescription": "Calcula el sales tax de EE. UU.: combina tipos estatales y locales, añádelo o extráelo de un total."
+      "shortDescription": "Calcula el sales tax de EE. UU.: combina tipos estatales y locales, añádelo o extráelo de un total.",
+      "seo": {
+        "title": "Calculadora de Impuesto sobre Ventas (EE. UU.) | Setu",
+        "description": "Calculadora gratuita de impuesto sobre ventas. Combina tipos estatales y locales, añade el impuesto a un precio o extráelo de un total pagado. Sin registro.",
+        "keywords": [
+          "calculadora de impuesto sobre ventas",
+          "sales tax EE. UU.",
+          "calculadora de impuesto estatal",
+          "impuesto sobre ventas inverso"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Impuesto sobre Ventas",
+        "headline": "Calculadora de Impuesto sobre Ventas",
+        "subheadline": "Combina los tipos estatal y local, y después añade el impuesto a un precio o extráelo de un total que ya pagaste."
+      },
+      "about": {
+        "headline": "Cómo funciona el impuesto sobre ventas en EE. UU.",
+        "paragraphs": [
+          "A diferencia del IVA o del GST, el impuesto sobre ventas estadounidense se añade en la caja y varía según el estado, el condado y la ciudad. El tipo que cobras suele ser el estatal más los tipos locales que apliquen en el punto de venta — por eso dos tiendas separadas por unos kilómetros pueden cobrar impuestos distintos.",
+          "Introduce el tipo estatal y cualquier tipo local o municipal, y esta calculadora muestra el tipo combinado, el importe del impuesto y el total. Dale la vuelta para extraer el impuesto del total de un recibo cuando lleves la contabilidad o justifiques gastos."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de impuesto sobre ventas",
+        "items": [
+          {
+            "question": "¿Cómo calculo el impuesto de una compra?",
+            "answer": "Multiplica el precio sin impuestos por el tipo combinado. Una compra de 100 $ con un tipo combinado del 8% lleva 8 $ de impuesto y da un total de 108 $."
+          },
+          {
+            "question": "¿Cómo obtengo el precio sin impuestos a partir del total?",
+            "answer": "Divide el total entre (1 + tipo combinado). Un total de 108 $ al 8% es 108 $ ÷ 1,08 = 100 $ sin impuestos y 8 $ de impuesto."
+          },
+          {
+            "question": "¿Por qué hacen falta el tipo estatal y el local por separado?",
+            "answer": "La mayoría de los estados permiten que condados, ciudades y distritos especiales añadan su propio impuesto sobre el tipo estatal. El cliente paga el total combinado del lugar de la venta, así que esta calculadora toma los dos y los suma."
+          },
+          {
+            "question": "¿Todos los estados cobran impuesto sobre ventas?",
+            "answer": "No — Alaska, Delaware, Montana, Nuevo Hampshire y Oregón no tienen impuesto estatal sobre ventas (aunque algunas localidades de Alaska cobran el suyo). El resto de los estados tiene un tipo estatal, normalmente entre el 4% y el 7,25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registran solos",
+        "subtext": "El TPV y las herramientas de Setu registran ventas, costes e impuestos de forma automática, así los informes se hacen mientras trabajas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ROI",

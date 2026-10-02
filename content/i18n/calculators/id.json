@@ -682,7 +682,57 @@
     },
     {
       "name": "Kalkulator pajak penjualan",
-      "shortDescription": "Hitung sales tax ala AS: gabungkan tarif negara bagian dan lokal, tambahkan atau keluarkan."
+      "shortDescription": "Hitung sales tax ala AS: gabungkan tarif negara bagian dan lokal, tambahkan atau keluarkan.",
+      "seo": {
+        "title": "Kalkulator Pajak Penjualan AS — Negara + Lokal | Setu",
+        "description": "Kalkulator pajak penjualan gratis. Gabungkan tarif negara bagian dan lokal, tambahkan pajak ke harga, atau keluarkan pajak dari total yang sudah dibayar.",
+        "keywords": [
+          "kalkulator pajak penjualan",
+          "sales tax Amerika",
+          "kalkulator pajak negara bagian",
+          "hitung balik pajak penjualan"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Pajak Penjualan",
+        "headline": "Kalkulator Pajak Penjualan",
+        "subheadline": "Gabungkan tarif negara bagian dan tarif lokal, lalu tambahkan pajak ke harga atau keluarkan pajak dari total yang sudah Anda bayar."
+      },
+      "about": {
+        "headline": "Bagaimana pajak penjualan di AS bekerja",
+        "paragraphs": [
+          "Berbeda dari PPN atau GST, pajak penjualan di Amerika Serikat ditambahkan di kasir dan berbeda menurut negara bagian, county, dan kota. Tarif yang Anda pungut biasanya tarif negara bagian ditambah tarif lokal yang berlaku di tempat penjualan — itulah sebabnya dua toko yang hanya berjarak beberapa kilometer bisa memungut pajak berbeda.",
+          "Masukkan tarif negara bagian dan tarif lokal atau kota, lalu kalkulator ini menampilkan tarif gabungan, jumlah pajak, dan totalnya. Balikkan arahnya untuk mengeluarkan pajak dari total pada struk saat Anda membukukan atau mengajukan klaim biaya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pajak penjualan",
+        "items": [
+          {
+            "question": "Bagaimana menghitung pajak penjualan atas sebuah pembelian?",
+            "answer": "Kalikan harga sebelum pajak dengan tarif gabungan. Pembelian $100 pada tarif gabungan 8% memuat pajak $8, sehingga totalnya $108."
+          },
+          {
+            "question": "Bagaimana mendapatkan harga sebelum pajak dari total?",
+            "answer": "Bagi total dengan (1 + tarif gabungan). Total $108 pada 8% adalah $108 ÷ 1,08 = $100 sebelum pajak dan $8 pajak."
+          },
+          {
+            "question": "Mengapa tarif negara bagian dan lokal perlu dipisah?",
+            "answer": "Sebagian besar negara bagian AS membolehkan county, kota, dan distrik khusus menambahkan pajak penjualan sendiri di atas tarif negara bagian. Pelanggan membayar total gabungan di lokasi penjualan, jadi kalkulator ini mengambil keduanya dan menjumlahkannya."
+          },
+          {
+            "question": "Apakah semua negara bagian AS memungut pajak penjualan?",
+            "answer": "Tidak — Alaska, Delaware, Montana, New Hampshire, dan Oregon tidak punya pajak penjualan tingkat negara bagian (meski beberapa daerah di Alaska memungut sendiri). Negara bagian lain punya tarif sendiri, biasanya antara 4% dan 7,25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator ROI",

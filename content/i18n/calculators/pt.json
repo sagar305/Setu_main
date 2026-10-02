@@ -682,7 +682,57 @@
     },
     {
       "name": "Calculadora de imposto sobre vendas",
-      "shortDescription": "Calcule o sales tax dos EUA: some alíquotas estaduais e locais, aplique ou extraia de um total."
+      "shortDescription": "Calcule o sales tax dos EUA: some alíquotas estaduais e locais, aplique ou extraia de um total.",
+      "seo": {
+        "title": "Calculadora de Imposto sobre Vendas (EUA) | Setu",
+        "description": "Calculadora gratuita de imposto sobre vendas. Combine as taxas estadual e local, some o imposto a um preço ou retire-o de um total já pago. Sem cadastro.",
+        "keywords": [
+          "calculadora de imposto sobre vendas",
+          "sales tax EUA",
+          "calculadora de imposto estadual",
+          "imposto sobre vendas inverso"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Imposto sobre Vendas",
+        "headline": "Calculadora de Imposto sobre Vendas",
+        "subheadline": "Combine as taxas estadual e local e depois some o imposto a um preço ou retire o imposto de um total que você já pagou."
+      },
+      "about": {
+        "headline": "Como funciona o imposto sobre vendas nos EUA",
+        "paragraphs": [
+          "Diferente do IVA ou do GST, o imposto sobre vendas dos EUA é somado no caixa e varia por estado, condado e cidade. A taxa que você cobra normalmente é a estadual mais as taxas locais aplicáveis no ponto de venda — por isso duas lojas a poucos quilômetros de distância podem cobrar impostos diferentes.",
+          "Informe a taxa estadual e qualquer taxa local ou municipal, e esta calculadora mostra a taxa combinada, o valor do imposto e o total. Inverta para retirar o imposto do total de um recibo quando estiver fazendo a contabilidade ou justificando despesas."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de imposto sobre vendas",
+        "items": [
+          {
+            "question": "Como calculo o imposto sobre uma compra?",
+            "answer": "Multiplique o preço sem imposto pela taxa combinada. Uma compra de US$ 100 com taxa combinada de 8% carrega US$ 8 de imposto, total de US$ 108."
+          },
+          {
+            "question": "Como descubro o preço sem imposto a partir do total?",
+            "answer": "Divida o total por (1 + taxa combinada). Um total de US$ 108 a 8% é US$ 108 ÷ 1,08 = US$ 100 sem imposto e US$ 8 de imposto."
+          },
+          {
+            "question": "Por que preciso das taxas estadual e local separadas?",
+            "answer": "A maioria dos estados dos EUA permite que condados, cidades e distritos especiais somem o próprio imposto sobre a taxa estadual. O cliente paga o total combinado do local da venda, então esta calculadora recebe as duas e soma para você."
+          },
+          {
+            "question": "Todos os estados dos EUA cobram imposto sobre vendas?",
+            "answer": "Não — Alasca, Delaware, Montana, Nova Hampshire e Oregon não têm imposto estadual sobre vendas (ainda que algumas localidades do Alasca cobrem o próprio). Todos os outros estados têm uma taxa estadual, normalmente entre 4% e 7,25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de ROI",
