@@ -1124,7 +1124,68 @@
     },
     {
       "name": "Calculateur d'ingénierie du menu",
-      "shortDescription": "Analysez vos plats par rentabilité et popularité pour repérer étoiles, vaches à lait, énigmes et poids morts."
+      "shortDescription": "Analysez vos plats par rentabilité et popularité pour repérer étoiles, vaches à lait, énigmes et poids morts.",
+      "seo": {
+        "title": "Calculateur d'ingénierie de menu pour restaurants",
+        "description": "Calculateur d'ingénierie de menu gratuit. Saisissez prix, coûts et popularité pour repérer vos plats rentables et corriger ceux qui rognent votre marge.",
+        "keywords": [
+          "calculateur d'ingénierie de menu",
+          "analyse de la carte d'un restaurant",
+          "calculateur de rentabilité du menu",
+          "optimisation de la carte d'un restaurant",
+          "calculateur de marge sur coûts variables",
+          "classification des plats",
+          "analyse de rentabilité d'un restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur d'ingénierie de menu",
+        "headline": "Calculateur d'ingénierie de menu",
+        "subheadline": "Analysez votre carte par rentabilité et popularité : repérez les stars à promouvoir, les vaches à lait à mettre en avant et les poids morts à retirer ou à repositionner."
+      },
+      "about": {
+        "headline": "Arrêtez de deviner quels plats font la marge",
+        "paragraphs": [
+          "L'ingénierie de menu consiste à analyser les plats de votre carte selon leur marge sur coûts variables et leur popularité, afin d'identifier ceux qui sont réellement rentables et ceux qui rongent vos marges.",
+          "Cet outil classe chaque plat dans l'une de quatre catégories : les Stars (forte marge, forte popularité) à promouvoir, les Vaches à lait (forte marge, faible popularité) qui manquent de visibilité, les Énigmes (faible marge, forte popularité) dont il faut revoir le prix, et les Poids morts (faible marge, faible popularité) à retirer ou repositionner. Saisissez vos plats avec leurs prix, leurs coûts et les quantités vendues — le calculateur fait le reste."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur l'ingénierie de menu",
+        "items": [
+          {
+            "question": "Que signifie « marge sur coûts variables » en ingénierie de menu ?",
+            "answer": "C'est le bénéfice par plat avant répartition des charges fixes (loyer, salaires, etc.). C'est la part que chaque vente apporte pour couvrir les charges fixes et dégager du bénéfice : prix de vente moins coût des marchandises vendues."
+          },
+          {
+            "question": "Comment les plats sont-ils classés ?",
+            "answer": "En comparant leur marge et leur popularité (quantités vendues) à la moyenne de la carte. Les Stars sont élevées sur les deux, les Vaches à lait ont une bonne marge mais peu de ventes, les Énigmes se vendent bien mais rapportent peu, et les Poids morts sont faibles sur les deux."
+          },
+          {
+            "question": "Que faire pour chaque catégorie ?",
+            "answer": "Stars : promouvoir fortement, garder le prix stable. Vaches à lait : gagner en visibilité et proposer des formules pour doper les ventes. Énigmes : augmenter le prix ou réduire les coûts (elles sont déjà populaires, juste pas rentables). Poids morts : retirer, repositionner en produit d'appel, ou revoir le coût de la recette."
+          },
+          {
+            "question": "La popularité, est-ce les quantités vendues ou le chiffre d'affaires ?",
+            "answer": "Dans ce calculateur, la popularité désigne les quantités ou les couverts vendus, pas le chiffre d'affaires. Un plat à faible marge qui se vend beaucoup est une Énigme, pas une Star, car il occupe la cuisine sans apporter de marge."
+          },
+          {
+            "question": "À quelle fréquence refaire cette analyse ?",
+            "answer": "Au moins une fois par mois, ou dès que vous ajoutez des plats ou modifiez sensiblement un prix ou une recette. Les variations saisonnières de popularité font changer les plats de catégorie : vous repérez ainsi les évolutions et ajustez leur positionnement."
+          },
+          {
+            "question": "Le coût de main-d'œuvre est-il pris en compte ?",
+            "answer": "Non : ce calculateur n'utilise que le coût matière pour établir la marge. Pour une vision plus complète, ajoutez à votre coût des marchandises une estimation du coût de main-d'œuvre par plat (préparation, cuisson, dressage) avant de calculer la marge."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimisez votre carte avec des données en temps réel",
+        "subtext": "Setu Dine enregistre automatiquement le coût et les ventes de chaque plat : vous pouvez faire de l'ingénierie de menu au quotidien et repérer les plats qui tuent la marge avant qu'ils ne pèsent sur vos résultats.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de TVA",

@@ -1124,7 +1124,68 @@
     },
     {
       "name": "Calculadora de ingeniería de menús",
-      "shortDescription": "Analiza tu carta por beneficio y popularidad para identificar estrellas, vacas, incógnitas y perros."
+      "shortDescription": "Analiza tu carta por beneficio y popularidad para identificar estrellas, vacas, incógnitas y perros.",
+      "seo": {
+        "title": "Calculadora de ingeniería de menú para restaurantes",
+        "description": "Calculadora de ingeniería de menú gratuita. Introduce precios, costes y popularidad para encontrar tus platos rentables y corregir los que te comen el margen.",
+        "keywords": [
+          "calculadora de ingeniería de menú",
+          "análisis del menú de restaurante",
+          "calculadora de beneficio del menú",
+          "optimización del menú de restaurante",
+          "calculadora de margen de contribución",
+          "clasificación del menú",
+          "análisis de rentabilidad de restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Calculadora de ingeniería de menú",
+        "headline": "Calculadora de ingeniería de menú",
+        "subheadline": "Analiza tu menú por beneficio y popularidad: identifica las estrellas que promocionar, las vacas lecheras que destacar y los perros que retirar o a los que cambiar el precio."
+      },
+      "about": {
+        "headline": "Deja de adivinar qué platos generan beneficio",
+        "paragraphs": [
+          "La ingeniería de menú consiste en analizar los platos de tu carta por margen de contribución y popularidad para identificar cuáles son realmente rentables y cuáles se están comiendo tus márgenes.",
+          "Esta herramienta clasifica cada plato en una de cuatro categorías: Estrellas (mucho beneficio, mucha popularidad), que conviene promocionar; Vacas lecheras (mucho beneficio, poca popularidad), que necesitan visibilidad; Enigmas (poco beneficio, mucha popularidad), que necesitan otro precio; y Perros (poco beneficio, poca popularidad), que conviene retirar o reposicionar. Introduce tus platos con sus precios, costes y unidades vendidas: del resto se encarga la calculadora."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas frecuentes sobre ingeniería de menú",
+        "items": [
+          {
+            "question": "¿Qué significa «margen de contribución» en ingeniería de menú?",
+            "answer": "El margen de contribución es el beneficio por plato antes de repartir los costes fijos (alquiler, salarios, etc.). Es lo que aporta cada venta para cubrir los costes fijos y generar beneficio, y se calcula como precio de venta menos coste de la mercancía vendida."
+          },
+          {
+            "question": "¿Cómo se clasifican los platos en ingeniería de menú?",
+            "answer": "Comparando su margen de contribución y su popularidad (unidades vendidas) con la media del menú. Las Estrellas están altas en ambos, las Vacas lecheras tienen buen margen pero poca popularidad, los Enigmas mucha popularidad pero poco margen, y los Perros están bajos en ambos."
+          },
+          {
+            "question": "¿Qué debo hacer con cada clasificación?",
+            "answer": "Estrellas: promociónalas con fuerza y mantén el precio estable. Vacas lecheras: dales visibilidad y combínalas para subir ventas. Enigmas: sube el precio o reduce costes (ya son populares, solo no rentables). Perros: retíralos, reposiciónalos como gancho o mejora el coste de la receta."
+          },
+          {
+            "question": "¿Popularidad significa unidades vendidas o ingresos?",
+            "answer": "En esta calculadora, popularidad significa unidades o comensales servidos, no ingresos. Un plato de poco margen que se vende mucho es un Enigma, no una Estrella, porque ocupa capacidad de cocina sin aportar margen."
+          },
+          {
+            "question": "¿Con qué frecuencia debo repetir este análisis?",
+            "answer": "Al menos una vez al mes, o cada vez que introduzcas platos nuevos o hagas cambios importantes de precio o receta. Los cambios estacionales de popularidad mueven platos entre categorías, así que podrás detectar la dinámica y ajustar su posición."
+          },
+          {
+            "question": "¿Tiene en cuenta el coste de personal?",
+            "answer": "No: esta calculadora usa solo el coste de ingredientes para hallar el margen de contribución. Para una imagen más completa, añade a tu coste de mercancía un coste de personal estimado por plato (preparación, cocción, emplatado) antes de calcular el margen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimiza tu menú con datos en tiempo real",
+        "subtext": "Setu Dine registra automáticamente el coste y las ventas de cada plato, así puedes hacer ingeniería de menú a diario y detectar los platos que matan el beneficio antes de que dañen tus cuentas.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de IVA",

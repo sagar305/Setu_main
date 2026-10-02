@@ -1124,7 +1124,68 @@
     },
     {
       "name": "Calculadora de engenharia de cardápio",
-      "shortDescription": "Analise os itens do cardápio por lucro e popularidade para identificar estrelas, vacas, enigmas e abacaxis."
+      "shortDescription": "Analise os itens do cardápio por lucro e popularidade para identificar estrelas, vacas, enigmas e abacaxis.",
+      "seo": {
+        "title": "Calculadora de engenharia de menu para restaurantes",
+        "description": "Calculadora de engenharia de menu gratuita. Informe preços, custos e popularidade para achar seus pratos lucrativos e corrigir os que consomem sua margem.",
+        "keywords": [
+          "calculadora de engenharia de menu",
+          "análise do menu de restaurante",
+          "calculadora de lucro do menu",
+          "otimização do menu de restaurante",
+          "calculadora de margem de contribuição",
+          "classificação do menu",
+          "análise de lucratividade de restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de engenharia de menu",
+        "headline": "Calculadora de engenharia de menu",
+        "subheadline": "Analise seu menu por lucro e popularidade: identifique as estrelas para promover, as vacas leiteiras para destacar e os cães para remover ou reprecificar."
+      },
+      "about": {
+        "headline": "Pare de adivinhar quais pratos dão lucro",
+        "paragraphs": [
+          "Engenharia de menu é a prática de analisar os pratos do seu menu por margem de contribuição e popularidade, para identificar quais são realmente lucrativos e quais estão consumindo suas margens.",
+          "Esta ferramenta classifica cada prato em uma de quatro categorias: Estrelas (muito lucro, muita popularidade), que devem ser promovidas; Vacas leiteiras (muito lucro, pouca popularidade), que precisam de visibilidade; Enigmas (pouco lucro, muita popularidade), que precisam de novo preço; e Cães (pouco lucro, pouca popularidade), que devem sair ou ser reposicionados. Informe seus pratos com preço, custo e unidades vendidas — o resto a calculadora faz."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre engenharia de menu",
+        "items": [
+          {
+            "question": "O que significa «margem de contribuição» em engenharia de menu?",
+            "answer": "É o lucro por prato antes de ratear os custos fixos (aluguel, salários etc.). É quanto cada venda contribui para cobrir os custos fixos e gerar lucro, calculado como preço de venda menos custo da mercadoria vendida."
+          },
+          {
+            "question": "Como os pratos são classificados?",
+            "answer": "Comparando a margem de contribuição e a popularidade (unidades vendidas) de cada prato com a média do menu. Estrelas são altas nas duas, Vacas leiteiras têm boa margem mas pouca saída, Enigmas vendem muito mas rendem pouco, e Cães são baixos nas duas."
+          },
+          {
+            "question": "O que fazer com cada classificação?",
+            "answer": "Estrelas: promova forte e mantenha o preço estável. Vacas leiteiras: aumente visibilidade e combos para elevar as vendas. Enigmas: suba o preço ou reduza custos (já são populares, só não são lucrativos). Cães: remova, reposicione como chamariz, ou melhore o custo da receita."
+          },
+          {
+            "question": "Popularidade significa unidades vendidas ou receita?",
+            "answer": "Nesta calculadora, popularidade significa unidades ou couverts vendidos, não receita. Um prato de margem baixa que vende muito é um Enigma, não uma Estrela, porque ocupa a capacidade da cozinha sem entregar margem."
+          },
+          {
+            "question": "Com que frequência devo repetir essa análise?",
+            "answer": "Pelo menos uma vez por mês, ou sempre que incluir pratos novos e fizer mudanças relevantes de preço ou receita. Mudanças sazonais de popularidade movem pratos entre categorias, então você percebe a dinâmica e ajusta o posicionamento."
+          },
+          {
+            "question": "Isso considera o custo de mão de obra?",
+            "answer": "Não — esta calculadora usa apenas o custo dos ingredientes para achar a margem de contribuição. Para um retrato mais completo, acrescente ao custo da mercadoria uma estimativa de mão de obra por prato (preparo, cocção, montagem) antes de calcular a margem."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Otimize seu menu com dados em tempo real",
+        "subtext": "O Setu Dine registra automaticamente o custo e as vendas de cada prato, então você faz engenharia de menu diariamente e identifica os pratos que matam o lucro antes que eles afetem seu resultado.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de IVA",

@@ -1124,7 +1124,68 @@
     },
     {
       "name": "Kalkulator menu engineering",
-      "shortDescription": "Analisis menu berdasarkan laba dan popularitas untuk menemukan star, cash cow, puzzle, dan dog."
+      "shortDescription": "Analisis menu berdasarkan laba dan popularitas untuk menemukan star, cash cow, puzzle, dan dog.",
+      "seo": {
+        "title": "Kalkulator Menu Engineering untuk Restoran",
+        "description": "Kalkulator menu engineering gratis untuk restoran. Masukkan harga, biaya, dan popularitas untuk menemukan menu paling untung dan membenahi yang merugi.",
+        "keywords": [
+          "kalkulator menu engineering",
+          "analisis menu restoran",
+          "kalkulator laba menu",
+          "optimasi menu restoran",
+          "kalkulator margin kontribusi",
+          "klasifikasi menu",
+          "analisis profitabilitas restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Menu Engineering",
+        "headline": "Kalkulator Menu Engineering",
+        "subheadline": "Analisis menu Anda berdasarkan laba dan popularitas — kenali Star yang perlu dipromosikan, Cash Cow yang perlu ditonjolkan, dan Dog yang perlu dihapus atau diubah harganya."
+      },
+      "about": {
+        "headline": "Berhenti menebak menu mana yang menghasilkan laba",
+        "paragraphs": [
+          "Menu engineering adalah praktik menganalisis menu Anda berdasarkan margin kontribusi dan popularitas, untuk mengetahui mana yang benar-benar menguntungkan dan mana yang menggerus margin Anda.",
+          "Alat ini menggolongkan setiap menu ke salah satu dari empat kategori: Star (laba tinggi, popularitas tinggi) yang sebaiknya dipromosikan, Cash Cow (laba tinggi, popularitas rendah) yang butuh keterlihatan, Puzzle (laba rendah, popularitas tinggi) yang perlu diubah harganya, dan Dog (laba rendah, popularitas rendah) yang sebaiknya dihapus atau diposisikan ulang. Masukkan menu Anda beserta harga, biaya, dan jumlah terjual — sisanya ditangani kalkulator."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator menu engineering",
+        "items": [
+          {
+            "question": "Apa arti 'margin kontribusi' dalam menu engineering?",
+            "answer": "Margin kontribusi adalah laba per menu sebelum membebankan biaya tetap (sewa, gaji, dan lain-lain). Itulah jumlah yang disumbangkan setiap penjualan untuk menutup biaya tetap dan menghasilkan laba, dihitung sebagai harga jual dikurangi harga pokok penjualan."
+          },
+          {
+            "question": "Bagaimana menu digolongkan dalam menu engineering?",
+            "answer": "Dengan membandingkan margin kontribusi dan popularitas (jumlah terjual) setiap menu terhadap rata-rata menu Anda. Star tinggi pada keduanya, Cash Cow bermargin tinggi tapi kurang laku, Puzzle laku tapi bermargin rendah, dan Dog rendah pada keduanya."
+          },
+          {
+            "question": "Apa yang perlu dilakukan untuk tiap golongan?",
+            "answer": "Star — promosikan kuat, jaga harga tetap stabil. Cash Cow — tingkatkan keterlihatan dan paket bundling untuk mendongkrak penjualan. Puzzle — naikkan harga atau turunkan biaya (sudah laku, hanya belum menguntungkan). Dog — hapus, posisikan ulang sebagai penarik pelanggan, atau perbaiki biaya resepnya."
+          },
+          {
+            "question": "Popularitas berarti jumlah terjual atau pendapatan?",
+            "answer": "Dalam kalkulator ini, popularitas berarti jumlah porsi atau tamu terlayani, bukan pendapatan. Menu bermargin rendah yang terjual banyak adalah Puzzle, bukan Star, karena ia menyita kapasitas dapur tanpa memberi margin."
+          },
+          {
+            "question": "Seberapa sering analisis ini perlu diulang?",
+            "answer": "Setidaknya sebulan sekali, atau setiap kali Anda menambah menu baru dan mengubah harga atau resep secara berarti. Pergeseran popularitas musiman sering memindahkan menu antar kategori, sehingga Anda bisa melihat dinamikanya dan menyesuaikan penempatan."
+          },
+          {
+            "question": "Apakah ini memperhitungkan biaya tenaga kerja?",
+            "answer": "Tidak — kalkulator ini hanya memakai biaya bahan untuk mencari margin kontribusi. Untuk gambaran laba yang lebih utuh, tambahkan perkiraan biaya tenaga kerja per menu (persiapan, memasak, penyajian) ke harga pokok sebelum menghitung margin."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimalkan menu dengan data waktu nyata",
+        "subtext": "Setu Dine mencatat biaya dan penjualan setiap menu secara otomatis, jadi Anda bisa menjalankan menu engineering setiap hari dan menemukan menu pembunuh laba sebelum ia memukul hasil usaha Anda.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator PPN",

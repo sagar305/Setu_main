@@ -1124,7 +1124,68 @@
     },
     {
       "name": "Menu-Engineering-Rechner",
-      "shortDescription": "Analysieren Sie Gerichte nach Gewinn und Beliebtheit: Stars, Cash Cows, Puzzles und Poor Dogs."
+      "shortDescription": "Analysieren Sie Gerichte nach Gewinn und Beliebtheit: Stars, Cash Cows, Puzzles und Poor Dogs.",
+      "seo": {
+        "title": "Menu-Engineering-Rechner für Speisekarten",
+        "description": "Kostenloser Menu-Engineering-Rechner für Restaurants. Preise, Kosten und Beliebtheit eingeben, Gewinnbringer erkennen und margenschwache Gerichte korrigieren.",
+        "keywords": [
+          "Menu Engineering Rechner",
+          "Speisekarten Analyse Restaurant",
+          "Rechner Gewinn Speisekarte",
+          "Speisekarte optimieren Restaurant",
+          "Deckungsbeitrag Rechner",
+          "Klassifizierung der Speisekarte",
+          "Rentabilitätsanalyse Restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Menu-Engineering-Rechner",
+        "headline": "Menu-Engineering-Rechner",
+        "subheadline": "Analysieren Sie Ihre Karte nach Gewinn und Beliebtheit — erkennen Sie Stars zum Bewerben, Cash Cows zum Hervorheben und Dogs zum Streichen oder Neubepreisen."
+      },
+      "about": {
+        "headline": "Hören Sie auf zu raten, welche Gerichte Gewinn bringen",
+        "paragraphs": [
+          "Menu Engineering heißt, die Gerichte Ihrer Karte nach Deckungsbeitrag und Beliebtheit zu analysieren, um zu erkennen, welche wirklich profitabel sind und welche Ihre Margen auffressen.",
+          "Dieses Tool ordnet jedes Gericht einer von vier Kategorien zu: Stars (hoher Gewinn, hohe Beliebtheit), die beworben werden sollten; Cash Cows (hoher Gewinn, geringe Beliebtheit), die Sichtbarkeit brauchen; Puzzles (geringer Gewinn, hohe Beliebtheit), deren Preis angepasst werden muss; und Dogs (geringer Gewinn, geringe Beliebtheit), die gestrichen oder neu positioniert werden sollten. Geben Sie Ihre Gerichte mit Preis, Kosten und verkauften Stück ein — den Rest übernimmt der Rechner."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Menu Engineering",
+        "items": [
+          {
+            "question": "Was bedeutet „Deckungsbeitrag“ im Menu Engineering?",
+            "answer": "Der Deckungsbeitrag ist der Gewinn pro Gericht, bevor feste Gemeinkosten (Miete, Gehälter usw.) verteilt werden. Er ist der Betrag, den jeder Verkauf zur Deckung der Fixkosten und zum Gewinn beiträgt: Verkaufspreis minus Wareneinsatz."
+          },
+          {
+            "question": "Wie werden Gerichte im Menu Engineering eingeordnet?",
+            "answer": "Deckungsbeitrag und Beliebtheit (verkaufte Stück) jedes Gerichts werden mit dem Durchschnitt der Karte verglichen. Stars sind bei beidem hoch, Cash Cows haben hohe Marge bei geringer Beliebtheit, Puzzles hohe Beliebtheit bei geringer Marge, Dogs sind bei beidem niedrig."
+          },
+          {
+            "question": "Was tue ich mit jeder Kategorie?",
+            "answer": "Stars — stark bewerben, Preis stabil halten. Cash Cows — Sichtbarkeit und Kombiangebote erhöhen, um den Absatz zu steigern. Puzzles — Preis erhöhen oder Kosten senken (sie sind schon beliebt, nur nicht profitabel). Dogs — streichen, als Lockangebot neu positionieren oder die Rezeptkosten verbessern."
+          },
+          {
+            "question": "Meint Beliebtheit verkaufte Stück oder Umsatz?",
+            "answer": "In diesem Rechner meint Beliebtheit verkaufte Stück beziehungsweise Gedecke, nicht Umsatz. Ein Gericht mit geringer Marge, das sich häufig verkauft, ist ein Puzzle und kein Star, weil es Küchenkapazität bindet, ohne Marge zu liefern."
+          },
+          {
+            "question": "Wie oft sollte ich die Analyse wiederholen?",
+            "answer": "Mindestens monatlich oder immer dann, wenn Sie neue Gerichte aufnehmen oder Preise beziehungsweise Rezepte deutlich ändern. Saisonale Verschiebungen der Beliebtheit lassen Gerichte die Kategorie wechseln, sodass Sie Veränderungen erkennen und die Platzierung anpassen können."
+          },
+          {
+            "question": "Berücksichtigt das die Lohnkosten?",
+            "answer": "Nein — dieser Rechner nutzt für den Deckungsbeitrag nur die Zutatenkosten. Für ein vollständigeres Bild rechnen Sie je Gericht geschätzte Lohnkosten (Vorbereitung, Garzeit, Anrichten) in Ihren Wareneinsatz ein, bevor Sie die Marge berechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Karte mit Echtzeitdaten optimieren",
+        "subtext": "Setu Dine erfasst Kosten und Verkäufe jedes Gerichts automatisch, sodass Sie Menu Engineering täglich betreiben und margenschädliche Gerichte erkennen, bevor sie Ihr Ergebnis belasten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Mehrwertsteuer-Rechner",
