@@ -1253,7 +1253,58 @@
     },
     {
       "name": "Kalkulator selisih harga pembelian",
-      "shortDescription": "Bandingkan harga beli aktual dan standar, lalu lihat total selisihnya seketika."
+      "shortDescription": "Bandingkan harga beli aktual dan standar, lalu lihat total selisihnya seketika.",
+      "seo": {
+        "title": "Kalkulator Selisih Harga Beli (PPV)",
+        "description": "Kalkulator PPV gratis. Bandingkan harga yang benar-benar dibayar dengan harga standar atau anggaran untuk melihat selisih per unit, %, dan totalnya.",
+        "keywords": [
+          "kalkulator selisih harga beli",
+          "kalkulator PPV",
+          "rumus selisih harga",
+          "selisih pengadaan",
+          "selisih biaya standar"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator PPV",
+        "headline": "Kalkulator Selisih Harga Beli",
+        "subheadline": "Harga standar versus harga aktual × jumlah — lihat selisih per unit, dalam persen, dan totalnya, dengan tanda menguntungkan atau merugikan."
+      },
+      "about": {
+        "headline": "Tangkap kenaikan biaya yang diam-diam sebelum menggerus margin",
+        "paragraphs": [
+          "Selisih harga beli mengukur jarak antara harga yang Anda rencanakan untuk bahan atau stok dan harga yang benar-benar Anda bayar. Pemasok menaikkan tarif tanpa pemberitahuan, ukuran pesanan berubah, harga pasar bergerak — PPV adalah cara tim pembelian menangkapnya lebih awal dan mengukur dampaknya.",
+          "Selisih positif (merugikan) berarti pembelian lebih mahal daripada standar — margin sudah bocor di pintu masuk. Selisih negatif (menguntungkan) berarti Anda lebih baik dari rencana. Pantau per barang dan per pemasok, lalu bawa selisih yang terus berulang ke penetapan harga atau negosiasi ulang."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator PPV",
+        "items": [
+          {
+            "question": "Bagaimana selisih harga beli dihitung?",
+            "answer": "PPV = (harga aktual − harga standar) × jumlah yang dibeli. Membeli 500 unit di ₹110 terhadap standar ₹100 menghasilkan selisih merugikan ₹5.000."
+          },
+          {
+            "question": "Apa itu harga standar?",
+            "answer": "Patokan yang Anda pakai saat merencanakan — tarif anggaran, harga kontrak hasil negosiasi, atau biaya rata-rata periode lalu. Konsistensi lebih penting daripada pilihan mana yang Anda pakai."
+          },
+          {
+            "question": "Apakah selisih menguntungkan selalu bagus?",
+            "answer": "Biasanya ya, tapi periksa sebabnya. Harga lebih murah karena mutu turun, pesanan borongan lebih besar dari kebutuhan, atau jadwal kirim yang terlewat bisa jadi lebih mahal di belakang daripada penghematannya."
+          },
+          {
+            "question": "Seberapa sering saya perlu meninjau PPV?",
+            "answer": "Bulanan cocok untuk sebagian besar usaha kecil — cukup sering untuk menangkap kenaikan pemasok sebelum menumpuk, tanpa tenggelam dalam detail. Mulai dari barang dengan belanja terbesar (alat analisis ABC kami membantu mengurutkannya)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator rasio keuangan",

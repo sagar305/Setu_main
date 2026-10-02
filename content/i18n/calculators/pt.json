@@ -1253,7 +1253,58 @@
     },
     {
       "name": "Calculadora de variação de preço de compra",
-      "shortDescription": "Compare preços de compra reais e padrão e veja a variação total na hora."
+      "shortDescription": "Compare preços de compra reais e padrão e veja a variação total na hora.",
+      "seo": {
+        "title": "Calculadora de variação do preço de compra (PPV)",
+        "description": "Calculadora PPV gratuita. Compare os preços realmente pagos com os preços padrão ou orçados e veja a variação por unidade, em % e a variação total de compra.",
+        "keywords": [
+          "calculadora de variação do preço de compra",
+          "calculadora PPV",
+          "fórmula de variação de preço",
+          "variação em compras",
+          "variação de custo padrão"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora PPV",
+        "headline": "Calculadora de variação do preço de compra",
+        "subheadline": "Preço padrão versus preço real × quantidade: veja a variação por unidade, em porcentagem e total, marcada como favorável ou desfavorável."
+      },
+      "about": {
+        "headline": "Pegue o aumento silencioso de custo antes que ele coma sua margem",
+        "paragraphs": [
+          "A variação do preço de compra mede a diferença entre o que você planejou pagar por materiais ou estoque e o que de fato pagou. Fornecedores sobem preços sem avisar, o tamanho dos pedidos muda, o mercado oscila — o PPV é como as equipes de compras percebem isso cedo e medem o impacto.",
+          "Uma variação positiva (desfavorável) significa que as compras saíram mais caras que o padrão: a margem já vaza na entrada. Uma variação negativa (favorável) significa que você superou o plano. Acompanhe por item e por fornecedor, e leve as variações persistentes para o seu preço de venda ou para uma renegociação."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre a calculadora PPV",
+        "items": [
+          {
+            "question": "Como se calcula a variação do preço de compra?",
+            "answer": "PPV = (preço real − preço padrão) × quantidade comprada. Comprar 500 unidades a ₹110 contra um padrão de ₹100 gera variação desfavorável de ₹5.000."
+          },
+          {
+            "question": "O que é o preço padrão?",
+            "answer": "A referência que você usou para planejar: uma taxa orçada, um preço de contrato negociado ou o custo médio do período anterior. A consistência importa mais do que qual deles você escolhe."
+          },
+          {
+            "question": "Variação favorável é sempre boa?",
+            "answer": "Geralmente sim, mas confira o motivo. Preço menor por qualidade inferior, pedidos no atacado maiores do que o necessário ou prazos de entrega perdidos podem custar depois mais do que a variação economiza."
+          },
+          {
+            "question": "Com que frequência devo revisar o PPV?",
+            "answer": "Para a maioria dos pequenos negócios, uma vez por mês funciona — frequente o bastante para pegar aumentos de fornecedores antes que se acumulem, sem afogar você em ruído. Comece pelos itens de maior gasto (nossa ferramenta de análise ABC ajuda a ordená-los)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de índices financeiros",

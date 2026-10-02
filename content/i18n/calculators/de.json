@@ -1253,7 +1253,58 @@
     },
     {
       "name": "Rechner für Einkaufspreisabweichung",
-      "shortDescription": "Vergleichen Sie tatsächliche und Standard-Einkaufspreise und sehen Sie die Abweichung sofort."
+      "shortDescription": "Vergleichen Sie tatsächliche und Standard-Einkaufspreise und sehen Sie die Abweichung sofort.",
+      "seo": {
+        "title": "Rechner für Einkaufspreisabweichung (PPV)",
+        "description": "Kostenloser PPV-Rechner. Vergleichen Sie tatsächlich gezahlte Preise mit Standard- oder Planpreisen und erhalten Sie Abweichung je Stück, in Prozent und gesamt.",
+        "keywords": [
+          "Einkaufspreisabweichung Rechner",
+          "PPV Rechner",
+          "Formel Preisabweichung",
+          "Abweichung im Einkauf",
+          "Standardkostenabweichung"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — PPV-Rechner",
+        "headline": "Rechner für Einkaufspreisabweichung",
+        "subheadline": "Standardpreis gegen tatsächlicher Preis × Menge — sehen Sie Abweichung je Stück, in Prozent und gesamt, gekennzeichnet als günstig oder ungünstig."
+      },
+      "about": {
+        "headline": "Kostenschleichgang erkennen, bevor er die Marge frisst",
+        "paragraphs": [
+          "Die Einkaufspreisabweichung misst den Abstand zwischen dem, was Sie für Material oder Ware einplanten, und dem, was Sie tatsächlich bezahlt haben. Lieferanten erhöhen Preise still, Bestellmengen ändern sich, Marktpreise bewegen sich — mit PPV erkennen Einkaufsteams das früh und beziffern die Wirkung.",
+          "Eine positive (ungünstige) Abweichung heißt: der Einkauf war teurer als der Standard — die Marge läuft schon am Eingang aus. Eine negative (günstige) Abweichung heißt: Sie waren besser als geplant. Verfolgen Sie sie je Artikel und je Lieferant und lassen Sie dauerhafte Abweichungen in Ihre Preise oder in Nachverhandlungen einfließen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum PPV-Rechner",
+        "items": [
+          {
+            "question": "Wie wird die Einkaufspreisabweichung berechnet?",
+            "answer": "PPV = (tatsächlicher Preis − Standardpreis) × gekaufte Menge. 500 Stück zu ₹110 gegen einen Standard von ₹100 ergeben eine ungünstige Abweichung von ₹5.000."
+          },
+          {
+            "question": "Was ist der Standardpreis?",
+            "answer": "Der Maßstab, mit dem Sie geplant haben — ein Planpreis, ein verhandelter Vertragspreis oder die Durchschnittskosten der Vorperiode. Wichtiger als die Wahl ist, dauerhaft beim gleichen Maßstab zu bleiben."
+          },
+          {
+            "question": "Ist eine günstige Abweichung immer gut?",
+            "answer": "Meist ja, prüfen Sie aber den Grund. Ein niedrigerer Preis durch schlechtere Qualität, zu große Großbestellungen oder verpasste Liefertermine können später mehr kosten, als die Abweichung einspart."
+          },
+          {
+            "question": "Wie oft sollte ich PPV prüfen?",
+            "answer": "Für die meisten kleinen Betriebe reicht monatlich — oft genug, um Lieferantenerhöhungen zu erkennen, bevor sie sich aufsummieren, ohne im Rauschen zu versinken. Beginnen Sie bei den Artikeln mit dem höchsten Einkaufsvolumen (unser ABC-Analyse-Tool hilft beim Sortieren)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Finanzkennzahlen-Rechner",

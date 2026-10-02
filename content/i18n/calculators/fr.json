@@ -1253,7 +1253,58 @@
     },
     {
       "name": "Calculateur d'écart sur prix d'achat",
-      "shortDescription": "Comparez prix d'achat réels et standards et voyez l'écart total instantanément."
+      "shortDescription": "Comparez prix d'achat réels et standards et voyez l'écart total instantanément.",
+      "seo": {
+        "title": "Calculateur d'écart sur prix d'achat (PPV)",
+        "description": "Calculateur PPV gratuit. Comparez les prix réellement payés aux prix standards ou budgétés et obtenez l'écart par unité, en pourcentage et au total.",
+        "keywords": [
+          "calculateur d'écart sur prix d'achat",
+          "calculateur PPV",
+          "formule d'écart sur prix",
+          "écart sur achats",
+          "écart sur coût standard"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur PPV",
+        "headline": "Calculateur d'écart sur prix d'achat",
+        "subheadline": "Prix standard contre prix réel × quantité : visualisez l'écart par unité, en pourcentage et au total, signalé favorable ou défavorable."
+      },
+      "about": {
+        "headline": "Repérez la dérive des coûts avant qu'elle ne mange votre marge",
+        "paragraphs": [
+          "L'écart sur prix d'achat mesure la différence entre ce que vous aviez prévu de payer pour vos matières ou vos stocks et ce que vous avez réellement payé. Les fournisseurs augmentent leurs tarifs discrètement, les volumes de commande changent, les prix du marché bougent : le PPV, c'est ainsi que les acheteurs le repèrent tôt et en chiffrent l'impact.",
+          "Un écart positif (défavorable) signifie que les achats ont coûté plus que le standard : la marge fuit dès l'entrée. Un écart négatif (favorable) signifie que vous avez fait mieux que prévu. Suivez-le par article et par fournisseur, et reportez les écarts persistants dans vos prix ou dans une renégociation."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le calculateur PPV",
+        "items": [
+          {
+            "question": "Comment calcule-t-on l'écart sur prix d'achat ?",
+            "answer": "PPV = (prix réel − prix standard) × quantité achetée. Acheter 500 unités à ₹110 face à un standard de ₹100 donne un écart défavorable de ₹5 000."
+          },
+          {
+            "question": "Qu'est-ce que le prix standard ?",
+            "answer": "La référence qui a servi à votre plan : un tarif budgété, un prix contractuel négocié ou le coût moyen de la période précédente. La constance compte plus que le choix lui-même."
+          },
+          {
+            "question": "Un écart favorable est-il toujours une bonne nouvelle ?",
+            "answer": "En général oui, mais vérifiez pourquoi. Un prix plus bas lié à une qualité moindre, des commandes en gros surdimensionnées ou des délais de livraison manqués peuvent coûter plus en aval que l'écart ne fait gagner."
+          },
+          {
+            "question": "À quelle fréquence revoir le PPV ?",
+            "answer": "Un suivi mensuel suffit à la plupart des petites entreprises : assez fréquent pour repérer les hausses fournisseurs avant qu'elles ne s'accumulent, sans se noyer dans le bruit. Commencez par les articles les plus coûteux (notre outil d'analyse ABC aide à les classer)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de ratios financiers",
