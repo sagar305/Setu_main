@@ -72,9 +72,9 @@ const PAGE_PATHS_FOR_ITEMS = { calculators: "/calculators", tools: "/tools" };
  *
  * The listing needs a name and a one-line description; the item's page needs
  * the copy a search engine indexes. Requiring the title, the description and
- * the headline — plus the explainer and the FAQ wherever English has them —
- * keeps a half-translated page from being published and then competing with
- * the English one it was meant to serve alongside.
+ * the headline — plus the explainer, the FAQ and the body blocks wherever
+ * English has them — keeps a half-translated page from being published and
+ * then competing with the English one it was meant to serve alongside.
  */
 function itemIsTranslated(english, translated) {
   if (!translated) return false;
@@ -93,6 +93,11 @@ function itemIsTranslated(english, translated) {
     english.faq &&
     !(translated.faq?.items?.length === english.faq.items.length)
   )
+    return false;
+  // A few tool pages carry blocks of prose under the tool. Publishing with
+  // those untranslated would leave a page whose hero is in the reader's
+  // language and whose explainer is not, which reads worse than English alone.
+  if (english.body && !(translated.body?.length === english.body.length))
     return false;
 
   return true;

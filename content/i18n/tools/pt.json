@@ -213,7 +213,41 @@
     },
     {
       "name": "Análise ABC",
-      "shortDescription": "Classifique o estoque em A, B e C pelo valor de consumo anual — a regra 80/15/5."
+      "shortDescription": "Classifique o estoque em A, B e C pelo valor de consumo anual — a regra 80/15/5.",
+      "seo": {
+        "title": "Calculadora de análise ABC gratuita",
+        "description": "Classifique o estoque em classes A, B e C pelo valor de consumo anual: a regra 80/15/5, calculada sozinha. Exportação em CSV. Grátis e sem cadastro.",
+        "keywords": [
+          "análise ABC",
+          "classificação de estoque",
+          "método ABC de estoque",
+          "análise de Pareto de estoque",
+          "controle de estoque ABC"
+        ],
+        "ogTitle": "Análise ABC",
+        "ogDescription": "Classifique o estoque em classes A, B e C pelo valor de consumo anual: a regra 80/15/5, calculada sozinha. Exportação em CSV. Grátis e sem cadastro."
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Análise ABC",
+        "headline": "Análise ABC",
+        "subheadline": "Nem todo estoque merece a mesma atenção: ordene os itens por valor anual e controle a classe A de perto."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é análise ABC?",
+            "answer": "Um método de estoque baseado no princípio de Pareto: os itens de classe A são os poucos decisivos (~80% do valor de consumo), os B o grupo intermediário (~15%) e os C os muitos irrelevantes (~5%). Cada classe recebe o nível de controle correspondente."
+          },
+          {
+            "question": "Como os itens são classificados?",
+            "answer": "Ordene os itens pelo valor de consumo anual (quantidade anual × custo unitário), tome o percentual acumulado do valor total e corte em 80% (A), 95% (B) e além (C) — exatamente o que esta ferramenta automatiza."
+          },
+          {
+            "question": "O que fazer com cada classe?",
+            "answer": "A: controle rígido — contagens frequentes, pontos de pedido bem definidos, preços negociados. B: moderado, revisão periódica. C: regras simples e pedidos no atacado. Use junto da nossa calculadora de ponto de pedido para os itens A."
+          }
+        ]
+      }
     },
     {
       "name": "Comparação de fornecedores",

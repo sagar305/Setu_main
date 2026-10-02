@@ -213,7 +213,41 @@
     },
     {
       "name": "Análisis ABC",
-      "shortDescription": "Clasifica el inventario en A, B y C por valor de consumo anual: la regla 80/15/5."
+      "shortDescription": "Clasifica el inventario en A, B y C por valor de consumo anual: la regla 80/15/5.",
+      "seo": {
+        "title": "Calculadora de análisis ABC gratuita",
+        "description": "Clasifica el inventario en clases A, B y C por valor de consumo anual: la regla 80/15/5, calculada sola. Exportación a CSV. Gratis y sin registro.",
+        "keywords": [
+          "análisis ABC",
+          "clasificación de inventario",
+          "método ABC de inventario",
+          "análisis de inventario de Pareto",
+          "control de stock ABC"
+        ],
+        "ogTitle": "Análisis ABC",
+        "ogDescription": "Clasifica el inventario en clases A, B y C por valor de consumo anual: la regla 80/15/5, calculada sola. Exportación a CSV. Gratis y sin registro."
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Análisis ABC",
+        "headline": "Análisis ABC",
+        "subheadline": "No todo el stock merece la misma atención: ordena los artículos por valor anual y controla la clase A de cerca."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es el análisis ABC?",
+            "answer": "Un método de inventario basado en el principio de Pareto: los artículos de clase A son los pocos decisivos (~80% del valor de consumo), los B el grupo intermedio (~15%) y los C los muchos irrelevantes (~5%). Cada clase recibe el nivel de control que le corresponde."
+          },
+          {
+            "question": "¿Cómo se clasifican los artículos?",
+            "answer": "Ordena los artículos por valor de consumo anual (cantidad anual × coste unitario), toma el porcentaje acumulado del valor total y corta en el 80% (A), el 95% (B) y más allá (C): exactamente lo que automatiza esta herramienta."
+          },
+          {
+            "question": "¿Qué hago con cada clase?",
+            "answer": "A: control estricto — recuentos frecuentes, puntos de pedido cuidados, precios negociados. B: moderado, revisión periódica. C: reglas simples y pedidos al por mayor. Combínalo con nuestra calculadora de punto de pedido para los artículos A."
+          }
+        ]
+      }
     },
     {
       "name": "Comparador de proveedores",

@@ -213,7 +213,41 @@
     },
     {
       "name": "Analyse ABC",
-      "shortDescription": "Classez le stock en A, B et C selon la valeur de consommation annuelle : la règle 80/15/5."
+      "shortDescription": "Classez le stock en A, B et C selon la valeur de consommation annuelle : la règle 80/15/5.",
+      "seo": {
+        "title": "Calculateur d'analyse ABC gratuit",
+        "description": "Classez votre stock en catégories A, B et C selon la valeur de consommation annuelle : la règle 80/15/5, calculée seule. Export CSV. Gratuit, sans inscription.",
+        "keywords": [
+          "analyse ABC",
+          "classification des stocks",
+          "méthode ABC des stocks",
+          "analyse de Pareto des stocks",
+          "gestion de stock ABC"
+        ],
+        "ogTitle": "Analyse ABC",
+        "ogDescription": "Classez votre stock en catégories A, B et C selon la valeur de consommation annuelle : la règle 80/15/5, calculée seule. Export CSV. Gratuit, sans inscription."
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Analyse ABC",
+        "headline": "Analyse ABC",
+        "subheadline": "Tout le stock ne mérite pas la même attention : classez les articles par valeur annuelle et tenez la catégorie A de près."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce que l'analyse ABC ?",
+            "answer": "Une méthode de gestion des stocks fondée sur le principe de Pareto : la catégorie A regroupe les quelques articles décisifs (~80% de la valeur de consommation), la B le milieu (~15%), la C la multitude d'articles mineurs (~5%). Chaque catégorie reçoit le niveau de contrôle correspondant."
+          },
+          {
+            "question": "Comment les articles sont-ils classés ?",
+            "answer": "Classez les articles par valeur de consommation annuelle (quantité annuelle × coût unitaire), prenez le pourcentage cumulé de la valeur totale, et coupez à 80% (A), 95% (B) et au-delà (C) — précisément ce que cet outil automatise."
+          },
+          {
+            "question": "Que faire de chaque catégorie ?",
+            "answer": "A : contrôle serré — inventaires fréquents, points de commande soignés, prix négociés. B : modéré, revue périodique. C : règles simples et commandes groupées. À utiliser avec notre calculateur de point de commande pour les articles A."
+          }
+        ]
+      }
     },
     {
       "name": "Comparateur de fournisseurs",

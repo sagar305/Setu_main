@@ -213,7 +213,41 @@
     },
     {
       "name": "ABC-Analyse",
-      "shortDescription": "Bestand nach Jahresverbrauchswert in die Klassen A, B und C einteilen — die 80/15/5-Regel."
+      "shortDescription": "Bestand nach Jahresverbrauchswert in die Klassen A, B und C einteilen — die 80/15/5-Regel.",
+      "seo": {
+        "title": "Kostenloser ABC-Analyse-Rechner",
+        "description": "Teilen Sie Ihr Lager nach dem Jahresverbrauchswert in die Klassen A, B und C — die 80/15/5-Regel, automatisch berechnet. CSV-Export. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "ABC-Analyse",
+          "Lagerklassifizierung",
+          "ABC-Methode Lager",
+          "Pareto-Analyse Lager",
+          "Bestandssteuerung ABC"
+        ],
+        "ogTitle": "ABC-Analyse",
+        "ogDescription": "Teilen Sie Ihr Lager nach dem Jahresverbrauchswert in die Klassen A, B und C — die 80/15/5-Regel, automatisch berechnet. CSV-Export. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — ABC-Analyse",
+        "headline": "ABC-Analyse",
+        "subheadline": "Nicht jeder Bestand verdient gleich viel Aufmerksamkeit — sortieren Sie die Artikel nach Jahreswert und führen Sie Klasse A streng."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist die ABC-Analyse?",
+            "answer": "Ein Lagerverfahren nach dem Pareto-Prinzip: Klasse A sind die wenigen entscheidenden Artikel (~80% des Verbrauchswerts), B das Mittelfeld (~15%), C die vielen unbedeutenden (~5%). Jede Klasse erhält den dazu passenden Grad an Kontrolle."
+          },
+          {
+            "question": "Wie werden Artikel eingeordnet?",
+            "answer": "Sortieren Sie die Artikel nach Jahresverbrauchswert (Jahresmenge × Stückkosten), nehmen Sie den kumulierten Anteil am Gesamtwert und schneiden bei 80% (A), 95% (B) und darüber (C) — genau das automatisiert dieses Tool."
+          },
+          {
+            "question": "Was tue ich mit jeder Klasse?",
+            "answer": "A: strenge Kontrolle — häufige Zählungen, sorgfältige Meldebestände, verhandelte Preise. B: mittel, regelmäßige Durchsicht. C: einfache Regeln und Sammelbestellungen. Für die A-Artikel zusammen mit unserem Rechner für den Meldebestand nutzen."
+          }
+        ]
+      }
     },
     {
       "name": "Lieferantenvergleich",

@@ -213,7 +213,41 @@
     },
     {
       "name": "Analisis ABC",
-      "shortDescription": "Kelompokkan persediaan ke kelas A, B, dan C berdasarkan nilai pemakaian tahunan — aturan 80/15/5."
+      "shortDescription": "Kelompokkan persediaan ke kelas A, B, dan C berdasarkan nilai pemakaian tahunan — aturan 80/15/5.",
+      "seo": {
+        "title": "Kalkulator Analisis ABC Gratis",
+        "description": "Kelompokkan stok ke kelas A, B, dan C menurut nilai pemakaian tahunan — aturan 80/15/5, dihitung sendiri. Ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "analisis ABC",
+          "klasifikasi persediaan",
+          "metode ABC persediaan",
+          "analisis Pareto persediaan",
+          "pengendalian stok ABC"
+        ],
+        "ogTitle": "Analisis ABC",
+        "ogDescription": "Kelompokkan stok ke kelas A, B, dan C menurut nilai pemakaian tahunan — aturan 80/15/5, dihitung sendiri. Ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Analisis ABC",
+        "headline": "Analisis ABC",
+        "subheadline": "Tidak semua stok perlu perhatian yang sama — urutkan barang menurut nilai tahunannya dan kelola kelas A dengan ketat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu analisis ABC?",
+            "answer": "Metode persediaan berdasarkan prinsip Pareto: barang kelas A adalah yang sedikit tapi penting (~80% dari nilai pemakaian), B yang menengah (~15%), dan C yang banyak tapi kecil nilainya (~5%). Tiap kelas mendapat tingkat pengendalian yang sepadan."
+          },
+          {
+            "question": "Bagaimana barang digolongkan?",
+            "answer": "Urutkan barang menurut nilai pemakaian tahunan (jumlah setahun × biaya satuan), ambil persentase kumulatif dari nilai total, lalu potong di 80% (A), 95% (B), dan selebihnya (C) — persis itulah yang dikerjakan alat ini."
+          },
+          {
+            "question": "Apa yang perlu dilakukan untuk tiap kelas?",
+            "answer": "A: pengendalian ketat — hitung stok sering, titik pesan ulang yang cermat, harga hasil negosiasi. B: sedang, tinjau berkala. C: aturan sederhana dan pesanan borongan. Pakai bersama kalkulator titik pesan ulang kami untuk barang kelas A."
+          }
+        ]
+      }
     },
     {
       "name": "Perbandingan pemasok",
