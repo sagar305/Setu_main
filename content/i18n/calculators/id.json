@@ -211,7 +211,57 @@
     },
     {
       "name": "Kalkulator persentase biaya bahan makanan",
-      "shortDescription": "Cek apakah biaya bahan sebuah menu masih wajar dibanding harga jualnya."
+      "shortDescription": "Cek apakah biaya bahan sebuah menu masih wajar dibanding harga jualnya.",
+      "seo": {
+        "title": "Kalkulator Persentase Food Cost Restoran — Gratis | Setu",
+        "description": "Kalkulator persentase food cost gratis untuk restoran. Masukkan biaya bahan dan harga menu untuk melihat persentase food cost dan laba per porsi.",
+        "keywords": [
+          "kalkulator food cost",
+          "persentase food cost",
+          "food cost restoran",
+          "kalkulator harga menu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Food Cost",
+        "headline": "Kalkulator Persentase Food Cost",
+        "subheadline": "Masukkan biaya bahan sebuah menu dan harga jualnya untuk melihat persentase food cost dan laba per porsi."
+      },
+      "about": {
+        "headline": "Satu angka yang harus dilewati setiap harga menu",
+        "paragraphs": [
+          "Persentase food cost adalah bagian dari harga jual sebuah menu yang habis untuk bahannya. Sebagian besar restoran berusaha menjaganya di kisaran 28% sampai 35%, meski angkanya berbeda-beda tergantung jenis masakan, format layanan, dan seberapa banyak tenaga kerja yang dibutuhkan sebuah menu dibanding biaya bahan mentahnya.",
+          "Hitung setiap menu Anda di kalkulator ini saat menetapkan harga atau saat biaya bahan berubah. Menu dengan persentase jauh di luar target Anda butuh perubahan harga, perubahan resep, atau memang sengaja dipasang sebagai penarik pelanggan — yang penting Anda tahu mana di antara ketiganya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator food cost",
+        "items": [
+          {
+            "question": "Bagaimana cara menghitung persentase food cost?",
+            "answer": "Food cost % = (biaya bahan ÷ harga jual di menu) × 100. Menu dengan bahan ₹70 yang dijual ₹280 memiliki food cost 25%."
+          },
+          {
+            "question": "Berapa persentase food cost yang bagus untuk restoran?",
+            "answer": "Sebagian besar restoran layanan lengkap maupun cepat menargetkan 28-35%, tetapi bahan premium, minuman, dan produk bakeri bisa lebih rendah atau lebih tinggi dan tetap menguntungkan setelah tenaga kerja dan biaya tetap diperhitungkan."
+          },
+          {
+            "question": "Mengapa persentase food cost saya lebih tinggi dari perkiraan?",
+            "answer": "Penyebab umum: porsi yang makin besar seiring waktu, harga bahan naik tetapi harga menu belum menyusul, pemborosan di dapur, atau resep yang sejak awal tidak pernah dihitung biayanya dengan benar."
+          },
+          {
+            "question": "Apakah ini memperhitungkan biaya tenaga kerja?",
+            "answer": "Tidak — kalkulator ini hanya mencakup biaya bahan mentah. Tenaga kerja, kemasan, dan biaya tetap sebaiknya dipantau terpisah di samping food cost saat menentukan harga menu akhir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Hitung biaya setiap menu dengan tepat, otomatis",
+        "subtext": "Setu Dine menghubungkan resep dengan stok, jadi food cost tetap akurat ketika harga bahan berubah.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
     },
     {
       "name": "Kalkulator diskon",

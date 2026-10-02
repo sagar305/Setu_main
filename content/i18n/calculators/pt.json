@@ -211,7 +211,57 @@
     },
     {
       "name": "Calculadora de percentual de custo de alimentos",
-      "shortDescription": "Verifique se o custo dos ingredientes de um prato está saudável para o preço do cardápio."
+      "shortDescription": "Verifique se o custo dos ingredientes de um prato está saudável para o preço do cardápio.",
+      "seo": {
+        "title": "Calculadora de Custo de Alimentos para Restaurantes | Setu",
+        "description": "Calculadora gratuita do percentual de custo de alimentos. Informe o custo dos ingredientes e o preço do menu para ver o percentual e o lucro por prato.",
+        "keywords": [
+          "calculadora de custo de alimentos",
+          "percentual de custo de alimentos",
+          "custo de alimentos restaurante",
+          "calculadora de preço de menu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Custo de Alimentos",
+        "headline": "Calculadora de Custo de Alimentos",
+        "subheadline": "Informe o custo dos ingredientes de um prato e o preço do menu para ver o percentual de custo de alimentos e o lucro por prato."
+      },
+      "about": {
+        "headline": "O número que todo preço de menu deveria passar",
+        "paragraphs": [
+          "O percentual de custo de alimentos é a parte do preço de menu de um prato que vai para seus ingredientes. A maioria dos restaurantes tenta manter isso entre 28% e 35%, embora varie conforme a cozinha, o formato e quanta mão de obra o prato exige em relação ao custo da matéria-prima.",
+          "Passe cada prato do seu menu por esta calculadora ao definir preços ou quando o custo dos ingredientes mudar. Um prato com percentual muito fora da sua faixa-alvo precisa de mudança de preço, mudança de receita, ou está propositalmente posicionado como chamariz — mas é bom saber qual dos três."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de custo de alimentos",
+        "items": [
+          {
+            "question": "Como se calcula o percentual de custo de alimentos?",
+            "answer": "Custo de alimentos % = (custo dos ingredientes ÷ preço de venda no menu) × 100. Um prato com ₹70 de ingredientes vendido a ₹280 tem custo de alimentos de 25%."
+          },
+          {
+            "question": "Qual é um bom percentual de custo de alimentos num restaurante?",
+            "answer": "A maioria dos restaurantes, de serviço completo ou rápido, mira 28-35%, mas ingredientes premium, bebidas e itens de padaria podem ficar abaixo ou acima disso e continuar lucrativos depois de contabilizar mão de obra e despesas gerais."
+          },
+          {
+            "question": "Por que meu percentual está mais alto do que o esperado?",
+            "answer": "As causas comuns são porções que foram crescendo com o tempo, aumentos no preço dos ingredientes que os preços do menu não acompanharam, desperdício na cozinha, ou receitas que nunca foram custeadas corretamente."
+          },
+          {
+            "question": "Isso considera o custo de mão de obra?",
+            "answer": "Não — esta calculadora cobre apenas o custo da matéria-prima. Mão de obra, embalagem e despesas gerais devem ser acompanhadas separadamente, ao lado do custo de alimentos, ao definir os preços finais do menu."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Custeie cada prato com precisão, automaticamente",
+        "subtext": "O Setu Dine conecta receitas ao estoque, então o custo de alimentos continua exato quando os preços mudam.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de desconto",

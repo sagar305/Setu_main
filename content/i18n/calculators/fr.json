@@ -211,7 +211,57 @@
     },
     {
       "name": "Calculateur de ratio de coût matière",
-      "shortDescription": "Vérifiez si le coût des ingrédients d'un plat reste sain par rapport à son prix au menu."
+      "shortDescription": "Vérifiez si le coût des ingrédients d'un plat reste sain par rapport à son prix au menu.",
+      "seo": {
+        "title": "Calculateur de Coût Matière pour Restaurants | Setu",
+        "description": "Calculateur gratuit du pourcentage de coût matière. Saisissez le coût des ingrédients et le prix carte pour voir le ratio et la marge par plat.",
+        "keywords": [
+          "calculateur coût matière",
+          "pourcentage coût matière",
+          "coût matière restaurant",
+          "calculateur prix carte"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Coût Matière",
+        "headline": "Calculateur de Coût Matière",
+        "subheadline": "Saisissez le coût des ingrédients d'un plat et son prix carte pour voir son pourcentage de coût matière et la marge par assiette."
+      },
+      "about": {
+        "headline": "Le chiffre que chaque prix carte devrait valider",
+        "paragraphs": [
+          "Le pourcentage de coût matière est la part du prix carte d'un plat qui part dans ses ingrédients. La plupart des restaurants cherchent à le tenir entre 28 % et 35 %, même si cela varie selon la cuisine, le format et la main-d'œuvre qu'un plat demande face au coût de la matière première.",
+          "Passez chaque plat de votre carte dans ce calculateur quand vous fixez les prix ou quand le coût des ingrédients bouge. Un plat dont le ratio est très en dehors de votre cible demande un changement de prix, un changement de recette, ou il est volontairement positionné en produit d'appel — mais mieux vaut savoir lequel des trois."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de coût matière",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le pourcentage de coût matière ?",
+            "answer": "Coût matière % = (coût des ingrédients ÷ prix de vente carte) × 100. Un plat à ₹70 d'ingrédients vendu ₹280 affiche un coût matière de 25 %."
+          },
+          {
+            "question": "Quel pourcentage de coût matière viser en restauration ?",
+            "answer": "La plupart des établissements, service à table ou rapide, visent 28-35 %, mais les produits haut de gamme, les boissons et la boulangerie peuvent se situer en dessous ou au-dessus et rester rentables une fois la main-d'œuvre et les frais généraux intégrés."
+          },
+          {
+            "question": "Pourquoi mon coût matière est-il plus élevé que prévu ?",
+            "answer": "Les causes habituelles : des portions qui ont grossi avec le temps, des hausses de prix d'ingrédients que la carte n'a pas suivies, du gaspillage en cuisine, ou des recettes jamais correctement chiffrées au départ."
+          },
+          {
+            "question": "Est-ce que cela inclut le coût du personnel ?",
+            "answer": "Non — ce calculateur ne couvre que le coût des matières premières. La main-d'œuvre, l'emballage et les frais généraux doivent être suivis séparément, aux côtés du coût matière, pour fixer les prix définitifs."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Chiffrez chaque plat avec précision, automatiquement",
+        "subtext": "Setu Dine relie les recettes au stock : le coût matière reste juste quand les prix d'ingrédients changent.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculateur de remise",

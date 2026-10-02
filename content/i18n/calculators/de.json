@@ -211,7 +211,57 @@
     },
     {
       "name": "Wareneinsatz-Rechner",
-      "shortDescription": "Prüfen Sie, ob der Wareneinsatz eines Gerichts zum Menüpreis in einem gesunden Rahmen liegt."
+      "shortDescription": "Prüfen Sie, ob der Wareneinsatz eines Gerichts zum Menüpreis in einem gesunden Rahmen liegt.",
+      "seo": {
+        "title": "Warenkosten-Rechner für Restaurants — kostenlos | Setu",
+        "description": "Kostenloser Rechner für den Warenkostenanteil. Zutatenkosten und Verkaufspreis eingeben und sofort Warenkostenquote und Gewinn pro Gericht sehen.",
+        "keywords": [
+          "Warenkosten Rechner",
+          "Warenkostenanteil",
+          "Wareneinsatz Restaurant",
+          "Speisekarten Kalkulation"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Warenkosten",
+        "headline": "Warenkosten-Rechner",
+        "subheadline": "Geben Sie Zutatenkosten und Verkaufspreis eines Gerichts ein und sehen Sie Warenkostenquote und Gewinn pro Teller."
+      },
+      "about": {
+        "headline": "Die Zahl, die jeder Verkaufspreis bestehen sollte",
+        "paragraphs": [
+          "Die Warenkostenquote ist der Anteil des Verkaufspreises eines Gerichts, der für seine Zutaten draufgeht. Die meisten Restaurants versuchen, sie zwischen 28 % und 35 % zu halten — abhängig von Küche, Format und davon, wie viel Arbeit in einem Gericht steckt im Verhältnis zum reinen Wareneinsatz.",
+          "Rechnen Sie jedes Gericht Ihrer Karte durch, wenn Sie Preise festlegen oder wenn sich Einkaufspreise ändern. Ein Gericht mit einer Quote weit außerhalb Ihres Zielbereichs braucht einen anderen Preis, ein anderes Rezept, oder ist bewusst als Lockangebot kalkuliert — Sie sollten nur wissen, welches davon."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Warenkosten-Rechner",
+        "items": [
+          {
+            "question": "Wie berechnet man die Warenkostenquote?",
+            "answer": "Warenkosten % = (Zutatenkosten ÷ Verkaufspreis) × 100. Ein Gericht mit ₹70 Zutaten, das für ₹280 verkauft wird, hat eine Warenkostenquote von 25 %."
+          },
+          {
+            "question": "Welche Warenkostenquote ist für ein Restaurant gut?",
+            "answer": "Die meisten Betriebe mit Tisch- oder Schnellservice zielen auf 28-35 %, doch hochwertige Zutaten, Getränke und Backwaren können darunter oder darüber liegen und nach Personal- und Gemeinkosten dennoch rentabel sein."
+          },
+          {
+            "question": "Warum ist meine Warenkostenquote höher als erwartet?",
+            "answer": "Häufige Ursachen: Portionen, die über die Zeit größer geworden sind, gestiegene Einkaufspreise, denen die Verkaufspreise nicht gefolgt sind, Verschwendung in der Küche, oder Rezepte, die von Anfang an nie richtig kalkuliert wurden."
+          },
+          {
+            "question": "Sind Personalkosten enthalten?",
+            "answer": "Nein — dieser Rechner erfasst nur den reinen Wareneinsatz. Personal, Verpackung und Gemeinkosten sollten Sie bei der endgültigen Preisfindung getrennt neben den Warenkosten verfolgen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jedes Gericht genau kalkuliert, automatisch",
+        "subtext": "Setu Dine verknüpft Rezepte mit dem Lager, damit die Warenkosten stimmen, wenn sich Einkaufspreise ändern.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
     },
     {
       "name": "Rabattrechner",

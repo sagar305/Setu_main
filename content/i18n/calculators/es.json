@@ -211,7 +211,57 @@
     },
     {
       "name": "Calculadora de porcentaje de coste de alimentos",
-      "shortDescription": "Comprueba si el coste de los ingredientes de un plato es razonable para su precio de carta."
+      "shortDescription": "Comprueba si el coste de los ingredientes de un plato es razonable para su precio de carta.",
+      "seo": {
+        "title": "Calculadora de Coste de Comida para Restaurantes | Setu",
+        "description": "Calculadora gratuita del porcentaje de coste de comida. Introduce el coste de los ingredientes y el precio de carta para ver el % y el beneficio por plato.",
+        "keywords": [
+          "calculadora de coste de comida",
+          "porcentaje de coste de comida",
+          "coste de alimentos restaurante",
+          "calculadora de precios de carta"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Herramienta gratuita — Coste de Comida",
+        "headline": "Calculadora de Coste de Comida",
+        "subheadline": "Introduce el coste de los ingredientes de un plato y su precio de carta para ver su porcentaje de coste de comida y el beneficio por plato."
+      },
+      "about": {
+        "headline": "El número que todo precio de carta debería aprobar",
+        "paragraphs": [
+          "El porcentaje de coste de comida es la parte del precio de carta de un plato que se va en sus ingredientes. La mayoría de los restaurantes intentan mantenerlo entre el 28% y el 35%, aunque varía según la cocina, el formato y cuánta mano de obra lleva un plato frente al coste de la materia prima.",
+          "Pasa cada plato de tu carta por esta calculadora cuando fijes precios o cuando cambien los costes de los ingredientes. Un plato con un porcentaje muy fuera de tu rango objetivo necesita un cambio de precio, un cambio de receta, o está puesto a propósito como gancho — pero conviene saber cuál de las tres es."
+        ]
+      },
+      "faq": {
+        "headline": "Preguntas sobre la calculadora de coste de comida",
+        "items": [
+          {
+            "question": "¿Cómo se calcula el porcentaje de coste de comida?",
+            "answer": "% de coste de comida = (coste de ingredientes ÷ precio de venta en carta) × 100. Un plato con ₹70 de ingredientes vendido a ₹280 tiene un coste de comida del 25%."
+          },
+          {
+            "question": "¿Qué porcentaje de coste de comida es bueno en un restaurante?",
+            "answer": "La mayoría de los restaurantes, de servicio completo o rápido, apuntan a un 28-35%, pero los ingredientes de gama alta, las bebidas y la bollería pueden quedar por debajo o por encima y seguir siendo rentables una vez contados la mano de obra y los gastos generales."
+          },
+          {
+            "question": "¿Por qué mi porcentaje es más alto de lo previsto?",
+            "answer": "Las causas habituales son raciones que han ido creciendo con el tiempo, subidas del precio de los ingredientes que los precios de carta no han seguido, desperdicio en cocina, o recetas que nunca se costearon bien desde el principio."
+          },
+          {
+            "question": "¿Incluye el coste de personal?",
+            "answer": "No — esta calculadora cubre solo el coste de la materia prima. La mano de obra, el envase y los gastos generales deben seguirse por separado, junto al coste de comida, al decidir los precios finales de carta."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Costea cada plato con precisión, de forma automática",
+        "subtext": "Setu Dine conecta las recetas con el inventario, así el coste de comida sigue siendo exacto cuando cambian los precios.",
+        "cta": {
+          "label": "Descubre Setu Dine"
+        }
+      }
     },
     {
       "name": "Calculadora de descuentos",
