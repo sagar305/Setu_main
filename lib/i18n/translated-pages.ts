@@ -55,7 +55,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "payment-terms-calculator": [],
     "purchase-price-variance-calculator": [],
     "financial-ratio-calculator": [],
-    "mdr-calculator": [],
+    "mdr-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
   },
   tools: {
     "invoice-generator": [],

@@ -685,7 +685,8 @@
           "adicionar IVA",
           "remover IVA",
           "calculadora de IVA inverso",
-          "calcular IVA 23%"
+          "calcular IVA 23%",
+          "calculadora de IVA online"
         ]
       },
       "hero": {
@@ -739,7 +740,8 @@
           "calculadora de imposto sobre vendas",
           "sales tax EUA",
           "calculadora de imposto estadual",
-          "imposto sobre vendas inverso"
+          "imposto sobre vendas inverso",
+          "imposto sobre a compra"
         ]
       },
       "hero": {
@@ -856,7 +858,64 @@
     },
     {
       "name": "Calculadora de MDR",
-      "shortDescription": "Veja quanto de MDR é cobrado num pagamento e quanto realmente cai na sua conta, com MDR incluso ou por fora."
+      "shortDescription": "Veja quanto de MDR é cobrado num pagamento e quanto realmente cai na sua conta, com MDR incluso ou por fora.",
+      "seo": {
+        "title": "Calculadora de MDR — Taxas do Gateway | Setu",
+        "description": "Calculadora gratuita de MDR para comerciantes na Índia. Informe um valor com ou sem MDR para ver a taxa do adquirente, o GST sobre ela e o que você recebe.",
+        "keywords": [
+          "calculadora de MDR",
+          "taxa de desconto do lojista",
+          "taxas de gateway de pagamento",
+          "MDR incluído ou excluído",
+          "MDR do UPI na Índia",
+          "taxas de transação com cartão"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de MDR",
+        "headline": "Calculadora de MDR",
+        "subheadline": "Calcule a taxa de desconto do lojista sobre um recebimento e o que cai na sua conta depois que ela e o GST dela saem."
+      },
+      "about": {
+        "headline": "Quanto o MDR custa de verdade",
+        "paragraphs": [
+          "A taxa de desconto do lojista (MDR) é a parte que o seu adquirente retém em cada recebimento por cartão ou carteira digital, e o GST incide também sobre essa parte. Numa venda de ₹5.000 no crédito a 2%, o MDR é ₹100 e o GST sobre ele mais ₹18, então liquidam ₹4.882 em vez de ₹5.000. Ao longo de um mês de volume no cartão essa diferença é dinheiro de verdade, e a maioria dos comerciantes só a encontra no relatório de liquidação.",
+          "Você pode informar o valor de duas formas, conforme o que souber. Com MDR incluído, o número é o que o cliente paga, e a calculadora diz quanto fica com você. Com MDR excluído, o número é o que você quer receber, e a calculadora eleva a cobrança para que o líquido depois do MDR saia exato — útil quando você repassa a taxa ao cliente ou dá um preço que precisa deixar um valor fixo.",
+          "Nem todo meio custa o mesmo, e o do UPI está a ponto de mudar. A partir de 15 de outubro de 2026, pagamentos UPI a comerciantes acima de ₹2.000 têm MDR de 0,4% sobre o valor total, com teto de ₹300 por transação. Até ₹2.000 continua sem MDR, o débito RuPay e os mandatos de UPI Autopay seguem isentos, e comerciantes que recebem menos de ₹1 lakh por mês via QR do UPI também — por isso dividir um recebimento grande em vários QR menores pode zerar o custo."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de MDR",
+        "items": [
+          {
+            "question": "O que é MDR?",
+            "answer": "MDR, ou taxa de desconto do lojista, é a tarifa que o comerciante paga para aceitar um pagamento digital. Normalmente é um percentual do valor da transação, às vezes com uma tarifa fixa por cima, e é descontada antes de o dinheiro ser liquidado na conta do comerciante. O GST incide sobre o próprio MDR."
+          },
+          {
+            "question": "Qual é a diferença entre MDR incluído e MDR excluído?",
+            "answer": "MDR incluído significa que o valor digitado é o que o cliente paga, e o MDR sai dele, então você recebe menos. MDR excluído significa que o valor digitado é o que você quer receber, então a cobrança é elevada para cobrir o MDR e o GST dele. Use excluído quando precisar que um valor específico caia na sua conta."
+          },
+          {
+            "question": "Existe MDR nos pagamentos por UPI na Índia?",
+            "answer": "Até ₹2.000 não há, e o débito RuPay fica em zero por regulação. A partir de 15 de outubro de 2026, pagamentos UPI a comerciantes acima de ₹2.000 têm MDR de 0,4%, cobrado sobre o valor total da transação e limitado a ₹300. UPI Autopay e outros mandatos recorrentes são isentos, assim como comerciantes que recebem menos de ₹1 lakh por mês via QR do UPI."
+          },
+          {
+            "question": "Como reduzir o que pago de MDR?",
+            "answer": "Direcione os clientes para os meios que seguem gratuitos — UPI até ₹2.000, débito RuPay e mandatos de UPI Autopay — e negocie a taxa de cartão com o seu adquirente quando o volume justificar. Como o limite de ₹2.000 é por transação, manter cada recebimento no UPI abaixo dele evita os 0,4% por completo; o divisor de QR vinculado quebra um total maior em QR abaixo do limite."
+          },
+          {
+            "question": "Incide GST sobre o MDR?",
+            "answer": "Sim. O GST de 18% incide sobre o próprio MDR, não sobre a sua venda nem sobre a transação de UPI. A calculadora mostra isso em linha separada para você ver o custo completo do recebimento, e empresas registradas no GST normalmente podem aproveitá-lo como crédito de imposto."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Receba sem perder uma fatia",
+        "subtext": "As ferramentas de UPI gratuitas do Setu permitem receber no caixa abaixo do limite do MDR, sem cadastro.",
+        "cta": {
+          "label": "Experimente o gerador de QR do UPI"
+        }
+      }
     }
   ],
   "labels": {

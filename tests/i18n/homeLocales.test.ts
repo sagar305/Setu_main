@@ -560,4 +560,43 @@ describe("translation files are clean text", () => {
       }
     }
   });
+
+  /**
+   * Translations merge over English by array index, so a list that is one entry
+   * short does not fall back cleanly — it keeps English's last entry and ships a
+   * half-translated page. It happened with the VAT and sales-tax keyword lists in
+   * seven languages each, where the English tail keyword survived into the
+   * localized meta tag. Nested lists inside an item have to match English exactly.
+   */
+  it("keeps every translated item's nested lists the same length as English", () => {
+    const paths: [string, (item: Record<string, any>) => unknown[] | undefined][] = [
+      ["seo.keywords", (item) => item.seo?.keywords],
+      ["about.paragraphs", (item) => item.about?.paragraphs],
+      ["faq.items", (item) => item.faq?.items],
+    ];
+    for (const page of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${page}.json`), "utf8"),
+      ).items as Record<string, any>[];
+      const base = path.join(process.cwd(), "content", "i18n", page);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const items = (JSON.parse(fs.readFileSync(path.join(base, file), "utf8")).items ??
+          []) as Record<string, any>[];
+        items.forEach((item, index) => {
+          if (!item) return;
+          for (const [label, get] of paths) {
+            const translated = get(item);
+            const source = get(english[index]);
+            if (!translated || !source) continue;
+            expect(
+              translated.length,
+              `content/i18n/${page}/${file} items[${index}] ` +
+                `(${english[index].slug}) ${label} has ${translated.length} entries, ` +
+                `English has ${source.length} — the missing entries fall back to English`,
+            ).toBe(source.length);
+          }
+        });
+      }
+    }
+  });
 });

@@ -685,7 +685,8 @@
           "tambah PPN",
           "hitung PPN dari harga",
           "kalkulator PPN terbalik",
-          "hitung PPN 11%"
+          "hitung PPN 11%",
+          "kalkulator PPN online"
         ]
       },
       "hero": {
@@ -739,7 +740,8 @@
           "kalkulator pajak penjualan",
           "sales tax Amerika",
           "kalkulator pajak negara bagian",
-          "hitung balik pajak penjualan"
+          "hitung balik pajak penjualan",
+          "pajak atas pembelian"
         ]
       },
       "hero": {
@@ -856,7 +858,64 @@
     },
     {
       "name": "Kalkulator MDR",
-      "shortDescription": "Lihat berapa MDR yang dipotong dari sebuah pembayaran dan berapa yang benar-benar masuk ke rekening Anda, sudah termasuk MDR atau belum."
+      "shortDescription": "Lihat berapa MDR yang dipotong dari sebuah pembayaran dan berapa yang benar-benar masuk ke rekening Anda, sudah termasuk MDR atau belum.",
+      "seo": {
+        "title": "Kalkulator MDR — Biaya Payment Gateway | Setu",
+        "description": "Kalkulator MDR gratis untuk merchant di India. Masukkan nilai termasuk atau belum termasuk MDR untuk melihat tarif merchant, pajaknya, dan yang Anda terima.",
+        "keywords": [
+          "kalkulator MDR",
+          "merchant discount rate",
+          "kalkulator biaya payment gateway",
+          "MDR termasuk belum termasuk",
+          "MDR UPI India",
+          "biaya transaksi kartu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator MDR",
+        "headline": "Kalkulator MDR",
+        "subheadline": "Hitung merchant discount rate pada satu pembayaran, dan berapa yang masuk ke rekening Anda setelah tarif itu beserta pajaknya dipotong."
+      },
+      "about": {
+        "headline": "Berapa sebenarnya MDR membebani Anda",
+        "paragraphs": [
+          "Merchant discount rate adalah potongan yang disimpan acquirer Anda dari setiap penerimaan kartu atau dompet digital, dan pajak GST juga dikenakan atas potongan itu. Pada penjualan kartu kredit ₹5.000 dengan tarif 2%, MDR-nya ₹100 dan pajaknya ₹18 lagi, jadi yang disetelkan ₹4.882 bukan ₹5.000. Sepanjang sebulan volume kartu, selisih itu uang yang nyata, dan sebagian besar merchant baru menemuinya di laporan setelmen.",
+          "Anda bisa memasukkan nilainya dengan dua cara, tergantung apa yang Anda ketahui. Termasuk MDR berarti angka itu yang dibayar pelanggan, dan kalkulator memberi tahu berapa yang tinggal untuk Anda. Belum termasuk MDR berarti angka itu yang ingin Anda terima, dan kalkulator menaikkan tagihannya supaya nilai bersih setelah MDR keluar tepat — berguna saat Anda membebankan biayanya ke pelanggan atau menyebut harga yang harus menyisakan jumlah tertentu.",
+          "Tidak semua jalur berbiaya sama, dan UPI akan berubah. Mulai 15 Oktober 2026, pembayaran UPI ke merchant di atas ₹2.000 dikenai MDR 0,4% atas nilai penuh, dibatasi ₹300 per transaksi. Sampai ₹2.000 masih tanpa MDR, debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula merchant yang menerima di bawah ₹1 lakh per bulan lewat QR UPI — itulah sebabnya menerima jumlah besar melalui beberapa kode QR yang lebih kecil bisa membuat biayanya nol."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator MDR",
+        "items": [
+          {
+            "question": "Apa itu MDR?",
+            "answer": "MDR, atau merchant discount rate, adalah biaya yang dibayar merchant untuk menerima pembayaran digital. Biasanya berupa persentase dari nilai transaksi, kadang ditambah biaya tetap, dan dipotong sebelum uangnya disetelkan ke rekening merchant. Pajak GST dikenakan atas MDR itu sendiri."
+          },
+          {
+            "question": "Apa bedanya termasuk MDR dan belum termasuk MDR?",
+            "answer": "Termasuk MDR berarti nilai yang Anda masukkan adalah yang dibayar pelanggan, dan MDR diambil dari situ, jadi Anda menerima lebih sedikit. Belum termasuk MDR berarti nilai yang Anda masukkan adalah yang ingin Anda terima, jadi tagihannya dinaikkan untuk menutup MDR beserta pajaknya. Pakai yang belum termasuk kalau angka tertentu harus masuk ke rekening Anda."
+          },
+          {
+            "question": "Apakah pembayaran UPI di India dikenai MDR?",
+            "answer": "Sampai ₹2.000 tidak ada, dan debit RuPay tetap nol karena ketentuan. Mulai 15 Oktober 2026, pembayaran UPI ke merchant di atas ₹2.000 dikenai MDR 0,4%, dihitung atas nilai penuh transaksi dan dibatasi ₹300. UPI Autopay dan mandat berulang lainnya dikecualikan, begitu juga merchant yang menerima di bawah ₹1 lakh per bulan lewat QR UPI."
+          },
+          {
+            "question": "Bagaimana menekan biaya MDR?",
+            "answer": "Arahkan pelanggan ke jalur yang tetap gratis — UPI sampai ₹2.000, debit RuPay, dan mandat UPI Autopay — dan negosiasikan tarif kartu dengan acquirer begitu volume Anda memadai. Karena batas ₹2.000 berlaku per transaksi, menjaga setiap penerimaan UPI di bawahnya menghindari 0,4% sepenuhnya; pemecah QR yang tertaut membelah total yang lebih besar menjadi kode QR di bawah batas."
+          },
+          {
+            "question": "Apakah MDR dikenai pajak GST?",
+            "answer": "Ya. Pajak 18% dikenakan atas MDR itu sendiri, bukan atas penjualan Anda maupun atas transaksi UPI. Kalkulator menampilkannya pada baris tersendiri supaya Anda melihat biaya penerimaan secara utuh, dan usaha yang terdaftar GST umumnya bisa mengklaimnya sebagai kredit pajak masukan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Terima pembayaran tanpa kehilangan potongan",
+        "subtext": "Alat UPI gratis dari Setu memungkinkan Anda menerima pembayaran di kasir di bawah batas MDR, tanpa perlu mendaftar.",
+        "cta": {
+          "label": "Coba Generator QR UPI"
+        }
+      }
     }
   ],
   "labels": {

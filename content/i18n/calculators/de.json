@@ -685,7 +685,8 @@
           "MwSt addieren",
           "MwSt herausrechnen",
           "Brutto Netto Rechner",
-          "19% MwSt berechnen"
+          "19% MwSt berechnen",
+          "MwSt Rechner online"
         ]
       },
       "hero": {
@@ -739,7 +740,8 @@
           "Sales Tax Rechner",
           "US Verkaufssteuer",
           "Staatssteuer Rechner",
-          "Verkaufssteuer herausrechnen"
+          "Verkaufssteuer herausrechnen",
+          "Steuer auf Einkauf berechnen"
         ]
       },
       "hero": {
@@ -856,7 +858,64 @@
     },
     {
       "name": "MDR-Rechner",
-      "shortDescription": "Sehen Sie, wie viel MDR auf eine Zahlung anfällt und was Ihnen tatsächlich gutgeschrieben wird — mit oder ohne MDR gerechnet."
+      "shortDescription": "Sehen Sie, wie viel MDR auf eine Zahlung anfällt und was Ihnen tatsächlich gutgeschrieben wird — mit oder ohne MDR gerechnet.",
+      "seo": {
+        "title": "MDR-Rechner — Gebühren des Zahlungsdienstes | Setu",
+        "description": "Kostenloser MDR-Rechner für Händler in Indien. Betrag mit oder ohne MDR eingeben und Händlergebühr, die Steuer darauf und Ihren Auszahlungsbetrag sehen.",
+        "keywords": [
+          "MDR Rechner",
+          "Händlergebühr berechnen",
+          "Gebühren Zahlungsdienstleister",
+          "MDR inklusive exklusive",
+          "UPI MDR Indien",
+          "Kartengebühren Rechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — MDR-Rechner",
+        "headline": "MDR-Rechner",
+        "subheadline": "Ermitteln Sie die Händlergebühr auf eine Zahlung und was auf Ihrem Konto landet, sobald sie und ihre Steuer abgezogen sind."
+      },
+      "about": {
+        "headline": "Was der MDR Sie tatsächlich kostet",
+        "paragraphs": [
+          "Der MDR, die Händlergebühr, ist der Anteil, den Ihr Acquirer bei jeder Karten- oder Wallet-Zahlung behält, und auf diesen Anteil fällt zusätzlich die Steuer GST an. Bei einem Kreditkartenumsatz von ₹5.000 zu 2 % beträgt der MDR ₹100 und die Steuer darauf weitere ₹18 — ausgezahlt werden also ₹4.882 statt ₹5.000. Über ein Monatsvolumen an Kartenzahlungen ist diese Lücke echtes Geld, und die meisten Händler begegnen ihr erst in der Abrechnung.",
+          "Geben Sie den Betrag auf zwei Wegen ein, je nachdem, was Sie kennen. MDR inklusive heißt: die Zahl ist, was der Kunde zahlt, und der Rechner sagt Ihnen, was bleibt. MDR exklusive heißt: die Zahl ist, was ankommen soll, und der Rechner rechnet die Gebühr hinauf, damit der Nettobetrag nach MDR genau stimmt — nützlich, wenn Sie die Gebühr an den Kunden weitergeben oder einen Preis nennen, der einen festen Betrag übrig lassen muss.",
+          "Nicht jeder Zahlweg kostet gleich, und bei UPI steht eine Änderung an. Ab dem 15. Oktober 2026 fällt auf UPI-Händlerzahlungen über ₹2.000 ein MDR von 0,4 % auf den gesamten Betrag an, begrenzt auf ₹300 je Transaktion. Bis ₹2.000 gibt es weiterhin keinen MDR, RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, und Händler mit weniger als ₹1 Lakh Monatsumsatz über UPI-QR ebenfalls — deshalb kann es die Kosten auf null bringen, einen größeren Betrag über mehrere kleinere QR-Codes zu kassieren."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum MDR-Rechner",
+        "items": [
+          {
+            "question": "Was ist der MDR?",
+            "answer": "Der MDR, die Händlergebühr, ist das Entgelt, das ein Händler für die Annahme einer digitalen Zahlung zahlt. Meist ist es ein Prozentsatz des Transaktionsbetrags, manchmal mit einem Festbetrag obendrauf, und er wird abgezogen, bevor das Geld auf dem Händlerkonto eingeht. Die Steuer GST fällt auf den MDR selbst an."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen MDR inklusive und exklusive?",
+            "answer": "MDR inklusive bedeutet, der eingegebene Betrag ist das, was der Kunde zahlt, und der MDR wird davon abgezogen — Sie erhalten also weniger. MDR exklusive bedeutet, der eingegebene Betrag ist das, was Sie erhalten wollen, also wird die Belastung hochgerechnet, um MDR und Steuer zu deckeln. Nutzen Sie exklusive, wenn eine bestimmte Summe auf Ihrem Konto ankommen muss."
+          },
+          {
+            "question": "Gibt es MDR auf UPI-Zahlungen in Indien?",
+            "answer": "Bis ₹2.000 nicht, und RuPay-Debit bleibt per Regulierung bei null. Ab dem 15. Oktober 2026 fällt auf UPI-Händlerzahlungen über ₹2.000 ein MDR von 0,4 % an, berechnet auf den gesamten Transaktionsbetrag und begrenzt auf ₹300. UPI Autopay und andere wiederkehrende Mandate sind befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen."
+          },
+          {
+            "question": "Wie senke ich meine MDR-Kosten?",
+            "answer": "Lenken Sie Kunden auf die Wege, die gebührenfrei bleiben — UPI bis ₹2.000, RuPay-Debit und UPI-Autopay-Mandate — und verhandeln Sie Ihren Kartensatz mit dem Acquirer, sobald Ihr Volumen das hergibt. Da die Schwelle von ₹2.000 pro Transaktion gilt, vermeidet man die 0,4 % vollständig, indem jede UPI-Zahlung darunter bleibt; der verlinkte QR-Splitter teilt eine größere Summe in QR-Codes unterhalb der Schwelle."
+          },
+          {
+            "question": "Fällt GST auf den MDR an?",
+            "answer": "Ja. Die GST von 18 % fällt auf den MDR selbst an, nicht auf Ihren Umsatz und nicht auf die UPI-Transaktion. Der Rechner zeigt sie als eigene Zeile, damit Sie die vollen Kosten des Einzugs sehen; GST-registrierte Betriebe können sie in der Regel als Vorsteuer geltend machen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlungen annehmen, ohne einen Anteil abzugeben",
+        "subtext": "Mit den kostenlosen UPI-Tools von Setu kassieren Sie an der Kasse unterhalb der MDR-Schwelle — ohne Anmeldung.",
+        "cta": {
+          "label": "UPI-QR-Generator testen"
+        }
+      }
     }
   ],
   "labels": {

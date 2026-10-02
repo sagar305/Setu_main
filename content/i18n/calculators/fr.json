@@ -685,7 +685,8 @@
           "ajouter la TVA",
           "retirer la TVA",
           "calcul TVA inversée",
-          "calculer TVA 20%"
+          "calculer TVA 20%",
+          "calculateur TVA en ligne"
         ]
       },
       "hero": {
@@ -739,7 +740,8 @@
           "calculateur taxe de vente",
           "sales tax États-Unis",
           "calculateur taxe d'État",
-          "taxe de vente inversée"
+          "taxe de vente inversée",
+          "taxe sur un achat"
         ]
       },
       "hero": {
@@ -856,7 +858,64 @@
     },
     {
       "name": "Calculateur de MDR",
-      "shortDescription": "Voyez la commission MDR prélevée sur un paiement et ce qui vous revient réellement, MDR inclus ou exclu."
+      "shortDescription": "Voyez la commission MDR prélevée sur un paiement et ce qui vous revient réellement, MDR inclus ou exclu.",
+      "seo": {
+        "title": "Calculateur de MDR — Frais de Paiement | Setu",
+        "description": "Calculateur gratuit de MDR pour les commerçants en Inde. Saisissez un montant MDR inclus ou exclu pour voir le taux, la TPS dessus et ce que vous recevez.",
+        "keywords": [
+          "calculateur de MDR",
+          "taux de commission commerçant",
+          "frais de passerelle de paiement",
+          "MDR inclus ou exclu",
+          "MDR UPI Inde",
+          "frais de transaction par carte"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de MDR",
+        "headline": "Calculateur de MDR",
+        "subheadline": "Calculez le taux de commission commerçant sur un encaissement et ce qui arrive sur votre compte une fois ce taux et sa taxe déduits."
+      },
+      "about": {
+        "headline": "Ce que le MDR vous coûte réellement",
+        "paragraphs": [
+          "Le MDR, ou taux de commission commerçant, est la part que votre acquéreur conserve sur chaque encaissement par carte ou portefeuille, et la taxe GST s'applique aussi sur cette part. Sur une vente par carte de crédit de ₹5 000 à 2 %, le MDR est de ₹100 et la taxe dessus de ₹18 : ce sont donc ₹4 882 qui sont versés, et non ₹5 000. Sur un mois de volume carte, cet écart représente de l'argent réel, et la plupart des commerçants ne le découvrent que dans le relevé de versement.",
+          "Saisissez le montant de deux façons, selon ce que vous connaissez. MDR inclus signifie que le chiffre correspond à ce que paie le client, et le calculateur vous indique ce qu'il vous reste. MDR exclu signifie que le chiffre est ce que vous voulez recevoir, et le calculateur majore l'encaissement pour que le net après MDR tombe juste — pratique lorsque vous répercutez la commission sur le client ou annoncez un prix qui doit laisser un montant fixe.",
+          "Tous les moyens de paiement ne coûtent pas la même chose, et l'UPI va changer. À partir du 15 octobre 2026, les paiements UPI aux commerçants supérieurs à ₹2 000 supportent un MDR de 0,4 % sur la totalité du montant, plafonné à ₹300 par transaction. Jusqu'à ₹2 000, il n'y a toujours pas de MDR, le débit RuPay et les mandats UPI Autopay restent exonérés, et les commerçants qui encaissent moins de ₹1 lakh par mois par QR UPI le sont aussi — c'est pourquoi répartir un encaissement important sur plusieurs QR plus petits peut ramener le coût à zéro."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de MDR",
+        "items": [
+          {
+            "question": "Qu'est-ce que le MDR ?",
+            "answer": "Le MDR, ou taux de commission commerçant, est la commission qu'un commerçant paie pour accepter un paiement numérique. C'est généralement un pourcentage du montant de la transaction, parfois avec un forfait en plus, et il est déduit avant que l'argent n'arrive sur le compte du commerçant. La taxe GST s'applique sur le MDR lui-même."
+          },
+          {
+            "question": "Quelle différence entre MDR inclus et MDR exclu ?",
+            "answer": "MDR inclus signifie que le montant saisi est ce que paie le client et que le MDR en est retiré : vous recevez donc moins. MDR exclu signifie que le montant saisi est ce que vous voulez recevoir, donc l'encaissement est majoré pour couvrir le MDR et sa taxe. Utilisez l'option exclue quand un montant précis doit arriver sur votre compte."
+          },
+          {
+            "question": "Y a-t-il un MDR sur les paiements UPI en Inde ?",
+            "answer": "Jusqu'à ₹2 000, aucun, et le débit RuPay reste à zéro par réglementation. À partir du 15 octobre 2026, les paiements UPI aux commerçants supérieurs à ₹2 000 supportent un MDR de 0,4 %, calculé sur la totalité du montant et plafonné à ₹300. UPI Autopay et les autres mandats récurrents sont exonérés, de même que les commerçants encaissant moins de ₹1 lakh par mois par QR UPI."
+          },
+          {
+            "question": "Comment réduire ce que je paie en MDR ?",
+            "answer": "Orientez les clients vers les moyens qui restent gratuits — UPI jusqu'à ₹2 000, débit RuPay et mandats UPI Autopay — et négociez votre taux carte avec votre acquéreur dès que votre volume le justifie. Comme le seuil de ₹2 000 s'applique par transaction, garder chaque encaissement UPI en dessous évite entièrement les 0,4 % ; le diviseur de QR associé découpe un total plus élevé en QR sous le seuil."
+          },
+          {
+            "question": "La taxe GST s'applique-t-elle au MDR ?",
+            "answer": "Oui. La GST à 18 % s'applique sur le MDR lui-même, pas sur votre vente ni sur la transaction UPI. Le calculateur l'affiche sur une ligne distincte pour que vous voyiez le coût complet de l'encaissement, et les entreprises enregistrées à la GST peuvent en général la récupérer en crédit de taxe."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Encaissez sans perdre une part",
+        "subtext": "Les outils UPI gratuits de Setu vous permettent d'encaisser au comptoir sous le seuil du MDR, sans inscription.",
+        "cta": {
+          "label": "Essayer le générateur de QR UPI"
+        }
+      }
     }
   ],
   "labels": {
