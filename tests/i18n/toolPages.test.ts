@@ -65,6 +65,26 @@ describe("tool pages keep their copy in content", () => {
       expect(hero?.subheadline?.trim(), `${slug} has no hero subheadline`).toBeTruthy();
     }
   });
+
+  /**
+   * The pill above the h1 reads the shared "Free Tool" label, not a per-item
+   * eyebrow — a tool that carried one would be sixteen translations of a string
+   * no page renders, which is what this replaced.
+   */
+  it("carries no per-item eyebrow, in English or in any translation", () => {
+    const files = ["content/en/tools.json"];
+    const dir = path.join(process.cwd(), "content", "i18n", "tools");
+    for (const file of fs.readdirSync(dir)) files.push(path.join("content", "i18n", "tools", file));
+
+    for (const file of files) {
+      const content = JSON.parse(fs.readFileSync(path.join(process.cwd(), file), "utf8"));
+      for (const item of content.items) {
+        expect(item.hero?.eyebrow, `${file}: ${item.slug ?? "an item"} has an eyebrow`).toBe(
+          undefined,
+        );
+      }
+    }
+  });
 });
 
 describe("the body blocks a few tool pages carry", () => {

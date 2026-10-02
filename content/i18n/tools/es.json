@@ -128,7 +128,6 @@
         "ogDescription": "Consulta el stock en tiempo real, registra entradas y salidas y revisa cada movimiento — compartido con tu TPV de navegador Setu. Gratis y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Registro de stock",
         "headline": "Registro de stock",
         "subheadline": "Stock en tiempo real, ajustes rápidos y un historial completo de movimientos — una sola verdad con tu TPV."
       },
@@ -166,7 +165,6 @@
         "ogDescription": "Registra las facturas de compra por proveedor, vincula los artículos a tus productos y el stock se actualiza solo. Gratis, sin conexión y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Registro de compras",
         "headline": "Registro de compras",
         "subheadline": "Registra facturas de proveedor, vincula productos y actualiza el stock con una sola confirmación."
       },
@@ -204,7 +202,6 @@
         "ogDescription": "Guarda los datos de todos tus proveedores en un solo sitio: contacto, GSTIN, direcciones y notas. Gratis, sin conexión, sin registro y reutilizable."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Libro de proveedores",
         "headline": "Libro de proveedores",
         "subheadline": "Todos tus proveedores en un sitio: se guardan una vez y los reutiliza cada herramienta de Setu."
       },
@@ -255,7 +252,6 @@
         "ogDescription": "Libro de crédito digital: lleva el crédito dado y los pagos recibidos de cada cliente, con saldos al día. Gratis, sin conexión y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Libro de clientes",
         "headline": "Libro de clientes",
         "subheadline": "Tu libreta de crédito, en digital: crédito, pagos y saldo de cada cliente."
       },
@@ -297,7 +293,6 @@
         "ogDescription": "Crea notas de crédito profesionales para devoluciones y ajustes. Campos de impuestos, líneas detalladas, PDF al instante. Gratis, sin conexión, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Generador de notas de crédito",
         "headline": "Generador de notas de crédito",
         "subheadline": "Gestiona devoluciones y ajustes de facturación con profesionalidad: referencia la factura, detalla los artículos, imprime el PDF."
       },
@@ -335,7 +330,6 @@
         "ogDescription": "Crea notas de débito por devoluciones de compra, faltantes y diferencias de precio. Campos de impuestos, líneas detalladas y PDF al instante. Gratis."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Generador de notas de débito",
         "headline": "Generador de notas de débito",
         "subheadline": "¿Devuelves mercancía o discutes la factura de un proveedor? Emite una nota de débito clara y detallada en un minuto."
       },
@@ -373,7 +367,6 @@
         "ogDescription": "Crea órdenes de compra profesionales con fecha de entrega, líneas detalladas e impuestos. Imprime el PDF al instante. Gratis, sin conexión y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Generador de órdenes de compra",
         "headline": "Generador de órdenes de compra",
         "subheadline": "Autoriza las compras a proveedores de forma formal: artículos, precios, fecha de entrega y condiciones en una sola orden clara."
       },
@@ -411,7 +404,6 @@
         "ogDescription": "Confirma los pedidos de tus clientes antes del envío con una orden de venta profesional: artículos, precios, fecha de entrega y PDF. Gratis y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Generador de órdenes de venta",
         "headline": "Generador de órdenes de venta",
         "subheadline": "Confirma lo que pidió el cliente — artículos, precios y fecha de entrega — antes de enviar nada."
       },
@@ -449,7 +441,6 @@
         "ogDescription": "Monta tu plan de cuentas desde una plantilla lista para pequeñas empresas. Añade, codifica y clasifica cuentas, y exporta a CSV. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Plan de cuentas",
         "headline": "Plan de cuentas",
         "subheadline": "La columna vertebral de tu contabilidad — una lista de cuentas lista para usar que puedes adaptar a tu negocio."
       },
@@ -487,7 +478,6 @@
         "ogDescription": "Registra asientos por partida doble con cuadre automático de debe y haber. Alimentan el libro mayor y el balance de comprobación. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Asiento contable",
         "headline": "Asiento contable",
         "subheadline": "Contabilidad por partida doble de verdad — el debe a la izquierda, el haber a la derecha, siempre cuadrado."
       },
@@ -525,7 +515,6 @@
         "ogDescription": "Consulta el mayor de cualquier cuenta con saldos acumulados, generado solo a partir de tus asientos. Exportación a CSV. Gratis, sin conexión y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Libro mayor",
         "headline": "Libro mayor",
         "subheadline": "Elige una cuenta y ve cada apunte con su saldo acumulado — generado solo a partir de tu diario."
       },
@@ -563,7 +552,6 @@
         "ogDescription": "Concilia tu extracto bancario con el libro de caja: cheques pendientes, remesas en tránsito y gastos bancarios, hasta que los saldos coincidan. Gratis."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Conciliación bancaria",
         "headline": "Conciliación bancaria",
         "subheadline": "El banco dice una cifra y tus libros otra — ve anotando las partidas de conciliación hasta que coincidan."
       },
@@ -605,7 +593,6 @@
         "ogDescription": "Un balance de comprobación generado solo a partir de tus asientos: el saldo neto deudor o acreedor de cada cuenta, sumado y verificado. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Balance de sumas y saldos",
         "headline": "Balance de sumas y saldos",
         "subheadline": "El saldo neto de cada cuenta en su lado deudor o acreedor — sumado, comprobado y listo para exportar."
       },
@@ -643,7 +630,6 @@
         "ogDescription": "Elabora una cuenta de resultados: ingresos, coste de ventas, gastos y beneficio bruto, operativo y neto con sus márgenes. Imprime en PDF o exporta CSV. Gratis."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Cuenta de resultados",
         "headline": "Cuenta de resultados",
         "subheadline": "Ingresos arriba, beneficio neto abajo y cada paso intermedio — con los márgenes calculados en vivo."
       },
@@ -681,7 +667,6 @@
         "ogDescription": "Elabora un balance con activo corriente y fijo, pasivo y patrimonio. Comprobación del cuadre en vivo, impresión A4 y exportación CSV. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Balance de situación",
         "headline": "Balance de situación",
         "subheadline": "Lo que tienes, lo que debes y lo que queda para los socios — comprobado en vivo, así siempre cuadra."
       },
@@ -719,7 +704,6 @@
         "ogDescription": "Elabora un estado de flujos de efectivo por actividades de explotación, inversión y financiación. De saldo inicial a final, PDF y CSV. Gratis, sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Estado de flujos de efectivo",
         "headline": "Estado de flujos de efectivo",
         "subheadline": "De dónde vino el efectivo y a dónde fue — explotación, inversión y financiación, del saldo inicial al final."
       },
@@ -773,7 +757,6 @@
         "ogDescription": "Clasifica el inventario en clases A, B y C por valor de consumo anual: la regla 80/15/5, calculada sola. Exportación a CSV. Gratis y sin registro."
       },
       "hero": {
-        "eyebrow": "Herramienta gratuita — Análisis ABC",
         "headline": "Análisis ABC",
         "subheadline": "No todo el stock merece la misma atención: ordena los artículos por valor anual y controla la clase A de cerca."
       },

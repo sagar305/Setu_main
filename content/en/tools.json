@@ -106,7 +106,6 @@
         ]
       },
       "hero": {
-        "eyebrow": "Free Tool — Browser Based POS",
         "headline": "Browser Based POS",
         "subheadline": "Bill customers, manage products and track inventory — right from your browser, even without internet."
       }
@@ -133,7 +132,6 @@
         "ogDescription": "Create professional invoices with GST calculations. No login needed. Download as PDF instantly."
       },
       "hero": {
-        "eyebrow": "Free Tool — Invoice Generator",
         "headline": "Free Invoice Generator",
         "subheadline": "Create professional GST-compliant invoices instantly. No signup required."
       },
@@ -260,7 +258,6 @@
         "ogDescription": "Generate custom UPI QR codes with amounts and notes instantly. Share for quick payments."
       },
       "hero": {
-        "eyebrow": "Free Tool — UPI QR Generator",
         "headline": "Dynamic UPI QR Generator",
         "subheadline": "Generate custom UPI QR codes with amounts and notes. Share instantly for quick payments."
       },
@@ -386,7 +383,6 @@
         "ogDescription": "Break a large payment into several sub-₹2,000 UPI QR codes and collect the full amount without paying MDR."
       },
       "hero": {
-        "eyebrow": "Free Tool — Zero-MDR UPI QR Splitter",
         "headline": "Zero-MDR UPI QR Splitter",
         "subheadline": "Break a large payment into several sub-₹2,000 QR codes and collect the whole amount without losing a cut to MDR."
       },
@@ -483,7 +479,6 @@
         "ogDescription": "Build your menu, get a QR code, print it. The entire menu lives inside the QR — no hosting or subscription needed."
       },
       "hero": {
-        "eyebrow": "Free Tool — QR Menu Generator",
         "headline": "QR Menu Generator",
         "subheadline": "Build your digital menu and get a print-ready QR code. The whole menu is stored inside the QR — no hosting, no subscription, nothing to expire."
       },
@@ -639,7 +634,6 @@
         "ogDescription": "Create professional quotes with validity dates and totals — print or save as PDF. No signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Quotation Generator",
         "headline": "Quotation Generator",
         "subheadline": "Professional quotes with validity dates and status tracking — print or save as PDF."
       },
@@ -683,7 +677,6 @@
         "ogDescription": "Fill your business details once. POS, invoices, receipts and labels reuse them automatically."
       },
       "hero": {
-        "eyebrow": "Free Tool — Business Profile",
         "headline": "Business Profile",
         "subheadline": "Set up once. Every Setu tool on this device reuses it — nothing asks twice."
       },
@@ -721,7 +714,6 @@
         "ogDescription": "Design a branded receipt, fill in a sale and print it — and reuse the design across Setu tools. Offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Receipt Generator",
         "headline": "Receipt Generator",
         "subheadline": "Design your receipt, fill in a sale and print it — and the same design prints from the POS too."
       },
@@ -763,7 +755,6 @@
         "ogDescription": "Generate product barcodes in your browser and download as PNG or PDF. No signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Barcode Generator",
         "headline": "Barcode Generator",
         "subheadline": "Generate EAN-13, Code 128 and QR barcodes — download as PNG or PDF. Works offline."
       },
@@ -820,7 +811,6 @@
         "ogDescription": "Print product labels on A4 label sheets or thermal rolls, right from your browser."
       },
       "hero": {
-        "eyebrow": "Free Tool — Label Printer",
         "headline": "Price Label Printer",
         "subheadline": "Print price and barcode labels on A4 sheets or thermal rolls — straight from your browser."
       },
@@ -865,7 +855,6 @@
         "ogDescription": "Live stock levels, adjustments and full movement history — shared with the Setu Browser POS."
       },
       "hero": {
-        "eyebrow": "Free Tool — Stock Register",
         "headline": "Stock Register",
         "subheadline": "Live stock levels, quick adjustments and a full movement history — one source of truth with your POS."
       },
@@ -906,7 +895,6 @@
         "ogDescription": "Record purchases, reuse suppliers from your Supplier Book, and update product stock with one confirmation."
       },
       "hero": {
-        "eyebrow": "Free Tool — Purchase Register",
         "headline": "Purchase Register",
         "subheadline": "Record supplier bills, link products, and update stock with one confirmation."
       },
@@ -947,7 +935,6 @@
         "ogDescription": "Save supplier details once, reuse them in the Purchase Register and every Setu tool."
       },
       "hero": {
-        "eyebrow": "Free Tool — Supplier Book",
         "headline": "Supplier Book",
         "subheadline": "All your vendors in one place — saved once, reused by every Setu tool."
       },
@@ -988,7 +975,6 @@
         "ogDescription": "Track expenses by category with monthly totals and CSV export. Offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Expense Tracker",
         "headline": "Expense Tracker",
         "subheadline": "Record every business expense by category — and see your real profit on the dashboard."
       },
@@ -1030,7 +1016,6 @@
         "ogDescription": "Record cash in/out and get opening & closing balances automatically. Offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Cash Book",
         "headline": "Cash Book",
         "subheadline": "Daily cash in, cash out, and closing balance — the shop diary, minus the diary."
       },
@@ -1071,7 +1056,6 @@
         "ogDescription": "Revenue minus cost of goods minus actual expenses — computed from your own data, on your device."
       },
       "hero": {
-        "eyebrow": "Free Tool — Profit Dashboard",
         "headline": "Profit Dashboard",
         "subheadline": "Your real profit — sales minus cost of goods minus actual expenses. No estimates."
       },
@@ -1113,7 +1097,6 @@
         "ogDescription": "Track credit and payments per customer with automatic balances. Offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Customer Ledger",
         "headline": "Customer Ledger",
         "subheadline": "Your udhaar khata, digital — credit, payments and balances per customer."
       },
@@ -1154,7 +1137,6 @@
         "ogDescription": "Day-wise appointment management for salons, clinics and services. Offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Appointment Book",
         "headline": "Appointment Book",
         "subheadline": "Day-wise bookings, durations and statuses — for every appointment-based business."
       },
@@ -1196,7 +1178,6 @@
         "ogDescription": "Create professional credit notes for returns and adjustments. GST fields, itemised lines, instant PDF. Free, offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Credit Note Generator",
         "headline": "Credit Note Generator",
         "subheadline": "Handle returns and billing adjustments professionally — reference the invoice, list the items, print the PDF."
       },
@@ -1238,7 +1219,6 @@
         "ogDescription": "Create debit notes for purchase returns, short supply and rate differences. GST fields, itemised lines, instant PDF. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Debit Note Generator",
         "headline": "Debit Note Generator",
         "subheadline": "Returning goods or disputing a supplier bill? Issue a clean, itemised debit note in a minute."
       },
@@ -1280,7 +1260,6 @@
         "ogDescription": "Create professional purchase orders with delivery dates, itemised lines and taxes. Print to PDF instantly. Free, offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Purchase Order Generator",
         "headline": "Purchase Order Generator",
         "subheadline": "Authorize supplier purchases formally — items, rates, delivery date and terms on one clean PO."
       },
@@ -1322,7 +1301,6 @@
         "ogDescription": "Confirm customer orders before dispatch with a professional sales order — items, prices, delivery date, PDF. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Sales Order Generator",
         "headline": "Sales Order Generator",
         "subheadline": "Confirm what the customer ordered — items, prices and delivery date — before anything ships."
       },
@@ -1364,7 +1342,6 @@
         "ogDescription": "Build your chart of accounts from a ready-made small-business template. Add, code and categorise accounts, export to CSV. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Chart of Accounts",
         "headline": "Chart of Accounts",
         "subheadline": "The backbone of your books — a ready-made account list you can shape to your business."
       },
@@ -1406,7 +1383,6 @@
         "ogDescription": "Record double-entry journal entries with automatic debit/credit balancing. Feeds a general ledger and trial balance. Free, offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Journal Entry",
         "headline": "Journal Entry",
         "subheadline": "Proper double-entry bookkeeping — debits on the left, credits on the right, always balanced."
       },
@@ -1448,7 +1424,6 @@
         "ogDescription": "View any account's ledger with running balances, built automatically from your journal entries. Export to CSV. Free, offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — General Ledger",
         "headline": "General Ledger",
         "subheadline": "Pick an account, see every posting and the running balance — built automatically from your journal."
       },
@@ -1490,7 +1465,6 @@
         "ogDescription": "Reconcile your bank statement with your cash book — track uncleared cheques, deposits in transit and bank charges until the balances match. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Bank Reconciliation",
         "headline": "Bank Reconciliation",
         "subheadline": "Bank says one number, your books say another — list the reconciling items until they agree."
       },
@@ -1528,7 +1502,6 @@
         ]
       },
       "hero": {
-        "eyebrow": "Free Tool — Bank Statement Analyzer",
         "headline": "Bank Statement Analyzer",
         "subheadline": "Import, classify and analyse statements without uploading them anywhere."
       }
@@ -1554,7 +1527,6 @@
         "ogDescription": "A trial balance built automatically from your journal entries — every account's net debit or credit balance, totalled and checked. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Trial Balance",
         "headline": "Trial Balance",
         "subheadline": "Every account's net balance on its debit or credit side — totalled, checked, and ready to export."
       },
@@ -1596,7 +1568,6 @@
         "ogDescription": "Build a profit & loss statement — revenue, COGS, expenses, gross/operating/net profit with margins. Print to PDF or export CSV. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Profit & Loss Statement",
         "headline": "Profit & Loss Statement",
         "subheadline": "Revenue at the top, net profit at the bottom, every step in between — with margins computed live."
       },
@@ -1638,7 +1609,6 @@
         "ogDescription": "Build a balance sheet with current/fixed assets, liabilities and equity. Live balance check, A4 print, CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Balance Sheet",
         "headline": "Balance Sheet",
         "subheadline": "What you own, what you owe, and what's left for the owners — checked live so it always balances."
       },
@@ -1680,7 +1650,6 @@
         "ogDescription": "Build a cash flow statement across operating, investing and financing activities. Opening to closing cash, print to PDF, CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Cash Flow Statement",
         "headline": "Cash Flow Statement",
         "subheadline": "Where cash came from and where it went — operating, investing and financing, from opening to closing balance."
       },
@@ -1722,7 +1691,6 @@
         "ogDescription": "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Customer Statement",
         "headline": "Customer Statement",
         "subheadline": "Every invoice, payment and adjustment for one customer — with the running balance that settles arguments."
       },
@@ -1764,7 +1732,6 @@
         "ogDescription": "Track unpaid customer invoices in aging buckets — current, 1–30, 31–60, 61–90 and 90+ days overdue, by customer. CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Invoice Aging Report",
         "headline": "Invoice Aging Report",
         "subheadline": "Who owes you, how much, and how overdue — bucketed by age so you chase the right money first."
       },
@@ -1806,7 +1773,6 @@
         "ogDescription": "Track unpaid supplier bills in aging buckets — see what's due now, what's overdue and which supplier to pay first. CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Accounts Payable Aging",
         "headline": "Accounts Payable Aging",
         "subheadline": "Every unpaid supplier bill, bucketed by age — so you pay the right people at the right time."
       },
@@ -1848,7 +1814,6 @@
         "ogDescription": "Compare budgeted vs actual amounts by category with variance and variance % computed live. CSV export. Free, offline, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Budget vs Actual",
         "headline": "Budget vs Actual",
         "subheadline": "Plan vs reality, category by category — variances computed and colour-coded as you type."
       },
@@ -1890,7 +1855,6 @@
         "ogDescription": "Classify inventory into A, B and C classes by annual consumption value — the 80/15/5 rule, computed automatically. CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — ABC Analysis",
         "headline": "ABC Analysis",
         "subheadline": "Not all stock deserves equal attention — rank items by annual value and manage class A tightly."
       },
@@ -1932,7 +1896,6 @@
         "ogDescription": "Compare suppliers on price, delivery, credit terms and quality with weighted scoring — see the best-value vendor instantly. CSV export. Free, no signup."
       },
       "hero": {
-        "eyebrow": "Free Tool — Vendor Comparison",
         "headline": "Vendor Comparison",
         "subheadline": "Price isn't everything — weigh delivery, credit and quality too, and let the score pick the vendor."
       },

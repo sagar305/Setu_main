@@ -128,7 +128,6 @@
         "ogDescription": "Lihat sisa stok real-time, catat barang masuk dan keluar, dan periksa setiap pergerakan — berbagi data dengan Kasir berbasis browser Setu. Gratis, offline."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku stok",
         "headline": "Buku stok",
         "subheadline": "Sisa stok real-time, koreksi cepat, dan riwayat pergerakan lengkap — satu sumber data dengan kasir Anda."
       },
@@ -166,7 +165,6 @@
         "ogDescription": "Catat nota pembelian atas nama pemasok, hubungkan barang dengan produk Anda, dan stok diperbarui otomatis. Gratis, offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku pembelian",
         "headline": "Buku pembelian",
         "subheadline": "Catat nota pemasok, hubungkan produk, dan perbarui stok dengan satu konfirmasi."
       },
@@ -204,7 +202,6 @@
         "ogDescription": "Simpan data semua pemasok Anda di satu tempat — kontak, GSTIN, alamat, dan catatan. Gratis, offline, tanpa pendaftaran, dan terpakai di semua alat Setu."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku pemasok",
         "headline": "Buku pemasok",
         "subheadline": "Semua pemasok Anda di satu tempat — disimpan sekali, dipakai setiap alat Setu."
       },
@@ -255,7 +252,6 @@
         "ogDescription": "Buku utang digital — pantau utang yang Anda berikan dan pembayaran yang masuk per pelanggan, dengan saldo berjalan. Gratis, offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku piutang pelanggan",
         "headline": "Buku piutang pelanggan",
         "subheadline": "Buku utang Anda, versi digital — utang, pembayaran, dan saldo tiap pelanggan."
       },
@@ -297,7 +293,6 @@
         "ogDescription": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Pembuat nota kredit",
         "headline": "Pembuat nota kredit",
         "subheadline": "Tangani pengembalian dan penyesuaian tagihan secara profesional — rujuk fakturnya, rinci barangnya, cetak PDF-nya."
       },
@@ -335,7 +330,6 @@
         "ogDescription": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Pembuat nota debit",
         "headline": "Pembuat nota debit",
         "subheadline": "Mengembalikan barang atau mempersoalkan tagihan pemasok? Terbitkan nota debit yang rapi dan terperinci dalam satu menit."
       },
@@ -373,7 +367,6 @@
         "ogDescription": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Pembuat purchase order",
         "headline": "Pembuat purchase order",
         "subheadline": "Setujui pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syaratnya dalam satu PO yang rapi."
       },
@@ -411,7 +404,6 @@
         "ogDescription": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Pembuat sales order",
         "headline": "Pembuat sales order",
         "subheadline": "Pastikan apa yang dipesan pelanggan — barang, harga, dan tanggal kirim — sebelum apa pun dikirim."
       },
@@ -449,7 +441,6 @@
         "ogDescription": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Bagan akun",
         "headline": "Bagan akun",
         "subheadline": "Tulang punggung pembukuan Anda — daftar akun siap pakai yang bisa Anda bentuk sesuai usaha sendiri."
       },
@@ -487,7 +478,6 @@
         "ogDescription": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnal umumnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Jurnal umum",
         "headline": "Jurnal umum",
         "subheadline": "Pembukuan berpasangan yang benar — debit di kiri, kredit di kanan, selalu seimbang."
       },
@@ -525,7 +515,6 @@
         "ogDescription": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Buku besar",
         "headline": "Buku besar",
         "subheadline": "Pilih sebuah akun, lihat setiap posting beserta saldo berjalannya — tersusun sendiri dari jurnal Anda."
       },
@@ -563,7 +552,6 @@
         "ogDescription": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Rekonsiliasi bank",
         "headline": "Rekonsiliasi bank",
         "subheadline": "Bank menyebut satu angka, buku Anda angka lain — daftarkan pos-pos rekonsiliasinya sampai keduanya sepakat."
       },
@@ -605,7 +593,6 @@
         "ogDescription": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Neraca saldo",
         "headline": "Neraca saldo",
         "subheadline": "Saldo bersih tiap akun di sisi debit atau kreditnya — dijumlahkan, diperiksa, dan siap diekspor."
       },
@@ -643,7 +630,6 @@
         "ogDescription": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Laporan laba rugi",
         "headline": "Laporan laba rugi",
         "subheadline": "Pendapatan di atas, laba bersih di bawah, dan setiap langkah di antaranya — margin dihitung langsung."
       },
@@ -681,7 +667,6 @@
         "ogDescription": "Susun neraca dengan aset lancar dan tetap, liabilitas, serta ekuitas. Pemeriksaan keseimbangan langsung, cetak A4, ekspor CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Neraca",
         "headline": "Neraca",
         "subheadline": "Apa yang Anda punya, apa yang Anda utang, dan apa yang tersisa bagi pemilik — diperiksa langsung, jadi selalu seimbang."
       },
@@ -719,7 +704,6 @@
         "ogDescription": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Laporan arus kas",
         "headline": "Laporan arus kas",
         "subheadline": "Dari mana kas datang dan ke mana perginya — operasi, investasi, dan pendanaan, dari saldo awal ke saldo akhir."
       },
@@ -773,7 +757,6 @@
         "ogDescription": "Kelompokkan stok ke kelas A, B, dan C menurut nilai pemakaian tahunan — aturan 80/15/5, dihitung sendiri. Ekspor CSV. Gratis, tanpa pendaftaran."
       },
       "hero": {
-        "eyebrow": "Alat Gratis — Analisis ABC",
         "headline": "Analisis ABC",
         "subheadline": "Tidak semua stok perlu perhatian yang sama — urutkan barang menurut nilai tahunannya dan kelola kelas A dengan ketat."
       },

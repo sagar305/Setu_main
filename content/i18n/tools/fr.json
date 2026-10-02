@@ -128,7 +128,6 @@
         "ogDescription": "Consultez le stock en temps réel, enregistrez les entrées et sorties et vérifiez chaque mouvement — partagé avec la Caisse dans le navigateur. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Registre de stock",
         "headline": "Registre de stock",
         "subheadline": "Un stock en temps réel, des corrections rapides et tout l'historique des mouvements — une seule vérité avec votre Caisse dans le navigateur."
       },
@@ -166,7 +165,6 @@
         "ogDescription": "Enregistrez les factures d'achat par fournisseur, reliez les lignes à vos produits et le stock se met à jour tout seul. Gratuit, hors ligne, sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Registre des achats",
         "headline": "Registre des achats",
         "subheadline": "Enregistrez les factures fournisseur, reliez vos produits et mettez le stock à jour en une confirmation."
       },
@@ -204,7 +202,6 @@
         "ogDescription": "Gardez les coordonnées de tous vos fournisseurs au même endroit : contact, GSTIN, adresses et notes. Gratuit, hors ligne et sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Répertoire fournisseurs",
         "headline": "Répertoire fournisseurs",
         "subheadline": "Tous vos fournisseurs au même endroit — enregistrés une fois, repris par chaque outil Setu."
       },
@@ -255,7 +252,6 @@
         "ogDescription": "Carnet de crédit numérique : suivez le crédit accordé et les paiements reçus pour chaque client, avec les soldes à jour. Gratuit et sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Livre de comptes clients",
         "headline": "Livre de comptes clients",
         "subheadline": "Votre carnet de crédit, en numérique — crédit, paiements et solde pour chaque client."
       },
@@ -297,7 +293,6 @@
         "ogDescription": "Créez des avoirs professionnels pour les retours et les ajustements. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit, hors ligne, sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Générateur d'avoirs",
         "headline": "Générateur d'avoirs",
         "subheadline": "Traitez les retours et les régularisations de facturation proprement : référencez la facture, détaillez les lignes, imprimez le PDF."
       },
@@ -335,7 +330,6 @@
         "ogDescription": "Créez des notes de débit pour les retours d'achat, les manquants et les écarts de prix. Champs de taxe, lignes détaillées, PDF immédiat. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Générateur de notes de débit",
         "headline": "Générateur de notes de débit",
         "subheadline": "Vous renvoyez de la marchandise ou contestez la facture d'un fournisseur ? Émettez une note de débit nette et détaillée en une minute."
       },
@@ -373,7 +367,6 @@
         "ogDescription": "Créez des bons de commande professionnels avec date de livraison, lignes détaillées et taxes. Imprimez le PDF immédiatement. Gratuit et sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Générateur de bons de commande",
         "headline": "Générateur de bons de commande",
         "subheadline": "Validez formellement vos achats fournisseurs : articles, prix, date de livraison et conditions sur un seul bon de commande clair."
       },
@@ -411,7 +404,6 @@
         "ogDescription": "Confirmez les commandes clients avant expédition avec un accusé de commande professionnel : articles, prix, date de livraison, PDF. Gratuit, sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Générateur de commandes clients",
         "headline": "Générateur de commandes clients",
         "subheadline": "Confirmez ce que le client a commandé — articles, prix et date de livraison — avant toute expédition."
       },
@@ -449,7 +441,6 @@
         "ogDescription": "Construisez votre plan comptable depuis un modèle prêt pour les petites entreprises. Ajoutez, codez et classez les comptes, exportez en CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Plan comptable",
         "headline": "Plan comptable",
         "subheadline": "La colonne vertébrale de votre comptabilité — une liste de comptes prête à l'emploi, que vous adaptez à votre activité."
       },
@@ -487,7 +478,6 @@
         "ogDescription": "Saisissez des écritures en partie double avec équilibrage automatique du débit et du crédit. Elles alimentent le grand livre et la balance. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Écriture comptable",
         "headline": "Écriture comptable",
         "subheadline": "De la vraie comptabilité en partie double — le débit à gauche, le crédit à droite, toujours équilibré."
       },
@@ -525,7 +515,6 @@
         "ogDescription": "Consultez le grand livre de n'importe quel compte avec les soldes progressifs, construit à partir de vos écritures. Export CSV. Gratuit, hors ligne."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Grand livre",
         "headline": "Grand livre",
         "subheadline": "Choisissez un compte et voyez chaque écriture avec son solde progressif — construit à partir de votre journal."
       },
@@ -563,7 +552,6 @@
         "ogDescription": "Rapprochez votre relevé bancaire de votre livre de caisse : chèques non débités, remises en cours et frais bancaires, jusqu'à ce que les soldes concordent."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Rapprochement bancaire",
         "headline": "Rapprochement bancaire",
         "subheadline": "La banque annonce un chiffre, vos livres un autre — listez les éléments de rapprochement jusqu'à ce qu'ils concordent."
       },
@@ -605,7 +593,6 @@
         "ogDescription": "Une balance générale produite automatiquement à partir de vos écritures : le solde net débiteur ou créditeur de chaque compte, totalisé et vérifié. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Balance générale",
         "headline": "Balance générale",
         "subheadline": "Le solde net de chaque compte du côté débit ou crédit — totalisé, vérifié et prêt à exporter."
       },
@@ -643,7 +630,6 @@
         "ogDescription": "Construisez un compte de résultat : chiffre d'affaires, coût des ventes, charges, résultats brut et net avec les marges. PDF ou export CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Compte de résultat",
         "headline": "Compte de résultat",
         "subheadline": "Le chiffre d'affaires en haut, le résultat net en bas, et chaque étape entre les deux — marges calculées en direct."
       },
@@ -681,7 +667,6 @@
         "ogDescription": "Construisez un bilan avec actif circulant et immobilisé, dettes et capitaux propres. Contrôle d'équilibre en direct, impression A4, export CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Bilan",
         "headline": "Bilan",
         "subheadline": "Ce que vous possédez, ce que vous devez et ce qui reste aux associés — vérifié en direct, donc toujours équilibré."
       },
@@ -719,7 +704,6 @@
         "ogDescription": "Construisez un tableau de flux de trésorerie par activités d'exploitation, d'investissement et de financement. Du solde initial au final, PDF et CSV. Gratuit."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Tableau des flux de trésorerie",
         "headline": "Tableau des flux de trésorerie",
         "subheadline": "D'où la trésorerie est venue et où elle est allée — exploitation, investissement et financement, du solde d'ouverture à celui de clôture."
       },
@@ -773,7 +757,6 @@
         "ogDescription": "Classez votre stock en catégories A, B et C selon la valeur de consommation annuelle : la règle 80/15/5, calculée seule. Export CSV. Gratuit, sans inscription."
       },
       "hero": {
-        "eyebrow": "Outil gratuit — Analyse ABC",
         "headline": "Analyse ABC",
         "subheadline": "Tout le stock ne mérite pas la même attention : classez les articles par valeur annuelle et tenez la catégorie A de près."
       },

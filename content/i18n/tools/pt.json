@@ -128,7 +128,6 @@
         "ogDescription": "Veja o estoque atual, registre entradas e saídas e confira cada movimentação — compartilhado com o seu PDV de navegador Setu. Grátis e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Registro de estoque",
         "headline": "Registro de estoque",
         "subheadline": "Estoque atualizado, ajustes rápidos e todo o histórico de movimentações — uma só verdade com o seu PDV."
       },
@@ -166,7 +165,6 @@
         "ogDescription": "Registre notas de compra por fornecedor, vincule os itens aos seus produtos e o estoque é atualizado sozinho. Grátis, offline e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Registro de compras",
         "headline": "Registro de compras",
         "subheadline": "Registre notas de fornecedor, vincule produtos e atualize o estoque com uma confirmação."
       },
@@ -204,7 +202,6 @@
         "ogDescription": "Mantenha os dados de todos os seus fornecedores num só lugar: contato, GSTIN, endereços e observações. Grátis, offline e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Livro de fornecedores",
         "headline": "Livro de fornecedores",
         "subheadline": "Todos os seus fornecedores num só lugar — salvos uma vez e reaproveitados por cada ferramenta Setu."
       },
@@ -255,7 +252,6 @@
         "ogDescription": "Caderneta digital: acompanhe o crédito dado e os pagamentos recebidos de cada cliente, com saldo em dia. Grátis, offline e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Razão de clientes",
         "headline": "Razão de clientes",
         "subheadline": "A sua caderneta, em digital — crédito, pagamentos e saldo de cada cliente."
       },
@@ -297,7 +293,6 @@
         "ogDescription": "Crie notas de crédito profissionais para devoluções e ajustes. Campos de imposto, linhas detalhadas, PDF na hora. Grátis, funciona offline, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de notas de crédito",
         "headline": "Gerador de notas de crédito",
         "subheadline": "Trate devoluções e ajustes de faturamento com profissionalismo: referencie a fatura, detalhe os itens, imprima o PDF."
       },
@@ -335,7 +330,6 @@
         "ogDescription": "Crie notas de débito para devoluções de compra, falta de mercadoria e diferenças de preço. Campos de imposto, linhas detalhadas e PDF na hora. Grátis."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de notas de débito",
         "headline": "Gerador de notas de débito",
         "subheadline": "Devolvendo mercadoria ou contestando a fatura de um fornecedor? Emita uma nota de débito limpa e detalhada em um minuto."
       },
@@ -373,7 +367,6 @@
         "ogDescription": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de ordem de compra",
         "headline": "Gerador de ordem de compra",
         "subheadline": "Autorize compras a fornecedores formalmente: itens, preços, data de entrega e condições em uma única ordem limpa."
       },
@@ -411,7 +404,6 @@
         "ogDescription": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Gerador de pedido de venda",
         "headline": "Gerador de pedido de venda",
         "subheadline": "Confirme o que o cliente pediu — itens, preços e data de entrega — antes de despachar qualquer coisa."
       },
@@ -449,7 +441,6 @@
         "ogDescription": "Monte seu plano de contas a partir de um modelo pronto para pequenos negócios. Inclua, codifique e classifique contas, exporte em CSV. Grátis, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Plano de contas",
         "headline": "Plano de contas",
         "subheadline": "A espinha dorsal da sua contabilidade — uma lista de contas pronta que você molda ao seu negócio."
       },
@@ -487,7 +478,6 @@
         "ogDescription": "Registre lançamentos em partidas dobradas com fechamento automático de débito e crédito. Alimentam o livro razão e o balancete. Grátis, offline, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Lançamento contábil",
         "headline": "Lançamento contábil",
         "subheadline": "Contabilidade por partidas dobradas de verdade — débito à esquerda, crédito à direita, sempre fechando."
       },
@@ -525,7 +515,6 @@
         "ogDescription": "Veja o razão de qualquer conta com saldos acumulados, montado a partir dos seus lançamentos. Exportação em CSV. Grátis, funciona offline, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Livro razão",
         "headline": "Livro razão",
         "subheadline": "Escolha uma conta e veja cada lançamento com o saldo acumulado — montado a partir do seu diário."
       },
@@ -563,7 +552,6 @@
         "ogDescription": "Concilie seu extrato bancário com o livro caixa: cheques não compensados, depósitos em trânsito e tarifas, até os saldos baterem. Grátis, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Conciliação bancária",
         "headline": "Conciliação bancária",
         "subheadline": "O banco diz um número, seus livros dizem outro — vá listando os itens de conciliação até os dois concordarem."
       },
@@ -605,7 +593,6 @@
         "ogDescription": "Um balancete gerado automaticamente a partir dos seus lançamentos: o saldo líquido devedor ou credor de cada conta, somado e conferido. Grátis, sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Balancete de verificação",
         "headline": "Balancete de verificação",
         "subheadline": "O saldo líquido de cada conta no seu lado devedor ou credor — somado, conferido e pronto para exportar."
       },
@@ -643,7 +630,6 @@
         "ogDescription": "Monte uma DRE: receita, custo das mercadorias, despesas e lucro bruto, operacional e líquido com as margens. Imprima em PDF ou exporte CSV. Grátis."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Demonstração de resultado",
         "headline": "Demonstração de resultado",
         "subheadline": "Receita no topo, lucro líquido na base e cada passo no meio — com as margens calculadas ao vivo."
       },
@@ -681,7 +667,6 @@
         "ogDescription": "Monte um balanço patrimonial com ativo circulante e fixo, passivo e patrimônio líquido. Conferência do fechamento ao vivo, impressão A4 e CSV. Grátis."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Balanço patrimonial",
         "headline": "Balanço patrimonial",
         "subheadline": "O que você tem, o que você deve e o que sobra para os sócios — conferido ao vivo, então sempre fecha."
       },
@@ -719,7 +704,6 @@
         "ogDescription": "Monte uma demonstração de fluxo de caixa por atividades operacionais, de investimento e de financiamento. Do saldo inicial ao final, PDF e CSV. Grátis."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Demonstração de fluxo de caixa",
         "headline": "Demonstração de fluxo de caixa",
         "subheadline": "De onde o dinheiro veio e para onde foi — operacional, investimento e financiamento, do saldo inicial ao final."
       },
@@ -773,7 +757,6 @@
         "ogDescription": "Classifique o estoque em classes A, B e C pelo valor de consumo anual: a regra 80/15/5, calculada sozinha. Exportação em CSV. Grátis e sem cadastro."
       },
       "hero": {
-        "eyebrow": "Ferramenta gratuita — Análise ABC",
         "headline": "Análise ABC",
         "subheadline": "Nem todo estoque merece a mesma atenção: ordene os itens por valor anual e controle a classe A de perto."
       },

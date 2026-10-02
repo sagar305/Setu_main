@@ -88,7 +88,8 @@ export type ToolItem = {
     ogTitle?: string;
     ogDescription?: string;
   };
-  hero: { eyebrow: string; headline: string; subheadline: string };
+  /** No eyebrow: the pill on a tool page reads the shared "Free Tool" label. */
+  hero: { headline: string; subheadline: string };
   faq?: { items: { question: string; answer: string }[] };
   body?: ToolBodyBlock[];
 };

@@ -128,7 +128,6 @@
         "ogDescription": "Aktuellen Lagerbestand sehen, Zu- und Abgänge erfassen und jede Bewegung prüfen — gemeinsam mit Ihrem Setu Browser-Kasse. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Bestandsbuch",
         "headline": "Bestandsbuch",
         "subheadline": "Aktueller Bestand, schnelle Korrekturen und die vollständige Bewegungshistorie — eine Wahrheit mit Ihrer Browser-Kasse."
       },
@@ -166,7 +165,6 @@
         "ogDescription": "Lieferantenrechnungen erfassen, Positionen mit Ihren Artikeln verknüpfen und der Bestand wird automatisch fortgeschrieben. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Einkaufsbuch",
         "headline": "Einkaufsbuch",
         "subheadline": "Lieferantenrechnungen erfassen, Artikel verknüpfen und den Bestand mit einer Bestätigung fortschreiben."
       },
@@ -204,7 +202,6 @@
         "ogDescription": "Halten Sie alle Lieferantendaten an einem Ort — Kontakt, GSTIN, Adressen und Notizen. Kostenlos, offline, ohne Anmeldung, in jedem Setu-Tool nutzbar."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Lieferantenbuch",
         "headline": "Lieferantenbuch",
         "subheadline": "Alle Lieferanten an einem Ort — einmal gespeichert, von jedem Setu-Tool wiederverwendet."
       },
@@ -255,7 +252,6 @@
         "ogDescription": "Digitales Kreditbuch — gewährter Kredit und erhaltene Zahlungen je Kunde, mit laufendem Saldo. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Kundenkonto",
         "headline": "Kundenkonto",
         "subheadline": "Ihr Kreditbuch, digital — Kredit, Zahlungen und Saldo je Kunde."
       },
@@ -297,7 +293,6 @@
         "ogDescription": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Gutschriftengenerator",
         "headline": "Gutschriftengenerator",
         "subheadline": "Rücksendungen und Rechnungskorrekturen professionell abwickeln — Rechnung referenzieren, Posten auflisten, PDF drucken."
       },
@@ -335,7 +330,6 @@
         "ogDescription": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Belastungsanzeigen-Generator",
         "headline": "Belastungsanzeigen-Generator",
         "subheadline": "Ware geht zurück oder die Lieferantenrechnung stimmt nicht? Stellen Sie in einer Minute eine saubere, nach Posten aufgeschlüsselte Belastungsanzeige aus."
       },
@@ -373,7 +367,6 @@
         "ogDescription": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Bestellgenerator",
         "headline": "Bestellgenerator",
         "subheadline": "Einkäufe bei Lieferanten formell freigeben — Artikel, Preise, Liefertermin und Bedingungen auf einer klaren Bestellung."
       },
@@ -411,7 +404,6 @@
         "ogDescription": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Auftragsgenerator",
         "headline": "Auftragsgenerator",
         "subheadline": "Halten Sie fest, was der Kunde bestellt hat — Artikel, Preise und Liefertermin — bevor etwas das Haus verlässt."
       },
@@ -449,7 +441,6 @@
         "ogDescription": "Bauen Sie Ihren Kontenplan aus einer Vorlage für kleine Betriebe. Konten anlegen, nummerieren und einordnen, als CSV exportieren. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Kontenplan",
         "headline": "Kontenplan",
         "subheadline": "Das Rückgrat Ihrer Buchhaltung — eine fertige Kontenliste, die Sie auf Ihren Betrieb zuschneiden."
       },
@@ -487,7 +478,6 @@
         "ogDescription": "Erfassen Sie doppelte Buchungssatzen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Buchungssatz",
         "headline": "Buchungssatz",
         "subheadline": "Echte doppelte Buchführung — Soll links, Haben rechts, immer im Gleichgewicht."
       },
@@ -525,7 +515,6 @@
         "ogDescription": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Hauptbuch",
         "headline": "Hauptbuch",
         "subheadline": "Konto auswählen und jede Buchungssatz mit dem laufenden Saldo sehen — automatisch aus Ihrem Journal erzeugt."
       },
@@ -563,7 +552,6 @@
         "ogDescription": "Stimmen Sie Ihren Kontoauszug mit dem Kassenbuch ab — nicht eingelöste Schecks, Einzahlungen auf dem Weg und Bankspesen, bis die Salden stimmen."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Bankabstimmung",
         "headline": "Bankabstimmung",
         "subheadline": "Die Bank nennt eine Zahl, Ihre Bücher eine andere — tragen Sie die Abstimmungsposten ein, bis beide übereinstimmen."
       },
@@ -605,7 +593,6 @@
         "ogDescription": "Eine Saldenliste, automatisch aus Ihren Buchungssatzen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Saldenliste",
         "headline": "Saldenliste",
         "subheadline": "Je Konto der Saldo auf seiner Soll- oder Haben-Seite — summiert, geprüft und bereit zum Export."
       },
@@ -643,7 +630,6 @@
         "ogDescription": "Erstellen Sie eine Gewinn- und Verlustrechnung: Umsatz, Wareneinsatz, Kosten, Roh- und Jahresergebnis mit Margen. PDF-Druck oder CSV-Export. Kostenlos."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Gewinn- und Verlustrechnung",
         "headline": "Gewinn- und Verlustrechnung",
         "subheadline": "Oben der Umsatz, unten das Jahresergebnis, und jede Stufe dazwischen — Margen laufend berechnet."
       },
@@ -681,7 +667,6 @@
         "ogDescription": "Erstellen Sie eine Bilanz mit Umlauf- und Anlagevermögen, Verbindlichkeiten und Eigenkapital. Bilanzprüfung in Echtzeit, A4-Druck, CSV-Export. Kostenlos."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Bilanz",
         "headline": "Bilanz",
         "subheadline": "Was Sie besitzen, was Sie schulden und was den Eigentümern bleibt — laufend geprüft, damit es immer aufgeht."
       },
@@ -719,7 +704,6 @@
         "ogDescription": "Erstellen Sie eine Kapitalflussrechnung nach operativer, Investitions- und Finanzierungstätigkeit. Vom Anfangs- zum Endbestand, PDF und CSV. Kostenlos."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — Kapitalflussrechnung",
         "headline": "Kapitalflussrechnung",
         "subheadline": "Woher das Geld kam und wohin es ging — operativ, Investition und Finanzierung, vom Anfangs- bis zum Endbestand."
       },
@@ -773,7 +757,6 @@
         "ogDescription": "Teilen Sie Ihr Lager nach dem Jahresverbrauchswert in die Klassen A, B und C — die 80/15/5-Regel, automatisch berechnet. CSV-Export. Kostenlos, ohne Anmeldung."
       },
       "hero": {
-        "eyebrow": "Kostenloses Tool — ABC-Analyse",
         "headline": "ABC-Analyse",
         "subheadline": "Nicht jeder Bestand verdient gleich viel Aufmerksamkeit — sortieren Sie die Artikel nach Jahreswert und führen Sie Klasse A streng."
       },
