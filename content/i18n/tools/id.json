@@ -191,7 +191,118 @@
     },
     {
       "name": "Pembuat QR UPI dinamis",
-      "shortDescription": "Buat kode QR UPI dinamis dengan nominal dan catatan khusus untuk pembayaran instan."
+      "shortDescription": "Buat kode QR UPI dinamis dengan nominal dan catatan khusus untuk pembayaran instan.",
+      "seo": {
+        "title": "Pembuat QR UPI dinamis gratis — seketika",
+        "description": "Buat kode QR UPI dinamis seketika. Masukkan UPI ID, jumlah, dan catatan Anda untuk mendapat kode QR penagihan cepat. Tanpa pendaftaran.",
+        "keywords": [
+          "pembuat QR UPI",
+          "kode QR dinamis",
+          "QR pembayaran UPI",
+          "pembuat QR gratis",
+          "QR tagih seketika",
+          "tautan dalam UPI",
+          "kode QR pembayaran"
+        ],
+        "ogTitle": "Pembuat QR UPI dinamis gratis — seketika",
+        "ogDescription": "Buat kode QR UPI berisi jumlah dan catatan seketika. Bagikan untuk menagih dengan cepat."
+      },
+      "hero": {
+        "headline": "Pembuat QR UPI dinamis",
+        "subheadline": "Buat kode QR UPI berisi jumlah dan catatan. Bagikan seketika untuk menagih dengan cepat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu kode QR UPI dinamis?",
+            "answer": "Kode QR UPI dinamis adalah kode khusus yang sudah memuat UPI ID Anda, jumlah pembayaran, dan catatan rujukan. Begitu dipindai, ia mengisi sendiri rincian pembayaran di aplikasi UPI mana pun, sehingga penagihan jadi lebih cepat dan enak."
+          },
+          {
+            "question": "Apakah saya perlu mendaftar?",
+            "answer": "Tidak! Pembuat kode QR UPI ini sepenuhnya gratis dan tanpa pendaftaran. Buat kode sebanyak yang Anda perlukan, seketika."
+          },
+          {
+            "question": "Bagaimana memakai kode QR yang sudah dibuat?",
+            "answer": "Unduh kode QR-nya dan pasang di toko, rumah makan, atau faktur Anda. Pelanggan memindainya dengan aplikasi UPI apa pun (Google Pay, PhonePe, Paytm, dan lain-lain) lalu membayar seketika."
+          },
+          {
+            "question": "Bisakah jumlah pembayaran ditetapkan?",
+            "answer": "Bisa! Kalau mau, sertakan jumlah tetap di dalam kode QR. Jumlahnya sudah terisi saat pelanggan membuka aplikasi UPI mereka."
+          },
+          {
+            "question": "Penyedia UPI apa saja yang didukung?",
+            "answer": "Pembuat ini jalan dengan semua penyedia UPI besar di India, termasuk SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm, dan 80-an bank serta aplikasi pembayaran lainnya."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat QR UPI Setu?",
+          "items": [
+            {
+              "title": "Jadi seketika",
+              "text": "Kode QR jadi seketika. Tanpa pendaftaran, tanpa menunggu. Buat sebanyak yang perlu."
+            },
+            {
+              "title": "Sesuai kebutuhan",
+              "text": "Tetapkan jumlah pembayaran dan tambahkan catatan rujukan. Cocok untuk struk, faktur, atau harga tetap."
+            },
+            {
+              "title": "Semua bank jalan",
+              "text": "Jalan dengan semua bank dan aplikasi UPI besar di India. Pelanggan bisa membayar dari aplikasi apa pun."
+            },
+            {
+              "title": "Enak di ponsel",
+              "text": "Jalan baik di ponsel, tablet, dan komputer. Unduh dan bagikan seketika."
+            },
+            {
+              "title": "Aman dan pribadi",
+              "text": "Semua QR dibuat di perangkat Anda. UPI ID Anda tidak pernah sampai ke server kami."
+            },
+            {
+              "title": "Unduh dan bagikan",
+              "text": "Unduh QR sebagai gambar atau salin tautan dalam UPI. Pakai di mana saja."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "intro": "Ikuti langkah sederhana ini untuk membuat kode QR UPI:",
+          "steps": [
+            "Masukkan UPI ID Anda (misalnya namaanda@upi)",
+            "Kalau mau, tambahkan jumlah pembayaran",
+            "Tambahkan catatan rujukan (boleh dikosongkan)",
+            "Unduh kode QR-nya atau salin tautan UPI",
+            "Bagikan ke pelanggan atau pasang di toko"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Di mana kode QR UPI bisa dipakai?",
+          "items": [
+            "Pasang di rumah makan, kafe, atau toko Anda",
+            "Tambahkan ke faktur atau struk Anda",
+            "Bagikan lewat WhatsApp atau media sosial",
+            "Sertakan di dalam email",
+            "Cetak dan tempel di paket antaran"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat alat usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Pembuat faktur"
+            },
+            {
+              "label": "Kalkulator GST"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Pemisah QR UPI tanpa MDR",

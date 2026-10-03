@@ -191,7 +191,118 @@
     },
     {
       "name": "Générateur de QR de paiement",
-      "shortDescription": "Générez des QR codes de paiement dynamiques avec montant et libellé pour encaisser tout de suite."
+      "shortDescription": "Générez des QR codes de paiement dynamiques avec montant et libellé pour encaisser tout de suite.",
+      "seo": {
+        "title": "Générateur de QR de paiement UPI gratuit",
+        "description": "Générez des QR codes UPI dynamiques à l'instant. Indiquez votre identifiant UPI, le montant et une note pour créer des QR codes d'encaissement rapide.",
+        "keywords": [
+          "générateur de QR UPI",
+          "QR code dynamique",
+          "QR de paiement UPI",
+          "générateur de QR gratuit",
+          "QR d'encaissement instantané",
+          "lien profond UPI",
+          "QR code de paiement"
+        ],
+        "ogTitle": "Générateur de QR de paiement UPI gratuit",
+        "ogDescription": "Créez des QR codes UPI avec montants et notes à l'instant. Partagez-les pour encaisser vite."
+      },
+      "hero": {
+        "headline": "Générateur de QR de paiement",
+        "subheadline": "Créez des QR codes UPI avec montants et notes. Partagez-les aussitôt pour encaisser vite."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un QR code UPI dynamique ?",
+            "answer": "Un QR code UPI dynamique est un code personnalisé qui porte votre identifiant UPI, le montant à encaisser et une note de référence. À la lecture, il remplit tout seul les informations de paiement dans n'importe quelle application UPI, ce qui rend l'encaissement plus rapide."
+          },
+          {
+            "question": "Faut-il s'inscrire ?",
+            "answer": "Non ! Ce générateur de QR codes UPI est entièrement gratuit et sans inscription. Créez autant de codes qu'il vous en faut, aussitôt."
+          },
+          {
+            "question": "Comment utiliser le QR code obtenu ?",
+            "answer": "Téléchargez le QR code et affichez-le dans votre boutique, votre restaurant ou sur votre facture. Vos clients le lisent avec n'importe quelle application UPI (Google Pay, PhonePe, Paytm, etc.) et paient aussitôt."
+          },
+          {
+            "question": "Puis-je fixer le montant ?",
+            "answer": "Oui ! Vous pouvez inclure un montant fixe dans le QR code. Il sera déjà renseigné quand le client ouvrira son application UPI."
+          },
+          {
+            "question": "Quels fournisseurs UPI sont pris en charge ?",
+            "answer": "Notre générateur fonctionne avec tous les grands fournisseurs UPI indiens, dont SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm, et plus de 80 autres banques et applications de paiement."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Pourquoi utiliser le générateur de QR UPI de Setu ?",
+          "items": [
+            {
+              "title": "Généré aussitôt",
+              "text": "Les QR codes se créent sur-le-champ. Pas d'inscription, pas d'attente. Faites-en autant qu'il faut."
+            },
+            {
+              "title": "À votre main",
+              "text": "Fixez le montant et ajoutez une note de référence. Parfait pour les notes, les factures ou les prix fixes."
+            },
+            {
+              "title": "Toutes les banques",
+              "text": "Fonctionne avec toutes les grandes banques et applications UPI indiennes. Vos clients paient depuis l'application qu'ils utilisent."
+            },
+            {
+              "title": "Pratique sur mobile",
+              "text": "Fonctionne bien sur téléphone, tablette et ordinateur. Téléchargez et partagez aussitôt."
+            },
+            {
+              "title": "Sûr et confidentiel",
+              "text": "Tous les QR sont générés sur votre appareil. Votre identifiant UPI n'atteint jamais nos serveurs."
+            },
+            {
+              "title": "Télécharger et partager",
+              "text": "Téléchargez les QR en image ou copiez le lien profond UPI. Utilisez-le où vous voulez."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Comment ça marche ?",
+          "intro": "Suivez ces étapes simples pour générer un QR code UPI :",
+          "steps": [
+            "Saisissez votre identifiant UPI (par exemple votrenom@upi)",
+            "Ajoutez si vous le souhaitez le montant à encaisser",
+            "Ajoutez une note de référence (facultatif)",
+            "Téléchargez le QR code ou copiez le lien UPI",
+            "Partagez-le avec vos clients ou affichez-le en boutique"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Où utiliser les QR codes UPI ?",
+          "items": [
+            "Affichez-le dans votre restaurant, votre café ou votre boutique",
+            "Ajoutez-le à vos factures ou à vos notes",
+            "Partagez-le sur WhatsApp ou les réseaux sociaux",
+            "Mettez-le dans vos e-mails",
+            "Imprimez-le et collez-le sur les colis de livraison"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Outils associés",
+          "intro": "Découvrez nos autres outils pour l'entreprise :",
+          "links": [
+            {
+              "label": "Générateur de factures"
+            },
+            {
+              "label": "Calculateur de GST"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Diviseur de QR UPI sans MDR",

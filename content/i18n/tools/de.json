@@ -191,7 +191,118 @@
     },
     {
       "name": "Dynamischer UPI-QR-Generator",
-      "shortDescription": "Dynamische UPI-QR-Codes mit eigenem Betrag und Verwendungszweck für Sofortzahlungen."
+      "shortDescription": "Dynamische UPI-QR-Codes mit eigenem Betrag und Verwendungszweck für Sofortzahlungen.",
+      "seo": {
+        "title": "Kostenloser dynamischer UPI-QR-Generator",
+        "description": "Dynamische UPI-QR-Codes sofort erzeugen. Geben Sie Ihre UPI-ID, den Betrag und eine Notiz ein und erhalten Sie einen QR-Code für schnelle Zahlungen.",
+        "keywords": [
+          "UPI-QR-Generator",
+          "dynamischer QR-Code",
+          "UPI-Zahlungs-QR",
+          "QR-Generator kostenlos",
+          "Sofortzahlungs-QR",
+          "UPI-Deeplink",
+          "Zahlungs-QR-Code"
+        ],
+        "ogTitle": "Kostenloser dynamischer UPI-QR-Generator",
+        "ogDescription": "Erzeugen Sie UPI-QR-Codes mit Betrag und Notiz sofort. Weitergeben und schnell kassieren."
+      },
+      "hero": {
+        "headline": "Dynamischer UPI-QR-Generator",
+        "subheadline": "Erzeugen Sie UPI-QR-Codes mit Betrag und Notiz. Sofort weitergeben und schnell kassieren."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein dynamischer UPI-QR-Code?",
+            "answer": "Ein dynamischer UPI-QR-Code ist ein Code, in dem Ihre UPI-ID, der Zahlbetrag und eine Referenznotiz bereits stehen. Beim Scannen füllt er die Zahlungsangaben in jeder UPI-App von selbst aus, und das Kassieren geht schneller."
+          },
+          {
+            "question": "Muss ich mich anmelden?",
+            "answer": "Nein! Dieser UPI-QR-Generator ist vollständig kostenlos und braucht keine Anmeldung. Erzeugen Sie sofort so viele Codes, wie Sie brauchen."
+          },
+          {
+            "question": "Wie nutze ich den erzeugten QR-Code?",
+            "answer": "Laden Sie den QR-Code herunter und stellen Sie ihn in Ihrem Laden, Ihrem Restaurant oder auf Ihrer Rechnung aus. Ihre Kunden scannen ihn mit einer beliebigen UPI-App (Google Pay, PhonePe, Paytm und andere) und zahlen sofort."
+          },
+          {
+            "question": "Kann ich den Zahlbetrag festlegen?",
+            "answer": "Ja! Sie können einen festen Betrag in den QR-Code aufnehmen. Er ist dann bereits ausgefüllt, wenn der Kunde seine UPI-App öffnet."
+          },
+          {
+            "question": "Welche UPI-Anbieter werden unterstützt?",
+            "answer": "Unser Generator arbeitet mit allen großen indischen UPI-Anbietern, darunter SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm und über 80 weitere Banken und Zahlungs-Apps."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den Setu UPI-QR-Generator nutzen?",
+          "items": [
+            {
+              "title": "Sofort erzeugt",
+              "text": "Die QR-Codes entstehen auf der Stelle. Keine Anmeldung, kein Warten. Erzeugen Sie so viele, wie Sie brauchen."
+            },
+            {
+              "title": "Nach Ihren Vorgaben",
+              "text": "Legen Sie den Betrag fest und ergänzen Sie eine Referenznotiz. Gut für Belege, Rechnungen oder feste Preise."
+            },
+            {
+              "title": "Alle Banken",
+              "text": "Arbeitet mit allen großen indischen Banken und UPI-Apps. Ihre Kunden zahlen aus der App, die sie nutzen."
+            },
+            {
+              "title": "Auch am Telefon",
+              "text": "Funktioniert gut auf Telefon, Tablet und Rechner. Sofort herunterladen und weitergeben."
+            },
+            {
+              "title": "Sicher und privat",
+              "text": "Alle QR-Codes entstehen auf Ihrem Gerät. Ihre UPI-ID erreicht unsere Server nie."
+            },
+            {
+              "title": "Herunterladen und teilen",
+              "text": "Laden Sie die QR-Codes als Bild herunter oder kopieren Sie den UPI-Deeplink. Nutzen Sie ihn, wo Sie wollen."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "intro": "So erzeugen Sie in wenigen Schritten einen UPI-QR-Code:",
+          "steps": [
+            "Geben Sie Ihre UPI-ID ein (zum Beispiel ihrname@upi)",
+            "Ergänzen Sie auf Wunsch den Zahlbetrag",
+            "Ergänzen Sie eine Referenznotiz (optional)",
+            "Laden Sie den QR-Code herunter oder kopieren Sie den UPI-Link",
+            "Geben Sie ihn an Kunden weiter oder stellen Sie ihn im Laden aus"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Wo kann ich UPI-QR-Codes einsetzen?",
+          "items": [
+            "Im Restaurant, im Café oder im Laden aufstellen",
+            "Auf Ihre Rechnungen oder Belege setzen",
+            "Über WhatsApp oder soziale Netzwerke weitergeben",
+            "In Ihre E-Mails aufnehmen",
+            "Ausdrucken und auf Lieferpakete kleben"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Tools",
+          "intro": "Sehen Sie sich unsere anderen Tools für den Betrieb an:",
+          "links": [
+            {
+              "label": "Rechnungsgenerator"
+            },
+            {
+              "label": "GST-Rechner"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "UPI-QR-Splitter ohne MDR",
