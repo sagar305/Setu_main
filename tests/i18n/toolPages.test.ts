@@ -191,11 +191,18 @@ describe("the body blocks in every translation", () => {
     }
   });
 
-  /** A link written into a translation has to point somewhere real too. */
-  it("points every link at a path the site serves", () => {
+  /**
+   * A link written into a translation has to point somewhere real too. A
+   * translation normally carries only the label and inherits the href from
+   * English — mergeTranslation recurses into array elements and keeps the keys
+   * the translation left out — so an absent href is the intended case, not a
+   * fault. One that is written has to resolve.
+   */
+  it("points every link it writes at a path the site serves", () => {
     const paths = knownPaths();
     for (const { where, body } of translatedBodies()) {
       for (const href of hrefs(body)) {
+        if (href === undefined) continue;
         expect(paths.has(href), `${where}: nothing serves ${href}`).toBe(true);
       }
     }

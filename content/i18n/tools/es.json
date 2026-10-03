@@ -77,7 +77,117 @@
     },
     {
       "name": "Generador de facturas",
-      "shortDescription": "Crea, personaliza y descarga facturas profesionales con soporte de impuestos."
+      "shortDescription": "Crea, personaliza y descarga facturas profesionales con soporte de impuestos.",
+      "seo": {
+        "title": "Generador de facturas gratis — conforme al GST",
+        "description": "Crea facturas profesionales conformes al GST gratis. Varias plantillas, cálculo automático de impuestos, soporte UPI y descarga en PDF al instante.",
+        "keywords": [
+          "generador de facturas gratis",
+          "hacer facturas",
+          "factura GST",
+          "plantilla de factura",
+          "factura gratis",
+          "generador de facturas online",
+          "factura India"
+        ],
+        "ogTitle": "Generador de facturas gratis — conforme al GST",
+        "ogDescription": "Crea facturas profesionales con cálculo de GST. Sin iniciar sesión. Descárgalas en PDF al instante."
+      },
+      "hero": {
+        "headline": "Generador de facturas gratis",
+        "subheadline": "Crea facturas profesionales conformes al GST al instante. Sin registro."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es una factura conforme al GST?",
+            "answer": "Una factura conforme al GST incluye tu GSTIN, el GSTIN del cliente, el detalle por línea con sus tipos de impuesto y el desglose del impuesto (CGST/SGST o IGST). Nuestro generador hace todos los cálculos solo."
+          },
+          {
+            "question": "¿Tengo que registrarme o iniciar sesión?",
+            "answer": "¡No! Este generador de facturas es completamente gratis y sin registro. Los datos de tu factura se guardan en tu navegador con localStorage, para que la próxima vez sea más cómodo."
+          },
+          {
+            "question": "¿Puedo descargar las facturas en PDF?",
+            "answer": "¡Sí! Pulsa ‘Download PDF’ y la factura se genera y se descarga al instante. Todo el PDF se produce en tu dispositivo: tus datos nunca llegan a nuestros servidores."
+          },
+          {
+            "question": "¿Qué formas de pago puedo mostrar en la factura?",
+            "answer": "Puedes añadir los datos de la cuenta bancaria (número de cuenta, código IFSC) y tu UPI ID. La factura mostrará esas opciones a tus clientes."
+          },
+          {
+            "question": "¿Hay distintas plantillas de factura?",
+            "answer": "¡Sí! Ofrecemos 3 plantillas de diseño profesional: Classic (formal), Modern (minimalista) y Colorful (creativa). Puedes elegir el color de marca de cada una."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "¿Por qué usar el generador de facturas de Setu?",
+          "items": [
+            {
+              "title": "Varias plantillas",
+              "text": "Elige entre 3 plantillas de diseño profesional y personalízalas con tu color de marca."
+            },
+            {
+              "title": "Guardado automático",
+              "text": "Los datos de tu factura se guardan solos en el navegador. La próxima factura la harás más rápido."
+            },
+            {
+              "title": "Cálculo del GST",
+              "text": "Cálculo automático del GST con desglose CGST/SGST y varios tipos de impuesto por línea."
+            },
+            {
+              "title": "Funciona en el móvil",
+              "text": "Crea y envía facturas desde el móvil, la tableta o el ordenador. Funciona en todas partes."
+            },
+            {
+              "title": "La privacidad primero",
+              "text": "Todo el PDF se produce en tu dispositivo. Los datos de tu factura nunca llegan a nuestros servidores."
+            },
+            {
+              "title": "Pensado para la India",
+              "text": "Hecho para pymes indias: validación del GSTIN, desglose CGST/SGST, UPI ID e importe en palabras (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "¿Qué campos debe llevar una factura?",
+          "intro": "Una factura profesional debería incluir:",
+          "items": [
+            "Nombre, dirección, teléfono y correo del negocio",
+            "Nombre y dirección del cliente",
+            "Número y fecha de la factura",
+            "Lista detallada de productos o servicios con cantidades y precios",
+            "Impuestos aplicables (GST en la India)",
+            "Importe total y condiciones de pago",
+            "Datos de pago (cuenta bancaria, UPI, etc.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Cumplimiento del GST",
+          "text": "**Aviso:** este generador de facturas es solo una herramienta de formato y cálculo. No presenta declaraciones de GST ni garantiza el cumplimiento de toda la normativa fiscal. Para asesoría y presentación, consulta con tu contable o asesor fiscal."
+        },
+        {
+          "kind": "links",
+          "headline": "Herramientas relacionadas",
+          "intro": "Echa un vistazo a nuestras otras calculadoras para el negocio:",
+          "links": [
+            {
+              "label": "Calculadora de GST"
+            },
+            {
+              "label": "Calculadora de impuesto sobre la renta"
+            },
+            {
+              "label": "Calculadora de margen de beneficio"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Generador de QR de pago",

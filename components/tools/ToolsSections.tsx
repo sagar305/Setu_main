@@ -32,7 +32,7 @@ export function ToolsSections({ content, lang }: { content: ToolsContent; lang: 
               </FadeIn>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((item) => (
-                  <ToolCard key={item.slug} item={item} />
+                  <ToolCard key={item.slug} item={item} lang={lang} />
                 ))}
               </div>
             </div>

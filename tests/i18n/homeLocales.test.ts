@@ -347,8 +347,52 @@ describe("links stay in the reader's language", () => {
   /** Pointing at a translation that does not exist would be a link into a 404. */
   it("leaves a page that has no version in this language on its English path", () => {
     expect(localizedHref("/blog", "hi")).toBe("/blog");
-    expect(localizedHref("/tools/invoice-generator", "hi")).toBe("/tools/invoice-generator");
     expect(localizedHref("/products/restaurant-pos", "hi")).toBe("/products/restaurant-pos");
+  });
+
+  /**
+   * An item page is published per item, and these links are the ones a reader
+   * actually follows out of body prose and the suggested-tools strip. Left on
+   * their English path they end a translated visit — the reader taps a Hindi
+   * link and gets the English calculator.
+   */
+  it("moves a link to an item page that is translated into this language", () => {
+    expect(localizedHref("/calculators/gst-calculator", "hi")).toBe(
+      "/hi/calculators/gst-calculator",
+    );
+    expect(localizedHref("/tools/invoice-generator", "zh")).toBe("/zh/tools/invoice-generator");
+    expect(localizedHref("/calculators/gst-calculator?amount=100", "de")).toBe(
+      "/de/calculators/gst-calculator?amount=100",
+    );
+  });
+
+  /** An item still awaiting its own translation has to stay on English. */
+  it("leaves an item page that is not yet translated on its English path", () => {
+    const pending: [string, LanguageCode][] = [];
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ).items as { slug: string }[];
+
+      for (const { slug } of english) {
+        for (const { code } of LANGUAGES) {
+          if (code !== "en" && !itemLocalesFor(key, slug).includes(code)) {
+            pending.push([`/${key}/${slug}`, code]);
+          }
+        }
+      }
+    }
+
+    // Once every item is published in every language there is nothing left to
+    // hold back, and that is the state this asserts instead.
+    if (pending.length === 0) {
+      expect(localizedHref("/tools/not-a-real-tool", "hi")).toBe("/tools/not-a-real-tool");
+      return;
+    }
+
+    for (const [href, lang] of pending) {
+      expect(localizedHref(href, lang), `${href} in ${lang}`).toBe(href);
+    }
   });
 
   it("leaves anything that is not an internal path alone", () => {

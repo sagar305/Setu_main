@@ -58,7 +58,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "mdr-calculator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
   },
   tools: {
-    "invoice-generator": [],
+    "invoice-generator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "upi-qr-generator": [],
     "upi-qr-split": [],
     "qr-menu-generator": [],

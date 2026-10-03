@@ -82,16 +82,27 @@ export function pathFor(key: PageKey, lang: LanguageCode): string {
  * link to /hi/products instead.
  *
  * A link is only moved when that page is actually published in this language.
- * Pages outside the translated set — the blog, the glossary, an individual tool
- * or calculator — stay on their English path, because the alternative is a link
- * into a 404. Anything that is not an internal path we own (an anchor, a query,
- * a mailto:, an external URL) is returned untouched.
+ * An individual calculator's or tool's page counts here too: those are
+ * published per item, so such a link moves only when that item's own copy is
+ * translated into this language. Pages outside the translated set — the blog,
+ * the glossary, an item still in English — stay on their English path, because
+ * the alternative is a link into a 404. Anything that is not an internal path
+ * we own (an anchor, a query, a mailto:, an external URL) is returned untouched.
  */
 export function localizedHref(href: string, lang: LanguageCode): string {
   if (lang === "en" || !href.startsWith("/") || href.startsWith("//")) return href;
 
   const [path] = href.split(/[?#]/);
   const clean = path.length > 1 ? path.replace(/\/+$/, "") : path;
+
+  // Item pages first: /calculators/<slug> also starts with no page path, and
+  // each one has its own set of languages rather than the listing's.
+  const item = itemFromPath(clean === "" ? "/" : clean);
+  if (item) {
+    if (!itemLocalesFor(item.key, item.slug).includes(lang)) return href;
+    return itemPathFor(item.key, item.slug, lang) + href.slice(path.length);
+  }
+
   const key = PAGE_KEYS.find((k) => PAGE_PATHS[k] === (clean === "" ? "/" : clean));
   if (!key || !localesFor(key).includes(lang)) return href;
 

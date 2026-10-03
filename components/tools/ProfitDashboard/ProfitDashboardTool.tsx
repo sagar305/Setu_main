@@ -11,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Card, EmptyState, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
+import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
 import { getExpenses, getOrderItems, getOrders } from "@/lib/toolkit/workspace";
 import type { Expense } from "@/lib/toolkit/types";
 import type { Order, OrderItem } from "@/lib/pos/types";
@@ -46,6 +47,8 @@ function eachDay(start: string, end: string): string[] {
 }
 
 export function ProfitDashboardTool() {
+  // Keeps the links below in the language of the page this tool is on.
+  const href = useLocalizedHref();
   const workspace = useWorkspaceConnection("profit-dashboard");
   const { t } = useI18n();
   const [orders, setOrders] = useState<Order[]>([]);
@@ -176,7 +179,7 @@ export function ProfitDashboardTool() {
                 Open Browser POS
               </a>
               <a
-                href="/tools/expense-tracker"
+                href={href("/tools/expense-tracker")}
                 className="rounded-lg border border-indigo/30 px-4 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
               >
                 Open Expense Tracker
@@ -309,7 +312,7 @@ export function ProfitDashboardTool() {
               {data.byCategory.length === 0 ? (
                 <p className="py-8 text-center text-sm text-muted">
                   No expenses in this period.{" "}
-                  <a href="/tools/expense-tracker" className="font-semibold text-indigo">
+                  <a href={href("/tools/expense-tracker")} className="font-semibold text-indigo">
                     Add them in the Expense Tracker
                   </a>
                   .

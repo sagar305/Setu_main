@@ -77,7 +77,117 @@
     },
     {
       "name": "Pembuat faktur",
-      "shortDescription": "Buat, sesuaikan, dan unduh faktur profesional lengkap dengan dukungan pajak."
+      "shortDescription": "Buat, sesuaikan, dan unduh faktur profesional lengkap dengan dukungan pajak.",
+      "seo": {
+        "title": "Pembuat faktur gratis — sesuai GST",
+        "description": "Buat faktur rapi yang sesuai GST secara gratis. Beberapa templat, hitungan pajak otomatis, dukungan UPI, dan unduhan PDF seketika. Tanpa pendaftaran.",
+        "keywords": [
+          "pembuat faktur gratis",
+          "buat faktur",
+          "faktur GST",
+          "templat faktur",
+          "faktur gratis",
+          "pembuat faktur online",
+          "faktur India"
+        ],
+        "ogTitle": "Pembuat faktur gratis — sesuai GST",
+        "ogDescription": "Buat faktur rapi dengan hitungan GST. Tanpa login. Unduh PDF seketika."
+      },
+      "hero": {
+        "headline": "Pembuat faktur gratis",
+        "subheadline": "Buat faktur rapi yang sesuai GST seketika. Tanpa pendaftaran."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu faktur yang sesuai GST?",
+            "answer": "Faktur yang sesuai GST memuat GSTIN Anda, GSTIN pelanggan, rincian tiap baris beserta tarif pajaknya, dan pembagian pajak (CGST/SGST atau IGST). Pembuat faktur kami mengurus semua hitungannya sendiri."
+          },
+          {
+            "question": "Apakah saya perlu mendaftar atau masuk?",
+            "answer": "Tidak! Pembuat faktur ini sepenuhnya gratis dan tanpa pendaftaran. Data faktur Anda tersimpan di peramban lewat localStorage, supaya lebih enak dipakai lain kali."
+          },
+          {
+            "question": "Bisakah faktur diunduh sebagai PDF?",
+            "answer": "Bisa! Klik ‘Download PDF’ dan fakturnya langsung dibuat dan terunduh. Seluruh PDF dibuat di perangkat Anda — data Anda tidak pernah sampai ke server kami."
+          },
+          {
+            "question": "Cara pembayaran apa yang bisa saya tampilkan di faktur?",
+            "answer": "Anda bisa menambahkan data rekening bank (nomor rekening, kode IFSC) dan UPI ID. Faktur akan menampilkan pilihan itu kepada pelanggan Anda."
+          },
+          {
+            "question": "Apakah ada templat faktur yang berbeda?",
+            "answer": "Ada! Tiga templat bergaya rapi: Classic (resmi), Modern (minimalis), dan Colorful (kreatif). Warna merek tiap templat bisa Anda pilih sendiri."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat faktur Setu?",
+          "items": [
+            {
+              "title": "Beberapa templat",
+              "text": "Pilih dari tiga templat bergaya rapi dan sesuaikan dengan warna merek Anda."
+            },
+            {
+              "title": "Tersimpan sendiri",
+              "text": "Data faktur Anda tersimpan sendiri di peramban. Faktur berikutnya jadi lebih cepat."
+            },
+            {
+              "title": "Hitungan GST",
+              "text": "Hitungan GST otomatis dengan pembagian CGST/SGST dan beberapa tarif pajak per baris."
+            },
+            {
+              "title": "Jalan di ponsel",
+              "text": "Buat dan kirim faktur dari ponsel, tablet, atau komputer. Jalan di mana saja."
+            },
+            {
+              "title": "Privasi lebih dulu",
+              "text": "Seluruh PDF dibuat di perangkat Anda. Data faktur Anda tidak pernah sampai ke server kami."
+            },
+            {
+              "title": "Dibuat untuk India",
+              "text": "Untuk usaha kecil India: pemeriksaan GSTIN, pembagian CGST/SGST, UPI ID, dan jumlah dalam kata (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Isi apa yang perlu ada di faktur?",
+          "intro": "Faktur yang rapi sebaiknya memuat:",
+          "items": [
+            "Nama, alamat, telepon, dan email usaha",
+            "Nama dan alamat pelanggan",
+            "Nomor dan tanggal faktur",
+            "Daftar rinci produk atau jasa beserta jumlah dan harganya",
+            "Pajak yang berlaku (GST di India)",
+            "Jumlah total dan termin pembayaran",
+            "Data pembayaran (rekening bank, UPI, dan lain-lain)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Kepatuhan GST",
+          "text": "**Penafian:** pembuat faktur ini hanya alat penataan dan hitungan. Ia tidak melaporkan SPT GST dan tidak menjamin kepatuhan pada seluruh aturan pajak. Untuk nasihat dan pelaporan, bicarakan dengan akuntan atau konsultan pajak Anda."
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat kalkulator usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Kalkulator GST"
+            },
+            {
+              "label": "Kalkulator pajak penghasilan"
+            },
+            {
+              "label": "Kalkulator margin laba"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Pembuat QR UPI dinamis",

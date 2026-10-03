@@ -77,7 +77,117 @@
     },
     {
       "name": "Générateur de factures",
-      "shortDescription": "Créez, personnalisez et téléchargez des factures professionnelles avec gestion des taxes."
+      "shortDescription": "Créez, personnalisez et téléchargez des factures professionnelles avec gestion des taxes.",
+      "seo": {
+        "title": "Générateur de factures gratuit — conforme GST",
+        "description": "Créez gratuitement des factures professionnelles conformes au GST. Plusieurs modèles, calcul automatique des taxes, UPI et téléchargement PDF immédiat.",
+        "keywords": [
+          "générateur de factures gratuit",
+          "faire une facture",
+          "facture GST",
+          "modèle de facture",
+          "facture gratuite",
+          "générateur de factures en ligne",
+          "facture Inde"
+        ],
+        "ogTitle": "Générateur de factures gratuit — conforme GST",
+        "ogDescription": "Créez des factures professionnelles avec le calcul du GST. Sans connexion. Téléchargez en PDF immédiatement."
+      },
+      "hero": {
+        "headline": "Générateur de factures gratuit",
+        "subheadline": "Créez immédiatement des factures professionnelles conformes au GST. Sans inscription."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'une facture conforme au GST ?",
+            "answer": "Une facture conforme au GST comporte votre GSTIN, celui du client, le détail ligne par ligne avec les taux de taxe et la ventilation de la taxe (CGST/SGST ou IGST). Notre générateur fait tous les calculs tout seul."
+          },
+          {
+            "question": "Faut-il s'inscrire ou se connecter ?",
+            "answer": "Non ! Ce générateur de factures est entièrement gratuit et sans inscription. Les données de votre facture sont enregistrées dans votre navigateur via localStorage, pour que la prochaine fois soit plus rapide."
+          },
+          {
+            "question": "Puis-je télécharger les factures en PDF ?",
+            "answer": "Oui ! Cliquez sur « Download PDF » et la facture est produite et téléchargée aussitôt. Tout le PDF est généré sur votre appareil : vos données n'atteignent jamais nos serveurs."
+          },
+          {
+            "question": "Quels moyens de paiement puis-je afficher sur la facture ?",
+            "answer": "Vous pouvez ajouter les coordonnées bancaires (numéro de compte, code IFSC) et votre identifiant UPI. La facture présentera ces options à vos clients."
+          },
+          {
+            "question": "Y a-t-il plusieurs modèles de facture ?",
+            "answer": "Oui ! Trois modèles au design professionnel : Classic (formel), Modern (épuré) et Colorful (créatif). Vous choisissez la couleur de marque de chacun."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Pourquoi utiliser le générateur de factures Setu ?",
+          "items": [
+            {
+              "title": "Plusieurs modèles",
+              "text": "Choisissez parmi trois modèles au design professionnel et personnalisez-les avec votre couleur de marque."
+            },
+            {
+              "title": "Enregistrement automatique",
+              "text": "Les données de votre facture sont enregistrées d'elles-mêmes dans le navigateur. La prochaine facture ira plus vite."
+            },
+            {
+              "title": "Calcul du GST",
+              "text": "Calcul automatique du GST avec ventilation CGST/SGST et plusieurs taux de taxe par ligne."
+            },
+            {
+              "title": "Pensé pour le mobile",
+              "text": "Créez et envoyez vos factures depuis le téléphone, la tablette ou l'ordinateur. Ça fonctionne partout."
+            },
+            {
+              "title": "La confidentialité d'abord",
+              "text": "Tout le PDF est produit sur votre appareil. Les données de votre facture n'atteignent jamais nos serveurs."
+            },
+            {
+              "title": "Fait pour l'Inde",
+              "text": "Conçu pour les TPE indiennes : contrôle du GSTIN, ventilation CGST/SGST, identifiants UPI et montant en lettres (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Quelles mentions doit porter une facture ?",
+          "intro": "Une facture professionnelle devrait comporter :",
+          "items": [
+            "Nom, adresse, téléphone et e-mail de l'entreprise",
+            "Nom et adresse du client",
+            "Numéro et date de la facture",
+            "Liste détaillée des produits ou services avec quantités et prix",
+            "Taxes applicables (le GST en Inde)",
+            "Montant total et conditions de paiement",
+            "Coordonnées de paiement (compte bancaire, UPI, etc.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Conformité au GST",
+          "text": "**Avertissement :** ce générateur de factures n'est qu'un outil de mise en forme et de calcul. Il ne dépose pas les déclarations de GST et ne garantit pas la conformité à l'ensemble de la réglementation fiscale. Pour un conseil et un dépôt, adressez-vous à votre comptable ou à un fiscaliste."
+        },
+        {
+          "kind": "links",
+          "headline": "Outils associés",
+          "intro": "Découvrez nos autres calculateurs pour l'entreprise :",
+          "links": [
+            {
+              "label": "Calculateur de GST"
+            },
+            {
+              "label": "Calculateur d'impôt sur le revenu"
+            },
+            {
+              "label": "Calculateur de marge bénéficiaire"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Générateur de QR de paiement",

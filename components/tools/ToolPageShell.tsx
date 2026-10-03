@@ -80,7 +80,7 @@ export function ToolPageShell({
 
       {suggested && (
         <section className="mx-auto max-w-4xl px-6 py-16">
-          <SuggestedTools current={item.slug} />
+          <SuggestedTools current={item.slug} lang={lang} />
         </section>
       )}
 

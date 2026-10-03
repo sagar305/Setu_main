@@ -77,7 +77,117 @@
     },
     {
       "name": "Rechnungsgenerator",
-      "shortDescription": "Professionelle Rechnungen mit Steuerunterstützung erstellen, anpassen und herunterladen."
+      "shortDescription": "Professionelle Rechnungen mit Steuerunterstützung erstellen, anpassen und herunterladen.",
+      "seo": {
+        "title": "Kostenloser Rechnungsgenerator — GST-konform",
+        "description": "Erstellen Sie kostenlos professionelle GST-konforme Rechnungen. Mehrere Vorlagen, automatische Steuerberechnung, UPI und sofortiger PDF-Download.",
+        "keywords": [
+          "kostenloser Rechnungsgenerator",
+          "Rechnung erstellen",
+          "GST-Rechnung",
+          "Rechnungsvorlage",
+          "kostenlose Rechnung",
+          "Rechnungsgenerator online",
+          "Rechnung Indien"
+        ],
+        "ogTitle": "Kostenloser Rechnungsgenerator — GST-konform",
+        "ogDescription": "Erstellen Sie professionelle Rechnungen mit GST-Berechnung. Ohne Anmeldung. Sofort als PDF herunterladen."
+      },
+      "hero": {
+        "headline": "Kostenloser Rechnungsgenerator",
+        "subheadline": "Erstellen Sie sofort professionelle GST-konforme Rechnungen. Ohne Anmeldung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine GST-konforme Rechnung?",
+            "answer": "Eine GST-konforme Rechnung enthält Ihre GSTIN, die GSTIN des Kunden, die Positionen mit ihren Steuersätzen und die Aufteilung der Steuer (CGST/SGST oder IGST). Unser Rechnungsgenerator übernimmt alle Berechnungen von selbst."
+          },
+          {
+            "question": "Muss ich mich anmelden oder einloggen?",
+            "answer": "Nein! Dieser Rechnungsgenerator ist vollständig kostenlos und braucht keine Anmeldung. Ihre Rechnungsdaten werden über localStorage in Ihrem Browser gespeichert, damit es beim nächsten Mal schneller geht."
+          },
+          {
+            "question": "Kann ich Rechnungen als PDF herunterladen?",
+            "answer": "Ja! Klicken Sie auf „Download PDF“, und die Rechnung wird sofort erzeugt und heruntergeladen. Das PDF entsteht vollständig auf Ihrem Gerät — Ihre Daten erreichen unsere Server nie."
+          },
+          {
+            "question": "Welche Zahlungswege kann ich auf der Rechnung zeigen?",
+            "answer": "Sie können Bankdaten (Kontonummer, IFSC-Code) und Ihre UPI-ID angeben. Die Rechnung zeigt Ihren Kunden dann diese Zahlungswege."
+          },
+          {
+            "question": "Gibt es verschiedene Rechnungsvorlagen?",
+            "answer": "Ja! Drei professionell gestaltete Vorlagen: Classic (formell), Modern (reduziert) und Colorful (kreativ). Die Markenfarbe wählen Sie für jede Vorlage selbst."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den Setu Rechnungsgenerator nutzen?",
+          "items": [
+            {
+              "title": "Mehrere Vorlagen",
+              "text": "Wählen Sie aus drei professionell gestalteten Vorlagen und passen Sie sie an Ihre Markenfarbe an."
+            },
+            {
+              "title": "Automatisches Speichern",
+              "text": "Ihre Rechnungsdaten werden von selbst im Browser gespeichert. Die nächste Rechnung geht schneller."
+            },
+            {
+              "title": "GST-Berechnung",
+              "text": "Automatische GST-Berechnung mit CGST/SGST-Aufteilung und mehreren Steuersätzen je Position."
+            },
+            {
+              "title": "Auch mobil",
+              "text": "Rechnungen vom Telefon, Tablet oder Rechner erstellen und versenden. Funktioniert überall."
+            },
+            {
+              "title": "Datenschutz zuerst",
+              "text": "Das PDF entsteht vollständig auf Ihrem Gerät. Ihre Rechnungsdaten erreichen unsere Server nie."
+            },
+            {
+              "title": "Für Indien gemacht",
+              "text": "Für indische Kleinbetriebe: GSTIN-Prüfung, CGST/SGST-Aufteilung, UPI-IDs und Betrag in Worten (Lakh/Crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Welche Angaben gehören auf eine Rechnung?",
+          "intro": "Auf eine professionelle Rechnung gehört:",
+          "items": [
+            "Name, Adresse, Telefon und E-Mail des Betriebs",
+            "Name und Adresse des Kunden",
+            "Rechnungsnummer und Datum",
+            "Aufgeschlüsselte Liste der Waren oder Leistungen mit Mengen und Preisen",
+            "Anfallende Steuern (in Indien GST)",
+            "Gesamtbetrag und Zahlungsbedingungen",
+            "Zahlungsdaten (Bankkonto, UPI usw.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "GST-Konformität",
+          "text": "**Hinweis:** Dieser Rechnungsgenerator ist nur ein Werkzeug für Gestaltung und Berechnung. Er gibt keine GST-Erklärungen ab und sichert nicht die Einhaltung aller Steuervorschriften zu. Für Beratung und Abgabe wenden Sie sich an Ihre Steuerberatung."
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Tools",
+          "intro": "Sehen Sie sich unsere anderen Rechner für den Betrieb an:",
+          "links": [
+            {
+              "label": "GST-Rechner"
+            },
+            {
+              "label": "Einkommensteuer-Rechner"
+            },
+            {
+              "label": "Gewinnmargen-Rechner"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Dynamischer UPI-QR-Generator",

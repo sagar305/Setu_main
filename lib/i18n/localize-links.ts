@@ -19,8 +19,11 @@ import { localizedHref } from "./pages";
  * language-agnostic.
  *
  * Only links to pages actually published in this language move — localizedHref
- * leaves the blog, the glossary, individual tool and calculator pages, and
- * anything external exactly as written, rather than inventing a route that 404s.
+ * leaves the blog, the glossary, an item whose own copy is still in English,
+ * and anything external exactly as written, rather than inventing a route that
+ * 404s. A calculator or tool page that *is* translated does move, so a link out
+ * of body prose keeps the reader in their language instead of handing them the
+ * English page.
  */
 export function localizeLinks<T>(value: T, lang: LanguageCode): T {
   if (lang === "en") return value;

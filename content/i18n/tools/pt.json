@@ -77,7 +77,117 @@
     },
     {
       "name": "Gerador de faturas",
-      "shortDescription": "Crie, personalize e baixe faturas profissionais com suporte a impostos."
+      "shortDescription": "Crie, personalize e baixe faturas profissionais com suporte a impostos.",
+      "seo": {
+        "title": "Gerador de faturas grátis — conforme o GST",
+        "description": "Crie faturas profissionais em conformidade com o GST de graça. Vários modelos, cálculo automático de impostos, suporte a UPI e PDF na hora. Sem cadastro.",
+        "keywords": [
+          "gerador de faturas grátis",
+          "fazer fatura",
+          "fatura GST",
+          "modelo de fatura",
+          "fatura grátis",
+          "gerador de faturas online",
+          "fatura Índia"
+        ],
+        "ogTitle": "Gerador de faturas grátis — conforme o GST",
+        "ogDescription": "Crie faturas profissionais com cálculo de GST. Sem login. Baixe em PDF na hora."
+      },
+      "hero": {
+        "headline": "Gerador de faturas grátis",
+        "subheadline": "Crie faturas profissionais em conformidade com o GST na hora. Sem cadastro."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é uma fatura em conformidade com o GST?",
+            "answer": "Uma fatura em conformidade com o GST traz o seu GSTIN, o GSTIN do cliente, o detalhe linha a linha com as alíquotas e a separação do imposto (CGST/SGST ou IGST). Nosso gerador faz todos os cálculos sozinho."
+          },
+          {
+            "question": "Preciso me cadastrar ou fazer login?",
+            "answer": "Não! Este gerador de faturas é totalmente grátis e sem cadastro. Os dados da sua fatura ficam salvos no seu navegador com localStorage, para facilitar a próxima vez."
+          },
+          {
+            "question": "Posso baixar as faturas em PDF?",
+            "answer": "Sim! Clique em ‘Download PDF’ e a fatura é gerada e baixada na hora. Todo o PDF é feito no seu dispositivo — seus dados nunca chegam aos nossos servidores."
+          },
+          {
+            "question": "Quais formas de pagamento posso mostrar na fatura?",
+            "answer": "Você pode incluir os dados da conta bancária (número da conta, código IFSC) e o seu UPI ID. A fatura mostrará essas opções aos seus clientes."
+          },
+          {
+            "question": "Existem modelos de fatura diferentes?",
+            "answer": "Sim! Oferecemos 3 modelos com design profissional: Classic (formal), Modern (minimalista) e Colorful (criativo). Você escolhe a cor da marca em cada um."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Por que usar o gerador de faturas da Setu?",
+          "items": [
+            {
+              "title": "Vários modelos",
+              "text": "Escolha entre 3 modelos com design profissional e personalize com a cor da sua marca."
+            },
+            {
+              "title": "Salva sozinho",
+              "text": "Os dados da sua fatura são salvos sozinhos no navegador. A próxima fatura sai mais rápido."
+            },
+            {
+              "title": "Cálculo do GST",
+              "text": "Cálculo automático do GST com separação CGST/SGST e várias alíquotas por linha."
+            },
+            {
+              "title": "Funciona no celular",
+              "text": "Crie e envie faturas do celular, do tablet ou do computador. Funciona em qualquer lugar."
+            },
+            {
+              "title": "Privacidade primeiro",
+              "text": "Todo o PDF é feito no seu dispositivo. Os dados da sua fatura nunca chegam aos nossos servidores."
+            },
+            {
+              "title": "Pensado para a Índia",
+              "text": "Feito para pequenos negócios indianos: validação de GSTIN, separação CGST/SGST, UPI ID e valor em palavras (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Que campos uma fatura deve ter?",
+          "intro": "Uma fatura profissional deve trazer:",
+          "items": [
+            "Nome, endereço, telefone e e-mail do negócio",
+            "Nome e endereço do cliente",
+            "Número e data da fatura",
+            "Lista detalhada de produtos ou serviços com quantidades e valores",
+            "Impostos aplicáveis (GST na Índia)",
+            "Valor total e condições de pagamento",
+            "Dados de pagamento (conta bancária, UPI etc.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Conformidade com o GST",
+          "text": "**Aviso:** este gerador de faturas é apenas uma ferramenta de formatação e cálculo. Ele não entrega declarações de GST nem garante conformidade com toda a legislação tributária. Para orientação e entrega, fale com seu contador ou com um profissional de tributos."
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "intro": "Veja nossas outras calculadoras para o negócio:",
+          "links": [
+            {
+              "label": "Calculadora de GST"
+            },
+            {
+              "label": "Calculadora de imposto de renda"
+            },
+            {
+              "label": "Calculadora de margem de lucro"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Gerador de QR UPI dinâmico",

@@ -82,6 +82,33 @@ const LOCALE_LIMITS = {
 const LANGS = new Set([...TRANSLATIONS.values()].flat());
 
 /**
+ * Which languages each individual calculator and tool page is published in,
+ * read from the module scripts/sync-translations.mjs generates. Parsed rather
+ * than imported because this script is plain node with no TypeScript loader.
+ */
+const TRANSLATED_ITEMS = readTranslatedItems();
+
+function readTranslatedItems() {
+  const source = fs.readFileSync(path.join("lib", "i18n", "translated-pages.ts"), "utf8");
+  const start = source.indexOf("TRANSLATED_ITEMS");
+  if (start === -1) return {};
+
+  let depth = 0;
+  let from = source.indexOf("{", start);
+  let to = from;
+  for (; to < source.length; to += 1) {
+    if (source[to] === "{") depth += 1;
+    else if (source[to] === "}" && --depth === 0) break;
+  }
+
+  const object = source
+    .slice(from, to + 1)
+    .replace(/(^|[{,]\s*)([A-Za-z_][\w-]*)\s*:/g, '$1"$2":')
+    .replace(/,(\s*[}\]])/g, "$1");
+  return JSON.parse(object);
+}
+
+/**
  * The language a route is written in, or null for the English pages.
  *
  * Taken from the first path segment rather than from the page map, so the
@@ -193,6 +220,23 @@ for (const file of files.sort()) {
       fail(`has ${alternates} hreflang alternates, expected ${expected}`);
     }
     if (!/hreflang="x-default"/i.test(html)) fail("missing the x-default hreflang alternate");
+  }
+
+  // A link to the English version of a page that exists in this language ends
+  // the visit: the reader taps a Hindi link and gets the English tool. Content
+  // hrefs go through localizedHref, but a component that writes its own path
+  // bypasses that, and nothing else notices — it looks right in the diff and
+  // only shows up by clicking a translated page in a browser.
+  const lang = route.split("/")[1];
+  if (LANGS.has(lang)) {
+    for (const [key, slugs] of Object.entries(TRANSLATED_ITEMS)) {
+      for (const [slug, langs] of Object.entries(slugs)) {
+        if (!langs.includes(lang)) continue;
+        if (html.includes(`href="/${key}/${slug}"`)) {
+          fail(`links to the English /${key}/${slug}, which is published in ${lang}`);
+        }
+      }
+    }
   }
 }
 
