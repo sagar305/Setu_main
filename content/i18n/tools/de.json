@@ -224,15 +224,115 @@
     },
     {
       "name": "Ausgaben-Tracker",
-      "shortDescription": "Ausgaben nach Kategorie erfassen, mit Monatssummen und CSV-Export."
+      "shortDescription": "Ausgaben nach Kategorie erfassen, mit Monatssummen und CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Ausgaben-Tracker für kleine Betriebe",
+        "description": "Betriebsausgaben nach Kategorie erfassen — Miete, Löhne, Einkäufe, Rechnungen. Monatssummen und CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Ausgaben-Tracker",
+          "Betriebsausgaben erfassen kostenlos",
+          "Ausgabenbuch Laden",
+          "Ausgabenregister",
+          "Kostenerfassung kostenlos"
+        ],
+        "ogTitle": "Ausgaben-Tracker",
+        "ogDescription": "Betriebsausgaben nach Kategorie erfassen — Miete, Löhne, Einkäufe, Rechnungen. Monatssummen und CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Ausgaben-Tracker",
+        "subheadline": "Jede Betriebsausgabe nach Kategorie erfassen — und im Dashboard den echten Gewinn sehen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Ist dieser Ausgaben-Tracker wirklich kostenlos?",
+            "answer": "Ja: kostenlos, unbegrenzt viele Buchungen, keine Anmeldung. Ihre Ausgabendaten bleiben in Ihrem Browser auf Ihrem Gerät."
+          },
+          {
+            "question": "Wie hängt er mit dem Gewinn-Dashboard zusammen?",
+            "answer": "Die hier erfassten Ausgaben gehen automatisch in das Gewinn-Dashboard von Setu ein, der Gewinn wird also aus echten Ausgaben berechnet — nicht aus Schätzungen."
+          },
+          {
+            "question": "Kann ich meine Ausgaben exportieren?",
+            "answer": "Ja: exportieren Sie jeden Monat als CSV-Datei, die sich in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
     },
     {
       "name": "Kassenbuch",
-      "shortDescription": "Tägliche Ein- und Auszahlungen mit automatischem Anfangs- und Endbestand."
+      "shortDescription": "Tägliche Ein- und Auszahlungen mit automatischem Anfangs- und Endbestand.",
+      "seo": {
+        "title": "Kostenloses Kassenbuch — Tagessaldo",
+        "description": "Einfaches tägliches Kassenbuch für Ihren Laden: Bareinnahmen und -ausgaben erfassen, Anfangs- und Endbestand werden automatisch berechnet. Kostenlos.",
+        "keywords": [
+          "Kassenbuch",
+          "tägliches Kassenjournal",
+          "Bareinnahmen Barausgaben Buch",
+          "Kassenbuch Laden kostenlos",
+          "Kassenendbestand",
+          "Kassensturz"
+        ],
+        "ogTitle": "Kassenbuch",
+        "ogDescription": "Einfaches tägliches Kassenbuch für Ihren Laden: Bareinnahmen und -ausgaben erfassen, Anfangs- und Endbestand werden automatisch berechnet. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kassenbuch",
+        "subheadline": "Bareinnahmen, Barausgaben und Endbestand pro Tag — das Ladenbuch, ohne Buch."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie werden Anfangs- und Endbestand berechnet?",
+            "answer": "Automatisch. Der Anfangsbestand eines Tages ist die laufende Summe aller früheren Buchungen; beim Endbestand kommen die Bareinnahmen des Tages hinzu und die Barausgaben gehen ab."
+          },
+          {
+            "question": "Bleiben meine Kassendaten privat?",
+            "answer": "Ja: alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud. Exportieren Sie das ganze Buch jederzeit als CSV."
+          },
+          {
+            "question": "Kann ich es für vergangene Tage nutzen?",
+            "answer": "Ja: wählen Sie beim Erfassen und beim Ansehen ein beliebiges Datum. Die Bestände werden über das ganze Buch neu berechnet."
+          }
+        ]
+      }
     },
     {
       "name": "Gewinn-Dashboard",
-      "shortDescription": "Echter Gewinn aus Ihren eigenen Umsätzen, Warenkosten und Ausgaben."
+      "shortDescription": "Echter Gewinn aus Ihren eigenen Umsätzen, Warenkosten und Ausgaben.",
+      "seo": {
+        "title": "Kostenloses Gewinn-Dashboard — echter Gewinn",
+        "description": "Sehen Sie den echten Gewinn Ihres Betriebs: Umsatz aus den Kassenverkäufen, abzüglich Wareneinsatz und echter Ausgaben. Diagramme, Zeiträume, offline.",
+        "keywords": [
+          "Gewinn-Dashboard",
+          "Gewinnrechner Betrieb",
+          "Ladengewinn verfolgen",
+          "Nettogewinn kleines Unternehmen",
+          "Gewinn und Verlust kostenlos"
+        ],
+        "ogTitle": "Gewinn-Dashboard",
+        "ogDescription": "Sehen Sie den echten Gewinn Ihres Betriebs: Umsatz aus den Kassenverkäufen, abzüglich Wareneinsatz und echter Ausgaben. Diagramme, Zeiträume, offline."
+      },
+      "hero": {
+        "headline": "Gewinn-Dashboard",
+        "subheadline": "Ihr echter Gewinn — Umsatz abzüglich Wareneinsatz abzüglich echter Ausgaben. Keine Schätzungen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie wird der Gewinn berechnet?",
+            "answer": "Nettogewinn = Umsatz − Wareneinsatz − Ausgaben. Der Umsatz kommt aus den Verkäufen Ihrer Browser-Kasse, der Wareneinsatz aus dem Einkaufspreis jedes Artikels und die Ausgaben aus dem Ausgaben-Tracker — alles auf Ihrem Gerät."
+          },
+          {
+            "question": "Muss ich Daten zweimal eingeben?",
+            "answer": "Nein. Das Dashboard liest die Verkäufe, die Sie in der Kasse schon abgerechnet haben, und die Ausgaben, die Sie im Ausgaben-Tracker schon erfasst haben. Nichts neu eingeben, nichts einrichten."
+          },
+          {
+            "question": "Werden meine Finanzdaten übertragen?",
+            "answer": "Niemals. Alle Berechnungen laufen in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, kein Server."
+          }
+        ]
+      }
     },
     {
       "name": "Kundenkonto",
@@ -738,7 +838,40 @@
     },
     {
       "name": "Plan-Ist-Vergleich",
-      "shortDescription": "Plan und Realität je Kategorie, mit Abweichung und Abweichung % live. CSV-Export."
+      "shortDescription": "Plan und Realität je Kategorie, mit Abweichung und Abweichung % live. CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Plan-Ist-Vergleich — Abweichungen",
+        "description": "Plan- und Ist-Beträge nach Kategorie vergleichen, mit Abweichung und Abweichung in % live berechnet. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Plan-Ist-Vergleich",
+          "Abweichungsbericht",
+          "Budgetkontrolle Betrieb",
+          "Budgetabweichung analysieren",
+          "monatlicher Budgetvergleich"
+        ],
+        "ogTitle": "Plan-Ist-Vergleich",
+        "ogDescription": "Plan- und Ist-Beträge nach Kategorie vergleichen, mit Abweichung und Abweichung in % live berechnet. CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Plan-Ist-Vergleich",
+        "subheadline": "Plan gegen Wirklichkeit, Kategorie für Kategorie — Abweichungen werden beim Tippen berechnet und farbig markiert."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Budgetabweichung?",
+            "answer": "Die Differenz zwischen Ist- und Planbetrag (Ist − Plan). In Ausgabenzeilen bedeutet eine positive Abweichung Mehrausgaben; in Ertragszeilen, dass Sie den Plan übertroffen haben."
+          },
+          {
+            "question": "Welche Abweichungen sollte ich prüfen?",
+            "answer": "Die großen in Euro und die großen in Prozent — 2 % Abweichung bei Ihrem größten Kostenblock können mehr wiegen als 40 % bei einer Kleinigkeit. Sehen Sie sich beide Spalten an."
+          },
+          {
+            "question": "Wie oft sollte ich Plan und Ist vergleichen?",
+            "answer": "Einmal im Monat ist der übliche Rhythmus: früh genug, um den Kurs zu korrigieren, und weit genug auseinander für echte Zahlen. Speichern Sie das Blatt monatlich und exportieren Sie die CSV für Ihre Unterlagen."
+          }
+        ]
+      }
     },
     {
       "name": "ABC-Analyse",

@@ -224,15 +224,115 @@
     },
     {
       "name": "Pelacak pengeluaran",
-      "shortDescription": "Lacak pengeluaran per kategori dengan total bulanan dan ekspor CSV."
+      "shortDescription": "Lacak pengeluaran per kategori dengan total bulanan dan ekspor CSV.",
+      "seo": {
+        "title": "Pelacak pengeluaran gratis untuk usaha kecil",
+        "description": "Catat pengeluaran usaha per kategori — sewa, gaji, pembelian, tagihan. Total bulanan dan ekspor CSV. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pelacak pengeluaran",
+          "pencatat pengeluaran usaha gratis",
+          "catatan pengeluaran toko",
+          "buku pengeluaran",
+          "kelola pengeluaran"
+        ],
+        "ogTitle": "Pelacak pengeluaran",
+        "ogDescription": "Catat pengeluaran usaha per kategori — sewa, gaji, pembelian, tagihan. Total bulanan dan ekspor CSV. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pelacak pengeluaran",
+        "subheadline": "Catat setiap pengeluaran usaha per kategori — dan lihat laba sebenarnya di dasbor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apakah pelacak pengeluaran ini benar-benar gratis?",
+            "answer": "Ya: gratis, catatan tanpa batas, tanpa pendaftaran. Data pengeluaran Anda tetap di browser pada perangkat Anda."
+          },
+          {
+            "question": "Bagaimana kaitannya dengan Dasbor laba?",
+            "answer": "Pengeluaran yang Anda catat di sini otomatis masuk ke Dasbor laba Setu, jadi laba dihitung dari pengeluaran nyata — bukan dari perkiraan."
+          },
+          {
+            "question": "Bisakah pengeluaran diekspor?",
+            "answer": "Bisa: ekspor bulan mana pun sebagai berkas CSV yang terbuka di Excel atau Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Buku kas",
-      "shortDescription": "Kas masuk dan keluar harian dengan saldo awal dan akhir otomatis."
+      "shortDescription": "Kas masuk dan keluar harian dengan saldo awal dan akhir otomatis.",
+      "seo": {
+        "title": "Buku kas gratis — saldo kas harian",
+        "description": "Buku kas harian sederhana untuk toko Anda: catat kas masuk dan keluar, saldo awal dan saldo akhir dihitung sendiri. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku kas",
+          "catatan kas harian",
+          "buku kas masuk keluar",
+          "buku kas toko gratis",
+          "saldo akhir kas",
+          "pembukuan kas sederhana"
+        ],
+        "ogTitle": "Buku kas",
+        "ogDescription": "Buku kas harian sederhana untuk toko Anda: catat kas masuk dan keluar, saldo awal dan saldo akhir dihitung sendiri. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku kas",
+        "subheadline": "Kas masuk, kas keluar, dan saldo akhir tiap hari — buku toko, tanpa bukunya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana saldo awal dan saldo akhir dihitung?",
+            "answer": "Otomatis. Saldo awal suatu hari adalah jumlah berjalan dari semua catatan sebelumnya; saldo akhir menambahkan kas masuk hari itu dan mengurangi kas keluar."
+          },
+          {
+            "question": "Apakah data kas saya pribadi?",
+            "answer": "Ya: semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud. Ekspor seluruh buku sebagai CSV kapan saja."
+          },
+          {
+            "question": "Bisakah dipakai untuk hari-hari sebelumnya?",
+            "answer": "Bisa: pilih tanggal mana pun saat menambah catatan maupun saat melihat. Saldo dihitung ulang di seluruh buku."
+          }
+        ]
+      }
     },
     {
       "name": "Dasbor laba",
-      "shortDescription": "Laba nyata dari penjualan, biaya produk, dan pengeluaran Anda sendiri."
+      "shortDescription": "Laba nyata dari penjualan, biaya produk, dan pengeluaran Anda sendiri.",
+      "seo": {
+        "title": "Dasbor laba gratis — laba sebenarnya",
+        "description": "Lihat laba sebenarnya dari usaha Anda: pendapatan dari penjualan kasir, dikurangi harga pokok barang dan pengeluaran nyata. Grafik, rentang tanggal, offline.",
+        "keywords": [
+          "dasbor laba",
+          "kalkulator laba usaha",
+          "pelacak laba toko",
+          "laba bersih usaha kecil",
+          "laba rugi gratis"
+        ],
+        "ogTitle": "Dasbor laba",
+        "ogDescription": "Lihat laba sebenarnya dari usaha Anda: pendapatan dari penjualan kasir, dikurangi harga pokok barang dan pengeluaran nyata. Grafik, rentang tanggal, offline."
+      },
+      "hero": {
+        "headline": "Dasbor laba",
+        "subheadline": "Laba sebenarnya — penjualan dikurangi harga pokok barang dikurangi pengeluaran nyata. Tanpa perkiraan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana laba dihitung?",
+            "answer": "Laba bersih = pendapatan − harga pokok barang − pengeluaran. Pendapatan berasal dari penjualan Kasir berbasis browser Anda, harga pokok dari harga beli tiap produk, dan pengeluaran dari Pelacak pengeluaran — semuanya di perangkat Anda."
+          },
+          {
+            "question": "Apakah data harus dimasukkan dua kali?",
+            "answer": "Tidak. Dasbor membaca penjualan yang sudah Anda tagihkan di kasir dan pengeluaran yang sudah Anda catat di Pelacak pengeluaran. Tidak ada yang perlu diketik ulang, tidak ada yang perlu disetel."
+          },
+          {
+            "question": "Apakah data keuangan saya diunggah?",
+            "answer": "Tidak pernah. Semua perhitungan berlangsung di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, tanpa server."
+          }
+        ]
+      }
     },
     {
       "name": "Buku piutang pelanggan",
@@ -738,7 +838,40 @@
     },
     {
       "name": "Anggaran vs realisasi",
-      "shortDescription": "Rencana dan kenyataan per kategori dengan selisih dan selisih % dihitung langsung. Ekspor CSV."
+      "shortDescription": "Rencana dan kenyataan per kategori dengan selisih dan selisih % dihitung langsung. Ekspor CSV.",
+      "seo": {
+        "title": "Anggaran vs realisasi gratis — selisih",
+        "description": "Bandingkan jumlah yang dianggarkan dengan realisasinya per kategori, dengan selisih dan selisih % dihitung langsung. Ekspor CSV. Gratis dan offline.",
+        "keywords": [
+          "anggaran vs realisasi",
+          "laporan selisih",
+          "pelacak anggaran usaha",
+          "analisis selisih anggaran",
+          "perbandingan anggaran bulanan"
+        ],
+        "ogTitle": "Anggaran vs realisasi",
+        "ogDescription": "Bandingkan jumlah yang dianggarkan dengan realisasinya per kategori, dengan selisih dan selisih % dihitung langsung. Ekspor CSV. Gratis dan offline."
+      },
+      "hero": {
+        "headline": "Anggaran vs realisasi",
+        "subheadline": "Rencana berhadapan dengan kenyataan, kategori demi kategori — selisih dihitung dan diberi warna saat Anda mengetik."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu selisih anggaran?",
+            "answer": "Perbedaan antara jumlah realisasi dan anggaran (realisasi − anggaran). Pada baris pengeluaran, selisih positif berarti pemborosan; pada baris pendapatan berarti Anda melampaui rencana."
+          },
+          {
+            "question": "Selisih mana yang perlu ditelusuri?",
+            "answer": "Yang besar dalam rupiah dan yang besar dalam persen — selisih 2% pada biaya terbesar Anda bisa lebih penting daripada 40% pada pos kecil. Lihat kedua kolom."
+          },
+          {
+            "question": "Seberapa sering anggaran vs realisasi perlu ditinjau?",
+            "answer": "Sebulan sekali adalah irama lazimnya: cukup cepat untuk memperbaiki arah, cukup berjarak agar datanya nyata. Simpan lembarnya setiap bulan dan ekspor CSV untuk catatan Anda."
+          }
+        ]
+      }
     },
     {
       "name": "Analisis ABC",

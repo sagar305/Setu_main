@@ -224,15 +224,115 @@
     },
     {
       "name": "Controle de despesas",
-      "shortDescription": "Acompanhe despesas por categoria com totais mensais e exportação CSV."
+      "shortDescription": "Acompanhe despesas por categoria com totais mensais e exportação CSV.",
+      "seo": {
+        "title": "Controle de despesas grátis para pequenos negócios",
+        "description": "Acompanhe as despesas do negócio por categoria — aluguel, salários, compras, contas. Totais do mês e exportação em CSV. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "controle de despesas",
+          "controle de despesas da empresa grátis",
+          "registro de despesas da loja",
+          "livro de despesas",
+          "controle de gastos"
+        ],
+        "ogTitle": "Controle de despesas",
+        "ogDescription": "Acompanhe as despesas do negócio por categoria — aluguel, salários, compras, contas. Totais do mês e exportação em CSV. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Controle de despesas",
+        "subheadline": "Lance cada despesa do negócio por categoria — e veja o lucro real no painel."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Este controle de despesas é grátis mesmo?",
+            "answer": "Sim: grátis, lançamentos ilimitados e sem cadastro. Seus dados de despesas ficam no seu navegador, no seu dispositivo."
+          },
+          {
+            "question": "Como ele se liga ao Painel de lucro?",
+            "answer": "As despesas lançadas aqui entram sozinhas no Painel de lucro da Setu, então o lucro sai de despesas reais — não de estimativas."
+          },
+          {
+            "question": "Posso exportar minhas despesas?",
+            "answer": "Sim: exporte qualquer mês como arquivo CSV, que abre no Excel ou no Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Livro caixa",
-      "shortDescription": "Entradas e saídas diárias de caixa com saldos de abertura e fechamento automáticos."
+      "shortDescription": "Entradas e saídas diárias de caixa com saldos de abertura e fechamento automáticos.",
+      "seo": {
+        "title": "Livro caixa grátis — saldo diário do caixa",
+        "description": "Livro caixa diário simples para a sua loja: lance entradas e saídas de dinheiro e tenha os saldos de abertura e fechamento prontos. Grátis e sem cadastro.",
+        "keywords": [
+          "livro caixa",
+          "registro diário de caixa",
+          "livro de entradas e saídas",
+          "livro caixa de loja grátis",
+          "fechamento de caixa",
+          "controle de caixa"
+        ],
+        "ogTitle": "Livro caixa",
+        "ogDescription": "Livro caixa diário simples para a sua loja: lance entradas e saídas de dinheiro e tenha os saldos de abertura e fechamento prontos. Grátis e sem cadastro."
+      },
+      "hero": {
+        "headline": "Livro caixa",
+        "subheadline": "Dinheiro que entra, dinheiro que sai e saldo de fechamento — o caderninho da loja, sem o caderninho."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como os saldos de abertura e fechamento são calculados?",
+            "answer": "Sozinhos. O saldo de abertura de um dia é o acumulado de todos os lançamentos anteriores; o de fechamento soma o dinheiro que entrou naquele dia e subtrai o que saiu."
+          },
+          {
+            "question": "Meus dados de caixa ficam privados?",
+            "answer": "Sim: tudo fica no seu navegador, no seu dispositivo. Sem cadastro e sem nuvem. Exporte o livro inteiro em CSV quando quiser."
+          },
+          {
+            "question": "Posso usar para dias anteriores?",
+            "answer": "Sim: escolha qualquer data ao lançar e ao consultar. Os saldos são recalculados em todo o livro."
+          }
+        ]
+      }
     },
     {
       "name": "Painel de lucro",
-      "shortDescription": "Lucro real a partir das suas vendas, custos de produto e despesas."
+      "shortDescription": "Lucro real a partir das suas vendas, custos de produto e despesas.",
+      "seo": {
+        "title": "Painel de lucro grátis — lucro real",
+        "description": "Veja o lucro real do negócio: a receita das vendas do PDV, menos o custo da mercadoria e as despesas reais. Gráficos, períodos de datas, offline.",
+        "keywords": [
+          "painel de lucro",
+          "calculadora de lucro da empresa",
+          "controle de lucro da loja",
+          "lucro líquido pequeno negócio",
+          "lucros e perdas grátis"
+        ],
+        "ogTitle": "Painel de lucro",
+        "ogDescription": "Veja o lucro real do negócio: a receita das vendas do PDV, menos o custo da mercadoria e as despesas reais. Gráficos, períodos de datas, offline."
+      },
+      "hero": {
+        "headline": "Painel de lucro",
+        "subheadline": "Seu lucro real — vendas menos custo da mercadoria menos despesas reais. Sem estimativas."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como o lucro é calculado?",
+            "answer": "Lucro líquido = receita − custo da mercadoria − despesas. A receita vem das vendas do seu PDV no navegador, o custo da mercadoria do preço de custo de cada produto, e as despesas do Controle de despesas — tudo no seu dispositivo."
+          },
+          {
+            "question": "Preciso lançar os dados duas vezes?",
+            "answer": "Não. O painel lê as vendas que você já faturou no PDV e as despesas que você já lançou no Controle de despesas. Nada para redigitar, nada para configurar."
+          },
+          {
+            "question": "Meus dados financeiros são enviados?",
+            "answer": "Nunca. Todos os cálculos acontecem no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem e sem servidor."
+          }
+        ]
+      }
     },
     {
       "name": "Razão de clientes",
@@ -738,7 +838,40 @@
     },
     {
       "name": "Orçado vs realizado",
-      "shortDescription": "Plano e realidade por categoria, com variação e variação % calculadas ao vivo. Exportação CSV."
+      "shortDescription": "Plano e realidade por categoria, com variação e variação % calculadas ao vivo. Exportação CSV.",
+      "seo": {
+        "title": "Orçado vs realizado grátis — variações",
+        "description": "Compare o valor orçado com o realizado por categoria, com a variação e a variação % calculadas na hora. Exporte em CSV. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "orçado vs realizado",
+          "relatório de variações",
+          "controle de orçamento empresarial",
+          "análise de variação orçamentária",
+          "comparativo mensal de orçamento"
+        ],
+        "ogTitle": "Orçado vs realizado",
+        "ogDescription": "Compare o valor orçado com o realizado por categoria, com a variação e a variação % calculadas na hora. Exporte em CSV. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Orçado vs realizado",
+        "subheadline": "O plano diante da realidade, categoria por categoria — as variações são calculadas e coloridas enquanto você digita."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é variação orçamentária?",
+            "answer": "A diferença entre o valor realizado e o orçado (realizado − orçado). Nas linhas de despesa uma variação positiva é gasto a mais; nas de receita significa que você superou o plano."
+          },
+          {
+            "question": "Quais variações vale investigar?",
+            "answer": "As grandes em dinheiro e as grandes em porcentagem: 2% de variação no seu maior custo pode pesar mais do que 40% numa conta pequena. Olhe as duas colunas."
+          },
+          {
+            "question": "Com que frequência revisar?",
+            "answer": "Uma vez por mês é o ritmo padrão: cedo o bastante para corrigir o rumo e espaçado o bastante para haver dados reais. Salve a planilha todo mês e exporte o CSV para o seu arquivo."
+          }
+        ]
+      }
     },
     {
       "name": "Análise ABC",

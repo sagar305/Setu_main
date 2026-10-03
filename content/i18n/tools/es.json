@@ -224,15 +224,115 @@
     },
     {
       "name": "Control de gastos",
-      "shortDescription": "Sigue los gastos por categoría con totales mensuales y exportación a CSV."
+      "shortDescription": "Sigue los gastos por categoría con totales mensuales y exportación a CSV.",
+      "seo": {
+        "title": "Control de gastos gratis para pymes",
+        "description": "Lleva los gastos del negocio por categoría — alquiler, nóminas, compras, facturas. Totales mensuales y exportación a CSV. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "control de gastos",
+          "control de gastos de empresa gratis",
+          "registro de gastos de tienda",
+          "libro de gastos",
+          "seguimiento de gastos"
+        ],
+        "ogTitle": "Control de gastos",
+        "ogDescription": "Lleva los gastos del negocio por categoría — alquiler, nóminas, compras, facturas. Totales mensuales y exportación a CSV. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "headline": "Control de gastos",
+        "subheadline": "Anota cada gasto del negocio por categoría — y mira tu beneficio real en el panel."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Este control de gastos es gratis de verdad?",
+            "answer": "Sí: gratis, apuntes ilimitados y sin registro. Tus datos de gastos se quedan en tu navegador, en tu dispositivo."
+          },
+          {
+            "question": "¿Cómo se conecta con el Panel de beneficios?",
+            "answer": "Los gastos que anotas aquí entran solos en el Panel de beneficios de Setu, así que el beneficio sale de gastos reales, no de estimaciones."
+          },
+          {
+            "question": "¿Puedo exportar mis gastos?",
+            "answer": "Sí: exporta cualquier mes como archivo CSV, que se abre en Excel o Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Libro de caja",
-      "shortDescription": "Entradas y salidas diarias de efectivo con saldos de apertura y cierre automáticos."
+      "shortDescription": "Entradas y salidas diarias de efectivo con saldos de apertura y cierre automáticos.",
+      "seo": {
+        "title": "Libro de caja gratis — saldo diario de caja",
+        "description": "Libro de caja diario sencillo para tu tienda: anota entradas y salidas de efectivo y obtén los saldos de apertura y cierre solos. Gratis y sin registro.",
+        "keywords": [
+          "libro de caja",
+          "registro diario de caja",
+          "libro de entradas y salidas",
+          "libro de caja de tienda gratis",
+          "arqueo de caja",
+          "saldo de cierre de caja"
+        ],
+        "ogTitle": "Libro de caja",
+        "ogDescription": "Libro de caja diario sencillo para tu tienda: anota entradas y salidas de efectivo y obtén los saldos de apertura y cierre solos. Gratis y sin registro."
+      },
+      "hero": {
+        "headline": "Libro de caja",
+        "subheadline": "Efectivo que entra, efectivo que sale y saldo de cierre — el cuaderno de la tienda, sin el cuaderno."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cómo se calculan los saldos de apertura y cierre?",
+            "answer": "Solos. El saldo de apertura de un día es el acumulado de todos los apuntes anteriores; el de cierre suma el efectivo que entró ese día y resta el que salió."
+          },
+          {
+            "question": "¿Mis datos de caja son privados?",
+            "answer": "Sí: todo se queda en tu navegador, en tu dispositivo. Sin registro y sin nube. Exporta el libro entero en CSV cuando quieras."
+          },
+          {
+            "question": "¿Puedo usarlo para días anteriores?",
+            "answer": "Sí: elige cualquier fecha al añadir un apunte y al consultar. Los saldos se recalculan en todo el libro."
+          }
+        ]
+      }
     },
     {
       "name": "Panel de beneficios",
-      "shortDescription": "El beneficio real a partir de tus ventas, costes de producto y gastos."
+      "shortDescription": "El beneficio real a partir de tus ventas, costes de producto y gastos.",
+      "seo": {
+        "title": "Panel de beneficios gratis — beneficio real",
+        "description": "Mira el beneficio real del negocio: ingresos de las ventas del TPV, menos el coste de la mercancía y los gastos reales. Gráficas y rangos de fechas.",
+        "keywords": [
+          "panel de beneficios",
+          "calculadora de beneficio de empresa",
+          "seguimiento del beneficio de la tienda",
+          "beneficio neto para pymes",
+          "pérdidas y ganancias gratis"
+        ],
+        "ogTitle": "Panel de beneficios",
+        "ogDescription": "Mira el beneficio real del negocio: ingresos de las ventas del TPV, menos el coste de la mercancía y los gastos reales. Gráficas y rangos de fechas."
+      },
+      "hero": {
+        "headline": "Panel de beneficios",
+        "subheadline": "Tu beneficio real — ventas menos coste de la mercancía menos gastos reales. Sin estimaciones."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cómo se calcula el beneficio?",
+            "answer": "Beneficio neto = ingresos − coste de la mercancía − gastos. Los ingresos vienen de las ventas de tu TPV en el navegador, el coste de la mercancía del precio de coste de cada producto, y los gastos del Control de gastos — todo en tu dispositivo."
+          },
+          {
+            "question": "¿Tengo que introducir los datos dos veces?",
+            "answer": "No. El panel lee las ventas que ya facturaste en el TPV y los gastos que ya anotaste en el Control de gastos. Nada que volver a teclear, nada que configurar."
+          },
+          {
+            "question": "¿Se sube mi información financiera?",
+            "answer": "Nunca. Todos los cálculos ocurren en tu navegador, en tu dispositivo. Sin registro, sin nube y sin servidor."
+          }
+        ]
+      }
     },
     {
       "name": "Libro de clientes",
@@ -738,7 +838,40 @@
     },
     {
       "name": "Presupuesto frente a real",
-      "shortDescription": "Plan frente a realidad por categoría, con desviación y % calculados en vivo. Exporta a CSV."
+      "shortDescription": "Plan frente a realidad por categoría, con desviación y % calculados en vivo. Exporta a CSV.",
+      "seo": {
+        "title": "Presupuesto frente a real gratis — desvíos",
+        "description": "Compara el importe presupuestado con el real por categoría, con el desvío y el desvío % calculados al momento. Exporta a CSV. Gratis y sin registro.",
+        "keywords": [
+          "presupuesto frente a real",
+          "informe de desvíos",
+          "control de presupuesto de empresa",
+          "análisis de desviación presupuestaria",
+          "comparativa mensual de presupuesto"
+        ],
+        "ogTitle": "Presupuesto frente a real",
+        "ogDescription": "Compara el importe presupuestado con el real por categoría, con el desvío y el desvío % calculados al momento. Exporta a CSV. Gratis y sin registro."
+      },
+      "hero": {
+        "headline": "Presupuesto frente a real",
+        "subheadline": "El plan frente a la realidad, categoría a categoría — los desvíos se calculan y se colorean mientras escribes."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es el desvío presupuestario?",
+            "answer": "La diferencia entre el importe real y el presupuestado (real − presupuesto). En las filas de gasto un desvío positivo es exceso; en las de ingreso significa que has superado el plan."
+          },
+          {
+            "question": "¿Qué desvíos conviene revisar?",
+            "answer": "Los grandes en dinero y los grandes en porcentaje: un 2% de desvío en tu mayor coste puede importar más que un 40% en una partida pequeña. Mira las dos columnas."
+          },
+          {
+            "question": "¿Cada cuánto conviene revisarlo?",
+            "answer": "Una vez al mes es el ritmo habitual: pronto para corregir el rumbo y con margen para que haya datos reales. Guarda la hoja cada mes y exporta el CSV para tu archivo."
+          }
+        ]
+      }
     },
     {
       "name": "Análisis ABC",

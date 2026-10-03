@@ -224,15 +224,115 @@
     },
     {
       "name": "Suivi des dépenses",
-      "shortDescription": "Suivez les dépenses par catégorie avec totaux mensuels et export CSV."
+      "shortDescription": "Suivez les dépenses par catégorie avec totaux mensuels et export CSV.",
+      "seo": {
+        "title": "Suivi des dépenses gratuit pour TPE",
+        "description": "Suivez les dépenses de l'entreprise par catégorie — loyer, salaires, achats, factures. Totaux mensuels et export CSV. Gratuit, hors ligne, sans inscription.",
+        "keywords": [
+          "suivi des dépenses",
+          "suivi des dépenses d'entreprise gratuit",
+          "registre des dépenses de boutique",
+          "journal des dépenses",
+          "gestion des dépenses gratuite"
+        ],
+        "ogTitle": "Suivi des dépenses",
+        "ogDescription": "Suivez les dépenses de l'entreprise par catégorie — loyer, salaires, achats, factures. Totaux mensuels et export CSV. Gratuit, hors ligne, sans inscription."
+      },
+      "hero": {
+        "headline": "Suivi des dépenses",
+        "subheadline": "Notez chaque dépense de l'entreprise par catégorie — et voyez votre marge réelle sur le tableau de bord."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Ce suivi des dépenses est-il vraiment gratuit ?",
+            "answer": "Oui : gratuit, écritures illimitées, sans inscription. Vos données de dépenses restent dans votre navigateur, sur votre appareil."
+          },
+          {
+            "question": "Comment se relie-t-il au Tableau de bord des marges ?",
+            "answer": "Les dépenses notées ici entrent d'elles-mêmes dans le Tableau de bord des marges de Setu : la marge est donc calculée sur des dépenses réelles, pas sur des estimations."
+          },
+          {
+            "question": "Puis-je exporter mes dépenses ?",
+            "answer": "Oui : exportez n'importe quel mois en fichier CSV, qui s'ouvre dans Excel ou Google Sheets."
+          }
+        ]
+      }
     },
     {
       "name": "Livre de caisse",
-      "shortDescription": "Entrées et sorties d'espèces au jour le jour, avec soldes d'ouverture et de clôture automatiques."
+      "shortDescription": "Entrées et sorties d'espèces au jour le jour, avec soldes d'ouverture et de clôture automatiques.",
+      "seo": {
+        "title": "Livre de caisse gratuit — solde quotidien",
+        "description": "Un livre de caisse quotidien simple pour votre boutique : notez les entrées et sorties d'espèces, les soldes d'ouverture et de clôture se calculent seuls.",
+        "keywords": [
+          "livre de caisse",
+          "journal de caisse quotidien",
+          "livre entrées sorties d'espèces",
+          "livre de caisse boutique gratuit",
+          "solde de clôture de caisse",
+          "tenue de caisse"
+        ],
+        "ogTitle": "Livre de caisse",
+        "ogDescription": "Un livre de caisse quotidien simple pour votre boutique : notez les entrées et sorties d'espèces, les soldes d'ouverture et de clôture se calculent seuls."
+      },
+      "hero": {
+        "headline": "Livre de caisse",
+        "subheadline": "Espèces entrées, espèces sorties et solde de clôture — le cahier de la boutique, sans le cahier."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Comment les soldes d'ouverture et de clôture sont-ils calculés ?",
+            "answer": "Tout seuls. Le solde d'ouverture d'un jour est le cumul de toutes les écritures antérieures ; celui de clôture ajoute les espèces entrées ce jour-là et retire celles qui sont sorties."
+          },
+          {
+            "question": "Mes données de caisse restent-elles privées ?",
+            "answer": "Oui : tout reste dans votre navigateur, sur votre appareil. Pas d'inscription, pas de cloud. Exportez tout le livre en CSV à tout moment."
+          },
+          {
+            "question": "Puis-je l'utiliser pour les jours passés ?",
+            "answer": "Oui : choisissez n'importe quelle date à la saisie comme à la consultation. Les soldes se recalculent sur tout le livre."
+          }
+        ]
+      }
     },
     {
       "name": "Tableau de bord des marges",
-      "shortDescription": "Le bénéfice réel calculé à partir de vos ventes, du coût des produits et de vos charges."
+      "shortDescription": "Le bénéfice réel calculé à partir de vos ventes, du coût des produits et de vos charges.",
+      "seo": {
+        "title": "Tableau de bord des marges gratuit",
+        "description": "Voyez la marge réelle de votre activité : le chiffre d'affaires de la caisse, moins le coût des marchandises et les dépenses réelles. Graphiques, hors ligne.",
+        "keywords": [
+          "tableau de bord des marges",
+          "calcul de la marge de l'entreprise",
+          "suivi de la marge de la boutique",
+          "résultat net TPE",
+          "compte de résultat gratuit"
+        ],
+        "ogTitle": "Tableau de bord des marges",
+        "ogDescription": "Voyez la marge réelle de votre activité : le chiffre d'affaires de la caisse, moins le coût des marchandises et les dépenses réelles. Graphiques, hors ligne."
+      },
+      "hero": {
+        "headline": "Tableau de bord des marges",
+        "subheadline": "Votre marge réelle — les ventes moins le coût des marchandises moins les dépenses réelles. Aucune estimation."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Comment la marge est-elle calculée ?",
+            "answer": "Marge nette = chiffre d'affaires − coût des marchandises − dépenses. Le chiffre d'affaires vient des ventes de votre Caisse dans le navigateur, le coût des marchandises du prix d'achat de chaque produit, et les dépenses du Suivi des dépenses — le tout sur votre appareil."
+          },
+          {
+            "question": "Faut-il saisir les données deux fois ?",
+            "answer": "Non. Le tableau de bord lit les ventes que vous avez déjà facturées dans la caisse et les dépenses que vous avez déjà notées dans le Suivi des dépenses. Rien à ressaisir, rien à configurer."
+          },
+          {
+            "question": "Mes données financières sont-elles envoyées ?",
+            "answer": "Jamais. Tous les calculs se font dans votre navigateur, sur votre appareil. Pas d'inscription, pas de cloud, pas de serveur."
+          }
+        ]
+      }
     },
     {
       "name": "Livre de comptes clients",
@@ -738,7 +838,40 @@
     },
     {
       "name": "Budget et réalisé",
-      "shortDescription": "Prévu contre réalisé par catégorie, avec écart et % d'écart calculés en direct. Export CSV."
+      "shortDescription": "Prévu contre réalisé par catégorie, avec écart et % d'écart calculés en direct. Export CSV.",
+      "seo": {
+        "title": "Budget et réalisé gratuit — écarts calculés",
+        "description": "Comparez le budget et le réalisé par catégorie, avec l'écart et l'écart en % calculés à la saisie. Export CSV. Gratuit, hors ligne et sans inscription.",
+        "keywords": [
+          "budget et réalisé",
+          "rapport d'écarts",
+          "suivi budgétaire entreprise",
+          "analyse des écarts budgétaires",
+          "comparaison budgétaire mensuelle"
+        ],
+        "ogTitle": "Budget et réalisé",
+        "ogDescription": "Comparez le budget et le réalisé par catégorie, avec l'écart et l'écart en % calculés à la saisie. Export CSV. Gratuit, hors ligne et sans inscription."
+      },
+      "hero": {
+        "headline": "Budget et réalisé",
+        "subheadline": "Le plan face à la réalité, catégorie par catégorie — les écarts se calculent et se colorent à mesure que vous saisissez."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un écart budgétaire ?",
+            "answer": "La différence entre le réalisé et le budget (réalisé − budget). Sur une ligne de dépense, un écart positif est un dépassement ; sur une ligne de recette, il signifie que vous avez fait mieux que prévu."
+          },
+          {
+            "question": "Quels écarts faut-il examiner ?",
+            "answer": "Les grands en euros et les grands en pourcentage : un écart de 2 % sur votre plus gros poste peut compter davantage que 40 % sur un poste minuscule. Regardez les deux colonnes."
+          },
+          {
+            "question": "À quelle fréquence revoir le budget et le réalisé ?",
+            "answer": "Une fois par mois est le rythme habituel : assez tôt pour corriger la trajectoire, assez espacé pour avoir de vraies données. Enregistrez la feuille chaque mois et exportez le CSV pour vos archives."
+          }
+        ]
+      }
     },
     {
       "name": "Analyse ABC",
