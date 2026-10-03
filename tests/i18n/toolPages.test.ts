@@ -154,6 +154,54 @@ describe("the body blocks a few tool pages carry", () => {
   });
 });
 
+describe("the body blocks in every translation", () => {
+  const LANGS = fs
+    .readdirSync(path.join(process.cwd(), "content", "i18n", "tools"))
+    .filter((file) => file.endsWith(".json"));
+
+  const translatedBodies = () => {
+    const out: { where: string; body: Record<string, any>[] }[] = [];
+    for (const file of LANGS) {
+      const items = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "i18n", "tools", file), "utf8"),
+      ).items as Record<string, any>[];
+      items.forEach((item, index) => {
+        if (item?.body) out.push({ where: `${file} items[${index}]`, body: item.body });
+      });
+    }
+    return out;
+  };
+
+  /**
+   * RichText renders anything it does not match as literal text, so an unclosed
+   * `**` or a half-written link reaches the reader as asterisks and brackets.
+   * English is checked above; a translation can break it just as easily, and
+   * nothing else would notice.
+   */
+  it("keeps the inline markup in a shape RichText recognises", () => {
+    for (const { where, body } of translatedBodies()) {
+      for (const text of prose(body)) {
+        const stars = (text.match(/\*\*/g) ?? []).length;
+        expect(stars % 2, `${where}: unbalanced ** in "${text.slice(0, 50)}"`).toBe(0);
+
+        const brackets = (text.match(/\[/g) ?? []).length;
+        const made = (text.match(/\[[^\]]+\]\([^)]+\)/g) ?? []).length;
+        expect(made, `${where}: a bracket in "${text.slice(0, 50)}" is not a link`).toBe(brackets);
+      }
+    }
+  });
+
+  /** A link written into a translation has to point somewhere real too. */
+  it("points every link at a path the site serves", () => {
+    const paths = knownPaths();
+    for (const { where, body } of translatedBodies()) {
+      for (const href of hrefs(body)) {
+        expect(paths.has(href), `${where}: nothing serves ${href}`).toBe(true);
+      }
+    }
+  });
+});
+
 describe("the localized tool route", () => {
   /**
    * A route is prerendered per (language, slug), and the tool it renders comes

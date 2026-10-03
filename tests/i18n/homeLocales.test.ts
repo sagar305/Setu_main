@@ -618,6 +618,7 @@ describe("translation files are clean text", () => {
       ["seo.keywords", (item) => item.seo?.keywords],
       ["about.paragraphs", (item) => item.about?.paragraphs],
       ["faq.items", (item) => item.faq?.items],
+      ["body", (item) => item.body],
     ];
     for (const page of ["calculators", "tools"] as const) {
       const english = JSON.parse(
@@ -642,6 +643,49 @@ describe("translation files are clean text", () => {
           }
         });
       }
+    }
+  });
+
+  /**
+   * The same index-merge trap, one level deeper: a body block's steps, cards,
+   * tick list, paragraphs or links all merge by position, so a Hindi steps list
+   * with four of English's five entries ships the fifth in English. The block
+   * kinds have to line up too — a translation that renames `kind` renders
+   * nothing at all, because ToolBody switches on it.
+   */
+  it("keeps every translated body block the same shape as English", () => {
+    const lists = ["steps", "items", "paragraphs", "links"] as const;
+    const english = (
+      JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "en", "tools.json"), "utf8"))
+        .items as Record<string, any>[]
+    ).map((item) => item.body as Record<string, any>[] | undefined);
+
+    const base = path.join(process.cwd(), "content", "i18n", "tools");
+    for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+      const items = (JSON.parse(fs.readFileSync(path.join(base, file), "utf8")).items ??
+        []) as Record<string, any>[];
+
+      items.forEach((item, index) => {
+        const source = english[index];
+        if (!item?.body || !source) return;
+
+        item.body.forEach((block: Record<string, any>, at: number) => {
+          const from = source[at];
+          const where = `content/i18n/tools/${file} items[${index}] body[${at}]`;
+          expect(block.kind, `${where}: kind is "${block.kind}", English has "${from?.kind}"`).toBe(
+            from?.kind,
+          );
+
+          for (const list of lists) {
+            if (!block[list] || !from?.[list]) continue;
+            expect(
+              block[list].length,
+              `${where}.${list} has ${block[list].length} entries, English has ` +
+                `${from[list].length} — the missing entries fall back to English`,
+            ).toBe(from[list].length);
+          }
+        });
+      });
     }
   });
 });
