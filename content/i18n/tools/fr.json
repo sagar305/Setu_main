@@ -93,15 +93,115 @@
     },
     {
       "name": "Générateur de devis",
-      "shortDescription": "Des devis professionnels avec date de validité et suivi du statut : impression ou PDF."
+      "shortDescription": "Des devis professionnels avec date de validité et suivi du statut : impression ou PDF.",
+      "seo": {
+        "title": "Générateur de devis gratuit — estimations",
+        "description": "Créez des devis et des estimations professionnels avec date de validité, taxes et totaux. Imprimez ou enregistrez en PDF. Gratuit, hors ligne, sans inscription.",
+        "keywords": [
+          "générateur de devis",
+          "faire un devis gratuit",
+          "générateur d'estimation",
+          "modèle de devis",
+          "format de devis",
+          "devis proforma"
+        ],
+        "ogTitle": "Générateur de devis",
+        "ogDescription": "Créez des devis professionnels avec date de validité et totaux — imprimez ou enregistrez en PDF. Sans inscription."
+      },
+      "hero": {
+        "headline": "Générateur de devis",
+        "subheadline": "Des devis professionnels avec date de validité et suivi du statut — imprimez ou enregistrez en PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quelle est la différence entre un devis et une facture ?",
+            "answer": "Un devis est une offre de prix envoyée avant le travail ou la vente — il porte une date de validité et n'est pas un document fiscal. La facture est le document émis après. Setu propose un Générateur de factures gratuit distinct pour cela."
+          },
+          {
+            "question": "Puis-je savoir si un devis a été accepté ?",
+            "answer": "Oui — les devis enregistrés portent un statut : brouillon, envoyé, accepté ou refusé. Mettez-le à jour au fil de la négociation."
+          },
+          {
+            "question": "Reprend-il les coordonnées de mon entreprise et de mes clients ?",
+            "answer": "Oui. Connectez votre espace de travail Setu et les informations de votre entreprise, vos clients enregistrés et vos produits se remplissent tout seuls — rien à ressaisir."
+          },
+          {
+            "question": "Comment obtenir le PDF ?",
+            "answer": "Cliquez sur Imprimer / PDF et choisissez « Enregistrer au format PDF » dans la boîte d'impression de votre navigateur. Tout se passe sur votre appareil."
+          }
+        ]
+      }
     },
     {
       "name": "Profil de l'entreprise",
-      "shortDescription": "Enregistrez vos informations une fois : tous les outils Setu les réutilisent automatiquement."
+      "shortDescription": "Enregistrez vos informations une fois : tous les outils Setu les réutilisent automatiquement.",
+      "seo": {
+        "title": "Profil de l'entreprise — une seule saisie",
+        "description": "Enregistrez une fois le nom de votre entreprise, le GSTIN, le logo et les coordonnées — tous les outils Setu les reprennent d'eux-mêmes. Gratuit, hors ligne.",
+        "keywords": [
+          "profil de l'entreprise",
+          "saisie des informations de l'entreprise",
+          "profil GSTIN",
+          "configuration du logo de l'entreprise"
+        ],
+        "ogTitle": "Profil de l'entreprise",
+        "ogDescription": "Renseignez les informations de votre entreprise une fois. La caisse, les factures, les reçus et les étiquettes les reprennent d'eux-mêmes."
+      },
+      "hero": {
+        "headline": "Profil de l'entreprise",
+        "subheadline": "Renseignez-le une fois. Tous les outils Setu de cet appareil le reprennent — rien ne vous le demande deux fois."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Pourquoi renseigner un profil d'entreprise ?",
+            "answer": "Pour ne jamais saisir vos informations deux fois. Votre nom, votre GSTIN, votre logo et votre adresse sont enregistrés une fois sur cet appareil, et tous les outils Setu — caisse, factures, reçus, étiquettes — les remplissent d'eux-mêmes."
+          },
+          {
+            "question": "Où le profil est-il enregistré ?",
+            "answer": "Dans votre navigateur, sur votre appareil, à l'intérieur de votre espace de travail Setu privé. Pas d'inscription, pas de cloud, et vous pouvez l'exporter ou le supprimer à tout moment."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur de reçus",
-      "shortDescription": "Dessinez un reçu, saisissez une vente et imprimez ; la caisse du navigateur imprime le même modèle."
+      "shortDescription": "Dessinez un reçu, saisissez une vente et imprimez ; la caisse du navigateur imprime le même modèle.",
+      "seo": {
+        "title": "Générateur de reçus gratuit — créez, imprimez",
+        "description": "Dessinez le reçu de votre boutique — logo, couleurs, en-tête et pied — puis saisissez une vente et imprimez-le. Le même modèle s'imprime depuis la caisse Setu.",
+        "keywords": [
+          "générateur de reçus",
+          "créer un reçu",
+          "modèle de reçu thermique",
+          "mise en page reçu 80 mm",
+          "imprimer un reçu en ligne",
+          "modèle de ticket de caisse"
+        ],
+        "ogTitle": "Générateur de reçus",
+        "ogDescription": "Dessinez un reçu à votre marque, saisissez une vente et imprimez-le — et réutilisez le modèle dans les outils Setu. Sans inscription."
+      },
+      "hero": {
+        "headline": "Générateur de reçus",
+        "subheadline": "Dessinez votre reçu, saisissez une vente et imprimez-le — et le même modèle s'imprime depuis la caisse."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Où puis-je utiliser le modèle de reçu enregistré ?",
+            "answer": "Les modèles sont enregistrés dans votre espace de travail Setu sur cet appareil. La Caisse dans le navigateur peut imprimer les tickets avec eux — dessinez ici une fois, sans refaire ni recopier."
+          },
+          {
+            "question": "Quels formats de papier sont pris en charge ?",
+            "answer": "Thermique 80 mm et 58 mm (les rouleaux de caisse courants) et A4."
+          },
+          {
+            "question": "L'aperçu affiche-t-il les vraies informations de mon entreprise ?",
+            "answer": "Oui — connectez votre espace de travail et l'aperçu en direct utilise le nom, le logo, l'adresse et le GSTIN réels de votre entreprise."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur de codes-barres",
@@ -374,7 +474,40 @@
     },
     {
       "name": "Agenda des rendez-vous",
-      "shortDescription": "Réservations par jour avec durée, statut et suivi des absences."
+      "shortDescription": "Réservations par jour avec durée, statut et suivi des absences.",
+      "seo": {
+        "title": "Agenda des rendez-vous gratuit — salons",
+        "description": "Prenez et gérez les rendez-vous — vue du jour, statuts, durées, absences. Pour salons, cabinets, consultants et ateliers. Gratuit, hors ligne, sans inscription.",
+        "keywords": [
+          "agenda des rendez-vous",
+          "planificateur de rendez-vous gratuit",
+          "agenda de salon de coiffure",
+          "registre de rendez-vous de cabinet",
+          "agenda de rendez-vous en ligne"
+        ],
+        "ogTitle": "Agenda des rendez-vous",
+        "ogDescription": "Gestion des rendez-vous au jour pour salons, cabinets et services. Hors ligne, sans inscription."
+      },
+      "hero": {
+        "headline": "Agenda des rendez-vous",
+        "subheadline": "Réservations au jour, durées et statuts — pour toute activité qui travaille sur rendez-vous."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "À qui s'adresse cet agenda ?",
+            "answer": "À toute activité qui travaille sur rendez-vous : salons, cabinets, consultants, ateliers de réparation, professeurs particuliers, avocats. Vue du jour, durées, statuts et suivi des absences."
+          },
+          {
+            "question": "Reprend-il mes clients existants ?",
+            "answer": "Oui. Si vous utilisez d'autres outils Setu sur cet appareil, connectez votre espace de travail et choisissez les clients dans le carnet partagé au lieu de les ressaisir."
+          },
+          {
+            "question": "Mes données de rendez-vous restent-elles privées ?",
+            "answer": "Oui — tout reste dans votre navigateur, sur votre appareil. Pas d'inscription, pas de cloud, export CSV à tout moment."
+          }
+        ]
+      }
     },
     {
       "name": "Générateur d'avoirs",

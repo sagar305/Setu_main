@@ -93,15 +93,115 @@
     },
     {
       "name": "Angebotsgenerator",
-      "shortDescription": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — Druck oder PDF."
+      "shortDescription": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — Druck oder PDF.",
+      "seo": {
+        "title": "Kostenloser Angebotsgenerator — Kostenschätzung",
+        "description": "Erstellen Sie professionelle Angebote und Kostenschätzungen mit Gültigkeitsdatum, Steuer und Summen. Drucken oder als PDF speichern. Kostenlos, offline.",
+        "keywords": [
+          "Angebotsgenerator",
+          "Angebot kostenlos erstellen",
+          "Kostenschätzung erstellen",
+          "Angebotsvorlage",
+          "Angebotsformat",
+          "Proforma-Angebot"
+        ],
+        "ogTitle": "Angebotsgenerator",
+        "ogDescription": "Professionelle Angebote mit Gültigkeitsdatum und Summen — drucken oder als PDF speichern. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Angebotsgenerator",
+        "subheadline": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — drucken oder als PDF speichern."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen Angebot und Rechnung?",
+            "answer": "Ein Angebot ist ein Preisvorschlag, den Sie vor Arbeit oder Verkauf schicken — es hat ein Gültigkeitsdatum und ist kein Steuerdokument. Die Rechnung stellen Sie danach. Dafür hat Setu einen eigenen kostenlosen Rechnungsgenerator."
+          },
+          {
+            "question": "Kann ich sehen, ob ein Angebot angenommen wurde?",
+            "answer": "Ja — gespeicherte Angebote tragen einen Status: Entwurf, versandt, angenommen oder abgelehnt. Aktualisieren Sie ihn, während das Geschäft läuft."
+          },
+          {
+            "question": "Übernimmt er meine Betriebs- und Kundendaten?",
+            "answer": "Ja. Verbinden Sie Ihren Setu-Arbeitsbereich, dann füllen sich Ihre Betriebsdaten, gespeicherte Kunden und Artikel von selbst — nichts neu eingeben."
+          },
+          {
+            "question": "Wie bekomme ich ein PDF?",
+            "answer": "Klicken Sie auf Drucken / PDF und wählen Sie im Druckdialog Ihres Browsers „Als PDF speichern“. Alles passiert auf Ihrem Gerät."
+          }
+        ]
+      }
     },
     {
       "name": "Betriebsprofil",
-      "shortDescription": "Ihre Betriebsdaten einmal speichern — jedes Setu-Tool übernimmt sie automatisch."
+      "shortDescription": "Ihre Betriebsdaten einmal speichern — jedes Setu-Tool übernimmt sie automatisch.",
+      "seo": {
+        "title": "Betriebsprofil — einmal anlegen, überall nutzen",
+        "description": "Betriebsname, GSTIN, Logo und Kontaktdaten einmal speichern — jedes Setu-Tool übernimmt sie von selbst. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Betriebsprofil",
+          "Betriebsdaten anlegen",
+          "GSTIN-Profil",
+          "Betriebslogo einrichten"
+        ],
+        "ogTitle": "Betriebsprofil",
+        "ogDescription": "Betriebsdaten einmal ausfüllen. Kasse, Rechnungen, Belege und Etiketten übernehmen sie von selbst."
+      },
+      "hero": {
+        "headline": "Betriebsprofil",
+        "subheadline": "Einmal anlegen. Jedes Setu-Tool auf diesem Gerät übernimmt es — nichts fragt zweimal."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum ein Betriebsprofil anlegen?",
+            "answer": "Damit Sie Ihre Daten nie zweimal eingeben. Name, GSTIN, Logo und Adresse werden einmal auf diesem Gerät gespeichert, und jedes Setu-Tool — Kasse, Rechnungen, Belege, Etiketten — füllt sie von selbst ein."
+          },
+          {
+            "question": "Wo wird das Profil gespeichert?",
+            "answer": "In Ihrem Browser auf Ihrem Gerät, in Ihrem privaten Setu-Arbeitsbereich. Keine Anmeldung, keine Cloud, und Sie können es jederzeit exportieren oder löschen."
+          }
+        ]
+      }
     },
     {
       "name": "Beleggenerator",
-      "shortDescription": "Beleg gestalten, Verkauf eintragen und drucken — die Browser-Kasse druckt im selben Layout."
+      "shortDescription": "Beleg gestalten, Verkauf eintragen und drucken — die Browser-Kasse druckt im selben Layout.",
+      "seo": {
+        "title": "Kostenloser Beleggenerator — gestalten, drucken",
+        "description": "Gestalten Sie den Beleg Ihres Ladens — Logo, Farben, Kopf und Fuß — tragen Sie dann einen Verkauf ein und drucken ihn. Dasselbe Layout druckt die Setu-Kasse.",
+        "keywords": [
+          "Beleggenerator",
+          "Beleg erstellen",
+          "Thermobeleg-Vorlage",
+          "80mm Belegvorlage",
+          "Beleg online drucken",
+          "Kassenbeleg-Vorlage"
+        ],
+        "ogTitle": "Beleggenerator",
+        "ogDescription": "Gestalten Sie einen Beleg im eigenen Auftritt, tragen einen Verkauf ein und drucken ihn — das Layout gilt in allen Setu-Tools. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Beleggenerator",
+        "subheadline": "Gestalten Sie Ihren Beleg, tragen einen Verkauf ein und drucken ihn — dasselbe Layout druckt auch die Kasse."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wo kann ich meine gespeicherte Belegvorlage nutzen?",
+            "answer": "Vorlagen werden in Ihrem Setu-Arbeitsbereich auf diesem Gerät gespeichert. Die Browser-Kasse kann Bons damit drucken — hier einmal gestalten, kein zweites Gestalten, kein Kopieren."
+          },
+          {
+            "question": "Welche Papiergrößen werden unterstützt?",
+            "answer": "Thermo 80 mm und 58 mm (die üblichen Bonrollen) sowie A4."
+          },
+          {
+            "question": "Zeigt die Vorschau meine echten Betriebsdaten?",
+            "answer": "Ja — verbinden Sie Ihren Arbeitsbereich, dann nutzt die laufende Vorschau Ihren echten Betriebsnamen, Ihr Logo, Ihre Adresse und Ihre GSTIN."
+          }
+        ]
+      }
     },
     {
       "name": "Barcode-Generator",
@@ -374,7 +474,40 @@
     },
     {
       "name": "Terminbuch",
-      "shortDescription": "Tagesgenaue Buchungssatzen mit Dauer, Status und Erfassung von Nichterscheinen."
+      "shortDescription": "Tagesgenaue Buchungssatzen mit Dauer, Status und Erfassung von Nichterscheinen.",
+      "seo": {
+        "title": "Kostenloses Terminbuch — Salons und Praxen",
+        "description": "Termine annehmen und verwalten — Tagesansicht, Status, Dauer, Nichterscheinen. Für Salons, Praxen, Beratende und Werkstätten. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Terminbuch",
+          "Terminplaner kostenlos",
+          "Terminbuch Friseur",
+          "Terminregister Praxis",
+          "Terminkalender online"
+        ],
+        "ogTitle": "Terminbuch",
+        "ogDescription": "Tagesweise Terminverwaltung für Salons, Praxen und Dienstleistungen. Offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Terminbuch",
+        "subheadline": "Tagesweise Buchungen, Dauer und Status — für jeden Betrieb, der auf Termin arbeitet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Für wen ist dieses Terminbuch?",
+            "answer": "Für jeden Betrieb, der auf Termin arbeitet: Salons, Praxen, Beratende, Reparaturwerkstätten, Nachhilfe, Anwaltskanzleien. Tagesansicht, Dauer, Status und Erfassung von Nichterscheinen."
+          },
+          {
+            "question": "Übernimmt es meine vorhandenen Kunden?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät andere Setu-Tools nutzen, verbinden Sie Ihren Arbeitsbereich und wählen Kunden aus dem gemeinsamen Kundenverzeichnis, statt sie neu einzugeben."
+          },
+          {
+            "question": "Bleiben meine Termindaten privat?",
+            "answer": "Ja — alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, CSV-Export jederzeit."
+          }
+        ]
+      }
     },
     {
       "name": "Gutschriftengenerator",

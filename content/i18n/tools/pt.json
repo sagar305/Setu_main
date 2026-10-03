@@ -93,15 +93,115 @@
     },
     {
       "name": "Gerador de orçamentos",
-      "shortDescription": "Orçamentos profissionais com data de validade e acompanhamento de status — impressão ou PDF."
+      "shortDescription": "Orçamentos profissionais com data de validade e acompanhamento de status — impressão ou PDF.",
+      "seo": {
+        "title": "Gerador de orçamentos grátis — estimativas",
+        "description": "Crie orçamentos e estimativas profissionais com data de validade, impostos e totais. Imprima ou salve em PDF. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "gerador de orçamentos",
+          "fazer orçamento grátis",
+          "gerador de estimativas",
+          "modelo de orçamento",
+          "formato de orçamento",
+          "orçamento proforma"
+        ],
+        "ogTitle": "Gerador de orçamentos",
+        "ogDescription": "Crie orçamentos profissionais com data de validade e totais — imprima ou salve em PDF. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de orçamentos",
+        "subheadline": "Orçamentos profissionais com data de validade e acompanhamento do status — imprima ou salve em PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qual a diferença entre orçamento e nota fiscal?",
+            "answer": "O orçamento é uma oferta de preço enviada antes do serviço ou da venda — tem data de validade e não é documento fiscal. A nota é a cobrança emitida depois. Para isso a Setu tem um Gerador de faturas grátis separado."
+          },
+          {
+            "question": "Consigo saber se o orçamento foi aceito?",
+            "answer": "Sim — os orçamentos salvos têm um status: rascunho, enviado, aceito ou recusado. Atualize conforme a negociação andar."
+          },
+          {
+            "question": "Ele reaproveita os dados do meu negócio e dos clientes?",
+            "answer": "Sim. Conecte seu espaço de trabalho Setu e os dados do negócio, os clientes salvos e os produtos se preenchem sozinhos — nada para redigitar."
+          },
+          {
+            "question": "Como consigo o PDF?",
+            "answer": "Clique em Imprimir / PDF e escolha ‘Salvar como PDF’ na janela de impressão do navegador. Tudo acontece no seu dispositivo."
+          }
+        ]
+      }
     },
     {
       "name": "Perfil do negócio",
-      "shortDescription": "Salve os dados do seu negócio uma vez — toda ferramenta Setu reutiliza automaticamente."
+      "shortDescription": "Salve os dados do seu negócio uma vez — toda ferramenta Setu reutiliza automaticamente.",
+      "seo": {
+        "title": "Perfil do negócio — um cadastro para tudo",
+        "description": "Salve uma só vez o nome do seu negócio, o GSTIN, o logo e os contatos — todas as ferramentas Setu reaproveitam sozinhas. Grátis, offline, sem cadastro.",
+        "keywords": [
+          "perfil do negócio",
+          "cadastro dos dados do negócio",
+          "perfil com GSTIN",
+          "cadastro do logo do negócio"
+        ],
+        "ogTitle": "Perfil do negócio",
+        "ogDescription": "Preencha os dados do negócio uma vez. O PDV, as faturas, os recibos e as etiquetas reaproveitam sozinhos."
+      },
+      "hero": {
+        "headline": "Perfil do negócio",
+        "subheadline": "Cadastre uma vez. Toda ferramenta Setu neste dispositivo reaproveita — nada pergunta duas vezes."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que cadastrar um perfil do negócio?",
+            "answer": "Para nunca digitar seus dados duas vezes. Nome, GSTIN, logo e endereço ficam salvos uma vez neste dispositivo, e toda ferramenta Setu — PDV, faturas, recibos, etiquetas — preenche sozinha."
+          },
+          {
+            "question": "Onde o perfil fica salvo?",
+            "answer": "No seu navegador, no seu dispositivo, dentro do seu espaço de trabalho Setu privado. Sem cadastro, sem nuvem, e você pode exportar ou apagar quando quiser."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de recibos",
-      "shortDescription": "Desenhe um recibo, lance a venda e imprima — o PDV do navegador imprime no mesmo desenho."
+      "shortDescription": "Desenhe um recibo, lance a venda e imprima — o PDV do navegador imprime no mesmo desenho.",
+      "seo": {
+        "title": "Gerador de recibos grátis — desenhe e imprima",
+        "description": "Desenhe o recibo da sua loja — logo, cores, cabeçalho e rodapé — depois preencha uma venda e imprima. O mesmo desenho sai também do PDV da Setu.",
+        "keywords": [
+          "gerador de recibos",
+          "fazer recibo",
+          "modelo de recibo térmico",
+          "desenho de recibo 80mm",
+          "imprimir recibo online",
+          "modelo de recibo de PDV"
+        ],
+        "ogTitle": "Gerador de recibos",
+        "ogDescription": "Desenhe um recibo com sua marca, preencha uma venda e imprima — e reaproveite o desenho nas ferramentas Setu. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de recibos",
+        "subheadline": "Desenhe seu recibo, preencha uma venda e imprima — e o mesmo desenho sai também do PDV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Onde posso usar o modelo de recibo que salvei?",
+            "answer": "Os modelos ficam salvos no seu espaço de trabalho Setu neste dispositivo. O PDV no navegador consegue imprimir as vendas com eles — desenhe aqui uma vez, sem redesenhar nem copiar."
+          },
+          {
+            "question": "Quais tamanhos de papel são aceitos?",
+            "answer": "Térmico de 80mm e 58mm (as bobinas comuns) e A4."
+          },
+          {
+            "question": "A prévia mostra os dados reais do meu negócio?",
+            "answer": "Sim — conecte seu espaço de trabalho e a prévia ao vivo usa o nome, o logo, o endereço e o GSTIN reais do seu negócio."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de códigos de barras",
@@ -374,7 +474,40 @@
     },
     {
       "name": "Agenda de atendimentos",
-      "shortDescription": "Reservas por dia com duração, status e registro de faltas."
+      "shortDescription": "Reservas por dia com duração, status e registro de faltas.",
+      "seo": {
+        "title": "Agenda de atendimentos grátis — salões",
+        "description": "Marque e gerencie atendimentos — visão do dia, status, durações e faltas. Para salões, clínicas, consultores e oficinas. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "agenda de atendimentos",
+          "agendador de horários grátis",
+          "agenda de salão",
+          "registro de consultas de clínica",
+          "agenda de atendimentos online"
+        ],
+        "ogTitle": "Agenda de atendimentos",
+        "ogDescription": "Gestão de horários por dia para salões, clínicas e serviços. Offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Agenda de atendimentos",
+        "subheadline": "Marcações por dia, durações e status — para todo negócio que trabalha com hora marcada."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para quem é esta agenda?",
+            "answer": "Para qualquer negócio com hora marcada: salões, clínicas, consultores, oficinas, professores particulares, advogados. Visão do dia, durações, status e controle de faltas."
+          },
+          {
+            "question": "Ela reaproveita os clientes que eu já tenho?",
+            "answer": "Sim. Se você usa outras ferramentas Setu neste dispositivo, conecte seu espaço de trabalho e escolha os clientes da lista compartilhada em vez de digitar de novo."
+          },
+          {
+            "question": "Meus dados de atendimento ficam privados?",
+            "answer": "Sim — tudo fica no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem, com exportação em CSV quando quiser."
+          }
+        ]
+      }
     },
     {
       "name": "Gerador de notas de crédito",

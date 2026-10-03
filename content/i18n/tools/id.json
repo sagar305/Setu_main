@@ -93,15 +93,115 @@
     },
     {
       "name": "Pembuat penawaran",
-      "shortDescription": "Penawaran profesional dengan masa berlaku dan pelacakan status — cetak atau PDF."
+      "shortDescription": "Penawaran profesional dengan masa berlaku dan pelacakan status — cetak atau PDF.",
+      "seo": {
+        "title": "Pembuat penawaran gratis — perkiraan harga",
+        "description": "Buat penawaran dan perkiraan harga yang rapi dengan tanggal berlaku, pajak, dan total. Cetak atau simpan sebagai PDF. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat penawaran",
+          "buat penawaran gratis",
+          "pembuat perkiraan harga",
+          "templat penawaran",
+          "format penawaran",
+          "penawaran proforma"
+        ],
+        "ogTitle": "Pembuat penawaran",
+        "ogDescription": "Buat penawaran rapi dengan tanggal berlaku dan total — cetak atau simpan sebagai PDF. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat penawaran",
+        "subheadline": "Penawaran rapi dengan tanggal berlaku dan pemantauan status — cetak atau simpan sebagai PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa bedanya penawaran dengan faktur?",
+            "answer": "Penawaran adalah usulan harga yang dikirim sebelum pekerjaan atau penjualan — ada tanggal berlakunya dan bukan dokumen pajak. Faktur adalah tagihan yang dibuat sesudahnya. Untuk itu Setu punya Pembuat faktur gratis tersendiri."
+          },
+          {
+            "question": "Bisakah saya tahu penawaran diterima atau tidak?",
+            "answer": "Bisa — penawaran yang tersimpan punya status: draf, terkirim, diterima, atau ditolak. Perbarui saat tawar-menawar berjalan."
+          },
+          {
+            "question": "Apakah ia memakai lagi data usaha dan pelanggan saya?",
+            "answer": "Ya. Hubungkan ruang kerja Setu Anda, lalu data usaha, pelanggan tersimpan, dan produk terisi sendiri — tak ada yang perlu diketik ulang."
+          },
+          {
+            "question": "Bagaimana cara mendapat PDF-nya?",
+            "answer": "Klik Cetak / PDF lalu pilih ‘Simpan sebagai PDF’ di kotak cetak peramban Anda. Semuanya terjadi di perangkat Anda."
+          }
+        ]
+      }
     },
     {
       "name": "Profil usaha",
-      "shortDescription": "Simpan detail usaha Anda sekali — setiap alat Setu memakainya secara otomatis."
+      "shortDescription": "Simpan detail usaha Anda sekali — setiap alat Setu memakainya secara otomatis.",
+      "seo": {
+        "title": "Profil usaha — satu kali isi untuk semua alat",
+        "description": "Simpan nama usaha, GSTIN, logo, dan data kontak Anda sekali saja — setiap alat Setu memakainya lagi secara otomatis. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "profil usaha",
+          "pengaturan data usaha",
+          "profil GSTIN",
+          "pengaturan logo usaha"
+        ],
+        "ogTitle": "Profil usaha",
+        "ogDescription": "Isi data usaha sekali saja. Kasir, faktur, struk, dan label memakainya lagi secara otomatis."
+      },
+      "hero": {
+        "headline": "Profil usaha",
+        "subheadline": "Atur sekali. Setiap alat Setu di perangkat ini memakainya lagi — tak ada yang menanyakan dua kali."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Mengapa perlu mengatur profil usaha?",
+            "answer": "Supaya Anda tak pernah mengetik data dua kali. Nama, GSTIN, logo, dan alamat Anda tersimpan sekali di perangkat ini, dan setiap alat Setu — kasir, faktur, struk, label — mengisinya sendiri."
+          },
+          {
+            "question": "Di mana profilnya disimpan?",
+            "answer": "Di browser pada perangkat Anda, di dalam ruang kerja Setu pribadi Anda. Tanpa pendaftaran, tanpa cloud, dan Anda bisa mengekspor atau menghapusnya kapan saja."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat struk",
-      "shortDescription": "Rancang struk, isi transaksi, lalu cetak — POS browser pun mencetak dengan rancangan yang sama."
+      "shortDescription": "Rancang struk, isi transaksi, lalu cetak — POS browser pun mencetak dengan rancangan yang sama.",
+      "seo": {
+        "title": "Pembuat struk gratis — rancang dan cetak",
+        "description": "Rancang struk toko Anda — logo, warna, kepala, dan kaki — lalu isi satu penjualan dan cetak. Rancangan yang sama juga tercetak dari kasir Setu.",
+        "keywords": [
+          "pembuat struk",
+          "buat struk",
+          "templat struk termal",
+          "rancangan struk 80mm",
+          "cetak struk online",
+          "templat struk kasir"
+        ],
+        "ogTitle": "Pembuat struk",
+        "ogDescription": "Rancang struk bermerek Anda, isi satu penjualan dan cetak — rancangannya dipakai lagi di alat-alat Setu. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat struk",
+        "subheadline": "Rancang struk Anda, isi satu penjualan dan cetak — rancangan yang sama juga tercetak dari kasir."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Di mana templat struk yang saya simpan bisa dipakai?",
+            "answer": "Templat tersimpan di ruang kerja Setu Anda pada perangkat ini. Kasir berbasis browser bisa mencetak tagihan dengan templat itu — rancang sekali di sini, tanpa merancang ulang atau menyalin."
+          },
+          {
+            "question": "Ukuran kertas apa saja yang didukung?",
+            "answer": "Termal 80mm dan 58mm (ukuran rol struk yang umum) serta A4."
+          },
+          {
+            "question": "Apakah pratinjau menampilkan data usaha saya yang sebenarnya?",
+            "answer": "Ya — hubungkan ruang kerja Anda, lalu pratinjau langsung memakai nama usaha, logo, alamat, dan GSTIN Anda yang sebenarnya."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat barcode",
@@ -374,7 +474,40 @@
     },
     {
       "name": "Buku janji temu",
-      "shortDescription": "Pemesanan harian lengkap dengan durasi, status, dan catatan tidak hadir."
+      "shortDescription": "Pemesanan harian lengkap dengan durasi, status, dan catatan tidak hadir.",
+      "seo": {
+        "title": "Buku janji temu gratis — salon dan klinik",
+        "description": "Catat dan kelola janji temu — tampilan harian, status, durasi, dan yang tak datang. Untuk salon, klinik, konsultan, dan bengkel. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "buku janji temu",
+          "penjadwal janji temu gratis",
+          "buku janji salon",
+          "buku janji klinik",
+          "agenda janji temu online"
+        ],
+        "ogTitle": "Buku janji temu",
+        "ogDescription": "Pengelolaan janji temu per hari untuk salon, klinik, dan jasa. Offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku janji temu",
+        "subheadline": "Pemesanan per hari, durasi, dan status — untuk setiap usaha yang bekerja dengan janji temu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Buku janji temu ini untuk siapa?",
+            "answer": "Untuk usaha apa pun yang bekerja dengan janji temu: salon, klinik, konsultan, bengkel, guru les, pengacara. Tampilan harian, durasi, status, dan catatan yang tak datang."
+          },
+          {
+            "question": "Apakah ia memakai pelanggan yang sudah ada?",
+            "answer": "Ya. Jika Anda memakai alat Setu lain di perangkat ini, hubungkan ruang kerja Anda dan pilih pelanggan dari buku pelanggan bersama, tak perlu diketik ulang."
+          },
+          {
+            "question": "Apakah data janji temu saya pribadi?",
+            "answer": "Ya — semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, ekspor CSV kapan saja."
+          }
+        ]
+      }
     },
     {
       "name": "Pembuat nota kredit",

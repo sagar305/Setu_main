@@ -93,15 +93,115 @@
     },
     {
       "name": "Generador de presupuestos",
-      "shortDescription": "Presupuestos profesionales con fecha de validez y seguimiento de estado: imprime o guarda en PDF."
+      "shortDescription": "Presupuestos profesionales con fecha de validez y seguimiento de estado: imprime o guarda en PDF.",
+      "seo": {
+        "title": "Generador de presupuestos gratis",
+        "description": "Crea presupuestos y estimaciones profesionales con fecha de validez, impuestos y totales. Imprime o guarda como PDF. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "generador de presupuestos",
+          "hacer presupuestos gratis",
+          "generador de estimaciones",
+          "plantilla de presupuesto",
+          "formato de presupuesto",
+          "presupuesto proforma"
+        ],
+        "ogTitle": "Generador de presupuestos",
+        "ogDescription": "Crea presupuestos profesionales con fecha de validez y totales — imprime o guarda como PDF. Sin registro."
+      },
+      "hero": {
+        "headline": "Generador de presupuestos",
+        "subheadline": "Presupuestos profesionales con fecha de validez y seguimiento del estado — imprime o guarda como PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué diferencia hay entre un presupuesto y una factura?",
+            "answer": "Un presupuesto es una oferta de precio que se envía antes del trabajo o la venta — tiene fecha de validez y no es un documento fiscal. La factura es el cobro que se emite después. Setu tiene un Generador de facturas gratuito aparte para eso."
+          },
+          {
+            "question": "¿Puedo saber si aceptaron un presupuesto?",
+            "answer": "Sí — los presupuestos guardados llevan un estado: borrador, enviado, aceptado o rechazado. Actualízalo según avance la operación."
+          },
+          {
+            "question": "¿Reutiliza los datos de mi negocio y mis clientes?",
+            "answer": "Sí. Conecta tu espacio de trabajo Setu y los datos de tu negocio, los clientes guardados y los productos se rellenan solos — nada que volver a teclear."
+          },
+          {
+            "question": "¿Cómo obtengo el PDF?",
+            "answer": "Pulsa Imprimir / PDF y elige ‘Guardar como PDF’ en el diálogo de impresión de tu navegador. Todo ocurre en tu dispositivo."
+          }
+        ]
+      }
     },
     {
       "name": "Perfil del negocio",
-      "shortDescription": "Guarda los datos de tu negocio una vez y todas las herramientas de Setu los reutilizan."
+      "shortDescription": "Guarda los datos de tu negocio una vez y todas las herramientas de Setu los reutilizan.",
+      "seo": {
+        "title": "Perfil del negocio — una sola configuración",
+        "description": "Guarda una sola vez el nombre de tu negocio, el GSTIN, el logo y los datos de contacto — todas las herramientas de Setu los reutilizan solas. Gratis.",
+        "keywords": [
+          "perfil del negocio",
+          "configurar los datos del negocio",
+          "perfil con GSTIN",
+          "configurar el logo del negocio"
+        ],
+        "ogTitle": "Perfil del negocio",
+        "ogDescription": "Rellena los datos de tu negocio una vez. El TPV, las facturas, los recibos y las etiquetas los reutilizan solos."
+      },
+      "hero": {
+        "headline": "Perfil del negocio",
+        "subheadline": "Configúralo una vez. Todas las herramientas de Setu en este dispositivo lo reutilizan — nada te lo pregunta dos veces."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Para qué configurar un perfil del negocio?",
+            "answer": "Para no teclear tus datos dos veces. Tu nombre, GSTIN, logo y dirección se guardan una vez en este dispositivo, y todas las herramientas de Setu — TPV, facturas, recibos, etiquetas — los rellenan solas."
+          },
+          {
+            "question": "¿Dónde se guarda el perfil?",
+            "answer": "En tu navegador, en tu dispositivo, dentro de tu espacio de trabajo Setu privado. Sin registro, sin nube, y puedes exportarlo o borrarlo cuando quieras."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de recibos",
-      "shortDescription": "Diseña un recibo, rellena una venta e imprime; el TPV del navegador imprime con el mismo diseño."
+      "shortDescription": "Diseña un recibo, rellena una venta e imprime; el TPV del navegador imprime con el mismo diseño.",
+      "seo": {
+        "title": "Generador de recibos gratis — diseña e imprime",
+        "description": "Diseña el recibo de tu tienda — logo, colores, encabezado y pie — y luego rellena una venta e imprímelo. El mismo diseño se imprime desde el TPV de Setu.",
+        "keywords": [
+          "generador de recibos",
+          "hacer recibos",
+          "plantilla de recibo térmico",
+          "diseño de recibo de 80 mm",
+          "imprimir recibo online",
+          "plantilla de recibo para TPV"
+        ],
+        "ogTitle": "Generador de recibos",
+        "ogDescription": "Diseña un recibo con tu marca, rellena una venta e imprímelo — y reutiliza el diseño en las herramientas de Setu. Sin registro."
+      },
+      "hero": {
+        "headline": "Generador de recibos",
+        "subheadline": "Diseña tu recibo, rellena una venta e imprímelo — y el mismo diseño se imprime desde el TPV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Dónde puedo usar la plantilla de recibo que guarde?",
+            "answer": "Las plantillas se guardan en tu espacio de trabajo Setu en este dispositivo. El TPV en el navegador puede imprimir tickets con ellas — diseña aquí una vez, sin rediseñar ni copiar nada."
+          },
+          {
+            "question": "¿Qué tamaños de papel admite?",
+            "answer": "Térmico de 80 mm y 58 mm (los rollos de ticket habituales) y A4."
+          },
+          {
+            "question": "¿La vista previa muestra los datos reales de mi negocio?",
+            "answer": "Sí — conecta tu espacio de trabajo y la vista previa en vivo usa el nombre, el logo, la dirección y el GSTIN reales de tu negocio."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de códigos de barras",
@@ -374,7 +474,40 @@
     },
     {
       "name": "Agenda de citas",
-      "shortDescription": "Reservas por día con duración, estados y seguimiento de ausencias."
+      "shortDescription": "Reservas por día con duración, estados y seguimiento de ausencias.",
+      "seo": {
+        "title": "Agenda de citas gratis — peluquerías, clínicas",
+        "description": "Reserva y gestiona citas — vista de día, estados, duraciones y ausencias. Para peluquerías, clínicas, consultores y talleres. Gratis y sin registro.",
+        "keywords": [
+          "agenda de citas",
+          "programador de citas gratis",
+          "agenda de peluquería",
+          "registro de citas de clínica",
+          "agenda de citas online"
+        ],
+        "ogTitle": "Agenda de citas",
+        "ogDescription": "Gestión de citas por día para peluquerías, clínicas y servicios. Sin conexión y sin registro."
+      },
+      "hero": {
+        "headline": "Agenda de citas",
+        "subheadline": "Reservas por día, duraciones y estados — para cualquier negocio que trabaje con cita."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Para quién es esta agenda de citas?",
+            "answer": "Para cualquier negocio que trabaje con cita: peluquerías, clínicas, consultores, talleres, profesores particulares, abogados. Vista de día, duraciones, estados y seguimiento de ausencias."
+          },
+          {
+            "question": "¿Reutiliza los clientes que ya tengo?",
+            "answer": "Sí. Si usas otras herramientas de Setu en este dispositivo, conecta tu espacio de trabajo y elige clientes del libro compartido en vez de volver a escribirlos."
+          },
+          {
+            "question": "¿Mis datos de citas son privados?",
+            "answer": "Sí — todo se queda en tu navegador, en tu dispositivo. Sin registro, sin nube y con exportación a CSV cuando quieras."
+          }
+        ]
+      }
     },
     {
       "name": "Generador de notas de crédito",
