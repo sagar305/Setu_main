@@ -205,11 +205,98 @@
     },
     {
       "name": "Gerador de códigos de barras",
-      "shortDescription": "Gere códigos EAN-13, Code 128 e QR — baixe como PNG ou PDF."
+      "shortDescription": "Gere códigos EAN-13, Code 128 e QR — baixe como PNG ou PDF.",
+      "seo": {
+        "title": "Gerador de códigos de barras grátis",
+        "description": "Gere códigos de barras EAN-13, Code 128 e QR de graça. Use os produtos que você salvou e baixe em PNG ou PDF. Funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de códigos de barras",
+          "gerador de código de barras grátis",
+          "gerador EAN-13",
+          "gerador Code 128",
+          "código de barras de produto",
+          "criar código de barras online"
+        ],
+        "ogTitle": "Gerador de códigos de barras",
+        "ogDescription": "Gere os códigos de barras dos seus produtos no navegador e baixe em PNG ou PDF. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de códigos de barras",
+        "subheadline": "Gere códigos EAN-13, Code 128 e QR — baixe em PNG ou PDF. Funciona offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quais tipos de código posso gerar?",
+            "answer": "EAN-13 (o código padrão do varejo), Code 128 (flexível, aceita qualquer texto — ótimo para SKU) e códigos QR (para links, texto ou UPI)."
+          },
+          {
+            "question": "Este gerador de código de barras é grátis?",
+            "answer": "Sim — totalmente grátis e sem cadastro. Os códigos são gerados no seu dispositivo e nunca vão para um servidor."
+          },
+          {
+            "question": "Posso usar os produtos que já salvei?",
+            "answer": "Sim. Se você usa outras ferramentas Setu, como o PDV no navegador, neste dispositivo, conecte seu espaço de trabalho e gere códigos para os produtos salvos com um clique."
+          },
+          {
+            "question": "Em quais formatos posso baixar?",
+            "answer": "PNG para uso digital e PDF para impressão. Os dois são gerados localmente no seu navegador."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Como funciona?",
+          "steps": [
+            "Escolha o tipo de código — Code 128 para SKU, EAN-13 para varejo, QR para links",
+            "Digite o valor, ou escolha um produto salvo no seu espaço de trabalho",
+            "Baixe em PNG ou PDF e imprima ou compartilhe"
+          ]
+        }
+      ]
     },
     {
       "name": "Impressora de etiquetas de preço",
-      "shortDescription": "Imprima etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas."
+      "shortDescription": "Imprima etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas.",
+      "seo": {
+        "title": "Impressora de etiquetas de preço grátis",
+        "description": "Imprima etiquetas de preço e código de barras dos seus produtos — folhas A4 (65/40/24 por folha) ou bobinas térmicas. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "impressora de etiquetas",
+          "gerador de etiquetas de preço",
+          "imprimir etiqueta com código de barras",
+          "etiquetas de produto A4",
+          "etiqueta térmica 50x25",
+          "gerador de etiqueta de prateleira"
+        ],
+        "ogTitle": "Impressora de etiquetas de preço",
+        "ogDescription": "Imprima etiquetas de produto em folhas A4 ou bobinas térmicas, direto do seu navegador."
+      },
+      "hero": {
+        "headline": "Impressora de etiquetas de preço",
+        "subheadline": "Etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas — direto do seu navegador."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quais tamanhos de etiqueta são aceitos?",
+            "answer": "Folhas A4 com 65, 40 ou 24 etiquetas por folha, e etiquetas em bobina térmica de 50×25mm e 38×25mm. Escolha o formato e o layout se ajusta sozinho."
+          },
+          {
+            "question": "O que posso colocar em cada etiqueta?",
+            "answer": "Nome do produto, preço, um código de barras Code 128 e o texto do SKU — cada um pode ser ligado ou desligado."
+          },
+          {
+            "question": "Posso imprimir etiquetas dos produtos que salvei?",
+            "answer": "Sim. Se você usa o PDV no navegador da Setu ou outras ferramentas Setu neste dispositivo, conecte seu espaço de trabalho e adicione produtos à lista de etiquetas com um clique — nomes, preços e códigos de barras se preenchem sozinhos."
+          },
+          {
+            "question": "Precisa de algum programa especial?",
+            "answer": "Não. A impressão usa a janela normal do seu navegador, então qualquer impressora que funcione no seu computador funciona aqui — inclusive impressoras térmicas de etiqueta."
+          }
+        ]
+      }
     },
     {
       "name": "Registro de estoque",

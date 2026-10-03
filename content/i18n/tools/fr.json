@@ -205,11 +205,98 @@
     },
     {
       "name": "Générateur de codes-barres",
-      "shortDescription": "Générez des codes EAN-13, Code 128 et QR, puis téléchargez-les en PNG ou PDF."
+      "shortDescription": "Générez des codes EAN-13, Code 128 et QR, puis téléchargez-les en PNG ou PDF.",
+      "seo": {
+        "title": "Générateur de codes-barres gratuit",
+        "description": "Générez gratuitement des codes-barres EAN-13, Code 128 et QR. Reprenez vos produits enregistrés et téléchargez en PNG ou PDF. Hors ligne, sans inscription.",
+        "keywords": [
+          "générateur de codes-barres",
+          "générateur de codes-barres gratuit",
+          "générateur EAN-13",
+          "générateur Code 128",
+          "code-barres produit",
+          "créer un code-barres en ligne"
+        ],
+        "ogTitle": "Générateur de codes-barres",
+        "ogDescription": "Générez les codes-barres de vos produits dans votre navigateur et téléchargez-les en PNG ou PDF. Sans inscription."
+      },
+      "hero": {
+        "headline": "Générateur de codes-barres",
+        "subheadline": "Générez des codes EAN-13, Code 128 et QR — téléchargez-les en PNG ou PDF. Fonctionne hors ligne."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quels types de codes puis-je générer ?",
+            "answer": "EAN-13 (le code-barres standard du commerce), Code 128 (souple, il encode n'importe quel texte — parfait pour les SKU) et les codes QR (pour des liens, du texte ou l'UPI)."
+          },
+          {
+            "question": "Ce générateur de codes-barres est-il gratuit ?",
+            "answer": "Oui — entièrement gratuit et sans inscription. Les codes sont générés sur votre appareil et ne sont jamais envoyés à un serveur."
+          },
+          {
+            "question": "Puis-je utiliser mes produits enregistrés ?",
+            "answer": "Oui. Si vous utilisez d'autres outils Setu comme la Caisse dans le navigateur sur cet appareil, connectez votre espace de travail et générez les codes de vos produits enregistrés en un clic."
+          },
+          {
+            "question": "Dans quels formats puis-je télécharger ?",
+            "answer": "PNG pour l'usage numérique et PDF pour l'impression. Les deux sont produits localement dans votre navigateur."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Comment ça marche ?",
+          "steps": [
+            "Choisissez le type de code — Code 128 pour les SKU, EAN-13 pour le commerce, QR pour les liens",
+            "Saisissez la valeur, ou prenez un produit enregistré dans votre espace de travail",
+            "Téléchargez en PNG ou PDF, puis imprimez ou partagez"
+          ]
+        }
+      ]
     },
     {
       "name": "Impression d'étiquettes",
-      "shortDescription": "Imprimez des étiquettes de prix et de code-barres sur feuilles A4 ou rouleaux thermiques."
+      "shortDescription": "Imprimez des étiquettes de prix et de code-barres sur feuilles A4 ou rouleaux thermiques.",
+      "seo": {
+        "title": "Impression d'étiquettes de prix gratuite",
+        "description": "Imprimez des étiquettes de prix et de code-barres pour vos produits — planches A4 (65/40/24 par planche) ou rouleaux thermiques. Gratuit, sans inscription.",
+        "keywords": [
+          "impression d'étiquettes",
+          "générateur d'étiquettes de prix",
+          "imprimer des étiquettes code-barres",
+          "étiquettes produit A4",
+          "étiquette thermique 50x25",
+          "générateur d'étiquettes de rayon"
+        ],
+        "ogTitle": "Impression d'étiquettes",
+        "ogDescription": "Imprimez vos étiquettes produit sur planches A4 ou rouleaux thermiques, directement depuis votre navigateur."
+      },
+      "hero": {
+        "headline": "Impression d'étiquettes",
+        "subheadline": "Étiquettes de prix et de code-barres sur planches A4 ou rouleaux thermiques — directement depuis votre navigateur."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quels formats d'étiquette sont pris en charge ?",
+            "answer": "Les planches A4 à 65, 40 ou 24 étiquettes, et les étiquettes en rouleau thermique de 50×25 mm et 38×25 mm. Choisissez le format et la mise en page s'ajuste d'elle-même."
+          },
+          {
+            "question": "Que peut-on mettre sur chaque étiquette ?",
+            "answer": "Le nom du produit, le prix, un code-barres Code 128 et le texte du SKU — chacun peut être affiché ou masqué."
+          },
+          {
+            "question": "Puis-je imprimer les étiquettes de mes produits enregistrés ?",
+            "answer": "Oui. Si vous utilisez la Caisse dans le navigateur de Setu ou d'autres outils Setu sur cet appareil, connectez votre espace de travail et ajoutez des produits à la liste d'étiquettes en un clic — noms, prix et codes-barres se remplissent tout seuls."
+          },
+          {
+            "question": "Faut-il un logiciel particulier ?",
+            "answer": "Non. L'impression passe par la boîte d'impression habituelle de votre navigateur : toute imprimante qui fonctionne avec votre ordinateur fonctionne ici — y compris les imprimantes d'étiquettes thermiques."
+          }
+        ]
+      }
     },
     {
       "name": "Registre de stock",

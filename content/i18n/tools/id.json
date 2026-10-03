@@ -205,11 +205,98 @@
     },
     {
       "name": "Pembuat barcode",
-      "shortDescription": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF."
+      "shortDescription": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF.",
+      "seo": {
+        "title": "Pembuat barcode gratis — EAN-13 dan QR",
+        "description": "Buat barcode EAN-13, Code 128, dan QR secara gratis. Pakai produk yang sudah Anda simpan, unduh sebagai PNG atau PDF. Jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat barcode",
+          "pembuat barcode gratis",
+          "pembuat EAN-13",
+          "pembuat Code 128",
+          "barcode produk",
+          "buat barcode online"
+        ],
+        "ogTitle": "Pembuat barcode",
+        "ogDescription": "Buat barcode produk di peramban Anda dan unduh sebagai PNG atau PDF. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat barcode",
+        "subheadline": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF. Jalan offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Jenis barcode apa saja yang bisa dibuat?",
+            "answer": "EAN-13 (barcode ritel yang baku), Code 128 (lentur, memuat teks apa pun — bagus untuk SKU), dan kode QR (untuk tautan, teks, atau UPI)."
+          },
+          {
+            "question": "Apakah pembuat barcode ini gratis?",
+            "answer": "Ya — sepenuhnya gratis tanpa pendaftaran. Barcode dibuat di perangkat Anda dan tidak pernah dikirim ke server."
+          },
+          {
+            "question": "Bisakah memakai produk yang sudah saya simpan?",
+            "answer": "Bisa. Jika Anda memakai alat Setu lain seperti Kasir berbasis browser di perangkat ini, hubungkan ruang kerja usaha Anda dan buat barcode untuk produk tersimpan dengan sekali klik."
+          },
+          {
+            "question": "Bisa diunduh dalam format apa?",
+            "answer": "PNG untuk pemakaian digital dan PDF untuk dicetak. Keduanya dibuat lokal di peramban Anda."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "steps": [
+            "Pilih jenis barcode — Code 128 untuk SKU, EAN-13 untuk ritel, QR untuk tautan",
+            "Ketik nilainya, atau ambil produk tersimpan dari ruang kerja Anda",
+            "Unduh sebagai PNG atau PDF lalu cetak atau bagikan"
+          ]
+        }
+      ]
     },
     {
       "name": "Pencetak label harga",
-      "shortDescription": "Cetak label harga dan barcode di lembar A4 atau gulungan termal."
+      "shortDescription": "Cetak label harga dan barcode di lembar A4 atau gulungan termal.",
+      "seo": {
+        "title": "Pencetak label harga gratis — A4, termal",
+        "description": "Cetak label harga dan barcode untuk produk Anda — lembar label A4 (65/40/24 per lembar) atau rol termal. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pencetak label",
+          "pembuat label harga",
+          "cetak label barcode",
+          "label produk A4",
+          "label termal 50x25",
+          "pembuat label rak"
+        ],
+        "ogTitle": "Pencetak label harga",
+        "ogDescription": "Cetak label produk di lembar A4 atau rol termal, langsung dari peramban Anda."
+      },
+      "hero": {
+        "headline": "Pencetak label harga",
+        "subheadline": "Label harga dan barcode di lembar A4 atau rol termal — langsung dari peramban Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Ukuran label apa saja yang didukung?",
+            "answer": "Lembar label A4 dengan 65, 40, atau 24 label per lembar, serta label rol termal 50×25mm dan 38×25mm. Pilih formatnya, tata letaknya menyesuaikan sendiri."
+          },
+          {
+            "question": "Apa saja yang bisa dimuat tiap label?",
+            "answer": "Nama produk, harga, barcode Code 128, dan teks SKU — masing-masing bisa dinyalakan atau dimatikan."
+          },
+          {
+            "question": "Bisakah mencetak label untuk produk yang sudah saya simpan?",
+            "answer": "Bisa. Jika Anda memakai Kasir berbasis browser Setu atau alat Setu lain di perangkat ini, hubungkan ruang kerja Anda dan tambahkan produk ke daftar label dengan sekali klik — nama, harga, dan barcode terisi sendiri."
+          },
+          {
+            "question": "Perlu perangkat lunak khusus?",
+            "answer": "Tidak. Pencetakan memakai kotak cetak biasa di peramban Anda, jadi printer apa pun yang jalan di komputer Anda juga jalan di sini — termasuk printer label termal."
+          }
+        ]
+      }
     },
     {
       "name": "Buku stok",

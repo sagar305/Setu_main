@@ -205,11 +205,98 @@
     },
     {
       "name": "Generador de códigos de barras",
-      "shortDescription": "Genera códigos EAN-13, Code 128 y QR, y descárgalos en PNG o PDF."
+      "shortDescription": "Genera códigos EAN-13, Code 128 y QR, y descárgalos en PNG o PDF.",
+      "seo": {
+        "title": "Generador de códigos de barras gratis",
+        "description": "Genera códigos de barras EAN-13, Code 128 y QR gratis. Usa tus productos guardados y descarga en PNG o PDF. Funciona sin conexión y sin registro.",
+        "keywords": [
+          "generador de códigos de barras",
+          "generador de códigos de barras gratis",
+          "generador EAN-13",
+          "generador Code 128",
+          "código de barras de producto",
+          "crear código de barras online"
+        ],
+        "ogTitle": "Generador de códigos de barras",
+        "ogDescription": "Genera códigos de barras de producto en tu navegador y descárgalos en PNG o PDF. Sin registro."
+      },
+      "hero": {
+        "headline": "Generador de códigos de barras",
+        "subheadline": "Genera códigos EAN-13, Code 128 y QR — descárgalos en PNG o PDF. Funciona sin conexión."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué tipos de código puedo generar?",
+            "answer": "EAN-13 (el código estándar del comercio), Code 128 (flexible, admite cualquier texto — ideal para SKU) y códigos QR (para enlaces, texto o UPI)."
+          },
+          {
+            "question": "¿Este generador es gratis?",
+            "answer": "Sí — del todo gratis y sin registro. Los códigos se generan en tu dispositivo y nunca se envían a un servidor."
+          },
+          {
+            "question": "¿Puedo usar mis productos guardados?",
+            "answer": "Sí. Si usas otras herramientas de Setu como el TPV en el navegador en este dispositivo, conecta tu espacio de trabajo y genera códigos para los productos guardados con un clic."
+          },
+          {
+            "question": "¿En qué formatos puedo descargar?",
+            "answer": "PNG para uso digital y PDF para imprimir. Los dos se generan localmente en tu navegador."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "¿Cómo funciona?",
+          "steps": [
+            "Elige el tipo de código — Code 128 para SKU, EAN-13 para comercio, QR para enlaces",
+            "Escribe el valor, o elige un producto guardado de tu espacio de trabajo",
+            "Descárgalo en PNG o PDF e imprímelo o compártelo"
+          ]
+        }
+      ]
     },
     {
       "name": "Impresión de etiquetas",
-      "shortDescription": "Imprime etiquetas de precio y código de barras en hojas A4 o rollos térmicos."
+      "shortDescription": "Imprime etiquetas de precio y código de barras en hojas A4 o rollos térmicos.",
+      "seo": {
+        "title": "Impresión de etiquetas de precio gratis",
+        "description": "Imprime etiquetas de precio y código de barras para tus productos — hojas A4 (65/40/24 por hoja) o rollos térmicos. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "impresión de etiquetas",
+          "generador de etiquetas de precio",
+          "imprimir etiquetas con código de barras",
+          "etiquetas de producto A4",
+          "etiqueta térmica 50x25",
+          "generador de etiquetas de estante"
+        ],
+        "ogTitle": "Impresión de etiquetas",
+        "ogDescription": "Imprime etiquetas de producto en hojas A4 o rollos térmicos, directamente desde tu navegador."
+      },
+      "hero": {
+        "headline": "Impresión de etiquetas",
+        "subheadline": "Etiquetas de precio y código de barras en hojas A4 o rollos térmicos — directamente desde tu navegador."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué tamaños de etiqueta admite?",
+            "answer": "Hojas A4 con 65, 40 o 24 etiquetas por hoja, y etiquetas en rollo térmico de 50×25 mm y 38×25 mm. Elige el formato y la composición se ajusta sola."
+          },
+          {
+            "question": "¿Qué puedo poner en cada etiqueta?",
+            "answer": "Nombre del producto, precio, un código de barras Code 128 y el texto del SKU — cada uno se puede activar o desactivar."
+          },
+          {
+            "question": "¿Puedo imprimir etiquetas de mis productos guardados?",
+            "answer": "Sí. Si usas el TPV en el navegador de Setu u otras herramientas de Setu en este dispositivo, conecta tu espacio de trabajo y añade productos a la lista de etiquetas con un clic — nombres, precios y códigos de barras se rellenan solos."
+          },
+          {
+            "question": "¿Hace falta algún programa especial?",
+            "answer": "No. La impresión usa el diálogo normal de tu navegador, así que cualquier impresora que funcione con tu ordenador funciona aquí — también las de etiquetas térmicas."
+          }
+        ]
+      }
     },
     {
       "name": "Registro de stock",

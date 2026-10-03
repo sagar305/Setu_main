@@ -205,11 +205,98 @@
     },
     {
       "name": "Barcode-Generator",
-      "shortDescription": "EAN-13-, Code-128- und QR-Codes erzeugen — als PNG oder PDF herunterladen."
+      "shortDescription": "EAN-13-, Code-128- und QR-Codes erzeugen — als PNG oder PDF herunterladen.",
+      "seo": {
+        "title": "Kostenloser Barcode-Generator — EAN-13, QR",
+        "description": "EAN-13-, Code-128- und QR-Barcodes kostenlos erzeugen. Gespeicherte Artikel übernehmen, als PNG oder PDF herunterladen. Läuft offline, ohne Anmeldung.",
+        "keywords": [
+          "Barcode-Generator",
+          "Barcode kostenlos erstellen",
+          "EAN-13-Generator",
+          "Code-128-Generator",
+          "Artikel-Barcode",
+          "Barcode online erstellen"
+        ],
+        "ogTitle": "Barcode-Generator",
+        "ogDescription": "Erzeugen Sie Artikel-Barcodes im Browser und laden Sie sie als PNG oder PDF herunter. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Barcode-Generator",
+        "subheadline": "EAN-13-, Code-128- und QR-Barcodes erzeugen — als PNG oder PDF herunterladen. Läuft offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Welche Barcode-Arten kann ich erzeugen?",
+            "answer": "EAN-13 (der übliche Handels-Barcode), Code 128 (flexibel, codiert beliebigen Text — gut für SKUs) und QR-Codes (für Links, Text oder UPI)."
+          },
+          {
+            "question": "Ist dieser Barcode-Generator kostenlos?",
+            "answer": "Ja — vollständig kostenlos und ohne Anmeldung. Die Barcodes entstehen auf Ihrem Gerät und gehen an keinen Server."
+          },
+          {
+            "question": "Kann ich meine gespeicherten Artikel nutzen?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät andere Setu-Tools wie die Browser-Kasse nutzen, verbinden Sie Ihren Arbeitsbereich und erzeugen Barcodes für gespeicherte Artikel mit einem Klick."
+          },
+          {
+            "question": "In welchen Formaten kann ich herunterladen?",
+            "answer": "PNG für die digitale Nutzung und PDF zum Drucken. Beide entstehen lokal in Ihrem Browser."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "steps": [
+            "Barcode-Art wählen — Code 128 für SKUs, EAN-13 für den Handel, QR für Links",
+            "Wert eintippen, oder einen gespeicherten Artikel aus dem Arbeitsbereich nehmen",
+            "Als PNG oder PDF herunterladen und drucken oder weitergeben"
+          ]
+        }
+      ]
     },
     {
       "name": "Preisetiketten-Druck",
-      "shortDescription": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen drucken."
+      "shortDescription": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen drucken.",
+      "seo": {
+        "title": "Kostenloser Preisetiketten-Druck — A4, Thermo",
+        "description": "Preis- und Barcode-Etiketten für Ihre Artikel drucken — A4-Etikettenbögen (65/40/24 je Bogen) oder Thermorollen. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Etikettendruck",
+          "Preisetiketten erstellen",
+          "Barcode-Etiketten drucken",
+          "Artikeletiketten A4",
+          "Thermoetikett 50x25",
+          "Regaletiketten erstellen"
+        ],
+        "ogTitle": "Preisetiketten-Druck",
+        "ogDescription": "Drucken Sie Artikeletiketten auf A4-Bögen oder Thermorollen, direkt aus Ihrem Browser."
+      },
+      "hero": {
+        "headline": "Preisetiketten-Druck",
+        "subheadline": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen — direkt aus Ihrem Browser."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Welche Etikettengrößen werden unterstützt?",
+            "answer": "A4-Etikettenbögen mit 65, 40 oder 24 Etiketten je Bogen sowie Thermorollen-Etiketten in 50×25 mm und 38×25 mm. Format wählen, und das Layout passt sich von selbst an."
+          },
+          {
+            "question": "Was kann auf jedes Etikett?",
+            "answer": "Artikelname, Preis, ein Code-128-Barcode und der SKU-Text — jedes einzeln ein- oder ausschaltbar."
+          },
+          {
+            "question": "Kann ich Etiketten für meine gespeicherten Artikel drucken?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät die Setu Browser-Kasse oder andere Setu-Tools nutzen, verbinden Sie Ihren Arbeitsbereich und fügen Artikel mit einem Klick zur Etikettenliste hinzu — Namen, Preise und Barcodes füllen sich von selbst."
+          },
+          {
+            "question": "Braucht es besondere Software?",
+            "answer": "Nein. Gedruckt wird über den normalen Druckdialog Ihres Browsers, also funktioniert hier jeder Drucker, der an Ihrem Rechner läuft — auch Thermo-Etikettendrucker."
+          }
+        ]
+      }
     },
     {
       "name": "Bestandsbuch",
