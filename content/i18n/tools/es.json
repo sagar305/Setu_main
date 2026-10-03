@@ -826,15 +826,114 @@
     },
     {
       "name": "Extracto de cliente",
-      "shortDescription": "Estado de cuenta por cliente: facturas, cobros y saldo corriente. Imprime en PDF."
+      "shortDescription": "Estado de cuenta por cliente: facturas, cobros y saldo corriente. Imprime en PDF.",
+      "seo": {
+        "title": "Generador de extractos de cliente gratis",
+        "description": "Genera el extracto de cuenta de un cliente — facturas, cobros y notas de crédito con el saldo acumulado. Imprime en PDF o exporta a CSV. Gratis, sin registro.",
+        "keywords": [
+          "extracto de cliente",
+          "extracto de cuenta",
+          "formato de extracto de cuenta de cliente",
+          "extracto de saldo pendiente",
+          "extracto de deudor"
+        ],
+        "ogTitle": "Extracto de cliente",
+        "ogDescription": "Genera el extracto de cuenta de un cliente — facturas, cobros y notas de crédito con el saldo acumulado. Imprime en PDF o exporta a CSV. Gratis, sin registro."
+      },
+      "hero": {
+        "headline": "Extracto de cliente",
+        "subheadline": "Cada factura, cobro y ajuste de un cliente — con el saldo acumulado que zanja las discusiones."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un extracto de cuenta?",
+            "answer": "Un resumen de todas las operaciones con un cliente en un periodo — facturas emitidas, cobros recibidos, notas de crédito concedidas — que acaba en el saldo que debe ahora."
+          },
+          {
+            "question": "¿Cuándo conviene enviar extractos a los clientes?",
+            "answer": "Cada mes a los clientes habituales a crédito, y de inmediato al reclamar un pago vencido. Un extracto claro resuelve casi todas las conversaciones del tipo “eso ya lo pagamos”."
+          },
+          {
+            "question": "¿Cómo se calcula el saldo?",
+            "answer": "Saldo inicial más facturas, menos cobros y notas de crédito, por orden de fecha. La herramienta recalcula el saldo acumulado sola a medida que añades operaciones."
+          }
+        ]
+      }
     },
     {
       "name": "Informe de facturas vencidas",
-      "shortDescription": "Facturas de clientes sin cobrar por tramos de antigüedad, de corrientes a 90+ días. Exporta a CSV."
+      "shortDescription": "Facturas de clientes sin cobrar por tramos de antigüedad, de corrientes a 90+ días. Exporta a CSV.",
+      "seo": {
+        "title": "Informe de facturas vencidas gratis",
+        "description": "Sigue las facturas de cliente sin cobrar por antigüedad — al día, 1–30, 31–60, 61–90 y 90+ días de retraso, por cliente. Exporta a CSV. Gratis.",
+        "keywords": [
+          "informe de facturas vencidas",
+          "antigüedad de cobros",
+          "aging de clientes",
+          "informe de facturas impagadas",
+          "análisis de antigüedad de deudores"
+        ],
+        "ogTitle": "Informe de facturas vencidas",
+        "ogDescription": "Sigue las facturas de cliente sin cobrar por antigüedad — al día, 1–30, 31–60, 61–90 y 90+ días de retraso, por cliente. Exporta a CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Informe de facturas vencidas",
+        "subheadline": "Quién te debe, cuánto y con cuánto retraso — agrupado por antigüedad para reclamar primero lo que toca."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un informe de facturas vencidas?",
+            "answer": "Una vista de todas las facturas de cliente sin cobrar, agrupadas según su retraso — aún no vencidas, 1–30, 31–60, 61–90 y 90+ días. Es la herramienta estándar para priorizar el cobro."
+          },
+          {
+            "question": "¿Qué tramo conviene reclamar primero?",
+            "answer": "El más antiguo. Las probabilidades de cobro caen con rapidez al envejecer la deuda: los estudios del sector sitúan el cobro esperado de una deuda de más de 90 días bien por debajo de su valor nominal. La columna de 90+ es tu lista de prioridades."
+          },
+          {
+            "question": "¿Cómo afectan al negocio las facturas vencidas?",
+            "answer": "El dinero de los tramos de 30+ es circulante que estás prestando sin intereses, mientras quizá pagas por tu propio crédito. Mira la Calculadora de plazos de pago para poner precio a un descuento por pronto pago que adelante la entrada de caja."
+          }
+        ]
+      }
     },
     {
       "name": "Antigüedad de pagos",
-      "shortDescription": "Facturas de proveedor pendientes por tramos de antigüedad: paga a quien toca cuando toca. CSV."
+      "shortDescription": "Facturas de proveedor pendientes por tramos de antigüedad: paga a quien toca cuando toca. CSV.",
+      "seo": {
+        "title": "Informe de antigüedad de pagos gratis",
+        "description": "Sigue las facturas de proveedor sin pagar por antigüedad — qué vence ahora, qué está vencido y a qué proveedor pagar primero. Exporta a CSV. Gratis.",
+        "keywords": [
+          "antigüedad de pagos",
+          "informe de cuentas a pagar",
+          "control de facturas de proveedor",
+          "antigüedad de acreedores",
+          "informe de pagos pendientes"
+        ],
+        "ogTitle": "Antigüedad de pagos",
+        "ogDescription": "Sigue las facturas de proveedor sin pagar por antigüedad — qué vence ahora, qué está vencido y a qué proveedor pagar primero. Exporta a CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Antigüedad de pagos",
+        "subheadline": "Cada factura de proveedor sin pagar, agrupada por antigüedad — para pagar a quien toca cuando toca."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un informe de antigüedad de pagos?",
+            "answer": "Una vista de todas las facturas de proveedor sin pagar, agrupadas según su retraso. Muestra la exposición total por proveedor y señala los pagos que pueden agriar una relación."
+          },
+          {
+            "question": "¿Cómo lo uso para planificar los pagos?",
+            "answer": "Liquida primero las facturas más antiguas, para proteger la buena voluntad del proveedor y tus condiciones de crédito, y encaja el resto con tu posición de caja. Lo que aún no vence suele poder esperar hasta cerca de su vencimiento."
+          },
+          {
+            "question": "¿Conviene pagar antes si un proveedor ofrece descuento?",
+            "answer": "A menudo sí: la Calculadora de plazos de pago de este sitio muestra el rendimiento anualizado de aceptar un descuento por pronto pago, que con frecuencia supera al de dejar el dinero en el banco."
+          }
+        ]
+      }
     },
     {
       "name": "Presupuesto frente a real",
@@ -912,7 +1011,40 @@
     },
     {
       "name": "Comparador de proveedores",
-      "shortDescription": "Compara proveedores por precio, entrega, crédito y calidad con puntuación ponderada."
+      "shortDescription": "Compara proveedores por precio, entrega, crédito y calidad con puntuación ponderada.",
+      "seo": {
+        "title": "Comparador de proveedores gratis",
+        "description": "Compara proveedores por precio, entrega, condiciones de crédito y calidad con puntuación ponderada — el de mejor valor al instante. Exporta a CSV. Gratis.",
+        "keywords": [
+          "comparador de proveedores",
+          "herramienta de comparación de proveedores",
+          "cuadro de puntuación de proveedores",
+          "criterios de selección de proveedor",
+          "puntuación ponderada de proveedores"
+        ],
+        "ogTitle": "Comparador de proveedores",
+        "ogDescription": "Compara proveedores por precio, entrega, condiciones de crédito y calidad con puntuación ponderada — el de mejor valor al instante. Exporta a CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Comparador de proveedores",
+        "subheadline": "El precio no es todo — pesa también entrega, crédito y calidad, y deja que la puntuación elija al proveedor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cómo funciona la puntuación?",
+            "answer": "Cada criterio se normaliza entre proveedores (el mejor se lleva la nota máxima), se multiplica por el peso que fijes y se suma hasta una puntuación sobre 100. Cambia los pesos y el orden se actualiza al instante."
+          },
+          {
+            "question": "¿Qué pesos debería usar?",
+            "answer": "Los que más duelan cuando algo sale mal. ¿Género perecedero? Pondera alto la entrega. ¿Caja justa? Las condiciones de crédito. ¿Calidad que ve el cliente? La calidad. Los valores por defecto (40/20/15/25) encajan en la mayoría de compras de tienda."
+          },
+          {
+            "question": "¿Por qué no quedarse con el presupuesto más barato?",
+            "answer": "El proveedor más barato que entrega tarde o sirve mala calidad sale más caro en roturas de stock, devoluciones y clientes perdidos. Una puntuación ponderada hace explícitas esas contrapartidas en vez de dejarlas al instinto."
+          }
+        ]
+      }
     }
   ]
 }

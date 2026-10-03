@@ -826,15 +826,114 @@
     },
     {
       "name": "Extrato do cliente",
-      "shortDescription": "Extrato de conta por cliente — faturas, pagamentos e saldo corrente. Imprima em PDF."
+      "shortDescription": "Extrato de conta por cliente — faturas, pagamentos e saldo corrente. Imprima em PDF.",
+      "seo": {
+        "title": "Gerador de extrato do cliente grátis",
+        "description": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "extrato do cliente",
+          "extrato de conta",
+          "modelo de extrato de conta do cliente",
+          "extrato de saldo em aberto",
+          "extrato do devedor"
+        ],
+        "ogTitle": "Extrato do cliente",
+        "ogDescription": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Extrato do cliente",
+        "subheadline": "Cada fatura, recebimento e ajuste de um cliente — com o saldo acumulado que encerra discussões."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um extrato de conta?",
+            "answer": "Um resumo de todas as operações com um cliente num período — faturas emitidas, recebimentos, notas de crédito concedidas — terminando no saldo que ele deve agora."
+          },
+          {
+            "question": "Quando enviar extratos aos clientes?",
+            "answer": "Todo mês aos clientes habituais a prazo, e na hora ao cobrar um pagamento em atraso. Um extrato claro resolve quase toda conversa do tipo “isso já foi pago”."
+          },
+          {
+            "question": "Como o saldo é calculado?",
+            "answer": "Saldo inicial mais faturas, menos recebimentos e notas de crédito, em ordem de data. A ferramenta recalcula o saldo acumulado sozinha conforme você adiciona operações."
+          }
+        ]
+      }
     },
     {
       "name": "Relatório de aging de faturas",
-      "shortDescription": "Faturas em aberto por faixa de atraso — do corrente a 90+ dias, por cliente. Exportação CSV."
+      "shortDescription": "Faturas em aberto por faixa de atraso — do corrente a 90+ dias, por cliente. Exportação CSV.",
+      "seo": {
+        "title": "Relatório de aging de faturas grátis",
+        "description": "Acompanhe as faturas de cliente não pagas por idade — em dia, 1–30, 31–60, 61–90 e 90+ dias de atraso, por cliente. Exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "relatório de aging de faturas",
+          "aging de contas a receber",
+          "aging de clientes",
+          "relatório de faturas em atraso",
+          "análise de idade dos devedores"
+        ],
+        "ogTitle": "Relatório de aging de faturas",
+        "ogDescription": "Acompanhe as faturas de cliente não pagas por idade — em dia, 1–30, 31–60, 61–90 e 90+ dias de atraso, por cliente. Exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Relatório de aging de faturas",
+        "subheadline": "Quem lhe deve, quanto e com quanto atraso — agrupado por idade para cobrar primeiro o que importa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um relatório de aging de faturas?",
+            "answer": "Uma visão de todas as faturas de cliente não pagas, agrupadas conforme o atraso — ainda não vencidas, 1–30, 31–60, 61–90 e 90+ dias. É a ferramenta padrão para priorizar a cobrança."
+          },
+          {
+            "question": "Qual faixa cobrar primeiro?",
+            "answer": "A mais antiga. A chance de receber cai rápido com a idade — estudos do setor colocam o recebimento esperado de uma dívida com mais de 90 dias bem abaixo do valor de face. A coluna 90+ é a sua lista de prioridades."
+          },
+          {
+            "question": "Como as faturas em atraso afetam o negócio?",
+            "answer": "O dinheiro nas faixas de 30+ é capital de giro que você está emprestando sem juros, enquanto talvez pague pelo seu próprio crédito. Veja a Calculadora de prazos de pagamento para pôr preço num desconto de pagamento antecipado que antecipa a entrada de caixa."
+          }
+        ]
+      }
     },
     {
       "name": "Aging de contas a pagar",
-      "shortDescription": "Contas de fornecedores em aberto por idade — pague as pessoas certas na hora certa. Exportação CSV."
+      "shortDescription": "Contas de fornecedores em aberto por idade — pague as pessoas certas na hora certa. Exportação CSV.",
+      "seo": {
+        "title": "Relatório de aging de contas a pagar grátis",
+        "description": "Acompanhe as notas de fornecedor não pagas por idade — o que vence agora, o que está atrasado e a quem pagar primeiro. Exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "aging de contas a pagar",
+          "relatório de contas a pagar",
+          "controle de notas de fornecedor",
+          "aging de credores",
+          "relatório de pagamentos pendentes"
+        ],
+        "ogTitle": "Aging de contas a pagar",
+        "ogDescription": "Acompanhe as notas de fornecedor não pagas por idade — o que vence agora, o que está atrasado e a quem pagar primeiro. Exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Aging de contas a pagar",
+        "subheadline": "Cada nota de fornecedor não paga, agrupada por idade — para pagar as pessoas certas na hora certa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um relatório de aging de contas a pagar?",
+            "answer": "Uma visão de todas as notas de fornecedor não pagas, agrupadas conforme o atraso. Mostra a exposição total por fornecedor e sinaliza os pagamentos que podem azedar uma relação."
+          },
+          {
+            "question": "Como usá-lo para programar os pagamentos?",
+            "answer": "Liquide primeiro as notas mais antigas, para preservar a boa vontade do fornecedor e suas condições de prazo, e encaixe o resto na sua posição de caixa. O que ainda não venceu muitas vezes pode esperar até perto do vencimento."
+          },
+          {
+            "question": "Vale pagar antes se o fornecedor oferece desconto?",
+            "answer": "Muitas vezes sim: a Calculadora de prazos de pagamento deste site mostra o retorno anualizado de aceitar um desconto por pagamento antecipado, que com frequência supera deixar o dinheiro no banco."
+          }
+        ]
+      }
     },
     {
       "name": "Orçado vs realizado",
@@ -912,7 +1011,40 @@
     },
     {
       "name": "Comparação de fornecedores",
-      "shortDescription": "Compare fornecedores em preço, entrega, prazo e qualidade com pontuação ponderada."
+      "shortDescription": "Compare fornecedores em preço, entrega, prazo e qualidade com pontuação ponderada.",
+      "seo": {
+        "title": "Comparação de fornecedores grátis",
+        "description": "Compare fornecedores por preço, entrega, prazo de pagamento e qualidade com pontuação ponderada — o de melhor valor na hora. Exporte em CSV. Grátis.",
+        "keywords": [
+          "comparação de fornecedores",
+          "ferramenta de comparação de fornecedores",
+          "scorecard de fornecedores",
+          "critérios de escolha de fornecedor",
+          "pontuação ponderada de fornecedores"
+        ],
+        "ogTitle": "Comparação de fornecedores",
+        "ogDescription": "Compare fornecedores por preço, entrega, prazo de pagamento e qualidade com pontuação ponderada — o de melhor valor na hora. Exporte em CSV. Grátis."
+      },
+      "hero": {
+        "headline": "Comparação de fornecedores",
+        "subheadline": "Preço não é tudo — pese também entrega, prazo e qualidade, e deixe a pontuação escolher o fornecedor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como funciona a pontuação?",
+            "answer": "Cada critério é normalizado entre os fornecedores (o melhor leva a nota cheia), multiplicado pelo peso que você define e somado numa pontuação de 0 a 100. Mude os pesos e a ordem se atualiza na hora."
+          },
+          {
+            "question": "Que pesos devo usar?",
+            "answer": "Os que doem mais quando algo dá errado. Produto perecível? Pese alto a entrega. Caixa apertado? O prazo de pagamento. Qualidade que o cliente vê? A qualidade. Os padrões (40/20/15/25) servem para a maioria das compras de loja."
+          },
+          {
+            "question": "Por que não ficar com o orçamento mais barato?",
+            "answer": "O fornecedor mais barato que entrega atrasado ou manda qualidade ruim custa mais em falta de estoque, devoluções e clientes perdidos. Uma pontuação ponderada deixa essas trocas explícitas em vez de no achismo."
+          }
+        ]
+      }
     }
   ]
 }

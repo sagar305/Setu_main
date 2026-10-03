@@ -826,15 +826,114 @@
     },
     {
       "name": "Relevé de compte client",
-      "shortDescription": "Relevé par client : factures, règlements et solde progressif. Impression en PDF."
+      "shortDescription": "Relevé par client : factures, règlements et solde progressif. Impression en PDF.",
+      "seo": {
+        "title": "Générateur de relevé de compte client gratuit",
+        "description": "Générez le relevé de compte d'un client — factures, règlements et avoirs avec le solde cumulé. Imprimez en PDF ou exportez en CSV. Gratuit, sans inscription.",
+        "keywords": [
+          "relevé de compte client",
+          "relevé de compte",
+          "modèle de relevé de compte client",
+          "relevé du solde dû",
+          "relevé débiteur"
+        ],
+        "ogTitle": "Relevé de compte client",
+        "ogDescription": "Générez le relevé de compte d'un client — factures, règlements et avoirs avec le solde cumulé. Imprimez en PDF ou exportez en CSV. Gratuit, sans inscription."
+      },
+      "hero": {
+        "headline": "Relevé de compte client",
+        "subheadline": "Chaque facture, règlement et ajustement d'un client — avec le solde cumulé qui met fin aux discussions."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un relevé de compte ?",
+            "answer": "Le récapitulatif de toutes les opérations avec un client sur une période — factures émises, règlements reçus, avoirs accordés — qui se termine par le solde dû aujourd'hui."
+          },
+          {
+            "question": "Quand envoyer un relevé à un client ?",
+            "answer": "Chaque mois aux clients réguliers à crédit, et immédiatement en cas de relance. Un relevé clair règle la plupart des échanges du type « nous avons déjà payé »."
+          },
+          {
+            "question": "Comment le solde est-il calculé ?",
+            "answer": "Solde d'ouverture plus les factures, moins les règlements et les avoirs, dans l'ordre des dates. L'outil recalcule le solde cumulé tout seul à mesure que vous ajoutez des opérations."
+          }
+        ]
+      }
     },
     {
       "name": "Balance âgée clients",
-      "shortDescription": "Factures clients impayées par tranches d'ancienneté, de courant à 90+ jours. Export CSV."
+      "shortDescription": "Factures clients impayées par tranches d'ancienneté, de courant à 90+ jours. Export CSV.",
+      "seo": {
+        "title": "Balance âgée clients gratuite — impayés",
+        "description": "Suivez les factures clients impayées par ancienneté — à jour, 1–30, 31–60, 61–90 et 90+ jours de retard, par client. Export CSV. Gratuit, sans inscription.",
+        "keywords": [
+          "balance âgée clients",
+          "ancienneté des créances",
+          "balance âgée",
+          "rapport des factures impayées",
+          "analyse de l'ancienneté des débiteurs"
+        ],
+        "ogTitle": "Balance âgée clients",
+        "ogDescription": "Suivez les factures clients impayées par ancienneté — à jour, 1–30, 31–60, 61–90 et 90+ jours de retard, par client. Export CSV. Gratuit, sans inscription."
+      },
+      "hero": {
+        "headline": "Balance âgée clients",
+        "subheadline": "Qui vous doit combien, et depuis quand — classé par ancienneté pour relancer d'abord ce qui compte."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'une balance âgée clients ?",
+            "answer": "Une vue de toutes les factures clients impayées, regroupées selon leur retard — pas encore échues, 1–30, 31–60, 61–90 et 90+ jours. C'est l'outil courant pour prioriser le recouvrement."
+          },
+          {
+            "question": "Quelle tranche relancer en premier ?",
+            "answer": "La plus ancienne. Les chances de recouvrement chutent vite avec l'âge : les études du secteur estiment le recouvrement attendu d'une créance de plus de 90 jours très en dessous de sa valeur nominale. La colonne 90+ est votre liste de priorités."
+          },
+          {
+            "question": "Quel effet les impayés ont-ils sur l'activité ?",
+            "answer": "L'argent des tranches 30+ est du fonds de roulement que vous prêtez sans intérêt, alors que vous payez peut-être pour votre propre crédit. Voyez le Calculateur de délais de paiement pour chiffrer un escompte de règlement anticipé qui fait rentrer la trésorerie plus vite."
+          }
+        ]
+      }
     },
     {
       "name": "Balance âgée fournisseurs",
-      "shortDescription": "Factures fournisseurs impayées par tranches d'ancienneté : payer les bonnes personnes au bon moment. CSV."
+      "shortDescription": "Factures fournisseurs impayées par tranches d'ancienneté : payer les bonnes personnes au bon moment. CSV.",
+      "seo": {
+        "title": "Balance âgée fournisseurs gratuite",
+        "description": "Suivez les factures fournisseurs impayées par ancienneté — ce qui est dû maintenant, ce qui est en retard et qui payer en premier. Export CSV. Gratuit.",
+        "keywords": [
+          "balance âgée fournisseurs",
+          "ancienneté des dettes fournisseurs",
+          "suivi des factures fournisseurs",
+          "ancienneté des créanciers",
+          "rapport des dettes à payer"
+        ],
+        "ogTitle": "Balance âgée fournisseurs",
+        "ogDescription": "Suivez les factures fournisseurs impayées par ancienneté — ce qui est dû maintenant, ce qui est en retard et qui payer en premier. Export CSV. Gratuit."
+      },
+      "hero": {
+        "headline": "Balance âgée fournisseurs",
+        "subheadline": "Chaque facture fournisseur impayée, classée par ancienneté — pour payer les bonnes personnes au bon moment."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'une balance âgée fournisseurs ?",
+            "answer": "Une vue de toutes les factures fournisseurs impayées, regroupées selon leur retard. Elle montre l'exposition totale par fournisseur et signale les paiements susceptibles d'abîmer une relation."
+          },
+          {
+            "question": "Comment l'utiliser pour planifier les paiements ?",
+            "answer": "Soldez d'abord les factures les plus anciennes, pour préserver la bonne volonté du fournisseur et vos conditions de crédit, puis calez le reste sur votre trésorerie. Ce qui n'est pas encore échu peut souvent attendre d'approcher l'échéance."
+          },
+          {
+            "question": "Faut-il payer plus tôt si un fournisseur accorde un escompte ?",
+            "answer": "Souvent oui : le Calculateur de délais de paiement de ce site montre le rendement annualisé d'un escompte de règlement anticipé, qui dépasse fréquemment celui de laisser l'argent à la banque."
+          }
+        ]
+      }
     },
     {
       "name": "Budget et réalisé",
@@ -912,7 +1011,40 @@
     },
     {
       "name": "Comparateur de fournisseurs",
-      "shortDescription": "Comparez les fournisseurs sur le prix, le délai, le crédit et la qualité avec une notation pondérée."
+      "shortDescription": "Comparez les fournisseurs sur le prix, le délai, le crédit et la qualité avec une notation pondérée.",
+      "seo": {
+        "title": "Comparateur de fournisseurs gratuit",
+        "description": "Comparez les fournisseurs sur le prix, la livraison, les conditions de crédit et la qualité avec une note pondérée — le meilleur rapport apparaît aussitôt.",
+        "keywords": [
+          "comparateur de fournisseurs",
+          "outil de comparaison des fournisseurs",
+          "fiche de notation fournisseur",
+          "critères de choix d'un fournisseur",
+          "notation pondérée des fournisseurs"
+        ],
+        "ogTitle": "Comparateur de fournisseurs",
+        "ogDescription": "Comparez les fournisseurs sur le prix, la livraison, les conditions de crédit et la qualité avec une note pondérée — le meilleur rapport apparaît aussitôt."
+      },
+      "hero": {
+        "headline": "Comparateur de fournisseurs",
+        "subheadline": "Le prix n'est pas tout — pesez aussi la livraison, le crédit et la qualité, et laissez la note choisir le fournisseur."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Comment la notation fonctionne-t-elle ?",
+            "answer": "Chaque critère est normalisé entre les fournisseurs (le meilleur obtient la note maximale), multiplié par le poids que vous fixez, puis additionné pour donner une note sur 100. Changez les poids et le classement se met à jour aussitôt."
+          },
+          {
+            "question": "Quels poids utiliser ?",
+            "answer": "Ceux qui font le plus mal quand ça tourne mal. Des produits périssables ? Pesez fort la livraison. Une trésorerie tendue ? Les conditions de crédit. Une qualité que le client voit ? La qualité. Les valeurs par défaut (40/20/15/25) conviennent à la plupart des achats de détail."
+          },
+          {
+            "question": "Pourquoi ne pas simplement prendre le devis le moins cher ?",
+            "answer": "Le fournisseur le moins cher qui livre en retard ou fournit une qualité médiocre coûte plus en ruptures de stock, retours et clients perdus. Une note pondérée rend ces arbitrages explicites au lieu de les laisser à l'intuition."
+          }
+        ]
+      }
     }
   ]
 }

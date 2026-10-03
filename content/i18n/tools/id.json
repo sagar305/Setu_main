@@ -826,15 +826,114 @@
     },
     {
       "name": "Laporan akun pelanggan",
-      "shortDescription": "Laporan akun per pelanggan — faktur, pembayaran, dan saldo berjalan. Cetak ke PDF."
+      "shortDescription": "Laporan akun per pelanggan — faktur, pembayaran, dan saldo berjalan. Cetak ke PDF.",
+      "seo": {
+        "title": "Pembuat laporan akun pelanggan gratis",
+        "description": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "laporan akun pelanggan",
+          "laporan rekening",
+          "format laporan akun pelanggan",
+          "laporan saldo tertunggak",
+          "laporan debitur"
+        ],
+        "ogTitle": "Laporan akun pelanggan",
+        "ogDescription": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Laporan akun pelanggan",
+        "subheadline": "Setiap faktur, pembayaran, dan penyesuaian satu pelanggan — dengan saldo berjalan yang menutup perdebatan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan rekening?",
+            "answer": "Ringkasan semua transaksi dengan satu pelanggan dalam satu periode — faktur yang diterbitkan, pembayaran yang diterima, nota kredit yang diberikan — dan berakhir pada saldo yang masih ia tanggung."
+          },
+          {
+            "question": "Kapan laporan akun pelanggan perlu dikirim?",
+            "answer": "Tiap bulan untuk pelanggan kredit tetap, dan langsung saat menagih pembayaran yang telat. Laporan yang jelas menyelesaikan hampir semua percakapan “itu sudah kami bayar”."
+          },
+          {
+            "question": "Bagaimana saldo dihitung?",
+            "answer": "Saldo awal ditambah faktur, dikurangi pembayaran dan nota kredit, berurutan menurut tanggal. Alat ini menghitung ulang saldo berjalan sendiri setiap kali Anda menambah transaksi."
+          }
+        ]
+      }
     },
     {
       "name": "Laporan umur piutang",
-      "shortDescription": "Faktur pelanggan belum dibayar per rentang umur — lancar sampai 90+ hari. Ekspor CSV."
+      "shortDescription": "Faktur pelanggan belum dibayar per rentang umur — lancar sampai 90+ hari. Ekspor CSV.",
+      "seo": {
+        "title": "Laporan umur piutang gratis — tunggakan",
+        "description": "Pantau faktur pelanggan yang belum dibayar menurut umur — lancar, 1–30, 31–60, 61–90, dan 90+ hari telat, per pelanggan. Ekspor CSV. Gratis.",
+        "keywords": [
+          "laporan umur piutang",
+          "aging piutang usaha",
+          "aging AR",
+          "laporan faktur telat bayar",
+          "analisis umur debitur"
+        ],
+        "ogTitle": "Laporan umur piutang",
+        "ogDescription": "Pantau faktur pelanggan yang belum dibayar menurut umur — lancar, 1–30, 31–60, 61–90, dan 90+ hari telat, per pelanggan. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Laporan umur piutang",
+        "subheadline": "Siapa berutang berapa dan seberapa telat — dikelompokkan menurut umur agar Anda menagih yang tepat lebih dulu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan umur piutang?",
+            "answer": "Tampilan semua faktur pelanggan yang belum dibayar, dikelompokkan menurut lama keterlambatannya — belum jatuh tempo, 1–30, 31–60, 61–90, dan 90+ hari. Inilah alat baku untuk menentukan prioritas penagihan."
+          },
+          {
+            "question": "Kelompok mana yang ditagih lebih dulu?",
+            "answer": "Yang paling tua. Peluang tertagih turun cepat seiring umur — kajian industri menaksir penerimaan yang diharapkan dari utang lewat 90 hari jauh di bawah nilai nominalnya. Kolom 90+ adalah daftar prioritas Anda."
+          },
+          {
+            "question": "Bagaimana faktur telat memengaruhi usaha?",
+            "answer": "Uang di kelompok 30+ adalah modal kerja yang Anda pinjamkan tanpa bunga, sementara Anda mungkin membayar bunga atas kredit sendiri. Lihat Kalkulator termin pembayaran untuk menghargai diskon pembayaran awal yang menarik kas lebih cepat."
+          }
+        ]
+      }
     },
     {
       "name": "Umur utang usaha",
-      "shortDescription": "Tagihan pemasok belum dibayar dikelompokkan per umur — bayar yang tepat pada waktu yang tepat. Ekspor CSV."
+      "shortDescription": "Tagihan pemasok belum dibayar dikelompokkan per umur — bayar yang tepat pada waktu yang tepat. Ekspor CSV.",
+      "seo": {
+        "title": "Laporan umur utang usaha gratis",
+        "description": "Pantau nota pemasok yang belum dibayar menurut umur — apa yang jatuh tempo sekarang, apa yang telat, dan siapa dibayar lebih dulu. Ekspor CSV. Gratis.",
+        "keywords": [
+          "umur utang usaha",
+          "laporan utang usaha",
+          "pemantau nota pemasok",
+          "aging kreditur",
+          "laporan utang jatuh tempo"
+        ],
+        "ogTitle": "Umur utang usaha",
+        "ogDescription": "Pantau nota pemasok yang belum dibayar menurut umur — apa yang jatuh tempo sekarang, apa yang telat, dan siapa dibayar lebih dulu. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Umur utang usaha",
+        "subheadline": "Setiap nota pemasok yang belum dibayar, dikelompokkan menurut umur — agar Anda membayar orang yang tepat pada waktu yang tepat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan umur utang usaha?",
+            "answer": "Tampilan semua nota pemasok yang belum dibayar, dikelompokkan menurut lama keterlambatannya. Ia menunjukkan total tanggungan per pemasok dan menandai pembayaran yang berisiko merusak hubungan."
+          },
+          {
+            "question": "Bagaimana memakainya untuk menjadwalkan pembayaran?",
+            "answer": "Lunasi nota tertua lebih dulu untuk menjaga niat baik pemasok dan termin kredit Anda, lalu sesuaikan sisanya dengan posisi kas. Nota yang belum jatuh tempo sering bisa menunggu sampai dekat tanggalnya."
+          },
+          {
+            "question": "Perlukah membayar awal jika pemasok memberi diskon?",
+            "answer": "Sering kali ya — Kalkulator termin pembayaran di situs ini menunjukkan hasil setahunan dari mengambil diskon pembayaran awal, yang kerap mengalahkan menyimpan uang di bank."
+          }
+        ]
+      }
     },
     {
       "name": "Anggaran vs realisasi",
@@ -912,7 +1011,40 @@
     },
     {
       "name": "Perbandingan pemasok",
-      "shortDescription": "Bandingkan pemasok dari harga, pengiriman, tempo, dan mutu dengan skor berbobot."
+      "shortDescription": "Bandingkan pemasok dari harga, pengiriman, tempo, dan mutu dengan skor berbobot.",
+      "seo": {
+        "title": "Alat perbandingan pemasok gratis",
+        "description": "Bandingkan pemasok dari harga, pengiriman, termin kredit, dan mutu dengan skor berbobot — pemasok bernilai terbaik langsung terlihat. Ekspor CSV. Gratis.",
+        "keywords": [
+          "perbandingan pemasok",
+          "alat perbandingan pemasok",
+          "kartu skor pemasok",
+          "kriteria pemilihan pemasok",
+          "skor berbobot pemasok"
+        ],
+        "ogTitle": "Perbandingan pemasok",
+        "ogDescription": "Bandingkan pemasok dari harga, pengiriman, termin kredit, dan mutu dengan skor berbobot — pemasok bernilai terbaik langsung terlihat. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Perbandingan pemasok",
+        "subheadline": "Harga bukan segalanya — timbang juga pengiriman, kredit, dan mutu, lalu biarkan skor memilih pemasoknya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana cara skor bekerja?",
+            "answer": "Setiap kriteria disamakan skalanya antar pemasok (yang terbaik dapat nilai penuh), dikalikan bobot yang Anda tetapkan, lalu dijumlahkan menjadi skor dari 100. Ubah bobotnya dan peringkat berubah seketika."
+          },
+          {
+            "question": "Bobot apa yang sebaiknya dipakai?",
+            "answer": "Yang paling sakit bila salah. Barang mudah rusak? Beri bobot tinggi pada pengiriman. Kas ketat? Pada termin kredit. Mutu yang dilihat pelanggan? Pada mutu. Nilai bawaan (40/20/15/25) cocok untuk sebagian besar pembelian ritel."
+          },
+          {
+            "question": "Mengapa tidak ambil penawaran termurah saja?",
+            "answer": "Pemasok termurah yang mengirim telat atau memasok mutu buruk justru lebih mahal dalam kehabisan stok, pengembalian, dan pelanggan yang hilang. Skor berbobot membuat pertukaran itu terang, bukan soal perasaan."
+          }
+        ]
+      }
     }
   ]
 }

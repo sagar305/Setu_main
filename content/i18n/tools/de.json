@@ -826,15 +826,114 @@
     },
     {
       "name": "Kundenkontoauszug",
-      "shortDescription": "Kontoauszug je Kunde — Rechnungen, Zahlungen und laufender Saldo. Druck als PDF."
+      "shortDescription": "Kontoauszug je Kunde — Rechnungen, Zahlungen und laufender Saldo. Druck als PDF.",
+      "seo": {
+        "title": "Kostenloser Kundenkontoauszug-Generator",
+        "description": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos.",
+        "keywords": [
+          "Kundenkontoauszug",
+          "Kontoauszug",
+          "Muster Kundenkontoauszug",
+          "Auszug offener Posten",
+          "Debitorenauszug"
+        ],
+        "ogTitle": "Kundenkontoauszug",
+        "ogDescription": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kundenkontoauszug",
+        "subheadline": "Jede Rechnung, Zahlung und Korrektur eines Kunden — mit dem laufenden Saldo, der Diskussionen beendet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein Kontoauszug?",
+            "answer": "Eine Zusammenfassung aller Vorgänge mit einem Kunden in einem Zeitraum — gestellte Rechnungen, erhaltene Zahlungen, erteilte Gutschriften — die mit dem aktuell offenen Saldo endet."
+          },
+          {
+            "question": "Wann sollte ich Kundenkontoauszüge verschicken?",
+            "answer": "Monatlich an regelmäßige Kreditkunden und sofort, wenn Sie eine überfällige Zahlung anmahnen. Ein klarer Auszug klärt die meisten Gespräche nach dem Muster „das haben wir doch bezahlt“."
+          },
+          {
+            "question": "Wie wird der Saldo berechnet?",
+            "answer": "Anfangssaldo plus Rechnungen, minus Zahlungen und Gutschriften, in zeitlicher Reihenfolge. Das Tool rechnet den laufenden Saldo automatisch neu, während Sie Vorgänge ergänzen."
+          }
+        ]
+      }
     },
     {
       "name": "Offene-Posten-Liste",
-      "shortDescription": "Offene Kundenrechnungen nach Altersklassen — von aktuell bis 90+ Tage, je Kunde. CSV-Export."
+      "shortDescription": "Offene Kundenrechnungen nach Altersklassen — von aktuell bis 90+ Tage, je Kunde. CSV-Export.",
+      "seo": {
+        "title": "Kostenlose Offene-Posten-Liste — Kunden",
+        "description": "Offene Kundenrechnungen nach Alter verfolgen — fällig, 1–30, 31–60, 61–90 und 90+ Tage überfällig, je Kunde. CSV-Export. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Offene-Posten-Liste",
+          "Debitorenaltersstruktur",
+          "OP-Liste Kunden",
+          "Bericht überfälliger Rechnungen",
+          "Altersanalyse der Debitoren"
+        ],
+        "ogTitle": "Offene-Posten-Liste",
+        "ogDescription": "Offene Kundenrechnungen nach Alter verfolgen — fällig, 1–30, 31–60, 61–90 und 90+ Tage überfällig, je Kunde. CSV-Export. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Offene-Posten-Liste",
+        "subheadline": "Wer Ihnen wie viel schuldet und wie lange schon — nach Alter gruppiert, damit Sie zuerst das Richtige anmahnen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Offene-Posten-Liste?",
+            "answer": "Eine Übersicht aller offenen Kundenrechnungen, gruppiert nach ihrer Überfälligkeit — noch nicht fällig, 1–30, 31–60, 61–90 und 90+ Tage. Sie ist das übliche Werkzeug, um das Mahnwesen zu priorisieren."
+          },
+          {
+            "question": "Welche Gruppe mahne ich zuerst?",
+            "answer": "Die älteste. Die Einbringungschancen fallen mit dem Alter deutlich — Branchenstudien setzen den erwarteten Eingang einer Forderung jenseits von 90 Tagen weit unter ihren Nominalwert. Die Spalte 90+ ist Ihre Prioritätenliste."
+          },
+          {
+            "question": "Wie wirken überfällige Rechnungen auf den Betrieb?",
+            "answer": "Das Geld in den 30+-Gruppen ist Umlaufvermögen, das Sie zinslos verleihen, während Sie für Ihren eigenen Kredit womöglich zahlen. Der Zahlungsziel-Rechner zeigt, was ein Skonto wert ist, das Geld schneller hereinholt."
+          }
+        ]
+      }
     },
     {
       "name": "Kreditoren-Altersstruktur",
-      "shortDescription": "Offene Lieferantenrechnungen nach Alter — die Richtigen zur richtigen Zeit bezahlen. CSV-Export."
+      "shortDescription": "Offene Lieferantenrechnungen nach Alter — die Richtigen zur richtigen Zeit bezahlen. CSV-Export.",
+      "seo": {
+        "title": "Kostenlose Kreditoren-Altersstruktur",
+        "description": "Offene Lieferantenrechnungen nach Alter verfolgen — was jetzt fällig ist, was überfällig ist und wen Sie zuerst bezahlen. CSV-Export. Kostenlos.",
+        "keywords": [
+          "Kreditoren-Altersstruktur",
+          "OP-Liste Lieferanten",
+          "Lieferantenrechnungen verfolgen",
+          "Altersanalyse der Kreditoren",
+          "Bericht offener Verbindlichkeiten"
+        ],
+        "ogTitle": "Kreditoren-Altersstruktur",
+        "ogDescription": "Offene Lieferantenrechnungen nach Alter verfolgen — was jetzt fällig ist, was überfällig ist und wen Sie zuerst bezahlen. CSV-Export. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kreditoren-Altersstruktur",
+        "subheadline": "Jede offene Lieferantenrechnung, nach Alter gruppiert — damit Sie die Richtigen zur richtigen Zeit bezahlen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Kreditoren-Altersstruktur?",
+            "answer": "Eine Übersicht aller offenen Lieferantenrechnungen, gruppiert nach ihrer Überfälligkeit. Sie zeigt das Gesamtvolumen je Lieferant und markiert Zahlungen, die eine Beziehung belasten können."
+          },
+          {
+            "question": "Wie plane ich damit meine Zahlungen?",
+            "answer": "Begleichen Sie die ältesten Rechnungen zuerst, um Goodwill und Zahlungsziele zu schützen, und legen Sie den Rest auf Ihre Liquidität. Was noch nicht fällig ist, kann meist bis kurz vor Fälligkeit warten."
+          },
+          {
+            "question": "Soll ich früher zahlen, wenn ein Lieferant Skonto gibt?",
+            "answer": "Oft ja — der Zahlungsziel-Rechner auf dieser Seite zeigt die annualisierte Rendite eines Skontos, und die liegt häufig über dem, was das Geld auf der Bank bringt."
+          }
+        ]
+      }
     },
     {
       "name": "Plan-Ist-Vergleich",
@@ -912,7 +1011,40 @@
     },
     {
       "name": "Lieferantenvergleich",
-      "shortDescription": "Lieferanten nach Preis, Lieferung, Zahlungsziel und Qualität gewichtet vergleichen."
+      "shortDescription": "Lieferanten nach Preis, Lieferung, Zahlungsziel und Qualität gewichtet vergleichen.",
+      "seo": {
+        "title": "Kostenloser Lieferantenvergleich — Bewertung",
+        "description": "Lieferanten nach Preis, Lieferzeit, Zahlungsziel und Qualität mit gewichteter Bewertung vergleichen — das beste Angebot sofort sichtbar. CSV-Export.",
+        "keywords": [
+          "Lieferantenvergleich",
+          "Werkzeug zum Lieferantenvergleich",
+          "Lieferanten-Scorecard",
+          "Kriterien der Lieferantenauswahl",
+          "gewichtete Lieferantenbewertung"
+        ],
+        "ogTitle": "Lieferantenvergleich",
+        "ogDescription": "Lieferanten nach Preis, Lieferzeit, Zahlungsziel und Qualität mit gewichteter Bewertung vergleichen — das beste Angebot sofort sichtbar. CSV-Export."
+      },
+      "hero": {
+        "headline": "Lieferantenvergleich",
+        "subheadline": "Der Preis ist nicht alles — wiegen Sie Lieferzeit, Zahlungsziel und Qualität mit, und lassen Sie die Bewertung entscheiden."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktioniert die Bewertung?",
+            "answer": "Jedes Kriterium wird über die Lieferanten normiert (der Beste erhält die volle Punktzahl), mit der von Ihnen gesetzten Gewichtung multipliziert und zu einer Bewertung von 100 Punkten summiert. Ändern Sie die Gewichtung, ändert sich die Reihenfolge sofort."
+          },
+          {
+            "question": "Welche Gewichtungen soll ich wählen?",
+            "answer": "Die, bei denen ein Fehler am meisten weh tut. Leicht verderbliche Ware? Lieferzeit hoch gewichten. Knappe Kasse? Das Zahlungsziel. Qualität, die der Kunde sieht? Die Qualität. Die Vorgaben (40/20/15/25) passen für den meisten Handelseinkauf."
+          },
+          {
+            "question": "Warum nicht einfach das günstigste Angebot nehmen?",
+            "answer": "Der günstigste Lieferant, der zu spät liefert oder schlechte Qualität schickt, kostet mehr an Fehlbeständen, Rücksendungen und verlorenen Kunden. Eine gewichtete Bewertung macht diese Abwägungen ausdrücklich statt zur Bauchentscheidung."
+          }
+        ]
+      }
     }
   ]
 }
