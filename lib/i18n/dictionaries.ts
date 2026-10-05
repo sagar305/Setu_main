@@ -33,6 +33,13 @@ export type DictKey =
   | "timezone"
   | "customer"
   | "supplier"
+  | "toolTryIt"
+  | "toolRelated"
+  | "share"
+  | "shareTap"
+  | "sharePreparing"
+  | "shareMenuFailed"
+  | "shareFileFailed"
   // Tool vocabulary — complete in en + hi; other languages fall back to
   // English until their dictionaries are extended.
   | "category"
@@ -169,6 +176,13 @@ const en: Dict = {
   markCompleted: "Mark completed",
   reopen: "Re-open",
   address: "Address",
+  toolTryIt: "Try it",
+  toolRelated: "Related Tools",
+  share: "Share",
+  shareTap: "Tap to share",
+  sharePreparing: "Preparing...",
+  shareMenuFailed: "Could not open the share menu. Please try again.",
+  shareFileFailed: "Could not prepare the file to share. Please try again.",
 };
 
 const hi: Dict = {
@@ -250,6 +264,13 @@ const hi: Dict = {
   markCompleted: "पूर्ण करें",
   reopen: "फिर से खोलें",
   address: "पता",
+  toolTryIt: "आज़माइए",
+  toolRelated: "संबंधित टूल",
+  share: "साझा कीजिए",
+  shareTap: "साझा करने के लिए दबाइए",
+  sharePreparing: "तैयार हो रहा है…",
+  shareMenuFailed: "साझा करने का मेन्यू नहीं खुल सका। कृपया फिर कोशिश कीजिए।",
+  shareFileFailed: "साझा करने के लिए फ़ाइल तैयार नहीं हो सकी। कृपया फिर कोशिश कीजिए।",
 };
 
 const bn: Partial<Dict> = {
@@ -331,6 +352,13 @@ const bn: Partial<Dict> = {
   markCompleted: "সম্পন্ন করুন",
   reopen: "আবার খুলুন",
   address: "ঠিকানা",
+  toolTryIt: "ব্যবহার করুন",
+  toolRelated: "সম্পর্কিত টুল",
+  share: "পাঠান",
+  shareTap: "পাঠাতে চাপ দিন",
+  sharePreparing: "তৈরি হচ্ছে…",
+  shareMenuFailed: "পাঠানোর মেনু খোলা গেল না। আবার চেষ্টা করুন।",
+  shareFileFailed: "পাঠানোর জন্য ফাইল তৈরি করা গেল না। আবার চেষ্টা করুন।",
 };
 
 const ta: Partial<Dict> = {
@@ -412,6 +440,13 @@ const ta: Partial<Dict> = {
   markCompleted: "முடிந்ததாகக் குறி",
   reopen: "மீண்டும் திற",
   address: "முகவரி",
+  toolTryIt: "பயன்படுத்துங்கள்",
+  toolRelated: "தொடர்புடைய கருவிகள்",
+  share: "பகிருங்கள்",
+  shareTap: "பகிர தட்டுங்கள்",
+  sharePreparing: "தயாராகிறது…",
+  shareMenuFailed: "பகிர்வு பட்டியலைத் திறக்க முடியவில்லை. மீண்டும் முயலுங்கள்.",
+  shareFileFailed: "பகிர்வதற்கான கோப்பைத் தயாரிக்க முடியவில்லை. மீண்டும் முயலுங்கள்.",
 };
 
 const te: Partial<Dict> = {
@@ -493,6 +528,13 @@ const te: Partial<Dict> = {
   markCompleted: "పూర్తయిందని గుర్తించండి",
   reopen: "మళ్లీ తెరవండి",
   address: "చిరునామా",
+  toolTryIt: "వాడి చూడండి",
+  toolRelated: "సంబంధిత టూల్స్",
+  share: "పంచండి",
+  shareTap: "పంచడానికి నొక్కండి",
+  sharePreparing: "సిద్ధమవుతోంది…",
+  shareMenuFailed: "పంచే మెనూ తెరవలేకపోయాం. మళ్లీ ప్రయత్నించండి.",
+  shareFileFailed: "పంచడానికి ఫైల్ సిద్ధం చేయలేకపోయాం. మళ్లీ ప్రయత్నించండి.",
 };
 
 const mr: Partial<Dict> = {
@@ -574,6 +616,13 @@ const mr: Partial<Dict> = {
   markCompleted: "पूर्ण करा",
   reopen: "पुन्हा उघडा",
   address: "पत्ता",
+  toolTryIt: "वापरून पाहा",
+  toolRelated: "संबंधित साधने",
+  share: "पाठवा",
+  shareTap: "पाठवण्यासाठी दाबा",
+  sharePreparing: "तयार होत आहे…",
+  shareMenuFailed: "पाठवण्याचा मेनू उघडू शकला नाही. कृपया पुन्हा प्रयत्न करा.",
+  shareFileFailed: "पाठवण्यासाठी फाइल तयार होऊ शकली नाही. कृपया पुन्हा प्रयत्न करा.",
 };
 
 const gu: Partial<Dict> = {
@@ -655,6 +704,13 @@ const gu: Partial<Dict> = {
   markCompleted: "પૂર્ણ કરો",
   reopen: "ફરી ખોલો",
   address: "સરનામું",
+  toolTryIt: "વાપરી જુઓ",
+  toolRelated: "સંબંધિત સાધનો",
+  share: "મોકલો",
+  shareTap: "મોકલવા માટે દબાવો",
+  sharePreparing: "તૈયાર થઈ રહ્યું છે…",
+  shareMenuFailed: "મોકલવાનું મેનૂ ખૂલી શક્યું નહીં. કૃપા કરીને ફરી પ્રયાસ કરો.",
+  shareFileFailed: "મોકલવા માટે ફાઇલ તૈયાર થઈ શકી નહીં. કૃપા કરીને ફરી પ્રયાસ કરો.",
 };
 
 const kn: Partial<Dict> = {
@@ -736,6 +792,13 @@ const kn: Partial<Dict> = {
   markCompleted: "ಪೂರ್ಣಗೊಳಿಸಿ",
   reopen: "ಮತ್ತೆ ತೆರೆಯಿರಿ",
   address: "ವಿಳಾಸ",
+  toolTryIt: "ಬಳಸಿ ನೋಡಿ",
+  toolRelated: "ಸಂಬಂಧಿತ ಟೂಲ್‌ಗಳು",
+  share: "ಹಂಚಿ",
+  shareTap: "ಹಂಚಲು ಒತ್ತಿ",
+  sharePreparing: "ಸಿದ್ಧವಾಗುತ್ತಿದೆ…",
+  shareMenuFailed: "ಹಂಚುವ ಮೆನು ತೆರೆಯಲಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+  shareFileFailed: "ಹಂಚಲು ಕಡತ ಸಿದ್ಧಪಡಿಸಲಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
 };
 
 const ml: Partial<Dict> = {
@@ -817,6 +880,13 @@ const ml: Partial<Dict> = {
   markCompleted: "പൂർത്തിയാക്കുക",
   reopen: "വീണ്ടും തുറക്കുക",
   address: "വിലാസം",
+  toolTryIt: "ഉപയോഗിച്ചു നോക്കൂ",
+  toolRelated: "ബന്ധപ്പെട്ട ടൂളുകൾ",
+  share: "പങ്കിടുക",
+  shareTap: "പങ്കിടാൻ അമർത്തുക",
+  sharePreparing: "തയ്യാറാകുന്നു…",
+  shareMenuFailed: "പങ്കിടൽ മെനു തുറക്കാനായില്ല. വീണ്ടും ശ്രമിക്കുക.",
+  shareFileFailed: "പങ്കിടാൻ ഫയൽ തയ്യാറാക്കാനായില്ല. വീണ്ടും ശ്രമിക്കുക.",
 };
 
 const pa: Partial<Dict> = {
@@ -898,6 +968,13 @@ const pa: Partial<Dict> = {
   markCompleted: "ਪੂਰਾ ਕਰੋ",
   reopen: "ਮੁੜ ਖੋਲ੍ਹੋ",
   address: "ਪਤਾ",
+  toolTryIt: "ਵਰਤ ਕੇ ਵੇਖੋ",
+  toolRelated: "ਸਬੰਧਿਤ ਟੂਲ",
+  share: "ਸਾਂਝਾ ਕਰੋ",
+  shareTap: "ਸਾਂਝਾ ਕਰਨ ਲਈ ਦਬਾਓ",
+  sharePreparing: "ਤਿਆਰ ਹੋ ਰਿਹਾ ਹੈ…",
+  shareMenuFailed: "ਸਾਂਝਾ ਕਰਨ ਵਾਲਾ ਮੀਨੂ ਨਹੀਂ ਖੁੱਲ੍ਹ ਸਕਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+  shareFileFailed: "ਸਾਂਝਾ ਕਰਨ ਲਈ ਫ਼ਾਈਲ ਤਿਆਰ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
 };
 
 const es: Partial<Dict> = {
@@ -979,6 +1056,13 @@ const es: Partial<Dict> = {
   markCompleted: "Marcar completada",
   reopen: "Reabrir",
   address: "Dirección",
+  toolTryIt: "Pruébalo",
+  toolRelated: "Herramientas relacionadas",
+  share: "Compartir",
+  shareTap: "Toca para compartir",
+  sharePreparing: "Preparando…",
+  shareMenuFailed: "No se pudo abrir el menú para compartir. Inténtalo de nuevo.",
+  shareFileFailed: "No se pudo preparar el archivo para compartir. Inténtalo de nuevo.",
 };
 
 const fr: Partial<Dict> = {
@@ -1060,6 +1144,13 @@ const fr: Partial<Dict> = {
   markCompleted: "Marquer terminé",
   reopen: "Rouvrir",
   address: "Adresse",
+  toolTryIt: "Essayer",
+  toolRelated: "Outils associés",
+  share: "Partager",
+  shareTap: "Touchez pour partager",
+  sharePreparing: "Préparation…",
+  shareMenuFailed: "Impossible d'ouvrir le menu de partage. Veuillez réessayer.",
+  shareFileFailed: "Impossible de préparer le fichier à partager. Veuillez réessayer.",
 };
 
 const ar: Partial<Dict> = {
@@ -1141,6 +1232,13 @@ const ar: Partial<Dict> = {
   markCompleted: "وضع علامة مكتمل",
   reopen: "إعادة فتح",
   address: "العنوان",
+  toolTryIt: "جرّبها",
+  toolRelated: "أدوات ذات صلة",
+  share: "مشاركة",
+  shareTap: "اضغط للمشاركة",
+  sharePreparing: "جارٍ التحضير…",
+  shareMenuFailed: "تعذّر فتح قائمة المشاركة. يُرجى المحاولة مرة أخرى.",
+  shareFileFailed: "تعذّر تحضير الملف للمشاركة. يُرجى المحاولة مرة أخرى.",
 };
 
 const pt: Partial<Dict> = {
@@ -1222,6 +1320,13 @@ const pt: Partial<Dict> = {
   markCompleted: "Marcar concluído",
   reopen: "Reabrir",
   address: "Endereço",
+  toolTryIt: "Experimente",
+  toolRelated: "Ferramentas relacionadas",
+  share: "Compartilhar",
+  shareTap: "Toque para compartilhar",
+  sharePreparing: "Preparando…",
+  shareMenuFailed: "Não foi possível abrir o menu de compartilhamento. Tente de novo.",
+  shareFileFailed: "Não foi possível preparar o arquivo para compartilhar. Tente de novo.",
 };
 
 const id: Partial<Dict> = {
@@ -1303,6 +1408,13 @@ const id: Partial<Dict> = {
   markCompleted: "Tandai selesai",
   reopen: "Buka kembali",
   address: "Alamat",
+  toolTryIt: "Coba",
+  toolRelated: "Alat terkait",
+  share: "Bagikan",
+  shareTap: "Ketuk untuk membagikan",
+  sharePreparing: "Menyiapkan…",
+  shareMenuFailed: "Menu berbagi tidak dapat dibuka. Silakan coba lagi.",
+  shareFileFailed: "Berkas untuk dibagikan tidak dapat disiapkan. Silakan coba lagi.",
 };
 
 const de: Partial<Dict> = {
@@ -1384,6 +1496,13 @@ const de: Partial<Dict> = {
   markCompleted: "Als erledigt markieren",
   reopen: "Wieder öffnen",
   address: "Adresse",
+  toolTryIt: "Ausprobieren",
+  toolRelated: "Verwandte Werkzeuge",
+  share: "Teilen",
+  shareTap: "Zum Teilen tippen",
+  sharePreparing: "Wird vorbereitet …",
+  shareMenuFailed: "Das Teilen-Menü konnte nicht geöffnet werden. Bitte erneut versuchen.",
+  shareFileFailed: "Die Datei zum Teilen konnte nicht vorbereitet werden. Bitte erneut versuchen.",
 };
 
 const zh: Partial<Dict> = {
@@ -1465,6 +1584,13 @@ const zh: Partial<Dict> = {
   markCompleted: "标记完成",
   reopen: "重新打开",
   address: "地址",
+  toolTryIt: "试一试",
+  toolRelated: "相关工具",
+  share: "分享",
+  shareTap: "点按即可分享",
+  sharePreparing: "正在准备…",
+  shareMenuFailed: "打不开分享菜单，请再试一次。",
+  shareFileFailed: "无法准备要分享的文件，请再试一次。",
 };
 
 export const DICTIONARIES: Record<LanguageCode, Partial<Dict>> = {

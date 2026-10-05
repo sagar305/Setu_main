@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { CalculatorIcon } from "@/components/calculators/CalculatorIcon";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { itemLocalesFor, itemPathFor, localizedHref } from "@/lib/i18n/pages";
+import { translate } from "@/lib/i18n/translate";
 
 /** Just the fields a card shows, so a localized item can be passed straight in. */
 type CardItem = {
@@ -42,7 +43,7 @@ export function ToolCard({
       <h3 className="mt-4 text-lg font-bold text-ink">{item.name}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{item.shortDescription}</p>
       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo">
-        Try it
+        {translate(lang, "toolTryIt")}
         <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
       </span>
     </Link>

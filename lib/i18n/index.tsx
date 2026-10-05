@@ -14,21 +14,12 @@ import {
 } from "react";
 import { getPreferences, markHydrated, setPreferences } from "@/lib/toolkit/preferences";
 import { isLanguageCode, LANGUAGES, type LanguageCode } from "./config";
-import { BASE_DICT, DICTIONARIES, type DictKey } from "./dictionaries";
-import { CALC_BASE, CALC_DICTIONARIES, type CalcDictKey } from "./calc-dictionaries";
-
+import type { DictKey } from "./dictionaries";
+import type { CalcDictKey } from "./calc-dictionaries";
 // `t` resolves against both the shared chrome dictionary and the calculator
-// dictionary; each falls back to its English base when a key is missing.
-type TKey = DictKey | CalcDictKey;
-
-function translate(lang: LanguageCode, key: TKey): string {
-  if (key in BASE_DICT) {
-    const k = key as DictKey;
-    return DICTIONARIES[lang]?.[k] ?? BASE_DICT[k];
-  }
-  const k = key as CalcDictKey;
-  return CALC_DICTIONARIES[lang]?.[k] ?? CALC_BASE[k];
-}
+// dictionary; each falls back to its English base when a key is missing. The
+// lookup lives in ./translate so server components can use it as well.
+import { translate, type TKey } from "./translate";
 
 type I18n = {
   lang: LanguageCode;

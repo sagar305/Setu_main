@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Share2, Loader2 } from "lucide-react";
 import { canShare, canShareFiles } from "@/lib/share";
+import { useI18n } from "@/lib/i18n";
 
 interface ShareButtonProps {
   title: string;
@@ -14,6 +15,7 @@ interface ShareButtonProps {
 }
 
 export function ShareButton({ title, text, generateFiles, className }: ShareButtonProps) {
+  const { t } = useI18n();
   const [isSupported, setIsSupported] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isPreparing, setIsPreparing] = useState(false);
@@ -58,7 +60,7 @@ export function ShareButton({ title, text, generateFiles, className }: ShareButt
           setPendingFiles(null);
         } else {
           console.error("Share failed:", err);
-          alert("Could not open the share menu. Please try again.");
+          alert(t("shareMenuFailed"));
         }
       }
       return;
@@ -74,7 +76,7 @@ export function ShareButton({ title, text, generateFiles, className }: ShareButt
         alert(
           err instanceof Error && err.message
             ? err.message
-            : "Could not prepare the file to share. Please try again."
+            : t("shareFileFailed")
         );
         setIsPreparing(false);
         return;
@@ -94,7 +96,7 @@ export function ShareButton({ title, text, generateFiles, className }: ShareButt
         setPendingFiles(files);
       } else {
         console.error("Share failed:", err);
-        alert("Could not open the share menu. Please try again.");
+        alert(t("shareMenuFailed"));
       }
     }
   };
@@ -104,10 +106,10 @@ export function ShareButton({ title, text, generateFiles, className }: ShareButt
   }
 
   const label = isPreparing
-    ? "Preparing..."
+    ? t("sharePreparing")
     : pendingFiles
-      ? "Tap to share"
-      : "Share";
+      ? t("shareTap")
+      : t("share");
 
   return (
     <button
@@ -118,7 +120,7 @@ export function ShareButton({ title, text, generateFiles, className }: ShareButt
           ? "animate-pulse border-indigo bg-indigo text-white"
           : "border-indigo/30 bg-indigo/5 text-indigo hover:bg-indigo/10"
       } ${className ?? ""}`}
-      title="Share"
+      title={t("share")}
     >
       {isPreparing ? (
         <Loader2 className="h-4 w-4 animate-spin" />

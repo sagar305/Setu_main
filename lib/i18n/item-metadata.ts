@@ -55,7 +55,13 @@ export function toolMetadata(slug: string, lang: LanguageCode = "en"): Metadata 
   };
 }
 
-function localizedTool(slug: string, lang: LanguageCode) {
+/**
+ * One tool's content in `lang`, or undefined if no tool has that slug.
+ *
+ * Exported because the suggestion strip needs the tool's name in the reader's
+ * language, not just this module's metadata.
+ */
+export function localizedTool(slug: string, lang: LanguageCode) {
   if (lang === "en") return getToolBySlug(slug);
 
   const english = getToolsContent();
