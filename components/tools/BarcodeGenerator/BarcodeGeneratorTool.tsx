@@ -117,18 +117,18 @@ export function BarcodeGeneratorTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Generate barcodes straight from your saved products instead of typing values."
+        message={t("bgConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
-          <h2 className="mb-4 text-lg font-bold text-ink">Barcode details</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("bgDetails")}</h2>
           <div className="space-y-4">
             {workspace.connected && workspace.products.length > 0 ? (
-              <Field label="Pick a saved product (optional)">
+              <Field label={t("bgPickProduct")}>
                 <Select defaultValue="" onChange={(e) => pickProduct(e.target.value)}>
                   <option value="" disabled>
-                    Choose a product…
+                    {t("bgChooseProduct")}
                   </option>
                   {workspace.products.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -139,7 +139,7 @@ export function BarcodeGeneratorTool() {
               </Field>
             ) : null}
 
-            <Field label="Barcode type">
+            <Field label={t("bgType")}>
               <Select value={kind} onChange={(e) => setKind(e.target.value as BarcodeKind)}>
                 <option value="CODE128">Code 128</option>
                 <option value="EAN13">EAN-13</option>
@@ -148,7 +148,7 @@ export function BarcodeGeneratorTool() {
             </Field>
             <p className="-mt-2 text-xs text-muted">{KIND_HINTS[kind]}</p>
 
-            <Field label="Value to encode">
+            <Field label={t("bgValue")}>
               <TextInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -156,23 +156,23 @@ export function BarcodeGeneratorTool() {
               />
             </Field>
 
-            <Field label="Label (optional, shown on the PDF)">
+            <Field label={t("bgLabel")}>
               <TextInput
                 value={label}
                 onChange={(e) => setLabel(e.target.value)}
-                placeholder="Product name"
+                placeholder={t("productNamePlaceholder")}
               />
             </Field>
           </div>
         </Card>
 
         <Card className="flex flex-col">
-          <h2 className="mb-4 text-lg font-bold text-ink">Preview</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("preview")}</h2>
           <div className="flex flex-1 items-center justify-center rounded-xl bg-cream-paper/60 p-6">
             {value.trim() ? (
               <canvas ref={canvasRef} className="max-w-full" />
             ) : (
-              <p className="text-sm text-muted">Enter a value to see the barcode.</p>
+              <p className="text-sm text-muted">{t("bgEnterValue")}</p>
             )}
           </div>
           {error ? <p className="mt-3 text-sm font-medium text-red-600">{error}</p> : null}

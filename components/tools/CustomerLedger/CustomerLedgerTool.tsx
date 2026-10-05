@@ -28,6 +28,7 @@ import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
@@ -158,7 +159,7 @@ export function CustomerLedgerTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Track udhaar for the same customers your POS and invoices use — one customer book everywhere."
+        message={t("clConnectHint")}
       />
 
       <div className="mb-6 flex flex-wrap items-center gap-4 rounded-xl bg-cream-paper/70 px-5 py-4">
@@ -181,12 +182,12 @@ export function CustomerLedgerTool() {
             <TextInput
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              placeholder="New customer name"
+              placeholder={t("clNewCustomer")}
             />
             <TextInput
               value={newPhone}
               onChange={(e) => setNewPhone(e.target.value)}
-              placeholder="Phone (optional)"
+              placeholder={t("phoneOptional")}
             />
             <PrimaryButton className="w-full" onClick={addCustomer} disabled={!newName.trim()}>
               {t("addCustomer")}
@@ -233,8 +234,8 @@ export function CustomerLedgerTool() {
         <Card className="h-fit">
           {!selected ? (
             <EmptyState
-              title="Pick a customer"
-              subtitle="Select a customer to see their ledger — credit given, payments received and the running balance."
+              title={t("clPickTitle")}
+              subtitle={t("clPickHint")}
             />
           ) : (
             <>
@@ -263,7 +264,7 @@ export function CustomerLedgerTool() {
                       sendReminder(selected.name, selected.phone, balances.get(selected.id) ?? 0)
                     }
                   >
-                    Send reminder
+                    {t("clSendReminder")}
                   </SecondaryButton>
                 ) : null}
               </div>
@@ -279,7 +280,7 @@ export function CustomerLedgerTool() {
                   <TextInput
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
-                    placeholder="e.g. Groceries, part payment"
+                    placeholder={t("clNotePlaceholder")}
                   />
                 </Field>
                 <Field label={`${t("amount")} (${currencySymbol(currency)})`}>
@@ -346,15 +347,20 @@ export function CustomerLedgerTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete ledger entry?"
+        title={t("clDeleteTitle")}
         message={
           deleting
-            ? `Delete the ${formatMoney(deleting.amount, currency)} ${
-                deleting.type === "credit" ? "credit" : "payment"
-              } entry for ${deleting.customerName}? Their balance will change.`
+            ? fill(
+                t(
+                  deleting.type === "credit"
+                    ? "clDeleteCreditMessage"
+                    : "clDeletePaymentMessage",
+                ),
+                { amount: formatMoney(deleting.amount, currency), name: deleting.customerName },
+              )
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);
@@ -366,7 +372,7 @@ export function CustomerLedgerTool() {
         open={sharing !== null}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Send payment reminder"
+        title={t("clReminderTitle")}
         onSaveUpiDefault={saveUpiDefault}
       />
     </div>

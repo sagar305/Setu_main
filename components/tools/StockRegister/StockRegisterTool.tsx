@@ -22,9 +22,10 @@ import { getInventory, updateStock } from "@/lib/toolkit/workspace";
 import type { InventoryLog } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 export function StockRegisterTool() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const workspace = useWorkspaceConnection("stock-register");
   const [logs, setLogs] = useState<InventoryLog[]>([]);
   const [tab, setTab] = useState<"stock" | "history">("stock");
@@ -64,7 +65,7 @@ export function StockRegisterTool() {
     await workspace.reload();
     setLogs(await getInventory());
     setMessage(
-      `${selected.name}: ${direction === "add" ? "+" : "−"}${qtyNum} ${selected.unit || "units"}`
+      `${selected.name}: ${direction === "add" ? "+" : "−"}${qtyNum} ${selected.unit || t("units")}`
     );
     setConfirming(false);
     setQty("");
@@ -87,14 +88,14 @@ export function StockRegisterTool() {
   if (workspace.ready && !workspace.exists) {
     return (
       <EmptyState
-        title="No business workspace on this device yet"
-        subtitle="The Stock Register works on the products saved in your Setu workspace. Set up your products in the free Browser POS first — they'll appear here automatically."
+        title={t("srNoWorkspaceTitle")}
+        subtitle={t("srNoWorkspaceHint")}
         action={
           <a
             href="/products/browser-based-pos"
             className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
           >
-            Open Browser POS
+            {t("openBrowserPos")}
           </a>
         }
       />
@@ -105,7 +106,7 @@ export function StockRegisterTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="View live stock levels and record adjustments for your saved products."
+        message={t("srConnectHint")}
       />
 
       {!workspace.connected ? null : (
@@ -118,13 +119,13 @@ export function StockRegisterTool() {
                     onClick={() => setTab("stock")}
                     className={tab === "stock" ? "bg-indigo/10" : ""}
                   >
-                    Current stock
+                    {t("srCurrentStock")}
                   </SecondaryButton>
                   <SecondaryButton
                     onClick={() => setTab("history")}
                     className={tab === "history" ? "bg-indigo/10" : ""}
                   >
-                    Movement history
+                    {t("srMovementHistory")}
                   </SecondaryButton>
                 </div>
                 <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
@@ -140,7 +141,7 @@ export function StockRegisterTool() {
                   />
                   {tracked.length === 0 ? (
                     <p className="py-8 text-center text-sm text-muted">
-                      No products found. Add products in the Browser POS.
+                      {t("srNoProducts")}
                     </p>
                   ) : (
                     <div className="overflow-x-auto">
@@ -180,25 +181,25 @@ export function StockRegisterTool() {
                   )}
                 </>
               ) : sortedLogs.length === 0 ? (
-                <p className="py-8 text-center text-sm text-muted">No stock movements recorded yet.</p>
+                <p className="py-8 text-center text-sm text-muted">{t("srNoMovements")}</p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-muted-line/30 text-left text-muted">
-                        <th className="py-2 pr-4 font-semibold">When</th>
-                        <th className="py-2 pr-4 font-semibold">Product</th>
-                        <th className="py-2 pr-4 font-semibold">Type</th>
-                        <th className="py-2 pr-4 text-right font-semibold">Change</th>
-                        <th className="py-2 pr-4 text-right font-semibold">After</th>
-                        <th className="py-2 font-semibold">Note</th>
+                        <th className="py-2 pr-4 font-semibold">{t("srWhen")}</th>
+                        <th className="py-2 pr-4 font-semibold">{t("product")}</th>
+                        <th className="py-2 pr-4 font-semibold">{t("typeLabel")}</th>
+                        <th className="py-2 pr-4 text-right font-semibold">{t("srChange")}</th>
+                        <th className="py-2 pr-4 text-right font-semibold">{t("srAfter")}</th>
+                        <th className="py-2 font-semibold">{t("note")}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {sortedLogs.map((log) => (
                         <tr key={log.id} className="border-b border-muted-line/20">
                           <td className="py-2.5 pr-4 text-muted">
-                            {new Date(log.createdAt).toLocaleString("en-IN", {
+                            {new Date(log.createdAt).toLocaleString(intlLocaleFor(lang), {
                               day: "2-digit",
                               month: "short",
                               hour: "2-digit",
@@ -253,7 +254,7 @@ export function StockRegisterTool() {
                   <TextInput
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
-                    placeholder="e.g. New delivery, damage, audit"
+                    placeholder={t("srNotePlaceholder")}
                   />
                 </Field>
                 <PrimaryButton
@@ -261,7 +262,7 @@ export function StockRegisterTool() {
                   disabled={!canAdjust}
                   onClick={() => setConfirming(true)}
                 >
-                  Apply adjustment
+                  {t("srApply")}
                 </PrimaryButton>
                 {message ? (
                   <p className="text-sm font-medium text-emerald-600">Saved: {message}</p>
@@ -272,15 +273,15 @@ export function StockRegisterTool() {
 
           <ConfirmDialog
             open={confirming}
-            title="Change stock?"
+            title={t("srConfirmTitle")}
             message={
               selected
                 ? `${selected.name}: ${direction === "add" ? "add" : "remove"} ${qtyNum} ${
-                    selected.unit || "units"
+                    selected.unit || t("units")
                   }. This updates the shared workspace — the POS and every other Setu tool will see the new stock level.`
                 : ""
             }
-            confirmLabel="Yes, update stock"
+            confirmLabel={t("srConfirmLabel")}
             onConfirm={applyAdjustment}
             onCancel={() => setConfirming(false)}
           />
