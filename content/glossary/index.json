@@ -64,6 +64,70 @@
   ],
   "terms": [
     {
+      "slug": "menu-sync",
+      "term": "Menu Sync",
+      "category": "pos-tech",
+      "short": "Pushing one master menu out to every ordering channel at once instead of editing each platform by hand.",
+      "aliases": [
+        "menu synchronisation",
+        "menu push",
+        "menu publishing"
+      ]
+    },
+    {
+      "slug": "moving-average-cost",
+      "term": "Moving Average Cost",
+      "category": "retail-inventory",
+      "short": "An item's stock value recalculated as a blended average every time new stock is received at a different rate.",
+      "aliases": [
+        "moving average costing",
+        "rolling average cost"
+      ]
+    },
+    {
+      "slug": "order-aggregator",
+      "term": "Order Aggregator",
+      "category": "restaurant-ops",
+      "short": "A delivery marketplace that lists your restaurant, takes the customer order and charges a commission on it.",
+      "aliases": [
+        "food aggregator",
+        "delivery aggregator",
+        "aggregator platform"
+      ]
+    },
+    {
+      "slug": "rate-contract",
+      "term": "Rate Contract",
+      "category": "retail-inventory",
+      "short": "A written agreement fixing a supplier's rate for named items over a defined period.",
+      "aliases": [
+        "rate agreement",
+        "fixed-rate contract",
+        "price hold agreement"
+      ]
+    },
+    {
+      "slug": "scope-of-work",
+      "term": "Scope of Work",
+      "category": "accounting",
+      "short": "The written list of what a service provider will deliver, by when, and what sits outside the fee.",
+      "aliases": [
+        "statement of work",
+        "scope document"
+      ]
+    },
+    {
+      "slug": "three-way-match",
+      "term": "Three-Way Match",
+      "category": "accounting",
+      "short": "Checking a supplier invoice against the purchase order and the receiving record before you pay it.",
+      "aliases": [
+        "3-way match",
+        "three way matching",
+        "invoice matching"
+      ]
+    },
+    {
       "slug": "implementation-fee",
       "term": "Implementation Fee",
       "category": "pos-tech",
