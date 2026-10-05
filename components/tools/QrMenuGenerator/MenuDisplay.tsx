@@ -1,4 +1,5 @@
 import { Phone, MapPin } from "lucide-react";
+import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
 import { hasVariant, type QrMenuData, type DietTag } from "@/lib/qrmenu";
 
 // FSSAI-style diet markers: green square + dot for veg, red square + triangle
@@ -37,6 +38,10 @@ export function MenuDisplay({
   menu: QrMenuData;
   nameHeadingLevel?: "h1" | "h2";
 }) {
+  // The credit link is the one route this component writes itself. Both callers
+  // are client components, so the hook can read the language off the path and
+  // keep a reader on /hi/tools/qr-menu-generator out of the English page.
+  const href = useLocalizedHref();
   const accent = menu.accent || "#26306B";
   const categories = menu.categories.filter(
     (category) => category.name.trim() || category.items.some((item) => item.name.trim())
@@ -155,7 +160,7 @@ export function MenuDisplay({
       {/* Footer */}
       <div className="border-t border-muted-line/20 bg-cream-paper px-6 py-4 text-center">
         <a
-          href="/tools/qr-menu-generator"
+          href={href("/tools/qr-menu-generator")}
           className="text-xs text-muted underline-offset-2 hover:underline"
         >
           Free digital menu by Setu Technology

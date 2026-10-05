@@ -394,7 +394,146 @@
     },
     {
       "name": "Pembuat menu QR",
-      "shortDescription": "Buat kode QR menu digital — seluruh menu tersimpan di dalam QR, tanpa perlu hosting."
+      "shortDescription": "Buat kode QR menu digital — seluruh menu tersimpan di dalam QR, tanpa perlu hosting.",
+      "seo": {
+        "title": "Pembuat menu QR gratis untuk restoran",
+        "description": "Buat kode QR menu digital Anda dalam beberapa menit. Seluruh menu tersimpan di dalam kode QR — tanpa hosting, tanpa langganan, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat menu QR",
+          "kode QR menu digital",
+          "menu QR restoran",
+          "menu QR gratis",
+          "menu tanpa sentuh",
+          "pembuat kode QR menu",
+          "menu digital untuk restoran"
+        ],
+        "ogTitle": "Pembuat menu QR gratis untuk restoran",
+        "ogDescription": "Susun menu Anda, ambil kode QR, cetak. Seluruh menu ada di dalam kode QR — tanpa hosting atau langganan."
+      },
+      "hero": {
+        "headline": "Pembuat menu QR",
+        "subheadline": "Susun menu digital Anda dan dapatkan kode QR siap cetak. Seluruh menu tersimpan di dalam kode QR — tanpa hosting, tanpa langganan, tak ada yang kedaluwarsa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana menu QR bekerja tanpa hosting?",
+            "answer": "Seluruh menu Anda dipadatkan dan disimpan di dalam kode QR itu sendiri. Ketika pelanggan memindainya, ponselnya membuka halaman menu kami, yang membaca data menu dari tautan QR dan menampilkannya seketika. Tidak ada basis data, tidak ada akun, dan tidak ada yang kedaluwarsa."
+          },
+          {
+            "question": "Apakah pembuat menu QR benar-benar gratis?",
+            "answer": "Ya, sepenuhnya gratis tanpa pendaftaran, tanpa langganan, dan tanpa tanda air pada menu Anda. Karena menu ada di dalam kode QR, kami tidak punya biaya hosting yang perlu dibebankan kepada Anda."
+          },
+          {
+            "question": "Bagaimana cara memperbarui menu atau harga?",
+            "answer": "Kembalilah ke halaman ini — menu Anda tersimpan otomatis di peramban Anda. Ubah hidangan atau harganya, unduh kode QR yang baru, lalu gantikan yang sudah dicetak. Perlu diingat, kode QR cetak selalu menampilkan menu saat kode itu dibuat."
+          },
+          {
+            "question": "Berapa banyak item yang masuk dalam satu kode QR?",
+            "answer": "Satu kode QR memuat sekitar 2.900 karakter, dan kami memadatkan menu Anda agar terpakai sebaik mungkin. Biasanya itu cukup untuk 60–100 item, tergantung panjang deskripsi Anda. Meter kapasitas menunjukkan berapa ruang yang tersisa, dan untuk menu yang sangat besar Anda bisa membuat kode QR terpisah untuk makanan dan minuman."
+          },
+          {
+            "question": "Bisakah saya punya kode QR yang tidak berubah saat menu diperbarui?",
+            "answer": "Bisa — justru untuk itulah menu QR premium ada. Menu Anda disimpan daring dan kode QR hanya memuat satu tautan permanen yang pendek, jadi memindainya selalu menampilkan menu terbaru Anda. Ubah harga, tandai sebuah hidangan habis, atau pasang menu musiman, dan kode QR cetak tetap bekerja, sehingga Anda tak perlu mencetak ulang penanda meja. Ini juga menghapus batas ukuran serta menambahkan foto, penanda habis, dan hitungan pindaian harian. Alat gratis di halaman ini menyimpan seluruh menu di dalam kode QR itu sendiri, itulah sebabnya kode QR baru dibuat setiap kali menu berubah."
+          },
+          {
+            "question": "Bisakah saya mengimpor menu dari Excel atau CSV?",
+            "answer": "Bisa. Unggah berkas Excel (.xlsx, .xls) atau CSV dengan kolom Kategori, Nama item, Harga, Deskripsi, dan Jenis (vegetarian/non-vegetarian), lalu seluruh menu Anda terisi sekaligus. Anda juga bisa mengekspor menu saat ini ke Excel, mengubah harga di sana, dan mengimpornya kembali — tanpa mengetik ulang."
+          },
+          {
+            "question": "Apakah data menu saya diunggah ke server?",
+            "answer": "Tidak. Kode QR dibuat sepenuhnya di peramban Anda, dan menu Anda hanya disimpan di penyimpanan lokal peramban. Data menu Anda tidak pernah menyentuh server kami."
+          },
+          {
+            "question": "Apakah pelanggan perlu memasang aplikasi?",
+            "answer": "Tidak perlu aplikasi. Kamera ponsel apa pun atau pemindai QR membuka menu langsung di peramban. Halaman menunya ringan dan cepat dimuat bahkan pada koneksi lambat."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat menu QR Setu?",
+          "items": [
+            {
+              "title": "Menu ada di dalam QR",
+              "text": "Seluruh menu Anda dipadatkan ke dalam kode QR itu sendiri. Tanpa basis data, tanpa biaya hosting, tanpa tautan yang berhenti bekerja."
+            },
+            {
+              "title": "Gratis selamanya",
+              "text": "Tanpa pendaftaran, tanpa langganan, tanpa biaya per pindaian. Buat dan cetak ulang sebanyak apa pun kode QR menu yang Anda perlukan."
+            },
+            {
+              "title": "Dibuat untuk menu India",
+              "text": "Penanda vegetarian dan non-vegetarian, harga dalam ₹, serta kategori seperti pembuka, hidangan utama, dan minuman — siap sejak awal."
+            },
+            {
+              "title": "Warna merek Anda",
+              "text": "Pilih warna tema yang cocok dengan restoran Anda. Halaman menu yang dipindai memakainya untuk judul dan penonjolan."
+            },
+            {
+              "title": "Privat sejak rancangannya",
+              "text": "Semuanya terjadi di peramban Anda. Menu Anda disimpan lokal di perangkat Anda dan tidak pernah diunggah ke server kami."
+            },
+            {
+              "title": "Tanpa aplikasi bagi pelanggan",
+              "text": "Pelanggan memindai dengan kamera ponsel dan menu terbuka di peramban — cepat, ringan, dan mengutamakan ponsel."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "steps": [
+            "Masukkan nama restoran Anda dan pilih warna tema",
+            "Tambahkan kategori dan hidangan beserta harga, deskripsi, serta label vegetarian/non-vegetarian",
+            "Menu Anda dipadatkan dan dikemas ke dalam kode QR secara otomatis",
+            "Unduh kode QR siap cetak dan tempatkan di meja, konter, atau pintu",
+            "Pelanggan memindainya dan menu lengkap terbuka seketika — tanpa aplikasi"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Di mana saya bisa memakai menu QR?",
+          "items": [
+            "Penanda meja dan stiker di restoran atau kafe Anda",
+            "Kemasan dapur awan dan kantong pengantaran",
+            "Gerai makanan, truk makanan, dan konter sementara",
+            "Bagikan tautan menu langsung di WhatsApp atau Instagram",
+            "Kartu layanan kamar hotel dan menu jamuan"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Perlu kode QR yang tidak pernah berubah?",
+          "intro": "Karena alat gratis ini menyimpan seluruh menu Anda di dalam kode QR, kode baru dibuat setiap kali Anda menyunting menu — dan menu harus muat dalam sekitar 2.900 karakter. Kalau Anda lebih suka mencetak kode QR sekali dan tidak menyentuhnya lagi, menu QR premium menyimpan menu Anda daring dan hanya menaruh satu tautan permanen yang pendek di dalam kode.",
+          "items": [
+            "Kode QR yang sama tetap sah setelah setiap perubahan harga atau hidangan",
+            "Tanpa batas ukuran — tambahkan sebanyak apa pun kategori dan hidangan yang Anda perlukan",
+            "Foto hidangan, penanda habis, dan beberapa menu yang bisa Anda pertukarkan",
+            "Lihat berapa orang yang membuka menu Anda setiap hari"
+          ],
+          "cta": {
+            "label": "Coba menu QR premium"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat alat usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Pembuat QR UPI dinamis"
+            },
+            {
+              "label": "Pembuat faktur"
+            },
+            {
+              "label": "Kalkulator persentase biaya bahan makanan"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Pembuat penawaran",

@@ -394,7 +394,146 @@
     },
     {
       "name": "QR-Speisekarten-Generator",
-      "shortDescription": "QR-Code für eine digitale Speisekarte — die ganze Karte steckt im Code, kein Hosting nötig."
+      "shortDescription": "QR-Code für eine digitale Speisekarte — die ganze Karte steckt im Code, kein Hosting nötig.",
+      "seo": {
+        "title": "Kostenloser QR-Speisekarten-Generator für Lokale",
+        "description": "Erstellen Sie den QR-Code Ihrer digitalen Speisekarte in Minuten. Die ganze Karte steckt im QR-Code: kein Hosting, kein Abo, keine Anmeldung.",
+        "keywords": [
+          "QR-Speisekarten-Generator",
+          "digitale Speisekarte QR-Code",
+          "QR-Speisekarte für Restaurants",
+          "kostenlose QR-Speisekarte",
+          "kontaktlose Speisekarte",
+          "Speisekarten-QR-Code erstellen",
+          "digitale Speisekarte für Restaurants"
+        ],
+        "ogTitle": "Kostenloser QR-Speisekarten-Generator für Lokale",
+        "ogDescription": "Karte zusammenstellen, QR-Code holen, ausdrucken. Die ganze Karte steckt im QR-Code — Hosting und Abo entfallen."
+      },
+      "hero": {
+        "headline": "QR-Speisekarten-Generator",
+        "subheadline": "Stellen Sie Ihre digitale Speisekarte zusammen und erhalten Sie einen druckfertigen QR-Code. Die ganze Karte steckt im QR-Code: kein Hosting, kein Abo, nichts, was abläuft."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktioniert die QR-Speisekarte ohne Hosting?",
+            "answer": "Ihre ganze Karte wird komprimiert und im QR-Code selbst gespeichert. Scannt ein Gast ihn, öffnet sein Telefon unsere Kartenseite, die die Daten aus dem QR-Link liest und sofort anzeigt. Es gibt keine Datenbank, kein Konto und nichts, was abläuft."
+          },
+          {
+            "question": "Ist der QR-Speisekarten-Generator wirklich kostenlos?",
+            "answer": "Ja, vollständig kostenlos, ohne Anmeldung, ohne Abo und ohne Wasserzeichen auf Ihrer Karte. Da die Karte im QR-Code selbst steckt, haben wir keine Hosting-Kosten, die wir an Sie weitergeben müssten."
+          },
+          {
+            "question": "Wie aktualisiere ich meine Karte oder die Preise?",
+            "answer": "Kommen Sie auf diese Seite zurück — Ihre Karte wird automatisch in Ihrem Browser gespeichert. Ändern Sie Gerichte oder Preise, laden Sie den neuen QR-Code herunter und ersetzen Sie den gedruckten. Beachten Sie: Ein gedruckter QR-Code zeigt immer die Karte, mit der er erzeugt wurde."
+          },
+          {
+            "question": "Wie viele Gerichte passen in einen QR-Code?",
+            "answer": "Ein QR-Code fasst etwa 2.900 Zeichen, und wir komprimieren Ihre Karte, um sie bestmöglich zu nutzen. Üblicherweise passen 60–100 Gerichte hinein, je nachdem, wie lang Ihre Beschreibungen sind. Die Kapazitätsanzeige zeigt, wie viel Platz bleibt; für sehr große Karten können Sie getrennte QR-Codes für Speisen und Getränke anlegen."
+          },
+          {
+            "question": "Bekomme ich einen QR-Code, der sich beim Aktualisieren nicht ändert?",
+            "answer": "Ja — dafür gibt es die Premium-QR-Speisekarte. Ihre Karte liegt online und der QR-Code enthält nur einen kurzen dauerhaften Link, sodass das Scannen immer Ihre aktuellste Karte zeigt. Ändern Sie einen Preis, markieren Sie ein Gericht als ausverkauft oder hängen Sie eine Saisonkarte ein — der gedruckte QR-Code funktioniert weiter, Sie drucken Ihre Tischaufsteller also nie neu. Außerdem fällt die Größenbeschränkung weg, und Fotos, Ausverkauft-Schalter und tägliche Scan-Zahlen kommen hinzu. Das kostenlose Werkzeug auf dieser Seite speichert die ganze Karte im QR-Code selbst, weshalb bei jeder Änderung ein neuer QR-Code entsteht."
+          },
+          {
+            "question": "Kann ich meine Karte aus Excel oder CSV importieren?",
+            "answer": "Ja. Laden Sie eine Excel- (.xlsx, .xls) oder CSV-Datei mit Spalten für Kategorie, Name des Gerichts, Preis, Beschreibung und Art (vegetarisch/nicht vegetarisch) hoch, und Ihre ganze Karte wird in einem Zug gefüllt. Sie können Ihre aktuelle Karte auch nach Excel exportieren, dort die Preise ändern und sie wieder importieren — ohne Abtippen."
+          },
+          {
+            "question": "Werden meine Kartendaten auf einen Server geladen?",
+            "answer": "Nein. Der QR-Code entsteht vollständig in Ihrem Browser, und Ihre Karte wird nur im lokalen Speicher des Browsers gesichert. Ihre Kartendaten berühren unsere Server nie."
+          },
+          {
+            "question": "Müssen Gäste eine App installieren?",
+            "answer": "Keine App nötig. Jede Telefonkamera oder ein QR-Scanner öffnet die Karte direkt im Browser. Die Kartenseite ist leichtgewichtig und lädt auch bei langsamer Verbindung schnell."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den QR-Speisekarten-Generator von Setu nutzen?",
+          "items": [
+            {
+              "title": "Die Karte steckt im QR-Code",
+              "text": "Ihre ganze Karte wird in den QR-Code selbst komprimiert. Keine Datenbank, keine Hosting-Gebühren, kein Link, der irgendwann nicht mehr funktioniert."
+            },
+            {
+              "title": "Für immer kostenlos",
+              "text": "Keine Anmeldung, kein Abo, keine Gebühr pro Scan. Erzeugen und drucken Sie so viele Speisekarten-QR-Codes, wie Sie brauchen."
+            },
+            {
+              "title": "Für indische Karten gebaut",
+              "text": "Kennzeichnung vegetarisch und nicht vegetarisch, Preise in ₹ und Kategorien wie Vorspeisen, Hauptgerichte und Getränke — von Anfang an fertig."
+            },
+            {
+              "title": "Ihre Markenfarbe",
+              "text": "Wählen Sie eine Themenfarbe, die zu Ihrem Lokal passt. Die gescannte Kartenseite verwendet sie für Überschriften und Hervorhebungen."
+            },
+            {
+              "title": "Von Grund auf privat",
+              "text": "Alles passiert in Ihrem Browser. Ihre Karte wird lokal auf Ihrem Gerät gespeichert und nie auf unsere Server geladen."
+            },
+            {
+              "title": "Keine App für die Gäste",
+              "text": "Gäste scannen mit der Telefonkamera und die Karte öffnet sich im Browser — schnell, leicht und für das Mobiltelefon gedacht."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "steps": [
+            "Geben Sie den Namen Ihres Lokals ein und wählen Sie eine Themenfarbe",
+            "Fügen Sie Kategorien und Gerichte mit Preisen, Beschreibungen und vegetarisch/nicht vegetarisch hinzu",
+            "Ihre Karte wird automatisch komprimiert und in den QR-Code gepackt",
+            "Laden Sie den druckfertigen QR-Code herunter und bringen Sie ihn an Tischen, am Tresen oder an der Tür an",
+            "Gäste scannen ihn und die vollständige Karte öffnet sich sofort — ohne App"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Wo kann ich eine QR-Speisekarte einsetzen?",
+          "items": [
+            "Tischaufsteller und Aufkleber in Ihrem Lokal oder Café",
+            "Verpackungen der Lieferküche und Liefertüten",
+            "Imbissstände, Foodtrucks und Pop-up-Theken",
+            "Teilen Sie den Kartenlink direkt über WhatsApp oder Instagram",
+            "Zimmerservice-Karten im Hotel und Bankettkarten"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Brauchen Sie einen QR-Code, der sich nie ändert?",
+          "intro": "Weil dieses kostenlose Werkzeug Ihre ganze Karte im QR-Code speichert, entsteht bei jeder Bearbeitung ein neuer Code — und die Karte muss in etwa 2.900 Zeichen passen. Wenn Sie einen QR-Code lieber einmal drucken und nie wieder anfassen möchten, hält die Premium-QR-Speisekarte Ihre Karte online und legt nur einen kurzen dauerhaften Link in den Code.",
+          "items": [
+            "Derselbe QR-Code bleibt nach jeder Preis- oder Gerichtsänderung gültig",
+            "Keine Größenbeschränkung — fügen Sie so viele Kategorien und Gerichte hinzu, wie Sie brauchen",
+            "Fotos der Gerichte, Ausverkauft-Schalter und mehrere Karten zum Umschalten",
+            "Sehen Sie, wie viele Menschen Ihre Karte an jedem Tag geöffnet haben"
+          ],
+          "cta": {
+            "label": "Die Premium-QR-Speisekarte ansehen"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Werkzeuge",
+          "intro": "Sehen Sie sich unsere weiteren Werkzeuge für Betriebe an:",
+          "links": [
+            {
+              "label": "Dynamischer UPI-QR-Generator"
+            },
+            {
+              "label": "Rechnungsgenerator"
+            },
+            {
+              "label": "Wareneinsatz-Rechner"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Angebotsgenerator",

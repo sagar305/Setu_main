@@ -394,7 +394,146 @@
     },
     {
       "name": "Gerador de cardápio QR",
-      "shortDescription": "Crie um QR code de cardápio digital — o cardápio inteiro fica dentro do QR, sem hospedagem."
+      "shortDescription": "Crie um QR code de cardápio digital — o cardápio inteiro fica dentro do QR, sem hospedagem.",
+      "seo": {
+        "title": "Gerador de cardápio QR grátis para restaurantes",
+        "description": "Crie o código QR do seu cardápio digital em minutos. O cardápio inteiro fica dentro do QR: sem hospedagem, sem assinatura, sem cadastro. Imprima e pronto.",
+        "keywords": [
+          "gerador de cardápio QR",
+          "código QR de cardápio digital",
+          "cardápio QR para restaurante",
+          "cardápio QR grátis",
+          "cardápio sem contato",
+          "criador de código QR de cardápio",
+          "cardápio digital para restaurantes"
+        ],
+        "ogTitle": "Gerador de cardápio QR grátis para restaurantes",
+        "ogDescription": "Monte seu cardápio, pegue o código QR e imprima. O cardápio inteiro vive dentro do QR: não precisa de hospedagem nem assinatura."
+      },
+      "hero": {
+        "headline": "Gerador de cardápio QR",
+        "subheadline": "Monte seu cardápio digital e receba um código QR pronto para imprimir. O cardápio inteiro fica dentro do QR: sem hospedagem, sem assinatura, nada que expire."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como o cardápio QR funciona sem hospedagem?",
+            "answer": "Seu cardápio inteiro é comprimido e guardado dentro do próprio código QR. Quando o cliente escaneia, o celular dele abre a nossa página de cardápio, que lê os dados do link do QR e mostra na hora. Não há banco de dados, não há conta e não há nada que expire."
+          },
+          {
+            "question": "O gerador de cardápio QR é realmente grátis?",
+            "answer": "Sim, totalmente grátis, sem cadastro, sem assinatura e sem marca d'água no seu cardápio. Como o cardápio vive dentro do código QR, não temos custos de hospedagem para repassar a você."
+          },
+          {
+            "question": "Como atualizo o cardápio ou os preços?",
+            "answer": "Volte a esta página: seu cardápio fica salvo automaticamente no seu navegador. Mude os pratos ou os preços, baixe o novo código QR e substitua o impresso. Lembre-se de que um código QR impresso mostra sempre o cardápio com que foi gerado."
+          },
+          {
+            "question": "Quantos itens cabem em um código QR?",
+            "answer": "Um código QR guarda cerca de 2.900 caracteres, e comprimimos seu cardápio para aproveitar ao máximo. Normalmente cabem de 60 a 100 itens, dependendo do tamanho das suas descrições. O medidor de capacidade mostra quanto espaço resta, e para cardápios muito grandes você pode criar códigos QR separados para comidas e bebidas."
+          },
+          {
+            "question": "Posso ter um código QR que não muda quando eu atualizo o cardápio?",
+            "answer": "Sim — é para isso que serve o cardápio QR premium. Seu cardápio fica guardado online e o código QR carrega apenas um link permanente curto, então escaneá-lo sempre mostra o seu cardápio mais recente. Mude um preço, marque um prato como esgotado ou coloque um cardápio de estação e o código QR impresso continua funcionando, de modo que você nunca reimprime os displays de mesa. Ele também tira o limite de tamanho e acrescenta fotos, botões de esgotado e a contagem diária de leituras. A ferramenta grátis desta página guarda o cardápio inteiro dentro do próprio código QR, e é por isso que um novo QR é gerado sempre que o cardápio muda."
+          },
+          {
+            "question": "Posso importar meu cardápio do Excel ou CSV?",
+            "answer": "Sim. Envie um arquivo Excel (.xlsx, .xls) ou CSV com colunas de Categoria, Nome do item, Preço, Descrição e Tipo (veg/não veg) e seu cardápio inteiro é preenchido de uma vez. Você também pode exportar o cardápio atual para o Excel, mudar os preços lá e importar de novo — sem redigitar nada."
+          },
+          {
+            "question": "Os dados do meu cardápio são enviados para um servidor?",
+            "answer": "Não. O código QR é gerado inteiramente no seu navegador, e seu cardápio fica salvo apenas no armazenamento local dele. Os dados do seu cardápio nunca tocam os nossos servidores."
+          },
+          {
+            "question": "Os clientes precisam instalar um aplicativo?",
+            "answer": "Nenhum aplicativo. A câmera de qualquer celular ou um leitor de QR abre o cardápio direto no navegador. A página do cardápio é leve e carrega rápido mesmo em conexões lentas."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Por que usar o gerador de cardápio QR da Setu?",
+          "items": [
+            {
+              "title": "O cardápio mora no QR",
+              "text": "Seu cardápio inteiro é comprimido dentro do próprio código QR. Sem banco de dados, sem taxa de hospedagem, sem link que para de funcionar."
+            },
+            {
+              "title": "Grátis para sempre",
+              "text": "Sem cadastro, sem assinatura, sem cobrança por leitura. Gere e reimprima quantos códigos QR de cardápio precisar."
+            },
+            {
+              "title": "Feito para cardápios indianos",
+              "text": "Marcas veg e não veg, preços em ₹ e categorias como entradas, pratos principais e bebidas — prontas desde o início."
+            },
+            {
+              "title": "A cor da sua marca",
+              "text": "Escolha uma cor de tema que combine com o seu restaurante. A página do cardápio escaneado usa essa cor nos títulos e nos destaques."
+            },
+            {
+              "title": "Privado por natureza",
+              "text": "Tudo acontece no seu navegador. Seu cardápio fica salvo localmente no seu aparelho e nunca é enviado aos nossos servidores."
+            },
+            {
+              "title": "Sem aplicativo para o cliente",
+              "text": "Os clientes escaneiam com a câmera do celular e o cardápio abre no navegador — rápido, leve e pensado para o celular."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como funciona?",
+          "steps": [
+            "Informe o nome do seu restaurante e escolha uma cor de tema",
+            "Acrescente categorias e pratos com preços, descrições e marcas veg/não veg",
+            "Seu cardápio é comprimido e empacotado no código QR automaticamente",
+            "Baixe o código QR pronto para imprimir e coloque nas mesas, no balcão ou na porta",
+            "Os clientes escaneiam e o cardápio completo abre na hora — sem nenhum aplicativo"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Onde posso usar um cardápio QR?",
+          "items": [
+            "Displays de mesa e adesivos no seu restaurante ou café",
+            "Embalagens de cozinha fantasma e sacolas de entrega",
+            "Barracas de comida, food trucks e balcões temporários",
+            "Compartilhe o link do cardápio direto no WhatsApp ou no Instagram",
+            "Cartões de serviço de quarto e cardápios de banquete"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Precisa de um código QR que nunca mude?",
+          "intro": "Como esta ferramenta grátis guarda o cardápio inteiro dentro do código QR, um código novo é gerado toda vez que você edita o cardápio — e o cardápio precisa caber em cerca de 2.900 caracteres. Se preferir imprimir um código QR uma vez e nunca mais mexer nele, o cardápio QR premium mantém o seu cardápio online e coloca no código apenas um link permanente curto.",
+          "items": [
+            "O mesmo código QR continua válido depois de cada mudança de preço ou de prato",
+            "Sem limite de tamanho — acrescente quantas categorias e pratos precisar",
+            "Fotos dos pratos, botões de esgotado e vários cardápios para alternar",
+            "Veja quantas pessoas abriram o seu cardápio cada dia"
+          ],
+          "cta": {
+            "label": "Conheça o cardápio QR premium"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "intro": "Veja as nossas outras ferramentas para negócios:",
+          "links": [
+            {
+              "label": "Gerador de QR UPI dinâmico"
+            },
+            {
+              "label": "Gerador de faturas"
+            },
+            {
+              "label": "Calculadora de percentual de custo de alimentos"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Gerador de orçamentos",

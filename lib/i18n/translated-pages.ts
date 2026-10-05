@@ -61,7 +61,7 @@ export const TRANSLATED_ITEMS: Record<"calculators" | "tools", Record<string, La
     "invoice-generator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "upi-qr-generator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "upi-qr-split": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
-    "qr-menu-generator": [],
+    "qr-menu-generator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "quotation-generator": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "business-profile": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],
     "receipt-designer": ["hi", "bn", "ta", "te", "mr", "gu", "kn", "ml", "pa", "es", "fr", "ar", "pt", "id", "de", "zh"],

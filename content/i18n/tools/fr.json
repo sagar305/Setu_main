@@ -394,7 +394,146 @@
     },
     {
       "name": "Générateur de carte QR",
-      "shortDescription": "Créez un QR code de carte : la carte entière tient dans le QR, sans hébergement."
+      "shortDescription": "Créez un QR code de carte : la carte entière tient dans le QR, sans hébergement.",
+      "seo": {
+        "title": "Générateur de carte QR gratuit pour restaurants",
+        "description": "Créez le QR code de votre carte numérique en quelques minutes. Toute la carte tient dans le QR : sans hébergement, sans abonnement, sans inscription.",
+        "keywords": [
+          "générateur de carte QR",
+          "QR code de carte numérique",
+          "carte QR pour restaurant",
+          "carte QR gratuite",
+          "carte sans contact",
+          "créateur de QR code de carte",
+          "carte numérique pour restaurants"
+        ],
+        "ogTitle": "Générateur de carte QR gratuit pour restaurants",
+        "ogDescription": "Composez votre carte, obtenez un QR code, imprimez-le. Toute la carte vit dans le QR : ni hébergement ni abonnement."
+      },
+      "hero": {
+        "headline": "Générateur de carte QR",
+        "subheadline": "Composez votre carte numérique et obtenez un QR code prêt à imprimer. Toute la carte tient dans le QR : sans hébergement, sans abonnement, rien qui expire."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Comment la carte QR fonctionne-t-elle sans hébergement ?",
+            "answer": "Toute votre carte est compressée et stockée dans le QR code lui-même. Quand un client le scanne, son téléphone ouvre notre page de carte, qui lit les données depuis le lien du QR et les affiche aussitôt. Pas de base de données, pas de compte, rien qui expire."
+          },
+          {
+            "question": "Le générateur de carte QR est-il vraiment gratuit ?",
+            "answer": "Oui, entièrement gratuit, sans inscription, sans abonnement et sans filigrane sur votre carte. Comme la carte vit dans le QR code, nous n'avons aucun coût d'hébergement à vous répercuter."
+          },
+          {
+            "question": "Comment mettre à jour ma carte ou mes prix ?",
+            "answer": "Revenez sur cette page : votre carte est enregistrée automatiquement dans votre navigateur. Modifiez les plats ou les prix, téléchargez le nouveau QR code et remplacez celui qui est imprimé. Notez qu'un QR code imprimé affiche toujours la carte avec laquelle il a été généré."
+          },
+          {
+            "question": "Combien de plats tiennent dans un QR code ?",
+            "answer": "Un QR code contient environ 2 900 caractères, et nous compressons votre carte pour en tirer le maximum. Cela représente en général 60 à 100 plats, selon la longueur de vos descriptions. La jauge de capacité indique la place restante, et pour les très grandes cartes vous pouvez créer des QR codes distincts pour les plats et les boissons."
+          },
+          {
+            "question": "Puis-je avoir un QR code qui ne change pas quand je modifie ma carte ?",
+            "answer": "Oui, c'est à cela que sert la carte QR premium. Votre carte est stockée en ligne et le QR code ne contient qu'un court lien permanent : le scanner affiche donc toujours votre carte la plus récente. Changez un prix, signalez un plat épuisé ou passez à une carte de saison, le QR code imprimé continue de fonctionner, si bien que vous ne réimprimez plus vos chevalets de table. Elle supprime aussi la limite de taille et ajoute des photos, des bascules « épuisé » et le nombre de scans par jour. L'outil gratuit de cette page stocke toute la carte dans le QR code lui-même, et c'est pourquoi un nouveau QR est généré à chaque modification."
+          },
+          {
+            "question": "Puis-je importer ma carte depuis Excel ou CSV ?",
+            "answer": "Oui. Chargez un fichier Excel (.xlsx, .xls) ou CSV avec des colonnes Catégorie, Nom du plat, Prix, Description et Type (végé/non végé), et toute votre carte se remplit d'un coup. Vous pouvez aussi exporter votre carte actuelle vers Excel, y modifier les prix et la réimporter : pas de ressaisie."
+          },
+          {
+            "question": "Les données de ma carte sont-elles envoyées sur un serveur ?",
+            "answer": "Non. Le QR code est généré entièrement dans votre navigateur, et votre carte n'est enregistrée que dans le stockage local de celui-ci. Les données de votre carte ne touchent jamais nos serveurs."
+          },
+          {
+            "question": "Les clients doivent-ils installer une application ?",
+            "answer": "Aucune application. L'appareil photo de n'importe quel téléphone ou un lecteur de QR ouvre la carte directement dans le navigateur. La page de la carte est légère et s'affiche vite, même sur une connexion lente."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Pourquoi utiliser le générateur de carte QR de Setu ?",
+          "items": [
+            {
+              "title": "La carte vit dans le QR",
+              "text": "Toute votre carte est compressée dans le QR code lui-même. Pas de base de données, pas de frais d'hébergement, pas de lien qui cesse de fonctionner."
+            },
+            {
+              "title": "Gratuit pour toujours",
+              "text": "Sans inscription, sans abonnement, sans frais par scan. Générez et réimprimez autant de QR codes de carte qu'il vous en faut."
+            },
+            {
+              "title": "Conçu pour les cartes indiennes",
+              "text": "Repères végé et non végé, prix en ₹ et catégories comme entrées, plats et boissons : prêtes dès le départ."
+            },
+            {
+              "title": "La couleur de votre marque",
+              "text": "Choisissez une couleur de thème accordée à votre restaurant. La page de carte scannée l'utilise pour les en-têtes et les mises en avant."
+            },
+            {
+              "title": "Privé par conception",
+              "text": "Tout se passe dans votre navigateur. Votre carte est enregistrée localement sur votre appareil et n'est jamais envoyée sur nos serveurs."
+            },
+            {
+              "title": "Aucune application pour les clients",
+              "text": "Les clients scannent avec l'appareil photo de leur téléphone et la carte s'ouvre dans le navigateur : rapide, légère et pensée pour le mobile."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Comment cela fonctionne-t-il ?",
+          "steps": [
+            "Saisissez le nom de votre restaurant et choisissez une couleur de thème",
+            "Ajoutez des catégories et des plats avec prix, descriptions et étiquettes végé/non végé",
+            "Votre carte est compressée et empaquetée dans le QR code automatiquement",
+            "Téléchargez le QR code prêt à imprimer et placez-le sur les tables, le comptoir ou la porte",
+            "Les clients le scannent et la carte complète s'ouvre aussitôt, sans aucune application"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Où puis-je utiliser une carte QR ?",
+          "items": [
+            "Chevalets de table et autocollants dans votre restaurant ou café",
+            "Emballages de cuisine fantôme et sacs de livraison",
+            "Stands de restauration, food trucks et comptoirs éphémères",
+            "Partagez le lien de la carte directement sur WhatsApp ou Instagram",
+            "Cartes de service en chambre et cartes de banquet"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Il vous faut un QR code qui ne change jamais ?",
+          "intro": "Comme cet outil gratuit stocke toute votre carte dans le QR code, un nouveau code est généré à chaque modification, et la carte doit tenir dans environ 2 900 caractères. Si vous préférez imprimer un QR code une fois et ne plus y toucher, la carte QR premium garde votre carte en ligne et ne place qu'un court lien permanent dans le code.",
+          "items": [
+            "Le même QR code reste valable après chaque changement de prix ou de plat",
+            "Aucune limite de taille : ajoutez autant de catégories et de plats qu'il vous en faut",
+            "Photos des plats, bascules « épuisé » et plusieurs cartes entre lesquelles basculer",
+            "Voyez combien de personnes ont ouvert votre carte chaque jour"
+          ],
+          "cta": {
+            "label": "Essayez la carte QR premium"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Outils associés",
+          "intro": "Découvrez nos autres outils pour les entreprises :",
+          "links": [
+            {
+              "label": "Générateur de QR de paiement"
+            },
+            {
+              "label": "Générateur de factures"
+            },
+            {
+              "label": "Calculateur de ratio de coût matière"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Générateur de devis",
