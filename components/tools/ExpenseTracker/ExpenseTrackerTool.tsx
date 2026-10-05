@@ -19,12 +19,34 @@ import { EXPENSE_CATEGORIES } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { DictKey } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
+
+/**
+ * Dictionary key per expense category.
+ *
+ * The category is stored as its English string, because it is persisted data
+ * that older records already carry — translating the stored value would orphan
+ * every expense saved before this. So the English value stays the identity and
+ * is mapped to a key only for display.
+ */
+const CATEGORY_KEYS: Record<string, DictKey> = {
+  Rent: "expCatRent",
+  Salaries: "expCatSalaries",
+  Electricity: "expCatElectricity",
+  Purchases: "expCatPurchases",
+  Transport: "expCatTransport",
+  Marketing: "expCatMarketing",
+  Maintenance: "expCatMaintenance",
+  Other: "expCatOther",
+};
 const monthOf = (isoDate: string) => isoDate.slice(0, 7);
 
 export function ExpenseTrackerTool() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { items: expenses, loading, error, save, remove } = useEntityList<Expense>("expenses");
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [currency, setCurrency] = useState("INR");
@@ -45,6 +67,10 @@ export function ExpenseTrackerTool() {
       .then((b) => b && setCurrency(b.currency))
       .catch(() => {});
   }, []);
+
+  // An unknown category — one stored before a rename — falls back to its own
+  // stored text rather than rendering blank.
+  const categoryLabel = (c: string) => (CATEGORY_KEYS[c] ? t(CATEGORY_KEYS[c]) : c);
 
   const amountNum = Number(amount);
   const canAdd = Number.isFinite(amountNum) && amountNum > 0 && date;
@@ -107,7 +133,10 @@ export function ExpenseTrackerTool() {
     );
 
   const monthLabel = (m: string) =>
-    new Date(`${m}-01T00:00:00`).toLocaleDateString("en-IN", { month: "long", year: "numeric" });
+    new Date(`${m}-01T00:00:00`).toLocaleDateString(intlLocaleFor(lang), {
+      month: "long",
+      year: "numeric",
+    });
 
   return (
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
@@ -120,7 +149,9 @@ export function ExpenseTrackerTool() {
           <Field label={t("category")}>
             <Select value={category} onChange={(e) => setCategory(e.target.value)}>
               {EXPENSE_CATEGORIES.map((c) => (
-                <option key={c}>{c}</option>
+                <option key={c} value={c}>
+                  {categoryLabel(c)}
+                </option>
               ))}
             </Select>
           </Field>
@@ -137,7 +168,7 @@ export function ExpenseTrackerTool() {
             <TextInput
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="e.g. Shop rent for July"
+              placeholder={t("etDescPlaceholder")}
             />
           </Field>
           <Field label={t("paymentMode")}>
@@ -195,7 +226,7 @@ export function ExpenseTrackerTool() {
                   key={cat}
                   className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-ink"
                 >
-                  {cat}: {formatMoney(total, currency)}
+                  {categoryLabel(cat)}: {formatMoney(total, currency)}
                 </span>
               ))}
             </div>
@@ -207,7 +238,7 @@ export function ExpenseTrackerTool() {
           ) : inMonth.length === 0 ? (
             <EmptyState
               title={t("noEntries")}
-              subtitle="Record rent, salaries, purchases and bills — the Profit Dashboard uses them to show your real profit."
+              subtitle={t("etEmptyHint")}
             />
           ) : (
             <div className="overflow-x-auto">
@@ -225,7 +256,7 @@ export function ExpenseTrackerTool() {
                   {inMonth.map((e) => (
                     <tr key={e.id} className="border-b border-muted-line/20">
                       <td className="py-2.5 pr-4 text-muted">{e.date.slice(8)}</td>
-                      <td className="py-2.5 pr-4 font-medium text-ink">{e.category}</td>
+                      <td className="py-2.5 pr-4 font-medium text-ink">{categoryLabel(e.category)}</td>
                       <td className="py-2.5 pr-4 text-muted">{e.description || "—"}</td>
                       <td className="py-2.5 pr-4 text-right font-semibold text-ink">
                         {formatMoney(e.amount, currency)}
@@ -250,13 +281,16 @@ export function ExpenseTrackerTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete expense?"
+        title={t("etDeleteTitle")}
         message={
           deleting
-            ? `Delete the ${formatMoney(deleting.amount, currency)} ${deleting.category} expense from ${deleting.date}?`
+            ? fill(t("etDeleteMessage"), {
+                amount: formatMoney(deleting.amount, currency),
+                date: deleting.date,
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);

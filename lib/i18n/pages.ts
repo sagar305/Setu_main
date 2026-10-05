@@ -255,3 +255,21 @@ const OG_TERRITORY: Record<LanguageCode, string> = {
 export function ogLocaleFor(code: LanguageCode): string {
   return `${code}_${OG_TERRITORY[code]}`;
 }
+
+/**
+ * The BCP-47 tag to hand Intl for this language.
+ *
+ * Dates and times across the tools were formatted with a hardcoded "en-IN", so
+ * a reader on a Hindi page got English month names and English weekdays in the
+ * middle of it. The territory comes from the same table as the OpenGraph locale
+ * rather than a second list that could drift from it.
+ *
+ * Every tag asks for Latin digits. Several of these locales default to their own
+ * numerals — Bengali renders ৩, Marathi ३, Arabic ٣ — while formatMoney renders
+ * every amount in Latin numerals, so without this a date sits beside a price in
+ * two different numbering systems on the same line. The month and weekday names
+ * are still the language's own, which is the part a reader needs translated.
+ */
+export function intlLocaleFor(code: LanguageCode): string {
+  return `${code}-${OG_TERRITORY[code]}-u-nu-latn`;
+}

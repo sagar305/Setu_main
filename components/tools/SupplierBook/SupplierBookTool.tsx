@@ -16,6 +16,7 @@ import type { Supplier } from "@/lib/toolkit/types";
 import { generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 const BLANK = { name: "", phone: "", email: "", gstin: "", address: "", notes: "" };
 
@@ -136,15 +137,15 @@ export function SupplierBookTool() {
         </h2>
         <div className="space-y-4">
           <Field label={`${t("name")} *`}>
-            <TextInput value={form.name} onChange={set("name")} placeholder="Supplier name" />
+            <TextInput value={form.name} onChange={set("name")} placeholder={t("sbNamePlaceholder")} />
           </Field>
           <Field label={t("phone")}>
             <TextInput value={form.phone} onChange={set("phone")} placeholder="98765 43210" />
           </Field>
-          <Field label="Email">
+          <Field label={t("email")}>
             <TextInput value={form.email} onChange={set("email")} placeholder="supplier@email.com" />
           </Field>
-          <Field label="GSTIN">
+          <Field label={t("gstin")}>
             <TextInput value={form.gstin} onChange={set("gstin")} placeholder="22AAAAA0000A1Z5" />
           </Field>
           <Field label={t("address")}>
@@ -173,13 +174,13 @@ export function SupplierBookTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete supplier?"
+        title={t("sbDeleteTitle")}
         message={
           deleting
-            ? `Delete "${deleting.name}" from your workspace? Purchases already recorded against them keep the name, but the supplier will no longer appear in any Setu tool.`
+            ? fill(t("sbDeleteMessage"), { name: deleting.name })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);

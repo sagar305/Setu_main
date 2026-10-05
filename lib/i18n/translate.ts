@@ -31,3 +31,20 @@ export function translate(lang: LanguageCode, key: TKey): string {
   const k = key as CalcDictKey;
   return CALC_DICTIONARIES[lang]?.[k] ?? CALC_BASE[k];
 }
+
+/**
+ * Substitutes `{name}` placeholders in a translated string.
+ *
+ * The placeholders are named rather than positional so each language can put
+ * them where its own grammar needs them — an amount that falls mid-sentence in
+ * English lands in a different place in Hindi or Arabic, and a positional
+ * format would force every language into the English word order.
+ *
+ * An unknown placeholder is left as written, so a typo shows up as the literal
+ * `{foo}` on screen rather than silently rendering "undefined".
+ */
+export function fill(template: string, values: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (match, key) =>
+    key in values ? String(values[key]) : match,
+  );
+}
