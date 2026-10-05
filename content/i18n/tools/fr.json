@@ -306,7 +306,91 @@
     },
     {
       "name": "Diviseur de QR UPI sans MDR",
-      "shortDescription": "Divisez un gros paiement en plusieurs QR codes UPI sous 2 000 ₹ pour qu'aucune commission MDR ou d'interchange ne s'applique."
+      "shortDescription": "Divisez un gros paiement en plusieurs QR codes UPI sous 2 000 ₹ pour qu'aucune commission MDR ou d'interchange ne s'applique.",
+      "seo": {
+        "title": "Diviseur de QR UPI sans MDR — divisez un paiement | Setu",
+        "description": "Divisez un gros encaissement en plusieurs QR codes UPI de moins de ₹2,000 pour qu'aucun interchange ni MDR ne s'applique. Gratuit et sans inscription.",
+        "keywords": [
+          "UPI sans MDR",
+          "diviseur de QR UPI",
+          "diviser un paiement en QR",
+          "éviter les frais MDR",
+          "limite UPI 2000 interchange",
+          "encaissement sans MDR"
+        ],
+        "ogTitle": "Diviseur de QR UPI sans MDR",
+        "ogDescription": "Divisez un gros encaissement en plusieurs QR codes UPI de moins de ₹2,000 et encaissez la totalité sans payer de MDR."
+      },
+      "hero": {
+        "headline": "Diviseur de QR UPI sans MDR",
+        "subheadline": "Découpez un gros encaissement en plusieurs QR codes de moins de ₹2,000 et touchez la totalité sans en perdre une part en MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "En quoi diviser un paiement évite-t-il le MDR ?",
+            "answer": "Le MDR UPI ne s'applique qu'au-delà de ₹2,000 par transaction, et alors sur le montant entier et non sur le seul excédent. Un encaissement de ₹7,500 pris en un seul paiement franchit cette limite et est facturé sur les ₹7,500 entiers ; pris en quatre QR codes de ₹2,000 ou moins, chaque transaction reste sous le seuil et rien n'est facturé."
+          },
+          {
+            "question": "Pourquoi la valeur par défaut est-elle ₹1,999 et non ₹2,000 ?",
+            "answer": "₹2,000 est la limite elle-même. Placer le plafond une roupie en dessous laisse chaque transaction nettement sous le seuil plutôt qu'exactement dessus, ce qui évite toute discussion sur la façon dont telle banque acquéreuse arrondit ou interprète la limite. Vous pouvez changer ce chiffre si vous préférez."
+          },
+          {
+            "question": "Mon identifiant UPI est-il envoyé aux serveurs de Setu ?",
+            "answer": "Non. Chaque QR code est généré dans votre navigateur, et votre identifiant UPI n'est enregistré que dans le stockage local de votre propre appareil pour qu'il soit là la prochaine fois. Rien de l'encaissement n'atteint nos serveurs."
+          },
+          {
+            "question": "Les paiements UPI depuis un compte bancaire comportent-ils un MDR de toute façon ?",
+            "answer": "Jusqu'à ₹2,000, non. À partir du 15 octobre 2026, les paiements UPI aux commerçants au-delà de ₹2,000 portent un MDR de 0,4 % sur la valeur entière de la transaction, plafonné à ₹300. Le débit RuPay et les mandats UPI Autopay restent exonérés, de même que les commerçants encaissant moins de ₹1 lakh par mois par QR UPI : vérifiez donc si les frais vous concernent avant de diviser quoi que ce soit."
+          },
+          {
+            "question": "Est-il permis de diviser un paiement de cette façon ?",
+            "answer": "Encaisser plusieurs paiements distincts auprès d'un client est une pratique commerciale ordinaire, et rien ici ne contourne les contrôles d'un système de paiement. Cela dit, les contrats avec les banques acquéreuses diffèrent, et certains interdisent de structurer délibérément des transactions pour éviter des frais. Vérifiez votre propre contrat commerçant avant d'en faire une habitude."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Pourquoi cela fonctionne",
+          "paragraphs": [
+            "À partir du 15 octobre 2026, les paiements UPI aux commerçants portent un MDR de 0,4 % — mais **uniquement sur les transactions au-delà de ₹2,000**, et alors sur le montant entier et non sur le seul excédent, plafonné à ₹300 par transaction. À ₹2,000 ou en dessous, il n'y a aucun MDR. Le débit RuPay et les mandats UPI Autopay restent exonérés, de même que les commerçants encaissant moins de ₹1 lakh par mois par QR UPI.",
+            "Ce seuil s'entend par transaction, non par client ni par jour. Une facture de ₹7,500 encaissée d'un coup se situe au-dessus et est facturée sur les ₹7,500 entiers, plus 18 % de GST sur ces frais. Les mêmes ₹7,500 encaissés en quatre QR codes de ₹1,999, ₹1,999, ₹1,999 et ₹1,503 restent sous la limite à chaque étape, et la totalité vous est versée.",
+            "Calculez ce que vous payez aujourd'hui avec le [Calculateur de MDR](/calculators/mdr-calculator), puis reportez ce montant ici pour voir la répartition."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Comment l'utiliser",
+          "steps": [
+            "Saisissez le montant total à encaisser",
+            "Laissez le plafond à ₹1,999, ou fixez le vôtre",
+            "Ajoutez votre identifiant UPI et le nom de l'entreprise",
+            "Montrez chaque QR code au client à tour de rôle, ou partagez les liens UPI",
+            "Utilisez la note de référence pour rapprocher les parties d'une seule facture"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Avant d'en faire une habitude",
+          "text": "Encaisser plusieurs paiements distincts auprès d'un client est une pratique commerciale ordinaire, et rien ici ne contourne un quelconque contrôle du système de paiement. Les contrats avec les banques acquéreuses diffèrent toutefois, et certains restreignent la structuration délibérée de transactions pour éviter des frais. Vérifiez votre propre contrat commerçant avant de vous y fier au quotidien — et vérifiez d'abord si les frais vous concernent, puisque le débit RuPay, les mandats UPI Autopay et les commerçants sous ₹1 lakh par mois en QR UPI en sont de toute façon exonérés."
+        },
+        {
+          "kind": "links",
+          "headline": "Outils associés",
+          "links": [
+            {
+              "label": "Calculateur de MDR"
+            },
+            {
+              "label": "Générateur de QR de paiement"
+            },
+            {
+              "label": "Générateur de factures"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Générateur de carte QR",

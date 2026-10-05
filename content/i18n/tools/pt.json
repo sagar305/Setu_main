@@ -306,7 +306,91 @@
     },
     {
       "name": "Divisor de QR UPI sem MDR",
-      "shortDescription": "Divida um pagamento grande em vários QR codes UPI abaixo de ₹2.000 para que não incida MDR nem intercâmbio."
+      "shortDescription": "Divida um pagamento grande em vários QR codes UPI abaixo de ₹2.000 para que não incida MDR nem intercâmbio.",
+      "seo": {
+        "title": "Divisor de QR UPI sem MDR — divida uma cobrança | Setu",
+        "description": "Divida uma cobrança grande em vários códigos QR UPI de menos de ₹2.000 para que não incida intercâmbio nem MDR. Grátis, sem cadastro e no seu aparelho.",
+        "keywords": [
+          "UPI sem MDR",
+          "divisor de QR UPI",
+          "dividir cobrança em QR",
+          "evitar taxas de MDR",
+          "limite UPI 2000 intercâmbio",
+          "cobrança sem MDR"
+        ],
+        "ogTitle": "Divisor de QR UPI sem MDR",
+        "ogDescription": "Divida uma cobrança grande em vários códigos QR UPI de menos de ₹2.000 e receba o valor inteiro sem pagar MDR."
+      },
+      "hero": {
+        "headline": "Divisor de QR UPI sem MDR",
+        "subheadline": "Quebre uma cobrança grande em vários códigos QR de menos de ₹2.000 e receba o valor inteiro sem perder uma parte em MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como dividir uma cobrança evita o MDR?",
+            "answer": "O MDR do UPI incide apenas acima de ₹2.000 por transação, e então sobre o valor inteiro, não só sobre o excedente. Uma cobrança de ₹7.500 recebida de uma só vez cruza essa linha e é taxada sobre os ₹7.500 inteiros, mas recebida como quatro códigos QR de ₹2.000 ou menos, cada transação fica abaixo do limite e nada é cobrado."
+          },
+          {
+            "question": "Por que o padrão é ₹1.999 e não ₹2.000?",
+            "answer": "₹2.000 é a própria fronteira. Deixar o teto uma rupia abaixo mantém cada transação claramente sob o limite, e não exatamente nele, o que afasta qualquer discussão sobre como um determinado banco adquirente arredonda ou interpreta o limite. Se preferir, pode mudar o número."
+          },
+          {
+            "question": "Meu ID UPI é enviado aos servidores da Setu?",
+            "answer": "Não. Cada código QR é gerado no seu navegador, e o seu ID UPI é guardado somente no armazenamento local do seu próprio aparelho, para estar ali na próxima vez. Nada da cobrança chega aos nossos servidores."
+          },
+          {
+            "question": "Pagamentos UPI de conta bancária têm MDR de qualquer forma?",
+            "answer": "Até ₹2.000, não. A partir de 15 de outubro de 2026, pagamentos UPI a lojistas acima de ₹2.000 têm MDR de 0,4% sobre o valor inteiro da transação, com teto de ₹300. Débito RuPay e mandatos de UPI Autopay seguem isentos, assim como lojistas que recebem menos de ₹1 lakh por mês via QR UPI — então verifique se a taxa se aplica a você antes de dividir qualquer coisa."
+          },
+          {
+            "question": "É permitido dividir uma cobrança desse jeito?",
+            "answer": "Receber vários pagamentos separados de um cliente é prática comercial comum, e nada aqui contorna os controles de um sistema de pagamentos. Dito isso, os contratos com bancos adquirentes variam, e alguns proíbem estruturar transações de propósito para evitar taxas. Confira o seu próprio contrato de lojista antes de tornar isso rotina."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Por que isso funciona",
+          "paragraphs": [
+            "A partir de 15 de outubro de 2026, pagamentos UPI a lojistas têm MDR de 0,4% — mas **somente em transações acima de ₹2.000**, e então sobre o valor inteiro e não só sobre o excedente, com teto de ₹300 por transação. Em ₹2.000 ou abaixo não há MDR algum. Débito RuPay e mandatos de UPI Autopay seguem isentos, assim como lojistas que recebem menos de ₹1 lakh por mês via QR UPI.",
+            "Esse limite é por transação, não por cliente nem por dia. Uma conta de ₹7.500 recebida de uma só vez fica acima dele e é taxada sobre os ₹7.500 inteiros, mais 18% de GST sobre essa taxa. Os mesmos ₹7.500 recebidos como quatro códigos QR de ₹1.999, ₹1.999, ₹1.999 e ₹1.503 ficam sob a linha em cada parte, e o valor inteiro é liquidado para você.",
+            "Veja quanto você paga hoje com a [Calculadora de MDR](/calculators/mdr-calculator) e depois traga esse valor para cá para ver a divisão."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como usar",
+          "steps": [
+            "Informe o valor total que precisa receber",
+            "Deixe o teto em ₹1.999, ou defina o seu",
+            "Acrescente o seu ID UPI e o nome do negócio",
+            "Mostre cada código QR ao cliente por vez, ou compartilhe os links UPI",
+            "Use a nota de referência para conciliar as partes com uma única conta"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Antes de tornar isso rotina",
+          "text": "Receber vários pagamentos separados de um cliente é prática comercial comum, e nada aqui contorna qualquer controle do sistema de pagamentos. Os contratos com bancos adquirentes variam, porém, e alguns restringem estruturar transações de propósito para evitar taxas. Confira o seu próprio contrato de lojista antes de depender disso no dia a dia — e verifique primeiro se a taxa sequer se aplica a você, já que débito RuPay, mandatos de UPI Autopay e lojistas abaixo de ₹1 lakh por mês em QR UPI são isentos de qualquer forma."
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "links": [
+            {
+              "label": "Calculadora de MDR"
+            },
+            {
+              "label": "Gerador de QR UPI dinâmico"
+            },
+            {
+              "label": "Gerador de faturas"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Gerador de cardápio QR",

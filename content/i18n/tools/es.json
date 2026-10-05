@@ -306,7 +306,91 @@
     },
     {
       "name": "Divisor de QR UPI sin MDR",
-      "shortDescription": "Divide un pago grande en varios códigos QR de UPI por debajo de ₹2.000 para que no se aplique MDR ni intercambio."
+      "shortDescription": "Divide un pago grande en varios códigos QR de UPI por debajo de ₹2.000 para que no se aplique MDR ni intercambio.",
+      "seo": {
+        "title": "Divisor de QR UPI sin MDR — divide un cobro | Setu",
+        "description": "Divide un cobro grande en varios códigos QR UPI de menos de ₹2,000 para que no se aplique intercambio ni MDR. Gratis, sin registro y en tu dispositivo.",
+        "keywords": [
+          "UPI sin MDR",
+          "divisor de QR UPI",
+          "dividir cobro en QR",
+          "evitar comisiones MDR",
+          "límite UPI 2000 intercambio",
+          "cobro sin MDR"
+        ],
+        "ogTitle": "Divisor de QR UPI sin MDR",
+        "ogDescription": "Divide un cobro grande en varios códigos QR UPI de menos de ₹2,000 y cobra el importe completo sin pagar MDR."
+      },
+      "hero": {
+        "headline": "Divisor de QR UPI sin MDR",
+        "subheadline": "Divide un cobro grande en varios códigos QR de menos de ₹2,000 y recibe el importe completo sin perder una parte en MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Cómo evita el MDR dividir un cobro?",
+            "answer": "El MDR de UPI se aplica solo por encima de ₹2,000 por transacción, y entonces sobre el importe completo, no solo sobre el exceso. Un cobro de ₹7,500 en un único pago cruza ese límite y se le cobra sobre los ₹7,500 enteros, pero tomado como cuatro códigos QR de ₹2,000 o menos, cada transacción queda por debajo del umbral y no se cobra nada."
+          },
+          {
+            "question": "¿Por qué el valor por defecto es ₹1,999 y no ₹2,000?",
+            "answer": "₹2,000 es el límite mismo. Poner el techo una rupia por debajo deja cada transacción claramente por debajo del umbral y no exactamente en él, lo que evita cualquier discusión sobre cómo redondea o interpreta ese límite un banco adquirente concreto. Si lo prefieres, puedes cambiar la cifra."
+          },
+          {
+            "question": "¿Mi ID de UPI se envía a los servidores de Setu?",
+            "answer": "No. Cada código QR se genera en tu navegador, y tu ID de UPI se guarda solo en el almacenamiento local de tu propio dispositivo para que esté ahí la próxima vez. Nada del cobro llega a nuestros servidores."
+          },
+          {
+            "question": "¿Los pagos UPI desde una cuenta bancaria tienen MDR de todos modos?",
+            "answer": "Hasta ₹2,000, no. Desde el 15 de octubre de 2026, los pagos UPI a comercios por encima de ₹2,000 llevan un MDR del 0,4% sobre el valor completo de la transacción, con un tope de ₹300. Las domiciliaciones de RuPay débito y UPI Autopay siguen exentas, igual que los comercios que reciben menos de ₹1 lakh al mes por QR UPI, así que comprueba si el cargo te afecta antes de dividir nada."
+          },
+          {
+            "question": "¿Está permitido dividir un cobro de esta manera?",
+            "answer": "Cobrar varios pagos por separado a un cliente es una práctica comercial habitual, y aquí nada elude los controles de un sistema de pagos. Dicho eso, los contratos con los bancos adquirentes son distintos, y algunos prohíben estructurar transacciones deliberadamente para evitar comisiones. Revisa tu propio contrato de comercio antes de convertir esto en rutina."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Por qué funciona",
+          "paragraphs": [
+            "Desde el 15 de octubre de 2026, los pagos UPI a comercios llevan un MDR del 0,4%, pero **solo en transacciones por encima de ₹2,000**, y entonces sobre el importe completo y no solo sobre el exceso, con un tope de ₹300 por transacción. En ₹2,000 o por debajo no hay MDR alguno. Las domiciliaciones de RuPay débito y UPI Autopay siguen exentas, igual que los comercios que reciben menos de ₹1 lakh al mes por QR UPI.",
+            "Ese umbral es por transacción, no por cliente ni por día. Una factura de ₹7,500 cobrada de una vez queda por encima y se le cobra sobre los ₹7,500 enteros, más un 18% de GST sobre esa comisión. Esos mismos ₹7,500 cobrados como cuatro códigos QR de ₹1,999, ₹1,999, ₹1,999 y ₹1,503 quedan por debajo del límite en cada tramo, y el importe completo te llega íntegro.",
+            "Calcula lo que pagas hoy con la [Calculadora de MDR](/calculators/mdr-calculator) y después trae ese importe aquí para ver el reparto."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Cómo usarlo",
+          "steps": [
+            "Introduce el importe total que necesitas cobrar",
+            "Deja el techo en ₹1,999 o fija el tuyo",
+            "Añade tu ID de UPI y el nombre del negocio",
+            "Muestra cada código QR al cliente por turnos, o comparte los enlaces UPI",
+            "Usa la nota de referencia para conciliar las partes con una sola factura"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Antes de convertirlo en rutina",
+          "text": "Cobrar varios pagos por separado a un cliente es una práctica comercial habitual, y aquí nada elude ningún control del sistema de pagos. Sin embargo, los contratos con los bancos adquirentes son distintos, y algunos restringen estructurar transacciones deliberadamente para evitar comisiones. Revisa tu propio contrato de comercio antes de confiar en esto a diario, y comprueba primero si el cargo te afecta, ya que RuPay débito, las domiciliaciones de UPI Autopay y los comercios con menos de ₹1 lakh al mes en QR UPI están exentos de todos modos."
+        },
+        {
+          "kind": "links",
+          "headline": "Herramientas relacionadas",
+          "links": [
+            {
+              "label": "Calculadora de MDR"
+            },
+            {
+              "label": "Generador de QR de pago"
+            },
+            {
+              "label": "Generador de facturas"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Generador de cartas QR",

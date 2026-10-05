@@ -306,7 +306,91 @@
     },
     {
       "name": "Pemisah QR UPI tanpa MDR",
-      "shortDescription": "Pecah pembayaran besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak dikenai MDR maupun biaya interchange."
+      "shortDescription": "Pecah pembayaran besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak dikenai MDR maupun biaya interchange.",
+      "seo": {
+        "title": "Pemisah QR UPI tanpa MDR — pecah tagihan | Setu",
+        "description": "Pecah tagihan besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak ada interchange atau MDR. Gratis, tanpa pendaftaran, dibuat di perangkat Anda.",
+        "keywords": [
+          "UPI tanpa MDR",
+          "pemisah QR UPI",
+          "memecah tagihan jadi QR",
+          "menghindari biaya MDR",
+          "batas UPI 2000 interchange",
+          "penagihan tanpa MDR"
+        ],
+        "ogTitle": "Pemisah QR UPI tanpa MDR",
+        "ogDescription": "Pecah tagihan besar menjadi beberapa kode QR UPI di bawah ₹2.000 dan tagih seluruh jumlahnya tanpa membayar MDR."
+      },
+      "hero": {
+        "headline": "Pemisah QR UPI tanpa MDR",
+        "subheadline": "Pecah tagihan besar menjadi beberapa kode QR di bawah ₹2.000 dan terima seluruh jumlahnya tanpa kehilangan sebagian ke MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana memecah tagihan menghindari MDR?",
+            "answer": "MDR UPI hanya berlaku di atas ₹2.000 per transaksi, dan saat itu atas seluruh nilai, bukan hanya kelebihannya. Tagihan ₹7.500 yang diambil sebagai satu pembayaran melewati batas itu dan dikenai biaya atas ₹7.500 penuh, tetapi diambil sebagai empat kode QR masing-masing ₹2.000 atau kurang, setiap transaksi tetap di bawah ambang dan tidak ada biaya."
+          },
+          {
+            "question": "Mengapa nilai bawaannya ₹1.999 dan bukan ₹2.000?",
+            "answer": "₹2.000 adalah batasnya itu sendiri. Menaruh plafon satu rupee di bawahnya membuat setiap transaksi jelas berada di bawah ambang, bukan tepat di atasnya, sehingga tidak ada perdebatan soal bagaimana suatu bank akuirer membulatkan atau menafsirkan batas tersebut. Anda bisa mengubah angkanya bila mau."
+          },
+          {
+            "question": "Apakah ID UPI saya dikirim ke server Setu?",
+            "answer": "Tidak. Setiap kode QR dibuat di peramban Anda, dan ID UPI Anda hanya disimpan di penyimpanan lokal perangkat Anda sendiri agar tersedia pada kesempatan berikutnya. Tidak ada apa pun tentang tagihan yang sampai ke server kami."
+          },
+          {
+            "question": "Apakah pembayaran UPI dari rekening bank tetap kena MDR?",
+            "answer": "Sampai ₹2.000 tidak. Mulai 15 Oktober 2026, pembayaran UPI ke pedagang di atas ₹2.000 dikenai MDR 0,4% atas seluruh nilai transaksi, dengan plafon ₹300. Debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula pedagang yang menerima kurang dari ₹1 lakh per bulan melalui QR UPI — jadi periksa apakah biaya itu berlaku bagi Anda sebelum memecah apa pun."
+          },
+          {
+            "question": "Apakah memecah tagihan seperti ini diperbolehkan?",
+            "answer": "Menagih beberapa pembayaran terpisah dari seorang pelanggan adalah praktik dagang biasa, dan tidak ada yang di sini melewati kendali sistem pembayaran. Namun perjanjian dengan bank akuirer berbeda-beda, dan sebagian melarang menyusun transaksi dengan sengaja untuk menghindari biaya. Periksa perjanjian pedagang Anda sendiri sebelum menjadikannya kebiasaan."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Mengapa ini berhasil",
+          "paragraphs": [
+            "Mulai 15 Oktober 2026, pembayaran UPI ke pedagang dikenai MDR 0,4% — tetapi **hanya atas transaksi di atas ₹2.000**, dan saat itu atas seluruh nilai bukan hanya kelebihannya, dengan plafon ₹300 per transaksi. Pada ₹2.000 atau di bawahnya tidak ada MDR sama sekali. Debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula pedagang yang menerima kurang dari ₹1 lakh per bulan melalui QR UPI.",
+            "Ambang itu berlaku per transaksi, bukan per pelanggan atau per hari. Tagihan ₹7.500 yang ditagih sekaligus berada di atasnya dan dikenai biaya atas ₹7.500 penuh, ditambah GST 18% atas biaya tersebut. ₹7.500 yang sama bila ditagih sebagai empat kode QR sebesar ₹1.999, ₹1.999, ₹1.999 dan ₹1.503 tetap di bawah batas pada setiap bagian, dan seluruh jumlahnya masuk ke Anda.",
+            "Hitung berapa yang Anda bayar hari ini dengan [Kalkulator MDR](/calculators/mdr-calculator), lalu bawa jumlahnya ke sini untuk melihat pembagiannya."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Cara memakainya",
+          "steps": [
+            "Masukkan jumlah total yang perlu Anda tagih",
+            "Biarkan plafon di ₹1.999, atau tetapkan milik Anda sendiri",
+            "Tambahkan ID UPI dan nama usaha Anda",
+            "Tunjukkan setiap kode QR kepada pelanggan secara bergantian, atau bagikan tautan UPI",
+            "Pakai catatan rujukan untuk mencocokkan bagian-bagiannya dengan satu tagihan"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Sebelum menjadikannya kebiasaan",
+          "text": "Menagih beberapa pembayaran terpisah dari seorang pelanggan adalah praktik dagang biasa, dan tidak ada yang di sini melewati kendali apa pun dalam sistem pembayaran. Namun perjanjian dengan bank akuirer berbeda-beda, dan sebagian membatasi penyusunan transaksi dengan sengaja untuk menghindari biaya. Periksa perjanjian pedagang Anda sendiri sebelum mengandalkan ini sehari-hari — dan periksa dulu apakah biayanya memang berlaku bagi Anda, sebab debit RuPay, mandat UPI Autopay dan pedagang di bawah ₹1 lakh per bulan pada QR UPI semuanya sudah dikecualikan."
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "links": [
+            {
+              "label": "Kalkulator MDR"
+            },
+            {
+              "label": "Pembuat QR UPI dinamis"
+            },
+            {
+              "label": "Pembuat faktur"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Pembuat menu QR",

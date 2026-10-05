@@ -306,7 +306,91 @@
     },
     {
       "name": "UPI-QR-Splitter ohne MDR",
-      "shortDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter 2.000 ₹ auf, damit weder MDR noch Interbankenentgelt anfallen."
+      "shortDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter 2.000 ₹ auf, damit weder MDR noch Interbankenentgelt anfallen.",
+      "seo": {
+        "title": "UPI-QR-Splitter ohne MDR — Zahlung aufteilen | Setu",
+        "description": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter ₹2.000 auf, damit kein Interchange und kein MDR anfällt. Kostenlos, ohne Anmeldung, auf Ihrem Gerät.",
+        "keywords": [
+          "UPI ohne MDR",
+          "UPI-QR-Splitter",
+          "Zahlung in QR-Codes aufteilen",
+          "MDR-Gebühren vermeiden",
+          "UPI-Grenze 2000 Interchange",
+          "Inkasso ohne MDR"
+        ],
+        "ogTitle": "UPI-QR-Splitter ohne MDR",
+        "ogDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter ₹2.000 auf und kassieren Sie den vollen Betrag ohne MDR."
+      },
+      "hero": {
+        "headline": "UPI-QR-Splitter ohne MDR",
+        "subheadline": "Zerlegen Sie eine große Zahlung in mehrere QR-Codes unter ₹2.000 und kassieren Sie den vollen Betrag, ohne einen Anteil an MDR zu verlieren."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie vermeidet das Aufteilen einer Zahlung den MDR?",
+            "answer": "Der UPI-MDR greift erst über ₹2.000 je Transaktion, und dann auf den ganzen Betrag und nicht nur auf den Überschuss. Ein Inkasso von ₹7.500 als eine Zahlung überschreitet diese Grenze und wird auf die vollen ₹7.500 berechnet; als vier QR-Codes von ₹2.000 oder weniger bleibt jede Transaktion unter der Schwelle, und es fällt nichts an."
+          },
+          {
+            "question": "Warum liegt der Vorgabewert bei ₹1.999 und nicht bei ₹2.000?",
+            "answer": "₹2.000 ist die Grenze selbst. Die Obergrenze eine Rupie darunter zu setzen hält jede Transaktion deutlich unter der Schwelle statt genau darauf, und das erspart jeden Streit darüber, wie eine bestimmte Acquirer-Bank die Grenze rundet oder auslegt. Sie können den Wert ändern, wenn Sie möchten."
+          },
+          {
+            "question": "Wird meine UPI-ID an die Server von Setu gesendet?",
+            "answer": "Nein. Jeder QR-Code entsteht in Ihrem Browser, und Ihre UPI-ID wird nur im lokalen Speicher Ihres eigenen Geräts abgelegt, damit sie beim nächsten Mal da ist. Nichts von der Zahlung erreicht unsere Server."
+          },
+          {
+            "question": "Fällt bei UPI-Zahlungen vom Bankkonto überhaupt MDR an?",
+            "answer": "Bis ₹2.000 nicht. Ab dem 15. Oktober 2026 tragen UPI-Händlerzahlungen über ₹2.000 einen MDR von 0,4 % auf den gesamten Transaktionswert, gedeckelt auf ₹300. RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen — prüfen Sie also, ob die Gebühr Sie überhaupt betrifft, bevor Sie etwas aufteilen."
+          },
+          {
+            "question": "Ist es erlaubt, eine Zahlung so aufzuteilen?",
+            "answer": "Mehrere getrennte Zahlungen von einem Kunden einzuziehen ist gewöhnliche Handelspraxis, und hier wird keine Kontrolle eines Zahlungssystems umgangen. Allerdings unterscheiden sich die Verträge mit Acquirer-Banken, und manche untersagen es, Transaktionen absichtlich so zu gestalten, dass Gebühren vermieden werden. Prüfen Sie Ihren eigenen Händlervertrag, bevor Sie das zur Regel machen."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Warum das funktioniert",
+          "paragraphs": [
+            "Ab dem 15. Oktober 2026 tragen UPI-Händlerzahlungen einen MDR von 0,4 % — aber **nur bei Transaktionen über ₹2.000**, und dann auf den ganzen Betrag und nicht nur auf den Überschuss, gedeckelt auf ₹300 je Transaktion. Bei ₹2.000 oder darunter fällt überhaupt kein MDR an. RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen.",
+            "Diese Schwelle gilt je Transaktion, nicht je Kunde und nicht je Tag. Eine Rechnung von ₹7.500 in einem Zug eingezogen liegt darüber und wird auf die vollen ₹7.500 berechnet, zuzüglich 18 % GST auf diese Gebühr. Dieselben ₹7.500 als vier QR-Codes von ₹1.999, ₹1.999, ₹1.999 und ₹1.503 eingezogen bleiben auf jeder Teilstrecke unter der Grenze, und der volle Betrag wird Ihnen gutgeschrieben.",
+            "Rechnen Sie mit dem [MDR-Rechner](/calculators/mdr-calculator) aus, was Sie heute zahlen, und bringen Sie den Betrag dann hierher, um die Aufteilung zu sehen."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "So verwenden Sie es",
+          "steps": [
+            "Geben Sie den Gesamtbetrag ein, den Sie einziehen müssen",
+            "Lassen Sie die Obergrenze bei ₹1.999, oder setzen Sie eine eigene",
+            "Fügen Sie Ihre UPI-ID und den Firmennamen hinzu",
+            "Zeigen Sie dem Kunden jeden QR-Code der Reihe nach, oder teilen Sie die UPI-Links",
+            "Nutzen Sie den Referenzhinweis, um die Teile einer Rechnung zuzuordnen"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Bevor Sie das zur Regel machen",
+          "text": "Mehrere getrennte Zahlungen von einem Kunden einzuziehen ist gewöhnliche Handelspraxis, und hier wird keine Kontrolle im Zahlungssystem umgangen. Die Verträge mit Acquirer-Banken unterscheiden sich allerdings, und manche beschränken es, Transaktionen absichtlich so zu gestalten, dass Gebühren vermieden werden. Prüfen Sie Ihren eigenen Händlervertrag, bevor Sie sich täglich darauf verlassen — und prüfen Sie zuerst, ob die Gebühr Sie überhaupt betrifft, denn RuPay-Debit, UPI-Autopay-Mandate und Händler unter ₹1 Lakh im Monat auf UPI-QR sind ohnehin befreit."
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Werkzeuge",
+          "links": [
+            {
+              "label": "MDR-Rechner"
+            },
+            {
+              "label": "Dynamischer UPI-QR-Generator"
+            },
+            {
+              "label": "Rechnungsgenerator"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "QR-Speisekarten-Generator",
