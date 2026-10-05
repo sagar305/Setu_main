@@ -1,0 +1,47 @@
+{
+  "slug": "order-aggregator",
+  "term": "Order Aggregator",
+  "category": "restaurant-ops",
+  "aliases": [
+    "food aggregator",
+    "delivery aggregator",
+    "aggregator platform"
+  ],
+  "short": "A delivery marketplace that lists your restaurant, takes the customer order and charges a commission on it.",
+  "seoTitle": "Order Aggregator — Meaning for Restaurants",
+  "metaDescription": "An order aggregator is a delivery marketplace that lists your restaurant and charges commission per order. What it controls, what it costs and what you keep.",
+  "updated": "2026-10-06",
+  "definition": "An order aggregator is a third-party platform that lists many restaurants in one app, takes the customer's order and payment, arranges delivery, and pays the restaurant the order value less its commission and deductions. In India the category is dominated by Swiggy and Zomato. The restaurant supplies the food and the menu; the aggregator owns the customer relationship, the app experience and the discounting, which is the trade at the heart of the channel.",
+  "bodyHtml": "<h2>What the aggregator controls and what you control</h2><p>You control your menu, your prices on the platform, your preparation time and whether a channel is accepting orders. The aggregator controls search ranking, which promotions appear, delivery allocation, the customer's contact details and the data about who ordered what. That split explains most of the friction operators report: the parts you can change are the parts the platform does not treat as its own.</p><h2>What it actually costs</h2><p>The headline commission is only the first deduction. A payout statement typically also carries payment handling charges, the restaurant's share of any platform-funded discount, advertising spend if you bought placement, packaging recovered from the customer but not always passed on in full, and tax on the commission itself. The figure that matters is rupees retained per order after all of that, which is usually well below what the commission percentage alone suggests. Your own contract and monthly statement are the only reliable source.</p><h2>Working with the channel rather than against it</h2><p>Operators who make the channel work usually do three things: they price the online menu separately from the dine-in menu so the commission is carried by the list price rather than by the margin, they drop items whose retained value per order is negative no matter how often they sell, and they measure the channel on contribution rather than on revenue. At volume across more than one platform, software that consolidates orders and pushes menu changes once becomes a cost worth paying to remove retyping errors.</p>",
+  "faq": [
+    {
+      "question": "Is the commission rate negotiable?",
+      "answer": "Rates vary by city, cuisine, contract vintage and how much the platform wants your listing, so the rate in your agreement is not a universal number. It is worth asking at renewal, particularly if you can show volume the platform values."
+    },
+    {
+      "question": "Does listing on an aggregator cannibalise dine-in?",
+      "answer": "Sometimes, and it is worth measuring rather than assuming. Compare average order value and contribution per order across channels over a few months before deciding whether the delivery volume is additional business or the same customers choosing a lower-margin route."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    }
+  ],
+  "relatedTerms": [
+    "aggregator-commission",
+    "menu-price-padding",
+    "average-order-value",
+    "cloud-kitchen",
+    "menu-sync"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "slug": "three-way-match",
+  "term": "Three-Way Match",
+  "category": "accounting",
+  "aliases": [
+    "3-way match",
+    "three way matching",
+    "invoice matching"
+  ],
+  "short": "Checking a supplier invoice against the purchase order and the receiving record before you pay it.",
+  "seoTitle": "Three-Way Match — The Check Before You Pay",
+  "metaDescription": "A three-way match checks a supplier invoice against the purchase order and the goods received note before payment. What each mismatch is telling you.",
+  "updated": "2026-10-06",
+  "definition": "A three-way match is the control of comparing three documents before releasing payment on a supplier bill: the purchase order (what was agreed), the receiving record (what arrived) and the invoice (what is being charged). Payment is approved only where all three agree on item, quantity and rate. Where they do not, the mismatch is investigated rather than absorbed.",
+  "bodyHtml": "<h2>What each mismatch means</h2><p>Invoice quantity above the receiving record is a billing error or a short delivery nobody flagged. Invoice rate above the order is a price change that was never agreed, which is the single most common leak in small-business purchasing. An invoice with no matching order is an unauthorised purchase, and an order with no invoice after a long gap is either an accrual you have missed or a delivery that never came.</p><h2>Making it practical in a small business</h2><p>Full matching on every line is realistic in software and unrealistic by hand. The workable compromise is to match everything above a value threshold you set, match every line for your three or four largest suppliers regardless of value, and sample the rest. That catches the great majority of the money while remaining a task somebody will actually do each week.</p><h2>What it is not</h2><p>Matching confirms the bill agrees with the order and the delivery. It does not confirm the rate was competitive, that the quantity was needed, or that the specification was right. Those are separate questions answered by rate comparison, consumption analysis and the item description respectively — and a business can match perfectly while steadily overpaying an agreed-but-expensive rate.</p>",
+  "faq": [
+    {
+      "question": "What tolerance should I allow on a mismatch?",
+      "answer": "Set a small money or percentage tolerance for rounding and freight so trivial differences do not block payment, and review anything outside it. The level depends on your bill sizes, so pick one, write it down, and revisit it once you see how often it triggers."
+    },
+    {
+      "question": "Where does a two-way match fit?",
+      "answer": "A two-way match compares only the invoice to the order and is sometimes used for services, where there is nothing physical to receive. For goods it leaves the biggest gap open, because nothing in the check confirms that what you are paying for actually arrived."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    },
+    {
+      "type": "tool",
+      "slug": "accounts-payable-aging"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    }
+  ],
+  "relatedTerms": [
+    "purchase-order",
+    "grn",
+    "purchase-price-variance",
+    "accounts-payable",
+    "vendor-reconciliation"
+  ]
+}

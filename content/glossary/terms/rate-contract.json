@@ -1,0 +1,47 @@
+{
+  "slug": "rate-contract",
+  "term": "Rate Contract",
+  "category": "retail-inventory",
+  "aliases": [
+    "rate agreement",
+    "fixed-rate contract",
+    "price hold agreement"
+  ],
+  "short": "A written agreement fixing a supplier's rate for named items over a defined period.",
+  "seoTitle": "Rate Contract — Fixing Supplier Prices",
+  "metaDescription": "A rate contract fixes a supplier's price for named items over a set period. What it should specify, where it fails, and why it makes costing reliable.",
+  "updated": "2026-10-06",
+  "definition": "A rate contract is a written agreement that fixes the rate a supplier will charge for specified items over a defined period, usually a quarter or a year, often against an expected volume. It does not commit the buyer to a quantity in the way a purchase order does; it settles the price so that each individual order becomes a delivery instruction rather than a negotiation.",
+  "bodyHtml": "<h2>What it should specify</h2><p>Four things, and a contract missing any of them will be argued about. The item and its specification, written tightly enough that a thinner or lower-grade substitute is visibly out of scope. The rate, and whether it includes freight, loading and taxes. The period, with a clear start and end date. And the conditions under which the rate may move before the period ends — most suppliers will want an escape for a large input-cost swing, which is reasonable as long as it is defined rather than left open.</p><h2>Why it is worth more than a discount</h2><p>A one-time discount improves a single bill. A held rate makes your costing true for the whole period, which is what lets you price your own products with confidence and makes any variance you later find attributable to behaviour rather than to noise. For a business whose selling prices are printed on a menu or a shelf label, a stable input rate is worth more than a slightly lower volatile one.</p><h2>Where it fails in practice</h2><p>Three failures recur. The rate is agreed verbally and never written down, so it evaporates at the first staff change on either side. The contract fixes a rate but says nothing about the specification, and quality quietly drops to meet it. Or nobody checks incoming bills against the agreed rate, which makes the contract a document rather than a control — the check at bill-entry time is what turns it into one.</p>",
+  "faq": [
+    {
+      "question": "Does a rate contract commit me to a quantity?",
+      "answer": "Not by default, though suppliers often ask for an indicative volume in return for a better rate and some agreements make the rate conditional on it. Read whether the volume is an expectation or an obligation, because the two carry very different consequences if you under-buy."
+    },
+    {
+      "question": "How long should the period be?",
+      "answer": "A quarter is the usual starting point for items with volatile input costs, and a year is realistic for stable packaging and consumables. Match it to how often you reset your own selling prices, so your costing and your pricing move on the same cycle."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "supplier-book"
+    },
+    {
+      "type": "tool",
+      "slug": "purchase-register"
+    }
+  ],
+  "relatedTerms": [
+    "purchase-order",
+    "purchase-price-variance",
+    "supplier",
+    "landed-cost",
+    "grn"
+  ]
+}

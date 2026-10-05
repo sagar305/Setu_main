@@ -1,0 +1,46 @@
+{
+  "slug": "scope-of-work",
+  "term": "Scope of Work",
+  "category": "accounting",
+  "aliases": [
+    "statement of work",
+    "scope document"
+  ],
+  "short": "The written list of what a service provider will deliver, by when, and what sits outside the fee.",
+  "seoTitle": "Scope of Work — What a Service Fee Covers",
+  "metaDescription": "A scope of work records what a provider delivers, by when, at what volume and what is excluded. The clauses that make bookkeeping quotes comparable.",
+  "updated": "2026-10-06",
+  "definition": "A scope of work is the written description of exactly what a service provider will do: the deliverables, the dates they arrive on, the volume of work the fee assumes, the inputs the client must supply, and what is explicitly excluded. It is the document that turns a price into something comparable, because two quotes with identical wording and no scope can describe very different amounts of work.",
+  "bodyHtml": "<h2>What a usable scope contains</h2><p>At minimum: the named deliverables and the date each is due; the volume band the fee covers, such as a transaction count or a headcount; the inputs the client supplies and by when; who reviews the work before it is issued; the exclusions; the fee, the billing cycle and the trigger for repricing; and the handover terms if the engagement ends. A scope that says services as required has recorded nothing and will protect neither side.</p><h2>Scope versus engagement letter</h2><p>The engagement letter is the contract — parties, term, fees, liability, confidentiality, termination. The scope of work is the operational annexure that says what actually gets done. They are often bound together, and the scope is the part worth reading twice, because it is where expectations are set and where disputes start.</p><h2>Why volume bands matter</h2><p>Most professional services scale with volume rather than with turnover. A fee quoted without a band is a fee that will be renegotiated in your busiest month, usually from a weaker position. Agreeing the band and the repricing trigger up front converts an awkward future conversation into a clause nobody has to argue about.</p><h2>The exit clause</h2><p>Specify what the client receives on termination and how quickly: full data exports, period-end balances, ledger-level detail, reconciliation statements and supporting files, in a readable format. The expensive part of a bad engagement is rarely the fee; it is reconstructing records nobody handed over cleanly.</p>",
+  "faq": [
+    {
+      "question": "Is a scope of work legally binding?",
+      "answer": "It is generally binding to the extent the contract incorporates it, which is why it is usually attached to or referenced by the engagement letter rather than left as an email. Have your own adviser confirm how it sits in your jurisdiction before you rely on it."
+    },
+    {
+      "question": "What is the most commonly missed clause?",
+      "answer": "Handover on exit. Providers rarely resist it when asked, and clients rarely think to ask until the relationship is already ending and the leverage has gone."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "bank-reconciliation"
+    }
+  ],
+  "relatedTerms": [
+    "engagement-letter",
+    "books-of-accounts",
+    "implementation-fee",
+    "vendor-lock-in",
+    "annual-maintenance-contract"
+  ]
+}

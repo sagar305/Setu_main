@@ -1,0 +1,47 @@
+{
+  "slug": "menu-sync",
+  "term": "Menu Sync",
+  "category": "pos-tech",
+  "aliases": [
+    "menu synchronisation",
+    "menu push",
+    "menu publishing"
+  ],
+  "short": "Pushing one master menu out to every ordering channel at once instead of editing each platform by hand.",
+  "seoTitle": "Menu Sync — How Multi-Channel Menus Stay Right",
+  "metaDescription": "Menu sync pushes one master menu to every ordering channel at once. Why hand-editing each platform causes wrong prices, and what a sync actually covers.",
+  "updated": "2026-10-06",
+  "definition": "Menu sync is the practice of holding one master menu in a single system and publishing it out to every channel a business sells through — delivery platforms, its own ordering site, the in-store till and any QR menu — so that a change is made once rather than repeated. Without it, each channel is edited by hand, and the channels drift apart within weeks.",
+  "bodyHtml": "<h2>Why hand-editing drifts</h2><p>A kitchen that sells on two delivery platforms, a QR menu and the counter has four places to change a price and four places to switch off a sold-out item. Each edit is a separate login and a separate chance to miss one. The result is familiar: an item still listed that the kitchen cannot make, a price that is right on one platform and stale on another, and a customer complaint that costs a refund and a public rating.</p><h2>What a sync normally covers</h2><p>A full sync pushes item names and descriptions, prices per channel (often deliberately different), category structure and sort order, modifier and variant groups, images, and availability — the on and off switch per item. Some systems also push channel-level pause, so a kitchen under pressure can stop one platform without taking the whole business offline. Channel-specific pricing is the feature that matters most commercially, because it lets an operator carry commission in the list price on delivery while keeping dine-in prices intact.</p><h2>Where it goes wrong</h2><p>Syncs fail quietly rather than loudly. Common causes are an item mapped to the wrong channel category, a modifier group that exists in the master but has no equivalent on a platform, and an availability toggle that is set in the platform's own partner app and then overwritten by the next sync. The discipline is to make every change in the master only, and to spot-check one channel after each push.</p>",
+  "faq": [
+    {
+      "question": "Can I keep different prices per channel with a sync?",
+      "answer": "Most systems built for multi-channel selling allow a separate price per channel against the same master item, which is exactly what makes them useful. Confirm it explicitly before you buy, because a sync that forces one price everywhere removes your main defence against commission."
+    },
+    {
+      "question": "Why did my sold-out item come back on the platform?",
+      "answer": "Usually because availability was switched off in the platform's partner app rather than in the master menu, so the next publish restored it. Set availability in the one system that owns the master and let it propagate."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "qr-menu-generator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-menu-price-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    }
+  ],
+  "relatedTerms": [
+    "qr-menu",
+    "menu-mix",
+    "api-integration",
+    "order-aggregator",
+    "menu-price-padding"
+  ]
+}

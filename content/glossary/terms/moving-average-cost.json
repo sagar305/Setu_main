@@ -1,0 +1,55 @@
+{
+  "slug": "moving-average-cost",
+  "term": "Moving Average Cost",
+  "category": "retail-inventory",
+  "aliases": [
+    "moving average costing",
+    "rolling average cost"
+  ],
+  "short": "An item's stock value recalculated as a blended average every time new stock is received at a different rate.",
+  "seoTitle": "Moving Average Cost — Formula and Worked Example",
+  "metaDescription": "Moving average cost reblends an item's value on every receipt at a new rate. The formula, a worked example, and why your recipe costs lag behind it.",
+  "updated": "2026-10-06",
+  "definition": "Moving average cost values stock at a running blended average rather than at the rate of the most recent purchase. Each time stock arrives at a different rate, the average is recalculated across the quantity already on hand and the quantity received, and that new average is what is charged out to cost of sales until the next receipt moves it again.",
+  "formula": {
+    "expression": "New average = ((quantity on hand × current average) + (quantity received × receipt rate)) ÷ (quantity on hand + quantity received)",
+    "note": "Recalculated on every receipt at a new rate. Issues out of stock are charged at the average prevailing at the time, not at the rate of the latest purchase."
+  },
+  "example": [
+    "A bakery holds 40 kg of coffee beans at a moving average of ₹1,340 a kilogram, so the stock on hand is valued at ₹53,600.",
+    "A delivery of 60 kg arrives at ₹1,268 a kilogram, worth ₹76,080.",
+    "The new average is (53,600 + 76,080) ÷ 100 = ₹1,296.80 a kilogram — not ₹1,268. Anything costed at the latest invoice rate is understated by about 2 per cent until the older stock clears."
+  ],
+  "bodyHtml": "<h2>Why it matters to your margins</h2><p>The gap between the invoice rate and the blended average is the reason recipe and product costs drift out of true. When a rate falls, costing at the new invoice rate understates what is actually in your bin. When a rate rises — the more common and more damaging case — costing at the old average flatters your margin until the cheaper stock runs out. Neither error announces itself; both show up later as a gross margin that does not match the arithmetic.</p><h2>How it compares to the alternatives</h2><p>Against first-in-first-out, moving average smooths the effect of a price spike rather than passing it straight into cost of sales, which makes month-to-month margins more comparable but slower to reflect reality. Against standard costing, it tracks actual purchase behaviour instead of a fixed planning rate, which means it will not by itself tell you that a supplier has crept up on you — that needs a variance comparison against a baseline you set.</p><h2>Practical cautions</h2><p>Three things break a moving average in practice. Receiving in a different unit from the one you issue in corrupts the average silently. Entering a bill without its freight or duty gives you an average below true landed cost. And a negative quantity on hand, which happens when issues are recorded before receipts, produces an average that is arithmetically meaningless until the sequence is fixed.</p>",
+  "faq": [
+    {
+      "question": "Should I cost my recipes at moving average or at the latest purchase rate?",
+      "answer": "For reporting what a period actually cost, the blended average is the truer figure because it reflects the stock you consumed. For deciding what to charge going forward, the latest rate is the more useful signal, since it is what the next batch will cost you."
+    },
+    {
+      "question": "How often should the average be recalculated?",
+      "answer": "On every receipt at a different rate, which is how the method is defined. Recalculating monthly instead is a different and cruder method, and it will leave your cost of sales wrong in whichever direction prices moved during the month."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "purchase-price-variance-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "weighted-average-cost",
+    "landed-cost",
+    "closing-stock",
+    "purchase-price-variance",
+    "cost-price"
+  ]
+}
