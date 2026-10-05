@@ -123,7 +123,7 @@ export function LabelPrinterTool() {
            .sheet { display: block; }
            .label { page-break-after: always; }`;
 
-    const html = `<!doctype html><html><head><title>Labels</title><style>
+    const html = `<!doctype html><html><head><title>${t("lpLabels")}</title><style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font-family: Arial, sans-serif; }
       ${pageCss}
@@ -151,13 +151,13 @@ export function LabelPrinterTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Print price labels for your saved products without retyping them."
+        message={t("lpConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
         <Card>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-ink">Labels to print</h2>
+            <h2 className="text-lg font-bold text-ink">{t("lpLabelsToPrint")}</h2>
             <div className="flex gap-2">
               <SecondaryButton onClick={addManualRow}>+ Add label</SecondaryButton>
             </div>
@@ -165,9 +165,9 @@ export function LabelPrinterTool() {
 
           {workspace.connected && workspace.products.length > 0 ? (
             <div className="mb-4">
-              <Field label="Add from saved products">
+              <Field label={t("lpAddFromSaved")}>
                 <Select value="" onChange={(e) => e.target.value && addProductRow(e.target.value)}>
-                  <option value="">Choose a product…</option>
+                  <option value="">{t("bgChooseProduct")}</option>
                   {workspace.products.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}
@@ -180,9 +180,9 @@ export function LabelPrinterTool() {
 
           {rows.length === 0 ? (
             <EmptyState
-              title="No labels yet"
-              subtitle="Add labels manually, or connect your workspace to pull in saved products with names, prices and barcodes."
-              action={<PrimaryButton onClick={addManualRow}>Add your first label</PrimaryButton>}
+              title={t("lpNoLabelsTitle")}
+              subtitle={t("lpNoLabelsHint")}
+              action={<PrimaryButton onClick={addManualRow}>{t("lpAddFirst")}</PrimaryButton>}
             />
           ) : (
             <div className="space-y-3">
@@ -195,7 +195,7 @@ export function LabelPrinterTool() {
                     <TextInput
                       value={row.name}
                       onChange={(e) => updateRow(row.id, { name: e.target.value })}
-                      placeholder="Product name"
+                      placeholder={t("productNamePlaceholder")}
                     />
                   </Field>
                   <Field label={t("price")}>
@@ -205,7 +205,7 @@ export function LabelPrinterTool() {
                       placeholder="99"
                     />
                   </Field>
-                  <Field label="Barcode / SKU">
+                  <Field label={t("lpBarcodeSku")}>
                     <TextInput
                       value={row.code}
                       onChange={(e) => updateRow(row.id, { code: e.target.value })}
@@ -223,7 +223,7 @@ export function LabelPrinterTool() {
                     type="button"
                     onClick={() => removeRow(row.id)}
                     className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600"
-                    aria-label="Remove label"
+                    aria-label={t("lpRemoveLabel")}
                   >
                     {t("remove")}
                   </button>
@@ -235,8 +235,8 @@ export function LabelPrinterTool() {
 
         <div className="space-y-6">
           <Card>
-            <h2 className="mb-4 text-lg font-bold text-ink">Label format</h2>
-            <Field label="Sheet / roll size">
+            <h2 className="mb-4 text-lg font-bold text-ink">{t("lpFormat")}</h2>
+            <Field label={t("lpSheetSize")}>
               <Select value={formatId} onChange={(e) => setFormatId(e.target.value)}>
                 {FORMATS.map((f) => (
                   <option key={f.id} value={f.id}>
@@ -246,7 +246,7 @@ export function LabelPrinterTool() {
               </Select>
             </Field>
 
-            <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Show on label</h3>
+            <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("lpShowOnLabel")}</h3>
             <div className="space-y-2 text-sm text-ink">
               {(
                 [
@@ -278,7 +278,7 @@ export function LabelPrinterTool() {
               {t("print")}
             </PrimaryButton>
             <p className="mt-2 text-xs text-muted">
-              Opens your browser&apos;s print dialog — choose the printer and paper there.
+              {t("lpPrintHint")}
             </p>
           </Card>
         </div>

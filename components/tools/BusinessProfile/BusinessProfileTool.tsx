@@ -143,22 +143,22 @@ export function BusinessProfileTool() {
             : "Fill this once. Every Setu tool on this device will reuse it — no tool ever asks again."}
         </p>
         {!loaded ? (
-          <p className="py-6 text-center text-sm text-muted">Loading…</p>
+          <p className="py-6 text-center text-sm text-muted">{t("loading")}</p>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Business name *">
+            <Field label={t("bpBusinessNameReq")}>
               <TextInput value={form.name} onChange={set("name")} placeholder="Sharma Stores" />
             </Field>
             <Field label={t("phone")}>
               <TextInput value={form.phone} onChange={set("phone")} placeholder="98765 43210" />
             </Field>
-            <Field label="Email">
+            <Field label={t("email")}>
               <TextInput value={form.email} onChange={set("email")} placeholder="shop@email.com" />
             </Field>
-            <Field label="GSTIN / Tax number">
+            <Field label={t("bpGstinTax")}>
               <TextInput value={form.taxNumber} onChange={set("taxNumber")} placeholder="22AAAAA0000A1Z5" />
             </Field>
-            <Field label="UPI ID (for payment links)">
+            <Field label={t("bpUpiId")}>
               <TextInput value={form.upiId} onChange={set("upiId")} placeholder="shopname@okhdfcbank" />
             </Field>
             <Field label={t("currency")}>
@@ -174,7 +174,7 @@ export function BusinessProfileTool() {
                 )}
               </Select>
             </Field>
-            <Field label="Timezone (auto-detected)">
+            <Field label={t("bpTimezoneAuto")}>
               <Select value={form.timezone} onChange={set("timezone")}>
                 {timezones.length === 0 ? (
                   <option value={form.timezone}>{form.timezone || "Asia/Kolkata"}</option>
@@ -193,7 +193,7 @@ export function BusinessProfileTool() {
               </Field>
             </div>
             <div className="sm:col-span-2">
-              <Field label="Logo">
+              <Field label={t("bpLogo")}>
                 <input
                   type="file"
                   accept="image/*"
@@ -206,14 +206,14 @@ export function BusinessProfileTool() {
               <PrimaryButton onClick={save} disabled={!form.name.trim()}>
                 {existing ? t("saveChanges") : "Create workspace"}
               </PrimaryButton>
-              {saved ? <p className="text-sm font-medium text-emerald-600">Saved ✓</p> : null}
+              {saved ? <p className="text-sm font-medium text-emerald-600">{t("saved")} ✓</p> : null}
             </div>
           </div>
         )}
       </Card>
 
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Preview</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("preview")}</h2>
         <div className="rounded-xl border border-muted-line/30 p-5 text-center">
           {form.logoDataUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -237,7 +237,7 @@ export function BusinessProfileTool() {
           ) : null}
         </div>
         <p className="mt-4 text-xs text-muted">
-          This is how your details appear on receipts, invoices and labels across Setu tools.
+          {t("bpPreviewHint")}
         </p>
       </Card>
 
@@ -255,6 +255,7 @@ export function BusinessProfileTool() {
  * do nothing.
  */
 function ShortLinkSetting() {
+  const { t } = useI18n();
   const [enabled, setEnabled] = useState(true);
   const [auto, setAuto] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -270,11 +271,9 @@ function ShortLinkSetting() {
 
   return (
     <Card className="lg:col-span-2">
-      <h2 className="mb-1 text-lg font-bold text-ink">Short links for sharing</h2>
+      <h2 className="mb-1 text-lg font-bold text-ink">{t("bpShortLinks")}</h2>
       <p className="mb-4 text-sm text-muted">
-        Normally a shared invoice, receipt or appointment travels entirely inside its own link, so
-        nothing is uploaded and the link still opens on a phone with no signal — but the link runs to
-        a few thousand characters.
+        {t("bpShortLinksIntro")}
       </p>
 
       <label className="flex items-start gap-3">
@@ -288,10 +287,9 @@ function ShortLinkSetting() {
           className="mt-0.5 h-4 w-4 accent-indigo"
         />
         <span className="text-sm text-ink">
-          Offer to shorten share links
+          {t("bpOfferShorten")}
           <span className="mt-1 block text-xs text-muted">
-            Adds a &ldquo;Shorten&rdquo; button to the share sheet. Nothing is shortened until you
-            press it, one share at a time.
+            {t("bpOfferShortenHint")}
           </span>
         </span>
       </label>
@@ -308,24 +306,20 @@ function ShortLinkSetting() {
           className="mt-0.5 h-4 w-4 accent-indigo"
         />
         <span className="text-sm text-ink">
-          Shorten every link automatically
+          {t("bpShortenAuto")}
           <span className="mt-1 block text-xs text-muted">
-            Skips the button: opening a share sheet uploads that document and hands you the short
-            link straight away. If it fails or you are offline, you get the full link instead.
+            {t("bpShortenAutoHint")}
           </span>
         </span>
       </label>
 
       <div className="mt-4 rounded-lg bg-cream-paper/60 p-3 text-xs text-muted">
-        <p className="font-semibold text-ink">What shortening changes</p>
+        <p className="font-semibold text-ink">{t("bpWhatChanges")}</p>
         <p className="mt-1">
-          To keep a link short, that document has to be saved on our server — a shortened link is
-          only a pointer to it. We delete it 180 days after the last time anyone opens it. Because
-          the document is no longer inside the link, whoever you send it to needs an internet
-          connection to open it.
+          {t("bpWhatChangesBody")}
         </p>
         <p className="mt-2">
-          Leave this off and every share stays fully self-contained, exactly as before.
+          {t("bpLeaveOff")}
         </p>
       </div>
     </Card>
