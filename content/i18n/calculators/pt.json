@@ -1,0 +1,1644 @@
+{
+  "seo": {
+    "title": "Calculadoras grátis para restaurantes e lojas | Setu",
+    "description": "Calculadoras online gratuitas para restaurantes e pequenos negócios: GST, margem de lucro, markup, ponto de equilíbrio, custo de alimentos e prestações.",
+    "keywords": [
+      "calculadoras para negócios",
+      "calculadoras para restaurantes",
+      "calculadora de GST",
+      "calculadora de margem de lucro",
+      "calculadora de custo de alimentos",
+      "calculadora de ponto de equilíbrio",
+      "calculadora de prestação de empréstimo",
+      "ferramentas grátis para negócios"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Calculadoras gratuitas",
+    "headline": "Calculadoras de negócio, feitas para quem opera",
+    "subheadline": "Ferramentas rápidas e gratuitas para os números que você confere toda semana: preços, margens, impostos e mais. Sem cadastro, só respostas."
+  },
+  "ctaBanner": {
+    "headline": "Quer que os números se acompanhem sozinhos?",
+    "subtext": "O Setu Dine acompanha vendas, custos e impostos automaticamente, para você gastar menos tempo em calculadoras e mais tempo tocando o negócio.",
+    "cta": {
+      "label": "Conheça o Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Preço e lucro"
+    },
+    {
+      "name": "Operação de restaurante"
+    },
+    {
+      "name": "Operação de varejo"
+    },
+    {
+      "name": "Impostos e finanças"
+    },
+    {
+      "name": "Crescimento e marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "Calculadora de GST",
+      "shortDescription": "Adicione ou retire o GST de qualquer valor num toque, para qualquer faixa de imposto.",
+      "seo": {
+        "title": "Calculadora de GST — some ou retire o GST | Setu",
+        "description": "Calculadora de GST gratuita para somar o GST a um valor base ou retirá-lo de um preço final, com qualquer alíquota. Veja o imposto e o total na hora.",
+        "keywords": [
+          "calculadora de GST",
+          "calculadora de GST online",
+          "somar GST",
+          "retirar GST",
+          "calculadora de valor de GST Índia"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de GST",
+        "headline": "Calculadora de GST",
+        "subheadline": "Some o GST a um preço base ou separe o GST de um preço final — escolha a alíquota e veja a divisão na hora."
+      },
+      "about": {
+        "headline": "Para que serve uma calculadora de GST",
+        "paragraphs": [
+          "O GST aparece em tudo no dia a dia de um negócio: passar um preço ao cliente, conferir a nota de um fornecedor ou decidir o que lançar num cupom. Fazer a conta à mão para cada faixa é lento e erra fácil, principalmente quando você transita entre alíquotas como 5%, 12%, 18% e 28%.",
+          "Esta calculadora funciona nos dois sentidos. Informe um valor base para ver o GST e o total com o imposto somado, ou informe um valor final para ver qual era o preço base e o imposto antes de o GST entrar. É a mesma conta que o Setu Dine faz sozinho em cada cupom, disponível aqui como ferramenta gratuita e avulsa."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de GST",
+        "items": [
+          {
+            "question": "Como calculo o GST sobre um valor?",
+            "answer": "Multiplique o valor base pela alíquota do GST e divida por 100 para obter o imposto, depois some ao valor base para chegar ao total. Por exemplo, ₹1.000 a 18% de GST soma ₹180, totalizando ₹1.180."
+          },
+          {
+            "question": "Como retiro o GST de um preço final para achar o preço base?",
+            "answer": "Divida o valor final por (1 + alíquota do GST/100). Para um valor final de ₹1.180 a 18% de GST, o preço base é ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Quais são as faixas de GST comuns na Índia?",
+            "answer": "As faixas mais comuns são 5%, 12%, 18% e 28%, embora alguns bens e serviços fiquem fora delas ou sejam isentos. Confira sempre a alíquota que se aplica ao que você está faturando."
+          },
+          {
+            "question": "O Setu Dine calcula o GST automaticamente?",
+            "answer": "Sim. O Setu Dine tem um motor de impostos embutido que aplica o GST correto em cada cupom, então você não precisa calcular à mão pedido por pedido."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Deixe o Setu Dine cuidar do imposto de cada cupom",
+        "subtext": "O Setu Dine aplica o GST correto em cada pedido automaticamente — sem conta à mão, sem erro.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de margem de lucro",
+      "shortDescription": "Descubra sua margem de lucro e o % de markup a partir do custo e do preço de venda.",
+      "seo": {
+        "title": "Calculadora de margem de lucro — grátis | Setu",
+        "description": "Calcule a margem de lucro e o percentual de markup a partir do preço de custo e do preço de venda. Calculadora gratuita para varejo e restaurantes.",
+        "keywords": [
+          "calculadora de margem de lucro",
+          "calculadora de margem",
+          "calculadora de lucro",
+          "markup e margem"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de margem",
+        "headline": "Calculadora de margem de lucro",
+        "subheadline": "Informe o preço de custo e o preço de venda para ver lucro, margem % e markup % de uma vez."
+      },
+      "about": {
+        "headline": "Por que margem e markup importam os dois",
+        "paragraphs": [
+          "A margem de lucro diz qual parte do seu preço de venda é lucro de verdade — útil para checar se um produto ou prato ainda vale a pena no preço de hoje. O markup diz quanto você acrescentou sobre o custo, que é o que você precisa ao formar um preço do zero.",
+          "Os dois números se parecem mas não são iguais: 50% de markup sobre o custo dá apenas 33% de margem sobre o preço de venda. Esta calculadora mostra os dois juntos, para você revisar decisões de preço sem trocar um pelo outro."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de margem",
+        "items": [
+          {
+            "question": "Qual é a fórmula da margem de lucro?",
+            "answer": "Margem % = (Preço de venda − Preço de custo) ÷ Preço de venda × 100. Ela mede o lucro como percentual do preço de venda."
+          },
+          {
+            "question": "Qual a diferença entre margem e markup?",
+            "answer": "Margem é o lucro dividido pelo preço de venda; markup é o lucro dividido pelo custo. O lucro é o mesmo e o denominador muda, então um mesmo valor gera um markup % maior que a margem %."
+          },
+          {
+            "question": "Qual é uma boa margem para um negócio pequeno?",
+            "answer": "Varia muito por setor — restaurantes costumam operar com 10-15% de margem líquida, e no varejo depende da categoria. Compare com os seus próprios números anteriores e com as referências do setor, em vez de uma meta única."
+          },
+          {
+            "question": "Devo precificar por margem ou por markup?",
+            "answer": "A maioria dos negócios define o preço aplicando markup sobre o custo e depois confere se a margem resultante atinge a meta de lucro. Olhar os dois evita deixar barato um item que parece certo por uma medida e não pela outra."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Veja suas margens reais, automaticamente",
+        "subtext": "O Setu Dine acompanha custo e vendas juntos, então você sabe sua margem sem fazer a conta.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de markup",
+      "shortDescription": "Encontre o preço de venda necessário para atingir um markup-alvo sobre o custo.",
+      "seo": {
+        "title": "Calculadora de markup — ache seu preço de venda | Setu",
+        "description": "Calculadora de markup gratuita. Informe o preço de custo e o markup desejado para achar na hora o preço de venda e o lucro por unidade.",
+        "keywords": [
+          "calculadora de markup",
+          "calculadora de preço de venda",
+          "calculadora de preço sobre custo"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de markup",
+        "headline": "Calculadora de markup",
+        "subheadline": "Informe seu custo e o markup % desejado para obter o preço de venda que você deveria cobrar."
+      },
+      "about": {
+        "headline": "Formar preço a partir do custo",
+        "paragraphs": [
+          "Formar preço somando um markup fixo ao custo é a maneira mais simples de precificar um produto novo ou um prato. O difícil é fazer isso de forma consistente em dezenas de itens ou pratos sem abrir uma calculadora em outra aba para cada um.",
+          "Esta ferramenta inverte a pergunta habitual da margem: em vez de conferir a margem de um preço que você já escolheu, você diz o markup que quer e ela devolve o preço a cobrar, junto com o lucro por unidade nesse preço."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de markup",
+        "items": [
+          {
+            "question": "Qual é a fórmula do markup?",
+            "answer": "Preço de venda = Preço de custo × (1 + Markup % ÷ 100). Por exemplo, um item de ₹100 de custo com markup de 40% sai a ₹140."
+          },
+          {
+            "question": "Markup de 50% é a mesma coisa que margem de 50%?",
+            "answer": "Não. Markup de 50% sobre ₹100 de custo dá preço de venda de ₹150, o que equivale a 33,3% de margem, não 50%. Markup e margem são calculados sobre bases diferentes."
+          },
+          {
+            "question": "Que markup usar em produtos de varejo?",
+            "answer": "Depende da categoria, da concorrência e do serviço ou valor agregado que acompanha o produto. Muitos varejistas começam na faixa de 30-50% de markup e ajustam conforme o que vende e o que o mercado aceita."
+          },
+          {
+            "question": "Serve também para precificar cardápio de restaurante?",
+            "answer": "Sim: informe o custo do prato como preço de custo e o markup desejado para obter um preço inicial de cardápio, e depois confira com a calculadora de percentual de custo de alimentos."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Precifique cada item com segurança",
+        "subtext": "O Setu Dine mantém custo e preço juntos, então você muda preços sem perder a margem de vista.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de ponto de equilíbrio",
+      "shortDescription": "Descubra quantas unidades precisa vender para cobrir seus custos.",
+      "seo": {
+        "title": "Calculadora de ponto de equilíbrio — Grátis | Setu",
+        "description": "Calcule seu ponto de equilíbrio em unidades e receita. Calculadora de ponto de equilíbrio gratuita para restaurantes, lojas e pequenos negócios.",
+        "keywords": [
+          "calculadora de ponto de equilíbrio",
+          "ponto de equilíbrio em unidades",
+          "análise de ponto de equilíbrio"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Ponto de Equilíbrio",
+        "headline": "Calculadora de ponto de equilíbrio",
+        "subheadline": "Informe seus custos fixos, o preço e o custo variável por unidade para ver exatamente quanto precisa vender para cobrir os custos."
+      },
+      "about": {
+        "headline": "Tenha o seu número antes de o mês começar",
+        "paragraphs": [
+          "Seu ponto de equilíbrio é o nível de vendas em que a receita cobre exatamente os custos — vender menos é prejuízo, vender mais e cada unidade extra é contribuição direta ao lucro. É um dos números mais úteis de um negócio porque transforma aluguel, salários e os outros custos fixos em uma meta de vendas concreta.",
+          "Informe seus custos fixos mensais (aluguel, salários, assinaturas), seu custo variável por unidade (ingredientes, embalagem, custos por pedido) e seu preço de venda, e esta calculadora descobre as unidades e a receita que você precisa alcançar antes de entrar no lucro."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ponto de equilíbrio",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ponto de equilíbrio?",
+            "answer": "Unidades de equilíbrio = custos fixos ÷ (preço de venda por unidade − custo variável por unidade). Multiplique o resultado pelo preço de venda para obter a receita de equilíbrio."
+          },
+          {
+            "question": "O que é custo fixo e o que é custo variável?",
+            "answer": "Custos fixos ficam praticamente iguais independentemente do volume de vendas — aluguel, salários, assinaturas de software. Custos variáveis crescem com cada unidade vendida — ingredientes, embalagem, taxas de gateway de pagamento por pedido."
+          },
+          {
+            "question": "Por que o ponto de equilíbrio importa para um restaurante ou loja novos?",
+            "answer": "Ele transforma suas despesas gerais em uma meta de vendas diária ou mensal, o que torna muito mais fácil julgar se um ponto, um preço de menu ou um quadro de pessoal é realista antes de assumir o compromisso."
+          },
+          {
+            "question": "O que é margem de contribuição?",
+            "answer": "Margem de contribuição é o preço de venda menos o custo variável por unidade — o quanto cada venda contribui para cobrir os custos fixos. Quanto maior ela for, menos unidades você precisa vender para empatar."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Acompanhe as vendas contra o ponto de equilíbrio, todo dia",
+        "subtext": "O Setu Dine te dá dados de vendas em tempo real, então você sempre sabe como está em relação aos seus números.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de percentual de custo de alimentos",
+      "shortDescription": "Verifique se o custo dos ingredientes de um prato está saudável para o preço do cardápio.",
+      "seo": {
+        "title": "Percentual de custo de alimentos para restaurantes",
+        "description": "Calculadora gratuita do percentual de custo de alimentos. Informe o custo dos ingredientes e o preço do menu para ver o percentual e o lucro por prato.",
+        "keywords": [
+          "calculadora de custo de alimentos",
+          "percentual de custo de alimentos",
+          "custo de alimentos restaurante",
+          "calculadora de preço de menu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Custo de Alimentos",
+        "headline": "Calculadora de percentual de custo de alimentos",
+        "subheadline": "Informe o custo dos ingredientes de um prato e o preço do menu para ver o percentual de custo de alimentos e o lucro por prato."
+      },
+      "about": {
+        "headline": "O número que todo preço de menu deveria passar",
+        "paragraphs": [
+          "O percentual de custo de alimentos é a parte do preço de menu de um prato que vai para seus ingredientes. A maioria dos restaurantes tenta manter isso entre 28% e 35%, embora varie conforme a cozinha, o formato e quanta mão de obra o prato exige em relação ao custo da matéria-prima.",
+          "Passe cada prato do seu menu por esta calculadora ao definir preços ou quando o custo dos ingredientes mudar. Um prato com percentual muito fora da sua faixa-alvo precisa de mudança de preço, mudança de receita, ou está propositalmente posicionado como chamariz — mas é bom saber qual dos três."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de custo de alimentos",
+        "items": [
+          {
+            "question": "Como se calcula o percentual de custo de alimentos?",
+            "answer": "Custo de alimentos % = (custo dos ingredientes ÷ preço de venda no menu) × 100. Um prato com ₹70 de ingredientes vendido a ₹280 tem custo de alimentos de 25%."
+          },
+          {
+            "question": "Qual é um bom percentual de custo de alimentos num restaurante?",
+            "answer": "A maioria dos restaurantes, de serviço completo ou rápido, mira 28-35%, mas ingredientes premium, bebidas e itens de padaria podem ficar abaixo ou acima disso e continuar lucrativos depois de contabilizar mão de obra e despesas gerais."
+          },
+          {
+            "question": "Por que meu percentual está mais alto do que o esperado?",
+            "answer": "As causas comuns são porções que foram crescendo com o tempo, aumentos no preço dos ingredientes que os preços do menu não acompanharam, desperdício na cozinha, ou receitas que nunca foram custeadas corretamente."
+          },
+          {
+            "question": "Isso considera o custo de mão de obra?",
+            "answer": "Não — esta calculadora cobre apenas o custo da matéria-prima. Mão de obra, embalagem e despesas gerais devem ser acompanhadas separadamente, ao lado do custo de alimentos, ao definir os preços finais do menu."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Custeie cada prato com precisão, automaticamente",
+        "subtext": "O Setu Dine conecta receitas ao estoque, então o custo de alimentos continua exato quando os preços mudam.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de desconto",
+      "shortDescription": "Calcule o preço final e a economia de qualquer desconto ou promoção.",
+      "seo": {
+        "title": "Calculadora de desconto — preço final e economia | Setu",
+        "description": "Calcule na hora o preço com desconto e quanto se economiza. Informe o preço original e o percentual de desconto para ver o preço final e a economia total.",
+        "keywords": [
+          "calculadora de desconto",
+          "calculadora de percentual de desconto",
+          "calculadora de preço promocional"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de desconto",
+        "headline": "Calculadora de desconto",
+        "subheadline": "Informe o preço original e o percentual de desconto para ver o preço final e exatamente quanto se economiza."
+      },
+      "about": {
+        "headline": "Útil dos dois lados do balcão",
+        "paragraphs": [
+          "Quando você monta uma promoção ou uma oferta com cupom, precisa saber o preço final que vai cobrar de fato — e quanto isso custa em margem. Esta calculadora dá as duas coisas na hora, para qualquer percentual de desconto.",
+          "Também serve para conferir o desconto que um fornecedor oferece num pedido grande, ou para responder ao \"quanto fica com o desconto?\" do cliente sem pegar a calculadora do celular."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de desconto",
+        "items": [
+          {
+            "question": "Como calculo um preço com desconto?",
+            "answer": "Valor do desconto = Preço original × Desconto % ÷ 100. Preço final = Preço original − Valor do desconto. Um item de ₹500 com 20% de desconto economiza ₹100, ficando em ₹400."
+          },
+          {
+            "question": "Como um desconto afeta minha margem de lucro?",
+            "answer": "O desconto reduz seu preço de venda mas não o custo, então sai direto da margem. Antes de rodar uma promoção, confira a margem no preço com desconto na calculadora de margem para garantir que ainda vale a pena vender."
+          },
+          {
+            "question": "Posso juntar dois descontos?",
+            "answer": "Aplique um depois do outro, e não somando os percentuais: 20% seguido de mais 10% não é 30% no total. Passe o primeiro desconto pela calculadora e depois passe o resultado com o segundo."
+          },
+          {
+            "question": "O Setu Dine aplica descontos e cupons sozinho no faturamento?",
+            "answer": "Sim. O Setu Dine trabalha com cupons e descontos configuráveis que entram sozinhos no cupom, então a equipe não precisa calcular ofertas à mão no balcão."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Rode ofertas sem conta à mão",
+        "subtext": "O Setu Dine aplica cupons e descontos automaticamente no faturamento, sempre.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de prestação de empréstimo",
+      "shortDescription": "Estime a prestação mensal, os juros totais e o total pago em um empréstimo empresarial.",
+      "seo": {
+        "title": "Calculadora de EMI de Empréstimo — Grátis | Setu",
+        "description": "Calculadora gratuita de EMI de empréstimo empresarial. Informe o valor, a taxa de juros e o prazo para ver a prestação mensal, os juros e o total pago.",
+        "keywords": [
+          "calculadora de EMI",
+          "calculadora de empréstimo empresarial",
+          "calculadora de prestação",
+          "calculadora de financiamento"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de EMI",
+        "headline": "Calculadora de prestação de empréstimo",
+        "subheadline": "Informe o valor do empréstimo, a taxa de juros e o prazo para ver a prestação mensal, os juros totais e o total pago."
+      },
+      "about": {
+        "headline": "Saiba o valor mensal antes de assinar",
+        "paragraphs": [
+          "Seja capital de giro, financiamento de equipamentos ou uma linha de crédito para abrir uma nova loja, a prestação é o número que realmente aparece contra o seu fluxo de caixa todos os meses. Comparar propostas apenas pela taxa de juros pode enganar quando o prazo e os custos de contratação entram na conta.",
+          "Informe o valor do empréstimo, a taxa de juros anual e o prazo para obter a prestação pela fórmula padrão de saldo decrescente, junto com os juros totais que você pagará ao longo do empréstimo — útil para comparar duas propostas lado a lado."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de EMI",
+        "items": [
+          {
+            "question": "Qual é a fórmula da prestação?",
+            "answer": "Prestação = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), em que P é o valor do empréstimo, r é a taxa de juros mensal (taxa anual ÷ 12 ÷ 100) e n é o número de prestações mensais."
+          },
+          {
+            "question": "Isso inclui taxas de contratação ou outros encargos?",
+            "answer": "Não — o cálculo considera apenas o principal, a taxa de juros e o prazo. Some separadamente as taxas de contratação e outros encargos ao comparar o custo real de propostas diferentes."
+          },
+          {
+            "question": "A taxa que devo informar é a mesma que o banco anuncia?",
+            "answer": "Use a taxa de juros anual informada pelo credor. Se o credor anuncia uma taxa fixa em vez de uma taxa sobre saldo decrescente, a prestação real será diferente da mostrada aqui, porque empréstimos com taxa fixa cobram juros sobre todo o principal durante todo o prazo."
+          },
+          {
+            "question": "Como um prazo mais curto afeta os juros totais?",
+            "answer": "Um prazo mais curto significa prestação maior, mas juros totais bem menores, já que passa menos tempo com juros incidindo sobre o saldo devedor. Um prazo mais longo reduz a prestação, mas aumenta os juros pagos no total."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vai abrir uma nova loja? Podemos ajudar no planejamento",
+        "subtext": "Fale com a gente sobre o que é preciso para abrir e operar um novo ponto com o Setu Dine funcionando desde o primeiro dia.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de giro de mesas",
+      "shortDescription": "Veja quantas vezes cada mesa gira durante o serviço e o seu tempo médio de giro.",
+      "seo": {
+        "title": "Calculadora de giro de mesas — Grátis | Setu",
+        "description": "Calculadora gratuita de rotatividade de mesas para restaurantes. Informe os couverts servidos, o número de mesas e as horas de serviço para ver a rotatividade.",
+        "keywords": [
+          "calculadora de rotatividade de mesas",
+          "rotatividade de mesas restaurante",
+          "couverts por mesa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Rotatividade de Mesas",
+        "headline": "Calculadora de giro de mesas",
+        "subheadline": "Informe os couverts servidos, o número de mesas e as horas de serviço para ver sua taxa de rotatividade e o tempo médio por giro."
+      },
+      "about": {
+        "headline": "O número por trás de um salão que parece cheio",
+        "paragraphs": [
+          "A rotatividade de mesas diz quantas vezes, em média, cada mesa foi usada durante um período de serviço. É uma medida direta da eficiência com que o seu salão transforma assentos em couverts — e nos horários de pico ela pesa tanto quanto o movimento na porta.",
+          "Informe o total de couverts servidos, o número de mesas que você tem e a duração do serviço, e esta calculadora apura a sua taxa de rotatividade e o tempo médio que cada mesa ficou ocupada por giro — útil para perceber se giros lentos estão limitando a sua receita nas noites cheias."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de rotatividade de mesas",
+        "items": [
+          {
+            "question": "Como se calcula a rotatividade de mesas?",
+            "answer": "Rotatividade = couverts servidos ÷ número de mesas. Se 120 couverts foram servidos em 20 mesas durante um serviço, a rotatividade é 6: cada mesa foi usada 6 vezes em média."
+          },
+          {
+            "question": "Qual é uma boa rotatividade de mesas num restaurante?",
+            "answer": "Depende muito do formato: serviço rápido e casual buscam rotatividade alta (vários giros por serviço), enquanto a alta gastronomia opera de propósito com rotatividade baixa, permanências mais longas e gasto maior por couvert. Compare com o seu próprio formato e com o seu histórico."
+          },
+          {
+            "question": "Como melhorar a rotatividade sem apressar o cliente?",
+            "answer": "Tempos de cozinha mais rápidos, cobrança e pagamento ágeis e equipe treinada para ler as pausas naturais da refeição (em vez de impor limite de tempo) costumam melhorar a rotatividade de forma mais sustentável do que apressar os convidados."
+          },
+          {
+            "question": "O Setu Dine acompanha o status das mesas em tempo real?",
+            "answer": "Sim. O Setu Dine mostra o status das mesas ao vivo — livre, ocupada, com a conta fechada — em todo o salão, então a equipe sempre sabe o que está livre sem precisar circular para conferir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "O status de cada mesa, ao vivo",
+        "subtext": "O Setu Dine acompanha o status das mesas em tempo real, então a sua equipe de salão sempre sabe o que está livre.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de salário líquido",
+      "shortDescription": "Veja seu salário líquido mensal após previdência, imposto profissional e demais descontos.",
+      "seo": {
+        "title": "Calculadora de salário líquido — do custo ao líquido | Setu",
+        "description": "Calculadora de salário líquido gratuita. Informe o custo anual por funcionário e estime o salário mensal líquido após os descontos habituais.",
+        "keywords": [
+          "calculadora de salário líquido",
+          "salário líquido mensal",
+          "cálculo de salário líquido",
+          "calculadora de folha de pagamento"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Salário Líquido",
+        "headline": "Calculadora de salário líquido",
+        "subheadline": "Informe o custo anual por funcionário e estime o salário mensal líquido após os descontos habituais."
+      },
+      "about": {
+        "headline": "O que de fato cai na conta todo mês",
+        "paragraphs": [
+          "O custo total por funcionário quase nunca é o valor que cai na conta bancária. Contribuições ao fundo de previdência, imposto profissional e outros descontos saem antes do pagamento do salário, e a diferença entre o custo total e o líquido surpreende muita gente recém-contratada — e muitos donos que estão orçando uma nova vaga.",
+          "Esta calculadora dá uma estimativa rápida do salário líquido mensal a partir do custo anual, usando premissas habituais de previdência e imposto profissional. Os números reais dependem da sua estrutura salarial (base, auxílio-moradia, adicionais) e da política da empresa, então trate isto como uma estimativa de planejamento, não como um holerite."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de salário líquido",
+        "items": [
+          {
+            "question": "Qual é a diferença entre custo total e salário líquido?",
+            "answer": "O custo total é tudo o que o empregador gasta com uma pessoa, incluindo salário base, adicionais, a parte patronal do fundo de previdência e outros benefícios. O salário líquido é o que realmente é depositado na conta todo mês, após descontos como a parte do funcionário, o imposto profissional e a retenção do imposto de renda, quando aplicável."
+          },
+          {
+            "question": "Por que meu líquido é menor que o custo total dividido por 12?",
+            "answer": "Porque o custo total inclui contribuições do empregador que nunca chegam à conta do funcionário, e porque descontos como a parte do funcionário, o imposto profissional e a retenção na fonte são subtraídos do bruto antes do pagamento."
+          },
+          {
+            "question": "Isso é exato para o meu holerite?",
+            "answer": "É uma estimativa de planejamento, baseada em premissas habituais de previdência e imposto profissional. Seu líquido real depende da sua estrutura salarial, do seu estado e de descontos adicionais como a retenção do imposto de renda, então consulte o holerite da empresa ou o RH para o número exato."
+          },
+          {
+            "question": "Isso inclui o desconto do imposto de renda?",
+            "answer": "Não — esta calculadora estima apenas os descontos de previdência e imposto profissional. Para uma estimativa que inclua o imposto de renda, use a calculadora de imposto de renda junto com esta ferramenta."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vai contratar para uma loja nova? Veja os números primeiro",
+        "subtext": "O Setu Dine te dá os dados de vendas e de custo de pessoal para saber se uma contratação se paga.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de imposto de renda",
+      "shortDescription": "Estime o imposto de renda no regime antigo ou no novo para o ano fiscal de 2025-26.",
+      "seo": {
+        "title": "Calculadora de imposto de renda — Índia 2025-26 | Setu",
+        "description": "Calculadora gratuita de imposto de renda na Índia para 2025-26. Compare o regime antigo e o novo e veja qual sai mais barato. Apenas uma estimativa.",
+        "keywords": [
+          "calculadora de imposto de renda",
+          "calculadora de imposto Índia",
+          "regime antigo vs novo",
+          "cálculo de imposto de renda"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Imposto de Renda",
+        "headline": "Calculadora de imposto de renda",
+        "subheadline": "Compare o imposto do regime antigo e do novo sobre a sua renda no exercício 2025-26 e veja qual sai mais barato."
+      },
+      "about": {
+        "headline": "Regime antigo ou novo: decida com os números na mão",
+        "paragraphs": [
+          "O sistema indiano de imposto de renda permite que a maioria dos contribuintes escolha entre o regime antigo (mais deduções, alíquotas de faixa mais altas) e o novo (menos deduções, alíquotas mais baixas). A escolha certa depende inteiramente de quantas deduções e isenções você realmente usa — não existe resposta universal.",
+          "Esta calculadora estima o imposto devido nos dois regimes para o exercício 2025-26 (ano fiscal 2026-27), com as faixas e a dedução padrão que temos registradas, incluindo o abatimento do artigo 87A. Ela não considera o adicional sobre rendas muito altas, os casos limite do alívio marginal nem todas as deduções possíveis — e as faixas costumam ser revistas a cada Orçamento anual, então confirme sempre as faixas oficiais mais recentes ou consulte um contador antes de declarar ou escolher o regime."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de imposto de renda",
+        "items": [
+          {
+            "question": "Quais são as faixas do regime novo em 2025-26?",
+            "answer": "No regime novo (exercício 2025-26 / ano fiscal 2026-27): isento até ₹4.00.000; 5% de ₹4.00.001 a 8.00.000; 10% de ₹8.00.001 a 12.00.000; 15% de ₹12.00.001 a 16.00.000; 20% de ₹16.00.001 a 20.00.000; 25% de ₹20.00.001 a 24.00.000; e 30% acima de ₹24.00.000. As faixas mudam a cada Orçamento, então confirme na notificação oficial mais recente antes de usar isto para declarar."
+          },
+          {
+            "question": "O que é o abatimento do artigo 87A?",
+            "answer": "É um abatimento que zera o imposto devido para contribuintes abaixo de um certo limite de renda tributável. No regime novo de 2025-26 ele se aplica em geral até ₹12.00.000 de renda tributável, e logo acima disso vai diminuindo pelo alívio marginal. Esta calculadora aplica uma versão simplificada e não modela todos os casos limite."
+          },
+          {
+            "question": "Devo escolher o regime antigo ou o novo?",
+            "answer": "Depende de quanto você deduz — auxílio-moradia, investimentos do artigo 80C, juros do financiamento imobiliário e assim por diante. Se suas deduções elegíveis forem grandes, o regime antigo costuma sair mais barato; se você deduz pouco, as alíquotas menores do novo normalmente ganham. Compare os dois aqui com os seus números reais."
+          },
+          {
+            "question": "Isto substitui a orientação de um contador?",
+            "answer": "Não. É uma estimativa simplificada, apenas para planejamento: não inclui o adicional, nuances da contribuição em alguns casos e várias deduções detalhadas. Para a declaração real ou uma decisão de regime com dinheiro em jogo, confira as faixas vigentes e consulte um contador habilitado."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Cuide do negócio, não da planilha de impostos",
+        "subtext": "O Setu Dine mantém seus dados de vendas e despesas organizados, para a temporada de impostos deixar de ser uma correria.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de gratificação por tempo de serviço",
+      "shortDescription": "Estime a gratificação devida com base no salário e nos anos de serviço.",
+      "seo": {
+        "title": "Calculadora de gratificação por tempo de serviço | Setu",
+        "description": "Calculadora gratuita de gratificação por tempo de serviço na Índia. Informe o último salário e os anos de serviço para estimar o valor devido pela lei de 1972.",
+        "keywords": [
+          "calculadora de gratificação",
+          "gratificação por tempo de serviço",
+          "lei de gratificação Índia",
+          "fórmula da gratificação"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Gratificação",
+        "headline": "Calculadora de gratificação por tempo de serviço",
+        "subheadline": "Informe o último salário recebido e os anos de serviço para estimar a gratificação devida na saída."
+      },
+      "about": {
+        "headline": "Quanta gratificação é devida, e quando",
+        "paragraphs": [
+          "A gratificação é um pagamento único que o empregador deve a quem completou pelo menos 5 anos de serviço contínuo, conforme a lei indiana de 1972 sobre pagamento de gratificação. Ela é calculada a partir do último salário recebido e do total de anos de serviço — não dos ganhos de toda a carreira.",
+          "Esta calculadora aplica a fórmula padrão para quem está coberto pela lei, e serve tanto a quem quer estimar o que lhe é devido na saída quanto ao dono que orça a obrigação de gratificação da equipe antiga. O teto legal é revisto periodicamente, então confirme o limite vigente antes de tratar isto como valor final de rescisão."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de gratificação",
+        "items": [
+          {
+            "question": "Qual é a fórmula da gratificação?",
+            "answer": "Gratificação = (último salário mensal × 15 × número de anos de serviço) ÷ 26, para quem está coberto pela lei. Salário aqui normalmente significa o salário base mais o adicional de custo de vida."
+          },
+          {
+            "question": "Eu tenho direito à gratificação?",
+            "answer": "Em geral têm direito quem completou 5 anos ou mais de serviço contínuo com o mesmo empregador, com algumas exceções (como falecimento ou invalidez, em que a exigência dos 5 anos não se aplica)."
+          },
+          {
+            "question": "Existe um limite máximo de gratificação?",
+            "answer": "Sim — a lei fixa um teto legal para a gratificação isenta de imposto, que o governo revisa periodicamente. Confira o limite vigente antes de tratar o resultado desta calculadora como um valor final e já limitado."
+          },
+          {
+            "question": "Se trabalhei 7 anos e 8 meses, como contam os anos de serviço?",
+            "answer": "Pela lei, um período de mais de 6 meses além de um ano completo normalmente é arredondado para o ano seguinte. Assim, 7 anos e 8 meses costumam ser tratados como 8 anos no cálculo."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Está planejando o orçamento de pessoal?",
+        "subtext": "O Setu Dine te dá os dados de vendas para dimensionar a equipe e os custos de folha a longo prazo pelo que a sua loja consegue sustentar.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de comissão de pedidos online",
+      "shortDescription": "Veja seu repasse real após comissão da plataforma, embalagem e taxas do gateway de pagamento.",
+      "seo": {
+        "title": "Calculadora de Comissão de Delivery | Setu",
+        "description": "Calculadora gratuita de comissão de pedidos online para restaurantes. Informe o valor do pedido, a comissão e os outros encargos para ver o repasse real.",
+        "keywords": [
+          "calculadora de comissão de delivery",
+          "comissão de aplicativos de comida",
+          "calculadora de repasse por pedido",
+          "comissão de agregadores"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Comissão de Pedidos Online",
+        "headline": "Calculadora de comissão de pedidos online",
+        "subheadline": "Informe o valor do pedido e os encargos da plataforma para ver exatamente quanto sobra para você em um pedido online."
+      },
+      "about": {
+        "headline": "O que um pedido online realmente te paga",
+        "paragraphs": [
+          "As taxas de comissão divulgadas raramente contam a história completa. Somando o custo da embalagem, os encargos do gateway de pagamento e o imposto sobre a própria comissão, a diferença entre o que o cliente paga e o que cai na sua conta pode chegar a 30% ou mais.",
+          "Informe o valor do pedido e os encargos que valem na sua conta de agregador para ver o repasse real por pedido e o seu percentual efetivo. Rode alguns dos seus tamanhos de pedido mais comuns por aqui para saber se os pedidos online são tão lucrativos quanto o salão ou a retirada depois de todas as deduções."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de comissão de pedidos online",
+        "items": [
+          {
+            "question": "Como os aplicativos de delivery calculam a comissão?",
+            "answer": "A maioria cobra comissão como percentual do valor do pedido e pode somar o imposto correspondente sobre essa comissão. Encargos de embalagem e taxas de gateway de pagamento normalmente vêm separados e reduzem ainda mais o seu repasse."
+          },
+          {
+            "question": "Por que meu repasse real é tão menor que o valor do pedido?",
+            "answer": "Comissão, imposto sobre a comissão, custo de embalagem e taxas de gateway saem do valor do pedido antes de você receber. Num pedido típico essas deduções somadas costumam ficar entre 25% e 35% do valor, dependendo da plataforma e da categoria."
+          },
+          {
+            "question": "Devo precificar diferente nas plataformas de delivery?",
+            "answer": "Muitos restaurantes realmente embutem um acréscimo específico de delivery nos preços do menu no agregador para compensar a comissão, já que salão e delivery têm estruturas de custo bem diferentes. Use esta calculadora para checar se os seus preços de delivery atuais deixam uma margem sustentável."
+          },
+          {
+            "question": "O Setu Dine consegue gerenciar pedidos de várias plataformas?",
+            "answer": "Sim. O Setu Dine pode trazer pedidos de vários agregadores para uma única visão, então a sua cozinha não precisa se dividir entre um tablet por plataforma."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gerencie todos os agregadores em uma só tela",
+        "subtext": "O Setu Dine reúne os pedidos de todas as suas plataformas de delivery em uma única visão de cozinha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de preço de cardápio online",
+      "shortDescription": "Descubra o preço a publicar nos aplicativos de entrega para manter seu valor-alvo após comissão e imposto.",
+      "seo": {
+        "title": "Calculadora de preço de menu para apps de entrega",
+        "description": "Calculadora gratuita de preço de cardápio online para restaurantes. Informe quanto quer receber e descubra o preço que cobre comissão, imposto e taxas.",
+        "keywords": [
+          "calculadora de preço de menu do Zomato",
+          "calculadora de preço do Swiggy",
+          "preço de menu online depois da comissão",
+          "calculadora de preços para apps de entrega",
+          "calculadora de comissão inversa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de preço de cardápio online",
+        "headline": "Calculadora de preço de cardápio online",
+        "subheadline": "Diga quanto você quer receber de fato por um pedido online e nós calculamos o preço que precisa publicar no aplicativo."
+      },
+      "about": {
+        "headline": "Calcule de trás para frente a partir do que quer receber",
+        "paragraphs": [
+          "Se você publicar online o mesmo preço que cobra no balcão, a comissão, o imposto sobre essa comissão, a taxa do gateway e o imposto devido na venda consomem o valor antes de você ver um centavo — e o que sobra online fica bem abaixo do seu preço no salão.",
+          "Esta calculadora inverte a conta usual de comissão: informe quanto quer realmente guardar por item, junto com as taxas da sua plataforma, e ela resolve o preço publicado que chega lá. Use sempre que cadastrar um item novo em um app ou a plataforma mudar a faixa de comissão.",
+          "É um modelo simplificado: assume que comissão e taxa de gateway incidem sobre o preço publicado e que esse preço já inclui o imposto que você cobra no item. Os contratos dos apps variam, então confronte o resultado com um relatório de repasse real antes de aplicar os novos preços."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre preço de menu online",
+        "items": [
+          {
+            "question": "Por que o preço que devo publicar é maior que o do salão?",
+            "answer": "Porque comissão, imposto sobre essa comissão, taxa de gateway e o imposto devido na venda são descontados do preço publicado antes de você receber. Para sobrar online o mesmo que no balcão, o preço publicado precisa absorver todos esses descontos."
+          },
+          {
+            "question": "A comissão é cobrada mesmo sobre o preço com imposto incluído?",
+            "answer": "Depende da plataforma e do seu contrato: algumas cobram comissão sobre a base (antes do imposto), outras sobre o preço publicado inteiro. Esta calculadora assume que comissão e gateway incidem no preço publicado, o caso mais comum e mais conservador. Confira seu relatório de repasse para saber qual vale no seu caso."
+          },
+          {
+            "question": "E se nenhum preço publicado cobrir todas as taxas?",
+            "answer": "Se comissão, impostos e taxas somarem 100% ou mais do preço publicado, nenhum preço devolve o valor que você quer receber — a calculadora avisa, para você repensar a margem online do item em vez de chutar um preço."
+          },
+          {
+            "question": "O Setu Dine sincroniza esses preços com meus apps de entrega?",
+            "answer": "Sim. O Setu Dine permite gerenciar os preços do menu do salão e de vários apps em uma única tela, então os preços atualizados saem para todos os canais de uma vez."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gerencie todos os apps em uma só tela",
+        "subtext": "O Setu Dine reúne os pedidos de todas as suas plataformas de entrega em uma única visão de cozinha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de ficha técnica de receitas",
+      "shortDescription": "Precifique uma receita ingrediente a ingrediente e encontre o custo real por porção.",
+      "seo": {
+        "title": "Calculadora de ficha técnica de receitas — custo por porção",
+        "description": "Calculadora gratuita de ficha técnica para restaurantes. Adicione ingredientes e quantidades para ver o custo total, o custo por porção e um preço sugerido.",
+        "keywords": [
+          "calculadora de custo de receita",
+          "calculadora de custo de ficha técnica",
+          "custeio de menu",
+          "calculadora de custo por porção"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de ficha técnica de receitas",
+        "headline": "Calculadora de ficha técnica de receitas",
+        "subheadline": "Adicione cada ingrediente e sua quantidade para descobrir o custo real de uma receita, por porção."
+      },
+      "about": {
+        "headline": "Custeie a receita inteira, não só os ingredientes principais",
+        "paragraphs": [
+          "A maioria dos erros de precificação vem de custear um prato pelos seus 2-3 ingredientes principais e estimar o resto. Óleo, temperos, guarnição e embalagem são pequenos isoladamente, mas somam — e essa diferença se multiplica ao longo de centenas de pedidos por mês.",
+          "Adicione todos os ingredientes da receita com quantidade e custo unitário para obter um custo total correto e o custo por porção. Com o custo real em mãos, use-o junto da calculadora de percentual de custo de alimentos para definir um preço de menu que protege sua margem."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre custo de receita",
+        "items": [
+          {
+            "question": "Por que custear todos os ingredientes e não só os principais?",
+            "answer": "Ingredientes pequenos como óleo, temperos, molhos e guarnição são baratos isoladamente, mas somam dentro de uma receita; espalhados por centenas de pratos vendidos no mês, essa diferença pode corroer a margem de forma relevante se nunca for contabilizada."
+          },
+          {
+            "question": "Por quantas porções devo dividir o custo total?",
+            "answer": "Divida pelo número real de porções ou pratos que a receita rende, não pelo número de ingredientes. Se uma preparação em lote gera uma base usada em 10 pratos, use 10 como número de porções."
+          },
+          {
+            "question": "Isso inclui mão de obra ou custos indiretos?",
+            "answer": "Não — aqui se calcula apenas o custo dos ingredientes. Some mão de obra e custos indiretos separadamente e considere os dois ao lado do custo de ingredientes ao definir o preço final."
+          },
+          {
+            "question": "Posso salvar isso para cada prato do meu menu?",
+            "answer": "Esta ferramenta não guarda dados entre sessões, então anote o custo por porção de cada prato conforme avança. O Setu Dine pode guardar os custos de receita junto dos itens do menu de forma permanente e atualizá-los quando os preços dos ingredientes mudam."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Receitas que atualizam o custo sozinhas",
+        "subtext": "O Setu Dine liga as receitas aos preços atuais dos ingredientes, então o custo por prato continua correto sem recálculo manual.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de custo de dose de bebidas",
+      "shortDescription": "Descubra o percentual de custo por dose e o lucro em cada bebida servida.",
+      "seo": {
+        "title": "Calculadora de custo de dose de bebidas — controle do bar",
+        "description": "Calculadora gratuita de custo de dose para bares e restaurantes. Informe custo da garrafa, dose e preço de venda para ver o custo em % e o lucro por drink.",
+        "keywords": [
+          "calculadora de custo de dose",
+          "calculadora de custo de destilados",
+          "calculadora de custos de bar",
+          "percentual de custo de dose"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de custo de dose de bebidas",
+        "headline": "Calculadora de custo de dose de bebidas",
+        "subheadline": "Informe o custo da garrafa, o tamanho da dose e o preço de venda para ver seu custo de dose em % e o lucro por drink."
+      },
+      "about": {
+        "headline": "A versão do bar para o percentual de custo de alimentos",
+        "paragraphs": [
+          "O custo de dose é para o bar o que o percentual de custo de alimentos é para a cozinha: a parte do preço de venda de um drink que vai para o destilado em si. É o número que diz se seus preços e suas doses são realmente lucrativos, sobretudo quando você conta quantas doses saem de uma garrafa.",
+          "Informe o custo da garrafa, o volume dela, a dose que você realmente serve e o preço de venda por drink para obter o custo de dose em %, o lucro por dose e quantas doses deveria render cada garrafa. Passe seus rótulos mais vendidos por aqui sempre que um fornecedor mudar o preço."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre custo de destilados",
+        "items": [
+          {
+            "question": "Como se calcula o percentual de custo de dose?",
+            "answer": "Custo de dose % = (custo por dose ÷ preço de venda por dose) × 100, em que o custo por dose = custo da garrafa ÷ (volume da garrafa ÷ tamanho da dose)."
+          },
+          {
+            "question": "Qual percentual de custo de dose é bom?",
+            "answer": "A maioria dos bares busca 18-24% em destilados, embora varie por categoria: rótulos premium e artesanais costumam ficar um pouco acima, em troca de preço e valor percebido maiores."
+          },
+          {
+            "question": "Por que meu custo de dose real não bate com a meta?",
+            "answer": "Servir além da dose é a causa mais comum — mesmo 5-10 ml a mais por drink se acumulam rápido numa noite cheia. Doses irregulares, derramamento e drinks oferecidos ou cortesia também ampliam a diferença entre meta e realidade."
+          },
+          {
+            "question": "Quantas doses devo tirar de uma garrafa?",
+            "answer": "Doses por garrafa = volume da garrafa ÷ tamanho da dose. Uma garrafa padrão de 750 ml servida a 30 ml por drink deveria render 25 doses — compare as doses reais com esse número para identificar excesso ou desperdício."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Controle o bar como você controla a cozinha",
+        "subtext": "O Setu Dine confronta o consumo de estoque com as vendas, então excesso na dose e desperdício aparecem rápido.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de divisão de gorjetas",
+      "shortDescription": "Divida a caixinha de forma justa entre a equipe por horas, cotas ou igualmente.",
+      "seo": {
+        "title": "Calculadora de divisão de gorjetas | Setu",
+        "description": "Calculadora gratuita de divisão de gorjetas. Adicione a equipe e as horas ou pontos para dividir o bolo com justiça: em partes iguais, por horas ou por pontos.",
+        "keywords": [
+          "calculadora de divisão de gorjetas",
+          "bolo de gorjetas",
+          "divisão de gorjetas por horas",
+          "calculadora de gorjetas restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Divisão de Gorjetas",
+        "headline": "Calculadora de divisão de gorjetas",
+        "subheadline": "Adicione sua equipe e divida um bolo de gorjetas em partes iguais, por horas trabalhadas, ou por pontos/cotas."
+      },
+      "about": {
+        "headline": "Uma divisão de gorjetas que a equipe vê como justa",
+        "paragraphs": [
+          "Dividir gorjetas à mão fica confuso rápido quando entram turnos de durações diferentes ou funções diferentes. Quem fez um turno dobrado completo e quem cobriu as duas últimas horas não deveriam levar partes iguais — mas é exatamente em como ponderar isso que começam a maioria das discussões.",
+          "Esta calculadora divide o bolo de três formas: em partes iguais entre todos, proporcionalmente às horas trabalhadas, ou por um sistema de pontos em que você atribui um peso a cada função ou pessoa. Adicione a equipe, escolha o método, e a divisão se atualiza na hora."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de divisão de gorjetas",
+        "items": [
+          {
+            "question": "Qual é a diferença entre divisão igual e divisão por pontos?",
+            "answer": "A divisão igual reparte o bolo de forma uniforme, sem olhar função nem horas. A divisão por pontos dá a cada pessoa um peso (pontos ou cotas) refletindo função, tempo de casa ou horas, e reparte o bolo na proporção desses pesos — comum quando salão e apoio dividem o mesmo bolo."
+          },
+          {
+            "question": "A cozinha deve entrar no bolo junto com o salão?",
+            "answer": "As regras e os costumes da divisão de gorjetas variam por região e pela legislação trabalhista local: em alguns lugares há limites sobre quem pode participar. Confira o que é permitido onde você opera antes de decidir quem tem direito."
+          },
+          {
+            "question": "Como divido gorjetas com justiça por horas trabalhadas?",
+            "answer": "Use o método 'por horas': informe as horas de cada pessoa no turno ou período e o bolo é dividido proporcionalmente, de modo que quem trabalhou o dobro recebe cerca do dobro."
+          },
+          {
+            "question": "Posso usar para um turno só ou para as gorjetas de uma semana inteira?",
+            "answer": "Para os dois: informe o bolo total do período que está dividindo (um turno, um dia, uma semana) junto com as horas ou cotas desse mesmo período."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Folha e gorjetas, sem a planilha paralela",
+        "subtext": "O Setu Dine registra as horas de turno e as vendas por pessoa, então você sempre tem os números que a divisão precisa.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de giro de estoque",
+      "shortDescription": "Descubra quantas vezes seu estoque gira em um período e quantos dias de estoque você mantém.",
+      "seo": {
+        "title": "Calculadora de giro de estoque | Setu",
+        "description": "Calculadora gratuita de giro de estoque para o varejo. Informe o custo das mercadorias vendidas e o estoque médio para ver o giro e os dias de estoque.",
+        "keywords": [
+          "calculadora de giro de estoque",
+          "índice de giro de estoque",
+          "dias de estoque",
+          "calculadora de rotatividade de estoque"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Giro de Estoque",
+        "headline": "Calculadora de giro de estoque",
+        "subheadline": "Informe o custo das mercadorias vendidas e o valor médio do estoque para ver o seu índice de giro e os dias de estoque em mãos."
+      },
+      "about": {
+        "headline": "Dinheiro parado na prateleira é dinheiro que você não pode usar em outro lugar",
+        "paragraphs": [
+          "O giro de estoque mostra quantas vezes você vende o seu estoque médio num determinado período. Um índice baixo normalmente significa dinheiro preso em produto que não sai; um índice muito alto pode indicar risco de faltar mercadoria. Nenhum extremo é bom por si só: o número certo depende da sua categoria e da facilidade de reposição.",
+          "Informe o custo das mercadorias vendidas de um período (mês ou ano) e o valor médio do seu estoque no mesmo período para obter o índice de giro e o equivalente em dias de estoque. Acompanhe isso ao longo do tempo, não isoladamente: um índice em queda costuma ser o primeiro sinal de que está acumulando produto lento ou encalhado."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de giro de estoque",
+        "items": [
+          {
+            "question": "Qual é a fórmula do índice de giro de estoque?",
+            "answer": "Índice de giro = custo das mercadorias vendidas ÷ valor médio do estoque, do mesmo período. O estoque médio normalmente é (estoque inicial + estoque final) ÷ 2."
+          },
+          {
+            "question": "Qual é um bom índice de giro de estoque?",
+            "answer": "Varia muito por categoria: perecíveis e moda rápida giram muito mais que móveis ou eletrônicos. Compare o seu índice com o seu próprio histórico e com as referências da sua categoria, não com um número universal."
+          },
+          {
+            "question": "O que significam os 'dias de estoque'?",
+            "answer": "É o índice de giro convertido em dias: aproximadamente quantos dias de venda o seu estoque médio atual representa. Calcula-se como 365 ÷ índice de giro, e um número crescente sinaliza que o estoque está saindo mais devagar que antes."
+          },
+          {
+            "question": "Por que o meu giro de estoque está caindo?",
+            "answer": "As causas comuns são comprar demais antecipando a demanda, acúmulo de itens que não saem, queda sazonal de demanda, ou preços que já não são competitivos o bastante para mover o estoque no ritmo anterior."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Quer acesso antecipado ao Setu Retail?",
+        "subtext": "Conte sobre o seu varejo e avisamos assim que o Setu Retail for lançado, com controle de estoque incluído.",
+        "cta": {
+          "label": "Quero ser avisado"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de ponto de reposição",
+      "shortDescription": "Encontre o nível exato de estoque que deve disparar sua próxima compra.",
+      "seo": {
+        "title": "Calculadora de ponto de reposição — Evite Faltas | Setu",
+        "description": "Calculadora gratuita de ponto de pedido para o varejo. Informe a venda média diária, o prazo do fornecedor e o estoque de segurança para saber quando repor.",
+        "keywords": [
+          "calculadora de ponto de pedido",
+          "ponto de pedido de estoque",
+          "calculadora de reposição de estoque",
+          "calculadora de estoque de segurança"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Ponto de Pedido",
+        "headline": "Calculadora de ponto de reposição",
+        "subheadline": "Informe a venda média diária, o prazo de entrega do fornecedor e o estoque de segurança para saber quando deve repor."
+      },
+      "about": {
+        "headline": "Reponha antes de acabar, não depois",
+        "paragraphs": [
+          "O ponto de pedido é o nível de estoque que deve disparar uma nova ordem de compra: baixo demais e você corre o risco de ficar sem produto antes de a reposição chegar; alto demais e prende dinheiro em estoque excedente.",
+          "Informe a venda média diária de um item, quantos dias o seu fornecedor costuma levar para entregar e um colchão de estoque de segurança para picos de demanda ou atrasos, e esta calculadora dá o número exato de unidades que deve disparar o seu próximo pedido."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ponto de pedido",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ponto de pedido?",
+            "answer": "Ponto de pedido = (venda média diária × prazo do fornecedor em dias) + estoque de segurança. É o nível de estoque em que um novo pedido deve ser colocado para a reposição chegar antes de acabar."
+          },
+          {
+            "question": "Como defino o estoque de segurança?",
+            "answer": "O estoque de segurança deve cobrir tanto a variação da demanda (dias mais movimentados que a média) quanto atrasos do fornecedor. Um ponto de partida comum é alguns dias de venda média, ampliado para itens com fornecedores pouco confiáveis ou demanda instável."
+          },
+          {
+            "question": "E se o prazo do meu fornecedor variar muito?",
+            "answer": "Use o seu pior prazo realista em vez do melhor caso ao calcular o ponto de pedido, e conte com um colchão de segurança maior para itens cujo prazo é imprevisível."
+          },
+          {
+            "question": "Isso considera picos sazonais de demanda?",
+            "answer": "Não diretamente: o cálculo usa a sua venda média diária. Para itens de estação, recalcule com a venda média diária esperada para a temporada que vem, em vez de uma média anual uniforme."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Quer acesso antecipado ao Setu Retail?",
+        "subtext": "Conte sobre o seu varejo e avisamos assim que o Setu Retail for lançado, com alertas de reposição incluídos.",
+        "cta": {
+          "label": "Quero ser avisado"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de custo de aquisição de cliente (CAC)",
+      "shortDescription": "Descubra exatamente quanto você gasta para conquistar cada novo cliente.",
+      "seo": {
+        "title": "Calculadora de Custo de Aquisição (CAC) | Setu",
+        "description": "Calculadora de CAC gratuita. Informe o gasto em marketing e os clientes novos conquistados para achar seu custo de aquisição e comparar com a receita.",
+        "keywords": [
+          "calculadora de CAC",
+          "custo de aquisição de clientes",
+          "custo de marketing por cliente",
+          "fórmula do CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de CAC",
+        "headline": "Calculadora de Custo de Aquisição de Clientes",
+        "subheadline": "Informe seu gasto em marketing e os clientes novos conquistados para achar seu custo por cliente."
+      },
+      "about": {
+        "headline": "O número que diz se o marketing está funcionando",
+        "paragraphs": [
+          "O custo de aquisição de clientes (CAC) é quanto você gasta, em média, para conquistar um cliente novo, contando todos os custos de marketing e vendas envolvidos. Ele só significa algo ao lado de um segundo número: quanto esse cliente realmente vale para você.",
+          "Informe o gasto total de um período e o número de clientes novos que ele trouxe para obter o seu CAC. Se você também souber a receita média por cliente, esta calculadora mostra a relação entre os dois — uma checagem rápida de se uma campanha ou canal está se pagando."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de CAC",
+        "items": [
+          {
+            "question": "Qual é a fórmula do CAC?",
+            "answer": "CAC = gasto total em marketing e vendas ÷ número de clientes novos conquistados, no mesmo período. Gastar 50.000 para conquistar 100 clientes novos dá um CAC de 500."
+          },
+          {
+            "question": "Que custos devo incluir no gasto de marketing?",
+            "answer": "Inclua investimento em anúncios, honorários de agência ou taxas de plataforma, descontos promocionais usados só para aquisição e uma parcela razoável do custo do time comercial, se for o caso: tudo que foi gasto especificamente para trazer clientes novos no período."
+          },
+          {
+            "question": "Qual é um bom CAC?",
+            "answer": "Depende inteiramente de quanto um cliente vale para você ao longo do tempo. Um CAC é saudável se fica confortavelmente abaixo da receita (de preferência recorrente) que um cliente típico gera: não existe um número 'bom' fixo para todos os negócios."
+          },
+          {
+            "question": "Qual é a diferença entre CAC e ticket médio?",
+            "answer": "O CAC mede quanto você gastou para conquistar um cliente; o ticket médio mede quanto esse cliente gasta por pedido depois de conquistado. Comparar os dois indica aproximadamente quantos pedidos são necessários para recuperar o custo de aquisição."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Saiba quais clientes vale a pena manter",
+        "subtext": "O Setu Dine acompanha clientes recorrentes e histórico de pedidos, então você vê quais canais trazem clientes que realmente voltam.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de ticket médio (AOV)",
+      "shortDescription": "Descubra seu ticket médio e veja o impacto na receita ao aumentá-lo um pouco.",
+      "seo": {
+        "title": "Calculadora de Ticket Médio (AOV) | Setu",
+        "description": "Calculadora de ticket médio gratuita. Informe a receita total e o número de pedidos para achar seu ticket médio e ver o efeito de aumentá-lo.",
+        "keywords": [
+          "calculadora de ticket médio",
+          "calculadora AOV",
+          "fórmula do ticket médio",
+          "ticket médio em e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de Ticket Médio",
+        "headline": "Calculadora de Ticket Médio",
+        "subheadline": "Informe a receita total e o número de pedidos para achar seu ticket médio e ver quanto vale um aumento pequeno."
+      },
+      "about": {
+        "headline": "Um aumento pequeno no ticket médio se multiplica rápido",
+        "paragraphs": [
+          "O ticket médio é o valor gasto em média por pedido — e é uma das poucas alavancas de receita que você consegue mover sem conquistar um único cliente novo. Uma oferta de combo, uma sugestão de adicional bem colocada ou um ajuste pequeno de preço podem elevar o ticket médio em todos os pedidos que você já recebe.",
+          "Informe a receita total e o número de pedidos de um período para achar o seu ticket médio atual e, depois, um percentual de aumento desejado para ver quanto essa melhora valeria em receita extra no mesmo volume de pedidos — útil para julgar se um esforço de venda adicional ou uma mudança de menu ou de combos vale o trabalho."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ticket médio",
+        "items": [
+          {
+            "question": "Qual é a fórmula do ticket médio?",
+            "answer": "Ticket médio = receita total ÷ número de pedidos, do mesmo período. Uma receita de 5.00.000 em 1.000 pedidos dá um ticket médio de 500."
+          },
+          {
+            "question": "Como aumentar o ticket médio?",
+            "answer": "As alavancas comuns são ofertas de combo ou kit, sugerir um tamanho maior ou um adicional no momento do pedido, frete grátis acima de um valor mínimo e destacar itens que combinam com o que o cliente já está pedindo."
+          },
+          {
+            "question": "Por que um aumento pequeno no ticket médio importa tanto?",
+            "answer": "Porque ele vale para todos os pedidos que você já recebe, sem custo adicional de aquisição: uma melhora de 10% no seu volume atual vira receita extra direta, sem precisar de um único cliente novo."
+          },
+          {
+            "question": "Ticket médio mais alto é sempre melhor?",
+            "answer": "Para receita, normalmente sim, mas confira se não vem ao custo da frequência de pedidos ou da satisfação do cliente: empurrar adicionais com insistência demais pode sair pela culatra. Acompanhe o ticket médio ao lado da taxa de recompra para perceber isso cedo."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Encontre oportunidades de venda adicional automaticamente",
+        "subtext": "O Setu Dine mostra avisos de combo e adicionais na hora de fechar a conta, então aumentar o ticket médio não depende de a equipe lembrar de oferecer.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de engenharia de cardápio",
+      "shortDescription": "Analise os itens do cardápio por lucro e popularidade para identificar estrelas, vacas, enigmas e abacaxis.",
+      "seo": {
+        "title": "Calculadora de engenharia de cardápio para restaurantes",
+        "description": "Calculadora de engenharia de cardápio gratuita. Informe preços, custos e popularidade para achar seus pratos lucrativos e corrigir os que consomem sua margem.",
+        "keywords": [
+          "calculadora de engenharia de menu",
+          "análise do menu de restaurante",
+          "calculadora de lucro do menu",
+          "otimização do menu de restaurante",
+          "calculadora de margem de contribuição",
+          "classificação do menu",
+          "análise de lucratividade de restaurante"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de engenharia de cardápio",
+        "headline": "Calculadora de engenharia de cardápio",
+        "subheadline": "Analise seu menu por lucro e popularidade: identifique as estrelas para promover, as vacas leiteiras para destacar e os cães para remover ou reprecificar."
+      },
+      "about": {
+        "headline": "Pare de adivinhar quais pratos dão lucro",
+        "paragraphs": [
+          "Engenharia de menu é a prática de analisar os pratos do seu menu por margem de contribuição e popularidade, para identificar quais são realmente lucrativos e quais estão consumindo suas margens.",
+          "Esta ferramenta classifica cada prato em uma de quatro categorias: Estrelas (muito lucro, muita popularidade), que devem ser promovidas; Vacas leiteiras (muito lucro, pouca popularidade), que precisam de visibilidade; Enigmas (pouco lucro, muita popularidade), que precisam de novo preço; e Cães (pouco lucro, pouca popularidade), que devem sair ou ser reposicionados. Informe seus pratos com preço, custo e unidades vendidas — o resto a calculadora faz."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre engenharia de menu",
+        "items": [
+          {
+            "question": "O que significa «margem de contribuição» em engenharia de menu?",
+            "answer": "É o lucro por prato antes de ratear os custos fixos (aluguel, salários etc.). É quanto cada venda contribui para cobrir os custos fixos e gerar lucro, calculado como preço de venda menos custo da mercadoria vendida."
+          },
+          {
+            "question": "Como os pratos são classificados?",
+            "answer": "Comparando a margem de contribuição e a popularidade (unidades vendidas) de cada prato com a média do menu. Estrelas são altas nas duas, Vacas leiteiras têm boa margem mas pouca saída, Enigmas vendem muito mas rendem pouco, e Cães são baixos nas duas."
+          },
+          {
+            "question": "O que fazer com cada classificação?",
+            "answer": "Estrelas: promova forte e mantenha o preço estável. Vacas leiteiras: aumente visibilidade e combos para elevar as vendas. Enigmas: suba o preço ou reduza custos (já são populares, só não são lucrativos). Cães: remova, reposicione como chamariz, ou melhore o custo da receita."
+          },
+          {
+            "question": "Popularidade significa unidades vendidas ou receita?",
+            "answer": "Nesta calculadora, popularidade significa unidades ou couverts vendidos, não receita. Um prato de margem baixa que vende muito é um Enigma, não uma Estrela, porque ocupa a capacidade da cozinha sem entregar margem."
+          },
+          {
+            "question": "Com que frequência devo repetir essa análise?",
+            "answer": "Pelo menos uma vez por mês, ou sempre que incluir pratos novos e fizer mudanças relevantes de preço ou receita. Mudanças sazonais de popularidade movem pratos entre categorias, então você percebe a dinâmica e ajusta o posicionamento."
+          },
+          {
+            "question": "Isso considera o custo de mão de obra?",
+            "answer": "Não — esta calculadora usa apenas o custo dos ingredientes para achar a margem de contribuição. Para um retrato mais completo, acrescente ao custo da mercadoria uma estimativa de mão de obra por prato (preparo, cocção, montagem) antes de calcular a margem."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Otimize seu menu com dados em tempo real",
+        "subtext": "O Setu Dine registra automaticamente o custo e as vendas de cada prato, então você faz engenharia de menu diariamente e identifica os pratos que matam o lucro antes que eles afetem seu resultado.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de IVA",
+      "shortDescription": "Adicione IVA a um preço líquido ou extraia o IVA de um valor bruto, com qualquer alíquota.",
+      "seo": {
+        "title": "Calculadora de IVA — Adicionar ou Remover IVA | Setu",
+        "description": "Calculadora de IVA gratuita. Adicione IVA a um valor líquido ou retire-o de um preço com imposto, com as taxas padrão de mais de 65 países já incluídas.",
+        "keywords": [
+          "calculadora de IVA",
+          "adicionar IVA",
+          "remover IVA",
+          "calculadora de IVA inverso",
+          "calcular IVA 23%",
+          "calculadora de IVA online"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de IVA",
+        "headline": "Calculadora de IVA",
+        "subheadline": "Adicione IVA a um preço líquido ou retire o IVA de um valor com imposto: escolha qualquer taxa e veja na hora o líquido, o imposto e o total."
+      },
+      "about": {
+        "headline": "Para que serve uma calculadora de IVA",
+        "paragraphs": [
+          "Se você vende a clientes ou compra de fornecedores em países com IVA — Portugal, o resto da UE, o Reino Unido, os Emirados, a África do Sul e mais de 170 outros — precisa alternar o tempo todo entre preço líquido e preço com imposto. Fazer isso à mão dá margem a erro, sobretudo com taxas como 12,5% ou 23%.",
+          "Esta calculadora funciona nos dois sentidos. Informe um valor líquido para ver o IVA e o total, ou informe um preço com IVA incluído para recuperar o valor líquido e o imposto dentro dele. Os botões de seleção rápida cobrem as taxas mais comuns do mundo, e você pode digitar qualquer taxa personalizada."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de IVA",
+        "items": [
+          {
+            "question": "Como adiciono IVA a um preço?",
+            "answer": "Multiplique o preço líquido pela taxa de IVA e some. A 20% de IVA, um líquido de 100 carrega 20 de IVA e dá 120 no total. Esta calculadora faz isso na hora para qualquer taxa."
+          },
+          {
+            "question": "Como removo o IVA de um valor total?",
+            "answer": "Divida o valor total por (1 + taxa). Um preço de 120 com IVA de 20% é 120 ÷ 1,20 = 100 de líquido, com 20 de IVA. Nunca subtraia a percentagem diretamente — isso dá o resultado errado."
+          },
+          {
+            "question": "Qual é a diferença entre IVA e GST?",
+            "answer": "Funcionam da mesma forma: um imposto sobre o valor acrescentado em cada etapa. Os países apenas usam nomes e taxas diferentes. A Índia usa GST (use a nossa calculadora de GST para a divisão CGST/SGST); o Reino Unido, a UE e muitos outros usam IVA."
+          },
+          {
+            "question": "Que taxa de IVA devo usar?",
+            "answer": "A taxa normal do país onde a venda é tributada — por exemplo 20% no Reino Unido, 19% na Alemanha, 5% nos Emirados. Muitos países também têm taxas reduzidas para bens essenciais; confira a categoria do seu bem ou serviço."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de imposto sobre vendas",
+      "shortDescription": "Calcule o sales tax dos EUA: some alíquotas estaduais e locais, aplique ou extraia de um total.",
+      "seo": {
+        "title": "Calculadora de imposto sobre vendas (EUA) | Setu",
+        "description": "Calculadora gratuita de imposto sobre vendas. Combine as taxas estadual e local, some o imposto a um preço ou retire-o de um total já pago. Sem cadastro.",
+        "keywords": [
+          "calculadora de imposto sobre vendas",
+          "sales tax EUA",
+          "calculadora de imposto estadual",
+          "imposto sobre vendas inverso",
+          "imposto sobre a compra"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Imposto sobre Vendas",
+        "headline": "Calculadora de imposto sobre vendas",
+        "subheadline": "Combine as taxas estadual e local e depois some o imposto a um preço ou retire o imposto de um total que você já pagou."
+      },
+      "about": {
+        "headline": "Como funciona o imposto sobre vendas nos EUA",
+        "paragraphs": [
+          "Diferente do IVA ou do GST, o imposto sobre vendas dos EUA é somado no caixa e varia por estado, condado e cidade. A taxa que você cobra normalmente é a estadual mais as taxas locais aplicáveis no ponto de venda — por isso duas lojas a poucos quilômetros de distância podem cobrar impostos diferentes.",
+          "Informe a taxa estadual e qualquer taxa local ou municipal, e esta calculadora mostra a taxa combinada, o valor do imposto e o total. Inverta para retirar o imposto do total de um recibo quando estiver fazendo a contabilidade ou justificando despesas."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de imposto sobre vendas",
+        "items": [
+          {
+            "question": "Como calculo o imposto sobre uma compra?",
+            "answer": "Multiplique o preço sem imposto pela taxa combinada. Uma compra de US$ 100 com taxa combinada de 8% carrega US$ 8 de imposto, total de US$ 108."
+          },
+          {
+            "question": "Como descubro o preço sem imposto a partir do total?",
+            "answer": "Divida o total por (1 + taxa combinada). Um total de US$ 108 a 8% é US$ 108 ÷ 1,08 = US$ 100 sem imposto e US$ 8 de imposto."
+          },
+          {
+            "question": "Por que preciso das taxas estadual e local separadas?",
+            "answer": "A maioria dos estados dos EUA permite que condados, cidades e distritos especiais somem o próprio imposto sobre a taxa estadual. O cliente paga o total combinado do local da venda, então esta calculadora recebe as duas e soma para você."
+          },
+          {
+            "question": "Todos os estados dos EUA cobram imposto sobre vendas?",
+            "answer": "Não — Alasca, Delaware, Montana, Nova Hampshire e Oregon não têm imposto estadual sobre vendas (ainda que algumas localidades do Alasca cobrem o próprio). Todos os outros estados têm uma taxa estadual, normalmente entre 4% e 7,25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de ROI",
+      "shortDescription": "Meça o retorno sobre o investimento: lucro líquido, ROI em % e retorno anualizado de qualquer gasto.",
+      "seo": {
+        "title": "Calculadora de ROI — Retorno sobre Investimento | Setu",
+        "description": "Calculadora de ROI gratuita. Informe o valor investido e o valor recebido para obter o lucro líquido, o ROI em percentual e o ROI anualizado do período.",
+        "keywords": [
+          "calculadora de ROI",
+          "retorno sobre investimento",
+          "ROI anualizado",
+          "calculadora de rentabilidade",
+          "fórmula do ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de ROI",
+        "headline": "Calculadora de ROI",
+        "subheadline": "Informe o que você colocou e o que recebeu de volta: veja o lucro líquido, o ROI em percentual e o retorno anualizado do período."
+      },
+      "about": {
+        "headline": "Por que o ROI importa em toda decisão do negócio",
+        "paragraphs": [
+          "Seja um equipamento novo de cozinha, uma campanha de marketing ou o estoque da temporada, cada real que você aplica deveria se pagar. O ROI coloca todas essas escolhas na mesma escala: o que o dinheiro devolveu em relação ao que custou?",
+          "O percentual simples de ROI mostra o ganho total. O número anualizado importa quando se comparam opções de prazos diferentes — 40% em 4 anos é bem mais fraco que 25% em um ano. Informe o período e esta calculadora apresenta os dois."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de ROI",
+        "items": [
+          {
+            "question": "Como o ROI é calculado?",
+            "answer": "ROI = (valor recebido − valor investido) ÷ valor investido × 100. Investir ₹1.00.000 e receber ₹1.40.000 dá um ROI de 40%."
+          },
+          {
+            "question": "O que é ROI anualizado?",
+            "answer": "Ele converte um retorno total em taxa composta por ano: (recebido ÷ investido)^(1 ÷ anos) − 1. Um retorno total de 40% em 2 anos equivale a cerca de 18,3% ao ano — útil para comparar investimentos de durações diferentes."
+          },
+          {
+            "question": "Qual é um bom ROI para um negócio pequeno?",
+            "answer": "Depende do risco e das suas alternativas. Como régua aproximada, o investimento deve superar o que o mesmo dinheiro renderia com segurança (taxas de aplicação de renda fixa) por uma margem que justifique o esforço — muitos donos de pequenos negócios buscam 15–30% ao ano ou mais em investimentos operacionais."
+          },
+          {
+            "question": "Isso inclui custos contínuos?",
+            "answer": "Inclua-os no valor investido, ou subtraia-os do valor recebido — de qualquer forma, o ROI é tão honesto quanto os números que você informa. Para marketing, nossa calculadora de CAC complementa isto medindo o custo por cliente."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de depreciação",
+      "shortDescription": "Depreciação linear ou por saldo decrescente, com cronograma completo ano a ano.",
+      "seo": {
+        "title": "Calculadora e Cronograma de Depreciação | Setu",
+        "description": "Calculadora de depreciação gratuita. Calcule a depreciação linear ou pelo saldo decrescente com um cronograma completo, ano a ano, dos valores contábeis.",
+        "keywords": [
+          "calculadora de depreciação",
+          "depreciação linear",
+          "depreciação por saldo decrescente",
+          "depreciação WDV",
+          "cronograma de depreciação de ativos"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Depreciação",
+        "headline": "Calculadora de depreciação",
+        "subheadline": "Informe o custo do ativo, o valor residual e a vida útil: obtenha a depreciação anual e um cronograma completo ano a ano, linear ou por saldo decrescente."
+      },
+      "about": {
+        "headline": "Dois métodos, um cronograma",
+        "paragraphs": [
+          "A depreciação distribui o custo de um ativo ao longo da sua vida útil, e o método muda o formato da despesa. O linear divide o custo igualmente cada ano: simples e comum para móveis, instalações e equipamentos. O saldo decrescente aplica um percentual fixo ao valor contábil restante e concentra a despesa no começo: é a abordagem que a lei indiana do imposto de renda usa para a maioria dos blocos de ativos.",
+          "Esta calculadora produz o cronograma completo por qualquer dos métodos: valor inicial, depreciação e valor contábil final de cada ano, para você levar os números direto para a contabilidade ou comparar os métodos antes de escolher."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de depreciação",
+        "items": [
+          {
+            "question": "Como funciona a depreciação linear?",
+            "answer": "Depreciação anual = (custo − valor residual) ÷ vida útil. Uma máquina de ₹5.00.000 com residual de ₹50.000 em 5 anos deprecia ₹90.000 por ano."
+          },
+          {
+            "question": "Como funciona o saldo decrescente?",
+            "answer": "A cada ano você deprecia um percentual fixo do valor contábil restante. A 25%, um ativo de ₹5.00.000 deprecia ₹1.25.000 no primeiro ano, depois 25% de ₹3.75.000 no segundo, e assim por diante: deduções maiores no começo e menores depois."
+          },
+          {
+            "question": "Qual método devo usar?",
+            "answer": "Para fins de imposto de renda na Índia, o saldo decrescente às taxas de bloco previstas é o padrão para a maioria das empresas. Para a sua contabilidade gerencial, o linear é mais simples e mostra um custo estável. Companhias que reportam pela lei das sociedades seguem as vidas úteis do anexo II. Na dúvida, pergunte ao seu contador."
+          },
+          {
+            "question": "O que é valor residual?",
+            "answer": "Quanto você espera que o ativo valha no fim da vida útil: valor de revenda ou de sucata. A depreciação para quando o valor contábil chega a ele."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O PDV e as ferramentas do Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de prazos de pagamento",
+      "shortDescription": "Datas de vencimento, economia por pagamento antecipado e o custo real de pagar em atraso.",
+      "seo": {
+        "title": "Calculadora de prazos de pagamento — 30 dias",
+        "description": "Calculadora de prazos de pagamento gratuita: vencimento exato de 15/30/45/60 dias, economia do desconto à vista e o custo real de dispensá-lo.",
+        "keywords": [
+          "calculadora de prazos de pagamento",
+          "calculadora net 30",
+          "2/10 net 30",
+          "desconto por pagamento antecipado",
+          "calculadora de data de vencimento de fatura",
+          "custo do crédito comercial"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de prazos de pagamento",
+        "headline": "Calculadora de prazos de pagamento",
+        "subheadline": "Transforme prazos como «2/10 net 30» em datas e valores reais: vencimento, economia ao pagar antes e quanto custa de fato dispensar o desconto."
+      },
+      "about": {
+        "headline": "Decifre os prazos de uma fatura em segundos",
+        "paragraphs": [
+          "Prazos como «net 30» ou «2/10 net 45» escondem em poucos caracteres uma data de vencimento, um desconto e uma taxa de juros implícita. Esta calculadora abre tudo isso: a data exata de vencimento a partir da data da fatura, o valor do desconto se você pagar dentro do prazo e o custo anualizado de não pagar.",
+          "É esse último número que surpreende. Dispensar um desconto de 2% para segurar o caixa por 20 dias extras equivale a tomar dinheiro emprestado a mais de 36% ao ano — bem mais caro que a maioria das linhas de capital de giro. Saber disso permite decidir com números, seja você o comprador ou o vendedor que define os prazos."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre prazos de pagamento",
+        "items": [
+          {
+            "question": "O que significa 2/10 net 30?",
+            "answer": "Pague em até 10 dias e ganhe 2% de desconto na fatura; caso contrário, o valor integral vence 30 dias após a data da fatura."
+          },
+          {
+            "question": "Como se calcula o custo de dispensar um desconto?",
+            "answer": "Custo ≈ (% de desconto ÷ (100 − % de desconto)) × (365 ÷ dias extras de crédito) × 100. Para 2/10 net 30, isso dá (2 ÷ 98) × (365 ÷ 20) ≈ 37% ao ano — o que esses 20 dias extras de crédito realmente custam."
+          },
+          {
+            "question": "O vencimento conta da data da fatura ou da entrega?",
+            "answer": "Normalmente da data da fatura, a menos que o contrato diga outra coisa (alguns usam prazos de fim de mês, escritos «net 30 FDM»). Esta calculadora conta dias corridos a partir da data da fatura que você informar."
+          },
+          {
+            "question": "Devo oferecer desconto por pagamento antecipado aos meus clientes?",
+            "answer": "Se o caixa está apertado ou os clientes pagam devagar, um desconto pequeno pode antecipar muito a entrada de dinheiro e reduzir a cobrança. Defina o valor com consciência — a mesma conta de custo anualizado vale para você como vendedor."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de variação de preço de compra",
+      "shortDescription": "Compare preços de compra reais e padrão e veja a variação total na hora.",
+      "seo": {
+        "title": "Calculadora de variação de preço de compra (PPV)",
+        "description": "Calculadora PPV gratuita. Compare os preços realmente pagos com os preços padrão ou orçados e veja a variação por unidade, em % e a variação total de compra.",
+        "keywords": [
+          "calculadora de variação do preço de compra",
+          "calculadora PPV",
+          "fórmula de variação de preço",
+          "variação em compras",
+          "variação de custo padrão"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora PPV",
+        "headline": "Calculadora de variação de preço de compra",
+        "subheadline": "Preço padrão versus preço real × quantidade: veja a variação por unidade, em porcentagem e total, marcada como favorável ou desfavorável."
+      },
+      "about": {
+        "headline": "Pegue o aumento silencioso de custo antes que ele coma sua margem",
+        "paragraphs": [
+          "A variação do preço de compra mede a diferença entre o que você planejou pagar por materiais ou estoque e o que de fato pagou. Fornecedores sobem preços sem avisar, o tamanho dos pedidos muda, o mercado oscila — o PPV é como as equipes de compras percebem isso cedo e medem o impacto.",
+          "Uma variação positiva (desfavorável) significa que as compras saíram mais caras que o padrão: a margem já vaza na entrada. Uma variação negativa (favorável) significa que você superou o plano. Acompanhe por item e por fornecedor, e leve as variações persistentes para o seu preço de venda ou para uma renegociação."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre a calculadora PPV",
+        "items": [
+          {
+            "question": "Como se calcula a variação do preço de compra?",
+            "answer": "PPV = (preço real − preço padrão) × quantidade comprada. Comprar 500 unidades a ₹110 contra um padrão de ₹100 gera variação desfavorável de ₹5.000."
+          },
+          {
+            "question": "O que é o preço padrão?",
+            "answer": "A referência que você usou para planejar: uma taxa orçada, um preço de contrato negociado ou o custo médio do período anterior. A consistência importa mais do que qual deles você escolhe."
+          },
+          {
+            "question": "Variação favorável é sempre boa?",
+            "answer": "Geralmente sim, mas confira o motivo. Preço menor por qualidade inferior, pedidos no atacado maiores do que o necessário ou prazos de entrega perdidos podem custar depois mais do que a variação economiza."
+          },
+          {
+            "question": "Com que frequência devo revisar o PPV?",
+            "answer": "Para a maioria dos pequenos negócios, uma vez por mês funciona — frequente o bastante para pegar aumentos de fornecedores antes que se acumulem, sem afogar você em ruído. Comece pelos itens de maior gasto (nossa ferramenta de análise ABC ajuda a ordená-los)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de índices financeiros",
+      "shortDescription": "Índices de liquidez, alavancagem, margem e eficiência a partir do balanço e da DRE.",
+      "seo": {
+        "title": "Calculadora de índices financeiros para empresas",
+        "description": "Calculadora de índices financeiros gratuita. Informe dados do balanço e da DRE para obter liquidez, endividamento, margens e prazo médio de recebimento.",
+        "keywords": [
+          "calculadora de índices financeiros",
+          "calculadora de liquidez corrente",
+          "liquidez seca",
+          "índice de endividamento",
+          "análise de índices",
+          "diagnóstico financeiro da empresa"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Analisador de índices",
+        "headline": "Calculadora de índices financeiros",
+        "subheadline": "Sete índices essenciais a partir de poucos números: liquidez, endividamento, margens e eficiência em uma só tela."
+      },
+      "about": {
+        "headline": "Um check-up de saúde para o seu negócio",
+        "paragraphs": [
+          "Números isolados de um balanço dizem pouco sozinhos — os índices os colocam em contexto. Você consegue cobrir as contas de curto prazo (liquidez corrente e seca)? Está endividado demais (índice de endividamento)? A operação principal dá lucro (margens bruta e líquida)? O dinheiro está preso em estoque ou com clientes (giro de estoque e prazo de recebimento)?",
+          "Bancos e investidores calculam exatamente esses índices quando olham suas contas, então vale ver primeiro. Informe os números do seu balanço e DRE mais recentes — ou monte essas demonstrações com nossas ferramentas gratuitas de balanço e DRE — e leia os resultados junto das referências fornecidas."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas frequentes sobre índices financeiros",
+        "items": [
+          {
+            "question": "Qual liquidez corrente é boa?",
+            "answer": "Entre 1,5 e 3 é confortável para a maioria dos negócios. Abaixo de 1, o passivo circulante supera o ativo circulante — um alerta de liquidez. Muito acima de 3 pode indicar caixa ocioso ou estoque em excesso."
+          },
+          {
+            "question": "Por que a liquidez seca exclui o estoque?",
+            "answer": "O estoque pode levar meses para virar dinheiro e, sob pressão, sair abaixo do valor contábil. A liquidez seca ((ativo circulante − estoque) ÷ passivo circulante) testa se você pagaria as contas próximas sem depender de vendê-lo."
+          },
+          {
+            "question": "O que o índice de endividamento me diz?",
+            "answer": "Quanto do negócio é financiado por dívida em comparação com o dinheiro dos sócios. Abaixo de 1 é conservador, 1–2 é comum; acima de 2, os credores assumem mais risco e crédito novo fica mais difícil e mais caro."
+          },
+          {
+            "question": "O que é prazo médio de recebimento (DSO)?",
+            "answer": "Contas a receber ÷ receita anual × 365 — a média de dias que os clientes levam para pagar. Se seu prazo é 30 dias mas o DSO é 55, a cobrança precisa de atenção (nossa ferramenta de aging de faturas mostra exatamente onde)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Números que se registram sozinhos",
+        "subtext": "O POS e as ferramentas de gestão da Setu registram vendas, custos e impostos automaticamente, então os relatórios se montam enquanto você trabalha.",
+        "cta": {
+          "label": "Conheça o Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculadora de MDR",
+      "shortDescription": "Veja quanto de MDR é cobrado num pagamento e quanto realmente cai na sua conta, com MDR incluso ou por fora.",
+      "seo": {
+        "title": "Calculadora de MDR — Taxas do Gateway | Setu",
+        "description": "Calculadora gratuita de MDR para comerciantes na Índia. Informe um valor com ou sem MDR para ver a taxa do adquirente, o GST sobre ela e o que você recebe.",
+        "keywords": [
+          "calculadora de MDR",
+          "taxa de desconto do lojista",
+          "taxas de gateway de pagamento",
+          "MDR incluído ou excluído",
+          "MDR do UPI na Índia",
+          "taxas de transação com cartão"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Ferramenta gratuita — Calculadora de MDR",
+        "headline": "Calculadora de MDR",
+        "subheadline": "Calcule a taxa de desconto do lojista sobre um recebimento e o que cai na sua conta depois que ela e o GST dela saem."
+      },
+      "about": {
+        "headline": "Quanto o MDR custa de verdade",
+        "paragraphs": [
+          "A taxa de desconto do lojista (MDR) é a parte que o seu adquirente retém em cada recebimento por cartão ou carteira digital, e o GST incide também sobre essa parte. Numa venda de ₹5.000 no crédito a 2%, o MDR é ₹100 e o GST sobre ele mais ₹18, então liquidam ₹4.882 em vez de ₹5.000. Ao longo de um mês de volume no cartão essa diferença é dinheiro de verdade, e a maioria dos comerciantes só a encontra no relatório de liquidação.",
+          "Você pode informar o valor de duas formas, conforme o que souber. Com MDR incluído, o número é o que o cliente paga, e a calculadora diz quanto fica com você. Com MDR excluído, o número é o que você quer receber, e a calculadora eleva a cobrança para que o líquido depois do MDR saia exato — útil quando você repassa a taxa ao cliente ou dá um preço que precisa deixar um valor fixo.",
+          "Nem todo meio custa o mesmo, e o do UPI está a ponto de mudar. A partir de 15 de outubro de 2026, pagamentos UPI a comerciantes acima de ₹2.000 têm MDR de 0,4% sobre o valor total, com teto de ₹300 por transação. Até ₹2.000 continua sem MDR, o débito RuPay e os mandatos de UPI Autopay seguem isentos, e comerciantes que recebem menos de ₹1 lakh por mês via QR do UPI também — por isso dividir um recebimento grande em vários QR menores pode zerar o custo."
+        ]
+      },
+      "faq": {
+        "headline": "Perguntas sobre a calculadora de MDR",
+        "items": [
+          {
+            "question": "O que é MDR?",
+            "answer": "MDR, ou taxa de desconto do lojista, é a tarifa que o comerciante paga para aceitar um pagamento digital. Normalmente é um percentual do valor da transação, às vezes com uma tarifa fixa por cima, e é descontada antes de o dinheiro ser liquidado na conta do comerciante. O GST incide sobre o próprio MDR."
+          },
+          {
+            "question": "Qual é a diferença entre MDR incluído e MDR excluído?",
+            "answer": "MDR incluído significa que o valor digitado é o que o cliente paga, e o MDR sai dele, então você recebe menos. MDR excluído significa que o valor digitado é o que você quer receber, então a cobrança é elevada para cobrir o MDR e o GST dele. Use excluído quando precisar que um valor específico caia na sua conta."
+          },
+          {
+            "question": "Existe MDR nos pagamentos por UPI na Índia?",
+            "answer": "Até ₹2.000 não há, e o débito RuPay fica em zero por regulação. A partir de 15 de outubro de 2026, pagamentos UPI a comerciantes acima de ₹2.000 têm MDR de 0,4%, cobrado sobre o valor total da transação e limitado a ₹300. UPI Autopay e outros mandatos recorrentes são isentos, assim como comerciantes que recebem menos de ₹1 lakh por mês via QR do UPI."
+          },
+          {
+            "question": "Como reduzir o que pago de MDR?",
+            "answer": "Direcione os clientes para os meios que seguem gratuitos — UPI até ₹2.000, débito RuPay e mandatos de UPI Autopay — e negocie a taxa de cartão com o seu adquirente quando o volume justificar. Como o limite de ₹2.000 é por transação, manter cada recebimento no UPI abaixo dele evita os 0,4% por completo; o divisor de QR vinculado quebra um total maior em QR abaixo do limite."
+          },
+          {
+            "question": "Incide GST sobre o MDR?",
+            "answer": "Sim. O GST de 18% incide sobre o próprio MDR, não sobre a sua venda nem sobre a transação de UPI. A calculadora mostra isso em linha separada para você ver o custo completo do recebimento, e empresas registradas no GST normalmente podem aproveitá-lo como crédito de imposto."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Receba sem perder uma fatia",
+        "subtext": "As ferramentas de UPI gratuitas do Setu permitem receber no caixa abaixo do limite do MDR, sem cadastro.",
+        "cta": {
+          "label": "Experimente o gerador de QR do UPI"
+        }
+      }
+    }
+  ],
+  "labels": {
+    "allCalculators": "← Todas as calculadoras",
+    "moreCalculators": "Mais calculadoras"
+  }
+}

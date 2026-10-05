@@ -8,13 +8,15 @@ interface UPIQRCodeProps {
   upiId: string;
   amount?: number;
   notes?: string;
+  /** Payee name shown by the UPI app before the payer confirms. */
+  businessName?: string;
   logo?: string | null;
 }
 
-export function UPIQRCode({ upiId, amount, notes, logo }: UPIQRCodeProps) {
+export function UPIQRCode({ upiId, amount, notes, businessName, logo }: UPIQRCodeProps) {
   const [qrSvg, setQrSvg] = useState<string>("");
 
-  const upiUrl = generateUPIUrl(upiId, amount, notes);
+  const upiUrl = generateUPIUrl(upiId, amount, notes, businessName);
 
   useEffect(() => {
     if (upiId && upiUrl) {

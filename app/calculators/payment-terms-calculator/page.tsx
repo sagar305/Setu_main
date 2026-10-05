@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCalculatorBySlug } from "@/lib/content";
+import { itemLanguageAlternates } from "@/lib/i18n/pages";
 import { CalculatorShell } from "@/components/calculators/CalculatorShell";
 import { PaymentTermsCalculatorTool } from "@/components/calculators/tools/PaymentTermsCalculatorTool";
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   title: item.seo.title,
   description: item.seo.description,
   keywords: item.seo.keywords,
-  alternates: { canonical: "/calculators/payment-terms-calculator" },
+  alternates: {
+    canonical: "/calculators/payment-terms-calculator",
+    languages: itemLanguageAlternates("calculators", "payment-terms-calculator"),
+  },
   openGraph: {
     title: item.seo.title,
     description: item.seo.description,

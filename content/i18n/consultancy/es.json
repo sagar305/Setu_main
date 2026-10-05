@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "Contabilidad, teneduría y nóminas | Setu Technology",
+    "description": "Contabilidad, teneduría de libros y nóminas externalizadas para pymes, de semanal a anual. Experiencia en QuickBooks, Xero, Zoho, Appfolio, FreshBooks y Wave.",
+    "keywords": [
+      "servicios de contabilidad",
+      "servicios de teneduría de libros",
+      "servicios de nóminas",
+      "contabilidad externalizada para pymes",
+      "teneduría con QuickBooks",
+      "contabilidad con Xero",
+      "conciliación bancaria"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Consultoría",
+    "headline": "Contabilidad, teneduría de libros y nóminas",
+    "subheadline": "Ofrecemos contabilidad, teneduría de libros y nóminas a la medida de tu negocio: semanal, quincenal, mensual, trimestral o anual. Del asiento diario a las cuentas anuales, mantenemos tus libros exactos y listos para una auditoría."
+  },
+  "overview": {
+    "headline": "Mantenimiento completo de tus libros",
+    "intro": "Nuestros servicios cubren todos los aspectos del mantenimiento de los libros, incluidos:",
+    "items": [
+      "Registro de todas las operaciones de gastos, ingresos, activos y pasivos",
+      "Elaboración del libro mayor y de los mayores auxiliares",
+      "Contabilidad de activos y mantenimiento del registro de inmovilizado",
+      "Cuentas a cobrar e informes de antigüedad para la dirección",
+      "Cuentas a pagar, incluidas las deudas vencidas",
+      "Conciliación bancaria",
+      "Balance de sumas y saldos",
+      "Cuenta de resultados (pérdidas y ganancias)",
+      "Balance de situación",
+      "Estado de flujos de efectivo"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Servicios incluidos",
+    "subtext": "Un alcance claro y continuo, para que siempre sepas qué está cubierto.",
+    "items": [
+      "Teneduría mensual (continua)",
+      "Conciliación de bancos y tarjetas",
+      "Categorización de ingresos y gastos",
+      "Revisión del plan de cuentas",
+      "Resultados y balance mensuales",
+      "Asientos y ajustes",
+      "Seguimiento de cobros y pagos (básico)"
+    ]
+  },
+  "software": {
+    "headline": "Experiencia en software",
+    "subtext": "Trabajamos dentro de las herramientas que ya usas, o te ayudamos a elegir la adecuada.",
+    "items": [
+      {
+        "detail": "Online y de escritorio"
+      },
+      {
+        "detail": "Contabilidad en la nube"
+      },
+      {
+        "detail": "Zoho Books"
+      },
+      {
+        "detail": "Gestión inmobiliaria"
+      },
+      {
+        "detail": "Gestión inmobiliaria"
+      },
+      {
+        "detail": "Facturación y libros"
+      },
+      {
+        "detail": "Contabilidad para pequeños negocios"
+      }
+    ]
+  },
+  "idealFor": {
+    "headline": "Ideal para",
+    "subtext": "Pensado para negocios en crecimiento que quieren libros limpios sin un equipo financiero interno.",
+    "items": [
+      "Pequeñas y medianas empresas (pymes)",
+      "Negocios de servicios",
+      "Comercio electrónico, inmobiliario, salud y servicios profesionales"
+    ]
+  },
+  "frequency": {
+    "headline": "A tu ritmo",
+    "subtext": "Elige la cadencia que encaje con cómo funciona tu negocio.",
+    "options": [
+      "Semanal",
+      "Quincenal",
+      "Mensual",
+      "Trimestral",
+      "Anual"
+    ]
+  },
+  "cta": {
+    "headline": "¿Listo para delegar tus libros?",
+    "subtext": "Cuéntanos cómo es tu negocio y preparamos un plan de contabilidad y teneduría a tu medida.",
+    "cta": {
+      "label": "Habla con nosotros"
+    }
+  }
+}

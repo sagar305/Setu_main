@@ -1,0 +1,82 @@
+{
+  "seo": {
+    "title": "Politique de confidentialité | Setu Technology",
+    "description": "Ce que Setu Technology mesure et ce qu'elle ne voit jamais : vos factures et relevés restent sur votre appareil. Et comment tout désactiver."
+  },
+  "hero": {
+    "eyebrow": "Mentions légales",
+    "headline": "Politique de confidentialité",
+    "subheadline": "Ce que nous mesurons, ce que nous ne pouvons délibérément pas voir, et comment le couper."
+  },
+  "lastUpdated": "Dernière mise à jour le 7 septembre 2026.",
+  "translationNote": "Cette traduction est fournie par commodité. En cas de divergence avec la version anglaise, c'est la version anglaise qui s'applique.",
+  "sections": [
+    {
+      "heading": "En résumé",
+      "paragraphs": [
+        "Les calculatrices et les outils de ce site font leur travail à l'intérieur de votre navigateur. Factures, devis, relevés bancaires, notes de patients et suivis de frais sont écrits dans le stockage de votre propre appareil et ne nous sont jamais transmis. Nous ne pouvons pas les lire, nous ne pouvons rien récupérer pour vous, et effacer les données de votre navigateur les supprime définitivement.",
+        "Séparément, nous comptons comment le site est utilisé — quelles pages s'ouvrent, quels boutons sont cliqués — afin de savoir quels outils méritent d'être améliorés. Cette mesure n'inclut jamais ce que vous saisissez."
+      ]
+    },
+    {
+      "heading": "Ce que nous enregistrons",
+      "list": [
+        "Les pages ouvertes, et la page d'où vous venez.",
+        "Les boutons et liens cliqués — identifiés par le nom que nous leur donnons dans notre propre code, par exemple « download invoice PDF », jamais par ce qu'ils affichent à l'écran.",
+        "Jusqu'où vous avez fait défiler la page, et approximativement combien de temps vous êtes resté.",
+        "Si l'appareil est un téléphone ou un ordinateur, et de quel pays vient la requête.",
+        "Un identifiant aléatoire stocké dans votre navigateur, pour qu'une visite répétée soit reconnue comme telle.",
+        "Les messages d'erreur lorsque quelque chose casse sur le site."
+      ]
+    },
+    {
+      "heading": "Ce que nous n'enregistrons jamais",
+      "list": [
+        "Tout ce que vous tapez dans une calculatrice, un générateur ou une application de ce site.",
+        "Le contenu des factures, devis, cartes, notes, relevés ou fiches.",
+        "Les fichiers téléversés. Les PDF de relevés bancaires sont lus dans votre navigateur et ne nous sont jamais envoyés.",
+        "Vos nom, téléphone ou e-mail, sauf si vous les saisissez vous-même dans le formulaire de contact ou de démonstration.",
+        "Votre adresse IP. Elle atteint notre serveur comme pour toute requête web, sert uniquement à déterminer le pays, et n'est jamais écrite en base."
+      ]
+    },
+    {
+      "heading": "Qui d'autre y a accès",
+      "paragraphs": [
+        "La mesure d'usage est traitée par **PostHog** (analytique), **Google Analytics** (analytique, qui dépose un cookie dans votre navigateur) et **Vercel**, qui héberge le site et fournit des chiffres de trafic et de performance sans cookie. Chacun reçoit les événements décrits ci-dessus, et rien d'autre.",
+        "Quand vous envoyez le formulaire de contact ou de démonstration, ce que vous avez écrit nous parvient par e-mail via **Resend**. Nous ne vendons de données à personne et ne les utilisons pas à des fins publicitaires."
+      ]
+    },
+    {
+      "heading": "Combien de temps nous les conservons",
+      "paragraphs": [
+        "Les événements d'usage individuels sont supprimés au bout de 14 mois. Les chiffres agrégés — visites par mois, outils utilisés — sont conservés sans limite, car ils ne contiennent rien qui puisse identifier quelqu'un. Les demandes de contact et de démonstration sont conservées sous forme d'e-mails tant que nous pouvons avoir à y répondre."
+      ]
+    },
+    {
+      "heading": "Comment le désactiver",
+      "paragraphs": [
+        "Vous pouvez refuser la mesure d'usage ci-dessous. Nous respectons aussi automatiquement les réglages « Do Not Track » et Global Privacy Control du navigateur : si vous en avez déjà activé un, rien ici ne vous enregistre."
+      ]
+    },
+    {
+      "heading": "Vos droits",
+      "paragraphs": [
+        "En vertu de la loi indienne de 2023 sur la protection des données personnelles numériques, vous pouvez demander quelles données personnelles vous concernant nous détenons, en demander la correction ou l'effacement, et contester la façon dont nous les avons traitées. Comme la mesure d'usage est rattachée à un identifiant de navigateur aléatoire et non à vous, nous ne pouvons généralement pas la relier à une personne, même si on nous le demande — refuser la mesure ci-dessus, ou effacer les données du site, est le remède le plus rapide.",
+        "Questions et réclamations sur la protection des données : [privacy@setutechnology.com](mailto:privacy@setutechnology.com). Nous répondons sous 30 jours."
+      ]
+    },
+    {
+      "heading": "Enfants",
+      "paragraphs": [
+        "Ce sont des outils pour gérer une activité ; ils ne s'adressent pas aux enfants. Nous ne collectons pas sciemment de données concernant une personne de moins de 18 ans."
+      ]
+    },
+    {
+      "heading": "Modifications",
+      "paragraphs": [
+        "Si cette politique change, nous mettrons à jour la date en haut de cette page. Continuer à utiliser le site après une modification signifie que la version mise à jour s'applique.",
+        "Voyez aussi nos [conditions d'utilisation](/terms)."
+      ]
+    }
+  ]
+}

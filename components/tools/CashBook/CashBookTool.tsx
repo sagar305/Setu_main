@@ -18,11 +18,13 @@ import type { CashEntry } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function CashBookTool() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { items: entries, loading, error, save, remove } = useEntityList<CashEntry>("cashbook");
   const [currency, setCurrency] = useState("INR");
 
@@ -138,7 +140,7 @@ export function CashBookTool() {
             <TextInput
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="e.g. Day sales, tea, auto fare"
+              placeholder={t("cbDescPlaceholder")}
             />
           </Field>
           <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
@@ -150,7 +152,7 @@ export function CashBookTool() {
       <div className="space-y-6">
         <Card>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <Field label="Day">
+            <Field label={t("day")}>
               <TextInput
                 type="date"
                 value={viewDate}
@@ -176,7 +178,7 @@ export function CashBookTool() {
           ) : dayEntries.length === 0 ? (
             <EmptyState
               title={t("noEntries")}
-              subtitle="Record cash in and cash out through the day — opening and closing balances are calculated automatically."
+              subtitle={t("cbEmptyHint")}
             />
           ) : (
             <div className="space-y-2">
@@ -188,7 +190,7 @@ export function CashBookTool() {
                   <div>
                     <p className="text-sm font-medium text-ink">{e.description || "—"}</p>
                     <p className="text-xs text-muted">
-                      {new Date(e.createdAt).toLocaleTimeString("en-IN", {
+                      {new Date(e.createdAt).toLocaleTimeString(intlLocaleFor(lang), {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
@@ -220,15 +222,15 @@ export function CashBookTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete cash entry?"
+        title={t("cbDeleteTitle")}
         message={
           deleting
-            ? `Delete the ${formatMoney(deleting.amount, currency)} ${
-                deleting.type === "in" ? "cash-in" : "cash-out"
-              } entry? Balances will be recalculated.`
+            ? fill(t(deleting.type === "in" ? "cbDeleteInMessage" : "cbDeleteOutMessage"), {
+                amount: formatMoney(deleting.amount, currency),
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);

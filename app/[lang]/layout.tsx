@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { LocaleDocumentAttrs } from "@/components/home/LocaleDocumentAttrs";
 import { isLanguageCode } from "@/lib/i18n/config";
-import { HOME_LOCALES, homePathFor } from "@/lib/i18n/home-locales";
+import { PAGE_KEYS, dirFor, localesFor } from "@/lib/i18n/pages";
 import { getLocalizedSiteContent } from "@/lib/i18n/site-chrome";
+import { LanguageProvider } from "@/lib/i18n";
 
 /**
  * Header and footer for a translated homepage, in that page's language.
@@ -23,14 +25,36 @@ export default async function LocalizedHomeLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  if (!isLanguageCode(lang) || !HOME_LOCALES.includes(lang)) notFound();
+  if (!isLanguageCode(lang) || lang === "en") notFound();
+
+  // This segment wraps every translated page under the language, so it accepts
+  // any language some page is published in; each page 404s on its own for a
+  // language it has not been translated into.
+  if (!PAGE_KEYS.some((key) => localesFor(key).includes(lang))) notFound();
 
   const site = getLocalizedSiteContent(lang);
 
   return (
     <>
-      <Nav site={site} homeHref={homePathFor(lang)} />
-      <main>{children}</main>
+      {/* Sets the document language during parsing, before hydration, so RTL
+          Arabic never renders left-to-right first. The root layout owns <html>
+          and has no dynamic segment to read the language from — see
+          LocaleDocumentAttrs, which keeps this correct across client-side
+          navigation. */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.lang=${JSON.stringify(lang)};document.documentElement.dir=${JSON.stringify(dirFor(lang))}`,
+        }}
+      />
+      <LocaleDocumentAttrs lang={lang} dir={dirFor(lang)} />
+      <Nav site={site} lang={lang} />
+      {/* Nested inside the provider in the root layout, which has no dynamic
+          segment to read a language from. The inner one wins for this subtree,
+          so an interactive tool under /<lang>/ renders its own labels in that
+          language on the server rather than after hydration. */}
+      <LanguageProvider routeLang={lang}>
+        <main>{children}</main>
+      </LanguageProvider>
       <Footer site={site} />
     </>
   );

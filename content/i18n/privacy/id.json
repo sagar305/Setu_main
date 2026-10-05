@@ -1,0 +1,82 @@
+{
+  "seo": {
+    "title": "Kebijakan Privasi | Setu Technology",
+    "description": "Apa yang Setu Technology ukur dan apa yang tak pernah dilihat: faktur, rekening koran, dan data tagihan Anda tetap di perangkat sendiri."
+  },
+  "hero": {
+    "eyebrow": "Legal",
+    "headline": "Kebijakan Privasi",
+    "subheadline": "Apa yang kami ukur, apa yang sengaja tidak bisa kami lihat, dan cara mematikannya."
+  },
+  "lastUpdated": "Terakhir diperbarui 7 September 2026.",
+  "translationNote": "Terjemahan ini disediakan demi kemudahan. Bila berbeda dari versi bahasa Inggris, versi bahasa Inggris yang berlaku.",
+  "sections": [
+    {
+      "heading": "Ringkasnya",
+      "paragraphs": [
+        "Kalkulator dan alat di situs ini bekerja di dalam peramban Anda. Faktur, penawaran, rekening koran, tagihan, catatan pasien, dan catatan iuran ditulis ke penyimpanan perangkat Anda sendiri dan tidak pernah diunggah ke kami. Kami tidak bisa membacanya, tidak bisa memulihkannya untuk Anda, dan menghapus data peramban akan menghapusnya selamanya.",
+        "Terpisah dari itu, kami menghitung bagaimana situs dipakai — halaman apa yang dibuka, tombol apa yang ditekan — agar tahu alat mana yang layak diperbaiki. Pengukuran itu tidak pernah memuat apa pun yang Anda ketik."
+      ]
+    },
+    {
+      "heading": "Apa yang kami catat",
+      "list": [
+        "Halaman yang dibuka, dan halaman asal Anda datang.",
+        "Tombol dan tautan yang ditekan — dikenali dari nama yang kami beri di kode kami sendiri, misalnya “download invoice PDF”, bukan dari isinya di layar.",
+        "Seberapa jauh Anda menggulir halaman, dan kira-kira berapa lama Anda bertahan.",
+        "Apakah perangkatnya ponsel atau komputer, dan dari negara mana permintaan datang.",
+        "Sebuah penanda acak yang disimpan di peramban Anda, agar kunjungan ulang dikenali sebagai kunjungan ulang.",
+        "Pesan galat ketika ada yang rusak di situs."
+      ]
+    },
+    {
+      "heading": "Apa yang tidak pernah kami catat",
+      "list": [
+        "Apa pun yang diketik ke dalam kalkulator, generator, atau aplikasi di situs ini.",
+        "Isi faktur, penawaran, menu, tagihan, rekening koran, atau catatan.",
+        "Berkas yang diunggah. PDF rekening koran dibaca di peramban Anda dan tidak pernah dikirim ke kami.",
+        "Nama, nomor telepon, atau email Anda, kecuali Anda sendiri mengetiknya di formulir kontak atau demo.",
+        "Alamat IP Anda. Ia sampai ke server kami sebagai bagian dari permintaan web mana pun, dipakai hanya untuk mengetahui negara, dan tidak pernah ditulis ke penyimpanan."
+      ]
+    },
+    {
+      "heading": "Siapa lagi yang melihatnya",
+      "paragraphs": [
+        "Pengukuran penggunaan diproses oleh **PostHog** (analitik), **Google Analytics** (analitik, yang menaruh cookie di peramban Anda), dan **Vercel**, yang menghosting situs serta menyediakan angka lalu lintas dan performa tanpa cookie. Masing-masing hanya menerima peristiwa yang disebut di atas, tidak lebih.",
+        "Saat Anda mengirim formulir kontak atau demo, apa yang Anda tulis dikirimkan ke kami lewat email melalui **Resend**. Kami tidak menjual data kepada siapa pun dan tidak memakainya untuk iklan."
+      ]
+    },
+    {
+      "heading": "Berapa lama kami menyimpannya",
+      "paragraphs": [
+        "Peristiwa penggunaan satuan dihapus setelah 14 bulan. Angka ringkasan — kunjungan per bulan, alat apa yang dipakai — disimpan tanpa batas waktu, karena tidak memuat apa pun yang bisa mengenali seseorang. Pertanyaan kontak dan demo disimpan sebagai email selama kami mungkin perlu menjawabnya."
+      ]
+    },
+    {
+      "heading": "Mematikannya",
+      "paragraphs": [
+        "Anda bisa keluar dari pengukuran penggunaan di bawah ini. Kami juga otomatis menghormati setelan “Do Not Track” dan Global Privacy Control di peramban — jadi bila salah satunya sudah Anda aktifkan, tidak ada yang sedang mencatat Anda di sini."
+      ]
+    },
+    {
+      "heading": "Hak Anda",
+      "paragraphs": [
+        "Berdasarkan Digital Personal Data Protection Act 2023 India, Anda dapat menanyakan data pribadi Anda yang kami simpan, meminta perbaikan atau penghapusannya, dan mengadukan cara kami menanganinya. Karena pengukuran penggunaan terikat pada penanda peramban acak, bukan pada diri Anda, biasanya kami tidak dapat menghubungkannya ke seseorang meski diminta — keluar dari pengukuran di atas, atau menghapus data situs, adalah jalan yang lebih cepat.",
+        "Pertanyaan dan keluhan perlindungan data: [privacy@setutechnology.com](mailto:privacy@setutechnology.com). Kami menjawab dalam 30 hari."
+      ]
+    },
+    {
+      "heading": "Anak-anak",
+      "paragraphs": [
+        "Ini alat untuk menjalankan usaha dan bukan ditujukan bagi anak-anak. Kami tidak dengan sengaja mengumpulkan data siapa pun yang berumur di bawah 18 tahun."
+      ]
+    },
+    {
+      "heading": "Perubahan",
+      "paragraphs": [
+        "Bila kebijakan ini berubah, kami akan memperbarui tanggal di bagian atas halaman ini. Terus memakai situs setelah perubahan berarti kebijakan yang diperbarui berlaku.",
+        "Lihat juga [Ketentuan Penggunaan](/terms) kami."
+      ]
+    }
+  ]
+}

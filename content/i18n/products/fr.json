@@ -1,0 +1,375 @@
+{
+  "seo": {
+    "title": "Produits | Caisse, carte QR et logiciels | Setu",
+    "description": "Découvrez les produits Setu : la caisse gratuite dans le navigateur, la carte QR, Free Dine, la gestion des cours et celle de cabinet, plus Setu Dine et Queue.",
+    "keywords": [
+      "produits Setu",
+      "caisse dans le navigateur",
+      "Free Dine",
+      "caisse gratuite pour restaurant",
+      "Setu QR Menu",
+      "Setu Dine",
+      "Setu Queue",
+      "Setu Retail",
+      "Setu Clinic",
+      "Setu Tuition",
+      "gestion des cours particuliers",
+      "gestion de cabinet gratuite",
+      "logiciel gratuit de gestion de cabinet"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Produits",
+    "headline": "Une seule entreprise, qui construit pour chaque secteur",
+    "subheadline": "Nous avons commencé par les restaurants. Voici ce qui tourne aujourd'hui, et ce qui arrive ensuite."
+  },
+  "labels": {
+    "comingSoon": "Bientôt disponible",
+    "paidSoonEyebrow": "Produit payant bientôt disponible",
+    "paidSoonSuffix": "Tout ce qui précède reste gratuit."
+  },
+  "products": [
+    {
+      "name": "Caisse dans le navigateur",
+      "headline": "Une caisse gratuite et hors ligne, directement dans votre navigateur",
+      "description": "Un point de vente entièrement gratuit pour les petits commerces. Encaissez vos clients, gérez produits et stock, mettez un panier en attente puis reprenez-le, imprimez des tickets thermiques — sans inscription, sans abonnement, et cela continue de fonctionner sans internet. Toutes les données restent sur votre appareil, avec sauvegarde et restauration en un clic.",
+      "features": [
+        "Encaissement rapide avec prise en charge du lecteur de codes-barres",
+        "Fonctionne entièrement hors ligne",
+        "Mettez un panier en attente et reprenez-le en plein coup de feu",
+        "Ventes à crédit et compte client",
+        "Suivi du stock avec journal des mouvements",
+        "Clients et historique d'achats",
+        "Rapports de ventes, d'encaissements et des meilleures ventes",
+        "Impression de tickets thermiques (80 mm/58 mm) et A4",
+        "Verrouillage de caisse par code PIN, avec verrouillage automatique",
+        "Sauvegarde et restauration JSON, exports CSV et synchronisation Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données dans le cloud, plusieurs caisses et comptes pour l'équipe."
+      },
+      "cta": {
+        "label": "Ouvrir la caisse dans le navigateur — c'est gratuit"
+      }
+    },
+    {
+      "name": "Analyseur de relevés bancaires",
+      "headline": "Analyse gratuite de relevés bancaires, directement dans votre navigateur",
+      "description": "Un analyseur de relevés bancaires entièrement gratuit pour les experts-comptables et pour quiconque tient une comptabilité. Importez un relevé PDF, Excel ou CSV, classez chaque opération avec vos propres règles, rapprochez-le de votre grand livre et exportez vos rapports — sans inscription, sans abonnement, et le relevé n'est jamais envoyé nulle part.",
+      "features": [
+        "Importe PDF, XLSX, XLS et CSV, y compris les PDF protégés par mot de passe",
+        "Rien n'est envoyé : la lecture et l'analyse se font dans votre navigateur",
+        "Extraction vérifiée face au solde progressif du relevé lui-même",
+        "Classement déterministe par règles, avec le niveau de confiance affiché",
+        "Marquage professionnel, personnel et virement, distinct de la catégorie",
+        "Plusieurs relevés analysés ensemble, doublons exclus",
+        "Analyse mensuelle des flux, des dépenses, des recettes et des contreparties",
+        "Rapports d'espèces, de gros montants, de frais bancaires, d'intérêts et de virements",
+        "Rapprochement avec correspondance exacte, par fenêtre de dates ou approximative",
+        "Classeur Excel, rapport PDF et exports CSV générés sur l'appareil"
+      ],
+      "cta": {
+        "label": "Ouvrir l'analyseur de relevés — c'est gratuit"
+      }
+    },
+    {
+      "headline": "Une caisse de restaurant gratuite qui tourne dans le navigateur",
+      "description": "Une caisse de salle complète, gratuite et sans inscription. Tables et zones de salle, additions qui restent ouvertes une heure, bons de cuisine par tournée et un écran cuisine en direct dans un second onglet. Partagez et fusionnez les additions, TVA avec la ventilation CGST/SGST, stock de matières premières piloté par les recettes, réservations de table avec confirmation WhatsApp et ardoise via le compte client partagé. Tout reste sur votre appareil, et l'encaissement continue même sans internet.",
+      "features": [
+        "Tables et zones de salle avec totaux en direct",
+        "Additions ouvertes qui survivent à un redémarrage du navigateur",
+        "Bons de cuisine par tournée, sans les prix",
+        "Écran cuisine en direct dans un second onglet, verrouillable en mode kiosque",
+        "Formats demi/entier et groupes de suppléments",
+        "Partage de l'addition par article, par part ou par montant — et fusion de tables",
+        "Taxes au taux de chaque article avec ventilation CGST/SGST",
+        "Stock de matières premières avec recettes par plat et coût matière",
+        "Réservations de table, gratuites ou contre un acompte",
+        "Confirmations et rappels WhatsApp depuis votre propre numéro",
+        "L'ardoise s'inscrit dans le compte client partagé",
+        "Additions thermiques (80 mm/58 mm) et A4, conçues dans l'éditeur de tickets",
+        "Résumé du jour, rapport par article, ventes par heure et clôture imprimable",
+        "Sauvegarde, exports CSV et synchronisation Google Sheets",
+        "Fonctionne hors ligne, aucune inscription nécessaire"
+      ],
+      "paidSoon": {
+        "note": "Base de données dans le cloud, plusieurs établissements, appareils et comptes équipe."
+      },
+      "cta": {
+        "label": "Ouvrir Free Dine — c'est gratuit"
+      }
+    },
+    {
+      "headline": "Un QR code qu'il ne faut jamais réimprimer",
+      "description": "Votre carte vit en ligne et le QR code imprimé ne contient qu'un court lien permanent. Changez un prix, signalez un plat épuisé ou passez à une carte de saison : le code posé sur vos tables continue de fonctionner. Photos des plats, tailles et variantes, plusieurs cartes et comptage quotidien des scans — gratuit la première année.",
+      "features": [
+        "Un seul QR code permanent, imprimé une fois",
+        "Changements de prix et de carte instantanés",
+        "Marquage des plats épuisés et photos des plats",
+        "Tailles et variantes par plat",
+        "Plusieurs cartes entre lesquelles basculer",
+        "Statistiques de scans au jour le jour",
+        "Note et certificat d'hygiène sur la carte",
+        "Trois modèles aux couleurs modifiables"
+      ],
+      "cta": {
+        "label": "Découvrir Setu QR Menu"
+      }
+    },
+    {
+      "name": "Gestion des cours particuliers",
+      "headline": "Logiciel gratuit pour cours particuliers, directement dans votre navigateur",
+      "description": "Un gestionnaire de classe entièrement gratuit pour un professeur particulier. Élèves et groupes, appel quotidien, frais mensuels qui s'additionnent tout seuls, rappels WhatsApp aux parents, notes des contrôles et reçus de frais partageables — sans inscription, sans abonnement, et cela fonctionne sans internet.",
+      "features": [
+        "Appel quotidien par groupe en quelques secondes",
+        "Fonctionne entièrement hors ligne",
+        "Frais mensuels dus calculés seuls, remises et frais ponctuels",
+        "Reçus numérotés avec lien partageable et paiement UPI",
+        "Rappels de frais et avis d'absence envoyés aux parents par WhatsApp",
+        "Contrôles avec saisie des notes de tout le groupe et partage des résultats",
+        "Un départ arrête les frais mais conserve l'historique",
+        "Vos propres champs par élève, par exemple les notes de l'école",
+        "Rappels d'agenda datés et registre des demandes d'inscription",
+        "Import groupé d'élèves, verrou PIN, sauvegarde et synchronisation Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, vue parent en direct et encaissement des frais en ligne."
+      },
+      "cta": {
+        "label": "Ouvrir la gestion des cours — c'est gratuit"
+      }
+    },
+    {
+      "name": "Gestion de cabinet gratuite",
+      "headline": "Logiciel gratuit de cabinet et d'ordonnances, dans votre navigateur",
+      "description": "Un gestionnaire de cabinet entièrement gratuit pour un médecin seul ou un petit cabinet. Ordonnances imprimées en texte net et sélectionnable, dossiers patients avec constantes et antécédents, rendez-vous sur un écran du jour en direct, et facturation avec frais de suivi automatiques et reçus UPI — sans inscription, sans abonnement, sans limite de patients, et cela fonctionne sans internet.",
+      "features": [
+        "Ordonnances imprimées en vrai texte sélectionnable, en A4 ou A5",
+        "Protocoles : enregistrez une ordonnance entière et appliquez-la au patient suivant d'un geste",
+        "Motifs, observations et diagnostics complétés à partir de ce que vous avez déjà écrit",
+        "Constantes avec IMC calculé à la saisie et dernière mesure affichée",
+        "Un écran du jour dans l'ordre des tickets, avec les temps d'attente en direct",
+        "Rendez-vous dans vos propres horaires, rappels WhatsApp envoyés en une fois",
+        "Suivi programmé à la validation, plus un rapport de ceux qui ne sont pas revenus",
+        "Frais de suivi appliqués automatiquement dans votre délai",
+        "Reçus numérotés en 58 mm, 80 mm ou A4, avec un QR UPI pour régler",
+        "Suivi des impayés avec rappels WhatsApp aux patients",
+        "Demandes d'examens imprimées à part, signées, en A5",
+        "Courbes de poids et de tension par patient, et import groupé du registre",
+        "Rapports de fréquentation, de recettes, de diagnostics fréquents et d'absences, exportables en CSV",
+        "Fonctionne hors ligne : verrou PIN, sauvegarde/restauration et Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, plusieurs médecins et sites sur un même dossier."
+      },
+      "cta": {
+        "label": "Ouvrir la gestion de cabinet — c'est gratuit"
+      }
+    },
+    {
+      "name": "Système de tickets gratuit",
+      "headline": "Logiciel gratuit de tickets et d'affichage, dans votre navigateur",
+      "description": "Un système de tickets entièrement gratuit pour tout endroit où l'on fait la queue : cabinets, laboratoires, salons, centres de services, agences bancaires. Distribuez des numéros, posez un écran dans la salle d'attente et laissez l'application appeler chacun à voix haute, en hindi, en anglais ou dans votre langue. Sans inscription, sans abonnement, et cela fonctionne sans internet.",
+      "features": [
+        "Appelle le numéro à voix haute : « Ticket A quarante-deux, présentez-vous au guichet trois »",
+        "Annonces en hindi, anglais, marathi, tamoul, télougou, bengali, gujarati et kannada",
+        "Un affichage de salle d'attente pour un téléviseur ou un second écran, en clair, sombre ou fort contraste",
+        "Carillon et carte clignotante pour les écrans sans synthèse vocale",
+        "Plusieurs services et guichets, avec priorité aux personnes âgées et aux urgences",
+        "Rappeler, passer et transférer : le numéro reste attaché à la personne",
+        "Des estimations d'attente honnêtes, tirées de vos temps de service réels",
+        "Tickets sur imprimante 58 mm et affiche QR A4 pour la salle d'attente",
+        "Envoi du ticket par WhatsApp et alerte « c'est bientôt votre tour »",
+        "Rapports de charge horaire, de taux d'absence et par guichet, exportables en CSV",
+        "Fonctionne hors ligne : verrou PIN, sauvegarde/restauration et Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, encaissement au guichet et envoi en cuisine."
+      },
+      "cta": {
+        "label": "Ouvrir le système de tickets — c'est gratuit"
+      }
+    },
+    {
+      "name": "Registre de location gratuit",
+      "headline": "Logiciel de location gratuit pour loueurs de chapiteaux et de matériel",
+      "description": "Un registre de location entièrement gratuit pour les loueurs de chapiteaux, décorateurs d'événements, loueurs de mobilier et de matériel de fête, de caméras et d'outillage de chantier. Il suit ce qui est engagé à chaque date, pour que les mêmes 200 chaises ne soient jamais promises à deux mariages — et il règle casse, manquants et retards sur la caution au retour du matériel. Sans inscription, sans abonnement, fonctionne hors ligne.",
+      "features": [
+        "Un calendrier de disponibilité qui répond en quelques secondes à « combien en reste-t-il le 14 ? »",
+        "Les quantités libres sont comptées sur le jour le plus tendu de la période, jamais sur une moyenne qui masque un conflit",
+        "Une liste de conflits qui fait ressortir chaque réservation promettant plus de matériel que vous n'en avez",
+        "Demande → confirmé → parti → rendu, avec un devis au départ",
+        "Listes de préparation pour l'équipe de chargement, sans prix, et bons de livraison signés",
+        "Règlement au retour : casse, perte et retard, tous imputés sur la caution",
+        "Taux d'utilisation et retour sur coût par article : quoi racheter, quoi revendre",
+        "Unités numérotées pour les caméras et l'outillage, une réservation à la fois",
+        "Fiches d'entretien qui retirent le matériel de la disponibilité pendant la réparation",
+        "Devis, confirmations et relances WhatsApp, avec un lien que le client peut ouvrir",
+        "Fonctionne hors ligne : verrou PIN, sauvegarde/restauration et Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, plusieurs agences et comptes pour l'équipe."
+      },
+      "cta": {
+        "label": "Ouvrir le registre de location — c'est gratuit"
+      }
+    },
+    {
+      "name": "Fiche de réparation gratuite",
+      "headline": "Logiciel de réparation gratuit avec fiches, photos et état à la réception",
+      "description": "Une application de fiches de travail entièrement gratuite pour les réparateurs de téléphones, d'ordinateurs portables et d'électroménager. Elle enregistre l'état de l'appareil avec des photos et une signature dès son arrivée, si bien que le « cette rayure n'y était pas » s'arrête là — puis elle suit chaque appareil sur un tableau qui vire à l'ambre puis au rouge à mesure que les jours passent. Sans inscription, sans abonnement, fonctionne hors ligne.",
+      "features": [
+        "Réception en quatre-vingt-dix secondes : liste d'état, photos et signature du client",
+        "Un état de réception impossible à modifier une fois la fiche enregistrée — c'est tout l'intérêt",
+        "Un tableau de tous les appareils de l'atelier, qui vieillit vers l'ambre et le rouge",
+        "Recherche par IMEI, numéro de fiche, téléphone ou nom, même sur une partie du numéro de série",
+        "Messages WhatsApp à chaque étape, depuis vos propres modèles, envoyés par vous et non automatiquement",
+        "Bon en A5 ou 58 mm, plus une étiquette d'appareil au numéro assez grand pour se lire de l'autre côté de l'établi",
+        "Stock de pièces avec le coût à côté du prix de vente, pour voir la marge tant qu'on peut encore la changer",
+        "Restitution avec paiement, signature et une facture portant la fin de garantie",
+        "Recherche de garantie par numéro de fiche ou IMEI, et prises en charge qui ne comptent pas comme du chiffre d'affaires",
+        "La liste des non récupérés : travaux finis que personne n'est venu chercher, totalisés et relancés",
+        "Marge, délais, rendement par technicien et quels fournisseurs voient leurs pièces revenir",
+        "Un lien de suivi facultatif par fiche — une adresse qui ne change jamais, depuis laquelle le client peut valider un devis",
+        "Fonctionne hors ligne : verrou PIN, sauvegarde/restauration et Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, plusieurs ateliers et comptes techniciens."
+      },
+      "cta": {
+        "label": "Ouvrir la fiche de réparation — c'est gratuit"
+      }
+    },
+    {
+      "name": "Caisse de pharmacie gratuite",
+      "headline": "Logiciel de facturation gratuit pour pharmacies, avec suivi des péremptions",
+      "description": "Une application de facturation et de stock entièrement gratuite pour les pharmacies. Le stock est tenu lot par lot plutôt que par médicament, si bien que le comptoir vend toujours la boîte qui périme en premier, le numéro de lot s'imprime sur le ticket, et un tableau des péremptions vous dit ce qui va perdre toute valeur tant que le grossiste le reprend encore. Sans inscription, sans abonnement, fonctionne hors ligne.",
+      "features": [
+        "Stock par lot avec péremption au mois près sur chaque boîte de l'officine",
+        "Une facturation qui choisit le lot qui périme en premier et répartit seule une quantité entre plusieurs lots",
+        "Un tableau des péremptions par tranches de 30, 60 et 90 jours, valorisé au prix d'achat",
+        "Listes de retour groupées par fournisseur, avec le bon de retour en un geste",
+        "Une seule recherche sur le nom commercial, la molécule et le code-barres, avec les équivalents",
+        "Saisie des factures grossiste en conditionnements, remises en nature intégrées dans un prix moyen",
+        "Saisie des ordonnances pour les substances réglementées et un registre imprimable",
+        "Marge lue sur le lot d'où la vente est réellement sortie, pas sur une moyenne",
+        "Récapitulatif de taxes par taux, valeur du stock, meilleures rotations et commande suggérée par fournisseur",
+        "Rappels de renouvellement et soldes à crédit, envoyés par WhatsApp depuis vos modèles",
+        "Fonctionne hors ligne : verrou PIN, sauvegarde/restauration et Google Sheets"
+      ],
+      "paidSoon": {
+        "note": "Base de données cloud, plusieurs comptoirs et synchronisation grossiste."
+      },
+      "cta": {
+        "label": "Ouvrir la caisse de pharmacie — c'est gratuit"
+      }
+    },
+    {
+      "headline": "La gestion de restaurant, bien faite — en cours de développement",
+      "description": "Facturation, flux de cuisine, gestion des tables, tableaux de bord multi-établissements, gestion clients, coupons et un moteur fiscal intégré : tout ce qu'il faut à un restaurant pour tourner, d'un seul établissement à une chaîne entière.",
+      "features": [
+        "Tableau de bord multi-établissements",
+        "Flux de cuisine et routage des commandes",
+        "Gestion des tables",
+        "Moteur de facturation prêt pour la fiscalité",
+        "Suivi de commande par QR et appel du serveur",
+        "Coupons et remises"
+      ],
+      "cta": {
+        "label": "Découvrir Setu Dine"
+      }
+    },
+    {
+      "headline": "Le service au comptoir en restauration rapide, réglé — en développement",
+      "description": "Encaissement au comptoir, gestion des tickets, routage en cuisine et écran de retrait client, conçus pour la restauration rapide et les aires de restauration.",
+      "features": [
+        "Encaissement au comptoir avec taxes automatiques",
+        "Génération et affichage des tickets",
+        "Routage des commandes en cuisine",
+        "Écran de retrait client",
+        "Tableau de bord de file en temps réel"
+      ],
+      "cta": {
+        "label": "Découvrir Setu Queue"
+      }
+    },
+    {
+      "headline": "La gestion de magasin, bientôt disponible",
+      "description": "Suivi du stock, facturation et exploitation de magasin, conçus pour les commerces de détail du monde entier.",
+      "cta": {
+        "label": "Découvrir Setu Retail"
+      }
+    },
+    {
+      "headline": "La gestion des cours de soutien, bientôt disponible",
+      "description": "Messages automatiques aux parents, vue parent en direct, encaissement des frais en ligne et synchronisation cloud entre vos appareils — toujours pensé pour un professeur, pas pour un établissement.",
+      "cta": {
+        "label": "Découvrir Setu Tuition"
+      }
+    },
+    {
+      "headline": "La gestion de cabinet, en cours de développement",
+      "description": "Le produit payant vers lequel grandit la gestion de cabinet gratuite : les mêmes ordonnances et dossiers patients, tenus dans une base cloud pour que plusieurs médecins, un accueil et plus d'un site travaillent sur le même dossier.",
+      "features": [
+        "Dossiers patients cloud partagés entre appareils",
+        "Plusieurs médecins et sites sur un seul compte",
+        "Prise de rendez-vous depuis l'accueil",
+        "Accès par rôle pour l'équipe",
+        "Rapports à l'échelle du cabinet"
+      ],
+      "cta": {
+        "label": "Me prévenir au lancement"
+      }
+    },
+    {
+      "headline": "La facturation en pharmacie, en cours de développement",
+      "description": "Le produit payant vers lequel grandit la caisse de pharmacie gratuite : stock par lot et suivi des péremptions dans une base cloud, avec plusieurs comptoirs qui encaissent en même temps et les achats grossiste synchronisés.",
+      "features": [
+        "Stock par lot et péremptions dans le cloud, partagés entre comptoirs",
+        "Plusieurs comptoirs qui encaissent en même temps",
+        "Synchronisation des achats et des remises en nature du grossiste",
+        "Transferts de stock entre officines",
+        "Rapports de taxes et de marge sur toute la chaîne"
+      ],
+      "cta": {
+        "label": "Me prévenir au lancement"
+      }
+    },
+    {
+      "headline": "La gestion de location, en cours de développement",
+      "description": "Le produit payant vers lequel grandit le registre de location gratuit : un seul calendrier de disponibilité dans une base cloud, pour qu'une deuxième agence et l'équipe de chargement ne puissent jamais engager deux fois le même matériel.",
+      "features": [
+        "Disponibilité cloud partagée entre agences",
+        "Comptes équipe pour les départs et les retours",
+        "Transferts de matériel entre agences",
+        "Portail client pour les devis et les confirmations",
+        "Rapports d'utilisation et de retour sur coût"
+      ],
+      "cta": {
+        "label": "Me prévenir au lancement"
+      }
+    },
+    {
+      "headline": "La gestion d'atelier de réparation, en cours de développement",
+      "description": "Le produit payant vers lequel grandit la fiche de réparation gratuite : états de réception et photos des appareils dans une base cloud, avec des comptes techniciens et le tableau de chaque atelier sur un seul écran.",
+      "features": [
+        "Fiches et photos de réception dans le cloud",
+        "Comptes techniciens avec le rendement de chacun",
+        "Le tableau de chaque atelier sur un seul écran",
+        "Stock de pièces partagé entre ateliers",
+        "Rapports de garantie et de marge sur toute la chaîne"
+      ],
+      "cta": {
+        "label": "Me prévenir au lancement"
+      }
+    },
+    {
+      "name": "Setu pour votre activité",
+      "headline": "Le prochain secteur que nous construisons, c'est le vôtre",
+      "description": "Si vous ne voyez pas encore votre secteur, dites-nous ce que vous gérez. Nous construisons Setu pour chaque type d'activité, un secteur à la fois.",
+      "cta": {
+        "label": "Dites-nous votre besoin"
+      }
+    }
+  ]
+}

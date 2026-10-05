@@ -6,20 +6,24 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { LanguageSwitcher } from "@/components/toolkit/LanguageSwitcher";
 import type { SiteContent } from "@/lib/content";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { pathFor } from "@/lib/i18n/pages";
 
 export function Nav({
   site,
-  homeHref = "/",
+  lang = "en",
 }: {
   site: SiteContent;
   /**
-   * Where the logo points. A translated homepage passes its own path, so
-   * clicking the logo there keeps the reader in their language rather than
-   * dropping them onto the English root.
+   * The language this header is rendered in, used for the one destination that
+   * does not come from content: the logo. The nav links and the call to action
+   * arrive already pointed at this language, because the site content was
+   * resolved for it — see lib/i18n/localize-links.
    */
-  homeHref?: string;
+  lang?: LanguageCode;
 }) {
   const [open, setOpen] = useState(false);
+  const homeHref = pathFor("home", lang);
 
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/80">

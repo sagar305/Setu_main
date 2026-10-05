@@ -1,0 +1,1644 @@
+{
+  "seo": {
+    "title": "Kostenlose Rechner für Gastronomie & Handel | Setu",
+    "description": "Kostenlose Online-Rechner für Gastronomie und kleine Betriebe: GST, Gewinnmarge, Aufschlag, Break-even, Wareneinsatz, Rabatte und Kreditraten.",
+    "keywords": [
+      "Rechner für Unternehmen",
+      "Rechner für Gastronomie",
+      "GST-Rechner",
+      "Gewinnmargen-Rechner",
+      "Wareneinsatz-Rechner",
+      "Break-even-Rechner",
+      "Kreditraten-Rechner",
+      "kostenlose Business-Tools"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kostenlose Rechner",
+    "headline": "Rechner für alle, die den Laden führen",
+    "subheadline": "Schnelle, kostenlose Tools für die Zahlen, die Sie jede Woche prüfen — Preise, Margen, Steuern und mehr. Ohne Anmeldung, einfach Antworten."
+  },
+  "ctaBanner": {
+    "headline": "Sollen sich die Zahlen selbst führen?",
+    "subtext": "Setu Dine erfasst Umsätze, Kosten und Steuern automatisch — weniger Zeit für Rechner, mehr Zeit für Ihren Betrieb.",
+    "cta": {
+      "label": "Setu Dine entdecken"
+    }
+  },
+  "categories": [
+    {
+      "name": "Preis und Gewinn"
+    },
+    {
+      "name": "Gastronomiebetrieb"
+    },
+    {
+      "name": "Einzelhandelsbetrieb"
+    },
+    {
+      "name": "Steuern und Finanzen"
+    },
+    {
+      "name": "Wachstum und Marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "GST-Rechner",
+      "shortDescription": "GST mit einem Tipp zu jedem Betrag addieren oder herausrechnen, für jeden Steuersatz.",
+      "seo": {
+        "title": "GST-Rechner — GST addieren oder herausrechnen | Setu",
+        "description": "Kostenloser GST-Rechner: GST zu einem Nettobetrag addieren oder aus einem Endpreis herausrechnen, für jeden Satz. Steuerbetrag und Summe sofort im Blick.",
+        "keywords": [
+          "GST-Rechner",
+          "GST-Rechner online",
+          "GST addieren",
+          "GST herausrechnen",
+          "GST-Betrag berechnen Indien"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — GST-Rechner",
+        "headline": "GST-Rechner",
+        "subheadline": "Addieren Sie GST zu einem Nettopreis oder rechnen Sie sie aus einem Endpreis heraus — Satz wählen, Aufteilung sofort sehen."
+      },
+      "about": {
+        "headline": "Wofür ein GST-Rechner gut ist",
+        "paragraphs": [
+          "GST taucht im Alltag eines Betriebs überall auf: wenn Sie einem Kunden einen Preis nennen, eine Lieferantenrechnung prüfen oder festlegen, was auf den Bon kommt. Für jeden Satz von Hand zu rechnen ist langsam und schnell falsch, besonders wenn Sie zwischen 5 %, 12 %, 18 % und 28 % hin und her wechseln.",
+          "Dieser Rechner funktioniert in beide Richtungen. Geben Sie einen Nettobetrag ein und sehen Sie GST und Summe mit Steuer, oder geben Sie einen Endbetrag ein und sehen Sie, wie hoch Nettopreis und Steuer vor dem Aufschlag waren. Genau diese Rechnung macht Setu Dine auf jedem Bon automatisch; hier steht sie als kostenloses, eigenständiges Tool."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum GST-Rechner",
+        "items": [
+          {
+            "question": "Wie berechne ich GST auf einen Betrag?",
+            "answer": "Multiplizieren Sie den Nettobetrag mit dem GST-Satz und teilen Sie durch 100 — das ist der Steuerbetrag; addieren Sie ihn dann zum Nettobetrag. Bei ₹1.000 und 18 % GST kommen ₹180 hinzu, in Summe ₹1.180."
+          },
+          {
+            "question": "Wie rechne ich GST aus einem Endpreis heraus?",
+            "answer": "Teilen Sie den Endbetrag durch (1 + GST-Satz/100). Bei einem Endbetrag von ₹1.180 und 18 % GST ergibt das einen Nettopreis von ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Welche GST-Sätze sind in Indien üblich?",
+            "answer": "Am häufigsten sind 5 %, 12 %, 18 % und 28 %, wobei einige Waren und Leistungen darunter nicht fallen oder befreit sind. Prüfen Sie immer den Satz, der für das Berechnete gilt."
+          },
+          {
+            "question": "Rechnet Setu Dine GST automatisch?",
+            "answer": "Ja. Setu Dine hat eine eingebaute Steuerlogik, die auf jedem Bon die richtige GST automatisch ansetzt — Sie müssen sie nicht für jede Bestellung von Hand ausrechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Die Steuer auf jedem Bon übernimmt Setu Dine",
+        "subtext": "Setu Dine setzt auf jeder Bestellung automatisch die richtige GST an — keine Handrechnung, keine Fehler.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Gewinnmargen-Rechner",
+      "shortDescription": "Ermitteln Sie Gewinnmarge und Aufschlag in Prozent aus Kosten und Verkaufspreis.",
+      "seo": {
+        "title": "Gewinnmargen-Rechner — kostenloses Online-Tool | Setu",
+        "description": "Berechnen Sie Gewinnmarge und Aufschlag in Prozent aus Einkaufs- und Verkaufspreis. Kostenloser Gewinnmargen-Rechner für Handel und Gastronomie.",
+        "keywords": [
+          "Gewinnmargen-Rechner",
+          "Margenrechner",
+          "Gewinnrechner",
+          "Aufschlag und Marge"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Gewinnmargen-Rechner",
+        "headline": "Gewinnmargen-Rechner",
+        "subheadline": "Geben Sie Einkaufs- und Verkaufspreis ein und sehen Sie Gewinn, Marge % und Aufschlag % auf einmal."
+      },
+      "about": {
+        "headline": "Warum Marge und Aufschlag beide zählen",
+        "paragraphs": [
+          "Die Gewinnmarge sagt Ihnen, welcher Anteil Ihres Verkaufspreises echter Gewinn ist — nützlich, um zu prüfen, ob sich ein Artikel oder Gericht zum heutigen Preis überhaupt lohnt. Der Aufschlag sagt Ihnen, wie viel Sie auf die Kosten gelegt haben, und genau den brauchen Sie, wenn Sie einen Preis neu festlegen.",
+          "Die beiden Zahlen sehen ähnlich aus, sind aber nicht dasselbe: 50 % Aufschlag auf die Kosten sind nur 33 % Marge auf den Verkaufspreis. Dieser Rechner zeigt beide zusammen, damit Sie Preisentscheidungen prüfen können, ohne sie zu verwechseln."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Gewinnmargen-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Gewinnmarge?",
+            "answer": "Marge % = (Verkaufspreis − Einkaufspreis) ÷ Verkaufspreis × 100. Sie misst den Gewinn als Prozentsatz des Verkaufspreises."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen Marge und Aufschlag?",
+            "answer": "Die Marge ist der Gewinn geteilt durch den Verkaufspreis, der Aufschlag der Gewinn geteilt durch die Kosten. Gleicher Gewinn, anderer Nenner — derselbe Betrag ergibt also einen höheren Aufschlag als Marge."
+          },
+          {
+            "question": "Was ist eine gute Marge für einen kleinen Betrieb?",
+            "answer": "Das hängt stark von der Branche ab: Gastronomie liegt oft bei 10 bis 15 % Nettomarge, im Handel kommt es auf die Warengruppe an. Vergleichen Sie mit Ihren eigenen früheren Zahlen und den Kennzahlen Ihrer Branche statt mit einem einzigen allgemeinen Ziel."
+          },
+          {
+            "question": "Soll ich über die Marge oder den Aufschlag kalkulieren?",
+            "answer": "Die meisten Betriebe kalkulieren mit einem Aufschlag auf die Kosten und prüfen danach, ob die entstehende Marge das Gewinnziel erreicht. Beides anzusehen verhindert, dass Artikel zu günstig bleiben, die nach einem Maß in Ordnung wirken und nach dem anderen nicht."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ihre echten Margen, ganz von selbst",
+        "subtext": "Setu Dine erfasst Kosten und Umsätze gemeinsam — Sie kennen Ihre Marge, ohne sie auszurechnen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Aufschlagsrechner",
+      "shortDescription": "Finden Sie den Verkaufspreis, den Sie für einen Zielaufschlag auf die Kosten brauchen.",
+      "seo": {
+        "title": "Aufschlagsrechner — Verkaufspreis ermitteln | Setu",
+        "description": "Kostenloser Aufschlagsrechner. Geben Sie Einkaufspreis und gewünschten Aufschlag in Prozent ein und erhalten Sie Verkaufspreis und Gewinn je Stück.",
+        "keywords": [
+          "Aufschlagsrechner",
+          "Verkaufspreis berechnen",
+          "Kalkulation mit Kostenaufschlag"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Aufschlagsrechner",
+        "headline": "Aufschlagsrechner",
+        "subheadline": "Geben Sie Ihre Kosten und den gewünschten Aufschlag % ein und erhalten Sie den Verkaufspreis, den Sie ansetzen sollten."
+      },
+      "about": {
+        "headline": "Preise von den Kosten aus aufbauen",
+        "paragraphs": [
+          "Einen festen Aufschlag auf die Kosten zu legen ist die einfachste Art, ein neues Produkt oder Gericht zu kalkulieren. Schwierig wird es, das über Dutzende Artikel oder Gerichte gleich zu halten, ohne für jeden einzelnen einen Rechner im zweiten Tab zu öffnen.",
+          "Dieses Tool dreht die übliche Margenfrage um: Statt die Marge eines schon gewählten Preises zu prüfen, nennen Sie den gewünschten Aufschlag und erhalten den anzusetzenden Preis — samt Gewinn je Stück zu diesem Preis."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Aufschlagsrechner",
+        "items": [
+          {
+            "question": "Wie lautet die Aufschlagsformel?",
+            "answer": "Verkaufspreis = Einkaufspreis × (1 + Aufschlag % ÷ 100). Ein Artikel mit ₹100 Kosten und 40 % Aufschlag kostet also ₹140."
+          },
+          {
+            "question": "Sind 50 % Aufschlag dasselbe wie 50 % Marge?",
+            "answer": "Nein. 50 % Aufschlag auf ₹100 Kosten ergeben einen Verkaufspreis von ₹150, und das sind 33,3 % Marge, nicht 50 %. Aufschlag und Marge rechnen auf unterschiedlichen Grundlagen."
+          },
+          {
+            "question": "Welchen Aufschlag sollte ich im Handel ansetzen?",
+            "answer": "Das hängt von der Warengruppe, dem Wettbewerb und der Leistung ab, die mit dem Produkt verkauft wird. Viele Händler starten im Bereich 30 bis 50 % und passen an, je nachdem was sich verkauft und was der Markt trägt."
+          },
+          {
+            "question": "Lässt sich das auch für Speisekarten nutzen?",
+            "answer": "Ja: Geben Sie die Tellerkosten als Einkaufspreis und Ihren Zielaufschlag ein, um einen Startpreis für die Karte zu erhalten, und prüfen Sie ihn danach mit dem Wareneinsatz-Rechner."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jeden Artikel sicher kalkulieren",
+        "subtext": "Setu Dine hält Kosten und Preise zusammen — Sie ändern Preise, ohne die Marge aus dem Blick zu verlieren.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Break-even-Rechner",
+      "shortDescription": "Finden Sie heraus, wie viele Einheiten Sie verkaufen müssen, um Ihre Kosten zu decken.",
+      "seo": {
+        "title": "Break-even-Rechner — kostenloses Online-Tool | Setu",
+        "description": "Berechnen Sie Ihren Break-even-Punkt in Stück und Umsatz. Kostenloser Break-even-Rechner für Restaurants, Einzelhandel und kleine Unternehmen.",
+        "keywords": [
+          "Break-even Rechner",
+          "Break-even-Punkt berechnen",
+          "Break-even-Analyse"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Break-even",
+        "headline": "Break-even-Rechner",
+        "subheadline": "Geben Sie Ihre Fixkosten, den Preis und die variablen Kosten pro Stück ein und sehen Sie genau, wie viel Sie verkaufen müssen, um die Kosten zu deckeln."
+      },
+      "about": {
+        "headline": "Kennen Sie Ihre Zahl, bevor der Monat beginnt",
+        "paragraphs": [
+          "Der Break-even-Punkt ist das Absatzniveau, bei dem der Umsatz genau Ihre Kosten deckt: darunter machen Sie Verlust, darüber trägt jedes weitere Stück direkt zum Gewinn bei. Es ist eine der nützlichsten Zahlen im Betrieb, weil sie Miete, Löhne und andere Fixkosten in ein konkretes Verkaufsziel übersetzt.",
+          "Geben Sie Ihre monatlichen Fixkosten (Miete, Löhne, Abos), Ihre variablen Kosten pro Stück (Zutaten, Verpackung, Kosten je Bestellung) und Ihren Verkaufspreis ein — dieser Rechner ermittelt die Stückzahl und den Umsatz, die Sie erreichen müssen, bevor Sie im Gewinn sind."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Break-even-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Break-even-Formel?",
+            "answer": "Break-even-Stückzahl = Fixkosten ÷ (Verkaufspreis pro Stück − variable Kosten pro Stück). Multiplizieren Sie das Ergebnis mit dem Verkaufspreis, um den Break-even-Umsatz zu erhalten."
+          },
+          {
+            "question": "Was zählt als Fixkosten, was als variable Kosten?",
+            "answer": "Fixkosten bleiben unabhängig vom Absatz etwa gleich: Miete, Löhne, Software-Abos. Variable Kosten steigen mit jedem verkauften Stück: Zutaten, Verpackung, Zahlungsgebühren pro Bestellung."
+          },
+          {
+            "question": "Warum ist Break-even für ein neues Restaurant oder Geschäft wichtig?",
+            "answer": "Es übersetzt Ihre Gemeinkosten in ein Tages- oder Monatsziel für den Umsatz. Damit lässt sich viel leichter beurteilen, ob ein Standort, ein Preis oder eine Personalstärke realistisch ist, bevor Sie sich festlegen."
+          },
+          {
+            "question": "Was ist der Deckungsbeitrag?",
+            "answer": "Der Deckungsbeitrag ist der Verkaufspreis minus die variablen Kosten pro Stück — der Betrag, mit dem jeder Verkauf zur Deckung der Fixkosten beiträgt. Je höher er ist, desto weniger Stück brauchen Sie bis zum Break-even."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Verfolgen Sie Ihren Umsatz täglich gegen den Break-even",
+        "subtext": "Setu Dine liefert Verkaufsdaten in Echtzeit, damit Sie immer wissen, wo Sie gegenüber Ihren Zahlen stehen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Wareneinsatz-Rechner",
+      "shortDescription": "Prüfen Sie, ob der Wareneinsatz eines Gerichts zum Menüpreis in einem gesunden Rahmen liegt.",
+      "seo": {
+        "title": "Wareneinsatz-Rechner für Restaurants — kostenlos | Setu",
+        "description": "Kostenloser Rechner für den Warenkostenanteil. Zutatenkosten und Verkaufspreis eingeben und sofort Warenkostenquote und Gewinn pro Gericht sehen.",
+        "keywords": [
+          "Warenkosten Rechner",
+          "Warenkostenanteil",
+          "Wareneinsatz Restaurant",
+          "Speisekarten Kalkulation"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Warenkosten",
+        "headline": "Wareneinsatz-Rechner",
+        "subheadline": "Geben Sie Zutatenkosten und Verkaufspreis eines Gerichts ein und sehen Sie Warenkostenquote und Gewinn pro Teller."
+      },
+      "about": {
+        "headline": "Die Zahl, die jeder Verkaufspreis bestehen sollte",
+        "paragraphs": [
+          "Die Warenkostenquote ist der Anteil des Verkaufspreises eines Gerichts, der für seine Zutaten draufgeht. Die meisten Restaurants versuchen, sie zwischen 28 % und 35 % zu halten — abhängig von Küche, Format und davon, wie viel Arbeit in einem Gericht steckt im Verhältnis zum reinen Wareneinsatz.",
+          "Rechnen Sie jedes Gericht Ihrer Karte durch, wenn Sie Preise festlegen oder wenn sich Einkaufspreise ändern. Ein Gericht mit einer Quote weit außerhalb Ihres Zielbereichs braucht einen anderen Preis, ein anderes Rezept, oder ist bewusst als Lockangebot kalkuliert — Sie sollten nur wissen, welches davon."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Wareneinsatz-Rechner",
+        "items": [
+          {
+            "question": "Wie berechnet man die Warenkostenquote?",
+            "answer": "Warenkosten % = (Zutatenkosten ÷ Verkaufspreis) × 100. Ein Gericht mit ₹70 Zutaten, das für ₹280 verkauft wird, hat eine Warenkostenquote von 25 %."
+          },
+          {
+            "question": "Welche Warenkostenquote ist für ein Restaurant gut?",
+            "answer": "Die meisten Betriebe mit Tisch- oder Schnellservice zielen auf 28-35 %, doch hochwertige Zutaten, Getränke und Backwaren können darunter oder darüber liegen und nach Personal- und Gemeinkosten dennoch rentabel sein."
+          },
+          {
+            "question": "Warum ist meine Warenkostenquote höher als erwartet?",
+            "answer": "Häufige Ursachen: Portionen, die über die Zeit größer geworden sind, gestiegene Einkaufspreise, denen die Verkaufspreise nicht gefolgt sind, Verschwendung in der Küche, oder Rezepte, die von Anfang an nie richtig kalkuliert wurden."
+          },
+          {
+            "question": "Sind Personalkosten enthalten?",
+            "answer": "Nein — dieser Rechner erfasst nur den reinen Wareneinsatz. Personal, Verpackung und Gemeinkosten sollten Sie bei der endgültigen Preisfindung getrennt neben den Warenkosten verfolgen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jedes Gericht genau kalkuliert, automatisch",
+        "subtext": "Setu Dine verknüpft Rezepte mit dem Lager, damit die Warenkosten stimmen, wenn sich Einkaufspreise ändern.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Rabattrechner",
+      "shortDescription": "Berechnen Sie Endpreis und Ersparnis für jeden Rabatt oder jedes Angebot.",
+      "seo": {
+        "title": "Rabattrechner — Endpreis und Ersparnis | Setu",
+        "description": "Berechnen Sie sofort den rabattierten Preis und die Ersparnis. Geben Sie Originalpreis und Rabatt in Prozent ein und sehen Sie Endpreis und Gesamtersparnis.",
+        "keywords": [
+          "Rabattrechner",
+          "Prozentrechner Rabatt",
+          "Aktionspreis berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rabattrechner",
+        "headline": "Rabattrechner",
+        "subheadline": "Geben Sie Originalpreis und Rabatt in Prozent ein und sehen Sie den Endpreis und genau wie viel gespart wird."
+      },
+      "about": {
+        "headline": "Auf beiden Seiten der Theke nützlich",
+        "paragraphs": [
+          "Wenn Sie eine Aktion oder ein Gutscheinangebot fahren, müssen Sie den Endpreis kennen, den Sie tatsächlich verlangen — und was er Sie an Marge kostet. Dieser Rechner liefert beides sofort, für jeden Rabattsatz.",
+          "Er hilft auch, das Rabattangebot eines Lieferanten auf eine größere Bestellung zu prüfen, oder die Frage eines Kunden „was kostet das mit Rabatt?\" zu beantworten, ohne zum Handy zu greifen."
+        ]
+      },
+      "faq": {
+        "headline": "Fragen zum Rabattrechner",
+        "items": [
+          {
+            "question": "Wie berechne ich einen rabattierten Preis?",
+            "answer": "Rabattbetrag = Originalpreis × Rabatt % ÷ 100. Endpreis = Originalpreis − Rabattbetrag. Ein Artikel zu ₹500 mit 20 % Rabatt spart ₹100 und kostet dann ₹400."
+          },
+          {
+            "question": "Wie wirkt ein Rabatt auf meine Gewinnmarge?",
+            "answer": "Der Rabatt senkt Ihren Verkaufspreis, nicht Ihre Kosten — er geht also direkt von der Marge ab. Prüfen Sie vor einer Aktion die Marge auf den rabattierten Preis im Margenrechner, um sicher zu sein, dass der Verkauf sich noch lohnt."
+          },
+          {
+            "question": "Kann ich zwei Rabatte kombinieren?",
+            "answer": "Wenden Sie sie nacheinander an, statt die Prozente zu addieren: 20 % und danach weitere 10 % sind nicht 30 % insgesamt. Rechnen Sie den ersten Rabatt, und das Ergebnis dann noch einmal mit dem zweiten."
+          },
+          {
+            "question": "Setzt Setu Dine Rabatte und Gutscheine beim Abrechnen selbst an?",
+            "answer": "Ja. Setu Dine kennt einstellbare Gutscheine und Rabatte, die auf dem Bon automatisch greifen — das Personal muss Aktionen an der Theke nicht von Hand rechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Aktionen fahren, ohne von Hand zu rechnen",
+        "subtext": "Setu Dine setzt Gutscheine und Rabatte beim Abrechnen jedes Mal automatisch an.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Kreditraten-Rechner",
+      "shortDescription": "Schätzen Sie Monatsrate, Gesamtzinsen und Gesamtzahlung eines Geschäftskredits.",
+      "seo": {
+        "title": "Kreditraten-Rechner — kostenlos | Setu",
+        "description": "Kostenloser Rechner für Firmenkredite. Kreditbetrag, Zinssatz und Laufzeit eingeben und sofort Monatsrate, Gesamtzinsen und Gesamtzahlung sehen.",
+        "keywords": [
+          "Kreditrechner",
+          "Firmenkredit Rechner",
+          "Monatsrate berechnen",
+          "Ratenrechner Unternehmen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kreditrechner",
+        "headline": "Kreditraten-Rechner",
+        "subheadline": "Geben Sie Kreditbetrag, Zinssatz und Laufzeit ein und sehen Sie Ihre Monatsrate, die Gesamtzinsen und die Gesamtzahlung."
+      },
+      "about": {
+        "headline": "Kennen Sie die Monatsrate, bevor Sie unterschreiben",
+        "paragraphs": [
+          "Ob Betriebsmittelkredit, Maschinenfinanzierung oder Kreditlinie für eine neue Filiale — die Monatsrate ist die Zahl, die jeden Monat tatsächlich gegen Ihren Cashflow läuft. Kreditangebote nur über den Zinssatz zu vergleichen, kann in die Irre führen, sobald Laufzeit und Bearbeitungskosten mit einfließen.",
+          "Geben Sie Kreditbetrag, Jahreszinssatz und Laufzeit ein und erhalten Sie die Rate nach der üblichen Annuitätenformel mit fallendem Restsaldo, dazu die Gesamtzinsen über die Laufzeit — praktisch, um zwei Angebote direkt nebeneinander zu vergleichen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Kreditrechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Monatsrate?",
+            "answer": "Rate = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), wobei P der Kreditbetrag ist, r der monatliche Zinssatz (Jahreszins ÷ 12 ÷ 100) und n die Anzahl der monatlichen Raten."
+          },
+          {
+            "question": "Sind Bearbeitungsgebühren oder andere Kosten enthalten?",
+            "answer": "Nein — gerechnet wird nur mit Kreditbetrag, Zinssatz und Laufzeit. Bearbeitungsgebühren und sonstige Kosten rechnen Sie separat dazu, wenn Sie die tatsächlichen Kosten verschiedener Angebote vergleichen."
+          },
+          {
+            "question": "Ist der einzugebende Zinssatz derselbe, den die Bank nennt?",
+            "answer": "Verwenden Sie den Jahreszinssatz, den der Kreditgeber nennt. Nennt er einen Festzins statt eines Zinses auf den fallenden Restsaldo, weicht die tatsächliche Rate von der hier gezeigten ab, denn bei Festzinskrediten fallen Zinsen über die gesamte Laufzeit auf den vollen Kreditbetrag an."
+          },
+          {
+            "question": "Wie wirkt sich eine kürzere Laufzeit auf die Gesamtzinsen aus?",
+            "answer": "Eine kürzere Laufzeit bedeutet eine höhere Rate, aber deutlich geringere Gesamtzinsen, weil weniger Zeit vergeht, in der Zinsen auf den Restsaldo anfallen. Eine längere Laufzeit senkt die Rate, erhöht aber die insgesamt gezahlten Zinsen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Neue Filiale geplant? Wir helfen bei der Planung",
+        "subtext": "Sprechen Sie mit uns darüber, was es braucht, um einen neuen Standort zu eröffnen und zu führen — mit Setu Dine ab dem ersten Tag.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Tischauslastungs-Rechner",
+      "shortDescription": "Sehen Sie, wie oft jeder Tisch im Service neu besetzt wird und wie lange eine Runde dauert.",
+      "seo": {
+        "title": "Tischauslastungs-Rechner für Restaurants — kostenlos | Setu",
+        "description": "Kostenloser Rechner für den Tischumschlag. Servierte Gedecke, Anzahl der Tische und Servicestunden eingeben und Umschlagrate samt Belegungszeit sehen.",
+        "keywords": [
+          "Tischumschlag Rechner",
+          "Tischumschlag Restaurant",
+          "Gedecke pro Tisch"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Tischumschlag",
+        "headline": "Tischauslastungs-Rechner",
+        "subheadline": "Geben Sie servierte Gedecke, Anzahl der Tische und Servicestunden ein und sehen Sie Ihre Umschlagrate und die durchschnittliche Belegungszeit."
+      },
+      "about": {
+        "headline": "Die Zahl hinter einem voll wirkenden Gastraum",
+        "paragraphs": [
+          "Die Umschlagrate sagt Ihnen, wie oft im Schnitt jeder Tisch während eines Service genutzt wurde. Sie misst direkt, wie effizient Ihr Gastraum Plätze in Gedecke verwandelt — und in Spitzenzeiten zählt sie genauso viel wie die Besucherzahl.",
+          "Geben Sie die servierten Gedecke, die Anzahl Ihrer Tische und die Dauer des Service ein: Der Rechner ermittelt Ihre Umschlagrate und die durchschnittliche Zeit, die jeder Tisch pro Umschlag belegt war — hilfreich, um zu erkennen, ob langsame Umschläge Ihren Umsatz an starken Abenden deckeln."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Tischauslastungs-Rechner",
+        "items": [
+          {
+            "question": "Wie berechnet man die Umschlagrate?",
+            "answer": "Umschlagrate = servierte Gedecke ÷ Anzahl der Tische. Wurden in einem Service 120 Gedecke an 20 Tischen serviert, liegt die Rate bei 6 — jeder Tisch war im Schnitt 6-mal besetzt."
+          },
+          {
+            "question": "Welche Umschlagrate ist für ein Restaurant gut?",
+            "answer": "Das hängt stark vom Format ab: Schnellgastronomie und Casual Dining streben hohe Raten an (mehrere Umschläge pro Service), während die Spitzengastronomie bewusst mit niedriger Rate, längerem Aufenthalt und höherem Umsatz je Gedeck arbeitet. Vergleichen Sie mit Ihrem eigenen Format und Ihren früheren Zahlen."
+          },
+          {
+            "question": "Wie verbessere ich den Umschlag, ohne Gäste zu drängen?",
+            "answer": "Kürzere Küchenzeiten, zügiges Abrechnen und Bezahlen und ein Team, das die natürlichen Pausen einer Mahlzeit erkennt (statt eine Zeitgrenze zu setzen), verbessern den Umschlag meist nachhaltiger als Gäste zu drängen."
+          },
+          {
+            "question": "Zeigt Setu Dine den Tischstatus in Echtzeit?",
+            "answer": "Ja. Setu Dine zeigt den Tischstatus live über den ganzen Gastraum — frei, besetzt, abgerechnet —, sodass das Team immer weiß, welche Tische frei sind, ohne durch den Raum zu laufen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Der Status jedes Tisches, live",
+        "subtext": "Setu Dine verfolgt den Tischstatus in Echtzeit, damit Ihr Serviceteam immer weiß, was frei ist.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Nettogehalts-Rechner",
+      "shortDescription": "Sehen Sie Ihr monatliches Nettogehalt nach Vorsorge, Berufssteuer und weiteren Abzügen.",
+      "seo": {
+        "title": "Nettogehalts-Rechner — von Gesamtkosten zum Netto | Setu",
+        "description": "Kostenloser Nettogehalts-Rechner. Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Netto nach den üblichen Abzügen.",
+        "keywords": [
+          "Nettogehalt Rechner",
+          "Netto Gehalt berechnen",
+          "monatliches Nettogehalt",
+          "Lohnrechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Netto-Gehalt",
+        "headline": "Nettogehalts-Rechner",
+        "subheadline": "Geben Sie die jährlichen Arbeitgeberkosten ein und schätzen Sie das monatliche Nettogehalt nach den üblichen Abzügen."
+      },
+      "about": {
+        "headline": "Was jeden Monat wirklich auf dem Konto landet",
+        "paragraphs": [
+          "Die Gesamtkosten pro Mitarbeitenden sind so gut wie nie der Betrag, der auf einem Bankkonto landet. Beiträge zur Vorsorgekasse, die Berufssteuer und weitere Abzüge gehen ab, bevor das Gehalt ausgezahlt wird, und die Lücke zwischen Gesamtkosten und Netto überrascht viele neue Mitarbeitende — und viele Inhaber, die eine neue Stelle einplanen.",
+          "Dieser Rechner liefert eine schnelle Schätzung des monatlichen Nettogehalts aus den Jahreskosten, mit üblichen Annahmen für Vorsorgekasse und Berufssteuer. Die echten Zahlen hängen von Ihrer Gehaltsstruktur (Grundgehalt, Wohnzuschuss, Zulagen) und der Unternehmenspolitik ab — sehen Sie es also als Planungsschätzung, nicht als Lohnabrechnung."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Nettogehalts-Rechner",
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen Gesamtkosten und Nettogehalt?",
+            "answer": "Die Gesamtkosten sind alles, was ein Arbeitgeber für eine Person aufwendet: Grundgehalt, Zulagen, Arbeitgeberanteil zur Vorsorgekasse und weitere Leistungen. Das Nettogehalt ist der Betrag, der jeden Monat tatsächlich auf dem Konto eingeht — nach Abzügen wie dem Arbeitnehmeranteil, der Berufssteuer und, falls zutreffend, der Lohnsteuer."
+          },
+          {
+            "question": "Warum ist mein Netto niedriger als die Gesamtkosten geteilt durch 12?",
+            "answer": "Weil die Gesamtkosten Arbeitgeberbeiträge enthalten, die nie auf dem Konto der Person ankommen, und weil vom Bruttolohn vor der Auszahlung Abzüge wie Arbeitnehmeranteil, Berufssteuer und Lohnsteuer abgezogen werden."
+          },
+          {
+            "question": "Stimmt das genau mit meiner Lohnabrechnung überein?",
+            "answer": "Es ist eine Planungsschätzung auf Basis üblicher Annahmen für Vorsorgekasse und Berufssteuer. Ihr tatsächliches Netto hängt von Ihrer Gehaltsstruktur, Ihrer Region und zusätzlichen Abzügen wie der Lohnsteuer ab — die genaue Zahl steht auf Ihrer Lohnabrechnung oder nennt Ihnen die Personalabteilung."
+          },
+          {
+            "question": "Ist die Lohnsteuer darin enthalten?",
+            "answer": "Nein — dieser Rechner schätzt nur die Abzüge für Vorsorgekasse und Berufssteuer. Für eine Schätzung mit Lohnsteuer nutzen Sie zusätzlich den Einkommensteuer-Rechner."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Personal für einen neuen Standort? Erst die Zahlen",
+        "subtext": "Setu Dine liefert Ihnen Umsatz- und Personalkostendaten, damit Sie wissen, ob sich eine Neueinstellung selbst trägt.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Einkommensteuer-Rechner",
+      "shortDescription": "Schätzen Sie die Einkommensteuer nach altem und neuem Modell für das Steuerjahr 2025-26.",
+      "seo": {
+        "title": "Einkommensteuer-Rechner — Indien 2025-26 | Setu",
+        "description": "Kostenloser Einkommensteuer-Rechner für Indien 2025-26. Vergleichen Sie altes und neues Steuerregime und sehen Sie, welches günstiger ist. Nur Schätzung.",
+        "keywords": [
+          "Einkommensteuer Rechner",
+          "Steuerrechner Indien",
+          "altes vs neues Steuerregime",
+          "Einkommensteuer berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Einkommensteuer",
+        "headline": "Einkommensteuer-Rechner",
+        "subheadline": "Vergleichen Sie die Steuer nach altem und neuem Regime auf Ihr Einkommen im Steuerjahr 2025-26 und sehen Sie, welches günstiger ausfällt."
+      },
+      "about": {
+        "headline": "Altes oder neues Regime — entscheiden Sie mit Zahlen",
+        "paragraphs": [
+          "Im indischen Einkommensteuersystem können die meisten Steuerpflichtigen zwischen dem alten Regime (mehr Abzüge, höhere Stufensätze) und dem neuen Regime (weniger Abzüge, niedrigere Stufensätze) wählen. Was günstiger ist, hängt ganz davon ab, wie viele Abzüge und Freibeträge Sie tatsächlich geltend machen — eine allgemeingültige Antwort gibt es nicht.",
+          "Dieser Rechner schätzt die fällige Steuer in beiden Regimen für das Steuerjahr 2025-26 (Veranlagungsjahr 2026-27) anhand der bei uns erfassten aktuellen Stufen und des Pauschalabzugs, einschließlich der Ermäßigung nach Abschnitt 87A. Zuschläge auf sehr hohe Einkommen, Grenzfälle der Grenzentlastung und viele mögliche Abzüge sind nicht berücksichtigt — und die Stufen werden üblicherweise jedes Jahr im Haushalt angepasst. Prüfen Sie daher vor der Abgabe oder einer Regime-Entscheidung immer die aktuellen amtlichen Stufen oder fragen Sie einen Steuerberater."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Einkommensteuer-Rechner",
+        "items": [
+          {
+            "question": "Wie lauten die Stufen des neuen Regimes für 2025-26?",
+            "answer": "Im neuen Regime (Steuerjahr 2025-26 / Veranlagungsjahr 2026-27): bis ₹4.00.000 steuerfrei; 5 % von ₹4.00.001 bis 8.00.000; 10 % von ₹8.00.001 bis 12.00.000; 15 % von ₹12.00.001 bis 16.00.000; 20 % von ₹16.00.001 bis 20.00.000; 25 % von ₹20.00.001 bis 24.00.000; und 30 % über ₹24.00.000. Die Stufen ändern sich mit jedem Haushalt — prüfen Sie die aktuelle amtliche Bekanntmachung, bevor Sie sich für die Abgabe darauf verlassen."
+          },
+          {
+            "question": "Was ist die Ermäßigung nach Abschnitt 87A?",
+            "answer": "Eine Ermäßigung, die die Steuerlast für Steuerpflichtige unterhalb einer bestimmten Grenze des zu versteuernden Einkommens auf null senkt. Im neuen Regime für 2025-26 gilt sie in der Regel bis ₹12.00.000 zu versteuerndem Einkommen und läuft knapp darüber über die Grenzentlastung aus. Dieser Rechner nutzt eine vereinfachte Fassung und bildet nicht jeden Grenzfall ab."
+          },
+          {
+            "question": "Soll ich das alte oder das neue Regime wählen?",
+            "answer": "Das hängt davon ab, wie viel Sie absetzen — Wohnzuschuss, Anlagen nach Abschnitt 80C, Hypothekenzinsen und so weiter. Sind Ihre abzugsfähigen Posten hoch, ist das alte Regime oft günstiger; machen Sie wenig geltend, gewinnen meist die niedrigeren Stufensätze des neuen Regimes. Vergleichen Sie beides hier mit Ihren echten Zahlen."
+          },
+          {
+            "question": "Ersetzt das die Beratung durch einen Steuerberater?",
+            "answer": "Nein. Es ist eine vereinfachte Schätzung zur Planung: Zuschläge, Feinheiten der Abgabe in manchen Fällen und mehrere Einzelabzüge fehlen. Für die tatsächliche Abgabe oder eine Regime-Entscheidung mit echtem Geld prüfen Sie die aktuellen Stufen und fragen Sie eine qualifizierte Fachperson."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kümmern Sie sich ums Geschäft, nicht um die Steuertabelle",
+        "subtext": "Setu Dine hält Ihre Umsatz- und Ausgabendaten geordnet, damit die Steuerzeit keine Hetzjagd mehr ist.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Abfindungsrechner",
+      "shortDescription": "Schätzen Sie die gesetzliche Abfindung aus Gehalt und Dienstjahren.",
+      "seo": {
+        "title": "Abfindungsrechner — Gratuity-Gesetz Indien | Setu",
+        "description": "Kostenloser Rechner für die Gratuity in Indien. Letztes Gehalt und Dienstjahre eingeben und den nach dem Gesetz von 1972 fälligen Betrag schätzen.",
+        "keywords": [
+          "Gratuity Rechner",
+          "Abfindung Indien berechnen",
+          "Gratuity Gesetz Rechner",
+          "Gratuity Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Gratuity",
+        "headline": "Abfindungsrechner",
+        "subheadline": "Geben Sie das letzte Gehalt und die Dienstjahre ein und schätzen Sie den beim Austritt fälligen Betrag."
+      },
+      "about": {
+        "headline": "Wie viel Gratuity zusteht — und wann",
+        "paragraphs": [
+          "Die Gratuity ist eine Einmalzahlung, die Arbeitgeber in Indien Beschäftigten mit mindestens 5 Jahren ununterbrochener Dienstzeit nach dem Gesetz über die Zahlung der Gratuity von 1972 schulden. Berechnet wird sie aus dem letzten Gehalt und den gesamten Dienstjahren — nicht aus dem Verdienst der ganzen Laufbahn.",
+          "Dieser Rechner wendet die Standardformel für Beschäftigte im Anwendungsbereich des Gesetzes an und hilft sowohl Beschäftigten, die ihren Anspruch beim Austritt abschätzen, als auch Inhabern, die die Gratuity-Verpflichtung langjähriger Mitarbeitender einplanen. Die gesetzliche Höchstgrenze wird regelmäßig angepasst — prüfen Sie daher die aktuelle Grenze, bevor Sie dies als endgültigen Abfindungsbetrag ansetzen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Abfindungsrechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Gratuity?",
+            "answer": "Gratuity = (letztes Monatsgehalt × 15 × Anzahl der Dienstjahre) ÷ 26, für Beschäftigte im Anwendungsbereich des Gesetzes. Gehalt meint hier in der Regel das Grundgehalt plus Teuerungszulage."
+          },
+          {
+            "question": "Habe ich Anspruch auf Gratuity?",
+            "answer": "Grundsätzlich haben Beschäftigte mit 5 oder mehr Jahren ununterbrochener Dienstzeit beim gleichen Arbeitgeber Anspruch, mit einigen Ausnahmen (etwa Tod oder Invalidität, wo die 5-Jahres-Bedingung nicht gilt)."
+          },
+          {
+            "question": "Gibt es eine Obergrenze?",
+            "answer": "Ja — das Gesetz setzt für die steuerfreie Gratuity eine gesetzliche Obergrenze, die die Regierung regelmäßig anpasst. Prüfen Sie die aktuelle Grenze, bevor Sie das Ergebnis als endgültigen, begrenzten Betrag behandeln."
+          },
+          {
+            "question": "Wie werden die Dienstjahre gezählt, wenn ich 7 Jahre und 8 Monate gearbeitet habe?",
+            "answer": "Nach dem Gesetz wird eine Dienstzeit von mehr als 6 Monaten über ein vollendetes Jahr hinaus in der Regel auf das nächste volle Jahr aufgerundet. 7 Jahre und 8 Monate gelten in der Rechnung also meist als 8 Jahre."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Planen Sie Ihr Personalbudget?",
+        "subtext": "Setu Dine liefert Ihnen die Umsatzdaten, um Personal und langfristige Lohnkosten an dem auszurichten, was Ihr Standort tragen kann.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Provisionsrechner für Online-Bestellungen",
+      "shortDescription": "Sehen Sie Ihre echte Auszahlung nach Plattformprovision, Verpackung und Zahlungsgebühren.",
+      "seo": {
+        "title": "Provisionsrechner für Lieferdienste | Setu",
+        "description": "Kostenloser Provisionsrechner für Online-Bestellungen. Bestellwert, Plattformprovision und weitere Kosten eingeben und die echte Auszahlung je Bestellung sehen.",
+        "keywords": [
+          "Provisionsrechner Lieferdienst",
+          "Provision Lieferplattform",
+          "Auszahlung je Bestellung berechnen",
+          "Provision Vermittlungsplattform"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Provision bei Online-Bestellungen",
+        "headline": "Provisionsrechner für Online-Bestellungen",
+        "subheadline": "Geben Sie Bestellwert und Plattformkosten ein und sehen Sie genau, was Ihnen von einer Online-Bestellung bleibt."
+      },
+      "about": {
+        "headline": "Was eine Online-Bestellung tatsächlich einbringt",
+        "paragraphs": [
+          "Die genannten Provisionssätze erzählen selten die ganze Geschichte. Rechnet man Verpackungskosten, Gebühren des Zahlungsdienstes und die Steuer auf die Provision selbst hinzu, kann die Lücke zwischen dem Bestellwert, den der Gast zahlt, und dem, was auf Ihrem Konto landet, 30 % oder mehr betragen.",
+          "Geben Sie den Bestellwert und die bei Ihrem Plattformkonto geltenden Kosten ein, um die echte Auszahlung je Bestellung und Ihren effektiven Anteil zu sehen. Rechnen Sie einige Ihrer üblichen Bestellgrößen durch, um zu sehen, ob Online-Bestellungen nach allen Abzügen so rentabel sind wie Ihr Restaurant- oder Abholgeschäft."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Provisionsrechner",
+        "items": [
+          {
+            "question": "Wie berechnen Lieferplattformen ihre Provision?",
+            "answer": "Die meisten Plattformen nehmen eine Provision als Prozentsatz des Bestellwerts und können darauf zusätzlich die Steuer berechnen. Verpackungskosten und Gebühren des Zahlungsdienstes sind meist getrennt und schmälern Ihre Auszahlung weiter."
+          },
+          {
+            "question": "Warum ist meine Auszahlung so viel niedriger als der Bestellwert?",
+            "answer": "Provision, Steuer auf die Provision, Verpackungskosten und Zahlungsgebühren gehen vom Bestellwert ab, bevor Sie Geld erhalten. Bei einer typischen Bestellung machen diese Abzüge zusammen häufig 25 bis 35 % des Bestellwerts aus, je nach Plattform und Kategorie."
+          },
+          {
+            "question": "Sollte ich für Lieferplattformen anders kalkulieren?",
+            "answer": "Viele Betriebe bauen in ihre Plattformpreise tatsächlich einen eigenen Lieferaufschlag ein, um die Provision auszugleichen, denn Restaurantbetrieb und Lieferung haben sehr unterschiedliche Kostenstrukturen. Prüfen Sie mit diesem Rechner, ob Ihre heutigen Lieferpreise eine tragfähige Marge lassen."
+          },
+          {
+            "question": "Kann Setu Dine Bestellungen mehrerer Lieferplattformen verwalten?",
+            "answer": "Ja. Setu Dine kann Bestellungen mehrerer Plattformen in einer Ansicht zusammenführen, damit Ihre Küche nicht für jede Plattform ein eigenes Tablet bedienen muss."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Alle Plattformen über einen Bildschirm steuern",
+        "subtext": "Setu Dine bringt die Bestellungen aller Ihrer Lieferplattformen in eine gemeinsame Küchenansicht.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Rechner für Online-Menüpreise",
+      "shortDescription": "Finden Sie den Preis für Lieferapps, damit nach Provision und Steuer Ihr Zielbetrag übrig bleibt.",
+      "seo": {
+        "title": "Menüpreis-Rechner für Lieferplattformen",
+        "description": "Kostenloser Rechner für Online-Menüpreise. Geben Sie Ihren Zielbetrag ein und finden Sie den Listenpreis, der Provision, Steuer und Zahlungsgebühren abdeckt.",
+        "keywords": [
+          "Zomato Menüpreis Rechner",
+          "Swiggy Preisrechner",
+          "Online-Menüpreis nach Provision",
+          "Preisrechner Lieferplattform",
+          "Rechner umgekehrte Provision"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rechner für Online-Menüpreise",
+        "headline": "Rechner für Online-Menüpreise",
+        "subheadline": "Sagen Sie uns, was von einer Online-Bestellung tatsächlich bei Ihnen ankommen soll — wir ermitteln den Preis, den Sie in der App listen müssen."
+      },
+      "about": {
+        "headline": "Rechnen Sie von Ihrem Zielbetrag zurück",
+        "paragraphs": [
+          "Listen Sie online denselben Preis wie an der Theke, zehren Provision, Steuer auf diese Provision, Zahlungsgebühren und die auf den Verkauf fällige Steuer daran, bevor eine Rupie bei Ihnen ankommt — Ihr Online-Erlös liegt dann deutlich unter Ihrem Preis im Lokal.",
+          "Dieser Rechner dreht die übliche Provisionsrechnung um: geben Sie ein, was Sie pro Gericht wirklich behalten wollen, dazu die Gebühren Ihrer Plattform, und er löst nach dem Listenpreis auf, der Sie dorthin bringt. Nutzen Sie ihn, wenn Sie ein neues Gericht einstellen oder eine Plattform ihre Provisionsstufe ändert.",
+          "Das ist ein vereinfachtes Modell — es nimmt an, dass Provision und Zahlungsgebühren auf den Listenpreis berechnet werden und dass dieser Listenpreis die von Ihnen erhobene Steuer enthält. Die Verträge der Plattformen unterscheiden sich, prüfen Sie das Ergebnis daher gegen eine echte Auszahlungsabrechnung, bevor Sie neue Menüpreise ausrollen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Online-Menüpreisen",
+        "items": [
+          {
+            "question": "Warum liegt der zu listende Preis über meinem Preis im Lokal?",
+            "answer": "Weil Provision, Steuer auf diese Provision, Zahlungsgebühren und die fällige Umsatzsteuer alle vom Listenpreis abgezogen werden, bevor Sie Geld erhalten. Damit online dasselbe übrig bleibt wie an der Theke, muss der Listenpreis all diese Abzüge tragen."
+          },
+          {
+            "question": "Wird die Provision wirklich auf den Preis inklusive Steuer berechnet?",
+            "answer": "Das hängt von der Plattform und Ihrem Vertrag ab — manche berechnen die Provision auf den Nettowert, andere auf den vollen Listenpreis. Dieser Rechner nimmt an, dass Provision und Zahlungsgebühren auf den Listenpreis anfallen; das ist der häufigere und vorsichtigere Fall. Prüfen Sie Ihre Auszahlungsabrechnung, was für Sie gilt."
+          },
+          {
+            "question": "Was, wenn kein Listenpreis alle Gebühren deckt?",
+            "answer": "Ergeben Provision, Steuer und Gebühren zusammen 100% oder mehr des Listenpreises, bringt kein Preis Ihren Zielbetrag — der Rechner weist darauf hin, damit Sie die Online-Marge des Gerichts überdenken statt einen Preis zu raten."
+          },
+          {
+            "question": "Kann Setu Dine diese Preise auf meine Lieferplattformen übertragen?",
+            "answer": "Ja. Mit Setu Dine verwalten Sie Menüpreise für das Lokal und mehrere Plattformen auf einem Bildschirm, sodass geänderte Preise überall gleichzeitig ausgehen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Alle Plattformen auf einem Bildschirm",
+        "subtext": "Setu Dine bündelt Bestellungen aus allen Ihren Lieferplattformen in einer einzigen Küchenansicht.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Rezeptkalkulations-Rechner",
+      "shortDescription": "Kalkulieren Sie ein Rezept Zutat für Zutat und finden Sie die echten Kosten pro Portion.",
+      "seo": {
+        "title": "Rezeptkalkulation — Kosten pro Portion berechnen",
+        "description": "Kostenlose Rezeptkalkulation für die Gastronomie. Zutaten und Mengen eingeben und Gesamtkosten, Kosten pro Portion und einen Menüpreisvorschlag erhalten.",
+        "keywords": [
+          "Rezeptkalkulation Rechner",
+          "Rezeptkosten berechnen",
+          "Menükalkulation",
+          "Rechner Kosten pro Portion"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Rezeptkalkulation",
+        "headline": "Rezeptkalkulations-Rechner",
+        "subheadline": "Tragen Sie jede Zutat mit ihrer Menge ein und sehen Sie die echten Kosten eines Rezepts, pro Portion."
+      },
+      "about": {
+        "headline": "Kalkulieren Sie das ganze Rezept, nicht nur die Hauptzutaten",
+        "paragraphs": [
+          "Die meisten Fehler bei Menüpreisen entstehen, weil ein Gericht nur über seine 2-3 Hauptzutaten kalkuliert und der Rest geschätzt wird. Öl, Gewürze, Garnitur und Verpackung sind einzeln klein, summieren sich aber — und über Hunderte Bestellungen im Monat vervielfacht sich diese Lücke.",
+          "Tragen Sie jede Zutat eines Rezepts mit Menge und Stückkosten ein und erhalten Sie exakte Gesamtkosten und Kosten pro Portion. Sind die echten Kosten bekannt, nutzen Sie sie zusammen mit dem Rechner für den Wareneinsatz, um einen Menüpreis zu setzen, der Ihre Marge schützt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zur Rezeptkalkulation",
+        "items": [
+          {
+            "question": "Warum sollte ich jede Zutat kalkulieren und nicht nur die Hauptzutaten?",
+            "answer": "Kleine Posten wie Öl, Gewürze, Saucen und Garnitur sind einzeln günstig, summieren sich aber im Rezept; verteilt auf Hunderte verkaufte Teller pro Monat kann diese Lücke die Marge deutlich auffressen, wenn sie nie erfasst wird."
+          },
+          {
+            "question": "Durch wie viele Portionen teile ich die Gesamtkosten?",
+            "answer": "Teilen Sie durch die tatsächliche Anzahl Portionen oder Teller, die das Rezept ergibt, nicht durch die Zahl der Zutaten. Ergibt ein Ansatz eine Basis für 10 Teller, rechnen Sie mit 10 Portionen."
+          },
+          {
+            "question": "Sind Lohn- oder Gemeinkosten enthalten?",
+            "answer": "Nein — hier werden nur die reinen Zutatenkosten berechnet. Lohn und Gemeinkosten kommen separat dazu; berücksichtigen Sie beide neben den Zutatenkosten, wenn Sie den endgültigen Menüpreis festlegen."
+          },
+          {
+            "question": "Kann ich das für jedes Gericht meiner Karte speichern?",
+            "answer": "Dieses Tool speichert nichts zwischen Sitzungen, notieren Sie die Kosten pro Portion also gleich mit. Setu Dine kann Rezeptkosten dauerhaft an Menüartikel hängen und aktualisiert sie automatisch, wenn sich Zutatenpreise ändern."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Rezepte, deren Kosten sich selbst aktualisieren",
+        "subtext": "Setu Dine verknüpft Rezepte mit aktuellen Zutatenpreisen, sodass die Kosten pro Teller ohne manuelles Nachrechnen stimmen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Ausschankkosten-Rechner",
+      "shortDescription": "Ermitteln Sie Ihre Pour-Cost-Quote und den Gewinn bei jedem ausgeschenkten Drink.",
+      "seo": {
+        "title": "Ausschankkosten-Rechner — Kostenkontrolle an der Bar",
+        "description": "Kostenloser Ausschankkosten-Rechner für Bars und Restaurants. Flaschenpreis, Ausschankmenge und Verkaufspreis eingeben und Ausschankkosten % sowie Gewinn sehen.",
+        "keywords": [
+          "Ausschankkosten Rechner",
+          "Spirituosenkosten Rechner",
+          "Barkosten Rechner",
+          "Ausschankkosten Prozent"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Ausschankkosten-Rechner",
+        "headline": "Ausschankkosten-Rechner",
+        "subheadline": "Geben Sie Flaschenpreis, Ausschankmenge und Verkaufspreis ein und sehen Sie Ihre Ausschankkosten in Prozent und den Gewinn pro Drink."
+      },
+      "about": {
+        "headline": "Das Gegenstück des Wareneinsatzes für die Bar",
+        "paragraphs": [
+          "Was der Wareneinsatz für die Küche ist, sind die Ausschankkosten für die Bar — der Anteil am Verkaufspreis eines Drinks, der auf die Spirituose selbst entfällt. Diese Zahl sagt Ihnen, ob Preise und Ausschankmengen wirklich rentabel sind, besonders wenn Sie mitrechnen, wie viele Ausschänke eine Flasche ergibt.",
+          "Geben Sie Flaschenpreis, Flaschengröße, die tatsächlich ausgeschenkte Menge und den Verkaufspreis pro Drink ein, und Sie erhalten Ausschankkosten %, Gewinn je Ausschank und wie viele Ausschänke jede Flasche ergeben sollte. Prüfen Sie Ihre Bestseller hier jedes Mal nach, wenn ein Lieferant den Preis ändert."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Spirituosenkosten",
+        "items": [
+          {
+            "question": "Wie werden die Ausschankkosten in Prozent berechnet?",
+            "answer": "Ausschankkosten % = (Kosten pro Ausschank ÷ Verkaufspreis pro Ausschank) × 100, wobei Kosten pro Ausschank = Flaschenpreis ÷ (Flaschengröße ÷ Ausschankmenge)."
+          },
+          {
+            "question": "Welcher Prozentsatz ist ein guter Wert?",
+            "answer": "Die meisten Bars peilen bei Spirituosen 18-24% an, je nach Kategorie unterschiedlich — Premium- und Craft-Produkte liegen oft etwas höher, dafür sind Preis und wahrgenommener Wert höher."
+          },
+          {
+            "question": "Warum stimmen meine echten Ausschankkosten nicht mit dem Ziel überein?",
+            "answer": "Zu großzügiges Eingießen ist die häufigste Ursache — selbst 5-10 ml mehr pro Drink summieren sich an einem vollen Abend schnell. Ungleiche Ausschankmengen, Verschütten sowie Freigetränke und Gutschriften vergrößern die Lücke zwischen Ziel und Realität ebenfalls."
+          },
+          {
+            "question": "Wie viele Ausschänke sollte eine Flasche ergeben?",
+            "answer": "Ausschänke je Flasche = Flaschengröße ÷ Ausschankmenge. Eine Standardflasche mit 750 ml bei 30 ml pro Drink sollte 25 Ausschänke ergeben — vergleichen Sie die tatsächliche Zahl damit, um zu großzügiges Eingießen oder Schwund zu erkennen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Barkosten so steuern wie den Wareneinsatz",
+        "subtext": "Setu Dine stellt den Lagerverbrauch den Verkäufen gegenüber, sodass zu großzügiges Eingießen und Schwund schnell auffallen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Trinkgeld-Rechner",
+      "shortDescription": "Verteilen Sie den Trinkgeldtopf fair nach Stunden, Anteilen oder zu gleichen Teilen.",
+      "seo": {
+        "title": "Trinkgeld-Rechner — fairer Trinkgeldpool fürs Team | Setu",
+        "description": "Kostenloser Trinkgeld-Rechner. Team und Stunden oder Punkte eintragen und den Trinkgeldpool fair aufteilen — gleichmäßig, nach Arbeitsstunden oder nach Punkten.",
+        "keywords": [
+          "Trinkgeld Rechner",
+          "Trinkgeldpool aufteilen",
+          "Trinkgeld nach Stunden verteilen",
+          "Trinkgeld Rechner Gastronomie"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Trinkgeld-Rechner",
+        "headline": "Trinkgeld-Rechner",
+        "subheadline": "Tragen Sie Ihr Team ein und teilen Sie einen gemeinsamen Trinkgeldpool gleichmäßig, nach Arbeitsstunden oder nach Punkten/Anteilen auf."
+      },
+      "about": {
+        "headline": "Ein Trinkgeldpool, den das Team als fair erkennt",
+        "paragraphs": [
+          "Trinkgeld von Hand zu teilen wird schnell unübersichtlich, sobald unterschiedlich lange Schichten oder Rollen ins Spiel kommen. Wer eine komplette Doppelschicht gearbeitet hat, und wer die letzten zwei Stunden übernommen hat, sollten nicht gleich viel bekommen — doch genau bei der Frage, wie man das gewichtet, beginnen die meisten Streitigkeiten.",
+          "Dieser Rechner teilt den Pool auf drei Wege: gleichmäßig auf alle, anteilig nach Arbeitsstunden, oder über ein Punkte-/Anteilssystem, in dem Sie jeder Rolle oder Person ein Gewicht geben. Team eintragen, Methode wählen — die Aufteilung aktualisiert sich sofort."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Trinkgeld-Rechner",
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen gleichmäßiger und punktebasierter Aufteilung?",
+            "answer": "Gleichmäßig teilt den Pool unabhängig von Rolle und Stunden zu gleichen Teilen. Punktebasiert erhält jede Person ein Gewicht (Punkte oder Anteile) nach Rolle, Betriebszugehörigkeit oder Stunden, und der Pool wird im Verhältnis dieser Gewichte aufgeteilt — üblich, wenn Service und unterstützende Rollen gemeinsam poolen."
+          },
+          {
+            "question": "Sollte die Küche mit dem Service im Pool sein?",
+            "answer": "Regeln und Gepflogenheiten beim Trinkgeldpool unterscheiden sich je nach Region und örtlichem Arbeitsrecht — manche Rechtsordnungen schränken ein, wer teilnehmen darf. Prüfen Sie, was an Ihrem Standort zulässig ist, bevor Sie festlegen, wer berechtigt ist."
+          },
+          {
+            "question": "Wie teile ich Trinkgeld fair nach Arbeitsstunden?",
+            "answer": "Nutzen Sie die Methode „nach Stunden“: Tragen Sie die Stunden jeder Person für die Schicht oder den Zeitraum ein; der Pool wird anteilig geteilt, sodass jemand mit doppelter Arbeitszeit etwa den doppelten Anteil erhält."
+          },
+          {
+            "question": "Kann ich das für eine Schicht oder für die Trinkgelder einer ganzen Woche nutzen?",
+            "answer": "Für beides — tragen Sie den gesamten Pool des Zeitraums ein, den Sie aufteilen (eine Schicht, ein Tag, eine Woche), zusammen mit den Stunden oder Anteilen desselben Zeitraums."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lohn und Trinkgeld, ohne Zusatztabelle",
+        "subtext": "Setu Dine erfasst Schichtstunden und Umsätze je Mitarbeitenden, sodass Sie die Zahlen für die Trinkgeldaufteilung immer zur Hand haben.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Lagerumschlags-Rechner",
+      "shortDescription": "Finden Sie heraus, wie oft Ihr Lager in einer Periode umschlägt und wie viele Tage Bestand Sie halten.",
+      "seo": {
+        "title": "Lagerumschlags-Rechner — kostenloses Tool | Setu",
+        "description": "Kostenloser Lagerumschlags-Rechner für Händler. Wareneinsatz und durchschnittlichen Lagerwert eingeben und Umschlagshäufigkeit samt Lagerdauer in Tagen sehen.",
+        "keywords": [
+          "Lagerumschlag Rechner",
+          "Umschlagshäufigkeit Lager",
+          "Lagerdauer in Tagen",
+          "Lagerumschlag berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Lagerumschlag",
+        "headline": "Lagerumschlags-Rechner",
+        "subheadline": "Geben Sie Wareneinsatz und durchschnittlichen Lagerwert ein und sehen Sie Ihre Umschlagshäufigkeit und die Lagerdauer in Tagen."
+      },
+      "about": {
+        "headline": "Geld im Regal ist Geld, das Ihnen anderswo fehlt",
+        "paragraphs": [
+          "Der Lagerumschlag sagt, wie oft Sie Ihren durchschnittlichen Bestand in einem Zeitraum verkaufen. Eine niedrige Umschlagshäufigkeit bedeutet meist Kapital, das in langsam drehender Ware steckt; eine sehr hohe kann auf Risiko von Fehlbeständen hindeuten. Kein Extrem ist von sich aus gut — die passende Zahl hängt von Ihrer Warengruppe und davon ab, wie leicht Sie nachbestellen können.",
+          "Geben Sie den Wareneinsatz eines Zeitraums (Monat oder Jahr) und den durchschnittlichen Lagerwert desselben Zeitraums ein, um Umschlagshäufigkeit und die entsprechende Lagerdauer in Tagen zu erhalten. Beobachten Sie die Zahl über die Zeit statt einzeln: eine sinkende Umschlagshäufigkeit ist oft das früheste Anzeichen dafür, dass sich langsam drehende oder stehende Ware aufbaut."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Lagerumschlags-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für die Umschlagshäufigkeit?",
+            "answer": "Umschlagshäufigkeit = Wareneinsatz ÷ durchschnittlicher Lagerwert, im gleichen Zeitraum. Der durchschnittliche Bestand ist meist (Anfangsbestand + Endbestand) ÷ 2."
+          },
+          {
+            "question": "Welche Umschlagshäufigkeit ist gut?",
+            "answer": "Das unterscheidet sich stark nach Warengruppe: Frischware und schnelle Mode drehen weit häufiger als Möbel oder Elektronik. Vergleichen Sie Ihre Kennzahl mit dem eigenen Verlauf und den Werten Ihrer Warengruppe statt mit einer allgemeinen Zahl."
+          },
+          {
+            "question": "Was bedeutet die Lagerdauer in Tagen?",
+            "answer": "Es ist die Umschlagshäufigkeit in Tage umgerechnet: ungefähr wie viele Verkaufstage Ihr heutiger Durchschnittsbestand abdeckt. Sie ergibt sich aus 365 ÷ Umschlagshäufigkeit; eine steigende Zahl zeigt, dass die Ware langsamer abfließt als früher."
+          },
+          {
+            "question": "Warum sinkt mein Lagerumschlag?",
+            "answer": "Häufige Ursachen: zu viel Ware vor der Nachfrage eingekauft, Ansammlung langsam drehender Artikel, saisonale Nachfragerückgänge, oder Preise, die nicht mehr wettbewerbsfähig genug sind, um die Ware im früheren Tempo abzusetzen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Früher Zugang zu Setu Retail?",
+        "subtext": "Erzählen Sie uns von Ihrem Handelsgeschäft, und wir melden uns, sobald Setu Retail startet — mit Bestandsführung von Anfang an.",
+        "cta": {
+          "label": "Benachrichtigt werden"
+        }
+      }
+    },
+    {
+      "name": "Meldebestands-Rechner",
+      "shortDescription": "Finden Sie den genauen Bestand, bei dem Sie neu bestellen sollten.",
+      "seo": {
+        "title": "Meldebestands-Rechner — Fehlbestände vermeiden | Setu",
+        "description": "Kostenloser Meldebestands-Rechner für den Handel. Durchschnittlichen Tagesabsatz, Lieferzeit und Sicherheitsbestand eingeben und den Nachbestellpunkt erhalten.",
+        "keywords": [
+          "Meldebestand Rechner",
+          "Meldebestand berechnen",
+          "Nachbestellpunkt Lager",
+          "Sicherheitsbestand Rechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Meldebestand",
+        "headline": "Meldebestands-Rechner",
+        "subheadline": "Geben Sie durchschnittlichen Tagesabsatz, Lieferzeit des Lieferanten und Sicherheitsbestand ein, um zu sehen, wann Sie nachbestellen sollten."
+      },
+      "about": {
+        "headline": "Nachbestellen, bevor die Ware ausgeht — nicht danach",
+        "paragraphs": [
+          "Der Meldebestand ist der Lagerstand, bei dem eine neue Bestellung ausgelöst werden sollte: zu niedrig, und Sie riskieren, vor Eintreffen der Nachlieferung leer zu laufen; zu hoch, und Sie binden Kapital in überschüssigem Bestand.",
+          "Geben Sie den durchschnittlichen Tagesabsatz eines Artikels ein, wie viele Tage Ihr Lieferant üblicherweise braucht, und einen Sicherheitsbestand für Nachfragespitzen oder Lieferverzug — der Rechner nennt die genaue Stückzahl, bei der Ihre nächste Bestellung rausgehen sollte."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Meldebestands-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für den Meldebestand?",
+            "answer": "Meldebestand = (durchschnittlicher Tagesabsatz × Lieferzeit in Tagen) + Sicherheitsbestand. Es ist der Lagerstand, bei dem eine neue Bestellung ausgelöst werden sollte, damit die Nachlieferung vor dem Leerlaufen ankommt."
+          },
+          {
+            "question": "Wie lege ich den Sicherheitsbestand fest?",
+            "answer": "Der Sicherheitsbestand sollte Nachfrageschwankungen (stärkere Tage als im Schnitt) und Lieferverzögerungen abdecken. Ein üblicher Startpunkt sind einige Tage Durchschnittsabsatz, nach oben angepasst bei Artikeln mit unzuverlässigen Lieferanten oder schwankender Nachfrage."
+          },
+          {
+            "question": "Was, wenn die Lieferzeit stark schwankt?",
+            "answer": "Rechnen Sie mit Ihrer realistisch schlechtesten Lieferzeit statt mit dem besten Fall, und stützen Sie sich bei Artikeln mit unvorhersehbarer Lieferzeit auf einen größeren Sicherheitsbestand."
+          },
+          {
+            "question": "Sind saisonale Nachfragespitzen berücksichtigt?",
+            "answer": "Nicht direkt — gerechnet wird mit Ihrem durchschnittlichen Tagesabsatz. Für Saisonartikel rechnen Sie neu, und zwar mit dem für die kommende Saison erwarteten Tagesabsatz statt mit einem flachen Jahresmittel."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Früher Zugang zu Setu Retail?",
+        "subtext": "Erzählen Sie uns von Ihrem Handelsgeschäft, und wir melden uns, sobald Setu Retail startet — mit Nachbestell-Hinweisen von Anfang an.",
+        "cta": {
+          "label": "Benachrichtigt werden"
+        }
+      }
+    },
+    {
+      "name": "Rechner für Kundenakquisekosten (CAC)",
+      "shortDescription": "Finden Sie heraus, wie viel Sie genau für jeden neuen Kunden ausgeben.",
+      "seo": {
+        "title": "Rechner für Kundenakquisitionskosten (CAC) | Setu",
+        "description": "Kostenloser CAC-Rechner. Marketingausgaben und gewonnene Neukunden eingeben, die Kundenakquisitionskosten ermitteln und mit dem Umsatz pro Kunde vergleichen.",
+        "keywords": [
+          "CAC Rechner",
+          "Kundenakquisitionskosten berechnen",
+          "Marketingkosten pro Kunde",
+          "CAC Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — CAC-Rechner",
+        "headline": "Rechner für Kundenakquisitionskosten",
+        "subheadline": "Geben Sie Ihre Marketingausgaben und die Zahl gewonnener Neukunden ein, um Ihre Kosten je Kunde zu ermitteln."
+      },
+      "about": {
+        "headline": "Die Zahl, die zeigt, ob Marketing wirkt",
+        "paragraphs": [
+          "Die Kundenakquisitionskosten (CAC) sind der Betrag, den Sie im Schnitt aufwenden, um einen neuen Kunden zu gewinnen — über alle Marketing- und Vertriebskosten, die dafür anfielen. Sinn ergibt die Zahl erst neben einer zweiten: wie viel dieser Kunde Ihnen tatsächlich wert ist.",
+          "Geben Sie Ihre Gesamtausgaben eines Zeitraums und die Zahl der dadurch gewonnenen Neukunden ein, um Ihren CAC zu erhalten. Kennen Sie zusätzlich den durchschnittlichen Umsatz pro Kunde, zeigt der Rechner das Verhältnis beider Werte — eine schnelle Prüfung, ob sich eine Kampagne oder ein Kanal wirklich trägt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum CAC-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die CAC-Formel?",
+            "answer": "CAC = gesamte Marketing- und Vertriebsausgaben ÷ Zahl der gewonnenen Neukunden, im gleichen Zeitraum. 50.000 Ausgaben für 100 neue Kunden ergeben einen CAC von 500."
+          },
+          {
+            "question": "Welche Kosten gehören zu den Marketingausgaben?",
+            "answer": "Werbeausgaben, Agentur- oder Plattformgebühren, Aktionsrabatte, die allein der Gewinnung dienen, und, wo sinnvoll, ein angemessener Anteil der Vertriebskosten — alles, was im Zeitraum gezielt für neue Kunden aufgewendet wurde."
+          },
+          {
+            "question": "Was ist ein guter CAC?",
+            "answer": "Das hängt ganz davon ab, was ein Kunde Ihnen über die Zeit wert ist. Ein CAC ist gesund, wenn er deutlich unter dem Umsatz liegt, den ein typischer Kunde erzeugt — idealerweise unter dem wiederkehrenden Umsatz. Eine allgemein gültige gute Zahl gibt es nicht."
+          },
+          {
+            "question": "Wie unterscheidet sich der CAC vom durchschnittlichen Bestellwert?",
+            "answer": "Der CAC misst, was Sie für die Gewinnung eines Kunden aufgewendet haben; der durchschnittliche Bestellwert misst, was dieser Kunde danach pro Bestellung ausgibt. Der Vergleich zeigt grob, wie viele Bestellungen nötig sind, um die Akquisitionskosten zurückzuverdienen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Wissen, welche Kunden sich lohnen",
+        "subtext": "Setu Dine verfolgt Stammkunden und Bestellhistorie, sodass Sie sehen, welche Kanäle Kunden bringen, die tatsächlich wiederkommen.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Rechner für den durchschnittlichen Bestellwert (AOV)",
+      "shortDescription": "Ermitteln Sie Ihren Bestellwert und sehen Sie, was eine Steigerung beim Umsatz bringt.",
+      "seo": {
+        "title": "Rechner für den durchschnittlichen Bestellwert (AOV) | Setu",
+        "description": "Kostenloser AOV-Rechner. Gesamtumsatz und Zahl der Bestellungen eingeben, den durchschnittlichen Bestellwert ermitteln und die Wirkung einer Steigerung sehen.",
+        "keywords": [
+          "durchschnittlicher Bestellwert Rechner",
+          "AOV Rechner",
+          "AOV Formel",
+          "durchschnittlicher Bestellwert E-Commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — AOV-Rechner",
+        "headline": "Rechner für den durchschnittlichen Bestellwert",
+        "subheadline": "Geben Sie Gesamtumsatz und Zahl der Bestellungen ein, ermitteln Sie Ihren AOV und sehen Sie, was eine kleine Steigerung wert ist."
+      },
+      "about": {
+        "headline": "Eine kleine AOV-Steigerung summiert sich schnell",
+        "paragraphs": [
+          "Der durchschnittliche Bestellwert (AOV) ist der Betrag, der pro Bestellung im Schnitt ausgegeben wird — und einer der wenigen Umsatzhebel, die Sie bewegen können, ohne einen einzigen neuen Kunden zu gewinnen. Ein Kombiangebot, ein gut platzierter Zusatzvorschlag oder eine kleine Preisanpassung kann den AOV über alle Bestellungen heben, die Sie heute schon bekommen.",
+          "Geben Sie Gesamtumsatz und Zahl der Bestellungen eines Zeitraums ein, um Ihren aktuellen AOV zu ermitteln, und dann eine Zielsteigerung in Prozent, um zu sehen, was diese Steigerung bei gleichem Bestellvolumen an Mehrumsatz bringt — nützlich, um zu beurteilen, ob eine Upselling-Initiative oder eine Änderung an Karte und Angeboten den Aufwand lohnt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum AOV-Rechner",
+        "items": [
+          {
+            "question": "Wie lautet die Formel für den durchschnittlichen Bestellwert?",
+            "answer": "AOV = Gesamtumsatz ÷ Zahl der Bestellungen, im gleichen Zeitraum. 5.00.000 Umsatz auf 1.000 Bestellungen ergeben einen AOV von 500."
+          },
+          {
+            "question": "Wie kann ich den durchschnittlichen Bestellwert steigern?",
+            "answer": "Gängige Hebel sind Kombi- oder Paketangebote, der Vorschlag einer größeren Portion oder eines Zusatzes im Bestellmoment, Schwellen für kostenlose Lieferung ab einem Mindestbetrag und das sichtbare Vorschlagen passender Artikel zu dem, was der Gast schon bestellt."
+          },
+          {
+            "question": "Warum fällt eine kleine AOV-Steigerung so stark ins Gewicht?",
+            "answer": "Weil sie für alle Bestellungen gilt, die Sie schon haben, ohne zusätzliche Akquisitionskosten: 10 % mehr AOV auf Ihrem bestehenden Volumen schlagen direkt als Mehrumsatz durch, ohne einen einzigen neuen Kunden."
+          },
+          {
+            "question": "Ist ein höherer AOV immer besser?",
+            "answer": "Für den Umsatz in der Regel ja, aber prüfen Sie, dass er nicht auf Kosten der Bestellhäufigkeit oder der Zufriedenheit geht — Zusätze zu forsch anzubieten kann nach hinten losgehen. Beobachten Sie den AOV deshalb zusammen mit der Wiederkaufrate."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Upselling-Chancen automatisch erkennen",
+        "subtext": "Setu Dine zeigt beim Kassieren Hinweise auf Kombis und Zusätze, damit ein höherer AOV nicht davon abhängt, dass das Team daran denkt.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Menu-Engineering-Rechner",
+      "shortDescription": "Analysieren Sie Gerichte nach Gewinn und Beliebtheit: Stars, Cash Cows, Puzzles und Poor Dogs.",
+      "seo": {
+        "title": "Menu-Engineering-Rechner für Speisekarten",
+        "description": "Kostenloser Menu-Engineering-Rechner für Restaurants. Preise, Kosten und Beliebtheit eingeben, Gewinnbringer erkennen und margenschwache Gerichte korrigieren.",
+        "keywords": [
+          "Menu Engineering Rechner",
+          "Speisekarten Analyse Restaurant",
+          "Rechner Gewinn Speisekarte",
+          "Speisekarte optimieren Restaurant",
+          "Deckungsbeitrag Rechner",
+          "Klassifizierung der Speisekarte",
+          "Rentabilitätsanalyse Restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Menu-Engineering-Rechner",
+        "headline": "Menu-Engineering-Rechner",
+        "subheadline": "Analysieren Sie Ihre Karte nach Gewinn und Beliebtheit — erkennen Sie Stars zum Bewerben, Cash Cows zum Hervorheben und Dogs zum Streichen oder Neubepreisen."
+      },
+      "about": {
+        "headline": "Hören Sie auf zu raten, welche Gerichte Gewinn bringen",
+        "paragraphs": [
+          "Menu Engineering heißt, die Gerichte Ihrer Karte nach Deckungsbeitrag und Beliebtheit zu analysieren, um zu erkennen, welche wirklich profitabel sind und welche Ihre Margen auffressen.",
+          "Dieses Tool ordnet jedes Gericht einer von vier Kategorien zu: Stars (hoher Gewinn, hohe Beliebtheit), die beworben werden sollten; Cash Cows (hoher Gewinn, geringe Beliebtheit), die Sichtbarkeit brauchen; Puzzles (geringer Gewinn, hohe Beliebtheit), deren Preis angepasst werden muss; und Dogs (geringer Gewinn, geringe Beliebtheit), die gestrichen oder neu positioniert werden sollten. Geben Sie Ihre Gerichte mit Preis, Kosten und verkauften Stück ein — den Rest übernimmt der Rechner."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Menu Engineering",
+        "items": [
+          {
+            "question": "Was bedeutet „Deckungsbeitrag“ im Menu Engineering?",
+            "answer": "Der Deckungsbeitrag ist der Gewinn pro Gericht, bevor feste Gemeinkosten (Miete, Gehälter usw.) verteilt werden. Er ist der Betrag, den jeder Verkauf zur Deckung der Fixkosten und zum Gewinn beiträgt: Verkaufspreis minus Wareneinsatz."
+          },
+          {
+            "question": "Wie werden Gerichte im Menu Engineering eingeordnet?",
+            "answer": "Deckungsbeitrag und Beliebtheit (verkaufte Stück) jedes Gerichts werden mit dem Durchschnitt der Karte verglichen. Stars sind bei beidem hoch, Cash Cows haben hohe Marge bei geringer Beliebtheit, Puzzles hohe Beliebtheit bei geringer Marge, Dogs sind bei beidem niedrig."
+          },
+          {
+            "question": "Was tue ich mit jeder Kategorie?",
+            "answer": "Stars — stark bewerben, Preis stabil halten. Cash Cows — Sichtbarkeit und Kombiangebote erhöhen, um den Absatz zu steigern. Puzzles — Preis erhöhen oder Kosten senken (sie sind schon beliebt, nur nicht profitabel). Dogs — streichen, als Lockangebot neu positionieren oder die Rezeptkosten verbessern."
+          },
+          {
+            "question": "Meint Beliebtheit verkaufte Stück oder Umsatz?",
+            "answer": "In diesem Rechner meint Beliebtheit verkaufte Stück beziehungsweise Gedecke, nicht Umsatz. Ein Gericht mit geringer Marge, das sich häufig verkauft, ist ein Puzzle und kein Star, weil es Küchenkapazität bindet, ohne Marge zu liefern."
+          },
+          {
+            "question": "Wie oft sollte ich die Analyse wiederholen?",
+            "answer": "Mindestens monatlich oder immer dann, wenn Sie neue Gerichte aufnehmen oder Preise beziehungsweise Rezepte deutlich ändern. Saisonale Verschiebungen der Beliebtheit lassen Gerichte die Kategorie wechseln, sodass Sie Veränderungen erkennen und die Platzierung anpassen können."
+          },
+          {
+            "question": "Berücksichtigt das die Lohnkosten?",
+            "answer": "Nein — dieser Rechner nutzt für den Deckungsbeitrag nur die Zutatenkosten. Für ein vollständigeres Bild rechnen Sie je Gericht geschätzte Lohnkosten (Vorbereitung, Garzeit, Anrichten) in Ihren Wareneinsatz ein, bevor Sie die Marge berechnen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Karte mit Echtzeitdaten optimieren",
+        "subtext": "Setu Dine erfasst Kosten und Verkäufe jedes Gerichts automatisch, sodass Sie Menu Engineering täglich betreiben und margenschädliche Gerichte erkennen, bevor sie Ihr Ergebnis belasten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Mehrwertsteuer-Rechner",
+      "shortDescription": "Mehrwertsteuer zum Nettopreis addieren oder aus dem Bruttobetrag herausrechnen, für jeden Satz.",
+      "seo": {
+        "title": "Mehrwertsteuer-Rechner — MwSt. berechnen | Setu",
+        "description": "Kostenloser MwSt.-Rechner. Rechnen Sie die Mehrwertsteuer auf einen Nettobetrag auf oder aus einem Bruttopreis heraus — Standardsätze für über 65 Länder.",
+        "keywords": [
+          "Mehrwertsteuer Rechner",
+          "MwSt addieren",
+          "MwSt herausrechnen",
+          "Brutto Netto Rechner",
+          "19% MwSt berechnen",
+          "MwSt Rechner online"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — MwSt.-Rechner",
+        "headline": "Mehrwertsteuer-Rechner",
+        "subheadline": "Rechnen Sie die MwSt. auf einen Nettopreis auf oder aus einem Bruttobetrag heraus: Satz wählen und sofort Netto, Steuer und Brutto sehen."
+      },
+      "about": {
+        "headline": "Wozu ein Mehrwertsteuer-Rechner",
+        "paragraphs": [
+          "Wenn Sie an Kunden in Ländern mit Mehrwertsteuer verkaufen oder dort einkaufen — Deutschland, die übrige EU, Großbritannien, die Emirate, Südafrika und über 170 weitere — müssen Sie laufend zwischen Netto- und Bruttopreisen wechseln. Von Hand ist das fehleranfällig, gerade bei Sätzen wie 12,5 % oder 23 %.",
+          "Dieser Rechner arbeitet in beide Richtungen. Geben Sie einen Nettobetrag ein, um Steuer und Bruttosumme zu sehen, oder einen Bruttopreis, um Netto und enthaltene Steuer zurückzugewinnen. Schnellwahl-Buttons decken die weltweit gängigsten Sätze ab, und Sie können jeden eigenen Satz eintippen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Mehrwertsteuer-Rechner",
+        "items": [
+          {
+            "question": "Wie rechne ich die MwSt. auf einen Preis auf?",
+            "answer": "Multiplizieren Sie den Nettopreis mit dem Steuersatz und addieren Sie ihn. Bei 20 % MwSt. trägt ein Netto von 100 eine Steuer von 20, Brutto also 120. Der Rechner macht das für jeden Satz sofort."
+          },
+          {
+            "question": "Wie rechne ich die MwSt. aus einem Bruttobetrag heraus?",
+            "answer": "Teilen Sie den Bruttobetrag durch (1 + Satz). Ein Bruttopreis von 120 bei 20 % MwSt. ergibt 120 ÷ 1,20 = 100 Netto mit 20 Steuer. Ziehen Sie den Prozentsatz nie direkt ab — das ergibt ein falsches Ergebnis."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen MwSt. und GST?",
+            "answer": "Beide funktionieren gleich: eine Steuer auf den in jeder Stufe geschaffenen Wert. Die Länder verwenden nur andere Namen und Sätze. Indien nutzt GST (für die CGST/SGST-Aufteilung unseren GST-Rechner verwenden); Großbritannien, die EU und viele andere nutzen die Mehrwertsteuer."
+          },
+          {
+            "question": "Welchen Steuersatz soll ich nehmen?",
+            "answer": "Den Normalsatz des Landes, in dem der Umsatz besteuert wird — etwa 20 % in Großbritannien, 19 % in Deutschland, 5 % in den Emiraten. Viele Länder haben zusätzlich reduzierte Sätze für Grundbedarf; prüfen Sie die Kategorie Ihrer Ware oder Leistung."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Sales-Tax-Rechner",
+      "shortDescription": "Berechnen Sie US-Sales-Tax: Staats- und Kommunalsätze kombinieren, addieren oder herausrechnen.",
+      "seo": {
+        "title": "Sales-Tax-Rechner — Staats- und Ortssätze | Setu",
+        "description": "Kostenloser Sales-Tax-Rechner für die USA. Staats- und Ortssätze kombinieren, Steuer auf einen Nettopreis aufschlagen oder aus einer Summe herausrechnen.",
+        "keywords": [
+          "Sales Tax Rechner",
+          "US Verkaufssteuer",
+          "Staatssteuer Rechner",
+          "Verkaufssteuer herausrechnen",
+          "Steuer auf Einkauf berechnen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Sales Tax",
+        "headline": "Sales-Tax-Rechner",
+        "subheadline": "Kombinieren Sie Staats- und Ortssatz und schlagen Sie die Steuer dann auf einen Preis auf — oder rechnen Sie sie aus einer bereits bezahlten Summe heraus."
+      },
+      "about": {
+        "headline": "So funktioniert die US-Verkaufssteuer",
+        "paragraphs": [
+          "Anders als Mehrwertsteuer oder GST kommt die US-Verkaufssteuer an der Kasse dazu und unterscheidet sich je nach Bundesstaat, County und Stadt. Der Satz, den Sie erheben, ist meist der Satz des Bundesstaats plus die am Verkaufsort geltenden Ortssätze — deshalb können zwei Läden wenige Kilometer auseinander unterschiedlich viel Steuer verlangen.",
+          "Geben Sie den Satz des Bundesstaats und etwaige Orts- oder Stadtsätze ein: Der Rechner zeigt den kombinierten Satz, den Steuerbetrag und die Summe. Umgekehrt rechnen Sie die Steuer aus einer Belegsumme heraus, etwa für die Buchhaltung oder eine Spesenabrechnung."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Sales-Tax-Rechner",
+        "items": [
+          {
+            "question": "Wie berechne ich die Verkaufssteuer auf einen Einkauf?",
+            "answer": "Multiplizieren Sie den Preis vor Steuern mit dem kombinierten Satz. Ein Einkauf von 100 $ bei kombiniert 8 % trägt 8 $ Steuer, Summe also 108 $."
+          },
+          {
+            "question": "Wie komme ich von der Summe auf den Preis vor Steuern?",
+            "answer": "Teilen Sie die Summe durch (1 + kombinierter Satz). Eine Summe von 108 $ bei 8 % ergibt 108 $ ÷ 1,08 = 100 $ vor Steuern und 8 $ Steuer."
+          },
+          {
+            "question": "Warum brauche ich Staats- und Ortssatz getrennt?",
+            "answer": "In den meisten US-Bundesstaaten dürfen Countys, Städte und Sonderbezirke eigene Verkaufssteuer auf den Satz des Bundesstaats aufschlagen. Der Kunde zahlt die kombinierte Summe am Verkaufsort — der Rechner nimmt daher beide und addiert sie."
+          },
+          {
+            "question": "Erheben alle US-Bundesstaaten Verkaufssteuer?",
+            "answer": "Nein — Alaska, Delaware, Montana, New Hampshire und Oregon haben keine landesweite Verkaufssteuer (einige Orte in Alaska erheben eine eigene). Alle anderen Bundesstaaten haben einen Satz, meist zwischen 4 % und 7,25 %."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "ROI-Rechner",
+      "shortDescription": "Messen Sie die Rendite: Nettogewinn, ROI in Prozent und annualisierte Rendite jeder Ausgabe.",
+      "seo": {
+        "title": "ROI-Rechner — Rendite der Investition | Setu",
+        "description": "Kostenloser ROI-Rechner. Geben Sie eingesetzten und zurückerhaltenen Betrag ein und erhalten Sie Nettogewinn, ROI in Prozent und den annualisierten ROI.",
+        "keywords": [
+          "ROI Rechner",
+          "Rendite berechnen",
+          "annualisierter ROI",
+          "Investitionsrechner",
+          "ROI Formel"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — ROI-Rechner",
+        "headline": "ROI-Rechner",
+        "subheadline": "Geben Sie ein, was Sie eingesetzt und was Sie zurückerhalten haben: Nettogewinn, ROI in Prozent und die annualisierte Rendite des Zeitraums."
+      },
+      "about": {
+        "headline": "Warum der ROI bei jeder Entscheidung zählt",
+        "paragraphs": [
+          "Ob neue Küchentechnik, eine Marketingkampagne oder Ware für die Saison — jeder eingesetzte Euro sollte sich verdienen. Der ROI bringt all diese Entscheidungen auf eine Skala: Was hat das Geld gegenüber seinen Kosten zurückgebracht?",
+          "Der schlichte ROI-Prozentwert zeigt den Gesamtgewinn. Die annualisierte Zahl zählt, sobald Sie Optionen mit unterschiedlichen Laufzeiten vergleichen: 40 % über 4 Jahre sind deutlich schwächer als 25 % in einem Jahr. Geben Sie den Zeitraum ein, und der Rechner liefert beides."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum ROI-Rechner",
+        "items": [
+          {
+            "question": "Wie wird der ROI berechnet?",
+            "answer": "ROI = (zurückerhaltener Betrag − eingesetzter Betrag) ÷ eingesetzter Betrag × 100. Setzen Sie 100.000 ein und erhalten 140.000 zurück, liegt Ihr ROI bei 40 %."
+          },
+          {
+            "question": "Was ist der annualisierte ROI?",
+            "answer": "Er rechnet eine Gesamtrendite in einen jährlichen Zinseszinssatz um: (zurückerhalten ÷ eingesetzt)^(1 ÷ Jahre) − 1. 40 % Gesamtrendite über 2 Jahre entsprechen etwa 18,3 % pro Jahr — hilfreich beim Vergleich unterschiedlich langer Anlagen."
+          },
+          {
+            "question": "Welcher ROI ist für ein kleines Unternehmen gut?",
+            "answer": "Das hängt vom Risiko und Ihren Alternativen ab. Als grobe Messlatte sollte eine Investition das, was dasselbe Geld sicher erbringen würde (Festgeldzinsen), so weit übertreffen, dass Aufwand und Risiko sich lohnen — viele Inhaber erwarten bei operativen Investitionen 15–30 % und mehr pro Jahr."
+          },
+          {
+            "question": "Sind laufende Kosten enthalten?",
+            "answer": "Rechnen Sie sie in den eingesetzten Betrag ein oder ziehen Sie sie vom zurückerhaltenen ab — in jedem Fall ist der ROI nur so ehrlich wie die Zahlen, die Sie eingeben. Fürs Marketing ergänzt ihn unser CAC-Rechner, der die Kosten je Kunde misst."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Abschreibungsrechner",
+      "shortDescription": "Lineare oder degressive Abschreibung mit vollständigem Plan Jahr für Jahr.",
+      "seo": {
+        "title": "Abschreibungsrechner mit Abschreibungsplan | Setu",
+        "description": "Kostenloser Abschreibungsrechner. Lineare oder degressive Abschreibung berechnen, mit vollständigem Plan der Buchwerte Jahr für Jahr.",
+        "keywords": [
+          "Abschreibungsrechner",
+          "lineare Abschreibung",
+          "degressive Abschreibung",
+          "Restbuchwert Abschreibung",
+          "Abschreibungsplan Anlagevermögen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Abschreibung",
+        "headline": "Abschreibungsrechner",
+        "subheadline": "Geben Sie Anschaffungskosten, Restwert und Nutzungsdauer ein — Sie erhalten die jährliche Abschreibung und einen vollständigen Plan Jahr für Jahr, linear oder degressiv."
+      },
+      "about": {
+        "headline": "Zwei Methoden, ein Plan",
+        "paragraphs": [
+          "Abschreibung verteilt die Kosten eines Wirtschaftsguts über seine Nutzungsdauer, und die Methode verändert den Verlauf des Aufwands. Linear teilt die Kosten jedes Jahr gleichmäßig auf — einfach und üblich für Mobiliar, Einrichtung und Geräte. Degressiv wendet einen festen Prozentsatz auf den Restbuchwert an und zieht den Aufwand nach vorn — so verfährt das indische Einkommensteuergesetz für die meisten Anlagegruppen.",
+          "Dieser Rechner erstellt den vollständigen Plan für beide Methoden: Anfangswert, Abschreibung und Restbuchwert für jedes Jahr, damit Sie die Zahlen direkt in die Buchhaltung übernehmen oder die Methoden vor der Wahl vergleichen können."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum Abschreibungsrechner",
+        "items": [
+          {
+            "question": "Wie funktioniert die lineare Abschreibung?",
+            "answer": "Jährliche Abschreibung = (Kosten − Restwert) ÷ Nutzungsdauer. Eine Maschine für ₹5.00.000 mit ₹50.000 Restwert über 5 Jahre schreibt ₹90.000 pro Jahr ab."
+          },
+          {
+            "question": "Wie funktioniert die degressive Abschreibung?",
+            "answer": "Jedes Jahr schreiben Sie einen festen Prozentsatz des Restbuchwerts ab. Bei 25 % schreibt ein Gut von ₹5.00.000 im ersten Jahr ₹1.25.000 ab, im zweiten dann 25 % von ₹3.75.000, und so weiter — anfangs größere, später kleinere Beträge."
+          },
+          {
+            "question": "Welche Methode soll ich nutzen?",
+            "answer": "Für die indische Einkommensteuer ist die degressive Abschreibung zu den vorgeschriebenen Gruppensätzen bei den meisten Betrieben Standard. Für die eigene Managementrechnung ist linear einfacher und zeigt einen gleichmäßigen Aufwand. Gesellschaften, die nach dem Gesellschaftsrecht berichten, folgen den Nutzungsdauern des Anhangs II. Im Zweifel fragen Sie Ihren Steuerberater."
+          },
+          {
+            "question": "Was ist der Restwert?",
+            "answer": "Der Betrag, den das Gut Ihrer Erwartung nach am Ende der Nutzungsdauer noch wert ist — Wiederverkaufs- oder Schrottwert. Die Abschreibung endet, sobald der Buchwert ihn erreicht."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst mitschreiben",
+        "subtext": "Kasse und Business-Tools von Setu erfassen Umsätze, Kosten und Steuern automatisch — die Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Zahlungsziel-Rechner",
+      "shortDescription": "Fälligkeiten, Skonto-Ersparnis und die echten Kosten verspäteter Zahlung.",
+      "seo": {
+        "title": "Zahlungsziel-Rechner — Netto 30",
+        "description": "Kostenloser Rechner für Zahlungsbedingungen: exaktes Fälligkeitsdatum bei netto 15/30/45/60, Skonto-Ersparnis und die echten Kosten des Verzichts.",
+        "keywords": [
+          "Zahlungsbedingungen Rechner",
+          "Netto-30-Rechner",
+          "2/10 netto 30",
+          "Skonto bei früher Zahlung",
+          "Rechner Fälligkeitsdatum Rechnung",
+          "Kosten des Lieferantenkredits"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Zahlungsziel-Rechner",
+        "headline": "Zahlungsziel-Rechner",
+        "subheadline": "Machen Sie aus Bedingungen wie „2/10 netto 30“ echte Daten und Beträge: Fälligkeitstag, Ersparnis bei früher Zahlung und was es wirklich kostet, das Skonto zu verfallen zu lassen."
+      },
+      "about": {
+        "headline": "Rechnungsbedingungen in Sekunden entschlüsseln",
+        "paragraphs": [
+          "Bedingungen wie „netto 30“ oder „2/10 netto 45“ packen ein Fälligkeitsdatum, ein Skonto und einen versteckten Zinssatz in wenige Zeichen. Dieser Rechner packt sie wieder aus: das genaue Fälligkeitsdatum ab Rechnungsdatum, den Skontobetrag bei Zahlung innerhalb der Frist und die auf das Jahr gerechneten Kosten, wenn Sie darauf verzichten.",
+          "Die letzte Zahl überrascht die meisten. Auf 2% Skonto zu verzichten, um das Geld 20 Tage länger zu halten, entspricht einem Kredit zu über 36% pro Jahr — weit teurer als fast jede Betriebsmittelfinanzierung. Wer das weiß, entscheidet mit Zahlen, ob als Käufer oder als Verkäufer, der die Bedingungen setzt."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Zahlungsbedingungen",
+        "items": [
+          {
+            "question": "Was bedeutet 2/10 netto 30?",
+            "answer": "Zahlen Sie innerhalb von 10 Tagen, ziehen Sie 2% von der Rechnung ab; andernfalls ist der volle Betrag 30 Tage nach Rechnungsdatum fällig."
+          },
+          {
+            "question": "Wie werden die Kosten eines verfallenen Skontos berechnet?",
+            "answer": "Kosten ≈ (Skonto % ÷ (100 − Skonto %)) × (365 ÷ zusätzliche Kredittage) × 100. Für 2/10 netto 30 ergibt das (2 ÷ 98) × (365 ÷ 20) ≈ 37% pro Jahr — so viel kosten die 20 zusätzlichen Kredittage tatsächlich."
+          },
+          {
+            "question": "Zählt die Frist ab Rechnungsdatum oder ab Lieferdatum?",
+            "answer": "Normalerweise ab Rechnungsdatum, sofern der Vertrag nichts anderes sagt (manche nutzen Monatsendfristen, geschrieben als „netto 30 Monatsende“). Dieser Rechner zählt Kalendertage ab dem Rechnungsdatum, das Sie eingeben."
+          },
+          {
+            "question": "Sollte ich meinen Kunden Skonto für frühe Zahlung anbieten?",
+            "answer": "Wenn die Liquidität knapp ist oder Kunden langsam zahlen, bringt ein kleines Skonto das Geld deutlich schneller herein und spart Mahnaufwand. Kalkulieren Sie es bewusst — dieselbe Jahresrechnung gilt für Sie als Verkäufer."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Rechner für Einkaufspreisabweichung",
+      "shortDescription": "Vergleichen Sie tatsächliche und Standard-Einkaufspreise und sehen Sie die Abweichung sofort.",
+      "seo": {
+        "title": "Rechner für Einkaufspreisabweichung (PPV)",
+        "description": "Kostenloser PPV-Rechner. Vergleichen Sie tatsächlich gezahlte Preise mit Standard- oder Planpreisen und erhalten Sie Abweichung je Stück, in Prozent und gesamt.",
+        "keywords": [
+          "Einkaufspreisabweichung Rechner",
+          "PPV Rechner",
+          "Formel Preisabweichung",
+          "Abweichung im Einkauf",
+          "Standardkostenabweichung"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — PPV-Rechner",
+        "headline": "Rechner für Einkaufspreisabweichung",
+        "subheadline": "Standardpreis gegen tatsächlicher Preis × Menge — sehen Sie Abweichung je Stück, in Prozent und gesamt, gekennzeichnet als günstig oder ungünstig."
+      },
+      "about": {
+        "headline": "Kostenschleichgang erkennen, bevor er die Marge frisst",
+        "paragraphs": [
+          "Die Einkaufspreisabweichung misst den Abstand zwischen dem, was Sie für Material oder Ware einplanten, und dem, was Sie tatsächlich bezahlt haben. Lieferanten erhöhen Preise still, Bestellmengen ändern sich, Marktpreise bewegen sich — mit PPV erkennen Einkaufsteams das früh und beziffern die Wirkung.",
+          "Eine positive (ungünstige) Abweichung heißt: der Einkauf war teurer als der Standard — die Marge läuft schon am Eingang aus. Eine negative (günstige) Abweichung heißt: Sie waren besser als geplant. Verfolgen Sie sie je Artikel und je Lieferant und lassen Sie dauerhafte Abweichungen in Ihre Preise oder in Nachverhandlungen einfließen."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum PPV-Rechner",
+        "items": [
+          {
+            "question": "Wie wird die Einkaufspreisabweichung berechnet?",
+            "answer": "PPV = (tatsächlicher Preis − Standardpreis) × gekaufte Menge. 500 Stück zu ₹110 gegen einen Standard von ₹100 ergeben eine ungünstige Abweichung von ₹5.000."
+          },
+          {
+            "question": "Was ist der Standardpreis?",
+            "answer": "Der Maßstab, mit dem Sie geplant haben — ein Planpreis, ein verhandelter Vertragspreis oder die Durchschnittskosten der Vorperiode. Wichtiger als die Wahl ist, dauerhaft beim gleichen Maßstab zu bleiben."
+          },
+          {
+            "question": "Ist eine günstige Abweichung immer gut?",
+            "answer": "Meist ja, prüfen Sie aber den Grund. Ein niedrigerer Preis durch schlechtere Qualität, zu große Großbestellungen oder verpasste Liefertermine können später mehr kosten, als die Abweichung einspart."
+          },
+          {
+            "question": "Wie oft sollte ich PPV prüfen?",
+            "answer": "Für die meisten kleinen Betriebe reicht monatlich — oft genug, um Lieferantenerhöhungen zu erkennen, bevor sie sich aufsummieren, ohne im Rauschen zu versinken. Beginnen Sie bei den Artikeln mit dem höchsten Einkaufsvolumen (unser ABC-Analyse-Tool hilft beim Sortieren)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "Finanzkennzahlen-Rechner",
+      "shortDescription": "Kennzahlen zu Liquidität, Verschuldung, Marge und Effizienz aus Bilanz und GuV.",
+      "seo": {
+        "title": "Finanzkennzahlen-Rechner für Unternehmen",
+        "description": "Kostenloser Finanzkennzahlen-Rechner. Zahlen aus Bilanz und GuV eingeben und Liquidität, Verschuldung, Margen sowie Debitorentage auf einmal erhalten.",
+        "keywords": [
+          "Finanzkennzahlen Rechner",
+          "Liquidität 3. Grades Rechner",
+          "Liquidität 2. Grades",
+          "Verschuldungsgrad",
+          "Kennzahlenanalyse",
+          "Finanzcheck Unternehmen"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — Kennzahlen-Analyse",
+        "headline": "Finanzkennzahlen-Rechner",
+        "subheadline": "Sieben zentrale Kennzahlen aus wenigen Zahlen — Liquidität, Verschuldung, Margen und Effizienz auf einen Blick."
+      },
+      "about": {
+        "headline": "Ein Gesundheitscheck für Ihr Unternehmen",
+        "paragraphs": [
+          "Einzelne Zahlen in einer Bilanz sagen allein wenig — Kennzahlen setzen sie in den Zusammenhang. Können Sie die nächsten Rechnungen decken (Liquidität 3. und 2. Grades)? Sind Sie überschuldet (Verschuldungsgrad)? Ist das Kerngeschäft profitabel (Brutto- und Nettomarge)? Steckt Geld im Lager oder bei Kunden fest (Lagerumschlag und Debitorentage)?",
+          "Banken und Investoren berechnen genau diese Kennzahlen, wenn sie Ihre Zahlen prüfen — es lohnt sich also, sie zuerst selbst zu sehen. Geben Sie die Werte aus Ihrer letzten Bilanz und Gewinn- und Verlustrechnung ein — oder erstellen Sie diese Abschlüsse mit unseren kostenlosen Bilanz- und GuV-Tools — und lesen Sie die Ergebnisse anhand der mitgelieferten Richtwerte."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zu Finanzkennzahlen",
+        "items": [
+          {
+            "question": "Was ist eine gute Liquidität 3. Grades?",
+            "answer": "Zwischen 1,5 und 3 ist für die meisten Betriebe komfortabel. Unter 1 übersteigen die kurzfristigen Verbindlichkeiten das Umlaufvermögen — ein Liquiditätswarnsignal. Deutlich über 3 kann auf ungenutzte Mittel oder zu hohe Lagerbestände hindeuten."
+          },
+          {
+            "question": "Warum bleibt das Lager bei der Liquidität 2. Grades außen vor?",
+            "answer": "Lagerbestände brauchen oft Monate, um zu Geld zu werden, und gehen unter Druck auch unter Buchwert weg. Die Liquidität 2. Grades ((Umlaufvermögen − Vorräte) ÷ kurzfristige Verbindlichkeiten) prüft, ob Sie die nächsten Rechnungen zahlen könnten, ohne auf den Verkauf von Beständen zu setzen."
+          },
+          {
+            "question": "Was sagt der Verschuldungsgrad aus?",
+            "answer": "Wie viel des Unternehmens über Fremdkapital statt über Eigenkapital finanziert ist. Unter 1 ist konservativ, 1–2 ist üblich; über 2 tragen die Kreditgeber mehr Risiko, und neue Kredite werden schwieriger und teurer."
+          },
+          {
+            "question": "Was sind Debitorentage (DSO)?",
+            "answer": "Forderungen ÷ Jahresumsatz × 365 — die durchschnittliche Zahl der Tage, die Kunden zum Bezahlen brauchen. Liegen Ihre Zahlungsbedingungen bei 30 Tagen, der DSO aber bei 55, braucht das Mahnwesen Aufmerksamkeit (unser Tool zur Offenen-Posten-Analyse zeigt genau, wo)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlen, die sich selbst erfassen",
+        "subtext": "Setus Kassensystem und Business-Tools erfassen Umsätze, Kosten und Steuern automatisch, sodass Berichte entstehen, während Sie arbeiten.",
+        "cta": {
+          "label": "Setu Dine entdecken"
+        }
+      }
+    },
+    {
+      "name": "MDR-Rechner",
+      "shortDescription": "Sehen Sie, wie viel MDR auf eine Zahlung anfällt und was Ihnen tatsächlich gutgeschrieben wird — mit oder ohne MDR gerechnet.",
+      "seo": {
+        "title": "MDR-Rechner — Gebühren des Zahlungsdienstes | Setu",
+        "description": "Kostenloser MDR-Rechner für Händler in Indien. Betrag mit oder ohne MDR eingeben und Händlergebühr, die Steuer darauf und Ihren Auszahlungsbetrag sehen.",
+        "keywords": [
+          "MDR Rechner",
+          "Händlergebühr berechnen",
+          "Gebühren Zahlungsdienstleister",
+          "MDR inklusive exklusive",
+          "UPI MDR Indien",
+          "Kartengebühren Rechner"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Kostenloses Tool — MDR-Rechner",
+        "headline": "MDR-Rechner",
+        "subheadline": "Ermitteln Sie die Händlergebühr auf eine Zahlung und was auf Ihrem Konto landet, sobald sie und ihre Steuer abgezogen sind."
+      },
+      "about": {
+        "headline": "Was der MDR Sie tatsächlich kostet",
+        "paragraphs": [
+          "Der MDR, die Händlergebühr, ist der Anteil, den Ihr Acquirer bei jeder Karten- oder Wallet-Zahlung behält, und auf diesen Anteil fällt zusätzlich die Steuer GST an. Bei einem Kreditkartenumsatz von ₹5.000 zu 2 % beträgt der MDR ₹100 und die Steuer darauf weitere ₹18 — ausgezahlt werden also ₹4.882 statt ₹5.000. Über ein Monatsvolumen an Kartenzahlungen ist diese Lücke echtes Geld, und die meisten Händler begegnen ihr erst in der Abrechnung.",
+          "Geben Sie den Betrag auf zwei Wegen ein, je nachdem, was Sie kennen. MDR inklusive heißt: die Zahl ist, was der Kunde zahlt, und der Rechner sagt Ihnen, was bleibt. MDR exklusive heißt: die Zahl ist, was ankommen soll, und der Rechner rechnet die Gebühr hinauf, damit der Nettobetrag nach MDR genau stimmt — nützlich, wenn Sie die Gebühr an den Kunden weitergeben oder einen Preis nennen, der einen festen Betrag übrig lassen muss.",
+          "Nicht jeder Zahlweg kostet gleich, und bei UPI steht eine Änderung an. Ab dem 15. Oktober 2026 fällt auf UPI-Händlerzahlungen über ₹2.000 ein MDR von 0,4 % auf den gesamten Betrag an, begrenzt auf ₹300 je Transaktion. Bis ₹2.000 gibt es weiterhin keinen MDR, RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, und Händler mit weniger als ₹1 Lakh Monatsumsatz über UPI-QR ebenfalls — deshalb kann es die Kosten auf null bringen, einen größeren Betrag über mehrere kleinere QR-Codes zu kassieren."
+        ]
+      },
+      "faq": {
+        "headline": "Häufige Fragen zum MDR-Rechner",
+        "items": [
+          {
+            "question": "Was ist der MDR?",
+            "answer": "Der MDR, die Händlergebühr, ist das Entgelt, das ein Händler für die Annahme einer digitalen Zahlung zahlt. Meist ist es ein Prozentsatz des Transaktionsbetrags, manchmal mit einem Festbetrag obendrauf, und er wird abgezogen, bevor das Geld auf dem Händlerkonto eingeht. Die Steuer GST fällt auf den MDR selbst an."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen MDR inklusive und exklusive?",
+            "answer": "MDR inklusive bedeutet, der eingegebene Betrag ist das, was der Kunde zahlt, und der MDR wird davon abgezogen — Sie erhalten also weniger. MDR exklusive bedeutet, der eingegebene Betrag ist das, was Sie erhalten wollen, also wird die Belastung hochgerechnet, um MDR und Steuer zu deckeln. Nutzen Sie exklusive, wenn eine bestimmte Summe auf Ihrem Konto ankommen muss."
+          },
+          {
+            "question": "Gibt es MDR auf UPI-Zahlungen in Indien?",
+            "answer": "Bis ₹2.000 nicht, und RuPay-Debit bleibt per Regulierung bei null. Ab dem 15. Oktober 2026 fällt auf UPI-Händlerzahlungen über ₹2.000 ein MDR von 0,4 % an, berechnet auf den gesamten Transaktionsbetrag und begrenzt auf ₹300. UPI Autopay und andere wiederkehrende Mandate sind befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen."
+          },
+          {
+            "question": "Wie senke ich meine MDR-Kosten?",
+            "answer": "Lenken Sie Kunden auf die Wege, die gebührenfrei bleiben — UPI bis ₹2.000, RuPay-Debit und UPI-Autopay-Mandate — und verhandeln Sie Ihren Kartensatz mit dem Acquirer, sobald Ihr Volumen das hergibt. Da die Schwelle von ₹2.000 pro Transaktion gilt, vermeidet man die 0,4 % vollständig, indem jede UPI-Zahlung darunter bleibt; der verlinkte QR-Splitter teilt eine größere Summe in QR-Codes unterhalb der Schwelle."
+          },
+          {
+            "question": "Fällt GST auf den MDR an?",
+            "answer": "Ja. Die GST von 18 % fällt auf den MDR selbst an, nicht auf Ihren Umsatz und nicht auf die UPI-Transaktion. Der Rechner zeigt sie als eigene Zeile, damit Sie die vollen Kosten des Einzugs sehen; GST-registrierte Betriebe können sie in der Regel als Vorsteuer geltend machen."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Zahlungen annehmen, ohne einen Anteil abzugeben",
+        "subtext": "Mit den kostenlosen UPI-Tools von Setu kassieren Sie an der Kasse unterhalb der MDR-Schwelle — ohne Anmeldung.",
+        "cta": {
+          "label": "UPI-QR-Generator testen"
+        }
+      }
+    }
+  ],
+  "labels": {
+    "allCalculators": "← Alle Rechner",
+    "moreCalculators": "Weitere Rechner"
+  }
+}

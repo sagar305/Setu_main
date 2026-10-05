@@ -20,6 +20,8 @@ import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n, type DictKey } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 export type AgingKind = "receivable" | "payable";
 
@@ -32,29 +34,71 @@ type AgingDoc = {
 };
 
 const BUCKETS = [
-  { key: "current", label: "Not yet due" },
-  { key: "b30", label: "1–30 days" },
-  { key: "b60", label: "31–60 days" },
-  { key: "b90", label: "61–90 days" },
-  { key: "b90plus", label: "90+ days" },
-] as const;
+  { key: "current", label: "Not yet due", dict: "agBucketCurrent" },
+  { key: "b30", label: "1–30 days", dict: "agBucket30" },
+  { key: "b60", label: "31–60 days", dict: "agBucket60" },
+  { key: "b90", label: "61–90 days", dict: "agBucket90" },
+  { key: "b90plus", label: "90+ days", dict: "agBucket90Plus" },
+] as const satisfies readonly { key: string; label: string; dict: DictKey }[];
 
 type BucketKey = (typeof BUCKETS)[number]["key"];
 
-const LABELS: Record<AgingKind, { party: string; doc: string; file: string; empty: string }> = {
+/**
+ * Per-kind wording, held as dictionary keys rather than nouns.
+ *
+ * This used to be one noun per kind ("Invoice" / "Bill") spliced into English
+ * sentences — lowercased for a heading, given an "s" for a plural, prefixed
+ * with "this" in a confirmation. None of that carries into another language, so
+ * each phrase is a whole key per kind and the noun is never assembled.
+ *
+ * `party` and `csvParty` differ on purpose: the heading follows the reader's
+ * language while the CSV heading stays English, matching the other tools'
+ * exports.
+ */
+const LABELS: Record<
+  AgingKind,
+  {
+    file: string;
+    csvParty: string;
+    party: DictKey;
+    partyNameReq: DictKey;
+    docNumber: DictKey;
+    addUnpaid: DictKey;
+    noneTitle: DictKey;
+    inReport: DictKey;
+    removeTitle: DictKey;
+    thisDoc: DictKey;
+    pull: DictKey;
+    empty: DictKey;
+  }
+> = {
   receivable: {
-    party: "Customer",
-    doc: "Invoice",
     file: "invoice-aging.csv",
-    empty:
-      "Add each unpaid customer invoice with its due date — the report buckets them by how overdue they are.",
+    csvParty: "Customer",
+    party: "customer",
+    partyNameReq: "agCustomerNameReq",
+    docNumber: "agInvoiceNumber",
+    addUnpaid: "agAddUnpaidInvoice",
+    noneTitle: "agNoInvoicesTitle",
+    inReport: "agInvoicesInReport",
+    removeTitle: "agRemoveInvoiceTitle",
+    thisDoc: "agThisInvoice",
+    pull: "agPullFromLedger",
+    empty: "agEmptyReceivable",
   },
   payable: {
-    party: "Supplier",
-    doc: "Bill",
     file: "ap-aging.csv",
-    empty:
-      "Add each unpaid supplier bill with its due date — the report shows which payments are most overdue.",
+    csvParty: "Supplier",
+    party: "supplier",
+    partyNameReq: "agSupplierNameReq",
+    docNumber: "billNumber",
+    addUnpaid: "agAddUnpaidBill",
+    noneTitle: "agNoBillsTitle",
+    inReport: "agBillsInReport",
+    removeTitle: "agRemoveBillTitle",
+    thisDoc: "agThisBill",
+    pull: "agPullFromRegister",
+    empty: "agEmptyPayable",
   },
 };
 
@@ -73,6 +117,7 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function AgingReportTool({ kind }: { kind: AgingKind }) {
   const labels = LABELS[kind];
+  const { t } = useI18n();
   const { code: currency } = usePreferredCurrency();
   const workspace = useFinanceWorkspace(
     kind === "receivable" ? "invoice-aging-report" : "accounts-payable-aging"
@@ -170,7 +215,7 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
     downloadCsv(
       labels.file,
       toCsv(
-        [labels.party, ...BUCKETS.map((b) => b.label), "Total"],
+        [labels.csvParty, ...BUCKETS.map((b) => b.label), "Total"],
         [
           ...report.rows.map(([name, row]) => [
             name,
@@ -197,25 +242,25 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
 
       <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Add unpaid {labels.doc.toLowerCase()}</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t(labels.addUnpaid)}</h2>
         {workspace.connected ? (
           <div className="mb-4">
             <SecondaryButton onClick={pullFromWorkspace}>
-              ↻ {kind === "receivable" ? "Pull from Customer Ledger" : "Pull from Purchase Register"}
+              ↻ {t(labels.pull)}
             </SecondaryButton>
           </div>
         ) : null}
         <div className="space-y-4">
-          <Field label={`${labels.party} name *`}>
+          <Field label={t(labels.partyNameReq)}>
             <TextInput value={party} onChange={(e) => setParty(e.target.value)} />
           </Field>
-          <Field label={`${labels.doc} number`}>
+          <Field label={t(labels.docNumber)}>
             <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
           </Field>
-          <Field label="Due date">
+          <Field label={t("agDueDate")}>
             <TextInput type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
           </Field>
-          <Field label="Amount outstanding">
+          <Field label={t("agAmountOutstanding")}>
             <NumberInput
               min={0}
               step="0.01"
@@ -225,7 +270,7 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
             />
           </Field>
           <PrimaryButton className="w-full" onClick={add} disabled={!canAdd}>
-            Add to report
+            {t("agAddToReport")}
           </PrimaryButton>
         </div>
       </Card>
@@ -233,9 +278,9 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
       <div className="space-y-6">
         <Card>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-lg font-bold text-ink">Aging summary</h2>
+            <h2 className="text-lg font-bold text-ink">{t("agSummary")}</h2>
             <SecondaryButton onClick={exportCsv} disabled={docs.length === 0}>
-              Export CSV
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
 
@@ -248,7 +293,7 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
                 }`}
               >
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
-                  {b.label}
+                  {t(b.dict)}
                 </p>
                 <p
                   className={`mt-1 text-sm font-bold ${
@@ -261,28 +306,28 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
             ))}
             <div className="rounded-xl bg-indigo p-3 text-center">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-cream-paper/70">
-                Total
+                {t("total")}
               </p>
               <p className="mt-1 text-sm font-bold text-cream-paper">{money(report.grand)}</p>
             </div>
           </div>
 
           {!loaded ? (
-            <p className="py-8 text-center text-sm text-muted">Loading…</p>
+            <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
           ) : report.rows.length === 0 ? (
-            <EmptyState title={`No unpaid ${labels.doc.toLowerCase()}s yet`} subtitle={labels.empty} />
+            <EmptyState title={t(labels.noneTitle)} subtitle={t(labels.empty)} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
                   <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                    <th className="py-2 pr-3">{labels.party}</th>
+                    <th className="py-2 pr-3">{t(labels.party)}</th>
                     {BUCKETS.map((b) => (
                       <th key={b.key} className="py-2 pr-3 text-right">
-                        {b.label}
+                        {t(b.dict)}
                       </th>
                     ))}
-                    <th className="py-2 text-right">Total</th>
+                    <th className="py-2 text-right">{t("total")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -314,10 +359,10 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
 
         <Card>
           <h2 className="mb-4 text-lg font-bold text-ink">
-            {labels.doc}s in this report ({docs.length})
+            {fill(t(labels.inReport), { count: docs.length })}
           </h2>
           {sortedDocs.length === 0 ? (
-            <p className="text-sm text-muted">Nothing added yet.</p>
+            <p className="text-sm text-muted">{t("agNothingAdded")}</p>
           ) : (
             <div className="space-y-2">
               {sortedDocs.map((doc) => (
@@ -354,13 +399,17 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
 
       <ConfirmDialog
         open={deleting !== null}
-        title={`Remove ${labels.doc.toLowerCase()}?`}
+        title={t(labels.removeTitle)}
         message={
           deleting
-            ? `Remove ${deleting.number || "this " + labels.doc.toLowerCase()} for ${deleting.party} (${money(deleting.amount)}) from the report?`
+            ? fill(t("agRemoveMessage"), {
+                label: deleting.number || t(labels.thisDoc),
+                party: deleting.party,
+                amount: money(deleting.amount),
+              })
             : ""
         }
-        confirmLabel="Remove"
+        confirmLabel={t("remove")}
         onConfirm={() => {
           if (deleting) setDocs((prev) => prev.filter((d) => d.id !== deleting.id));
           setDeleting(null);

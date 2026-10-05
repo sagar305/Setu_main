@@ -1,0 +1,1644 @@
+{
+  "seo": {
+    "title": "Kalkulator bisnis gratis untuk restoran & ritel | Setu",
+    "description": "Kalkulator online gratis untuk restoran dan usaha kecil: GST, margin laba, markup, titik impas, biaya bahan makanan, diskon, dan cicilan pinjaman.",
+    "keywords": [
+      "kalkulator bisnis",
+      "kalkulator restoran",
+      "kalkulator GST",
+      "kalkulator margin laba",
+      "kalkulator biaya bahan makanan",
+      "kalkulator titik impas",
+      "kalkulator cicilan pinjaman",
+      "alat bisnis gratis"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kalkulator gratis",
+    "headline": "Kalkulator bisnis, dibuat untuk pelaku usaha",
+    "subheadline": "Alat cepat dan gratis untuk angka yang Anda cek tiap minggu — harga, margin, pajak, dan lainnya. Tanpa daftar, langsung jawaban."
+  },
+  "ctaBanner": {
+    "headline": "Ingin angkanya terhitung sendiri?",
+    "subtext": "Setu Dine melacak penjualan, biaya, dan pajak secara otomatis, agar waktu Anda lebih banyak untuk usaha daripada untuk kalkulator.",
+    "cta": {
+      "label": "Jelajahi Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Harga dan laba"
+    },
+    {
+      "name": "Operasional restoran"
+    },
+    {
+      "name": "Operasional ritel"
+    },
+    {
+      "name": "Pajak dan keuangan"
+    },
+    {
+      "name": "Pertumbuhan dan pemasaran"
+    }
+  ],
+  "items": [
+    {
+      "name": "Kalkulator GST",
+      "shortDescription": "Tambah atau keluarkan GST dari nominal apa pun dalam sekali ketuk, untuk semua tarif.",
+      "seo": {
+        "title": "Kalkulator GST — tambah atau keluarkan GST | Setu",
+        "description": "Kalkulator GST gratis untuk menambahkan GST ke nominal dasar atau mengeluarkannya dari harga akhir, pada tarif mana pun. Nilai pajak dan total langsung.",
+        "keywords": [
+          "kalkulator GST",
+          "kalkulator GST online",
+          "tambah GST",
+          "keluarkan GST",
+          "kalkulator nominal GST India"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator GST",
+        "headline": "Kalkulator GST",
+        "subheadline": "Tambahkan GST ke harga dasar atau keluarkan GST dari harga akhir — pilih tarifnya, rinciannya muncul seketika."
+      },
+      "about": {
+        "headline": "Kenapa kalkulator GST berguna",
+        "paragraphs": [
+          "GST muncul di mana-mana dalam pekerjaan harian sebuah usaha — menyebut harga ke pelanggan, memeriksa tagihan pemasok, atau menentukan apa yang ditulis di struk. Menghitung tiap tarif dengan tangan itu lambat dan mudah salah, terutama saat Anda berpindah-pindah antara 5%, 12%, 18%, dan 28%.",
+          "Kalkulator ini bekerja dua arah. Masukkan nominal dasar untuk melihat GST dan total setelah pajak ditambahkan, atau masukkan nominal akhir untuk melihat berapa harga dasar dan pajaknya sebelum GST masuk. Hitungan yang sama dijalankan Setu Dine secara otomatis di setiap struk, dan di sini tersedia sebagai alat gratis yang berdiri sendiri."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator GST",
+        "items": [
+          {
+            "question": "Bagaimana cara menghitung GST dari sebuah nominal?",
+            "answer": "Kalikan nominal dasar dengan tarif GST lalu bagi 100 untuk mendapat nilai pajaknya, kemudian tambahkan ke nominal dasar untuk totalnya. Misalnya ₹1.000 dengan GST 18% menambah ₹180, sehingga totalnya ₹1.180."
+          },
+          {
+            "question": "Bagaimana mengeluarkan GST dari harga akhir untuk mencari harga dasar?",
+            "answer": "Bagi nominal akhir dengan (1 + tarif GST/100). Untuk nominal akhir ₹1.180 dengan GST 18%, harga dasarnya ₹1.180 ÷ 1,18 = ₹1.000."
+          },
+          {
+            "question": "Apa saja tarif GST yang umum di India?",
+            "answer": "Tarif yang paling umum adalah 5%, 12%, 18%, dan 28%, meski sebagian barang dan jasa berada di luar itu atau dibebaskan. Selalu periksa tarif yang berlaku untuk yang Anda tagihkan."
+          },
+          {
+            "question": "Apakah Setu Dine menghitung GST otomatis?",
+            "answer": "Ya. Setu Dine punya mesin pajak bawaan yang menerapkan GST yang benar di setiap struk secara otomatis, jadi Anda tak perlu menghitungnya manual tiap pesanan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Biarkan Setu Dine mengurus pajak di setiap struk",
+        "subtext": "Setu Dine menerapkan GST yang benar di setiap pesanan secara otomatis — tanpa hitung manual, tanpa salah.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator margin laba",
+      "shortDescription": "Hitung margin laba dan persen markup Anda dari biaya dan harga jual.",
+      "seo": {
+        "title": "Kalkulator margin laba — alat online gratis | Setu",
+        "description": "Hitung margin laba dan persentase markup dari harga pokok dan harga jual Anda. Kalkulator margin laba gratis untuk usaha ritel dan restoran.",
+        "keywords": [
+          "kalkulator margin laba",
+          "kalkulator margin",
+          "kalkulator laba",
+          "markup vs margin"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator margin laba",
+        "headline": "Kalkulator margin laba",
+        "subheadline": "Masukkan harga pokok dan harga jual untuk melihat laba, margin %, dan markup % sekaligus."
+      },
+      "about": {
+        "headline": "Kenapa margin dan markup dua-duanya penting",
+        "paragraphs": [
+          "Margin laba memberi tahu berapa bagian dari harga jual Anda yang benar-benar laba — berguna untuk memeriksa apakah sebuah produk atau menu masih layak dijual di harga sekarang. Markup memberi tahu berapa yang Anda tambahkan di atas biaya, dan itulah yang Anda perlukan saat menyusun harga dari nol.",
+          "Kedua angka ini terlihat mirip tetapi tidak sama: markup 50% atas biaya hanya berarti margin 33% atas harga jual. Kalkulator ini menampilkan keduanya bersamaan, jadi Anda bisa menimbang keputusan harga tanpa tertukar."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator margin laba",
+        "items": [
+          {
+            "question": "Apa rumus margin laba?",
+            "answer": "Margin laba % = (Harga jual − Harga pokok) ÷ Harga jual × 100. Ini mengukur laba sebagai persentase dari harga jual."
+          },
+          {
+            "question": "Apa bedanya margin dan markup?",
+            "answer": "Margin adalah laba dibagi harga jual; markup adalah laba dibagi harga pokok. Labanya sama, penyebutnya berbeda — jadi nominal laba yang sama menghasilkan markup % yang lebih tinggi daripada margin %."
+          },
+          {
+            "question": "Berapa margin laba yang bagus untuk usaha kecil?",
+            "answer": "Sangat berbeda antar industri — restoran sering berjalan di margin bersih 10-15%, sementara di ritel bergantung kategorinya. Bandingkan dengan angka Anda sendiri sebelumnya dan patokan industri, bukan satu target yang berlaku untuk semua."
+          },
+          {
+            "question": "Sebaiknya menetapkan harga dari margin atau markup?",
+            "answer": "Sebagian besar usaha menetapkan harga dengan markup atas biaya, lalu memeriksa apakah margin yang dihasilkan memenuhi target laba. Melihat keduanya mencegah barang tertinggal di harga rendah hanya karena terlihat wajar di satu ukuran saja."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lihat margin Anda yang sebenarnya, otomatis",
+        "subtext": "Setu Dine mencatat biaya dan penjualan bersamaan, jadi Anda tahu margin tanpa menghitung sendiri.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator markup",
+      "shortDescription": "Temukan harga jual yang dibutuhkan untuk mencapai target markup atas biaya.",
+      "seo": {
+        "title": "Kalkulator markup — cari harga jual Anda | Setu",
+        "description": "Kalkulator markup gratis. Masukkan harga pokok dan markup yang Anda targetkan untuk langsung menemukan harga jual serta laba per unit.",
+        "keywords": [
+          "kalkulator markup",
+          "kalkulator harga jual",
+          "kalkulator penetapan harga atas biaya"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator markup",
+        "headline": "Kalkulator markup",
+        "subheadline": "Masukkan biaya dan markup % yang Anda targetkan untuk mendapat harga jual yang sebaiknya Anda pasang."
+      },
+      "about": {
+        "headline": "Menetapkan harga dari biaya ke atas",
+        "paragraphs": [
+          "Menambahkan markup tetap di atas biaya adalah cara paling sederhana untuk menetapkan harga produk atau menu baru. Bagian sulitnya adalah melakukannya secara konsisten untuk puluhan SKU atau hidangan, tanpa membuka kalkulator di tab lain untuk setiap satu.",
+          "Alat ini membalik pertanyaan margin yang biasa: daripada memeriksa margin pada harga yang sudah Anda pilih, Anda sebutkan markup yang diinginkan dan ia memberi harga yang perlu dipasang, beserta laba per unit pada harga itu."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator markup",
+        "items": [
+          {
+            "question": "Apa rumus markup?",
+            "answer": "Harga jual = Harga pokok × (1 + Markup % ÷ 100). Misalnya barang berbiaya ₹100 dengan markup 40% dijual ₹140."
+          },
+          {
+            "question": "Apakah markup 50% sama dengan margin 50%?",
+            "answer": "Bukan. Markup 50% atas biaya ₹100 memberi harga jual ₹150, yang berarti margin 33,3%, bukan 50%. Markup dan margin dihitung atas dasar yang berbeda."
+          },
+          {
+            "question": "Berapa markup yang cocok untuk produk ritel?",
+            "answer": "Tergantung kategori, persaingan, dan layanan atau nilai tambah yang menyertai produk. Banyak pedagang mulai di kisaran markup 30-50% lalu menyesuaikan dari apa yang terjual dan seberapa jauh pasar menerimanya."
+          },
+          {
+            "question": "Bisa dipakai untuk harga menu restoran juga?",
+            "answer": "Bisa: masukkan biaya per porsi sebagai harga pokok dan markup target Anda untuk mendapat harga menu awal, lalu periksa lagi dengan kalkulator persentase biaya bahan makanan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Tetapkan harga tiap barang dengan yakin",
+        "subtext": "Setu Dine menyimpan data biaya dan harga bersama, jadi Anda bisa mengubah harga tanpa kehilangan jejak margin.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator titik impas",
+      "shortDescription": "Cari tahu berapa unit yang harus terjual untuk menutup seluruh biaya Anda.",
+      "seo": {
+        "title": "Kalkulator titik impas — Alat Gratis | Setu",
+        "description": "Hitung titik impas Anda dalam unit dan pendapatan. Kalkulator BEP gratis untuk restoran, toko ritel, dan usaha kecil, tanpa perlu mendaftar.",
+        "keywords": [
+          "kalkulator titik impas",
+          "kalkulator BEP",
+          "analisis titik impas"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Titik Impas",
+        "headline": "Kalkulator titik impas",
+        "subheadline": "Masukkan biaya tetap, harga jual, dan biaya variabel per unit untuk melihat persis berapa yang harus terjual agar biaya tertutup."
+      },
+      "about": {
+        "headline": "Ketahui angka Anda sebelum bulan dimulai",
+        "paragraphs": [
+          "Titik impas adalah tingkat penjualan di mana pendapatan tepat menutup biaya Anda — di bawah itu rugi, di atas itu setiap unit tambahan langsung menjadi kontribusi ke laba. Ini salah satu angka paling berguna dalam usaha, karena mengubah sewa, gaji, dan biaya tetap lain menjadi satu target penjualan yang konkret.",
+          "Masukkan biaya tetap bulanan (sewa, gaji, langganan), biaya variabel per unit (bahan, kemasan, biaya per pesanan), dan harga jual Anda, lalu kalkulator ini menghitung jumlah unit serta pendapatan yang harus dicapai sebelum Anda masuk ke laba."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator titik impas",
+        "items": [
+          {
+            "question": "Apa rumus titik impas?",
+            "answer": "Unit impas = biaya tetap ÷ (harga jual per unit − biaya variabel per unit). Kalikan hasilnya dengan harga jual untuk mendapat pendapatan impas."
+          },
+          {
+            "question": "Apa yang termasuk biaya tetap dan biaya variabel?",
+            "answer": "Biaya tetap kurang lebih sama besarnya berapa pun volume penjualan — sewa, gaji, langganan perangkat lunak. Biaya variabel naik mengikuti setiap unit yang terjual — bahan, kemasan, biaya gerbang pembayaran per pesanan."
+          },
+          {
+            "question": "Mengapa titik impas penting bagi restoran atau toko baru?",
+            "answer": "Karena ia mengubah biaya tetap Anda menjadi target penjualan harian atau bulanan, sehingga jauh lebih mudah menilai apakah sebuah lokasi, harga menu, atau jumlah karyawan realistis sebelum Anda memutuskan."
+          },
+          {
+            "question": "Apa itu margin kontribusi?",
+            "answer": "Margin kontribusi adalah harga jual dikurangi biaya variabel per unit — bagian yang disumbangkan setiap penjualan untuk menutup biaya tetap. Makin besar marginnya, makin sedikit unit yang perlu terjual untuk impas."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Pantau penjualan terhadap titik impas, setiap hari",
+        "subtext": "Setu Dine memberi Anda data penjualan waktu nyata, jadi Anda selalu tahu posisi Anda terhadap angka sendiri.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator persentase biaya bahan makanan",
+      "shortDescription": "Cek apakah biaya bahan sebuah menu masih wajar dibanding harga jualnya.",
+      "seo": {
+        "title": "Kalkulator persentase biaya bahan makanan",
+        "description": "Kalkulator persentase food cost gratis untuk restoran. Masukkan biaya bahan dan harga menu untuk melihat persentase food cost dan laba per porsi.",
+        "keywords": [
+          "kalkulator food cost",
+          "persentase food cost",
+          "food cost restoran",
+          "kalkulator harga menu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Food Cost",
+        "headline": "Kalkulator persentase biaya bahan makanan",
+        "subheadline": "Masukkan biaya bahan sebuah menu dan harga jualnya untuk melihat persentase food cost dan laba per porsi."
+      },
+      "about": {
+        "headline": "Satu angka yang harus dilewati setiap harga menu",
+        "paragraphs": [
+          "Persentase food cost adalah bagian dari harga jual sebuah menu yang habis untuk bahannya. Sebagian besar restoran berusaha menjaganya di kisaran 28% sampai 35%, meski angkanya berbeda-beda tergantung jenis masakan, format layanan, dan seberapa banyak tenaga kerja yang dibutuhkan sebuah menu dibanding biaya bahan mentahnya.",
+          "Hitung setiap menu Anda di kalkulator ini saat menetapkan harga atau saat biaya bahan berubah. Menu dengan persentase jauh di luar target Anda butuh perubahan harga, perubahan resep, atau memang sengaja dipasang sebagai penarik pelanggan — yang penting Anda tahu mana di antara ketiganya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator food cost",
+        "items": [
+          {
+            "question": "Bagaimana cara menghitung persentase food cost?",
+            "answer": "Food cost % = (biaya bahan ÷ harga jual di menu) × 100. Menu dengan bahan ₹70 yang dijual ₹280 memiliki food cost 25%."
+          },
+          {
+            "question": "Berapa persentase food cost yang bagus untuk restoran?",
+            "answer": "Sebagian besar restoran layanan lengkap maupun cepat menargetkan 28-35%, tetapi bahan premium, minuman, dan produk bakeri bisa lebih rendah atau lebih tinggi dan tetap menguntungkan setelah tenaga kerja dan biaya tetap diperhitungkan."
+          },
+          {
+            "question": "Mengapa persentase food cost saya lebih tinggi dari perkiraan?",
+            "answer": "Penyebab umum: porsi yang makin besar seiring waktu, harga bahan naik tetapi harga menu belum menyusul, pemborosan di dapur, atau resep yang sejak awal tidak pernah dihitung biayanya dengan benar."
+          },
+          {
+            "question": "Apakah ini memperhitungkan biaya tenaga kerja?",
+            "answer": "Tidak — kalkulator ini hanya mencakup biaya bahan mentah. Tenaga kerja, kemasan, dan biaya tetap sebaiknya dipantau terpisah di samping food cost saat menentukan harga menu akhir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Hitung biaya setiap menu dengan tepat, otomatis",
+        "subtext": "Setu Dine menghubungkan resep dengan stok, jadi food cost tetap akurat ketika harga bahan berubah.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator diskon",
+      "shortDescription": "Hitung harga akhir dan penghematan untuk diskon atau promo apa pun.",
+      "seo": {
+        "title": "Kalkulator diskon — harga akhir dan penghematan | Setu",
+        "description": "Hitung seketika harga setelah diskon dan berapa yang dihemat. Masukkan harga asli dan persentase diskon untuk melihat harga akhir serta total penghematan.",
+        "keywords": [
+          "kalkulator diskon",
+          "kalkulator persentase diskon",
+          "kalkulator harga obral"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat gratis — Kalkulator diskon",
+        "headline": "Kalkulator diskon",
+        "subheadline": "Masukkan harga asli dan persentase diskon untuk melihat harga akhir dan persisnya berapa yang dihemat."
+      },
+      "about": {
+        "headline": "Berguna di kedua sisi meja kasir",
+        "paragraphs": [
+          "Saat menjalankan obral atau penawaran kupon, Anda perlu tahu harga akhir yang benar-benar akan ditagih — dan berapa biayanya dari margin. Kalkulator ini memberi keduanya seketika, untuk persentase diskon apa pun.",
+          "Berguna juga untuk memeriksa diskon yang ditawarkan pemasok pada pesanan besar, atau untuk menjawab pertanyaan pelanggan \"jadi berapa setelah diskon?\" tanpa mengambil kalkulator di ponsel."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator diskon",
+        "items": [
+          {
+            "question": "Bagaimana menghitung harga setelah diskon?",
+            "answer": "Nilai diskon = Harga asli × Diskon % ÷ 100. Harga akhir = Harga asli − Nilai diskon. Barang ₹500 dengan diskon 20% menghemat ₹100, sehingga harganya ₹400."
+          },
+          {
+            "question": "Bagaimana diskon memengaruhi margin laba saya?",
+            "answer": "Diskon menurunkan harga jual tetapi tidak menurunkan biaya, jadi langsung memotong margin. Sebelum menjalankan promo, periksa margin pada harga diskon di kalkulator margin laba untuk memastikan masih layak dijual."
+          },
+          {
+            "question": "Bisakah dua diskon ditumpuk?",
+            "answer": "Terapkan satu demi satu, bukan dengan menjumlahkan persentasenya — diskon 20% lalu 10% lagi bukan berarti total 30%. Hitung diskon pertama di kalkulator, lalu masukkan hasilnya lagi untuk diskon kedua."
+          },
+          {
+            "question": "Apakah Setu Dine menerapkan diskon dan kupon otomatis saat penagihan?",
+            "answer": "Ya. Setu Dine mendukung kupon dan diskon yang bisa diatur dan berlaku otomatis di struk, jadi staf tak perlu menghitung penawaran manual di kasir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Jalankan promo tanpa hitung manual",
+        "subtext": "Setu Dine menerapkan kupon dan diskon otomatis saat penagihan, setiap kali.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator cicilan pinjaman usaha",
+      "shortDescription": "Perkirakan cicilan bulanan, total bunga, dan total pembayaran pinjaman usaha.",
+      "seo": {
+        "title": "Kalkulator cicilan pinjaman usaha — Gratis | Setu",
+        "description": "Kalkulator angsuran pinjaman usaha gratis. Masukkan jumlah pinjaman, suku bunga, dan tenor untuk melihat angsuran bulanan, total bunga, dan total bayar.",
+        "keywords": [
+          "kalkulator angsuran",
+          "kalkulator pinjaman usaha",
+          "hitung angsuran bulanan",
+          "kalkulator cicilan pinjaman"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator Angsuran",
+        "headline": "Kalkulator cicilan pinjaman usaha",
+        "subheadline": "Masukkan jumlah pinjaman, suku bunga, dan tenor untuk melihat angsuran bulanan, total bunga, dan total pembayaran."
+      },
+      "about": {
+        "headline": "Ketahui angka bulanannya sebelum tanda tangan",
+        "paragraphs": [
+          "Entah itu pinjaman modal kerja, pembiayaan mesin, atau plafon kredit untuk membuka gerai baru, angsuranlah angka yang benar-benar berhadapan dengan arus kas Anda setiap bulan. Membandingkan penawaran pinjaman hanya dari suku bunganya bisa menyesatkan begitu tenor dan biaya provisi ikut diperhitungkan.",
+          "Masukkan jumlah pinjaman, suku bunga tahunan, dan tenor untuk mendapat angsuran dengan rumus saldo menurun yang standar, lengkap dengan total bunga yang Anda bayar sepanjang masa pinjaman — berguna untuk membandingkan dua penawaran berdampingan."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator angsuran pinjaman",
+        "items": [
+          {
+            "question": "Apa rumus angsuran bulanan?",
+            "answer": "Angsuran = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), dengan P adalah jumlah pinjaman, r adalah suku bunga bulanan (bunga tahunan ÷ 12 ÷ 100), dan n adalah jumlah angsuran bulanan."
+          },
+          {
+            "question": "Apakah ini sudah termasuk biaya provisi atau biaya lain?",
+            "answer": "Tidak — perhitungan ini hanya memakai pokok pinjaman, suku bunga, dan tenor. Tambahkan biaya provisi dan biaya lain secara terpisah saat membandingkan biaya sebenarnya dari beberapa penawaran."
+          },
+          {
+            "question": "Apakah suku bunga yang saya masukkan sama dengan yang disebut bank?",
+            "answer": "Gunakan suku bunga tahunan seperti yang disebut pemberi pinjaman. Jika yang disebut adalah bunga flat, bukan bunga saldo menurun, angsuran sebenarnya akan berbeda dari yang ditampilkan di sini, karena bunga flat dihitung atas seluruh pokok selama tenor."
+          },
+          {
+            "question": "Bagaimana tenor yang lebih pendek mempengaruhi total bunga?",
+            "answer": "Tenor lebih pendek berarti angsuran lebih besar tetapi total bunga jauh lebih kecil, karena waktu bunga berjalan atas saldo terutang lebih singkat. Tenor lebih panjang menurunkan angsuran tetapi menaikkan total bunga yang dibayar."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Mau buka gerai baru? Kami bisa bantu merencanakannya",
+        "subtext": "Bicara dengan kami tentang apa yang dibutuhkan untuk membuka dan menjalankan lokasi baru dengan Setu Dine siap sejak hari pertama.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator tingkat perputaran meja",
+      "shortDescription": "Lihat berapa kali tiap meja berganti tamu selama layanan, dan rata-rata durasinya.",
+      "seo": {
+        "title": "Kalkulator tingkat perputaran meja restoran — Gratis | Setu",
+        "description": "Kalkulator perputaran meja gratis untuk restoran. Masukkan jumlah porsi tersaji, jumlah meja, dan jam layanan untuk melihat tingkat perputaran dan durasinya.",
+        "keywords": [
+          "kalkulator perputaran meja",
+          "perputaran meja restoran",
+          "porsi per meja"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Perputaran Meja",
+        "headline": "Kalkulator tingkat perputaran meja",
+        "subheadline": "Masukkan jumlah porsi tersaji, jumlah meja, dan jam layanan untuk melihat tingkat perputaran dan rata-rata lama tiap putaran."
+      },
+      "about": {
+        "headline": "Angka di balik ruang makan yang tampak penuh",
+        "paragraphs": [
+          "Tingkat perputaran meja memberi tahu berapa kali rata-rata setiap meja terpakai selama satu periode layanan. Ini ukuran langsung seberapa efisien lantai Anda mengubah tempat duduk menjadi tamu terlayani — dan pada jam sibuk, angkanya sepenting jumlah pengunjung.",
+          "Masukkan total porsi tersaji, jumlah meja yang Anda miliki, dan panjang periode layanan, lalu kalkulator ini menghitung tingkat perputaran serta rata-rata lama setiap meja terisi per putaran — berguna untuk melihat apakah putaran yang lambat membatasi pendapatan Anda di malam-malam ramai."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator perputaran meja",
+        "items": [
+          {
+            "question": "Bagaimana tingkat perputaran meja dihitung?",
+            "answer": "Tingkat perputaran = total porsi tersaji ÷ jumlah meja. Kalau 120 porsi tersaji pada 20 meja dalam satu layanan, tingkat perputarannya 6 — setiap meja terpakai rata-rata 6 kali."
+          },
+          {
+            "question": "Berapa tingkat perputaran meja yang bagus untuk restoran?",
+            "answer": "Sangat bergantung pada formatnya: layanan cepat dan kasual mengincar perputaran tinggi (beberapa putaran per layanan), sedangkan fine dining memang berjalan dengan perputaran rendah, tamu duduk lebih lama, dan belanja per tamu lebih besar. Bandingkan dengan format Anda sendiri dan kinerja sebelumnya."
+          },
+          {
+            "question": "Bagaimana memperbaiki perputaran tanpa membuat pelanggan merasa diburu?",
+            "answer": "Waktu dapur yang lebih cepat, penagihan dan pembayaran yang efisien, serta staf yang terlatih membaca jeda alami dalam santapan (bukan menerapkan batas waktu) biasanya memperbaiki perputaran secara lebih berkelanjutan daripada memburu tamu."
+          },
+          {
+            "question": "Apakah Setu Dine bisa memantau status meja secara waktu nyata?",
+            "answer": "Bisa. Setu Dine menampilkan status meja secara langsung di seluruh lantai — kosong, terisi, sudah ditagih — jadi staf selalu tahu meja mana yang bebas tanpa harus berkeliling memeriksa."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Status setiap meja, langsung terlihat",
+        "subtext": "Setu Dine memantau status meja secara waktu nyata, jadi staf lantai Anda selalu tahu mana yang kosong.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator gaji bersih",
+      "shortDescription": "Lihat gaji bersih bulanan setelah dana pensiun, pajak profesi, dan potongan lain dari CTC.",
+      "seo": {
+        "title": "Kalkulator gaji bersih — dari biaya ke take-home | Setu",
+        "description": "Kalkulator gaji bersih gratis. Masukkan biaya tahunan per karyawan untuk memperkirakan gaji bersih bulanan setelah iuran pensiun dan pajak daerah.",
+        "keywords": [
+          "kalkulator gaji bersih",
+          "hitung gaji bersih bulanan",
+          "kalkulator take home pay",
+          "kalkulator penggajian"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Gaji Bersih",
+        "headline": "Kalkulator gaji bersih",
+        "subheadline": "Masukkan biaya tahunan per karyawan untuk memperkirakan gaji bersih bulanan setelah potongan yang biasa."
+      },
+      "about": {
+        "headline": "Yang benar-benar masuk ke rekening setiap bulan",
+        "paragraphs": [
+          "Biaya total per karyawan hampir tidak pernah sama dengan uang yang masuk ke rekening. Iuran dana pensiun, pajak profesi, dan potongan lain diambil sebelum gaji dibayarkan, dan jarak antara biaya total dan gaji bersih sering mengejutkan karyawan baru — juga banyak pemilik usaha yang sedang menganggarkan posisi baru.",
+          "Kalkulator ini memberi perkiraan cepat gaji bersih bulanan dari biaya tahunan, dengan asumsi umum untuk dana pensiun dan pajak profesi. Angka sebenarnya bergantung pada struktur gaji Anda (gaji pokok, tunjangan rumah, tunjangan lain) dan kebijakan perusahaan, jadi anggap ini perkiraan untuk perencanaan, bukan slip gaji."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator gaji bersih",
+        "items": [
+          {
+            "question": "Apa bedanya biaya total karyawan dan gaji bersih?",
+            "answer": "Biaya total adalah seluruh pengeluaran perusahaan untuk satu karyawan: gaji pokok, tunjangan, iuran dana pensiun dari perusahaan, dan manfaat lain. Gaji bersih adalah uang yang benar-benar masuk ke rekening setiap bulan, setelah potongan seperti iuran karyawan, pajak profesi, dan pajak penghasilan jika berlaku."
+          },
+          {
+            "question": "Mengapa gaji bersih saya lebih kecil dari biaya total dibagi 12?",
+            "answer": "Karena biaya total mencakup iuran perusahaan yang tidak pernah sampai ke rekening karyawan, dan karena potongan seperti iuran karyawan, pajak profesi, dan pajak yang dipotong di muka dikurangkan dari gaji bruto sebelum dibayarkan."
+          },
+          {
+            "question": "Apakah ini akurat untuk slip gaji saya?",
+            "answer": "Ini perkiraan untuk perencanaan, berdasarkan asumsi umum dana pensiun dan pajak profesi. Gaji bersih Anda yang sebenarnya bergantung pada struktur gaji, wilayah, dan potongan tambahan seperti pajak penghasilan, jadi lihat slip gaji perusahaan atau tanya bagian SDM untuk angka pastinya."
+          },
+          {
+            "question": "Apakah potongan pajak penghasilan sudah termasuk?",
+            "answer": "Belum — kalkulator ini hanya memperkirakan potongan dana pensiun dan pajak profesi. Untuk perkiraan yang memasukkan pajak penghasilan, gunakan kalkulator pajak penghasilan bersama alat ini."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Merekrut untuk gerai baru? Lihat angkanya dulu",
+        "subtext": "Setu Dine memberi Anda data penjualan dan biaya tenaga kerja untuk tahu apakah karyawan baru menutup biayanya sendiri.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator pajak penghasilan",
+      "shortDescription": "Perkirakan pajak penghasilan skema lama dan baru untuk tahun fiskal 2025-26.",
+      "seo": {
+        "title": "Kalkulator pajak penghasilan — India 2025-26 | Setu",
+        "description": "Kalkulator pajak penghasilan India gratis untuk 2025-26. Bandingkan rezim lama dan baru, lihat mana yang lebih murah. Hanya perkiraan — cek anggaran resmi.",
+        "keywords": [
+          "kalkulator pajak penghasilan",
+          "kalkulator pajak India",
+          "rezim lama vs baru",
+          "hitung pajak penghasilan"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Pajak Penghasilan",
+        "headline": "Kalkulator pajak penghasilan",
+        "subheadline": "Bandingkan pajak rezim lama dan rezim baru atas penghasilan Anda untuk tahun fiskal 2025-26 dan lihat mana yang lebih murah."
+      },
+      "about": {
+        "headline": "Rezim lama atau baru — putuskan dengan angka di depan Anda",
+        "paragraphs": [
+          "Sistem pajak penghasilan India memberi hampir semua wajib pajak pilihan antara rezim lama (lebih banyak pengurang, tarif lapisan lebih tinggi) dan rezim baru (lebih sedikit pengurang, tarif lebih rendah). Pilihan yang tepat sepenuhnya bergantung pada seberapa banyak pengurang dan pembebasan yang benar-benar Anda ambil — tidak ada satu jawaban untuk semua orang.",
+          "Kalkulator ini memperkirakan pajak terutang pada kedua rezim untuk tahun fiskal 2025-26 (tahun penilaian 2026-27), memakai lapisan tarif dan pengurang standar terbaru yang kami catat, termasuk keringanan Pasal 87A. Ia tidak menghitung pungutan tambahan atas penghasilan sangat tinggi, kasus batas keringanan marginal, maupun setiap pengurang yang mungkin — dan lapisan tarif biasanya direvisi tiap tahun dalam anggaran negara, jadi selalu cek lapisan resmi terbaru atau tanya akuntan sebelum melapor atau memilih rezim."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pajak penghasilan",
+        "items": [
+          {
+            "question": "Apa lapisan tarif rezim baru untuk 2025-26?",
+            "answer": "Pada rezim baru (2025-26 / tahun penilaian 2026-27): nol sampai ₹4.00.000; 5% dari ₹4.00.001-8.00.000; 10% dari ₹8.00.001-12.00.000; 15% dari ₹12.00.001-16.00.000; 20% dari ₹16.00.001-20.00.000; 25% dari ₹20.00.001-24.00.000; dan 30% di atas ₹24.00.000. Lapisan tarif berubah setiap anggaran negara, jadi pastikan lewat pemberitahuan resmi terbaru sebelum memakainya untuk melapor."
+          },
+          {
+            "question": "Apa itu keringanan Pasal 87A?",
+            "answer": "Keringanan yang membuat pajak terutang menjadi nol bagi wajib pajak di bawah ambang penghasilan kena pajak tertentu. Pada rezim baru 2025-26 umumnya berlaku sampai penghasilan kena pajak ₹12.00.000, dan sedikit di atas ambang itu berkurang bertahap melalui keringanan marginal. Kalkulator ini memakai versi sederhana dan tidak memodelkan semua kasus batas."
+          },
+          {
+            "question": "Sebaiknya saya pilih rezim lama atau baru?",
+            "answer": "Bergantung pada berapa besar pengurang yang Anda ambil — tunjangan rumah, investasi Pasal 80C, bunga kredit rumah, dan seterusnya. Kalau pengurang yang memenuhi syarat besar, rezim lama sering lebih murah; kalau Anda mengambil sedikit pengurang, tarif lebih rendah rezim baru biasanya menang. Bandingkan keduanya di sini dengan angka Anda sendiri."
+          },
+          {
+            "question": "Apakah ini menggantikan saran akuntan?",
+            "answer": "Tidak. Ini perkiraan sederhana untuk perencanaan saja — tidak memasukkan pungutan tambahan, detail cukai pada beberapa kasus, dan beberapa pengurang terperinci. Untuk pelaporan sebenarnya atau keputusan rezim yang menyangkut uang nyata, cek lapisan tarif terbaru dan konsultasikan dengan akuntan bersertifikat."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Urus usaha Anda, bukan spreadsheet pajak",
+        "subtext": "Setu Dine menjaga data penjualan dan pengeluaran Anda tetap rapi, sehingga musim pajak tidak lagi bikin kalang kabut.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator uang penghargaan masa kerja",
+      "shortDescription": "Perkirakan uang penghargaan yang jadi hak Anda dari gaji dan masa kerja.",
+      "seo": {
+        "title": "Kalkulator uang penghargaan masa kerja — UU 1972 | Setu",
+        "description": "Kalkulator gratuity gratis untuk India. Masukkan gaji terakhir dan masa kerja untuk memperkirakan jumlah yang wajib dibayar menurut UU Gratuity 1972.",
+        "keywords": [
+          "kalkulator gratuity",
+          "kalkulator uang jasa",
+          "UU gratuity India",
+          "rumus gratuity"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Gratuity",
+        "headline": "Kalkulator uang penghargaan masa kerja",
+        "subheadline": "Masukkan gaji terakhir dan masa kerja untuk memperkirakan gratuity yang menjadi hak saat keluar."
+      },
+      "about": {
+        "headline": "Berapa gratuity yang menjadi hak, dan kapan",
+        "paragraphs": [
+          "Gratuity adalah pembayaran sekaligus yang wajib diberikan pemberi kerja kepada karyawan yang telah menyelesaikan sekurangnya 5 tahun masa kerja berkelanjutan, menurut Undang-Undang Pembayaran Gratuity India tahun 1972. Perhitungannya memakai gaji terakhir karyawan dan total masa kerja — bukan seluruh penghasilan sepanjang karier.",
+          "Kalkulator ini menerapkan rumus standar bagi karyawan yang tercakup undang-undang tersebut, dan berguna baik bagi karyawan yang memperkirakan haknya saat keluar maupun bagi pemilik usaha yang menganggarkan kewajiban gratuity untuk staf lama. Batas atas menurut undang-undang direvisi dari waktu ke waktu, jadi pastikan batas yang berlaku sebelum memakai ini sebagai angka penyelesaian akhir."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator gratuity",
+        "items": [
+          {
+            "question": "Apa rumus perhitungan gratuity?",
+            "answer": "Gratuity = (gaji bulanan terakhir × 15 × jumlah tahun masa kerja) ÷ 26, untuk karyawan yang tercakup undang-undang. Gaji di sini biasanya berarti gaji pokok ditambah tunjangan kemahalan."
+          },
+          {
+            "question": "Apakah saya berhak atas gratuity?",
+            "answer": "Pada umumnya karyawan yang telah menyelesaikan 5 tahun atau lebih masa kerja berkelanjutan pada pemberi kerja yang sama berhak, dengan beberapa pengecualian (seperti kematian atau kecacatan, di mana syarat 5 tahun tidak berlaku)."
+          },
+          {
+            "question": "Apakah ada batas maksimum gratuity?",
+            "answer": "Ada — undang-undang menetapkan batas atas untuk gratuity yang bebas pajak, dan pemerintah merevisinya dari waktu ke waktu. Periksa batas yang berlaku sebelum menganggap hasil kalkulator ini sebagai angka akhir yang sudah dibatasi."
+          },
+          {
+            "question": "Kalau saya bekerja 7 tahun 8 bulan, bagaimana masa kerja dihitung?",
+            "answer": "Menurut undang-undang, masa kerja lebih dari 6 bulan di atas tahun penuh biasanya dibulatkan ke tahun berikutnya. Jadi 7 tahun 8 bulan umumnya dihitung sebagai 8 tahun."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Sedang menyusun anggaran karyawan?",
+        "subtext": "Setu Dine memberi Anda data penjualan untuk merencanakan jumlah karyawan dan biaya gaji jangka panjang sesuai kemampuan gerai Anda.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator komisi pesanan online",
+      "shortDescription": "Lihat penerimaan nyata Anda setelah komisi platform, kemasan, dan biaya payment gateway.",
+      "seo": {
+        "title": "Kalkulator komisi pesanan online restoran | Setu",
+        "description": "Kalkulator komisi pesanan online gratis untuk restoran. Masukkan nilai pesanan, komisi platform, dan biaya lain untuk melihat penerimaan nyata per pesanan.",
+        "keywords": [
+          "kalkulator komisi ojek online",
+          "komisi platform pesan antar",
+          "kalkulator penerimaan per pesanan",
+          "komisi aggregator restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Komisi Pesanan Online",
+        "headline": "Kalkulator komisi pesanan online",
+        "subheadline": "Masukkan nilai pesanan dan biaya platform untuk melihat persis berapa yang Anda bawa pulang dari sebuah pesanan online."
+      },
+      "about": {
+        "headline": "Berapa sebenarnya yang dibayar sebuah pesanan online",
+        "paragraphs": [
+          "Tarif komisi yang diumumkan jarang menceritakan semuanya. Setelah Anda menambahkan biaya kemasan, biaya payment gateway, dan pajak atas komisinya sendiri, jarak antara nilai pesanan yang dibayar pelanggan dan yang benar-benar masuk ke rekening Anda bisa mencapai 30% atau lebih.",
+          "Masukkan nilai pesanan dan biaya yang berlaku di akun aggregator Anda untuk melihat penerimaan nyata per pesanan serta persentase bersih yang Anda bawa pulang. Coba beberapa ukuran pesanan yang biasa Anda terima, untuk tahu apakah pesanan online sama menguntungkannya dengan makan di tempat atau bungkus setelah semua potongan dihitung."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator komisi pesanan online",
+        "items": [
+          {
+            "question": "Bagaimana platform pesan antar menghitung komisi?",
+            "answer": "Sebagian besar platform mengenakan komisi sebagai persentase nilai pesanan, dan bisa menambahkan pajak atas komisi itu. Biaya kemasan dan biaya payment gateway biasanya terpisah dan makin mengurangi penerimaan Anda."
+          },
+          {
+            "question": "Mengapa penerimaan saya jauh lebih kecil dari nilai pesanan?",
+            "answer": "Komisi, pajak atas komisi, biaya kemasan, dan biaya payment gateway semuanya keluar dari nilai pesanan sebelum Anda dibayar. Pada pesanan biasa, potongan-potongan itu bersama-sama sering mencapai 25-35% dari nilai pesanan, tergantung platform dan kategorinya."
+          },
+          {
+            "question": "Apakah harga di platform pesan antar sebaiknya berbeda?",
+            "answer": "Banyak restoran memang menambahkan markup khusus pengantaran pada harga menu di aggregator untuk menutup komisi, karena struktur biaya makan di tempat dan pengantaran sangat berbeda. Pakai kalkulator ini untuk memeriksa apakah harga pengantaran Anda sekarang menyisakan margin yang bisa bertahan."
+          },
+          {
+            "question": "Apakah Setu Dine bisa mengelola pesanan dari beberapa platform?",
+            "answer": "Bisa. Setu Dine dapat menarik pesanan dari beberapa aggregator ke satu tampilan, jadi dapur Anda tidak perlu bergantian mengurus satu tablet per platform."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kelola semua aggregator dari satu layar",
+        "subtext": "Setu Dine menyatukan pesanan dari semua platform pengantaran Anda ke satu tampilan dapur.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator harga menu online",
+      "shortDescription": "Temukan harga yang perlu dipasang di aplikasi pesan antar agar target Anda tetap utuh setelah komisi dan pajak.",
+      "seo": {
+        "title": "Kalkulator Harga Menu untuk Aplikasi Pesan-Antar",
+        "description": "Kalkulator harga menu online gratis untuk restoran. Masukkan jumlah yang ingin Anda terima, lalu temukan harga tayang yang menutup komisi dan pajak.",
+        "keywords": [
+          "kalkulator harga menu Zomato",
+          "kalkulator harga Swiggy",
+          "harga menu online setelah komisi",
+          "kalkulator harga aplikasi pesan-antar",
+          "kalkulator komisi terbalik"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator harga menu online",
+        "headline": "Kalkulator harga menu online",
+        "subheadline": "Sebutkan berapa yang benar-benar ingin Anda terima dari pesanan online, dan kami hitung harga yang perlu Anda tayangkan di aplikasi."
+      },
+      "about": {
+        "headline": "Hitung mundur dari target penerimaan Anda",
+        "paragraphs": [
+          "Kalau Anda menayangkan harga online yang sama dengan harga di kasir, komisi, pajak atas komisi itu, biaya gateway, dan pajak yang Anda setor atas penjualan semuanya memotongnya sebelum satu rupee pun sampai ke tangan Anda — sehingga penerimaan online jatuh jauh di bawah harga makan di tempat.",
+          "Kalkulator ini membalik perhitungan komisi yang biasa: masukkan jumlah yang benar-benar ingin Anda simpan per item, beserta biaya platform Anda, dan ia mencari harga tayang yang membawa Anda ke angka itu. Pakai setiap kali menambahkan item baru ke aplikasi atau platform mengubah tingkat komisinya.",
+          "Ini model yang disederhanakan — diasumsikan komisi dan biaya gateway dikenakan atas harga tayang, dan harga tayang itu sudah termasuk pajak yang Anda pungut atas item. Perjanjian tiap aplikasi berbeda, jadi cocokkan hasilnya dengan laporan pembayaran yang nyata sebelum menerapkan harga menu baru."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ harga menu online",
+        "items": [
+          {
+            "question": "Kenapa harga yang perlu saya tayangkan lebih tinggi dari harga makan di tempat?",
+            "answer": "Karena komisi, pajak atas komisi itu, biaya gateway, dan pajak yang Anda setor atas penjualan semuanya dipotong dari harga tayang sebelum Anda dibayar. Agar penerimaan online sama dengan di kasir, harga tayang harus menanggung semua potongan itu."
+          },
+          {
+            "question": "Apakah komisi benar-benar dihitung dari harga yang sudah termasuk pajak?",
+            "answer": "Bergantung pada platform dan perjanjian Anda — ada yang menghitung komisi dari nilai dasar (sebelum pajak), ada yang dari seluruh harga tayang. Kalkulator ini mengasumsikan komisi dan biaya gateway berlaku atas harga tayang, yang lebih umum dan lebih hati-hati. Periksa laporan pembayaran untuk memastikan mana yang berlaku bagi Anda."
+          },
+          {
+            "question": "Bagaimana kalau tidak ada harga tayang yang bisa menutup semua biaya?",
+            "answer": "Kalau komisi, pajak, dan biaya bersama-sama mencapai 100% atau lebih dari harga tayang, tidak ada harga yang bisa mengembalikan target penerimaan Anda — kalkulator akan menandainya, supaya Anda meninjau ulang margin online item itu alih-alih menebak harga."
+          },
+          {
+            "question": "Bisakah Setu Dine menyinkronkan harga ini ke platform pesan-antar saya?",
+            "answer": "Bisa. Setu Dine memungkinkan Anda mengelola harga menu untuk makan di tempat dan beberapa aplikasi dari satu layar, jadi harga yang diperbarui terkirim ke semua kanal sekaligus."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kelola semua aplikasi dari satu layar",
+        "subtext": "Setu Dine menyatukan pesanan dari semua platform pesan-antar Anda dalam satu tampilan dapur.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator biaya resep",
+      "shortDescription": "Hitung biaya resep bahan per bahan untuk tahu biaya asli per porsi.",
+      "seo": {
+        "title": "Kalkulator biaya resep — Biaya per Porsi",
+        "description": "Kalkulator biaya resep gratis untuk restoran. Tambahkan bahan dan jumlahnya untuk melihat total biaya resep, biaya per porsi, dan saran harga menu.",
+        "keywords": [
+          "kalkulator biaya resep",
+          "hitung biaya resep",
+          "perhitungan biaya menu",
+          "kalkulator biaya per porsi"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator biaya resep",
+        "headline": "Kalkulator biaya resep",
+        "subheadline": "Tambahkan setiap bahan dan jumlahnya untuk mengetahui biaya sebenarnya sebuah resep, per porsi."
+      },
+      "about": {
+        "headline": "Hitung seluruh resep, bukan hanya bahan utamanya",
+        "paragraphs": [
+          "Sebagian besar kesalahan menetapkan harga menu berasal dari menghitung biaya hidangan hanya dari 2-3 bahan utama lalu menebak sisanya. Minyak, bumbu, hiasan, dan kemasan kecil-kecil saja, tapi menumpuk — dan selisih itu berlipat di ratusan pesanan setiap bulan.",
+          "Masukkan setiap bahan dalam resep beserta jumlah dan biaya satuannya untuk mendapat total biaya yang akurat dan biaya per porsi. Setelah tahu biaya sebenarnya, pakai angka itu bersama kalkulator persentase biaya bahan untuk menetapkan harga menu yang menjaga margin Anda."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator biaya resep",
+        "items": [
+          {
+            "question": "Kenapa harus menghitung semua bahan, bukan hanya yang utama?",
+            "answer": "Bahan kecil seperti minyak, bumbu, saus, dan hiasan memang murah satu per satu, tapi menumpuk dalam satu resep; disebar ke ratusan porsi yang terjual tiap bulan, selisih itu bisa menggerus margin cukup berarti kalau tak pernah dihitung."
+          },
+          {
+            "question": "Total biaya dibagi dengan berapa porsi?",
+            "answer": "Bagi dengan jumlah porsi atau piring yang benar-benar dihasilkan resep, bukan jumlah bahan yang dipakai. Kalau satu resep batch menghasilkan dasar yang dipakai untuk 10 piring, pakai 10 sebagai jumlah porsi."
+          },
+          {
+            "question": "Apakah ini termasuk biaya tenaga kerja atau overhead?",
+            "answer": "Tidak — ini hanya menghitung biaya bahan mentah. Tambahkan tenaga kerja dan overhead secara terpisah, dan pertimbangkan keduanya bersama biaya bahan saat menetapkan harga menu akhir."
+          },
+          {
+            "question": "Bisakah saya menyimpannya untuk setiap hidangan di menu?",
+            "answer": "Alat ini tidak menyimpan data antar sesi, jadi catat biaya per porsi tiap hidangan sambil jalan. Setu Dine bisa menyimpan biaya resep yang menempel pada item menu secara permanen dan memperbaruinya otomatis saat harga bahan berubah."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Resep yang biayanya terbarui sendiri",
+        "subtext": "Setu Dine menautkan resep ke harga bahan terkini, jadi biaya per porsi tetap akurat tanpa hitung ulang manual.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator pour cost minuman",
+      "shortDescription": "Temukan persentase pour cost dan laba di setiap gelas yang Anda sajikan.",
+      "seo": {
+        "title": "Kalkulator pour cost minuman — Kendali Biaya Bar",
+        "description": "Kalkulator pour cost gratis untuk bar dan restoran. Masukkan biaya botol, ukuran tuangan, dan harga jual untuk melihat pour cost % serta laba per minuman.",
+        "keywords": [
+          "kalkulator pour cost",
+          "kalkulator biaya minuman keras",
+          "kalkulator biaya bar",
+          "persentase pour cost"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator pour cost minuman",
+        "headline": "Kalkulator pour cost minuman",
+        "subheadline": "Masukkan biaya botol, ukuran tuangan, dan harga jual untuk melihat pour cost % Anda dan laba per minuman."
+      },
+      "about": {
+        "headline": "Versi bar dari persentase biaya bahan dapur",
+        "paragraphs": [
+          "Pour cost bagi bar sama seperti persentase biaya bahan bagi dapur — bagian dari harga jual satu minuman yang terserap oleh minumannya sendiri. Angka inilah yang memberi tahu apakah harga dan ukuran tuangan Anda benar-benar menguntungkan, terutama kalau Anda ikut menghitung berapa tuangan yang dihasilkan satu botol.",
+          "Masukkan biaya botol, ukuran botol, ukuran tuangan yang benar-benar Anda sajikan, dan harga jual per minuman untuk mendapat pour cost %, laba per tuangan, serta berapa tuangan yang semestinya keluar dari setiap botol. Jalankan menu terlaris Anda di sini setiap kali pemasok mengubah harga."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator biaya minuman keras",
+        "items": [
+          {
+            "question": "Bagaimana persentase pour cost dihitung?",
+            "answer": "Pour cost % = (biaya per tuangan ÷ harga jual per tuangan) × 100, dengan biaya per tuangan = biaya botol ÷ (ukuran botol ÷ ukuran tuangan)."
+          },
+          {
+            "question": "Berapa persentase pour cost yang baik?",
+            "answer": "Sebagian besar bar menargetkan 18-24% untuk spirit, meski berbeda menurut kategori — produk premium dan craft sering sedikit di atas itu, sebagai tukar dengan harga dan nilai yang dianggap lebih tinggi."
+          },
+          {
+            "question": "Kenapa pour cost nyata saya tidak cocok dengan target?",
+            "answer": "Menuang berlebih adalah penyebab paling umum — tambahan 5-10 ml per minuman pun cepat menumpuk sepanjang malam yang sibuk. Ukuran tuangan yang tidak seragam, ceceran, serta minuman gratis atau kompensasi juga melebarkan jarak antara target dan kenyataan."
+          },
+          {
+            "question": "Berapa tuangan yang semestinya keluar dari satu botol?",
+            "answer": "Tuangan per botol = ukuran botol ÷ ukuran tuangan. Botol standar 750 ml yang dituang 30 ml per minuman semestinya menghasilkan 25 tuangan — bandingkan tuangan nyata dengan angka ini untuk menangkap tuangan berlebih atau pemborosan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Kendalikan biaya bar seperti biaya bahan dapur",
+        "subtext": "Setu Dine mencocokkan pemakaian stok dengan penjualan, jadi tuangan berlebih dan pemborosan cepat terlihat.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator bagi tip",
+      "shortDescription": "Bagi kumpulan tip secara adil ke staf berdasarkan jam kerja, bagian, atau rata.",
+      "seo": {
+        "title": "Kalkulator bagi tip — Adil untuk Staf | Setu",
+        "description": "Kalkulator pembagian tip gratis. Tambahkan staf dan jam kerja atau poin untuk membagi kumpulan tip secara adil — rata, menurut jam kerja, atau menurut poin.",
+        "keywords": [
+          "kalkulator pembagian tip",
+          "kumpulan tip bersama",
+          "bagi tip menurut jam kerja",
+          "kalkulator tip restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator bagi tip",
+        "headline": "Kalkulator bagi tip",
+        "subheadline": "Tambahkan staf Anda dan bagi kumpulan tip bersama secara rata, menurut jam kerja, atau menurut poin/bagian."
+      },
+      "about": {
+        "headline": "Pembagian tip yang staf pun melihat adil",
+        "paragraphs": [
+          "Membagi tip dengan tangan cepat jadi berantakan begitu Anda ikut memperhitungkan panjang shift atau peran yang berbeda. Pelayan yang menjalani shift ganda penuh dan yang menutup dua jam terakhir semestinya tidak menerima bagian sama — tetapi justru pada cara menimbangnya itulah sebagian besar perselisihan mulai.",
+          "Kalkulator ini membagi kumpulan tip dengan tiga cara: rata untuk semua orang, sebanding dengan jam kerja, atau dengan sistem poin/bagian di mana Anda menetapkan bobot untuk setiap peran atau orang. Tambahkan staf, pilih metodenya, dan pembagiannya langsung diperbarui."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pembagian tip",
+        "items": [
+          {
+            "question": "Apa bedanya pembagian rata dan pembagian berbasis poin?",
+            "answer": "Pembagian rata membelah kumpulan tip sama besar tanpa melihat peran atau jam kerja. Pembagian berbasis poin memberi setiap orang bobot (poin atau bagian) yang mencerminkan peran, masa kerja, atau jam kerja, lalu membagi kumpulan itu sebanding dengan bobot tersebut — biasa dipakai ketika peran depan dan pendukung dikumpulkan bersama."
+          },
+          {
+            "question": "Apakah staf dapur perlu ikut dalam kumpulan tip bersama pelayan?",
+            "answer": "Aturan dan kebiasaan pembagian tip berbeda menurut wilayah dan ketentuan tenaga kerja setempat — di beberapa yurisdiksi ada batasan siapa yang boleh ikut. Periksa apa yang diizinkan di tempat Anda beroperasi sebelum menentukan siapa yang berhak."
+          },
+          {
+            "question": "Bagaimana membagi tip secara adil menurut jam kerja?",
+            "answer": "Pakai metode 'menurut jam': masukkan jam kerja tiap orang untuk shift atau periode itu, dan kumpulan tip dibagi sebanding, sehingga yang bekerja dua kali lebih lama menerima kira-kira dua kali bagian."
+          },
+          {
+            "question": "Bisa dipakai untuk satu shift atau untuk tip seminggu penuh?",
+            "answer": "Keduanya — masukkan total kumpulan tip untuk periode yang Anda bagi (satu shift, satu hari, satu minggu) beserta jam kerja atau bagian untuk periode yang sama."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Penggajian dan tip, tanpa spreadsheet terpisah",
+        "subtext": "Setu Dine mencatat jam shift dan penjualan per staf, jadi angka yang dibutuhkan pembagian tip selalu ada.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator perputaran persediaan",
+      "shortDescription": "Cari tahu berapa kali stok Anda terjual dalam satu periode, dan berapa hari stok tersisa.",
+      "seo": {
+        "title": "Kalkulator perputaran persediaan — Gratis | Setu",
+        "description": "Kalkulator perputaran persediaan gratis untuk usaha ritel. Masukkan harga pokok penjualan dan persediaan rata-rata untuk melihat rasio dan hari persediaan.",
+        "keywords": [
+          "kalkulator perputaran persediaan",
+          "rasio perputaran persediaan",
+          "hari persediaan",
+          "kalkulator perputaran stok"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Perputaran Persediaan",
+        "headline": "Kalkulator perputaran persediaan",
+        "subheadline": "Masukkan harga pokok penjualan dan nilai persediaan rata-rata untuk melihat rasio perputaran dan berapa hari stok yang Anda tahan."
+      },
+      "about": {
+        "headline": "Uang yang tertahan di rak adalah uang yang tidak bisa Anda pakai di tempat lain",
+        "paragraphs": [
+          "Perputaran persediaan memberi tahu berapa kali Anda menjual habis persediaan rata-rata dalam satu periode. Rasio yang rendah biasanya berarti uang mengendap di barang yang lambat bergerak; rasio yang sangat tinggi bisa berarti Anda berisiko kehabisan stok. Tidak ada ujung yang otomatis bagus — angka yang tepat bergantung pada kategori Anda dan seberapa mudah Anda bisa mengisi ulang.",
+          "Masukkan harga pokok penjualan untuk satu periode (bulan atau tahun) dan nilai persediaan rata-rata pada periode yang sama untuk mendapat rasio perputaran serta jumlah hari stok yang setara. Pantaulah angka ini sepanjang waktu, bukan sekali saja — rasio yang menurun sering jadi tanda paling awal bahwa barang lambat atau mati sedang menumpuk."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator perputaran persediaan",
+        "items": [
+          {
+            "question": "Apa rumus rasio perputaran persediaan?",
+            "answer": "Rasio perputaran persediaan = harga pokok penjualan ÷ nilai persediaan rata-rata, untuk periode yang sama. Persediaan rata-rata biasanya (persediaan awal + persediaan akhir) ÷ 2."
+          },
+          {
+            "question": "Berapa rasio perputaran persediaan yang bagus?",
+            "answer": "Sangat berbeda antar kategori — barang mudah rusak dan fesyen cepat berputar jauh lebih cepat daripada mebel atau elektronik. Bandingkan rasio Anda dengan tren Anda sendiri dan tolok ukur kategori, bukan satu angka universal."
+          },
+          {
+            "question": "Apa arti 'hari persediaan'?",
+            "answer": "Itu rasio perputaran yang diubah menjadi hari — kira-kira berapa hari penjualan yang diwakili persediaan rata-rata Anda sekarang. Dihitung sebagai 365 ÷ rasio perputaran, dan angka yang naik menandakan stok bergerak lebih lambat dari sebelumnya."
+          },
+          {
+            "question": "Mengapa perputaran persediaan saya menurun?",
+            "answer": "Penyebab umum: membeli berlebih mendahului permintaan, menumpuknya barang yang lambat bergerak, permintaan yang turun karena musim, atau harga yang tidak lagi cukup bersaing untuk menggerakkan stok secepat sebelumnya."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ingin akses awal ke Setu Retail?",
+        "subtext": "Ceritakan tentang usaha ritel Anda dan kami kabari begitu Setu Retail diluncurkan, lengkap dengan pelacakan persediaan.",
+        "cta": {
+          "label": "Beri tahu saya"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator titik pemesanan ulang",
+      "shortDescription": "Temukan level stok pasti yang harus memicu pemesanan berikutnya.",
+      "seo": {
+        "title": "Kalkulator titik pemesanan ulang | Setu",
+        "description": "Kalkulator titik pemesanan ulang gratis untuk ritel. Masukkan penjualan harian rata-rata, waktu tunggu, dan stok aman untuk tahu kapan harus memesan lagi.",
+        "keywords": [
+          "kalkulator titik pemesanan ulang",
+          "titik pemesanan ulang stok",
+          "kalkulator pengisian ulang persediaan",
+          "kalkulator stok aman"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Titik Pemesanan Ulang",
+        "headline": "Kalkulator titik pemesanan ulang",
+        "subheadline": "Masukkan penjualan harian rata-rata, waktu tunggu pemasok, dan stok aman untuk tahu kapan Anda sebaiknya memesan lagi."
+      },
+      "about": {
+        "headline": "Pesan sebelum stok habis, bukan setelahnya",
+        "paragraphs": [
+          "Titik pemesanan ulang adalah tingkat stok yang semestinya memicu pesanan pembelian baru — kalau terlalu rendah, Anda berisiko kehabisan sebelum barang baru tiba; kalau terlalu tinggi, uang Anda tertahan di persediaan berlebih.",
+          "Masukkan penjualan harian rata-rata sebuah barang, berapa hari pemasok Anda biasanya mengirim, dan bantalan stok aman untuk lonjakan permintaan atau keterlambatan kiriman, lalu kalkulator ini memberi jumlah unit tepat yang semestinya memicu pesanan Anda berikutnya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator titik pemesanan ulang",
+        "items": [
+          {
+            "question": "Apa rumus titik pemesanan ulang?",
+            "answer": "Titik pemesanan ulang = (penjualan harian rata-rata × waktu tunggu pemasok dalam hari) + stok aman. Itulah tingkat stok saat pesanan baru sebaiknya dibuat agar barang pengganti tiba sebelum stok habis."
+          },
+          {
+            "question": "Bagaimana menentukan angka stok aman?",
+            "answer": "Stok aman sebaiknya menutup baik ragam permintaan (hari yang lebih sibuk dari rata-rata) maupun keterlambatan pemasok. Titik awal yang umum adalah penjualan rata-rata beberapa hari, dinaikkan untuk barang dengan pemasok yang kurang andal atau permintaan yang bergejolak."
+          },
+          {
+            "question": "Bagaimana kalau waktu tunggu pemasok saya sangat berubah-ubah?",
+            "answer": "Pakai waktu tunggu terburuk yang realistis, bukan kasus terbaik, saat menghitung titik pemesanan ulang, dan andalkan bantalan stok aman yang lebih besar untuk barang yang waktu tunggunya sulit diperkirakan."
+          },
+          {
+            "question": "Apakah ini memperhitungkan lonjakan permintaan musiman?",
+            "answer": "Tidak secara langsung — perhitungan ini memakai angka penjualan harian rata-rata Anda. Untuk barang musiman, hitung ulang memakai penjualan harian rata-rata yang diperkirakan pada musim yang akan datang, bukan rata-rata tahunan yang rata."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ingin akses awal ke Setu Retail?",
+        "subtext": "Ceritakan tentang usaha ritel Anda dan kami kabari begitu Setu Retail diluncurkan, lengkap dengan peringatan pemesanan ulang.",
+        "cta": {
+          "label": "Beri tahu saya"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator biaya akuisisi pelanggan (CAC)",
+      "shortDescription": "Cari tahu persis berapa biaya Anda untuk mendapatkan setiap pelanggan baru.",
+      "seo": {
+        "title": "Kalkulator Biaya Akuisisi Pelanggan (CAC) | Setu",
+        "description": "Kalkulator CAC gratis. Masukkan belanja pemasaran dan jumlah pelanggan baru untuk menemukan biaya akuisisi dan membandingkannya dengan pendapatan per pelanggan.",
+        "keywords": [
+          "kalkulator CAC",
+          "biaya akuisisi pelanggan",
+          "biaya pemasaran per pelanggan",
+          "rumus CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator CAC",
+        "headline": "Kalkulator Biaya Akuisisi Pelanggan",
+        "subheadline": "Masukkan belanja pemasaran Anda dan jumlah pelanggan baru yang diperoleh untuk menemukan biaya per pelanggan."
+      },
+      "about": {
+        "headline": "Angka yang memberi tahu apakah pemasaran Anda bekerja",
+        "paragraphs": [
+          "Biaya akuisisi pelanggan (CAC) adalah jumlah rata-rata yang Anda keluarkan untuk mendapat satu pelanggan baru, mencakup semua biaya pemasaran dan penjualan yang terpakai untuk itu. Angka ini baru berarti kalau diletakkan di samping angka kedua: seberapa bernilai pelanggan itu bagi Anda.",
+          "Masukkan total belanja Anda selama satu periode dan jumlah pelanggan baru yang datang karenanya untuk mendapat CAC. Kalau Anda juga tahu rata-rata pendapatan per pelanggan, kalkulator ini menampilkan perbandingan keduanya — pemeriksaan cepat apakah sebuah kampanye atau kanal benar-benar menutup biayanya sendiri."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator CAC",
+        "items": [
+          {
+            "question": "Apa rumus CAC?",
+            "answer": "CAC = total belanja pemasaran dan penjualan ÷ jumlah pelanggan baru yang diperoleh, pada periode yang sama. Mengeluarkan 50.000 untuk mendapat 100 pelanggan baru memberi CAC 500."
+          },
+          {
+            "question": "Biaya apa saja yang masuk ke belanja pemasaran?",
+            "answer": "Masukkan belanja iklan, biaya agensi atau platform, diskon promosi yang murni untuk akuisisi, dan porsi yang wajar dari biaya tim penjualan bila relevan — semua yang dikeluarkan khusus untuk mendatangkan pelanggan baru pada periode itu."
+          },
+          {
+            "question": "Berapa CAC yang bagus?",
+            "answer": "Sepenuhnya bergantung pada nilai seorang pelanggan bagi Anda sepanjang waktu. CAC tergolong sehat kalau nyaman berada di bawah pendapatan (idealnya pendapatan berulang) yang dihasilkan pelanggan biasa — tidak ada satu angka 'bagus' yang berlaku untuk semua usaha."
+          },
+          {
+            "question": "Apa bedanya CAC dan nilai pesanan rata-rata?",
+            "answer": "CAC mengukur apa yang Anda keluarkan untuk mendapat pelanggan; nilai pesanan rata-rata mengukur apa yang pelanggan itu belanjakan per pesanan setelah didapat. Membandingkan keduanya memberi gambaran berapa pesanan yang diperlukan untuk menutup biaya akuisisi."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Ketahui pelanggan mana yang layak dipertahankan",
+        "subtext": "Setu Dine mencatat pelanggan berulang dan riwayat pesanan, jadi Anda bisa melihat kanal mana yang membawa pelanggan yang benar-benar kembali.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator nilai pesanan rata-rata (AOV)",
+      "shortDescription": "Temukan nilai pesanan rata-rata Anda, dan dampaknya ke pendapatan bila dinaikkan.",
+      "seo": {
+        "title": "Kalkulator Nilai Pesanan Rata-rata (AOV) | Setu",
+        "description": "Kalkulator AOV gratis. Masukkan total pendapatan dan jumlah pesanan untuk menemukan nilai pesanan rata-rata, dan lihat dampak menaikkannya.",
+        "keywords": [
+          "kalkulator nilai pesanan rata-rata",
+          "kalkulator AOV",
+          "rumus AOV",
+          "nilai pesanan rata-rata e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator AOV",
+        "headline": "Kalkulator Nilai Pesanan Rata-rata",
+        "subheadline": "Masukkan total pendapatan dan jumlah pesanan untuk menemukan AOV Anda, dan lihat berapa nilainya kalau naik sedikit."
+      },
+      "about": {
+        "headline": "Kenaikan kecil pada AOV cepat menumpuk",
+        "paragraphs": [
+          "Nilai pesanan rata-rata (AOV) adalah jumlah yang dibelanjakan rata-rata per pesanan — dan termasuk sedikit tuas pendapatan yang bisa Anda gerakkan tanpa menambah satu pelanggan baru pun. Sebuah penawaran paket, saran tambahan yang ditaruh di tempat tepat, atau penyesuaian harga kecil bisa menaikkan AOV di semua pesanan yang sudah Anda terima.",
+          "Masukkan total pendapatan dan jumlah pesanan untuk satu periode guna menemukan AOV saat ini, lalu masukkan target kenaikan dalam persen untuk melihat berapa nilai kenaikan itu sebagai pendapatan tambahan pada volume pesanan yang sama — berguna untuk menilai apakah dorongan upselling atau perubahan menu dan paket sepadan dengan usahanya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator AOV",
+        "items": [
+          {
+            "question": "Apa rumus nilai pesanan rata-rata?",
+            "answer": "AOV = total pendapatan ÷ jumlah pesanan, untuk periode yang sama. Pendapatan 5.00.000 dari 1.000 pesanan memberi AOV 500."
+          },
+          {
+            "question": "Bagaimana cara menaikkan nilai pesanan rata-rata?",
+            "answer": "Tuas yang biasa dipakai: penawaran paket atau kombo, menawarkan ukuran lebih besar atau tambahan tepat saat pesanan dibuat, ambang gratis ongkir di atas belanja tertentu, dan menonjolkan item yang cocok dengan apa yang sudah dipesan pelanggan."
+          },
+          {
+            "question": "Mengapa kenaikan kecil pada AOV begitu berarti?",
+            "answer": "Karena ia berlaku untuk semua pesanan yang sudah Anda terima, tanpa biaya akuisisi tambahan — kenaikan 10% pada volume pesanan sekarang langsung menjadi pendapatan tambahan, tanpa perlu satu pelanggan baru."
+          },
+          {
+            "question": "Apakah AOV lebih tinggi selalu lebih baik?",
+            "answer": "Dari sisi pendapatan umumnya ya, tapi pastikan itu tidak mengorbankan frekuensi pesanan atau kepuasan pelanggan — mendorong tambahan terlalu keras bisa berbalik. Pantau AOV bersama tingkat pesanan ulang supaya terlihat lebih awal."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Temukan peluang upselling secara otomatis",
+        "subtext": "Setu Dine memunculkan saran paket dan tambahan saat penagihan, jadi menaikkan AOV tidak bergantung pada ingatan staf untuk menawarkan.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator menu engineering",
+      "shortDescription": "Analisis menu berdasarkan laba dan popularitas untuk menemukan star, cash cow, puzzle, dan dog.",
+      "seo": {
+        "title": "Kalkulator menu engineering untuk restoran",
+        "description": "Kalkulator menu engineering gratis untuk restoran. Masukkan harga, biaya, dan popularitas untuk menemukan menu paling untung dan membenahi yang merugi.",
+        "keywords": [
+          "kalkulator menu engineering",
+          "analisis menu restoran",
+          "kalkulator laba menu",
+          "optimasi menu restoran",
+          "kalkulator margin kontribusi",
+          "klasifikasi menu",
+          "analisis profitabilitas restoran"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator menu engineering",
+        "headline": "Kalkulator menu engineering",
+        "subheadline": "Analisis menu Anda berdasarkan laba dan popularitas — kenali Star yang perlu dipromosikan, Cash Cow yang perlu ditonjolkan, dan Dog yang perlu dihapus atau diubah harganya."
+      },
+      "about": {
+        "headline": "Berhenti menebak menu mana yang menghasilkan laba",
+        "paragraphs": [
+          "Menu engineering adalah praktik menganalisis menu Anda berdasarkan margin kontribusi dan popularitas, untuk mengetahui mana yang benar-benar menguntungkan dan mana yang menggerus margin Anda.",
+          "Alat ini menggolongkan setiap menu ke salah satu dari empat kategori: Star (laba tinggi, popularitas tinggi) yang sebaiknya dipromosikan, Cash Cow (laba tinggi, popularitas rendah) yang butuh keterlihatan, Puzzle (laba rendah, popularitas tinggi) yang perlu diubah harganya, dan Dog (laba rendah, popularitas rendah) yang sebaiknya dihapus atau diposisikan ulang. Masukkan menu Anda beserta harga, biaya, dan jumlah terjual — sisanya ditangani kalkulator."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator menu engineering",
+        "items": [
+          {
+            "question": "Apa arti 'margin kontribusi' dalam menu engineering?",
+            "answer": "Margin kontribusi adalah laba per menu sebelum membebankan biaya tetap (sewa, gaji, dan lain-lain). Itulah jumlah yang disumbangkan setiap penjualan untuk menutup biaya tetap dan menghasilkan laba, dihitung sebagai harga jual dikurangi harga pokok penjualan."
+          },
+          {
+            "question": "Bagaimana menu digolongkan dalam menu engineering?",
+            "answer": "Dengan membandingkan margin kontribusi dan popularitas (jumlah terjual) setiap menu terhadap rata-rata menu Anda. Star tinggi pada keduanya, Cash Cow bermargin tinggi tapi kurang laku, Puzzle laku tapi bermargin rendah, dan Dog rendah pada keduanya."
+          },
+          {
+            "question": "Apa yang perlu dilakukan untuk tiap golongan?",
+            "answer": "Star — promosikan kuat, jaga harga tetap stabil. Cash Cow — tingkatkan keterlihatan dan paket bundling untuk mendongkrak penjualan. Puzzle — naikkan harga atau turunkan biaya (sudah laku, hanya belum menguntungkan). Dog — hapus, posisikan ulang sebagai penarik pelanggan, atau perbaiki biaya resepnya."
+          },
+          {
+            "question": "Popularitas berarti jumlah terjual atau pendapatan?",
+            "answer": "Dalam kalkulator ini, popularitas berarti jumlah porsi atau tamu terlayani, bukan pendapatan. Menu bermargin rendah yang terjual banyak adalah Puzzle, bukan Star, karena ia menyita kapasitas dapur tanpa memberi margin."
+          },
+          {
+            "question": "Seberapa sering analisis ini perlu diulang?",
+            "answer": "Setidaknya sebulan sekali, atau setiap kali Anda menambah menu baru dan mengubah harga atau resep secara berarti. Pergeseran popularitas musiman sering memindahkan menu antar kategori, sehingga Anda bisa melihat dinamikanya dan menyesuaikan penempatan."
+          },
+          {
+            "question": "Apakah ini memperhitungkan biaya tenaga kerja?",
+            "answer": "Tidak — kalkulator ini hanya memakai biaya bahan untuk mencari margin kontribusi. Untuk gambaran laba yang lebih utuh, tambahkan perkiraan biaya tenaga kerja per menu (persiapan, memasak, penyajian) ke harga pokok sebelum menghitung margin."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimalkan menu dengan data waktu nyata",
+        "subtext": "Setu Dine mencatat biaya dan penjualan setiap menu secara otomatis, jadi Anda bisa menjalankan menu engineering setiap hari dan menemukan menu pembunuh laba sebelum ia memukul hasil usaha Anda.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator PPN",
+      "shortDescription": "Tambahkan PPN ke harga neto atau keluarkan PPN dari nominal bruto, untuk tarif mana pun.",
+      "seo": {
+        "title": "Kalkulator PPN — Tambah atau Hitung Balik | Setu",
+        "description": "Kalkulator PPN gratis. Tambahkan PPN ke nilai sebelum pajak atau keluarkan PPN dari harga termasuk pajak, dengan tarif standar 65+ negara di dalamnya.",
+        "keywords": [
+          "kalkulator PPN",
+          "tambah PPN",
+          "hitung PPN dari harga",
+          "kalkulator PPN terbalik",
+          "hitung PPN 11%",
+          "kalkulator PPN online"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator PPN",
+        "headline": "Kalkulator PPN",
+        "subheadline": "Tambahkan PPN ke harga sebelum pajak atau keluarkan PPN dari harga termasuk pajak: pilih tarif apa pun dan lihat rincian nilai, pajak, dan total."
+      },
+      "about": {
+        "headline": "Kenapa memakai kalkulator PPN",
+        "paragraphs": [
+          "Kalau Anda menjual ke pelanggan atau membeli dari pemasok di negara yang memakai PPN — Inggris, Uni Eropa, Uni Emirat Arab, Afrika Selatan, dan 170 negara lainnya — Anda terus-menerus harus berpindah antara harga sebelum pajak dan harga termasuk pajak. Menghitungnya manual mudah salah, terutama pada tarif seperti 12,5% atau 23%.",
+          "Kalkulator ini bekerja dua arah. Masukkan nilai sebelum pajak untuk melihat PPN dan totalnya, atau masukkan harga yang sudah termasuk PPN untuk mendapatkan kembali nilai dasar beserta pajak di dalamnya. Tombol pilih cepat mencakup tarif paling umum di dunia, dan Anda bisa mengetik tarif apa pun."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator PPN",
+        "items": [
+          {
+            "question": "Bagaimana cara menambahkan PPN ke harga?",
+            "answer": "Kalikan harga sebelum pajak dengan tarif PPN lalu tambahkan. Pada tarif 20%, harga dasar 100 memuat PPN 20 sehingga totalnya 120. Kalkulator ini melakukannya seketika untuk tarif apa pun."
+          },
+          {
+            "question": "Bagaimana cara mengeluarkan PPN dari harga total?",
+            "answer": "Bagi harga total dengan (1 + tarif). Harga 120 dengan PPN 20% menjadi 120 ÷ 1,20 = 100 nilai dasar, dengan PPN 20. Jangan pernah langsung mengurangi persentasenya — hasilnya salah."
+          },
+          {
+            "question": "Apa bedanya VAT dan GST?",
+            "answer": "Keduanya bekerja sama saja: pajak atas nilai tambah di setiap tahap. Negara hanya memakai nama dan tarif berbeda. India memakai GST (gunakan kalkulator GST kami untuk pembagian CGST/SGST); Inggris, Uni Eropa, dan banyak negara lain memakai VAT."
+          },
+          {
+            "question": "Tarif PPN mana yang harus saya pakai?",
+            "answer": "Pakai tarif standar negara tempat penjualan itu dikenai pajak — misalnya 20% di Inggris, 19% di Jerman, 5% di Uni Emirat Arab. Banyak negara juga punya tarif lebih rendah untuk barang pokok; periksa kategori barang atau jasa Anda."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator pajak penjualan",
+      "shortDescription": "Hitung sales tax ala AS: gabungkan tarif negara bagian dan lokal, tambahkan atau keluarkan.",
+      "seo": {
+        "title": "Kalkulator pajak penjualan AS — Negara + Lokal | Setu",
+        "description": "Kalkulator pajak penjualan gratis. Gabungkan tarif negara bagian dan lokal, tambahkan pajak ke harga, atau keluarkan pajak dari total yang sudah dibayar.",
+        "keywords": [
+          "kalkulator pajak penjualan",
+          "sales tax Amerika",
+          "kalkulator pajak negara bagian",
+          "hitung balik pajak penjualan",
+          "pajak atas pembelian"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Pajak Penjualan",
+        "headline": "Kalkulator pajak penjualan",
+        "subheadline": "Gabungkan tarif negara bagian dan tarif lokal, lalu tambahkan pajak ke harga atau keluarkan pajak dari total yang sudah Anda bayar."
+      },
+      "about": {
+        "headline": "Bagaimana pajak penjualan di AS bekerja",
+        "paragraphs": [
+          "Berbeda dari PPN atau GST, pajak penjualan di Amerika Serikat ditambahkan di kasir dan berbeda menurut negara bagian, county, dan kota. Tarif yang Anda pungut biasanya tarif negara bagian ditambah tarif lokal yang berlaku di tempat penjualan — itulah sebabnya dua toko yang hanya berjarak beberapa kilometer bisa memungut pajak berbeda.",
+          "Masukkan tarif negara bagian dan tarif lokal atau kota, lalu kalkulator ini menampilkan tarif gabungan, jumlah pajak, dan totalnya. Balikkan arahnya untuk mengeluarkan pajak dari total pada struk saat Anda membukukan atau mengajukan klaim biaya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator pajak penjualan",
+        "items": [
+          {
+            "question": "Bagaimana menghitung pajak penjualan atas sebuah pembelian?",
+            "answer": "Kalikan harga sebelum pajak dengan tarif gabungan. Pembelian $100 pada tarif gabungan 8% memuat pajak $8, sehingga totalnya $108."
+          },
+          {
+            "question": "Bagaimana mendapatkan harga sebelum pajak dari total?",
+            "answer": "Bagi total dengan (1 + tarif gabungan). Total $108 pada 8% adalah $108 ÷ 1,08 = $100 sebelum pajak dan $8 pajak."
+          },
+          {
+            "question": "Mengapa tarif negara bagian dan lokal perlu dipisah?",
+            "answer": "Sebagian besar negara bagian AS membolehkan county, kota, dan distrik khusus menambahkan pajak penjualan sendiri di atas tarif negara bagian. Pelanggan membayar total gabungan di lokasi penjualan, jadi kalkulator ini mengambil keduanya dan menjumlahkannya."
+          },
+          {
+            "question": "Apakah semua negara bagian AS memungut pajak penjualan?",
+            "answer": "Tidak — Alaska, Delaware, Montana, New Hampshire, dan Oregon tidak punya pajak penjualan tingkat negara bagian (meski beberapa daerah di Alaska memungut sendiri). Negara bagian lain punya tarif sendiri, biasanya antara 4% dan 7,25%."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator ROI",
+      "shortDescription": "Ukur imbal hasil investasi: laba bersih, ROI persen, dan imbal hasil tahunan tiap pengeluaran.",
+      "seo": {
+        "title": "Kalkulator ROI — Imbal Hasil Investasi | Setu",
+        "description": "Kalkulator ROI gratis. Masukkan jumlah yang diinvestasikan dan yang kembali untuk mendapat laba bersih, persentase ROI, dan ROI tahunan untuk periode apa pun.",
+        "keywords": [
+          "kalkulator ROI",
+          "imbal hasil investasi",
+          "ROI tahunan",
+          "kalkulator pengembalian investasi",
+          "rumus ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator ROI",
+        "headline": "Kalkulator ROI",
+        "subheadline": "Masukkan yang Anda keluarkan dan yang Anda terima kembali: laba bersih, ROI dalam persen, dan imbal hasil tahunan untuk periode itu."
+      },
+      "about": {
+        "headline": "Kenapa ROI penting di setiap keputusan usaha",
+        "paragraphs": [
+          "Entah peralatan dapur baru, kampanye pemasaran, atau stok untuk musim ramai, setiap rupiah yang Anda keluarkan harus membayar dirinya sendiri. ROI menaruh semua pilihan itu pada satu skala: apa yang uang itu kembalikan dibanding biayanya?",
+          "Persentase ROI biasa memberi tahu total keuntungan. Angka tahunan baru penting saat Anda membandingkan pilihan dengan jangka waktu berbeda — imbal hasil 40% selama 4 tahun jauh lebih lemah daripada 25% dalam setahun. Masukkan periodenya dan kalkulator ini menghitung keduanya."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator ROI",
+        "items": [
+          {
+            "question": "Bagaimana ROI dihitung?",
+            "answer": "ROI = (jumlah yang kembali − jumlah yang diinvestasikan) ÷ jumlah yang diinvestasikan × 100. Investasi 100.000 dan kembali 140.000 berarti ROI Anda 40%."
+          },
+          {
+            "question": "Apa itu ROI tahunan?",
+            "answer": "Ia mengubah imbal hasil total menjadi tingkat majemuk per tahun: (kembali ÷ diinvestasikan)^(1 ÷ tahun) − 1. Imbal hasil total 40% selama 2 tahun setara sekitar 18,3% per tahun — berguna untuk membandingkan investasi berdurasi berbeda."
+          },
+          {
+            "question": "Berapa ROI yang bagus untuk usaha kecil?",
+            "answer": "Bergantung pada risiko dan pilihan lain yang Anda punya. Sebagai patokan kasar, investasi harus mengalahkan apa yang uang itu bisa hasilkan dengan aman (bunga deposito) dengan selisih yang cukup untuk membenarkan usaha dan risikonya — banyak pemilik usaha kecil mengincar 15–30% atau lebih per tahun untuk investasi operasional."
+          },
+          {
+            "question": "Apakah biaya berjalan sudah termasuk?",
+            "answer": "Masukkan biaya itu ke jumlah yang diinvestasikan, atau kurangkan dari jumlah yang kembali — bagaimanapun, ROI hanya sejujur angka yang Anda berikan. Untuk pemasaran, kalkulator CAC kami melengkapinya dengan mengukur biaya per pelanggan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator penyusutan",
+      "shortDescription": "Penyusutan garis lurus atau saldo menurun lengkap dengan jadwal tahun per tahun.",
+      "seo": {
+        "title": "Kalkulator dan Jadwal Penyusutan | Setu",
+        "description": "Kalkulator penyusutan gratis. Hitung penyusutan garis lurus atau saldo menurun, lengkap dengan jadwal nilai buku tahun demi tahun.",
+        "keywords": [
+          "kalkulator penyusutan",
+          "penyusutan garis lurus",
+          "penyusutan saldo menurun",
+          "penyusutan WDV",
+          "jadwal penyusutan aset"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Penyusutan",
+        "headline": "Kalkulator penyusutan",
+        "subheadline": "Masukkan harga perolehan aset, nilai residu, dan masa manfaat — dapatkan penyusutan tahunan serta jadwal lengkap tahun demi tahun, garis lurus atau saldo menurun."
+      },
+      "about": {
+        "headline": "Dua metode, satu jadwal",
+        "paragraphs": [
+          "Penyusutan menyebar harga perolehan sebuah aset sepanjang masa manfaatnya, dan metodenya mengubah bentuk bebannya. Garis lurus membagi biaya sama rata setiap tahun — sederhana dan biasa dipakai untuk perabot, instalasi, dan peralatan. Saldo menurun mengenakan persentase tetap pada nilai buku yang tersisa sehingga beban menumpuk di tahun-tahun awal — inilah pendekatan yang dipakai undang-undang pajak penghasilan India untuk sebagian besar kelompok aset.",
+          "Kalkulator ini menghasilkan jadwal lengkap untuk kedua metode: nilai awal, penyusutan, dan nilai buku akhir untuk setiap tahun, jadi Anda bisa langsung memasukkan angkanya ke pembukuan atau membandingkan metode sebelum memilih."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator penyusutan",
+        "items": [
+          {
+            "question": "Bagaimana penyusutan garis lurus bekerja?",
+            "answer": "Penyusutan tahunan = (harga perolehan − nilai residu) ÷ masa manfaat. Mesin ₹5.00.000 dengan residu ₹50.000 selama 5 tahun menyusut ₹90.000 per tahun."
+          },
+          {
+            "question": "Bagaimana metode saldo menurun bekerja?",
+            "answer": "Setiap tahun Anda menyusutkan persentase tetap dari nilai buku yang tersisa. Pada 25%, aset ₹5.00.000 menyusut ₹1.25.000 di tahun pertama, lalu 25% dari ₹3.75.000 di tahun kedua, dan seterusnya — potongan lebih besar di awal, lebih kecil kemudian."
+          },
+          {
+            "question": "Metode mana yang sebaiknya saya pakai?",
+            "answer": "Untuk keperluan pajak penghasilan di India, saldo menurun pada tarif kelompok yang ditentukan adalah hal lazim bagi sebagian besar usaha. Untuk pembukuan manajemen Anda sendiri, garis lurus lebih sederhana dan menunjukkan biaya yang stabil. Perseroan yang melapor menurut undang-undang perseroan mengikuti masa manfaat pada Lampiran II. Kalau ragu, tanyakan ke akuntan Anda."
+          },
+          {
+            "question": "Apa itu nilai residu?",
+            "answer": "Jumlah yang Anda perkirakan masih bernilai pada akhir masa manfaat aset — nilai jual kembali atau nilai besi tua. Penyusutan berhenti begitu nilai buku mencapainya."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sambil Anda bekerja.",
+        "cta": {
+          "label": "Lihat Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator termin pembayaran",
+      "shortDescription": "Tanggal jatuh tempo, hemat diskon bayar cepat, dan biaya nyata dari telat membayar.",
+      "seo": {
+        "title": "Kalkulator termin pembayaran — Net 30",
+        "description": "Kalkulator termin pembayaran gratis: tanggal jatuh tempo pasti untuk net 15/30/45/60, hemat diskon bayar cepat, dan biaya nyata melewatkannya.",
+        "keywords": [
+          "kalkulator termin pembayaran",
+          "kalkulator net 30",
+          "2/10 net 30",
+          "diskon pembayaran lebih awal",
+          "kalkulator jatuh tempo faktur",
+          "biaya kredit dagang"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator termin pembayaran",
+        "headline": "Kalkulator termin pembayaran",
+        "subheadline": "Ubah termin seperti \"2/10 net 30\" menjadi tanggal dan rupiah nyata — jatuh tempo, hemat dari bayar lebih awal, dan berapa sebenarnya biaya melewatkan diskonnya."
+      },
+      "about": {
+        "headline": "Pahami termin faktur dalam hitungan detik",
+        "paragraphs": [
+          "Termin seperti \"net 30\" atau \"2/10 net 45\" memadatkan tanggal jatuh tempo, diskon, dan bunga tersembunyi hanya dalam beberapa karakter. Kalkulator ini membukanya: tanggal jatuh tempo persis dari tanggal faktur, nilai diskon bila Anda bayar dalam masa itu, dan biaya setahunnya bila Anda memilih tidak.",
+          "Angka terakhir itulah yang mengejutkan. Melewatkan diskon 2% demi menahan kas 20 hari lebih lama setara dengan meminjam di atas 36% per tahun — jauh lebih mahal daripada sebagian besar pembiayaan modal kerja. Dengan tahu itu, Anda memutuskan pakai angka, baik sebagai pembeli maupun penjual yang menetapkan termin."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ termin pembayaran",
+        "items": [
+          {
+            "question": "Apa arti 2/10 net 30?",
+            "answer": "Bayar dalam 10 hari dan Anda dapat diskon 2% dari nilai faktur; jika tidak, seluruh tagihan jatuh tempo 30 hari sejak tanggal faktur."
+          },
+          {
+            "question": "Bagaimana biaya melewatkan diskon dihitung?",
+            "answer": "Biaya ≈ (% diskon ÷ (100 − % diskon)) × (365 ÷ hari kredit tambahan) × 100. Untuk 2/10 net 30 hasilnya (2 ÷ 98) × (365 ÷ 20) ≈ 37% per tahun — itulah biaya nyata dari 20 hari kredit tambahan."
+          },
+          {
+            "question": "Jatuh tempo dihitung dari tanggal faktur atau tanggal kirim?",
+            "answer": "Biasanya dari tanggal faktur, kecuali kontrak menyebut lain (ada yang memakai termin akhir bulan, ditulis \"net 30 EOM\"). Kalkulator ini menghitung hari kalender dari tanggal faktur yang Anda masukkan."
+          },
+          {
+            "question": "Perlukah saya menawarkan diskon bayar cepat ke pelanggan?",
+            "answer": "Kalau arus kas ketat atau pelanggan lambat bayar, diskon kecil bisa mempercepat masuknya uang secara drastis dan mengurangi kerja penagihan. Tetapkan dengan sadar — perhitungan biaya setahun yang sama juga berlaku bagi Anda sebagai penjual."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator selisih harga pembelian",
+      "shortDescription": "Bandingkan harga beli aktual dan standar, lalu lihat total selisihnya seketika.",
+      "seo": {
+        "title": "Kalkulator selisih harga pembelian (PPV)",
+        "description": "Kalkulator PPV gratis. Bandingkan harga yang benar-benar dibayar dengan harga standar atau anggaran untuk melihat selisih per unit, %, dan totalnya.",
+        "keywords": [
+          "kalkulator selisih harga beli",
+          "kalkulator PPV",
+          "rumus selisih harga",
+          "selisih pengadaan",
+          "selisih biaya standar"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator PPV",
+        "headline": "Kalkulator selisih harga pembelian",
+        "subheadline": "Harga standar versus harga aktual × jumlah — lihat selisih per unit, dalam persen, dan totalnya, dengan tanda menguntungkan atau merugikan."
+      },
+      "about": {
+        "headline": "Tangkap kenaikan biaya yang diam-diam sebelum menggerus margin",
+        "paragraphs": [
+          "Selisih harga beli mengukur jarak antara harga yang Anda rencanakan untuk bahan atau stok dan harga yang benar-benar Anda bayar. Pemasok menaikkan tarif tanpa pemberitahuan, ukuran pesanan berubah, harga pasar bergerak — PPV adalah cara tim pembelian menangkapnya lebih awal dan mengukur dampaknya.",
+          "Selisih positif (merugikan) berarti pembelian lebih mahal daripada standar — margin sudah bocor di pintu masuk. Selisih negatif (menguntungkan) berarti Anda lebih baik dari rencana. Pantau per barang dan per pemasok, lalu bawa selisih yang terus berulang ke penetapan harga atau negosiasi ulang."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ kalkulator PPV",
+        "items": [
+          {
+            "question": "Bagaimana selisih harga beli dihitung?",
+            "answer": "PPV = (harga aktual − harga standar) × jumlah yang dibeli. Membeli 500 unit di ₹110 terhadap standar ₹100 menghasilkan selisih merugikan ₹5.000."
+          },
+          {
+            "question": "Apa itu harga standar?",
+            "answer": "Patokan yang Anda pakai saat merencanakan — tarif anggaran, harga kontrak hasil negosiasi, atau biaya rata-rata periode lalu. Konsistensi lebih penting daripada pilihan mana yang Anda pakai."
+          },
+          {
+            "question": "Apakah selisih menguntungkan selalu bagus?",
+            "answer": "Biasanya ya, tapi periksa sebabnya. Harga lebih murah karena mutu turun, pesanan borongan lebih besar dari kebutuhan, atau jadwal kirim yang terlewat bisa jadi lebih mahal di belakang daripada penghematannya."
+          },
+          {
+            "question": "Seberapa sering saya perlu meninjau PPV?",
+            "answer": "Bulanan cocok untuk sebagian besar usaha kecil — cukup sering untuk menangkap kenaikan pemasok sebelum menumpuk, tanpa tenggelam dalam detail. Mulai dari barang dengan belanja terbesar (alat analisis ABC kami membantu mengurutkannya)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator rasio keuangan",
+      "shortDescription": "Rasio likuiditas, leverage, margin, dan efisiensi dari neraca serta laporan laba rugi.",
+      "seo": {
+        "title": "Kalkulator rasio keuangan untuk Usaha",
+        "description": "Kalkulator rasio keuangan gratis. Masukkan angka neraca dan laba rugi untuk mendapat rasio lancar, rasio cepat, rasio utang, margin, dan hari piutang.",
+        "keywords": [
+          "kalkulator rasio keuangan",
+          "kalkulator rasio lancar",
+          "rasio cepat",
+          "rasio utang terhadap ekuitas",
+          "analisis rasio",
+          "cek kesehatan usaha"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Penganalisis Rasio",
+        "headline": "Kalkulator rasio keuangan",
+        "subheadline": "Tujuh rasio penting dari sedikit angka — likuiditas, beban utang, margin, dan efisiensi dalam satu tampilan."
+      },
+      "about": {
+        "headline": "Pemeriksaan kesehatan untuk usaha Anda",
+        "paragraphs": [
+          "Angka tunggal di neraca sendiri tidak banyak bercerita — rasio yang menempatkannya pada konteks. Mampukah Anda menutup tagihan jangka pendek (rasio lancar dan rasio cepat)? Apakah utang Anda berlebihan (utang terhadap ekuitas)? Apakah usaha intinya menguntungkan (margin kotor dan bersih)? Apakah uang tersangkut di stok atau di pelanggan (perputaran persediaan dan hari piutang)?",
+          "Bank dan investor menghitung persis rasio-rasio ini saat memeriksa laporan Anda, jadi sebaiknya Anda melihatnya lebih dulu. Masukkan angka dari neraca dan laba rugi terakhir Anda — atau susun laporan itu dengan alat neraca dan laba rugi gratis kami — lalu baca hasilnya bersama tolok ukur yang disediakan."
+        ]
+      },
+      "faq": {
+        "headline": "FAQ rasio keuangan",
+        "items": [
+          {
+            "question": "Berapa rasio lancar yang baik?",
+            "answer": "Antara 1,5 dan 3 terasa nyaman bagi sebagian besar usaha. Di bawah 1 berarti kewajiban lancar melebihi aset lancar — peringatan likuiditas. Jauh di atas 3 bisa berarti kas menganggur atau persediaan berlebih."
+          },
+          {
+            "question": "Mengapa persediaan dikeluarkan dari rasio cepat?",
+            "answer": "Persediaan bisa butuh berbulan-bulan untuk menjadi uang dan, dalam tekanan, terjual di bawah nilai bukunya. Rasio cepat ((aset lancar − persediaan) ÷ kewajiban lancar) menguji apakah Anda bisa membayar tagihan terdekat tanpa bergantung pada penjualannya."
+          },
+          {
+            "question": "Apa yang diberitahukan rasio utang terhadap ekuitas?",
+            "answer": "Seberapa besar usaha dibiayai utang dibanding uang pemilik. Di bawah 1 tergolong hati-hati, 1–2 umum; di atas 2 berarti pemberi pinjaman menanggung lebih banyak risiko, dan kredit baru menjadi lebih sulit serta lebih mahal."
+          },
+          {
+            "question": "Apa itu hari piutang (DSO)?",
+            "answer": "Piutang usaha ÷ pendapatan tahunan × 365 — rata-rata jumlah hari pelanggan membayar. Kalau termin Anda 30 hari tetapi DSO 55, penagihan perlu diperhatikan (alat umur piutang kami menunjukkan persisnya di mana)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Angka yang mencatat dirinya sendiri",
+        "subtext": "POS dan alat bisnis Setu mencatat penjualan, biaya, dan pajak secara otomatis, jadi laporan tersusun sendiri sambil Anda bekerja.",
+        "cta": {
+          "label": "Jelajahi Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Kalkulator MDR",
+      "shortDescription": "Lihat berapa MDR yang dipotong dari sebuah pembayaran dan berapa yang benar-benar masuk ke rekening Anda, sudah termasuk MDR atau belum.",
+      "seo": {
+        "title": "Kalkulator MDR — Biaya Payment Gateway | Setu",
+        "description": "Kalkulator MDR gratis untuk merchant di India. Masukkan nilai termasuk atau belum termasuk MDR untuk melihat tarif merchant, pajaknya, dan yang Anda terima.",
+        "keywords": [
+          "kalkulator MDR",
+          "merchant discount rate",
+          "kalkulator biaya payment gateway",
+          "MDR termasuk belum termasuk",
+          "MDR UPI India",
+          "biaya transaksi kartu"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Alat Gratis — Kalkulator MDR",
+        "headline": "Kalkulator MDR",
+        "subheadline": "Hitung merchant discount rate pada satu pembayaran, dan berapa yang masuk ke rekening Anda setelah tarif itu beserta pajaknya dipotong."
+      },
+      "about": {
+        "headline": "Berapa sebenarnya MDR membebani Anda",
+        "paragraphs": [
+          "Merchant discount rate adalah potongan yang disimpan acquirer Anda dari setiap penerimaan kartu atau dompet digital, dan pajak GST juga dikenakan atas potongan itu. Pada penjualan kartu kredit ₹5.000 dengan tarif 2%, MDR-nya ₹100 dan pajaknya ₹18 lagi, jadi yang disetelkan ₹4.882 bukan ₹5.000. Sepanjang sebulan volume kartu, selisih itu uang yang nyata, dan sebagian besar merchant baru menemuinya di laporan setelmen.",
+          "Anda bisa memasukkan nilainya dengan dua cara, tergantung apa yang Anda ketahui. Termasuk MDR berarti angka itu yang dibayar pelanggan, dan kalkulator memberi tahu berapa yang tinggal untuk Anda. Belum termasuk MDR berarti angka itu yang ingin Anda terima, dan kalkulator menaikkan tagihannya supaya nilai bersih setelah MDR keluar tepat — berguna saat Anda membebankan biayanya ke pelanggan atau menyebut harga yang harus menyisakan jumlah tertentu.",
+          "Tidak semua jalur berbiaya sama, dan UPI akan berubah. Mulai 15 Oktober 2026, pembayaran UPI ke merchant di atas ₹2.000 dikenai MDR 0,4% atas nilai penuh, dibatasi ₹300 per transaksi. Sampai ₹2.000 masih tanpa MDR, debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula merchant yang menerima di bawah ₹1 lakh per bulan lewat QR UPI — itulah sebabnya menerima jumlah besar melalui beberapa kode QR yang lebih kecil bisa membuat biayanya nol."
+        ]
+      },
+      "faq": {
+        "headline": "Tanya jawab kalkulator MDR",
+        "items": [
+          {
+            "question": "Apa itu MDR?",
+            "answer": "MDR, atau merchant discount rate, adalah biaya yang dibayar merchant untuk menerima pembayaran digital. Biasanya berupa persentase dari nilai transaksi, kadang ditambah biaya tetap, dan dipotong sebelum uangnya disetelkan ke rekening merchant. Pajak GST dikenakan atas MDR itu sendiri."
+          },
+          {
+            "question": "Apa bedanya termasuk MDR dan belum termasuk MDR?",
+            "answer": "Termasuk MDR berarti nilai yang Anda masukkan adalah yang dibayar pelanggan, dan MDR diambil dari situ, jadi Anda menerima lebih sedikit. Belum termasuk MDR berarti nilai yang Anda masukkan adalah yang ingin Anda terima, jadi tagihannya dinaikkan untuk menutup MDR beserta pajaknya. Pakai yang belum termasuk kalau angka tertentu harus masuk ke rekening Anda."
+          },
+          {
+            "question": "Apakah pembayaran UPI di India dikenai MDR?",
+            "answer": "Sampai ₹2.000 tidak ada, dan debit RuPay tetap nol karena ketentuan. Mulai 15 Oktober 2026, pembayaran UPI ke merchant di atas ₹2.000 dikenai MDR 0,4%, dihitung atas nilai penuh transaksi dan dibatasi ₹300. UPI Autopay dan mandat berulang lainnya dikecualikan, begitu juga merchant yang menerima di bawah ₹1 lakh per bulan lewat QR UPI."
+          },
+          {
+            "question": "Bagaimana menekan biaya MDR?",
+            "answer": "Arahkan pelanggan ke jalur yang tetap gratis — UPI sampai ₹2.000, debit RuPay, dan mandat UPI Autopay — dan negosiasikan tarif kartu dengan acquirer begitu volume Anda memadai. Karena batas ₹2.000 berlaku per transaksi, menjaga setiap penerimaan UPI di bawahnya menghindari 0,4% sepenuhnya; pemecah QR yang tertaut membelah total yang lebih besar menjadi kode QR di bawah batas."
+          },
+          {
+            "question": "Apakah MDR dikenai pajak GST?",
+            "answer": "Ya. Pajak 18% dikenakan atas MDR itu sendiri, bukan atas penjualan Anda maupun atas transaksi UPI. Kalkulator menampilkannya pada baris tersendiri supaya Anda melihat biaya penerimaan secara utuh, dan usaha yang terdaftar GST umumnya bisa mengklaimnya sebagai kredit pajak masukan."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Terima pembayaran tanpa kehilangan potongan",
+        "subtext": "Alat UPI gratis dari Setu memungkinkan Anda menerima pembayaran di kasir di bawah batas MDR, tanpa perlu mendaftar.",
+        "cta": {
+          "label": "Coba Generator QR UPI"
+        }
+      }
+    }
+  ],
+  "labels": {
+    "allCalculators": "← Semua kalkulator",
+    "moreCalculators": "Kalkulator lainnya"
+  }
+}

@@ -1,0 +1,1714 @@
+{
+  "seo": {
+    "title": "Alat bisnis gratis untuk restoran & ritel | Setu",
+    "description": "Alat bisnis online gratis untuk restoran dan usaha kecil — pembuat faktur, kalkulator, dan banyak lagi. Tanpa perlu mendaftar akun apa pun.",
+    "keywords": [
+      "alat bisnis",
+      "alat bisnis gratis",
+      "pembuat faktur",
+      "alat restoran",
+      "alat usaha kecil"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Alat gratis",
+    "headline": "Alat untuk menjalankan usaha Anda",
+    "subheadline": "Alat gratis tanpa pendaftaran, dibuat untuk pengelola restoran dan ritel — faktur, kalkulator, dan lainnya."
+  },
+  "ctaBanner": {
+    "headline": "Ingin angkanya terhitung sendiri?",
+    "subtext": "Setu Dine melacak penjualan, biaya, dan pajak secara otomatis, agar waktu Anda lebih banyak untuk usaha daripada untuk kalkulator.",
+    "cta": {
+      "label": "Jelajahi Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Penyiapan usaha"
+    },
+    {
+      "name": "Kasir"
+    },
+    {
+      "name": "Faktur"
+    },
+    {
+      "name": "Pembayaran"
+    },
+    {
+      "name": "Menu"
+    },
+    {
+      "name": "Produk dan label"
+    },
+    {
+      "name": "Persediaan dan pembelian"
+    },
+    {
+      "name": "Keuangan"
+    },
+    {
+      "name": "Pelanggan"
+    },
+    {
+      "name": "Janji temu"
+    },
+    {
+      "name": "Dokumen usaha"
+    },
+    {
+      "name": "Pembukuan"
+    },
+    {
+      "name": "Laporan keuangan"
+    },
+    {
+      "name": "Analisis keuangan"
+    }
+  ],
+  "labels": {
+    "freeTool": "Alat Gratis",
+    "loading": "Memuat…"
+  },
+  "items": [
+    {
+      "name": "Kasir berbasis browser",
+      "shortDescription": "POS gratis yang jalan offline di browser — penjualan, stok, pelanggan, dan struk. Tanpa login."
+    },
+    {
+      "name": "Pembuat faktur",
+      "shortDescription": "Buat, sesuaikan, dan unduh faktur profesional lengkap dengan dukungan pajak.",
+      "seo": {
+        "title": "Pembuat faktur gratis — sesuai GST",
+        "description": "Buat faktur rapi yang sesuai GST secara gratis. Beberapa templat, hitungan pajak otomatis, dukungan UPI, dan unduhan PDF seketika. Tanpa pendaftaran.",
+        "keywords": [
+          "pembuat faktur gratis",
+          "buat faktur",
+          "faktur GST",
+          "templat faktur",
+          "faktur gratis",
+          "pembuat faktur online",
+          "faktur India"
+        ],
+        "ogTitle": "Pembuat faktur gratis — sesuai GST",
+        "ogDescription": "Buat faktur rapi dengan hitungan GST. Tanpa login. Unduh PDF seketika."
+      },
+      "hero": {
+        "headline": "Pembuat faktur gratis",
+        "subheadline": "Buat faktur rapi yang sesuai GST seketika. Tanpa pendaftaran."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu faktur yang sesuai GST?",
+            "answer": "Faktur yang sesuai GST memuat GSTIN Anda, GSTIN pelanggan, rincian tiap baris beserta tarif pajaknya, dan pembagian pajak (CGST/SGST atau IGST). Pembuat faktur kami mengurus semua hitungannya sendiri."
+          },
+          {
+            "question": "Apakah saya perlu mendaftar atau masuk?",
+            "answer": "Tidak! Pembuat faktur ini sepenuhnya gratis dan tanpa pendaftaran. Data faktur Anda tersimpan di peramban lewat localStorage, supaya lebih enak dipakai lain kali."
+          },
+          {
+            "question": "Bisakah faktur diunduh sebagai PDF?",
+            "answer": "Bisa! Klik ‘Download PDF’ dan fakturnya langsung dibuat dan terunduh. Seluruh PDF dibuat di perangkat Anda — data Anda tidak pernah sampai ke server kami."
+          },
+          {
+            "question": "Cara pembayaran apa yang bisa saya tampilkan di faktur?",
+            "answer": "Anda bisa menambahkan data rekening bank (nomor rekening, kode IFSC) dan UPI ID. Faktur akan menampilkan pilihan itu kepada pelanggan Anda."
+          },
+          {
+            "question": "Apakah ada templat faktur yang berbeda?",
+            "answer": "Ada! Tiga templat bergaya rapi: Classic (resmi), Modern (minimalis), dan Colorful (kreatif). Warna merek tiap templat bisa Anda pilih sendiri."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat faktur Setu?",
+          "items": [
+            {
+              "title": "Beberapa templat",
+              "text": "Pilih dari tiga templat bergaya rapi dan sesuaikan dengan warna merek Anda."
+            },
+            {
+              "title": "Tersimpan sendiri",
+              "text": "Data faktur Anda tersimpan sendiri di peramban. Faktur berikutnya jadi lebih cepat."
+            },
+            {
+              "title": "Hitungan GST",
+              "text": "Hitungan GST otomatis dengan pembagian CGST/SGST dan beberapa tarif pajak per baris."
+            },
+            {
+              "title": "Jalan di ponsel",
+              "text": "Buat dan kirim faktur dari ponsel, tablet, atau komputer. Jalan di mana saja."
+            },
+            {
+              "title": "Privasi lebih dulu",
+              "text": "Seluruh PDF dibuat di perangkat Anda. Data faktur Anda tidak pernah sampai ke server kami."
+            },
+            {
+              "title": "Dibuat untuk India",
+              "text": "Untuk usaha kecil India: pemeriksaan GSTIN, pembagian CGST/SGST, UPI ID, dan jumlah dalam kata (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Isi apa yang perlu ada di faktur?",
+          "intro": "Faktur yang rapi sebaiknya memuat:",
+          "items": [
+            "Nama, alamat, telepon, dan email usaha",
+            "Nama dan alamat pelanggan",
+            "Nomor dan tanggal faktur",
+            "Daftar rinci produk atau jasa beserta jumlah dan harganya",
+            "Pajak yang berlaku (GST di India)",
+            "Jumlah total dan termin pembayaran",
+            "Data pembayaran (rekening bank, UPI, dan lain-lain)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Kepatuhan GST",
+          "text": "**Penafian:** pembuat faktur ini hanya alat penataan dan hitungan. Ia tidak melaporkan SPT GST dan tidak menjamin kepatuhan pada seluruh aturan pajak. Untuk nasihat dan pelaporan, bicarakan dengan akuntan atau konsultan pajak Anda."
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat kalkulator usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Kalkulator GST"
+            },
+            {
+              "label": "Kalkulator pajak penghasilan"
+            },
+            {
+              "label": "Kalkulator margin laba"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pembuat QR UPI dinamis",
+      "shortDescription": "Buat kode QR UPI dinamis dengan nominal dan catatan khusus untuk pembayaran instan.",
+      "seo": {
+        "title": "Pembuat QR UPI dinamis gratis — seketika",
+        "description": "Buat kode QR UPI dinamis seketika. Masukkan UPI ID, jumlah, dan catatan Anda untuk mendapat kode QR penagihan cepat. Tanpa pendaftaran.",
+        "keywords": [
+          "pembuat QR UPI",
+          "kode QR dinamis",
+          "QR pembayaran UPI",
+          "pembuat QR gratis",
+          "QR tagih seketika",
+          "tautan dalam UPI",
+          "kode QR pembayaran"
+        ],
+        "ogTitle": "Pembuat QR UPI dinamis gratis — seketika",
+        "ogDescription": "Buat kode QR UPI berisi jumlah dan catatan seketika. Bagikan untuk menagih dengan cepat."
+      },
+      "hero": {
+        "headline": "Pembuat QR UPI dinamis",
+        "subheadline": "Buat kode QR UPI berisi jumlah dan catatan. Bagikan seketika untuk menagih dengan cepat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu kode QR UPI dinamis?",
+            "answer": "Kode QR UPI dinamis adalah kode khusus yang sudah memuat UPI ID Anda, jumlah pembayaran, dan catatan rujukan. Begitu dipindai, ia mengisi sendiri rincian pembayaran di aplikasi UPI mana pun, sehingga penagihan jadi lebih cepat dan enak."
+          },
+          {
+            "question": "Apakah saya perlu mendaftar?",
+            "answer": "Tidak! Pembuat kode QR UPI ini sepenuhnya gratis dan tanpa pendaftaran. Buat kode sebanyak yang Anda perlukan, seketika."
+          },
+          {
+            "question": "Bagaimana memakai kode QR yang sudah dibuat?",
+            "answer": "Unduh kode QR-nya dan pasang di toko, rumah makan, atau faktur Anda. Pelanggan memindainya dengan aplikasi UPI apa pun (Google Pay, PhonePe, Paytm, dan lain-lain) lalu membayar seketika."
+          },
+          {
+            "question": "Bisakah jumlah pembayaran ditetapkan?",
+            "answer": "Bisa! Kalau mau, sertakan jumlah tetap di dalam kode QR. Jumlahnya sudah terisi saat pelanggan membuka aplikasi UPI mereka."
+          },
+          {
+            "question": "Penyedia UPI apa saja yang didukung?",
+            "answer": "Pembuat ini jalan dengan semua penyedia UPI besar di India, termasuk SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm, dan 80-an bank serta aplikasi pembayaran lainnya."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat QR UPI Setu?",
+          "items": [
+            {
+              "title": "Jadi seketika",
+              "text": "Kode QR jadi seketika. Tanpa pendaftaran, tanpa menunggu. Buat sebanyak yang perlu."
+            },
+            {
+              "title": "Sesuai kebutuhan",
+              "text": "Tetapkan jumlah pembayaran dan tambahkan catatan rujukan. Cocok untuk struk, faktur, atau harga tetap."
+            },
+            {
+              "title": "Semua bank jalan",
+              "text": "Jalan dengan semua bank dan aplikasi UPI besar di India. Pelanggan bisa membayar dari aplikasi apa pun."
+            },
+            {
+              "title": "Enak di ponsel",
+              "text": "Jalan baik di ponsel, tablet, dan komputer. Unduh dan bagikan seketika."
+            },
+            {
+              "title": "Aman dan pribadi",
+              "text": "Semua QR dibuat di perangkat Anda. UPI ID Anda tidak pernah sampai ke server kami."
+            },
+            {
+              "title": "Unduh dan bagikan",
+              "text": "Unduh QR sebagai gambar atau salin tautan dalam UPI. Pakai di mana saja."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "intro": "Ikuti langkah sederhana ini untuk membuat kode QR UPI:",
+          "steps": [
+            "Masukkan UPI ID Anda (misalnya namaanda@upi)",
+            "Kalau mau, tambahkan jumlah pembayaran",
+            "Tambahkan catatan rujukan (boleh dikosongkan)",
+            "Unduh kode QR-nya atau salin tautan UPI",
+            "Bagikan ke pelanggan atau pasang di toko"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Di mana kode QR UPI bisa dipakai?",
+          "items": [
+            "Pasang di rumah makan, kafe, atau toko Anda",
+            "Tambahkan ke faktur atau struk Anda",
+            "Bagikan lewat WhatsApp atau media sosial",
+            "Sertakan di dalam email",
+            "Cetak dan tempel di paket antaran"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat alat usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Pembuat faktur"
+            },
+            {
+              "label": "Kalkulator GST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pemisah QR UPI tanpa MDR",
+      "shortDescription": "Pecah pembayaran besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak dikenai MDR maupun biaya interchange.",
+      "seo": {
+        "title": "Pemisah QR UPI tanpa MDR — pecah tagihan | Setu",
+        "description": "Pecah tagihan besar menjadi beberapa kode QR UPI di bawah ₹2.000 agar tidak ada interchange atau MDR. Gratis, tanpa pendaftaran, dibuat di perangkat Anda.",
+        "keywords": [
+          "UPI tanpa MDR",
+          "pemisah QR UPI",
+          "memecah tagihan jadi QR",
+          "menghindari biaya MDR",
+          "batas UPI 2000 interchange",
+          "penagihan tanpa MDR"
+        ],
+        "ogTitle": "Pemisah QR UPI tanpa MDR",
+        "ogDescription": "Pecah tagihan besar menjadi beberapa kode QR UPI di bawah ₹2.000 dan tagih seluruh jumlahnya tanpa membayar MDR."
+      },
+      "hero": {
+        "headline": "Pemisah QR UPI tanpa MDR",
+        "subheadline": "Pecah tagihan besar menjadi beberapa kode QR di bawah ₹2.000 dan terima seluruh jumlahnya tanpa kehilangan sebagian ke MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana memecah tagihan menghindari MDR?",
+            "answer": "MDR UPI hanya berlaku di atas ₹2.000 per transaksi, dan saat itu atas seluruh nilai, bukan hanya kelebihannya. Tagihan ₹7.500 yang diambil sebagai satu pembayaran melewati batas itu dan dikenai biaya atas ₹7.500 penuh, tetapi diambil sebagai empat kode QR masing-masing ₹2.000 atau kurang, setiap transaksi tetap di bawah ambang dan tidak ada biaya."
+          },
+          {
+            "question": "Mengapa nilai bawaannya ₹1.999 dan bukan ₹2.000?",
+            "answer": "₹2.000 adalah batasnya itu sendiri. Menaruh plafon satu rupee di bawahnya membuat setiap transaksi jelas berada di bawah ambang, bukan tepat di atasnya, sehingga tidak ada perdebatan soal bagaimana suatu bank akuirer membulatkan atau menafsirkan batas tersebut. Anda bisa mengubah angkanya bila mau."
+          },
+          {
+            "question": "Apakah ID UPI saya dikirim ke server Setu?",
+            "answer": "Tidak. Setiap kode QR dibuat di peramban Anda, dan ID UPI Anda hanya disimpan di penyimpanan lokal perangkat Anda sendiri agar tersedia pada kesempatan berikutnya. Tidak ada apa pun tentang tagihan yang sampai ke server kami."
+          },
+          {
+            "question": "Apakah pembayaran UPI dari rekening bank tetap kena MDR?",
+            "answer": "Sampai ₹2.000 tidak. Mulai 15 Oktober 2026, pembayaran UPI ke pedagang di atas ₹2.000 dikenai MDR 0,4% atas seluruh nilai transaksi, dengan plafon ₹300. Debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula pedagang yang menerima kurang dari ₹1 lakh per bulan melalui QR UPI — jadi periksa apakah biaya itu berlaku bagi Anda sebelum memecah apa pun."
+          },
+          {
+            "question": "Apakah memecah tagihan seperti ini diperbolehkan?",
+            "answer": "Menagih beberapa pembayaran terpisah dari seorang pelanggan adalah praktik dagang biasa, dan tidak ada yang di sini melewati kendali sistem pembayaran. Namun perjanjian dengan bank akuirer berbeda-beda, dan sebagian melarang menyusun transaksi dengan sengaja untuk menghindari biaya. Periksa perjanjian pedagang Anda sendiri sebelum menjadikannya kebiasaan."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Mengapa ini berhasil",
+          "paragraphs": [
+            "Mulai 15 Oktober 2026, pembayaran UPI ke pedagang dikenai MDR 0,4% — tetapi **hanya atas transaksi di atas ₹2.000**, dan saat itu atas seluruh nilai bukan hanya kelebihannya, dengan plafon ₹300 per transaksi. Pada ₹2.000 atau di bawahnya tidak ada MDR sama sekali. Debit RuPay dan mandat UPI Autopay tetap dikecualikan, begitu pula pedagang yang menerima kurang dari ₹1 lakh per bulan melalui QR UPI.",
+            "Ambang itu berlaku per transaksi, bukan per pelanggan atau per hari. Tagihan ₹7.500 yang ditagih sekaligus berada di atasnya dan dikenai biaya atas ₹7.500 penuh, ditambah GST 18% atas biaya tersebut. ₹7.500 yang sama bila ditagih sebagai empat kode QR sebesar ₹1.999, ₹1.999, ₹1.999 dan ₹1.503 tetap di bawah batas pada setiap bagian, dan seluruh jumlahnya masuk ke Anda.",
+            "Hitung berapa yang Anda bayar hari ini dengan [Kalkulator MDR](/calculators/mdr-calculator), lalu bawa jumlahnya ke sini untuk melihat pembagiannya."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Cara memakainya",
+          "steps": [
+            "Masukkan jumlah total yang perlu Anda tagih",
+            "Biarkan plafon di ₹1.999, atau tetapkan milik Anda sendiri",
+            "Tambahkan ID UPI dan nama usaha Anda",
+            "Tunjukkan setiap kode QR kepada pelanggan secara bergantian, atau bagikan tautan UPI",
+            "Pakai catatan rujukan untuk mencocokkan bagian-bagiannya dengan satu tagihan"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Sebelum menjadikannya kebiasaan",
+          "text": "Menagih beberapa pembayaran terpisah dari seorang pelanggan adalah praktik dagang biasa, dan tidak ada yang di sini melewati kendali apa pun dalam sistem pembayaran. Namun perjanjian dengan bank akuirer berbeda-beda, dan sebagian membatasi penyusunan transaksi dengan sengaja untuk menghindari biaya. Periksa perjanjian pedagang Anda sendiri sebelum mengandalkan ini sehari-hari — dan periksa dulu apakah biayanya memang berlaku bagi Anda, sebab debit RuPay, mandat UPI Autopay dan pedagang di bawah ₹1 lakh per bulan pada QR UPI semuanya sudah dikecualikan."
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "links": [
+            {
+              "label": "Kalkulator MDR"
+            },
+            {
+              "label": "Pembuat QR UPI dinamis"
+            },
+            {
+              "label": "Pembuat faktur"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pembuat menu QR",
+      "shortDescription": "Buat kode QR menu digital — seluruh menu tersimpan di dalam QR, tanpa perlu hosting.",
+      "seo": {
+        "title": "Pembuat menu QR gratis untuk restoran",
+        "description": "Buat kode QR menu digital Anda dalam beberapa menit. Seluruh menu tersimpan di dalam kode QR — tanpa hosting, tanpa langganan, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat menu QR",
+          "kode QR menu digital",
+          "menu QR restoran",
+          "menu QR gratis",
+          "menu tanpa sentuh",
+          "pembuat kode QR menu",
+          "menu digital untuk restoran"
+        ],
+        "ogTitle": "Pembuat menu QR gratis untuk restoran",
+        "ogDescription": "Susun menu Anda, ambil kode QR, cetak. Seluruh menu ada di dalam kode QR — tanpa hosting atau langganan."
+      },
+      "hero": {
+        "headline": "Pembuat menu QR",
+        "subheadline": "Susun menu digital Anda dan dapatkan kode QR siap cetak. Seluruh menu tersimpan di dalam kode QR — tanpa hosting, tanpa langganan, tak ada yang kedaluwarsa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana menu QR bekerja tanpa hosting?",
+            "answer": "Seluruh menu Anda dipadatkan dan disimpan di dalam kode QR itu sendiri. Ketika pelanggan memindainya, ponselnya membuka halaman menu kami, yang membaca data menu dari tautan QR dan menampilkannya seketika. Tidak ada basis data, tidak ada akun, dan tidak ada yang kedaluwarsa."
+          },
+          {
+            "question": "Apakah pembuat menu QR benar-benar gratis?",
+            "answer": "Ya, sepenuhnya gratis tanpa pendaftaran, tanpa langganan, dan tanpa tanda air pada menu Anda. Karena menu ada di dalam kode QR, kami tidak punya biaya hosting yang perlu dibebankan kepada Anda."
+          },
+          {
+            "question": "Bagaimana cara memperbarui menu atau harga?",
+            "answer": "Kembalilah ke halaman ini — menu Anda tersimpan otomatis di peramban Anda. Ubah hidangan atau harganya, unduh kode QR yang baru, lalu gantikan yang sudah dicetak. Perlu diingat, kode QR cetak selalu menampilkan menu saat kode itu dibuat."
+          },
+          {
+            "question": "Berapa banyak item yang masuk dalam satu kode QR?",
+            "answer": "Satu kode QR memuat sekitar 2.900 karakter, dan kami memadatkan menu Anda agar terpakai sebaik mungkin. Biasanya itu cukup untuk 60–100 item, tergantung panjang deskripsi Anda. Meter kapasitas menunjukkan berapa ruang yang tersisa, dan untuk menu yang sangat besar Anda bisa membuat kode QR terpisah untuk makanan dan minuman."
+          },
+          {
+            "question": "Bisakah saya punya kode QR yang tidak berubah saat menu diperbarui?",
+            "answer": "Bisa — justru untuk itulah menu QR premium ada. Menu Anda disimpan daring dan kode QR hanya memuat satu tautan permanen yang pendek, jadi memindainya selalu menampilkan menu terbaru Anda. Ubah harga, tandai sebuah hidangan habis, atau pasang menu musiman, dan kode QR cetak tetap bekerja, sehingga Anda tak perlu mencetak ulang penanda meja. Ini juga menghapus batas ukuran serta menambahkan foto, penanda habis, dan hitungan pindaian harian. Alat gratis di halaman ini menyimpan seluruh menu di dalam kode QR itu sendiri, itulah sebabnya kode QR baru dibuat setiap kali menu berubah."
+          },
+          {
+            "question": "Bisakah saya mengimpor menu dari Excel atau CSV?",
+            "answer": "Bisa. Unggah berkas Excel (.xlsx, .xls) atau CSV dengan kolom Kategori, Nama item, Harga, Deskripsi, dan Jenis (vegetarian/non-vegetarian), lalu seluruh menu Anda terisi sekaligus. Anda juga bisa mengekspor menu saat ini ke Excel, mengubah harga di sana, dan mengimpornya kembali — tanpa mengetik ulang."
+          },
+          {
+            "question": "Apakah data menu saya diunggah ke server?",
+            "answer": "Tidak. Kode QR dibuat sepenuhnya di peramban Anda, dan menu Anda hanya disimpan di penyimpanan lokal peramban. Data menu Anda tidak pernah menyentuh server kami."
+          },
+          {
+            "question": "Apakah pelanggan perlu memasang aplikasi?",
+            "answer": "Tidak perlu aplikasi. Kamera ponsel apa pun atau pemindai QR membuka menu langsung di peramban. Halaman menunya ringan dan cepat dimuat bahkan pada koneksi lambat."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Mengapa memakai pembuat menu QR Setu?",
+          "items": [
+            {
+              "title": "Menu ada di dalam QR",
+              "text": "Seluruh menu Anda dipadatkan ke dalam kode QR itu sendiri. Tanpa basis data, tanpa biaya hosting, tanpa tautan yang berhenti bekerja."
+            },
+            {
+              "title": "Gratis selamanya",
+              "text": "Tanpa pendaftaran, tanpa langganan, tanpa biaya per pindaian. Buat dan cetak ulang sebanyak apa pun kode QR menu yang Anda perlukan."
+            },
+            {
+              "title": "Dibuat untuk menu India",
+              "text": "Penanda vegetarian dan non-vegetarian, harga dalam ₹, serta kategori seperti pembuka, hidangan utama, dan minuman — siap sejak awal."
+            },
+            {
+              "title": "Warna merek Anda",
+              "text": "Pilih warna tema yang cocok dengan restoran Anda. Halaman menu yang dipindai memakainya untuk judul dan penonjolan."
+            },
+            {
+              "title": "Privat sejak rancangannya",
+              "text": "Semuanya terjadi di peramban Anda. Menu Anda disimpan lokal di perangkat Anda dan tidak pernah diunggah ke server kami."
+            },
+            {
+              "title": "Tanpa aplikasi bagi pelanggan",
+              "text": "Pelanggan memindai dengan kamera ponsel dan menu terbuka di peramban — cepat, ringan, dan mengutamakan ponsel."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "steps": [
+            "Masukkan nama restoran Anda dan pilih warna tema",
+            "Tambahkan kategori dan hidangan beserta harga, deskripsi, serta label vegetarian/non-vegetarian",
+            "Menu Anda dipadatkan dan dikemas ke dalam kode QR secara otomatis",
+            "Unduh kode QR siap cetak dan tempatkan di meja, konter, atau pintu",
+            "Pelanggan memindainya dan menu lengkap terbuka seketika — tanpa aplikasi"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Di mana saya bisa memakai menu QR?",
+          "items": [
+            "Penanda meja dan stiker di restoran atau kafe Anda",
+            "Kemasan dapur awan dan kantong pengantaran",
+            "Gerai makanan, truk makanan, dan konter sementara",
+            "Bagikan tautan menu langsung di WhatsApp atau Instagram",
+            "Kartu layanan kamar hotel dan menu jamuan"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Perlu kode QR yang tidak pernah berubah?",
+          "intro": "Karena alat gratis ini menyimpan seluruh menu Anda di dalam kode QR, kode baru dibuat setiap kali Anda menyunting menu — dan menu harus muat dalam sekitar 2.900 karakter. Kalau Anda lebih suka mencetak kode QR sekali dan tidak menyentuhnya lagi, menu QR premium menyimpan menu Anda daring dan hanya menaruh satu tautan permanen yang pendek di dalam kode.",
+          "items": [
+            "Kode QR yang sama tetap sah setelah setiap perubahan harga atau hidangan",
+            "Tanpa batas ukuran — tambahkan sebanyak apa pun kategori dan hidangan yang Anda perlukan",
+            "Foto hidangan, penanda habis, dan beberapa menu yang bisa Anda pertukarkan",
+            "Lihat berapa orang yang membuka menu Anda setiap hari"
+          ],
+          "cta": {
+            "label": "Coba menu QR premium"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait",
+          "intro": "Lihat alat usaha kami yang lain:",
+          "links": [
+            {
+              "label": "Pembuat QR UPI dinamis"
+            },
+            {
+              "label": "Pembuat faktur"
+            },
+            {
+              "label": "Kalkulator persentase biaya bahan makanan"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pembuat penawaran",
+      "shortDescription": "Penawaran profesional dengan masa berlaku dan pelacakan status — cetak atau PDF.",
+      "seo": {
+        "title": "Pembuat penawaran gratis — perkiraan harga",
+        "description": "Buat penawaran dan perkiraan harga yang rapi dengan tanggal berlaku, pajak, dan total. Cetak atau simpan sebagai PDF. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat penawaran",
+          "buat penawaran gratis",
+          "pembuat perkiraan harga",
+          "templat penawaran",
+          "format penawaran",
+          "penawaran proforma"
+        ],
+        "ogTitle": "Pembuat penawaran",
+        "ogDescription": "Buat penawaran rapi dengan tanggal berlaku dan total — cetak atau simpan sebagai PDF. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat penawaran",
+        "subheadline": "Penawaran rapi dengan tanggal berlaku dan pemantauan status — cetak atau simpan sebagai PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa bedanya penawaran dengan faktur?",
+            "answer": "Penawaran adalah usulan harga yang dikirim sebelum pekerjaan atau penjualan — ada tanggal berlakunya dan bukan dokumen pajak. Faktur adalah tagihan yang dibuat sesudahnya. Untuk itu Setu punya Pembuat faktur gratis tersendiri."
+          },
+          {
+            "question": "Bisakah saya tahu penawaran diterima atau tidak?",
+            "answer": "Bisa — penawaran yang tersimpan punya status: draf, terkirim, diterima, atau ditolak. Perbarui saat tawar-menawar berjalan."
+          },
+          {
+            "question": "Apakah ia memakai lagi data usaha dan pelanggan saya?",
+            "answer": "Ya. Hubungkan ruang kerja Setu Anda, lalu data usaha, pelanggan tersimpan, dan produk terisi sendiri — tak ada yang perlu diketik ulang."
+          },
+          {
+            "question": "Bagaimana cara mendapat PDF-nya?",
+            "answer": "Klik Cetak / PDF lalu pilih ‘Simpan sebagai PDF’ di kotak cetak peramban Anda. Semuanya terjadi di perangkat Anda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Profil usaha",
+      "shortDescription": "Simpan detail usaha Anda sekali — setiap alat Setu memakainya secara otomatis.",
+      "seo": {
+        "title": "Profil usaha — satu kali isi untuk semua alat",
+        "description": "Simpan nama usaha, GSTIN, logo, dan data kontak Anda sekali saja — setiap alat Setu memakainya lagi secara otomatis. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "profil usaha",
+          "pengaturan data usaha",
+          "profil GSTIN",
+          "pengaturan logo usaha"
+        ],
+        "ogTitle": "Profil usaha",
+        "ogDescription": "Isi data usaha sekali saja. Kasir, faktur, struk, dan label memakainya lagi secara otomatis."
+      },
+      "hero": {
+        "headline": "Profil usaha",
+        "subheadline": "Atur sekali. Setiap alat Setu di perangkat ini memakainya lagi — tak ada yang menanyakan dua kali."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Mengapa perlu mengatur profil usaha?",
+            "answer": "Supaya Anda tak pernah mengetik data dua kali. Nama, GSTIN, logo, dan alamat Anda tersimpan sekali di perangkat ini, dan setiap alat Setu — kasir, faktur, struk, label — mengisinya sendiri."
+          },
+          {
+            "question": "Di mana profilnya disimpan?",
+            "answer": "Di browser pada perangkat Anda, di dalam ruang kerja Setu pribadi Anda. Tanpa pendaftaran, tanpa cloud, dan Anda bisa mengekspor atau menghapusnya kapan saja."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat struk",
+      "shortDescription": "Rancang struk, isi transaksi, lalu cetak — POS browser pun mencetak dengan rancangan yang sama.",
+      "seo": {
+        "title": "Pembuat struk gratis — rancang dan cetak",
+        "description": "Rancang struk toko Anda — logo, warna, kepala, dan kaki — lalu isi satu penjualan dan cetak. Rancangan yang sama juga tercetak dari kasir Setu.",
+        "keywords": [
+          "pembuat struk",
+          "buat struk",
+          "templat struk termal",
+          "rancangan struk 80mm",
+          "cetak struk online",
+          "templat struk kasir"
+        ],
+        "ogTitle": "Pembuat struk",
+        "ogDescription": "Rancang struk bermerek Anda, isi satu penjualan dan cetak — rancangannya dipakai lagi di alat-alat Setu. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat struk",
+        "subheadline": "Rancang struk Anda, isi satu penjualan dan cetak — rancangan yang sama juga tercetak dari kasir."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Di mana templat struk yang saya simpan bisa dipakai?",
+            "answer": "Templat tersimpan di ruang kerja Setu Anda pada perangkat ini. Kasir berbasis browser bisa mencetak tagihan dengan templat itu — rancang sekali di sini, tanpa merancang ulang atau menyalin."
+          },
+          {
+            "question": "Ukuran kertas apa saja yang didukung?",
+            "answer": "Termal 80mm dan 58mm (ukuran rol struk yang umum) serta A4."
+          },
+          {
+            "question": "Apakah pratinjau menampilkan data usaha saya yang sebenarnya?",
+            "answer": "Ya — hubungkan ruang kerja Anda, lalu pratinjau langsung memakai nama usaha, logo, alamat, dan GSTIN Anda yang sebenarnya."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat barcode",
+      "shortDescription": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF.",
+      "seo": {
+        "title": "Pembuat barcode gratis — EAN-13 dan QR",
+        "description": "Buat barcode EAN-13, Code 128, dan QR secara gratis. Pakai produk yang sudah Anda simpan, unduh sebagai PNG atau PDF. Jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat barcode",
+          "pembuat barcode gratis",
+          "pembuat EAN-13",
+          "pembuat Code 128",
+          "barcode produk",
+          "buat barcode online"
+        ],
+        "ogTitle": "Pembuat barcode",
+        "ogDescription": "Buat barcode produk di peramban Anda dan unduh sebagai PNG atau PDF. Tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat barcode",
+        "subheadline": "Buat barcode EAN-13, Code 128, dan QR — unduh sebagai PNG atau PDF. Jalan offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Jenis barcode apa saja yang bisa dibuat?",
+            "answer": "EAN-13 (barcode ritel yang baku), Code 128 (lentur, memuat teks apa pun — bagus untuk SKU), dan kode QR (untuk tautan, teks, atau UPI)."
+          },
+          {
+            "question": "Apakah pembuat barcode ini gratis?",
+            "answer": "Ya — sepenuhnya gratis tanpa pendaftaran. Barcode dibuat di perangkat Anda dan tidak pernah dikirim ke server."
+          },
+          {
+            "question": "Bisakah memakai produk yang sudah saya simpan?",
+            "answer": "Bisa. Jika Anda memakai alat Setu lain seperti Kasir berbasis browser di perangkat ini, hubungkan ruang kerja usaha Anda dan buat barcode untuk produk tersimpan dengan sekali klik."
+          },
+          {
+            "question": "Bisa diunduh dalam format apa?",
+            "answer": "PNG untuk pemakaian digital dan PDF untuk dicetak. Keduanya dibuat lokal di peramban Anda."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Bagaimana cara kerjanya?",
+          "steps": [
+            "Pilih jenis barcode — Code 128 untuk SKU, EAN-13 untuk ritel, QR untuk tautan",
+            "Ketik nilainya, atau ambil produk tersimpan dari ruang kerja Anda",
+            "Unduh sebagai PNG atau PDF lalu cetak atau bagikan"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pencetak label harga",
+      "shortDescription": "Cetak label harga dan barcode di lembar A4 atau gulungan termal.",
+      "seo": {
+        "title": "Pencetak label harga gratis — A4, termal",
+        "description": "Cetak label harga dan barcode untuk produk Anda — lembar label A4 (65/40/24 per lembar) atau rol termal. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pencetak label",
+          "pembuat label harga",
+          "cetak label barcode",
+          "label produk A4",
+          "label termal 50x25",
+          "pembuat label rak"
+        ],
+        "ogTitle": "Pencetak label harga",
+        "ogDescription": "Cetak label produk di lembar A4 atau rol termal, langsung dari peramban Anda."
+      },
+      "hero": {
+        "headline": "Pencetak label harga",
+        "subheadline": "Label harga dan barcode di lembar A4 atau rol termal — langsung dari peramban Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Ukuran label apa saja yang didukung?",
+            "answer": "Lembar label A4 dengan 65, 40, atau 24 label per lembar, serta label rol termal 50×25mm dan 38×25mm. Pilih formatnya, tata letaknya menyesuaikan sendiri."
+          },
+          {
+            "question": "Apa saja yang bisa dimuat tiap label?",
+            "answer": "Nama produk, harga, barcode Code 128, dan teks SKU — masing-masing bisa dinyalakan atau dimatikan."
+          },
+          {
+            "question": "Bisakah mencetak label untuk produk yang sudah saya simpan?",
+            "answer": "Bisa. Jika Anda memakai Kasir berbasis browser Setu atau alat Setu lain di perangkat ini, hubungkan ruang kerja Anda dan tambahkan produk ke daftar label dengan sekali klik — nama, harga, dan barcode terisi sendiri."
+          },
+          {
+            "question": "Perlu perangkat lunak khusus?",
+            "answer": "Tidak. Pencetakan memakai kotak cetak biasa di peramban Anda, jadi printer apa pun yang jalan di komputer Anda juga jalan di sini — termasuk printer label termal."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku stok",
+      "shortDescription": "Level stok langsung, penyesuaian, dan riwayat pergerakan — dipakai bersama POS Anda.",
+      "seo": {
+        "title": "Buku stok gratis — stok real-time",
+        "description": "Lihat sisa stok real-time, catat barang masuk dan keluar, dan periksa setiap pergerakan — berbagi data dengan Kasir berbasis browser Setu. Gratis, offline.",
+        "keywords": [
+          "buku stok",
+          "catatan stok",
+          "manajemen stok gratis",
+          "catatan barang masuk keluar",
+          "pencatat stok offline"
+        ],
+        "ogTitle": "Buku stok",
+        "ogDescription": "Lihat sisa stok real-time, catat barang masuk dan keluar, dan periksa setiap pergerakan — berbagi data dengan Kasir berbasis browser Setu. Gratis, offline."
+      },
+      "hero": {
+        "headline": "Buku stok",
+        "subheadline": "Sisa stok real-time, koreksi cepat, dan riwayat pergerakan lengkap — satu sumber data dengan kasir Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Dari mana data stok diambil?",
+            "answer": "Dari ruang kerja bisnis Setu Anda di perangkat ini — produk dan stok yang sama dengan yang dipakai Kasir berbasis browser. Datanya satu: koreksi di sini langsung terlihat di kasir, dan setiap penjualan di kasir muncul di riwayat pergerakan di sini."
+          },
+          {
+            "question": "Apakah data stok saya diunggah ke mana pun?",
+            "answer": "Tidak. Semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, tanpa server."
+          },
+          {
+            "question": "Bisakah buku stok diekspor?",
+            "answer": "Bisa — unduh daftar stok saat ini sebagai berkas CSV yang terbuka di Excel atau Google Sheets."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku pembelian",
+      "shortDescription": "Catat tagihan pemasok dan perbarui stok produk dengan satu konfirmasi.",
+      "seo": {
+        "title": "Buku pembelian gratis — nota pemasok",
+        "description": "Catat nota pembelian atas nama pemasok, hubungkan barang dengan produk Anda, dan stok diperbarui otomatis. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku pembelian",
+          "catatan nota pembelian",
+          "pembelian dari pemasok",
+          "pencatatan pembelian gratis",
+          "buku pembelian stok"
+        ],
+        "ogTitle": "Buku pembelian",
+        "ogDescription": "Catat nota pembelian atas nama pemasok, hubungkan barang dengan produk Anda, dan stok diperbarui otomatis. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku pembelian",
+        "subheadline": "Catat nota pemasok, hubungkan produk, dan perbarui stok dengan satu konfirmasi."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apakah pembelian memperbarui stok produk saya?",
+            "answer": "Ya. Hubungkan baris pembelian dengan produk yang sudah Anda simpan; setelah satu konfirmasi, jumlah yang dibeli ditambahkan ke stok — langsung terlihat di Buku stok dan di Kasir berbasis browser."
+          },
+          {
+            "question": "Apakah data pemasok harus ditulis ulang?",
+            "answer": "Tidak. Pemasok yang tersimpan di Buku pemasok muncul di daftar pilihan di sini. Simpan sekali, pakai selamanya."
+          },
+          {
+            "question": "Apakah data pembelian saya pribadi?",
+            "answer": "Sepenuhnya. Semuanya disimpan di browser pada perangkat Anda — tanpa pendaftaran, tanpa cloud, dan Anda bisa ekspor CSV kapan saja."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku pemasok",
+      "shortDescription": "Semua pemasok Anda di satu tempat — dipakai ulang oleh buku pembelian.",
+      "seo": {
+        "title": "Buku pemasok gratis — kontak dan GSTIN",
+        "description": "Simpan data semua pemasok Anda di satu tempat — kontak, GSTIN, alamat, dan catatan. Gratis, offline, tanpa pendaftaran, dan terpakai di semua alat Setu.",
+        "keywords": [
+          "buku pemasok",
+          "manajemen pemasok gratis",
+          "kontak pemasok",
+          "catatan GSTIN pemasok",
+          "daftar pemasok"
+        ],
+        "ogTitle": "Buku pemasok",
+        "ogDescription": "Simpan data semua pemasok Anda di satu tempat — kontak, GSTIN, alamat, dan catatan. Gratis, offline, tanpa pendaftaran, dan terpakai di semua alat Setu."
+      },
+      "hero": {
+        "headline": "Buku pemasok",
+        "subheadline": "Semua pemasok Anda di satu tempat — disimpan sekali, dipakai setiap alat Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Di mana data pemasok saya disimpan?",
+            "answer": "Di browser pada perangkat Anda, di dalam ruang kerja bisnis Setu Anda. Tidak ada yang diunggah — tanpa pendaftaran, tanpa cloud."
+          },
+          {
+            "question": "Alat apa lagi yang memakai pemasok saya?",
+            "answer": "Buku pembelian memilih pemasok langsung dari buku ini, jadi Anda tidak perlu menulis ulang data pemasok saat mencatat nota pembelian."
+          },
+          {
+            "question": "Bisakah data pemasok diekspor?",
+            "answer": "Bisa — ekspor seluruh buku sebagai CSV yang terbuka di Excel atau Google Sheets kapan saja."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pelacak pengeluaran",
+      "shortDescription": "Lacak pengeluaran per kategori dengan total bulanan dan ekspor CSV.",
+      "seo": {
+        "title": "Pelacak pengeluaran gratis untuk usaha kecil",
+        "description": "Catat pengeluaran usaha per kategori — sewa, gaji, pembelian, tagihan. Total bulanan dan ekspor CSV. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "pelacak pengeluaran",
+          "pencatat pengeluaran usaha gratis",
+          "catatan pengeluaran toko",
+          "buku pengeluaran",
+          "kelola pengeluaran"
+        ],
+        "ogTitle": "Pelacak pengeluaran",
+        "ogDescription": "Catat pengeluaran usaha per kategori — sewa, gaji, pembelian, tagihan. Total bulanan dan ekspor CSV. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pelacak pengeluaran",
+        "subheadline": "Catat setiap pengeluaran usaha per kategori — dan lihat laba sebenarnya di dasbor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apakah pelacak pengeluaran ini benar-benar gratis?",
+            "answer": "Ya: gratis, catatan tanpa batas, tanpa pendaftaran. Data pengeluaran Anda tetap di browser pada perangkat Anda."
+          },
+          {
+            "question": "Bagaimana kaitannya dengan Dasbor laba?",
+            "answer": "Pengeluaran yang Anda catat di sini otomatis masuk ke Dasbor laba Setu, jadi laba dihitung dari pengeluaran nyata — bukan dari perkiraan."
+          },
+          {
+            "question": "Bisakah pengeluaran diekspor?",
+            "answer": "Bisa: ekspor bulan mana pun sebagai berkas CSV yang terbuka di Excel atau Google Sheets."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku kas",
+      "shortDescription": "Kas masuk dan keluar harian dengan saldo awal dan akhir otomatis.",
+      "seo": {
+        "title": "Buku kas gratis — saldo kas harian",
+        "description": "Buku kas harian sederhana untuk toko Anda: catat kas masuk dan keluar, saldo awal dan saldo akhir dihitung sendiri. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku kas",
+          "catatan kas harian",
+          "buku kas masuk keluar",
+          "buku kas toko gratis",
+          "saldo akhir kas",
+          "pembukuan kas sederhana"
+        ],
+        "ogTitle": "Buku kas",
+        "ogDescription": "Buku kas harian sederhana untuk toko Anda: catat kas masuk dan keluar, saldo awal dan saldo akhir dihitung sendiri. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku kas",
+        "subheadline": "Kas masuk, kas keluar, dan saldo akhir tiap hari — buku toko, tanpa bukunya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana saldo awal dan saldo akhir dihitung?",
+            "answer": "Otomatis. Saldo awal suatu hari adalah jumlah berjalan dari semua catatan sebelumnya; saldo akhir menambahkan kas masuk hari itu dan mengurangi kas keluar."
+          },
+          {
+            "question": "Apakah data kas saya pribadi?",
+            "answer": "Ya: semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud. Ekspor seluruh buku sebagai CSV kapan saja."
+          },
+          {
+            "question": "Bisakah dipakai untuk hari-hari sebelumnya?",
+            "answer": "Bisa: pilih tanggal mana pun saat menambah catatan maupun saat melihat. Saldo dihitung ulang di seluruh buku."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Dasbor laba",
+      "shortDescription": "Laba nyata dari penjualan, biaya produk, dan pengeluaran Anda sendiri.",
+      "seo": {
+        "title": "Dasbor laba gratis — laba sebenarnya",
+        "description": "Lihat laba sebenarnya dari usaha Anda: pendapatan dari penjualan kasir, dikurangi harga pokok barang dan pengeluaran nyata. Grafik, rentang tanggal, offline.",
+        "keywords": [
+          "dasbor laba",
+          "kalkulator laba usaha",
+          "pelacak laba toko",
+          "laba bersih usaha kecil",
+          "laba rugi gratis"
+        ],
+        "ogTitle": "Dasbor laba",
+        "ogDescription": "Lihat laba sebenarnya dari usaha Anda: pendapatan dari penjualan kasir, dikurangi harga pokok barang dan pengeluaran nyata. Grafik, rentang tanggal, offline."
+      },
+      "hero": {
+        "headline": "Dasbor laba",
+        "subheadline": "Laba sebenarnya — penjualan dikurangi harga pokok barang dikurangi pengeluaran nyata. Tanpa perkiraan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana laba dihitung?",
+            "answer": "Laba bersih = pendapatan − harga pokok barang − pengeluaran. Pendapatan berasal dari penjualan Kasir berbasis browser Anda, harga pokok dari harga beli tiap produk, dan pengeluaran dari Pelacak pengeluaran — semuanya di perangkat Anda."
+          },
+          {
+            "question": "Apakah data harus dimasukkan dua kali?",
+            "answer": "Tidak. Dasbor membaca penjualan yang sudah Anda tagihkan di kasir dan pengeluaran yang sudah Anda catat di Pelacak pengeluaran. Tidak ada yang perlu diketik ulang, tidak ada yang perlu disetel."
+          },
+          {
+            "question": "Apakah data keuangan saya diunggah?",
+            "answer": "Tidak pernah. Semua perhitungan berlangsung di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, tanpa server."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku piutang pelanggan",
+      "shortDescription": "Buku utang digital — kredit, pembayaran, dan saldo tiap pelanggan.",
+      "seo": {
+        "title": "Buku piutang pelanggan gratis — utang",
+        "description": "Buku utang digital — pantau utang yang Anda berikan dan pembayaran yang masuk per pelanggan, dengan saldo berjalan. Gratis, offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku utang",
+          "buku piutang pelanggan",
+          "catatan utang",
+          "buku kas gratis",
+          "pencatat utang pelanggan",
+          "udhaar khata"
+        ],
+        "ogTitle": "Buku piutang pelanggan",
+        "ogDescription": "Buku utang digital — pantau utang yang Anda berikan dan pembayaran yang masuk per pelanggan, dengan saldo berjalan. Gratis, offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku piutang pelanggan",
+        "subheadline": "Buku utang Anda, versi digital — utang, pembayaran, dan saldo tiap pelanggan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu buku utang digital?",
+            "answer": "Versi digital dari buku utang yang biasa dipakai: catat utang yang Anda berikan ke pelanggan dan pembayaran yang ia lakukan, lalu saldo berjalan tiap pelanggan dihitung otomatis."
+          },
+          {
+            "question": "Apakah alat ini memakai pelanggan yang sudah ada?",
+            "answer": "Ya. Jika Anda memakai Kasir berbasis browser atau Pembuat faktur Setu di perangkat ini, buku ini memakai daftar pelanggan yang sama — tambahkan pelanggan sekali, pakai di mana saja."
+          },
+          {
+            "question": "Apakah buku saya pribadi?",
+            "answer": "Sepenuhnya. Semua data tetap di browser pada perangkat Anda — tanpa pendaftaran, tanpa cloud. Ekspor salinan CSV kapan saja."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku janji temu",
+      "shortDescription": "Pemesanan harian lengkap dengan durasi, status, dan catatan tidak hadir.",
+      "seo": {
+        "title": "Buku janji temu gratis — salon dan klinik",
+        "description": "Catat dan kelola janji temu — tampilan harian, status, durasi, dan yang tak datang. Untuk salon, klinik, konsultan, dan bengkel. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "buku janji temu",
+          "penjadwal janji temu gratis",
+          "buku janji salon",
+          "buku janji klinik",
+          "agenda janji temu online"
+        ],
+        "ogTitle": "Buku janji temu",
+        "ogDescription": "Pengelolaan janji temu per hari untuk salon, klinik, dan jasa. Offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku janji temu",
+        "subheadline": "Pemesanan per hari, durasi, dan status — untuk setiap usaha yang bekerja dengan janji temu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Buku janji temu ini untuk siapa?",
+            "answer": "Untuk usaha apa pun yang bekerja dengan janji temu: salon, klinik, konsultan, bengkel, guru les, pengacara. Tampilan harian, durasi, status, dan catatan yang tak datang."
+          },
+          {
+            "question": "Apakah ia memakai pelanggan yang sudah ada?",
+            "answer": "Ya. Jika Anda memakai alat Setu lain di perangkat ini, hubungkan ruang kerja Anda dan pilih pelanggan dari buku pelanggan bersama, tak perlu diketik ulang."
+          },
+          {
+            "question": "Apakah data janji temu saya pribadi?",
+            "answer": "Ya — semuanya tetap di browser pada perangkat Anda. Tanpa pendaftaran, tanpa cloud, ekspor CSV kapan saja."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat nota kredit",
+      "shortDescription": "Terbitkan nota kredit siap pajak untuk retur dan koreksi tagihan. PDF seketika, tanpa daftar.",
+      "seo": {
+        "title": "Pembuat nota kredit Gratis — PDF Seketika",
+        "description": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "generator nota kredit",
+          "format nota kredit",
+          "nota kredit pajak",
+          "nota kredit atas faktur",
+          "buat nota kredit gratis"
+        ],
+        "ogTitle": "Pembuat nota kredit",
+        "ogDescription": "Buat nota kredit profesional untuk pengembalian dan penyesuaian. Kolom pajak, baris per barang, PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat nota kredit",
+        "subheadline": "Tangani pengembalian dan penyesuaian tagihan secara profesional — rujuk fakturnya, rinci barangnya, cetak PDF-nya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kapan saya perlu menerbitkan nota kredit?",
+            "answer": "Ketika Anda perlu mengurangi nilai faktur yang sudah diterbitkan — barang dikembalikan, tagihan kelebihan, diskon setelah penjualan, atau salah tagih. Nota kredit merujuk faktur aslinya dan mencatat pengurangannya."
+          },
+          {
+            "question": "Apakah nota kredit ini sesuai ketentuan pajak?",
+            "answer": "Nota ini memuat kolom yang biasa diharapkan — NPWP Anda, NPWP pelanggan, rujukan faktur asli, baris per barang beserta tarif pajaknya, dan alasan yang jelas. Laporkan dalam SPT Anda sesuai saran konsultan pajak Anda."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — semuanya tetap di penyimpanan lokal peramban Anda. Tidak ada yang diunggah ke server mana pun, dan tanpa pendaftaran."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat nota debit",
+      "shortDescription": "Buat nota debit untuk retur pembelian, kekurangan kiriman, dan selisih harga. PDF seketika.",
+      "seo": {
+        "title": "Pembuat nota debit Gratis — Retur Pembelian",
+        "description": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "generator nota debit",
+          "format nota debit",
+          "nota retur pembelian",
+          "nota debit pajak",
+          "buat nota debit gratis"
+        ],
+        "ogTitle": "Pembuat nota debit",
+        "ogDescription": "Buat nota debit untuk pengembalian pembelian, kekurangan kiriman, dan selisih harga. Kolom pajak, baris per barang, PDF seketika. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat nota debit",
+        "subheadline": "Mengembalikan barang atau mempersoalkan tagihan pemasok? Terbitkan nota debit yang rapi dan terperinci dalam satu menit."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Nota debit dipakai untuk apa?",
+            "answer": "Pembeli menerbitkan nota debit kepada pemasok untuk mencatat berkurangnya utangnya — barang dikembalikan, kiriman kurang, barang rusak, atau ada selisih harga terhadap tagihan pemasok."
+          },
+          {
+            "question": "Apa bedanya nota debit dan nota kredit?",
+            "answer": "Keduanya dua sisi dari penyesuaian yang sama: pembeli menerbitkan nota debit kepada pemasok, lalu penjual menjawabnya dengan (atau langsung menerbitkan) nota kredit. Mana yang Anda terbitkan bergantung pada posisi Anda dalam transaksi."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — dokumen hanya disimpan di penyimpanan lokal peramban Anda. Tidak ada yang diunggah, dan tidak perlu akun."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat purchase order",
+      "shortDescription": "Sahkan pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syarat dalam satu PO.",
+      "seo": {
+        "title": "Pembuat purchase order Gratis — Buat PO",
+        "description": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "generator purchase order",
+          "buat purchase order",
+          "format purchase order",
+          "template purchase order gratis",
+          "purchase order PDF"
+        ],
+        "ogTitle": "Pembuat purchase order",
+        "ogDescription": "Buat pesanan pembelian profesional lengkap dengan tanggal kirim, baris per barang, dan pajak. Cetak PDF seketika. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat purchase order",
+        "subheadline": "Setujui pembelian ke pemasok secara resmi — barang, harga, tanggal kirim, dan syaratnya dalam satu PO yang rapi."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa pakai purchase order daripada telepon saja?",
+            "answer": "PO menuliskan barang, jumlah, harga, dan tanggal kirim sebelum uang bergerak. Ia mencegah perselisihan \"bukan itu yang saya pesan\" dan memberi Anda dokumen untuk mencocokkan tagihan pemasok."
+          },
+          {
+            "question": "Apa saja yang perlu ada di purchase order?",
+            "answer": "Nomor dan tanggal PO, data pemasok, baris per barang dengan jumlah dan harga yang disepakati, pajak, perkiraan tanggal kirim, serta syarat apa pun — semuanya tercakup di alat ini."
+          },
+          {
+            "question": "Bisakah PO disimpan untuk nanti?",
+            "answer": "Bisa — PO yang disimpan tetap ada di penyimpanan lokal peramban Anda, jadi bisa dicetak ulang kapan saja. Tidak ada yang diunggah ke server."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pembuat sales order",
+      "shortDescription": "Kunci pesanan pelanggan sebelum dikirim — barang, harga, dan tanggal kirim dalam satu dokumen.",
+      "seo": {
+        "title": "Pembuat sales order Gratis — Konfirmasi Pesanan",
+        "description": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "generator sales order",
+          "format sales order",
+          "dokumen konfirmasi pesanan",
+          "buat sales order",
+          "template sales order gratis"
+        ],
+        "ogTitle": "Pembuat sales order",
+        "ogDescription": "Konfirmasi pesanan pelanggan sebelum dikirim dengan sales order profesional — barang, harga, tanggal kirim, PDF. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Pembuat sales order",
+        "subheadline": "Pastikan apa yang dipesan pelanggan — barang, harga, dan tanggal kirim — sebelum apa pun dikirim."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Sales order untuk apa?",
+            "answer": "Ia mengonfirmasi pesanan pelanggan secara tertulis sebelum Anda mengirim atau menagih — mengunci barang, jumlah, harga, dan tanggal kirim supaya kedua pihak sepakat sejak awal."
+          },
+          {
+            "question": "Apa bedanya sales order dengan faktur?",
+            "answer": "Sales order mengonfirmasi pesanan; faktur menagih pembayaran. Biasanya sales order diterbitkan saat pesanan dipastikan, lalu diubah menjadi faktur saat pengiriman (bagian itu ditangani generator faktur gratis kami)."
+          },
+          {
+            "question": "Apakah data saya tetap pribadi?",
+            "answer": "Ya — semuanya tetap di penyimpanan lokal peramban Anda, tidak ada yang diunggah, dan tidak perlu mendaftar."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bagan akun",
+      "shortDescription": "Susun daftar akun dari templat usaha kecil siap pakai — kode, jenis, dan ekspor CSV.",
+      "seo": {
+        "title": "Pembuat Bagan akun Gratis — Online",
+        "description": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "bagan akun",
+          "templat bagan akun",
+          "bagan akun usaha kecil",
+          "kode akun",
+          "daftar akun pembukuan"
+        ],
+        "ogTitle": "Bagan akun",
+        "ogDescription": "Susun bagan akun Anda dari templat siap pakai untuk usaha kecil. Tambah, beri kode, dan kelompokkan akun, lalu ekspor ke CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Bagan akun",
+        "subheadline": "Tulang punggung pembukuan Anda — daftar akun siap pakai yang bisa Anda bentuk sesuai usaha sendiri."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu bagan akun?",
+            "answer": "Daftar induk semua akun tempat usaha Anda mencatat uang — aset, liabilitas, ekuitas, pendapatan, dan beban. Setiap jurnal diposkan ke akun dari daftar ini."
+          },
+          {
+            "question": "Apa arti kode akun?",
+            "answer": "Kebiasaan umum: seri 1000 untuk aset, 2000 liabilitas, 3000 ekuitas, 4000 pendapatan, 5000 beban. Penomorannya menyisakan celah supaya akun baru bisa diselipkan nanti."
+          },
+          {
+            "question": "Apakah ini tersambung ke alat pembukuan lain?",
+            "answer": "Ya — alat jurnal, buku besar, dan neraca saldo di situs ini membaca bagan yang sama secara otomatis, semuanya di dalam peramban Anda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Jurnal umum",
+      "shortDescription": "Pembukuan berpasangan dengan debit/kredit seimbang otomatis. Mengisi buku besar dan neraca saldo.",
+      "seo": {
+        "title": "Alat Jurnal umum Gratis — Pembukuan Berpasangan",
+        "description": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnal umumnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "jurnal akuntansi",
+          "pembukuan berpasangan",
+          "buku jurnal online",
+          "jurnal debit kredit",
+          "buku jurnal gratis"
+        ],
+        "ogTitle": "Jurnal umum",
+        "ogDescription": "Catat jurnal berpasangan dengan penyeimbangan debit dan kredit otomatis. Jurnal umumnya mengisi buku besar dan neraca saldo. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Jurnal umum",
+        "subheadline": "Pembukuan berpasangan yang benar — debit di kiri, kredit di kanan, selalu seimbang."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana debit dan kredit bekerja?",
+            "answer": "Setiap transaksi menyentuh sedikitnya dua akun, dan total debit harus sama dengan total kredit. Membayar sewa ₹10.000 lewat bank: debit Beban Sewa ₹10.000, kredit Bank ₹10.000. Jurnal umum yang tidak seimbang ditolak alat ini."
+          },
+          {
+            "question": "Jurnal umum saya tersimpan di mana?",
+            "answer": "Di sebuah buku jurnal dalam peramban Anda. Alat buku besar dan neraca saldo membaca jurnal yang sama, jadi pembukuan Anda tetap selaras di ketiganya."
+          },
+          {
+            "question": "Bisakah jurnalnya diekspor?",
+            "answer": "Bisa — satu klik mengekspor seluruh jurnal sebagai CSV, siap untuk Excel, Google Sheets, atau akuntan Anda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buku besar",
+      "shortDescription": "Buku besar per akun dengan saldo berjalan, tersusun otomatis dari jurnal Anda.",
+      "seo": {
+        "title": "Alat Buku besar Gratis — Online",
+        "description": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran.",
+        "keywords": [
+          "buku besar",
+          "akun buku besar online",
+          "buku besar saldo berjalan",
+          "buku besar gratis",
+          "buku besar pembukuan"
+        ],
+        "ogTitle": "Buku besar",
+        "ogDescription": "Lihat buku besar akun mana pun beserta saldo berjalan, tersusun sendiri dari jurnal Anda. Ekspor ke CSV. Gratis, jalan offline, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Buku besar",
+        "subheadline": "Pilih sebuah akun, lihat setiap posting beserta saldo berjalannya — tersusun sendiri dari jurnal Anda."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Data buku besar datang dari mana?",
+            "answer": "Dari alat jurnal di situs ini. Setiap jurnal yang diposkan muncul di buku besar tiap akun yang disentuhnya — tanpa mengetik ulang."
+          },
+          {
+            "question": "Apa arti saldo Dr/Cr?",
+            "answer": "Akun aset dan beban biasanya bersaldo debit (Dr); akun liabilitas, ekuitas, dan pendapatan bersaldo kredit (Cr). Buku besar menampilkan saldo berjalan di sisi normal akun tersebut."
+          },
+          {
+            "question": "Bisakah buku besarnya diekspor?",
+            "answer": "Bisa — ekspor buku besar akun mana pun sebagai CSV lengkap dengan tanggal, keterangan, debit, kredit, dan saldo berjalan."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Rekonsiliasi bank",
+      "shortDescription": "Cocokkan rekening koran dengan pembukuan Anda — cek belum cair, setoran dalam perjalanan, biaya.",
+      "seo": {
+        "title": "Alat Rekonsiliasi bank Gratis — Online",
+        "description": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "rekonsiliasi bank",
+          "laporan rekonsiliasi bank",
+          "format rekonsiliasi bank",
+          "mencocokkan rekening bank",
+          "selisih bank dan buku"
+        ],
+        "ogTitle": "Rekonsiliasi bank",
+        "ogDescription": "Rekonsiliasi rekening bank Anda dengan buku kas — cek belum cair, setoran dalam perjalanan, dan biaya bank, sampai kedua saldo cocok. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Rekonsiliasi bank",
+        "subheadline": "Bank menyebut satu angka, buku Anda angka lain — daftarkan pos-pos rekonsiliasinya sampai keduanya sepakat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa saldo bank dan buku saya tidak cocok?",
+            "answer": "Soal waktu dan yang terlewat: cek yang Anda terbitkan tapi belum cair, setoran yang belum dikreditkan bank, biaya dan bunga yang belum Anda catat. Masing-masing adalah satu pos rekonsiliasi."
+          },
+          {
+            "question": "Seberapa sering perlu rekonsiliasi?",
+            "answer": "Paling sedikit sebulan sekali, saat rekening koran datang. Usaha yang sibuk merekonsiliasi tiap minggu — makin cepat Anda menemukan salah catat atau catatan yang hilang, makin mudah membetulkannya."
+          },
+          {
+            "question": "Bagaimana kalau selisihnya masih ada setelah disesuaikan?",
+            "answer": "Periksa angka yang tertukar posisinya (selisih yang habis dibagi 9 adalah tandanya yang khas), catatan ganda, atau transaksi yang masuk ke sisi yang salah. Alat ini menampilkan selisih sisanya secara langsung sambil Anda menambahkan pos."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Penganalisis rekening koran",
+      "shortDescription": "Analisis, klasifikasikan, dan periksa rekening koran secara privat di browser Anda."
+    },
+    {
+      "name": "Neraca saldo",
+      "shortDescription": "Tersusun otomatis dari jurnal — saldo bersih tiap akun, dijumlah dan diperiksa.",
+      "seo": {
+        "title": "Pembuat Neraca saldo Gratis — Online",
+        "description": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "neraca saldo",
+          "format neraca saldo",
+          "neraca saldo online",
+          "pemeriksaan debit kredit",
+          "neraca saldo pembukuan"
+        ],
+        "ogTitle": "Neraca saldo",
+        "ogDescription": "Neraca saldo yang tersusun sendiri dari jurnal Anda — saldo bersih debit atau kredit tiap akun, dijumlahkan dan diperiksa. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Neraca saldo",
+        "subheadline": "Saldo bersih tiap akun di sisi debit atau kreditnya — dijumlahkan, diperiksa, dan siap diekspor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu neraca saldo?",
+            "answer": "Daftar semua akun yang saldonya bukan nol, ditampilkan di sisi debit atau kreditnya. Kalau jurnal berpasangan Anda benar, total debit sama dengan total kredit."
+          },
+          {
+            "question": "Angkanya dari mana?",
+            "answer": "Dari alat jurnal di situs ini — neraca saldo dihitung ulang sendiri dari jurnal yang Anda catat, mengikuti bagan akun Anda."
+          },
+          {
+            "question": "Bagaimana kalau tidak seimbang?",
+            "answer": "Dengan alat ini semestinya selalu seimbang, karena jurnal yang tidak seimbang tidak bisa dicatat. Kalau Anda mengimpor atau menyunting data di tempat lain, spanduk selisih memberi tahu seberapa jauh kedua sisi berbeda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Laporan laba rugi",
+      "shortDescription": "Susun laporan laba rugi — dari pendapatan ke laba bersih dengan margin langsung. PDF atau CSV.",
+      "seo": {
+        "title": "Laporan laba rugi Gratis — Pembuat P&L",
+        "description": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis.",
+        "keywords": [
+          "laporan laba rugi",
+          "pembuat laporan laba rugi",
+          "laporan laba rugi online",
+          "format laba rugi",
+          "template P&L gratis"
+        ],
+        "ogTitle": "Laporan laba rugi",
+        "ogDescription": "Susun laporan laba rugi — pendapatan, harga pokok, beban, serta laba kotor, operasional, dan bersih beserta marginnya. Cetak PDF atau ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Laporan laba rugi",
+        "subheadline": "Pendapatan di atas, laba bersih di bawah, dan setiap langkah di antaranya — margin dihitung langsung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa saja yang masuk laporan laba rugi?",
+            "answer": "Pendapatan, dikurangi harga pokok penjualan (laba kotor), dikurangi beban operasional (laba operasional), ditambah pendapatan lain, dikurangi pajak — sisanya laba bersih. Alat ini menghitung setiap tingkat sambil Anda mengetik."
+          },
+          {
+            "question": "Apa bedanya margin kotor dan margin bersih?",
+            "answer": "Margin kotor menunjukkan seberapa untung produk inti Anda sebelum biaya tetap; margin bersih menunjukkan apa yang benar-benar tersisa setelah semuanya. Margin kotor sehat tapi bersihnya tipis menunjuk ke biaya tetap."
+          },
+          {
+            "question": "Bisakah laporannya dicetak atau dibagikan?",
+            "answer": "Bisa — cetak lembar A4 yang rapi (atau simpan sebagai PDF dari dialog cetak) dan ekspor angka-angkanya sebagai CSV. Datanya tetap di peramban Anda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Neraca",
+      "shortDescription": "Aset, liabilitas, dan ekuitas dengan pemeriksaan keseimbangan langsung. Cetak A4 dan ekspor CSV.",
+      "seo": {
+        "title": "Pembuat Neraca Gratis — Online",
+        "description": "Susun neraca dengan aset lancar dan tetap, liabilitas, serta ekuitas. Pemeriksaan keseimbangan langsung, cetak A4, ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "pembuat neraca",
+          "format neraca",
+          "neraca online gratis",
+          "aset liabilitas ekuitas",
+          "neraca usaha kecil"
+        ],
+        "ogTitle": "Neraca",
+        "ogDescription": "Susun neraca dengan aset lancar dan tetap, liabilitas, serta ekuitas. Pemeriksaan keseimbangan langsung, cetak A4, ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Neraca",
+        "subheadline": "Apa yang Anda punya, apa yang Anda utang, dan apa yang tersisa bagi pemilik — diperiksa langsung, jadi selalu seimbang."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu neraca?",
+            "answer": "Potret pada satu tanggal: aset (yang dimiliki usaha), liabilitas (yang menjadi utangnya), dan ekuitas (bagian pemilik). Aset harus sama dengan liabilitas ditambah ekuitas."
+          },
+          {
+            "question": "Kenapa neraca saya tidak seimbang?",
+            "answer": "Penyebab paling umum adalah laba ditahan yang terlewat — laba terkumpul dari periode lalu masuk ke ekuitas. Alat ini menunjukkan selisih persisnya supaya Anda bisa menemukan celahnya."
+          },
+          {
+            "question": "Apa bedanya aset lancar dan aset tetap?",
+            "answer": "Aset lancar berubah menjadi kas dalam setahun (kas, piutang, persediaan); aset tetap melayani usaha lebih lama (peralatan, perabot, kendaraan). Liabilitas terbagi dengan cara yang sama menurut kapan jatuh temponya."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Laporan arus kas",
+      "shortDescription": "Arus operasi, investasi, dan pendanaan dari kas awal sampai akhir. Cetak atau ekspor.",
+      "seo": {
+        "title": "Pembuat Laporan arus kas Gratis — Online",
+        "description": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "laporan arus kas",
+          "format arus kas",
+          "arus kas online gratis",
+          "operasi investasi pendanaan",
+          "arus kas usaha kecil"
+        ],
+        "ogTitle": "Laporan arus kas",
+        "ogDescription": "Susun laporan arus kas menurut aktivitas operasi, investasi, dan pendanaan. Dari kas awal sampai kas akhir, cetak PDF, ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Laporan arus kas",
+        "subheadline": "Dari mana kas datang dan ke mana perginya — operasi, investasi, dan pendanaan, dari saldo awal ke saldo akhir."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Kenapa arus kas dipantau terpisah dari laba?",
+            "answer": "Laba itu pendapat, kas itu fakta: usaha yang untung pun bisa kehabisan kas kalau uangnya tertahan di persediaan atau di tagihan yang belum dibayar. Laporan arus kas menunjukkan pergerakan yang sebenarnya."
+          },
+          {
+            "question": "Apa isi tiap bagiannya?",
+            "answer": "Operasi: perdagangan harian (penerimaan dari pelanggan, pembayaran ke pemasok dan gaji). Investasi: membeli atau menjual aset. Pendanaan: pinjaman yang diambil atau dilunasi, modal yang disetor, serta pengambilan pemilik."
+          },
+          {
+            "question": "Bagaimana cara memasukkan arus keluar?",
+            "answer": "Sebagai angka negatif — misalnya −25000 untuk peralatan yang dibeli. Tiap bagian lalu menghitung bersihnya sendiri, dan laporannya berjalan dari kas awal ke kas akhir."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Laporan akun pelanggan",
+      "shortDescription": "Laporan akun per pelanggan — faktur, pembayaran, dan saldo berjalan. Cetak ke PDF.",
+      "seo": {
+        "title": "Pembuat laporan akun pelanggan gratis",
+        "description": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "laporan akun pelanggan",
+          "laporan rekening",
+          "format laporan akun pelanggan",
+          "laporan saldo tertunggak",
+          "laporan debitur"
+        ],
+        "ogTitle": "Laporan akun pelanggan",
+        "ogDescription": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Laporan akun pelanggan",
+        "subheadline": "Setiap faktur, pembayaran, dan penyesuaian satu pelanggan — dengan saldo berjalan yang menutup perdebatan."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan rekening?",
+            "answer": "Ringkasan semua transaksi dengan satu pelanggan dalam satu periode — faktur yang diterbitkan, pembayaran yang diterima, nota kredit yang diberikan — dan berakhir pada saldo yang masih ia tanggung."
+          },
+          {
+            "question": "Kapan laporan akun pelanggan perlu dikirim?",
+            "answer": "Tiap bulan untuk pelanggan kredit tetap, dan langsung saat menagih pembayaran yang telat. Laporan yang jelas menyelesaikan hampir semua percakapan “itu sudah kami bayar”."
+          },
+          {
+            "question": "Bagaimana saldo dihitung?",
+            "answer": "Saldo awal ditambah faktur, dikurangi pembayaran dan nota kredit, berurutan menurut tanggal. Alat ini menghitung ulang saldo berjalan sendiri setiap kali Anda menambah transaksi."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Laporan umur piutang",
+      "shortDescription": "Faktur pelanggan belum dibayar per rentang umur — lancar sampai 90+ hari. Ekspor CSV.",
+      "seo": {
+        "title": "Laporan umur piutang gratis — tunggakan",
+        "description": "Pantau faktur pelanggan yang belum dibayar menurut umur — lancar, 1–30, 31–60, 61–90, dan 90+ hari telat, per pelanggan. Ekspor CSV. Gratis.",
+        "keywords": [
+          "laporan umur piutang",
+          "aging piutang usaha",
+          "aging AR",
+          "laporan faktur telat bayar",
+          "analisis umur debitur"
+        ],
+        "ogTitle": "Laporan umur piutang",
+        "ogDescription": "Pantau faktur pelanggan yang belum dibayar menurut umur — lancar, 1–30, 31–60, 61–90, dan 90+ hari telat, per pelanggan. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Laporan umur piutang",
+        "subheadline": "Siapa berutang berapa dan seberapa telat — dikelompokkan menurut umur agar Anda menagih yang tepat lebih dulu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan umur piutang?",
+            "answer": "Tampilan semua faktur pelanggan yang belum dibayar, dikelompokkan menurut lama keterlambatannya — belum jatuh tempo, 1–30, 31–60, 61–90, dan 90+ hari. Inilah alat baku untuk menentukan prioritas penagihan."
+          },
+          {
+            "question": "Kelompok mana yang ditagih lebih dulu?",
+            "answer": "Yang paling tua. Peluang tertagih turun cepat seiring umur — kajian industri menaksir penerimaan yang diharapkan dari utang lewat 90 hari jauh di bawah nilai nominalnya. Kolom 90+ adalah daftar prioritas Anda."
+          },
+          {
+            "question": "Bagaimana faktur telat memengaruhi usaha?",
+            "answer": "Uang di kelompok 30+ adalah modal kerja yang Anda pinjamkan tanpa bunga, sementara Anda mungkin membayar bunga atas kredit sendiri. Lihat Kalkulator termin pembayaran untuk menghargai diskon pembayaran awal yang menarik kas lebih cepat."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Umur utang usaha",
+      "shortDescription": "Tagihan pemasok belum dibayar dikelompokkan per umur — bayar yang tepat pada waktu yang tepat. Ekspor CSV.",
+      "seo": {
+        "title": "Laporan umur utang usaha gratis",
+        "description": "Pantau nota pemasok yang belum dibayar menurut umur — apa yang jatuh tempo sekarang, apa yang telat, dan siapa dibayar lebih dulu. Ekspor CSV. Gratis.",
+        "keywords": [
+          "umur utang usaha",
+          "laporan utang usaha",
+          "pemantau nota pemasok",
+          "aging kreditur",
+          "laporan utang jatuh tempo"
+        ],
+        "ogTitle": "Umur utang usaha",
+        "ogDescription": "Pantau nota pemasok yang belum dibayar menurut umur — apa yang jatuh tempo sekarang, apa yang telat, dan siapa dibayar lebih dulu. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Umur utang usaha",
+        "subheadline": "Setiap nota pemasok yang belum dibayar, dikelompokkan menurut umur — agar Anda membayar orang yang tepat pada waktu yang tepat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu laporan umur utang usaha?",
+            "answer": "Tampilan semua nota pemasok yang belum dibayar, dikelompokkan menurut lama keterlambatannya. Ia menunjukkan total tanggungan per pemasok dan menandai pembayaran yang berisiko merusak hubungan."
+          },
+          {
+            "question": "Bagaimana memakainya untuk menjadwalkan pembayaran?",
+            "answer": "Lunasi nota tertua lebih dulu untuk menjaga niat baik pemasok dan termin kredit Anda, lalu sesuaikan sisanya dengan posisi kas. Nota yang belum jatuh tempo sering bisa menunggu sampai dekat tanggalnya."
+          },
+          {
+            "question": "Perlukah membayar awal jika pemasok memberi diskon?",
+            "answer": "Sering kali ya — Kalkulator termin pembayaran di situs ini menunjukkan hasil setahunan dari mengambil diskon pembayaran awal, yang kerap mengalahkan menyimpan uang di bank."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Anggaran vs realisasi",
+      "shortDescription": "Rencana dan kenyataan per kategori dengan selisih dan selisih % dihitung langsung. Ekspor CSV.",
+      "seo": {
+        "title": "Anggaran vs realisasi gratis — selisih",
+        "description": "Bandingkan jumlah yang dianggarkan dengan realisasinya per kategori, dengan selisih dan selisih % dihitung langsung. Ekspor CSV. Gratis dan offline.",
+        "keywords": [
+          "anggaran vs realisasi",
+          "laporan selisih",
+          "pelacak anggaran usaha",
+          "analisis selisih anggaran",
+          "perbandingan anggaran bulanan"
+        ],
+        "ogTitle": "Anggaran vs realisasi",
+        "ogDescription": "Bandingkan jumlah yang dianggarkan dengan realisasinya per kategori, dengan selisih dan selisih % dihitung langsung. Ekspor CSV. Gratis dan offline."
+      },
+      "hero": {
+        "headline": "Anggaran vs realisasi",
+        "subheadline": "Rencana berhadapan dengan kenyataan, kategori demi kategori — selisih dihitung dan diberi warna saat Anda mengetik."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu selisih anggaran?",
+            "answer": "Perbedaan antara jumlah realisasi dan anggaran (realisasi − anggaran). Pada baris pengeluaran, selisih positif berarti pemborosan; pada baris pendapatan berarti Anda melampaui rencana."
+          },
+          {
+            "question": "Selisih mana yang perlu ditelusuri?",
+            "answer": "Yang besar dalam rupiah dan yang besar dalam persen — selisih 2% pada biaya terbesar Anda bisa lebih penting daripada 40% pada pos kecil. Lihat kedua kolom."
+          },
+          {
+            "question": "Seberapa sering anggaran vs realisasi perlu ditinjau?",
+            "answer": "Sebulan sekali adalah irama lazimnya: cukup cepat untuk memperbaiki arah, cukup berjarak agar datanya nyata. Simpan lembarnya setiap bulan dan ekspor CSV untuk catatan Anda."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Analisis ABC",
+      "shortDescription": "Kelompokkan persediaan ke kelas A, B, dan C berdasarkan nilai pemakaian tahunan — aturan 80/15/5.",
+      "seo": {
+        "title": "Kalkulator Analisis ABC Gratis",
+        "description": "Kelompokkan stok ke kelas A, B, dan C menurut nilai pemakaian tahunan — aturan 80/15/5, dihitung sendiri. Ekspor CSV. Gratis, tanpa pendaftaran.",
+        "keywords": [
+          "analisis ABC",
+          "klasifikasi persediaan",
+          "metode ABC persediaan",
+          "analisis Pareto persediaan",
+          "pengendalian stok ABC"
+        ],
+        "ogTitle": "Analisis ABC",
+        "ogDescription": "Kelompokkan stok ke kelas A, B, dan C menurut nilai pemakaian tahunan — aturan 80/15/5, dihitung sendiri. Ekspor CSV. Gratis, tanpa pendaftaran."
+      },
+      "hero": {
+        "headline": "Analisis ABC",
+        "subheadline": "Tidak semua stok perlu perhatian yang sama — urutkan barang menurut nilai tahunannya dan kelola kelas A dengan ketat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu analisis ABC?",
+            "answer": "Metode persediaan berdasarkan prinsip Pareto: barang kelas A adalah yang sedikit tapi penting (~80% dari nilai pemakaian), B yang menengah (~15%), dan C yang banyak tapi kecil nilainya (~5%). Tiap kelas mendapat tingkat pengendalian yang sepadan."
+          },
+          {
+            "question": "Bagaimana barang digolongkan?",
+            "answer": "Urutkan barang menurut nilai pemakaian tahunan (jumlah setahun × biaya satuan), ambil persentase kumulatif dari nilai total, lalu potong di 80% (A), 95% (B), dan selebihnya (C) — persis itulah yang dikerjakan alat ini."
+          },
+          {
+            "question": "Apa yang perlu dilakukan untuk tiap kelas?",
+            "answer": "A: pengendalian ketat — hitung stok sering, titik pesan ulang yang cermat, harga hasil negosiasi. B: sedang, tinjau berkala. C: aturan sederhana dan pesanan borongan. Pakai bersama kalkulator titik pesan ulang kami untuk barang kelas A."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Perbandingan pemasok",
+      "shortDescription": "Bandingkan pemasok dari harga, pengiriman, tempo, dan mutu dengan skor berbobot.",
+      "seo": {
+        "title": "Alat perbandingan pemasok gratis",
+        "description": "Bandingkan pemasok dari harga, pengiriman, termin kredit, dan mutu dengan skor berbobot — pemasok bernilai terbaik langsung terlihat. Ekspor CSV. Gratis.",
+        "keywords": [
+          "perbandingan pemasok",
+          "alat perbandingan pemasok",
+          "kartu skor pemasok",
+          "kriteria pemilihan pemasok",
+          "skor berbobot pemasok"
+        ],
+        "ogTitle": "Perbandingan pemasok",
+        "ogDescription": "Bandingkan pemasok dari harga, pengiriman, termin kredit, dan mutu dengan skor berbobot — pemasok bernilai terbaik langsung terlihat. Ekspor CSV. Gratis."
+      },
+      "hero": {
+        "headline": "Perbandingan pemasok",
+        "subheadline": "Harga bukan segalanya — timbang juga pengiriman, kredit, dan mutu, lalu biarkan skor memilih pemasoknya."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Bagaimana cara skor bekerja?",
+            "answer": "Setiap kriteria disamakan skalanya antar pemasok (yang terbaik dapat nilai penuh), dikalikan bobot yang Anda tetapkan, lalu dijumlahkan menjadi skor dari 100. Ubah bobotnya dan peringkat berubah seketika."
+          },
+          {
+            "question": "Bobot apa yang sebaiknya dipakai?",
+            "answer": "Yang paling sakit bila salah. Barang mudah rusak? Beri bobot tinggi pada pengiriman. Kas ketat? Pada termin kredit. Mutu yang dilihat pelanggan? Pada mutu. Nilai bawaan (40/20/15/25) cocok untuk sebagian besar pembelian ritel."
+          },
+          {
+            "question": "Mengapa tidak ambil penawaran termurah saja?",
+            "answer": "Pemasok termurah yang mengirim telat atau memasok mutu buruk justru lebih mahal dalam kehabisan stok, pengembalian, dan pelanggan yang hilang. Skor berbobot membuat pertukaran itu terang, bukan soal perasaan."
+          }
+        ]
+      }
+    }
+  ]
+}

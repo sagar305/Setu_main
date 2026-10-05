@@ -1,0 +1,39 @@
+{
+  "seo": {
+    "title": "Kontakt | Setu Technology: Produkte und Partnerschaft",
+    "description": "Schreiben Sie Setu Technology: Fragen zu den Produkten, Partnerschaftsanfragen oder was für eine Software Ihr Unternehmen als Nächstes braucht.",
+    "keywords": [
+      "Kontakt Setu Technology",
+      "Support Setu Technology"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kontakt",
+    "headline": "Sprechen wir über Ihr Geschäft",
+    "subheadline": "Fragen zu Setu Dine, Partnerschaftsanfragen, oder sagen Sie uns, was Sie als Nächstes brauchen — wir lesen jede Nachricht."
+  },
+  "variants": {
+    "consultancy": {
+      "eyebrow": "Beratung",
+      "headline": "Sprechen wir über Ihre Buchhaltung",
+      "subheadline": "Fragen zu ausgelagerter Buchhaltung, Buchführung oder Lohnabrechnung — oder dazu, welcher Rhythmus und welches Setup zu Ihrem Betrieb passen. Wir lesen jede Nachricht."
+    }
+  },
+  "form": {
+    "fields": [
+      {
+        "label": "Name"
+      },
+      {
+        "label": "E-Mail"
+      },
+      {
+        "label": "Name des Unternehmens"
+      },
+      {
+        "label": "Nachricht"
+      }
+    ],
+    "submitLabel": "Nachricht senden"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "seo": {
+    "title": "Política de privacidade | Setu Technology",
+    "description": "O que a Setu Technology mede e o que nunca vê: suas notas, extratos e dados de faturamento ficam no seu aparelho. Veja também como desativar a medição."
+  },
+  "hero": {
+    "eyebrow": "Jurídico",
+    "headline": "Política de privacidade",
+    "subheadline": "O que medimos, o que deliberadamente não conseguimos ver e como desligar."
+  },
+  "lastUpdated": "Última atualização em 7 de setembro de 2026.",
+  "translationNote": "Esta tradução é oferecida por conveniência. Em caso de divergência com a versão em inglês, prevalece a versão em inglês.",
+  "sections": [
+    {
+      "heading": "A versão curta",
+      "paragraphs": [
+        "As calculadoras e ferramentas deste site fazem o trabalho dentro do seu navegador. Notas, orçamentos, extratos bancários, contas, anotações de pacientes e registros de mensalidades são gravados no armazenamento do seu próprio aparelho e nunca são enviados para nós. Não conseguimos lê-los, não conseguimos recuperá-los para você, e limpar os dados do navegador os apaga de vez.",
+        "Em separado, contamos como o site é usado — que páginas abrem, que botões são clicados — para saber quais ferramentas vale a pena melhorar. Essa medição nunca inclui nada do que você digita."
+      ]
+    },
+    {
+      "heading": "O que registramos",
+      "list": [
+        "As páginas abertas e a página de onde você veio.",
+        "Botões e links clicados — identificados pelo nome que damos a eles no nosso próprio código, como “download invoice PDF”, nunca pelo que mostram na tela.",
+        "Até onde você rolou a página e, aproximadamente, quanto tempo ficou.",
+        "Se o aparelho é um celular ou um computador, e de que país veio a solicitação.",
+        "Um identificador aleatório guardado no seu navegador, para que uma visita repetida seja reconhecida como repetida.",
+        "Mensagens de erro quando algo do site quebra."
+      ]
+    },
+    {
+      "heading": "O que nunca registramos",
+      "list": [
+        "Nada do que for digitado em uma calculadora, gerador ou aplicativo deste site.",
+        "O conteúdo de notas, orçamentos, cardápios, contas, extratos ou registros.",
+        "Arquivos enviados. PDFs de extrato bancário são lidos no seu navegador e nunca chegam até nós.",
+        "Seu nome, telefone ou e-mail, a menos que você mesmo os escreva no formulário de contato ou de demonstração.",
+        "Seu endereço IP. Ele chega ao nosso servidor como parte de qualquer requisição web, é usado só para descobrir o país e nunca é gravado."
+      ]
+    },
+    {
+      "heading": "Quem mais vê",
+      "paragraphs": [
+        "A medição de uso é processada por **PostHog** (analytics), **Google Analytics** (analytics, que grava um cookie no seu navegador) e **Vercel**, que hospeda o site e fornece números de tráfego e desempenho sem cookies. Cada um recebe os eventos descritos acima e nada além disso.",
+        "Quando você envia o formulário de contato ou de demonstração, o que escreveu chega até nós por e-mail via **Resend**. Não vendemos dados a ninguém nem os usamos para publicidade."
+      ]
+    },
+    {
+      "heading": "Por quanto tempo guardamos",
+      "paragraphs": [
+        "Eventos de uso individuais são apagados após 14 meses. Números agregados — visitas por mês, quais ferramentas foram usadas — ficam guardados por tempo indeterminado, porque não contêm nada que identifique alguém. Pedidos de contato e de demonstração ficam como e-mail enquanto pudermos precisar respondê-los."
+      ]
+    },
+    {
+      "heading": "Como desligar",
+      "paragraphs": [
+        "Você pode sair da medição de uso aqui embaixo. Também respeitamos automaticamente as configurações “Do Not Track” e Global Privacy Control do navegador — então, se você já ativou alguma delas, nada aqui está registrando você."
+      ]
+    },
+    {
+      "heading": "Seus direitos",
+      "paragraphs": [
+        "Pela Lei de Proteção de Dados Pessoais Digitais da Índia, de 2023, você pode perguntar quais dados pessoais seus temos, pedir correção ou exclusão e reclamar de como os tratamos. Como a medição de uso está ligada a um identificador aleatório do navegador e não a você, normalmente não conseguimos ligá-la a uma pessoa nem quando pedem — sair da medição acima, ou limpar os dados do site, é o caminho mais rápido.",
+        "Dúvidas e reclamações sobre proteção de dados: [privacy@setutechnology.com](mailto:privacy@setutechnology.com). Respondemos em até 30 dias."
+      ]
+    },
+    {
+      "heading": "Crianças",
+      "paragraphs": [
+        "Estas são ferramentas para tocar um negócio e não se destinam a crianças. Não coletamos conscientemente dados de ninguém com menos de 18 anos."
+      ]
+    },
+    {
+      "heading": "Mudanças",
+      "paragraphs": [
+        "Se esta política mudar, atualizaremos a data no topo desta página. Continuar usando o site depois de uma mudança significa que a política atualizada se aplica.",
+        "Veja também nossos [Termos de uso](/terms)."
+      ]
+    }
+  ]
+}

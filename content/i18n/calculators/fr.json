@@ -1,0 +1,1644 @@
+{
+  "seo": {
+    "title": "Calculateurs gratuits pour restaurants & commerces | Setu",
+    "description": "Calculateurs en ligne gratuits pour les restaurants et petits commerces : GST, marge, taux de marque, seuil de rentabilité, coût matière et prêts.",
+    "keywords": [
+      "calculateurs de gestion",
+      "calculateurs pour restaurants",
+      "calculateur de GST",
+      "calculateur de marge bénéficiaire",
+      "calculateur de coût matière",
+      "calculateur de seuil de rentabilité",
+      "calculateur de mensualité de prêt",
+      "outils de gestion gratuits"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Calculateurs gratuits",
+    "headline": "Des calculateurs pensés pour les exploitants",
+    "subheadline": "Des outils rapides et gratuits pour les chiffres que vous suivez chaque semaine : prix, marges, taxes et plus. Sans inscription, juste des réponses."
+  },
+  "ctaBanner": {
+    "headline": "Envie que les chiffres se suivent tout seuls ?",
+    "subtext": "Setu Dine suit automatiquement ventes, coûts et taxes : moins de temps sur les calculateurs, plus de temps pour votre affaire.",
+    "cta": {
+      "label": "Découvrir Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Prix et rentabilité"
+    },
+    {
+      "name": "Exploitation de restaurant"
+    },
+    {
+      "name": "Exploitation de commerce"
+    },
+    {
+      "name": "Fiscalité et finance"
+    },
+    {
+      "name": "Croissance et marketing"
+    }
+  ],
+  "items": [
+    {
+      "name": "Calculateur de GST",
+      "shortDescription": "Ajoutez ou retirez la GST d'un montant en un clic, pour n'importe quel taux.",
+      "seo": {
+        "title": "Calculateur de GST — ajouter ou retirer la GST | Setu",
+        "description": "Calculateur de GST gratuit : ajoutez la GST à un montant de base ou retirez-la d'un prix final, à n'importe quel taux. Montant de taxe et total immédiats.",
+        "keywords": [
+          "calculateur de GST",
+          "calculateur de GST en ligne",
+          "ajouter la GST",
+          "retirer la GST",
+          "calculateur de montant de GST Inde"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de GST",
+        "headline": "Calculateur de GST",
+        "subheadline": "Ajoutez la GST à un prix de base ou extrayez-la d'un prix final : choisissez le taux et voyez la répartition immédiatement."
+      },
+      "about": {
+        "headline": "À quoi sert un calculateur de GST",
+        "paragraphs": [
+          "La GST revient partout dans le quotidien d'un commerce : annoncer un prix à un client, vérifier la facture d'un fournisseur, ou décider de ce qu'on inscrit sur un ticket. Refaire le calcul à la main pour chaque tranche est lent et se trompe vite, surtout quand on passe d'un taux à l'autre entre 5 %, 12 %, 18 % et 28 %.",
+          "Ce calculateur fonctionne dans les deux sens. Saisissez un montant de base pour voir la GST et le total taxe comprise, ou saisissez un montant final pour voir quels étaient le prix de base et la taxe avant qu'elle soit incluse. C'est le calcul que Setu Dine fait tout seul sur chaque ticket, disponible ici comme outil gratuit et autonome."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de GST",
+        "items": [
+          {
+            "question": "Comment calculer la GST sur un montant ?",
+            "answer": "Multipliez le montant de base par le taux de GST et divisez par 100 pour obtenir la taxe, puis ajoutez-la au montant de base pour le total. Par exemple, ₹1 000 à 18 % de GST ajoute ₹180, soit un total de ₹1 180."
+          },
+          {
+            "question": "Comment retirer la GST d'un prix final pour trouver le prix de base ?",
+            "answer": "Divisez le montant final par (1 + taux de GST/100). Pour un montant final de ₹1 180 à 18 % de GST, le prix de base est ₹1 180 ÷ 1,18 = ₹1 000."
+          },
+          {
+            "question": "Quelles sont les tranches de GST courantes en Inde ?",
+            "answer": "Les tranches les plus courantes sont 5 %, 12 %, 18 % et 28 %, même si certains biens et services en sortent ou en sont exonérés. Vérifiez toujours le taux qui s'applique à ce que vous facturez."
+          },
+          {
+            "question": "Setu Dine calcule-t-il la GST automatiquement ?",
+            "answer": "Oui. Setu Dine embarque un moteur fiscal qui applique la bonne GST sur chaque ticket, vous n'avez donc pas à la calculer à la main commande par commande."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Laissez Setu Dine gérer la taxe sur chaque ticket",
+        "subtext": "Setu Dine applique la bonne GST sur chaque commande automatiquement : aucun calcul à la main, aucune erreur.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de marge bénéficiaire",
+      "shortDescription": "Calculez votre marge bénéficiaire et votre taux de marque à partir du coût et du prix de vente.",
+      "seo": {
+        "title": "Calculateur de marge bénéficiaire — gratuit | Setu",
+        "description": "Calculez la marge bénéficiaire et le taux de marque depuis votre prix de revient et votre prix de vente. Outil gratuit pour commerce et restauration.",
+        "keywords": [
+          "calculateur de marge bénéficiaire",
+          "calculateur de marge",
+          "calculateur de bénéfice",
+          "taux de marque et marge"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de marge",
+        "headline": "Calculateur de marge bénéficiaire",
+        "subheadline": "Saisissez votre prix de revient et votre prix de vente pour voir d'un coup le bénéfice, la marge % et le taux de marque %."
+      },
+      "about": {
+        "headline": "Pourquoi la marge et le taux de marque comptent tous les deux",
+        "paragraphs": [
+          "La marge bénéficiaire vous dit quelle part de votre prix de vente est du bénéfice réel : utile pour vérifier qu'un produit ou un plat vaut encore la peine au prix actuel. Le taux de marque vous dit combien vous avez ajouté au-dessus du coût, ce qu'il faut quand vous fixez un prix de zéro.",
+          "Les deux chiffres se ressemblent sans être identiques : 50 % de marque sur le coût ne fait que 33 % de marge sur le prix de vente. Ce calculateur affiche les deux ensemble, pour revoir vos décisions de prix sans les confondre."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de marge",
+        "items": [
+          {
+            "question": "Quelle est la formule de la marge bénéficiaire ?",
+            "answer": "Marge % = (Prix de vente − Prix de revient) ÷ Prix de vente × 100. Elle mesure le bénéfice en pourcentage du prix de vente."
+          },
+          {
+            "question": "Quelle différence entre marge et taux de marque ?",
+            "answer": "La marge, c'est le bénéfice divisé par le prix de vente ; le taux de marque, c'est le bénéfice divisé par le coût. Même bénéfice, dénominateur différent : un montant donné produit donc un taux de marque supérieur à la marge."
+          },
+          {
+            "question": "Quelle marge viser pour une petite entreprise ?",
+            "answer": "Cela varie beaucoup selon le secteur : la restauration tourne souvent autour de 10 à 15 % de marge nette, et dans le commerce cela dépend de la catégorie. Comparez à vos propres chiffres passés et aux repères de votre métier plutôt qu'à un objectif universel."
+          },
+          {
+            "question": "Faut-il fixer ses prix à la marge ou au taux de marque ?",
+            "answer": "La plupart des entreprises fixent le prix en appliquant une marque sur le coût, puis vérifient que la marge obtenue atteint leur objectif. Regarder les deux évite de laisser sous-tarifés des articles qui paraissent corrects selon une mesure et pas selon l'autre."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Voyez vos vraies marges, sans rien calculer",
+        "subtext": "Setu Dine suit ensemble le coût et les ventes : vous connaissez votre marge sans faire le calcul vous-même.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de taux de marque",
+      "shortDescription": "Trouvez le prix de vente nécessaire pour atteindre un taux de marque cible sur le coût.",
+      "seo": {
+        "title": "Calculateur de marque — trouvez votre prix de vente | Setu",
+        "description": "Calculateur de taux de marque gratuit. Saisissez votre prix de revient et la marque visée pour obtenir aussitôt le prix de vente et le bénéfice par unité.",
+        "keywords": [
+          "calculateur de taux de marque",
+          "calculateur de prix de vente",
+          "calcul du prix au coût majoré"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de marque",
+        "headline": "Calculateur de taux de marque",
+        "subheadline": "Saisissez votre coût et la marque % visée pour obtenir le prix de vente à pratiquer."
+      },
+      "about": {
+        "headline": "Fixer ses prix en partant du coût",
+        "paragraphs": [
+          "Fixer un prix en ajoutant une marque fixe au coût est la façon la plus simple de tarifer un nouveau produit ou un plat. Le difficile, c'est de le faire de la même manière sur des dizaines de références ou de recettes, sans ouvrir une calculatrice dans un autre onglet pour chacune.",
+          "Cet outil retourne la question habituelle de la marge : au lieu de vérifier la marge d'un prix déjà choisi, vous indiquez la marque souhaitée et il vous donne le prix à pratiquer, avec le bénéfice par unité à ce prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de marque",
+        "items": [
+          {
+            "question": "Quelle est la formule du taux de marque ?",
+            "answer": "Prix de vente = Prix de revient × (1 + Marque % ÷ 100). Par exemple, un article à ₹100 de coût avec 40 % de marque se vend ₹140."
+          },
+          {
+            "question": "50 % de marque, est-ce la même chose que 50 % de marge ?",
+            "answer": "Non. 50 % de marque sur ₹100 de coût donne un prix de vente de ₹150, soit une marge de 33,3 % et non de 50 %. Marque et marge se calculent sur des bases différentes."
+          },
+          {
+            "question": "Quelle marque appliquer sur des produits de détail ?",
+            "answer": "Cela dépend de la catégorie, de la concurrence et du service ou de la valeur ajoutée qui accompagne le produit. Beaucoup de commerçants démarrent entre 30 et 50 % de marque, puis ajustent selon ce qui se vend et ce que le marché accepte."
+          },
+          {
+            "question": "Peut-on s'en servir pour la carte d'un restaurant ?",
+            "answer": "Oui : entrez le coût de l'assiette comme prix de revient et la marque visée pour obtenir un prix de carte de départ, puis vérifiez-le avec le calculateur de ratio de coût matière."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Tarifez chaque article en confiance",
+        "subtext": "Setu Dine garde ensemble les données de coût et de prix : vous changez vos prix sans perdre la marge de vue.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de seuil de rentabilité",
+      "shortDescription": "Découvrez combien d'unités vous devez vendre pour couvrir vos coûts.",
+      "seo": {
+        "title": "Calculateur de seuil de rentabilité — Gratuit | Setu",
+        "description": "Calculez votre seuil de rentabilité en unités et en chiffre d'affaires. Calculateur gratuit pour restaurants, commerces et petites entreprises.",
+        "keywords": [
+          "calculateur seuil de rentabilité",
+          "seuil de rentabilité en unités",
+          "analyse du point mort"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Seuil de Rentabilité",
+        "headline": "Calculateur de seuil de rentabilité",
+        "subheadline": "Saisissez vos charges fixes, votre prix et votre coût variable unitaire pour voir exactement ce qu'il faut vendre pour couvrir vos coûts."
+      },
+      "about": {
+        "headline": "Connaissez votre chiffre avant le début du mois",
+        "paragraphs": [
+          "Votre seuil de rentabilité est le niveau de ventes où le chiffre d'affaires couvre exactement vos coûts : en dessous vous êtes en perte, au-dessus chaque unité supplémentaire contribue directement au bénéfice. C'est l'un des chiffres les plus utiles en gestion, car il transforme le loyer, les salaires et les autres charges fixes en un objectif de ventes concret.",
+          "Saisissez vos charges fixes mensuelles (loyer, salaires, abonnements), votre coût variable unitaire (ingrédients, emballage, coûts par commande) et votre prix de vente : ce calculateur en déduit les unités et le chiffre d'affaires à atteindre avant d'être en bénéfice."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de seuil de rentabilité",
+        "items": [
+          {
+            "question": "Quelle est la formule du seuil de rentabilité ?",
+            "answer": "Unités au seuil = charges fixes ÷ (prix de vente unitaire − coût variable unitaire). Multipliez le résultat par le prix de vente pour obtenir le chiffre d'affaires au seuil."
+          },
+          {
+            "question": "Qu'est-ce qu'une charge fixe par rapport à une charge variable ?",
+            "answer": "Les charges fixes restent à peu près les mêmes quel que soit le volume de ventes : loyer, salaires, abonnements logiciels. Les charges variables augmentent avec chaque unité vendue : ingrédients, emballage, frais de passerelle de paiement par commande."
+          },
+          {
+            "question": "Pourquoi le seuil de rentabilité compte-t-il pour un nouveau restaurant ou commerce ?",
+            "answer": "Il transforme vos frais généraux en objectif de ventes quotidien ou mensuel, ce qui rend bien plus facile de juger si un emplacement, un prix carte ou un effectif est réaliste avant de s'engager."
+          },
+          {
+            "question": "Qu'est-ce que la marge sur coûts variables ?",
+            "answer": "C'est le prix de vente moins le coût variable unitaire : ce que chaque vente apporte pour couvrir les charges fixes. Plus elle est élevée, moins il faut vendre d'unités pour atteindre le seuil."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Suivez vos ventes face au seuil, chaque jour",
+        "subtext": "Setu Dine vous donne des données de ventes en temps réel : vous savez toujours où vous en êtes par rapport à vos chiffres.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de ratio de coût matière",
+      "shortDescription": "Vérifiez si le coût des ingrédients d'un plat reste sain par rapport à son prix au menu.",
+      "seo": {
+        "title": "Calculateur de ratio de coût matière pour restaurants | Setu",
+        "description": "Calculateur gratuit du pourcentage de coût matière. Saisissez le coût des ingrédients et le prix carte pour voir le ratio et la marge par plat.",
+        "keywords": [
+          "calculateur coût matière",
+          "pourcentage coût matière",
+          "coût matière restaurant",
+          "calculateur prix carte"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Coût Matière",
+        "headline": "Calculateur de ratio de coût matière",
+        "subheadline": "Saisissez le coût des ingrédients d'un plat et son prix carte pour voir son pourcentage de coût matière et la marge par assiette."
+      },
+      "about": {
+        "headline": "Le chiffre que chaque prix carte devrait valider",
+        "paragraphs": [
+          "Le pourcentage de coût matière est la part du prix carte d'un plat qui part dans ses ingrédients. La plupart des restaurants cherchent à le tenir entre 28 % et 35 %, même si cela varie selon la cuisine, le format et la main-d'œuvre qu'un plat demande face au coût de la matière première.",
+          "Passez chaque plat de votre carte dans ce calculateur quand vous fixez les prix ou quand le coût des ingrédients bouge. Un plat dont le ratio est très en dehors de votre cible demande un changement de prix, un changement de recette, ou il est volontairement positionné en produit d'appel — mais mieux vaut savoir lequel des trois."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de coût matière",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le pourcentage de coût matière ?",
+            "answer": "Coût matière % = (coût des ingrédients ÷ prix de vente carte) × 100. Un plat à ₹70 d'ingrédients vendu ₹280 affiche un coût matière de 25 %."
+          },
+          {
+            "question": "Quel pourcentage de coût matière viser en restauration ?",
+            "answer": "La plupart des établissements, service à table ou rapide, visent 28-35 %, mais les produits haut de gamme, les boissons et la boulangerie peuvent se situer en dessous ou au-dessus et rester rentables une fois la main-d'œuvre et les frais généraux intégrés."
+          },
+          {
+            "question": "Pourquoi mon coût matière est-il plus élevé que prévu ?",
+            "answer": "Les causes habituelles : des portions qui ont grossi avec le temps, des hausses de prix d'ingrédients que la carte n'a pas suivies, du gaspillage en cuisine, ou des recettes jamais correctement chiffrées au départ."
+          },
+          {
+            "question": "Est-ce que cela inclut le coût du personnel ?",
+            "answer": "Non — ce calculateur ne couvre que le coût des matières premières. La main-d'œuvre, l'emballage et les frais généraux doivent être suivis séparément, aux côtés du coût matière, pour fixer les prix définitifs."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Chiffrez chaque plat avec précision, automatiquement",
+        "subtext": "Setu Dine relie les recettes au stock : le coût matière reste juste quand les prix d'ingrédients changent.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de remise",
+      "shortDescription": "Calculez le prix final et l'économie réalisée pour n'importe quelle remise ou offre.",
+      "seo": {
+        "title": "Calculateur de remise — prix final et économie | Setu",
+        "description": "Calculez aussitôt le prix remisé et le montant économisé. Saisissez le prix initial et le pourcentage de remise pour voir le prix final et l'économie totale.",
+        "keywords": [
+          "calculateur de remise",
+          "calculateur de pourcentage de remise",
+          "calculateur de prix soldé"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de remise",
+        "headline": "Calculateur de remise",
+        "subheadline": "Saisissez le prix initial et le pourcentage de remise pour voir le prix final et exactement ce qui est économisé."
+      },
+      "about": {
+        "headline": "Utile des deux côtés du comptoir",
+        "paragraphs": [
+          "Quand vous lancez une promotion ou une offre avec code, il faut connaître le prix final que vous allez réellement encaisser — et ce qu'il coûte en marge. Ce calculateur donne les deux immédiatement, pour n'importe quel pourcentage de remise.",
+          "Il sert aussi à vérifier la remise proposée par un fournisseur sur une grosse commande, ou à répondre au « ça fait combien après la remise ? » d'un client sans sortir la calculatrice du téléphone."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de remise",
+        "items": [
+          {
+            "question": "Comment calculer un prix remisé ?",
+            "answer": "Montant de la remise = Prix initial × Remise % ÷ 100. Prix final = Prix initial − Montant de la remise. Un article à ₹500 remisé de 20 % fait économiser ₹100, soit un prix final de ₹400."
+          },
+          {
+            "question": "Quel effet une remise a-t-elle sur ma marge ?",
+            "answer": "La remise baisse votre prix de vente sans baisser votre coût : elle sort donc directement de la marge. Avant de lancer une promotion, vérifiez la marge sur le prix remisé dans le calculateur de marge pour confirmer que cela vaut encore la peine."
+          },
+          {
+            "question": "Peut-on cumuler deux remises ?",
+            "answer": "Appliquez-les l'une après l'autre plutôt que d'additionner les pourcentages : 20 % puis 10 % de plus ne font pas 30 % au total. Passez la première remise dans le calculateur, puis repassez le résultat avec la seconde."
+          },
+          {
+            "question": "Setu Dine applique-t-il seul remises et codes à l'encaissement ?",
+            "answer": "Oui. Setu Dine gère des codes et des remises paramétrables qui s'appliquent d'eux-mêmes sur le ticket : l'équipe n'a pas à calculer les offres à la main au comptoir."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Lancez vos offres sans calcul à la main",
+        "subtext": "Setu Dine applique codes et remises automatiquement à l'encaissement, chaque fois.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de mensualité de prêt",
+      "shortDescription": "Estimez votre mensualité, les intérêts totaux et le coût total d'un prêt professionnel.",
+      "seo": {
+        "title": "Calculateur de mensualité de prêt — gratuit | Setu",
+        "description": "Calculateur gratuit de mensualité de prêt professionnel. Saisissez le montant, le taux et la durée pour voir la mensualité, les intérêts et le total dû.",
+        "keywords": [
+          "calculateur de mensualité",
+          "calculateur de prêt professionnel",
+          "calculateur d'échéance",
+          "simulateur de prêt"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de mensualité",
+        "headline": "Calculateur de mensualité de prêt",
+        "subheadline": "Saisissez le montant, le taux d'intérêt et la durée pour voir votre mensualité, les intérêts totaux et le total remboursé."
+      },
+      "about": {
+        "headline": "Connaître le chiffre mensuel avant de signer",
+        "paragraphs": [
+          "Qu'il s'agisse d'un prêt de trésorerie, du financement d'un équipement ou d'une ligne de crédit pour ouvrir un nouvel établissement, la mensualité est le chiffre qui se présente réellement devant votre trésorerie chaque mois. Comparer des offres sur le seul taux d'intérêt peut tromper dès que la durée et les frais de dossier entrent en jeu.",
+          "Saisissez le montant, le taux annuel et la durée pour obtenir la mensualité selon la formule classique du capital restant dû, ainsi que les intérêts totaux payés sur la vie du prêt — pratique pour mettre deux offres côte à côte."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de mensualité",
+        "items": [
+          {
+            "question": "Quelle est la formule de la mensualité ?",
+            "answer": "Mensualité = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), où P est le montant du prêt, r le taux mensuel (taux annuel ÷ 12 ÷ 100) et n le nombre de mensualités."
+          },
+          {
+            "question": "Les frais de dossier sont-ils inclus ?",
+            "answer": "Non : le calcul ne porte que sur le capital, le taux et la durée. Ajoutez séparément les frais de dossier et autres coûts quand vous comparez le coût réel de plusieurs offres."
+          },
+          {
+            "question": "Le taux à saisir est-il celui annoncé par la banque ?",
+            "answer": "Utilisez le taux annuel tel que le prêteur l'annonce. Si on vous annonce un taux fixe sur le capital initial plutôt qu'un taux sur capital restant dû, la mensualité réelle différera de celle affichée ici, car les intérêts portent alors sur tout le capital pendant toute la durée."
+          },
+          {
+            "question": "Quel effet une durée plus courte a-t-elle sur les intérêts totaux ?",
+            "answer": "Une durée plus courte signifie une mensualité plus élevée mais nettement moins d'intérêts au total, puisque les intérêts courent moins longtemps sur le capital restant. Une durée plus longue abaisse la mensualité mais augmente les intérêts payés en tout."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous ouvrez un nouvel établissement ? Parlons-en",
+        "subtext": "Discutons de ce qu'il faut pour ouvrir et faire tourner un nouveau point de vente avec Setu Dine en place dès le premier jour.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de rotation des tables",
+      "shortDescription": "Voyez combien de fois chaque table tourne pendant le service et votre durée moyenne de rotation.",
+      "seo": {
+        "title": "Calculateur de rotation des tables — Gratuit | Setu",
+        "description": "Calculateur gratuit de rotation des tables pour restaurants. Saisissez les couverts servis, le nombre de tables et les heures de service pour voir la rotation.",
+        "keywords": [
+          "calculateur rotation des tables",
+          "rotation des tables restaurant",
+          "couverts par table"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Rotation des Tables",
+        "headline": "Calculateur de rotation des tables",
+        "subheadline": "Saisissez les couverts servis, le nombre de tables et les heures de service pour voir votre taux de rotation et la durée moyenne par rotation."
+      },
+      "about": {
+        "headline": "Le chiffre derrière une salle qui a l'air pleine",
+        "paragraphs": [
+          "La rotation des tables indique combien de fois, en moyenne, chaque table a été utilisée pendant un service. C'est une mesure directe de l'efficacité avec laquelle votre salle transforme les places en couverts — et aux heures de pointe, elle compte autant que la fréquentation.",
+          "Saisissez le total des couverts servis, le nombre de tables dont vous disposez et la durée du service : ce calculateur en déduit votre taux de rotation et la durée moyenne d'occupation de chaque table par rotation — pratique pour repérer si des rotations lentes plafonnent votre chiffre d'affaires les soirs chargés."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de rotation des tables",
+        "items": [
+          {
+            "question": "Comment calcule-t-on la rotation des tables ?",
+            "answer": "Rotation des tables = couverts servis ÷ nombre de tables. Si 120 couverts ont été servis sur 20 tables pendant un service, la rotation est de 6 : chaque table a servi 6 fois en moyenne."
+          },
+          {
+            "question": "Quel taux de rotation viser en restauration ?",
+            "answer": "Cela dépend beaucoup du format : la restauration rapide et décontractée vise une rotation élevée (plusieurs rotations par service), alors que la gastronomie assume une rotation basse, des repas plus longs et une dépense par couvert plus forte. Comparez-vous à votre propre format et à votre historique."
+          },
+          {
+            "question": "Comment améliorer la rotation sans presser les clients ?",
+            "answer": "Des temps de cuisine plus courts, un encaissement efficace et une équipe formée à repérer les pauses naturelles d'un repas (plutôt qu'à imposer une limite de temps) améliorent la rotation de façon plus durable que de presser les convives."
+          },
+          {
+            "question": "Setu Dine suit-il l'état des tables en temps réel ?",
+            "answer": "Oui. Setu Dine affiche l'état des tables en direct — libre, occupée, encaissée — sur toute la salle, pour que l'équipe sache toujours quelles tables sont libres sans faire le tour."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "L'état de chaque table, en direct",
+        "subtext": "Setu Dine suit l'état des tables en temps réel : votre équipe de salle sait toujours ce qui est libre.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de salaire net",
+      "shortDescription": "Voyez votre salaire net mensuel après cotisations, impôts et autres retenues sur le package.",
+      "seo": {
+        "title": "Calculateur de salaire net — du coût total au net | Setu",
+        "description": "Calculateur de salaire net gratuit. Saisissez le coût annuel par salarié pour estimer le salaire mensuel net après cotisations et retenues usuelles.",
+        "keywords": [
+          "calculateur de salaire net",
+          "salaire net mensuel",
+          "calcul du net à payer",
+          "calculateur de paie"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Salaire Net",
+        "headline": "Calculateur de salaire net",
+        "subheadline": "Saisissez le coût annuel par salarié pour estimer le salaire mensuel net après les retenues usuelles."
+      },
+      "about": {
+        "headline": "Ce qui arrive réellement sur le compte chaque mois",
+        "paragraphs": [
+          "Le coût total employeur n'est presque jamais le montant qui arrive sur un compte bancaire. Les cotisations au fonds de prévoyance, la taxe professionnelle et d'autres retenues sont prélevées avant le versement du salaire, et l'écart entre le coût total et le net surprend beaucoup de nouvelles recrues — et beaucoup de patrons qui budgétisent un poste.",
+          "Ce calculateur donne une estimation rapide du salaire mensuel net à partir du coût annuel, selon les hypothèses usuelles de prévoyance et de taxe professionnelle. Les chiffres réels dépendent de votre structure de rémunération (base, logement, primes) et de la politique de l'entreprise : voyez-le comme une estimation pour planifier, pas comme un bulletin de paie."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de salaire net",
+        "items": [
+          {
+            "question": "Quelle est la différence entre coût total et salaire net ?",
+            "answer": "Le coût total est la dépense globale de l'employeur pour un salarié : salaire de base, primes, part patronale du fonds de prévoyance et autres avantages. Le salaire net est ce qui est effectivement versé sur le compte chaque mois, après retenues comme la part salariale, la taxe professionnelle et le prélèvement de l'impôt sur le revenu le cas échéant."
+          },
+          {
+            "question": "Pourquoi mon net est-il inférieur au coût total divisé par 12 ?",
+            "answer": "Parce que le coût total comprend des contributions patronales qui n'arrivent jamais sur le compte du salarié, et parce que des retenues comme la part salariale, la taxe professionnelle et le prélèvement à la source sont soustraites du brut avant versement."
+          },
+          {
+            "question": "Ce calcul correspond-il exactement à mon bulletin de paie ?",
+            "answer": "C'est une estimation pour planifier, fondée sur des hypothèses usuelles de prévoyance et de taxe professionnelle. Votre net réel dépend de votre structure de rémunération, de votre région et de retenues supplémentaires comme l'impôt prélevé à la source : pour le chiffre exact, reportez-vous à votre bulletin ou au service du personnel."
+          },
+          {
+            "question": "L'impôt sur le revenu est-il pris en compte ?",
+            "answer": "Non — ce calculateur estime uniquement les retenues de prévoyance et de taxe professionnelle. Pour une estimation incluant l'impôt sur le revenu, utilisez le calculateur d'impôt sur le revenu en complément."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous recrutez pour un nouveau point de vente ? Chiffrez d'abord",
+        "subtext": "Setu Dine vous donne les données de ventes et de coût du personnel pour savoir si un recrutement se rentabilise.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur d'impôt sur le revenu",
+      "shortDescription": "Estimez l'impôt sur le revenu selon l'ancien ou le nouveau régime pour l'exercice 2025-26.",
+      "seo": {
+        "title": "Calculateur d'impôt sur le revenu — Inde 2025-26 | Setu",
+        "description": "Calculateur gratuit de l'impôt sur le revenu en Inde pour 2025-26. Comparez l'ancien et le nouveau régime et voyez lequel coûte moins. Estimation seulement.",
+        "keywords": [
+          "calculateur impôt sur le revenu",
+          "calculateur impôt Inde",
+          "ancien vs nouveau régime fiscal",
+          "calcul de l'impôt Inde"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Impôt sur le Revenu",
+        "headline": "Calculateur d'impôt sur le revenu",
+        "subheadline": "Comparez l'impôt de l'ancien et du nouveau régime sur vos revenus de l'exercice 2025-26 et voyez lequel coûte le moins cher."
+      },
+      "about": {
+        "headline": "Ancien ou nouveau régime : décidez chiffres en main",
+        "paragraphs": [
+          "Le système indien de l'impôt sur le revenu permet à la plupart des contribuables de choisir entre l'ancien régime (plus de déductions, taux de tranches plus élevés) et le nouveau (moins de déductions, taux plus bas). Le bon choix dépend entièrement du montant de déductions et d'exonérations que vous demandez réellement : il n'y a pas de réponse universelle.",
+          "Ce calculateur estime l'impôt dû dans les deux régimes pour l'exercice 2025-26 (année d'imposition 2026-27), avec les tranches et la déduction standard que nous avons en référence, y compris la réduction de l'article 87A. Il ne tient pas compte de la surtaxe sur les très hauts revenus, des cas limites de l'allègement marginal ni de toutes les déductions possibles — et les tranches sont généralement révisées chaque année au Budget : vérifiez donc toujours les tranches officielles les plus récentes ou consultez un expert-comptable avant de déclarer ou de choisir un régime."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'impôt sur le revenu",
+        "items": [
+          {
+            "question": "Quelles sont les tranches du nouveau régime en 2025-26 ?",
+            "answer": "Dans le nouveau régime (exercice 2025-26 / année d'imposition 2026-27) : néant jusqu'à ₹4 00 000 ; 5 % de ₹4 00 001 à 8 00 000 ; 10 % de ₹8 00 001 à 12 00 000 ; 15 % de ₹12 00 001 à 16 00 000 ; 20 % de ₹16 00 001 à 20 00 000 ; 25 % de ₹20 00 001 à 24 00 000 ; et 30 % au-delà de ₹24 00 000. Les tranches changent à chaque Budget : confirmez-les dans la notification officielle la plus récente avant de déclarer."
+          },
+          {
+            "question": "Qu'est-ce que la réduction de l'article 87A ?",
+            "answer": "C'est une réduction qui ramène l'impôt à zéro pour les contribuables situés sous un certain seuil de revenu imposable. Dans le nouveau régime 2025-26, elle s'applique en général jusqu'à ₹12 00 000 de revenu imposable, puis s'atténue juste au-dessus via l'allègement marginal. Ce calculateur en applique une version simplifiée et ne modélise pas tous les cas limites."
+          },
+          {
+            "question": "Dois-je choisir l'ancien ou le nouveau régime ?",
+            "answer": "Cela dépend du montant de vos déductions : aide au logement, placements de l'article 80C, intérêts d'emprunt immobilier, etc. Si vos déductions éligibles sont importantes, l'ancien régime est souvent moins coûteux ; si vous déduisez peu, les taux plus bas du nouveau régime l'emportent généralement. Comparez les deux ici avec vos chiffres réels."
+          },
+          {
+            "question": "Cela remplace-t-il l'avis d'un expert-comptable ?",
+            "answer": "Non. C'est une estimation simplifiée, destinée à la planification : elle exclut la surtaxe, certaines subtilités de la contribution additionnelle et plusieurs déductions détaillées. Pour votre déclaration réelle ou un choix de régime avec de l'argent en jeu, vérifiez les tranches en vigueur et consultez un professionnel qualifié."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Occupez-vous de votre affaire, pas de votre tableur fiscal",
+        "subtext": "Setu Dine garde vos données de ventes et de dépenses en ordre, pour que la période fiscale ne soit plus une course.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de prime de fin de service",
+      "shortDescription": "Estimez la prime due selon la loi indienne, à partir du salaire et des années de service.",
+      "seo": {
+        "title": "Calculateur de prime de fin de service | Setu",
+        "description": "Calculateur gratuit de l'indemnité de fin de service en Inde. Saisissez le dernier salaire et les années de service pour estimer le montant dû (loi de 1972).",
+        "keywords": [
+          "calculateur indemnité de fin de service",
+          "calcul gratuité Inde",
+          "loi sur la gratification",
+          "formule de l'indemnité"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Indemnité de Fin de Service",
+        "headline": "Calculateur de prime de fin de service",
+        "subheadline": "Saisissez le dernier salaire perçu et les années de service pour estimer l'indemnité due au départ."
+      },
+      "about": {
+        "headline": "Quel montant est dû, et à quel moment",
+        "paragraphs": [
+          "L'indemnité de fin de service est un versement unique que l'employeur doit aux salariés ayant accompli au moins 5 années de service continu, en vertu de la loi indienne de 1972 sur le paiement de la gratification. Elle se calcule à partir du dernier salaire perçu et du total des années de service, et non des revenus de toute la carrière.",
+          "Ce calculateur applique la formule standard pour les salariés couverts par la loi : utile au salarié qui estime ce qui lui est dû au départ comme au dirigeant qui budgétise l'engagement lié à une équipe ancienne. Le plafond légal est révisé périodiquement, confirmez donc la limite en vigueur avant de retenir ce montant comme solde définitif."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'indemnité",
+        "items": [
+          {
+            "question": "Quelle est la formule de l'indemnité ?",
+            "answer": "Indemnité = (dernier salaire mensuel × 15 × nombre d'années de service) ÷ 26, pour les salariés couverts par la loi. Le salaire désigne ici généralement le salaire de base plus l'indemnité de vie chère."
+          },
+          {
+            "question": "Y ai-je droit ?",
+            "answer": "En général, les salariés ayant accompli 5 années ou plus de service continu chez le même employeur y ont droit, avec quelques exceptions (décès ou invalidité, où la condition des 5 ans ne s'applique pas)."
+          },
+          {
+            "question": "Existe-t-il un plafond ?",
+            "answer": "Oui — la loi fixe un plafond légal pour la part exonérée d'impôt, que le gouvernement révise périodiquement. Vérifiez la limite en vigueur avant de considérer le résultat comme un montant final et plafonné."
+          },
+          {
+            "question": "Si j'ai travaillé 7 ans et 8 mois, comment compte-t-on les années de service ?",
+            "answer": "Selon la loi, une période de plus de 6 mois au-delà d'une année complète est généralement arrondie à l'année suivante. Ainsi, 7 ans et 8 mois sont habituellement comptés comme 8 ans."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Vous préparez votre budget de personnel ?",
+        "subtext": "Setu Dine vous donne les données de ventes pour dimensionner les effectifs et la masse salariale selon ce que votre établissement peut supporter.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de commission des commandes en ligne",
+      "shortDescription": "Voyez votre versement réel après commission de plateforme, emballage et frais de paiement.",
+      "seo": {
+        "title": "Calculateur de Commission de Livraison | Setu",
+        "description": "Calculateur gratuit de commission sur les commandes en ligne pour restaurants. Saisissez le montant, la commission et les autres frais pour voir votre net.",
+        "keywords": [
+          "calculateur commission livraison",
+          "commission plateformes de livraison",
+          "calculateur revenu par commande",
+          "commission des agrégateurs"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Commission des Commandes en Ligne",
+        "headline": "Calculateur de commission des commandes en ligne",
+        "subheadline": "Saisissez le montant de la commande et les frais de la plateforme pour voir exactement ce qu'il vous reste sur une commande en ligne."
+      },
+      "about": {
+        "headline": "Ce qu'une commande en ligne vous rapporte réellement",
+        "paragraphs": [
+          "Les taux de commission affichés racontent rarement toute l'histoire. Une fois ajoutés le coût de l'emballage, les frais de la passerelle de paiement et la taxe sur la commission elle-même, l'écart entre ce que paie le client et ce qui arrive sur votre compte peut atteindre 30 % ou plus.",
+          "Saisissez le montant de la commande et les frais applicables sur votre compte agrégateur pour voir le revenu réel par commande et votre pourcentage net effectif. Faites passer quelques-unes de vos tailles de commande habituelles pour savoir si les commandes en ligne sont aussi rentables que votre salle ou votre vente à emporter, déductions faites."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de commission des commandes en ligne",
+        "items": [
+          {
+            "question": "Comment les plateformes de livraison calculent-elles leur commission ?",
+            "answer": "La plupart prélèvent une commission en pourcentage du montant de la commande et peuvent y ajouter la taxe applicable sur cette commission. Les frais d'emballage et les frais de passerelle de paiement sont généralement distincts et réduisent encore votre revenu."
+          },
+          {
+            "question": "Pourquoi mon revenu réel est-il si inférieur au montant de la commande ?",
+            "answer": "Commission, taxe sur la commission, coût de l'emballage et frais de passerelle sortent du montant de la commande avant votre versement. Sur une commande type, ces déductions cumulées représentent couramment 25 à 35 % du montant, selon la plateforme et la catégorie."
+          },
+          {
+            "question": "Faut-il appliquer des prix différents sur les plateformes de livraison ?",
+            "answer": "Beaucoup de restaurants intègrent effectivement une majoration propre à la livraison dans les prix affichés chez l'agrégateur pour compenser la commission, car la salle et la livraison ont des structures de coûts très différentes. Vérifiez avec ce calculateur si vos prix de livraison actuels vous laissent une marge tenable."
+          },
+          {
+            "question": "Setu Dine peut-il gérer les commandes de plusieurs plateformes ?",
+            "answer": "Oui. Setu Dine peut rassembler les commandes de plusieurs agrégateurs dans une vue unique, pour que votre cuisine n'ait pas à jongler avec une tablette par plateforme."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gérez tous les agrégateurs depuis un seul écran",
+        "subtext": "Setu Dine rassemble les commandes de toutes vos plateformes de livraison dans une seule vue cuisine.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de prix au menu en ligne",
+      "shortDescription": "Trouvez le prix à publier sur les applis de livraison pour conserver votre montant cible après commission et taxes.",
+      "seo": {
+        "title": "Calculateur de prix de menu pour applis de livraison",
+        "description": "Calculateur de prix au menu en ligne gratuit. Indiquez ce que vous voulez toucher et trouvez le prix à afficher qui couvre commission, taxe et frais.",
+        "keywords": [
+          "calculateur de prix de menu Zomato",
+          "calculateur de prix Swiggy",
+          "prix de menu en ligne après commission",
+          "calculateur de tarification pour applis de livraison",
+          "calculateur de commission inversée"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de prix au menu en ligne",
+        "headline": "Calculateur de prix au menu en ligne",
+        "subheadline": "Dites-nous ce que vous voulez réellement toucher sur une commande en ligne, et nous calculons le prix à afficher dans l'appli."
+      },
+      "about": {
+        "headline": "Partez du montant que vous voulez toucher",
+        "paragraphs": [
+          "Si vous affichez en ligne le même prix qu'au comptoir, la commission, la taxe sur cette commission, les frais de paiement et la taxe due sur la vente grignotent le montant avant que vous ne touchiez une roupie : ce qu'il vous reste en ligne finit bien en dessous de votre prix en salle.",
+          "Ce calculateur inverse le calcul habituel de la commission : saisissez ce que vous voulez vraiment garder par plat, ainsi que les frais de votre plateforme, et il détermine le prix affiché qui vous y amène. Utilisez-le chaque fois que vous ajoutez un plat sur une appli ou qu'une plateforme change son palier de commission.",
+          "C'est un modèle simplifié : il suppose que la commission et les frais de paiement s'appliquent au prix affiché et que ce prix inclut déjà la taxe que vous facturez sur le plat. Les contrats des applis diffèrent, donc recoupez le résultat avec un vrai relevé de versement avant de déployer de nouveaux prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les prix de menu en ligne",
+        "items": [
+          {
+            "question": "Pourquoi le prix à afficher est-il plus élevé que mon prix en salle ?",
+            "answer": "Parce que la commission, la taxe sur cette commission, les frais de paiement et la taxe due sur la vente sont déduits du prix affiché avant que vous ne soyez payé. Pour toucher en ligne autant qu'au comptoir, le prix affiché doit absorber toutes ces retenues."
+          },
+          {
+            "question": "La commission porte-t-elle vraiment sur le prix taxes incluses ?",
+            "answer": "Cela dépend de la plateforme et de votre contrat : certaines prélèvent la commission sur la base hors taxe, d'autres sur le prix affiché entier. Ce calculateur suppose que la commission et les frais de paiement s'appliquent au prix affiché, le cas le plus courant et le plus prudent. Vérifiez votre relevé de versement pour savoir ce qui vous concerne."
+          },
+          {
+            "question": "Et si aucun prix affiché ne couvre tous les frais ?",
+            "answer": "Si commission, taxes et frais atteignent ensemble 100% ou plus du prix affiché, aucun prix ne permet d'obtenir le montant visé : le calculateur le signale, pour que vous revoyiez la marge en ligne du plat au lieu de deviner un prix."
+          },
+          {
+            "question": "Setu Dine peut-il synchroniser ces prix avec mes plateformes de livraison ?",
+            "answer": "Oui. Setu Dine permet de gérer les prix du menu pour la salle et plusieurs applis depuis un seul écran : les prix mis à jour partent partout en même temps."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Gérez toutes les applis depuis un seul écran",
+        "subtext": "Setu Dine rassemble les commandes de toutes vos plateformes de livraison dans une seule vue cuisine.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de coût de recette",
+      "shortDescription": "Chiffrez une recette ingrédient par ingrédient pour connaître le vrai coût par portion.",
+      "seo": {
+        "title": "Calculateur de coût de recette — coût par portion",
+        "description": "Calculateur de coût de recette gratuit pour la restauration. Ajoutez ingrédients et quantités pour voir le coût total, le coût par portion et un prix conseillé.",
+        "keywords": [
+          "calculateur de coût de recette",
+          "calcul du coût d'une recette",
+          "calcul des coûts du menu",
+          "calculateur de coût par portion"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de coût de recette",
+        "headline": "Calculateur de coût de recette",
+        "subheadline": "Ajoutez chaque ingrédient et sa quantité pour connaître le coût réel d'une recette, par portion."
+      },
+      "about": {
+        "headline": "Chiffrez toute la recette, pas seulement les ingrédients vedettes",
+        "paragraphs": [
+          "La plupart des erreurs de tarification viennent du fait de chiffrer un plat sur ses 2-3 ingrédients principaux et d'estimer le reste. Huile, épices, garniture et emballage sont minimes séparément, mais ils s'additionnent — et cet écart se multiplie sur des centaines de commandes par mois.",
+          "Ajoutez chaque ingrédient d'une recette avec sa quantité et son coût unitaire pour obtenir un coût total juste et le coût par portion. Une fois le coût réel connu, utilisez-le avec le calculateur de pourcentage de coût matière pour fixer un prix de menu qui protège votre marge."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le coût de recette",
+        "items": [
+          {
+            "question": "Pourquoi chiffrer tous les ingrédients et pas seulement les principaux ?",
+            "answer": "Les petits ingrédients — huile, épices, sauces, garniture — sont peu chers isolément mais s'additionnent dans une recette ; répartis sur des centaines d'assiettes vendues chaque mois, cet écart peut sérieusement éroder la marge s'il n'est jamais compté."
+          },
+          {
+            "question": "Par combien de portions diviser le coût total ?",
+            "answer": "Divisez par le nombre réel de portions ou d'assiettes que donne la recette, pas par le nombre d'ingrédients. Si une préparation en lot sert de base à 10 assiettes, retenez 10 portions."
+          },
+          {
+            "question": "Le coût de main-d'œuvre ou les frais généraux sont-ils inclus ?",
+            "answer": "Non : ce calcul porte uniquement sur le coût matière. Ajoutez la main-d'œuvre et les frais généraux séparément, et prenez-les en compte avec le coût matière pour fixer le prix final."
+          },
+          {
+            "question": "Puis-je l'enregistrer pour chaque plat de ma carte ?",
+            "answer": "Cet outil ne conserve pas les données entre deux sessions : notez le coût par portion de chaque plat au fur et à mesure. Setu Dine peut enregistrer durablement les coûts de recette par plat et les mettre à jour quand les prix des ingrédients changent."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des recettes dont le coût se met à jour tout seul",
+        "subtext": "Setu Dine relie les recettes aux prix actuels des ingrédients : le coût par assiette reste juste sans recalcul manuel.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de coût des boissons",
+      "shortDescription": "Trouvez votre ratio de coût par verre et le bénéfice de chaque boisson servie.",
+      "seo": {
+        "title": "Calculateur de coût des boissons — gestion du bar",
+        "description": "Calculateur de coût des boissons gratuit pour bars et restaurants. Saisissez le coût de la bouteille, la dose et le prix de vente pour voir le coût en %.",
+        "keywords": [
+          "calculateur de coût de dose",
+          "calculateur de coût des spiritueux",
+          "calculateur de coûts de bar",
+          "pourcentage de coût de dose"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de coût des boissons",
+        "headline": "Calculateur de coût des boissons",
+        "subheadline": "Saisissez le coût de la bouteille, la dose servie et le prix de vente pour voir votre coût de dose en % et la marge par verre."
+      },
+      "about": {
+        "headline": "L'équivalent au bar du pourcentage de coût matière",
+        "paragraphs": [
+          "Le coût de dose est au bar ce que le coût matière est à la cuisine : la part du prix de vente d'un verre qui part dans l'alcool lui-même. C'est le chiffre qui dit si vos prix et vos doses sont réellement rentables, surtout quand on compte le nombre de doses que donne une bouteille.",
+          "Saisissez le coût de la bouteille, sa contenance, la dose que vous servez vraiment et le prix de vente par verre pour obtenir le coût de dose en %, la marge par dose et le nombre de doses attendu par bouteille. Repassez vos références les plus vendues dès qu'un fournisseur change un prix."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le coût des spiritueux",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le pourcentage de coût de dose ?",
+            "answer": "Coût de dose % = (coût par dose ÷ prix de vente par dose) × 100, où le coût par dose = coût de la bouteille ÷ (contenance ÷ taille de la dose)."
+          },
+          {
+            "question": "Quel pourcentage de coût de dose viser ?",
+            "answer": "La plupart des bars visent 18-24% sur les spiritueux, avec des variations selon la catégorie : les références premium et artisanales tournent souvent un peu plus haut, en échange d'un prix et d'une valeur perçue supérieurs."
+          },
+          {
+            "question": "Pourquoi mon coût de dose réel ne correspond-il pas à ma cible ?",
+            "answer": "Le sur-dosage est la cause la plus fréquente : même 5-10 ml de plus par verre s'additionnent vite sur une soirée chargée. Des doses irrégulières, les pertes et les verres offerts ou remisés creusent aussi l'écart entre la cible et le réel."
+          },
+          {
+            "question": "Combien de doses dois-je tirer d'une bouteille ?",
+            "answer": "Doses par bouteille = contenance ÷ taille de la dose. Une bouteille standard de 750 ml servie à 30 ml par verre devrait donner 25 doses ; comparez les doses réelles à ce chiffre pour repérer le sur-dosage ou le gaspillage."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Pilotez le bar comme vous pilotez le coût matière",
+        "subtext": "Setu Dine rapproche la consommation des stocks des ventes : sur-dosage et gaspillage ressortent vite.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de partage des pourboires",
+      "shortDescription": "Répartissez équitablement la cagnotte de pourboires par heures, parts ou à parts égales.",
+      "seo": {
+        "title": "Calculateur de partage des pourboires | Setu",
+        "description": "Calculateur gratuit de partage des pourboires. Ajoutez le personnel et les heures ou points pour répartir la cagnotte : à parts égales, aux heures, aux points.",
+        "keywords": [
+          "calculateur partage des pourboires",
+          "cagnotte de pourboires",
+          "partage des pourboires aux heures",
+          "calculateur pourboires restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Partage des Pourboires",
+        "headline": "Calculateur de partage des pourboires",
+        "subheadline": "Ajoutez votre équipe et répartissez une cagnotte de pourboires à parts égales, au prorata des heures travaillées, ou en points/parts."
+      },
+      "about": {
+        "headline": "Un partage des pourboires que l'équipe trouve juste",
+        "paragraphs": [
+          "Partager les pourboires à la main devient vite confus dès qu'il faut tenir compte de durées de service différentes ou de postes différents. Celui qui a fait un double service complet et celui qui a couvert les deux dernières heures ne devraient pas toucher la même part — mais c'est précisément sur la façon de pondérer que naissent la plupart des désaccords.",
+          "Ce calculateur répartit la cagnotte de trois façons : à parts égales entre tous, au prorata des heures travaillées, ou selon un système de points où vous attribuez un poids à chaque poste ou personne. Ajoutez votre équipe, choisissez une méthode, et la répartition se met à jour aussitôt."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de partage des pourboires",
+        "items": [
+          {
+            "question": "Quelle différence entre un partage à parts égales et un partage en points ?",
+            "answer": "À parts égales, la cagnotte est divisée uniformément, sans tenir compte du poste ni des heures. En points, chaque personne reçoit un poids (points ou parts) reflétant son poste, son ancienneté ou ses heures, et la cagnotte est divisée au prorata de ces poids — courant quand la salle et les postes de soutien partagent la même cagnotte."
+          },
+          {
+            "question": "Faut-il inclure la cuisine dans la cagnotte avec la salle ?",
+            "answer": "Les règles et usages du partage des pourboires varient selon la région et la réglementation du travail locale : certains endroits limitent qui peut participer. Vérifiez ce qui est permis là où vous exercez avant de décider qui est éligible."
+          },
+          {
+            "question": "Comment répartir équitablement aux heures travaillées ?",
+            "answer": "Utilisez la méthode « aux heures » : saisissez les heures de chacun pour le service ou la période, et la cagnotte est divisée au prorata, de sorte que celui qui a travaillé deux fois plus longtemps reçoit à peu près le double."
+          },
+          {
+            "question": "Puis-je l'utiliser pour un seul service ou pour les pourboires d'une semaine ?",
+            "answer": "Les deux : saisissez la cagnotte totale de la période que vous répartissez (un service, une journée, une semaine) avec les heures ou les parts correspondant à cette même période."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Paie et pourboires, sans tableur à côté",
+        "subtext": "Setu Dine suit les heures de service et les ventes par membre d'équipe : vous avez toujours les chiffres nécessaires au partage.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de rotation des stocks",
+      "shortDescription": "Découvrez combien de fois votre stock tourne sur une période et combien de jours de stock vous détenez.",
+      "seo": {
+        "title": "Calculateur de rotation des stocks | Setu",
+        "description": "Calculateur gratuit de rotation des stocks pour les commerces. Saisissez le coût des marchandises vendues et le stock moyen pour voir la rotation et les jours.",
+        "keywords": [
+          "calculateur rotation des stocks",
+          "taux de rotation des stocks",
+          "jours de stock",
+          "calculateur rotation marchandises"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Rotation des Stocks",
+        "headline": "Calculateur de rotation des stocks",
+        "subheadline": "Saisissez le coût des marchandises vendues et la valeur moyenne du stock pour voir votre taux de rotation et le nombre de jours de stock détenu."
+      },
+      "about": {
+        "headline": "L'argent immobilisé en rayon est de l'argent indisponible ailleurs",
+        "paragraphs": [
+          "La rotation des stocks indique combien de fois vous écoulez votre stock moyen sur une période donnée. Un taux faible signifie généralement de la trésorerie figée dans des produits qui ne tournent pas ; un taux très élevé peut signaler un risque de rupture. Aucun extrême n'est bon en soi : le bon chiffre dépend de votre catégorie et de la facilité de réapprovisionnement.",
+          "Saisissez le coût des marchandises vendues sur une période (mois ou année) et la valeur moyenne de votre stock sur cette même période pour obtenir votre taux de rotation et le nombre de jours de stock correspondant. Suivez ce chiffre dans le temps plutôt qu'isolément : un taux qui baisse est souvent le premier signe que du stock lent ou dormant s'accumule."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de rotation des stocks",
+        "items": [
+          {
+            "question": "Quelle est la formule du taux de rotation des stocks ?",
+            "answer": "Taux de rotation = coût des marchandises vendues ÷ valeur moyenne du stock, sur la même période. Le stock moyen vaut généralement (stock initial + stock final) ÷ 2."
+          },
+          {
+            "question": "Quel taux de rotation des stocks viser ?",
+            "answer": "Cela varie beaucoup selon la catégorie : le frais et la mode rapide tournent bien plus vite que le meuble ou l'électronique. Comparez votre taux à votre propre historique et aux repères de votre catégorie plutôt qu'à un chiffre universel."
+          },
+          {
+            "question": "Que signifient les « jours de stock » ?",
+            "answer": "C'est le taux de rotation converti en jours : à peu près combien de jours de ventes représente votre stock moyen actuel. Il se calcule par 365 ÷ taux de rotation, et un chiffre qui augmente signale que le stock s'écoule plus lentement qu'avant."
+          },
+          {
+            "question": "Pourquoi ma rotation des stocks baisse-t-elle ?",
+            "answer": "Les causes habituelles : surstockage en anticipation de la demande, accumulation de références qui ne tournent pas, baisse saisonnière de la demande, ou des prix devenus insuffisamment compétitifs pour écouler le stock au rythme précédent."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Envie d'un accès anticipé à Setu Retail ?",
+        "subtext": "Parlez-nous de votre commerce et nous vous préviendrons dès le lancement de Setu Retail, avec le suivi des stocks intégré.",
+        "cta": {
+          "label": "Être prévenu"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de point de commande",
+      "shortDescription": "Trouvez le niveau de stock exact qui doit déclencher votre prochaine commande.",
+      "seo": {
+        "title": "Calculateur de point de commande — Gratuit | Setu",
+        "description": "Calculateur gratuit de point de commande. Saisissez les ventes par jour, le délai fournisseur et le stock de sécurité pour savoir quand commander.",
+        "keywords": [
+          "calculateur point de commande",
+          "point de commande stock",
+          "calculateur de réapprovisionnement",
+          "calculateur stock de sécurité"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Point de Commande",
+        "headline": "Calculateur de point de commande",
+        "subheadline": "Saisissez les ventes moyennes par jour, le délai de livraison du fournisseur et le stock de sécurité pour savoir quand réapprovisionner."
+      },
+      "about": {
+        "headline": "Commandez avant la rupture, pas après",
+        "paragraphs": [
+          "Le point de commande est le niveau de stock qui doit déclencher une nouvelle commande d'achat : trop bas, vous risquez la rupture avant l'arrivée du réassort ; trop haut, vous immobilisez de la trésorerie dans du stock excédentaire.",
+          "Saisissez les ventes moyennes par jour d'un article, le nombre de jours que met habituellement votre fournisseur, et un stock de sécurité pour les pics de demande ou les retards de livraison : ce calculateur vous donne le nombre exact d'unités qui doit déclencher votre prochaine commande."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de point de commande",
+        "items": [
+          {
+            "question": "Quelle est la formule du point de commande ?",
+            "answer": "Point de commande = (ventes moyennes par jour × délai fournisseur en jours) + stock de sécurité. C'est le niveau de stock auquel passer une nouvelle commande pour que le réassort arrive avant la rupture."
+          },
+          {
+            "question": "Comment fixer le stock de sécurité ?",
+            "answer": "Le stock de sécurité doit couvrir à la fois la variabilité de la demande (journées plus chargées que la moyenne) et les retards fournisseurs. Un point de départ courant est quelques jours de ventes moyennes, augmenté pour les articles aux fournisseurs peu fiables ou à la demande instable."
+          },
+          {
+            "question": "Et si le délai de mon fournisseur varie beaucoup ?",
+            "answer": "Retenez votre pire délai réaliste plutôt que le meilleur cas pour calculer le point de commande, et prévoyez un stock de sécurité plus large pour les articles dont le délai est imprévisible."
+          },
+          {
+            "question": "Les pics saisonniers sont-ils pris en compte ?",
+            "answer": "Pas directement : le calcul utilise vos ventes moyennes par jour. Pour les articles saisonniers, recalculez avec les ventes moyennes attendues pendant la saison à venir plutôt qu'une moyenne annuelle lissée."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Envie d'un accès anticipé à Setu Retail ?",
+        "subtext": "Parlez-nous de votre commerce et nous vous préviendrons dès le lancement de Setu Retail, avec les alertes de réassort intégrées.",
+        "cta": {
+          "label": "Être prévenu"
+        }
+      }
+    },
+    {
+      "name": "Calculateur du coût d'acquisition client (CAC)",
+      "shortDescription": "Découvrez exactement combien vous dépensez pour acquérir chaque nouveau client.",
+      "seo": {
+        "title": "Calculateur de Coût d'Acquisition Client (CAC) | Setu",
+        "description": "Calculateur de CAC gratuit. Saisissez vos dépenses marketing et les nouveaux clients acquis pour obtenir votre coût d'acquisition et le comparer au revenu.",
+        "keywords": [
+          "calculateur de CAC",
+          "coût d'acquisition client",
+          "coût marketing par client",
+          "formule du CAC"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de CAC",
+        "headline": "Calculateur de Coût d'Acquisition Client",
+        "subheadline": "Saisissez vos dépenses marketing et le nombre de nouveaux clients acquis pour obtenir votre coût par client."
+      },
+      "about": {
+        "headline": "Le chiffre qui dit si le marketing fonctionne",
+        "paragraphs": [
+          "Le coût d'acquisition client (CAC) est le montant moyen dépensé pour gagner un nouveau client, en comptant tous les coûts marketing et commerciaux engagés. Il ne veut dire quelque chose qu'à côté d'un second chiffre : ce que ce client vous rapporte réellement.",
+          "Saisissez vos dépenses totales sur une période et le nombre de nouveaux clients qu'elles ont amenés pour obtenir votre CAC. Si vous connaissez aussi le revenu moyen par client, ce calculateur affiche le rapport entre les deux — une vérification rapide pour savoir si une campagne ou un canal se rentabilise."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de CAC",
+        "items": [
+          {
+            "question": "Quelle est la formule du CAC ?",
+            "answer": "CAC = dépenses marketing et commerciales totales ÷ nombre de nouveaux clients acquis, sur la même période. Dépenser 50 000 pour acquérir 100 nouveaux clients donne un CAC de 500."
+          },
+          {
+            "question": "Quels coûts inclure dans les dépenses marketing ?",
+            "answer": "Incluez les achats d'espace publicitaire, les honoraires d'agence ou frais de plateforme, les remises promotionnelles servant uniquement à l'acquisition et une part raisonnable du coût de l'équipe commerciale le cas échéant : tout ce qui a été dépensé spécifiquement pour amener de nouveaux clients sur la période."
+          },
+          {
+            "question": "Quel est un bon CAC ?",
+            "answer": "Cela dépend entièrement de ce qu'un client vous rapporte dans le temps. Un CAC est sain s'il reste confortablement en dessous du revenu (idéalement récurrent) qu'un client type génère : il n'existe pas de bon chiffre universel."
+          },
+          {
+            "question": "Quelle différence entre le CAC et le panier moyen ?",
+            "answer": "Le CAC mesure ce que vous avez dépensé pour gagner un client ; le panier moyen mesure ce que ce client dépense par commande une fois acquis. Comparer les deux indique à peu près combien de commandes sont nécessaires pour amortir le coût d'acquisition."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Sachez quels clients valent la peine d'être gardés",
+        "subtext": "Setu Dine suit les clients fidèles et l'historique des commandes : vous voyez quels canaux amènent des clients qui reviennent vraiment.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur du panier moyen (AOV)",
+      "shortDescription": "Trouvez votre panier moyen et voyez l'effet sur le chiffre d'affaires si vous l'augmentez.",
+      "seo": {
+        "title": "Calculateur de Panier Moyen (AOV) | Setu",
+        "description": "Calculateur de panier moyen gratuit. Saisissez le chiffre d'affaires total et le nombre de commandes pour obtenir votre panier moyen et l'effet d'une hausse.",
+        "keywords": [
+          "calculateur de panier moyen",
+          "calculateur AOV",
+          "formule du panier moyen",
+          "panier moyen e-commerce"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de Panier Moyen",
+        "headline": "Calculateur de Panier Moyen",
+        "subheadline": "Saisissez le chiffre d'affaires total et le nombre de commandes pour obtenir votre panier moyen et voir ce que vaut une petite hausse."
+      },
+      "about": {
+        "headline": "Une petite hausse du panier moyen se cumule vite",
+        "paragraphs": [
+          "Le panier moyen est le montant dépensé en moyenne par commande — et c'est l'un des rares leviers de chiffre d'affaires que vous pouvez actionner sans acquérir un seul nouveau client. Une offre combinée, une suggestion de supplément bien placée ou un léger ajustement de prix peuvent relever le panier moyen sur toutes les commandes que vous recevez déjà.",
+          "Saisissez votre chiffre d'affaires total et le nombre de commandes sur une période pour obtenir votre panier moyen actuel, puis un pourcentage de hausse visé pour voir ce que cette progression rapporterait à volume de commandes constant — pratique pour juger si un effort de montée en gamme ou un changement de carte ou de formules vaut la peine."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de panier moyen",
+        "items": [
+          {
+            "question": "Quelle est la formule du panier moyen ?",
+            "answer": "Panier moyen = chiffre d'affaires total ÷ nombre de commandes, sur la même période. 5 00 000 de chiffre d'affaires sur 1 000 commandes donne un panier moyen de 500."
+          },
+          {
+            "question": "Comment augmenter le panier moyen ?",
+            "answer": "Les leviers habituels : offres combinées ou formules, proposer une plus grande taille ou un supplément au moment de la commande, livraison offerte à partir d'un certain montant, et mettre en avant les produits qui accompagnent ce que le client commande déjà."
+          },
+          {
+            "question": "Pourquoi une petite hausse du panier moyen compte-t-elle autant ?",
+            "answer": "Parce qu'elle s'applique à toutes les commandes que vous recevez déjà, sans coût d'acquisition supplémentaire : une hausse de 10 % sur votre volume actuel devient directement du chiffre d'affaires en plus, sans un seul nouveau client."
+          },
+          {
+            "question": "Un panier moyen plus élevé est-il toujours préférable ?",
+            "answer": "Pour le chiffre d'affaires, en général oui, mais vérifiez que ce n'est pas au prix de la fréquence des commandes ou de la satisfaction des clients : pousser les suppléments avec trop d'insistance peut se retourner contre vous. Suivez le panier moyen à côté du taux de réachat pour le repérer tôt."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Repérez les occasions de vente additionnelle automatiquement",
+        "subtext": "Setu Dine fait remonter les suggestions de formules et de suppléments à l'encaissement : relever le panier moyen ne dépend plus de la mémoire de l'équipe.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur d'ingénierie du menu",
+      "shortDescription": "Analysez vos plats par rentabilité et popularité pour repérer étoiles, vaches à lait, énigmes et poids morts.",
+      "seo": {
+        "title": "Calculateur d'ingénierie du menu pour restaurants",
+        "description": "Calculateur d'ingénierie du menu gratuit. Saisissez prix, coûts et popularité pour repérer vos plats rentables et corriger ceux qui rognent votre marge.",
+        "keywords": [
+          "calculateur d'ingénierie de menu",
+          "analyse de la carte d'un restaurant",
+          "calculateur de rentabilité du menu",
+          "optimisation de la carte d'un restaurant",
+          "calculateur de marge sur coûts variables",
+          "classification des plats",
+          "analyse de rentabilité d'un restaurant"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur d'ingénierie du menu",
+        "headline": "Calculateur d'ingénierie du menu",
+        "subheadline": "Analysez votre carte par rentabilité et popularité : repérez les stars à promouvoir, les vaches à lait à mettre en avant et les poids morts à retirer ou à repositionner."
+      },
+      "about": {
+        "headline": "Arrêtez de deviner quels plats font la marge",
+        "paragraphs": [
+          "L'ingénierie de menu consiste à analyser les plats de votre carte selon leur marge sur coûts variables et leur popularité, afin d'identifier ceux qui sont réellement rentables et ceux qui rongent vos marges.",
+          "Cet outil classe chaque plat dans l'une de quatre catégories : les Stars (forte marge, forte popularité) à promouvoir, les Vaches à lait (forte marge, faible popularité) qui manquent de visibilité, les Énigmes (faible marge, forte popularité) dont il faut revoir le prix, et les Poids morts (faible marge, faible popularité) à retirer ou repositionner. Saisissez vos plats avec leurs prix, leurs coûts et les quantités vendues — le calculateur fait le reste."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur l'ingénierie de menu",
+        "items": [
+          {
+            "question": "Que signifie « marge sur coûts variables » en ingénierie de menu ?",
+            "answer": "C'est le bénéfice par plat avant répartition des charges fixes (loyer, salaires, etc.). C'est la part que chaque vente apporte pour couvrir les charges fixes et dégager du bénéfice : prix de vente moins coût des marchandises vendues."
+          },
+          {
+            "question": "Comment les plats sont-ils classés ?",
+            "answer": "En comparant leur marge et leur popularité (quantités vendues) à la moyenne de la carte. Les Stars sont élevées sur les deux, les Vaches à lait ont une bonne marge mais peu de ventes, les Énigmes se vendent bien mais rapportent peu, et les Poids morts sont faibles sur les deux."
+          },
+          {
+            "question": "Que faire pour chaque catégorie ?",
+            "answer": "Stars : promouvoir fortement, garder le prix stable. Vaches à lait : gagner en visibilité et proposer des formules pour doper les ventes. Énigmes : augmenter le prix ou réduire les coûts (elles sont déjà populaires, juste pas rentables). Poids morts : retirer, repositionner en produit d'appel, ou revoir le coût de la recette."
+          },
+          {
+            "question": "La popularité, est-ce les quantités vendues ou le chiffre d'affaires ?",
+            "answer": "Dans ce calculateur, la popularité désigne les quantités ou les couverts vendus, pas le chiffre d'affaires. Un plat à faible marge qui se vend beaucoup est une Énigme, pas une Star, car il occupe la cuisine sans apporter de marge."
+          },
+          {
+            "question": "À quelle fréquence refaire cette analyse ?",
+            "answer": "Au moins une fois par mois, ou dès que vous ajoutez des plats ou modifiez sensiblement un prix ou une recette. Les variations saisonnières de popularité font changer les plats de catégorie : vous repérez ainsi les évolutions et ajustez leur positionnement."
+          },
+          {
+            "question": "Le coût de main-d'œuvre est-il pris en compte ?",
+            "answer": "Non : ce calculateur n'utilise que le coût matière pour établir la marge. Pour une vision plus complète, ajoutez à votre coût des marchandises une estimation du coût de main-d'œuvre par plat (préparation, cuisson, dressage) avant de calculer la marge."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Optimisez votre carte avec des données en temps réel",
+        "subtext": "Setu Dine enregistre automatiquement le coût et les ventes de chaque plat : vous pouvez faire de l'ingénierie de menu au quotidien et repérer les plats qui tuent la marge avant qu'ils ne pèsent sur vos résultats.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de TVA",
+      "shortDescription": "Ajoutez la TVA à un prix HT ou extrayez-la d'un montant TTC, pour n'importe quel taux.",
+      "seo": {
+        "title": "Calculateur de TVA — Ajouter ou Retirer la TVA | Setu",
+        "description": "Calculateur de TVA gratuit. Ajoutez la TVA à un montant hors taxes ou extrayez-la d'un prix TTC, avec les taux standards de plus de 65 pays intégrés.",
+        "keywords": [
+          "calculateur de TVA",
+          "ajouter la TVA",
+          "retirer la TVA",
+          "calcul TVA inversée",
+          "calculer TVA 20%",
+          "calculateur TVA en ligne"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de TVA",
+        "headline": "Calculateur de TVA",
+        "subheadline": "Ajoutez la TVA à un prix hors taxes ou extrayez-la d'un montant TTC : choisissez un taux et obtenez aussitôt le HT, la taxe et le TTC."
+      },
+      "about": {
+        "headline": "À quoi sert un calculateur de TVA",
+        "paragraphs": [
+          "Si vous vendez à des clients ou achetez à des fournisseurs dans des pays à TVA — France, reste de l'UE, Royaume-Uni, Émirats, Afrique du Sud et plus de 170 autres — vous passez sans cesse du prix hors taxes au prix TTC. Le faire à la main est source d'erreurs, surtout avec des taux comme 12,5 % ou 23 %.",
+          "Ce calculateur fonctionne dans les deux sens. Saisissez un montant hors taxes pour voir la TVA et le total TTC, ou saisissez un prix TTC pour retrouver le montant hors taxes et la taxe qu'il contient. Les boutons de sélection rapide couvrent les taux les plus courants dans le monde, et vous pouvez saisir n'importe quel taux."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de TVA",
+        "items": [
+          {
+            "question": "Comment ajouter la TVA à un prix ?",
+            "answer": "Multipliez le prix hors taxes par le taux de TVA et ajoutez-le. À 20 % de TVA, un prix HT de 100 porte 20 de TVA, soit 120 TTC. Ce calculateur le fait aussitôt pour n'importe quel taux."
+          },
+          {
+            "question": "Comment retirer la TVA d'un montant TTC ?",
+            "answer": "Divisez le montant TTC par (1 + taux). Un prix de 120 TTC à 20 % de TVA donne 120 ÷ 1,20 = 100 HT, avec 20 de TVA. Ne soustrayez jamais le pourcentage directement : le résultat serait faux."
+          },
+          {
+            "question": "Quelle différence entre TVA et GST ?",
+            "answer": "Les deux fonctionnent de la même façon : une taxe sur la valeur ajoutée à chaque étape. Les pays utilisent simplement des noms et des taux différents. L'Inde applique la GST (utilisez notre calculateur GST pour la répartition CGST/SGST) ; le Royaume-Uni, l'UE et beaucoup d'autres appliquent la TVA."
+          },
+          {
+            "question": "Quel taux de TVA utiliser ?",
+            "answer": "Le taux normal du pays où la vente est taxée : par exemple 20 % au Royaume-Uni, 19 % en Allemagne, 5 % aux Émirats. Beaucoup de pays ont aussi des taux réduits sur les produits essentiels ; vérifiez la catégorie de votre bien ou service."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de taxe de vente",
+      "shortDescription": "Calculez la sales tax américaine : cumulez taux d'État et taux locaux, ajoutez-la ou extrayez-la.",
+      "seo": {
+        "title": "Calculateur de taxe de vente (États-Unis) | Setu",
+        "description": "Calculateur gratuit de taxe de vente. Combinez les taux d'État et locaux, ajoutez la taxe à un prix hors taxe ou extrayez-la d'un total déjà payé.",
+        "keywords": [
+          "calculateur taxe de vente",
+          "sales tax États-Unis",
+          "calculateur taxe d'État",
+          "taxe de vente inversée",
+          "taxe sur un achat"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Taxe de Vente",
+        "headline": "Calculateur de taxe de vente",
+        "subheadline": "Combinez le taux de l'État et le taux local, puis ajoutez la taxe à un prix ou extrayez-la d'un total que vous avez déjà payé."
+      },
+      "about": {
+        "headline": "Comment fonctionne la taxe de vente américaine",
+        "paragraphs": [
+          "Contrairement à la TVA ou à la GST, la taxe de vente américaine s'ajoute à la caisse et varie selon l'État, le comté et la ville. Le taux que vous facturez est en général celui de l'État plus les taux locaux applicables au lieu de vente — c'est pourquoi deux commerces à quelques kilomètres d'écart peuvent facturer une taxe différente.",
+          "Saisissez le taux de l'État et tout taux local ou municipal : ce calculateur affiche le taux combiné, le montant de la taxe et le total. Inversez-le pour extraire la taxe du total d'un reçu lorsque vous tenez votre comptabilité ou justifiez des frais."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de taxe de vente",
+        "items": [
+          {
+            "question": "Comment calculer la taxe de vente sur un achat ?",
+            "answer": "Multipliez le prix hors taxe par le taux combiné. Un achat de 100 $ à un taux combiné de 8 % porte 8 $ de taxe, soit un total de 108 $."
+          },
+          {
+            "question": "Comment retrouver le prix hors taxe à partir du total ?",
+            "answer": "Divisez le total par (1 + taux combiné). Un total de 108 $ à 8 % donne 108 $ ÷ 1,08 = 100 $ hors taxe et 8 $ de taxe."
+          },
+          {
+            "question": "Pourquoi faut-il le taux de l'État et le taux local séparément ?",
+            "answer": "La plupart des États autorisent les comtés, les villes et des districts spéciaux à ajouter leur propre taxe de vente au-dessus du taux de l'État. Le client paie le total combiné du lieu de vente : ce calculateur prend donc les deux et les additionne."
+          },
+          {
+            "question": "Tous les États américains appliquent-ils une taxe de vente ?",
+            "answer": "Non — l'Alaska, le Delaware, le Montana, le New Hampshire et l'Oregon n'ont pas de taxe de vente à l'échelle de l'État (certaines localités d'Alaska appliquent la leur). Tous les autres États ont un taux, généralement entre 4 % et 7,25 %."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de ROI",
+      "shortDescription": "Mesurez le retour sur investissement : bénéfice net, ROI en % et rendement annualisé d'une dépense.",
+      "seo": {
+        "title": "Calculateur de ROI — Retour sur Investissement | Setu",
+        "description": "Calculateur de ROI gratuit. Saisissez le montant investi et le montant récupéré pour obtenir le bénéfice net, le ROI en pourcentage et le ROI annualisé.",
+        "keywords": [
+          "calculateur de ROI",
+          "retour sur investissement",
+          "ROI annualisé",
+          "calculateur de rentabilité",
+          "formule du ROI"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de ROI",
+        "headline": "Calculateur de ROI",
+        "subheadline": "Saisissez ce que vous avez engagé et ce que vous avez récupéré : bénéfice net, ROI en pourcentage et rendement annualisé de la période."
+      },
+      "about": {
+        "headline": "Pourquoi le ROI compte dans chaque décision",
+        "paragraphs": [
+          "Nouveau matériel de cuisine, campagne marketing, stock de saison : chaque euro engagé devrait gagner sa place. Le ROI met toutes ces décisions sur la même échelle — qu'a rapporté l'argent par rapport à ce qu'il a coûté ?",
+          "Le pourcentage brut de ROI donne le gain total. Le chiffre annualisé compte dès qu'on compare des options aux durées différentes : 40 % sur 4 ans est bien plus faible que 25 % en un an. Indiquez la durée et ce calculateur produit les deux."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de ROI",
+        "items": [
+          {
+            "question": "Comment calcule-t-on le ROI ?",
+            "answer": "ROI = (montant récupéré − montant investi) ÷ montant investi × 100. Investissez 100 000 et récupérez 140 000 : votre ROI est de 40 %."
+          },
+          {
+            "question": "Qu'est-ce que le ROI annualisé ?",
+            "answer": "Il convertit un rendement total en taux composé annuel : (récupéré ÷ investi)^(1 ÷ années) − 1. Un rendement total de 40 % sur 2 ans fait environ 18,3 % par an — pratique pour comparer des placements de durées différentes."
+          },
+          {
+            "question": "Quel ROI viser pour une petite entreprise ?",
+            "answer": "Cela dépend du risque et de vos alternatives. En repère grossier, un investissement devrait dépasser ce que le même argent rapporterait sans risque (un dépôt à terme) avec une marge suffisante pour justifier l'effort — beaucoup de dirigeants visent 15 à 30 % et plus par an sur les investissements opérationnels."
+          },
+          {
+            "question": "Les coûts récurrents sont-ils inclus ?",
+            "answer": "Intégrez-les au montant investi, ou retranchez-les du montant récupéré : dans tous les cas, le ROI ne vaut que ce que valent les chiffres saisis. Pour le marketing, notre calculateur de CAC le complète en mesurant le coût par client."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur d'amortissement",
+      "shortDescription": "Amortissement linéaire ou dégressif, avec un tableau complet année par année.",
+      "seo": {
+        "title": "Calculateur et Tableau d'Amortissement | Setu",
+        "description": "Calculateur d'amortissement gratuit. Calculez l'amortissement linéaire ou dégressif avec un tableau complet année par année des valeurs comptables.",
+        "keywords": [
+          "calculateur d'amortissement",
+          "amortissement linéaire",
+          "amortissement dégressif",
+          "amortissement WDV",
+          "tableau d'amortissement des actifs"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Amortissement",
+        "headline": "Calculateur d'amortissement",
+        "subheadline": "Saisissez le coût du bien, la valeur résiduelle et la durée d'utilité : obtenez l'amortissement annuel et un tableau complet année par année, linéaire ou dégressif."
+      },
+      "about": {
+        "headline": "Deux méthodes, un tableau",
+        "paragraphs": [
+          "L'amortissement répartit le coût d'un bien sur sa durée d'utilité, et la méthode change la forme de la charge. Le linéaire répartit le coût également chaque année : simple et courant pour le mobilier, les agencements et le matériel. Le dégressif applique un pourcentage fixe à la valeur comptable restante et concentre la charge au début : c'est l'approche retenue par la loi indienne sur l'impôt sur le revenu pour la plupart des blocs d'actifs.",
+          "Ce calculateur produit le tableau complet pour l'une ou l'autre méthode : valeur d'ouverture, amortissement et valeur comptable de clôture pour chaque année, afin de reporter les chiffres directement dans vos comptes ou de comparer les méthodes avant de choisir."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur d'amortissement",
+        "items": [
+          {
+            "question": "Comment fonctionne l'amortissement linéaire ?",
+            "answer": "Amortissement annuel = (coût − valeur résiduelle) ÷ durée d'utilité. Une machine de ₹5 00 000 avec ₹50 000 de résiduelle sur 5 ans s'amortit de ₹90 000 par an."
+          },
+          {
+            "question": "Comment fonctionne l'amortissement dégressif ?",
+            "answer": "Chaque année, vous amortissez un pourcentage fixe de la valeur comptable restante. À 25 %, un bien de ₹5 00 000 s'amortit de ₹1 25 000 la première année, puis de 25 % de ₹3 75 000 la deuxième, et ainsi de suite : des dotations plus fortes au début, plus faibles ensuite."
+          },
+          {
+            "question": "Quelle méthode utiliser ?",
+            "answer": "Pour l'impôt sur le revenu en Inde, le dégressif aux taux de bloc prescrits est la norme pour la plupart des entreprises. Pour votre comptabilité de gestion, le linéaire est plus simple et donne une charge stable. Les sociétés qui publient selon la loi sur les sociétés suivent les durées d'utilité de l'annexe II. En cas de doute, demandez à votre expert-comptable."
+          },
+          {
+            "question": "Qu'est-ce que la valeur résiduelle ?",
+            "answer": "Ce que vous estimez que le bien vaudra à la fin de sa durée d'utilité : valeur de revente ou de ferraille. L'amortissement s'arrête dès que la valeur comptable l'atteint."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui se tiennent à jour tout seuls",
+        "subtext": "La caisse et les outils de gestion Setu enregistrent ventes, coûts et taxes automatiquement : les rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de délais de paiement",
+      "shortDescription": "Échéances des conditions de paiement, économies d'escompte et coût réel d'un retard.",
+      "seo": {
+        "title": "Calculateur de délais de paiement — net 30",
+        "description": "Calculateur de délais de paiement gratuit : date d'échéance exacte en net 15/30/45/60, économie liée à l'escompte et coût réel d'y renoncer.",
+        "keywords": [
+          "calculateur de délais de paiement",
+          "calculateur net 30",
+          "2/10 net 30",
+          "escompte pour paiement anticipé",
+          "calculateur de date d'échéance de facture",
+          "coût du crédit fournisseur"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de délais de paiement",
+        "headline": "Calculateur de délais de paiement",
+        "subheadline": "Traduisez des conditions comme « 2/10 net 30 » en dates et en euros réels : date d'échéance, économie en payant tôt et ce que coûte vraiment le fait de renoncer à l'escompte."
+      },
+      "about": {
+        "headline": "Décoder les conditions d'une facture en quelques secondes",
+        "paragraphs": [
+          "Des conditions comme « net 30 » ou « 2/10 net 45 » condensent en quelques caractères une date d'échéance, un escompte et un taux d'intérêt implicite. Ce calculateur les décompose : la date d'échéance exacte à partir de la date de facture, le montant de l'escompte si vous payez dans le délai, et le coût annualisé de ne pas le faire.",
+          "C'est ce dernier chiffre qui surprend. Renoncer à un escompte de 2% pour garder la trésorerie 20 jours de plus équivaut à emprunter à plus de 36% par an, bien plus cher que la plupart des financements de trésorerie. Le savoir vous permet de décider avec des chiffres, que vous soyez l'acheteur ou le vendeur qui fixe les conditions."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les délais de paiement",
+        "items": [
+          {
+            "question": "Que signifie 2/10 net 30 ?",
+            "answer": "Payez sous 10 jours et vous déduisez 2% de la facture ; sinon, le montant total est dû 30 jours après la date de facture."
+          },
+          {
+            "question": "Comment calcule-t-on le coût d'un escompte auquel on renonce ?",
+            "answer": "Coût ≈ (% d'escompte ÷ (100 − % d'escompte)) × (365 ÷ jours de crédit supplémentaires) × 100. Pour 2/10 net 30, cela donne (2 ÷ 98) × (365 ÷ 20) ≈ 37% par an, soit le coût réel de ces 20 jours de crédit en plus."
+          },
+          {
+            "question": "L'échéance part-elle de la date de facture ou de la livraison ?",
+            "answer": "En général de la date de facture, sauf mention contraire au contrat (certains utilisent des conditions fin de mois, notées « net 30 FDM »). Ce calculateur compte les jours calendaires à partir de la date de facture que vous saisissez."
+          },
+          {
+            "question": "Dois-je proposer un escompte à mes clients ?",
+            "answer": "Si la trésorerie est tendue ou si les clients paient lentement, un escompte modeste peut faire rentrer l'argent beaucoup plus vite et réduire les relances. Fixez-le en conscience : le même calcul de coût annualisé s'applique à vous en tant que vendeur."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur d'écart sur prix d'achat",
+      "shortDescription": "Comparez prix d'achat réels et standards et voyez l'écart total instantanément.",
+      "seo": {
+        "title": "Calculateur d'écart sur prix d'achat (PPV)",
+        "description": "Calculateur PPV gratuit. Comparez les prix réellement payés aux prix standards ou budgétés et obtenez l'écart par unité, en pourcentage et au total.",
+        "keywords": [
+          "calculateur d'écart sur prix d'achat",
+          "calculateur PPV",
+          "formule d'écart sur prix",
+          "écart sur achats",
+          "écart sur coût standard"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur PPV",
+        "headline": "Calculateur d'écart sur prix d'achat",
+        "subheadline": "Prix standard contre prix réel × quantité : visualisez l'écart par unité, en pourcentage et au total, signalé favorable ou défavorable."
+      },
+      "about": {
+        "headline": "Repérez la dérive des coûts avant qu'elle ne mange votre marge",
+        "paragraphs": [
+          "L'écart sur prix d'achat mesure la différence entre ce que vous aviez prévu de payer pour vos matières ou vos stocks et ce que vous avez réellement payé. Les fournisseurs augmentent leurs tarifs discrètement, les volumes de commande changent, les prix du marché bougent : le PPV, c'est ainsi que les acheteurs le repèrent tôt et en chiffrent l'impact.",
+          "Un écart positif (défavorable) signifie que les achats ont coûté plus que le standard : la marge fuit dès l'entrée. Un écart négatif (favorable) signifie que vous avez fait mieux que prévu. Suivez-le par article et par fournisseur, et reportez les écarts persistants dans vos prix ou dans une renégociation."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur le calculateur PPV",
+        "items": [
+          {
+            "question": "Comment calcule-t-on l'écart sur prix d'achat ?",
+            "answer": "PPV = (prix réel − prix standard) × quantité achetée. Acheter 500 unités à ₹110 face à un standard de ₹100 donne un écart défavorable de ₹5 000."
+          },
+          {
+            "question": "Qu'est-ce que le prix standard ?",
+            "answer": "La référence qui a servi à votre plan : un tarif budgété, un prix contractuel négocié ou le coût moyen de la période précédente. La constance compte plus que le choix lui-même."
+          },
+          {
+            "question": "Un écart favorable est-il toujours une bonne nouvelle ?",
+            "answer": "En général oui, mais vérifiez pourquoi. Un prix plus bas lié à une qualité moindre, des commandes en gros surdimensionnées ou des délais de livraison manqués peuvent coûter plus en aval que l'écart ne fait gagner."
+          },
+          {
+            "question": "À quelle fréquence revoir le PPV ?",
+            "answer": "Un suivi mensuel suffit à la plupart des petites entreprises : assez fréquent pour repérer les hausses fournisseurs avant qu'elles ne s'accumulent, sans se noyer dans le bruit. Commencez par les articles les plus coûteux (notre outil d'analyse ABC aide à les classer)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de ratios financiers",
+      "shortDescription": "Ratios de liquidité, d'endettement, de marge et d'efficacité à partir de votre bilan et de votre compte de résultat.",
+      "seo": {
+        "title": "Calculateur de ratios financiers pour entreprises",
+        "description": "Calculateur de ratios financiers gratuit. Saisissez vos données de bilan et de résultat pour obtenir liquidité, endettement, marges et délai de règlement.",
+        "keywords": [
+          "calculateur de ratios financiers",
+          "calculateur de ratio de liquidité générale",
+          "ratio de liquidité immédiate",
+          "ratio d'endettement",
+          "analyse par ratios",
+          "diagnostic financier d'entreprise"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Analyseur de ratios",
+        "headline": "Calculateur de ratios financiers",
+        "subheadline": "Sept ratios clés à partir de quelques chiffres : liquidité, endettement, marges et efficacité en une seule vue."
+      },
+      "about": {
+        "headline": "Un bilan de santé pour votre entreprise",
+        "paragraphs": [
+          "Les chiffres isolés d'un bilan disent peu de choses : les ratios les remettent en contexte. Pouvez-vous couvrir les échéances proches (ratios de liquidité générale et immédiate) ? Êtes-vous trop endetté (ratio d'endettement) ? L'activité de base est-elle rentable (marges brute et nette) ? La trésorerie est-elle immobilisée en stock ou chez les clients (rotation des stocks et délai de règlement) ?",
+          "Banques et investisseurs calculent précisément ces ratios quand ils examinent vos comptes : autant les voir avant eux. Saisissez les chiffres de votre dernier bilan et compte de résultat — ou construisez ces états avec nos outils gratuits de bilan et de compte de résultat — puis lisez les résultats à la lumière des repères fournis."
+        ]
+      },
+      "faq": {
+        "headline": "Questions fréquentes sur les ratios financiers",
+        "items": [
+          {
+            "question": "Quel ratio de liquidité générale viser ?",
+            "answer": "Entre 1,5 et 3, c'est confortable pour la plupart des entreprises. En dessous de 1, les dettes à court terme dépassent l'actif circulant : c'est un signal d'alerte. Bien au-dessus de 3, cela peut signaler de la trésorerie dormante ou des stocks excessifs."
+          },
+          {
+            "question": "Pourquoi exclure les stocks du ratio de liquidité immédiate ?",
+            "answer": "Les stocks peuvent prendre des mois à se transformer en trésorerie et se vendre sous leur valeur comptable en cas de pression. Le ratio de liquidité immédiate ((actif circulant − stocks) ÷ dettes à court terme) vérifie si vous pourriez honorer vos échéances proches sans compter sur leur vente."
+          },
+          {
+            "question": "Que m'apprend le ratio d'endettement ?",
+            "answer": "Quelle part de l'entreprise est financée par la dette plutôt que par les fonds des associés. En dessous de 1 c'est prudent, entre 1 et 2 c'est courant ; au-delà de 2, les prêteurs portent davantage le risque et le nouveau crédit devient plus difficile et plus cher."
+          },
+          {
+            "question": "Qu'est-ce que le délai de règlement (DSO) ?",
+            "answer": "Créances clients ÷ chiffre d'affaires annuel × 365 : le nombre moyen de jours que vos clients mettent à payer. Si vos conditions sont de 30 jours mais le DSO de 55, le recouvrement mérite attention (notre outil de balance âgée montre précisément où)."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Des chiffres qui s'enregistrent tout seuls",
+        "subtext": "Le POS et les outils de gestion Setu enregistrent automatiquement ventes, coûts et taxes : vos rapports se construisent pendant que vous travaillez.",
+        "cta": {
+          "label": "Découvrir Setu Dine"
+        }
+      }
+    },
+    {
+      "name": "Calculateur de MDR",
+      "shortDescription": "Voyez la commission MDR prélevée sur un paiement et ce qui vous revient réellement, MDR inclus ou exclu.",
+      "seo": {
+        "title": "Calculateur de MDR — Frais de Paiement | Setu",
+        "description": "Calculateur gratuit de MDR pour les commerçants en Inde. Saisissez un montant MDR inclus ou exclu pour voir le taux, la TPS dessus et ce que vous recevez.",
+        "keywords": [
+          "calculateur de MDR",
+          "taux de commission commerçant",
+          "frais de passerelle de paiement",
+          "MDR inclus ou exclu",
+          "MDR UPI Inde",
+          "frais de transaction par carte"
+        ]
+      },
+      "hero": {
+        "eyebrow": "Outil gratuit — Calculateur de MDR",
+        "headline": "Calculateur de MDR",
+        "subheadline": "Calculez le taux de commission commerçant sur un encaissement et ce qui arrive sur votre compte une fois ce taux et sa taxe déduits."
+      },
+      "about": {
+        "headline": "Ce que le MDR vous coûte réellement",
+        "paragraphs": [
+          "Le MDR, ou taux de commission commerçant, est la part que votre acquéreur conserve sur chaque encaissement par carte ou portefeuille, et la taxe GST s'applique aussi sur cette part. Sur une vente par carte de crédit de ₹5 000 à 2 %, le MDR est de ₹100 et la taxe dessus de ₹18 : ce sont donc ₹4 882 qui sont versés, et non ₹5 000. Sur un mois de volume carte, cet écart représente de l'argent réel, et la plupart des commerçants ne le découvrent que dans le relevé de versement.",
+          "Saisissez le montant de deux façons, selon ce que vous connaissez. MDR inclus signifie que le chiffre correspond à ce que paie le client, et le calculateur vous indique ce qu'il vous reste. MDR exclu signifie que le chiffre est ce que vous voulez recevoir, et le calculateur majore l'encaissement pour que le net après MDR tombe juste — pratique lorsque vous répercutez la commission sur le client ou annoncez un prix qui doit laisser un montant fixe.",
+          "Tous les moyens de paiement ne coûtent pas la même chose, et l'UPI va changer. À partir du 15 octobre 2026, les paiements UPI aux commerçants supérieurs à ₹2 000 supportent un MDR de 0,4 % sur la totalité du montant, plafonné à ₹300 par transaction. Jusqu'à ₹2 000, il n'y a toujours pas de MDR, le débit RuPay et les mandats UPI Autopay restent exonérés, et les commerçants qui encaissent moins de ₹1 lakh par mois par QR UPI le sont aussi — c'est pourquoi répartir un encaissement important sur plusieurs QR plus petits peut ramener le coût à zéro."
+        ]
+      },
+      "faq": {
+        "headline": "Questions sur le calculateur de MDR",
+        "items": [
+          {
+            "question": "Qu'est-ce que le MDR ?",
+            "answer": "Le MDR, ou taux de commission commerçant, est la commission qu'un commerçant paie pour accepter un paiement numérique. C'est généralement un pourcentage du montant de la transaction, parfois avec un forfait en plus, et il est déduit avant que l'argent n'arrive sur le compte du commerçant. La taxe GST s'applique sur le MDR lui-même."
+          },
+          {
+            "question": "Quelle différence entre MDR inclus et MDR exclu ?",
+            "answer": "MDR inclus signifie que le montant saisi est ce que paie le client et que le MDR en est retiré : vous recevez donc moins. MDR exclu signifie que le montant saisi est ce que vous voulez recevoir, donc l'encaissement est majoré pour couvrir le MDR et sa taxe. Utilisez l'option exclue quand un montant précis doit arriver sur votre compte."
+          },
+          {
+            "question": "Y a-t-il un MDR sur les paiements UPI en Inde ?",
+            "answer": "Jusqu'à ₹2 000, aucun, et le débit RuPay reste à zéro par réglementation. À partir du 15 octobre 2026, les paiements UPI aux commerçants supérieurs à ₹2 000 supportent un MDR de 0,4 %, calculé sur la totalité du montant et plafonné à ₹300. UPI Autopay et les autres mandats récurrents sont exonérés, de même que les commerçants encaissant moins de ₹1 lakh par mois par QR UPI."
+          },
+          {
+            "question": "Comment réduire ce que je paie en MDR ?",
+            "answer": "Orientez les clients vers les moyens qui restent gratuits — UPI jusqu'à ₹2 000, débit RuPay et mandats UPI Autopay — et négociez votre taux carte avec votre acquéreur dès que votre volume le justifie. Comme le seuil de ₹2 000 s'applique par transaction, garder chaque encaissement UPI en dessous évite entièrement les 0,4 % ; le diviseur de QR associé découpe un total plus élevé en QR sous le seuil."
+          },
+          {
+            "question": "La taxe GST s'applique-t-elle au MDR ?",
+            "answer": "Oui. La GST à 18 % s'applique sur le MDR lui-même, pas sur votre vente ni sur la transaction UPI. Le calculateur l'affiche sur une ligne distincte pour que vous voyiez le coût complet de l'encaissement, et les entreprises enregistrées à la GST peuvent en général la récupérer en crédit de taxe."
+          }
+        ]
+      },
+      "cta": {
+        "headline": "Encaissez sans perdre une part",
+        "subtext": "Les outils UPI gratuits de Setu vous permettent d'encaisser au comptoir sous le seuil du MDR, sans inscription.",
+        "cta": {
+          "label": "Essayer le générateur de QR UPI"
+        }
+      }
+    }
+  ],
+  "labels": {
+    "allCalculators": "← Tous les calculateurs",
+    "moreCalculators": "Plus de calculateurs"
+  }
+}

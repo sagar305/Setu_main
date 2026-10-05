@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "Jasa Akuntansi, Pembukuan, dan Payroll | Setu Technology",
+    "description": "Akuntansi, pembukuan, dan payroll alih daya untuk UKM, dari mingguan hingga tahunan. Berpengalaman di QuickBooks, Xero, Zoho, Appfolio, FreshBooks, dan Wave.",
+    "keywords": [
+      "jasa akuntansi",
+      "jasa pembukuan",
+      "jasa payroll",
+      "akuntansi alih daya untuk UKM",
+      "pembukuan QuickBooks",
+      "akuntansi Xero",
+      "jasa rekonsiliasi bank"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Konsultasi",
+    "headline": "Jasa akuntansi, pembukuan, dan payroll",
+    "subheadline": "Kami menyediakan jasa akuntansi, pembukuan, dan payroll sesuai kebutuhan Anda — mingguan, dua mingguan, bulanan, triwulanan, atau tahunan. Dari transaksi harian sampai laporan keuangan, pembukuan Anda tetap akurat dan siap diaudit."
+  },
+  "overview": {
+    "headline": "Pemeliharaan lengkap pembukuan Anda",
+    "intro": "Layanan kami mencakup seluruh aspek pemeliharaan pembukuan, termasuk:",
+    "items": [
+      "Pencatatan seluruh transaksi beban, pendapatan, aset, dan liabilitas",
+      "Penyusunan buku besar dan buku besar pembantu",
+      "Akuntansi aset dan pemeliharaan daftar aset tetap",
+      "Piutang usaha dan laporan umur piutang untuk manajemen",
+      "Utang usaha termasuk kewajiban yang jatuh tempo",
+      "Rekonsiliasi bank",
+      "Neraca saldo",
+      "Laporan laba rugi",
+      "Neraca",
+      "Laporan arus kas"
+    ]
+  },
+  "servicesIncluded": {
+    "headline": "Layanan yang termasuk",
+    "subtext": "Ruang lingkup yang jelas dan berkelanjutan, jadi Anda selalu tahu apa yang tercakup.",
+    "items": [
+      "Pembukuan bulanan (berkelanjutan)",
+      "Rekonsiliasi bank dan kartu kredit",
+      "Kategorisasi pendapatan dan beban",
+      "Peninjauan bagan akun",
+      "Laba rugi dan neraca bulanan",
+      "Jurnal dan penyesuaian",
+      "Pemantauan piutang/utang (dasar)"
+    ]
+  },
+  "software": {
+    "headline": "Penguasaan software",
+    "subtext": "Kami bekerja di dalam alat yang sudah Anda pakai — atau membantu memilih yang tepat.",
+    "items": [
+      {
+        "detail": "Online dan desktop"
+      },
+      {
+        "detail": "Akuntansi berbasis cloud"
+      },
+      {
+        "detail": "Zoho Books"
+      },
+      {
+        "detail": "Manajemen properti"
+      },
+      {
+        "detail": "Manajemen properti"
+      },
+      {
+        "detail": "Penagihan dan pembukuan"
+      },
+      {
+        "detail": "Akuntansi usaha kecil"
+      }
+    ]
+  },
+  "idealFor": {
+    "headline": "Cocok untuk",
+    "subtext": "Dibuat untuk usaha yang sedang tumbuh dan ingin pembukuan rapi tanpa tim keuangan internal penuh.",
+    "items": [
+      "Usaha kecil dan menengah (UKM)",
+      "Usaha berbasis jasa",
+      "E-commerce, properti, layanan kesehatan, dan jasa profesional"
+    ]
+  },
+  "frequency": {
+    "headline": "Sesuai jadwal Anda",
+    "subtext": "Pilih ritme yang cocok dengan cara usaha Anda berjalan.",
+    "options": [
+      "Mingguan",
+      "Dua mingguan",
+      "Bulanan",
+      "Triwulanan",
+      "Tahunan"
+    ]
+  },
+  "cta": {
+    "headline": "Siap menyerahkan pembukuan Anda?",
+    "subtext": "Ceritakan usaha Anda dan kami susun rencana akuntansi serta pembukuan yang pas.",
+    "cta": {
+      "label": "Hubungi kami"
+    }
+  }
+}

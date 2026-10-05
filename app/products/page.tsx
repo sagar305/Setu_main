@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getProductsContent } from "@/lib/content";
 import {
   pharmacySoftwareEnabled,
@@ -7,35 +6,16 @@ import {
   repairSoftwareEnabled,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
-import { PageHero } from "@/components/PageHero";
+import { languageAlternates } from "@/lib/i18n/pages";
+import { ProductsSections } from "@/components/products/ProductsSections";
 
 const content = getProductsContent();
-
-/**
- * Products the site is willing to admit exist.
- *
- * An unreleased product is dropped from the listing and from the ItemList
- * schema below, so the page and the structured data telling Google what is on
- * it never disagree.
- */
-const visibleProducts = content.products.filter((product) => {
-  // A paid product with no page of its own travels with the free one it grows
-  // out of: announcing "Setu Pharmacy is coming" while the free Pharmacy POS is
-  // still unreleased would advertise a product nobody can see the shape of.
-  // Setu Queue is not in that group — it has had a live page all along.
-  if (product.id === "free-token") return tokenSystemEnabled();
-  if (product.id === "free-rental" || product.id === "rental") return rentalSoftwareEnabled();
-  if (product.id === "free-pharmacy" || product.id === "pharmacy") return pharmacySoftwareEnabled();
-  if (product.id === "free-repair" || product.id === "repair") return repairSoftwareEnabled();
-  return true;
-});
-
 
 export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
   keywords: content.seo.keywords,
-  alternates: { canonical: "/products" },
+  alternates: { canonical: "/products", languages: languageAlternates("products") },
   openGraph: {
     title: content.seo.title,
     description: content.seo.description,
@@ -111,70 +91,7 @@ export default function ProductsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-
-      <PageHero
-        eyebrow={content.hero.eyebrow}
-        headline={content.hero.headline}
-        subheadline={content.hero.subheadline}
-      />
-
-      <section className="mx-auto max-w-5xl px-6 py-12">
-        <div className="flex flex-col gap-10">
-          {visibleProducts.map((product) => {
-            const isLive = product.status === "live";
-            return (
-              <div
-                key={product.id}
-                id={product.id}
-                className={`rounded-2xl border p-8 ${
-                  isLive ? "border-indigo/15 bg-white shadow-sm" : "border-muted-line/30 bg-white/50"
-                }`}
-              >
-                <div className="flex flex-wrap items-center gap-3">
-                  <h2 className="text-2xl font-bold text-ink">{product.name}</h2>
-                  {!isLive && (
-                    <span className="rounded-full bg-cream px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-warm">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-base font-medium text-indigo">{product.headline}</p>
-                <p className="mt-4 max-w-2xl text-muted leading-relaxed">{product.description}</p>
-
-                {product.features && (
-                  <ul className="mt-6 grid gap-2 sm:grid-cols-2">
-                    {product.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-ink/80">
-                        <span className="h-1.5 w-1.5 rounded-full bg-saffron" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {"paidSoon" in product && product.paidSoon && (
-                  <div className="mt-6 rounded-xl border border-muted-line/30 bg-cream/60 p-4">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                      Paid product coming soon
-                    </p>
-                    <p className="mt-1 text-sm text-ink/80">
-                      <span className="font-semibold text-ink">{product.paidSoon.name}</span> —{" "}
-                      {product.paidSoon.note} Everything above stays free.
-                    </p>
-                  </div>
-                )}
-
-                <Link
-                  href={product.cta.href}
-                  className="mt-6 inline-block text-sm font-semibold text-indigo hover:underline"
-                >
-                  {product.cta.label} →
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <ProductsSections content={content} lang="en" />
     </>
   );
 }

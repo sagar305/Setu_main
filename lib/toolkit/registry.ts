@@ -73,6 +73,7 @@ export type ToolSlug =
   | "tuition-manager"
   // Payments / utilities
   | "upi-qr-generator"
+  | "upi-qr-split"
   | "gst-calculator"
   // Documents
   | "pdf-tools"
@@ -529,6 +530,23 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: [],
     paidPath: "platform",
     integrations: [{ with: "browser-pos", ux: "Use the business UPI at checkout" }],
+  },
+  {
+    slug: "upi-qr-split",
+    name: "Zero-MDR UPI QR Splitter",
+    category: "payments",
+    kind: "app",
+    tier: "growth",
+    status: "built",
+    route: "/tools/upi-qr-split",
+    reads: ["business"],
+    writes: [],
+    dependsOn: [],
+    paidPath: "platform",
+    integrations: [
+      { with: "gst-calculator", ux: "Bring the MDR calculator's amount straight into the split" },
+      { with: "upi-qr-generator", ux: "Generate a single QR instead when the amount is already small" },
+    ],
   },
   {
     slug: "gst-calculator",

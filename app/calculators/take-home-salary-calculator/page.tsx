@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCalculatorBySlug } from "@/lib/content";
+import { itemLanguageAlternates } from "@/lib/i18n/pages";
 import { CalculatorShell } from "@/components/calculators/CalculatorShell";
 import { TakeHomeSalaryCalculatorTool } from "@/components/calculators/tools/TakeHomeSalaryCalculatorTool";
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   title: item.seo.title,
   description: item.seo.description,
   keywords: item.seo.keywords,
-  alternates: { canonical: "/calculators/take-home-salary-calculator" },
+  alternates: {
+    canonical: "/calculators/take-home-salary-calculator",
+    languages: itemLanguageAlternates("calculators", "take-home-salary-calculator"),
+  },
   openGraph: {
     title: item.seo.title,
     description: item.seo.description,

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getHomeContent } from "@/lib/content";
-import { homeLanguageAlternates } from "@/lib/i18n/home-locales";
+import { languageAlternates } from "@/lib/i18n/pages";
 import { faqPageSchema, webSiteSchema } from "@/lib/schema";
 import { HomeSections } from "@/components/home/HomeSections";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     // Every translated homepage, plus x-default. Listed here as well as on the
     // translations themselves because hreflang only counts when the pages name
     // each other — a one-way reference is ignored.
-    languages: homeLanguageAlternates(),
+    languages: languageAlternates("home"),
   },
   openGraph: {
     title: content.seo.title,

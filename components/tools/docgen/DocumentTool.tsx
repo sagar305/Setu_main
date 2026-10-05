@@ -23,6 +23,7 @@ import {
 } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
+import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -165,6 +166,8 @@ const blankItem = (): LineItem => ({
 const todayIso = () => new Date().toISOString().split("T")[0];
 
 export function DocumentTool({ docType }: { docType: DocType }) {
+  // Keeps the links below in the language of the page this tool is on.
+  const href = useLocalizedHref();
   const cfg = CONFIGS[docType];
   const workspace = useFinanceWorkspace(cfg.slug);
   const { items: allDocs, save, remove } = useEntityList<SavedDoc>("documents");
@@ -433,7 +436,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
           ) : (
             <div className="mb-5 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-700">
               Set up your{" "}
-              <a href="/tools/business-profile" className="font-semibold underline">
+              <a href={href("/tools/business-profile")} className="font-semibold underline">
                 Business Profile
               </a>{" "}
               once to put your name, address and GSTIN on every document automatically.

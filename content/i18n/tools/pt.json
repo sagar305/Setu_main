@@ -1,0 +1,1714 @@
+{
+  "seo": {
+    "title": "Ferramentas grátis para restaurantes e lojas | Setu",
+    "description": "Ferramentas online gratuitas para restaurantes e pequenos negócios — gerador de faturas, calculadoras e muito mais. Sem precisar de cadastro.",
+    "keywords": [
+      "ferramentas para negócios",
+      "ferramentas grátis para negócios",
+      "gerador de faturas",
+      "ferramentas para restaurantes",
+      "ferramentas para pequenos negócios"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Ferramentas gratuitas",
+    "headline": "Ferramentas para tocar o seu negócio",
+    "subheadline": "Ferramentas gratuitas e sem cadastro, feitas para quem opera restaurantes e lojas — emissão de documentos, calculadoras e mais."
+  },
+  "ctaBanner": {
+    "headline": "Quer que os números se acompanhem sozinhos?",
+    "subtext": "O Setu Dine acompanha vendas, custos e impostos automaticamente, para você gastar menos tempo em calculadoras e mais tempo tocando o negócio.",
+    "cta": {
+      "label": "Conheça o Setu Dine"
+    }
+  },
+  "categories": [
+    {
+      "name": "Configuração do negócio"
+    },
+    {
+      "name": "Ponto de venda"
+    },
+    {
+      "name": "Faturamento"
+    },
+    {
+      "name": "Pagamento"
+    },
+    {
+      "name": "Cardápio"
+    },
+    {
+      "name": "Produtos e etiquetas"
+    },
+    {
+      "name": "Estoque e compras"
+    },
+    {
+      "name": "Finanças"
+    },
+    {
+      "name": "Clientes"
+    },
+    {
+      "name": "Agendamentos"
+    },
+    {
+      "name": "Documentos do negócio"
+    },
+    {
+      "name": "Contabilidade"
+    },
+    {
+      "name": "Demonstrações e relatórios"
+    },
+    {
+      "name": "Análise financeira"
+    }
+  ],
+  "labels": {
+    "freeTool": "Ferramenta gratuita",
+    "loading": "Carregando…"
+  },
+  "items": [
+    {
+      "name": "PDV no navegador",
+      "shortDescription": "PDV gratuito que funciona offline no navegador — vendas, estoque, clientes e recibos. Sem login."
+    },
+    {
+      "name": "Gerador de faturas",
+      "shortDescription": "Crie, personalize e baixe faturas profissionais com suporte a impostos.",
+      "seo": {
+        "title": "Gerador de faturas grátis — conforme o GST",
+        "description": "Crie faturas profissionais em conformidade com o GST de graça. Vários modelos, cálculo automático de impostos, suporte a UPI e PDF na hora. Sem cadastro.",
+        "keywords": [
+          "gerador de faturas grátis",
+          "fazer fatura",
+          "fatura GST",
+          "modelo de fatura",
+          "fatura grátis",
+          "gerador de faturas online",
+          "fatura Índia"
+        ],
+        "ogTitle": "Gerador de faturas grátis — conforme o GST",
+        "ogDescription": "Crie faturas profissionais com cálculo de GST. Sem login. Baixe em PDF na hora."
+      },
+      "hero": {
+        "headline": "Gerador de faturas grátis",
+        "subheadline": "Crie faturas profissionais em conformidade com o GST na hora. Sem cadastro."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é uma fatura em conformidade com o GST?",
+            "answer": "Uma fatura em conformidade com o GST traz o seu GSTIN, o GSTIN do cliente, o detalhe linha a linha com as alíquotas e a separação do imposto (CGST/SGST ou IGST). Nosso gerador faz todos os cálculos sozinho."
+          },
+          {
+            "question": "Preciso me cadastrar ou fazer login?",
+            "answer": "Não! Este gerador de faturas é totalmente grátis e sem cadastro. Os dados da sua fatura ficam salvos no seu navegador com localStorage, para facilitar a próxima vez."
+          },
+          {
+            "question": "Posso baixar as faturas em PDF?",
+            "answer": "Sim! Clique em ‘Download PDF’ e a fatura é gerada e baixada na hora. Todo o PDF é feito no seu dispositivo — seus dados nunca chegam aos nossos servidores."
+          },
+          {
+            "question": "Quais formas de pagamento posso mostrar na fatura?",
+            "answer": "Você pode incluir os dados da conta bancária (número da conta, código IFSC) e o seu UPI ID. A fatura mostrará essas opções aos seus clientes."
+          },
+          {
+            "question": "Existem modelos de fatura diferentes?",
+            "answer": "Sim! Oferecemos 3 modelos com design profissional: Classic (formal), Modern (minimalista) e Colorful (criativo). Você escolhe a cor da marca em cada um."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Por que usar o gerador de faturas da Setu?",
+          "items": [
+            {
+              "title": "Vários modelos",
+              "text": "Escolha entre 3 modelos com design profissional e personalize com a cor da sua marca."
+            },
+            {
+              "title": "Salva sozinho",
+              "text": "Os dados da sua fatura são salvos sozinhos no navegador. A próxima fatura sai mais rápido."
+            },
+            {
+              "title": "Cálculo do GST",
+              "text": "Cálculo automático do GST com separação CGST/SGST e várias alíquotas por linha."
+            },
+            {
+              "title": "Funciona no celular",
+              "text": "Crie e envie faturas do celular, do tablet ou do computador. Funciona em qualquer lugar."
+            },
+            {
+              "title": "Privacidade primeiro",
+              "text": "Todo o PDF é feito no seu dispositivo. Os dados da sua fatura nunca chegam aos nossos servidores."
+            },
+            {
+              "title": "Pensado para a Índia",
+              "text": "Feito para pequenos negócios indianos: validação de GSTIN, separação CGST/SGST, UPI ID e valor em palavras (lakh/crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Que campos uma fatura deve ter?",
+          "intro": "Uma fatura profissional deve trazer:",
+          "items": [
+            "Nome, endereço, telefone e e-mail do negócio",
+            "Nome e endereço do cliente",
+            "Número e data da fatura",
+            "Lista detalhada de produtos ou serviços com quantidades e valores",
+            "Impostos aplicáveis (GST na Índia)",
+            "Valor total e condições de pagamento",
+            "Dados de pagamento (conta bancária, UPI etc.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Conformidade com o GST",
+          "text": "**Aviso:** este gerador de faturas é apenas uma ferramenta de formatação e cálculo. Ele não entrega declarações de GST nem garante conformidade com toda a legislação tributária. Para orientação e entrega, fale com seu contador ou com um profissional de tributos."
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "intro": "Veja nossas outras calculadoras para o negócio:",
+          "links": [
+            {
+              "label": "Calculadora de GST"
+            },
+            {
+              "label": "Calculadora de imposto de renda"
+            },
+            {
+              "label": "Calculadora de margem de lucro"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gerador de QR UPI dinâmico",
+      "shortDescription": "Gere QR codes UPI dinâmicos com valores e observações para pagamentos instantâneos.",
+      "seo": {
+        "title": "Gerador de QR UPI dinâmico grátis",
+        "description": "Gere códigos QR de UPI dinâmicos na hora. Informe seu UPI ID, o valor e uma observação para criar códigos QR de cobrança rápida. Sem cadastro.",
+        "keywords": [
+          "gerador de QR UPI",
+          "código QR dinâmico",
+          "QR de pagamento UPI",
+          "gerador de QR grátis",
+          "QR de cobrança na hora",
+          "link profundo UPI",
+          "código QR de pagamento"
+        ],
+        "ogTitle": "Gerador de QR UPI dinâmico grátis",
+        "ogDescription": "Crie códigos QR de UPI com valores e observações na hora. Compartilhe para receber rápido."
+      },
+      "hero": {
+        "headline": "Gerador de QR UPI dinâmico",
+        "subheadline": "Crie códigos QR de UPI com valores e observações. Compartilhe na hora para receber rápido."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um código QR de UPI dinâmico?",
+            "answer": "Um código QR de UPI dinâmico é um código personalizado que leva o seu UPI ID, o valor a receber e uma observação de referência. Ao ser lido, ele preenche sozinho os dados do pagamento em qualquer aplicativo de UPI, deixando a cobrança mais rápida."
+          },
+          {
+            "question": "Preciso me cadastrar?",
+            "answer": "Não! Este gerador de QR de UPI é totalmente grátis e sem cadastro. Crie quantos códigos precisar, na hora."
+          },
+          {
+            "question": "Como uso o código QR gerado?",
+            "answer": "Baixe o código QR e coloque na sua loja, no seu restaurante ou na fatura. Os clientes leem com qualquer aplicativo de UPI (Google Pay, PhonePe, Paytm etc.) e pagam na hora."
+          },
+          {
+            "question": "Posso definir o valor da cobrança?",
+            "answer": "Sim! Se quiser, inclua um valor fixo no código QR. Ele já aparece preenchido quando o cliente abrir o aplicativo de UPI."
+          },
+          {
+            "question": "Quais provedores de UPI são aceitos?",
+            "answer": "Nosso gerador funciona com todos os grandes provedores de UPI da Índia, entre eles SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm e mais de 80 bancos e aplicativos de pagamento."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Por que usar o gerador de QR UPI da Setu?",
+          "items": [
+            {
+              "title": "Sai na hora",
+              "text": "Os códigos QR saem na hora. Sem cadastro e sem espera. Faça quantos precisar."
+            },
+            {
+              "title": "Do seu jeito",
+              "text": "Defina o valor e acrescente uma observação de referência. Ótimo para recibos, faturas ou preço fixo."
+            },
+            {
+              "title": "Todos os bancos",
+              "text": "Funciona com todos os grandes bancos e aplicativos de UPI da Índia. Seus clientes pagam pelo aplicativo que usam."
+            },
+            {
+              "title": "Bom no celular",
+              "text": "Funciona bem no celular, no tablet e no computador. Baixe e compartilhe na hora."
+            },
+            {
+              "title": "Seguro e privado",
+              "text": "Todos os QR são gerados no seu dispositivo. Seu UPI ID nunca chega aos nossos servidores."
+            },
+            {
+              "title": "Baixe e compartilhe",
+              "text": "Baixe os QR como imagem ou copie o link profundo de UPI. Use onde quiser."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como funciona?",
+          "intro": "Siga estes passos simples para gerar um código QR de UPI:",
+          "steps": [
+            "Informe seu UPI ID (por exemplo, seunome@upi)",
+            "Se quiser, acrescente o valor da cobrança",
+            "Acrescente uma observação de referência (opcional)",
+            "Baixe o código QR ou copie o link de UPI",
+            "Compartilhe com os clientes ou exponha na loja"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Onde posso usar os códigos QR de UPI?",
+          "items": [
+            "Deixe à vista no seu restaurante, na cafeteria ou na loja",
+            "Acrescente nas suas faturas ou recibos",
+            "Compartilhe no WhatsApp ou nas redes sociais",
+            "Inclua nos seus e-mails",
+            "Imprima e cole nos pacotes de entrega"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "intro": "Veja nossas outras ferramentas para o negócio:",
+          "links": [
+            {
+              "label": "Gerador de faturas"
+            },
+            {
+              "label": "Calculadora de GST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Divisor de QR UPI sem MDR",
+      "shortDescription": "Divida um pagamento grande em vários QR codes UPI abaixo de ₹2.000 para que não incida MDR nem intercâmbio.",
+      "seo": {
+        "title": "Divisor de QR UPI sem MDR — divida uma cobrança | Setu",
+        "description": "Divida uma cobrança grande em vários códigos QR UPI de menos de ₹2.000 para que não incida intercâmbio nem MDR. Grátis, sem cadastro e no seu aparelho.",
+        "keywords": [
+          "UPI sem MDR",
+          "divisor de QR UPI",
+          "dividir cobrança em QR",
+          "evitar taxas de MDR",
+          "limite UPI 2000 intercâmbio",
+          "cobrança sem MDR"
+        ],
+        "ogTitle": "Divisor de QR UPI sem MDR",
+        "ogDescription": "Divida uma cobrança grande em vários códigos QR UPI de menos de ₹2.000 e receba o valor inteiro sem pagar MDR."
+      },
+      "hero": {
+        "headline": "Divisor de QR UPI sem MDR",
+        "subheadline": "Quebre uma cobrança grande em vários códigos QR de menos de ₹2.000 e receba o valor inteiro sem perder uma parte em MDR."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como dividir uma cobrança evita o MDR?",
+            "answer": "O MDR do UPI incide apenas acima de ₹2.000 por transação, e então sobre o valor inteiro, não só sobre o excedente. Uma cobrança de ₹7.500 recebida de uma só vez cruza essa linha e é taxada sobre os ₹7.500 inteiros, mas recebida como quatro códigos QR de ₹2.000 ou menos, cada transação fica abaixo do limite e nada é cobrado."
+          },
+          {
+            "question": "Por que o padrão é ₹1.999 e não ₹2.000?",
+            "answer": "₹2.000 é a própria fronteira. Deixar o teto uma rupia abaixo mantém cada transação claramente sob o limite, e não exatamente nele, o que afasta qualquer discussão sobre como um determinado banco adquirente arredonda ou interpreta o limite. Se preferir, pode mudar o número."
+          },
+          {
+            "question": "Meu ID UPI é enviado aos servidores da Setu?",
+            "answer": "Não. Cada código QR é gerado no seu navegador, e o seu ID UPI é guardado somente no armazenamento local do seu próprio aparelho, para estar ali na próxima vez. Nada da cobrança chega aos nossos servidores."
+          },
+          {
+            "question": "Pagamentos UPI de conta bancária têm MDR de qualquer forma?",
+            "answer": "Até ₹2.000, não. A partir de 15 de outubro de 2026, pagamentos UPI a lojistas acima de ₹2.000 têm MDR de 0,4% sobre o valor inteiro da transação, com teto de ₹300. Débito RuPay e mandatos de UPI Autopay seguem isentos, assim como lojistas que recebem menos de ₹1 lakh por mês via QR UPI — então verifique se a taxa se aplica a você antes de dividir qualquer coisa."
+          },
+          {
+            "question": "É permitido dividir uma cobrança desse jeito?",
+            "answer": "Receber vários pagamentos separados de um cliente é prática comercial comum, e nada aqui contorna os controles de um sistema de pagamentos. Dito isso, os contratos com bancos adquirentes variam, e alguns proíbem estruturar transações de propósito para evitar taxas. Confira o seu próprio contrato de lojista antes de tornar isso rotina."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Por que isso funciona",
+          "paragraphs": [
+            "A partir de 15 de outubro de 2026, pagamentos UPI a lojistas têm MDR de 0,4% — mas **somente em transações acima de ₹2.000**, e então sobre o valor inteiro e não só sobre o excedente, com teto de ₹300 por transação. Em ₹2.000 ou abaixo não há MDR algum. Débito RuPay e mandatos de UPI Autopay seguem isentos, assim como lojistas que recebem menos de ₹1 lakh por mês via QR UPI.",
+            "Esse limite é por transação, não por cliente nem por dia. Uma conta de ₹7.500 recebida de uma só vez fica acima dele e é taxada sobre os ₹7.500 inteiros, mais 18% de GST sobre essa taxa. Os mesmos ₹7.500 recebidos como quatro códigos QR de ₹1.999, ₹1.999, ₹1.999 e ₹1.503 ficam sob a linha em cada parte, e o valor inteiro é liquidado para você.",
+            "Veja quanto você paga hoje com a [Calculadora de MDR](/calculators/mdr-calculator) e depois traga esse valor para cá para ver a divisão."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como usar",
+          "steps": [
+            "Informe o valor total que precisa receber",
+            "Deixe o teto em ₹1.999, ou defina o seu",
+            "Acrescente o seu ID UPI e o nome do negócio",
+            "Mostre cada código QR ao cliente por vez, ou compartilhe os links UPI",
+            "Use a nota de referência para conciliar as partes com uma única conta"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Antes de tornar isso rotina",
+          "text": "Receber vários pagamentos separados de um cliente é prática comercial comum, e nada aqui contorna qualquer controle do sistema de pagamentos. Os contratos com bancos adquirentes variam, porém, e alguns restringem estruturar transações de propósito para evitar taxas. Confira o seu próprio contrato de lojista antes de depender disso no dia a dia — e verifique primeiro se a taxa sequer se aplica a você, já que débito RuPay, mandatos de UPI Autopay e lojistas abaixo de ₹1 lakh por mês em QR UPI são isentos de qualquer forma."
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "links": [
+            {
+              "label": "Calculadora de MDR"
+            },
+            {
+              "label": "Gerador de QR UPI dinâmico"
+            },
+            {
+              "label": "Gerador de faturas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gerador de cardápio QR",
+      "shortDescription": "Crie um QR code de cardápio digital — o cardápio inteiro fica dentro do QR, sem hospedagem.",
+      "seo": {
+        "title": "Gerador de cardápio QR grátis para restaurantes",
+        "description": "Crie o código QR do seu cardápio digital em minutos. O cardápio inteiro fica dentro do QR: sem hospedagem, sem assinatura, sem cadastro. Imprima e pronto.",
+        "keywords": [
+          "gerador de cardápio QR",
+          "código QR de cardápio digital",
+          "cardápio QR para restaurante",
+          "cardápio QR grátis",
+          "cardápio sem contato",
+          "criador de código QR de cardápio",
+          "cardápio digital para restaurantes"
+        ],
+        "ogTitle": "Gerador de cardápio QR grátis para restaurantes",
+        "ogDescription": "Monte seu cardápio, pegue o código QR e imprima. O cardápio inteiro vive dentro do QR: não precisa de hospedagem nem assinatura."
+      },
+      "hero": {
+        "headline": "Gerador de cardápio QR",
+        "subheadline": "Monte seu cardápio digital e receba um código QR pronto para imprimir. O cardápio inteiro fica dentro do QR: sem hospedagem, sem assinatura, nada que expire."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como o cardápio QR funciona sem hospedagem?",
+            "answer": "Seu cardápio inteiro é comprimido e guardado dentro do próprio código QR. Quando o cliente escaneia, o celular dele abre a nossa página de cardápio, que lê os dados do link do QR e mostra na hora. Não há banco de dados, não há conta e não há nada que expire."
+          },
+          {
+            "question": "O gerador de cardápio QR é realmente grátis?",
+            "answer": "Sim, totalmente grátis, sem cadastro, sem assinatura e sem marca d'água no seu cardápio. Como o cardápio vive dentro do código QR, não temos custos de hospedagem para repassar a você."
+          },
+          {
+            "question": "Como atualizo o cardápio ou os preços?",
+            "answer": "Volte a esta página: seu cardápio fica salvo automaticamente no seu navegador. Mude os pratos ou os preços, baixe o novo código QR e substitua o impresso. Lembre-se de que um código QR impresso mostra sempre o cardápio com que foi gerado."
+          },
+          {
+            "question": "Quantos itens cabem em um código QR?",
+            "answer": "Um código QR guarda cerca de 2.900 caracteres, e comprimimos seu cardápio para aproveitar ao máximo. Normalmente cabem de 60 a 100 itens, dependendo do tamanho das suas descrições. O medidor de capacidade mostra quanto espaço resta, e para cardápios muito grandes você pode criar códigos QR separados para comidas e bebidas."
+          },
+          {
+            "question": "Posso ter um código QR que não muda quando eu atualizo o cardápio?",
+            "answer": "Sim — é para isso que serve o cardápio QR premium. Seu cardápio fica guardado online e o código QR carrega apenas um link permanente curto, então escaneá-lo sempre mostra o seu cardápio mais recente. Mude um preço, marque um prato como esgotado ou coloque um cardápio de estação e o código QR impresso continua funcionando, de modo que você nunca reimprime os displays de mesa. Ele também tira o limite de tamanho e acrescenta fotos, botões de esgotado e a contagem diária de leituras. A ferramenta grátis desta página guarda o cardápio inteiro dentro do próprio código QR, e é por isso que um novo QR é gerado sempre que o cardápio muda."
+          },
+          {
+            "question": "Posso importar meu cardápio do Excel ou CSV?",
+            "answer": "Sim. Envie um arquivo Excel (.xlsx, .xls) ou CSV com colunas de Categoria, Nome do item, Preço, Descrição e Tipo (veg/não veg) e seu cardápio inteiro é preenchido de uma vez. Você também pode exportar o cardápio atual para o Excel, mudar os preços lá e importar de novo — sem redigitar nada."
+          },
+          {
+            "question": "Os dados do meu cardápio são enviados para um servidor?",
+            "answer": "Não. O código QR é gerado inteiramente no seu navegador, e seu cardápio fica salvo apenas no armazenamento local dele. Os dados do seu cardápio nunca tocam os nossos servidores."
+          },
+          {
+            "question": "Os clientes precisam instalar um aplicativo?",
+            "answer": "Nenhum aplicativo. A câmera de qualquer celular ou um leitor de QR abre o cardápio direto no navegador. A página do cardápio é leve e carrega rápido mesmo em conexões lentas."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Por que usar o gerador de cardápio QR da Setu?",
+          "items": [
+            {
+              "title": "O cardápio mora no QR",
+              "text": "Seu cardápio inteiro é comprimido dentro do próprio código QR. Sem banco de dados, sem taxa de hospedagem, sem link que para de funcionar."
+            },
+            {
+              "title": "Grátis para sempre",
+              "text": "Sem cadastro, sem assinatura, sem cobrança por leitura. Gere e reimprima quantos códigos QR de cardápio precisar."
+            },
+            {
+              "title": "Feito para cardápios indianos",
+              "text": "Marcas veg e não veg, preços em ₹ e categorias como entradas, pratos principais e bebidas — prontas desde o início."
+            },
+            {
+              "title": "A cor da sua marca",
+              "text": "Escolha uma cor de tema que combine com o seu restaurante. A página do cardápio escaneado usa essa cor nos títulos e nos destaques."
+            },
+            {
+              "title": "Privado por natureza",
+              "text": "Tudo acontece no seu navegador. Seu cardápio fica salvo localmente no seu aparelho e nunca é enviado aos nossos servidores."
+            },
+            {
+              "title": "Sem aplicativo para o cliente",
+              "text": "Os clientes escaneiam com a câmera do celular e o cardápio abre no navegador — rápido, leve e pensado para o celular."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como funciona?",
+          "steps": [
+            "Informe o nome do seu restaurante e escolha uma cor de tema",
+            "Acrescente categorias e pratos com preços, descrições e marcas veg/não veg",
+            "Seu cardápio é comprimido e empacotado no código QR automaticamente",
+            "Baixe o código QR pronto para imprimir e coloque nas mesas, no balcão ou na porta",
+            "Os clientes escaneiam e o cardápio completo abre na hora — sem nenhum aplicativo"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Onde posso usar um cardápio QR?",
+          "items": [
+            "Displays de mesa e adesivos no seu restaurante ou café",
+            "Embalagens de cozinha fantasma e sacolas de entrega",
+            "Barracas de comida, food trucks e balcões temporários",
+            "Compartilhe o link do cardápio direto no WhatsApp ou no Instagram",
+            "Cartões de serviço de quarto e cardápios de banquete"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Precisa de um código QR que nunca mude?",
+          "intro": "Como esta ferramenta grátis guarda o cardápio inteiro dentro do código QR, um código novo é gerado toda vez que você edita o cardápio — e o cardápio precisa caber em cerca de 2.900 caracteres. Se preferir imprimir um código QR uma vez e nunca mais mexer nele, o cardápio QR premium mantém o seu cardápio online e coloca no código apenas um link permanente curto.",
+          "items": [
+            "O mesmo código QR continua válido depois de cada mudança de preço ou de prato",
+            "Sem limite de tamanho — acrescente quantas categorias e pratos precisar",
+            "Fotos dos pratos, botões de esgotado e vários cardápios para alternar",
+            "Veja quantas pessoas abriram o seu cardápio cada dia"
+          ],
+          "cta": {
+            "label": "Conheça o cardápio QR premium"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas",
+          "intro": "Veja as nossas outras ferramentas para negócios:",
+          "links": [
+            {
+              "label": "Gerador de QR UPI dinâmico"
+            },
+            {
+              "label": "Gerador de faturas"
+            },
+            {
+              "label": "Calculadora de percentual de custo de alimentos"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gerador de orçamentos",
+      "shortDescription": "Orçamentos profissionais com data de validade e acompanhamento de status — impressão ou PDF.",
+      "seo": {
+        "title": "Gerador de orçamentos grátis — estimativas",
+        "description": "Crie orçamentos e estimativas profissionais com data de validade, impostos e totais. Imprima ou salve em PDF. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "gerador de orçamentos",
+          "fazer orçamento grátis",
+          "gerador de estimativas",
+          "modelo de orçamento",
+          "formato de orçamento",
+          "orçamento proforma"
+        ],
+        "ogTitle": "Gerador de orçamentos",
+        "ogDescription": "Crie orçamentos profissionais com data de validade e totais — imprima ou salve em PDF. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de orçamentos",
+        "subheadline": "Orçamentos profissionais com data de validade e acompanhamento do status — imprima ou salve em PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qual a diferença entre orçamento e nota fiscal?",
+            "answer": "O orçamento é uma oferta de preço enviada antes do serviço ou da venda — tem data de validade e não é documento fiscal. A nota é a cobrança emitida depois. Para isso a Setu tem um Gerador de faturas grátis separado."
+          },
+          {
+            "question": "Consigo saber se o orçamento foi aceito?",
+            "answer": "Sim — os orçamentos salvos têm um status: rascunho, enviado, aceito ou recusado. Atualize conforme a negociação andar."
+          },
+          {
+            "question": "Ele reaproveita os dados do meu negócio e dos clientes?",
+            "answer": "Sim. Conecte seu espaço de trabalho Setu e os dados do negócio, os clientes salvos e os produtos se preenchem sozinhos — nada para redigitar."
+          },
+          {
+            "question": "Como consigo o PDF?",
+            "answer": "Clique em Imprimir / PDF e escolha ‘Salvar como PDF’ na janela de impressão do navegador. Tudo acontece no seu dispositivo."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Perfil do negócio",
+      "shortDescription": "Salve os dados do seu negócio uma vez — toda ferramenta Setu reutiliza automaticamente.",
+      "seo": {
+        "title": "Perfil do negócio — um cadastro para tudo",
+        "description": "Salve uma só vez o nome do seu negócio, o GSTIN, o logo e os contatos — todas as ferramentas Setu reaproveitam sozinhas. Grátis, offline, sem cadastro.",
+        "keywords": [
+          "perfil do negócio",
+          "cadastro dos dados do negócio",
+          "perfil com GSTIN",
+          "cadastro do logo do negócio"
+        ],
+        "ogTitle": "Perfil do negócio",
+        "ogDescription": "Preencha os dados do negócio uma vez. O PDV, as faturas, os recibos e as etiquetas reaproveitam sozinhos."
+      },
+      "hero": {
+        "headline": "Perfil do negócio",
+        "subheadline": "Cadastre uma vez. Toda ferramenta Setu neste dispositivo reaproveita — nada pergunta duas vezes."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que cadastrar um perfil do negócio?",
+            "answer": "Para nunca digitar seus dados duas vezes. Nome, GSTIN, logo e endereço ficam salvos uma vez neste dispositivo, e toda ferramenta Setu — PDV, faturas, recibos, etiquetas — preenche sozinha."
+          },
+          {
+            "question": "Onde o perfil fica salvo?",
+            "answer": "No seu navegador, no seu dispositivo, dentro do seu espaço de trabalho Setu privado. Sem cadastro, sem nuvem, e você pode exportar ou apagar quando quiser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de recibos",
+      "shortDescription": "Desenhe um recibo, lance a venda e imprima — o PDV do navegador imprime no mesmo desenho.",
+      "seo": {
+        "title": "Gerador de recibos grátis — desenhe e imprima",
+        "description": "Desenhe o recibo da sua loja — logo, cores, cabeçalho e rodapé — depois preencha uma venda e imprima. O mesmo desenho sai também do PDV da Setu.",
+        "keywords": [
+          "gerador de recibos",
+          "fazer recibo",
+          "modelo de recibo térmico",
+          "desenho de recibo 80mm",
+          "imprimir recibo online",
+          "modelo de recibo de PDV"
+        ],
+        "ogTitle": "Gerador de recibos",
+        "ogDescription": "Desenhe um recibo com sua marca, preencha uma venda e imprima — e reaproveite o desenho nas ferramentas Setu. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de recibos",
+        "subheadline": "Desenhe seu recibo, preencha uma venda e imprima — e o mesmo desenho sai também do PDV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Onde posso usar o modelo de recibo que salvei?",
+            "answer": "Os modelos ficam salvos no seu espaço de trabalho Setu neste dispositivo. O PDV no navegador consegue imprimir as vendas com eles — desenhe aqui uma vez, sem redesenhar nem copiar."
+          },
+          {
+            "question": "Quais tamanhos de papel são aceitos?",
+            "answer": "Térmico de 80mm e 58mm (as bobinas comuns) e A4."
+          },
+          {
+            "question": "A prévia mostra os dados reais do meu negócio?",
+            "answer": "Sim — conecte seu espaço de trabalho e a prévia ao vivo usa o nome, o logo, o endereço e o GSTIN reais do seu negócio."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de códigos de barras",
+      "shortDescription": "Gere códigos EAN-13, Code 128 e QR — baixe como PNG ou PDF.",
+      "seo": {
+        "title": "Gerador de códigos de barras grátis",
+        "description": "Gere códigos de barras EAN-13, Code 128 e QR de graça. Use os produtos que você salvou e baixe em PNG ou PDF. Funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de códigos de barras",
+          "gerador de código de barras grátis",
+          "gerador EAN-13",
+          "gerador Code 128",
+          "código de barras de produto",
+          "criar código de barras online"
+        ],
+        "ogTitle": "Gerador de códigos de barras",
+        "ogDescription": "Gere os códigos de barras dos seus produtos no navegador e baixe em PNG ou PDF. Sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de códigos de barras",
+        "subheadline": "Gere códigos EAN-13, Code 128 e QR — baixe em PNG ou PDF. Funciona offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quais tipos de código posso gerar?",
+            "answer": "EAN-13 (o código padrão do varejo), Code 128 (flexível, aceita qualquer texto — ótimo para SKU) e códigos QR (para links, texto ou UPI)."
+          },
+          {
+            "question": "Este gerador de código de barras é grátis?",
+            "answer": "Sim — totalmente grátis e sem cadastro. Os códigos são gerados no seu dispositivo e nunca vão para um servidor."
+          },
+          {
+            "question": "Posso usar os produtos que já salvei?",
+            "answer": "Sim. Se você usa outras ferramentas Setu, como o PDV no navegador, neste dispositivo, conecte seu espaço de trabalho e gere códigos para os produtos salvos com um clique."
+          },
+          {
+            "question": "Em quais formatos posso baixar?",
+            "answer": "PNG para uso digital e PDF para impressão. Os dois são gerados localmente no seu navegador."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Como funciona?",
+          "steps": [
+            "Escolha o tipo de código — Code 128 para SKU, EAN-13 para varejo, QR para links",
+            "Digite o valor, ou escolha um produto salvo no seu espaço de trabalho",
+            "Baixe em PNG ou PDF e imprima ou compartilhe"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Impressora de etiquetas de preço",
+      "shortDescription": "Imprima etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas.",
+      "seo": {
+        "title": "Impressora de etiquetas de preço grátis",
+        "description": "Imprima etiquetas de preço e código de barras dos seus produtos — folhas A4 (65/40/24 por folha) ou bobinas térmicas. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "impressora de etiquetas",
+          "gerador de etiquetas de preço",
+          "imprimir etiqueta com código de barras",
+          "etiquetas de produto A4",
+          "etiqueta térmica 50x25",
+          "gerador de etiqueta de prateleira"
+        ],
+        "ogTitle": "Impressora de etiquetas de preço",
+        "ogDescription": "Imprima etiquetas de produto em folhas A4 ou bobinas térmicas, direto do seu navegador."
+      },
+      "hero": {
+        "headline": "Impressora de etiquetas de preço",
+        "subheadline": "Etiquetas de preço e código de barras em folhas A4 ou bobinas térmicas — direto do seu navegador."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quais tamanhos de etiqueta são aceitos?",
+            "answer": "Folhas A4 com 65, 40 ou 24 etiquetas por folha, e etiquetas em bobina térmica de 50×25mm e 38×25mm. Escolha o formato e o layout se ajusta sozinho."
+          },
+          {
+            "question": "O que posso colocar em cada etiqueta?",
+            "answer": "Nome do produto, preço, um código de barras Code 128 e o texto do SKU — cada um pode ser ligado ou desligado."
+          },
+          {
+            "question": "Posso imprimir etiquetas dos produtos que salvei?",
+            "answer": "Sim. Se você usa o PDV no navegador da Setu ou outras ferramentas Setu neste dispositivo, conecte seu espaço de trabalho e adicione produtos à lista de etiquetas com um clique — nomes, preços e códigos de barras se preenchem sozinhos."
+          },
+          {
+            "question": "Precisa de algum programa especial?",
+            "answer": "Não. A impressão usa a janela normal do seu navegador, então qualquer impressora que funcione no seu computador funciona aqui — inclusive impressoras térmicas de etiqueta."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registro de estoque",
+      "shortDescription": "Níveis de estoque ao vivo, ajustes e histórico de movimentação — compartilhado com o PDV.",
+      "seo": {
+        "title": "Registro de estoque grátis — estoque atual",
+        "description": "Veja o estoque atual, registre entradas e saídas e confira cada movimentação — compartilhado com o seu PDV de navegador Setu. Grátis e sem cadastro.",
+        "keywords": [
+          "registro de estoque",
+          "livro de estoque",
+          "controle de estoque grátis",
+          "registro de entradas e saídas",
+          "controle de estoque offline"
+        ],
+        "ogTitle": "Registro de estoque",
+        "ogDescription": "Veja o estoque atual, registre entradas e saídas e confira cada movimentação — compartilhado com o seu PDV de navegador Setu. Grátis e sem cadastro."
+      },
+      "hero": {
+        "headline": "Registro de estoque",
+        "subheadline": "Estoque atualizado, ajustes rápidos e todo o histórico de movimentações — uma só verdade com o seu PDV."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "De onde vêm os dados de estoque?",
+            "answer": "Do seu espaço de trabalho Setu neste dispositivo: os mesmos produtos e o mesmo estoque que o PDV de navegador usa. Existe uma só fonte: um ajuste feito aqui aparece na hora no PDV, e cada venda do PDV entra aqui no histórico de movimentações."
+          },
+          {
+            "question": "Meus dados de estoque são enviados para algum lugar?",
+            "answer": "Não. Tudo fica no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem e sem servidor."
+          },
+          {
+            "question": "Posso exportar o registro?",
+            "answer": "Sim: baixe a lista de estoque atual como arquivo CSV, que abre no Excel ou no Google Sheets."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registro de compras",
+      "shortDescription": "Lance notas de fornecedores e atualize o estoque dos produtos com uma confirmação.",
+      "seo": {
+        "title": "Registro de compras grátis — notas de fornecedor",
+        "description": "Registre notas de compra por fornecedor, vincule os itens aos seus produtos e o estoque é atualizado sozinho. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "registro de compras",
+          "registro de nota de compra",
+          "compras de fornecedores",
+          "lançamento de compra grátis",
+          "registro de compras de estoque"
+        ],
+        "ogTitle": "Registro de compras",
+        "ogDescription": "Registre notas de compra por fornecedor, vincule os itens aos seus produtos e o estoque é atualizado sozinho. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Registro de compras",
+        "subheadline": "Registre notas de fornecedor, vincule produtos e atualize o estoque com uma confirmação."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "As compras atualizam o estoque dos meus produtos?",
+            "answer": "Sim. Vincule as linhas da compra aos seus produtos salvos e, depois de uma confirmação, as quantidades compradas entram no estoque — aparecem na hora no Registro de estoque e no PDV de navegador."
+          },
+          {
+            "question": "Preciso digitar os dados do fornecedor de novo?",
+            "answer": "Não. Os fornecedores salvos no Livro de fornecedores aparecem aqui numa lista. Salve um fornecedor uma vez e reutilize sempre."
+          },
+          {
+            "question": "Meus dados de compra ficam privados?",
+            "answer": "Totalmente. Tudo é salvo no seu navegador, no seu dispositivo — sem cadastro, sem nuvem, e você exporta um CSV quando quiser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Livro de fornecedores",
+      "shortDescription": "Todos os seus fornecedores num só lugar — reaproveitado pelo registro de compras.",
+      "seo": {
+        "title": "Livro de fornecedores grátis — contatos, GSTIN",
+        "description": "Mantenha os dados de todos os seus fornecedores num só lugar: contato, GSTIN, endereços e observações. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "livro de fornecedores",
+          "cadastro de fornecedores grátis",
+          "contatos de fornecedores",
+          "GSTIN do fornecedor",
+          "registro de fornecedores"
+        ],
+        "ogTitle": "Livro de fornecedores",
+        "ogDescription": "Mantenha os dados de todos os seus fornecedores num só lugar: contato, GSTIN, endereços e observações. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Livro de fornecedores",
+        "subheadline": "Todos os seus fornecedores num só lugar — salvos uma vez e reaproveitados por cada ferramenta Setu."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Onde ficam salvos os dados dos meus fornecedores?",
+            "answer": "No seu navegador, no seu dispositivo, dentro do seu espaço de trabalho Setu. Nada é enviado — sem cadastro e sem nuvem."
+          },
+          {
+            "question": "Quais outras ferramentas usam meus fornecedores?",
+            "answer": "O Registro de compras escolhe os fornecedores direto deste livro, então você nunca digita os dados do fornecedor de novo ao registrar uma nota de compra."
+          },
+          {
+            "question": "Posso exportar meus fornecedores?",
+            "answer": "Sim: exporte o livro inteiro em CSV, que abre no Excel ou no Google Sheets a qualquer momento."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Controle de despesas",
+      "shortDescription": "Acompanhe despesas por categoria com totais mensais e exportação CSV.",
+      "seo": {
+        "title": "Controle de despesas grátis para pequenos negócios",
+        "description": "Acompanhe as despesas do negócio por categoria — aluguel, salários, compras, contas. Totais do mês e exportação em CSV. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "controle de despesas",
+          "controle de despesas da empresa grátis",
+          "registro de despesas da loja",
+          "livro de despesas",
+          "controle de gastos"
+        ],
+        "ogTitle": "Controle de despesas",
+        "ogDescription": "Acompanhe as despesas do negócio por categoria — aluguel, salários, compras, contas. Totais do mês e exportação em CSV. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Controle de despesas",
+        "subheadline": "Lance cada despesa do negócio por categoria — e veja o lucro real no painel."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Este controle de despesas é grátis mesmo?",
+            "answer": "Sim: grátis, lançamentos ilimitados e sem cadastro. Seus dados de despesas ficam no seu navegador, no seu dispositivo."
+          },
+          {
+            "question": "Como ele se liga ao Painel de lucro?",
+            "answer": "As despesas lançadas aqui entram sozinhas no Painel de lucro da Setu, então o lucro sai de despesas reais — não de estimativas."
+          },
+          {
+            "question": "Posso exportar minhas despesas?",
+            "answer": "Sim: exporte qualquer mês como arquivo CSV, que abre no Excel ou no Google Sheets."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Livro caixa",
+      "shortDescription": "Entradas e saídas diárias de caixa com saldos de abertura e fechamento automáticos.",
+      "seo": {
+        "title": "Livro caixa grátis — saldo diário do caixa",
+        "description": "Livro caixa diário simples para a sua loja: lance entradas e saídas de dinheiro e tenha os saldos de abertura e fechamento prontos. Grátis e sem cadastro.",
+        "keywords": [
+          "livro caixa",
+          "registro diário de caixa",
+          "livro de entradas e saídas",
+          "livro caixa de loja grátis",
+          "fechamento de caixa",
+          "controle de caixa"
+        ],
+        "ogTitle": "Livro caixa",
+        "ogDescription": "Livro caixa diário simples para a sua loja: lance entradas e saídas de dinheiro e tenha os saldos de abertura e fechamento prontos. Grátis e sem cadastro."
+      },
+      "hero": {
+        "headline": "Livro caixa",
+        "subheadline": "Dinheiro que entra, dinheiro que sai e saldo de fechamento — o caderninho da loja, sem o caderninho."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como os saldos de abertura e fechamento são calculados?",
+            "answer": "Sozinhos. O saldo de abertura de um dia é o acumulado de todos os lançamentos anteriores; o de fechamento soma o dinheiro que entrou naquele dia e subtrai o que saiu."
+          },
+          {
+            "question": "Meus dados de caixa ficam privados?",
+            "answer": "Sim: tudo fica no seu navegador, no seu dispositivo. Sem cadastro e sem nuvem. Exporte o livro inteiro em CSV quando quiser."
+          },
+          {
+            "question": "Posso usar para dias anteriores?",
+            "answer": "Sim: escolha qualquer data ao lançar e ao consultar. Os saldos são recalculados em todo o livro."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Painel de lucro",
+      "shortDescription": "Lucro real a partir das suas vendas, custos de produto e despesas.",
+      "seo": {
+        "title": "Painel de lucro grátis — lucro real",
+        "description": "Veja o lucro real do negócio: a receita das vendas do PDV, menos o custo da mercadoria e as despesas reais. Gráficos, períodos de datas, offline.",
+        "keywords": [
+          "painel de lucro",
+          "calculadora de lucro da empresa",
+          "controle de lucro da loja",
+          "lucro líquido pequeno negócio",
+          "lucros e perdas grátis"
+        ],
+        "ogTitle": "Painel de lucro",
+        "ogDescription": "Veja o lucro real do negócio: a receita das vendas do PDV, menos o custo da mercadoria e as despesas reais. Gráficos, períodos de datas, offline."
+      },
+      "hero": {
+        "headline": "Painel de lucro",
+        "subheadline": "Seu lucro real — vendas menos custo da mercadoria menos despesas reais. Sem estimativas."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como o lucro é calculado?",
+            "answer": "Lucro líquido = receita − custo da mercadoria − despesas. A receita vem das vendas do seu PDV no navegador, o custo da mercadoria do preço de custo de cada produto, e as despesas do Controle de despesas — tudo no seu dispositivo."
+          },
+          {
+            "question": "Preciso lançar os dados duas vezes?",
+            "answer": "Não. O painel lê as vendas que você já faturou no PDV e as despesas que você já lançou no Controle de despesas. Nada para redigitar, nada para configurar."
+          },
+          {
+            "question": "Meus dados financeiros são enviados?",
+            "answer": "Nunca. Todos os cálculos acontecem no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem e sem servidor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Razão de clientes",
+      "shortDescription": "Caderneta digital de fiado — crédito, pagamentos e saldo por cliente.",
+      "seo": {
+        "title": "Razão de clientes grátis — caderneta digital",
+        "description": "Caderneta digital: acompanhe o crédito dado e os pagamentos recebidos de cada cliente, com saldo em dia. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "caderneta digital",
+          "razão de clientes",
+          "livro de crédito",
+          "caderneta grátis",
+          "controle de crédito de clientes",
+          "udhaar khata"
+        ],
+        "ogTitle": "Razão de clientes",
+        "ogDescription": "Caderneta digital: acompanhe o crédito dado e os pagamentos recebidos de cada cliente, com saldo em dia. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Razão de clientes",
+        "subheadline": "A sua caderneta, em digital — crédito, pagamentos e saldo de cada cliente."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é uma caderneta digital?",
+            "answer": "A versão digital do caderninho de crédito de sempre: registre o crédito que você dá ao cliente e os pagamentos que ele faz, e o saldo de cada cliente é calculado sozinho."
+          },
+          {
+            "question": "Ela usa os clientes que eu já tenho?",
+            "answer": "Sim. Se você usa o PDV de navegador ou o Gerador de faturas da Setu neste dispositivo, a razão usa a mesma lista de clientes compartilhada — cadastre o cliente uma vez e use em todo lugar."
+          },
+          {
+            "question": "Minha caderneta fica privada?",
+            "answer": "Totalmente. Todos os dados ficam no seu navegador, no seu dispositivo — sem cadastro, sem nuvem. Exporte um backup em CSV quando quiser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Agenda de atendimentos",
+      "shortDescription": "Reservas por dia com duração, status e registro de faltas.",
+      "seo": {
+        "title": "Agenda de atendimentos grátis — salões",
+        "description": "Marque e gerencie atendimentos — visão do dia, status, durações e faltas. Para salões, clínicas, consultores e oficinas. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "agenda de atendimentos",
+          "agendador de horários grátis",
+          "agenda de salão",
+          "registro de consultas de clínica",
+          "agenda de atendimentos online"
+        ],
+        "ogTitle": "Agenda de atendimentos",
+        "ogDescription": "Gestão de horários por dia para salões, clínicas e serviços. Offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Agenda de atendimentos",
+        "subheadline": "Marcações por dia, durações e status — para todo negócio que trabalha com hora marcada."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para quem é esta agenda?",
+            "answer": "Para qualquer negócio com hora marcada: salões, clínicas, consultores, oficinas, professores particulares, advogados. Visão do dia, durações, status e controle de faltas."
+          },
+          {
+            "question": "Ela reaproveita os clientes que eu já tenho?",
+            "answer": "Sim. Se você usa outras ferramentas Setu neste dispositivo, conecte seu espaço de trabalho e escolha os clientes da lista compartilhada em vez de digitar de novo."
+          },
+          {
+            "question": "Meus dados de atendimento ficam privados?",
+            "answer": "Sim — tudo fica no seu navegador, no seu dispositivo. Sem cadastro, sem nuvem, com exportação em CSV quando quiser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de notas de crédito",
+      "shortDescription": "Emita notas de crédito para devoluções e ajustes de cobrança. PDF na hora, sem cadastro.",
+      "seo": {
+        "title": "Gerador de notas de crédito gratuito",
+        "description": "Crie notas de crédito profissionais para devoluções e ajustes. Campos de imposto, linhas detalhadas, PDF na hora. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de notas de crédito",
+          "modelo de nota de crédito",
+          "nota de crédito com imposto",
+          "nota de crédito contra fatura",
+          "criar nota de crédito grátis"
+        ],
+        "ogTitle": "Gerador de notas de crédito",
+        "ogDescription": "Crie notas de crédito profissionais para devoluções e ajustes. Campos de imposto, linhas detalhadas, PDF na hora. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de notas de crédito",
+        "subheadline": "Trate devoluções e ajustes de faturamento com profissionalismo: referencie a fatura, detalhe os itens, imprima o PDF."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Quando devo emitir uma nota de crédito?",
+            "answer": "Quando precisa reduzir o valor de uma fatura já emitida: mercadoria devolvida, cobrança a mais, desconto concedido depois da venda ou erro de faturamento. A nota de crédito referencia a fatura original e registra a redução."
+          },
+          {
+            "question": "Esta nota de crédito atende às exigências fiscais?",
+            "answer": "Ela traz os campos que a prática fiscal espera: seu número de inscrição, o do cliente, a referência à fatura original, linhas detalhadas com as alíquotas e um motivo claro. Declare-a como seu contador orientar."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: tudo permanece no armazenamento local do seu navegador. Nada é enviado a servidor algum e não é preciso se cadastrar."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de notas de débito",
+      "shortDescription": "Crie notas de débito para devoluções de compra, falta de entrega e diferenças de preço. PDF na hora.",
+      "seo": {
+        "title": "Gerador de notas de débito gratuito",
+        "description": "Crie notas de débito para devoluções de compra, falta de mercadoria e diferenças de preço. Campos de imposto, linhas detalhadas e PDF na hora. Grátis.",
+        "keywords": [
+          "gerador de notas de débito",
+          "modelo de nota de débito",
+          "nota de devolução de compra",
+          "nota de débito com imposto",
+          "criar nota de débito grátis"
+        ],
+        "ogTitle": "Gerador de notas de débito",
+        "ogDescription": "Crie notas de débito para devoluções de compra, falta de mercadoria e diferenças de preço. Campos de imposto, linhas detalhadas e PDF na hora. Grátis."
+      },
+      "hero": {
+        "headline": "Gerador de notas de débito",
+        "subheadline": "Devolvendo mercadoria ou contestando a fatura de um fornecedor? Emita uma nota de débito limpa e detalhada em um minuto."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para que serve uma nota de débito?",
+            "answer": "O comprador emite uma nota de débito ao fornecedor para registrar a redução do que deve: mercadoria devolvida, quantidade a menos, itens danificados ou diferença de preço em relação à fatura do fornecedor."
+          },
+          {
+            "question": "Qual a diferença entre nota de débito e nota de crédito?",
+            "answer": "São os dois lados do mesmo ajuste: o comprador emite a nota de débito ao fornecedor e o vendedor responde com (ou emite diretamente) uma nota de crédito. Qual delas você emite depende do lado da operação em que está."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: os documentos são salvos apenas no armazenamento local do seu navegador. Nada é enviado e nenhuma conta é necessária."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de ordem de compra",
+      "shortDescription": "Autorize compras de fornecedores formalmente — itens, preços, prazo e condições em uma OC.",
+      "seo": {
+        "title": "Gerador de ordem de compra gratuito",
+        "description": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "gerador de ordens de compra",
+          "criar ordem de compra",
+          "modelo de ordem de compra",
+          "modelo de ordem de compra grátis",
+          "ordem de compra PDF"
+        ],
+        "ogTitle": "Gerador de ordem de compra",
+        "ogDescription": "Crie ordens de compra profissionais com data de entrega, linhas detalhadas e impostos. Imprima o PDF na hora. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de ordem de compra",
+        "subheadline": "Autorize compras a fornecedores formalmente: itens, preços, data de entrega e condições em uma única ordem limpa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que usar ordem de compra em vez de um telefonema?",
+            "answer": "A ordem registra por escrito os itens, as quantidades, os preços e a data de entrega antes de o dinheiro sair. Evita o \"não foi isso que eu pedi\" e dá um documento para conferir a fatura do fornecedor."
+          },
+          {
+            "question": "O que uma ordem de compra deve conter?",
+            "answer": "Número e data da ordem, dados do fornecedor, linhas detalhadas com quantidades e preços acordados, impostos, data de entrega prevista e quaisquer condições — tudo isso está nesta ferramenta."
+          },
+          {
+            "question": "Posso salvar as ordens para depois?",
+            "answer": "Sim: as ordens salvas ficam no armazenamento local do seu navegador, então você pode reimprimi-las quando quiser. Nada é enviado a um servidor."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gerador de pedido de venda",
+      "shortDescription": "Confirme pedidos de clientes antes do envio — itens, preços e data de entrega num só documento.",
+      "seo": {
+        "title": "Gerador de pedido de venda gratuito",
+        "description": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro.",
+        "keywords": [
+          "gerador de pedidos de venda",
+          "modelo de pedido de venda",
+          "documento de confirmação de pedido",
+          "criar pedido de venda",
+          "modelo de pedido de venda grátis"
+        ],
+        "ogTitle": "Gerador de pedido de venda",
+        "ogDescription": "Confirme os pedidos dos clientes antes do despacho com um pedido de venda profissional: itens, preços, data de entrega, PDF. Grátis e sem cadastro."
+      },
+      "hero": {
+        "headline": "Gerador de pedido de venda",
+        "subheadline": "Confirme o que o cliente pediu — itens, preços e data de entrega — antes de despachar qualquer coisa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Para que serve um pedido de venda?",
+            "answer": "Ele confirma por escrito o pedido do cliente antes do despacho ou do faturamento, fixando itens, quantidades, preços e data de entrega para que os dois lados concordem desde o início."
+          },
+          {
+            "question": "Como ele difere de uma fatura?",
+            "answer": "O pedido de venda confirma o pedido; a fatura cobra o pagamento. Normalmente você emite o pedido na confirmação e o converte em fatura no despacho (essa parte o nosso gerador de faturas gratuito resolve)."
+          },
+          {
+            "question": "Meus dados ficam privados?",
+            "answer": "Sim: tudo permanece no armazenamento local do seu navegador, nada é enviado e não é preciso se cadastrar."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Plano de contas",
+      "shortDescription": "Monte sua lista de contas a partir de um modelo pronto — códigos, tipos e exportação CSV.",
+      "seo": {
+        "title": "Gerador de plano de contas gratuito",
+        "description": "Monte seu plano de contas a partir de um modelo pronto para pequenos negócios. Inclua, codifique e classifique contas, exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "plano de contas",
+          "modelo de plano de contas",
+          "plano de contas para pequena empresa",
+          "códigos de conta",
+          "lista de contas contábeis"
+        ],
+        "ogTitle": "Plano de contas",
+        "ogDescription": "Monte seu plano de contas a partir de um modelo pronto para pequenos negócios. Inclua, codifique e classifique contas, exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Plano de contas",
+        "subheadline": "A espinha dorsal da sua contabilidade — uma lista de contas pronta que você molda ao seu negócio."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um plano de contas?",
+            "answer": "A lista mestra de todas as contas contra as quais o seu negócio registra dinheiro: ativo, passivo, patrimônio líquido, receitas e despesas. Todo lançamento vai para contas desta lista."
+          },
+          {
+            "question": "O que significam os códigos de conta?",
+            "answer": "Uma convenção comum: a série 1000 para ativo, 2000 passivo, 3000 patrimônio líquido, 4000 receitas e 5000 despesas. A numeração deixa lacunas para encaixar contas novas depois."
+          },
+          {
+            "question": "Isso se conecta com as outras ferramentas contábeis?",
+            "answer": "Sim: as ferramentas de lançamentos, livro razão e balancete deste site leem este mesmo plano automaticamente, tudo dentro do seu navegador."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Lançamento contábil",
+      "shortDescription": "Partidas dobradas com débito e crédito equilibrados automaticamente. Alimenta razão e balancete.",
+      "seo": {
+        "title": "Ferramenta de lançamentos contábeis grátis",
+        "description": "Registre lançamentos em partidas dobradas com fechamento automático de débito e crédito. Alimentam o livro razão e o balancete. Grátis, offline, sem cadastro.",
+        "keywords": [
+          "lançamento contábil",
+          "contabilidade por partidas dobradas",
+          "livro diário online",
+          "lançamento débito crédito",
+          "livro diário grátis"
+        ],
+        "ogTitle": "Lançamento contábil",
+        "ogDescription": "Registre lançamentos em partidas dobradas com fechamento automático de débito e crédito. Alimentam o livro razão e o balancete. Grátis, offline, sem cadastro."
+      },
+      "hero": {
+        "headline": "Lançamento contábil",
+        "subheadline": "Contabilidade por partidas dobradas de verdade — débito à esquerda, crédito à direita, sempre fechando."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como funcionam débito e crédito?",
+            "answer": "Cada operação toca pelo menos duas contas, e o total dos débitos tem de igualar o dos créditos. Pagando ₹10.000 de aluguel pelo banco: débito Despesa de aluguel ₹10.000, crédito Banco ₹10.000. A ferramenta bloqueia lançamentos desbalanceados."
+          },
+          {
+            "question": "Para onde vão meus lançamentos?",
+            "answer": "Para um livro diário guardado no seu navegador. As ferramentas de livro razão e balancete leem esse mesmo diário, então sua contabilidade fica consistente nas três."
+          },
+          {
+            "question": "Posso exportar o diário?",
+            "answer": "Sim: com um clique você exporta o diário completo em CSV, pronto para Excel, Google Sheets ou seu contador."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Livro razão",
+      "shortDescription": "Razões por conta com saldos correntes, montados automaticamente a partir dos lançamentos.",
+      "seo": {
+        "title": "Ferramenta de livro razão gratuita — online",
+        "description": "Veja o razão de qualquer conta com saldos acumulados, montado a partir dos seus lançamentos. Exportação em CSV. Grátis, funciona offline, sem cadastro.",
+        "keywords": [
+          "livro razão",
+          "conta do razão online",
+          "razão com saldo acumulado",
+          "livro razão grátis",
+          "razão contábil"
+        ],
+        "ogTitle": "Livro razão",
+        "ogDescription": "Veja o razão de qualquer conta com saldos acumulados, montado a partir dos seus lançamentos. Exportação em CSV. Grátis, funciona offline, sem cadastro."
+      },
+      "hero": {
+        "headline": "Livro razão",
+        "subheadline": "Escolha uma conta e veja cada lançamento com o saldo acumulado — montado a partir do seu diário."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "De onde vêm os dados do razão?",
+            "answer": "Da ferramenta de lançamentos deste site. Cada lançamento registrado aparece no razão de todas as contas que ele toca — sem redigitar nada."
+          },
+          {
+            "question": "O que significa o saldo Dr/Cr?",
+            "answer": "Contas de ativo e despesa normalmente têm saldo devedor (Dr); contas de passivo, patrimônio líquido e receita têm saldo credor (Cr). O razão mostra o saldo acumulado no lado habitual da conta."
+          },
+          {
+            "question": "Posso exportar um razão?",
+            "answer": "Sim: exporte o razão de qualquer conta em CSV com datas, históricos, débitos, créditos e o saldo acumulado."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Conciliação bancária",
+      "shortDescription": "Concilie o extrato bancário com seus livros — cheques não compensados, depósitos em trânsito, tarifas.",
+      "seo": {
+        "title": "Ferramenta de conciliação bancária gratuita",
+        "description": "Concilie seu extrato bancário com o livro caixa: cheques não compensados, depósitos em trânsito e tarifas, até os saldos baterem. Grátis, sem cadastro.",
+        "keywords": [
+          "conciliação bancária",
+          "demonstrativo de conciliação bancária",
+          "modelo de conciliação bancária",
+          "conciliar extrato bancário",
+          "diferença entre banco e livros"
+        ],
+        "ogTitle": "Conciliação bancária",
+        "ogDescription": "Concilie seu extrato bancário com o livro caixa: cheques não compensados, depósitos em trânsito e tarifas, até os saldos baterem. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Conciliação bancária",
+        "subheadline": "O banco diz um número, seus livros dizem outro — vá listando os itens de conciliação até os dois concordarem."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que os saldos do banco e dos livros não batem?",
+            "answer": "Prazos e omissões: cheques que você emitiu e ainda não compensaram, depósitos que o banco ainda não creditou, tarifas e juros que você não registrou. Cada um é um item de conciliação."
+          },
+          {
+            "question": "Com que frequência devo conciliar?",
+            "answer": "No mínimo uma vez por mês, quando o extrato chega. Negócios movimentados conciliam toda semana — quanto mais cedo você pega um erro ou um lançamento faltando, mais fácil é corrigir."
+          },
+          {
+            "question": "E se sobrar diferença depois de ajustar?",
+            "answer": "Procure dígitos trocados de posição (uma diferença divisível por 9 é o sinal clássico), lançamentos duplicados, ou uma operação registrada no lado errado. A ferramenta mostra a diferença restante ao vivo enquanto você adiciona itens."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Analisador de extrato bancário",
+      "shortDescription": "Analise, classifique e revise extratos bancários com privacidade no seu navegador."
+    },
+    {
+      "name": "Balancete de verificação",
+      "shortDescription": "Montado automaticamente dos lançamentos — saldo líquido de cada conta, somado e conferido.",
+      "seo": {
+        "title": "Balancete de verificação gratuito — online",
+        "description": "Um balancete gerado automaticamente a partir dos seus lançamentos: o saldo líquido devedor ou credor de cada conta, somado e conferido. Grátis, sem cadastro.",
+        "keywords": [
+          "balancete de verificação",
+          "modelo de balancete",
+          "balancete online",
+          "conferência débito crédito",
+          "balancete contábil"
+        ],
+        "ogTitle": "Balancete de verificação",
+        "ogDescription": "Um balancete gerado automaticamente a partir dos seus lançamentos: o saldo líquido devedor ou credor de cada conta, somado e conferido. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Balancete de verificação",
+        "subheadline": "O saldo líquido de cada conta no seu lado devedor ou credor — somado, conferido e pronto para exportar."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um balancete de verificação?",
+            "answer": "Uma lista de todas as contas com saldo diferente de zero, mostradas no lado devedor ou credor. Se seus lançamentos em partidas dobradas estão certos, o total dos débitos iguala o dos créditos."
+          },
+          {
+            "question": "De onde vêm os números?",
+            "answer": "Da ferramenta de lançamentos deste site: o balancete se recalcula sozinho a partir dos seus lançamentos registrados, usando seu plano de contas."
+          },
+          {
+            "question": "E se não fechar?",
+            "answer": "Com esta ferramenta deveria sempre fechar, porque lançamentos desbalanceados não podem ser registrados. Se você importou ou editou dados em outro lugar, o aviso de diferença informa o quanto os dois lados se separam."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Demonstração de resultado",
+      "shortDescription": "Monte a DRE — da receita ao lucro líquido com margens calculadas ao vivo. PDF ou CSV.",
+      "seo": {
+        "title": "DRE gratuita — demonstração de resultado",
+        "description": "Monte uma DRE: receita, custo das mercadorias, despesas e lucro bruto, operacional e líquido com as margens. Imprima em PDF ou exporte CSV. Grátis.",
+        "keywords": [
+          "demonstração de resultado",
+          "gerador de DRE",
+          "DRE online",
+          "modelo de DRE",
+          "modelo de DRE grátis"
+        ],
+        "ogTitle": "Demonstração de resultado",
+        "ogDescription": "Monte uma DRE: receita, custo das mercadorias, despesas e lucro bruto, operacional e líquido com as margens. Imprima em PDF ou exporte CSV. Grátis."
+      },
+      "hero": {
+        "headline": "Demonstração de resultado",
+        "subheadline": "Receita no topo, lucro líquido na base e cada passo no meio — com as margens calculadas ao vivo."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que entra em uma DRE?",
+            "answer": "Receita, menos custo das mercadorias vendidas (lucro bruto), menos despesas operacionais (lucro operacional), mais outras receitas, menos impostos: sobra o lucro líquido. Esta ferramenta calcula cada nível enquanto você digita."
+          },
+          {
+            "question": "Qual a diferença entre margem bruta e líquida?",
+            "answer": "A margem bruta mostra o quanto seu produto principal é lucrativo antes das despesas fixas; a líquida mostra o que de fato sobra depois de tudo. Margem bruta boa com líquida fina aponta para as despesas fixas."
+          },
+          {
+            "question": "Posso imprimir ou compartilhar a demonstração?",
+            "answer": "Sim: imprima um A4 limpo (ou salve como PDF na janela de impressão) e exporte os números em CSV. Os dados ficam no seu navegador."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Balanço patrimonial",
+      "shortDescription": "Ativos, passivos e patrimônio com verificação de equilíbrio ao vivo. Impressão A4 e CSV.",
+      "seo": {
+        "title": "Gerador de balanço patrimonial gratuito",
+        "description": "Monte um balanço patrimonial com ativo circulante e fixo, passivo e patrimônio líquido. Conferência do fechamento ao vivo, impressão A4 e CSV. Grátis.",
+        "keywords": [
+          "gerador de balanço patrimonial",
+          "modelo de balanço patrimonial",
+          "balanço patrimonial online grátis",
+          "ativo passivo patrimônio líquido",
+          "balanço para pequena empresa"
+        ],
+        "ogTitle": "Balanço patrimonial",
+        "ogDescription": "Monte um balanço patrimonial com ativo circulante e fixo, passivo e patrimônio líquido. Conferência do fechamento ao vivo, impressão A4 e CSV. Grátis."
+      },
+      "hero": {
+        "headline": "Balanço patrimonial",
+        "subheadline": "O que você tem, o que você deve e o que sobra para os sócios — conferido ao vivo, então sempre fecha."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um balanço patrimonial?",
+            "answer": "Uma foto em uma data: ativo (o que a empresa possui), passivo (o que ela deve) e patrimônio líquido (a parte dos sócios). O ativo tem de ser igual ao passivo mais o patrimônio líquido."
+          },
+          {
+            "question": "Por que meu balanço não fecha?",
+            "answer": "A causa mais comum são os lucros acumulados esquecidos: o lucro de exercícios anteriores pertence ao patrimônio líquido. A ferramenta mostra a diferença exata para você achar a falha."
+          },
+          {
+            "question": "Qual a diferença entre ativo circulante e fixo?",
+            "answer": "O ativo circulante vira dinheiro dentro do ano (caixa, contas a receber, estoque); o fixo serve à empresa por mais tempo (equipamentos, móveis, veículos). O passivo se divide da mesma forma, pelo prazo de vencimento."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Demonstração de fluxo de caixa",
+      "shortDescription": "Fluxos operacional, de investimento e de financiamento, do caixa inicial ao final. Imprima ou exporte.",
+      "seo": {
+        "title": "Demonstração de fluxo de caixa gratuita",
+        "description": "Monte uma demonstração de fluxo de caixa por atividades operacionais, de investimento e de financiamento. Do saldo inicial ao final, PDF e CSV. Grátis.",
+        "keywords": [
+          "demonstração de fluxo de caixa",
+          "modelo de fluxo de caixa",
+          "fluxo de caixa online grátis",
+          "operacional investimento financiamento",
+          "fluxo de caixa pequena empresa"
+        ],
+        "ogTitle": "Demonstração de fluxo de caixa",
+        "ogDescription": "Monte uma demonstração de fluxo de caixa por atividades operacionais, de investimento e de financiamento. Do saldo inicial ao final, PDF e CSV. Grátis."
+      },
+      "hero": {
+        "headline": "Demonstração de fluxo de caixa",
+        "subheadline": "De onde o dinheiro veio e para onde foi — operacional, investimento e financiamento, do saldo inicial ao final."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Por que acompanhar o caixa separado do lucro?",
+            "answer": "Lucro é opinião, caixa é fato: uma empresa lucrativa pode ficar sem dinheiro se ele estiver preso em estoque ou em faturas não pagas. A demonstração de fluxo mostra o movimento real."
+          },
+          {
+            "question": "O que vai em cada seção?",
+            "answer": "Operacional: o dia a dia (recebimentos de clientes, pagamentos a fornecedores e salários). Investimento: compra ou venda de ativos. Financiamento: empréstimos tomados ou pagos, capital aportado, retiradas."
+          },
+          {
+            "question": "Como lanço as saídas?",
+            "answer": "Como números negativos — por exemplo −25000 para um equipamento comprado. Cada seção então apura seu próprio líquido e a demonstração vai do caixa inicial ao caixa final."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Extrato do cliente",
+      "shortDescription": "Extrato de conta por cliente — faturas, pagamentos e saldo corrente. Imprima em PDF.",
+      "seo": {
+        "title": "Gerador de extrato do cliente grátis",
+        "description": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "extrato do cliente",
+          "extrato de conta",
+          "modelo de extrato de conta do cliente",
+          "extrato de saldo em aberto",
+          "extrato do devedor"
+        ],
+        "ogTitle": "Extrato do cliente",
+        "ogDescription": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Extrato do cliente",
+        "subheadline": "Cada fatura, recebimento e ajuste de um cliente — com o saldo acumulado que encerra discussões."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um extrato de conta?",
+            "answer": "Um resumo de todas as operações com um cliente num período — faturas emitidas, recebimentos, notas de crédito concedidas — terminando no saldo que ele deve agora."
+          },
+          {
+            "question": "Quando enviar extratos aos clientes?",
+            "answer": "Todo mês aos clientes habituais a prazo, e na hora ao cobrar um pagamento em atraso. Um extrato claro resolve quase toda conversa do tipo “isso já foi pago”."
+          },
+          {
+            "question": "Como o saldo é calculado?",
+            "answer": "Saldo inicial mais faturas, menos recebimentos e notas de crédito, em ordem de data. A ferramenta recalcula o saldo acumulado sozinha conforme você adiciona operações."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Relatório de aging de faturas",
+      "shortDescription": "Faturas em aberto por faixa de atraso — do corrente a 90+ dias, por cliente. Exportação CSV.",
+      "seo": {
+        "title": "Relatório de aging de faturas grátis",
+        "description": "Acompanhe as faturas de cliente não pagas por idade — em dia, 1–30, 31–60, 61–90 e 90+ dias de atraso, por cliente. Exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "relatório de aging de faturas",
+          "aging de contas a receber",
+          "aging de clientes",
+          "relatório de faturas em atraso",
+          "análise de idade dos devedores"
+        ],
+        "ogTitle": "Relatório de aging de faturas",
+        "ogDescription": "Acompanhe as faturas de cliente não pagas por idade — em dia, 1–30, 31–60, 61–90 e 90+ dias de atraso, por cliente. Exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Relatório de aging de faturas",
+        "subheadline": "Quem lhe deve, quanto e com quanto atraso — agrupado por idade para cobrar primeiro o que importa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um relatório de aging de faturas?",
+            "answer": "Uma visão de todas as faturas de cliente não pagas, agrupadas conforme o atraso — ainda não vencidas, 1–30, 31–60, 61–90 e 90+ dias. É a ferramenta padrão para priorizar a cobrança."
+          },
+          {
+            "question": "Qual faixa cobrar primeiro?",
+            "answer": "A mais antiga. A chance de receber cai rápido com a idade — estudos do setor colocam o recebimento esperado de uma dívida com mais de 90 dias bem abaixo do valor de face. A coluna 90+ é a sua lista de prioridades."
+          },
+          {
+            "question": "Como as faturas em atraso afetam o negócio?",
+            "answer": "O dinheiro nas faixas de 30+ é capital de giro que você está emprestando sem juros, enquanto talvez pague pelo seu próprio crédito. Veja a Calculadora de prazos de pagamento para pôr preço num desconto de pagamento antecipado que antecipa a entrada de caixa."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Aging de contas a pagar",
+      "shortDescription": "Contas de fornecedores em aberto por idade — pague as pessoas certas na hora certa. Exportação CSV.",
+      "seo": {
+        "title": "Relatório de aging de contas a pagar grátis",
+        "description": "Acompanhe as notas de fornecedor não pagas por idade — o que vence agora, o que está atrasado e a quem pagar primeiro. Exporte em CSV. Grátis, sem cadastro.",
+        "keywords": [
+          "aging de contas a pagar",
+          "relatório de contas a pagar",
+          "controle de notas de fornecedor",
+          "aging de credores",
+          "relatório de pagamentos pendentes"
+        ],
+        "ogTitle": "Aging de contas a pagar",
+        "ogDescription": "Acompanhe as notas de fornecedor não pagas por idade — o que vence agora, o que está atrasado e a quem pagar primeiro. Exporte em CSV. Grátis, sem cadastro."
+      },
+      "hero": {
+        "headline": "Aging de contas a pagar",
+        "subheadline": "Cada nota de fornecedor não paga, agrupada por idade — para pagar as pessoas certas na hora certa."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um relatório de aging de contas a pagar?",
+            "answer": "Uma visão de todas as notas de fornecedor não pagas, agrupadas conforme o atraso. Mostra a exposição total por fornecedor e sinaliza os pagamentos que podem azedar uma relação."
+          },
+          {
+            "question": "Como usá-lo para programar os pagamentos?",
+            "answer": "Liquide primeiro as notas mais antigas, para preservar a boa vontade do fornecedor e suas condições de prazo, e encaixe o resto na sua posição de caixa. O que ainda não venceu muitas vezes pode esperar até perto do vencimento."
+          },
+          {
+            "question": "Vale pagar antes se o fornecedor oferece desconto?",
+            "answer": "Muitas vezes sim: a Calculadora de prazos de pagamento deste site mostra o retorno anualizado de aceitar um desconto por pagamento antecipado, que com frequência supera deixar o dinheiro no banco."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Orçado vs realizado",
+      "shortDescription": "Plano e realidade por categoria, com variação e variação % calculadas ao vivo. Exportação CSV.",
+      "seo": {
+        "title": "Orçado vs realizado grátis — variações",
+        "description": "Compare o valor orçado com o realizado por categoria, com a variação e a variação % calculadas na hora. Exporte em CSV. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "orçado vs realizado",
+          "relatório de variações",
+          "controle de orçamento empresarial",
+          "análise de variação orçamentária",
+          "comparativo mensal de orçamento"
+        ],
+        "ogTitle": "Orçado vs realizado",
+        "ogDescription": "Compare o valor orçado com o realizado por categoria, com a variação e a variação % calculadas na hora. Exporte em CSV. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Orçado vs realizado",
+        "subheadline": "O plano diante da realidade, categoria por categoria — as variações são calculadas e coloridas enquanto você digita."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é variação orçamentária?",
+            "answer": "A diferença entre o valor realizado e o orçado (realizado − orçado). Nas linhas de despesa uma variação positiva é gasto a mais; nas de receita significa que você superou o plano."
+          },
+          {
+            "question": "Quais variações vale investigar?",
+            "answer": "As grandes em dinheiro e as grandes em porcentagem: 2% de variação no seu maior custo pode pesar mais do que 40% numa conta pequena. Olhe as duas colunas."
+          },
+          {
+            "question": "Com que frequência revisar?",
+            "answer": "Uma vez por mês é o ritmo padrão: cedo o bastante para corrigir o rumo e espaçado o bastante para haver dados reais. Salve a planilha todo mês e exporte o CSV para o seu arquivo."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Análise ABC",
+      "shortDescription": "Classifique o estoque em A, B e C pelo valor de consumo anual — a regra 80/15/5.",
+      "seo": {
+        "title": "Calculadora de análise ABC gratuita",
+        "description": "Classifique o estoque em classes A, B e C pelo valor de consumo anual: a regra 80/15/5, calculada sozinha. Exportação em CSV. Grátis e sem cadastro.",
+        "keywords": [
+          "análise ABC",
+          "classificação de estoque",
+          "método ABC de estoque",
+          "análise de Pareto de estoque",
+          "controle de estoque ABC"
+        ],
+        "ogTitle": "Análise ABC",
+        "ogDescription": "Classifique o estoque em classes A, B e C pelo valor de consumo anual: a regra 80/15/5, calculada sozinha. Exportação em CSV. Grátis e sem cadastro."
+      },
+      "hero": {
+        "headline": "Análise ABC",
+        "subheadline": "Nem todo estoque merece a mesma atenção: ordene os itens por valor anual e controle a classe A de perto."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é análise ABC?",
+            "answer": "Um método de estoque baseado no princípio de Pareto: os itens de classe A são os poucos decisivos (~80% do valor de consumo), os B o grupo intermediário (~15%) e os C os muitos irrelevantes (~5%). Cada classe recebe o nível de controle correspondente."
+          },
+          {
+            "question": "Como os itens são classificados?",
+            "answer": "Ordene os itens pelo valor de consumo anual (quantidade anual × custo unitário), tome o percentual acumulado do valor total e corte em 80% (A), 95% (B) e além (C) — exatamente o que esta ferramenta automatiza."
+          },
+          {
+            "question": "O que fazer com cada classe?",
+            "answer": "A: controle rígido — contagens frequentes, pontos de pedido bem definidos, preços negociados. B: moderado, revisão periódica. C: regras simples e pedidos no atacado. Use junto da nossa calculadora de ponto de pedido para os itens A."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Comparação de fornecedores",
+      "shortDescription": "Compare fornecedores em preço, entrega, prazo e qualidade com pontuação ponderada.",
+      "seo": {
+        "title": "Comparação de fornecedores grátis",
+        "description": "Compare fornecedores por preço, entrega, prazo de pagamento e qualidade com pontuação ponderada — o de melhor valor na hora. Exporte em CSV. Grátis.",
+        "keywords": [
+          "comparação de fornecedores",
+          "ferramenta de comparação de fornecedores",
+          "scorecard de fornecedores",
+          "critérios de escolha de fornecedor",
+          "pontuação ponderada de fornecedores"
+        ],
+        "ogTitle": "Comparação de fornecedores",
+        "ogDescription": "Compare fornecedores por preço, entrega, prazo de pagamento e qualidade com pontuação ponderada — o de melhor valor na hora. Exporte em CSV. Grátis."
+      },
+      "hero": {
+        "headline": "Comparação de fornecedores",
+        "subheadline": "Preço não é tudo — pese também entrega, prazo e qualidade, e deixe a pontuação escolher o fornecedor."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Como funciona a pontuação?",
+            "answer": "Cada critério é normalizado entre os fornecedores (o melhor leva a nota cheia), multiplicado pelo peso que você define e somado numa pontuação de 0 a 100. Mude os pesos e a ordem se atualiza na hora."
+          },
+          {
+            "question": "Que pesos devo usar?",
+            "answer": "Os que doem mais quando algo dá errado. Produto perecível? Pese alto a entrega. Caixa apertado? O prazo de pagamento. Qualidade que o cliente vê? A qualidade. Os padrões (40/20/15/25) servem para a maioria das compras de loja."
+          },
+          {
+            "question": "Por que não ficar com o orçamento mais barato?",
+            "answer": "O fornecedor mais barato que entrega atrasado ou manda qualidade ruim custa mais em falta de estoque, devoluções e clientes perdidos. Uma pontuação ponderada deixa essas trocas explícitas em vez de no achismo."
+          }
+        ]
+      }
+    }
+  ]
+}

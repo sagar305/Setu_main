@@ -14,21 +14,12 @@ import {
 } from "react";
 import { getPreferences, markHydrated, setPreferences } from "@/lib/toolkit/preferences";
 import { isLanguageCode, LANGUAGES, type LanguageCode } from "./config";
-import { BASE_DICT, DICTIONARIES, type DictKey } from "./dictionaries";
-import { CALC_BASE, CALC_DICTIONARIES, type CalcDictKey } from "./calc-dictionaries";
-
+import type { DictKey } from "./dictionaries";
+import type { CalcDictKey } from "./calc-dictionaries";
 // `t` resolves against both the shared chrome dictionary and the calculator
-// dictionary; each falls back to its English base when a key is missing.
-type TKey = DictKey | CalcDictKey;
-
-function translate(lang: LanguageCode, key: TKey): string {
-  if (key in BASE_DICT) {
-    const k = key as DictKey;
-    return DICTIONARIES[lang]?.[k] ?? BASE_DICT[k];
-  }
-  const k = key as CalcDictKey;
-  return CALC_DICTIONARIES[lang]?.[k] ?? CALC_BASE[k];
-}
+// dictionary; each falls back to its English base when a key is missing. The
+// lookup lives in ./translate so server components can use it as well.
+import { translate, type TKey } from "./translate";
 
 type I18n = {
   lang: LanguageCode;
@@ -42,16 +33,39 @@ const I18nContext = createContext<I18n>({
   t: (key) => translate("en", key),
 });
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Always start at "en" (matches server render), then adopt the saved
-  // preference after mount to avoid hydration mismatches.
-  const [lang, setLangState] = useState<LanguageCode>("en");
+export function LanguageProvider({
+  children,
+  routeLang,
+}: {
+  children: ReactNode;
+  /**
+   * The language of the URL, on a route that is published in one.
+   *
+   * Without it the toolkit starts in English and only switches after mount,
+   * once the stored preference has been read — which is fine for a preference
+   * but useless to a search engine, because the HTML that gets crawled is the
+   * English one. Passing the language the route is published in renders the
+   * toolkit in that language on the server, so /hi/calculators/... is Hindi in
+   * the markup rather than only after hydration.
+   *
+   * It also wins over the stored preference for as long as the reader is on
+   * that route: the address bar is the more explicit request of the two, and a
+   * Hindi URL that renders in whatever language was last picked elsewhere would
+   * be neither what the reader asked for nor what the crawler is told it is.
+   */
+  routeLang?: LanguageCode;
+}) {
+  // Without a language in the route, start at "en" to match the server render
+  // and adopt the stored preference after mount; with one, that language is
+  // already what the server rendered.
+  const [lang, setLangState] = useState<LanguageCode>(routeLang ?? "en");
 
   useEffect(() => {
     markHydrated();
+    if (routeLang) return;
     const stored = getPreferences().language;
     if (isLanguageCode(stored)) applyLang(stored, false);
-  }, []);
+  }, [routeLang]);
 
   const applyLang = (code: LanguageCode, persist = true) => {
     setLangState(code);

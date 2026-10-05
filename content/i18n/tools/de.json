@@ -1,0 +1,1714 @@
+{
+  "seo": {
+    "title": "Kostenlose Business-Tools für Gastro & Handel | Setu",
+    "description": "Kostenlose Online-Tools für Gastronomie und kleine Betriebe — Rechnungsgenerator, Rechner und vieles mehr. Ganz ohne Anmeldung nutzbar.",
+    "keywords": [
+      "Business-Tools",
+      "kostenlose Business-Tools",
+      "Rechnungsgenerator",
+      "Tools für Gastronomie",
+      "Tools für kleine Betriebe"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Kostenlose Tools",
+    "headline": "Werkzeuge für Ihren Betrieb",
+    "subheadline": "Kostenlose Tools ohne Anmeldung, gebaut für Gastronomie und Handel — Rechnungen, Rechner und mehr."
+  },
+  "ctaBanner": {
+    "headline": "Sollen sich die Zahlen selbst führen?",
+    "subtext": "Setu Dine erfasst Umsätze, Kosten und Steuern automatisch — weniger Zeit für Rechner, mehr Zeit für Ihren Betrieb.",
+    "cta": {
+      "label": "Setu Dine entdecken"
+    }
+  },
+  "categories": [
+    {
+      "name": "Betriebseinrichtung"
+    },
+    {
+      "name": "Kasse"
+    },
+    {
+      "name": "Rechnungen"
+    },
+    {
+      "name": "Zahlung"
+    },
+    {
+      "name": "Speisekarte"
+    },
+    {
+      "name": "Produkte und Etiketten"
+    },
+    {
+      "name": "Bestand und Einkauf"
+    },
+    {
+      "name": "Finanzen"
+    },
+    {
+      "name": "Kunden"
+    },
+    {
+      "name": "Termine"
+    },
+    {
+      "name": "Geschäftsdokumente"
+    },
+    {
+      "name": "Buchhaltung"
+    },
+    {
+      "name": "Abschlüsse und Berichte"
+    },
+    {
+      "name": "Finanzanalyse"
+    }
+  ],
+  "labels": {
+    "freeTool": "Kostenloses Tool",
+    "loading": "Wird geladen…"
+  },
+  "items": [
+    {
+      "name": "Browser-Kasse",
+      "shortDescription": "Kostenlose Kasse, die offline im Browser läuft — Bonieren, Bestand, Kunden und Belege. Ohne Login."
+    },
+    {
+      "name": "Rechnungsgenerator",
+      "shortDescription": "Professionelle Rechnungen mit Steuerunterstützung erstellen, anpassen und herunterladen.",
+      "seo": {
+        "title": "Kostenloser Rechnungsgenerator — GST-konform",
+        "description": "Erstellen Sie kostenlos professionelle GST-konforme Rechnungen. Mehrere Vorlagen, automatische Steuerberechnung, UPI und sofortiger PDF-Download.",
+        "keywords": [
+          "kostenloser Rechnungsgenerator",
+          "Rechnung erstellen",
+          "GST-Rechnung",
+          "Rechnungsvorlage",
+          "kostenlose Rechnung",
+          "Rechnungsgenerator online",
+          "Rechnung Indien"
+        ],
+        "ogTitle": "Kostenloser Rechnungsgenerator — GST-konform",
+        "ogDescription": "Erstellen Sie professionelle Rechnungen mit GST-Berechnung. Ohne Anmeldung. Sofort als PDF herunterladen."
+      },
+      "hero": {
+        "headline": "Kostenloser Rechnungsgenerator",
+        "subheadline": "Erstellen Sie sofort professionelle GST-konforme Rechnungen. Ohne Anmeldung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine GST-konforme Rechnung?",
+            "answer": "Eine GST-konforme Rechnung enthält Ihre GSTIN, die GSTIN des Kunden, die Positionen mit ihren Steuersätzen und die Aufteilung der Steuer (CGST/SGST oder IGST). Unser Rechnungsgenerator übernimmt alle Berechnungen von selbst."
+          },
+          {
+            "question": "Muss ich mich anmelden oder einloggen?",
+            "answer": "Nein! Dieser Rechnungsgenerator ist vollständig kostenlos und braucht keine Anmeldung. Ihre Rechnungsdaten werden über localStorage in Ihrem Browser gespeichert, damit es beim nächsten Mal schneller geht."
+          },
+          {
+            "question": "Kann ich Rechnungen als PDF herunterladen?",
+            "answer": "Ja! Klicken Sie auf „Download PDF“, und die Rechnung wird sofort erzeugt und heruntergeladen. Das PDF entsteht vollständig auf Ihrem Gerät — Ihre Daten erreichen unsere Server nie."
+          },
+          {
+            "question": "Welche Zahlungswege kann ich auf der Rechnung zeigen?",
+            "answer": "Sie können Bankdaten (Kontonummer, IFSC-Code) und Ihre UPI-ID angeben. Die Rechnung zeigt Ihren Kunden dann diese Zahlungswege."
+          },
+          {
+            "question": "Gibt es verschiedene Rechnungsvorlagen?",
+            "answer": "Ja! Drei professionell gestaltete Vorlagen: Classic (formell), Modern (reduziert) und Colorful (kreativ). Die Markenfarbe wählen Sie für jede Vorlage selbst."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den Setu Rechnungsgenerator nutzen?",
+          "items": [
+            {
+              "title": "Mehrere Vorlagen",
+              "text": "Wählen Sie aus drei professionell gestalteten Vorlagen und passen Sie sie an Ihre Markenfarbe an."
+            },
+            {
+              "title": "Automatisches Speichern",
+              "text": "Ihre Rechnungsdaten werden von selbst im Browser gespeichert. Die nächste Rechnung geht schneller."
+            },
+            {
+              "title": "GST-Berechnung",
+              "text": "Automatische GST-Berechnung mit CGST/SGST-Aufteilung und mehreren Steuersätzen je Position."
+            },
+            {
+              "title": "Auch mobil",
+              "text": "Rechnungen vom Telefon, Tablet oder Rechner erstellen und versenden. Funktioniert überall."
+            },
+            {
+              "title": "Datenschutz zuerst",
+              "text": "Das PDF entsteht vollständig auf Ihrem Gerät. Ihre Rechnungsdaten erreichen unsere Server nie."
+            },
+            {
+              "title": "Für Indien gemacht",
+              "text": "Für indische Kleinbetriebe: GSTIN-Prüfung, CGST/SGST-Aufteilung, UPI-IDs und Betrag in Worten (Lakh/Crore)."
+            }
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Welche Angaben gehören auf eine Rechnung?",
+          "intro": "Auf eine professionelle Rechnung gehört:",
+          "items": [
+            "Name, Adresse, Telefon und E-Mail des Betriebs",
+            "Name und Adresse des Kunden",
+            "Rechnungsnummer und Datum",
+            "Aufgeschlüsselte Liste der Waren oder Leistungen mit Mengen und Preisen",
+            "Anfallende Steuern (in Indien GST)",
+            "Gesamtbetrag und Zahlungsbedingungen",
+            "Zahlungsdaten (Bankkonto, UPI usw.)"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "GST-Konformität",
+          "text": "**Hinweis:** Dieser Rechnungsgenerator ist nur ein Werkzeug für Gestaltung und Berechnung. Er gibt keine GST-Erklärungen ab und sichert nicht die Einhaltung aller Steuervorschriften zu. Für Beratung und Abgabe wenden Sie sich an Ihre Steuerberatung."
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Tools",
+          "intro": "Sehen Sie sich unsere anderen Rechner für den Betrieb an:",
+          "links": [
+            {
+              "label": "GST-Rechner"
+            },
+            {
+              "label": "Einkommensteuer-Rechner"
+            },
+            {
+              "label": "Gewinnmargen-Rechner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dynamischer UPI-QR-Generator",
+      "shortDescription": "Dynamische UPI-QR-Codes mit eigenem Betrag und Verwendungszweck für Sofortzahlungen.",
+      "seo": {
+        "title": "Kostenloser dynamischer UPI-QR-Generator",
+        "description": "Dynamische UPI-QR-Codes sofort erzeugen. Geben Sie Ihre UPI-ID, den Betrag und eine Notiz ein und erhalten Sie einen QR-Code für schnelle Zahlungen.",
+        "keywords": [
+          "UPI-QR-Generator",
+          "dynamischer QR-Code",
+          "UPI-Zahlungs-QR",
+          "QR-Generator kostenlos",
+          "Sofortzahlungs-QR",
+          "UPI-Deeplink",
+          "Zahlungs-QR-Code"
+        ],
+        "ogTitle": "Kostenloser dynamischer UPI-QR-Generator",
+        "ogDescription": "Erzeugen Sie UPI-QR-Codes mit Betrag und Notiz sofort. Weitergeben und schnell kassieren."
+      },
+      "hero": {
+        "headline": "Dynamischer UPI-QR-Generator",
+        "subheadline": "Erzeugen Sie UPI-QR-Codes mit Betrag und Notiz. Sofort weitergeben und schnell kassieren."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein dynamischer UPI-QR-Code?",
+            "answer": "Ein dynamischer UPI-QR-Code ist ein Code, in dem Ihre UPI-ID, der Zahlbetrag und eine Referenznotiz bereits stehen. Beim Scannen füllt er die Zahlungsangaben in jeder UPI-App von selbst aus, und das Kassieren geht schneller."
+          },
+          {
+            "question": "Muss ich mich anmelden?",
+            "answer": "Nein! Dieser UPI-QR-Generator ist vollständig kostenlos und braucht keine Anmeldung. Erzeugen Sie sofort so viele Codes, wie Sie brauchen."
+          },
+          {
+            "question": "Wie nutze ich den erzeugten QR-Code?",
+            "answer": "Laden Sie den QR-Code herunter und stellen Sie ihn in Ihrem Laden, Ihrem Restaurant oder auf Ihrer Rechnung aus. Ihre Kunden scannen ihn mit einer beliebigen UPI-App (Google Pay, PhonePe, Paytm und andere) und zahlen sofort."
+          },
+          {
+            "question": "Kann ich den Zahlbetrag festlegen?",
+            "answer": "Ja! Sie können einen festen Betrag in den QR-Code aufnehmen. Er ist dann bereits ausgefüllt, wenn der Kunde seine UPI-App öffnet."
+          },
+          {
+            "question": "Welche UPI-Anbieter werden unterstützt?",
+            "answer": "Unser Generator arbeitet mit allen großen indischen UPI-Anbietern, darunter SBI, ICICI, HDFC, Axis, IDFC, Kotak, Airtel Payments Bank, Google Pay, PhonePe, Paytm und über 80 weitere Banken und Zahlungs-Apps."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den Setu UPI-QR-Generator nutzen?",
+          "items": [
+            {
+              "title": "Sofort erzeugt",
+              "text": "Die QR-Codes entstehen auf der Stelle. Keine Anmeldung, kein Warten. Erzeugen Sie so viele, wie Sie brauchen."
+            },
+            {
+              "title": "Nach Ihren Vorgaben",
+              "text": "Legen Sie den Betrag fest und ergänzen Sie eine Referenznotiz. Gut für Belege, Rechnungen oder feste Preise."
+            },
+            {
+              "title": "Alle Banken",
+              "text": "Arbeitet mit allen großen indischen Banken und UPI-Apps. Ihre Kunden zahlen aus der App, die sie nutzen."
+            },
+            {
+              "title": "Auch am Telefon",
+              "text": "Funktioniert gut auf Telefon, Tablet und Rechner. Sofort herunterladen und weitergeben."
+            },
+            {
+              "title": "Sicher und privat",
+              "text": "Alle QR-Codes entstehen auf Ihrem Gerät. Ihre UPI-ID erreicht unsere Server nie."
+            },
+            {
+              "title": "Herunterladen und teilen",
+              "text": "Laden Sie die QR-Codes als Bild herunter oder kopieren Sie den UPI-Deeplink. Nutzen Sie ihn, wo Sie wollen."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "intro": "So erzeugen Sie in wenigen Schritten einen UPI-QR-Code:",
+          "steps": [
+            "Geben Sie Ihre UPI-ID ein (zum Beispiel ihrname@upi)",
+            "Ergänzen Sie auf Wunsch den Zahlbetrag",
+            "Ergänzen Sie eine Referenznotiz (optional)",
+            "Laden Sie den QR-Code herunter oder kopieren Sie den UPI-Link",
+            "Geben Sie ihn an Kunden weiter oder stellen Sie ihn im Laden aus"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Wo kann ich UPI-QR-Codes einsetzen?",
+          "items": [
+            "Im Restaurant, im Café oder im Laden aufstellen",
+            "Auf Ihre Rechnungen oder Belege setzen",
+            "Über WhatsApp oder soziale Netzwerke weitergeben",
+            "In Ihre E-Mails aufnehmen",
+            "Ausdrucken und auf Lieferpakete kleben"
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Tools",
+          "intro": "Sehen Sie sich unsere anderen Tools für den Betrieb an:",
+          "links": [
+            {
+              "label": "Rechnungsgenerator"
+            },
+            {
+              "label": "GST-Rechner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UPI-QR-Splitter ohne MDR",
+      "shortDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter 2.000 ₹ auf, damit weder MDR noch Interbankenentgelt anfallen.",
+      "seo": {
+        "title": "UPI-QR-Splitter ohne MDR — Zahlung aufteilen | Setu",
+        "description": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter ₹2.000 auf, damit kein Interchange und kein MDR anfällt. Kostenlos, ohne Anmeldung, auf Ihrem Gerät.",
+        "keywords": [
+          "UPI ohne MDR",
+          "UPI-QR-Splitter",
+          "Zahlung in QR-Codes aufteilen",
+          "MDR-Gebühren vermeiden",
+          "UPI-Grenze 2000 Interchange",
+          "Inkasso ohne MDR"
+        ],
+        "ogTitle": "UPI-QR-Splitter ohne MDR",
+        "ogDescription": "Teilen Sie eine große Zahlung in mehrere UPI-QR-Codes unter ₹2.000 auf und kassieren Sie den vollen Betrag ohne MDR."
+      },
+      "hero": {
+        "headline": "UPI-QR-Splitter ohne MDR",
+        "subheadline": "Zerlegen Sie eine große Zahlung in mehrere QR-Codes unter ₹2.000 und kassieren Sie den vollen Betrag, ohne einen Anteil an MDR zu verlieren."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie vermeidet das Aufteilen einer Zahlung den MDR?",
+            "answer": "Der UPI-MDR greift erst über ₹2.000 je Transaktion, und dann auf den ganzen Betrag und nicht nur auf den Überschuss. Ein Inkasso von ₹7.500 als eine Zahlung überschreitet diese Grenze und wird auf die vollen ₹7.500 berechnet; als vier QR-Codes von ₹2.000 oder weniger bleibt jede Transaktion unter der Schwelle, und es fällt nichts an."
+          },
+          {
+            "question": "Warum liegt der Vorgabewert bei ₹1.999 und nicht bei ₹2.000?",
+            "answer": "₹2.000 ist die Grenze selbst. Die Obergrenze eine Rupie darunter zu setzen hält jede Transaktion deutlich unter der Schwelle statt genau darauf, und das erspart jeden Streit darüber, wie eine bestimmte Acquirer-Bank die Grenze rundet oder auslegt. Sie können den Wert ändern, wenn Sie möchten."
+          },
+          {
+            "question": "Wird meine UPI-ID an die Server von Setu gesendet?",
+            "answer": "Nein. Jeder QR-Code entsteht in Ihrem Browser, und Ihre UPI-ID wird nur im lokalen Speicher Ihres eigenen Geräts abgelegt, damit sie beim nächsten Mal da ist. Nichts von der Zahlung erreicht unsere Server."
+          },
+          {
+            "question": "Fällt bei UPI-Zahlungen vom Bankkonto überhaupt MDR an?",
+            "answer": "Bis ₹2.000 nicht. Ab dem 15. Oktober 2026 tragen UPI-Händlerzahlungen über ₹2.000 einen MDR von 0,4 % auf den gesamten Transaktionswert, gedeckelt auf ₹300. RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen — prüfen Sie also, ob die Gebühr Sie überhaupt betrifft, bevor Sie etwas aufteilen."
+          },
+          {
+            "question": "Ist es erlaubt, eine Zahlung so aufzuteilen?",
+            "answer": "Mehrere getrennte Zahlungen von einem Kunden einzuziehen ist gewöhnliche Handelspraxis, und hier wird keine Kontrolle eines Zahlungssystems umgangen. Allerdings unterscheiden sich die Verträge mit Acquirer-Banken, und manche untersagen es, Transaktionen absichtlich so zu gestalten, dass Gebühren vermieden werden. Prüfen Sie Ihren eigenen Händlervertrag, bevor Sie das zur Regel machen."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Warum das funktioniert",
+          "paragraphs": [
+            "Ab dem 15. Oktober 2026 tragen UPI-Händlerzahlungen einen MDR von 0,4 % — aber **nur bei Transaktionen über ₹2.000**, und dann auf den ganzen Betrag und nicht nur auf den Überschuss, gedeckelt auf ₹300 je Transaktion. Bei ₹2.000 oder darunter fällt überhaupt kein MDR an. RuPay-Debit und UPI-Autopay-Mandate bleiben befreit, ebenso Händler, die über UPI-QR weniger als ₹1 Lakh im Monat einnehmen.",
+            "Diese Schwelle gilt je Transaktion, nicht je Kunde und nicht je Tag. Eine Rechnung von ₹7.500 in einem Zug eingezogen liegt darüber und wird auf die vollen ₹7.500 berechnet, zuzüglich 18 % GST auf diese Gebühr. Dieselben ₹7.500 als vier QR-Codes von ₹1.999, ₹1.999, ₹1.999 und ₹1.503 eingezogen bleiben auf jeder Teilstrecke unter der Grenze, und der volle Betrag wird Ihnen gutgeschrieben.",
+            "Rechnen Sie mit dem [MDR-Rechner](/calculators/mdr-calculator) aus, was Sie heute zahlen, und bringen Sie den Betrag dann hierher, um die Aufteilung zu sehen."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "So verwenden Sie es",
+          "steps": [
+            "Geben Sie den Gesamtbetrag ein, den Sie einziehen müssen",
+            "Lassen Sie die Obergrenze bei ₹1.999, oder setzen Sie eine eigene",
+            "Fügen Sie Ihre UPI-ID und den Firmennamen hinzu",
+            "Zeigen Sie dem Kunden jeden QR-Code der Reihe nach, oder teilen Sie die UPI-Links",
+            "Nutzen Sie den Referenzhinweis, um die Teile einer Rechnung zuzuordnen"
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Bevor Sie das zur Regel machen",
+          "text": "Mehrere getrennte Zahlungen von einem Kunden einzuziehen ist gewöhnliche Handelspraxis, und hier wird keine Kontrolle im Zahlungssystem umgangen. Die Verträge mit Acquirer-Banken unterscheiden sich allerdings, und manche beschränken es, Transaktionen absichtlich so zu gestalten, dass Gebühren vermieden werden. Prüfen Sie Ihren eigenen Händlervertrag, bevor Sie sich täglich darauf verlassen — und prüfen Sie zuerst, ob die Gebühr Sie überhaupt betrifft, denn RuPay-Debit, UPI-Autopay-Mandate und Händler unter ₹1 Lakh im Monat auf UPI-QR sind ohnehin befreit."
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Werkzeuge",
+          "links": [
+            {
+              "label": "MDR-Rechner"
+            },
+            {
+              "label": "Dynamischer UPI-QR-Generator"
+            },
+            {
+              "label": "Rechnungsgenerator"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "QR-Speisekarten-Generator",
+      "shortDescription": "QR-Code für eine digitale Speisekarte — die ganze Karte steckt im Code, kein Hosting nötig.",
+      "seo": {
+        "title": "Kostenloser QR-Speisekarten-Generator für Lokale",
+        "description": "Erstellen Sie den QR-Code Ihrer digitalen Speisekarte in Minuten. Die ganze Karte steckt im QR-Code: kein Hosting, kein Abo, keine Anmeldung.",
+        "keywords": [
+          "QR-Speisekarten-Generator",
+          "digitale Speisekarte QR-Code",
+          "QR-Speisekarte für Restaurants",
+          "kostenlose QR-Speisekarte",
+          "kontaktlose Speisekarte",
+          "Speisekarten-QR-Code erstellen",
+          "digitale Speisekarte für Restaurants"
+        ],
+        "ogTitle": "Kostenloser QR-Speisekarten-Generator für Lokale",
+        "ogDescription": "Karte zusammenstellen, QR-Code holen, ausdrucken. Die ganze Karte steckt im QR-Code — Hosting und Abo entfallen."
+      },
+      "hero": {
+        "headline": "QR-Speisekarten-Generator",
+        "subheadline": "Stellen Sie Ihre digitale Speisekarte zusammen und erhalten Sie einen druckfertigen QR-Code. Die ganze Karte steckt im QR-Code: kein Hosting, kein Abo, nichts, was abläuft."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktioniert die QR-Speisekarte ohne Hosting?",
+            "answer": "Ihre ganze Karte wird komprimiert und im QR-Code selbst gespeichert. Scannt ein Gast ihn, öffnet sein Telefon unsere Kartenseite, die die Daten aus dem QR-Link liest und sofort anzeigt. Es gibt keine Datenbank, kein Konto und nichts, was abläuft."
+          },
+          {
+            "question": "Ist der QR-Speisekarten-Generator wirklich kostenlos?",
+            "answer": "Ja, vollständig kostenlos, ohne Anmeldung, ohne Abo und ohne Wasserzeichen auf Ihrer Karte. Da die Karte im QR-Code selbst steckt, haben wir keine Hosting-Kosten, die wir an Sie weitergeben müssten."
+          },
+          {
+            "question": "Wie aktualisiere ich meine Karte oder die Preise?",
+            "answer": "Kommen Sie auf diese Seite zurück — Ihre Karte wird automatisch in Ihrem Browser gespeichert. Ändern Sie Gerichte oder Preise, laden Sie den neuen QR-Code herunter und ersetzen Sie den gedruckten. Beachten Sie: Ein gedruckter QR-Code zeigt immer die Karte, mit der er erzeugt wurde."
+          },
+          {
+            "question": "Wie viele Gerichte passen in einen QR-Code?",
+            "answer": "Ein QR-Code fasst etwa 2.900 Zeichen, und wir komprimieren Ihre Karte, um sie bestmöglich zu nutzen. Üblicherweise passen 60–100 Gerichte hinein, je nachdem, wie lang Ihre Beschreibungen sind. Die Kapazitätsanzeige zeigt, wie viel Platz bleibt; für sehr große Karten können Sie getrennte QR-Codes für Speisen und Getränke anlegen."
+          },
+          {
+            "question": "Bekomme ich einen QR-Code, der sich beim Aktualisieren nicht ändert?",
+            "answer": "Ja — dafür gibt es die Premium-QR-Speisekarte. Ihre Karte liegt online und der QR-Code enthält nur einen kurzen dauerhaften Link, sodass das Scannen immer Ihre aktuellste Karte zeigt. Ändern Sie einen Preis, markieren Sie ein Gericht als ausverkauft oder hängen Sie eine Saisonkarte ein — der gedruckte QR-Code funktioniert weiter, Sie drucken Ihre Tischaufsteller also nie neu. Außerdem fällt die Größenbeschränkung weg, und Fotos, Ausverkauft-Schalter und tägliche Scan-Zahlen kommen hinzu. Das kostenlose Werkzeug auf dieser Seite speichert die ganze Karte im QR-Code selbst, weshalb bei jeder Änderung ein neuer QR-Code entsteht."
+          },
+          {
+            "question": "Kann ich meine Karte aus Excel oder CSV importieren?",
+            "answer": "Ja. Laden Sie eine Excel- (.xlsx, .xls) oder CSV-Datei mit Spalten für Kategorie, Name des Gerichts, Preis, Beschreibung und Art (vegetarisch/nicht vegetarisch) hoch, und Ihre ganze Karte wird in einem Zug gefüllt. Sie können Ihre aktuelle Karte auch nach Excel exportieren, dort die Preise ändern und sie wieder importieren — ohne Abtippen."
+          },
+          {
+            "question": "Werden meine Kartendaten auf einen Server geladen?",
+            "answer": "Nein. Der QR-Code entsteht vollständig in Ihrem Browser, und Ihre Karte wird nur im lokalen Speicher des Browsers gesichert. Ihre Kartendaten berühren unsere Server nie."
+          },
+          {
+            "question": "Müssen Gäste eine App installieren?",
+            "answer": "Keine App nötig. Jede Telefonkamera oder ein QR-Scanner öffnet die Karte direkt im Browser. Die Kartenseite ist leichtgewichtig und lädt auch bei langsamer Verbindung schnell."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "features",
+          "headline": "Warum den QR-Speisekarten-Generator von Setu nutzen?",
+          "items": [
+            {
+              "title": "Die Karte steckt im QR-Code",
+              "text": "Ihre ganze Karte wird in den QR-Code selbst komprimiert. Keine Datenbank, keine Hosting-Gebühren, kein Link, der irgendwann nicht mehr funktioniert."
+            },
+            {
+              "title": "Für immer kostenlos",
+              "text": "Keine Anmeldung, kein Abo, keine Gebühr pro Scan. Erzeugen und drucken Sie so viele Speisekarten-QR-Codes, wie Sie brauchen."
+            },
+            {
+              "title": "Für indische Karten gebaut",
+              "text": "Kennzeichnung vegetarisch und nicht vegetarisch, Preise in ₹ und Kategorien wie Vorspeisen, Hauptgerichte und Getränke — von Anfang an fertig."
+            },
+            {
+              "title": "Ihre Markenfarbe",
+              "text": "Wählen Sie eine Themenfarbe, die zu Ihrem Lokal passt. Die gescannte Kartenseite verwendet sie für Überschriften und Hervorhebungen."
+            },
+            {
+              "title": "Von Grund auf privat",
+              "text": "Alles passiert in Ihrem Browser. Ihre Karte wird lokal auf Ihrem Gerät gespeichert und nie auf unsere Server geladen."
+            },
+            {
+              "title": "Keine App für die Gäste",
+              "text": "Gäste scannen mit der Telefonkamera und die Karte öffnet sich im Browser — schnell, leicht und für das Mobiltelefon gedacht."
+            }
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "steps": [
+            "Geben Sie den Namen Ihres Lokals ein und wählen Sie eine Themenfarbe",
+            "Fügen Sie Kategorien und Gerichte mit Preisen, Beschreibungen und vegetarisch/nicht vegetarisch hinzu",
+            "Ihre Karte wird automatisch komprimiert und in den QR-Code gepackt",
+            "Laden Sie den druckfertigen QR-Code herunter und bringen Sie ihn an Tischen, am Tresen oder an der Tür an",
+            "Gäste scannen ihn und die vollständige Karte öffnet sich sofort — ohne App"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Wo kann ich eine QR-Speisekarte einsetzen?",
+          "items": [
+            "Tischaufsteller und Aufkleber in Ihrem Lokal oder Café",
+            "Verpackungen der Lieferküche und Liefertüten",
+            "Imbissstände, Foodtrucks und Pop-up-Theken",
+            "Teilen Sie den Kartenlink direkt über WhatsApp oder Instagram",
+            "Zimmerservice-Karten im Hotel und Bankettkarten"
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Brauchen Sie einen QR-Code, der sich nie ändert?",
+          "intro": "Weil dieses kostenlose Werkzeug Ihre ganze Karte im QR-Code speichert, entsteht bei jeder Bearbeitung ein neuer Code — und die Karte muss in etwa 2.900 Zeichen passen. Wenn Sie einen QR-Code lieber einmal drucken und nie wieder anfassen möchten, hält die Premium-QR-Speisekarte Ihre Karte online und legt nur einen kurzen dauerhaften Link in den Code.",
+          "items": [
+            "Derselbe QR-Code bleibt nach jeder Preis- oder Gerichtsänderung gültig",
+            "Keine Größenbeschränkung — fügen Sie so viele Kategorien und Gerichte hinzu, wie Sie brauchen",
+            "Fotos der Gerichte, Ausverkauft-Schalter und mehrere Karten zum Umschalten",
+            "Sehen Sie, wie viele Menschen Ihre Karte an jedem Tag geöffnet haben"
+          ],
+          "cta": {
+            "label": "Die Premium-QR-Speisekarte ansehen"
+          }
+        },
+        {
+          "kind": "links",
+          "headline": "Verwandte Werkzeuge",
+          "intro": "Sehen Sie sich unsere weiteren Werkzeuge für Betriebe an:",
+          "links": [
+            {
+              "label": "Dynamischer UPI-QR-Generator"
+            },
+            {
+              "label": "Rechnungsgenerator"
+            },
+            {
+              "label": "Wareneinsatz-Rechner"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Angebotsgenerator",
+      "shortDescription": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — Druck oder PDF.",
+      "seo": {
+        "title": "Kostenloser Angebotsgenerator — Kostenschätzung",
+        "description": "Erstellen Sie professionelle Angebote und Kostenschätzungen mit Gültigkeitsdatum, Steuer und Summen. Drucken oder als PDF speichern. Kostenlos, offline.",
+        "keywords": [
+          "Angebotsgenerator",
+          "Angebot kostenlos erstellen",
+          "Kostenschätzung erstellen",
+          "Angebotsvorlage",
+          "Angebotsformat",
+          "Proforma-Angebot"
+        ],
+        "ogTitle": "Angebotsgenerator",
+        "ogDescription": "Professionelle Angebote mit Gültigkeitsdatum und Summen — drucken oder als PDF speichern. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Angebotsgenerator",
+        "subheadline": "Professionelle Angebote mit Gültigkeitsdatum und Statusverfolgung — drucken oder als PDF speichern."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist der Unterschied zwischen Angebot und Rechnung?",
+            "answer": "Ein Angebot ist ein Preisvorschlag, den Sie vor Arbeit oder Verkauf schicken — es hat ein Gültigkeitsdatum und ist kein Steuerdokument. Die Rechnung stellen Sie danach. Dafür hat Setu einen eigenen kostenlosen Rechnungsgenerator."
+          },
+          {
+            "question": "Kann ich sehen, ob ein Angebot angenommen wurde?",
+            "answer": "Ja — gespeicherte Angebote tragen einen Status: Entwurf, versandt, angenommen oder abgelehnt. Aktualisieren Sie ihn, während das Geschäft läuft."
+          },
+          {
+            "question": "Übernimmt er meine Betriebs- und Kundendaten?",
+            "answer": "Ja. Verbinden Sie Ihren Setu-Arbeitsbereich, dann füllen sich Ihre Betriebsdaten, gespeicherte Kunden und Artikel von selbst — nichts neu eingeben."
+          },
+          {
+            "question": "Wie bekomme ich ein PDF?",
+            "answer": "Klicken Sie auf Drucken / PDF und wählen Sie im Druckdialog Ihres Browsers „Als PDF speichern“. Alles passiert auf Ihrem Gerät."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Betriebsprofil",
+      "shortDescription": "Ihre Betriebsdaten einmal speichern — jedes Setu-Tool übernimmt sie automatisch.",
+      "seo": {
+        "title": "Betriebsprofil — einmal anlegen, überall nutzen",
+        "description": "Betriebsname, GSTIN, Logo und Kontaktdaten einmal speichern — jedes Setu-Tool übernimmt sie von selbst. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Betriebsprofil",
+          "Betriebsdaten anlegen",
+          "GSTIN-Profil",
+          "Betriebslogo einrichten"
+        ],
+        "ogTitle": "Betriebsprofil",
+        "ogDescription": "Betriebsdaten einmal ausfüllen. Kasse, Rechnungen, Belege und Etiketten übernehmen sie von selbst."
+      },
+      "hero": {
+        "headline": "Betriebsprofil",
+        "subheadline": "Einmal anlegen. Jedes Setu-Tool auf diesem Gerät übernimmt es — nichts fragt zweimal."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum ein Betriebsprofil anlegen?",
+            "answer": "Damit Sie Ihre Daten nie zweimal eingeben. Name, GSTIN, Logo und Adresse werden einmal auf diesem Gerät gespeichert, und jedes Setu-Tool — Kasse, Rechnungen, Belege, Etiketten — füllt sie von selbst ein."
+          },
+          {
+            "question": "Wo wird das Profil gespeichert?",
+            "answer": "In Ihrem Browser auf Ihrem Gerät, in Ihrem privaten Setu-Arbeitsbereich. Keine Anmeldung, keine Cloud, und Sie können es jederzeit exportieren oder löschen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Beleggenerator",
+      "shortDescription": "Beleg gestalten, Verkauf eintragen und drucken — die Browser-Kasse druckt im selben Layout.",
+      "seo": {
+        "title": "Kostenloser Beleggenerator — gestalten, drucken",
+        "description": "Gestalten Sie den Beleg Ihres Ladens — Logo, Farben, Kopf und Fuß — tragen Sie dann einen Verkauf ein und drucken ihn. Dasselbe Layout druckt die Setu-Kasse.",
+        "keywords": [
+          "Beleggenerator",
+          "Beleg erstellen",
+          "Thermobeleg-Vorlage",
+          "80mm Belegvorlage",
+          "Beleg online drucken",
+          "Kassenbeleg-Vorlage"
+        ],
+        "ogTitle": "Beleggenerator",
+        "ogDescription": "Gestalten Sie einen Beleg im eigenen Auftritt, tragen einen Verkauf ein und drucken ihn — das Layout gilt in allen Setu-Tools. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Beleggenerator",
+        "subheadline": "Gestalten Sie Ihren Beleg, tragen einen Verkauf ein und drucken ihn — dasselbe Layout druckt auch die Kasse."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wo kann ich meine gespeicherte Belegvorlage nutzen?",
+            "answer": "Vorlagen werden in Ihrem Setu-Arbeitsbereich auf diesem Gerät gespeichert. Die Browser-Kasse kann Bons damit drucken — hier einmal gestalten, kein zweites Gestalten, kein Kopieren."
+          },
+          {
+            "question": "Welche Papiergrößen werden unterstützt?",
+            "answer": "Thermo 80 mm und 58 mm (die üblichen Bonrollen) sowie A4."
+          },
+          {
+            "question": "Zeigt die Vorschau meine echten Betriebsdaten?",
+            "answer": "Ja — verbinden Sie Ihren Arbeitsbereich, dann nutzt die laufende Vorschau Ihren echten Betriebsnamen, Ihr Logo, Ihre Adresse und Ihre GSTIN."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Barcode-Generator",
+      "shortDescription": "EAN-13-, Code-128- und QR-Codes erzeugen — als PNG oder PDF herunterladen.",
+      "seo": {
+        "title": "Kostenloser Barcode-Generator — EAN-13, QR",
+        "description": "EAN-13-, Code-128- und QR-Barcodes kostenlos erzeugen. Gespeicherte Artikel übernehmen, als PNG oder PDF herunterladen. Läuft offline, ohne Anmeldung.",
+        "keywords": [
+          "Barcode-Generator",
+          "Barcode kostenlos erstellen",
+          "EAN-13-Generator",
+          "Code-128-Generator",
+          "Artikel-Barcode",
+          "Barcode online erstellen"
+        ],
+        "ogTitle": "Barcode-Generator",
+        "ogDescription": "Erzeugen Sie Artikel-Barcodes im Browser und laden Sie sie als PNG oder PDF herunter. Ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Barcode-Generator",
+        "subheadline": "EAN-13-, Code-128- und QR-Barcodes erzeugen — als PNG oder PDF herunterladen. Läuft offline."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Welche Barcode-Arten kann ich erzeugen?",
+            "answer": "EAN-13 (der übliche Handels-Barcode), Code 128 (flexibel, codiert beliebigen Text — gut für SKUs) und QR-Codes (für Links, Text oder UPI)."
+          },
+          {
+            "question": "Ist dieser Barcode-Generator kostenlos?",
+            "answer": "Ja — vollständig kostenlos und ohne Anmeldung. Die Barcodes entstehen auf Ihrem Gerät und gehen an keinen Server."
+          },
+          {
+            "question": "Kann ich meine gespeicherten Artikel nutzen?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät andere Setu-Tools wie die Browser-Kasse nutzen, verbinden Sie Ihren Arbeitsbereich und erzeugen Barcodes für gespeicherte Artikel mit einem Klick."
+          },
+          {
+            "question": "In welchen Formaten kann ich herunterladen?",
+            "answer": "PNG für die digitale Nutzung und PDF zum Drucken. Beide entstehen lokal in Ihrem Browser."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "steps",
+          "headline": "Wie funktioniert es?",
+          "steps": [
+            "Barcode-Art wählen — Code 128 für SKUs, EAN-13 für den Handel, QR für Links",
+            "Wert eintippen, oder einen gespeicherten Artikel aus dem Arbeitsbereich nehmen",
+            "Als PNG oder PDF herunterladen und drucken oder weitergeben"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Preisetiketten-Druck",
+      "shortDescription": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen drucken.",
+      "seo": {
+        "title": "Kostenloser Preisetiketten-Druck — A4, Thermo",
+        "description": "Preis- und Barcode-Etiketten für Ihre Artikel drucken — A4-Etikettenbögen (65/40/24 je Bogen) oder Thermorollen. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Etikettendruck",
+          "Preisetiketten erstellen",
+          "Barcode-Etiketten drucken",
+          "Artikeletiketten A4",
+          "Thermoetikett 50x25",
+          "Regaletiketten erstellen"
+        ],
+        "ogTitle": "Preisetiketten-Druck",
+        "ogDescription": "Drucken Sie Artikeletiketten auf A4-Bögen oder Thermorollen, direkt aus Ihrem Browser."
+      },
+      "hero": {
+        "headline": "Preisetiketten-Druck",
+        "subheadline": "Preis- und Barcode-Etiketten auf A4-Bögen oder Thermorollen — direkt aus Ihrem Browser."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Welche Etikettengrößen werden unterstützt?",
+            "answer": "A4-Etikettenbögen mit 65, 40 oder 24 Etiketten je Bogen sowie Thermorollen-Etiketten in 50×25 mm und 38×25 mm. Format wählen, und das Layout passt sich von selbst an."
+          },
+          {
+            "question": "Was kann auf jedes Etikett?",
+            "answer": "Artikelname, Preis, ein Code-128-Barcode und der SKU-Text — jedes einzeln ein- oder ausschaltbar."
+          },
+          {
+            "question": "Kann ich Etiketten für meine gespeicherten Artikel drucken?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät die Setu Browser-Kasse oder andere Setu-Tools nutzen, verbinden Sie Ihren Arbeitsbereich und fügen Artikel mit einem Klick zur Etikettenliste hinzu — Namen, Preise und Barcodes füllen sich von selbst."
+          },
+          {
+            "question": "Braucht es besondere Software?",
+            "answer": "Nein. Gedruckt wird über den normalen Druckdialog Ihres Browsers, also funktioniert hier jeder Drucker, der an Ihrem Rechner läuft — auch Thermo-Etikettendrucker."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bestandsbuch",
+      "shortDescription": "Aktuelle Bestände, Korrekturen und Bewegungshistorie — gemeinsam mit Ihrer Browser-Kasse.",
+      "seo": {
+        "title": "Kostenloses Bestandsbuch — Lagerbestand live",
+        "description": "Aktuellen Lagerbestand sehen, Zu- und Abgänge erfassen und jede Bewegung prüfen — gemeinsam mit Ihrem Setu Browser-Kasse. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Bestandsbuch",
+          "Lagerbuch",
+          "Lagerverwaltung kostenlos",
+          "Bestandsbewegungen erfassen",
+          "Lagerbestand offline"
+        ],
+        "ogTitle": "Bestandsbuch",
+        "ogDescription": "Aktuellen Lagerbestand sehen, Zu- und Abgänge erfassen und jede Bewegung prüfen — gemeinsam mit Ihrem Setu Browser-Kasse. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Bestandsbuch",
+        "subheadline": "Aktueller Bestand, schnelle Korrekturen und die vollständige Bewegungshistorie — eine Wahrheit mit Ihrer Browser-Kasse."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Woher kommen die Bestandsdaten?",
+            "answer": "Aus Ihrem Setu-Arbeitsbereich auf diesem Gerät — dieselben Artikel und derselbe Bestand, die das Browser-Kasse nutzt. Es gibt nur eine Wahrheit: eine Korrektur hier ist in der Kasse sofort sichtbar, und jeder Verkauf in der Kasse erscheint hier in der Bewegungshistorie."
+          },
+          {
+            "question": "Werden meine Bestandsdaten irgendwohin übertragen?",
+            "answer": "Nein. Alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, kein Server."
+          },
+          {
+            "question": "Kann ich das Bestandsbuch exportieren?",
+            "answer": "Ja — laden Sie die aktuelle Bestandsliste als CSV-Datei herunter, die sich in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Einkaufsbuch",
+      "shortDescription": "Lieferantenrechnungen erfassen und den Warenbestand mit einer Bestätigung aktualisieren.",
+      "seo": {
+        "title": "Kostenloses Einkaufsbuch — Lieferantenrechnungen",
+        "description": "Lieferantenrechnungen erfassen, Positionen mit Ihren Artikeln verknüpfen und der Bestand wird automatisch fortgeschrieben. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Einkaufsbuch",
+          "Einkaufsrechnung erfassen",
+          "Lieferanteneinkäufe",
+          "Einkaufsbuchung kostenlos",
+          "Lagerzugang erfassen"
+        ],
+        "ogTitle": "Einkaufsbuch",
+        "ogDescription": "Lieferantenrechnungen erfassen, Positionen mit Ihren Artikeln verknüpfen und der Bestand wird automatisch fortgeschrieben. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Einkaufsbuch",
+        "subheadline": "Lieferantenrechnungen erfassen, Artikel verknüpfen und den Bestand mit einer Bestätigung fortschreiben."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Schreiben Einkäufe den Bestand meiner Artikel fort?",
+            "answer": "Ja. Verknüpfen Sie die Einkaufspositionen mit Ihren gespeicherten Artikeln; nach einer Bestätigung werden die gekauften Mengen dem Bestand zugebucht — sofort sichtbar im Bestandsbuch und im Browser-Kasse."
+          },
+          {
+            "question": "Muss ich Lieferantendaten erneut eingeben?",
+            "answer": "Nein. Im Lieferantenbuch gespeicherte Lieferanten erscheinen hier in einer Auswahlliste. Einmal speichern, immer wiederverwenden."
+          },
+          {
+            "question": "Bleiben meine Einkaufsdaten privat?",
+            "answer": "Vollständig. Alles wird in Ihrem Browser auf Ihrem Gerät gespeichert — keine Anmeldung, keine Cloud, und Sie können jederzeit eine CSV-Datei exportieren."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Lieferantenbuch",
+      "shortDescription": "Alle Lieferanten an einem Ort — das Einkaufsbuch greift direkt darauf zu.",
+      "seo": {
+        "title": "Kostenloses Lieferantenbuch — Kontakte, GSTIN",
+        "description": "Halten Sie alle Lieferantendaten an einem Ort — Kontakt, GSTIN, Adressen und Notizen. Kostenlos, offline, ohne Anmeldung, in jedem Setu-Tool nutzbar.",
+        "keywords": [
+          "Lieferantenbuch",
+          "Lieferantenverwaltung kostenlos",
+          "Lieferantenkontakte",
+          "Lieferanten-GSTIN",
+          "Lieferantenverzeichnis"
+        ],
+        "ogTitle": "Lieferantenbuch",
+        "ogDescription": "Halten Sie alle Lieferantendaten an einem Ort — Kontakt, GSTIN, Adressen und Notizen. Kostenlos, offline, ohne Anmeldung, in jedem Setu-Tool nutzbar."
+      },
+      "hero": {
+        "headline": "Lieferantenbuch",
+        "subheadline": "Alle Lieferanten an einem Ort — einmal gespeichert, von jedem Setu-Tool wiederverwendet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wo werden meine Lieferantendaten gespeichert?",
+            "answer": "In Ihrem Browser auf Ihrem Gerät, innerhalb Ihres Setu-Arbeitsbereichs. Es wird nichts übertragen — keine Anmeldung, keine Cloud."
+          },
+          {
+            "question": "Welche anderen Tools nutzen meine Lieferanten?",
+            "answer": "Das Einkaufsbuch wählt Lieferanten direkt aus diesem Buch, Sie geben also beim Erfassen einer Einkaufsrechnung nie wieder Lieferantendaten ein."
+          },
+          {
+            "question": "Kann ich meine Lieferanten exportieren?",
+            "answer": "Ja — exportieren Sie das ganze Buch als CSV-Datei, die sich jederzeit in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ausgaben-Tracker",
+      "shortDescription": "Ausgaben nach Kategorie erfassen, mit Monatssummen und CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Ausgaben-Tracker für kleine Betriebe",
+        "description": "Betriebsausgaben nach Kategorie erfassen — Miete, Löhne, Einkäufe, Rechnungen. Monatssummen und CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Ausgaben-Tracker",
+          "Betriebsausgaben erfassen kostenlos",
+          "Ausgabenbuch Laden",
+          "Ausgabenregister",
+          "Kostenerfassung kostenlos"
+        ],
+        "ogTitle": "Ausgaben-Tracker",
+        "ogDescription": "Betriebsausgaben nach Kategorie erfassen — Miete, Löhne, Einkäufe, Rechnungen. Monatssummen und CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Ausgaben-Tracker",
+        "subheadline": "Jede Betriebsausgabe nach Kategorie erfassen — und im Dashboard den echten Gewinn sehen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Ist dieser Ausgaben-Tracker wirklich kostenlos?",
+            "answer": "Ja: kostenlos, unbegrenzt viele Buchungen, keine Anmeldung. Ihre Ausgabendaten bleiben in Ihrem Browser auf Ihrem Gerät."
+          },
+          {
+            "question": "Wie hängt er mit dem Gewinn-Dashboard zusammen?",
+            "answer": "Die hier erfassten Ausgaben gehen automatisch in das Gewinn-Dashboard von Setu ein, der Gewinn wird also aus echten Ausgaben berechnet — nicht aus Schätzungen."
+          },
+          {
+            "question": "Kann ich meine Ausgaben exportieren?",
+            "answer": "Ja: exportieren Sie jeden Monat als CSV-Datei, die sich in Excel oder Google Sheets öffnet."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kassenbuch",
+      "shortDescription": "Tägliche Ein- und Auszahlungen mit automatischem Anfangs- und Endbestand.",
+      "seo": {
+        "title": "Kostenloses Kassenbuch — Tagessaldo",
+        "description": "Einfaches tägliches Kassenbuch für Ihren Laden: Bareinnahmen und -ausgaben erfassen, Anfangs- und Endbestand werden automatisch berechnet. Kostenlos.",
+        "keywords": [
+          "Kassenbuch",
+          "tägliches Kassenjournal",
+          "Bareinnahmen Barausgaben Buch",
+          "Kassenbuch Laden kostenlos",
+          "Kassenendbestand",
+          "Kassensturz"
+        ],
+        "ogTitle": "Kassenbuch",
+        "ogDescription": "Einfaches tägliches Kassenbuch für Ihren Laden: Bareinnahmen und -ausgaben erfassen, Anfangs- und Endbestand werden automatisch berechnet. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kassenbuch",
+        "subheadline": "Bareinnahmen, Barausgaben und Endbestand pro Tag — das Ladenbuch, ohne Buch."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie werden Anfangs- und Endbestand berechnet?",
+            "answer": "Automatisch. Der Anfangsbestand eines Tages ist die laufende Summe aller früheren Buchungen; beim Endbestand kommen die Bareinnahmen des Tages hinzu und die Barausgaben gehen ab."
+          },
+          {
+            "question": "Bleiben meine Kassendaten privat?",
+            "answer": "Ja: alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud. Exportieren Sie das ganze Buch jederzeit als CSV."
+          },
+          {
+            "question": "Kann ich es für vergangene Tage nutzen?",
+            "answer": "Ja: wählen Sie beim Erfassen und beim Ansehen ein beliebiges Datum. Die Bestände werden über das ganze Buch neu berechnet."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gewinn-Dashboard",
+      "shortDescription": "Echter Gewinn aus Ihren eigenen Umsätzen, Warenkosten und Ausgaben.",
+      "seo": {
+        "title": "Kostenloses Gewinn-Dashboard — echter Gewinn",
+        "description": "Sehen Sie den echten Gewinn Ihres Betriebs: Umsatz aus den Kassenverkäufen, abzüglich Wareneinsatz und echter Ausgaben. Diagramme, Zeiträume, offline.",
+        "keywords": [
+          "Gewinn-Dashboard",
+          "Gewinnrechner Betrieb",
+          "Ladengewinn verfolgen",
+          "Nettogewinn kleines Unternehmen",
+          "Gewinn und Verlust kostenlos"
+        ],
+        "ogTitle": "Gewinn-Dashboard",
+        "ogDescription": "Sehen Sie den echten Gewinn Ihres Betriebs: Umsatz aus den Kassenverkäufen, abzüglich Wareneinsatz und echter Ausgaben. Diagramme, Zeiträume, offline."
+      },
+      "hero": {
+        "headline": "Gewinn-Dashboard",
+        "subheadline": "Ihr echter Gewinn — Umsatz abzüglich Wareneinsatz abzüglich echter Ausgaben. Keine Schätzungen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie wird der Gewinn berechnet?",
+            "answer": "Nettogewinn = Umsatz − Wareneinsatz − Ausgaben. Der Umsatz kommt aus den Verkäufen Ihrer Browser-Kasse, der Wareneinsatz aus dem Einkaufspreis jedes Artikels und die Ausgaben aus dem Ausgaben-Tracker — alles auf Ihrem Gerät."
+          },
+          {
+            "question": "Muss ich Daten zweimal eingeben?",
+            "answer": "Nein. Das Dashboard liest die Verkäufe, die Sie in der Kasse schon abgerechnet haben, und die Ausgaben, die Sie im Ausgaben-Tracker schon erfasst haben. Nichts neu eingeben, nichts einrichten."
+          },
+          {
+            "question": "Werden meine Finanzdaten übertragen?",
+            "answer": "Niemals. Alle Berechnungen laufen in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, kein Server."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kundenkonto",
+      "shortDescription": "Digitales Anschreibebuch — Kredit, Zahlungen und Saldo je Kunde.",
+      "seo": {
+        "title": "Kostenloses Kundenkonto — Kredit und Saldo",
+        "description": "Digitales Kreditbuch — gewährter Kredit und erhaltene Zahlungen je Kunde, mit laufendem Saldo. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Kundenkonto",
+          "Kreditbuch",
+          "Schuldbuch",
+          "Kontobuch kostenlos",
+          "Kundenkredit verfolgen",
+          "udhaar khata"
+        ],
+        "ogTitle": "Kundenkonto",
+        "ogDescription": "Digitales Kreditbuch — gewährter Kredit und erhaltene Zahlungen je Kunde, mit laufendem Saldo. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Kundenkonto",
+        "subheadline": "Ihr Kreditbuch, digital — Kredit, Zahlungen und Saldo je Kunde."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein digitales Kreditbuch?",
+            "answer": "Die digitale Form des gewohnten Kreditheftes: Erfassen Sie den Kredit, den Sie einem Kunden geben, und dessen Zahlungen; der laufende Saldo wird je Kunde automatisch berechnet."
+          },
+          {
+            "question": "Nutzt es meine vorhandenen Kunden?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät das Setu Browser-Kasse oder den Rechnungsgenerator nutzen, greift das Konto auf dasselbe gemeinsame Kundenverzeichnis zu — einmal anlegen, überall nutzen."
+          },
+          {
+            "question": "Bleibt mein Kundenkonto privat?",
+            "answer": "Vollständig. Alle Daten bleiben in Ihrem Browser auf Ihrem Gerät — keine Anmeldung, keine Cloud. Eine CSV-Sicherung können Sie jederzeit exportieren."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Terminbuch",
+      "shortDescription": "Tagesgenaue Buchungssatzen mit Dauer, Status und Erfassung von Nichterscheinen.",
+      "seo": {
+        "title": "Kostenloses Terminbuch — Salons und Praxen",
+        "description": "Termine annehmen und verwalten — Tagesansicht, Status, Dauer, Nichterscheinen. Für Salons, Praxen, Beratende und Werkstätten. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Terminbuch",
+          "Terminplaner kostenlos",
+          "Terminbuch Friseur",
+          "Terminregister Praxis",
+          "Terminkalender online"
+        ],
+        "ogTitle": "Terminbuch",
+        "ogDescription": "Tagesweise Terminverwaltung für Salons, Praxen und Dienstleistungen. Offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Terminbuch",
+        "subheadline": "Tagesweise Buchungen, Dauer und Status — für jeden Betrieb, der auf Termin arbeitet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Für wen ist dieses Terminbuch?",
+            "answer": "Für jeden Betrieb, der auf Termin arbeitet: Salons, Praxen, Beratende, Reparaturwerkstätten, Nachhilfe, Anwaltskanzleien. Tagesansicht, Dauer, Status und Erfassung von Nichterscheinen."
+          },
+          {
+            "question": "Übernimmt es meine vorhandenen Kunden?",
+            "answer": "Ja. Wenn Sie auf diesem Gerät andere Setu-Tools nutzen, verbinden Sie Ihren Arbeitsbereich und wählen Kunden aus dem gemeinsamen Kundenverzeichnis, statt sie neu einzugeben."
+          },
+          {
+            "question": "Bleiben meine Termindaten privat?",
+            "answer": "Ja — alles bleibt in Ihrem Browser auf Ihrem Gerät. Keine Anmeldung, keine Cloud, CSV-Export jederzeit."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gutschriftengenerator",
+      "shortDescription": "Steuerfertige Gutschriften für Retouren und Rechnungskorrekturen. Sofort als PDF, ohne Anmeldung.",
+      "seo": {
+        "title": "Kostenloser Gutschriftengenerator — PDF sofort",
+        "description": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Gutschrift Generator",
+          "Gutschrift Vorlage",
+          "Gutschrift mit Umsatzsteuer",
+          "Gutschrift zur Rechnung",
+          "Gutschrift kostenlos erstellen"
+        ],
+        "ogTitle": "Gutschriftengenerator",
+        "ogDescription": "Erstellen Sie professionelle Gutschriften für Rücksendungen und Korrekturen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Gutschriftengenerator",
+        "subheadline": "Rücksendungen und Rechnungskorrekturen professionell abwickeln — Rechnung referenzieren, Posten auflisten, PDF drucken."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wann sollte ich eine Gutschrift ausstellen?",
+            "answer": "Wenn Sie den Betrag einer bereits gestellten Rechnung senken müssen — zurückgesandte Ware, ein zu hoher Betrag, ein nachträglicher Rabatt oder ein Rechnungsfehler. Die Gutschrift verweist auf die Originalrechnung und hält die Minderung fest."
+          },
+          {
+            "question": "Erfüllt diese Gutschrift die steuerlichen Anforderungen?",
+            "answer": "Sie enthält die Felder, die die Praxis erwartet — Ihre Steuernummer, die des Kunden, den Verweis auf die Originalrechnung, Einzelposten mit Steuersätzen und einen klaren Grund. Melden Sie sie so, wie es Ihr Steuerberater vorgibt."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — alles bleibt im lokalen Speicher Ihres Browsers. Nichts wird auf einen Server geladen, und eine Anmeldung ist nicht nötig."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Belastungsanzeigen-Generator",
+      "shortDescription": "Belastungsanzeigen für Retouren, Minderlieferung und Preisdifferenzen. Sofort als PDF.",
+      "seo": {
+        "title": "Kostenloser Belastungsanzeigen-Generator",
+        "description": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos.",
+        "keywords": [
+          "Lastschriftanzeige Generator",
+          "Belastungsanzeige Vorlage",
+          "Einkaufsrücksendung Anzeige",
+          "Lastschriftanzeige Umsatzsteuer",
+          "Belastungsanzeige kostenlos"
+        ],
+        "ogTitle": "Belastungsanzeigen-Generator",
+        "ogDescription": "Erstellen Sie Lastschriftanzeigen für Einkaufsrücksendungen, Fehlmengen und Preisabweichungen. Steuerfelder, Einzelposten, PDF sofort. Kostenlos."
+      },
+      "hero": {
+        "headline": "Belastungsanzeigen-Generator",
+        "subheadline": "Ware geht zurück oder die Lieferantenrechnung stimmt nicht? Stellen Sie in einer Minute eine saubere, nach Posten aufgeschlüsselte Belastungsanzeige aus."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wofür dient eine Lastschriftanzeige?",
+            "answer": "Der Käufer stellt dem Lieferanten eine Lastschriftanzeige, um festzuhalten, dass seine Verbindlichkeit sinkt — zurückgesandte Ware, Fehlmenge, beschädigte Artikel oder eine Preisabweichung gegenüber der Lieferantenrechnung."
+          },
+          {
+            "question": "Was unterscheidet sie von einer Gutschrift?",
+            "answer": "Es sind die zwei Seiten derselben Korrektur: der Käufer stellt die Lastschriftanzeige an den Lieferanten, der Verkäufer antwortet mit (oder stellt direkt) eine Gutschrift. Was Sie ausstellen, hängt davon ab, auf welcher Seite des Geschäfts Sie stehen."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — die Belege werden nur im lokalen Speicher Ihres Browsers gespeichert. Nichts wird hochgeladen, und ein Konto ist nicht nötig."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bestellgenerator",
+      "shortDescription": "Einkäufe formell freigeben — Artikel, Preise, Liefertermin und Konditionen in einer Bestellung.",
+      "seo": {
+        "title": "Kostenloser Bestellgenerator — PO erstellen",
+        "description": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Bestellung Generator",
+          "Bestellung erstellen",
+          "Bestellung Vorlage",
+          "kostenlose Bestellvorlage",
+          "Bestellung PDF"
+        ],
+        "ogTitle": "Bestellgenerator",
+        "ogDescription": "Erstellen Sie professionelle Bestellungen mit Liefertermin, Einzelposten und Steuern. Drucken Sie das PDF sofort. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Bestellgenerator",
+        "subheadline": "Einkäufe bei Lieferanten formell freigeben — Artikel, Preise, Liefertermin und Bedingungen auf einer klaren Bestellung."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum eine Bestellung statt eines Anrufs?",
+            "answer": "Die Bestellung hält Artikel, Mengen, Preise und Liefertermin schriftlich fest, bevor Geld fließt. Sie verhindert das „das habe ich so nicht bestellt\" und gibt Ihnen einen Beleg, gegen den Sie die Lieferantenrechnung prüfen können."
+          },
+          {
+            "question": "Was gehört auf eine Bestellung?",
+            "answer": "Bestellnummer und Datum, Lieferantendaten, Einzelposten mit Mengen und vereinbarten Preisen, Steuern, der erwartete Liefertermin und etwaige Bedingungen — alles davon deckt dieses Tool ab."
+          },
+          {
+            "question": "Kann ich Bestellungen für später speichern?",
+            "answer": "Ja — gespeicherte Bestellungen bleiben im lokalen Speicher Ihres Browsers, Sie können sie also jederzeit neu drucken. Nichts wird auf einen Server geladen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Auftragsgenerator",
+      "shortDescription": "Kundenaufträge vor dem Versand bestätigen — Artikel, Preise und Liefertermin in einem Dokument.",
+      "seo": {
+        "title": "Kostenloser Auftragsgenerator online",
+        "description": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Auftragsbestätigung Generator",
+          "Auftragsbestätigung Vorlage",
+          "Bestellbestätigung Dokument",
+          "Auftragsbestätigung erstellen",
+          "kostenlose Auftragsvorlage"
+        ],
+        "ogTitle": "Auftragsgenerator",
+        "ogDescription": "Bestätigen Sie Kundenaufträge vor dem Versand mit einer professionellen Auftragsbestätigung: Artikel, Preise, Liefertermin, PDF. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Auftragsgenerator",
+        "subheadline": "Halten Sie fest, was der Kunde bestellt hat — Artikel, Preise und Liefertermin — bevor etwas das Haus verlässt."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wofür dient eine Auftragsbestätigung?",
+            "answer": "Sie bestätigt den Kundenauftrag schriftlich, bevor Sie versenden oder abrechnen — Artikel, Mengen, Preise und Liefertermin sind damit fixiert, und beide Seiten sind sich von Anfang an einig."
+          },
+          {
+            "question": "Was unterscheidet sie von einer Rechnung?",
+            "answer": "Die Auftragsbestätigung bestätigt den Auftrag, die Rechnung fordert das Geld. Üblich ist, die Bestätigung bei Auftragseingang zu stellen und sie beim Versand in eine Rechnung zu überführen (das übernimmt unser kostenloser Rechnungsgenerator)."
+          },
+          {
+            "question": "Bleiben meine Daten privat?",
+            "answer": "Ja — alles bleibt im lokalen Speicher Ihres Browsers, nichts wird hochgeladen, und eine Anmeldung ist nicht nötig."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kontenplan",
+      "shortDescription": "Kontenliste aus einer fertigen Vorlage für kleine Betriebe — Nummern, Arten, CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Kontenplan-Generator — online",
+        "description": "Bauen Sie Ihren Kontenplan aus einer Vorlage für kleine Betriebe. Konten anlegen, nummerieren und einordnen, als CSV exportieren. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Kontenplan",
+          "Kontenplan Vorlage",
+          "Kontenplan kleines Unternehmen",
+          "Kontonummern",
+          "Liste der Buchhaltungskonten"
+        ],
+        "ogTitle": "Kontenplan",
+        "ogDescription": "Bauen Sie Ihren Kontenplan aus einer Vorlage für kleine Betriebe. Konten anlegen, nummerieren und einordnen, als CSV exportieren. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Kontenplan",
+        "subheadline": "Das Rückgrat Ihrer Buchhaltung — eine fertige Kontenliste, die Sie auf Ihren Betrieb zuschneiden."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein Kontenplan?",
+            "answer": "Die Hauptliste aller Konten, auf die Ihr Betrieb Geld verbucht — Aktiva, Verbindlichkeiten, Eigenkapital, Erträge und Aufwendungen. Jede Buchungssatz läuft auf Konten aus dieser Liste."
+          },
+          {
+            "question": "Was bedeuten die Kontonummern?",
+            "answer": "Eine verbreitete Konvention: 1000er für Aktiva, 2000er Verbindlichkeiten, 3000er Eigenkapital, 4000er Erträge, 5000er Aufwendungen. Die Nummerierung lässt Lücken, damit später neue Konten dazwischen passen."
+          },
+          {
+            "question": "Hängt das mit den anderen Buchhaltungstools zusammen?",
+            "answer": "Ja — die Tools für Buchungssatzen, Hauptbuch und Saldenliste auf dieser Seite lesen denselben Kontenplan automatisch, und zwar alles in Ihrem Browser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Buchungssatz",
+      "shortDescription": "Doppelte Buchführung mit automatischem Soll-Haben-Ausgleich. Speist Hauptbuch und Saldenliste.",
+      "seo": {
+        "title": "Kostenloses Buchungssatzstool — doppelte Buchführung",
+        "description": "Erfassen Sie doppelte Buchungssatzen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Buchungssatz erfassen",
+          "doppelte Buchführung",
+          "Buchungssatzsjournal online",
+          "Soll Haben Buchungssatz",
+          "kostenloses Buchungssatzsjournal"
+        ],
+        "ogTitle": "Buchungssatz",
+        "ogDescription": "Erfassen Sie doppelte Buchungssatzen mit automatischem Abgleich von Soll und Haben. Sie speisen Hauptbuch und Saldenliste. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Buchungssatz",
+        "subheadline": "Echte doppelte Buchführung — Soll links, Haben rechts, immer im Gleichgewicht."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktionieren Soll und Haben?",
+            "answer": "Jeder Vorgang berührt mindestens zwei Konten, und die Summe im Soll muss der Summe im Haben entsprechen. Miete von ₹10.000 per Bank: Soll Mietaufwand ₹10.000, Haben Bank ₹10.000. Unausgeglichene Buchungssatzen lässt das Tool nicht zu."
+          },
+          {
+            "question": "Wohin gehen meine Buchungssatzen?",
+            "answer": "In ein Journal, das in Ihrem Browser liegt. Die Tools für Hauptbuch und Saldenliste lesen dasselbe Journal, sodass Ihre Bücher über alle drei hinweg zusammenpassen."
+          },
+          {
+            "question": "Kann ich mein Journal exportieren?",
+            "answer": "Ja — ein Klick exportiert das gesamte Journal als CSV, fertig für Excel, Google Sheets oder Ihren Steuerberater."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hauptbuch",
+      "shortDescription": "Kontenblätter mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt.",
+      "seo": {
+        "title": "Kostenloses Hauptbuch-Tool — online",
+        "description": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Hauptbuch",
+          "Sachkonto online",
+          "Hauptbuch laufender Saldo",
+          "kostenloses Hauptbuch",
+          "Hauptbuch Buchhaltung"
+        ],
+        "ogTitle": "Hauptbuch",
+        "ogDescription": "Sehen Sie das Hauptbuch zu jedem Konto mit laufenden Salden, automatisch aus Ihren Buchungssatzen erzeugt. CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Hauptbuch",
+        "subheadline": "Konto auswählen und jede Buchungssatz mit dem laufenden Saldo sehen — automatisch aus Ihrem Journal erzeugt."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Woher kommen die Daten im Hauptbuch?",
+            "answer": "Aus dem Buchungssatzstool dieser Seite. Jede erfasste Buchungssatz erscheint im Hauptbuch jedes Kontos, das sie berührt — nichts muss neu eingetippt werden."
+          },
+          {
+            "question": "Was bedeutet der Soll-/Haben-Saldo?",
+            "answer": "Aktiv- und Aufwandskonten tragen normalerweise einen Soll-Saldo (Dr); Verbindlichkeits-, Eigenkapital- und Ertragskonten einen Haben-Saldo (Cr). Das Hauptbuch zeigt den laufenden Saldo auf der üblichen Seite des Kontos."
+          },
+          {
+            "question": "Kann ich ein Konto exportieren?",
+            "answer": "Ja — exportieren Sie das Hauptbuch zu jedem Konto als CSV mit Datum, Buchungssatzstext, Soll, Haben und laufendem Saldo."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bankabstimmung",
+      "shortDescription": "Kontoauszug mit Ihrer Buchhaltung abgleichen — offene Schecks, schwebende Einzahlungen, Gebühren.",
+      "seo": {
+        "title": "Kostenloses Tool zur Bankabstimmung",
+        "description": "Stimmen Sie Ihren Kontoauszug mit dem Kassenbuch ab — nicht eingelöste Schecks, Einzahlungen auf dem Weg und Bankspesen, bis die Salden stimmen.",
+        "keywords": [
+          "Bankabstimmung",
+          "Bankabstimmung Aufstellung",
+          "Vorlage Bankabstimmung",
+          "Kontoauszug abstimmen",
+          "Differenz Bank und Buchhaltung"
+        ],
+        "ogTitle": "Bankabstimmung",
+        "ogDescription": "Stimmen Sie Ihren Kontoauszug mit dem Kassenbuch ab — nicht eingelöste Schecks, Einzahlungen auf dem Weg und Bankspesen, bis die Salden stimmen."
+      },
+      "hero": {
+        "headline": "Bankabstimmung",
+        "subheadline": "Die Bank nennt eine Zahl, Ihre Bücher eine andere — tragen Sie die Abstimmungsposten ein, bis beide übereinstimmen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum stimmen Bank- und Buchsaldo nicht überein?",
+            "answer": "Zeitversatz und Lücken: ausgestellte Schecks, die noch nicht eingelöst sind, Einzahlungen, die die Bank noch nicht gutgeschrieben hat, Spesen und Zinsen, die Sie noch nicht erfasst haben. Jedes davon ist ein Abstimmungsposten."
+          },
+          {
+            "question": "Wie oft sollte ich abstimmen?",
+            "answer": "Mindestens monatlich, sobald der Auszug kommt. Betriebe mit viel Bewegung stimmen wöchentlich ab — je früher Sie einen Fehler oder eine fehlende Buchungssatz finden, desto leichter die Korrektur."
+          },
+          {
+            "question": "Was, wenn nach dem Anpassen eine Differenz bleibt?",
+            "answer": "Prüfen Sie auf vertauschte Ziffern (eine durch 9 teilbare Differenz ist das klassische Zeichen), doppelte Buchungssatzen oder einen Vorgang auf der falschen Seite. Das Tool zeigt die Restdifferenz laufend an, während Sie Posten ergänzen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kontoauszug-Analyse",
+      "shortDescription": "Kontoauszüge privat im Browser auswerten, klassifizieren und prüfen."
+    },
+    {
+      "name": "Saldenliste",
+      "shortDescription": "Automatisch aus Ihren Buchungssatzen — Nettosaldo jedes Kontos, summiert und geprüft.",
+      "seo": {
+        "title": "Kostenlose Saldenliste — online erstellen",
+        "description": "Eine Saldenliste, automatisch aus Ihren Buchungssatzen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Summen und Saldenliste",
+          "Saldenliste Vorlage",
+          "Saldenliste online",
+          "Soll Haben Prüfung",
+          "Saldenliste Buchhaltung"
+        ],
+        "ogTitle": "Saldenliste",
+        "ogDescription": "Eine Saldenliste, automatisch aus Ihren Buchungssatzen erzeugt — je Konto der Saldo im Soll oder Haben, summiert und geprüft. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Saldenliste",
+        "subheadline": "Je Konto der Saldo auf seiner Soll- oder Haben-Seite — summiert, geprüft und bereit zum Export."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Saldenliste?",
+            "answer": "Eine Liste aller Konten mit einem Saldo ungleich null, jeweils auf der Soll- oder Haben-Seite. Sind Ihre doppelten Buchungssatzen richtig, entspricht die Summe der Soll- der Summe der Haben-Seite."
+          },
+          {
+            "question": "Woher kommen die Zahlen?",
+            "answer": "Aus dem Buchungssatzstool dieser Seite — die Liste wird aus Ihren erfassten Buchungssatzen und Ihrem Kontenplan automatisch neu berechnet."
+          },
+          {
+            "question": "Was, wenn sie nicht ausgeglichen ist?",
+            "answer": "Mit diesem Tool sollte sie es immer sein, weil unausgeglichene Buchungssatzen nicht erfasst werden können. Haben Sie Daten anderswo importiert oder geändert, nennt der Differenzhinweis den Abstand zwischen beiden Seiten."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gewinn- und Verlustrechnung",
+      "shortDescription": "GuV erstellen — vom Umsatz zum Jahresüberschuss, Margen live berechnet. PDF oder CSV.",
+      "seo": {
+        "title": "Kostenlose Gewinn- und Verlustrechnung",
+        "description": "Erstellen Sie eine Gewinn- und Verlustrechnung: Umsatz, Wareneinsatz, Kosten, Roh- und Jahresergebnis mit Margen. PDF-Druck oder CSV-Export. Kostenlos.",
+        "keywords": [
+          "Gewinn und Verlustrechnung",
+          "GuV erstellen",
+          "GuV online",
+          "GuV Vorlage",
+          "kostenlose GuV Vorlage"
+        ],
+        "ogTitle": "Gewinn- und Verlustrechnung",
+        "ogDescription": "Erstellen Sie eine Gewinn- und Verlustrechnung: Umsatz, Wareneinsatz, Kosten, Roh- und Jahresergebnis mit Margen. PDF-Druck oder CSV-Export. Kostenlos."
+      },
+      "hero": {
+        "headline": "Gewinn- und Verlustrechnung",
+        "subheadline": "Oben der Umsatz, unten das Jahresergebnis, und jede Stufe dazwischen — Margen laufend berechnet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was gehört in eine Gewinn- und Verlustrechnung?",
+            "answer": "Umsatz, minus Wareneinsatz (Rohertrag), minus Betriebskosten (Betriebsergebnis), plus sonstige Erträge, minus Steuern — übrig bleibt das Jahresergebnis. Dieses Tool rechnet jede Stufe mit, während Sie eintragen."
+          },
+          {
+            "question": "Was unterscheidet Roh- von Nettomarge?",
+            "answer": "Die Rohmarge zeigt, wie rentabel Ihr Kernprodukt vor Gemeinkosten ist; die Nettomarge, was nach allem wirklich bleibt. Eine gesunde Rohmarge bei dünner Nettomarge deutet auf die Gemeinkosten."
+          },
+          {
+            "question": "Kann ich die Rechnung drucken oder teilen?",
+            "answer": "Ja — drucken Sie ein sauberes A4-Blatt (oder speichern Sie es im Druckdialog als PDF) und exportieren Sie die Zahlen als CSV. Die Daten bleiben in Ihrem Browser."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bilanz",
+      "shortDescription": "Aktiva, Passiva und Eigenkapital mit laufender Bilanzprüfung. A4-Druck und CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Bilanz-Generator — online",
+        "description": "Erstellen Sie eine Bilanz mit Umlauf- und Anlagevermögen, Verbindlichkeiten und Eigenkapital. Bilanzprüfung in Echtzeit, A4-Druck, CSV-Export. Kostenlos.",
+        "keywords": [
+          "Bilanz erstellen",
+          "Bilanz Vorlage",
+          "Bilanz online kostenlos",
+          "Aktiva Passiva Eigenkapital",
+          "Bilanz kleines Unternehmen"
+        ],
+        "ogTitle": "Bilanz",
+        "ogDescription": "Erstellen Sie eine Bilanz mit Umlauf- und Anlagevermögen, Verbindlichkeiten und Eigenkapital. Bilanzprüfung in Echtzeit, A4-Druck, CSV-Export. Kostenlos."
+      },
+      "hero": {
+        "headline": "Bilanz",
+        "subheadline": "Was Sie besitzen, was Sie schulden und was den Eigentümern bleibt — laufend geprüft, damit es immer aufgeht."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Bilanz?",
+            "answer": "Eine Momentaufnahme zu einem Datum: Aktiva (was das Unternehmen besitzt), Verbindlichkeiten (was es schuldet) und Eigenkapital (der Anteil der Eigentümer). Die Aktiva müssen der Summe aus Verbindlichkeiten und Eigenkapital entsprechen."
+          },
+          {
+            "question": "Warum geht meine Bilanz nicht auf?",
+            "answer": "Die häufigste Ursache ist der vergessene Gewinnvortrag — aufgelaufene Gewinne früherer Jahre gehören ins Eigenkapital. Das Tool zeigt die genaue Differenz, damit Sie die Lücke finden."
+          },
+          {
+            "question": "Was unterscheidet Umlauf- von Anlagevermögen?",
+            "answer": "Umlaufvermögen wird innerhalb eines Jahres zu Geld (Kasse, Forderungen, Vorräte); Anlagevermögen dient dem Betrieb länger (Maschinen, Mobiliar, Fahrzeuge). Verbindlichkeiten teilen sich nach ihrer Fälligkeit genauso auf."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kapitalflussrechnung",
+      "shortDescription": "Operative, Investitions- und Finanzierungsflüsse vom Anfangs- zum Endbestand. Druck oder Export.",
+      "seo": {
+        "title": "Kostenlose Kapitalflussrechnung — online",
+        "description": "Erstellen Sie eine Kapitalflussrechnung nach operativer, Investitions- und Finanzierungstätigkeit. Vom Anfangs- zum Endbestand, PDF und CSV. Kostenlos.",
+        "keywords": [
+          "Kapitalflussrechnung",
+          "Cashflow Vorlage",
+          "Cashflow online kostenlos",
+          "operativ Investition Finanzierung",
+          "Cashflow kleines Unternehmen"
+        ],
+        "ogTitle": "Kapitalflussrechnung",
+        "ogDescription": "Erstellen Sie eine Kapitalflussrechnung nach operativer, Investitions- und Finanzierungstätigkeit. Vom Anfangs- zum Endbestand, PDF und CSV. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kapitalflussrechnung",
+        "subheadline": "Woher das Geld kam und wohin es ging — operativ, Investition und Finanzierung, vom Anfangs- bis zum Endbestand."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Warum den Cashflow getrennt vom Gewinn verfolgen?",
+            "answer": "Gewinn ist eine Meinung, Liquidität ist eine Tatsache: ein profitabler Betrieb kann zahlungsunfähig werden, wenn das Geld in Vorräten oder offenen Rechnungen feststeckt. Die Kapitalflussrechnung zeigt die tatsächliche Bewegung."
+          },
+          {
+            "question": "Was gehört in welchen Abschnitt?",
+            "answer": "Operativ: das Tagesgeschäft (Kundeneingänge, Zahlungen an Lieferanten und Löhne). Investition: Kauf oder Verkauf von Anlagen. Finanzierung: aufgenommene oder getilgte Darlehen, eingelegtes Kapital, Entnahmen."
+          },
+          {
+            "question": "Wie trage ich Abflüsse ein?",
+            "answer": "Als negative Zahlen — zum Beispiel −25000 für angeschaffte Maschinen. Jeder Abschnitt saldiert sich dann selbst, und die Rechnung läuft vom Anfangs- zum Endbestand."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kundenkontoauszug",
+      "shortDescription": "Kontoauszug je Kunde — Rechnungen, Zahlungen und laufender Saldo. Druck als PDF.",
+      "seo": {
+        "title": "Kostenloser Kundenkontoauszug-Generator",
+        "description": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos.",
+        "keywords": [
+          "Kundenkontoauszug",
+          "Kontoauszug",
+          "Muster Kundenkontoauszug",
+          "Auszug offener Posten",
+          "Debitorenauszug"
+        ],
+        "ogTitle": "Kundenkontoauszug",
+        "ogDescription": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kundenkontoauszug",
+        "subheadline": "Jede Rechnung, Zahlung und Korrektur eines Kunden — mit dem laufenden Saldo, der Diskussionen beendet."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein Kontoauszug?",
+            "answer": "Eine Zusammenfassung aller Vorgänge mit einem Kunden in einem Zeitraum — gestellte Rechnungen, erhaltene Zahlungen, erteilte Gutschriften — die mit dem aktuell offenen Saldo endet."
+          },
+          {
+            "question": "Wann sollte ich Kundenkontoauszüge verschicken?",
+            "answer": "Monatlich an regelmäßige Kreditkunden und sofort, wenn Sie eine überfällige Zahlung anmahnen. Ein klarer Auszug klärt die meisten Gespräche nach dem Muster „das haben wir doch bezahlt“."
+          },
+          {
+            "question": "Wie wird der Saldo berechnet?",
+            "answer": "Anfangssaldo plus Rechnungen, minus Zahlungen und Gutschriften, in zeitlicher Reihenfolge. Das Tool rechnet den laufenden Saldo automatisch neu, während Sie Vorgänge ergänzen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Offene-Posten-Liste",
+      "shortDescription": "Offene Kundenrechnungen nach Altersklassen — von aktuell bis 90+ Tage, je Kunde. CSV-Export.",
+      "seo": {
+        "title": "Kostenlose Offene-Posten-Liste — Kunden",
+        "description": "Offene Kundenrechnungen nach Alter verfolgen — fällig, 1–30, 31–60, 61–90 und 90+ Tage überfällig, je Kunde. CSV-Export. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "Offene-Posten-Liste",
+          "Debitorenaltersstruktur",
+          "OP-Liste Kunden",
+          "Bericht überfälliger Rechnungen",
+          "Altersanalyse der Debitoren"
+        ],
+        "ogTitle": "Offene-Posten-Liste",
+        "ogDescription": "Offene Kundenrechnungen nach Alter verfolgen — fällig, 1–30, 31–60, 61–90 und 90+ Tage überfällig, je Kunde. CSV-Export. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Offene-Posten-Liste",
+        "subheadline": "Wer Ihnen wie viel schuldet und wie lange schon — nach Alter gruppiert, damit Sie zuerst das Richtige anmahnen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Offene-Posten-Liste?",
+            "answer": "Eine Übersicht aller offenen Kundenrechnungen, gruppiert nach ihrer Überfälligkeit — noch nicht fällig, 1–30, 31–60, 61–90 und 90+ Tage. Sie ist das übliche Werkzeug, um das Mahnwesen zu priorisieren."
+          },
+          {
+            "question": "Welche Gruppe mahne ich zuerst?",
+            "answer": "Die älteste. Die Einbringungschancen fallen mit dem Alter deutlich — Branchenstudien setzen den erwarteten Eingang einer Forderung jenseits von 90 Tagen weit unter ihren Nominalwert. Die Spalte 90+ ist Ihre Prioritätenliste."
+          },
+          {
+            "question": "Wie wirken überfällige Rechnungen auf den Betrieb?",
+            "answer": "Das Geld in den 30+-Gruppen ist Umlaufvermögen, das Sie zinslos verleihen, während Sie für Ihren eigenen Kredit womöglich zahlen. Der Zahlungsziel-Rechner zeigt, was ein Skonto wert ist, das Geld schneller hereinholt."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Kreditoren-Altersstruktur",
+      "shortDescription": "Offene Lieferantenrechnungen nach Alter — die Richtigen zur richtigen Zeit bezahlen. CSV-Export.",
+      "seo": {
+        "title": "Kostenlose Kreditoren-Altersstruktur",
+        "description": "Offene Lieferantenrechnungen nach Alter verfolgen — was jetzt fällig ist, was überfällig ist und wen Sie zuerst bezahlen. CSV-Export. Kostenlos.",
+        "keywords": [
+          "Kreditoren-Altersstruktur",
+          "OP-Liste Lieferanten",
+          "Lieferantenrechnungen verfolgen",
+          "Altersanalyse der Kreditoren",
+          "Bericht offener Verbindlichkeiten"
+        ],
+        "ogTitle": "Kreditoren-Altersstruktur",
+        "ogDescription": "Offene Lieferantenrechnungen nach Alter verfolgen — was jetzt fällig ist, was überfällig ist und wen Sie zuerst bezahlen. CSV-Export. Kostenlos."
+      },
+      "hero": {
+        "headline": "Kreditoren-Altersstruktur",
+        "subheadline": "Jede offene Lieferantenrechnung, nach Alter gruppiert — damit Sie die Richtigen zur richtigen Zeit bezahlen."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Kreditoren-Altersstruktur?",
+            "answer": "Eine Übersicht aller offenen Lieferantenrechnungen, gruppiert nach ihrer Überfälligkeit. Sie zeigt das Gesamtvolumen je Lieferant und markiert Zahlungen, die eine Beziehung belasten können."
+          },
+          {
+            "question": "Wie plane ich damit meine Zahlungen?",
+            "answer": "Begleichen Sie die ältesten Rechnungen zuerst, um Goodwill und Zahlungsziele zu schützen, und legen Sie den Rest auf Ihre Liquidität. Was noch nicht fällig ist, kann meist bis kurz vor Fälligkeit warten."
+          },
+          {
+            "question": "Soll ich früher zahlen, wenn ein Lieferant Skonto gibt?",
+            "answer": "Oft ja — der Zahlungsziel-Rechner auf dieser Seite zeigt die annualisierte Rendite eines Skontos, und die liegt häufig über dem, was das Geld auf der Bank bringt."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Plan-Ist-Vergleich",
+      "shortDescription": "Plan und Realität je Kategorie, mit Abweichung und Abweichung % live. CSV-Export.",
+      "seo": {
+        "title": "Kostenloser Plan-Ist-Vergleich — Abweichungen",
+        "description": "Plan- und Ist-Beträge nach Kategorie vergleichen, mit Abweichung und Abweichung in % live berechnet. CSV-Export. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Plan-Ist-Vergleich",
+          "Abweichungsbericht",
+          "Budgetkontrolle Betrieb",
+          "Budgetabweichung analysieren",
+          "monatlicher Budgetvergleich"
+        ],
+        "ogTitle": "Plan-Ist-Vergleich",
+        "ogDescription": "Plan- und Ist-Beträge nach Kategorie vergleichen, mit Abweichung und Abweichung in % live berechnet. CSV-Export. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Plan-Ist-Vergleich",
+        "subheadline": "Plan gegen Wirklichkeit, Kategorie für Kategorie — Abweichungen werden beim Tippen berechnet und farbig markiert."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist eine Budgetabweichung?",
+            "answer": "Die Differenz zwischen Ist- und Planbetrag (Ist − Plan). In Ausgabenzeilen bedeutet eine positive Abweichung Mehrausgaben; in Ertragszeilen, dass Sie den Plan übertroffen haben."
+          },
+          {
+            "question": "Welche Abweichungen sollte ich prüfen?",
+            "answer": "Die großen in Euro und die großen in Prozent — 2 % Abweichung bei Ihrem größten Kostenblock können mehr wiegen als 40 % bei einer Kleinigkeit. Sehen Sie sich beide Spalten an."
+          },
+          {
+            "question": "Wie oft sollte ich Plan und Ist vergleichen?",
+            "answer": "Einmal im Monat ist der übliche Rhythmus: früh genug, um den Kurs zu korrigieren, und weit genug auseinander für echte Zahlen. Speichern Sie das Blatt monatlich und exportieren Sie die CSV für Ihre Unterlagen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "ABC-Analyse",
+      "shortDescription": "Bestand nach Jahresverbrauchswert in die Klassen A, B und C einteilen — die 80/15/5-Regel.",
+      "seo": {
+        "title": "Kostenloser ABC-Analyse-Rechner",
+        "description": "Teilen Sie Ihr Lager nach dem Jahresverbrauchswert in die Klassen A, B und C — die 80/15/5-Regel, automatisch berechnet. CSV-Export. Kostenlos, ohne Anmeldung.",
+        "keywords": [
+          "ABC-Analyse",
+          "Lagerklassifizierung",
+          "ABC-Methode Lager",
+          "Pareto-Analyse Lager",
+          "Bestandssteuerung ABC"
+        ],
+        "ogTitle": "ABC-Analyse",
+        "ogDescription": "Teilen Sie Ihr Lager nach dem Jahresverbrauchswert in die Klassen A, B und C — die 80/15/5-Regel, automatisch berechnet. CSV-Export. Kostenlos, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "ABC-Analyse",
+        "subheadline": "Nicht jeder Bestand verdient gleich viel Aufmerksamkeit — sortieren Sie die Artikel nach Jahreswert und führen Sie Klasse A streng."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist die ABC-Analyse?",
+            "answer": "Ein Lagerverfahren nach dem Pareto-Prinzip: Klasse A sind die wenigen entscheidenden Artikel (~80% des Verbrauchswerts), B das Mittelfeld (~15%), C die vielen unbedeutenden (~5%). Jede Klasse erhält den dazu passenden Grad an Kontrolle."
+          },
+          {
+            "question": "Wie werden Artikel eingeordnet?",
+            "answer": "Sortieren Sie die Artikel nach Jahresverbrauchswert (Jahresmenge × Stückkosten), nehmen Sie den kumulierten Anteil am Gesamtwert und schneiden bei 80% (A), 95% (B) und darüber (C) — genau das automatisiert dieses Tool."
+          },
+          {
+            "question": "Was tue ich mit jeder Klasse?",
+            "answer": "A: strenge Kontrolle — häufige Zählungen, sorgfältige Meldebestände, verhandelte Preise. B: mittel, regelmäßige Durchsicht. C: einfache Regeln und Sammelbestellungen. Für die A-Artikel zusammen mit unserem Rechner für den Meldebestand nutzen."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Lieferantenvergleich",
+      "shortDescription": "Lieferanten nach Preis, Lieferung, Zahlungsziel und Qualität gewichtet vergleichen.",
+      "seo": {
+        "title": "Kostenloser Lieferantenvergleich — Bewertung",
+        "description": "Lieferanten nach Preis, Lieferzeit, Zahlungsziel und Qualität mit gewichteter Bewertung vergleichen — das beste Angebot sofort sichtbar. CSV-Export.",
+        "keywords": [
+          "Lieferantenvergleich",
+          "Werkzeug zum Lieferantenvergleich",
+          "Lieferanten-Scorecard",
+          "Kriterien der Lieferantenauswahl",
+          "gewichtete Lieferantenbewertung"
+        ],
+        "ogTitle": "Lieferantenvergleich",
+        "ogDescription": "Lieferanten nach Preis, Lieferzeit, Zahlungsziel und Qualität mit gewichteter Bewertung vergleichen — das beste Angebot sofort sichtbar. CSV-Export."
+      },
+      "hero": {
+        "headline": "Lieferantenvergleich",
+        "subheadline": "Der Preis ist nicht alles — wiegen Sie Lieferzeit, Zahlungsziel und Qualität mit, und lassen Sie die Bewertung entscheiden."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Wie funktioniert die Bewertung?",
+            "answer": "Jedes Kriterium wird über die Lieferanten normiert (der Beste erhält die volle Punktzahl), mit der von Ihnen gesetzten Gewichtung multipliziert und zu einer Bewertung von 100 Punkten summiert. Ändern Sie die Gewichtung, ändert sich die Reihenfolge sofort."
+          },
+          {
+            "question": "Welche Gewichtungen soll ich wählen?",
+            "answer": "Die, bei denen ein Fehler am meisten weh tut. Leicht verderbliche Ware? Lieferzeit hoch gewichten. Knappe Kasse? Das Zahlungsziel. Qualität, die der Kunde sieht? Die Qualität. Die Vorgaben (40/20/15/25) passen für den meisten Handelseinkauf."
+          },
+          {
+            "question": "Warum nicht einfach das günstigste Angebot nehmen?",
+            "answer": "Der günstigste Lieferant, der zu spät liefert oder schlechte Qualität schickt, kostet mehr an Fehlbeständen, Rücksendungen und verlorenen Kunden. Eine gewichtete Bewertung macht diese Abwägungen ausdrücklich statt zur Bauchentscheidung."
+          }
+        ]
+      }
+    }
+  ]
+}

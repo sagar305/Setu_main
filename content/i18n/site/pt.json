@@ -1,16 +1,35 @@
 {
   "nav": {
     "links": [
-      { "label": "Produtos" },
-      { "label": "Consultoria" },
-      { "label": "Calculadoras" },
-      { "label": "Ferramentas" },
-      { "label": "Sobre" },
-      { "label": "Blog" },
-      { "label": "Contato" }
+      {
+        "label": "Produtos"
+      },
+      {
+        "label": "Consultoria"
+      },
+      {
+        "label": "Calculadoras"
+      },
+      {
+        "label": "Ferramentas"
+      },
+      {
+        "label": "Sobre"
+      },
+      {
+        "label": "Blog"
+      },
+      {
+        "label": "Contato"
+      }
     ],
-    "cta": { "label": "Fale com a gente" },
-    "menu": { "open": "Abrir menu", "close": "Fechar menu" }
+    "cta": {
+      "label": "Fale com a gente"
+    },
+    "menu": {
+      "open": "Abrir menu",
+      "close": "Fechar menu"
+    }
   },
   "footer": {
     "description": "A Setu Technology cria software prático, pensado primeiro em quem toca o negócio, para empresas no mundo todo.",
@@ -18,54 +37,111 @@
       {
         "heading": "Produtos",
         "links": [
-          { "label": "PDV no navegador (grátis)" },
-          { "label": "Analisador de extratos bancários (grátis)" },
-          { "label": "Free Dine — PDV de restaurante (grátis)" },
-          { "label": "Gestor de turmas de reforço (grátis)" },
-          { "label": "Gestor de clínica (grátis)" },
+          {
+            "label": "PDV no navegador (grátis)"
+          },
+          {
+            "label": "Analisador de extratos bancários (grátis)"
+          },
+          {
+            "label": "Free Dine — PDV de restaurante (grátis)"
+          },
+          {
+            "label": "Gestor de turmas de reforço (grátis)"
+          },
+          {
+            "label": "Gestor de clínica (grátis)"
+          },
           {},
-          { "label": "Todos os produtos" }
+          {
+            "label": "Todos os produtos"
+          }
         ]
       },
       {
         "heading": "Empresa",
         "links": [
-          { "label": "Sobre" },
-          { "label": "Time" },
-          { "label": "Consultoria" },
-          { "label": "Blog" },
-          { "label": "Glossário" },
-          { "label": "Contato" }
+          {
+            "label": "Sobre"
+          },
+          {
+            "label": "Time"
+          },
+          {
+            "label": "Consultoria"
+          },
+          {
+            "label": "Blog"
+          },
+          {
+            "label": "Glossário"
+          },
+          {
+            "label": "Contato"
+          }
         ]
       },
       {
         "heading": "Ferramentas",
         "links": [
-          { "label": "Todas as ferramentas" },
-          { "label": "Gerador de notas" },
-          { "label": "Gerador de cardápio QR" },
-          { "label": "Gerador de QR de pagamento" },
-          { "label": "Gerador de código de barras" }
+          {
+            "label": "Todas as ferramentas"
+          },
+          {
+            "label": "Gerador de notas"
+          },
+          {
+            "label": "Gerador de cardápio QR"
+          },
+          {
+            "label": "Gerador de QR de pagamento"
+          },
+          {
+            "label": "Gerador de código de barras"
+          }
         ]
       },
       {
         "heading": "Calculadoras",
         "links": [
-          { "label": "Todas as calculadoras" },
-          { "label": "Calculadora de GST" },
-          { "label": "Calculadora de margem de lucro" },
-          { "label": "Calculadora de imposto de renda" },
-          { "label": "Calculadora de parcela de empréstimo" }
+          {
+            "label": "Todas as calculadoras"
+          },
+          {
+            "label": "Calculadora de GST"
+          },
+          {
+            "label": "Calculadora de margem de lucro"
+          },
+          {
+            "label": "Calculadora de imposto de renda"
+          },
+          {
+            "label": "Calculadora de parcela de empréstimo"
+          }
         ]
       }
     ],
     "legal": [
-      { "label": "Preços" },
-      { "label": "Time" },
-      { "label": "Mapa do site" },
-      { "label": "Privacidade" },
-      { "label": "Termos" }
+      {
+        "label": "Preços"
+      },
+      {
+        "label": "Time"
+      },
+      {
+        "label": "Mapa do site"
+      },
+      {
+        "label": "Privacidade"
+      },
+      {
+        "label": "Termos"
+      }
     ],
     "copyright": "© 2026 Setu Technology. Feito na Índia."
+  },
+  "languageLinks": {
+    "headline": "Setu no seu idioma"
   }
 }

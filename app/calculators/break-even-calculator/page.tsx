@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getCalculatorBySlug } from "@/lib/content";
+import { itemLanguageAlternates } from "@/lib/i18n/pages";
 import { CalculatorShell } from "@/components/calculators/CalculatorShell";
 import { BreakEvenCalculatorTool } from "@/components/calculators/tools/BreakEvenCalculatorTool";
 
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
   title: item.seo.title,
   description: item.seo.description,
   keywords: item.seo.keywords,
-  alternates: { canonical: "/calculators/break-even-calculator" },
+  alternates: {
+    canonical: "/calculators/break-even-calculator",
+    languages: itemLanguageAlternates("calculators", "break-even-calculator"),
+  },
   openGraph: {
     title: item.seo.title,
     description: item.seo.description,

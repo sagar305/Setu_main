@@ -23,6 +23,11 @@
     "headline": "One company, building for every industry",
     "subheadline": "We started with restaurants. Here's what's live today, and what's coming next."
   },
+  "labels": {
+    "comingSoon": "Coming Soon",
+    "paidSoonEyebrow": "Paid product coming soon",
+    "paidSoonSuffix": "Everything above stays free."
+  },
   "products": [
     {
       "id": "browser-pos",

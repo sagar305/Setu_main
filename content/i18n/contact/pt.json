@@ -1,0 +1,39 @@
+{
+  "seo": {
+    "title": "Contato | Setu Technology: produtos e parcerias",
+    "description": "Fale com a Setu Technology: dúvidas sobre os produtos, propostas de parceria ou para contar de qual software o seu negócio precisa a seguir.",
+    "keywords": [
+      "contato Setu Technology",
+      "suporte Setu Technology"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Contato",
+    "headline": "Vamos falar do seu negócio",
+    "subheadline": "Dúvidas sobre o Setu Dine, propostas de parceria ou contar o que você precisa a seguir: lemos cada mensagem."
+  },
+  "variants": {
+    "consultancy": {
+      "eyebrow": "Consultoria",
+      "headline": "Vamos falar da sua contabilidade",
+      "subheadline": "Dúvidas sobre contabilidade, escrituração ou folha de pagamento terceirizadas — ou sobre a periodicidade e o arranjo que combinam com o seu negócio. Lemos cada mensagem."
+    }
+  },
+  "form": {
+    "fields": [
+      {
+        "label": "Nome"
+      },
+      {
+        "label": "E-mail"
+      },
+      {
+        "label": "Nome do negócio"
+      },
+      {
+        "label": "Mensagem"
+      }
+    ],
+    "submitLabel": "Enviar mensagem"
+  }
+}

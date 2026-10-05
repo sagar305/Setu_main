@@ -4,14 +4,21 @@ import path from "node:path";
 
 import { LANGUAGES, type LanguageCode } from "@/lib/i18n/config";
 import {
-  HOME_LOCALES,
-  homeLangFromPath,
-  homeLanguageAlternates,
-  homePathFor,
   hreflangFor,
+  languageAlternates,
+  languagesFor,
+  localesFor,
+  localizedHref,
+  itemLanguageAlternates,
+  itemLocalesFor,
+  itemPathFor,
+  itemRoutesFor,
   ogLocaleFor,
-} from "@/lib/i18n/home-locales";
+  pageFromPath,
+  pathFor,
+} from "@/lib/i18n/pages";
 import { mergeTranslation } from "@/lib/i18n/home-merge";
+import { localizeLinks } from "@/lib/i18n/localize-links";
 
 const english = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "content", "en", "home.json"), "utf8"),
@@ -31,31 +38,44 @@ function siteTranslationFor(lang: LanguageCode) {
   return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
 }
 
+const HOME_LOCALES = localesFor("home");
+
 describe("home locale routing", () => {
   it("gives every switcher language a homepage URL, with English at the root", () => {
-    expect(homePathFor("en")).toBe("/");
+    expect(pathFor("home", "en")).toBe("/");
     expect(HOME_LOCALES).toEqual(LANGUAGES.filter((l) => l.code !== "en").map((l) => l.code));
-    for (const code of HOME_LOCALES) expect(homePathFor(code)).toBe(`/${code}`);
+    for (const code of HOME_LOCALES) expect(pathFor("home", code)).toBe(`/${code}`);
   });
 
-  it("reads the language back out of a homepage path, and rejects anything else", () => {
-    expect(homeLangFromPath("/")).toBe("en");
-    expect(homeLangFromPath("/hi")).toBe("hi");
-    expect(homeLangFromPath("/hi/")).toBe("hi");
-    expect(homeLangFromPath("/tools/invoice-generator")).toBeNull();
-    expect(homeLangFromPath("/about")).toBeNull();
-    expect(homeLangFromPath(null)).toBeNull();
+  it("reads the page and language back out of a path, and rejects anything else", () => {
+    expect(pageFromPath("/")).toEqual({ key: "home", lang: "en" });
+    expect(pageFromPath("/hi")).toEqual({ key: "home", lang: "hi" });
+    expect(pageFromPath("/hi/")).toEqual({ key: "home", lang: "hi" });
+    expect(pageFromPath("/privacy")).toEqual({ key: "privacy", lang: "en" });
+    expect(pageFromPath("/about")).toBeNull();
+    expect(pageFromPath("/glossary/gst")).toBeNull();
+    expect(pageFromPath(null)).toBeNull();
+  });
+
+  it("only claims a translated page in a language it has been translated into", () => {
+    for (const lang of localesFor("privacy")) {
+      expect(pageFromPath(`/${lang}/privacy`)).toEqual({ key: "privacy", lang });
+    }
+    const missing = LANGUAGES.map((l) => l.code).filter(
+      (code) => code !== "en" && !localesFor("privacy").includes(code),
+    );
+    for (const lang of missing) expect(pageFromPath(`/${lang}/privacy`)).toBeNull();
   });
 
   it("publishes a complete hreflang cluster including x-default", () => {
-    const alternates = homeLanguageAlternates();
+    const alternates = languageAlternates("home");
     expect(alternates["x-default"]).toBe("/");
     expect(alternates.en).toBe("/");
     for (const code of HOME_LOCALES) {
       expect(alternates[hreflangFor(code)]).toBe(`/${code}`);
     }
-    // Every language, plus English and x-default sharing the root.
-    expect(Object.keys(alternates)).toHaveLength(LANGUAGES.length + 1);
+    // Every published language, plus English and x-default sharing the root.
+    expect(Object.keys(alternates)).toHaveLength(languagesFor("home").length + 1);
   });
 
   it("marks Chinese as Simplified and pairs each language with an OG territory", () => {
@@ -204,5 +224,512 @@ describe("site chrome translations", () => {
     );
     // Social profiles are accounts, not copy.
     expect(merged.footer.social).toEqual(englishSite.footer.social);
+  });
+});
+
+describe("every translated page", () => {
+  const PAGES = [
+    "home",
+    "privacy",
+    "terms",
+    "contact",
+    "consultancy",
+    "products",
+    "tools",
+    "calculators",
+  ] as const;
+
+  function englishFor(key: string) {
+    const file =
+      key === "home"
+        ? path.join(process.cwd(), "content", "en", "home.json")
+        : path.join(process.cwd(), "content", "en", `${key}.json`);
+    return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
+  }
+
+  it("publishes only languages whose translation file exists", () => {
+    for (const key of PAGES) {
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        expect(fs.existsSync(file), `${key}/${lang}.json`).toBe(true);
+      }
+    }
+  });
+
+  it("gives every translation its own title and description, within SERP limits", () => {
+    // Same limits scripts/check-seo.mjs enforces on the built HTML.
+    for (const key of PAGES) {
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const seo = (JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>).seo;
+        expect(seo, `${key}/${lang} seo`).toBeTruthy();
+
+        const limits =
+          lang === "zh"
+            ? { title: [14, 34], description: [50, 100] }
+            : { title: [30, 60], description: [120, 160] };
+
+        expect(seo.title.length, `${key}/${lang} title`).toBeGreaterThanOrEqual(limits.title[0]);
+        expect(seo.title.length, `${key}/${lang} title`).toBeLessThanOrEqual(limits.title[1]);
+        expect(seo.description.length, `${key}/${lang} description`).toBeGreaterThanOrEqual(
+          limits.description[0],
+        );
+        expect(seo.description.length, `${key}/${lang} description`).toBeLessThanOrEqual(
+          limits.description[1],
+        );
+        expect(seo.title).not.toBe(englishFor(key).seo?.title);
+      }
+    }
+  });
+
+  it("never reshapes a page: list lengths follow the English content", () => {
+    for (const key of PAGES) {
+      const english = englishFor(key);
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const merged = mergeTranslation(
+          english,
+          JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>,
+        );
+        for (const field of ["items", "products", "sections", "categories"]) {
+          if (Array.isArray(english[field])) {
+            expect(merged[field].length, `${key}/${lang} ${field}`).toBe(english[field].length);
+          }
+        }
+      }
+    }
+  });
+
+  /**
+   * Lists merge by position, so a translation that is short by one entry does not
+   * fail loudly — it silently pairs every later translation with the wrong English
+   * item. Merging cannot reveal that, because it pads the tail from English, so the
+   * count has to be checked on the file as written. An entry inserted into the
+   * middle of an English list (rather than appended) is what makes this bite, and it
+   * is exactly the change most likely to arrive from someone else's branch.
+   */
+  it("keeps every translated list the same length as English in the file itself", () => {
+    for (const key of PAGES) {
+      const english = englishFor(key);
+      for (const lang of localesFor(key)) {
+        const file = path.join(process.cwd(), "content", "i18n", key, `${lang}.json`);
+        const raw = JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
+        for (const field of ["items", "products", "sections", "categories"]) {
+          if (Array.isArray(english[field]) && raw[field] !== undefined) {
+            expect(
+              raw[field].length,
+              `content/i18n/${key}/${lang}.json ${field}: translated entries must line up ` +
+                `one-to-one with content/en/${key}.json`,
+            ).toBe(english[field].length);
+          }
+        }
+      }
+    }
+  });
+});
+
+describe("links stay in the reader's language", () => {
+  it("moves a link to the version of that page in this language", () => {
+    expect(localizedHref("/products", "hi")).toBe("/hi/products");
+    expect(localizedHref("/", "hi")).toBe("/hi");
+    expect(localizedHref("/calculators", "zh")).toBe("/zh/calculators");
+  });
+
+  it("keeps query strings and fragments", () => {
+    expect(localizedHref("/contact?topic=consultancy", "hi")).toBe("/hi/contact?topic=consultancy");
+    expect(localizedHref("/tools#top", "de")).toBe("/de/tools#top");
+  });
+
+  it("leaves English alone", () => {
+    expect(localizedHref("/products", "en")).toBe("/products");
+  });
+
+  /** Pointing at a translation that does not exist would be a link into a 404. */
+  it("leaves a page that has no version in this language on its English path", () => {
+    expect(localizedHref("/blog", "hi")).toBe("/blog");
+    expect(localizedHref("/products/restaurant-pos", "hi")).toBe("/products/restaurant-pos");
+  });
+
+  /**
+   * An item page is published per item, and these links are the ones a reader
+   * actually follows out of body prose and the suggested-tools strip. Left on
+   * their English path they end a translated visit — the reader taps a Hindi
+   * link and gets the English calculator.
+   */
+  it("moves a link to an item page that is translated into this language", () => {
+    expect(localizedHref("/calculators/gst-calculator", "hi")).toBe(
+      "/hi/calculators/gst-calculator",
+    );
+    expect(localizedHref("/tools/invoice-generator", "zh")).toBe("/zh/tools/invoice-generator");
+    expect(localizedHref("/calculators/gst-calculator?amount=100", "de")).toBe(
+      "/de/calculators/gst-calculator?amount=100",
+    );
+  });
+
+  /** An item still awaiting its own translation has to stay on English. */
+  it("leaves an item page that is not yet translated on its English path", () => {
+    const pending: [string, LanguageCode][] = [];
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ).items as { slug: string }[];
+
+      for (const { slug } of english) {
+        for (const { code } of LANGUAGES) {
+          if (code !== "en" && !itemLocalesFor(key, slug).includes(code)) {
+            pending.push([`/${key}/${slug}`, code]);
+          }
+        }
+      }
+    }
+
+    // Once every item is published in every language there is nothing left to
+    // hold back, and that is the state this asserts instead.
+    if (pending.length === 0) {
+      expect(localizedHref("/tools/not-a-real-tool", "hi")).toBe("/tools/not-a-real-tool");
+      return;
+    }
+
+    for (const [href, lang] of pending) {
+      expect(localizedHref(href, lang), `${href} in ${lang}`).toBe(href);
+    }
+  });
+
+  it("leaves anything that is not an internal path alone", () => {
+    expect(localizedHref("https://example.com/products", "hi")).toBe("https://example.com/products");
+    expect(localizedHref("//example.com/products", "hi")).toBe("//example.com/products");
+    expect(localizedHref("mailto:hi@example.com", "hi")).toBe("mailto:hi@example.com");
+    expect(localizedHref("#faq", "hi")).toBe("#faq");
+  });
+
+  it("can be applied twice without changing the result", () => {
+    const once = localizedHref("/products", "hi");
+    expect(localizedHref(once, "hi")).toBe(once);
+  });
+
+  it("rewrites every href in a content tree, at any depth", () => {
+    const content = {
+      hero: { primaryCta: { href: "/products", label: "x" } },
+      cards: [{ cta: { href: "/tools" } }, { cta: { href: "/blog" } }],
+      social: [{ href: "https://x.com/setu" }],
+    };
+    const localized = localizeLinks(content, "hi");
+
+    expect(localized.hero.primaryCta.href).toBe("/hi/products");
+    expect(localized.cards[0].cta.href).toBe("/hi/tools");
+    expect(localized.cards[1].cta.href).toBe("/blog");
+    expect(localized.social[0].href).toBe("https://x.com/setu");
+    expect(localized.hero.primaryCta.label).toBe("x");
+  });
+
+  it("returns the English tree untouched, not a copy", () => {
+    const content = { cta: { href: "/products" } };
+    expect(localizeLinks(content, "en")).toBe(content);
+  });
+});
+
+describe("links written inline in body copy", () => {
+  it("localizes a markdown-style link inside a paragraph", () => {
+    const merged = localizeLinks(
+      { sections: [{ paragraphs: ["Siehe auch unsere [Nutzungsbedingungen](/terms)."] }] },
+      "de",
+    );
+    expect(merged.sections[0].paragraphs[0]).toBe(
+      "Siehe auch unsere [Nutzungsbedingungen](/de/terms).",
+    );
+  });
+
+  it("leaves an inline link to an untranslated page alone", () => {
+    const merged = localizeLinks({ p: "see the [blog](/blog)" }, "de");
+    expect(merged.p).toBe("see the [blog](/blog)");
+  });
+
+  it("leaves prose without links untouched", () => {
+    const text = "No links here, just **bold** and a bracket ] and a paren )";
+    expect(localizeLinks({ p: text }, "de").p).toBe(text);
+  });
+
+  /**
+   * RichText splits on its own pattern, so a target this rewrote into a shape it
+   * does not match would render as literal text instead of a link.
+   */
+  it("produces links RichText still recognises", () => {
+    const richTextPattern = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+    const localized = localizeLinks({ p: "our [privacy policy](/privacy) applies" }, "hi").p;
+    const parts = localized.split(richTextPattern).filter((part: string) => part !== "");
+    expect(parts).toContain("[privacy policy](/hi/privacy)");
+  });
+});
+
+describe("item pages: one per calculator, one per tool", () => {
+  it("keeps the English path for English and prefixes it otherwise", () => {
+    expect(itemPathFor("calculators", "gst-calculator", "en")).toBe("/calculators/gst-calculator");
+    expect(itemPathFor("calculators", "gst-calculator", "hi")).toBe(
+      "/hi/calculators/gst-calculator",
+    );
+  });
+
+  it("publishes an item only in the languages its own copy is translated into", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ) as Record<string, any>;
+
+      for (const item of english.items) {
+        for (const lang of itemLocalesFor(key, item.slug)) {
+          // The listing has to carry the item before its own page can.
+          expect(localesFor(key), `${key}/${item.slug} in ${lang}`).toContain(lang);
+        }
+      }
+    }
+  });
+
+  it("gives every published item page a complete, two-way hreflang cluster", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      for (const { slug, lang } of itemRoutesFor(key)) {
+        const alternates = itemLanguageAlternates(key, slug);
+        const english = itemPathFor(key, slug, "en");
+
+        // The English page carries the same cluster, so both directions agree.
+        expect(alternates["x-default"]).toBe(english);
+        expect(alternates.en).toBe(english);
+        expect(alternates[hreflangFor(lang)]).toBe(itemPathFor(key, slug, lang));
+        expect(Object.keys(alternates)).toHaveLength(itemLocalesFor(key, slug).length + 2);
+      }
+    }
+  });
+
+  /**
+   * The listing name is what a reader clicks, what the suggested-tools strip
+   * shows and what the JSON-LD publishes; the headline is the page's h1. When a
+   * translation gives the same tool two names the reader is told they landed
+   * somewhere else, so the two have to agree in every language they agree in in
+   * English — the invoice generator and two calculators deliberately differ.
+   */
+  it("gives each item one name in each language, h1 and listing alike", () => {
+    for (const key of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${key}.json`), "utf8"),
+      ) as Record<string, any>;
+
+      for (const [index, item] of english.items.entries()) {
+        if (item.name !== item.hero?.headline) continue;
+
+        for (const lang of itemLocalesFor(key, item.slug)) {
+          const translated = JSON.parse(
+            fs.readFileSync(path.join(process.cwd(), "content", "i18n", key, `${lang}.json`), "utf8"),
+          ) as Record<string, any>;
+          const entry = translated.items[index];
+          expect(entry.hero.headline, `${key}/${lang} ${item.slug}`).toBe(entry.name);
+        }
+      }
+    }
+  });
+
+  /**
+   * A route is prerendered per (language, slug), and the tool it renders comes
+   * from the registry — a slug missing from it would build a page with no
+   * calculator on it.
+   */
+  it("has a tool in the registry for every calculator route it will build", async () => {
+    const { CALCULATOR_TOOLS } = await import("@/components/calculators/tools/registry");
+    for (const { slug } of itemRoutesFor("calculators")) {
+      expect(Object.keys(CALCULATOR_TOOLS), `registry is missing ${slug}`).toContain(slug);
+    }
+  });
+});
+
+describe("an item's own page is a route the chrome and switcher must recognise", () => {
+  /**
+   * SiteFrame renders the English header unless the path resolves to a
+   * translated page, and app/[lang]/layout.tsx renders the localized one. A
+   * path it does not resolve therefore gets both — two headers, two footers and
+   * two <main> elements on the same page.
+   */
+  it("resolves an item page in both English and a translated language", () => {
+    expect(pageFromPath("/calculators/gst-calculator")).toEqual({
+      key: "calculators",
+      lang: "en",
+      slug: "gst-calculator",
+    });
+
+    for (const lang of itemLocalesFor("calculators", "gst-calculator")) {
+      expect(pageFromPath(`/${lang}/calculators/gst-calculator`)).toEqual({
+        key: "calculators",
+        lang,
+        slug: "gst-calculator",
+      });
+    }
+  });
+
+  it("refuses a language an item is not published in", () => {
+    const published = itemLocalesFor("calculators", "gst-calculator");
+    const missing = LANGUAGES.map((l) => l.code).filter(
+      (code) => code !== "en" && !published.includes(code),
+    );
+    for (const lang of missing) {
+      expect(pageFromPath(`/${lang}/calculators/gst-calculator`)).toBeNull();
+    }
+  });
+
+  it("does not mistake a path that merely starts the same way for an item", () => {
+    expect(pageFromPath("/calculators/not-a-real-calculator")).toBeNull();
+    expect(pageFromPath("/calculators/gst-calculator/extra")).toBeNull();
+    expect(pageFromPath("/hi/calculators/not-a-real-calculator")).toBeNull();
+  });
+
+  it("still resolves the listing pages themselves", () => {
+    expect(pageFromPath("/calculators")).toEqual({ key: "calculators", lang: "en" });
+    expect(pageFromPath("/hi/calculators")).toEqual({ key: "calculators", lang: "hi" });
+  });
+});
+
+describe("translation files are clean text", () => {
+  /**
+   * A replacement character means some byte was lost on the way in — the string
+   * still looks plausible in a diff, and renders as a black diamond to the
+   * reader. It happened once in a Punjabi answer, inside a word, and neither the
+   * build nor the length checks noticed.
+   */
+  it("contains no replacement or non-characters", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/[�￾￿]/);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has a damaged character near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
+
+  /**
+   * A stray CJK character is the other way a translation goes wrong silently: it
+   * survives JSON, passes the length checks and reads as a glyph the reader
+   * cannot place. It happened once in a French subheadline. Only zh is allowed
+   * to contain these ranges.
+   */
+  it("keeps unassigned Unicode code points out of every translation file", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/\P{Assigned}/u);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has an unassigned code point ` +
+              `(U+${text.codePointAt(at)!.toString(16).toUpperCase().padStart(4, "0")}) near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
+
+  it("keeps CJK characters out of every language but zh", () => {
+    for (const dir of fs.readdirSync(path.join(process.cwd(), "content", "i18n"))) {
+      const base = path.join(process.cwd(), "content", "i18n", dir);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        if (file === "zh.json") continue;
+        const text = fs.readFileSync(path.join(base, file), "utf8");
+        const at = text.search(/[\u3000-\u303f\u3400-\u9fff\uf900-\ufaff\uff01-\uff60]/);
+        expect(
+          at,
+          at === -1
+            ? ""
+            : `content/i18n/${dir}/${file} has a stray CJK character near: ` +
+              `"${text.slice(Math.max(0, at - 30), at + 30)}"`,
+        ).toBe(-1);
+      }
+    }
+  });
+
+  /**
+   * Translations merge over English by array index, so a list that is one entry
+   * short does not fall back cleanly — it keeps English's last entry and ships a
+   * half-translated page. It happened with the VAT and sales-tax keyword lists in
+   * seven languages each, where the English tail keyword survived into the
+   * localized meta tag. Nested lists inside an item have to match English exactly.
+   */
+  it("keeps every translated item's nested lists the same length as English", () => {
+    const paths: [string, (item: Record<string, any>) => unknown[] | undefined][] = [
+      ["seo.keywords", (item) => item.seo?.keywords],
+      ["about.paragraphs", (item) => item.about?.paragraphs],
+      ["faq.items", (item) => item.faq?.items],
+      ["body", (item) => item.body],
+    ];
+    for (const page of ["calculators", "tools"] as const) {
+      const english = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), "content", "en", `${page}.json`), "utf8"),
+      ).items as Record<string, any>[];
+      const base = path.join(process.cwd(), "content", "i18n", page);
+      for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+        const items = (JSON.parse(fs.readFileSync(path.join(base, file), "utf8")).items ??
+          []) as Record<string, any>[];
+        items.forEach((item, index) => {
+          if (!item) return;
+          for (const [label, get] of paths) {
+            const translated = get(item);
+            const source = get(english[index]);
+            if (!translated || !source) continue;
+            expect(
+              translated.length,
+              `content/i18n/${page}/${file} items[${index}] ` +
+                `(${english[index].slug}) ${label} has ${translated.length} entries, ` +
+                `English has ${source.length} — the missing entries fall back to English`,
+            ).toBe(source.length);
+          }
+        });
+      }
+    }
+  });
+
+  /**
+   * The same index-merge trap, one level deeper: a body block's steps, cards,
+   * tick list, paragraphs or links all merge by position, so a Hindi steps list
+   * with four of English's five entries ships the fifth in English. The block
+   * kinds have to line up too — a translation that renames `kind` renders
+   * nothing at all, because ToolBody switches on it.
+   */
+  it("keeps every translated body block the same shape as English", () => {
+    const lists = ["steps", "items", "paragraphs", "links"] as const;
+    const english = (
+      JSON.parse(fs.readFileSync(path.join(process.cwd(), "content", "en", "tools.json"), "utf8"))
+        .items as Record<string, any>[]
+    ).map((item) => item.body as Record<string, any>[] | undefined);
+
+    const base = path.join(process.cwd(), "content", "i18n", "tools");
+    for (const file of fs.readdirSync(base).filter((f) => f.endsWith(".json"))) {
+      const items = (JSON.parse(fs.readFileSync(path.join(base, file), "utf8")).items ??
+        []) as Record<string, any>[];
+
+      items.forEach((item, index) => {
+        const source = english[index];
+        if (!item?.body || !source) return;
+
+        item.body.forEach((block: Record<string, any>, at: number) => {
+          const from = source[at];
+          const where = `content/i18n/tools/${file} items[${index}] body[${at}]`;
+          expect(block.kind, `${where}: kind is "${block.kind}", English has "${from?.kind}"`).toBe(
+            from?.kind,
+          );
+
+          for (const list of lists) {
+            if (!block[list] || !from?.[list]) continue;
+            expect(
+              block[list].length,
+              `${where}.${list} has ${block[list].length} entries, English has ` +
+                `${from[list].length} — the missing entries fall back to English`,
+            ).toBe(from[list].length);
+          }
+        });
+      });
+    }
   });
 });

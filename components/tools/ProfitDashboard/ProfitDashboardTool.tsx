@@ -11,11 +11,13 @@ import { useEffect, useMemo, useState } from "react";
 import { Card, EmptyState, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
+import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
 import { getExpenses, getOrderItems, getOrders } from "@/lib/toolkit/workspace";
 import type { Expense } from "@/lib/toolkit/types";
 import type { Order, OrderItem } from "@/lib/pos/types";
 import { formatMoney } from "@/lib/pos/types";
 import { useI18n } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 const REVENUE = "#4F46E5";
 const EXPENSE = "#D97706";
@@ -46,8 +48,10 @@ function eachDay(start: string, end: string): string[] {
 }
 
 export function ProfitDashboardTool() {
+  // Keeps the links below in the language of the page this tool is on.
+  const href = useLocalizedHref();
   const workspace = useWorkspaceConnection("profit-dashboard");
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [orders, setOrders] = useState<Order[]>([]);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -128,7 +132,7 @@ export function ProfitDashboardTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Include your POS sales and product costs, so profit comes from real numbers."
+        message={t("pdConnectHint")}
       />
 
       {/* Filter row */}
@@ -165,21 +169,21 @@ export function ProfitDashboardTool() {
 
       {!hasAnyData ? (
         <EmptyState
-          title="No data to chart yet"
-          subtitle="Record sales in the Browser POS and expenses in the Expense Tracker — your profit appears here automatically, computed from real numbers."
+          title={t("pdNoDataTitle")}
+          subtitle={t("pdNoDataHint")}
           action={
             <>
               <a
                 href="/products/browser-based-pos"
                 className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
               >
-                Open Browser POS
+                {t("openBrowserPos")}
               </a>
               <a
-                href="/tools/expense-tracker"
+                href={href("/tools/expense-tracker")}
                 className="rounded-lg border border-indigo/30 px-4 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
               >
-                Open Expense Tracker
+                {t("openExpenseTracker")}
               </a>
             </>
           }
@@ -206,7 +210,7 @@ export function ProfitDashboardTool() {
             {/* Revenue by day — single-series bar chart */}
             <Card>
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-base font-bold text-ink">Revenue by day</h2>
+                <h2 className="text-base font-bold text-ink">{t("pdRevenueByDay")}</h2>
                 <SecondaryButton onClick={() => setShowTable((v) => !v)}>
                   {showTable ? t("viewChart") : t("viewTable")}
                 </SecondaryButton>
@@ -214,16 +218,16 @@ export function ProfitDashboardTool() {
 
               {!workspace.connected ? (
                 <p className="py-8 text-center text-sm text-muted">
-                  Connect your workspace above to include POS sales.
+                  {t("pdConnectForPos")}
                 </p>
               ) : showTable ? (
                 <div className="max-h-72 overflow-y-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-muted-line/30 text-left text-muted">
-                        <th className="py-1.5 pr-4 font-semibold">Day</th>
-                        <th className="py-1.5 pr-4 text-right font-semibold">Revenue</th>
-                        <th className="py-1.5 text-right font-semibold">Expenses</th>
+                        <th className="py-1.5 pr-4 font-semibold">{t("day")}</th>
+                        <th className="py-1.5 pr-4 text-right font-semibold">{t("revenue")}</th>
+                        <th className="py-1.5 text-right font-semibold">{t("expensesLabel")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -249,7 +253,7 @@ export function ProfitDashboardTool() {
                       style={{ left: `${((hover + 0.5) / data.daily.length) * 100}%` }}
                     >
                       <span className="font-semibold">
-                        {new Date(`${data.daily[hover].day}T00:00:00`).toLocaleDateString("en-IN", {
+                        {new Date(`${data.daily[hover].day}T00:00:00`).toLocaleDateString(intlLocaleFor(lang), {
                           day: "numeric",
                           month: "short",
                         })}
@@ -261,7 +265,7 @@ export function ProfitDashboardTool() {
                     viewBox={`0 0 ${data.daily.length * 20} 120`}
                     className="h-48 w-full"
                     role="img"
-                    aria-label="Bar chart of revenue per day"
+                    aria-label={t("pdChartLabel")}
                     preserveAspectRatio="none"
                     onMouseLeave={() => setHover(null)}
                   >
@@ -287,13 +291,13 @@ export function ProfitDashboardTool() {
                   </svg>
                   <div className="mt-1 flex justify-between text-xs text-muted">
                     <span>
-                      {new Date(`${start}T00:00:00`).toLocaleDateString("en-IN", {
+                      {new Date(`${start}T00:00:00`).toLocaleDateString(intlLocaleFor(lang), {
                         day: "numeric",
                         month: "short",
                       })}
                     </span>
                     <span>
-                      {new Date(`${end}T00:00:00`).toLocaleDateString("en-IN", {
+                      {new Date(`${end}T00:00:00`).toLocaleDateString(intlLocaleFor(lang), {
                         day: "numeric",
                         month: "short",
                       })}
@@ -305,12 +309,12 @@ export function ProfitDashboardTool() {
 
             {/* Expenses by category — horizontal bars */}
             <Card>
-              <h2 className="mb-4 text-base font-bold text-ink">Expenses by category</h2>
+              <h2 className="mb-4 text-base font-bold text-ink">{t("pdExpensesByCategory")}</h2>
               {data.byCategory.length === 0 ? (
                 <p className="py-8 text-center text-sm text-muted">
                   No expenses in this period.{" "}
-                  <a href="/tools/expense-tracker" className="font-semibold text-indigo">
-                    Add them in the Expense Tracker
+                  <a href={href("/tools/expense-tracker")} className="font-semibold text-indigo">
+                    {t("pdAddInExpenseTracker")}
                   </a>
                   .
                 </p>

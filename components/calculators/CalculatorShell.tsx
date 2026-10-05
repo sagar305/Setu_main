@@ -10,15 +10,31 @@ import {
   getRelatedCalculators,
   getTeamMember,
   FINANCE_AUTHOR_SLUG,
+  getCalculatorsContent,
   type CalculatorItem,
 } from "@/lib/content";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { itemPathFor, localizedHref } from "@/lib/i18n/pages";
 import { toolApplicationSchema } from "@/lib/schema";
 import { CalculatorReviewPrompt } from "@/components/review/CalculatorReviewPrompt";
 import { GlossaryText } from "@/components/glossary/GlossaryText";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
 
-export function CalculatorShell({ item, children }: { item: CalculatorItem; children: ReactNode }) {
+export function CalculatorShell({
+  item,
+  children,
+  lang = "en",
+  labels,
+}: {
+  item: CalculatorItem;
+  children: ReactNode;
+  /** The language this page is published in; drives its own links and schema. */
+  lang?: LanguageCode;
+  /** Shell labels in that language. English is used when none are passed. */
+  labels?: { allCalculators: string; moreCalculators: string };
+}) {
   const related = getRelatedCalculators(item.slug, 3);
+  const text = labels ?? getCalculatorsContent().labels;
 
   // Terms used in the explainer copy below link to their glossary definitions.
   const glossary = createGlossaryLinker({ maxLinks: 6 });
@@ -31,7 +47,7 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
   const applicationSchema = toolApplicationSchema({
     name: item.name,
     description: item.shortDescription,
-    path: `/calculators/${item.slug}`,
+    path: itemPathFor("calculators", item.slug, lang),
     author: getTeamMember(FINANCE_AUTHOR_SLUG),
   });
 
@@ -82,8 +98,11 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
         </FadeIn>
 
         <FadeIn className="mt-8">
-          <Link href="/calculators" className="text-sm font-semibold text-indigo hover:underline">
-            ← All calculators
+          <Link
+            href={localizedHref("/calculators", lang)}
+            className="text-sm font-semibold text-indigo hover:underline"
+          >
+            {text.allCalculators}
           </Link>
         </FadeIn>
       </section>
@@ -93,10 +112,10 @@ export function CalculatorShell({ item, children }: { item: CalculatorItem; chil
       {related.length > 0 && (
         <section className="border-t border-muted-line/20 py-16">
           <div className="mx-auto max-w-5xl px-6">
-            <h2 className="text-2xl font-bold tracking-tight text-ink">More calculators</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-ink">{text.moreCalculators}</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-3">
               {related.map((relatedItem) => (
-                <CalculatorCard key={relatedItem.slug} item={relatedItem} />
+                <CalculatorCard key={relatedItem.slug} item={relatedItem} lang={lang} />
               ))}
             </div>
           </div>

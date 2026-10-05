@@ -22,6 +22,7 @@ import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
@@ -165,17 +166,17 @@ export function AppointmentBookTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Book appointments for the customers you already have — one shared customer book."
+        message={t("abConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">New appointment</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("abNew")}</h2>
           <div className="space-y-4">
             {workspace.connected && workspace.customers.length > 0 ? (
-              <Field label="Pick a saved customer">
+              <Field label={t("abPickCustomer")}>
                 <Select value={customerId} onChange={(e) => pickCustomer(e.target.value)}>
-                  <option value="">Type details below…</option>
+                  <option value="">{t("abTypeDetails")}</option>
                   {workspace.customers.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
@@ -184,14 +185,14 @@ export function AppointmentBookTool() {
                 </Select>
               </Field>
             ) : null}
-            <Field label="Customer name *">
+            <Field label={t("abCustomerNameReq")}>
               <TextInput
                 value={customerName}
                 onChange={(e) => {
                   setCustomerName(e.target.value);
                   setCustomerId("");
                 }}
-                placeholder="Customer name"
+                placeholder={t("customerNamePlaceholder")}
               />
             </Field>
             <Field label={t("phone")}>
@@ -201,7 +202,7 @@ export function AppointmentBookTool() {
               <TextInput
                 value={service}
                 onChange={(e) => setService(e.target.value)}
-                placeholder="e.g. Haircut, Consultation, Repair"
+                placeholder={t("abServicePlaceholder")}
               />
             </Field>
             <div className="grid grid-cols-3 gap-3">
@@ -217,7 +218,7 @@ export function AppointmentBookTool() {
                   />
                 </Field>
               </div>
-              <Field label="Time">
+              <Field label={t("time")}>
                 <TextInput
                   type="time"
                   value={time}
@@ -240,7 +241,7 @@ export function AppointmentBookTool() {
               />
             </Field>
             <Field label={t("notes")}>
-              <TextInput value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional" />
+              <TextInput value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t("optional")} />
             </Field>
             {error ? (
               <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -248,7 +249,7 @@ export function AppointmentBookTool() {
               </p>
             ) : null}
             <PrimaryButton className="w-full" onClick={submit} disabled={!canAdd}>
-              Book appointment
+              {t("abBook")}
             </PrimaryButton>
           </div>
         </Card>
@@ -273,8 +274,8 @@ export function AppointmentBookTool() {
 
           {dayAppointments.length === 0 ? (
             <EmptyState
-              title="No appointments on this day"
-              subtitle="Booked appointments appear here in time order. Use the date picker to move between days."
+              title={t("abNoneTitle")}
+              subtitle={t("abNoneHint")}
             />
           ) : (
             <div className="space-y-3">
@@ -311,21 +312,21 @@ export function AppointmentBookTool() {
                         className="rounded-md bg-red-100 px-3 py-1.5 text-red-600 hover:bg-red-200"
                         onClick={() => setStatus(a, "no-show")}
                       >
-                        No-show
+                        {t("noShow")}
                       </button>
                       <button
                         type="button"
                         className="rounded-md bg-gray-100 px-3 py-1.5 text-gray-600 hover:bg-gray-200"
                         onClick={() => setStatus(a, "cancelled")}
                       >
-                        Cancel
+                        {t("cancel")}
                       </button>
                       <button
                         type="button"
                         className="rounded-md bg-indigo/10 px-3 py-1.5 text-indigo hover:bg-indigo/20"
                         onClick={() => shareAppointment(a)}
                       >
-                        Share
+                        {t("share")}
                       </button>
                     </div>
                   ) : (
@@ -338,10 +339,10 @@ export function AppointmentBookTool() {
                         {t("reopen")}
                       </button>
                       <button type="button" className="text-indigo" onClick={() => shareAppointment(a)}>
-                        Share
+                        {t("share")}
                       </button>
                       <button type="button" className="text-red-500" onClick={() => setDeleting(a)}>
-                        Delete
+                        {t("delete")}
                       </button>
                     </div>
                   )}
@@ -354,13 +355,18 @@ export function AppointmentBookTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete appointment?"
+        title={t("abDeleteTitle")}
         message={
           deleting
-            ? `Delete ${deleting.customerName}'s ${deleting.service} appointment on ${deleting.date} at ${deleting.time}?`
+            ? fill(t("abDeleteMessage"), {
+                name: deleting.customerName,
+                service: deleting.service,
+                date: deleting.date,
+                time: deleting.time,
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);
@@ -372,7 +378,7 @@ export function AppointmentBookTool() {
         open={sharing !== null}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Share appointment"
+        title={t("abShareTitle")}
         allowFee
         onSaveUpiDefault={saveUpiDefault}
       />

@@ -1,0 +1,76 @@
+{
+  "seo": {
+    "title": "Nutzungsbedingungen | Werkzeuge von Setu Technology",
+    "description": "Die Bedingungen für die kostenlosen Geschäftsrechner und Werkzeuge von Setu Technology: wie Ihre Daten auf Ihrem Gerät bleiben und was wir nicht zusichern."
+  },
+  "hero": {
+    "eyebrow": "Rechtliches",
+    "headline": "Nutzungsbedingungen",
+    "subheadline": "Die wenigen Regeln, die zu diesen Werkzeugen gehören."
+  },
+  "lastUpdated": "Zuletzt aktualisiert am 7. September 2026.",
+  "translationNote": "Diese Übersetzung dient der Bequemlichkeit. Weicht sie von der englischen Fassung ab, gilt die englische Fassung.",
+  "sections": [
+    {
+      "heading": "Wer wir sind",
+      "paragraphs": [
+        "Diese Website wird von Setu Technology betrieben. Wer sie nutzt, nimmt diese Bedingungen an. Wenn Sie sie nicht annehmen, nutzen Sie die Website bitte nicht."
+      ]
+    },
+    {
+      "heading": "Die Werkzeuge sind kostenlos und werden so bereitgestellt, wie sie sind",
+      "paragraphs": [
+        "Die Rechner, Generatoren und Anwendungen hier werden kostenfrei und ohne jede Gewährleistung bereitgestellt. Es sind Arbeitswerkzeuge, keine fachliche Beratung.",
+        "**Besonders bei Steuern, GST, Lohn und Finanzzahlen:** Sätze und Regeln ändern sich, und ein Rechner kann nur abbilden, was zum Zeitpunkt seiner Erstellung richtig war. Prüfen Sie alles Wesentliche anhand des geltenden Rechts oder mit einer qualifizierten Steuerberatung, bevor Sie sich darauf verlassen. Für eine Entscheidung, die auf einer hier erzeugten Zahl beruht, haften wir nicht."
+      ]
+    },
+    {
+      "heading": "Ihre Daten gehören Ihnen — und liegen in Ihrer Verantwortung",
+      "paragraphs": [
+        "Was Sie in diesen Werkzeugen erstellen, wird in Ihrem eigenen Browser gespeichert, nicht auf unseren Servern. Das hat eine wichtige Folge: **Wir haben keine Kopie und können nichts für Sie wiederherstellen.** Browserdaten löschen, privates Surfen, ein Wechsel von Browser oder Gerät — und es ist weg. Exportieren oder laden Sie herunter, was Sie behalten wollen.",
+        "Für die Richtigkeit und Rechtmäßigkeit dessen, was Sie in die Werkzeuge eingeben, sind Sie verantwortlich — einschließlich jeder Rechnung, jedes Belegs und jeder Aufzeichnung, die Sie erzeugen und weitergeben."
+      ]
+    },
+    {
+      "heading": "Zulässige Nutzung",
+      "paragraphs": [
+        "Sie verpflichten sich, Folgendes zu unterlassen:"
+      ],
+      "list": [
+        "Die Website nutzen, um falsche oder betrügerische Dokumente zu erstellen.",
+        "Versuchen, die Website oder ihre Systeme zu beschädigen, zu überlasten oder unbefugt darauf zuzugreifen.",
+        "Die Werkzeuge oder ihre Inhalte auslesen, weiterverkaufen oder als eigene verbreiten."
+      ]
+    },
+    {
+      "heading": "Verfügbarkeit",
+      "paragraphs": [
+        "Wir können jeden Teil der Website jederzeit und ohne Ankündigung ändern, aussetzen oder einstellen. Für kostenlose Werkzeuge gibt es keine Verfügbarkeitszusage. Für kostenpflichtige Produkte gilt der beim Kauf geschlossene Vertrag, der diesen Bedingungen vorgeht."
+      ]
+    },
+    {
+      "heading": "Websites anderer",
+      "paragraphs": [
+        "Wo wir nach außen verlinken — etwa zu Google, zu Bewertungsseiten oder zu Zahlungs-Apps —, haben wir keine Kontrolle über diese Dienste und sind für sie nicht verantwortlich."
+      ]
+    },
+    {
+      "heading": "Unsere Inhalte",
+      "paragraphs": [
+        "Gestaltung, Texte und Code dieser Website gehören Setu Technology. Die Dokumente, die Sie mit den Werkzeugen erstellen, gehören Ihnen."
+      ]
+    },
+    {
+      "heading": "Anwendbares Recht",
+      "paragraphs": [
+        "Diese Bedingungen unterliegen dem Recht Indiens; für Streitigkeiten daraus sind ausschließlich die Gerichte Indiens zuständig."
+      ]
+    },
+    {
+      "heading": "Fragen",
+      "paragraphs": [
+        "Fragen Sie über die [Kontaktseite](/contact). Zu allem, was Daten betrifft, siehe unsere [Datenschutzerklärung](/privacy)."
+      ]
+    }
+  ]
+}
