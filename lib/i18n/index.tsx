@@ -4,6 +4,7 @@
 // preference (never asked twice); missing translations fall back to English.
 // Direction (RTL for Arabic) is applied to <html> when the language changes.
 
+import { usePathname } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -20,6 +21,7 @@ import type { CalcDictKey } from "./calc-dictionaries";
 // dictionary; each falls back to its English base when a key is missing. The
 // lookup lives in ./translate so server components can use it as well.
 import { translate, type TKey } from "./translate";
+import { routeLanguage } from "./route-language";
 
 type I18n = {
   lang: LanguageCode;
@@ -55,17 +57,23 @@ export function LanguageProvider({
    */
   routeLang?: LanguageCode;
 }) {
+  const pathname = usePathname();
+
   // Without a language in the route, start at "en" to match the server render
-  // and adopt the stored preference after mount; with one, that language is
+  // and settle on the real language after mount; with one, that language is
   // already what the server rendered.
   const [lang, setLangState] = useState<LanguageCode>(routeLang ?? "en");
 
+  // The pathname is in the dependencies because a client-side navigation keeps
+  // this provider mounted: moving from a page outside any cluster, where the
+  // stored preference applies, onto an English page that has its own
+  // translations has to put the language back to the one the new URL declares.
   useEffect(() => {
     markHydrated();
-    if (routeLang) return;
-    const stored = getPreferences().language;
-    if (isLanguageCode(stored)) applyLang(stored, false);
-  }, [routeLang]);
+    const next = routeLanguage(routeLang, pathname, getPreferences().language);
+    if (next !== lang) applyLang(next, false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeLang, pathname]);
 
   const applyLang = (code: LanguageCode, persist = true) => {
     setLangState(code);
