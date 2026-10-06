@@ -94,11 +94,11 @@ export function SupplierBookTool() {
           <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
         ) : filtered.length === 0 ? (
           <EmptyState
-            title={suppliers.length === 0 ? "No suppliers yet" : "No matches"}
+            title={suppliers.length === 0 ? t("sbNoneTitle") : t("noMatches")}
             subtitle={
               suppliers.length === 0
-                ? "Save your suppliers once — the Purchase Register and other Setu tools reuse them automatically."
-                : "Try a different search."
+                ? t("sbNoneHint")
+                : t("trySearchAgain")
             }
           />
         ) : (

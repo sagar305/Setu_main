@@ -331,8 +331,7 @@ export function PurchaseRegisterTool() {
             <span className="text-sm text-ink">
               {t("prAlsoExpense")}
               <span className="block text-xs text-muted">
-                Adds it to the Expense Tracker (category: Purchases). Turn this off for resale stock
-                whose cost you track via product cost price, so it isn&apos;t counted twice in profit.
+                {t("prExpenseHint")}
               </span>
             </span>
           </label>

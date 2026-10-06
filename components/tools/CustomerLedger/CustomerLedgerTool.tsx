@@ -57,7 +57,7 @@ export function CustomerLedgerTool() {
       cn: customerName,
       cp: customerPhone || undefined,
       bal: balance,
-      note: "Kindly clear the outstanding balance at your convenience. Thank you!",
+      note: t("clDefaultReminder"),
     });
   };
 
@@ -197,8 +197,8 @@ export function CustomerLedgerTool() {
           {customers.length === 0 ? (
             <p className="py-4 text-center text-sm text-muted">
               {workspace.exists && !workspace.connected
-                ? "Connect your workspace above to see saved customers."
-                : "No customers yet — add your first one above."}
+                ? t("clConnectForCustomers")
+                : t("clNoCustomers")}
             </p>
           ) : (
             <div className="max-h-96 space-y-1 overflow-y-auto">
@@ -303,7 +303,7 @@ export function CustomerLedgerTool() {
 
               {selectedEntries.length === 0 ? (
                 <p className="py-6 text-center text-sm text-muted">
-                  No entries yet for {selected.name}.
+                  {fill(t("clNoEntriesFor"), { name: selected.name })}
                 </p>
               ) : (
                 <div className="space-y-2">

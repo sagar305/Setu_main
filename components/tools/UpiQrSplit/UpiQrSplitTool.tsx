@@ -143,12 +143,15 @@ export function UpiQrSplitTool() {
               />
             </div>
             <span className="mt-1.5 block text-xs text-muted">
-              MDR starts above ₹{ZERO_MDR_THRESHOLD.toLocaleString("en-IN")}. The default sits a rupee
-              under it.
+              {fill(t("spMdrStartsAbove"), {
+                amount: ZERO_MDR_THRESHOLD.toLocaleString("en-IN"),
+              })}
             </span>
             {capTooHigh && (
               <span className="mt-1.5 block text-xs font-semibold text-red-600">
-                Above ₹{ZERO_MDR_THRESHOLD.toLocaleString("en-IN")}, so these QR codes will attract MDR.
+                {fill(t("spCapTooHigh"), {
+                  amount: ZERO_MDR_THRESHOLD.toLocaleString("en-IN"),
+                })}
               </span>
             )}
           </label>

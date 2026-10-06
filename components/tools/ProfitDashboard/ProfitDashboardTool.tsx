@@ -312,7 +312,7 @@ export function ProfitDashboardTool() {
               <h2 className="mb-4 text-base font-bold text-ink">{t("pdExpensesByCategory")}</h2>
               {data.byCategory.length === 0 ? (
                 <p className="py-8 text-center text-sm text-muted">
-                  No expenses in this period.{" "}
+                  {t("pdNoExpenses")}{" "}
                   <a href={href("/tools/expense-tracker")} className="font-semibold text-indigo">
                     {t("pdAddInExpenseTracker")}
                   </a>
