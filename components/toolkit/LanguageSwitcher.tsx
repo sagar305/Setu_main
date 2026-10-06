@@ -30,7 +30,7 @@ function isClientTranslatablePath(pathname: string | null): boolean {
 }
 
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
-  const { lang, setLang } = useI18n();
+  const { lang, setLang, t } = useI18n();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -53,7 +53,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
       : languagesFor(page!.key)
     : LANGUAGES.map((l) => l.code);
 
-  const disabledNote = "Language switching is available on translated pages, tools & calculators";
+  const disabledNote = t("langSwitchDisabled");
 
   const handleChange = (code: LanguageCode) => {
     setLang(code);
@@ -77,7 +77,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
     >
       <Globe className="h-4 w-4 text-muted" aria-hidden="true" />
       <select
-        aria-label="Language"
+        aria-label={t("language")}
         // On a translated page the URL is the truth. On the tools the saved
         // preference is. Everywhere else, display English regardless of the
         // saved language — which is left untouched so it comes back on the next

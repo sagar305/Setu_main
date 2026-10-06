@@ -615,6 +615,7 @@ export type DictKey =
   | "qmSampleVarSize"
   | "qmSampleHalf"
   | "qmSampleFull"
+  | "langSwitchDisabled"
   // Tool vocabulary — complete in en + hi; other languages fall back to
   // English until their dictionaries are extended.
   | "category"
@@ -1333,6 +1334,7 @@ const en: Dict = {
   qmSampleVarSize: "Size",
   qmSampleHalf: "Half",
   qmSampleFull: "Full",
+  langSwitchDisabled: "Language switching is available on translated pages, tools & calculators",
 };
 
 const hi: Dict = {
@@ -1996,6 +1998,7 @@ const hi: Dict = {
   qmSampleVarSize: "आकार",
   qmSampleHalf: "आधा",
   qmSampleFull: "पूरा",
+  langSwitchDisabled: "भाषा बदलना अनूदित पेजों, टूल और कैलकुलेटर पर उपलब्ध है",
 };
 
 const bn: Partial<Dict> = {
@@ -2659,6 +2662,7 @@ const bn: Partial<Dict> = {
   qmSampleVarSize: "মাপ",
   qmSampleHalf: "অর্ধেক",
   qmSampleFull: "পুরো",
+  langSwitchDisabled: "ভাষা বদলানো যায় অনূদিত পাতা, টুল ও ক্যালকুলেটরে",
 };
 
 const ta: Partial<Dict> = {
@@ -3322,6 +3326,7 @@ const ta: Partial<Dict> = {
   qmSampleVarSize: "அளவு",
   qmSampleHalf: "அரை",
   qmSampleFull: "முழு",
+  langSwitchDisabled: "மொழி மாற்றம் மொழிபெயர்க்கப்பட்ட பக்கங்கள், கருவிகள், கணிப்பான்களில் கிடைக்கும்",
 };
 
 const te: Partial<Dict> = {
@@ -3985,6 +3990,7 @@ const te: Partial<Dict> = {
   qmSampleVarSize: "పరిమాణం",
   qmSampleHalf: "సగం",
   qmSampleFull: "పూర్తి",
+  langSwitchDisabled: "భాష మార్చడం అనువాద పేజీలు, సాధనాలు, లెక్కింపు సాధనాల్లో మాత్రమే",
 };
 
 const mr: Partial<Dict> = {
@@ -4648,6 +4654,7 @@ const mr: Partial<Dict> = {
   qmSampleVarSize: "आकार",
   qmSampleHalf: "अर्धा",
   qmSampleFull: "पूर्ण",
+  langSwitchDisabled: "भाषा बदलणे अनुवादित पाने, साधने व गणकांवर उपलब्ध आहे",
 };
 
 const gu: Partial<Dict> = {
@@ -5311,6 +5318,7 @@ const gu: Partial<Dict> = {
   qmSampleVarSize: "માપ",
   qmSampleHalf: "અડધું",
   qmSampleFull: "આખું",
+  langSwitchDisabled: "ભાષા બદલવાની સુવિધા અનુવાદિત પાનાં, સાધનો અને ગણકો પર છે",
 };
 
 const kn: Partial<Dict> = {
@@ -5974,6 +5982,7 @@ const kn: Partial<Dict> = {
   qmSampleVarSize: "ಗಾತ್ರ",
   qmSampleHalf: "ಅರ್ಧ",
   qmSampleFull: "ಪೂರ್ಣ",
+  langSwitchDisabled: "ಭಾಷೆ ಬದಲಿಸುವುದು ಅನುವಾದಿತ ಪುಟಗಳು, ಸಾಧನಗಳು ಮತ್ತು ಗಣಕಗಳಲ್ಲಿ ಲಭ್ಯ",
 };
 
 const ml: Partial<Dict> = {
@@ -6637,6 +6646,7 @@ const ml: Partial<Dict> = {
   qmSampleVarSize: "വലുപ്പം",
   qmSampleHalf: "പകുതി",
   qmSampleFull: "മുഴുവൻ",
+  langSwitchDisabled: "ഭാഷ മാറ്റൽ പരിഭാഷപ്പെടുത്തിയ താളുകളിലും ഉപകരണങ്ങളിലും കണക്കുകൂട്ടലുകളിലും മാത്രം",
 };
 
 const pa: Partial<Dict> = {
@@ -7300,6 +7310,7 @@ const pa: Partial<Dict> = {
   qmSampleVarSize: "ਆਕਾਰ",
   qmSampleHalf: "ਅੱਧਾ",
   qmSampleFull: "ਪੂਰਾ",
+  langSwitchDisabled: "ਭਾਸ਼ਾ ਬਦਲਣਾ ਅਨੁਵਾਦਿਤ ਸਫ਼ਿਆਂ, ਟੂਲਾਂ ਤੇ ਕੈਲਕੁਲੇਟਰਾਂ 'ਤੇ ਮੌਜੂਦ ਹੈ",
 };
 
 const es: Partial<Dict> = {
@@ -7963,6 +7974,7 @@ const es: Partial<Dict> = {
   qmSampleVarSize: "Tamaño",
   qmSampleHalf: "Media",
   qmSampleFull: "Entera",
+  langSwitchDisabled: "El cambio de idioma está disponible en las páginas traducidas, las herramientas y las calculadoras",
 };
 
 const fr: Partial<Dict> = {
@@ -8626,6 +8638,7 @@ const fr: Partial<Dict> = {
   qmSampleVarSize: "Taille",
   qmSampleHalf: "Demi",
   qmSampleFull: "Entier",
+  langSwitchDisabled: "Le changement de langue est disponible sur les pages traduites, les outils et les calculateurs",
 };
 
 const ar: Partial<Dict> = {
@@ -9289,6 +9302,7 @@ const ar: Partial<Dict> = {
   qmSampleVarSize: "الحجم",
   qmSampleHalf: "نصف",
   qmSampleFull: "كامل",
+  langSwitchDisabled: "تغيير اللغة متاح في الصفحات المترجمة والأدوات والحاسبات",
 };
 
 const pt: Partial<Dict> = {
@@ -9952,6 +9966,7 @@ const pt: Partial<Dict> = {
   qmSampleVarSize: "Tamanho",
   qmSampleHalf: "Meia",
   qmSampleFull: "Inteira",
+  langSwitchDisabled: "A troca de idioma está disponível nas páginas traduzidas, nas ferramentas e nas calculadoras",
 };
 
 const id: Partial<Dict> = {
@@ -10615,6 +10630,7 @@ const id: Partial<Dict> = {
   qmSampleVarSize: "Ukuran",
   qmSampleHalf: "Setengah",
   qmSampleFull: "Penuh",
+  langSwitchDisabled: "Penggantian bahasa tersedia di halaman terjemahan, alat, dan kalkulator",
 };
 
 const de: Partial<Dict> = {
@@ -11278,6 +11294,7 @@ const de: Partial<Dict> = {
   qmSampleVarSize: "Größe",
   qmSampleHalf: "Halbe Portion",
   qmSampleFull: "Ganze Portion",
+  langSwitchDisabled: "Die Sprache lässt sich auf übersetzten Seiten, in den Werkzeugen und Rechnern wechseln",
 };
 
 const zh: Partial<Dict> = {
@@ -11941,6 +11958,7 @@ const zh: Partial<Dict> = {
   qmSampleVarSize: "份量",
   qmSampleHalf: "半份",
   qmSampleFull: "整份",
+  langSwitchDisabled: "只有已翻译的页面、工具和计算器可以切换语言",
 };
 
 export const DICTIONARIES: Record<LanguageCode, Partial<Dict>> = {
