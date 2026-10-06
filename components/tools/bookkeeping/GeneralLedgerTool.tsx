@@ -4,10 +4,12 @@ import { useMemo, useState } from "react";
 import { Card, EmptyState, Field, SecondaryButton, Select } from "@/components/toolkit/ui";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
-  DEFAULT_ACCOUNTS,
+  defaultAccounts,
   isDebitNormal,
   ledgerRows,
   type Account,
@@ -16,8 +18,9 @@ import {
 
 export function GeneralLedgerTool() {
   const { code: currency } = usePreferredCurrency();
+  const { t, lang } = useI18n();
   const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
-  const accounts = coaAccounts.length > 0 ? coaAccounts : DEFAULT_ACCOUNTS;
+  const accounts = coaAccounts.length > 0 ? coaAccounts : defaultAccounts(lang);
   const { items: entries, loading } = useEntityList<JournalEntry>("journal_entries");
   const loaded = !loading;
   const [accountId, setAccountId] = useState("");
@@ -34,7 +37,10 @@ export function GeneralLedgerTool() {
   );
 
   const closing = rows.length > 0 ? rows[rows.length - 1].balance : 0;
-  const side = account ? (isDebitNormal(account.type) ? "Dr" : "Cr") : "";
+  // Which side the account's balance sits on, and the other side for when it
+  // has swung the wrong way.
+  const side = account ? t(isDebitNormal(account.type) ? "bkDr" : "bkCr") : "";
+  const otherSide = account ? t(isDebitNormal(account.type) ? "bkCr" : "bkDr") : "";
 
   const exportCsv = () => {
     if (!account) return;
@@ -57,9 +63,9 @@ export function GeneralLedgerTool() {
     <Card>
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div className="w-full max-w-sm">
-          <Field label="Account">
+          <Field label={t("bkAccount")}>
             <Select value={accountId} onChange={(e) => setAccountId(e.target.value)}>
-              <option value="">Choose an account…</option>
+              <option value="">{t("glChooseAccount")}</option>
               {sortedAccounts.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.code} · {a.name}
@@ -69,32 +75,26 @@ export function GeneralLedgerTool() {
           </Field>
         </div>
         <SecondaryButton onClick={exportCsv} disabled={rows.length === 0}>
-          Export CSV
+          {t("exportCsv")}
         </SecondaryButton>
       </div>
 
       {!loaded ? (
-        <p className="py-8 text-center text-sm text-muted">Loading…</p>
+        <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
       ) : !accountId ? (
-        <EmptyState
-          title="Pick an account"
-          subtitle="The ledger shows every journal posting to that account with a running balance. Post entries in the Journal Entry tool first."
-        />
+        <EmptyState title={t("glPickTitle")} subtitle={t("glPickHint")} />
       ) : rows.length === 0 ? (
-        <EmptyState
-          title="No postings yet"
-          subtitle="Nothing has been posted to this account. Record transactions in the Journal Entry tool and they appear here instantly."
-        />
+        <EmptyState title={t("glNoPostingsTitle")} subtitle={t("glNoPostingsHint")} />
       ) : (
         <>
           <div className="mb-4 rounded-xl bg-cream-paper/70 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-              Closing balance — {account?.name}
+              {fill(t("glClosingBalance"), { account: account?.name ?? "" })}
             </p>
             <p className="mt-1 text-2xl font-bold text-ink">
               {formatMoney(Math.abs(closing), currency)}{" "}
               <span className="text-base font-semibold text-muted">
-                {closing >= 0 ? side : side === "Dr" ? "Cr" : "Dr"}
+                {closing >= 0 ? side : otherSide}
               </span>
             </p>
           </div>
@@ -103,11 +103,11 @@ export function GeneralLedgerTool() {
             <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                  <th className="py-2 pr-3">Date</th>
-                  <th className="py-2 pr-3">Narration</th>
-                  <th className="py-2 pr-3 text-right">Debit</th>
-                  <th className="py-2 pr-3 text-right">Credit</th>
-                  <th className="py-2 text-right">Balance</th>
+                  <th className="py-2 pr-3">{t("date")}</th>
+                  <th className="py-2 pr-3">{t("bkNarration")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkDebit")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkCredit")}</th>
+                  <th className="py-2 text-right">{t("bkBalance")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,7 +124,7 @@ export function GeneralLedgerTool() {
                     <td className="py-2 text-right font-medium">
                       {formatMoney(Math.abs(row.balance), currency)}{" "}
                       <span className="text-xs text-muted">
-                        {row.balance >= 0 ? side : side === "Dr" ? "Cr" : "Dr"}
+                        {row.balance >= 0 ? side : otherSide}
                       </span>
                     </td>
                   </tr>

@@ -14,10 +14,11 @@ import {
 } from "@/components/toolkit/ui";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
-  DEFAULT_ACCOUNTS,
+  defaultAccounts,
   accountLabel,
   type Account,
   type JournalEntry,
@@ -35,9 +36,10 @@ const blankLine = (): JournalLine => ({ id: generateId(), accountId: "", debit: 
 
 export function JournalEntryTool() {
   const { code: currency } = usePreferredCurrency();
+  const { lang } = useI18n();
   // Same shared stores as the Chart of Accounts and Trial Balance tools.
   const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
-  const accounts = coaAccounts.length > 0 ? coaAccounts : DEFAULT_ACCOUNTS;
+  const accounts = coaAccounts.length > 0 ? coaAccounts : defaultAccounts(lang);
   const { items: entries, save: saveEntry, remove: removeEntry } =
     useEntityList<JournalEntry>("journal_entries");
 
@@ -123,7 +125,7 @@ export function JournalEntryTool() {
         rows.push([
           entry.date,
           entry.narration,
-          accountLabel(accounts, line.accountId),
+          accountLabel(accounts, line.accountId, lang),
           line.debit ? line.debit.toFixed(2) : "",
           line.credit ? line.credit.toFixed(2) : "",
         ]);
@@ -334,7 +336,7 @@ export function JournalEntryTool() {
                 <div className="mt-2 space-y-0.5 text-xs text-muted">
                   {entry.lines.map((line) => (
                     <p key={line.id}>
-                      {line.debit > 0 ? "Dr" : "Cr"} {accountLabel(accounts, line.accountId)} —{" "}
+                      {line.debit > 0 ? "Dr" : "Cr"} {accountLabel(accounts, line.accountId, lang)} —{" "}
                       {formatMoney(line.debit || line.credit, currency)}
                     </p>
                   ))}

@@ -6,6 +6,10 @@
 
 import { Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 export type StatementLine = { id: string; label: string; amount: number };
 
@@ -22,13 +26,14 @@ export function LineSectionEditor({
   title,
   lines,
   onChange,
-  addLabel = "+ Add line",
+  addLabel,
 }: {
   title: string;
   lines: StatementLine[];
   onChange: (lines: StatementLine[]) => void;
   addLabel?: string;
 }) {
+  const { t } = useI18n();
   const update = (id: string, patch: Partial<StatementLine>) =>
     onChange(lines.map((l) => (l.id === id ? { ...l, ...patch } : l)));
 
@@ -42,7 +47,7 @@ export function LineSectionEditor({
               <TextInput
                 value={line.label}
                 onChange={(e) => update(line.id, { label: e.target.value })}
-                placeholder="Item name"
+                placeholder={t("stItemName")}
               />
             </Field>
             <Field label="">
@@ -65,7 +70,7 @@ export function LineSectionEditor({
         ))}
       </div>
       <SecondaryButton className="mt-2" onClick={() => onChange([...lines, blankLine()])}>
-        {addLabel}
+        {addLabel ?? t("stAddLine")}
       </SecondaryButton>
     </div>
   );
@@ -84,12 +89,15 @@ export function printStatement({
   periodLabel,
   rows,
   footNote,
+  lang = "en",
 }: {
   docTitle: string;
   businessName: string;
   periodLabel: string;
   rows: PrintRow[];
   footNote?: string;
+  /** Not a hook, so the caller passes the language it is already rendering in. */
+  lang?: LanguageCode;
 }) {
   const body = rows
     .map((r) => {
@@ -102,7 +110,7 @@ export function printStatement({
 
   const html = `<!doctype html><html><head><title>${esc(docTitle)}</title><style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Georgia, "Times New Roman", serif; color: #1a1a2e; padding: 48px 56px; }
+    body { font-family: Georgia, "Times New Roman", "Noto Serif", serif, sans-serif; color: #1a1a2e; padding: 48px 56px; }
     @page { size: A4; margin: 0; }
     .head { text-align: center; margin-bottom: 32px; }
     .head .biz { font-size: 20px; font-weight: bold; }
@@ -117,14 +125,18 @@ export function printStatement({
     .foot { margin-top: 36px; font-size: 11px; color: #8a8a9a; display: flex; justify-content: space-between; }
   </style></head><body>
     <div class="head">
-      <p class="biz">${esc(businessName || "Your Business")}</p>
+      <p class="biz">${esc(businessName || translate(lang, "stYourBusiness"))}</p>
       <p class="doc">${esc(docTitle)}</p>
       <p class="period">${esc(periodLabel)}</p>
     </div>
     <table><tbody>${body}</tbody></table>
     <div class="foot">
-      <span>${footNote ? esc(footNote) : "Prepared with Setu Technology's free tools"}</span>
-      <span>Generated ${new Date().toLocaleDateString("en-IN")}</span>
+      <span>${esc(footNote ?? translate(lang, "stPreparedWith"))}</span>
+      <span>${esc(
+        fill(translate(lang, "stGenerated"), {
+          date: new Date().toLocaleDateString(intlLocaleFor(lang)),
+        })
+      )}</span>
     </div>
     <script>window.onload = () => window.print();</script>
   </body></html>`;
