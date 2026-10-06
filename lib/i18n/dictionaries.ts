@@ -396,6 +396,7 @@ export type DictKey =
   | "dgUnitDozen"
   | "dgUnitHours"
   | "dgUnitDays"
+  | "ogImageAlt"
   // Tool vocabulary — complete in en + hi; other languages fall back to
   // English until their dictionaries are extended.
   | "category"
@@ -895,6 +896,7 @@ const en: Dict = {
   dgUnitDozen: "Dozen",
   dgUnitHours: "Hours",
   dgUnitDays: "Days",
+  ogImageAlt: "Setu Technology - Setu for your business",
 };
 
 const hi: Dict = {
@@ -1339,6 +1341,7 @@ const hi: Dict = {
   dgUnitDozen: "दर्जन",
   dgUnitHours: "घंटे",
   dgUnitDays: "दिन",
+  ogImageAlt: "Setu Technology — आपके कारोबार के लिए Setu",
 };
 
 const bn: Partial<Dict> = {
@@ -1783,6 +1786,7 @@ const bn: Partial<Dict> = {
   dgUnitDozen: "ডজন",
   dgUnitHours: "ঘণ্টা",
   dgUnitDays: "দিন",
+  ogImageAlt: "Setu Technology — আপনার ব্যবসার জন্য Setu",
 };
 
 const ta: Partial<Dict> = {
@@ -2227,6 +2231,7 @@ const ta: Partial<Dict> = {
   dgUnitDozen: "டஜன்",
   dgUnitHours: "மணி",
   dgUnitDays: "நாட்கள்",
+  ogImageAlt: "Setu Technology — உங்கள் வணிகத்துக்கு Setu",
 };
 
 const te: Partial<Dict> = {
@@ -2671,6 +2676,7 @@ const te: Partial<Dict> = {
   dgUnitDozen: "డజను",
   dgUnitHours: "గంటలు",
   dgUnitDays: "రోజులు",
+  ogImageAlt: "Setu Technology — మీ వ్యాపారం కోసం Setu",
 };
 
 const mr: Partial<Dict> = {
@@ -3115,6 +3121,7 @@ const mr: Partial<Dict> = {
   dgUnitDozen: "डझन",
   dgUnitHours: "तास",
   dgUnitDays: "दिवस",
+  ogImageAlt: "Setu Technology — तुमच्या व्यवसायासाठी Setu",
 };
 
 const gu: Partial<Dict> = {
@@ -3559,6 +3566,7 @@ const gu: Partial<Dict> = {
   dgUnitDozen: "ડઝન",
   dgUnitHours: "કલાક",
   dgUnitDays: "દિવસ",
+  ogImageAlt: "Setu Technology — તમારા ધંધા માટે Setu",
 };
 
 const kn: Partial<Dict> = {
@@ -4003,6 +4011,7 @@ const kn: Partial<Dict> = {
   dgUnitDozen: "ಡಜನ್",
   dgUnitHours: "ಗಂಟೆ",
   dgUnitDays: "ದಿನ",
+  ogImageAlt: "Setu Technology — ನಿಮ್ಮ ವ್ಯಾಪಾರಕ್ಕಾಗಿ Setu",
 };
 
 const ml: Partial<Dict> = {
@@ -4447,6 +4456,7 @@ const ml: Partial<Dict> = {
   dgUnitDozen: "ഡസൻ",
   dgUnitHours: "മണിക്കൂർ",
   dgUnitDays: "ദിവസം",
+  ogImageAlt: "Setu Technology — നിങ്ങളുടെ വ്യാപാരത്തിനായി Setu",
 };
 
 const pa: Partial<Dict> = {
@@ -4891,6 +4901,7 @@ const pa: Partial<Dict> = {
   dgUnitDozen: "ਦਰਜਨ",
   dgUnitHours: "ਘੰਟੇ",
   dgUnitDays: "ਦਿਨ",
+  ogImageAlt: "Setu Technology — ਤੁਹਾਡੇ ਕਾਰੋਬਾਰ ਲਈ Setu",
 };
 
 const es: Partial<Dict> = {
@@ -5335,6 +5346,7 @@ const es: Partial<Dict> = {
   dgUnitDozen: "Docena",
   dgUnitHours: "Horas",
   dgUnitDays: "Días",
+  ogImageAlt: "Setu Technology — Setu para tu negocio",
 };
 
 const fr: Partial<Dict> = {
@@ -5779,6 +5791,7 @@ const fr: Partial<Dict> = {
   dgUnitDozen: "Douzaine",
   dgUnitHours: "Heures",
   dgUnitDays: "Jours",
+  ogImageAlt: "Setu Technology — Setu pour votre entreprise",
 };
 
 const ar: Partial<Dict> = {
@@ -6223,6 +6236,7 @@ const ar: Partial<Dict> = {
   dgUnitDozen: "دستة",
   dgUnitHours: "ساعات",
   dgUnitDays: "أيام",
+  ogImageAlt: "Setu Technology — Setu لنشاطك التجاري",
 };
 
 const pt: Partial<Dict> = {
@@ -6667,6 +6681,7 @@ const pt: Partial<Dict> = {
   dgUnitDozen: "Dúzia",
   dgUnitHours: "Horas",
   dgUnitDays: "Dias",
+  ogImageAlt: "Setu Technology — Setu para o seu negócio",
 };
 
 const id: Partial<Dict> = {
@@ -7111,6 +7126,7 @@ const id: Partial<Dict> = {
   dgUnitDozen: "Lusin",
   dgUnitHours: "Jam",
   dgUnitDays: "Hari",
+  ogImageAlt: "Setu Technology — Setu untuk usaha Anda",
 };
 
 const de: Partial<Dict> = {
@@ -7555,6 +7571,7 @@ const de: Partial<Dict> = {
   dgUnitDozen: "Dutzend",
   dgUnitHours: "Stunden",
   dgUnitDays: "Tage",
+  ogImageAlt: "Setu Technology — Setu für Ihren Betrieb",
 };
 
 const zh: Partial<Dict> = {
@@ -7999,6 +8016,7 @@ const zh: Partial<Dict> = {
   dgUnitDozen: "打",
   dgUnitHours: "小时",
   dgUnitDays: "天",
+  ogImageAlt: "Setu Technology — 为你的生意而做的 Setu",
 };
 
 export const DICTIONARIES: Record<LanguageCode, Partial<Dict>> = {

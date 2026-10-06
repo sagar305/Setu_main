@@ -15,6 +15,7 @@
 // versions of the page they are on.
 
 import { LANGUAGES, type LanguageCode } from "./config";
+import { translate } from "./translate";
 import { TRANSLATED_ITEMS, TRANSLATED_PAGES } from "./translated-pages";
 
 /** A page that can be published in more than one language. */
@@ -272,4 +273,21 @@ export function ogLocaleFor(code: LanguageCode): string {
  */
 export function intlLocaleFor(code: LanguageCode): string {
   return `${code}-${OG_TERRITORY[code]}-u-nu-latn`;
+}
+
+/**
+ * The share-card images, with their alt text in `lang`.
+ *
+ * Four routes declared this list themselves, each with the alt text written
+ * out in English, which is what a reader on a translated page heard when the
+ * image did not load and what a crawler read beside it. One builder, so the
+ * alt text follows the page.
+ */
+export function ogImagesFor(lang: LanguageCode) {
+  const alt = translate(lang, "ogImageAlt");
+  return [
+    { url: "/og/setu-og-image-1200x627.png", width: 1200, height: 627, alt },
+    { url: "/og/setu-og-image-800x418.png", width: 800, height: 418, alt },
+    { url: "/og/setu-og-image-500x261.png", width: 500, height: 261, alt },
+  ];
 }
