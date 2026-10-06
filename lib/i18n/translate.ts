@@ -48,3 +48,27 @@ export function fill(template: string, values: Record<string, string | number>):
     key in values ? String(values[key]) : match,
   );
 }
+
+/**
+ * Splits a translated string around a single `{name}` placeholder.
+ *
+ * `fill` cannot help where the value is not text but an element — a link, a
+ * bold name — because a React element has no string form to substitute in. So
+ * the sentence still lives in the dictionary as one string, with the
+ * placeholder marking where the element goes, and the caller renders the two
+ * halves around it.
+ *
+ * Keeping the whole sentence in one key is what matters: a language that puts
+ * the link first, or last, or inside a different clause, writes it that way,
+ * instead of being forced into the English order by a pair of
+ * before-the-link / after-the-link keys.
+ *
+ * A string without the placeholder returns as the first half, so the sentence
+ * still renders in full and only the element is missing.
+ */
+export function splitAround(template: string, name: string): [string, string] {
+  const token = `{${name}}`;
+  const at = template.indexOf(token);
+  if (at === -1) return [template, ""];
+  return [template.slice(0, at), template.slice(at + token.length)];
+}
