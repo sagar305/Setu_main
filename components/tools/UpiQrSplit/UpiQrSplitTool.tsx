@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Check, Copy } from "lucide-react";
 import { UPIQRCode } from "@/components/tools/UpiQrGenerator/UPIQRCode";
 import { generateUPIUrl, isValidUPIId } from "@/lib/upi";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import {
   DEFAULT_QR_CAP,
   MAX_QR_CHUNKS,
@@ -28,6 +30,7 @@ function inr(value: number): string {
 }
 
 export function UpiQrSplitTool() {
+  const { t } = useI18n();
   const searchParams = useSearchParams();
 
   const [total, setTotal] = useState("");
@@ -109,11 +112,11 @@ export function UpiQrSplitTool() {
     <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
       {/* ---- Form ---- */}
       <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-bold text-ink">Payment details</h2>
+        <h2 className="text-lg font-bold text-ink">{t("spPaymentDetails")}</h2>
 
         <div className="mt-5 space-y-5">
           <label className="block">
-            <span className="text-sm font-semibold text-ink">Total amount to collect</span>
+            <span className="text-sm font-semibold text-ink">{t("spTotalToCollect")}</span>
             <div className="mt-2 flex items-center rounded-xl border border-muted-line/40 bg-white px-4 transition focus-within:border-indigo">
               <span className="mr-2 text-sm text-muted-warm">₹</span>
               <input
@@ -128,7 +131,7 @@ export function UpiQrSplitTool() {
           </label>
 
           <label className="block">
-            <span className="text-sm font-semibold text-ink">Maximum per QR code</span>
+            <span className="text-sm font-semibold text-ink">{t("spMaxPerQr")}</span>
             <div className="mt-2 flex items-center rounded-xl border border-muted-line/40 bg-white px-4 transition focus-within:border-indigo">
               <span className="mr-2 text-sm text-muted-warm">₹</span>
               <input
@@ -151,7 +154,7 @@ export function UpiQrSplitTool() {
           </label>
 
           <label className="block">
-            <span className="text-sm font-semibold text-ink">Your UPI ID</span>
+            <span className="text-sm font-semibold text-ink">{t("spYourUpiId")}</span>
             <input
               type="text"
               value={upiId}
@@ -163,14 +166,15 @@ export function UpiQrSplitTool() {
             />
             {upiError && (
               <span className="mt-1.5 block text-xs font-semibold text-red-600">
-                Invalid UPI ID format. Example: name@bankname
+                {t("upiInvalidFormat")}
               </span>
             )}
           </label>
 
           <label className="block">
             <span className="text-sm font-semibold text-ink">
-              Business name <span className="font-normal text-muted">(optional)</span>
+              {t("spBusinessName")}{" "}
+              <span className="font-normal text-muted">{t("optionalParen")}</span>
             </span>
             <input
               type="text"
@@ -183,7 +187,8 @@ export function UpiQrSplitTool() {
 
           <label className="block">
             <span className="text-sm font-semibold text-ink">
-              Reference note <span className="font-normal text-muted">(optional)</span>
+              {t("spReferenceNote")}{" "}
+              <span className="font-normal text-muted">{t("optionalParen")}</span>
             </span>
             <input
               type="text"
@@ -193,12 +198,12 @@ export function UpiQrSplitTool() {
               className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
             />
             <span className="mt-1.5 block text-xs text-muted">
-              Each QR is tagged with the part number, so payments are easy to reconcile.
+              {t("spReferenceHint")}
             </span>
           </label>
 
           <label className="block">
-            <span className="text-sm font-semibold text-ink">MDR rate you would otherwise pay</span>
+            <span className="text-sm font-semibold text-ink">{t("spMdrRateLabel")}</span>
             <div className="mt-2 flex items-center rounded-xl border border-muted-line/40 bg-white px-4 transition focus-within:border-indigo">
               <input
                 type="number"
@@ -218,7 +223,7 @@ export function UpiQrSplitTool() {
         {split.chunks.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-muted-line/40 bg-cream p-10 text-center">
             <p className="text-muted">
-              Enter the total you need to collect and your UPI ID to generate the QR codes.
+              {t("spEnterTotal")}
             </p>
           </div>
         ) : (
@@ -226,7 +231,7 @@ export function UpiQrSplitTool() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div className="rounded-xl border border-indigo/15 bg-white p-4 shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                  QR codes needed
+                  {t("spQrCodesNeeded")}
                 </p>
                 <p className="mt-1 text-2xl font-bold tracking-tight text-ink">
                   {split.chunks.length}
@@ -234,7 +239,7 @@ export function UpiQrSplitTool() {
               </div>
               <div className="rounded-xl border border-indigo/15 bg-white p-4 shadow-sm">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                  Total collected
+                  {t("spTotalCollected")}
                 </p>
                 <p className="mt-1 text-2xl font-bold tracking-tight text-ink">
                   {inr(split.covered)}
@@ -242,7 +247,7 @@ export function UpiQrSplitTool() {
               </div>
               <div className="rounded-xl bg-indigo p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-cream-paper/70">
-                  MDR avoided
+                  {t("spMdrAvoided")}
                 </p>
                 <p className="mt-1 text-2xl font-bold tracking-tight text-cream-paper">
                   {inr(mdrAvoided)}
@@ -252,17 +257,17 @@ export function UpiQrSplitTool() {
 
             {split.capped && (
               <p className="mt-4 rounded-xl border border-indigo/15 bg-white p-4 text-sm text-muted">
-                This total needs more than {MAX_QR_CHUNKS} QR codes, so only the first{" "}
-                {MAX_QR_CHUNKS} are shown, covering {inr(split.covered)}. A further{" "}
-                {inr(split.shortfall)} is still outstanding — raise the amount per QR, or collect the
-                balance separately.
+                {fill(t("spCappedNote"), {
+                  max: MAX_QR_CHUNKS,
+                  covered: inr(split.covered),
+                  shortfall: inr(split.shortfall),
+                })}
               </p>
             )}
 
             {!upiValid && (
               <p className="mt-4 rounded-xl border border-indigo/15 bg-white p-4 text-sm text-muted">
-                The split is ready. Add a valid UPI ID on the left to turn each part into a scannable
-                QR code.
+                {t("spReadyAddUpi")}
               </p>
             )}
 
@@ -281,7 +286,7 @@ export function UpiQrSplitTool() {
                     className="rounded-2xl border border-indigo/15 bg-white p-5 text-center shadow-sm"
                   >
                     <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                      Part {index + 1} of {split.chunks.length}
+                      {fill(t("spPartOf"), { n: index + 1, total: split.chunks.length })}
                     </p>
                     <p className="mt-1 text-2xl font-bold tracking-tight text-ink">{inr(chunk)}</p>
 
@@ -295,7 +300,7 @@ export function UpiQrSplitTool() {
                         />
                       ) : (
                         <div className="flex h-48 w-48 items-center justify-center rounded-lg border border-dashed border-muted-line/40 text-xs text-muted">
-                          Add a UPI ID
+                          {t("spAddUpiId")}
                         </div>
                       )}
                     </div>
@@ -308,11 +313,11 @@ export function UpiQrSplitTool() {
                       >
                         {copiedIndex === index ? (
                           <>
-                            <Check className="h-4 w-4" aria-hidden="true" /> Copied
+                            <Check className="h-4 w-4" aria-hidden="true" /> {t("spCopiedShort")}
                           </>
                         ) : (
                           <>
-                            <Copy className="h-4 w-4" aria-hidden="true" /> Copy UPI link
+                            <Copy className="h-4 w-4" aria-hidden="true" /> {t("spCopyLink")}
                           </>
                         )}
                       </button>
