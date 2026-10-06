@@ -16,12 +16,12 @@ import { useEntityList } from "@/lib/hooks/useEntityList";
 import { getBusiness, getSuppliers } from "@/lib/toolkit/workspace";
 import type { Expense, Supplier } from "@/lib/toolkit/types";
 import { EXPENSE_CATEGORIES } from "@/lib/toolkit/types";
+import { EXPENSE_CATEGORY_KEYS } from "@/lib/toolkit/category-labels";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
 import { intlLocaleFor } from "@/lib/i18n/pages";
-import type { DictKey } from "@/lib/i18n";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
@@ -33,16 +33,6 @@ const todayIso = () => new Date().toISOString().split("T")[0];
  * every expense saved before this. So the English value stays the identity and
  * is mapped to a key only for display.
  */
-const CATEGORY_KEYS: Record<string, DictKey> = {
-  Rent: "expCatRent",
-  Salaries: "expCatSalaries",
-  Electricity: "expCatElectricity",
-  Purchases: "expCatPurchases",
-  Transport: "expCatTransport",
-  Marketing: "expCatMarketing",
-  Maintenance: "expCatMaintenance",
-  Other: "expCatOther",
-};
 const monthOf = (isoDate: string) => isoDate.slice(0, 7);
 
 export function ExpenseTrackerTool() {
@@ -70,7 +60,7 @@ export function ExpenseTrackerTool() {
 
   // An unknown category — one stored before a rename — falls back to its own
   // stored text rather than rendering blank.
-  const categoryLabel = (c: string) => (CATEGORY_KEYS[c] ? t(CATEGORY_KEYS[c]) : c);
+  const categoryLabel = (c: string) => (EXPENSE_CATEGORY_KEYS[c] ? t(EXPENSE_CATEGORY_KEYS[c]) : c);
 
   const amountNum = Number(amount);
   const canAdd = Number.isFinite(amountNum) && amountNum > 0 && date;

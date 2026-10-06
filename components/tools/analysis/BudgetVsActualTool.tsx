@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   Card,
   Field,
@@ -12,6 +12,8 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { EXPENSE_CATEGORY_KEYS } from "@/lib/toolkit/category-labels";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 
@@ -36,21 +38,29 @@ const blankRow = (category = "", type: RowType = "expense"): BudgetRow => ({
   actual: 0,
 });
 
-const INITIAL: BvaState = {
-  period: "",
-  rows: [
-    blankRow("Sales", "revenue"),
-    blankRow("Rent"),
-    blankRow("Salaries"),
-    blankRow("Marketing"),
-  ],
-};
-
 export function BudgetVsActualTool() {
   const { code: currency } = usePreferredCurrency();
+  const { t } = useI18n();
   const workspace = useFinanceWorkspace("budget-vs-actual");
-  const [state, setState] = useLocalStore<BvaState>("setu-budget-vs-actual", INITIAL);
+  // The four starter rows are what the table shows before anything is typed,
+  // so they are seeded in the reader's language. useLocalStore reads the
+  // initial value once, and a stored table replaces it, so this cannot
+  // overwrite anyone's rows when the language changes.
+  const [initial] = useState<BvaState>(() => ({
+    period: "",
+    rows: [
+      blankRow(t("bvaCatSales"), "revenue"),
+      blankRow(t("expCatRent")),
+      blankRow(t("expCatSalaries")),
+      blankRow(t("expCatMarketing")),
+    ],
+  }));
+  const [state, setState] = useLocalStore<BvaState>("setu-budget-vs-actual", initial);
   const money = (v: number) => formatMoney(v, currency);
+  // An expense is stored under its English category; the rows carry the
+  // reader's wording, so the two meet on the translated label.
+  const categoryLabel = (c: string) =>
+    EXPENSE_CATEGORY_KEYS[c] ? t(EXPENSE_CATEGORY_KEYS[c]) : c;
 
   const update = (id: string, patch: Partial<BudgetRow>) =>
     setState((s) => ({ ...s, rows: s.rows.map((r) => (r.id === id ? { ...r, ...patch } : r)) }));
@@ -60,7 +70,8 @@ export function BudgetVsActualTool() {
   const pullActuals = () => {
     const byCategory = new Map<string, number>();
     for (const e of workspace.expenses) {
-      byCategory.set(e.category, (byCategory.get(e.category) ?? 0) + e.amount);
+      const label = categoryLabel(e.category);
+      byCategory.set(label, (byCategory.get(label) ?? 0) + e.amount);
     }
     setState((s) => {
       const rows = s.rows.map((r) =>
@@ -111,9 +122,11 @@ export function BudgetVsActualTool() {
             ]),
           [
             "TOTAL",
+            "",
             computed.totals.budget.toFixed(2),
             computed.totals.actual.toFixed(2),
             computed.totalVariance.toFixed(2),
+            "",
             "",
           ],
         ]
@@ -124,29 +137,29 @@ export function BudgetVsActualTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Fill the actual column automatically from your recorded expenses by category."
+        message={t("bvaConnectHint")}
       />
 
       <Card>
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div className="w-full max-w-xs">
-          <Field label="Period">
+          <Field label={t("bvaPeriod")}>
             <TextInput
               value={state.period}
               onChange={(e) => setState((s) => ({ ...s, period: e.target.value }))}
-              placeholder="e.g. July 2026"
+              placeholder={t("bvaPeriodPlaceholder")}
             />
           </Field>
         </div>
         <div className="flex gap-2">
           {workspace.connected ? (
-            <SecondaryButton onClick={pullActuals}>↻ Pull actuals from expenses</SecondaryButton>
+            <SecondaryButton onClick={pullActuals}>↻ {t("bvaPullActuals")}</SecondaryButton>
           ) : null}
           <SecondaryButton onClick={() => setState((s) => ({ ...s, rows: [...s.rows, blankRow()] }))}>
-            + Add row
+            {t("bvaAddRow")}
           </SecondaryButton>
           <SecondaryButton onClick={exportCsv} disabled={computed.rows.every((r) => !r.category)}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
       </div>
@@ -155,12 +168,12 @@ export function BudgetVsActualTool() {
         <table className="w-full min-w-[680px] text-sm">
           <thead>
             <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-              <th className="py-2 pr-3">Category</th>
-              <th className="py-2 pr-3">Type</th>
-              <th className="py-2 pr-3 text-right">Budget</th>
-              <th className="py-2 pr-3 text-right">Actual</th>
-              <th className="py-2 pr-3 text-right">Variance</th>
-              <th className="py-2 pr-3 text-right">Variance %</th>
+              <th className="py-2 pr-3">{t("category")}</th>
+              <th className="py-2 pr-3">{t("typeLabel")}</th>
+              <th className="py-2 pr-3 text-right">{t("bvaBudget")}</th>
+              <th className="py-2 pr-3 text-right">{t("bvaActual")}</th>
+              <th className="py-2 pr-3 text-right">{t("bvaVariance")}</th>
+              <th className="py-2 pr-3 text-right">{t("bvaVariancePct")}</th>
               <th className="py-2" />
             </tr>
           </thead>
@@ -171,7 +184,7 @@ export function BudgetVsActualTool() {
                   <TextInput
                     value={row.category}
                     onChange={(e) => update(row.id, { category: e.target.value })}
-                    placeholder="Category"
+                    placeholder={t("category")}
                   />
                 </td>
                 <td className="py-2 pr-3">
@@ -180,8 +193,8 @@ export function BudgetVsActualTool() {
                     onChange={(e) => update(row.id, { type: e.target.value as RowType })}
                     className="rounded-lg border border-muted-line/40 bg-white px-2 py-2 text-sm text-ink outline-none focus:border-indigo"
                   >
-                    <option value="expense">Expense</option>
-                    <option value="revenue">Revenue</option>
+                    <option value="expense">{t("bvaExpenseType")}</option>
+                    <option value="revenue">{t("revenue")}</option>
                   </select>
                 </td>
                 <td className="py-2 pr-3">
@@ -237,7 +250,7 @@ export function BudgetVsActualTool() {
               </tr>
             ))}
             <tr className="border-t-2 border-indigo/30 font-bold text-ink">
-              <td className="py-2 pr-3">Total</td>
+              <td className="py-2 pr-3">{t("total")}</td>
               <td className="py-2 pr-3" />
               <td className="py-2 pr-3 text-right">{money(computed.totals.budget)}</td>
               <td className="py-2 pr-3 text-right">{money(computed.totals.actual)}</td>
@@ -255,10 +268,7 @@ export function BudgetVsActualTool() {
         </table>
       </div>
 
-      <p className="mt-4 text-xs text-muted">
-        Green = favourable (under-spent on expenses, over-achieved on revenue); red = unfavourable.
-        Data saves automatically in this browser.
-      </p>
+      <p className="mt-4 text-xs text-muted">{t("bvaFootnote")}</p>
       </Card>
     </div>
   );

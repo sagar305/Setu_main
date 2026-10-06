@@ -6,11 +6,13 @@
 // live. Everything persists in localStorage; vendor names can be pulled from
 // the workspace supplier book.
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Card, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 
 type Vendor = { id: string; name: string };
@@ -27,37 +29,48 @@ const criterion = (name: string, weight: number): Criterion => ({
   scores: {},
 });
 
-function initialState(): VcState {
-  const vendors = [vendor("Vendor A"), vendor("Vendor B"), vendor("Vendor C")];
-  return {
-    item: "",
-    vendors,
-    criteria: [
-      criterion("Price", 30),
-      criterion("Quality", 25),
-      criterion("Delivery reliability", 20),
-      criterion("Credit terms", 15),
-      criterion("Support", 10),
-    ],
-  };
-}
-
-const SAMPLE_CRITERIA: [string, number][] = [
-  ["Price", 20],
-  ["Quality", 20],
-  ["Delivery reliability", 15],
-  ["Lead time", 10],
-  ["Credit terms", 10],
-  ["Support", 10],
-  ["Warranty", 5],
-  ["MOQ (min. order qty)", 5],
-  ["Shipping cost", 3],
-  ["Tax / GST compliance", 2],
+/** The starter criteria, each with its weight. */
+const INITIAL_CRITERIA: [TKey, number][] = [
+  ["vcCritPrice", 30],
+  ["vcCritQuality", 25],
+  ["vcCritDelivery", 20],
+  ["vcCritCreditTerms", 15],
+  ["vcCritSupport", 10],
 ];
+
+/** A fuller set, offered behind "load sample criteria". */
+const SAMPLE_CRITERIA: [TKey, number][] = [
+  ["vcCritPrice", 20],
+  ["vcCritQuality", 20],
+  ["vcCritDelivery", 15],
+  ["vcCritLeadTime", 10],
+  ["vcCritCreditTerms", 10],
+  ["vcCritSupport", 10],
+  ["vcCritWarranty", 5],
+  ["vcCritMoq", 5],
+  ["vcCritShipping", 3],
+  ["vcCritTaxCompliance", 2],
+];
+
+/** Vendor A, Vendor B, Vendor C — the column headings before they are renamed. */
+const vendorLetter = (index: number) => String.fromCharCode(65 + index);
 
 export function VendorComparisonTool() {
   const workspace = useFinanceWorkspace("vendor-comparison");
-  const [state, setState] = useLocalStore<VcState>("setu-vendor-comparison-v2", initialState());
+  const { t } = useI18n();
+
+  // Criteria and vendor names are editable text, so both starter sets are
+  // built in the reader's language: storing them in English and translating
+  // them for display would leave each box showing one wording and keeping
+  // another the moment it was edited.
+  const initialState = (): VcState => ({
+    item: "",
+    vendors: [0, 1, 2].map((i) => vendor(fill(t("vcVendorName"), { letter: vendorLetter(i) }))),
+    criteria: INITIAL_CRITERIA.map(([key, weight]) => criterion(t(key), weight)),
+  });
+
+  const [initial] = useState<VcState>(initialState);
+  const [state, setState] = useLocalStore<VcState>("setu-vendor-comparison-v2", initial);
 
   const setCriterion = (id: string, patch: Partial<Criterion>) =>
     setState((s) => ({
@@ -76,14 +89,17 @@ export function VendorComparisonTool() {
   const addVendor = () =>
     setState((s) => ({
       ...s,
-      vendors: [...s.vendors, vendor(`Vendor ${String.fromCharCode(65 + s.vendors.length)}`)],
+      vendors: [
+        ...s.vendors,
+        vendor(fill(t("vcVendorName"), { letter: vendorLetter(s.vendors.length) })),
+      ],
     }));
 
   const removeVendor = (id: string) =>
     setState((s) => ({ ...s, vendors: s.vendors.filter((v) => v.id !== id) }));
 
   const addCriterion = () =>
-    setState((s) => ({ ...s, criteria: [...s.criteria, criterion("New criterion", 5)] }));
+    setState((s) => ({ ...s, criteria: [...s.criteria, criterion(t("vcNewCriterion"), 5)] }));
 
   const removeCriterion = (id: string) =>
     setState((s) => ({ ...s, criteria: s.criteria.filter((c) => c.id !== id) }));
@@ -96,7 +112,7 @@ export function VendorComparisonTool() {
   const loadSample = () =>
     setState((s) => ({
       ...s,
-      criteria: SAMPLE_CRITERIA.map(([name, weight]) => criterion(name, weight)),
+      criteria: SAMPLE_CRITERIA.map(([key, weight]) => criterion(t(key), weight)),
     }));
 
   const reset = () => setState(initialState());
@@ -149,18 +165,18 @@ export function VendorComparisonTool() {
     <div className="space-y-6">
       <WorkspaceBanner
         connection={workspace}
-        message="Load your saved suppliers as the vendors to compare."
+        message={t("vcConnectHint")}
       />
 
       <Card>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Vendors</h2>
+          <h2 className="text-lg font-bold text-ink">{t("vcVendors")}</h2>
           <div className="flex flex-wrap gap-2">
             {workspace.connected && workspace.suppliers.length > 0 ? (
-              <SecondaryButton onClick={pullSuppliers}>↻ Load suppliers</SecondaryButton>
+              <SecondaryButton onClick={pullSuppliers}>↻ {t("vcLoadSuppliers")}</SecondaryButton>
             ) : null}
-            <SecondaryButton onClick={loadSample}>Load sample criteria</SecondaryButton>
-            <SecondaryButton onClick={reset}>Reset</SecondaryButton>
+            <SecondaryButton onClick={loadSample}>{t("vcLoadSample")}</SecondaryButton>
+            <SecondaryButton onClick={reset}>{t("resetLabel")}</SecondaryButton>
           </div>
         </div>
 
@@ -185,32 +201,32 @@ export function VendorComparisonTool() {
                 onClick={() => removeVendor(v.id)}
                 disabled={state.vendors.length <= 2}
                 className="text-xs font-semibold text-red-500 hover:text-red-600 disabled:opacity-30"
-                aria-label={`Remove ${v.name}`}
+                aria-label={fill(t("vcRemoveAria"), { name: v.name })}
               >
                 ✕
               </button>
             </div>
           ))}
-          <SecondaryButton onClick={addVendor}>+ Add vendor</SecondaryButton>
+          <SecondaryButton onClick={addVendor}>{t("vcAddVendor")}</SecondaryButton>
         </div>
         <div className="mt-4 max-w-md">
           <TextInput
             value={state.item}
             onChange={(e) => setState((s) => ({ ...s, item: e.target.value }))}
-            placeholder="What are you buying? e.g. Cooking oil 15L tins, monthly"
+            placeholder={t("vcItemPlaceholder")}
           />
         </div>
       </Card>
 
       <Card>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Criteria, weights &amp; scores (1–10 per vendor)</h2>
+          <h2 className="text-lg font-bold text-ink">{t("vcCriteriaHeading")}</h2>
           <span
             className={`text-sm font-semibold ${
               Math.round(totalWeight) === 100 ? "text-emerald-600" : "text-amber-600"
             }`}
           >
-            Total weight: {totalWeight}%
+            {fill(t("vcTotalWeight"), { pct: totalWeight })}
           </span>
         </div>
 
@@ -218,8 +234,8 @@ export function VendorComparisonTool() {
           <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="py-2 pr-3">Criterion</th>
-                <th className="py-2 pr-3 text-right">Weight %</th>
+                <th className="py-2 pr-3">{t("vcCriterion")}</th>
+                <th className="py-2 pr-3 text-right">{t("vcWeightPct")}</th>
                 {state.vendors.map((v) => (
                   <th key={v.id} className="py-2 pr-3 text-center">
                     {v.name}
@@ -264,7 +280,7 @@ export function VendorComparisonTool() {
                       onClick={() => removeCriterion(c.id)}
                       disabled={state.criteria.length === 1}
                       className="text-xs font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
-                      aria-label={`Remove ${c.name}`}
+                      aria-label={fill(t("vcRemoveAria"), { name: c.name })}
                     >
                       ✕
                     </button>
@@ -276,23 +292,20 @@ export function VendorComparisonTool() {
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          <SecondaryButton onClick={addCriterion}>+ Add criterion</SecondaryButton>
-          <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+          <SecondaryButton onClick={addCriterion}>{t("vcAddCriterion")}</SecondaryButton>
+          <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
         </div>
         {Math.round(totalWeight) !== 100 ? (
           <p className="mt-3 text-xs text-amber-600">
-            Weights total {totalWeight}%. They don&apos;t have to sum to 100 — scores are normalised
-            by the total either way — but 100 keeps them easy to read.
+            {fill(t("vcWeightNote"), { pct: totalWeight })}
           </p>
         ) : null}
       </Card>
 
       <Card>
-        <h2 className="mb-4 text-lg font-bold text-ink">Ranking</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("vcRanking")}</h2>
         {ranking.bestId === null ? (
-          <p className="text-sm text-muted">
-            Score each vendor from 1–10 on every criterion — the weighted ranking appears here.
-          </p>
+          <p className="text-sm text-muted">{t("vcRankingHint")}</p>
         ) : (
           <div className="space-y-3">
             {ranking.rows.map((v, i) => (
@@ -309,7 +322,7 @@ export function VendorComparisonTool() {
                       {v.name}
                       {v.id === ranking.bestId ? (
                         <span className="ml-2 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-                          Best value
+                          {t("vcBestValue")}
                         </span>
                       ) : null}
                     </p>

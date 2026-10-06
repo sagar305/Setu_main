@@ -701,7 +701,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
               <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              <SecondaryButton onClick={resetForm}>{t("dgReset")}</SecondaryButton>
+              <SecondaryButton onClick={resetForm}>{t("resetLabel")}</SecondaryButton>
               <SecondaryButton onClick={exportCsv} disabled={!canSave}>
                 {t("exportCsv")}
               </SecondaryButton>
