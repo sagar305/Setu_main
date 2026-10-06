@@ -1,5 +1,8 @@
 import LZString from "lz-string";
 
+import type { LanguageCode } from "./i18n/config";
+import { translate, type TKey } from "./i18n/translate";
+
 // ---------------------------------------------------------------------------
 // QR Menu data model
 //
@@ -240,75 +243,60 @@ export function countMenuItems(menu: QrMenuData): number {
   );
 }
 
-export function createSampleMenu(): QrMenuData {
+/**
+ * The demo menu behind "load sample".
+ *
+ * Every string in it lands in an editable field, so it is built in the
+ * reader's language: a Hindi restaurateur who presses the button to see how
+ * the tool works should not be handed an English menu to retype. Dish names
+ * are transliterated rather than renamed, because that is what they are called
+ * in each of these languages too.
+ */
+export function createSampleMenu(lang: LanguageCode = "en"): QrMenuData {
+  const s = (key: TKey) => translate(lang, key);
+  const item = (
+    name: TKey,
+    price: string,
+    description: TKey | null = null,
+    tag: DietTag = "veg"
+  ): QrMenuItem => ({
+    id: createId(),
+    name: s(name),
+    price,
+    description: description ? s(description) : "",
+    tag,
+    variant: null,
+  });
+
   return {
-    restaurantName: "Sharma's Kitchen",
-    tagline: "Authentic North Indian flavours since 1998",
-    phone: "+91 98765 43210",
-    address: "12 MG Road, Indiranagar, Bengaluru",
+    restaurantName: s("qmSampleRestaurant"),
+    tagline: s("qmSampleTagline"),
+    phone: s("qmPhonePlaceholder"),
+    address: s("qmSampleAddress"),
     accent: "#26306B",
     categories: [
       {
         id: createId(),
-        name: "Starters",
+        name: s("qmExampleStarters"),
         items: [
-          {
-            id: createId(),
-            name: "Paneer Tikka",
-            price: "249",
-            description: "Char-grilled cottage cheese with mint chutney",
-            tag: "veg",
-            variant: null,
-          },
-          {
-            id: createId(),
-            name: "Chicken 65",
-            price: "299",
-            description: "Spicy deep-fried chicken, curry leaf tempering",
-            tag: "nonveg",
-            variant: null,
-          },
-          {
-            id: createId(),
-            name: "Masala Papad",
-            price: "79",
-            description: "",
-            tag: "veg",
-            variant: null,
-          },
+          item("qmSamplePaneerTikka", "249", "qmSampleDescPaneer"),
+          item("qmSampleChicken65", "299", "qmSampleDescChicken65", "nonveg"),
+          item("qmSampleMasalaPapad", "79"),
         ],
       },
       {
         id: createId(),
-        name: "Main Course",
+        name: s("qmExampleMains"),
         items: [
+          item("qmSampleDalMakhani", "279", "qmSampleDescDal"),
+          item("qmSampleButterChicken", "349", "qmSampleDescButterChicken", "nonveg"),
           {
-            id: createId(),
-            name: "Dal Makhani",
-            price: "279",
-            description: "Slow-cooked black lentils in creamy tomato gravy",
-            tag: "veg",
-            variant: null,
-          },
-          {
-            id: createId(),
-            name: "Butter Chicken",
-            price: "349",
-            description: "Tandoori chicken in rich makhani gravy",
-            tag: "nonveg",
-            variant: null,
-          },
-          {
-            id: createId(),
-            name: "Veg Biryani",
-            price: "",
-            description: "Fragrant basmati rice with seasonal vegetables",
-            tag: "veg",
+            ...item("qmSampleVegBiryani", "", "qmSampleDescBiryani"),
             variant: {
-              name: "Size",
+              name: s("qmSampleVarSize"),
               options: [
-                { name: "Half", price: "229" },
-                { name: "Full", price: "379" },
+                { name: s("qmSampleHalf"), price: "229" },
+                { name: s("qmSampleFull"), price: "379" },
               ],
             },
           },
@@ -316,26 +304,19 @@ export function createSampleMenu(): QrMenuData {
       },
       {
         id: createId(),
-        name: "Breads & Rice",
+        name: s("qmSampleCatBreads"),
         items: [
-          { id: createId(), name: "Butter Naan", price: "59", description: "", tag: "veg", variant: null },
-          { id: createId(), name: "Garlic Naan", price: "69", description: "", tag: "veg", variant: null },
-          { id: createId(), name: "Jeera Rice", price: "149", description: "", tag: "veg", variant: null },
+          item("qmSampleButterNaan", "59"),
+          item("qmSampleGarlicNaan", "69"),
+          item("qmSampleJeeraRice", "149"),
         ],
       },
       {
         id: createId(),
-        name: "Desserts & Beverages",
+        name: s("qmSampleCatDesserts"),
         items: [
-          {
-            id: createId(),
-            name: "Gulab Jamun (2 pc)",
-            price: "99",
-            description: "Served warm with rabri",
-            tag: "veg",
-            variant: null,
-          },
-          { id: createId(), name: "Masala Chaas", price: "59", description: "", tag: "veg", variant: null },
+          item("qmSampleGulabJamun", "99", "qmSampleDescGulab"),
+          item("qmSampleMasalaChaas", "59"),
         ],
       },
     ],

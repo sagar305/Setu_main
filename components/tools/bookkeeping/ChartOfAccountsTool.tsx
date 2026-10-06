@@ -13,10 +13,12 @@ import {
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import {
   ACCOUNT_TYPES,
-  DEFAULT_ACCOUNTS,
-  INDUSTRY_TEMPLATES,
+  defaultAccounts,
+  industryTemplates,
   type Account,
   type AccountType,
 } from "@/lib/bookkeeping";
@@ -33,6 +35,11 @@ export function ChartOfAccountsTool() {
   // Chart of Accounts is a SHARED workspace entity — the Journal Entry, General
   // Ledger and Trial Balance tools read the same store. First-time users get a
   // ready-made small-business chart seeded once.
+  const { t, lang } = useI18n();
+  // The starter chart and the industry templates carry account names, which
+  // are seeded into the shared chart, so they are built in the reader's
+  // language — see lib/bookkeeping.
+  const templates = useMemo(() => industryTemplates(lang), [lang]);
   const { items: accounts, loading, save, remove } = useEntityList<Account>("coa_accounts");
   const seededRef = useRef(false);
   const [code, setCode] = useState("");
@@ -44,7 +51,7 @@ export function ChartOfAccountsTool() {
 
   // Replace the whole chart with an industry template (confirmed first).
   const applyTemplate = async () => {
-    const template = INDUSTRY_TEMPLATES.find((t) => t.id === templateId);
+    const template = templates.find((item) => item.id === templateId);
     if (!template) return;
     for (const account of accounts) await remove(account.id);
     for (const account of template.accounts) await save(account);
@@ -54,9 +61,9 @@ export function ChartOfAccountsTool() {
     if (loading || seededRef.current || accounts.length > 0) return;
     seededRef.current = true;
     (async () => {
-      for (const account of DEFAULT_ACCOUNTS) await save(account);
+      for (const account of defaultAccounts(lang)) await save(account);
     })();
-  }, [loading, accounts.length, save]);
+  }, [loading, accounts.length, save, lang]);
 
   const loaded = !loading;
   const canAdd = code.trim().length > 0 && name.trim().length > 0;
@@ -70,9 +77,9 @@ export function ChartOfAccountsTool() {
 
   const grouped = useMemo(() => {
     const sorted = [...accounts].sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
-    return ACCOUNT_TYPES.map((t) => ({
-      ...t,
-      accounts: sorted.filter((a) => a.type === t.value),
+    return ACCOUNT_TYPES.map((group) => ({
+      ...group,
+      accounts: sorted.filter((a) => a.type === group.value),
     })).filter((g) => g.accounts.length > 0);
   }, [accounts]);
 
@@ -90,69 +97,73 @@ export function ChartOfAccountsTool() {
   return (
     <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">Start from a template</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("coaStartFromTemplate")}</h2>
         <div className="mb-6 space-y-3">
-          <Field label="Industry">
+          <Field label={t("coaIndustry")}>
             <Select value={templateId} onChange={(e) => setTemplateId(e.target.value)}>
-              {INDUSTRY_TEMPLATES.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.name} ({t.accounts.length} accounts)
+              {templates.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {fill(t("coaTemplateOption"), {
+                    name: item.name,
+                    count: item.accounts.length,
+                  })}
                 </option>
               ))}
             </Select>
           </Field>
           <SecondaryButton className="w-full" onClick={() => setConfirmTemplate(true)}>
-            Load this template
+            {t("coaLoadTemplate")}
           </SecondaryButton>
         </div>
 
-        <h2 className="mb-4 text-lg font-bold text-ink">Add account</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("coaAddAccount")}</h2>
         <div className="space-y-4">
-          <Field label="Account code">
-            <TextInput value={code} onChange={(e) => setCode(e.target.value)} placeholder="e.g. 1300" />
+          <Field label={t("coaAccountCode")}>
+            <TextInput
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder={t("coaCodePlaceholder")}
+            />
           </Field>
-          <Field label="Account name">
+          <Field label={t("coaAccountName")}>
             <TextInput
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g. Prepaid Insurance"
+              placeholder={t("coaNamePlaceholder")}
             />
           </Field>
-          <Field label="Type">
+          <Field label={t("typeLabel")}>
             <Select value={type} onChange={(e) => setType(e.target.value as AccountType)}>
-              {ACCOUNT_TYPES.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label}
+              {ACCOUNT_TYPES.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {t(option.label)}
                 </option>
               ))}
             </Select>
           </Field>
           <PrimaryButton className="w-full" onClick={addAccount} disabled={!canAdd}>
-            Add account
+            {t("coaAddAccount")}
           </PrimaryButton>
-          <p className="text-xs text-muted">
-            Convention: 1000s assets, 2000s liabilities, 3000s equity, 4000s income, 5000s expenses.
-            The Journal Entry, General Ledger and Trial Balance tools use this chart automatically.
-          </p>
+          <p className="text-xs text-muted">{t("coaConvention")}</p>
         </div>
       </Card>
 
       <Card>
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Your chart of accounts</h2>
+          <h2 className="text-lg font-bold text-ink">{t("coaYourChart")}</h2>
           <SecondaryButton onClick={exportCsv} disabled={accounts.length === 0}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
 
         {!loaded ? (
-          <p className="py-8 text-center text-sm text-muted">Loading…</p>
+          <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
         ) : (
           <div className="space-y-6">
             {grouped.map((group) => (
               <div key={group.value}>
                 <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                  {group.label} accounts
+                  {fill(t("coaGroupAccounts"), { type: t(group.label) })}
                 </h3>
                 <div className="space-y-1.5">
                   {group.accounts.map((account) => (
@@ -168,14 +179,14 @@ export function ChartOfAccountsTool() {
                         <span
                           className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_STYLES[account.type]}`}
                         >
-                          {account.type}
+                          {t(group.label)}
                         </span>
                         <button
                           type="button"
                           onClick={() => setDeleting(account)}
                           className="text-xs font-semibold text-red-500 hover:text-red-600"
                         >
-                          Delete
+                          {t("delete")}
                         </button>
                       </div>
                     </div>
@@ -189,13 +200,17 @@ export function ChartOfAccountsTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete account?"
+        title={t("coaDeleteTitle")}
         message={
           deleting
-            ? `Delete ${deleting.code} · ${deleting.name}? Journal entries posted to it will show "(deleted account)".`
+            ? fill(t("coaDeleteMessage"), {
+                code: deleting.code,
+                name: deleting.name,
+                deleted: t("bkDeletedAccount"),
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deleting) void remove(deleting.id);
           setDeleting(null);
@@ -205,9 +220,12 @@ export function ChartOfAccountsTool() {
 
       <ConfirmDialog
         open={confirmTemplate}
-        title="Replace your chart of accounts?"
-        message={`Load the "${INDUSTRY_TEMPLATES.find((t) => t.id === templateId)?.name}" template? Your current accounts will be replaced. Journal entries keep their history but postings to removed accounts will show "(deleted account)".`}
-        confirmLabel="Load template"
+        title={t("coaReplaceTitle")}
+        message={fill(t("coaReplaceMessage"), {
+          name: templates.find((item) => item.id === templateId)?.name ?? "",
+          deleted: t("bkDeletedAccount"),
+        })}
+        confirmLabel={t("coaLoadTemplateConfirm")}
         onConfirm={async () => {
           setConfirmTemplate(false);
           await applyTemplate();

@@ -3,6 +3,9 @@
 // journal are each stored once in localStorage; the ledger and trial balance
 // are pure views derived from the journal, so the four tools always agree.
 
+import type { LanguageCode } from "./i18n/config";
+import { translate, type TKey } from "./i18n/translate";
+
 export type AccountType = "asset" | "liability" | "equity" | "income" | "expense";
 
 export type Account = {
@@ -30,12 +33,12 @@ export type JournalEntry = {
 export const COA_STORAGE_KEY = "setu-bk-accounts";
 export const JOURNAL_STORAGE_KEY = "setu-bk-journal";
 
-export const ACCOUNT_TYPES: { value: AccountType; label: string }[] = [
-  { value: "asset", label: "Asset" },
-  { value: "liability", label: "Liability" },
-  { value: "equity", label: "Equity" },
-  { value: "income", label: "Income" },
-  { value: "expense", label: "Expense" },
+export const ACCOUNT_TYPES: { value: AccountType; label: TKey }[] = [
+  { value: "asset", label: "bkTypeAsset" },
+  { value: "liability", label: "bkTypeLiability" },
+  { value: "equity", label: "bkTypeEquity" },
+  { value: "income", label: "bkTypeIncome" },
+  { value: "expense", label: "bkTypeExpense" },
 ];
 
 /** Debit-normal account types; the rest are credit-normal. */
@@ -43,125 +46,161 @@ export function isDebitNormal(type: AccountType): boolean {
   return type === "asset" || type === "expense";
 }
 
-/** A sensible starter chart for a small Indian business. */
-export const DEFAULT_ACCOUNTS: Account[] = [
-  { id: "a-1000", code: "1000", name: "Cash in Hand", type: "asset" },
-  { id: "a-1010", code: "1010", name: "Bank Account", type: "asset" },
-  { id: "a-1100", code: "1100", name: "Accounts Receivable (Debtors)", type: "asset" },
-  { id: "a-1200", code: "1200", name: "Inventory / Stock", type: "asset" },
-  { id: "a-1500", code: "1500", name: "Equipment & Furniture", type: "asset" },
-  { id: "a-2000", code: "2000", name: "Accounts Payable (Creditors)", type: "liability" },
-  { id: "a-2100", code: "2100", name: "GST Payable", type: "liability" },
-  { id: "a-2200", code: "2200", name: "Loans Payable", type: "liability" },
-  { id: "a-3000", code: "3000", name: "Owner's Capital", type: "equity" },
-  { id: "a-3100", code: "3100", name: "Owner's Drawings", type: "equity" },
-  { id: "a-4000", code: "4000", name: "Sales Revenue", type: "income" },
-  { id: "a-4100", code: "4100", name: "Other Income", type: "income" },
-  { id: "a-5000", code: "5000", name: "Purchases / Cost of Goods Sold", type: "expense" },
-  { id: "a-5100", code: "5100", name: "Rent Expense", type: "expense" },
-  { id: "a-5200", code: "5200", name: "Salaries & Wages", type: "expense" },
-  { id: "a-5300", code: "5300", name: "Electricity & Utilities", type: "expense" },
-  { id: "a-5400", code: "5400", name: "Marketing & Advertising", type: "expense" },
-  { id: "a-5900", code: "5900", name: "Miscellaneous Expense", type: "expense" },
+/**
+ * A sensible starter chart for a small business.
+ *
+ * Seeded into the shared Chart of Accounts the first time someone opens one of
+ * the bookkeeping tools, so it is built in the reader's language: these names
+ * land in the chart they then edit, and the ledger, journal and trial balance
+ * all read them back from there.
+ *
+ * The codes and ids are identifiers and stay as written — a journal posted in
+ * one language still points at the right account in another.
+ */
+const STARTER_CHART: { code: string; name: TKey; type: AccountType }[] = [
+  { code: "1000", name: "bkAcCashInHand", type: "asset" },
+  { code: "1010", name: "bkAcBankAccount", type: "asset" },
+  { code: "1100", name: "bkAcReceivable", type: "asset" },
+  { code: "1200", name: "bkAcInventory", type: "asset" },
+  { code: "1500", name: "bkAcEquipment", type: "asset" },
+  { code: "2000", name: "bkAcPayable", type: "liability" },
+  { code: "2100", name: "bkAcGstPayable", type: "liability" },
+  { code: "2200", name: "bkAcLoansPayable", type: "liability" },
+  { code: "3000", name: "bkAcOwnersCapital", type: "equity" },
+  { code: "3100", name: "bkAcOwnersDrawings", type: "equity" },
+  { code: "4000", name: "bkAcSalesRevenue", type: "income" },
+  { code: "4100", name: "bkAcOtherIncome", type: "income" },
+  { code: "5000", name: "bkAcPurchases", type: "expense" },
+  { code: "5100", name: "bkAcRent", type: "expense" },
+  { code: "5200", name: "bkAcSalaries", type: "expense" },
+  { code: "5300", name: "bkAcUtilities", type: "expense" },
+  { code: "5400", name: "bkAcMarketing", type: "expense" },
+  { code: "5900", name: "bkAcMisc", type: "expense" },
 ];
 
+export function defaultAccounts(lang: LanguageCode = "en"): Account[] {
+  return STARTER_CHART.map(({ code, name, type }) => ({
+    id: `a-${code}`,
+    code,
+    name: translate(lang, name),
+    type,
+  }));
+}
+
 // ---------------------------------------------------------------------------
-// Industry chart templates. Each starts from the general small-business chart
-// and swaps in the accounts that industry actually uses.
+// Industry chart templates. Each starts from the starter chart and swaps in
+// the accounts that industry actually uses. Built per language for the same
+// reason as the starter chart: loading one writes these names into the chart.
 // ---------------------------------------------------------------------------
 
-const acct = (code: string, name: string, type: AccountType): Account => ({
-  id: `a-${code}`,
-  code,
-  name,
-  type,
-});
+type TemplateExtra = { code: string; name: TKey; type: AccountType };
 
-export type IndustryTemplate = { id: string; name: string; accounts: Account[] };
+type TemplateSpec = {
+  id: string;
+  name: TKey;
+  /** ids dropped from the starter chart because this industry has no use for them. */
+  without?: string[];
+  extras: TemplateExtra[];
+};
 
-export const INDUSTRY_TEMPLATES: IndustryTemplate[] = [
-  { id: "general", name: "General small business", accounts: DEFAULT_ACCOUNTS },
+const TEMPLATE_SPECS: TemplateSpec[] = [
+  { id: "general", name: "bkTplGeneral", extras: [] },
   {
     id: "retail",
-    name: "Retail / Store",
-    accounts: [
-      ...DEFAULT_ACCOUNTS,
-      acct("1210", "Goods in Transit", "asset"),
-      acct("4010", "Online Marketplace Sales", "income"),
-      acct("5010", "Freight & Cartage Inward", "expense"),
-      acct("5410", "Packaging Material", "expense"),
-      acct("5420", "Shop Consumables", "expense"),
+    name: "bkTplRetail",
+    extras: [
+      { code: "1210", name: "bkAcGoodsInTransit", type: "asset" },
+      { code: "4010", name: "bkAcMarketplaceSales", type: "income" },
+      { code: "5010", name: "bkAcFreightInward", type: "expense" },
+      { code: "5410", name: "bkAcPackaging", type: "expense" },
+      { code: "5420", name: "bkAcShopConsumables", type: "expense" },
     ],
   },
   {
     id: "restaurant",
-    name: "Restaurant / F&B",
-    accounts: [
-      ...DEFAULT_ACCOUNTS,
-      acct("1210", "Kitchen Stock (Perishables)", "asset"),
-      acct("4010", "Online Order Sales (Zomato/Swiggy)", "income"),
-      acct("5010", "Food & Beverage Cost", "expense"),
-      acct("5410", "Aggregator Commission", "expense"),
-      acct("5420", "Kitchen Fuel (LPG)", "expense"),
-      acct("5430", "Cleaning & Consumables", "expense"),
+    name: "bkTplRestaurant",
+    extras: [
+      { code: "1210", name: "bkAcKitchenStock", type: "asset" },
+      { code: "4010", name: "bkAcOnlineOrderSales", type: "income" },
+      { code: "5010", name: "bkAcFoodCost", type: "expense" },
+      { code: "5410", name: "bkAcAggregatorCommission", type: "expense" },
+      { code: "5420", name: "bkAcKitchenFuel", type: "expense" },
+      { code: "5430", name: "bkAcCleaning", type: "expense" },
     ],
   },
   {
     id: "services",
-    name: "Services / Consulting",
-    accounts: [
-      ...DEFAULT_ACCOUNTS.filter((a) => a.id !== "a-1200" && a.id !== "a-5000"),
-      acct("4010", "Consulting / Service Fees", "income"),
-      acct("5010", "Subcontractor Costs", "expense"),
-      acct("5410", "Software Subscriptions", "expense"),
-      acct("5420", "Travel & Conveyance", "expense"),
-      acct("5430", "Professional Fees (CA/Legal)", "expense"),
+    name: "bkTplServices",
+    without: ["a-1200", "a-5000"],
+    extras: [
+      { code: "4010", name: "bkAcConsultingFees", type: "income" },
+      { code: "5010", name: "bkAcSubcontractor", type: "expense" },
+      { code: "5410", name: "bkAcSoftwareSubs", type: "expense" },
+      { code: "5420", name: "bkAcTravel", type: "expense" },
+      { code: "5430", name: "bkAcProfessionalFees", type: "expense" },
     ],
   },
   {
     id: "saas",
-    name: "SaaS / Software",
-    accounts: [
-      ...DEFAULT_ACCOUNTS.filter((a) => a.id !== "a-1200" && a.id !== "a-5000"),
-      acct("1300", "Deferred Revenue Receivable", "asset"),
-      acct("2300", "Deferred / Unearned Revenue", "liability"),
-      acct("4010", "Subscription Revenue", "income"),
-      acct("5010", "Hosting & Infrastructure", "expense"),
-      acct("5410", "Software & API Subscriptions", "expense"),
-      acct("5420", "Payment Gateway Fees", "expense"),
+    name: "bkTplSaas",
+    without: ["a-1200", "a-5000"],
+    extras: [
+      { code: "1300", name: "bkAcDeferredReceivable", type: "asset" },
+      { code: "2300", name: "bkAcDeferredRevenue", type: "liability" },
+      { code: "4010", name: "bkAcSubscriptionRevenue", type: "income" },
+      { code: "5010", name: "bkAcHosting", type: "expense" },
+      { code: "5410", name: "bkAcApiSubs", type: "expense" },
+      { code: "5420", name: "bkAcGatewayFees", type: "expense" },
     ],
   },
   {
     id: "manufacturing",
-    name: "Manufacturing",
-    accounts: [
-      ...DEFAULT_ACCOUNTS,
-      acct("1210", "Raw Materials", "asset"),
-      acct("1220", "Work in Progress", "asset"),
-      acct("1230", "Finished Goods", "asset"),
-      acct("5010", "Direct Labour", "expense"),
-      acct("5020", "Factory Overheads", "expense"),
-      acct("5410", "Repairs & Maintenance (Plant)", "expense"),
+    name: "bkTplManufacturing",
+    extras: [
+      { code: "1210", name: "bkAcRawMaterials", type: "asset" },
+      { code: "1220", name: "bkAcWip", type: "asset" },
+      { code: "1230", name: "bkAcFinishedGoods", type: "asset" },
+      { code: "5010", name: "bkAcDirectLabour", type: "expense" },
+      { code: "5020", name: "bkAcFactoryOverheads", type: "expense" },
+      { code: "5410", name: "bkAcPlantRepairs", type: "expense" },
     ],
   },
   {
     id: "ecommerce",
-    name: "E-commerce / D2C",
-    accounts: [
-      ...DEFAULT_ACCOUNTS,
-      acct("1210", "Stock with Marketplace Warehouses", "asset"),
-      acct("4010", "Marketplace Sales (Amazon/Flipkart)", "income"),
-      acct("4020", "Own Website Sales", "income"),
-      acct("5010", "Shipping & Fulfilment", "expense"),
-      acct("5410", "Marketplace Commission & Fees", "expense"),
-      acct("5420", "Returns & Refunds Cost", "expense"),
+    name: "bkTplEcommerce",
+    extras: [
+      { code: "1210", name: "bkAcMarketplaceStock", type: "asset" },
+      { code: "4010", name: "bkAcMarketplaceSales2", type: "income" },
+      { code: "4020", name: "bkAcOwnWebsiteSales", type: "income" },
+      { code: "5010", name: "bkAcShipping", type: "expense" },
+      { code: "5410", name: "bkAcMarketplaceCommission", type: "expense" },
+      { code: "5420", name: "bkAcReturnsCost", type: "expense" },
     ],
   },
 ];
 
-export function accountLabel(accounts: Account[], id: string): string {
+export type IndustryTemplate = { id: string; name: string; accounts: Account[] };
+
+export function industryTemplates(lang: LanguageCode = "en"): IndustryTemplate[] {
+  const starter = defaultAccounts(lang);
+  return TEMPLATE_SPECS.map(({ id, name, without, extras }) => ({
+    id,
+    name: translate(lang, name),
+    accounts: [
+      ...(without ? starter.filter((a) => !without.includes(a.id)) : starter),
+      ...extras.map(({ code, name: key, type }) => ({
+        id: `a-${code}`,
+        code,
+        name: translate(lang, key),
+        type,
+      })),
+    ],
+  }));
+}
+
+export function accountLabel(accounts: Account[], id: string, lang: LanguageCode = "en"): string {
   const a = accounts.find((x) => x.id === id);
-  return a ? `${a.code} · ${a.name}` : "(deleted account)";
+  return a ? `${a.code} · ${a.name}` : translate(lang, "bkDeletedAccount");
 }
 
 export type LedgerRow = {

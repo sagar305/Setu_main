@@ -49,6 +49,8 @@ import {
   updateShortLink,
 } from "@/lib/toolkit/shortLink";
 import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
+import { useI18n } from "@/lib/i18n";
+import { fill, splitAround } from "@/lib/i18n/translate";
 import { MenuDisplay } from "./MenuDisplay";
 import { ShareButton } from "@/components/tools/ShareButton";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
@@ -70,6 +72,7 @@ const loadImage = (src: string) =>
   });
 
 export function QrMenuGeneratorTool() {
+  const { t, lang } = useI18n();
   const [menu, setMenu] = useState<QrMenuData>(createEmptyMenu);
   const [hydrated, setHydrated] = useState(false);
   const [origin, setOrigin] = useState("");
@@ -171,11 +174,7 @@ export function QrMenuGeneratorTool() {
       }
     } catch (error) {
       const reason = error instanceof ShortenError ? error.reason : "failed";
-      setPublishError(
-        reason === "offline"
-          ? "Publishing needs an internet connection. Your menu is unchanged."
-          : "Couldn\u2019t reach the server. Your menu is unchanged — try again."
-      );
+      setPublishError(t(reason === "offline" ? "qmPublishOfflineError" : "qmPublishFailedError"));
     } finally {
       setPublishing(false);
     }
@@ -184,11 +183,7 @@ export function QrMenuGeneratorTool() {
   const unpublish = () => {
     // Forgetting the record throws away the edit key, and there is no way to
     // get it back — any QR already printed would be frozen on its current menu.
-    const confirmed = window.confirm(
-      "Forget this published menu?\n\nThe edit key is stored only in this browser. " +
-        "Any QR code you have already printed will keep showing the current menu, but you " +
-        "will never be able to update it again."
-    );
+    const confirmed = window.confirm(t("qmUnpublishConfirm"));
     if (!confirmed) return;
 
     clearPublishedMenu();
@@ -339,7 +334,7 @@ export function QrMenuGeneratorTool() {
     }));
 
   const handleReset = () => {
-    if (!window.confirm("Clear the entire menu and start over?")) return;
+    if (!window.confirm(t("qmResetConfirm"))) return;
     window.localStorage.removeItem(STORAGE_KEY);
     setMenu(createEmptyMenu());
   };
@@ -351,7 +346,7 @@ export function QrMenuGeneratorTool() {
       await exportMenuFile(menu, format);
     } catch (err) {
       console.error("Export failed:", err);
-      alert("Could not export the file. Please try again.");
+      alert(t("qmExportFailed"));
     }
   };
 
@@ -364,16 +359,18 @@ export function QrMenuGeneratorTool() {
     try {
       const categories = await importMenuFile(file);
       if (!categories) {
-        alert(
-          "No menu items found in this file. Expected columns: Category, Item Name, Price, Description, Type — export your current menu once to get a ready-made template."
-        );
+        alert(t("qmImportNoItems"));
         return;
       }
       const importedCount = categories.reduce((total, c) => total + c.items.length, 0);
       if (
         itemCount > 0 &&
         !window.confirm(
-          `Replace your current ${itemCount} item(s) with the ${importedCount} item(s) from "${file.name}"? Restaurant details are kept.`
+          fill(t("qmImportReplace"), {
+            current: itemCount,
+            imported: importedCount,
+            file: file.name,
+          })
         )
       ) {
         return;
@@ -381,7 +378,7 @@ export function QrMenuGeneratorTool() {
       setMenu((prev) => ({ ...prev, categories }));
     } catch (err) {
       console.error("Import failed:", err);
-      alert("Could not read this file. Please upload a valid .xlsx, .xls, or .csv file.");
+      alert(t("qmImportFailed"));
     } finally {
       setImporting(false);
     }
@@ -440,6 +437,10 @@ export function QrMenuGeneratorTool() {
     });
   };
 
+  // The near-the-limit warning links to the premium tool mid-sentence, so the
+  // sentence stays one dictionary entry with the link marked by a placeholder.
+  const nearLimit = splitAround(t("qmNearLimit"), "link");
+
   const handleCopyLink = () => {
     navigator.clipboard.writeText(menuUrl);
     setCopied(true);
@@ -455,22 +456,22 @@ export function QrMenuGeneratorTool() {
         {/* Restaurant details */}
         <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-ink">Restaurant details</h2>
+            <h2 className="text-lg font-semibold text-ink">{t("qmRestaurantDetails")}</h2>
             <div className="flex gap-2">
               <button
-                onClick={() => setMenu(createSampleMenu())}
+                onClick={() => setMenu(createSampleMenu(lang))}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-1.5 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
               >
                 <Sparkles className="h-3.5 w-3.5" />
-                Load sample
+                {t("qmLoadSample")}
               </button>
               <button
                 onClick={handleReset}
-                title="Clear menu"
+                title={t("qmClearMenu")}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:bg-red-100"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
-                Reset
+                {t("resetLabel")}
               </button>
             </div>
           </div>
@@ -478,58 +479,58 @@ export function QrMenuGeneratorTool() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="mb-1.5 block text-sm font-semibold text-ink">
-                Restaurant name <span className="text-red-500">*</span>
+                {t("qmRestaurantName")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 value={menu.restaurantName}
                 onChange={(e) => updateField("restaurantName", e.target.value)}
-                placeholder="e.g. Sharma's Kitchen"
+                placeholder={t("qmRestaurantNamePlaceholder")}
                 maxLength={60}
                 className={inputClass}
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1.5 block text-sm font-semibold text-ink">Tagline</label>
+              <label className="mb-1.5 block text-sm font-semibold text-ink">{t("qmTagline")}</label>
               <input
                 type="text"
                 value={menu.tagline}
                 onChange={(e) => updateField("tagline", e.target.value)}
-                placeholder="e.g. Authentic North Indian flavours"
+                placeholder={t("qmTaglinePlaceholder")}
                 maxLength={100}
                 className={inputClass}
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-ink">Phone</label>
+              <label className="mb-1.5 block text-sm font-semibold text-ink">{t("phone")}</label>
               <input
                 type="tel"
                 value={menu.phone}
                 onChange={(e) => updateField("phone", e.target.value)}
-                placeholder="+91 98765 43210"
+                placeholder={t("qmPhonePlaceholder")}
                 maxLength={20}
                 className={inputClass}
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-semibold text-ink">Address</label>
+              <label className="mb-1.5 block text-sm font-semibold text-ink">{t("address")}</label>
               <input
                 type="text"
                 value={menu.address}
                 onChange={(e) => updateField("address", e.target.value)}
-                placeholder="Short address or landmark"
+                placeholder={t("qmAddressPlaceholder")}
                 maxLength={120}
                 className={inputClass}
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1.5 block text-sm font-semibold text-ink">Theme colour</label>
+              <label className="mb-1.5 block text-sm font-semibold text-ink">{t("qmThemeColour")}</label>
               <div className="flex flex-wrap items-center gap-2">
                 {ACCENT_PRESETS.map((color) => (
                   <button
                     key={color}
                     onClick={() => updateField("accent", color)}
-                    aria-label={`Use theme colour ${color}`}
+                    aria-label={fill(t("qmUseThemeColour"), { color })}
                     className={`h-8 w-8 rounded-full border-2 transition ${
                       menu.accent === color ? "scale-110 border-ink" : "border-transparent"
                     }`}
@@ -540,7 +541,7 @@ export function QrMenuGeneratorTool() {
                   type="color"
                   value={menu.accent}
                   onChange={(e) => updateField("accent", e.target.value)}
-                  aria-label="Pick a custom theme colour"
+                  aria-label={t("qmPickCustomColour")}
                   className="h-8 w-8 cursor-pointer rounded-full border border-muted-line/40 bg-white p-0.5"
                 />
               </div>
@@ -552,11 +553,8 @@ export function QrMenuGeneratorTool() {
         <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-ink">Import / export items</h2>
-              <p className="mt-1 text-xs text-muted">
-                Edit your menu in Excel and re-import it anytime. Columns: Category, Item Name,
-                Price, Description, Type (Veg/Non-veg).
-              </p>
+              <h2 className="text-lg font-semibold text-ink">{t("qmImportExport")}</h2>
+              <p className="mt-1 text-xs text-muted">{t("qmImportExportHint")}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <input
@@ -576,21 +574,21 @@ export function QrMenuGeneratorTool() {
                 ) : (
                   <FileUp className="h-3.5 w-3.5" />
                 )}
-                Import Excel/CSV
+                {t("qmImportExcel")}
               </button>
               <button
                 onClick={() => handleExport("xlsx")}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
               >
                 <FileDown className="h-3.5 w-3.5" />
-                Export Excel
+                {t("qmExportExcel")}
               </button>
               <button
                 onClick={() => handleExport("csv")}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
               >
                 <FileDown className="h-3.5 w-3.5" />
-                Export CSV
+                {t("exportCsv")}
               </button>
             </div>
           </div>
@@ -604,15 +602,17 @@ export function QrMenuGeneratorTool() {
                 type="text"
                 value={category.name}
                 onChange={(e) => updateCategory(category.id, e.target.value)}
-                placeholder={`Category name (e.g. ${categoryIndex === 0 ? "Starters" : "Main Course"})`}
+                placeholder={fill(t("qmCategoryPlaceholder"), {
+                  example: t(categoryIndex === 0 ? "qmExampleStarters" : "qmExampleMains"),
+                })}
                 maxLength={40}
                 className={`${inputClass} font-semibold`}
               />
               <button
                 onClick={() => moveCategory(category.id, -1)}
                 disabled={categoryIndex === 0}
-                title="Move category up"
-                aria-label="Move category up"
+                title={t("qmMoveCategoryUp")}
+                aria-label={t("qmMoveCategoryUp")}
                 className="rounded-lg border border-muted-line/40 p-2 text-muted transition hover:bg-cream disabled:opacity-30"
               >
                 <ChevronUp className="h-4 w-4" />
@@ -620,16 +620,16 @@ export function QrMenuGeneratorTool() {
               <button
                 onClick={() => moveCategory(category.id, 1)}
                 disabled={categoryIndex === menu.categories.length - 1}
-                title="Move category down"
-                aria-label="Move category down"
+                title={t("qmMoveCategoryDown")}
+                aria-label={t("qmMoveCategoryDown")}
                 className="rounded-lg border border-muted-line/40 p-2 text-muted transition hover:bg-cream disabled:opacity-30"
               >
                 <ChevronDown className="h-4 w-4" />
               </button>
               <button
                 onClick={() => removeCategory(category.id)}
-                title="Remove category"
-                aria-label="Remove category"
+                title={t("qmRemoveCategory")}
+                aria-label={t("qmRemoveCategory")}
                 className="rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
               >
                 <Trash2 className="h-4 w-4" />
@@ -647,7 +647,7 @@ export function QrMenuGeneratorTool() {
                       type="text"
                       value={item.name}
                       onChange={(e) => updateItem(category.id, item.id, "name", e.target.value)}
-                      placeholder="Dish name"
+                      placeholder={t("qmDishName")}
                       maxLength={60}
                       className={inputClass}
                     />
@@ -656,24 +656,24 @@ export function QrMenuGeneratorTool() {
                       inputMode="decimal"
                       value={item.price}
                       onChange={(e) => updateItem(category.id, item.id, "price", e.target.value)}
-                      placeholder="₹ Price"
+                      placeholder={t("qmPricePlaceholder")}
                       maxLength={12}
                       className={inputClass}
                     />
                     <select
                       value={item.tag}
                       onChange={(e) => updateItem(category.id, item.id, "tag", e.target.value)}
-                      aria-label="Dietary tag"
+                      aria-label={t("qmDietaryTag")}
                       className={inputClass}
                     >
-                      <option value="">No tag</option>
-                      <option value="veg">🟢 Veg</option>
-                      <option value="nonveg">🔺 Non-veg</option>
+                      <option value="">{t("qmNoTag")}</option>
+                      <option value="veg">🟢 {t("qmVeg")}</option>
+                      <option value="nonveg">🔺 {t("qmNonVeg")}</option>
                     </select>
                     <button
                       onClick={() => removeItem(category.id, item.id)}
-                      title="Remove item"
-                      aria-label="Remove item"
+                      title={t("qmRemoveItem")}
+                      aria-label={t("qmRemoveItem")}
                       className="flex items-center justify-center rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -685,7 +685,7 @@ export function QrMenuGeneratorTool() {
                     onChange={(e) =>
                       updateItem(category.id, item.id, "description", e.target.value)
                     }
-                    placeholder="Short description (optional)"
+                    placeholder={t("qmDescPlaceholder")}
                     maxLength={120}
                     className={`${inputClass} mt-2`}
                   />
@@ -699,14 +699,14 @@ export function QrMenuGeneratorTool() {
                           type="text"
                           value={item.variant.name}
                           onChange={(e) => renameVariant(category.id, item.id, e.target.value)}
-                          placeholder="Variation name (e.g. Size, Filling)"
+                          placeholder={t("qmVariantNamePlaceholder")}
                           maxLength={40}
                           className={`${inputClass} font-semibold`}
                         />
                         <button
                           onClick={() => removeVariant(category.id, item.id)}
-                          title="Remove variations"
-                          aria-label="Remove variations"
+                          title={t("qmRemoveVariations")}
+                          aria-label={t("qmRemoveVariations")}
                           className="rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -728,7 +728,7 @@ export function QrMenuGeneratorTool() {
                                   e.target.value
                                 )
                               }
-                              placeholder="Option (e.g. Half)"
+                              placeholder={t("qmOptionPlaceholder")}
                               maxLength={40}
                               className={inputClass}
                             />
@@ -745,14 +745,14 @@ export function QrMenuGeneratorTool() {
                                   e.target.value
                                 )
                               }
-                              placeholder="₹ Price"
+                              placeholder={t("qmPricePlaceholder")}
                               maxLength={12}
                               className={inputClass}
                             />
                             <button
                               onClick={() => removeVariantOption(category.id, item.id, optionIndex)}
-                              title="Remove option"
-                              aria-label="Remove option"
+                              title={t("qmRemoveOption")}
+                              aria-label={t("qmRemoveOption")}
                               className="flex items-center justify-center rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -766,7 +766,7 @@ export function QrMenuGeneratorTool() {
                         className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-1.5 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
                       >
                         <Plus className="h-3.5 w-3.5" />
-                        Add option
+                        {t("qmAddOption")}
                       </button>
                     </div>
                   ) : (
@@ -775,7 +775,7 @@ export function QrMenuGeneratorTool() {
                       className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-cream"
                     >
                       <Plus className="h-3.5 w-3.5" />
-                      Add variations (size, filling…)
+                      {t("qmAddVariations")}
                     </button>
                   )}
                 </div>
@@ -785,7 +785,7 @@ export function QrMenuGeneratorTool() {
                 className="inline-flex items-center gap-1.5 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
               >
                 <Plus className="h-3.5 w-3.5" />
-                Add item
+                {t("qmAddItem")}
               </button>
             </div>
           </div>
@@ -796,7 +796,7 @@ export function QrMenuGeneratorTool() {
           className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-indigo/30 bg-indigo/5 px-4 py-4 font-semibold text-indigo transition hover:bg-indigo/10"
         >
           <Plus className="h-5 w-5" />
-          Add category
+          {t("qmAddCategory")}
         </button>
 
         {/* Mobile preview toggle */}
@@ -805,7 +805,7 @@ export function QrMenuGeneratorTool() {
             onClick={() => setShowPreview((v) => !v)}
             className="w-full rounded-lg border border-muted-line/40 bg-white px-4 py-3 font-semibold text-ink transition hover:bg-cream"
           >
-            {showPreview ? "Hide menu preview" : "Show menu preview"}
+            {t(showPreview ? "qmHidePreview" : "qmShowPreview")}
           </button>
           {showPreview && (
             <div className="mt-4">
@@ -818,34 +818,27 @@ export function QrMenuGeneratorTool() {
       {/* QR + preview column */}
       <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-semibold text-ink">Your menu QR code</h2>
+          <h2 className="mb-4 text-lg font-semibold text-ink">{t("qmYourQrHeading")}</h2>
 
           {!hasContent && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-center text-sm text-amber-700">
-              Add your restaurant name and at least one dish to generate the QR code.
+              {t("qmNeedContent")}
             </div>
           )}
 
           {hasContent && qrBlocked && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              <p className="font-semibold">Menu is too large for one QR code.</p>
-              <p className="mt-1">
-                Shorten dish descriptions or remove some items — or split the menu into two QR
-                codes (e.g. Food and Drinks).
-              </p>
+              <p className="font-semibold">{t("qmTooLargeTitle")}</p>
+              <p className="mt-1">{t("qmTooLargeBody")}</p>
               <div className="mt-3 rounded-lg border border-indigo/20 bg-white p-3 text-ink">
-                <p className="text-sm font-semibold">Or remove the limit entirely</p>
-                <p className="mt-1 text-xs text-muted">
-                  With the premium tool your menu is stored online and the QR code holds only a
-                  short permanent link — so there is no size limit, and the printed code keeps
-                  working every time you change a price or a dish.
-                </p>
+                <p className="text-sm font-semibold">{t("qmRemoveLimitTitle")}</p>
+                <p className="mt-1 text-xs text-muted">{t("qmRemoveLimitBody")}</p>
                 <a
                   href={QR_MENU_PRODUCT_PATH}
                   className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-indigo bg-indigo px-3 py-2 text-xs font-semibold text-white transition hover:bg-indigo-700"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
-                  Try the premium QR menu
+                  {t("qmTryPremium")}
                 </a>
               </div>
             </div>
@@ -859,14 +852,12 @@ export function QrMenuGeneratorTool() {
                 </div>
               </div>
               <p className="mt-3 text-center text-xs text-muted">
-                {itemCount} {itemCount === 1 ? "item" : "items"} ·{" "}
-                {showingShortQr
-                  ? "points to your published menu"
-                  : "whole menu stored inside the QR"}
+                {fill(t(itemCount === 1 ? "qmItemOne" : "qmItemMany"), { count: itemCount })} ·{" "}
+                {t(showingShortQr ? "qmPointsToPublished" : "qmWholeMenuInside")}
               </p>
               {showingShortQr && hasUnpublishedChanges ? (
                 <p className="mt-1 text-center text-xs font-semibold text-amber-600">
-                  This QR still shows the last published version.
+                  {t("qmStillLastPublished")}
                 </p>
               ) : null}
 
@@ -876,7 +867,7 @@ export function QrMenuGeneratorTool() {
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-3 font-semibold text-white transition hover:bg-indigo-700"
                 >
                   <Download className="h-4 w-4" />
-                  Download QR (print-ready)
+                  {t("qmDownloadQr")}
                 </button>
                 <div className="flex gap-2">
                   <button
@@ -886,12 +877,12 @@ export function QrMenuGeneratorTool() {
                     {copied ? (
                       <>
                         <Check className="h-4 w-4 text-green-600" />
-                        Copied!
+                        {t("copied")}
                       </>
                     ) : (
                       <>
                         <Copy className="h-4 w-4" />
-                        Copy link
+                        {t("qmCopyLink")}
                       </>
                     )}
                   </button>
@@ -902,12 +893,12 @@ export function QrMenuGeneratorTool() {
                     className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-muted-line/40 bg-white px-3 py-2.5 text-sm font-semibold text-ink transition hover:bg-cream"
                   >
                     <ExternalLink className="h-4 w-4" />
-                    Open menu
+                    {t("qmOpenMenu")}
                   </a>
                 </div>
                 <ShareButton
-                  title="Menu QR Code"
-                  text={`Scan to see the menu of ${menu.restaurantName}`}
+                  title={t("qmShareTitle")}
+                  text={fill(t("qmShareText"), { name: menu.restaurantName })}
                   generateFiles={generateShareFiles}
                   className="w-full px-4 py-2.5"
                 />
@@ -921,23 +912,14 @@ export function QrMenuGeneratorTool() {
               <div className="flex items-center gap-2">
                 <Link2 className="h-4 w-4 text-indigo" aria-hidden="true" />
                 <h3 className="text-sm font-semibold text-ink">
-                  {published ? "Published menu" : "Publish for a permanent QR"}
+                  {t(published ? "qmPublishedMenu" : "qmPublishForPermanent")}
                 </h3>
               </div>
 
               {!published ? (
                 <>
-                  <p className="mt-2 text-xs text-muted">
-                    Right now the whole menu is inside the QR code, so it works with no internet at
-                    all — but the code has to be reprinted whenever you change a price, and the menu
-                    has to stay small enough to fit.
-                  </p>
-                  <p className="mt-2 text-xs text-muted">
-                    Publishing stores the menu with us and puts a short link in the QR instead. The
-                    printed code never changes again, and the size limit disappears. Diners then
-                    need an internet connection to see it, and we delete the menu 180 days after the
-                    last time anyone scans it.
-                  </p>
+                  <p className="mt-2 text-xs text-muted">{t("qmPublishBody1")}</p>
+                  <p className="mt-2 text-xs text-muted">{t("qmPublishBody2")}</p>
                   <button
                     onClick={publish}
                     disabled={publishing}
@@ -946,12 +928,12 @@ export function QrMenuGeneratorTool() {
                     {publishing ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Publishing…
+                        {t("qmPublishing")}
                       </>
                     ) : (
                       <>
                         <Link2 className="h-4 w-4" />
-                        Publish menu
+                        {t("qmPublishMenu")}
                       </>
                     )}
                   </button>
@@ -964,11 +946,11 @@ export function QrMenuGeneratorTool() {
 
                   {hasUnpublishedChanges ? (
                     <p className="mt-2 text-xs font-semibold text-amber-600">
-                      You have changes that customers can&rsquo;t see yet.
+                      {t("qmUnpublishedChanges")}
                     </p>
                   ) : (
                     <p className="mt-2 text-xs text-emerald-700">
-                      Live and up to date — no need to reprint anything.
+                      {t("qmLiveUpToDate")}
                     </p>
                   )}
 
@@ -983,7 +965,7 @@ export function QrMenuGeneratorTool() {
                       ) : (
                         <RefreshCw className="h-3.5 w-3.5" />
                       )}
-                      Update published menu
+                      {t("qmUpdatePublished")}
                     </button>
                     <button
                       onClick={copyShortLink}
@@ -992,12 +974,12 @@ export function QrMenuGeneratorTool() {
                       {shortCopied ? (
                         <>
                           <Check className="h-3.5 w-3.5 text-green-600" />
-                          Copied!
+                          {t("copied")}
                         </>
                       ) : (
                         <>
                           <Copy className="h-3.5 w-3.5" />
-                          Copy short link
+                          {t("qmCopyShortLink")}
                         </>
                       )}
                     </button>
@@ -1010,27 +992,19 @@ export function QrMenuGeneratorTool() {
                       onChange={(event) => setUseShortQr(!event.target.checked)}
                       className="mt-0.5 h-3.5 w-3.5 accent-indigo"
                     />
-                    <span>
-                      Show the self-contained QR instead — works with no internet, but it is size
-                      limited and has to be reprinted after every change.
-                    </span>
+                    <span>{t("qmShowSelfContained")}</span>
                   </label>
 
                   <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-                    <p className="font-semibold">Only this browser can update this menu.</p>
-                    <p className="mt-1">
-                      The key that proves it is yours is stored here and nowhere else. There is no
-                      login to recover it, so clearing this browser&rsquo;s data — or moving to
-                      another phone or computer — means the printed QR can never be changed again.
-                      Export your menu from the top of the page to keep a copy of the contents.
-                    </p>
+                    <p className="font-semibold">{t("qmOnlyThisBrowserTitle")}</p>
+                    <p className="mt-1">{t("qmOnlyThisBrowserBody")}</p>
                   </div>
 
                   <button
                     onClick={unpublish}
                     className="mt-3 text-xs font-semibold text-muted underline"
                   >
-                    Stop using the published link
+                    {t("qmStopUsingPublished")}
                   </button>
                 </>
               )}
@@ -1045,7 +1019,7 @@ export function QrMenuGeneratorTool() {
           {hasContent && !showingShortQr && (
             <div className="mt-5">
               <div className="mb-1 flex items-center justify-between text-xs text-muted">
-                <span>QR capacity used</span>
+                <span>{t("qmCapacityUsed")}</span>
                 <span>{capacityPercent}%</span>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-muted-line/20">
@@ -1062,11 +1036,11 @@ export function QrMenuGeneratorTool() {
               </div>
               {!overCapacity && capacityPercent > 80 && (
                 <p className="mt-1.5 text-xs text-amber-600">
-                  Getting close to the limit — keep descriptions short, or{" "}
+                  {nearLimit[0]}
                   <a href={QR_MENU_PRODUCT_PATH} className="font-semibold underline">
-                    switch to the premium tool
-                  </a>{" "}
-                  for an unlimited menu behind a QR code that never changes.
+                    {t("qmSwitchToPremium")}
+                  </a>
+                  {nearLimit[1]}
                 </p>
               )}
             </div>
@@ -1075,9 +1049,7 @@ export function QrMenuGeneratorTool() {
 
         {/* Desktop live preview */}
         <div className="hidden lg:block">
-          <p className="mb-2 text-sm font-semibold text-muted">
-            Live preview — what customers see after scanning
-          </p>
+          <p className="mb-2 text-sm font-semibold text-muted">{t("qmLivePreview")}</p>
           <div className="max-h-[540px] overflow-y-auto rounded-2xl">
             <MenuDisplay menu={menu} />
           </div>

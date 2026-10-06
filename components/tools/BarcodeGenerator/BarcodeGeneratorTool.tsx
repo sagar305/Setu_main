@@ -14,16 +14,17 @@ import {
 } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, type DictKey } from "@/lib/i18n";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 type BarcodeKind = "CODE128" | "EAN13" | "QR";
 
-const KIND_HINTS: Record<BarcodeKind, string> = {
-  CODE128: "Any text or numbers — the most flexible retail barcode.",
-  EAN13: "12 digits (the 13th check digit is added automatically) or a full 13-digit code.",
-  QR: "Any text, URL or UPI link.",
+/** What each format accepts, as a dictionary key per kind. */
+const KIND_HINTS: Record<BarcodeKind, DictKey> = {
+  CODE128: "bgTypeCode128",
+  EAN13: "bgTypeEan13",
+  QR: "bgTypeQr",
 };
 
 export function BarcodeGeneratorTool() {
@@ -60,8 +61,8 @@ export function BarcodeGeneratorTool() {
     } catch {
       setError(
         kind === "EAN13"
-          ? "EAN-13 needs exactly 12 or 13 digits."
-          : "This value can't be encoded — try different text."
+          ? t("bgEan13Digits")
+          : t("bgCannotEncode")
       );
     }
   }, [kind, value]);
@@ -146,7 +147,7 @@ export function BarcodeGeneratorTool() {
                 <option value="QR">QR Code</option>
               </Select>
             </Field>
-            <p className="-mt-2 text-xs text-muted">{KIND_HINTS[kind]}</p>
+            <p className="-mt-2 text-xs text-muted">{t(KIND_HINTS[kind])}</p>
 
             <Field label={t("bgValue")}>
               <TextInput

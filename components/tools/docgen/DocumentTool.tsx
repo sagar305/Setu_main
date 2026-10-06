@@ -24,6 +24,8 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
+import { useI18n } from "@/lib/i18n";
+import { fill, splitAround, type TKey } from "@/lib/i18n/translate";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -35,32 +37,76 @@ type PartyKind = "customer" | "supplier";
 
 type DocConfig = {
   slug: ToolSlug;
-  printTitle: string;
+  printTitle: TKey;
+  /** The title as stored in a CSV export, which stays English (see exportCsv). */
+  csvTitle: string;
   numberPrefix: string;
   partyKind: PartyKind;
-  partyLabel: string;
-  refLabel: string | null;
-  reasonLabel: string | null;
-  /** Common reasons offered as quick-picks (credit/debit notes). */
+  partyLabel: TKey;
+  /** The party heading in a CSV export — English, for the same reason. */
+  csvPartyLabel: string;
+  /** Whole phrases rather than "{party} name", so each language keeps its own
+   * grammar instead of having the English word order composed onto it. */
+  partyNameReq: TKey;
+  pickParty: TKey;
+  refLabel: TKey | null;
+  reasonLabel: TKey | null;
+  /** Common reasons offered as quick-picks (credit/debit notes). The value
+   * stored on the document stays English so a document saved in one language
+   * still reads correctly in another; only the label shown is translated. */
   reasonOptions?: string[];
-  secondDateLabel: string | null;
-  footerNote: string;
+  secondDateLabel: TKey | null;
+  footerNote: TKey;
   accent: string;
-  workspaceMsg: string;
+  workspaceMsg: TKey;
 };
 
-/** Units offered on line items (matches common billing practice). */
+/** Units offered on line items (matches common billing practice). Stored as
+ * written here and displayed through UNIT_KEYS, for the same reason. */
 const UNITS = ["Pcs", "Kg", "g", "L", "ml", "m", "Box", "Dozen", "Hours", "Days", "Service"];
+
+const UNIT_KEYS: Record<string, TKey> = {
+  Pcs: "dgUnitPcs",
+  Kg: "dgUnitKg",
+  g: "dgUnitG",
+  L: "dgUnitL",
+  ml: "dgUnitMl",
+  m: "dgUnitM",
+  Box: "dgUnitBox",
+  Dozen: "dgUnitDozen",
+  Hours: "dgUnitHours",
+  Days: "dgUnitDays",
+  Service: "service",
+};
+
+const REASON_KEYS: Record<string, TKey> = {
+  "Return of goods": "dgCnReturnGoods",
+  "Pricing error": "dgCnPricingError",
+  "Duplicate payment": "dgCnDuplicatePayment",
+  "Post-sale discount": "dgCnPostSaleDiscount",
+  "Damaged in transit": "dgCnDamagedTransit",
+  "Goodwill adjustment": "dgCnGoodwill",
+  "Goods returned": "dgDnGoodsReturned",
+  "Short delivery": "dgDnShortDelivery",
+  "Damaged goods": "dgDnDamagedGoods",
+  "Rate difference / overcharge": "dgDnRateDifference",
+  "Quality issue": "dgDnQualityIssue",
+  "Wrong items supplied": "dgDnWrongItems",
+};
 
 const CONFIGS: Record<DocType, DocConfig> = {
   "credit-note": {
     slug: "credit-note-generator",
-    printTitle: "CREDIT NOTE",
+    printTitle: "dgCreditNoteCaps",
+    csvTitle: "CREDIT NOTE",
     numberPrefix: "CN",
     partyKind: "customer",
-    partyLabel: "Customer",
-    refLabel: "Against invoice no.",
-    reasonLabel: "Reason (return / adjustment)",
+    partyLabel: "customer",
+    csvPartyLabel: "Customer",
+    partyNameReq: "agCustomerNameReq",
+    pickParty: "abPickCustomer",
+    refLabel: "dgRefInvoice",
+    reasonLabel: "dgReasonCredit",
     reasonOptions: [
       "Return of goods",
       "Pricing error",
@@ -70,18 +116,22 @@ const CONFIGS: Record<DocType, DocConfig> = {
       "Goodwill adjustment",
     ],
     secondDateLabel: null,
-    footerNote: "This credit note adjusts the referenced invoice.",
+    footerNote: "dgFootCredit",
     accent: "#166534",
-    workspaceMsg: "Autofill your business details and pick a saved customer and products.",
+    workspaceMsg: "dgConnectCustomer",
   },
   "debit-note": {
     slug: "debit-note-generator",
-    printTitle: "DEBIT NOTE",
+    printTitle: "dgDebitNoteCaps",
+    csvTitle: "DEBIT NOTE",
     numberPrefix: "DN",
     partyKind: "supplier",
-    partyLabel: "Supplier",
-    refLabel: "Against bill / invoice no.",
-    reasonLabel: "Reason (return / short supply / rate difference)",
+    partyLabel: "supplier",
+    csvPartyLabel: "Supplier",
+    partyNameReq: "agSupplierNameReq",
+    pickParty: "dgPickSupplier",
+    refLabel: "dgRefBill",
+    reasonLabel: "dgReasonDebit",
     reasonOptions: [
       "Goods returned",
       "Short delivery",
@@ -91,35 +141,43 @@ const CONFIGS: Record<DocType, DocConfig> = {
       "Wrong items supplied",
     ],
     secondDateLabel: null,
-    footerNote: "This debit note is issued against the referenced purchase.",
+    footerNote: "dgFootDebit",
     accent: "#9a3412",
-    workspaceMsg: "Autofill your business details and pick a saved supplier and products.",
+    workspaceMsg: "dgConnectSupplier",
   },
   "purchase-order": {
     slug: "purchase-order-generator",
-    printTitle: "PURCHASE ORDER",
+    printTitle: "dgPurchaseOrderCaps",
+    csvTitle: "PURCHASE ORDER",
     numberPrefix: "PO",
     partyKind: "supplier",
-    partyLabel: "Supplier",
-    refLabel: "Quotation ref (optional)",
+    partyLabel: "supplier",
+    csvPartyLabel: "Supplier",
+    partyNameReq: "agSupplierNameReq",
+    pickParty: "dgPickSupplier",
+    refLabel: "dgRefQuotation",
     reasonLabel: null,
-    secondDateLabel: "Expected delivery date",
-    footerNote: "Please confirm acceptance of this purchase order and the delivery date.",
+    secondDateLabel: "dgExpectedDelivery",
+    footerNote: "dgFootPurchase",
     accent: "#26306B",
-    workspaceMsg: "Autofill your business details and pick a saved supplier and products.",
+    workspaceMsg: "dgConnectSupplier",
   },
   "sales-order": {
     slug: "sales-order-generator",
-    printTitle: "SALES ORDER",
+    printTitle: "dgSalesOrderCaps",
+    csvTitle: "SALES ORDER",
     numberPrefix: "SO",
     partyKind: "customer",
-    partyLabel: "Customer",
-    refLabel: "Customer PO ref (optional)",
+    partyLabel: "customer",
+    csvPartyLabel: "Customer",
+    partyNameReq: "agCustomerNameReq",
+    pickParty: "abPickCustomer",
+    refLabel: "dgRefCustomerPo",
     reasonLabel: null,
-    secondDateLabel: "Expected delivery date",
-    footerNote: "This sales order confirms the items and prices agreed before dispatch.",
+    secondDateLabel: "dgExpectedDelivery",
+    footerNote: "dgFootSales",
     accent: "#26306B",
-    workspaceMsg: "Autofill your business details and pick a saved customer and products.",
+    workspaceMsg: "dgConnectCustomer",
   },
 };
 
@@ -168,6 +226,7 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 export function DocumentTool({ docType }: { docType: DocType }) {
   // Keeps the links below in the language of the page this tool is on.
   const href = useLocalizedHref();
+  const { t } = useI18n();
   const cfg = CONFIGS[docType];
   const workspace = useFinanceWorkspace(cfg.slug);
   const { items: allDocs, save, remove } = useEntityList<SavedDoc>("documents");
@@ -175,6 +234,21 @@ export function DocumentTool({ docType }: { docType: DocType }) {
   const biz = workspace.business;
   const currency = biz?.currency ?? "INR";
   const symbol = currencySymbol(currency);
+
+  // A unit is stored as its English identifier, so a document saved in one
+  // language still prints with the right unit in another; this is what turns
+  // that identifier into the reader's language on screen and on paper. A unit
+  // from an older record that is no longer offered shows as it was stored.
+  const unitLabel = (unit: string) => (unit in UNIT_KEYS ? t(UNIT_KEYS[unit]) : unit);
+  // The reason, by contrast, is a free-text field the quick-picks only fill in,
+  // so what the reader picked is what gets saved — translating it here would
+  // mean the box showed one thing and the document kept another.
+  const reasonLabel = (reason: string) =>
+    reason in REASON_KEYS ? t(REASON_KEYS[reason]) : reason;
+  // The prompt to fill in the Business Profile is one sentence in the
+  // dictionary with the link marked by a placeholder, so a language that puts
+  // the link somewhere other than mid-sentence can say it that way.
+  const profileHint = splitAround(t("dgProfileHint"), "profile");
 
   const [number, setNumber] = useState(`${cfg.numberPrefix}-${String(Date.now()).slice(-5)}`);
   const [date, setDate] = useState(todayIso());
@@ -297,7 +371,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     const d = buildDoc();
     const rows: unknown[][] = [
       ["Date", d.date],
-      [cfg.partyLabel, d.partyName],
+      [cfg.csvPartyLabel, d.partyName],
       ...(d.refNumber ? [["Ref", d.refNumber]] : []),
       ...(d.reason ? [["Reason", d.reason]] : []),
       [],
@@ -317,7 +391,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
       ["Tax", d.taxTotal.toFixed(2)],
       ["Total", d.total.toFixed(2)],
     ];
-    downloadCsv(`${d.number}.csv`, toCsv([cfg.printTitle, d.number], rows));
+    downloadCsv(`${d.number}.csv`, toCsv([cfg.csvTitle, d.number], rows));
   };
 
   const printDoc = (doc?: SavedDoc) => {
@@ -328,7 +402,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
         (i, n) => `<tr>
           <td class="c">${n + 1}</td>
           <td>${esc(i.description)}</td>
-          <td class="r">${i.quantity}${i.unit ? " " + esc(i.unit) : ""}</td>
+          <td class="r">${i.quantity}${i.unit ? " " + esc(unitLabel(i.unit)) : ""}</td>
           <td class="r">${money(i.rate)}</td>
           <td class="r">${i.taxRate ? i.taxRate + "%" : "—"}</td>
           <td class="r">${money(i.quantity * i.rate * (1 + i.taxRate / 100))}</td>
@@ -338,7 +412,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
 
     const html = `<!doctype html><html><head><title>${esc(d.number)}</title><style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: Georgia, "Times New Roman", serif; color: #1a1a2e; }
+      body { font-family: Georgia, "Times New Roman", "Noto Serif", serif, sans-serif; color: #1a1a2e; }
       @page { size: A4; margin: 0; }
       .band { background: ${cfg.accent}; color: #fff; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-start; }
       .band h1 { font-size: 24px; letter-spacing: 4px; font-weight: normal; }
@@ -368,45 +442,45 @@ export function DocumentTool({ docType }: { docType: DocType }) {
     </style></head><body>
       <div class="band">
         <div>
-          <h1>${cfg.printTitle}</h1>
+          <h1>${esc(t(cfg.printTitle))}</h1>
           <p class="no">${esc(d.number)}</p>
         </div>
         <div class="biz">
           <p class="bn">${esc(biz?.name ?? "")}</p>
           ${biz?.address ? `<p>${esc(biz.address)}</p>` : ""}
           ${biz?.phone ? `<p>${esc(biz.phone)}</p>` : ""}
-          ${biz?.taxNumber ? `<p>GSTIN: ${esc(biz.taxNumber)}</p>` : ""}
+          ${biz?.taxNumber ? `<p>${esc(t("gstin"))}: ${esc(biz.taxNumber)}</p>` : ""}
         </div>
       </div>
       <div class="wrap">
         <div class="meta">
           <div class="to">
-            <p class="lbl">${esc(cfg.partyLabel)}</p>
+            <p class="lbl">${esc(t(cfg.partyLabel))}</p>
             <p class="cn">${esc(d.partyName)}</p>
             ${d.partyAddress ? `<p>${esc(d.partyAddress)}</p>` : ""}
-            ${d.partyGstin ? `<p>GSTIN: ${esc(d.partyGstin)}</p>` : ""}
+            ${d.partyGstin ? `<p>${esc(t("gstin"))}: ${esc(d.partyGstin)}</p>` : ""}
           </div>
           <div class="dates">
-            <p><span class="lbl">Date</span>&nbsp; ${esc(d.date)}</p>
-            ${cfg.secondDateLabel && d.secondDate ? `<p><span class="lbl">${esc(cfg.secondDateLabel)}</span>&nbsp; ${esc(d.secondDate)}</p>` : ""}
-            ${d.refNumber ? `<p><span class="lbl">Ref</span>&nbsp; ${esc(d.refNumber)}</p>` : ""}
+            <p><span class="lbl">${esc(t("date"))}</span>&nbsp; ${esc(d.date)}</p>
+            ${cfg.secondDateLabel && d.secondDate ? `<p><span class="lbl">${esc(t(cfg.secondDateLabel))}</span>&nbsp; ${esc(d.secondDate)}</p>` : ""}
+            ${d.refNumber ? `<p><span class="lbl">${esc(t("dgRefShort"))}</span>&nbsp; ${esc(d.refNumber)}</p>` : ""}
           </div>
         </div>
-        ${d.reason ? `<div class="notes" style="margin-top:0;margin-bottom:20px"><p class="lbl">Reason</p><p>${esc(d.reason)}</p></div>` : ""}
+        ${d.reason ? `<div class="notes" style="margin-top:0;margin-bottom:20px"><p class="lbl">${esc(t("dgReason"))}</p><p>${esc(d.reason)}</p></div>` : ""}
         <table>
-          <thead><tr><th>#</th><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Tax</th><th class="r">Amount</th></tr></thead>
+          <thead><tr><th>#</th><th>${esc(t("description"))}</th><th class="r">${esc(t("quantity"))}</th><th class="r">${esc(t("rate"))}</th><th class="r">${esc(t("taxLabel"))}</th><th class="r">${esc(t("amount"))}</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
         <div class="totals">
-          <div><span>Subtotal</span><span>${money(d.subtotal)}</span></div>
-          ${d.discount ? `<div><span>Discount</span><span>−${money(d.discount)}</span></div>` : ""}
-          <div><span>Tax</span><span>${money(d.taxTotal)}</span></div>
-          <div class="grand"><span>Total</span><span>${money(d.total)}</span></div>
+          <div><span>${esc(t("subtotal"))}</span><span>${money(d.subtotal)}</span></div>
+          ${d.discount ? `<div><span>${esc(t("discDiscount"))}</span><span>−${money(d.discount)}</span></div>` : ""}
+          <div><span>${esc(t("taxLabel"))}</span><span>${money(d.taxTotal)}</span></div>
+          <div class="grand"><span>${esc(t("total"))}</span><span>${money(d.total)}</span></div>
         </div>
-        ${d.notes ? `<div class="notes"><p class="lbl">Notes & terms</p><p>${esc(d.notes)}</p></div>` : ""}
-        <div class="sign"><div class="box"><div class="line"></div>Authorised signatory</div></div>
+        ${d.notes ? `<div class="notes"><p class="lbl">${esc(t("qgNotesTerms"))}</p><p>${esc(d.notes)}</p></div>` : ""}
+        <div class="sign"><div class="box"><div class="line"></div>${esc(t("dgAuthSignatory"))}</div></div>
         <div class="foot">
-          <span>${esc(cfg.footerNote)}</span>
+          <span>${esc(t(cfg.footerNote))}</span>
           <span>${esc(biz?.name ?? "")}</span>
         </div>
       </div>
@@ -423,36 +497,41 @@ export function DocumentTool({ docType }: { docType: DocType }) {
 
   return (
     <div>
-      <WorkspaceBanner connection={workspace} message={cfg.workspaceMsg} />
+      <WorkspaceBanner connection={workspace} message={t(cfg.workspaceMsg)} />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <Card className="h-fit">
           {biz ? (
             <div className="mb-5 rounded-xl bg-cream-paper/60 px-4 py-3 text-sm">
-              <span className="text-muted">Issuing as </span>
-              <span className="font-semibold text-ink">{biz.name || "your business"}</span>
-              {biz.taxNumber ? <span className="text-muted"> · GSTIN {biz.taxNumber}</span> : null}
+              <span className="text-muted">{t("dgIssuingAs")} </span>
+              <span className="font-semibold text-ink">{biz.name || t("dgYourBusiness")}</span>
+              {biz.taxNumber ? (
+                <span className="text-muted">
+                  {" · "}
+                  {t("gstin")} {biz.taxNumber}
+                </span>
+              ) : null}
             </div>
           ) : (
             <div className="mb-5 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-700">
-              Set up your{" "}
+              {profileHint[0]}
               <a href={href("/tools/business-profile")} className="font-semibold underline">
-                Business Profile
-              </a>{" "}
-              once to put your name, address and GSTIN on every document automatically.
+                {t("dgProfileLink")}
+              </a>
+              {profileHint[1]}
             </div>
           )}
 
-          <h2 className="mb-4 text-lg font-bold text-ink">Document details</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("dgDocDetails")}</h2>
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Number">
+            <Field label={t("dgNumber")}>
               <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
             </Field>
-            <Field label="Date">
+            <Field label={t("date")}>
               <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </Field>
             {cfg.secondDateLabel ? (
-              <Field label={cfg.secondDateLabel}>
+              <Field label={t(cfg.secondDateLabel)}>
                 <TextInput
                   type="date"
                   value={secondDate}
@@ -461,18 +540,18 @@ export function DocumentTool({ docType }: { docType: DocType }) {
               </Field>
             ) : null}
             {cfg.refLabel ? (
-              <Field label={cfg.refLabel}>
+              <Field label={t(cfg.refLabel)}>
                 <TextInput value={refNumber} onChange={(e) => setRefNumber(e.target.value)} />
               </Field>
             ) : null}
           </div>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{cfg.partyLabel}</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t(cfg.partyLabel)}</h3>
           <div className="grid gap-4 sm:grid-cols-3">
             {workspace.connected && partyOptions.length > 0 ? (
-              <Field label={`Pick a saved ${cfg.partyLabel.toLowerCase()}`}>
+              <Field label={t(cfg.pickParty)}>
                 <Select value={partyId} onChange={(e) => pickParty(e.target.value)}>
-                  <option value="">Type details below…</option>
+                  <option value="">{t("abTypeDetails")}</option>
                   {partyOptions.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}
@@ -481,7 +560,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                 </Select>
               </Field>
             ) : null}
-            <Field label={`${cfg.partyLabel} name *`}>
+            <Field label={t(cfg.partyNameReq)}>
               <TextInput
                 value={partyName}
                 onChange={(e) => {
@@ -490,37 +569,37 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                 }}
               />
             </Field>
-            <Field label="Address">
+            <Field label={t("address")}>
               <TextInput value={partyAddress} onChange={(e) => setPartyAddress(e.target.value)} />
             </Field>
-            <Field label="GSTIN (optional)">
+            <Field label={t("dgGstinOptional")}>
               <TextInput value={partyGstin} onChange={(e) => setPartyGstin(e.target.value)} />
             </Field>
           </div>
 
           {cfg.reasonLabel ? (
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <Field label="Common reasons">
+              <Field label={t("dgCommonReasons")}>
                 <Select value="" onChange={(e) => e.target.value && setReason(e.target.value)}>
-                  <option value="">Pick a reason…</option>
+                  <option value="">{t("dgPickReason")}</option>
                   {(cfg.reasonOptions ?? []).map((r) => (
-                    <option key={r} value={r}>
-                      {r}
+                    <option key={r} value={reasonLabel(r)}>
+                      {reasonLabel(r)}
                     </option>
                   ))}
                 </Select>
               </Field>
-              <Field label={cfg.reasonLabel}>
+              <Field label={t(cfg.reasonLabel)}>
                 <TextInput
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
-                  placeholder="Or type your own reason"
+                  placeholder={t("dgOwnReason")}
                 />
               </Field>
             </div>
           ) : null}
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Items</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("items")}</h3>
           <div className="space-y-3">
             {items.map((item) => (
               <div
@@ -528,12 +607,12 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                 className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_90px_70px_100px_70px_auto]"
               >
                 {workspace.connected && workspace.products.length > 0 ? (
-                  <Field label="Product">
+                  <Field label={t("product")}>
                     <Select
                       value=""
                       onChange={(e) => e.target.value && pickProduct(item.id, e.target.value)}
                     >
-                      <option value="">Choose…</option>
+                      <option value="">{t("chooseEllipsis")}</option>
                       {workspace.products.map((p) => (
                         <option key={p.id} value={p.id}>
                           {p.name}
@@ -542,32 +621,32 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                     </Select>
                   </Field>
                 ) : null}
-                <Field label="Description">
+                <Field label={t("description")}>
                   <TextInput
                     value={item.description}
                     onChange={(e) => updateItem(item.id, { description: e.target.value })}
                   />
                 </Field>
-                <Field label="Unit">
+                <Field label={t("unit")}>
                   <Select
                     value={item.unit ?? "Pcs"}
                     onChange={(e) => updateItem(item.id, { unit: e.target.value })}
                   >
                     {UNITS.map((u) => (
                       <option key={u} value={u}>
-                        {u}
+                        {unitLabel(u)}
                       </option>
                     ))}
                   </Select>
                 </Field>
-                <Field label="Qty">
+                <Field label={t("quantity")}>
                   <NumberInput
                     min={0}
                     value={item.quantity || ""}
                     onChange={(e) => updateItem(item.id, { quantity: Number(e.target.value) || 0 })}
                   />
                 </Field>
-                <Field label={`Rate (${symbol})`}>
+                <Field label={`${t("rate")} (${symbol})`}>
                   <NumberInput
                     min={0}
                     step="0.01"
@@ -575,7 +654,7 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                     onChange={(e) => updateItem(item.id, { rate: Number(e.target.value) || 0 })}
                   />
                 </Field>
-                <Field label="Tax %">
+                <Field label={t("taxPct")}>
                   <NumberInput
                     min={0}
                     value={item.taxRate || ""}
@@ -588,20 +667,20 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                   disabled={items.length === 1}
                   className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
             ))}
           </div>
           <SecondaryButton className="mt-3" onClick={() => setItems((p) => [...p, blankItem()])}>
-            + Add item
+            {t("addItem")}
           </SecondaryButton>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_180px]">
-            <Field label="Notes & terms">
+            <Field label={t("qgNotesTerms")}>
               <TextArea value={notes} onChange={(e) => setNotes(e.target.value)} />
             </Field>
-            <Field label={`Discount (${symbol})`}>
+            <Field label={`${t("discDiscount")} (${symbol})`}>
               <NumberInput
                 min={0}
                 step="0.01"
@@ -615,33 +694,34 @@ export function DocumentTool({ docType }: { docType: DocType }) {
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
             <div className="text-sm text-muted">
               {formatMoney(totals.subtotal, currency)}
-              {totals.discount > 0 ? ` − ${formatMoney(totals.discount, currency)} discount` : ""} +{" "}
-              {formatMoney(totals.taxTotal, currency)} tax ={" "}
+              {totals.discount > 0
+                ? ` − ${formatMoney(totals.discount, currency)} ${t("dgDiscountWord")}`
+                : ""}{" "}
+              + {formatMoney(totals.taxTotal, currency)} {t("dgTaxWord")} ={" "}
               <span className="text-lg font-bold text-ink">{formatMoney(totals.total, currency)}</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              <SecondaryButton onClick={resetForm}>Reset</SecondaryButton>
+              <SecondaryButton onClick={resetForm}>{t("resetLabel")}</SecondaryButton>
               <SecondaryButton onClick={exportCsv} disabled={!canSave}>
-                Export CSV
+                {t("exportCsv")}
               </SecondaryButton>
               <SecondaryButton onClick={() => printDoc()} disabled={!canSave}>
-                Print / PDF
+                {t("qgPrintPdf")}
               </SecondaryButton>
               <PrimaryButton onClick={saveDoc} disabled={!canSave}>
-                Save
+                {t("save")}
               </PrimaryButton>
             </div>
           </div>
-          {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Saved ✓</p> : null}
+          {savedMsg ? (
+            <p className="mt-2 text-sm font-medium text-emerald-600">{t("saved")} ✓</p>
+          ) : null}
         </Card>
 
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">Saved documents</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("dgSavedDocs")}</h2>
           {savedDocs.length === 0 ? (
-            <EmptyState
-              title="Nothing saved yet"
-              subtitle="Documents you save appear here — stored in your private workspace on this device, never uploaded."
-            />
+            <EmptyState title={t("dgNoneTitle")} subtitle={t("dgNoneHint")} />
           ) : (
             <div className="space-y-3">
               {savedDocs.slice(0, 20).map((docItem) => (
@@ -659,14 +739,14 @@ export function DocumentTool({ docType }: { docType: DocType }) {
                   </div>
                   <div className="mt-2 flex gap-3 text-xs font-semibold">
                     <button type="button" className="text-indigo" onClick={() => printDoc(docItem)}>
-                      Print
+                      {t("print")}
                     </button>
                     <button
                       type="button"
                       className="text-red-500"
                       onClick={() => setDeleting(docItem)}
                     >
-                      Delete
+                      {t("delete")}
                     </button>
                   </div>
                 </div>
@@ -678,9 +758,13 @@ export function DocumentTool({ docType }: { docType: DocType }) {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete document?"
-        message={deleting ? `Delete ${deleting.number} for ${deleting.partyName}?` : ""}
-        confirmLabel="Delete"
+        title={t("dgDeleteTitle")}
+        message={
+          deleting
+            ? fill(t("qgDeleteMessage"), { number: deleting.number, name: deleting.partyName })
+            : ""
+        }
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deleting) void remove(deleting.id);
           setDeleting(null);

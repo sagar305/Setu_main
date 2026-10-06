@@ -23,6 +23,7 @@ import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "
 import { dbPut } from "@/lib/pos/db";
 import { readLogoDataUrl } from "@/lib/toolkit/logo";
 import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 
 type SaleItem = { id: string; name: string; qty: number; price: number };
 
@@ -47,6 +48,20 @@ type Draft = {
   separator: ReceiptTemplate["separator"];
 };
 
+/**
+ * Dictionary key per payment mode.
+ *
+ * The mode is held and printed as its English string, so switching language
+ * mid-sale cannot leave the select with a value it no longer recognises; the
+ * translation is applied only where it is shown.
+ */
+const PAY_MODE_KEYS: Record<string, TKey> = {
+  Cash: "payCash",
+  UPI: "payUpi",
+  Card: "payCard",
+  "Credit (Udhaar)": "payCredit",
+};
+
 const DEFAULTS: Draft = {
   name: "My Receipt",
   paperSize: "80mm",
@@ -63,8 +78,18 @@ const DEFAULTS: Draft = {
 export function ReceiptDesignerTool() {
   const workspace = useWorkspaceConnection("receipt-designer");
   const { t } = useI18n();
+  // The template's name and footer are the shopkeeper's own copy once they edit
+  // them, but the values they start from should be in their language rather
+  // than English for them to translate by hand.
+  const payLabel = (mode: string) => (PAY_MODE_KEYS[mode] ? t(PAY_MODE_KEYS[mode]) : mode);
+
+  const defaults = (): Draft => ({
+    ...DEFAULTS,
+    name: t("rdDefaultName"),
+    footerText: t("rdDefaultFooter"),
+  });
   const { items: templates, save, remove } = useEntityList<ReceiptTemplate>("receipt_templates");
-  const [draft, setDraft] = useState<Draft>(DEFAULTS);
+  const [draft, setDraft] = useState<Draft>(defaults);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<ReceiptTemplate | null>(null);
   const [savedMsg, setSavedMsg] = useState(false);
@@ -92,24 +117,24 @@ export function ReceiptDesignerTool() {
     setSavedMsg(false);
   };
 
-  const startEdit = (t: ReceiptTemplate) => {
-    setEditingId(t.id);
+  const startEdit = (template: ReceiptTemplate) => {
+    setEditingId(template.id);
     setDraft({
-      name: t.name,
-      paperSize: t.paperSize as Draft["paperSize"],
-      accentColor: t.accentColor,
-      headerText: t.headerText,
-      footerText: t.footerText,
-      showLogo: t.showLogo,
-      showBusinessInfo: t.showBusinessInfo,
-      showGstin: t.showGstin,
-      boldTotals: t.boldTotals,
-      separator: t.separator as Draft["separator"],
+      name: template.name,
+      paperSize: template.paperSize as Draft["paperSize"],
+      accentColor: template.accentColor,
+      headerText: template.headerText,
+      footerText: template.footerText,
+      showLogo: template.showLogo,
+      showBusinessInfo: template.showBusinessInfo,
+      showGstin: template.showGstin,
+      boldTotals: template.boldTotals,
+      separator: template.separator as Draft["separator"],
     });
   };
 
   const submit = async () => {
-    const existing = templates.find((t) => t.id === editingId);
+    const existing = templates.find((template) => template.id === editingId);
     await save({
       id: editingId ?? generateId(),
       ...draft,
@@ -123,7 +148,7 @@ export function ReceiptDesignerTool() {
 
   const startNew = () => {
     setEditingId(null);
-    setDraft(DEFAULTS);
+    setDraft(defaults());
     setSavedMsg(false);
   };
 
@@ -173,10 +198,10 @@ export function ReceiptDesignerTool() {
       )
       .join("");
 
-    const html = `<!doctype html><html><head><title>Receipt ${esc(billNo)}</title><style>
+    const html = `<!doctype html><html><head><title>${esc(fill(t("rdReceiptTitle"), { number: billNo }))}</title><style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { display: flex; justify-content: center; background: #fff; }
-      .r { width: ${widthPx}px; padding: 14px; font-family: "Courier New", monospace; font-size: 12px; color: #1a1a1a; }
+      .r { width: ${widthPx}px; padding: 14px; font-family: "Courier New", "Noto Sans Mono", monospace, sans-serif; font-size: 12px; color: #1a1a1a; }
       .center { text-align: center; }
       .bn { font-size: 15px; font-weight: bold; color: ${draft.accentColor}; }
       .hdr { font-weight: bold; color: ${draft.accentColor}; }
@@ -192,7 +217,7 @@ export function ReceiptDesignerTool() {
       ${
         draft.showBusinessInfo
           ? `<div class="center">
-              <p class="bn">${esc(biz?.name ?? "Your Business")}</p>
+              <p class="bn">${esc(biz?.name ?? t("rdYourBusiness"))}</p>
               ${biz?.address ? `<p>${esc(biz.address)}</p>` : ""}
               ${biz?.phone ? `<p>${esc(biz.phone)}</p>` : ""}
               ${draft.showGstin && biz?.taxNumber ? `<p>GSTIN: ${esc(biz.taxNumber)}</p>` : ""}
@@ -200,13 +225,13 @@ export function ReceiptDesignerTool() {
           : ""
       }
       <div class="sep"></div>
-      <div class="row"><span>Bill: ${esc(billNo)}</span><span>${esc(saleDate)}</span></div>
-      ${customerName ? `<div class="row"><span>Customer</span><span>${esc(customerName)}</span></div>` : ""}
+      <div class="row"><span>${esc(fill(t("rdBillLabel"), { number: billNo }))}</span><span>${esc(saleDate)}</span></div>
+      ${customerName ? `<div class="row"><span>${esc(t("customer"))}</span><span>${esc(customerName)}</span></div>` : ""}
       <div class="sep"></div>
       ${itemRows}
       <div class="sep"></div>
-      <div class="tot"><span>TOTAL</span><span>${money(receiptTotal)}</span></div>
-      <div class="row"><span>Paid via</span><span>${esc(paymentMode)}</span></div>
+      <div class="tot"><span>${esc(t("rdTotalCaps"))}</span><span>${money(receiptTotal)}</span></div>
+      <div class="row"><span>${esc(t("rdPaidVia"))}</span><span>${esc(payLabel(paymentMode))}</span></div>
       <div class="sep"></div>
       ${draft.footerText ? `<p class="center">${esc(draft.footerText)}</p>` : ""}
     </div><script>window.onload = () => window.print();</script></body></html>`;
@@ -230,7 +255,7 @@ export function ReceiptDesignerTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Preview the receipt with your real business name, logo and GSTIN."
+        message={t("rdConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_auto_300px]">
@@ -246,28 +271,28 @@ export function ReceiptDesignerTool() {
               <TextInput value={draft.name} onChange={(e) => set("name", e.target.value)} />
             </Field>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Paper size">
+              <Field label={t("rdPaperSize")}>
                 <Select
                   value={draft.paperSize}
                   onChange={(e) => set("paperSize", e.target.value as Draft["paperSize"])}
                 >
-                  <option value="80mm">Thermal 80mm</option>
-                  <option value="58mm">Thermal 58mm</option>
+                  <option value="80mm">{t("rdThermal80")}</option>
+                  <option value="58mm">{t("rdThermal58")}</option>
                   <option value="a4">A4</option>
                 </Select>
               </Field>
-              <Field label="Separator style">
+              <Field label={t("rdSeparator")}>
                 <Select
                   value={draft.separator}
                   onChange={(e) => set("separator", e.target.value as Draft["separator"])}
                 >
-                  <option value="dashed">Dashed</option>
-                  <option value="solid">Solid</option>
-                  <option value="none">None</option>
+                  <option value="dashed">{t("rdDashed")}</option>
+                  <option value="solid">{t("rdSolid")}</option>
+                  <option value="none">{t("rdNoneOption")}</option>
                 </Select>
               </Field>
             </div>
-            <Field label="Accent color">
+            <Field label={t("rdAccentColor")}>
               <input
                 type="color"
                 value={draft.accentColor}
@@ -275,25 +300,25 @@ export function ReceiptDesignerTool() {
                 className="h-10 w-full cursor-pointer rounded-lg border border-muted-line/40"
               />
             </Field>
-            <Field label="Header line (optional)">
+            <Field label={t("rdHeaderLine")}>
               <TextInput
                 value={draft.headerText}
                 onChange={(e) => set("headerText", e.target.value)}
-                placeholder="e.g. TAX INVOICE"
+                placeholder={t("rdHeaderPlaceholder")}
               />
             </Field>
-            <Field label="Footer message">
+            <Field label={t("rdFooterMessage")}>
               <TextInput value={draft.footerText} onChange={(e) => set("footerText", e.target.value)} />
             </Field>
             <div className="space-y-2 text-sm text-ink">
               {(
                 [
-                  ["Show logo", "showLogo"],
-                  ["Show business info", "showBusinessInfo"],
-                  ["Show GSTIN", "showGstin"],
-                  ["Bold totals", "boldTotals"],
+                  ["rdShowLogo", "showLogo"],
+                  ["rdShowBusinessInfo", "showBusinessInfo"],
+                  ["rdShowGstin", "showGstin"],
+                  ["rdBoldTotals", "boldTotals"],
                 ] as const
-              ).map(([label, key]) => (
+              ).map(([labelKey, key]) => (
                 <label key={key} className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -301,7 +326,7 @@ export function ReceiptDesignerTool() {
                     onChange={(e) => set(key, e.target.checked)}
                     className="h-4 w-4 accent-indigo"
                   />
-                  {label}
+                  {t(labelKey)}
                 </label>
               ))}
             </div>
@@ -312,7 +337,7 @@ export function ReceiptDesignerTool() {
               <div className="rounded-lg border border-muted-line/30 bg-cream-paper/40 p-3">
                 {!biz ? (
                   <p className="text-xs text-muted">
-                    Connect your workspace (or set up your business) to add a logo.
+                    {t("rdLogoHint")}
                   </p>
                 ) : (
                   <div className="flex items-center gap-3">
@@ -339,7 +364,7 @@ export function ReceiptDesignerTool() {
                           onClick={clearLogo}
                           className="text-left text-xs font-semibold text-red-500 hover:text-red-600"
                         >
-                          Remove logo
+                          {t("ugRemoveLogo")}
                         </button>
                       ) : null}
                     </div>
@@ -355,7 +380,7 @@ export function ReceiptDesignerTool() {
               </PrimaryButton>
               {savedMsg ? (
                 <p className="text-sm font-medium text-emerald-600">
-                  Saved — available to the POS ✓
+                  {t("rdSavedToPos")} ✓
                 </p>
               ) : null}
             </div>
@@ -365,7 +390,7 @@ export function ReceiptDesignerTool() {
         {/* Live preview */}
         <div className="justify-self-center">
           <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-muted">
-            Live preview
+            {t("rdLivePreview")}
           </p>
           <div
             className={`${paperWidth} rounded-lg border border-muted-line/40 bg-white p-4 font-mono text-[11px] leading-snug text-gray-800 shadow-md`}
@@ -391,7 +416,7 @@ export function ReceiptDesignerTool() {
             {draft.showBusinessInfo ? (
               <div className="text-center">
                 <p className="text-sm font-bold" style={{ color: draft.accentColor }}>
-                  {biz?.name ?? "Your Business"}
+                  {biz?.name ?? t("rdYourBusiness")}
                 </p>
                 <p>{biz?.address || "Shop address"}</p>
                 <p>{biz?.phone || "98765 43210"}</p>
@@ -400,12 +425,12 @@ export function ReceiptDesignerTool() {
             ) : null}
             <div className={`my-2 ${sep}`} />
             <div className="flex justify-between">
-              <span>Bill: {billNo}</span>
+              <span>{fill(t("rdBillLabel"), { number: billNo })}</span>
               <span>{saleDate}</span>
             </div>
             {customerName ? (
               <div className="flex justify-between">
-                <span>Customer</span>
+                <span>{t("customer")}</span>
                 <span>{customerName}</span>
               </div>
             ) : null}
@@ -424,12 +449,12 @@ export function ReceiptDesignerTool() {
             ))}
             <div className={`my-2 ${sep}`} />
             <div className={`flex justify-between ${draft.boldTotals ? "font-bold" : ""}`}>
-              <span>TOTAL</span>
+              <span>{t("rdTotalCaps")}</span>
               <span>{formatMoney(receiptTotal, currency)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Paid via</span>
-              <span>{paymentMode}</span>
+              <span>{t("rdPaidVia")}</span>
+              <span>{payLabel(paymentMode)}</span>
             </div>
             <div className={`my-2 ${sep}`} />
             <p className="text-center">{draft.footerText}</p>
@@ -437,11 +462,10 @@ export function ReceiptDesignerTool() {
         </div>
 
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">Saved templates</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("rdSavedTemplates")}</h2>
           {templates.length === 0 ? (
             <p className="text-sm text-muted">
-              None yet. Saved templates appear in the Browser POS as printing options — design once,
-              print everywhere.
+              {t("rdNoTemplates")}
             </p>
           ) : (
             <div className="space-y-2">
@@ -479,19 +503,19 @@ export function ReceiptDesignerTool() {
 
       {/* Generate a real receipt from the current design. */}
       <Card className="mt-6">
-        <h2 className="mb-1 text-lg font-bold text-ink">Fill in a sale &amp; print a receipt</h2>
+        <h2 className="mb-1 text-lg font-bold text-ink">{t("rdFillSale")}</h2>
         <p className="mb-4 text-sm text-muted">
-          Enter the sale below — the preview above updates live and prints with the design you chose.
+          {t("rdFillSaleHint")}
         </p>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Field label="Bill number">
+          <Field label={t("billNumber")}>
             <TextInput value={billNo} onChange={(e) => setBillNo(e.target.value)} />
           </Field>
-          <Field label="Date">
+          <Field label={t("date")}>
             <TextInput type="date" value={saleDate} onChange={(e) => setSaleDate(e.target.value)} />
           </Field>
-          <Field label="Customer (optional)">
+          <Field label={t("rdCustomerOptional")}>
             {workspace.connected && workspace.customers.length > 0 ? (
               <Select
                 value=""
@@ -511,21 +535,22 @@ export function ReceiptDesignerTool() {
               <TextInput
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="Walk-in"
+                placeholder={t("rdWalkIn")}
               />
             )}
           </Field>
-          <Field label="Payment mode">
+          <Field label={t("paymentMode")}>
             <Select value={paymentMode} onChange={(e) => setPaymentMode(e.target.value)}>
-              <option>Cash</option>
-              <option>UPI</option>
-              <option>Card</option>
-              <option>Credit (Udhaar)</option>
+              {Object.keys(PAY_MODE_KEYS).map((mode) => (
+                <option key={mode} value={mode}>
+                  {payLabel(mode)}
+                </option>
+              ))}
             </Select>
           </Field>
         </div>
 
-        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Items</h3>
+        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("items")}</h3>
         <div className="space-y-2">
           {saleItems.map((item) => (
             <div
@@ -533,12 +558,12 @@ export function ReceiptDesignerTool() {
               className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_80px_110px_auto]"
             >
               {workspace.connected && workspace.products.length > 0 ? (
-                <Field label="Product">
+                <Field label={t("product")}>
                   <Select
                     value=""
                     onChange={(e) => e.target.value && pickSaleProduct(item.id, e.target.value)}
                   >
-                    <option value="">Choose…</option>
+                    <option value="">{t("chooseEllipsis")}</option>
                     {workspace.products.map((p) => (
                       <option key={p.id} value={p.id}>
                         {p.name}
@@ -547,13 +572,13 @@ export function ReceiptDesignerTool() {
                   </Select>
                 </Field>
               ) : null}
-              <Field label="Item">
+              <Field label={t("itemPlaceholder")}>
                 <TextInput
                   value={item.name}
                   onChange={(e) => updateSaleItem(item.id, { name: e.target.value })}
                 />
               </Field>
-              <Field label="Qty">
+              <Field label={t("quantity")}>
                 <NumberInput
                   min={0}
                   value={item.qty || ""}
@@ -574,7 +599,7 @@ export function ReceiptDesignerTool() {
                 disabled={saleItems.length === 1}
                 className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
               >
-                Remove
+                {t("remove")}
               </button>
             </div>
           ))}
@@ -582,14 +607,15 @@ export function ReceiptDesignerTool() {
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <SecondaryButton onClick={() => setSaleItems((p) => [...p, blankSaleItem()])}>
-            + Add item
+            {t("addItem")}
           </SecondaryButton>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted">
-              Total <span className="text-lg font-bold text-ink">{formatMoney(receiptTotal, currency)}</span>
+              {t("total")}{" "}
+              <span className="text-lg font-bold text-ink">{formatMoney(receiptTotal, currency)}</span>
             </span>
             <PrimaryButton onClick={printReceipt} disabled={validSaleItems.length === 0}>
-              Print receipt
+              {t("rdPrintReceipt")}
             </PrimaryButton>
           </div>
         </div>
@@ -597,19 +623,19 @@ export function ReceiptDesignerTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete template?"
+        title={t("rdDeleteTitle")}
         message={
           deleting
-            ? `Delete "${deleting.name}"? Tools that print with it will fall back to their default receipt.`
+            ? fill(t("rdDeleteMessage"), { name: deleting.name })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) {
             await remove(deleting.id);
             if (editingId === deleting.id) {
               setEditingId(null);
-              setDraft(DEFAULTS);
+              setDraft(defaults());
             }
           }
           setDeleting(null);

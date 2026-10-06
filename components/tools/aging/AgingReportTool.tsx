@@ -235,8 +235,8 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
         connection={workspace}
         message={
           kind === "receivable"
-            ? "Pull outstanding balances straight from your customer ledger."
-            : "Pull unpaid bills straight from your purchase register."
+            ? t("agPullReceivable")
+            : t("agPullPayable")
         }
       />
 

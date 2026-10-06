@@ -1,18 +1,24 @@
 import { Phone, MapPin } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
 import { hasVariant, type QrMenuData, type DietTag } from "@/lib/qrmenu";
 
 // FSSAI-style diet markers: green square + dot for veg, red square + triangle
 // for non-veg — instantly recognisable to Indian diners.
 function DietMark({ tag }: { tag: DietTag }) {
+  const { t } = useI18n();
   if (!tag) return null;
   const color = tag === "veg" ? "#1B7A43" : "#B3261E";
+  // The square-and-dot marker is the whole message for a diner who reads it at
+  // a glance; the text is for everyone who hears the page instead.
+  const label = t(tag === "veg" ? "qmVegetarian" : "qmNonVegetarian");
   return (
     <span
       className="inline-flex h-4 w-4 flex-shrink-0 items-center justify-center border-2"
       style={{ borderColor: color }}
-      title={tag === "veg" ? "Vegetarian" : "Non-vegetarian"}
-      aria-label={tag === "veg" ? "Vegetarian" : "Non-vegetarian"}
+      title={label}
+      aria-label={label}
     >
       {tag === "veg" ? (
         <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
@@ -42,6 +48,7 @@ export function MenuDisplay({
   // are client components, so the hook can read the language off the path and
   // keep a reader on /hi/tools/qr-menu-generator out of the English page.
   const href = useLocalizedHref();
+  const { t } = useI18n();
   const accent = menu.accent || "#26306B";
   const categories = menu.categories.filter(
     (category) => category.name.trim() || category.items.some((item) => item.name.trim())
@@ -52,7 +59,7 @@ export function MenuDisplay({
       {/* Header */}
       <div className="px-6 py-8 text-center text-white" style={{ backgroundColor: accent }}>
         <NameHeading className="text-2xl font-bold tracking-tight sm:text-3xl">
-          {menu.restaurantName.trim() || "Your Restaurant"}
+          {menu.restaurantName.trim() || t("qmYourRestaurant")}
         </NameHeading>
         {menu.tagline.trim() && (
           <p className="mt-2 text-sm text-white/80 sm:text-base">{menu.tagline}</p>
@@ -81,9 +88,7 @@ export function MenuDisplay({
       {/* Categories */}
       <div className="divide-y divide-muted-line/20">
         {categories.length === 0 && (
-          <p className="px-6 py-10 text-center text-sm text-muted">
-            No menu items yet. Add categories and dishes to see them here.
-          </p>
+          <p className="px-6 py-10 text-center text-sm text-muted">{t("qmNoItemsYet")}</p>
         )}
         {categories.map((category, index) => {
           const items = category.items.filter((item) => item.name.trim());
@@ -93,7 +98,7 @@ export function MenuDisplay({
                 className="mb-4 text-xs font-bold uppercase tracking-[0.2em]"
                 style={{ color: accent }}
               >
-                {category.name.trim() || `Category ${index + 1}`}
+                {category.name.trim() || fill(t("qmCategoryN"), { n: index + 1 })}
               </h2>
               <ul className="space-y-4">
                 {items.map((item, itemIndex) => (
@@ -149,7 +154,7 @@ export function MenuDisplay({
                   </li>
                 ))}
                 {items.length === 0 && (
-                  <li className="text-sm text-muted">No items in this category yet.</li>
+                  <li className="text-sm text-muted">{t("qmNoItemsInCategory")}</li>
                 )}
               </ul>
             </section>
@@ -163,7 +168,7 @@ export function MenuDisplay({
           href={href("/tools/qr-menu-generator")}
           className="text-xs text-muted underline-offset-2 hover:underline"
         >
-          Free digital menu by Setu Technology
+          {t("qmCredit")}
         </a>
       </div>
     </div>

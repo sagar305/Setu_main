@@ -5,10 +5,13 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 const TERM_PRESETS = ["7", "15", "30", "45", "60", "90"];
 
 export function PaymentTermsCalculatorTool() {
+  const { lang } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [amount, setAmount] = useState("100000");
   const [invoiceDate, setInvoiceDate] = useState(() => new Date().toISOString().split("T")[0]);
@@ -27,7 +30,11 @@ export function PaymentTermsCalculatorTool() {
     const addDays = (days: number) => {
       const d = new Date(base);
       d.setDate(d.getDate() + days);
-      return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+      return d.toLocaleDateString(intlLocaleFor(lang), {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
     };
 
     const discountAmount = value * (dPct / 100);
@@ -47,7 +54,7 @@ export function PaymentTermsCalculatorTool() {
       annualCost,
       hasDiscount: dPct > 0,
     };
-  }, [amount, invoiceDate, netDays, discountPct, discountDays]);
+  }, [amount, invoiceDate, netDays, discountPct, discountDays, lang]);
 
   return (
     <div>

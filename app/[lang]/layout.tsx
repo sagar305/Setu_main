@@ -47,15 +47,21 @@ export default async function LocalizedHomeLayout({
         }}
       />
       <LocaleDocumentAttrs lang={lang} dir={dirFor(lang)} />
-      <Nav site={site} lang={lang} />
       {/* Nested inside the provider in the root layout, which has no dynamic
           segment to read a language from. The inner one wins for this subtree,
           so an interactive tool under /<lang>/ renders its own labels in that
-          language on the server rather than after hydration. */}
+          language on the server rather than after hydration.
+
+          The header and footer are inside it too: the language switcher in the
+          header reads its own labels from the dictionary, and outside this
+          provider it rendered them in English and only corrected itself after
+          hydration — which a crawler never sees, and a screen reader reads
+          before it happens. */}
       <LanguageProvider routeLang={lang}>
+        <Nav site={site} lang={lang} />
         <main>{children}</main>
+        <Footer site={site} />
       </LanguageProvider>
-      <Footer site={site} />
     </>
   );
 }

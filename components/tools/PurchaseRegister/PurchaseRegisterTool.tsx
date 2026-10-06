@@ -20,6 +20,7 @@ import type { Expense, Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/ty
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 type ItemRow = PurchaseItem & { key: string };
 
@@ -135,10 +136,15 @@ export function PurchaseRegisterTool() {
       purchase.expenseId = expense.id;
     }
     await save(purchase);
+    const extras = [
+      applyStock ? t("prStockUpdated") : null,
+      recordExpense ? t("prAddedToExpenses") : null,
+    ].filter(Boolean);
     setMessage(
-      `Purchase of ${formatMoney(purchase.total, currency)} recorded${
-        applyStock ? ", stock updated" : ""
-      }${recordExpense ? ", added to expenses" : ""}.`
+      fill(t("prRecordedToast"), {
+        amount: formatMoney(purchase.total, currency),
+        extras: extras.length > 0 ? `, ${extras.join(", ")}` : "",
+      }),
     );
     resetForm();
   };
@@ -187,12 +193,12 @@ export function PurchaseRegisterTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Link purchase lines to your saved products and update stock automatically."
+        message={t("prConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">Record purchase</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("prRecordPurchase")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t("supplier")}>
               {suppliers.length > 0 ? (
@@ -203,7 +209,7 @@ export function PurchaseRegisterTool() {
                     setSupplierName("");
                   }}
                 >
-                  <option value="">Type name below…</option>
+                  <option value="">{t("prTypeNameBelow")}</option>
                   {suppliers.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name}
@@ -214,16 +220,16 @@ export function PurchaseRegisterTool() {
                 <TextInput
                   value={supplierName}
                   onChange={(e) => setSupplierName(e.target.value)}
-                  placeholder="Supplier name"
+                  placeholder={t("sbNamePlaceholder")}
                 />
               )}
             </Field>
             {suppliers.length > 0 && !supplierId ? (
-              <Field label="Or new supplier name">
+              <Field label={t("prOrNewSupplier")}>
                 <TextInput
                   value={supplierName}
                   onChange={(e) => setSupplierName(e.target.value)}
-                  placeholder="Supplier name"
+                  placeholder={t("sbNamePlaceholder")}
                 />
               </Field>
             ) : (
@@ -247,7 +253,7 @@ export function PurchaseRegisterTool() {
             </Field>
           </div>
 
-          <h3 className="mb-2 mt-6 text-sm font-bold text-ink">Items</h3>
+          <h3 className="mb-2 mt-6 text-sm font-bold text-ink">{t("items")}</h3>
           <div className="space-y-3">
             {items.map((item) => (
               <div
@@ -255,12 +261,12 @@ export function PurchaseRegisterTool() {
                 className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_1fr_80px_100px_auto]"
               >
                 {workspace.connected && workspace.products.length > 0 ? (
-                  <Field label="Link product">
+                  <Field label={t("prLinkProduct")}>
                     <Select
                       value={item.productId ?? ""}
                       onChange={(e) => linkProduct(item.key, e.target.value)}
                     >
-                      <option value="">Not linked</option>
+                      <option value="">{t("prNotLinked")}</option>
                       {workspace.products.map((p) => (
                         <option key={p.id} value={p.id}>
                           {p.name}
@@ -273,7 +279,7 @@ export function PurchaseRegisterTool() {
                   <TextInput
                     value={item.name}
                     onChange={(e) => updateItem(item.key, { name: e.target.value })}
-                    placeholder="Item"
+                    placeholder={t("itemPlaceholder")}
                   />
                 </Field>
                 <Field label={t("quantity")}>
@@ -283,7 +289,7 @@ export function PurchaseRegisterTool() {
                     onChange={(e) => updateItem(item.key, { quantity: Number(e.target.value) || 0 })}
                   />
                 </Field>
-                <Field label={`Unit cost (${symbol})`}>
+                <Field label={fill(t("prUnitCost"), { symbol })}>
                   <NumberInput
                     min={0}
                     step="0.01"
@@ -310,7 +316,7 @@ export function PurchaseRegisterTool() {
             <TextInput
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Optional"
+              placeholder={t("optional")}
               className="mt-1"
             />
           </Field>
@@ -323,10 +329,9 @@ export function PurchaseRegisterTool() {
               className="mt-0.5 h-4 w-4 accent-indigo"
             />
             <span className="text-sm text-ink">
-              Also record as a business expense
+              {t("prAlsoExpense")}
               <span className="block text-xs text-muted">
-                Adds it to the Expense Tracker (category: Purchases). Turn this off for resale stock
-                whose cost you track via product cost price, so it isn&apos;t counted twice in profit.
+                {t("prExpenseHint")}
               </span>
             </span>
           </label>
@@ -334,7 +339,7 @@ export function PurchaseRegisterTool() {
           <div className="mt-5 flex items-center justify-between border-t border-muted-line/30 pt-4">
             <p className="text-lg font-bold text-ink">{t("total")}: {formatMoney(total, currency)}</p>
             <PrimaryButton onClick={submit} disabled={!canSave}>
-              Save purchase
+              {t("prSavePurchase")}
             </PrimaryButton>
           </div>
           {message ? <p className="mt-3 text-sm font-medium text-emerald-600">{message}</p> : null}
@@ -342,15 +347,15 @@ export function PurchaseRegisterTool() {
 
         <Card className="h-fit">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-ink">Recent purchases</h2>
+            <h2 className="text-lg font-bold text-ink">{t("prRecent")}</h2>
             <SecondaryButton onClick={exportCsv} disabled={purchases.length === 0}>
               {t("exportCsv")}
             </SecondaryButton>
           </div>
           {sorted.length === 0 ? (
             <EmptyState
-              title="No purchases yet"
-              subtitle="Purchase bills you record appear here, with totals per supplier."
+              title={t("prNoneTitle")}
+              subtitle={t("prNoneHint")}
             />
           ) : (
             <div className="space-y-3">
@@ -358,11 +363,12 @@ export function PurchaseRegisterTool() {
                 <div key={p.id} className="rounded-lg border border-muted-line/30 p-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="font-semibold text-ink">{p.supplierName || "Unknown supplier"}</p>
+                      <p className="font-semibold text-ink">{p.supplierName || t("prUnknownSupplier")}</p>
                       <p className="text-xs text-muted">
                         {p.date}
-                        {p.billNumber ? ` · Bill ${p.billNumber}` : ""} · {p.paymentMode}
-                        {p.stockApplied ? " · stock updated" : ""}
+                        {p.billNumber ? ` · ${fill(t("prBillNo"), { number: p.billNumber })}` : ""} ·{" "}
+                        {p.paymentMode}
+                        {p.stockApplied ? ` · ${t("prStockUpdated")}` : ""}
                       </p>
                     </div>
                     <p className="font-bold text-ink">{formatMoney(p.total, currency)}</p>
@@ -386,9 +392,9 @@ export function PurchaseRegisterTool() {
 
       <ConfirmDialog
         open={pendingStock !== null}
-        title="Update stock too?"
-        message="Some items are linked to saved products. Add the purchased quantities to their stock? This changes the shared workspace that the POS and Stock Register also use."
-        confirmLabel="Save & update stock"
+        title={t("prUpdateStockTitle")}
+        message={t("prUpdateStockMessage")}
+        confirmLabel={t("prSaveAndStock")}
         cancelLabel="Save without stock"
         danger={false}
         onConfirm={() => confirmWithStock(true)}
@@ -397,15 +403,16 @@ export function PurchaseRegisterTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete purchase?"
+        title={t("prDeleteTitle")}
         message={
           deleting
-            ? `Delete the ${formatMoney(deleting.total, currency)} purchase from ${
-                deleting.supplierName || "unknown supplier"
-              }?${deleting.expenseId ? " Its linked expense will also be removed." : ""} Stock already applied from it is NOT reversed.`
+            ? `${fill(t("prDeleteMessage"), {
+                amount: formatMoney(deleting.total, currency),
+                supplier: deleting.supplierName || t("prUnknownSupplier"),
+              })}${deleting.expenseId ? ` ${t("prExpenseAlsoRemoved")}` : ""}`
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) {
             if (deleting.expenseId) await deleteExpense(deleting.expenseId).catch(() => {});

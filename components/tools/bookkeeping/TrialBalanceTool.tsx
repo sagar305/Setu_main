@@ -5,16 +5,19 @@
 // imbalance. Users on the bookkeeping suite can also pull the balances straight
 // from their posted journal with one click. Everything persists in localStorage.
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Card, Field, NumberInput, PrimaryButton, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { printStatement, type PrintRow } from "@/components/tools/statements/shared";
 import {
-  DEFAULT_ACCOUNTS,
+  defaultAccounts,
   trialBalance,
   type Account,
   type JournalEntry,
@@ -33,28 +36,35 @@ const row = (account: string, debit = 0, credit = 0): TbRow => ({
 
 const todayIso = () => new Date().toISOString().split("T")[0];
 
-function initialState(): TbState {
+/** The worked example the worksheet opens on, in the reader's language. */
+const SEED_ROWS: [TKey, number, number][] = [
+  ["tbSeedCash", 25000, 0],
+  ["tbSeedReceivable", 12000, 0],
+  ["tbSeedInventory", 18000, 0],
+  ["tbSeedEquipment", 40000, 0],
+  ["tbSeedPayable", 0, 15000],
+  ["tbSeedDebt", 0, 30000],
+  ["tbSeedStock", 0, 20000],
+  ["tbSeedRetained", 0, 10000],
+  ["tbSeedRevenue", 0, 45000],
+  ["tbSeedExpenses", 25000, 0],
+];
+
+function initialState(lang: LanguageCode): TbState {
   return {
     businessName: "",
     asOf: todayIso(),
-    rows: [
-      row("Cash", 25000),
-      row("Accounts Receivable", 12000),
-      row("Inventory", 18000),
-      row("Equipment", 40000),
-      row("Accounts Payable", 0, 15000),
-      row("Long-term Debt", 0, 30000),
-      row("Common Stock", 0, 20000),
-      row("Retained Earnings", 0, 10000),
-      row("Revenue", 0, 45000),
-      row("Expenses", 25000),
-    ],
+    rows: SEED_ROWS.map(([key, debit, credit]) =>
+      row(translate(lang, key), debit, credit)
+    ),
   };
 }
 
 export function TrialBalanceTool() {
   const { code: currency } = usePreferredCurrency();
-  const [state, setState] = useLocalStore<TbState>("setu-trial-balance", initialState());
+  const { t, lang } = useI18n();
+  const [initial] = useState<TbState>(() => initialState(lang));
+  const [state, setState] = useLocalStore<TbState>("setu-trial-balance", initial);
 
   // For the optional "pull from journal" action (bookkeeping suite).
   const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
@@ -67,7 +77,7 @@ export function TrialBalanceTool() {
     setState((s) => ({ ...s, rows: s.rows.map((r) => (r.id === id ? { ...r, ...p } : r)) }));
 
   const pullFromJournal = () => {
-    const accounts = coaAccounts.length > 0 ? coaAccounts : DEFAULT_ACCOUNTS;
+    const accounts = coaAccounts.length > 0 ? coaAccounts : defaultAccounts(lang);
     const derived = trialBalance(entries, accounts);
     setState((s) => ({
       ...s,
@@ -102,20 +112,25 @@ export function TrialBalanceTool() {
 
   const print = () => {
     const rows: PrintRow[] = [
-      { label: "Account", value: "Debit / Credit", kind: "heading" },
+      { label: t("bkAccount"), value: t("tbDebitCredit"), kind: "heading" },
       ...namedRows.map((r) => ({
         label: r.account,
-        value: r.debit ? `${money(r.debit)} Dr` : r.credit ? `${money(r.credit)} Cr` : "—",
+        value: r.debit
+          ? `${money(r.debit)} ${t("bkDr")}`
+          : r.credit
+            ? `${money(r.credit)} ${t("bkCr")}`
+            : "—",
       })),
-      { label: `Total debits`, value: money(totals.debit), kind: "subtotal" },
-      { label: `Total credits`, value: money(totals.credit), kind: "total" },
+      { label: t("tbTotalDebits"), value: money(totals.debit), kind: "subtotal" },
+      { label: t("tbTotalCredits"), value: money(totals.credit), kind: "total" },
     ];
     printStatement({
-      docTitle: "Trial Balance",
+      docTitle: t("tbDocTitle"),
       businessName: state.businessName,
-      periodLabel: state.asOf ? `As at ${state.asOf}` : "As at date",
+      periodLabel: state.asOf ? fill(t("tbAsAt"), { date: state.asOf }) : t("tbAsAtDate"),
       rows,
-      footNote: balanced ? "Balanced — debits equal credits." : "Out of balance — review the postings.",
+      footNote: t(balanced ? "tbFootBalanced" : "tbFootOutOfBalance"),
+      lang,
     });
   };
 
@@ -123,21 +138,21 @@ export function TrialBalanceTool() {
     <div className="space-y-6">
       <Card>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Your business name">
+          <Field label={t("tbBusinessName")}>
             <TextInput
               value={state.businessName}
               onChange={(e) => patch({ businessName: e.target.value })}
-              placeholder="Acme Inc."
+              placeholder={t("tbBusinessPlaceholder")}
             />
           </Field>
-          <Field label="As at date">
+          <Field label={t("tbAsAtDate")}>
             <TextInput type="date" value={state.asOf} onChange={(e) => patch({ asOf: e.target.value })} />
           </Field>
         </div>
         {hasJournal ? (
           <div className="mt-4">
             <SecondaryButton onClick={pullFromJournal}>
-              ↻ Pull balances from my journal
+              ↻ {t("tbPullFromJournal")}
             </SecondaryButton>
           </div>
         ) : null}
@@ -148,9 +163,9 @@ export function TrialBalanceTool() {
           <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="py-2 pr-3">Account</th>
-                <th className="py-2 pr-3 text-right">Debit</th>
-                <th className="py-2 pr-3 text-right">Credit</th>
+                <th className="py-2 pr-3">{t("bkAccount")}</th>
+                <th className="py-2 pr-3 text-right">{t("bkDebit")}</th>
+                <th className="py-2 pr-3 text-right">{t("bkCredit")}</th>
                 <th className="py-2" />
               </tr>
             </thead>
@@ -161,7 +176,7 @@ export function TrialBalanceTool() {
                     <TextInput
                       value={r.account}
                       onChange={(e) => update(r.id, { account: e.target.value })}
-                      placeholder="Account name"
+                      placeholder={t("tbAccountPlaceholder")}
                     />
                   </td>
                   <td className="py-2 pr-3">
@@ -194,7 +209,7 @@ export function TrialBalanceTool() {
                       }
                       disabled={state.rows.length === 1}
                       className="text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
-                      aria-label="Delete row"
+                      aria-label={t("tbDeleteRow")}
                     >
                       🗑
                     </button>
@@ -209,17 +224,17 @@ export function TrialBalanceTool() {
           onClick={() => setState((s) => ({ ...s, rows: [...s.rows, row("")] }))}
           className="mt-3 text-sm font-semibold text-indigo hover:underline"
         >
-          + Add account
+          {t("tbAddAccount")}
         </button>
       </Card>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-muted-line/30 bg-white p-5 text-center shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Total debits</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t("tbTotalDebits")}</p>
           <p className="mt-1 text-2xl font-bold text-ink">{money(totals.debit)}</p>
         </div>
         <div className="rounded-2xl border border-muted-line/30 bg-white p-5 text-center shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Total credits</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t("tbTotalCredits")}</p>
           <p className="mt-1 text-2xl font-bold text-ink">{money(totals.credit)}</p>
         </div>
         <div
@@ -228,7 +243,7 @@ export function TrialBalanceTool() {
           }`}
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            {balanced ? "Balanced" : "Out of balance"}
+            {t(balanced ? "tbBalanced" : "tbOutOfBalance")}
           </p>
           <p className={`mt-1 text-2xl font-bold ${balanced ? "text-emerald-700" : "text-red-600"}`}>
             {balanced ? "✓" : money(Math.abs(difference))}
@@ -237,15 +252,13 @@ export function TrialBalanceTool() {
       </div>
 
       <div className="flex flex-wrap gap-3">
-        <PrimaryButton onClick={print}>Export PDF</PrimaryButton>
-        <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+        <PrimaryButton onClick={print}>{t("abcExportPdf")}</PrimaryButton>
+        <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
       </div>
 
       {!balanced ? (
         <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
-          Debits and credits differ by {money(Math.abs(difference))}. A difference divisible by 9
-          often means transposed digits; also check for a missing account or a balance on the wrong
-          side.
+          {fill(t("tbImbalanceNote"), { amount: money(Math.abs(difference)) })}
         </p>
       ) : null}
     </div>

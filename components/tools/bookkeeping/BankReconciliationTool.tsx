@@ -13,6 +13,9 @@ import {
 } from "@/components/toolkit/ui";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { printStatement, type PrintRow } from "@/components/tools/statements/shared";
@@ -32,31 +35,16 @@ type ReconState = {
   items: ReconItem[];
 };
 
-const KIND_OPTIONS: { value: ItemKind; label: string; hint: string }[] = [
-  {
-    value: "deposit-in-transit",
-    label: "Deposit in transit (+ bank)",
-    hint: "Recorded in your books, not yet showing in the bank",
-  },
-  {
-    value: "outstanding-payment",
-    label: "Outstanding cheque / payment (− bank)",
-    hint: "Issued by you, not yet cleared by the bank",
-  },
-  {
-    value: "bank-credit",
-    label: "Bank credit not in books (+ book)",
-    hint: "Interest earned, direct customer receipt",
-  },
-  {
-    value: "bank-debit",
-    label: "Bank charge not in books (− book)",
-    hint: "Bank fees, direct debits you haven't recorded",
-  },
+const KIND_OPTIONS: { value: ItemKind; label: TKey; hint: TKey }[] = [
+  { value: "deposit-in-transit", label: "brDepositLabel", hint: "brDepositHint" },
+  { value: "outstanding-payment", label: "brOutstandingLabel", hint: "brOutstandingHint" },
+  { value: "bank-credit", label: "brCreditLabel", hint: "brCreditHint" },
+  { value: "bank-debit", label: "brDebitLabel", hint: "brDebitHint" },
 ];
 
 export function BankReconciliationTool() {
   const { code: currency } = usePreferredCurrency();
+  const { t, lang } = useI18n();
   const [state, setState, loaded] = useLocalStore<ReconState>("setu-bank-recon", {
     bankBalance: 0,
     bookBalance: 0,
@@ -97,7 +85,10 @@ export function BankReconciliationTool() {
     return { adjustedBank, adjustedBook, difference, reconciled: Math.abs(difference) < 0.005 };
   }, [state]);
 
-  const kindLabel = (k: ItemKind) => KIND_OPTIONS.find((o) => o.value === k)?.label ?? k;
+  const kindLabel = (k: ItemKind) => {
+    const key = KIND_OPTIONS.find((o) => o.value === k)?.label;
+    return key ? t(key) : k;
+  };
 
   const exportCsv = () =>
     downloadCsv(
@@ -126,24 +117,27 @@ export function BankReconciliationTool() {
       ];
     };
     printStatement({
-      docTitle: "Bank Reconciliation Statement",
+      docTitle: t("brDocTitle"),
       businessName: "",
-      periodLabel: `As of ${new Date().toLocaleDateString("en-IN")}`,
+      periodLabel: fill(t("brAsOf"), {
+        date: new Date().toLocaleDateString(intlLocaleFor(lang)),
+      }),
       rows: [
-        { label: "Bank statement balance", value: money(state.bankBalance), kind: "subtotal" },
-        ...section("deposit-in-transit", "Add: Deposits in transit"),
-        ...section("outstanding-payment", "Less: Outstanding cheques / payments"),
-        { label: "Adjusted bank balance", value: money(result.adjustedBank), kind: "total" },
-        { label: "Book / cash book balance", value: money(state.bookBalance), kind: "subtotal" },
-        ...section("bank-credit", "Add: Bank credits not in books"),
-        ...section("bank-debit", "Less: Bank charges not in books"),
-        { label: "Adjusted book balance", value: money(result.adjustedBook), kind: "total" },
+        { label: t("brBankStatementBalance"), value: money(state.bankBalance), kind: "subtotal" },
+        ...section("deposit-in-transit", t("brAddDeposits")),
+        ...section("outstanding-payment", t("brLessOutstanding")),
+        { label: t("brAdjustedBankRow"), value: money(result.adjustedBank), kind: "total" },
+        { label: t("brBookBalanceRow"), value: money(state.bookBalance), kind: "subtotal" },
+        ...section("bank-credit", t("brAddCredits")),
+        ...section("bank-debit", t("brLessCharges")),
+        { label: t("brAdjustedBookRow"), value: money(result.adjustedBook), kind: "total" },
         {
-          label: result.reconciled ? "Reconciled" : "Unreconciled difference",
+          label: t(result.reconciled ? "brReconciled" : "brUnreconciled"),
           value: result.reconciled ? "✓" : money(result.difference),
           kind: "subtotal",
         },
       ],
+      lang,
     });
   };
 
@@ -151,52 +145,57 @@ export function BankReconciliationTool() {
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <div className="space-y-6">
         <Card>
-          <h2 className="mb-4 text-lg font-bold text-ink">Balances</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("brBalances")}</h2>
           <div className="space-y-4">
-            <Field label="Bank statement closing balance">
+            <Field label={t("brBankClosing")}>
               <NumberInput
                 step="0.01"
                 value={state.bankBalance || ""}
                 onChange={(e) =>
                   setState((s) => ({ ...s, bankBalance: Number(e.target.value) || 0 }))
                 }
-                placeholder="From the bank statement"
+                placeholder={t("brBankClosingPlaceholder")}
               />
             </Field>
-            <Field label="Cash book / ledger balance">
+            <Field label={t("brBookBalance")}>
               <NumberInput
                 step="0.01"
                 value={state.bookBalance || ""}
                 onChange={(e) =>
                   setState((s) => ({ ...s, bookBalance: Number(e.target.value) || 0 }))
                 }
-                placeholder="From your books"
+                placeholder={t("brBookPlaceholder")}
               />
             </Field>
           </div>
         </Card>
 
         <Card>
-          <h2 className="mb-4 text-lg font-bold text-ink">Add reconciling item</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("brAddItemHeading")}</h2>
           <div className="space-y-4">
-            <Field label="Type">
+            <Field label={t("typeLabel")}>
               <Select value={kind} onChange={(e) => setKind(e.target.value as ItemKind)}>
                 {KIND_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>
-                    {o.label}
+                    {t(o.label)}
                   </option>
                 ))}
               </Select>
             </Field>
-            <p className="text-xs text-muted">{KIND_OPTIONS.find((o) => o.value === kind)?.hint}</p>
-            <Field label="Description">
+            <p className="text-xs text-muted">
+              {(() => {
+                const hint = KIND_OPTIONS.find((o) => o.value === kind)?.hint;
+                return hint ? t(hint) : "";
+              })()}
+            </p>
+            <Field label={t("description")}>
               <TextInput
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="e.g. Cheque #104 to supplier"
+                placeholder={t("brDescPlaceholder")}
               />
             </Field>
-            <Field label="Amount">
+            <Field label={t("amount")}>
               <NumberInput
                 min={0}
                 step="0.01"
@@ -206,7 +205,7 @@ export function BankReconciliationTool() {
               />
             </Field>
             <PrimaryButton className="w-full" onClick={addItem} disabled={!canAdd}>
-              Add item
+              {t("brAddItem")}
             </PrimaryButton>
           </div>
         </Card>
@@ -214,22 +213,22 @@ export function BankReconciliationTool() {
 
       <Card className="h-fit">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Reconciliation</h2>
+          <h2 className="text-lg font-bold text-ink">{t("brReconciliation")}</h2>
           <div className="flex gap-2">
-            <SecondaryButton onClick={printRecon}>Print / PDF</SecondaryButton>
-            <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+            <SecondaryButton onClick={printRecon}>{t("qgPrintPdf")}</SecondaryButton>
+            <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
           </div>
         </div>
 
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div className="rounded-xl bg-cream-paper/70 p-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Adjusted bank</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t("brAdjustedBank")}</p>
             <p className="mt-1 text-lg font-bold text-ink">
               {formatMoney(result.adjustedBank, currency)}
             </p>
           </div>
           <div className="rounded-xl bg-cream-paper/70 p-4 text-center">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Adjusted book</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t("brAdjustedBook")}</p>
             <p className="mt-1 text-lg font-bold text-ink">
               {formatMoney(result.adjustedBook, currency)}
             </p>
@@ -240,7 +239,7 @@ export function BankReconciliationTool() {
             }`}
           >
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-              {result.reconciled ? "Reconciled" : "Difference"}
+              {t(result.reconciled ? "brReconciled" : "brDifference")}
             </p>
             <p
               className={`mt-1 text-lg font-bold ${
@@ -253,13 +252,9 @@ export function BankReconciliationTool() {
         </div>
 
         {!loaded ? (
-          <p className="py-8 text-center text-sm text-muted">Loading…</p>
+          <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
         ) : state.items.length === 0 ? (
-          <p className="rounded-xl bg-cream-paper/50 p-4 text-sm text-muted">
-            Enter both balances, then add each item that explains the gap — uncleared cheques,
-            deposits in transit, bank charges and interest. When the two adjusted balances match,
-            you&apos;re reconciled.
-          </p>
+          <p className="rounded-xl bg-cream-paper/50 p-4 text-sm text-muted">{t("brEmptyHint")}</p>
         ) : (
           <div className="space-y-2">
             {state.items.map((item) => (
@@ -278,7 +273,7 @@ export function BankReconciliationTool() {
                     onClick={() => setDeleting(item)}
                     className="text-xs font-semibold text-red-500 hover:text-red-600"
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
               </div>
@@ -288,17 +283,24 @@ export function BankReconciliationTool() {
 
         {!result.reconciled && state.items.length > 0 ? (
           <p className="mt-4 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-700">
-            Still {formatMoney(Math.abs(result.difference), currency)} apart. Common culprits:
-            transposed digits, a missed bank charge, or a payment recorded twice.
+            {fill(t("brStillApart"), {
+              amount: formatMoney(Math.abs(result.difference), currency),
+            })}
           </p>
         ) : null}
       </Card>
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete item?"
-        message={deleting ? `Remove "${deleting.description || kindLabel(deleting.kind)}"?` : ""}
-        confirmLabel="Delete"
+        title={t("brDeleteTitle")}
+        message={
+          deleting
+            ? fill(t("brDeleteMessage"), {
+                name: deleting.description || kindLabel(deleting.kind),
+              })
+            : ""
+        }
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deleting)
             setState((s) => ({ ...s, items: s.items.filter((i) => i.id !== deleting.id) }));

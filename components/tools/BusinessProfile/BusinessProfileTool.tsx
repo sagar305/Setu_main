@@ -139,8 +139,8 @@ export function BusinessProfileTool() {
         </h2>
         <p className="mb-5 text-sm text-muted">
           {existing
-            ? "Saved on this device. Every Setu tool — POS, invoices, labels, receipts — uses these details automatically."
-            : "Fill this once. Every Setu tool on this device will reuse it — no tool ever asks again."}
+            ? t("bpSavedHint")
+            : t("bpFillOnceHint")}
         </p>
         {!loaded ? (
           <p className="py-6 text-center text-sm text-muted">{t("loading")}</p>

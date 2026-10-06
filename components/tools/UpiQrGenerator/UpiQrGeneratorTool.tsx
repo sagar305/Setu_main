@@ -7,6 +7,7 @@ import { UPIQRCode } from "../UpiQrGenerator/UPIQRCode";
 import { ShareButton } from "@/components/tools/ShareButton";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
+import { useI18n } from "@/lib/i18n";
 
 const SETU_LOGO_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"><rect width="120" height="120" rx="20" fill="#ECEAE3"/><path d="M18 98 L18 56 C18 40 28 31 46 31 L74 31 C92 31 102 40 102 56 L102 98" fill="none" stroke="#26306B" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -22,6 +23,7 @@ const loadImage = (src: string) =>
   });
 
 export function UpiQrGeneratorTool() {
+  const { t } = useI18n();
   const [upiId, setUpiId] = useState("");
   const [amount, setAmount] = useState("");
   const [notes, setNotes] = useState("");
@@ -37,7 +39,7 @@ export function UpiQrGeneratorTool() {
     setUpiId(value);
     if (value.trim()) {
       if (!isValidUPIId(value)) {
-        setUpiIdError("Invalid UPI ID format. Example: name@bankname");
+        setUpiIdError(t("upiInvalidFormat"));
       } else {
         setUpiIdError("");
       }
@@ -173,7 +175,7 @@ export function UpiQrGeneratorTool() {
             {/* UPI ID Input */}
             <div>
               <label className="mb-2 block text-sm font-semibold text-ink">
-                UPI ID <span className="text-red-500">*</span>
+                {t("upiId")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -188,14 +190,14 @@ export function UpiQrGeneratorTool() {
               />
               {upiIdError && <p className="mt-2 text-sm text-red-600">{upiIdError}</p>}
               {isUPIValid && (
-                <p className="mt-2 text-sm text-green-600">✓ Valid UPI ID</p>
+                <p className="mt-2 text-sm text-green-600">✓ {t("upiValid")}</p>
               )}
             </div>
 
             {/* Amount Input */}
             <div>
               <label className="mb-2 block text-sm font-semibold text-ink">
-                Amount (Optional)
+                {t("amountOptional")}
               </label>
               <div className="flex items-center">
                 <span className="mr-2 text-lg font-semibold text-ink">₹</span>
@@ -219,13 +221,13 @@ export function UpiQrGeneratorTool() {
             {/* Notes Input */}
             <div>
               <label className="mb-2 block text-sm font-semibold text-ink">
-                Notes (Optional)
+                {t("notesOptional")}
               </label>
               <input
                 type="text"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Payment reference or description"
+                placeholder={t("ugNotePlaceholder")}
                 maxLength={80}
                 className="w-full rounded-lg border border-muted-line/40 bg-white px-4 py-3 text-base outline-none transition focus:border-indigo focus:ring-indigo/10"
               />
@@ -235,7 +237,7 @@ export function UpiQrGeneratorTool() {
             {/* Logo Picker */}
             <div>
               <label className="mb-2 block text-sm font-semibold text-ink">
-                Logo on QR (Optional)
+                {t("ugLogoOptional")}
               </label>
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-muted-line/40 bg-white p-1.5">
@@ -247,7 +249,7 @@ export function UpiQrGeneratorTool() {
                       className="max-h-full max-w-full object-contain"
                     />
                   ) : (
-                    <span className="text-[10px] text-muted">No logo</span>
+                    <span className="text-[10px] text-muted">{t("ugNoLogo")}</span>
                   )}
                 </div>
 
@@ -270,8 +272,8 @@ export function UpiQrGeneratorTool() {
                 {logo ? (
                   <button
                     onClick={() => setLogo(null)}
-                    title="Remove logo"
-                    aria-label="Remove logo"
+                    title={t("ugRemoveLogo")}
+                    aria-label={t("ugRemoveLogo")}
                     className="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100"
                   >
                     <X className="h-4 w-4 flex-shrink-0" />
@@ -281,12 +283,12 @@ export function UpiQrGeneratorTool() {
                     onClick={() => setLogo(SETU_LOGO_DATA_URL)}
                     className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs font-semibold text-ink transition hover:bg-cream"
                   >
-                    Use Setu Logo
+                    {t("ugUseSetuLogo")}
                   </button>
                 )}
               </div>
               <p className="mt-1 text-xs text-muted">
-                Shown at the center of your QR code. Upload your business logo or remove it.
+                {t("ugLogoHint")}
               </p>
             </div>
           </div>
@@ -297,7 +299,7 @@ export function UpiQrGeneratorTool() {
           <div className="rounded-2xl border border-indigo/15 bg-white p-8 shadow-sm">
             <div className="space-y-6">
               <div>
-                <h3 className="mb-4 text-lg font-semibold text-ink">Your QR Code</h3>
+                <h3 className="mb-4 text-lg font-semibold text-ink">{t("ugYourQr")}</h3>
                 <div className="flex justify-center rounded-lg bg-gray-50 p-8">
                   <div data-qr="upi">
                     <UPIQRCode
@@ -313,18 +315,18 @@ export function UpiQrGeneratorTool() {
               {/* Info Display */}
               <div className="space-y-3 rounded-lg bg-indigo/5 p-4">
                 <div>
-                  <p className="text-xs font-semibold text-muted">UPI ID</p>
+                  <p className="text-xs font-semibold text-muted">{t("upiId")}</p>
                   <p className="text-sm font-medium text-ink">{upiId}</p>
                 </div>
                 {amount && (
                   <div>
-                    <p className="text-xs font-semibold text-muted">Amount</p>
+                    <p className="text-xs font-semibold text-muted">{t("amount")}</p>
                     <p className="text-sm font-medium text-ink">₹{amount}</p>
                   </div>
                 )}
                 {notes && (
                   <div>
-                    <p className="text-xs font-semibold text-muted">Notes</p>
+                    <p className="text-xs font-semibold text-muted">{t("notes")}</p>
                     <p className="text-sm font-medium text-ink">{notes}</p>
                   </div>
                 )}
@@ -337,7 +339,7 @@ export function UpiQrGeneratorTool() {
                   className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-indigo bg-indigo px-4 py-3 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 sm:flex-1"
                 >
                   <Download className="h-4 w-4 flex-shrink-0" />
-                  Download QR
+                  {t("ugDownloadQr")}
                 </button>
                 <button
                   onClick={handleCopyUPI}
@@ -346,17 +348,17 @@ export function UpiQrGeneratorTool() {
                   {copied ? (
                     <>
                       <Check className="h-4 w-4 flex-shrink-0 text-green-600" />
-                      Copied!
+                      {t("copied")}
                     </>
                   ) : (
                     <>
                       <Copy className="h-4 w-4 flex-shrink-0" />
-                      Copy UPI URL
+                      {t("ugCopyUrl")}
                     </>
                   )}
                 </button>
                 <ShareButton
-                  title="UPI QR Code"
+                  title={t("ugQrTitle")}
                   text={`Scan this QR code to pay ${upiId} via UPI`}
                   generateFiles={generateShareFiles}
                   className="w-full whitespace-nowrap px-4 py-3 text-base sm:flex-1"
@@ -369,13 +371,13 @@ export function UpiQrGeneratorTool() {
         {/* Empty State */}
         {!isUPIValid && upiId && (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-8 text-center">
-            <p className="text-sm text-red-700">Please enter a valid UPI ID to generate QR code</p>
+            <p className="text-sm text-red-700">{t("ugInvalidUpi")}</p>
           </div>
         )}
 
         {!upiId && (
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-8 text-center">
-            <p className="text-sm text-amber-700">Enter your UPI ID above to generate a dynamic QR code</p>
+            <p className="text-sm text-amber-700">{t("ugEnterUpiAbove")}</p>
           </div>
         )}
       </div>

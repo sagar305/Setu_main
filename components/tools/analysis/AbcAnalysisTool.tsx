@@ -6,6 +6,10 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 
@@ -36,34 +40,45 @@ const CLASS_CHIP: Record<AbcClass, string> = {
 const BAR_COLOR = "#26306B";
 const LINE_COLOR = "#F2A03D"; // saffron — distinct hue + line shape + legend
 
-const CLASS_CONTROL: Record<AbcClass, string> = {
-  A: "Tight control: review weekly, keep precise stock records, use accurate demand forecasting, and negotiate the best supplier terms — these items drive most of your inventory value.",
-  B: "Moderate control: review monthly, use standard reorder points, and apply normal (not intensive) forecasting effort.",
-  C: "Loose control: review quarterly or less, order in bulk to reduce administrative overhead, and consider simplified or even automated reordering.",
+const CLASS_CONTROL: Record<AbcClass, TKey> = {
+  A: "abcControlA",
+  B: "abcControlB",
+  C: "abcControlC",
 };
-const CLASS_RESTOCK: Record<AbcClass, string> = {
-  A: "Highest — reorder promptly and avoid stockouts; consider safety stock and frequent small orders.",
-  B: "Medium — standard reorder points; review monthly.",
-  C: "Low — bulk order infrequently; simple min/max is enough.",
+const CLASS_RESTOCK: Record<AbcClass, TKey> = {
+  A: "abcRestockA",
+  B: "abcRestockB",
+  C: "abcRestockC",
 };
 
-const SAMPLE: AbcItem[] = [
-  { name: "Industrial Bearing Assembly", annualQty: 1200, unitCost: 45 },
-  { name: "Steel Frame Component", annualQty: 800, unitCost: 60 },
-  { name: "Hydraulic Pump Unit", annualQty: 150, unitCost: 220 },
-  { name: "Control Circuit Board", annualQty: 900, unitCost: 18 },
-  { name: "Rubber Gasket Set", annualQty: 5000, unitCost: 2 },
-  { name: "Motor Housing", annualQty: 300, unitCost: 35 },
-  { name: "Fastener Kit (Mixed)", annualQty: 8000, unitCost: 0.8 },
-  { name: "Sensor Module", annualQty: 600, unitCost: 22 },
-  { name: "Packaging Box (Standard)", annualQty: 12000, unitCost: 0.5 },
-  { name: "Lubricant (Industrial, 5L)", annualQty: 400, unitCost: 15 },
-  { name: "Wiring Harness", annualQty: 700, unitCost: 12 },
-  { name: "Cable Ties (Bulk Pack)", annualQty: 20000, unitCost: 0.1 },
-].map((s) => ({ id: generateLocalId(), ...s }));
+/** The demo inventory behind "load sample inventory", named in the reader's
+ *  language because every name lands in an editable field. */
+const SAMPLE: { key: TKey; annualQty: number; unitCost: number }[] = [
+  { key: "abcSampleBearing", annualQty: 1200, unitCost: 45 },
+  { key: "abcSampleFrame", annualQty: 800, unitCost: 60 },
+  { key: "abcSamplePump", annualQty: 150, unitCost: 220 },
+  { key: "abcSampleBoard", annualQty: 900, unitCost: 18 },
+  { key: "abcSampleGasket", annualQty: 5000, unitCost: 2 },
+  { key: "abcSampleHousing", annualQty: 300, unitCost: 35 },
+  { key: "abcSampleFastener", annualQty: 8000, unitCost: 0.8 },
+  { key: "abcSampleSensor", annualQty: 600, unitCost: 22 },
+  { key: "abcSampleBox", annualQty: 12000, unitCost: 0.5 },
+  { key: "abcSampleLubricant", annualQty: 400, unitCost: 15 },
+  { key: "abcSampleHarness", annualQty: 700, unitCost: 12 },
+  { key: "abcSampleCableTies", annualQty: 20000, unitCost: 0.1 },
+];
+
+const sampleItems = (lang: LanguageCode): AbcItem[] =>
+  SAMPLE.map(({ key, annualQty, unitCost }) => ({
+    id: generateLocalId(),
+    name: translate(lang, key),
+    annualQty,
+    unitCost,
+  }));
 
 export function AbcAnalysisTool() {
   const { code: currency } = usePreferredCurrency();
+  const { t, lang } = useI18n();
   const workspace = useFinanceWorkspace("abc-analysis");
   const [state, setState] = useLocalStore<AbcState>("setu-abc-analysis-v2", {
     companyName: "",
@@ -123,7 +138,7 @@ export function AbcAnalysisTool() {
           `${r.sharePct.toFixed(1)}%`,
           `${r.cumPct.toFixed(1)}%`,
           r.cls,
-          CLASS_RESTOCK[r.cls],
+          t(CLASS_RESTOCK[r.cls]),
         ])
       )
     );
@@ -134,7 +149,7 @@ export function AbcAnalysisTool() {
     const classRows = (["A", "B", "C"] as const)
       .map((c) => {
         const pct = analysis.total > 0 ? (analysis.values[c] / analysis.total) * 100 : 0;
-        return `<tr><td>Class ${c}</td><td class="r">${analysis.counts[c]}</td><td class="r">${money(analysis.values[c])}</td><td class="r">${pct.toFixed(1)}%</td></tr>`;
+        return `<tr><td>${esc(fill(t("abcClassLabel"), { cls: c }))}</td><td class="r">${analysis.counts[c]}</td><td class="r">${money(analysis.values[c])}</td><td class="r">${pct.toFixed(1)}%</td></tr>`;
       })
       .join("");
     const itemRows = analysis.rows
@@ -143,9 +158,9 @@ export function AbcAnalysisTool() {
           `<tr><td class="r">${i + 1}</td><td>${esc(r.name)}</td><td class="r">${money(r.value)}</td><td class="r">${r.sharePct.toFixed(1)}%</td><td class="r">${r.cumPct.toFixed(1)}%</td><td class="c">${r.cls}</td></tr>`
       )
       .join("");
-    const html = `<!doctype html><html><head><title>ABC Analysis</title><style>
+    const html = `<!doctype html><html><head><title>${esc(t("abcPdfTitle"))}</title><style>
       *{margin:0;padding:0;box-sizing:border-box}
-      body{font-family:Georgia,"Times New Roman",serif;color:#1a1a2e;padding:40px 48px}
+      body{font-family:Georgia,"Times New Roman","Noto Serif",serif,sans-serif;color:#1a1a2e;padding:40px 48px}
       h1{font-size:20px;color:#26306B}h2{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#8a8a9a;margin:24px 0 8px}
       .biz{font-size:13px;color:#55556a;margin-bottom:4px}
       table{width:100%;border-collapse:collapse;font-size:12px}
@@ -153,12 +168,12 @@ export function AbcAnalysisTool() {
       td{padding:5px 6px;border-bottom:1px solid #ececf2}
       .r{text-align:right}.c{text-align:center;font-weight:bold}
     </style></head><body>
-      <h1>Inventory ABC Analysis</h1>
-      <p class="biz">${esc(state.companyName || "Your Business")} · ${new Date().toLocaleDateString("en-IN")}</p>
-      <h2>Class summary</h2>
-      <table><thead><tr><th>Class</th><th class="r">Items</th><th class="r">Usage value</th><th class="r">Share</th></tr></thead><tbody>${classRows}</tbody></table>
-      <h2>Item ranking &amp; restocking priority</h2>
-      <table><thead><tr><th>Rank</th><th>Item</th><th class="r">Usage value</th><th class="r">% of total</th><th class="r">Cumulative</th><th class="c">Class</th></tr></thead><tbody>${itemRows}</tbody></table>
+      <h1>${esc(t("abcPdfTitle"))}</h1>
+      <p class="biz">${esc(state.companyName || t("abcYourBusiness"))} · ${new Date().toLocaleDateString(intlLocaleFor(lang))}</p>
+      <h2>${esc(t("abcClassSummary"))}</h2>
+      <table><thead><tr><th>${esc(t("abcClassCol"))}</th><th class="r">${esc(t("abcItemsCol"))}</th><th class="r">${esc(t("abcUsageValue"))}</th><th class="r">${esc(t("abcShareCol"))}</th></tr></thead><tbody>${classRows}</tbody></table>
+      <h2>${esc(t("abcRankingHeading"))}</h2>
+      <table><thead><tr><th>${esc(t("abcRank"))}</th><th>${esc(t("abcItemCol"))}</th><th class="r">${esc(t("abcUsageValue"))}</th><th class="r">${esc(t("abcPctOfTotal"))}</th><th class="r">${esc(t("abcCumulativePct"))}</th><th class="c">${esc(t("abcClassCol"))}</th></tr></thead><tbody>${itemRows}</tbody></table>
       <script>window.onload=()=>window.print()</script>
     </body></html>`;
     const win = window.open("", "_blank");
@@ -173,7 +188,7 @@ export function AbcAnalysisTool() {
     <div className="space-y-6">
       <WorkspaceBanner
         connection={workspace}
-        message="Load your product list from the workspace, then fill in each item's annual usage."
+        message={t("abcConnectHint")}
       />
 
       <Card>
@@ -181,31 +196,31 @@ export function AbcAnalysisTool() {
           <TextInput
             value={state.companyName}
             onChange={(e) => setState((s) => ({ ...s, companyName: e.target.value }))}
-            placeholder="Company name"
+            placeholder={t("abcCompanyPlaceholder")}
           />
           <div className="flex flex-wrap gap-2">
-            <SecondaryButton onClick={() => setItems(SAMPLE.map((s) => ({ ...s, id: generateLocalId() })))}>
-              Load sample inventory
+            <SecondaryButton onClick={() => setItems(sampleItems(lang))}>
+              {t("abcLoadSample")}
             </SecondaryButton>
             <SecondaryButton onClick={() => setItems([blankItem(), blankItem(), blankItem()])}>
-              Reset
+              {t("resetLabel")}
             </SecondaryButton>
             {workspace.connected ? (
-              <SecondaryButton onClick={pullProducts}>↻ Pull products</SecondaryButton>
+              <SecondaryButton onClick={pullProducts}>↻ {t("abcPullProducts")}</SecondaryButton>
             ) : null}
           </div>
         </div>
       </Card>
 
       <Card>
-        <h2 className="mb-4 text-lg font-bold text-ink">Inventory items</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("abcInventoryItems")}</h2>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="py-2 pr-3">Item name</th>
-                <th className="py-2 pr-3 text-right">Annual qty used/sold</th>
-                <th className="py-2 pr-3 text-right">Unit cost</th>
+                <th className="py-2 pr-3">{t("abcItemName")}</th>
+                <th className="py-2 pr-3 text-right">{t("abcAnnualQty")}</th>
+                <th className="py-2 pr-3 text-right">{t("abcUnitCost")}</th>
                 <th className="py-2" />
               </tr>
             </thead>
@@ -216,7 +231,7 @@ export function AbcAnalysisTool() {
                     <TextInput
                       value={item.name}
                       onChange={(e) => update(item.id, { name: e.target.value })}
-                      placeholder="e.g. Industrial Bearing Assembly"
+                      placeholder={t("abcItemPlaceholder")}
                     />
                   </td>
                   <td className="py-2 pr-3">
@@ -256,16 +271,13 @@ export function AbcAnalysisTool() {
           onClick={() => setItems([...items, blankItem()])}
           className="mt-3 text-sm font-semibold text-indigo hover:underline"
         >
-          + Add item
+          {t("addItem")}
         </button>
       </Card>
 
       {!hasData ? (
         <Card>
-          <p className="text-sm text-muted">
-            Add inventory items with their annual quantity and unit cost (or load the sample) to see
-            your ABC classification, Pareto chart and restocking priorities.
-          </p>
+          <p className="text-sm text-muted">{t("abcEmptyHint")}</p>
         </Card>
       ) : (
         <>
@@ -277,13 +289,17 @@ export function AbcAnalysisTool() {
                 <Card key={cls}>
                   <div className="flex items-center justify-between">
                     <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${CLASS_CHIP[cls]}`}>
-                      Class {cls}
+                      {fill(t("abcClassLabel"), { cls })}
                     </span>
-                    <span className="text-xs text-muted">{analysis.counts[cls]} items</span>
+                    <span className="text-xs text-muted">
+                      {fill(t("abcItemsCount"), { count: analysis.counts[cls] })}
+                    </span>
                   </div>
                   <p className="mt-2 text-3xl font-bold text-ink">{pct.toFixed(0)}%</p>
-                  <p className="text-xs text-muted">of total usage value ({money(analysis.values[cls])})</p>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">{CLASS_CONTROL[cls]}</p>
+                  <p className="text-xs text-muted">
+                    {fill(t("abcOfTotalValue"), { amount: money(analysis.values[cls]) })}
+                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-muted">{t(CLASS_CONTROL[cls])}</p>
                 </Card>
               );
             })}
@@ -292,11 +308,11 @@ export function AbcAnalysisTool() {
           {/* Charts */}
           <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
             <Card>
-              <h2 className="mb-4 text-lg font-bold text-ink">Pareto chart (usage value)</h2>
+              <h2 className="mb-4 text-lg font-bold text-ink">{t("abcPareto")}</h2>
               <ParetoChart rows={analysis.rows} money={money} />
             </Card>
             <Card>
-              <h2 className="mb-4 text-lg font-bold text-ink">Value by class</h2>
+              <h2 className="mb-4 text-lg font-bold text-ink">{t("abcValueByClass")}</h2>
               <ClassPie values={analysis.values} total={analysis.total} money={money} />
             </Card>
           </div>
@@ -304,23 +320,23 @@ export function AbcAnalysisTool() {
           {/* Ranking table */}
           <Card>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-lg font-bold text-ink">Item ranking &amp; restocking priority</h2>
+              <h2 className="text-lg font-bold text-ink">{t("abcRankingHeading")}</h2>
               <div className="flex gap-2">
-                <PrimaryButton onClick={exportPdf}>Export PDF</PrimaryButton>
-                <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+                <PrimaryButton onClick={exportPdf}>{t("abcExportPdf")}</PrimaryButton>
+                <SecondaryButton onClick={exportCsv}>{t("exportCsv")}</SecondaryButton>
               </div>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[720px] text-sm">
                 <thead>
                   <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                    <th className="py-2 pr-3">Rank</th>
-                    <th className="py-2 pr-3">Item</th>
-                    <th className="py-2 pr-3 text-right">Usage value</th>
-                    <th className="py-2 pr-3 text-right">% of total</th>
-                    <th className="py-2 pr-3 text-right">Cumulative %</th>
-                    <th className="py-2 pr-3 text-center">Class</th>
-                    <th className="py-2">Restock priority</th>
+                    <th className="py-2 pr-3">{t("abcRank")}</th>
+                    <th className="py-2 pr-3">{t("abcItemCol")}</th>
+                    <th className="py-2 pr-3 text-right">{t("abcUsageValue")}</th>
+                    <th className="py-2 pr-3 text-right">{t("abcPctOfTotal")}</th>
+                    <th className="py-2 pr-3 text-right">{t("abcCumulativePct")}</th>
+                    <th className="py-2 pr-3 text-center">{t("abcClassCol")}</th>
+                    <th className="py-2">{t("abcRestockPriority")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -336,7 +352,7 @@ export function AbcAnalysisTool() {
                           {row.cls}
                         </span>
                       </td>
-                      <td className="py-2 text-xs text-muted">{CLASS_RESTOCK[row.cls]}</td>
+                      <td className="py-2 text-xs text-muted">{t(CLASS_RESTOCK[row.cls])}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -358,6 +374,7 @@ type Row = {
 };
 
 function ParetoChart({ rows, money }: { rows: Row[]; money: (v: number) => string }) {
+  const { t } = useI18n();
   const W = 800;
   const H = 340;
   const padL = 64;
@@ -379,7 +396,12 @@ function ParetoChart({ rows, money }: { rows: Row[]; money: (v: number) => strin
 
   return (
     <div className="overflow-x-auto">
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[560px]" role="img" aria-label="Pareto chart of usage value by item">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="w-full min-w-[560px]"
+        role="img"
+        aria-label={t("abcParetoAria")}
+      >
         {/* gridlines + left axis (usage value) */}
         {[0, 0.25, 0.5, 0.75, 1].map((t) => (
           <g key={t}>
@@ -412,7 +434,11 @@ function ParetoChart({ rows, money }: { rows: Row[]; money: (v: number) => strin
             fill={BAR_COLOR}
           >
             <title>
-              {r.name}: {money(r.value)} · cumulative {r.cumPct.toFixed(1)}%
+              {fill(t("abcBarTitle"), {
+                name: r.name,
+                value: money(r.value),
+                pct: r.cumPct.toFixed(1),
+              })}
             </title>
           </rect>
         ))}
@@ -422,7 +448,7 @@ function ParetoChart({ rows, money }: { rows: Row[]; money: (v: number) => strin
         {rows.map((r, i) => (
           <circle key={r.id} cx={x(i)} cy={yPct(r.cumPct)} r={4} fill="#fff" stroke={LINE_COLOR} strokeWidth={2}>
             <title>
-              {r.name}: cumulative {r.cumPct.toFixed(1)}%
+              {fill(t("abcLineTitle"), { name: r.name, pct: r.cumPct.toFixed(1) })}
             </title>
           </circle>
         ))}
@@ -444,10 +470,12 @@ function ParetoChart({ rows, money }: { rows: Row[]; money: (v: number) => strin
       </svg>
       <div className="mt-2 flex flex-wrap items-center justify-center gap-5 text-xs text-muted">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-3 w-3 rounded-sm" style={{ background: BAR_COLOR }} /> Usage value
+          <span className="inline-block h-3 w-3 rounded-sm" style={{ background: BAR_COLOR }} />{" "}
+          {t("abcUsageValue")}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-4" style={{ background: LINE_COLOR }} /> Cumulative %
+          <span className="inline-block h-0.5 w-4" style={{ background: LINE_COLOR }} />{" "}
+          {t("abcCumulativePct")}
         </span>
       </div>
     </div>
@@ -463,6 +491,7 @@ function ClassPie({
   total: number;
   money: (v: number) => string;
 }) {
+  const { t } = useI18n();
   const R = 90;
   const cx = 110;
   const cy = 110;
@@ -488,12 +517,16 @@ function ClassPie({
 
   return (
     <div className="flex flex-col items-center gap-4 sm:flex-row">
-      <svg viewBox="0 0 220 220" className="h-48 w-48 shrink-0" role="img" aria-label="Value by class pie chart">
+      <svg viewBox="0 0 220 220" className="h-48 w-48 shrink-0" role="img" aria-label={t("abcPieAria")}>
         {slices.map((s) =>
           s.frac > 0 ? (
             <path key={s.c} d={s.path} fill={CLASS_COLOR[s.c]} stroke="#fff" strokeWidth={2}>
               <title>
-                Class {s.c}: {(s.frac * 100).toFixed(1)}% ({money(values[s.c])})
+                {fill(t("abcSliceTitle"), {
+                  cls: s.c,
+                  pct: (s.frac * 100).toFixed(1),
+                  amount: money(values[s.c]),
+                })}
               </title>
             </path>
           ) : null
@@ -503,7 +536,7 @@ function ClassPie({
         {classes.map((c) => (
           <div key={c} className="flex items-center gap-2">
             <span className="inline-block h-3 w-3 rounded-sm" style={{ background: CLASS_COLOR[c] }} />
-            <span className="font-semibold text-ink">Class {c}</span>
+            <span className="font-semibold text-ink">{fill(t("abcClassLabel"), { cls: c })}</span>
             <span className="text-muted">
               {total > 0 ? ((values[c] / total) * 100).toFixed(1) : "0"}% · {money(values[c])}
             </span>

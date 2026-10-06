@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getToolBySlug, getToolsContent } from "@/lib/content";
 import type { LanguageCode } from "./config";
 import { getLocalizedContent } from "./page-content";
-import { itemLanguageAlternates, itemPathFor, ogLocaleFor } from "./pages";
+import { itemLanguageAlternates, itemPathFor, ogImagesFor, ogLocaleFor } from "./pages";
 
 /**
  * Metadata for one tool's own page, in a given language.
@@ -44,13 +44,13 @@ export function toolMetadata(slug: string, lang: LanguageCode = "en"): Metadata 
       url: path,
       type: "website",
       locale: ogLocaleFor(lang),
-      images: OG_IMAGES,
+      images: ogImagesFor(lang),
     },
     twitter: {
       card: "summary_large_image",
       title: seo.ogTitle ?? seo.title,
       description: seo.ogDescription ?? seo.description,
-      images: OG_IMAGES.map((image) => image.url),
+      images: ogImagesFor(lang).map((image) => image.url),
     },
   };
 }
@@ -71,8 +71,3 @@ export function localizedTool(slug: string, lang: LanguageCode) {
   return getLocalizedContent("tools", lang, english).items[index];
 }
 
-const OG_IMAGES = [
-  { url: "/og/setu-og-image-1200x627.png", width: 1200, height: 627 },
-  { url: "/og/setu-og-image-800x418.png", width: 800, height: 418 },
-  { url: "/og/setu-og-image-500x261.png", width: 500, height: 261 },
-].map((image) => ({ ...image, alt: "Setu Technology - Setu for your business" }));
