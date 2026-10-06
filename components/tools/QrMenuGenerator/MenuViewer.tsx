@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { QrCode } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import { decodeMenu, type QrMenuData } from "@/lib/qrmenu";
 import { resolveShortLink } from "@/lib/toolkit/shortLink";
 import { MenuDisplay } from "./MenuDisplay";
@@ -20,6 +21,7 @@ type ViewerState =
  *             when the whole menu travelled inside the QR code itself.
  */
 export function MenuViewer({ code }: { code?: string } = {}) {
+  const { t } = useI18n();
   const [state, setState] = useState<ViewerState>({ status: "loading" });
   const [attempt, setAttempt] = useState(0);
 
@@ -66,7 +68,7 @@ export function MenuViewer({ code }: { code?: string } = {}) {
   if (state.status === "loading") {
     return (
       <div className="py-24 text-center text-sm text-muted" role="status">
-        Loading menu…
+        {t("qmLoadingMenu")}
       </div>
     );
   }
@@ -76,23 +78,25 @@ export function MenuViewer({ code }: { code?: string } = {}) {
     return <MenuDisplay menu={state.menu} nameHeadingLevel="h1" />;
   }
 
-  const heading =
+  const heading = t(
     state.status === "empty"
-      ? "No menu found"
+      ? "qmEmptyHeading"
       : state.status === "offline"
-        ? "Can\u2019t load this menu"
+        ? "qmOfflineHeading"
         : state.status === "expired"
-          ? "This menu is no longer available"
-          : "This menu link is invalid";
+          ? "qmExpiredHeading"
+          : "qmInvalidHeading"
+  );
 
-  const body =
+  const body = t(
     state.status === "empty"
-      ? "This page shows a restaurant menu when opened from a menu QR code. Scan a menu QR code to see it here."
+      ? "qmEmptyBody"
       : state.status === "offline"
-        ? "This QR code points to a menu stored online, so it needs an internet connection. Check your connection and try again."
+        ? "qmOfflineBody"
         : state.status === "expired"
-          ? "A published menu is removed 180 days after the last time anyone opened it. Ask the restaurant for an up-to-date QR code."
-          : "The QR code or link appears to be damaged or incomplete. Please rescan the QR code, or ask the restaurant for a fresh one.";
+          ? "qmExpiredBody"
+          : "qmInvalidBody"
+  );
 
   return (
     <div className="rounded-2xl border border-muted-line/30 bg-white px-6 py-16 text-center shadow-sm">
@@ -106,14 +110,14 @@ export function MenuViewer({ code }: { code?: string } = {}) {
           onClick={() => setAttempt((n) => n + 1)}
           className="mt-6 inline-block rounded-lg border border-indigo bg-indigo px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
         >
-          Try again
+          {t("qmTryAgain")}
         </button>
       ) : (
         <Link
           href="/tools/qr-menu-generator"
           className="mt-6 inline-block rounded-lg border border-indigo bg-indigo px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
         >
-          Create your own menu QR — free
+          {t("qmCreateOwn")}
         </Link>
       )}
     </div>
