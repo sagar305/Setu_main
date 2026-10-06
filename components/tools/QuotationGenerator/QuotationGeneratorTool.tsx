@@ -26,7 +26,8 @@ import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "
 import { dbPut } from "@/lib/pos/db";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { businessToShare, type SharedDoc } from "@/lib/toolkit/shareLink";
-import { useI18n } from "@/lib/i18n";
+import { useI18n, type DictKey } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
@@ -44,6 +45,14 @@ const blankItem = (): QuotationItem => ({
   rate: 0,
   taxRate: 0,
 });
+
+/** Dictionary key per status; the stored value stays the English word. */
+const STATUS_KEYS: Record<QuotationStatus, DictKey> = {
+  draft: "qgStatusDraft",
+  sent: "qgStatusSent",
+  accepted: "qgStatusAccepted",
+  declined: "qgStatusDeclined",
+};
 
 const STATUS_STYLES: Record<QuotationStatus, string> = {
   draft: "bg-gray-100 text-gray-600",
@@ -186,7 +195,7 @@ export function QuotationGeneratorTool() {
 
     const html = `<!doctype html><html><head><title>${esc(quote.number)}</title><style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: Georgia, "Times New Roman", serif; color: #1a1a2e; padding: 0; }
+      body { font-family: Georgia, "Times New Roman", "Noto Serif", serif, sans-serif; color: #1a1a2e; padding: 0; }
       @page { size: A4; margin: 0; }
       .band { background: #26306B; color: #fff; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-start; }
       .band h1 { font-size: 26px; letter-spacing: 4px; font-weight: normal; }
@@ -214,7 +223,7 @@ export function QuotationGeneratorTool() {
     </style></head><body>
       <div class="band">
         <div>
-          <h1>QUOTATION</h1>
+          <h1>${esc(t("qgQuotationCaps"))}</h1>
           <p class="no">${esc(quote.number)}</p>
         </div>
         <div class="biz">
@@ -227,28 +236,28 @@ export function QuotationGeneratorTool() {
       <div class="wrap">
         <div class="meta">
           <div class="to">
-            <p class="lbl">Quotation for</p>
+            <p class="lbl">${esc(t("qgQuotationFor"))}</p>
             <p class="cn">${esc(quote.clientName)}</p>
             ${quote.clientAddress ? `<p>${esc(quote.clientAddress)}</p>` : ""}
             ${quote.clientPhone ? `<p>${esc(quote.clientPhone)}</p>` : ""}
           </div>
           <div class="dates">
-            <p><span class="lbl">Date</span>&nbsp; ${esc(quote.date)}</p>
-            <span class="valid">Valid until ${esc(quote.validUntil)}</span>
+            <p><span class="lbl">${esc(t("date"))}</span>&nbsp; ${esc(quote.date)}</p>
+            <span class="valid">${esc(fill(t("qgValidUntil"), { date: quote.validUntil }))}</span>
           </div>
         </div>
         <table>
-          <thead><tr><th>#</th><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Tax</th><th class="r">Amount</th></tr></thead>
+          <thead><tr><th>#</th><th>${esc(t("description"))}</th><th class="r">${esc(t("quantity"))}</th><th class="r">${esc(t("rate"))}</th><th class="r">${esc(t("taxLabel"))}</th><th class="r">${esc(t("amount"))}</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
         <div class="totals">
-          <div><span>Subtotal</span><span>${money(quote.subtotal)}</span></div>
-          <div><span>Tax</span><span>${money(quote.taxTotal)}</span></div>
-          <div class="grand"><span>Total</span><span>${money(quote.total)}</span></div>
+          <div><span>${esc(t("subtotal"))}</span><span>${money(quote.subtotal)}</span></div>
+          <div><span>${esc(t("taxLabel"))}</span><span>${money(quote.taxTotal)}</span></div>
+          <div class="grand"><span>${esc(t("total"))}</span><span>${money(quote.total)}</span></div>
         </div>
-        ${quote.notes ? `<div class="notes"><p class="lbl">Notes & terms</p><p>${esc(quote.notes)}</p></div>` : ""}
+        ${quote.notes ? `<div class="notes"><p class="lbl">${esc(t("qgNotesTerms"))}</p><p>${esc(quote.notes)}</p></div>` : ""}
         <div class="foot">
-          <span>This is a quotation, not a tax invoice.</span>
+          <span>${esc(t("qgNotTaxInvoice"))}</span>
           <span>${esc(biz?.name ?? "")}</span>
         </div>
       </div>
@@ -272,15 +281,15 @@ export function QuotationGeneratorTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Auto-fill your business details and pick saved customers and products."
+        message={t("qgConnectHint")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">New quotation</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("qgNew")}</h2>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Quote number">
+            <Field label={t("qgQuoteNumber")}>
               <TextInput value={number} onChange={(e) => setNumber(e.target.value)} />
             </Field>
             <Field label={t("date")}>
@@ -295,12 +304,12 @@ export function QuotationGeneratorTool() {
             </Field>
           </div>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Client</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("client")}</h3>
           <div className="grid gap-4 sm:grid-cols-2">
             {workspace.connected && workspace.customers.length > 0 ? (
-              <Field label="Pick a saved customer">
+              <Field label={t("abPickCustomer")}>
                 <Select value={customerId} onChange={(e) => pickCustomer(e.target.value)}>
-                  <option value="">Type details below…</option>
+                  <option value="">{t("abTypeDetails")}</option>
                   {workspace.customers.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
@@ -309,7 +318,7 @@ export function QuotationGeneratorTool() {
                 </Select>
               </Field>
             ) : null}
-            <Field label="Client name *">
+            <Field label={t("qgClientNameReq")}>
               <TextInput
                 value={clientName}
                 onChange={(e) => {
@@ -326,7 +335,7 @@ export function QuotationGeneratorTool() {
             </Field>
           </div>
 
-          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Items</h3>
+          <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("items")}</h3>
           <div className="space-y-3">
             {items.map((item) => (
               <div
@@ -336,7 +345,7 @@ export function QuotationGeneratorTool() {
                 {workspace.connected && workspace.products.length > 0 ? (
                   <Field label={t("product")}>
                     <Select value="" onChange={(e) => e.target.value && pickProduct(item.id, e.target.value)}>
-                      <option value="">Choose…</option>
+                      <option value="">{t("chooseEllipsis")}</option>
                       {workspace.products.map((p) => (
                         <option key={p.id} value={p.id}>
                           {p.name}
@@ -366,7 +375,7 @@ export function QuotationGeneratorTool() {
                     onChange={(e) => updateItem(item.id, { rate: Number(e.target.value) || 0 })}
                   />
                 </Field>
-                <Field label="Tax %">
+                <Field label={t("taxPct")}>
                   <NumberInput
                     min={0}
                     value={item.taxRate || ""}
@@ -379,7 +388,7 @@ export function QuotationGeneratorTool() {
                   disabled={items.length === 1}
                   className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
             ))}
@@ -389,11 +398,11 @@ export function QuotationGeneratorTool() {
           </SecondaryButton>
 
           <div className="mt-4">
-            <Field label="Notes & terms">
+            <Field label={t("qgNotesTerms")}>
               <TextArea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g. 50% advance, delivery within 7 days, prices valid till date above."
+                placeholder={t("qgNotesPlaceholder")}
               />
             </Field>
           </div>
@@ -407,28 +416,28 @@ export function QuotationGeneratorTool() {
             </div>
             <div className="flex gap-2">
               <SecondaryButton onClick={() => printQuote()} disabled={!canSave}>
-                Print / PDF
+                {t("qgPrintPdf")}
               </SecondaryButton>
               <SecondaryButton
                 onClick={() => setSharing(toShareDoc(buildQuotation()))}
                 disabled={!canSave}
               >
-                Share link
+                {t("qgShareLink")}
               </SecondaryButton>
               <PrimaryButton onClick={saveQuote} disabled={!canSave}>
-                Save quotation
+                {t("qgSave")}
               </PrimaryButton>
             </div>
           </div>
-          {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Quotation saved ✓</p> : null}
+          {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">{t("qgSaved")} ✓</p> : null}
         </Card>
 
         <Card className="h-fit">
-          <h2 className="mb-4 text-lg font-bold text-ink">Saved quotations</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("qgSavedList")}</h2>
           {sorted.length === 0 ? (
             <EmptyState
-              title="No quotations yet"
-              subtitle="Saved quotes appear here with their status — draft, sent, accepted or declined."
+              title={t("qgNoneTitle")}
+              subtitle={t("qgNoneHint")}
             />
           ) : (
             <div className="space-y-3">
@@ -444,7 +453,7 @@ export function QuotationGeneratorTool() {
                     <span
                       className={`rounded-full px-2.5 py-1 text-xs font-semibold ${STATUS_STYLES[q.status]}`}
                     >
-                      {q.status}
+                      {t(STATUS_KEYS[q.status])}
                     </span>
                   </div>
                   <p className="mt-1 text-sm font-bold text-ink">{formatMoney(q.total, currency)}</p>
@@ -453,11 +462,11 @@ export function QuotationGeneratorTool() {
                       {t("print")}
                     </button>
                     <button type="button" className="text-indigo" onClick={() => setSharing(toShareDoc(q))}>
-                      Share
+                      {t("share")}
                     </button>
                     {q.status === "draft" ? (
                       <button type="button" className="text-indigo" onClick={() => setStatus(q, "sent")}>
-                        Mark sent
+                        {t("qgMarkSent")}
                       </button>
                     ) : null}
                     {q.status === "sent" ? (
@@ -467,14 +476,14 @@ export function QuotationGeneratorTool() {
                           className="text-emerald-600"
                           onClick={() => setStatus(q, "accepted")}
                         >
-                          Accepted
+                          {t("qgMarkAccepted")}
                         </button>
                         <button
                           type="button"
                           className="text-red-500"
                           onClick={() => setStatus(q, "declined")}
                         >
-                          Declined
+                          {t("qgMarkDeclined")}
                         </button>
                       </>
                     ) : null}
@@ -491,9 +500,16 @@ export function QuotationGeneratorTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete quotation?"
-        message={deleting ? `Delete ${deleting.number} for ${deleting.clientName}?` : ""}
-        confirmLabel="Delete"
+        title={t("qgDeleteTitle")}
+        message={
+          deleting
+            ? fill(t("qgDeleteMessage"), {
+                number: deleting.number,
+                name: deleting.clientName,
+              })
+            : ""
+        }
+        confirmLabel={t("delete")}
         onConfirm={async () => {
           if (deleting) await remove(deleting.id);
           setDeleting(null);
@@ -505,7 +521,7 @@ export function QuotationGeneratorTool() {
         open={sharing !== null}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Share quotation"
+        title={t("qgShareTitle")}
         onSaveUpiDefault={saveUpiDefault}
       />
 
