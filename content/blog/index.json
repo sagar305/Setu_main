@@ -72,6 +72,14 @@
   },
   "posts": [
                 {
+                  "slug": "setu-tools-vs-urbanpiper-2026",
+                  "title": "Setu vs UrbanPiper: Do You Need Aggregator Middleware in 2026?",
+                  "excerpt": "UrbanPiper does not publish platform pricing, and its Prime POS is listed near ₹8,475 a year on a software marketplace. Setu's browser POS and aggregator calculators are free, and have no Swiggy or Zomato integration at all. Here is which you need.",
+                  "date": "2026-10-06",
+                  "category": "Aggregator Ops",
+                  "thumbnail": "/blog/thumbnails/listing/setu-tools-vs-urbanpiper-2026.jpeg"
+                },
+                {
                   "slug": "setu-billing-tools-vs-mybillbook-2026",
                   "title": "Setu vs myBillBook: Counter Billing and Stock for a Small Shop in 2026",
                   "excerpt": "myBillBook puts billing, stock and khata in one paid account, listed from ₹3,490 a year with a trial but no permanently free tier. Setu's billing, stock register and ledger tools are free with no cap. Here is how to tell which trade fits your shop.",
