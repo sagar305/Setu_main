@@ -9,6 +9,8 @@
 
 import LZString from "lz-string";
 import type { Business } from "@/lib/pos/types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 
 export const VIEW_PATH = "/view";
 
@@ -19,7 +21,9 @@ export const VIEW_PATH = "/view";
  */
 export function businessToShare(business: Business | null, fallbackCurrency = "INR"): ShareBusiness {
   return {
-    n: business?.name || "Business",
+    // Left empty rather than filled with the word "Business": the viewer is
+    // where a reader is, so it supplies the label in the reader's language.
+    n: business?.name ?? "",
     a: business?.address || undefined,
     p: business?.phone || undefined,
     g: business?.taxNumber || undefined,
@@ -292,33 +296,43 @@ export function buildShareUrl(doc: SharedDoc, origin: string): string {
 // Presentation helpers
 // ---------------------------------------------------------------------------
 
-export function docTitle(doc: SharedDoc): string {
+/**
+ * What this shared document is called.
+ *
+ * Read by both sides of a share: the sender, composing the WhatsApp message,
+ * and the recipient, as the heading of the page they open. Each gets it in
+ * their own language, so the language is a parameter rather than fixed.
+ */
+export function docTitle(doc: SharedDoc, lang: LanguageCode = "en"): string {
+  const t = (key: TKey, no?: string) =>
+    no === undefined ? translate(lang, key) : fill(translate(lang, key), { no });
+
   switch (doc.t) {
     case "inv":
-      return `Invoice ${doc.no}`;
+      return t("svInvoiceNo", doc.no);
     case "quo":
-      return `Quotation ${doc.no}`;
+      return t("svQuotationNo", doc.no);
     case "led":
-      return `Payment reminder`;
+      return t("svPaymentReminder");
     case "apt":
-      return `Appointment`;
+      return t("svAppointment");
     case "fee":
-      return `Fee receipt ${doc.no}`;
+      return t("svFeeReceiptNo", doc.no);
     case "mrk":
-      return `Test result`;
+      return t("svTestResult");
     case "att":
-      return `Attendance report`;
+      return t("svAttendanceReport");
     case "rx":
-      return `Prescription`;
+      return t("svPrescription");
     case "rnt":
-      if (doc.rm?.k === "overdue") return `Overdue — ${doc.no}`;
-      if (doc.rm?.k === "returnDue") return `Return due — ${doc.no}`;
-      if (doc.rm?.k === "dispatch") return `Delivery — ${doc.no}`;
+      if (doc.rm?.k === "overdue") return t("svOverdueNo", doc.no);
+      if (doc.rm?.k === "returnDue") return t("svReturnDueNo", doc.no);
+      if (doc.rm?.k === "dispatch") return t("svDeliveryNo", doc.no);
       return doc.st === "quote"
-        ? `Quotation ${doc.no}`
+        ? t("svQuotationNo", doc.no)
         : doc.st === "settled"
-          ? `Settlement ${doc.no}`
-          : `Booking ${doc.no}`;
+          ? t("svSettlementNo", doc.no)
+          : t("svBookingNo", doc.no);
   }
 }
 
