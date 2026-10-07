@@ -1,4 +1,5 @@
 import { Upload, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import type { BusinessDetails } from "@/lib/types/invoice";
 
 interface BusinessDetailsSectionProps {
@@ -10,6 +11,7 @@ export function BusinessDetailsSection({
   data,
   onChange,
 }: BusinessDetailsSectionProps) {
+  const { t } = useI18n();
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -25,27 +27,27 @@ export function BusinessDetailsSection({
   return (
     <div>
       <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-        Business Details
+        {t("igBusinessDetails")}
       </h3>
 
       <div className="space-y-4">
         {/* Logo Upload */}
         <div>
           <label className="block text-sm font-semibold text-ink mb-2">
-            Business Logo (Optional)
+            {t("igBusinessLogo")}
           </label>
           {data.logo ? (
             <div className="relative inline-block">
               <img
                 src={data.logo}
-                alt="Business logo"
+                alt={t("igBusinessLogoAlt")}
                 className="h-24 w-24 rounded-lg border border-muted-line/40 object-cover"
               />
               <button
                 type="button"
                 onClick={() => onChange({ logo: undefined })}
                 className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white transition hover:bg-red-600"
-                aria-label="Remove logo"
+                aria-label={t("igRemoveLogo")}
               >
                 <X className="h-3 w-3" />
               </button>
@@ -54,8 +56,8 @@ export function BusinessDetailsSection({
             <label className="flex cursor-pointer items-center gap-3 rounded-xl border-2 border-dashed border-muted-line/40 bg-cream/50 px-6 py-8 transition hover:border-indigo hover:bg-indigo/5">
               <Upload className="h-5 w-5 text-muted-warm" />
               <div>
-                <p className="text-sm font-semibold text-ink">Click to upload logo</p>
-                <p className="text-xs text-muted-warm">PNG, JPG up to 5MB</p>
+                <p className="text-sm font-semibold text-ink">{t("igUploadLogo")}</p>
+                <p className="text-xs text-muted-warm">{t("igUploadHint")}</p>
               </div>
               <input
                 type="file"
@@ -67,19 +69,19 @@ export function BusinessDetailsSection({
           )}
         </div>
         <div>
-          <label className="block text-sm font-semibold text-ink">Business Name *</label>
+          <label className="block text-sm font-semibold text-ink">{t("igBusinessNameReq")}</label>
           <input
             type="text"
             value={data.name}
             onChange={(e) => onChange({ name: e.target.value })}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Your Business Name"
+            placeholder={t("igBusinessNamePlaceholder")}
           />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-semibold text-ink">Phone</label>
+            <label className="block text-sm font-semibold text-ink">{t("phone")}</label>
             <input
               type="tel"
               value={data.phone}
@@ -90,7 +92,7 @@ export function BusinessDetailsSection({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-ink">Email</label>
+            <label className="block text-sm font-semibold text-ink">{t("email")}</label>
             <input
               type="email"
               value={data.email}
@@ -102,18 +104,18 @@ export function BusinessDetailsSection({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-ink">Address *</label>
+          <label className="block text-sm font-semibold text-ink">{t("igAddressReq")}</label>
           <textarea
             value={data.address}
             onChange={(e) => onChange({ address: e.target.value })}
             rows={3}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Street, City, State, PIN"
+            placeholder={t("igAddressPlaceholder")}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-ink">GSTIN (Optional)</label>
+          <label className="block text-sm font-semibold text-ink">{t("igGstinOptional")}</label>
           <input
             type="text"
             value={data.gstin || ""}
@@ -122,9 +124,7 @@ export function BusinessDetailsSection({
             placeholder="27AABCT1234H1Z0"
             maxLength={15}
           />
-          <p className="mt-1 text-xs text-muted-warm">
-            Format: 2 digits (state) + 10 chars (PAN) + 3 chars
-          </p>
+          <p className="mt-1 text-xs text-muted-warm">{t("igGstinHint")}</p>
         </div>
       </div>
     </div>

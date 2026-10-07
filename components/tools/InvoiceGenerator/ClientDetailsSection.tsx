@@ -1,4 +1,5 @@
 import type { ClientDetails } from "@/lib/types/invoice";
+import { useI18n } from "@/lib/i18n";
 
 interface ClientDetailsSectionProps {
   data: ClientDetails;
@@ -9,38 +10,39 @@ export function ClientDetailsSection({
   data,
   onChange,
 }: ClientDetailsSectionProps) {
+  const { t } = useI18n();
   return (
     <div>
       <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-        Bill To
+        {t("igBillTo")}
       </h3>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-ink">Client Name *</label>
+          <label className="block text-sm font-semibold text-ink">{t("igClientNameReq")}</label>
           <input
             type="text"
             value={data.name}
             onChange={(e) => onChange({ name: e.target.value })}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Client Business Name"
+            placeholder={t("igClientNamePlaceholder")}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-ink">Address *</label>
+          <label className="block text-sm font-semibold text-ink">{t("igAddressReq")}</label>
           <textarea
             value={data.address}
             onChange={(e) => onChange({ address: e.target.value })}
             rows={3}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Street, City, State, PIN"
+            placeholder={t("igAddressPlaceholder")}
           />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-semibold text-ink">Phone</label>
+            <label className="block text-sm font-semibold text-ink">{t("phone")}</label>
             <input
               type="tel"
               value={data.phone || ""}
@@ -51,7 +53,7 @@ export function ClientDetailsSection({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-ink">Email</label>
+            <label className="block text-sm font-semibold text-ink">{t("email")}</label>
             <input
               type="email"
               value={data.email || ""}
@@ -63,7 +65,7 @@ export function ClientDetailsSection({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-ink">GSTIN (Optional)</label>
+          <label className="block text-sm font-semibold text-ink">{t("igGstinOptional")}</label>
           <input
             type="text"
             value={data.gstin || ""}
@@ -72,9 +74,7 @@ export function ClientDetailsSection({
             placeholder="27AABCT5678H2Z0"
             maxLength={15}
           />
-          <p className="mt-1 text-xs text-muted-warm">
-            Leave empty for B2C invoices
-          </p>
+          <p className="mt-1 text-xs text-muted-warm">{t("igB2cHint")}</p>
         </div>
       </div>
     </div>

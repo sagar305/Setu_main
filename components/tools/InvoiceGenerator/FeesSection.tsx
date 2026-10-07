@@ -2,6 +2,7 @@
 
 import { Plus, Trash2 } from "lucide-react";
 import type { Fee } from "@/lib/types/invoice";
+import { useI18n } from "@/lib/i18n";
 
 interface FeesSectionProps {
   fees: Fee[];
@@ -28,24 +29,25 @@ export function FeesSection({
   onRemoveFee,
   onUpdateFee,
 }: FeesSectionProps) {
+  const { t } = useI18n();
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
-          Fees (Optional)
+          {t("igFeesOptional")}
         </h3>
         <button
           onClick={onAddFee}
           className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-xs font-semibold text-indigo transition hover:bg-indigo/10"
         >
           <Plus className="h-4 w-4" />
-          Add Fee
+          {t("igAddFee")}
         </button>
       </div>
 
       {fees.length === 0 ? (
         <div className="rounded-lg border border-muted-line/20 bg-cream/30 p-4 text-center text-sm text-muted">
-          No fees added. Click "Add Fee" to add shipping, packaging, or other charges.
+          {t("igNoFees")}
         </div>
       ) : (
         <div className="space-y-3 rounded-xl border border-muted-line/20 bg-cream/30 p-4 sm:p-6">
@@ -57,7 +59,7 @@ export function FeesSection({
               {/* Line 1: Fee Name */}
               <div>
                 <label className="mb-2 block text-xs font-semibold text-ink">
-                  Fee Name
+                  {t("igFeeName")}
                 </label>
                 <input
                   type="text"
@@ -65,7 +67,7 @@ export function FeesSection({
                   onChange={(e) =>
                     onUpdateFee(fee.id, { name: e.target.value })
                   }
-                  placeholder="e.g., Shipping, Packaging, Discount"
+                  placeholder={t("igFeeNamePlaceholder")}
                   className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs sm:text-sm text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
                 />
               </div>
@@ -75,7 +77,7 @@ export function FeesSection({
                 {/* Fee Type */}
                 <div className="flex-1">
                   <label className="mb-2 block text-xs font-semibold text-ink">
-                    Type
+                    {t("typeLabel")}
                   </label>
                   <select
                     value={fee.type}
@@ -86,15 +88,15 @@ export function FeesSection({
                     }
                     className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 text-xs sm:text-sm text-ink outline-none transition focus:border-indigo"
                   >
-                    <option value="fixed">Fixed (₹)</option>
-                    <option value="percentage">Percentage (%)</option>
+                    <option value="fixed">{t("igFeeFixed")} (₹)</option>
+                    <option value="percentage">{t("igFeePercentage")} (%)</option>
                   </select>
                 </div>
 
                 {/* Fee Amount */}
                 <div className="flex-1">
                   <label className="mb-2 block text-xs font-semibold text-ink">
-                    Amount
+                    {t("amount")}
                   </label>
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-semibold text-ink flex-shrink-0">
@@ -146,7 +148,7 @@ export function FeesSection({
                 <button
                   onClick={() => onRemoveFee(fee.id)}
                   className="inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-600 transition hover:bg-red-100"
-                  title="Remove fee"
+                  title={t("igRemoveFee")}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>

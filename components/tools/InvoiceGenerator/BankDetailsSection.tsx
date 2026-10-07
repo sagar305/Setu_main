@@ -1,4 +1,5 @@
 import type { BankDetails } from "@/lib/types/invoice";
+import { useI18n } from "@/lib/i18n";
 
 interface BankDetailsSectionProps {
   data: BankDetails | undefined;
@@ -9,12 +10,13 @@ export function BankDetailsSection({
   data = {},
   onChange,
 }: BankDetailsSectionProps) {
+  const { t } = useI18n();
   return (
     <div>
       <div className="space-y-4">
           <div>
             <label className="block text-sm font-semibold text-ink">
-              Account Number
+              {t("igAccountNumber")}
             </label>
             <input
               type="text"
@@ -27,7 +29,7 @@ export function BankDetailsSection({
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-sm font-semibold text-ink">IFSC Code</label>
+              <label className="block text-sm font-semibold text-ink">{t("igIfscCode")}</label>
               <input
                 type="text"
                 value={data.ifsc || ""}
@@ -39,7 +41,7 @@ export function BankDetailsSection({
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-ink">UPI ID</label>
+              <label className="block text-sm font-semibold text-ink">{t("igUpiIdLabel")}</label>
               <input
                 type="text"
                 value={data.upiId || ""}

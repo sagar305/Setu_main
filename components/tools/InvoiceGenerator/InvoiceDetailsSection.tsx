@@ -1,4 +1,7 @@
+"use client";
+
 import type { InvoiceDetails } from "@/lib/types/invoice";
+import { useI18n } from "@/lib/i18n";
 
 interface InvoiceDetailsSectionProps {
   data: InvoiceDetails;
@@ -15,6 +18,7 @@ export function InvoiceDetailsSection({
   data,
   onChange,
 }: InvoiceDetailsSectionProps) {
+  const { t } = useI18n();
   const setDueDate = (days: number) => {
     const date = new Date(data.date);
     date.setDate(date.getDate() + days);
@@ -24,13 +28,13 @@ export function InvoiceDetailsSection({
   return (
     <div>
       <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-        Invoice Details
+        {t("igInvoiceDetails")}
       </h3>
 
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-semibold text-ink">Invoice Number *</label>
+            <label className="block text-sm font-semibold text-ink">{t("igInvoiceNumberReq")}</label>
             <input
               type="text"
               value={data.number}
@@ -41,20 +45,20 @@ export function InvoiceDetailsSection({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-ink">PO Number</label>
+            <label className="block text-sm font-semibold text-ink">{t("igPoNumber")}</label>
             <input
               type="text"
               value={data.poNumber || ""}
               onChange={(e) => onChange({ poNumber: e.target.value })}
               className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-              placeholder="Optional"
+              placeholder={t("igOptional")}
             />
           </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="block text-sm font-semibold text-ink">Date *</label>
+            <label className="block text-sm font-semibold text-ink">{t("igDateReq")}</label>
             <input
               type="date"
               value={data.date}
@@ -75,7 +79,7 @@ export function InvoiceDetailsSection({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-ink">Due Date</label>
+            <label className="block text-sm font-semibold text-ink">{t("igDueDate")}</label>
             <input
               type="date"
               value={data.dueDate}
@@ -87,7 +91,7 @@ export function InvoiceDetailsSection({
 
         <div>
           <label className="block text-sm font-semibold text-ink mb-2">
-            Due Date Presets
+            {t("igDueDatePresets")}
           </label>
           <div className="flex gap-2">
             {DUE_DATE_PRESETS.map(({ label, days }) => (
@@ -112,13 +116,13 @@ export function InvoiceDetailsSection({
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-ink">E-way Bill Number</label>
+          <label className="block text-sm font-semibold text-ink">{t("igEwayBill")}</label>
           <input
             type="text"
             value={data.ewayBillNumber || ""}
             onChange={(e) => onChange({ ewayBillNumber: e.target.value })}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Optional - for goods above threshold"
+            placeholder={t("igEwayHint")}
           />
         </div>
       </div>

@@ -16,9 +16,12 @@ import { ShareButton } from "@/components/tools/ShareButton";
 import { useInvoiceData } from "@/lib/hooks/useInvoiceData";
 import { exportInvoiceToPdf, generateInvoicePdfBlob } from "@/lib/pdf/exportInvoiceToPdf";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 export function InvoiceGeneratorTool() {
+  const { t } = useI18n();
   const {
     data,
     isLoaded,
@@ -140,14 +143,14 @@ export function InvoiceGeneratorTool() {
     try {
       const exportElement = getExportElement();
       if (!exportElement) {
-        throw new Error("Invoice preview not found. Please try again.");
+        throw new Error(t("igErrNoPreview"));
       }
 
       await exportInvoiceToPdf(data, exportElement);
       // The invoice is on their disk: the cycle is finished.
       review.complete();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to export PDF");
+      setError(err instanceof Error ? err.message : t("igErrExport"));
     } finally {
       setIsExporting(false);
     }
@@ -181,7 +184,7 @@ export function InvoiceGeneratorTool() {
   };
 
   const handleReset = () => {
-    if (confirm("Are you sure you want to reset the entire invoice? This cannot be undone.")) {
+    if (confirm(t("igResetConfirm"))) {
       reset();
       setError(null);
     }
@@ -190,12 +193,12 @@ export function InvoiceGeneratorTool() {
   const generateShareFiles = async () => {
     const exportElement = getExportElement();
     if (!exportElement) {
-      throw new Error("Could not find the invoice to share. Please try again.");
+      throw new Error(t("igErrShareFind"));
     }
 
     const pdfBlob = await generateInvoicePdfBlob(data, exportElement);
     if (!pdfBlob || pdfBlob.size === 0) {
-      throw new Error("Could not generate the invoice PDF. Please try again.");
+      throw new Error(t("igErrSharePdf"));
     }
 
     const fileName = `Invoice-${data.invoiceDetails.number || "draft"}.pdf`;
@@ -209,7 +212,7 @@ export function InvoiceGeneratorTool() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mb-2 inline-block h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-indigo" />
-          <p className="text-muted">Loading invoice...</p>
+          <p className="text-muted">{t("igLoading")}</p>
         </div>
       </div>
     );
@@ -232,10 +235,10 @@ export function InvoiceGeneratorTool() {
               onClick={handlePrint}
               disabled={!hasValidItems}
               className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
-              title="Print invoice"
+              title={t("igPrintTitle")}
             >
               <Printer className="h-4 w-4" />
-              Print
+              {t("igPrint")}
             </button>
 
             <button
@@ -245,10 +248,10 @@ export function InvoiceGeneratorTool() {
               }}
               disabled={!hasValidItems}
               className="inline-flex items-center gap-2 rounded-lg border border-orange-200 bg-orange-50 px-4 py-2 font-semibold text-orange-600 transition hover:border-orange-400 hover:bg-orange-100 disabled:cursor-not-allowed disabled:opacity-50"
-              title="Print invoice and clear unlocked fields for next invoice"
+              title={t("igPrintNextTitle")}
             >
               <Printer className="h-4 w-4" />
-              Print & Next
+              {t("igPrintNext")}
             </button>
 
             <button
@@ -256,12 +259,15 @@ export function InvoiceGeneratorTool() {
               className="inline-flex items-center gap-2 rounded-lg border border-muted-line/40 bg-white px-4 py-2 font-semibold text-ink transition hover:bg-cream"
             >
               <RotateCcw className="h-4 w-4" />
-              Reset All
+              {t("igResetAll")}
             </button>
 
             <ShareButton
-              title={`Invoice ${data.invoiceDetails.number}`}
-              text={`Invoice #${data.invoiceDetails.number} from ${data.businessDetails.name}`}
+              title={fill(t("igShareTitle"), { no: data.invoiceDetails.number })}
+              text={fill(t("igShareText"), {
+                no: data.invoiceDetails.number,
+                business: data.businessDetails.name,
+              })}
               invoiceNumber={data.invoiceDetails.number}
               generateFiles={generateShareFiles}
             />
@@ -275,12 +281,12 @@ export function InvoiceGeneratorTool() {
             {showPreview ? (
               <>
                 <EyeOff className="h-4 w-4" />
-                <span className="hidden sm:inline">Hide Preview</span>
+                <span className="hidden sm:inline">{t("igHidePreview")}</span>
               </>
             ) : (
               <>
                 <Eye className="h-4 w-4" />
-                <span className="hidden sm:inline">Show Preview</span>
+                <span className="hidden sm:inline">{t("igShowPreview")}</span>
               </>
             )}
           </button>
@@ -293,7 +299,7 @@ export function InvoiceGeneratorTool() {
             <div className="rounded-2xl border border-indigo/15 bg-white shadow-sm overflow-hidden">
               {/* Business Details */}
               <AccordionSection
-                title="Business Details"
+                title={t("igBusinessDetails")}
                 icon={<Building2 className="h-5 w-5" />}
                 isOpen={openSections.business}
                 onToggle={() => toggleSection("business")}
@@ -308,7 +314,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Client Details */}
               <AccordionSection
-                title="Bill To"
+                title={t("igBillTo")}
                 icon={<Users className="h-5 w-5" />}
                 isOpen={openSections.client}
                 onToggle={() => toggleSection("client")}
@@ -323,7 +329,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Invoice Details */}
               <AccordionSection
-                title="Invoice Details"
+                title={t("igInvoiceDetails")}
                 icon={<FileText className="h-5 w-5" />}
                 isOpen={openSections.invoice}
                 onToggle={() => toggleSection("invoice")}
@@ -338,7 +344,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Line Items */}
               <AccordionSection
-                title="Line Items"
+                title={t("igLineItems")}
                 icon={<ShoppingCart className="h-5 w-5" />}
                 isOpen={openSections.items}
                 onToggle={() => toggleSection("items")}
@@ -357,7 +363,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Fees */}
               <AccordionSection
-                title="Fees"
+                title={t("igFees")}
                 icon={<Banknote className="h-5 w-5" />}
                 isOpen={openSections.fees}
                 onToggle={() => toggleSection("fees")}
@@ -374,7 +380,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Bank Details */}
               <AccordionSection
-                title="Bank & Payment"
+                title={t("igBankPayment")}
                 icon={<Banknote className="h-5 w-5" />}
                 isOpen={openSections.bank}
                 onToggle={() => toggleSection("bank")}
@@ -389,7 +395,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Notes & Terms */}
               <AccordionSection
-                title="Notes & Terms"
+                title={t("igNotesTerms")}
                 icon={<BookOpen className="h-5 w-5" />}
                 isOpen={openSections.notes}
                 onToggle={() => toggleSection("notes")}
@@ -406,7 +412,7 @@ export function InvoiceGeneratorTool() {
 
               {/* Template */}
               <AccordionSection
-                title="Template & Brand"
+                title={t("igTemplateBrand")}
                 icon={<Palette className="h-5 w-5" />}
                 isOpen={openSections.template}
                 onToggle={() => toggleSection("template")}
@@ -447,7 +453,7 @@ export function InvoiceGeneratorTool() {
           <div className="lg:hidden">
             <div className="rounded-2xl border border-indigo/15 bg-white p-6 shadow-sm sm:p-8">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-                Preview
+                {t("igPreview")}
               </h3>
               <div
                 data-preview="mobile"

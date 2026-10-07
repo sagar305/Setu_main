@@ -1,3 +1,8 @@
+"use client";
+
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
+
 interface NotesAndTermsSectionProps {
   notes: string;
   terms: string;
@@ -5,12 +10,9 @@ interface NotesAndTermsSectionProps {
   onTermsChange: (terms: string) => void;
 }
 
-const TERMS_TEMPLATES = [
-  "Payment due within 15 days",
-  "Payment due upon receipt",
-  "Payment due within 30 days. Late payment fee of 1.5% per month applies.",
-  "Please make payment to UPI ID or Bank Account provided above",
-];
+// The chosen wording goes into the invoice the customer reads, so the
+// templates are offered in the language the invoice is being written in.
+const TERMS_TEMPLATES: TKey[] = ["igTerm1", "igTerm2", "igTerm3", "igTerm4"];
 
 export function NotesAndTermsSection({
   notes,
@@ -18,28 +20,29 @@ export function NotesAndTermsSection({
   onNotesChange,
   onTermsChange,
 }: NotesAndTermsSectionProps) {
+  const { t } = useI18n();
   return (
     <div>
       <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-        Notes & Terms
+        {t("igNotesTerms")}
       </h3>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-ink">Notes</label>
+          <label className="block text-sm font-semibold text-ink">{t("notes")}</label>
           <textarea
             value={notes}
             onChange={(e) => onNotesChange(e.target.value)}
             rows={3}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Thank you for your business! Any special notes here..."
+            placeholder={t("igNotesPlaceholder")}
           />
         </div>
 
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label className="block text-sm font-semibold text-ink">
-              Terms & Conditions
+              {t("igTermsConditions")}
             </label>
           </div>
           <textarea
@@ -47,22 +50,26 @@ export function NotesAndTermsSection({
             onChange={(e) => onTermsChange(e.target.value)}
             rows={3}
             className="mt-2 w-full rounded-xl border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus-within:border-indigo"
-            placeholder="Payment terms, conditions, late fees, etc."
+            placeholder={t("igTermsPlaceholder")}
           />
 
           <div className="mt-3">
-            <p className="mb-2 text-xs font-semibold text-muted-warm">Quick Templates:</p>
+            <p className="mb-2 text-xs font-semibold text-muted-warm">{t("igQuickTemplates")}</p>
             <div className="flex flex-wrap gap-2">
-              {TERMS_TEMPLATES.map((template) => (
-                <button
-                  key={template}
-                  type="button"
-                  onClick={() => onTermsChange(template)}
-                  className="rounded-full border border-muted-line/40 bg-cream px-3 py-1 text-xs text-muted transition hover:border-indigo hover:bg-indigo/5"
-                >
-                  {template.substring(0, 25)}...
-                </button>
-              ))}
+              {TERMS_TEMPLATES.map((key) => {
+                const text = t(key);
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => onTermsChange(text)}
+                    title={text}
+                    className="rounded-full border border-muted-line/40 bg-cream px-3 py-1 text-xs text-muted transition hover:border-indigo hover:bg-indigo/5"
+                  >
+                    {text.length > 25 ? `${text.slice(0, 25)}…` : text}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

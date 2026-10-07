@@ -1,5 +1,8 @@
 import { formatCurrency } from "@/lib/format";
 import { amountInWordsIndian, calculateLineItem, calculateTotals } from "@/lib/invoice";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { UPIQRCode } from "../UPIQRCode";
 import type { InvoiceData } from "@/lib/types/invoice";
 
@@ -8,6 +11,13 @@ interface ModernTemplateProps {
 }
 
 export function ModernTemplate({ data }: ModernTemplateProps) {
+  const { t, lang } = useI18n();
+  const fmtDate = (iso: string) =>
+    new Date(iso).toLocaleDateString(intlLocaleFor(lang), {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   const totals = calculateTotals(data.lineItems, data.fees, data.taxMode);
   const amountWords = amountInWordsIndian(totals.grandTotal);
 
@@ -18,13 +28,13 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {data.businessDetails.logo && (
           <img
             src={data.businessDetails.logo}
-            alt="Business logo"
+            alt={t("igBusinessLogoAlt")}
             className="h-20 w-20 rounded-lg object-cover"
           />
         )}
         <div>
           <div className="text-3xl font-bold">{data.businessDetails.name}</div>
-          <div className="mt-2 opacity-90">Professional Invoice</div>
+          <div className="mt-2 opacity-90">{t("igDocProfessional")}</div>
         </div>
       </div>
 
@@ -32,29 +42,17 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* Invoice Meta */}
         <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           <div>
-            <div className="text-xs font-semibold opacity-60">Invoice #</div>
+            <div className="text-xs font-semibold opacity-60">{t("igDocInvoiceHash")}</div>
             <div className="mt-1 text-lg font-bold">{data.invoiceDetails.number}</div>
           </div>
           <div>
-            <div className="text-xs font-semibold opacity-60">Date</div>
-            <div className="mt-1 text-lg font-bold">
-              {new Date(data.invoiceDetails.date).toLocaleDateString("en-IN", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </div>
+            <div className="text-xs font-semibold opacity-60">{t("date")}</div>
+            <div className="mt-1 text-lg font-bold">{fmtDate(data.invoiceDetails.date)}</div>
           </div>
           {data.invoiceDetails.dueDate && (
             <div>
-              <div className="text-xs font-semibold opacity-60">Due Date</div>
-              <div className="mt-1 text-lg font-bold">
-                {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </div>
+              <div className="text-xs font-semibold opacity-60">{t("igDueDate")}</div>
+              <div className="mt-1 text-lg font-bold">{fmtDate(data.invoiceDetails.dueDate)}</div>
             </div>
           )}
           {data.invoiceDetails.poNumber && (
@@ -68,7 +66,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         {/* From/To */}
         <div className="mb-8 grid grid-cols-2 gap-12">
           <div>
-            <div className="mb-3 text-xs font-bold uppercase opacity-60">From</div>
+            <div className="mb-3 text-xs font-bold uppercase opacity-60">{t("igDocFrom")}</div>
             <div className="space-y-1 text-sm">
               <div className="font-bold text-lg">{data.businessDetails.name}</div>
               <div>{data.businessDetails.address}</div>
@@ -79,7 +77,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
           </div>
 
           <div>
-            <div className="mb-3 text-xs font-bold uppercase opacity-60">Bill To</div>
+            <div className="mb-3 text-xs font-bold uppercase opacity-60">{t("igDocBillTo")}</div>
             <div className="space-y-1 text-sm">
               <div className="font-bold text-lg">{data.clientDetails.name}</div>
               <div>{data.clientDetails.address}</div>
@@ -96,12 +94,12 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
             <tr
               style={{ backgroundColor: data.brandColor + "10", borderTopWidth: "2px", borderBottomWidth: "2px" }}
             >
-              <th className="px-4 py-3 text-left font-bold">Item Description</th>
-              <th className="px-4 py-3 text-center font-bold">Qty</th>
-              <th className="px-4 py-3 text-right font-bold">Price</th>
-              <th className="px-4 py-3 text-center font-bold">Disc %</th>
-              <th className="px-4 py-3 text-center font-bold">Tax %</th>
-              <th className="px-4 py-3 text-right font-bold">Amount</th>
+              <th className="px-4 py-3 text-left font-bold">{t("igItemDescription")}</th>
+              <th className="px-4 py-3 text-center font-bold">{t("quantity")}</th>
+              <th className="px-4 py-3 text-right font-bold">{t("igDocPrice")}</th>
+              <th className="px-4 py-3 text-center font-bold">{t("igDocDiscPct")}</th>
+              <th className="px-4 py-3 text-center font-bold">{t("igTaxPct")}</th>
+              <th className="px-4 py-3 text-right font-bold">{t("amount")}</th>
             </tr>
           </thead>
           <tbody>
@@ -131,13 +129,13 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         <div className="mb-8 flex justify-end">
           <div className="w-80">
             <div className="mb-2 flex justify-between border-b py-2 text-sm">
-              <span>Subtotal</span>
+              <span>{t("igDocSubtotal")}</span>
               <span className="font-semibold">{formatCurrency(totals.subtotal)}</span>
             </div>
 
             {totals.totalDiscount > 0 && (
               <div className="mb-2 flex justify-between border-b py-2 text-sm">
-                <span>Discount</span>
+                <span>{t("igDocDiscount")}</span>
                 <span className="font-semibold text-red-600">-{formatCurrency(totals.totalDiscount)}</span>
               </div>
             )}
@@ -146,7 +144,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               .filter(([_, amount]) => amount > 0)
               .map(([rate, amount]) => (
               <div key={rate} className="mb-2 flex justify-between border-b py-2 text-sm">
-                <span>Tax @ {rate}%</span>
+                <span>{fill(t("igDocTaxAt"), { rate })}</span>
                 <span className="font-semibold">{formatCurrency(amount)}</span>
               </div>
             ))}
@@ -166,7 +164,7 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
               className="mt-3 flex justify-between py-3 text-lg font-bold"
               style={{ color: data.brandColor, borderTopWidth: "2px" }}
             >
-              <span>TOTAL</span>
+              <span>{t("igDocTotal")}</span>
               <span>{formatCurrency(totals.grandTotal)}</span>
             </div>
           </div>
@@ -174,19 +172,25 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
 
         {/* Amount in Words */}
         <div className="mb-6 border-b py-4 text-xs">
-          <div className="font-bold">Amount in Words</div>
+          <div className="font-bold">{t("igDocAmountInWordsPlain")}</div>
           <div className="mt-1">{amountWords}</div>
         </div>
 
         {/* Payment Details */}
         {(data.bankDetails?.accountNo || data.bankDetails?.upiId) && (
           <div className="mb-6 border-b py-4">
-            <div className="font-bold text-xs">Payment Details</div>
+            <div className="font-bold text-xs">{t("igDocPaymentDetails")}</div>
             <div className="mt-2 grid grid-cols-2 gap-4">
               <div className="space-y-1 text-xs">
-                {data.bankDetails.accountNo && <div>Account: {data.bankDetails.accountNo}</div>}
-                {data.bankDetails.ifsc && <div>IFSC: {data.bankDetails.ifsc}</div>}
-                {data.bankDetails.upiId && <div>UPI: {data.bankDetails.upiId}</div>}
+                {data.bankDetails.accountNo && (
+                  <div>{fill(t("igDocAccount"), { value: data.bankDetails.accountNo })}</div>
+                )}
+                {data.bankDetails.ifsc && (
+                  <div>{fill(t("igDocIfsc"), { value: data.bankDetails.ifsc })}</div>
+                )}
+                {data.bankDetails.upiId && (
+                  <div>{fill(t("igDocUpi"), { value: data.bankDetails.upiId })}</div>
+                )}
               </div>
               {data.bankDetails.upiId && (
                 <div className="flex justify-end">
@@ -206,14 +210,14 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
           <div className="text-xs">
             {data.notes && (
               <div className="mb-4">
-                <div className="font-bold">Notes</div>
+                <div className="font-bold">{t("igDocNotesPlain")}</div>
                 <div className="mt-1 whitespace-pre-wrap text-gray-600">{data.notes}</div>
               </div>
             )}
 
             {data.terms && (
               <div>
-                <div className="font-bold">Terms & Conditions</div>
+                <div className="font-bold">{t("igTermsConditions")}</div>
                 <div className="mt-1 whitespace-pre-wrap text-gray-600">{data.terms}</div>
               </div>
             )}
