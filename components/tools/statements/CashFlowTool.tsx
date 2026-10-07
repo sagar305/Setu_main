@@ -1,11 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { translate, type TKey } from "@/lib/i18n/translate";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
@@ -27,19 +30,26 @@ type CfState = {
   financing: StatementLine[];
 };
 
-const INITIAL: CfState = {
-  businessName: "",
-  period: "",
-  openingCash: 0,
-  operating: [blankLine("Cash from customers"), blankLine("Paid to suppliers (−)")],
-  investing: [blankLine("Equipment purchased (−)")],
-  financing: [blankLine("Loan received / repaid")],
+// The starting line labels are the user's to edit, so they begin in the
+// user's own language rather than making them translate the form away.
+const initialState = (lang: LanguageCode): CfState => {
+  const seed = (key: TKey) => blankLine(translate(lang, key));
+  return {
+    businessName: "",
+    period: "",
+    openingCash: 0,
+    operating: [seed("stSeedCashFromCustomers"), seed("stSeedPaidToSuppliers")],
+    investing: [seed("stSeedEquipmentPurchased")],
+    financing: [seed("stSeedLoanReceivedRepaid")],
+  };
 };
 
 export function CashFlowTool() {
   const { code: currency } = usePreferredCurrency();
   const workspace = useFinanceWorkspace("cash-flow-statement");
-  const [state, setState] = useLocalStore<CfState>("setu-stmt-cf", INITIAL);
+  const { t, lang } = useI18n();
+  const [initial] = useState(() => initialState(lang));
+  const [state, setState] = useLocalStore<CfState>("setu-stmt-cf", initial);
   const money = (v: number) => formatMoney(v, currency);
   const patch = (p: Partial<CfState>) => setState((s) => ({ ...s, ...p }));
 
@@ -57,8 +67,8 @@ export function CashFlowTool() {
       ...s,
       businessName: s.businessName || workspace.business?.name || "",
       operating: [
-        { id: generateId(), label: "Cash received (cash book)", amount: cashIn },
-        { id: generateId(), label: "Cash paid out (cash book)", amount: -cashOut },
+        { id: generateId(), label: t("stSeedCashReceivedBook"), amount: cashIn },
+        { id: generateId(), label: t("stSeedCashPaidBook"), amount: -cashOut },
       ],
     }));
   };
@@ -77,25 +87,26 @@ export function CashFlowTool() {
 
   const print = () => {
     const rows: PrintRow[] = [
-      { label: "Operating activities", value: "", kind: "heading" },
+      { label: t("stOperatingActivities"), value: "", kind: "heading" },
       ...section(state.operating),
-      { label: "Net cash from operations", value: money(r.operating), kind: "subtotal" },
-      { label: "Investing activities", value: "", kind: "heading" },
+      { label: t("stNetCashOperations"), value: money(r.operating), kind: "subtotal" },
+      { label: t("stInvestingActivities"), value: "", kind: "heading" },
       ...section(state.investing),
-      { label: "Net cash from investing", value: money(r.investing), kind: "subtotal" },
-      { label: "Financing activities", value: "", kind: "heading" },
+      { label: t("stNetCashInvesting"), value: money(r.investing), kind: "subtotal" },
+      { label: t("stFinancingActivities"), value: "", kind: "heading" },
       ...section(state.financing),
-      { label: "Net cash from financing", value: money(r.financing), kind: "subtotal" },
-      { label: "Net change in cash", value: money(r.netChange), kind: "subtotal" },
-      { label: "Opening cash", value: money(state.openingCash || 0) },
-      { label: "Closing cash", value: money(r.closingCash), kind: "total" },
+      { label: t("stNetCashFinancing"), value: money(r.financing), kind: "subtotal" },
+      { label: t("stNetChangeCash"), value: money(r.netChange), kind: "subtotal" },
+      { label: t("stOpeningCash"), value: money(state.openingCash || 0) },
+      { label: t("stClosingCash"), value: money(r.closingCash), kind: "total" },
     ];
     printStatement({
-      docTitle: "Cash Flow Statement",
+      docTitle: t("stCfTitle"),
       businessName: state.businessName,
-      periodLabel: state.period || "For the period",
+      periodLabel: state.period || t("stForThePeriod"),
       rows,
-      footNote: "Inflows positive, outflows negative.",
+      footNote: t("stCfFootnote"),
+      lang,
     });
   };
 
@@ -116,26 +127,26 @@ export function CashFlowTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Pull operating cash straight from your recorded cash book entries."
+        message={t("stCfWorkspaceMsg")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <Card className="h-fit">
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Business name">
+          <Field label={t("spBusinessName")}>
             <TextInput
               value={state.businessName}
               onChange={(e) => patch({ businessName: e.target.value })}
             />
           </Field>
-          <Field label="Period">
+          <Field label={t("bvaPeriod")}>
             <TextInput
               value={state.period}
               onChange={(e) => patch({ period: e.target.value })}
-              placeholder="e.g. FY 2025-26"
+              placeholder={t("stCfPeriodPlaceholder")}
             />
           </Field>
-          <Field label="Opening cash balance">
+          <Field label={t("stOpeningCashBalance")}>
             <NumberInput
               step="0.01"
               value={state.openingCash || ""}
@@ -147,29 +158,28 @@ export function CashFlowTool() {
         {workspace.connected ? (
           <div className="mt-4">
             <SecondaryButton onClick={pullFromWorkspace}>
-              ↻ Pull operating cash from cash book
+              ↻ {t("stCfPullBtn")}
             </SecondaryButton>
           </div>
         ) : null}
 
         <p className="mt-4 rounded-xl bg-cream-paper/50 px-4 py-3 text-xs text-muted">
-          Enter inflows as positive numbers and outflows as negative (e.g. −25000 for equipment
-          bought). Each section then nets itself.
+          {t("stCfSignHint")}
         </p>
 
         <div className="mt-6 space-y-6">
           <LineSectionEditor
-            title="Operating activities (day-to-day trading)"
+            title={t("stOperatingSection")}
             lines={state.operating}
             onChange={(operating) => patch({ operating })}
           />
           <LineSectionEditor
-            title="Investing activities (assets bought / sold)"
+            title={t("stInvestingSection")}
             lines={state.investing}
             onChange={(investing) => patch({ investing })}
           />
           <LineSectionEditor
-            title="Financing activities (loans, capital, drawings)"
+            title={t("stFinancingSection")}
             lines={state.financing}
             onChange={(financing) => patch({ financing })}
           />
@@ -177,18 +187,20 @@ export function CashFlowTool() {
       </Card>
 
       <Card className="h-fit lg:sticky lg:top-24">
-        <h2 className="mb-4 text-lg font-bold text-ink">Cash summary</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("stCashSummary")}</h2>
         <div className="space-y-2 text-sm">
-          <Row label="Operating" value={money(r.operating)} />
-          <Row label="Investing" value={money(r.investing)} />
-          <Row label="Financing" value={money(r.financing)} />
-          <Row label="Net change in cash" value={money(r.netChange)} strong />
-          <Row label="Opening cash" value={money(state.openingCash || 0)} />
+          <Row label={t("stOperating")} value={money(r.operating)} />
+          <Row label={t("stInvesting")} value={money(r.investing)} />
+          <Row label={t("stFinancing")} value={money(r.financing)} />
+          <Row label={t("stNetChangeCash")} value={money(r.netChange)} strong />
+          <Row label={t("stOpeningCash")} value={money(state.openingCash || 0)} />
         </div>
         <div
           className={`mt-4 rounded-xl p-4 ${r.closingCash >= 0 ? "bg-emerald-100" : "bg-red-50"}`}
         >
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Closing cash</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+            {t("stClosingCash")}
+          </p>
           <p
             className={`mt-1 text-2xl font-bold ${
               r.closingCash >= 0 ? "text-emerald-700" : "text-red-600"
@@ -199,13 +211,13 @@ export function CashFlowTool() {
         </div>
         <div className="mt-4 flex gap-2">
           <SecondaryButton className="flex-1" onClick={print}>
-            Print / PDF
+            {t("qgPrintPdf")}
           </SecondaryButton>
           <SecondaryButton className="flex-1" onClick={exportCsv}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
-        <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
+        <p className="mt-3 text-xs text-muted">{t("stSavedAuto")}</p>
       </Card>
       </div>
     </div>

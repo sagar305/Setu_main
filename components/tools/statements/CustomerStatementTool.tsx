@@ -19,6 +19,9 @@ import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { formatMoney } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { esc } from "@/components/tools/statements/shared";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 type TxnType = "invoice" | "payment" | "credit-note";
 
@@ -37,7 +40,16 @@ type StatementState = {
   txns: Txn[];
 };
 
-const TYPE_LABEL: Record<TxnType, string> = {
+// The stored value is the kind; what it is called on screen follows the
+// reader. The CSV keeps the English label, because a spreadsheet is read by
+// machines and formulas as often as by people.
+const TYPE_KEY: Record<TxnType, TKey> = {
+  invoice: "stTypeInvoice",
+  payment: "stTypePayment",
+  "credit-note": "stTypeCreditNote",
+};
+
+const TYPE_CSV: Record<TxnType, string> = {
   invoice: "Invoice",
   payment: "Payment received",
   "credit-note": "Credit note",
@@ -48,6 +60,7 @@ const todayIso = () => new Date().toISOString().split("T")[0];
 export function CustomerStatementTool() {
   const { code: currency } = usePreferredCurrency();
   const workspace = useFinanceWorkspace("customer-statement");
+  const { t, lang } = useI18n();
   const [state, setState, loaded] = useLocalStore<StatementState>("setu-stmt-customer", {
     businessName: "",
     customerName: "",
@@ -63,6 +76,7 @@ export function CustomerStatementTool() {
   const [deleting, setDeleting] = useState<Txn | null>(null);
 
   const money = (v: number) => formatMoney(v, currency);
+  const typeLabel = (kind: TxnType) => t(TYPE_KEY[kind]);
   const amountNum = Number(amount);
   const canAdd = Number.isFinite(amountNum) && amountNum > 0;
 
@@ -124,7 +138,7 @@ export function CustomerStatementTool() {
         ["Date", "Type", "Reference", "Debit", "Credit", "Balance"],
         rows.map((r) => [
           r.date,
-          TYPE_LABEL[r.type],
+          TYPE_CSV[r.type],
           r.reference,
           r.type === "invoice" ? r.amount.toFixed(2) : "",
           r.type !== "invoice" ? r.amount.toFixed(2) : "",
@@ -138,7 +152,7 @@ export function CustomerStatementTool() {
       .map(
         (r) => `<tr>
           <td>${esc(r.date)}</td>
-          <td>${esc(TYPE_LABEL[r.type])}${r.reference ? ` — ${esc(r.reference)}` : ""}</td>
+          <td>${esc(typeLabel(r.type))}${r.reference ? ` — ${esc(r.reference)}` : ""}</td>
           <td class="r">${r.type === "invoice" ? money(r.amount) : "—"}</td>
           <td class="r">${r.type !== "invoice" ? money(r.amount) : "—"}</td>
           <td class="r">${money(r.balance)}</td>
@@ -146,9 +160,9 @@ export function CustomerStatementTool() {
       )
       .join("");
 
-    const html = `<!doctype html><html><head><title>Customer Statement</title><style>
+    const html = `<!doctype html><html><head><title>${esc(t("stCsTitle"))}</title><style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: Georgia, "Times New Roman", serif; color: #1a1a2e; padding: 48px 56px; }
+      body { font-family: Georgia, "Times New Roman", "Noto Serif", serif, sans-serif; color: #1a1a2e; padding: 48px 56px; }
       @page { size: A4; margin: 0; }
       .head { display: flex; justify-content: space-between; margin-bottom: 28px; }
       .head .biz { font-size: 18px; font-weight: bold; }
@@ -166,23 +180,25 @@ export function CustomerStatementTool() {
     </style></head><body>
       <div class="head">
         <div>
-          <p class="biz">${esc(state.businessName || "Your Business")}</p>
+          <p class="biz">${esc(state.businessName || t("stYourBusiness"))}</p>
         </div>
-        <p class="doc">Statement of Account</p>
+        <p class="doc">${esc(t("stStatementOfAccount"))}</p>
       </div>
       <div class="cust">
-        <p class="lbl">Statement for</p>
-        <p class="cn">${esc(state.customerName || "Customer")}</p>
+        <p class="lbl">${esc(t("stStatementFor"))}</p>
+        <p class="cn">${esc(state.customerName || t("customer"))}</p>
       </div>
       <table>
-        <thead><tr><th>Date</th><th>Particulars</th><th class="r">Debit</th><th class="r">Credit</th><th class="r">Balance</th></tr></thead>
+        <thead><tr><th>${esc(t("date"))}</th><th>${esc(t("stParticulars"))}</th><th class="r">${esc(t("bkDebit"))}</th><th class="r">${esc(t("bkCredit"))}</th><th class="r">${esc(t("balance"))}</th></tr></thead>
         <tbody>
-          <tr><td></td><td>Opening balance</td><td class="r">—</td><td class="r">—</td><td class="r">${money(state.openingBalance || 0)}</td></tr>
+          <tr><td></td><td>${esc(t("stOpeningBalanceOwed"))}</td><td class="r">—</td><td class="r">—</td><td class="r">${money(state.openingBalance || 0)}</td></tr>
           ${body}
         </tbody>
       </table>
-      <p class="closing">Balance due: ${money(closing)}</p>
-      <p class="foot">Generated ${new Date().toLocaleDateString("en-IN")} · Debit = invoiced to you, Credit = payments & adjustments.</p>
+      <p class="closing">${esc(fill(t("stBalanceDueAmount"), { amount: money(closing) }))}</p>
+      <p class="foot">${esc(
+        fill(t("stGenerated"), { date: new Date().toLocaleDateString(intlLocaleFor(lang)) })
+      )} · ${esc(t("stCsFootnote"))}</p>
       <script>window.onload = () => window.print();</script>
     </body></html>`;
 
@@ -196,18 +212,18 @@ export function CustomerStatementTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Pick a saved customer to build their statement straight from your ledger."
+        message={t("stCsWorkspaceMsg")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <div className="space-y-6">
         <Card>
-          <h2 className="mb-4 text-lg font-bold text-ink">Statement details</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("stStatementDetails")}</h2>
           <div className="space-y-4">
             {workspace.connected && workspace.customers.length > 0 ? (
-              <Field label="Load a saved customer's ledger">
+              <Field label={t("stLoadCustomer")}>
                 <Select value={pickedCustomer} onChange={(e) => loadFromLedger(e.target.value)}>
-                  <option value="">Type details below…</option>
+                  <option value="">{t("stTypeDetailsBelow")}</option>
                   {workspace.customers.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
@@ -216,19 +232,19 @@ export function CustomerStatementTool() {
                 </Select>
               </Field>
             ) : null}
-            <Field label="Your business name">
+            <Field label={t("tbBusinessName")}>
               <TextInput
                 value={state.businessName}
                 onChange={(e) => setState((s) => ({ ...s, businessName: e.target.value }))}
               />
             </Field>
-            <Field label="Customer name">
+            <Field label={t("customerNamePlaceholder")}>
               <TextInput
                 value={state.customerName}
                 onChange={(e) => setState((s) => ({ ...s, customerName: e.target.value }))}
               />
             </Field>
-            <Field label="Opening balance (amount already owed)">
+            <Field label={t("stOpeningBalanceOwed")}>
               <NumberInput
                 step="0.01"
                 value={state.openingBalance || ""}
@@ -242,26 +258,26 @@ export function CustomerStatementTool() {
         </Card>
 
         <Card>
-          <h2 className="mb-4 text-lg font-bold text-ink">Add transaction</h2>
+          <h2 className="mb-4 text-lg font-bold text-ink">{t("stAddTransaction")}</h2>
           <div className="space-y-4">
-            <Field label="Date">
+            <Field label={t("date")}>
               <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </Field>
-            <Field label="Type">
+            <Field label={t("typeLabel")}>
               <Select value={type} onChange={(e) => setType(e.target.value as TxnType)}>
-                <option value="invoice">Invoice (customer owes more)</option>
-                <option value="payment">Payment received</option>
-                <option value="credit-note">Credit note / adjustment</option>
+                <option value="invoice">{t("stTypeInvoiceOpt")}</option>
+                <option value="payment">{t("stTypePayment")}</option>
+                <option value="credit-note">{t("stTypeCreditNoteOpt")}</option>
               </Select>
             </Field>
-            <Field label="Reference">
+            <Field label={t("stReference")}>
               <TextInput
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
-                placeholder="e.g. INV-1042 or UPI ref"
+                placeholder={t("stReferencePlaceholder")}
               />
             </Field>
-            <Field label="Amount">
+            <Field label={t("amount")}>
               <NumberInput
                 min={0}
                 step="0.01"
@@ -271,7 +287,7 @@ export function CustomerStatementTool() {
               />
             </Field>
             <PrimaryButton className="w-full" onClick={addTxn} disabled={!canAdd}>
-              Add transaction
+              {t("stAddTransaction")}
             </PrimaryButton>
           </div>
         </Card>
@@ -279,41 +295,40 @@ export function CustomerStatementTool() {
 
       <Card className="h-fit">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Statement</h2>
+          <h2 className="text-lg font-bold text-ink">{t("stStatement")}</h2>
           <div className="flex gap-2">
             <SecondaryButton onClick={print} disabled={rows.length === 0}>
-              Print / PDF
+              {t("qgPrintPdf")}
             </SecondaryButton>
             <SecondaryButton onClick={exportCsv} disabled={rows.length === 0}>
-              Export CSV
+              {t("exportCsv")}
             </SecondaryButton>
           </div>
         </div>
 
         <div className="mb-5 rounded-xl bg-cream-paper/70 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-muted">Balance due</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+            {t("stBalanceDue")}
+          </p>
           <p className={`mt-1 text-2xl font-bold ${closing > 0 ? "text-ink" : "text-emerald-600"}`}>
             {money(closing)}
           </p>
         </div>
 
         {!loaded ? (
-          <p className="py-8 text-center text-sm text-muted">Loading…</p>
+          <p className="py-8 text-center text-sm text-muted">{t("loading")}</p>
         ) : rows.length === 0 ? (
-          <EmptyState
-            title="No transactions yet"
-            subtitle="Add the customer's invoices, payments and credit notes — the running balance builds the statement automatically."
-          />
+          <EmptyState title={t("stNoTxns")} subtitle={t("stNoTxnsSub")} />
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                  <th className="py-2 pr-3">Date</th>
-                  <th className="py-2 pr-3">Particulars</th>
-                  <th className="py-2 pr-3 text-right">Debit</th>
-                  <th className="py-2 pr-3 text-right">Credit</th>
-                  <th className="py-2 pr-3 text-right">Balance</th>
+                  <th className="py-2 pr-3">{t("date")}</th>
+                  <th className="py-2 pr-3">{t("stParticulars")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkDebit")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkCredit")}</th>
+                  <th className="py-2 pr-3 text-right">{t("balance")}</th>
                   <th className="py-2" />
                 </tr>
               </thead>
@@ -322,7 +337,7 @@ export function CustomerStatementTool() {
                   <tr key={row.id} className="border-b border-muted-line/30">
                     <td className="py-2 pr-3 whitespace-nowrap">{row.date}</td>
                     <td className="py-2 pr-3">
-                      {TYPE_LABEL[row.type]}
+                      {typeLabel(row.type)}
                       {row.reference ? <span className="text-muted"> — {row.reference}</span> : null}
                     </td>
                     <td className="py-2 pr-3 text-right">
@@ -338,7 +353,7 @@ export function CustomerStatementTool() {
                         onClick={() => setDeleting(row)}
                         className="text-xs font-semibold text-red-500 hover:text-red-600"
                       >
-                        Delete
+                        {t("delete")}
                       </button>
                     </td>
                   </tr>
@@ -351,13 +366,19 @@ export function CustomerStatementTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete transaction?"
+        title={t("stDeleteTxn")}
         message={
           deleting
-            ? `Delete the ${TYPE_LABEL[deleting.type].toLowerCase()} of ${money(deleting.amount)} dated ${deleting.date}?`
+            ? // The kind is a translated label, so it goes in as written rather
+              // than lowercased — not every language has a lowercase form.
+              fill(t("stDeleteTxnMsg"), {
+                kind: typeLabel(deleting.type),
+                amount: money(deleting.amount),
+                date: deleting.date,
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deleting)
             setState((s) => ({ ...s, txns: s.txns.filter((t) => t.id !== deleting.id) }));
