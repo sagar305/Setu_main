@@ -70,7 +70,15 @@
       "intro": "Order accuracy, ticket flow and holding the kitchen together at peak hour."
     }
   },
-  "posts": [
+    "posts": [
+                 {
+                  "slug": "comparing-bookkeeping-quotes-2026",
+                  "title": "Comparing Bookkeeping Quotes: The Eight Questions That Matter",
+                  "excerpt": "Two bookkeeping quotes use identical words and differ by three times in price, because price without scope is not a price. The eight questions that make quotes comparable, the four red flags, and an in-house cost comparison that carries its full weight.",
+                  "date": "2026-10-06",
+                  "category": "Accounting",
+                  "thumbnail": "/blog/thumbnails/listing/comparing-bookkeeping-quotes-2026.jpeg"
+                },
                 {
                   "slug": "setu-tools-vs-urbanpiper-2026",
                   "title": "Setu vs UrbanPiper: Do You Need Aggregator Middleware in 2026?",
