@@ -24,11 +24,14 @@ import {
   type SharedDoc,
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
+import { fill, splitAround } from "@/lib/i18n/translate";
 import { resolveShortLink } from "@/lib/toolkit/shortLink";
 import { supportsUpi } from "@/lib/upi";
 import { UpiPayButton } from "@/components/toolkit/UpiPayButton";
 
 function BusinessHeader({ b, accent = "#26306B" }: { b: ShareBusiness; accent?: string }) {
+  const { t } = useI18n();
   return (
     <div className="border-b border-muted-line/30 pb-4 text-center">
       {b.logo ? (
@@ -36,7 +39,7 @@ function BusinessHeader({ b, accent = "#26306B" }: { b: ShareBusiness; accent?: 
         <img src={b.logo} alt="" className="mx-auto mb-2 h-14 w-14 object-contain" />
       ) : null}
       <h1 className="text-xl font-bold" style={{ color: accent }}>
-        {b.n}
+        {b.n || t("stYourBusiness")}
       </h1>
       {b.a ? <p className="mt-1 text-sm text-muted">{b.a}</p> : null}
       <p className="text-sm text-muted">
@@ -47,15 +50,16 @@ function BusinessHeader({ b, accent = "#26306B" }: { b: ShareBusiness; accent?: 
 }
 
 function ItemsTable({ items, currency }: { items: ShareLineItem[]; currency: string }) {
+  const { t } = useI18n();
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-muted-line/30 text-left text-muted">
-            <th className="py-2 pr-3 font-semibold">Item</th>
-            <th className="py-2 pr-3 text-right font-semibold">Qty</th>
-            <th className="py-2 pr-3 text-right font-semibold">Rate</th>
-            <th className="py-2 text-right font-semibold">Amount</th>
+            <th className="py-2 pr-3 font-semibold">{t("itemLabel")}</th>
+            <th className="py-2 pr-3 text-right font-semibold">{t("quantity")}</th>
+            <th className="py-2 pr-3 text-right font-semibold">{t("rate")}</th>
+            <th className="py-2 text-right font-semibold">{t("amount")}</th>
           </tr>
         </thead>
         <tbody>
@@ -100,6 +104,9 @@ type LoadState = "loading" | "ready" | "broken" | "expired" | "failed";
  *             Absent for a self-contained /view#d= link.
  */
 export function ShareViewer({ code }: { code?: string } = {}) {
+  // The reader here is the recipient, not the sender, so the page follows the
+  // recipient's own language preference.
+  const { t, lang } = useI18n();
   const [doc, setDoc] = useState<SharedDoc | null>(null);
   const [state, setState] = useState<LoadState>("loading");
   const [attempt, setAttempt] = useState(0);
@@ -152,36 +159,30 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
   if (state === "loading") {
     return code ? (
-      <Notice title="Opening the link…">
-        <p>One moment.</p>
+      <Notice title={t("svOpeningLink")}>
+        <p>{t("svOneMoment")}</p>
       </Notice>
     ) : null;
   }
 
   if (state === "expired") {
     return (
-      <Notice title="This link has expired">
-        <p>
-          Shortened links are kept for 180 days after they were last opened, then deleted. Ask the
-          sender to share it again.
-        </p>
+      <Notice title={t("svExpiredTitle")}>
+        <p>{t("svExpiredBody")}</p>
       </Notice>
     );
   }
 
   if (state === "failed") {
     return (
-      <Notice title="Couldn&apos;t open this link">
-        <p>
-          This link needs an internet connection, because the document is stored rather than carried
-          inside the link. Check your connection and try again.
-        </p>
+      <Notice title={t("svFailedTitle")}>
+        <p>{t("svFailedBody")}</p>
         <button
           type="button"
           onClick={retry}
           className="mt-4 rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white"
         >
-          Try again
+          {t("qmTryAgain")}
         </button>
       </Notice>
     );
@@ -189,14 +190,15 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
   if (!doc) {
     return (
-      <Notice title="This link is empty or broken">
-        <p>
-          The document data lives inside the link itself. Ask the sender to share it again — the full
-          link may have been cut off.
-        </p>
+      <Notice title={t("svBrokenTitle")}>
+        <p>{t("svBrokenBody")}</p>
       </Notice>
     );
   }
+
+  // The credit line has the brand mid-sentence, so the sentence stays one
+  // dictionary entry with the link marked by a placeholder.
+  const sharedWith = splitAround(t("svSharedWith"), "link");
 
   const b = doc.b;
   const currency = b.cur;
@@ -205,17 +207,17 @@ export function ShareViewer({ code }: { code?: string } = {}) {
     doc.t === "inv" || doc.t === "quo" || doc.t === "fee" || doc.t === "rnt"
       ? doc.no
       : doc.t === "led"
-        ? "Payment"
+        ? t("svPayment")
         : doc.t === "apt"
-          ? "Advance"
-          : "Payment";
+          ? t("svAdvance")
+          : t("svPayment");
 
   return (
     <div className="mx-auto max-w-lg space-y-5">
       <div className="rounded-2xl border border-muted-line/30 bg-white p-6 shadow-sm">
         <BusinessHeader b={b} />
 
-        <h2 className="mt-4 text-center text-lg font-bold text-ink">{docTitle(doc)}</h2>
+        <h2 className="mt-4 text-center text-lg font-bold text-ink">{docTitle(doc, lang)}</h2>
 
         {doc.t === "inv" ? (
           <>
@@ -223,16 +225,20 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               <span>{doc.no}</span>
               <span>{doc.dt?.slice(0, 10)}</span>
             </div>
-            {doc.cn ? <p className="mt-1 text-sm text-ink">Billed to: {doc.cn}</p> : null}
+            {doc.cn ? (
+              <p className="mt-1 text-sm text-ink">{fill(t("svBilledTo"), { name: doc.cn })}</p>
+            ) : null}
             <div className="my-4">
               <ItemsTable items={doc.it} currency={currency} />
             </div>
             <div className="space-y-1">
-              <Row label="Subtotal" value={formatMoney(doc.sub, currency)} />
-              {doc.dis ? <Row label="Discount" value={`-${formatMoney(doc.dis, currency)}`} /> : null}
-              {doc.tax ? <Row label="Tax" value={formatMoney(doc.tax, currency)} /> : null}
-              <Row label="Total" value={formatMoney(doc.tot, currency)} bold />
-              {doc.pm ? <Row label="Payment" value={doc.pm} /> : null}
+              <Row label={t("subtotal")} value={formatMoney(doc.sub, currency)} />
+              {doc.dis ? (
+                <Row label={t("discDiscount")} value={`-${formatMoney(doc.dis, currency)}`} />
+              ) : null}
+              {doc.tax ? <Row label={t("taxLabel")} value={formatMoney(doc.tax, currency)} /> : null}
+              <Row label={t("total")} value={formatMoney(doc.tot, currency)} bold />
+              {doc.pm ? <Row label={t("svPayment")} value={doc.pm} /> : null}
             </div>
           </>
         ) : null}
@@ -245,17 +251,21 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             </div>
             {doc.vu ? (
               <p className="mt-1 text-center text-xs font-semibold text-indigo">
-                Valid until {doc.vu.slice(0, 10)}
+                {fill(t("qgValidUntil"), { date: doc.vu.slice(0, 10) })}
               </p>
             ) : null}
-            {doc.cn ? <p className="mt-2 text-sm text-ink">For: {doc.cn}</p> : null}
+            {doc.cn ? (
+              <p className="mt-2 text-sm text-ink">
+                {t("svFor")}: {doc.cn}
+              </p>
+            ) : null}
             <div className="my-4">
               <ItemsTable items={doc.it} currency={currency} />
             </div>
             <div className="space-y-1">
-              <Row label="Subtotal" value={formatMoney(doc.sub, currency)} />
-              {doc.tax ? <Row label="Tax" value={formatMoney(doc.tax, currency)} /> : null}
-              <Row label="Total" value={formatMoney(doc.tot, currency)} bold />
+              <Row label={t("subtotal")} value={formatMoney(doc.sub, currency)} />
+              {doc.tax ? <Row label={t("taxLabel")} value={formatMoney(doc.tax, currency)} /> : null}
+              <Row label={t("total")} value={formatMoney(doc.tot, currency)} bold />
             </div>
             {doc.note ? <p className="mt-3 text-xs text-muted">{doc.note}</p> : null}
           </>
@@ -263,8 +273,8 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
         {doc.t === "led" ? (
           <div className="mt-4 text-center">
-            <p className="text-sm text-ink">Dear {doc.cn},</p>
-            <p className="mt-2 text-sm text-muted">Your outstanding balance is</p>
+            <p className="text-sm text-ink">{fill(t("svDear"), { name: doc.cn })}</p>
+            <p className="mt-2 text-sm text-muted">{t("svOutstandingBalance")}</p>
             <p className="mt-1 text-3xl font-bold text-red-600">{formatMoney(doc.bal, currency)}</p>
             {doc.note ? <p className="mt-3 text-xs text-muted">{doc.note}</p> : null}
           </div>
@@ -272,11 +282,13 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
         {doc.t === "apt" ? (
           <div className="mt-4 space-y-2 text-sm">
-            <Row label="For" value={doc.cn} />
-            <Row label="Service" value={doc.svc} />
-            <Row label="Date" value={doc.dt.slice(0, 10)} />
-            <Row label="Time" value={doc.tm} />
-            {doc.dur ? <Row label="Duration" value={`${doc.dur} min`} /> : null}
+            <Row label={t("svFor")} value={doc.cn} />
+            <Row label={t("service")} value={doc.svc} />
+            <Row label={t("date")} value={doc.dt.slice(0, 10)} />
+            <Row label={t("svTime")} value={doc.tm} />
+            {doc.dur ? (
+              <Row label={t("svDuration")} value={fill(t("svMinutes"), { n: doc.dur })} />
+            ) : null}
             {doc.note ? <p className="pt-1 text-xs text-muted">{doc.note}</p> : null}
           </div>
         ) : null}
@@ -297,23 +309,28 @@ export function ShareViewer({ code }: { code?: string } = {}) {
                 {doc.rm.k === "overdue" ? (
                   <p className="font-semibold">
                     {doc.rm.ld
-                      ? `${doc.rm.ld} ${doc.rm.ld === 1 ? "day" : "days"} overdue`
-                      : "Overdue"}
-                    {doc.rm.d ? ` — these items were due back on ${doc.rm.d}` : ""}.
+                      ? fill(t("svDaysOverdue"), {
+                          n: doc.rm.ld,
+                          unit: t(doc.rm.ld === 1 ? "svDayUnit" : "svDaysUnit"),
+                        })
+                      : t("svOverdue")}
+                    {doc.rm.d ? fill(t("svDueBackOn"), { date: doc.rm.d }) : ""}.
                     {doc.rm.lf
-                      ? ` A late fee of ${formatMoney(doc.rm.lf, currency)} has built up so far.`
+                      ? fill(t("svLateFeeSoFar"), {
+                          amount: formatMoney(doc.rm.lf, currency),
+                        })
                       : ""}
                   </p>
                 ) : null}
                 {doc.rm.k === "returnDue" ? (
                   <p className="font-semibold">
-                    These items are due back on {doc.rm.d}. Please arrange the return.
+                    {fill(t("svReturnDueOn"), { date: doc.rm.d ?? "" })}
                   </p>
                 ) : null}
                 {doc.rm.k === "dispatch" ? (
                   <p className="font-semibold">
-                    Your order is being delivered on {doc.rm.d}.
-                    {doc.rm.c ? ` Our team will call ${doc.rm.c} on arrival.` : ""}
+                    {fill(t("svDeliveringOn"), { date: doc.rm.d ?? "" })}
+                    {doc.rm.c ? fill(t("svWillCall"), { phone: doc.rm.c }) : ""}
                   </p>
                 ) : null}
               </div>
@@ -325,20 +342,26 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             </div>
             {doc.vu ? (
               <p className="mt-1 text-center text-xs font-semibold text-indigo">
-                Valid until {doc.vu.slice(0, 10)}
+                {fill(t("qgValidUntil"), { date: doc.vu.slice(0, 10) })}
               </p>
             ) : null}
-            {doc.cn ? <p className="mt-2 text-sm text-ink">For: {doc.cn}</p> : null}
+            {doc.cn ? (
+              <p className="mt-2 text-sm text-ink">
+                {t("svFor")}: {doc.cn}
+              </p>
+            ) : null}
 
             <div className="mt-3 rounded-xl bg-cream-paper p-3 text-sm">
-              {doc.ev ? <Row label="Event" value={doc.ev} /> : null}
-              {doc.vn ? <Row label="Venue" value={doc.vn} /> : null}
+              {doc.ev ? <Row label={t("svEvent")} value={doc.ev} /> : null}
+              {doc.vn ? <Row label={t("svVenue")} value={doc.vn} /> : null}
               <Row
-                label="Hire period"
-                value={`${doc.fd}${doc.td && doc.td !== doc.fd ? ` to ${doc.td}` : ""}`}
+                label={t("svHirePeriod")}
+                value={[doc.fd, doc.td && doc.td !== doc.fd ? doc.td : ""]
+                  .filter(Boolean)
+                  .join(" – ")}
               />
               {doc.ft || doc.tt ? (
-                <Row label="Time" value={[doc.ft, doc.tt].filter(Boolean).join(" – ")} />
+                <Row label={t("svTime")} value={[doc.ft, doc.tt].filter(Boolean).join(" – ")} />
               ) : null}
             </div>
 
@@ -347,35 +370,49 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             </div>
 
             <div className="space-y-1">
-              <Row label="Rent" value={formatMoney(doc.sub, currency)} />
-              {doc.trn ? <Row label="Transport" value={formatMoney(doc.trn, currency)} /> : null}
-              {doc.lab ? <Row label="Labour" value={formatMoney(doc.lab, currency)} /> : null}
-              {doc.dis ? (
-                <Row label="Discount" value={`-${formatMoney(doc.dis, currency)}`} />
+              <Row label={t("svRent")} value={formatMoney(doc.sub, currency)} />
+              {doc.trn ? (
+                <Row label={t("svTransport")} value={formatMoney(doc.trn, currency)} />
               ) : null}
-              {doc.tax ? <Row label="Tax" value={formatMoney(doc.tax, currency)} /> : null}
-              <Row label="Hire total" value={formatMoney(doc.tot, currency)} bold />
-              {doc.dep ? <Row label="Deposit (refundable)" value={formatMoney(doc.dep, currency)} /> : null}
-              {doc.adv ? <Row label="Received" value={formatMoney(doc.adv, currency)} /> : null}
+              {doc.lab ? (
+                <Row label={t("svLabour")} value={formatMoney(doc.lab, currency)} />
+              ) : null}
+              {doc.dis ? (
+                <Row label={t("discDiscount")} value={`-${formatMoney(doc.dis, currency)}`} />
+              ) : null}
+              {doc.tax ? <Row label={t("taxLabel")} value={formatMoney(doc.tax, currency)} /> : null}
+              <Row label={t("svHireTotal")} value={formatMoney(doc.tot, currency)} bold />
+              {doc.dep ? (
+                <Row label={t("svDeposit")} value={formatMoney(doc.dep, currency)} />
+              ) : null}
+              {doc.adv ? (
+                <Row label={t("svReceived")} value={formatMoney(doc.adv, currency)} />
+              ) : null}
               {doc.st === "quote" && doc.adue ? (
-                <Row label="Advance to confirm" value={formatMoney(doc.adue, currency)} bold />
+                <Row label={t("svAdvanceToConfirm")} value={formatMoney(doc.adue, currency)} bold />
               ) : null}
 
               {doc.st === "settled" ? (
                 <div className="mt-2 space-y-1 border-t border-muted-line/30 pt-2">
                   {doc.ld ? (
                     <Row
-                      label={`Late return (${doc.ld} ${doc.ld === 1 ? "day" : "days"})`}
+                      label={fill(t("svLateReturn"), {
+                        days: `${doc.ld} ${t(doc.ld === 1 ? "svDayUnit" : "svDaysUnit")}`,
+                      })}
                       value={formatMoney(doc.lf ?? 0, currency)}
                     />
                   ) : null}
-                  {doc.dmg ? <Row label="Damage" value={formatMoney(doc.dmg, currency)} /> : null}
-                  {doc.los ? <Row label="Loss" value={formatMoney(doc.los, currency)} /> : null}
+                  {doc.dmg ? (
+                    <Row label={t("svDamage")} value={formatMoney(doc.dmg, currency)} />
+                  ) : null}
+                  {doc.los ? (
+                    <Row label={t("svLoss")} value={formatMoney(doc.los, currency)} />
+                  ) : null}
                   {doc.ref ? (
-                    <Row label="Deposit refunded" value={formatMoney(doc.ref, currency)} />
+                    <Row label={t("svDepositRefunded")} value={formatMoney(doc.ref, currency)} />
                   ) : null}
                   <Row
-                    label={(doc.due ?? 0) > 0 ? "Still payable" : "Settled in full"}
+                    label={t((doc.due ?? 0) > 0 ? "svStillPayable" : "svSettledInFull")}
                     value={formatMoney(doc.due ?? 0, currency)}
                     bold
                   />
@@ -393,7 +430,7 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               <span>{doc.dt?.slice(0, 10)}</span>
             </div>
             <div className="mt-4 rounded-xl bg-cream-paper p-4 text-center">
-              <p className="text-sm text-muted">Received with thanks from</p>
+              <p className="text-sm text-muted">{t("svReceivedWithThanks")}</p>
               <p className="mt-1 text-lg font-bold text-ink">{doc.sn}</p>
               {doc.cls ? <p className="text-xs text-muted">{doc.cls}</p> : null}
               <p className="mt-3 text-3xl font-bold text-indigo">
@@ -402,14 +439,14 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             </div>
             <div className="mt-4 space-y-1">
               {doc.tw && doc.tw.length > 0 ? (
-                <Row label="Towards" value={doc.tw.join(", ")} />
+                <Row label={t("svTowards")} value={doc.tw.join(", ")} />
               ) : null}
-              {doc.mode ? <Row label="Paid by" value={doc.mode} /> : null}
+              {doc.mode ? <Row label={t("svPaidBy")} value={doc.mode} /> : null}
               {doc.bal && doc.bal > 0 ? (
-                <Row label="Still pending" value={formatMoney(doc.bal, currency)} bold />
+                <Row label={t("svStillPending")} value={formatMoney(doc.bal, currency)} bold />
               ) : (
                 <p className="pt-2 text-center text-sm font-semibold text-emerald-600">
-                  No dues pending
+                  {t("svNoDuesPending")}
                 </p>
               )}
             </div>
@@ -426,7 +463,7 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               <p className="text-lg font-bold text-ink">{doc.sn}</p>
               {doc.sub ? <p className="text-xs text-muted">{doc.sub}</p> : null}
               {doc.mk === null ? (
-                <p className="mt-3 text-xl font-bold text-saffron">Did not appear</p>
+                <p className="mt-3 text-xl font-bold text-saffron">{t("svDidNotAppear")}</p>
               ) : (
                 <>
                   <p className="mt-3 text-3xl font-bold text-indigo">
@@ -441,12 +478,16 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             </div>
             <div className="mt-4 space-y-1">
               {doc.avg !== undefined ? (
-                <Row label="Class average" value={`${doc.avg} / ${doc.max}`} />
+                <Row label={t("svClassAverage")} value={`${doc.avg} / ${doc.max}`} />
               ) : null}
               {doc.rnk ? (
                 <Row
-                  label="Rank"
-                  value={doc.outOf ? `${doc.rnk} of ${doc.outOf}` : String(doc.rnk)}
+                  label={t("svRank")}
+                  value={
+                    doc.outOf
+                      ? fill(t("svRankOf"), { rank: doc.rnk, total: doc.outOf })
+                      : String(doc.rnk)
+                  }
                 />
               ) : null}
             </div>
@@ -460,20 +501,24 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               <div className="mt-1 text-center text-sm text-muted">
                 <p className="font-semibold text-ink">{doc.dr}</p>
                 {doc.drq ? <p className="text-xs">{doc.drq}</p> : null}
-                {doc.reg ? <p className="text-xs">Reg. No: {doc.reg}</p> : null}
+                {doc.reg ? (
+                  <p className="text-xs">{fill(t("svRegNo"), { no: doc.reg })}</p>
+                ) : null}
               </div>
             ) : null}
 
             <div className="mt-4 flex flex-wrap justify-between gap-x-4 gap-y-1 border-y border-muted-line/30 py-2 text-sm">
               <span className="font-semibold text-ink">{doc.pn}</span>
               {doc.ag ? <span className="text-muted">{doc.ag}</span> : null}
-              {doc.fl ? <span className="text-muted">File: {doc.fl}</span> : null}
+              {doc.fl ? (
+                <span className="text-muted">{fill(t("svFile"), { no: doc.fl })}</span>
+              ) : null}
               <span className="text-muted">{doc.dt?.slice(0, 10)}</span>
             </div>
 
             {doc.alg && doc.alg.length > 0 ? (
               <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-bold uppercase tracking-wide text-red-700">
-                Allergies: {doc.alg.join(", ")}
+                {fill(t("svAllergies"), { list: doc.alg.join(", ") })}
               </p>
             ) : null}
 
@@ -483,7 +528,9 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
             {doc.dx ? (
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-wide text-muted">Diagnosis</p>
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">
+                  {t("svDiagnosis")}
+                </p>
                 <p className="mt-1 whitespace-pre-line text-sm text-ink">{doc.dx}</p>
               </div>
             ) : null}
@@ -495,9 +542,9 @@ export function ShareViewer({ code }: { code?: string } = {}) {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-muted-line/30 text-left text-muted">
-                        <th className="py-2 pr-3 font-semibold">Medicine</th>
-                        <th className="py-2 pr-3 font-semibold">Dosage</th>
-                        <th className="py-2 font-semibold">Duration</th>
+                        <th className="py-2 pr-3 font-semibold">{t("svMedicine")}</th>
+                        <th className="py-2 pr-3 font-semibold">{t("svDosage")}</th>
+                        <th className="py-2 font-semibold">{t("svDuration")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -511,7 +558,9 @@ export function ShareViewer({ code }: { code?: string } = {}) {
                               <span className="block text-xs text-muted">{line.nt}</span>
                             ) : null}
                             {line.q ? (
-                              <span className="block text-xs text-muted">Qty: {line.q}</span>
+                              <span className="block text-xs text-muted">
+                                {fill(t("svQtyOf"), { n: line.q })}
+                              </span>
                             ) : null}
                           </td>
                           <td className="py-2 pr-3 text-muted">{line.f ?? ""}</td>
@@ -527,7 +576,7 @@ export function ShareViewer({ code }: { code?: string } = {}) {
             {doc.inv && doc.inv.length > 0 ? (
               <div className="mt-4">
                 <p className="text-xs font-bold uppercase tracking-wide text-muted">
-                  Investigations advised
+                  {t("svInvestigations")}
                 </p>
                 <ol className="mt-1 list-decimal pl-5 text-sm text-ink">
                   {doc.inv.map((item, i) => (
@@ -539,14 +588,16 @@ export function ShareViewer({ code }: { code?: string } = {}) {
 
             {doc.adv ? (
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-wide text-muted">Advice</p>
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">
+                  {t("svAdvice")}
+                </p>
                 <p className="mt-1 whitespace-pre-line text-sm text-ink">{doc.adv}</p>
               </div>
             ) : null}
 
             {doc.fu ? (
               <p className="mt-4 text-center text-sm font-semibold text-indigo">
-                Review after {doc.fu} days
+                {fill(t("svReviewAfter"), { n: doc.fu })}
               </p>
             ) : null}
 
@@ -556,10 +607,7 @@ export function ShareViewer({ code }: { code?: string } = {}) {
               </p>
             ) : null}
 
-            <p className="mt-3 text-center text-xs text-muted">
-              This is a copy of a prescription issued by your doctor. Take medicines only as
-              directed, and ask the clinic if anything here is unclear.
-            </p>
+            <p className="mt-3 text-center text-xs text-muted">{t("svRxDisclaimer")}</p>
           </>
         ) : null}
 
@@ -576,12 +624,14 @@ export function ShareViewer({ code }: { code?: string } = {}) {
                 {doc.pct}%
               </p>
               <p className="mt-1 text-sm text-muted">
-                Present for {doc.prs} of {doc.tot} classes
+                {fill(t("svPresentFor"), { present: doc.prs, total: doc.tot })}
               </p>
             </div>
             {doc.abs && doc.abs.length > 0 ? (
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-wide text-muted">Days missed</p>
+                <p className="text-xs font-bold uppercase tracking-wide text-muted">
+                  {t("svDaysMissed")}
+                </p>
                 <p className="mt-1 text-sm text-ink">{doc.abs.join(", ")}</p>
               </div>
             ) : null}
@@ -600,14 +650,12 @@ export function ShareViewer({ code }: { code?: string } = {}) {
       ) : null}
 
       <p className="text-center text-xs text-muted">
-        Shared with a free{" "}
+        {sharedWith[0]}
         <a href="/tools" className="font-semibold text-indigo">
           Setu
-        </a>{" "}
-        tool.{" "}
-        {code
-          ? "This is a shortened link, so the document is stored until 180 days after it was last opened."
-          : "Your data stays in the link — nothing is stored on a server."}
+        </a>
+        {sharedWith[1]}{" "}
+        {t(code ? "svFootShortened" : "svFootInline")}
       </p>
     </div>
   );

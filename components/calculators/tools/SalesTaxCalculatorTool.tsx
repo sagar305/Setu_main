@@ -6,6 +6,7 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 import { US_STATE_TAX_RATES } from "@/lib/constants/taxRates";
 
 type Mode = "add" | "extract";
@@ -13,6 +14,7 @@ type RateMode = "state" | "combined";
 
 export function SalesTaxCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
+  const { t } = useI18n();
   const [mode, setMode] = useState<Mode>("add");
   const [rateMode, setRateMode] = useState<RateMode>("combined");
   const [amount, setAmount] = useState("100");
@@ -55,16 +57,16 @@ export function SalesTaxCalculatorTool() {
       <div className="flex flex-wrap items-center gap-3">
         <SegmentedControl
           options={[
-            { label: "Add tax to price", value: "add" },
-            { label: "Extract from total", value: "extract" },
+            { label: t("sxAddTax"), value: "add" },
+            { label: t("sxExtract"), value: "extract" },
           ]}
           value={mode}
           onChange={setMode}
         />
         <SegmentedControl
           options={[
-            { label: "State only", value: "state" },
-            { label: "Combined", value: "combined" },
+            { label: t("sxStateOnly"), value: "state" },
+            { label: t("sxCombined"), value: "combined" },
           ]}
           value={rateMode}
           onChange={setRateMode}
@@ -77,7 +79,7 @@ export function SalesTaxCalculatorTool() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search state or code… (all 50 states + DC)"
+            placeholder={t("sxSearchState")}
             className="w-full rounded-lg border border-muted-line/40 px-3 py-2 text-sm text-ink outline-none focus:border-indigo"
           />
         </div>
@@ -85,10 +87,10 @@ export function SalesTaxCalculatorTool() {
           <table className="w-full text-sm">
             <thead className="sticky top-0 bg-white">
               <tr className="text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="px-3 py-2">State</th>
-                <th className="px-3 py-2 text-right">State %</th>
-                <th className="px-3 py-2 text-right">Avg local %</th>
-                <th className="px-3 py-2 text-right">Combined</th>
+                <th className="px-3 py-2">{t("sxState")}</th>
+                <th className="px-3 py-2 text-right">{t("sxStatePct")}</th>
+                <th className="px-3 py-2 text-right">{t("sxAvgLocalPct")}</th>
+                <th className="px-3 py-2 text-right">{t("sxCombined")}</th>
               </tr>
             </thead>
             <tbody>
@@ -129,42 +131,45 @@ export function SalesTaxCalculatorTool() {
           onChange={(e) => setCustomRate(e.target.checked)}
           className="h-4 w-4 accent-indigo"
         />
-        Use a custom rate (exact city/county combination)
+        {t("sxCustomRate")}
       </label>
 
       <div className="mt-4 grid gap-5 sm:grid-cols-2">
         <NumberField
-          label={mode === "add" ? "Pre-tax price" : "Total paid (with tax)"}
+          label={t(mode === "add" ? "sxPreTaxPrice" : "sxTotalPaid")}
           value={amount}
           onChange={setAmount}
           prefix="₹"
         />
         {customRate ? (
-          <NumberField label="Custom combined rate" value={custom} onChange={setCustom} suffix="%" />
+          <NumberField
+            label={t("sxCustomCombined")}
+            value={custom}
+            onChange={setCustom}
+            suffix="%"
+          />
         ) : (
           <div className="rounded-xl bg-cream-paper/70 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Selected</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t("vatSelected")}
+            </p>
             <p className="mt-1 text-lg font-bold text-ink">
               {selected ? `${selected.state} — ${rate.toFixed(2)}%` : "—"}
             </p>
             <p className="text-xs text-muted">
-              {rateMode === "combined" ? "State + average local rate" : "State rate only"}
+              {t(rateMode === "combined" ? "sxStatePlusLocal" : "sxStateRateOnly")}
             </p>
           </div>
         )}
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Pre-tax price" value={formatCurrency(result.preTax)} />
-        <ResultStat label="Sales tax" value={formatCurrency(result.tax)} />
-        <ResultStat label="Total price" value={formatCurrency(result.total)} emphasis />
+        <ResultStat label={t("sxPreTaxPrice")} value={formatCurrency(result.preTax)} />
+        <ResultStat label={t("sxSalesTax")} value={formatCurrency(result.tax)} />
+        <ResultStat label={t("sxTotalPrice")} value={formatCurrency(result.total)} emphasis />
       </div>
 
-      <p className="mt-4 text-xs text-muted">
-        Local rates shown are population-weighted averages — the exact rate depends on the city and
-        county of the sale. Alaska, Delaware, Montana, New Hampshire and Oregon have no state-wide
-        sales tax.
-      </p>
+      <p className="mt-4 text-xs text-muted">{t("sxFootnote")}</p>
     </div>
   );
 }

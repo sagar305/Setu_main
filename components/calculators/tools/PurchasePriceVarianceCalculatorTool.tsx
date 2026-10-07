@@ -4,13 +4,17 @@ import { useMemo, useState } from "react";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { fill, splitAround } from "@/lib/i18n/translate";
 
 type PpvItem = { id: number; name: string; standard: string; actual: string; qty: string };
 
 let nextId = 4;
 
-const INITIAL: PpvItem[] = [
-  { id: 1, name: "Raw material A", standard: "100", actual: "110", qty: "500" },
+// The sample row is something the reader edits, so it starts in their own
+// language rather than making them translate it away.
+const initialItems = (sampleName: string): PpvItem[] => [
+  { id: 1, name: sampleName, standard: "100", actual: "110", qty: "500" },
   { id: 2, name: "", standard: "", actual: "", qty: "" },
   { id: 3, name: "", standard: "", actual: "", qty: "" },
 ];
@@ -22,7 +26,8 @@ const num = (v: string) => {
 
 export function PurchasePriceVarianceCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
-  const [items, setItems] = useState<PpvItem[]>(INITIAL);
+  const { t } = useI18n();
+  const [items, setItems] = useState<PpvItem[]>(() => initialItems(t("ppvSampleItem")));
 
   const update = (id: number, patch: Partial<PpvItem>) =>
     setItems((prev) => prev.map((i) => (i.id === id ? { ...i, ...patch } : i)));
@@ -52,17 +57,22 @@ export function PurchasePriceVarianceCalculatorTool() {
   const inputClass =
     "w-full rounded-lg border border-muted-line/40 bg-white px-2 py-2 text-sm text-ink outline-none focus:border-indigo";
 
+  // The item name is set in bold mid-sentence, so the sentence is split around
+  // it rather than broken into fragments a translator cannot reorder.
+  const overrun = splitAround(t("ppvBiggestOverrun"), "name");
+  const saving = splitAround(t("ppvBiggestSaving"), "name");
+
   return (
     <div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[520px] text-sm">
           <thead>
             <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-              <th className="py-2 pr-2">Item</th>
-              <th className="py-2 pr-2 text-right">Standard cost</th>
-              <th className="py-2 pr-2 text-right">Actual cost</th>
-              <th className="py-2 pr-2 text-right">Qty</th>
-              <th className="py-2 pr-2 text-right">Variance impact</th>
+              <th className="py-2 pr-2">{t("meItemNo")}</th>
+              <th className="py-2 pr-2 text-right">{t("ppvStandardCost")}</th>
+              <th className="py-2 pr-2 text-right">{t("ppvActualCost")}</th>
+              <th className="py-2 pr-2 text-right">{t("ppvQty")}</th>
+              <th className="py-2 pr-2 text-right">{t("ppvVarianceImpact")}</th>
               <th className="py-2" />
             </tr>
           </thead>
@@ -77,7 +87,7 @@ export function PurchasePriceVarianceCalculatorTool() {
                     <input
                       value={item.name}
                       onChange={(e) => update(item.id, { name: e.target.value })}
-                      placeholder="e.g. Steel sheet"
+                      placeholder={t("ppvItemPlaceholder")}
                       className={inputClass}
                     />
                   </td>
@@ -139,41 +149,37 @@ export function PurchasePriceVarianceCalculatorTool() {
         }
         className="mt-3 rounded-lg border border-indigo/30 px-4 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
       >
-        + Add item
+        {t("ppvAddItem")}
       </button>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <ResultStat
-          label={computed.total > 0 ? "Total variance (unfavourable)" : "Total variance"}
+          label={t(computed.total > 0 ? "ppvTotalVarianceUnfav" : "ppvTotalVariance")}
           value={formatCurrency(computed.total)}
           emphasis
         />
-        <ResultStat
-          label="Items compared"
-          value={String(computed.activeRows.length)}
-        />
+        <ResultStat label={t("ppvItemsCompared")} value={String(computed.activeRows.length)} />
       </div>
 
       {computed.worst && computed.worst.impact > 0 ? (
         <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
-          Biggest overrun: <span className="font-semibold">{computed.worst.name}</span> —{" "}
-          {formatCurrency(computed.worst.impact)} above plan ({formatNumber(computed.worst.pct, 1)}%
-          per unit). Investigate this one first.
+          {overrun[0]}
+          <span className="font-semibold">{computed.worst.name}</span>
+          {fill(overrun[1], {
+            amount: formatCurrency(computed.worst.impact),
+            pct: formatNumber(computed.worst.pct, 1),
+          })}
         </p>
       ) : null}
       {computed.best && computed.best.impact < 0 ? (
         <p className="mt-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
-          Biggest saving: <span className="font-semibold">{computed.best.name}</span> —{" "}
-          {formatCurrency(Math.abs(computed.best.impact))} below plan. Worth understanding why, so
-          you can repeat it.
+          {saving[0]}
+          <span className="font-semibold">{computed.best.name}</span>
+          {fill(saving[1], { amount: formatCurrency(Math.abs(computed.best.impact)) })}
         </p>
       ) : null}
 
-      <p className="mt-4 text-sm text-muted">
-        PPV = (actual price − standard price) × quantity, per item. Red rows cost more than planned
-        (unfavourable); green rows beat the plan. Standard price is your budgeted or negotiated
-        rate.
-      </p>
+      <p className="mt-4 text-sm text-muted">{t("ppvFootnote")}</p>
     </div>
   );
 }

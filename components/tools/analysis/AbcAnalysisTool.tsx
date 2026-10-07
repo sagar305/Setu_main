@@ -173,7 +173,7 @@ export function AbcAnalysisTool() {
       <h2>${esc(t("abcClassSummary"))}</h2>
       <table><thead><tr><th>${esc(t("abcClassCol"))}</th><th class="r">${esc(t("abcItemsCol"))}</th><th class="r">${esc(t("abcUsageValue"))}</th><th class="r">${esc(t("abcShareCol"))}</th></tr></thead><tbody>${classRows}</tbody></table>
       <h2>${esc(t("abcRankingHeading"))}</h2>
-      <table><thead><tr><th>${esc(t("abcRank"))}</th><th>${esc(t("abcItemCol"))}</th><th class="r">${esc(t("abcUsageValue"))}</th><th class="r">${esc(t("abcPctOfTotal"))}</th><th class="r">${esc(t("abcCumulativePct"))}</th><th class="c">${esc(t("abcClassCol"))}</th></tr></thead><tbody>${itemRows}</tbody></table>
+      <table><thead><tr><th>${esc(t("abcRank"))}</th><th>${esc(t("itemLabel"))}</th><th class="r">${esc(t("abcUsageValue"))}</th><th class="r">${esc(t("abcPctOfTotal"))}</th><th class="r">${esc(t("abcCumulativePct"))}</th><th class="c">${esc(t("abcClassCol"))}</th></tr></thead><tbody>${itemRows}</tbody></table>
       <script>window.onload=()=>window.print()</script>
     </body></html>`;
     const win = window.open("", "_blank");
@@ -331,7 +331,7 @@ export function AbcAnalysisTool() {
                 <thead>
                   <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
                     <th className="py-2 pr-3">{t("abcRank")}</th>
-                    <th className="py-2 pr-3">{t("abcItemCol")}</th>
+                    <th className="py-2 pr-3">{t("itemLabel")}</th>
                     <th className="py-2 pr-3 text-right">{t("abcUsageValue")}</th>
                     <th className="py-2 pr-3 text-right">{t("abcPctOfTotal")}</th>
                     <th className="py-2 pr-3 text-right">{t("abcCumulativePct")}</th>

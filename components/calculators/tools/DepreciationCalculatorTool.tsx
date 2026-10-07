@@ -6,6 +6,7 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 type Method = "sl" | "wdv";
 
@@ -13,6 +14,7 @@ type ScheduleRow = { year: number; opening: number; depreciation: number; closin
 
 export function DepreciationCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
+  const { t } = useI18n();
   const [method, setMethod] = useState<Method>("sl");
   const [cost, setCost] = useState("500000");
   const [salvage, setSalvage] = useState("50000");
@@ -50,29 +52,34 @@ export function DepreciationCalculatorTool() {
     <div>
       <SegmentedControl
         options={[
-          { label: "Straight line", value: "sl" },
-          { label: "Written down value", value: "wdv" },
+          { label: t("depStraightLine"), value: "sl" },
+          { label: t("depWdv"), value: "wdv" },
         ]}
         value={method}
         onChange={setMethod}
       />
 
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
-        <NumberField label="Asset cost" value={cost} onChange={setCost} prefix="₹" />
-        <NumberField label="Salvage value" value={salvage} onChange={setSalvage} prefix="₹" />
-        <NumberField label="Useful life" value={life} onChange={setLife} suffix="yrs" />
+        <NumberField label={t("depAssetCost")} value={cost} onChange={setCost} prefix="₹" />
+        <NumberField label={t("depSalvage")} value={salvage} onChange={setSalvage} prefix="₹" />
+        <NumberField
+          label={t("depUsefulLife")}
+          value={life}
+          onChange={setLife}
+          suffix={t("unitYrs")}
+        />
         {method === "wdv" ? (
-          <NumberField label="Depreciation rate" value={rate} onChange={setRate} suffix="%" />
+          <NumberField label={t("depRate")} value={rate} onChange={setRate} suffix="%" />
         ) : null}
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <ResultStat
-          label={method === "sl" ? "Annual depreciation" : "First-year depreciation"}
+          label={t(method === "sl" ? "depAnnual" : "depFirstYear")}
           value={formatCurrency(result.annual)}
           emphasis
         />
-        <ResultStat label="Book value at end of life" value={formatCurrency(result.finalValue)} />
+        <ResultStat label={t("depBookValueEnd")} value={formatCurrency(result.finalValue)} />
       </div>
 
       {result.schedule.length > 0 ? (
@@ -80,10 +87,10 @@ export function DepreciationCalculatorTool() {
           <table className="w-full min-w-[420px] text-sm">
             <thead>
               <tr className="border-b-2 border-indigo/30 text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="py-2 pr-3">Year</th>
-                <th className="py-2 pr-3 text-right">Opening value</th>
-                <th className="py-2 pr-3 text-right">Depreciation</th>
-                <th className="py-2 text-right">Closing value</th>
+                <th className="py-2 pr-3">{t("depYear")}</th>
+                <th className="py-2 pr-3 text-right">{t("depOpening")}</th>
+                <th className="py-2 pr-3 text-right">{t("depDepreciation")}</th>
+                <th className="py-2 text-right">{t("depClosing")}</th>
               </tr>
             </thead>
             <tbody>

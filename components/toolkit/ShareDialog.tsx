@@ -27,6 +27,8 @@ import {
   type SharedDoc,
 } from "@/lib/toolkit/shareLink";
 import { formatMoney } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { getWhatsAppShareUrl, shareViaWeb, canShare } from "@/lib/share";
 import { encodeDoc } from "@/lib/toolkit/shareLink";
 import { useShortenLink } from "@/lib/toolkit/useShortenLink";
@@ -44,7 +46,7 @@ export function ShareDialog({
   doc,
   title,
   allowFee = false,
-  recipientLabel = "customer",
+  recipientLabel,
   onSaveUpiDefault,
 }: {
   open: boolean;
@@ -53,11 +55,13 @@ export function ShareDialog({
   title?: string;
   /** Show an advance/booking-fee input (appointments). */
   allowFee?: boolean;
-  /** Who the link is going to — "parent" in the Tuition Class Manager. */
+  /** Who the link is going to — "parent" in the Tuition Class Manager.
+   *  Already translated by the caller; defaults to "customer". */
   recipientLabel?: string;
   /** Called when the user opts to save an entered UPI as the business default. */
   onSaveUpiDefault?: (upiId: string) => void;
 }) {
+  const { t, lang } = useI18n();
   const [upiId, setUpiId] = useState("");
   const [fee, setFee] = useState<string>("");
   const [saveDefault, setSaveDefault] = useState(false);
@@ -115,9 +119,10 @@ export function ShareDialog({
   const phone = recipientPhone(effectiveDoc);
   const longLink = url.length > 1800;
 
+  // The sender is writing this, so it is composed in the sender's language.
   const message = [
-    `${docTitle(effectiveDoc)} from ${doc.b.n}`,
-    amount > 0 ? `Amount: ${formatMoney(amount, currency)}` : "",
+    fill(t("sdDocFrom"), { title: docTitle(effectiveDoc, lang), business: doc.b.n }),
+    amount > 0 ? fill(t("sdAmountLine"), { amount: formatMoney(amount, currency) }) : "",
     "",
     url,
   ]
@@ -148,31 +153,29 @@ export function ShareDialog({
 
   const onNativeShare = async () => {
     persistUpiIfAsked();
-    await shareViaWeb({ title: docTitle(effectiveDoc), text: message });
+    await shareViaWeb({ title: docTitle(effectiveDoc, lang), text: message });
   };
 
   // UPI is an India/INR rail; only offer the payment setup for INR documents.
   const upiEnabled = supportsUpi(currency);
 
   return (
-    <Modal open={open} onClose={onClose} title={title ?? "Share"}>
+    <Modal open={open} onClose={onClose} title={title ?? t("sdShare")}>
       <div className="space-y-4">
         {/* Payment setup — INR only */}
         {upiEnabled ? (
         <div className="rounded-lg border border-muted-line/30 p-3">
           <label className="block text-sm font-semibold text-ink">
-            UPI ID for payment {amount > 0 ? "" : "(optional)"}
+            {t(amount > 0 ? "sdUpiId" : "sdUpiIdOptional")}
           </label>
           <input
             value={upiId}
             onChange={(e) => setUpiId(e.target.value)}
-            placeholder="shopname@okhdfcbank"
+            placeholder={t("sdUpiPlaceholder")}
             className="mt-1 w-full rounded-lg border border-muted-line/40 px-3 py-2 text-sm outline-none focus:border-indigo"
           />
           {upiId.trim() && !isValidUPIId(upiId.trim()) ? (
-            <p className="mt-1 text-xs text-amber-600">
-              This doesn&apos;t look like a valid UPI ID — the pay button may not work.
-            </p>
+            <p className="mt-1 text-xs text-amber-600">{t("sdInvalidUpi")}</p>
           ) : null}
           {onSaveUpiDefault && upiId.trim() && upiId.trim() !== (doc.b.u ?? "") ? (
             <label className="mt-2 flex items-center gap-2 text-xs text-muted">
@@ -182,14 +185,14 @@ export function ShareDialog({
                 onChange={(e) => setSaveDefault(e.target.checked)}
                 className="h-4 w-4 accent-indigo"
               />
-              Save as my default UPI ID
+              {t("sdSaveDefaultUpi")}
             </label>
           ) : null}
 
           {allowFee ? (
             <div className="mt-3">
               <label className="block text-sm font-semibold text-ink">
-                Advance / booking fee (optional)
+                {t("sdAdvanceFee")}
               </label>
               <input
                 type="number"
@@ -208,17 +211,19 @@ export function ShareDialog({
         <div className="flex items-center gap-3">
           {qr ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={qr} alt="Link QR" className="h-24 w-24 shrink-0 rounded-lg border border-muted-line/30 bg-white p-1" />
+            <img src={qr} alt={t("sdLinkQrAlt")} className="h-24 w-24 shrink-0 rounded-lg border border-muted-line/30 bg-white p-1" />
           ) : null}
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Shareable link</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t("sdShareableLink")}
+            </p>
             <p className="mt-1 break-all rounded-lg bg-cream-paper/60 p-2 text-xs text-ink">{url}</p>
 
             {shortener.offered && !shortener.shortUrl ? (
               <div className="mt-2">
                 {shortener.auto ? (
                   shortener.status === "working" ? (
-                    <p className="text-xs text-muted">Shortening…</p>
+                    <p className="text-xs text-muted">{t("sdShortening")}</p>
                   ) : null
                 ) : (
                   <button
@@ -227,57 +232,48 @@ export function ShareDialog({
                     disabled={shortener.status === "working"}
                     className="rounded-lg border border-indigo/30 px-3 py-1.5 text-xs font-semibold text-indigo disabled:opacity-60"
                   >
-                    {shortener.status === "working" ? "Shortening…" : "Shorten link"}
+                    {t(shortener.status === "working" ? "sdShortening" : "sdShortenLink")}
                   </button>
                 )}
 
                 {shortener.status === "error" && shortener.failure === "offline" ? (
-                  <p className="mt-1 text-xs text-amber-600">
-                    Shortening needs an internet connection. The full link below works offline —
-                    send that instead.
-                  </p>
+                  <p className="mt-1 text-xs text-amber-600">{t("sdShortenOffline")}</p>
                 ) : null}
 
                 {shortener.status === "error" && shortener.failure !== "offline" ? (
-                  <p className="mt-1 text-xs text-amber-600">
-                    Couldn&apos;t shorten — using the full link.
-                  </p>
+                  <p className="mt-1 text-xs text-amber-600">{t("sdShortenFailed")}</p>
                 ) : null}
               </div>
             ) : null}
 
             {shortener.shortUrl ? (
-              <p className="mt-1 text-xs text-muted">
-                Shortened. This copy is stored online and deleted 180 days after it was last opened —
-                so the recipient needs an internet connection to open it.
-              </p>
+              <p className="mt-1 text-xs text-muted">{t("sdShortened")}</p>
             ) : longLink ? (
-              <p className="mt-1 text-xs text-muted">
-                The link is long because the whole document is inside it (nothing is stored online).
-                Prefer the QR code or the WhatsApp button below — both handle any length.
-              </p>
+              <p className="mt-1 text-xs text-muted">{t("sdLongLink")}</p>
             ) : null}
           </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={onWhatsApp} className={`${primaryBtnClass} flex-1`}>
-            WhatsApp{phone ? ` to ${recipientLabel}` : ""}
+            {phone
+              ? fill(t("sdWhatsAppTo"), {
+                  recipient: recipientLabel ?? t("sdRecipientCustomer"),
+                })
+              : t("sdWhatsApp")}
           </button>
           <button type="button" onClick={copy} className={`${secondaryBtnClass} flex-1`}>
-            {copied ? "Copied ✓" : "Copy link"}
+            {copied ? `${t("copied")} ✓` : t("qmCopyLink")}
           </button>
           {canShare() ? (
             <button type="button" onClick={onNativeShare} className={`${secondaryBtnClass} flex-1`}>
-              Share…
+              {t("sdShareEllipsis")}
             </button>
           ) : null}
         </div>
 
         <p className="text-xs text-muted">
-          {shortener.shortUrl
-            ? "A copy of this document is stored so the link can stay short. The recipient can view it and pay by UPI without any app or login."
-            : "The whole document travels inside the link — nothing is uploaded. The recipient can view it and pay by UPI without any app or login."}
+          {t(shortener.shortUrl ? "sdFootStored" : "sdFootInline")}
         </p>
       </div>
     </Modal>

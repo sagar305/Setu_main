@@ -122,11 +122,14 @@ export type CurrencyInfo = { code: string; name: string; symbol: string };
 /**
  * Every ISO 4217 currency the browser knows, named and symbolled via Intl —
  * no hand-maintained list to go stale. INR pinned first for the home market.
+ *
+ * The names are read off a picker, so they come in the reader's language; the
+ * codes and symbols are the same everywhere.
  */
-export function allCurrencies(): CurrencyInfo[] {
+export function allCurrencies(locale = "en"): CurrencyInfo[] {
   try {
     const codes = Intl.supportedValuesOf("currency");
-    const names = new Intl.DisplayNames(["en"], { type: "currency" });
+    const names = new Intl.DisplayNames([locale], { type: "currency" });
     const list = codes.map((code) => ({
       code,
       name: names.of(code) ?? code,

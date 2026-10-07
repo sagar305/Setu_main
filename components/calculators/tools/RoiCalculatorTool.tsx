@@ -5,9 +5,11 @@ import { NumberField } from "@/components/calculators/NumberField";
 import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
 
 export function RoiCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
+  const { t } = useI18n();
   const [invested, setInvested] = useState("100000");
   const [returned, setReturned] = useState("140000");
   const [years, setYears] = useState("2");
@@ -28,33 +30,40 @@ export function RoiCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-3">
-        <NumberField label="Amount invested" value={invested} onChange={setInvested} prefix="₹" />
-        <NumberField label="Amount returned" value={returned} onChange={setReturned} prefix="₹" />
         <NumberField
-          label="Holding period"
+          label={t("roiInvested")}
+          value={invested}
+          onChange={setInvested}
+          prefix="₹"
+        />
+        <NumberField
+          label={t("roiReturned")}
+          value={returned}
+          onChange={setReturned}
+          prefix="₹"
+        />
+        <NumberField
+          label={t("roiHoldingPeriod")}
           value={years}
           onChange={setYears}
-          suffix="yrs"
-          placeholder="optional"
+          suffix={t("unitYrs")}
+          placeholder={t("roiOptional")}
         />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
         <ResultStat
-          label={result.gain >= 0 ? "Net profit" : "Net loss"}
+          label={t(result.gain >= 0 ? "roiNetProfit" : "roiNetLoss")}
           value={formatCurrency(result.gain)}
         />
-        <ResultStat label="ROI" value={`${formatNumber(result.roi, 2)}%`} emphasis />
+        <ResultStat label={t("roiRoi")} value={`${formatNumber(result.roi, 2)}%`} emphasis />
         <ResultStat
-          label="Annualized ROI"
+          label={t("roiAnnualized")}
           value={result.hasPeriod ? `${formatNumber(result.annualized, 2)}%` : "—"}
         />
       </div>
 
-      <p className="mt-4 text-sm text-muted">
-        ROI = (returned − invested) ÷ invested × 100. Annualized ROI smooths the same return over
-        the holding period so you can compare investments of different lengths.
-      </p>
+      <p className="mt-4 text-sm text-muted">{t("roiFootnote")}</p>
     </div>
   );
 }
