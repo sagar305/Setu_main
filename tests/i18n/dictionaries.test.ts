@@ -16,10 +16,15 @@ import { translate } from "@/lib/i18n/translate";
  */
 const OTHERS = LANGUAGES.map((l) => l.code).filter((code) => code !== "en");
 
+/** The {placeholder} names a string carries, as a comparable signature. */
+const placeholders = (text: string) =>
+  [...text.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort().join(",");
+
 describe.each([
   ["the shared chrome dictionary", BASE_DICT, DICTIONARIES],
   ["the calculator dictionary", CALC_BASE, CALC_DICTIONARIES],
-] as const)("%s", (_name, base, dictionaries) => {
+] as const)("%s", (_name, baseDict, dictionaries) => {
+  const base = baseDict as Record<string, string>;
   const keys = Object.keys(base);
 
   it("has keys to translate", () => {
@@ -36,6 +41,21 @@ describe.each([
     const dict = (dictionaries[lang as LanguageCode] ?? {}) as Record<string, string>;
     const blank = keys.filter((key) => !dict[key]?.trim());
     expect(blank).toEqual([]);
+  });
+
+  /**
+   * Sentences with a figure or a name in them are stored with a {placeholder}
+   * that `fill` substitutes. A translation that drops one renders the sentence
+   * without its number — "above plan" with no amount — and a translation that
+   * renames one leaves the braces on screen. Neither shows up in English, so
+   * the only place it can be caught is here.
+   */
+  it.each(OTHERS)("keeps every placeholder in %s", (lang) => {
+    const dict = (dictionaries[lang as LanguageCode] ?? {}) as Record<string, string>;
+    const mismatched = keys
+      .filter((key) => dict[key])
+      .filter((key) => placeholders(dict[key]) !== placeholders(base[key]));
+    expect(mismatched).toEqual([]);
   });
 });
 

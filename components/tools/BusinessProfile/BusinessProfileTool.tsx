@@ -64,7 +64,7 @@ function readLogo(file: File): Promise<string> {
 
 export function BusinessProfileTool() {
   const [form, setForm] = useState(BLANK);
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [existing, setExisting] = useState<Business | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -72,8 +72,13 @@ export function BusinessProfileTool() {
   const [currencies, setCurrencies] = useState<CurrencyInfo[]>([]);
   const [timezones, setTimezones] = useState<string[]>([]);
 
+  // Kept apart from the load below so switching language renames the currencies
+  // without re-reading the saved profile over whatever is being typed.
   useEffect(() => {
-    setCurrencies(allCurrencies());
+    setCurrencies(allCurrencies(lang));
+  }, [lang]);
+
+  useEffect(() => {
     setTimezones(allTimezones());
     setForm((f) => ({ ...f, timezone: f.timezone || detectTimezone() }));
     getBusiness()

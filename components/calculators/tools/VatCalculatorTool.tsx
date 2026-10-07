@@ -6,34 +6,78 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { SegmentedControl } from "@/components/calculators/SegmentedControl";
 import { formatCurrency, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { COUNTRY_VAT_RATES } from "@/lib/constants/taxRates";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { COUNTRY_VAT_RATES, type CountryVatRate } from "@/lib/constants/taxRates";
 
 type Mode = "add" | "remove";
 
 export function VatCalculatorTool() {
   usePreferredCurrency(); // re-render when the business currency changes
+  const { t, lang } = useI18n();
   const [mode, setMode] = useState<Mode>("add");
   const [amount, setAmount] = useState("1000");
   const [rate, setRate] = useState("20");
-  const [country, setCountry] = useState("United Kingdom");
+  // The ISO code, not the name: the name on screen is whatever the reader's
+  // language calls the country, so it cannot be what identifies the row.
+  const [code, setCode] = useState("GB");
   const [search, setSearch] = useState("");
   const [customRate, setCustomRate] = useState(false);
 
+  // Country names come from the browser's own locale data, so the table reads
+  // in the page's language without 65 names to translate by hand. Falls back to
+  // the English name where Intl has nothing.
+  const names = useMemo(() => {
+    let display: Intl.DisplayNames | null = null;
+    try {
+      display = new Intl.DisplayNames([lang], { type: "region" });
+    } catch {
+      display = null;
+    }
+    const map = new Map<string, string>();
+    for (const c of COUNTRY_VAT_RATES) {
+      let name = c.country;
+      try {
+        name = display?.of(c.code) || c.country;
+      } catch {
+        name = c.country;
+      }
+      map.set(c.code, name);
+    }
+    return map;
+  }, [lang]);
+
+  const countryName = (c: CountryVatRate) => names.get(c.code) ?? c.country;
+
+  // Searching matches the translated name and the English one, so a reader who
+  // knows the country by either spelling finds it.
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return COUNTRY_VAT_RATES;
-    return COUNTRY_VAT_RATES.filter((c) => c.country.toLowerCase().includes(q));
-  }, [search]);
+    return COUNTRY_VAT_RATES.filter(
+      (c) =>
+        (names.get(c.code) ?? "").toLowerCase().includes(q) ||
+        c.country.toLowerCase().includes(q) ||
+        c.code.toLowerCase() === q
+    );
+  }, [search, names]);
 
-  const selected = COUNTRY_VAT_RATES.find((c) => c.country === country);
+  const selected = COUNTRY_VAT_RATES.find((c) => c.code === code);
 
-  const pick = (name: string) => {
-    const c = COUNTRY_VAT_RATES.find((x) => x.country === name);
-    if (!c) return;
-    setCountry(name);
+  const pick = (c: CountryVatRate) => {
+    setCode(c.code);
     setCustomRate(false);
     setRate(String(c.rate));
   };
+
+  // Reduced rates are figures and stay as written; the note is prose.
+  const noteFor = (c: CountryVatRate) =>
+    [
+      c.reduced ? fill(t("vatReducedRates"), { rates: c.reduced }) : "",
+      c.note ? t(c.note) : "",
+    ]
+      .filter(Boolean)
+      .join(" · ");
 
   const result = useMemo(() => {
     const value = parseNumber(amount);
@@ -50,8 +94,8 @@ export function VatCalculatorTool() {
     <div>
       <SegmentedControl
         options={[
-          { label: "Add VAT", value: "add" },
-          { label: "Remove VAT", value: "remove" },
+          { label: t("vatAdd"), value: "add" },
+          { label: t("vatRemove"), value: "remove" },
         ]}
         value={mode}
         onChange={setMode}
@@ -63,7 +107,7 @@ export function VatCalculatorTool() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search country… (65+ countries)"
+            placeholder={fill(t("vatSearchCountry"), { count: COUNTRY_VAT_RATES.length })}
             className="w-full rounded-lg border border-muted-line/40 px-3 py-2 text-sm text-ink outline-none focus:border-indigo"
           />
         </div>
@@ -71,29 +115,31 @@ export function VatCalculatorTool() {
           <table className="w-full text-sm">
             <thead className="sticky top-0 bg-white">
               <tr className="text-left text-xs font-semibold uppercase tracking-wide text-muted">
-                <th className="px-3 py-2">Country</th>
-                <th className="px-3 py-2">Type</th>
-                <th className="px-3 py-2 text-right">Rate</th>
-                <th className="hidden px-3 py-2 sm:table-cell">Notes</th>
+                <th className="px-3 py-2">{t("vatCountry")}</th>
+                <th className="px-3 py-2">{t("typeLabel")}</th>
+                <th className="px-3 py-2 text-right">{t("rate")}</th>
+                <th className="hidden px-3 py-2 sm:table-cell">{t("notes")}</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map((c) => (
                 <tr
-                  key={c.country}
-                  onClick={() => pick(c.country)}
+                  key={c.code}
+                  onClick={() => pick(c)}
                   className={`cursor-pointer border-t border-muted-line/20 ${
-                    country === c.country && !customRate ? "bg-indigo/10" : "hover:bg-cream-paper/60"
+                    code === c.code && !customRate ? "bg-indigo/10" : "hover:bg-cream-paper/60"
                   }`}
                 >
-                  <td className="px-3 py-1.5 font-medium text-ink">{c.country}</td>
+                  <td className="px-3 py-1.5 font-medium text-ink">{countryName(c)}</td>
                   <td className="px-3 py-1.5">
                     <span className="rounded-full bg-cream px-2 py-0.5 text-xs font-semibold text-muted">
                       {c.type}
                     </span>
                   </td>
                   <td className="px-3 py-1.5 text-right font-bold">{c.rate}%</td>
-                  <td className="hidden px-3 py-1.5 text-xs text-muted sm:table-cell">{c.note ?? ""}</td>
+                  <td className="hidden px-3 py-1.5 text-xs text-muted sm:table-cell">
+                    {noteFor(c)}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -108,39 +154,40 @@ export function VatCalculatorTool() {
           onChange={(e) => setCustomRate(e.target.checked)}
           className="h-4 w-4 accent-indigo"
         />
-        Use a custom rate
+        {t("vatCustomRate")}
       </label>
 
       <div className="mt-4 grid gap-5 sm:grid-cols-2">
         <NumberField
-          label={mode === "add" ? "Amount before VAT" : "Amount including VAT"}
+          label={t(mode === "add" ? "vatAmountBefore" : "vatAmountIncluding")}
           value={amount}
           onChange={setAmount}
           prefix="₹"
         />
         {customRate ? (
-          <NumberField label="Custom rate" value={rate} onChange={setRate} suffix="%" />
+          <NumberField label={t("vatCustomRateLabel")} value={rate} onChange={setRate} suffix="%" />
         ) : (
           <div className="rounded-xl bg-cream-paper/70 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Selected</p>
-            <p className="mt-1 text-lg font-bold text-ink">
-              {selected ? `${selected.country} — ${rate}% ${selected.type}` : `${rate}%`}
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t("vatSelected")}
             </p>
-            {selected?.note ? <p className="text-xs text-muted">{selected.note}</p> : null}
+            <p className="mt-1 text-lg font-bold text-ink">
+              {selected ? `${countryName(selected)} — ${rate}% ${selected.type}` : `${rate}%`}
+            </p>
+            {selected && noteFor(selected) ? (
+              <p className="text-xs text-muted">{noteFor(selected)}</p>
+            ) : null}
           </div>
         )}
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <ResultStat label="Net amount" value={formatCurrency(result.net)} />
-        <ResultStat label="VAT amount" value={formatCurrency(result.vat)} />
-        <ResultStat label="Gross amount" value={formatCurrency(result.gross)} emphasis />
+        <ResultStat label={t("vatNetAmount")} value={formatCurrency(result.net)} />
+        <ResultStat label={t("vatVatAmount")} value={formatCurrency(result.vat)} />
+        <ResultStat label={t("vatGrossAmount")} value={formatCurrency(result.gross)} emphasis />
       </div>
 
-      <p className="mt-4 text-xs text-muted">
-        Standard rates for reference — many countries also apply reduced or zero rates to specific
-        goods. Verify the rate for your product category before invoicing.
-      </p>
+      <p className="mt-4 text-xs text-muted">{t("vatFootnote")}</p>
     </div>
   );
 }

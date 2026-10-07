@@ -3,7 +3,8 @@ import { describe, expect, it } from "vitest";
 import { LANGUAGES, type LanguageCode } from "@/lib/i18n/config";
 import { docTitle, type SharedDoc } from "@/lib/toolkit/shareLink";
 
-const business = { n: "Shop", cur: "INR" } as SharedDoc["b"];
+const business: SharedDoc["b"] = { n: "Shop", cur: "INR" };
+const DATE = "2026-01-01";
 
 /**
  * docTitle is read by both sides of a share — the sender composing the message
@@ -13,15 +14,26 @@ const business = { n: "Shop", cur: "INR" } as SharedDoc["b"];
  * wrong language.
  */
 const DOCS: SharedDoc[] = [
-  { t: "inv", b: business, no: "INV-1", it: [], sub: 0, tot: 0 } as SharedDoc,
-  { t: "quo", b: business, no: "QUO-1", it: [], sub: 0, tot: 0 } as SharedDoc,
-  { t: "led", b: business, cn: "A", bal: 0 } as SharedDoc,
-  { t: "apt", b: business, cn: "A", svc: "S", dt: "2026-01-01", tm: "10:00" } as SharedDoc,
-  { t: "fee", b: business, no: "F-1", sn: "A", amt: 0 } as SharedDoc,
-  { t: "mrk", b: business, sn: "A", tn: "T", mk: 1, max: 10 } as SharedDoc,
-  { t: "att", b: business, sn: "A", pd: "Aug", prs: 1, tot: 2, pct: 50 } as SharedDoc,
-  { t: "rx", b: business, pn: "A", med: [] } as SharedDoc,
-  { t: "rnt", b: business, no: "R-1", st: "confirmed", it: [], sub: 0, tot: 0 } as SharedDoc,
+  { t: "inv", b: business, no: "INV-1", dt: DATE, it: [], sub: 0, tot: 0 },
+  { t: "quo", b: business, no: "QUO-1", dt: DATE, it: [], sub: 0, tot: 0 },
+  { t: "led", b: business, cn: "A", bal: 0 },
+  { t: "apt", b: business, cn: "A", svc: "S", dt: DATE, tm: "10:00" },
+  { t: "fee", b: business, no: "F-1", dt: DATE, sn: "A", amt: 0 },
+  { t: "mrk", b: business, sn: "A", tn: "T", dt: DATE, mk: 1, max: 10 },
+  { t: "att", b: business, sn: "A", pd: "Aug", prs: 1, tot: 2, pct: 50 },
+  { t: "rx", b: business, pn: "A", dt: DATE, med: [] },
+  {
+    t: "rnt",
+    b: business,
+    no: "R-1",
+    st: "confirmed",
+    dt: DATE,
+    fd: DATE,
+    td: DATE,
+    it: [],
+    sub: 0,
+    tot: 0,
+  },
 ];
 
 describe("docTitle", () => {
