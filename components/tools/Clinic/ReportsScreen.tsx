@@ -23,8 +23,19 @@ import {
 import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
 import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { LanguageCode } from "@/lib/i18n/config";
 
-const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+/**
+ * Weekday names from Intl rather than a hardcoded English list, so the
+ * no-show table reads in the language of the page it is on.
+ */
+function weekdayNames(lang: LanguageCode): string[] {
+  const format = new Intl.DateTimeFormat(intlLocaleFor(lang), { weekday: "long" });
+  // 2023-01-01 was a Sunday, which is index 0 here and in Date.getDay().
+  return Array.from({ length: 7 }, (_, index) => format.format(new Date(2023, 0, 1 + index)));
+}
 
 function Block({
   title,
@@ -37,6 +48,7 @@ function Block({
   onExport?: () => void;
   children: React.ReactNode;
 }) {
+  const { t } = useI18n();
   return (
     <section className="rounded-2xl border border-muted-line/30 bg-white p-4">
       <div className="mb-3 flex items-start justify-between gap-3">
@@ -48,7 +60,7 @@ function Block({
           <button
             type="button"
             onClick={onExport}
-            aria-label={`Export ${title}`}
+            aria-label={fill(t("clRpExportTitled"), { title })}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo"
           >
             <Download className="h-4 w-4" />
@@ -94,7 +106,7 @@ function RankedList({
 }
 
 export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { visits, appointments, bills, patients, doctors, business, settings } = useClinic();
 
   const today = todayIso();
@@ -191,7 +203,12 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   // ---- No-show rate by weekday -------------------------------------------
   const noShowByWeekday = useMemo(() => {
-    const rows = WEEKDAYS.map((label) => ({ label, booked: 0, attended: 0, noShow: 0 }));
+    const rows = weekdayNames(lang).map((label) => ({
+      label,
+      booked: 0,
+      attended: 0,
+      noShow: 0,
+    }));
     for (const appointment of rangeAppointments) {
       const [y, m, d] = appointment.date.split("-").map(Number);
       const weekday = new Date(y, m - 1, d).getDay();
@@ -288,7 +305,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-muted-line/30 bg-white p-4">
         <label className="block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            From
+            {t("clRpFrom")}
           </span>
           <input
             type="date"
@@ -299,7 +316,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         </label>
         <label className="block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            To
+            {t("clRpTo")}
           </span>
           <input
             type="date"
@@ -309,21 +326,17 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           />
         </label>
         <div className="flex gap-2">
-          {[
-            ["7 days", 7],
-            ["30 days", 30],
-            ["90 days", 90],
-          ].map(([label, days]) => (
+          {[7, 30, 90].map((days) => (
             <button
-              key={label as string}
+              key={days}
               type="button"
               onClick={() => {
-                setFrom(addDays(today, -(days as number)));
+                setFrom(addDays(today, -days));
                 setTo(today);
               }}
               className={secondaryBtnClass}
             >
-              {label}
+              {fill(t("clRpDaysN"), { n: days })}
             </button>
           ))}
         </div>
@@ -331,27 +344,30 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Patients seen"
+          label={t("clRpPatientsSeen")}
           value={String(totalSeen)}
-          sub={`${totalNew} new · ${totalSeen - totalNew} repeat`}
+          sub={fill(t("clRpNewRepeat"), { fresh: totalNew, repeat: totalSeen - totalNew })}
         />
         <StatCard
-          label="Collected"
+          label={t("clRpCollected")}
           value={formatCurrency(revenue, currency)}
-          sub={`${formatCurrency(billed, currency)} billed`}
+          sub={fill(t("clRpBilledAmount"), { amount: formatCurrency(billed, currency) })}
         />
         <StatCard
-          label="No-show rate"
+          label={t("clRpNoShowRate")}
           value={totalBooked ? `${Math.round((totalNoShow / totalBooked) * 100)}%` : "—"}
-          sub={`${totalNoShow} of ${totalBooked}`}
+          sub={fill(t("clRpOfTotal"), { count: totalNoShow, total: totalBooked })}
         />
-        <StatCard label="Average wait" value={avgWait === null ? "—" : `${avgWait} min`} />
+        <StatCard
+          label={t("clTdAverageWait")}
+          value={avgWait === null ? "—" : fill(t("clTdMinutes"), { n: avgWait })}
+        />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Block
-          title="Footfall"
-          subtitle="Patients seen per day, new vs repeat"
+          title={t("clRpFootfall")}
+          subtitle={t("clRpFootfallSub")}
           onExport={() =>
             downloadCsv(
               "footfall.csv",
@@ -368,14 +384,14 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               .map(([date, row]) => ({
                 label: formatDate(date, lang),
                 value: row.total,
-                sub: `${row.fresh} new`,
+                sub: fill(t("clRpNewSuffix"), { count: row.fresh }),
               }))}
           />
         </Block>
 
         <Block
-          title="Top diagnoses"
-          subtitle="Most recorded diagnoses in this range"
+          title={t("clRpTopDiagnoses")}
+          subtitle={t("clRpTopDiagnosesSub")}
           onExport={() =>
             downloadCsv(
               "top-diagnoses.csv",
@@ -390,7 +406,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         </Block>
 
         <Block
-          title="Revenue by payment mode"
+          title={t("clRpRevenueByMode")}
           onExport={() =>
             downloadCsv(
               "revenue-by-mode.csv",
@@ -408,7 +424,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         </Block>
 
         <Block
-          title="Revenue by charge"
+          title={t("clRpRevenueByCharge")}
           onExport={() =>
             downloadCsv(
               "revenue-by-charge.csv",
@@ -426,7 +442,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         </Block>
 
         {revenueByDoctor.length > 1 && (
-          <Block title="Revenue by doctor">
+          <Block title={t("clRpRevenueByDoctor")}>
             <RankedList
               rows={revenueByDoctor}
               formatValue={(value) => formatCurrency(value, currency)}
@@ -435,7 +451,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         )}
 
         <Block
-          title="No-shows by day of week"
+          title={t("clRpNoShowsByDay")}
           onExport={() =>
             downloadCsv(
               "no-shows.csv",
@@ -450,14 +466,17 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             rows={noShowByWeekday.map((row) => ({
               label: row.label,
               value: row.noShow,
-              sub: `${row.booked} booked · ${row.attended} attended`,
+              sub: fill(t("clRpBookedAttended"), {
+                booked: row.booked,
+                attended: row.attended,
+              }),
             }))}
           />
         </Block>
 
         <Block
-          title="Peak hours"
-          subtitle="Arrivals by hour — use it to set slot lengths"
+          title={t("clRpPeakHours")}
+          subtitle={t("clRpPeakHoursSub")}
           onExport={() =>
             downloadCsv(
               "peak-hours.csv",
@@ -472,8 +491,8 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         </Block>
 
         <Block
-          title="Outstanding dues"
-          subtitle="Patient-wise, oldest first"
+          title={t("clRpOutstandingDues")}
+          subtitle={t("clRpDuesSub")}
           onExport={() =>
             downloadCsv(
               "outstanding-dues.csv",
@@ -491,7 +510,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           }
         >
           {duesAgeing.length === 0 ? (
-            <p className="text-sm text-muted">Nothing outstanding.</p>
+            <p className="text-sm text-muted">{t("clBlNothingOutstanding")}</p>
           ) : (
             <ul className="space-y-1.5">
               {duesAgeing.slice(0, 12).map((row) => (
@@ -506,7 +525,9 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                       {formatCurrency(row.amount, currency)}
                     </span>
                   </button>
-                  <p className="text-[11px] text-muted">{row.ageDays} days old</p>
+                  <p className="text-[11px] text-muted">
+                    {fill(t("clRpDaysOld"), { n: row.ageDays })}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -515,8 +536,8 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       </div>
 
       <Block
-        title="Follow-ups due this week"
-        subtitle="Patients advised a review, with nothing booked yet — this is the call list"
+        title={t("clRpFollowUpsDue")}
+        subtitle={t("clRpFollowUpsSub")}
         onExport={() =>
           downloadCsv(
             "follow-ups-due.csv",
@@ -537,7 +558,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         }
       >
         {followUpsDue.length === 0 ? (
-          <p className="text-sm text-muted">No follow-ups fall due in the next seven days.</p>
+          <p className="text-sm text-muted">{t("clRpNoFollowUps")}</p>
         ) : (
           <>
             <ul className="space-y-1.5">
@@ -553,8 +574,11 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                       onClick={() => patient && onNavigate("patients", patient.id)}
                       className="min-w-0 truncate text-left text-ink"
                     >
-                      {patient?.name ?? "Unknown"}
-                      <span className="text-muted"> · {visit.diagnosis || "No diagnosis"}</span>
+                      {patient?.name ?? t("clApUnknown")}
+                      <span className="text-muted">
+                        {" "}
+                        · {visit.diagnosis || t("clRpNoDiagnosisShort")}
+                      </span>
                     </button>
                     <span className="shrink-0 text-xs text-muted">{formatDate(dueOn, lang)}</span>
                   </li>
@@ -567,7 +591,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               className={`${primaryBtnClass} mt-4`}
             >
               <MessageCircle className="h-4 w-4" />
-              Send all {followUpsDue.length}
+              {fill(t("clRpSendAll"), { count: followUpsDue.length })}
             </button>
           </>
         )}
@@ -575,7 +599,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
       <SendQueue
         open={queueOpen}
-        title="Follow-up reminders"
+        title={t("clRpFollowUpReminders")}
         messages={followUpMessages}
         onClose={() => setQueueOpen(false)}
         onSent={() => setQueueOpen(false)}

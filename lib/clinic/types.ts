@@ -230,6 +230,28 @@ const FORM_SHORT_KEYS: Record<MedicineForm, TKey | ""> = {
   other: "",
 };
 
+/**
+ * The form's full name, for the dropdown in the prescription pad. That
+ * dropdown rendered the stored code itself — "tablet", "syrup" — so it was
+ * English on every page and lower-case in the middle of a form.
+ */
+const FORM_NAME_KEYS: Record<MedicineForm, TKey> = {
+  tablet: "clFormNameTablet",
+  capsule: "clFormNameCapsule",
+  syrup: "clFormNameSyrup",
+  injection: "clFormNameInjection",
+  drops: "clFormNameDrops",
+  ointment: "clFormNameOintment",
+  inhaler: "clFormNameInhaler",
+  sachet: "clFormNameSachet",
+  other: "clFormNameOther",
+};
+
+export function formName(form: MedicineForm, lang: LanguageCode): string {
+  const key = FORM_NAME_KEYS[form];
+  return key ? translate(lang, key) : form;
+}
+
 export function formShort(form: MedicineForm, lang: LanguageCode): string {
   const key = FORM_SHORT_KEYS[form];
   return key ? translate(lang, key) : "";

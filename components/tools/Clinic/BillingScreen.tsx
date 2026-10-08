@@ -28,6 +28,7 @@ import {
   type Bill,
   type BillLine,
   type Patient,
+  paymentModeLabel,
 } from "@/lib/clinic/types";
 import { formatCurrency } from "@/lib/format";
 import {
@@ -42,6 +43,7 @@ import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 type Tab = "bills" | "dues";
@@ -53,7 +55,7 @@ export function BillingScreen({
   onNavigate: NavigateFn;
   externalQuery: QueryRequest | null;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const {
     bills,
     patients,
@@ -139,16 +141,23 @@ export function BillingScreen({
   return (
     <div className="space-y-5">
       <div className="grid gap-3 sm:grid-cols-3">
-        <StatCard label="Collected today" value={formatCurrency(collectedToday, currency)} />
         <StatCard
-          label="Billed today"
-          value={formatCurrency(billedToday, currency)}
-          sub={`${todaysBills.length} ${todaysBills.length === 1 ? "bill" : "bills"}`}
+          label={t("clTdCollectedToday")}
+          value={formatCurrency(collectedToday, currency)}
         />
         <StatCard
-          label="Outstanding"
+          label={t("clBlBilledToday")}
+          value={formatCurrency(billedToday, currency)}
+          sub={fill(t(todaysBills.length === 1 ? "clBlBillCountOne" : "clBlBillCountMany"), {
+            count: todaysBills.length,
+          })}
+        />
+        <StatCard
+          label={t("clBlOutstanding")}
           value={formatCurrency(totalDues, currency)}
-          sub={`${dueRows.length} ${dueRows.length === 1 ? "patient" : "patients"}`}
+          sub={fill(t(dueRows.length === 1 ? "clPtCountOne" : "clPtCountMany"), {
+            count: dueRows.length,
+          })}
         />
       </div>
 
@@ -156,8 +165,8 @@ export function BillingScreen({
         <div className="flex gap-1">
           {(
             [
-              ["bills", `Bills (${bills.length})`],
-              ["dues", `Dues (${dueRows.length})`],
+              ["bills", fill(t("clBlTabBills"), { count: bills.length })],
+              ["dues", fill(t("clBlTabDues"), { count: dueRows.length })],
             ] as [Tab, string][]
           ).map(([id, label]) => (
             <button
@@ -183,12 +192,12 @@ export function BillingScreen({
             className={primaryBtnClass}
           >
             <Plus className="h-4 w-4" />
-            New bill
+            {t("clBlNewBill")}
           </button>
           {tab === "dues" && dueRows.length > 0 && (
             <button type="button" onClick={() => setQueueOpen(true)} className={secondaryBtnClass}>
               <MessageCircle className="h-4 w-4" />
-              Send reminders
+              {t("clBlSendReminders")}
             </button>
           )}
           {tab === "bills" && (
@@ -199,7 +208,7 @@ export function BillingScreen({
               className={secondaryBtnClass}
             >
               <Download className="h-4 w-4" />
-              Export
+              {t("appExport")}
             </button>
           )}
         </div>
@@ -209,8 +218,8 @@ export function BillingScreen({
         (bills.length === 0 ? (
           <EmptyState
             icon={<Receipt className="h-6 w-6" />}
-            title="No bills yet"
-            message="Bills you raise after a consultation appear here, with their receipts."
+            title={t("clBlNoBills")}
+            message={t("clBlNoBillsMsg")}
           />
         ) : (
           <ul className="space-y-2">
@@ -224,7 +233,7 @@ export function BillingScreen({
                 >
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold text-ink">
-                      {patient?.name ?? "Unknown"}{" "}
+                      {patient?.name ?? t("clApUnknown")}{" "}
                       <span className="font-normal text-muted">· {bill.receiptNo}</span>
                     </p>
                     <p className="truncate text-xs text-muted">
@@ -239,7 +248,9 @@ export function BillingScreen({
                     </p>
                     {due > 0 && (
                       <p className="text-xs font-semibold text-red-600">
-                        {formatCurrency(due, currency)} due
+                        {fill(t("clPcAmountDue"), {
+                          amount: formatCurrency(due, currency),
+                        })}
                       </p>
                     )}
                   </div>
@@ -254,14 +265,14 @@ export function BillingScreen({
                         className={secondaryBtnClass}
                       >
                         <IndianRupee className="h-4 w-4" />
-                        Collect
+                        {t("clBlCollect")}
                       </button>
                     )}
                     <button
                       type="button"
                       onClick={() => setReceiptBill(bill)}
-                      aria-label="Receipt"
-                      title="Receipt"
+                      aria-label={t("clDocReceipt")}
+                      title={t("clDocReceipt")}
                       className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo"
                     >
                       <Printer className="h-4 w-4" />
@@ -269,7 +280,7 @@ export function BillingScreen({
                     <button
                       type="button"
                       onClick={() => deleteBill(bill.id)}
-                      aria-label="Delete bill"
+                      aria-label={t("clBlDeleteBill")}
                       className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -285,8 +296,8 @@ export function BillingScreen({
         (dueRows.length === 0 ? (
           <EmptyState
             icon={<Receipt className="h-6 w-6" />}
-            title="Nothing outstanding"
-            message="Every bill is fully paid."
+            title={t("clBlNothingOutstanding")}
+            message={t("clBlAllPaid")}
           />
         ) : (
           <ul className="space-y-2">
@@ -321,7 +332,7 @@ export function BillingScreen({
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Send reminder"
+                    aria-label={t("clBlSendReminder")}
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo"
                   >
                     <MessageCircle className="h-4 w-4" />
@@ -348,18 +359,20 @@ export function BillingScreen({
       <Modal
         open={Boolean(collecting)}
         onClose={() => setCollecting(null)}
-        title="Collect payment"
+        title={t("clBlCollectPayment")}
       >
         {collecting && (
           <>
             <p className="text-sm text-muted">
-              {formatCurrency(billDue(collecting), currency)} outstanding on{" "}
-              {collecting.receiptNo}.
+              {fill(t("clBlOutstandingOn"), {
+                amount: formatCurrency(billDue(collecting), currency),
+                receipt: collecting.receiptNo,
+              })}
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <label className="block">
                 <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                  Amount
+                  {t("clBlAmount")}
                 </span>
                 <input
                   type="number"
@@ -374,7 +387,7 @@ export function BillingScreen({
               </label>
               <label className="block">
                 <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                  Mode
+                  {t("clBlMode")}
                 </span>
                 <select
                   value={collectMode}
@@ -383,7 +396,7 @@ export function BillingScreen({
                 >
                   {settings.paymentModes.map((mode) => (
                     <option key={mode} value={mode}>
-                      {mode}
+                      {paymentModeLabel(mode, lang)}
                     </option>
                   ))}
                 </select>
@@ -395,7 +408,7 @@ export function BillingScreen({
                 onClick={() => setCollecting(null)}
                 className={secondaryBtnClass}
               >
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="button"
@@ -409,7 +422,7 @@ export function BillingScreen({
                 }}
                 className={primaryBtnClass}
               >
-                Record payment
+                {t("clBlRecordPayment")}
               </button>
             </div>
           </>
@@ -418,7 +431,7 @@ export function BillingScreen({
 
       <SendQueue
         open={queueOpen}
-        title="Send dues reminders"
+        title={t("clBlSendDuesReminders")}
         messages={dueMessages}
         onClose={() => setQueueOpen(false)}
         onSent={() => setQueueOpen(false)}
@@ -441,6 +454,7 @@ function BillComposer({
   onClose: () => void;
   onCreated: (bill: Bill) => void;
 }) {
+  const { t, lang } = useI18n();
   const { charges, settings, business, activeDoctor, createBill, feeFor, visits } = useClinic();
   const [chosen, setChosen] = useState<Patient | null>(patient);
   const [lines, setLines] = useState<BillLine[]>([]);
@@ -470,8 +484,8 @@ function BillComposer({
         {
           id: generateId(),
           label: fee.isFollowUp
-            ? `Follow-up — within ${fee.withinDays} days`
-            : "Consultation",
+            ? fill(t("clBlFollowUpLine"), { n: fee.withinDays ?? 0 })
+            : t("clBlConsultationLine"),
           amount: fee.amount,
           kind: "consultation",
         },
@@ -495,7 +509,9 @@ function BillComposer({
       setLines([
         {
           id: generateId(),
-          label: fee.isFollowUp ? `Follow-up — within ${fee.withinDays} days` : "Consultation",
+          label: fee.isFollowUp
+            ? fill(t("clBlFollowUpLine"), { n: fee.withinDays ?? 0 })
+            : t("clBlConsultationLine"),
           amount: fee.amount,
           kind: "consultation",
         },
@@ -524,9 +540,9 @@ function BillComposer({
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="New bill" wide>
+    <Modal open={open} onClose={onClose} title={t("clBlNewBill")} wide>
       {!chosen ? (
-        <PatientPicker label="Patient" autoFocus onPick={pickPatient} />
+        <PatientPicker label={t("clDocPatient")} autoFocus onPick={pickPatient} />
       ) : (
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-3 rounded-lg bg-cream/60 px-3 py-2">
@@ -538,7 +554,7 @@ function BillComposer({
               onClick={() => setChosen(null)}
               className="text-xs font-semibold text-indigo underline"
             >
-              Change
+              {t("clApChange")}
             </button>
           </div>
 
@@ -556,7 +572,7 @@ function BillComposer({
                     )
                   }
                   className={inputClass}
-                  aria-label="Line description"
+                  aria-label={t("clBlLineDescription")}
                 />
                 <input
                   type="number"
@@ -571,12 +587,12 @@ function BillComposer({
                     )
                   }
                   className={`${inputClass} w-28 shrink-0`}
-                  aria-label="Amount"
+                  aria-label={t("clBlAmount")}
                 />
                 <button
                   type="button"
                   onClick={() => setLines((prev) => prev.filter((_, i) => i !== index))}
-                  aria-label="Remove line"
+                  aria-label={t("clBlRemoveLine")}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -618,14 +634,14 @@ function BillComposer({
               }
               className="rounded-full border border-dashed border-muted-line/50 px-3 py-1.5 text-xs font-semibold text-muted transition hover:text-indigo"
             >
-              + Other
+              {t("clBlOther")}
             </button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3">
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Discount
+                {t("clDocDiscount")}
               </span>
               <div className="flex gap-1">
                 <input
@@ -649,7 +665,7 @@ function BillComposer({
             </label>
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Paid
+                {t("clDocPaid")}
               </span>
               <input
                 type="number"
@@ -663,7 +679,7 @@ function BillComposer({
             </label>
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Mode
+                {t("clBlMode")}
               </span>
               <select
                 value={mode}
@@ -672,7 +688,7 @@ function BillComposer({
               >
                 {settings.paymentModes.map((option) => (
                   <option key={option} value={option}>
-                    {option}
+                    {paymentModeLabel(option, lang)}
                   </option>
                 ))}
               </select>
@@ -681,24 +697,24 @@ function BillComposer({
 
           <div className="rounded-lg bg-cream/60 px-3 py-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted">Subtotal</span>
+              <span className="text-muted">{t("clBlSubtotal")}</span>
               <span>{formatCurrency(subtotal, currency)}</span>
             </div>
             {discountValue > 0 && (
               <div className="flex justify-between">
-                <span className="text-muted">Discount</span>
+                <span className="text-muted">{t("clDocDiscount")}</span>
                 <span>-{formatCurrency(discountValue, currency)}</span>
               </div>
             )}
             <div className="mt-1 flex justify-between border-t border-muted-line/30 pt-1 font-bold text-ink">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span>{formatCurrency(total, currency)}</span>
             </div>
           </div>
 
           <div className="flex justify-end gap-3">
             <button type="button" onClick={onClose} className={secondaryBtnClass}>
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="button"
@@ -706,7 +722,7 @@ function BillComposer({
               disabled={saving || lines.length === 0}
               className={primaryBtnClass}
             >
-              {saving ? "Saving…" : "Save bill"}
+              {saving ? t("clPfSaving") : t("clBlSaveBill")}
             </button>
           </div>
         </div>
@@ -717,7 +733,7 @@ function BillComposer({
 
 /** Receipt preview, print and PDF. UPI QR appears when a UPI ID is configured. */
 function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => void }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { patients, doctors, business, settings } = useClinic();
   const [qr, setQr] = useState("");
   const [sharing, setSharing] = useState<SharedDoc | null>(null);
@@ -758,7 +774,7 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
   };
 
   return (
-    <Modal open onClose={onClose} title={`Receipt ${bill.receiptNo}`}>
+    <Modal open onClose={onClose} title={fill(t("clBlReceiptTitle"), { no: bill.receiptNo })}>
       <div className="rounded-lg border border-muted-line/30 bg-white p-4 text-sm">
         <p className="font-bold text-ink">{business?.name}</p>
         <p className="text-xs text-muted">
@@ -774,33 +790,35 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
         </ul>
         {bill.discount > 0 && (
           <p className="mt-1 flex justify-between text-muted">
-            <span>Discount</span>
+            <span>{t("clDocDiscount")}</span>
             <span>-{formatCurrency(bill.discount, currency)}</span>
           </p>
         )}
         <p className="mt-2 flex justify-between border-t border-muted-line/30 pt-2 font-bold">
-          <span>Total</span>
+          <span>{t("total")}</span>
           <span>{formatCurrency(bill.total, currency)}</span>
         </p>
         <p className="flex justify-between text-muted">
-          <span>Paid ({bill.paymentMode})</span>
+          <span>
+            {t("clDocPaid")} ({paymentModeLabel(bill.paymentMode, lang)})
+          </span>
           <span>{formatCurrency(bill.paid, currency)}</span>
         </p>
         {due > 0 && (
           <p className="flex justify-between font-semibold text-red-600">
-            <span>Balance due</span>
+            <span>{t("clDocBalanceDue")}</span>
             <span>{formatCurrency(due, currency)}</span>
           </p>
         )}
         {qr && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={qr} alt="UPI QR code" className="mx-auto mt-3 h-28 w-28" />
+          <img src={qr} alt={t("clBlUpiQrAlt")} className="mx-auto mt-3 h-28 w-28" />
         )}
       </div>
 
       <div className="mt-4 flex flex-wrap justify-end gap-3">
         <button type="button" onClick={onClose} className={secondaryBtnClass}>
-          Close
+          {t("close")}
         </button>
         {patient ? (
           <button
@@ -809,12 +827,12 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
             className={secondaryBtnClass}
           >
             <Share2 className="h-4 w-4" />
-            Share link
+            {t("clCsShareLink")}
           </button>
         ) : null}
         <button type="button" onClick={() => printReceipt(context)} className={primaryBtnClass}>
           <Printer className="h-4 w-4" />
-          Print receipt
+          {t("clBlPrintReceipt")}
         </button>
       </div>
 
@@ -822,8 +840,8 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
         open={Boolean(sharing)}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Share receipt"
-        recipientLabel="patient"
+        title={t("clBlShareReceipt")}
+        recipientLabel={t("sdRecipientPatient")}
       />
     </Modal>
   );

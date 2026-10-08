@@ -6,6 +6,7 @@ import { generateId } from "@/lib/pos/types";
 import { useClinic, useFrequentMedicines } from "@/lib/clinic/store";
 import { formShort, type Medicine, type RxLine } from "@/lib/clinic/types";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { inputClass } from "@/components/tools/FreePos/ui";
 
@@ -37,7 +38,7 @@ export function lineFromMedicine(medicine: Medicine): RxLine {
  * most, which after a week is the fastest way to write a prescription.
  */
 export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { medicines } = useClinic();
   const frequent = useFrequentMedicines(10);
   const [query, setQuery] = useState("");
@@ -99,7 +100,7 @@ export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
               }
             }
           }}
-          placeholder="Search medicine or salt…"
+          placeholder={t("clMpSearch")}
           className={`${inputClass} pl-9`}
         />
       </div>
@@ -135,9 +136,9 @@ export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm font-semibold text-indigo transition hover:bg-cream"
           >
             <Plus className="h-4 w-4" />
-            Prescribe “{query.trim()}”
+            {fill(t("clMpPrescribe"), { name: query.trim() })}
             {matches.length === 0 && (
-              <span className="font-normal text-muted">— not in your list</span>
+              <span className="font-normal text-muted">{t("clMpNotInList")}</span>
             )}
           </button>
         </div>
@@ -146,7 +147,7 @@ export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
           <div className="mt-2">
             <p className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted">
               <Sparkles className="h-3 w-3" />
-              Frequently prescribed
+              {t("clMpFrequent")}
             </p>
             <div className="flex flex-wrap gap-1.5">
               {frequent.map((medicine) => (

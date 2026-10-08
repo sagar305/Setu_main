@@ -51,25 +51,27 @@ import { RxLineRow } from "./RxLineRow";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 import { useI18n } from "@/lib/i18n";
+import { fill, splitAround, type TKey } from "@/lib/i18n/translate";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 
 /** Textarea that offers what this clinic has typed before, ranked by frequency. */
 function SuggestField({
-  label,
+  labelKey,
   field,
   value,
   onChange,
   onBlur,
   rows = 2,
 }: {
-  label: string;
+  labelKey: TKey;
   field: "complaints" | "findings" | "diagnosis" | "advice";
   value: string;
   onChange: (value: string) => void;
   onBlur: () => void;
   rows?: number;
 }) {
+  const { t } = useI18n();
   const [focused, setFocused] = useState(false);
   const suggestions = useHistorySuggestions(field, value);
   const showSuggestions = focused && suggestions.length > 0 && suggestions[0] !== value.trim();
@@ -77,7 +79,7 @@ function SuggestField({
   return (
     <div className="relative">
       <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-        {label}
+        {t(labelKey)}
       </span>
       <textarea
         value={value}
@@ -120,7 +122,7 @@ export function ConsultScreen({
   onNavigate: NavigateFn;
   visitRequest: QueryRequest | null;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const {
     visits,
     patients,
@@ -313,9 +315,9 @@ export function ConsultScreen({
       date,
       startTime: settings.openTime,
       durationMinutes: settings.slotMinutes,
-      reason: "Follow-up",
+      reason: t("clCsFollowUpReason"),
     });
-    setNotice(`Follow-up booked for ${formatDate(date, lang)}.`);
+    setNotice(fill(t("clCsFollowUpBooked"), { date: formatDate(date, lang) }));
   };
 
   // A rendered prescription the patient can open, rather than the plain-text
@@ -330,17 +332,24 @@ export function ConsultScreen({
     const lines = (previewVisit.medicines ?? [])
       .map(
         (line, index) =>
-          `${index + 1}. ${[line.name, line.strength, line.frequency, line.durationDays ? `${line.durationDays} days` : ""]
+          `${index + 1}. ${[
+            line.name,
+            line.strength,
+            line.frequency,
+            line.durationDays ? fill(t("clDocDaysN"), { n: line.durationDays }) : "",
+          ]
             .filter(Boolean)
             .join(" ")}`
       )
       .join("\n");
     const message = [
-      `Namaste ${patient.name},`,
-      previewVisit.diagnosis ? `Diagnosis: ${previewVisit.diagnosis}` : "",
+      fill(t("clCsGreeting"), { name: patient.name }),
+      previewVisit.diagnosis ? `${t("clDocDiagnosis")}: ${previewVisit.diagnosis}` : "",
       lines ? `\nRx:\n${lines}` : "",
-      previewVisit.advice ? `\nAdvice: ${previewVisit.advice}` : "",
-      previewVisit.followUpDays ? `\nReview after ${previewVisit.followUpDays} days.` : "",
+      previewVisit.advice ? `\n${t("clDocAdvice")}: ${previewVisit.advice}` : "",
+      previewVisit.followUpDays
+        ? `\n${fill(t("clDocReviewAfter"), { n: previewVisit.followUpDays })}`
+        : "",
       `\n— ${business?.name ?? ""}`,
     ]
       .filter(Boolean)
@@ -352,11 +361,11 @@ export function ConsultScreen({
     return (
       <EmptyState
         icon={<Stethoscope className="h-6 w-6" />}
-        title="No consultation open"
-        message="Start a consult from the Today queue, or from a patient's chart."
+        title={t("clCsNoneOpen")}
+        message={t("clCsNoneOpenMsg")}
         action={
           <button type="button" onClick={() => onNavigate("today")} className={primaryBtnClass}>
-            Go to Today
+            {t("clCsGoToToday")}
           </button>
         }
       />
@@ -391,7 +400,7 @@ export function ConsultScreen({
                 onClick={() => onNavigate("patients", patient.id)}
                 className={secondaryBtnClass}
               >
-                Full chart
+                {t("clCsFullChart")}
               </button>
               <button
                 type="button"
@@ -399,38 +408,44 @@ export function ConsultScreen({
                 className={secondaryBtnClass}
               >
                 <Layers className="h-4 w-4" />
-                Load protocol
+                {t("clCsLoadProtocol")}
               </button>
             </div>
           </div>
 
           {(allergies.length > 0 || conditions.length > 0) && (
             <div className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">
-              {allergies.length > 0 && <div>Allergies: {allergies.join(", ")}</div>}
+              {allergies.length > 0 && (
+                <div>
+                  {t("clPfAllergies")}: {allergies.join(", ")}
+                </div>
+              )}
               {conditions.length > 0 && (
-                <div className="font-normal">Chronic: {conditions.join(", ")}</div>
+                <div className="font-normal">
+                  {t("clPtFilterChronic")}: {conditions.join(", ")}
+                </div>
               )}
             </div>
           )}
 
           {lastVisit && (
             <p className="mt-2 text-xs text-muted">
-              Last visit {formatDate(lastVisit.date, lang)}
+              {fill(t("clCsLastVisit"), { date: formatDate(lastVisit.date, lang) })}
               {lastVisit.diagnosis ? ` — ${lastVisit.diagnosis}` : ""}
             </p>
           )}
           {visit.finalisedAt && (
             <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-800">
               <CheckCircle2 className="h-3 w-3" />
-              Finalised {formatDate(visit.date, lang)}
-              {visit.editedAfterFinaliseAt ? " · edited" : ""}
+              {fill(t("clCsFinalisedOn"), { date: formatDate(visit.date, lang) })}
+              {visit.editedAfterFinaliseAt ? ` ${t("clCsEditedSuffix")}` : ""}
             </p>
           )}
         </div>
 
         {/* 2. Vitals */}
         <section className="rounded-2xl border border-muted-line/30 bg-white p-4">
-          <h4 className="text-sm font-bold text-ink">Vitals</h4>
+          <h4 className="text-sm font-bold text-ink">{t("clCsVitals")}</h4>
           <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
             <label className="block">
               <span className="mb-1 block text-[11px] font-semibold uppercase text-muted">BP</span>
@@ -445,7 +460,7 @@ export function ConsultScreen({
             </label>
             <label className="block">
               <span className="mb-1 block text-[11px] font-semibold uppercase text-muted">
-                Pulse
+                {t("clVitPulse")}
               </span>
               <input
                 type="number"
@@ -461,7 +476,7 @@ export function ConsultScreen({
             </label>
             <label className="block">
               <span className="mb-1 block text-[11px] font-semibold uppercase text-muted">
-                Temp °F
+                {t("clCsTempF")}
               </span>
               <input
                 type="number"
@@ -494,7 +509,7 @@ export function ConsultScreen({
             </label>
             <label className="block">
               <span className="mb-1 block text-[11px] font-semibold uppercase text-muted">
-                Weight kg
+                {t("clCsWeightKg")}
               </span>
               <input
                 type="number"
@@ -511,7 +526,7 @@ export function ConsultScreen({
             </label>
             <label className="block">
               <span className="mb-1 block text-[11px] font-semibold uppercase text-muted">
-                Height cm
+                {t("clCsHeightCm")}
               </span>
               <input
                 type="number"
@@ -544,28 +559,28 @@ export function ConsultScreen({
         {/* 3. The narrative */}
         <section className="space-y-3 rounded-2xl border border-muted-line/30 bg-white p-4">
           <SuggestField
-            label="Complaints"
+            labelKey="clDocComplaints"
             field="complaints"
             value={complaints}
             onChange={setComplaints}
             onBlur={persist}
           />
           <SuggestField
-            label="Findings"
+            labelKey="clDocFindings"
             field="findings"
             value={findings}
             onChange={setFindings}
             onBlur={persist}
           />
           <SuggestField
-            label="Diagnosis"
+            labelKey="clDocDiagnosis"
             field="diagnosis"
             value={diagnosis}
             onChange={setDiagnosis}
             onBlur={persist}
           />
           <SuggestField
-            label="Advice"
+            labelKey="clDocAdvice"
             field="advice"
             value={advice}
             onChange={setAdvice}
@@ -575,7 +590,7 @@ export function ConsultScreen({
 
         {/* 4. Medicines */}
         <section className="rounded-2xl border border-muted-line/30 bg-white p-4">
-          <h4 className="text-sm font-bold text-ink">Medicines</h4>
+          <h4 className="text-sm font-bold text-ink">{t("clBkMedicines")}</h4>
           <div className="mt-3">
             <MedicinePicker onPick={(line) => updateMedicines([...medicines, line])} />
           </div>
@@ -610,21 +625,21 @@ export function ConsultScreen({
         <section className="grid gap-4 rounded-2xl border border-muted-line/30 bg-white p-4 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Investigations
+              {t("clDocInvestigationsShort")}
             </span>
             <textarea
               value={investigations}
               onChange={(event) => setInvestigations(event.target.value)}
               onBlur={persist}
               rows={3}
-              placeholder="One per line — CBC&#10;Fasting blood sugar"
+              placeholder={t("clCsInvestigationsPh")}
               className={`${inputClass} resize-y`}
             />
           </label>
           <div className="space-y-3">
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Review after (days)
+                {t("clCsReviewAfterDays")}
               </span>
               <input
                 type="number"
@@ -633,20 +648,20 @@ export function ConsultScreen({
                 value={followUpDays}
                 onChange={(event) => setFollowUpDays(event.target.value)}
                 onBlur={persist}
-                placeholder="e.g. 5"
+                placeholder={t("clCsReviewPh")}
                 className={inputClass}
               />
             </label>
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Internal notes
+                {t("clCsInternalNotes")}
               </span>
               <textarea
                 value={internalNotes}
                 onChange={(event) => setInternalNotes(event.target.value)}
                 onBlur={persist}
                 rows={2}
-                placeholder="Not printed"
+                placeholder={t("clCsNotPrinted")}
                 className={`${inputClass} resize-y`}
               />
             </label>
@@ -656,7 +671,7 @@ export function ConsultScreen({
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={handleFinalise} className={primaryBtnClass}>
             <CheckCircle2 className="h-4 w-4" />
-            {visit.finalisedAt ? "Save & reprint" : "Finalise"}
+            {t(visit.finalisedAt ? "clCsSaveReprint" : "clCsFinalise")}
           </button>
           <button
             type="button"
@@ -667,7 +682,7 @@ export function ConsultScreen({
             className={secondaryBtnClass}
           >
             <BookmarkPlus className="h-4 w-4" />
-            Save as protocol
+            {t("clCsSaveAsProtocol")}
           </button>
           <button
             type="button"
@@ -675,7 +690,7 @@ export function ConsultScreen({
             className={`${secondaryBtnClass} lg:hidden`}
           >
             <Eye className="h-4 w-4" />
-            Preview
+            {t("clCsPreview")}
           </button>
         </div>
 
@@ -686,7 +701,7 @@ export function ConsultScreen({
       <aside className="hidden lg:block">
         <div className="sticky top-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-            Prescription preview · {settings.rxPaperSize.toUpperCase()}
+            {t("clCsRxPreview")} · {settings.rxPaperSize.toUpperCase()}
           </p>
           <div className="max-h-[75vh] overflow-y-auto rounded-2xl border border-muted-line/30 bg-white p-5 shadow-sm">
             <div className="rx" dangerouslySetInnerHTML={{ __html: previewHtml }} />
@@ -694,23 +709,20 @@ export function ConsultScreen({
         </div>
       </aside>
 
-      <Modal open={previewOpen} onClose={() => setPreviewOpen(false)} title="Prescription preview" wide>
+      <Modal open={previewOpen} onClose={() => setPreviewOpen(false)} title={t("clCsRxPreview")} wide>
         <div className="rx" dangerouslySetInnerHTML={{ __html: previewHtml }} />
       </Modal>
 
       {/* Load protocol */}
-      <Modal open={protocolOpen} onClose={() => setProtocolOpen(false)} title="Load a protocol">
+      <Modal open={protocolOpen} onClose={() => setProtocolOpen(false)} title={t("clCsLoadAProtocol")}>
         <SearchInput
           value={protocolQuery}
           onChange={setProtocolQuery}
-          placeholder="Search protocols…"
+          placeholder={t("clCsSearchProtocols")}
           autoFocus
         />
         {visibleProtocols.length === 0 ? (
-          <p className="mt-4 text-sm text-muted">
-            No saved protocols yet. Write a prescription, then “Save as protocol” to reuse it in
-            one tap.
-          </p>
+          <p className="mt-4 text-sm text-muted">{t("clCsNoProtocols")}</p>
         ) : (
           <ul className="mt-3 space-y-2">
             {visibleProtocols.map((protocol) => (
@@ -723,8 +735,10 @@ export function ConsultScreen({
                   <span className="block text-sm font-semibold text-ink">{protocol.name}</span>
                   <span className="block truncate text-xs text-muted">
                     {(protocol.medicines ?? []).map((line) => line.name).join(", ") ||
-                      "No medicines"}
-                    {protocol.timesUsed ? ` · used ${protocol.timesUsed}×` : ""}
+                      t("clCsNoMedicines")}
+                    {protocol.timesUsed
+                      ? ` ${fill(t("clCsUsedTimes"), { count: protocol.timesUsed })}`
+                      : ""}
                   </span>
                 </button>
               </li>
@@ -737,21 +751,18 @@ export function ConsultScreen({
       <Modal
         open={saveProtocolOpen}
         onClose={() => setSaveProtocolOpen(false)}
-        title="Save as protocol"
+        title={t("clCsSaveAsProtocol")}
       >
-        <p className="text-sm text-muted">
-          Saves the complaints, diagnosis, advice, investigations, medicines and follow-up as a
-          template you can load in one tap.
-        </p>
+        <p className="text-sm text-muted">{t("clCsSaveProtocolBlurb")}</p>
         <label className="mt-4 block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Name
+            {t("name")}
           </span>
           <input
             type="text"
             value={protocolName}
             onChange={(event) => setProtocolName(event.target.value)}
-            placeholder="e.g. Viral fever – adult"
+            placeholder={t("clCsProtocolNamePh")}
             className={inputClass}
             autoFocus
           />
@@ -762,7 +773,7 @@ export function ConsultScreen({
             onClick={() => setSaveProtocolOpen(false)}
             className={secondaryBtnClass}
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="button"
@@ -779,17 +790,17 @@ export function ConsultScreen({
                 followUpDays: draft.followUpDays,
               });
               setSaveProtocolOpen(false);
-              setNotice(`Saved “${protocolName.trim()}” as a protocol.`);
+              setNotice(fill(t("clCsProtocolSaved"), { name: protocolName.trim() }));
             }}
             className={primaryBtnClass}
           >
-            Save protocol
+            {t("clCsSaveProtocol")}
           </button>
         </div>
       </Modal>
 
       {/* After finalise */}
-      <Modal open={doneOpen} onClose={() => setDoneOpen(false)} title="Consultation finalised">
+      <Modal open={doneOpen} onClose={() => setDoneOpen(false)} title={t("clCsFinalisedTitle")}>
         <div className="grid gap-2 sm:grid-cols-2">
           <button
             type="button"
@@ -801,15 +812,15 @@ export function ConsultScreen({
             className={primaryBtnClass}
           >
             <Printer className="h-4 w-4" />
-            Print prescription
+            {t("clCsPrintRx")}
           </button>
           <button type="button" onClick={shareRxLink} className={secondaryBtnClass}>
             <Share2 className="h-4 w-4" />
-            Share link
+            {t("clCsShareLink")}
           </button>
           <button type="button" onClick={shareOnWhatsApp} className={secondaryBtnClass}>
             <MessageCircle className="h-4 w-4" />
-            Share on WhatsApp
+            {t("clCsShareWhatsApp")}
           </button>
           {draft.investigations.length > 0 && (
             <button
@@ -829,7 +840,7 @@ export function ConsultScreen({
               className={secondaryBtnClass}
             >
               <FlaskConical className="h-4 w-4" />
-              Investigation slip
+              {t("clCsInvestigationSlip")}
             </button>
           )}
           <button
@@ -841,7 +852,7 @@ export function ConsultScreen({
             className={secondaryBtnClass}
           >
             <Receipt className="h-4 w-4" />
-            Add bill
+            {t("clPcAddBill")}
           </button>
           {draft.followUpDays ? (
             <button
@@ -853,7 +864,7 @@ export function ConsultScreen({
               className={secondaryBtnClass}
             >
               <FileText className="h-4 w-4" />
-              Book follow-up
+              {t("clCsBookFollowUp")}
             </button>
           ) : null}
         </div>
@@ -861,8 +872,9 @@ export function ConsultScreen({
         {offerMedicine && (
           <div className="mt-5 rounded-xl border border-muted-line/30 bg-cream/50 p-3">
             <p className="text-sm text-ink">
-              <b>{offerMedicine.name}</b> is not in your medicine list. Add it so it comes up next
-              time?
+              {splitAround(t("clCsOfferMedicine"), "name")[0]}
+              <b>{offerMedicine.name}</b>
+              {splitAround(t("clCsOfferMedicine"), "name")[1]}
             </p>
             <button
               type="button"
@@ -880,7 +892,7 @@ export function ConsultScreen({
               }}
               className={`${secondaryBtnClass} mt-2`}
             >
-              Add to my medicines
+              {t("clCsAddToMedicines")}
             </button>
           </div>
         )}
@@ -890,8 +902,8 @@ export function ConsultScreen({
         open={Boolean(sharing)}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Share prescription"
-        recipientLabel="patient"
+        title={t("clCsSharePrescription")}
+        recipientLabel={t("sdRecipientPatient")}
       />
 
       <ReviewPromptDialog

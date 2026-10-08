@@ -4,7 +4,17 @@ import { useMemo } from "react";
 import { formatDate, formatDayMonth, visitVitals, type Visit } from "@/lib/clinic/types";
 import { useI18n } from "@/lib/i18n";
 
-type Series = { label: string; colour: string; points: { x: string; y: number }[] };
+/**
+ * `kind` rather than a label prefix: the two charts used to be split by
+ * `label.startsWith("Weight")`, which stops being true the moment the label is
+ * translated.
+ */
+type Series = {
+  kind: "weight" | "bp";
+  label: string;
+  colour: string;
+  points: { x: string; y: number }[];
+};
 
 /**
  * Weight and BP over time. Hand-drawn SVG rather than a charting library: two
@@ -12,12 +22,27 @@ type Series = { label: string; colour: string; points: { x: string; y: number }[
  * and the app has no other chart.
  */
 export function VitalsTrend({ visits }: { visits: Visit[] }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const series = useMemo<Series[]>(() => {
     const ordered = [...visits].sort((a, b) => a.date.localeCompare(b.date));
-    const weight: Series = { label: "Weight (kg)", colour: "#4f46e5", points: [] };
-    const systolic: Series = { label: "Systolic", colour: "#dc2626", points: [] };
-    const diastolic: Series = { label: "Diastolic", colour: "#ea580c", points: [] };
+    const weight: Series = {
+      kind: "weight",
+      label: t("clVtWeightKg"),
+      colour: "#4f46e5",
+      points: [],
+    };
+    const systolic: Series = {
+      kind: "bp",
+      label: t("clVtSystolic"),
+      colour: "#dc2626",
+      points: [],
+    };
+    const diastolic: Series = {
+      kind: "bp",
+      label: t("clVtDiastolic"),
+      colour: "#ea580c",
+      points: [],
+    };
 
     for (const visit of ordered) {
       const vitals = visitVitals(visit);
@@ -26,23 +51,25 @@ export function VitalsTrend({ visits }: { visits: Visit[] }) {
       if (vitals.bpDiastolic) diastolic.points.push({ x: visit.date, y: vitals.bpDiastolic });
     }
     return [weight, systolic, diastolic].filter((s) => s.points.length > 0);
-  }, [visits]);
+  }, [visits, t]);
 
   if (series.length === 0) {
     return (
-      <p className="text-sm text-muted">
-        Record weight or blood pressure in a consultation and the trend appears here.
-      </p>
+      <p className="text-sm text-muted">{t("clVtEmpty")}</p>
     );
   }
 
-  const weightSeries = series.filter((s) => s.label.startsWith("Weight"));
-  const bpSeries = series.filter((s) => !s.label.startsWith("Weight"));
+  const weightSeries = series.filter((s) => s.kind === "weight");
+  const bpSeries = series.filter((s) => s.kind === "bp");
 
   return (
     <div className="space-y-5">
-      {weightSeries.length > 0 && <Chart title="Weight" series={weightSeries} unit="kg" />}
-      {bpSeries.length > 0 && <Chart title="Blood pressure" series={bpSeries} unit="mmHg" />}
+      {weightSeries.length > 0 && (
+        <Chart title={t("clVtWeight")} series={weightSeries} unit="kg" />
+      )}
+      {bpSeries.length > 0 && (
+        <Chart title={t("clVtBloodPressure")} series={bpSeries} unit="mmHg" />
+      )}
     </div>
   );
 }

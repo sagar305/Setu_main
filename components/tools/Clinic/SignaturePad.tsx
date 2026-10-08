@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Eraser, Upload } from "lucide-react";
 import { secondaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
 
 /**
  * Draw-or-upload signature capture. Hand-rolled on a canvas rather than pulling
@@ -19,6 +20,7 @@ export function SignaturePad({
   value: string;
   onChange: (dataUrl: string) => void;
 }) {
+  const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawingRef = useRef(false);
   const dirtyRef = useRef(false);
@@ -93,7 +95,7 @@ export function SignaturePad({
       {value && !hasInk && (
         <div className="mb-2 rounded-lg border border-muted-line/30 bg-white p-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={value} alt="Saved signature" className="max-h-16" />
+          <img src={value} alt={t("clSpSaved")} className="max-h-16" />
         </div>
       )}
 
@@ -104,13 +106,13 @@ export function SignaturePad({
         onPointerUp={end}
         onPointerLeave={end}
         className="h-32 w-full touch-none rounded-lg border border-dashed border-muted-line/50 bg-white"
-        aria-label="Signature drawing area"
+        aria-label={t("clSpArea")}
       />
 
       <div className="mt-2 flex flex-wrap gap-2">
         <button type="button" onClick={clear} className={secondaryBtnClass}>
           <Eraser className="h-4 w-4" />
-          Clear
+          {t("clSpClear")}
         </button>
         <button
           type="button"
@@ -118,7 +120,7 @@ export function SignaturePad({
           className={secondaryBtnClass}
         >
           <Upload className="h-4 w-4" />
-          Upload image
+          {t("clSpUpload")}
         </button>
       </div>
 
