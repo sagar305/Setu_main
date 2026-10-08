@@ -71,11 +71,19 @@
     }
   },
     "posts": [
+                {
+                   "slug": "supplier-price-creep-purchase-variance-2026",
+                   "title": "Catching Supplier Price Creep: A Purchase Variance Walkthrough",
+                   "excerpt": "Nobody announces a price rise. One line moves a few rupees, the total still looks right, and six months later your margin is two points thinner. A worked eight-line variance example, the three ways it misleads you, and what to do with the answer.",
+                   "date": "2026-10-08",
+                   "category": "Inventory Ops",
+                   "thumbnail": "/blog/thumbnails/listing/supplier-price-creep-purchase-variance-2026.jpeg"
+                 },
                  {
                   "slug": "comparing-bookkeeping-quotes-2026",
                   "title": "Comparing Bookkeeping Quotes: The Eight Questions That Matter",
                   "excerpt": "Two bookkeeping quotes use identical words and differ by three times in price, because price without scope is not a price. The eight questions that make quotes comparable, the four red flags, and an in-house cost comparison that carries its full weight.",
-                  "date": "2026-10-06",
+                  "date": "2026-10-07",
                   "category": "Accounting",
                   "thumbnail": "/blog/thumbnails/listing/comparing-bookkeeping-quotes-2026.jpeg"
                 },
