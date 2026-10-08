@@ -1147,6 +1147,11 @@ export type DictKey =
   | "igDocInvoiceDate"
   | "igDocPaymentInformation"
   | "igBrandColor"
+  | "cfCountryCode"
+  | "cfPhoneInvalid"
+  | "cfSending"
+  | "cfSuccess"
+  | "cfError"
   // Tool vocabulary — complete in en + hi; other languages fall back to
   // English until their dictionaries are extended.
   | "category"
@@ -2397,6 +2402,11 @@ const en: Dict = {
   igDocInvoiceDate: "Invoice Date",
   igDocPaymentInformation: "Payment Information",
   igBrandColor: "Brand Color",
+  cfCountryCode: "Country code",
+  cfPhoneInvalid: "Enter a phone number we can reach you on.",
+  cfSending: "Sending…",
+  cfSuccess: "Thanks — we've got your message and will get back to you shortly.",
+  cfError: "Something went wrong. Please try again.",
 };
 
 const hi: Dict = {
@@ -3592,6 +3602,11 @@ const hi: Dict = {
   igDocInvoiceDate: "बिल की तारीख़",
   igDocPaymentInformation: "भुगतान की जानकारी",
   igBrandColor: "आपका रंग",
+  cfCountryCode: "देश का कोड",
+  cfPhoneInvalid: "ऐसा फ़ोन नंबर लिखिए जिस पर आप तक पहुँचा जा सके।",
+  cfSending: "भेजा जा रहा है…",
+  cfSuccess: "धन्यवाद — आपका संदेश हमें मिल गया है, हम जल्द ही जवाब देंगे।",
+  cfError: "कुछ गड़बड़ हो गई। फिर कोशिश कीजिए।",
 };
 
 const bn: Partial<Dict> = {
@@ -4787,6 +4802,11 @@ const bn: Partial<Dict> = {
   igDocInvoiceDate: "চালানের তারিখ",
   igDocPaymentInformation: "টাকা দেওয়ার তথ্য",
   igBrandColor: "আপনার রং",
+  cfCountryCode: "দেশের কোড",
+  cfPhoneInvalid: "এমন ফোন নম্বর দিন যাতে আপনার সঙ্গে যোগাযোগ করা যায়।",
+  cfSending: "পাঠানো হচ্ছে…",
+  cfSuccess: "ধন্যবাদ — আপনার বার্তা আমরা পেয়েছি, শিগগিরই উত্তর দেব।",
+  cfError: "কিছু একটা গোলমাল হয়েছে। আবার চেষ্টা করুন।",
 };
 
 const ta: Partial<Dict> = {
@@ -5982,6 +6002,11 @@ const ta: Partial<Dict> = {
   igDocInvoiceDate: "விலைப்பட்டி தேதி",
   igDocPaymentInformation: "பணம் தரும் விவரம்",
   igBrandColor: "உங்கள் நிறம்",
+  cfCountryCode: "நாட்டின் குறியீடு",
+  cfPhoneInvalid: "உங்களைத் தொடர்பு கொள்ளக்கூடிய தொலைபேசி எண்ணைக் கொடுங்கள்.",
+  cfSending: "அனுப்பப்படுகிறது…",
+  cfSuccess: "நன்றி — உங்கள் செய்தி எங்களுக்குக் கிடைத்தது, விரைவில் பதில் தருகிறோம்.",
+  cfError: "ஏதோ தவறாகிவிட்டது. மீண்டும் முயலுங்கள்.",
 };
 
 const te: Partial<Dict> = {
@@ -7177,6 +7202,11 @@ const te: Partial<Dict> = {
   igDocInvoiceDate: "ఇన్‌వాయిస్ తేదీ",
   igDocPaymentInformation: "చెల్లింపు సమాచారం",
   igBrandColor: "మీ రంగు",
+  cfCountryCode: "దేశం కోడ్",
+  cfPhoneInvalid: "మిమ్మల్ని సంప్రదించగలిగే ఫోన్ నంబర్ ఇవ్వండి.",
+  cfSending: "పంపుతున్నాం…",
+  cfSuccess: "ధన్యవాదాలు — మీ సందేశం అందింది, త్వరలోనే బదులిస్తాం.",
+  cfError: "ఏదో పొరపాటు జరిగింది. మళ్లీ ప్రయత్నించండి.",
 };
 
 const mr: Partial<Dict> = {
@@ -8372,6 +8402,11 @@ const mr: Partial<Dict> = {
   igDocInvoiceDate: "बिलाची तारीख",
   igDocPaymentInformation: "पैसे देण्याची माहिती",
   igBrandColor: "तुमचा रंग",
+  cfCountryCode: "देशाचा कोड",
+  cfPhoneInvalid: "तुमच्याशी संपर्क साधता येईल असा फोन क्रमांक द्या.",
+  cfSending: "पाठवत आहोत…",
+  cfSuccess: "आभार — तुमचा संदेश मिळाला आहे, लवकरच उत्तर देऊ.",
+  cfError: "काहीतरी चुकले. पुन्हा प्रयत्न करा.",
 };
 
 const gu: Partial<Dict> = {
@@ -9567,6 +9602,11 @@ const gu: Partial<Dict> = {
   igDocInvoiceDate: "બિલની તારીખ",
   igDocPaymentInformation: "ચુકવણીની માહિતી",
   igBrandColor: "તમારો રંગ",
+  cfCountryCode: "દેશનો કોડ",
+  cfPhoneInvalid: "તમારો સંપર્ક થઈ શકે એવો ફોન નંબર લખો.",
+  cfSending: "મોકલાઈ રહ્યું છે…",
+  cfSuccess: "આભાર — તમારો સંદેશ મળી ગયો છે, જલદી જવાબ આપીશું.",
+  cfError: "કંઈક ખોટું થયું. ફરી પ્રયાસ કરો.",
 };
 
 const kn: Partial<Dict> = {
@@ -10762,6 +10802,11 @@ const kn: Partial<Dict> = {
   igDocInvoiceDate: "ಬಿಲ್ ದಿನಾಂಕ",
   igDocPaymentInformation: "ಪಾವತಿ ಮಾಹಿತಿ",
   igBrandColor: "ನಿಮ್ಮ ಬಣ್ಣ",
+  cfCountryCode: "ದೇಶದ ಕೋಡ್",
+  cfPhoneInvalid: "ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಬಹುದಾದ ಫೋನ್ ಸಂಖ್ಯೆ ಕೊಡಿ.",
+  cfSending: "ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ…",
+  cfSuccess: "ಧನ್ಯವಾದ — ನಿಮ್ಮ ಸಂದೇಶ ಸಿಕ್ಕಿದೆ, ಬೇಗ ಉತ್ತರಿಸುತ್ತೇವೆ.",
+  cfError: "ಏನೋ ತಪ್ಪಾಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
 };
 
 const ml: Partial<Dict> = {
@@ -11957,6 +12002,11 @@ const ml: Partial<Dict> = {
   igDocInvoiceDate: "ബില്ലിന്റെ തീയതി",
   igDocPaymentInformation: "പണം നൽകാനുള്ള വിവരം",
   igBrandColor: "നിങ്ങളുടെ നിറം",
+  cfCountryCode: "രാജ്യത്തിന്റെ കോഡ്",
+  cfPhoneInvalid: "നിങ്ങളെ ബന്ധപ്പെടാൻ കഴിയുന്ന ഫോൺ നമ്പർ തരൂ.",
+  cfSending: "അയയ്ക്കുന്നു…",
+  cfSuccess: "നന്ദി — നിങ്ങളുടെ സന്ദേശം കിട്ടി, വൈകാതെ മറുപടി തരാം.",
+  cfError: "എന്തോ കുഴപ്പം പറ്റി. വീണ്ടും ശ്രമിക്കുക.",
 };
 
 const pa: Partial<Dict> = {
@@ -13152,6 +13202,11 @@ const pa: Partial<Dict> = {
   igDocInvoiceDate: "ਬਿੱਲ ਦੀ ਤਾਰੀਖ਼",
   igDocPaymentInformation: "ਅਦਾਇਗੀ ਦੀ ਜਾਣਕਾਰੀ",
   igBrandColor: "ਤੁਹਾਡਾ ਰੰਗ",
+  cfCountryCode: "ਦੇਸ਼ ਦਾ ਕੋਡ",
+  cfPhoneInvalid: "ਅਜਿਹਾ ਫ਼ੋਨ ਨੰਬਰ ਲਿਖੋ ਜਿਸ ਉੱਤੇ ਤੁਹਾਡੇ ਤੱਕ ਪਹੁੰਚਿਆ ਜਾ ਸਕੇ।",
+  cfSending: "ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ…",
+  cfSuccess: "ਧੰਨਵਾਦ — ਤੁਹਾਡਾ ਸੁਨੇਹਾ ਮਿਲ ਗਿਆ ਹੈ, ਅਸੀਂ ਛੇਤੀ ਜਵਾਬ ਦੇਵਾਂਗੇ।",
+  cfError: "ਕੁਝ ਗੜਬੜ ਹੋ ਗਈ। ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
 };
 
 const es: Partial<Dict> = {
@@ -14347,6 +14402,11 @@ const es: Partial<Dict> = {
   igDocInvoiceDate: "Fecha de la factura",
   igDocPaymentInformation: "Información de pago",
   igBrandColor: "Color de marca",
+  cfCountryCode: "Código de país",
+  cfPhoneInvalid: "Escribe un teléfono en el que podamos localizarte.",
+  cfSending: "Enviando…",
+  cfSuccess: "Gracias: hemos recibido tu mensaje y te respondemos enseguida.",
+  cfError: "Algo ha fallado. Inténtalo de nuevo.",
 };
 
 const fr: Partial<Dict> = {
@@ -15542,6 +15602,11 @@ const fr: Partial<Dict> = {
   igDocInvoiceDate: "Date de la facture",
   igDocPaymentInformation: "Informations de paiement",
   igBrandColor: "Couleur de marque",
+  cfCountryCode: "Indicatif du pays",
+  cfPhoneInvalid: "Indiquez un numéro où nous pouvons vous joindre.",
+  cfSending: "Envoi en cours…",
+  cfSuccess: "Merci — nous avons bien reçu votre message et vous répondrons rapidement.",
+  cfError: "Un problème est survenu. Réessayez.",
 };
 
 const ar: Partial<Dict> = {
@@ -16737,6 +16802,11 @@ const ar: Partial<Dict> = {
   igDocInvoiceDate: "تاريخ الفاتورة",
   igDocPaymentInformation: "معلومات السداد",
   igBrandColor: "لون العلامة",
+  cfCountryCode: "رمز الدولة",
+  cfPhoneInvalid: "اكتب رقم هاتف يمكننا الوصول إليك عليه.",
+  cfSending: "جارٍ الإرسال…",
+  cfSuccess: "شكرًا — وصلتنا رسالتك وسنردّ عليك قريبًا.",
+  cfError: "حدث خطأ ما. حاول مرة أخرى.",
 };
 
 const pt: Partial<Dict> = {
@@ -17932,6 +18002,11 @@ const pt: Partial<Dict> = {
   igDocInvoiceDate: "Data da nota",
   igDocPaymentInformation: "Informações de pagamento",
   igBrandColor: "Cor da marca",
+  cfCountryCode: "Código do país",
+  cfPhoneInvalid: "Informe um telefone em que possamos falar com você.",
+  cfSending: "Enviando…",
+  cfSuccess: "Obrigado — recebemos sua mensagem e respondemos em breve.",
+  cfError: "Algo deu errado. Tente de novo.",
 };
 
 const id: Partial<Dict> = {
@@ -19127,6 +19202,11 @@ const id: Partial<Dict> = {
   igDocInvoiceDate: "Tanggal tagihan",
   igDocPaymentInformation: "Informasi pembayaran",
   igBrandColor: "Warna merek",
+  cfCountryCode: "Kode negara",
+  cfPhoneInvalid: "Tulis nomor telepon yang bisa kami hubungi.",
+  cfSending: "Mengirim…",
+  cfSuccess: "Terima kasih — pesan Anda sudah kami terima dan akan segera kami balas.",
+  cfError: "Ada yang salah. Coba lagi.",
 };
 
 const de: Partial<Dict> = {
@@ -20322,6 +20402,11 @@ const de: Partial<Dict> = {
   igDocInvoiceDate: "Rechnungsdatum",
   igDocPaymentInformation: "Zahlungsinformationen",
   igBrandColor: "Markenfarbe",
+  cfCountryCode: "Ländervorwahl",
+  cfPhoneInvalid: "Geben Sie eine Telefonnummer an, unter der wir Sie erreichen.",
+  cfSending: "Wird gesendet …",
+  cfSuccess: "Danke — Ihre Nachricht ist angekommen, wir melden uns in Kürze.",
+  cfError: "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
 };
 
 const zh: Partial<Dict> = {
@@ -21517,6 +21602,11 @@ const zh: Partial<Dict> = {
   igDocInvoiceDate: "开票日期",
   igDocPaymentInformation: "付款信息",
   igBrandColor: "品牌色",
+  cfCountryCode: "国家区号",
+  cfPhoneInvalid: "请填写我们能联系到你的电话号码。",
+  cfSending: "正在发送…",
+  cfSuccess: "谢谢——我们已收到你的留言，会尽快回复。",
+  cfError: "出了点问题，请重试。",
 };
 
 export const DICTIONARIES: Record<LanguageCode, Partial<Dict>> = {

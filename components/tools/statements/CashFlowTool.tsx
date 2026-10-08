@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { useI18n } from "@/lib/i18n";
+import { relabelSeedLines } from "@/lib/i18n/seed-labels";
 import { translate, type TKey } from "@/lib/i18n/translate";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { formatMoney, generateId } from "@/lib/pos/types";
@@ -32,6 +33,21 @@ type CfState = {
 
 // The starting line labels are the user's to edit, so they begin in the
 // user's own language rather than making them translate the form away.
+const SEED_KEYS: TKey[] = [
+  "stSeedCashFromCustomers",
+  "stSeedPaidToSuppliers",
+  "stSeedEquipmentPurchased",
+  "stSeedLoanReceivedRepaid",
+  "stSeedCashReceivedBook",
+  "stSeedCashPaidBook",
+];
+
+const SEEDED_FIELDS = [
+  "operating",
+  "investing",
+  "financing",
+] as const satisfies readonly (keyof CfState)[];
+
 const initialState = (lang: LanguageCode): CfState => {
   const seed = (key: TKey) => blankLine(translate(lang, key));
   return {
@@ -49,7 +65,27 @@ export function CashFlowTool() {
   const workspace = useFinanceWorkspace("cash-flow-statement");
   const { t, lang } = useI18n();
   const [initial] = useState(() => initialState(lang));
-  const [state, setState] = useLocalStore<CfState>("setu-stmt-cf", initial);
+  const [state, setState, loaded] = useLocalStore<CfState>("setu-stmt-cf", initial);
+
+  // The starting lines are sample text, not the reader's: ones they have not
+  // touched follow the language they are reading in, however the saved sheet
+  // got here. Lines they typed are left exactly as they wrote them.
+  useEffect(() => {
+    if (!loaded) return;
+    setState((s) => {
+      let changed = false;
+      const next = { ...s };
+      for (const field of SEEDED_FIELDS) {
+        const lines = relabelSeedLines(s[field], SEED_KEYS, lang);
+        if (lines !== s[field]) {
+          next[field] = lines;
+          changed = true;
+        }
+      }
+      return changed ? next : s;
+    });
+  }, [loaded, lang, setState]);
+
   const money = (v: number) => formatMoney(v, currency);
   const patch = (p: Partial<CfState>) => setState((s) => ({ ...s, ...p }));
 

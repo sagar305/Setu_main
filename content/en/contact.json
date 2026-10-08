@@ -2,7 +2,10 @@
   "seo": {
     "title": "Contact Setu Technology | Product & Partnership Enquiries",
     "description": "Get in touch with Setu Technology — for product questions, partnership enquiries, or to tell us what software your business needs next.",
-    "keywords": ["contact Setu Technology", "Setu Technology support"]
+    "keywords": [
+      "contact Setu Technology",
+      "Setu Technology support"
+    ]
   },
   "hero": {
     "eyebrow": "Contact",
@@ -18,10 +21,36 @@
   },
   "form": {
     "fields": [
-      { "name": "name", "label": "Name", "type": "text", "required": true },
-      { "name": "email", "label": "Email", "type": "email", "required": true },
-      { "name": "company", "label": "Business name", "type": "text", "required": false },
-      { "name": "message", "label": "Message", "type": "textarea", "required": true }
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": true
+      },
+      {
+        "name": "company",
+        "label": "Business name",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "required": true
+      }
     ],
     "submitLabel": "Send message"
   }
