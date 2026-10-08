@@ -2,6 +2,7 @@
 
 import { Plus, Trash2 } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
+import { useI18n } from "@/lib/i18n";
 import { calculateLineItem } from "@/lib/invoice";
 import type { LineItem } from "@/lib/types/invoice";
 
@@ -34,11 +35,12 @@ export function LineItemsSection({
   onRemoveItem,
   onUpdateItem,
 }: LineItemsSectionProps) {
+  const { t } = useI18n();
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
-          Line Items
+          {t("igLineItems")}
         </h3>
         <label className="flex items-center gap-2 cursor-pointer">
           <input
@@ -47,7 +49,7 @@ export function LineItemsSection({
             onChange={(e) => onTaxModeChange(e.target.checked ? "inclusive" : "exclusive")}
             className="h-4 w-4 rounded border-muted-line/40 text-indigo accent-indigo"
           />
-          <span className="text-sm font-medium text-ink">Tax Inclusive</span>
+          <span className="text-sm font-medium text-ink">{t("igTaxInclusive")}</span>
         </label>
       </div>
 
@@ -64,7 +66,7 @@ export function LineItemsSection({
                 {/* First Row: Item Description (Full Width) */}
                 <div className="mb-4">
                   <label className="mb-2 block text-xs font-semibold text-ink">
-                    Item Description
+                    {t("igItemDescription")}
                   </label>
                   <input
                     type="text"
@@ -73,7 +75,7 @@ export function LineItemsSection({
                       onUpdateItem(item.id, { description: e.target.value })
                     }
                     className="w-full rounded-lg border border-muted-line/40 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted-line focus:border-indigo"
-                    placeholder="What are you billing for?"
+                    placeholder={t("igItemPlaceholder")}
                   />
                 </div>
 
@@ -81,7 +83,7 @@ export function LineItemsSection({
                 <div className="mb-3 grid gap-2 sm:grid-cols-2">
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
-                      Quantity
+                      {t("igQuantityLabel")}
                     </label>
                     <input
                       key={`${item.id}-quantity-${item.quantity}`}
@@ -118,7 +120,7 @@ export function LineItemsSection({
 
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
-                      Rate (₹)
+                      {t("rate")} (₹)
                     </label>
                     <input
                       key={`${item.id}-rate-${item.rate}`}
@@ -158,7 +160,7 @@ export function LineItemsSection({
                 <div className="grid gap-2 sm:grid-cols-5 sm:items-end">
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
-                      Discount %
+                      {t("igDiscountPct")}
                     </label>
                     <input
                       key={`${item.id}-discount-${item.discountPercent}`}
@@ -196,7 +198,7 @@ export function LineItemsSection({
 
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-ink">
-                      Tax %
+                      {t("igTaxPct")}
                     </label>
                     <input
                       key={`${item.id}-tax-${item.taxRate}`}
@@ -233,7 +235,7 @@ export function LineItemsSection({
 
                   <div className="sm:col-span-2">
                     <label className="mb-1 block text-xs font-semibold text-ink">
-                      Amount
+                      {t("amount")}
                     </label>
                     <div className="flex items-center justify-end rounded-lg border border-indigo/40 bg-indigo/5 px-3 py-2">
                       <span className="font-bold text-indigo">
@@ -247,7 +249,7 @@ export function LineItemsSection({
                     onClick={() => onRemoveItem(item.id)}
                     disabled={items.length <= 1}
                     className="flex items-center justify-center rounded-lg border border-red-200 bg-red-50 h-8 w-8 text-red-600 transition hover:border-red-400 hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
-                    title="Remove item"
+                    title={t("igRemoveItem")}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -263,7 +265,7 @@ export function LineItemsSection({
         onClick={onAddItem}
         className="mt-4 inline-flex items-center gap-2 rounded-lg bg-indigo px-4 py-2 font-semibold text-white transition hover:bg-indigo-700"
       >
-        <Plus className="h-4 w-4" /> Add Line Item
+        <Plus className="h-4 w-4" /> {t("igAddItem")}
       </button>
     </div>
   );

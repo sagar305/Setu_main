@@ -1,11 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, Field, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { relabelSeedLines } from "@/lib/i18n/seed-labels";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
@@ -27,26 +31,75 @@ type BsState = {
   equity: StatementLine[];
 };
 
-const INITIAL: BsState = {
-  businessName: "",
-  asOf: "",
-  currentAssets: [blankLine("Cash & bank"), blankLine("Accounts receivable"), blankLine("Inventory")],
-  fixedAssets: [blankLine("Equipment & furniture")],
-  currentLiabilities: [blankLine("Accounts payable"), blankLine("GST payable")],
-  longTermLiabilities: [blankLine("Loans payable")],
-  equity: [blankLine("Owner's capital"), blankLine("Retained earnings")],
+// The starting line labels are the user's to edit, so they begin in the
+// user's own language rather than making them translate the form away.
+const SEED_KEYS: TKey[] = [
+  "stSeedCashBank",
+  "stSeedReceivable",
+  "stSeedInventory",
+  "stSeedEquipment",
+  "stSeedPayable",
+  "stSeedGstPayable",
+  "stSeedLoans",
+  "stSeedCapital",
+  "stSeedRetained",
+];
+
+const SEEDED_FIELDS = [
+  "currentAssets",
+  "fixedAssets",
+  "currentLiabilities",
+  "longTermLiabilities",
+  "equity",
+] as const satisfies readonly (keyof BsState)[];
+
+const initialState = (lang: LanguageCode): BsState => {
+  const seed = (key: TKey) => blankLine(translate(lang, key));
+  return {
+    businessName: "",
+    asOf: "",
+    currentAssets: [seed("stSeedCashBank"), seed("stSeedReceivable"), seed("stSeedInventory")],
+    fixedAssets: [seed("stSeedEquipment")],
+    currentLiabilities: [seed("stSeedPayable"), seed("stSeedGstPayable")],
+    longTermLiabilities: [seed("stSeedLoans")],
+    equity: [seed("stSeedCapital"), seed("stSeedRetained")],
+  };
 };
 
 export function BalanceSheetTool() {
   const { code: currency } = usePreferredCurrency();
   const workspace = useFinanceWorkspace("balance-sheet");
-  const [state, setState] = useLocalStore<BsState>("setu-stmt-bs", INITIAL);
+  const { t, lang } = useI18n();
+  const [initial] = useState(() => initialState(lang));
+  const [state, setState, loaded] = useLocalStore<BsState>("setu-stmt-bs", initial);
+
+  // The starting lines are sample text, not the reader's: ones they have not
+  // touched follow the language they are reading in, however the saved sheet
+  // got here. Lines they typed are left exactly as they wrote them.
+  useEffect(() => {
+    if (!loaded) return;
+    setState((s) => {
+      let changed = false;
+      const next = { ...s };
+      for (const field of SEEDED_FIELDS) {
+        const lines = relabelSeedLines(s[field], SEED_KEYS, lang);
+        if (lines !== s[field]) {
+          next[field] = lines;
+          changed = true;
+        }
+      }
+      return changed ? next : s;
+    });
+  }, [loaded, lang, setState]);
+
   const money = (v: number) => formatMoney(v, currency);
   const patch = (p: Partial<BsState>) => setState((s) => ({ ...s, ...p }));
 
   // Fill the figures we can derive: cash from the cash book's net position,
   // receivables from customers who still owe on their ledger.
   const pullFromWorkspace = () => {
+    const cashLabel = t("stSeedCashBank");
+    const receivableLabel = t("stSeedReceivable");
     const cash = workspace.cashEntries.reduce(
       (s, e) => s + (e.type === "in" ? e.amount : -e.amount),
       0
@@ -62,11 +115,12 @@ export function BalanceSheetTool() {
       ...s,
       businessName: s.businessName || workspace.business?.name || "",
       currentAssets: [
-        { id: generateId(), label: "Cash & bank", amount: cash },
-        { id: generateId(), label: "Accounts receivable", amount: receivables },
-        ...s.currentAssets.filter(
-          (l) => l.label !== "Cash & bank" && l.label !== "Accounts receivable"
-        ),
+        { id: generateId(), label: cashLabel, amount: cash },
+        { id: generateId(), label: receivableLabel, amount: receivables },
+        // Matched against the labels this tool seeded, which are in the
+        // reader's language, so the pull replaces its own rows rather than
+        // stacking a second copy on top of them.
+        ...s.currentAssets.filter((l) => l.label !== cashLabel && l.label !== receivableLabel),
       ],
     }));
   };
@@ -102,29 +156,30 @@ export function BalanceSheetTool() {
 
   const print = () => {
     const rows: PrintRow[] = [
-      { label: "Assets — Current", value: "", kind: "heading" },
+      { label: t("stAssetsCurrent"), value: "", kind: "heading" },
       ...section(state.currentAssets),
-      { label: "Total current assets", value: money(r.currentAssets), kind: "subtotal" },
-      { label: "Assets — Fixed / Non-current", value: "", kind: "heading" },
+      { label: t("stTotalCurrentAssets"), value: money(r.currentAssets), kind: "subtotal" },
+      { label: t("stAssetsFixed"), value: "", kind: "heading" },
       ...section(state.fixedAssets),
-      { label: "Total fixed assets", value: money(r.fixedAssets), kind: "subtotal" },
-      { label: "Total assets", value: money(r.totalAssets), kind: "total" },
-      { label: "Liabilities — Current", value: "", kind: "heading" },
+      { label: t("stTotalFixedAssets"), value: money(r.fixedAssets), kind: "subtotal" },
+      { label: t("stTotalAssets"), value: money(r.totalAssets), kind: "total" },
+      { label: t("stLiabilitiesCurrent"), value: "", kind: "heading" },
       ...section(state.currentLiabilities),
-      { label: "Total current liabilities", value: money(r.currentLiabilities), kind: "subtotal" },
-      { label: "Liabilities — Long-term", value: "", kind: "heading" },
+      { label: t("stTotalCurrentLiabilities"), value: money(r.currentLiabilities), kind: "subtotal" },
+      { label: t("stLiabilitiesLongTerm"), value: "", kind: "heading" },
       ...section(state.longTermLiabilities),
-      { label: "Total liabilities", value: money(r.totalLiabilities), kind: "subtotal" },
-      { label: "Equity", value: "", kind: "heading" },
+      { label: t("stTotalLiabilities"), value: money(r.totalLiabilities), kind: "subtotal" },
+      { label: t("stEquity"), value: "", kind: "heading" },
       ...section(state.equity),
-      { label: "Total equity", value: money(r.equity), kind: "subtotal" },
-      { label: "Total liabilities & equity", value: money(r.totalLiabEquity), kind: "total" },
+      { label: t("stTotalEquity"), value: money(r.equity), kind: "subtotal" },
+      { label: t("stTotalLiabEquity"), value: money(r.totalLiabEquity), kind: "total" },
     ];
     printStatement({
-      docTitle: "Balance Sheet",
+      docTitle: t("stBsTitle"),
       businessName: state.businessName,
-      periodLabel: state.asOf ? `As of ${state.asOf}` : "As of date",
+      periodLabel: state.asOf ? fill(t("stAsOf"), { date: state.asOf }) : t("stAsOfDate"),
       rows,
+      lang,
     });
   };
 
@@ -146,7 +201,7 @@ export function BalanceSheetTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Pull cash from your cash book and receivables from outstanding customer udhaar."
+        message={t("stBsWorkspaceMsg")}
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -154,44 +209,44 @@ export function BalanceSheetTool() {
         {workspace.connected ? (
           <div className="mb-4">
             <SecondaryButton onClick={pullFromWorkspace}>
-              ↻ Pull cash &amp; receivables from workspace
+              ↻ {t("stBsPullBtn")}
             </SecondaryButton>
           </div>
         ) : null}
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Business name">
+          <Field label={t("spBusinessName")}>
             <TextInput
               value={state.businessName}
               onChange={(e) => patch({ businessName: e.target.value })}
             />
           </Field>
-          <Field label="As of date">
+          <Field label={t("stAsOfDate")}>
             <TextInput type="date" value={state.asOf} onChange={(e) => patch({ asOf: e.target.value })} />
           </Field>
         </div>
         <div className="mt-6 space-y-6">
           <LineSectionEditor
-            title="Current assets"
+            title={t("stCurrentAssets")}
             lines={state.currentAssets}
             onChange={(currentAssets) => patch({ currentAssets })}
           />
           <LineSectionEditor
-            title="Fixed / non-current assets"
+            title={t("stFixedAssetsSection")}
             lines={state.fixedAssets}
             onChange={(fixedAssets) => patch({ fixedAssets })}
           />
           <LineSectionEditor
-            title="Current liabilities"
+            title={t("stCurrentLiabilities")}
             lines={state.currentLiabilities}
             onChange={(currentLiabilities) => patch({ currentLiabilities })}
           />
           <LineSectionEditor
-            title="Long-term liabilities"
+            title={t("stLongTermLiabilities")}
             lines={state.longTermLiabilities}
             onChange={(longTermLiabilities) => patch({ longTermLiabilities })}
           />
           <LineSectionEditor
-            title="Equity"
+            title={t("stEquity")}
             lines={state.equity}
             onChange={(equity) => patch({ equity })}
           />
@@ -199,17 +254,17 @@ export function BalanceSheetTool() {
       </Card>
 
       <Card className="h-fit lg:sticky lg:top-24">
-        <h2 className="mb-4 text-lg font-bold text-ink">Balance check</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("stBalanceCheck")}</h2>
         <div className="space-y-2 text-sm">
-          <Row label="Current assets" value={money(r.currentAssets)} />
-          <Row label="Fixed assets" value={money(r.fixedAssets)} />
-          <Row label="Total assets" value={money(r.totalAssets)} strong />
-          <Row label="Current liabilities" value={money(r.currentLiabilities)} />
-          <Row label="Long-term liabilities" value={money(r.longTermLiabilities)} />
-          <Row label="Total equity" value={money(r.equity)} />
-          <Row label="Liabilities + equity" value={money(r.totalLiabEquity)} strong />
+          <Row label={t("stCurrentAssets")} value={money(r.currentAssets)} />
+          <Row label={t("stFixedAssets")} value={money(r.fixedAssets)} />
+          <Row label={t("stTotalAssets")} value={money(r.totalAssets)} strong />
+          <Row label={t("stCurrentLiabilities")} value={money(r.currentLiabilities)} />
+          <Row label={t("stLongTermLiabilities")} value={money(r.longTermLiabilities)} />
+          <Row label={t("stTotalEquity")} value={money(r.equity)} />
+          <Row label={t("stLiabPlusEquity")} value={money(r.totalLiabEquity)} strong />
           <div className="flex justify-between pt-1 text-muted">
-            <span>Working capital</span>
+            <span>{t("stWorkingCapital")}</span>
             <span className={r.workingCapital >= 0 ? "font-semibold text-emerald-600" : "font-semibold text-red-600"}>
               {money(r.workingCapital)}
             </span>
@@ -220,30 +275,29 @@ export function BalanceSheetTool() {
           className={`mt-4 rounded-xl p-4 ${r.balanced ? "bg-emerald-100" : "bg-red-50"}`}
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            {r.balanced ? "Balanced" : "Out of balance"}
+            {t(r.balanced ? "tbBalanced" : "stOutOfBalance")}
           </p>
           <p
             className={`mt-1 text-xl font-bold ${r.balanced ? "text-emerald-700" : "text-red-600"}`}
           >
-            {r.balanced ? "Assets = Liabilities + Equity ✓" : `Difference: ${money(r.difference)}`}
+            {r.balanced
+              ? `${t("stBalancedEq")} ✓`
+              : fill(t("stDifference"), { amount: money(r.difference) })}
           </p>
           {!r.balanced ? (
-            <p className="mt-1 text-xs text-muted">
-              A common fix: the gap is usually retained earnings (accumulated profit) missing from
-              equity.
-            </p>
+            <p className="mt-1 text-xs text-muted">{t("stBalanceHint")}</p>
           ) : null}
         </div>
 
         <div className="mt-4 flex gap-2">
           <SecondaryButton className="flex-1" onClick={print}>
-            Print / PDF
+            {t("qgPrintPdf")}
           </SecondaryButton>
           <SecondaryButton className="flex-1" onClick={exportCsv}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
-        <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
+        <p className="mt-3 text-xs text-muted">{t("stSavedAuto")}</p>
       </Card>
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown, Lock, LockOpen } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 interface AccordionSectionProps {
   title: string;
@@ -21,6 +22,7 @@ export function AccordionSection({
   onToggleLock,
   children,
 }: AccordionSectionProps) {
+  const { t } = useI18n();
   return (
     <div className={`border-b border-muted-line/20 ${isLocked ? "bg-gray-50" : ""}`}>
       <div className="flex w-full items-center justify-between px-4 sm:px-6 py-3 sm:py-4 transition hover:bg-cream/30">
@@ -42,7 +44,7 @@ export function AccordionSection({
                 onToggleLock();
               }}
               className="p-1 sm:p-2 text-muted hover:text-indigo transition"
-              title={isLocked ? "Unlock section" : "Lock section"}
+              title={t(isLocked ? "igUnlockSection" : "igLockSection")}
             >
               {isLocked ? (
                 <Lock className="h-3 w-3 sm:h-4 sm:w-4" />

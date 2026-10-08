@@ -1,6 +1,8 @@
 "use client";
 
 import { FileText, Sparkles, Palette } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 
 interface TemplateSelectorProps {
   selectedTemplate: "classic" | "modern" | "colorful";
@@ -9,34 +11,42 @@ interface TemplateSelectorProps {
   onBrandColorChange: (color: string) => void;
 }
 
-const BRAND_COLOR_PRESETS = [
-  { name: "Indigo", color: "#26306B" },
-  { name: "Blue", color: "#2196F3" },
-  { name: "Green", color: "#4CAF50" },
-  { name: "Orange", color: "#FF9800" },
-  { name: "Purple", color: "#9C27B0" },
-  { name: "Red", color: "#F44336" },
-  { name: "Teal", color: "#009688" },
-  { name: "Pink", color: "#E91E63" },
+// The hex value is what gets stored; the name beside the swatch is just how
+// this reader says that colour.
+const BRAND_COLOR_PRESETS: { name: TKey; color: string }[] = [
+  { name: "igColorIndigo", color: "#26306B" },
+  { name: "igColorBlue", color: "#2196F3" },
+  { name: "igColorGreen", color: "#4CAF50" },
+  { name: "igColorOrange", color: "#FF9800" },
+  { name: "igColorPurple", color: "#9C27B0" },
+  { name: "igColorRed", color: "#F44336" },
+  { name: "igColorTeal", color: "#009688" },
+  { name: "igColorPink", color: "#E91E63" },
 ];
 
-const TEMPLATES = [
+// The id is stored; the name and description follow the reader.
+const TEMPLATES: {
+  id: "classic" | "modern" | "colorful";
+  name: TKey;
+  description: TKey;
+  icon: typeof FileText;
+}[] = [
   {
-    id: "classic" as const,
-    name: "Classic",
-    description: "Formal & Traditional",
+    id: "classic",
+    name: "igTplClassic",
+    description: "igTplClassicDesc",
     icon: FileText,
   },
   {
-    id: "modern" as const,
-    name: "Modern",
-    description: "Clean & Minimal",
+    id: "modern",
+    name: "igTplModern",
+    description: "igTplModernDesc",
     icon: Sparkles,
   },
   {
-    id: "colorful" as const,
-    name: "Colorful",
-    description: "Creative & Bold",
+    id: "colorful",
+    name: "igTplColorful",
+    description: "igTplColorfulDesc",
     icon: Palette,
   },
 ];
@@ -47,12 +57,13 @@ export function TemplateSelector({
   onTemplateChange,
   onBrandColorChange,
 }: TemplateSelectorProps) {
+  const { t } = useI18n();
   return (
     <div className="space-y-6">
       {/* Template Selection */}
       <div>
         <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-          Invoice Template
+          {t("igInvoiceTemplate")}
         </h3>
 
         <div className="grid gap-3 sm:grid-cols-3">
@@ -68,9 +79,9 @@ export function TemplateSelector({
             >
               <div className="mb-2 flex items-center gap-2">
                 <Icon className="h-5 w-5" />
-                <span className="font-semibold text-ink">{name}</span>
+                <span className="font-semibold text-ink">{t(name)}</span>
               </div>
-              <p className="text-xs text-muted-warm">{description}</p>
+              <p className="text-xs text-muted-warm">{t(description)}</p>
             </button>
           ))}
         </div>
@@ -79,7 +90,7 @@ export function TemplateSelector({
       {/* Brand Color */}
       <div className="border-t border-muted-line/10 pt-6">
         <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-ink">
-          Brand Color
+          {t("igBrandColor")}
         </h3>
 
         <div className="mb-4 flex items-center gap-3">
@@ -90,13 +101,13 @@ export function TemplateSelector({
             className="h-12 w-16 cursor-pointer rounded-lg border border-muted-line/40"
           />
           <div>
-            <p className="text-xs text-muted-warm">Current Color</p>
+            <p className="text-xs text-muted-warm">{t("igCurrentColor")}</p>
             <p className="font-mono text-sm font-semibold text-ink">{brandColor.toUpperCase()}</p>
           </div>
         </div>
 
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-muted-warm">Preset Colors</p>
+          <p className="text-xs font-semibold text-muted-warm">{t("igPresetColors")}</p>
           <div className="grid gap-2 sm:grid-cols-4">
             {BRAND_COLOR_PRESETS.map(({ name, color }) => (
               <button
@@ -112,7 +123,7 @@ export function TemplateSelector({
                   className="h-5 w-5 rounded border border-gray-300"
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-xs font-semibold text-ink">{name}</span>
+                <span className="text-xs font-semibold text-ink">{t(name)}</span>
               </button>
             ))}
           </div>

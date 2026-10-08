@@ -11,9 +11,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { name, email, company, message } = body as Record<string, string>;
+  const { name, email, phone, phoneCountry, company, message } = body as Record<string, string>;
 
-  if (!name || !email || !message) {
+  // Checked here as well as in the form: the browser's `required` only binds
+  // the browser, and this endpoint is reachable without one.
+  if (!name || !email || !phone || !message) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -30,6 +32,7 @@ export async function POST(request: Request) {
     text: [
       `Name: ${name}`,
       `Email: ${email}`,
+      `Phone: ${phone}${phoneCountry ? ` (${phoneCountry})` : ""}`,
       company ? `Business name: ${company}` : null,
       "",
       "Message:",

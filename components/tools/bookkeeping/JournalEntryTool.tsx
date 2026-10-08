@@ -15,6 +15,7 @@ import {
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
@@ -25,9 +26,11 @@ import {
   type JournalLine,
 } from "@/lib/bookkeeping";
 import {
-  JOURNAL_SCENARIOS,
+  journalScenarios,
+  scenarioCategoryLabel,
   SCENARIO_CATEGORIES,
   type JournalScenario,
+  type ScenarioCategory,
 } from "@/lib/journalScenarios";
 
 const todayIso = () => new Date().toISOString().split("T")[0];
@@ -36,7 +39,7 @@ const blankLine = (): JournalLine => ({ id: generateId(), accountId: "", debit: 
 
 export function JournalEntryTool() {
   const { code: currency } = usePreferredCurrency();
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   // Same shared stores as the Chart of Accounts and Trial Balance tools.
   const { items: coaAccounts } = useEntityList<Account>("coa_accounts");
   const accounts = coaAccounts.length > 0 ? coaAccounts : defaultAccounts(lang);
@@ -52,17 +55,20 @@ export function JournalEntryTool() {
   // Scenario library — pick a real-world transaction and the correct
   // debit/credit lines load, ready to edit.
   const [scenarioSearch, setScenarioSearch] = useState("");
-  const [scenarioCategory, setScenarioCategory] = useState("");
+  const [scenarioCategory, setScenarioCategory] = useState<ScenarioCategory | "">("");
   const [loadedScenario, setLoadedScenario] = useState<JournalScenario | null>(null);
+
+  // Worded for this reader; the entries themselves are the same either way.
+  const scenarios = useMemo(() => journalScenarios(lang), [lang]);
 
   const filteredScenarios = useMemo(() => {
     const q = scenarioSearch.trim().toLowerCase();
-    return JOURNAL_SCENARIOS.filter(
+    return scenarios.filter(
       (s) =>
         (!scenarioCategory || s.category === scenarioCategory) &&
         (!q || s.name.toLowerCase().includes(q) || s.narration.toLowerCase().includes(q))
     );
-  }, [scenarioSearch, scenarioCategory]);
+  }, [scenarios, scenarioSearch, scenarioCategory]);
 
   const loadScenario = (s: JournalScenario) => {
     const available = new Set(accounts.map((a) => a.id));
@@ -142,15 +148,12 @@ export function JournalEntryTool() {
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <div className="space-y-6">
       <Card>
-        <h2 className="mb-1 text-lg font-bold text-ink">Scenario library</h2>
-        <p className="mb-3 text-sm text-muted">
-          Not sure which account to debit or credit? Pick the transaction — the correct entry loads
-          below, ready to edit.
-        </p>
+        <h2 className="mb-1 text-lg font-bold text-ink">{t("jeScenarioLibrary")}</h2>
+        <p className="mb-3 text-sm text-muted">{t("jeScenarioIntro")}</p>
         <TextInput
           value={scenarioSearch}
           onChange={(e) => setScenarioSearch(e.target.value)}
-          placeholder="Search scenarios… (e.g. depreciation, GST, salary, loan)"
+          placeholder={t("jeSearchScenarios")}
         />
         <div className="mt-3 flex flex-wrap gap-1.5">
           <button
@@ -162,7 +165,7 @@ export function JournalEntryTool() {
                 : "border-muted-line/40 text-ink/70 hover:border-indigo/40"
             }`}
           >
-            All ({JOURNAL_SCENARIOS.length})
+            {fill(t("jeAllCount"), { count: scenarios.length })}
           </button>
           {SCENARIO_CATEGORIES.map((c) => (
             <button
@@ -175,7 +178,7 @@ export function JournalEntryTool() {
                   : "border-muted-line/40 text-ink/70 hover:border-indigo/40"
               }`}
             >
-              {c}
+              {scenarioCategoryLabel(c, lang)}
             </button>
           ))}
         </div>
@@ -192,21 +195,21 @@ export function JournalEntryTool() {
               }`}
             >
               <p className="text-sm font-semibold text-ink">{s.name}</p>
-              <p className="text-xs text-muted">{s.category}</p>
+              <p className="text-xs text-muted">{scenarioCategoryLabel(s.category, lang)}</p>
             </button>
           ))}
           {filteredScenarios.length === 0 ? (
-            <p className="py-4 text-sm text-muted">No scenarios match that search.</p>
+            <p className="py-4 text-sm text-muted">{t("jeNoScenarios")}</p>
           ) : null}
         </div>
         {loadedScenario ? (
           <div className="mt-3 space-y-2 rounded-xl bg-cream-paper/60 p-4 text-sm">
             <p>
-              <span className="font-semibold text-ink">Why this entry: </span>
+              <span className="font-semibold text-ink">{t("jeWhyThisEntry")} </span>
               <span className="text-muted">{loadedScenario.explanation}</span>
             </p>
             <p>
-              <span className="font-semibold text-red-600">Common mistake: </span>
+              <span className="font-semibold text-red-600">{t("jeCommonMistake")} </span>
               <span className="text-muted">{loadedScenario.mistake}</span>
             </p>
           </div>
@@ -214,33 +217,33 @@ export function JournalEntryTool() {
       </Card>
 
       <Card className="h-fit">
-        <h2 className="mb-4 text-lg font-bold text-ink">New journal entry</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("jeNewEntry")}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Date">
+          <Field label={t("date")}>
             <TextInput type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </Field>
-          <Field label="Narration *">
+          <Field label={t("jeNarrationReq")}>
             <TextInput
               value={narration}
               onChange={(e) => setNarration(e.target.value)}
-              placeholder="e.g. Paid shop rent for July by bank transfer"
+              placeholder={t("jeNarrationPlaceholder")}
             />
           </Field>
         </div>
 
-        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">Lines (debits must equal credits)</h3>
+        <h3 className="mb-2 mt-5 text-sm font-bold text-ink">{t("jeLines")}</h3>
         <div className="space-y-2">
           {lines.map((line) => (
             <div
               key={line.id}
               className="grid grid-cols-2 items-end gap-2 rounded-lg border border-muted-line/30 p-3 sm:grid-cols-[1fr_120px_120px_auto]"
             >
-              <Field label="Account">
+              <Field label={t("bkAccount")}>
                 <Select
                   value={line.accountId}
                   onChange={(e) => updateLine(line.id, { accountId: e.target.value })}
                 >
-                  <option value="">Choose account…</option>
+                  <option value="">{t("jeChooseAccount")}</option>
                   {sortedAccounts.map((a) => (
                     <option key={a.id} value={a.id}>
                       {a.code} · {a.name}
@@ -248,7 +251,7 @@ export function JournalEntryTool() {
                   ))}
                 </Select>
               </Field>
-              <Field label="Debit">
+              <Field label={t("bkDebit")}>
                 <NumberInput
                   min={0}
                   step="0.01"
@@ -258,7 +261,7 @@ export function JournalEntryTool() {
                   }
                 />
               </Field>
-              <Field label="Credit">
+              <Field label={t("bkCredit")}>
                 <NumberInput
                   min={0}
                   step="0.01"
@@ -274,48 +277,51 @@ export function JournalEntryTool() {
                 disabled={lines.length <= 2}
                 className="mb-1 justify-self-end text-sm font-semibold text-red-500 hover:text-red-600 disabled:opacity-40"
               >
-                Remove
+                {t("remove")}
               </button>
             </div>
           ))}
         </div>
         <SecondaryButton className="mt-3" onClick={() => setLines((p) => [...p, blankLine()])}>
-          + Add line
+          {t("jeAddLine")}
         </SecondaryButton>
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-muted-line/30 pt-4">
           <p className="text-sm">
-            <span className="font-semibold text-ink">Dr {formatMoney(totals.debit, currency)}</span>
+            <span className="font-semibold text-ink">
+              {t("bkDr")} {formatMoney(totals.debit, currency)}
+            </span>
             <span className="mx-2 text-muted">·</span>
-            <span className="font-semibold text-ink">Cr {formatMoney(totals.credit, currency)}</span>
+            <span className="font-semibold text-ink">
+              {t("bkCr")} {formatMoney(totals.credit, currency)}
+            </span>
             <span
               className={`ml-3 rounded-full px-2.5 py-1 text-xs font-semibold ${
                 totals.balanced ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-600"
               }`}
             >
-              {totals.balanced ? "Balanced" : "Not balanced"}
+              {t(totals.balanced ? "tbBalanced" : "jeNotBalanced")}
             </span>
           </p>
           <PrimaryButton onClick={post} disabled={!canPost}>
-            Post entry
+            {t("jePostEntry")}
           </PrimaryButton>
         </div>
-        {savedMsg ? <p className="mt-2 text-sm font-medium text-emerald-600">Entry posted ✓</p> : null}
+        {savedMsg ? (
+          <p className="mt-2 text-sm font-medium text-emerald-600">{t("jeEntryPosted")} ✓</p>
+        ) : null}
       </Card>
       </div>
 
       <Card className="h-fit">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <h2 className="text-lg font-bold text-ink">Recent entries</h2>
+          <h2 className="text-lg font-bold text-ink">{t("jeRecentEntries")}</h2>
           <SecondaryButton onClick={exportCsv} disabled={entries.length === 0}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
         {recent.length === 0 ? (
-          <EmptyState
-            title="No entries yet"
-            subtitle="Posted entries appear here and flow into the General Ledger and Trial Balance tools automatically."
-          />
+          <EmptyState title={t("noEntries")} subtitle={t("jeNoEntriesSub")} />
         ) : (
           <div className="space-y-3">
             {recent.map((entry) => (
@@ -330,13 +336,14 @@ export function JournalEntryTool() {
                     onClick={() => setDeleting(entry)}
                     className="text-xs font-semibold text-red-500 hover:text-red-600"
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
                 <div className="mt-2 space-y-0.5 text-xs text-muted">
                   {entry.lines.map((line) => (
                     <p key={line.id}>
-                      {line.debit > 0 ? "Dr" : "Cr"} {accountLabel(accounts, line.accountId, lang)} —{" "}
+                      {t(line.debit > 0 ? "bkDr" : "bkCr")}{" "}
+                      {accountLabel(accounts, line.accountId, lang)} —{" "}
                       {formatMoney(line.debit || line.credit, currency)}
                     </p>
                   ))}
@@ -349,13 +356,16 @@ export function JournalEntryTool() {
 
       <ConfirmDialog
         open={deleting !== null}
-        title="Delete journal entry?"
+        title={t("jeDeleteEntry")}
         message={
           deleting
-            ? `Delete "${deleting.narration}" (${deleting.date})? The ledger and trial balance will update.`
+            ? fill(t("jeDeleteEntryMsg"), {
+                narration: deleting.narration,
+                date: deleting.date,
+              })
             : ""
         }
-        confirmLabel="Delete"
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deleting) void removeEntry(deleting.id);
           setDeleting(null);

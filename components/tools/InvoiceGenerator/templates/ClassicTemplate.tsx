@@ -1,5 +1,8 @@
 import { formatCurrency } from "@/lib/format";
 import { amountInWordsIndian, calculateLineItem, calculateTotals, splitTax } from "@/lib/invoice";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { UPIQRCode } from "../UPIQRCode";
 import type { InvoiceData } from "@/lib/types/invoice";
 
@@ -8,8 +11,13 @@ interface ClassicTemplateProps {
 }
 
 export function ClassicTemplate({ data }: ClassicTemplateProps) {
+  const { t, lang } = useI18n();
   const totals = calculateTotals(data.lineItems, data.fees, data.taxMode);
+  // The spelled-out amount is still English: a number-to-words engine per
+  // language is its own piece of work, and a wrong one on a tax document is
+  // worse than an English one. The label around it follows the reader.
   const amountWords = amountInWordsIndian(totals.grandTotal);
+  const fmtDate = (iso: string) => new Date(iso).toLocaleDateString(intlLocaleFor(lang));
 
   return (
     <div className="bg-white p-8 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -19,7 +27,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
           {data.businessDetails.logo && (
             <img
               src={data.businessDetails.logo}
-              alt="Business logo"
+              alt={t("igBusinessLogoAlt")}
               className="h-16 w-16 rounded-lg object-cover"
             />
           )}
@@ -27,14 +35,16 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             <div className="text-2xl font-bold" style={{ color: data.brandColor }}>
               {data.businessDetails.name}
             </div>
-            <div className="mt-1 text-xs text-gray-600">INVOICE</div>
+            <div className="mt-1 text-xs text-gray-600">{t("igDocInvoice")}</div>
           </div>
         </div>
         <div className="text-right text-xs">
-          <div className="font-bold">Invoice #: {data.invoiceDetails.number}</div>
-          <div>Date: {new Date(data.invoiceDetails.date).toLocaleDateString("en-IN")}</div>
+          <div className="font-bold">
+            {fill(t("igDocInvoiceNo"), { no: data.invoiceDetails.number })}
+          </div>
+          <div>{fill(t("igDocDate"), { date: fmtDate(data.invoiceDetails.date) })}</div>
           {data.invoiceDetails.dueDate && (
-            <div>Due: {new Date(data.invoiceDetails.dueDate).toLocaleDateString("en-IN")}</div>
+            <div>{fill(t("igDocDue"), { date: fmtDate(data.invoiceDetails.dueDate) })}</div>
           )}
         </div>
       </div>
@@ -43,7 +53,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       <div className="mb-8 grid grid-cols-2 gap-8 text-xs">
         <div>
           <div className="mb-2 font-bold" style={{ color: data.brandColor }}>
-            FROM
+            {t("igDocFrom")}
           </div>
           <div className="space-y-1 text-gray-700">
             <div className="font-bold">{data.businessDetails.name}</div>
@@ -56,7 +66,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
 
         <div>
           <div className="mb-2 font-bold" style={{ color: data.brandColor }}>
-            BILL TO
+            {t("igDocBillTo")}
           </div>
           <div className="space-y-1 text-gray-700">
             <div className="font-bold">{data.clientDetails.name}</div>
@@ -72,12 +82,12 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       <table className="mb-6 w-full border-collapse text-xs">
         <thead>
           <tr className="border-t-2 border-b border-black">
-            <th className="border-b border-gray-300 py-2 text-left font-bold">Item Description</th>
-            <th className="border-b border-gray-300 py-2 text-center font-bold">Qty</th>
-            <th className="border-b border-gray-300 py-2 text-center font-bold">Rate</th>
-            <th className="border-b border-gray-300 py-2 text-center font-bold">Disc %</th>
-            <th className="border-b border-gray-300 py-2 text-center font-bold">Tax %</th>
-            <th className="border-b border-gray-300 py-2 text-right font-bold">Amount</th>
+            <th className="border-b border-gray-300 py-2 text-left font-bold">{t("igItemDescription")}</th>
+            <th className="border-b border-gray-300 py-2 text-center font-bold">{t("quantity")}</th>
+            <th className="border-b border-gray-300 py-2 text-center font-bold">{t("rate")}</th>
+            <th className="border-b border-gray-300 py-2 text-center font-bold">{t("igDocDiscPct")}</th>
+            <th className="border-b border-gray-300 py-2 text-center font-bold">{t("igTaxPct")}</th>
+            <th className="border-b border-gray-300 py-2 text-right font-bold">{t("amount")}</th>
           </tr>
         </thead>
         <tbody>
@@ -101,13 +111,13 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       <div className="mb-6 flex justify-end">
         <div className="w-64 text-xs">
           <div className="mb-1 flex justify-between border-b border-gray-300 py-1">
-            <span>Subtotal:</span>
+            <span>{t("igDocSubtotal")}:</span>
             <span className="font-bold">{formatCurrency(totals.subtotal)}</span>
           </div>
 
           {totals.totalDiscount > 0 && (
             <div className="mb-1 flex justify-between border-b border-gray-300 py-1">
-              <span>Total Discount:</span>
+              <span>{t("igDocTotalDiscount")}:</span>
               <span className="font-bold text-red-600">-{formatCurrency(totals.totalDiscount)}</span>
             </div>
           )}
@@ -116,7 +126,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             .filter(([_, amount]) => amount > 0)
             .map(([rate, amount]) => (
             <div key={rate} className="mb-1 flex justify-between border-b border-gray-300 py-1">
-              <span>Tax @ {rate}%:</span>
+              <span>{fill(t("igDocTaxAt"), { rate })}:</span>
               <span className="font-bold">{formatCurrency(amount)}</span>
             </div>
           ))}
@@ -136,7 +146,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
             className="mt-3 flex justify-between border-t-2 border-black py-2 text-sm font-bold"
             style={{ color: data.brandColor }}
           >
-            <span>TOTAL:</span>
+            <span>{t("igDocTotal")}:</span>
             <span>{formatCurrency(totals.grandTotal)}</span>
           </div>
         </div>
@@ -144,24 +154,24 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
 
       {/* Amount in Words */}
       <div className="mb-6 border-b border-gray-300 pb-4 text-xs">
-        <div className="font-bold">Amount in Words:</div>
+        <div className="font-bold">{t("igDocAmountInWords")}</div>
         <div>{amountWords}</div>
       </div>
 
       {/* Bank Details */}
       {(data.bankDetails?.accountNo || data.bankDetails?.upiId) && (
         <div className="mb-6 border-b border-gray-300 pb-4">
-          <div className="font-bold mb-2 text-xs">Payment Details</div>
+          <div className="font-bold mb-2 text-xs">{t("igDocPaymentDetails")}</div>
           <div className="grid grid-cols-2 gap-4">
             <div className="text-xs">
               {data.bankDetails.accountNo && (
-                <div>Account: {data.bankDetails.accountNo}</div>
+                <div>{fill(t("igDocAccount"), { value: data.bankDetails.accountNo })}</div>
               )}
               {data.bankDetails.ifsc && (
-                <div>IFSC: {data.bankDetails.ifsc}</div>
+                <div>{fill(t("igDocIfsc"), { value: data.bankDetails.ifsc })}</div>
               )}
               {data.bankDetails.upiId && (
-                <div>UPI: {data.bankDetails.upiId}</div>
+                <div>{fill(t("igDocUpi"), { value: data.bankDetails.upiId })}</div>
               )}
             </div>
             {data.bankDetails.upiId && (
@@ -180,7 +190,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       {/* Notes */}
       {data.notes && (
         <div className="mb-4 border-b border-gray-300 pb-4 text-xs">
-          <div className="font-bold">Notes:</div>
+          <div className="font-bold">{t("igDocNotes")}</div>
           <div className="mt-1 whitespace-pre-wrap text-gray-700">{data.notes}</div>
         </div>
       )}
@@ -188,7 +198,7 @@ export function ClassicTemplate({ data }: ClassicTemplateProps) {
       {/* Terms */}
       {data.terms && (
         <div className="text-xs">
-          <div className="font-bold">Terms & Conditions:</div>
+          <div className="font-bold">{t("igDocTerms")}</div>
           <div className="mt-1 whitespace-pre-wrap text-gray-700">{data.terms}</div>
         </div>
       )}

@@ -5,9 +5,10 @@
 // imbalance. Users on the bookkeeping suite can also pull the balances straight
 // from their posted journal with one click. Everything persists in localStorage.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, Field, NumberInput, PrimaryButton, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
+import { relabelSeed } from "@/lib/i18n/seed-labels";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { useI18n } from "@/lib/i18n";
@@ -50,6 +51,8 @@ const SEED_ROWS: [TKey, number, number][] = [
   ["tbSeedExpenses", 25000, 0],
 ];
 
+const SEED_KEYS = SEED_ROWS.map(([key]) => key);
+
 function initialState(lang: LanguageCode): TbState {
   return {
     businessName: "",
@@ -64,7 +67,24 @@ export function TrialBalanceTool() {
   const { code: currency } = usePreferredCurrency();
   const { t, lang } = useI18n();
   const [initial] = useState<TbState>(() => initialState(lang));
-  const [state, setState] = useLocalStore<TbState>("setu-trial-balance", initial);
+  const [state, setState, loaded] = useLocalStore<TbState>("setu-trial-balance", initial);
+
+  // The worked example is sample text, not the reader's: a row they have not
+  // touched follows the language they are reading in, however the saved
+  // worksheet got here. Rows they typed are left exactly as they wrote them.
+  useEffect(() => {
+    if (!loaded) return;
+    setState((s) => {
+      let changed = false;
+      const rows = s.rows.map((r) => {
+        const account = relabelSeed(r.account, SEED_KEYS, lang);
+        if (account === r.account) return r;
+        changed = true;
+        return { ...r, account };
+      });
+      return changed ? { ...s, rows } : s;
+    });
+  }, [loaded, lang, setState]);
 
   // For the optional "pull from journal" action (bookkeeping suite).
   const { items: coaAccounts } = useEntityList<Account>("coa_accounts");

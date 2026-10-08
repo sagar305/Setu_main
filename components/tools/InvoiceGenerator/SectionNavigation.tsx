@@ -1,6 +1,8 @@
 "use client";
 
 import { Building2, Users, FileText, ShoppingCart, BookOpen, Banknote, Palette, Eye, EyeOff } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 
 interface SectionNavigationProps {
   activeSection: string;
@@ -9,14 +11,14 @@ interface SectionNavigationProps {
   onPreviewToggle: (show: boolean) => void;
 }
 
-const SECTIONS = [
-  { id: "business", label: "Business Details", icon: Building2 },
-  { id: "client", label: "Bill To", icon: Users },
-  { id: "invoice", label: "Invoice Details", icon: FileText },
-  { id: "items", label: "Line Items", icon: ShoppingCart },
-  { id: "bank", label: "Bank & Payment", icon: Banknote },
-  { id: "notes", label: "Notes & Terms", icon: BookOpen },
-  { id: "template", label: "Template", icon: Palette },
+const SECTIONS: { id: string; label: TKey; icon: typeof Building2 }[] = [
+  { id: "business", label: "igBusinessDetails", icon: Building2 },
+  { id: "client", label: "igBillTo", icon: Users },
+  { id: "invoice", label: "igInvoiceDetails", icon: FileText },
+  { id: "items", label: "igLineItems", icon: ShoppingCart },
+  { id: "bank", label: "igBankPayment", icon: Banknote },
+  { id: "notes", label: "igNotesTerms", icon: BookOpen },
+  { id: "template", label: "igTemplateWord", icon: Palette },
 ];
 
 export function SectionNavigation({
@@ -25,6 +27,7 @@ export function SectionNavigation({
   showPreview,
   onPreviewToggle,
 }: SectionNavigationProps) {
+  const { t } = useI18n();
   return (
     <div className="sticky top-0 z-40 border-b border-muted-line/20 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-6 py-4">
@@ -42,7 +45,7 @@ export function SectionNavigation({
                 }`}
               >
                 <Icon className="h-4 w-4" />
-                <span className="hidden sm:inline">{label}</span>
+                <span className="hidden sm:inline">{t(label)}</span>
               </button>
             ))}
           </div>
@@ -51,17 +54,17 @@ export function SectionNavigation({
           <button
             onClick={() => onPreviewToggle(!showPreview)}
             className="inline-flex items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 text-sm font-semibold text-muted transition hover:border-indigo hover:text-indigo"
-            title={showPreview ? "Hide preview" : "Show preview"}
+            title={t(showPreview ? "igHidePreview" : "igShowPreview")}
           >
             {showPreview ? (
               <>
                 <EyeOff className="h-4 w-4" />
-                <span className="hidden sm:inline">Hide Preview</span>
+                <span className="hidden sm:inline">{t("igHidePreview")}</span>
               </>
             ) : (
               <>
                 <Eye className="h-4 w-4" />
-                <span className="hidden sm:inline">Show Preview</span>
+                <span className="hidden sm:inline">{t("igShowPreview")}</span>
               </>
             )}
           </button>

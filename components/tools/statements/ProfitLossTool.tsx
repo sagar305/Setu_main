@@ -1,11 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
+import { useI18n } from "@/lib/i18n";
+import { relabelSeedLines } from "@/lib/i18n/seed-labels";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { formatMoney, generateId } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import {
@@ -27,20 +31,63 @@ type PlState = {
   tax: number;
 };
 
-const INITIAL: PlState = {
-  businessName: "",
-  period: "",
-  revenue: [blankLine("Sales")],
-  cogs: [blankLine("Purchases / materials")],
-  expenses: [blankLine("Rent"), blankLine("Salaries & wages")],
-  otherIncome: [blankLine("Other income")],
-  tax: 0,
+// The starting line labels are the user's to edit, so they begin in the
+// user's own language rather than making them translate the form away.
+const SEED_KEYS: TKey[] = [
+  "stSeedSales",
+  "stSeedPurchasesMaterials",
+  "stSeedRent",
+  "stSeedSalaries",
+  "stOtherIncome",
+  "stSeedPurchases",
+];
+
+const SEEDED_FIELDS = [
+  "revenue",
+  "cogs",
+  "expenses",
+  "otherIncome",
+] as const satisfies readonly (keyof PlState)[];
+
+const initialState = (lang: LanguageCode): PlState => {
+  const seed = (key: TKey) => blankLine(translate(lang, key));
+  return {
+    businessName: "",
+    period: "",
+    revenue: [seed("stSeedSales")],
+    cogs: [seed("stSeedPurchasesMaterials")],
+    expenses: [seed("stSeedRent"), seed("stSeedSalaries")],
+    otherIncome: [seed("stOtherIncome")],
+    tax: 0,
+  };
 };
 
 export function ProfitLossTool() {
   const { code: currency } = usePreferredCurrency();
   const workspace = useFinanceWorkspace("profit-loss-statement");
-  const [state, setState] = useLocalStore<PlState>("setu-stmt-pl", INITIAL);
+  const { t, lang } = useI18n();
+  const [initial] = useState(() => initialState(lang));
+  const [state, setState, loaded] = useLocalStore<PlState>("setu-stmt-pl", initial);
+
+  // The starting lines are sample text, not the reader's: ones they have not
+  // touched follow the language they are reading in, however the saved sheet
+  // got here. Lines they typed are left exactly as they wrote them.
+  useEffect(() => {
+    if (!loaded) return;
+    setState((s) => {
+      let changed = false;
+      const next = { ...s };
+      for (const field of SEEDED_FIELDS) {
+        const lines = relabelSeedLines(s[field], SEED_KEYS, lang);
+        if (lines !== s[field]) {
+          next[field] = lines;
+          changed = true;
+        }
+      }
+      return changed ? next : s;
+    });
+  }, [loaded, lang, setState]);
+
 
   const money = (v: number) => formatMoney(v, currency);
 
@@ -66,8 +113,8 @@ export function ProfitLossTool() {
     setState((s) => ({
       ...s,
       businessName: s.businessName || workspace.business?.name || "",
-      revenue: [{ id: generateId(), label: "Sales", amount: netSales }],
-      cogs: [{ id: generateId(), label: "Purchases", amount: purchasesTotal }],
+      revenue: [{ id: generateId(), label: t("stSeedSales"), amount: netSales }],
+      cogs: [{ id: generateId(), label: t("stSeedPurchases"), amount: purchasesTotal }],
       expenses: expenseLines.length > 0 ? expenseLines : s.expenses,
     }));
   };
@@ -90,28 +137,29 @@ export function ProfitLossTool() {
 
   const print = () => {
     const rows: PrintRow[] = [
-      { label: "Revenue", value: "", kind: "heading" },
+      { label: t("revenue"), value: "", kind: "heading" },
       ...state.revenue.filter((l) => l.label).map((l) => ({ label: l.label, value: money(l.amount) })),
-      { label: "Total revenue", value: money(r.revenue), kind: "subtotal" as const },
-      { label: "Cost of goods sold", value: "", kind: "heading" },
+      { label: t("stTotalRevenue"), value: money(r.revenue), kind: "subtotal" as const },
+      { label: t("stCogs"), value: "", kind: "heading" },
       ...state.cogs.filter((l) => l.label).map((l) => ({ label: l.label, value: money(l.amount) })),
-      { label: "Total cost of goods sold", value: money(r.cogs), kind: "subtotal" as const },
-      { label: "Gross profit", value: money(r.grossProfit), kind: "subtotal" },
-      { label: "Operating expenses", value: "", kind: "heading" },
+      { label: t("stTotalCogs"), value: money(r.cogs), kind: "subtotal" as const },
+      { label: t("stGrossProfit"), value: money(r.grossProfit), kind: "subtotal" },
+      { label: t("stOperatingExpenses"), value: "", kind: "heading" },
       ...state.expenses.filter((l) => l.label).map((l) => ({ label: l.label, value: money(l.amount) })),
-      { label: "Total operating expenses", value: money(r.expenses), kind: "subtotal" as const },
-      { label: "Operating profit", value: money(r.operatingProfit), kind: "subtotal" },
-      { label: "Other income", value: "", kind: "heading" },
+      { label: t("stTotalOperatingExpenses"), value: money(r.expenses), kind: "subtotal" as const },
+      { label: t("stOperatingProfit"), value: money(r.operatingProfit), kind: "subtotal" },
+      { label: t("stOtherIncome"), value: "", kind: "heading" },
       ...state.otherIncome.filter((l) => l.label).map((l) => ({ label: l.label, value: money(l.amount) })),
-      { label: "Profit before tax", value: money(r.profitBeforeTax), kind: "subtotal" },
-      { label: "Tax", value: money(state.tax || 0) },
-      { label: "Net profit", value: money(r.netProfit), kind: "total" },
+      { label: t("stProfitBeforeTax"), value: money(r.profitBeforeTax), kind: "subtotal" },
+      { label: t("taxLabel"), value: money(state.tax || 0) },
+      { label: t("stNetProfit"), value: money(r.netProfit), kind: "total" },
     ];
     printStatement({
-      docTitle: "Profit & Loss Statement",
+      docTitle: t("stPlTitle"),
       businessName: state.businessName,
-      periodLabel: state.period || "For the period",
+      periodLabel: state.period || t("stForThePeriod"),
       rows,
+      lang,
     });
   };
 
@@ -134,23 +182,23 @@ export function ProfitLossTool() {
     <div>
       <WorkspaceBanner
         connection={workspace}
-        message="Build this P&L automatically from your recorded sales, purchases and expenses."
+        message={t("stPlWorkspaceMsg")}
       />
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
       <Card className="h-fit">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Business name">
+          <Field label={t("spBusinessName")}>
             <TextInput
               value={state.businessName}
               onChange={(e) => patch({ businessName: e.target.value })}
             />
           </Field>
-          <Field label="Period">
+          <Field label={t("bvaPeriod")}>
             <TextInput
               value={state.period}
               onChange={(e) => patch({ period: e.target.value })}
-              placeholder="e.g. April 2026 – June 2026"
+              placeholder={t("stPeriodPlaceholder")}
             />
           </Field>
         </div>
@@ -158,34 +206,34 @@ export function ProfitLossTool() {
         {workspace.connected ? (
           <div className="mt-4">
             <SecondaryButton onClick={pullFromWorkspace}>
-              ↻ Pull from recorded sales, purchases &amp; expenses
+              ↻ {t("stPlPullBtn")}
             </SecondaryButton>
           </div>
         ) : null}
 
         <div className="mt-6 space-y-6">
           <LineSectionEditor
-            title="Revenue"
+            title={t("revenue")}
             lines={state.revenue}
             onChange={(revenue) => patch({ revenue })}
           />
           <LineSectionEditor
-            title="Cost of goods sold"
+            title={t("stCogs")}
             lines={state.cogs}
             onChange={(cogs) => patch({ cogs })}
           />
           <LineSectionEditor
-            title="Operating expenses"
+            title={t("stOperatingExpenses")}
             lines={state.expenses}
             onChange={(expenses) => patch({ expenses })}
           />
           <LineSectionEditor
-            title="Other income"
+            title={t("stOtherIncome")}
             lines={state.otherIncome}
             onChange={(otherIncome) => patch({ otherIncome })}
           />
           <div className="max-w-[220px]">
-            <Field label="Tax on profit">
+            <Field label={t("stTaxOnProfit")}>
               <NumberInput
                 step="0.01"
                 value={state.tax || ""}
@@ -198,19 +246,21 @@ export function ProfitLossTool() {
       </Card>
 
       <Card className="h-fit lg:sticky lg:top-24">
-        <h2 className="mb-4 text-lg font-bold text-ink">Statement</h2>
+        <h2 className="mb-4 text-lg font-bold text-ink">{t("stStatement")}</h2>
         <div className="space-y-2 text-sm">
-          <Row label="Total revenue" value={money(r.revenue)} />
-          <Row label="Cost of goods sold" value={`− ${money(r.cogs)}`} />
-          <Row label="Gross profit" value={money(r.grossProfit)} strong />
-          <Row label="Operating expenses" value={`− ${money(r.expenses)}`} />
-          <Row label="Operating profit" value={money(r.operatingProfit)} strong />
-          <Row label="Other income" value={`+ ${money(r.otherIncome)}`} />
-          <Row label="Tax" value={`− ${money(state.tax || 0)}`} />
+          <Row label={t("stTotalRevenue")} value={money(r.revenue)} />
+          <Row label={t("stCogs")} value={`− ${money(r.cogs)}`} />
+          <Row label={t("stGrossProfit")} value={money(r.grossProfit)} strong />
+          <Row label={t("stOperatingExpenses")} value={`− ${money(r.expenses)}`} />
+          <Row label={t("stOperatingProfit")} value={money(r.operatingProfit)} strong />
+          <Row label={t("stOtherIncome")} value={`+ ${money(r.otherIncome)}`} />
+          <Row label={t("taxLabel")} value={`− ${money(state.tax || 0)}`} />
           <div
             className={`mt-2 rounded-xl p-4 ${r.netProfit >= 0 ? "bg-emerald-100" : "bg-red-50"}`}
           >
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Net profit</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t("stNetProfit")}
+            </p>
             <p
               className={`mt-1 text-2xl font-bold ${
                 r.netProfit >= 0 ? "text-emerald-700" : "text-red-600"
@@ -219,19 +269,22 @@ export function ProfitLossTool() {
               {money(r.netProfit)}
             </p>
             <p className="mt-1 text-xs text-muted">
-              Gross margin {r.grossMarginPct.toFixed(1)}% · Net margin {r.netMarginPct.toFixed(1)}%
+              {fill(t("stMarginLine"), {
+                gross: r.grossMarginPct.toFixed(1),
+                net: r.netMarginPct.toFixed(1),
+              })}
             </p>
           </div>
         </div>
         <div className="mt-4 flex gap-2">
           <SecondaryButton className="flex-1" onClick={print}>
-            Print / PDF
+            {t("qgPrintPdf")}
           </SecondaryButton>
           <SecondaryButton className="flex-1" onClick={exportCsv}>
-            Export CSV
+            {t("exportCsv")}
           </SecondaryButton>
         </div>
-        <p className="mt-3 text-xs text-muted">Saved automatically in this browser as you type.</p>
+        <p className="mt-3 text-xs text-muted">{t("stSavedAuto")}</p>
       </Card>
       </div>
     </div>
