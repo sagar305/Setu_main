@@ -1152,6 +1152,17 @@ export type DictKey =
   | "cfSending"
   | "cfSuccess"
   | "cfError"
+  | "bdRequestingFor"
+  | "bdPreferredDate"
+  | "bdPreferredTime"
+  | "bdAnythingElse"
+  | "bdRequestDemo"
+  | "bdSuccess"
+  | "plNoArticles"
+  | "plPagination"
+  | "plPrevPage"
+  | "plNextPage"
+  | "plPageN"
   // Tool vocabulary — complete in en + hi; other languages fall back to
   // English until their dictionaries are extended.
   | "category"
@@ -2407,6 +2418,17 @@ const en: Dict = {
   cfSending: "Sending…",
   cfSuccess: "Thanks — we've got your message and will get back to you shortly.",
   cfError: "Something went wrong. Please try again.",
+  bdRequestingFor: "Requesting a demo for: {product}",
+  bdPreferredDate: "Preferred date",
+  bdPreferredTime: "Preferred time",
+  bdAnythingElse: "Anything else we should know? (optional)",
+  bdRequestDemo: "Request demo",
+  bdSuccess: "Thanks — your demo request for {product} is in. We'll confirm the slot shortly.",
+  plNoArticles: "No articles to show.",
+  plPagination: "Pagination",
+  plPrevPage: "Previous page",
+  plNextPage: "Next page",
+  plPageN: "Page {n}",
 };
 
 const hi: Dict = {
@@ -3607,6 +3629,17 @@ const hi: Dict = {
   cfSending: "भेजा जा रहा है…",
   cfSuccess: "धन्यवाद — आपका संदेश हमें मिल गया है, हम जल्द ही जवाब देंगे।",
   cfError: "कुछ गड़बड़ हो गई। फिर कोशिश कीजिए।",
+  bdRequestingFor: "डेमो माँगा जा रहा है: {product}",
+  bdPreferredDate: "कौन सी तारीख़ ठीक रहेगी",
+  bdPreferredTime: "कौन सा समय ठीक रहेगा",
+  bdAnythingElse: "और कुछ बताना चाहें? (ज़रूरी नहीं)",
+  bdRequestDemo: "डेमो माँगिए",
+  bdSuccess: "धन्यवाद — {product} के लिए आपकी डेमो की माँग हमें मिल गई। समय जल्द ही पक्का कर देंगे।",
+  plNoArticles: "दिखाने के लिए कोई लेख नहीं।",
+  plPagination: "पन्ने",
+  plPrevPage: "पिछला पन्ना",
+  plNextPage: "अगला पन्ना",
+  plPageN: "पन्ना {n}",
 };
 
 const bn: Partial<Dict> = {
@@ -4807,6 +4840,17 @@ const bn: Partial<Dict> = {
   cfSending: "পাঠানো হচ্ছে…",
   cfSuccess: "ধন্যবাদ — আপনার বার্তা আমরা পেয়েছি, শিগগিরই উত্তর দেব।",
   cfError: "কিছু একটা গোলমাল হয়েছে। আবার চেষ্টা করুন।",
+  bdRequestingFor: "ডেমো চাওয়া হচ্ছে: {product}",
+  bdPreferredDate: "কোন তারিখ ভালো হয়",
+  bdPreferredTime: "কোন সময় ভালো হয়",
+  bdAnythingElse: "আর কিছু জানানোর আছে? (ঐচ্ছিক)",
+  bdRequestDemo: "ডেমো চান",
+  bdSuccess: "ধন্যবাদ — {product}-এর জন্য আপনার ডেমোর অনুরোধ পেয়েছি। সময় শিগগিরই জানিয়ে দেব।",
+  plNoArticles: "দেখানোর মতো কোনো লেখা নেই।",
+  plPagination: "পাতা",
+  plPrevPage: "আগের পাতা",
+  plNextPage: "পরের পাতা",
+  plPageN: "পাতা {n}",
 };
 
 const ta: Partial<Dict> = {
@@ -6007,6 +6051,17 @@ const ta: Partial<Dict> = {
   cfSending: "அனுப்பப்படுகிறது…",
   cfSuccess: "நன்றி — உங்கள் செய்தி எங்களுக்குக் கிடைத்தது, விரைவில் பதில் தருகிறோம்.",
   cfError: "ஏதோ தவறாகிவிட்டது. மீண்டும் முயலுங்கள்.",
+  bdRequestingFor: "டெமோ கேட்கப்படுகிறது: {product}",
+  bdPreferredDate: "விரும்பும் தேதி",
+  bdPreferredTime: "விரும்பும் நேரம்",
+  bdAnythingElse: "வேறு ஏதும் சொல்ல விரும்புகிறீர்களா? (விரும்பினால்)",
+  bdRequestDemo: "டெமோ கேளுங்கள்",
+  bdSuccess: "நன்றி — {product} க்கான உங்கள் டெமோ கோரிக்கை கிடைத்தது. நேரத்தை விரைவில் உறுதி செய்கிறோம்.",
+  plNoArticles: "காட்ட கட்டுரை எதுவும் இல்லை.",
+  plPagination: "பக்கங்கள்",
+  plPrevPage: "முந்தைய பக்கம்",
+  plNextPage: "அடுத்த பக்கம்",
+  plPageN: "பக்கம் {n}",
 };
 
 const te: Partial<Dict> = {
@@ -7207,6 +7262,17 @@ const te: Partial<Dict> = {
   cfSending: "పంపుతున్నాం…",
   cfSuccess: "ధన్యవాదాలు — మీ సందేశం అందింది, త్వరలోనే బదులిస్తాం.",
   cfError: "ఏదో పొరపాటు జరిగింది. మళ్లీ ప్రయత్నించండి.",
+  bdRequestingFor: "డెమో కోరుతున్నాం: {product}",
+  bdPreferredDate: "మీకు అనుకూల తేదీ",
+  bdPreferredTime: "మీకు అనుకూల సమయం",
+  bdAnythingElse: "ఇంకేమైనా చెప్పాలనుకుంటున్నారా? (ఐచ్ఛికం)",
+  bdRequestDemo: "డెమో అడగండి",
+  bdSuccess: "ధన్యవాదాలు — {product} కోసం మీ డెమో అభ్యర్థన అందింది. సమయాన్ని త్వరలో ఖరారు చేస్తాం.",
+  plNoArticles: "చూపించడానికి వ్యాసాలు లేవు.",
+  plPagination: "పేజీలు",
+  plPrevPage: "మునుపటి పేజీ",
+  plNextPage: "తదుపరి పేజీ",
+  plPageN: "పేజీ {n}",
 };
 
 const mr: Partial<Dict> = {
@@ -8407,6 +8473,17 @@ const mr: Partial<Dict> = {
   cfSending: "पाठवत आहोत…",
   cfSuccess: "आभार — तुमचा संदेश मिळाला आहे, लवकरच उत्तर देऊ.",
   cfError: "काहीतरी चुकले. पुन्हा प्रयत्न करा.",
+  bdRequestingFor: "डेमोची विनंती: {product}",
+  bdPreferredDate: "कोणती तारीख सोयीची",
+  bdPreferredTime: "कोणती वेळ सोयीची",
+  bdAnythingElse: "आणखी काही सांगायचे आहे? (ऐच्छिक)",
+  bdRequestDemo: "डेमो मागा",
+  bdSuccess: "आभार — {product} साठी तुमची डेमोची विनंती मिळाली. वेळ लवकरच निश्चित करू.",
+  plNoArticles: "दाखवण्यासारखा लेख नाही.",
+  plPagination: "पाने",
+  plPrevPage: "मागील पान",
+  plNextPage: "पुढील पान",
+  plPageN: "पान {n}",
 };
 
 const gu: Partial<Dict> = {
@@ -9607,6 +9684,17 @@ const gu: Partial<Dict> = {
   cfSending: "મોકલાઈ રહ્યું છે…",
   cfSuccess: "આભાર — તમારો સંદેશ મળી ગયો છે, જલદી જવાબ આપીશું.",
   cfError: "કંઈક ખોટું થયું. ફરી પ્રયાસ કરો.",
+  bdRequestingFor: "ડેમો માટે વિનંતી: {product}",
+  bdPreferredDate: "કઈ તારીખ ફાવશે",
+  bdPreferredTime: "કયો સમય ફાવશે",
+  bdAnythingElse: "બીજું કંઈ જણાવવું છે? (મરજી મુજબ)",
+  bdRequestDemo: "ડેમો માગો",
+  bdSuccess: "આભાર — {product} માટે તમારી ડેમોની વિનંતી મળી ગઈ. સમય જલદી નક્કી કરીશું.",
+  plNoArticles: "દેખાડવા માટે કોઈ લેખ નથી.",
+  plPagination: "પાનાં",
+  plPrevPage: "પાછલું પાનું",
+  plNextPage: "આગળનું પાનું",
+  plPageN: "પાનું {n}",
 };
 
 const kn: Partial<Dict> = {
@@ -10807,6 +10895,17 @@ const kn: Partial<Dict> = {
   cfSending: "ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ…",
   cfSuccess: "ಧನ್ಯವಾದ — ನಿಮ್ಮ ಸಂದೇಶ ಸಿಕ್ಕಿದೆ, ಬೇಗ ಉತ್ತರಿಸುತ್ತೇವೆ.",
   cfError: "ಏನೋ ತಪ್ಪಾಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+  bdRequestingFor: "ಡೆಮೋ ಕೇಳುತ್ತಿದ್ದೀರಿ: {product}",
+  bdPreferredDate: "ಯಾವ ದಿನಾಂಕ ಅನುಕೂಲ",
+  bdPreferredTime: "ಯಾವ ಸಮಯ ಅನುಕೂಲ",
+  bdAnythingElse: "ಇನ್ನೇನಾದರೂ ಹೇಳಬೇಕೇ? (ಬೇಕಿದ್ದರೆ)",
+  bdRequestDemo: "ಡೆಮೋ ಕೇಳಿ",
+  bdSuccess: "ಧನ್ಯವಾದ — {product} ಗಾಗಿ ನಿಮ್ಮ ಡೆಮೋ ಕೋರಿಕೆ ಸಿಕ್ಕಿದೆ. ಸಮಯವನ್ನು ಬೇಗ ಖಚಿತಪಡಿಸುತ್ತೇವೆ.",
+  plNoArticles: "ತೋರಿಸಲು ಯಾವ ಲೇಖನವೂ ಇಲ್ಲ.",
+  plPagination: "ಪುಟಗಳು",
+  plPrevPage: "ಹಿಂದಿನ ಪುಟ",
+  plNextPage: "ಮುಂದಿನ ಪುಟ",
+  plPageN: "ಪುಟ {n}",
 };
 
 const ml: Partial<Dict> = {
@@ -12007,6 +12106,17 @@ const ml: Partial<Dict> = {
   cfSending: "അയയ്ക്കുന്നു…",
   cfSuccess: "നന്ദി — നിങ്ങളുടെ സന്ദേശം കിട്ടി, വൈകാതെ മറുപടി തരാം.",
   cfError: "എന്തോ കുഴപ്പം പറ്റി. വീണ്ടും ശ്രമിക്കുക.",
+  bdRequestingFor: "ഡെമോ ആവശ്യപ്പെടുന്നു: {product}",
+  bdPreferredDate: "ഇഷ്ടമുള്ള തീയതി",
+  bdPreferredTime: "ഇഷ്ടമുള്ള സമയം",
+  bdAnythingElse: "മറ്റെന്തെങ്കിലും പറയാനുണ്ടോ? (വേണമെങ്കിൽ)",
+  bdRequestDemo: "ഡെമോ ചോദിക്കുക",
+  bdSuccess: "നന്ദി — {product} നുള്ള നിങ്ങളുടെ ഡെമോ അഭ്യർഥന കിട്ടി. സമയം വൈകാതെ ഉറപ്പിക്കാം.",
+  plNoArticles: "കാണിക്കാൻ ലേഖനങ്ങളില്ല.",
+  plPagination: "പേജുകൾ",
+  plPrevPage: "മുൻ പേജ്",
+  plNextPage: "അടുത്ത പേജ്",
+  plPageN: "പേജ് {n}",
 };
 
 const pa: Partial<Dict> = {
@@ -13207,6 +13317,17 @@ const pa: Partial<Dict> = {
   cfSending: "ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ…",
   cfSuccess: "ਧੰਨਵਾਦ — ਤੁਹਾਡਾ ਸੁਨੇਹਾ ਮਿਲ ਗਿਆ ਹੈ, ਅਸੀਂ ਛੇਤੀ ਜਵਾਬ ਦੇਵਾਂਗੇ।",
   cfError: "ਕੁਝ ਗੜਬੜ ਹੋ ਗਈ। ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+  bdRequestingFor: "ਡੈਮੋ ਮੰਗਿਆ ਜਾ ਰਿਹਾ ਹੈ: {product}",
+  bdPreferredDate: "ਕਿਹੜੀ ਤਾਰੀਖ਼ ਠੀਕ ਰਹੇਗੀ",
+  bdPreferredTime: "ਕਿਹੜਾ ਸਮਾਂ ਠੀਕ ਰਹੇਗਾ",
+  bdAnythingElse: "ਹੋਰ ਕੁਝ ਦੱਸਣਾ ਚਾਹੋਗੇ? (ਮਰਜ਼ੀ ਨਾਲ)",
+  bdRequestDemo: "ਡੈਮੋ ਮੰਗੋ",
+  bdSuccess: "ਧੰਨਵਾਦ — {product} ਲਈ ਤੁਹਾਡੀ ਡੈਮੋ ਦੀ ਮੰਗ ਮਿਲ ਗਈ। ਸਮਾਂ ਛੇਤੀ ਪੱਕਾ ਕਰ ਦੇਵਾਂਗੇ।",
+  plNoArticles: "ਦਿਖਾਉਣ ਲਈ ਕੋਈ ਲੇਖ ਨਹੀਂ।",
+  plPagination: "ਸਫ਼ੇ",
+  plPrevPage: "ਪਿਛਲਾ ਸਫ਼ਾ",
+  plNextPage: "ਅਗਲਾ ਸਫ਼ਾ",
+  plPageN: "ਸਫ਼ਾ {n}",
 };
 
 const es: Partial<Dict> = {
@@ -14407,6 +14528,17 @@ const es: Partial<Dict> = {
   cfSending: "Enviando…",
   cfSuccess: "Gracias: hemos recibido tu mensaje y te respondemos enseguida.",
   cfError: "Algo ha fallado. Inténtalo de nuevo.",
+  bdRequestingFor: "Solicitando una demo de: {product}",
+  bdPreferredDate: "Fecha preferida",
+  bdPreferredTime: "Hora preferida",
+  bdAnythingElse: "¿Algo más que debamos saber? (opcional)",
+  bdRequestDemo: "Solicitar demo",
+  bdSuccess: "Gracias: hemos recibido tu solicitud de demo de {product}. Te confirmamos la hora enseguida.",
+  plNoArticles: "No hay artículos que mostrar.",
+  plPagination: "Paginación",
+  plPrevPage: "Página anterior",
+  plNextPage: "Página siguiente",
+  plPageN: "Página {n}",
 };
 
 const fr: Partial<Dict> = {
@@ -15607,6 +15739,17 @@ const fr: Partial<Dict> = {
   cfSending: "Envoi en cours…",
   cfSuccess: "Merci — nous avons bien reçu votre message et vous répondrons rapidement.",
   cfError: "Un problème est survenu. Réessayez.",
+  bdRequestingFor: "Demande de démo pour : {product}",
+  bdPreferredDate: "Date souhaitée",
+  bdPreferredTime: "Heure souhaitée",
+  bdAnythingElse: "Autre chose à nous signaler ? (facultatif)",
+  bdRequestDemo: "Demander une démo",
+  bdSuccess: "Merci — votre demande de démo pour {product} est bien reçue. Nous confirmons le créneau rapidement.",
+  plNoArticles: "Aucun article à afficher.",
+  plPagination: "Pagination",
+  plPrevPage: "Page précédente",
+  plNextPage: "Page suivante",
+  plPageN: "Page {n}",
 };
 
 const ar: Partial<Dict> = {
@@ -16807,6 +16950,17 @@ const ar: Partial<Dict> = {
   cfSending: "جارٍ الإرسال…",
   cfSuccess: "شكرًا — وصلتنا رسالتك وسنردّ عليك قريبًا.",
   cfError: "حدث خطأ ما. حاول مرة أخرى.",
+  bdRequestingFor: "طلب عرض توضيحي لـ: {product}",
+  bdPreferredDate: "التاريخ المفضل",
+  bdPreferredTime: "الوقت المفضل",
+  bdAnythingElse: "هل من شيء آخر ينبغي أن نعرفه؟ (اختياري)",
+  bdRequestDemo: "اطلب عرضًا توضيحيًا",
+  bdSuccess: "شكرًا — وصلنا طلبك لعرض {product} التوضيحي. سنؤكد الموعد قريبًا.",
+  plNoArticles: "لا مقالات لعرضها.",
+  plPagination: "ترقيم الصفحات",
+  plPrevPage: "الصفحة السابقة",
+  plNextPage: "الصفحة التالية",
+  plPageN: "الصفحة {n}",
 };
 
 const pt: Partial<Dict> = {
@@ -18007,6 +18161,17 @@ const pt: Partial<Dict> = {
   cfSending: "Enviando…",
   cfSuccess: "Obrigado — recebemos sua mensagem e respondemos em breve.",
   cfError: "Algo deu errado. Tente de novo.",
+  bdRequestingFor: "Pedido de demonstração de: {product}",
+  bdPreferredDate: "Data preferida",
+  bdPreferredTime: "Horário preferido",
+  bdAnythingElse: "Mais alguma coisa que devemos saber? (opcional)",
+  bdRequestDemo: "Pedir demonstração",
+  bdSuccess: "Obrigado — recebemos seu pedido de demonstração de {product}. Confirmamos o horário em breve.",
+  plNoArticles: "Nenhum artigo para mostrar.",
+  plPagination: "Paginação",
+  plPrevPage: "Página anterior",
+  plNextPage: "Próxima página",
+  plPageN: "Página {n}",
 };
 
 const id: Partial<Dict> = {
@@ -19207,6 +19372,17 @@ const id: Partial<Dict> = {
   cfSending: "Mengirim…",
   cfSuccess: "Terima kasih — pesan Anda sudah kami terima dan akan segera kami balas.",
   cfError: "Ada yang salah. Coba lagi.",
+  bdRequestingFor: "Meminta demo untuk: {product}",
+  bdPreferredDate: "Tanggal yang diinginkan",
+  bdPreferredTime: "Waktu yang diinginkan",
+  bdAnythingElse: "Ada lagi yang perlu kami tahu? (opsional)",
+  bdRequestDemo: "Minta demo",
+  bdSuccess: "Terima kasih — permintaan demo {product} sudah kami terima. Jadwalnya segera kami konfirmasi.",
+  plNoArticles: "Tidak ada artikel untuk ditampilkan.",
+  plPagination: "Halaman",
+  plPrevPage: "Halaman sebelumnya",
+  plNextPage: "Halaman berikutnya",
+  plPageN: "Halaman {n}",
 };
 
 const de: Partial<Dict> = {
@@ -20407,6 +20583,17 @@ const de: Partial<Dict> = {
   cfSending: "Wird gesendet …",
   cfSuccess: "Danke — Ihre Nachricht ist angekommen, wir melden uns in Kürze.",
   cfError: "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  bdRequestingFor: "Demo angefragt für: {product}",
+  bdPreferredDate: "Wunschdatum",
+  bdPreferredTime: "Wunschzeit",
+  bdAnythingElse: "Noch etwas, das wir wissen sollten? (optional)",
+  bdRequestDemo: "Demo anfragen",
+  bdSuccess: "Danke — Ihre Demo-Anfrage für {product} ist angekommen. Wir bestätigen den Termin in Kürze.",
+  plNoArticles: "Keine Beiträge vorhanden.",
+  plPagination: "Seitennummerierung",
+  plPrevPage: "Vorherige Seite",
+  plNextPage: "Nächste Seite",
+  plPageN: "Seite {n}",
 };
 
 const zh: Partial<Dict> = {
@@ -21607,6 +21794,17 @@ const zh: Partial<Dict> = {
   cfSending: "正在发送…",
   cfSuccess: "谢谢——我们已收到你的留言，会尽快回复。",
   cfError: "出了点问题，请重试。",
+  bdRequestingFor: "申请演示：{product}",
+  bdPreferredDate: "希望日期",
+  bdPreferredTime: "希望时间",
+  bdAnythingElse: "还有什么需要我们知道的吗？（可不填）",
+  bdRequestDemo: "申请演示",
+  bdSuccess: "谢谢——已收到你对 {product} 的演示申请，我们会尽快确认时间。",
+  plNoArticles: "没有可显示的文章。",
+  plPagination: "分页",
+  plPrevPage: "上一页",
+  plNextPage: "下一页",
+  plPageN: "第 {n} 页",
 };
 
 export const DICTIONARIES: Record<LanguageCode, Partial<Dict>> = {

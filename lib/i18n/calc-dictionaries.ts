@@ -322,6 +322,20 @@ export type CalcDictKey =
   | "ppvBiggestOverrun"
   | "ppvBiggestSaving"
   | "ppvFootnote"
+  // Payment terms
+  | "ptInvoiceAmount"
+  | "ptInvoiceDate"
+  | "ptNetDays"
+  | "ptNetPreset"
+  | "ptEarlyDiscount"
+  | "ptZeroForNone"
+  | "ptDiscountWindow"
+  | "ptDueDate"
+  | "ptPayEarlyBy"
+  | "ptEarlySaves"
+  | "ptCostOfSkipping"
+  | "ptPerYear"
+  | "ptFootnote"
   | "unitMin";
 
 export type CalcDict = Record<CalcDictKey, string>;
@@ -626,6 +640,19 @@ const en: CalcDict = {
   ppvBiggestOverrun: "Biggest overrun: {name} — {amount} above plan ({pct}% per unit). Investigate this one first.",
   ppvBiggestSaving: "Biggest saving: {name} — {amount} below plan. Worth understanding why, so you can repeat it.",
   ppvFootnote: "PPV = (actual price − standard price) × quantity, per item. Red rows cost more than planned (unfavourable); green rows beat the plan. Standard price is your budgeted or negotiated rate.",
+  ptInvoiceAmount: "Invoice amount",
+  ptInvoiceDate: "Invoice date",
+  ptNetDays: "Payment terms (net days)",
+  ptNetPreset: "Net {days}",
+  ptEarlyDiscount: "Early payment discount",
+  ptZeroForNone: "0 for none",
+  ptDiscountWindow: "Discount window",
+  ptDueDate: "Payment due date",
+  ptPayEarlyBy: "Pay early by",
+  ptEarlySaves: "Early payment saves",
+  ptCostOfSkipping: "Cost of skipping discount",
+  ptPerYear: "{pct}% / yr",
+  ptFootnote: "A “2/10 net 30” term means a 2% discount if paid within 10 days, otherwise the full amount is due in 30 days. The annualized cost shows what skipping that discount effectively costs as an interest rate — often far more than a working-capital loan.",
 };
 
 const hi: Partial<CalcDict> = {
@@ -923,6 +950,19 @@ const hi: Partial<CalcDict> = {
   ppvBiggestOverrun: "सबसे बड़ा ऊपरी ख़र्च: {name} — योजना से {amount} ज़्यादा (हर इकाई पर {pct}%)। पहले इसी की जाँच कीजिए।",
   ppvBiggestSaving: "सबसे बड़ी बचत: {name} — योजना से {amount} कम। वजह समझ लीजिए, ताकि इसे दोहरा सकें।",
   ppvFootnote: "PPV = (असली दाम − तय दाम) × मात्रा, हर आइटम के लिए। लाल पंक्तियाँ योजना से ज़्यादा महँगी पड़ीं (नुक़सान का फ़र्क़); हरी पंक्तियाँ योजना से सस्ती रहीं। तय दाम वही है जो आपने बजट में रखा या सौदे में तय किया था।",
+  ptInvoiceAmount: "बिल की रकम",
+  ptInvoiceDate: "बिल की तारीख़",
+  ptNetDays: "भुगतान की मोहलत (दिन)",
+  ptNetPreset: "{days} दिन",
+  ptEarlyDiscount: "जल्दी भुगतान पर छूट",
+  ptZeroForNone: "कोई नहीं तो 0",
+  ptDiscountWindow: "छूट की मोहलत",
+  ptDueDate: "भुगतान की आख़िरी तारीख़",
+  ptPayEarlyBy: "इस तारीख़ तक दें तो छूट",
+  ptEarlySaves: "जल्दी देने पर बचत",
+  ptCostOfSkipping: "छूट छोड़ने की लागत",
+  ptPerYear: "{pct}% सालाना",
+  ptFootnote: "“2/10 net 30” का मतलब: 10 दिन में दें तो 2% छूट, वरना पूरी रकम 30 दिन में। सालाना लागत बताती है कि वह छूट छोड़ना असल में कितने ब्याज के बराबर पड़ता है — अक्सर कारोबारी कर्ज़ से कहीं ज़्यादा।",
 };
 
 const bn: Partial<CalcDict> = {
@@ -1219,6 +1259,19 @@ const bn: Partial<CalcDict> = {
   ppvBiggestOverrun: "সবচেয়ে বড় বাড়তি খরচ: {name} — পরিকল্পনার চেয়ে {amount} বেশি (প্রতি একক {pct}%)। আগে এটাই দেখুন।",
   ppvBiggestSaving: "সবচেয়ে বড় সঞ্চয়: {name} — পরিকল্পনার চেয়ে {amount} কম। কারণটা বুঝে নিন, যাতে আবার করা যায়।",
   ppvFootnote: "PPV = (আসল দাম − ধরা দাম) × পরিমাণ, প্রতিটি আইটেমের জন্য। লাল সারি মানে পরিকল্পনার চেয়ে বেশি খরচ (ক্ষতির দিকে); সবুজ সারি মানে পরিকল্পনার চেয়ে কম। ধরা দাম হলো আপনি বাজেটে যা রেখেছিলেন বা দরদামে যা ঠিক করেছিলেন।",
+  ptInvoiceAmount: "চালানের টাকা",
+  ptInvoiceDate: "চালানের তারিখ",
+  ptNetDays: "টাকা দেওয়ার মেয়াদ (দিন)",
+  ptNetPreset: "{days} দিন",
+  ptEarlyDiscount: "আগে টাকা দিলে ছাড়",
+  ptZeroForNone: "না থাকলে ০",
+  ptDiscountWindow: "ছাড়ের মেয়াদ",
+  ptDueDate: "টাকা দেওয়ার শেষ তারিখ",
+  ptPayEarlyBy: "এই তারিখের মধ্যে দিলে ছাড়",
+  ptEarlySaves: "আগে দিলে সাশ্রয়",
+  ptCostOfSkipping: "ছাড় ছাড়লে খরচ",
+  ptPerYear: "{pct}% বছরে",
+  ptFootnote: "“2/10 net 30” মানে: ১০ দিনে দিলে ২% ছাড়, নইলে পুরো টাকা ৩০ দিনে। বছরের হিসাবে খরচ দেখায় সেই ছাড় ছাড়া আসলে কত সুদের সমান পড়ে — প্রায়ই ব্যবসার ঋণের চেয়ে অনেক বেশি।",
 };
 
 const ta: Partial<CalcDict> = {
@@ -1515,6 +1568,19 @@ const ta: Partial<CalcDict> = {
   ppvBiggestOverrun: "மிகப் பெரிய மிகைச் செலவு: {name} — திட்டத்தை விட {amount} அதிகம் (ஒரு அலகுக்கு {pct}%). முதலில் இதையே ஆராயுங்கள்.",
   ppvBiggestSaving: "மிகப் பெரிய சேமிப்பு: {name} — திட்டத்தை விட {amount} குறைவு. காரணத்தைத் தெரிந்துகொண்டால் மீண்டும் செய்ய முடியும்.",
   ppvFootnote: "PPV = (உண்மை விலை − நிர்ணய விலை) × அளவு, ஒவ்வொரு உருப்படிக்கும். சிவப்பு வரிசைகள் திட்டத்தை விட அதிகம் செலவானவை (பாதகம்); பச்சை வரிசைகள் திட்டத்தை விடக் குறைவு. நிர்ணய விலை என்பது நீங்கள் பட்ஜெட்டில் வைத்த அல்லது பேரம் பேசி முடித்த விலை.",
+  ptInvoiceAmount: "விலைப்பட்டித் தொகை",
+  ptInvoiceDate: "விலைப்பட்டி தேதி",
+  ptNetDays: "பணம் தரும் கால அவகாசம் (நாட்கள்)",
+  ptNetPreset: "{days} நாள்",
+  ptEarlyDiscount: "முன்கூட்டிப் பணம் தந்தால் தள்ளுபடி",
+  ptZeroForNone: "இல்லையென்றால் 0",
+  ptDiscountWindow: "தள்ளுபடிக் கால அவகாசம்",
+  ptDueDate: "பணம் தர வேண்டிய கடைசி தேதி",
+  ptPayEarlyBy: "இந்தத் தேதிக்குள் தந்தால் தள்ளுபடி",
+  ptEarlySaves: "முன்கூட்டித் தந்தால் மிச்சம்",
+  ptCostOfSkipping: "தள்ளுபடியை விட்டால் செலவு",
+  ptPerYear: "{pct}% ஆண்டுக்கு",
+  ptFootnote: "“2/10 net 30” என்றால்: 10 நாளில் தந்தால் 2% தள்ளுபடி, இல்லையெனில் முழுத் தொகை 30 நாளில். ஆண்டுச் செலவு, அந்தத் தள்ளுபடியை விடுவது உண்மையில் எவ்வளவு வட்டிக்குச் சமம் என்பதைக் காட்டும் — பெரும்பாலும் வணிகக் கடனை விட அதிகம்.",
 };
 
 const te: Partial<CalcDict> = {
@@ -1811,6 +1877,19 @@ const te: Partial<CalcDict> = {
   ppvBiggestOverrun: "అన్నింటిలో పెద్ద అదనపు ఖర్చు: {name} — ప్రణాళిక కన్నా {amount} ఎక్కువ (ఒక యూనిట్‌కు {pct}%). మొదట ఇదే చూడండి.",
   ppvBiggestSaving: "అన్నింటిలో పెద్ద ఆదా: {name} — ప్రణాళిక కన్నా {amount} తక్కువ. కారణం తెలుసుకుంటే మళ్లీ చేయగలరు.",
   ppvFootnote: "PPV = (అసలు ధర − నిర్ణీత ధర) × పరిమాణం, ప్రతి ఐటమ్‌కు. ఎరుపు వరుసలు ప్రణాళిక కన్నా ఎక్కువ ఖర్చయినవి (నష్టం వైపు); ఆకుపచ్చ వరుసలు ప్రణాళిక కన్నా తక్కువ. నిర్ణీత ధర అంటే మీరు బడ్జెట్‌లో పెట్టుకున్నది లేదా బేరంలో కుదుర్చుకున్నది.",
+  ptInvoiceAmount: "ఇన్‌వాయిస్ మొత్తం",
+  ptInvoiceDate: "ఇన్‌వాయిస్ తేదీ",
+  ptNetDays: "చెల్లింపు గడువు (రోజులు)",
+  ptNetPreset: "{days} రోజులు",
+  ptEarlyDiscount: "ముందే చెల్లిస్తే రాయితీ",
+  ptZeroForNone: "లేకపోతే 0",
+  ptDiscountWindow: "రాయితీ గడువు",
+  ptDueDate: "చెల్లించాల్సిన చివరి తేదీ",
+  ptPayEarlyBy: "ఈ తేదీలోపు చెల్లిస్తే రాయితీ",
+  ptEarlySaves: "ముందే ఇస్తే ఆదా",
+  ptCostOfSkipping: "రాయితీ వదులుకుంటే ఖర్చు",
+  ptPerYear: "{pct}% ఏడాదికి",
+  ptFootnote: "“2/10 net 30” అంటే: 10 రోజుల్లో ఇస్తే 2% రాయితీ, లేకపోతే పూర్తి మొత్తం 30 రోజుల్లో. ఏడాది ఖర్చు, ఆ రాయితీని వదులుకోవడం నిజానికి ఎంత వడ్డీకి సమానమో చూపుతుంది — చాలాసార్లు వ్యాపార రుణం కన్నా ఎక్కువ.",
 };
 
 const mr: Partial<CalcDict> = {
@@ -2107,6 +2186,19 @@ const mr: Partial<CalcDict> = {
   ppvBiggestOverrun: "सर्वांत मोठा जादा खर्च: {name} — नियोजनापेक्षा {amount} जास्त (प्रत्येक नगावर {pct}%). आधी याचीच चौकशी करा.",
   ppvBiggestSaving: "सर्वांत मोठी बचत: {name} — नियोजनापेक्षा {amount} कमी. कारण समजून घ्या, म्हणजे पुन्हा जमेल.",
   ppvFootnote: "PPV = (प्रत्यक्ष दर − ठरलेला दर) × प्रमाण, प्रत्येक आयटमसाठी. लाल ओळी नियोजनापेक्षा जास्त महागल्या (प्रतिकूल); हिरव्या ओळी नियोजनापेक्षा स्वस्त पडल्या. ठरलेला दर म्हणजे तुम्ही अंदाजपत्रकात धरलेला किंवा घासाघीस करून ठरवलेला दर.",
+  ptInvoiceAmount: "बिलाची रक्कम",
+  ptInvoiceDate: "बिलाची तारीख",
+  ptNetDays: "पैसे देण्याची मुदत (दिवस)",
+  ptNetPreset: "{days} दिवस",
+  ptEarlyDiscount: "लवकर पैसे दिल्यास सूट",
+  ptZeroForNone: "नसेल तर 0",
+  ptDiscountWindow: "सुटीची मुदत",
+  ptDueDate: "पैसे देण्याची अंतिम तारीख",
+  ptPayEarlyBy: "या तारखेपर्यंत दिल्यास सूट",
+  ptEarlySaves: "लवकर दिल्यास बचत",
+  ptCostOfSkipping: "सूट सोडल्याची किंमत",
+  ptPerYear: "{pct}% वार्षिक",
+  ptFootnote: "“2/10 net 30” म्हणजे: 10 दिवसांत दिल्यास 2% सूट, नाहीतर पूर्ण रक्कम 30 दिवसांत. वार्षिक किंमत दाखवते की ती सूट सोडणे प्रत्यक्षात किती व्याजाइतके पडते — बहुधा व्यवसाय कर्जापेक्षा कितीतरी जास्त.",
 };
 
 const gu: Partial<CalcDict> = {
@@ -2403,6 +2495,19 @@ const gu: Partial<CalcDict> = {
   ppvBiggestOverrun: "સૌથી મોટો વધારાનો ખર્ચ: {name} — યોજના કરતાં {amount} વધુ (દર નંગે {pct}%). પહેલાં આની જ તપાસ કરો.",
   ppvBiggestSaving: "સૌથી મોટી બચત: {name} — યોજના કરતાં {amount} ઓછું. કારણ સમજી લો, જેથી ફરી કરી શકાય.",
   ppvFootnote: "PPV = (ખરો ભાવ − નક્કી ભાવ) × જથ્થો, દરેક આઇટમ માટે. લાલ લીટીઓ યોજના કરતાં મોંઘી પડી (પ્રતિકૂળ); લીલી લીટીઓ યોજના કરતાં સસ્તી રહી. નક્કી ભાવ એ છે જે તમે બજેટમાં રાખ્યો કે સોદામાં ઠરાવ્યો હતો.",
+  ptInvoiceAmount: "બિલની રકમ",
+  ptInvoiceDate: "બિલની તારીખ",
+  ptNetDays: "ચુકવણીની મુદત (દિવસ)",
+  ptNetPreset: "{days} દિવસ",
+  ptEarlyDiscount: "વહેલી ચુકવણીએ વટાવ",
+  ptZeroForNone: "ન હોય તો 0",
+  ptDiscountWindow: "વટાવની મુદત",
+  ptDueDate: "ચુકવણીની છેલ્લી તારીખ",
+  ptPayEarlyBy: "આ તારીખ સુધીમાં આપો તો વટાવ",
+  ptEarlySaves: "વહેલું આપો તો બચત",
+  ptCostOfSkipping: "વટાવ જતો કરવાની કિંમત",
+  ptPerYear: "{pct}% વાર્ષિક",
+  ptFootnote: "“2/10 net 30” એટલે: 10 દિવસમાં આપો તો 2% વટાવ, નહીં તો પૂરી રકમ 30 દિવસમાં. વાર્ષિક કિંમત બતાવે છે કે એ વટાવ જતો કરવો ખરેખર કેટલા વ્યાજ બરાબર પડે છે — ઘણી વાર ધંધાની લોન કરતાં ક્યાંય વધુ.",
 };
 
 const kn: Partial<CalcDict> = {
@@ -2699,6 +2804,19 @@ const kn: Partial<CalcDict> = {
   ppvBiggestOverrun: "ಅತಿ ದೊಡ್ಡ ಹೆಚ್ಚುವರಿ ವೆಚ್ಚ: {name} — ಯೋಜನೆಗಿಂತ {amount} ಹೆಚ್ಚು (ಪ್ರತಿ ಘಟಕಕ್ಕೆ {pct}%). ಮೊದಲು ಇದನ್ನೇ ಪರಿಶೀಲಿಸಿ.",
   ppvBiggestSaving: "ಅತಿ ದೊಡ್ಡ ಉಳಿತಾಯ: {name} — ಯೋಜನೆಗಿಂತ {amount} ಕಡಿಮೆ. ಕಾರಣ ತಿಳಿದುಕೊಂಡರೆ ಮತ್ತೆ ಮಾಡಬಹುದು.",
   ppvFootnote: "PPV = (ನಿಜ ದರ − ನಿಗದಿತ ದರ) × ಪ್ರಮಾಣ, ಪ್ರತಿ ಐಟಂಗೆ. ಕೆಂಪು ಸಾಲುಗಳು ಯೋಜನೆಗಿಂತ ಹೆಚ್ಚು ದುಬಾರಿಯಾದವು (ಪ್ರತಿಕೂಲ); ಹಸಿರು ಸಾಲುಗಳು ಯೋಜನೆಗಿಂತ ಕಡಿಮೆ. ನಿಗದಿತ ದರ ಎಂದರೆ ನೀವು ಬಜೆಟ್‌ನಲ್ಲಿ ಇಟ್ಟ ಅಥವಾ ಚೌಕಾಸಿಯಲ್ಲಿ ಒಪ್ಪಿದ ದರ.",
+  ptInvoiceAmount: "ಬಿಲ್ ಮೊತ್ತ",
+  ptInvoiceDate: "ಬಿಲ್ ದಿನಾಂಕ",
+  ptNetDays: "ಪಾವತಿ ಅವಧಿ (ದಿನ)",
+  ptNetPreset: "{days} ದಿನ",
+  ptEarlyDiscount: "ಬೇಗ ಪಾವತಿಸಿದರೆ ರಿಯಾಯಿತಿ",
+  ptZeroForNone: "ಇಲ್ಲದಿದ್ದರೆ 0",
+  ptDiscountWindow: "ರಿಯಾಯಿತಿ ಅವಧಿ",
+  ptDueDate: "ಪಾವತಿಯ ಕೊನೆಯ ದಿನಾಂಕ",
+  ptPayEarlyBy: "ಈ ದಿನಾಂಕದೊಳಗೆ ಕೊಟ್ಟರೆ ರಿಯಾಯಿತಿ",
+  ptEarlySaves: "ಬೇಗ ಕೊಟ್ಟರೆ ಉಳಿತಾಯ",
+  ptCostOfSkipping: "ರಿಯಾಯಿತಿ ಬಿಟ್ಟರೆ ವೆಚ್ಚ",
+  ptPerYear: "{pct}% ವಾರ್ಷಿಕ",
+  ptFootnote: "“2/10 net 30” ಎಂದರೆ: 10 ದಿನಗಳಲ್ಲಿ ಕೊಟ್ಟರೆ 2% ರಿಯಾಯಿತಿ, ಇಲ್ಲದಿದ್ದರೆ ಪೂರ್ಣ ಮೊತ್ತ 30 ದಿನಗಳಲ್ಲಿ. ವಾರ್ಷಿಕ ವೆಚ್ಚವು ಆ ರಿಯಾಯಿತಿ ಬಿಡುವುದು ನಿಜಕ್ಕೂ ಎಷ್ಟು ಬಡ್ಡಿಗೆ ಸಮ ಎಂದು ತೋರಿಸುತ್ತದೆ — ಹೆಚ್ಚಾಗಿ ವ್ಯಾಪಾರ ಸಾಲಕ್ಕಿಂತ ತುಂಬಾ ಜಾಸ್ತಿ.",
 };
 
 const ml: Partial<CalcDict> = {
@@ -2995,6 +3113,19 @@ const ml: Partial<CalcDict> = {
   ppvBiggestOverrun: "ഏറ്റവും വലിയ അധികച്ചെലവ്: {name} — പദ്ധതിയെക്കാൾ {amount} കൂടുതൽ (ഒരു യൂണിറ്റിന് {pct}%). ആദ്യം ഇതുതന്നെ പരിശോധിക്കുക.",
   ppvBiggestSaving: "ഏറ്റവും വലിയ ലാഭം: {name} — പദ്ധതിയെക്കാൾ {amount} കുറവ്. കാരണം മനസ്സിലാക്കിയാൽ വീണ്ടും ചെയ്യാം.",
   ppvFootnote: "PPV = (യഥാർഥ വില − നിശ്ചിത വില) × അളവ്, ഓരോ ഇനത്തിനും. ചുവപ്പ് വരികൾ പദ്ധതിയെക്കാൾ ചെലവേറിയവ (പ്രതികൂലം); പച്ച വരികൾ പദ്ധതിയെക്കാൾ കുറവ്. നിശ്ചിത വില എന്നത് നിങ്ങൾ ബജറ്റിൽ വെച്ചതോ വിലപേശി ഉറപ്പിച്ചതോ ആയ വിലയാണ്.",
+  ptInvoiceAmount: "ബില്ലിന്റെ തുക",
+  ptInvoiceDate: "ബില്ലിന്റെ തീയതി",
+  ptNetDays: "പണം നൽകാനുള്ള കാലാവധി (ദിവസം)",
+  ptNetPreset: "{days} ദിവസം",
+  ptEarlyDiscount: "നേരത്തേ പണം നൽകിയാൽ കിഴിവ്",
+  ptZeroForNone: "ഇല്ലെങ്കിൽ 0",
+  ptDiscountWindow: "കിഴിവിന്റെ കാലാവധി",
+  ptDueDate: "പണം നൽകേണ്ട അവസാന തീയതി",
+  ptPayEarlyBy: "ഈ തീയതിക്കകം നൽകിയാൽ കിഴിവ്",
+  ptEarlySaves: "നേരത്തേ നൽകിയാൽ ലാഭം",
+  ptCostOfSkipping: "കിഴിവ് വേണ്ടെന്നു വെച്ചാലുള്ള ചെലവ്",
+  ptPerYear: "{pct}% വർഷത്തിൽ",
+  ptFootnote: "“2/10 net 30” എന്നാൽ: 10 ദിവസത്തിനകം നൽകിയാൽ 2% കിഴിവ്, അല്ലെങ്കിൽ മുഴുവൻ തുക 30 ദിവസത്തിനകം. വാർഷിക ചെലവ്, ആ കിഴിവ് വേണ്ടെന്നു വെക്കുന്നത് യഥാർഥത്തിൽ എത്ര പലിശയ്ക്കു തുല്യമെന്നു കാണിക്കുന്നു — മിക്കപ്പോഴും കച്ചവട വായ്പയെക്കാൾ ഏറെ കൂടുതൽ.",
 };
 
 const pa: Partial<CalcDict> = {
@@ -3291,6 +3422,19 @@ const pa: Partial<CalcDict> = {
   ppvBiggestOverrun: "ਸਭ ਤੋਂ ਵੱਡਾ ਵਾਧੂ ਖ਼ਰਚ: {name} — ਯੋਜਨਾ ਤੋਂ {amount} ਵੱਧ (ਹਰ ਇਕਾਈ ’ਤੇ {pct}%)। ਪਹਿਲਾਂ ਇਸੇ ਦੀ ਜਾਂਚ ਕਰੋ।",
   ppvBiggestSaving: "ਸਭ ਤੋਂ ਵੱਡੀ ਬਚਤ: {name} — ਯੋਜਨਾ ਤੋਂ {amount} ਘੱਟ। ਕਾਰਨ ਸਮਝ ਲਵੋ, ਤਾਂ ਜੋ ਮੁੜ ਕੇ ਹੋ ਸਕੇ।",
   ppvFootnote: "PPV = (ਅਸਲ ਭਾਅ − ਤੈਅ ਭਾਅ) × ਮਾਤਰਾ, ਹਰ ਆਈਟਮ ਲਈ। ਲਾਲ ਸਤਰਾਂ ਯੋਜਨਾ ਤੋਂ ਮਹਿੰਗੀਆਂ ਪਈਆਂ (ਨੁਕਸਾਨ ਵਾਲਾ ਫ਼ਰਕ); ਹਰੀਆਂ ਸਤਰਾਂ ਯੋਜਨਾ ਤੋਂ ਸਸਤੀਆਂ ਰਹੀਆਂ। ਤੈਅ ਭਾਅ ਉਹੀ ਹੈ ਜੋ ਤੁਸੀਂ ਬਜਟ ਵਿੱਚ ਰੱਖਿਆ ਜਾਂ ਸੌਦੇ ਵਿੱਚ ਤੈਅ ਕੀਤਾ ਸੀ।",
+  ptInvoiceAmount: "ਬਿੱਲ ਦੀ ਰਕਮ",
+  ptInvoiceDate: "ਬਿੱਲ ਦੀ ਤਾਰੀਖ਼",
+  ptNetDays: "ਅਦਾਇਗੀ ਦੀ ਮੁਹਲਤ (ਦਿਨ)",
+  ptNetPreset: "{days} ਦਿਨ",
+  ptEarlyDiscount: "ਛੇਤੀ ਅਦਾਇਗੀ ਉੱਤੇ ਛੋਟ",
+  ptZeroForNone: "ਨਾ ਹੋਵੇ ਤਾਂ 0",
+  ptDiscountWindow: "ਛੋਟ ਦੀ ਮੁਹਲਤ",
+  ptDueDate: "ਅਦਾਇਗੀ ਦੀ ਆਖ਼ਰੀ ਤਾਰੀਖ਼",
+  ptPayEarlyBy: "ਇਸ ਤਾਰੀਖ਼ ਤੱਕ ਦੇਵੋ ਤਾਂ ਛੋਟ",
+  ptEarlySaves: "ਛੇਤੀ ਦੇਣ ਉੱਤੇ ਬਚਤ",
+  ptCostOfSkipping: "ਛੋਟ ਛੱਡਣ ਦੀ ਲਾਗਤ",
+  ptPerYear: "{pct}% ਸਾਲਾਨਾ",
+  ptFootnote: "“2/10 net 30” ਦਾ ਮਤਲਬ: 10 ਦਿਨਾਂ ਵਿੱਚ ਦੇਵੋ ਤਾਂ 2% ਛੋਟ, ਨਹੀਂ ਤਾਂ ਪੂਰੀ ਰਕਮ 30 ਦਿਨਾਂ ਵਿੱਚ। ਸਾਲਾਨਾ ਲਾਗਤ ਦੱਸਦੀ ਹੈ ਕਿ ਉਹ ਛੋਟ ਛੱਡਣੀ ਅਸਲ ਵਿੱਚ ਕਿੰਨੇ ਵਿਆਜ ਦੇ ਬਰਾਬਰ ਪੈਂਦੀ ਹੈ — ਅਕਸਰ ਕਾਰੋਬਾਰੀ ਕਰਜ਼ੇ ਤੋਂ ਕਿਤੇ ਵੱਧ।",
 };
 
 const es: Partial<CalcDict> = {
@@ -3587,6 +3731,19 @@ const es: Partial<CalcDict> = {
   ppvBiggestOverrun: "Mayor sobrecoste: {name} — {amount} por encima del plan ({pct}% por unidad). Revísalo primero.",
   ppvBiggestSaving: "Mayor ahorro: {name} — {amount} por debajo del plan. Merece la pena entender por qué, para poder repetirlo.",
   ppvFootnote: "PPV = (precio real − precio estándar) × cantidad, por artículo. Las filas rojas han costado más de lo previsto (desfavorable); las verdes han quedado por debajo del plan. El precio estándar es la tarifa que presupuestaste o negociaste.",
+  ptInvoiceAmount: "Importe de la factura",
+  ptInvoiceDate: "Fecha de la factura",
+  ptNetDays: "Plazo de pago (días netos)",
+  ptNetPreset: "Neto {days}",
+  ptEarlyDiscount: "Descuento por pronto pago",
+  ptZeroForNone: "0 si no hay",
+  ptDiscountWindow: "Plazo del descuento",
+  ptDueDate: "Fecha de vencimiento",
+  ptPayEarlyBy: "Paga antes del",
+  ptEarlySaves: "Ahorro por pronto pago",
+  ptCostOfSkipping: "Coste de no aprovecharlo",
+  ptPerYear: "{pct}% anual",
+  ptFootnote: "Un plazo “2/10 neto 30” significa un 2 % de descuento si pagas en 10 días; si no, el importe íntegro vence a 30 días. El coste anualizado muestra lo que realmente cuesta renunciar a ese descuento, como tipo de interés — a menudo mucho más que un crédito de circulante.",
 };
 
 const fr: Partial<CalcDict> = {
@@ -3883,6 +4040,19 @@ const fr: Partial<CalcDict> = {
   ppvBiggestOverrun: "Plus gros dépassement : {name} — {amount} au-dessus du plan ({pct}% par unité). À examiner en premier.",
   ppvBiggestSaving: "Plus grosse économie : {name} — {amount} sous le plan. Comprendre pourquoi permet de reproduire le coup.",
   ppvFootnote: "PPV = (prix réel − prix standard) × quantité, par article. Les lignes rouges ont coûté plus que prévu (défavorable) ; les vertes sont restées sous le plan. Le prix standard est le tarif budgété ou négocié.",
+  ptInvoiceAmount: "Montant de la facture",
+  ptInvoiceDate: "Date de la facture",
+  ptNetDays: "Délai de paiement (jours nets)",
+  ptNetPreset: "Net {days}",
+  ptEarlyDiscount: "Escompte pour paiement anticipé",
+  ptZeroForNone: "0 si aucun",
+  ptDiscountWindow: "Délai de l'escompte",
+  ptDueDate: "Date d'échéance",
+  ptPayEarlyBy: "Payer avant le",
+  ptEarlySaves: "Économie si paiement anticipé",
+  ptCostOfSkipping: "Coût de renoncer à l'escompte",
+  ptPerYear: "{pct}% par an",
+  ptFootnote: "Un délai « 2/10 net 30 » signifie 2 % d'escompte en cas de paiement sous 10 jours, sinon la totalité est due à 30 jours. Le coût annualisé montre ce que renoncer à cet escompte coûte réellement, en taux d'intérêt — souvent bien plus qu'un crédit de trésorerie.",
 };
 
 const ar: Partial<CalcDict> = {
@@ -4179,6 +4349,19 @@ const ar: Partial<CalcDict> = {
   ppvBiggestOverrun: "أكبر تجاوز: {name} — {amount} فوق الخطة ({pct}% للوحدة). ابدأ بفحص هذا.",
   ppvBiggestSaving: "أكبر توفير: {name} — {amount} أقل من الخطة. يستحق أن تعرف السبب لتكرره.",
   ppvFootnote: "فرق سعر الشراء = (السعر الفعلي − السعر المعياري) × الكمية، لكل عنصر. الصفوف الحمراء كلّفت أكثر من المخطط (غير مُواتية)، والخضراء جاءت أقل من الخطة. والسعر المعياري هو السعر الذي وضعته في الموازنة أو اتفقت عليه.",
+  ptInvoiceAmount: "مبلغ الفاتورة",
+  ptInvoiceDate: "تاريخ الفاتورة",
+  ptNetDays: "مهلة السداد (أيام)",
+  ptNetPreset: "{days} يومًا",
+  ptEarlyDiscount: "خصم السداد المبكر",
+  ptZeroForNone: "0 إن لم يوجد",
+  ptDiscountWindow: "مهلة الخصم",
+  ptDueDate: "تاريخ الاستحقاق",
+  ptPayEarlyBy: "ادفع قبل",
+  ptEarlySaves: "توفير السداد المبكر",
+  ptCostOfSkipping: "تكلفة التخلي عن الخصم",
+  ptPerYear: "{pct}% سنويًا",
+  ptFootnote: "شرط “2/10 صافي 30” يعني خصم 2% عند السداد خلال 10 أيام، وإلا فالمبلغ كاملًا خلال 30 يومًا. والتكلفة السنوية تبيّن ما يكلّفه التخلي عن ذلك الخصم فعليًا كسعر فائدة — وغالبًا أكثر بكثير من قرض رأس المال العامل.",
 };
 
 const pt: Partial<CalcDict> = {
@@ -4475,6 +4658,19 @@ const pt: Partial<CalcDict> = {
   ppvBiggestOverrun: "Maior estouro: {name} — {amount} acima do plano ({pct}% por unidade). Investigue este primeiro.",
   ppvBiggestSaving: "Maior economia: {name} — {amount} abaixo do plano. Vale entender por quê, para repetir.",
   ppvFootnote: "PPV = (preço real − preço padrão) × quantidade, por item. As linhas vermelhas custaram mais do que o planejado (desfavorável); as verdes ficaram abaixo do plano. O preço padrão é a tarifa que você orçou ou negociou.",
+  ptInvoiceAmount: "Valor da nota",
+  ptInvoiceDate: "Data da nota",
+  ptNetDays: "Prazo de pagamento (dias)",
+  ptNetPreset: "{days} dias",
+  ptEarlyDiscount: "Desconto por pagamento antecipado",
+  ptZeroForNone: "0 se não houver",
+  ptDiscountWindow: "Prazo do desconto",
+  ptDueDate: "Data de vencimento",
+  ptPayEarlyBy: "Pague até",
+  ptEarlySaves: "Economia pagando antes",
+  ptCostOfSkipping: "Custo de abrir mão do desconto",
+  ptPerYear: "{pct}% ao ano",
+  ptFootnote: "Um prazo “2/10 net 30” significa 2% de desconto se pagar em 10 dias; caso contrário, o valor integral vence em 30 dias. O custo anualizado mostra quanto abrir mão desse desconto custa de fato, como taxa de juros — muitas vezes bem mais que um crédito de capital de giro.",
 };
 
 const id: Partial<CalcDict> = {
@@ -4771,6 +4967,19 @@ const id: Partial<CalcDict> = {
   ppvBiggestOverrun: "Pembengkakan terbesar: {name} — {amount} di atas rencana ({pct}% per unit). Periksa yang ini dulu.",
   ppvBiggestSaving: "Penghematan terbesar: {name} — {amount} di bawah rencana. Pahami sebabnya supaya bisa diulang.",
   ppvFootnote: "PPV = (harga aktual − harga standar) × jumlah, per item. Baris merah lebih mahal dari rencana (merugikan); baris hijau lebih murah. Harga standar adalah tarif yang Anda anggarkan atau sepakati.",
+  ptInvoiceAmount: "Jumlah tagihan",
+  ptInvoiceDate: "Tanggal tagihan",
+  ptNetDays: "Tempo pembayaran (hari)",
+  ptNetPreset: "Net {days}",
+  ptEarlyDiscount: "Diskon bayar lebih awal",
+  ptZeroForNone: "0 jika tidak ada",
+  ptDiscountWindow: "Masa berlaku diskon",
+  ptDueDate: "Tanggal jatuh tempo",
+  ptPayEarlyBy: "Bayar sebelum",
+  ptEarlySaves: "Hemat jika bayar awal",
+  ptCostOfSkipping: "Biaya melewatkan diskon",
+  ptPerYear: "{pct}% per tahun",
+  ptFootnote: "Syarat “2/10 net 30” berarti diskon 2% bila dibayar dalam 10 hari; jika tidak, seluruhnya jatuh tempo dalam 30 hari. Biaya setahunnya menunjukkan berapa sebenarnya ongkos melewatkan diskon itu sebagai bunga — sering jauh lebih mahal daripada pinjaman modal kerja.",
 };
 
 const de: Partial<CalcDict> = {
@@ -5067,6 +5276,19 @@ const de: Partial<CalcDict> = {
   ppvBiggestOverrun: "Größte Überschreitung: {name} — {amount} über Plan ({pct}% je Einheit). Das zuerst prüfen.",
   ppvBiggestSaving: "Größte Einsparung: {name} — {amount} unter Plan. Es lohnt sich zu verstehen, warum — dann lässt sich das wiederholen.",
   ppvFootnote: "PPV = (Ist-Preis − Standardpreis) × Menge, je Position. Rote Zeilen haben mehr gekostet als geplant (ungünstig); grüne Zeilen liegen unter Plan. Der Standardpreis ist der kalkulierte oder verhandelte Satz.",
+  ptInvoiceAmount: "Rechnungsbetrag",
+  ptInvoiceDate: "Rechnungsdatum",
+  ptNetDays: "Zahlungsziel (Tage netto)",
+  ptNetPreset: "Netto {days}",
+  ptEarlyDiscount: "Skonto bei früher Zahlung",
+  ptZeroForNone: "0 wenn keiner",
+  ptDiscountWindow: "Skontofrist",
+  ptDueDate: "Fälligkeitsdatum",
+  ptPayEarlyBy: "Zahlen bis",
+  ptEarlySaves: "Ersparnis bei früher Zahlung",
+  ptCostOfSkipping: "Kosten des Skontoverzichts",
+  ptPerYear: "{pct}% p. a.",
+  ptFootnote: "„2/10 netto 30“ heißt: 2 % Skonto bei Zahlung binnen 10 Tagen, sonst ist der volle Betrag nach 30 Tagen fällig. Die Jahreskosten zeigen, was der Verzicht auf dieses Skonto tatsächlich als Zinssatz kostet — oft weit mehr als ein Betriebsmittelkredit.",
 };
 
 const zh: Partial<CalcDict> = {
@@ -5362,6 +5584,19 @@ const zh: Partial<CalcDict> = {
   ppvBiggestOverrun: "最大超支：{name} — 比计划高 {amount}（每单位 {pct}%）。先查这一项。",
   ppvBiggestSaving: "最大节省：{name} — 比计划低 {amount}。值得弄清原因，好再来一次。",
   ppvFootnote: "PPV =（实际单价 − 标准单价）× 数量，逐项计算。红色行比计划贵（不利）；绿色行比计划便宜。标准单价就是你做预算时定的或谈下来的价。",
+  ptInvoiceAmount: "发票金额",
+  ptInvoiceDate: "开票日期",
+  ptNetDays: "付款期限（天）",
+  ptNetPreset: "{days} 天",
+  ptEarlyDiscount: "提前付款折扣",
+  ptZeroForNone: "没有就填 0",
+  ptDiscountWindow: "折扣期限",
+  ptDueDate: "付款到期日",
+  ptPayEarlyBy: "在此日期前付款",
+  ptEarlySaves: "提前付款可省",
+  ptCostOfSkipping: "放弃折扣的代价",
+  ptPerYear: "{pct}% / 年",
+  ptFootnote: "“2/10 net 30”的意思是：10 天内付款享 2% 折扣，否则全额 30 天到期。年化成本显示放弃这笔折扣实际相当于多高的利率——往往远高于一笔流动资金贷款。",
 };
 
 export const CALC_BASE = en;

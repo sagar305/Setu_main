@@ -6,12 +6,13 @@ import { ResultStat } from "@/components/calculators/ResultStat";
 import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { intlLocaleFor } from "@/lib/i18n/pages";
 
 const TERM_PRESETS = ["7", "15", "30", "45", "60", "90"];
 
 export function PaymentTermsCalculatorTool() {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   usePreferredCurrency(); // re-render when the business currency changes
   const [amount, setAmount] = useState("100000");
   const [invoiceDate, setInvoiceDate] = useState(() => new Date().toISOString().split("T")[0]);
@@ -59,9 +60,9 @@ export function PaymentTermsCalculatorTool() {
   return (
     <div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <NumberField label="Invoice amount" value={amount} onChange={setAmount} prefix="₹" />
+        <NumberField label={t("ptInvoiceAmount")} value={amount} onChange={setAmount} prefix="₹" />
         <label className="block">
-          <span className="text-sm font-semibold text-ink">Invoice date</span>
+          <span className="text-sm font-semibold text-ink">{t("ptInvoiceDate")}</span>
           <div className="mt-2 flex items-center rounded-xl border border-muted-line/40 bg-white px-4 transition focus-within:border-indigo">
             <input
               type="date"
@@ -71,7 +72,12 @@ export function PaymentTermsCalculatorTool() {
             />
           </div>
         </label>
-        <NumberField label="Payment terms (net days)" value={netDays} onChange={setNetDays} suffix="days" />
+        <NumberField
+          label={t("ptNetDays")}
+          value={netDays}
+          onChange={setNetDays}
+          suffix={t("unitDays")}
+        />
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
@@ -86,48 +92,48 @@ export function PaymentTermsCalculatorTool() {
                 : "border-muted-line/40 text-ink/70 hover:border-indigo/40 hover:text-ink"
             }`}
           >
-            Net {d}
+            {fill(t("ptNetPreset"), { days: d })}
           </button>
         ))}
       </div>
 
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
         <NumberField
-          label="Early payment discount"
+          label={t("ptEarlyDiscount")}
           value={discountPct}
           onChange={setDiscountPct}
           suffix="%"
-          placeholder="0 for none"
+          placeholder={t("ptZeroForNone")}
         />
         <NumberField
-          label="Discount window"
+          label={t("ptDiscountWindow")}
           value={discountDays}
           onChange={setDiscountDays}
-          suffix="days"
+          suffix={t("unitDays")}
         />
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <ResultStat label="Payment due date" value={result.dueDate} emphasis />
+        <ResultStat label={t("ptDueDate")} value={result.dueDate} emphasis />
         <ResultStat
-          label="Pay early by"
+          label={t("ptPayEarlyBy")}
           value={result.hasDiscount ? result.discountDate : "—"}
         />
         <ResultStat
-          label="Early payment saves"
+          label={t("ptEarlySaves")}
           value={result.hasDiscount ? formatCurrency(result.discountAmount) : "—"}
         />
         <ResultStat
-          label="Cost of skipping discount"
-          value={result.hasDiscount ? `${formatNumber(result.annualCost, 1)}% / yr` : "—"}
+          label={t("ptCostOfSkipping")}
+          value={
+            result.hasDiscount
+              ? fill(t("ptPerYear"), { pct: formatNumber(result.annualCost, 1) })
+              : "—"
+          }
         />
       </div>
 
-      <p className="mt-4 text-sm text-muted">
-        A &quot;2/10 net 30&quot; term means a 2% discount if paid within 10 days, otherwise the full
-        amount is due in 30 days. The annualized cost shows what skipping that discount effectively
-        costs as an interest rate — often far more than a working-capital loan.
-      </p>
+      <p className="mt-4 text-sm text-muted">{t("ptFootnote")}</p>
     </div>
   );
 }
