@@ -9,6 +9,8 @@
 // device. Settings nags for one.
 
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
 
 export const BACKUP_APP_MARKER = "setu-clinic";
 export const BACKUP_VERSION = 1;
@@ -63,23 +65,28 @@ export function downloadBackupFile(backup: ClinicBackup): void {
   URL.revokeObjectURL(url);
 }
 
+/**
+ * A failed validation carries a dictionary key rather than a sentence: this
+ * module has no language of its own, and the screen that shows the message
+ * does.
+ */
 export type BackupValidation =
   | { ok: true; backup: ClinicBackup }
-  | { ok: false; error: string };
+  | { ok: false; error: TKey };
 
 export function validateBackup(raw: unknown): BackupValidation {
   if (typeof raw !== "object" || raw === null) {
-    return { ok: false, error: "This file is not a valid backup." };
+    return { ok: false, error: "appBackupNotValid" };
   }
   const candidate = raw as Partial<ClinicBackup>;
   if (candidate.app !== BACKUP_APP_MARKER) {
-    return { ok: false, error: "This file was not exported from the Clinic Manager." };
+    return { ok: false, error: "clBackupWrongApp" };
   }
   if (typeof candidate.version !== "number" || candidate.version > BACKUP_VERSION) {
-    return { ok: false, error: "This backup was created by a newer version of the app." };
+    return { ok: false, error: "appBackupNewer" };
   }
   if (typeof candidate.data !== "object" || candidate.data === null) {
-    return { ok: false, error: "This backup file is missing its data." };
+    return { ok: false, error: "appBackupMissingData" };
   }
   return { ok: true, backup: candidate as ClinicBackup };
 }
@@ -89,24 +96,27 @@ export function parseBackupFile(text: string): BackupValidation {
   try {
     return validateBackup(JSON.parse(text));
   } catch {
-    return { ok: false, error: "This file is not readable JSON." };
+    return { ok: false, error: "appBackupNotJson" };
   }
 }
 
 /** Count the records a backup holds, so restore can show what it will replace. */
-export function backupSummary(backup: ClinicBackup): { label: string; count: number }[] {
-  const labels: Partial<Record<StoreName, string>> = {
-    clinic_patients: "Patients",
-    clinic_visits: "Consultations",
-    clinic_appointments: "Appointments",
-    clinic_bills: "Bills",
-    clinic_medicines: "Medicines",
-    clinic_protocols: "Protocols",
-    clinic_doctors: "Doctors",
+export function backupSummary(
+  backup: ClinicBackup,
+  lang: LanguageCode
+): { label: string; count: number }[] {
+  const labels: Partial<Record<StoreName, TKey>> = {
+    clinic_patients: "clNavPatients",
+    clinic_visits: "clBkConsultations",
+    clinic_appointments: "clNavAppointments",
+    clinic_bills: "clBkBills",
+    clinic_medicines: "clBkMedicines",
+    clinic_protocols: "clBkProtocols",
+    clinic_doctors: "clBkDoctors",
   };
   return (Object.keys(labels) as StoreName[])
     .map((store) => ({
-      label: labels[store] as string,
+      label: translate(lang, labels[store] as TKey),
       count: Array.isArray(backup.data[store]) ? (backup.data[store] as unknown[]).length : 0,
     }))
     .filter((row) => row.count > 0);

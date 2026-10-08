@@ -55,6 +55,7 @@ import {
 } from "@/components/tools/FreePos/ui";
 import { SignaturePad } from "./SignaturePad";
 import { useI18n } from "@/lib/i18n";
+import { translate } from "@/lib/i18n/translate";
 
 const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -1432,6 +1433,7 @@ function BackupSection({
   onExport: () => Promise<void>;
   onRestore: (backup: ClinicBackup) => Promise<void>;
 }) {
+  const { lang } = useI18n();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [pending, setPending] = useState<ClinicBackup | null>(null);
   const [error, setError] = useState("");
@@ -1483,7 +1485,7 @@ function BackupSection({
           setError("");
           const result = parseBackupFile(await file.text());
           if (!result.ok) {
-            setError(result.error);
+            setError(translate(lang, result.error));
             return;
           }
           setPending(result.backup);
@@ -1498,7 +1500,7 @@ function BackupSection({
               currently in the clinic app on this device.
             </p>
             <ul className="mt-3 space-y-1 text-sm text-ink">
-              {backupSummary(pending).map((row) => (
+              {backupSummary(pending, lang).map((row) => (
                 <li key={row.label} className="flex justify-between">
                   <span>{row.label}</span>
                   <span className="font-semibold">{row.count}</span>

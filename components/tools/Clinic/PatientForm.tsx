@@ -13,11 +13,13 @@ import {
   type Sex,
 } from "@/lib/clinic/types";
 import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import { fill, splitAround, type TKey } from "@/lib/i18n/translate";
 
-const SEX_OPTIONS: { value: Sex; label: string }[] = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "other", label: "Other" },
+const SEX_OPTIONS: { value: Sex; label: TKey }[] = [
+  { value: "male", label: "clSexMale" },
+  { value: "female", label: "clSexFemale" },
+  { value: "other", label: "clSexOther" },
 ];
 
 /** Comma-separated text ⇄ string[], for the allergy and condition fields. */
@@ -42,6 +44,7 @@ export function PatientForm({
   onSaved: (patient: Patient) => void;
   onCancel?: () => void;
 }) {
+  const { t } = useI18n();
   const { createPatient, updatePatient, findCustomerByPhone, findPatientByPhone } = useClinic();
 
   const [name, setName] = useState(patient?.name ?? initialName ?? "");
@@ -86,11 +89,11 @@ export function PatientForm({
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (!name.trim()) {
-      setError("Patient name is required.");
+      setError(t("clPfErrName"));
       return;
     }
     if (!phone.trim()) {
-      setError("Phone number is required — it is how the patient is found again.");
+      setError(t("clPfErrPhone"));
       return;
     }
     setError("");
@@ -123,7 +126,7 @@ export function PatientForm({
         onSaved(created);
       }
     } catch {
-      setError("Could not save this patient. Please try again.");
+      setError(t("clPfErrSave"));
       setSaving(false);
     }
   };
@@ -132,7 +135,7 @@ export function PatientForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       {duplicate && (
         <p className="rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-sm text-ink">
-          {duplicate.name} ({duplicate.code}) is already registered on this number.
+          {fill(t("clPfDuplicate"), { name: duplicate.name, code: duplicate.code })}
         </p>
       )}
       {!duplicate && knownCustomer && !name && (
@@ -141,12 +144,14 @@ export function PatientForm({
           onClick={() => setName(knownCustomer.name)}
           className="w-full rounded-lg border border-indigo/30 bg-indigo/5 px-3 py-2 text-left text-sm text-ink"
         >
-          This number is saved as <b>{knownCustomer.name}</b> — tap to use that name.
+          {splitAround(t("clPfKnownCustomer"), "name")[0]}
+          <b>{knownCustomer.name}</b>
+          {splitAround(t("clPfKnownCustomer"), "name")[1]}
         </button>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Patient name" required>
+        <Field label={t("clPfName")} required>
           <input
             type="text"
             value={name}
@@ -155,19 +160,19 @@ export function PatientForm({
             autoFocus
           />
         </Field>
-        <Field label="Phone" required>
+        <Field label={t("phone")} required>
           <input
             type="tel"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
-            placeholder="10-digit mobile number"
+            placeholder={t("clSetPhonePh")}
             className={inputClass}
           />
         </Field>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="Sex">
+        <Field label={t("clImpSex")}>
           <select
             value={sex}
             onChange={(event) => setSex(event.target.value as Sex)}
@@ -175,7 +180,7 @@ export function PatientForm({
           >
             {SEX_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(option.label)}
               </option>
             ))}
           </select>
@@ -183,13 +188,13 @@ export function PatientForm({
 
         <div className="sm:col-span-2">
           <span className="mb-1 flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted">
-            Age
+            {t("clImpAge")}
             <button
               type="button"
               onClick={() => setAgeMode(ageMode === "years" ? "dob" : "years")}
               className="text-[11px] font-semibold normal-case text-indigo underline"
             >
-              {ageMode === "years" ? "Enter date of birth instead" : "Enter age in years instead"}
+              {t(ageMode === "years" ? "clPfDobToggle" : "clPfAgeToggle")}
             </button>
           </span>
           {ageMode === "years" ? (
@@ -200,7 +205,7 @@ export function PatientForm({
               max={130}
               value={ageYears}
               onChange={(event) => setAgeYears(event.target.value)}
-              placeholder="Age in years"
+              placeholder={t("clPfAgePh")}
               className={inputClass}
             />
           ) : (
@@ -216,7 +221,7 @@ export function PatientForm({
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Alternate phone">
+        <Field label={t("clPfAltPhone")}>
           <input
             type="tel"
             value={altPhone}
@@ -224,13 +229,13 @@ export function PatientForm({
             className={inputClass}
           />
         </Field>
-        <Field label="Blood group">
+        <Field label={t("clPfBloodGroup")}>
           <select
             value={bloodGroup}
             onChange={(event) => setBloodGroup(event.target.value)}
             className={inputClass}
           >
-            <option value="">Not known</option>
+            <option value="">{t("clPfNotKnown")}</option>
             {BLOOD_GROUPS.map((group) => (
               <option key={group} value={group}>
                 {group}
@@ -240,7 +245,7 @@ export function PatientForm({
         </Field>
       </div>
 
-      <Field label="Address">
+      <Field label={t("address")}>
         <textarea
           value={address}
           onChange={(event) => setAddress(event.target.value)}
@@ -249,29 +254,29 @@ export function PatientForm({
         />
       </Field>
 
-      <Field label="Allergies" hint="Comma separated. Shown as a red banner on the chart and Rx.">
+      <Field label={t("clPfAllergies")} hint={t("clPfAllergiesHint")}>
         <input
           type="text"
           value={allergies}
           onChange={(event) => setAllergies(event.target.value)}
-          placeholder="Penicillin, Sulfa"
+          placeholder={t("clPfAllergiesPh")}
           className={inputClass}
         />
       </Field>
 
-      <Field label="Chronic conditions" hint="Comma separated.">
+      <Field label={t("clPfChronic")} hint={t("clPfChronicHint")}>
         <input
           type="text"
           value={conditions}
           onChange={(event) => setConditions(event.target.value)}
-          placeholder="Diabetes, Hypertension"
+          placeholder={t("clPfChronicPh")}
           className={inputClass}
         />
       </Field>
 
       <div>
         <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-          Photo
+          {t("clPfPhoto")}
         </span>
         <div className="flex items-center gap-3">
           {photoDataUrl ? (
@@ -292,11 +297,11 @@ export function PatientForm({
               onClick={() => fileInputRef.current?.click()}
               className={secondaryBtnClass}
             >
-              Choose file
+              {t("clPfChooseFile")}
             </button>
             <button type="button" onClick={() => setCameraOpen(true)} className={secondaryBtnClass}>
               <Camera className="h-4 w-4" />
-              Camera
+              {t("clPfCamera")}
             </button>
             {photoDataUrl && (
               <button
@@ -304,7 +309,7 @@ export function PatientForm({
                 onClick={() => setPhotoDataUrl("")}
                 className={secondaryBtnClass}
               >
-                Remove
+                {t("remove")}
               </button>
             )}
           </div>
@@ -335,7 +340,7 @@ export function PatientForm({
 
       <div>
         <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-          Other details
+          {t("clPfOtherDetails")}
         </span>
         <div className="space-y-2">
           {customFields.map((field, index) => (
@@ -350,7 +355,7 @@ export function PatientForm({
                     )
                   )
                 }
-                placeholder="Label"
+                placeholder={t("clPfLabelPh")}
                 className={`${inputClass} w-1/3`}
               />
               <input
@@ -363,13 +368,13 @@ export function PatientForm({
                     )
                   )
                 }
-                placeholder="Value"
+                placeholder={t("clPfValuePh")}
                 className={inputClass}
               />
               <button
                 type="button"
                 onClick={() => setCustomFields((prev) => prev.filter((_, i) => i !== index))}
-                aria-label="Remove field"
+                aria-label={t("clPfRemoveField")}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
               >
                 <Trash2 className="h-4 w-4" />
@@ -384,12 +389,12 @@ export function PatientForm({
             className={secondaryBtnClass}
           >
             <Plus className="h-4 w-4" />
-            Add field
+            {t("clPfAddField")}
           </button>
         </div>
       </div>
 
-      <Field label="Notes">
+      <Field label={t("notes")}>
         <textarea
           value={notes}
           onChange={(event) => setNotes(event.target.value)}
@@ -403,11 +408,11 @@ export function PatientForm({
       <div className="flex justify-end gap-3 pt-1">
         {onCancel && (
           <button type="button" onClick={onCancel} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
         )}
         <button type="submit" disabled={saving} className={primaryBtnClass}>
-          {saving ? "Saving…" : patient ? "Save changes" : "Register patient"}
+          {saving ? t("clPfSaving") : t(patient ? "clPfSaveChanges" : "clPtRegisterTitle")}
         </button>
       </div>
     </form>
@@ -455,6 +460,7 @@ function CameraCapture({
   onCapture: (dataUrl: string) => void;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const [error, setError] = useState("");
@@ -475,7 +481,7 @@ function CameraCapture({
         }
       })
       .catch(() => {
-        if (!cancelled) setError("Could not open the camera. Use “Choose file” instead.");
+        if (!cancelled) setError(t("clPfCameraError"));
       });
     return () => {
       cancelled = true;
@@ -500,11 +506,11 @@ function CameraCapture({
     <div className="fixed inset-0 z-[75] flex items-center justify-center bg-ink/70 p-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h4 className="text-sm font-bold text-ink">Take a photo</h4>
+          <h4 className="text-sm font-bold text-ink">{t("clPfTakePhoto")}</h4>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("close")}
             className="flex h-8 w-8 items-center justify-center rounded-full text-muted hover:bg-cream"
           >
             <X className="h-4 w-4" />
@@ -519,10 +525,10 @@ function CameraCapture({
               playsInline
               muted
               className="w-full rounded-lg bg-ink/10"
-              aria-label="Camera preview"
+              aria-label={t("clPfCameraPreview")}
             />
             <button type="button" onClick={capture} className={`${primaryBtnClass} mt-3 w-full`}>
-              Capture
+              {t("clPfCapture")}
             </button>
           </>
         )}

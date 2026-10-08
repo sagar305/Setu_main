@@ -11,6 +11,8 @@ import {
 } from "@/lib/clinic/csv";
 import { useClinic } from "@/lib/clinic/store";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 /**
  * Bulk import for the clinic that already keeps a register in Excel. Accepts a
@@ -18,6 +20,7 @@ import { inputClass, primaryBtnClass, secondaryBtnClass } from "@/components/too
  * actually do with a spreadsheet.
  */
 export function ImportPatients({ onDone }: { onDone: (count: number) => void }) {
+  const { t, lang } = useI18n();
   const { importPatients } = useClinic();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState("");
@@ -32,7 +35,7 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
       setErrors([]);
       return;
     }
-    const result = parsePatientImport(value);
+    const result = parsePatientImport(value, lang);
     setRows(result.rows);
     setErrors(result.errors);
   };
@@ -53,11 +56,7 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted">
-        Paste your register below, or upload a CSV. The first row can be a header — Name, Phone,
-        Age, Sex, Address, Blood Group, Allergies, Chronic Conditions are all recognised. Without
-        a header, columns are read as Name, Phone, Age, Sex, Address.
-      </p>
+      <p className="text-sm text-muted">{t("clImpBlurb")}</p>
 
       <div className="flex flex-wrap gap-2">
         <button
@@ -66,7 +65,7 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
           className={secondaryBtnClass}
         >
           <Upload className="h-4 w-4" />
-          Upload CSV
+          {t("clImpUploadCsv")}
         </button>
         <button
           type="button"
@@ -74,7 +73,7 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
           className={secondaryBtnClass}
         >
           <FileSpreadsheet className="h-4 w-4" />
-          Download template
+          {t("clImpTemplate")}
         </button>
       </div>
 
@@ -94,19 +93,19 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
         value={text}
         onChange={(event) => analyse(event.target.value)}
         rows={7}
-        placeholder={"Ramesh Kumar, 9876543210, 42, M, 12 MG Road"}
+        placeholder={t("clImpPlaceholder")}
         className={`${inputClass} font-mono text-xs`}
       />
 
       {rows && (
         <div className="rounded-xl border border-muted-line/30 bg-cream/50 p-3">
-          <p className="text-sm font-semibold text-ink">{describeImport(rows)}</p>
+          <p className="text-sm font-semibold text-ink">{describeImport(rows, lang)}</p>
           {errors.length > 0 && (
             <ul className="mt-2 space-y-0.5 text-xs text-red-600">
               {errors.slice(0, 6).map((error) => (
                 <li key={error}>{error}</li>
               ))}
-              {errors.length > 6 && <li>…and {errors.length - 6} more.</li>}
+              {errors.length > 6 && <li>{fill(t("clImpAndMore"), { count: errors.length - 6 })}</li>}
             </ul>
           )}
           {rows.length > 0 && (
@@ -114,10 +113,10 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
               <table className="w-full text-xs">
                 <thead className="sticky top-0 bg-cream">
                   <tr>
-                    <th className="px-2 py-1.5 text-left font-semibold text-muted">Name</th>
-                    <th className="px-2 py-1.5 text-left font-semibold text-muted">Phone</th>
-                    <th className="px-2 py-1.5 text-left font-semibold text-muted">Age</th>
-                    <th className="px-2 py-1.5 text-left font-semibold text-muted">Sex</th>
+                    <th className="px-2 py-1.5 text-left font-semibold text-muted">{t("name")}</th>
+                    <th className="px-2 py-1.5 text-left font-semibold text-muted">{t("phone")}</th>
+                    <th className="px-2 py-1.5 text-left font-semibold text-muted">{t("clImpAge")}</th>
+                    <th className="px-2 py-1.5 text-left font-semibold text-muted">{t("clImpSex")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,7 +125,7 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
                       <td className="px-2 py-1.5 text-ink">{row.name}</td>
                       <td className="px-2 py-1.5 text-muted">{row.phone}</td>
                       <td className="px-2 py-1.5 text-muted">
-                        {row.dob || (row.ageYears !== null ? `${row.ageYears} y` : "")}
+                        {row.dob || (row.ageYears !== null ? fill(t("clAgeYears"), { n: row.ageYears }) : "")}
                       </td>
                       <td className="px-2 py-1.5 text-muted">{row.sex}</td>
                     </tr>
@@ -144,7 +143,9 @@ export function ImportPatients({ onDone }: { onDone: (count: number) => void }) 
         disabled={!rows || rows.length === 0 || importing}
         className={primaryBtnClass}
       >
-        {importing ? "Importing…" : `Import ${rows?.length ?? 0} patients`}
+        {importing
+          ? t("clImpImporting")
+          : fill(t("clImpImportN"), { count: rows?.length ?? 0 })}
       </button>
     </div>
   );

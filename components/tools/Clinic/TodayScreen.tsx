@@ -39,6 +39,7 @@ import {
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 const STATUS_PILL: Record<AppointmentStatus, string> = {
   booked: "bg-cream text-muted",
@@ -50,7 +51,7 @@ const STATUS_PILL: Record<AppointmentStatus, string> = {
 };
 
 export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const {
     appointments,
     patients,
@@ -109,7 +110,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   const handleWalkIn = async (patient: Patient) => {
     if (!activeDoctor) {
-      setError("Add a doctor in Settings before adding patients to the queue.");
+      setError(t("clTdErrNoDoctor"));
       return;
     }
     setError("");
@@ -123,7 +124,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       const visit = await startConsult(appointment.id);
       onNavigate("consult", visit.id);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not open the consultation.");
+      setError(caught instanceof Error ? caught.message : t("clTdErrConsult"));
     } finally {
       setBusyId("");
     }
@@ -132,22 +133,26 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   return (
     <div className="space-y-6">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Seen today" value={String(seen)} sub={`${expected} still expected`} />
-        <StatCard label="Waiting now" value={String(waiting)} />
         <StatCard
-          label="Average wait"
-          value={averageWait === null ? "—" : `${averageWait} min`}
-          sub={averageWait === null ? "No completed consults yet" : undefined}
+          label={t("clTdSeenToday")}
+          value={String(seen)}
+          sub={fill(t("clTdStillExpected"), { count: expected })}
         />
-        <StatCard label="Collected today" value={formatCurrency(collections, currency)} />
+        <StatCard label={t("clTdWaitingNow")} value={String(waiting)} />
+        <StatCard
+          label={t("clTdAverageWait")}
+          value={averageWait === null ? "—" : fill(t("clTdMinutes"), { n: averageWait })}
+          sub={averageWait === null ? t("clTdNoConsultsYet") : undefined}
+        />
+        <StatCard label={t("clTdCollectedToday")} value={formatCurrency(collections, currency)} />
       </div>
 
       <div className="rounded-2xl border border-muted-line/30 bg-white p-4 sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex-1">
             <PatientPicker
-              label="Add a walk-in"
-              placeholder="Search by phone, name or file no."
+              label={t("clTdAddWalkIn")}
+              placeholder={t("clTdWalkInPh")}
               autoFocus={todaysRows.length === 0}
               onPick={handleWalkIn}
             />
@@ -155,14 +160,14 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           {activeDoctors.length > 1 && (
             <label className="sm:w-56">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Doctor
+                {t("clDocDoctor")}
               </span>
               <select
                 value={doctorFilter}
                 onChange={(event) => setDoctorFilter(event.target.value)}
                 className={inputClass}
               >
-                <option value="">All doctors</option>
+                <option value="">{t("clTdAllDoctors")}</option>
                 {activeDoctors.map((doctor) => (
                   <option key={doctor.id} value={doctor.id}>
                     {doctor.name}
@@ -178,8 +183,8 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       {todaysRows.length === 0 ? (
         <EmptyState
           icon={<Stethoscope className="h-6 w-6" />}
-          title="No patients yet today"
-          message="Search for a patient above to add the first walk-in, or book an appointment."
+          title={t("clTdNoneToday")}
+          message={t("clTdNoneTodayMsg")}
           action={
             <button
               type="button"
@@ -187,7 +192,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               className={secondaryBtnClass}
             >
               <CalendarPlus className="h-4 w-4" />
-              Open appointments
+              {t("clTdOpenAppointments")}
             </button>
           }
         />
@@ -212,7 +217,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         ? "bg-saffron text-ink"
                         : "bg-cream text-ink"
                     }`}
-                    title={appointment.priority ? "Priority" : "Token"}
+                    title={t(appointment.priority ? "clTdPriority" : "clTdToken")}
                   >
                     {appointment.tokenNo ?? "—"}
                   </span>
@@ -220,7 +225,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="truncate text-sm font-semibold text-ink">
-                        {patient?.name ?? "Unknown patient"}
+                        {patient?.name ?? t("clTdUnknownPatient")}
                       </span>
                       {patient && (
                         <span className="text-xs text-muted">{formatAgeSex(patient, lang)}</span>
@@ -235,7 +240,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                       {waitingFor !== null && appointment.status === "waiting" && (
                         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-saffron">
                           <Clock className="h-3 w-3" />
-                          {waitingFor} min
+                          {fill(t("clTdMinutes"), { n: waitingFor })}
                         </span>
                       )}
                     </div>
@@ -259,7 +264,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         className={secondaryBtnClass}
                       >
                         <LogIn className="h-4 w-4" />
-                        Arrived
+                        {t("clTdArrived")}
                       </button>
                     )}
                     {(appointment.status === "waiting" ||
@@ -271,7 +276,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         className={primaryBtnClass}
                       >
                         <Play className="h-4 w-4" />
-                        {appointment.status === "in-consult" ? "Resume" : "Start consult"}
+                        {t(appointment.status === "in-consult" ? "clTdResume" : "clTdStartConsult")}
                       </button>
                     )}
                     {appointment.status === "done" && (
@@ -280,15 +285,15 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         onClick={() => handleStartConsult(appointment)}
                         className={secondaryBtnClass}
                       >
-                        Open record
+                        {t("clTdOpenRecord")}
                       </button>
                     )}
                     {settled ? (
                       <button
                         type="button"
                         onClick={() => reopenAppointment(appointment.id)}
-                        aria-label="Undo"
-                        title="Put back in the queue"
+                        aria-label={t("clTdUndo")}
+                        title={t("clTdPutBack")}
                         className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo"
                       >
                         <Undo2 className="h-4 w-4" />
@@ -298,8 +303,10 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         <button
                           type="button"
                           onClick={() => togglePriority(appointment.id)}
-                          aria-label="Toggle priority"
-                          title={appointment.priority ? "Remove priority" : "Mark priority"}
+                          aria-label={t("clTdTogglePriority")}
+                          title={t(
+                            appointment.priority ? "clTdRemovePriority" : "clTdMarkPriority"
+                          )}
                           className={`flex h-9 w-9 items-center justify-center rounded-lg transition hover:bg-cream ${
                             appointment.priority ? "text-saffron" : "text-muted hover:text-indigo"
                           }`}
@@ -312,8 +319,8 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                             setCancelling(appointment);
                             setCancelReason("");
                           }}
-                          aria-label="Cancel"
-                          title="Cancel"
+                          aria-label={t("cancel")}
+                          title={t("cancel")}
                           className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
                         >
                           <X className="h-4 w-4" />
@@ -331,20 +338,18 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       <Modal
         open={Boolean(cancelling)}
         onClose={() => setCancelling(null)}
-        title="Cancel this appointment?"
+        title={t("clTdCancelTitle")}
       >
-        <p className="text-sm text-muted">
-          Cancellations show up in the no-show report, so a short reason helps.
-        </p>
+        <p className="text-sm text-muted">{t("clTdCancelBlurbToday")}</p>
         <label className="mt-4 block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Reason
+            {t("clTdReason")}
           </span>
           <input
             type="text"
             value={cancelReason}
             onChange={(event) => setCancelReason(event.target.value)}
-            placeholder="e.g. Patient rescheduled"
+            placeholder={t("clTdReasonPh")}
             className={inputClass}
             autoFocus
           />
@@ -355,7 +360,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             onClick={() => setCancelling(null)}
             className={secondaryBtnClass}
           >
-            Keep it
+            {t("clTdKeepIt")}
           </button>
           <button
             type="button"
@@ -365,7 +370,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             }}
             className={dangerBtnClass}
           >
-            Cancel appointment
+            {t("clTdCancelAppointment")}
           </button>
         </div>
       </Modal>

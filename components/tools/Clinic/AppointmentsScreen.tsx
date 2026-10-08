@@ -43,11 +43,14 @@ import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
 import { useI18n } from "@/lib/i18n";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 
 type View = "day" | "week";
 
+const VIEW_LABELS: Record<View, TKey> = { day: "clApViewDay", week: "clApViewWeek" };
+
 export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const {
     appointments,
     patients,
@@ -106,7 +109,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     const patient = patientOf(appointment.patientId);
     return {
       id: appointment.id,
-      name: patient?.name ?? "Patient",
+      name: patient?.name ?? translate(lang, "clDocPatient"),
       phone: patient?.phone ?? "",
       message: fillTemplate(settings.messageTemplates.appointmentReminder, {
         patientName: patient?.name ?? "",
@@ -127,7 +130,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           <button
             type="button"
             onClick={() => setDate(addDays(date, view === "week" ? -7 : -1))}
-            aria-label="Previous"
+            aria-label={t("appPrevious")}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:text-indigo"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -141,7 +144,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           <button
             type="button"
             onClick={() => setDate(addDays(date, view === "week" ? 7 : 1))}
-            aria-label="Next"
+            aria-label={t("appNext")}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:text-indigo"
           >
             <ChevronRight className="h-4 w-4" />
@@ -151,7 +154,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             onClick={() => setDate(todayIso())}
             className={secondaryBtnClass}
           >
-            Today
+            {t("today")}
           </button>
         </div>
 
@@ -162,20 +165,20 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                 key={option}
                 type="button"
                 onClick={() => setView(option)}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold capitalize transition ${
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
                   view === option
                     ? "bg-indigo text-white"
                     : "border border-muted-line/40 bg-white text-muted hover:text-indigo"
                 }`}
               >
-                {option}
+                {t(VIEW_LABELS[option])}
               </button>
             ))}
           </div>
           {tomorrowsUnreminded.length > 0 && (
             <button type="button" onClick={() => setQueueOpen(true)} className={secondaryBtnClass}>
               <MessageCircle className="h-4 w-4" />
-              Tomorrow&apos;s reminders ({tomorrowsUnreminded.length})
+              {fill(t("clApRemindersCount"), { count: tomorrowsUnreminded.length })}
             </button>
           )}
           <button
@@ -184,14 +187,14 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             className={primaryBtnClass}
           >
             <Plus className="h-4 w-4" />
-            Book
+            {t("clApBook")}
           </button>
         </div>
       </div>
 
       {closed && (
         <p className="rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-sm font-semibold text-ink">
-          The clinic is marked closed on {formatDate(date, lang)}. Bookings are still allowed.
+          {fill(t("clApClosedNote"), { date: formatDate(date, lang) })}
         </p>
       )}
 
@@ -207,23 +210,21 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           }}
         />
       ) : slots.length === 0 ? (
-        <p className="text-sm text-muted">
-          Set your opening and closing times in Settings → Schedule to see the day view.
-        </p>
+        <p className="text-sm text-muted">{t("clApSetHours")}</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full min-w-[32rem] border-collapse">
             <thead>
               <tr>
                 <th className="w-20 border-b border-muted-line/30 px-2 py-2 text-left text-xs font-semibold uppercase text-muted">
-                  Time
+                  {t("clApTime")}
                 </th>
                 {columns.map((doctor) => (
                   <th
                     key={doctor.id}
                     className="border-b border-muted-line/30 px-2 py-2 text-left text-xs font-semibold uppercase text-muted"
                   >
-                    {columns.length > 1 ? doctor.name : "Appointments"}
+                    {columns.length > 1 ? doctor.name : t("clNavAppointments")}
                   </th>
                 ))}
               </tr>
@@ -249,8 +250,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                   (b) =>
                                     timeToMinutes(slot) >= timeToMinutes(b.start) &&
                                     timeToMinutes(slot) < timeToMinutes(b.end)
-                                )?.label ?? "Break"
-                              : "Closed"}
+                                )?.label ?? t("clApBreak")
+                              : t("clApClosed")}
                           </td>
                         );
                       }
@@ -275,7 +276,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                     className="min-w-0 flex-1 text-left"
                                   >
                                     <span className="block truncate text-xs font-semibold text-ink">
-                                      {patient?.name ?? "Unknown"}
+                                      {patient?.name ?? t("clApUnknown")}
                                     </span>
                                     <span className="block truncate text-[11px] text-muted">
                                       {[
@@ -303,8 +304,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                             )
                                           )
                                         }
-                                        aria-label="Share appointment"
-                                        title="Share appointment"
+                                        aria-label={t("clApShareAppointment")}
+                                        title={t("clApShareAppointment")}
                                         className="flex h-6 w-6 items-center justify-center rounded text-muted hover:text-indigo"
                                       >
                                         <Share2 className="h-3.5 w-3.5" />
@@ -313,8 +314,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                     <button
                                       type="button"
                                       onClick={() => setMoving(appointment)}
-                                      aria-label="Move"
-                                      title="Move"
+                                      aria-label={t("clApMove")}
+                                      title={t("clApMove")}
                                       className="flex h-6 w-6 items-center justify-center rounded text-muted hover:text-indigo"
                                     >
                                       <Move className="h-3.5 w-3.5" />
@@ -325,8 +326,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                         setCancelling(appointment);
                                         setCancelReason("");
                                       }}
-                                      aria-label="Cancel"
-                                      title="Cancel"
+                                      aria-label={t("cancel")}
+                                      title={t("cancel")}
                                       className="flex h-6 w-6 items-center justify-center rounded text-muted hover:text-red-600"
                                     >
                                       <X className="h-3.5 w-3.5" />
@@ -341,7 +342,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                             onClick={() => setBooking({ time: slot, doctorId: doctor.id })}
                             className="w-full rounded-lg border border-dashed border-muted-line/40 px-2 py-1 text-left text-[11px] text-muted transition hover:border-indigo/40 hover:text-indigo"
                           >
-                            {booked.length > 0 ? "+ Double book" : "+ Book"}
+                            {t(booked.length > 0 ? "clApDoubleBook" : "clApBookSlot")}
                           </button>
                         </td>
                       );
@@ -384,7 +385,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             date: formatDate(date, lang),
             time: formatTime(time, lang),
           });
-          if (patient.phone && window.confirm("Send the confirmation on WhatsApp?")) {
+          if (patient.phone && window.confirm(t("clApSendWhatsApp"))) {
             window.open(whatsAppLink(patient.phone, message), "_blank", "noopener");
             await markReminded([created.id]);
           }
@@ -395,12 +396,12 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         open={Boolean(sharing)}
         onClose={() => setSharing(null)}
         doc={sharing}
-        title="Share appointment"
-        recipientLabel="patient"
+        title={t("clApShareAppointment")}
+        recipientLabel={t("sdRecipientPatient")}
         allowFee
       />
 
-      <Modal open={Boolean(moving)} onClose={() => setMoving(null)} title="Move appointment">
+      <Modal open={Boolean(moving)} onClose={() => setMoving(null)} title={t("clApMoveAppointment")}>
         {moving && (
           <MoveForm
             appointment={moving}
@@ -417,27 +418,25 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       <Modal
         open={Boolean(cancelling)}
         onClose={() => setCancelling(null)}
-        title="Cancel this appointment?"
+        title={t("clTdCancelTitle")}
       >
-        <p className="text-sm text-muted">
-          Cancellations are reported on, so a short reason helps.
-        </p>
+        <p className="text-sm text-muted">{t("clTdCancelBlurbAppt")}</p>
         <label className="mt-4 block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Reason
+            {t("clTdReason")}
           </span>
           <input
             type="text"
             value={cancelReason}
             onChange={(event) => setCancelReason(event.target.value)}
-            placeholder="e.g. Patient rescheduled"
+            placeholder={t("clTdReasonPh")}
             className={inputClass}
             autoFocus
           />
         </label>
         <div className="mt-5 flex justify-end gap-3">
           <button type="button" onClick={() => setCancelling(null)} className={secondaryBtnClass}>
-            Keep it
+            {t("clTdKeepIt")}
           </button>
           <button
             type="button"
@@ -447,14 +446,14 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             }}
             className={dangerBtnClass}
           >
-            Cancel appointment
+            {t("clTdCancelAppointment")}
           </button>
         </div>
       </Modal>
 
       <SendQueue
         open={queueOpen}
-        title="Tomorrow's reminders"
+        title={t("clApRemindersTitle")}
         messages={reminderMessages}
         onClose={() => setQueueOpen(false)}
         onSent={(ids) => {
@@ -489,7 +488,7 @@ function BookingModal({
     doctorId: string
   ) => Promise<void>;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { settings, doctors } = useClinic();
   const [patient, setPatient] = useState<Patient | null>(null);
   const [reason, setReason] = useState("");
@@ -514,16 +513,18 @@ function BookingModal({
   const activeDoctors = doctors.filter((d) => d.active);
 
   return (
-    <Modal open={open} onClose={onClose} title="Book an appointment" wide>
+    <Modal open={open} onClose={onClose} title={t("clApBookTitle")} wide>
       {existingCount > 0 && (
         <p className="mb-3 rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-sm text-ink">
-          {existingCount} {existingCount === 1 ? "patient is" : "patients are"} already booked at{" "}
-          {formatTime(time, lang)}.
+          {fill(t(existingCount === 1 ? "clApAlreadyBookedOne" : "clApAlreadyBookedMany"), {
+            count: existingCount,
+            time: formatTime(time, lang),
+          })}
         </p>
       )}
 
       {!patient ? (
-        <PatientPicker label="Patient" autoFocus onPick={setPatient} />
+        <PatientPicker label={t("clDocPatient")} autoFocus onPick={setPatient} />
       ) : (
         <div className="space-y-4">
           <div className="flex items-center justify-between gap-3 rounded-lg bg-cream/60 px-3 py-2">
@@ -535,14 +536,14 @@ function BookingModal({
               onClick={() => setPatient(null)}
               className="text-xs font-semibold text-indigo underline"
             >
-              Change
+              {t("clApChange")}
             </button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Time
+                {t("clApTime")}
               </span>
               <input
                 type="time"
@@ -553,7 +554,7 @@ function BookingModal({
             </label>
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Duration (minutes)
+                {t("clApDuration")}
               </span>
               <input
                 type="number"
@@ -570,7 +571,7 @@ function BookingModal({
           {activeDoctors.length > 1 && (
             <label className="block">
               <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-                Doctor
+                {t("clDocDoctor")}
               </span>
               <select
                 value={doctor}
@@ -588,20 +589,20 @@ function BookingModal({
 
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Reason
+              {t("clTdReason")}
             </span>
             <input
               type="text"
               value={reason}
               onChange={(event) => setReason(event.target.value)}
-              placeholder="e.g. Fever, review"
+              placeholder={t("clApReasonPh")}
               className={inputClass}
             />
           </label>
 
           <div className="flex justify-end gap-3">
             <button type="button" onClick={onClose} className={secondaryBtnClass}>
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="button"
@@ -616,7 +617,9 @@ function BookingModal({
               }}
               className={primaryBtnClass}
             >
-              {saving ? "Booking…" : `Book for ${formatDate(date, lang)}`}
+              {saving
+                ? t("clApBooking")
+                : fill(t("clApBookFor"), { date: formatDate(date, lang) })}
             </button>
           </div>
         </div>
@@ -636,7 +639,7 @@ function MoveForm({
   onCancel: () => void;
   onMove: (date: string, time: string) => Promise<void>;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const [date, setDate] = useState(appointment.date);
   const [time, setTime] = useState(appointment.startTime);
 
@@ -645,7 +648,7 @@ function MoveForm({
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            New date
+            {t("clApNewDate")}
           </span>
           <input
             type="date"
@@ -656,7 +659,7 @@ function MoveForm({
         </label>
         <label className="block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            New time
+            {t("clApNewTime")}
           </span>
           {slots.length > 0 ? (
             <select
@@ -682,10 +685,10 @@ function MoveForm({
       </div>
       <div className="flex justify-end gap-3">
         <button type="button" onClick={onCancel} className={secondaryBtnClass}>
-          Cancel
+          {t("cancel")}
         </button>
         <button type="button" onClick={() => onMove(date, time)} className={primaryBtnClass}>
-          Move appointment
+          {t("clApMoveAppointment")}
         </button>
       </div>
     </div>
@@ -706,7 +709,7 @@ function WeekView({
   settings: { weeklyOffDays: number[]; holidays: { date: string }[] };
   onPickDay: (date: string) => void;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const days = useMemo(() => {
     const [y, m, d] = startDate.split("-").map(Number);
     const base = new Date(y, m - 1, d);
@@ -722,7 +725,8 @@ function WeekView({
     });
   }, [startDate]);
 
-  const patientName = (id: string) => patients.find((p) => p.id === id)?.name ?? "Unknown";
+  const patientName = (id: string) =>
+    patients.find((p) => p.id === id)?.name ?? t("clApUnknown");
 
   return (
     <div className="grid gap-2 sm:grid-cols-7">
@@ -742,7 +746,7 @@ function WeekView({
           >
             <p className="text-xs font-semibold text-ink">{formatDayMonth(day, lang)}</p>
             <p className="mb-1 text-[11px] text-muted">
-              {off ? "Closed" : `${rows.length} booked`}
+              {off ? t("clApClosed") : fill(t("clApBookedN"), { count: rows.length })}
             </p>
             {rows.slice(0, 4).map((appointment) => (
               <p key={appointment.id} className="truncate text-[11px] text-muted">
@@ -750,7 +754,9 @@ function WeekView({
               </p>
             ))}
             {rows.length > 4 && (
-              <p className="text-[11px] text-indigo">+{rows.length - 4} more</p>
+              <p className="text-[11px] text-indigo">
+                {fill(t("clApMoreN"), { count: rows.length - 4 })}
+              </p>
             )}
           </button>
         );

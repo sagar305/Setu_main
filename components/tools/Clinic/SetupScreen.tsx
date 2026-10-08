@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { useClinic } from "@/lib/clinic/store";
 import { CURRENCIES } from "@/lib/pos/types";
 import { Field, inputClass, primaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
 
 /**
  * Two things in one form: the clinic (the workspace Business) and the doctor
@@ -12,6 +13,7 @@ import { Field, inputClass, primaryBtnClass } from "@/components/tools/FreePos/u
  * without a name and a registration number on it is not a prescription.
  */
 export function SetupScreen() {
+  const { t } = useI18n();
   const { createClinic, backToWelcome, business } = useClinic();
 
   const [name, setName] = useState(business?.name ?? "");
@@ -34,15 +36,15 @@ export function SetupScreen() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     if (!name.trim()) {
-      setError("Please enter your clinic's name.");
+      setError(t("clSetErrName"));
       return;
     }
     if (!phone.trim()) {
-      setError("Phone number is required — patients reply on this number.");
+      setError(t("clSetErrPhone"));
       return;
     }
     if (!doctorName.trim()) {
-      setError("Please enter the doctor's name — it prints on every prescription.");
+      setError(t("clSetErrDoctor"));
       return;
     }
     setError("");
@@ -72,7 +74,7 @@ export function SetupScreen() {
         }
       );
     } catch {
-      setError("Could not save your details. Please try again.");
+      setError(t("clSetErrSave"));
       setSaving(false);
     }
   };
@@ -85,36 +87,33 @@ export function SetupScreen() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-muted transition hover:text-indigo"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back
+        {t("back")}
       </button>
 
-      <h2 className="text-2xl font-bold tracking-tight text-ink">Your clinic</h2>
-      <p className="mt-2 text-sm text-muted">
-        These appear on prescriptions, receipts and the messages you send patients. You can change
-        all of it later in Settings.
-      </p>
+      <h2 className="text-2xl font-bold tracking-tight text-ink">{t("clSetTitle")}</h2>
+      <p className="mt-2 text-sm text-muted">{t("clSetBlurb")}</p>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-        <Field label="Clinic name" required>
+        <Field label={t("clSetClinicName")} required>
           <input
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="e.g. Sharma Clinic"
+            placeholder={t("clSetClinicNamePh")}
             className={inputClass}
             autoFocus
           />
         </Field>
-        <Field label="Phone number" required>
+        <Field label={t("clSetPhone")} required>
           <input
             type="tel"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
-            placeholder="10-digit mobile number"
+            placeholder={t("clSetPhonePh")}
             className={inputClass}
           />
         </Field>
-        <Field label="Address" hint="Prints in the prescription header.">
+        <Field label={t("address")} hint={t("clSetAddressHint")}>
           <textarea
             value={address}
             onChange={(event) => setAddress(event.target.value)}
@@ -123,7 +122,7 @@ export function SetupScreen() {
           />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Currency">
+          <Field label={t("currency")}>
             <select
               value={currency}
               onChange={(event) => setCurrency(event.target.value)}
@@ -136,7 +135,7 @@ export function SetupScreen() {
               ))}
             </select>
           </Field>
-          <Field label="UPI ID" hint="Prints a QR on receipts.">
+          <Field label={t("upiId")} hint={t("clSetUpiHint")}>
             <input
               type="text"
               value={upiId}
@@ -148,23 +147,21 @@ export function SetupScreen() {
         </div>
 
         <div className="border-t border-muted-line/30 pt-5">
-          <h3 className="text-base font-bold text-ink">The doctor</h3>
-          <p className="mt-1 text-sm text-muted">
-            This name, qualification and registration number print on every prescription.
-          </p>
+          <h3 className="text-base font-bold text-ink">{t("clSetDoctorSection")}</h3>
+          <p className="mt-1 text-sm text-muted">{t("clSetDoctorNote")}</p>
         </div>
 
-        <Field label="Doctor's name" required>
+        <Field label={t("clPhDoctorName")} required>
           <input
             type="text"
             value={doctorName}
             onChange={(event) => setDoctorName(event.target.value)}
-            placeholder="e.g. Dr. Anil Sharma"
+            placeholder={t("clSetDoctorNamePh")}
             className={inputClass}
           />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Qualifications">
+          <Field label={t("clSetQualifications")}>
             <input
               type="text"
               value={qualifications}
@@ -173,17 +170,17 @@ export function SetupScreen() {
               className={inputClass}
             />
           </Field>
-          <Field label="Speciality">
+          <Field label={t("clSetSpeciality")}>
             <input
               type="text"
               value={speciality}
               onChange={(event) => setSpeciality(event.target.value)}
-              placeholder="General Physician"
+              placeholder={t("clSetSpecialityPh")}
               className={inputClass}
             />
           </Field>
         </div>
-        <Field label="Medical council registration no.">
+        <Field label={t("clSetRegNo")}>
           <input
             type="text"
             value={registrationNo}
@@ -193,7 +190,7 @@ export function SetupScreen() {
         </Field>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Consultation fee">
+          <Field label={t("clSetConsultFee")}>
             <input
               type="number"
               inputMode="numeric"
@@ -204,7 +201,7 @@ export function SetupScreen() {
               className={inputClass}
             />
           </Field>
-          <Field label="Follow-up fee" hint="0 = free">
+          <Field label={t("clSetFollowUpFee")} hint={t("clSetFreeHintZero")}>
             <input
               type="number"
               inputMode="numeric"
@@ -215,7 +212,7 @@ export function SetupScreen() {
               className={inputClass}
             />
           </Field>
-          <Field label="Free within (days)" hint="0 = never">
+          <Field label={t("clSetFreeWithin")} hint={t("clSetNeverHint")}>
             <input
               type="number"
               inputMode="numeric"
@@ -230,7 +227,7 @@ export function SetupScreen() {
         {error && <p className="text-sm text-red-600">{error}</p>}
 
         <button type="submit" disabled={saving} className={`${primaryBtnClass} w-full`}>
-          {saving ? "Setting up…" : "Open my clinic"}
+          {saving ? t("clSetSaving") : t("clSetOpen")}
         </button>
       </form>
     </div>
