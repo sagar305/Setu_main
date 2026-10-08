@@ -23,9 +23,10 @@ import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { appointmentDoc } from "./share";
 import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import {
-  STATUS_LABELS,
+  statusLabel,
   addDays,
   formatDate,
+  formatDayMonth,
   formatTime,
   todayIso,
   type Appointment,
@@ -41,10 +42,12 @@ import {
 import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
+import { useI18n } from "@/lib/i18n";
 
 type View = "day" | "week";
 
 export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { lang } = useI18n();
   const {
     appointments,
     patients,
@@ -111,8 +114,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         doctorName: doctors.find((d) => d.id === appointment.doctorId)?.name ?? "",
         clinicName: business?.name ?? "",
         clinicPhone: business?.phone ?? "",
-        date: formatDate(appointment.date),
-        time: formatTime(appointment.startTime),
+        date: formatDate(appointment.date, lang),
+        time: formatTime(appointment.startTime, lang),
       }),
     };
   });
@@ -188,7 +191,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
       {closed && (
         <p className="rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-sm font-semibold text-ink">
-          The clinic is marked closed on {formatDate(date)}. Bookings are still allowed.
+          The clinic is marked closed on {formatDate(date, lang)}. Bookings are still allowed.
         </p>
       )}
 
@@ -231,7 +234,7 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                 return (
                   <tr key={slot}>
                     <td className="border-b border-muted-line/20 px-2 py-1.5 align-top text-xs text-muted">
-                      {formatTime(slot)}
+                      {formatTime(slot, lang)}
                     </td>
                     {columns.map((doctor) => {
                       const booked = inSlot(slot, doctor.id);
@@ -276,9 +279,9 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                     </span>
                                     <span className="block truncate text-[11px] text-muted">
                                       {[
-                                        patient ? formatAgeSex(patient) : "",
+                                        patient ? formatAgeSex(patient, lang) : "",
                                         appointment.reason,
-                                        STATUS_LABELS[appointment.status],
+                                        statusLabel(appointment.status, lang),
                                       ]
                                         .filter(Boolean)
                                         .join(" · ")}
@@ -295,7 +298,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                                               patient,
                                               appointment,
                                               doctors.find((d) => d.id === appointment.doctorId) ??
-                                                null
+                                                null,
+                                              lang
                                             )
                                           )
                                         }
@@ -377,8 +381,8 @@ export function AppointmentsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             doctorName: doctors.find((d) => d.id === doctorId)?.name ?? "",
             clinicName: business?.name ?? "",
             clinicPhone: business?.phone ?? "",
-            date: formatDate(date),
-            time: formatTime(time),
+            date: formatDate(date, lang),
+            time: formatTime(time, lang),
           });
           if (patient.phone && window.confirm("Send the confirmation on WhatsApp?")) {
             window.open(whatsAppLink(patient.phone, message), "_blank", "noopener");
@@ -485,6 +489,7 @@ function BookingModal({
     doctorId: string
   ) => Promise<void>;
 }) {
+  const { lang } = useI18n();
   const { settings, doctors } = useClinic();
   const [patient, setPatient] = useState<Patient | null>(null);
   const [reason, setReason] = useState("");
@@ -513,7 +518,7 @@ function BookingModal({
       {existingCount > 0 && (
         <p className="mb-3 rounded-lg border border-saffron/40 bg-saffron/10 px-3 py-2 text-sm text-ink">
           {existingCount} {existingCount === 1 ? "patient is" : "patients are"} already booked at{" "}
-          {formatTime(time)}.
+          {formatTime(time, lang)}.
         </p>
       )}
 
@@ -611,7 +616,7 @@ function BookingModal({
               }}
               className={primaryBtnClass}
             >
-              {saving ? "Booking…" : `Book for ${formatDate(date)}`}
+              {saving ? "Booking…" : `Book for ${formatDate(date, lang)}`}
             </button>
           </div>
         </div>
@@ -631,6 +636,7 @@ function MoveForm({
   onCancel: () => void;
   onMove: (date: string, time: string) => Promise<void>;
 }) {
+  const { lang } = useI18n();
   const [date, setDate] = useState(appointment.date);
   const [time, setTime] = useState(appointment.startTime);
 
@@ -660,7 +666,7 @@ function MoveForm({
             >
               {slots.map((slot) => (
                 <option key={slot} value={slot}>
-                  {formatTime(slot)}
+                  {formatTime(slot, lang)}
                 </option>
               ))}
             </select>
@@ -700,6 +706,7 @@ function WeekView({
   settings: { weeklyOffDays: number[]; holidays: { date: string }[] };
   onPickDay: (date: string) => void;
 }) {
+  const { lang } = useI18n();
   const days = useMemo(() => {
     const [y, m, d] = startDate.split("-").map(Number);
     const base = new Date(y, m - 1, d);
@@ -733,13 +740,13 @@ function WeekView({
               off ? "border-muted-line/20 bg-cream/40" : "border-muted-line/30 bg-white"
             }`}
           >
-            <p className="text-xs font-semibold text-ink">{formatDate(day).slice(0, 6)}</p>
+            <p className="text-xs font-semibold text-ink">{formatDayMonth(day, lang)}</p>
             <p className="mb-1 text-[11px] text-muted">
               {off ? "Closed" : `${rows.length} booked`}
             </p>
             {rows.slice(0, 4).map((appointment) => (
               <p key={appointment.id} className="truncate text-[11px] text-muted">
-                {formatTime(appointment.startTime)} {patientName(appointment.patientId)}
+                {formatTime(appointment.startTime, lang)} {patientName(appointment.patientId)}
               </p>
             ))}
             {rows.length > 4 && (

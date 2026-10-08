@@ -4,22 +4,25 @@ import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 import { computeQuantity } from "@/lib/clinic/calc";
 import {
   MEDICINE_FORMS,
-  TIMING_LABELS,
+  timingLabel,
   type MedicineForm,
   type RxLine,
   type RxTiming,
 } from "@/lib/clinic/types";
 import { inputClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
 
 /** The doses doctors actually write, one tap each. Anything else is typed. */
 const FREQUENCY_PRESETS = ["1-0-0", "0-0-1", "1-0-1", "1-1-1", "1-1-0", "SOS"];
 
-const TIMING_OPTIONS: { value: RxTiming; label: string }[] = [
-  { value: "", label: "—" },
-  { value: "before-food", label: TIMING_LABELS["before-food"] },
-  { value: "after-food", label: TIMING_LABELS["after-food"] },
-  { value: "with-food", label: TIMING_LABELS["with-food"] },
-];
+const TIMING_VALUES: RxTiming[] = ["", "before-food", "after-food", "with-food"];
+
+const timingOptions = (lang: LanguageCode) =>
+  TIMING_VALUES.map((value) => ({
+    value,
+    label: value ? timingLabel(value, lang) : "—",
+  }));
 
 export function RxLineRow({
   line,
@@ -36,6 +39,7 @@ export function RxLineRow({
   onRemove: () => void;
   onMove: (direction: -1 | 1) => void;
 }) {
+  const { lang } = useI18n();
   /**
    * Quantity follows frequency × duration until the doctor overrides it. Syrups
    * and injections never match the tablet arithmetic, so the field stays fully
@@ -120,7 +124,7 @@ export function RxLineRow({
               className={inputClass}
               aria-label="Timing"
             >
-              {TIMING_OPTIONS.map((option) => (
+              {timingOptions(lang).map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>

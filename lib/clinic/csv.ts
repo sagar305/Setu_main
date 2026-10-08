@@ -14,7 +14,6 @@ import {
   waitMinutes,
 } from "./calc";
 import {
-  formatDate,
   patientCustomFields,
   visitMedicines,
   visitVitals,
@@ -53,7 +52,7 @@ export function patientsCsv(patients: Patient[], bills: Bill[]): string {
     patients.map((p) => [
       p.code,
       p.name,
-      formatAge(patientAge(p)),
+      formatAge(patientAge(p), "en"),
       p.sex,
       p.phone,
       p.altPhone,
@@ -421,9 +420,4 @@ export function describeImport(rows: ParsedPatientRow[]): string {
   const withPhone = rows.filter((r) => r.phone.trim()).length;
   const withAge = rows.filter((r) => r.dob || r.ageYears !== null).length;
   return `${rows.length} patients · ${withPhone} with a phone number · ${withAge} with an age`;
-}
-
-/** Used by the chart export header. */
-export function formatVisitDate(dateKey: string): string {
-  return formatDate(dateKey);
 }

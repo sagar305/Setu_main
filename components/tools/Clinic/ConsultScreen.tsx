@@ -50,6 +50,7 @@ import { MedicinePicker } from "./MedicinePicker";
 import { RxLineRow } from "./RxLineRow";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
+import { useI18n } from "@/lib/i18n";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 
@@ -119,6 +120,7 @@ export function ConsultScreen({
   onNavigate: NavigateFn;
   visitRequest: QueryRequest | null;
 }) {
+  const { lang } = useI18n();
   const {
     visits,
     patients,
@@ -241,6 +243,7 @@ export function ConsultScreen({
       doctor,
       patient,
       visit: previewVisit,
+      lang,
     });
   }, [previewVisit, patient, business, settings, doctor]);
 
@@ -312,14 +315,14 @@ export function ConsultScreen({
       durationMinutes: settings.slotMinutes,
       reason: "Follow-up",
     });
-    setNotice(`Follow-up booked for ${formatDate(date)}.`);
+    setNotice(`Follow-up booked for ${formatDate(date, lang)}.`);
   };
 
   // A rendered prescription the patient can open, rather than the plain-text
   // dump below. Built from the same visit the printout uses.
   const shareRxLink = () => {
     if (!patient || !previewVisit) return;
-    setSharing(prescriptionDoc(business, settings, doctor, patient, previewVisit));
+    setSharing(prescriptionDoc(business, settings, doctor, patient, previewVisit, lang));
   };
 
   const shareOnWhatsApp = () => {
@@ -379,7 +382,7 @@ export function ConsultScreen({
             <div className="min-w-0">
               <h3 className="truncate text-base font-bold text-ink">{patient.name}</h3>
               <p className="truncate text-xs text-muted">
-                {[patient.code, formatAgeSex(patient), patient.phone].filter(Boolean).join(" · ")}
+                {[patient.code, formatAgeSex(patient, lang), patient.phone].filter(Boolean).join(" · ")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -412,14 +415,14 @@ export function ConsultScreen({
 
           {lastVisit && (
             <p className="mt-2 text-xs text-muted">
-              Last visit {formatDate(lastVisit.date)}
+              Last visit {formatDate(lastVisit.date, lang)}
               {lastVisit.diagnosis ? ` — ${lastVisit.diagnosis}` : ""}
             </p>
           )}
           {visit.finalisedAt && (
             <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-800">
               <CheckCircle2 className="h-3 w-3" />
-              Finalised {formatDate(visit.date)}
+              Finalised {formatDate(visit.date, lang)}
               {visit.editedAfterFinaliseAt ? " · edited" : ""}
             </p>
           )}
@@ -793,7 +796,7 @@ export function ConsultScreen({
             onClick={() =>
               patient &&
               previewVisit &&
-              printPrescription({ business, settings, doctor, patient, visit: previewVisit })
+              printPrescription({ business, settings, doctor, patient, visit: previewVisit, lang })
             }
             className={primaryBtnClass}
           >
@@ -820,6 +823,7 @@ export function ConsultScreen({
                   doctor,
                   patient,
                   visit: previewVisit,
+                  lang,
                 })
               }
               className={secondaryBtnClass}

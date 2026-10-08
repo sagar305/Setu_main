@@ -15,7 +15,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { ClinicProvider, useClinic } from "@/lib/clinic/store";
-import { FIRST_RUN_DISCLAIMER } from "@/lib/clinic/types";
+import { firstRunDisclaimer } from "@/lib/clinic/types";
 import { previewStyleSheet } from "@/lib/clinic/print";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
@@ -29,6 +29,7 @@ import { ConsultScreen } from "./ConsultScreen";
 import { BillingScreen } from "./BillingScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
+import { useI18n } from "@/lib/i18n";
 
 const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Users }[] = [
   { id: "today", label: "Today", icon: LayoutDashboard },
@@ -49,6 +50,7 @@ type QueryRequest = { screen: ScreenId; value: string; nonce: number };
  * checking something.
  */
 function DisclaimerGate({ onAccept }: { onAccept: () => void }) {
+  const { lang } = useI18n();
   return (
     <div className="fixed inset-0 z-[80] flex items-end justify-center bg-ink/60 p-0 sm:items-center sm:p-6">
       <div className="flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl sm:max-w-lg sm:rounded-2xl">
@@ -56,7 +58,7 @@ function DisclaimerGate({ onAccept }: { onAccept: () => void }) {
           <h3 className="text-base font-bold text-ink">Before you start</h3>
         </div>
         <div className="overflow-y-auto px-5 py-4">
-          <p className="text-sm leading-relaxed text-muted">{FIRST_RUN_DISCLAIMER}</p>
+          <p className="text-sm leading-relaxed text-muted">{firstRunDisclaimer(lang)}</p>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             You can edit the disclaimer that prints on your prescriptions in Settings →
             Prescription.

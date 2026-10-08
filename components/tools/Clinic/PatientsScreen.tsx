@@ -25,6 +25,7 @@ import { PatientForm } from "./PatientForm";
 import { PatientChart } from "./PatientChart";
 import { ImportPatients } from "./ImportPatients";
 import { searchPatients } from "./PatientPicker";
+import { useI18n } from "@/lib/i18n";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 type Filter = "all" | "dues" | "chronic" | "lapsed" | "new";
@@ -258,6 +259,7 @@ function PatientRow({
   currency: string;
   onOpen: () => void;
 }) {
+  const { lang } = useI18n();
   const conditions = patientConditions(patient);
   return (
     <button
@@ -277,7 +279,7 @@ function PatientRow({
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold text-ink">{patient.name}</span>
         <span className="block truncate text-xs text-muted">
-          {[patient.code, formatAgeSex(patient), patient.phone].filter(Boolean).join(" · ")}
+          {[patient.code, formatAgeSex(patient, lang), patient.phone].filter(Boolean).join(" · ")}
         </span>
       </span>
 
@@ -288,7 +290,7 @@ function PatientRow({
           </span>
         )}
         {lastVisit && (
-          <span className="block text-[11px] text-muted">{formatDate(lastVisit)}</span>
+          <span className="block text-[11px] text-muted">{formatDate(lastVisit, lang)}</span>
         )}
         {conditions.length > 0 && (
           <span className="block text-[11px] text-saffron">{conditions[0]}</span>

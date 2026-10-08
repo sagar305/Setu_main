@@ -28,6 +28,7 @@ import {
 } from "react";
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
 import { generateId, nowIso, type Business, type Customer } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
 import {
   buildTabPayloads,
   isValidSyncUrl,
@@ -54,6 +55,7 @@ import { buildSeedMedicines, medicineKey } from "./medicines";
 import type { ParsedPatientRow } from "./csv";
 import {
   DEFAULT_CLINIC_SETTINGS,
+  defaultClinicSettings,
   EMPTY_VITALS,
   SYNC_SLICES,
   formatPatientCode,
@@ -213,6 +215,9 @@ const ClinicContext = createContext<ClinicContextValue | null>(null);
 const LAST_SYNC_KEY = "clinic_sheet_sync_last";
 
 export function ClinicProvider({ children }: { children: ReactNode }) {
+  // A clinic is seeded with its patient-facing text — the Rx footer and the
+  // WhatsApp templates — in the language it is being set up in.
+  const { lang } = useI18n();
   const [status, setStatus] = useState<ClinicStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [business, setBusiness] = useState<Business | null>(null);
@@ -400,7 +405,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         createdAt: nowIso(),
         updatedAt: nowIso(),
       };
-      const newSettings: ClinicSettings = { ...DEFAULT_CLINIC_SETTINGS };
+      const newSettings: ClinicSettings = defaultClinicSettings(lang);
       await batchWithSync(
         {
           business: [newBusiness],
@@ -415,7 +420,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       setDoctors([doctor]);
       setStatus("ready");
     },
-    [batchWithSync]
+    [batchWithSync, lang]
   );
 
   const updateBusiness = useCallback(
@@ -1258,11 +1263,11 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     setProtocols([]);
     setCharges([]);
     setBills([]);
-    setSettings(DEFAULT_CLINIC_SETTINGS);
+    setSettings(defaultClinicSettings(lang));
     setDirtySlices([]);
     sweptRef.current = false;
     setStatus("welcome");
-  }, []);
+  }, [lang]);
 
   const value = useMemo<ClinicContextValue>(
     () => ({

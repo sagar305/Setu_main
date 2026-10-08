@@ -7,6 +7,7 @@ import { formatAgeSex } from "@/lib/clinic/calc";
 import { phoneKey, type Patient } from "@/lib/clinic/types";
 import { Modal, inputClass } from "@/components/tools/FreePos/ui";
 import { PatientForm } from "./PatientForm";
+import { useI18n } from "@/lib/i18n";
 
 /** Rank matches so the person the desk means is first: code, then phone, then name. */
 export function searchPatients(patients: Patient[], query: string, limit = 8): Patient[] {
@@ -52,6 +53,7 @@ export function PatientPicker({
   onPick: (patient: Patient) => void;
   label?: string;
 }) {
+  const { lang } = useI18n();
   const { patients } = useClinic();
   const [query, setQuery] = useState("");
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -97,7 +99,7 @@ export function PatientPicker({
                   {patient.name}
                 </span>
                 <span className="block truncate text-xs text-muted">
-                  {[patient.code, formatAgeSex(patient), patient.phone]
+                  {[patient.code, formatAgeSex(patient, lang), patient.phone]
                     .filter(Boolean)
                     .join(" · ")}
                 </span>

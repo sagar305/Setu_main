@@ -41,6 +41,7 @@ import {
 import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
+import { useI18n } from "@/lib/i18n";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 type Tab = "bills" | "dues";
@@ -52,6 +53,7 @@ export function BillingScreen({
   onNavigate: NavigateFn;
   externalQuery: QueryRequest | null;
 }) {
+  const { lang } = useI18n();
   const {
     bills,
     patients,
@@ -226,7 +228,7 @@ export function BillingScreen({
                       <span className="font-normal text-muted">· {bill.receiptNo}</span>
                     </p>
                     <p className="truncate text-xs text-muted">
-                      {[formatDate(bill.date), doctorName(bill.doctorId), bill.paymentMode]
+                      {[formatDate(bill.date, lang), doctorName(bill.doctorId), bill.paymentMode]
                         .filter(Boolean)
                         .join(" · ")}
                     </p>
@@ -715,6 +717,7 @@ function BillComposer({
 
 /** Receipt preview, print and PDF. UPI QR appears when a UPI ID is configured. */
 function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => void }) {
+  const { lang } = useI18n();
   const { patients, doctors, business, settings } = useClinic();
   const [qr, setQr] = useState("");
   const [sharing, setSharing] = useState<SharedDoc | null>(null);
@@ -741,6 +744,7 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
     business,
     settings,
     patient,
+    lang,
     doctorName: doctors.find((d) => d.id === bill.doctorId)?.name ?? "",
     receiptNo: bill.receiptNo,
     date: bill.date,
@@ -758,7 +762,7 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
       <div className="rounded-lg border border-muted-line/30 bg-white p-4 text-sm">
         <p className="font-bold text-ink">{business?.name}</p>
         <p className="text-xs text-muted">
-          {patient?.name} · {formatDate(bill.date)}
+          {patient?.name} · {formatDate(bill.date, lang)}
         </p>
         <ul className="mt-3 space-y-1">
           {bill.lines.map((line) => (
@@ -801,7 +805,7 @@ function ReceiptModal({ bill, onClose }: { bill: Bill | null; onClose: () => voi
         {patient ? (
           <button
             type="button"
-            onClick={() => setSharing(receiptDoc(business, patient, bill, currency))}
+            onClick={() => setSharing(receiptDoc(business, patient, bill, currency, lang))}
             className={secondaryBtnClass}
           >
             <Share2 className="h-4 w-4" />

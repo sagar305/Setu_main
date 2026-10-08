@@ -12,10 +12,13 @@ import {
   type Doctor,
   type Patient,
   type RxLine,
+  type Sex,
   type Vitals,
   type Visit,
   billLines,
 } from "./types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 
 // ---------------------------------------------------------------------------
 // Age
@@ -55,19 +58,51 @@ export function ageFromDob(dob: string, asOf: string = todayIso()): Age {
 }
 
 /** "34 y" / "8 m" — under 2 years reads in months, per §5. */
-export function formatAge(age: Age | null): string {
+/** "34 y", or months under two, with the unit written in `lang`. */
+export function formatAge(age: Age | null, lang: LanguageCode): string {
   if (!age) return "";
   if (age.years < 2) {
     const totalMonths = age.years * 12 + age.months;
-    return `${totalMonths} m`;
+    return fill(translate(lang, "clAgeMonths"), { n: totalMonths });
   }
-  return `${age.years} y`;
+  return fill(translate(lang, "clAgeYears"), { n: age.years });
+}
+
+const SEX_KEYS: Record<Sex, TKey> = {
+  male: "clSexMale",
+  female: "clSexFemale",
+  other: "clSexOther",
+};
+
+const SEX_SHORT_KEYS: Record<Sex, TKey> = {
+  male: "clSexShortMale",
+  female: "clSexShortFemale",
+  other: "clSexShortOther",
+};
+
+export function sexLabel(sex: Sex, lang: LanguageCode): string {
+  const key = SEX_KEYS[sex];
+  return key ? translate(lang, key) : "";
+}
+
+/**
+ * The single letter on the patient strip. It used to be the first character of
+ * the stored value, which is English, so "M" turned up in the middle of a
+ * Hindi prescription and an Arabic one.
+ */
+export function sexShort(sex: Sex, lang: LanguageCode): string {
+  const key = SEX_SHORT_KEYS[sex];
+  return key ? translate(lang, key) : "";
 }
 
 /** "34 y / M" — the form that goes on the patient strip and the Rx. */
-export function formatAgeSex(patient: Patient, asOf?: string): string {
-  const age = formatAge(patientAge(patient, asOf));
-  const sex = patient.sex ? patient.sex.charAt(0).toUpperCase() : "";
+export function formatAgeSex(
+  patient: Patient,
+  lang: LanguageCode,
+  asOf?: string
+): string {
+  const age = formatAge(patientAge(patient, asOf), lang);
+  const sex = patient.sex ? sexShort(patient.sex, lang) : "";
   return [age, sex].filter(Boolean).join(" / ");
 }
 

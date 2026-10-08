@@ -22,6 +22,7 @@ import {
 } from "@/components/tools/FreePos/ui";
 import { SendQueue } from "@/components/tools/Tuition/SendQueue";
 import type { NavigateFn } from "./nav";
+import { useI18n } from "@/lib/i18n";
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -93,6 +94,7 @@ function RankedList({
 }
 
 export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { lang } = useI18n();
   const { visits, appointments, bills, patients, doctors, business, settings } = useClinic();
 
   const today = todayIso();
@@ -238,7 +240,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         doctorName: doctorName(visit.doctorId),
         clinicName: business?.name ?? "",
         clinicPhone: business?.phone ?? "",
-        date: formatDate(dueOn),
+        date: formatDate(dueOn, lang),
       }),
     };
   });
@@ -364,7 +366,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             rows={footfall
               .slice(-14)
               .map(([date, row]) => ({
-                label: formatDate(date),
+                label: formatDate(date, lang),
                 value: row.total,
                 sub: `${row.fresh} new`,
               }))}
@@ -554,7 +556,7 @@ export function ReportsScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                       {patient?.name ?? "Unknown"}
                       <span className="text-muted"> · {visit.diagnosis || "No diagnosis"}</span>
                     </button>
-                    <span className="shrink-0 text-xs text-muted">{formatDate(dueOn)}</span>
+                    <span className="shrink-0 text-xs text-muted">{formatDate(dueOn, lang)}</span>
                   </li>
                 );
               })}

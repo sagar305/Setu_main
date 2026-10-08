@@ -14,6 +14,10 @@
 // collide.
 
 import type { StoreName } from "@/lib/pos/db";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { relabelSeed } from "@/lib/i18n/seed-labels";
+import { translate, type TKey } from "@/lib/i18n/translate";
 
 // ---------------------------------------------------------------------------
 // Doctors
@@ -137,14 +141,24 @@ export const ACTIVE_STATUSES: AppointmentStatus[] = [
   "done",
 ];
 
-export const STATUS_LABELS: Record<AppointmentStatus, string> = {
-  booked: "Booked",
-  waiting: "Waiting",
-  "in-consult": "In consult",
-  done: "Done",
-  "no-show": "No-show",
-  cancelled: "Cancelled",
+/**
+ * The status a record stores is the coded value above, never its label — a
+ * queue saved while the front desk was reading Hindi must still be readable,
+ * and filterable, on the English screen. Only the display follows the reader.
+ */
+const STATUS_KEYS: Record<AppointmentStatus, TKey> = {
+  booked: "clStBooked",
+  waiting: "clStWaiting",
+  "in-consult": "clStInConsult",
+  done: "clStDone",
+  "no-show": "clStNoShow",
+  cancelled: "clStCancelled",
 };
+
+export function statusLabel(status: AppointmentStatus, lang: LanguageCode): string {
+  const key = STATUS_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 // ---------------------------------------------------------------------------
 // Visits — the clinical record
@@ -199,26 +213,41 @@ export const MEDICINE_FORMS: MedicineForm[] = [
   "other",
 ];
 
-/** Short form printed on the Rx line — "Tab.", "Cap.", "Syp." */
-export const FORM_SHORT: Record<MedicineForm, string> = {
-  tablet: "Tab.",
-  capsule: "Cap.",
-  syrup: "Syp.",
-  injection: "Inj.",
-  drops: "Drops",
-  ointment: "Oint.",
-  inhaler: "Inh.",
-  sachet: "Sach.",
+/**
+ * Short form printed on the Rx line — "Tab.", "Cap.", "Syp." A pharmacist
+ * reads this off the paper, so it is written in the language the prescription
+ * is printed in. `other` has no prefix in any language.
+ */
+const FORM_SHORT_KEYS: Record<MedicineForm, TKey | ""> = {
+  tablet: "clFormTablet",
+  capsule: "clFormCapsule",
+  syrup: "clFormSyrup",
+  injection: "clFormInjection",
+  drops: "clFormDrops",
+  ointment: "clFormOintment",
+  inhaler: "clFormInhaler",
+  sachet: "clFormSachet",
   other: "",
 };
 
+export function formShort(form: MedicineForm, lang: LanguageCode): string {
+  const key = FORM_SHORT_KEYS[form];
+  return key ? translate(lang, key) : "";
+}
+
 export type RxTiming = "before-food" | "after-food" | "with-food" | "";
 
-export const TIMING_LABELS: Record<Exclude<RxTiming, "">, string> = {
-  "before-food": "Before food",
-  "after-food": "After food",
-  "with-food": "With food",
+const TIMING_KEYS: Record<Exclude<RxTiming, "">, TKey> = {
+  "before-food": "clTimingBeforeFood",
+  "after-food": "clTimingAfterFood",
+  "with-food": "clTimingWithFood",
 };
+
+export function timingLabel(timing: RxTiming, lang: LanguageCode): string {
+  if (!timing) return "";
+  const key = TIMING_KEYS[timing];
+  return key ? translate(lang, key) : "";
+}
 
 export type RxLine = {
   id: string;
@@ -396,7 +425,19 @@ export type ClinicSettings = {
   autoLockMinutes?: number;
 };
 
+/**
+ * The seeded payment modes. The clinic edits this list in Settings and the
+ * chosen mode is written onto the bill, so the stored strings stay as they
+ * were seeded — in English — and `paymentModeLabel` is what a reader sees.
+ * A mode the clinic typed themselves is their words and is shown as written.
+ */
 export const DEFAULT_PAYMENT_MODES = ["Cash", "UPI", "Card"];
+
+const PAYMENT_MODE_KEYS: TKey[] = ["clPayCash", "clPayUpi", "clPayCard"];
+
+export function paymentModeLabel(mode: string, lang: LanguageCode): string {
+  return relabelSeed(mode, PAYMENT_MODE_KEYS, lang);
+}
 
 /**
  * The disclaimer that prints under every prescription, and the notice shown
@@ -404,24 +445,53 @@ export const DEFAULT_PAYMENT_MODES = ["Cash", "UPI", "Card"];
  * and makes clear the prescribing decision belongs to the doctor. It is not
  * legal advice and the clinic can rewrite it in Settings.
  */
-export const DEFAULT_RX_FOOTER =
-  "This prescription is valid only for the named patient. Not valid for medico-legal purposes.";
+export function defaultRxFooter(lang: LanguageCode): string {
+  return translate(lang, "clRxFooterDefault");
+}
 
-export const FIRST_RUN_DISCLAIMER =
-  "Setu Clinic Manager is a record-keeping tool. It does not check doses, interactions or allergies, and it gives no clinical advice — every prescribing decision is the treating doctor's. Patient data is stored only in this browser on this device, so keep your own backups.";
+/**
+ * The footer as it should print: the clinic's own wording when they rewrote
+ * it, and our seed in the language the prescription is being printed in when
+ * they left it alone.
+ */
+export function rxFooterFor(text: string, lang: LanguageCode): string {
+  return relabelSeed(text, ["clRxFooterDefault"], lang);
+}
 
-export const DEFAULT_MESSAGE_TEMPLATES: Record<ClinicTemplateKey, string> = {
-  appointmentConfirmed:
-    "Namaste {{patientName}}, your appointment at {{clinicName}} is confirmed for {{date}} at {{time}} with {{doctorName}}. — {{clinicPhone}}",
-  appointmentReminder:
-    "Reminder: your appointment at {{clinicName}} is tomorrow, {{date}} at {{time}}. Reply here to reschedule.",
-  followUpDue:
-    "Namaste {{patientName}}, {{doctorName}} advised a review around {{date}}. Shall we book you in?",
-  reportReady: "Your reports are ready for collection at {{clinicName}}.",
-  duesReminder:
-    "Namaste {{patientName}}, ₹{{amount}} is pending at {{clinicName}}. Pay by UPI: {{upiId}}",
+export function firstRunDisclaimer(lang: LanguageCode): string {
+  return translate(lang, "clFirstRunDisclaimer");
+}
+
+const TEMPLATE_KEYS: Record<ClinicTemplateKey, TKey> = {
+  appointmentConfirmed: "clTplApptConfirmed",
+  appointmentReminder: "clTplApptReminder",
+  followUpDue: "clTplFollowUpDue",
+  reportReady: "clTplReportReady",
+  duesReminder: "clTplDuesReminder",
 };
 
+/**
+ * The seeded WhatsApp templates. A patient reads these, so they are seeded in
+ * the language the clinic set up in; the clinic can rewrite any of them.
+ */
+export function defaultMessageTemplates(
+  lang: LanguageCode
+): Record<ClinicTemplateKey, string> {
+  return {
+    appointmentConfirmed: translate(lang, TEMPLATE_KEYS.appointmentConfirmed),
+    appointmentReminder: translate(lang, TEMPLATE_KEYS.appointmentReminder),
+    followUpDue: translate(lang, TEMPLATE_KEYS.followUpDue),
+    reportReady: translate(lang, TEMPLATE_KEYS.reportReady),
+    duesReminder: translate(lang, TEMPLATE_KEYS.duesReminder),
+  };
+}
+
+/**
+ * The shape every stored settings record is merged over, so a record written
+ * by an older version gains new fields. The reader-facing seeds in it — the
+ * Rx footer and the message templates — are left empty here and filled by
+ * `defaultClinicSettings` at the two points that actually seed a clinic.
+ */
 export const DEFAULT_CLINIC_SETTINGS: ClinicSettings = {
   id: "main",
   patientCodePrefix: "SC-",
@@ -437,9 +507,15 @@ export const DEFAULT_CLINIC_SETTINGS: ClinicSettings = {
   paymentModes: [...DEFAULT_PAYMENT_MODES],
   rxPaperSize: "a4",
   printClinicHeader: true,
-  rxFooterText: DEFAULT_RX_FOOTER,
+  rxFooterText: "",
   showVitalsOnRx: true,
-  messageTemplates: { ...DEFAULT_MESSAGE_TEMPLATES },
+  messageTemplates: {
+    appointmentConfirmed: "",
+    appointmentReminder: "",
+    followUpDue: "",
+    reportReady: "",
+    duesReminder: "",
+  },
   receiptPaperSize: "80mm",
   disclaimerAcceptedAt: null,
   lastBackupAt: null,
@@ -448,6 +524,15 @@ export const DEFAULT_CLINIC_SETTINGS: ClinicSettings = {
   pinSalt: "",
   autoLockMinutes: 0,
 };
+
+/** A fresh clinic's settings, with the patient-facing text in `lang`. */
+export function defaultClinicSettings(lang: LanguageCode): ClinicSettings {
+  return {
+    ...DEFAULT_CLINIC_SETTINGS,
+    rxFooterText: defaultRxFooter(lang),
+    messageTemplates: defaultMessageTemplates(lang),
+  };
+}
 
 /**
  * `prefix + zero-padded serial`, padded to 4. Serials past 9999 simply grow
@@ -513,24 +598,43 @@ export function todayIso(): string {
   return toDateKey(new Date());
 }
 
-/** "2026-08-11" → "11 Aug 2026" */
-export function formatDate(dateKey: string): string {
+/** "2026-08-11" → "11 Aug 2026", with the month name in `lang`. */
+export function formatDate(dateKey: string, lang: LanguageCode): string {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) return dateKey;
   const [y, m, d] = dateKey.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString("en-IN", {
+  return new Date(y, m - 1, d).toLocaleDateString(intlLocaleFor(lang), {
     day: "numeric",
     month: "short",
     year: "numeric",
   });
 }
 
-/** "18:00" → "6:00 pm" */
-export function formatTime(time: string): string {
+/**
+ * "2026-08-11" → "11 Aug", for a chart axis with no room for the year.
+ * The axis used to take the first six characters of the full date, which is
+ * "11 Aug" only as long as the date is written in English.
+ */
+export function formatDayMonth(dateKey: string, lang: LanguageCode): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) return dateKey;
+  const [y, m, d] = dateKey.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString(intlLocaleFor(lang), {
+    day: "numeric",
+    month: "short",
+  });
+}
+
+/**
+ * "18:00" → "6:00 pm", written the way `lang` writes a clock time. The
+ * am/pm marker used to be hand-built here, so every language got the English
+ * one in the middle of its own sentence.
+ */
+export function formatTime(time: string, lang: LanguageCode): string {
   if (!/^\d{1,2}:\d{2}$/.test(time)) return time;
   const [h, m] = time.split(":").map(Number);
-  const suffix = h >= 12 ? "pm" : "am";
-  const hour = h % 12 === 0 ? 12 : h % 12;
-  return `${hour}:${String(m).padStart(2, "0")} ${suffix}`;
+  return new Date(2000, 0, 1, h, m).toLocaleTimeString(intlLocaleFor(lang), {
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 /** Shift a date key by N days, staying in local time. */

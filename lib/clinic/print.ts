@@ -13,9 +13,11 @@
 // on screen. Real text goes to the printer; jsPDF is only for share-as-PDF.
 
 import {
-  FORM_SHORT,
-  TIMING_LABELS,
+  formShort,
+  timingLabel,
   formatDate,
+  paymentModeLabel,
+  rxFooterFor,
   visitInvestigations,
   visitMedicines,
   visitVitals,
@@ -26,8 +28,10 @@ import {
   type RxPaperSize,
   type Visit,
 } from "./types";
-import { dosesPerDay, formatAgeSex, patientAge, formatAge } from "./calc";
+import { dosesPerDay, formatAgeSex, patientAge, formatAge, sexLabel } from "./calc";
 import type { Business } from "@/lib/pos/types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 
 // ---------------------------------------------------------------------------
 // Document styling
@@ -77,6 +81,12 @@ const DOC_RULES = `
 `;
 
 export const PREVIEW_CLASS = "rx";
+
+/**
+ * Every label on these documents is read by a patient or a pharmacist, so the
+ * whole sheet is built in one language: the one the clinic is working in.
+ */
+const label = (lang: LanguageCode, key: TKey) => escapeHtml(translate(lang, key));
 
 /** The live preview in the Consult screen renders under this stylesheet. */
 export function previewStyleSheet(): string {
@@ -174,12 +184,13 @@ export type RxContext = {
   doctor: Doctor | null;
   patient: Patient;
   visit: Visit;
+  lang: LanguageCode;
 };
 
 function headerBlock(ctx: RxContext): string {
   // Suppressed when printing onto a pre-printed letterhead pad.
   if (!ctx.settings.printClinicHeader) return "";
-  const { business, doctor } = ctx;
+  const { business, doctor, lang } = ctx;
   const clinicLines = [business?.address, business?.phone].filter(Boolean).join(" · ");
   const doctorLines = [doctor?.qualifications, doctor?.speciality].filter(Boolean).join(" · ");
   return `
@@ -193,7 +204,9 @@ function headerBlock(ctx: RxContext): string {
         ${doctorLines ? `<div class="doctor-meta">${escapeHtml(doctorLines)}</div>` : ""}
         ${
           doctor?.registrationNo
-            ? `<div class="doctor-meta">Reg. No: ${escapeHtml(doctor.registrationNo)}</div>`
+            ? `<div class="doctor-meta">${label(lang, "clDocRegNo")}: ${escapeHtml(
+                doctor.registrationNo
+              )}</div>`
             : ""
         }
       </div>
@@ -203,32 +216,38 @@ function headerBlock(ctx: RxContext): string {
 }
 
 function patientBlock(ctx: RxContext, showVitals: boolean): string {
-  const { patient, visit, settings } = ctx;
-  const age = formatAgeSex(patient, visit.date);
+  const { patient, visit, settings, lang } = ctx;
+  const age = formatAgeSex(patient, lang, visit.date);
   const cells = [
     `<span><b>${escapeHtml(patient.name)}</b></span>`,
     age ? `<span>${escapeHtml(age)}</span>` : "",
-    patient.code ? `<span>File: ${escapeHtml(patient.code)}</span>` : "",
-    `<span>Date: ${escapeHtml(formatDate(visit.date))}</span>`,
+    patient.code
+      ? `<span>${label(lang, "clDocFile")}: ${escapeHtml(patient.code)}</span>`
+      : "",
+    `<span>${label(lang, "date")}: ${escapeHtml(formatDate(visit.date, lang))}</span>`,
   ]
     .filter(Boolean)
     .join("");
 
   const allergies = (patient.allergies ?? []).filter(Boolean);
   const allergyBanner = allergies.length
-    ? `<div class="allergy">ALLERGIES: ${escapeHtml(allergies.join(", "))}</div>`
+    ? `<div class="allergy">${label(lang, "clDocAllergies")}: ${escapeHtml(
+        allergies.join(", ")
+      )}</div>`
     : "";
 
   let vitalsRow = "";
   if (showVitals && settings.showVitalsOnRx) {
     const v = visitVitals(visit);
     const parts = [
+      // BP, SpO₂ and BMI are the same three letters on a chart anywhere; the
+      // words beside them are not.
       v.bp ? `BP ${v.bp}` : "",
-      v.pulse ? `Pulse ${v.pulse}/min` : "",
-      v.tempF ? `Temp ${v.tempF}°F` : "",
+      v.pulse ? `${translate(lang, "clVitPulse")} ${v.pulse}/min` : "",
+      v.tempF ? `${translate(lang, "clVitTemp")} ${v.tempF}°F` : "",
       v.spo2 ? `SpO₂ ${v.spo2}%` : "",
-      v.weightKg ? `Wt ${v.weightKg} kg` : "",
-      v.heightCm ? `Ht ${v.heightCm} cm` : "",
+      v.weightKg ? `${translate(lang, "clVitWeight")} ${v.weightKg} kg` : "",
+      v.heightCm ? `${translate(lang, "clVitHeight")} ${v.heightCm} cm` : "",
       v.bmi ? `BMI ${v.bmi}` : "",
     ].filter(Boolean);
     if (parts.length) {
@@ -251,21 +270,23 @@ function textSection(label: string, value: string): string {
   `;
 }
 
-function medicinesBlock(visit: Visit): string {
+function medicinesBlock(visit: Visit, lang: LanguageCode): string {
   const lines = visitMedicines(visit);
   if (lines.length === 0) return "";
   const rows = lines
     .map((line, index) => {
-      const title = [FORM_SHORT[line.form] ?? "", line.name, line.strength]
+      const title = [formShort(line.form, lang), line.name, line.strength]
         .filter(Boolean)
         .join(" ");
       const notes = [
-        line.timing ? TIMING_LABELS[line.timing] : "",
+        timingLabel(line.timing, lang),
         line.instructions,
       ]
         .filter(Boolean)
         .join(" · ");
-      const duration = line.durationDays ? `${line.durationDays} days` : "";
+      const duration = line.durationDays
+        ? fill(translate(lang, "clDocDaysN"), { n: line.durationDays })
+        : "";
       const quantity = line.quantity ? `${line.quantity}` : "";
       return `
         <tr>
@@ -288,7 +309,13 @@ function medicinesBlock(visit: Visit): string {
       <table>
         <thead>
           <tr>
-            <th></th><th>Medicine</th><th>Dosage</th><th>Duration</th><th>Qty</th>
+            <th></th><th>${label(lang, "clDocMedicine")}</th><th>${label(
+              lang,
+              "clDocDosage"
+            )}</th><th>${label(lang, "clDocDuration")}</th><th>${label(
+              lang,
+              "quantity"
+            )}</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -297,27 +324,31 @@ function medicinesBlock(visit: Visit): string {
   `;
 }
 
-function investigationsBlock(visit: Visit): string {
+function investigationsBlock(visit: Visit, lang: LanguageCode): string {
   const items = visitInvestigations(visit).filter(Boolean);
   if (items.length === 0) return "";
   return `
     <div class="section">
-      <div class="section-label">Investigations advised</div>
+      <div class="section-label">${label(lang, "clDocInvestigations")}</div>
       <ol class="list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
     </div>
   `;
 }
 
-function followUpBlock(visit: Visit): string {
+function followUpBlock(visit: Visit, lang: LanguageCode): string {
   if (!visit.followUpDays) return "";
-  return `<div class="followup">Review after ${visit.followUpDays} days</div>`;
+  const text = fill(translate(lang, "clDocReviewAfter"), { n: visit.followUpDays });
+  return `<div class="followup">${escapeHtml(text)}</div>`;
 }
 
-function signatureBlock(doctor: Doctor | null): string {
+function signatureBlock(doctor: Doctor | null, lang: LanguageCode): string {
   const signature = doctor?.signatureDataUrl
     ? `<div><img src="${doctor.signatureDataUrl}" alt=""></div>`
     : "";
-  const caption = [doctor?.name, doctor?.registrationNo ? `Reg. No: ${doctor.registrationNo}` : ""]
+  const regNo = doctor?.registrationNo
+    ? `${translate(lang, "clDocRegNo")}: ${doctor.registrationNo}`
+    : "";
+  const caption = [doctor?.name, regNo]
     .filter(Boolean)
     .join(" · ");
   return `
@@ -328,26 +359,29 @@ function signatureBlock(doctor: Doctor | null): string {
   `;
 }
 
-function footerBlock(settings: ClinicSettings): string {
+function footerBlock(settings: ClinicSettings, lang: LanguageCode): string {
   if (!settings.rxFooterText) return "";
-  return `<div class="footer">${escapeHtml(settings.rxFooterText)}</div>`;
+  return `<div class="footer">${escapeHtml(
+    rxFooterFor(settings.rxFooterText, lang)
+  )}</div>`;
 }
 
 /** The full prescription, in the order spec §7 lists it. */
 export function buildPrescriptionHtml(ctx: RxContext): string {
-  const { visit } = ctx;
+  const { visit, lang } = ctx;
+  const t = (key: TKey) => translate(lang, key);
   return [
     headerBlock(ctx),
     patientBlock(ctx, true),
-    textSection("Complaints", visit.complaints),
-    textSection("Findings", visit.findings),
-    textSection("Diagnosis", visit.diagnosis),
-    medicinesBlock(visit),
-    investigationsBlock(visit),
-    textSection("Advice", visit.advice),
-    followUpBlock(visit),
-    signatureBlock(ctx.doctor),
-    footerBlock(ctx.settings),
+    textSection(t("clDocComplaints"), visit.complaints),
+    textSection(t("clDocFindings"), visit.findings),
+    textSection(t("clDocDiagnosis"), visit.diagnosis),
+    medicinesBlock(visit, lang),
+    investigationsBlock(visit, lang),
+    textSection(t("clDocAdvice"), visit.advice),
+    followUpBlock(visit, lang),
+    signatureBlock(ctx.doctor, lang),
+    footerBlock(ctx.settings, lang),
   ].join("");
 }
 
@@ -355,7 +389,7 @@ export function printPrescription(ctx: RxContext): boolean {
   return printHtml(
     buildPrescriptionHtml(ctx),
     ctx.settings.rxPaperSize,
-    `Prescription — ${ctx.patient.name}`
+    `${translate(ctx.lang, "clDocRxTitle")} — ${ctx.patient.name}`
   );
 }
 
@@ -370,11 +404,11 @@ export function buildInvestigationSlipHtml(ctx: RxContext): string {
     headerBlock(ctx),
     patientBlock(ctx, false),
     `<div class="section">
-      <div class="section-label">Investigations advised</div>
+      <div class="section-label">${label(ctx.lang, "clDocInvestigations")}</div>
       <ol class="list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
     </div>`,
-    signatureBlock(ctx.doctor),
-    footerBlock(ctx.settings),
+    signatureBlock(ctx.doctor, ctx.lang),
+    footerBlock(ctx.settings, ctx.lang),
   ].join("");
 }
 
@@ -382,7 +416,7 @@ export function printInvestigationSlip(ctx: RxContext): boolean {
   return printHtml(
     buildInvestigationSlipHtml(ctx),
     "a5",
-    `Investigations — ${ctx.patient.name}`
+    `${translate(ctx.lang, "clDocInvestigationsShort")} — ${ctx.patient.name}`
   );
 }
 
@@ -396,7 +430,8 @@ export function buildChartHtml(
   settings: ClinicSettings,
   patient: Patient,
   visits: Visit[],
-  doctors: Doctor[]
+  doctors: Doctor[],
+  lang: LanguageCode
 ): string {
   const doctorName = (id: string) => doctors.find((d) => d.id === id)?.name ?? "";
   const age = patientAge(patient);
@@ -404,12 +439,12 @@ export function buildChartHtml(
     <div class="head">
       <div>
         <div class="clinic-name">${escapeHtml(business?.name ?? "")}</div>
-        <div class="clinic-meta">Patient record</div>
+        <div class="clinic-meta">${label(lang, "clDocPatientRecord")}</div>
       </div>
       <div class="head-right">
         <div class="doctor-name">${escapeHtml(patient.name)}</div>
         <div class="doctor-meta">${escapeHtml(
-          [patient.code, formatAge(age), patient.sex, patient.phone].filter(Boolean).join(" · ")
+          [patient.code, formatAge(age, lang), sexLabel(patient.sex, lang), patient.phone].filter(Boolean).join(" · ")
         )}</div>
       </div>
     </div>
@@ -418,10 +453,12 @@ export function buildChartHtml(
 
   const alerts = [
     (patient.allergies ?? []).length
-      ? `ALLERGIES: ${(patient.allergies ?? []).join(", ")}`
+      ? `${translate(lang, "clDocAllergies")}: ${(patient.allergies ?? []).join(", ")}`
       : "",
     (patient.chronicConditions ?? []).length
-      ? `CHRONIC: ${(patient.chronicConditions ?? []).join(", ")}`
+      ? `${translate(lang, "clDocChronic")}: ${(patient.chronicConditions ?? []).join(
+          ", "
+        )}`
       : "",
   ].filter(Boolean);
   const alertBlock = alerts.length
@@ -434,53 +471,64 @@ export function buildChartHtml(
           const v = visitVitals(visit);
           const vitals = [
             v.bp ? `BP ${v.bp}` : "",
-            v.pulse ? `Pulse ${v.pulse}` : "",
-            v.tempF ? `Temp ${v.tempF}°F` : "",
-            v.weightKg ? `Wt ${v.weightKg} kg` : "",
+            v.pulse ? `${translate(lang, "clVitPulse")} ${v.pulse}` : "",
+            v.tempF ? `${translate(lang, "clVitTemp")} ${v.tempF}°F` : "",
+            v.weightKg ? `${translate(lang, "clVitWeight")} ${v.weightKg} kg` : "",
             v.bmi ? `BMI ${v.bmi}` : "",
           ]
             .filter(Boolean)
             .join(" · ");
           const meds = visitMedicines(visit)
             .map((line) =>
-              [FORM_SHORT[line.form] ?? "", line.name, line.strength, line.frequency]
+              [formShort(line.form, lang), line.name, line.strength, line.frequency]
                 .filter(Boolean)
                 .join(" ")
             )
             .join("; ");
           return `
             <div class="chart-visit">
-              <div class="chart-date">${escapeHtml(formatDate(visit.date))} — ${escapeHtml(
+              <div class="chart-date">${escapeHtml(formatDate(visit.date, lang))} — ${escapeHtml(
                 doctorName(visit.doctorId)
               )}</div>
               ${vitals ? `<div class="med-note">${escapeHtml(vitals)}</div>` : ""}
               ${
                 visit.complaints
-                  ? `<div class="section-body"><b>Complaints:</b> ${multiline(visit.complaints)}</div>`
+                  ? `<div class="section-body"><b>${label(
+                      lang,
+                      "clDocComplaints"
+                    )}:</b> ${multiline(visit.complaints)}</div>`
                   : ""
               }
               ${
                 visit.diagnosis
-                  ? `<div class="section-body"><b>Diagnosis:</b> ${multiline(visit.diagnosis)}</div>`
+                  ? `<div class="section-body"><b>${label(
+                      lang,
+                      "clDocDiagnosis"
+                    )}:</b> ${multiline(visit.diagnosis)}</div>`
                   : ""
               }
               ${meds ? `<div class="section-body"><b>Rx:</b> ${escapeHtml(meds)}</div>` : ""}
               ${
                 visit.advice
-                  ? `<div class="section-body"><b>Advice:</b> ${multiline(visit.advice)}</div>`
+                  ? `<div class="section-body"><b>${label(
+                      lang,
+                      "clDocAdvice"
+                    )}:</b> ${multiline(visit.advice)}</div>`
                   : ""
               }
             </div>
           `;
         })
         .join("")
-    : `<div class="section-body muted">No consultations recorded yet.</div>`;
+    : `<div class="section-body muted">${label(lang, "clDocNoConsults")}</div>`;
 
   return [
     header,
     alertBlock,
-    `<div class="section"><div class="section-label">Consultation history (${visits.length})</div>${body}</div>`,
-    footerBlock(settings),
+    `<div class="section"><div class="section-label">${escapeHtml(
+      fill(translate(lang, "clDocConsultHistory"), { count: visits.length })
+    )}</div>${body}</div>`,
+    footerBlock(settings, lang),
   ].join("");
 }
 
@@ -489,12 +537,13 @@ export function printChart(
   settings: ClinicSettings,
   patient: Patient,
   visits: Visit[],
-  doctors: Doctor[]
+  doctors: Doctor[],
+  lang: LanguageCode
 ): boolean {
   return printHtml(
-    buildChartHtml(business, settings, patient, visits, doctors),
+    buildChartHtml(business, settings, patient, visits, doctors, lang),
     "a4",
-    `Patient record — ${patient.name}`
+    `${translate(lang, "clDocPatientRecord")} — ${patient.name}`
   );
 }
 
@@ -524,10 +573,10 @@ export async function prescriptionToPdfBlob(ctx: RxContext): Promise<Blob> {
 }
 
 /** Rough per-day dose count, surfaced next to the quantity field in the pad. */
-export function describeFrequency(frequency: string): string {
+export function describeFrequency(frequency: string, lang: LanguageCode): string {
   const perDay = dosesPerDay(frequency);
   if (perDay === null) return "";
-  return `${perDay} per day`;
+  return fill(translate(lang, "clDocPerDay"), { n: perDay });
 }
 
 // ---------------------------------------------------------------------------
@@ -580,6 +629,7 @@ export type ReceiptContext = {
   paid: number;
   paymentMode: string;
   currencySymbol: string;
+  lang: LanguageCode;
   /** Data URL of the UPI QR, when a UPI ID is configured. */
   upiQrDataUrl?: string;
 };
@@ -589,7 +639,7 @@ function money(value: number, symbol: string): string {
 }
 
 export function buildReceiptHtml(ctx: ReceiptContext): string {
-  const { business, patient, currencySymbol: sym } = ctx;
+  const { business, patient, currencySymbol: sym, lang } = ctx;
   const due = Math.max(0, ctx.total - ctx.paid);
 
   const lineRows = ctx.lines
@@ -606,17 +656,27 @@ export function buildReceiptHtml(ctx: ReceiptContext): string {
       ${business?.phone ? `<div class="sm">${escapeHtml(business.phone)}</div>` : ""}
     </div>
     <div class="rule"></div>
-    <div class="row sm"><span>Receipt</span><span>${escapeHtml(ctx.receiptNo)}</span></div>
-    <div class="row sm"><span>Date</span><span>${escapeHtml(formatDate(ctx.date))}</span></div>
+    <div class="row sm"><span>${label(lang, "clDocReceipt")}</span><span>${escapeHtml(
+      ctx.receiptNo
+    )}</span></div>
+    <div class="row sm"><span>${label(lang, "date")}</span><span>${escapeHtml(
+      formatDate(ctx.date, lang)
+    )}</span></div>
     ${
       patient
-        ? `<div class="row sm"><span>Patient</span><span>${escapeHtml(patient.name)}</span></div>
-           <div class="row sm"><span>File no.</span><span>${escapeHtml(patient.code)}</span></div>`
+        ? `<div class="row sm"><span>${label(lang, "clDocPatient")}</span><span>${escapeHtml(
+            patient.name
+          )}</span></div>
+           <div class="row sm"><span>${label(lang, "clDocFileNo")}</span><span>${escapeHtml(
+             patient.code
+           )}</span></div>`
         : ""
     }
     ${
       ctx.doctorName
-        ? `<div class="row sm"><span>Doctor</span><span>${escapeHtml(ctx.doctorName)}</span></div>`
+        ? `<div class="row sm"><span>${label(lang, "clDocDoctor")}</span><span>${escapeHtml(
+            ctx.doctorName
+          )}</span></div>`
         : ""
     }
     <div class="rule"></div>
@@ -624,19 +684,31 @@ export function buildReceiptHtml(ctx: ReceiptContext): string {
     <div class="rule"></div>
     ${
       ctx.discount > 0
-        ? `<div class="row"><span>Discount</span><span>-${money(ctx.discount, sym)}</span></div>`
+        ? `<div class="row"><span>${label(lang, "clDocDiscount")}</span><span>-${money(
+            ctx.discount,
+            sym
+          )}</span></div>`
         : ""
     }
-    <div class="row b"><span>Total</span><span>${money(ctx.total, sym)}</span></div>
-    <div class="row"><span>Paid (${escapeHtml(ctx.paymentMode)})</span><span>${money(
-      ctx.paid,
+    <div class="row b"><span>${label(lang, "total")}</span><span>${money(
+      ctx.total,
       sym
     )}</span></div>
-    ${due > 0 ? `<div class="row b"><span>Balance due</span><span>${money(due, sym)}</span></div>` : ""}
+    <div class="row"><span>${label(lang, "clDocPaid")} (${escapeHtml(
+      paymentModeLabel(ctx.paymentMode, lang)
+    )})</span><span>${money(ctx.paid, sym)}</span></div>
+    ${
+      due > 0
+        ? `<div class="row b"><span>${label(lang, "clDocBalanceDue")}</span><span>${money(
+            due,
+            sym
+          )}</span></div>`
+        : ""
+    }
     ${ctx.upiQrDataUrl ? `<img class="qr" src="${ctx.upiQrDataUrl}" alt="">` : ""}
-    ${ctx.upiQrDataUrl ? `<div class="c sm">Scan to pay by UPI</div>` : ""}
+    ${ctx.upiQrDataUrl ? `<div class="c sm">${label(lang, "clDocScanUpi")}</div>` : ""}
     <div class="solid"></div>
-    <div class="c sm">Thank you — get well soon.</div>
+    <div class="c sm">${label(lang, "clDocThankYou")}</div>
   `;
 }
 

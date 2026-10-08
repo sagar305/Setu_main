@@ -16,7 +16,7 @@ import { generateId } from "@/lib/pos/types";
 import { useClinic } from "@/lib/clinic/store";
 import { parseBackupFile, backupSummary, type ClinicBackup } from "@/lib/clinic/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/clinic/sheetSync";
-import { CLINIC_PLACEHOLDERS } from "@/lib/clinic/messages";
+import { clinicPlaceholders } from "@/lib/clinic/messages";
 import { SEED_MEDICINE_COUNT } from "@/lib/clinic/medicines";
 import {
   PIN_MAX_LENGTH,
@@ -28,8 +28,8 @@ import {
 } from "@/lib/pos/pin";
 import { CURRENCIES } from "@/lib/pos/types";
 import {
-  DEFAULT_MESSAGE_TEMPLATES,
-  DEFAULT_RX_FOOTER,
+  defaultMessageTemplates,
+  defaultRxFooter,
   MEDICINE_FORMS,
   formatDate,
   formatPatientCode,
@@ -54,6 +54,7 @@ import {
   secondaryBtnClass,
 } from "@/components/tools/FreePos/ui";
 import { SignaturePad } from "./SignaturePad";
+import { useI18n } from "@/lib/i18n";
 
 const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -81,6 +82,7 @@ function SavedFlash({ show }: { show: boolean }) {
 }
 
 export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
+  const { lang } = useI18n();
   const {
     business,
     settings,
@@ -191,7 +193,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
           </label>
           <button
             type="button"
-            onClick={() => patch({ rxFooterText: DEFAULT_RX_FOOTER }, "rx")}
+            onClick={() => patch({ rxFooterText: defaultRxFooter(lang) }, "rx")}
             className="text-xs font-semibold text-indigo underline"
           >
             Reset footer to the default wording
@@ -615,6 +617,7 @@ function ScheduleSection({
   onPatch: (updates: Partial<Omit<ClinicSettings, "id">>, key: string) => Promise<void>;
   flash: string;
 }) {
+  const { lang } = useI18n();
   const [breakLabel, setBreakLabel] = useState("Lunch");
   const [breakStart, setBreakStart] = useState("13:00");
   const [breakEnd, setBreakEnd] = useState("14:00");
@@ -777,7 +780,7 @@ function ScheduleSection({
               className="flex items-center justify-between gap-3 rounded-lg border border-muted-line/30 px-3 py-1.5 text-sm"
             >
               <span className="text-ink">
-                {formatDate(item.date)}
+                {formatDate(item.date, lang)}
                 {item.reason ? ` · ${item.reason}` : ""}
               </span>
               <button
@@ -1229,6 +1232,7 @@ function TemplatesSection({
   onPatch: (updates: Partial<Omit<ClinicSettings, "id">>, key: string) => Promise<void>;
   flash: string;
 }) {
+  const { lang } = useI18n();
   return (
     <Section
       title="Message templates"
@@ -1260,7 +1264,7 @@ function TemplatesSection({
       <div className="mt-4 rounded-lg bg-cream/50 p-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-muted">Variables</p>
         <ul className="mt-2 grid gap-1 sm:grid-cols-2">
-          {CLINIC_PLACEHOLDERS.map((item) => (
+          {clinicPlaceholders(lang).map((item) => (
             <li key={item.token} className="text-xs text-muted">
               <code className="rounded bg-white px-1 py-0.5 text-ink">{item.token}</code>{" "}
               {item.meaning}
@@ -1272,7 +1276,7 @@ function TemplatesSection({
       <div className="mt-3 flex items-center gap-3">
         <button
           type="button"
-          onClick={() => onPatch({ messageTemplates: { ...DEFAULT_MESSAGE_TEMPLATES } }, "templates")}
+          onClick={() => onPatch({ messageTemplates: defaultMessageTemplates(lang) }, "templates")}
           className="text-xs font-semibold text-indigo underline"
         >
           Reset all to defaults

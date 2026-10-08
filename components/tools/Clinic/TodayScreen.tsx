@@ -19,7 +19,7 @@ import {
   formatAgeSex,
 } from "@/lib/clinic/calc";
 import {
-  STATUS_LABELS,
+  statusLabel,
   formatTime,
   todayIso,
   type Appointment,
@@ -38,6 +38,7 @@ import {
 } from "@/components/tools/FreePos/ui";
 import type { NavigateFn } from "./nav";
 import { PatientPicker } from "./PatientPicker";
+import { useI18n } from "@/lib/i18n";
 
 const STATUS_PILL: Record<AppointmentStatus, string> = {
   booked: "bg-cream text-muted",
@@ -49,6 +50,7 @@ const STATUS_PILL: Record<AppointmentStatus, string> = {
 };
 
 export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { lang } = useI18n();
   const {
     appointments,
     patients,
@@ -221,14 +223,14 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         {patient?.name ?? "Unknown patient"}
                       </span>
                       {patient && (
-                        <span className="text-xs text-muted">{formatAgeSex(patient)}</span>
+                        <span className="text-xs text-muted">{formatAgeSex(patient, lang)}</span>
                       )}
                       <span
                         className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
                           STATUS_PILL[appointment.status]
                         }`}
                       >
-                        {STATUS_LABELS[appointment.status]}
+                        {statusLabel(appointment.status, lang)}
                       </span>
                       {waitingFor !== null && appointment.status === "waiting" && (
                         <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-saffron">
@@ -240,7 +242,7 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     <div className="mt-0.5 truncate text-xs text-muted">
                       {[
                         patient?.code,
-                        formatTime(appointment.startTime),
+                        formatTime(appointment.startTime, lang),
                         activeDoctors.length > 1 ? doctorName(appointment.doctorId) : "",
                         appointment.reason,
                       ]

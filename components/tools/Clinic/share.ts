@@ -23,8 +23,10 @@ import {
   visitInvestigations,
   visitMedicines,
   visitVitals,
-  FORM_SHORT,
-  TIMING_LABELS,
+  formShort,
+  timingLabel,
+  paymentModeLabel,
+  rxFooterFor,
   type Appointment,
   type Bill,
   type ClinicSettings,
@@ -32,31 +34,39 @@ import {
   type Patient,
   type Visit,
 } from "@/lib/clinic/types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 
 /** Vitals as the prescription prints them, so the two never drift apart. */
-function vitalsLines(visit: Visit, settings: ClinicSettings): string[] {
+function vitalsLines(
+  visit: Visit,
+  settings: ClinicSettings,
+  lang: LanguageCode
+): string[] {
   if (!settings.showVitalsOnRx) return [];
   const v = visitVitals(visit);
   return [
     v.bp ? `BP ${v.bp}` : "",
-    v.pulse ? `Pulse ${v.pulse}/min` : "",
-    v.tempF ? `Temp ${v.tempF}°F` : "",
+    v.pulse ? `${translate(lang, "clVitPulse")} ${v.pulse}/min` : "",
+    v.tempF ? `${translate(lang, "clVitTemp")} ${v.tempF}°F` : "",
     v.spo2 ? `SpO₂ ${v.spo2}%` : "",
-    v.weightKg ? `Wt ${v.weightKg} kg` : "",
-    v.heightCm ? `Ht ${v.heightCm} cm` : "",
+    v.weightKg ? `${translate(lang, "clVitWeight")} ${v.weightKg} kg` : "",
+    v.heightCm ? `${translate(lang, "clVitHeight")} ${v.heightCm} cm` : "",
     v.bmi ? `BMI ${v.bmi}` : "",
   ].filter(Boolean);
 }
 
-function medicineLines(visit: Visit): ShareRxMedicine[] {
+function medicineLines(visit: Visit, lang: LanguageCode): ShareRxMedicine[] {
   return visitMedicines(visit).map((line) => {
-    const note = [line.timing ? TIMING_LABELS[line.timing] : "", line.instructions]
+    const note = [timingLabel(line.timing, lang), line.instructions]
       .filter(Boolean)
       .join(" · ");
     return {
-      n: [FORM_SHORT[line.form] ?? "", line.name, line.strength].filter(Boolean).join(" "),
+      n: [formShort(line.form, lang), line.name, line.strength].filter(Boolean).join(" "),
       f: line.frequency || undefined,
-      d: line.durationDays ? `${line.durationDays} days` : undefined,
+      d: line.durationDays
+        ? fill(translate(lang, "clDocDaysN"), { n: line.durationDays })
+        : undefined,
       q: line.quantity ? String(line.quantity) : undefined,
       nt: note || undefined,
     };
@@ -68,12 +78,13 @@ export function prescriptionDoc(
   settings: ClinicSettings,
   doctor: Doctor | null,
   patient: Patient,
-  visit: Visit
+  visit: Visit,
+  lang: LanguageCode
 ): SharedPrescription {
   const allergies = (patient.allergies ?? []).filter(Boolean);
-  const vitals = vitalsLines(visit, settings);
+  const vitals = vitalsLines(visit, settings, lang);
   const investigations = visitInvestigations(visit).filter(Boolean);
-  const age = formatAgeSex(patient, visit.date);
+  const age = formatAgeSex(patient, lang, visit.date);
 
   return {
     t: "rx",
@@ -91,11 +102,11 @@ export function prescriptionDoc(
     vit: vitals.length > 0 ? vitals : undefined,
     alg: allergies.length > 0 ? allergies : undefined,
     dx: visit.diagnosis || undefined,
-    med: medicineLines(visit),
+    med: medicineLines(visit, lang),
     inv: investigations.length > 0 ? investigations : undefined,
     adv: visit.advice || undefined,
     fu: visit.followUpDays ?? undefined,
-    ft: settings.rxFooterText || undefined,
+    ft: settings.rxFooterText ? rxFooterFor(settings.rxFooterText, lang) : undefined,
   };
 }
 
@@ -103,14 +114,17 @@ export function appointmentDoc(
   business: Business | null,
   patient: Patient,
   appointment: Appointment,
-  doctor: Doctor | null
+  doctor: Doctor | null,
+  lang: LanguageCode
 ): SharedAppointment {
   return {
     t: "apt",
     b: businessToShare(business),
     cn: patient.name,
     cp: patient.phone || undefined,
-    svc: doctor?.name ? `Consultation — ${doctor.name}` : "Consultation",
+    svc: doctor?.name
+      ? fill(translate(lang, "clShConsultWith"), { doctor: doctor.name })
+      : translate(lang, "clShConsultation"),
     dt: appointment.date,
     tm: appointment.startTime,
     dur: appointment.durationMinutes ?? undefined,
@@ -122,7 +136,8 @@ export function receiptDoc(
   business: Business | null,
   patient: Patient,
   bill: Bill,
-  currency: string
+  currency: string,
+  lang: LanguageCode
 ): SharedInvoice {
   // Clinic charges are flat amounts, not rate × quantity, so each becomes a
   // single-unit line — which is exactly how the printed receipt reads.
@@ -146,9 +161,13 @@ export function receiptDoc(
     dis: bill.discount || undefined,
     tot: bill.total,
     // A partly-paid bill has to say so, or the patient reads it as settled.
-    pm:
-      due > 0
-        ? `${bill.paymentMode} · ${formatMoney(due, currency)} due`
-        : `Paid by ${bill.paymentMode}`,
+    pm: (() => {
+      const mode = paymentModeLabel(bill.paymentMode, lang);
+      if (due <= 0) return fill(translate(lang, "clShPaidBy"), { mode });
+      const owed = fill(translate(lang, "clShAmountDue"), {
+        amount: formatMoney(due, currency),
+      });
+      return `${mode} · ${owed}`;
+    })(),
   };
 }

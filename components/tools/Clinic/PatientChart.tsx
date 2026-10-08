@@ -17,7 +17,7 @@ import { billDue, formatAgeSex, patientDues } from "@/lib/clinic/calc";
 import { printChart } from "@/lib/clinic/print";
 import { whatsAppLink } from "@/lib/clinic/messages";
 import {
-  FORM_SHORT,
+  formShort,
   formatDate,
   patientAllergies,
   patientConditions,
@@ -32,6 +32,7 @@ import { Modal, primaryBtnClass, secondaryBtnClass } from "@/components/tools/Fr
 import type { NavigateFn } from "./nav";
 import { PatientForm } from "./PatientForm";
 import { VitalsTrend } from "./VitalsTrend";
+import { useI18n } from "@/lib/i18n";
 
 type Tab = "visits" | "bills" | "vitals" | "details";
 
@@ -44,6 +45,7 @@ export function PatientChart({
   onNavigate: NavigateFn;
   onClose: () => void;
 }) {
+  const { lang } = useI18n();
   const {
     visits,
     bills,
@@ -105,7 +107,7 @@ export function PatientChart({
             <div className="min-w-0">
               <h3 className="truncate text-lg font-bold text-ink">{patient.name}</h3>
               <p className="truncate text-xs text-muted">
-                {[patient.code, formatAgeSex(patient), patient.bloodGroup]
+                {[patient.code, formatAgeSex(patient, lang), patient.bloodGroup]
                   .filter(Boolean)
                   .join(" · ")}
               </p>
@@ -190,7 +192,7 @@ export function PatientChart({
           </button>
           <button
             type="button"
-            onClick={() => printChart(business, settings, patient, patientVisits, doctors)}
+            onClick={() => printChart(business, settings, patient, patientVisits, doctors, lang)}
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
@@ -250,7 +252,7 @@ export function PatientChart({
                   )}
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold text-ink">
-                      {formatDate(visit.date)}
+                      {formatDate(visit.date, lang)}
                       {!visit.finalisedAt && (
                         <span className="ml-2 rounded-full bg-saffron/20 px-2 py-0.5 text-[10px] font-semibold">
                           Draft
@@ -299,7 +301,7 @@ export function PatientChart({
                       <ol className="list-decimal space-y-0.5 pl-5">
                         {meds.map((line) => (
                           <li key={line.id}>
-                            {[FORM_SHORT[line.form], line.name, line.strength, line.frequency]
+                            {[formShort(line.form, lang), line.name, line.strength, line.frequency]
                               .filter(Boolean)
                               .join(" ")}
                             {line.durationDays ? ` × ${line.durationDays} days` : ""}
@@ -338,7 +340,7 @@ export function PatientChart({
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-ink">{bill.receiptNo}</p>
                 <p className="text-xs text-muted">
-                  {formatDate(bill.date)} · {bill.paymentMode}
+                  {formatDate(bill.date, lang)} · {bill.paymentMode}
                 </p>
               </div>
               <div className="text-right">
@@ -367,7 +369,7 @@ export function PatientChart({
           <Detail label="Phone" value={patient.phone} />
           <Detail label="Alternate phone" value={patient.altPhone} />
           <Detail label="Address" value={patient.address} />
-          <Detail label="Registered" value={formatDate(patient.registeredOn)} />
+          <Detail label="Registered" value={formatDate(patient.registeredOn, lang)} />
           <Detail label="WhatsApp number" value={whatsAppNumber(patient.phone)} />
           {patientCustomFields(patient).map((field) => (
             <Detail key={field.id} label={field.label} value={field.value} />

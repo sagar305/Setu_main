@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { formatDate, visitVitals, type Visit } from "@/lib/clinic/types";
+import { formatDate, formatDayMonth, visitVitals, type Visit } from "@/lib/clinic/types";
+import { useI18n } from "@/lib/i18n";
 
 type Series = { label: string; colour: string; points: { x: string; y: number }[] };
 
@@ -11,6 +12,7 @@ type Series = { label: string; colour: string; points: { x: string; y: number }[
  * and the app has no other chart.
  */
 export function VitalsTrend({ visits }: { visits: Visit[] }) {
+  const { lang } = useI18n();
   const series = useMemo<Series[]>(() => {
     const ordered = [...visits].sort((a, b) => a.date.localeCompare(b.date));
     const weight: Series = { label: "Weight (kg)", colour: "#4f46e5", points: [] };
@@ -46,6 +48,7 @@ export function VitalsTrend({ visits }: { visits: Visit[] }) {
 }
 
 function Chart({ title, series, unit }: { title: string; series: Series[]; unit: string }) {
+  const { lang } = useI18n();
   const width = 320;
   const height = 120;
   const padding = { top: 8, right: 8, bottom: 18, left: 30 };
@@ -120,7 +123,7 @@ function Chart({ title, series, unit }: { title: string; series: Series[]; unit:
             />
             {s.points.map((p) => (
               <circle key={`${s.label}-${p.x}`} cx={xOf(p.x)} cy={yOf(p.y)} r={2.5} fill={s.colour}>
-                <title>{`${formatDate(p.x)}: ${p.y} ${unit}`}</title>
+                <title>{`${formatDate(p.x, lang)}: ${p.y} ${unit}`}</title>
               </circle>
             ))}
           </g>
@@ -133,7 +136,7 @@ function Chart({ title, series, unit }: { title: string; series: Series[]; unit:
               y={height - 4}
               className="fill-current text-[8px] text-muted"
             >
-              {formatDate(dates[0]).slice(0, 6)}
+              {formatDayMonth(dates[0], lang)}
             </text>
             <text
               x={width - padding.right}
@@ -141,7 +144,7 @@ function Chart({ title, series, unit }: { title: string; series: Series[]; unit:
               textAnchor="end"
               className="fill-current text-[8px] text-muted"
             >
-              {formatDate(dates[dates.length - 1]).slice(0, 6)}
+              {formatDayMonth(dates[dates.length - 1], lang)}
             </text>
           </>
         )}

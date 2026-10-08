@@ -4,11 +4,13 @@ import { useMemo, useState } from "react";
 import { Plus, Search, Sparkles } from "lucide-react";
 import { generateId } from "@/lib/pos/types";
 import { useClinic, useFrequentMedicines } from "@/lib/clinic/store";
-import { FORM_SHORT, type Medicine, type RxLine } from "@/lib/clinic/types";
+import { formShort, type Medicine, type RxLine } from "@/lib/clinic/types";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { inputClass } from "@/components/tools/FreePos/ui";
 
-function label(medicine: Medicine): string {
-  return [FORM_SHORT[medicine.form] ?? "", medicine.name, medicine.strength]
+function label(medicine: Medicine, lang: LanguageCode): string {
+  return [formShort(medicine.form, lang), medicine.name, medicine.strength]
     .filter(Boolean)
     .join(" ");
 }
@@ -35,6 +37,7 @@ export function lineFromMedicine(medicine: Medicine): RxLine {
  * most, which after a week is the fastest way to write a prescription.
  */
 export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
+  const { lang } = useI18n();
   const { medicines } = useClinic();
   const frequent = useFrequentMedicines(10);
   const [query, setQuery] = useState("");
@@ -115,7 +118,7 @@ export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
             >
               <span className="min-w-0">
                 <span className="block truncate text-sm font-semibold text-ink">
-                  {label(medicine)}
+                  {label(medicine, lang)}
                 </span>
                 {medicine.composition && (
                   <span className="block truncate text-xs text-muted">
@@ -153,7 +156,7 @@ export function MedicinePicker({ onPick }: { onPick: (line: RxLine) => void }) {
                   onClick={() => onPick(lineFromMedicine(medicine))}
                   className="rounded-full border border-muted-line/40 bg-white px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-indigo/40 hover:text-indigo"
                 >
-                  {label(medicine)}
+                  {label(medicine, lang)}
                 </button>
               ))}
             </div>
