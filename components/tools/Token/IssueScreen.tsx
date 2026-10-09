@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown, MessageCircle, Printer, QrCode, Star, Ticket } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill } from "@/lib/i18n/translate";
 import { useToken } from "@/lib/token/store";
 import {
   activeCountersForService,
@@ -24,6 +27,7 @@ import {
 } from "./ui";
 
 export function IssueScreen() {
+  const { t, lang } = useI18n();
   const { services, counters, todayTokens, settings, business, issueToken, serviceById } =
     useToken();
 
@@ -57,11 +61,11 @@ export function IssueScreen() {
   const handleIssue = async () => {
     if (!service) return;
     if (!name.trim()) {
-      setError("A name is needed before a token can be issued.");
+      setError(t("tkIsErrName"));
       return;
     }
     if (!phoneLooksRight) {
-      setError("A phone number of at least 10 digits is needed before a token can be issued.");
+      setError(t("tkIsErrPhone"));
       return;
     }
     setError("");
@@ -85,7 +89,7 @@ export function IssueScreen() {
       // anyone could reach them — the number is only half the job, and handing
       // it over is the other half.
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not issue a token.");
+      setError(caught instanceof Error ? caught.message : t("tkIsErrIssue"));
     } finally {
       setIssuing(false);
     }
@@ -93,9 +97,9 @@ export function IssueScreen() {
 
   if (active.length === 0) {
     return (
-      <SectionCard title="Issue a token">
+      <SectionCard title={t("tkIsTitle")}>
         <p className="py-6 text-center text-sm text-muted">
-          Add a service in Settings first — a token has to be for something.
+          {t("tkIsNoService")}
         </p>
       </SectionCard>
     );
@@ -119,11 +123,12 @@ export function IssueScreen() {
             businessName: business?.name ?? "",
             tokens: todayTokens,
             counters,
+            lang,
           })}
           onDismiss={() => setIssued(null)}
         />
       ) : (
-        <SectionCard title="Issue a token">
+        <SectionCard title={t("tkIsTitle")}>
           <div className="grid gap-4">
             {active.length > 1 && (
               <div className="grid gap-2 sm:grid-cols-2">
@@ -145,7 +150,9 @@ export function IssueScreen() {
                         {row.name}
                       </span>
                       <span className="text-xs text-muted">
-                        {ahead === 0 ? "No one waiting" : `${ahead} waiting`}
+                        {ahead === 0
+                          ? t("tkIsNoOneWaiting")
+                          : fill(t("tkIsAheadWaiting"), { count: ahead })}
                       </span>
                     </button>
                   );
@@ -154,8 +161,8 @@ export function IssueScreen() {
             )}
 
             <div className="flex items-center justify-between rounded-xl bg-cream-paper px-4 py-3">
-              <span className="text-sm font-semibold text-ink">Estimated wait</span>
-              <span className="text-sm font-bold text-indigo">{formatWait(estimate)}</span>
+              <span className="text-sm font-semibold text-ink">{t("tkIsEstimatedWait")}</span>
+              <span className="text-sm font-bold text-indigo">{formatWait(estimate, lang)}</span>
             </div>
 
             <button
@@ -169,7 +176,7 @@ export function IssueScreen() {
               aria-pressed={priority}
             >
               <Star className="h-4 w-4" aria-hidden="true" />
-              Priority — senior citizen, emergency or appointment
+              {t("tkIsPriorityNote")}
             </button>
 
             {/* Name and phone are required. Every token now belongs to a
@@ -178,15 +185,15 @@ export function IssueScreen() {
                 stays folded away, because it is the one field that is genuinely
                 occasional. */}
             <div className="grid gap-3 sm:grid-cols-2">
-              <Field label="Name" required>
+              <Field label={t("name")} required>
                 <input
                   className={inputClass}
                   value={name}
                   onChange={(event) => setName(event.target.value)}
-                  placeholder="Customer's name"
+                  placeholder={t("tkIsCustomerNamePh")}
                 />
               </Field>
-              <Field label="Phone" required hint="Used to message them when their turn is near.">
+              <Field label={t("phone")} required hint={t("tkIsPhoneHint")}>
                 <input
                   className={inputClass}
                   value={phone}
@@ -208,16 +215,16 @@ export function IssueScreen() {
                   className={`h-4 w-4 transition ${showDetails ? "rotate-180" : ""}`}
                   aria-hidden="true"
                 />
-                Add a note
+                {t("tkIsAddNote")}
               </button>
               {showDetails && (
                 <div className="mt-3">
-                  <Field label="Note">
+                  <Field label={t("notes")}>
                     <input
                       className={inputClass}
                       value={note}
                       onChange={(event) => setNote(event.target.value)}
-                      placeholder="Anything the counter should know"
+                      placeholder={t("tkIsNotePh")}
                     />
                   </Field>
                 </div>
@@ -237,13 +244,13 @@ export function IssueScreen() {
               className="inline-flex min-h-[64px] w-full items-center justify-center gap-2 rounded-xl bg-indigo px-5 text-lg font-bold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Ticket className="h-6 w-6" aria-hidden="true" />
-              {issuing ? "Issuing…" : "Give a token"}
+              {issuing ? t("tkIsIssuing") : t("tkIsGiveToken")}
             </button>
           </div>
         </SectionCard>
       )}
 
-      <QrPosterCard services={active} businessName={business?.name ?? ""} />
+      <QrPosterCard services={active} businessName={business?.name ?? ""} lang={lang} />
     </div>
   );
 }
@@ -263,26 +270,27 @@ function IssuedCard({
   whatsAppHref: string;
   onDismiss: () => void;
 }) {
+  const { t, lang } = useI18n();
   return (
     <section className="rounded-2xl border-2 border-indigo bg-indigo/5 p-6 text-center">
       <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-        {service?.name ?? "Token"}
+        {service?.name || t("tkToken")}
       </p>
       <p className="mt-2 text-7xl font-extrabold leading-none tracking-tight text-ink sm:text-8xl">
         {tokenLabel(token, service)}
       </p>
-      <p className="mt-3 text-sm font-semibold text-indigo">{formatWait(waitMinutes)}</p>
+      <p className="mt-3 text-sm font-semibold text-indigo">{formatWait(waitMinutes, lang)}</p>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
         <button
           type="button"
           className={secondaryBtnClass}
           onClick={() =>
-            printTokenSlip({ token, service, businessName, waitMinutes })
+            printTokenSlip({ token, service, businessName, waitMinutes, lang })
           }
         >
           <Printer className="h-4 w-4" aria-hidden="true" />
-          Print slip
+          {t("tkIsPrintSlip")}
         </button>
         {token.phone && (
           <a
@@ -292,11 +300,11 @@ function IssuedCard({
             className={secondaryBtnClass}
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            Send on WhatsApp
+            {t("tkIsSendWhatsApp")}
           </a>
         )}
         <button type="button" className={primaryBtnClass} onClick={onDismiss}>
-          Next person
+          {t("tkIsNextPerson")}
         </button>
       </div>
     </section>
@@ -312,7 +320,16 @@ function IssuedCard({
  * than a customer standing in front of a screen that claims they are seventh
  * in a queue their phone knows nothing about.
  */
-function QrPosterCard({ services, businessName }: { services: Service[]; businessName: string }) {
+function QrPosterCard({
+  services,
+  businessName,
+  lang,
+}: {
+  services: Service[];
+  businessName: string;
+  lang: LanguageCode;
+}) {
+  const { t } = useI18n();
   const [printing, setPrinting] = useState(false);
   const [serviceId, setServiceId] = useState(services[0]?.id ?? "");
   const service = services.find((row) => row.id === serviceId) ?? services[0];
@@ -327,18 +344,20 @@ function QrPosterCard({ services, businessName }: { services: Service[]; busines
       );
       url.searchParams.set("b", businessName);
       url.searchParams.set("s", service.name);
-      await printQrPoster({ businessName, serviceName: service.name, url: url.toString() });
+      await printQrPoster({
+        businessName,
+        serviceName: service.name,
+        url: url.toString(),
+        lang,
+      });
     } finally {
       setPrinting(false);
     }
   };
 
   return (
-    <SectionCard title="Waiting area poster">
-      <p className="text-sm text-muted">
-        Print an A4 poster with a QR code. A customer scans it, and their phone shows them what to
-        do next — they still collect the number from you.
-      </p>
+    <SectionCard title={t("tkIsPosterTitle")}>
+      <p className="text-sm text-muted">{t("tkIsPosterBlurb")}</p>
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {services.length > 1 &&
           services.map((row) => (
@@ -360,12 +379,11 @@ function QrPosterCard({ services, businessName }: { services: Service[]; busines
           disabled={printing || !service}
         >
           <QrCode className="h-4 w-4" aria-hidden="true" />
-          {printing ? "Preparing…" : "Print poster"}
+          {printing ? t("tkIsPreparing") : t("tkIsPrintPoster")}
         </button>
       </div>
       <p className="mt-3 text-xs text-muted">
-        A customer&apos;s own phone issuing its own token, with a live position in the queue, needs
-        a server the two devices share — which an app that works offline cannot honestly offer.
+        {t("tkIsPosterFoot")}
       </p>
     </SectionCard>
   );

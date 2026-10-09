@@ -16,7 +16,7 @@ import {
   type ServiceDemand,
   type TokenRow,
 } from "./reports";
-import { TOKEN_STATUS_LABELS } from "./types";
+import { statusLabel } from "./types";
 
 function minutesCell(value: number | null): string {
   return value === null ? "" : String(Math.round(value));
@@ -47,15 +47,16 @@ export function tokensCsv(rows: TokenRow[]): string {
     row.token.date,
     row.label,
     row.serviceName,
-    TOKEN_STATUS_LABELS[row.token.status],
+    // English, like the headers: a CSV is read by a spreadsheet, not a person.
+    statusLabel(row.token.status, "en"),
     row.token.priority ? "Yes" : "",
     row.counterName,
     row.token.customerName,
     row.token.phone,
-    formatClock(row.token.issuedAt),
-    formatClock(row.token.calledAt),
-    formatClock(row.token.servingStartedAt),
-    formatClock(row.token.closedAt),
+    formatClock(row.token.issuedAt, "en"),
+    formatClock(row.token.calledAt, "en"),
+    formatClock(row.token.servingStartedAt, "en"),
+    formatClock(row.token.closedAt, "en"),
     minutesCell(row.waited),
     minutesCell(row.serviceTime),
     row.token.recallCount || "",

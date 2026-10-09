@@ -5,6 +5,8 @@
 // what day it is, who is next, how long the wait is, and how a token is
 // spoken — can be tested without a browser.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import {
   RECALLS_BEFORE_SKIP,
   type Counter,
@@ -223,13 +225,13 @@ export function estimateWaitMinutes(
 }
 
 /** Human form of an estimate. Deliberately vague — it is a guess, not a slot. */
-export function formatWait(minutes: number): string {
-  if (minutes <= 0) return "You're next";
-  if (minutes < 60) return `about ${minutes} min`;
+export function formatWait(minutes: number, lang: LanguageCode): string {
+  if (minutes <= 0) return translate(lang, "tkWaitYoureNext");
+  if (minutes < 60) return fill(translate(lang, "tkWaitAboutMin"), { n: minutes });
   const hours = Math.floor(minutes / 60);
   const rest = minutes % 60;
-  const hourPart = `${hours} hr`;
-  return rest === 0 ? `about ${hourPart}` : `about ${hourPart} ${rest} min`;
+  if (rest === 0) return fill(translate(lang, "tkWaitAboutHr"), { h: hours });
+  return fill(translate(lang, "tkWaitAboutHrMin"), { h: hours, n: rest });
 }
 
 /** The estimate for a token that has not been issued yet. */

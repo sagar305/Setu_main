@@ -12,6 +12,8 @@
 // the display can fall back to the chime and then to the flash rather than
 // standing there mute and looking broken.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import { fillTemplate } from "./messages";
 
 export type VoiceChoice = {
@@ -74,21 +76,39 @@ export function chooseVoice(voices: SpeechSynthesisVoice[], lang: string): Voice
   const fallback = voices.find((v) => v.default) ?? voices[0];
   if (fallback) return { voice: fallback, reason: "default", label: fallback.name };
 
-  return { voice: null, reason: "none", label: "No voice available" };
+  // Not shown to a reader on its own — "none" takes the sentence below.
+  return { voice: null, reason: "none", label: "" };
 }
 
-export function describeVoiceChoice(choice: VoiceChoice, lang: string): string {
+/**
+ * Which voice the device will actually use, in words.
+ *
+ * `voiceLang` is the speech-synthesis code the owner picked (hi-IN); `lang` is
+ * the language the sentence itself is written in. They are different things:
+ * somebody reading the app in Tamil can still want the announcement in Hindi.
+ */
+export function describeVoiceChoice(
+  choice: VoiceChoice,
+  voiceLang: string,
+  lang: LanguageCode
+): string {
   switch (choice.reason) {
     case "exact":
-      return `Will speak with "${choice.label}".`;
+      return fill(translate(lang, "tkVoiceExact"), { voice: choice.label });
     case "language":
-      return `No ${lang} voice on this device — will use "${choice.label}", the closest match.`;
+      return fill(translate(lang, "tkVoiceClosest"), { lang: voiceLang, voice: choice.label });
     case "indian-english":
-      return `No ${lang} voice on this device — will speak Indian English with "${choice.label}".`;
+      return fill(translate(lang, "tkVoiceIndianEnglish"), {
+        lang: voiceLang,
+        voice: choice.label,
+      });
     case "default":
-      return `No ${lang} voice on this device — will use this browser's default, "${choice.label}".`;
+      return fill(translate(lang, "tkVoiceBrowserDefault"), {
+        lang: voiceLang,
+        voice: choice.label,
+      });
     default:
-      return "This browser has no speech voices. Announcements will play the chime only.";
+      return translate(lang, "tkVoiceNoVoices");
   }
 }
 

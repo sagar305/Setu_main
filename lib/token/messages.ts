@@ -19,8 +19,10 @@ import {
   waitingAhead,
   activeCountersForService,
 } from "./calc";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import {
-  DEFAULT_MESSAGE_TEMPLATES,
+  defaultMessageTemplates,
   tokenLabel,
   type Counter,
   type TokenSettings,
@@ -40,11 +42,13 @@ export type MessageContext = {
   counters: Counter[];
   /** The grace window, for the "we are waiting for you" message. */
   minutes?: number;
+  /** The language the message is written in — the customer's, not the app's. */
+  lang: LanguageCode;
 };
 
 /** The values every queue template can use. */
 export function messageVars(context: MessageContext): Record<string, string> {
-  const { token, service, counter, businessName, tokens, counters, minutes } = context;
+  const { token, service, counter, businessName, tokens, counters, minutes, lang } = context;
   const ahead = service ? waitingAhead(tokens, service.id) : 0;
   // Two different numbers, deliberately kept apart: {wait} is how long the
   // queue is likely to take, {minutes} is how long this person has to reach
@@ -58,11 +62,11 @@ export function messageVars(context: MessageContext): Record<string, string> {
     : 0;
 
   return {
-    name: token.customerName.trim() || "Sir/Ma'am",
+    name: token.customerName.trim() || translate(lang, "tkFallbackName"),
     token: tokenLabel(token, service),
     service: service?.name ?? "",
-    business: businessName || "our counter",
-    wait: formatWait(estimatedWait),
+    business: businessName || translate(lang, "tkOurCounter"),
+    wait: formatWait(estimatedWait, lang),
     ahead: String(ahead),
     counter: counter?.name ?? "",
     minutes: minutes === undefined ? "" : String(minutes),
@@ -84,7 +88,8 @@ export function buildMessage(
   settings: TokenSettings,
   context: MessageContext
 ): string {
-  const template = settings.messageTemplates?.[key] ?? DEFAULT_MESSAGE_TEMPLATES[key] ?? "";
+  const template =
+    settings.messageTemplates?.[key] || defaultMessageTemplates(context.lang)[key] || "";
   return fillTemplate(template, messageVars(context));
 }
 

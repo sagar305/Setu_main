@@ -18,6 +18,9 @@ import {
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import type { Business } from "@/lib/pos/types";
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
+
 export const BACKUP_APP_MARKER = "setu-token";
 export const BACKUP_VERSION = 1;
 
@@ -61,25 +64,21 @@ export function downloadBackupFile(backup: TokenBackup): void {
 
 export type BackupValidation =
   | { ok: true; backup: TokenBackup }
-  | { ok: false; error: string };
+  // A key rather than a sentence: the file is read in a helper that has no
+  // business knowing which language the screen is in.
+  | { ok: false; error: TKey };
 
 export function validateBackup(raw: unknown): BackupValidation {
-  if (!raw || typeof raw !== "object") return { ok: false, error: "That file is not a backup." };
+  if (!raw || typeof raw !== "object") return { ok: false, error: "appBackupNotValid" };
   const candidate = raw as Partial<TokenBackup>;
   if (candidate.app !== BACKUP_APP_MARKER) {
-    return {
-      ok: false,
-      error: "That backup belongs to a different Setu app. Restore it from that app instead.",
-    };
+    return { ok: false, error: "tkBackupWrongApp" };
   }
   if (typeof candidate.version !== "number" || candidate.version > BACKUP_VERSION) {
-    return {
-      ok: false,
-      error: "That backup was made by a newer version of the queue than this one.",
-    };
+    return { ok: false, error: "appBackupNewer" };
   }
   if (!candidate.data || typeof candidate.data !== "object") {
-    return { ok: false, error: "That backup file has no data in it." };
+    return { ok: false, error: "appBackupMissingData" };
   }
   return { ok: true, backup: candidate as TokenBackup };
 }
@@ -88,19 +87,22 @@ export function parseBackupFile(text: string): BackupValidation {
   try {
     return validateBackup(JSON.parse(text));
   } catch {
-    return { ok: false, error: "That file could not be read as a backup." };
+    return { ok: false, error: "appBackupNotJson" };
   }
 }
 
-export function backupSummary(backup: TokenBackup): { label: string; count: number }[] {
-  const labels: Record<TokenStoreName, string> = {
-    services: "Services",
-    counters: "Counters",
-    tokens: "Tokens",
-    settings: "Settings",
+export function backupSummary(
+  backup: TokenBackup,
+  lang: LanguageCode
+): { label: string; count: number }[] {
+  const labels: Record<TokenStoreName, TKey> = {
+    services: "tkStServices",
+    counters: "tkStCounters",
+    tokens: "tkBkTokens",
+    settings: "tkBkSettings",
   };
   return QUEUE_BACKUP_STORES.map((store) => ({
-    label: labels[store],
+    label: translate(lang, labels[store]),
     count: (backup.data[store] ?? []).length,
   }));
 }

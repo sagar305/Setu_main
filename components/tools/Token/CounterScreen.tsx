@@ -24,6 +24,8 @@ import {
   waitingQueue,
 } from "@/lib/token/calc";
 import { averageWaitMinutes } from "@/lib/token/calc";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { formatClock, formatMinutes } from "@/lib/token/reports";
 import { whatsAppLinkFor } from "@/lib/token/messages";
 import {
@@ -75,6 +77,7 @@ function useElapsed(since: string | null): string {
 }
 
 export function CounterScreen() {
+  const { t, lang } = useI18n();
   const {
     settings,
     services,
@@ -161,6 +164,7 @@ export function CounterScreen() {
       tokens: todayTokens,
       counters,
       minutes: settings.autoSkipMinutes,
+      lang,
     });
 
   return (
@@ -168,7 +172,7 @@ export function CounterScreen() {
       {counters.filter((row) => row.active).length > 1 && (
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-semibold uppercase tracking-wide text-muted">
-            This device is
+            {t("tkCoThisDeviceIs")}
           </span>
           {counters
             .filter((row) => row.active)
@@ -199,7 +203,7 @@ export function CounterScreen() {
                   {current.priority && <PriorityFlag />}
                   {current.recallCount > 0 && (
                     <span className="text-xs font-semibold text-amber-700">
-                      Called {current.recallCount + 1}×
+                      {fill(t("tkCoCalledTimes"), { count: current.recallCount + 1 })}
                     </span>
                   )}
                 </div>
@@ -208,17 +212,17 @@ export function CounterScreen() {
                 </div>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted">
                   <ServiceDot colour={serviceById(current.serviceId)?.colour ?? "#5F6478"} />
-                  {serviceById(current.serviceId)?.name ?? "Removed service"}
+                  {serviceById(current.serviceId)?.name ?? t("tkCoRemovedService")}
                   {current.customerName && <span>· {current.customerName}</span>}
                 </div>
               </div>
               <div className="text-right">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted">
                   {current.status === "serving"
-                    ? "Serving for"
+                    ? t("tkCoServingFor")
                     : secondsLeft !== null
-                      ? "Skips in"
-                      : "Called"}
+                      ? t("tkCoSkipsIn")
+                      : t("tkStCalled")}
                 </div>
                 <div
                   className={`text-2xl font-bold tabular-nums ${
@@ -229,7 +233,7 @@ export function CounterScreen() {
                     ? elapsed
                     : secondsLeft !== null
                       ? formatCountdown(secondsLeft)
-                      : formatClock(current.calledAt)}
+                      : formatClock(current.calledAt, lang)}
                 </div>
               </div>
             </div>
@@ -242,7 +246,7 @@ export function CounterScreen() {
                 onClick={() => void run(() => recallToken(current.id))}
               >
                 <Volume2 className="h-4 w-4" aria-hidden="true" />
-                Recall
+                {t("tkCoRecall")}
               </button>
 
               {current.status === "called" ? (
@@ -253,7 +257,7 @@ export function CounterScreen() {
                   onClick={() => void run(() => startServing(current.id))}
                 >
                   <Play className="h-4 w-4" aria-hidden="true" />
-                  Start serving
+                  {t("tkCoStartServing")}
                 </button>
               ) : (
                 <button
@@ -263,7 +267,7 @@ export function CounterScreen() {
                   onClick={() => void run(() => completeToken(current.id))}
                 >
                   <Check className="h-4 w-4" aria-hidden="true" />
-                  Done
+                  {t("tkCoDone")}
                 </button>
               )}
 
@@ -275,7 +279,7 @@ export function CounterScreen() {
                   className={chipBtnClass}
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  We&apos;re waiting
+                  {t("tkCoWereWaiting")}
                 </a>
               )}
 
@@ -286,7 +290,7 @@ export function CounterScreen() {
                 onClick={() => setTransferOpen(true)}
               >
                 <ArrowRightLeft className="h-4 w-4" aria-hidden="true" />
-                Transfer
+                {t("tkCoTransfer")}
               </button>
 
               <button
@@ -298,7 +302,7 @@ export function CounterScreen() {
                 onClick={() => void run(() => skipToken(current.id))}
               >
                 <SkipForward className="h-4 w-4" aria-hidden="true" />
-                {shouldOfferSkip(current) ? "No-show — skip" : "Skip"}
+                {shouldOfferSkip(current) ? t("tkCoNoShowSkip") : t("tkCoSkip")}
               </button>
 
               <button
@@ -308,7 +312,7 @@ export function CounterScreen() {
                 onClick={() => setCancelTarget(current)}
               >
                 <Ban className="h-4 w-4" aria-hidden="true" />
-                Cancel
+                {t("cancel")}
               </button>
             </div>
 
@@ -317,13 +321,14 @@ export function CounterScreen() {
                 average service time on the reports means something. */}
             {current.status === "called" && (
               <p className="mt-3 text-xs text-muted">
-                Tap <strong>Start serving</strong> when they reach you — Done appears after that.
+                {fill(t("tkCoStartServingHint"), { startServing: t("tkCoStartServing") })}
                 {secondsLeft !== null && (
                   <>
                     {" "}
-                    If nobody comes, this token skips itself in{" "}
-                    <strong>{formatCountdown(secondsLeft)}</strong>. Tap{" "}
-                    <strong>We&apos;re waiting</strong> to tell them the clock is running.
+                    {fill(t("tkCoSkipCountdown"), {
+                      time: formatCountdown(secondsLeft),
+                      wereWaiting: t("tkCoWereWaiting"),
+                    })}
                   </>
                 )}
               </p>
@@ -332,12 +337,8 @@ export function CounterScreen() {
         ) : (
           <EmptyState
             icon={<PhoneCall className="h-6 w-6" aria-hidden="true" />}
-            title="Nobody at this counter"
-            message={
-              upNext
-                ? "Tap Call next to bring the next person over."
-                : "The queue is empty. New tokens appear here as they are issued."
-            }
+            title={t("tkCoNobodyHere")}
+            message={upNext ? t("tkCoTapCallNext") : t("tkCoQueueEmpty")}
           />
         )}
 
@@ -349,20 +350,22 @@ export function CounterScreen() {
         >
           <PhoneCall className="h-5 w-5" aria-hidden="true" />
           {upNext
-            ? `Call next — ${tokenLabel(upNext, serviceById(upNext.serviceId))}`
-            : "No one waiting"}
+            ? fill(t("tkCoCallNext"), {
+                token: tokenLabel(upNext, serviceById(upNext.serviceId)),
+              })
+            : t("tkIsNoOneWaiting")}
         </button>
       </section>
 
       <div className="grid grid-cols-3 gap-2">
-        <Stat label="Waiting" value={String(queue.length)} />
-        <Stat label="Avg wait today" value={formatMinutes(averageWait)} />
-        <Stat label="Served by me" value={String(servedByMe)} />
+        <Stat label="tkStWaiting" value={String(queue.length)} />
+        <Stat label="tkCoAvgWaitToday" value={formatMinutes(averageWait, lang)} />
+        <Stat label="tkCoServedByMe" value={String(servedByMe)} />
       </div>
 
-      <SectionCard title={`Waiting (${queue.length})`}>
+      <SectionCard title={fill(t("tkCoWaitingN"), { count: queue.length })}>
         {queue.length === 0 ? (
-          <p className="py-6 text-center text-sm text-muted">Nobody is waiting right now.</p>
+          <p className="py-6 text-center text-sm text-muted">{t("tkCoNobodyWaiting")}</p>
         ) : (
           <ul className="divide-y divide-muted-line/20">
             {queue.slice(0, WAITING_LIST_LENGTH).map((token, index) => {
@@ -388,10 +391,11 @@ export function CounterScreen() {
                     <span className="flex min-w-0 flex-col">
                       <span className="flex items-center gap-1.5 truncate text-sm text-ink">
                         <ServiceDot colour={service?.colour ?? "#5F6478"} />
-                        {service?.name ?? "Removed service"}
+                        {service?.name ?? t("tkCoRemovedService")}
                       </span>
                       <span className="truncate text-xs text-muted">
-                        {token.customerName || formatClock(token.issuedAt)} · {wait === 0 ? "next" : `${wait} min`}
+                        {token.customerName || formatClock(token.issuedAt, lang)} ·{" "}
+                        {wait === 0 ? t("tkCoNext") : fill(t("tkCoMinN"), { n: wait })}
                       </span>
                     </span>
                     {token.priority && <PriorityFlag className="ml-auto shrink-0" />}
@@ -402,10 +406,10 @@ export function CounterScreen() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${chipBtnClass} shrink-0 px-2`}
-                      title="Send an 'almost your turn' message on WhatsApp"
+                      title={t("tkCoNotifyTitle")}
                     >
                       <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                      <span className="sr-only">Notify on WhatsApp</span>
+                      <span className="sr-only">{t("tkCoNotifyWhatsApp")}</span>
                     </a>
                   )}
                 </li>
@@ -415,7 +419,7 @@ export function CounterScreen() {
         )}
         {queue.length > WAITING_LIST_LENGTH && (
           <p className="pt-3 text-center text-xs text-muted">
-            and {queue.length - WAITING_LIST_LENGTH} more
+            {fill(t("tkCoAndMore"), { count: queue.length - WAITING_LIST_LENGTH })}
           </p>
         )}
       </SectionCard>
@@ -423,13 +427,15 @@ export function CounterScreen() {
       {reissued && (
         <section className="rounded-2xl border-2 border-indigo bg-indigo/5 p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-            New token for {reissued.customerName || "them"}
+            {fill(t("tkCoNewTokenFor"), {
+              name: reissued.customerName || t("tkCoThem"),
+            })}
           </p>
           <p className="mt-1 text-5xl font-extrabold leading-none tracking-tight text-ink">
             {tokenLabel(reissued, serviceById(reissued.serviceId))}
           </p>
           <p className="mt-2 text-sm text-muted">
-            They are behind everyone currently waiting.
+            {t("tkCoBehindEveryone")}
           </p>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             {reissued.phone && (
@@ -440,7 +446,7 @@ export function CounterScreen() {
                 className={chipBtnClass}
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                Send the new number
+                {t("tkCoSendNewNumber")}
               </a>
             )}
             <button
@@ -448,7 +454,7 @@ export function CounterScreen() {
               className={secondaryBtnClass}
               onClick={() => setReissued(null)}
             >
-              Done
+              {t("tkCoDone")}
             </button>
           </div>
         </section>
@@ -458,13 +464,15 @@ export function CounterScreen() {
 
       <ConfirmDialog
         open={Boolean(jumpTarget)}
-        title="Call this token out of turn?"
+        title={t("tkCoJumpTitle")}
         message={
           jumpTarget
-            ? `${tokenLabel(jumpTarget, serviceById(jumpTarget.serviceId))} is not next in line. Everyone ahead of them keeps their place.`
+            ? fill(t("tkCoJumpMessage"), {
+                token: tokenLabel(jumpTarget, serviceById(jumpTarget.serviceId)),
+              })
             : ""
         }
-        confirmLabel="Call them"
+        confirmLabel={t("tkCoCallThem")}
         danger={false}
         onCancel={() => setJumpTarget(null)}
         onConfirm={() => {
@@ -476,9 +484,9 @@ export function CounterScreen() {
 
       <ConfirmDialog
         open={Boolean(cancelTarget)}
-        title="Cancel this token?"
-        message="The number is not reused, and the token stays in today's history as cancelled."
-        confirmLabel="Cancel token"
+        title={t("tkCoCancelTitle")}
+        message={t("tkCoCancelMessage")}
+        confirmLabel={t("tkCoCancelToken")}
         onCancel={() => setCancelTarget(null)}
         onConfirm={() => {
           const target = cancelTarget;
@@ -487,17 +495,18 @@ export function CounterScreen() {
         }}
       />
 
-      <Modal open={transferOpen} onClose={() => setTransferOpen(false)} title="Transfer this token">
+      <Modal open={transferOpen} onClose={() => setTransferOpen(false)} title={t("tkCoTransferTitle")}>
         {current && (
           <div className="grid gap-4">
             <p className="text-sm text-muted">
-              {tokenLabel(current, serviceById(current.serviceId))} keeps its number wherever it
-              goes — the person holding the slip has been told to watch for that number.
+              {fill(t("tkCoTransferBlurb"), {
+                token: tokenLabel(current, serviceById(current.serviceId)),
+              })}
             </p>
 
             <div>
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                To another service
+                {t("tkCoToAnotherService")}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {services
@@ -517,17 +526,17 @@ export function CounterScreen() {
                     </button>
                   ))}
                 {services.filter((s) => s.active && s.id !== current.serviceId).length === 0 && (
-                  <p className="text-sm text-muted">There is only one service.</p>
+                  <p className="text-sm text-muted">{t("tkCoOnlyOneService")}</p>
                 )}
               </div>
               <p className="mt-2 text-xs text-muted">
-                They go back to waiting, at the end of the new line.
+                {t("tkCoBackToWaiting")}
               </p>
             </div>
 
             <div>
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                To another counter
+                {t("tkCoToAnotherCounter")}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {countersForService(counters, current.serviceId)
@@ -547,7 +556,7 @@ export function CounterScreen() {
                   ))}
                 {countersForService(counters, current.serviceId).filter((r) => r.id !== counterId)
                   .length === 0 && (
-                  <p className="text-sm text-muted">No other counter takes this service.</p>
+                  <p className="text-sm text-muted">{t("tkCoNoOtherCounter")}</p>
                 )}
               </div>
             </div>
@@ -563,7 +572,7 @@ export function CounterScreen() {
     );
     if (skipped.length === 0) return null;
     return (
-      <SectionCard title={`Skipped (${skipped.length})`}>
+      <SectionCard title={fill(t("tkCoSkippedN"), { count: skipped.length })}>
         <ul className="divide-y divide-muted-line/20">
           {skipped.map((token) => (
             <li key={token.id} className="flex flex-wrap items-center justify-between gap-2 py-2.5">
@@ -584,7 +593,7 @@ export function CounterScreen() {
                     className={chipBtnClass}
                   >
                     <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    Tell them
+                    {t("tkCoTellThem")}
                   </a>
                 )}
                 <button
@@ -597,25 +606,27 @@ export function CounterScreen() {
                   })}
                 >
                   <Undo2 className="h-4 w-4" aria-hidden="true" />
-                  They came back
+                  {t("tkCoCameBack")}
                 </button>
               </span>
             </li>
           ))}
         </ul>
         <p className="pt-3 text-xs text-muted">
-          Coming back gets them a fresh number behind everyone currently waiting. The skipped one
-          stays in today&apos;s history, so the reports still show the call that went unanswered.
+          {t("tkCoCameBackNote")}
         </p>
       </SectionCard>
     );
   }
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: TKey; value: string }) {
+  const { t } = useI18n();
   return (
     <div className="rounded-xl border border-muted-line/30 bg-white px-3 py-2.5 text-center">
-      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+        {t(label)}
+      </div>
       <div className="mt-0.5 text-lg font-bold text-ink">{value}</div>
     </div>
   );

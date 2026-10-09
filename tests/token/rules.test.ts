@@ -241,7 +241,7 @@ describe("the wait estimate", () => {
 
   it("is zero when nobody is ahead", () => {
     expect(estimateWaitMinutes(0, 10, 1)).toBe(0);
-    expect(formatWait(0)).toBe("You're next");
+    expect(formatWait(0, "en")).toBe("You're next");
   });
 
   it("survives a queue with no active counters at all", () => {
@@ -260,9 +260,9 @@ describe("the wait estimate", () => {
   });
 
   it("reads hours out in words once the wait is long", () => {
-    expect(formatWait(45)).toBe("about 45 min");
-    expect(formatWait(60)).toBe("about 1 hr");
-    expect(formatWait(85)).toBe("about 1 hr 25 min");
+    expect(formatWait(45, "en")).toBe("about 45 min");
+    expect(formatWait(60, "en")).toBe("about 1 hr");
+    expect(formatWait(85, "en")).toBe("about 1 hr 25 min");
   });
 });
 

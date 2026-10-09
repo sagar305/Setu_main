@@ -13,6 +13,10 @@ import {
   Volume2,
   X,
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { LANGUAGES, type LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useToken } from "@/lib/token/store";
 import { generateSalt, hashPin, isValidPinFormat } from "@/lib/pos/pin";
 import { suggestedServiceMinutes } from "@/lib/token/calc";
@@ -27,10 +31,9 @@ import {
 } from "@/lib/token/voice";
 import { createBackup, downloadBackupFile, parseBackupFile } from "@/lib/token/backup";
 import { APPS_SCRIPT_TEMPLATE, isValidSyncUrl, testSheetConnection } from "@/lib/token/sheetSync";
-import { MESSAGE_PLACEHOLDERS } from "@/lib/token/types";
+import { messagePlaceholders } from "@/lib/token/types";
 import {
-  DEFAULT_VOICE_TEMPLATE,
-  HINDI_VOICE_TEMPLATE,
+  voiceTemplateFor,
   SERVICE_COLOURS,
   VOICE_LANGUAGES,
   type Counter,
@@ -70,6 +73,7 @@ export function SettingsScreen() {
 /* ------------------------------------------------------------------ */
 
 function BusinessSection() {
+  const { t } = useI18n();
   const { business, updateBusiness } = useToken();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -81,12 +85,12 @@ function BusinessSection() {
   }, [business]);
 
   return (
-    <SectionCard title="Business">
+    <SectionCard title={t("appBusiness")}>
       <div className="grid gap-3 sm:grid-cols-2">
-        <Field label="Name" hint="Shown on the display and on every token slip.">
+        <Field label={t("name")} hint={t("tkStNameHint")}>
           <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} />
         </Field>
-        <Field label="Phone">
+        <Field label={t("phone")}>
           <input
             className={inputClass}
             value={phone}
@@ -105,10 +109,10 @@ function BusinessSection() {
         }}
       >
         {saved ? <Check className="h-4 w-4" aria-hidden="true" /> : null}
-        {saved ? "Saved" : "Save business details"}
+        {saved ? t("saved") : t("appSaveBusinessDetails")}
       </button>
       <p className="mt-2 text-xs text-muted">
-        These are shared with your other Setu tools on this device.
+        {t("appBusinessSharedHint")}
       </p>
     </SectionCard>
   );
@@ -135,6 +139,7 @@ const EMPTY_SERVICE: ServiceDraft = {
 };
 
 function ServicesSection() {
+  const { t } = useI18n();
   const { services, tokens, today, saveService, deleteService } = useToken();
   const [editing, setEditing] = useState<Service | null>(null);
   const [draft, setDraft] = useState<ServiceDraft>({ ...EMPTY_SERVICE });
@@ -171,11 +176,11 @@ function ServicesSection() {
 
   return (
     <SectionCard
-      title="Services"
+      title={t("tkStServices")}
       action={
         <button type="button" className={secondaryBtnClass} onClick={() => open(null)}>
           <Plus className="h-4 w-4" aria-hidden="true" />
-          Add service
+          {t("tkStAddService")}
         </button>
       }
     >
@@ -193,12 +198,14 @@ function ServicesSection() {
                   {service.prefix}-42
                 </span>
               )}
-              {!service.active && <span className="text-xs text-muted">(off)</span>}
+              {!service.active && <span className="text-xs text-muted">{t("tkStOff")}</span>}
             </span>
             <span className="flex items-center gap-2">
-              <span className="text-xs text-muted">{service.avgServiceMinutes} min each</span>
+              <span className="text-xs text-muted">
+                {fill(t("tkStMinEach"), { n: service.avgServiceMinutes })}
+              </span>
               <button type="button" className={`${chipBtnClass} min-h-0 px-2 py-1`} onClick={() => open(service)}>
-                Edit
+                {t("edit")}
               </button>
               <button
                 type="button"
@@ -206,29 +213,31 @@ function ServicesSection() {
                 onClick={() => setDeleteTarget(service)}
               >
                 <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="sr-only">Remove {service.name}</span>
+                <span className="sr-only">
+                  {fill(t("tkStRemoveNamed"), { name: service.name })}
+                </span>
               </button>
             </span>
           </li>
         ))}
         {services.length === 0 && (
-          <li className="py-4 text-center text-sm text-muted">No services yet.</li>
+          <li className="py-4 text-center text-sm text-muted">{t("tkStNoServices")}</li>
         )}
       </ul>
 
       {(editing || adding) && (
         <div className="mt-4 grid gap-3 rounded-xl border-2 border-indigo/30 bg-indigo/5 p-4">
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Name" required>
+            <Field label={t("name")} required>
               <input
                 className={inputClass}
                 value={draft.name}
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-                placeholder="New registration"
+                placeholder={t("tkStServicePh")}
                 autoFocus
               />
             </Field>
-            <Field label="Token prefix" hint='One letter, e.g. "A" gives A-42. Leave empty for plain numbers.'>
+            <Field label={t("tkStTokenPrefix")} hint={t("tkStTokenPrefixHint")}>
               <input
                 className={inputClass}
                 value={draft.prefix}
@@ -248,14 +257,14 @@ function ServicesSection() {
 
           <div>
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Chip colour
+              {t("tkStChipColour")}
             </span>
             <div className="flex flex-wrap gap-2">
               {SERVICE_COLOURS.map((colour) => (
                 <button
                   key={colour}
                   type="button"
-                  aria-label={`Use colour ${colour}`}
+                  aria-label={fill(t("tkStUseColour"), { colour })}
                   aria-pressed={draft.colour === colour}
                   onClick={() => setDraft({ ...draft, colour })}
                   className={`h-9 w-9 rounded-full border-2 ${
@@ -273,15 +282,15 @@ function ServicesSection() {
               checked={draft.active}
               onChange={(e) => setDraft({ ...draft, active: e.target.checked })}
             />
-            Accepting new tokens
+            {t("tkStAcceptingNew")}
           </label>
 
           <div className="flex gap-2">
             <button type="button" className={primaryBtnClass} onClick={() => void save()}>
-              Save service
+              {t("tkStSaveService")}
             </button>
             <button type="button" className={secondaryBtnClass} onClick={close}>
-              Cancel
+              {t("cancel")}
             </button>
           </div>
         </div>
@@ -289,13 +298,13 @@ function ServicesSection() {
 
       <ConfirmDialog
         open={Boolean(deleteTarget)}
-        title="Remove this service?"
+        title={t("tkStRemoveServiceQ")}
         message={
-          deleteTarget && tokens.some((t) => t.serviceId === deleteTarget.id)
-            ? "Tokens have been issued for it, so it is switched off rather than deleted — otherwise today's history and your reports would stop making sense."
-            : "It has never issued a token, so it will be removed completely."
+          deleteTarget && tokens.some((row) => row.serviceId === deleteTarget.id)
+            ? t("tkStRemoveServiceUsed")
+            : t("tkStRemoveServiceUnused")
         }
-        confirmLabel="Remove"
+        confirmLabel={t("remove")}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={() => {
           const target = deleteTarget;
@@ -327,13 +336,14 @@ function ServiceMinutesField({
   tokens: ReturnType<typeof useToken>["tokens"];
   today: string;
 }) {
+  const { t } = useI18n();
   const suggestion = useMemo(
     () => (service ? suggestedServiceMinutes(tokens, service.id, today) : null),
     [service, tokens, today]
   );
 
   return (
-    <Field label="Minutes per person" hint="Drives the wait estimate on slips and the display.">
+    <Field label={t("tkStMinutesPerPerson")} hint={t("tkStMinutesPerPersonHint")}>
       <div className="flex flex-wrap items-center gap-2">
         <input
           className={`${inputClass} max-w-[8rem]`}
@@ -349,7 +359,7 @@ function ServiceMinutesField({
             className={`${chipBtnClass} min-h-0 px-2 py-1`}
             onClick={() => onChange(suggestion)}
           >
-            Last 7 days say {suggestion} min — use it
+            {fill(t("tkStSuggestion"), { n: suggestion })}
           </button>
         )}
       </div>
@@ -360,6 +370,7 @@ function ServiceMinutesField({
 /* ------------------------------------------------------------------ */
 
 function CountersSection() {
+  const { t } = useI18n();
   const { counters, services, saveCounter, deleteCounter } = useToken();
   const [editing, setEditing] = useState<Counter | null>(null);
   const [adding, setAdding] = useState(false);
@@ -382,7 +393,12 @@ function CountersSection() {
             serviceIds: counter.serviceIds,
             active: counter.active,
           }
-        : { name: `Counter ${counters.length + 1}`, staffName: "", serviceIds: [], active: true }
+        : {
+            name: fill(t("tkStCounterN"), { n: counters.length + 1 }),
+            staffName: "",
+            serviceIds: [],
+            active: true,
+          }
     );
   };
 
@@ -393,11 +409,11 @@ function CountersSection() {
 
   return (
     <SectionCard
-      title="Counters"
+      title={t("tkStCounters")}
       action={
         <button type="button" className={secondaryBtnClass} onClick={() => open(null)}>
           <Plus className="h-4 w-4" aria-hidden="true" />
-          Add counter
+          {t("tkStAddCounter")}
         </button>
       }
     >
@@ -412,10 +428,12 @@ function CountersSection() {
               {counter.staffName && (
                 <span className="ml-2 text-xs text-muted">{counter.staffName}</span>
               )}
-              {!counter.active && <span className="ml-2 text-xs text-muted">(off)</span>}
+              {!counter.active && (
+                <span className="ml-2 text-xs text-muted">{t("tkStOff")}</span>
+              )}
               <div className="text-xs text-muted">
                 {counter.serviceIds.length === 0
-                  ? "Serves everything"
+                  ? t("tkStServesEverything")
                   : counter.serviceIds
                       .map((id) => services.find((s) => s.id === id)?.name)
                       .filter(Boolean)
@@ -428,7 +446,7 @@ function CountersSection() {
                 className={`${chipBtnClass} min-h-0 px-2 py-1`}
                 onClick={() => open(counter)}
               >
-                Edit
+                {t("edit")}
               </button>
               <button
                 type="button"
@@ -436,29 +454,31 @@ function CountersSection() {
                 onClick={() => setDeleteTarget(counter)}
               >
                 <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
-                <span className="sr-only">Remove {counter.name}</span>
+                <span className="sr-only">
+                  {fill(t("tkStRemoveNamed"), { name: counter.name })}
+                </span>
               </button>
             </span>
           </li>
         ))}
         {counters.length === 0 && (
-          <li className="py-4 text-center text-sm text-muted">No counters yet.</li>
+          <li className="py-4 text-center text-sm text-muted">{t("tkStNoCounters")}</li>
         )}
       </ul>
 
       {(editing || adding) && (
         <div className="mt-4 grid gap-3 rounded-xl border-2 border-indigo/30 bg-indigo/5 p-4">
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Name" required>
+            <Field label={t("name")} required>
               <input
                 className={inputClass}
                 value={draft.name}
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-                placeholder="Counter 1"
+                placeholder={fill(t("tkStCounterN"), { n: 1 })}
                 autoFocus
               />
             </Field>
-            <Field label="Staff name" hint="Optional. Appears in the reports.">
+            <Field label={t("appStaffName")} hint={t("tkStStaffNameHint")}>
               <input
                 className={inputClass}
                 value={draft.staffName}
@@ -469,7 +489,7 @@ function CountersSection() {
 
           <div>
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Serves
+              {t("tkStServes")}
             </span>
             <div className="flex flex-wrap gap-2">
               <button
@@ -477,7 +497,7 @@ function CountersSection() {
                 className={`${chipBtnClass} ${draft.serviceIds.length === 0 ? "border-indigo bg-indigo/10 text-indigo" : ""}`}
                 onClick={() => setDraft({ ...draft, serviceIds: [] })}
               >
-                Everything
+                {t("appEverything")}
               </button>
               {services.map((service) => {
                 const on = draft.serviceIds.includes(service.id);
@@ -509,7 +529,7 @@ function CountersSection() {
               checked={draft.active}
               onChange={(e) => setDraft({ ...draft, active: e.target.checked })}
             />
-            Open — counts towards the wait estimate
+            {t("tkStCounterOpen")}
           </label>
 
           <div className="flex gap-2">
@@ -522,10 +542,10 @@ function CountersSection() {
                 close();
               }}
             >
-              Save counter
+              {t("tkStSaveCounter")}
             </button>
             <button type="button" className={secondaryBtnClass} onClick={close}>
-              Cancel
+              {t("cancel")}
             </button>
           </div>
         </div>
@@ -533,9 +553,9 @@ function CountersSection() {
 
       <ConfirmDialog
         open={Boolean(deleteTarget)}
-        title="Remove this counter?"
-        message="Tokens it has already served keep their record in the reports."
-        confirmLabel="Remove"
+        title={t("tkStRemoveCounterQ")}
+        message={t("tkStRemoveCounterBody")}
+        confirmLabel={t("remove")}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={() => {
           const target = deleteTarget;
@@ -549,17 +569,47 @@ function CountersSection() {
 
 /* ------------------------------------------------------------------ */
 
-const THEMES: { id: DisplayTheme; label: string; hint: string }[] = [
-  { id: "light", label: "Light", hint: "Matches the rest of Setu" },
-  { id: "dark", label: "Dark", hint: "Easier on a screen left on all day" },
-  { id: "high-contrast", label: "High contrast", hint: "For a TV seen from far away" },
+const THEMES: { id: DisplayTheme; label: TKey; hint: TKey }[] = [
+  { id: "light", label: "appThemeLight", hint: "tkStThemeLightHint" },
+  { id: "dark", label: "appThemeDark", hint: "tkStThemeDarkHint" },
+  { id: "high-contrast", label: "appThemeHighContrast", hint: "tkStThemeContrastHint" },
 ];
 
+/** The business day as a reader of `lang` would write it. */
+function formatDay(dateKey: string, lang: LanguageCode): string {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  if (!y || !m || !d) return dateKey;
+  return new Date(y, m - 1, d).toLocaleDateString(intlLocaleFor(lang), {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+const CHIME_KEYS: Record<"bell" | "ding" | "chime", TKey> = {
+  bell: "tkStChimeBell",
+  ding: "tkStChimeDing",
+  chime: "tkStChimeChime",
+};
+
+/**
+ * The spoken line when the announcement language changes.
+ *
+ * A template still equal to one of our shipped lines is ours, so it moves to
+ * the newly chosen voice language. Anything the owner typed is left alone.
+ */
+function voiceLineFor(current: string, voiceLang: string, lang: LanguageCode): string {
+  const site = LANGUAGES.find(({ code }) => voiceLang.toLowerCase().startsWith(code));
+  const target = site ? site.code : lang;
+  return voiceTemplateFor(current, target);
+}
+
 function DisplaySection() {
+  const { t } = useI18n();
   const { settings, updateSettings } = useToken();
   return (
     <SectionCard
-      title="Waiting-room display"
+      title={t("tkStDisplaySection")}
       action={
         <a
           href="/products/free-token-system/display"
@@ -568,28 +618,28 @@ function DisplaySection() {
           className={secondaryBtnClass}
         >
           <Monitor className="h-4 w-4" aria-hidden="true" />
-          Open display
+          {t("tkStOpenDisplay")}
         </a>
       }
     >
       <div className="grid gap-3">
-        <Field label="Title" hint="The line across the top of the screen.">
+        <Field label={t("tkStTitle")} hint={t("tkStTitleHint")}>
           <input
             className={inputClass}
             value={settings.displayTitle}
             onChange={(e) => void updateSettings({ displayTitle: e.target.value })}
-            placeholder="Welcome to Sharma Diagnostics"
+            placeholder={t("tkStTitlePh")}
           />
         </Field>
-        <Field label="Notice ticker" hint="Scrolls along the bottom. Leave empty to hide it.">
+        <Field label={t("tkStTicker")} hint={t("tkStTickerHint")}>
           <input
             className={inputClass}
             value={settings.tickerText}
             onChange={(e) => void updateSettings({ tickerText: e.target.value })}
-            placeholder="Reports ready in 30 minutes · Please keep your token safe"
+            placeholder={t("tkStTickerPh")}
           />
         </Field>
-        <Field label="How many upcoming tokens to list">
+        <Field label={t("tkStUpcomingCount")}>
           <input
             className={`${inputClass} max-w-[8rem]`}
             type="number"
@@ -605,26 +655,25 @@ function DisplaySection() {
         </Field>
         <div>
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Theme
+            {t("appTheme")}
           </span>
           <div className="flex flex-wrap gap-2">
             {THEMES.map((theme) => (
               <button
                 key={theme.id}
                 type="button"
-                title={theme.hint}
+                title={t(theme.hint)}
                 className={`${chipBtnClass} ${settings.theme === theme.id ? "border-indigo bg-indigo/10 text-indigo" : ""}`}
                 onClick={() => void updateSettings({ theme: theme.id })}
               >
-                {theme.label}
+                {t(theme.label)}
               </button>
             ))}
           </div>
         </div>
       </div>
       <p className="mt-3 text-xs text-muted">
-        Open the display on the TV or second monitor once and leave it. It follows this counter
-        without anyone touching it.
+        {t("tkStDisplayFoot")}
       </p>
     </SectionCard>
   );
@@ -641,6 +690,7 @@ function DisplaySection() {
  * that makes noise right now.
  */
 function AnnouncementSection() {
+  const { t, lang } = useI18n();
   const { settings, updateSettings } = useToken();
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [tested, setTested] = useState<string>("");
@@ -667,7 +717,7 @@ function AnnouncementSection() {
       {
         template: settings.voiceTemplate,
         token: "A 42",
-        counter: "Counter 3",
+        counter: fill(t("tkStCounterN"), { n: 3 }),
         lang: settings.voiceLang,
         rate: settings.voiceRate,
         repeat: 1,
@@ -676,44 +726,41 @@ function AnnouncementSection() {
     );
     if (settings.chimeEnabled) playChime(settings.chimeSound);
     setTested(
-      spoke
-        ? "Playing now. If you heard nothing, check the screen's volume."
-        : "This browser could not speak. The chime will be used instead."
+      spoke ? t("tkStTestPlaying") : t("tkStTestNoSpeech")
     );
     window.setTimeout(() => setTested(""), 6000);
   };
 
   return (
-    <SectionCard title="Announcements">
+    <SectionCard title={t("tkStAnnouncements")}>
       <label className="flex items-center gap-2 text-sm font-semibold text-ink">
         <input
           type="checkbox"
           checked={settings.voiceEnabled}
           onChange={(e) => void updateSettings({ voiceEnabled: e.target.checked })}
         />
-        Call the number out loud
+        {t("tkStCallOutLoud")}
       </label>
 
       {!supported && (
         <p className="mt-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-          This browser has no speech engine, so nothing will be spoken here. The chime and the
-          flashing card still work. Chrome, Edge and Safari on a laptop all speak.
+          {t("tkStNoSpeechEngine")}
         </p>
       )}
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <Field label="Language">
+        <Field label={t("language")}>
           <select
             className={inputClass}
             value={settings.voiceLang}
             onChange={(e) => {
-              const lang = e.target.value;
+              const code = e.target.value;
               void updateSettings({
-                voiceLang: lang,
-                voiceTemplate:
-                  settings.voiceTemplate === DEFAULT_VOICE_TEMPLATE && lang.startsWith("hi")
-                    ? HINDI_VOICE_TEMPLATE
-                    : settings.voiceTemplate,
+                voiceLang: code,
+                // A template the owner has not rewritten follows the voice
+                // language, so picking Hindi gets the Hindi line rather than
+                // an English sentence read with a Hindi voice.
+                voiceTemplate: voiceLineFor(settings.voiceTemplate, code, lang),
               });
             }}
           >
@@ -723,7 +770,7 @@ function AnnouncementSection() {
               </option>
             ))}
             {deviceLanguages.length > 0 && (
-              <optgroup label="Also on this device">
+              <optgroup label={t("tkStAlsoOnDevice")}>
                 {deviceLanguages.map((code) => (
                   <option key={code} value={code}>
                     {code}
@@ -734,7 +781,7 @@ function AnnouncementSection() {
           </select>
         </Field>
 
-        <Field label={`Speaking speed — ${settings.voiceRate.toFixed(1)}×`}>
+        <Field label={fill(t("tkStSpeakingSpeed"), { rate: settings.voiceRate.toFixed(1) })}>
           <input
             type="range"
             min={0.5}
@@ -749,8 +796,8 @@ function AnnouncementSection() {
 
       <div className="mt-3">
         <Field
-          label="What it says"
-          hint="{token} and {counter} are filled in. A-42 is read as “A forty-two”."
+          label={t("tkStWhatItSays")}
+          hint={t("tkStWhatItSaysHint")}
         >
           <input
             className={inputClass}
@@ -761,7 +808,7 @@ function AnnouncementSection() {
       </div>
 
       <p className="mt-3 rounded-lg bg-cream-paper px-3 py-2 text-sm text-muted">
-        {describeVoiceChoice(choice, settings.voiceLang)}
+        {describeVoiceChoice(choice, settings.voiceLang, lang)}
       </p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -772,7 +819,7 @@ function AnnouncementSection() {
               checked={settings.chimeEnabled}
               onChange={(e) => void updateSettings({ chimeEnabled: e.target.checked })}
             />
-            Play a chime first
+            {t("tkStPlayChimeFirst")}
           </label>
           <div className="mt-2 flex flex-wrap gap-2">
             {(["bell", "ding", "chime"] as const).map((sound) => (
@@ -785,18 +832,18 @@ function AnnouncementSection() {
                   playChime(sound);
                 }}
               >
-                {sound}
+                {t(CHIME_KEYS[sound])}
               </button>
             ))}
           </div>
           {!chimeSupported() && (
             <p className="mt-2 text-xs text-amber-700">
-              This browser cannot play the chime either — the card will flash instead.
+              {t("tkStNoChime")}
             </p>
           )}
         </div>
 
-        <Field label="Repeat each announcement">
+        <Field label={t("tkStRepeatAnnouncement")}>
           <div className="flex gap-2">
             {([1, 2] as const).map((count) => (
               <button
@@ -819,11 +866,11 @@ function AnnouncementSection() {
             checked={settings.autoSkipEnabled}
             onChange={(e) => void updateSettings({ autoSkipEnabled: e.target.checked })}
           />
-          Skip a called token automatically if nobody comes
+          {t("tkStAutoSkip")}
         </label>
         {settings.autoSkipEnabled && (
           <div className="mt-3 flex flex-wrap items-end gap-3">
-            <Field label="Minutes to reach the counter">
+            <Field label={t("tkStMinutesToReach")}>
               <input
                 className={`${inputClass} max-w-[7rem]`}
                 type="number"
@@ -840,15 +887,13 @@ function AnnouncementSection() {
           </div>
         )}
         <p className="mt-2 text-xs text-muted">
-          The counter shows the countdown, and there is a WhatsApp button to tell the customer the
-          clock is running before it runs out. When it does, they move to Skipped — and coming back
-          gets them a fresh number behind everyone currently waiting, never their old one.
+          {t("tkStAutoSkipFoot")}
         </p>
       </div>
 
       <button type="button" className={`${primaryBtnClass} mt-4`} onClick={test}>
         <Volume2 className="h-4 w-4" aria-hidden="true" />
-        Test the announcement
+        {t("tkStTestAnnouncement")}
       </button>
       {tested && <p className="mt-2 text-sm text-muted">{tested}</p>}
     </SectionCard>
@@ -858,15 +903,13 @@ function AnnouncementSection() {
 /* ------------------------------------------------------------------ */
 
 function DaySection() {
+  const { t, lang } = useI18n();
   const { settings, updateSettings, resetDayNow, today } = useToken();
   const [confirming, setConfirming] = useState(false);
 
   return (
-    <SectionCard title="The day">
-      <Field
-        label="Numbering restarts at"
-        hint="Pick an hour before you open. Work done after midnight but before this hour still counts as the previous day."
-      >
+    <SectionCard title={t("tkStTheDay")}>
+      <Field label={t("tkStNumberingRestarts")} hint={t("tkStNumberingHint")}>
         <select
           className={`${inputClass} max-w-[10rem]`}
           value={settings.dailyResetHour}
@@ -874,14 +917,14 @@ function DaySection() {
         >
           {Array.from({ length: 24 }, (_, hour) => (
             <option key={hour} value={hour}>
-              {hour === 0 ? "Midnight" : `${String(hour).padStart(2, "0")}:00`}
+              {hour === 0 ? t("tkStMidnight") : `${String(hour).padStart(2, "0")}:00`}
             </option>
           ))}
         </select>
       </Field>
 
       <p className="mt-3 text-sm text-muted">
-        Today is <strong className="text-ink">{today}</strong>.
+        {fill(t("tkStTodayIs"), { date: formatDay(today, lang) })}
       </p>
 
       <button
@@ -890,18 +933,17 @@ function DaySection() {
         onClick={() => setConfirming(true)}
       >
         <RotateCcw className="h-4 w-4" aria-hidden="true" />
-        Reset the queue now
+        {t("tkStResetQueueNow")}
       </button>
       <p className="mt-2 text-xs text-muted">
-        For the day that does not end when the clock says it does — a night shift, a wedding-season
-        Sunday. Numbering starts again at 1 and today&apos;s history is kept.
+        {t("tkStResetFoot")}
       </p>
 
       <ConfirmDialog
         open={confirming}
-        title="Reset the queue now?"
-        message="Everyone still waiting or called is cancelled, and the next token issued will be number 1. Today's history stays in Reports."
-        confirmLabel="Reset the queue"
+        title={t("tkStResetQueueQ")}
+        message={t("tkStResetQueueBody")}
+        confirmLabel={t("tkStResetQueueConfirm")}
         onCancel={() => setConfirming(false)}
         onConfirm={() => {
           setConfirming(false);
@@ -915,11 +957,12 @@ function DaySection() {
 /* ------------------------------------------------------------------ */
 
 function MessagesSection() {
+  const { t, lang } = useI18n();
   const { settings, updateSettings } = useToken();
   return (
-    <SectionCard title="WhatsApp messages">
+    <SectionCard title={t("tkStWhatsAppMessages")}>
       <div className="grid gap-3">
-        <Field label="When a token is issued">
+        <Field label={t("tkStTplIssuedLabel")}>
           <textarea
             className={`${inputClass} min-h-[80px]`}
             value={settings.messageTemplates.tokenIssued}
@@ -930,7 +973,7 @@ function MessagesSection() {
             }
           />
         </Field>
-        <Field label="Almost your turn">
+        <Field label={t("tkStTplAlmostLabel")}>
           <textarea
             className={`${inputClass} min-h-[80px]`}
             value={settings.messageTemplates.almostYourTurn}
@@ -945,8 +988,8 @@ function MessagesSection() {
           />
         </Field>
         <Field
-          label="Called — we are waiting for you"
-          hint="Sent from the counter when their number is called. {minutes} is the grace window."
+          label={t("tkStTplWaitingLabel")}
+          hint={t("tkStTplWaitingHint")}
         >
           <textarea
             className={`${inputClass} min-h-[80px]`}
@@ -961,7 +1004,7 @@ function MessagesSection() {
             }
           />
         </Field>
-        <Field label="Skipped — nobody came">
+        <Field label={t("tkStTplSkippedLabel")}>
           <textarea
             className={`${inputClass} min-h-[80px]`}
             value={settings.messageTemplates.skipped}
@@ -974,16 +1017,14 @@ function MessagesSection() {
         </Field>
       </div>
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
-        {MESSAGE_PLACEHOLDERS.map((row) => (
+        {messagePlaceholders(lang).map((row) => (
           <span key={row.token}>
             <code className="font-semibold text-ink">{row.token}</code> {row.meaning}
           </span>
         ))}
       </div>
       <p className="mt-3 text-xs text-muted">
-        Nothing is sent automatically. The app opens WhatsApp with the message ready and you tap
-        send — an app with no server cannot do more than that, and pretending otherwise would be
-        worse.
+        {t("tkStMessagesFoot")}
       </p>
     </SectionCard>
   );
@@ -992,6 +1033,7 @@ function MessagesSection() {
 /* ------------------------------------------------------------------ */
 
 function SheetSection() {
+  const { t, lang } = useI18n();
   const { settings, updateSettings, syncToSheet } = useToken();
   const [url, setUrl] = useState(settings.sheetUrl ?? "");
   const [status, setStatus] = useState("");
@@ -1001,8 +1043,8 @@ function SheetSection() {
   useEffect(() => setUrl(settings.sheetUrl ?? ""), [settings.sheetUrl]);
 
   return (
-    <SectionCard title="Google Sheet backup">
-      <Field label="Apps Script URL" hint="Leave empty to keep everything on this device.">
+    <SectionCard title={t("appSheetBackupTitle")}>
+      <Field label={t("appAppsScriptUrl")} hint={t("appAppsScriptUrlHint")}>
         <input
           className={inputClass}
           value={url}
@@ -1021,11 +1063,13 @@ function SheetSection() {
             setStatus("");
             try {
               if (!isValidSyncUrl(url)) {
-                setStatus("That does not look like an Apps Script URL.");
+                setStatus(t("appNotAppsScriptUrl"));
                 return;
               }
-              const result = await testSheetConnection(url.trim());
-              setStatus(result.ok ? "Connected." : result.error ?? "Could not connect.");
+              const result = await testSheetConnection(url.trim(), lang);
+              setStatus(
+                result.ok ? t("appSheetConnected") : result.error ?? t("appSheetCouldNotConnect")
+              );
               if (result.ok) await updateSettings({ sheetUrl: url.trim() });
             } finally {
               setBusy(false);
@@ -1033,7 +1077,7 @@ function SheetSection() {
           }}
         >
           <Sheet className="h-4 w-4" aria-hidden="true" />
-          Test and save
+          {t("appTestAndSave")}
         </button>
 
         <button
@@ -1045,16 +1089,16 @@ function SheetSection() {
             setStatus("");
             try {
               await syncToSheet();
-              setStatus("Pushed to your sheet.");
+              setStatus(t("appPushedToSheet"));
             } catch (error) {
-              setStatus(error instanceof Error ? error.message : "Could not push to the sheet.");
+              setStatus(error instanceof Error ? error.message : t("appCouldNotPushToSheet"));
             } finally {
               setBusy(false);
             }
           }}
         >
           <Upload className="h-4 w-4" aria-hidden="true" />
-          Push now
+          {t("appPushNow")}
         </button>
 
         <button
@@ -1062,22 +1106,23 @@ function SheetSection() {
           className={chipBtnClass}
           onClick={() => setShowScript((value) => !value)}
         >
-          {showScript ? "Hide" : "Show"} the script to paste
+          {showScript ? t("appHideScriptToPaste") : t("appShowScriptToPaste")}
         </button>
       </div>
 
       {status && <p className="mt-3 text-sm font-semibold text-ink">{status}</p>}
       {settings.lastSyncAt && (
         <p className="mt-1 text-xs text-muted">
-          Last pushed {new Date(settings.lastSyncAt).toLocaleString("en-IN")}.
+          {fill(t("appLastPushedAt"), {
+            when: new Date(settings.lastSyncAt).toLocaleString(intlLocaleFor(lang)),
+          })}
         </p>
       )}
 
       {showScript && (
         <div className="mt-3">
           <p className="mb-2 text-xs text-muted">
-            In your Google Sheet: Extensions → Apps Script, paste this, then Deploy → New
-            deployment → Web app, with access set to &ldquo;Anyone&rdquo;.
+            {t("appScriptPasteSteps")}
           </p>
           <pre className="max-h-64 overflow-auto rounded-lg bg-ink p-3 text-xs text-cream">
             {APPS_SCRIPT_TEMPLATE}
@@ -1086,8 +1131,7 @@ function SheetSection() {
       )}
 
       <p className="mt-3 text-xs text-muted">
-        One way only. The sheet is a copy for the owner, never a source the queue reads back —
-        a stale spreadsheet overwriting a live queue would lose somebody standing in the room.
+        {t("tkStSheetFoot")}
       </p>
     </SectionCard>
   );
@@ -1096,12 +1140,13 @@ function SheetSection() {
 /* ------------------------------------------------------------------ */
 
 function BackupSection() {
+  const { t, lang } = useI18n();
   const { settings, updateSettings, applyRestoredBackup } = useToken();
   const fileRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
 
   return (
-    <SectionCard title="Backup">
+    <SectionCard title={t("appBackup")}>
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
@@ -1109,15 +1154,15 @@ function BackupSection() {
           onClick={async () => {
             downloadBackupFile(await createBackup());
             await updateSettings({ lastBackupAt: new Date().toISOString() });
-            setStatus("Backup downloaded.");
+            setStatus(t("appBackupDownloaded"));
           }}
         >
           <Download className="h-4 w-4" aria-hidden="true" />
-          Download a backup
+          {t("appDownloadABackup")}
         </button>
         <button type="button" className={secondaryBtnClass} onClick={() => fileRef.current?.click()}>
           <Upload className="h-4 w-4" aria-hidden="true" />
-          Restore a backup
+          {t("appRestoreABackup")}
         </button>
         <input
           ref={fileRef}
@@ -1130,19 +1175,21 @@ function BackupSection() {
             if (!file) return;
             const result = parseBackupFile(await file.text());
             if (!result.ok) {
-              setStatus(result.error);
+              setStatus(t(result.error));
               return;
             }
             await applyRestoredBackup(result.backup);
-            setStatus("Restored.");
+            setStatus(t("appRestored"));
           }}
         />
       </div>
       {status && <p className="mt-3 text-sm font-semibold text-ink">{status}</p>}
       <p className="mt-2 text-xs text-muted">
         {settings.lastBackupAt
-          ? `Last backup ${new Date(settings.lastBackupAt).toLocaleString("en-IN")}.`
-          : "You have not taken a backup yet. This browser is the only copy."}
+          ? fill(t("appLastBackupAt"), {
+              when: new Date(settings.lastBackupAt).toLocaleString(intlLocaleFor(lang)),
+            })
+          : t("appNoBackupYet")}
       </p>
     </SectionCard>
   );
@@ -1151,18 +1198,19 @@ function BackupSection() {
 /* ------------------------------------------------------------------ */
 
 function LockSection() {
+  const { t } = useI18n();
   const { settings, updateSettings } = useToken();
   const [pin, setPin] = useState("");
   const [status, setStatus] = useState("");
   const hasPin = Boolean(settings.pinHash);
 
   return (
-    <SectionCard title="Screen lock">
+    <SectionCard title={t("appLockTitle")}>
       {hasPin ? (
         <>
-          <p className="text-sm text-muted">A PIN is set on this device.</p>
+          <p className="text-sm text-muted">{t("appPinSetOnDevice")}</p>
           <div className="mt-3 flex flex-wrap items-end gap-2">
-            <Field label="Lock after (minutes idle)" hint="0 never locks on its own.">
+            <Field label={t("appLockAfterMinutesIdle")} hint={t("appNeverLocksHint")}>
               <input
                 className={`${inputClass} max-w-[8rem]`}
                 type="number"
@@ -1179,17 +1227,17 @@ function LockSection() {
               className={dangerBtnClass}
               onClick={async () => {
                 await updateSettings({ pinHash: "", pinSalt: "" });
-                setStatus("PIN removed.");
+                setStatus(t("appPinRemoved"));
               }}
             >
               <X className="h-4 w-4" aria-hidden="true" />
-              Remove the PIN
+              {t("appRemoveThePin")}
             </button>
           </div>
         </>
       ) : (
         <div className="flex flex-wrap items-end gap-2">
-          <Field label="Set a PIN" hint="4 to 8 digits.">
+          <Field label={t("appSetAPin")} hint={t("appPinDigitsHint")}>
             <input
               className={`${inputClass} max-w-[10rem]`}
               value={pin}
@@ -1203,23 +1251,22 @@ function LockSection() {
             className={secondaryBtnClass}
             onClick={async () => {
               if (!isValidPinFormat(pin)) {
-                setStatus("A PIN is 4 to 8 digits.");
+                setStatus(t("appPinFormatError"));
                 return;
               }
               const salt = generateSalt();
               await updateSettings({ pinHash: await hashPin(pin, salt), pinSalt: salt });
               setPin("");
-              setStatus("PIN set.");
+              setStatus(t("appPinSet"));
             }}
           >
-            Set PIN
+            {t("appSetPin")}
           </button>
         </div>
       )}
       {status && <p className="mt-3 text-sm font-semibold text-ink">{status}</p>}
       <p className="mt-2 text-xs text-muted">
-        A deterrent against a customer poking at an unattended counter, not a defence against
-        someone with the device and developer tools. The queue lives in this browser.
+        {t("tkStLockFoot")}
       </p>
     </SectionCard>
   );
@@ -1228,25 +1275,25 @@ function LockSection() {
 /* ------------------------------------------------------------------ */
 
 function DangerSection() {
+  const { t } = useI18n();
   const { clearAllData } = useToken();
   const [confirming, setConfirming] = useState(false);
 
   return (
-    <SectionCard title="Start over">
+    <SectionCard title={t("appStartOver")}>
       <button type="button" className={dangerBtnClass} onClick={() => setConfirming(true)}>
         <Trash2 className="h-4 w-4" aria-hidden="true" />
-        Delete everything in the queue
+        {t("tkStDeleteQueueBtn")}
       </button>
       <p className="mt-2 text-xs text-muted">
-        Services, counters, tokens and these settings. Your business profile and your other Setu
-        tools are untouched. Take a backup first — this cannot be undone.
+        {t("tkStDangerFoot")}
       </p>
 
       <ConfirmDialog
         open={confirming}
-        title="Delete the whole queue?"
-        message="Every service, counter and token on this device is removed. Your other Setu tools keep their data."
-        confirmLabel="Delete everything"
+        title={t("tkStDeleteQueueQ")}
+        message={t("tkStDeleteQueueBody")}
+        confirmLabel={t("appDeleteEverything")}
         onCancel={() => setConfirming(false)}
         onConfirm={() => {
           setConfirming(false);

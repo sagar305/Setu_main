@@ -5,6 +5,9 @@
 // the by-hour load row above all, which is the number that decides whether a
 // second person comes in at 11am.
 
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import {
   averageServiceMinutes,
   averageWaitMinutes,
@@ -165,20 +168,25 @@ export function summarise(tokens: Token[]): DaySummary {
 }
 
 /** "12 min", "1 hr 5 min", or a dash when there is nothing to measure. */
-export function formatMinutes(minutes: number | null): string {
+export function formatMinutes(minutes: number | null, lang: LanguageCode): string {
   if (minutes === null || Number.isNaN(minutes)) return "—";
   const rounded = Math.round(minutes);
-  if (rounded < 60) return `${rounded} min`;
+  if (rounded < 60) return fill(translate(lang, "svMinutes"), { n: rounded });
   const hours = Math.floor(rounded / 60);
   const rest = rounded % 60;
-  return rest === 0 ? `${hours} hr` : `${hours} hr ${rest} min`;
+  if (rest === 0) return fill(translate(lang, "appHoursN"), { h: hours });
+  return fill(translate(lang, "appHoursMinutesN"), { h: hours, n: rest });
 }
 
-export function formatClock(iso: string | null): string {
+export function formatClock(iso: string | null, lang: LanguageCode): string {
   if (!iso) return "—";
   const at = new Date(iso);
   if (Number.isNaN(at.getTime())) return "—";
-  return at.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true });
+  return at.toLocaleTimeString(intlLocaleFor(lang), {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 }
 
 /** Per-token row used by both History and the CSV export. */
@@ -194,7 +202,8 @@ export type TokenRow = {
 export function tokenRows(
   tokens: Token[],
   services: Service[],
-  counters: Counter[]
+  counters: Counter[],
+  lang: LanguageCode
 ): TokenRow[] {
   const serviceById = new Map(services.map((service) => [service.id, service]));
   const counterById = new Map(counters.map((counter) => [counter.id, counter]));
@@ -204,7 +213,7 @@ export function tokenRows(
     return {
       token,
       label: prefix ? `${prefix}-${token.number}` : String(token.number),
-      serviceName: service?.name ?? "Removed service",
+      serviceName: service?.name ?? translate(lang, "tkCoRemovedService"),
       counterName: token.counterId ? counterById.get(token.counterId)?.name ?? "—" : "—",
       waited: waitMinutes(token),
       serviceTime: serviceMinutes(token),

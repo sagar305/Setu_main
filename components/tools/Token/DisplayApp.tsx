@@ -19,6 +19,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Maximize2, Volume2 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { TokenProvider, useToken } from "@/lib/token/store";
 import { compareQueue, spokenToken } from "@/lib/token/calc";
 import { chimeSupported, chooseVoice, loadVoices, playChime, speakAnnouncement, speechSupported, unlockAudio } from "@/lib/token/voice";
@@ -37,7 +40,7 @@ import {
 const RECENT_COUNT = 3;
 
 /** A ticking wall clock, to the minute. */
-function useClock(): string {
+function useClock(lang: LanguageCode): string {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     // Aligned to the next minute rather than a 1s interval: this screen is on
@@ -54,13 +57,18 @@ function useClock(): string {
     schedule();
     return () => window.clearTimeout(timer);
   }, []);
-  return now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true });
+  return now.toLocaleTimeString(intlLocaleFor(lang), {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 }
 
 function DisplayBody() {
+  const { t, lang } = useI18n();
   const { status, errorMessage, settings, services, counters, todayTokens, business } = useToken();
   const palette = DISPLAY_PALETTES[settings.theme];
-  const clock = useClock();
+  const clock = useClock(lang);
 
   const [started, setStarted] = useState(false);
   const [wakeLockFailed, setWakeLockFailed] = useState(false);
@@ -255,7 +263,7 @@ function DisplayBody() {
   };
 
   if (status === "loading") {
-    return <FullScreenMessage palette={palette} message="Opening the queue…" />;
+    return <FullScreenMessage palette={palette} message={t("tkDpOpening")} />;
   }
   if (status === "error") {
     return <FullScreenMessage palette={palette} message={errorMessage} />;
@@ -264,7 +272,7 @@ function DisplayBody() {
     return (
       <FullScreenMessage
         palette={palette}
-        message="Set the queue up on the counter screen first, then open this display."
+        message={t("tkDpSetUpFirst")}
       />
     );
   }
@@ -284,7 +292,7 @@ function DisplayBody() {
         style={{ fontSize: TITLE_CLAMP }}
       >
         <h1 className="truncate font-bold tracking-tight">
-          {settings.displayTitle || business?.name || "Now serving"}
+          {settings.displayTitle || business?.name || t("tkDpNowServing")}
         </h1>
         <span className="shrink-0 tabular-nums" style={{ color: palette.muted }}>
           {clock}
@@ -302,7 +310,7 @@ function DisplayBody() {
         }`}
         style={{ ["--token-flash-colour" as string]: palette.flash }}
         aria-live="polite"
-        aria-label="Now serving"
+        aria-label={t("tkDpNowServing")}
       >
         {nowServing ? (
           <>
@@ -310,7 +318,7 @@ function DisplayBody() {
               className="font-semibold uppercase tracking-[0.2em]"
               style={{ color: palette.muted, fontSize: TICKER_CLAMP }}
             >
-              Now serving
+              {t("tkDpNowServing")}
             </p>
             <p
               className="font-extrabold leading-[0.9] tracking-tight"
@@ -332,7 +340,7 @@ function DisplayBody() {
             className="text-center font-semibold"
             style={{ fontSize: NEXT_CLAMP, color: palette.muted }}
           >
-            Please wait — your number will appear here.
+            {t("tkDpPleaseWait")}
           </p>
         )}
       </section>
@@ -348,7 +356,7 @@ function DisplayBody() {
             className="mb-[0.6vh] font-semibold uppercase tracking-[0.15em]"
             style={{ color: palette.muted, fontSize: TICKER_CLAMP }}
           >
-            Just called
+            {t("tkDpJustCalled")}
           </p>
           <div className="flex flex-wrap items-baseline gap-x-[2vw] gap-y-[0.5vh]">
             {recent.length === 0 ? (
@@ -374,7 +382,7 @@ function DisplayBody() {
             className="mb-[0.6vh] font-semibold uppercase tracking-[0.15em]"
             style={{ color: palette.muted, fontSize: TICKER_CLAMP }}
           >
-            Next up
+            {t("tkDpNextUp")}
           </p>
           <div className="flex flex-wrap items-baseline gap-x-[2vw] gap-y-[0.5vh]">
             {upNext.length === 0 ? (
@@ -405,7 +413,7 @@ function DisplayBody() {
       {!started && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/70 p-6 text-center">
           <p className="max-w-md text-lg font-semibold text-white">
-            Tap once to let this screen make a sound, and to fill the display.
+            {t("tkDpTapOnce")}
           </p>
           <button
             type="button"
@@ -413,14 +421,14 @@ function DisplayBody() {
             className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-4 text-lg font-bold text-ink"
           >
             <Volume2 className="h-5 w-5" aria-hidden="true" />
-            Start the display
+            {t("tkDpStartDisplay")}
           </button>
           <p className="max-w-md text-sm text-white/80">
             {speechSupported()
-              ? "Numbers will be called out loud."
+              ? t("tkDpWillSpeak")
               : chimeSupported()
-                ? "This browser cannot speak — it will chime and flash instead."
-                : "This browser has no sound — the screen will flash on every call."}
+                ? t("tkDpChimeOnly")
+                : t("tkDpFlashOnly")}
           </p>
         </div>
       )}
@@ -431,7 +439,7 @@ function DisplayBody() {
           style={{ color: palette.muted }}
         >
           <Maximize2 className="mr-1 inline h-3 w-3" aria-hidden="true" />
-          This browser cannot keep the screen awake — set the display to never sleep.
+          {t("tkDpNoWakeLock")}
         </p>
       )}
     </div>

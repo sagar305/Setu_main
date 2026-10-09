@@ -22,7 +22,9 @@ import {
   totalsByDay,
   demandByService,
 } from "./reports";
-import { TOKEN_STATUS_LABELS, type Counter, type TokenSettings, type Service, type Token } from "./types";
+import { statusLabel, type Counter, type TokenSettings, type Service, type Token } from "./types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 
 type TabPayload = { tab: string; headers: string[]; rows: (string | number | boolean)[][] };
 
@@ -65,7 +67,7 @@ function metaTab(snapshot: TokenSnapshot): TabPayload {
 }
 
 function tokensTab(snapshot: TokenSnapshot): TabPayload {
-  const rows = tokenRows(snapshot.tokens, snapshot.services, snapshot.counters);
+  const rows = tokenRows(snapshot.tokens, snapshot.services, snapshot.counters, "en");
   return {
     tab: SHEET_TABS.tokens,
     headers: [
@@ -87,14 +89,16 @@ function tokensTab(snapshot: TokenSnapshot): TabPayload {
       row.token.date,
       row.label,
       row.serviceName,
-      TOKEN_STATUS_LABELS[row.token.status],
+      // English: the sheet's headers are too, so a formula written against
+      // one tab keeps working whatever language the owner reads the app in.
+      statusLabel(row.token.status, "en"),
       row.token.priority,
       row.counterName,
       row.token.customerName,
       row.token.phone,
-      formatClock(row.token.issuedAt),
-      formatClock(row.token.calledAt),
-      formatClock(row.token.closedAt),
+      formatClock(row.token.issuedAt, "en"),
+      formatClock(row.token.calledAt, "en"),
+      formatClock(row.token.closedAt, "en"),
       row.waited === null ? "" : Math.round(row.waited),
       row.serviceTime === null ? "" : Math.round(row.serviceTime),
     ]),
@@ -204,32 +208,38 @@ async function postToScript(url: string, payload: unknown): Promise<unknown> {
   }
 }
 
-export async function testSheetConnection(url: string): Promise<{ ok: boolean; error?: string }> {
+export async function testSheetConnection(
+  url: string,
+  lang: LanguageCode
+): Promise<{ ok: boolean; error?: string }> {
   try {
     const result = (await postToScript(url, { action: "test", app: "setu-token" })) as {
       ok?: boolean;
       error?: string;
     };
     if (result && result.ok === false) {
-      return { ok: false, error: result.error || "The script reported an error." };
+      return { ok: false, error: result.error || translate(lang, "appScriptReportedError") };
     }
     return { ok: true };
   } catch {
     return {
       ok: false,
-      error:
-        'Could not reach the script. Check the URL, and make sure the deployment\'s access is set to "Anyone".',
+      error: translate(lang, "appCouldNotReachScript"),
     };
   }
 }
 
-export async function pushToSheet(url: string, tabs: TabPayload[]): Promise<void> {
+export async function pushToSheet(
+  url: string,
+  tabs: TabPayload[],
+  lang: LanguageCode
+): Promise<void> {
   const result = (await postToScript(url, { action: "push", app: "setu-token", tabs })) as {
     ok?: boolean;
     error?: string;
   };
   if (result && result.ok === false) {
-    throw new Error(result.error || "The sheet script rejected the update.");
+    throw new Error(result.error || translate(lang, "appSheetRejectedUpdate"));
   }
 }
 

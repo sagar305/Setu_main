@@ -5,6 +5,10 @@
 // hangs off, and it is a business day rather than a calendar day: a clinic
 // that runs past midnight keeps one logical day until the reset hour.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { relabelSeed } from "@/lib/i18n/seed-labels";
+import { translate, type TKey } from "@/lib/i18n/translate";
+
 /** A queue line. Most businesses have one; banks and RTOs have several. */
 export type Service = {
   id: string;
@@ -165,30 +169,76 @@ export const VOICE_LANGUAGES: { code: string; label: string }[] = [
   { code: "kn-IN", label: "ಕನ್ನಡ — Kannada" },
 ];
 
-export const DEFAULT_VOICE_TEMPLATE = "Token {token}, please proceed to {counter}";
-export const HINDI_VOICE_TEMPLATE = "टोकन {token}, कृपया {counter} पर जाएं";
+/**
+ * The spoken line, in the reader's language.
+ *
+ * The template is stored, so it is seeded rather than translated on the way
+ * out: an owner who rewrites it keeps their own words for ever.
+ */
+export function defaultVoiceTemplate(lang: LanguageCode): string {
+  return translate(lang, "tkVoiceDefault");
+}
 
-export const DEFAULT_MESSAGE_TEMPLATES: Record<MessageTemplateKey, string> = {
-  tokenIssued:
-    "Namaste {name}, your token at {business} is {token} for {service}. About {wait} of waiting. Please be seated.",
-  almostYourTurn:
-    "{name}, your token {token} at {business} is next but one. Please come to the waiting area.",
-  waitingForYou:
-    "{name}, your token {token} has been called at {business}. Please come to {counter} within {minutes} minutes, or the token will be skipped.",
-  skipped:
-    "{name}, token {token} was called at {business} but nobody came, so it has been skipped. Please come to the counter and we will give you a new number.",
+/** A stored template that is still one of our seeds, in `lang`. */
+export function voiceTemplateFor(text: string, lang: LanguageCode): string {
+  return relabelSeed(text, ["tkVoiceDefault"], lang);
+}
+
+const MESSAGE_TEMPLATE_KEYS: Record<MessageTemplateKey, TKey> = {
+  tokenIssued: "tkTplIssued",
+  almostYourTurn: "tkTplAlmost",
+  waitingForYou: "tkTplWaiting",
+  skipped: "tkTplSkipped",
 };
 
-export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
-  { token: "{name}", meaning: "Customer's name (falls back to \"Sir/Ma'am\")" },
-  { token: "{token}", meaning: "Token, e.g. A-42" },
-  { token: "{service}", meaning: "Service name" },
-  { token: "{business}", meaning: "Your business name" },
-  { token: "{wait}", meaning: "Estimated wait, e.g. about 20 min" },
-  { token: "{ahead}", meaning: "How many people are ahead" },
-  { token: "{counter}", meaning: "Counter name, once called" },
-  { token: "{minutes}", meaning: "Minutes they have to reach the counter" },
+export const MESSAGE_TEMPLATE_ORDER: MessageTemplateKey[] = [
+  "tokenIssued",
+  "almostYourTurn",
+  "waitingForYou",
+  "skipped",
 ];
+
+/** The shipped WhatsApp wording, in the reader's language. */
+export function defaultMessageTemplates(
+  lang: LanguageCode
+): Record<MessageTemplateKey, string> {
+  return {
+    tokenIssued: translate(lang, MESSAGE_TEMPLATE_KEYS.tokenIssued),
+    almostYourTurn: translate(lang, MESSAGE_TEMPLATE_KEYS.almostYourTurn),
+    waitingForYou: translate(lang, MESSAGE_TEMPLATE_KEYS.waitingForYou),
+    skipped: translate(lang, MESSAGE_TEMPLATE_KEYS.skipped),
+  };
+}
+
+/** One stored template, re-languaged while it is still our seed. */
+export function messageTemplateFor(
+  key: MessageTemplateKey,
+  text: string,
+  lang: LanguageCode
+): string {
+  return relabelSeed(text || "", [MESSAGE_TEMPLATE_KEYS[key]], lang) || translate(lang, MESSAGE_TEMPLATE_KEYS[key]);
+}
+
+const PLACEHOLDER_KEYS: { token: string; key: TKey }[] = [
+  { token: "{name}", key: "tkPhName" },
+  { token: "{token}", key: "tkPhToken" },
+  { token: "{service}", key: "tkPhService" },
+  { token: "{business}", key: "tkPhBusiness" },
+  { token: "{wait}", key: "tkPhWait" },
+  { token: "{ahead}", key: "tkPhAhead" },
+  { token: "{counter}", key: "tkPhCounter" },
+  { token: "{minutes}", key: "tkPhMinutes" },
+];
+
+/** What each placeholder stands for, for the hint under the template editor. */
+export function messagePlaceholders(
+  lang: LanguageCode
+): { token: string; meaning: string }[] {
+  return PLACEHOLDER_KEYS.map(({ token, key }) => ({
+    token,
+    meaning: translate(lang, key),
+  }));
+}
 
 export const DEFAULT_SETTINGS: TokenSettings = {
   id: "main",
@@ -199,7 +249,7 @@ export const DEFAULT_SETTINGS: TokenSettings = {
   voiceEnabled: true,
   voiceLang: "en-IN",
   voiceRate: 0.9,
-  voiceTemplate: DEFAULT_VOICE_TEMPLATE,
+  voiceTemplate: "",
   autoSkipEnabled: true,
   autoSkipMinutes: 2,
   chimeEnabled: true,
@@ -207,13 +257,28 @@ export const DEFAULT_SETTINGS: TokenSettings = {
   announceRepeat: 2,
   theme: "light",
   selfIssueEnabled: false,
-  messageTemplates: DEFAULT_MESSAGE_TEMPLATES,
+  messageTemplates: { tokenIssued: "", almostYourTurn: "", waitingForYou: "", skipped: "" },
   lastBackupAt: null,
   lastResetAt: null,
   sheetUrl: "",
   sheetAutoSync: false,
   lastSyncAt: null,
 };
+
+/**
+ * The settings a new queue starts on, in the reader's language.
+ *
+ * DEFAULT_SETTINGS above keeps the wordy fields empty: it is the shape a
+ * stored row is folded onto, and a default in the wrong language written over
+ * somebody's own wording would be worse than an empty string.
+ */
+export function defaultTokenSettings(lang: LanguageCode): TokenSettings {
+  return {
+    ...DEFAULT_SETTINGS,
+    voiceTemplate: defaultVoiceTemplate(lang),
+    messageTemplates: defaultMessageTemplates(lang),
+  };
+}
 
 /** Tokens older than this are dropped on load; Reports covers the same window. */
 export const TOKEN_RETENTION_DAYS = 90;
@@ -224,14 +289,23 @@ export const RECALLS_BEFORE_SKIP = 2;
 /** How close to the front a token must be for the "almost your turn" nudge. */
 export const ALMOST_YOUR_TURN_POSITION = 3;
 
-export const TOKEN_STATUS_LABELS: Record<TokenStatus, string> = {
-  waiting: "Waiting",
-  called: "Called",
-  serving: "Serving",
-  served: "Served",
-  skipped: "Skipped",
-  cancelled: "Cancelled",
+const STATUS_KEYS: Record<TokenStatus, TKey> = {
+  waiting: "tkStWaiting",
+  called: "tkStCalled",
+  serving: "tkStServing",
+  served: "tkStServed",
+  skipped: "tkStSkipped",
+  cancelled: "tkStCancelled",
 };
+
+/**
+ * A status in words. The stored value stays the coded one — a row written in
+ * Tamil has to still read as "served" after the owner switches to English.
+ */
+export function statusLabel(status: TokenStatus, lang: LanguageCode): string {
+  const key = STATUS_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 export function generateId(): string {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
