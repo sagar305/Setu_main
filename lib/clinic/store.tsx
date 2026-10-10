@@ -29,6 +29,7 @@ import {
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
 import { generateId, nowIso, type Business, type Customer } from "@/lib/pos/types";
 import { useI18n } from "@/lib/i18n";
+import { translate } from "@/lib/i18n/translate";
 import {
   buildTabPayloads,
   isValidSyncUrl,
@@ -360,17 +361,15 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       })
       .catch((error: unknown) => {
         if (!active) return;
-        setErrorMessage(
-          error instanceof Error
-            ? error.message
-            : "Could not open local storage. Please use a modern browser outside private mode."
-        );
+        // The browser's own wording helps nobody; keep it for the console.
+        console.error(error);
+        setErrorMessage(translate(lang, "appStorageErrorTitle"));
         setStatus("error");
       });
     return () => {
       active = false;
     };
-  }, [loadAll]);
+  }, [loadAll, lang]);
 
   const startSetup = useCallback(() => setStatus("setup"), []);
   const backToWelcome = useCallback(() => setStatus("welcome"), []);
@@ -795,7 +794,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
   const startConsult = useCallback(
     async (appointmentId: string) => {
       const appointment = appointments.find((a) => a.id === appointmentId);
-      if (!appointment) throw new Error("That appointment no longer exists.");
+      if (!appointment) throw new Error(translate(lang, "clApAppointmentGone"));
 
       // Resume rather than duplicate — this is what makes closing the tab safe.
       const existing = visits.find((v) => v.appointmentId === appointmentId);
@@ -829,7 +828,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       setAppointments((prev) => prev.map((a) => (a.id === appointmentId ? nextAppointment : a)));
       return visit;
     },
-    [appointments, visits, blankVisit, batchWithSync, patchAppointment]
+    [appointments, visits, blankVisit, batchWithSync, patchAppointment, lang]
   );
 
   const startConsultForPatient = useCallback(
@@ -1161,14 +1160,14 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         setDirtySlices((prev) => prev.filter((slice) => !slices.includes(slice)));
       } catch (error: unknown) {
         setSheetLastError(
-          error instanceof Error ? error.message : "Could not reach the sheet."
+          error instanceof Error ? error.message : translate(lang, "appCouldNotReachSheet")
         );
       } finally {
         flushingRef.current = false;
         setSheetSyncing(false);
       }
     },
-    [settings.sheetSyncUrl]
+    [settings.sheetSyncUrl, lang]
   );
 
   const syncSheetNow = useCallback(async () => {
@@ -1183,10 +1182,10 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
       const test = await testSheetConnection(trimmed);
-      if (!test.ok) throw new Error(test.error ?? "Could not reach the script.");
+      if (!test.ok) throw new Error(test.error ?? translate(lang, "appCouldNotReachScript"));
       await updateSettings({ sheetSyncUrl: trimmed });
       setDirtySlices([...SYNC_SLICES]);
     },
@@ -1196,13 +1195,13 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
   const disconnectSheet = useCallback(async () => {
     await updateSettings({ sheetSyncUrl: "" });
     setSheetLastError("");
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const restoreFromSheet = useCallback(
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
       const pulled = await pullFromSheet(trimmed);
       const restoredSettings = settingsFromPull(pulled.meta.settings);
@@ -1242,7 +1241,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     const backup = await createBackup();
     downloadBackupFile(backup);
     await updateSettings({ lastBackupAt: nowIso() });
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const applyRestoredBackup = useCallback(
     async (backup: ClinicBackup) => {

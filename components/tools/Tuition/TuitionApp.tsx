@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 import { useEffect, useRef, useState } from "react";
 import {
   BarChart3,
@@ -31,16 +33,16 @@ import { EnquiriesScreen } from "./EnquiriesScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 
-const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Users }[] = [
-  { id: "today", label: "Today", icon: LayoutDashboard },
-  { id: "attendance", label: "Attendance", icon: CalendarCheck },
-  { id: "students", label: "Students", icon: Users },
-  { id: "fees", label: "Fees", icon: Wallet },
-  { id: "tests", label: "Tests", icon: ClipboardList },
-  { id: "diary", label: "Diary", icon: NotebookPen },
-  { id: "enquiries", label: "Enquiries", icon: UserPlus },
-  { id: "reports", label: "Reports", icon: BarChart3 },
-  { id: "settings", label: "Settings", icon: Settings },
+const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Users }[] = [
+  { id: "today", label: "today", icon: LayoutDashboard },
+  { id: "attendance", label: "tuNavAttendance", icon: CalendarCheck },
+  { id: "students", label: "tuNavStudents", icon: Users },
+  { id: "fees", label: "igFees", icon: Wallet },
+  { id: "tests", label: "tuNavTests", icon: ClipboardList },
+  { id: "diary", label: "tuNavDiary", icon: NotebookPen },
+  { id: "enquiries", label: "tuNavEnquiries", icon: UserPlus },
+  { id: "reports", label: "clNavReports", icon: BarChart3 },
+  { id: "settings", label: "clNavSettings", icon: Settings },
 ];
 
 type QueryRequest = { screen: ScreenId; value: string; nonce: number };
@@ -52,6 +54,7 @@ function TuitionShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { business, settings } = useTuition();
   const [screen, setScreen] = useState<ScreenId>("today");
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
@@ -118,7 +121,7 @@ function TuitionShell({
           {offline && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-saffron/15 px-2.5 py-1 text-xs font-semibold text-ink">
               <WifiOff className="h-3.5 w-3.5 text-saffron" />
-              Offline — attendance still works
+              {t("tuOffline")}
             </span>
           )}
         </div>
@@ -127,8 +130,8 @@ function TuitionShell({
             <button
               type="button"
               onClick={lockNow}
-              aria-label="Lock the app"
-              title="Lock the app"
+              aria-label={t("tuLockApp")}
+              title={t("tuLockApp")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
             >
               <Lock className="h-4 w-4" />
@@ -137,7 +140,7 @@ function TuitionShell({
           <button
             type="button"
             onClick={onToggleFullscreen}
-            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
+            aria-label={fullscreen ? t("appExitFullScreen") : t("appEnterFullScreen")}
             title={fullscreen ? "Exit full screen" : "Full screen"}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
           >
@@ -146,7 +149,7 @@ function TuitionShell({
         </div>
       </div>
 
-      <nav className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1" aria-label="Sections">
+      <nav className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1" aria-label={t("tuSections")}>
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
@@ -158,7 +161,7 @@ function TuitionShell({
             }`}
           >
             <item.icon className="h-4 w-4" />
-            {item.label}
+            {t(item.label)}
           </button>
         ))}
       </nav>
@@ -216,12 +219,13 @@ function TuitionRouter({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { status, errorMessage } = useTuition();
 
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center py-24">
-        <p className="text-sm text-muted">Opening your class…</p>
+        <p className="text-sm text-muted">{t("tuOpening")}</p>
       </div>
     );
   }
@@ -230,8 +234,7 @@ function TuitionRouter({
       <div className="mx-auto max-w-md py-16 text-center">
         <h2 className="text-lg font-bold text-ink">Couldn&apos;t open local storage</h2>
         <p className="mt-2 text-sm text-muted">
-          {errorMessage ||
-            "This app stores data in your browser (IndexedDB). Private/incognito windows and some very old browsers block it."}
+          {errorMessage || t("appStorageBody")}
         </p>
       </div>
     );

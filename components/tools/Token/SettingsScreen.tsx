@@ -214,7 +214,7 @@ function ServicesSection() {
               >
                 <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                 <span className="sr-only">
-                  {fill(t("tkStRemoveNamed"), { name: service.name })}
+                  {fill(t("appRemoveNamed"), { name: service.name })}
                 </span>
               </button>
             </span>
@@ -455,7 +455,7 @@ function CountersSection() {
               >
                 <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
                 <span className="sr-only">
-                  {fill(t("tkStRemoveNamed"), { name: counter.name })}
+                  {fill(t("appRemoveNamed"), { name: counter.name })}
                 </span>
               </button>
             </span>

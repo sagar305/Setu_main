@@ -4,13 +4,15 @@
 // finished on a phone in a few seconds: pick the batch, everyone starts as
 // present, tap the two who are missing, save, notify their parents.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { CalendarDays, Check, MessageCircle, Save, UserX } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
 import { batchesOnDate, studentsInBatch } from "@/lib/tuition/calc";
 import { fillTemplate, type OutboundMessage } from "@/lib/tuition/messages";
 import {
-  ATTENDANCE_LABELS,
+  attendanceLabel,
   attendanceId,
   formatDate,
   formatTime,
@@ -41,6 +43,7 @@ export function AttendanceScreen({
   /** Set by the Today screen when the teacher taps a specific class. */
   batchRequest?: { value: string; nonce: number } | null;
 }) {
+  const { t, lang } = useI18n();
   const {
     batches,
     students,
@@ -145,11 +148,11 @@ export function AttendanceScreen({
       name: student.name,
       phone: student.parentPhone,
       message: fillTemplate(settings.templates.absent, {
-        parent: student.parentName || "Sir/Ma'am",
+        parent: student.parentName || t("appSirMaam"),
         student: student.name,
         batch: batch.name,
         class: student.classLevel,
-        date: formatDate(date),
+        date: formatDate(date, lang),
         teacher: business?.name ?? "",
       }),
     }));
@@ -164,8 +167,8 @@ export function AttendanceScreen({
     return (
       <EmptyState
         icon={<CalendarDays className="h-6 w-6" />}
-        title="Create a batch first"
-        message="Attendance is marked batch by batch. Add your first batch in Settings → Batches, then enrol students into it."
+        title={t("tuAtNoBatchTitle")}
+        message={t("tuAtNoBatchBody")}
       />
     );
   }
@@ -176,7 +179,7 @@ export function AttendanceScreen({
         <div className="flex flex-wrap items-end gap-3">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Date
+              {t("date")}
             </span>
             <input
               type="date"
@@ -190,22 +193,24 @@ export function AttendanceScreen({
             onClick={() => setDate(todayIso())}
             className={`${secondaryBtnClass} h-[38px]`}
           >
-            Today
+            {t("today")}
           </button>
         </div>
         <div className="text-sm text-muted">
-          {counts.present + counts.late} present · {counts.absent} absent
+          {fill(t("tuAtCounts"), {
+            present: counts.present + counts.late,
+            absent: counts.absent,
+          })}
         </div>
       </div>
 
       {holiday && (
         <p className="mt-4 rounded-xl border border-saffron/40 bg-saffron/10 px-4 py-3 text-sm text-ink">
-          {formatDate(date)} is marked as a holiday ({holiday.name}). You can still take
-          attendance if you held a class.
+          {fill(t("tuAtHolidayNote"), { date: formatDate(date, lang), name: holiday.name })}
         </p>
       )}
 
-      <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto pb-1" aria-label="Batches">
+      <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto pb-1" aria-label={t("tuAtBatches")}>
         {activeBatches.map((item) => {
           const runsToday = scheduled.some((b) => b.id === item.id);
           return (
@@ -224,8 +229,8 @@ export function AttendanceScreen({
               <span
                 className={`text-xs ${batchId === item.id ? "text-white/70" : "text-muted"}`}
               >
-                {formatTime(item.startTime)}
-                {runsToday ? " · today" : ""}
+                {formatTime(item.startTime, lang)}
+                {runsToday ? t("tuAtRunsToday") : ""}
               </span>
             </button>
           );
@@ -236,8 +241,8 @@ export function AttendanceScreen({
         <div className="mt-6">
           <EmptyState
             icon={<UserX className="h-6 w-6" />}
-            title="No students in this batch"
-            message="Enrol students into this batch from the Students screen to start marking attendance."
+            title={t("tuAtNoStudentsTitle")}
+            message={t("tuAtNoStudentsBody")}
           />
         </div>
       ) : (
@@ -245,7 +250,7 @@ export function AttendanceScreen({
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
             <button type="button" onClick={markAllPresent} className={secondaryBtnClass}>
               <Check className="h-4 w-4" />
-              Mark all present
+              {t("tuAtMarkAllPresent")}
             </button>
             <div className="flex items-center gap-2">
               {saved && absentStudents.length > 0 && (
@@ -255,13 +260,14 @@ export function AttendanceScreen({
                   className={secondaryBtnClass}
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Notify {absentStudents.length} parent
-                  {absentStudents.length > 1 ? "s" : ""}
+                  {fill(t(absentStudents.length === 1 ? "tuAtNotifyOne" : "tuAtNotifyMany"), {
+                    count: absentStudents.length,
+                  })}
                 </button>
               )}
               <button type="button" onClick={() => void handleSave()} className={primaryBtnClass}>
                 <Save className="h-4 w-4" />
-                {saved ? "Saved" : "Save attendance"}
+                {saved ? t("saved") : t("tuAtSaveAttendance")}
               </button>
             </div>
           </div>
@@ -286,7 +292,7 @@ export function AttendanceScreen({
                     </p>
                     <p className="text-xs text-muted">
                       {student.classLevel}
-                      {record?.notifiedAt ? " · parent notified" : ""}
+                      {record?.notifiedAt ? t("tuAtParentNotified") : ""}
                     </p>
                   </div>
                   <div className="flex gap-1">
@@ -302,7 +308,7 @@ export function AttendanceScreen({
                             : "bg-cream-paper text-muted hover:text-ink"
                         }`}
                       >
-                        {ATTENDANCE_LABELS[option]}
+                        {attendanceLabel(option, lang)}
                       </button>
                     ))}
                   </div>
@@ -315,7 +321,7 @@ export function AttendanceScreen({
 
       <SendQueue
         open={queueOpen}
-        title="Tell parents their child was absent"
+        title={t("tuAtTellParents")}
         messages={messages}
         onClose={() => setQueueOpen(false)}
         onSent={(ids) => void notifyAndRecord(ids)}

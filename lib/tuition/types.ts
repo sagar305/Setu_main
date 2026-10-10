@@ -13,6 +13,11 @@ export { generateId, nowIso };
 // Batches (the unit fees are attached to)
 // ---------------------------------------------------------------------------
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { relabelSeed } from "@/lib/i18n/seed-labels";
+import { translate, type TKey } from "@/lib/i18n/translate";
+
 /** A recurring class: a subject, a group of students, days and a timing. */
 export type Batch = {
   id: string;
@@ -94,13 +99,18 @@ export function studentCustomFields(student: Student): CustomField[] {
   return Array.isArray(student.custom) ? student.custom : [];
 }
 
-export const COMMON_CUSTOM_FIELDS = [
-  "School test marks",
-  "School roll number",
-  "Board / medium",
-  "Weak areas",
-  "Target exam",
+const COMMON_CUSTOM_FIELD_KEYS: TKey[] = [
+  "tuCfSchoolMarks",
+  "tuCfSchoolRoll",
+  "tuCfBoard",
+  "tuCfWeakAreas",
+  "tuCfTargetExam",
 ];
+
+/** The custom fields a teacher is offered, in the reader's language. */
+export function commonCustomFields(lang: LanguageCode): string[] {
+  return COMMON_CUSTOM_FIELD_KEYS.map((key) => translate(lang, key));
+}
 
 // ---------------------------------------------------------------------------
 // Attendance
@@ -108,13 +118,19 @@ export const COMMON_CUSTOM_FIELDS = [
 
 export type AttendanceStatus = "present" | "absent" | "late" | "leave" | "holiday";
 
-export const ATTENDANCE_LABELS: Record<AttendanceStatus, string> = {
-  present: "Present",
-  absent: "Absent",
-  late: "Late",
-  leave: "Leave",
-  holiday: "Holiday",
+const ATTENDANCE_KEYS: Record<AttendanceStatus, TKey> = {
+  present: "tuAtPresent",
+  absent: "tuAtAbsent",
+  late: "tuAtLate",
+  leave: "tuAtLeave",
+  holiday: "tuAtHoliday",
 };
+
+/** A mark in words. The stored value stays the coded one. */
+export function attendanceLabel(status: AttendanceStatus, lang: LanguageCode): string {
+  const key = ATTENDANCE_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 /**
  * One mark per student per batch per day — a student enrolled in two batches
@@ -142,14 +158,33 @@ export function attendanceId(date: string, batchId: string, studentId: string): 
 
 export type FeeDueKind = "tuition" | "admission" | "exam" | "material" | "transport" | "other";
 
-export const FEE_KIND_LABELS: Record<FeeDueKind, string> = {
-  tuition: "Tuition fee",
-  admission: "Admission fee",
-  exam: "Exam fee",
-  material: "Books & material",
-  transport: "Transport",
-  other: "Other",
+const FEE_KIND_KEYS: Record<FeeDueKind, TKey> = {
+  tuition: "tuFeeTuition",
+  admission: "tuFeeAdmission",
+  exam: "tuFeeExam",
+  material: "tuFeeMaterial",
+  transport: "tuFeeTransport",
+  other: "tuFeeOther",
 };
+
+export const FEE_KIND_ORDER = Object.keys(FEE_KIND_KEYS) as FeeDueKind[];
+
+/** What a fee line is for, in words. */
+export function feeKindLabel(kind: FeeDueKind, lang: LanguageCode): string {
+  const key = FEE_KIND_KEYS[kind];
+  return key ? translate(lang, key) : kind;
+}
+
+/**
+ * A stored fee label in the reader's language.
+ *
+ * The label is snapshotted onto the due when it is generated, so a month
+ * raised in Hindi keeps its Hindi label for ever unless it is still exactly
+ * one of ours — which is the usual case, since nobody retypes "Tuition fee".
+ */
+export function feeLabelFor(label: string, lang: LanguageCode): string {
+  return relabelSeed(label, Object.values(FEE_KIND_KEYS), lang);
+}
 
 /** One line the student owes. Monthly tuition dues are generated per cycle. */
 export type FeeDue = {
@@ -185,7 +220,17 @@ export type FeePayment = {
   createdAt: string;
 };
 
-export const DEFAULT_PAYMENT_MODES = ["Cash", "UPI", "Bank transfer", "Cheque"];
+const PAYMENT_MODE_KEYS: TKey[] = ["tuPayCash", "tuPayUpi", "tuPayBank", "tuPayCheque"];
+
+/** The payment modes a new install starts with, in the reader's language. */
+export function defaultPaymentModes(lang: LanguageCode): string[] {
+  return PAYMENT_MODE_KEYS.map((key) => translate(lang, key));
+}
+
+/** A stored mode, re-languaged while it is still one of our seeds. */
+export function paymentModeLabel(mode: string, lang: LanguageCode): string {
+  return relabelSeed(mode, PAYMENT_MODE_KEYS, lang);
+}
 
 // ---------------------------------------------------------------------------
 // Tests & marks
@@ -237,13 +282,19 @@ export type StudentNote = {
 
 export type EnquiryStatus = "new" | "followup" | "demo" | "joined" | "lost";
 
-export const ENQUIRY_LABELS: Record<EnquiryStatus, string> = {
-  new: "New",
-  followup: "Follow up",
-  demo: "Demo taken",
-  joined: "Joined",
-  lost: "Lost",
+const ENQUIRY_KEYS: Record<EnquiryStatus, TKey> = {
+  new: "tuEnqNew",
+  followup: "tuEnqFollowup",
+  demo: "tuEnqDemo",
+  joined: "tuEnqJoined",
+  lost: "tuEnqLost",
 };
+
+/** Where an enquiry has got to, in words. */
+export function enquiryLabel(status: EnquiryStatus, lang: LanguageCode): string {
+  const key = ENQUIRY_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 export type Enquiry = {
   id: string;
@@ -290,20 +341,41 @@ export type MessageTemplates = {
   attendanceReport: string;
 };
 
-export const DEFAULT_TEMPLATES: MessageTemplates = {
-  feeReminder:
-    "Namaste {parent}, this is a gentle reminder that {amount} is pending for {student} ({period}). You can view the details and pay here: {link}\n\n— {teacher}",
-  absent:
-    "Namaste {parent}, {student} was absent from the {batch} class on {date}. Please let us know if everything is alright.\n\n— {teacher}",
-  receipt:
-    "Namaste {parent}, we have received {amount} towards {student}'s fees. Your receipt: {link}\n\nThank you.\n— {teacher}",
-  marks:
-    "Namaste {parent}, {student} scored {marks}/{max} ({percent}%) in {test} — {subject}. Full result: {link}\n\n— {teacher}",
-  diary: "Namaste {parent}, a note for {student}: {note}\n\n— {teacher}",
-  birthday: "Wishing {student} a very happy birthday from all of us at {teacher}! 🎂",
-  attendanceReport:
-    "Namaste {parent}, {student}'s attendance for {period}: {percent}% ({present} of {total} classes). Details: {link}\n\n— {teacher}",
+const TEMPLATE_KEYS: Record<keyof MessageTemplates, TKey> = {
+  feeReminder: "tuTplFeeReminder",
+  absent: "tuTplAbsent",
+  receipt: "tuTplReceipt",
+  marks: "tuTplMarks",
+  diary: "tuTplDiary",
+  birthday: "tuTplBirthday",
+  attendanceReport: "tuTplAttendance",
 };
+
+export const TEMPLATE_ORDER = Object.keys(TEMPLATE_KEYS) as (keyof MessageTemplates)[];
+
+/** The shipped wording, in the reader's language. */
+export function defaultTemplates(lang: LanguageCode): MessageTemplates {
+  return {
+    feeReminder: translate(lang, TEMPLATE_KEYS.feeReminder),
+    absent: translate(lang, TEMPLATE_KEYS.absent),
+    receipt: translate(lang, TEMPLATE_KEYS.receipt),
+    marks: translate(lang, TEMPLATE_KEYS.marks),
+    diary: translate(lang, TEMPLATE_KEYS.diary),
+    birthday: translate(lang, TEMPLATE_KEYS.birthday),
+    attendanceReport: translate(lang, TEMPLATE_KEYS.attendanceReport),
+  };
+}
+
+/** One stored template, re-languaged while it is still our own wording. */
+export function templateFor(
+  key: keyof MessageTemplates,
+  text: string,
+  lang: LanguageCode
+): string {
+  return text
+    ? relabelSeed(text, [TEMPLATE_KEYS[key]], lang)
+    : translate(lang, TEMPLATE_KEYS[key]);
+}
 
 // ---------------------------------------------------------------------------
 // Settings
@@ -332,14 +404,37 @@ export type TuitionSettings = {
   autoLockMinutes?: number;
 };
 
+/**
+ * The settings a new install starts on, in the reader's language.
+ *
+ * DEFAULT_TUITION_SETTINGS below keeps the wordy fields empty: it is the shape
+ * a stored row is folded onto, and an English default written over somebody's
+ * own wording would be worse than an empty string.
+ */
+export function defaultTuitionSettings(lang: LanguageCode): TuitionSettings {
+  return {
+    ...DEFAULT_TUITION_SETTINGS,
+    paymentModes: defaultPaymentModes(lang),
+    templates: defaultTemplates(lang),
+  };
+}
+
 export const DEFAULT_TUITION_SETTINGS: TuitionSettings = {
   id: "main",
   receiptPrefix: "RCPT-",
   nextReceiptNumber: 1,
   feeDueDay: 5,
   autoGenerateDues: true,
-  paymentModes: [...DEFAULT_PAYMENT_MODES],
-  templates: { ...DEFAULT_TEMPLATES },
+  paymentModes: [],
+  templates: {
+    feeReminder: "",
+    absent: "",
+    receipt: "",
+    marks: "",
+    diary: "",
+    birthday: "",
+    attendanceReport: "",
+  },
   showClassAverage: true,
   showRank: false,
   sheetSyncUrl: "",
@@ -397,20 +492,24 @@ export function currentMonthKey(): string {
   return monthKey(todayIso());
 }
 
-/** "2026-08" → "Aug 2026" */
-export function formatMonth(period: string): string {
+/** "2026-08" → "Aug 2026", named by the reader's own calendar. */
+export function formatMonth(period: string, lang: LanguageCode): string {
   if (!/^\d{4}-\d{2}$/.test(period)) return period;
   const [year, month] = period.split("-");
   const date = new Date(Number(year), Number(month) - 1, 1);
-  return date.toLocaleDateString("en-IN", { month: "short", year: "numeric" });
+  return date.toLocaleDateString(intlLocaleFor(lang), { month: "short", year: "numeric" });
 }
 
-/** "2026-08-11" → "11 Aug 2026" */
-export function formatDate(dateKey: string): string {
+/** "2026-08-11" → "11 Aug 2026", written the way the reader writes a date. */
+export function formatDate(dateKey: string, lang: LanguageCode): string {
   if (!dateKey) return "";
   const date = new Date(`${dateKey.slice(0, 10)}T00:00:00`);
   if (Number.isNaN(date.getTime())) return dateKey;
-  return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  return date.toLocaleDateString(intlLocaleFor(lang), {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 /** All month keys from `from` up to and including `to`, oldest first. */
@@ -432,24 +531,33 @@ export function monthsBetween(from: string, to: string): string[] {
   return months;
 }
 
-export const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+/**
+ * Short weekday names from the browser's own calendar data.
+ *
+ * 2023-01-01 was a Sunday, so index 0..6 lines up with Date.getDay() and with
+ * the numbers a batch stores.
+ */
+export function weekdayNames(lang: LanguageCode): string[] {
+  const format = new Intl.DateTimeFormat(intlLocaleFor(lang), { weekday: "short" });
+  return Array.from({ length: 7 }, (_, index) => format.format(new Date(2023, 0, 1 + index)));
+}
 
-export function describeDays(days: number[]): string {
-  if (days.length === 0) return "No fixed days";
-  if (days.length === 7) return "Daily";
+export function describeDays(days: number[], lang: LanguageCode): string {
+  if (days.length === 0) return translate(lang, "tuNoFixedDays");
+  if (days.length === 7) return translate(lang, "tuDaily");
+  const names = weekdayNames(lang);
   return [...days]
     .sort((a, b) => a - b)
-    .map((d) => WEEKDAYS[d])
+    .map((d) => names[d])
     .join(", ");
 }
 
-/** "18:00" → "6:00 PM" */
-export function formatTime(value: string): string {
+/** "18:00" → "6:00 pm", written the way the reader's locale writes a clock. */
+export function formatTime(value: string, lang: LanguageCode): string {
   if (!/^\d{2}:\d{2}$/.test(value)) return value;
   const [h, m] = value.split(":").map(Number);
-  const suffix = h >= 12 ? "PM" : "AM";
-  const hour = h % 12 === 0 ? 12 : h % 12;
-  return `${hour}:${String(m).padStart(2, "0")} ${suffix}`;
+  const at = new Date(2023, 0, 1, h, m);
+  return at.toLocaleTimeString(intlLocaleFor(lang), { hour: "numeric", minute: "2-digit" });
 }
 
 /**

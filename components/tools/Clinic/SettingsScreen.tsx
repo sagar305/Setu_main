@@ -251,7 +251,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
                 <button
                   type="button"
                   onClick={() => deleteProtocol(protocol.id)}
-                  aria-label={fill(t("clStDeleteNamed"), { name: protocol.name })}
+                  aria-label={fill(t("appDeleteNamed"), { name: protocol.name })}
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -417,7 +417,7 @@ function DoctorsSection({
                 <button
                   type="button"
                   onClick={() => setRemoving(doctor)}
-                  aria-label={fill(t("clStRemoveNamed"), { name: doctor.name })}
+                  aria-label={fill(t("appRemoveNamed"), { name: doctor.name })}
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -729,7 +729,7 @@ function ScheduleSection({
                     "schedule"
                   )
                 }
-                aria-label={fill(t("clStRemoveNamed"), { name: item.label })}
+                aria-label={fill(t("appRemoveNamed"), { name: item.label })}
                 className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
               >
                 <Trash2 className="h-4 w-4" />
@@ -885,7 +885,7 @@ function ChargesSection({
             <button
               type="button"
               onClick={() => onDelete(charge.id)}
-              aria-label={fill(t("clStRemoveNamed"), { name: charge.name })}
+              aria-label={fill(t("appRemoveNamed"), { name: charge.name })}
               className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
             >
               <Trash2 className="h-4 w-4" />
@@ -1024,7 +1024,7 @@ function MedicinesSection({
             <button
               type="button"
               onClick={() => onDelete(medicine.id)}
-              aria-label={fill(t("clStRemoveNamed"), { name: medicine.name })}
+              aria-label={fill(t("appRemoveNamed"), { name: medicine.name })}
               className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
             >
               <Trash2 className="h-4 w-4" />
@@ -1196,7 +1196,7 @@ function BillingSection({
                       "billing"
                     )
                   }
-                  aria-label={fill(t("clStRemoveNamed"), { name: paymentModeLabel(item, lang) })}
+                  aria-label={fill(t("appRemoveNamed"), { name: paymentModeLabel(item, lang) })}
                   className="text-muted hover:text-red-600"
                 >
                   ×
@@ -1584,7 +1584,7 @@ function ScreenLockSection({
 
   const setNewPin = async () => {
     if (!isValidPinFormat(pin)) {
-      setError(fill(t("clStPinLengthError"), { min: PIN_MIN_LENGTH, max: PIN_MAX_LENGTH }));
+      setError(fill(t("appPinLengthError"), { min: PIN_MIN_LENGTH, max: PIN_MAX_LENGTH }));
       return;
     }
     if (pin !== confirmPin) {

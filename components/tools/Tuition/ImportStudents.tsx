@@ -4,6 +4,8 @@
 // notebook, a WhatsApp message or a spreadsheet — this accepts a pasted block
 // or a CSV file so onboarding is not 80 forms.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useRef, useState } from "react";
 import { FileUp, Upload } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
@@ -21,6 +23,7 @@ Aarav Sharma, Class 10, Rakesh Sharma, 9876543210, Maths Evening
 Diya Patel, Class 9, Nisha Patel, 9876500011, Science Morning | Maths Evening`;
 
 export function ImportStudents({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t, lang } = useI18n();
   const { batches, importStudents } = useTuition();
   const [text, setText] = useState("");
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -32,14 +35,14 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
   const activeBatches = useMemo(() => batches.filter((b) => b.active), [batches]);
 
   const preview = () => {
-    setResult(parseStudentImport(text, batches));
+    setResult(parseStudentImport(text, batches, lang));
     setDone(0);
   };
 
   const handleFile = async (file: File) => {
     const content = await file.text();
     setText(content);
-    setResult(parseStudentImport(content, batches));
+    setResult(parseStudentImport(content, batches, lang));
     setDone(0);
   };
 
@@ -69,15 +72,14 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
   };
 
   return (
-    <Modal open={open} onClose={close} title="Import students" wide>
+    <Modal open={open} onClose={close} title={t("tuImTitle")} wide>
       <p className="text-sm text-muted">
-        Paste rows straight from a spreadsheet or WhatsApp, or upload a CSV. A header row is
-        used when present; otherwise columns are read as{" "}
-        <span className="font-semibold text-ink">Name, Class, Parent, Parent Phone, Batches</span>.
+        {t("tuImBlurb")}{" "}
+        {fill(t("tuImHeaderNote"), { columns: t("tuImColumns") })}
       </p>
 
       <div className="mt-4">
-        <Field label="Paste your list">
+        <Field label={t("tuImPasteList")}>
           <textarea
             value={text}
             onChange={(event) => {
@@ -94,7 +96,7 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
       <div className="mt-3 flex flex-wrap gap-2">
         <button type="button" onClick={() => fileRef.current?.click()} className={secondaryBtnClass}>
           <FileUp className="h-4 w-4" />
-          Upload CSV
+          {t("tuImUploadCsv")}
         </button>
         <button
           type="button"
@@ -102,7 +104,7 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
           disabled={!text.trim()}
           className={secondaryBtnClass}
         >
-          Preview
+          {t("tuImPreview")}
         </button>
         <input
           ref={fileRef}
@@ -119,33 +121,33 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
 
       {done > 0 && (
         <p className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-          {done} student{done > 1 ? "s" : ""} imported.
+          {fill(t(done === 1 ? "tuImImportedOne" : "tuImImportedMany"), { count: done })}
         </p>
       )}
 
       {result && (
         <div className="mt-4 rounded-xl border border-muted-line/30 bg-white p-4">
           <p className="text-sm font-semibold text-ink">
-            {result.rows.length} student{result.rows.length === 1 ? "" : "s"} ready to import
+            {fill(t(result.rows.length === 1 ? "tuImReadyOne" : "tuImReadyMany"), {
+              count: result.rows.length,
+            })}
           </p>
 
           {result.unknownBatches.length > 0 && (
             <p className="mt-2 rounded-lg bg-saffron/10 px-3 py-2 text-xs text-ink">
-              These batch names are not in your list yet:{" "}
-              <span className="font-semibold">{result.unknownBatches.join(", ")}</span>. Create
-              them first, or pick a batch below for everyone.
+              {fill(t("tuImUnknownBatches"), { names: result.unknownBatches.join(", ") })}
             </p>
           )}
 
           {activeBatches.length > 0 && (
             <div className="mt-3">
-              <Field label="Batch for students with no batch matched">
+              <Field label={t("tuImFallbackBatch")}>
                 <select
                   value={fallbackBatch}
                   onChange={(event) => setFallbackBatch(event.target.value)}
                   className={inputClass}
                 >
-                  <option value="">No batch</option>
+                  <option value="">{t("tuImNoBatch")}</option>
                   {activeBatches.map((batch) => (
                     <option key={batch.id} value={batch.id}>
                       {batch.name}
@@ -168,10 +170,10 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
             <table className="w-full text-left text-xs">
               <thead className="bg-cream-paper text-muted">
                 <tr>
-                  <th className="px-3 py-1.5 font-semibold">Name</th>
-                  <th className="px-3 py-1.5 font-semibold">Class</th>
-                  <th className="px-3 py-1.5 font-semibold">Parent phone</th>
-                  <th className="px-3 py-1.5 font-semibold">Batches</th>
+                  <th className="px-3 py-1.5 font-semibold">{t("name")}</th>
+                  <th className="px-3 py-1.5 font-semibold">{t("tuEnClass")}</th>
+                  <th className="px-3 py-1.5 font-semibold">{t("tuImColParentPhone")}</th>
+                  <th className="px-3 py-1.5 font-semibold">{t("tuImColBatches")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -189,7 +191,7 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
 
           <div className="mt-4 flex justify-end gap-3">
             <button type="button" onClick={close} className={secondaryBtnClass}>
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="button"
@@ -198,7 +200,9 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
               className={primaryBtnClass}
             >
               <Upload className="h-4 w-4" />
-              {importing ? "Importing…" : `Import ${result.rows.length}`}
+              {importing
+                ? t("tuImImporting")
+                : fill(t("tuImImportN"), { count: result.rows.length })}
             </button>
           </div>
         </div>

@@ -1,18 +1,21 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 import { useRef, useState } from "react";
 import { GraduationCap, Lock, Sheet, Upload, WifiOff } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
 import { parseBackupFile } from "@/lib/tuition/backup";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
 
-const POINTS = [
-  { icon: WifiOff, text: "Works offline — mark attendance without internet" },
-  { icon: Lock, text: "No signup. Everything stays on this device" },
-  { icon: Sheet, text: "Optional Google Sheet sync as your backup" },
+const POINTS: { icon: typeof WifiOff; key: TKey }[] = [
+  { icon: WifiOff, key: "tuWelPointOffline" },
+  { icon: Lock, key: "tuWelPointPrivate" },
+  { icon: Sheet, key: "tuWelPointSheet" },
 ];
 
 export function WelcomeScreen() {
+  const { t } = useI18n();
   const { startSetup, applyRestoredBackup, restoreFromSheet } = useTuition();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState("");
@@ -28,7 +31,7 @@ export function WelcomeScreen() {
       await restoreFromSheet(sheetUrl);
     } catch (error) {
       setImportError(
-        error instanceof Error ? error.message : "Could not restore from this sheet."
+        error instanceof Error ? error.message : t("tuWelSheetFailed")
       );
     } finally {
       setSheetRestoring(false);
@@ -41,12 +44,12 @@ export function WelcomeScreen() {
     try {
       const result = parseBackupFile(await file.text());
       if (!result.ok) {
-        setImportError(result.error);
+        setImportError(t(result.error));
         return;
       }
       await applyRestoredBackup(result.backup);
     } catch {
-      setImportError("Could not restore this backup. The file may be corrupted.");
+      setImportError(t("appRestoreFailed"));
     } finally {
       setImporting(false);
     }
@@ -58,28 +61,27 @@ export function WelcomeScreen() {
         <GraduationCap className="h-8 w-8" />
       </span>
       <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-        Your tuition class, organised
+        {t("tuWelTitle")}
       </h2>
       <p className="mx-auto mt-3 max-w-md text-muted">
-        Students, daily attendance, fees, test marks and parent reminders — set up in under a
-        minute, and it keeps working without internet.
+        {t("tuWelBlurb")}
       </p>
 
       <ul className="mx-auto mt-8 grid max-w-md gap-3 text-left">
         {POINTS.map((point) => (
           <li
-            key={point.text}
+            key={point.key}
             className="flex items-center gap-3 rounded-xl border border-muted-line/30 bg-white px-4 py-3"
           >
             <point.icon className="h-4 w-4 shrink-0 text-indigo" />
-            <span className="text-sm text-ink">{point.text}</span>
+            <span className="text-sm text-ink">{t(point.key)}</span>
           </li>
         ))}
       </ul>
 
       <div className="mt-8 flex flex-col items-center gap-3">
         <button type="button" onClick={startSetup} className={`${primaryBtnClass} w-full max-w-xs py-3`}>
-          Set up my class
+          {t("tuWelSetUp")}
         </button>
 
         <div className="flex flex-wrap items-center justify-center gap-2">
@@ -90,7 +92,7 @@ export function WelcomeScreen() {
             className={secondaryBtnClass}
           >
             <Upload className="h-4 w-4" />
-            {importing ? "Restoring…" : "Restore a backup"}
+            {importing ? t("appRestoring") : t("appRestoreABackup")}
           </button>
           <button
             type="button"
@@ -98,14 +100,14 @@ export function WelcomeScreen() {
             className={secondaryBtnClass}
           >
             <Sheet className="h-4 w-4" />
-            Restore from Google Sheet
+            {t("tuWelRestoreSheet")}
           </button>
         </div>
 
         {sheetOpen && (
           <div className="w-full max-w-md rounded-xl border border-muted-line/30 bg-white p-4 text-left">
             <label className="block text-xs font-semibold uppercase tracking-wide text-muted">
-              Apps Script web app URL
+              {t("tuWelSheetUrl")}
             </label>
             <input
               type="url"
@@ -120,7 +122,7 @@ export function WelcomeScreen() {
               disabled={sheetRestoring || !sheetUrl.trim()}
               className={`${primaryBtnClass} mt-3 w-full`}
             >
-              {sheetRestoring ? "Restoring…" : "Restore from this sheet"}
+              {sheetRestoring ? t("appRestoring") : t("tuWelRestoreThisSheet")}
             </button>
           </div>
         )}

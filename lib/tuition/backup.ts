@@ -6,6 +6,8 @@
 
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
 
+import type { TKey } from "@/lib/i18n/translate";
+
 export const BACKUP_APP_MARKER = "setu-tuition";
 export const BACKUP_VERSION = 1;
 
@@ -61,21 +63,23 @@ export function downloadBackupFile(backup: TuitionBackup): void {
 
 export type BackupValidation =
   | { ok: true; backup: TuitionBackup }
-  | { ok: false; error: string };
+  // A key rather than a sentence: the file is read in a helper that has no
+  // business knowing which language the screen is in.
+  | { ok: false; error: TKey };
 
 export function validateBackup(raw: unknown): BackupValidation {
   if (typeof raw !== "object" || raw === null) {
-    return { ok: false, error: "This file is not a valid backup." };
+    return { ok: false, error: "appBackupNotValid" };
   }
   const candidate = raw as Partial<TuitionBackup>;
   if (candidate.app !== BACKUP_APP_MARKER) {
-    return { ok: false, error: "This file was not exported from the Tuition Class Manager." };
+    return { ok: false, error: "tuBackupWrongApp" };
   }
   if (typeof candidate.version !== "number" || candidate.version > BACKUP_VERSION) {
-    return { ok: false, error: "This backup was created by a newer version of the app." };
+    return { ok: false, error: "appBackupNewer" };
   }
   if (typeof candidate.data !== "object" || candidate.data === null) {
-    return { ok: false, error: "This backup file is missing its data." };
+    return { ok: false, error: "appBackupMissingData" };
   }
   return { ok: true, backup: candidate as TuitionBackup };
 }
@@ -85,7 +89,7 @@ export function parseBackupFile(text: string): BackupValidation {
   try {
     return validateBackup(JSON.parse(text));
   } catch {
-    return { ok: false, error: "This file is not readable JSON." };
+    return { ok: false, error: "appBackupNotJson" };
   }
 }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
@@ -7,6 +8,7 @@ import { CURRENCIES } from "@/lib/pos/types";
 import { Field, inputClass, primaryBtnClass } from "@/components/tools/FreePos/ui";
 
 export function SetupScreen() {
+  const { t } = useI18n();
   const { createBusiness, backToWelcome } = useTuition();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,11 +22,11 @@ export function SetupScreen() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!name.trim()) {
-      setError("Please enter your name or your institute's name.");
+      setError(t("tuSetErrName"));
       return;
     }
     if (!phone.trim()) {
-      setError("Phone number is required — parents reply on this number.");
+      setError(t("tuSetErrPhone"));
       return;
     }
     setError("");
@@ -41,7 +43,7 @@ export function SetupScreen() {
         logoDataUrl: "",
       });
     } catch {
-      setError("Could not save your details. Please try again.");
+      setError(t("tuSetErrSave"));
       setSaving(false);
     }
   };
@@ -54,27 +56,26 @@ export function SetupScreen() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-muted transition hover:text-indigo"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back
+        {t("back")}
       </button>
 
-      <h2 className="text-2xl font-bold tracking-tight text-ink">Your details</h2>
+      <h2 className="text-2xl font-bold tracking-tight text-ink">{t("tuSetTitle")}</h2>
       <p className="mt-2 text-sm text-muted">
-        These appear on fee receipts and in the messages you send parents. You can change them
-        later in Settings.
+        {t("tuSetBlurb")}
       </p>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-        <Field label="Your name / institute name" required>
+        <Field label={t("tuPhTeacher")} required>
           <input
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="e.g. Sharma Classes"
+            placeholder={t("tuSetNamePh")}
             className={inputClass}
             autoFocus
           />
         </Field>
-        <Field label="Phone number" required>
+        <Field label={t("clSetPhone")} required>
           <input
             type="tel"
             value={phone}
@@ -83,17 +84,17 @@ export function SetupScreen() {
             className={inputClass}
           />
         </Field>
-        <Field label="Address (optional)" hint="Shown on fee receipts">
+        <Field label={t("appAddressOptional")} hint={t("tuSetAddressHint")}>
           <textarea
             value={address}
             onChange={(event) => setAddress(event.target.value)}
-            placeholder="Where you take classes"
+            placeholder={t("tuSetWhere")}
             rows={2}
             className={inputClass}
           />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Currency" required>
+          <Field label={t("currency")} required>
             <select
               value={currency}
               onChange={(event) => setCurrency(event.target.value)}
@@ -106,7 +107,7 @@ export function SetupScreen() {
               ))}
             </select>
           </Field>
-          <Field label="Email (optional)">
+          <Field label={t("appEmailOptional")}>
             <input
               type="email"
               value={email}
@@ -116,7 +117,7 @@ export function SetupScreen() {
             />
           </Field>
         </div>
-        <Field label="UPI ID (optional)" hint="Parents get a Pay now button on receipts and reminders">
+        <Field label={t("tuSetUpiOptional")} hint={t("tuSetUpiHint")}>
           <input
             type="text"
             value={upiId}
@@ -133,7 +134,7 @@ export function SetupScreen() {
         )}
 
         <button type="submit" disabled={saving} className={`${primaryBtnClass} w-full py-3`}>
-          {saving ? "Setting up…" : "Start"}
+          {saving ? t("clSetSaving") : t("tuSetStart")}
         </button>
       </form>
     </div>

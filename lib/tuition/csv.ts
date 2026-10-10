@@ -4,10 +4,12 @@
 // with 80 students will not type them in one by one, so the Students screen
 // accepts a pasted spreadsheet block (CSV or tab-separated) as well as a file.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import { toCsv } from "@/lib/pos/csv";
 import { studentBalance, studentMonthlyFee } from "./calc";
 import {
-  ATTENDANCE_LABELS,
+  attendanceLabel,
   formatMonth,
   studentCustomFields,
   type AttendanceRecord,
@@ -86,7 +88,8 @@ export function attendanceCsv(
         r.date,
         studentName(r.studentId),
         batchName(r.batchId),
-        ATTENDANCE_LABELS[r.status],
+        // English, like the headers: a CSV is read by a spreadsheet.
+        attendanceLabel(r.status, "en"),
         r.note,
       ])
   );
@@ -120,7 +123,10 @@ export function paymentsCsv(payments: FeePayment[]): string {
         p.studentName,
         p.amount,
         p.mode,
-        p.appliedTo.map((label) => (/^\d{4}-\d{2}$/.test(label) ? formatMonth(label) : label)).join(", "),
+        p.appliedTo
+          // English, like the headers: a CSV is read by a spreadsheet.
+          .map((label) => (/^\d{4}-\d{2}$/.test(label) ? formatMonth(label, "en") : label))
+          .join(", "),
         p.note,
       ])
   );
@@ -244,7 +250,11 @@ const HEADER_ALIASES: Record<string, keyof ParsedStudentRow | "fee"> = {
  * present; otherwise columns are read positionally as
  * Name, Class, Parent, Parent Phone, Batches.
  */
-export function parseStudentImport(text: string, batches: Batch[]): ImportResult {
+export function parseStudentImport(
+  text: string,
+  batches: Batch[],
+  lang: LanguageCode
+): ImportResult {
   const errors: string[] = [];
   const rows: ParsedStudentRow[] = [];
   const unknown = new Set<string>();
@@ -253,7 +263,9 @@ export function parseStudentImport(text: string, batches: Batch[]): ImportResult
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
-  if (lines.length === 0) return { rows, errors: ["Nothing to import."], unknownBatches: [] };
+  if (lines.length === 0) {
+    return { rows, errors: [translate(lang, "tuImNothingToImport")], unknownBatches: [] };
+  }
 
   const delimiter = lines[0].includes("\t") ? "\t" : ",";
   const firstCells = splitLine(lines[0], delimiter).map((c) => c.toLowerCase());
@@ -309,7 +321,7 @@ export function parseStudentImport(text: string, batches: Batch[]): ImportResult
     });
 
     if (!row.name) {
-      errors.push(`Line ${index + 1}: no student name — skipped.`);
+      errors.push(fill(translate(lang, "tuImNoName"), { line: index + 1 }));
       continue;
     }
 

@@ -4,6 +4,8 @@
 // the missing homework on Friday", "call Aarav's mother", "bring the geometry
 // box". Overdue notes keep showing until they are ticked off.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import { Cake, Check, MessageCircle, NotebookPen, Plus, Trash2 } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
@@ -20,6 +22,7 @@ import {
 import { SendQueue } from "./SendQueue";
 
 export function DiaryScreen() {
+  const { t, lang } = useI18n();
   const { notes, students, business, settings, createNote, toggleNote, deleteNote, markNoteSent } =
     useTuition();
   const [date, setDate] = useState(todayIso());
@@ -55,10 +58,10 @@ export function DiaryScreen() {
         name: student.name,
         phone: student.parentPhone,
         message: fillTemplate(settings.templates.diary, {
-          parent: student.parentName || "Sir/Ma'am",
+          parent: student.parentName || t("appSirMaam"),
           student: student.name,
           note: note.text,
-          date: formatDate(note.date),
+          date: formatDate(note.date, lang),
           teacher: business?.name ?? "",
         }),
       },
@@ -75,7 +78,7 @@ export function DiaryScreen() {
         name: student.name,
         phone: student.parentPhone,
         message: fillTemplate(settings.templates.birthday, {
-          parent: student.parentName || "Sir/Ma'am",
+          parent: student.parentName || t("appSirMaam"),
           student: student.name,
           teacher: business?.name ?? "",
         }),
@@ -96,7 +99,7 @@ export function DiaryScreen() {
         <button
           type="button"
           onClick={() => void toggleNote(note.id)}
-          aria-label={note.done ? "Mark as not done" : "Mark as done"}
+          aria-label={note.done ? t("tuDiMarkNotDone") : t("tuDiMarkDone")}
           className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border transition ${
             note.done
               ? "border-emerald-600 bg-emerald-600 text-white"
@@ -111,9 +114,9 @@ export function DiaryScreen() {
           </p>
           <p className="text-xs text-muted">
             {[
-              note.studentId ? studentName(note.studentId) : "General",
-              muted ? formatDate(note.date) : "",
-              note.sentAt ? "sent to parent" : "",
+              note.studentId ? studentName(note.studentId) : t("tuGeneral"),
+              muted ? formatDate(note.date, lang) : "",
+              note.sentAt ? t("tuDiSentToParent") : "",
             ]
               .filter(Boolean)
               .join(" · ")}
@@ -125,7 +128,7 @@ export function DiaryScreen() {
               type="button"
               onClick={() => sendNote(note.id)}
               className="flex h-8 w-8 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
-              aria-label="Send this note to the parent"
+              aria-label={t("tuDiSendToParent")}
             >
               <MessageCircle className="h-4 w-4" />
             </button>
@@ -134,7 +137,7 @@ export function DiaryScreen() {
             type="button"
             onClick={() => void deleteNote(note.id)}
             className="flex h-8 w-8 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:border-red-300 hover:text-red-600"
-            aria-label="Delete this note"
+            aria-label={t("tuDiDeleteNote")}
           >
             <Trash2 className="h-4 w-4" />
           </button>
@@ -149,7 +152,7 @@ export function DiaryScreen() {
         <div className="flex items-end gap-3">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Date
+              {t("date")}
             </span>
             <input
               type="date"
@@ -163,12 +166,12 @@ export function DiaryScreen() {
             onClick={() => setDate(todayIso())}
             className={`${secondaryBtnClass} h-[38px]`}
           >
-            Today
+            {t("today")}
           </button>
         </div>
         <button type="button" onClick={() => setFormOpen(true)} className={primaryBtnClass}>
           <Plus className="h-4 w-4" />
-          Add reminder
+          {t("tuDiAddReminderBtn")}
         </button>
       </div>
 
@@ -176,7 +179,7 @@ export function DiaryScreen() {
         <div className="mt-4 rounded-xl border border-saffron/40 bg-saffron/10 p-3">
           <p className="flex items-center gap-2 text-sm font-semibold text-ink">
             <Cake className="h-4 w-4 text-saffron" />
-            Birthday today
+            {t("tuDiBirthdayToday")}
           </p>
           <ul className="mt-2 space-y-1">
             {birthdays.map((student) => (
@@ -188,7 +191,7 @@ export function DiaryScreen() {
                   className={`${secondaryBtnClass} px-3 py-1.5`}
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Wish
+                  {t("tuDiWish")}
                 </button>
               </li>
             ))}
@@ -199,7 +202,7 @@ export function DiaryScreen() {
       {overdue.length > 0 && (
         <section className="mt-5">
           <h3 className="text-xs font-bold uppercase tracking-wide text-red-600">
-            Still pending ({overdue.length})
+            {fill(t("tuDiStillPending"), { count: overdue.length })}
           </h3>
           <ul className="mt-2 space-y-2">{overdue.map((note) => renderNote(note.id, true))}</ul>
         </section>
@@ -207,18 +210,18 @@ export function DiaryScreen() {
 
       <section className="mt-5">
         <h3 className="text-xs font-bold uppercase tracking-wide text-muted">
-          {formatDate(date)}
+          {formatDate(date, lang)}
         </h3>
         {forDate.length === 0 ? (
           <div className="mt-2">
             <EmptyState
               icon={<NotebookPen className="h-6 w-6" />}
-              title="Nothing noted for this day"
-              message="Add a reminder for a student or for yourself — it shows up on the Today screen when the date arrives."
+              title={t("tuDiNothingNoted")}
+              message={t("tuDiNothingNotedBody")}
               action={
                 <button type="button" onClick={() => setFormOpen(true)} className={primaryBtnClass}>
                   <Plus className="h-4 w-4" />
-                  Add reminder
+                  {t("tuDiAddReminderBtn")}
                 </button>
               }
             />
@@ -237,7 +240,7 @@ export function DiaryScreen() {
 
       <SendQueue
         open={Boolean(queue)}
-        title="Send to the parent"
+        title={t("tuDiSendToParentShort")}
         messages={queue ?? []}
         onClose={() => setQueue(null)}
         onSent={(ids) => {
@@ -266,6 +269,7 @@ function NoteForm({
     notifyParent: boolean;
   }) => Promise<void>;
 }) {
+  const { t } = useI18n();
   const { students } = useTuition();
   const [studentId, setStudentId] = useState("");
   const [date, setDate] = useState(defaultDate);
@@ -294,26 +298,26 @@ function NoteForm({
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Add a reminder">
+    <Modal open={open} onClose={onClose} title={t("tuDiAddReminder")}>
       <form onSubmit={submit} className="space-y-4">
-        <Field label="Reminder" required>
+        <Field label={t("tuDiReminder")} required>
           <textarea
             value={text}
             onChange={(event) => setText(event.target.value)}
             rows={2}
-            placeholder="e.g. Ask for the pending assignment"
+            placeholder={t("tuDiNotePh")}
             className={inputClass}
             autoFocus
           />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="For student (optional)">
+          <Field label={t("tuDiForStudent")}>
             <select
               value={studentId}
               onChange={(event) => setStudentId(event.target.value)}
               className={inputClass}
             >
-              <option value="">General reminder</option>
+              <option value="">{t("tuDiGeneralReminder")}</option>
               {students
                 .filter((s) => s.status === "active")
                 .map((student) => (
@@ -323,7 +327,7 @@ function NoteForm({
                 ))}
             </select>
           </Field>
-          <Field label="Remind me on">
+          <Field label={t("tuDiRemindMeOn")}>
             <input
               type="date"
               value={date}
@@ -340,15 +344,15 @@ function NoteForm({
               onChange={(event) => setNotifyParent(event.target.checked)}
               className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
             />
-            This is meant for the parent
+            {t("tuDiMeantForParent")}
           </label>
         )}
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button type="submit" disabled={saving} className={primaryBtnClass}>
-            {saving ? "Saving…" : "Add reminder"}
+            {saving ? t("clPfSaving") : t("tuDiAddReminderBtn")}
           </button>
         </div>
       </form>

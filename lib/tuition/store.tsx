@@ -7,6 +7,8 @@
 // another Setu tool on this device lands straight in the app with their name,
 // phone, logo and UPI ID already filled in.
 
+import { useI18n } from "@/lib/i18n";
+import { translate } from "@/lib/i18n/translate";
 import {
   createContext,
   useCallback,
@@ -47,6 +49,7 @@ import {
   attendanceId,
   currentMonthKey,
   DEFAULT_TUITION_SETTINGS,
+  defaultTuitionSettings,
   formatReceiptNumber,
   markId,
   monthKey,
@@ -184,6 +187,7 @@ const TuitionContext = createContext<TuitionContextValue | null>(null);
 const LAST_SYNC_KEY = "tuition_sheet_sync_last";
 
 export function TuitionProvider({ children }: { children: ReactNode }) {
+  const { lang } = useI18n();
   const [status, setStatus] = useState<TuitionStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [business, setBusiness] = useState<Business | null>(null);
@@ -300,18 +304,28 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     );
 
     // Merge with defaults so records written by older versions gain new fields.
+    // The shipped wording comes from the dictionary rather than the base row:
+    // an empty template is a key this install has never had, so the line in
+    // the reader's language stands in for it.
     const stored = settingsRows.find((s) => s.id === "main");
+    const shipped = defaultTuitionSettings(lang);
     const loadedSettings: TuitionSettings = stored
       ? {
-          ...DEFAULT_TUITION_SETTINGS,
+          ...shipped,
           ...stored,
-          templates: { ...DEFAULT_TUITION_SETTINGS.templates, ...stored.templates },
+          paymentModes: stored.paymentModes?.length ? stored.paymentModes : shipped.paymentModes,
+          templates: {
+            ...shipped.templates,
+            ...Object.fromEntries(
+              Object.entries(stored.templates ?? {}).filter(([, text]) => Boolean(text))
+            ),
+          },
         }
-      : DEFAULT_TUITION_SETTINGS;
+      : shipped;
     setSettings(loadedSettings);
 
     return { business: loadedBusiness, settings: loadedSettings, hasSetup: Boolean(stored) };
-  }, []);
+  }, [lang]);
 
   useEffect(() => {
     let active = true;
@@ -359,7 +373,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
   const createBusiness = useCallback(
     async (profile: Omit<Business, "id" | "createdAt">) => {
       const newBusiness: Business = { ...profile, id: "main", createdAt: nowIso() };
-      const newSettings: TuitionSettings = { ...DEFAULT_TUITION_SETTINGS };
+      const newSettings: TuitionSettings = defaultTuitionSettings(lang);
       await batchWithSync(
         { business: [newBusiness], tuition_settings: [newSettings] },
         {},
@@ -369,7 +383,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setSettings(newSettings);
       setStatus("ready");
     },
-    [batchWithSync]
+    [batchWithSync, lang]
   );
 
   const updateBusiness = useCallback(
@@ -393,10 +407,10 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     (input: BatchInput, ignoreId?: string) => {
       const blocking = blockingConflicts(findBatchConflicts(batches, input, ignoreId));
       if (blocking.length > 0) {
-        throw new Error(describeConflict(blocking[0]));
+        throw new Error(describeConflict(blocking[0], lang));
       }
     },
-    [batches]
+    [batches, lang]
   );
 
   const createBatch = useCallback(
@@ -641,7 +655,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
         // month they left, so their final month is still raised.
         for (const missing of missingDuePeriods(student, dues, target)) {
           created.push(
-            buildTuitionDue(student, batches, missing, settings.feeDueDay, now)
+            buildTuitionDue(student, batches, missing, settings.feeDueDay, now, lang)
           );
         }
       }
@@ -650,7 +664,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setDues((prev) => [...prev, ...created]);
       return created.length;
     },
-    [students, dues, batches, settings.feeDueDay, batchWithSync]
+    [batchWithSync, batches, dues, lang, settings.feeDueDay, students]
   );
 
   // Generate the current month's dues once per session when switched on.
@@ -934,7 +948,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
         queued.map((row) => row.id),
         snapshot
       );
-      await pushToSheet(url, tabs);
+      await pushToSheet(url, tabs, lang);
 
       // Only clear flags that weren't re-dirtied while the push was in flight.
       const current = await dbGetAll<SyncDirtyRow>("sync_queue");
@@ -965,7 +979,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       flushingRef.current = false;
       setSheetSyncing(false);
     }
-  }, []);
+  }, [lang]);
 
   // Debounced auto-flush whenever something is dirty and a sheet is connected.
   useEffect(() => {
@@ -989,11 +1003,11 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("Paste the full https:// web app URL from Apps Script.");
+        throw new Error(translate(lang, "appPasteWebAppUrl"));
       }
-      const test = await testSheetConnection(trimmed);
+      const test = await testSheetConnection(trimmed, lang);
       if (!test.ok) {
-        throw new Error(test.error || "Could not connect to the script.");
+        throw new Error(test.error || translate(lang, "appCouldNotConnectScript"));
       }
       await updateSettings({ sheetSyncUrl: trimmed });
       // The first sync sends everything.
@@ -1005,7 +1019,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
   const disconnectSheet = useCallback(async () => {
     await updateSettings({ sheetSyncUrl: "" });
     setSheetLastError("");
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const syncSheetNow = useCallback(async () => {
     await runSheetFlush();
@@ -1020,13 +1034,11 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("Paste the full https:// web app URL from Apps Script.");
+        throw new Error(translate(lang, "appPasteWebAppUrl"));
       }
       const pull = await pullFromSheet(trimmed);
       if (pull.students.length === 0 && !pull.meta.business) {
-        throw new Error(
-          "This sheet has no tuition data yet. Connect the app to it and sync at least once first."
-        );
+        throw new Error(translate(lang, "appSheetNoDataYet"));
       }
       const backup: TuitionBackup = {
         app: "setu-tuition",
@@ -1061,7 +1073,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     const backup = await createBackup();
     downloadBackupFile(backup);
     await updateSettings({ lastBackupAt: nowIso() });
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const applyRestoredBackup = useCallback(
     async (backup: TuitionBackup) => {
@@ -1093,10 +1105,10 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     setHolidays([]);
     setDirtySlices([]);
     setSheetLastError("");
-    setSettings(DEFAULT_TUITION_SETTINGS);
+    setSettings(defaultTuitionSettings(lang));
     duesGeneratedRef.current = false;
     setStatus(business ? "ready" : "welcome");
-  }, [business]);
+  }, [business, lang]);
 
   const sheetSync = useMemo(
     () => ({

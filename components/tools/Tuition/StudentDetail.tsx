@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import {
   CalendarCheck,
@@ -60,6 +62,7 @@ export function StudentDetail({
   onClose: () => void;
   onEdit: (student: Student) => void;
 }) {
+  const { t, lang } = useI18n();
   const {
     business,
     settings,
@@ -115,7 +118,7 @@ export function StudentDetail({
   const customFields = studentCustomFields(student);
   const absentDates = monthRecords
     .filter((r) => r.status === "absent")
-    .map((r) => formatDate(r.date).replace(/ \d{4}$/, ""));
+    .map((r) => formatDate(r.date, lang).replace(/ \d{4}$/, ""));
 
   const reminderMessage = () => {
     const doc: SharedDoc = {
@@ -127,15 +130,15 @@ export function StudentDetail({
       note: `Fees pending for ${student.name}`,
     };
     return fillTemplate(settings.templates.feeReminder, {
-      parent: student.parentName || "Sir/Ma'am",
+      parent: student.parentName || t("appSirMaam"),
       student: student.name,
       class: student.classLevel,
       amount: formatMoney(balance.outstanding, currency),
       period: balance.dues
         .filter((d) => d.remaining > 0)
-        .map((d) => (d.due.period ? formatMonth(d.due.period) : d.due.label))
+        .map((d) => (d.due.period ? formatMonth(d.due.period, lang) : d.due.label))
         .join(", "),
-      due: balance.oldestPendingDate ? formatDate(balance.oldestPendingDate) : "",
+      due: balance.oldestPendingDate ? formatDate(balance.oldestPendingDate, lang) : "",
       link: shareUrlFor(doc),
       teacher: business?.name ?? "",
     });
@@ -146,7 +149,7 @@ export function StudentDetail({
       attendanceDoc(
         business,
         student,
-        formatMonth(period),
+        formatMonth(period, lang),
         { present: monthStats.present + monthStats.late, total: monthStats.total, percent: monthStats.percent },
         absentDates
       )
@@ -159,12 +162,16 @@ export function StudentDetail({
         {hasLeft && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-muted-line/40 bg-cream-paper px-4 py-3">
             <p className="text-sm text-ink">
-              <span className="font-bold">Left</span>
-              {student.leftOn ? ` on ${formatDate(student.leftOn)}` : ""}
+              <span className="font-bold">{t("tuStLeft")}</span>
+              {student.leftOn
+                ? ` ${fill(t("tuSdOnDate"), { date: formatDate(student.leftOn, lang) })}`
+                : ""}
               {student.leaveReason ? ` · ${student.leaveReason}` : ""}
               {balance.outstanding > 0 && (
                 <span className="ml-2 font-semibold text-red-600">
-                  still owes {formatMoney(balance.outstanding, currency)}
+                  {fill(t("tuSdStillOwes"), {
+                    amount: formatMoney(balance.outstanding, currency),
+                  })}
                 </span>
               )}
             </p>
@@ -174,7 +181,7 @@ export function StudentDetail({
               className={`${secondaryBtnClass} px-3 py-1.5`}
             >
               <RotateCcw className="h-4 w-4" />
-              They&apos;re back
+              {t("tuSdTheyreBack")}
             </button>
           </div>
         )}
@@ -182,10 +189,10 @@ export function StudentDetail({
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm text-muted">
-              {[student.classLevel, student.school].filter(Boolean).join(" · ") || "No class set"}
+              {[student.classLevel, student.school].filter(Boolean).join(" · ") || t("tuSdNoClassSet")}
             </p>
             <p className="mt-1 text-sm text-ink">
-              {student.parentName || "Parent"}
+              {student.parentName || t("tuSdParent")}
               {student.parentPhone ? (
                 <a
                   href={`tel:${student.parentPhone}`}
@@ -195,7 +202,7 @@ export function StudentDetail({
                   {student.parentPhone}
                 </a>
               ) : (
-                <span className="ml-2 text-xs text-saffron">No parent number saved</span>
+                <span className="ml-2 text-xs text-saffron">{t("tuSdNoParentNumberSaved")}</span>
               )}
             </p>
             {enrolled.length > 0 && (
@@ -214,13 +221,13 @@ export function StudentDetail({
           <div className="flex gap-2">
             <button type="button" onClick={() => onEdit(student)} className={secondaryBtnClass}>
               <Pencil className="h-4 w-4" />
-              Edit
+              {t("edit")}
             </button>
             <button
               type="button"
               onClick={() => setConfirmDelete(true)}
               className={dangerBtnClass}
-              aria-label="Delete student"
+              aria-label={t("tuSdDeleteStudent")}
             >
               <Trash2 className="h-4 w-4" />
             </button>
@@ -228,17 +235,17 @@ export function StudentDetail({
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat label="Fee / month" value={formatMoney(fee.total, currency)} />
+          <Stat label={t("tuSdFeePerMonth")} value={formatMoney(fee.total, currency)} />
           <Stat
-            label="Outstanding"
+            label={t("tuRpOutstanding")}
             value={formatMoney(balance.outstanding, currency)}
             tone={balance.outstanding > 0 ? "text-red-600" : "text-emerald-600"}
           />
           <Stat
-            label={`Attendance ${formatMonth(period)}`}
+            label={fill(t("tuSdAttendanceMonth"), { month: formatMonth(period, lang) })}
             value={monthStats.total ? `${monthStats.percent}%` : "—"}
           />
-          <Stat label="Tests" value={String(results.length)} />
+          <Stat label={t("tuNavTests")} value={String(results.length)} />
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -249,12 +256,12 @@ export function StudentDetail({
               className={primaryBtnClass}
             >
               <MessageCircle className="h-4 w-4" />
-              Send fee reminder
+              {t("tuSdSendFeeReminder")}
             </button>
           )}
           <button type="button" onClick={shareAttendance} className={secondaryBtnClass}>
             <CalendarCheck className="h-4 w-4" />
-            Share attendance report
+            {t("tuSdShareAttendance")}
           </button>
           {!hasLeft && (
             <button
@@ -267,7 +274,7 @@ export function StudentDetail({
               className={secondaryBtnClass}
             >
               <UserMinus className="h-4 w-4" />
-              Student left
+              {t("tuSdStudentLeft")}
             </button>
           )}
         </div>
@@ -275,7 +282,7 @@ export function StudentDetail({
         {customFields.length > 0 && (
           <section className="mt-6">
             <h4 className="text-xs font-bold uppercase tracking-wide text-muted">
-              Your own fields
+              {t("tuSfOwnFields")}
             </h4>
             <dl className="mt-2 grid gap-2 sm:grid-cols-2">
               {customFields.map((field) => (
@@ -284,7 +291,7 @@ export function StudentDetail({
                   className="rounded-xl border border-muted-line/30 bg-white px-3 py-2"
                 >
                   <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted">
-                    {field.label || "Note"}
+                    {field.label || t("note")}
                   </dt>
                   <dd className="text-sm text-ink">{field.value}</dd>
                 </div>
@@ -294,9 +301,9 @@ export function StudentDetail({
         )}
 
         <section className="mt-6">
-          <h4 className="text-xs font-bold uppercase tracking-wide text-muted">Fee dues</h4>
+          <h4 className="text-xs font-bold uppercase tracking-wide text-muted">{t("tuSdFeeDues")}</h4>
           {balance.dues.length === 0 ? (
-            <p className="mt-2 text-sm text-muted">No dues raised yet.</p>
+            <p className="mt-2 text-sm text-muted">{t("tuSdNoDuesYet")}</p>
           ) : (
             <ul className="mt-2 divide-y divide-muted-line/20 rounded-xl border border-muted-line/30 bg-white">
               {balance.dues
@@ -307,9 +314,11 @@ export function StudentDetail({
                   <li key={row.due.id} className="flex items-center justify-between px-3 py-2">
                     <div>
                       <p className="text-sm font-semibold text-ink">
-                        {row.due.period ? formatMonth(row.due.period) : row.due.label}
+                        {row.due.period ? formatMonth(row.due.period, lang) : row.due.label}
                       </p>
-                      <p className="text-xs text-muted">Due {formatDate(row.due.dueDate)}</p>
+                      <p className="text-xs text-muted">
+                        {fill(t("tuSdDueOn"), { date: formatDate(row.due.dueDate, lang) })}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-semibold text-ink">
@@ -325,8 +334,10 @@ export function StudentDetail({
                         }`}
                       >
                         {row.status === "paid"
-                          ? "Paid"
-                          : `${formatMoney(row.remaining, currency)} pending`}
+                          ? t("tuSdPaid")
+                          : fill(t("tuSdPending"), {
+                              amount: formatMoney(row.remaining, currency),
+                            })}
                       </p>
                     </div>
                   </li>
@@ -349,18 +360,20 @@ export function StudentDetail({
                       <span className="ml-2 text-xs font-normal text-muted">{payment.mode}</span>
                     </p>
                     <p className="truncate text-xs text-muted">
-                      {payment.receiptNumber} · {formatDate(payment.date.slice(0, 10))}
+                      {payment.receiptNumber} · {formatDate(payment.date.slice(0, 10), lang)}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() =>
-                      setShareDoc(feeReceiptDoc(business, student, payment, balance.outstanding))
+                      setShareDoc(
+                        feeReceiptDoc(business, student, payment, balance.outstanding, lang)
+                      )
                     }
                     className={`${secondaryBtnClass} px-3 py-1.5`}
                   >
                     <Share2 className="h-3.5 w-3.5" />
-                    Receipt
+                    {t("tuSdReceipt")}
                   </button>
                 </li>
               ))}
@@ -379,7 +392,7 @@ export function StudentDetail({
                   <div>
                     <p className="text-sm font-semibold text-ink">{test.name}</p>
                     <p className="text-xs text-muted">
-                      {[test.subject, formatDate(test.date)].filter(Boolean).join(" · ")}
+                      {[test.subject, formatDate(test.date, lang)].filter(Boolean).join(" · ")}
                     </p>
                   </div>
                   <p className="text-sm font-bold text-ink">
@@ -407,13 +420,13 @@ export function StudentDetail({
         open={Boolean(shareDoc)}
         doc={shareDoc}
         onClose={() => setShareDoc(null)}
-        recipientLabel="parent"
-        title="Share with the parent"
+        recipientLabel={t("tuRpParent")}
+        title={t("tuSdShareWithParent")}
       />
 
       <SendQueue
         open={reminderOpen}
-        title="Fee reminder"
+        title={t("tuStgTplFeeReminder")}
         messages={[
           {
             id: student.id,
@@ -429,17 +442,17 @@ export function StudentDetail({
       <Modal
         open={leaveOpen}
         onClose={() => setLeaveOpen(false)}
-        title={`${student.name} has left`}
+        title={fill(t("tuSdHasLeft"), { name: student.name })}
       >
         <p className="text-sm text-muted">
-          They come off the roll and off every batch&apos;s attendance list. Their record,
+          {t("tuSdLeftBody")}
           attendance, fees and marks are all kept, no fee is raised after the month they left, and
           anything still pending stays on the Fees screen.
         </p>
         <div className="mt-4 space-y-4">
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Last day
+              {t("tuSdLastDay")}
             </span>
             <input
               type="date"
@@ -450,13 +463,13 @@ export function StudentDetail({
           </label>
           <label className="block">
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Reason (optional)
+              {t("tuSfReasonOptional")}
             </span>
             <input
               type="text"
               value={leaveReason}
               onChange={(event) => setLeaveReason(event.target.value)}
-              placeholder="e.g. shifted city, board exams over"
+              placeholder={t("tuSfReasonPh")}
               className={inputClass}
             />
           </label>
@@ -473,7 +486,7 @@ export function StudentDetail({
             onClick={() => setLeaveOpen(false)}
             className={secondaryBtnClass}
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="button"
@@ -483,16 +496,16 @@ export function StudentDetail({
             }}
             className={primaryBtnClass}
           >
-            Mark as left
+            {t("tuSdMarkAsLeft")}
           </button>
         </div>
       </Modal>
 
       <ConfirmDialog
         open={confirmDelete}
-        title={`Delete ${student.name}?`}
-        message="Their attendance, fees, payments, marks and notes will be deleted too. This cannot be undone."
-        confirmLabel="Delete student"
+        title={fill(t("tuStgDeleteNamedQ"), { name: student.name })}
+        message={t("tuSdDeleteBody")}
+        confirmLabel={t("tuSdDeleteStudent")}
         onCancel={() => setConfirmDelete(false)}
         onConfirm={() => {
           void deleteStudent(student.id);

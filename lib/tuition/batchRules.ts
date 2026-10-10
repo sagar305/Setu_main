@@ -9,6 +9,8 @@
 // different groups at different times (a morning batch and an evening batch),
 // so that is only a warning the teacher can accept.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import type { Batch } from "./types";
 import { formatTime } from "./types";
 
@@ -92,16 +94,18 @@ export function blockingConflicts(conflicts: BatchConflict[]): BatchConflict[] {
   return conflicts.filter((conflict) => conflict.kind !== "same-subject");
 }
 
-export function describeConflict(conflict: BatchConflict): string {
-  const other = conflict.batch.name;
+export function describeConflict(conflict: BatchConflict, lang: LanguageCode): string {
+  const name = conflict.batch.name;
   switch (conflict.kind) {
     case "duplicate-name":
-      return `You already have a batch called "${other}". Give this one a different name, or edit the existing batch instead of adding it twice.`;
+      return fill(translate(lang, "tuBrDuplicateName"), { name });
     case "time-clash":
-      return `This clashes with "${other}" (${formatTime(conflict.batch.startTime)}–${formatTime(
-        conflict.batch.endTime
-      )}). You cannot take two batches at the same time — change the day or the timing.`;
+      return fill(translate(lang, "tuBrTimeClash"), {
+        name,
+        from: formatTime(conflict.batch.startTime, lang),
+        to: formatTime(conflict.batch.endTime, lang),
+      });
     case "same-subject":
-      return `You already teach this subject and class in "${other}". That is fine if this is a separate group at a different time — otherwise add these students to "${other}" instead of making a second batch.`;
+      return fill(translate(lang, "tuBrDuplicateSubject"), { name });
   }
 }

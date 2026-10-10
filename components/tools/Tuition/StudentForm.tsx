@@ -1,12 +1,14 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { useTuition, type StudentInput } from "@/lib/tuition/store";
 import { studentMonthlyFee } from "@/lib/tuition/calc";
 import { formatMoney } from "@/lib/pos/types";
 import {
-  COMMON_CUSTOM_FIELDS,
+  commonCustomFields,
   generateId,
   todayIso,
   type Student,
@@ -48,6 +50,7 @@ export function StudentForm({
   student: Student | null;
   onClose: () => void;
 }) {
+  const { t, lang } = useI18n();
   const { batches, business, createStudent, updateStudent } = useTuition();
   const [form, setForm] = useState<StudentInput>(EMPTY);
   const [customFee, setCustomFee] = useState("");
@@ -99,7 +102,7 @@ export function StudentForm({
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!form.name.trim()) {
-      setError("Student name is required.");
+      setError(t("tuSfErrName"));
       return;
     }
     setSaving(true);
@@ -122,17 +125,22 @@ export function StudentForm({
       else await createStudent(payload);
       onClose();
     } catch {
-      setError("Could not save this student. Please try again.");
+      setError(t("tuSfErrSave"));
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <Modal open={open} onClose={onClose} title={student ? "Edit student" : "Add student"} wide>
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={t(student ? "tuSfEditStudent" : "tuStAddStudent")}
+      wide
+    >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Student name" required>
+          <Field label={t("tuEnStudentName")} required>
             <input
               type="text"
               value={form.name}
@@ -141,16 +149,16 @@ export function StudentForm({
               autoFocus
             />
           </Field>
-          <Field label="Class / grade">
+          <Field label={t("tuSfClassGrade")}>
             <input
               type="text"
               value={form.classLevel}
               onChange={(event) => setForm((p) => ({ ...p, classLevel: event.target.value }))}
-              placeholder="e.g. Class 10"
+              placeholder={t("tuSfClassPh")}
               className={inputClass}
             />
           </Field>
-          <Field label="Roll number">
+          <Field label={t("tuSfRollNumber")}>
             <input
               type="text"
               value={form.rollNo}
@@ -158,7 +166,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="School">
+          <Field label={t("tuSfSchool")}>
             <input
               type="text"
               value={form.school}
@@ -170,12 +178,11 @@ export function StudentForm({
 
         <div>
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Batches
+            {t("tuAtBatches")}
           </span>
           {activeBatches.length === 0 ? (
             <p className="rounded-lg bg-cream-paper px-3 py-2 text-sm text-muted">
-              No batches yet — add one in Settings → Batches. Fees come from the batches a
-              student is enrolled in.
+              {t("tuSfNoBatches")}
             </p>
           ) : (
             <div className="flex flex-wrap gap-2">
@@ -205,7 +212,7 @@ export function StudentForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Parent / guardian name">
+          <Field label={t("tuSfParentName")}>
             <input
               type="text"
               value={form.parentName}
@@ -213,7 +220,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Parent WhatsApp number" hint="Reminders are sent to this number">
+          <Field label={t("tuSfParentWhatsApp")} hint={t("tuSfRemindersHint")}>
             <input
               type="tel"
               value={form.parentPhone}
@@ -222,7 +229,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Alternate number">
+          <Field label={t("tuSfAltNumber")}>
             <input
               type="tel"
               value={form.altPhone}
@@ -230,7 +237,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Student's own number">
+          <Field label={t("tuSfAltHint")}>
             <input
               type="tel"
               value={form.studentPhone}
@@ -241,7 +248,7 @@ export function StudentForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Joining date" hint="Fees start from this month">
+          <Field label={t("tuSfJoiningDate")} hint={t("tuSfFeesStart")}>
             <input
               type="date"
               value={form.joinDate}
@@ -249,7 +256,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Date of birth" hint="For birthday reminders">
+          <Field label={t("tuSfDob")} hint={t("tuSfDobHint")}>
             <input
               type="date"
               value={form.dob}
@@ -257,7 +264,7 @@ export function StudentForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Status">
+          <Field label={t("tkHiColStatus")}>
             <select
               value={form.status}
               onChange={(event) => {
@@ -272,15 +279,15 @@ export function StudentForm({
               }}
               className={inputClass}
             >
-              <option value="active">Currently attending</option>
-              <option value="inactive">Left</option>
+              <option value="active">{t("tuSfCurrentlyAttending")}</option>
+              <option value="inactive">{t("tuStLeft")}</option>
             </select>
           </Field>
         </div>
 
         {form.status === "inactive" && (
           <div className="grid gap-4 rounded-xl border border-muted-line/30 bg-cream-paper p-4 sm:grid-cols-2">
-            <Field label="Left on" hint="Fees stop after this month">
+            <Field label={t("tuSfLeftOn")} hint={t("tuSfFeesStop")}>
               <input
                 type="date"
                 value={form.leftOn}
@@ -288,12 +295,12 @@ export function StudentForm({
                 className={inputClass}
               />
             </Field>
-            <Field label="Reason (optional)">
+            <Field label={t("tuSfReasonOptional")}>
               <input
                 type="text"
                 value={form.leaveReason}
                 onChange={(event) => setForm((p) => ({ ...p, leaveReason: event.target.value }))}
-                placeholder="e.g. shifted city, board exams over"
+                placeholder={t("tuSfReasonPh")}
                 className={inputClass}
               />
             </Field>
@@ -302,7 +309,7 @@ export function StudentForm({
 
         <div className="rounded-xl border border-muted-line/30 bg-cream-paper p-4">
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Concession" hint="Sibling / scholarship discount">
+            <Field label={t("tuSfConcession")} hint={t("tuSfConcessionHint")}>
               <div className="flex gap-2">
                 <input
                   type="number"
@@ -329,19 +336,19 @@ export function StudentForm({
                 </select>
               </div>
             </Field>
-            <Field label="Custom fee" hint="Overrides the batch total">
+            <Field label={t("tuSfCustomFee")} hint={t("tuSfCustomFeeHint")}>
               <input
                 type="number"
                 min={0}
                 value={customFee}
                 onChange={(event) => setCustomFee(event.target.value)}
-                placeholder="Leave blank"
+                placeholder={t("tuSfLeaveBlank")}
                 className={inputClass}
               />
             </Field>
             <div className="flex flex-col justify-end">
               <span className="text-xs font-semibold uppercase tracking-wide text-muted">
-                Fee per month
+                {t("tuSfFeePerMonth")}
               </span>
               <span className="mt-1 text-xl font-bold text-ink">
                 {formatMoney(preview.total, currency)}
@@ -359,7 +366,7 @@ export function StudentForm({
         <div>
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wide text-muted">
-              Your own fields
+              {t("tuSfOwnFields")}
             </span>
             <button
               type="button"
@@ -372,11 +379,11 @@ export function StudentForm({
               className="inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
             >
               <Plus className="h-3.5 w-3.5" />
-              Add a field
+              {t("tuSfAddField")}
             </button>
           </div>
           <p className="mt-1 text-xs text-muted/80">
-            Anything you want to remember — school test marks, a board roll number, weak topics.
+            {t("tuSfOwnFieldsHint")}
           </p>
 
           {form.custom.length > 0 && (
@@ -393,10 +400,10 @@ export function StudentForm({
                         custom: p.custom.map((f, i) => (i === index ? { ...f, label } : f)),
                       }));
                     }}
-                    placeholder="Field name"
+                    placeholder={t("tuSfFieldName")}
                     list="tuition-custom-field-names"
                     className={`${inputClass} sm:w-56`}
-                    aria-label={`Field name ${index + 1}`}
+                    aria-label={fill(t("tuSfFieldNameN"), { n: index + 1 })}
                   />
                   <input
                     type="text"
@@ -408,9 +415,9 @@ export function StudentForm({
                         custom: p.custom.map((f, i) => (i === index ? { ...f, value } : f)),
                       }));
                     }}
-                    placeholder="Value — e.g. Maths 78/100"
+                    placeholder={t("tuSfFieldValuePh")}
                     className={`${inputClass} flex-1`}
-                    aria-label={`Field value ${index + 1}`}
+                    aria-label={fill(t("tuSfFieldValueN"), { n: index + 1 })}
                   />
                   <button
                     type="button"
@@ -418,7 +425,7 @@ export function StudentForm({
                       setForm((p) => ({ ...p, custom: p.custom.filter((_, i) => i !== index) }))
                     }
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-muted-line/40 text-muted transition hover:border-red-300 hover:text-red-600"
-                    aria-label={`Remove field ${index + 1}`}
+                    aria-label={fill(t("tuSfRemoveFieldN"), { n: index + 1 })}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -427,13 +434,13 @@ export function StudentForm({
             </ul>
           )}
           <datalist id="tuition-custom-field-names">
-            {COMMON_CUSTOM_FIELDS.map((name) => (
+            {commonCustomFields(lang).map((name) => (
               <option key={name} value={name} />
             ))}
           </datalist>
         </div>
 
-        <Field label="Notes">
+        <Field label={t("notes")}>
           <textarea
             value={form.notes}
             onChange={(event) => setForm((p) => ({ ...p, notes: event.target.value }))}
@@ -450,10 +457,10 @@ export function StudentForm({
 
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button type="submit" disabled={saving} className={primaryBtnClass}>
-            {saving ? "Saving…" : student ? "Save changes" : "Add student"}
+            {saving ? t("clPfSaving") : t(student ? "saveChanges" : "tuStAddStudent")}
           </button>
         </div>
       </form>
