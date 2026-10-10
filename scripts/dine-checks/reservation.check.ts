@@ -196,6 +196,7 @@ const free = confirmationMessage({
   businessName: "Anand Bhavan",
   reservation: booking(),
   currency: "INR",
+  lang: "en",
 });
 eq("a free booking never mentions an advance", /advance/i.test(free), false);
 eq("it carries the party size", free.includes("4 guests"), true);
@@ -204,6 +205,7 @@ const paid = confirmationMessage({
   businessName: "Anand Bhavan",
   reservation: booking({ depositRequired: toPaise(500), depositPaid: toPaise(500) }),
   currency: "INR",
+  lang: "en",
 });
 eq("a paid booking says the advance comes off the bill", paid.includes("final bill"), true);
 
@@ -211,6 +213,7 @@ const partly = confirmationMessage({
   businessName: "Anand Bhavan",
   reservation: booking({ depositRequired: toPaise(500) }),
   currency: "INR",
+  lang: "en",
   upiId: "anand@upi",
 });
 eq("an unpaid advance asks for it", partly.includes("Advance to confirm"), true);

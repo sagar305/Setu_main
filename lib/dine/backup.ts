@@ -6,6 +6,7 @@
 // carries its own marker so a Browser Based POS backup can never be restored
 // over a Dine database by mistake.
 
+import type { TKey } from "@/lib/i18n/translate";
 import { DINE_STORES, dineBatch, dineClearStores, dineGetAll, type DineStoreName } from "./db";
 
 export const DINE_BACKUP_MARKER = "setu-free-dine";
@@ -51,46 +52,45 @@ export function downloadDineBackup(backup: DineBackup): void {
 
 export type DineBackupValidation =
   | { ok: true; backup: DineBackup }
-  | { ok: false; error: string };
+  // A key rather than a sentence: this file is read in a helper that has no
+  // business knowing which language the screen is in.
+  | { ok: false; error: TKey; values?: Record<string, string | number> };
 
 export function validateDineBackup(raw: unknown): DineBackupValidation {
   if (typeof raw !== "object" || raw === null) {
-    return { ok: false, error: "This file is not a valid Free Dine backup." };
+    return { ok: false, error: "appBackupNotValid" };
   }
   const candidate = raw as Partial<DineBackup>;
   if (candidate.app !== DINE_BACKUP_MARKER) {
     return {
       ok: false,
-      error:
-        candidate.app === "setu-free-pos"
-          ? "This is a Browser Based POS backup. Free Dine keeps its own separate data and cannot restore it."
-          : "This file was not exported from Free Dine.",
+      error: candidate.app === "setu-free-pos" ? "dnBackupIsPos" : "dnBackupWrongApp",
     };
   }
   if (typeof candidate.version !== "number" || candidate.version > DINE_BACKUP_VERSION) {
-    return { ok: false, error: "This backup was created by a newer version of Free Dine." };
+    return { ok: false, error: "appBackupNewer" };
   }
   if (typeof candidate.data !== "object" || candidate.data === null) {
-    return { ok: false, error: "The backup file is missing its data section." };
+    return { ok: false, error: "appBackupMissingData" };
   }
 
   const data = candidate.data as Record<string, unknown>;
   for (const store of DINE_STORES) {
     if (data[store] !== undefined && !Array.isArray(data[store])) {
-      return { ok: false, error: `The backup section "${store}" is corrupted.` };
+      return { ok: false, error: "dnBackupSectionCorrupt", values: { section: store } };
     }
   }
 
   const records = data as Record<DineStoreName, unknown[] | undefined>;
   for (const record of records.dine_business ?? []) {
     if (typeof (record as { name?: unknown })?.name !== "string") {
-      return { ok: false, error: "The restaurant profile in this backup is corrupted." };
+      return { ok: false, error: "dnBackupProfileCorrupt" };
     }
   }
   for (const record of records.dine_menu_items ?? []) {
     const item = record as { id?: unknown; name?: unknown };
     if (typeof item?.id !== "string" || typeof item?.name !== "string") {
-      return { ok: false, error: "A menu item in this backup is corrupted." };
+      return { ok: false, error: "dnBackupMenuCorrupt" };
     }
   }
 
@@ -112,7 +112,7 @@ export function parseDineBackupFile(text: string): DineBackupValidation {
   try {
     return validateDineBackup(JSON.parse(text));
   } catch {
-    return { ok: false, error: "Could not read this file — it is not valid JSON." };
+    return { ok: false, error: "appBackupNotJson" };
   }
 }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useRef, useState } from "react";
 import {
   Download,
@@ -13,7 +14,7 @@ import {
 import { useDine, type MenuItemInput } from "@/lib/dine/store";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { downloadCsv, menuCsv, parseMenuCsv } from "@/lib/dine/csv";
-import { FOOD_TYPE_LABELS, type DineMenuItem, type FoodType } from "@/lib/dine/types";
+import { foodTypeLabel, type DineMenuItem, type FoodType } from "@/lib/dine/types";
 import { RecipeBadge, RecipeModal } from "./RecipeModal";
 import {
   ConfirmDialog,
@@ -30,6 +31,7 @@ import {
 } from "./ui";
 
 export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
+  const { lang } = useI18n();
   const {
     menuItems,
     categories,
@@ -72,7 +74,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
 
   const onImport = async (file: File | undefined) => {
     if (!file) return;
-    const result = parseMenuCsv(await file.text());
+    const result = parseMenuCsv(await file.text(), lang);
     if (result.rows.length > 0) {
       const added = await importMenu(result.rows, false);
       setImportReport([`Added ${added} item${added === 1 ? "" : "s"}.`, ...result.errors]);
@@ -334,6 +336,7 @@ const EMPTY_ITEM: MenuItemInput = {
 };
 
 function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: () => void }) {
+  const { lang } = useI18n();
   const {
     categories,
     variations,
@@ -469,7 +472,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
           </Field>
           <Field label="Type">
             <div className="flex gap-2">
-              {(Object.keys(FOOD_TYPE_LABELS) as FoodType[]).map((type) => (
+              {(Object.keys(foodTypeLabel) as FoodType[]).map((type) => (
                 <button
                   key={type}
                   type="button"
@@ -482,7 +485,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                   }`}
                 >
                   <FoodDot type={type} />
-                  {FOOD_TYPE_LABELS[type]}
+                  {foodTypeLabel(type, lang)}
                 </button>
               ))}
             </div>

@@ -1,12 +1,13 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useMemo, useState } from "react";
 import { Check, ChefHat, CircleAlert, Clock, Flame, Utensils } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { canSyncTabs } from "@/lib/dine/sync";
 import {
-  KOT_STATUS_LABELS,
-  ORDER_TYPE_LABELS,
+  kotStatusLabel,
+  orderTypeLabel,
   kotStatusOf,
   type DineKot,
   type KotStatus,
@@ -43,6 +44,7 @@ const NEXT_STATUS: Partial<Record<KotStatus, { next: KotStatus; label: string }>
 };
 
 export function KitchenScreen() {
+  const { lang } = useI18n();
   const { kots, tickets, tables, areas, ticketItems, setKotStatus, business } = useDine();
   const [now, setNow] = useState(() => Date.now());
   const [showServed, setShowServed] = useState(false);
@@ -115,7 +117,7 @@ export function KitchenScreen() {
                 now={now}
                 table={table}
                 areaName={areas.find((area) => area.id === table?.areaId)?.name ?? ""}
-                orderTypeLabel={ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}
+                orderTypeLabel={orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}
                 customerName={ticket?.customerName ?? ""}
                 items={ticketItems.filter(
                   (item) =>
@@ -160,6 +162,7 @@ function KotCard({
   }[];
   onAdvance: (status: KotStatus) => void;
 }) {
+  const { lang } = useI18n();
   const status = kotStatusOf(kot);
   const age = ageOf(kot.printedAt, now);
   const advance = NEXT_STATUS[status];
@@ -203,7 +206,7 @@ function KotCard({
             {age.label}
           </span>
           <p className="mt-1 text-[10px] uppercase tracking-wide text-muted">
-            {KOT_STATUS_LABELS[status]}
+            {kotStatusLabel(status, lang)}
           </p>
         </div>
       </header>

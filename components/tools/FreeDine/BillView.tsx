@@ -1,9 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { forwardRef, useEffect, useState } from "react";
 import { formatPaise, amountInWords, toMajor } from "@/lib/dine/money";
 import {
-  ORDER_TYPE_LABELS,
+  orderTypeLabel,
   type DineBill,
   type DineBillItem,
   type DineBillPayment,
@@ -71,6 +72,7 @@ export const BillView = forwardRef<
     template?: ReceiptTemplate | null;
   }
 >(function BillView({ bill, items, payments, business, settings, template }, ref) {
+  const { lang } = useI18n();
   const currency = business?.currency ?? "INR";
   const money = (paise: number) => formatPaise(paise, currency).replace(/^[^\d-]+/, "");
   const showItems = items.length > 0;
@@ -146,7 +148,7 @@ export const BillView = forwardRef<
         <span>
           {bill.tableName
             ? `${bill.tableName}${bill.areaName ? ` · ${bill.areaName}` : ""}`
-            : ORDER_TYPE_LABELS[bill.orderType]}
+            : orderTypeLabel(bill.orderType, lang)}
         </span>
         {bill.splitCount > 1 && (
           <span className="b">
@@ -304,10 +306,11 @@ export function billShareText(
   business: DineBusiness | null,
   currency: string
 ): string {
+  const { lang } = useI18n();
   const lines = [
     business?.name ?? "Restaurant",
     `Bill ${bill.billLabel}`,
-    bill.tableName ? `Table ${bill.tableName}` : ORDER_TYPE_LABELS[bill.orderType],
+    bill.tableName ? `Table ${bill.tableName}` : orderTypeLabel(bill.orderType, lang),
     `Total: ${currency === "INR" ? "₹" : ""}${toMajor(bill.total).toFixed(2)}`,
     printedAt(bill.createdAt),
   ];

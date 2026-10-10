@@ -1,9 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useRef } from "react";
 import { Printer, RotateCcw } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
-import { ORDER_TYPE_LABELS, type DineKot } from "@/lib/dine/types";
+import { orderTypeLabel, type DineKot } from "@/lib/dine/types";
 import { Modal, primaryBtnClass, secondaryBtnClass, tapTargetClass } from "./ui";
 import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
 
@@ -24,6 +25,7 @@ export function KotModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const { lang } = useI18n();
   const { business, settings, tickets, tables, areas, ticketItems, reprintKot } = useDine();
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -68,13 +70,13 @@ export function KotModal({
           <div className="rule" />
 
           <div className="row">
-            <span className="b">{table ? table.name : ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}</span>
+            <span className="b">{table ? table.name : orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}</span>
             <span>Round {kot.roundNumber}</span>
           </div>
           <div className="row sm muted">
             <span>
               {area ? `${area.name} · ` : ""}
-              {ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}
+              {orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}
             </span>
             <span>{printedAt(kot.printedAt)}</span>
           </div>

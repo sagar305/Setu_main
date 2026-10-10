@@ -1,11 +1,12 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useRef, useState } from "react";
 import { Ban, Download, Printer, Receipt } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
 import { billsCsv, downloadCsv } from "@/lib/dine/csv";
-import { ORDER_TYPE_LABELS, type DineBill } from "@/lib/dine/types";
+import { orderTypeLabel, type DineBill } from "@/lib/dine/types";
 import { BillView, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode, printedAt } from "./printing";
 import {
@@ -21,6 +22,7 @@ import {
 } from "./ui";
 
 export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
+  const { lang } = useI18n();
   const { bills, billItems, billPayments, business, settings, cancelBill } = useDine();
   const template = useBillTemplate();
   const paperSize = template?.paperSize ?? settings.billPaperSize;
@@ -121,7 +123,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
                   </td>
                   <td className="px-4 py-2 text-muted">{printedAt(bill.createdAt)}</td>
                   <td className="px-4 py-2 text-muted">
-                    {bill.tableName || ORDER_TYPE_LABELS[bill.orderType]}
+                    {bill.tableName || orderTypeLabel(bill.orderType, lang)}
                   </td>
                   <td className="px-4 py-2 text-right font-bold text-ink">
                     {formatPaise(bill.total, currency)}

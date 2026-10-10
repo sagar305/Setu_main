@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -17,7 +18,7 @@ import {
 import { useDine } from "@/lib/dine/store";
 import { formatPaise, parseAmount } from "@/lib/dine/money";
 import {
-  ORDER_TYPE_LABELS,
+  orderTypeLabel,
   lineUnitPrice,
   type DineKot,
   type DineMenuItem,
@@ -47,6 +48,7 @@ export function TicketScreen({
   ticketId: string;
   onBack: () => void;
 }) {
+  const { lang } = useI18n();
   const {
     tickets,
     tables,
@@ -182,7 +184,7 @@ export function TicketScreen({
             <h2 className="text-lg font-bold text-ink">{title}</h2>
             <p className="flex items-center gap-2 text-xs text-muted">
               <OrderTypeChip type={ticket.orderType} />
-              <span>Open {elapsedLabel(ticket.openedAt, now)}</span>
+              <span>Open {elapsedLabel(ticket.openedAt, now, lang)}</span>
               {ticket.roundsFired > 0 && (
                 <span>
                   · {ticket.roundsFired} round{ticket.roundsFired === 1 ? "" : "s"} sent
@@ -454,7 +456,7 @@ export function TicketScreen({
               >
                 <span>{candidateTable?.name ?? `#${candidate.ticketNumber}`}</span>
                 <span className="text-xs font-normal text-muted">
-                  {ORDER_TYPE_LABELS[candidate.orderType]}
+                  {orderTypeLabel(candidate.orderType, lang)}
                 </span>
               </button>
             );

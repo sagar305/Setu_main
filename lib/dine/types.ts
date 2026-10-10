@@ -9,6 +9,9 @@
 // MONEY: every amount here is an integer in the currency's minor unit (paise).
 // See lib/dine/money.ts — no field on this page is ever a rupee float.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { relabelSeed } from "@/lib/i18n/seed-labels";
+import { translate, type TKey } from "@/lib/i18n/translate";
 import type { BaseUnit } from "./units";
 
 export type OrderType = "dine-in" | "takeaway" | "delivery";
@@ -101,13 +104,21 @@ export type DineStockMove = {
   createdAt: string;
 };
 
-export const STOCK_MOVE_LABELS: Record<StockMoveReason, string> = {
-  opening: "Opening stock",
-  purchase: "Stock added",
-  consume: "Used in orders",
-  wastage: "Wastage",
-  adjust: "Stock take",
+const STOCK_MOVE_KEYS: Record<StockMoveReason, TKey> = {
+  opening: "dnSmOpening",
+  purchase: "dnSmPurchase",
+  consume: "dnSmConsume",
+  wastage: "dnSmWastage",
+  adjust: "dnSmAdjust",
 };
+
+export const STOCK_MOVE_ORDER = Object.keys(STOCK_MOVE_KEYS) as StockMoveReason[];
+
+/** Why stock moved, in words. The stored reason stays the coded one. */
+export function stockMoveLabel(reason: StockMoveReason, lang: LanguageCode): string {
+  const key = STOCK_MOVE_KEYS[reason];
+  return key ? translate(lang, key) : reason;
+}
 
 export type DineBusiness = {
   id: "main";
@@ -298,12 +309,20 @@ export type DineKot = {
   createdAt: string;
 };
 
-export const KOT_STATUS_LABELS: Record<KotStatus, string> = {
-  new: "New",
-  preparing: "Cooking",
-  ready: "Ready",
-  served: "Served",
+const KOT_STATUS_KEYS: Record<KotStatus, TKey> = {
+  new: "dnKotNew",
+  preparing: "dnKotPreparing",
+  ready: "dnKotReady",
+  served: "dnKotServed",
 };
+
+export const KOT_STATUS_ORDER = Object.keys(KOT_STATUS_KEYS) as KotStatus[];
+
+/** Where a round has got to, in words. */
+export function kotStatusLabel(status: KotStatus, lang: LanguageCode): string {
+  const key = KOT_STATUS_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 export function kotStatusOf(kot: Pick<DineKot, "status">): KotStatus {
   return kot.status ?? "new";
@@ -450,13 +469,26 @@ export type DineCustomer = {
 
 export type ReservationStatus = "booked" | "seated" | "completed" | "cancelled" | "no-show";
 
-export const RESERVATION_STATUS_LABELS: Record<ReservationStatus, string> = {
-  booked: "Booked",
-  seated: "Seated",
-  completed: "Completed",
-  cancelled: "Cancelled",
-  "no-show": "No-show",
+const RESERVATION_STATUS_KEYS: Record<ReservationStatus, TKey> = {
+  booked: "dnRsBooked",
+  seated: "dnRsSeated",
+  completed: "dnRsCompleted",
+  cancelled: "dnRsCancelled",
+  "no-show": "dnRsNoShow",
 };
+
+export const RESERVATION_STATUS_ORDER = Object.keys(
+  RESERVATION_STATUS_KEYS
+) as ReservationStatus[];
+
+/** Where a booking stands, in words. */
+export function reservationStatusLabel(
+  status: ReservationStatus,
+  lang: LanguageCode
+): string {
+  const key = RESERVATION_STATUS_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
 
 /** Bookings still holding a table. Cancelled and finished ones release it. */
 export const ACTIVE_RESERVATION_STATUSES: ReservationStatus[] = ["booked", "seated"];
@@ -663,7 +695,7 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   nextTicketNumber: 1,
   defaultOrderType: "dine-in",
 
-  receiptFooter: "Thank you for dining with us!",
+  receiptFooter: "",
   showBusinessInfoOnBill: true,
   billTemplateId: "",
 
@@ -688,11 +720,41 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   kitchenLocked: false,
 };
 
-export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
+const PAYMENT_METHOD_KEYS: TKey[] = ["dnPayCash", "dnPayUpi", "dnPayCard"];
 
-/** Reserved tender names. Created on demand, never editable, never deletable. */
-export const CREDIT_METHOD_NAME = "On account (khata)";
-export const ADVANCE_METHOD_NAME = "Booking advance";
+/** The tenders a new restaurant starts with, in the reader's language. */
+export function defaultPaymentMethods(lang: LanguageCode): string[] {
+  return PAYMENT_METHOD_KEYS.map((key) => translate(lang, key));
+}
+
+/**
+ * Reserved tender keys. Created on demand, never editable, never deletable.
+ *
+ * A reserved row is recognised by its `kind`, never by its name, so the name
+ * is display only: it is written in the language of whoever turned the feature
+ * on and re-languaged on the way out while it is still one of ours.
+ */
+const RESERVED_METHOD_KEYS: Record<"credit" | "advance", TKey> = {
+  credit: "dnPayCredit",
+  advance: "dnPayAdvance",
+};
+
+export function reservedMethodName(
+  kind: "credit" | "advance",
+  lang: LanguageCode
+): string {
+  return translate(lang, RESERVED_METHOD_KEYS[kind]);
+}
+
+/**
+ * A stored tender name in the reader's language.
+ *
+ * Seeded and reserved names follow the reader; a tender the owner typed
+ * ("Sodexo", "Swiggy") is left exactly as written.
+ */
+export function paymentMethodLabel(name: string, lang: LanguageCode): string {
+  return relabelSeed(name, [...PAYMENT_METHOD_KEYS, ...Object.values(RESERVED_METHOD_KEYS)], lang);
+}
 
 /**
  * Slices of the workspace that can be marked dirty for Sheet sync.
@@ -721,17 +783,33 @@ export const DINE_SYNC_SLICES: DineSyncSlice[] = [
 
 export type DineSyncDirtyRow = { id: DineSyncSlice; dirtyAt: string };
 
-export const ORDER_TYPE_LABELS: Record<OrderType, string> = {
-  "dine-in": "Dine-in",
-  takeaway: "Takeaway",
-  delivery: "Delivery",
+const ORDER_TYPE_KEYS: Record<OrderType, TKey> = {
+  "dine-in": "dnOtDineIn",
+  takeaway: "dnOtTakeaway",
+  delivery: "dnOtDelivery",
 };
 
-export const FOOD_TYPE_LABELS: Record<FoodType, string> = {
-  veg: "Veg",
-  nonveg: "Non-veg",
-  egg: "Egg",
+export const ORDER_TYPE_ORDER = Object.keys(ORDER_TYPE_KEYS) as OrderType[];
+
+/** How the order is being served, in words. */
+export function orderTypeLabel(type: OrderType, lang: LanguageCode): string {
+  const key = ORDER_TYPE_KEYS[type];
+  return key ? translate(lang, key) : type;
+}
+
+const FOOD_TYPE_KEYS: Record<FoodType, TKey> = {
+  veg: "qmVeg",
+  nonveg: "qmNonVeg",
+  egg: "dnFtEgg",
 };
+
+export const FOOD_TYPE_ORDER = Object.keys(FOOD_TYPE_KEYS) as FoodType[];
+
+/** The green/red/brown dot's name, for the tooltip and for screen readers. */
+export function foodTypeLabel(type: FoodType, lang: LanguageCode): string {
+  const key = FOOD_TYPE_KEYS[type];
+  return key ? translate(lang, key) : type;
+}
 
 /** Starter list for setup; the profile screen offers every ISO currency. */
 export const CURRENCIES = [

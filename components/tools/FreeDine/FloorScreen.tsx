@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bike,
@@ -12,7 +13,7 @@ import {
 } from "lucide-react";
 import { useDine, type FloorTable } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
-import { ORDER_TYPE_LABELS, type DineReservation, type DineTicket } from "@/lib/dine/types";
+import { orderTypeLabel, type DineReservation, type DineTicket } from "@/lib/dine/types";
 import { formatSlot, holdingTable, isLate, upcoming } from "@/lib/dine/reservation";
 import type { NavigateFn } from "./nav";
 import {
@@ -39,6 +40,7 @@ export function FloorScreen({
   onOpenTicket: (ticketId: string) => void;
   onNavigate: NavigateFn;
 }) {
+  const { lang } = useI18n();
   const {
     areas,
     floorTables,
@@ -167,7 +169,7 @@ export function FloorScreen({
                   {booking.guestName || "Guest"} · {booking.partySize} pax
                 </span>
                 <span className="text-muted">
-                  {formatSlot(booking.startsAt).replace(/^.*?, /, "")}
+                  {formatSlot(booking.startsAt, lang).replace(/^.*?, /, "")}
                   {booking.tableName ? ` · ${booking.tableName}` : " · any table"}
                   {isLate(booking, now, settings.reservationHoldMinutes) ? " · late" : ""}
                 </span>
@@ -248,7 +250,7 @@ export function FloorScreen({
                 heldBy.has(row.table.id) ? (
                   <span className="text-xs font-semibold text-purple-800">
                     {heldBy.get(row.table.id)!.guestName || "Guest"} ·{" "}
-                    {formatSlot(heldBy.get(row.table.id)!.startsAt).replace(/^.*?, /, "")} ·{" "}
+                    {formatSlot(heldBy.get(row.table.id)!.startsAt, lang).replace(/^.*?, /, "")} ·{" "}
                     {heldBy.get(row.table.id)!.partySize} pax
                   </span>
                 ) : (
@@ -264,7 +266,7 @@ export function FloorScreen({
                   <span className="flex items-center gap-2 text-[11px] text-muted">
                     <span className="inline-flex items-center gap-1">
                       <Clock className="h-3 w-3" aria-hidden="true" />
-                      {elapsedLabel(row.openedAt, now)}
+                      {elapsedLabel(row.openedAt, now, lang)}
                     </span>
                     <span>
                       {row.itemCount} item{row.itemCount === 1 ? "" : "s"}
@@ -328,6 +330,7 @@ function CounterTicketCard({
   now: number;
   onOpen: () => void;
 }) {
+  const { lang } = useI18n();
   const { ticketTotals } = useDine();
   const totals = ticketTotals(ticket.id);
 
@@ -347,8 +350,8 @@ function CounterTicketCard({
         </span>
         <span className="mt-1 flex items-center gap-2 text-[11px] text-muted">
           <Clock className="h-3 w-3" aria-hidden="true" />
-          {elapsedLabel(ticket.openedAt, now)}
-          <span>{ORDER_TYPE_LABELS[ticket.orderType]}</span>
+          {elapsedLabel(ticket.openedAt, now, lang)}
+          <span>{orderTypeLabel(ticket.orderType, lang)}</span>
         </span>
       </span>
       <span className="shrink-0 text-sm font-bold text-ink">

@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useMemo, useState } from "react";
 import {
   CalendarClock,
@@ -27,7 +28,7 @@ import {
   windowOf,
 } from "@/lib/dine/reservation";
 import {
-  RESERVATION_STATUS_LABELS,
+  reservationStatusLabel,
   kindOf,
   type DineReservation,
   type ReservationStatus,
@@ -327,6 +328,7 @@ function ReservationCard({
   onCancel: () => void;
   onNoShow: () => void;
 }) {
+  const { lang } = useI18n();
   const { business, settings } = useDine();
   const currency = business?.currency ?? "INR";
   const late = isLate(reservation, now, settings.reservationHoldMinutes);
@@ -336,6 +338,7 @@ function ReservationCard({
     businessName: business?.name ?? "our restaurant",
     reservation,
     currency,
+    lang,
     address: business?.address || undefined,
     phone: business?.phone || undefined,
     upiId: business?.upiId || undefined,
@@ -344,6 +347,7 @@ function ReservationCard({
     businessName: business?.name ?? "our restaurant",
     reservation,
     currency,
+    lang,
   });
 
   return (
@@ -357,7 +361,7 @@ function ReservationCard({
                 STATUS_STYLE[reservation.status]
               }`}
             >
-              {RESERVATION_STATUS_LABELS[reservation.status]}
+              {reservationStatusLabel(reservation.status, lang)}
             </span>
             {late && (
               <span className="flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">
@@ -367,7 +371,7 @@ function ReservationCard({
             )}
           </div>
           <p className="mt-1 text-sm text-muted">
-            {formatSlot(reservation.startsAt)} · {reservation.partySize}{" "}
+            {formatSlot(reservation.startsAt, lang)} · {reservation.partySize}{" "}
             {reservation.partySize === 1 ? "guest" : "guests"}
             {reservation.tableName ? ` · ${reservation.tableName}` : " · any table"}
           </p>
@@ -500,6 +504,7 @@ function ReservationModal({
   reservation: DineReservation | null;
   onClose: () => void;
 }) {
+  const { lang } = useI18n();
   const {
     tables,
     areas,
@@ -632,7 +637,7 @@ function ReservationModal({
               <p className="font-semibold">That table is already promised.</p>
               {conflicts.map((row) => (
                 <p key={row.id} className="text-xs">
-                  {row.guestName || "Guest"} at {formatSlot(row.startsAt)} for {row.partySize}
+                  {row.guestName || "Guest"} at {formatSlot(row.startsAt, lang)} for {row.partySize}
                 </p>
               ))}
               <p className="mt-1 text-xs">
@@ -810,6 +815,7 @@ function CancelModal({
   reservation: DineReservation;
   onClose: () => void;
 }) {
+  const { lang } = useI18n();
   const { business, settings, cancelReservation } = useDine();
   const currency = business?.currency ?? "INR";
   const [reason, setReason] = useState("");
@@ -822,6 +828,7 @@ function CancelModal({
       businessName: business?.name ?? "our restaurant",
       reservation: done,
       currency,
+      lang,
     });
     return (
       <Modal open onClose={onClose} title="Booking cancelled">

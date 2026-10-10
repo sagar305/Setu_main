@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useState } from "react";
 import {
   Boxes,
@@ -25,7 +26,7 @@ import {
   valueOf,
   type BaseUnit,
 } from "@/lib/dine/units";
-import { STOCK_MOVE_LABELS, type DineMaterial } from "@/lib/dine/types";
+import { stockMoveLabel, type DineMaterial } from "@/lib/dine/types";
 import { printedAt } from "./printing";
 import {
   ConfirmDialog,
@@ -50,6 +51,7 @@ import {
  * sale into a deduction.
  */
 export function InventoryScreen() {
+  const { lang } = useI18n();
   const {
     materials,
     stockMoves,
@@ -357,7 +359,7 @@ export function InventoryScreen() {
               <tr key={move.id} className="border-b border-muted-line/10 last:border-0">
                 <td className="py-2 text-xs text-muted">{printedAt(move.createdAt)}</td>
                 <td className="py-2">
-                  <span className="text-ink">{STOCK_MOVE_LABELS[move.reason]}</span>
+                  <span className="text-ink">{stockMoveLabel(move.reason, lang)}</span>
                   {(move.refLabel || move.note) && (
                     <span className="block text-xs text-muted">
                       {[move.refLabel, move.note].filter(Boolean).join(" · ")}

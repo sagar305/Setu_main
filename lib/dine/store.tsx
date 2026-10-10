@@ -14,6 +14,8 @@
 // all: a ticket is a database record from the moment the table is tapped, and
 // every mutation is a write.
 
+import { useI18n } from "@/lib/i18n";
+import { translate } from "@/lib/i18n/translate";
 import {
   createContext,
   useCallback,
@@ -82,10 +84,9 @@ import {
   type SampleRecipeLine,
 } from "./sampleMenu";
 import {
-  ADVANCE_METHOD_NAME,
-  CREDIT_METHOD_NAME,
+  reservedMethodName,
   DEFAULT_DINE_SETTINGS,
-  DEFAULT_PAYMENT_METHODS,
+  defaultPaymentMethods,
   DINE_SYNC_SLICES,
   businessDateOf,
   effectiveTaxRate,
@@ -465,6 +466,7 @@ const SYNC_LAST_KEY = "dine_sheet_sync_last";
 const DineContext = createContext<DineContextValue | null>(null);
 
 export function DineProvider({ children }: { children: ReactNode }) {
+  const { lang } = useI18n();
   const [status, setStatus] = useState<DineStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -797,11 +799,9 @@ export function DineProvider({ children }: { children: ReactNode }) {
         setStatus(existing ? "ready" : "welcome");
       } catch (error) {
         if (cancelled) return;
-        setErrorMessage(
-          error instanceof Error
-            ? error.message
-            : "Free Dine could not open its local database in this browser."
-        );
+        // The browser's own wording helps nobody; keep it for the console.
+        console.error(error);
+        setErrorMessage(translate(lang, "appStorageErrorTitle"));
         setStatus("error");
       }
     })();
@@ -831,7 +831,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const createdAt = nowIso();
       const record: DineBusiness = { ...profile, id: "main", createdAt };
 
-      const paymentRows: DinePaymentMethod[] = DEFAULT_PAYMENT_METHODS.map((name, index) => ({
+      const paymentRows: DinePaymentMethod[] = defaultPaymentMethods(lang).map((name, index) => ({
         id: generateId(),
         name,
         isDefault: true,
@@ -1072,7 +1072,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       if (orphaned.length > 0 && !fallback) {
         fallback = {
           id: generateId(),
-          name: "Uncategorised",
+          name: translate(lang, "dnUncategorised"),
           sortOrder: categories.length,
           createdAt: nowIso(),
         };
@@ -1303,7 +1303,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const modifierRows: DineModifier[] = [];
 
       const categoryFor = (name: string) => {
-        const trimmed = name.trim() || "Uncategorised";
+        const trimmed = name.trim() || translate(lang, "dnUncategorised");
         const existing = categoryRows.find(
           (category) => category.name.toLowerCase() === trimmed.toLowerCase()
         );
@@ -2034,7 +2034,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
           ticketId,
           menuItemId: input.menuItemId,
           variationId: variation?.id ?? null,
-          name: menuItem?.name ?? "Item",
+          name: menuItem?.name ?? translate(lang, "dnItemFallback"),
           variationName: variation?.name ?? "",
           price,
           quantity: Math.max(input.quantity, 1),
@@ -2224,13 +2224,13 @@ export function DineProvider({ children }: { children: ReactNode }) {
       if (settingsRef.current.inventoryEnabled) {
         const wasted = consumptionForTicketItem(cancelled, recipeIndexRef.current);
         if (wasted.length > 0) {
-          const reasonNote = reason.trim() || "Cancelled after firing";
+          const reasonNote = reason.trim() || translate(lang, "dnStockCancelledAfterFiring");
           await applyStock([
             ...wasted.map((entry) => ({
               materialId: entry.materialId,
               change: entry.quantity,
               reason: "consume" as const,
-              note: "Reclassified as wastage",
+              note: translate(lang, "dnStockReclassified"),
               refId: item.ticketId,
               refLabel: kot.kotLabel,
             })),
@@ -2579,7 +2579,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
             customerId: current.customerId,
             customerName: current.guestName,
             amountPaise: amount,
-            when: formatSlot(current.startsAt),
+            when: formatSlot(current.startsAt, lang),
           })
         );
         if (!posted) return null;
@@ -2589,7 +2589,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         depositPaid: current.depositPaid + amount,
         depositRequired: Math.max(current.depositRequired, current.depositPaid + amount),
         depositMethodId: methodId,
-        depositMethodName: method?.name ?? "Cash",
+        depositMethodName: method?.name ?? translate(lang, "dnPayCash"),
         depositPaidAt: nowIso(),
       });
     },
@@ -2618,7 +2618,10 @@ export function DineProvider({ children }: { children: ReactNode }) {
       };
       if (current.depositPaid > 0) {
         patches.advanceAmount = current.depositPaid;
-        patches.advanceNote = `Booking advance · ${formatSlot(current.startsAt)}`;
+        patches.advanceNote = `${reservedMethodName("advance", lang)} · ${formatSlot(
+          current.startsAt,
+          lang
+        )}`;
       }
       await patchTicket(ticket.id, patches);
 
@@ -2945,7 +2948,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
             id: generateId(),
             billId,
             methodId: tender.methodId,
-            methodName: method?.name ?? "Cash",
+            methodName: method?.name ?? translate(lang, "dnPayCash"),
             amount: tender.amount,
             note: tender.note ?? "",
             createdAt: at,
@@ -3091,8 +3094,10 @@ export function DineProvider({ children }: { children: ReactNode }) {
       const missing: DinePaymentMethod[] = [];
       const at = nowIso();
       const needs: [PaymentMethodKind, string, boolean][] = [
-        ["credit", CREDIT_METHOD_NAME, want.credit],
-        ["advance", ADVANCE_METHOD_NAME, want.advance],
+        // The name is display only — a reserved row is found by its kind —
+        // so it is written in the language of whoever switched the feature on.
+        ["credit", reservedMethodName("credit", lang), want.credit],
+        ["advance", reservedMethodName("advance", lang), want.advance],
       ];
 
       for (const [kind, name, wanted] of needs) {
@@ -3206,12 +3211,12 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setSheetSyncing(true);
       setSheetLastError("");
       try {
-        await pushToDineSheet(url, buildDineTabPayloads(snapshot, slices));
+        await pushToDineSheet(url, buildDineTabPayloads(snapshot, slices), lang);
         countSheetCall();
         await markSynced(slices);
       } catch (error) {
         setSheetLastError(
-          error instanceof Error ? error.message : "Could not reach the sheet."
+          error instanceof Error ? error.message : translate(lang, "appCouldNotReachSheet")
         );
       } finally {
         setSheetSyncing(false);
@@ -3224,11 +3229,11 @@ export function DineProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
-      const result = await testDineSheetConnection(trimmed);
+      const result = await testDineSheetConnection(trimmed, lang);
       countSheetCall();
-      if (!result.ok) throw new Error(result.error ?? "Could not reach the sheet.");
+      if (!result.ok) throw new Error(result.error ?? translate(lang, "appCouldNotReachSheet"));
       await writeSettings({ sheetSyncUrl: trimmed });
       // A freshly connected sheet is empty, so everything is dirty.
       setDirtySlices([...DINE_SYNC_SLICES]);
@@ -3256,12 +3261,12 @@ export function DineProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
       setSheetSyncing(true);
       setSheetLastError("");
       try {
-        const pull = await pullFromDineSheet(trimmed);
+        const pull = await pullFromDineSheet(trimmed, lang);
         countSheetCall();
         const backup = buildBackupFromDineSheetPull(pull, trimmed);
         await restoreDineBackup(backup);

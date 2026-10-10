@@ -16,6 +16,8 @@
 // restore reads only "_json", so the round trip is lossless even though the
 // visible columns are rounded to rupees for a human reading the sheet.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import { toMajor } from "./money";
 import { DEFAULT_DINE_SETTINGS } from "./types";
 import { fromQty } from "./units";
@@ -40,7 +42,7 @@ import type {
   DineTable,
   DineVariation,
 } from "./types";
-import { STOCK_MOVE_LABELS } from "./types";
+import { stockMoveLabel } from "./types";
 import { DINE_BACKUP_MARKER, DINE_BACKUP_VERSION, type DineBackup } from "./backup";
 
 export type DineMetaSnapshot = {
@@ -365,6 +367,7 @@ function recipesTab(
   const materialById = new Map(materials.map((material) => [material.id, material]));
 
   const describe = (line: DineRecipeLine): { dish: string; applies: string } => {
+    // English, like the sheet's own headers: a formula is written against it.
     if (line.ownerType === "item") return { dish: itemName(line.ownerId), applies: "Base recipe" };
     if (line.ownerType === "variation") {
       const variation = variations.find((row) => row.id === line.ownerId);
@@ -403,7 +406,7 @@ function stockMovesTab(moves: DineStockMove[]): TabPayload {
       move.createdAt,
       move.businessDate,
       move.materialName,
-      STOCK_MOVE_LABELS[move.reason],
+      stockMoveLabel(move.reason, "en"),
       fromQty(move.change),
       fromQty(move.balanceAfter),
       [move.refLabel, move.note].filter(Boolean).join(" · "),
@@ -483,7 +486,8 @@ async function postToScript(url: string, payload: unknown): Promise<unknown> {
 }
 
 export async function testDineSheetConnection(
-  url: string
+  url: string,
+  lang: LanguageCode
 ): Promise<{ ok: boolean; error?: string }> {
   try {
     const result = (await postToScript(url, { action: "test", app: "setu-dine" })) as {
@@ -491,25 +495,28 @@ export async function testDineSheetConnection(
       error?: string;
     };
     if (result && result.ok === false) {
-      return { ok: false, error: result.error || "The script reported an error." };
+      return { ok: false, error: result.error || translate(lang, "appScriptReportedError") };
     }
     return { ok: true };
   } catch {
     return {
       ok: false,
-      error:
-        'Could not reach the script. Check the URL, and make sure the deployment\'s access is set to "Anyone".',
+      error: translate(lang, "appCouldNotReachScript"),
     };
   }
 }
 
-export async function pushToDineSheet(url: string, tabs: TabPayload[]): Promise<void> {
+export async function pushToDineSheet(
+  url: string,
+  tabs: TabPayload[],
+  lang: LanguageCode
+): Promise<void> {
   const result = (await postToScript(url, { action: "push", app: "setu-dine", tabs })) as {
     ok?: boolean;
     error?: string;
   };
   if (result && result.ok === false) {
-    throw new Error(result.error || "The sheet script rejected the update.");
+    throw new Error(result.error || translate(lang, "appSheetRejectedUpdate"));
   }
 }
 
@@ -584,7 +591,10 @@ function parseOptions(rows: unknown[][]) {
   return { variations, groups, modifiers };
 }
 
-export async function pullFromDineSheet(url: string): Promise<DineSheetPullResult> {
+export async function pullFromDineSheet(
+  url: string,
+  lang: LanguageCode
+): Promise<DineSheetPullResult> {
   const separator = url.includes("?") ? "&" : "?";
   const response = await fetch(`${url}${separator}action=pull`, { redirect: "follow" });
   const body = (await response.json()) as {
@@ -593,7 +603,7 @@ export async function pullFromDineSheet(url: string): Promise<DineSheetPullResul
     tabs?: Record<string, unknown[][]>;
   };
   if (!body || body.ok === false || !body.tabs) {
-    throw new Error(body?.error || "The script did not return any restaurant data.");
+    throw new Error(body?.error || translate(lang, "dnSheetNoData"));
   }
 
   const meta: Partial<DineMetaSnapshot> = {};

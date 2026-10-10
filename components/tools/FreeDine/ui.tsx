@@ -6,8 +6,11 @@
 // here.
 
 import type { ReactNode } from "react";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import type { TableState } from "@/lib/dine/store";
-import { FOOD_TYPE_LABELS, type FoodType, type OrderType } from "@/lib/dine/types";
+import { foodTypeLabel, orderTypeLabel, type FoodType, type OrderType } from "@/lib/dine/types";
 
 export {
   inputClass,
@@ -28,6 +31,8 @@ export {
  * the shape alone means nothing to them.
  */
 export function FoodDot({ type, className = "" }: { type: FoodType; className?: string }) {
+  const { lang } = useI18n();
+  const label = foodTypeLabel(type, lang);
   const colour =
     type === "veg" ? "bg-green-600" : type === "egg" ? "bg-amber-500" : "bg-red-600";
   const border =
@@ -35,27 +40,27 @@ export function FoodDot({ type, className = "" }: { type: FoodType; className?: 
   return (
     <span
       className={`inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center border ${border} ${className}`}
-      title={FOOD_TYPE_LABELS[type]}
+      title={label}
     >
-      <span className="sr-only">{FOOD_TYPE_LABELS[type]}</span>
+      <span className="sr-only">{label}</span>
       <span className={`h-1.5 w-1.5 rounded-full ${colour}`} aria-hidden="true" />
     </span>
   );
 }
 
-const TABLE_STATE_STYLES: Record<TableState, { label: string; chip: string; card: string }> = {
+const TABLE_STATE_STYLES: Record<TableState, { label: TKey; chip: string; card: string }> = {
   free: {
-    label: "Free",
+    label: "dnTsFree",
     chip: "bg-white text-muted border-muted-line/40",
     card: "border-muted-line/30 bg-white hover:border-indigo/50",
   },
   occupied: {
-    label: "Running",
+    label: "dnTsRunning",
     chip: "bg-saffron/15 text-ink border-saffron/50",
     card: "border-saffron/60 bg-saffron/10 hover:border-saffron",
   },
   billed: {
-    label: "Bill printed",
+    label: "dnTsBilled",
     chip: "bg-indigo/10 text-indigo border-indigo/40",
     card: "border-indigo/60 bg-indigo/5 hover:border-indigo",
   },
@@ -63,7 +68,7 @@ const TABLE_STATE_STYLES: Record<TableState, { label: string; chip: string; card
   // no clock — the floor works it out from the bookings and the time, and
   // passes it in, so the store stays free of anything that ticks.
   reserved: {
-    label: "Reserved",
+    label: "dnTsReserved",
     chip: "bg-purple-100 text-purple-800 border-purple-300",
     card: "border-purple-300 bg-purple-50 hover:border-purple-500",
   },
@@ -75,12 +80,13 @@ const TABLE_STATE_STYLES: Record<TableState, { label: string; chip: string; card
  * because roughly one man in twelve cannot tell the amber from the green.
  */
 export function TableStateBadge({ state }: { state: TableState }) {
+  const { t } = useI18n();
   const style = TABLE_STATE_STYLES[state];
   return (
     <span
       className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide ${style.chip}`}
     >
-      {style.label}
+      {t(style.label)}
     </span>
   );
 }
@@ -89,8 +95,8 @@ export function tableCardClass(state: TableState): string {
   return TABLE_STATE_STYLES[state].card;
 }
 
-export function tableStateLabel(state: TableState): string {
-  return TABLE_STATE_STYLES[state].label;
+export function tableStateLabel(state: TableState, lang: LanguageCode): string {
+  return translate(lang, TABLE_STATE_STYLES[state].label);
 }
 
 const ORDER_TYPE_STYLES: Record<OrderType, string> = {
@@ -100,29 +106,25 @@ const ORDER_TYPE_STYLES: Record<OrderType, string> = {
 };
 
 export function OrderTypeChip({ type }: { type: OrderType }) {
-  const labels: Record<OrderType, string> = {
-    "dine-in": "Dine-in",
-    takeaway: "Takeaway",
-    delivery: "Delivery",
-  };
+  const { lang } = useI18n();
   return (
     <span
       className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide ${ORDER_TYPE_STYLES[type]}`}
     >
-      {labels[type]}
+      {orderTypeLabel(type, lang)}
     </span>
   );
 }
 
 /** How long a ticket has been open, in the shorthand a floor manager reads. */
-export function elapsedLabel(openedAt: string | null, now: number): string {
+export function elapsedLabel(openedAt: string | null, now: number, lang: LanguageCode): string {
   if (!openedAt) return "";
   const started = new Date(openedAt).getTime();
   if (Number.isNaN(started)) return "";
   const minutes = Math.max(Math.floor((now - started) / 60000), 0);
-  if (minutes < 60) return `${minutes}m`;
+  if (minutes < 60) return fill(translate(lang, "dnElapsedMin"), { n: minutes });
   const hours = Math.floor(minutes / 60);
-  return `${hours}h ${minutes % 60}m`;
+  return fill(translate(lang, "dnElapsedHrMin"), { h: hours, m: minutes % 60 });
 }
 
 export function SectionHeading({
