@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Printer, Receipt, Share2, Split, Undo2 } from "lucide-react";
 import { useDine, type SplitPlan, type TenderInput } from "@/lib/dine/store";
@@ -333,6 +334,7 @@ function BillCard({
   currency: string;
   onPay: () => void;
 }) {
+  const { lang } = useI18n();
   const { billItems, billPayments, business, settings } = useDine();
   const template = useBillTemplate();
   const paperSize = template?.paperSize ?? settings.billPaperSize;
@@ -345,7 +347,7 @@ function BillCard({
   const share = async () => {
     setSharing(true);
     try {
-      const text = billShareText(bill, business, currency);
+      const text = billShareText(bill, business, currency, lang);
       const canShareFiles =
         typeof navigator !== "undefined" && typeof navigator.canShare === "function";
 

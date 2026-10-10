@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useState } from "react";
 import { ChevronDown, TriangleAlert } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
@@ -23,6 +25,7 @@ function guessTimezone(): string {
  * fields before seeing the product will close the tab instead.
  */
 export function SetupScreen() {
+  const { t } = useI18n();
   const { completeSetup, backToWelcome } = useDine();
 
   const [name, setName] = useState("");
@@ -48,7 +51,7 @@ export function SetupScreen() {
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!name.trim()) {
-      setError("Please enter the restaurant name.");
+      setError(t("dnSuNameRequired"));
       return;
     }
     setBusy(true);
@@ -69,30 +72,28 @@ export function SetupScreen() {
         seedSampleMenu,
       });
     } catch {
-      setError("Could not save. Your browser may be blocking local storage.");
+      setError(t("dnSuCouldNotSave"));
       setBusy(false);
     }
   };
 
   return (
     <form onSubmit={submit} className="mx-auto max-w-lg py-8">
-      <h2 className="text-xl font-bold tracking-tight text-ink">Your restaurant</h2>
-      <p className="mt-1 text-sm text-muted">
-        Only the name is needed to start. Everything else can wait.
-      </p>
+      <h2 className="text-xl font-bold tracking-tight text-ink">{t("dnSuYourRestaurant")}</h2>
+      <p className="mt-1 text-sm text-muted">{t("dnSuOnlyNameNeeded")}</p>
 
       <div className="mt-6 space-y-4">
-        <Field label="Restaurant name" required>
+        <Field label={t("qmRestaurantName")} required>
           <input
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="e.g. Anand Bhavan"
+            placeholder={t("dnSuNamePh")}
             autoFocus
             className={inputClass}
           />
         </Field>
 
-        <Field label="Currency">
+        <Field label={t("currency")}>
           <select
             value={currency}
             onChange={(event) => setCurrency(event.target.value)}
@@ -115,12 +116,10 @@ export function SetupScreen() {
           />
           <span>
             <span className="block text-sm font-semibold text-ink">
-              Start with a sample menu ({SAMPLE_ITEM_COUNT} items)
+              {fill(t("dnSuSampleMenu"), { n: SAMPLE_ITEM_COUNT })}
             </span>
             <span className="mt-0.5 block text-xs text-muted">
-              Common Indian dishes across {SAMPLE_MENU.length} categories, including half/full
-              biryani and add-ons. Print a real bill before you type a single dish — then edit or
-              delete the lot.
+              {fill(t("dnSuSampleMenuBody"), { n: SAMPLE_MENU.length })}
             </span>
           </span>
         </label>
@@ -134,19 +133,19 @@ export function SetupScreen() {
             className={`h-4 w-4 transition ${showMore ? "rotate-180" : ""}`}
             aria-hidden="true"
           />
-          {showMore ? "Hide extra details" : "Add GSTIN, address and logo"}
+          {showMore ? t("dnSuHideExtra") : t("dnSuAddExtra")}
         </button>
 
         {showMore && (
           <div className="space-y-4 rounded-xl border border-muted-line/30 bg-white p-4">
-            <Field label="Phone">
+            <Field label={t("phone")}>
               <input
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
                 className={inputClass}
               />
             </Field>
-            <Field label="Address" hint="Printed at the top of every bill.">
+            <Field label={t("address")} hint={t("dnSuAddressHint")}>
               <textarea
                 value={address}
                 onChange={(event) => setAddress(event.target.value)}
@@ -154,7 +153,7 @@ export function SetupScreen() {
                 className={inputClass}
               />
             </Field>
-            <Field label="GSTIN" hint="Required on the bill if you are GST registered.">
+            <Field label={t("gstin")} hint={t("dnSuGstinHint")}>
               <input
                 value={gstin}
                 onChange={(event) => setGstin(event.target.value)}
@@ -162,7 +161,7 @@ export function SetupScreen() {
                 className={`${inputClass} uppercase`}
               />
             </Field>
-            <Field label="UPI ID" hint="Printed on the bill so guests can pay by scanning.">
+            <Field label={t("upiId")} hint={t("dnSuUpiHint")}>
               <input
                 value={upiId}
                 onChange={(event) => setUpiId(event.target.value)}
@@ -170,7 +169,7 @@ export function SetupScreen() {
                 className={inputClass}
               />
             </Field>
-            <Field label="Email">
+            <Field label={t("email")}>
               <input
                 type="email"
                 value={email}
@@ -178,7 +177,7 @@ export function SetupScreen() {
                 className={inputClass}
               />
             </Field>
-            <Field label="Logo">
+            <Field label={t("bpLogo")}>
               <input
                 type="file"
                 accept="image/*"
@@ -194,10 +193,8 @@ export function SetupScreen() {
       <div className="mt-6 flex gap-3 rounded-xl border border-saffron/40 bg-saffron/10 p-4">
         <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-ink" aria-hidden="true" />
         <p className="text-xs leading-relaxed text-ink">
-          <strong className="font-bold">Your data lives in this browser, on this device.</strong>{" "}
-          Nothing is uploaded, which is why there is no login — but it also means clearing your
-          browsing data would erase it. Take a backup from Settings once a week, or connect a Google
-          Sheet, and you are covered.
+          <strong className="font-bold">{t("dnSuDataHere")}</strong>{" "}
+          {t("dnSuDataHereBody")}
         </p>
       </div>
 
@@ -205,10 +202,10 @@ export function SetupScreen() {
 
       <div className="mt-6 flex flex-wrap gap-3">
         <button type="submit" disabled={busy} className={primaryBtnClass}>
-          {busy ? "Setting up…" : "Start taking orders"}
+          {busy ? t("clSetSaving") : t("dnSuStartTakingOrders")}
         </button>
         <button type="button" onClick={backToWelcome} className={secondaryBtnClass}>
-          Back
+          {t("back")}
         </button>
       </div>
     </form>
