@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ChefHat, Lock, Maximize2, Minimize2 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import { DineProvider, useDine } from "@/lib/dine/store";
 import { KitchenScreen } from "./KitchenScreen";
 import { primaryBtnClass } from "./ui";
@@ -17,6 +18,7 @@ import { primaryBtnClass } from "./ui";
  * between.
  */
 function KitchenBody() {
+  const { t } = useI18n();
   const { status, errorMessage, settings, updateSettings } = useDine();
   const [expanded, setExpanded] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -127,17 +129,14 @@ function KitchenBody() {
   if (status === "loading") {
     content = (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <p className="text-sm text-muted">Opening the kitchen screen…</p>
+        <p className="text-sm text-muted">{t("dnKiOpening")}</p>
       </div>
     );
   } else if (status === "error") {
     content = (
       <div className="mx-auto max-w-md py-20 text-center">
-        <h1 className="text-lg font-bold text-ink">Couldn&apos;t open local storage</h1>
-        <p className="mt-2 text-sm text-muted">
-          {errorMessage ||
-            "The kitchen screen reads the same browser storage as the counter. Private windows block it."}
-        </p>
+        <h1 className="text-lg font-bold text-ink">{t("appStorageErrorTitle")}</h1>
+        <p className="mt-2 text-sm text-muted">{errorMessage || t("dnKiStorageBody")}</p>
       </div>
     );
   } else if (status === "welcome" || status === "setup") {
@@ -148,15 +147,12 @@ function KitchenBody() {
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo text-white">
           <ChefHat className="h-6 w-6" />
         </span>
-        <h1 className="mt-4 text-lg font-bold text-ink">No restaurant on this device yet</h1>
-        <p className="mt-2 text-sm text-muted">
-          Set the restaurant up on the counter first. This screen then shows every round the moment
-          it is sent.
-        </p>
+        <h1 className="mt-4 text-lg font-bold text-ink">{t("dnKiNoRestaurant")}</h1>
+        <p className="mt-2 text-sm text-muted">{t("dnKiSetUpAtCounter")}</p>
         {!locked && (
           <Link href="/products/free-restaurant-pos" className={`${primaryBtnClass} mt-6`}>
             <ArrowLeft className="h-4 w-4" />
-            Go to the counter
+            {t("dnKiGoToCounter")}
           </Link>
         )}
       </div>
@@ -180,7 +176,7 @@ function KitchenBody() {
           {locked ? (
             <span className="inline-flex items-center gap-2 rounded-full bg-indigo/10 px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo">
               <Lock className="h-3.5 w-3.5" />
-              Screen locked
+              {t("dnKiScreenLocked")}
             </span>
           ) : (
             <Link
@@ -188,35 +184,35 @@ function KitchenBody() {
               className="inline-flex items-center gap-2 text-sm font-semibold text-muted transition hover:text-indigo"
             >
               <ArrowLeft className="h-4 w-4" />
-              Counter
+              {t("tkHiColCounter")}
             </Link>
           )}
 
           <div className="flex items-center gap-2">
-            <span className="hidden text-xs text-muted sm:inline">Free Dine — kitchen screen</span>
+            <span className="hidden text-xs text-muted sm:inline">{t("dnKiKitchenScreenLabel")}</span>
 
             {locked ? (
               // Not a button. Telling the kitchen where the lock lifts is
               // information; giving them a control that lifts it is not a lock.
-              <span className="text-xs text-muted">Unlock at the counter</span>
+              <span className="text-xs text-muted">{t("dnKiUnlockAtCounter")}</span>
             ) : (
               <>
                 {hasPin && status === "ready" && (
                   <button
                     type="button"
                     onClick={() => void updateSettings({ kitchenLocked: true })}
-                    title="Lock this screen so nobody can leave it without the PIN"
+                    title={t("dnKiLockHint")}
                     className="inline-flex h-9 items-center gap-2 rounded-full border border-muted-line/40 bg-white px-3 text-xs font-semibold text-muted transition hover:border-indigo/40 hover:text-indigo"
                   >
                     <Lock className="h-4 w-4" />
-                    Lock screen
+                    {t("dnKiLockScreen")}
                   </button>
                 )}
                 <button
                   type="button"
                   onClick={toggleExpanded}
-                  aria-label={expanded ? "Exit full screen" : "Enter full screen"}
-                  title={expanded ? "Exit full screen" : "Full screen"}
+                  aria-label={expanded ? t("appExitFullScreen") : t("appEnterFullScreen")}
+                  title={expanded ? t("appExitFullScreen") : t("appFullScreen")}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
                 >
                   {expanded ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
