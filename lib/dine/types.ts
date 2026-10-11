@@ -341,6 +341,18 @@ export type SplitMode = "full" | "items" | "amount" | "equal";
 
 export type BillStatus = "unpaid" | "paid" | "cancelled";
 
+const BILL_STATUS_KEYS: Record<BillStatus, TKey> = {
+  unpaid: "dnBsUnpaid",
+  paid: "dnBsPaid",
+  cancelled: "dnBsCancelled",
+};
+
+/** Where a bill stands, in words. The stored status stays the coded one. */
+export function billStatusLabel(status: BillStatus, lang: LanguageCode): string {
+  const key = BILL_STATUS_KEYS[status];
+  return key ? translate(lang, key) : status;
+}
+
 export type DineBill = {
   id: string;
   ticketId: string;

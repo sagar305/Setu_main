@@ -1,12 +1,13 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useRef, useState } from "react";
 import { Ban, Download, Printer, Receipt } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
 import { billsCsv, downloadCsv } from "@/lib/dine/csv";
-import { orderTypeLabel, type DineBill } from "@/lib/dine/types";
+import { billStatusLabel, orderTypeLabel, type DineBill } from "@/lib/dine/types";
 import { BillView, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode, printedAt } from "./printing";
 import {
@@ -22,7 +23,7 @@ import {
 } from "./ui";
 
 export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { bills, billItems, billPayments, business, settings, cancelBill } = useDine();
   const template = useBillTemplate();
   const paperSize = template?.paperSize ?? settings.billPaperSize;
@@ -51,7 +52,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
   return (
     <div className="space-y-5">
       <SectionHeading
-        title="Bills"
+        title={t("clBkBills")}
         subtitle={`${bills.length} bill${bills.length === 1 ? "" : "s"} so far`}
         action={
           <button
@@ -71,7 +72,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
           <SearchInput
             value={query}
             onChange={setQuery}
-            placeholder="Bill number, table or customer…"
+            placeholder={t("dnBlSearchPh")}
           />
         </div>
         <div className="flex gap-1">
@@ -94,19 +95,19 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
       {visible.length === 0 ? (
         <EmptyState
           icon={<Receipt className="h-6 w-6" />}
-          title="No bills yet"
-          message="Settle a table and its bill shows up here."
+          title={t("clBlNoBills")}
+          message={t("dnBlNoBillsBody")}
         />
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-muted-line/30 bg-white shadow-sm">
           <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b border-muted-line/20 bg-cream-paper text-left">
-                <th className="px-4 py-2 font-semibold text-muted">Bill</th>
-                <th className="px-4 py-2 font-semibold text-muted">When</th>
-                <th className="px-4 py-2 font-semibold text-muted">Table</th>
-                <th className="px-4 py-2 text-right font-semibold text-muted">Total</th>
-                <th className="px-4 py-2 font-semibold text-muted">Status</th>
+                <th className="px-4 py-2 font-semibold text-muted">{t("dnBlColBill")}</th>
+                <th className="px-4 py-2 font-semibold text-muted">{t("dnBlColWhen")}</th>
+                <th className="px-4 py-2 font-semibold text-muted">{t("dnBlColTable")}</th>
+                <th className="px-4 py-2 text-right font-semibold text-muted">{t("total")}</th>
+                <th className="px-4 py-2 font-semibold text-muted">{t("tkHiColStatus")}</th>
                 <th className="px-4 py-2" />
               </tr>
             </thead>
@@ -138,7 +139,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
                             : "bg-saffron/20 text-ink"
                       }`}
                     >
-                      {bill.status}
+                      {billStatusLabel(bill.status, lang)}
                     </span>
                   </td>
                   <td className="px-4 py-2 text-right">
@@ -147,7 +148,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
                       onClick={() => setViewing(bill)}
                       className="text-xs font-semibold text-indigo"
                     >
-                      View
+                      {t("dnBlView")}
                     </button>
                   </td>
                 </tr>
@@ -171,25 +172,22 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
       <Modal
         open={cancelling !== null}
         onClose={() => setCancelling(null)}
-        title={`Cancel ${cancelling?.billLabel ?? "bill"}?`}
+        title={fill(t("dnBlCancelTitle"), { label: cancelling?.billLabel ?? t("dnBlColBill") })}
       >
-        <p className="text-sm text-muted">
-          The bill is marked cancelled and drops out of your sales figures. It is never deleted —
-          the record, and the reason, stay in your books.
-        </p>
+        <p className="text-sm text-muted">{t("dnBlCancelBody")}</p>
         <div className="mt-4">
-          <Field label="Reason">
+          <Field label={t("dgReason")}>
             <input
               value={reason}
               onChange={(event) => setReason(event.target.value)}
-              placeholder="billed twice, guest walked out…"
+              placeholder={t("dnBlCancelReasonPh")}
               className={inputClass}
             />
           </Field>
         </div>
         <div className="mt-5 flex justify-end gap-3">
           <button type="button" onClick={() => setCancelling(null)} className={secondaryBtnClass}>
-            Keep it
+            {t("clTdKeepIt")}
           </button>
           <button
             type="button"
@@ -201,7 +199,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
             className={dangerBtnClass}
           >
             <Ban className="h-4 w-4" />
-            Cancel bill
+            {t("dnBlCancelBill")}
           </button>
         </div>
       </Modal>
@@ -242,7 +240,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
           {bill.status !== "cancelled" && (
             <button type="button" onClick={onCancel} className={dangerBtnClass}>
               <Ban className="h-4 w-4" />
-              Cancel bill
+              {t("dnBlCancelBill")}
             </button>
           )}
           <button
@@ -251,7 +249,7 @@ export function BillsScreen({ externalQuery }: { externalQuery?: string }) {
             className={primaryBtnClass}
           >
             <Printer className="h-4 w-4" />
-            Print
+            {t("print")}
           </button>
         </div>
       </Modal>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useState } from "react";
 import { LayoutGrid, Plus, Trash2 } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
@@ -20,6 +22,7 @@ import {
  * it when you add a terrace — so this lives away from the order screens.
  */
 export function TablesScreen() {
+  const { t } = useI18n();
   const {
     areas,
     tables,
@@ -48,17 +51,22 @@ export function TablesScreen() {
   return (
     <div className="space-y-6">
       <SectionHeading
-        title="Tables and areas"
-        subtitle={`${tables.length} table${tables.length === 1 ? "" : "s"} across ${
-          areas.length
-        } area${areas.length === 1 ? "" : "s"}`}
+        title={t("dnTaTablesAndAreas")}
+        subtitle={fill(t("dnTaTablesAcrossAreas"), {
+          tables: fill(t(tables.length === 1 ? "dnTaTableCount1" : "dnTaTableCountN"), {
+            n: tables.length,
+          }),
+          areas: fill(t(areas.length === 1 ? "dnTaAreaCount1" : "dnTaAreaCountN"), {
+            n: areas.length,
+          }),
+        })}
       />
 
       <div className="flex flex-wrap gap-2">
         <input
           value={areaName}
           onChange={(event) => setAreaName(event.target.value)}
-          placeholder="New area — Terrace, AC Section…"
+          placeholder={t("dnTaNewAreaPh")}
           className={`${inputClass} max-w-xs flex-1`}
         />
         <button
@@ -71,15 +79,15 @@ export function TablesScreen() {
           className={primaryBtnClass}
         >
           <Plus className="h-4 w-4" />
-          Add area
+          {t("dnTaAddArea")}
         </button>
       </div>
 
       {orderedAreas.length === 0 ? (
         <EmptyState
           icon={<LayoutGrid className="h-6 w-6" />}
-          title="No areas yet"
-          message="Add an area — Main Hall, Terrace — and put some tables in it."
+          title={t("dnTaNoAreas")}
+          message={t("dnTaNoAreasBody")}
         />
       ) : (
         orderedAreas.map((area) => {
@@ -95,7 +103,7 @@ export function TablesScreen() {
                 <input
                   value={area.name}
                   onChange={(event) => void renameArea(area.id, event.target.value)}
-                  aria-label="Area name"
+                  aria-label={t("dnTaAreaName")}
                   className={`${inputClass} max-w-[220px] flex-1 font-semibold`}
                 />
                 <button
@@ -113,7 +121,7 @@ export function TablesScreen() {
                 <button
                   type="button"
                   onClick={() => setDeleteAreaTarget(area.id)}
-                  aria-label={`Delete ${area.name}`}
+                  aria-label={fill(t("appDeleteNamed"), { name: area.name })}
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -121,7 +129,7 @@ export function TablesScreen() {
               </div>
 
               {areaTables.length === 0 ? (
-                <p className="text-sm text-muted">No tables in this area yet.</p>
+                <p className="text-sm text-muted">{t("dnTaNoTablesHere")}</p>
               ) : (
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
                   {areaTables.map((table) => {
@@ -136,7 +144,7 @@ export function TablesScreen() {
                           onChange={(event) =>
                             void updateTable(table.id, event.target.value, table.seats)
                           }
-                          aria-label="Table name"
+                          aria-label={t("dnTaTableName")}
                           className={`${inputClass} font-semibold`}
                         />
                         <div className="mt-1.5 flex items-center gap-1.5">
@@ -150,7 +158,7 @@ export function TablesScreen() {
                                 Number(event.target.value) || 1
                               )
                             }
-                            aria-label="Seats"
+                            aria-label={t("dnTaSeats")}
                             className={`${inputClass} w-14`}
                           />
                           <span className="text-xs text-muted">seats</span>
@@ -158,8 +166,8 @@ export function TablesScreen() {
                             type="button"
                             onClick={() => void deleteTable(table.id)}
                             disabled={busy}
-                            title={busy ? "This table has a running ticket." : "Delete table"}
-                            aria-label={`Delete ${table.name}`}
+                            title={busy ? t("dnTaTableRunning") : t("dnTaDeleteTable")}
+                            aria-label={fill(t("appDeleteNamed"), { name: table.name })}
                             className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600 disabled:opacity-30"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -180,9 +188,9 @@ export function TablesScreen() {
         })
       )}
 
-      <Modal open={addingTo !== null} onClose={() => setAddingTo(null)} title="Add tables">
+      <Modal open={addingTo !== null} onClose={() => setAddingTo(null)} title={t("dnTaAddTables")}>
         <div className="space-y-4">
-          <Field label="How many?">
+          <Field label={t("dnTaHowMany")}>
             <input
               inputMode="numeric"
               value={bulkCount}
@@ -190,7 +198,7 @@ export function TablesScreen() {
               className={inputClass}
             />
           </Field>
-          <Field label="Seats per table">
+          <Field label={t("dnTaSeatsPerTable")}>
             <input
               inputMode="numeric"
               value={bulkSeats}
@@ -223,8 +231,8 @@ export function TablesScreen() {
 
       <ConfirmDialog
         open={deleteAreaTarget !== null}
-        title="Delete this area?"
-        message="Its tables go with it. Bills already taken on those tables keep their record."
+        title={t("dnTaDeleteArea")}
+        message={t("dnTaDeleteAreaBody")}
         onCancel={() => setDeleteAreaTarget(null)}
         onConfirm={async () => {
           if (deleteAreaTarget) await deleteArea(deleteAreaTarget);
