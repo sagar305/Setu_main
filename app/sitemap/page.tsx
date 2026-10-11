@@ -47,6 +47,7 @@ function buildSections(): Section[] {
         { label: "Setu Queue", href: "/products/queue" },
         { label: "Setu Retail", href: "/products/retail" },
         { label: "Setu Clinic", href: "/products/clinic" },
+        { label: "Setu Workflow", href: "/products/workflow" },
       ],
     },
     {

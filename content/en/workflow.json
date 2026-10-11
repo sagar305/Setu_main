@@ -1,0 +1,111 @@
+{
+  "seo": {
+    "title": "Setu Workflow — Practice Management for CA Firms",
+    "description": "Practice management software for CA and accounting firms — engagements, workflow stages, checklists, review points, time and capacity in one place.",
+    "keywords": [
+      "Setu Workflow",
+      "practice management software for CA firms",
+      "accounting firm workflow software",
+      "CPA practice management software",
+      "engagement management software",
+      "audit review points tracker",
+      "accounting firm time tracking",
+      "team capacity planning for accounting firms"
+    ]
+  },
+  "hero": {
+    "eyebrow": "Setu Workflow — Coming Soon",
+    "headline": "Practice Management Software for CA & Accounting Firms",
+    "subheadline": "Every client, engagement, workflow stage, checklist, review point and hour your team works — in one place, so partners know where every job stands without chasing anyone for an update."
+  },
+  "status": {
+    "label": "Paid product · In development",
+    "text": "Setu Workflow is a paid, multi-user cloud product. It is in development and will launch soon — pricing will be announced at launch."
+  },
+  "body": {
+    "headline": "Why we're building it",
+    "paragraphs": [
+      "Most firms run their practice on a spreadsheet of due dates, a WhatsApp group for review notes and a manager's memory of who is doing what. It works until the busy season, when a return sits in review for a week because nobody noticed it was waiting, or a query to the client was answered and then lost in a thread.",
+      "Setu Workflow gives the whole firm one record of the work: which engagements are open, which stage each one is in and who owns it, what is still outstanding on the checklist, which review points are blocking sign-off, and how the hours spent compare with the budget."
+    ]
+  },
+  "modules": {
+    "headline": "What's inside",
+    "subheadline": "Built as one connected system — Firm → Client → Engagement → Workflow → Checklist & Points — not a set of separate tools.",
+    "items": [
+      {
+        "title": "Client Master",
+        "description": "Client records with entity type, addresses, contacts, service lines and an owner. Custom fields, full activity history, search and filters, plus CSV import, export and bulk updates."
+      },
+      {
+        "title": "Engagement Master",
+        "description": "Every job linked to its client, with type, period, due dates, priority and budgeted hours. Partner, Manager, Reviewer and Preparer staffing, lifecycle history and record-level access."
+      },
+      {
+        "title": "Workflow templates & stages",
+        "description": "Build versioned templates once — Preparation, Review, Partner sign-off — and apply them to engagements. Move work forward, return it, reassign or reopen, with every movement and stage age recorded."
+      },
+      {
+        "title": "Checklists",
+        "description": "Stage-wise checklist items with owners, due dates and required flags. Required items gate the workflow, completions and reopenings are logged, and each person has their own checklist queue."
+      },
+      {
+        "title": "Queries & review points",
+        "description": "Client questions, review points, instructions and internal issues in one numbered thread per engagement. Explicit resolve and reopen, aging in days, and blocking points that hold the workflow until cleared."
+      },
+      {
+        "title": "Work allocation",
+        "description": "Plan dated hours for each person across engagements, preview before saving, reassign or cancel with history, and see a budget comparison before you commit the team's week."
+      },
+      {
+        "title": "Time & budget",
+        "description": "Staff log actual hours against engagements and stages from My Time. Budget, planned, actual and remaining hours for every engagement, with warnings at 80%, 90% and over budget."
+      },
+      {
+        "title": "Team capacity",
+        "description": "Weekly capacity, planned load and available hours for every person, adjusted for leave, training and holidays. Find who is free before assigning the next job."
+      },
+      {
+        "title": "Dashboard & reports",
+        "description": "A Needs Attention view for overdue engagements, blocking points, stalled stages and budget overruns, plus engagement health, deadlines and exportable management reports."
+      }
+    ]
+  },
+  "team": {
+    "headline": "Built for the way a firm actually runs",
+    "items": [
+      {
+        "title": "Partners & managers",
+        "description": "See every engagement's stage, blocker and budget at a glance, and drill into exceptions instead of asking for a status update."
+      },
+      {
+        "title": "Reviewers",
+        "description": "Raise numbered review points against a stage or checklist item, track responses and mark them resolved only when they are."
+      },
+      {
+        "title": "Staff",
+        "description": "Open My Work and My Day to see exactly what is assigned, what is due and what is waiting — then log the hours against it."
+      }
+    ]
+  },
+  "trust": {
+    "headline": "Built for firm data",
+    "items": [
+      "Each firm's data is isolated from every other firm's",
+      "Custom roles with granular permissions",
+      "Record-level visibility for engagements",
+      "Full audit trail of every change and movement",
+      "Firm-level timezone for due dates and aging",
+      "Secure login, invitations and password reset"
+    ]
+  },
+  "cta": {
+    "headline": "Want early access to Setu Workflow?",
+    "subtext": "Tell us about your firm — how many people, which services you run — and we'll reach out as soon as Setu Workflow launches.",
+    "cta": { "label": "Get notified at launch", "href": "/contact" }
+  },
+  "crossSell": {
+    "text": "Working through client bank statements today? The Bank Statement Analyzer is free and runs entirely in your browser.",
+    "cta": { "label": "Open the Bank Statement Analyzer", "href": "/products/bank-statement-analyzer" }
+  }
+}
