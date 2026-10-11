@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill, translate } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import { Boxes, Plus, X } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
@@ -20,6 +22,7 @@ type DraftLine = { materialId: string; text: string };
  * base, and an add-on's lines are *added* to whatever came before.
  */
 export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: () => void }) {
+  const { t, lang } = useI18n();
   const {
     materials,
     recipeLines,
@@ -115,7 +118,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
         }))
       : [
           {
-            label: "One portion",
+            label: translate(lang, "dnRcOnePortion"),
             price: item.price,
             cost: recipeCost(
               consumptionFor(
@@ -149,14 +152,11 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
 
   if (materials.length === 0) {
     return (
-      <Modal open onClose={onClose} title={`Recipe · ${item.name}`}>
-        <p className="text-sm text-muted">
-          Add some raw materials first — rice, paneer, ghee — on the Stock screen. A recipe is a
-          list of those, so there is nothing to choose from yet.
-        </p>
+      <Modal open onClose={onClose} title={fill(t("dnRcTitle"), { name: item.name })}>
+        <p className="text-sm text-muted">{t("dnRcNoMaterials")}</p>
         <div className="mt-4 flex justify-end">
           <button type="button" onClick={onClose} className={primaryBtnClass}>
-            Got it
+            {t("dnRcGotIt")}
           </button>
         </div>
       </Modal>
@@ -164,18 +164,28 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
   }
 
   return (
-    <Modal open onClose={onClose} title={`Recipe · ${item.name}`} wide>
+    <Modal open onClose={onClose} title={fill(t("dnRcTitle"), { name: item.name })} wide>
       <div className="space-y-5">
         <p className="rounded-xl bg-cream-paper p-3 text-xs leading-relaxed text-ink">
-          Quantities are for <strong>one portion</strong>. Sending a round to the kitchen takes them
-          out of stock.
+          {/* The emphasis sits on a placeholder, so each language puts the
+              bold words where its own grammar wants them. */}
+          {(() => {
+            const [before, after] = fill(t("dnRcPortionNote"), { strong: "\u0000" }).split("\u0000");
+            return (
+              <>
+                {before}
+                <strong>{t("dnRcOnePortion")}</strong>
+                {after}
+              </>
+            );
+          })()}
         </p>
 
         <LineEditor
-          title={itemVariations.length > 0 ? "Base recipe" : "Recipe"}
+          title={itemVariations.length > 0 ? t("dnRcBaseRecipe") : t("dnRcRecipe")}
           hint={
             itemVariations.length > 0
-              ? "Used by any size that does not have its own recipe below."
+              ? t("dnRcBaseHint")
               : undefined
           }
           lines={get("item", item.id)}
@@ -203,7 +213,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                     onClick={() => set("variation", variation.id, [])}
                     className="text-xs font-semibold text-indigo"
                   >
-                    Use the base recipe instead
+                    {t("dnRcUseBaseInstead")}
                   </button>
                 ) : (
                   <button
@@ -213,7 +223,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                     }
                     className="text-xs font-semibold text-indigo"
                   >
-                    Give this size its own recipe
+                    {t("dnRcOwnRecipe")}
                   </button>
                 )}
               </div>
@@ -222,16 +232,13 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                 <div className="mt-3">
                   <LineEditor
                     title=""
-                    hint="Replaces the base recipe entirely for this size."
+                    hint={t("dnRcOwnRecipeHint")}
                     lines={lines}
                     onChange={(next) => set("variation", variation.id, next)}
                   />
                 </div>
               ) : (
-                <p className="mt-1 text-xs text-muted">
-                  Uses the base recipe. Half plates usually need their own — less rice, but the same
-                  raita.
-                </p>
+                <p className="mt-1 text-xs text-muted">{t("dnRcUsesBase")}</p>
               )}
             </div>
           );
@@ -245,7 +252,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                 {group.name}
                 <span className="ml-2 font-normal normal-case tracking-normal text-muted/70">
-                  added on top of whichever recipe applies — use a minus for &ldquo;no onion&rdquo;
+                  {t("dnRcAddOnHint")}
                 </span>
               </p>
               {options.map((modifier) => (
@@ -277,7 +284,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
         })}
 
         <div className="rounded-xl border border-indigo/30 bg-indigo/5 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-indigo">Cost check</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-indigo">{t("dnRcCostCheck")}</p>
           <table className="mt-2 w-full text-sm">
             <tbody>
               {preview.map((row) => {
@@ -287,32 +294,34 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                   <tr key={row.label}>
                     <td className="py-1 text-ink">{row.label}</td>
                     <td className="py-1 text-right text-muted">
-                      costs {formatPaise(row.cost, currency)}
+                      {fill(t("dnRcCosts"), { amount: formatPaise(row.cost, currency) })}
                     </td>
-                    <td className="py-1 text-right text-muted">sells {formatPaise(row.price, currency)}</td>
+                    <td className="py-1 text-right text-muted">
+                      {fill(t("dnRcSells"), { amount: formatPaise(row.price, currency) })}
+                    </td>
                     <td
                       className={`py-1 text-right font-bold ${
                         row.cost === 0 ? "text-muted" : pct > 40 ? "text-red-600" : "text-green-700"
                       }`}
                     >
-                      {row.cost === 0 ? "—" : `${pct}% food cost`}
+                      {row.cost === 0 ? "—" : fill(t("dnRcFoodCost"), { pct })}
                     </td>
                     <td className="py-1 text-right text-muted">
-                      {row.cost === 0 ? "" : `${formatPaise(margin, currency)} margin`}
+                      {row.cost === 0
+                        ? ""
+                        : fill(t("dnRcMargin"), { amount: formatPaise(margin, currency) })}
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          <p className="mt-2 text-[11px] text-muted">
-            At current average costs. Add-ons are not included here — they vary per order.
-          </p>
+          <p className="mt-2 text-[11px] text-muted">{t("dnRcCostNote")}</p>
         </div>
 
         <div className="flex justify-end gap-3 border-t border-muted-line/20 pt-4">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="button"
@@ -320,7 +329,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
             disabled={busy}
             className={primaryBtnClass}
           >
-            {busy ? "Saving…" : "Save recipe"}
+            {busy ? t("clPfSaving") : t("dnRcSaveRecipe")}
           </button>
         </div>
       </div>
@@ -368,10 +377,10 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                       )
                     )
                   }
-                  aria-label="Material"
+                  aria-label={t("dnRcMaterial")}
                   className={`${inputClass} min-w-[140px] flex-1`}
                 >
-                  <option value="">Choose a material…</option>
+                  <option value="">{t("dnRcChooseMaterial")}</option>
                   {materials
                     .slice()
                     .sort((a, b) => a.name.localeCompare(b.name))
@@ -397,7 +406,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                     )
                   }
                   placeholder={allowNegative ? "30 or −10" : "250"}
-                  aria-label="Quantity"
+                  aria-label={t("igQuantityLabel")}
                   className={`${inputClass} w-24`}
                 />
                 <span className="w-8 text-xs text-muted">{material?.baseUnit ?? ""}</span>
@@ -412,7 +421,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
                 <button
                   type="button"
                   onClick={() => onChange(lines.filter((_, rowIndex) => rowIndex !== index))}
-                  aria-label="Remove line"
+                  aria-label={t("clBlRemoveLine")}
                   className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                 >
                   <X className="h-4 w-4" />
@@ -430,7 +439,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
           }`}
         >
           <Plus className="h-3.5 w-3.5" />
-          {lines.length === 0 ? "Add an ingredient" : "Add another"}
+          {lines.length === 0 ? t("dnRcAddIngredient") : t("dnRcAddAnother")}
         </button>
       </div>
     );
@@ -439,6 +448,7 @@ export function RecipeModal({ item, onClose }: { item: DineMenuItem; onClose: ()
 
 /** Small badge for the menu card, showing whether a dish is costed. */
 export function RecipeBadge({ item }: { item: DineMenuItem }) {
+  const { t } = useI18n();
   const { recipeLines, variations, settings } = useDine();
   if (!settings.inventoryEnabled) return null;
 
@@ -458,7 +468,7 @@ export function RecipeBadge({ item }: { item: DineMenuItem }) {
       }`}
     >
       <Boxes className="h-2.5 w-2.5" aria-hidden="true" />
-      {costed ? "Costed" : "No recipe"}
+      {costed ? t("dnRcCosted") : t("dnRcNoRecipe")}
     </span>
   );
 }

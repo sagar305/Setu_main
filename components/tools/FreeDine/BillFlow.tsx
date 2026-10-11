@@ -1,12 +1,19 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Printer, Receipt, Share2, Split, Undo2 } from "lucide-react";
 import { useDine, type SplitPlan, type TenderInput } from "@/lib/dine/store";
 import { amountDue } from "@/lib/dine/calc";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
-import { kindOf, lineUnitPrice, type DineBill } from "@/lib/dine/types";
+import {
+  billStatusLabel,
+  kindOf,
+  lineUnitPrice,
+  paymentMethodLabel,
+  type DineBill,
+} from "@/lib/dine/types";
 import { balanceOf } from "@/lib/dine/credit";
 import { BillView, billShareText, useBillTemplate } from "./BillView";
 import { PAPER_CONTENT_MM, PREVIEW_CLASS, printNode } from "./printing";
@@ -41,6 +48,7 @@ export function BillFlow({
   onClose: () => void;
   onSettled: () => void;
 }) {
+  const { t } = useI18n();
   const {
     tickets,
     bills,
@@ -119,17 +127,17 @@ export function BillFlow({
       <Modal
         open={step === "split"}
         onClose={onClose}
-        title={`Bill · ${formatPaise(totals.total, currency)}`}
+        title={fill(t("dnBfBillTitle"), { amount: formatPaise(totals.total, currency) })}
         wide
       >
         <div className="space-y-5">
           <div className="grid gap-2 sm:grid-cols-2">
             {(
               [
-                { id: "full", label: "One bill", hint: "The usual — the whole table on one bill." },
-                { id: "items", label: "Split by items", hint: "Move dishes onto separate bills." },
-                { id: "equal", label: "Split equally", hint: "Even shares of the total." },
-                { id: "amount", label: "Split by amount", hint: "They tell you what each pays." },
+                { id: "full", label: "dnBfOneBill", hint: "dnBfOneBillHint" },
+                { id: "items", label: "dnBfSplitItems", hint: "dnBfSplitItemsHint" },
+                { id: "equal", label: "dnBfSplitEqual", hint: "dnBfSplitEqualHint" },
+                { id: "amount", label: "dnBfSplitAmount", hint: "dnBfSplitAmountHint" },
               ] as const
             ).map((option) => (
               <button
@@ -143,14 +151,14 @@ export function BillFlow({
                     : "border-muted-line/40 bg-white hover:border-indigo/40"
                 }`}
               >
-                <span className="block text-sm font-bold text-ink">{option.label}</span>
-                <span className="mt-0.5 block text-xs text-muted">{option.hint}</span>
+                <span className="block text-sm font-bold text-ink">{t(option.label)}</span>
+                <span className="mt-0.5 block text-xs text-muted">{t(option.hint)}</span>
               </button>
             ))}
           </div>
 
           {(mode === "equal" || mode === "items" || mode === "amount") && (
-            <Field label="How many bills?">
+            <Field label={t("dnBfHowManyBills")}>
               <div className="flex flex-wrap gap-2">
                 {[2, 3, 4, 5, 6].map((count) => (
                   <button
@@ -203,16 +211,18 @@ export function BillFlow({
                 </Field>
               ))}
               <p className={`text-xs ${amountsMatch ? "text-muted" : "text-red-600"}`}>
-                Entered {formatPaise(enteredTotal, currency)} of{" "}
-                {formatPaise(totals.total, currency)}
-                {!amountsMatch && " — the amounts will be scaled to match the bill."}
+                {fill(t("dnBfEnteredOf"), {
+                  entered: formatPaise(enteredTotal, currency),
+                  total: formatPaise(totals.total, currency),
+                })}
+                {!amountsMatch && ` ${t("dnBfAmountsScaled")}`}
               </p>
             </div>
           )}
 
           {mode === "items" && (
             <div className="space-y-2">
-              <p className="text-xs text-muted">Tap a number to move a dish onto that bill.</p>
+              <p className="text-xs text-muted">{t("dnBfTapToMove")}</p>
               <ul className="max-h-64 space-y-1.5 overflow-y-auto">
                 {items.map((item) => (
                   <li
@@ -237,7 +247,10 @@ export function BillFlow({
                           onClick={() =>
                             setAssignment((previous) => ({ ...previous, [item.id]: index }))
                           }
-                          aria-label={`Move ${item.name} to bill ${index + 1}`}
+                          aria-label={fill(t("dnBfMoveToBill"), {
+                            name: item.name,
+                            n: index + 1,
+                          })}
                           aria-pressed={(assignment[item.id] ?? 0) === index}
                           className={`h-8 w-8 rounded-lg border text-xs font-bold transition ${
                             (assignment[item.id] ?? 0) === index
@@ -266,7 +279,11 @@ export function BillFlow({
               className={`${primaryBtnClass} ${tapTargetClass}`}
             >
               <Receipt className="h-4 w-4" />
-              {busy ? "Making bills…" : mode === "full" ? "Make the bill" : `Make ${parts} bills`}
+              {busy
+                ? t("dnBfMakingBills")
+                : mode === "full"
+                  ? t("dnBfMakeBill")
+                  : fill(t("dnBfMakeNBills"), { n: parts })}
             </button>
           </div>
         </div>
@@ -275,7 +292,11 @@ export function BillFlow({
       <Modal
         open={step === "bills"}
         onClose={onClose}
-        title={ticketBills.length > 1 ? `${ticketBills.length} bills` : "Bill"}
+        title={
+          ticketBills.length > 1
+            ? fill(t("dnBfNBills"), { n: ticketBills.length })
+            : t("dnBlColBill")
+        }
         wide
       >
         <div className="space-y-3">
@@ -334,7 +355,7 @@ function BillCard({
   currency: string;
   onPay: () => void;
 }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const { billItems, billPayments, business, settings } = useDine();
   const template = useBillTemplate();
   const paperSize = template?.paperSize ?? settings.billPaperSize;
@@ -403,7 +424,7 @@ function BillCard({
                 : "bg-saffron/20 text-ink"
           }`}
         >
-          {bill.status === "paid" ? "Paid" : bill.status === "cancelled" ? "Cancelled" : "Unpaid"}
+          {billStatusLabel(bill.status, lang)}
         </span>
       </div>
 
@@ -429,7 +450,7 @@ function BillCard({
         {bill.status === "unpaid" && (
           <button type="button" onClick={onPay} className={`${primaryBtnClass} ${tapTargetClass}`}>
             <Check className="h-4 w-4" />
-            Take payment
+            {t("dnBfTakePayment")}
           </button>
         )}
         <button
@@ -438,7 +459,7 @@ function BillCard({
           className={`${secondaryBtnClass} ${tapTargetClass}`}
         >
           <Printer className="h-4 w-4" />
-          Print
+          {t("print")}
         </button>
         <button
           type="button"
@@ -447,7 +468,7 @@ function BillCard({
           className={`${secondaryBtnClass} ${tapTargetClass}`}
         >
           <Share2 className="h-4 w-4" />
-          {sharing ? "Sharing…" : "Share"}
+          {sharing ? t("dnBfSharing") : t("share")}
         </button>
       </div>
     </div>
@@ -487,6 +508,7 @@ async function billPdfBlob(node: HTMLElement): Promise<Blob> {
  * total whatever form they took.
  */
 function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }) {
+  const { lang, t } = useI18n();
   const { paymentMethods, business, settings, customers, tickets, bills, ledgerEntries, payBill } =
     useDine();
   const currency = business?.currency ?? "INR";
@@ -577,7 +599,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
       onClose();
     } catch (caught) {
       setError(
-        caught instanceof Error ? caught.message : "Could not record this payment."
+        caught instanceof Error ? caught.message : t("dnBfCouldNotRecord")
       );
     } finally {
       setBusy(false);
@@ -585,7 +607,11 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
   };
 
   return (
-    <Modal open onClose={onClose} title={`Payment · ${formatPaise(bill.total, currency)}`}>
+    <Modal
+      open
+      onClose={onClose}
+      title={fill(t("dnBfPaymentTitle"), { amount: formatPaise(bill.total, currency) })}
+    >
       <div className="space-y-4">
         {tenders.map((tender, index) => (
           <div key={index} className="flex gap-2">
@@ -599,11 +625,11 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
                 )
               }
               className={`${inputClass} flex-1`}
-              aria-label="Payment method"
+              aria-label={t("mdrInstrument")}
             >
               {selectable(tender.methodId).map((method) => (
                 <option key={method.id} value={method.id}>
-                  {method.name}
+                  {paymentMethodLabel(method.name, lang)}
                 </option>
               ))}
             </select>
@@ -617,7 +643,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
                   )
                 )
               }
-              aria-label="Amount"
+              aria-label={t("amount")}
               className={`${inputClass} w-28`}
             />
             {tenders.length > 1 && (
@@ -626,7 +652,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
                 onClick={() =>
                   setTenders((previous) => previous.filter((_, rowIndex) => rowIndex !== index))
                 }
-                aria-label="Remove this tender"
+                aria-label={t("dnBfRemoveTender")}
                 className={`${dangerBtnClass} px-3`}
               >
                 ×
@@ -650,51 +676,59 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
           className="flex items-center gap-1.5 text-sm font-semibold text-indigo"
         >
           <Split className="h-4 w-4" />
-          Pay with another method
+          {t("dnBfPayAnother")}
         </button>
 
         {canUseAdvance && (
           <p className="rounded-xl bg-indigo/5 p-3 text-xs text-indigo">
-            {formatPaise(advanceAvailable, currency)} was already taken as a booking advance and has
-            been applied to this bill.
+            {fill(t("dnBfAdvanceApplied"), {
+              amount: formatPaise(advanceAvailable, currency),
+            })}
           </p>
         )}
 
         {settings.creditEnabled && !creditAllowed && (
           <p className="text-xs text-muted">
             {!diner
-              ? "Link a diner to this table to settle on account."
-              : `${diner.name} is not set up for a running account — turn it on for them in Khata.`}
+              ? t("dnBfLinkDiner")
+              : fill(t("dnBfNoRunningAccount"), { name: diner.name })}
           </p>
         )}
 
         {unspentAdvance > 0 && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
             <p className="font-semibold">
-              {formatPaise(unspentAdvance, currency)} of their advance is unspent.
+              {fill(t("dnBfAdvanceUnspent"), {
+                amount: formatPaise(unspentAdvance, currency),
+              })}
             </p>
-            <p>Hand it back — settling this bill closes the table and clears it.</p>
+            <p>{t("dnBfHandItBack")}</p>
           </div>
         )}
 
         {advanceOverspent > 0 && (
           <p className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-700">
-            That is {formatPaise(advanceOverspent, currency)} more advance than was ever collected.
+            {fill(t("dnBfAdvanceOverspent"), {
+              amount: formatPaise(advanceOverspent, currency),
+            })}
           </p>
         )}
 
         {onAccount > 0 && creditAllowed && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
             <p className="font-semibold">
-              {formatPaise(onAccount, currency)} goes on {diner?.name}&apos;s account.
+              {fill(t("dnBfGoesOnAccount"), {
+                amount: formatPaise(onAccount, currency),
+                name: diner?.name ?? "",
+              })}
             </p>
             <p>
               {owedAlready > 0
-                ? `They already owe ${formatPaise(owedAlready, currency)} — this takes them to ${formatPaise(
-                    owedAlready + onAccount,
-                    currency
-                  )}.`
-                : "Nothing outstanding on their account before this."}
+                ? fill(t("dnBfAlreadyOwe"), {
+                    owed: formatPaise(owedAlready, currency),
+                    total: formatPaise(owedAlready + onAccount, currency),
+                  })
+                : t("dnBfNothingOutstanding")}
             </p>
             <a
               href="/tools/customer-ledger"
@@ -702,7 +736,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
               rel="noopener noreferrer"
               className="font-semibold underline underline-offset-2"
             >
-              Settle it in the Customer Ledger
+              {t("dnBfSettleInLedger")}
             </a>
           </div>
         )}
@@ -715,17 +749,17 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
 
         <div className="rounded-xl bg-cream-paper p-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-muted">Entered</span>
+            <span className="text-muted">{t("dnBfEntered")}</span>
             <span className="font-bold text-ink">{formatPaise(entered, currency)}</span>
           </div>
           {onAccount > 0 && (
             <div className="flex justify-between">
-              <span className="text-muted">Going on account</span>
+              <span className="text-muted">{t("dnBfGoingOnAccount")}</span>
               <span className="font-bold text-ink">{formatPaise(onAccount, currency)}</span>
             </div>
           )}
           <div className="flex justify-between">
-            <span className="text-muted">{remaining >= 0 ? "Still due" : "Change"}</span>
+            <span className="text-muted">{remaining >= 0 ? t("dnBfStillDue") : t("dnBfChange")}</span>
             <span
               className={`font-bold ${remaining > 0 ? "text-red-600" : "text-green-700"}`}
             >
@@ -736,7 +770,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
 
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="button"
@@ -745,7 +779,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
             <Check className="h-4 w-4" />
-            {busy ? "Saving…" : "Mark paid"}
+            {busy ? t("clPfSaving") : t("dnBfMarkPaid")}
           </button>
         </div>
       </div>

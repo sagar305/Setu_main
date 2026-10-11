@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import {
   Bike,
@@ -40,7 +41,7 @@ export function FloorScreen({
   onOpenTicket: (ticketId: string) => void;
   onNavigate: NavigateFn;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const {
     areas,
     floorTables,
@@ -120,14 +121,17 @@ export function FloorScreen({
   return (
     <div className="space-y-6">
       <SectionHeading
-        title="Floor"
+        title={t("dnFlFloor")}
         subtitle={
           running.length === 0
-            ? "Every table is free."
-            : `${running.length} table${running.length === 1 ? "" : "s"} running · ${formatPaise(
-                runningTotal,
-                currency
-              )} on the floor`
+            ? t("dnFlEveryTableFree")
+            : fill(t("dnFlRunningSubtitle"), {
+                tables: fill(
+                  t(running.length === 1 ? "dnFlTableRunning1" : "dnFlTableRunningN"),
+                  { n: running.length }
+                ),
+                amount: formatPaise(runningTotal, currency),
+              })
         }
         action={
           <div className="flex flex-wrap gap-2">
@@ -137,7 +141,7 @@ export function FloorScreen({
               className={`${secondaryBtnClass} ${tapTargetClass}`}
             >
               <ShoppingBag className="h-4 w-4" />
-              Takeaway
+              {t("dnOtTakeaway")}
             </button>
             <button
               type="button"
@@ -145,7 +149,7 @@ export function FloorScreen({
               className={`${secondaryBtnClass} ${tapTargetClass}`}
             >
               <Bike className="h-4 w-4" />
-              Delivery
+              {t("dnOtDelivery")}
             </button>
           </div>
         }
@@ -155,7 +159,7 @@ export function FloorScreen({
         <div className="rounded-2xl border border-purple-200 bg-purple-50 p-3">
           <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-purple-800">
             <CalendarClock className="h-3.5 w-3.5" />
-            Arriving soon
+            {t("dnFlArrivingSoon")}
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
             {arriving.slice(0, 6).map((booking) => (
@@ -166,12 +170,15 @@ export function FloorScreen({
                 className={`${tapTargetClass} rounded-xl border border-purple-200 bg-white px-3 py-2 text-left text-xs`}
               >
                 <span className="block font-bold text-ink">
-                  {booking.guestName || "Guest"} · {booking.partySize} pax
+                  {booking.guestName || t("dnFlGuest")} ·{" "}
+                  {fill(t("dnFlPax"), { n: booking.partySize })}
                 </span>
                 <span className="text-muted">
                   {formatSlot(booking.startsAt, lang).replace(/^.*?, /, "")}
-                  {booking.tableName ? ` · ${booking.tableName}` : " · any table"}
-                  {isLate(booking, now, settings.reservationHoldMinutes) ? " · late" : ""}
+                  {booking.tableName ? ` · ${booking.tableName}` : ` · ${t("dnFlAnyTable")}`}
+                  {isLate(booking, now, settings.reservationHoldMinutes)
+                    ? ` · ${t("dnFlLate")}`
+                    : ""}
                 </span>
               </button>
             ))}
@@ -180,7 +187,7 @@ export function FloorScreen({
       )}
 
       {areas.length > 1 && (
-        <div className="-mx-1 flex gap-1 overflow-x-auto pb-1" role="tablist" aria-label="Areas">
+        <div className="-mx-1 flex gap-1 overflow-x-auto pb-1" role="tablist" aria-label={t("dnFlAreas")}>
           <button
             type="button"
             role="tab"
@@ -217,8 +224,8 @@ export function FloorScreen({
       {visible.length === 0 ? (
         <EmptyState
           icon={<LayoutGrid className="h-6 w-6" />}
-          title="No tables yet"
-          message="Add an area and some tables and they will show up here."
+          title={t("dnFlNoTables")}
+          message={t("dnFlNoTablesBody")}
           action={
             <button
               type="button"
@@ -249,9 +256,9 @@ export function FloorScreen({
               {row.state === "free" ? (
                 heldBy.has(row.table.id) ? (
                   <span className="text-xs font-semibold text-purple-800">
-                    {heldBy.get(row.table.id)!.guestName || "Guest"} ·{" "}
+                    {heldBy.get(row.table.id)!.guestName || t("dnFlGuest")} ·{" "}
                     {formatSlot(heldBy.get(row.table.id)!.startsAt, lang).replace(/^.*?, /, "")} ·{" "}
-                    {heldBy.get(row.table.id)!.partySize} pax
+                    {fill(t("dnFlPax"), { n: heldBy.get(row.table.id)!.partySize })}
                   </span>
                 ) : (
                   <span className="text-xs text-muted">
@@ -280,7 +287,7 @@ export function FloorScreen({
                   )}
                   {row.unfiredCount > 0 && (
                     <span className="inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-red-700">
-                      {row.unfiredCount} not sent
+                      {fill(t("dnFlNotSent"), { n: row.unfiredCount })}
                     </span>
                   )}
                 </div>
@@ -293,7 +300,7 @@ export function FloorScreen({
       {counterTickets.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-sm font-bold uppercase tracking-wide text-muted">
-            Takeaway &amp; delivery
+            {t("dnFlTakeawayDelivery")}
           </h3>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {counterTickets.map((ticket) => (
