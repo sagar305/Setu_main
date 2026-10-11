@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import {
   Boxes,
@@ -51,7 +52,7 @@ import {
  * sale into a deduction.
  */
 export function InventoryScreen() {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const {
     materials,
     stockMoves,
@@ -89,8 +90,8 @@ export function InventoryScreen() {
     return (
       <EmptyState
         icon={<Boxes className="h-6 w-6" />}
-        title="Stock tracking is off"
-        message="Turn it on to count raw materials — rice, ghee, paneer — and have every dish you send to the kitchen deduct what its recipe uses. You will need to add a recipe to each dish before the numbers mean anything."
+        title={t("dnInStockOff")}
+        message={t("dnInStockOffBody")}
         action={
           <button
             type="button"
@@ -108,7 +109,7 @@ export function InventoryScreen() {
   return (
     <div className="space-y-5">
       <SectionHeading
-        title="Stock"
+        title={t("stock")}
         subtitle={`${materials.length} raw material${materials.length === 1 ? "" : "s"} · ${
           costedItems
         } dish${costedItems === 1 ? "" : "es"} with a recipe`}
@@ -133,16 +134,16 @@ export function InventoryScreen() {
 
       {materials.length > 0 && (
         <div className="grid gap-3 sm:grid-cols-3">
-          <StatCard label="Stock value" value={formatPaise(value, currency)} sub="At average cost" />
+          <StatCard label={t("dnInStockValue")} value={formatPaise(value, currency)} sub={t("dnInAtAvgCost")} />
           <StatCard
-            label="Running low"
+            label={t("dnInRunningLow")}
             value={String(low.length)}
-            sub={low.length ? low.slice(0, 3).map((m) => m.name).join(", ") : "Nothing to reorder"}
+            sub={low.length ? low.slice(0, 3).map((m) => m.name).join(", ") : t("dnInNothingToReorder")}
           />
           <StatCard
-            label="Dishes costed"
+            label={t("dnInDishesCosted")}
             value={`${costedItems} / ${menuItems.length}`}
-            sub={costedItems < menuItems.length ? "Add recipes on the Menu screen" : "All costed"}
+            sub={costedItems < menuItems.length ? t("dnInAddRecipesHint") : t("dnInAllCosted")}
           />
         </div>
       )}
@@ -162,8 +163,8 @@ export function InventoryScreen() {
       {materials.length === 0 ? (
         <EmptyState
           icon={<Boxes className="h-6 w-6" />}
-          title="No materials yet"
-          message="Add what you buy — rice, paneer, ghee, cups — then give each dish a recipe from the Menu screen."
+          title={t("dnInNoMaterials")}
+          message={t("dnInNoMaterialsBody")}
           action={
             <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
@@ -173,17 +174,17 @@ export function InventoryScreen() {
         />
       ) : (
         <>
-          <SearchInput value={query} onChange={setQuery} placeholder="Search materials…" />
+          <SearchInput value={query} onChange={setQuery} placeholder={t("dnInSearchPh")} />
 
           <div className="overflow-x-auto rounded-2xl border border-muted-line/30 bg-white shadow-sm">
             <table className="w-full min-w-[680px] text-sm">
               <thead>
                 <tr className="border-b border-muted-line/20 bg-cream-paper text-left">
-                  <th className="px-4 py-2 font-semibold text-muted">Material</th>
-                  <th className="px-4 py-2 text-right font-semibold text-muted">In stock</th>
-                  <th className="px-4 py-2 text-right font-semibold text-muted">Reorder at</th>
-                  <th className="px-4 py-2 text-right font-semibold text-muted">Avg cost</th>
-                  <th className="px-4 py-2 text-right font-semibold text-muted">Value</th>
+                  <th className="px-4 py-2 font-semibold text-muted">{t("dnRcMaterial")}</th>
+                  <th className="px-4 py-2 text-right font-semibold text-muted">{t("dnInColInStock")}</th>
+                  <th className="px-4 py-2 text-right font-semibold text-muted">{t("dnInColReorderAt")}</th>
+                  <th className="px-4 py-2 text-right font-semibold text-muted">{t("dnInColAvgCost")}</th>
+                  <th className="px-4 py-2 text-right font-semibold text-muted">{t("dnInColValue")}</th>
                   <th className="px-4 py-2" />
                 </tr>
               </thead>
@@ -216,7 +217,7 @@ export function InventoryScreen() {
                               isOut ? "bg-red-100 text-red-700" : "bg-saffron/20 text-ink"
                             }`}
                           >
-                            {isOut ? "Out" : "Low"}
+                            {isOut ? t("dnInOut") : t("dnInLow")}
                           </span>
                         )}
                       </td>
@@ -251,7 +252,7 @@ export function InventoryScreen() {
                           <button
                             type="button"
                             onClick={() => setHistoryFor(material)}
-                            aria-label={`History for ${material.name}`}
+                            aria-label={fill(t("dnInHistoryFor"), { name: material.name })}
                             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-cream hover:text-indigo"
                           >
                             <History className="h-4 w-4" />
@@ -259,7 +260,7 @@ export function InventoryScreen() {
                           <button
                             type="button"
                             onClick={() => setEditing(material)}
-                            aria-label={`Edit ${material.name}`}
+                            aria-label={fill(t("dnInEditMaterial"), { name: material.name })}
                             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-cream hover:text-indigo"
                           >
                             <Pencil className="h-4 w-4" />
@@ -267,7 +268,7 @@ export function InventoryScreen() {
                           <button
                             type="button"
                             onClick={() => setDeleteTarget(material)}
-                            aria-label={`Delete ${material.name}`}
+                            aria-label={fill(t("appDeleteNamed"), { name: material.name })}
                             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                           >
                             <Trash2 className="h-4 w-4" />
@@ -313,7 +314,7 @@ export function InventoryScreen() {
       <Modal
         open={historyFor !== null}
         onClose={() => setHistoryFor(null)}
-        title={`${historyFor?.name ?? ""} — movements`}
+        title={fill(t("dnInMovementsTitle"), { name: historyFor?.name ?? "" })}
         wide
       >
         <MovementList materialId={historyFor?.id ?? ""} />
@@ -321,8 +322,8 @@ export function InventoryScreen() {
 
       <ConfirmDialog
         open={deleteTarget !== null}
-        title={`Delete ${deleteTarget?.name ?? "this material"}?`}
-        message="It is removed from every recipe that used it. Past movements stay in your records — history should not rewrite itself."
+        title={fill(t("dnInDeleteTitle"), { name: deleteTarget?.name ?? t("dnInThisMaterial") })}
+        message={t("dnInDeleteBody")}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={async () => {
           if (deleteTarget) await deleteMaterial(deleteTarget.id);
@@ -340,7 +341,7 @@ export function InventoryScreen() {
     const material = materials.find((row) => row.id === materialId);
 
     if (rows.length === 0) {
-      return <p className="text-sm text-muted">Nothing has moved yet.</p>;
+      return <p className="text-sm text-muted">{t("dnInNothingMoved")}</p>;
     }
 
     return (
@@ -348,10 +349,10 @@ export function InventoryScreen() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-muted-line/20 text-left">
-              <th className="py-2 font-semibold text-muted">When</th>
-              <th className="py-2 font-semibold text-muted">Why</th>
-              <th className="py-2 text-right font-semibold text-muted">Change</th>
-              <th className="py-2 text-right font-semibold text-muted">Balance</th>
+              <th className="py-2 font-semibold text-muted">{t("dnBlColWhen")}</th>
+              <th className="py-2 font-semibold text-muted">{t("dnInColWhy")}</th>
+              <th className="py-2 text-right font-semibold text-muted">{t("dnInColChange")}</th>
+              <th className="py-2 text-right font-semibold text-muted">{t("dnInColBalance")}</th>
             </tr>
           </thead>
           <tbody>
@@ -402,6 +403,7 @@ function MaterialModal({
   material: DineMaterial | null;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
   const { createMaterial, updateMaterial } = useDine();
   const [form, setForm] = useState<MaterialInput>(() =>
     material
@@ -444,21 +446,21 @@ function MaterialModal({
   };
 
   return (
-    <Modal open onClose={onClose} title={material ? `Edit ${material.name}` : "New material"}>
+    <Modal open onClose={onClose} title={material ? fill(t("dnInEditMaterial"), { name: material.name }) : t("dnInNewMaterial")}>
       <div className="space-y-4">
-        <Field label="Name" required>
+        <Field label={t("name")} required>
           <input
             value={form.name}
             onChange={(event) => patch({ name: event.target.value })}
-            placeholder="Basmati rice"
+            placeholder={t("dnInNamePh")}
             autoFocus
             className={inputClass}
           />
         </Field>
 
         <Field
-          label="Counted in"
-          hint="Recipes and stock both use this. Weight for solids, volume for liquids, pieces for things you count."
+          label={t("dnInCountedIn")}
+          hint={t("dnInCountedInHint")}
         >
           <div className="flex gap-2">
             {BASE_UNITS.map((unit) => (
@@ -468,7 +470,7 @@ function MaterialModal({
                 onClick={() => patch({ baseUnit: unit.id as BaseUnit })}
                 aria-pressed={form.baseUnit === unit.id}
                 disabled={Boolean(material)}
-                title={material ? "The unit cannot change once stock has moved." : unit.long}
+                title={material ? t("dnInUnitLocked") : t(unit.long)}
                 className={`${tapTargetClass} flex-1 rounded-lg border text-sm font-semibold transition disabled:opacity-50 ${
                   form.baseUnit === unit.id
                     ? "border-indigo bg-indigo text-white"
@@ -482,15 +484,15 @@ function MaterialModal({
         </Field>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Bought as" hint="Optional — the pack you buy it in.">
+          <Field label={t("dnInBoughtAs")} hint={t("dnInBoughtAsHint")}>
             <input
               value={form.packLabel}
               onChange={(event) => patch({ packLabel: event.target.value })}
-              placeholder="5 kg sack"
+              placeholder={t("dnInPackPh")}
               className={inputClass}
             />
           </Field>
-          <Field label={`One pack is how many ${form.baseUnit}?`}>
+          <Field label={fill(t("dnInOnePackIs"), { unit: form.baseUnit })}>
             <input
               inputMode="decimal"
               value={packText}
@@ -520,8 +522,8 @@ function MaterialModal({
         )}
 
         <Field
-          label={`Warn me below (${form.baseUnit})`}
-          hint="Leave blank for no warning."
+          label={fill(t("dnInWarnBelow"), { unit: form.baseUnit })}
+          hint={t("dnInWarnBlank")}
         >
           <input
             inputMode="decimal"
@@ -542,7 +544,7 @@ function MaterialModal({
             disabled={busy || !form.name.trim()}
             className={primaryBtnClass}
           >
-            {busy ? "Saving…" : material ? "Save changes" : "Add material"}
+            {busy ? t("clPfSaving") : material ? t("saveChanges") : t("dnInAddMaterial")}
           </button>
         </div>
       </div>
@@ -553,6 +555,7 @@ function MaterialModal({
 type StockMode = "add" | "wastage" | "count";
 
 function StockModal({ material, onClose }: { material: DineMaterial; onClose: () => void }) {
+  const { t } = useI18n();
   const { addStock, recordWastage, setStockLevel, business } = useDine();
   const currency = business?.currency ?? "INR";
 
@@ -577,7 +580,7 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
     try {
       if (mode === "add") await addStock(material.id, quantity, parseAmount(costText), note.trim());
       else if (mode === "wastage") await recordWastage(material.id, quantity, note.trim());
-      else await setStockLevel(material.id, quantity, note.trim() || "Stock take");
+      else await setStockLevel(material.id, quantity, note.trim() || t("dnSmAdjust"));
       onClose();
     } finally {
       setBusy(false);
@@ -596,9 +599,9 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
         <div className="grid grid-cols-3 gap-2">
           {(
             [
-              { id: "add", label: "Add stock" },
-              { id: "wastage", label: "Wastage" },
-              { id: "count", label: "Stock take" },
+              { id: "add", label: "dnInAddStock" },
+              { id: "wastage", label: "dnSmWastage" },
+              { id: "count", label: "dnSmAdjust" },
             ] as const
           ).map((option) => (
             <button
@@ -612,14 +615,14 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
                   : "border-muted-line/40 bg-white text-ink"
               }`}
             >
-              {option.label}
+              {t(option.label)}
             </button>
           ))}
         </div>
 
         {hasPack && mode === "add" ? (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label={`How many ${material.packLabel}?`}>
+            <Field label={fill(t("dnInHowManyPacks"), { pack: material.packLabel })}>
               <input
                 inputMode="decimal"
                 value={packText}
@@ -632,7 +635,7 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
                 className={inputClass}
               />
             </Field>
-            <Field label={`…or loose (${material.baseUnit})`}>
+            <Field label={fill(t("dnInOrLoose"), { unit: material.baseUnit })}>
               <input
                 inputMode="decimal"
                 value={qtyText}
@@ -648,8 +651,8 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
           <Field
             label={
               mode === "count"
-                ? `Counted quantity (${material.baseUnit})`
-                : `Quantity (${material.baseUnit})`
+                ? fill(t("dnInCountedQty"), { unit: material.baseUnit })
+                : fill(t("dnInQtyUnit"), { unit: material.baseUnit })
             }
           >
             <input
@@ -663,7 +666,7 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
         )}
 
         {mode === "add" && (
-          <Field label="What it cost" hint="Optional. Used to keep the average cost honest.">
+          <Field label={t("dnInWhatItCost")} hint={t("dnInWhatItCostHint")}>
             <input
               inputMode="decimal"
               value={costText}
@@ -685,15 +688,15 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
             }`}
           >
             {variance === 0
-              ? "Matches the books exactly."
-              : `${variance < 0 ? "Short" : "Over"} by ${formatQty(
-                  Math.abs(variance),
-                  material.baseUnit
-                )} — recorded as a stock take.`}
+              ? t("dnInMatchesBooks")
+              : fill(t("dnInVarianceNote"), {
+                  direction: variance < 0 ? t("dnInShort") : t("dnInOver"),
+                  amount: formatQty(Math.abs(variance), material.baseUnit),
+                })}
           </p>
         )}
 
-        <Field label="Note">
+        <Field label={t("note")}>
           <input
             value={note}
             onChange={(event) => setNote(event.target.value)}
@@ -717,12 +720,12 @@ function StockModal({ material, onClose }: { material: DineMaterial; onClose: ()
             {mode === "add" && <Plus className="h-4 w-4" />}
             {mode === "count" && <ClipboardCheck className="h-4 w-4" />}
             {busy
-              ? "Saving…"
+              ? t("clPfSaving")
               : mode === "add"
                 ? `Add ${quantity > 0 ? formatQty(quantity, material.baseUnit) : "stock"}`
                 : mode === "wastage"
-                  ? "Record wastage"
-                  : "Save count"}
+                  ? t("dnInRecordWastage")
+                  : t("dnInSaveCount")}
           </button>
         </div>
 
