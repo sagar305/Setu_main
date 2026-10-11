@@ -1,0 +1,51 @@
+{
+  "slug": "per-seat-pricing",
+  "term": "Per-Seat Pricing",
+  "category": "pos-tech",
+  "aliases": [
+    "per-user pricing",
+    "seat-based pricing",
+    "per-seat licence"
+  ],
+  "short": "Software priced per named user, so the bill rises every time another person needs access.",
+  "seoTitle": "Per-Seat Pricing: What It Costs as You Add Staff",
+  "metaDescription": "Per-seat pricing charges software by the number of named users. It looks cheap at one user and scales with headcount, which is the figure to check first.",
+  "updated": "2026-10-11",
+  "definition": "Per-seat pricing charges for software by the number of named users who can sign in, rather than by outlet, transaction volume or revenue. The headline price is almost always quoted for a single seat, which makes a product look inexpensive until you count how many people actually need to be in it. For small businesses it is the pricing model most likely to be misread at the point of purchase.",
+  "formula": {
+    "expression": "Annual cost = Number of seats × Price per seat per month × 12",
+    "note": "Check whether the quoted price is per seat or for the plan, and whether it excludes GST. Both are common sources of a bill larger than expected."
+  },
+  "bodyHtml": "<h2>What to check before signing</h2><p>Three questions settle most of it. How many seats does the advertised price include, and is a second seat an upgrade or an add-on. Can a seat be reassigned when someone leaves, or does it stay tied to the person. And is a read-only user — an accountant, an owner who only looks at reports — a full-price seat or a free one, because the answer can change the annual figure substantially for a small team.</p><h2>How it compares with the alternatives</h2><p>Per-outlet pricing scales with locations rather than people, which suits a business where each site has several staff on one till. Transaction or revenue-based pricing scales with how much you sell, which is gentler in a slow month and more expensive in a good one. Per-seat pricing scales with headcount, so it is kindest to a one-person operation and least forgiving to a business with high staff turnover and many part-time users.</p><h2>The shared-login temptation</h2><p>The common response to per-seat pricing is one login passed around the counter. It saves money and costs you the audit trail: every entry now looks like the same person made it, which makes a genuine error indistinguishable from a deliberate one, and removes the main operational benefit of having accounts at all. If the seat count is the problem, negotiate the seat count or change the product rather than collapsing the record of who did what.</p><h2>Budgeting it honestly</h2><p>Work out the figure at the headcount you expect in a year, not today's. Software bought at one seat and used at four is a different purchase, and it is usually cheaper to discover that before the migration than after it.</p>",
+  "faq": [
+    {
+      "question": "Is per-seat pricing cheaper than per-outlet pricing?",
+      "answer": "It depends entirely on your shape. One person running one shop pays less on a per-seat plan; four staff sharing one till usually pay less on a per-outlet plan. Price both models at the headcount and location count you expect in twelve months rather than at today's."
+    },
+    {
+      "question": "Can I just share one login to save seats?",
+      "answer": "You can, and it destroys the audit trail. Every entry then appears to come from one person, so a mistake and a deliberate change look identical after the fact. If seats are the constraint, it is better to negotiate them or pick a differently priced product."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "vendor-lock-in",
+    "role-based-access",
+    "audit-trail",
+    "implementation-fee",
+    "annual-maintenance-contract"
+  ]
+}

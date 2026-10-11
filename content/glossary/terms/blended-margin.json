@@ -1,0 +1,54 @@
+{
+  "slug": "blended-margin",
+  "term": "Blended Margin",
+  "category": "pricing-profit",
+  "aliases": [
+    "blended gross margin",
+    "overall margin"
+  ],
+  "short": "The single gross margin percentage across everything you sold in a period, rather than the margin on any one item.",
+  "seoTitle": "Blended Margin: One Number Across Every Line",
+  "metaDescription": "Blended margin is total gross profit divided by total revenue for a period. It shows what your actual sales mix earned, not what any single item earns.",
+  "updated": "2026-10-11",
+  "definition": "Blended margin is total gross profit divided by total revenue for a period, expressed as a percentage. It is the margin your actual sales mix produced, as opposed to the margin on any individual line. The number moves for two quite different reasons — because prices or costs changed, or because customers bought a different mix of the same items — and separating those two causes is most of the value in tracking it.",
+  "formula": {
+    "expression": "Blended margin % = Total gross profit ÷ Total revenue × 100",
+    "note": "Gross profit here means revenue less direct cost of what was sold, before overheads. Compare the same definition month to month or the trend is meaningless."
+  },
+  "bodyHtml": "<h2>Why it moves without anyone changing a price</h2><p>Mix is the usual culprit. If a high-margin line sells less this month and a low-margin line sells more, the blended figure falls even though every individual price and cost is identical. That is why a falling blended margin is a question rather than a conclusion: the first thing to establish is whether the mix shifted or the economics did.</p><h2>Reading it beside line-level margin</h2><p>Blended margin tells you what the business earned; line-level margin tells you where. Used together they answer the useful question, which is which lines are carrying the business and which are along for the ride. Used alone, the blended figure hides a loss-making bestseller behind a handful of strong products, which is how businesses discover they have been subsidising their most popular item.</p><h2>What a promotion does to it</h2><p>Any discount pulls the blended figure down for the period, because discounted units enter the mix at a lower margin. The question worth asking is whether the fall was smaller than the extra gross profit the volume produced. If blended margin fell and total gross profit rose, the offer worked; if both fell, it did not, regardless of how busy the period felt.</p><h2>A practical target</h2><p>There is no universal right number — it is set by your category and your cost base. What is useful is your own trailing twelve-month range. Once you know the band your business normally sits in, a month outside it becomes a signal rather than a mystery, and that is far more actionable than comparing yourself with an industry average that was computed on a different definition of cost.</p>",
+  "faq": [
+    {
+      "question": "Is blended margin the same as net margin?",
+      "answer": "No. Blended margin is a gross figure: revenue less the direct cost of goods or services sold, before rent, salaries and other overheads. Net margin is what remains after all of those, so it is always the smaller number and it moves for different reasons."
+    },
+    {
+      "question": "Should I track blended margin or margin per item?",
+      "answer": "Both, because they answer different questions. The blended figure tells you how the period went overall; the per-item figure tells you which lines produced that result. Businesses that track only the blended number tend to miss a popular line that has quietly stopped paying for itself."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "profit-margin",
+    "gross-profit",
+    "contribution-margin",
+    "menu-mix",
+    "promotional-discount"
+  ]
+}

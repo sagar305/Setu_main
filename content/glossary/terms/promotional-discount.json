@@ -1,0 +1,56 @@
+{
+  "slug": "promotional-discount",
+  "term": "Promotional Discount",
+  "category": "pricing-profit",
+  "aliases": [
+    "promo discount",
+    "sale discount",
+    "offer discount"
+  ],
+  "short": "A temporary reduction from the normal selling price, given to lift volume or clear stock, which comes out of gross margin rather than revenue.",
+  "seoTitle": "Promotional Discount: How It Hits Your Margin",
+  "metaDescription": "A promotional discount is a temporary price cut. Because cost does not move, it is taken out of gross margin — a 20% cut on a 40% margin halves the profit.",
+  "updated": "2026-10-11",
+  "definition": "A promotional discount is a temporary, advertised reduction from an item's normal selling price, run to lift volume, clear ageing stock or win a first order. The important property is arithmetical rather than commercial: because your cost does not change when the price does, the whole discount is taken out of gross profit. A discount of twenty per cent on an item carrying a forty per cent margin removes half the profit, not a fifth of it.",
+  "formula": {
+    "expression": "Discount % = (List price − Promo price) ÷ List price × 100; Gross profit after promo = Promo price − Unit cost",
+    "note": "A promotional discount equal to your margin percentage leaves zero gross profit, so the margin is the ceiling on any offer that is meant to make money."
+  },
+  "bodyHtml": "<h2>Why the customer's percentage and yours differ</h2><p>The customer sees a percentage of the price. You lose a percentage of the margin. Those are different bases, and the thinner the margin the more violent the gap. On a forty per cent margin, ten per cent off costs a quarter of the profit and twenty per cent off costs half of it. On a twenty per cent margin, ten per cent off already costs half the profit and twenty per cent off leaves nothing at all.</p><h2>Where it appears matters for tax</h2><p>A discount shown on the face of the invoice generally reduces the taxable value, so GST is charged on the reduced amount. A discount granted after the sale is treated differently and carries conditions about prior agreement, linkage to specific invoices and credit adjustment by the buyer. In practice that means an offer's design has a tax consequence as well as a margin one, and the paperwork should be settled before the posters are printed. This is general information, not tax advice.</p><h2>The versions that usually pay</h2><p>Three shapes tend to survive the arithmetic. A threshold offer, where the discount only applies above a basket value, so the uplift in order size can outrun the margin given away. A clearance discount on slow or ageing stock, where there is no margin left to protect and the goal is recovering cash. And a free add-on rather than a price cut, because the add-on costs you its cost price while the price cut costs you full selling price.</p><h2>The version that usually does not</h2><p>A flat store-wide percentage gives away the most margin on exactly the lines that were already selling, and the least help to the lines that needed it. Permanent or near-permanent discounting is worse again: it is simply a lower price with extra administration, and it teaches customers to wait rather than to buy.</p>",
+  "faq": [
+    {
+      "question": "How much more do I need to sell to break even on a discount?",
+      "answer": "Divide your margin percentage by what the discount leaves of it. A forty per cent margin discounted by twenty per cent leaves twenty points, and forty divided by twenty is two — so twice the units for the same gross profit. The multiplier rises steeply as the discount approaches the margin."
+    },
+    {
+      "question": "Is a discount better than a free gift?",
+      "answer": "Usually the gift, because you give away cost price rather than selling price. An add-on that costs you sixty rupees is a sixty rupee hit; taking two hundred rupees off the bill is a two hundred rupee hit, even where the customer values both gestures similarly."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "markup-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "discount",
+    "profit-margin",
+    "markup",
+    "markdown",
+    "contribution-margin",
+    "basket-size"
+  ]
+}

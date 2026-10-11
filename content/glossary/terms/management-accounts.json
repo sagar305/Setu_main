@@ -1,0 +1,51 @@
+{
+  "slug": "management-accounts",
+  "term": "Management Accounts",
+  "category": "accounting",
+  "aliases": [
+    "management reporting",
+    "internal financial reporting"
+  ],
+  "short": "The monthly or quarterly pack of statements prepared for the owner to run the business, rather than for tax or statutory filing.",
+  "seoTitle": "Management Accounts: Meaning and Monthly Pack",
+  "metaDescription": "Management accounts are the monthly P&L, balance sheet and cash flow pack your bookkeeper prepares so you can run the business between statutory filings.",
+  "updated": "2026-10-11",
+  "definition": "Management accounts are the internal financial reports prepared for the people running a business — usually a profit and loss statement, a balance sheet and a cash flow statement, produced monthly or quarterly. They are not filed with anyone. Their only job is to tell the owner what happened in the period soon enough to do something about it, which is why they are allowed to be quicker, rougher and more frequent than statutory accounts.",
+  "bodyHtml": "<h2>What a monthly pack usually contains</h2><p>Most outsourced bookkeeping engagements produce the same bundle: the books written up for the period, a trial balance behind them, and then three statements built on top. Alongside those sit the supporting schedules that make the statements readable — an age-wise list of receivables, the same for payables, and a note of anything that could not be classified.</p><p>The pack is a deliverable, so it is worth naming in your engagement letter. Agreeing that three statements plus two ageing schedules arrive by a fixed day each month removes most of the friction that otherwise builds up with a bookkeeper.</p><h2>How they differ from statutory accounts</h2><p>Statutory accounts are prepared once a year to a prescribed format for filing and for tax. Management accounts are prepared for the owner, with no prescribed format, and they trade a little precision for speed. A management pack may carry estimates where a statutory one would wait for the final figure — a provisional depreciation charge, an accrual for a bill not yet received — because a number that is roughly right this week beats one that is exactly right in March.</p><h2>Why monthly beats quarterly</h2><p>The value of the pack is almost entirely in how early it reaches you. A collection problem spotted in the month it starts is a phone call; the same problem spotted a quarter later is a write-off conversation. Businesses that move from quarterly to monthly reporting usually find the first three months uncomfortable, because the reports surface things that were previously invisible, and then find they cannot go back.</p><h2>Reading them without an accounting background</h2><p>You do not need double-entry to use a management pack. Compare operating cash against reported profit, read revenue against the same month last year rather than the previous month, watch direct costs as a percentage rather than a rupee figure, and track receivables, stock, payables and cash as a trend across three or more months. Anything that surprises you becomes a question for whoever prepared it.</p>",
+  "faq": [
+    {
+      "question": "Are management accounts audited?",
+      "answer": "No. They are internal reports with no prescribed format and no audit requirement. An auditor may look at them while auditing the statutory accounts, but the pack itself is not an audited document and is not filed anywhere."
+    },
+    {
+      "question": "How soon after month end should they arrive?",
+      "answer": "Anywhere from the first to the third week is normal, depending on how quickly bank data, supplier bills and payroll reach whoever prepares them. Consistency matters more than speed: a pack that lands on the same day every month gets read, and one that drifts does not."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-flow-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "trial-balance",
+    "balance-sheet",
+    "cash-flow-statement",
+    "month-end-close",
+    "engagement-letter",
+    "aging-report"
+  ]
+}

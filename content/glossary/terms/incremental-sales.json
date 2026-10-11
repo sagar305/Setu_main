@@ -1,0 +1,55 @@
+{
+  "slug": "incremental-sales",
+  "term": "Incremental Sales",
+  "category": "growth-marketing",
+  "aliases": [
+    "incremental volume",
+    "incremental revenue",
+    "sales uplift"
+  ],
+  "short": "The extra sales an offer or campaign genuinely created, measured against what would have happened anyway.",
+  "seoTitle": "Incremental Sales: Measuring Real Offer Uplift",
+  "metaDescription": "Incremental sales are the extra sales an offer actually created, measured against a baseline — not the total sales made while the offer was running.",
+  "updated": "2026-10-11",
+  "definition": "Incremental sales are the additional sales an offer, discount or campaign genuinely caused, measured against a baseline of what would have happened without it. The distinction matters because the obvious number — total sales during the promotion — includes everything you would have sold anyway, and discounting those is pure margin given away. An offer that moves a lot of volume can produce almost no incremental sales if most of that volume was already coming.",
+  "formula": {
+    "expression": "Incremental sales = Promo-period sales − Baseline sales; Incremental gross profit = Incremental sales × Promo margin % − (Baseline sales × Discount %)",
+    "note": "The baseline is the hard part. Use the same weeks last year, or an immediately preceding comparable period, and say which you used."
+  },
+  "bodyHtml": "<h2>Setting a baseline you can defend</h2><p>Without a baseline there is no incremental figure, only a total. The two usable baselines for a small business are the same period last year, which handles seasonality but not growth, and the immediately preceding comparable weeks, which handles growth but not seasonality. Pick one, write down which, and use the same choice next time so that comparisons between campaigns mean something.</p><h2>Cannibalisation and pull-forward</h2><p>Two effects quietly eat the apparent uplift. Cannibalisation is a discounted line stealing sales from an undiscounted one, so the category total barely moves while its margin falls. Pull-forward is a customer who was going to buy next month buying now because of the offer — real sales, but borrowed from a future period, which is why the weeks immediately after a strong promotion often look weak.</p><h2>Why the margin maths comes first</h2><p>Incremental volume only matters relative to the volume the discount required. If a twenty per cent discount on a forty per cent margin needs twice the units just to stand still, then an offer that lifted volume by thirty per cent destroyed gross profit even though the shop was visibly busier. Work out the required multiplier before the campaign, then measure the actual uplift against it rather than against zero.</p><h2>What to measure alongside it</h2><p>Average order value tells you whether the offer made baskets bigger or merely made them cheaper. Repeat rate on discounted first orders, compared with undiscounted ones, tells you whether an acquisition offer acquired anybody or simply discounted people who would have paid. Both are more informative than the headline revenue figure for the promotion week.</p>",
+  "faq": [
+    {
+      "question": "Can incremental sales be negative?",
+      "answer": "The measured figure can come out below zero if the comparison period was stronger, which usually means the baseline was badly chosen rather than that the offer repelled customers. It is also common for the weeks after a promotion to show a genuine dip, because demand was pulled forward into the offer period."
+    },
+    {
+      "question": "How long should I measure after the offer ends?",
+      "answer": "Long enough to catch the dip. Measuring only the promotion week flatters almost every offer. Running the comparison across the offer period plus an equal stretch afterwards gives a much more honest picture of whether anything was actually added."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "discount-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "cac-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "average-order-value",
+    "basket-size",
+    "promotional-discount",
+    "customer-acquisition-cost",
+    "repeat-rate"
+  ]
+}

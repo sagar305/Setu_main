@@ -1,0 +1,54 @@
+{
+  "slug": "cannibalisation",
+  "term": "Cannibalisation",
+  "category": "pricing-profit",
+  "aliases": [
+    "cannibalization",
+    "sales cannibalisation"
+  ],
+  "short": "When one product or channel takes sales from another of your own, so the total barely moves while the margin falls.",
+  "seoTitle": "Cannibalisation: When Your Own Lines Compete",
+  "metaDescription": "Cannibalisation is one of your products or channels taking sales from another of your own. The category total holds steady while the margin quietly drops.",
+  "updated": "2026-10-11",
+  "definition": "Cannibalisation is what happens when a new product, a discounted line or an extra sales channel takes its volume from something you already sold rather than from a competitor or from new demand. The tell is a category total that barely moves while the margin inside it falls. It is not automatically a mistake — sometimes you cannibalise deliberately — but it is almost always invisible unless you look at the category rather than the item.",
+  "formula": {
+    "expression": "Cannibalisation rate = Lost units on existing lines ÷ Units sold of the new or discounted line × 100",
+    "note": "A rate near 100% means the new line added nothing but complexity. Measure over the category, never over the single item being promoted."
+  },
+  "bodyHtml": "<h2>Where it shows up</h2><p>Three situations produce most of it. A discounted line next to a full-price one that does much the same job, so customers simply switch and you fund the switch. A new variant that appeals to your existing buyers rather than to new ones. And an extra channel — an aggregator listing, an online store, a second outlet nearby — that serves people who would have walked into the original anyway.</p><h2>How to spot it without a data team</h2><p>Compare the category total, not the item. If promoted units are up two hundred while the rest of the category is down one hundred and eighty, you have moved volume rather than created it, and you did it at a discount. The same comparison across outlets catches a new location drawing from an old one.</p><h2>When it is worth doing anyway</h2><p>Deliberate cannibalisation makes sense when the replacement line is more profitable, when it defends a position a competitor would otherwise take, or when it moves a customer onto something they will keep buying. The test is whether total gross profit for the category rose, not whether the new line sold well.</p><h2>The channel version</h2><p>This is the one that costs restaurants and shops the most money. Listing on a commission-bearing channel feels like new demand and is frequently the same regulars ordering a different way, which converts a full-margin walk-in into a commission-bearing delivery. Before expanding a channel, work out what share of its volume would have arrived anyway, and price the channel on that assumption rather than on the gross order count.</p>",
+  "faq": [
+    {
+      "question": "Is cannibalisation always bad?",
+      "answer": "No. It is bad when you give away margin to move the same volume, and defensible when the new line is more profitable, defends you against a competitor, or brings a customer onto something they buy repeatedly. The deciding number is category gross profit, not the sales figure of the new line."
+    },
+    {
+      "question": "How do I measure it in a small business?",
+      "answer": "Compare the whole category before and during the change rather than the promoted item. If the promoted line is up by roughly what the rest of the category is down, the volume moved sideways. Doing this on three or four categories is usually enough to see the pattern."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "aov-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "online-order-commission-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "incremental-sales",
+    "promotional-discount",
+    "menu-mix",
+    "basket-size",
+    "markdown"
+  ]
+}
