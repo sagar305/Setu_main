@@ -15,7 +15,8 @@
       "Setu Tuition",
       "Tuition Class Manager",
       "Free Clinic Manager",
-      "free clinic management software"
+      "free clinic management software",
+      "Setu Workflow"
     ]
   },
   "hero": {
@@ -433,6 +434,25 @@
       "cta": {
         "label": "Get notified at launch",
         "href": "/contact"
+      }
+    },
+    {
+      "id": "workflow",
+      "status": "coming-soon",
+      "name": "Setu Workflow",
+      "headline": "Practice management for CA & accounting firms — in development",
+      "description": "A paid, multi-user cloud product for accounting firms: clients, engagements, versioned workflow stages, checklists, review points, time, capacity and management reports — so partners see where every job stands without chasing anyone for an update.",
+      "features": [
+        "Client and engagement masters with staffing",
+        "Versioned workflow templates and stages",
+        "Stage checklists with required-item gates",
+        "Numbered queries and review points",
+        "Work allocation, time entry and budgets",
+        "Team capacity, dashboard and reports"
+      ],
+      "cta": {
+        "label": "Explore Setu Workflow",
+        "href": "/products/workflow"
       }
     },
     {

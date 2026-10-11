@@ -568,6 +568,27 @@
         "label": "Get notified at launch",
         "href": "/contact"
       }
+    },
+    {
+      "slug": "setu-workflow",
+      "name": "Setu Workflow",
+      "href": "/products/workflow",
+      "status": "in-development",
+      "summary": "Practice management for CA and accounting firms — engagements, workflow, review points, time and capacity.",
+      "freeNote": "In development",
+      "trial": null,
+      "price": null,
+      "features": [
+        "Clients, engagements and staffing",
+        "Workflow stages and checklists",
+        "Queries and review points",
+        "Time, budgets and team capacity",
+        "Management dashboard and reports"
+      ],
+      "cta": {
+        "label": "Get notified at launch",
+        "href": "/contact"
+      }
     }
   ],
   "faq": {

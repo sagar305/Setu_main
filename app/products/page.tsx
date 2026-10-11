@@ -71,6 +71,7 @@ const listedProducts: { name: string; path: string }[] = [
   { name: "Setu Retail", path: "/products/retail" },
   { name: "Setu Tuition", path: "/products/tuition" },
   { name: "Setu Clinic", path: "/products/clinic" },
+  { name: "Setu Workflow", path: "/products/workflow" },
 ];
 
 const itemListSchema = {

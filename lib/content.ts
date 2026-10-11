@@ -13,6 +13,7 @@ import queueData from "@/content/en/queue.json";
 import qrMenuData from "@/content/en/qr-menu.json";
 import retailData from "@/content/en/retail.json";
 import clinicData from "@/content/en/clinic.json";
+import workflowData from "@/content/en/workflow.json";
 import tuitionData from "@/content/en/tuition.json";
 import calculatorsData from "@/content/en/calculators.json";
 import toolsData from "@/content/en/tools.json";
@@ -34,6 +35,7 @@ export type QueueContent = typeof queueData;
 export type QrMenuContent = typeof qrMenuData;
 export type RetailContent = typeof retailData;
 export type ClinicContent = typeof clinicData;
+export type WorkflowContent = typeof workflowData;
 export type TuitionContent = typeof tuitionData;
 export type CalculatorsContent = typeof calculatorsData;
 export type CalculatorItem = CalculatorsContent["items"][number];
@@ -508,6 +510,10 @@ export function getRetailContent(): RetailContent {
 
 export function getClinicContent(): ClinicContent {
   return clinicData;
+}
+
+export function getWorkflowContent(): WorkflowContent {
+  return workflowData;
 }
 
 export function getTuitionContent(): TuitionContent {
