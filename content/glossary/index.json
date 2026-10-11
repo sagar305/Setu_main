@@ -64,6 +64,69 @@
   ],
   "terms": [
     {
+      "slug": "management-accounts",
+      "term": "Management Accounts",
+      "category": "accounting",
+      "short": "The monthly or quarterly pack of statements prepared for the owner to run the business, rather than for tax or statutory filing.",
+      "aliases": [
+        "management reporting",
+        "internal financial reporting"
+      ]
+    },
+    {
+      "slug": "cannibalisation",
+      "term": "Cannibalisation",
+      "category": "pricing-profit",
+      "short": "When one product or channel takes sales from another of your own, so the total barely moves while the margin falls.",
+      "aliases": [
+        "cannibalization",
+        "sales cannibalisation"
+      ]
+    },
+    {
+      "slug": "promotional-discount",
+      "term": "Promotional Discount",
+      "category": "pricing-profit",
+      "short": "A temporary reduction from the normal selling price, given to lift volume or clear stock, which comes out of gross margin rather than revenue.",
+      "aliases": [
+        "promo discount",
+        "sale discount",
+        "offer discount"
+      ]
+    },
+    {
+      "slug": "incremental-sales",
+      "term": "Incremental Sales",
+      "category": "growth-marketing",
+      "short": "The extra sales an offer or campaign genuinely created, measured against what would have happened anyway.",
+      "aliases": [
+        "incremental volume",
+        "incremental revenue",
+        "sales uplift"
+      ]
+    },
+    {
+      "slug": "blended-margin",
+      "term": "Blended Margin",
+      "category": "pricing-profit",
+      "short": "The single gross margin percentage across everything you sold in a period, rather than the margin on any one item.",
+      "aliases": [
+        "blended gross margin",
+        "overall margin"
+      ]
+    },
+    {
+      "slug": "per-seat-pricing",
+      "term": "Per-Seat Pricing",
+      "category": "pos-tech",
+      "short": "Software priced per named user, so the bill rises every time another person needs access.",
+      "aliases": [
+        "per-user pricing",
+        "seat-based pricing",
+        "per-seat licence"
+      ]
+    },
+    {
       "slug": "menu-sync",
       "term": "Menu Sync",
       "category": "pos-tech",
