@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import {
   CalendarClock,
@@ -85,6 +86,7 @@ type Filter = "today" | "upcoming" | "past";
  * sent to a server.
  */
 export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string) => void }) {
+  const { t } = useI18n();
   const {
     reservations,
     business,
@@ -147,8 +149,8 @@ export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string
     return (
       <EmptyState
         icon={<CalendarClock className="h-6 w-6" />}
-        title="Bookings are off"
-        message="Turn this on to hold tables ahead of time, with or without an advance. You can send the guest a confirmation on WhatsApp, and any advance you take comes off their bill when they sit down."
+        title={t("dnRsBookingsOff")}
+        message={t("dnRsBookingsOffBody")}
         action={
           <button
             type="button"
@@ -166,11 +168,14 @@ export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string
   return (
     <div className="space-y-5">
       <SectionHeading
-        title="Bookings"
+        title={t("dnNavBookings")}
         subtitle={
           todayRows.length === 0
-            ? "Nothing booked for today."
-            : `${todayRows.length} today · ${covers} cover${covers === 1 ? "" : "s"}`
+            ? t("dnRsNothingToday")
+            : fill(t("dnRsTodaySubtitle"), {
+                n: todayRows.length,
+                covers: fill(t(covers === 1 ? "dnRsCover1" : "dnRsCoverN"), { n: covers }),
+              })
         }
         action={
           <div className="flex flex-wrap gap-2">
@@ -187,32 +192,32 @@ export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string
             </button>
             <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <CalendarPlus className="h-4 w-4" />
-              New booking
+              {t("dnRsNewBooking")}
             </button>
           </div>
         }
       />
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <StatCard label="Booked today" value={String(todayRows.length)} sub={`${covers} covers`} />
+        <StatCard label={t("dnRsBookedToday")} value={String(todayRows.length)} sub={fill(t(covers === 1 ? "dnRsCover1" : "dnRsCoverN"), { n: covers })} />
         <StatCard
-          label="Advances held"
+          label={t("dnRpAdvancesHeld")}
           value={formatPaise(heldDeposits, currency)}
-          sub="Comes off their bills"
+          sub={t("dnRsComesOffBills")}
         />
         <StatCard
-          label="Waiting to arrive"
+          label={t("dnRsWaitingToArrive")}
           value={String(todayRows.filter((row) => row.status === "booked").length)}
-          sub={`${todayRows.filter((row) => isLate(row, now, settings.reservationHoldMinutes)).length} late`}
+          sub={fill(t("dnRsLateCount"), { n: todayRows.filter((row) => isLate(row, now, settings.reservationHoldMinutes)).length })}
         />
       </div>
 
       <div className="flex flex-wrap gap-2">
         {(
           [
-            ["today", "Today"],
-            ["upcoming", "Upcoming"],
-            ["past", "Past"],
+            ["today", t("today")],
+            ["upcoming", t("dnRsUpcoming")],
+            ["past", t("dnRsPast")],
           ] as [Filter, string][]
         ).map(([value, label]) => (
           <button
@@ -234,11 +239,11 @@ export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string
       {visible.length === 0 ? (
         <EmptyState
           icon={<CalendarClock className="h-6 w-6" />}
-          title={filter === "past" ? "Nothing in the past" : "Nothing booked"}
+          title={filter === "past" ? t("dnRsNothingPast") : t("dnRsNothingBooked")}
           message={
             filter === "today"
-              ? "Take a booking over the phone and it shows up here, with a WhatsApp confirmation ready to send."
-              : "Bookings for other days appear here."
+              ? t("dnRsTakeOverPhone")
+              : t("dnRsOtherDaysHere")
           }
         />
       ) : (
@@ -282,16 +287,16 @@ export function ReservationsScreen({ onOpenTicket }: { onOpenTicket: (id: string
       {noShowFor && (
         <ConfirmDialog
           open
-          title="Mark as a no-show?"
+          title={t("dnRsNoShowTitle")}
           message={
             noShowFor.depositPaid > 0
-              ? `${noShowFor.guestName} did not arrive. Their advance of ${formatPaise(
-                  noShowFor.depositPaid,
-                  currency
-                )} will be kept.`
-              : `${noShowFor.guestName} did not arrive. The table is released.`
+              ? fill(t("dnRsNoShowKept"), {
+                  name: noShowFor.guestName,
+                  amount: formatPaise(noShowFor.depositPaid, currency),
+                })
+              : fill(t("dnRsNoShowReleased"), { name: noShowFor.guestName })
           }
-          confirmLabel="Mark no-show"
+          confirmLabel={t("dnRsMarkNoShow")}
           onConfirm={async () => {
             await markReservationNoShow(noShowFor.id, "forfeited");
             setNoShowFor(null);
@@ -328,7 +333,7 @@ function ReservationCard({
   onCancel: () => void;
   onNoShow: () => void;
 }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const { business, settings } = useDine();
   const currency = business?.currency ?? "INR";
   const late = isLate(reservation, now, settings.reservationHoldMinutes);
@@ -355,7 +360,7 @@ function ReservationCard({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <p className="text-base font-bold text-ink">{reservation.guestName || "Guest"}</p>
+            <p className="text-base font-bold text-ink">{reservation.guestName || t("dnFlGuest")}</p>
             <span
               className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                 STATUS_STYLE[reservation.status]
@@ -366,14 +371,18 @@ function ReservationCard({
             {late && (
               <span className="flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">
                 <TriangleAlert className="h-3 w-3" />
-                Late
+                {t("dnRsLate")}
               </span>
             )}
           </div>
           <p className="mt-1 text-sm text-muted">
-            {formatSlot(reservation.startsAt, lang)} · {reservation.partySize}{" "}
-            {reservation.partySize === 1 ? "guest" : "guests"}
-            {reservation.tableName ? ` · ${reservation.tableName}` : " · any table"}
+            {formatSlot(reservation.startsAt, lang)} ·{" "}
+            {fill(t(reservation.partySize === 1 ? "dnRsGuest1" : "dnRsGuestN"), {
+              n: reservation.partySize,
+            })}
+            {reservation.tableName
+              ? ` · ${reservation.tableName}`
+              : ` · ${t("dnRsAnyTable")}`}
           </p>
           {reservation.occasion && (
             <p className="text-sm text-muted">🎉 {reservation.occasion}</p>
@@ -392,17 +401,17 @@ function ReservationCard({
                 </span>
               </p>
               <p className="text-xs text-muted">
-                {due > 0 ? `${formatPaise(due, currency)} still to collect` : "Advance received"}
+                {due > 0 ? fill(t("dnRsStillToCollect"), { amount: formatPaise(due, currency) }) : t("dnRsAdvanceReceived")}
               </p>
             </>
           ) : (
-            <p className="text-xs text-muted">Free booking</p>
+            <p className="text-xs text-muted">{t("dnRsFreeBooking")}</p>
           )}
           {reservation.depositOutcome === "forfeited" && (
-            <p className="text-xs font-semibold text-amber-700">Advance kept</p>
+            <p className="text-xs font-semibold text-amber-700">{t("dnRsAdvanceKept")}</p>
           )}
           {reservation.depositOutcome === "refunded" && (
-            <p className="text-xs font-semibold text-muted">Advance refunded</p>
+            <p className="text-xs font-semibold text-muted">{t("dnRsAdvanceRefunded")}</p>
           )}
         </div>
       </div>
@@ -416,7 +425,7 @@ function ReservationCard({
               className={`${primaryBtnClass} px-3 py-1.5 text-xs`}
             >
               <Check className="h-3.5 w-3.5" />
-              Seat them
+              {t("dnRsSeatThem")}
             </button>
             {due > 0 && (
               <button
@@ -425,7 +434,7 @@ function ReservationCard({
                 className={`${secondaryBtnClass} px-3 py-1.5 text-xs`}
               >
                 <Wallet className="h-3.5 w-3.5" />
-                Take advance
+                {t("dnRsTakeAdvance")}
               </button>
             )}
           </>
@@ -440,7 +449,7 @@ function ReservationCard({
               className={`${secondaryBtnClass} px-3 py-1.5 text-xs`}
             >
               <MessageCircle className="h-3.5 w-3.5" />
-              Confirm on WhatsApp
+              {t("dnRsConfirmWhatsApp")}
             </a>
             {reservation.status === "booked" && (
               <a
@@ -450,7 +459,7 @@ function ReservationCard({
                 className={`${secondaryBtnClass} px-3 py-1.5 text-xs`}
               >
                 <MessageCircle className="h-3.5 w-3.5" />
-                Remind
+                {t("dnRsRemind")}
               </a>
             )}
           </>
@@ -461,7 +470,7 @@ function ReservationCard({
             <button
               type="button"
               onClick={onEdit}
-              aria-label={`Edit booking for ${reservation.guestName}`}
+              aria-label={fill(t("dnRsEditBookingFor"), { name: reservation.guestName })}
               className={`${secondaryBtnClass} px-3 py-1.5 text-xs`}
             >
               <Pencil className="h-3.5 w-3.5" />
@@ -504,7 +513,7 @@ function ReservationModal({
   reservation: DineReservation | null;
   onClose: () => void;
 }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const {
     tables,
     areas,
@@ -564,10 +573,14 @@ function ReservationModal({
   });
 
   return (
-    <Modal open onClose={onClose} title={reservation ? "Edit booking" : "New booking"}>
+    <Modal
+      open
+      onClose={onClose}
+      title={reservation ? t("dnRsEditBooking") : t("dnRsNewBooking")}
+    >
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Guest name" required>
+          <Field label={t("dnRsGuestName")} required>
             <input
               value={guestName}
               onChange={(event) => setGuestName(event.target.value)}
@@ -575,7 +588,7 @@ function ReservationModal({
               className={inputClass}
             />
           </Field>
-          <Field label="Phone" hint="For the WhatsApp confirmation.">
+          <Field label={t("phone")} hint={t("dnRsPhoneHint")}>
             <input
               inputMode="tel"
               value={phone}
@@ -587,7 +600,7 @@ function ReservationModal({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Date and time" required>
+          <Field label={t("dnRsDateAndTime")} required>
             <input
               type="datetime-local"
               value={startsAt}
@@ -595,7 +608,7 @@ function ReservationModal({
               className={inputClass}
             />
           </Field>
-          <Field label="Guests">
+          <Field label={t("dnRsGuests")}>
             <input
               inputMode="numeric"
               value={partySize}
@@ -603,7 +616,7 @@ function ReservationModal({
               className={inputClass}
             />
           </Field>
-          <Field label="For how long (minutes)">
+          <Field label={t("dnRsForHowLong")}>
             <input
               inputMode="numeric"
               value={duration}
@@ -613,18 +626,18 @@ function ReservationModal({
           </Field>
         </div>
 
-        <Field label="Table" hint="Leave on ‘any table’ to decide when they arrive.">
+        <Field label={t("dnBlColTable")} hint={t("dnRsTableHint")}>
           <select
             value={tableId}
             onChange={(event) => setTableId(event.target.value)}
             className={inputClass}
           >
-            <option value="">Any table</option>
+            <option value="">{t("dnRsAnyTable")}</option>
             {tables.map((table) => (
               <option key={table.id} value={table.id}>
                 {table.name}
                 {areaById.get(table.areaId) ? ` · ${areaById.get(table.areaId)!.name}` : ""} (
-                {table.seats} seats)
+                {fill(t("dnRsSeatsCount"), { n: table.seats })})
               </option>
             ))}
           </select>
@@ -634,14 +647,18 @@ function ReservationModal({
           <div className="flex items-start gap-2 rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
             <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
             <div>
-              <p className="font-semibold">That table is already promised.</p>
+              <p className="font-semibold">{t("dnRsTablePromised")}</p>
               {conflicts.map((row) => (
                 <p key={row.id} className="text-xs">
-                  {row.guestName || "Guest"} at {formatSlot(row.startsAt, lang)} for {row.partySize}
+                  {fill(t("dnRsConflictRow"), {
+                    name: row.guestName || t("dnFlGuest"),
+                    slot: formatSlot(row.startsAt, lang),
+                    n: row.partySize,
+                  })}
                 </p>
               ))}
               <p className="mt-1 text-xs">
-                You can still save it — sometimes a table really does turn over in time.
+                {t("dnRsStillSave")}
               </p>
             </div>
           </div>
@@ -649,18 +666,18 @@ function ReservationModal({
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
-            label="Advance to collect"
-            hint="Leave blank for a free booking. Whatever you take comes off their bill."
+            label={t("dnRsAdvanceToCollect")}
+            hint={t("dnRsAdvanceHint")}
           >
             <input
               inputMode="decimal"
               value={deposit}
               onChange={(event) => setDeposit(event.target.value)}
-              placeholder="No advance"
+              placeholder={t("dnRsNoAdvance")}
               className={inputClass}
             />
           </Field>
-          <Field label="Occasion" hint="Birthday, anniversary — printed on nothing, said by staff.">
+          <Field label={t("dnRsOccasion")} hint={t("dnRsOccasionHint")}>
             <input
               value={occasion}
               onChange={(event) => setOccasion(event.target.value)}
@@ -669,7 +686,7 @@ function ReservationModal({
           </Field>
         </div>
 
-        <Field label="Note">
+        <Field label={t("note")}>
           <textarea
             value={note}
             onChange={(event) => setNote(event.target.value)}
@@ -697,7 +714,7 @@ function ReservationModal({
             }}
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
-            {busy ? "Saving…" : reservation ? "Save booking" : "Take booking"}
+            {busy ? t("clPfSaving") : reservation ? t("dnRsSaveBooking") : t("dnRsTakeBooking")}
           </button>
         </div>
       </div>
@@ -713,6 +730,7 @@ function DepositModal({
   reservation: DineReservation;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
   const { paymentMethods, business, takeReservationDeposit } = useDine();
   const currency = business?.currency ?? "INR";
   const due = depositDue(reservation);
@@ -728,17 +746,23 @@ function DepositModal({
   const [busy, setBusy] = useState(false);
 
   return (
-    <Modal open onClose={onClose} title={`Advance from ${reservation.guestName || "guest"}`}>
+    <Modal
+      open
+      onClose={onClose}
+      title={fill(t("dnRsAdvanceFrom"), {
+        name: reservation.guestName || t("dnRsGuestFallback"),
+      })}
+    >
       <div className="space-y-4">
         <div className="rounded-xl bg-cream-paper p-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-muted">Asked for</span>
+            <span className="text-muted">{t("dnRsAskedFor")}</span>
             <span className="font-bold text-ink">
               {formatPaise(reservation.depositRequired, currency)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-muted">Already received</span>
+            <span className="text-muted">{t("dnRsAlreadyReceived")}</span>
             <span className="font-bold text-ink">
               {formatPaise(reservation.depositPaid, currency)}
             </span>
@@ -746,7 +770,7 @@ function DepositModal({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Amount received">
+          <Field label={t("dnRsAmountReceived")}>
             <input
               inputMode="decimal"
               value={amount}
@@ -755,7 +779,7 @@ function DepositModal({
               className={inputClass}
             />
           </Field>
-          <Field label="Taken as">
+          <Field label={t("dnRsTakenAs")}>
             <select
               value={methodId}
               onChange={(event) => setMethodId(event.target.value)}
@@ -794,7 +818,7 @@ function DepositModal({
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
             <Wallet className="h-4 w-4" />
-            {busy ? "Saving…" : "Record advance"}
+            {busy ? t("clPfSaving") : t("dnRsRecordAdvance")}
           </button>
         </div>
       </div>
@@ -815,7 +839,7 @@ function CancelModal({
   reservation: DineReservation;
   onClose: () => void;
 }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const { business, settings, cancelReservation } = useDine();
   const currency = business?.currency ?? "INR";
   const [reason, setReason] = useState("");
@@ -831,15 +855,14 @@ function CancelModal({
       lang,
     });
     return (
-      <Modal open onClose={onClose} title="Booking cancelled">
+      <Modal open onClose={onClose} title={t("dnRsBookingCancelled")}>
         <div className="space-y-4">
           <p className="text-sm text-muted">
-            The table is released. Let the guest know so they are not left waiting on a table that
-            is no longer held.
+            {t("dnRsTableReleased")}
           </p>
           <div className="flex justify-end gap-3">
             <button type="button" onClick={onClose} className={secondaryBtnClass}>
-              Close
+              {t("close")}
             </button>
             {done.phone && (
               <a
@@ -850,7 +873,7 @@ function CancelModal({
                 className={`${primaryBtnClass} ${tapTargetClass}`}
               >
                 <MessageCircle className="h-4 w-4" />
-                Tell them on WhatsApp
+                {t("dnRsTellWhatsApp")}
               </a>
             )}
           </div>
@@ -860,9 +883,15 @@ function CancelModal({
   }
 
   return (
-    <Modal open onClose={onClose} title={`Cancel ${reservation.guestName || "booking"}`}>
+    <Modal
+      open
+      onClose={onClose}
+      title={fill(t("dnRsCancelFor"), {
+        name: reservation.guestName || t("dnRsBookingFallback"),
+      })}
+    >
       <div className="space-y-4">
-        <Field label="Reason" hint="Shown to the guest if you send the message.">
+        <Field label={t("dgReason")} hint={t("dnRsCancelReasonHint")}>
           <input
             value={reason}
             onChange={(event) => setReason(event.target.value)}
@@ -872,12 +901,16 @@ function CancelModal({
         </Field>
 
         {reservation.depositPaid > 0 && (
-          <Field label={`Their advance of ${formatPaise(reservation.depositPaid, currency)}`}>
+          <Field
+            label={fill(t("dnRsTheirAdvanceOf"), {
+              amount: formatPaise(reservation.depositPaid, currency),
+            })}
+          >
             <div className="flex flex-wrap gap-2">
               {(
                 [
-                  ["refunded", "Refund it"],
-                  ["forfeited", "Keep it"],
+                  ["refunded", t("dnRsRefundIt")],
+                  ["forfeited", t("dnRsKeepIt")],
                 ] as ["refunded" | "forfeited", string][]
               ).map(([value, label]) => (
                 <button
@@ -900,7 +933,7 @@ function CancelModal({
 
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Keep booking
+            {t("dnRsKeepBooking")}
           </button>
           <button
             type="button"
@@ -916,7 +949,7 @@ function CancelModal({
             }}
             className={`${dangerBtnClass} ${tapTargetClass}`}
           >
-            {busy ? "Cancelling…" : "Cancel booking"}
+            {busy ? t("dnRsCancelling") : t("dnRsCancelBooking")}
           </button>
         </div>
       </div>
