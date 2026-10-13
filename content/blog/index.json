@@ -72,6 +72,14 @@
   },
     "posts": [
                 {
+                  "slug": "setu-invoicing-tools-vs-swipe-2026",
+                  "title": "Setu vs Swipe: Free Invoicing Tools or a Billing Account in 2026?",
+                  "excerpt": "Swipe's paid plans start near ₹2,542 a year excluding GST as publicly listed in October 2026, and it keeps a free app tier. Setu's invoicing tools are free browser tools with no account and no sync. Here is exactly where the line between them falls.",
+                  "date": "2026-10-13",
+                  "category": "Operations",
+                  "thumbnail": "/blog/thumbnails/listing/setu-invoicing-tools-vs-swipe-2026.jpeg"
+                },
+                {
                    "slug": "supplier-price-creep-purchase-variance-2026",
                    "title": "Catching Supplier Price Creep: A Purchase Variance Walkthrough",
                    "excerpt": "Nobody announces a price rise. One line moves a few rupees, the total still looks right, and six months later your margin is two points thinner. A worked eight-line variance example, the three ways it misleads you, and what to do with the answer.",
