@@ -31,9 +31,16 @@ export function licenseForOrder(order: CashfreeOrder, secret: string): PaidLicen
 }
 
 /**
- * Emails the key so it survives the buyer closing the tab. Failures are logged
- * and swallowed: the return page shows the key as well, and the webhook that
- * calls this must still answer Cashfree with a 200.
+ * Emails the key so it survives the buyer closing the tab.
+ *
+ * Called from both the webhook and the return page's status check, because
+ * either can be the one that never happens: the webhook is not sent on
+ * localhost and is blocked by Vercel Deployment Protection on previews, and
+ * the buyer can close the tab before the return page loads. Resend's
+ * idempotency key (honoured for 24 hours) collapses the repeats into one email.
+ *
+ * Failures are logged and swallowed: the return page shows the key as well,
+ * and the webhook must still answer Cashfree with a 200.
  */
 export async function emailLicenseKey(to: string, license: PaidLicense, orderId: string) {
   if (!process.env.RESEND_API_KEY) {
@@ -65,6 +72,6 @@ export async function emailLicenseKey(to: string, license: PaidLicense, orderId:
       "",
       `Order: ${orderId}`,
     ].join("\n"),
-  });
-  if (error) console.error("Resend error (QR Menu license):", error);
+  }, { idempotencyKey: `qr-menu-license/${orderId}` });
+  if (error) console.error("Resend error (QR Menu license):", orderId, error);
 }

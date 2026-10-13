@@ -24,7 +24,12 @@ export async function POST(request: NextRequest) {
     rawBody,
     request.headers.get("x-webhook-signature")
   );
-  if (!signed) return Response.json({ error: "bad_signature" }, { status: 401 });
+  if (!signed) {
+    // Usually CASHFREE_SECRET_KEY belonging to the other environment (sandbox
+    // vs production) from the one that sent the webhook.
+    console.warn("QR Menu webhook rejected: signature did not verify");
+    return Response.json({ error: "bad_signature" }, { status: 401 });
+  }
 
   let event: { type?: string; data?: { order?: { order_id?: unknown } } };
   try {

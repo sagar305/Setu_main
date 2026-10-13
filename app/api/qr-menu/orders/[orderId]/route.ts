@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { cashfreeConfig, getOrder, isOrderId } from "@/lib/cashfree";
-import { licenseForOrder, licenseSecret } from "@/lib/qrMenuOrders";
+import { emailLicenseKey, licenseForOrder, licenseSecret } from "@/lib/qrMenuOrders";
 
 // What the return page polls after Cashfree sends the buyer back. Asks
 // Cashfree directly rather than trusting the redirect, and returns the key once
@@ -39,6 +39,9 @@ export async function GET(
 
   const license = licenseForOrder(order, secret);
   if (license) {
+    // The webhook sends this too; whichever arrives second is de-duplicated.
+    const email = order.customer_details?.customer_email;
+    if (email) await emailLicenseKey(email, license, order.order_id);
     return Response.json({ status: "paid", ...license }, { headers: NO_STORE });
   }
   if (order.order_status === "PAID") {
