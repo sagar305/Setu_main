@@ -40,8 +40,7 @@ export async function GET(
   const license = licenseForOrder(order, secret);
   if (license) {
     // The webhook sends this too; whichever arrives second is de-duplicated.
-    const email = order.customer_details?.customer_email;
-    if (email) await emailLicenseKey(email, license, order.order_id);
+    await emailLicenseKey(order, license);
     return Response.json({ status: "paid", ...license }, { headers: NO_STORE });
   }
   if (order.order_status === "PAID") {

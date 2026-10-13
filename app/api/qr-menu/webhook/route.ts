@@ -44,8 +44,7 @@ export async function POST(request: NextRequest) {
 
   const order = await getOrder(config, orderId);
   const license = order ? licenseForOrder(order, secret) : null;
-  const email = order?.customer_details?.customer_email;
-  if (order && license && email) await emailLicenseKey(email, license, order.order_id);
+  if (order && license) await emailLicenseKey(order, license);
 
   return Response.json({ ok: true });
 }

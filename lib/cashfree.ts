@@ -56,6 +56,8 @@ export type CashfreeOrder = {
   /** ACTIVE until paid, then PAID; EXPIRED or TERMINATED if abandoned. */
   order_status: string;
   order_tags?: Record<string, string> | null;
+  /** ISO timestamp; the invoice date. */
+  created_at?: string;
   payment_session_id?: string;
   customer_details?: { customer_email?: string | null; customer_phone?: string } | null;
 };

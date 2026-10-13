@@ -1,4 +1,5 @@
 import { createHmac } from "node:crypto";
+import { writeFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
 
 // lib/cashfree.ts is server-only; the marker throws outside a server bundle.
@@ -12,7 +13,8 @@ import {
   regionFor,
 } from "@/lib/qrMenuCheckout";
 import { isOrderId, newOrderId, verifyWebhookSignature, type CashfreeOrder } from "@/lib/cashfree";
-import { licenseForOrder, ORDER_PRODUCT_TAG } from "@/lib/qrMenuOrders";
+import { licenseEmailHtml, licenseForOrder, ORDER_PRODUCT_TAG } from "@/lib/qrMenuOrders";
+import { buildInvoicePdf, invoiceNumber, splitInclusiveGst } from "@/lib/qrMenuInvoice";
 
 const SECRET = "shared-test-vector-secret";
 
@@ -130,5 +132,57 @@ describe("paid orders", () => {
     expect(licenseForOrder(order({ order_status: "ACTIVE" }), SECRET)).toBeNull();
     expect(licenseForOrder(order({ order_tags: { product: "other", billing: "yearly" } }), SECRET)).toBeNull();
     expect(licenseForOrder(order({ order_tags: null }), SECRET)).toBeNull();
+  });
+});
+
+describe("invoice", () => {
+  it("numbers invoices stably per order", () => {
+    const date = new Date("2026-10-13T10:00:00Z");
+    expect(invoiceNumber("qrm_abc_0123456789abcdef", date)).toBe("SQM-20261013-89ABCDEF");
+    expect(invoiceNumber("qrm_abc_0123456789abcdef", date)).toBe(
+      invoiceNumber("qrm_abc_0123456789abcdef", date)
+    );
+  });
+
+  it("splits a GST-inclusive price without changing the total", () => {
+    for (const amount of [49, 499, 1]) {
+      const { taxable, cgst, sgst } = splitInclusiveGst(amount);
+      expect(Math.round((taxable + cgst + sgst) * 100) / 100).toBe(amount);
+    }
+    expect(splitInclusiveGst(499)).toEqual({ taxable: 422.88, cgst: 38.06, sgst: 38.06 });
+  });
+
+  it("builds a PDF", () => {
+    const pdf = buildInvoicePdf({
+      orderId: "qrm_mg8x2k1a_0123456789abcdef01234567",
+      issuedAt: new Date("2026-10-13T10:00:00Z"),
+      billing: "yearly",
+      days: 365,
+      amount: 499,
+      currency: "INR",
+      customerEmail: "owner@example.com",
+      customerPhone: "9876543210",
+    });
+    expect(pdf.subarray(0, 5).toString()).toBe("%PDF-");
+    if (process.env.INVOICE_SAMPLE_PATH) {
+      writeFileSync(process.env.INVOICE_SAMPLE_PATH, pdf);
+    }
+  });
+});
+
+describe("license email", () => {
+  it("shows the key, amount and invoice, escaping anything it is handed", () => {
+    const html = licenseEmailHtml({
+      license: { key: VECTOR.key, days: 365, billing: "yearly" },
+      settingsUrl: "https://app.qr-menu.setutechnology.com/app/settings",
+      invoiceNo: "SQM-20261013-01234567",
+      amount: "INR 499.00",
+      orderId: "qrm_<x>",
+    });
+    expect(html).toContain(VECTOR.key);
+    expect(html).toContain("INR 499.00");
+    expect(html).toContain("SQM-20261013-01234567");
+    expect(html).toContain("qrm_&#60;x&#62;");
+    if (process.env.EMAIL_SAMPLE_PATH) writeFileSync(process.env.EMAIL_SAMPLE_PATH, html);
   });
 });
