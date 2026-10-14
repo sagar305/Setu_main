@@ -97,3 +97,18 @@ export function pharmacySoftwareEnabled(): boolean {
 export function repairSoftwareEnabled(): boolean {
   return enabled(process.env.REPAIR_SOFTWARE_ENABLED);
 }
+
+/**
+ * Buying Setu QR Menu time: the Buy button and buy box on /products/qr-menu,
+ * the /products/qr-menu/payment return page, and the /api/qr-menu/* checkout,
+ * order, region and webhook routes.
+ *
+ * Off unless "true". When off the page shows no way to pay, the return page
+ * 404s and the API routes answer 404 — so nothing can be charged even if
+ * Cashfree keys are present. Set QR_MENU_PAYMENTS_ENABLED=true (with the
+ * Cashfree keys and QR_MENU_LICENSE_SECRET) and redeploy to start selling.
+ * The pages read it at build time; the API routes at request time.
+ */
+export function qrMenuPaymentsEnabled(): boolean {
+  return enabled(process.env.QR_MENU_PAYMENTS_ENABLED);
+}

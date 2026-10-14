@@ -47,8 +47,10 @@ import {
   BadgeCheck,
   CalendarClock,
   KeyRound,
+  ShoppingCart,
 } from "lucide-react";
 import { getQrMenuContent, getPricingPlan } from "@/lib/content";
+import { qrMenuPaymentsEnabled } from "@/lib/featureFlags";
 import { planOffers } from "@/lib/schema";
 import {
   QR_MENU_APP_ENABLED,
@@ -58,6 +60,7 @@ import {
   QR_MENU_SIGNUP_URL,
 } from "@/lib/premiumLinks";
 import { PageHero } from "@/components/PageHero";
+import { QrMenuBuy } from "@/components/QrMenuBuy";
 import { QrMenuHeroVisual } from "@/components/QrMenuHeroVisual";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
@@ -282,6 +285,15 @@ export default function QrMenuProductPage() {
               Try the live demo
             </a>
             <SignupCta className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5" />
+            {qrMenuPaymentsEnabled() && (
+              <a
+                href="#buy"
+                className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Buy
+              </a>
+            )}
           </div>
           {!QR_MENU_APP_ENABLED && (
             <p className="mt-3 text-center text-xs text-muted">
@@ -504,6 +516,13 @@ export default function QrMenuProductPage() {
             <p className="mt-6 text-xs text-muted">{content.pricing.note}</p>
           </div>
         </FadeIn>
+
+        {/* scroll-mt keeps the box clear of the sticky nav on a #buy link */}
+        {qrMenuPaymentsEnabled() && (
+          <div id="buy" className="mt-8 scroll-mt-24">
+            <QrMenuBuy />
+          </div>
+        )}
       </section>
 
       {/* Free vs premium */}
