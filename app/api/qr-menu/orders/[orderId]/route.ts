@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { cashfreeConfig, getOrder, isOrderId } from "@/lib/cashfree";
 import { emailLicenseKey, licenseForOrder, licenseSecret } from "@/lib/qrMenuOrders";
+import { paymentsDisabledResponse } from "@/lib/qrMenuPaymentsGate";
 
 // What the return page polls after Cashfree sends the buyer back. Asks
 // Cashfree directly rather than trusting the redirect, and returns the key once
@@ -15,6 +16,8 @@ export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ orderId: string }> }
 ) {
+  const disabled = paymentsDisabledResponse();
+  if (disabled) return disabled;
   const { orderId } = await params;
   const config = cashfreeConfig();
   const secret = licenseSecret();

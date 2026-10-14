@@ -11,6 +11,7 @@ import {
   regionFor,
 } from "@/lib/qrMenuCheckout";
 import { licenseSecret, ORDER_PRODUCT_TAG } from "@/lib/qrMenuOrders";
+import { paymentsDisabledResponse } from "@/lib/qrMenuPaymentsGate";
 
 // Starts a Cashfree order for QR Menu time and hands the page the session id
 // it opens checkout with. The amount is set here from pricing.json — nothing
@@ -19,6 +20,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  const disabled = paymentsDisabledResponse();
+  if (disabled) return disabled;
   const config = cashfreeConfig();
   if (!config || !licenseSecret()) {
     return Response.json(

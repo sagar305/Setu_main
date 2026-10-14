@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { cashfreeConfig, getOrder, isOrderId, verifyWebhookSignature } from "@/lib/cashfree";
 import { emailLicenseKey, licenseForOrder, licenseSecret } from "@/lib/qrMenuOrders";
+import { paymentsDisabledResponse } from "@/lib/qrMenuPaymentsGate";
 
 // Cashfree's payment webhook. Its only job is emailing the license key, so the
 // buyer has it even if they closed the tab before the return page loaded.
@@ -13,6 +14,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  const disabled = paymentsDisabledResponse();
+  if (disabled) return disabled;
   const config = cashfreeConfig();
   const secret = licenseSecret();
   if (!config || !secret) return Response.json({ error: "not_configured" }, { status: 503 });
