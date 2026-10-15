@@ -51,7 +51,10 @@ function browserTimezone(): string | null {
  * Cashfree returns to /products/qr-menu/payment, which shows the license key.
  */
 export function QrMenuBuy() {
+  // The price list, and separately where the buyer is: someone abroad pays in
+  // rupees while USD charging is off, but still has a foreign phone number.
   const [regionId, setRegionId] = useState<PricingRegionId | null>(null);
+  const [buyerRegion, setBuyerRegion] = useState<PricingRegionId>("IN");
   const [billing, setBilling] = useState<Billing>("yearly");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -63,11 +66,17 @@ export function QrMenuBuy() {
     let cancelled = false;
     fetch(`/api/qr-menu/region${timezone ? `?tz=${encodeURIComponent(timezone)}` : ""}`)
       .then((response) => (response.ok ? response.json() : Promise.reject()))
-      .then((data: { region?: PricingRegionId }) => {
-        if (!cancelled) setRegionId(data.region === "IN" ? "IN" : "INTL");
+      .then((data: { region?: PricingRegionId; buyerRegion?: PricingRegionId }) => {
+        if (cancelled) return;
+        setRegionId(data.region === "INTL" ? "INTL" : "IN");
+        setBuyerRegion(data.buyerRegion === "INTL" ? "INTL" : "IN");
       })
       .catch(() => {
-        if (!cancelled) setRegionId(regionFor(null, timezone));
+        if (cancelled) return;
+        // Rupees are the one price list that always works; the server
+        // decides the real one at checkout either way.
+        setRegionId("IN");
+        setBuyerRegion(regionFor(null, timezone));
       });
     return () => {
       cancelled = true;
@@ -121,7 +130,7 @@ export function QrMenuBuy() {
           Buy a license key
         </h3>
         <p className="text-xs text-muted">
-          Prices for {regionId === "IN" ? "India" : "your region"} ({region.currency}), incl. GST
+          Prices in {region.currency}, incl. GST
         </p>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-muted">
@@ -182,7 +191,7 @@ export function QrMenuBuy() {
             required
             autoComplete="tel"
             inputMode="tel"
-            placeholder={regionId === "IN" ? "98765 43210" : "+1 555 123 4567"}
+            placeholder={buyerRegion === "IN" ? "98765 43210" : "+1 555 123 4567"}
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
             className="mt-1 w-full rounded-lg border border-muted-line/40 px-3 py-2.5 text-ink outline-none focus:border-indigo"

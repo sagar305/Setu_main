@@ -62,6 +62,17 @@ export type CashfreeOrder = {
   customer_details?: { customer_email?: string | null; customer_phone?: string } | null;
 };
 
+/** A non-2xx answer from Cashfree, keeping its own explanation for the buyer and the logs. */
+export class CashfreeError extends Error {
+  constructor(
+    readonly status: number,
+    readonly cashfreeMessage: string,
+    context: string
+  ) {
+    super(`Cashfree ${context} failed (${status}): ${cashfreeMessage}`);
+  }
+}
+
 async function call<T>(config: CashfreeConfig, path: string, init: RequestInit = {}): Promise<T> {
   const response = await fetch(`${baseUrl(config.mode)}${path}`, {
     ...init,
@@ -76,7 +87,11 @@ async function call<T>(config: CashfreeConfig, path: string, init: RequestInit =
   });
   const data = (await response.json().catch(() => null)) as T & { message?: string };
   if (!response.ok) {
-    throw new Error(`Cashfree ${init.method ?? "GET"} ${path} failed (${response.status}): ${data?.message ?? "no message"}`);
+    throw new CashfreeError(
+      response.status,
+      data?.message ?? "no message",
+      `${init.method ?? "GET"} ${path}`
+    );
   }
   return data;
 }
@@ -120,7 +135,7 @@ export async function getOrder(config: CashfreeConfig, orderId: string): Promise
   try {
     return await call<CashfreeOrder>(config, `/orders/${encodeURIComponent(orderId)}`);
   } catch (error) {
-    if (error instanceof Error && /\(404\)/.test(error.message)) return null;
+    if (error instanceof CashfreeError && error.status === 404) return null;
     throw error;
   }
 }

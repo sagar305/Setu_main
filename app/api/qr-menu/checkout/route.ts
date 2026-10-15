@@ -1,5 +1,12 @@
 import { NextRequest } from "next/server";
-import { cashfreeConfig, createOrder, customerIdFor, newOrderId } from "@/lib/cashfree";
+import {
+  CashfreeError,
+  cashfreeConfig,
+  createOrder,
+  customerIdFor,
+  newOrderId,
+} from "@/lib/cashfree";
+import { qrMenuUsdEnabled } from "@/lib/featureFlags";
 import {
   BILLING_DAYS,
   countryFromHeaders,
@@ -7,6 +14,7 @@ import {
   isCheckoutEmail,
   normaliseCheckoutPhone,
   qrMenuAmounts,
+  pricingRegion,
   qrMenuRegion,
   regionFor,
 } from "@/lib/qrMenuCheckout";
@@ -46,16 +54,19 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: "Enter a valid email address." }, { status: 400 });
   }
 
-  const regionId = regionFor(
+  // Where the buyer is decides how their phone number is read; what they are
+  // charged in can differ while USD charging is off.
+  const buyerRegion = regionFor(
     countryFromHeaders(request.headers),
     typeof timezone === "string" ? timezone : null
   );
-  const cleanPhone = normaliseCheckoutPhone(typeof phone === "string" ? phone : "", regionId);
+  const regionId = pricingRegion(buyerRegion, qrMenuUsdEnabled());
+  const cleanPhone = normaliseCheckoutPhone(typeof phone === "string" ? phone : "", buyerRegion);
   if (!cleanPhone) {
     return Response.json(
       {
         error:
-          regionId === "IN"
+          buyerRegion === "IN"
             ? "Enter a 10-digit Indian mobile number."
             : "Enter your phone number with its country code.",
       },
@@ -87,8 +98,11 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("QR Menu checkout failed:", error);
+    // Cashfree's own reason ("order_currency : ...", "customer_phone : ...") is
+    // what tells a buyer or us what to fix; anything else stays generic.
+    const reason = error instanceof CashfreeError ? ` (${error.cashfreeMessage})` : "";
     return Response.json(
-      { error: "Could not start the payment. Please try again in a minute." },
+      { error: `Could not start the payment${reason}. Please try again in a minute.` },
       { status: 502 }
     );
   }
