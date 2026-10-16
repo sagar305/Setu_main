@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { KeyRound, Loader2, ShoppingCart } from "lucide-react";
 import { formatPrice, yearlySavingPercent, type PricingRegionId } from "@/lib/pricing";
 import {
@@ -12,8 +13,23 @@ import {
   type Billing,
 } from "@/lib/qrMenuCheckout";
 
+/**
+ * What a "_modal" checkout settles with. `error` is set when the buyer closes
+ * the popup or the payment errors; `redirect` when the popup could not open
+ * (some in-app browsers) and Cashfree goes to the return URL instead;
+ * `paymentDetails` once a payment finished, whether or not it succeeded.
+ */
+type CashfreeCheckoutResult = {
+  error?: { message?: string };
+  redirect?: boolean;
+  paymentDetails?: { paymentMessage?: string };
+};
+
 type CashfreeCheckout = {
-  checkout: (options: { paymentSessionId: string; redirectTarget?: "_self" }) => Promise<unknown>;
+  checkout: (options: {
+    paymentSessionId: string;
+    redirectTarget?: "_modal";
+  }) => Promise<CashfreeCheckoutResult>;
 };
 
 declare global {
@@ -45,12 +61,31 @@ function browserTimezone(): string | null {
   }
 }
 
+function paymentPage(orderId: string): string {
+  return `/products/qr-menu/payment?order_id=${encodeURIComponent(orderId)}`;
+}
+
+/** Null when the order could not be checked; the buyer can still retry. */
+async function orderStatus(orderId: string): Promise<string | null> {
+  try {
+    const response = await fetch(`/api/qr-menu/orders/${encodeURIComponent(orderId)}`, {
+      cache: "no-store",
+    });
+    const data = await response.json().catch(() => ({}));
+    return typeof data.status === "string" ? data.status : null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Buys QR Menu time. The region is detected rather than chosen, the buyer only
- * picks monthly or yearly, and Cashfree checkout opens in this tab. Afterwards
- * Cashfree returns to /products/qr-menu/payment, which shows the license key.
+ * picks monthly or yearly, and Cashfree checkout opens as a popup over this
+ * page, so the buyer never leaves the site. Afterwards the page moves on to
+ * /products/qr-menu/payment, which shows the license key.
  */
 export function QrMenuBuy() {
+  const router = useRouter();
   // The price list, and separately where the buyer is: someone abroad pays in
   // rupees while USD charging is off, but still has a foreign phone number.
   const [regionId, setRegionId] = useState<PricingRegionId | null>(null);
@@ -97,10 +132,27 @@ export function QrMenuBuy() {
       if (!response.ok) throw new Error(data.error || "Could not start the payment.");
 
       const Cashfree = await loadCashfree();
-      await Cashfree({ mode: data.mode }).checkout({
+      const result = await Cashfree({ mode: data.mode }).checkout({
         paymentSessionId: data.paymentSessionId,
-        redirectTarget: "_self",
+        redirectTarget: "_modal",
       });
+
+      // Cashfree is taking the buyer to the return URL itself.
+      if (result.redirect) return;
+      // Paid or not, the payment page asks Cashfree and shows the outcome.
+      if (result.paymentDetails) {
+        router.push(paymentPage(data.orderId));
+        return;
+      }
+      // Closed or errored. A UPI payment can still land after the popup is
+      // closed, so look before calling it unpaid.
+      if ((await orderStatus(data.orderId)) === "paid") {
+        router.push(paymentPage(data.orderId));
+        return;
+      }
+      throw new Error(
+        "The payment was not completed. You can try again — if money did leave your account, the key is emailed to you once Cashfree confirms it."
+      );
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : "Could not start the payment.");
       setSubmitting(false);
@@ -219,7 +271,8 @@ export function QrMenuBuy() {
         Buy {billing} · {formatPrice(amounts[billing], region)}
       </button>
       <p className="mt-3 text-xs text-muted">
-        Secure payment by Cashfree. Keys are one-time payments that never renew. See the{" "}
+        Secure payment by Cashfree, without leaving this page. Keys are one-time payments
+        that never renew. See the{" "}
         <a href="/refund-policy" className="underline hover:text-ink">
           refund &amp; cancellation policy
         </a>
