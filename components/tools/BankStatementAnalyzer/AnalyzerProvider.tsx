@@ -9,6 +9,7 @@
 // No Zustand (decision 2) — feature hooks over React state, as the repo does.
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import {
   createContext,
   useCallback,
@@ -65,7 +66,7 @@ import {
 } from "@/lib/bankStatement/ai/approval";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 import { merchantKey } from "@/lib/bankStatement/ai/narration";
-import { slugifyCategory } from "@/lib/bankStatement/classification/categories";
+import { categoryLabel, slugifyCategory } from "@/lib/bankStatement/classification/categories";
 import { markDuplicates } from "@/lib/bankStatement/normalization/deduplicator";
 import { mapInChunks } from "@/lib/bankStatement/utils/scheduler";
 
@@ -149,7 +150,7 @@ export function useAnalyzer(): AnalyzerContextValue {
 }
 
 export function AnalyzerProvider({ children }: { children: ReactNode }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const [state, setState] = useState<AnalyzerState>({
     loaded: false,
     statements: [],
@@ -588,12 +589,14 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       transactions: Transaction[];
     }) => {
       const name = input.name.trim();
-      if (name === "") return { created: false, categoryId: "", rows: 0, reason: "A name is required." };
+      if (name === "") {
+        return { created: false, categoryId: "", rows: 0, reason: t("bsSgNameRequired") };
+      }
 
       const current = stateRef.current;
       const categoryId = slugifyCategory(name);
       if (categoryId === "") {
-        return { created: false, categoryId: "", rows: 0, reason: "That name cannot be used." };
+        return { created: false, categoryId: "", rows: 0, reason: t("bsSgNameUnusable") };
       }
 
       const clash = current.categories.find((category) => category.id === categoryId);
@@ -602,7 +605,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
           created: false,
           categoryId,
           rows: 0,
-          reason: `"${clash.name}" already exists — move these to it instead, or pick another name.`,
+          reason: fill(t("bsSgNameClash"), { name: categoryLabel(clash, lang) }),
         };
       }
 

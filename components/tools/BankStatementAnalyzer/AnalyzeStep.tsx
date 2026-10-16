@@ -4,6 +4,7 @@
 // Any statement that did not parse cleanly is declared above the numbers, not
 // buried under them.
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import Link from "next/link";
 import { AlertTriangle } from "lucide-react";
@@ -17,6 +18,7 @@ import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 import type { Transaction } from "@/lib/bankStatement/types";
 
 export function AnalyzeStep() {
+  const { t } = useI18n();
   const { analysis, activeStatements, settings, actions, loaded, statements, activeTransactions } =
     useAnalyzer();
   const { code: currency } = usePreferredCurrency();
@@ -108,18 +110,18 @@ export function AnalyzeStep() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <CategoryBars
-          title="Expenses by category"
+          title={t("bsChExpensesByCategory")}
           rows={analysis.expenseCategories}
           currency={currency}
           direction="DEBIT"
-          emptyMessage="No debits in this period."
+          emptyMessage={t("bsChNoDebits")}
         />
         <CategoryBars
-          title="Income by category"
+          title={t("bsChIncomeByCategory")}
           rows={analysis.incomeCategories}
           currency={currency}
           direction="CREDIT"
-          emptyMessage="No credits in this period."
+          emptyMessage={t("bsChNoCredits")}
         />
       </div>
 

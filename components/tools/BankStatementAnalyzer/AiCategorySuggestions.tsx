@@ -18,7 +18,9 @@ import { useEffect, useState } from "react";
 import { FolderPlus, Sparkles } from "lucide-react";
 import { Card, Field, PrimaryButton, SecondaryButton, Select, TextInput } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
-import { groupLabel } from "@/lib/bankStatement/classification/categories";
+import { groupLabel, GROUP_ORDER } from "@/lib/bankStatement/classification/categories";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import type { CategorySuggestion } from "@/lib/bankStatement/ai/categorySuggestion";
 import type { CategoryGroup } from "@/lib/bankStatement/types";
 
@@ -31,6 +33,7 @@ export function AiCategorySuggestions({
   onDismiss: (key: string) => void;
   onAccepted: (key: string) => void;
 }) {
+  const { lang, t } = useI18n();
   const { actions } = useAnalyzer();
   const [created, setCreated] = useState<{ name: string; rows: number } | null>(null);
 
@@ -43,27 +46,26 @@ export function AiCategorySuggestions({
       <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
         <Sparkles className="h-4 w-4 text-indigo" aria-hidden="true" />
         {suggestions.length > 0
-          ? `${rows.toLocaleString("en-IN")} transaction${rows === 1 ? "" : "s"} do not fit any category you have`
-          : "Category added"}
+          ? fill(t(rows === 1 ? "bsSgDontFit1" : "bsSgDontFitN"), {
+              n: rows.toLocaleString(intlLocaleFor(lang)),
+            })
+          : t("bsSgCategoryAdded")}
       </h3>
 
       <p className="mt-1 text-sm text-muted">
-        {suggestions.length > 0 ? (
-          <>
-            They fell into {suggestions.length === 1 ? "a group" : `${suggestions.length} groups`} that
-            look related to each other but not to anything on your list. Adding a category is
-            optional — you can also leave them uncategorised or place them by hand.
-          </>
-        ) : (
-          <>Everything in that group has been moved across.</>
-        )}
+        {suggestions.length > 0
+          ? fill(t(suggestions.length === 1 ? "bsSgFellInto1" : "bsSgFellIntoN"), {
+              n: suggestions.length,
+            })
+          : t("bsSgMovedAcross")}
       </p>
 
       {created ? (
         <p className="mt-3 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-          <strong>{created.name}</strong> created, and {created.rows.toLocaleString("en-IN")}{" "}
-          transaction{created.rows === 1 ? "" : "s"} moved into it. Rules were saved for those
-          merchants, so the next statement will place them without the model.
+          {fill(t(created.rows === 1 ? "bsSgCreated1" : "bsSgCreatedN"), {
+            name: created.name,
+            n: created.rows.toLocaleString(intlLocaleFor(lang)),
+          })}
         </p>
       ) : null}
 
@@ -107,7 +109,7 @@ function SuggestionRow({
     group: CategoryGroup
   ) => Promise<string | undefined>;
 }) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const [name, setName] = useState(suggestion.name);
   const [description, setDescription] = useState(suggestion.description);
   const [group, setGroup] = useState<CategoryGroup>(suggestion.group);
@@ -125,28 +127,32 @@ function SuggestionRow({
   return (
     <li className="rounded-xl border border-muted-line/30 p-4">
       <p className="text-sm text-muted">
-        <strong className="text-ink">{suggestion.merchantCount}</strong> merchant
-        {suggestion.merchantCount === 1 ? "" : "s"} ·{" "}
-        <strong className="text-ink">{suggestion.transactions.length}</strong> transaction
-        {suggestion.transactions.length === 1 ? "" : "s"}
+        {fill(t(suggestion.merchantCount === 1 ? "bsSgMerchants1" : "bsSgMerchantsN"), {
+          n: suggestion.merchantCount,
+        })}{" "}
+        ·{" "}
+        {fill(
+          t(suggestion.transactions.length === 1 ? "bsAudTxnCount1" : "bsAudTxnCountN"),
+          { n: suggestion.transactions.length }
+        )}
       </p>
       <p className="mt-1 text-xs text-muted">{suggestion.examples.join(" · ")}</p>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_10rem]">
-        <Field label="Category name">
+        <Field label={t("bsSgCategoryName")}>
           <TextInput
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder={
               suggestion.name === ""
-                ? "These merchants share no obvious word — you name it"
-                : "Name this category"
+                ? t("bsSgNoWord")
+                : t("bsSgNameThis")
             }
           />
         </Field>
-        <Field label="Group">
+        <Field label={t("bsCmGroup")}>
           <Select value={group} onChange={(event) => setGroup(event.target.value as CategoryGroup)}>
-            {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((option) => (
+            {GROUP_ORDER.map((option) => (
               <option key={option} value={option}>
                 {groupLabel(option, lang)}
               </option>
@@ -156,17 +162,15 @@ function SuggestionRow({
       </div>
 
       <div className="mt-3">
-        <Field label="What belongs here">
+        <Field label={t("bsSgWhatBelongs")}>
           <TextInput
             value={description}
             onChange={(event) => setDescription(event.target.value)}
-            placeholder="Describe it in a line — this is what future transactions are matched against"
+            placeholder={t("bsSgDescPlaceholder")}
           />
         </Field>
-        <p className="mt-1 text-xs text-muted">
-          This sentence is what the model compares transactions to, so it matters more than the
-          name. It has been filled in from the merchants above — edit it to suit.
-        </p>
+        <p className="mt-1 text-xs text-muted">{t("bsSgDescNote")}</p>
+        <p className="mt-1 text-xs text-muted">{t("bsCmDescEnglish")}</p>
       </div>
 
       {problem ? (
@@ -187,11 +191,11 @@ function SuggestionRow({
         >
           <span className="flex items-center gap-1">
             <FolderPlus className="h-3.5 w-3.5" aria-hidden="true" />
-            {busy ? "Creating…" : "Create and move them"}
+            {busy ? t("bsSgCreating") : t("bsSgCreateMove")}
           </span>
         </PrimaryButton>
         <SecondaryButton className="!px-3 !py-1.5 !text-xs" onClick={onDismiss}>
-          Not a category
+          {t("bsSgNotACategory")}
         </SecondaryButton>
       </div>
     </li>
