@@ -5,6 +5,8 @@ import { ToolBody } from "@/components/tools/ToolBody";
 import { ToolSchema } from "@/components/toolkit/ToolSchema";
 import { SuggestedTools } from "@/components/toolkit/SuggestedTools";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
+import { Faq } from "@/components/Faq";
+import { getToolsContent } from "@/lib/content";
 
 /**
  * Every tool page, in every language it is published in.
@@ -17,15 +19,16 @@ import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
  * the copy comes from content/en/tools.json, overlaid with the translation for
  * whichever language the route serves.
  *
- * The FAQ stays JSON-LD only, as it was — these pages have never shown the
- * questions on the page itself, and this change is about where the copy lives,
- * not about adding a section to thirty-five pages.
+ * The FAQ is shown on the page as well as published as FAQPage JSON-LD.
+ * Google only honours FAQ markup whose questions and answers a reader can see,
+ * and the answers are most of the explanatory text these pages have.
  */
 export function ToolPageShell({
   item,
   children,
   lang = "en",
   eyebrow,
+  faqHeadline = getToolsContent().labels.faqHeadline,
   schema = false,
   suggested = false,
 }: {
@@ -35,12 +38,14 @@ export function ToolPageShell({
   lang?: LanguageCode;
   /** "Free Tool" in the route's language. */
   eyebrow: string;
+  /** "Frequently asked questions" in the route's language. */
+  faqHeadline?: string;
   /** Publish the SoftwareApplication block as well; not every page does. */
   schema?: boolean;
   /** Show the suggested-tools strip; not every page does. */
   suggested?: boolean;
 }) {
-  const faqSchema = item.faq
+  const faqSchema = item.faq?.items.length
     ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -77,6 +82,10 @@ export function ToolPageShell({
       <section className="mx-auto max-w-6xl px-6 pb-12">{children}</section>
 
       {item.body && <ToolBody blocks={item.body} />}
+
+      {item.faq && item.faq.items.length > 0 && (
+        <Faq headline={faqHeadline} items={item.faq.items} />
+      )}
 
       {suggested && (
         <section className="mx-auto max-w-4xl px-6 py-16">

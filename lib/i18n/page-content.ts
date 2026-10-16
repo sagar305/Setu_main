@@ -47,3 +47,14 @@ export function getLocalizedContent<T>(
   cache.set(id, merged);
   return merged;
 }
+
+/**
+ * The translation file for a page exactly as written, before any English fills
+ * its gaps — for when a page needs to know what the translation itself covers.
+ * Null when there is no file for that language.
+ */
+export function getTranslationPatch(key: PageKey | "site", lang: LanguageCode): unknown {
+  const id = `${key}:${lang}:raw`;
+  if (!cache.has(id)) cache.set(id, loadTranslation(key, lang));
+  return cache.get(id) ?? null;
+}

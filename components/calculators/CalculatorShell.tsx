@@ -19,6 +19,7 @@ import { toolApplicationSchema } from "@/lib/schema";
 import { CalculatorReviewPrompt } from "@/components/review/CalculatorReviewPrompt";
 import { GlossaryText } from "@/components/glossary/GlossaryText";
 import { GlossaryTermsStrip } from "@/components/glossary/GlossaryTermsStrip";
+import { ToolBody } from "@/components/tools/ToolBody";
 
 export function CalculatorShell({
   item,
@@ -67,7 +68,12 @@ export function CalculatorShell({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(applicationSchema) }}
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {item.faq.items.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <PageHero eyebrow={item.hero.eyebrow} headline={item.hero.headline} subheadline={item.hero.subheadline} />
 
@@ -93,6 +99,12 @@ export function CalculatorShell({
           ))}
         </FadeIn>
 
+        {item.guide && item.guide.length > 0 && (
+          <FadeIn className="mt-12">
+            <ToolBody blocks={item.guide} layout="column" />
+          </FadeIn>
+        )}
+
         <FadeIn className="mt-10">
           <GlossaryTermsStrip type="calculator" slug={item.slug} />
         </FadeIn>
@@ -107,7 +119,7 @@ export function CalculatorShell({
         </FadeIn>
       </section>
 
-      <Faq headline={item.faq.headline} items={item.faq.items} />
+      {item.faq.items.length > 0 && <Faq headline={item.faq.headline} items={item.faq.items} />}
 
       {related.length > 0 && (
         <section className="border-t border-muted-line/20 py-16">

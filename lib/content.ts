@@ -39,7 +39,14 @@ export type ClinicContent = typeof clinicData;
 export type WorkflowContent = typeof workflowData;
 export type TuitionContent = typeof tuitionData;
 export type CalculatorsContent = typeof calculatorsData;
-export type CalculatorItem = CalculatorsContent["items"][number];
+/**
+ * One calculator. `guide` is the formula, how-to, worked example and tips that
+ * sit under the "about" copy — the same block shapes tool pages use, so one
+ * renderer covers both.
+ */
+export type CalculatorItem = Omit<CalculatorsContent["items"][number], "guide"> & {
+  guide?: ToolBodyBlock[];
+};
 export type ToolsContent = typeof toolsData;
 
 /**

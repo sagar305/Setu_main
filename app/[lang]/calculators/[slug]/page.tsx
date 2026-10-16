@@ -4,7 +4,8 @@ import { CalculatorShell } from "@/components/calculators/CalculatorShell";
 import { CALCULATOR_TOOLS } from "@/components/calculators/tools/registry";
 import { getCalculatorsContent, type CalculatorItem } from "@/lib/content";
 import { isLanguageCode, type LanguageCode } from "@/lib/i18n/config";
-import { getLocalizedContent } from "@/lib/i18n/page-content";
+import { getLocalizedContent, getTranslationPatch } from "@/lib/i18n/page-content";
+import { keepTranslatedOnly } from "@/lib/i18n/translated-only";
 import {
   itemLanguageAlternates,
   itemLocalesFor,
@@ -48,7 +49,17 @@ function resolve(lang: string, slug: string): { lang: LanguageCode; item: Calcul
   // The whole page is merged at once rather than item by item, so an item's
   // copy falls back to English exactly as every other translated page does.
   const localized = getLocalizedContent("calculators", lang, english);
-  return { lang, item: localized.items[index] };
+  // The guide and any FAQ answers added since the translation was made appear
+  // only once they are translated; the calculator itself is always there.
+  const patch = (getTranslationPatch("calculators", lang) as { items?: unknown[] } | null)
+    ?.items?.[index];
+  return {
+    lang,
+    item: keepTranslatedOnly(localized.items[index] as CalculatorItem, patch, [
+      ["guide"],
+      ["faq", "items"],
+    ]),
+  };
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {

@@ -17,7 +17,28 @@ import { RichText } from "@/components/RichText";
  * language by the time they arrive — localizeLinks rewrites them as the copy is
  * loaded, so nothing in this file has to know which language it is rendering.
  */
-export function ToolBody({ blocks }: { blocks: ToolBodyBlock[] }) {
+export function ToolBody({
+  blocks,
+  layout = "bands",
+}: {
+  blocks: ToolBodyBlock[];
+  /**
+   * "column" keeps every block in order inside the caller's own column — how a
+   * calculator's guide reads, where the formula has to come before the worked
+   * example that uses it.
+   */
+  layout?: "bands" | "column";
+}) {
+  if (layout === "column") {
+    return (
+      <div className="space-y-10">
+        {blocks.map((block) => (
+          <Block key={block.headline} block={block} />
+        ))}
+      </div>
+    );
+  }
+
   const bands = blocks.filter((block) => block.kind === "features" || block.kind === "prose");
   const stacked = blocks.filter((block) => block.kind !== "features" && block.kind !== "prose");
 
