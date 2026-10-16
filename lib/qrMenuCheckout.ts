@@ -48,6 +48,16 @@ export function regionFor(country?: string | null, timezone?: string | null): Pr
   return timezone && INDIAN_TIMEZONES.has(timezone) ? "IN" : "INTL";
 }
 
+/**
+ * The price list to charge: the buyer's own region, except that outside India
+ * falls back to rupees while USD charging is switched off (see
+ * qrMenuUsdEnabled in lib/featureFlags.ts — passed in to keep this file
+ * client-safe).
+ */
+export function pricingRegion(buyer: PricingRegionId, usdEnabled: boolean): PricingRegionId {
+  return buyer === "INTL" && !usdEnabled ? "IN" : buyer;
+}
+
 /** The country header set by whichever host is in front of the site, if any. */
 export function countryFromHeaders(headers: Headers): string | null {
   return (

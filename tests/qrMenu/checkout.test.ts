@@ -9,6 +9,7 @@ import { issueLicenseKey, readLicenseKey, MAX_LICENSE_DAYS } from "@/lib/qrMenuL
 import {
   BILLING_DAYS,
   normaliseCheckoutPhone,
+  pricingRegion,
   qrMenuAmounts,
   regionFor,
 } from "@/lib/qrMenuCheckout";
@@ -184,5 +185,14 @@ describe("license email", () => {
     expect(html).toContain("SQM-20261013-01234567");
     expect(html).toContain("qrm_&#60;x&#62;");
     if (process.env.EMAIL_SAMPLE_PATH) writeFileSync(process.env.EMAIL_SAMPLE_PATH, html);
+  });
+});
+
+describe("pricing region", () => {
+  it("charges buyers abroad in rupees until USD is switched on", () => {
+    expect(pricingRegion("IN", false)).toBe("IN");
+    expect(pricingRegion("INTL", false)).toBe("IN");
+    expect(pricingRegion("INTL", true)).toBe("INTL");
+    expect(pricingRegion("IN", true)).toBe("IN");
   });
 });

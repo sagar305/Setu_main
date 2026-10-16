@@ -112,3 +112,18 @@ export function repairSoftwareEnabled(): boolean {
 export function qrMenuPaymentsEnabled(): boolean {
   return enabled(process.env.QR_MENU_PAYMENTS_ENABLED);
 }
+
+/**
+ * Charging buyers outside India in US dollars.
+ *
+ * Off unless "true", and then everyone pays the Indian (INR) price. Cashfree
+ * only accepts a USD order once international payments are enabled on the
+ * merchant account; until then a USD order is refused and checkout fails. Turn
+ * this on after Cashfree confirms international payments are live.
+ *
+ * Read at request time by the /api/qr-menu routes, so changing it needs no
+ * rebuild — but redeploy anyway so every instance picks it up.
+ */
+export function qrMenuUsdEnabled(): boolean {
+  return enabled(process.env.QR_MENU_USD_ENABLED);
+}

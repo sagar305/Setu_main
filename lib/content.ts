@@ -22,6 +22,7 @@ import teamData from "@/content/en/team.json";
 import pricingData from "@/content/en/pricing.json";
 import privacyData from "@/content/en/privacy.json";
 import termsData from "@/content/en/terms.json";
+import refundPolicyData from "@/content/en/refund-policy.json";
 
 export type Cta = { label: string; href: string };
 
@@ -125,6 +126,10 @@ export function getPrivacyContent(): LegalContent {
 
 export function getTermsContent(): LegalContent {
   return termsData as LegalContent;
+}
+
+export function getRefundPolicyContent(): LegalContent {
+  return refundPolicyData as LegalContent;
 }
 
 export function getSiteContent(): SiteContent {
