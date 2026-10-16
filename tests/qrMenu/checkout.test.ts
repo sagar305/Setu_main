@@ -71,8 +71,8 @@ describe("license keys", () => {
 describe("checkout", () => {
   it("sells 30 and 365 days at the published prices", () => {
     expect(BILLING_DAYS).toEqual({ monthly: 30, yearly: 365 });
-    expect(qrMenuAmounts("IN")).toEqual({ monthly: 49, yearly: 499 });
-    expect(qrMenuAmounts("INTL")).toEqual({ monthly: 0.99, yearly: 9.99 });
+    expect(qrMenuAmounts("IN")).toEqual({ monthly: 99, yearly: 999 });
+    expect(qrMenuAmounts("INTL")).toEqual({ monthly: 1.99, yearly: 19.99 });
   });
 
   it("picks the region from the country, then the timezone", () => {

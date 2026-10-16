@@ -383,12 +383,12 @@
       "trial": "First year free",
       "price": {
         "IN": {
-          "monthly": 49,
-          "yearly": 499
+          "monthly": 99,
+          "yearly": 999
         },
         "INTL": {
-          "monthly": 0.99,
-          "yearly": 9.99
+          "monthly": 1.99,
+          "yearly": 19.99
         }
       },
       "features": [

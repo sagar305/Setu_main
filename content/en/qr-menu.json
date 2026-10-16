@@ -303,21 +303,21 @@
         "region": "India",
         "currency": "INR",
         "symbol": "₹",
-        "monthly": "49",
-        "yearly": "499",
-        "monthlyLabel": "₹49",
-        "yearlyLabel": "₹499",
-        "saveLabel": "Save ₹89 a year"
+        "monthly": "99",
+        "yearly": "999",
+        "monthlyLabel": "₹99",
+        "yearlyLabel": "₹999",
+        "saveLabel": "Save ₹189 a year"
       },
       {
         "region": "Rest of the world",
         "currency": "USD",
         "symbol": "$",
-        "monthly": "0.99",
-        "yearly": "9.99",
-        "monthlyLabel": "$0.99",
-        "yearlyLabel": "$9.99",
-        "saveLabel": "Save $1.89 a year"
+        "monthly": "1.99",
+        "yearly": "19.99",
+        "monthlyLabel": "$1.99",
+        "yearlyLabel": "$19.99",
+        "saveLabel": "Save $3.89 a year"
       }
     ],
     "includes": [
