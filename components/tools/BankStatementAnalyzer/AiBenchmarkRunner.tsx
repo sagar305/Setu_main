@@ -1,5 +1,12 @@
 "use client";
 
+// Development-only, and deliberately untranslated.
+// ---------------------------------------------------------------------------
+// This renders inside app/dev/ai-benchmark, which calls notFound() in a
+// production build — a CA can never reach it. The copy below is for whoever is
+// comparing embedding models, so it stays English rather than carrying 15
+// strings through all 17 languages for an audience of one.
+
 // The benchmark's controls. Development only — see app/dev/ai-benchmark.
 // ---------------------------------------------------------------------------
 // Deliberately plain: this is a measuring instrument, not product UI, and any

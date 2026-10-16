@@ -7,6 +7,7 @@
 // the extraction verdict. The verdict is the important part: when we could not
 // resolve every row we say so plainly instead of showing a tidy number (§30).
 
+import { useI18n } from "@/lib/i18n";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -506,9 +507,10 @@ function PendingReview({
   onCancel: () => void;
   busy: boolean;
 }) {
+  const { lang } = useI18n();
   const { statement, transactions, headers, rawRows, grid, ambiguousDateFormat } = pending.outcome;
   const report = statement.validation;
-  const summary = summariseParse(report, statement.parseStatus);
+  const summary = summariseParse(report, statement.parseStatus, lang);
   const gaps = mapping ? describeMappingGaps(mapping) : [];
   const usable = mapping ? isMappingUsable(mapping) : false;
 

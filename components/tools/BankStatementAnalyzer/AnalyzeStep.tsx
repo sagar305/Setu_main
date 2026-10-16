@@ -18,7 +18,7 @@ import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 import type { Transaction } from "@/lib/bankStatement/types";
 
 export function AnalyzeStep() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { analysis, activeStatements, settings, actions, loaded, statements, activeTransactions } =
     useAnalyzer();
   const { code: currency } = usePreferredCurrency();
@@ -70,7 +70,7 @@ export function AnalyzeStep() {
                 {flagged.map((statement) => (
                   <li key={statement.id}>
                     <strong className="text-ink">{statement.fileName}</strong> —{" "}
-                    {summariseParse(statement.validation, statement.parseStatus)}
+                    {summariseParse(statement.validation, statement.parseStatus, lang)}
                   </li>
                 ))}
               </ul>

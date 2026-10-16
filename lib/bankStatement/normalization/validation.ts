@@ -8,6 +8,8 @@
 //   • A row-count mismatch alone is NOT unresolved — statements rarely print a
 //     trustworthy transaction count, so we never invent one to compare against.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import type {
   BalanceChainResult,
   IssueCode,
@@ -181,12 +183,22 @@ export function parseStatusFrom(report: ValidationReport): ParseStatus {
 }
 
 /** The sentence the review screen leads with. Never overstates the result. */
-export function summariseParse(report: ValidationReport, status: ParseStatus): string {
+export function summariseParse(
+  report: ValidationReport,
+  status: ParseStatus,
+  lang: LanguageCode
+): string {
   if (status === "VALID") {
-    return `${report.resolved} transactions extracted and checked against the running balance.`;
+    return fill(translate(lang, "bsSumValid"), { n: report.resolved });
   }
   if (status === "WARNING") {
-    return `${report.resolved + report.warnings} transactions extracted, ${report.warnings} of which need a look.`;
+    return fill(translate(lang, "bsSumWarning"), {
+      n: report.resolved + report.warnings,
+      bad: report.warnings,
+    });
   }
-  return `We could not confidently extract every transaction. Extracted: ${report.resolved + report.warnings}. Unresolved: ${report.unresolved}.`;
+  return fill(translate(lang, "bsSumUnresolved"), {
+    n: report.resolved + report.warnings,
+    bad: report.unresolved,
+  });
 }

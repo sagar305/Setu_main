@@ -19,6 +19,8 @@
 // every keystroke.
 
 import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { useMemo, useRef, useState } from "react";
 import { ArrowUpToLine, CornerLeftUp, EyeOff, Wand2 } from "lucide-react";
 import { PrimaryButton, SecondaryButton, Select } from "@/components/toolkit/ui";
@@ -34,16 +36,16 @@ const OVERSCAN = 10;
 const CELL_WIDTH = 160;
 
 /** The fields a column can be assigned to, in the order they read in a table. */
-const ROLES: { key: keyof ColumnMapping; label: string; short: string }[] = [
-  { key: "date", label: "Date", short: "Date" },
-  { key: "valueDate", label: "Value date", short: "Value dt" },
-  { key: "narration", label: "Narration / description", short: "Narration" },
-  { key: "reference", label: "Reference / cheque no.", short: "Reference" },
-  { key: "debit", label: "Debit / withdrawal", short: "Debit" },
-  { key: "credit", label: "Credit / deposit", short: "Credit" },
-  { key: "amount", label: "Single amount column", short: "Amount" },
-  { key: "direction", label: "Dr/Cr indicator", short: "Dr/Cr" },
-  { key: "balance", label: "Balance", short: "Balance" },
+const ROLES: { key: keyof ColumnMapping; labelKey: TKey; shortKey: TKey }[] = [
+  { key: "date", labelKey: "date", shortKey: "date" },
+  { key: "valueDate", labelKey: "bsGrValueDate", shortKey: "bsGrValueDateShort" },
+  { key: "narration", labelKey: "bsMapNarration", shortKey: "bkNarration" },
+  { key: "reference", labelKey: "bsGrReferenceLong", shortKey: "stReference" },
+  { key: "debit", labelKey: "bsMapDebit", shortKey: "bsColDebits" },
+  { key: "credit", labelKey: "bsMapCredit", shortKey: "bsColCredits" },
+  { key: "amount", labelKey: "bsMapSingleAmount", shortKey: "amount" },
+  { key: "direction", labelKey: "bsMapDirection", shortKey: "bsGrDrCrShort" },
+  { key: "balance", labelKey: "balance", shortKey: "balance" },
 ];
 
 export function StatementGrid({
@@ -63,7 +65,7 @@ export function StatementGrid({
   onApply: () => void;
   busy?: boolean;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -127,10 +129,13 @@ export function StatementGrid({
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h4 className="text-sm font-bold text-ink">The file as we read it</h4>
+          <h4 className="text-sm font-bold text-ink">{t("bsGrFileAsRead")}</h4>
           <p className="mt-0.5 text-xs text-muted">
-            {grid.length.toLocaleString("en-IN")} rows · {columnCount} column
-            {columnCount === 1 ? "" : "s"} · {describeRowPlan(plan, lang)}
+            {fill(t(columnCount === 1 ? "bsGrRowsCols1" : "bsGrRowsColsN"), {
+              rows: grid.length.toLocaleString(intlLocaleFor(lang)),
+              cols: columnCount,
+            })}{" "}
+            · {describeRowPlan(plan, lang)}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -146,31 +151,29 @@ export function StatementGrid({
             >
               <span className="flex items-center gap-1">
                 <Wand2 className="h-3.5 w-3.5" aria-hidden="true" />
-                Join {unapplied.length} wrapped line{unapplied.length === 1 ? "" : "s"}
+                {fill(t(unapplied.length === 1 ? "bsGrJoinWrapped1" : "bsGrJoinWrappedN"), {
+                  n: unapplied.length,
+                })}
               </span>
             </SecondaryButton>
           ) : null}
           <SecondaryButton className="!px-3 !py-1.5 !text-xs" onClick={() => onPlanChange({})}>
-            Reset
+            {t("resetLabel")}
           </SecondaryButton>
           <PrimaryButton className="!px-3 !py-1.5 !text-xs" onClick={onApply} disabled={busy}>
-            {busy ? "Re-reading…" : "Re-read with these settings"}
+            {busy ? t("bsGrReReading") : t("bsGrReRead")}
           </PrimaryButton>
         </div>
       </div>
 
-      <p className="text-xs text-muted">
-        Set what each column is in the row of dropdowns. Use the buttons on a row to mark where the
-        table starts and ends, hide a row that is not a transaction, or join a wrapped line to the
-        row above it.
-      </p>
+      <p className="text-xs text-muted">{t("bsGrHowTo")}</p>
 
       <div className="overflow-x-auto rounded-xl border border-muted-line/30">
         <div style={{ minWidth: 120 + columnCount * CELL_WIDTH }}>
           {/* Column roles. Sticky so they stay visible while scrolling rows. */}
           <div className="flex border-b border-muted-line/30 bg-cream-paper/60">
             <div className="w-[120px] shrink-0 px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted">
-              Row
+              {t("bsGrRow")}
             </div>
             {Array.from({ length: columnCount }, (_, column) => (
               <div key={column} style={{ width: CELL_WIDTH }} className="shrink-0 px-1 py-1">
@@ -180,12 +183,12 @@ export function StatementGrid({
                   onChange={(event) =>
                     assign(column, event.target.value as keyof ColumnMapping | "")
                   }
-                  aria-label={`What is in column ${column + 1}`}
+                  aria-label={fill(t("bsGrWhatColumnAria"), { n: column + 1 })}
                 >
-                  <option value="">Column {column + 1} — ignore</option>
+                  <option value="">{fill(t("bsGrColumnIgnore"), { n: column + 1 })}</option>
                   {ROLES.map((role) => (
                     <option key={role.key} value={role.key}>
-                      {role.label}
+                      {t(role.labelKey)}
                     </option>
                   ))}
                 </Select>
@@ -229,7 +232,7 @@ export function StatementGrid({
                           {index + 1}
                         </span>
                         <RowButton
-                          title="Table starts on this row"
+                          title={t("bsGrStartsHere")}
                           active={plan.startRow === index}
                           onClick={() =>
                             onPlanChange({
@@ -241,7 +244,7 @@ export function StatementGrid({
                           <ArrowUpToLine className="h-3 w-3" aria-hidden="true" />
                         </RowButton>
                         <RowButton
-                          title="This row is the column header"
+                          title={t("bsGrIsHeader")}
                           active={isHeader}
                           onClick={() =>
                             onPlanChange({
@@ -253,14 +256,14 @@ export function StatementGrid({
                           <span className="text-[10px] font-bold">H</span>
                         </RowButton>
                         <RowButton
-                          title="Not a transaction — hide this row"
+                          title={t("bsGrHideRow")}
                           active={skipped}
                           onClick={() => toggleRow(index, "skipRows")}
                         >
                           <EyeOff className="h-3 w-3" aria-hidden="true" />
                         </RowButton>
                         <RowButton
-                          title="Join this row to the one above"
+                          title={t("bsGrJoinAbove")}
                           active={merged}
                           onClick={() => toggleRow(index, "mergeUp")}
                         >
@@ -290,16 +293,16 @@ export function StatementGrid({
       </div>
 
       <div className="flex flex-wrap items-center gap-4 text-[11px] text-muted">
-        <Legend className="bg-emerald-50/70">assigned column</Legend>
-        <Legend className="bg-indigo/10">header row</Legend>
-        <Legend className="bg-amber-50">joined to the row above</Legend>
-        <Legend className="bg-cream">hidden or outside the table</Legend>
+        <Legend className="bg-emerald-50/70">{t("bsGrLegendAssigned")}</Legend>
+        <Legend className="bg-indigo/10">{t("bsGrLegendHeader")}</Legend>
+        <Legend className="bg-amber-50">{t("bsGrLegendJoined")}</Legend>
+        <Legend className="bg-cream">{t("bsGrLegendHidden")}</Legend>
         <button
           type="button"
           className="font-semibold text-indigo hover:underline"
           onClick={() => onPlanChange({ ...plan, endRow: plan.endRow === undefined ? grid.length - 1 : undefined })}
         >
-          {plan.endRow === undefined ? "Set the last row to the end of the file" : "Clear the end marker"}
+          {plan.endRow === undefined ? t("bsGrSetEnd") : t("bsGrClearEnd")}
         </button>
       </div>
     </div>
