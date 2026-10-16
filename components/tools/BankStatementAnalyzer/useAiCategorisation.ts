@@ -189,6 +189,11 @@ export function useAiCategorisation() {
 
       setSummary(tally);
       actions.log(
+        {
+          code: "AI_RUN",
+          suggested: tally.confident + tally.tentative,
+          unresolved: tally.unresolved,
+        },
         "AI categorisation run",
         `${tally.confident + tally.tentative} suggested for review · ${tally.unresolved} left`
       );

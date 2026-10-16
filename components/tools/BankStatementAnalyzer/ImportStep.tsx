@@ -169,7 +169,7 @@ export function ImportStep() {
   const loadDemo = useCallback(async () => {
     const { statement, transactions: demoTransactions } = buildDemoData();
     await actions.addStatement(statement, demoTransactions);
-    actions.log("Demo statement loaded");
+    actions.log({ code: "DEMO_LOADED" }, "Demo statement loaded");
   }, [actions]);
 
   // "Try Sample Statement" from the landing page arrives as ?demo=1. Load it

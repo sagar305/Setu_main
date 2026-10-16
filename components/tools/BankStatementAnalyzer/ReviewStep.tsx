@@ -16,7 +16,7 @@ import { RuleEditor } from "@/components/tools/BankStatementAnalyzer/RuleEditor"
 import { CategoryManager } from "@/components/tools/BankStatementAnalyzer/CategoryManager";
 import { ActivityLog } from "@/components/tools/BankStatementAnalyzer/ActivityLog";
 import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
-import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
+import type { BulkEdit, ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import { describeCondition, ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
 import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
@@ -123,18 +123,26 @@ export function ReviewStep() {
     async (transaction: Transaction, patch: Partial<Transaction>) => {
       pushUndo([transaction.id]);
       await actions.updateTransactions((current) => ({ ...current, ...patch }), [transaction.id]);
-      actions.log("Transaction edited", Object.keys(patch).join(", "));
+      actions.log(
+        { code: "TRANSACTION_EDITED", fields: Object.keys(patch) },
+        "Transaction edited",
+        Object.keys(patch).join(", ")
+      );
     },
     [actions, pushUndo]
   );
 
   const bulkApply = useCallback(
-    async (patch: Partial<Transaction>, label: string) => {
+    async (patch: Partial<Transaction>, edit: BulkEdit, label: string) => {
       const ids = [...selected];
       if (ids.length === 0) return;
       pushUndo(ids);
       await actions.updateTransactions((current) => ({ ...current, ...patch }), ids);
-      actions.log(label, `${ids.length} transactions`);
+      actions.log(
+        { code: "BULK_EDIT", edit, count: ids.length },
+        label,
+        `${ids.length} transactions`
+      );
       setSelected(new Set());
     },
     [actions, pushUndo, selected]
@@ -149,14 +157,18 @@ export function ReviewStep() {
       (current) => byId.get(current.id) ?? current,
       snapshot.map((transaction) => transaction.id)
     );
-    actions.log("Change undone", `${snapshot.length} transactions`);
+    actions.log(
+      { code: "CHANGE_UNDONE", count: snapshot.length },
+      "Change undone",
+      `${snapshot.length} transactions`
+    );
   }, [actions, undoStack]);
 
   const runClassification = useCallback(async () => {
     setReclassifying({ current: 0, total: activeTransactions.length });
     await actions.reclassifyAll((current, total) => setReclassifying({ current, total }));
     setReclassifying(null);
-    actions.log("Transactions classified");
+    actions.log({ code: "TRANSACTIONS_CLASSIFIED" }, "Transactions classified");
   }, [actions, activeTransactions.length]);
 
   if (loaded && statements.length === 0) {
@@ -368,6 +380,7 @@ export function ReviewStep() {
                   onClick={() =>
                     bulkApply(
                       { category: bulkCategory, classificationSource: "MANUAL", confidence: 100 },
+                      "categorised",
                       "Bulk categorised"
                     )
                   }
@@ -378,6 +391,7 @@ export function ReviewStep() {
                   onClick={() =>
                     bulkApply(
                       { classificationType: "BUSINESS", classificationSource: "MANUAL" },
+                      "business",
                       "Marked business"
                     )
                   }
@@ -388,6 +402,7 @@ export function ReviewStep() {
                   onClick={() =>
                     bulkApply(
                       { classificationType: "PERSONAL", classificationSource: "MANUAL" },
+                      "personal",
                       "Marked personal"
                     )
                   }
@@ -398,6 +413,7 @@ export function ReviewStep() {
                   onClick={() =>
                     bulkApply(
                       { classificationType: "TRANSFER", isTransfer: true, classificationSource: "MANUAL" },
+                      "transfer",
                       "Marked transfer"
                     )
                   }
@@ -405,12 +421,12 @@ export function ReviewStep() {
                   Mark transfer
                 </SecondaryButton>
                 <SecondaryButton
-                  onClick={() => bulkApply({ duplicateOverride: "KEEP" }, "Duplicate override")}
+                  onClick={() => bulkApply({ duplicateOverride: "KEEP" }, "duplicateOverride", "Duplicate override")}
                 >
                   Keep in totals
                 </SecondaryButton>
                 <SecondaryButton
-                  onClick={() => bulkApply({ duplicateOverride: "EXCLUDE" }, "Duplicate override")}
+                  onClick={() => bulkApply({ duplicateOverride: "EXCLUDE" }, "duplicateOverride", "Duplicate override")}
                 >
                   Exclude from totals
                 </SecondaryButton>

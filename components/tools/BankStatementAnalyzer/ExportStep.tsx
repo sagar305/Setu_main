@@ -52,7 +52,7 @@ export function ExportStep() {
         analysis,
         categories
       );
-      actions.log("Report exported", "Excel workbook");
+      actions.log({ code: "REPORT_EXPORTED", format: "excel" }, "Report exported", "Excel workbook");
     } finally {
       setBusy(null);
     }
@@ -69,7 +69,7 @@ export function ExportStep() {
         categories,
         lang
       );
-      actions.log("Report exported", "PDF report");
+      actions.log({ code: "REPORT_EXPORTED", format: "pdf" }, "Report exported", "PDF report");
     } finally {
       setBusy(null);
     }
@@ -99,7 +99,7 @@ export function ExportStep() {
           ])
         )
       );
-      actions.log("Report exported", "Transactions CSV");
+      actions.log({ code: "REPORT_EXPORTED", format: "csv" }, "Report exported", "Transactions CSV");
     } finally {
       setBusy(null);
     }

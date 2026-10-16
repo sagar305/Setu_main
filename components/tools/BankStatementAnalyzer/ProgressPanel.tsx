@@ -4,6 +4,10 @@
 // we genuinely know the denominator — page 32 of 120, or 824 of 1,248 rows.
 // Where we cannot count, we show the stage list instead of inventing a number.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+
 export type ProgressState = {
   label: string;
   current?: number;
@@ -23,6 +27,7 @@ export function ProgressPanel({
   progress?: ProgressState | null;
   stages?: StageState[];
 }) {
+  const { t, lang } = useI18n();
   const measurable =
     progress?.total !== undefined && progress.total > 0 && progress.current !== undefined;
   const percent = measurable
@@ -38,8 +43,11 @@ export function ProgressPanel({
             <>
               <p className="mt-1 text-sm text-muted">
                 {progress.unit === "page"
-                  ? `Page ${progress.current} of ${progress.total}`
-                  : `${(progress.current as number).toLocaleString("en-IN")} / ${(progress.total as number).toLocaleString("en-IN")}`}
+                  ? fill(t("bsProgPage"), {
+                      current: progress.current as number,
+                      total: progress.total as number,
+                    })
+                  : `${(progress.current as number).toLocaleString(intlLocaleFor(lang))} / ${(progress.total as number).toLocaleString(intlLocaleFor(lang))}`}
               </p>
               <div
                 className="mt-3 h-2 w-full overflow-hidden rounded-full bg-cream"
@@ -57,7 +65,7 @@ export function ProgressPanel({
               <p className="mt-2 text-xs font-semibold text-indigo">{percent}%</p>
             </>
           ) : (
-            <p className="mt-1 text-sm text-muted">Working…</p>
+            <p className="mt-1 text-sm text-muted">{t("bsProgWorking")}</p>
           )}
         </>
       ) : null}
@@ -80,7 +88,11 @@ export function ProgressPanel({
               </span>
               {stage.name}
               <span className="sr-only">
-                {stage.status === "done" ? " — done" : stage.status === "active" ? " — in progress" : " — waiting"}
+                {stage.status === "done"
+                  ? t("bsProgDone")
+                  : stage.status === "active"
+                    ? t("bsProgActive")
+                    : t("bsProgWaiting")}
               </span>
             </li>
           ))}

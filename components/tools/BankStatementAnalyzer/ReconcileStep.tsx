@@ -86,7 +86,11 @@ export function ReconcileStep() {
       matches,
       createdAt: new Date().toISOString(),
     });
-    actions.log("Reconciliation run", `${matches.length} results`);
+    actions.log(
+      { code: "RECONCILE_RUN", results: matches.length },
+      "Reconciliation run",
+      `${matches.length} results`
+    );
   }, [actions, activeTransactions, fileName, ledger]);
 
   const summary = useMemo(
@@ -121,7 +125,10 @@ export function ReconcileStep() {
         match.id === matchId ? { ...match, ...patch } : match
       ),
     });
-    actions.log(patch.confirmed ? "Reconciliation match confirmed" : "Reconciliation match rejected");
+    actions.log(
+      { code: patch.confirmed ? "RECONCILE_CONFIRMED" : "RECONCILE_REJECTED" },
+      patch.confirmed ? "Reconciliation match confirmed" : "Reconciliation match rejected"
+    );
   };
 
   const exportCsv = () => {
@@ -148,7 +155,11 @@ export function ReconcileStep() {
         })
       )
     );
-    actions.log("Report exported", "Reconciliation CSV");
+    actions.log(
+      { code: "REPORT_EXPORTED", format: "reconciliation" },
+      "Report exported",
+      "Reconciliation CSV"
+    );
   };
 
   if (loaded && statements.length === 0) {

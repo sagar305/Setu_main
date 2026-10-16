@@ -4,18 +4,21 @@
 // bookmark or refresh mid-workflow and land back where they were.
 
 import Link from "next/link";
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 import { usePathname } from "next/navigation";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 
-const STEPS = [
-  { href: "/products/bank-statement-analyzer/import", label: "Import" },
-  { href: "/products/bank-statement-analyzer/review", label: "Review" },
-  { href: "/products/bank-statement-analyzer/analyze", label: "Analyze" },
-  { href: "/products/bank-statement-analyzer/reconcile", label: "Reconcile" },
-  { href: "/products/bank-statement-analyzer/export", label: "Export" },
+const STEPS: { href: string; labelKey: TKey }[] = [
+  { href: "/products/bank-statement-analyzer/import", labelKey: "bsStepImport" },
+  { href: "/products/bank-statement-analyzer/review", labelKey: "bsStepReview" },
+  { href: "/products/bank-statement-analyzer/analyze", labelKey: "bsStepAnalyze" },
+  { href: "/products/bank-statement-analyzer/reconcile", labelKey: "bsStepReconcile" },
+  { href: "/products/bank-statement-analyzer/export", labelKey: "bsStepExport" },
 ];
 
 export function StepNav() {
+  const { t } = useI18n();
   const pathname = usePathname();
   const { transactions, loaded } = useAnalyzer();
   const hasData = transactions.length > 0;
@@ -26,7 +29,7 @@ export function StepNav() {
     pathname === base ? 0 : STEPS.findIndex((step) => pathname === step.href);
 
   return (
-    <nav aria-label="Analyzer steps" className="mb-8">
+    <nav aria-label={t("bsStepsAria")} className="mb-8">
       <ol className="flex flex-wrap gap-2">
         {STEPS.map((step, index) => {
           const active = index === activeIndex;
@@ -47,7 +50,7 @@ export function StepNav() {
               >
                 {index + 1}
               </span>
-              {step.label}
+              {t(step.labelKey)}
             </span>
           );
 

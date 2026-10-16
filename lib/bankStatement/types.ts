@@ -361,9 +361,54 @@ export type AnalyzerSettings = {
 export type AuditEntry = {
   id: string;
   at: string;
+  /**
+   * What happened, as a code.
+   *
+   * The log is a record kept over months and read back whenever a CA wants to
+   * know what they did to a statement. Wording it at write time would leave a
+   * log in whatever language each entry happened to be made in; a code lets
+   * the whole history read in one.
+   */
+  code?: AuditCode;
+  /** The entry as English prose, on entries written before the codes. */
   action: string;
   detail?: string;
 };
+
+/** The things worth recording. Deliberately never the statement contents. */
+export type AuditCode =
+  | { code: "DEMO_LOADED" }
+  | { code: "STATEMENT_IMPORTED"; file: string }
+  | { code: "STATEMENT_REMOVED"; file: string }
+  | { code: "REPORT_EXPORTED"; format: ExportFormat }
+  | { code: "RECONCILE_RUN"; results: number }
+  | { code: "RECONCILE_CONFIRMED" }
+  | { code: "RECONCILE_REJECTED" }
+  | { code: "TRANSACTION_EDITED"; fields: string[] }
+  | { code: "BULK_EDIT"; edit: BulkEdit; count: number }
+  | { code: "CHANGE_UNDONE"; count: number }
+  | { code: "TRANSACTIONS_CLASSIFIED" }
+  | { code: "RULE_SAVED"; name: string }
+  | { code: "RULE_DELETED"; name: string }
+  | { code: "CATEGORY_ADDED"; name: string }
+  | { code: "CATEGORY_ARCHIVED"; name: string }
+  | { code: "CATEGORY_RESTORED"; name: string }
+  | { code: "CATEGORY_DELETED"; name: string }
+  | { code: "CATEGORY_FROM_SUGGESTION"; name: string; rows: number }
+  | { code: "AI_SUGGESTION_APPROVED"; count: number; ruleSaved: boolean }
+  | { code: "AI_SUGGESTION_CORRECTED"; count: number; ruleSaved: boolean }
+  | { code: "LEARNED_FORGOTTEN" }
+  | { code: "AI_RUN"; suggested: number; unresolved: number }
+  | { code: "DATA_CLEARED" };
+
+export type ExportFormat = "excel" | "pdf" | "csv" | "reconciliation";
+
+export type BulkEdit =
+  | "categorised"
+  | "business"
+  | "personal"
+  | "transfer"
+  | "duplicateOverride";
 
 // ---------------------------------------------------------------------------
 // Analysis outputs

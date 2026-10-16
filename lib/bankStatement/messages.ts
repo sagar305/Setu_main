@@ -10,7 +10,15 @@
 // Those fall back to that prose rather than going silent: a stale sentence is
 // worth more to a CA chasing a broken balance than an empty cell.
 
-import type { IssueCode, ReportIssueCode, ValidationIssue } from "@/lib/bankStatement/types";
+import type {
+  AuditCode,
+  AuditEntry,
+  BulkEdit,
+  ExportFormat,
+  IssueCode,
+  ReportIssueCode,
+  ValidationIssue,
+} from "@/lib/bankStatement/types";
 import type { AiErrorCode } from "@/lib/bankStatement/ai/client";
 import type { AiProgress } from "@/lib/bankStatement/ai/protocol";
 import type { LanguageCode } from "@/lib/i18n/config";
@@ -110,4 +118,98 @@ export function aiErrorLabel(
 
 function formatMb(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+const AUDIT_KEYS: Record<AuditCode["code"], TKey> = {
+  DEMO_LOADED: "bsAudDemoLoaded",
+  STATEMENT_IMPORTED: "bsAudImported",
+  STATEMENT_REMOVED: "bsAudRemoved",
+  REPORT_EXPORTED: "bsAudExported",
+  RECONCILE_RUN: "bsAudReconcileRun",
+  RECONCILE_CONFIRMED: "bsAudMatchConfirmed",
+  RECONCILE_REJECTED: "bsAudMatchRejected",
+  TRANSACTION_EDITED: "bsAudEdited",
+  BULK_EDIT: "bsAudBulkCategorised",
+  CHANGE_UNDONE: "bsAudUndone",
+  TRANSACTIONS_CLASSIFIED: "bsAudClassified",
+  RULE_SAVED: "bsAudRuleSaved",
+  RULE_DELETED: "bsAudRuleDeleted",
+  CATEGORY_ADDED: "bsAudCategoryAdded",
+  CATEGORY_ARCHIVED: "bsAudCatArchived",
+  CATEGORY_RESTORED: "bsAudCatRestored",
+  CATEGORY_DELETED: "bsAudCatDeleted",
+  CATEGORY_FROM_SUGGESTION: "bsAudCatFromSuggestion",
+  AI_SUGGESTION_APPROVED: "bsAudAiApproved",
+  AI_SUGGESTION_CORRECTED: "bsAudAiCorrected",
+  LEARNED_FORGOTTEN: "bsAudLearnedForgotten",
+  AI_RUN: "bsAudAiRun",
+  DATA_CLEARED: "bsAudDataCleared",
+};
+
+const BULK_EDIT_KEYS: Record<BulkEdit, TKey> = {
+  categorised: "bsAudBulkCategorised",
+  business: "bsAudMarkedBusiness",
+  personal: "bsAudMarkedPersonal",
+  transfer: "bsAudMarkedTransfer",
+  duplicateOverride: "bsAudDuplicateOverride",
+};
+
+const EXPORT_FORMAT_KEYS: Record<ExportFormat, TKey> = {
+  excel: "bsFmtExcel",
+  pdf: "bsFmtPdf",
+  csv: "bsFmtCsv",
+  reconciliation: "bsFmtReconciliation",
+};
+
+/** What a log entry did, in this reader's language. */
+export function auditActionLabel(entry: AuditEntry, lang: LanguageCode): string {
+  if (!entry.code) return entry.action;
+  if (entry.code.code === "BULK_EDIT") {
+    return translate(lang, BULK_EDIT_KEYS[entry.code.edit]);
+  }
+  return translate(lang, AUDIT_KEYS[entry.code.code]);
+}
+
+/**
+ * The detail beside it: a count, a format, a file name, or the fields that
+ * changed. Field names stay as they are — they name the data, not the action.
+ */
+export function auditDetailLabel(entry: AuditEntry, lang: LanguageCode): string | undefined {
+  const code = entry.code;
+  if (!code) return entry.detail;
+  const count = (n: number) =>
+    fill(translate(lang, n === 1 ? "bsAudTxnCount1" : "bsAudTxnCountN"), { n });
+  switch (code.code) {
+    case "REPORT_EXPORTED":
+      return translate(lang, EXPORT_FORMAT_KEYS[code.format]);
+    case "RECONCILE_RUN":
+      return fill(translate(lang, "bsAudResults"), { n: code.results });
+    case "BULK_EDIT":
+    case "CHANGE_UNDONE":
+      return count(code.code === "BULK_EDIT" ? code.count : code.count);
+    case "TRANSACTION_EDITED":
+      return code.fields.join(", ");
+    case "STATEMENT_IMPORTED":
+    case "STATEMENT_REMOVED":
+      return code.file;
+    case "CATEGORY_ADDED":
+    case "CATEGORY_ARCHIVED":
+    case "CATEGORY_RESTORED":
+    case "CATEGORY_DELETED":
+      return code.name;
+    case "CATEGORY_FROM_SUGGESTION":
+      return `${code.name} · ${fill(translate(lang, "bsAudRows"), { n: code.rows })}`;
+    case "AI_RUN":
+      return fill(translate(lang, "bsAudAiRunDetail"), {
+        suggested: code.suggested,
+        unresolved: code.unresolved,
+      });
+    case "AI_SUGGESTION_APPROVED":
+    case "AI_SUGGESTION_CORRECTED": {
+      const rows = count(code.count);
+      return code.ruleSaved ? `${rows} · ${translate(lang, "bsAudRuleSavedToo")}` : rows;
+    }
+    default:
+      return entry.detail;
+  }
 }
