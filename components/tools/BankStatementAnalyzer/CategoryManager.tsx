@@ -4,6 +4,7 @@
 // refused while transactions still use a category — the CA is told how many and
 // asked to move them first.
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import type { Category, CategoryGroup } from "@/lib/bankStatement/types";
 import {
@@ -14,10 +15,11 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
-import { GROUP_LABELS, slugifyCategory } from "@/lib/bankStatement/classification/categories";
+import { groupLabel, slugifyCategory } from "@/lib/bankStatement/classification/categories";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 
 export function CategoryManager() {
+  const { lang } = useI18n();
   const { categories, transactions, actions } = useAnalyzer();
   const [name, setName] = useState("");
   const [group, setGroup] = useState<CategoryGroup>("EXPENSE");
@@ -106,7 +108,7 @@ export function CategoryManager() {
             <Select value={group} onChange={(event) => setGroup(event.target.value as CategoryGroup)}>
               {groups.map((option) => (
                 <option key={option} value={option}>
-                  {GROUP_LABELS[option]}
+                  {groupLabel(option, lang)}
                 </option>
               ))}
             </Select>
@@ -131,7 +133,7 @@ export function CategoryManager() {
           return (
             <div key={option}>
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                {GROUP_LABELS[option]}
+                {groupLabel(option, lang)}
               </h4>
               <ul className="space-y-1.5">
                 {rows.map((category) => {

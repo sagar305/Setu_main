@@ -16,6 +16,8 @@ import type {
 } from "@/lib/bankStatement/types";
 import { includedTransactions } from "@/lib/bankStatement/normalization/deduplicator";
 import { categoryGroup, categoryName } from "@/lib/bankStatement/classification/categories";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import { dayOfWeek, monthKey, monthLabel } from "@/lib/bankStatement/utils/dates";
 import { round2 } from "@/lib/bankStatement/utils/numbers";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
@@ -23,7 +25,9 @@ import { normaliseText } from "@/lib/bankStatement/utils/text";
 export function analyse(
   transactions: Transaction[],
   categories: Category[],
-  settings: AnalyzerSettings
+  settings: AnalyzerSettings,
+  /** Category rows carry a display label, so the breakdown is per reader. */
+  lang: LanguageCode
 ): AnalysisResult {
   const included = includedTransactions(transactions, settings.includeDuplicatesInTotals);
   const excludedDuplicates = transactions.length - included.length;
@@ -40,8 +44,8 @@ export function analyse(
       excludedDuplicates,
     },
     monthly: monthlySummary(included),
-    expenseCategories: categoryBreakdown(included, categories, "DEBIT"),
-    incomeCategories: categoryBreakdown(included, categories, "CREDIT"),
+    expenseCategories: categoryBreakdown(included, categories, "DEBIT", lang),
+    incomeCategories: categoryBreakdown(included, categories, "CREDIT", lang),
     parties: topParties(included),
     cash: cashSummary(included),
     highValue: included
@@ -103,7 +107,8 @@ export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
 export function categoryBreakdown(
   transactions: Transaction[],
   categories: Category[],
-  direction: "DEBIT" | "CREDIT"
+  direction: "DEBIT" | "CREDIT",
+  lang: LanguageCode
 ): CategoryRow[] {
   const relevant = transactions.filter((t) =>
     direction === "DEBIT" ? t.debit > 0 : t.credit > 0
@@ -128,7 +133,10 @@ export function categoryBreakdown(
     .map(([key, bucket]) => {
       const value = direction === "DEBIT" ? bucket.debit : bucket.credit;
       return {
-        category: key === "__uncategorised__" ? "Uncategorised" : categoryName(categories, key),
+        category:
+          key === "__uncategorised__"
+            ? translate(lang, "bsUncategorised")
+            : categoryName(categories, key, lang),
         group: key === "__uncategorised__" ? ("UNCATEGORISED" as const) : categoryGroup(categories, key),
         debit: round2(bucket.debit),
         credit: round2(bucket.credit),

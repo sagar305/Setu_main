@@ -5,6 +5,7 @@
 // allowed to claim it supports a bank once it passes these tests against real
 // anonymised statements for that bank. See tests/fixtures/README.md.
 
+import { rowIssueLabel } from "@/lib/bankStatement/messages";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -83,9 +84,20 @@ describe("generic CSV statements", () => {
     expect(statement.validation.balanceChain.checked).toBe(true);
     expect(statement.validation.balanceChain.breaks).toBe(expected.balanceBreaks);
 
-    const flagged = transactions.filter((t) => t.rowIssue?.startsWith("Running balance"));
+    const flagged = transactions.filter((t) => t.rowIssueCode?.code === "BALANCE_BREAK");
     expect(flagged).toHaveLength(1);
     expect(flagged[0].date).toBe(expected.firstBreakOn);
     expect(statement.validation.issues.some((issue) => issue.severity === "error")).toBe(true);
+
+    // The row says what broke in the language of whoever opens it, and the
+    // numbers it quotes are the ones the chain actually disagreed on.
+    const issue = flagged[0].rowIssueCode;
+    expect(issue?.code === "BALANCE_BREAK" && issue.expected).not.toBe(
+      issue?.code === "BALANCE_BREAK" && issue.found
+    );
+    const english = rowIssueLabel(flagged[0].rowIssueCode!, "en");
+    const hindi = rowIssueLabel(flagged[0].rowIssueCode!, "hi");
+    expect(english).toContain("Running balance");
+    expect(hindi).not.toBe(english);
   });
 });

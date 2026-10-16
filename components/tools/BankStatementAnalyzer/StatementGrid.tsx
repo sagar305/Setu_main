@@ -18,6 +18,7 @@
 // presses "Re-read" when they are ready, so a large file is not re-parsed on
 // every keystroke.
 
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useRef, useState } from "react";
 import { ArrowUpToLine, CornerLeftUp, EyeOff, Wand2 } from "lucide-react";
 import { PrimaryButton, SecondaryButton, Select } from "@/components/toolkit/ui";
@@ -62,6 +63,7 @@ export function StatementGrid({
   onApply: () => void;
   busy?: boolean;
 }) {
+  const { lang } = useI18n();
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -128,7 +130,7 @@ export function StatementGrid({
           <h4 className="text-sm font-bold text-ink">The file as we read it</h4>
           <p className="mt-0.5 text-xs text-muted">
             {grid.length.toLocaleString("en-IN")} rows · {columnCount} column
-            {columnCount === 1 ? "" : "s"} · {describeRowPlan(plan)}
+            {columnCount === 1 ? "" : "s"} · {describeRowPlan(plan, lang)}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

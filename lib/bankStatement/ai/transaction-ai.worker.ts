@@ -81,16 +81,12 @@ function createProgressReporter() {
     post({
       type: "MODEL_LOADING",
       percent: total > 0 ? Math.min(99, Math.round((loaded / total) * 100)) : undefined,
-      message:
+      progress:
         total > 0
-          ? `Downloading the categorisation model (${formatMb(loaded)} of ${formatMb(total)})`
-          : "Preparing AI categorisation…",
+          ? { code: "DOWNLOADING", loadedBytes: loaded, totalBytes: total }
+          : { code: "PREPARING" },
     });
   };
-}
-
-function formatMb(bytes: number): string {
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 function describe(error: unknown): string {
@@ -106,7 +102,7 @@ function describe(error: unknown): string {
  */
 function getProvider(): Promise<EmbeddingProvider> {
   if (!providerPromise) {
-    post({ type: "MODEL_LOADING", message: "Preparing AI categorisation…" });
+    post({ type: "MODEL_LOADING", progress: { code: "PREPARING" } });
 
     const provider = new TransformersEmbeddingProvider({
       model: providerSettings.model,

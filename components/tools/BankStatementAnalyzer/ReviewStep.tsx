@@ -5,6 +5,7 @@
 // create rules from real transactions, override duplicates, undo, and see at a
 // glance what still needs attention.
 
+import { useI18n } from "@/lib/i18n";
 import { useCallback, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -17,7 +18,7 @@ import { ActivityLog } from "@/components/tools/BankStatementAnalyzer/ActivityLo
 import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import { describeCondition, ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
-import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
@@ -63,6 +64,7 @@ const EMPTY_FILTERS: Filters = {
 };
 
 export function ReviewStep() {
+  const { lang } = useI18n();
   const { activeTransactions, categories, rules, settings, actions, loaded, statements } =
     useAnalyzer();
   const { code: currency } = usePreferredCurrency();
@@ -266,7 +268,7 @@ export function ReviewStep() {
                   <option value="">All</option>
                   <option value="__none__">Uncategorised</option>
                   {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
-                    <optgroup key={group} label={GROUP_LABELS[group]}>
+                    <optgroup key={group} label={groupLabel(group, lang)}>
                       {options
                         .filter((category) => category.group === group)
                         .map((category) => (

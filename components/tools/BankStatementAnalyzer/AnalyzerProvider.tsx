@@ -8,6 +8,7 @@
 //
 // No Zustand (decision 2) — feature hooks over React state, as the repo does.
 
+import { useI18n } from "@/lib/i18n";
 import {
   createContext,
   useCallback,
@@ -142,6 +143,7 @@ export function useAnalyzer(): AnalyzerContextValue {
 }
 
 export function AnalyzerProvider({ children }: { children: ReactNode }) {
+  const { lang } = useI18n();
   const [state, setState] = useState<AnalyzerState>({
     loaded: false,
     statements: [],
@@ -663,8 +665,8 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
   );
 
   const analysis = useMemo(
-    () => analyse(activeTransactions, state.categories, state.settings),
-    [activeTransactions, state.categories, state.settings]
+    () => analyse(activeTransactions, state.categories, state.settings, lang),
+    [activeTransactions, state.categories, state.settings, lang]
   );
 
   const value: AnalyzerContextValue = {

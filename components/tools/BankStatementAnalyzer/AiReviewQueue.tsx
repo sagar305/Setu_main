@@ -12,15 +12,17 @@
 // again. That is what makes the second pass faster than the first, and it is
 // why correcting a wrong suggestion is worth doing rather than working around.
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import { Check, GraduationCap, Pencil } from "lucide-react";
 import { Card, PrimaryButton, SecondaryButton, Select } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
-import { activeCategories, categoryName, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { activeCategories, categoryName, groupLabel } from "@/lib/bankStatement/classification/categories";
 import { ruleAnchor, type AiSuggestionGroup } from "@/lib/bankStatement/ai/approval";
 import { confidenceBand } from "@/lib/bankStatement/classification/classifier";
 
 export function AiReviewQueue({ groups }: { groups: AiSuggestionGroup[] }) {
+  const { lang } = useI18n();
   const { categories, settings, rules, actions } = useAnalyzer();
   const [correcting, setCorrecting] = useState<string | null>(null);
   const [choice, setChoice] = useState("");
@@ -41,7 +43,7 @@ export function AiReviewQueue({ groups }: { groups: AiSuggestionGroup[] }) {
     setChoice("");
     setTaught({
       label: group.label,
-      category: categoryName(categories, categoryId),
+      category: categoryName(categories, categoryId, lang),
       rows: result.rows,
       rule: result.ruleSaved,
     });
@@ -128,7 +130,7 @@ export function AiReviewQueue({ groups }: { groups: AiSuggestionGroup[] }) {
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted">suggests</span>
                   <span className="rounded-lg bg-cream-paper/70 px-2.5 py-1 text-sm font-semibold text-ink">
-                    {categoryName(categories, group.suggestedCategory)}
+                    {categoryName(categories, group.suggestedCategory, lang)}
                   </span>
                   <span
                     className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
@@ -187,7 +189,7 @@ export function AiReviewQueue({ groups }: { groups: AiSuggestionGroup[] }) {
                       >
                         <option value="">Choose the right category…</option>
                         {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((option) => (
-                          <optgroup key={option} label={GROUP_LABELS[option]}>
+                          <optgroup key={option} label={groupLabel(option, lang)}>
                             {options
                               .filter((category) => category.group === option)
                               .map((category) => (

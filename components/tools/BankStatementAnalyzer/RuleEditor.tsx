@@ -4,6 +4,7 @@
 // transaction opens here pre-filled so the CA can adjust it before saving —
 // never saved behind their back.
 
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useState } from "react";
 import type {
   ClassificationRule,
@@ -25,7 +26,7 @@ import {
   TextInput,
 } from "@/components/toolkit/ui";
 import { conditionValues, countMatches } from "@/lib/bankStatement/classification/rulesEngine";
-import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
 import { KeywordInput } from "@/components/tools/BankStatementAnalyzer/KeywordInput";
 
 const FIELD_LABELS: Record<RuleField, string> = {
@@ -67,6 +68,7 @@ export function RuleEditor({
   onSave: (rule: ClassificationRule) => void;
   onCancel: () => void;
 }) {
+  const { lang } = useI18n();
   const [draft, setDraft] = useState<ClassificationRule>(rule);
 
   const matches = useMemo(
@@ -255,7 +257,7 @@ export function RuleEditor({
             >
               <option value="">Leave unchanged</option>
               {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
-                <optgroup key={group} label={GROUP_LABELS[group]}>
+                <optgroup key={group} label={groupLabel(group, lang)}>
                   {options
                     .filter((category) => category.group === group)
                     .map((category) => (

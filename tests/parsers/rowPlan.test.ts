@@ -172,14 +172,25 @@ describe("suggesting the wrapped lines", () => {
 
 describe("describing a plan", () => {
   it("says so when there is nothing to say", () => {
-    expect(describeRowPlan({})).toBe("No changes");
+    expect(describeRowPlan({}, "en")).toBe("No changes");
   });
 
   it("reads in one-based rows, as the grid shows them", () => {
-    const description = describeRowPlan({ startRow: 3, endRow: 7, headerRow: 3, skipRows: [8], mergeUp: [5, 9] });
+    const description = describeRowPlan(
+      { startRow: 3, endRow: 7, headerRow: 3, skipRows: [8], mergeUp: [5, 9] },
+      "en"
+    );
     expect(description).toContain("rows 4–8");
     expect(description).toContain("header on row 4");
     expect(description).toContain("1 row skipped");
     expect(description).toContain("2 rows joined");
+  });
+
+  it("describes the plan in the reader's language", () => {
+    const plan = { startRow: 3, endRow: 7, skipRows: [8] };
+    const hindi = describeRowPlan(plan, "hi");
+    expect(hindi).not.toBe(describeRowPlan(plan, "en"));
+    expect(hindi).toContain("4");
+    expect(hindi).toContain("8");
   });
 });

@@ -8,6 +8,7 @@ import type {
   ColumnMapping,
   DateFormat,
   RawRow,
+  IssueCode,
   RowStatus,
   Transaction,
   TransactionType,
@@ -27,13 +28,13 @@ export type NormaliseInput = {
 export type NormaliseResult = {
   transactions: Transaction[];
   /** Rows that produced nothing usable, with the reason. */
-  rejected: { row: RawRow; reason: string }[];
+  rejected: { row: RawRow; reason: string; code: IssueCode }[];
   /**
    * Rows with a valid date but an explicit zero amount — an opening carry
    * forward, a nil entry. Not a failure: no money moved, so there is nothing
    * to lose. Counted separately so it never inflates the unresolved figure.
    */
-  skipped: { row: RawRow; reason: string }[];
+  skipped: { row: RawRow; reason: string; code: IssueCode }[];
   /** Rows that continued a previous transaction's narration. */
   continuations: number;
   /**
@@ -64,8 +65,8 @@ export function normalise(input: NormaliseInput): NormaliseResult {
   const { rows, mapping, dateFormat, statementId, currency } = input;
 
   const transactions: Transaction[] = [];
-  const rejected: { row: RawRow; reason: string }[] = [];
-  const skipped: { row: RawRow; reason: string }[] = [];
+  const rejected: { row: RawRow; reason: string; code: IssueCode }[] = [];
+  const skipped: { row: RawRow; reason: string; code: IssueCode }[] = [];
   const balanceMarkers: { date: string; balance: number; narration: string }[] = [];
   let continuations = 0;
 
@@ -92,6 +93,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
       rejected.push({
         row,
         reason: dateText ? `Unreadable date "${dateText}"` : "No date on a row carrying an amount",
+        code: dateText ? { code: "UNREADABLE_DATE", date: dateText } : { code: "NO_DATE" },
       });
       continue;
     }
@@ -99,7 +101,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
     let debit = 0;
     let credit = 0;
     let status: RowStatus = "VALID";
-    let issue: string | undefined;
+    let issue: IssueCode | undefined;
 
     if (debitRaw !== null || creditRaw !== null) {
       debit = Math.abs(debitRaw ?? 0);
@@ -107,7 +109,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
       // Both sides filled is almost always a column mis-read, not a real row.
       if (debit > 0 && credit > 0) {
         status = "UNRESOLVED";
-        issue = "Row has both a debit and a credit amount";
+        issue = { code: "BOTH_DEBIT_CREDIT" };
       }
     } else if (amountRaw !== null) {
       const direction = cell(row, mapping.direction).toUpperCase();
@@ -125,10 +127,14 @@ export function normalise(input: NormaliseInput): NormaliseResult {
           balance: round2(markerBalance),
           narration: narrationText,
         });
-        skipped.push({ row, reason: "Balance marker row — no money moved" });
+        skipped.push({
+          row,
+          reason: "Balance marker row — no money moved",
+          code: { code: "BALANCE_MARKER" },
+        });
         continue;
       }
-      rejected.push({ row, reason: "No amount on the row" });
+      rejected.push({ row, reason: "No amount on the row", code: { code: "NO_AMOUNT" } });
       continue;
     }
 
@@ -136,7 +142,11 @@ export function normalise(input: NormaliseInput): NormaliseResult {
       // An explicit zero is a real, readable value — this row simply moved no
       // money (an opening carry forward, a nil entry). Skipping it loses
       // nothing, so it is not an extraction failure.
-      skipped.push({ row, reason: "Row has a zero amount — no money moved" });
+      skipped.push({
+        row,
+        reason: "Row has a zero amount — no money moved",
+        code: { code: "ZERO_AMOUNT" },
+      });
       continue;
     }
 
@@ -144,7 +154,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
     const narration = narrationText || "(no narration)";
     if (!narrationText) {
       status = status === "VALID" ? "WARNING" : status;
-      issue = issue ?? "Row has no narration";
+      issue = issue ?? { code: "NO_NARRATION" };
     }
 
     const reference = cell(row, mapping.reference) || extractReference(narration);
@@ -171,7 +181,7 @@ export function normalise(input: NormaliseInput): NormaliseResult {
       sourcePage: row.page,
       sourceRow: row.row,
       rowStatus: status,
-      rowIssue: issue,
+      rowIssueCode: issue,
       createdAt: new Date().toISOString(),
     });
   }

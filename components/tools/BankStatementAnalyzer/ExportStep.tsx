@@ -3,6 +3,7 @@
 // Step 5 — Export. Excel workbook, PDF report and a plain CSV, all generated in
 // the browser (§18). Nothing is uploaded and no email is sent.
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import Link from "next/link";
 import { FileSpreadsheet, FileText, Table } from "lucide-react";
@@ -18,6 +19,7 @@ import { downloadCsv, toCsv } from "@/lib/pos/csv";
 import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 
 export function ExportStep() {
+  const { lang } = useI18n();
   const { activeStatements, activeTransactions, analysis, categories, actions, loaded, statements } =
     useAnalyzer();
   const [busy, setBusy] = useState<string | null>(null);
@@ -64,7 +66,8 @@ export function ExportStep() {
         activeStatements,
         activeTransactions,
         analysis,
-        categories
+        categories,
+        lang
       );
       actions.log("Report exported", "PDF report");
     } finally {
@@ -86,7 +89,7 @@ export function ExportStep() {
             transaction.debit || "",
             transaction.credit || "",
             transaction.balance ?? "",
-            categoryName(categories, transaction.category),
+            categoryName(categories, transaction.category, lang),
             transaction.partyName ?? "",
             transaction.classificationType,
             transaction.confidence ?? 0,

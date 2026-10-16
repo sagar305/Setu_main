@@ -13,11 +13,12 @@
 // the merchants are listed underneath, so the proposal can be checked before
 // it is accepted.
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { FolderPlus, Sparkles } from "lucide-react";
 import { Card, Field, PrimaryButton, SecondaryButton, Select, TextInput } from "@/components/toolkit/ui";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
-import { GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { groupLabel } from "@/lib/bankStatement/classification/categories";
 import type { CategorySuggestion } from "@/lib/bankStatement/ai/categorySuggestion";
 import type { CategoryGroup } from "@/lib/bankStatement/types";
 
@@ -106,6 +107,7 @@ function SuggestionRow({
     group: CategoryGroup
   ) => Promise<string | undefined>;
 }) {
+  const { lang } = useI18n();
   const [name, setName] = useState(suggestion.name);
   const [description, setDescription] = useState(suggestion.description);
   const [group, setGroup] = useState<CategoryGroup>(suggestion.group);
@@ -146,7 +148,7 @@ function SuggestionRow({
           <Select value={group} onChange={(event) => setGroup(event.target.value as CategoryGroup)}>
             {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((option) => (
               <option key={option} value={option}>
-                {GROUP_LABELS[option]}
+                {groupLabel(option, lang)}
               </option>
             ))}
           </Select>

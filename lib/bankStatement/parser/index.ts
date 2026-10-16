@@ -181,6 +181,7 @@ export async function parseStatementFile(
     transactions: sorted,
     rejected: rejected.map((item) => ({
       reason: item.reason,
+      code: item.code,
       row: item.row.row,
       page: item.row.page,
     })),

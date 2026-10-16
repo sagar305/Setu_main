@@ -7,6 +7,8 @@
 // the only thing that starts it, and everything the tool did before — rules,
 // patterns, categorising by hand — is untouched whether it is used or not.
 
+import { useI18n } from "@/lib/i18n";
+import { aiProgressLabel } from "@/lib/bankStatement/messages";
 import { useEffect, useState } from "react";
 import { Download, Sparkles, ShieldCheck, WifiOff } from "lucide-react";
 import { Card, Field, NumberInput, PrimaryButton, SecondaryButton } from "@/components/toolkit/ui";
@@ -18,6 +20,7 @@ import { AiCategorySuggestions } from "@/components/tools/BankStatementAnalyzer/
 import { categoryName } from "@/lib/bankStatement/classification/categories";
 
 export function AiCategorisationPanel() {
+  const { lang } = useI18n();
   const { settings, categories, learned, actions } = useAnalyzer();
   const {
     supported,
@@ -185,7 +188,9 @@ export function AiCategorisationPanel() {
                   : run.stage === "grouping"
                   ? { label: "Looking for categories you do not have" }
                   : {
-                      label: client.message ?? "Reading transactions on this device…",
+                      label: client.progress
+                        ? aiProgressLabel(client.progress, lang)
+                        : "Reading transactions on this device…",
                       current: client.percent,
                       total: client.percent === undefined ? undefined : 100,
                     }
@@ -285,7 +290,7 @@ export function AiCategorisationPanel() {
                     className="flex flex-wrap items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 text-xs"
                   >
                     <span className="min-w-0 flex-1 truncate font-medium text-ink">{entry.label}</span>
-                    <span className="text-muted">→ {categoryName(categories, entry.category)}</span>
+                    <span className="text-muted">→ {categoryName(categories, entry.category, lang)}</span>
                     {entry.count > 1 ? (
                       <span className="text-muted">· confirmed {entry.count}×</span>
                     ) : null}

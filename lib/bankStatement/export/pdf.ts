@@ -7,11 +7,22 @@ import type {
   AnalysisResult,
   BankStatement,
   Category,
+  ParseStatus,
   Transaction,
 } from "@/lib/bankStatement/types";
 import { groupIndian } from "@/lib/bankStatement/utils/numbers";
 import { formatDate } from "@/lib/bankStatement/utils/dates";
 import { categoryName } from "@/lib/bankStatement/classification/categories";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+
+/** How a parse status reads in a report a CA hands to someone else. */
+const PARSE_STATUS_KEYS: Record<ParseStatus, TKey> = {
+  VALID: "bsStatusValid",
+  WARNING: "bsStatusWarning",
+  UNRESOLVED: "bsStatusUnresolved",
+};
 
 const MARGIN = 40;
 const LINE = 14;
@@ -147,69 +158,82 @@ class Report {
 
 const money = (value: number) => groupIndian(value);
 
+// The printed report is for a reader, not a machine: unlike the workbook in
+// ./excel, every heading, column and note here follows the language the CA is
+// working in. Narrations, party names and file names are the bank's own words
+// and stay exactly as extracted.
 export function downloadPdfReport(
   fileName: string,
   statements: BankStatement[],
   transactions: Transaction[],
   analysis: AnalysisResult,
-  categories: Category[]
+  categories: Category[],
+  lang: LanguageCode
 ): void {
   const report = new Report();
+  const t = (key: TKey) => translate(lang, key);
+  const statusLabel = (status: ParseStatus) => t(PARSE_STATUS_KEYS[status]);
 
   const period = statements.length
     ? `${statements[0].startDate ?? "—"} to ${statements[statements.length - 1].endDate ?? "—"}`
     : "—";
 
   report.title(
-    "Bank Statement Analysis",
-    `${statements.length} statement${statements.length === 1 ? "" : "s"} · ${period} · generated ${new Date().toLocaleDateString("en-IN")}`
+    t("bsPdfTitle"),
+    fill(t(statements.length === 1 ? "bsPdfSubtitle1" : "bsPdfSubtitleN"), {
+      n: statements.length,
+      period,
+      date: new Date().toLocaleDateString(intlLocaleFor(lang)),
+    })
   );
 
   // Any statement that did not parse cleanly is declared up front, before a
   // single figure — a CA must not read these totals as complete (§30).
   const unresolved = statements.filter((statement) => statement.parseStatus !== "VALID");
   if (unresolved.length > 0) {
-    report.heading("Extraction warnings");
+    report.heading(t("bsPdfExtractionWarnings"));
     for (const statement of unresolved) {
       report.paragraph(
-        `${statement.fileName}: ${statement.parseStatus}. Extracted ${statement.validation.resolved + statement.validation.warnings} of ${statement.validation.extracted} rows; ${statement.validation.unresolved} unresolved.`
+        fill(t("bsPdfStatementLine"), {
+          file: statement.fileName,
+          status: statusLabel(statement.parseStatus),
+          ok: statement.validation.resolved + statement.validation.warnings,
+          total: statement.validation.extracted,
+          bad: statement.validation.unresolved,
+        })
       );
     }
-    report.paragraph(
-      "Figures below exclude rows that could not be resolved. Review the statement before relying on these totals."
-    );
+    report.paragraph(t("bsPdfExcludeNote"));
   }
 
   const unverified = statements.filter((statement) => !statement.parserValidated);
   if (unverified.length > 0) {
-    report.paragraph(
-      "Parsed with the generic layout engine. Bank-specific parsers have not been verified against real statements from this bank."
-    );
+    report.paragraph(t("bsPdfGenericNote"));
   }
 
-  report.heading("Summary");
+  report.heading(t("bsSummary"));
   report.table(
     [
-      { header: "Measure", width: 200 },
-      { header: "Value", width: 150, align: "right" },
+      { header: t("bsPdfMeasure"), width: 200 },
+      { header: t("bsPdfValue"), width: 150, align: "right" },
     ],
     [
-      ["Total credits", money(analysis.totals.credits)],
-      ["Total debits", money(analysis.totals.debits)],
-      ["Net cash flow", money(analysis.totals.net)],
-      ["Transactions", String(analysis.totals.count)],
-      ["Excluded as duplicates", String(analysis.totals.excludedDuplicates)],
+      [t("tbTotalCredits"), money(analysis.totals.credits)],
+      [t("tbTotalDebits"), money(analysis.totals.debits)],
+      [t("bsNetCashFlow"), money(analysis.totals.net)],
+      [t("bsTransactions"), String(analysis.totals.count)],
+      [t("bsPdfExcludedDuplicates"), String(analysis.totals.excludedDuplicates)],
     ]
   );
 
-  report.heading("Monthly summary");
+  report.heading(t("bsPdfMonthlySummary"));
   report.table(
     [
-      { header: "Month", width: 90 },
-      { header: "Opening", width: 90, align: "right" },
-      { header: "Credits", width: 90, align: "right" },
-      { header: "Debits", width: 90, align: "right" },
-      { header: "Closing", width: 90, align: "right" },
+      { header: t("tuRpMonth"), width: 90 },
+      { header: t("opening"), width: 90, align: "right" },
+      { header: t("bsColCredits"), width: 90, align: "right" },
+      { header: t("bsColDebits"), width: 90, align: "right" },
+      { header: t("closing"), width: 90, align: "right" },
     ],
     analysis.monthly.map((row) => [
       row.label,
@@ -220,13 +244,13 @@ export function downloadPdfReport(
     ])
   );
 
-  report.heading("Expense analysis");
+  report.heading(t("bsPdfExpenseAnalysis"));
   report.table(
     [
-      { header: "Category", width: 200 },
-      { header: "Amount", width: 100, align: "right" },
-      { header: "Share", width: 70, align: "right" },
-      { header: "Count", width: 60, align: "right" },
+      { header: t("category"), width: 200 },
+      { header: t("amount"), width: 100, align: "right" },
+      { header: t("share"), width: 70, align: "right" },
+      { header: t("bsColCount"), width: 60, align: "right" },
     ],
     analysis.expenseCategories.map((row) => [
       row.category,
@@ -236,13 +260,13 @@ export function downloadPdfReport(
     ])
   );
 
-  report.heading("Income analysis");
+  report.heading(t("bsPdfIncomeAnalysis"));
   report.table(
     [
-      { header: "Category", width: 200 },
-      { header: "Amount", width: 100, align: "right" },
-      { header: "Share", width: 70, align: "right" },
-      { header: "Count", width: 60, align: "right" },
+      { header: t("category"), width: 200 },
+      { header: t("amount"), width: 100, align: "right" },
+      { header: t("share"), width: 70, align: "right" },
+      { header: t("bsColCount"), width: 60, align: "right" },
     ],
     analysis.incomeCategories.map((row) => [
       row.category,
@@ -253,13 +277,13 @@ export function downloadPdfReport(
   );
 
   if (analysis.cash.transactions.length > 0) {
-    report.heading("Cash transactions");
+    report.heading(t("bsPdfCashTransactions"));
     report.table(
       [
-        { header: "Date", width: 70 },
-        { header: "Narration", width: 220 },
-        { header: "Deposit", width: 85, align: "right" },
-        { header: "Withdrawal", width: 85, align: "right" },
+        { header: t("date"), width: 70 },
+        { header: t("bkNarration"), width: 220 },
+        { header: t("bsColDeposit"), width: 85, align: "right" },
+        { header: t("bsColWithdrawal"), width: 85, align: "right" },
       ],
       analysis.cash.transactions.map((t) => [
         formatDate(t.date),
@@ -271,30 +295,30 @@ export function downloadPdfReport(
   }
 
   if (analysis.highValue.length > 0) {
-    report.heading("High value transactions");
+    report.heading(t("bsPdfHighValue"));
     report.table(
       [
-        { header: "Date", width: 70 },
-        { header: "Narration", width: 200 },
-        { header: "Amount", width: 90, align: "right" },
-        { header: "Category", width: 110 },
+        { header: t("date"), width: 70 },
+        { header: t("bkNarration"), width: 200 },
+        { header: t("amount"), width: 90, align: "right" },
+        { header: t("category"), width: 110 },
       ],
       analysis.highValue.map((t) => [
         formatDate(t.date),
         t.narration,
         money(Math.max(t.debit, t.credit)),
-        categoryName(categories, t.category),
+        categoryName(categories, t.category, lang),
       ])
     );
   }
 
   if (analysis.uncategorised.length > 0) {
-    report.heading("Uncategorised — needs review");
+    report.heading(t("bsPdfUncatReview"));
     report.table(
       [
-        { header: "Date", width: 70 },
-        { header: "Narration", width: 250 },
-        { header: "Amount", width: 90, align: "right" },
+        { header: t("date"), width: 70 },
+        { header: t("bkNarration"), width: 250 },
+        { header: t("amount"), width: 90, align: "right" },
       ],
       analysis.uncategorised.map((t) => [
         formatDate(t.date),
@@ -304,13 +328,13 @@ export function downloadPdfReport(
     );
   }
 
-  report.heading("Top counterparties");
+  report.heading(t("bsPdfTopParties"));
   report.table(
     [
-      { header: "Party", width: 200 },
-      { header: "Paid out", width: 100, align: "right" },
-      { header: "Received", width: 100, align: "right" },
-      { header: "Count", width: 60, align: "right" },
+      { header: t("bsColParty"), width: 200 },
+      { header: t("bsPdfPaidOut"), width: 100, align: "right" },
+      { header: t("bsPdfReceived"), width: 100, align: "right" },
+      { header: t("bsColCount"), width: 60, align: "right" },
     ],
     analysis.parties.map((row) => [
       row.party,
@@ -321,7 +345,7 @@ export function downloadPdfReport(
   );
 
   report.footerOnEveryPage(
-    `Generated locally in the browser by Setu Bank Statement Analyzer · ${transactions.length} transactions reviewed`
+    fill(t("bsPdfFooter"), { n: transactions.length })
   );
 
   report.save(fileName);

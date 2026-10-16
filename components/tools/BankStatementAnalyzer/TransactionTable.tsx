@@ -7,10 +7,11 @@
 // as one continuous ledger with a sticky header. No virtualisation dependency —
 // the repo has none, and the windowing this needs is a dozen lines.
 
+import { useI18n } from "@/lib/i18n";
 import { useCallback, useMemo, useRef, useState } from "react";
 import type { Category, Transaction } from "@/lib/bankStatement/types";
 import { formatDate } from "@/lib/bankStatement/utils/dates";
-import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
 import { confidenceBand, sourceBadge, sourceLabel } from "@/lib/bankStatement/classification/classifier";
 
 const ROW_HEIGHT = 56;
@@ -157,6 +158,7 @@ function Row({
   onCreateRule: () => void;
   money: (value: number) => string;
 }) {
+  const { lang } = useI18n();
   const band = confidenceBand(transaction.confidence);
   const bandStyle =
     band === "high"
@@ -229,7 +231,7 @@ function Row({
       >
         <option value="">Uncategorised</option>
         {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
-          <optgroup key={group} label={GROUP_LABELS[group]}>
+          <optgroup key={group} label={groupLabel(group, lang)}>
             {categories
               .filter((category) => category.group === group)
               .map((category) => (
