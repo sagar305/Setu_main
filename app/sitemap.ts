@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sitemap",
     "/privacy",
     "/terms",
+    "/refund-policy",
     "/products",
     "/products/qr-menu",
     "/products/restaurant-pos",

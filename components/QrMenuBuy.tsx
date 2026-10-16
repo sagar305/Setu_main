@@ -218,7 +218,13 @@ export function QrMenuBuy() {
         )}
         Buy {billing} · {formatPrice(amounts[billing], region)}
       </button>
-      <p className="mt-3 text-xs text-muted">Secure payment by Cashfree.</p>
+      <p className="mt-3 text-xs text-muted">
+        Secure payment by Cashfree. Keys are one-time payments that never renew. See the{" "}
+        <a href="/refund-policy" className="underline hover:text-ink">
+          refund &amp; cancellation policy
+        </a>
+        .
+      </p>
     </form>
   );
 }
