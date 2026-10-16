@@ -74,7 +74,7 @@ export function buildWorkbook(
         t.partyName ?? "",
         TYPE_LABEL[t.classificationType] ?? t.classificationType,
         t.confidence ?? 0,
-        sourceLabel(t.classificationSource),
+        sourceLabel(t.classificationSource, "en"),
         t.isDuplicate ? "Possible duplicate" : "",
         t.notes ?? "",
       ]),

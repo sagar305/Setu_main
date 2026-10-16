@@ -1,6 +1,7 @@
 // Classification is deterministic and rule-first (spec §13). These tests pin
 // the precedence order and the honesty of the confidence score.
 
+import { LANGUAGES } from "@/lib/i18n/config";
 import { describe, expect, it } from "vitest";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import {
@@ -209,13 +210,17 @@ describe("applying a classification", () => {
     expect(row.aiSimilarity).toBeUndefined();
   });
 
-  it("names every source it can be given", () => {
+  it("names every source it can be given, in every language we publish", () => {
     for (const source of ["RULE", "MANUAL", "MEMORY", "HEURISTIC", "AI", "UNCLASSIFIED"] as const) {
-      expect(sourceLabel(source)).toBeTruthy();
-      expect(sourceBadge(source)).toBeTruthy();
+      for (const { code } of LANGUAGES) {
+        expect(sourceLabel(source, code)).toBeTruthy();
+        expect(sourceBadge(source, code)).toBeTruthy();
+      }
     }
-    expect(sourceBadge("AI")).toBe("AI");
-    expect(sourceBadge("RULE")).toBe("Rule");
+    // "AI" is the same two letters everywhere, so it is deliberately not keyed.
+    expect(sourceBadge("AI", "hi")).toBe("AI");
+    expect(sourceBadge("RULE", "en")).toBe("Rule");
+    expect(sourceBadge("RULE", "hi")).not.toBe("Rule");
   });
 });
 

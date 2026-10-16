@@ -93,7 +93,7 @@ export function ExportStep() {
             transaction.partyName ?? "",
             transaction.classificationType,
             transaction.confidence ?? 0,
-            sourceLabel(transaction.classificationSource),
+            sourceLabel(transaction.classificationSource, "en"),
             transaction.isDuplicate ? "Possible duplicate" : "",
             transaction.notes ?? "",
           ])
