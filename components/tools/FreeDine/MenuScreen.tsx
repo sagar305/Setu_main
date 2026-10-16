@@ -431,7 +431,12 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
   };
 
   return (
-    <Modal open onClose={onClose} title={item ? `Edit ${item.name}` : "New dish"} wide>
+    <Modal
+      open
+      onClose={onClose}
+      title={item ? fill(t("dnMnEditDish"), { name: item.name }) : t("dnMnNewDish")}
+      wide
+    >
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t("name")} required>
@@ -462,7 +467,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               <input
                 value={newCategory}
                 onChange={(event) => setNewCategory(event.target.value)}
-                placeholder="e.g. Starters"
+                placeholder={t("dnMnCategoryPh")}
                 className={inputClass}
               />
             )}
