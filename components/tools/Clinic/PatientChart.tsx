@@ -17,7 +17,7 @@ import { billDue, formatAgeSex, patientDues } from "@/lib/clinic/calc";
 import { printChart } from "@/lib/clinic/print";
 import { whatsAppLink } from "@/lib/clinic/messages";
 import {
-  FORM_SHORT,
+  formShort,
   formatDate,
   patientAllergies,
   patientConditions,
@@ -32,6 +32,8 @@ import { Modal, primaryBtnClass, secondaryBtnClass } from "@/components/tools/Fr
 import type { NavigateFn } from "./nav";
 import { PatientForm } from "./PatientForm";
 import { VitalsTrend } from "./VitalsTrend";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 
 type Tab = "visits" | "bills" | "vitals" | "details";
 
@@ -44,6 +46,7 @@ export function PatientChart({
   onNavigate: NavigateFn;
   onClose: () => void;
 }) {
+  const { t, lang } = useI18n();
   const {
     visits,
     bills,
@@ -105,7 +108,7 @@ export function PatientChart({
             <div className="min-w-0">
               <h3 className="truncate text-lg font-bold text-ink">{patient.name}</h3>
               <p className="truncate text-xs text-muted">
-                {[patient.code, formatAgeSex(patient), patient.bloodGroup]
+                {[patient.code, formatAgeSex(patient, lang), patient.bloodGroup]
                   .filter(Boolean)
                   .join(" · ")}
               </p>
@@ -118,10 +121,10 @@ export function PatientChart({
                 <a
                   href={`tel:${patient.phone}`}
                   className={secondaryBtnClass}
-                  aria-label="Call patient"
+                  aria-label={t("clPcCallPatient")}
                 >
                   <Phone className="h-4 w-4" />
-                  Call
+                  {t("clPcCall")}
                 </a>
                 <a
                   href={whatsAppLink(patient.phone, "")}
@@ -136,7 +139,7 @@ export function PatientChart({
             )}
             <button type="button" onClick={startConsult} className={primaryBtnClass}>
               <Play className="h-4 w-4" />
-              Start consult
+              {t("clTdStartConsult")}
             </button>
           </div>
         </div>
@@ -160,7 +163,7 @@ export function PatientChart({
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-muted">
               <Users className="h-3.5 w-3.5" />
-              Family
+              {t("clPcFamily")}
             </span>
             {family.map((member) => (
               <button
@@ -178,7 +181,7 @@ export function PatientChart({
         <div className="mt-4 flex flex-wrap gap-2">
           <button type="button" onClick={() => setEditOpen(true)} className={secondaryBtnClass}>
             <Pencil className="h-4 w-4" />
-            Edit
+            {t("edit")}
           </button>
           <button
             type="button"
@@ -186,18 +189,18 @@ export function PatientChart({
             className={secondaryBtnClass}
           >
             <Receipt className="h-4 w-4" />
-            Add bill
+            {t("clPcAddBill")}
           </button>
           <button
             type="button"
-            onClick={() => printChart(business, settings, patient, patientVisits, doctors)}
+            onClick={() => printChart(business, settings, patient, patientVisits, doctors, lang)}
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            Export chart
+            {t("clPcExportChart")}
           </button>
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Back to list
+            {t("clPcBackToList")}
           </button>
         </div>
       </div>
@@ -205,10 +208,10 @@ export function PatientChart({
       <div className="flex gap-1 overflow-x-auto">
         {(
           [
-            ["visits", `Visits (${patientVisits.length})`],
-            ["bills", `Bills (${patientBills.length})`],
-            ["vitals", "Vitals trend"],
-            ["details", "Details"],
+            ["visits", fill(t("clPcTabVisits"), { count: patientVisits.length })],
+            ["bills", fill(t("clPcTabBills"), { count: patientBills.length })],
+            ["vitals", t("clPcTabVitals")],
+            ["details", t("clPcTabDetails")],
           ] as [Tab, string][]
         ).map(([id, label]) => (
           <button
@@ -250,20 +253,20 @@ export function PatientChart({
                   )}
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold text-ink">
-                      {formatDate(visit.date)}
+                      {formatDate(visit.date, lang)}
                       {!visit.finalisedAt && (
                         <span className="ml-2 rounded-full bg-saffron/20 px-2 py-0.5 text-[10px] font-semibold">
-                          Draft
+                          {t("clPcDraft")}
                         </span>
                       )}
                       {visit.editedAfterFinaliseAt && (
                         <span className="ml-2 rounded-full bg-muted-line/20 px-2 py-0.5 text-[10px] font-semibold text-muted">
-                          Edited
+                          {t("clPcEdited")}
                         </span>
                       )}
                     </span>
                     <span className="block truncate text-xs text-muted">
-                      {[visit.diagnosis || "No diagnosis recorded", doctorName(visit.doctorId)]
+                      {[visit.diagnosis || t("clPcNoDiagnosis"), doctorName(visit.doctorId)]
                         .filter(Boolean)
                         .join(" · ")}
                     </span>
@@ -274,21 +277,21 @@ export function PatientChart({
                   <div className="space-y-2 border-t border-muted-line/20 px-3 py-3 text-sm">
                     {visit.complaints && (
                       <p>
-                        <b className="text-muted">Complaints:</b> {visit.complaints}
+                        <b className="text-muted">{t("clDocComplaints")}:</b> {visit.complaints}
                       </p>
                     )}
                     {visit.findings && (
                       <p>
-                        <b className="text-muted">Findings:</b> {visit.findings}
+                        <b className="text-muted">{t("clDocFindings")}:</b> {visit.findings}
                       </p>
                     )}
                     {(vitals.bp || vitals.weightKg || vitals.pulse) && (
                       <p className="text-xs text-muted">
                         {[
                           vitals.bp ? `BP ${vitals.bp}` : "",
-                          vitals.pulse ? `Pulse ${vitals.pulse}` : "",
-                          vitals.tempF ? `Temp ${vitals.tempF}°F` : "",
-                          vitals.weightKg ? `Wt ${vitals.weightKg} kg` : "",
+                          vitals.pulse ? `${t("clVitPulse")} ${vitals.pulse}` : "",
+                          vitals.tempF ? `${t("clVitTemp")} ${vitals.tempF}°F` : "",
+                          vitals.weightKg ? `${t("clVitWeight")} ${vitals.weightKg} kg` : "",
                           vitals.bmi ? `BMI ${vitals.bmi}` : "",
                         ]
                           .filter(Boolean)
@@ -299,17 +302,19 @@ export function PatientChart({
                       <ol className="list-decimal space-y-0.5 pl-5">
                         {meds.map((line) => (
                           <li key={line.id}>
-                            {[FORM_SHORT[line.form], line.name, line.strength, line.frequency]
+                            {[formShort(line.form, lang), line.name, line.strength, line.frequency]
                               .filter(Boolean)
                               .join(" ")}
-                            {line.durationDays ? ` × ${line.durationDays} days` : ""}
+                            {line.durationDays
+                              ? ` ${fill(t("clPcTimesDays"), { n: line.durationDays })}`
+                              : ""}
                           </li>
                         ))}
                       </ol>
                     )}
                     {visit.advice && (
                       <p>
-                        <b className="text-muted">Advice:</b> {visit.advice}
+                        <b className="text-muted">{t("clDocAdvice")}:</b> {visit.advice}
                       </p>
                     )}
                     <button
@@ -317,7 +322,7 @@ export function PatientChart({
                       onClick={() => onNavigate("consult", visit.id)}
                       className={secondaryBtnClass}
                     >
-                      Open &amp; print again
+                      {t("clPcOpenPrintAgain")}
                     </button>
                   </div>
                 )}
@@ -329,7 +334,7 @@ export function PatientChart({
 
       {tab === "bills" && (
         <div className="space-y-2">
-          {patientBills.length === 0 && <p className="text-sm text-muted">No bills yet.</p>}
+          {patientBills.length === 0 && <p className="text-sm text-muted">{t("clPcNoBills")}</p>}
           {patientBills.map((bill) => (
             <div
               key={bill.id}
@@ -338,7 +343,7 @@ export function PatientChart({
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-ink">{bill.receiptNo}</p>
                 <p className="text-xs text-muted">
-                  {formatDate(bill.date)} · {bill.paymentMode}
+                  {formatDate(bill.date, lang)} · {bill.paymentMode}
                 </p>
               </div>
               <div className="text-right">
@@ -347,7 +352,9 @@ export function PatientChart({
                 </p>
                 {billDue(bill) > 0 && (
                   <p className="text-xs font-semibold text-red-600">
-                    {formatCurrency(billDue(bill), currency)} due
+                    {fill(t("clPcAmountDue"), {
+                      amount: formatCurrency(billDue(bill), currency),
+                    })}
                   </p>
                 )}
               </div>
@@ -364,19 +371,19 @@ export function PatientChart({
 
       {tab === "details" && (
         <div className="space-y-2 rounded-2xl border border-muted-line/30 bg-white p-4 text-sm">
-          <Detail label="Phone" value={patient.phone} />
-          <Detail label="Alternate phone" value={patient.altPhone} />
-          <Detail label="Address" value={patient.address} />
-          <Detail label="Registered" value={formatDate(patient.registeredOn)} />
-          <Detail label="WhatsApp number" value={whatsAppNumber(patient.phone)} />
+          <Detail label={t("phone")} value={patient.phone} />
+          <Detail label={t("clPfAltPhone")} value={patient.altPhone} />
+          <Detail label={t("address")} value={patient.address} />
+          <Detail label={t("clPcRegistered")} value={formatDate(patient.registeredOn, lang)} />
+          <Detail label={t("clPcWhatsAppNumber")} value={whatsAppNumber(patient.phone)} />
           {patientCustomFields(patient).map((field) => (
             <Detail key={field.id} label={field.label} value={field.value} />
           ))}
-          <Detail label="Notes" value={patient.notes} />
+          <Detail label={t("notes")} value={patient.notes} />
         </div>
       )}
 
-      <Modal open={editOpen} onClose={() => setEditOpen(false)} title="Edit patient" wide>
+      <Modal open={editOpen} onClose={() => setEditOpen(false)} title={t("clPcEditPatient")} wide>
         <PatientForm
           patient={patient}
           onSaved={() => setEditOpen(false)}

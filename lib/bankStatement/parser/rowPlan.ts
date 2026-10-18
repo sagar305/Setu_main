@@ -12,6 +12,8 @@
 //
 // Pure. No DOM, no file, no model.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import type { RawRow } from "@/lib/bankStatement/types";
 
 export type RowPlan = {
@@ -97,23 +99,31 @@ export function applyRowPlan(
 }
 
 /** One line describing what a plan does, for the import screen and the audit. */
-export function describeRowPlan(plan: RowPlan): string {
+export function describeRowPlan(plan: RowPlan, lang: LanguageCode): string {
+  const t = (key: TKey) => translate(lang, key);
   const parts: string[] = [];
 
   if (plan.startRow !== undefined || plan.endRow !== undefined) {
     const from = plan.startRow !== undefined ? plan.startRow + 1 : 1;
-    const to = plan.endRow !== undefined ? plan.endRow + 1 : "end";
-    parts.push(`rows ${from}–${to}`);
+    parts.push(
+      plan.endRow !== undefined
+        ? fill(t("bsPlanRows"), { from, to: plan.endRow + 1 })
+        : fill(t("bsPlanRowsToEnd"), { from })
+    );
   }
-  if (plan.headerRow !== undefined) parts.push(`header on row ${plan.headerRow + 1}`);
+  if (plan.headerRow !== undefined) {
+    parts.push(fill(t("bsPlanHeaderRow"), { n: plan.headerRow + 1 }));
+  }
   if (plan.skipRows && plan.skipRows.length > 0) {
-    parts.push(`${plan.skipRows.length} row${plan.skipRows.length === 1 ? "" : "s"} skipped`);
+    const n = plan.skipRows.length;
+    parts.push(fill(t(n === 1 ? "bsPlanSkipped1" : "bsPlanSkippedN"), { n }));
   }
   if (plan.mergeUp && plan.mergeUp.length > 0) {
-    parts.push(`${plan.mergeUp.length} row${plan.mergeUp.length === 1 ? "" : "s"} joined to the row above`);
+    const n = plan.mergeUp.length;
+    parts.push(fill(t(n === 1 ? "bsPlanJoined1" : "bsPlanJoinedN"), { n }));
   }
 
-  return parts.length > 0 ? parts.join(" · ") : "No changes";
+  return parts.length > 0 ? parts.join(" · ") : t("bsPlanNoChanges");
 }
 
 const DATE_CELL = /\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}|\d{4}-\d{2}-\d{2}/;

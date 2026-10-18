@@ -5,6 +5,8 @@
 // is genuinely ambiguous we say so rather than guessing silently.
 
 import type { DateFormat } from "@/lib/bankStatement/types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 
 const MONTHS: Record<string, number> = {
   jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
@@ -149,10 +151,14 @@ export function monthKey(isoDate: string): string {
 }
 
 /** "Mar 2026" for display. */
-export function monthLabel(key: string): string {
+export function monthLabel(key: string, lang: LanguageCode): string {
   const [year, month] = key.split("-").map(Number);
   const date = new Date(Date.UTC(year, month - 1, 1));
-  return date.toLocaleDateString("en-IN", { month: "short", year: "numeric", timeZone: "UTC" });
+  return date.toLocaleDateString(intlLocaleFor(lang), {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 /** Display an ISO date the way an Indian statement would print it. */

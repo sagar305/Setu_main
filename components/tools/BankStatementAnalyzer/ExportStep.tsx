@@ -3,6 +3,9 @@
 // Step 5 — Export. Excel workbook, PDF report and a plain CSV, all generated in
 // the browser (§18). Nothing is uploaded and no email is sent.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { useState } from "react";
 import Link from "next/link";
 import { FileSpreadsheet, FileText, Table } from "lucide-react";
@@ -18,6 +21,7 @@ import { downloadCsv, toCsv } from "@/lib/pos/csv";
 import { summariseParse } from "@/lib/bankStatement/normalization/validation";
 
 export function ExportStep() {
+  const { t, lang } = useI18n();
   const { activeStatements, activeTransactions, analysis, categories, actions, loaded, statements } =
     useAnalyzer();
   const [busy, setBusy] = useState<string | null>(null);
@@ -25,8 +29,8 @@ export function ExportStep() {
   if (loaded && statements.length === 0) {
     return (
       <Card>
-        <h2 className="text-xl font-bold text-ink">Nothing to export yet</h2>
-        <p className="mt-2 text-sm text-muted">Import a statement first.</p>
+        <h2 className="text-xl font-bold text-ink">{t("bsExNothing")}</h2>
+        <p className="mt-2 text-sm text-muted">{t("bsExImportFirst")}</p>
         <Link
           href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
@@ -50,7 +54,7 @@ export function ExportStep() {
         analysis,
         categories
       );
-      actions.log("Report exported", "Excel workbook");
+      actions.log({ code: "REPORT_EXPORTED", format: "excel" }, "Report exported", "Excel workbook");
     } finally {
       setBusy(null);
     }
@@ -64,9 +68,10 @@ export function ExportStep() {
         activeStatements,
         activeTransactions,
         analysis,
-        categories
+        categories,
+        lang
       );
-      actions.log("Report exported", "PDF report");
+      actions.log({ code: "REPORT_EXPORTED", format: "pdf" }, "Report exported", "PDF report");
     } finally {
       setBusy(null);
     }
@@ -75,6 +80,10 @@ export function ExportStep() {
   const exportCsv = () => {
     setBusy("csv");
     try {
+      // A CSV is a data file, like the workbook: the column names and the cell
+      // values stay English so a Tally import or a formula built on them does
+      // not break when the reader's language changes. The PDF is the artefact
+      // that follows the reader.
       downloadCsv(
         `bank-transactions-${stamp}.csv`,
         toCsv(
@@ -86,17 +95,17 @@ export function ExportStep() {
             transaction.debit || "",
             transaction.credit || "",
             transaction.balance ?? "",
-            categoryName(categories, transaction.category),
+            categoryName(categories, transaction.category, "en"),
             transaction.partyName ?? "",
             transaction.classificationType,
             transaction.confidence ?? 0,
-            sourceLabel(transaction.classificationSource),
+            sourceLabel(transaction.classificationSource, "en"),
             transaction.isDuplicate ? "Possible duplicate" : "",
             transaction.notes ?? "",
           ])
         )
       );
-      actions.log("Report exported", "Transactions CSV");
+      actions.log({ code: "REPORT_EXPORTED", format: "csv" }, "Report exported", "Transactions CSV");
     } finally {
       setBusy(null);
     }
@@ -105,71 +114,76 @@ export function ExportStep() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-ink">Export</h2>
+        <h2 className="text-2xl font-bold text-ink">{t("bsStepExport")}</h2>
         <p className="mt-1 text-sm text-muted">
-          {activeTransactions.length.toLocaleString("en-IN")} transactions across{" "}
-          {activeStatements.length} statement{activeStatements.length === 1 ? "" : "s"}.
+          {fill(t(activeStatements.length === 1 ? "bsExCount1" : "bsExCountN"), {
+            n: activeTransactions.length.toLocaleString(intlLocaleFor(lang)),
+            s: activeStatements.length,
+          })}
         </p>
       </div>
 
       {flagged.length > 0 ? (
         <Card className="border-amber-200">
-          <h3 className="font-bold text-ink">Exports will carry the extraction warnings</h3>
+          <h3 className="font-bold text-ink">{t("bsExWarnTitle")}</h3>
           <ul className="mt-2 space-y-1 text-sm text-muted">
             {flagged.map((statement) => (
               <li key={statement.id}>
                 <strong className="text-ink">{statement.fileName}</strong> —{" "}
-                {summariseParse(statement.validation, statement.parseStatus)}
+                {summariseParse(statement.validation, statement.parseStatus, lang)}
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-sm text-muted">
-            Both the workbook and the PDF state this on the first sheet and the first page, so
-            whoever reads the report sees it too.
-          </p>
+          <p className="mt-2 text-sm text-muted">{t("bsExWarnBody")}</p>
         </Card>
       ) : null}
 
       <div className="grid gap-6 lg:grid-cols-3">
         <ExportCard
           icon={<FileSpreadsheet className="h-5 w-5" aria-hidden="true" />}
-          title="Excel workbook"
-          description="Every CA report as its own sheet: transactions, monthly summary, expense analysis, cash, high value, uncategorised, bank charges, interest, transfers, counterparties and GST-relevant."
+          title={t("bsFmtExcel")}
+          description={t("bsExExcelDesc")}
           action={
             <PrimaryButton onClick={exportExcel} disabled={busy !== null}>
-              {busy === "excel" ? "Building…" : "Download .xlsx"}
+              {busy === "excel" ? t("bsSampBuilding") : t("bsExDownloadXlsx")}
             </PrimaryButton>
           }
         />
         <ExportCard
           icon={<FileText className="h-5 w-5" aria-hidden="true" />}
-          title="PDF report"
-          description="A formatted report for the file or the client: summary, monthly movement, expense and income analysis, cash, high value, uncategorised and counterparties."
+          title={t("bsFmtPdf")}
+          description={t("bsExPdfDesc")}
           action={
             <PrimaryButton onClick={exportPdf} disabled={busy !== null}>
-              {busy === "pdf" ? "Building…" : "Download .pdf"}
+              {busy === "pdf" ? t("bsSampBuilding") : t("bsExDownloadPdf")}
             </PrimaryButton>
           }
         />
         <ExportCard
           icon={<Table className="h-5 w-5" aria-hidden="true" />}
-          title="Transactions CSV"
-          description="The full transaction list with categories, parties and confidence — for importing into Tally, Excel or your own working papers."
+          title={t("bsFmtCsv")}
+          description={t("bsExCsvDesc")}
           action={
             <SecondaryButton onClick={exportCsv} disabled={busy !== null}>
-              {busy === "csv" ? "Building…" : "Download .csv"}
+              {busy === "csv" ? t("bsSampBuilding") : t("bsExDownloadCsv")}
             </SecondaryButton>
           }
         />
       </div>
 
       <Card>
-        <h3 className="text-base font-bold text-ink">What is in the reports</h3>
+        <h3 className="text-base font-bold text-ink">{t("bsExWhatsIn")}</h3>
         <dl className="mt-3 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
-          <Figure label="Transactions" value={analysis.totals.count.toLocaleString("en-IN")} />
-          <Figure label="Uncategorised" value={String(analysis.uncategorised.length)} />
-          <Figure label="Cash transactions" value={String(analysis.cash.transactions.length)} />
-          <Figure label="High value" value={String(analysis.highValue.length)} />
+          <Figure
+            label={t("bsTransactions")}
+            value={analysis.totals.count.toLocaleString(intlLocaleFor(lang))}
+          />
+          <Figure label={t("bsUncategorised")} value={String(analysis.uncategorised.length)} />
+          <Figure
+            label={t("bsPdfCashTransactions")}
+            value={String(analysis.cash.transactions.length)}
+          />
+          <Figure label={t("bsExHighValue")} value={String(analysis.highValue.length)} />
         </dl>
         <ProcessingNote className="mt-4" />
       </Card>

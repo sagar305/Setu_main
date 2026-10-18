@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   BarChart3,
@@ -31,15 +33,15 @@ import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 import { previewStyleSheet } from "./printing";
 
-const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Receipt }[] = [
-  { id: "floor", label: "Floor", icon: LayoutGrid },
-  { id: "menu", label: "Menu", icon: UtensilsCrossed },
-  { id: "tables", label: "Tables", icon: Grid3x3 },
-  { id: "stock", label: "Stock", icon: Boxes },
-  { id: "bookings", label: "Bookings", icon: CalendarClock },
-  { id: "bills", label: "Bills", icon: Receipt },
-  { id: "reports", label: "Reports", icon: BarChart3 },
-  { id: "settings", label: "Settings", icon: Settings },
+const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Receipt }[] = [
+  { id: "floor", label: "dnFlFloor", icon: LayoutGrid },
+  { id: "menu", label: "dnNavMenu", icon: UtensilsCrossed },
+  { id: "tables", label: "dnNavTables", icon: Grid3x3 },
+  { id: "stock", label: "stock", icon: Boxes },
+  { id: "bookings", label: "dnNavBookings", icon: CalendarClock },
+  { id: "bills", label: "clBkBills", icon: Receipt },
+  { id: "reports", label: "clNavReports", icon: BarChart3 },
+  { id: "settings", label: "clNavSettings", icon: Settings },
 ];
 
 function DineShell({
@@ -49,6 +51,7 @@ function DineShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { business, settings, openTickets } = useDine();
   const [screen, setScreen] = useState<ScreenId>("floor");
   const [query, setQuery] = useState<{ screen: ScreenId; value: string } | null>(null);
@@ -100,8 +103,10 @@ function DineShell({
             <p className="text-sm font-bold text-ink">{business?.name ?? "Free Dine"}</p>
             <p className="text-xs text-muted">
               {runningCount === 0
-                ? "Nothing running"
-                : `${runningCount} ticket${runningCount === 1 ? "" : "s"} open`}
+                ? t("dnAppNothingRunning")
+                : fill(t(runningCount === 1 ? "dnAppTicket1Open" : "dnAppTicketsNOpen"), {
+                    n: runningCount,
+                  })}
             </p>
           </div>
         </div>
@@ -114,7 +119,7 @@ function DineShell({
             href="/products/free-restaurant-pos/kitchen"
             target="_blank"
             rel="noopener noreferrer"
-            title="Open the kitchen screen in a new tab"
+            title={t("dnAppOpenKitchenAria")}
             className={`inline-flex h-9 shrink-0 items-center gap-2 rounded-full border px-3 text-xs font-semibold transition ${
               settings.kitchenLocked
                 ? "border-indigo/40 bg-indigo/10 text-indigo"
@@ -122,15 +127,15 @@ function DineShell({
             }`}
           >
             <ChefHat className="h-4 w-4" />
-            <span className="hidden sm:inline">Kitchen screen</span>
-            {settings.kitchenLocked && <Lock className="h-3 w-3" aria-label="locked" />}
+            <span className="hidden sm:inline">{t("dnAppKitchenScreen")}</span>
+            {settings.kitchenLocked && <Lock className="h-3 w-3" aria-label={t("dnAppLocked")} />}
           </a>
           {hasPin && (
             <button
               type="button"
               onClick={lockNow}
-              aria-label="Lock the counter"
-              title="Lock the counter"
+              aria-label={t("dnAppLockCounter")}
+              title={t("dnAppLockCounter")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
             >
               <Lock className="h-4 w-4" />
@@ -139,8 +144,8 @@ function DineShell({
           <button
             type="button"
             onClick={onToggleFullscreen}
-            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
-            title={fullscreen ? "Exit full screen" : "Full screen"}
+            aria-label={fullscreen ? t("appExitFullScreen") : t("appEnterFullScreen")}
+            title={fullscreen ? t("appExitFullScreen") : t("appFullScreen")}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
           >
             {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -149,7 +154,7 @@ function DineShell({
       </div>
 
       {openTicketId === null && (
-        <nav className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1" aria-label="Sections">
+        <nav className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1" aria-label={t("clNavSections")}>
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
@@ -163,7 +168,7 @@ function DineShell({
               }`}
             >
               <item.icon className="h-4 w-4" />
-              {item.label}
+              {t(item.label)}
             </button>
           ))}
         </nav>
@@ -224,22 +229,23 @@ function DineRouter({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { status, errorMessage } = useDine();
 
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center py-24">
-        <p className="text-sm text-muted">Opening your restaurant…</p>
+        <p className="text-sm text-muted">{t("dnAppOpening")}</p>
       </div>
     );
   }
   if (status === "error") {
     return (
       <div className="mx-auto max-w-md py-16 text-center">
-        <h2 className="text-lg font-bold text-ink">Couldn&apos;t open local storage</h2>
+        <h2 className="text-lg font-bold text-ink">{t("appStorageErrorTitle")}</h2>
         <p className="mt-2 text-sm text-muted">
           {errorMessage ||
-            "Free Dine stores everything in your browser (IndexedDB). Private windows and some very old browsers block it."}
+            t("dnAppStorageBody")}
         </p>
       </div>
     );

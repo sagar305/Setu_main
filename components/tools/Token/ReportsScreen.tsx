@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useToken } from "@/lib/token/store";
 import { retentionCutoff } from "@/lib/token/calc";
 import {
@@ -27,12 +29,13 @@ import { TOKEN_RETENTION_DAYS } from "@/lib/token/types";
 import { SectionCard, chipBtnClass, secondaryBtnClass } from "./ui";
 
 const RANGES = [
-  { id: "7", label: "Last 7 days", days: 7 },
-  { id: "30", label: "Last 30 days", days: 30 },
-  { id: "90", label: `Last ${TOKEN_RETENTION_DAYS} days`, days: TOKEN_RETENTION_DAYS },
+  { id: "7", days: 7 },
+  { id: "30", days: 30 },
+  { id: "90", days: TOKEN_RETENTION_DAYS },
 ] as const;
 
 export function ReportsScreen() {
+  const { t, lang } = useI18n();
   const { tokens, services, counters, today } = useToken();
   const [rangeId, setRangeId] = useState<(typeof RANGES)[number]["id"]>("7");
   const range = RANGES.find((row) => row.id === rangeId) ?? RANGES[0];
@@ -60,21 +63,23 @@ export function ReportsScreen() {
             onClick={() => setRangeId(row.id)}
             className={`${chipBtnClass} ${row.id === rangeId ? "border-indigo bg-indigo/10 text-indigo" : ""}`}
           >
-            {row.label}
+            {row.id === "7"
+              ? t("tkRpLast7")
+              : fill(t("tkRpLastN"), { n: row.days })}
           </button>
         ))}
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Issued" value={String(summary.issued)} />
-        <Stat label="Served" value={String(summary.served)} />
-        <Stat label="Avg wait" value={formatMinutes(summary.averageWait)} />
-        <Stat label="Avg service" value={formatMinutes(summary.averageService)} />
+        <Stat label="tkRpIssued" value={String(summary.issued)} />
+        <Stat label="tkRpServed" value={String(summary.served)} />
+        <Stat label="tkRpAvgWait" value={formatMinutes(summary.averageWait, lang)} />
+        <Stat label="tkRpAvgService" value={formatMinutes(summary.averageService, lang)} />
       </div>
 
       {/* The row that earns this screen: when do people actually turn up. */}
       <SectionCard
-        title="When the room fills"
+        title={t("tkRpWhenFills")}
         action={
           <button
             type="button"
@@ -88,18 +93,19 @@ export function ReportsScreen() {
       >
         {summary.issued === 0 ? (
           <p className="py-6 text-center text-sm text-muted">
-            No tokens in this period yet.
+            {t("tkRpNoTokensPeriod")}
           </p>
         ) : (
           <>
             {busiest && (
               <p className="mb-4 text-sm text-muted">
-                Busiest stretch is{" "}
-                <strong className="text-ink">{formatHourRange(busiest.hour)}</strong>, with{" "}
-                {busiest.issued} tokens. That is when a second counter pays for itself.
+                {fill(t("tkRpBusiest"), {
+                  hours: formatHourRange(busiest.hour),
+                  count: busiest.issued,
+                })}
               </p>
             )}
-            <div className="flex items-end gap-1" role="img" aria-label="Tokens issued by hour">
+            <div className="flex items-end gap-1" role="img" aria-label={t("tkRpByHourAlt")}>
               {hours.map((row) => (
                 <div key={row.hour} className="flex flex-1 flex-col items-center gap-1">
                   <div
@@ -118,7 +124,7 @@ export function ReportsScreen() {
       </SectionCard>
 
       <SectionCard
-        title="No-shows"
+        title={t("tkRpNoShows")}
         action={
           <button
             type="button"
@@ -127,31 +133,31 @@ export function ReportsScreen() {
             onClick={() =>
               downloadCsv(
                 `token-tokens-${today}.csv`,
-                tokensCsv(tokenRows(scoped, services, counters))
+                // English, like every other column in the file.
+                tokensCsv(tokenRows(scoped, services, counters, "en"))
               )
             }
           >
             <Download className="h-4 w-4" aria-hidden="true" />
-            All tokens
+            {t("tkRpAllTokens")}
           </button>
         }
       >
         <div className="grid grid-cols-3 gap-2">
-          <Stat label="Skipped" value={String(summary.skipped)} />
-          <Stat label="Cancelled" value={String(summary.cancelled)} />
+          <Stat label="tkStSkipped" value={String(summary.skipped)} />
+          <Stat label="tkStCancelled" value={String(summary.cancelled)} />
           <Stat
-            label="No-show rate"
+            label="tkRpNoShowRate"
             value={`${Math.round(summary.noShowRate * 100)}%`}
           />
         </div>
         <p className="mt-3 text-xs text-muted">
-          Counted against the people who were actually called — someone still waiting when you
-          closed cannot have failed to appear.
+          {t("tkRpNoShowNote")}
         </p>
       </SectionCard>
 
       <SectionCard
-        title="By counter"
+        title={t("tkRpByCounter")}
         action={
           <button
             type="button"
@@ -167,17 +173,17 @@ export function ReportsScreen() {
         }
       >
         {byCounter.length === 0 ? (
-          <p className="py-6 text-center text-sm text-muted">No counters yet.</p>
+          <p className="py-6 text-center text-sm text-muted">{t("tkRpNoCounters")}</p>
         ) : (
           <div className="-mx-4 overflow-x-auto sm:mx-0">
             <table className="w-full min-w-[520px] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-muted-line/30 text-left text-xs uppercase tracking-wide text-muted">
-                  <th className="px-3 py-2 font-semibold">Counter</th>
-                  <th className="px-3 py-2 font-semibold">Staff</th>
-                  <th className="px-3 py-2 text-right font-semibold">Served</th>
-                  <th className="px-3 py-2 text-right font-semibold">Avg wait</th>
-                  <th className="px-3 py-2 text-right font-semibold">Avg service</th>
+                  <th className="px-3 py-2 font-semibold">{t("tkHiColCounter")}</th>
+                  <th className="px-3 py-2 font-semibold">{t("tkRpStaff")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkRpServed")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkRpAvgWait")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkRpAvgService")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -187,10 +193,10 @@ export function ReportsScreen() {
                     <td className="px-3 py-2.5 text-muted">{row.staffName || "—"}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-ink">{row.served}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-muted">
-                      {formatMinutes(row.averageWait)}
+                      {formatMinutes(row.averageWait, lang)}
                     </td>
                     <td className="px-3 py-2.5 text-right tabular-nums text-muted">
-                      {formatMinutes(row.averageService)}
+                      {formatMinutes(row.averageService, lang)}
                     </td>
                   </tr>
                 ))}
@@ -201,7 +207,7 @@ export function ReportsScreen() {
       </SectionCard>
 
       <SectionCard
-        title="What people come for"
+        title={t("tkRpWhatPeopleComeFor")}
         action={
           <button
             type="button"
@@ -217,7 +223,7 @@ export function ReportsScreen() {
         }
       >
         {byService.length === 0 ? (
-          <p className="py-6 text-center text-sm text-muted">Nothing issued in this period.</p>
+          <p className="py-6 text-center text-sm text-muted">{t("tkRpNothingIssued")}</p>
         ) : (
           <ul className="grid gap-3">
             {byService.map((row) => (
@@ -241,7 +247,7 @@ export function ReportsScreen() {
       </SectionCard>
 
       <SectionCard
-        title="Day by day"
+        title={t("tkRpDayByDay")}
         action={
           <button
             type="button"
@@ -255,17 +261,17 @@ export function ReportsScreen() {
         }
       >
         {days.length === 0 ? (
-          <p className="py-6 text-center text-sm text-muted">Nothing to show yet.</p>
+          <p className="py-6 text-center text-sm text-muted">{t("tkRpNothingYet")}</p>
         ) : (
           <div className="-mx-4 overflow-x-auto sm:mx-0">
             <table className="w-full min-w-[480px] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-muted-line/30 text-left text-xs uppercase tracking-wide text-muted">
-                  <th className="px-3 py-2 font-semibold">Date</th>
-                  <th className="px-3 py-2 text-right font-semibold">Issued</th>
-                  <th className="px-3 py-2 text-right font-semibold">Served</th>
-                  <th className="px-3 py-2 text-right font-semibold">Skipped</th>
-                  <th className="px-3 py-2 text-right font-semibold">Cancelled</th>
+                  <th className="px-3 py-2 font-semibold">{t("date")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkRpIssued")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkRpServed")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkStSkipped")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tkStCancelled")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -285,17 +291,19 @@ export function ReportsScreen() {
       </SectionCard>
 
       <p className="text-center text-xs text-muted">
-        Tokens are kept for {TOKEN_RETENTION_DAYS} days on this device, then removed. Export a CSV
-        or a backup if you need them longer.
+        {fill(t("tkRpRetention"), { days: TOKEN_RETENTION_DAYS })}
       </p>
     </div>
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: TKey; value: string }) {
+  const { t } = useI18n();
   return (
     <div className="rounded-xl border border-muted-line/30 bg-white px-3 py-2.5 text-center">
-      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+        {t(label)}
+      </div>
       <div className="mt-0.5 text-lg font-bold text-ink">{value}</div>
     </div>
   );

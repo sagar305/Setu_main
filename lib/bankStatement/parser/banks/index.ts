@@ -15,6 +15,8 @@
 // with an expected-output JSON, make the golden test pass, then flip
 // `validated` to true here. Nothing else in the code needs to change.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
 import type { ColumnMapping, DateFormat } from "@/lib/bankStatement/types";
 
 export type BankAdapter = {
@@ -33,11 +35,21 @@ export type BankAdapter = {
   };
   /** Proven against real anonymised statements? See the note above. */
   validated: boolean;
+  /** Set only where the name is ours rather than a bank's. */
+  nameKey?: TKey;
 };
+
+/** A bank's own name as it is, ours in the reader's language. */
+export function adapterName(adapter: BankAdapter, lang: LanguageCode): string {
+  return adapter.nameKey ? translate(lang, adapter.nameKey) : adapter.name;
+}
 
 export const GENERIC_ADAPTER: BankAdapter = {
   id: "generic",
+  // Every other adapter is named after a bank, which is a proper noun in any
+  // language. This one is named by us, so it is the only one with a key.
   name: "Generic layout",
+  nameKey: "bsGenericLayout",
   detect: [],
   hints: { dateFormat: "DMY" },
   // The generic path is the one we actually test, against synthetic fixtures.

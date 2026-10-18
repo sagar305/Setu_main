@@ -10,6 +10,8 @@
 // restore reads only the _json column (lossless round trip).
 
 import type { Business } from "@/lib/pos/types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import type {
   AttendanceRecord,
   Batch,
@@ -23,7 +25,7 @@ import type {
   TestRecord,
   TuitionSettings,
 } from "./types";
-import { ATTENDANCE_LABELS, DEFAULT_TUITION_SETTINGS } from "./types";
+import { attendanceLabel, DEFAULT_TUITION_SETTINGS } from "./types";
 
 export type MetaSnapshot = {
   business: Business | null;
@@ -122,7 +124,9 @@ function attendanceTab(records: AttendanceRecord[], students: Student[], batches
       r.date,
       studentName(r.studentId),
       batchName(r.batchId),
-      ATTENDANCE_LABELS[r.status],
+      // English: the sheet's headers are too, so a formula written against
+      // one tab keeps working whatever language the teacher reads the app in.
+      attendanceLabel(r.status, "en"),
       r.note,
       JSON.stringify(r),
     ]),
@@ -248,32 +252,38 @@ async function postToScript(url: string, payload: unknown): Promise<unknown> {
   }
 }
 
-export async function testSheetConnection(url: string): Promise<{ ok: boolean; error?: string }> {
+export async function testSheetConnection(
+  url: string,
+  lang: LanguageCode
+): Promise<{ ok: boolean; error?: string }> {
   try {
     const result = (await postToScript(url, { action: "test", app: "setu-tuition" })) as {
       ok?: boolean;
       error?: string;
     };
     if (result && result.ok === false) {
-      return { ok: false, error: result.error || "The script reported an error." };
+      return { ok: false, error: result.error || translate(lang, "appScriptReportedError") };
     }
     return { ok: true };
   } catch {
     return {
       ok: false,
-      error:
-        "Could not reach the script. Check the URL, and make sure the deployment's access is set to \"Anyone\".",
+      error: translate(lang, "appCouldNotReachScript"),
     };
   }
 }
 
-export async function pushToSheet(url: string, tabs: TabPayload[]): Promise<void> {
+export async function pushToSheet(
+  url: string,
+  tabs: TabPayload[],
+  lang: LanguageCode
+): Promise<void> {
   const result = (await postToScript(url, { action: "push", app: "setu-tuition", tabs })) as {
     ok?: boolean;
     error?: string;
   };
   if (result && result.ok === false) {
-    throw new Error(result.error || "The sheet script rejected the update.");
+    throw new Error(result.error || translate(lang, "appSheetRejectedUpdate"));
   }
 }
 

@@ -1,9 +1,12 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import { forwardRef, useEffect, useState } from "react";
 import { formatPaise, amountInWords, toMajor } from "@/lib/dine/money";
 import {
-  ORDER_TYPE_LABELS,
+  orderTypeLabel,
   type DineBill,
   type DineBillItem,
   type DineBillPayment,
@@ -71,6 +74,7 @@ export const BillView = forwardRef<
     template?: ReceiptTemplate | null;
   }
 >(function BillView({ bill, items, payments, business, settings, template }, ref) {
+  const { t, lang } = useI18n();
   const currency = business?.currency ?? "INR";
   const money = (paise: number) => formatPaise(paise, currency).replace(/^[^\d-]+/, "");
   const showItems = items.length > 0;
@@ -110,7 +114,7 @@ export const BillView = forwardRef<
       {showBusiness && (
         <div className="c">
           <p className="lg b" style={{ margin: 0, color: accent }}>
-            {business?.name ?? "Restaurant"}
+            {business?.name ?? t("dnRestaurantFallback")}
           </p>
           {business?.address && (
             <p className="sm" style={{ margin: "2px 0 0" }}>
@@ -124,7 +128,7 @@ export const BillView = forwardRef<
           )}
           {showGstin && business?.gstin && (
             <p className="sm b" style={{ margin: "2px 0 0" }}>
-              GSTIN: {business.gstin}
+              {t("gstin")}: {business.gstin}
             </p>
           )}
         </div>
@@ -146,11 +150,11 @@ export const BillView = forwardRef<
         <span>
           {bill.tableName
             ? `${bill.tableName}${bill.areaName ? ` · ${bill.areaName}` : ""}`
-            : ORDER_TYPE_LABELS[bill.orderType]}
+            : orderTypeLabel(bill.orderType, lang)}
         </span>
         {bill.splitCount > 1 && (
           <span className="b">
-            Split {bill.splitIndex} of {bill.splitCount}
+            {fill(t("dnBvSplitN"), { index: bill.splitIndex, count: bill.splitCount })}
           </span>
         )}
       </div>
@@ -161,7 +165,7 @@ export const BillView = forwardRef<
       )}
       {bill.status === "cancelled" && (
         <p className="b c xl" style={{ margin: "4px 0" }}>
-          ** CANCELLED **
+          {t("dnCancelledStamp")}
         </p>
       )}
 
@@ -172,13 +176,13 @@ export const BillView = forwardRef<
           <thead>
             <tr>
               <th style={{ textAlign: "left" }} className="sm">
-                Item
+                {t("itemPlaceholder")}
               </th>
               <th className="sm c" style={{ width: "12mm" }}>
-                Qty
+                {t("dnBvQty")}
               </th>
               <th className="sm r" style={{ width: "18mm" }}>
-                Amount
+                {t("amount")}
               </th>
             </tr>
           </thead>
@@ -203,20 +207,20 @@ export const BillView = forwardRef<
         </table>
       ) : (
         <p className="sm">
-          Share of the table&apos;s bill ({bill.splitIndex} of {bill.splitCount}).
+          {fill(t("dnBvSplitShare"), { index: bill.splitIndex, count: bill.splitCount })}
         </p>
       )}
 
       <Rule />
 
       <div className="row">
-        <span>Subtotal</span>
+        <span>{t("subtotal")}</span>
         <span>{money(bill.subtotal)}</span>
       </div>
       {bill.discountAmount > 0 && (
         <div className="row">
           <span>
-            Discount
+            {t("igDocDiscount")}
             {bill.discountType === "percent" && bill.discountValue > 0
               ? ` (${bill.discountValue}%)`
               : ""}
@@ -226,7 +230,7 @@ export const BillView = forwardRef<
       )}
       {bill.serviceCharge > 0 && (
         <div className="row">
-          <span>Service charge ({bill.serviceChargeRate}%)</span>
+          <span>{fill(t("dnBvServiceChargeRate"), { rate: bill.serviceChargeRate })}</span>
           <span>{money(bill.serviceCharge)}</span>
         </div>
       )}
@@ -255,12 +259,12 @@ export const BillView = forwardRef<
 
       <Rule strong />
       <div className={`row xl ${boldTotals ? "b" : ""}`} style={{ color: accent }}>
-        <span>TOTAL</span>
+        <span>{t("rdTotalCaps")}</span>
         <span>{money(bill.total)}</span>
       </div>
       {bill.includedTax > 0 && (
         <p className="sm" style={{ margin: "2px 0 0" }}>
-          (Includes {money(bill.includedTax)} tax)
+          {fill(t("dnBvIncludesTax"), { amount: money(bill.includedTax) })}
         </p>
       )}
       <p className="sm" style={{ margin: "4px 0 0" }}>
@@ -281,7 +285,7 @@ export const BillView = forwardRef<
 
       {business?.upiId && (
         <p className="c sm" style={{ margin: "6px 0 0" }}>
-          Pay by UPI: {business.upiId}
+          {fill(t("dnBvPayByUpi"), { upi: business.upiId })}
         </p>
       )}
 
@@ -291,7 +295,7 @@ export const BillView = forwardRef<
       </p>
       {bill.serviceCharge > 0 && (
         <p className="c sm" style={{ margin: "4px 0 0" }}>
-          Service charge is voluntary. Ask us to remove it if you prefer.
+          {t("dnBvServiceVoluntary")}
         </p>
       )}
     </div>
@@ -302,13 +306,18 @@ export const BillView = forwardRef<
 export function billShareText(
   bill: DineBill,
   business: DineBusiness | null,
-  currency: string
+  currency: string,
+  lang: LanguageCode
 ): string {
   const lines = [
-    business?.name ?? "Restaurant",
-    `Bill ${bill.billLabel}`,
-    bill.tableName ? `Table ${bill.tableName}` : ORDER_TYPE_LABELS[bill.orderType],
-    `Total: ${currency === "INR" ? "₹" : ""}${toMajor(bill.total).toFixed(2)}`,
+    business?.name ?? translate(lang, "dnRestaurantFallback"),
+    fill(translate(lang, "dnBvBillNo"), { label: bill.billLabel }),
+    bill.tableName
+      ? fill(translate(lang, "dnBvTableN"), { name: bill.tableName })
+      : orderTypeLabel(bill.orderType, lang),
+    fill(translate(lang, "dnBvTotalLine"), {
+      amount: `${currency === "INR" ? "₹" : ""}${toMajor(bill.total).toFixed(2)}`,
+    }),
     printedAt(bill.createdAt),
   ];
   return lines.filter(Boolean).join("\n");

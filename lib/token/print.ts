@@ -10,8 +10,16 @@
 
 import QRCode from "qrcode";
 import { escapeHtml } from "@/lib/clinic/print";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import { formatWait } from "./calc";
 import { tokenLabel, type Service, type Token } from "./types";
+
+/** A translated string, escaped for the document it is going into. */
+function label(lang: LanguageCode, key: TKey): string {
+  return escapeHtml(translate(lang, key));
+}
 
 export type PaperSize = "58mm" | "a4";
 
@@ -119,33 +127,36 @@ export type SlipContext = {
   service: Service | undefined;
   businessName: string;
   waitMinutes: number;
+  /** The customer holds this slip, so it is printed in the reader's language. */
+  lang: LanguageCode;
 };
 
 export function buildSlipHtml(ctx: SlipContext): string {
-  const issued = new Date(ctx.token.issuedAt).toLocaleTimeString("en-IN", {
+  const issued = new Date(ctx.token.issuedAt).toLocaleTimeString(intlLocaleFor(ctx.lang), {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
   });
   return `
     <div class="slip center">
-      <div class="business">${escapeHtml(ctx.businessName || "Token")}</div>
+      <div class="business">${escapeHtml(ctx.businessName) || label(ctx.lang, "tkToken")}</div>
       <div class="service muted">${escapeHtml(ctx.service?.name ?? "")}</div>
       <div class="token">${escapeHtml(tokenLabel(ctx.token, ctx.service))}</div>
-      <div class="wait">${escapeHtml(formatWait(ctx.waitMinutes))}</div>
-      ${ctx.token.priority ? '<div class="priority">PRIORITY</div>' : ""}
+      <div class="wait">${escapeHtml(formatWait(ctx.waitMinutes, ctx.lang))}</div>
+      ${ctx.token.priority ? `<div class="priority">${label(ctx.lang, "tkPriority")}</div>` : ""}
       <div class="rule"></div>
       <div class="meta muted">
-        Issued ${escapeHtml(issued)}<br />
+        ${escapeHtml(fill(translate(ctx.lang, "tkSlipIssued"), { time: issued }))}<br />
         ${ctx.token.customerName ? `${escapeHtml(ctx.token.customerName)}<br />` : ""}
-        Please watch the screen for your number.
+        ${label(ctx.lang, "tkSlipWatch")}
       </div>
     </div>
   `;
 }
 
 export function printTokenSlip(ctx: SlipContext): boolean {
-  return printHtml(buildSlipHtml(ctx), "58mm", `Token ${tokenLabel(ctx.token, ctx.service)}`);
+  const title = `${translate(ctx.lang, "tkToken")} ${tokenLabel(ctx.token, ctx.service)}`;
+  return printHtml(buildSlipHtml(ctx), "58mm", title);
 }
 
 export type PosterContext = {
@@ -153,6 +164,8 @@ export type PosterContext = {
   serviceName: string;
   url: string;
   qrDataUrl: string;
+  /** A customer reads the poster off a wall, so it follows the reader too. */
+  lang: LanguageCode;
 };
 
 /**
@@ -168,13 +181,13 @@ export type PosterContext = {
 export function buildPosterHtml(ctx: PosterContext): string {
   return `
     <div class="poster">
-      <h1>${escapeHtml(ctx.businessName || "Join the queue")}</h1>
+      <h1>${escapeHtml(ctx.businessName) || label(ctx.lang, "tkPosterTitle")}</h1>
       <p class="lead">${escapeHtml(ctx.serviceName)}</p>
-      <img src="${ctx.qrDataUrl}" alt="QR code" />
+      <img src="${ctx.qrDataUrl}" alt="${label(ctx.lang, "tkQrAlt")}" />
       <ol>
-        <li>Scan this code with your phone camera.</li>
-        <li>Show the screen that opens to our counter.</li>
-        <li>We will hand you your token number.</li>
+        <li>${label(ctx.lang, "tkPosterStep1")}</li>
+        <li>${label(ctx.lang, "tkPosterStep2")}</li>
+        <li>${label(ctx.lang, "tkPosterStep3")}</li>
       </ol>
       <div class="foot">${escapeHtml(ctx.url)}</div>
     </div>
@@ -192,6 +205,6 @@ export async function printQrPoster(
   return printHtml(
     buildPosterHtml({ ...context, qrDataUrl }),
     "a4",
-    `${context.businessName} — queue poster`
+    `${context.businessName} — ${translate(context.lang, "tkPosterTitle")}`
   );
 }

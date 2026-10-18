@@ -6,6 +6,8 @@
 // offline model, not an oversight; automated sending needs a WhatsApp Business
 // API account and lives in the paid product.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
 import { getWhatsAppShareUrl } from "@/lib/share";
 import { whatsAppNumber } from "./types";
 
@@ -49,24 +51,34 @@ export type OutboundMessage = {
   ref?: string;
 };
 
-export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
-  { token: "{student}", meaning: "Student's name" },
-  { token: "{parent}", meaning: "Parent's name (falls back to \"Sir/Ma'am\")" },
-  { token: "{teacher}", meaning: "Your name / institute name" },
-  { token: "{class}", meaning: "Student's class" },
-  { token: "{batch}", meaning: "Batch name" },
-  { token: "{amount}", meaning: "Amount, formatted" },
-  { token: "{period}", meaning: "Month, e.g. Aug 2026" },
-  { token: "{date}", meaning: "Date of the class / payment" },
-  { token: "{due}", meaning: "Due date" },
-  { token: "{test}", meaning: "Test name" },
-  { token: "{subject}", meaning: "Subject" },
-  { token: "{marks}", meaning: "Marks scored" },
-  { token: "{max}", meaning: "Maximum marks" },
-  { token: "{percent}", meaning: "Percentage" },
-  { token: "{average}", meaning: "Class average" },
-  { token: "{present}", meaning: "Classes attended" },
-  { token: "{total}", meaning: "Total classes" },
-  { token: "{note}", meaning: "The diary note" },
-  { token: "{link}", meaning: "Shareable link to the receipt / report" },
+const PLACEHOLDER_KEYS: { token: string; key: TKey }[] = [
+  { token: "{student}", key: "tuPhStudent" },
+  { token: "{parent}", key: "tuPhParent" },
+  { token: "{teacher}", key: "tuPhTeacher" },
+  { token: "{class}", key: "tuPhClass" },
+  { token: "{batch}", key: "tuPhBatch" },
+  { token: "{amount}", key: "tuPhAmount" },
+  { token: "{period}", key: "tuPhPeriod" },
+  { token: "{date}", key: "tuPhDate" },
+  { token: "{due}", key: "tuPhDue" },
+  { token: "{test}", key: "tuPhTest" },
+  { token: "{subject}", key: "tuPhSubject" },
+  { token: "{marks}", key: "tuPhMarks" },
+  { token: "{max}", key: "tuPhMax" },
+  { token: "{percent}", key: "tuPhPercent" },
+  { token: "{average}", key: "tuPhAverage" },
+  { token: "{present}", key: "tuPhPresent" },
+  { token: "{total}", key: "tuPhTotal" },
+  { token: "{note}", key: "tuPhNote" },
+  { token: "{link}", key: "tuPhLink" },
 ];
+
+/** What each placeholder stands for, for the hint under the template editor. */
+export function messagePlaceholders(
+  lang: LanguageCode
+): { token: string; meaning: string }[] {
+  return PLACEHOLDER_KEYS.map(({ token, key }) => ({
+    token,
+    meaning: translate(lang, key),
+  }));
+}

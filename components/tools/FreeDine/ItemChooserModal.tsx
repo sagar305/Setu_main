@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { Minus, Plus } from "lucide-react";
 import { useDine, type AddItemInput } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
@@ -24,6 +26,7 @@ export function ItemChooserModal({
   onClose: () => void;
   onAdd: (input: AddItemInput) => void;
 }) {
+  const { t } = useI18n();
   const { variations, modifierGroups, modifiers, business } = useDine();
   const currency = business?.currency ?? "INR";
 
@@ -123,7 +126,7 @@ export function ItemChooserModal({
         {itemVariations.length > 0 && (
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-              Size <span className="text-red-500">*</span>
+              {t("qmSampleVarSize")} <span className="text-red-500">*</span>
             </p>
             <div className="flex flex-wrap gap-2">
               {itemVariations.map((variation) => (
@@ -159,7 +162,9 @@ export function ItemChooserModal({
                 {group.name}
                 {group.minSelect > 0 && <span className="text-red-500"> *</span>}
                 <span className="ml-2 font-normal normal-case tracking-normal text-muted/70">
-                  {group.maxSelect === 1 ? "pick one" : `pick up to ${group.maxSelect}`}
+                  {group.maxSelect === 1
+                    ? t("dnIcPickOne")
+                    : fill(t("dnIcPickUpTo"), { n: group.maxSelect })}
                 </span>
               </p>
               <div className="flex flex-wrap gap-2">
@@ -188,11 +193,11 @@ export function ItemChooserModal({
           );
         })}
 
-        <Field label="Note for the kitchen" hint="Rides along to the KOT, e.g. “less spicy”.">
+        <Field label={t("dnIcKitchenNote")} hint={t("dnIcNoteHint")}>
           <input
             value={note}
             onChange={(event) => setNote(event.target.value)}
-            placeholder="less spicy, no onion…"
+            placeholder={t("dnIcNotePh")}
             className={inputClass}
           />
         </Field>
@@ -202,7 +207,7 @@ export function ItemChooserModal({
             <button
               type="button"
               onClick={() => setQuantity((previous) => Math.max(previous - 1, 1))}
-              aria-label="Reduce quantity"
+              aria-label={t("dnIcReduceQty")}
               className={`${tapTargetClass} flex items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink`}
             >
               <Minus className="h-4 w-4" />
@@ -213,7 +218,7 @@ export function ItemChooserModal({
             <button
               type="button"
               onClick={() => setQuantity((previous) => previous + 1)}
-              aria-label="Increase quantity"
+              aria-label={t("dnIcIncreaseQty")}
               className={`${tapTargetClass} flex items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink`}
             >
               <Plus className="h-4 w-4" />
@@ -226,7 +231,11 @@ export function ItemChooserModal({
             disabled={Boolean(unmetGroup)}
             className={`${primaryBtnClass} ${tapTargetClass}`}
           >
-            {unmetGroup ? `Choose ${unmetGroup.name}` : `Add · ${formatPaise(unitPrice * quantity, currency)}`}
+            {unmetGroup
+              ? fill(t("dnIcChooseGroup"), { group: unmetGroup.name })
+              : fill(t("dnIcAddAmount"), {
+                  amount: formatPaise(unitPrice * quantity, currency),
+                })}
           </button>
         </div>
       </div>

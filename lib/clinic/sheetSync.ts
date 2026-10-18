@@ -93,7 +93,7 @@ function patientsTab(patients: Patient[]): TabPayload {
     rows: patients.map((p) => [
       p.code,
       p.name,
-      formatAge(patientAge(p)),
+      formatAge(patientAge(p), "en"),
       p.sex,
       p.phone,
       p.bloodGroup,
@@ -168,7 +168,9 @@ function billsTab(bills: Bill[], patients: Patient[]): TabPayload {
     headers: ["Receipt No", "Date", "Patient", "Total", "Paid", "Due", "Mode", "_json"],
     rows: bills.map((b) => [
       b.receiptNo,
-      formatDate(b.date),
+      // The sheet's headers are English and a formula may read this column, so
+      // the date column stays English rather than following whoever synced.
+      formatDate(b.date, "en"),
       patientName(b.patientId),
       b.total,
       b.paid,

@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { useSearchParams } from "next/navigation";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function BookDemoForm() {
+  const { t } = useI18n();
   const searchParams = useSearchParams();
   const product = searchParams.get("product") || "Setu";
   const [status, setStatus] = useState<Status>("idle");
@@ -36,29 +39,29 @@ export function BookDemoForm() {
       } else {
         setStatus("error");
         trackEvent("form_failed", { form: "book_demo" });
-        setErrorMessage(result?.error || "Something went wrong. Please try again.");
+        setErrorMessage(result?.error || t("cfError"));
       }
     } catch {
       setStatus("error");
       trackEvent("form_failed", { form: "book_demo" });
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage(t("cfError"));
     }
   }
 
   if (status === "success") {
     return (
       <p className="rounded-2xl bg-white p-6 text-center text-ink shadow-sm">
-        Thanks — your demo request for {product} is in. We&apos;ll confirm the slot shortly.
+        {fill(t("bdSuccess"), { product })}
       </p>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 rounded-2xl bg-white p-8 shadow-sm">
-      <p className="text-sm font-medium text-indigo">Requesting a demo for: {product}</p>
+      <p className="text-sm font-medium text-indigo">{fill(t("bdRequestingFor"), { product })}</p>
 
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
-        Name
+        {t("name")}
         <input
           type="text"
           name="name"
@@ -68,7 +71,7 @@ export function BookDemoForm() {
       </label>
 
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
-        Email
+        {t("email")}
         <input
           type="email"
           name="email"
@@ -79,7 +82,7 @@ export function BookDemoForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="flex flex-col gap-2 text-sm font-medium text-ink">
-          Preferred date
+          {t("bdPreferredDate")}
           <input
             type="date"
             name="date"
@@ -89,7 +92,7 @@ export function BookDemoForm() {
         </label>
 
         <label className="flex flex-col gap-2 text-sm font-medium text-ink">
-          Preferred time
+          {t("bdPreferredTime")}
           <input
             type="time"
             name="time"
@@ -100,7 +103,7 @@ export function BookDemoForm() {
       </div>
 
       <label className="flex flex-col gap-2 text-sm font-medium text-ink">
-        Anything else we should know? (optional)
+        {t("bdAnythingElse")}
         <textarea
           name="details"
           rows={4}
@@ -113,7 +116,7 @@ export function BookDemoForm() {
         disabled={status === "submitting"}
         className="mt-2 rounded-full bg-indigo px-6 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink disabled:opacity-60"
       >
-        {status === "submitting" ? "Sending..." : "Request demo"}
+        {status === "submitting" ? t("cfSending") : t("bdRequestDemo")}
       </button>
 
       {status === "error" && <p className="text-sm text-red-600">{errorMessage}</p>}

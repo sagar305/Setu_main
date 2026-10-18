@@ -15,6 +15,8 @@
 // the message that crosses into the worker may carry only a narration, and the
 // UI has to keep saying so.
 
+import { LANGUAGES } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -171,17 +173,38 @@ describe("on-device categorisation stays on the device", () => {
   // statement, and that the CA can disconnect afterwards to see for themselves.
   // Collapsing it back into the categorise button would take the check away.
   it("keeps the model download as its own step, and says what it does", () => {
-    // JSX wraps prose across lines, so the copy is matched as one flowing
-    // string rather than as it happens to be indented today.
-    const panel = readFileSync(
-      join(process.cwd(), "components", "tools", "BankStatementAnalyzer", "AiCategorisationPanel.tsx"),
-      "utf8"
-    ).replace(/\s+/g, " ");
-    expect(panel, "no separate download control").toMatch(/Download AI model/);
-    expect(panel, "does not say the download carries none of the statement").toMatch(
-      /sends nothing about your statement/i
+    // The copy lives in the dictionary now, so it is checked there rather than
+    // by grepping the component: the panel renders these keys, and this is
+    // what they have to go on saying.
+    const panel = stripComments(
+      readFileSync(
+        join(process.cwd(), "components", "tools", "BankStatementAnalyzer", "AiCategorisationPanel.tsx"),
+        "utf8"
+      )
     );
-    expect(panel, "does not offer the offline check").toMatch(/turn your internet off/i);
+    expect(panel, "no separate download control").toMatch(/bsApDownloadModel/);
+    expect(panel, "does not offer the offline check").toMatch(/bsApTurnOffLabel/);
+
+    expect(translate("en", "bsApDownloadModel")).toMatch(/download/i);
+    expect(
+      translate("en", "bsApOneTime"),
+      "does not say the download carries none of the statement"
+    ).toMatch(/sends nothing about your statement/i);
+    expect(translate("en", "bsApTurnOffLabel"), "does not offer the offline check").toMatch(
+      /turn your internet off/i
+    );
+
+    // And the promise has to survive translation: a CA reading in Hindi is
+    // owed the same three statements, not an English fallback.
+    for (const key of ["bsApDownloadModel", "bsApOneTime", "bsApTurnOffLabel"] as const) {
+      for (const { code } of LANGUAGES) {
+        const text = translate(code, key);
+        expect(text, `${key} missing in ${code}`).toBeTruthy();
+        if (code !== "en") {
+          expect(text, `${key} not translated in ${code}`).not.toBe(translate("en", key));
+        }
+      }
+    }
   });
 
   it("only starts the model from the two places that are allowed to", () => {

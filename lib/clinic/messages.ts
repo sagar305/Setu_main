@@ -11,6 +11,8 @@
 
 import { getWhatsAppShareUrl } from "@/lib/share";
 import { whatsAppNumber } from "./types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
 
 export type MessageVars = Record<string, string | number | undefined>;
 
@@ -54,14 +56,28 @@ export type OutboundMessage = {
   ref?: string;
 };
 
-export const CLINIC_PLACEHOLDERS: { token: string; meaning: string }[] = [
-  { token: "{{patientName}}", meaning: "Patient's name" },
-  { token: "{{patientCode}}", meaning: "Patient's file number, e.g. SC-0142" },
-  { token: "{{doctorName}}", meaning: "Doctor's name" },
-  { token: "{{clinicName}}", meaning: "Your clinic's name" },
-  { token: "{{clinicPhone}}", meaning: "Your clinic's phone number" },
-  { token: "{{date}}", meaning: "Date of the appointment / review" },
-  { token: "{{time}}", meaning: "Time of the appointment" },
-  { token: "{{amount}}", meaning: "Amount pending, formatted" },
-  { token: "{{upiId}}", meaning: "Your UPI ID" },
+/**
+ * What each placeholder stands for, listed beside the template editor in
+ * Settings. The tokens themselves are part of the template syntax and stay
+ * as written; only the explanation beside them follows the reader.
+ */
+const PLACEHOLDER_KEYS: { token: string; key: TKey }[] = [
+  { token: "{{patientName}}", key: "clPhPatientName" },
+  { token: "{{patientCode}}", key: "clPhPatientCode" },
+  { token: "{{doctorName}}", key: "clPhDoctorName" },
+  { token: "{{clinicName}}", key: "clPhClinicName" },
+  { token: "{{clinicPhone}}", key: "clPhClinicPhone" },
+  { token: "{{date}}", key: "clPhDate" },
+  { token: "{{time}}", key: "clPhTime" },
+  { token: "{{amount}}", key: "clPhAmount" },
+  { token: "{{upiId}}", key: "clPhUpiId" },
 ];
+
+export function clinicPlaceholders(
+  lang: LanguageCode
+): { token: string; meaning: string }[] {
+  return PLACEHOLDER_KEYS.map(({ token, key }) => ({
+    token,
+    meaning: translate(lang, key),
+  }));
+}

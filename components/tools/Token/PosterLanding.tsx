@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Ticket } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 /**
  * What a customer sees after scanning the poster.
@@ -11,6 +12,7 @@ import { ArrowRight, Ticket } from "lucide-react";
  * Both are rendered as plain text, never as markup.
  */
 export function PosterLanding() {
+  const { t } = useI18n();
   const params = useSearchParams();
   const business = (params.get("b") ?? "").slice(0, 80);
   const service = (params.get("s") ?? "").slice(0, 80);
@@ -22,26 +24,26 @@ export function PosterLanding() {
       </span>
 
       <h1 className="mt-5 text-2xl font-bold tracking-tight text-ink">
-        {business || "You are in the right place"}
+        {business || t("tkPlTitle")}
       </h1>
       {service && <p className="mt-1 text-sm font-semibold text-muted">{service}</p>}
 
       <p className="mt-6 rounded-2xl bg-cream-paper px-5 py-4 text-lg font-semibold text-ink">
-        Show this screen at the counter and they will give you your token number.
+        {t("tkPlLead")}
       </p>
 
       <ol className="mx-auto mt-6 grid max-w-sm gap-2 text-left text-sm text-muted">
         <li className="flex items-start gap-2">
           <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-indigo" aria-hidden="true" />
-          Go to the counter with this screen open.
+          {t("tkPlStep1")}
         </li>
         <li className="flex items-start gap-2">
           <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-indigo" aria-hidden="true" />
-          They will hand you a number and tell you the wait.
+          {t("tkPlStep2")}
         </li>
         <li className="flex items-start gap-2">
           <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-indigo" aria-hidden="true" />
-          Watch the display screen — your number will be called out loud.
+          {t("tkPlStep3")}
         </li>
       </ol>
     </div>

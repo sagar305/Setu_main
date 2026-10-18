@@ -3,6 +3,8 @@
 // Monthly reports: what was collected, what is still out, who is missing
 // classes. Every row can be shared with the parent as a link.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import { Download, Share2, TriangleAlert } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
@@ -23,6 +25,7 @@ import { attendanceDoc } from "./share";
 const LOW_ATTENDANCE = 75;
 
 export function ReportsScreen() {
+  const { t, lang } = useI18n();
   const { students, batches, attendance, dues, payments, business } = useTuition();
   const [period, setPeriod] = useState(currentMonthKey());
   const [shareDoc, setShareDoc] = useState<SharedDoc | null>(null);
@@ -83,7 +86,7 @@ export function ReportsScreen() {
           const stats = attendanceStats(records);
           const absentDates = records
             .filter((r) => r.status === "absent")
-            .map((r) => formatDate(r.date).replace(/ \d{4}$/, ""));
+            .map((r) => formatDate(r.date, lang).replace(/ \d{4}$/, ""));
           return { student, stats, absentDates };
         })
         .sort((a, b) => a.stats.percent - b.stats.percent),
@@ -102,7 +105,7 @@ export function ReportsScreen() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <label className="block">
           <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-            Month
+            {t("tuRpMonth")}
           </span>
           <select
             value={period}
@@ -111,7 +114,7 @@ export function ReportsScreen() {
           >
             {periods.map((month) => (
               <option key={month} value={month}>
-                {formatMonth(month)}
+                {formatMonth(month, lang)}
               </option>
             ))}
           </select>
@@ -129,7 +132,7 @@ export function ReportsScreen() {
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            Attendance CSV
+            {t("tuRpAttendanceCsv")}
           </button>
           <button
             type="button"
@@ -138,23 +141,31 @@ export function ReportsScreen() {
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            Fees CSV
+            {t("tuRpFeesCsv")}
           </button>
         </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Collected" value={formatMoney(collected, currency)} sub={formatMonth(period)} />
-        <StatCard label="Billed" value={formatMoney(billed, currency)} sub="Dues raised this month" />
         <StatCard
-          label="Expected / month"
-          value={formatMoney(expected, currency)}
-          sub={`${activeStudents.length} active students`}
+          label={t("tuRpCollected")}
+          value={formatMoney(collected, currency)}
+          sub={formatMonth(period, lang)}
         />
         <StatCard
-          label="Outstanding"
+          label={t("tuRpBilled")}
+          value={formatMoney(billed, currency)}
+          sub={t("tuRpDuesRaised")}
+        />
+        <StatCard
+          label={t("tuRpExpectedMonth")}
+          value={formatMoney(expected, currency)}
+          sub={fill(t("tuRpActiveStudents"), { count: activeStudents.length })}
+        />
+        <StatCard
+          label={t("tuRpOutstanding")}
           value={formatMoney(totalOutstanding, currency)}
-          sub="All months"
+          sub={t("tuRpAllMonths")}
         />
       </div>
 
@@ -162,8 +173,10 @@ export function ReportsScreen() {
         <div className="mt-5 rounded-xl border border-saffron/40 bg-saffron/10 p-4">
           <p className="flex items-center gap-2 text-sm font-bold text-ink">
             <TriangleAlert className="h-4 w-4 text-saffron" />
-            {lowAttendance.length} student{lowAttendance.length > 1 ? "s" : ""} below{" "}
-            {LOW_ATTENDANCE}% attendance
+            {fill(t(lowAttendance.length === 1 ? "tuRpLowOne" : "tuRpLowMany"), {
+              count: lowAttendance.length,
+              percent: LOW_ATTENDANCE,
+            })}
           </p>
           <p className="mt-1 text-xs text-muted">
             {lowAttendance.map((row) => `${row.student.name} (${row.stats.percent}%)`).join(", ")}
@@ -172,20 +185,22 @@ export function ReportsScreen() {
       )}
 
       <section className="mt-6">
-        <h3 className="text-sm font-bold text-ink">Attendance — {formatMonth(period)}</h3>
+        <h3 className="text-sm font-bold text-ink">
+          {fill(t("tuRpAttendanceForMonth"), { month: formatMonth(period, lang) })}
+        </h3>
         {rows.every((row) => row.stats.total === 0) ? (
           <p className="mt-3 rounded-xl bg-cream-paper p-4 text-sm text-muted">
-            No attendance marked for this month yet.
+            {t("tuRpNoAttendance")}
           </p>
         ) : (
           <div className="mt-3 overflow-x-auto rounded-xl border border-muted-line/30 bg-white">
             <table className="w-full min-w-[520px] text-left text-sm">
               <thead className="bg-cream-paper text-xs uppercase tracking-wide text-muted">
                 <tr>
-                  <th className="px-3 py-2 font-semibold">Student</th>
-                  <th className="px-3 py-2 text-right font-semibold">Present</th>
-                  <th className="px-3 py-2 text-right font-semibold">Absent</th>
-                  <th className="px-3 py-2 text-right font-semibold">Classes</th>
+                  <th className="px-3 py-2 font-semibold">{t("tuRpColStudent")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tuAtPresent")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tuAtAbsent")}</th>
+                  <th className="px-3 py-2 text-right font-semibold">{t("tuRpColClasses")}</th>
                   <th className="px-3 py-2 text-right font-semibold">%</th>
                   <th className="px-3 py-2" />
                 </tr>
@@ -217,7 +232,7 @@ export function ReportsScreen() {
                             attendanceDoc(
                               business,
                               student,
-                              formatMonth(period),
+                              formatMonth(period, lang),
                               {
                                 present: stats.present + stats.late,
                                 total: stats.total,
@@ -228,7 +243,7 @@ export function ReportsScreen() {
                           )
                         }
                         className={`${secondaryBtnClass} px-2.5 py-1`}
-                        aria-label={`Share ${student.name}'s attendance report`}
+                        aria-label={fill(t("tuRpShareFor"), { name: student.name })}
                       >
                         <Share2 className="h-3.5 w-3.5" />
                       </button>
@@ -245,8 +260,8 @@ export function ReportsScreen() {
         open={Boolean(shareDoc)}
         doc={shareDoc}
         onClose={() => setShareDoc(null)}
-        recipientLabel="parent"
-        title="Attendance report"
+        recipientLabel={t("tuRpParent")}
+        title={t("tuRpAttendanceReport")}
       />
     </div>
   );

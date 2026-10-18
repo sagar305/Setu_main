@@ -1,6 +1,7 @@
 // Classification is deterministic and rule-first (spec §13). These tests pin
 // the precedence order and the honesty of the confidence score.
 
+import { LANGUAGES } from "@/lib/i18n/config";
 import { describe, expect, it } from "vitest";
 import type { ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import {
@@ -209,13 +210,17 @@ describe("applying a classification", () => {
     expect(row.aiSimilarity).toBeUndefined();
   });
 
-  it("names every source it can be given", () => {
+  it("names every source it can be given, in every language we publish", () => {
     for (const source of ["RULE", "MANUAL", "MEMORY", "HEURISTIC", "AI", "UNCLASSIFIED"] as const) {
-      expect(sourceLabel(source)).toBeTruthy();
-      expect(sourceBadge(source)).toBeTruthy();
+      for (const { code } of LANGUAGES) {
+        expect(sourceLabel(source, code)).toBeTruthy();
+        expect(sourceBadge(source, code)).toBeTruthy();
+      }
     }
-    expect(sourceBadge("AI")).toBe("AI");
-    expect(sourceBadge("RULE")).toBe("Rule");
+    // "AI" is the same two letters everywhere, so it is deliberately not keyed.
+    expect(sourceBadge("AI", "hi")).toBe("AI");
+    expect(sourceBadge("RULE", "en")).toBe("Rule");
+    expect(sourceBadge("RULE", "hi")).not.toBe("Rule");
   });
 });
 
@@ -360,12 +365,28 @@ describe("keyword lists inside a condition", () => {
   });
 
   it("describes itself the way the rules list reads", () => {
-    expect(describeCondition(meals.conditions[0])).toBe(
-      'narration contains any of "SWIGGY", "ZOMATO", "DOMINOS"'
+    expect(describeCondition(meals.conditions[0], "en")).toBe(
+      'Narration contains any of "SWIGGY", "ZOMATO", "DOMINOS"'
     );
-    expect(describeCondition({ field: "amount", operator: "greaterThan", value: "1000" })).toBe(
-      'amount is more than "1000"'
-    );
+    expect(
+      describeCondition({ field: "amount", operator: "greaterThan", value: "1000" }, "en")
+    ).toBe('Amount is more than "1000"');
+  });
+
+  // The summary is prose, so it is written per reader and not stored. The
+  // keywords themselves are the CA's own and stay exactly as typed in every
+  // language — it is the sentence around them that moves.
+  it("describes the same condition in the reader's language", () => {
+    for (const { code } of LANGUAGES) {
+      const described = describeCondition(meals.conditions[0], code);
+      expect(described, `empty description in ${code}`).toBeTruthy();
+      expect(described, `keywords altered in ${code}`).toContain('"SWIGGY"');
+      if (code !== "en") {
+        expect(described, `not translated in ${code}`).not.toBe(
+          describeCondition(meals.conditions[0], "en")
+        );
+      }
+    }
   });
 
   // A range is a range — the second bound must not be read as an alternative.

@@ -5,6 +5,8 @@
 // #D97706 for money out — chosen for colour-vision-deficiency safety, and every
 // chart has a table view so the data is readable without relying on colour.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useState } from "react";
 import type { CategoryRow, MonthlyRow, PartyRow } from "@/lib/bankStatement/types";
 import { Card, SecondaryButton } from "@/components/toolkit/ui";
@@ -20,6 +22,7 @@ export function MonthlyFlowChart({
   rows: MonthlyRow[];
   currency: string;
 }) {
+  const { t } = useI18n();
   const [showTable, setShowTable] = useState(false);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -29,34 +32,34 @@ export function MonthlyFlowChart({
   return (
     <Card>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-base font-bold text-ink">Money in and out by month</h3>
+        <h3 className="text-base font-bold text-ink">{t("bsChMonthlyFlow")}</h3>
         <SecondaryButton onClick={() => setShowTable((value) => !value)}>
-          {showTable ? "View chart" : "View table"}
+          {showTable ? t("bsChViewChart") : t("bsChViewTable")}
         </SecondaryButton>
       </div>
 
       <div className="mb-3 flex gap-4 text-xs text-muted">
         <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: IN }} aria-hidden="true" />
-          Credits
+          {t("bsColCredits")}
         </span>
         <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: OUT }} aria-hidden="true" />
-          Debits
+          {t("bsColDebits")}
         </span>
       </div>
 
       {rows.length === 0 ? (
-        <p className="py-8 text-center text-sm text-muted">No transactions to chart yet.</p>
+        <p className="py-8 text-center text-sm text-muted">{t("bsChNoRows")}</p>
       ) : showTable ? (
         <div className="max-h-72 overflow-y-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-muted-line/30 text-left text-muted">
-                <th className="py-1.5 pr-4 font-semibold">Month</th>
-                <th className="py-1.5 pr-4 text-right font-semibold">Credits</th>
-                <th className="py-1.5 pr-4 text-right font-semibold">Debits</th>
-                <th className="py-1.5 text-right font-semibold">Net</th>
+                <th className="py-1.5 pr-4 font-semibold">{t("tuRpMonth")}</th>
+                <th className="py-1.5 pr-4 text-right font-semibold">{t("bsColCredits")}</th>
+                <th className="py-1.5 pr-4 text-right font-semibold">{t("bsColDebits")}</th>
+                <th className="py-1.5 text-right font-semibold">{t("bsChNet")}</th>
               </tr>
             </thead>
             <tbody>
@@ -92,7 +95,7 @@ export function MonthlyFlowChart({
             viewBox={`0 0 ${rows.length * columnWidth} 120`}
             className="h-48 w-full"
             role="img"
-            aria-label={`Grouped bar chart of credits and debits across ${rows.length} months`}
+            aria-label={fill(t("bsChChartAria"), { n: rows.length })}
             preserveAspectRatio="none"
             onMouseLeave={() => setHover(null)}
           >
@@ -183,22 +186,21 @@ export function CategoryBars({
 }
 
 export function PartyTable({ rows, currency }: { rows: PartyRow[]; currency: string }) {
+  const { t } = useI18n();
   return (
     <Card>
-      <h3 className="mb-4 text-base font-bold text-ink">Top counterparties</h3>
+      <h3 className="mb-4 text-base font-bold text-ink">{t("bsPdfTopParties")}</h3>
       {rows.length === 0 ? (
-        <p className="py-8 text-center text-sm text-muted">
-          No counterparties were identified in these narrations.
-        </p>
+        <p className="py-8 text-center text-sm text-muted">{t("bsChNoParties")}</p>
       ) : (
         <div className="max-h-80 overflow-y-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-muted-line/30 text-left text-muted">
-                <th className="py-1.5 pr-4 font-semibold">Party</th>
-                <th className="py-1.5 pr-4 text-right font-semibold">Paid out</th>
-                <th className="py-1.5 pr-4 text-right font-semibold">Received</th>
-                <th className="py-1.5 text-right font-semibold">Count</th>
+                <th className="py-1.5 pr-4 font-semibold">{t("bsColParty")}</th>
+                <th className="py-1.5 pr-4 text-right font-semibold">{t("bsPdfPaidOut")}</th>
+                <th className="py-1.5 pr-4 text-right font-semibold">{t("bsPdfReceived")}</th>
+                <th className="py-1.5 text-right font-semibold">{t("bsColCount")}</th>
               </tr>
             </thead>
             <tbody>

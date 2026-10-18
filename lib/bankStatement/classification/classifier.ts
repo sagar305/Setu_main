@@ -18,6 +18,8 @@
 // rule, a correction or a pattern already answered is never sent to a model at
 // all — which is both faster and the priority order the tool promises.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate, type TKey } from "@/lib/i18n/translate";
 import type {
   Category,
   ClassificationRule,
@@ -148,43 +150,33 @@ export function confidenceBand(confidence: number | undefined): ConfidenceBand {
   return "low";
 }
 
-export function sourceLabel(source: ClassificationSource): string {
-  switch (source) {
-    case "RULE":
-      return "User rule";
-    case "MANUAL":
-      return "Set by you";
-    case "MEMORY":
-      return "Learned from you";
-    case "MERCHANT":
-      return "Known merchant";
-    case "HEURISTIC":
-      return "Pattern match";
-    case "AI":
-      return "On-device AI";
-    default:
-      return "Unclassified";
-  }
+const SOURCE_KEYS: Record<ClassificationSource, TKey> = {
+  RULE: "bsSrcRule",
+  MANUAL: "bsSrcManual",
+  MEMORY: "bsSrcMemory",
+  MERCHANT: "bsSrcMerchant",
+  HEURISTIC: "bsSrcHeuristic",
+  AI: "bsSrcAi",
+  UNCLASSIFIED: "bsSrcUnclassified",
+};
+
+export function sourceLabel(source: ClassificationSource, lang: LanguageCode): string {
+  return translate(lang, SOURCE_KEYS[source] ?? "bsSrcUnclassified");
 }
 
+const SOURCE_BADGE_KEYS: Partial<Record<ClassificationSource, TKey>> = {
+  RULE: "bsBadgeRule",
+  MANUAL: "bsBadgeYou",
+  MEMORY: "bsBadgeLearned",
+  MERCHANT: "bsBadgeMerchant",
+  HEURISTIC: "bsBadgePattern",
+};
+
 /** The short badge shown in the table's source column. */
-export function sourceBadge(source: ClassificationSource): string {
-  switch (source) {
-    case "RULE":
-      return "Rule";
-    case "MANUAL":
-      return "You";
-    case "MEMORY":
-      return "Learned";
-    case "MERCHANT":
-      return "Merchant";
-    case "HEURISTIC":
-      return "Pattern";
-    case "AI":
-      return "AI";
-    default:
-      return "—";
-  }
+export function sourceBadge(source: ClassificationSource, lang: LanguageCode): string {
+  if (source === "AI") return "AI";
+  const key = SOURCE_BADGE_KEYS[source];
+  return key ? translate(lang, key) : "—";
 }
 
 /** A party seen before, from the transactions the CA has already reviewed. */

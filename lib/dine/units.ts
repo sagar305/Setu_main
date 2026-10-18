@@ -10,12 +10,14 @@
 // 250 "g" leaves stock at −245 and nobody can explain it.
 
 /** What a material is counted in once it is in the store cupboard. */
+import type { TKey } from "@/lib/i18n/translate";
+
 export type BaseUnit = "g" | "ml" | "pc";
 
-export const BASE_UNITS: { id: BaseUnit; label: string; long: string }[] = [
-  { id: "g", label: "g", long: "Grams (weight)" },
-  { id: "ml", label: "ml", long: "Millilitres (volume)" },
-  { id: "pc", label: "pc", long: "Pieces (count)" },
+export const BASE_UNITS: { id: BaseUnit; label: string; long: TKey }[] = [
+  { id: "g", label: "g", long: "dnUnitGrams" },
+  { id: "ml", label: "ml", long: "dnUnitMillilitres" },
+  { id: "pc", label: "pc", long: "dnUnitPieces" },
 ];
 
 /** Quantities are stored as integer thousandths of the base unit. */

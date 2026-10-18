@@ -13,6 +13,8 @@ import {
   Ticket,
   WifiOff,
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { TokenProvider, useToken } from "@/lib/token/store";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
@@ -25,12 +27,12 @@ import { HistoryScreen } from "./HistoryScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 
-const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Ticket }[] = [
-  { id: "counter", label: "Counter", icon: PhoneCall },
-  { id: "issue", label: "Issue", icon: Ticket },
-  { id: "history", label: "History", icon: ClipboardList },
-  { id: "reports", label: "Reports", icon: BarChart3 },
-  { id: "settings", label: "Settings", icon: Settings },
+const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Ticket }[] = [
+  { id: "counter", label: "tkNavCounter", icon: PhoneCall },
+  { id: "issue", label: "tkNavIssue", icon: Ticket },
+  { id: "history", label: "tkNavHistory", icon: ClipboardList },
+  { id: "reports", label: "tkNavReports", icon: BarChart3 },
+  { id: "settings", label: "tkNavSettings", icon: Settings },
 ];
 
 function TokenShell({
@@ -40,6 +42,7 @@ function TokenShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { business, settings, todayTokens } = useToken();
   const [screen, setScreen] = useState<ScreenId>("counter");
   const [offline, setOffline] = useState(false);
@@ -86,7 +89,7 @@ function TokenShell({
   if (locked) {
     return (
       <LockScreen
-        businessName={business?.name ?? "Token system"}
+        businessName={business?.name || t("tkAppName")}
         pinHash={settings.pinHash ?? ""}
         pinSalt={settings.pinSalt ?? ""}
         onUnlock={() => {
@@ -103,16 +106,16 @@ function TokenShell({
     <div className="grid gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <h2 className="text-lg font-bold text-ink">{business?.name || "Token system"}</h2>
+          <h2 className="text-lg font-bold text-ink">{business?.name || t("tkAppName")}</h2>
           {waiting > 0 && (
             <span className="rounded-full bg-indigo/10 px-2.5 py-0.5 text-xs font-bold text-indigo">
-              {waiting} waiting
+              {fill(t("tkWaitingCount"), { count: waiting })}
             </span>
           )}
           {offline && (
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-muted">
               <WifiOff className="h-3.5 w-3.5" aria-hidden="true" />
-              Offline — the queue still works
+              {t("tkOffline")}
             </span>
           )}
         </div>
@@ -124,7 +127,7 @@ function TokenShell({
             className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40 hover:text-indigo"
           >
             <Monitor className="h-4 w-4" aria-hidden="true" />
-            Display
+            {t("tkDisplay")}
           </a>
           {hasPin && (
             <button
@@ -133,7 +136,7 @@ function TokenShell({
               className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40"
             >
               <Lock className="h-4 w-4" aria-hidden="true" />
-              Lock
+              {t("tkLock")}
             </button>
           )}
           <button
@@ -146,12 +149,14 @@ function TokenShell({
             ) : (
               <Maximize2 className="h-4 w-4" aria-hidden="true" />
             )}
-            <span className="sr-only">{fullscreen ? "Exit full screen" : "Full screen"}</span>
+            <span className="sr-only">
+              {fullscreen ? t("appExitFullScreen") : t("appFullScreen")}
+            </span>
           </button>
         </div>
       </div>
 
-      <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Token system sections">
+      <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label={t("tkAppSections")}>
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
@@ -165,7 +170,7 @@ function TokenShell({
             }`}
           >
             <item.icon className="h-4 w-4" aria-hidden="true" />
-            {item.label}
+            {t(item.label)}
           </button>
         ))}
       </nav>
@@ -180,6 +185,7 @@ function TokenShell({
 }
 
 function TokenBody() {
+  const { t } = useI18n();
   const { status, errorMessage } = useToken();
   const [fullscreen, setFullscreen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -216,22 +222,21 @@ function TokenBody() {
       }`}
     >
       {status === "loading" && (
-        <p className="py-16 text-center text-sm text-muted">Opening your queue…</p>
+        <p className="py-16 text-center text-sm text-muted">{t("tkDpOpening")}</p>
       )}
 
       {status === "error" && (
         <div className="py-16 text-center">
           <p className="text-sm font-semibold text-red-600">{errorMessage}</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
-            The queue needs IndexedDB. Private browsing on some phones blocks it — try a normal
-            window.
+            {t("tkStorageBody")}
           </p>
           <button
             type="button"
             className={`${primaryBtnClass} mt-4`}
             onClick={() => window.location.reload()}
           >
-            Try again
+            {t("tkTryAgain")}
           </button>
         </div>
       )}

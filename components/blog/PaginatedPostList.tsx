@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { BlogPostSummary } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/BlogCard";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 export const PER_PAGE_OPTIONS = [5, 10, 20, 50] as const;
 const DEFAULT_PER_PAGE = 10;
@@ -27,11 +29,13 @@ function pageWindow(current: number, total: number): (number | "gap")[] {
 
 export function PaginatedPostList({
   posts,
-  emptyMessage = "No articles to show.",
+  emptyMessage,
 }: {
   posts: BlogPostSummary[];
+  /** Overrides the default "nothing here" line; callers rarely need to. */
   emptyMessage?: string;
 }) {
+  const { t } = useI18n();
   const [perPage, setPerPage] = useState<number>(DEFAULT_PER_PAGE);
   const [page, setPage] = useState(1);
 
@@ -52,7 +56,7 @@ export function PaginatedPostList({
   if (posts.length === 0) {
     return (
       <div className="mt-6 rounded-2xl border border-dashed border-muted-line/40 bg-white/60 p-10 text-center">
-        <p className="text-muted">{emptyMessage}</p>
+        <p className="text-muted">{emptyMessage ?? t("plNoArticles")}</p>
       </div>
     );
   }
@@ -99,14 +103,14 @@ export function PaginatedPostList({
 
       {totalPages > 1 && (
         <nav
-          aria-label="Pagination"
+          aria-label={t("plPagination")}
           className="mt-10 flex flex-wrap items-center justify-center gap-2"
         >
           <button
             type="button"
             onClick={() => goTo(currentPage - 1)}
             disabled={currentPage === 1}
-            aria-label="Previous page"
+            aria-label={t("plPrevPage")}
             className="inline-flex h-9 items-center gap-1 rounded-lg border border-muted-line/40 px-3 text-sm font-semibold text-ink transition enabled:hover:border-indigo enabled:hover:text-indigo disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronLeft className="h-4 w-4" aria-hidden="true" />
@@ -123,7 +127,7 @@ export function PaginatedPostList({
                 key={entry}
                 type="button"
                 onClick={() => goTo(entry)}
-                aria-label={`Page ${entry}`}
+                aria-label={fill(t("plPageN"), { n: entry })}
                 aria-current={entry === currentPage ? "page" : undefined}
                 className={`h-9 min-w-9 rounded-lg border px-3 text-sm font-semibold transition ${
                   entry === currentPage
@@ -140,7 +144,7 @@ export function PaginatedPostList({
             type="button"
             onClick={() => goTo(currentPage + 1)}
             disabled={currentPage === totalPages}
-            aria-label="Next page"
+            aria-label={t("plNextPage")}
             className="inline-flex h-9 items-center gap-1 rounded-lg border border-muted-line/40 px-3 text-sm font-semibold text-ink transition enabled:hover:border-indigo enabled:hover:text-indigo disabled:cursor-not-allowed disabled:opacity-40"
           >
             Next

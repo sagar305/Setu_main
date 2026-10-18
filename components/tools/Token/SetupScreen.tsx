@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import { useToken } from "@/lib/token/store";
 import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
@@ -14,11 +15,14 @@ import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
  * has to be decided before the first token goes out.
  */
 export function SetupScreen() {
+  const { t } = useI18n();
   const { business, createQueue, backToWelcome } = useToken();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [serviceName, setServiceName] = useState("General");
-  const [counterName, setCounterName] = useState("Counter 1");
+  // Seeded from the dictionary, so the first service and desk a queue is
+  // created with are named in the language it was set up in.
+  const [serviceName, setServiceName] = useState(() => t("tkSetServicePh"));
+  const [counterName, setCounterName] = useState(() => t("tkSetCounterPh"));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,7 +37,7 @@ export function SetupScreen() {
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!name.trim()) {
-      setError("Your business name appears on the display and on every token slip.");
+      setError(t("tkSetErrName"));
       return;
     }
     setError("");
@@ -53,7 +57,7 @@ export function SetupScreen() {
         counterName
       );
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not set up the queue.");
+      setError(caught instanceof Error ? caught.message : t("tkSetErrSetup"));
       setSaving(false);
     }
   };
@@ -66,16 +70,16 @@ export function SetupScreen() {
         className="mb-4 inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-indigo"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-        Back
+        {t("back")}
       </button>
 
-      <h2 className="text-2xl font-bold tracking-tight text-ink">Set up your queue</h2>
+      <h2 className="text-2xl font-bold tracking-tight text-ink">{t("tkSetTitle")}</h2>
       <p className="mt-2 text-sm text-muted">
-        You can change all of this later, and add more services and counters in Settings.
+        {t("tkSetBlurb")}
       </p>
 
       <form onSubmit={submit} className="mt-6 grid gap-4 rounded-2xl border border-muted-line/30 bg-white p-5">
-        <Field label="Business name" required>
+        <Field label={t("tkSetBusinessName")} required>
           <input
             className={inputClass}
             value={name}
@@ -85,7 +89,7 @@ export function SetupScreen() {
           />
         </Field>
 
-        <Field label="Phone" hint="Optional. Printed on token slips.">
+        <Field label={t("phone")} hint={t("tkSetPhoneHint")}>
           <input
             className={inputClass}
             value={phone}
@@ -95,21 +99,21 @@ export function SetupScreen() {
           />
         </Field>
 
-        <Field label="What are people queueing for?" hint="One line to start with.">
+        <Field label={t("tkSetServiceQ")} hint={t("tkSetServiceHint")}>
           <input
             className={inputClass}
             value={serviceName}
             onChange={(event) => setServiceName(event.target.value)}
-            placeholder="General"
+            placeholder={t("tkSetServicePh")}
           />
         </Field>
 
-        <Field label="What do you call the desk?" hint='"Counter 1", "Dr. Mehta", "Chair 2".'>
+        <Field label={t("tkSetCounterQ")} hint={t("tkSetCounterHint")}>
           <input
             className={inputClass}
             value={counterName}
             onChange={(event) => setCounterName(event.target.value)}
-            placeholder="Counter 1"
+            placeholder={t("tkSetCounterPh")}
           />
         </Field>
 
@@ -121,10 +125,10 @@ export function SetupScreen() {
 
         <div className="flex flex-col gap-2 sm:flex-row">
           <button type="submit" className={primaryBtnClass} disabled={saving}>
-            {saving ? "Setting up…" : "Start the queue"}
+            {saving ? t("tkSetSaving") : t("tkSetStart")}
           </button>
           <button type="button" onClick={backToWelcome} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
         </div>
       </form>

@@ -14,7 +14,6 @@ import {
   waitMinutes,
 } from "./calc";
 import {
-  formatDate,
   patientCustomFields,
   visitMedicines,
   visitVitals,
@@ -25,6 +24,8 @@ import {
   type Appointment,
   type Visit,
 } from "./types";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 
 export { toCsv, downloadCsv } from "@/lib/pos/csv";
 
@@ -53,7 +54,7 @@ export function patientsCsv(patients: Patient[], bills: Bill[]): string {
     patients.map((p) => [
       p.code,
       p.name,
-      formatAge(patientAge(p)),
+      formatAge(patientAge(p), "en"),
       p.sex,
       p.phone,
       p.altPhone,
@@ -317,7 +318,10 @@ function splitList(value: string): string[] {
  * present; otherwise columns are read positionally as
  * Name, Phone, Age, Sex, Address.
  */
-export function parsePatientImport(text: string): PatientImportResult {
+export function parsePatientImport(
+  text: string,
+  lang: LanguageCode
+): PatientImportResult {
   const errors: string[] = [];
   const rows: ParsedPatientRow[] = [];
 
@@ -325,7 +329,9 @@ export function parsePatientImport(text: string): PatientImportResult {
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter(Boolean);
-  if (lines.length === 0) return { rows, errors: ["Nothing to import."] };
+  if (lines.length === 0) {
+    return { rows, errors: [translate(lang, "clImpNothing")] };
+  }
 
   const delimiter = lines[0].includes("\t") ? "\t" : ",";
   const firstCells = splitLine(lines[0], delimiter).map((c) => c.toLowerCase());
@@ -391,12 +397,18 @@ export function parsePatientImport(text: string): PatientImportResult {
     });
 
     if (!row.name) {
-      errors.push(`Line ${index + 1}: no patient name — skipped.`);
+      errors.push(fill(translate(lang, "clImpNoName"), { line: index + 1 }));
       continue;
     }
     const digits = row.phone.replace(/\D/g, "");
     if (digits && seenPhones.has(digits)) {
-      errors.push(`Line ${index + 1}: ${row.name} repeats phone ${row.phone} — still imported.`);
+      errors.push(
+        fill(translate(lang, "clImpDupPhone"), {
+          line: index + 1,
+          name: row.name,
+          phone: row.phone,
+        })
+      );
     }
     if (digits) seenPhones.add(digits);
     rows.push(row);
@@ -417,13 +429,12 @@ export function patientImportTemplate(): string {
 }
 
 /** Reported back after an import so the screen can say what happened. */
-export function describeImport(rows: ParsedPatientRow[]): string {
+export function describeImport(rows: ParsedPatientRow[], lang: LanguageCode): string {
   const withPhone = rows.filter((r) => r.phone.trim()).length;
   const withAge = rows.filter((r) => r.dob || r.ageYears !== null).length;
-  return `${rows.length} patients · ${withPhone} with a phone number · ${withAge} with an age`;
-}
-
-/** Used by the chart export header. */
-export function formatVisitDate(dateKey: string): string {
-  return formatDate(dateKey);
+  return fill(translate(lang, "clImpSummary"), {
+    total: rows.length,
+    withPhone,
+    withAge,
+  });
 }

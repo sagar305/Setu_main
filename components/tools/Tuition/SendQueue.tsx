@@ -11,6 +11,8 @@
 import { useEffect, useState } from "react";
 import { Check, Copy, MessageCircle, Phone } from "lucide-react";
 import { Modal, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { smsLink, whatsAppLink, type OutboundMessage } from "@/lib/tuition/messages";
 
 export function SendQueue({
@@ -27,6 +29,7 @@ export function SendQueue({
   /** Called with the ids of every recipient the teacher actually opened. */
   onSent: (ids: string[]) => void;
 }) {
+  const { t } = useI18n();
   const [sent, setSent] = useState<string[]>([]);
   const [copiedId, setCopiedId] = useState("");
   const [copiedAll, setCopiedAll] = useState(false);
@@ -60,7 +63,7 @@ export function SendQueue({
 
   const copyAll = async () => {
     const block = messages
-      .map((m) => `${m.name} (${m.phone || "no number"})\n${m.message}`)
+      .map((m) => `${m.name} (${m.phone || t("sqNoNumber")})\n${m.message}`)
       .join("\n\n———\n\n");
     try {
       await navigator.clipboard.writeText(block);
@@ -78,14 +81,11 @@ export function SendQueue({
 
   return (
     <Modal open={open} onClose={finish} title={title} wide>
-      <p className="text-sm text-muted">
-        WhatsApp opens with the message ready — tap send there, then come back for the next
-        parent. Nothing is sent automatically.
-      </p>
+      <p className="text-sm text-muted">{t("sqBlurb")}</p>
 
       {messages.length === 0 ? (
         <p className="mt-6 rounded-xl bg-cream-paper p-4 text-center text-sm text-muted">
-          Nobody to message here.
+          {t("sqNobody")}
         </p>
       ) : (
         <ul className="mt-4 space-y-3">
@@ -102,7 +102,7 @@ export function SendQueue({
                   <div className="min-w-0">
                     <p className="truncate text-sm font-bold text-ink">{message.name}</p>
                     <p className="text-xs text-muted">
-                      {message.phone || "No phone number saved"}
+                      {message.phone || t("sqNoPhone")}
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
@@ -110,8 +110,8 @@ export function SendQueue({
                       type="button"
                       onClick={() => void copyOne(message)}
                       className="flex h-9 w-9 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
-                      aria-label={`Copy the message for ${message.name}`}
-                      title="Copy this message"
+                      aria-label={fill(t("sqCopyFor"), { name: message.name })}
+                      title={t("sqCopyThis")}
                     >
                       {copiedId === message.id ? (
                         <Check className="h-4 w-4 text-emerald-600" />
@@ -124,8 +124,8 @@ export function SendQueue({
                         href={smsLink(message.phone, message.message)}
                         onClick={() => markSent(message.id)}
                         className="flex h-9 w-9 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
-                        aria-label={`Send an SMS to ${message.name}`}
-                        title="Send as SMS instead"
+                        aria-label={fill(t("sqSmsTo"), { name: message.name })}
+                        title={t("sqSmsInstead")}
                       >
                         <Phone className="h-4 w-4" />
                       </a>
@@ -137,11 +137,11 @@ export function SendQueue({
                     >
                       {done ? (
                         <>
-                          <Check className="h-4 w-4" /> Sent
+                          <Check className="h-4 w-4" /> {t("sqSent")}
                         </>
                       ) : (
                         <>
-                          <MessageCircle className="h-4 w-4" /> WhatsApp
+                          <MessageCircle className="h-4 w-4" /> {t("sdWhatsApp")}
                         </>
                       )}
                     </button>
@@ -159,10 +159,10 @@ export function SendQueue({
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <button type="button" onClick={() => void copyAll()} className={secondaryBtnClass}>
           {copiedAll ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
-          Copy all messages
+          {t("sqCopyAll")}
         </button>
         <button type="button" onClick={finish} className={primaryBtnClass}>
-          Done{sent.length > 0 ? ` (${sent.length} sent)` : ""}
+          {sent.length > 0 ? fill(t("sqDoneN"), { count: sent.length }) : t("appDone")}
         </button>
       </div>
     </Modal>

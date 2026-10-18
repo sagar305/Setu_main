@@ -41,8 +41,19 @@ export type ParseOptions = {
    * header is looked for, because it is what decides where the header is.
    */
   rowPlan?: RowPlan;
-  onProgress?: (stage: string, current?: number, total?: number) => void;
+  onProgress?: (stage: ParseStage, current?: number, total?: number) => void;
 };
+
+/**
+ * Where the import had got to. A code, not a sentence: the stage is shown to
+ * whoever is waiting (in their language) and also written into the failure
+ * report (where it stays a stable identifier whatever language it failed in).
+ */
+export type ParseStage =
+  | "READING_FILE"
+  | "READING_SPREADSHEET"
+  | "PARSING_STATEMENT"
+  | "NORMALISING";
 
 export function detectFormat(fileName: string, type: string): SourceFormat | null {
   const lower = fileName.toLowerCase();
@@ -77,7 +88,7 @@ async function extract(
   options: ParseOptions
 ): Promise<Extraction> {
   if (format === "CSV") {
-    options.onProgress?.("Reading file");
+    options.onProgress?.("READING_FILE");
     const text = await file.text();
     return { rows: parseCsv(text), text: text.slice(0, 8000) };
   }
@@ -85,7 +96,7 @@ async function extract(
   const buffer = await file.arrayBuffer();
 
   if (format === "XLSX" || format === "XLS") {
-    options.onProgress?.("Reading spreadsheet");
+    options.onProgress?.("READING_SPREADSHEET");
     const { rows } = parseWorkbook(buffer);
     const text = rows
       .slice(0, 40)
@@ -96,7 +107,7 @@ async function extract(
 
   const extraction = await extractPdf(buffer, {
     password: options.password,
-    onProgress: (page, total) => options.onProgress?.("Parsing statement", page, total),
+    onProgress: (page, total) => options.onProgress?.("PARSING_STATEMENT", page, total),
   });
   return {
     rows: extraction.rows,
@@ -161,7 +172,7 @@ export async function parseStatementFile(
   const metadata = extractMetadata(extraction.text, dateFormat);
   const currency = metadata.currency ?? "INR";
 
-  options.onProgress?.("Normalising transactions");
+  options.onProgress?.("NORMALISING");
   const { transactions, rejected, skipped, balanceMarkers } = normalise({
     rows: dataRows,
     mapping,
@@ -181,6 +192,7 @@ export async function parseStatementFile(
     transactions: sorted,
     rejected: rejected.map((item) => ({
       reason: item.reason,
+      code: item.code,
       row: item.row.row,
       page: item.row.page,
     })),

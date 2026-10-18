@@ -11,6 +11,7 @@
 
 import type {
   AiBackend,
+  AiProgress,
   AiRequestItem,
   AiResultItem,
   MainToWorkerMessage,
@@ -21,11 +22,33 @@ import type { EmbeddingModelId } from "@/lib/bankStatement/ai/models";
 
 export type AiPhase = "idle" | "loading" | "ready" | "error";
 
+/**
+ * Why categorisation is not running, as a code the panel words.
+ *
+ * "WORKER_FAILED" covers anything the worker itself reported — a model that
+ * would not load, a runtime fault — and keeps the worker's own English text
+ * alongside it in `error`, because that text is the only description of what
+ * actually went wrong and is worth more to whoever is debugging than a
+ * generic sentence.
+ */
+export type AiErrorCode = "UNSUPPORTED" | "WORKER_STOPPED" | "WORKER_FAILED";
+
+/** Rejection for a request the caller cancelled, rather than a failure. */
+export class AiCancelledError extends Error {
+  constructor() {
+    super("Cancelled.");
+    this.name = "AiCancelledError";
+  }
+}
+
 export type AiClientState = {
   phase: AiPhase;
   /** 0–100 while the model downloads, when the size is known. */
   percent?: number;
-  message?: string;
+  /** What is happening, for the panel to word. */
+  progress?: AiProgress;
+  /** Why it failed, for the panel to word. */
+  errorCode?: AiErrorCode;
   backend?: AiBackend;
   error?: string;
 };
@@ -93,8 +116,11 @@ class AiCategoriser {
     if (this.state.phase === "ready") return Promise.resolve();
 
     if (!aiSupported()) {
+      // The thrown Error keeps an English message: it is a diagnostic that ends
+      // up in a console or a log, not something a CA reads. What they read is
+      // the code, worded by the panel.
       const error = "This browser cannot run on-device categorisation. Rules and manual categorising still work.";
-      this.setState({ phase: "error", error });
+      this.setState({ phase: "error", error, errorCode: "UNSUPPORTED" });
       return Promise.reject(new Error(error));
     }
 
@@ -108,7 +134,9 @@ class AiCategoriser {
       this.worker.addEventListener("message", (event: MessageEvent<WorkerToMainMessage>) =>
         this.handle(event.data)
       );
-      this.worker.addEventListener("error", (event) => this.fail(event.message || "The AI worker stopped unexpectedly."));
+      this.worker.addEventListener("error", (event) =>
+        this.fail(event.message || "The AI worker stopped unexpectedly.", "WORKER_STOPPED")
+      );
     }
 
     const waiter = new Promise<void>((resolve, reject) => {
@@ -116,7 +144,12 @@ class AiCategoriser {
     });
 
     if (this.state.phase !== "loading") {
-      this.setState({ phase: "loading", message: "Preparing AI categorisation…", error: undefined });
+      this.setState({
+        phase: "loading",
+        progress: { code: "PREPARING" },
+        error: undefined,
+        errorCode: undefined,
+      });
       this.send({
         type: "INIT_MODEL",
         profiles,
@@ -172,7 +205,7 @@ class AiCategoriser {
   cancelAll(): void {
     for (const requestId of this.pending.keys()) {
       this.send({ type: "CANCEL", requestId });
-      this.pending.get(requestId)?.reject(new Error("Cancelled."));
+      this.pending.get(requestId)?.reject(new AiCancelledError());
     }
     this.pending.clear();
   }
@@ -184,11 +217,18 @@ class AiCategoriser {
   private handle(message: WorkerToMainMessage): void {
     switch (message.type) {
       case "MODEL_LOADING":
-        this.setState({ phase: "loading", percent: message.percent, message: message.message });
+        this.setState({ phase: "loading", percent: message.percent, progress: message.progress });
         break;
 
       case "MODEL_READY": {
-        this.setState({ phase: "ready", percent: 100, message: undefined, backend: message.backend, error: undefined });
+        this.setState({
+          phase: "ready",
+          percent: 100,
+          progress: undefined,
+          backend: message.backend,
+          error: undefined,
+          errorCode: undefined,
+        });
         const waiters = this.readyWaiters;
         this.readyWaiters = [];
         for (const waiter of waiters) waiter.resolve();
@@ -230,8 +270,8 @@ class AiCategoriser {
     }
   }
 
-  private fail(error: string): void {
-    this.setState({ phase: "error", error, message: undefined, percent: undefined });
+  private fail(error: string, errorCode: AiErrorCode = "WORKER_FAILED"): void {
+    this.setState({ phase: "error", error, errorCode, progress: undefined, percent: undefined });
 
     const waiters = this.readyWaiters;
     this.readyWaiters = [];

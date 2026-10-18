@@ -25,6 +25,10 @@ const TYPE_LABEL: Record<string, string> = {
   UNKNOWN: "Unreviewed",
 };
 
+// Column headings and cell values are English on purpose: a workbook is a
+// data file someone builds a pivot or an import mapping on, and those break
+// if the text moves with the reader's language. The printed PDF report is the
+// artefact that follows the reader — see ./pdf.
 export function buildWorkbook(
   statements: BankStatement[],
   transactions: Transaction[],
@@ -66,11 +70,11 @@ export function buildWorkbook(
         t.debit || "",
         t.credit || "",
         t.balance ?? "",
-        categoryName(categories, t.category),
+        categoryName(categories, t.category, "en"),
         t.partyName ?? "",
         TYPE_LABEL[t.classificationType] ?? t.classificationType,
         t.confidence ?? 0,
-        sourceLabel(t.classificationSource),
+        sourceLabel(t.classificationSource, "en"),
         t.isDuplicate ? "Possible duplicate" : "",
         t.notes ?? "",
       ]),
@@ -149,7 +153,7 @@ export function buildWorkbook(
         t.narration,
         t.debit || "",
         t.credit || "",
-        categoryName(categories, t.category),
+        categoryName(categories, t.category, "en"),
       ]),
     ]),
     "High Value"

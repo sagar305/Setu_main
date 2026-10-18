@@ -28,6 +28,8 @@ import {
 } from "react";
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
 import { generateId, nowIso, type Business, type Customer } from "@/lib/pos/types";
+import { useI18n } from "@/lib/i18n";
+import { translate } from "@/lib/i18n/translate";
 import {
   buildTabPayloads,
   isValidSyncUrl,
@@ -54,6 +56,7 @@ import { buildSeedMedicines, medicineKey } from "./medicines";
 import type { ParsedPatientRow } from "./csv";
 import {
   DEFAULT_CLINIC_SETTINGS,
+  defaultClinicSettings,
   EMPTY_VITALS,
   SYNC_SLICES,
   formatPatientCode,
@@ -213,6 +216,9 @@ const ClinicContext = createContext<ClinicContextValue | null>(null);
 const LAST_SYNC_KEY = "clinic_sheet_sync_last";
 
 export function ClinicProvider({ children }: { children: ReactNode }) {
+  // A clinic is seeded with its patient-facing text — the Rx footer and the
+  // WhatsApp templates — in the language it is being set up in.
+  const { lang } = useI18n();
   const [status, setStatus] = useState<ClinicStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [business, setBusiness] = useState<Business | null>(null);
@@ -355,17 +361,15 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       })
       .catch((error: unknown) => {
         if (!active) return;
-        setErrorMessage(
-          error instanceof Error
-            ? error.message
-            : "Could not open local storage. Please use a modern browser outside private mode."
-        );
+        // The browser's own wording helps nobody; keep it for the console.
+        console.error(error);
+        setErrorMessage(translate(lang, "appStorageErrorTitle"));
         setStatus("error");
       });
     return () => {
       active = false;
     };
-  }, [loadAll]);
+  }, [loadAll, lang]);
 
   const startSetup = useCallback(() => setStatus("setup"), []);
   const backToWelcome = useCallback(() => setStatus("welcome"), []);
@@ -400,7 +404,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         createdAt: nowIso(),
         updatedAt: nowIso(),
       };
-      const newSettings: ClinicSettings = { ...DEFAULT_CLINIC_SETTINGS };
+      const newSettings: ClinicSettings = defaultClinicSettings(lang);
       await batchWithSync(
         {
           business: [newBusiness],
@@ -415,7 +419,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       setDoctors([doctor]);
       setStatus("ready");
     },
-    [batchWithSync]
+    [batchWithSync, lang]
   );
 
   const updateBusiness = useCallback(
@@ -790,7 +794,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
   const startConsult = useCallback(
     async (appointmentId: string) => {
       const appointment = appointments.find((a) => a.id === appointmentId);
-      if (!appointment) throw new Error("That appointment no longer exists.");
+      if (!appointment) throw new Error(translate(lang, "clApAppointmentGone"));
 
       // Resume rather than duplicate — this is what makes closing the tab safe.
       const existing = visits.find((v) => v.appointmentId === appointmentId);
@@ -824,7 +828,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       setAppointments((prev) => prev.map((a) => (a.id === appointmentId ? nextAppointment : a)));
       return visit;
     },
-    [appointments, visits, blankVisit, batchWithSync, patchAppointment]
+    [appointments, visits, blankVisit, batchWithSync, patchAppointment, lang]
   );
 
   const startConsultForPatient = useCallback(
@@ -1156,14 +1160,14 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         setDirtySlices((prev) => prev.filter((slice) => !slices.includes(slice)));
       } catch (error: unknown) {
         setSheetLastError(
-          error instanceof Error ? error.message : "Could not reach the sheet."
+          error instanceof Error ? error.message : translate(lang, "appCouldNotReachSheet")
         );
       } finally {
         flushingRef.current = false;
         setSheetSyncing(false);
       }
     },
-    [settings.sheetSyncUrl]
+    [settings.sheetSyncUrl, lang]
   );
 
   const syncSheetNow = useCallback(async () => {
@@ -1178,10 +1182,10 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
       const test = await testSheetConnection(trimmed);
-      if (!test.ok) throw new Error(test.error ?? "Could not reach the script.");
+      if (!test.ok) throw new Error(test.error ?? translate(lang, "appCouldNotReachScript"));
       await updateSettings({ sheetSyncUrl: trimmed });
       setDirtySlices([...SYNC_SLICES]);
     },
@@ -1191,13 +1195,13 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
   const disconnectSheet = useCallback(async () => {
     await updateSettings({ sheetSyncUrl: "" });
     setSheetLastError("");
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const restoreFromSheet = useCallback(
     async (url: string) => {
       const trimmed = url.trim();
       if (!isValidSyncUrl(trimmed)) {
-        throw new Error("That does not look like an Apps Script web-app URL.");
+        throw new Error(translate(lang, "appNotAppsScriptUrl"));
       }
       const pulled = await pullFromSheet(trimmed);
       const restoredSettings = settingsFromPull(pulled.meta.settings);
@@ -1237,7 +1241,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     const backup = await createBackup();
     downloadBackupFile(backup);
     await updateSettings({ lastBackupAt: nowIso() });
-  }, [updateSettings]);
+  }, [updateSettings, lang]);
 
   const applyRestoredBackup = useCallback(
     async (backup: ClinicBackup) => {
@@ -1258,11 +1262,11 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
     setProtocols([]);
     setCharges([]);
     setBills([]);
-    setSettings(DEFAULT_CLINIC_SETTINGS);
+    setSettings(defaultClinicSettings(lang));
     setDirtySlices([]);
     sweptRef.current = false;
     setStatus("welcome");
-  }, []);
+  }, [lang]);
 
   const value = useMemo<ClinicContextValue>(
     () => ({

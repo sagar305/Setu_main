@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { Download, Plus, Upload, Users } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
@@ -23,6 +25,7 @@ export function StudentsScreen({
 }: {
   externalQuery?: { value: string; nonce: number } | null;
 }) {
+  const { t, lang } = useI18n();
   const { students, batches, dues, payments, business } = useTuition();
   const [query, setQuery] = useState("");
   const [batchFilter, setBatchFilter] = useState("");
@@ -72,13 +75,13 @@ export function StudentsScreen({
           <SearchInput
             value={query}
             onChange={setQuery}
-            placeholder="Search name, parent or phone…"
+            placeholder={t("tuStSearchPh")}
           />
         </div>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={() => setImportOpen(true)} className={secondaryBtnClass}>
             <Upload className="h-4 w-4" />
-            Import
+            {t("appImport")}
           </button>
           <button
             type="button"
@@ -87,11 +90,11 @@ export function StudentsScreen({
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            Export
+            {t("appExport")}
           </button>
           <button type="button" onClick={openAdd} className={primaryBtnClass}>
             <Plus className="h-4 w-4" />
-            Add student
+            {t("tuStAddStudent")}
           </button>
         </div>
       </div>
@@ -102,7 +105,7 @@ export function StudentsScreen({
           onChange={(event) => setBatchFilter(event.target.value)}
           className={`${inputClass} w-auto`}
         >
-          <option value="">All batches</option>
+          <option value="">{t("tuStAllBatches")}</option>
           {batches.map((batch) => (
             <option key={batch.id} value={batch.id}>
               {batch.name}
@@ -116,10 +119,12 @@ export function StudentsScreen({
             onChange={(event) => setShowInactive(event.target.checked)}
             className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
           />
-          Show students who left
+          {t("tuStShowLeft")}
         </label>
         <span className="text-sm text-muted">
-          {visible.length} student{visible.length === 1 ? "" : "s"}
+          {fill(t(visible.length === 1 ? "tuStCountOne" : "tuStCountMany"), {
+            count: visible.length,
+          })}
         </span>
       </div>
 
@@ -127,13 +132,13 @@ export function StudentsScreen({
         <div className="mt-6">
           <EmptyState
             icon={<Users className="h-6 w-6" />}
-            title="No students yet"
-            message="Add your first student, or paste your whole list at once with Import."
+            title={t("tuStNoStudents")}
+            message={t("tuStNoStudentsBody")}
             action={
               <div className="flex gap-2">
                 <button type="button" onClick={openAdd} className={primaryBtnClass}>
                   <Plus className="h-4 w-4" />
-                  Add student
+                  {t("tuStAddStudent")}
                 </button>
                 <button
                   type="button"
@@ -141,14 +146,14 @@ export function StudentsScreen({
                   className={secondaryBtnClass}
                 >
                   <Upload className="h-4 w-4" />
-                  Import a list
+                  {t("tuStImportList")}
                 </button>
               </div>
             }
           />
         </div>
       ) : visible.length === 0 ? (
-        <p className="mt-8 text-center text-sm text-muted">No students match this search.</p>
+        <p className="mt-8 text-center text-sm text-muted">{t("tuStNoMatch")}</p>
       ) : (
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
           {visible.map((student) => {
@@ -167,32 +172,34 @@ export function StudentsScreen({
                       {student.name}
                       {student.status !== "active" && (
                         <span className="ml-2 rounded-full bg-cream-paper px-2 py-0.5 text-[10px] font-semibold uppercase text-muted">
-                          Left
+                          {t("tuStLeft")}
                         </span>
                       )}
                     </p>
                     <p className="truncate text-xs text-muted">
                       {[student.classLevel, enrolled.map((b) => b.name).join(", ")]
                         .filter(Boolean)
-                        .join(" · ") || "No batch"}
+                        .join(" · ") || t("tuStNoBatch")}
                     </p>
                     <p className="truncate text-xs text-muted">
                       {student.status !== "active" && student.leftOn
-                        ? `Left ${formatDate(student.leftOn)}`
-                        : student.parentPhone || "No parent number"}
+                        ? fill(t("tuStLeftOn"), { date: formatDate(student.leftOn, lang) })
+                        : student.parentPhone || t("tuStNoParentNumber")}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
                     <p className="text-sm font-semibold text-ink">
                       {formatMoney(fee.total, currency)}
-                      <span className="text-xs font-normal text-muted">/mo</span>
+                      <span className="text-xs font-normal text-muted">{t("tuStPerMonth")}</span>
                     </p>
                     {balance.outstanding > 0 ? (
                       <p className="text-xs font-bold text-red-600">
-                        {formatMoney(balance.outstanding, currency)} due
+                        {fill(t("tuStDue"), {
+                          amount: formatMoney(balance.outstanding, currency),
+                        })}
                       </p>
                     ) : (
-                      <p className="text-xs font-semibold text-emerald-600">No dues</p>
+                      <p className="text-xs font-semibold text-emerald-600">{t("tuStNoDues")}</p>
                     )}
                   </div>
                 </button>

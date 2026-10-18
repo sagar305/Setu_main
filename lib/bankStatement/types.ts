@@ -4,6 +4,8 @@
 // serialised to a server: the whole pipeline runs in the browser and persists
 // only to this origin's localStorage / IndexedDB.
 
+import type { TKey } from "@/lib/i18n/translate";
+
 export type SourceFormat = "PDF" | "XLSX" | "XLS" | "CSV";
 
 export type TransactionType = "DEBIT" | "CREDIT";
@@ -102,6 +104,16 @@ export type Transaction = {
 
   /** Row-level parse health. Rolls up into the statement's parseStatus. */
   rowStatus?: RowStatus;
+  /**
+   * The issue as a code, so it reads in the language of whoever opens the
+   * statement rather than the one it was imported in.
+   */
+  rowIssueCode?: IssueCode;
+  /**
+   * The issue as English prose, on rows extracted before the codes existed.
+   * Shown as-is when there is no code, so an old statement still explains
+   * itself instead of going quiet.
+   */
   rowIssue?: string;
 
   createdAt: string;
@@ -109,6 +121,25 @@ export type Transaction = {
 
 /** Per-row parse health, distinct from classification confidence. */
 export type RowStatus = "VALID" | "WARNING" | "UNRESOLVED";
+
+/**
+ * Why a row is a warning, was rejected or was set aside.
+ *
+ * A code and its numbers rather than a sentence, because this travels with the
+ * data: it is written once at extraction, persisted, and read back possibly in
+ * a different language from the one it was extracted in. `rowIssueLabel` in
+ * ./messages turns it into prose for whoever is reading now.
+ */
+export type IssueCode =
+  | { code: "UNREADABLE_DATE"; date: string }
+  | { code: "NO_DATE" }
+  | { code: "BOTH_DEBIT_CREDIT" }
+  | { code: "NO_AMOUNT" }
+  | { code: "NO_NARRATION" }
+  | { code: "BALANCE_MARKER" }
+  | { code: "ZERO_AMOUNT" }
+  | { code: "BALANCE_BREAK"; expected: number; found: number }
+  | { code: "UNRESOLVED" };
 
 /** Statement-level parse health, rolled up from rows plus the balance chain. */
 export type ParseStatus = "VALID" | "WARNING" | "UNRESOLVED";
@@ -184,10 +215,22 @@ export type BalanceChainResult = {
 
 export type ValidationIssue = {
   severity: "warning" | "error";
+  /** The issue as a code; `message` carries it for reports read back later. */
+  code?: ReportIssueCode;
+  /** English prose, kept for issues stored before the codes existed. */
   message: string;
   row?: number;
   page?: number;
 };
+
+/** Statement-level findings, carried the same way and for the same reason. */
+export type ReportIssueCode =
+  | { code: "ROW"; issue?: IssueCode }
+  | { code: "BALANCE_BREAKS"; rows: number }
+  | { code: "OPENING_MISMATCH" }
+  | { code: "CLOSING_MISMATCH" }
+  | { code: "NOTHING_EXTRACTED" }
+  | { code: "SKIPPED_ROWS"; rows: number };
 
 // ---------------------------------------------------------------------------
 // Categories
@@ -197,7 +240,16 @@ export type CategoryGroup = "INCOME" | "EXPENSE" | "TRANSFER" | "CASH";
 
 export type Category = {
   id: string;
+  /**
+   * The stored name: ours as seeded, or whatever the CA renamed it to.
+   *
+   * Built-ins display through `categoryLabel`, which re-languages this when it
+   * is still one of our seeds and leaves a rename alone. Stored rather than
+   * derived so the id a rule or a transaction points at never moves.
+   */
   name: string;
+  /** Where a built-in's displayed name comes from; absent on a CA's own. */
+  nameKey?: TKey;
   group: CategoryGroup;
   parentId?: string;
   /**
@@ -309,9 +361,54 @@ export type AnalyzerSettings = {
 export type AuditEntry = {
   id: string;
   at: string;
+  /**
+   * What happened, as a code.
+   *
+   * The log is a record kept over months and read back whenever a CA wants to
+   * know what they did to a statement. Wording it at write time would leave a
+   * log in whatever language each entry happened to be made in; a code lets
+   * the whole history read in one.
+   */
+  code?: AuditCode;
+  /** The entry as English prose, on entries written before the codes. */
   action: string;
   detail?: string;
 };
+
+/** The things worth recording. Deliberately never the statement contents. */
+export type AuditCode =
+  | { code: "DEMO_LOADED" }
+  | { code: "STATEMENT_IMPORTED"; file: string }
+  | { code: "STATEMENT_REMOVED"; file: string }
+  | { code: "REPORT_EXPORTED"; format: ExportFormat }
+  | { code: "RECONCILE_RUN"; results: number }
+  | { code: "RECONCILE_CONFIRMED" }
+  | { code: "RECONCILE_REJECTED" }
+  | { code: "TRANSACTION_EDITED"; fields: string[] }
+  | { code: "BULK_EDIT"; edit: BulkEdit; count: number }
+  | { code: "CHANGE_UNDONE"; count: number }
+  | { code: "TRANSACTIONS_CLASSIFIED" }
+  | { code: "RULE_SAVED"; name: string }
+  | { code: "RULE_DELETED"; name: string }
+  | { code: "CATEGORY_ADDED"; name: string }
+  | { code: "CATEGORY_ARCHIVED"; name: string }
+  | { code: "CATEGORY_RESTORED"; name: string }
+  | { code: "CATEGORY_DELETED"; name: string }
+  | { code: "CATEGORY_FROM_SUGGESTION"; name: string; rows: number }
+  | { code: "AI_SUGGESTION_APPROVED"; count: number; ruleSaved: boolean }
+  | { code: "AI_SUGGESTION_CORRECTED"; count: number; ruleSaved: boolean }
+  | { code: "LEARNED_FORGOTTEN" }
+  | { code: "AI_RUN"; suggested: number; unresolved: number }
+  | { code: "DATA_CLEARED" };
+
+export type ExportFormat = "excel" | "pdf" | "csv" | "reconciliation";
+
+export type BulkEdit =
+  | "categorised"
+  | "business"
+  | "personal"
+  | "transfer"
+  | "duplicateOverride";
 
 // ---------------------------------------------------------------------------
 // Analysis outputs
@@ -376,6 +473,12 @@ export type Anomaly = {
     | "DUPLICATE"
     | "BALANCE_BREAK";
   severity: "info" | "warning";
+  /**
+   * The numbers the sentence quotes, so the sentence itself can be written at
+   * read time in the reader's language — see `anomalyLabel` in ../messages.
+   */
+  detail: { count: number; months?: string; threshold?: number };
+  /** The sentence in English, for anomalies stored before the codes. */
   message: string;
   transactionIds: string[];
 };

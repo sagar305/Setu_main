@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo, useRef, useState } from "react";
 import { BarChart3, Download, Printer } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
@@ -40,6 +42,7 @@ import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
  * cannot drift away from the bills it summarises (AC-6).
  */
 export function ReportsScreen() {
+  const { t } = useI18n();
   const {
     bills,
     billItems,
@@ -91,8 +94,8 @@ export function ReportsScreen() {
     return (
       <EmptyState
         icon={<BarChart3 className="h-6 w-6" />}
-        title="No sales yet"
-        message="Settle a table and your day summary, item report and hourly sales appear here."
+        title={t("dnRpNoSales")}
+        message={t("dnRpNoSalesBody")}
       />
     );
   }
@@ -100,15 +103,23 @@ export function ReportsScreen() {
   return (
     <div className="space-y-5">
       <SectionHeading
-        title="Reports"
+        title={t("clNavReports")}
         subtitle={
-          from === to ? `Business day ${from}` : `${from} to ${to} · ${ranged.length} bills`
+          from === to
+            ? fill(t("dnRpBusinessDay"), { date: from })
+            : fill(t("dnRpRangeSubtitle"), {
+                from,
+                to,
+                bills: fill(t(ranged.length === 1 ? "dnRpBill1" : "dnRpBillN"), {
+                  n: ranged.length,
+                }),
+              })
         }
         action={
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={() => setZOpen(true)} className={secondaryBtnClass}>
               <Printer className="h-4 w-4" />
-              Day close
+              {t("dnRpDayClose")}
             </button>
             <button
               type="button"
@@ -116,14 +127,14 @@ export function ReportsScreen() {
               className={secondaryBtnClass}
             >
               <Download className="h-4 w-4" />
-              Bills
+              {t("clBkBills")}
             </button>
           </div>
         }
       />
 
       <div className="flex flex-wrap items-end gap-3">
-        <Field label="From">
+        <Field label={t("clRpFrom")}>
           <input
             type="date"
             value={from}
@@ -131,7 +142,7 @@ export function ReportsScreen() {
             className={inputClass}
           />
         </Field>
-        <Field label="To">
+        <Field label={t("clRpTo")}>
           <input
             type="date"
             value={to}
@@ -167,41 +178,41 @@ export function ReportsScreen() {
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Sales"
+          label={t("bvaCatSales")}
           value={formatPaise(summary.totalSales, currency)}
-          sub={`${summary.billCount} bill${summary.billCount === 1 ? "" : "s"}`}
+          sub={fill(t(summary.billCount === 1 ? "dnRpBill1" : "dnRpBillN"), { n: summary.billCount })}
         />
         <StatCard
-          label="Average bill"
+          label={t("dnRpAverageBill")}
           value={formatPaise(summary.averageBill, currency)}
-          sub={`${summary.guestCount} items served`}
+          sub={fill(t("dnRpItemsServed"), { n: summary.guestCount })}
         />
         <StatCard
-          label="Tax collected"
+          label={t("dnRpTaxCollected")}
           value={formatPaise(summary.taxCollected, currency)}
           sub={
             summary.serviceCharge > 0
-              ? `+ ${formatPaise(summary.serviceCharge, currency)} service charge`
+              ? fill(t("dnRpPlusService"), { amount: formatPaise(summary.serviceCharge, currency) })
               : undefined
           }
         />
         <StatCard
-          label="Discounts given"
+          label={t("dnRpDiscountsGiven")}
           value={formatPaise(summary.discountsGiven, currency)}
           sub={
             summary.cancelledCount > 0
-              ? `${summary.cancelledCount} cancelled · ${formatPaise(
-                  summary.cancelledValue,
-                  currency
-                )}`
-              : "No cancellations"
+              ? fill(t("dnRpCancelledSummary"), {
+                  n: summary.cancelledCount,
+                  amount: formatPaise(summary.cancelledValue, currency),
+                })
+              : t("dnRpNoCancellations")
           }
         />
       </div>
 
       {(settings.creditEnabled || settings.reservationsEnabled) && (
         <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
-          <h3 className="text-sm font-bold text-ink">Money that is not in the drawer</h3>
+          <h3 className="text-sm font-bold text-ink">{t("dnRpNotInDrawer")}</h3>
           <p className="mt-1 text-xs text-muted">
             Sales above count every bill in full, however it was settled. These two are what has
             been promised rather than paid, and what has been paid for meals not yet eaten — neither
@@ -210,21 +221,21 @@ export function ReportsScreen() {
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             {settings.creditEnabled && (
               <StatCard
-                label="Owed on account"
+                label={t("dnRpOwedOnAccount")}
                 value={formatPaise(totalOutstanding(ledgerEntries), currency)}
-                sub="In the shared Customer Ledger"
+                sub={t("dnRpInLedger")}
               />
             )}
             {settings.reservationsEnabled && (
               <StatCard
-                label="Advances held"
+                label={t("dnRpAdvancesHeld")}
                 value={formatPaise(
                   reservations
                     .filter((row) => row.status === "booked")
                     .reduce((sum, row) => sum + row.depositPaid, 0),
                   currency
                 )}
-                sub="Against bookings still to come"
+                sub={t("dnRpAgainstBookings")}
               />
             )}
           </div>
@@ -233,9 +244,9 @@ export function ReportsScreen() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
-          <h3 className="text-sm font-bold text-ink">By payment method</h3>
+          <h3 className="text-sm font-bold text-ink">{t("dnRpByPaymentMethod")}</h3>
           {summary.byPaymentMethod.length === 0 ? (
-            <p className="mt-3 text-sm text-muted">Nothing settled in this range.</p>
+            <p className="mt-3 text-sm text-muted">{t("dnRpNothingSettled")}</p>
           ) : (
             <ul className="mt-3 space-y-2">
               {summary.byPaymentMethod.map((row) => (
@@ -253,7 +264,7 @@ export function ReportsScreen() {
 
         <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-ink">Hourly sales</h3>
+            <h3 className="text-sm font-bold text-ink">{t("dnRpHourlySales")}</h3>
             <button
               type="button"
               onClick={() => downloadCsv(`hourly-${from}.csv`, hourlySalesCsv(hourly))}
@@ -276,10 +287,10 @@ export function ReportsScreen() {
                 <div
                   key={row.hour}
                   className="group relative flex-1"
-                  title={`${String(row.hour).padStart(2, "0")}:00 — ${formatPaise(
-                    row.revenue,
-                    currency
-                  )}`}
+                  title={fill(t("dnRpHourTooltip"), {
+                    hour: String(row.hour).padStart(2, "0"),
+                    amount: formatPaise(row.revenue, currency),
+                  })}
                 >
                   <div
                     className="w-full rounded-t bg-indigo/70 transition group-hover:bg-indigo"
@@ -302,7 +313,7 @@ export function ReportsScreen() {
       <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-bold text-ink">What sold</h3>
+            <h3 className="text-sm font-bold text-ink">{t("dnRpWhatSold")}</h3>
             <p className="text-xs text-muted">
               Quantity and revenue per dish — the input for menu engineering.
             </p>
@@ -328,19 +339,19 @@ export function ReportsScreen() {
         </div>
 
         {items.length === 0 ? (
-          <p className="mt-3 text-sm text-muted">Nothing sold in this range.</p>
+          <p className="mt-3 text-sm text-muted">{t("dnRpNothingSold")}</p>
         ) : (
           <div className="mt-3 overflow-x-auto">
             <table className="w-full min-w-[420px] text-sm">
               <thead>
                 <tr className="border-b border-muted-line/20 text-left">
-                  <th className="py-2 font-semibold text-muted">Dish</th>
-                  <th className="py-2 text-right font-semibold text-muted">Qty</th>
-                  <th className="py-2 text-right font-semibold text-muted">Revenue</th>
+                  <th className="py-2 font-semibold text-muted">{t("dnRpColDish")}</th>
+                  <th className="py-2 text-right font-semibold text-muted">{t("dnBvQty")}</th>
+                  <th className="py-2 text-right font-semibold text-muted">{t("dnRpColRevenue")}</th>
                   {soldCost > 0 && (
                     <>
-                      <th className="py-2 text-right font-semibold text-muted">Cost</th>
-                      <th className="py-2 text-right font-semibold text-muted">Margin</th>
+                      <th className="py-2 text-right font-semibold text-muted">{t("dnRpColCost")}</th>
+                      <th className="py-2 text-right font-semibold text-muted">{t("dnRpColMargin")}</th>
                     </>
                   )}
                 </tr>
@@ -379,7 +390,7 @@ export function ReportsScreen() {
         <div className="rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h3 className="text-sm font-bold text-ink">What the kitchen got through</h3>
+              <h3 className="text-sm font-bold text-ink">{t("dnRpKitchenGotThrough")}</h3>
               <p className="text-xs text-muted">
                 Read from the stock ledger, not from the recipes — so a short stock take shows up
                 as a variance instead of quietly disappearing.
@@ -415,12 +426,12 @@ export function ReportsScreen() {
               <table className="w-full min-w-[560px] text-sm">
                 <thead>
                   <tr className="border-b border-muted-line/20 text-left">
-                    <th className="py-2 font-semibold text-muted">Material</th>
-                    <th className="py-2 text-right font-semibold text-muted">Used</th>
-                    <th className="py-2 text-right font-semibold text-muted">Wasted</th>
-                    <th className="py-2 text-right font-semibold text-muted">Received</th>
-                    <th className="py-2 text-right font-semibold text-muted">Stock take</th>
-                    <th className="py-2 text-right font-semibold text-muted">Cost</th>
+                    <th className="py-2 font-semibold text-muted">{t("dnRcMaterial")}</th>
+                    <th className="py-2 text-right font-semibold text-muted">{t("dnRpColUsed")}</th>
+                    <th className="py-2 text-right font-semibold text-muted">{t("dnRpColWasted")}</th>
+                    <th className="py-2 text-right font-semibold text-muted">{t("dnRpColReceived")}</th>
+                    <th className="py-2 text-right font-semibold text-muted">{t("dnSmAdjust")}</th>
+                    <th className="py-2 text-right font-semibold text-muted">{t("dnRpColCost")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -487,15 +498,15 @@ export function ReportsScreen() {
     const money = (paise: number) => formatPaise(paise, currency).replace(/^[^\d-]+/, "");
 
     return (
-      <Modal open={open} onClose={onClose} title="Day close">
+      <Modal open={open} onClose={onClose} title={t("dnRpDayClose")}>
         <div className={`rounded-xl border border-muted-line/40 p-4 ${PREVIEW_CLASS}`}>
           <div ref={printRef}>
             <div className="c">
               <p className="lg b" style={{ margin: 0 }}>
-                {business?.name ?? "Restaurant"}
+                {business?.name ?? t("dnRestaurantFallback")}
               </p>
               <p className="b" style={{ margin: "2px 0 0" }}>
-                DAY CLOSE
+                {t("dnRpDayCloseCaps")}
               </p>
               <p className="sm" style={{ margin: 0 }}>
                 {rangeFrom === rangeTo ? rangeFrom : `${rangeFrom} → ${rangeTo}`}
@@ -507,24 +518,24 @@ export function ReportsScreen() {
 
             <div className="solid" />
             <div className="row">
-              <span>Bills settled</span>
+              <span>{t("dnRpBillsSettled")}</span>
               <span className="b">{summary.billCount}</span>
             </div>
             <div className="row">
-              <span>Gross sales</span>
+              <span>{t("dnRpGrossSales")}</span>
               <span className="b">{money(summary.totalSales)}</span>
             </div>
             <div className="row">
-              <span>Average bill</span>
+              <span>{t("dnRpAverageBill")}</span>
               <span>{money(summary.averageBill)}</span>
             </div>
             <div className="row">
-              <span>Discounts</span>
+              <span>{t("dnRpDiscountsGiven")}</span>
               <span>− {money(summary.discountsGiven)}</span>
             </div>
             {summary.serviceCharge > 0 && (
               <div className="row">
-                <span>Service charge</span>
+                <span>{t("dnStServiceCharge")}</span>
                 <span>{money(summary.serviceCharge)}</span>
               </div>
             )}
@@ -550,13 +561,13 @@ export function ReportsScreen() {
               </div>
             ))}
             <div className="row">
-              <span className="b">Total tax</span>
+              <span className="b">{t("dnRpTotalTax")}</span>
               <span className="b">{money(summary.taxCollected)}</span>
             </div>
 
             <div className="rule" />
             <p className="b sm" style={{ margin: 0 }}>
-              PAYMENTS
+              {t("dnRpPaymentsCaps")}
             </p>
             {summary.byPaymentMethod.map((row) => (
               <div className="row" key={row.methodName}>
@@ -571,7 +582,7 @@ export function ReportsScreen() {
               <>
                 <div className="rule" />
                 <div className="row sm">
-                  <span>Cancelled bills</span>
+                  <span>{t("dnRpCancelledBills")}</span>
                   <span>
                     {summary.cancelledCount} · {money(summary.cancelledValue)}
                   </span>
@@ -581,7 +592,7 @@ export function ReportsScreen() {
 
             <div className="solid" />
             <div className="row xl b">
-              <span>NET</span>
+              <span>{t("dnRpNet")}</span>
               <span>{money(summary.totalSales)}</span>
             </div>
           </div>
@@ -597,7 +608,7 @@ export function ReportsScreen() {
           </button>
           <button
             type="button"
-            onClick={() => printNode(printRef.current, settings.billPaperSize, "Day close")}
+            onClick={() => printNode(printRef.current, settings.billPaperSize, t("dnRpDayClose"))}
             className={primaryBtnClass}
           >
             <Printer className="h-4 w-4" />

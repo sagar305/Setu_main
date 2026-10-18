@@ -4,6 +4,7 @@
 // refused while transactions still use a category — the CA is told how many and
 // asked to move them first.
 
+import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import type { Category, CategoryGroup } from "@/lib/bankStatement/types";
 import {
@@ -14,10 +15,17 @@ import {
   Select,
   TextInput,
 } from "@/components/toolkit/ui";
-import { GROUP_LABELS, slugifyCategory } from "@/lib/bankStatement/classification/categories";
+import {
+  categoryLabel,
+  groupLabel,
+  GROUP_ORDER,
+  slugifyCategory,
+} from "@/lib/bankStatement/classification/categories";
+import { fill } from "@/lib/i18n/translate";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 
 export function CategoryManager() {
+  const { t, lang } = useI18n();
   const { categories, transactions, actions } = useAnalyzer();
   const [name, setName] = useState("");
   const [group, setGroup] = useState<CategoryGroup>("EXPENSE");
@@ -31,7 +39,7 @@ export function CategoryManager() {
     if (!trimmed) return;
     const id = slugifyCategory(trimmed);
     if (categories.some((category) => category.id === id)) {
-      setMessage("A category with that name already exists.");
+      setMessage(t("bsCmExists"));
       return;
     }
     actions.saveCategory({
@@ -48,7 +56,11 @@ export function CategoryManager() {
 
   const rename = (category: Category, nextName: string) => {
     const trimmed = nextName.trim();
-    if (!trimmed || trimmed === category.name) return;
+    // Compared against the label on screen, not the stored name: a built-in
+    // shows its name in the reader's language, and blurring without editing
+    // must not write that label back as a rename — doing so would freeze the
+    // category in whichever language it was last looked at.
+    if (!trimmed || trimmed === categoryLabel(category, lang)) return;
     actions.saveCategory({ ...category, name: trimmed });
   };
 
@@ -72,48 +84,48 @@ export function CategoryManager() {
     if (!result.ok) {
       setMessage(
         result.inUse > 0
-          ? `${result.inUse} transaction${result.inUse === 1 ? "" : "s"} currently use this category. Move them to another category first.`
-          : "Built-in categories can be archived, but not deleted."
+          ? fill(t(result.inUse === 1 ? "bsCmInUse1" : "bsCmInUseN"), { n: result.inUse })
+          : t("bsCmBuiltInArchive")
       );
       return;
     }
     setMessage(null);
   };
 
-  const groups: CategoryGroup[] = ["INCOME", "EXPENSE", "TRANSFER", "CASH"];
+  const groups = GROUP_ORDER;
 
   return (
     <Card>
-      <h3 className="text-lg font-bold text-ink">Categories</h3>
-      <p className="mt-1 text-sm text-muted">
-        Rename, reorder or archive to match how you write up a set of books. The description under
-        each one is what automatic categorisation matches a transaction against — the more plainly it
-        says what belongs here, the better it places things.
-      </p>
+      <h3 className="text-lg font-bold text-ink">{t("bsCmTitle")}</h3>
+      <p className="mt-1 text-sm text-muted">{t("bsCmBlurb")}</p>
+      {/* The description is model input, and the model reads English. Saying so
+          here is the honest alternative to translating a field that would then
+          match nothing. */}
+      <p className="mt-1 text-xs text-muted">{t("bsCmDescEnglish")}</p>
 
       <div className="mt-4 flex flex-wrap items-end gap-3">
         <div className="min-w-[200px] flex-1">
-          <Field label="New category">
+          <Field label={t("bsCmNewCategory")}>
             <TextInput
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="e.g. Freight Inward"
+              placeholder={t("bsCmNewPlaceholder")}
             />
           </Field>
         </div>
         <div className="w-40">
-          <Field label="Group">
+          <Field label={t("bsCmGroup")}>
             <Select value={group} onChange={(event) => setGroup(event.target.value as CategoryGroup)}>
               {groups.map((option) => (
                 <option key={option} value={option}>
-                  {GROUP_LABELS[option]}
+                  {groupLabel(option, lang)}
                 </option>
               ))}
             </Select>
           </Field>
         </div>
         <PrimaryButton onClick={add} disabled={name.trim() === ""}>
-          Add
+          {t("add")}
         </PrimaryButton>
       </div>
 
@@ -131,7 +143,7 @@ export function CategoryManager() {
           return (
             <div key={option}>
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                {GROUP_LABELS[option]}
+                {groupLabel(option, lang)}
               </h4>
               <ul className="space-y-1.5">
                 {rows.map((category) => {
@@ -145,17 +157,21 @@ export function CategoryManager() {
                     >
                       <div className="flex flex-wrap items-center gap-2">
                       <input
-                        defaultValue={category.name}
+                        // Keyed on the language so switching it re-renders the
+                        // box with the newly-languaged label rather than
+                        // leaving React's uncontrolled value behind.
+                        key={`${category.id}-${lang}`}
+                        defaultValue={categoryLabel(category, lang)}
                         onBlur={(event) => rename(category, event.target.value)}
                         className="min-w-[140px] flex-1 rounded border-0 bg-transparent px-1 py-0.5 text-sm font-medium text-ink outline-none focus:bg-cream-paper/60"
-                        aria-label={`Rename ${category.name}`}
+                        aria-label={fill(t("bsCmRenameAria"), { name: categoryLabel(category, lang) })}
                       />
-                      <span className="text-xs text-muted">{inUse} in use</span>
+                      <span className="text-xs text-muted">{fill(t("bsCmInUseCount"), { n: inUse })}</span>
                       <button
                         type="button"
                         onClick={() => move(category, -1)}
                         className="rounded px-1.5 text-sm text-muted hover:text-ink"
-                        aria-label={`Move ${category.name} up`}
+                        aria-label={fill(t("bsCmMoveUpAria"), { name: categoryLabel(category, lang) })}
                       >
                         ↑
                       </button>
@@ -163,7 +179,7 @@ export function CategoryManager() {
                         type="button"
                         onClick={() => move(category, 1)}
                         className="rounded px-1.5 text-sm text-muted hover:text-ink"
-                        aria-label={`Move ${category.name} down`}
+                        aria-label={fill(t("bsCmMoveDownAria"), { name: categoryLabel(category, lang) })}
                       >
                         ↓
                       </button>
@@ -171,7 +187,7 @@ export function CategoryManager() {
                         className="!px-2.5 !py-1 !text-xs"
                         onClick={() => actions.archiveCategory(category.id, !category.archived)}
                       >
-                        {category.archived ? "Restore" : "Archive"}
+                        {category.archived ? t("bsCmRestore") : t("bsCmArchive")}
                       </SecondaryButton>
                       {!category.builtIn ? (
                         <button
@@ -179,16 +195,16 @@ export function CategoryManager() {
                           onClick={() => remove(category)}
                           className="text-xs font-semibold text-red-500 hover:text-red-600"
                         >
-                          Delete
+                          {t("delete")}
                         </button>
                       ) : null}
                       </div>
                       <input
                         defaultValue={category.description ?? ""}
                         onBlur={(event) => describe(category, event.target.value)}
-                        placeholder="Describe what belongs here, for automatic categorisation"
+                        placeholder={t("bsCmDescPlaceholder")}
                         className="mt-1 w-full rounded border-0 bg-transparent px-1 py-0.5 text-xs text-muted outline-none focus:bg-cream-paper/60"
-                        aria-label={`Description for ${category.name}`}
+                        aria-label={fill(t("bsCmDescAria"), { name: categoryLabel(category, lang) })}
                       />
                     </li>
                   );

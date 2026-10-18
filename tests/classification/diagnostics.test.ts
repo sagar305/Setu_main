@@ -17,17 +17,17 @@ describe("import diagnostics", () => {
   it("names the stage and the error class", () => {
     const failure = describeFailure(
       Object.assign(new Error("Invalid PDF structure."), { name: "InvalidPDFException" }),
-      "Parsing statement",
+      "PARSING_STATEMENT",
       FILE
     );
 
-    expect(failure.stage).toBe("Parsing statement");
+    expect(failure.stage).toBe("PARSING_STATEMENT");
     expect(failure.errorName).toBe("InvalidPDFException");
     expect(failure.message).toBe("Invalid PDF structure.");
   });
 
   it("keeps the file name out of the report entirely", () => {
-    const report = formatDiagnostics(describeFailure(new Error("boom"), "Reading file", FILE));
+    const report = formatDiagnostics(describeFailure(new Error("boom"), "READING_FILE", FILE));
 
     expect(report).not.toContain("Ankit");
     expect(report).not.toContain("Sharma");
@@ -38,19 +38,19 @@ describe("import diagnostics", () => {
   });
 
   it("says so, in the report, that nothing from the statement is in it", () => {
-    const report = formatDiagnostics(describeFailure(new Error("boom"), "Reading file", FILE));
+    const report = formatDiagnostics(describeFailure(new Error("boom"), "READING_FILE", FILE));
     expect(report).toContain("no statement content is included");
   });
 
   it("survives something that is not an Error at all", () => {
-    const failure = describeFailure("just a string", "Reading file", FILE);
+    const failure = describeFailure("just a string", "READING_FILE", FILE);
     expect(failure.errorName).toBe("string");
     expect(failure.message).toBe("just a string");
     expect(failure.frames).toEqual([]);
   });
 
   it("keeps a file with no extension readable rather than guessing", () => {
-    expect(describeFailure(new Error("x"), "Reading file", { name: "statement", size: 10 }).format).toBe(
+    expect(describeFailure(new Error("x"), "READING_FILE", { name: "statement", size: 10 }).format).toBe(
       "(none)"
     );
   });

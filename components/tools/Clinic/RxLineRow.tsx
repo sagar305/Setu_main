@@ -4,22 +4,26 @@ import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
 import { computeQuantity } from "@/lib/clinic/calc";
 import {
   MEDICINE_FORMS,
-  TIMING_LABELS,
+  formName,
+  timingLabel,
   type MedicineForm,
   type RxLine,
   type RxTiming,
 } from "@/lib/clinic/types";
 import { inputClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
 
 /** The doses doctors actually write, one tap each. Anything else is typed. */
 const FREQUENCY_PRESETS = ["1-0-0", "0-0-1", "1-0-1", "1-1-1", "1-1-0", "SOS"];
 
-const TIMING_OPTIONS: { value: RxTiming; label: string }[] = [
-  { value: "", label: "—" },
-  { value: "before-food", label: TIMING_LABELS["before-food"] },
-  { value: "after-food", label: TIMING_LABELS["after-food"] },
-  { value: "with-food", label: TIMING_LABELS["with-food"] },
-];
+const TIMING_VALUES: RxTiming[] = ["", "before-food", "after-food", "with-food"];
+
+const timingOptions = (lang: LanguageCode) =>
+  TIMING_VALUES.map((value) => ({
+    value,
+    label: value ? timingLabel(value, lang) : "—",
+  }));
 
 export function RxLineRow({
   line,
@@ -36,6 +40,7 @@ export function RxLineRow({
   onRemove: () => void;
   onMove: (direction: -1 | 1) => void;
 }) {
+  const { t, lang } = useI18n();
   /**
    * Quantity follows frequency × duration until the doctor overrides it. Syrups
    * and injections never match the tablet arithmetic, so the field stays fully
@@ -60,9 +65,9 @@ export function RxLineRow({
               type="text"
               value={line.name}
               onChange={(event) => patch({ name: event.target.value })}
-              placeholder="Medicine"
+              placeholder={t("clDocMedicine")}
               className={`${inputClass} font-semibold`}
-              aria-label="Medicine name"
+              aria-label={t("clRxMedicineName")}
             />
             <input
               type="text"
@@ -70,7 +75,7 @@ export function RxLineRow({
               onChange={(event) => patch({ strength: event.target.value })}
               placeholder="500 mg"
               className={`${inputClass} w-24 shrink-0`}
-              aria-label="Strength"
+              aria-label={t("clRxStrength")}
             />
           </div>
 
@@ -98,7 +103,7 @@ export function RxLineRow({
               onChange={(event) => patch({ frequency: event.target.value })}
               placeholder="1-0-1"
               className={inputClass}
-              aria-label="Frequency"
+              aria-label={t("clRxFrequency")}
             />
             <input
               type="number"
@@ -110,17 +115,17 @@ export function RxLineRow({
                   durationDays: event.target.value ? Number(event.target.value) : null,
                 })
               }
-              placeholder="Days"
+              placeholder={t("clRxDays")}
               className={inputClass}
-              aria-label="Duration in days"
+              aria-label={t("clRxDurationDays")}
             />
             <select
               value={line.timing}
               onChange={(event) => patch({ timing: event.target.value as RxTiming })}
               className={inputClass}
-              aria-label="Timing"
+              aria-label={t("clRxTiming")}
             >
-              {TIMING_OPTIONS.map((option) => (
+              {timingOptions(lang).map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
@@ -130,11 +135,11 @@ export function RxLineRow({
               value={line.form}
               onChange={(event) => patch({ form: event.target.value as MedicineForm })}
               className={inputClass}
-              aria-label="Form"
+              aria-label={t("clRxForm")}
             >
               {MEDICINE_FORMS.map((form) => (
                 <option key={form} value={form}>
-                  {form}
+                  {formName(form, lang)}
                 </option>
               ))}
             </select>
@@ -149,9 +154,9 @@ export function RxLineRow({
                   quantity: event.target.value ? Number(event.target.value) : null,
                 })
               }
-              placeholder="Qty"
+              placeholder={t("quantity")}
               className={inputClass}
-              aria-label="Quantity to dispense"
+              aria-label={t("clRxQtyDispense")}
             />
           </div>
 
@@ -159,9 +164,9 @@ export function RxLineRow({
             type="text"
             value={line.instructions}
             onChange={(event) => patch({ instructions: event.target.value })}
-            placeholder="Instructions (optional)"
+            placeholder={t("clRxInstructionsOptional")}
             className={inputClass}
-            aria-label="Instructions"
+            aria-label={t("clRxInstructions")}
           />
         </div>
 
@@ -170,7 +175,7 @@ export function RxLineRow({
             type="button"
             onClick={() => onMove(-1)}
             disabled={index === 0}
-            aria-label="Move up"
+            aria-label={t("clRxMoveUp")}
             className="flex h-7 w-7 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo disabled:opacity-30"
           >
             <ChevronUp className="h-4 w-4" />
@@ -179,7 +184,7 @@ export function RxLineRow({
             type="button"
             onClick={() => onMove(1)}
             disabled={index === total - 1}
-            aria-label="Move down"
+            aria-label={t("clRxMoveDown")}
             className="flex h-7 w-7 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-indigo disabled:opacity-30"
           >
             <ChevronDown className="h-4 w-4" />
@@ -187,7 +192,7 @@ export function RxLineRow({
           <button
             type="button"
             onClick={onRemove}
-            aria-label="Remove medicine"
+            aria-label={t("clRxRemoveMedicine")}
             className="flex h-7 w-7 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
           >
             <Trash2 className="h-4 w-4" />

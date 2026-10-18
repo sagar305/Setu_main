@@ -70,7 +70,7 @@ describe("analysis", () => {
   ];
 
   it("totals credits, debits and the net", () => {
-    const result = analyse(rows, categories, settings);
+    const result = analyse(rows, categories, settings, "en");
     expect(result.totals.credits).toBe(80000);
     expect(result.totals.debits).toBe(185000);
     expect(result.totals.net).toBe(-105000);
@@ -78,14 +78,14 @@ describe("analysis", () => {
   });
 
   it("buckets by month in order", () => {
-    const result = analyse(rows, categories, settings);
+    const result = analyse(rows, categories, settings, "en");
     expect(result.monthly.map((row) => row.month)).toEqual(["2025-04", "2025-05"]);
     expect(result.monthly[0].credits).toBe(50000);
     expect(result.monthly[1].debits).toBe(167000);
   });
 
   it("ranks expense categories by amount with a share that sums to 100", () => {
-    const result = analyse(rows, categories, settings);
+    const result = analyse(rows, categories, settings, "en");
     expect(result.expenseCategories[0].category).toBe("Purchases");
     expect(result.expenseCategories[0].debit).toBe(162000);
     const totalShare = result.expenseCategories.reduce((sum, row) => sum + row.share, 0);
@@ -93,39 +93,41 @@ describe("analysis", () => {
   });
 
   it("applies the high-value threshold from settings, not a hardcoded number", () => {
-    expect(analyse(rows, categories, settings).highValue).toHaveLength(1);
-    const raised = analyse(rows, categories, { ...settings, highValueThreshold: 200000 });
+    expect(analyse(rows, categories, settings, "en").highValue).toHaveLength(1);
+    const raised = analyse(rows, categories, { ...settings, highValueThreshold: 200000 }, "en");
     expect(raised.highValue).toHaveLength(0);
   });
 
   it("separates cash movement", () => {
-    const result = analyse(rows, categories, settings);
+    const result = analyse(rows, categories, settings, "en");
     expect(result.cash.withdrawals).toBe(5000);
     expect(result.cash.transactions).toHaveLength(1);
   });
 
   it("lists everything below the review confidence as uncategorised work", () => {
     const withGaps = [...rows, t({ debit: 900, category: undefined, confidence: 0 })];
-    const result = analyse(withGaps, categories, settings);
+    const result = analyse(withGaps, categories, settings, "en");
     expect(result.uncategorised.length).toBeGreaterThan(0);
   });
 
   it("excludes duplicates from the totals it reports", () => {
     const withDuplicate = [...rows, t({ date: "2025-04-05", credit: 50000, transactionType: "CREDIT", isDuplicate: true })];
-    const result = analyse(withDuplicate, categories, settings);
+    const result = analyse(withDuplicate, categories, settings, "en");
     expect(result.totals.credits).toBe(80000);
     expect(result.totals.excludedDuplicates).toBe(1);
 
-    const including = analyse(withDuplicate, categories, {
-      ...settings,
-      includeDuplicatesInTotals: true,
-    });
+    const including = analyse(
+      withDuplicate,
+      categories,
+      { ...settings, includeDuplicatesInTotals: true },
+      "en"
+    );
     expect(including.totals.credits).toBe(130000);
   });
 
   it("raises an anomaly for a balance chain break", () => {
     const broken = [...rows, t({ debit: 100, rowIssue: "Running balance does not follow: expected 1, statement shows 2" })];
-    const result = analyse(broken, categories, settings);
+    const result = analyse(broken, categories, settings, "en");
     expect(result.anomalies.some((anomaly) => anomaly.kind === "BALANCE_BREAK")).toBe(true);
   });
 });

@@ -8,6 +8,8 @@
 //
 // No Zustand (decision 2) — feature hooks over React state, as the repo does.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import {
   createContext,
   useCallback,
@@ -47,7 +49,7 @@ import {
   writeStatements,
   writeTransactions,
 } from "@/lib/bankStatement/storage/store";
-import type { AuditEntry } from "@/lib/bankStatement/types";
+import type { AuditCode, AuditEntry } from "@/lib/bankStatement/types";
 import { analyse } from "@/lib/bankStatement/analysis";
 import { applyClassification, buildPartyMemory, classify } from "@/lib/bankStatement/classification/classifier";
 import {
@@ -64,7 +66,7 @@ import {
 } from "@/lib/bankStatement/ai/approval";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 import { merchantKey } from "@/lib/bankStatement/ai/narration";
-import { slugifyCategory } from "@/lib/bankStatement/classification/categories";
+import { categoryLabel, slugifyCategory } from "@/lib/bankStatement/classification/categories";
 import { markDuplicates } from "@/lib/bankStatement/normalization/deduplicator";
 import { mapInChunks } from "@/lib/bankStatement/utils/scheduler";
 
@@ -123,7 +125,13 @@ type AnalyzerActions = {
   /** Forget one thing the categoriser learned from a correction. */
   forgetLearned: (key: string) => void;
   clearEverything: () => Promise<void>;
-  log: (action: string, detail?: string) => void;
+  /**
+   * Record what the CA did.
+   *
+   * The code is what the log displays; the English text beside it is the
+   * fallback and what a developer reading storage sees.
+   */
+  log: (code: AuditCode, action: string, detail?: string) => void;
 };
 
 type AnalyzerContextValue = AnalyzerState & {
@@ -142,6 +150,7 @@ export function useAnalyzer(): AnalyzerContextValue {
 }
 
 export function AnalyzerProvider({ children }: { children: ReactNode }) {
+  const { lang, t } = useI18n();
   const [state, setState] = useState<AnalyzerState>({
     loaded: false,
     statements: [],
@@ -209,8 +218,8 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  const log = useCallback((action: string, detail?: string) => {
-    appendAudit(action, detail);
+  const log = useCallback((code: AuditCode, action: string, detail?: string) => {
+    appendAudit(code, action, detail);
     setState((current) => ({ ...current, audit: readAudit() }));
   }, []);
 
@@ -235,7 +244,11 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       });
 
       await writeTransactions(statement.id, incoming);
-      appendAudit("Statement imported", `${statement.fileName} · ${statement.transactionCount} rows`);
+      appendAudit(
+        { code: "STATEMENT_IMPORTED", file: statement.fileName },
+        "Statement imported",
+        `${statement.fileName} · ${statement.transactionCount} rows`
+      );
       setState((current) => ({ ...current, audit: readAudit() }));
     },
     []
@@ -249,7 +262,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       transactions: current.transactions.filter((t) => t.statementId !== statementId),
       activeStatementIds: current.activeStatementIds.filter((id) => id !== statementId),
     }));
-    appendAudit("Statement removed");
+    appendAudit({ code: "STATEMENT_REMOVED", file: "" }, "Statement removed");
     setState((current) => ({ ...current, audit: readAudit() }));
   }, []);
 
@@ -400,7 +413,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
         writeRules(rules);
         return { ...current, rules };
       });
-      appendAudit("Rule saved", rule.name);
+      appendAudit({ code: "RULE_SAVED", name: rule.name }, "Rule saved", rule.name);
       setState((current) => ({ ...current, audit: readAudit() }));
     },
     []
@@ -412,7 +425,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       writeRules(rules);
       return { ...current, rules };
     });
-    appendAudit("Rule deleted");
+    appendAudit({ code: "RULE_DELETED", name: "" }, "Rule deleted");
     setState((current) => ({ ...current, audit: readAudit() }));
   }, []);
 
@@ -434,7 +447,11 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       writeCategories(categories);
       return { ...current, categories };
     });
-    appendAudit(archived ? "Category archived" : "Category restored", categoryId);
+    appendAudit(
+      { code: archived ? "CATEGORY_ARCHIVED" : "CATEGORY_RESTORED", name: categoryId },
+      archived ? "Category archived" : "Category restored",
+      categoryId
+    );
     setState((current) => ({ ...current, audit: readAudit() }));
   }, []);
 
@@ -453,7 +470,11 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     const categories = current.categories.filter((c) => c.id !== categoryId);
     writeCategories(categories);
     setState((state) => ({ ...state, categories }));
-    appendAudit("Category deleted", categoryId);
+    appendAudit(
+      { code: "CATEGORY_DELETED", name: categoryId },
+      "Category deleted",
+      categoryId
+    );
     setState((state) => ({ ...state, audit: readAudit() }));
     return { ok: true, inUse: 0 };
   }, []);
@@ -533,6 +554,11 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       );
 
       appendAudit(
+        {
+          code: approved ? "AI_SUGGESTION_APPROVED" : "AI_SUGGESTION_CORRECTED",
+          count: ids.length,
+          ruleSaved: savedRule !== null,
+        },
         approved ? "AI suggestion approved" : "AI suggestion corrected",
         `${ids.length} transaction${ids.length === 1 ? "" : "s"}${savedRule ? " · rule saved" : ""}`
       );
@@ -563,12 +589,14 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       transactions: Transaction[];
     }) => {
       const name = input.name.trim();
-      if (name === "") return { created: false, categoryId: "", rows: 0, reason: "A name is required." };
+      if (name === "") {
+        return { created: false, categoryId: "", rows: 0, reason: t("bsSgNameRequired") };
+      }
 
       const current = stateRef.current;
       const categoryId = slugifyCategory(name);
       if (categoryId === "") {
-        return { created: false, categoryId: "", rows: 0, reason: "That name cannot be used." };
+        return { created: false, categoryId: "", rows: 0, reason: t("bsSgNameUnusable") };
       }
 
       const clash = current.categories.find((category) => category.id === categoryId);
@@ -577,7 +605,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
           created: false,
           categoryId,
           rows: 0,
-          reason: `"${clash.name}" already exists — move these to it instead, or pick another name.`,
+          reason: fill(t("bsSgNameClash"), { name: categoryLabel(clash, lang) }),
         };
       }
 
@@ -596,7 +624,11 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       writeCategories(categories);
       setState((state) => ({ ...state, categories }));
       stateRef.current = { ...stateRef.current, categories };
-      appendAudit("Category created from a suggestion", `${name} · ${input.transactions.length} rows`);
+      appendAudit(
+        { code: "CATEGORY_FROM_SUGGESTION", name, rows: input.transactions.length },
+        "Category created from a suggestion",
+        `${name} · ${input.transactions.length} rows`
+      );
 
       // One merchant at a time, so each gets its own rule rather than one rule
       // that would have to match everything in the cluster at once.
@@ -624,7 +656,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
     const memory = unlearn(stateRef.current.learned, key);
     void writeLearned(memory);
     setState((current) => ({ ...current, learned: memory }));
-    appendAudit("Learned category forgotten");
+    appendAudit({ code: "LEARNED_FORGOTTEN" }, "Learned category forgotten");
     setState((current) => ({ ...current, audit: readAudit() }));
   }, []);
 
@@ -663,8 +695,8 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
   );
 
   const analysis = useMemo(
-    () => analyse(activeTransactions, state.categories, state.settings),
-    [activeTransactions, state.categories, state.settings]
+    () => analyse(activeTransactions, state.categories, state.settings, lang),
+    [activeTransactions, state.categories, state.settings, lang]
   );
 
   const value: AnalyzerContextValue = {

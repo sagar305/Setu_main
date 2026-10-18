@@ -15,7 +15,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { ClinicProvider, useClinic } from "@/lib/clinic/store";
-import { FIRST_RUN_DISCLAIMER } from "@/lib/clinic/types";
+import { firstRunDisclaimer } from "@/lib/clinic/types";
 import { previewStyleSheet } from "@/lib/clinic/print";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
@@ -29,15 +29,17 @@ import { ConsultScreen } from "./ConsultScreen";
 import { BillingScreen } from "./BillingScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
+import { useI18n } from "@/lib/i18n";
+import type { TKey } from "@/lib/i18n/translate";
 
-const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Users }[] = [
-  { id: "today", label: "Today", icon: LayoutDashboard },
-  { id: "patients", label: "Patients", icon: Users },
-  { id: "appointments", label: "Appointments", icon: CalendarDays },
-  { id: "consult", label: "Consult", icon: Stethoscope },
-  { id: "billing", label: "Billing", icon: Wallet },
-  { id: "reports", label: "Reports", icon: BarChart3 },
-  { id: "settings", label: "Settings", icon: Settings },
+const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Users }[] = [
+  { id: "today", label: "today", icon: LayoutDashboard },
+  { id: "patients", label: "clNavPatients", icon: Users },
+  { id: "appointments", label: "clNavAppointments", icon: CalendarDays },
+  { id: "consult", label: "clNavConsult", icon: Stethoscope },
+  { id: "billing", label: "clNavBilling", icon: Wallet },
+  { id: "reports", label: "clNavReports", icon: BarChart3 },
+  { id: "settings", label: "clNavSettings", icon: Settings },
 ];
 
 type QueryRequest = { screen: ScreenId; value: string; nonce: number };
@@ -49,20 +51,18 @@ type QueryRequest = { screen: ScreenId; value: string; nonce: number };
  * checking something.
  */
 function DisclaimerGate({ onAccept }: { onAccept: () => void }) {
+  const { t, lang } = useI18n();
   return (
     <div className="fixed inset-0 z-[80] flex items-end justify-center bg-ink/60 p-0 sm:items-center sm:p-6">
       <div className="flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl sm:max-w-lg sm:rounded-2xl">
         <div className="border-b border-muted-line/20 px-5 py-4">
-          <h3 className="text-base font-bold text-ink">Before you start</h3>
+          <h3 className="text-base font-bold text-ink">{t("clGateTitle")}</h3>
         </div>
         <div className="overflow-y-auto px-5 py-4">
-          <p className="text-sm leading-relaxed text-muted">{FIRST_RUN_DISCLAIMER}</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
-            You can edit the disclaimer that prints on your prescriptions in Settings →
-            Prescription.
-          </p>
+          <p className="text-sm leading-relaxed text-muted">{firstRunDisclaimer(lang)}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{t("clGateEditNote")}</p>
           <button type="button" onClick={onAccept} className={`${primaryBtnClass} mt-5 w-full`}>
-            I understand
+            {t("clGateUnderstand")}
           </button>
         </div>
       </div>
@@ -77,6 +77,7 @@ function ClinicShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { business, settings, acceptDisclaimer } = useClinic();
   const [screen, setScreen] = useState<ScreenId>("today");
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
@@ -147,7 +148,7 @@ function ClinicShell({
           {offline && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-saffron/15 px-2.5 py-1 text-xs font-semibold text-ink">
               <WifiOff className="h-3.5 w-3.5 text-saffron" />
-              Offline — consultations still work
+              {t("clOffline")}
             </span>
           )}
         </div>
@@ -156,8 +157,8 @@ function ClinicShell({
             <button
               type="button"
               onClick={lockNow}
-              aria-label="Lock the app"
-              title="Lock the app"
+              aria-label={t("clLockApp")}
+              title={t("clLockApp")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
             >
               <Lock className="h-4 w-4" />
@@ -166,8 +167,8 @@ function ClinicShell({
           <button
             type="button"
             onClick={onToggleFullscreen}
-            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
-            title={fullscreen ? "Exit full screen" : "Full screen"}
+            aria-label={t(fullscreen ? "appExitFullScreen" : "appEnterFullScreen")}
+            title={t(fullscreen ? "appExitFullScreen" : "appFullScreen")}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo"
           >
             {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -175,7 +176,10 @@ function ClinicShell({
         </div>
       </div>
 
-      <nav className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1" aria-label="Sections">
+      <nav
+        className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1"
+        aria-label={t("clNavSections")}
+      >
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
@@ -189,7 +193,7 @@ function ClinicShell({
             }`}
           >
             <item.icon className="h-4 w-4" />
-            {item.label}
+            {t(item.label)}
           </button>
         ))}
       </nav>
@@ -243,22 +247,22 @@ function ClinicRouter({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
+  const { t } = useI18n();
   const { status, errorMessage } = useClinic();
 
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center py-24">
-        <p className="text-sm text-muted">Opening your clinic…</p>
+        <p className="text-sm text-muted">{t("clOpening")}</p>
       </div>
     );
   }
   if (status === "error") {
     return (
       <div className="mx-auto max-w-md py-16 text-center">
-        <h2 className="text-lg font-bold text-ink">Couldn&apos;t open local storage</h2>
+        <h2 className="text-lg font-bold text-ink">{t("appStorageErrorTitle")}</h2>
         <p className="mt-2 text-sm text-muted">
-          {errorMessage ||
-            "This app stores data in your browser (IndexedDB). Private/incognito windows and some very old browsers block it."}
+          {errorMessage || t("clStorageErrorBody")}
         </p>
       </div>
     );

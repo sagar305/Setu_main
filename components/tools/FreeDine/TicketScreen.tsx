@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -17,7 +19,7 @@ import {
 import { useDine } from "@/lib/dine/store";
 import { formatPaise, parseAmount } from "@/lib/dine/money";
 import {
-  ORDER_TYPE_LABELS,
+  orderTypeLabel,
   lineUnitPrice,
   type DineKot,
   type DineMenuItem,
@@ -47,6 +49,7 @@ export function TicketScreen({
   ticketId: string;
   onBack: () => void;
 }) {
+  const { lang, t } = useI18n();
   const {
     tickets,
     tables,
@@ -125,9 +128,9 @@ export function TicketScreen({
   if (!ticket) {
     return (
       <div className="py-16 text-center">
-        <p className="text-sm text-muted">This ticket is no longer open.</p>
+        <p className="text-sm text-muted">{t("dnTkNoLongerOpen")}</p>
         <button type="button" onClick={onBack} className={`${secondaryBtnClass} mt-4`}>
-          Back to floor
+          {t("dnTkBackToFloor")}
         </button>
       </div>
     );
@@ -173,7 +176,7 @@ export function TicketScreen({
           <button
             type="button"
             onClick={onBack}
-            aria-label="Back to floor"
+            aria-label={t("dnTkBackToFloor")}
             className={`${tapTargetClass} flex items-center justify-center rounded-full border border-muted-line/40 bg-white text-muted transition hover:border-indigo/40 hover:text-indigo`}
           >
             <ArrowLeft className="h-4 w-4" />
@@ -182,10 +185,13 @@ export function TicketScreen({
             <h2 className="text-lg font-bold text-ink">{title}</h2>
             <p className="flex items-center gap-2 text-xs text-muted">
               <OrderTypeChip type={ticket.orderType} />
-              <span>Open {elapsedLabel(ticket.openedAt, now)}</span>
+              <span>{fill(t("dnTkOpenFor"), { elapsed: elapsedLabel(ticket.openedAt, now, lang) })}</span>
               {ticket.roundsFired > 0 && (
                 <span>
-                  · {ticket.roundsFired} round{ticket.roundsFired === 1 ? "" : "s"} sent
+                  ·{" "}
+                  {fill(t(ticket.roundsFired === 1 ? "dnTkRoundSent1" : "dnTkRoundsSentN"), {
+                    n: ticket.roundsFired,
+                  })}
                 </span>
               )}
             </p>
@@ -199,7 +205,7 @@ export function TicketScreen({
             className={`${secondaryBtnClass} ${tapTargetClass}`}
           >
             <UserPlus className="h-4 w-4" />
-            {ticket.customerName || "Customer"}
+            {ticket.customerName || t("customer")}
           </button>
           {mergeCandidates.length > 0 && (
             <button
@@ -223,13 +229,13 @@ export function TicketScreen({
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search the menu…"
-              aria-label="Search the menu"
+              placeholder={t("dnTkSearchMenuPh")}
+              aria-label={t("dnTkSearchMenu")}
               className={`${inputClass} pl-9`}
             />
           </div>
 
-          <div className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Menu categories">
+          <div className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label={t("dnTkMenuCategories")}>
             <button
               type="button"
               onClick={() => setCategoryId("all")}
@@ -261,7 +267,7 @@ export function TicketScreen({
 
           {visibleItems.length === 0 ? (
             <p className="rounded-2xl border border-dashed border-muted-line/40 bg-white/60 px-4 py-10 text-center text-sm text-muted">
-              Nothing on the menu matches.
+              {t("dnTkNothingMatches")}
             </p>
           ) : (
             <div className="grid grid-cols-2 gap-2 pb-28 sm:grid-cols-3 lg:pb-0">
@@ -343,7 +349,7 @@ export function TicketScreen({
               className={`${primaryBtnClass} ${tapTargetClass}`}
             >
               <ChefHat className="h-4 w-4" />
-              Send
+              {t("dnTkSend")}
             </button>
           ) : (
             <button
@@ -353,13 +359,17 @@ export function TicketScreen({
               className={`${primaryBtnClass} ${tapTargetClass}`}
             >
               <Receipt className="h-4 w-4" />
-              Bill
+              {t("dnBlColBill")}
             </button>
           )}
         </div>
       </div>
 
-      <Modal open={sheetOpen} onClose={() => setSheetOpen(false)} title={`Ticket · ${title}`}>
+      <Modal
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        title={fill(t("dnTkTicketTitle"), { title })}
+      >
         <TicketPanel
           ticketId={ticketId}
           rounds={rounds}
@@ -432,7 +442,7 @@ export function TicketScreen({
         showAddress={ticket.orderType === "delivery"}
       />
 
-      <Modal open={mergeOpen} onClose={() => setMergeOpen(false)} title="Merge another table in">
+      <Modal open={mergeOpen} onClose={() => setMergeOpen(false)} title={t("dnTkMergeTitle")}>
         <p className="text-sm text-muted">
           The other ticket&apos;s items move here and its table is freed. Both tables&apos; sent
           rounds are kept.
@@ -454,7 +464,7 @@ export function TicketScreen({
               >
                 <span>{candidateTable?.name ?? `#${candidate.ticketNumber}`}</span>
                 <span className="text-xs font-normal text-muted">
-                  {ORDER_TYPE_LABELS[candidate.orderType]}
+                  {orderTypeLabel(candidate.orderType, lang)}
                 </span>
               </button>
             );
@@ -465,7 +475,7 @@ export function TicketScreen({
       <Modal
         open={cancelItemTarget !== null}
         onClose={() => setCancelItemTarget(null)}
-        title="Cancel this item"
+        title={t("dnTkCancelItem")}
       >
         <p className="flex gap-2 rounded-xl border border-saffron/40 bg-saffron/10 p-3 text-xs leading-relaxed text-ink">
           <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
@@ -475,11 +485,11 @@ export function TicketScreen({
           </span>
         </p>
         <div className="mt-4">
-          <Field label="Reason" hint="Optional, but useful at the end of the month.">
+          <Field label={t("dgReason")} hint={t("dnTkCancelReasonHint")}>
             <input
               value={cancelReason}
               onChange={(event) => setCancelReason(event.target.value)}
-              placeholder="ordered by mistake, guest changed their mind…"
+              placeholder={t("dnTkCancelReasonPh")}
               className={inputClass}
             />
           </Field>
@@ -490,22 +500,22 @@ export function TicketScreen({
             onClick={() => setCancelItemTarget(null)}
             className={secondaryBtnClass}
           >
-            Keep it
+            {t("clTdKeepIt")}
           </button>
           <button type="button" onClick={() => void confirmCancelItem()} className={dangerBtnClass}>
-            Cancel item
+            {t("dnTkCancelItemBtn")}
           </button>
         </div>
       </Modal>
 
       <ConfirmDialog
         open={confirmVoid}
-        title="Void this ticket?"
-        message="The whole table is voided and freed. The ticket stays in your records as cancelled — nothing is deleted."
-        confirmLabel="Void ticket"
+        title={t("dnTkVoidTitle")}
+        message={t("dnTkVoidBody")}
+        confirmLabel={t("dnTkVoidTicket")}
         onCancel={() => setConfirmVoid(false)}
         onConfirm={async () => {
-          await cancelTicket(ticketId, "Voided from the floor");
+          await cancelTicket(ticketId, t("dnTkVoidedFromFloor"));
           setConfirmVoid(false);
           onBack();
         }}
@@ -550,6 +560,7 @@ function TicketPanel({
   onCancelFired: (item: DineTicketItem) => void;
   onVoid: () => void;
 }) {
+  const { t } = useI18n();
   const wrapper = bare
     ? ""
     : "sticky top-4 rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm";
@@ -558,7 +569,7 @@ function TicketPanel({
     <div className={wrapper}>
       {rounds.length === 0 ? (
         <p className="py-8 text-center text-sm text-muted">
-          Tap a dish to start this table&apos;s order.
+          {t("dnTkTapToStart")}
         </p>
       ) : (
         <div className="max-h-[46vh] space-y-4 overflow-y-auto pr-1">
@@ -567,13 +578,13 @@ function TicketPanel({
             return (
               <div key={roundNumber}>
                 <p className="mb-1.5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wide text-muted">
-                  Round {roundNumber}
+                  {fill(t("dnTkRoundN"), { n: roundNumber })}
                   <span
                     className={`rounded-full px-2 py-0.5 ${
                       fired ? "bg-green-100 text-green-800" : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {fired ? "sent" : "not sent"}
+                    {fired ? t("dnTkSent") : t("dnTkNotSent")}
                   </span>
                 </p>
                 <ul className="space-y-2">
@@ -595,24 +606,24 @@ function TicketPanel({
       )}
 
       <div className="mt-4 space-y-1.5 border-t border-muted-line/20 pt-4 text-sm">
-        <Row label="Subtotal" value={formatPaise(totals.subtotal, currency)} />
+        <Row label={t("subtotal")} value={formatPaise(totals.subtotal, currency)} />
         {totals.discountAmount > 0 && (
           <Row
-            label={`Discount${discountLabel ? ` (${discountLabel})` : ""}`}
+            label={discountLabel ? fill(t("dnTkDiscountNamed"), { label: discountLabel }) : t("dnTkDiscount")}
             value={`− ${formatPaise(totals.discountAmount, currency)}`}
           />
         )}
         {totals.serviceCharge > 0 && (
           <Row
-            label={`Service charge (${serviceChargeRate}%)`}
+            label={fill(t("dnTkServiceChargeRate"), { rate: serviceChargeRate })}
             value={formatPaise(totals.serviceCharge, currency)}
           />
         )}
         {totals.addedTax > 0 && (
-          <Row label="Tax" value={formatPaise(totals.addedTax, currency)} />
+          <Row label={t("taxLabel")} value={formatPaise(totals.addedTax, currency)} />
         )}
         <div className="flex items-baseline justify-between border-t border-muted-line/20 pt-2">
-          <span className="text-sm font-bold text-ink">Total</span>
+          <span className="text-sm font-bold text-ink">{t("total")}</span>
           <span className="text-xl font-bold text-ink">
             {formatPaise(totals.total, currency)}
           </span>
@@ -626,7 +637,7 @@ function TicketPanel({
 
       <div className="mt-4 flex flex-wrap gap-2">
         <button type="button" onClick={onDiscount} className="text-xs font-semibold text-indigo">
-          {discountLabel ? `Discount ${discountLabel}` : "Add discount"}
+          {discountLabel ? fill(t("dnTkDiscountShown"), { label: discountLabel }) : t("dnTkAddDiscount")}
         </button>
         <span className="text-muted/40">·</span>
         <button
@@ -634,7 +645,7 @@ function TicketPanel({
           onClick={onToggleServiceCharge}
           className="text-xs font-semibold text-indigo"
         >
-          {serviceChargeOn ? "Remove service charge" : `Add ${serviceChargeRate}% service charge`}
+          {serviceChargeOn ? t("dnTkRemoveService") : fill(t("dnTkAddService"), { rate: serviceChargeRate })}
         </button>
         <span className="text-muted/40">·</span>
         <button type="button" onClick={onVoid} className="text-xs font-semibold text-red-600">
@@ -654,7 +665,9 @@ function TicketPanel({
           className={`${primaryBtnClass} ${tapTargetClass} flex-1`}
         >
           <ChefHat className="h-4 w-4" />
-          Send {unfiredCount > 0 ? `${unfiredCount} to kitchen` : "to kitchen"}
+          {unfiredCount > 0
+            ? fill(t("dnTkSendNToKitchen"), { n: unfiredCount })
+            : t("dnTkSendToKitchen")}
         </button>
         <button
           type="button"
@@ -683,6 +696,7 @@ function TicketLine({
   onRemove: (itemId: string) => void;
   onCancelFired: (item: DineTicketItem) => void;
 }) {
+  const { t } = useI18n();
   const cancelled = item.cancelledAt !== null;
   const fired = item.firedAt !== null;
 
@@ -722,14 +736,14 @@ function TicketLine({
       {!cancelled && (
         <div className="mt-1.5 flex items-center justify-between gap-2">
           {fired ? (
-            <span className="text-[11px] font-semibold text-muted">Qty {item.quantity}</span>
+            <span className="text-[11px] font-semibold text-muted">{fill(t("dnTkQtyN"), { n: item.quantity })}</span>
           ) : (
             <div className="flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => onQuantity(item.id, item.quantity - 1)}
                 disabled={item.quantity <= 1}
-                aria-label={`Reduce ${item.name}`}
+                aria-label={fill(t("dnTkReduceNamed"), { name: item.name })}
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink disabled:opacity-40"
               >
                 <Minus className="h-3.5 w-3.5" />
@@ -738,7 +752,7 @@ function TicketLine({
               <button
                 type="button"
                 onClick={() => onQuantity(item.id, item.quantity + 1)}
-                aria-label={`Add another ${item.name}`}
+                aria-label={fill(t("dnTkAddAnotherNamed"), { name: item.name })}
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -749,7 +763,7 @@ function TicketLine({
           <button
             type="button"
             onClick={() => (fired ? onCancelFired(item) : onRemove(item.id))}
-            aria-label={fired ? `Cancel ${item.name}` : `Remove ${item.name}`}
+            aria-label={fill(t(fired ? "dnTkCancelNamed" : "dnTkRemoveNamed"), { name: item.name })}
             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted transition hover:bg-red-50 hover:text-red-600"
           >
             {fired ? <X className="h-4 w-4" /> : <Trash2 className="h-4 w-4" />}
@@ -786,6 +800,7 @@ function DiscountModal({
   initialReason: string;
   onSave: (type: "flat" | "percent", value: number, reason: string) => void;
 }) {
+  const { t } = useI18n();
   const [type, setType] = useState(initialType);
   const [value, setValue] = useState("");
   const [reason, setReason] = useState(initialReason);
@@ -804,7 +819,7 @@ function DiscountModal({
   }, [initialReason, initialType, initialValue, open]);
 
   return (
-    <Modal open={open} onClose={onClose} title="Discount">
+    <Modal open={open} onClose={onClose} title={t("dnTkDiscount")}>
       <div className="space-y-4">
         <div className="flex gap-2">
           {(["percent", "flat"] as const).map((option) => (
@@ -819,12 +834,12 @@ function DiscountModal({
                   : "border-muted-line/40 bg-white text-ink"
               }`}
             >
-              {option === "percent" ? "Percentage" : `Amount (${currency})`}
+              {option === "percent" ? t("dnTkPercentage") : fill(t("dnTkAmountCurrency"), { currency })}
             </button>
           ))}
         </div>
 
-        <Field label={type === "percent" ? "Discount %" : "Discount amount"}>
+        <Field label={type === "percent" ? t("dnTkDiscountPct") : t("dnTkDiscountAmount")}>
           <input
             inputMode="decimal"
             value={value}
@@ -834,11 +849,11 @@ function DiscountModal({
           />
         </Field>
 
-        <Field label="Reason" hint="Shows on the bill and in your reports.">
+        <Field label={t("dgReason")} hint={t("dnTkDiscountReasonHint")}>
           <input
             value={reason}
             onChange={(event) => setReason(event.target.value)}
-            placeholder="regular guest, service delay…"
+            placeholder={t("dnTkDiscountReasonPh")}
             className={inputClass}
           />
         </Field>
@@ -897,6 +912,7 @@ function CustomerModal({
   initialAddress: string;
   showAddress: boolean;
 }) {
+  const { t } = useI18n();
   const { customers, settings, createCustomer, updateCustomer, setTicketCustomerById, setTicketCustomer } =
     useDine();
 
@@ -957,11 +973,11 @@ function CustomerModal({
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Customer">
+    <Modal open={open} onClose={onClose} title={t("customer")}>
       <div className="space-y-4">
         {!adding ? (
           <>
-            <Field label="Saved customer">
+            <Field label={t("dnTkSavedCustomer")}>
               <select
                 value={selectedId}
                 onChange={(event) => {
@@ -972,7 +988,7 @@ function CustomerModal({
                 className={inputClass}
                 autoFocus
               >
-                <option value="">Walk-in guest</option>
+                <option value="">{t("dnTkWalkInGuest")}</option>
                 {sorted.map((customer) => (
                   <option key={customer.id} value={customer.id}>
                     {customer.name}
@@ -991,13 +1007,13 @@ function CustomerModal({
               className="flex items-center gap-1.5 text-sm font-semibold text-indigo"
             >
               <UserPlus className="h-4 w-4" />
-              Add a new customer
+              {t("dnTkAddNewCustomer")}
             </button>
           </>
         ) : (
           <>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Name" required>
+              <Field label={t("name")} required>
                 <input
                   value={name}
                   onChange={(event) => setName(event.target.value)}
@@ -1005,7 +1021,7 @@ function CustomerModal({
                   autoFocus
                 />
               </Field>
-              <Field label="Phone" hint="For WhatsApp and the Customer Ledger.">
+              <Field label={t("phone")} hint={t("dnTkPhoneHint")}>
                 <input
                   inputMode="tel"
                   value={phone}
@@ -1021,7 +1037,7 @@ function CustomerModal({
                 onClick={() => setAdding(false)}
                 className="text-sm font-semibold text-indigo"
               >
-                Pick a saved customer instead
+                {t("dnTkPickSavedInstead")}
               </button>
             )}
           </>
@@ -1036,17 +1052,16 @@ function CustomerModal({
               className="mt-0.5 h-4 w-4"
             />
             <span className="text-sm">
-              <span className="font-semibold text-ink">May eat now and pay later</span>
+              <span className="font-semibold text-ink">{t("dnTkMayPayLater")}</span>
               <span className="block text-xs text-muted">
-                Their bill can be settled &ldquo;on account&rdquo;, which posts to the shared
-                Customer Ledger.
+                {t("dnTkMayPayLaterBody")}
               </span>
             </span>
           </label>
         )}
 
         {showAddress && (
-          <Field label="Delivery address">
+          <Field label={t("dnTkDeliveryAddress")}>
             <textarea
               value={address}
               onChange={(event) => setAddress(event.target.value)}
@@ -1063,7 +1078,7 @@ function CustomerModal({
             disabled={busy || (adding && !name.trim())}
             className={primaryBtnClass}
           >
-            {busy ? "Saving…" : "Save"}
+            {busy ? t("clPfSaving") : t("save")}
           </button>
         </div>
       </div>

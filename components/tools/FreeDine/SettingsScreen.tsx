@@ -19,11 +19,21 @@ import {
   BookUser,
   CalendarClock,
 } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { useDine } from "@/lib/dine/store";
 import { formatPlain, parseAmount } from "@/lib/dine/money";
 import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
-import { CURRENCIES, type OrderType, type PaperSize } from "@/lib/dine/types";
+import {
+  CURRENCIES,
+  ORDER_TYPE_ORDER,
+  orderTypeLabel,
+  paymentMethodLabel,
+  type OrderType,
+  type PaperSize,
+} from "@/lib/dine/types";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/dine/sheetSync";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
@@ -39,13 +49,14 @@ import {
   tapTargetClass,
 } from "./ui";
 
-const PAPER_SIZES: { id: PaperSize; label: string }[] = [
-  { id: "80mm", label: "80mm roll" },
-  { id: "58mm", label: "58mm roll" },
-  { id: "a4", label: "A4 sheet" },
+const PAPER_SIZES: { id: PaperSize; labelKey: TKey }[] = [
+  { id: "80mm", labelKey: "dnStPaper80" },
+  { id: "58mm", labelKey: "dnStPaper58" },
+  { id: "a4", labelKey: "dnStPaperA4" },
 ];
 
 export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
+  const { t, lang } = useI18n();
   const {
     business,
     settings,
@@ -79,7 +90,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
 
   return (
     <div className="space-y-6">
-      <SectionHeading title="Settings" subtitle="Everything here is stored on this device." />
+      <SectionHeading title={t("dnStSettings")} subtitle={t("dnStStoredHere")} />
 
       {backupOverdue && (
         <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-saffron/50 bg-saffron/10 p-4">
@@ -87,10 +98,10 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           <p className="flex-1 text-sm text-ink">
             <strong className="font-bold">
               {sinceBackup === null
-                ? "You have never taken a backup."
-                : `Your last backup was ${sinceBackup} days ago.`}
+                ? t("dnStNeverBackedUp")
+                : fill(t("dnStLastBackupDays"), { n: sinceBackup })}
             </strong>{" "}
-            Clearing your browser data would take your sales with it. A backup takes two seconds.
+            {t("dnStBackupWarning")}
           </p>
           <button
             type="button"
@@ -102,42 +113,42 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className={primaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            {backupBusy ? "Saving…" : "Back up now"}
+            {backupBusy ? t("clPfSaving") : t("dnStBackUpNow")}
           </button>
         </div>
       )}
 
-      <Card icon={Building2} title="Restaurant">
+      <Card icon={Building2} title={t("dnRestaurantFallback")}>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Name">
+          <Field label={t("name")}>
             <input
               value={business?.name ?? ""}
               onChange={(event) => void updateBusiness({ name: event.target.value })}
               className={inputClass}
             />
           </Field>
-          <Field label="Phone">
+          <Field label={t("phone")}>
             <input
               value={business?.phone ?? ""}
               onChange={(event) => void updateBusiness({ phone: event.target.value })}
               className={inputClass}
             />
           </Field>
-          <Field label="GSTIN">
+          <Field label={t("gstin")}>
             <input
               value={business?.gstin ?? ""}
               onChange={(event) => void updateBusiness({ gstin: event.target.value.toUpperCase() })}
               className={`${inputClass} uppercase`}
             />
           </Field>
-          <Field label="UPI ID">
+          <Field label={t("upiId")}>
             <input
               value={business?.upiId ?? ""}
               onChange={(event) => void updateBusiness({ upiId: event.target.value })}
               className={inputClass}
             />
           </Field>
-          <Field label="Currency">
+          <Field label={t("currency")}>
             <select
               value={business?.currency ?? "INR"}
               onChange={(event) => void updateBusiness({ currency: event.target.value })}
@@ -150,7 +161,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               ))}
             </select>
           </Field>
-          <Field label="Default order type">
+          <Field label={t("dnStDefaultOrderType")}>
             <select
               value={settings.defaultOrderType}
               onChange={(event) =>
@@ -158,13 +169,15 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               }
               className={inputClass}
             >
-              <option value="dine-in">Dine-in</option>
-              <option value="takeaway">Takeaway</option>
-              <option value="delivery">Delivery</option>
+              {ORDER_TYPE_ORDER.map((type) => (
+                <option key={type} value={type}>
+                  {orderTypeLabel(type, lang)}
+                </option>
+              ))}
             </select>
           </Field>
         </div>
-        <Field label="Address">
+        <Field label={t("address")}>
           <textarea
             value={business?.address ?? ""}
             onChange={(event) => void updateBusiness({ address: event.target.value })}
@@ -174,9 +187,9 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         </Field>
       </Card>
 
-      <Card icon={Percent} title="Tax and service charge">
+      <Card icon={Percent} title={t("dnStTaxAndService")}>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Charge tax?">
+          <Field label={t("dnStChargeTax")}>
             <div className="flex gap-2">
               {[true, false].map((on) => (
                 <button
@@ -190,12 +203,12 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
                       : "border-muted-line/40 bg-white text-ink"
                   }`}
                 >
-                  {on ? "Yes" : "No"}
+                  {on ? t("dnStYes") : t("dnStNo")}
                 </button>
               ))}
             </div>
           </Field>
-          <Field label="Default tax rate %" hint="Used by dishes with no rate of their own.">
+          <Field label={t("dnStDefaultTaxRate")} hint={t("dnStDefaultTaxHint")}>
             <input
               inputMode="decimal"
               value={String(settings.defaultTaxRate)}
@@ -205,7 +218,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               className={inputClass}
             />
           </Field>
-          <Field label="Service charge %">
+          <Field label={t("dnStServiceChargePct")}>
             <input
               inputMode="decimal"
               value={String(settings.serviceChargeRate)}
@@ -215,7 +228,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               className={inputClass}
             />
           </Field>
-          <Field label="Tax on service charge %" hint="GST applies to service charge as well.">
+          <Field label={t("dnStTaxOnService")} hint={t("dnStTaxOnServiceHint")}>
             <input
               inputMode="decimal"
               value={String(settings.serviceChargeTaxRate)}
@@ -241,16 +254,15 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               Add service charge to new tickets by default
             </span>
             <span className="mt-0.5 block text-xs text-muted">
-              Off by default. Service charge is voluntary in India — a guest can ask you to remove
-              it, and the bill says so.
+              {t("dnStServiceVoluntary")}
             </span>
           </span>
         </label>
       </Card>
 
-      <Card icon={Printer} title="Printing and numbering">
+      <Card icon={Printer} title={t("dnStPrintingNumbering")}>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="KOT paper">
+          <Field label={t("dnStKotPaper")}>
             <select
               value={settings.kotPaperSize}
               onChange={(event) =>
@@ -260,12 +272,12 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             >
               {PAPER_SIZES.map((size) => (
                 <option key={size.id} value={size.id}>
-                  {size.label}
+                  {t(size.labelKey)}
                 </option>
               ))}
             </select>
           </Field>
-          <Field label="Bill paper">
+          <Field label={t("dnStBillPaper")}>
             <select
               value={settings.billPaperSize}
               onChange={(event) =>
@@ -275,26 +287,26 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             >
               {PAPER_SIZES.map((size) => (
                 <option key={size.id} value={size.id}>
-                  {size.label}
+                  {t(size.labelKey)}
                 </option>
               ))}
             </select>
           </Field>
-          <Field label="KOT prefix">
+          <Field label={t("dnStKotPrefix")}>
             <input
               value={settings.kotPrefix}
               onChange={(event) => void updateSettings({ kotPrefix: event.target.value })}
               className={inputClass}
             />
           </Field>
-          <Field label="Bill prefix">
+          <Field label={t("dnStBillPrefix")}>
             <input
               value={settings.billPrefix}
               onChange={(event) => void updateSettings({ billPrefix: event.target.value })}
               className={inputClass}
             />
           </Field>
-          <Field label="Next bill number">
+          <Field label={t("dnStNextBillNumber")}>
             <input
               inputMode="numeric"
               value={String(settings.nextBillNumber)}
@@ -305,8 +317,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             />
           </Field>
           <Field
-            label="Business day starts at"
-            hint="Set to 4 if you close at 2am, so a late order counts towards the night it belongs to."
+            label={t("dnStDayStartsAt")}
+            hint={t("dnStDayStartsHint")}
           >
             <select
               value={String(settings.dayStartHour)}
@@ -318,14 +330,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               {Array.from({ length: 12 }, (_, hour) => (
                 <option key={hour} value={hour}>
                   {String(hour).padStart(2, "0")}:00
-                  {hour === 0 ? " (midnight)" : ""}
+                  {hour === 0 ? ` (${t("dnStMidnight")})` : ""}
                 </option>
               ))}
             </select>
           </Field>
         </div>
 
-        <Field label="Bill footer">
+        <Field label={t("dnStBillFooter")}>
           <input
             value={settings.receiptFooter}
             onChange={(event) => void updateSettings({ receiptFooter: event.target.value })}
@@ -339,19 +351,19 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         />
       </Card>
 
-      <Card icon={Receipt} title="Payment methods">
+      <Card icon={Receipt} title={t("dnStPaymentMethods")}>
         <div className="flex flex-wrap gap-2">
           {paymentMethods.map((method) => (
             <span
               key={method.id}
               className="inline-flex items-center gap-2 rounded-full border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink"
             >
-              {method.name}
+              {paymentMethodLabel(method.name, lang)}
               {paymentMethods.length > 1 && (
                 <button
                   type="button"
                   onClick={() => void deletePaymentMethod(method.id)}
-                  aria-label={`Remove ${method.name}`}
+                  aria-label={fill(t("dnTkRemoveNamed"), { name: paymentMethodLabel(method.name, lang) })}
                   className="text-muted hover:text-red-600"
                 >
                   ×
@@ -364,7 +376,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           <input
             value={newMethod}
             onChange={(event) => setNewMethod(event.target.value)}
-            placeholder="Swiggy, Zomato, Sodexo…"
+            placeholder={t("dnStNewMethodPh")}
             className={`${inputClass} max-w-xs`}
           />
           <button
@@ -376,29 +388,26 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             }}
             className={secondaryBtnClass}
           >
-            Add
+            {t("add")}
           </button>
         </div>
       </Card>
 
-      <Card icon={Lock} title="Counter lock">
-        <p className="text-sm text-muted">
-          A PIN stops a passing guest or a curious staff member poking at the till. It is not a
-          defence against someone holding an unlocked device.
-        </p>
+      <Card icon={Lock} title={t("dnStCounterLock")}>
+        <p className="text-sm text-muted">{t("dnStPinBody")}</p>
         {settings.pinHash ? (
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={onLockNow} className={primaryBtnClass}>
               <Lock className="h-4 w-4" />
-              Lock now
+              {t("clStLockNow")}
             </button>
             <button type="button" onClick={() => void clearPin()} className={secondaryBtnClass}>
-              Remove PIN
+              {t("tuStgRemovePin")}
             </button>
           </div>
         ) : (
           <div className="flex flex-wrap items-end gap-3">
-            <Field label="New PIN" hint="4–8 digits.">
+            <Field label={t("clStNewPin")} hint={t("dnStPinLength")}>
               <input
                 inputMode="numeric"
                 value={pinValue}
@@ -413,7 +422,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               type="button"
               onClick={async () => {
                 if (!isValidPinFormat(pinValue)) {
-                  setPinError("Use 4 to 8 digits.");
+                  setPinError(t("dnStUse4To8"));
                   return;
                 }
                 await setPin(pinValue);
@@ -421,14 +430,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               }}
               className={primaryBtnClass}
             >
-              Set PIN
+              {t("clStSetPin")}
             </button>
           </div>
         )}
         {pinError && <p className="text-xs text-red-600">{pinError}</p>}
 
         {settings.pinHash && (
-          <Field label="Lock automatically after" hint="0 means never.">
+          <Field label={t("dnStLockAfter")} hint={t("dnStZeroNever")}>
             <select
               value={String(settings.autoLockMinutes)}
               onChange={(event) =>
@@ -438,7 +447,9 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             >
               {[0, 1, 2, 5, 10, 30].map((minutes) => (
                 <option key={minutes} value={minutes}>
-                  {minutes === 0 ? "Never" : `${minutes} minute${minutes === 1 ? "" : "s"}`}
+                  {minutes === 0
+                    ? t("dnStNever")
+                    : fill(t(minutes === 1 ? "dnStMinute1" : "dnStMinuteN"), { n: minutes })}
                 </option>
               ))}
             </select>
@@ -446,11 +457,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         )}
       </Card>
 
-      <Card icon={ChefHat} title="Kitchen screen">
-        <p className="text-sm text-muted">
-          Open this in a second tab and leave it on the pass. Rounds appear the moment you send
-          them, and marking food ready shows up on your floor.
-        </p>
+      <Card icon={ChefHat} title={t("dnAppKitchenScreen")}>
+        <p className="text-sm text-muted">{t("dnStKitchenBody")}</p>
 
         <div className="flex flex-wrap gap-3">
           <a
@@ -460,7 +468,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className={secondaryBtnClass}
           >
             <ExternalLink className="h-4 w-4" />
-            Open kitchen screen
+            {t("dnAppOpenKitchen")}
           </a>
 
           {settings.kitchenLocked ? (
@@ -470,7 +478,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               className={primaryBtnClass}
             >
               <Unlock className="h-4 w-4" />
-              Unlock the kitchen screen
+              {t("dnStUnlockKitchen")}
             </button>
           ) : (
             <button
@@ -479,45 +487,42 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               disabled={!settings.pinHash}
               title={
                 settings.pinHash
-                  ? "Lock the kitchen screen so staff cannot leave it"
-                  : "Set a counter PIN first — it is what unlocks the screen"
+                  ? t("dnStLockKitchenTitle")
+                  : t("dnStSetPinFirst")
               }
               className={primaryBtnClass}
             >
               <Lock className="h-4 w-4" />
-              Lock the kitchen screen
+              {t("dnStLockKitchen")}
             </button>
           )}
         </div>
 
         {!settings.pinHash && (
-          <p className="text-xs text-muted">
-            Set a counter PIN above first. Locking the pass is only worth doing if this counter is
-            itself protected.
-          </p>
+          <p className="text-xs text-muted">{t("dnStSetPinAbove")}</p>
         )}
 
         {settings.kitchenLocked && (
           <p className="rounded-xl bg-indigo/5 p-3 text-xs leading-relaxed text-ink">
-            <strong className="font-bold">
-              This button is the only way to unlock it.
-            </strong>{" "}
-            The kitchen screen carries no unlock control and no PIN pad of its own — its way back
-            to the counter is hidden, the back gesture is blocked, and closing the tab warns first.
-            A browser tab still cannot truly trap anyone, so whoever reaches the address bar can
-            leave. On a tablet you want properly locked down, pair this with the device&apos;s own
-            kiosk mode: screen pinning on Android, Guided Access on iPad, or launching Chrome with{" "}
-            <code className="rounded bg-white px-1 py-0.5">--kiosk</code> on a PC.
+            <strong className="font-bold">{t("dnStOnlyUnlock")}</strong>{" "}
+            {/* The inline flag sits on a placeholder, so each language puts it
+                where its own grammar wants it. */}
+            {(() => {
+              const [before, after] = fill(t("dnStKioskNote"), { kiosk: "\u0000" }).split("\u0000");
+              return (
+                <>
+                  {before}
+                  <code className="rounded bg-white px-1 py-0.5">--kiosk</code>
+                  {after}
+                </>
+              );
+            })()}
           </p>
         )}
       </Card>
 
-      <Card icon={Boxes} title="Raw materials and recipes">
-        <p className="text-sm text-muted">
-          Count what you buy — rice, paneer, ghee — and give each dish a recipe. Sending a round to
-          the kitchen then deducts exactly what that dish uses, following the size and add-ons the
-          guest chose.
-        </p>
+      <Card icon={Boxes} title={t("dnStRawMaterials")}>
+        <p className="text-sm text-muted">{t("dnStStockBody")}</p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
           <input
@@ -527,38 +532,28 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className="mt-0.5 h-4 w-4 accent-[#26306B]"
           />
           <span>
-            <span className="block text-sm font-semibold text-ink">Track stock and recipes</span>
-            <span className="mt-0.5 block text-xs text-muted">
-              Adds a Stock screen and a Recipe button on every dish. Off by default, because it is a
-              real commitment — the numbers mean nothing until each dish has a recipe, and a
-              half-entered one is worse than none.
-            </span>
+            <span className="block text-sm font-semibold text-ink">{t("dnStTrackStock")}</span>
+            <span className="mt-0.5 block text-xs text-muted">{t("dnStTrackStockHint")}</span>
           </span>
         </label>
 
         {settings.inventoryEnabled && (
-          <p className="text-xs text-muted">
-            Stock comes out when a round is sent to the kitchen, not when the bill is paid. A dish
-            cancelled after that is recorded as wastage rather than returned — it was cooked.
-            Running out never blocks a sale; it only warns.
-          </p>
+          <p className="text-xs text-muted">{t("dnStStockNote")}</p>
         )}
       </Card>
 
-      <Card icon={BookUser} title="Credit (udhaar)">
+      <Card icon={BookUser} title={t("dnStCredit")}>
         <p className="text-sm text-muted">
-          Let regulars eat now and pay later. What they owe is not kept here — it goes into the
-          shared{" "}
+          {t("dnStCreditBody")}{" "}
           <a
             href="/tools/customer-ledger"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-indigo underline underline-offset-2"
           >
-            Customer Ledger
+            {t("dnStCustomerLedger")}
           </a>
-          , the same book the Browser Based POS writes its udhaar sales to. One balance per person
-          for the whole business, settled and chased in one place.
+          {t("dnStCreditTail")}
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
@@ -569,29 +564,18 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className="mt-0.5 h-4 w-4 accent-[#26306B]"
           />
           <span>
-            <span className="block text-sm font-semibold text-ink">Allow bills on account</span>
-            <span className="mt-0.5 block text-xs text-muted">
-              Adds an &ldquo;On account&rdquo; tender at payment, for saved customers you have
-              marked as allowed. Off by default, so nobody can be sent away without paying by
-              tapping the wrong button.
-            </span>
+            <span className="block text-sm font-semibold text-ink">{t("dnStAllowOnAccount")}</span>
+            <span className="mt-0.5 block text-xs text-muted">{t("dnStAllowOnAccountHint")}</span>
           </span>
         </label>
 
         {settings.creditEnabled && (
-          <p className="text-xs text-muted">
-            Only a saved customer can run a tab — never a walk-in — and you tick who is allowed when
-            you attach them to a table. The payment screen shows what they already owe before you
-            add to it. Settling, reminders and statements all happen in the Customer Ledger.
-          </p>
+          <p className="text-xs text-muted">{t("dnStCreditNote")}</p>
         )}
       </Card>
 
-      <Card icon={CalendarClock} title="Table bookings">
-        <p className="text-sm text-muted">
-          Hold a table ahead of time, free or against an advance, and send the guest a confirmation
-          on WhatsApp. Anything you take as an advance comes off their bill when they sit down.
-        </p>
+      <Card icon={CalendarClock} title={t("dnStTableBookings")}>
+        <p className="text-sm text-muted">{t("dnStBookingsBody")}</p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
           <input
@@ -601,18 +585,15 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className="mt-0.5 h-4 w-4 accent-[#26306B]"
           />
           <span>
-            <span className="block text-sm font-semibold text-ink">Take bookings</span>
-            <span className="mt-0.5 block text-xs text-muted">
-              Adds a Bookings screen, marks held tables on the floor, and seats a booking when you
-              tap its table.
-            </span>
+            <span className="block text-sm font-semibold text-ink">{t("dnStTakeBookings")}</span>
+            <span className="mt-0.5 block text-xs text-muted">{t("dnStTakeBookingsHint")}</span>
           </span>
         </label>
 
         {settings.reservationsEnabled && (
           <>
             <div className="grid gap-4 sm:grid-cols-3">
-              <Field label="Usual length (minutes)" hint="Pre-filled on a new booking.">
+              <Field label={t("dnStUsualLength")} hint={t("dnStPrefilledHint")}>
                 <input
                   inputMode="numeric"
                   value={String(settings.reservationDefaultMinutes)}
@@ -625,8 +606,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
                 />
               </Field>
               <Field
-                label="Hold either side (minutes)"
-                hint="A table shows as reserved this long before, and a party counts as late this long after."
+                label={t("dnStHoldEitherSide")}
+                hint={t("dnStHoldHint")}
               >
                 <input
                   inputMode="numeric"
@@ -639,7 +620,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
                   className={inputClass}
                 />
               </Field>
-              <Field label="Usual advance" hint="Pre-filled on a new booking. Blank for free bookings.">
+              <Field label={t("dnStUsualAdvance")} hint={t("dnStUsualAdvanceHint")}>
                 <input
                   inputMode="decimal"
                   value={
@@ -652,15 +633,15 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
                       reservationDefaultDeposit: parseAmount(event.target.value),
                     })
                   }
-                  placeholder="No advance"
+                  placeholder={t("dnRsNoAdvance")}
                   className={inputClass}
                 />
               </Field>
             </div>
 
             <Field
-              label="WhatsApp country code"
-              hint="Put on the front of a local number when opening WhatsApp. 91 for India."
+              label={t("dnStWhatsAppCode")}
+              hint={t("dnStWhatsAppCodeHint")}
             >
               <input
                 inputMode="numeric"
@@ -670,29 +651,32 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               />
             </Field>
 
-            <p className="text-xs text-muted">
-              WhatsApp opens with the message written out and waits for you to send it — the
-              restaurant&apos;s own number, its own chat history, and no diner&apos;s phone number
-              ever leaves this browser.
-            </p>
+            <p className="text-xs text-muted">{t("dnStWhatsAppNote")}</p>
           </>
         )}
       </Card>
 
-      <Card icon={Users} title="Customers and the Customer Ledger">
+      <Card icon={Users} title={t("dnStCustomersAndLedger")}>
         <p className="text-sm text-muted">
-          One customer book for the whole business. Saving a diner on a ticket copies them into your
-          shared workspace, and regulars first saved at the shop till or in the{" "}
-          <a
-            href="/tools/customer-ledger"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-indigo underline underline-offset-2"
-          >
-            Customer Ledger
-          </a>{" "}
-          appear in the picker here — so &ldquo;select a customer&rdquo; finds the same people
-          everywhere.
+          {/* The ledger link sits on a placeholder, so each language puts it
+              where its own sentence wants it. */}
+          {(() => {
+            const [before, after] = fill(t("dnStCustomersBody"), { link: "\u0000" }).split("\u0000");
+            return (
+              <>
+                {before}
+                <a
+                  href="/tools/customer-ledger"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-indigo underline underline-offset-2"
+                >
+                  {t("dnStCustomerLedger")}
+                </a>
+                {after}
+              </>
+            );
+          })()}
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-muted-line/40 bg-cream/40 p-3">
@@ -705,21 +689,13 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className="mt-0.5 h-4 w-4 accent-[#26306B]"
           />
           <span>
-            <span className="block text-sm font-semibold text-ink">
-              Share diners with the Customer Ledger
-            </span>
-            <span className="mt-0.5 block text-xs text-muted">
-              Copies name, phone and address across as you save them, and brings the other tools&apos;
-              customers in here. Free Dine keeps its own copy either way, so clearing another tool
-              can never take your regulars with it. Switch this off and diners stay in Free Dine
-              only — but bills can no longer go on account, because the ledger they would post to is
-              the shared one.
-            </span>
+            <span className="block text-sm font-semibold text-ink">{t("dnStShareDiners")}</span>
+            <span className="mt-0.5 block text-xs text-muted">{t("dnStShareDinersHint")}</span>
           </span>
         </label>
 
         <p className="text-xs text-muted">
-          {customers.length} diner{customers.length === 1 ? "" : "s"} saved.
+          {fill(t(customers.length === 1 ? "dnStDiner1" : "dnStDinerN"), { n: customers.length })}
         </p>
       </Card>
 
@@ -737,11 +713,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
         onRestore={restoreFromSheet}
       />
 
-      <Card icon={Sheet} title="Backup and safety">
-        <p className="text-sm text-muted">
-          Free Dine keeps everything in this browser. A backup file is the one thing standing
-          between a cleared cache and losing your year.
-        </p>
+      <Card icon={Sheet} title={t("dnStBackupSafety")}>
+        <p className="text-sm text-muted">{t("dnStBackupBody")}</p>
         <div className="flex flex-wrap items-start gap-3">
           <button
             type="button"
@@ -753,32 +726,31 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
             className={primaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            {backupBusy ? "Saving…" : "Download backup"}
+            {backupBusy ? t("clPfSaving") : t("dnStDownloadBackup")}
           </button>
           <RestoreBackupButton className={secondaryBtnClass} />
         </div>
         {settings.lastBackupAt && (
           <p className="text-xs text-muted">
-            Last backup {new Date(settings.lastBackupAt).toLocaleString()}.
+            {fill(t("appLastBackupAt"), {
+              when: new Date(settings.lastBackupAt).toLocaleString(intlLocaleFor(lang)),
+            })}
           </p>
         )}
       </Card>
 
-      <Card icon={TriangleAlert} title="Danger zone">
-        <p className="text-sm text-muted">
-          Erases this restaurant&apos;s menu, tables, tickets and bills from this browser. The
-          Browser Based POS is a separate product with separate data and is not touched.
-        </p>
+      <Card icon={TriangleAlert} title={t("dnStDangerZone")}>
+        <p className="text-sm text-muted">{t("dnStDangerBody")}</p>
         <button type="button" onClick={() => setConfirmReset(true)} className={dangerBtnClass}>
-          Reset everything
+          {t("dnStResetEverything")}
         </button>
       </Card>
 
       <ConfirmDialog
         open={confirmReset}
-        title="Erase everything?"
-        message="Your menu, tables, tickets and every bill are deleted from this browser. This cannot be undone — download a backup first if you might want any of it."
-        confirmLabel="Erase it all"
+        title={t("dnStEraseTitle")}
+        message={t("dnStEraseBody")}
+        confirmLabel={t("dnStEraseItAll")}
         onCancel={() => setConfirmReset(false)}
         onConfirm={async () => {
           await resetAll();
@@ -828,6 +800,7 @@ function SheetSyncCard({
   const [showScript, setShowScript] = useState(false);
   const [copied, setCopied] = useState(false);
   const [confirmRestore, setConfirmRestore] = useState(false);
+  const { t, lang } = useI18n();
 
   const run = async (job: () => Promise<void>) => {
     setBusy(true);
@@ -835,31 +808,35 @@ function SheetSyncCard({
     try {
       await job();
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "That did not work.");
+      setError(caught instanceof Error ? caught.message : t("dnStShFailed"));
     } finally {
       setBusy(false);
     }
   };
 
   return (
-    <Card icon={Sheet} title="Google Sheet sync">
-      <p className="text-sm text-muted">
-        Push your menu, diners and settled bills into a Google Sheet you own. It is the second
-        safety net alongside the backup file, and it gives you your sales in a spreadsheet you can
-        pivot however you like.
-      </p>
+    <Card icon={Sheet} title={t("clStSheetTitle")}>
+      <p className="text-sm text-muted">{t("dnStShBlurb")}</p>
 
       <p className="rounded-xl bg-cream/60 p-3 text-xs leading-relaxed text-ink">
-        <strong className="font-bold">This is not multi-device sync.</strong> Each push rewrites
-        whole tabs, so two devices pointed at one sheet would overwrite each other and lose orders.
-        Use it from one device. Running a second till or a second outlet is what{" "}
-        <a
-          href="/products/restaurant-pos"
-          className="font-semibold text-indigo underline underline-offset-2"
-        >
-          Setu Dine
-        </a>{" "}
-        is for.
+        <strong className="font-bold">{t("dnStShNotMultiLabel")}</strong>{" "}
+        {/* The product link sits on a placeholder, so each language puts it
+            where its own sentence wants it. */}
+        {(() => {
+          const [before, after] = fill(t("dnStShNotMultiBody"), { link: "\u0000" }).split("\u0000");
+          return (
+            <>
+              {before}
+              <a
+                href="/products/restaurant-pos"
+                className="font-semibold text-indigo underline underline-offset-2"
+              >
+                Setu Dine
+              </a>
+              {after}
+            </>
+          );
+        })()}
       </p>
 
       {url ? (
@@ -868,14 +845,18 @@ function SheetSyncCard({
             <p className="break-all font-mono text-muted">{url}</p>
             <p className="mt-2 text-muted">
               {lastSyncAt
-                ? `Last synced ${new Date(lastSyncAt).toLocaleString()}.`
-                : "Not synced yet."}{" "}
+                ? fill(t("clStLastSynced"), {
+                    when: new Date(lastSyncAt).toLocaleString(intlLocaleFor(lang)),
+                  })
+                : t("clStNotSyncedYet")}{" "}
               {dirtyCount > 0
-                ? `${dirtyCount} change${dirtyCount === 1 ? "" : "s"} waiting.`
-                : "Everything is up to date."}
+                ? fill(t(dirtyCount === 1 ? "dnStShChangeWaiting1" : "dnStShChangeWaitingN"), {
+                    n: dirtyCount,
+                  })
+                : t("dnStShUpToDate")}
             </p>
             <p className="mt-1 text-muted/80">
-              {callsToday} sheet call{callsToday === 1 ? "" : "s"} from this browser today.
+              {fill(t(callsToday === 1 ? "dnStShCalls1" : "dnStShCallsN"), { n: callsToday })}
             </p>
           </div>
 
@@ -887,7 +868,7 @@ function SheetSyncCard({
               className={primaryBtnClass}
             >
               <RefreshCw className={`h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
-              {syncing ? "Syncing…" : "Sync now"}
+              {syncing ? t("clStSyncing") : t("tuStgSyncNow")}
             </button>
             <button
               type="button"
@@ -895,7 +876,7 @@ function SheetSyncCard({
               disabled={busy || syncing}
               className={secondaryBtnClass}
             >
-              Re-send everything
+              {t("tuStgResendAll")}
             </button>
             <button
               type="button"
@@ -903,15 +884,15 @@ function SheetSyncCard({
               disabled={busy}
               className={secondaryBtnClass}
             >
-              Disconnect
+              {t("clStDisconnect")}
             </button>
           </div>
         </>
       ) : (
         <div className="space-y-3">
           <Field
-            label="Apps Script web-app URL"
-            hint="Deploy the script below in your own sheet, then paste the URL here."
+            label={t("clStScriptUrl")}
+            hint={t("dnStShScriptHint")}
           >
             <input
               value={draftUrl}
@@ -926,7 +907,7 @@ function SheetSyncCard({
             disabled={busy || !draftUrl.trim()}
             className={primaryBtnClass}
           >
-            {busy ? "Connecting…" : "Connect sheet"}
+            {busy ? t("clStConnecting") : t("dnStShConnectSheet")}
           </button>
         </div>
       )}
@@ -939,23 +920,29 @@ function SheetSyncCard({
           onClick={() => setShowScript((previous) => !previous)}
           className="text-sm font-semibold text-indigo"
         >
-          {showScript ? "Hide the setup script" : "Show the setup script"}
+          {showScript ? t("dnStShHideScript") : t("dnStShShowScript")}
         </button>
         {showScript && (
           <div className="mt-3 space-y-2">
             <ol className="list-decimal space-y-1 pl-5 text-xs text-muted">
-              <li>Open your Google Sheet, then Extensions → Apps Script.</li>
-              <li>Replace everything with the script below and save.</li>
+              <li>{fill(t("dnStShStep1"), { menu: "Extensions \u2192 Apps Script" })}</li>
+              <li>{t("dnStShStep2")}</li>
               <li>
-                Deploy → New deployment → Web app. Execute as <strong>Me</strong>, access{" "}
-                <strong>Anyone</strong>.
+                {/* Google's own menu words stay English; the emphasis rides on
+                    placeholders so each language orders the clause itself. */}
+                {fill(t("dnStShStep3"), {
+                  path: "Deploy \u2192 New deployment \u2192 Web app",
+                  me: "\u0000Me\u0000",
+                  anyone: "\u0000Anyone\u0000",
+                })
+                  .split("\u0000")
+                  .map((part, index) =>
+                    index % 2 === 1 ? <strong key={index}>{part}</strong> : part,
+                  )}
               </li>
-              <li>Copy the Web app URL and paste it above.</li>
+              <li>{t("dnStShStep4")}</li>
             </ol>
-            <p className="text-xs text-muted">
-              Treat that URL like the share link of the sheet — anyone holding it can read and
-              write it.
-            </p>
+            <p className="text-xs text-muted">{t("dnStShTreatUrl")}</p>
             <button
               type="button"
               onClick={async () => {
@@ -964,12 +951,12 @@ function SheetSyncCard({
                   setCopied(true);
                   window.setTimeout(() => setCopied(false), 2000);
                 } catch {
-                  setError("Could not copy — select the script and copy it by hand.");
+                  setError(t("dnStShCopyFailed"));
                 }
               }}
               className={secondaryBtnClass}
             >
-              {copied ? "Copied" : "Copy script"}
+              {copied ? t("spCopiedShort") : t("dnStShCopyScript")}
             </button>
             <pre className="max-h-56 overflow-auto rounded-xl bg-ink p-3 text-[11px] leading-relaxed text-cream">
               {APPS_SCRIPT_TEMPLATE}
@@ -980,12 +967,9 @@ function SheetSyncCard({
 
       <div className="border-t border-muted-line/20 pt-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-          Restore from a sheet
+          {t("dnStShRestoreTitle")}
         </p>
-        <p className="mt-1 text-xs text-muted">
-          Rebuilds this browser from a sheet you synced earlier — menu, floor, diners and bills.
-          Anything open on the pass right now is left alone.
-        </p>
+        <p className="mt-1 text-xs text-muted">{t("dnStShRestoreBlurb")}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           <input
             value={restoreUrl}
@@ -999,16 +983,16 @@ function SheetSyncCard({
             disabled={busy || !restoreUrl.trim()}
             className={secondaryBtnClass}
           >
-            Restore
+            {t("dnStShRestore")}
           </button>
         </div>
       </div>
 
       <ConfirmDialog
         open={confirmRestore}
-        title="Restore from this sheet?"
-        message="Your menu, floor, diners and bills in this browser are replaced by the sheet's copy. Take a backup first if you are not sure."
-        confirmLabel="Restore"
+        title={t("dnStShRestoreQ")}
+        message={t("dnStShRestoreBody")}
+        confirmLabel={t("dnStShRestore")}
         onCancel={() => setConfirmRestore(false)}
         onConfirm={async () => {
           setConfirmRestore(false);
@@ -1036,6 +1020,7 @@ function BillTemplatePicker({
 }) {
   const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     let cancelled = false;
@@ -1055,8 +1040,8 @@ function BillTemplatePicker({
 
   return (
     <Field
-      label="Bill design"
-      hint="Designed in the Receipt Designer and shared across your Setu tools."
+      label={t("dnStBillDesign")}
+      hint={t("dnStBillDesignHint")}
     >
       <div className="flex flex-wrap items-center gap-2">
         <select
@@ -1064,7 +1049,7 @@ function BillTemplatePicker({
           onChange={(event) => onChange(event.target.value)}
           className={`${inputClass} max-w-xs`}
         >
-          <option value="">Built-in layout</option>
+          <option value="">{t("dnStBuiltInLayout")}</option>
           {templates.map((template) => (
             <option key={template.id} value={template.id}>
               {template.name} ({template.paperSize})
@@ -1078,20 +1063,14 @@ function BillTemplatePicker({
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo"
         >
           <ExternalLink className="h-4 w-4" />
-          {templates.length > 0 ? "Design another" : "Design one"}
+          {templates.length > 0 ? t("dnStDesignAnother") : t("dnStDesignOne")}
         </a>
       </div>
       {loaded && templates.length === 0 && (
-        <p className="mt-1 text-xs text-muted">
-          No designs saved yet. The Receipt Designer sets the colour, header, footer, logo and
-          separators; save one there and it appears here.
-        </p>
+        <p className="mt-1 text-xs text-muted">{t("dnStNoDesigns")}</p>
       )}
       {value !== "" && (
-        <p className="mt-1 text-xs text-muted">
-          The design decides the paper size, colour, header, footer and separators. The settings
-          above apply when no design is chosen.
-        </p>
+        <p className="mt-1 text-xs text-muted">{t("dnStDesignDecides")}</p>
       )}
     </Field>
   );

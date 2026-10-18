@@ -9,6 +9,8 @@
 
 import { useState, type KeyboardEvent } from "react";
 import { X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 
 export function KeywordInput({
   values,
@@ -21,6 +23,7 @@ export function KeywordInput({
   placeholder?: string;
   ariaLabel?: string;
 }) {
+  const { t } = useI18n();
   const [draft, setDraft] = useState("");
 
   const commit = (raw: string) => {
@@ -60,7 +63,7 @@ export function KeywordInput({
             type="button"
             onClick={() => onChange(values.filter((entry) => entry !== value))}
             className="rounded p-0.5 transition hover:bg-indigo/20"
-            aria-label={`Remove ${value}`}
+            aria-label={fill(t("appRemoveNamed"), { name: value })}
           >
             <X className="h-3 w-3" aria-hidden="true" />
           </button>
@@ -76,7 +79,7 @@ export function KeywordInput({
           commit(draft);
           setDraft("");
         }}
-        placeholder={values.length === 0 ? placeholder : "Add another…"}
+        placeholder={values.length === 0 ? placeholder : t("bsKwAddAnother")}
         aria-label={ariaLabel}
         className="min-w-[120px] flex-1 border-0 bg-transparent px-1 py-0.5 text-sm text-ink outline-none placeholder:text-muted/70"
       />

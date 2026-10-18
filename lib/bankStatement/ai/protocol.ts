@@ -79,11 +79,22 @@ export type MainToWorkerMessage =
 
 // --- worker → main thread --------------------------------------------------
 
+/**
+ * What the worker is doing, as a code rather than a sentence.
+ *
+ * The worker has no language context — it is a module running off the main
+ * thread, with no React and no preference to read. So it reports the state and
+ * its numbers, and the panel that displays it does the wording.
+ */
+export type AiProgress =
+  | { code: "PREPARING" }
+  | { code: "DOWNLOADING"; loadedBytes: number; totalBytes: number };
+
 export type ModelLoadingMessage = {
   type: "MODEL_LOADING";
   /** 0–100 across all model files, or undefined before any file has a size. */
   percent?: number;
-  message: string;
+  progress: AiProgress;
 };
 
 export type ModelReadyMessage = { type: "MODEL_READY"; backend: AiBackend };

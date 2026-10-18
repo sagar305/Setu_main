@@ -7,6 +7,10 @@
 // the only thing that starts it, and everything the tool did before — rules,
 // patterns, categorising by hand — is untouched whether it is used or not.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { aiProgressLabel } from "@/lib/bankStatement/messages";
 import { useEffect, useState } from "react";
 import { Download, Sparkles, ShieldCheck, WifiOff } from "lucide-react";
 import { Card, Field, NumberInput, PrimaryButton, SecondaryButton } from "@/components/toolkit/ui";
@@ -18,6 +22,7 @@ import { AiCategorySuggestions } from "@/components/tools/BankStatementAnalyzer/
 import { categoryName } from "@/lib/bankStatement/classification/categories";
 
 export function AiCategorisationPanel() {
+  const { t, lang } = useI18n();
   const { settings, categories, learned, actions } = useAnalyzer();
   const {
     supported,
@@ -48,21 +53,14 @@ export function AiCategorisationPanel() {
       <div className="min-w-[240px] flex-1">
         <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
           <Sparkles className="h-4 w-4 text-indigo" aria-hidden="true" />
-          Categorise the rest automatically
+          {t("bsApTitle")}
         </h3>
         <p className="mt-1 text-sm text-muted">
-          {pendingCount > 0 ? (
-            <>
-              <strong className="text-ink">{pendingCount.toLocaleString("en-IN")}</strong>{" "}
-              transaction{pendingCount === 1 ? "" : "s"} your rules and the keyword patterns could
-              not place. A small language model runs inside this browser and matches each one
-              against your category descriptions by meaning, not by exact keyword. Nothing it
-              suggests is applied for good until you approve it — and once you do, it is saved as a
-              rule, so the same merchant never needs the model again.
-            </>
-          ) : (
-            <>Every transaction already has a category from a rule, a pattern or your own edits.</>
-          )}
+          {pendingCount > 0
+            ? fill(t(pendingCount === 1 ? "bsApPending1" : "bsApPendingN"), {
+                n: pendingCount.toLocaleString(intlLocaleFor(lang)),
+              })
+            : t("bsApAllPlaced")}
         </p>
       </div>
 
@@ -78,27 +76,17 @@ export function AiCategorisationPanel() {
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="min-w-[220px] flex-1">
               <p className="text-sm font-bold text-ink">
-                Step 1 · Download the model{ready ? " — done" : ""}
+                {t("bsApStep1")}
+                {ready ? t("bsApStepDone") : ""}
               </p>
               <p className="mt-1 text-xs text-muted">
-                {ready ? (
-                  <>
-                    Loaded and running on this device. Nothing further will be downloaded, and no
-                    part of your statement was involved in this step.
-                  </>
-                ) : (
-                  <>
-                    A one-time download of the model file itself (about 15–25 MB), from the model
-                    host. This is the only time this feature uses the network, and it sends nothing
-                    about your statement — it has not been read at this point.
-                  </>
-                )}
+                {ready ? t("bsApLoaded") : t("bsApOneTime")}
               </p>
             </div>
             {ready ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
                 <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                Downloaded
+                {t("bsApDownloaded")}
               </span>
             ) : (
               <PrimaryButton
@@ -107,7 +95,7 @@ export function AiCategorisationPanel() {
               >
                 <span className="flex items-center gap-1.5">
                   <Download className="h-4 w-4" aria-hidden="true" />
-                  {client.phase === "loading" ? "Downloading…" : "Download AI model"}
+                  {client.phase === "loading" ? t("bsApDownloading") : t("bsApDownloadModel")}
                 </span>
               </PrimaryButton>
             )}
@@ -117,10 +105,7 @@ export function AiCategorisationPanel() {
             <p className="mt-3 flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-800">
               <WifiOff className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>
-                <strong>If you have any doubt, turn your internet off now.</strong> The model is
-                loaded in this browser and categorising below will still work with no connection at
-                all — which is the simplest way to see for yourself that nothing is being uploaded.
-                Your browser has also cached the file, so a later visit normally skips this step.
+                <strong>{t("bsApTurnOffLabel")}</strong> {t("bsApTurnOffBody")}
               </span>
             </p>
           ) : null}
@@ -129,26 +114,24 @@ export function AiCategorisationPanel() {
         <li className="rounded-xl border border-muted-line/30 p-4">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="min-w-[220px] flex-1">
-              <p className="text-sm font-bold text-ink">Step 2 · Categorise on this device</p>
+              <p className="text-sm font-bold text-ink">{t("bsApStep2")}</p>
               <p className="mt-1 text-xs text-muted">
-                {ready
-                  ? "Reads the narrations in this browser and suggests a category for each. Works with the network disconnected."
-                  : "Available once the model is on this device. No transaction is read before then."}
+                {ready ? t("bsApStep2Ready") : t("bsApStep2NotReady")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
               {busy ? (
-                <SecondaryButton onClick={cancel}>Stop</SecondaryButton>
+                <SecondaryButton onClick={cancel}>{t("bsApStop")}</SecondaryButton>
               ) : (
                 <PrimaryButton
                   onClick={() => void categorise()}
                   disabled={!supported || !ready || pendingCount === 0}
                 >
-                  Categorise with AI
+                  {t("bsApCategoriseWithAi")}
                 </PrimaryButton>
               )}
               <SecondaryButton onClick={() => setShowSettings((open) => !open)}>
-                {showSettings ? "Hide settings" : "Settings"}
+                {showSettings ? t("bsApHideSettings") : t("dnStSettings")}
               </SecondaryButton>
             </div>
           </div>
@@ -156,8 +139,7 @@ export function AiCategorisationPanel() {
           {ready && !online ? (
             <p className="mt-3 flex items-start gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-800">
               <WifiOff className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              You are offline, and this still works. Your statement is being read entirely on this
-              device.
+              {t("bsApOfflineWorks")}
             </p>
           ) : null}
         </li>
@@ -165,8 +147,7 @@ export function AiCategorisationPanel() {
 
       {!supported ? (
         <p className="mt-3 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          This browser cannot run on-device categorisation — it needs Web Workers and WebAssembly.
-          Rules, keyword patterns and categorising by hand all work as usual.
+          {t("bsApUnsupportedPanel")}
         </p>
       ) : null}
 
@@ -176,63 +157,78 @@ export function AiCategorisationPanel() {
             progress={
               run.stage === "classifying"
                 ? {
-                    label: "Matching transactions to categories",
+                    label: t("bsApMatching"),
                     current: run.current,
                     total: run.total,
                   }
                 : run.stage === "applying"
-                  ? { label: "Applying categories" }
+                  ? { label: t("bsApApplying") }
                   : run.stage === "grouping"
-                  ? { label: "Looking for categories you do not have" }
+                  ? { label: t("bsApGrouping") }
                   : {
-                      label: client.message ?? "Reading transactions on this device…",
+                      label: client.progress
+                        ? aiProgressLabel(client.progress, lang)
+                        : t("bsApReading"),
                       current: client.percent,
                       total: client.percent === undefined ? undefined : 100,
                     }
             }
           />
           <p className="mt-2 text-xs text-muted">
-            You can keep filtering, editing and categorising while this runs — it happens on a
-            background thread.
+            {t("bsApKeepWorking")}
           </p>
         </div>
       ) : null}
 
       {error ? (
         <p className="mt-3 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          {error} Your rules and manual categorising are unaffected.
+          {fill(t("bsApErrorTail"), { error })}
         </p>
       ) : null}
 
       {summary ? (
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          <Tally label="Suggested, awaiting your approval" value={summary.confident} tone="good" />
-          <Tally label="Suggested but a close call" value={summary.tentative} tone="warn" />
-          <Tally label="Nothing to suggest" value={summary.unresolved} tone="plain" />
+          <Tally label={t("bsApTallyConfident")} value={summary.confident} tone="good" />
+          <Tally label={t("bsApTallyTentative")} value={summary.tentative} tone="warn" />
+          <Tally label={t("bsApTallyNone")} value={summary.unresolved} tone="plain" />
         </div>
       ) : null}
 
       {client.phase === "ready" && client.backend ? (
         <p className="mt-3 text-xs text-muted">
-          {client.backend.name} · running on{" "}
-          {client.backend.device === "webgpu" ? "your GPU (WebGPU)" : "the CPU (WebAssembly)"} ·{" "}
-          {client.backend.quantization} weights · {client.backend.dimensions} dimensions · loaded
-          once for this browser session.
+          {fill(t("bsApBackendLine"), {
+            name: client.backend.name,
+            device: t(
+              client.backend.device === "webgpu" ? "bsApBackendGpu" : "bsApBackendCpu"
+            ),
+            quantization: client.backend.quantization,
+            dimensions: client.backend.dimensions,
+          })}
         </p>
       ) : null}
 
       {showSettings ? (
         <div className="mt-5 space-y-5 border-t border-muted-line/30 pt-5">
           <div>
-            <h4 className="text-sm font-bold text-ink">Confidence thresholds</h4>
+            <h4 className="text-sm font-bold text-ink">{t("bsApThresholds")}</h4>
             <p className="mt-1 text-xs text-muted">
-              The number in the confidence column is a <strong>model similarity score</strong>, not a
-              statistical probability: it combines how closely a transaction matches a category
-              description with how far ahead that category is of the runner-up. Tune these against
-              your own statements.
+              {/* The emphasis rides on a placeholder, so each language puts the
+                  bold phrase where its own sentence wants it. */}
+              {(() => {
+                const [before, after] = fill(t("bsApThresholdNote"), { strong: "\u0000" }).split(
+                  "\u0000"
+                );
+                return (
+                  <>
+                    {before}
+                    <strong>{t("bsApSimilarityScore")}</strong>
+                    {after}
+                  </>
+                );
+              })()}
             </p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              <Field label="Categorise automatically at or above">
+              <Field label={t("bsApAutoAt")}>
                 <NumberInput
                   value={settings.aiAutoThreshold}
                   min={0}
@@ -245,7 +241,7 @@ export function AiCategorisationPanel() {
                   }}
                 />
               </Field>
-              <Field label="Categorise but flag for review at or above">
+              <Field label={t("bsApReviewAt")}>
                 <NumberInput
                   value={settings.aiReviewThreshold}
                   min={0}
@@ -260,22 +256,20 @@ export function AiCategorisationPanel() {
               </Field>
             </div>
             <p className="mt-2 text-xs text-muted">
-              Below {settings.aiReviewThreshold}% a transaction is left uncategorised rather than
-              guessed at.
+              {fill(t("bsApBelowNote"), { n: settings.aiReviewThreshold })}
             </p>
           </div>
 
           <div>
             <h4 className="text-sm font-bold text-ink">
-              Learned from your corrections ({learnedEntries.length})
+              {fill(t("bsApLearnedTitle"), { n: learnedEntries.length })}
             </h4>
             <p className="mt-1 text-xs text-muted">
-              When you change a category by hand, that merchant is remembered here and used ahead of
-              the model next time. Stored on this device only.
+              {t("bsApLearnedNote")}
             </p>
             {learnedEntries.length === 0 ? (
               <p className="mt-3 rounded-xl bg-cream-paper/60 px-4 py-3 text-xs text-muted">
-                Nothing learned yet. Correct a category in the table and it will appear here.
+                {t("bsApLearnedEmpty")}
               </p>
             ) : (
               <ul className="mt-3 max-h-56 space-y-1.5 overflow-y-auto pr-1">
@@ -285,16 +279,18 @@ export function AiCategorisationPanel() {
                     className="flex flex-wrap items-center gap-2 rounded-lg border border-muted-line/30 px-3 py-2 text-xs"
                   >
                     <span className="min-w-0 flex-1 truncate font-medium text-ink">{entry.label}</span>
-                    <span className="text-muted">→ {categoryName(categories, entry.category)}</span>
+                    <span className="text-muted">→ {categoryName(categories, entry.category, lang)}</span>
                     {entry.count > 1 ? (
-                      <span className="text-muted">· confirmed {entry.count}×</span>
+                      <span className="text-muted">
+                        {fill(t("bsApConfirmedTimes"), { n: entry.count })}
+                      </span>
                     ) : null}
                     <button
                       type="button"
                       onClick={() => actions.forgetLearned(entry.key)}
                       className="font-semibold text-red-500 hover:text-red-600"
                     >
-                      Forget
+                      {t("bsApForget")}
                     </button>
                   </li>
                 ))}
@@ -348,6 +344,7 @@ function Tally({
   value: number;
   tone: "good" | "warn" | "plain";
 }) {
+  const { lang } = useI18n();
   const style =
     tone === "good"
       ? "bg-emerald-50 text-emerald-800"
@@ -357,7 +354,7 @@ function Tally({
 
   return (
     <div className={`rounded-xl px-4 py-3 ${style}`}>
-      <p className="text-xl font-bold">{value.toLocaleString("en-IN")}</p>
+      <p className="text-xl font-bold">{value.toLocaleString(intlLocaleFor(lang))}</p>
       <p className="text-xs font-semibold">{label}</p>
     </div>
   );

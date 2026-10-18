@@ -7,22 +7,39 @@
 // as one continuous ledger with a sticky header. No virtualisation dependency —
 // the repo has none, and the windowing this needs is a dozen lines.
 
+import { useI18n } from "@/lib/i18n";
 import { useCallback, useMemo, useRef, useState } from "react";
 import type { Category, Transaction } from "@/lib/bankStatement/types";
 import { formatDate } from "@/lib/bankStatement/utils/dates";
-import { activeCategories, GROUP_LABELS } from "@/lib/bankStatement/classification/categories";
+import {
+  activeCategories,
+  categoryLabel,
+  groupLabel,
+  GROUP_ORDER,
+} from "@/lib/bankStatement/classification/categories";
 import { confidenceBand, sourceBadge, sourceLabel } from "@/lib/bankStatement/classification/classifier";
+import { transactionIssueLabel } from "@/lib/bankStatement/messages";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+
+/** How a row's parse status reads beside the warning triangle. */
+const PARSE_STATUS_KEYS: Record<NonNullable<Transaction["rowStatus"]>, TKey> = {
+  VALID: "bsStatusValid",
+  WARNING: "bsStatusWarning",
+  UNRESOLVED: "bsStatusUnresolved",
+};
 
 const ROW_HEIGHT = 56;
 const OVERSCAN = 8;
 
 export type SortKey = "date" | "debit" | "credit" | "narration";
 
-const TYPE_LABEL: Record<Transaction["classificationType"], string> = {
-  BUSINESS: "Business",
-  PERSONAL: "Personal",
-  TRANSFER: "Transfer",
-  UNKNOWN: "Unreviewed",
+const TYPE_KEYS: Record<Transaction["classificationType"], TKey> = {
+  BUSINESS: "appBusiness",
+  PERSONAL: "bsTypePersonal",
+  TRANSFER: "tkCoTransfer",
+  UNKNOWN: "bsTypeUnreviewed",
 };
 
 export function TransactionTable({
@@ -47,6 +64,7 @@ export function TransactionTable({
   /** How many rows the viewport shows before scrolling (density, decision 29). */
   viewportRows?: number;
 }) {
+  const { lang, t } = useI18n();
   const [scrollTop, setScrollTop] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -65,12 +83,12 @@ export function TransactionTable({
   const money = useCallback(
     (value: number) =>
       value
-        ? new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en", {
+        ? new Intl.NumberFormat(currency === "INR" ? "en-IN" : intlLocaleFor(lang), {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(value)
         : "",
-    [currency]
+    [currency, lang]
   );
 
   return (
@@ -82,15 +100,15 @@ export function TransactionTable({
           checked={allSelected}
           onChange={() => onToggleAll(transactions.map((transaction) => transaction.id))}
           className="h-4 w-4 rounded border-muted-line text-indigo focus:ring-indigo"
-          aria-label="Select all visible transactions"
+          aria-label={t("bsSelectAllVisible")}
         />
-        <span className="w-20 shrink-0">Date</span>
-        <span className="min-w-0 flex-1">Narration</span>
-        <span className="w-24 shrink-0 text-right">Debit</span>
-        <span className="w-24 shrink-0 text-right">Credit</span>
-        <span className="w-40 shrink-0">Category</span>
-        <span className="w-28 shrink-0">Type</span>
-        <span className="w-28 shrink-0">Confidence</span>
+        <span className="w-20 shrink-0">{t("date")}</span>
+        <span className="min-w-0 flex-1">{t("bkNarration")}</span>
+        <span className="w-24 shrink-0 text-right">{t("bsColDebits")}</span>
+        <span className="w-24 shrink-0 text-right">{t("bsColCredits")}</span>
+        <span className="w-40 shrink-0">{t("category")}</span>
+        <span className="w-28 shrink-0">{t("typeLabel")}</span>
+        <span className="w-28 shrink-0">{t("bsColConfidence")}</span>
         <span className="w-16 shrink-0" />
       </div>
 
@@ -134,10 +152,13 @@ export function TransactionTable({
  * cosine similarity, because the percentage beside it is a calibrated score
  * rather than the model's own number and the two should never be confused.
  */
-function confidenceTitle(transaction: Transaction): string {
-  const base = `${sourceLabel(transaction.classificationSource)} · ${transaction.confidence ?? 0}%`;
+function confidenceTitle(transaction: Transaction, lang: LanguageCode): string {
+  const base = `${sourceLabel(transaction.classificationSource, lang)} · ${transaction.confidence ?? 0}%`;
   if (transaction.classificationSource !== "AI" || transaction.aiSimilarity === undefined) return base;
-  return `${base} (model similarity ${transaction.aiSimilarity.toFixed(2)})`;
+  return fill(translate(lang, "bsSimilarity"), {
+    base,
+    score: transaction.aiSimilarity.toFixed(2),
+  });
 }
 
 function Row({
@@ -157,6 +178,7 @@ function Row({
   onCreateRule: () => void;
   money: (value: number) => string;
 }) {
+  const { lang, t } = useI18n();
   const band = confidenceBand(transaction.confidence);
   const bandStyle =
     band === "high"
@@ -177,7 +199,7 @@ function Row({
         checked={selected}
         onChange={onToggle}
         className="h-4 w-4 shrink-0 rounded border-muted-line text-indigo focus:ring-indigo"
-        aria-label={`Select transaction dated ${formatDate(transaction.date)}`}
+        aria-label={fill(t("bsSelectRowAria"), { date: formatDate(transaction.date) })}
       />
 
       <span className="w-20 shrink-0 whitespace-nowrap text-xs text-muted">
@@ -191,14 +213,17 @@ function Row({
         <p className="truncate text-xs text-muted">
           {transaction.partyName ?? "—"}
           {transaction.isDuplicate && transaction.duplicateOverride !== "KEEP" ? (
-            <span className="ml-2 font-semibold text-amber-700">⚠ Possible duplicate</span>
+            <span className="ml-2 font-semibold text-amber-700">⚠ {t("bsPossibleDuplicate")}</span>
           ) : null}
           {transaction.needsReview ? (
-            <span className="ml-2 font-semibold text-amber-700">Needs review</span>
+            <span className="ml-2 font-semibold text-amber-700">{t("bsNeedsReview")}</span>
           ) : null}
           {transaction.rowStatus && transaction.rowStatus !== "VALID" ? (
-            <span className="ml-2 font-semibold text-red-600" title={transaction.rowIssue}>
-              ⚠ {transaction.rowStatus}
+            <span
+              className="ml-2 font-semibold text-red-600"
+              title={transactionIssueLabel(transaction, lang)}
+            >
+              ⚠ {t(PARSE_STATUS_KEYS[transaction.rowStatus])}
             </span>
           ) : null}
         </p>
@@ -225,16 +250,16 @@ function Row({
           })
         }
         className="w-40 shrink-0 rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-xs text-ink outline-none focus:border-indigo"
-        aria-label="Category"
+        aria-label={t("category")}
       >
-        <option value="">Uncategorised</option>
-        {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
-          <optgroup key={group} label={GROUP_LABELS[group]}>
+        <option value="">{t("bsUncategorised")}</option>
+        {GROUP_ORDER.map((group) => (
+          <optgroup key={group} label={groupLabel(group, lang)}>
             {categories
               .filter((category) => category.group === group)
               .map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.name}
+                  {categoryLabel(category, lang)}
                 </option>
               ))}
           </optgroup>
@@ -250,11 +275,11 @@ function Row({
           })
         }
         className="w-28 shrink-0 rounded-lg border border-muted-line/40 bg-white px-2 py-1.5 text-xs text-ink outline-none focus:border-indigo"
-        aria-label="Business, personal or transfer"
+        aria-label={t("bsTypeAria")}
       >
-        {(Object.keys(TYPE_LABEL) as Transaction["classificationType"][]).map((type) => (
+        {(Object.keys(TYPE_KEYS) as Transaction["classificationType"][]).map((type) => (
           <option key={type} value={type}>
-            {TYPE_LABEL[type]}
+            {t(TYPE_KEYS[type])}
           </option>
         ))}
       </select>
@@ -262,12 +287,15 @@ function Row({
       <span className="flex w-28 shrink-0 items-center gap-1.5">
         <span
           className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${bandStyle}`}
-          title={confidenceTitle(transaction)}
+          title={confidenceTitle(transaction, lang)}
         >
           {transaction.confidence ?? 0}%
         </span>
-        <span className="truncate text-[11px] text-muted" title={sourceLabel(transaction.classificationSource)}>
-          {sourceBadge(transaction.classificationSource)}
+        <span
+          className="truncate text-[11px] text-muted"
+          title={sourceLabel(transaction.classificationSource, lang)}
+        >
+          {sourceBadge(transaction.classificationSource, lang)}
         </span>
       </span>
 
@@ -276,7 +304,7 @@ function Row({
         onClick={onCreateRule}
         className="w-16 shrink-0 text-left text-xs font-semibold text-indigo hover:underline"
       >
-        Rule
+        {t("bsRuleShort")}
       </button>
     </div>
   );

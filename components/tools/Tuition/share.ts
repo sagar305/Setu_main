@@ -13,6 +13,7 @@ import {
   type SharedMarks,
 } from "@/lib/toolkit/shareLink";
 import type { Business } from "@/lib/pos/types";
+import type { LanguageCode } from "@/lib/i18n/config";
 import { percentOf } from "@/lib/tuition/calc";
 import {
   formatMonth,
@@ -27,7 +28,8 @@ export function feeReceiptDoc(
   business: Business | null,
   student: Student,
   payment: FeePayment,
-  balanceAfter: number
+  balanceAfter: number,
+  lang: LanguageCode
 ): SharedFeeReceipt {
   return {
     t: "fee",
@@ -40,7 +42,7 @@ export function feeReceiptDoc(
     amt: payment.amount,
     mode: payment.mode,
     tw: payment.appliedTo.map((label) =>
-      /^\d{4}-\d{2}$/.test(label) ? formatMonth(label) : label
+      /^\d{4}-\d{2}$/.test(label) ? formatMonth(label, lang) : label
     ),
     bal: balanceAfter > 0 ? balanceAfter : undefined,
   };

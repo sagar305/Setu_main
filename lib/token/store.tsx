@@ -44,9 +44,13 @@ import {
   retentionCutoff,
   tokensPastDeadline,
 } from "./calc";
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import {
-  DEFAULT_MESSAGE_TEMPLATES,
   DEFAULT_SETTINGS,
+  defaultMessageTemplates,
+  defaultVoiceTemplate,
   SERVICE_COLOURS,
   TOKEN_RETENTION_DAYS,
   generateId,
@@ -154,21 +158,36 @@ export function useToken(): TokenContextValue {
  * Every new key added here from now on lands on old devices for the same
  * reason.
  */
-function mergeSettings(stored: Partial<TokenSettings> | undefined): TokenSettings {
+function mergeSettings(
+  stored: Partial<TokenSettings> | undefined,
+  lang: LanguageCode
+): TokenSettings {
+  const shipped = defaultMessageTemplates(lang);
   return {
     ...DEFAULT_SETTINGS,
     ...(stored ?? {}),
+    voiceTemplate: stored?.voiceTemplate || defaultVoiceTemplate(lang),
     messageTemplates: {
-      ...DEFAULT_MESSAGE_TEMPLATES,
-      ...(stored?.messageTemplates ?? {}),
+      ...shipped,
+      // An empty string is a key this device has never had rather than wording
+      // somebody cleared, so the shipped line stands in for it either way.
+      ...Object.fromEntries(
+        Object.entries(stored?.messageTemplates ?? {}).filter(([, text]) => Boolean(text))
+      ),
     },
   };
+}
+
+/** A note the queue wrote itself, appended after anything the counter typed. */
+function appendNote(existing: string, added: string): string {
+  return existing ? `${existing} \u00b7 ${added}` : added;
 }
 
 /** Statuses that mean a token is still live and someone is expected to appear. */
 const OPEN_STATUSES: Token["status"][] = ["waiting", "called", "serving"];
 
 export function TokenProvider({ children }: { children: ReactNode }) {
+  const { lang } = useI18n();
   const [status, setStatus] = useState<AppStatus>("loading");
   const [errorMessage, setErrorMessage] = useState("");
   const [business, setBusiness] = useState<Business | null>(null);
@@ -247,16 +266,14 @@ export function TokenProvider({ children }: { children: ReactNode }) {
         ...token,
         status: "cancelled" as const,
         closedAt: token.closedAt ?? closedAt,
-        note: token.note
-          ? `${token.note} · Auto-voided at day close`
-          : "Auto-voided at day close",
+        note: appendNote(token.note, translate(lang, "tkNoteAutoVoided")),
       }));
       await batchWithSync({ tokens: voided });
 
       const byId = new Map(voided.map((token) => [token.id, token]));
       return rows.map((token) => byId.get(token.id) ?? token);
     },
-    [batchWithSync]
+    [batchWithSync, lang]
   );
 
   /** Drop tokens past the retention window. Reports never looks further back. */
@@ -283,7 +300,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
           dbGetAll<Business>("business"),
         ]);
 
-      const merged = mergeSettings(storedSettings.find((row) => row.id === "main"));
+      const merged = mergeSettings(storedSettings.find((row) => row.id === "main"), lang);
       const currentDay = businessDate(new Date(), merged.dailyResetHour);
 
       let rows = await purgeOldTokens(storedTokens, currentDay);
@@ -303,12 +320,14 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       // a business record and no queue.
       setStatus(storedServices.length > 0 ? "ready" : "welcome");
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "Could not open the queue database."
-      );
+      // The browser's own IndexedDB text names an API, not a problem anybody
+      // standing at a counter can act on, so the screen says what happened in
+      // their language and the raw message stays in the console.
+      if (error instanceof Error) console.error(error);
+      setErrorMessage(translate(lang, "appStorageErrorTitle"));
       setStatus("error");
     }
-  }, [purgeOldTokens, voidStaleTokens]);
+  }, [lang, purgeOldTokens, voidStaleTokens]);
 
   useEffect(() => {
     void load();
@@ -319,7 +338,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     const wanted = new Set(stores);
     if (wanted.has("settings")) {
       const rows = await tokenGetAll<TokenSettings>("settings");
-      setSettings(mergeSettings(rows.find((r) => r.id === "main")));
+      setSettings(mergeSettings(rows.find((r) => r.id === "main"), lang));
     }
     if (wanted.has("services")) {
       const rows = await tokenGetAll<Service>("services");
@@ -327,7 +346,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     }
     if (wanted.has("counters")) setCounters(await tokenGetAll<Counter>("counters"));
     if (wanted.has("tokens")) setTokens(await tokenGetAll<Token>("tokens"));
-  }, []);
+  }, [lang]);
 
   const reloadAll = useCallback(async () => {
     await reloadStores(["settings", "services", "counters", "tokens"]);
@@ -423,7 +442,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
 
       const service: Service = {
         id: generateId(),
-        name: serviceName.trim() || "General",
+        name: serviceName.trim() || translate(lang, "tkSetServicePh"),
         prefix: "",
         avgServiceMinutes: 5,
         colour: SERVICE_COLOURS[0],
@@ -433,7 +452,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       };
       const counter: Counter = {
         id: generateId(),
-        name: counterName.trim() || "Counter 1",
+        name: counterName.trim() || fill(translate(lang, "tkStCounterN"), { n: 1 }),
         serviceIds: [],
         staffName: "",
         active: true,
@@ -457,7 +476,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       setToday(businessDate(new Date(), nextSettings.dailyResetHour));
       setStatus("ready");
     },
-    [batchWithSync]
+    [batchWithSync, lang]
   );
 
   const updateBusiness = useCallback(
@@ -868,7 +887,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       ...token,
       status: "cancelled" as const,
       closedAt: at,
-      note: token.note ? `${token.note} \u00b7 Queue reset` : "Queue reset",
+      note: appendNote(token.note, translate(lang, "tkNoteQueueReset")),
     }));
     // The boundary, not a zeroed counter: numbering is derived from the tokens
     // issued since this moment, so nothing has to be deleted for the next
@@ -883,7 +902,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
     const byId = new Map(voided.map((token) => [token.id, token]));
     setTokens((previous) => previous.map((token) => byId.get(token.id) ?? token));
     setSettings(nextSettings);
-  }, [batchWithSync]);
+  }, [batchWithSync, lang]);
 
   const applyRestoredBackup = useCallback(
     async (backup: TokenBackup) => {
@@ -903,8 +922,8 @@ export function TokenProvider({ children }: { children: ReactNode }) {
    */
   const syncToSheet = useCallback(async () => {
     const url = (settingsRef.current.sheetUrl ?? "").trim();
-    if (!url) throw new Error("Add your Google Sheet URL in Settings first.");
-    if (!isValidSyncUrl(url)) throw new Error("That does not look like an Apps Script URL.");
+    if (!url) throw new Error(translate(lang, "appAddSheetUrlFirst"));
+    if (!isValidSyncUrl(url)) throw new Error(translate(lang, "appNotAppsScriptUrl"));
 
     await pushToSheet(
       url,
@@ -914,12 +933,13 @@ export function TokenProvider({ children }: { children: ReactNode }) {
         services,
         counters: countersRef.current,
         tokens: tokensRef.current,
-      })
+      }),
+      lang
     );
     const next: TokenSettings = { ...settingsRef.current, lastSyncAt: nowIso() };
     setSettings(next);
     await batchWithSync({ settings: [next] });
-  }, [batchWithSync, business, services]);
+  }, [batchWithSync, business, lang, services]);
 
   const clearAllData = useCallback(async () => {
     await tokenClearAll();

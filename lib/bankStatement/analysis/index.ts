@@ -16,6 +16,8 @@ import type {
 } from "@/lib/bankStatement/types";
 import { includedTransactions } from "@/lib/bankStatement/normalization/deduplicator";
 import { categoryGroup, categoryName } from "@/lib/bankStatement/classification/categories";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import { dayOfWeek, monthKey, monthLabel } from "@/lib/bankStatement/utils/dates";
 import { round2 } from "@/lib/bankStatement/utils/numbers";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
@@ -23,7 +25,9 @@ import { normaliseText } from "@/lib/bankStatement/utils/text";
 export function analyse(
   transactions: Transaction[],
   categories: Category[],
-  settings: AnalyzerSettings
+  settings: AnalyzerSettings,
+  /** Category rows carry a display label, so the breakdown is per reader. */
+  lang: LanguageCode
 ): AnalysisResult {
   const included = includedTransactions(transactions, settings.includeDuplicatesInTotals);
   const excludedDuplicates = transactions.length - included.length;
@@ -39,9 +43,9 @@ export function analyse(
       count: included.length,
       excludedDuplicates,
     },
-    monthly: monthlySummary(included),
-    expenseCategories: categoryBreakdown(included, categories, "DEBIT"),
-    incomeCategories: categoryBreakdown(included, categories, "CREDIT"),
+    monthly: monthlySummary(included, lang),
+    expenseCategories: categoryBreakdown(included, categories, "DEBIT", lang),
+    incomeCategories: categoryBreakdown(included, categories, "CREDIT", lang),
     parties: topParties(included),
     cash: cashSummary(included),
     highValue: included
@@ -57,11 +61,15 @@ export function analyse(
       relevant: included.filter((t) => t.gstRelevant === "RELEVANT"),
       potential: included.filter((t) => t.gstRelevant === "POTENTIAL"),
     },
-    anomalies: detectAnomalies(transactions, included, settings),
+    anomalies: detectAnomalies(transactions, included, settings, lang),
   };
 }
 
-export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
+export function monthlySummary(
+  transactions: Transaction[],
+  /** Month names are read, not stored, so they follow the reader. */
+  lang: LanguageCode
+): MonthlyRow[] {
   const buckets = new Map<string, Transaction[]>();
   for (const transaction of transactions) {
     const key = monthKey(transaction.date);
@@ -89,7 +97,7 @@ export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
 
       return {
         month: key,
-        label: monthLabel(key),
+        label: monthLabel(key, lang),
         openingBalance: opening,
         credits,
         debits,
@@ -103,7 +111,8 @@ export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
 export function categoryBreakdown(
   transactions: Transaction[],
   categories: Category[],
-  direction: "DEBIT" | "CREDIT"
+  direction: "DEBIT" | "CREDIT",
+  lang: LanguageCode
 ): CategoryRow[] {
   const relevant = transactions.filter((t) =>
     direction === "DEBIT" ? t.debit > 0 : t.credit > 0
@@ -128,7 +137,10 @@ export function categoryBreakdown(
     .map(([key, bucket]) => {
       const value = direction === "DEBIT" ? bucket.debit : bucket.credit;
       return {
-        category: key === "__uncategorised__" ? "Uncategorised" : categoryName(categories, key),
+        category:
+          key === "__uncategorised__"
+            ? translate(lang, "bsUncategorised")
+            : categoryName(categories, key, lang),
         group: key === "__uncategorised__" ? ("UNCATEGORISED" as const) : categoryGroup(categories, key),
         debit: round2(bucket.debit),
         credit: round2(bucket.credit),
@@ -196,7 +208,9 @@ function transferSummary(transactions: Transaction[]) {
 export function detectAnomalies(
   all: Transaction[],
   included: Transaction[],
-  settings: AnalyzerSettings
+  settings: AnalyzerSettings,
+  /** Only for the month names a spike names; the rest travel as codes. */
+  lang: LanguageCode
 ): Anomaly[] {
   const anomalies: Anomaly[] = [];
 
@@ -208,6 +222,7 @@ export function detectAnomalies(
       id: "high-value",
       kind: "HIGH_VALUE",
       severity: "info",
+      detail: { count: highValue.length, threshold: settings.highValueThreshold },
       message: `${highValue.length} transaction${highValue.length === 1 ? "" : "s"} at or above the ₹${settings.highValueThreshold.toLocaleString("en-IN")} threshold.`,
       transactionIds: highValue.map((t) => t.id),
     });
@@ -219,6 +234,7 @@ export function detectAnomalies(
       id: "duplicates",
       kind: "DUPLICATE",
       severity: "warning",
+      detail: { count: duplicates.length },
       message: `${duplicates.length} possible duplicate${duplicates.length === 1 ? "" : "s"} found — excluded from totals until you say otherwise.`,
       transactionIds: duplicates.map((t) => t.id),
     });
@@ -242,6 +258,7 @@ export function detectAnomalies(
       id: "round-tripping",
       kind: "ROUND_TRIPPING",
       severity: "info",
+      detail: { count: roundTrips.length / 2 },
       message: `${roundTrips.length / 2} credit(s) were followed by a matching debit within two days.`,
       transactionIds: roundTrips,
     });
@@ -255,13 +272,14 @@ export function detectAnomalies(
       id: "weekend-cash",
       kind: "WEEKEND_CASH",
       severity: "info",
+      detail: { count: weekendCash.length },
       message: `${weekendCash.length} cash transaction${weekendCash.length === 1 ? "" : "s"} dated on a weekend.`,
       transactionIds: weekendCash.map((t) => t.id),
     });
   }
 
   // A month whose debits are more than double the median month.
-  const monthly = monthlySummary(included);
+  const monthly = monthlySummary(included, lang);
   if (monthly.length >= 3) {
     const sorted = [...monthly].map((m) => m.debits).sort((a, b) => a - b);
     const median = sorted[Math.floor(sorted.length / 2)];
@@ -271,18 +289,25 @@ export function detectAnomalies(
         id: "spend-spike",
         kind: "SPIKE",
         severity: "info",
+        detail: { count: spikes.length, months: spikes.map((s) => s.label).join(", ") },
         message: `Spending in ${spikes.map((s) => s.label).join(", ")} was more than double the typical month.`,
         transactionIds: [],
       });
     }
   }
 
-  const balanceBreaks = all.filter((t) => t.rowIssue?.startsWith("Running balance"));
+  const balanceBreaks = all.filter(
+    (t) =>
+      t.rowIssueCode?.code === "BALANCE_BREAK" ||
+      // Statements extracted before the issue codes carry English prose here.
+      t.rowIssue?.startsWith("Running balance")
+  );
   if (balanceBreaks.length > 0) {
     anomalies.push({
       id: "balance-breaks",
       kind: "BALANCE_BREAK",
       severity: "warning",
+      detail: { count: balanceBreaks.length },
       message: `${balanceBreaks.length} row${balanceBreaks.length === 1 ? " does" : "s do"} not follow the running balance — the extraction may be incomplete.`,
       transactionIds: balanceBreaks.map((t) => t.id),
     });

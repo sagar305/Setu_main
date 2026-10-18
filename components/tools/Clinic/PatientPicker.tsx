@@ -7,6 +7,7 @@ import { formatAgeSex } from "@/lib/clinic/calc";
 import { phoneKey, type Patient } from "@/lib/clinic/types";
 import { Modal, inputClass } from "@/components/tools/FreePos/ui";
 import { PatientForm } from "./PatientForm";
+import { useI18n } from "@/lib/i18n";
 
 /** Rank matches so the person the desk means is first: code, then phone, then name. */
 export function searchPatients(patients: Patient[], query: string, limit = 8): Patient[] {
@@ -42,7 +43,7 @@ export function searchPatients(patients: Patient[], query: string, limit = 8): P
  * leaving the screen. This is the front desk's main input — spec §3.1.
  */
 export function PatientPicker({
-  placeholder = "Search by name, phone or file no.",
+  placeholder,
   autoFocus,
   onPick,
   label,
@@ -52,6 +53,7 @@ export function PatientPicker({
   onPick: (patient: Patient) => void;
   label?: string;
 }) {
+  const { t, lang } = useI18n();
   const { patients } = useClinic();
   const [query, setQuery] = useState("");
   const [registerOpen, setRegisterOpen] = useState(false);
@@ -77,7 +79,7 @@ export function PatientPicker({
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder={placeholder}
+          placeholder={placeholder ?? t("clPickPatientPh")}
           autoFocus={autoFocus}
           className={`${inputClass} pl-9`}
         />
@@ -97,7 +99,7 @@ export function PatientPicker({
                   {patient.name}
                 </span>
                 <span className="block truncate text-xs text-muted">
-                  {[patient.code, formatAgeSex(patient), patient.phone]
+                  {[patient.code, formatAgeSex(patient, lang), patient.phone]
                     .filter(Boolean)
                     .join(" · ")}
                 </span>
@@ -110,8 +112,10 @@ export function PatientPicker({
             className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm font-semibold text-indigo transition hover:bg-cream"
           >
             <UserPlus className="h-4 w-4" />
-            Register new patient
-            {matches.length === 0 && <span className="font-normal text-muted">— no match</span>}
+            {t("clPickRegisterNew")}
+            {matches.length === 0 && (
+              <span className="font-normal text-muted">{t("clPickNoMatch")}</span>
+            )}
           </button>
         </div>
       )}
@@ -119,7 +123,7 @@ export function PatientPicker({
       <Modal
         open={registerOpen}
         onClose={() => setRegisterOpen(false)}
-        title="Register new patient"
+        title={t("clPickRegisterNew")}
         wide
       >
         <PatientForm

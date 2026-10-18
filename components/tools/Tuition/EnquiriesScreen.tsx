@@ -4,12 +4,14 @@
 // calls, nobody writes it down, nobody follows up. This is a small pipeline
 // with a follow-up date and a one-tap WhatsApp.
 
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useMemo, useState } from "react";
 import { MessageCircle, Phone, Plus, Trash2, UserPlus } from "lucide-react";
 import { useTuition, type EnquiryInput } from "@/lib/tuition/store";
 import { whatsAppLink } from "@/lib/tuition/messages";
 import {
-  ENQUIRY_LABELS,
+  enquiryLabel,
   formatDate,
   todayIso,
   type Enquiry,
@@ -32,9 +34,18 @@ const STATUS_TONES: Record<EnquiryStatus, string> = {
   lost: "bg-red-50 text-red-600",
 };
 
-const SOURCES = ["Walk-in", "Phone call", "Reference", "Online", "Poster / pamphlet"];
+const SOURCE_KEYS: TKey[] = [
+  "tuEnSrcWalkIn",
+  "tuEnSrcPhone",
+  "tuEnSrcReference",
+  "tuEnSrcOnline",
+  "tuEnSrcPoster",
+];
+
+const STATUS_ORDER: EnquiryStatus[] = ["new", "followup", "demo", "joined", "lost"];
 
 export function EnquiriesScreen() {
+  const { t, lang } = useI18n();
   const { enquiries, createEnquiry, updateEnquiry, deleteEnquiry } = useTuition();
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<Enquiry | null>(null);
@@ -73,9 +84,9 @@ export function EnquiriesScreen() {
               filter === "" ? "bg-indigo text-white" : "bg-white text-muted hover:text-indigo"
             }`}
           >
-            All ({enquiries.length})
+            {fill(t("tuEnAllN"), { count: enquiries.length })}
           </button>
-          {(Object.keys(ENQUIRY_LABELS) as EnquiryStatus[]).map((status) => (
+          {STATUS_ORDER.map((status) => (
             <button
               key={status}
               type="button"
@@ -84,7 +95,7 @@ export function EnquiriesScreen() {
                 filter === status ? "bg-indigo text-white" : "bg-white text-muted hover:text-indigo"
               }`}
             >
-              {ENQUIRY_LABELS[status]}
+              {enquiryLabel(status, lang)}
             </button>
           ))}
         </div>
@@ -97,13 +108,15 @@ export function EnquiriesScreen() {
           className={primaryBtnClass}
         >
           <Plus className="h-4 w-4" />
-          New enquiry
+          {t("tuEnNewEnquiry")}
         </button>
       </div>
 
       {dueToday.length > 0 && (
         <p className="mt-4 rounded-xl border border-saffron/40 bg-saffron/10 px-4 py-3 text-sm text-ink">
-          {dueToday.length} follow-up{dueToday.length > 1 ? "s" : ""} due today or overdue.
+          {fill(t(dueToday.length === 1 ? "tuEnFollowUpsOne" : "tuEnFollowUpsMany"), {
+            count: dueToday.length,
+          })}
         </p>
       )}
 
@@ -111,8 +124,8 @@ export function EnquiriesScreen() {
         <div className="mt-6">
           <EmptyState
             icon={<UserPlus className="h-6 w-6" />}
-            title="No enquiries yet"
-            message="Note down every parent who calls or visits, with a follow-up date — the ones you call back are the ones who join."
+            title={t("tuEnNoneTitle")}
+            message={t("tuEnNoneBody")}
             action={
               <button
                 type="button"
@@ -123,7 +136,7 @@ export function EnquiriesScreen() {
                 className={primaryBtnClass}
               >
                 <Plus className="h-4 w-4" />
-                New enquiry
+                {t("tuEnNewEnquiry")}
               </button>
             }
           />
@@ -144,12 +157,14 @@ export function EnquiriesScreen() {
                   <p className="truncate text-sm font-bold text-ink">{enquiry.name}</p>
                   <p className="truncate text-xs text-muted">
                     {[enquiry.classLevel, enquiry.subjects].filter(Boolean).join(" · ") ||
-                      "No details"}
+                      t("tuEnNoDetails")}
                   </p>
                   <p className="truncate text-xs text-muted">
                     {enquiry.parentName}
                     {enquiry.followUpDate
-                      ? ` · follow up ${formatDate(enquiry.followUpDate)}`
+                      ? fill(t("tuEnFollowUpOnDate"), {
+                          date: formatDate(enquiry.followUpDate, lang),
+                        })
                       : ""}
                   </p>
                 </button>
@@ -158,7 +173,7 @@ export function EnquiriesScreen() {
                     STATUS_TONES[enquiry.status]
                   }`}
                 >
-                  {ENQUIRY_LABELS[enquiry.status]}
+                  {enquiryLabel(enquiry.status, lang)}
                 </span>
               </div>
               <div className="mt-3 flex items-center gap-2">
@@ -167,17 +182,17 @@ export function EnquiriesScreen() {
                     <a
                       href={`tel:${enquiry.phone}`}
                       className={`${secondaryBtnClass} px-3 py-1.5`}
-                      aria-label={`Call ${enquiry.name}`}
+                      aria-label={fill(t("tuEnCallNamed"), { name: enquiry.name })}
                     >
                       <Phone className="h-4 w-4" />
-                      Call
+                      {t("tuEnCall")}
                     </a>
                     <a
                       href={whatsAppLink(enquiry.phone, "")}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${secondaryBtnClass} px-3 py-1.5`}
-                      aria-label={`WhatsApp ${enquiry.name}`}
+                      aria-label={fill(t("tuEnWhatsAppNamed"), { name: enquiry.name })}
                     >
                       <MessageCircle className="h-4 w-4" />
                     </a>
@@ -187,7 +202,7 @@ export function EnquiriesScreen() {
                   type="button"
                   onClick={() => void deleteEnquiry(enquiry.id)}
                   className={`${secondaryBtnClass} ml-auto px-3 py-1.5`}
-                  aria-label={`Delete the enquiry from ${enquiry.name}`}
+                  aria-label={fill(t("tuEnDeleteNamed"), { name: enquiry.name })}
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -217,7 +232,7 @@ const EMPTY: EnquiryInput = {
   phone: "",
   classLevel: "",
   subjects: "",
-  source: SOURCES[0],
+  source: "",
   status: "new",
   followUpDate: "",
   note: "",
@@ -236,6 +251,7 @@ function EnquiryForm({
   onCreate: (input: EnquiryInput) => Promise<void>;
   onUpdate: (id: string, input: EnquiryInput) => Promise<void>;
 }) {
+  const { t, lang } = useI18n();
   const [form, setForm] = useState<EnquiryInput>(EMPTY);
   const [saving, setSaving] = useState(false);
   const [loadedFor, setLoadedFor] = useState<string | null>(null);
@@ -270,10 +286,10 @@ function EnquiryForm({
   };
 
   return (
-    <Modal open={open} onClose={onClose} title={enquiry ? "Edit enquiry" : "New enquiry"}>
+    <Modal open={open} onClose={onClose} title={t(enquiry ? "tuEnEditEnquiry" : "tuEnNewEnquiry")}>
       <form onSubmit={submit} className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Student name" required>
+          <Field label={t("tuEnStudentName")} required>
             <input
               type="text"
               value={form.name}
@@ -282,7 +298,7 @@ function EnquiryForm({
               autoFocus
             />
           </Field>
-          <Field label="Parent name">
+          <Field label={t("tuEnParentName")}>
             <input
               type="text"
               value={form.parentName}
@@ -290,7 +306,7 @@ function EnquiryForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Phone">
+          <Field label={t("phone")}>
             <input
               type="tel"
               value={form.phone}
@@ -298,38 +314,38 @@ function EnquiryForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Class">
+          <Field label={t("tuEnClass")}>
             <input
               type="text"
               value={form.classLevel}
               onChange={(event) => setForm((p) => ({ ...p, classLevel: event.target.value }))}
-              placeholder="e.g. Class 9"
+              placeholder={t("tuEnClassPh")}
               className={inputClass}
             />
           </Field>
-          <Field label="Subjects wanted">
+          <Field label={t("tuEnSubjectsWanted")}>
             <input
               type="text"
               value={form.subjects}
               onChange={(event) => setForm((p) => ({ ...p, subjects: event.target.value }))}
-              placeholder="e.g. Maths, Science"
+              placeholder={t("tuEnSubjectsPh")}
               className={inputClass}
             />
           </Field>
-          <Field label="How did they hear?">
+          <Field label={t("tuEnHowHeard")}>
             <select
               value={form.source}
               onChange={(event) => setForm((p) => ({ ...p, source: event.target.value }))}
               className={inputClass}
             >
-              {SOURCES.map((source) => (
-                <option key={source} value={source}>
-                  {source}
+              {SOURCE_KEYS.map((key) => (
+                <option key={key} value={t(key)}>
+                  {t(key)}
                 </option>
               ))}
             </select>
           </Field>
-          <Field label="Status">
+          <Field label={t("tkHiColStatus")}>
             <select
               value={form.status}
               onChange={(event) =>
@@ -337,14 +353,14 @@ function EnquiryForm({
               }
               className={inputClass}
             >
-              {(Object.keys(ENQUIRY_LABELS) as EnquiryStatus[]).map((status) => (
+              {STATUS_ORDER.map((status) => (
                 <option key={status} value={status}>
-                  {ENQUIRY_LABELS[status]}
+                  {enquiryLabel(status, lang)}
                 </option>
               ))}
             </select>
           </Field>
-          <Field label="Follow up on">
+          <Field label={t("tuEnFollowUpOn")}>
             <input
               type="date"
               value={form.followUpDate}
@@ -353,7 +369,7 @@ function EnquiryForm({
             />
           </Field>
         </div>
-        <Field label="Note">
+        <Field label={t("note")}>
           <textarea
             value={form.note}
             onChange={(event) => setForm((p) => ({ ...p, note: event.target.value }))}
@@ -363,10 +379,10 @@ function EnquiryForm({
         </Field>
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button type="submit" disabled={saving} className={primaryBtnClass}>
-            {saving ? "Saving…" : enquiry ? "Save changes" : "Add enquiry"}
+            {saving ? t("clPfSaving") : t(enquiry ? "saveChanges" : "tuEnAddEnquiry")}
           </button>
         </div>
       </form>

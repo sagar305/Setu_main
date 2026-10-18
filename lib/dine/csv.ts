@@ -11,12 +11,14 @@
 // Prices in the sheet are in major units (rupees), because that is what a
 // person types. They are converted to paise on the way in.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import { formatPlain, parseAmount, toMajor } from "./money";
 import { fromQty, formatQty } from "./units";
 import {
-  FOOD_TYPE_LABELS,
-  RESERVATION_STATUS_LABELS,
-  STOCK_MOVE_LABELS,
+  foodTypeLabel,
+  reservationStatusLabel,
+  stockMoveLabel,
   type DineMaterial,
   type DineRecipeLine,
   type DineStockMove,
@@ -151,7 +153,8 @@ export function menuCsv(
       formatPlain(item.price),
       item.taxRate ?? "",
       item.taxInclusive ? "inclusive" : "exclusive",
-      FOOD_TYPE_LABELS[item.foodType],
+      // English, like the headers: a CSV is read by a spreadsheet.
+      foodTypeLabel(item.foodType, "en"),
       item.available ? "yes" : "no",
       item.description,
       encodeVariations(variations.filter((variation) => variation.menuItemId === item.id)),
@@ -251,10 +254,10 @@ function parseModifierGroups(value: string): ParsedMenuRow["modifierGroups"] {
  * so a file with three bad rows can be reported in full rather than importing
  * halfway and stopping.
  */
-export function parseMenuCsv(text: string): MenuImportResult {
+export function parseMenuCsv(text: string, lang: LanguageCode): MenuImportResult {
   const rows = parseCsv(text);
   const errors: string[] = [];
-  if (rows.length === 0) return { rows: [], errors: ["The file is empty."] };
+  if (rows.length === 0) return { rows: [], errors: [translate(lang, "dnCsvFileEmpty")] };
 
   const header = rows[0].map((cell) => cell.trim().toLowerCase());
   const columnOf = (label: string) => header.indexOf(label.toLowerCase());
@@ -263,7 +266,7 @@ export function parseMenuCsv(text: string): MenuImportResult {
   if (nameAt === -1 || priceAt === -1) {
     return {
       rows: [],
-      errors: [`The sheet needs at least "Name" and "Price" columns. Found: ${rows[0].join(", ")}`],
+      errors: [fill(translate(lang, "dnCsvNeedsColumns"), { found: rows[0].join(", ") })],
     };
   }
 
@@ -277,18 +280,18 @@ export function parseMenuCsv(text: string): MenuImportResult {
     const row = rows[i];
     const name = (row[nameAt] ?? "").trim();
     if (!name) {
-      errors.push(`Row ${i + 1}: skipped, no item name.`);
+      errors.push(fill(translate(lang, "dnCsvRowNoName"), { row: i + 1 }));
       continue;
     }
     const price = parseAmount(row[priceAt] ?? "");
     if (price < 0) {
-      errors.push(`Row ${i + 1} (${name}): skipped, price cannot be negative.`);
+      errors.push(fill(translate(lang, "dnCsvRowNegative"), { row: i + 1, name }));
       continue;
     }
     const rateText = cell(row, "Tax %");
     const availableText = cell(row, "Available").toLowerCase();
     parsed.push({
-      categoryName: cell(row, "Category") || "Uncategorised",
+      categoryName: cell(row, "Category") || translate(lang, "dnUncategorised"),
       name,
       price,
       taxRate: rateText === "" ? null : Number(rateText) || 0,
@@ -432,7 +435,7 @@ export function stockMovesCsv(moves: DineStockMove[]): string {
         new Date(move.createdAt).toLocaleString(),
         move.businessDate,
         move.materialName,
-        STOCK_MOVE_LABELS[move.reason],
+        stockMoveLabel(move.reason, "en"),
         fromQty(move.change),
         fromQty(move.balanceAfter),
         move.refLabel,
@@ -516,7 +519,7 @@ export function reservationsCsv(reservations: DineReservation[], currency: strin
         row.tableName,
         row.areaName,
         row.durationMinutes,
-        RESERVATION_STATUS_LABELS[row.status],
+        reservationStatusLabel(row.status, "en"),
         toMajor(row.depositRequired),
         toMajor(row.depositPaid),
         row.depositOutcome,

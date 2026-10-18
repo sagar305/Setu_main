@@ -25,18 +25,20 @@ import { PatientForm } from "./PatientForm";
 import { PatientChart } from "./PatientChart";
 import { ImportPatients } from "./ImportPatients";
 import { searchPatients } from "./PatientPicker";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 
 type QueryRequest = { screen: string; value: string; nonce: number };
 type Filter = "all" | "dues" | "chronic" | "lapsed" | "new";
 
 const PAGE_SIZE = 50;
 
-const FILTERS: { id: Filter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "dues", label: "Has dues" },
-  { id: "chronic", label: "Chronic" },
-  { id: "lapsed", label: "Not seen in 6 months" },
-  { id: "new", label: "Registered this month" },
+const FILTERS: { id: Filter; label: TKey }[] = [
+  { id: "all", label: "clPtFilterAll" },
+  { id: "dues", label: "clPtFilterDues" },
+  { id: "chronic", label: "clPtFilterChronic" },
+  { id: "lapsed", label: "clPtFilterLapsed" },
+  { id: "new", label: "clPtFilterNew" },
 ];
 
 export function PatientsScreen({
@@ -46,6 +48,7 @@ export function PatientsScreen({
   onNavigate: NavigateFn;
   externalQuery: QueryRequest | null;
 }) {
+  const { t } = useI18n();
   const { patients, visits, bills, business } = useClinic();
 
   const [query, setQuery] = useState("");
@@ -132,17 +135,17 @@ export function PatientsScreen({
           <SearchInput
             value={query}
             onChange={setQuery}
-            placeholder="Search by name, phone or file no."
+            placeholder={t("clPickPatientPh")}
           />
         </div>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={() => setAddOpen(true)} className={primaryBtnClass}>
             <UserPlus className="h-4 w-4" />
-            Register
+            {t("clPtRegister")}
           </button>
           <button type="button" onClick={() => setImportOpen(true)} className={secondaryBtnClass}>
             <Upload className="h-4 w-4" />
-            Import
+            {t("appImport")}
           </button>
           <button
             type="button"
@@ -151,7 +154,7 @@ export function PatientsScreen({
             className={secondaryBtnClass}
           >
             <Download className="h-4 w-4" />
-            Export
+            {t("appExport")}
           </button>
         </div>
       </div>
@@ -168,7 +171,7 @@ export function PatientsScreen({
                 : "border border-muted-line/40 bg-white text-muted hover:text-indigo"
             }`}
           >
-            {item.label}
+            {t(item.label)}
           </button>
         ))}
       </div>
@@ -178,17 +181,13 @@ export function PatientsScreen({
       {filtered.length === 0 ? (
         <EmptyState
           icon={<Users className="h-6 w-6" />}
-          title={patients.length === 0 ? "No patients yet" : "No matches"}
-          message={
-            patients.length === 0
-              ? "Register your first patient, or import your existing register from a spreadsheet."
-              : "Try a different name, phone number or filter."
-          }
+          title={t(patients.length === 0 ? "clPtNoneYet" : "noMatches")}
+          message={t(patients.length === 0 ? "clPtNoneYetMsg" : "clPtNoMatchesMsg")}
           action={
             patients.length === 0 ? (
               <button type="button" onClick={() => setAddOpen(true)} className={primaryBtnClass}>
                 <UserPlus className="h-4 w-4" />
-                Register a patient
+                {t("clPtRegisterOne")}
               </button>
             ) : undefined
           }
@@ -196,7 +195,9 @@ export function PatientsScreen({
       ) : (
         <>
           <p className="text-xs text-muted">
-            {filtered.length} {filtered.length === 1 ? "patient" : "patients"}
+            {fill(t(filtered.length === 1 ? "clPtCountOne" : "clPtCountMany"), {
+              count: filtered.length,
+            })}
           </p>
           <ul className="space-y-2">
             {filtered.slice(0, visibleCount).map((patient) => (
@@ -217,13 +218,13 @@ export function PatientsScreen({
               onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
               className={`${secondaryBtnClass} w-full`}
             >
-              Show more ({filtered.length - visibleCount} left)
+              {fill(t("appShowMore"), { count: filtered.length - visibleCount })}
             </button>
           )}
         </>
       )}
 
-      <Modal open={addOpen} onClose={() => setAddOpen(false)} title="Register patient" wide>
+      <Modal open={addOpen} onClose={() => setAddOpen(false)} title={t("clPtRegisterTitle")} wide>
         <PatientForm
           onSaved={(patient) => {
             setAddOpen(false);
@@ -233,11 +234,13 @@ export function PatientsScreen({
         />
       </Modal>
 
-      <Modal open={importOpen} onClose={() => setImportOpen(false)} title="Import patients" wide>
+      <Modal open={importOpen} onClose={() => setImportOpen(false)} title={t("clPtImportTitle")} wide>
         <ImportPatients
           onDone={(count) => {
             setImportOpen(false);
-            setNotice(`Imported ${count} ${count === 1 ? "patient" : "patients"}.`);
+            setNotice(
+              fill(t(count === 1 ? "clPtImportedOne" : "clPtImportedMany"), { count })
+            );
           }}
         />
       </Modal>
@@ -258,6 +261,7 @@ function PatientRow({
   currency: string;
   onOpen: () => void;
 }) {
+  const { lang } = useI18n();
   const conditions = patientConditions(patient);
   return (
     <button
@@ -277,7 +281,7 @@ function PatientRow({
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold text-ink">{patient.name}</span>
         <span className="block truncate text-xs text-muted">
-          {[patient.code, formatAgeSex(patient), patient.phone].filter(Boolean).join(" · ")}
+          {[patient.code, formatAgeSex(patient, lang), patient.phone].filter(Boolean).join(" · ")}
         </span>
       </span>
 
@@ -288,7 +292,7 @@ function PatientRow({
           </span>
         )}
         {lastVisit && (
-          <span className="block text-[11px] text-muted">{formatDate(lastVisit)}</span>
+          <span className="block text-[11px] text-muted">{formatDate(lastVisit, lang)}</span>
         )}
         {conditions.length > 0 && (
           <span className="block text-[11px] text-saffron">{conditions[0]}</span>

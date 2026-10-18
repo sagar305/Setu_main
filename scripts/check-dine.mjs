@@ -28,21 +28,36 @@ if (checks.length === 0) {
   process.exit(1);
 }
 
+// The checked modules import their siblings relatively but reach the shared
+// i18n dictionary through the repo's "@/*" alias, so the compile needs the
+// same path mapping the app build uses. tsc takes that from a config file
+// only — there is no --paths flag — hence this throwaway tsconfig.
+const tsconfigPath = path.join(outDir, "tsconfig.check.json");
+fs.writeFileSync(
+  tsconfigPath,
+  JSON.stringify(
+    {
+      compilerOptions: {
+        module: "commonjs",
+        target: "es2020",
+        moduleResolution: "node",
+        esModuleInterop: true,
+        skipLibCheck: true,
+        baseUrl: path.resolve("."),
+        paths: { "@/*": ["./*"] },
+        outDir,
+      },
+      files: checks.map((check) => path.resolve(check)),
+    },
+    null,
+    2
+  )
+);
+
 try {
-  execFileSync(
-    "npx",
-    [
-      "tsc",
-      "--module", "commonjs",
-      "--target", "es2020",
-      "--moduleResolution", "node",
-      "--esModuleInterop",
-      "--skipLibCheck",
-      "--outDir", outDir,
-      ...checks,
-    ],
-    { stdio: ["ignore", "ignore", "pipe"] }
-  );
+  execFileSync("npx", ["tsc", "--project", tsconfigPath], {
+    stdio: ["ignore", "ignore", "pipe"],
+  });
 } catch (error) {
   // tsc warns about the repo tsconfig being ignored and about deprecated
   // options; neither stops it emitting. Only give up if nothing came out.
@@ -54,11 +69,30 @@ try {
   }
 }
 
+// tsc resolves "@/*" at compile time but leaves the specifier untouched in
+// the emitted require(), so node needs the same mapping. The compiled tree
+// keeps the repo's layout under outDir, which makes the mapping a prefix swap.
+const aliasHook = path.join(outDir, "alias-hook.cjs");
+fs.writeFileSync(
+  aliasHook,
+  `const Module = require("node:module");
+const path = require("node:path");
+const root = ${JSON.stringify(outDir)};
+const resolve = Module._resolveFilename;
+Module._resolveFilename = function (request, ...rest) {
+  if (request.startsWith("@/")) request = path.join(root, request.slice(2));
+  return resolve.call(this, request, ...rest);
+};
+`
+);
+
 let failed = 0;
 for (const check of checks) {
   const compiled = path.join(outDir, check.replace(/\.ts$/, ".js"));
   try {
-    const output = execFileSync("node", [compiled], { encoding: "utf8" });
+    const output = execFileSync("node", ["--require", aliasHook, compiled], {
+      encoding: "utf8",
+    });
     process.stdout.write(output);
   } catch (error) {
     process.stdout.write(String(error.stdout ?? ""));

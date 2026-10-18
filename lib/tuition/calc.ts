@@ -4,6 +4,8 @@
 // batch they are enrolled in, minus their concession. A per-student override
 // replaces that sum when the teacher sets one.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
 import {
   monthKey,
   monthsBetween,
@@ -80,7 +82,8 @@ export function buildTuitionDue(
   batches: Batch[],
   period: string,
   feeDueDay: number,
-  createdAt: string
+  createdAt: string,
+  lang: LanguageCode
 ): FeeDue {
   const fee = studentMonthlyFee(student, batches);
   const day = String(Math.min(Math.max(feeDueDay, 1), 28)).padStart(2, "0");
@@ -89,7 +92,7 @@ export function buildTuitionDue(
     studentId: student.id,
     period,
     kind: "tuition",
-    label: "Tuition fee",
+    label: translate(lang, "tuFeeTuition"),
     amount: fee.total,
     breakdown: fee.breakdown,
     concession: fee.concession,

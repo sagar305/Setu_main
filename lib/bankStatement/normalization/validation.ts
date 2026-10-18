@@ -8,8 +8,11 @@
 //   • A row-count mismatch alone is NOT unresolved — statements rarely print a
 //     trustworthy transaction count, so we never invent one to compare against.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 import type {
   BalanceChainResult,
+  IssueCode,
   ParseStatus,
   Transaction,
   ValidationIssue,
@@ -19,7 +22,7 @@ import { amountsEqual, round2 } from "@/lib/bankStatement/utils/numbers";
 
 export type ValidationInput = {
   transactions: Transaction[];
-  rejected: { reason: string; row?: number; page?: number }[];
+  rejected: { reason: string; code?: IssueCode; row?: number; page?: number }[];
   /** Zero-amount rows — reported, never counted as failures. */
   skipped?: number;
   declaredOpening?: number;
@@ -50,9 +53,11 @@ export function checkBalanceChain(
       if (firstBreakRow === undefined) firstBreakRow = current.sourceRow;
       // Mark the row so the review table can point straight at it.
       current.rowStatus = current.rowStatus === "UNRESOLVED" ? "UNRESOLVED" : "WARNING";
-      current.rowIssue =
-        current.rowIssue ??
-        `Running balance does not follow: expected ${expected.toFixed(2)}, statement shows ${(current.balance ?? 0).toFixed(2)}`;
+      current.rowIssueCode = current.rowIssueCode ?? {
+        code: "BALANCE_BREAK",
+        expected,
+        found: current.balance ?? 0,
+      };
     }
   }
 
@@ -84,7 +89,13 @@ export function validate(input: ValidationInput): ValidationReport {
   const issues: ValidationIssue[] = [];
 
   for (const item of rejected) {
-    issues.push({ severity: "error", message: item.reason, row: item.row, page: item.page });
+    issues.push({
+      severity: "error",
+      code: { code: "ROW", issue: item.code },
+      message: item.reason,
+      row: item.row,
+      page: item.page,
+    });
   }
 
   const warningRows = transactions.filter((t) => t.rowStatus === "WARNING");
@@ -93,6 +104,7 @@ export function validate(input: ValidationInput): ValidationReport {
   for (const transaction of unresolvedRows) {
     issues.push({
       severity: "error",
+      code: { code: "ROW", issue: transaction.rowIssueCode },
       message: transaction.rowIssue ?? "Row could not be resolved",
       row: transaction.sourceRow,
       page: transaction.sourcePage,
@@ -102,6 +114,7 @@ export function validate(input: ValidationInput): ValidationReport {
   if (balanceChain.checked && balanceChain.breaks > 0) {
     issues.push({
       severity: "error",
+      code: { code: "BALANCE_BREAKS", rows: balanceChain.breaks },
       message: `The running balance does not follow on ${balanceChain.breaks} row${balanceChain.breaks === 1 ? "" : "s"}. Some transactions may be missing or mis-read.`,
       row: balanceChain.firstBreakRow,
     });
@@ -110,12 +123,14 @@ export function validate(input: ValidationInput): ValidationReport {
   if (balanceChain.openingMatches === false) {
     issues.push({
       severity: "warning",
+      code: { code: "OPENING_MISMATCH" },
       message: "The first row does not follow from the statement's opening balance.",
     });
   }
   if (balanceChain.closingMatches === false) {
     issues.push({
       severity: "warning",
+      code: { code: "CLOSING_MISMATCH" },
       message: "The last row's balance does not match the statement's closing balance.",
     });
   }
@@ -123,6 +138,7 @@ export function validate(input: ValidationInput): ValidationReport {
   if (transactions.length === 0) {
     issues.push({
       severity: "error",
+      code: { code: "NOTHING_EXTRACTED" },
       message: "No transactions could be extracted from this file.",
     });
   }
@@ -130,6 +146,7 @@ export function validate(input: ValidationInput): ValidationReport {
   if (skipped > 0) {
     issues.push({
       severity: "warning",
+      code: { code: "SKIPPED_ROWS", rows: skipped },
       message: `${skipped} row${skipped === 1 ? "" : "s"} moved no money — an opening or closing balance, or a nil entry — and ${skipped === 1 ? "was" : "were"} not counted as a transaction.`,
     });
   }
@@ -166,12 +183,22 @@ export function parseStatusFrom(report: ValidationReport): ParseStatus {
 }
 
 /** The sentence the review screen leads with. Never overstates the result. */
-export function summariseParse(report: ValidationReport, status: ParseStatus): string {
+export function summariseParse(
+  report: ValidationReport,
+  status: ParseStatus,
+  lang: LanguageCode
+): string {
   if (status === "VALID") {
-    return `${report.resolved} transactions extracted and checked against the running balance.`;
+    return fill(translate(lang, "bsSumValid"), { n: report.resolved });
   }
   if (status === "WARNING") {
-    return `${report.resolved + report.warnings} transactions extracted, ${report.warnings} of which need a look.`;
+    return fill(translate(lang, "bsSumWarning"), {
+      n: report.resolved + report.warnings,
+      bad: report.warnings,
+    });
   }
-  return `We could not confidently extract every transaction. Extracted: ${report.resolved + report.warnings}. Unresolved: ${report.unresolved}.`;
+  return fill(translate(lang, "bsSumUnresolved"), {
+    n: report.resolved + report.warnings,
+    bad: report.unresolved,
+  });
 }

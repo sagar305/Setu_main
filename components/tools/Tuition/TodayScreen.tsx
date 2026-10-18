@@ -2,6 +2,8 @@
 
 // The landing screen: what is happening today and what needs a tap.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useMemo } from "react";
 import {
   Cake,
@@ -26,6 +28,7 @@ import { StatCard } from "@/components/tools/FreePos/ui";
 import type { NavigateFn } from "./nav";
 
 export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
+  const { t, lang } = useI18n();
   const { batches, students, attendance, dues, payments, notes, enquiries, business, holidays } =
     useTuition();
   const today = todayIso();
@@ -97,50 +100,54 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   return (
     <div>
-      <p className="text-sm text-muted">{formatDate(today)}</p>
+      <p className="text-sm text-muted">{formatDate(today, lang)}</p>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Classes today"
+          label={t("tuTdClassesToday")}
           value={String(todaysBatches.length)}
-          sub={`${marked.size} marked`}
+          sub={fill(t("tuTdMarkedN"), { count: marked.size })}
         />
         <StatCard
-          label="Pending fees"
+          label={t("tuTdPendingFees")}
           value={formatMoney(totalPending, currency)}
-          sub={`${pending.length} student${pending.length === 1 ? "" : "s"}`}
+          sub={fill(t(pending.length === 1 ? "tuStCountOne" : "tuStCountMany"), {
+            count: pending.length,
+          })}
         />
         <StatCard
-          label={`Collected ${formatMonth(period)}`}
+          label={fill(t("tuTdCollected"), { month: formatMonth(period, lang) })}
           value={formatMoney(collectedThisMonth, currency)}
         />
         <StatCard
-          label="Absent today"
+          label={t("tuTdAbsentToday")}
           value={String(absentToday.length)}
-          sub={`${absentToday.filter((a) => a.notifiedAt).length} parents told`}
+          sub={fill(t("tuTdParentsTold"), {
+            count: absentToday.filter((a) => a.notifiedAt).length,
+          })}
         />
       </div>
 
       {holiday && (
         <p className="mt-4 rounded-xl border border-saffron/40 bg-saffron/10 px-4 py-3 text-sm text-ink">
-          Today is a holiday — {holiday.name}.
+          {fill(t("tuTdHoliday"), { name: holiday.name })}
         </p>
       )}
 
       <section className="mt-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-ink">Today&apos;s classes</h3>
+          <h3 className="text-sm font-bold text-ink">{t("tuTdTodaysClasses")}</h3>
           <button
             type="button"
             onClick={() => onNavigate("attendance")}
             className="text-xs font-semibold text-indigo hover:underline"
           >
-            All attendance
+            {t("tuTdAllAttendance")}
           </button>
         </div>
         {todaysBatches.length === 0 ? (
           <p className="mt-2 rounded-xl bg-cream-paper p-4 text-sm text-muted">
-            No batch is scheduled for today.
+            {t("tuTdNoClassToday")}
           </p>
         ) : (
           <ul className="mt-2 space-y-2">
@@ -157,18 +164,18 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     <div className="min-w-0">
                       <p className="truncate text-sm font-bold text-ink">{batch.name}</p>
                       <p className="text-xs text-muted">
-                        {formatTime(batch.startTime)}–{formatTime(batch.endTime)} · {count}{" "}
-                        student{count === 1 ? "" : "s"}
+                        {formatTime(batch.startTime, lang)}–{formatTime(batch.endTime, lang)} ·{" "}
+                        {fill(t(count === 1 ? "tuStCountOne" : "tuStCountMany"), { count })}
                       </p>
                     </div>
                     <span className="flex shrink-0 items-center gap-2">
                       {done ? (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600">
                           <CheckCircle2 className="h-4 w-4" />
-                          Marked
+                          {t("tuTdMarked")}
                         </span>
                       ) : (
-                        <span className="text-xs font-semibold text-indigo">Mark attendance</span>
+                        <span className="text-xs font-semibold text-indigo">{t("tuTdMarkAttendance")}</span>
                       )}
                       <ChevronRight className="h-4 w-4 text-muted" />
                     </span>
@@ -183,18 +190,18 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       <div className="mt-6 grid gap-5 lg:grid-cols-2">
         <section>
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-ink">Fees to chase</h3>
+            <h3 className="text-sm font-bold text-ink">{t("tuTdFeesToChase")}</h3>
             <button
               type="button"
               onClick={() => onNavigate("fees")}
               className="text-xs font-semibold text-indigo hover:underline"
             >
-              Open fees
+              {t("tuTdOpenFees")}
             </button>
           </div>
           {pending.length === 0 ? (
             <p className="mt-2 rounded-xl bg-cream-paper p-4 text-sm text-muted">
-              Nothing pending. Everyone is up to date.
+              {t("tuTdNothingPending")}
             </p>
           ) : (
             <ul className="mt-2 space-y-2">
@@ -215,7 +222,9 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                           </span>
                           {overdue > 0 && (
                             <span className="block text-xs text-red-600">
-                              {overdue} day{overdue > 1 ? "s" : ""} overdue
+                              {fill(t(overdue === 1 ? "tuTdOverdueOne" : "tuTdOverdueMany"), {
+                                count: overdue,
+                              })}
                             </span>
                           )}
                         </span>
@@ -233,18 +242,18 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
         <section>
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-ink">Reminders</h3>
+            <h3 className="text-sm font-bold text-ink">{t("tuTdReminders")}</h3>
             <button
               type="button"
               onClick={() => onNavigate("diary")}
               className="text-xs font-semibold text-indigo hover:underline"
             >
-              Open diary
+              {t("tuTdOpenDiary")}
             </button>
           </div>
           {dueNotes.length === 0 && followUps.length === 0 && birthdays.length === 0 ? (
             <p className="mt-2 rounded-xl bg-cream-paper p-4 text-sm text-muted">
-              Nothing to remember today.
+              {t("tuTdNothingToday")}
             </p>
           ) : (
             <ul className="mt-2 space-y-2">
@@ -254,7 +263,9 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                   className="flex items-center gap-2 rounded-xl border border-saffron/40 bg-saffron/10 p-3"
                 >
                   <Cake className="h-4 w-4 shrink-0 text-saffron" />
-                  <span className="text-sm text-ink">{student.name}&apos;s birthday today</span>
+                  <span className="text-sm text-ink">
+                    {fill(t("tuTdBirthdayOf"), { name: student.name })}
+                  </span>
                 </li>
               ))}
               {dueNotes.slice(0, 5).map((note) => (
@@ -268,8 +279,10 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     <span className="min-w-0">
                       <span className="block truncate text-sm text-ink">{note.text}</span>
                       <span className="block text-xs text-muted">
-                        {[note.studentId ? studentName(note.studentId) : "General",
-                          note.date < today ? `from ${formatDate(note.date)}` : ""]
+                        {[note.studentId ? studentName(note.studentId) : t("tuGeneral"),
+                          note.date < today
+                            ? fill(t("tuTdFromDate"), { date: formatDate(note.date, lang) })
+                            : ""]
                           .filter(Boolean)
                           .join(" · ")}
                       </span>
@@ -287,10 +300,10 @@ export function TodayScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     <PhoneCall className="h-4 w-4 shrink-0 text-muted" />
                     <span className="min-w-0">
                       <span className="block truncate text-sm text-ink">
-                        Follow up: {enquiry.name}
+                        {fill(t("tuTdFollowUp"), { name: enquiry.name })}
                       </span>
                       <span className="block text-xs text-muted">
-                        {enquiry.phone || "no number"}
+                        {enquiry.phone || t("sqNoNumber")}
                       </span>
                     </span>
                   </button>

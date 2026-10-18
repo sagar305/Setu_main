@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildMessage } from "@/lib/token/messages";
 import {
   DEFAULT_SETTINGS,
+  defaultTokenSettings,
   type Counter,
   type Service,
   type TokenSettings,
@@ -57,11 +58,13 @@ const context = {
   tokens: [token],
   counters: [counter],
   minutes: 2,
+  lang: "en" as const,
 };
 
 describe("queue messages", () => {
   it("fills the token, counter and grace window in", () => {
-    const text = buildMessage("waitingForYou", DEFAULT_SETTINGS, context);
+    // The shipped wording, as a queue created in English actually stores it.
+    const text = buildMessage("waitingForYou", defaultTokenSettings("en"), context);
     expect(text).toContain("A-42");
     expect(text).toContain("Counter 3");
     expect(text).toContain("within 2 minutes");
@@ -69,7 +72,9 @@ describe("queue messages", () => {
 
   it("falls back to the customer's title when no name was taken", () => {
     const anonymous = { ...context, token: { ...token, customerName: "" } };
-    expect(buildMessage("tokenIssued", DEFAULT_SETTINGS, anonymous)).toContain("Sir/Ma'am");
+    expect(buildMessage("tokenIssued", defaultTokenSettings("en"), anonymous)).toContain(
+      "Sir/Ma'am"
+    );
   });
 
   /**
@@ -81,8 +86,8 @@ describe("queue messages", () => {
     const old = {
       ...DEFAULT_SETTINGS,
       messageTemplates: {
-        tokenIssued: DEFAULT_SETTINGS.messageTemplates.tokenIssued,
-        almostYourTurn: DEFAULT_SETTINGS.messageTemplates.almostYourTurn,
+        tokenIssued: defaultTokenSettings("en").messageTemplates.tokenIssued,
+        almostYourTurn: defaultTokenSettings("en").messageTemplates.almostYourTurn,
       },
     } as unknown as TokenSettings;
 

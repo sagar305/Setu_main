@@ -1,9 +1,11 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useRef } from "react";
 import { Printer, RotateCcw } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
-import { ORDER_TYPE_LABELS, type DineKot } from "@/lib/dine/types";
+import { orderTypeLabel, type DineKot } from "@/lib/dine/types";
 import { Modal, primaryBtnClass, secondaryBtnClass, tapTargetClass } from "./ui";
 import { PREVIEW_CLASS, printNode, printedAt } from "./printing";
 
@@ -24,6 +26,7 @@ export function KotModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const { t, lang } = useI18n();
   const { business, settings, tickets, tables, areas, ticketItems, reprintKot } = useDine();
   const printRef = useRef<HTMLDivElement>(null);
 
@@ -47,18 +50,22 @@ export function KotModal({
     <Modal
       open={open}
       onClose={onClose}
-      title={kot.isCancellation ? "Cancellation slip" : `Kitchen ticket · ${kot.kotLabel}`}
+      title={
+        kot.isCancellation
+          ? t("dnKmCancellationSlip")
+          : fill(t("dnKmKitchenTicket"), { label: kot.kotLabel })
+      }
     >
       <div className="rounded-xl border border-muted-line/40 bg-white p-4">
         <div ref={printRef} className={PREVIEW_CLASS}>
           <div className="c">
             {kot.isCancellation && (
               <p className="xl b" style={{ margin: "0 0 4px" }}>
-                ** CANCELLED **
+                {t("dnCancelledStamp")}
               </p>
             )}
             <p className="lg b" style={{ margin: 0 }}>
-              {business?.name ?? "Restaurant"}
+              {business?.name ?? t("dnRestaurantFallback")}
             </p>
             <p className="b xl" style={{ margin: "4px 0 0" }}>
               {kot.kotLabel}
@@ -68,20 +75,20 @@ export function KotModal({
           <div className="rule" />
 
           <div className="row">
-            <span className="b">{table ? table.name : ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}</span>
-            <span>Round {kot.roundNumber}</span>
+            <span className="b">{table ? table.name : orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}</span>
+            <span>{fill(t("dnKmRoundN"), { n: kot.roundNumber })}</span>
           </div>
           <div className="row sm muted">
             <span>
               {area ? `${area.name} · ` : ""}
-              {ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}
+              {orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}
             </span>
             <span>{printedAt(kot.printedAt)}</span>
           </div>
           {ticket?.customerName && <p className="sm muted" style={{ margin: 0 }}>{ticket.customerName}</p>}
           {kot.reprintCount > 0 && (
             <p className="sm b" style={{ margin: "2px 0 0" }}>
-              REPRINT #{kot.reprintCount}
+              {fill(t("dnKmReprintN"), { n: kot.reprintCount })}
             </p>
           )}
 
@@ -111,7 +118,9 @@ export function KotModal({
 
           <div className="solid" />
           <p className="c sm muted" style={{ margin: 0 }}>
-            {roundItems.reduce((sum, item) => sum + item.quantity, 0)} item(s)
+            {fill(t("dnKmItemCount"), {
+              n: roundItems.reduce((sum, item) => sum + item.quantity, 0),
+            })}
             {ticket?.note ? ` · ${ticket.note}` : ""}
           </p>
         </div>
@@ -119,7 +128,7 @@ export function KotModal({
 
       <div className="mt-4 flex flex-wrap justify-end gap-3">
         <button type="button" onClick={onClose} className={`${secondaryBtnClass} ${tapTargetClass}`}>
-          Done
+          {t("clStDone")}
         </button>
         {kot.reprintCount > 0 || kot.printedAt ? (
           <button
@@ -128,7 +137,7 @@ export function KotModal({
             className={`${secondaryBtnClass} ${tapTargetClass}`}
           >
             <RotateCcw className="h-4 w-4" />
-            Reprint
+            {t("dnKmReprint")}
           </button>
         ) : null}
         <button
@@ -137,13 +146,11 @@ export function KotModal({
           className={`${primaryBtnClass} ${tapTargetClass}`}
         >
           <Printer className="h-4 w-4" />
-          Print
+          {t("print")}
         </button>
       </div>
 
-      <p className="mt-3 text-center text-xs text-muted">
-        No printer? The kitchen can read this off the screen — that is what most small kitchens do.
-      </p>
+      <p className="mt-3 text-center text-xs text-muted">{t("dnKmNoPrinter")}</p>
     </Modal>
   );
 }

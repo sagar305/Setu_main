@@ -1,12 +1,15 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { Check, ChefHat, CircleAlert, Clock, Flame, Utensils } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
 import { canSyncTabs } from "@/lib/dine/sync";
 import {
-  KOT_STATUS_LABELS,
-  ORDER_TYPE_LABELS,
+  kotStatusLabel,
+  orderTypeLabel,
   kotStatusOf,
   type DineKot,
   type KotStatus,
@@ -28,21 +31,32 @@ import { timeOnly } from "./printing";
  */
 
 /** How long a round has been waiting, and how alarmed to look about it. */
-function ageOf(iso: string, now: number): { label: string; minutes: number } {
+function ageOf(
+  iso: string,
+  now: number,
+  lang: LanguageCode
+): { label: string; minutes: number } {
   const started = new Date(iso).getTime();
   if (Number.isNaN(started)) return { label: "", minutes: 0 };
   const minutes = Math.max(Math.floor((now - started) / 60000), 0);
-  if (minutes < 60) return { label: `${minutes}m`, minutes };
-  return { label: `${Math.floor(minutes / 60)}h ${minutes % 60}m`, minutes };
+  if (minutes < 60) return { label: fill(translate(lang, "dnElapsedMin"), { n: minutes }), minutes };
+  return {
+    label: fill(translate(lang, "dnElapsedHrMin"), {
+      h: Math.floor(minutes / 60),
+      m: minutes % 60,
+    }),
+    minutes,
+  };
 }
 
-const NEXT_STATUS: Partial<Record<KotStatus, { next: KotStatus; label: string }>> = {
-  new: { next: "preparing", label: "Start cooking" },
-  preparing: { next: "ready", label: "Mark ready" },
-  ready: { next: "served", label: "Picked up" },
+const NEXT_STATUS: Partial<Record<KotStatus, { next: KotStatus; label: TKey }>> = {
+  new: { next: "preparing", label: "dnKiStartCooking" },
+  preparing: { next: "ready", label: "dnKiMarkReady" },
+  ready: { next: "served", label: "dnKiPickedUp" },
 };
 
 export function KitchenScreen() {
+  const { t, lang } = useI18n();
   const { kots, tickets, tables, areas, ticketItems, setKotStatus, business } = useDine();
   const [now, setNow] = useState(() => Date.now());
   const [showServed, setShowServed] = useState(false);
@@ -78,12 +92,14 @@ export function KitchenScreen() {
         <div>
           <h2 className="flex items-center gap-2 text-lg font-bold text-ink">
             <ChefHat className="h-5 w-5 text-indigo" />
-            Kitchen
+            {t("dnKiKitchen")}
           </h2>
           <p className="text-xs text-muted">
             {business?.name ? `${business.name} · ` : ""}
-            {waiting === 0 ? "Nothing waiting" : `${waiting} round${waiting === 1 ? "" : "s"} on`}
-            {syncLive ? " · updates live" : " · live updates unavailable in this browser"}
+            {waiting === 0
+              ? t("dnKiNothingWaiting")
+              : fill(t(waiting === 1 ? "dnKiRound1On" : "dnKiRoundsNOn"), { n: waiting })}
+            {` · ${syncLive ? t("dnKiUpdatesLive") : t("dnKiUpdatesUnavailable")}`}
           </p>
         </div>
         <button
@@ -91,15 +107,15 @@ export function KitchenScreen() {
           onClick={() => setShowServed((previous) => !previous)}
           className={`${secondaryBtnClass} ${tapTargetClass}`}
         >
-          {showServed ? "Hide picked up" : "Show picked up"}
+          {showServed ? t("dnKiHidePickedUp") : t("dnKiShowPickedUp")}
         </button>
       </div>
 
       {visible.length === 0 ? (
         <EmptyState
           icon={<Utensils className="h-6 w-6" />}
-          title="Nothing on"
-          message="Rounds appear here the moment the counter sends them. Leave this tab open on the pass."
+          title={t("dnKiNothingOn")}
+          message={t("dnKiNothingOnBody")}
         />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -115,7 +131,7 @@ export function KitchenScreen() {
                 now={now}
                 table={table}
                 areaName={areas.find((area) => area.id === table?.areaId)?.name ?? ""}
-                orderTypeLabel={ORDER_TYPE_LABELS[ticket?.orderType ?? "takeaway"]}
+                orderTypeLabel={orderTypeLabel(ticket?.orderType ?? "takeaway", lang)}
                 customerName={ticket?.customerName ?? ""}
                 items={ticketItems.filter(
                   (item) =>
@@ -160,8 +176,9 @@ function KotCard({
   }[];
   onAdvance: (status: KotStatus) => void;
 }) {
+  const { t, lang } = useI18n();
   const status = kotStatusOf(kot);
-  const age = ageOf(kot.printedAt, now);
+  const age = ageOf(kot.printedAt, now, lang);
   const advance = NEXT_STATUS[status];
 
   // A round that has been sitting a while should be visible from across the
@@ -188,7 +205,7 @@ function KotCard({
             {areaName && <span className="ml-1.5 text-xs font-normal text-muted">{areaName}</span>}
           </p>
           <p className="text-xs text-muted">
-            {kot.kotLabel} · Round {kot.roundNumber}
+            {fill(t("dnKiKotRound"), { label: kot.kotLabel, n: kot.roundNumber })}
             {table ? ` · ${orderTypeLabel}` : ""}
             {customerName ? ` · ${customerName}` : ""}
           </p>
@@ -203,7 +220,7 @@ function KotCard({
             {age.label}
           </span>
           <p className="mt-1 text-[10px] uppercase tracking-wide text-muted">
-            {KOT_STATUS_LABELS[status]}
+            {kotStatusLabel(status, lang)}
           </p>
         </div>
       </header>
@@ -211,7 +228,7 @@ function KotCard({
       {kot.isCancellation && (
         <p className="mt-2 flex items-center gap-1.5 rounded-lg bg-red-100 px-2 py-1 text-xs font-bold uppercase tracking-wide text-red-700">
           <CircleAlert className="h-3.5 w-3.5" aria-hidden="true" />
-          Cancelled — stop cooking
+          {t("dnKiStopCooking")}
         </p>
       )}
 
@@ -255,7 +272,7 @@ function KotCard({
             ) : (
               <Check className="h-4 w-4" />
             )}
-            {advance.label}
+            {t(advance.label)}
           </button>
         ) : (
           <button
@@ -263,7 +280,7 @@ function KotCard({
             onClick={() => onAdvance("new")}
             className={`${secondaryBtnClass} ${tapTargetClass} flex-1`}
           >
-            Put back on
+            {t("dnKiPutBackOn")}
           </button>
         )}
         <span className="text-[10px] text-muted">{timeOnly(kot.printedAt)}</span>

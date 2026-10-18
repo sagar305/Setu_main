@@ -1,5 +1,7 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useMemo, useRef, useState } from "react";
 import {
   Download,
@@ -13,7 +15,7 @@ import {
 import { useDine, type MenuItemInput } from "@/lib/dine/store";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { downloadCsv, menuCsv, parseMenuCsv } from "@/lib/dine/csv";
-import { FOOD_TYPE_LABELS, type DineMenuItem, type FoodType } from "@/lib/dine/types";
+import { foodTypeLabel, type DineMenuItem, type FoodType } from "@/lib/dine/types";
 import { RecipeBadge, RecipeModal } from "./RecipeModal";
 import {
   ConfirmDialog,
@@ -30,6 +32,7 @@ import {
 } from "./ui";
 
 export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
+  const { lang, t } = useI18n();
   const {
     menuItems,
     categories,
@@ -72,12 +75,15 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
 
   const onImport = async (file: File | undefined) => {
     if (!file) return;
-    const result = parseMenuCsv(await file.text());
+    const result = parseMenuCsv(await file.text(), lang);
     if (result.rows.length > 0) {
       const added = await importMenu(result.rows, false);
-      setImportReport([`Added ${added} item${added === 1 ? "" : "s"}.`, ...result.errors]);
+      setImportReport([
+        fill(t(added === 1 ? "dnMnAdded1" : "dnMnAddedN"), { n: added }),
+        ...result.errors,
+      ]);
     } else {
-      setImportReport(result.errors.length ? result.errors : ["Nothing to import."]);
+      setImportReport(result.errors.length ? result.errors : [t("dnMnNothingToImport")]);
     }
     if (fileRef.current) fileRef.current.value = "";
   };
@@ -85,10 +91,15 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
   return (
     <div className="space-y-5">
       <SectionHeading
-        title="Menu"
-        subtitle={`${menuItems.length} item${menuItems.length === 1 ? "" : "s"} across ${
-          categories.length
-        } categor${categories.length === 1 ? "y" : "ies"}`}
+        title={t("dnNavMenu")}
+        subtitle={fill(t("dnMnSubtitle"), {
+          items: fill(t(menuItems.length === 1 ? "dnMnItemCount1" : "dnMnItemCountN"), {
+            n: menuItems.length,
+          }),
+          categories: fill(t(categories.length === 1 ? "dnMnCatCount1" : "dnMnCatCountN"), {
+            n: categories.length,
+          }),
+        })}
         action={
           <div className="flex flex-wrap gap-2">
             <input
@@ -109,7 +120,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
               className={secondaryBtnClass}
             >
               <Download className="h-4 w-4" />
-              Export
+              {t("appExport")}
             </button>
             <button
               type="button"
@@ -117,7 +128,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
               className={secondaryBtnClass}
             >
               <Upload className="h-4 w-4" />
-              Import
+              {t("appImport")}
             </button>
             <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
@@ -129,14 +140,14 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
 
       <div className="flex flex-wrap items-center gap-3">
         <div className="min-w-[200px] flex-1">
-          <SearchInput value={query} onChange={setQuery} placeholder="Search dishes…" />
+          <SearchInput value={query} onChange={setQuery} placeholder={t("dnMnSearchPh")} />
         </div>
         <button
           type="button"
           onClick={() => setCategoriesOpen(true)}
           className="text-sm font-semibold text-indigo"
         >
-          Manage categories
+          {t("dnMnManageCategories")}
         </button>
       </div>
 
@@ -169,8 +180,8 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
       {visible.length === 0 ? (
         <EmptyState
           icon={<UtensilsCrossed className="h-6 w-6" />}
-          title="No dishes here yet"
-          message="Add your first dish, or import a menu from a CSV."
+          title={t("dnMnNoDishes")}
+          message={t("dnMnNoDishesBody")}
           action={
             <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
@@ -219,7 +230,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
                       {item.taxRate === null
                         ? `${settings.defaultTaxRate}% (default)`
                         : `${item.taxRate}%`}{" "}
-                      · {item.taxInclusive ? "inclusive" : "exclusive"}
+                      · {item.taxInclusive ? t("dnMnInclusive") : t("dnMnExclusive")}
                       {itemVariations.length > 0 && ` · ${itemVariations.length} sizes`}
                       {groupCount > 0 && ` · ${groupCount} option group`}
                     </p>
@@ -228,7 +239,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
                     <button
                       type="button"
                       onClick={() => setEditing(item)}
-                      aria-label={`Edit ${item.name}`}
+                      aria-label={fill(t("dnMnEditDish"), { name: item.name })}
                       className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-cream hover:text-indigo"
                     >
                       <Pencil className="h-4 w-4" />
@@ -236,7 +247,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
                     <button
                       type="button"
                       onClick={() => setDeleteTarget(item)}
-                      aria-label={`Delete ${item.name}`}
+                      aria-label={fill(t("appDeleteNamed"), { name: item.name })}
                       className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -265,7 +276,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
                     onChange={(event) => void setItemAvailable(item.id, event.target.checked)}
                     className="h-4 w-4 accent-[#26306B]"
                   />
-                  {item.available ? "Available" : "Sold out — hidden from ordering"}
+                  {item.available ? t("dnMnAvailable") : t("dnMnSoldOut")}
                 </label>
               </div>
             );
@@ -285,8 +296,8 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
 
       <ConfirmDialog
         open={deleteTarget !== null}
-        title={`Delete ${deleteTarget?.name ?? "this dish"}?`}
-        message="It disappears from the menu. Bills that already contain it keep their record. If it is only off for tonight, use the Sold out toggle instead."
+        title={fill(t("dnInDeleteTitle"), { name: deleteTarget?.name ?? t("dnMnThisDish") })}
+        message={t("dnMnDeleteBody")}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={async () => {
           if (deleteTarget) await deleteMenuItem(deleteTarget.id);
@@ -307,7 +318,7 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
       <Modal
         open={importReport.length > 0}
         onClose={() => setImportReport([])}
-        title="Menu import"
+        title={t("dnMnImportTitle")}
       >
         <ul className="space-y-1 text-sm text-ink">
           {importReport.map((line, index) => (
@@ -334,6 +345,7 @@ const EMPTY_ITEM: MenuItemInput = {
 };
 
 function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: () => void }) {
+  const { lang, t } = useI18n();
   const {
     categories,
     variations,
@@ -419,10 +431,15 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
   };
 
   return (
-    <Modal open onClose={onClose} title={item ? `Edit ${item.name}` : "New dish"} wide>
+    <Modal
+      open
+      onClose={onClose}
+      title={item ? fill(t("dnMnEditDish"), { name: item.name }) : t("dnMnNewDish")}
+      wide
+    >
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Name" required>
+          <Field label={t("name")} required>
             <input
               value={form.name}
               onChange={(event) => patch({ name: event.target.value })}
@@ -430,7 +447,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               autoFocus
             />
           </Field>
-          <Field label="Category">
+          <Field label={t("category")}>
             {categories.length > 0 ? (
               <select
                 value={form.categoryId}
@@ -450,14 +467,14 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               <input
                 value={newCategory}
                 onChange={(event) => setNewCategory(event.target.value)}
-                placeholder="e.g. Starters"
+                placeholder={t("dnMnCategoryPh")}
                 className={inputClass}
               />
             )}
           </Field>
           <Field
-            label="Price"
-            hint={form.variations.length > 0 ? "Sizes below override this." : undefined}
+            label={t("price")}
+            hint={form.variations.length > 0 ? t("dnMnSizesOverride") : undefined}
           >
             <input
               inputMode="decimal"
@@ -467,9 +484,9 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               className={inputClass}
             />
           </Field>
-          <Field label="Type">
+          <Field label={t("typeLabel")}>
             <div className="flex gap-2">
-              {(Object.keys(FOOD_TYPE_LABELS) as FoodType[]).map((type) => (
+              {(Object.keys(foodTypeLabel) as FoodType[]).map((type) => (
                 <button
                   key={type}
                   type="button"
@@ -482,12 +499,12 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                   }`}
                 >
                   <FoodDot type={type} />
-                  {FOOD_TYPE_LABELS[type]}
+                  {foodTypeLabel(type, lang)}
                 </button>
               ))}
             </div>
           </Field>
-          <Field label="Tax rate %" hint={`Blank uses the default (${settings.defaultTaxRate}%).`}>
+          <Field label={t("dnMnTaxRatePct")} hint={fill(t("dnMnBlankDefault"), { rate: settings.defaultTaxRate })}>
             <input
               inputMode="decimal"
               value={form.taxRate === null ? "" : String(form.taxRate)}
@@ -498,7 +515,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               className={inputClass}
             />
           </Field>
-          <Field label="Price includes tax?">
+          <Field label={t("dnMnPriceIncludesTax")}>
             <div className="flex gap-2">
               {[true, false].map((inclusive) => (
                 <button
@@ -512,14 +529,14 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                       : "border-muted-line/40 bg-white text-ink"
                   }`}
                 >
-                  {inclusive ? "Inclusive" : "Exclusive"}
+                  {inclusive ? t("dnMnInclusive") : t("dnMnExclusive")}
                 </button>
               ))}
             </div>
           </Field>
         </div>
 
-        <Field label="Description">
+        <Field label={t("description")}>
           <textarea
             value={form.description}
             onChange={(event) => patch({ description: event.target.value })}
@@ -529,13 +546,13 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
         </Field>
 
         <ChildEditor
-          title="Sizes"
-          hint="Half / Full, Small / Large. A dish with sizes asks for one when ordered."
+          title="dnMnSizes"
+          hint="dnMnSizesHint"
           rows={form.variations.map((variation) => ({
             name: variation.name,
             value: formatPlain(variation.price),
           }))}
-          valueLabel="Price"
+          valueLabel="price"
           onChange={(rows) =>
             patch({
               variations: rows.map((row, index) => ({
@@ -558,13 +575,13 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                 patch({
                   modifierGroups: [
                     ...form.modifierGroups,
-                    { name: "Add-ons", minSelect: 0, maxSelect: 2, options: [] },
+                    { name: t("dnMnAddOns"), minSelect: 0, maxSelect: 2, options: [] },
                   ],
                 })
               }
               className="text-xs font-semibold text-indigo"
             >
-              + Add a group
+              {t("dnMnAddAGroup")}
             </button>
           </div>
 
@@ -575,7 +592,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
             >
               <div className="flex flex-wrap items-end gap-2">
                 <div className="min-w-[140px] flex-1">
-                  <Field label="Group name">
+                  <Field label={t("dnMnGroupName")}>
                     <input
                       value={group.name}
                       onChange={(event) =>
@@ -590,7 +607,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                   </Field>
                 </div>
                 <div className="w-20">
-                  <Field label="Min">
+                  <Field label={t("dnMnMin")}>
                     <input
                       inputMode="numeric"
                       value={String(group.minSelect)}
@@ -608,7 +625,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                   </Field>
                 </div>
                 <div className="w-20">
-                  <Field label="Max">
+                  <Field label={t("dnMnMax")}>
                     <input
                       inputMode="numeric"
                       value={String(group.maxSelect)}
@@ -634,24 +651,26 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                       ),
                     })
                   }
-                  aria-label="Remove group"
+                  aria-label={t("dnMnRemoveGroup")}
                   className="mb-1 flex h-9 w-9 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
               <p className="text-[11px] text-muted">
-                {group.minSelect > 0 ? "Required" : "Optional"} ·{" "}
-                {group.maxSelect === 1 ? "pick one" : `pick up to ${group.maxSelect}`}
+                {group.minSelect > 0 ? t("dnMnRequired") : t("dnMnOptional")} ·{" "}
+                {group.maxSelect === 1
+                  ? t("dnIcPickOne")
+                  : fill(t("dnIcPickUpTo"), { n: group.maxSelect })}
               </p>
 
               <ChildEditor
-                title="Options"
+                title="dnMnOptions"
                 rows={group.options.map((option) => ({
                   name: option.name,
                   value: formatPlain(option.priceDelta),
                 }))}
-                valueLabel="Extra"
+                valueLabel="dnMnExtra"
                 onChange={(rows) =>
                   patch({
                     modifierGroups: form.modifierGroups.map((row, index) =>
@@ -683,7 +702,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
             disabled={busy || !form.name.trim()}
             className={primaryBtnClass}
           >
-            {busy ? "Saving…" : item ? "Save changes" : "Add to menu"}
+            {busy ? t("clPfSaving") : item ? t("saveChanges") : t("dnMnAddToMenu")}
           </button>
         </div>
       </div>
@@ -699,25 +718,26 @@ function ChildEditor({
   valueLabel,
   onChange,
 }: {
-  title: string;
-  hint?: string;
+  title: TKey;
+  hint?: TKey;
   rows: { name: string; value: string }[];
-  valueLabel: string;
+  valueLabel: TKey;
   onChange: (rows: { name: string; value: string }[]) => void;
 }) {
+  const { t } = useI18n();
   return (
     <div>
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted">{title}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t(title)}</p>
         <button
           type="button"
           onClick={() => onChange([...rows, { name: "", value: "0.00" }])}
           className="text-xs font-semibold text-indigo"
         >
-          + Add
+          {t("dnMnAddRow")}
         </button>
       </div>
-      {hint && <p className="mt-0.5 text-[11px] text-muted/80">{hint}</p>}
+      {hint && <p className="mt-0.5 text-[11px] text-muted/80">{t(hint)}</p>}
       <div className="mt-2 space-y-2">
         {rows.map((row, index) => (
           <div key={index} className="flex gap-2">
@@ -730,8 +750,8 @@ function ChildEditor({
                   )
                 )
               }
-              placeholder="Name"
-              aria-label={`${title} name`}
+              placeholder={t("name")}
+              aria-label={fill(t("dnMnRowNameAria"), { title: t(title) })}
               className={`${inputClass} flex-1`}
             />
             <input
@@ -744,13 +764,13 @@ function ChildEditor({
                   )
                 )
               }
-              aria-label={valueLabel}
+              aria-label={t(valueLabel)}
               className={`${inputClass} w-24`}
             />
             <button
               type="button"
               onClick={() => onChange(rows.filter((_, itemIndex) => itemIndex !== index))}
-              aria-label="Remove"
+              aria-label={t("remove")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
             >
               <X className="h-4 w-4" />
@@ -775,11 +795,12 @@ function CategoriesModal({
   onRename: (id: string, name: string) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
 }) {
+  const { t } = useI18n();
   const { categories, menuItems } = useDine();
   const [name, setName] = useState("");
 
   return (
-    <Modal open={open} onClose={onClose} title="Categories">
+    <Modal open={open} onClose={onClose} title={t("dnMnCategories")}>
       <div className="space-y-3">
         {categories
           .slice()
@@ -792,13 +813,13 @@ function CategoriesModal({
                   value={category.name}
                   onChange={(event) => void onRename(category.id, event.target.value)}
                   className={`${inputClass} flex-1`}
-                  aria-label="Category name"
+                  aria-label={t("dnMnCategoryName")}
                 />
                 <span className="w-16 shrink-0 text-right text-xs text-muted">{count} items</span>
                 <button
                   type="button"
                   onClick={() => void onDelete(category.id)}
-                  aria-label={`Delete ${category.name}`}
+                  aria-label={fill(t("appDeleteNamed"), { name: category.name })}
                   className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -811,7 +832,7 @@ function CategoriesModal({
           <input
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="New category"
+            placeholder={t("dnMnNewCategoryPh")}
             className={`${inputClass} flex-1`}
           />
           <button
@@ -823,12 +844,11 @@ function CategoriesModal({
             }}
             className={primaryBtnClass}
           >
-            Add
+            {t("add")}
           </button>
         </div>
         <p className="text-xs text-muted">
-          Deleting a category keeps its dishes — they move to another category rather than
-          disappearing off the menu.
+          {t("dnMnDeletingCategory")}
         </p>
       </div>
     </Modal>

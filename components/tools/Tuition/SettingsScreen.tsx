@@ -1,5 +1,8 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { useRef, useState, type ReactNode } from "react";
 import {
   Copy,
@@ -21,7 +24,7 @@ import {
   describeConflict,
   findBatchConflicts,
 } from "@/lib/tuition/batchRules";
-import { MESSAGE_PLACEHOLDERS } from "@/lib/tuition/messages";
+import { messagePlaceholders } from "@/lib/tuition/messages";
 import {
   PIN_MAX_LENGTH,
   PIN_MIN_LENGTH,
@@ -32,12 +35,12 @@ import {
 } from "@/lib/pos/pin";
 import { CURRENCIES, formatMoney } from "@/lib/pos/types";
 import {
-  DEFAULT_TEMPLATES,
+  defaultTemplates,
   describeDays,
   formatDate,
   formatReceiptNumber,
   todayIso,
-  WEEKDAYS,
+  weekdayNames,
   type Batch,
   type MessageTemplates,
   type TuitionSettings,
@@ -71,8 +74,9 @@ function Section({
 }
 
 function SavedFlash({ show }: { show: boolean }) {
+  const { t, lang } = useI18n();
   if (!show) return null;
-  return <span className="text-sm font-semibold text-emerald-600">Saved ✓</span>;
+  return <span className="text-sm font-semibold text-emerald-600">{t("tuStgSaved")}</span>;
 }
 
 export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
@@ -147,6 +151,7 @@ function ProfileSection({
   business: ReturnType<typeof useTuition>["business"];
   onSave: (updates: Record<string, string>) => Promise<void>;
 }) {
+  const { t, lang } = useI18n();
   const [form, setForm] = useState({
     name: business?.name ?? "",
     phone: business?.phone ?? "",
@@ -165,11 +170,11 @@ function ProfileSection({
 
   return (
     <Section
-      title="Your details"
-      description="Shown on fee receipts and in the messages you send parents. Shared with your other Setu tools on this device."
+      title={t("tuSetTitle")}
+      description={t("tuStgDetailsBlurb")}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Name / institute name">
+        <Field label={t("tuStgNameLabel")}>
           <input
             type="text"
             value={form.name}
@@ -177,7 +182,7 @@ function ProfileSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Phone">
+        <Field label={t("phone")}>
           <input
             type="tel"
             value={form.phone}
@@ -185,7 +190,7 @@ function ProfileSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Email">
+        <Field label={t("email")}>
           <input
             type="email"
             value={form.email}
@@ -193,7 +198,7 @@ function ProfileSection({
             className={inputClass}
           />
         </Field>
-        <Field label="UPI ID" hint="Puts a Pay now button on receipts and reminders">
+        <Field label={t("tuSetUpiOptional")} hint={t("tuStgUpiHint")}>
           <input
             type="text"
             value={form.upiId}
@@ -202,7 +207,7 @@ function ProfileSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Currency">
+        <Field label={t("currency")}>
           <select
             value={form.currency}
             onChange={(event) => setForm((p) => ({ ...p, currency: event.target.value }))}
@@ -215,7 +220,7 @@ function ProfileSection({
             ))}
           </select>
         </Field>
-        <Field label="Address">
+        <Field label={t("address")}>
           <input
             type="text"
             value={form.address}
@@ -226,7 +231,7 @@ function ProfileSection({
       </div>
       <div className="mt-4 flex items-center gap-3">
         <button type="button" onClick={() => void save()} className={primaryBtnClass}>
-          Save details
+          {t("tuStgSaveDetails")}
         </button>
         <SavedFlash show={saved} />
       </div>
@@ -249,6 +254,7 @@ const EMPTY_BATCH: Omit<Batch, "id" | "createdAt" | "updatedAt"> = {
 };
 
 function BatchesSection() {
+  const { t, lang } = useI18n();
   const { batches, students, business, createBatch, updateBatch, deleteBatch } = useTuition();
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Batch | null>(null);
@@ -288,7 +294,7 @@ function BatchesSection() {
     event.preventDefault();
     if (!form.name.trim()) return;
     if (blocking.length > 0) {
-      setError(describeConflict(blocking[0]));
+      setError(describeConflict(blocking[0], lang));
       return;
     }
     setSaving(true);
@@ -299,7 +305,7 @@ function BatchesSection() {
       else await createBatch(payload);
       setOpen(false);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not save this batch.");
+      setError(caught instanceof Error ? caught.message : t("tuStgBatchSaveFailed"));
     } finally {
       setSaving(false);
     }
@@ -316,12 +322,12 @@ function BatchesSection() {
 
   return (
     <Section
-      title="Batches"
-      description="A batch is a class you take, with its own timing and its own fee. A student enrolled in two batches pays both fees. Two batches cannot run at the same time — you can only be in one place."
+      title={t("tuAtBatches")}
+      description={t("tuStgBatchesBlurb")}
     >
       {batches.length === 0 ? (
         <p className="rounded-xl bg-cream-paper p-4 text-sm text-muted">
-          No batches yet. Add one to start marking attendance and charging fees.
+          {t("tuStgNoBatches")}
         </p>
       ) : (
         <ul className="space-y-2">
@@ -339,16 +345,16 @@ function BatchesSection() {
                     {batch.name}
                     {!batch.active && (
                       <span className="ml-2 rounded-full bg-cream-paper px-2 py-0.5 text-[10px] font-semibold uppercase text-muted">
-                        Inactive
+                        {t("clStInactive")}
                       </span>
                     )}
                   </p>
                   <p className="truncate text-xs text-muted">
                     {[
                       batch.subject,
-                      describeDays(batch.days),
+                      describeDays(batch.days, lang),
                       `${batch.startTime}–${batch.endTime}`,
-                      `${count} student${count === 1 ? "" : "s"}`,
+                      fill(t(count === 1 ? "tuStCountOne" : "tuStCountMany"), { count }),
                     ]
                       .filter(Boolean)
                       .join(" · ")}
@@ -362,7 +368,7 @@ function BatchesSection() {
                     type="button"
                     onClick={() => setConfirmDelete(batch)}
                     className="flex h-8 w-8 items-center justify-center rounded-lg border border-muted-line/40 text-muted transition hover:border-red-300 hover:text-red-600"
-                    aria-label={`Delete ${batch.name}`}
+                    aria-label={fill(t("appDeleteNamed"), { name: batch.name })}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -375,23 +381,23 @@ function BatchesSection() {
 
       <button type="button" onClick={openNew} className={`${primaryBtnClass} mt-4`}>
         <Plus className="h-4 w-4" />
-        Add batch
+        {t("tuStgAddBatch")}
       </button>
 
-      <Modal open={open} onClose={() => setOpen(false)} title={editing ? "Edit batch" : "Add batch"}>
+      <Modal open={open} onClose={() => setOpen(false)} title={t(editing ? "tuStgEditBatch" : "tuStgAddBatch")}>
         <form onSubmit={submit} className="space-y-4">
-          <Field label="Batch name" required>
+          <Field label={t("tuStgBatchName")} required>
             <input
               type="text"
               value={form.name}
               onChange={(event) => setForm((p) => ({ ...p, name: event.target.value }))}
-              placeholder="e.g. Class 10 Maths — Evening"
+              placeholder={t("tuStgBatchNamePh")}
               className={inputClass}
               autoFocus
             />
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Subject">
+            <Field label={t("tuPhSubject")}>
               <input
                 type="text"
                 value={form.subject}
@@ -399,7 +405,7 @@ function BatchesSection() {
                 className={inputClass}
               />
             </Field>
-            <Field label="Class / grade">
+            <Field label={t("tuSfClassGrade")}>
               <input
                 type="text"
                 value={form.classLevel}
@@ -410,10 +416,10 @@ function BatchesSection() {
           </div>
           <div>
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
-              Days
+              {t("dgUnitDays")}
             </span>
             <div className="flex flex-wrap gap-1.5">
-              {WEEKDAYS.map((label, day) => (
+              {weekdayNames(lang).map((label, day) => (
                 <button
                   key={label}
                   type="button"
@@ -431,7 +437,7 @@ function BatchesSection() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Starts">
+            <Field label={t("tuStgStarts")}>
               <input
                 type="time"
                 value={form.startTime}
@@ -439,7 +445,7 @@ function BatchesSection() {
                 className={inputClass}
               />
             </Field>
-            <Field label="Ends">
+            <Field label={t("tuStgEnds")}>
               <input
                 type="time"
                 value={form.endTime}
@@ -447,7 +453,7 @@ function BatchesSection() {
                 className={inputClass}
               />
             </Field>
-            <Field label="Fee per month" required>
+            <Field label={t("tuSfFeePerMonth")} required>
               <input
                 type="number"
                 min={0}
@@ -459,7 +465,7 @@ function BatchesSection() {
               />
             </Field>
           </div>
-          <Field label="Venue (optional)">
+          <Field label={t("tuStgVenueOptional")}>
             <input
               type="text"
               value={form.venue}
@@ -474,18 +480,18 @@ function BatchesSection() {
               onChange={(event) => setForm((p) => ({ ...p, active: event.target.checked }))}
               className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
             />
-            Batch is running
+            {t("tuStgBatchRunning")}
           </label>
 
           {blocking.length > 0 && (
             <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-              {describeConflict(blocking[0])}
+              {describeConflict(blocking[0], lang)}
             </p>
           )}
 
           {blocking.length === 0 && warning && (
             <div className="rounded-lg border border-saffron/40 bg-saffron/10 px-4 py-3">
-              <p className="text-sm text-ink">{describeConflict(warning)}</p>
+              <p className="text-sm text-ink">{describeConflict(warning, lang)}</p>
               <label className="mt-2 flex items-center gap-2 text-sm text-muted">
                 <input
                   type="checkbox"
@@ -493,7 +499,7 @@ function BatchesSection() {
                   onChange={(event) => setAcceptedWarning(event.target.checked)}
                   className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
                 />
-                This is a separate group at a different time
+                {t("tuStgSeparateGroup")}
               </label>
             </div>
           )}
@@ -506,14 +512,14 @@ function BatchesSection() {
 
           <div className="flex justify-end gap-3">
             <button type="button" onClick={() => setOpen(false)} className={secondaryBtnClass}>
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               disabled={saving || blocking.length > 0 || (Boolean(warning) && !acceptedWarning)}
               className={primaryBtnClass}
             >
-              {saving ? "Saving…" : editing ? "Save changes" : "Add batch"}
+              {saving ? t("clPfSaving") : t(editing ? "saveChanges" : "tuStgAddBatch")}
             </button>
           </div>
         </form>
@@ -521,9 +527,11 @@ function BatchesSection() {
 
       <ConfirmDialog
         open={Boolean(confirmDelete)}
-        title={`Delete ${confirmDelete?.name ?? "this batch"}?`}
-        message="Students in this batch stay, but they will no longer be enrolled in it and their fee will change. Past attendance and fees are kept."
-        confirmLabel="Delete batch"
+        title={fill(t("tuStgDeleteNamedQ"), {
+          name: confirmDelete?.name ?? t("tuStgThisBatch"),
+        })}
+        message={t("tuStgDeleteBatchBody")}
+        confirmLabel={t("tuStgDeleteBatch")}
         onCancel={() => setConfirmDelete(null)}
         onConfirm={() => {
           if (confirmDelete) void deleteBatch(confirmDelete.id);
@@ -545,6 +553,7 @@ function FeesSection({
   onSave: (updates: Partial<TuitionSettings>) => Promise<void>;
   currency: string;
 }) {
+  const { t, lang } = useI18n();
   const [prefix, setPrefix] = useState(settings.receiptPrefix);
   const [next, setNext] = useState(String(settings.nextReceiptNumber));
   const [dueDay, setDueDay] = useState(String(settings.feeDueDay));
@@ -567,11 +576,11 @@ function FeesSection({
 
   return (
     <Section
-      title="Fees & receipts"
-      description="Monthly dues are raised automatically for every active student from their joining month onwards."
+      title={t("tuStgFeesReceipts")}
+      description={t("tuStgFeesBlurb")}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Receipt prefix">
+        <Field label={t("tuStgReceiptPrefix")}>
           <input
             type="text"
             value={prefix}
@@ -579,7 +588,12 @@ function FeesSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Next receipt number" hint={`Next: ${formatReceiptNumber(prefix, Number(next) || 1)}`}>
+        <Field
+          label={t("tuStgNextReceiptNumber")}
+          hint={fill(t("tuFsNextReceipt"), {
+            number: formatReceiptNumber(prefix, Number(next) || 1),
+          })}
+        >
           <input
             type="number"
             min={1}
@@ -588,7 +602,7 @@ function FeesSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Fees due on day" hint="Day of the month the monthly fee falls due">
+        <Field label={t("tuStgFeesDueDay")} hint={t("tuStgFeesDueDayHint")}>
           <input
             type="number"
             min={1}
@@ -598,7 +612,7 @@ function FeesSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Payment modes" hint="Comma separated">
+        <Field label={t("tuStgPaymentModes")} hint={t("tuStgCommaSeparated")}>
           <input
             type="text"
             value={modes}
@@ -614,7 +628,7 @@ function FeesSection({
           onChange={(event) => void onSave({ autoGenerateDues: event.target.checked })}
           className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
         />
-        Raise each month&apos;s dues automatically when I open the app
+        {t("tuStgAutoGenerate")}
       </label>
       <p className="mt-2 text-xs text-muted">
         Amounts are in {currency}. A due is snapshotted when it is raised, so changing a batch fee
@@ -622,7 +636,7 @@ function FeesSection({
       </p>
       <div className="mt-4 flex items-center gap-3">
         <button type="button" onClick={() => void save()} className={primaryBtnClass}>
-          Save
+          {t("save")}
         </button>
         <SavedFlash show={saved} />
       </div>
@@ -632,14 +646,14 @@ function FeesSection({
 
 // ---------------------------------------------------------------------------
 
-const TEMPLATE_LABELS: { key: keyof MessageTemplates; label: string }[] = [
-  { key: "feeReminder", label: "Fee reminder" },
-  { key: "absent", label: "Absent notice" },
-  { key: "receipt", label: "Payment receipt" },
-  { key: "marks", label: "Test result" },
-  { key: "diary", label: "Diary note" },
-  { key: "birthday", label: "Birthday wish" },
-  { key: "attendanceReport", label: "Attendance report" },
+const TEMPLATE_LABELS: { key: keyof MessageTemplates; label: TKey }[] = [
+  { key: "feeReminder", label: "tuStgTplFeeReminder" },
+  { key: "absent", label: "tuStgTplAbsent" },
+  { key: "receipt", label: "tuStgTplReceipt" },
+  { key: "marks", label: "tuStgTplMarks" },
+  { key: "diary", label: "tuStgTplDiary" },
+  { key: "birthday", label: "tuStgTplBirthday" },
+  { key: "attendanceReport", label: "tuRpAttendanceReport" },
 ];
 
 function TemplatesSection({
@@ -649,6 +663,7 @@ function TemplatesSection({
   settings: TuitionSettings;
   onSave: (updates: Partial<TuitionSettings>) => Promise<void>;
 }) {
+  const { t, lang } = useI18n();
   const [templates, setTemplates] = useState<MessageTemplates>(settings.templates);
   const [saved, setSaved] = useState(false);
 
@@ -660,8 +675,8 @@ function TemplatesSection({
 
   return (
     <Section
-      title="Message templates"
-      description="What gets typed into WhatsApp. Edit the wording — write them in Hindi or your local language if that is what parents read."
+      title={t("tuStgTemplatesTitle")}
+      description={t("tuStgTemplatesBlurb")}
     >
       <div className="space-y-4">
         {TEMPLATE_LABELS.map(({ key, label }) => (
@@ -680,10 +695,10 @@ function TemplatesSection({
 
       <details className="mt-3 rounded-xl bg-cream-paper p-3">
         <summary className="cursor-pointer text-sm font-semibold text-ink">
-          Placeholders you can use
+          {t("tuStgPlaceholders")}
         </summary>
         <ul className="mt-2 grid gap-1 sm:grid-cols-2">
-          {MESSAGE_PLACEHOLDERS.map((item) => (
+          {messagePlaceholders(lang).map((item) => (
             <li key={item.token} className="text-xs text-muted">
               <code className="font-semibold text-indigo">{item.token}</code> — {item.meaning}
             </li>
@@ -699,7 +714,7 @@ function TemplatesSection({
             onChange={(event) => void onSave({ showClassAverage: event.target.checked })}
             className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
           />
-          Show the class average on shared test results
+          {t("tuStgShowAverage")}
         </label>
         <label className="flex items-center gap-2 text-sm text-muted">
           <input
@@ -708,20 +723,20 @@ function TemplatesSection({
             onChange={(event) => void onSave({ showRank: event.target.checked })}
             className="h-4 w-4 rounded border-muted-line/40 text-indigo focus:ring-indigo"
           />
-          Show the student&apos;s rank on shared test results
+          {t("tuStgShowRank")}
         </label>
       </div>
 
       <div className="mt-4 flex items-center gap-3">
         <button type="button" onClick={() => void save()} className={primaryBtnClass}>
-          Save templates
+          {t("tuStgSaveTemplates")}
         </button>
         <button
           type="button"
-          onClick={() => setTemplates({ ...DEFAULT_TEMPLATES })}
+          onClick={() => setTemplates(defaultTemplates(lang))}
           className={secondaryBtnClass}
         >
-          Reset to default
+          {t("tuStgResetDefault")}
         </button>
         <SavedFlash show={saved} />
       </div>
@@ -740,16 +755,17 @@ function HolidaysSection({
   onAdd: (date: string, name: string) => Promise<void>;
   onRemove: (date: string) => Promise<void>;
 }) {
+  const { t, lang } = useI18n();
   const [date, setDate] = useState(todayIso());
   const [name, setName] = useState("");
 
   return (
     <Section
-      title="Holidays"
-      description="Days you are not taking class. The attendance screen warns you instead of leaving a false absence."
+      title={t("tuAtHoliday")}
+      description={t("tuStgHolidaysBlurb")}
     >
       <div className="flex flex-wrap items-end gap-3">
-        <Field label="Date">
+        <Field label={t("date")}>
           <input
             type="date"
             value={date}
@@ -757,19 +773,19 @@ function HolidaysSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Reason">
+        <Field label={t("dgReason")}>
           <input
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="e.g. Diwali"
+            placeholder={t("tuStgHolidayPh")}
             className={inputClass}
           />
         </Field>
         <button
           type="button"
           onClick={() => {
-            if (date) void onAdd(date, name.trim() || "Holiday");
+            if (date) void onAdd(date, name.trim() || t("tuAtHoliday"));
             setName("");
           }}
           className={`${primaryBtnClass} h-[38px]`}
@@ -786,13 +802,13 @@ function HolidaysSection({
               key={holiday.id}
               className="flex items-center gap-2 rounded-full bg-cream-paper px-3 py-1.5 text-xs text-ink"
             >
-              <span className="font-semibold">{formatDate(holiday.date)}</span>
+              <span className="font-semibold">{formatDate(holiday.date, lang)}</span>
               <span className="text-muted">{holiday.name}</span>
               <button
                 type="button"
                 onClick={() => void onRemove(holiday.id)}
                 className="text-muted transition hover:text-red-600"
-                aria-label={`Remove ${holiday.name}`}
+                aria-label={fill(t("appRemoveNamed"), { name: holiday.name })}
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </button>
@@ -821,6 +837,7 @@ function SheetSyncSection({
   onSyncNow: () => Promise<void>;
   onResync: () => Promise<void>;
 }) {
+  const { t, lang } = useI18n();
   const [url, setUrl] = useState(settings.sheetSyncUrl);
   const [error, setError] = useState("");
   const [connecting, setConnecting] = useState(false);
@@ -833,7 +850,7 @@ function SheetSyncSection({
     try {
       await onConnect(url);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Could not connect.");
+      setError(caught instanceof Error ? caught.message : t("appSheetCouldNotConnect"));
     } finally {
       setConnecting(false);
     }
@@ -851,8 +868,8 @@ function SheetSyncSection({
 
   return (
     <Section
-      title="Google Sheet sync"
-      description="Push a copy of your students, attendance, fees and marks into your own Google Sheet. It is your backup and your report — the app keeps working offline either way."
+      title={t("tuStgSheetSync")}
+      description={t("tuStgSheetBlurb")}
     >
       <ol className="space-y-2 text-sm text-muted">
         <li>
@@ -869,7 +886,7 @@ function SheetSyncSection({
       <div className="mt-3 flex flex-wrap gap-2">
         <button type="button" onClick={() => void copyScript()} className={secondaryBtnClass}>
           <Copy className="h-4 w-4" />
-          {copied ? "Script copied" : "Copy the script"}
+          {copied ? t("tuStgScriptCopied") : t("clStCopyScript")}
         </button>
         <a
           href="https://sheets.new"
@@ -878,12 +895,12 @@ function SheetSyncSection({
           className={secondaryBtnClass}
         >
           <ExternalLink className="h-4 w-4" />
-          New Google Sheet
+          {t("tuStgNewSheet")}
         </a>
       </div>
 
       <div className="mt-4">
-        <Field label="Web app URL">
+        <Field label={t("tuStgWebAppUrl")}>
           <input
             type="url"
             value={url}
@@ -908,7 +925,11 @@ function SheetSyncSection({
           className={primaryBtnClass}
         >
           <Sheet className="h-4 w-4" />
-          {connecting ? "Connecting…" : connected ? "Reconnect" : "Connect"}
+          {connecting
+            ? t("clStConnecting")
+            : connected
+              ? t("tuStgReconnect")
+              : t("clStConnect")}
         </button>
         {connected && (
           <>
@@ -919,13 +940,13 @@ function SheetSyncSection({
               className={secondaryBtnClass}
             >
               <RefreshCw className={`h-4 w-4 ${sheetSync.syncing ? "animate-spin" : ""}`} />
-              Sync now
+              {t("tuStgSyncNow")}
             </button>
             <button type="button" onClick={() => void onResync()} className={secondaryBtnClass}>
-              Re-send everything
+              {t("tuStgResendAll")}
             </button>
             <button type="button" onClick={() => void onDisconnect()} className={secondaryBtnClass}>
-              Disconnect
+              {t("clStDisconnect")}
             </button>
           </>
         )}
@@ -936,15 +957,19 @@ function SheetSyncSection({
           {sheetSync.lastError
             ? `Last sync failed: ${sheetSync.lastError}`
             : sheetSync.lastSyncAt
-              ? `Last synced ${new Date(sheetSync.lastSyncAt).toLocaleString()}`
-              : "Not synced yet."}
-          {sheetSync.dirtyCount > 0 ? ` · ${sheetSync.dirtyCount} change(s) waiting` : ""}
+              ? fill(t("tuStgLastSynced"), {
+                  when: new Date(sheetSync.lastSyncAt).toLocaleString(intlLocaleFor(lang)),
+                })
+              : t("clStNotSyncedYet")}
+          {sheetSync.dirtyCount > 0
+            ? fill(t("tuStgChangesWaiting"), { count: sheetSync.dirtyCount })
+            : ""}
         </p>
       )}
 
       <details className="mt-4 rounded-xl bg-cream-paper p-3">
         <summary className="cursor-pointer text-sm font-semibold text-ink">
-          Show the script
+          {t("tuStgShowScript")}
         </summary>
         <pre className="mt-2 max-h-64 overflow-auto rounded-lg bg-white p-3 text-[11px] leading-relaxed text-muted">
           {APPS_SCRIPT_TEMPLATE}
@@ -967,6 +992,7 @@ function BackupSection({
   onRestore: (backup: TuitionBackup) => Promise<void>;
   counts: { students: number; batches: number };
 }) {
+  const { t, lang } = useI18n();
   const fileRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");
   const [pending, setPending] = useState<TuitionBackup | null>(null);
@@ -983,8 +1009,8 @@ function BackupSection({
 
   return (
     <Section
-      title="Backup & restore"
-      description="Everything lives in this browser. Take a backup before changing devices or clearing browser data."
+      title={t("tuStgBackupRestore")}
+      description={t("tuStgBackupBlurb")}
     >
       <p className="text-sm text-muted">
         {counts.students} student{counts.students === 1 ? "" : "s"} · {counts.batches} batch
@@ -996,11 +1022,11 @@ function BackupSection({
       <div className="mt-4 flex flex-wrap gap-2">
         <button type="button" onClick={() => void onExport()} className={primaryBtnClass}>
           <Download className="h-4 w-4" />
-          Download backup
+          {t("tuStgDownloadBackup")}
         </button>
         <button type="button" onClick={() => fileRef.current?.click()} className={secondaryBtnClass}>
           <Upload className="h-4 w-4" />
-          Restore from file
+          {t("tuStgRestoreFromFile")}
         </button>
         <input
           ref={fileRef}
@@ -1022,9 +1048,9 @@ function BackupSection({
 
       <ConfirmDialog
         open={Boolean(pending)}
-        title="Restore this backup?"
-        message="Your current students, attendance, fees and marks will be replaced by the ones in this file. Other Setu tools on this device are not touched."
-        confirmLabel="Restore"
+        title={t("tuStgRestoreQ")}
+        message={t("tuStgRestoreBody")}
+        confirmLabel={t("clWelRestore")}
         onCancel={() => setPending(null)}
         onConfirm={() => {
           if (pending) void onRestore(pending);
@@ -1046,6 +1072,7 @@ function PinSection({
   onSave: (updates: Partial<TuitionSettings>) => Promise<void>;
   onLockNow?: () => void;
 }) {
+  const { t, lang } = useI18n();
   const hasPin = Boolean(settings.pinHash);
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
@@ -1063,16 +1090,16 @@ function PinSection({
     if (hasPin) {
       const ok = await verifyPin(currentPin, settings.pinSalt ?? "", settings.pinHash ?? "");
       if (!ok) {
-        setError("Current PIN is incorrect.");
+        setError(t("tuStgPinWrong"));
         return;
       }
     }
     if (!isValidPinFormat(pin)) {
-      setError(`PIN must be ${PIN_MIN_LENGTH}–${PIN_MAX_LENGTH} digits.`);
+      setError(fill(t("appPinLengthError"), { min: PIN_MIN_LENGTH, max: PIN_MAX_LENGTH }));
       return;
     }
     if (pin !== confirmPin) {
-      setError("The two PINs don't match.");
+      setError(t("tuStgPinMismatch"));
       return;
     }
     const salt = generateSalt();
@@ -1087,7 +1114,7 @@ function PinSection({
     setError("");
     const ok = await verifyPin(currentPin, settings.pinSalt ?? "", settings.pinHash ?? "");
     if (!ok) {
-      setError("Enter your current PIN to remove it.");
+      setError(t("tuStgPinNeeded"));
       return;
     }
     await onSave({ pinHash: "", pinSalt: "", autoLockMinutes: 0 });
@@ -1097,8 +1124,8 @@ function PinSection({
 
   return (
     <Section
-      title="Screen lock"
-      description="You are storing parents' phone numbers and fee records. A PIN keeps them off a shared or borrowed phone."
+      title={t("appLockTitle")}
+      description={t("tuStgLockBlurb")}
     >
       <div className="flex flex-wrap items-center gap-3">
         <span
@@ -1107,11 +1134,11 @@ function PinSection({
           }`}
         >
           {hasPin ? <Lock className="h-3.5 w-3.5" /> : <Unlock className="h-3.5 w-3.5" />}
-          {hasPin ? "PIN is set" : "No PIN set"}
+          {t(hasPin ? "tuStgPinIsSet" : "tuStgNoPinSet")}
         </span>
         {hasPin && onLockNow && (
           <button type="button" onClick={onLockNow} className={secondaryBtnClass}>
-            Lock now
+            {t("clStLockNow")}
           </button>
         )}
         <SavedFlash show={saved} />
@@ -1119,7 +1146,7 @@ function PinSection({
 
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
         {hasPin && (
-          <Field label="Current PIN">
+          <Field label={t("clStCurrentPin")}>
             <input
               type="password"
               inputMode="numeric"
@@ -1130,7 +1157,10 @@ function PinSection({
             />
           </Field>
         )}
-        <Field label={hasPin ? "New PIN" : "PIN"} hint={`${PIN_MIN_LENGTH}–${PIN_MAX_LENGTH} digits`}>
+        <Field
+          label={t(hasPin ? "clStNewPin" : "tuStgPin")}
+          hint={fill(t("tuStgPinDigits"), { min: PIN_MIN_LENGTH, max: PIN_MAX_LENGTH })}
+        >
           <input
             type="password"
             inputMode="numeric"
@@ -1140,7 +1170,7 @@ function PinSection({
             className={inputClass}
           />
         </Field>
-        <Field label="Confirm PIN">
+        <Field label={t("clStConfirmPin")}>
           <input
             type="password"
             inputMode="numeric"
@@ -1154,7 +1184,7 @@ function PinSection({
 
       {hasPin && (
         <div className="mt-4">
-          <Field label="Auto-lock after" hint="0 = never">
+          <Field label={t("clStAutoLockAfter")} hint={t("tuStgNeverLocks")}>
             <select
               value={settings.autoLockMinutes ?? 0}
               onChange={(event) => void onSave({ autoLockMinutes: Number(event.target.value) })}
@@ -1178,11 +1208,11 @@ function PinSection({
 
       <div className="mt-4 flex flex-wrap gap-2">
         <button type="button" onClick={() => void savePin()} className={primaryBtnClass}>
-          {hasPin ? "Change PIN" : "Set PIN"}
+          {t(hasPin ? "tuStgChangePin" : "appSetPin")}
         </button>
         {hasPin && (
           <button type="button" onClick={() => void removePin()} className={dangerBtnClass}>
-            Remove PIN
+            {t("tuStgRemovePin")}
           </button>
         )}
       </div>
@@ -1193,21 +1223,22 @@ function PinSection({
 // ---------------------------------------------------------------------------
 
 function DangerSection({ onReset }: { onReset: () => Promise<void> }) {
+  const { t, lang } = useI18n();
   const [confirm, setConfirm] = useState(false);
   return (
     <Section
-      title="Reset"
-      description="Deletes every student, attendance mark, fee record, test and note from this browser. Your other Setu tools are not touched."
+      title={t("resetLabel")}
+      description={t("tuStgResetBlurb")}
     >
       <button type="button" onClick={() => setConfirm(true)} className={dangerBtnClass}>
         <Trash2 className="h-4 w-4" />
-        Delete all tuition data
+        {t("tuStgDeleteAll")}
       </button>
       <ConfirmDialog
         open={confirm}
-        title="Delete everything?"
-        message="This cannot be undone. Download a backup first if you might need this data."
-        confirmLabel="Delete everything"
+        title={t("tuStgDeleteAllQ")}
+        message={t("tuStgDeleteAllBody")}
+        confirmLabel={t("appDeleteEverything")}
         onCancel={() => setConfirm(false)}
         onConfirm={() => {
           void onReset();

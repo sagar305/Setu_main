@@ -3,6 +3,8 @@
 // Tests: create a test for a batch, enter the whole batch's marks in one pass,
 // then send each parent their own child's result.
 
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { ClipboardList, Download, MessageCircle, Plus, Share2, Trash2 } from "lucide-react";
 import { useTuition, type MarkEntry } from "@/lib/tuition/store";
@@ -25,6 +27,7 @@ import { marksDoc, shareUrlFor } from "./share";
 import { SendQueue } from "./SendQueue";
 
 export function TestsScreen() {
+  const { t, lang } = useI18n();
   const {
     tests,
     marks,
@@ -106,7 +109,7 @@ export function TestsScreen() {
           name: student.name,
           phone: student.parentPhone,
           message: fillTemplate(settings.templates.marks, {
-            parent: student.parentName || "Sir/Ma'am",
+            parent: student.parentName || t("appSirMaam"),
             student: student.name,
             test: test.name,
             subject: test.subject,
@@ -114,7 +117,7 @@ export function TestsScreen() {
             max: test.maxMarks,
             percent: mark.marks === null ? "—" : percentOf(mark.marks, test.maxMarks),
             average: stats.average,
-            date: formatDate(test.date),
+            date: formatDate(test.date, lang),
             link: shareUrlFor(doc),
             teacher: business?.name ?? "",
           }),
@@ -132,8 +135,8 @@ export function TestsScreen() {
     return (
       <EmptyState
         icon={<ClipboardList className="h-6 w-6" />}
-        title="Create a batch first"
-        message="Tests belong to a batch, so the whole class's marks can be entered together."
+        title={t("tuAtNoBatchTitle")}
+        message={t("tuTsNoBatchBody")}
       />
     );
   }
@@ -144,7 +147,7 @@ export function TestsScreen() {
         <h3 className="text-sm font-bold text-ink">Tests</h3>
         <button type="button" onClick={() => setFormOpen(true)} className={primaryBtnClass}>
           <Plus className="h-4 w-4" />
-          New test
+          {t("tuTsNewTest")}
         </button>
       </div>
 
@@ -152,12 +155,12 @@ export function TestsScreen() {
         <div className="mt-4">
           <EmptyState
             icon={<ClipboardList className="h-6 w-6" />}
-            title="No tests yet"
-            message="Create a test, enter the batch's marks in one go, then send every parent their child's result."
+            title={t("tuTsNoTests")}
+            message={t("tuTsNoTestsBody")}
             action={
               <button type="button" onClick={() => setFormOpen(true)} className={primaryBtnClass}>
                 <Plus className="h-4 w-4" />
-                New test
+                {t("tuTsNewTest")}
               </button>
             }
           />
@@ -181,7 +184,7 @@ export function TestsScreen() {
                 <span
                   className={`text-xs ${selectedId === item.id ? "text-white/70" : "text-muted"}`}
                 >
-                  {formatDate(item.date)}
+                  {formatDate(item.date, lang)}
                 </span>
               </button>
             ))}
@@ -193,7 +196,12 @@ export function TestsScreen() {
                 <div>
                   <h4 className="text-base font-bold text-ink">{test.name}</h4>
                   <p className="text-xs text-muted">
-                    {[batch?.name, test.subject, `Max ${test.maxMarks}`, formatDate(test.date)]
+                    {[
+                      batch?.name,
+                      test.subject,
+                      fill(t("tuTsMaxN"), { n: test.maxMarks }),
+                      formatDate(test.date, lang),
+                    ]
                       .filter(Boolean)
                       .join(" · ")}
                   </p>
@@ -215,13 +223,13 @@ export function TestsScreen() {
                     className={secondaryBtnClass}
                   >
                     <MessageCircle className="h-4 w-4" />
-                    Send results
+                    {t("tuTsSendResults")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setConfirmDelete(test)}
                     className={`${secondaryBtnClass} px-3`}
-                    aria-label="Delete this test"
+                    aria-label={t("tuTsDeleteThisTest")}
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -237,7 +245,7 @@ export function TestsScreen() {
 
               {roll.length === 0 ? (
                 <p className="mt-4 text-sm text-muted">
-                  No students in this batch yet.
+                  {t("tuTsNoStudentsYet")}
                 </p>
               ) : (
                 <>
@@ -276,9 +284,9 @@ export function TestsScreen() {
                                 }));
                                 setSaved(false);
                               }}
-                              placeholder="Absent"
+                              placeholder={t("tuAtAbsent")}
                               className={`${inputClass} w-24 text-center`}
-                              aria-label={`Marks for ${student.name}`}
+                              aria-label={fill(t("tuTsMarksFor"), { name: student.name })}
                             />
                             <span className="text-xs text-muted">/ {test.maxMarks}</span>
                             <input
@@ -296,9 +304,9 @@ export function TestsScreen() {
                                 }));
                                 setSaved(false);
                               }}
-                              placeholder="Remark"
+                              placeholder={t("tuTsRemark")}
                               className={`${inputClass} flex-1 sm:w-40 sm:flex-none`}
-                              aria-label={`Remark for ${student.name}`}
+                              aria-label={fill(t("tuTsRemarkFor"), { name: student.name })}
                             />
                             {mark && (
                               <button
@@ -320,7 +328,7 @@ export function TestsScreen() {
                                   )
                                 }
                                 className={`${secondaryBtnClass} px-3 py-1.5`}
-                                aria-label={`Share ${student.name}'s result`}
+                                aria-label={fill(t("tuTsShareResultFor"), { name: student.name })}
                               >
                                 <Share2 className="h-4 w-4" />
                               </button>
@@ -333,7 +341,7 @@ export function TestsScreen() {
 
                   <div className="mt-4 flex justify-end">
                     <button type="button" onClick={() => void handleSave()} className={primaryBtnClass}>
-                      {saved ? "Saved" : "Save marks"}
+                      {saved ? t("saved") : t("tuTsSaveMarks")}
                     </button>
                   </div>
                 </>
@@ -349,13 +357,13 @@ export function TestsScreen() {
         open={Boolean(shareDoc)}
         doc={shareDoc}
         onClose={() => setShareDoc(null)}
-        recipientLabel="parent"
-        title="Share this result"
+        recipientLabel={t("tuRpParent")}
+        title={t("tuTsShareResult")}
       />
 
       <SendQueue
         open={Boolean(queue)}
-        title="Send results to parents"
+        title={t("tuTsSendToParents")}
         messages={queue ?? []}
         onClose={() => setQueue(null)}
         onSent={(ids) => {
@@ -365,9 +373,11 @@ export function TestsScreen() {
 
       <ConfirmDialog
         open={Boolean(confirmDelete)}
-        title={`Delete ${confirmDelete?.name ?? "this test"}?`}
-        message="The marks entered for this test will be deleted too."
-        confirmLabel="Delete test"
+        title={fill(t("tuStgDeleteNamedQ"), {
+          name: confirmDelete?.name ?? t("tuTsThisTest"),
+        })}
+        message={t("tuTsDeleteBody")}
+        confirmLabel={t("tuTsDeleteTest")}
         onCancel={() => setConfirmDelete(null)}
         onConfirm={() => {
           if (confirmDelete) {
@@ -390,6 +400,7 @@ function TestForm({
   onClose: () => void;
   onCreate: (input: Omit<TestRecord, "id" | "createdAt">) => Promise<TestRecord>;
 }) {
+  const { t } = useI18n();
   const { batches } = useTuition();
   const activeBatches = batches.filter((b) => b.active);
   const [name, setName] = useState("");
@@ -424,29 +435,29 @@ function TestForm({
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="New test">
+    <Modal open={open} onClose={onClose} title={t("tuTsNewTest")}>
       <form onSubmit={submit} className="space-y-4">
-        <Field label="Test name" required>
+        <Field label={t("tuTsTestName")} required>
           <input
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="e.g. Unit Test 2"
+            placeholder={t("tuTsTestNamePh")}
             className={inputClass}
             autoFocus
           />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Subject">
+          <Field label={t("tuPhSubject")}>
             <input
               type="text"
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
-              placeholder="e.g. Mathematics"
+              placeholder={t("tuTsSubjectPh")}
               className={inputClass}
             />
           </Field>
-          <Field label="Batch" required>
+          <Field label={t("tuTsBatch")} required>
             <select
               value={batchId}
               onChange={(event) => setBatchId(event.target.value)}
@@ -459,7 +470,7 @@ function TestForm({
               ))}
             </select>
           </Field>
-          <Field label="Date">
+          <Field label={t("date")}>
             <input
               type="date"
               value={date}
@@ -467,7 +478,7 @@ function TestForm({
               className={inputClass}
             />
           </Field>
-          <Field label="Maximum marks">
+          <Field label={t("tuTsMaxMarks")}>
             <input
               type="number"
               min={1}
@@ -479,10 +490,10 @@ function TestForm({
         </div>
         <div className="flex justify-end gap-3">
           <button type="button" onClick={onClose} className={secondaryBtnClass}>
-            Cancel
+            {t("cancel")}
           </button>
           <button type="submit" disabled={saving || !batchId} className={primaryBtnClass}>
-            {saving ? "Creating…" : "Create test"}
+            {saving ? t("tuTsCreating") : t("tuTsCreateTest")}
           </button>
         </div>
       </form>

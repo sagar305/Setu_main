@@ -5,14 +5,17 @@ import { Lock, Sheet, Stethoscope, Upload, WifiOff } from "lucide-react";
 import { useClinic } from "@/lib/clinic/store";
 import { parseBackupFile } from "@/lib/clinic/backup";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "@/components/tools/FreePos/ui";
+import { useI18n } from "@/lib/i18n";
+import { translate, type TKey } from "@/lib/i18n/translate";
 
-const POINTS = [
-  { icon: WifiOff, text: "Works offline — see patients even when the internet is down" },
-  { icon: Lock, text: "No signup. Patient records never leave this device" },
-  { icon: Sheet, text: "Optional Google Sheet sync as your backup" },
+const POINTS: { icon: typeof WifiOff; key: TKey }[] = [
+  { icon: WifiOff, key: "clWelPointOffline" },
+  { icon: Lock, key: "clWelPointPrivate" },
+  { icon: Sheet, key: "clWelPointSheet" },
 ];
 
 export function WelcomeScreen() {
+  const { t, lang } = useI18n();
   const { startSetup, applyRestoredBackup, restoreFromSheet } = useClinic();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState("");
@@ -28,7 +31,7 @@ export function WelcomeScreen() {
       await restoreFromSheet(sheetUrl);
     } catch (error) {
       setImportError(
-        error instanceof Error ? error.message : "Could not restore from this sheet."
+        error instanceof Error ? error.message : t("clWelSheetError")
       );
     } finally {
       setSheetRestoring(false);
@@ -41,12 +44,12 @@ export function WelcomeScreen() {
     try {
       const result = parseBackupFile(await file.text());
       if (!result.ok) {
-        setImportError(result.error);
+        setImportError(translate(lang, result.error));
         return;
       }
       await applyRestoredBackup(result.backup);
     } catch {
-      setImportError("Could not restore this backup. The file may be corrupted.");
+      setImportError(t("clWelBackupError"));
     } finally {
       setImporting(false);
     }
@@ -58,30 +61,27 @@ export function WelcomeScreen() {
         <Stethoscope className="h-8 w-8" />
       </span>
       <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-        Your clinic, without the paper
+        {t("clWelTitle")}
       </h2>
-      <p className="mx-auto mt-3 max-w-md text-muted">
-        Patient records, a prescription pad that prints properly, appointments and billing — set
-        up in under a minute, and it keeps working without internet.
-      </p>
+      <p className="mx-auto mt-3 max-w-md text-muted">{t("clWelBlurb")}</p>
 
       <ul className="mx-auto mt-8 grid max-w-md gap-3 text-left">
         {POINTS.map((point) => (
           <li
-            key={point.text}
+            key={point.key}
             className="flex items-center gap-3 rounded-xl border border-muted-line/30 bg-white px-4 py-3"
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cream text-indigo">
               <point.icon className="h-4 w-4" />
             </span>
-            <span className="text-sm text-ink">{point.text}</span>
+            <span className="text-sm text-ink">{t(point.key)}</span>
           </li>
         ))}
       </ul>
 
       <div className="mt-8 flex flex-col items-center gap-3">
         <button type="button" onClick={startSetup} className={primaryBtnClass}>
-          Set up my clinic
+          {t("clWelSetUp")}
         </button>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
@@ -92,7 +92,7 @@ export function WelcomeScreen() {
             className={secondaryBtnClass}
           >
             <Upload className="h-4 w-4" />
-            {importing ? "Restoring…" : "Restore a backup"}
+            {importing ? t("clWelRestoring") : t("clWelRestoreBackup")}
           </button>
           <button
             type="button"
@@ -100,7 +100,7 @@ export function WelcomeScreen() {
             className={secondaryBtnClass}
           >
             <Sheet className="h-4 w-4" />
-            Restore from Google Sheet
+            {t("clWelRestoreSheet")}
           </button>
         </div>
 
@@ -119,7 +119,7 @@ export function WelcomeScreen() {
               disabled={sheetRestoring || !sheetUrl.trim()}
               className={primaryBtnClass}
             >
-              {sheetRestoring ? "Restoring…" : "Restore"}
+              {sheetRestoring ? t("clWelRestoring") : t("clWelRestore")}
             </button>
           </div>
         )}

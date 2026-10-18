@@ -7,6 +7,7 @@
 import { readLocal, writeLocal, localKey } from "@/lib/toolkit/storage";
 import type {
   AnalyzerSettings,
+  AuditCode,
   AuditEntry,
   BankStatement,
   Category,
@@ -135,11 +136,14 @@ export function readAudit(): AuditEntry[] {
  * Append an audit entry. Callers pass a short action plus an optional detail —
  * detail must never carry an account number, a password or a full narration.
  */
-export function appendAudit(action: string, detail?: string): void {
+export function appendAudit(code: AuditCode, action: string, detail?: string): void {
   const entries = readAudit();
   entries.unshift({
     id: `audit-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
     at: new Date().toISOString(),
+    code,
+    // The English prose is written too, so an entry still reads if a later
+    // release ever drops a code, and so an old log and a new one look alike.
     action,
     detail: detail?.slice(0, 120),
   });

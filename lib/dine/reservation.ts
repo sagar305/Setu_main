@@ -12,6 +12,9 @@
 // counter types ten digits. A confirmation that opens an empty chat looks like
 // it worked right up until the guest never hears from you.
 
+import type { LanguageCode } from "@/lib/i18n/config";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill, translate } from "@/lib/i18n/translate";
 import { formatPaise } from "./money";
 import {
   ACTIVE_RESERVATION_STATUSES,
@@ -168,10 +171,10 @@ export function whatsappUrl(phone: string, message: string, dialCode: string): s
 }
 
 /** How a booking's time reads to a guest: "Sat 14 Mar, 7:30 pm". */
-export function formatSlot(startsAt: string): string {
+export function formatSlot(startsAt: string, lang: LanguageCode): string {
   const date = new Date(startsAt);
   if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleString(undefined, {
+  return date.toLocaleString(intlLocaleFor(lang), {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -180,10 +183,19 @@ export function formatSlot(startsAt: string): string {
   });
 }
 
+/** "1 guest" / "4 guests", pluralised the way the reader's language does. */
+function guestCount(partySize: number, lang: LanguageCode): string {
+  return fill(translate(lang, partySize === 1 ? "dnRsGuest1" : "dnRsGuestN"), {
+    n: partySize,
+  });
+}
+
 type MessageInput = {
   businessName: string;
   reservation: DineReservation;
   currency: string;
+  /** The guest reads this, so it is written in the restaurant's language. */
+  lang: LanguageCode;
   /** Included on a confirmation so a guest can find the place. */
   address?: string;
   phone?: string;
@@ -201,15 +213,19 @@ export function confirmationMessage({
   businessName,
   reservation,
   currency,
+  lang,
   address,
   phone,
   upiId,
 }: MessageInput): string {
   const lines = [
-    `Namaste ${reservation.guestName || "ji"}, your table at ${businessName} is booked.`,
+    fill(translate(lang, "dnRsMsgBooked"), {
+      guest: reservation.guestName || translate(lang, "dnRsGuestJi"),
+      business: businessName,
+    }),
     "",
-    `📅 ${formatSlot(reservation.startsAt)}`,
-    `👥 ${reservation.partySize} ${reservation.partySize === 1 ? "guest" : "guests"}`,
+    `📅 ${formatSlot(reservation.startsAt, lang)}`,
+    `👥 ${guestCount(reservation.partySize, lang)}`,
   ];
   if (reservation.tableName) {
     lines.push(`🪑 ${reservation.tableName}${reservation.areaName ? ` · ${reservation.areaName}` : ""}`);
@@ -219,31 +235,38 @@ export function confirmationMessage({
   if (reservation.depositPaid > 0) {
     lines.push(
       "",
-      `Advance received: ${formatPaise(reservation.depositPaid, currency)} — it comes off your final bill.`
+      fill(translate(lang, "dnRsMsgAdvanceGot"), {
+        amount: formatPaise(reservation.depositPaid, currency),
+      })
     );
   }
   const due = depositDue(reservation);
   if (due > 0) {
-    lines.push("", `Advance to confirm: ${formatPaise(due, currency)}.`);
-    if (upiId) lines.push(`Pay by UPI to ${upiId} and we will hold the table.`);
+    lines.push("", fill(translate(lang, "dnRsMsgAdvanceDue"), { amount: formatPaise(due, currency) }));
+    if (upiId) lines.push(fill(translate(lang, "dnRsMsgPayUpi"), { upi: upiId }));
   }
 
-  if (reservation.note) lines.push("", `Note: ${reservation.note}`);
+  if (reservation.note) {
+    lines.push("", fill(translate(lang, "dnRsMsgNote"), { note: reservation.note }));
+  }
   if (address) lines.push("", `📍 ${address}`);
   if (phone) lines.push(`📞 ${phone}`);
-  lines.push("", "See you soon!");
+  lines.push("", translate(lang, "dnRsMsgSeeYouSoon"));
   return lines.join("\n");
 }
 
 /** A nudge on the day. Short on purpose — it is read at a glance. */
-export function reminderMessage({ businessName, reservation }: MessageInput): string {
+export function reminderMessage({ businessName, reservation, lang }: MessageInput): string {
   return [
-    `Namaste ${reservation.guestName || "ji"}, just a reminder about your table at ${businessName}.`,
+    fill(translate(lang, "dnRsMsgReminder"), {
+      guest: reservation.guestName || translate(lang, "dnRsGuestJi"),
+      business: businessName,
+    }),
     "",
-    `📅 ${formatSlot(reservation.startsAt)}`,
-    `👥 ${reservation.partySize} ${reservation.partySize === 1 ? "guest" : "guests"}`,
+    `📅 ${formatSlot(reservation.startsAt, lang)}`,
+    `👥 ${guestCount(reservation.partySize, lang)}`,
     "",
-    "Please let us know if your plans change. See you soon!",
+    translate(lang, "dnRsMsgPlansChange"),
   ].join("\n");
 }
 
@@ -257,21 +280,30 @@ export function cancellationMessage({
   businessName,
   reservation,
   currency,
+  lang,
 }: MessageInput): string {
   const lines = [
-    `Namaste ${reservation.guestName || "ji"}, your booking at ${businessName} for ${formatSlot(
-      reservation.startsAt
-    )} has been cancelled.`,
+    fill(translate(lang, "dnRsMsgCancelled"), {
+      guest: reservation.guestName || translate(lang, "dnRsGuestJi"),
+      business: businessName,
+      slot: formatSlot(reservation.startsAt, lang),
+    }),
   ];
   if (reservation.cancelReason) lines.push("", reservation.cancelReason);
   if (reservation.depositPaid > 0) {
     lines.push(
       "",
-      reservation.depositOutcome === "refunded"
-        ? `Your advance of ${formatPaise(reservation.depositPaid, currency)} is being refunded.`
-        : `Your advance of ${formatPaise(reservation.depositPaid, currency)} is held against a future visit.`
+      fill(
+        translate(
+          lang,
+          reservation.depositOutcome === "refunded"
+            ? "dnRsMsgAdvanceRefunded"
+            : "dnRsMsgAdvanceHeld"
+        ),
+        { amount: formatPaise(reservation.depositPaid, currency) }
+      )
     );
   }
-  lines.push("", "We hope to see you another time.");
+  lines.push("", translate(lang, "dnRsMsgSeeYouAnother"));
   return lines.join("\n");
 }

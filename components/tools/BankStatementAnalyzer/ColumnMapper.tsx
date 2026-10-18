@@ -4,17 +4,19 @@
 // unsure. The CA always gets the last word on which column is which.
 
 import type { ColumnMapping } from "@/lib/bankStatement/types";
+import { useI18n } from "@/lib/i18n";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { Field, Select } from "@/components/toolkit/ui";
 
-const FIELDS: { key: keyof ColumnMapping; label: string; hint?: string }[] = [
-  { key: "date", label: "Date" },
-  { key: "narration", label: "Narration / description" },
-  { key: "reference", label: "Reference" },
-  { key: "debit", label: "Debit / withdrawal" },
-  { key: "credit", label: "Credit / deposit" },
-  { key: "amount", label: "Single amount column", hint: "Use only when debit and credit share one column" },
-  { key: "direction", label: "Dr/Cr indicator" },
-  { key: "balance", label: "Balance" },
+const FIELDS: { key: keyof ColumnMapping; labelKey: TKey; hintKey?: TKey }[] = [
+  { key: "date", labelKey: "date" },
+  { key: "narration", labelKey: "bsMapNarration" },
+  { key: "reference", labelKey: "stReference" },
+  { key: "debit", labelKey: "bsMapDebit" },
+  { key: "credit", labelKey: "bsMapCredit" },
+  { key: "amount", labelKey: "bsMapSingleAmount", hintKey: "bsMapSingleHint" },
+  { key: "direction", labelKey: "bsMapDirection" },
+  { key: "balance", labelKey: "balance" },
 ];
 
 export function ColumnMapper({
@@ -29,6 +31,7 @@ export function ColumnMapper({
   mapping: ColumnMapping;
   onChange: (mapping: ColumnMapping) => void;
 }) {
+  const { t } = useI18n();
   // Every column that exists anywhere in the file, not just in the header or
   // the first row — a narrow first row must never hide the later columns.
   const columnCount = Math.max(
@@ -50,14 +53,16 @@ export function ColumnMapper({
     const preview = samples.length > 0 ? ` — ${samples.map((s) => `“${s.slice(0, 18)}”`).join(", ")}` : "";
     return {
       value: index,
-      label: header ? `${index + 1}. ${header}` : `Column ${index + 1}${preview}`,
+      label: header
+        ? `${index + 1}. ${header}`
+        : `${fill(t("bsMapColumnN"), { n: index + 1 })}${preview}`,
     };
   });
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {FIELDS.map((field) => (
-        <Field key={field.key} label={field.label}>
+        <Field key={field.key} label={t(field.labelKey)}>
           <Select
             value={mapping[field.key] ?? ""}
             onChange={(event) => {
@@ -68,14 +73,16 @@ export function ColumnMapper({
               onChange(next);
             }}
           >
-            <option value="">Not in this file</option>
+            <option value="">{t("bsMapNotInFile")}</option>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </Select>
-          {field.hint ? <span className="mt-1 block text-xs text-muted">{field.hint}</span> : null}
+          {field.hintKey ? (
+            <span className="mt-1 block text-xs text-muted">{t(field.hintKey)}</span>
+          ) : null}
         </Field>
       ))}
     </div>

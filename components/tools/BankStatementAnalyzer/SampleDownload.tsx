@@ -8,6 +8,8 @@
 // without touching a client's file.
 
 import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
 import { Download, FileSpreadsheet, FileText, Table2 } from "lucide-react";
 import { SecondaryButton } from "@/components/toolkit/ui";
 import {
@@ -19,6 +21,7 @@ import { DEMO_TOTALS } from "@/lib/bankStatement/demo/sampleStatement";
 
 type Format = "pdf" | "xlsx" | "csv";
 
+// The format names are the file types themselves, so they stay as they are.
 const FORMATS: { key: Format; label: string; icon: typeof FileText; run: () => void }[] = [
   { key: "pdf", label: "PDF", icon: FileText, run: downloadSamplePdf },
   { key: "xlsx", label: "Excel", icon: FileSpreadsheet, run: downloadSampleXlsx },
@@ -26,6 +29,7 @@ const FORMATS: { key: Format; label: string; icon: typeof FileText; run: () => v
 ];
 
 export function SampleDownload({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   const [busy, setBusy] = useState<Format | null>(null);
 
   const download = (format: Format, run: () => void) => {
@@ -49,7 +53,9 @@ export function SampleDownload({ compact = false }: { compact?: boolean }) {
             className="inline-flex items-center gap-2"
           >
             <Icon className="h-4 w-4" aria-hidden="true" />
-            {busy === format.key ? "Building…" : `Sample ${format.label}`}
+            {busy === format.key
+              ? t("bsSampBuilding")
+              : fill(t("bsSampFormat"), { format: format.label })}
           </SecondaryButton>
         );
       })}
@@ -60,7 +66,7 @@ export function SampleDownload({ compact = false }: { compact?: boolean }) {
     return (
       <div className="text-center">
         <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
-          Or download a sample statement and import it
+          {t("bsSampOrDownload")}
         </p>
         {buttons}
       </div>
@@ -71,13 +77,11 @@ export function SampleDownload({ compact = false }: { compact?: boolean }) {
     <div>
       <div className="mb-3 flex items-center justify-center gap-2 text-sm font-semibold text-ink">
         <Download className="h-4 w-4 text-indigo" aria-hidden="true" />
-        Download the sample statement
+        {t("bsSampDownloadTitle")}
       </div>
       {buttons}
       <p className="mx-auto mt-3 max-w-md text-xs text-muted">
-        {DEMO_TOTALS.count} synthetic transactions across a full financial year, generated on your
-        device. Import it like any statement to see exactly how the parser behaves — the PDF is a
-        real multi-page statement layout, not a screenshot.
+        {fill(t("bsSampBlurb"), { n: DEMO_TOTALS.count })}
       </p>
     </div>
   );
