@@ -3,7 +3,7 @@ import { Sora } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import Script from "next/script";
-import { NepalSupportBanner } from "@/components/NepalSupportBanner";
+import { ReviewBanner } from "@/components/ReviewBanner";
 import { Footer } from "@/components/Footer";
 import { SiteFrame } from "@/components/SiteFrame";
 import { getSiteContent } from "@/lib/content";
@@ -95,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <LanguageProvider>
-          <NepalSupportBanner />
+          <ReviewBanner />
           {/* The translated homepages bring their own header and footer, in
               their own language — see app/[lang]/layout.tsx. */}
           <SiteFrame nav={<Nav site={site} />} footer={<Footer site={site} />}>
