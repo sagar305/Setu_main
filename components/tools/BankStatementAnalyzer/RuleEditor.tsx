@@ -26,15 +26,22 @@ import {
   TextInput,
 } from "@/components/toolkit/ui";
 import { conditionValues, countMatches } from "@/lib/bankStatement/classification/rulesEngine";
-import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
+import {
+  GROUP_ORDER,
+  activeCategories,
+  categoryLabel,
+  groupLabel,
+} from "@/lib/bankStatement/classification/categories";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill, type TKey } from "@/lib/i18n/translate";
 import { KeywordInput } from "@/components/tools/BankStatementAnalyzer/KeywordInput";
 
-const FIELD_LABELS: Record<RuleField, string> = {
-  narration: "Narration",
-  reference: "Reference",
-  amount: "Amount",
-  direction: "Debit / credit",
-  date: "Date",
+const FIELD_KEYS: Record<RuleField, TKey> = {
+  narration: "bkNarration",
+  reference: "stReference",
+  amount: "amount",
+  direction: "bsRuDebitCredit",
+  date: "date",
 };
 
 const OPERATORS: Record<RuleField, RuleOperator[]> = {
@@ -45,14 +52,14 @@ const OPERATORS: Record<RuleField, RuleOperator[]> = {
   date: ["between", "greaterThan", "lessThan"],
 };
 
-const OPERATOR_LABELS: Record<RuleOperator, string> = {
-  contains: "contains",
-  startsWith: "starts with",
-  endsWith: "ends with",
-  equals: "is",
-  greaterThan: "is more than",
-  lessThan: "is less than",
-  between: "is between",
+const OPERATOR_KEYS: Record<RuleOperator, TKey> = {
+  contains: "bsOpContains",
+  startsWith: "bsOpStartsWith",
+  endsWith: "bsOpEndsWith",
+  equals: "bsOpEquals",
+  greaterThan: "bsOpGreaterThan",
+  lessThan: "bsOpLessThan",
+  between: "bsOpBetween",
 };
 
 export function RuleEditor({
@@ -68,7 +75,7 @@ export function RuleEditor({
   onSave: (rule: ClassificationRule) => void;
   onCancel: () => void;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const [draft, setDraft] = useState<ClassificationRule>(rule);
 
   const matches = useMemo(
@@ -92,28 +99,40 @@ export function RuleEditor({
   return (
     <Card>
       <h3 className="text-lg font-bold text-ink">
-        {rule.name === draft.name && draft.conditions.length > 0 ? "Rule" : "New rule"}
+        {rule.name === draft.name && draft.conditions.length > 0
+          ? t("bsRuRule")
+          : t("bsRuNewRule")}
       </h3>
-      <p className="mt-1 text-sm text-muted">
-        Rules run before any pattern matching, and the highest priority wins. They stay on this
-        device.
-      </p>
+      <p className="mt-1 text-sm text-muted">{t("bsRuBlurb")}</p>
 
       <div className="mt-4 space-y-4">
-        <Field label="Rule name">
+        <Field label={t("bsRuRuleName")}>
           <TextInput
             value={draft.name}
             onChange={(event) => setDraft({ ...draft, name: event.target.value })}
-            placeholder="e.g. Swiggy → Business Meals"
+            placeholder={t("bsRuNamePlaceholder")}
           />
         </Field>
 
         <div>
-          <span className="mb-1.5 block text-sm font-semibold text-ink">Conditions (all must match)</span>
+          <span className="mb-1.5 block text-sm font-semibold text-ink">
+            {t("bsRuConditions")}
+          </span>
           <p className="mb-3 text-xs text-muted">
-            Give one condition several keywords and <strong>any one of them</strong> satisfies it —
-            so a whole category is one rule, not one rule per merchant. Press Enter or comma to add
-            each keyword.
+            {/* The bold phrase is a placeholder so each language puts it where its
+                own sentence wants it, rather than mid-way through an English one. */}
+            {(() => {
+              const [before, after] = fill(t("bsRuConditionsNote"), {
+                strong: "\u0000",
+              }).split("\u0000");
+              return (
+                <>
+                  {before}
+                  <strong>{t("bsRuAnyOne")}</strong>
+                  {after}
+                </>
+              );
+            })()}
           </p>
           <div className="space-y-3">
             {draft.conditions.map((condition, index) => (
@@ -124,11 +143,11 @@ export function RuleEditor({
                     const field = event.target.value as RuleField;
                     setCondition(index, { field, operator: OPERATORS[field][0] });
                   }}
-                  aria-label="Field"
+                  aria-label={t("bsRuField")}
                 >
-                  {(Object.keys(FIELD_LABELS) as RuleField[]).map((field) => (
+                  {(Object.keys(FIELD_KEYS) as RuleField[]).map((field) => (
                     <option key={field} value={field}>
-                      {FIELD_LABELS[field]}
+                      {t(FIELD_KEYS[field])}
                     </option>
                   ))}
                 </Select>
@@ -138,11 +157,11 @@ export function RuleEditor({
                   onChange={(event) =>
                     setCondition(index, { operator: event.target.value as RuleOperator })
                   }
-                  aria-label="Operator"
+                  aria-label={t("bsRuOperator")}
                 >
                   {OPERATORS[condition.field].map((operator) => (
                     <option key={operator} value={operator}>
-                      {OPERATOR_LABELS[operator]}
+                      {t(OPERATOR_KEYS[operator])}
                     </option>
                   ))}
                 </Select>
@@ -154,10 +173,10 @@ export function RuleEditor({
                       onChange={(event) =>
                         setCondition(index, { value: event.target.value, values: [event.target.value] })
                       }
-                      aria-label="Value"
+                      aria-label={t("bsRuValue")}
                     >
-                      <option value="DEBIT">Debit</option>
-                      <option value="CREDIT">Credit</option>
+                      <option value="DEBIT">{t("bkDebit")}</option>
+                      <option value="CREDIT">{t("bkCredit")}</option>
                     </Select>
                   ) : condition.field === "amount" && condition.operator !== "equals" ? (
                     <NumberInput
@@ -166,7 +185,7 @@ export function RuleEditor({
                         setCondition(index, { value: event.target.value, values: [event.target.value] })
                       }
                       placeholder="0.00"
-                      aria-label="Value"
+                      aria-label={t("bsRuValue")}
                     />
                   ) : condition.field === "date" ? (
                     <TextInput
@@ -175,7 +194,7 @@ export function RuleEditor({
                       onChange={(event) =>
                         setCondition(index, { value: event.target.value, values: [event.target.value] })
                       }
-                      aria-label="Value"
+                      aria-label={t("bsRuValue")}
                     />
                   ) : (
                     // Narration, reference and "amount is" accept a list —
@@ -186,9 +205,11 @@ export function RuleEditor({
                         setCondition(index, { values, value: values[0] ?? "" })
                       }
                       placeholder={
-                        condition.field === "amount" ? "e.g. 199 — Enter to add" : "e.g. SWIGGY — Enter to add"
+                        condition.field === "amount"
+                          ? t("bsRuAmountPlaceholder")
+                          : t("bsRuTextPlaceholder")
                       }
-                      ariaLabel="Keywords, any of which matches"
+                      ariaLabel={t("bsRuKeywordsAria")}
                     />
                   )}
 
@@ -198,14 +219,14 @@ export function RuleEditor({
                         type="date"
                         value={condition.value2 ?? ""}
                         onChange={(event) => setCondition(index, { value2: event.target.value })}
-                        aria-label="Upper bound"
+                        aria-label={t("bsRuUpperBound")}
                       />
                     ) : (
                       <NumberInput
                         value={condition.value2 ?? ""}
                         onChange={(event) => setCondition(index, { value2: event.target.value })}
-                        placeholder="and"
-                        aria-label="Upper bound"
+                        placeholder={t("bsRuAnd")}
+                        aria-label={t("bsRuUpperBound")}
                       />
                     )
                   ) : null}
@@ -222,7 +243,7 @@ export function RuleEditor({
                   disabled={draft.conditions.length === 1}
                   className="rounded-lg px-2 text-sm font-semibold text-red-500 disabled:opacity-40"
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
             ))}
@@ -240,12 +261,12 @@ export function RuleEditor({
               })
             }
           >
-            Add condition
+            {t("bsRuAddCondition")}
           </SecondaryButton>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Then set category">
+          <Field label={t("bsRuThenCategory")}>
             <Select
               value={draft.result.category ?? ""}
               onChange={(event) =>
@@ -255,14 +276,14 @@ export function RuleEditor({
                 })
               }
             >
-              <option value="">Leave unchanged</option>
-              {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
+              <option value="">{t("bsRuLeaveUnchanged")}</option>
+              {GROUP_ORDER.map((group) => (
                 <optgroup key={group} label={groupLabel(group, lang)}>
                   {options
                     .filter((category) => category.group === group)
                     .map((category) => (
                       <option key={category.id} value={category.id}>
-                        {category.name}
+                        {categoryLabel(category, lang)}
                       </option>
                     ))}
                 </optgroup>
@@ -270,7 +291,7 @@ export function RuleEditor({
             </Select>
           </Field>
 
-          <Field label="And mark as">
+          <Field label={t("bsRuAndMarkAs")}>
             <Select
               value={draft.result.classificationType ?? ""}
               onChange={(event) =>
@@ -283,14 +304,14 @@ export function RuleEditor({
                 })
               }
             >
-              <option value="">Leave unchanged</option>
-              <option value="BUSINESS">Business</option>
-              <option value="PERSONAL">Personal</option>
-              <option value="TRANSFER">Transfer</option>
+              <option value="">{t("bsRuLeaveUnchanged")}</option>
+              <option value="BUSINESS">{t("appBusiness")}</option>
+              <option value="PERSONAL">{t("bsTypePersonal")}</option>
+              <option value="TRANSFER">{t("tkCoTransfer")}</option>
             </Select>
           </Field>
 
-          <Field label="Party name">
+          <Field label={t("bsRuPartyName")}>
             <TextInput
               value={draft.result.partyName ?? ""}
               onChange={(event) =>
@@ -299,11 +320,11 @@ export function RuleEditor({
                   result: { ...draft.result, partyName: event.target.value || undefined },
                 })
               }
-              placeholder="e.g. ABC Enterprise"
+              placeholder={t("bsRuPartyPlaceholder")}
             />
           </Field>
 
-          <Field label="GST">
+          <Field label={t("bsCatGst")}>
             <Select
               value={draft.result.gstRelevant ?? "NOT_MARKED"}
               onChange={(event) =>
@@ -313,13 +334,13 @@ export function RuleEditor({
                 })
               }
             >
-              <option value="NOT_MARKED">Not marked</option>
-              <option value="POTENTIAL">Potentially GST relevant</option>
-              <option value="RELEVANT">GST relevant</option>
+              <option value="NOT_MARKED">{t("bsRuNotMarked")}</option>
+              <option value="POTENTIAL">{t("bsRuPotentialGst")}</option>
+              <option value="RELEVANT">{t("bsDashGstRelevant")}</option>
             </Select>
           </Field>
 
-          <Field label="Priority">
+          <Field label={t("bsRuPriority")}>
             <NumberInput
               value={draft.priority}
               onChange={(event) => setDraft({ ...draft, priority: Number(event.target.value) || 0 })}
@@ -328,15 +349,30 @@ export function RuleEditor({
         </div>
 
         <p className="rounded-xl bg-cream-paper/70 px-4 py-3 text-sm text-muted">
-          This rule matches <strong className="text-ink">{matches}</strong> of the{" "}
-          {transactions.length.toLocaleString("en-IN")} transactions loaded.
+          {/* The count is emphasised wherever the sentence puts it, so the
+              placeholder splits the line rather than the English word order. */}
+          {(() => {
+            const [before, after] = fill(t("bsRuMatchCount"), {
+              matches: "\u0000",
+              total: transactions.length.toLocaleString(intlLocaleFor(lang)),
+            }).split("\u0000");
+            return (
+              <>
+                {before}
+                <strong className="text-ink">
+                  {matches.toLocaleString(intlLocaleFor(lang))}
+                </strong>
+                {after}
+              </>
+            );
+          })()}
         </p>
 
         <div className="flex flex-wrap gap-3">
           <PrimaryButton onClick={() => onSave(draft)} disabled={!valid}>
-            Save rule
+            {t("bsRuSaveRule")}
           </PrimaryButton>
-          <SecondaryButton onClick={onCancel}>Cancel</SecondaryButton>
+          <SecondaryButton onClick={onCancel}>{t("cancel")}</SecondaryButton>
         </div>
       </div>
     </Card>

@@ -6,6 +6,9 @@
 // in the existing /tools/bank-reconciliation tool, which we link to rather than
 // duplicate.
 
+import { useI18n } from "@/lib/i18n";
+import { fill, translate, type TKey } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import { Upload } from "lucide-react";
@@ -26,13 +29,13 @@ import { formatDate } from "@/lib/bankStatement/utils/dates";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 
-const STATUS_LABEL: Record<MatchStatus, string> = {
-  MATCHED: "Matched",
-  LIKELY_MATCH: "Likely match",
-  UNMATCHED_BANK: "In bank, not in books",
-  UNMATCHED_BOOK: "In books, not in bank",
-  AMOUNT_MISMATCH: "Amount mismatch",
-  DUPLICATE: "Duplicate",
+const STATUS_KEYS: Record<MatchStatus, TKey> = {
+  MATCHED: "bsRcMatched",
+  LIKELY_MATCH: "bsRcLikely",
+  UNMATCHED_BANK: "bsRcBankOnly",
+  UNMATCHED_BOOK: "bsRcBooksOnly",
+  AMOUNT_MISMATCH: "bsRcAmountMismatch",
+  DUPLICATE: "bsColDuplicate",
 };
 
 const STATUS_STYLE: Record<MatchStatus, string> = {
@@ -45,6 +48,7 @@ const STATUS_STYLE: Record<MatchStatus, string> = {
 };
 
 export function ReconcileStep() {
+  const { lang, t } = useI18n();
   const { activeTransactions, reconciliation, actions, statements, loaded } = useAnalyzer();
   const { code: currency } = usePreferredCurrency();
 
@@ -66,7 +70,7 @@ export function ReconcileStep() {
       setMapping(built.mapping);
       setFileName(file.name);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "That file could not be read.");
+      setError(caught instanceof Error ? caught.message : t("bsRcFileUnreadable"));
     }
   }, []);
 
@@ -141,7 +145,7 @@ export function ReconcileStep() {
           const bank = match.bankTransactionId ? bankById.get(match.bankTransactionId) : undefined;
           const book = match.ledgerEntryId ? bookById.get(match.ledgerEntryId) : undefined;
           return [
-            STATUS_LABEL[match.status],
+            translate("en", STATUS_KEYS[match.status]),
             bank ? formatDate(bank.date) : "",
             bank?.narration ?? "",
             bank?.debit ?? "",
@@ -165,15 +169,15 @@ export function ReconcileStep() {
   if (loaded && statements.length === 0) {
     return (
       <Card>
-        <h2 className="text-xl font-bold text-ink">Import a statement first</h2>
+        <h2 className="text-xl font-bold text-ink">{t("bsRcImportFirstTitle")}</h2>
         <p className="mt-2 text-sm text-muted">
-          Reconciliation compares an imported bank statement against your books.
+          {t("bsRcComparesAgainst")}
         </p>
         <Link
           href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
-          Go to import
+          {t("bsStepImport")}
         </Link>
       </Card>
     );
@@ -182,11 +186,11 @@ export function ReconcileStep() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-ink">Reconcile against your books</h2>
+        <h2 className="text-2xl font-bold text-ink">{t("bsRcTitle")}</h2>
         <p className="mt-1 text-sm text-muted">
-          Import your ledger export and we will match it against the{" "}
-          {activeTransactions.length.toLocaleString("en-IN")} bank transactions loaded — exact
-          reference matches first, then date windows, then similar narrations.
+          {fill(t("bsRcBlurb"), {
+            n: activeTransactions.length.toLocaleString(intlLocaleFor(lang)),
+          })}
         </p>
       </div>
 
@@ -200,7 +204,7 @@ export function ReconcileStep() {
               className="sr-only"
               onChange={(event) => void onFile(event.target.files?.[0])}
             />
-            Import books (CSV, XLS, XLSX)
+            {t("bsRcImportBooks")}
           </label>
           <SecondaryButton
             onClick={() =>
@@ -210,23 +214,24 @@ export function ReconcileStep() {
               )
             }
           >
-            Download optional template
+            {t("bsRcDownloadTemplate")}
           </SecondaryButton>
           {fileName ? <span className="text-sm text-muted">{fileName}</span> : null}
         </div>
         <p className="mt-3 text-xs text-muted">
-          Any column layout works — we detect the columns and you can correct them below. Your ledger
-          is read in this browser too.
+          {t("bsRcAnyLayout")}
         </p>
         {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
       </Card>
 
       {ledger && mapping ? (
         <Card>
-          <h3 className="text-lg font-bold text-ink">Ledger columns</h3>
+          <h3 className="text-lg font-bold text-ink">{t("bsRcLedgerColumns")}</h3>
           <p className="mt-1 text-sm text-muted">
-            {ledger.entries.length.toLocaleString("en-IN")} entries read
-            {ledger.skipped > 0 ? `, ${ledger.skipped} rows skipped (no date or amount)` : ""}.
+            {fill(t("bsRcEntriesRead"), {
+              n: ledger.entries.length.toLocaleString(intlLocaleFor(lang)),
+            })}
+            {ledger.skipped > 0 ? fill(t("bsRcRowsSkipped"), { n: ledger.skipped }) : ""}.
           </p>
           <div className="mt-4">
             <ColumnMapper
@@ -236,9 +241,9 @@ export function ReconcileStep() {
             />
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
-            <SecondaryButton onClick={remap}>Re-read with this mapping</SecondaryButton>
+            <SecondaryButton onClick={remap}>{t("bsGrReRead")}</SecondaryButton>
             <PrimaryButton onClick={run} disabled={ledger.entries.length === 0}>
-              Match against the statement
+              {t("bsRcMatchAgainst")}
             </PrimaryButton>
           </div>
         </Card>
@@ -247,12 +252,12 @@ export function ReconcileStep() {
       {reconciliation && summary ? (
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            <Metric label="Matched" value={String(summary.matched)} />
-            <Metric label="Likely matches" value={String(summary.likely)} />
-            <Metric label="In bank only" value={String(summary.unmatchedBank)} />
-            <Metric label="In books only" value={String(summary.unmatchedBook)} />
+            <Metric label={t("bsRcMatched")} value={String(summary.matched)} />
+            <Metric label={t("bsRcLikelyMatches")} value={String(summary.likely)} />
+            <Metric label={t("bsRcBankOnlyShort")} value={String(summary.unmatchedBank)} />
+            <Metric label={t("bsRcBooksOnlyShort")} value={String(summary.unmatchedBook)} />
             <Metric
-              label="Difference"
+              label={t("bsRcDifference")}
               value={formatMoney(summary.difference, currency)}
               negative={Math.abs(summary.difference) > 0.005}
             />
@@ -260,22 +265,22 @@ export function ReconcileStep() {
 
           <Card>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-lg font-bold text-ink">Match results</h3>
+              <h3 className="text-lg font-bold text-ink">{t("bsRcResults")}</h3>
               <div className="flex flex-wrap items-center gap-2">
                 <select
                   value={filter}
                   onChange={(event) => setFilter(event.target.value as MatchStatus | "ALL")}
                   className="rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm"
-                  aria-label="Filter matches"
+                  aria-label={t("bsRcFilterAria")}
                 >
-                  <option value="ALL">All results</option>
-                  {(Object.keys(STATUS_LABEL) as MatchStatus[]).map((status) => (
+                  <option value="ALL">{t("bsRcAllResults")}</option>
+                  {(Object.keys(STATUS_KEYS) as MatchStatus[]).map((status) => (
                     <option key={status} value={status}>
-                      {STATUS_LABEL[status]}
+                      {t(STATUS_KEYS[status])}
                     </option>
                   ))}
                 </select>
-                <SecondaryButton onClick={exportCsv}>Export CSV</SecondaryButton>
+                <SecondaryButton onClick={exportCsv}>{t("bsRcExportCsv")}</SecondaryButton>
               </div>
             </div>
 
@@ -283,11 +288,11 @@ export function ReconcileStep() {
               <table className="w-full min-w-[860px] text-sm">
                 <thead>
                   <tr className="border-b border-muted-line/30 text-left text-muted">
-                    <th className="py-2 pr-3 font-semibold">Status</th>
-                    <th className="py-2 pr-3 font-semibold">Bank</th>
-                    <th className="py-2 pr-3 font-semibold">Books</th>
-                    <th className="py-2 pr-3 text-right font-semibold">Difference</th>
-                    <th className="py-2 font-semibold">Action</th>
+                    <th className="py-2 pr-3 font-semibold">{t("bsRcStatus")}</th>
+                    <th className="py-2 pr-3 font-semibold">{t("bsRcBank")}</th>
+                    <th className="py-2 pr-3 font-semibold">{t("bsRcBooks")}</th>
+                    <th className="py-2 pr-3 text-right font-semibold">{t("bsRcDifference")}</th>
+                    <th className="py-2 font-semibold">{t("bsRcAction")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -303,7 +308,7 @@ export function ReconcileStep() {
                           <span
                             className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold ${STATUS_STYLE[match.status]}`}
                           >
-                            {STATUS_LABEL[match.status]}
+                            {t(STATUS_KEYS[match.status])}
                           </span>
                           {match.confirmed ? (
                             <span className="ml-1 text-xs font-semibold text-emerald-700">✓</span>
@@ -346,14 +351,14 @@ export function ReconcileStep() {
                                 onClick={() => setMatchFlag(match.id, { confirmed: true, rejected: false })}
                                 className="text-xs font-semibold text-emerald-700 hover:underline"
                               >
-                                Confirm
+                                {t("bsRcConfirm")}
                               </button>
                               <button
                                 type="button"
                                 onClick={() => setMatchFlag(match.id, { rejected: true, confirmed: false })}
                                 className="text-xs font-semibold text-red-500 hover:underline"
                               >
-                                Reject
+                                {t("bsRcReject")}
                               </button>
                             </div>
                           ) : null}
@@ -365,7 +370,7 @@ export function ReconcileStep() {
               </table>
               {visible.length > 400 ? (
                 <p className="pt-2 text-xs text-muted">
-                  Showing the first 400 of {visible.length}. Export the CSV for the full list.
+                  {fill(t("bsRcShowingFirst"), { n: visible.length })}
                 </p>
               ) : null}
             </div>
