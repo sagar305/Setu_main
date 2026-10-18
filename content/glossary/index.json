@@ -64,6 +64,80 @@
   ],
   "terms": [
     {
+      "slug": "perpetual-licence",
+      "term": "Perpetual Licence",
+      "category": "pos-tech",
+      "short": "A software purchase you pay for once and may keep using indefinitely, usually with support and updates charged separately each year.",
+      "aliases": [
+        "perpetual license",
+        "one-time licence",
+        "one-time license"
+      ]
+    },
+    {
+      "slug": "on-premise-software",
+      "term": "On-Premise Software",
+      "category": "pos-tech",
+      "short": "Software installed on a machine you own and control, with the data stored on that machine rather than on a vendor's servers.",
+      "aliases": [
+        "on-premises software",
+        "on-prem software",
+        "locally installed software"
+      ]
+    },
+    {
+      "slug": "total-cost-of-ownership",
+      "term": "Total Cost of Ownership",
+      "category": "pos-tech",
+      "short": "Everything a purchase costs over its life — price, setup, training, support, renewals and the cost of leaving — not just the sticker figure.",
+      "aliases": [
+        "TCO"
+      ]
+    },
+    {
+      "slug": "data-migration",
+      "term": "Data Migration",
+      "category": "pos-tech",
+      "short": "Moving your existing records — customers, stock, ledgers, history — out of one system and into another in a usable shape.",
+      "aliases": [
+        "data import",
+        "migrating data"
+      ]
+    },
+    {
+      "slug": "peg-measure",
+      "term": "Peg Measure",
+      "category": "restaurant-ops",
+      "short": "The standard serving size for spirits in Indian bars — commonly 30ml for a small peg and 60ml for a large.",
+      "aliases": [
+        "peg size",
+        "patiala peg",
+        "standard peg"
+      ]
+    },
+    {
+      "slug": "house-pour",
+      "term": "House Pour",
+      "category": "restaurant-ops",
+      "short": "The default brand poured when a guest orders a spirit without naming one, chosen by the bar for cost and acceptable quality.",
+      "aliases": [
+        "well pour",
+        "house spirit",
+        "well spirit"
+      ]
+    },
+    {
+      "slug": "bar-variance",
+      "term": "Bar Variance",
+      "category": "restaurant-ops",
+      "short": "The gap between what your drink recipes say the bar should have consumed and what it actually consumed in the same period.",
+      "aliases": [
+        "liquor variance",
+        "beverage variance",
+        "pour cost variance"
+      ]
+    },
+    {
       "slug": "management-accounts",
       "term": "Management Accounts",
       "category": "accounting",
