@@ -14,10 +14,12 @@
 import type {
   ClassificationRule,
   RuleCondition,
-  RuleOperator,
   Transaction,
 } from "@/lib/bankStatement/types";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
+import { RULE_FIELD_KEYS, RULE_OPERATOR_KEYS } from "@/lib/bankStatement/messages";
+import type { LanguageCode } from "@/lib/i18n/config";
+import { fill, translate } from "@/lib/i18n/translate";
 
 function fieldValue(transaction: Transaction, condition: RuleCondition): string {
   switch (condition.field) {
@@ -98,26 +100,41 @@ export function ruleMatches(transaction: Transaction, rule: ClassificationRule):
 }
 
 /** One condition, phrased the way it reads in the rules list. */
-export function describeCondition(condition: RuleCondition): string {
+/**
+ * The one-line summary the rules list shows, in this reader's language.
+ *
+ * The three shapes are separate templates rather than one sentence stitched
+ * from fragments: where the operator and the values fall differs by language,
+ * and a rule only reads as a rule if the whole line is written as one.
+ */
+export function describeCondition(condition: RuleCondition, lang: LanguageCode): string {
   const alternatives = conditionValues(condition);
-  const operator =
-    condition.operator === "between"
-      ? `is between "${alternatives[0] ?? ""}" and "${condition.value2 ?? ""}"`
-      : alternatives.length > 1
-        ? `${OPERATOR_PHRASE[condition.operator]} any of ${alternatives.map((a) => `"${a}"`).join(", ")}`
-        : `${OPERATOR_PHRASE[condition.operator]} "${alternatives[0] ?? ""}"`;
-  return `${condition.field} ${operator}`;
-}
+  const field = translate(lang, RULE_FIELD_KEYS[condition.field]);
+  const operator = translate(lang, RULE_OPERATOR_KEYS[condition.operator]);
 
-const OPERATOR_PHRASE: Record<RuleOperator, string> = {
-  contains: "contains",
-  startsWith: "starts with",
-  endsWith: "ends with",
-  equals: "is",
-  greaterThan: "is more than",
-  lessThan: "is less than",
-  between: "is between",
-};
+  if (condition.operator === "between") {
+    return fill(translate(lang, "bsRvCondBetween"), {
+      field,
+      operator,
+      from: alternatives[0] ?? "",
+      to: condition.value2 ?? "",
+    });
+  }
+
+  if (alternatives.length > 1) {
+    return fill(translate(lang, "bsRvCondAny"), {
+      field,
+      operator,
+      values: alternatives.map((alternative) => `"${alternative}"`).join(", "),
+    });
+  }
+
+  return fill(translate(lang, "bsRvCondOne"), {
+    field,
+    operator,
+    value: alternatives[0] ?? "",
+  });
+}
 
 /** Highest priority first; ties broken by creation order for stability. */
 export function sortRules(rules: ClassificationRule[]): ClassificationRule[] {

@@ -365,12 +365,28 @@ describe("keyword lists inside a condition", () => {
   });
 
   it("describes itself the way the rules list reads", () => {
-    expect(describeCondition(meals.conditions[0])).toBe(
-      'narration contains any of "SWIGGY", "ZOMATO", "DOMINOS"'
+    expect(describeCondition(meals.conditions[0], "en")).toBe(
+      'Narration contains any of "SWIGGY", "ZOMATO", "DOMINOS"'
     );
-    expect(describeCondition({ field: "amount", operator: "greaterThan", value: "1000" })).toBe(
-      'amount is more than "1000"'
-    );
+    expect(
+      describeCondition({ field: "amount", operator: "greaterThan", value: "1000" }, "en")
+    ).toBe('Amount is more than "1000"');
+  });
+
+  // The summary is prose, so it is written per reader and not stored. The
+  // keywords themselves are the CA's own and stay exactly as typed in every
+  // language — it is the sentence around them that moves.
+  it("describes the same condition in the reader's language", () => {
+    for (const { code } of LANGUAGES) {
+      const described = describeCondition(meals.conditions[0], code);
+      expect(described, `empty description in ${code}`).toBeTruthy();
+      expect(described, `keywords altered in ${code}`).toContain('"SWIGGY"');
+      if (code !== "en") {
+        expect(described, `not translated in ${code}`).not.toBe(
+          describeCondition(meals.conditions[0], "en")
+        );
+      }
+    }
   });
 
   // A range is a range — the second bound must not be read as an alternative.

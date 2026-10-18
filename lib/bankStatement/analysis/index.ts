@@ -43,7 +43,7 @@ export function analyse(
       count: included.length,
       excludedDuplicates,
     },
-    monthly: monthlySummary(included),
+    monthly: monthlySummary(included, lang),
     expenseCategories: categoryBreakdown(included, categories, "DEBIT", lang),
     incomeCategories: categoryBreakdown(included, categories, "CREDIT", lang),
     parties: topParties(included),
@@ -61,11 +61,15 @@ export function analyse(
       relevant: included.filter((t) => t.gstRelevant === "RELEVANT"),
       potential: included.filter((t) => t.gstRelevant === "POTENTIAL"),
     },
-    anomalies: detectAnomalies(transactions, included, settings),
+    anomalies: detectAnomalies(transactions, included, settings, lang),
   };
 }
 
-export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
+export function monthlySummary(
+  transactions: Transaction[],
+  /** Month names are read, not stored, so they follow the reader. */
+  lang: LanguageCode
+): MonthlyRow[] {
   const buckets = new Map<string, Transaction[]>();
   for (const transaction of transactions) {
     const key = monthKey(transaction.date);
@@ -93,7 +97,7 @@ export function monthlySummary(transactions: Transaction[]): MonthlyRow[] {
 
       return {
         month: key,
-        label: monthLabel(key),
+        label: monthLabel(key, lang),
         openingBalance: opening,
         credits,
         debits,
@@ -204,7 +208,9 @@ function transferSummary(transactions: Transaction[]) {
 export function detectAnomalies(
   all: Transaction[],
   included: Transaction[],
-  settings: AnalyzerSettings
+  settings: AnalyzerSettings,
+  /** Only for the month names a spike names; the rest travel as codes. */
+  lang: LanguageCode
 ): Anomaly[] {
   const anomalies: Anomaly[] = [];
 
@@ -273,7 +279,7 @@ export function detectAnomalies(
   }
 
   // A month whose debits are more than double the median month.
-  const monthly = monthlySummary(included);
+  const monthly = monthlySummary(included, lang);
   if (monthly.length >= 3) {
     const sorted = [...monthly].map((m) => m.debits).sort((a, b) => a - b);
     const median = sorted[Math.floor(sorted.length / 2)];

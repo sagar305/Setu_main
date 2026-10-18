@@ -11,9 +11,15 @@
 // narration, any balance. Only the extension and a rounded size. The report is
 // shown to the CA and copied by them if they choose; nothing sends it anywhere.
 
+import type { ParseStage } from "@/lib/bankStatement/parser";
+
 export type ImportFailure = {
-  /** The pipeline stage in flight when it broke. */
-  stage: string;
+  /**
+   * The pipeline stage in flight when it broke, as a code. It is worded for
+   * the CA by the import screen and left as the code here, so two reports of
+   * the same failure read the same whatever language produced them.
+   */
+  stage: ParseStage;
   errorName: string;
   message: string;
   /** File shape only — never the name. */
@@ -77,7 +83,7 @@ export function stackFrames(error: unknown, limit = 4): string[] {
 
 export function describeFailure(
   error: unknown,
-  stage: string,
+  stage: ParseStage,
   file: { name: string; size: number }
 ): ImportFailure {
   const extension = file.name.includes(".")

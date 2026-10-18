@@ -209,13 +209,16 @@ export function isMappingUsable(mapping: ColumnMapping): boolean {
   return mapping.date !== undefined && hasAmount;
 }
 
-/** What is still missing, phrased for the import screen. */
-export function describeMappingGaps(mapping: ColumnMapping): string[] {
-  const gaps: string[] = [];
-  if (mapping.date === undefined) gaps.push("date column");
+/** Which column we still could not find. Worded by the import screen. */
+export type MappingGap = "DATE" | "AMOUNT" | "NARRATION";
+
+/** What is still missing, as codes for the import screen to word. */
+export function describeMappingGaps(mapping: ColumnMapping): MappingGap[] {
+  const gaps: MappingGap[] = [];
+  if (mapping.date === undefined) gaps.push("DATE");
   if (mapping.debit === undefined && mapping.credit === undefined && mapping.amount === undefined) {
-    gaps.push("debit/credit or amount column");
+    gaps.push("AMOUNT");
   }
-  if (mapping.narration === undefined) gaps.push("narration column");
+  if (mapping.narration === undefined) gaps.push("NARRATION");
   return gaps;
 }

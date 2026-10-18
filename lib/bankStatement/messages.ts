@@ -17,10 +17,15 @@ import type {
   BulkEdit,
   ExportFormat,
   IssueCode,
+  ParseStatus,
   ReportIssueCode,
+  RuleField,
+  RuleOperator,
   ValidationIssue,
 } from "@/lib/bankStatement/types";
 import type { AiErrorCode } from "@/lib/bankStatement/ai/client";
+import type { ParseStage } from "@/lib/bankStatement/parser";
+import type { MappingGap } from "@/lib/bankStatement/parser/columns";
 import type { AiProgress } from "@/lib/bankStatement/ai/protocol";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { fill, translate, type TKey } from "@/lib/i18n/translate";
@@ -243,4 +248,68 @@ export function anomalyLabel(
     months: detail.months ?? "",
     threshold: detail.threshold === undefined ? "" : money(detail.threshold),
   });
+}
+
+// ---------------------------------------------------------------------------
+// Rule conditions.
+// ---------------------------------------------------------------------------
+// A condition is stored as a field, an operator and the values it compares
+// against — never as the sentence a CA reads. The sentence is assembled here,
+// so the rule editor's dropdowns and the rules list's one-line summary say the
+// same thing in whatever language is open.
+
+export const RULE_FIELD_KEYS: Record<RuleField, TKey> = {
+  narration: "bkNarration",
+  reference: "stReference",
+  amount: "amount",
+  direction: "bsRuDebitCredit",
+  date: "date",
+};
+
+export const RULE_OPERATOR_KEYS: Record<RuleOperator, TKey> = {
+  contains: "bsOpContains",
+  startsWith: "bsOpStartsWith",
+  endsWith: "bsOpEndsWith",
+  equals: "bsOpEquals",
+  greaterThan: "bsOpGreaterThan",
+  lessThan: "bsOpLessThan",
+  between: "bsOpBetween",
+};
+
+// ---------------------------------------------------------------------------
+// The import pipeline.
+// ---------------------------------------------------------------------------
+
+const PARSE_STAGE_KEYS: Record<ParseStage, TKey> = {
+  READING_FILE: "bsImStageReading",
+  READING_SPREADSHEET: "bsImStageSpreadsheet",
+  PARSING_STATEMENT: "bsImStageParsing",
+  NORMALISING: "bsImStageNormalising",
+};
+
+/** The stage in flight, for whoever is waiting on it. */
+export function parseStageLabel(stage: ParseStage, lang: LanguageCode): string {
+  return translate(lang, PARSE_STAGE_KEYS[stage]);
+}
+
+const MAPPING_GAP_KEYS: Record<MappingGap, TKey> = {
+  DATE: "bsImGapDate",
+  AMOUNT: "bsImGapAmount",
+  NARRATION: "bsImGapNarration",
+};
+
+/** A column we could not find, named the way the sentence around it needs. */
+export function mappingGapLabel(gap: MappingGap, lang: LanguageCode): string {
+  return translate(lang, MAPPING_GAP_KEYS[gap]);
+}
+
+const PARSE_STATUS_KEYS: Record<ParseStatus, TKey> = {
+  VALID: "bsStatusValid",
+  WARNING: "bsStatusWarning",
+  UNRESOLVED: "bsStatusUnresolved",
+};
+
+/** The verdict chip on a statement. */
+export function parseStatusLabel(status: ParseStatus, lang: LanguageCode): string {
+  return translate(lang, PARSE_STATUS_KEYS[status]);
 }

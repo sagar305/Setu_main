@@ -159,16 +159,16 @@ export function AnalyzeStep() {
       ) : null}
 
       <Card>
-        <h3 className="mb-4 text-base font-bold text-ink">Monthly summary</h3>
+        <h3 className="mb-4 text-base font-bold text-ink">{t("bsPdfMonthlySummary")}</h3>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr className="border-b border-muted-line/30 text-left text-muted">
-                <th className="py-2 pr-4 font-semibold">Month</th>
-                <th className="py-2 pr-4 text-right font-semibold">Opening</th>
-                <th className="py-2 pr-4 text-right font-semibold">Credits</th>
-                <th className="py-2 pr-4 text-right font-semibold">Debits</th>
-                <th className="py-2 text-right font-semibold">Closing</th>
+                <th className="py-2 pr-4 font-semibold">{t("tuRpMonth")}</th>
+                <th className="py-2 pr-4 text-right font-semibold">{t("opening")}</th>
+                <th className="py-2 pr-4 text-right font-semibold">{t("bsColCredits")}</th>
+                <th className="py-2 pr-4 text-right font-semibold">{t("bsColDebits")}</th>
+                <th className="py-2 text-right font-semibold">{t("closing")}</th>
               </tr>
             </thead>
             <tbody>

@@ -8,6 +8,8 @@
 // resolve every row we say so plainly instead of showing a tidy number (§30).
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -33,6 +35,7 @@ import {
   parseStatementFile,
 } from "@/lib/bankStatement/parser";
 import { describeMappingGaps, isMappingUsable } from "@/lib/bankStatement/parser/columns";
+import type { ParseStage } from "@/lib/bankStatement/parser";
 import { isRowPlanEmpty, type RowPlan } from "@/lib/bankStatement/parser/rowPlan";
 import {
   describeFailure,
@@ -40,6 +43,12 @@ import {
   type ImportFailure,
 } from "@/lib/bankStatement/utils/diagnostics";
 import { summariseParse } from "@/lib/bankStatement/normalization/validation";
+import {
+  mappingGapLabel,
+  parseStageLabel,
+  parseStatusLabel,
+  validationIssueLabel,
+} from "@/lib/bankStatement/messages";
 import { buildDemoData } from "@/lib/bankStatement/demo/sampleStatement";
 import type {
   ColumnMapping,
@@ -56,6 +65,7 @@ type Pending = {
 };
 
 export function ImportStep() {
+  const { t, lang } = useI18n();
   const { statements, transactions, actions, loaded } = useAnalyzer();
   const searchParams = useSearchParams();
 
@@ -76,7 +86,7 @@ export function ImportStep() {
 
   // The last stage the parser reported, so a failure can say where it happened
   // rather than only what the exception was.
-  const stageRef = useRef("Reading file");
+  const stageRef = useRef<ParseStage>("READING_FILE");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -96,17 +106,17 @@ export function ImportStep() {
       if (options.rowPlan === undefined) setRowPlan({});
       setCopied(false);
       setPasswordError(null);
-      stageRef.current = "Reading file";
+      stageRef.current = "READING_FILE";
       try {
         const outcome = await parseStatementFile(file, {
           ...options,
           onProgress: (stage, current, total) => (
             (stageRef.current = stage),
             setProgress({
-              label: stage,
+              label: parseStageLabel(stage, lang),
               current,
               total,
-              unit: stage === "Parsing statement" ? "page" : undefined,
+              unit: stage === "PARSING_STATEMENT" ? "page" : undefined,
             })
           ),
         });
@@ -118,9 +128,12 @@ export function ImportStep() {
       } catch (caught) {
         if (caught instanceof PdfPasswordRequiredError) {
           setPasswordFor(file);
-          setPasswordError(caught.incorrect ? "Incorrect password. Please try again." : null);
+          setPasswordError(caught.incorrect ? t("bsImIncorrectPassword") : null);
         } else {
-          setError(caught instanceof Error ? caught.message : "This file could not be read.");
+          // The exception text itself stays as the browser wrote it — it is a
+          // diagnostic, and translating it would lose the only words that
+          // identify the fault.
+          setError(caught instanceof Error ? caught.message : t("bsImGenericError"));
           setFailure(describeFailure(caught, stageRef.current, file));
         }
       } finally {
@@ -128,7 +141,7 @@ export function ImportStep() {
         setProgress(null);
       }
     },
-    []
+    [lang, t]
   );
 
   const onFile = useCallback(
@@ -139,23 +152,21 @@ export function ImportStep() {
       setLargeFileNotice(null);
 
       if (!detectFormat(file.name, file.type)) {
-        setError("Unsupported file type. Import a PDF, XLSX, XLS or CSV statement.");
+        setError(t("bsImUnsupportedType"));
         return;
       }
       if (file.size > MAX_FILE_MB * 1024 * 1024) {
-        setError(`That file is larger than ${MAX_FILE_MB} MB.`);
+        setError(fill(t("bsImTooLarge"), { mb: MAX_FILE_MB }));
         return;
       }
       // Decision 26: mobile is not blocked, but a large statement is slow on a
       // phone and the CA deserves to know before they wait.
       if (file.size > 5 * 1024 * 1024 && typeof window !== "undefined" && window.innerWidth < 768) {
-        setLargeFileNotice(
-          "This is a large statement. For files this size a desktop browser will be considerably faster."
-        );
+        setLargeFileNotice(t("bsImLargeNotice"));
       }
       void run(file);
     },
-    [run]
+    [run, t]
   );
 
   const confirmImport = useCallback(async () => {
@@ -196,7 +207,7 @@ export function ImportStep() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-2xl font-bold text-ink">Import a statement</h2>
+        <h2 className="text-2xl font-bold text-ink">{t("bsImTitle")}</h2>
         <PrivacyNote />
       </div>
 
@@ -211,10 +222,9 @@ export function ImportStep() {
             className="rounded-2xl border-2 border-dashed border-muted-line/50 bg-cream-paper/40 p-8 text-center"
           >
             <Upload className="mx-auto h-8 w-8 text-indigo" aria-hidden="true" />
-            <h3 className="mt-3 text-lg font-bold text-ink">Drop your statement here</h3>
+            <h3 className="mt-3 text-lg font-bold text-ink">{t("bsImDropHere")}</h3>
             <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-              PDF, XLSX, XLS or CSV, up to {MAX_FILE_MB} MB. The file is read in this browser — it is
-              never uploaded.
+              {fill(t("bsImDropBody"), { mb: MAX_FILE_MB })}
             </p>
 
             <label className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90">
@@ -226,12 +236,12 @@ export function ImportStep() {
                 onChange={(event) => onFile(event.target.files?.[0])}
                 disabled={busy}
               />
-              Choose a statement
+              {t("bsImChooseStatement")}
             </label>
 
             <div className="mt-3">
               <SecondaryButton onClick={loadDemo} disabled={busy}>
-                Try a demo statement
+                {t("bsImTryDemo")}
               </SecondaryButton>
             </div>
 
@@ -250,21 +260,25 @@ export function ImportStep() {
 
       {busy ? (
         <ProgressPanel
-          progress={progress ?? { label: "Reading file" }}
+          progress={progress ?? { label: parseStageLabel("READING_FILE", lang) }}
           stages={[
-            { name: "Reading the file", status: progress?.label === "Reading file" ? "active" : "done" },
             {
-              name: "Extracting transactions",
+              name: t("bsImStageReading"),
+              status: stageRef.current === "READING_FILE" ? "active" : "done",
+            },
+            {
+              name: t("bsImStageExtracting"),
               status:
-                progress?.label === "Parsing statement" || progress?.label === "Reading spreadsheet"
+                stageRef.current === "PARSING_STATEMENT" ||
+                stageRef.current === "READING_SPREADSHEET"
                   ? "active"
-                  : progress?.label === "Normalising transactions"
+                  : stageRef.current === "NORMALISING"
                     ? "done"
                     : "pending",
             },
             {
-              name: "Normalising and validating",
-              status: progress?.label === "Normalising transactions" ? "active" : "pending",
+              name: t("bsImStageValidating"),
+              status: stageRef.current === "NORMALISING" ? "active" : "pending",
             },
           ]}
         />
@@ -275,25 +289,36 @@ export function ImportStep() {
           <div className="flex gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
             <div className="min-w-0 flex-1">
-              <h3 className="font-bold text-ink">We could not read that file</h3>
+              <h3 className="font-bold text-ink">{t("bsImReadFailTitle")}</h3>
               <p className="mt-1 text-sm text-muted">{error}</p>
 
               {failure ? (
                 <>
                   <p className="mt-2 text-sm text-muted">
-                    It failed while <strong className="text-ink">{failure.stage.toLowerCase()}</strong>.
-                    If this is a PDF, a CSV or Excel copy of the same statement usually imports
-                    cleanly — most banks offer one alongside the PDF.
+                    {/* The stage is emphasised wherever the sentence puts it. */}
+                    {(() => {
+                      const [before, after] = fill(t("bsImFailedWhile"), {
+                        strong: "\u0000",
+                      }).split("\u0000");
+                      return (
+                        <>
+                          {before}
+                          <strong className="text-ink">
+                            {parseStageLabel(failure.stage, lang).toLocaleLowerCase(
+                              intlLocaleFor(lang)
+                            )}
+                          </strong>
+                          {after}
+                        </>
+                      );
+                    })()}
                   </p>
 
                   <details className="mt-3">
                     <summary className="cursor-pointer text-sm font-semibold text-indigo">
-                      Technical details
+                      {t("bsImTechnicalDetails")}
                     </summary>
-                    <p className="mt-2 text-xs text-muted">
-                      Nothing from your statement is in here — no narrations, no amounts, not even
-                      the file name. Only which step failed and what this browser supports.
-                    </p>
+                    <p className="mt-2 text-xs text-muted">{t("bsImDiagnosticsNote")}</p>
                     <pre className="mt-2 max-h-56 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-cream-paper/70 p-3 text-[11px] leading-relaxed text-muted">
                       {formatDiagnostics(failure)}
                     </pre>
@@ -306,7 +331,7 @@ export function ImportStep() {
                           .catch(() => setCopied(false));
                       }}
                     >
-                      {copied ? "Copied" : "Copy details"}
+                      {copied ? t("spCopiedShort") : t("bsImCopyDetails")}
                     </SecondaryButton>
                   </details>
                 </>
@@ -318,11 +343,8 @@ export function ImportStep() {
 
       {passwordFor ? (
         <Card>
-          <h3 className="text-lg font-bold text-ink">Password required</h3>
-          <p className="mt-1 text-sm text-muted">
-            This bank statement is password protected. Enter the PDF password to continue. The
-            password is used once, in memory — it is never stored, logged or sent anywhere.
-          </p>
+          <h3 className="text-lg font-bold text-ink">{t("bsImPasswordTitle")}</h3>
+          <p className="mt-1 text-sm text-muted">{t("bsImPasswordBody")}</p>
           <form
             className="mt-4 flex flex-wrap items-end gap-3"
             onSubmit={(event) => {
@@ -331,18 +353,18 @@ export function ImportStep() {
             }}
           >
             <div className="min-w-[220px] flex-1">
-              <Field label="Password">
+              <Field label={t("bsImPassword")}>
                 <TextInput
                   type="password"
                   value={password}
                   autoComplete="off"
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="PDF password"
+                  placeholder={t("bsImPasswordPlaceholder")}
                 />
               </Field>
             </div>
             <PrimaryButton type="submit" disabled={busy || password === ""}>
-              Unlock
+              {t("bsImUnlock")}
             </PrimaryButton>
             <SecondaryButton
               onClick={() => {
@@ -351,7 +373,7 @@ export function ImportStep() {
                 setPasswordError(null);
               }}
             >
-              Cancel
+              {t("cancel")}
             </SecondaryButton>
           </form>
           {passwordError ? <p className="mt-2 text-sm text-red-600">{passwordError}</p> : null}
@@ -385,22 +407,21 @@ export function ImportStep() {
         <Card>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <h3 className="text-lg font-bold text-ink">
-              Imported statements ({statements.length})
+              {fill(t("bsImImportedStatements"), { n: statements.length })}
             </h3>
             {transactions.length > 0 ? (
               <Link
                 href="/products/bank-statement-analyzer/review"
                 className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
               >
-                Review {transactions.length.toLocaleString("en-IN")} transactions
+                {fill(t("bsImReviewTransactions"), {
+                  n: transactions.length.toLocaleString(intlLocaleFor(lang)),
+                })}
               </Link>
             ) : null}
           </div>
 
-          <p className="mb-3 text-sm text-muted">
-            Tick the statements to analyse together. Overlapping periods are de-duplicated
-            automatically.
-          </p>
+          <p className="mb-3 text-sm text-muted">{t("bsImTickNote")}</p>
 
           <ul className="space-y-2">
             {statements.map((statement) => (
@@ -416,9 +437,9 @@ export function ImportStep() {
 
       <ConfirmDialog
         open={removing !== null}
-        title="Remove this statement?"
-        message="Its transactions and any edits you made to them will be deleted from this browser."
-        confirmLabel="Remove"
+        title={t("bsImRemoveTitle")}
+        message={t("bsImRemoveBody")}
+        confirmLabel={t("remove")}
         onConfirm={() => {
           if (removing) void actions.removeStatement(removing);
           setRemoving(null);
@@ -430,6 +451,7 @@ export function ImportStep() {
 }
 
 function StatementRow({ statementId, onRemove }: { statementId: string; onRemove: () => void }) {
+  const { t, lang } = useI18n();
   const { statements, activeStatementIds, actions } = useAnalyzer();
   const statement = statements.find((item) => item.id === statementId);
   if (!statement) return null;
@@ -456,25 +478,29 @@ function StatementRow({ statementId, onRemove }: { statementId: string; onRemove
         checked={active}
         onChange={toggle}
         className="h-4 w-4 rounded border-muted-line text-indigo focus:ring-indigo"
-        aria-label={`Include ${statement.fileName} in the analysis`}
+        aria-label={fill(t("bsImIncludeAria"), { file: statement.fileName })}
       />
       <FileText className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold text-ink">{statement.fileName}</p>
         <p className="text-xs text-muted">
-          {statement.bankName ?? "Bank not detected"} · {statement.accountNumberMasked ?? "account not detected"} ·{" "}
-          {statement.startDate ? formatDate(statement.startDate) : "—"} to{" "}
-          {statement.endDate ? formatDate(statement.endDate) : "—"} · {statement.transactionCount} rows
+          {statement.bankName ?? t("bsImBankNotDetected")} ·{" "}
+          {statement.accountNumberMasked ?? t("bsImAccountNotDetected")} ·{" "}
+          {statement.startDate ? formatDate(statement.startDate) : "—"} –{" "}
+          {statement.endDate ? formatDate(statement.endDate) : "—"} ·{" "}
+          {fill(t("bsImRowsCount"), {
+            n: statement.transactionCount.toLocaleString(intlLocaleFor(lang)),
+          })}
         </p>
       </div>
       <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusStyle}`}>
-        {statement.parseStatus}
+        {parseStatusLabel(statement.parseStatus, lang)}
       </span>
       <button
         type="button"
         onClick={onRemove}
         className="rounded-lg p-1.5 text-muted transition hover:bg-red-50 hover:text-red-600"
-        aria-label={`Remove ${statement.fileName}`}
+        aria-label={fill(t("bsImRemoveAria"), { file: statement.fileName })}
       >
         <X className="h-4 w-4" aria-hidden="true" />
       </button>
@@ -507,7 +533,7 @@ function PendingReview({
   onCancel: () => void;
   busy: boolean;
 }) {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { statement, transactions, headers, rawRows, grid, ambiguousDateFormat } = pending.outcome;
   const report = statement.validation;
   const summary = summariseParse(report, statement.parseStatus, lang);
@@ -530,47 +556,64 @@ function PendingReview({
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-lg font-bold text-ink">{statement.fileName}</h3>
               <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tone.chip}`}>
-                {statement.parseStatus}
+                {parseStatusLabel(statement.parseStatus, lang)}
               </span>
             </div>
             <p className="mt-1 text-sm text-muted">{summary}</p>
 
             <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-              <Stat label="Rows found" value={String(report.extracted)} />
-              <Stat label="Resolved" value={String(report.resolved)} />
-              <Stat label="Warnings" value={String(report.warnings)} />
-              <Stat label="Unresolved" value={String(report.unresolved)} />
+              <Stat label={t("bsImRowsFound")} value={String(report.extracted)} />
+              <Stat label={t("bsImResolved")} value={String(report.resolved)} />
+              <Stat label={t("bsStatusWarning")} value={String(report.warnings)} />
+              <Stat label={t("bsStatusUnresolved")} value={String(report.unresolved)} />
             </dl>
 
             {statement.parseStatus === "UNRESOLVED" ? (
               <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
-                We could not confidently extract every transaction from this statement. Check the
-                column mapping below, or import the statement in CSV/XLSX format from your bank if
-                one is available. Importing anyway will give you an incomplete picture.
+                {t("bsImUnresolvedNote")}
               </p>
             ) : null}
 
             {!statement.parserValidated ? (
               <p className="mt-3 rounded-xl bg-cream-paper/70 px-4 py-3 text-sm text-muted">
                 {statement.bankName
-                  ? `Detected ${statement.bankName}, but the ${statement.bankName} layout parser has not been verified against real statements yet — this file was read with the generic layout engine.`
-                  : "Read with the generic layout engine. No bank-specific layout was matched."}
+                  ? fill(t("bsImUnverifiedParser"), { bank: statement.bankName })
+                  : t("bsImGenericEngine")}
               </p>
             ) : null}
 
             {report.issues.length > 0 ? (
               <details className="mt-3">
                 <summary className="cursor-pointer text-sm font-semibold text-indigo">
-                  {report.issues.length} issue{report.issues.length === 1 ? "" : "s"} to review
+                  {fill(t(report.issues.length === 1 ? "bsImIssues1" : "bsImIssuesN"), {
+                    n: report.issues.length.toLocaleString(intlLocaleFor(lang)),
+                  })}
                 </summary>
                 <ul className="mt-2 max-h-52 space-y-1 overflow-y-auto text-xs text-muted">
-                  {report.issues.slice(0, 60).map((issue, index) => (
-                    <li key={index}>
-                      {issue.page ? `Page ${issue.page}, ` : ""}
-                      {issue.row ? `row ${issue.row}: ` : ""}
-                      {issue.message}
-                    </li>
-                  ))}
+                  {report.issues.slice(0, 60).map((issue, index) => {
+                    // Page and row prefix the finding in whatever order the
+                    // language wants, so each combination is its own sentence.
+                    const message = validationIssueLabel(issue, lang);
+                    const key =
+                      issue.page && issue.row
+                        ? "bsImIssuePageRow"
+                        : issue.page
+                          ? "bsImIssuePage"
+                          : issue.row
+                            ? "bsImIssueRow"
+                            : null;
+                    return (
+                      <li key={index}>
+                        {key
+                          ? fill(t(key), {
+                              page: issue.page ?? "",
+                              row: issue.row ?? "",
+                              message,
+                            })
+                          : message}
+                      </li>
+                    );
+                  })}
                 </ul>
               </details>
             ) : null}
@@ -579,25 +622,27 @@ function PendingReview({
 
         <div className="mt-5 flex flex-wrap gap-3">
           <PrimaryButton onClick={onConfirm} disabled={busy || transactions.length === 0}>
-            {statement.parseStatus === "UNRESOLVED"
-              ? `Import ${transactions.length} extracted anyway`
-              : `Import ${transactions.length} transactions`}
+            {fill(
+              t(
+                statement.parseStatus === "UNRESOLVED"
+                  ? "bsImImportAnyway"
+                  : "bsImImportCount"
+              ),
+              { n: transactions.length.toLocaleString(intlLocaleFor(lang)) }
+            )}
           </PrimaryButton>
           <SecondaryButton onClick={onCancel} disabled={busy}>
-            Discard
+            {t("bsImDiscard")}
           </SecondaryButton>
         </div>
       </Card>
 
       {ambiguousDateFormat ? (
         <Card className="border-amber-200">
-          <h3 className="text-lg font-bold text-ink">Which date format does this statement use?</h3>
-          <p className="mt-1 text-sm text-muted">
-            We found dates that could be read in more than one format, and the difference changes
-            the dates on your transactions. Pick the one your bank uses.
-          </p>
+          <h3 className="text-lg font-bold text-ink">{t("bsImDateFormatTitle")}</h3>
+          <p className="mt-1 text-sm text-muted">{t("bsImDateFormatBody")}</p>
           <div className="mt-4 max-w-xs">
-            <Field label="Date format">
+            <Field label={t("bsImDateFormat")}>
               <Select
                 value={dateFormat ?? "DMY"}
                 onChange={(event) => onDateFormatChange(event.target.value as DateFormat)}
@@ -613,11 +658,15 @@ function PendingReview({
 
       {mapping ? (
         <Card>
-          <h3 className="text-lg font-bold text-ink">Column mapping</h3>
+          <h3 className="text-lg font-bold text-ink">{t("bsImColumnMapping")}</h3>
           <p className="mt-1 text-sm text-muted">
             {gaps.length === 0
-              ? "This is how we read the file. Change anything we got wrong, then re-read."
-              : `We could not identify the ${gaps.join(" and ")}. Set it below and re-read the file.`}
+              ? t("bsImMappingOk")
+              : fill(t("bsImMappingGaps"), {
+                  gaps: gaps
+                    .map((gap) => mappingGapLabel(gap, lang))
+                    .join(` ${t("bsRvCondAnd")} `),
+                })}
           </p>
           <div className="mt-4">
             <ColumnMapper
@@ -629,7 +678,7 @@ function PendingReview({
           </div>
           <div className="mt-4">
             <SecondaryButton onClick={onRemap} disabled={busy || !usable}>
-              Re-read with this mapping
+              {t("bsImReread")}
             </SecondaryButton>
           </div>
         </Card>
@@ -639,13 +688,9 @@ function PendingReview({
         <Card>
           <details open={statement.parseStatus !== "VALID"}>
             <summary className="cursor-pointer text-lg font-bold text-ink">
-              Fix the columns and rows
+              {t("bsImFixColumns")}
             </summary>
-            <p className="mt-1 text-sm text-muted">
-              Every row we found in the file, exactly as we read it. Use this when the numbers above
-              look wrong — mark where the table starts, hide the rows that are not transactions, and
-              join any narration that wrapped onto a second line.
-            </p>
+            <p className="mt-1 text-sm text-muted">{t("bsImFixColumnsBody")}</p>
             <div className="mt-4">
               <StatementGrid
                 grid={grid}
@@ -663,16 +708,16 @@ function PendingReview({
 
       {transactions.length > 0 ? (
         <Card>
-          <h3 className="mb-3 text-lg font-bold text-ink">Preview</h3>
+          <h3 className="mb-3 text-lg font-bold text-ink">{t("preview")}</h3>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[600px] text-left text-sm">
               <thead>
                 <tr className="border-b border-muted-line/30 text-xs uppercase tracking-wide text-muted">
-                  <th className="py-2 pr-3">Date</th>
-                  <th className="py-2 pr-3">Narration</th>
-                  <th className="py-2 pr-3 text-right">Debit</th>
-                  <th className="py-2 pr-3 text-right">Credit</th>
-                  <th className="py-2 text-right">Balance</th>
+                  <th className="py-2 pr-3">{t("date")}</th>
+                  <th className="py-2 pr-3">{t("bkNarration")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkDebit")}</th>
+                  <th className="py-2 pr-3 text-right">{t("bkCredit")}</th>
+                  <th className="py-2 text-right">{t("balance")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -690,7 +735,9 @@ function PendingReview({
           </div>
           {transactions.length > 10 ? (
             <p className="mt-2 text-xs text-muted">
-              Showing the first 10 of {transactions.length.toLocaleString("en-IN")}.
+              {fill(t("bsImShowingFirst10"), {
+                n: transactions.length.toLocaleString(intlLocaleFor(lang)),
+              })}
             </p>
           ) : null}
         </Card>

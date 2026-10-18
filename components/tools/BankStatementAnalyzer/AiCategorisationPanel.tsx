@@ -344,6 +344,7 @@ function Tally({
   value: number;
   tone: "good" | "warn" | "plain";
 }) {
+  const { lang } = useI18n();
   const style =
     tone === "good"
       ? "bg-emerald-50 text-emerald-800"
@@ -353,7 +354,7 @@ function Tally({
 
   return (
     <div className={`rounded-xl px-4 py-3 ${style}`}>
-      <p className="text-xl font-bold">{value.toLocaleString("en-IN")}</p>
+      <p className="text-xl font-bold">{value.toLocaleString(intlLocaleFor(lang))}</p>
       <p className="text-xs font-semibold">{label}</p>
     </div>
   );

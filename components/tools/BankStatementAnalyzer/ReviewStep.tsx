@@ -18,7 +18,14 @@ import { ActivityLog } from "@/components/tools/BankStatementAnalyzer/ActivityLo
 import { ProgressPanel } from "@/components/tools/BankStatementAnalyzer/ProgressPanel";
 import type { BulkEdit, ClassificationRule, Transaction } from "@/lib/bankStatement/types";
 import { describeCondition, ruleFromTransaction } from "@/lib/bankStatement/classification/rulesEngine";
-import { activeCategories, groupLabel } from "@/lib/bankStatement/classification/categories";
+import {
+  GROUP_ORDER,
+  activeCategories,
+  categoryLabel,
+  groupLabel,
+} from "@/lib/bankStatement/classification/categories";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { fill } from "@/lib/i18n/translate";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
 import { generateLocalId } from "@/lib/hooks/useLocalStore";
 import { normaliseText } from "@/lib/bankStatement/utils/text";
@@ -64,7 +71,7 @@ const EMPTY_FILTERS: Filters = {
 };
 
 export function ReviewStep() {
-  const { lang } = useI18n();
+  const { t, lang } = useI18n();
   const { activeTransactions, categories, rules, settings, actions, loaded, statements } =
     useAnalyzer();
   const { code: currency } = usePreferredCurrency();
@@ -174,15 +181,13 @@ export function ReviewStep() {
   if (loaded && statements.length === 0) {
     return (
       <Card>
-        <h2 className="text-xl font-bold text-ink">Nothing to review yet</h2>
-        <p className="mt-2 text-sm text-muted">
-          Import a statement — or load the demo — and it will appear here.
-        </p>
+        <h2 className="text-xl font-bold text-ink">{t("bsRvNothingTitle")}</h2>
+        <p className="mt-2 text-sm text-muted">{t("bsRvNothingBody")}</p>
         <Link
           href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
-          Go to import
+          {t("bsRvGoToImport")}
         </Link>
       </Card>
     );
@@ -193,19 +198,19 @@ export function ReviewStep() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-2xl font-bold text-ink">Review transactions</h2>
+        <h2 className="text-2xl font-bold text-ink">{t("bsRvTitle")}</h2>
         <div className="flex flex-wrap gap-2">
           <SecondaryButton onClick={runClassification} disabled={reclassifying !== null}>
-            {reclassifying ? "Classifying…" : "Run classification"}
+            {reclassifying ? t("bsRvClassifying") : t("bsRvRunClassification")}
           </SecondaryButton>
           <SecondaryButton onClick={undo} disabled={undoStack.length === 0}>
-            Undo
+            {t("clTdUndo")}
           </SecondaryButton>
           <Link
             href="/products/bank-statement-analyzer/analyze"
             className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
           >
-            Analyze
+            {t("bsStepAnalyze")}
           </Link>
         </div>
       </div>
@@ -213,7 +218,7 @@ export function ReviewStep() {
       {reclassifying ? (
         <ProgressPanel
           progress={{
-            label: "Classifying transactions",
+            label: t("bsRvClassifyingProgress"),
             current: reclassifying.current,
             total: reclassifying.total,
           }}
@@ -222,15 +227,27 @@ export function ReviewStep() {
 
       {needsReview > 0 ? (
         <p className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-800">
-          <strong>{needsReview.toLocaleString("en-IN")}</strong> transaction
-          {needsReview === 1 ? "" : "s"} are uncategorised, flagged for review, or below{" "}
-          {settings.reviewConfidenceThreshold}% confidence.{" "}
+          {/* The count is bold wherever the sentence puts it, so the placeholder
+              splits the line rather than the English word order. */}
+          {(() => {
+            const [before, after] = fill(
+              t(needsReview === 1 ? "bsRvNeedsReview1" : "bsRvNeedsReviewN"),
+              { n: "\u0000", pct: settings.reviewConfidenceThreshold }
+            ).split("\u0000");
+            return (
+              <>
+                {before}
+                <strong>{needsReview.toLocaleString(intlLocaleFor(lang))}</strong>
+                {after}
+              </>
+            );
+          })()}{" "}
           <button
             type="button"
             className="font-semibold underline"
             onClick={() => setFilters({ ...EMPTY_FILTERS, status: "needs-review" })}
           >
-            Show them
+            {t("bsRvShowThem")}
           </button>
         </p>
       ) : null}
@@ -238,10 +255,15 @@ export function ReviewStep() {
       <div className="flex flex-wrap gap-2 border-b border-muted-line/30">
         {(
           [
-            ["transactions", `Transactions (${activeTransactions.length.toLocaleString("en-IN")})`],
-            ["rules", `Rules (${rules.length})`],
-            ["categories", "Categories"],
-            ["activity", "Activity"],
+            [
+              "transactions",
+              fill(t("bsRvTabTransactions"), {
+                n: activeTransactions.length.toLocaleString(intlLocaleFor(lang)),
+              }),
+            ],
+            ["rules", fill(t("bsRvTabRules"), { n: rules.length })],
+            ["categories", t("dnMnCategories")],
+            ["activity", t("bsActTitle")],
           ] as [Tab, string][]
         ).map(([key, label]) => (
           <button
@@ -265,77 +287,79 @@ export function ReviewStep() {
 
           <Card>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              <Field label="Search">
+              <Field label={t("bsRvSearch")}>
                 <TextInput
                   value={filters.search}
                   onChange={(event) => setFilters({ ...filters, search: event.target.value })}
-                  placeholder="Narration or party"
+                  placeholder={t("bsRvSearchPlaceholder")}
                 />
               </Field>
-              <Field label="Category">
+              <Field label={t("category")}>
                 <Select
                   value={filters.category}
                   onChange={(event) => setFilters({ ...filters, category: event.target.value })}
                 >
-                  <option value="">All</option>
-                  <option value="__none__">Uncategorised</option>
-                  {(["INCOME", "EXPENSE", "TRANSFER", "CASH"] as const).map((group) => (
+                  <option value="">{t("bsRvAll")}</option>
+                  <option value="__none__">{t("bsUncategorised")}</option>
+                  {GROUP_ORDER.map((group) => (
                     <optgroup key={group} label={groupLabel(group, lang)}>
                       {options
                         .filter((category) => category.group === group)
                         .map((category) => (
                           <option key={category.id} value={category.id}>
-                            {category.name}
+                            {categoryLabel(category, lang)}
                           </option>
                         ))}
                     </optgroup>
                   ))}
                 </Select>
               </Field>
-              <Field label="Marked as">
+              <Field label={t("bsRvMarkedAs")}>
                 <Select
                   value={filters.type}
                   onChange={(event) => setFilters({ ...filters, type: event.target.value })}
                 >
-                  <option value="">All</option>
-                  <option value="BUSINESS">Business</option>
-                  <option value="PERSONAL">Personal</option>
-                  <option value="TRANSFER">Transfer</option>
-                  <option value="UNKNOWN">Unreviewed</option>
+                  <option value="">{t("bsRvAll")}</option>
+                  <option value="BUSINESS">{t("appBusiness")}</option>
+                  <option value="PERSONAL">{t("bsTypePersonal")}</option>
+                  <option value="TRANSFER">{t("tkCoTransfer")}</option>
+                  <option value="UNKNOWN">{t("bsTypeUnreviewed")}</option>
                 </Select>
               </Field>
-              <Field label="Direction">
+              <Field label={t("bsRuDebitCredit")}>
                 <Select
                   value={filters.direction}
                   onChange={(event) => setFilters({ ...filters, direction: event.target.value })}
                 >
-                  <option value="">All</option>
-                  <option value="DEBIT">Debit</option>
-                  <option value="CREDIT">Credit</option>
+                  <option value="">{t("bsRvAll")}</option>
+                  <option value="DEBIT">{t("bkDebit")}</option>
+                  <option value="CREDIT">{t("bkCredit")}</option>
                 </Select>
               </Field>
-              <Field label="Flags">
+              <Field label={t("bsRvFlags")}>
                 <Select
                   value={filters.status}
                   onChange={(event) => setFilters({ ...filters, status: event.target.value })}
                 >
-                  <option value="">All</option>
-                  <option value="needs-review">Needs review</option>
-                  <option value="duplicates">Possible duplicates</option>
-                  <option value="high-value">High value</option>
-                  <option value="issues">Extraction issues</option>
+                  <option value="">{t("bsRvAll")}</option>
+                  <option value="needs-review">{t("bsNeedsReview")}</option>
+                  <option value="duplicates">{t("bsRvPossibleDuplicates")}</option>
+                  <option value="high-value">{t("bsExHighValue")}</option>
+                  <option value="issues">{t("bsRvExtractionIssues")}</option>
                 </Select>
               </Field>
             </div>
 
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm text-muted">
-                Showing {filtered.length.toLocaleString("en-IN")} of{" "}
-                {activeTransactions.length.toLocaleString("en-IN")}
+                {fill(t("bsRvShowing"), {
+                  n: filtered.length.toLocaleString(intlLocaleFor(lang)),
+                  total: activeTransactions.length.toLocaleString(intlLocaleFor(lang)),
+                })}
               </p>
               <div className="flex items-center gap-2">
                 <label className="text-xs text-muted" htmlFor="density">
-                  Rows in view
+                  {t("bsRvRowsInView")}
                 </label>
                 <select
                   id="density"
@@ -348,7 +372,7 @@ export function ReviewStep() {
                   <option value={100}>100</option>
                 </select>
                 <SecondaryButton className="!px-3 !py-1.5 !text-xs" onClick={() => setFilters(EMPTY_FILTERS)}>
-                  Clear filters
+                  {t("bsRvClearFilters")}
                 </SecondaryButton>
               </div>
             </div>
@@ -358,18 +382,20 @@ export function ReviewStep() {
             <Card className="border-indigo/30">
               <div className="flex flex-wrap items-end gap-3">
                 <p className="text-sm font-semibold text-ink">
-                  {selected.size} selected
+                  {fill(t("bsRvSelected"), {
+                    n: selected.size.toLocaleString(intlLocaleFor(lang)),
+                  })}
                 </p>
                 <div className="w-52">
-                  <Field label="Set category">
+                  <Field label={t("bsRvSetCategory")}>
                     <Select
                       value={bulkCategory}
                       onChange={(event) => setBulkCategory(event.target.value)}
                     >
-                      <option value="">Choose…</option>
+                      <option value="">{t("chooseEllipsis")}</option>
                       {options.map((category) => (
                         <option key={category.id} value={category.id}>
-                          {category.name}
+                          {categoryLabel(category, lang)}
                         </option>
                       ))}
                     </Select>
@@ -385,7 +411,7 @@ export function ReviewStep() {
                     )
                   }
                 >
-                  Apply
+                  {t("bsRvApply")}
                 </PrimaryButton>
                 <SecondaryButton
                   onClick={() =>
@@ -396,7 +422,7 @@ export function ReviewStep() {
                     )
                   }
                 >
-                  Mark business
+                  {t("bsRvMarkBusiness")}
                 </SecondaryButton>
                 <SecondaryButton
                   onClick={() =>
@@ -407,7 +433,7 @@ export function ReviewStep() {
                     )
                   }
                 >
-                  Mark personal
+                  {t("bsRvMarkPersonal")}
                 </SecondaryButton>
                 <SecondaryButton
                   onClick={() =>
@@ -418,19 +444,19 @@ export function ReviewStep() {
                     )
                   }
                 >
-                  Mark transfer
+                  {t("bsRvMarkTransfer")}
                 </SecondaryButton>
                 <SecondaryButton
                   onClick={() => bulkApply({ duplicateOverride: "KEEP" }, "duplicateOverride", "Duplicate override")}
                 >
-                  Keep in totals
+                  {t("bsRvKeepInTotals")}
                 </SecondaryButton>
                 <SecondaryButton
                   onClick={() => bulkApply({ duplicateOverride: "EXCLUDE" }, "duplicateOverride", "Duplicate override")}
                 >
-                  Exclude from totals
+                  {t("bsRvExcludeFromTotals")}
                 </SecondaryButton>
-                <SecondaryButton onClick={() => setSelected(new Set())}>Clear selection</SecondaryButton>
+                <SecondaryButton onClick={() => setSelected(new Set())}>{t("bsRvClearSelection")}</SecondaryButton>
               </div>
             </Card>
           ) : null}
@@ -481,11 +507,8 @@ export function ReviewStep() {
           <Card>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 className="text-lg font-bold text-ink">Classification rules</h3>
-                <p className="mt-1 text-sm text-muted">
-                  Rules run before pattern matching and the AI model, and always win. Approving a
-                  suggestion adds one here automatically. They are stored on this device.
-                </p>
+                <h3 className="text-lg font-bold text-ink">{t("bsRvRulesTitle")}</h3>
+                <p className="mt-1 text-sm text-muted">{t("bsRvRulesBlurb")}</p>
               </div>
               <PrimaryButton
                 onClick={() =>
@@ -500,14 +523,24 @@ export function ReviewStep() {
                   })
                 }
               >
-                New rule
+                {t("bsRuNewRule")}
               </PrimaryButton>
             </div>
 
             {rules.length === 0 ? (
               <p className="mt-4 rounded-xl bg-cream-paper/60 px-4 py-3 text-sm text-muted">
-                No rules yet. Open any transaction&apos;s <strong>Rule</strong> link to build one from a
-                narration you have already seen.
+                {(() => {
+                  const [before, after] = fill(t("bsRvNoRules"), { strong: "\u0000" }).split(
+                    "\u0000"
+                  );
+                  return (
+                    <>
+                      {before}
+                      <strong>{t("bsRuRule")}</strong>
+                      {after}
+                    </>
+                  );
+                })()}
               </p>
             ) : (
               <ul className="mt-4 space-y-2">
@@ -524,17 +557,21 @@ export function ReviewStep() {
                           {rule.origin === "AI_APPROVED" ? (
                             <span
                               className="ml-2 rounded-full bg-indigo/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-indigo"
-                              title="Written when you approved or corrected a suggestion. It runs before the model, so this merchant is never sent to it again."
+                              title={t("bsRvFromReviewTitle")}
                             >
-                              From review
+                              {t("bsRvFromReview")}
                             </span>
                           ) : null}
                         </p>
                         <p className="truncate text-xs text-muted">
-                          {rule.conditions.map(describeCondition).join(" and ")}
+                          {rule.conditions
+                            .map((condition) => describeCondition(condition, lang))
+                            .join(` ${t("bsRvCondAnd")} `)}
                         </p>
                       </div>
-                      <span className="text-xs text-muted">Priority {rule.priority}</span>
+                      <span className="text-xs text-muted">
+                        {fill(t("bsRvPriorityValue"), { n: rule.priority })}
+                      </span>
                       <label className="flex items-center gap-1.5 text-xs text-muted">
                         <input
                           type="checkbox"
@@ -542,21 +579,21 @@ export function ReviewStep() {
                           onChange={() => void actions.saveRule({ ...rule, enabled: !rule.enabled })}
                           className="h-4 w-4 rounded border-muted-line text-indigo focus:ring-indigo"
                         />
-                        Enabled
+                        {t("bsRvEnabled")}
                       </label>
                       <button
                         type="button"
                         onClick={() => setEditingRule(rule)}
                         className="text-xs font-semibold text-indigo hover:underline"
                       >
-                        Edit
+                        {t("edit")}
                       </button>
                       <button
                         type="button"
                         onClick={() => setDeletingRule(rule.id)}
                         className="text-xs font-semibold text-red-500 hover:text-red-600"
                       >
-                        Delete
+                        {t("delete")}
                       </button>
                     </li>
                   ))}
@@ -585,9 +622,9 @@ export function ReviewStep() {
 
       <ConfirmDialog
         open={deletingRule !== null}
-        title="Delete this rule?"
-        message="Transactions it classified keep their category until you run classification again."
-        confirmLabel="Delete"
+        title={t("bsRvDeleteRuleTitle")}
+        message={t("bsRvDeleteRuleBody")}
+        confirmLabel={t("delete")}
         onConfirm={() => {
           if (deletingRule) actions.deleteRule(deletingRule);
           setDeletingRule(null);

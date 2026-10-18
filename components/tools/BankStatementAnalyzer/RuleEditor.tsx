@@ -32,17 +32,10 @@ import {
   categoryLabel,
   groupLabel,
 } from "@/lib/bankStatement/classification/categories";
+import { RULE_FIELD_KEYS, RULE_OPERATOR_KEYS } from "@/lib/bankStatement/messages";
 import { intlLocaleFor } from "@/lib/i18n/pages";
-import { fill, type TKey } from "@/lib/i18n/translate";
+import { fill } from "@/lib/i18n/translate";
 import { KeywordInput } from "@/components/tools/BankStatementAnalyzer/KeywordInput";
-
-const FIELD_KEYS: Record<RuleField, TKey> = {
-  narration: "bkNarration",
-  reference: "stReference",
-  amount: "amount",
-  direction: "bsRuDebitCredit",
-  date: "date",
-};
 
 const OPERATORS: Record<RuleField, RuleOperator[]> = {
   narration: ["contains", "startsWith", "endsWith", "equals"],
@@ -50,16 +43,6 @@ const OPERATORS: Record<RuleField, RuleOperator[]> = {
   amount: ["greaterThan", "lessThan", "between", "equals"],
   direction: ["equals"],
   date: ["between", "greaterThan", "lessThan"],
-};
-
-const OPERATOR_KEYS: Record<RuleOperator, TKey> = {
-  contains: "bsOpContains",
-  startsWith: "bsOpStartsWith",
-  endsWith: "bsOpEndsWith",
-  equals: "bsOpEquals",
-  greaterThan: "bsOpGreaterThan",
-  lessThan: "bsOpLessThan",
-  between: "bsOpBetween",
 };
 
 export function RuleEditor({
@@ -145,9 +128,9 @@ export function RuleEditor({
                   }}
                   aria-label={t("bsRuField")}
                 >
-                  {(Object.keys(FIELD_KEYS) as RuleField[]).map((field) => (
+                  {(Object.keys(RULE_FIELD_KEYS) as RuleField[]).map((field) => (
                     <option key={field} value={field}>
-                      {t(FIELD_KEYS[field])}
+                      {t(RULE_FIELD_KEYS[field])}
                     </option>
                   ))}
                 </Select>
@@ -161,7 +144,7 @@ export function RuleEditor({
                 >
                   {OPERATORS[condition.field].map((operator) => (
                     <option key={operator} value={operator}>
-                      {t(OPERATOR_KEYS[operator])}
+                      {t(RULE_OPERATOR_KEYS[operator])}
                     </option>
                   ))}
                 </Select>
