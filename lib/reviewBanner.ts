@@ -96,9 +96,9 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   ta: {
     lead: "Setu உங்களுக்கு உதவுகிறதா?",
-    body: "எங்கள் இலவச கருவிகளும் வழிகாட்டிகளும் உங்கள் வேலையை எளிதாக்கினால், தயவுசெய்து Google-இல் எங்களுக்கு ஒரு மதிப்பாய்வு எழுதுங்கள். ஒரு நிமிடம்தான் ஆகும்; மற்ற வணிகர்கள் எங்களைக் கண்டறிய இது உதவும்.",
-    cta: "மதிப்பாய்வு எழுதுங்கள்",
-    label: "Google-இல் Setu-வுக்கு மதிப்பாய்வு",
+    body: "எங்கள் இலவச கருவிகளும் வழிகாட்டிகளும் உங்கள் வேலையை எளிதாக்கினால், தயவுசெய்து Google-இல் எங்களைப் பற்றி ஒரு மதிப்புரை எழுதுங்கள். ஒரு நிமிடம்தான் ஆகும்; மற்ற வணிகர்கள் எங்களைக் கண்டறிய இது உதவும்.",
+    cta: "மதிப்புரை எழுதுங்கள்",
+    label: "Google-இல் Setu பற்றி மதிப்புரை எழுதுங்கள்",
     dismiss: "மூடு",
   },
   te: {
@@ -110,7 +110,7 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   mr: {
     lead: "Setu तुमच्या कामी येत आहे का?",
-    body: "आमची मोफत साधने आणि मार्गदर्शक तुमचे काम सोपे करत असतील, तर कृपया Google वर आम्हाला एक रिव्ह्यू द्या. फक्त एक मिनिट लागतो, आणि इतर व्यावसायिकांना आम्ही सापडायला मदत होते.",
+    body: "आमची मोफत साधने आणि मार्गदर्शक लेख तुमचे काम सोपे करत असतील, तर कृपया Google वर आम्हाला एक रिव्ह्यू द्या. फक्त एक मिनिट लागते, आणि त्यामुळे इतर व्यावसायिकांना आम्ही सापडायला मदत होते.",
     cta: "रिव्ह्यू द्या",
     label: "Google वर Setu ला रिव्ह्यू द्या",
     dismiss: "बंद करा",
@@ -124,7 +124,7 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   kn: {
     lead: "Setu ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತಿದೆಯೇ?",
-    body: "ನಮ್ಮ ಉಚಿತ ಸಾಧನಗಳು ಮತ್ತು ಮಾರ್ಗದರ್ಶಿಗಳು ನಿಮ್ಮ ಕೆಲಸವನ್ನು ಸುಲಭಗೊಳಿಸಿದ್ದರೆ, ದಯವಿಟ್ಟು Google ನಲ್ಲಿ ನಮಗೆ ಒಂದು ವಿಮರ್ಶೆ ನೀಡಿ. ಒಂದು ನಿಮಿಷ ಸಾಕು, ಮತ್ತು ಇತರ ವ್ಯಾಪಾರಿಗಳು ನಮ್ಮನ್ನು ಹುಡುಕಲು ಇದು ನೆರವಾಗುತ್ತದೆ.",
+    body: "ನಮ್ಮ ಉಚಿತ ಸಾಧನಗಳು ಮತ್ತು ಮಾರ್ಗದರ್ಶಿಗಳು ನಿಮ್ಮ ಕೆಲಸವನ್ನು ಸುಲಭಗೊಳಿಸಿದ್ದರೆ, ದಯವಿಟ್ಟು Google ನಲ್ಲಿ ನಮಗೆ ಒಂದು ವಿಮರ್ಶೆ ನೀಡಿ. ಒಂದು ನಿಮಿಷ ಸಾಕು, ಇದರಿಂದ ಇತರ ವ್ಯಾಪಾರಿಗಳಿಗೆ ನಮ್ಮನ್ನು ಕಂಡುಕೊಳ್ಳಲು ನೆರವಾಗುತ್ತದೆ.",
     cta: "ವಿಮರ್ಶೆ ನೀಡಿ",
     label: "Google ನಲ್ಲಿ Setu ಗೆ ವಿಮರ್ಶೆ ನೀಡಿ",
     dismiss: "ಮುಚ್ಚಿ",
@@ -152,9 +152,9 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   fr: {
     lead: "Setu vous est utile ?",
-    body: "Si nos outils et guides gratuits vous facilitent le travail, laissez-nous un avis sur Google. Cela prend une minute et aide d'autres entreprises à nous trouver.",
+    body: "Si nos outils et guides gratuits vous facilitent le travail, laissez-nous un avis sur Google. Cela ne prend qu'une minute et aide d'autres entreprises à nous trouver.",
     cta: "Laisser un avis",
-    label: "Donner votre avis sur Setu sur Google",
+    label: "Évaluer Setu sur Google",
     dismiss: "Fermer",
   },
   ar: {
@@ -166,7 +166,7 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   pt: {
     lead: "O Setu está ajudando você?",
-    body: "Se nossas ferramentas e guias gratuitos facilitam o seu trabalho, deixe uma avaliação no Google. Leva um minuto e ajuda outros negócios a nos encontrar.",
+    body: "Se nossas ferramentas e guias gratuitos facilitam o seu trabalho, deixe uma avaliação no Google. Leva só um minuto e ajuda outros negócios a nos encontrar.",
     cta: "Deixar uma avaliação",
     label: "Avaliar o Setu no Google",
     dismiss: "Fechar",
@@ -180,7 +180,7 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
   },
   de: {
     lead: "Hilft Ihnen Setu?",
-    body: "Wenn unsere kostenlosen Tools und Ratgeber Ihnen die Arbeit erleichtern, hinterlassen Sie uns bitte eine Google-Bewertung. Das dauert eine Minute und hilft anderen Unternehmen, uns zu finden.",
+    body: "Wenn unsere kostenlosen Tools und Ratgeber Ihnen die Arbeit erleichtern, hinterlassen Sie uns bitte eine Google-Bewertung. Das dauert nur eine Minute und hilft anderen Unternehmen, uns zu finden.",
     cta: "Bewertung schreiben",
     label: "Setu auf Google bewerten",
     dismiss: "Schließen",
