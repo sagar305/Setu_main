@@ -473,6 +473,12 @@ export type Anomaly = {
     | "DUPLICATE"
     | "BALANCE_BREAK";
   severity: "info" | "warning";
+  /**
+   * The numbers the sentence quotes, so the sentence itself can be written at
+   * read time in the reader's language — see `anomalyLabel` in ../messages.
+   */
+  detail: { count: number; months?: string; threshold?: number };
+  /** The sentence in English, for anomalies stored before the codes. */
   message: string;
   transactionIds: string[];
 };

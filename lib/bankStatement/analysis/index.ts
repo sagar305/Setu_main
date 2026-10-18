@@ -216,6 +216,7 @@ export function detectAnomalies(
       id: "high-value",
       kind: "HIGH_VALUE",
       severity: "info",
+      detail: { count: highValue.length, threshold: settings.highValueThreshold },
       message: `${highValue.length} transaction${highValue.length === 1 ? "" : "s"} at or above the ₹${settings.highValueThreshold.toLocaleString("en-IN")} threshold.`,
       transactionIds: highValue.map((t) => t.id),
     });
@@ -227,6 +228,7 @@ export function detectAnomalies(
       id: "duplicates",
       kind: "DUPLICATE",
       severity: "warning",
+      detail: { count: duplicates.length },
       message: `${duplicates.length} possible duplicate${duplicates.length === 1 ? "" : "s"} found — excluded from totals until you say otherwise.`,
       transactionIds: duplicates.map((t) => t.id),
     });
@@ -250,6 +252,7 @@ export function detectAnomalies(
       id: "round-tripping",
       kind: "ROUND_TRIPPING",
       severity: "info",
+      detail: { count: roundTrips.length / 2 },
       message: `${roundTrips.length / 2} credit(s) were followed by a matching debit within two days.`,
       transactionIds: roundTrips,
     });
@@ -263,6 +266,7 @@ export function detectAnomalies(
       id: "weekend-cash",
       kind: "WEEKEND_CASH",
       severity: "info",
+      detail: { count: weekendCash.length },
       message: `${weekendCash.length} cash transaction${weekendCash.length === 1 ? "" : "s"} dated on a weekend.`,
       transactionIds: weekendCash.map((t) => t.id),
     });
@@ -279,18 +283,25 @@ export function detectAnomalies(
         id: "spend-spike",
         kind: "SPIKE",
         severity: "info",
+        detail: { count: spikes.length, months: spikes.map((s) => s.label).join(", ") },
         message: `Spending in ${spikes.map((s) => s.label).join(", ")} was more than double the typical month.`,
         transactionIds: [],
       });
     }
   }
 
-  const balanceBreaks = all.filter((t) => t.rowIssue?.startsWith("Running balance"));
+  const balanceBreaks = all.filter(
+    (t) =>
+      t.rowIssueCode?.code === "BALANCE_BREAK" ||
+      // Statements extracted before the issue codes carry English prose here.
+      t.rowIssue?.startsWith("Running balance")
+  );
   if (balanceBreaks.length > 0) {
     anomalies.push({
       id: "balance-breaks",
       kind: "BALANCE_BREAK",
       severity: "warning",
+      detail: { count: balanceBreaks.length },
       message: `${balanceBreaks.length} row${balanceBreaks.length === 1 ? " does" : "s do"} not follow the running balance — the extraction may be incomplete.`,
       transactionIds: balanceBreaks.map((t) => t.id),
     });

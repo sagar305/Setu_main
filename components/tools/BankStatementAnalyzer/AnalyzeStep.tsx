@@ -5,6 +5,9 @@
 // buried under them.
 
 import { useI18n } from "@/lib/i18n";
+import { fill } from "@/lib/i18n/translate";
+import { intlLocaleFor } from "@/lib/i18n/pages";
+import { anomalyLabel } from "@/lib/bankStatement/messages";
 import { useState } from "react";
 import Link from "next/link";
 import { AlertTriangle } from "lucide-react";
@@ -27,13 +30,13 @@ export function AnalyzeStep() {
   if (loaded && statements.length === 0) {
     return (
       <Card>
-        <h2 className="text-xl font-bold text-ink">Nothing to analyse yet</h2>
-        <p className="mt-2 text-sm text-muted">Import a statement first.</p>
+        <h2 className="text-xl font-bold text-ink">{t("bsDashNothing")}</h2>
+        <p className="mt-2 text-sm text-muted">{t("bsExImportFirst")}</p>
         <Link
           href="/products/bank-statement-analyzer/import"
           className="mt-4 inline-block rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
-          Go to import
+          {t("bsStepImport")}
         </Link>
       </Card>
     );
@@ -46,17 +49,19 @@ export function AnalyzeStep() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold text-ink">Dashboard</h2>
+          <h2 className="text-2xl font-bold text-ink">{t("bsDashTitle")}</h2>
           <p className="mt-1 text-sm text-muted">
-            {activeStatements.length} statement{activeStatements.length === 1 ? "" : "s"} ·{" "}
-            {activeTransactions.length.toLocaleString("en-IN")} transactions
+            {fill(t(activeStatements.length === 1 ? "bsExCount1" : "bsExCountN"), {
+              n: activeTransactions.length.toLocaleString(intlLocaleFor(lang)),
+              s: activeStatements.length,
+            })}
           </p>
         </div>
         <Link
           href="/products/bank-statement-analyzer/export"
           className="rounded-lg bg-indigo px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo/90"
         >
-          Export reports
+          {t("bsStepExport")}
         </Link>
       </div>
 
@@ -65,7 +70,7 @@ export function AnalyzeStep() {
           <div className="flex gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
             <div>
-              <h3 className="font-bold text-ink">These figures may be incomplete</h3>
+              <h3 className="font-bold text-ink">{t("bsDashMayBeIncomplete")}</h3>
               <ul className="mt-2 space-y-1 text-sm text-muted">
                 {flagged.map((statement) => (
                   <li key={statement.id}>
@@ -81,26 +86,32 @@ export function AnalyzeStep() {
 
       {unverified.length > 0 ? (
         <p className="rounded-xl bg-cream-paper/70 px-4 py-3 text-sm text-muted">
-          Read with the generic layout engine — bank-specific parsers have not been verified against
-          real statements yet. Spot-check a few rows against your PDF before filing anything.
+          {t("bsPdfGenericNote")}
         </p>
       ) : null}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <SummaryCard label="Total credits" value={formatMoney(analysis.totals.credits, currency)} />
-        <SummaryCard label="Total debits" value={formatMoney(analysis.totals.debits, currency)} />
+        <SummaryCard label={t("tbTotalCredits")} value={formatMoney(analysis.totals.credits, currency)} />
+        <SummaryCard label={t("tbTotalDebits")} value={formatMoney(analysis.totals.debits, currency)} />
         <SummaryCard
-          label="Net cash flow"
+          label={t("bsNetCashFlow")}
           value={formatMoney(analysis.totals.net, currency)}
           negative={analysis.totals.net < 0}
           strong
         />
         <SummaryCard
-          label="Transactions"
-          value={analysis.totals.count.toLocaleString("en-IN")}
+          label={t("bsTransactions")}
+          value={analysis.totals.count.toLocaleString(intlLocaleFor(lang))}
           hint={
             analysis.totals.excludedDuplicates > 0
-              ? `${analysis.totals.excludedDuplicates} excluded as duplicates`
+              ? fill(
+                  t(
+                    analysis.totals.excludedDuplicates === 1
+                      ? "bsDashExcludedDup1"
+                      : "bsDashExcludedDupN"
+                  ),
+                  { n: analysis.totals.excludedDuplicates }
+                )
               : undefined
           }
         />
@@ -129,7 +140,7 @@ export function AnalyzeStep() {
 
       {analysis.anomalies.length > 0 ? (
         <Card>
-          <h3 className="mb-3 text-base font-bold text-ink">Worth a look</h3>
+          <h3 className="mb-3 text-base font-bold text-ink">{t("bsDashWorthLook")}</h3>
           <ul className="space-y-2">
             {analysis.anomalies.map((anomaly) => (
               <li
@@ -140,7 +151,7 @@ export function AnalyzeStep() {
                     : "bg-cream-paper/70 text-muted"
                 }`}
               >
-                {anomaly.message}
+                {anomalyLabel(anomaly, lang, (value) => formatMoney(value, currency))}
               </li>
             ))}
           </ul>
@@ -181,18 +192,23 @@ export function AnalyzeStep() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <ReportCard
-          title="Cash transactions"
-          subtitle={`In ${formatMoney(analysis.cash.deposits, currency)} · out ${formatMoney(analysis.cash.withdrawals, currency)}`}
+          title={t("bsPdfCashTransactions")}
+          subtitle={fill(t("bsDashCashIn"), {
+            in: formatMoney(analysis.cash.deposits, currency),
+            out: formatMoney(analysis.cash.withdrawals, currency),
+          })}
           rows={analysis.cash.transactions}
           currency={currency}
-          empty="No cash transactions identified."
+          empty={t("bsDashNoCash")}
         />
         <ReportCard
-          title="High value transactions"
-          subtitle={`At or above ${formatMoney(settings.highValueThreshold, currency)}`}
+          title={t("bsPdfHighValue")}
+          subtitle={fill(t("bsDashAtOrAbove"), {
+            amount: formatMoney(settings.highValueThreshold, currency),
+          })}
           rows={analysis.highValue}
           currency={currency}
-          empty="Nothing above the threshold."
+          empty={t("bsDashNoneAbove")}
           action={
             <form
               className="flex items-end gap-2"
@@ -205,7 +221,7 @@ export function AnalyzeStep() {
               }}
             >
               <div className="w-32">
-                <Field label="Threshold">
+                <Field label={t("bsDashThreshold")}>
                   <NumberInput
                     value={threshold}
                     onChange={(event) => setThreshold(event.target.value)}
@@ -214,63 +230,67 @@ export function AnalyzeStep() {
                 </Field>
               </div>
               <SecondaryButton type="submit" className="!py-2">
-                Set
+                {t("bsDashSet")}
               </SecondaryButton>
             </form>
           }
         />
         <ReportCard
-          title="Bank charges"
+          title={t("bsDashBankCharges")}
           subtitle={formatMoney(analysis.bankCharges.total, currency)}
           rows={analysis.bankCharges.transactions}
           currency={currency}
-          empty="No bank charges identified."
+          empty={t("bsDashNoBankCharges")}
         />
         <ReportCard
-          title="Interest"
+          title={t("bsDashInterest")}
           subtitle={formatMoney(analysis.interest.total, currency)}
           rows={analysis.interest.transactions}
           currency={currency}
-          empty="No interest entries identified."
+          empty={t("bsDashNoInterest")}
         />
         <ReportCard
-          title="Possible transfers"
+          title={t("bsDashPossibleTransfers")}
           subtitle={formatMoney(analysis.transfers.total, currency)}
           rows={analysis.transfers.transactions}
           currency={currency}
-          empty="No transfers identified."
+          empty={t("bsDashNoTransfers")}
         />
         <ReportCard
-          title="Uncategorised — needs review"
-          subtitle={`${analysis.uncategorised.length} transactions`}
+          title={t("bsPdfUncatReview")}
+          subtitle={fill(
+            t(analysis.uncategorised.length === 1 ? "bsAudTxnCount1" : "bsAudTxnCountN"),
+            { n: analysis.uncategorised.length }
+          )}
           rows={analysis.uncategorised}
           currency={currency}
-          empty="Everything is categorised."
+          empty={t("bsDashAllCategorised")}
           action={
             <Link
               href="/products/bank-statement-analyzer/review"
               className="text-sm font-semibold text-indigo hover:underline"
             >
-              Review them
+              {t("bsDashReviewThem")}
             </Link>
           }
         />
       </div>
 
       <Card>
-        <h3 className="mb-2 text-base font-bold text-ink">GST-relevant transactions</h3>
+        <h3 className="mb-2 text-base font-bold text-ink">{t("bsDashGstTitle")}</h3>
         <p className="mb-4 text-sm text-muted">
-          Identification only. This tool does not calculate ITC eligibility, tax liability, place of
-          supply or reverse charge — those need context it does not have.
+          {t("bsDashGstNote")}
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl bg-cream-paper/70 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted">GST relevant</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t("bsDashGstRelevant")}
+            </p>
             <p className="mt-1 text-2xl font-bold text-ink">{analysis.gst.relevant.length}</p>
           </div>
           <div className="rounded-xl bg-cream-paper/70 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-              Potentially relevant
+              {t("bsDashGstPotential")}
             </p>
             <p className="mt-1 text-2xl font-bold text-ink">{analysis.gst.potential.length}</p>
           </div>
@@ -323,6 +343,7 @@ function ReportCard({
   empty: string;
   action?: React.ReactNode;
 }) {
+  const { t } = useI18n();
   return (
     <Card>
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
@@ -339,9 +360,9 @@ function ReportCard({
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-muted-line/30 text-left text-muted">
-                <th className="py-1.5 pr-3 font-semibold">Date</th>
-                <th className="py-1.5 pr-3 font-semibold">Narration</th>
-                <th className="py-1.5 text-right font-semibold">Amount</th>
+                <th className="py-1.5 pr-3 font-semibold">{t("date")}</th>
+                <th className="py-1.5 pr-3 font-semibold">{t("bkNarration")}</th>
+                <th className="py-1.5 text-right font-semibold">{t("amount")}</th>
               </tr>
             </thead>
             <tbody>

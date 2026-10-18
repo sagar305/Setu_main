@@ -11,6 +11,7 @@
 // worth more to a CA chasing a broken balance than an empty cell.
 
 import type {
+  Anomaly,
   AuditCode,
   AuditEntry,
   BulkEdit,
@@ -212,4 +213,34 @@ export function auditDetailLabel(entry: AuditEntry, lang: LanguageCode): string 
     default:
       return entry.detail;
   }
+}
+
+const ANOMALY_KEYS: Record<Anomaly["kind"], [TKey, TKey]> = {
+  HIGH_VALUE: ["bsAnHighValue1", "bsAnHighValueN"],
+  DUPLICATE: ["bsAnDuplicate1", "bsAnDuplicateN"],
+  ROUND_TRIPPING: ["bsAnRoundTrip1", "bsAnRoundTripN"],
+  WEEKEND_CASH: ["bsAnWeekendCash1", "bsAnWeekendCashN"],
+  SPIKE: ["bsAnSpike", "bsAnSpike"],
+  BALANCE_BREAK: ["bsAnBalanceBreak1", "bsAnBalanceBreakN"],
+};
+
+/**
+ * One anomaly, in this reader's language.
+ *
+ * `money` formats the high-value threshold, so the amount carries the
+ * statement's own currency rather than a rupee sign baked into the sentence.
+ */
+export function anomalyLabel(
+  anomaly: Anomaly,
+  lang: LanguageCode,
+  money: (value: number) => string
+): string {
+  const detail = anomaly.detail;
+  if (!detail) return anomaly.message;
+  const [one, many] = ANOMALY_KEYS[anomaly.kind];
+  return fill(translate(lang, detail.count === 1 ? one : many), {
+    n: detail.count,
+    months: detail.months ?? "",
+    threshold: detail.threshold === undefined ? "" : money(detail.threshold),
+  });
 }
