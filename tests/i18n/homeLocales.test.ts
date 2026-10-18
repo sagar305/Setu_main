@@ -656,13 +656,20 @@ describe("translation files are clean text", () => {
    * half-translated page. It happened with the VAT and sales-tax keyword lists in
    * seven languages each, where the English tail keyword survived into the
    * localized meta tag. Nested lists inside an item have to match English exactly.
+   *
+   * The long-form lists — FAQ answers, a tool's explainer, a calculator's guide —
+   * are the exception: the localized routes cut them back to what the translation
+   * carries (see lib/i18n/translated-only.ts), so a shorter one shows fewer
+   * sections instead of English ones. Those may trail English, never exceed it.
    */
   it("keeps every translated item's nested lists the same length as English", () => {
-    const paths: [string, (item: Record<string, any>) => unknown[] | undefined][] = [
-      ["seo.keywords", (item) => item.seo?.keywords],
-      ["about.paragraphs", (item) => item.about?.paragraphs],
-      ["faq.items", (item) => item.faq?.items],
-      ["body", (item) => item.body],
+    type Rule = "exact" | "at-most";
+    const paths: [string, (item: Record<string, any>) => unknown[] | undefined, Rule][] = [
+      ["seo.keywords", (item) => item.seo?.keywords, "exact"],
+      ["about.paragraphs", (item) => item.about?.paragraphs, "exact"],
+      ["faq.items", (item) => item.faq?.items, "at-most"],
+      ["body", (item) => item.body, "at-most"],
+      ["guide", (item) => item.guide, "at-most"],
     ];
     for (const page of ["calculators", "tools"] as const) {
       const english = JSON.parse(
@@ -674,16 +681,24 @@ describe("translation files are clean text", () => {
           []) as Record<string, any>[];
         items.forEach((item, index) => {
           if (!item) return;
-          for (const [label, get] of paths) {
+          for (const [label, get, rule] of paths) {
             const translated = get(item);
             const source = get(english[index]);
             if (!translated || !source) continue;
-            expect(
-              translated.length,
+            const where =
               `content/i18n/${page}/${file} items[${index}] ` +
-                `(${english[index].slug}) ${label} has ${translated.length} entries, ` +
-                `English has ${source.length} — the missing entries fall back to English`,
-            ).toBe(source.length);
+              `(${english[index].slug}) ${label} has ${translated.length} entries, ` +
+              `English has ${source.length}`;
+            if (rule === "exact") {
+              expect(translated.length, `${where} — the missing entries fall back to English`).toBe(
+                source.length,
+              );
+            } else {
+              expect(
+                translated.length,
+                `${where} — the extra entries have no English to sit beside`,
+              ).toBeLessThanOrEqual(source.length);
+            }
           }
         });
       }

@@ -6,14 +6,22 @@ import {
   getBlogContent,
   getBlogPostUrl,
   getCalculatorsContent,
+  getGlossaryTermUrl,
+  getGlossaryTerms,
   getToolsContent,
 } from "@/lib/content";
+import {
+  pharmacySoftwareEnabled,
+  rentalSoftwareEnabled,
+  repairSoftwareEnabled,
+  tokenSystemEnabled,
+} from "@/lib/featureFlags";
 import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Sitemap | Every Page on Setu Technology",
   description:
-    "A complete index of Setu Technology — products, pricing, free calculators and business tools, blog categories and every published article, in one list.",
+    "A complete index of Setu Technology — products, pricing, free calculators and tools, blog categories, every article and glossary term, in one list.",
   alternates: { canonical: "/sitemap" },
 };
 
@@ -33,7 +41,6 @@ function buildSections(): Section[] {
         { label: "Pricing", href: "/pricing" },
         { label: "Contact", href: "/contact" },
         { label: "Book a demo", href: "/book-demo" },
-        { label: "Business glossary", href: "/glossary" },
       ],
     },
     {
@@ -41,11 +48,30 @@ function buildSections(): Section[] {
       links: [
         { label: "All products", href: "/products" },
         { label: "Browser Based POS", href: "/products/browser-based-pos" },
+        { label: "Bank Statement Analyzer", href: "/products/bank-statement-analyzer" },
         { label: "Free Dine — Free Restaurant POS", href: "/products/free-restaurant-pos" },
         { label: "Setu QR Menu", href: "/products/qr-menu" },
+        { label: "Setu QR Menu — live demo", href: "https://demo.qr-menu.setutechnology.com/" },
+        { label: "Tuition Class Manager", href: "/products/free-tuition-software" },
+        { label: "Free Clinic Manager", href: "/products/free-clinic-software" },
+        // Unreleased products appear only when their flag is on, matching
+        // /products and sitemap.xml, so this page never links to a 404.
+        ...(tokenSystemEnabled()
+          ? [{ label: "Free Token System", href: "/products/free-token-system" }]
+          : []),
+        ...(rentalSoftwareEnabled()
+          ? [{ label: "Free Rental & Hire Book", href: "/products/free-rental-software" }]
+          : []),
+        ...(pharmacySoftwareEnabled()
+          ? [{ label: "Free Pharmacy POS", href: "/products/free-pharmacy-software" }]
+          : []),
+        ...(repairSoftwareEnabled()
+          ? [{ label: "Free Repair Job Card", href: "/products/free-repair-shop-software" }]
+          : []),
         { label: "Setu Dine", href: "/products/restaurant-pos" },
         { label: "Setu Queue", href: "/products/queue" },
         { label: "Setu Retail", href: "/products/retail" },
+        { label: "Setu Tuition", href: "/products/tuition" },
         { label: "Setu Clinic", href: "/products/clinic" },
         { label: "Setu Workflow", href: "/products/workflow" },
       ],
@@ -64,10 +90,14 @@ function buildSections(): Section[] {
       heading: "Tools",
       links: [
         { label: "All tools", href: "/tools" },
-        ...getToolsContent().items.map((item) => ({
-          label: item.name,
-          href: "href" in item && item.href ? item.href : `/tools/${item.slug}`,
-        })),
+        ...getToolsContent()
+          .items.map((item) => ({
+            label: item.name,
+            href: "href" in item && item.href ? item.href : `/tools/${item.slug}`,
+          }))
+          // Browser Based POS and the Bank Statement Analyzer are listed under
+          // Products already; one link per page keeps the count honest.
+          .filter((link) => !link.href.startsWith("/products/")),
       ],
     },
     {
@@ -83,6 +113,24 @@ function buildSections(): Section[] {
     {
       heading: "Articles",
       links: blog.posts.map((post) => ({ label: post.title, href: getBlogPostUrl(post) })),
+    },
+    {
+      heading: "Glossary",
+      links: [
+        { label: "All terms", href: "/glossary" },
+        ...getGlossaryTerms().map((term) => ({
+          label: term.term,
+          href: getGlossaryTermUrl(term.slug),
+        })),
+      ],
+    },
+    {
+      heading: "Legal",
+      links: [
+        { label: "Privacy policy", href: "/privacy" },
+        { label: "Terms of service", href: "/terms" },
+        { label: "Refund & cancellation policy", href: "/refund-policy" },
+      ],
     },
   ];
 }

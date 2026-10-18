@@ -6,7 +6,8 @@ import { TOOL_PAGES } from "@/components/tools/registry";
 import { getToolsContent, type ToolItem } from "@/lib/content";
 import { isLanguageCode, type LanguageCode } from "@/lib/i18n/config";
 import { toolMetadata } from "@/lib/i18n/item-metadata";
-import { getLocalizedContent } from "@/lib/i18n/page-content";
+import { getLocalizedContent, getTranslationPatch } from "@/lib/i18n/page-content";
+import { keepTranslatedOnly } from "@/lib/i18n/translated-only";
 import { itemLocalesFor, itemRoutesFor } from "@/lib/i18n/pages";
 
 /**
@@ -35,7 +36,11 @@ type Params = Promise<{ lang: string; slug: string }>;
 function resolve(
   lang: string,
   slug: string,
-): { lang: LanguageCode; item: ToolItem; labels: { freeTool: string; loading: string } } {
+): {
+  lang: LanguageCode;
+  item: ToolItem;
+  labels: { freeTool: string; loading: string; faqHeadline: string };
+} {
   if (!isLanguageCode(lang) || lang === "en") notFound();
   if (!itemLocalesFor("tools", slug).includes(lang)) notFound();
 
@@ -46,9 +51,11 @@ function resolve(
   // The whole page is merged at once rather than item by item, so an item's
   // copy falls back to English exactly as every other translated page does.
   const localized = getLocalizedContent("tools", lang, english);
+  // The explainer and the FAQ appear only as far as they are translated.
+  const patch = (getTranslationPatch("tools", lang) as { items?: unknown[] } | null)?.items?.[index];
   return {
     lang,
-    item: localized.items[index] as ToolItem,
+    item: keepTranslatedOnly(localized.items[index] as ToolItem, patch, [["body"], ["faq", "items"]]),
     labels: localized.labels,
   };
 }
@@ -74,6 +81,7 @@ export default async function LocalizedToolPage({ params }: { params: Params }) 
       item={item}
       lang={lang}
       eyebrow={labels.freeTool}
+      faqHeadline={labels.faqHeadline}
       schema={schema}
       suggested={suggested}
     >

@@ -87,38 +87,75 @@ describe("tool pages keep their copy in content", () => {
   });
 });
 
-describe("the body blocks a few tool pages carry", () => {
-  const withBody = SLUGS.filter((slug) => itemFor(slug).body);
+const CALCULATORS = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "content", "en", "calculators.json"), "utf8"),
+).items as Record<string, any>[];
 
-  it("finds the five pages that have them", () => {
-    expect(withBody).toEqual([
-      "barcode-generator",
-      "invoice-generator",
-      "qr-menu-generator",
-      "upi-qr-generator",
-      "upi-qr-split",
-    ]);
+/**
+ * The explainer under every tool, and the guide under every calculator. Both
+ * render through ToolBody, so one set of checks covers the two.
+ */
+const LONG_FORM = [
+  ...SLUGS.map((slug) => ({ where: `tools/${slug}`, item: itemFor(slug), blocks: itemFor(slug).body })),
+  ...CALCULATORS.map((item) => ({ where: `calculators/${item.slug}`, item, blocks: item.guide })),
+] as { where: string; item: Record<string, any>; blocks: Record<string, any>[] | undefined }[];
+
+describe("the explainer every tool and calculator page carries", () => {
+  it("gives every page one, with something to read past the tool", () => {
+    for (const { where, blocks } of LONG_FORM) {
+      expect(blocks?.length ?? 0, `${where} has no explainer blocks`).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  it("gives every page an FAQ of at least five questions", () => {
+    for (const { where, item } of LONG_FORM) {
+      expect(item.faq?.items?.length ?? 0, `${where} has a thin FAQ`).toBeGreaterThanOrEqual(5);
+    }
+  });
+
+  it("never asks the same FAQ question twice on a page", () => {
+    for (const { where, item } of LONG_FORM) {
+      const questions = item.faq.items.map((entry: Record<string, any>) =>
+        entry.question.trim().toLowerCase(),
+      );
+      expect(new Set(questions).size, `${where} repeats an FAQ question`).toBe(questions.length);
+    }
   });
 
   /** ToolBody switches on `kind`, so an unknown one renders nothing at all. */
   it("uses only the kinds ToolBody knows how to render", () => {
     const kinds = new Set(["features", "steps", "checklist", "prose", "note", "links"]);
-    for (const slug of withBody) {
-      for (const block of itemFor(slug).body) {
-        expect(kinds.has(block.kind), `${slug}: unknown block kind "${block.kind}"`).toBe(true);
-        expect(block.headline?.trim(), `${slug}: a ${block.kind} block has no headline`).toBeTruthy();
+    for (const { where, blocks } of LONG_FORM) {
+      for (const block of blocks ?? []) {
+        expect(kinds.has(block.kind), `${where}: unknown block kind "${block.kind}"`).toBe(true);
+        expect(block.headline?.trim(), `${where}: a ${block.kind} block has no headline`).toBeTruthy();
+      }
+    }
+  });
+
+  /** The features grid is three columns wide; four or five cards leave a hole. */
+  it("fills the features grid in whole rows", () => {
+    for (const { where, blocks } of LONG_FORM) {
+      for (const block of blocks ?? []) {
+        if (block.kind !== "features") continue;
+        expect(block.items.length % 3, `${where}: ${block.items.length} features`).toBe(0);
       }
     }
   });
 
   /**
    * ToolBody keys the blocks by headline, and React drops the second of two
-   * children sharing a key — so a duplicate would silently lose a section.
+   * children sharing a key — so a duplicate would silently lose a section. A
+   * calculator's guide also sits beside its "about" and FAQ headings.
    */
-  it("gives each page's blocks distinct headlines", () => {
-    for (const slug of withBody) {
-      const headlines = itemFor(slug).body.map((block: Record<string, any>) => block.headline);
-      expect(new Set(headlines).size, `${slug} has two blocks with one headline`).toBe(
+  it("gives each page's sections distinct headlines", () => {
+    for (const { where, item, blocks } of LONG_FORM) {
+      const headlines = [
+        ...(blocks ?? []).map((block) => block.headline),
+        ...(item.about?.headline ? [item.about.headline] : []),
+        ...(item.faq?.headline ? [item.faq.headline] : []),
+      ].map((headline: string) => headline.trim().toLowerCase());
+      expect(new Set(headlines).size, `${where} has two sections with one headline`).toBe(
         headlines.length,
       );
     }
@@ -130,15 +167,34 @@ describe("the body blocks a few tool pages carry", () => {
    * as asterisks and brackets.
    */
   it("keeps the inline markup in a shape RichText recognises", () => {
-    for (const slug of withBody) {
-      for (const text of prose(itemFor(slug).body)) {
+    for (const { where, blocks } of LONG_FORM) {
+      for (const text of prose(blocks ?? [])) {
         const stars = (text.match(/\*\*/g) ?? []).length;
-        expect(stars % 2, `${slug}: unbalanced ** in "${text.slice(0, 50)}"`).toBe(0);
+        expect(stars % 2, `${where}: unbalanced ** in "${text.slice(0, 50)}"`).toBe(0);
 
         // An opening `[` always has to reach `](...)`, or it renders raw.
         const brackets = (text.match(/\[/g) ?? []).length;
         const links = (text.match(/\[[^\]]+\]\([^)]+\)/g) ?? []).length;
-        expect(links, `${slug}: a bracket in "${text.slice(0, 50)}" is not a link`).toBe(brackets);
+        expect(links, `${where}: a bracket in "${text.slice(0, 50)}" is not a link`).toBe(brackets);
+      }
+    }
+  });
+
+  /** Steps, ticks, cards and FAQ answers render as plain text; markup would show. */
+  it("keeps markup out of the strings that render as plain text", () => {
+    for (const { where, item, blocks } of LONG_FORM) {
+      const plain = [
+        ...(blocks ?? []).flatMap((block) => [
+          ...(block.steps ?? []),
+          ...(block.kind === "checklist" ? block.items : []),
+          ...(block.kind === "features" ? block.items.map((card: any) => card.text) : []),
+        ]),
+        ...item.faq.items.map((entry: Record<string, any>) => entry.answer),
+      ];
+      for (const text of plain) {
+        expect(/\*\*|\]\(/.test(text), `${where}: markup in plain text "${text.slice(0, 50)}"`).toBe(
+          false,
+        );
       }
     }
   });
@@ -146,9 +202,9 @@ describe("the body blocks a few tool pages carry", () => {
   /** A link written in content has to point at a page that exists. */
   it("points every link at a path the site serves", () => {
     const paths = knownPaths();
-    for (const slug of withBody) {
-      for (const href of hrefs(itemFor(slug).body)) {
-        expect(paths.has(href), `${slug}: nothing serves ${href}`).toBe(true);
+    for (const { where, blocks } of LONG_FORM) {
+      for (const href of hrefs(blocks ?? [])) {
+        expect(paths.has(href), `${where}: nothing serves ${href}`).toBe(true);
       }
     }
   });
@@ -265,9 +321,21 @@ function hrefs(blocks: Record<string, any>[]): string[] {
   return out;
 }
 
-/** The in-site paths a tool page may link to: a tool, a calculator, a product. */
+/**
+ * The in-site paths a tool page may link to: a tool, a calculator, a product, a
+ * glossary term, or one of the site's own top-level pages.
+ */
 function knownPaths(): Set<string> {
-  const paths = new Set<string>();
+  const paths = new Set<string>(["/"]);
+  for (const entry of fs.readdirSync(path.join(process.cwd(), "app"), { withFileTypes: true })) {
+    if (entry.isDirectory() && fs.existsSync(path.join(process.cwd(), "app", entry.name, "page.tsx"))) {
+      paths.add(`/${entry.name}`);
+    }
+  }
+  const terms = path.join(process.cwd(), "content", "glossary", "terms");
+  for (const file of fs.readdirSync(terms).filter((name) => name.endsWith(".json"))) {
+    paths.add(`/glossary/${file.replace(/\.json$/, "")}`);
+  }
   for (const dir of ["tools", "calculators", "products"] as const) {
     const base = path.join(process.cwd(), "app", dir);
     if (!fs.existsSync(base)) continue;

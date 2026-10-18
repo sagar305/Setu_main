@@ -71,10 +71,16 @@ const PAGE_PATHS_FOR_ITEMS = { calculators: "/calculators", tools: "/tools" };
  * on the listing.
  *
  * The listing needs a name and a one-line description; the item's page needs
- * the copy a search engine indexes. Requiring the title, the description and
- * the headline — plus the explainer, the FAQ and the body blocks wherever
- * English has them — keeps a half-translated page from being published and
- * then competing with the English one it was meant to serve alongside.
+ * the copy a search engine indexes. Requiring the title, the description, the
+ * headline and the "about" paragraphs, plus an FAQ wherever English has one,
+ * keeps a half-translated page from being published and then competing with
+ * the English one it was meant to serve alongside.
+ *
+ * The FAQ, a tool's body blocks and a calculator's guide do not have to match
+ * English in length. The localized routes cut each one back to what the
+ * translation carries (lib/i18n/translated-only.ts), so a translation that has
+ * not reached the newer entries yet publishes a shorter page in one language,
+ * not a longer one in two.
  */
 function itemIsTranslated(english, translated) {
   if (!translated) return false;
@@ -89,16 +95,7 @@ function itemIsTranslated(english, translated) {
     !(translated.about?.paragraphs?.length === english.about.paragraphs.length)
   )
     return false;
-  if (
-    english.faq &&
-    !(translated.faq?.items?.length === english.faq.items.length)
-  )
-    return false;
-  // A few tool pages carry blocks of prose under the tool. Publishing with
-  // those untranslated would leave a page whose hero is in the reader's
-  // language and whose explainer is not, which reads worse than English alone.
-  if (english.body && !(translated.body?.length === english.body.length))
-    return false;
+  if (english.faq?.items?.length && !(translated.faq?.items?.length > 0)) return false;
 
   return true;
 }

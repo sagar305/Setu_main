@@ -96,6 +96,22 @@
           {
             "question": "Does Setu Dine calculate GST automatically?",
             "answer": "Yes. Setu Dine has a built-in tax engine that applies the correct GST automatically on every bill, so you don't need to calculate it manually for each order."
+          },
+          {
+            "question": "How do I split GST into CGST and SGST?",
+            "answer": "For a sale within your own state, the GST amount is divided equally: half is CGST and half is SGST. At 18%, that is 9% CGST and 9% SGST, so ₹1,800 of GST on a ₹10,000 bill becomes ₹900 each. The calculator shows the combined GST amount, so halve it for the two lines on your invoice. Sales to another state carry the whole amount as IGST."
+          },
+          {
+            "question": "Can I enter a GST rate that is not on the preset buttons?",
+            "answer": "Yes. The rate field accepts any number, including decimals, so you can enter 3% for gold or 40% for goods in the highest slab. The preset buttons only fill the field for you. The base amount, GST amount and total update the moment you change either the rate or the amount."
+          },
+          {
+            "question": "What is the difference between a tax-inclusive and a tax-exclusive price?",
+            "answer": "A tax-exclusive price is the base amount before GST, with tax added on top at billing. A tax-inclusive price already contains the GST. Use Add GST mode for a tax-exclusive price to find the total, and Remove GST mode for a tax-inclusive price to find the base and the tax inside it. The MRP printed on packaged goods is inclusive of all taxes."
+          },
+          {
+            "question": "Is the GST calculator free to use on a mobile phone?",
+            "answer": "Yes. It is free, needs no signup and works in any phone browser. On a small screen the amount and rate fields stack in one column, and you can tap a preset rate instead of typing it. The calculation runs on your phone and nothing you enter is sent anywhere, so you can use it at the counter while quoting a customer."
           }
         ]
       },
@@ -106,7 +122,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "GST calculation formula",
+          "text": "**Add GST:** GST amount = Amount × GST rate ÷ 100. Total amount = Amount + GST amount. **Remove GST:** Base amount = Amount ÷ (1 + GST rate ÷ 100). GST amount = Amount − Base amount."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the GST calculator",
+          "steps": [
+            "Choose Add GST if your price is before tax, or Remove GST if the amount already includes tax.",
+            "Type the amount in rupees, without commas. The field reads Amount (before GST) or Amount (including GST) depending on the mode.",
+            "Enter the GST rate, or tap one of the preset buttons under the field. You can type any other rate, such as 3% or 40%.",
+            "Read the three results: Base amount, GST amount and Total amount. They update as you type.",
+            "For a sale within your state, halve the GST amount to show CGST and SGST as separate lines on the bill."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: GST on a ₹10,000 invoice",
+          "paragraphs": [
+            "Say a Pune agency bills a local client ₹10,000 for a service taxed at 18%. In the GST calculator's Add GST mode, enter 10000 as the amount and 18 as the rate. The GST amount is 10,000 × 18 ÷ 100 = ₹1,800, so the Total amount is ₹11,800. Because the client is in the same state, the invoice shows [CGST](/glossary/cgst) of ₹900 and [SGST](/glossary/sgst) of ₹900. If the same job were billed to a client in Bengaluru, the full ₹1,800 would be charged as [IGST](/glossary/igst).",
+            "Now the reverse. A customer paid ₹1,050 for a meal at a restaurant charging 5% GST and wants to know the tax in it. In Remove GST mode, enter 1050 and 5: Base amount = 1,050 ÷ 1.05 = ₹1,000 and GST amount = 1,050 − 1,000 = ₹50. Taking 5% of ₹1,050 (₹52.50) would overstate the tax, because the rate applies to the base price, not to the tax-inclusive total."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "GST billing tips and common mistakes",
+          "items": [
+            "Check the rate for your exact HSN or SAC code before billing. Since 22 September 2025 most goods and services fall under 5% or 18%, with 40% for a short list of sin and luxury goods.",
+            "The 12% and 28% preset buttons are mainly useful for checking older invoices; most items that sat in those slabs have moved to 5%, 18% or 40%.",
+            "Never remove GST by taking the rate off the total: ₹11,800 minus 18% gives ₹9,676, not the correct base of ₹10,000.",
+            "Say clearly on menus, price lists and quotations whether prices include GST, so customers are not surprised at billing.",
+            "If you are registered under the composition scheme, you cannot collect GST from customers, so the Add GST result does not belong on your bills.",
+            "Keep the GST amount from every purchase bill. A regular registered business can usually claim it as input tax credit, but composition dealers and restaurants billing at 5% without credit cannot."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Invoice Generator",
+              "href": "/tools/invoice-generator"
+            },
+            {
+              "label": "Quotation Generator",
+              "href": "/tools/quotation-generator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "Discount Calculator",
+              "href": "/calculators/discount-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "profit-margin-calculator",
@@ -154,6 +234,22 @@
           {
             "question": "Should I price based on margin or markup?",
             "answer": "Most businesses set prices using markup on cost, then check the resulting margin to confirm it meets their profit target. Using both avoids underpricing items that look fine by one measure but not the other."
+          },
+          {
+            "question": "Should I include GST when calculating profit margin?",
+            "answer": "If you are GST-registered under the regular scheme and claim input tax credit, leave GST out of both prices. The GST you collect belongs to the government, and the GST you paid on purchases comes back as credit. If you are under the composition scheme or not registered, you cannot claim that credit, so include the GST you paid in your cost price; composition tax on your turnover also comes out of your margin."
+          },
+          {
+            "question": "What is the difference between gross margin and net margin?",
+            "answer": "Gross margin is what is left from sales after the direct cost of the goods, which is closest to what this calculator shows for a single item. Net margin is what is left after every expense, including rent, salaries, electricity, interest and tax. A shop can have a healthy 30% gross margin and still make a loss if its overheads are high."
+          },
+          {
+            "question": "Can profit margin be more than 100%?",
+            "answer": "No. Profit can never be larger than the selling price, so margin stays below 100% and reaches it only if the cost is zero. Markup has no ceiling. Buying at ₹50 and selling at ₹200 is a 300% markup but a 75% margin. For the same item, the markup figure is always the higher of the two, so make sure you know which one a supplier or salesperson is quoting."
+          },
+          {
+            "question": "How do I find the selling price for a target margin?",
+            "answer": "Divide the cost by one minus the target margin. For a ₹600 cost and a 40% margin, that is 600 ÷ 0.60 = ₹1,000. You can confirm it here by entering ₹600 as the cost price and ₹1,000 as the selling price; the calculator will show a ₹400 profit, a 40% margin and a 66.7% markup."
           }
         ]
       },
@@ -164,7 +260,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Profit margin and markup formulas",
+          "text": "Profit = Selling price − Cost price. Profit margin % = (Selling price − Cost price) ÷ Selling price × 100. Markup % = (Selling price − Cost price) ÷ Cost price × 100."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the profit margin calculator",
+          "steps": [
+            "Enter the cost price of one unit: what you paid the supplier plus freight and packing, or the plate cost of a dish.",
+            "Enter the selling price of that unit, excluding any GST you collect from the customer.",
+            "Read the profit, the profit margin % and the markup %. All three update as you type.",
+            "Lower the selling price to see how much margin a discount or combo offer would cost you.",
+            "Repeat for your top-selling items to see which ones earn most of your profit."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: margin on a ₹999 kurta",
+          "paragraphs": [
+            "A clothing shop buys a kurta for ₹640 including freight and sells it for ₹999 before GST. Enter both figures in the profit margin calculator and it shows a profit of ₹359, a profit margin of 35.9% (359 ÷ 999 × 100) and a markup of 56.1% (359 ÷ 640 × 100). Put another way, about 36 paise of every rupee the customer pays is profit before rent, salaries and other overheads.",
+            "At the end-of-season sale the price drops to ₹849. Profit falls to ₹209, margin to 24.6% and markup to 32.7%. A 15% price cut has taken away about 42% of the profit on each kurta, so the shop must sell about 1.7 kurtas at the sale price to earn what one earned at full price. That is the real cost of a [markdown](/glossary/markdown)."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Common profit margin mistakes",
+          "items": [
+            "Using the printed MRP as the selling price. MRP includes GST and you may sell below it, so enter what customers actually pay, net of tax.",
+            "Leaving freight, loading, packing or wastage out of the cost price, which makes every margin look better than it is.",
+            "Forgetting returns, damaged pieces and free samples. Their cost has to be recovered from the units you do sell, so allow for it in your price.",
+            "Using one average margin for the whole shop. High- and low-margin items blend together, so check top sellers one by one.",
+            "Not rechecking after a supplier price rise. If cost goes from ₹100 to ₹120 on an item sold at ₹150, margin drops from 33.3% to 20%."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related pricing calculators",
+          "links": [
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "Discount Calculator",
+              "href": "/calculators/discount-calculator"
+            },
+            {
+              "label": "Break-Even Point Calculator",
+              "href": "/calculators/break-even-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "markup-calculator",
@@ -211,6 +370,22 @@
           {
             "question": "Can I use this for restaurant menu pricing too?",
             "answer": "Yes — enter your plate cost as the cost price and your target markup to get a starting menu price, then sanity-check it against the food cost percentage calculator."
+          },
+          {
+            "question": "Does the selling price from the markup calculator include GST?",
+            "answer": "No. The calculator adds your markup to the cost you enter and nothing else, so the result is the price before tax. If you are GST-registered and claim input tax credit, enter your cost without GST, then add GST at your item's rate on top of the calculated price. If you show tax-inclusive prices on a menu or shelf label, the final price will be higher than the figure shown here."
+          },
+          {
+            "question": "Can a markup be more than 100%?",
+            "answer": "Yes. A 100% markup doubles the cost, and anything above that is common for low-cost items such as accessories, beverages or packaged snacks. For example, a 150% markup on a ₹200 cost gives a ₹500 selling price and a ₹300 profit, which the calculator shows as a 60% resulting margin."
+          },
+          {
+            "question": "What is the difference between markup and MRP?",
+            "answer": "MRP, the maximum retail price, is the highest price at which a packaged product may be sold. The manufacturer, packer or importer prints it on the pack, and it includes all taxes. Markup is what you add on top of your own cost. For packaged goods, the MRP caps how much markup you can take; for loose items, services or dishes there is no MRP, so your markup and the market set the price."
+          },
+          {
+            "question": "Can I use the markup calculator in a currency other than rupees?",
+            "answer": "Yes. The calculator follows the currency saved in Setu's free Business Profile tool. Choose your currency there, fill in your business name and save, and the cost field and results on this page switch to that currency's symbol instead of the rupee. The markup arithmetic is the same in any currency."
           }
         ]
       },
@@ -221,7 +396,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Markup formula",
+          "text": "Selling price = Cost price × (1 + Markup % ÷ 100). Profit per unit = Selling price − Cost price. Resulting margin % = Profit per unit ÷ Selling price × 100."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the markup calculator",
+          "steps": [
+            "Enter the cost price of one unit, including freight and packing, or the plate cost of a dish.",
+            "Enter your target markup %.",
+            "Read the selling price, the profit per unit and the resulting margin %.",
+            "Round the selling price to a price point that suits your shelf or menu, then check the rounded price in the profit margin calculator.",
+            "Repeat for each product, keeping the same markup within a category so prices stay consistent."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: pricing kaju katli at a 65% markup",
+          "paragraphs": [
+            "A sweet shop works out that one kilo of kaju katli costs ₹720 to make, counting cashews, sugar, varq, gas, labour and the box. With a 65% markup, the markup calculator gives a selling price of ₹1,188 (720 × 1.65), a profit of ₹468 per kilo and a resulting margin of 39.4% (468 ÷ 1,188 × 100). On the price board the shop might round that to ₹1,190 or ₹1,200 a kilo.",
+            "Suppose the owner thinks in margin instead and wants 30%. The markup needed is 30 ÷ (100 − 30) × 100 = 42.86%. Entering 42.86% gives a selling price of ₹1,028.59 and a profit of ₹308.59 per kilo, and the resulting margin shows 30%. Converting the target margin first stops you from pricing at a 30% markup and ending up with only a 23% margin. This is the core of [cost-plus pricing](/glossary/cost-plus-pricing)."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Markup tips before you print the price",
+          "items": [
+            "Build the full landed cost first: purchase price, freight, loading, packing and expected breakage or wastage.",
+            "Use a higher markup on slow-moving, fragile or perishable items to cover the stock that never sells.",
+            "Check what is left after offers and platform commission. A 40% markup cut by a 20% discount leaves only about a 10.7% margin.",
+            "Let competitors' prices set your ceiling. Markup gives you a floor based on cost; what customers will pay decides how far above it you can go.",
+            "When a supplier raises prices, re-apply the same markup % to the new cost. Adding only the rupee increase quietly lowers your margin."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related pricing tools",
+          "links": [
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Recipe Costing Calculator",
+              "href": "/calculators/recipe-costing-calculator"
+            },
+            {
+              "label": "Discount Calculator",
+              "href": "/calculators/discount-calculator"
+            },
+            {
+              "label": "Price Label Printer",
+              "href": "/tools/label-printer"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "break-even-calculator",
@@ -268,6 +506,22 @@
           {
             "question": "What is contribution margin?",
             "answer": "Contribution margin is the selling price minus the variable cost per unit — the amount each sale contributes toward covering fixed costs. A higher contribution margin means you break even with fewer units sold."
+          },
+          {
+            "question": "Why does the break-even calculator say there is no break-even point?",
+            "answer": "This happens when the selling price per unit is equal to or lower than the variable cost per unit. Each sale then adds nothing, or loses money, before fixed costs are even counted, so no sales volume can cover rent and salaries. The calculator shows a warning instead of results. Raise the price or cut the variable cost, and check that you have not compared a GST-inclusive cost with a pre-GST price."
+          },
+          {
+            "question": "How do I work out my margin of safety from the break-even point?",
+            "answer": "Margin of safety is how far your actual sales sit above break-even. Subtract break-even revenue from your current monthly sales, then divide by current sales for a percentage. If you sell ₹3,60,000 a month and break even at ₹3,00,000, your margin of safety is ₹60,000, or about 16.7%. The bigger this cushion, the better you can absorb a slow month or a cost increase."
+          },
+          {
+            "question": "Should I include GST in the selling price for break-even analysis?",
+            "answer": "If you are a regular GST-registered business, no. The GST you collect is passed on to the government, so enter the selling price before tax, and enter purchase costs net of any input tax credit you can claim. Under the composition scheme you cannot collect GST from customers or claim input tax credit, so treat the tax you pay on turnover as a variable cost and enter purchase costs including GST."
+          },
+          {
+            "question": "Is the break-even calculator free, and does it save my numbers?",
+            "answer": "Yes, it is free to use with no sign-up, and the results update as you type. It does not save your inputs: reloading the page brings back the sample figures. Note down your fixed costs, variable cost and selling price, or keep them in a spreadsheet, so you can re-run the calculation quickly when costs or prices change."
           }
         ]
       },
@@ -278,7 +532,72 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Break-even point formula",
+          "text": "Contribution per unit = Selling price per unit − Variable cost per unit. Contribution margin % = Contribution per unit ÷ Selling price per unit × 100. Break-even units = Fixed costs ÷ Contribution per unit. Break-even revenue = Break-even units × Selling price per unit. If the selling price is not higher than the variable cost, there is **no break-even point** and the calculator shows a warning instead of results."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the break-even calculator",
+          "steps": [
+            "Add up the costs you pay every month whatever your sales, such as rent, staff salaries, fixed electricity charges and software subscriptions, and enter the total in Fixed costs (per month).",
+            "Decide what one unit means for your business: a product, a plate or an average bill. Use that same unit for the next two fields.",
+            "Enter the Variable cost per unit: everything you spend each time you sell one unit, such as ingredients, packaging, delivery app commission and card payment charges.",
+            "Enter the Selling price per unit as the amount you actually receive, after any regular discount and before GST.",
+            "Read Break-even units, Break-even revenue and Contribution margin. They update as you type.",
+            "Divide the break-even units or revenue by the number of days you are open to get a daily sales target."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: break-even for a café with ₹1,80,000 monthly costs",
+          "paragraphs": [
+            "A café pays ₹70,000 rent, ₹90,000 in salaries and about ₹20,000 for electricity, internet and software each month, so its [fixed costs](/glossary/fixed-cost) are ₹1,80,000. Its average bill is ₹400, and the ingredients, packaging and payment charges behind that bill come to ₹160. Each bill therefore contributes ₹400 − ₹160 = ₹240, a contribution margin of 60%. The break-even calculator divides ₹1,80,000 by ₹240 and shows 750 bills, or ₹3,00,000 in sales (750 × ₹400). Open 30 days a month, that is 25 bills or ₹10,000 of sales a day.",
+            "Now suppose milk and coffee prices push the variable cost to ₹200 per bill while menu prices stay the same. Contribution drops to ₹200, and break-even rises to ₹1,80,000 ÷ ₹200 = 900 bills, or ₹3,60,000 in sales. A ₹40 rise in cost per bill means 150 more bills every month, 20% more, just to reach zero profit. Whenever a supplier raises rates, recheck your [contribution margin](/glossary/contribution-margin) before deciding whether menu prices need to move."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Break-even mistakes to avoid",
+          "items": [
+            "Leaving out your own salary. If you work full time in the business, add a fair monthly drawing to fixed costs, or break-even will look easier than it is.",
+            "Counting only ingredients as variable costs. Delivery app commission, packaging, card payment charges (MDR) and per-order staff incentives also rise with every sale.",
+            "Ignoring loan repayments. The principal part of an EMI is not an expense in your P&L, but it still needs cash, so add EMIs to fixed costs if you want a cash break-even figure.",
+            "Reading the units as exact. Break-even units are rounded to the nearest whole number on screen; when planning, round any fraction up, since 642.3 bills shows as 642 but means you need 643.",
+            "Planning around an average month. Seasonal businesses should check break-even against their slowest months, not the yearly average.",
+            "Calculating once and forgetting it. Re-run the numbers whenever rent, salaries, supplier rates or menu prices change."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "Online Order Commission Calculator",
+              "href": "/calculators/online-order-commission-calculator"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "food-cost-calculator",
@@ -326,6 +645,22 @@
           {
             "question": "Does this account for labour cost?",
             "answer": "No — this calculator covers raw ingredient (food) cost only. Labour, packaging and overhead should be tracked separately alongside food cost when deciding final menu prices."
+          },
+          {
+            "question": "Should I enter the menu price with or without GST?",
+            "answer": "Enter the price before GST. The tax on a bill goes to the government, so it is not part of what the dish earns you. If your menu prices include GST, divide by 1.05 for the 5% rate most restaurants charge: a dish listed at ₹315 is ₹300 before tax. Restaurants on that 5% rate cannot claim input tax credit, so enter ingredient costs including the GST you paid on them."
+          },
+          {
+            "question": "What is the difference between theoretical and actual food cost?",
+            "answer": "Theoretical food cost is what this calculator shows: the recipe cost of a dish against its price, assuming exact portions and no waste. Actual food cost covers a whole period: (opening stock + purchases − closing stock) ÷ food sales × 100. If your actual figure runs well above the theoretical one, the gap is going on wastage, over-portioning, staff meals or missing stock."
+          },
+          {
+            "question": "How is food cost percentage related to gross margin on a dish?",
+            "answer": "The two always add up to 100% of the menu price. A dish with a 30% food cost has a 70% gross margin, which the calculator shows in rupees as gross profit per dish, for example ₹70 on a ₹100 dish. Because only ingredients are counted, rent, salaries, gas and electricity still have to be paid out of that gross profit before the dish makes a net profit."
+          },
+          {
+            "question": "Can I use this calculator for dishes sold on Zomato or Swiggy?",
+            "answer": "Yes, but enter what you actually receive for the dish rather than the price shown in the app. Take the listed price, subtract the platform commission and any discount you fund, and enter that figure as the menu selling price. The same recipe then shows a higher food cost percentage online than in your dining room, which tells you whether the online price needs to be set higher."
           }
         ]
       },
@@ -336,7 +671,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Food cost percentage formula",
+          "text": "Food cost % = Ingredient cost per dish ÷ Menu selling price × 100. Gross profit per dish = Menu selling price − Ingredient cost per dish. If food cost is above 35%, the calculator flags the dish as above the typical 28–35% range."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the food cost calculator",
+          "steps": [
+            "List every ingredient in one portion of the dish with the quantity used.",
+            "Multiply each quantity by your latest purchase price to get each ingredient's cost, then add them up. The Recipe Costing Calculator can total the ingredient costs for you and divide a batch by its number of servings.",
+            "Enter the total in Ingredient cost per dish.",
+            "Enter the Menu selling price of that dish, before GST.",
+            "Read Food cost % and Gross profit per dish. A note below the results flags dishes above 35%.",
+            "Repeat for each dish on the menu, and again whenever a supplier changes prices."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: food cost for a ₹320 paneer dish",
+          "paragraphs": [
+            "A portion of paneer butter masala uses 150 g of paneer at ₹400 per kg (₹60), ₹22 of butter, cream and cashew, and ₹14 of tomato, onion, oil and spices, for a total [plate cost](/glossary/plate-cost) of ₹96. Entered with a menu price of ₹320, the food cost calculator shows a food cost percentage of 30% (₹96 ÷ ₹320 × 100) and a gross profit of ₹224 per dish, inside the range most kitchens aim for.",
+            "A chicken biryani priced at ₹280 with ₹110 of ingredients comes out at 39.3%, and the calculator flags it as above range. To bring it to 32%, either raise the price to about ₹345 (₹110 ÷ 0.32 = ₹343.75, rounded up), which gives 31.9%, or keep ₹280 and bring the ingredient cost down to ₹89.60 (₹280 × 0.32), for example by adjusting the chicken portion or the [yield](/glossary/yield-percentage) you get from each kilo bought."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Food costing mistakes to avoid",
+          "items": [
+            "Leaving out small items. Oil, ghee, masalas, garnish, chutneys and complimentary sides all belong in the plate cost.",
+            "Ignoring yield. Bone-in chicken, unpeeled onions and leafy greens give less usable weight than you buy, so cost the usable quantity.",
+            "Costing at old prices. Use the rate on your latest supplier bill, not the rate from when the menu was set.",
+            "Judging by percentage alone. A ₹600 dish at 40% food cost earns ₹360 a plate, more than a ₹200 dish at 25%, which earns ₹150.",
+            "Costing a thali or combo by its main item only. Add every component, including rice, roti, dal, raita, papad and pickle, and enter the total against the combo price."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related restaurant calculators",
+          "links": [
+            {
+              "label": "Recipe Costing Calculator",
+              "href": "/calculators/recipe-costing-calculator"
+            },
+            {
+              "label": "Menu Engineering Calculator",
+              "href": "/calculators/menu-engineering-calculator"
+            },
+            {
+              "label": "Online Menu Price Calculator",
+              "href": "/calculators/online-menu-price-calculator"
+            },
+            {
+              "label": "Liquor Pour Cost Calculator",
+              "href": "/calculators/liquor-cost-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "discount-calculator",
@@ -383,6 +782,22 @@
           {
             "question": "Can Setu Dine apply discounts and coupons automatically at billing?",
             "answer": "Yes. Setu Dine supports configurable coupons and discounts that apply automatically at the bill, so staff don't need to calculate offers manually at the counter."
+          },
+          {
+            "question": "How do I calculate the discount percentage from the original and sale price?",
+            "answer": "Subtract the sale price from the original price, divide by the original price and multiply by 100. An item marked down from ₹2,000 to ₹1,500 carries a discount of ₹500 ÷ ₹2,000 × 100 = 25%. This calculator works forward from a percentage, so enter the figure you get to confirm the final price matches what you planned."
+          },
+          {
+            "question": "Is GST calculated before or after the discount?",
+            "answer": "When the discount is given at or before the time of sale and shown on the tax invoice, GST is charged on the discounted price. A ₹1,000 item with 10% off and 18% GST is billed at ₹900 plus ₹162 GST, a total of ₹1,062. Discounts given after the sale, such as year-end supplier rebates, follow stricter conditions, so check the treatment with your CA."
+          },
+          {
+            "question": "What is the difference between a discount and a markdown?",
+            "answer": "A discount is usually a temporary or conditional reduction, such as a festive offer, coupon or bulk-order rate, after which the price returns to normal. A markdown is a permanent cut to the selling price, often used to clear slow-moving or end-of-season stock. Both reduce your margin in the same way, and this calculator works out the new price for either."
+          },
+          {
+            "question": "Can I use the discount calculator on my phone?",
+            "answer": "Yes. The page works in any mobile browser with nothing to install, and on a small screen the two fields and the results stack in a single column. Each field brings up a numeric keypad, and You save and Final price update as you type, so there is no button to press. Bookmark the page so it is one tap away during a sale."
           }
         ]
       },
@@ -393,7 +808,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Discount formula",
+          "text": "Discount amount (You save) = Original price × Discount % ÷ 100. Final price = Original price − Discount amount. Put together, Final price = Original price × (100 − Discount %) ÷ 100."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the discount calculator",
+          "steps": [
+            "Enter the Original price: the MRP, list price or menu price before the offer.",
+            "Enter the Discount as a percentage, for example 15 for 15% off. Decimals such as 12.5 work too.",
+            "Read You save, the rupee value of the discount on that item or bill.",
+            "Read Final price, the amount the customer pays after the discount.",
+            "To compare offers, change only the discount figure; both results update as you type."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: 25% off a ₹1,800 shirt",
+          "paragraphs": [
+            "A clothing shop lists a shirt at ₹1,800 before GST and plans a 25% festive [promotional discount](/glossary/promotional-discount). The discount calculator shows You save ₹450 (₹1,800 × 25 ÷ 100) and a Final price of ₹1,350. The shirt costs the shop ₹1,080, so profit per shirt falls from ₹720 to ₹270, a drop of 62.5%. To earn the same total profit as before, the sale has to move about 2.7 times as many shirts (₹720 ÷ ₹270 = 2.67).",
+            "Multi-buy offers can be compared the same way. Buy 2, get 1 free on ₹600 items means the customer pays ₹1,200 for three pieces, or ₹400 each. Enter ₹600 and 33.33% and the calculator returns a final price of ₹400.02, the 2 paise being rounding, so the offer equals a one-third discount on every piece. That is deeper than 25% off, though it also moves three pieces per customer instead of one."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Before you announce a discount",
+          "items": [
+            "Check the final price still covers your cost price plus per-sale costs such as packaging, delivery commission and card charges.",
+            "Convert flat offers to a percentage to compare them: ₹100 off is 25% on a ₹400 bill but only 10% on a ₹1,000 bill.",
+            "For packaged goods, quote the discount from the printed MRP. You can sell below MRP, never above it.",
+            "Set an end date or a minimum bill value so a promotion does not quietly become your regular price.",
+            "After the offer, compare units sold with the extra volume you needed. If sales did not rise enough to cover the lost margin, change the offer before repeating it."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related pricing tools",
+          "links": [
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Break-Even Point Calculator",
+              "href": "/calculators/break-even-calculator"
+            },
+            {
+              "label": "Invoice Generator",
+              "href": "/tools/invoice-generator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "loan-emi-calculator",
@@ -441,6 +919,22 @@
           {
             "question": "How does a shorter tenure affect total interest?",
             "answer": "A shorter tenure means a higher EMI but significantly less total interest paid, since less time passes with interest accruing on the outstanding balance. A longer tenure lowers the EMI but increases total interest paid over the loan."
+          },
+          {
+            "question": "Can I use this EMI calculator for a home loan, car loan or personal loan?",
+            "answer": "Yes, as long as the loan is repaid in equal monthly instalments on a reducing balance, which is how most bank home, car, personal and business loans in India work. The maths does not change with the loan type. It will not match loans that charge a flat rate, use step-up or balloon repayments, or start with an interest-only period, because those do not follow equal EMIs."
+          },
+          {
+            "question": "What happens if I enter 0% interest?",
+            "answer": "The calculator divides the loan amount by the number of months, so a ₹6,00,000 interest-free loan over 24 months shows an EMI of ₹25,000 and total interest of zero. This is useful for an interest-free loan from a partner or family member. For a no-cost EMI offer on a purchase, read the invoice closely, since the interest is often recovered through a discount you do not get or a processing fee."
+          },
+          {
+            "question": "Does the calculator show a month-by-month amortisation schedule?",
+            "answer": "No. It shows the monthly EMI, total interest and total payment for the whole loan. Inside each EMI the interest share is largest at the start and falls every month as the balance reduces, while the principal share grows. For the exact split of every instalment, ask your lender for the amortisation schedule, which banks usually provide with the sanction letter or on request."
+          },
+          {
+            "question": "Does the loan EMI calculator save what I enter?",
+            "answer": "No. The figures you type are worked out in your browser and are not saved or sent anywhere, so they reset to the sample values when you reload the page. Note down the EMI and total interest for each offer if you want to compare them later. The calculator works the same on a phone, with the fields stacking in a single column."
           }
         ]
       },
@@ -451,7 +945,66 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Loan EMI formula",
+          "text": "Monthly rate r = Annual interest rate ÷ 12 ÷ 100, and n = tenure in months (years × 12). EMI = P × r × (1 + r)^n ÷ ((1 + r)^n − 1), where P is the loan amount. Total payment = EMI × n. Total interest = Total payment − P. At 0% interest the calculator simply divides: EMI = P ÷ n. This is the [reducing-balance](/glossary/reducing-balance-interest) method, so each month's interest is charged only on the principal still outstanding."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Business Loan EMI Calculator",
+          "steps": [
+            "Enter the amount you plan to borrow in the Loan amount field.",
+            "Enter the Annual interest rate from the lender's offer, as a reducing-balance rate.",
+            "Type the Tenure, then choose Months or Years below the field.",
+            "Read the Monthly EMI, Total interest and Total payment, which update as you type.",
+            "To compare two offers, change one input at a time, such as the tenure or the rate, and note the totals for each."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: EMI on a ₹10 lakh loan at 14%",
+          "paragraphs": [
+            "Say you borrow ₹10,00,000 at 14% a year to fit out a second outlet. The monthly rate is 14 ÷ 12 ÷ 100 = 0.011667. Over 36 months the loan EMI calculator gives an [EMI](/glossary/emi) of **₹34,177.63**, a total payment of ₹12,30,394.67 and total interest of ₹2,30,394.67. Stretch the same loan to 60 months and the EMI drops to ₹23,268.25, which is ₹10,909.38 less every month, but total interest rises to ₹3,96,095.05, or ₹1,65,700.38 more over the life of the loan.",
+            "Now compare two 36-month offers on the same ₹10 lakh. Offer A is 13% with a ₹20,000 processing fee; Offer B is 14% with no fee. At 13% the EMI is ₹33,693.95 and total interest is ₹2,12,982.27. Add the fee and Offer A's cost of borrowing comes to ₹2,32,982.27, which is ₹2,587.60 more than Offer B's ₹2,30,394.67. The lower rate is not the cheaper loan here, so add every fee to the calculator's total interest before you choose."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Checks before you take the loan",
+          "items": [
+            "Fit the EMI into your slowest month, not your average month, after rent, salaries and supplier payments are covered.",
+            "Ask whether the first EMI includes broken-period interest for the days between disbursal and the first due date; the calculator assumes equal instalments from the first month.",
+            "Check the prepayment and foreclosure charges in the sanction letter if you expect to close the loan early from festive-season or year-end cash.",
+            "On a floating-rate loan, rerun the numbers at a rate 1 to 2 points higher, since lenders often extend the tenure rather than raise the EMI when rates go up.",
+            "Interest on a loan used for the business is generally a deductible expense, but the principal part of each EMI is not, so ask your CA to split the EMIs correctly in your books."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "ROI Calculator",
+              "href": "/calculators/roi-calculator"
+            },
+            {
+              "label": "Break-Even Point Calculator",
+              "href": "/calculators/break-even-calculator"
+            },
+            {
+              "label": "Depreciation Calculator",
+              "href": "/calculators/depreciation-calculator"
+            },
+            {
+              "label": "Cash Flow Statement",
+              "href": "/tools/cash-flow-statement"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "table-turnover-calculator",
@@ -498,6 +1051,22 @@
           {
             "question": "Can Setu Dine track table status in real time?",
             "answer": "Yes. Setu Dine shows live table status — open, occupied, billed — across your floor, so staff always know which tables are free without walking the room to check."
+          },
+          {
+            "question": "How do I calculate seat turnover instead of table turnover?",
+            "answer": "Enter the number of seats in the Number of tables field and the number of guests in Covers served. The calculator divides the guests by the seats, so 120 guests across 60 seats over a 4-hour service gives a seat turnover of 2x and an average of 120 minutes per seat. This is useful when your floor mixes two-, four- and six-seat tables."
+          },
+          {
+            "question": "Why does the average turn time look longer than guests actually stay?",
+            "answer": "The calculator spreads the whole service length across the turns, so minutes when a table sat empty, waited to be cleared or was held for a booking all count. On a quiet weeknight that can make a 50-minute meal look like a 90-minute turn. For a cleaner figure, measure only your busy window, when tables are reseated soon after guests leave."
+          },
+          {
+            "question": "Can I work out lunch and dinner table turnover separately?",
+            "answer": "Yes, and it usually tells you more than a whole-day figure. Run the calculator once for lunch with lunch parties and lunch hours, for example 30 parties, 15 tables and 3 hours (2x, 90 minutes), and again for dinner with its own numbers. Comparing the two shows which service has spare table capacity and which one is genuinely full."
+          },
+          {
+            "question": "Does a higher table turnover rate always mean more revenue?",
+            "answer": "No. Revenue depends on both turns and spend per party. Across 15 tables, 4 turns at an average bill of ₹1,200 brings in 60 × ₹1,200 = ₹72,000, while 3 turns at ₹1,800 brings in 45 × ₹1,800 = ₹81,000. Track your average bill alongside turnover so that faster turns do not come from smaller orders."
           }
         ]
       },
@@ -508,7 +1077,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Table turnover formula",
+          "text": "[Table turnover rate](/glossary/table-turnover-rate) = Covers served ÷ Number of tables. Average turn time (minutes) = Service length in hours × 60 ÷ Table turnover rate. The turn time assumes tables were in use for the whole service, so it includes minutes a table sat empty or was being reset between parties."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the table turnover rate calculator",
+          "steps": [
+            "Pick one service period, such as weekday lunch or Saturday dinner.",
+            "Enter Covers served for that period. Use the number of parties seated (bills) for true table turns, or the number of guests for covers per table.",
+            "Enter Number of tables that were open during the period, leaving out any section you closed.",
+            "Enter Service length in hours. Decimals work, so 7 pm to 10:30 pm is 3.5.",
+            "Read Table turnover rate (shown as 3x, 6x and so on) and Avg. turn time in minutes."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: Friday dinner at a 15-table restaurant",
+          "paragraphs": [
+            "A 15-table restaurant serves dinner from 7 pm to 11 pm and seats 45 parties. Enter 45 in Covers served, 15 in Number of tables and 4 in Service length. The table turnover rate calculator shows 45 ÷ 15 = 3x and an average turn time of 4 × 60 ÷ 3 = 80 minutes. If you enter the 126 guests in those parties instead, it shows 8.4x and 29 minutes, which is [covers](/glossary/covers) per table, not the number of times a table was reset.",
+            "Now test a faster service. Enter 60 parties and the result becomes 4x with a 60-minute average turn. With an average bill of ₹1,800 per party, those 15 extra parties are worth 15 × ₹1,800 = ₹27,000 in one night, but only if guests are waiting for tables. If the floor is full and people are queuing at the door, that 20-minute gap is worth working on. On a half-empty night, turn time is not what limits sales."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Table turnover tips and common mistakes",
+          "items": [
+            "Count only tables that were open. If you closed a section or held tables for a late booking, leave them out.",
+            "Measure the peak window on its own, such as 8 pm to 10 pm. A whole-evening figure hides the hours when tables actually run short.",
+            "Compare like with like, such as this Saturday dinner against last Saturday, not a Saturday against a Tuesday.",
+            "Take parties seated per service from your billing system so you are not counting from memory.",
+            "Watch your table size mix. If most parties are couples seated at four-seat tables, adding two-seat tables may raise turns more than faster service would."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related restaurant tools",
+          "links": [
+            {
+              "label": "Average Order Value (AOV) Calculator",
+              "href": "/calculators/aov-calculator"
+            },
+            {
+              "label": "Menu Engineering Calculator",
+              "href": "/calculators/menu-engineering-calculator"
+            },
+            {
+              "label": "Tip Split Calculator",
+              "href": "/calculators/tip-split-calculator"
+            },
+            {
+              "label": "QR Menu Generator",
+              "href": "/tools/qr-menu-generator"
+            },
+            {
+              "label": "Free Restaurant POS",
+              "href": "/products/free-restaurant-pos"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "take-home-salary-calculator",
@@ -556,6 +1188,22 @@
           {
             "question": "Does this include income tax deduction?",
             "answer": "No — this calculator estimates deductions for PF and professional tax only. For an estimate that includes income tax, use the income tax calculator alongside this tool."
+          },
+          {
+            "question": "How is PF calculated in this take-home salary calculator?",
+            "answer": "It takes 12% of your basic salary twice: once as the employer's contribution, which is part of CTC but never reaches your bank account, and once as your own contribution, deducted from gross pay. It applies 12% to the full basic with no wage ceiling, so if your employer limits PF to the statutory wage ceiling, your real take-home will be a little higher."
+          },
+          {
+            "question": "What basic salary percentage should I enter?",
+            "answer": "Use the figure from your offer letter or payslip: monthly basic divided by monthly CTC, times 100. Many Indian companies set basic at around 40% to 50% of CTC, and the calculator starts at 40%. A higher basic means more PF deducted and lower monthly take-home, but larger PF savings and a bigger gratuity later."
+          },
+          {
+            "question": "How much professional tax should I enter?",
+            "answer": "Enter the monthly amount your state deducts from salary. Professional tax is a state levy capped at ₹2,500 a year, and ₹200 a month is a common figure where it applies; the calculator starts at ₹200. Some states, including Delhi, do not charge it, so enter 0 there. Your payslip shows the exact deduction."
+          },
+          {
+            "question": "Can an employer use this calculator to plan a salary offer?",
+            "answer": "Yes. Enter the annual CTC you plan to offer and the basic percentage in your salary structure to see what the employee will receive each month. Employer PF is inside the CTC figure, so CTC is your full yearly cost for the role before any bonus or insurance you add on top. Compare that cost with the sales the role will support."
           }
         ]
       },
@@ -566,7 +1214,67 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Take-home salary formula",
+          "text": "Monthly CTC = Annual CTC ÷ 12. Basic = Monthly CTC × Basic % ÷ 100. Employer PF = Employee PF = Basic × 12%. Gross monthly salary = Monthly CTC − Employer PF. Monthly take-home = Gross monthly salary − Employee PF − Professional tax. Annual take-home = Monthly take-home × 12."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the take-home salary calculator",
+          "steps": [
+            "Enter your annual CTC from the offer letter or appointment letter.",
+            "Enter basic salary as a percentage of CTC. If your payslip shows basic as a monthly amount, divide it by monthly CTC and multiply by 100.",
+            "Enter the monthly professional tax your state deducts, or 0 if your state does not levy it.",
+            "Read the monthly take-home, the employee PF deducted each month and the annual take-home.",
+            "Change the basic percentage to see how a different salary structure moves your in-hand pay."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: ₹6 lakh CTC with 40% basic",
+          "paragraphs": [
+            "A store supervisor is offered a CTC of ₹6,00,000 with basic set at 40% and ₹200 a month of [professional tax](/glossary/professional-tax). In the take-home salary calculator, monthly CTC is ₹6,00,000 ÷ 12 = ₹50,000, so basic is ₹20,000. Employer PF at 12% of basic is ₹2,400 and comes out of CTC first, leaving a gross monthly salary of ₹47,600. Employee PF of another ₹2,400 and professional tax of ₹200 are then deducted, so the monthly take-home is ₹45,000, or ₹5,40,000 a year.",
+            "Raise basic to 50% on the same CTC and basic becomes ₹25,000. Both PF contributions rise to ₹3,000, gross falls to ₹47,000, and take-home drops to ₹47,000 − ₹3,000 − ₹200 = ₹43,800, which is ₹1,200 less each month. The money is not lost: total [provident fund](/glossary/provident-fund) savings go up from ₹4,800 to ₹6,000 a month."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "What changes your real in-hand pay",
+          "items": [
+            "Check the PF line on your payslip. If it is less than 12% of your basic, your employer caps PF at the statutory wage ceiling and your real take-home is higher than shown here.",
+            "Take variable pay, joining bonus and employer-paid insurance out of CTC before entering it, because they are not paid to you every month.",
+            "Some employers include gratuity in CTC at about 4.81% of basic. It is paid only when you leave after five years, so remove it for a truer monthly figure.",
+            "Professional tax is capped at ₹2,500 a year, and some states, such as Delhi, do not levy it at all.",
+            "ESI is not deducted here. If your gross pay is within the ESI wage limit, your 0.75% ESI contribution also comes out of each month's pay.",
+            "Only the basic percentage moves the result. HRA, special allowance and other allowances are treated as one remainder, so how they are split does not change the figure."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Income Tax Calculator",
+              "href": "/calculators/income-tax-calculator"
+            },
+            {
+              "label": "Gratuity Calculator",
+              "href": "/calculators/gratuity-calculator"
+            },
+            {
+              "label": "Budget vs Actual",
+              "href": "/tools/budget-vs-actual"
+            },
+            {
+              "label": "Expense Tracker",
+              "href": "/tools/expense-tracker"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "income-tax-calculator",
@@ -614,6 +1322,22 @@
           {
             "question": "Is this calculator a substitute for filing advice from a CA?",
             "answer": "No. This is a simplified estimate for planning purposes only — it excludes surcharge, cess nuances for some cases, and several itemised deductions. For your actual tax filing or a regime decision with real money at stake, verify the latest slabs and consult a qualified chartered accountant."
+          },
+          {
+            "question": "Does the income tax calculator include the standard deduction?",
+            "answer": "Yes. It subtracts ₹75,000 from your gross income for the new regime and ₹50,000 for the old regime before applying the slabs, so enter your income before the standard deduction. That is why a salary of up to ₹12,75,000 shows zero tax under the new regime. Under the law, the standard deduction is available only on salary and pension income."
+          },
+          {
+            "question": "Does the calculator include cess and surcharge?",
+            "answer": "It adds 4% health and education cess to the tax under both regimes, so the figures shown already include cess. It does not add surcharge, which applies only when income is above ₹50 lakh. If your income is in that range, your actual tax will be higher than the estimate shown here."
+          },
+          {
+            "question": "Is the old regime figure correct for senior citizens?",
+            "answer": "Not exactly. The calculator uses the general old-regime slabs, with no tax on the first ₹2,50,000. Under the old regime, residents aged 60 to 79 have a basic exemption of ₹3,00,000 and those aged 80 or above ₹5,00,000, so the old-regime figure may be higher than they actually owe. New regime slabs are the same at every age, so that figure is unaffected."
+          },
+          {
+            "question": "Can I use this calculator for business or freelance income?",
+            "answer": "You can, but enter your taxable profit, not turnover, and expect the result to be low. The calculator always subtracts the ₹75,000 standard deduction, which the law allows only on salary and pension. Near the ₹12 lakh mark the gap is large: ₹12,50,000 of business profit shows nil tax, though about ₹52,000 is due under the new regime. People with business income also face limits on switching regimes, so confirm your choice with a CA."
           }
         ]
       },
@@ -624,7 +1348,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Income tax formula used by the calculator",
+          "text": "**New regime:** Taxable income = Gross income − ₹75,000. Tax = slab tax at 0% up to ₹4 lakh, then 5%, 10%, 15%, 20% and 25% on each next ₹4 lakh, and 30% above ₹24 lakh. Tax is nil if taxable income is ₹12,00,000 or less, and above that it is capped at Taxable income − ₹12,00,000. **Old regime:** Taxable income = Gross income − ₹50,000 − Deductions. Tax = slab tax at 0% up to ₹2.5 lakh, 5% up to ₹5 lakh, 20% up to ₹10 lakh and 30% above. Tax is nil if taxable income is ₹5,00,000 or less. In both regimes, Final tax = Tax × 1.04 (4% health and education cess)."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the income tax calculator",
+          "steps": [
+            "Enter your annual gross income for the financial year: salary before any deductions, plus other taxable income such as bank interest.",
+            "Do not subtract the standard deduction yourself. The calculator takes off ₹75,000 for the new regime and ₹50,000 for the old regime.",
+            "In the deductions field, enter the total you can claim under the old regime, such as 80C investments, health insurance, HRA exemption and home loan interest.",
+            "Compare the old regime tax and new regime tax figures, both shown including 4% cess.",
+            "Read the highlighted figure at the bottom to see which regime saves you money and by how much."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: ₹15 lakh salary, old vs new regime",
+          "paragraphs": [
+            "Here is how the income tax calculator handles a salaried store manager earning ₹15,00,000 a year who claims ₹2,00,000 of old-regime deductions, such as 80C investments and health insurance. Under the new regime, taxable income is ₹15,00,000 − ₹75,000 = ₹14,25,000. Slab tax is ₹20,000 (5% of ₹4–8 lakh) + ₹40,000 (10% of ₹8–12 lakh) + ₹33,750 (15% of the ₹2,25,000 above ₹12 lakh) = ₹93,750, or ₹97,500 with cess.",
+            "Under the old regime, taxable income is ₹15,00,000 − ₹50,000 − ₹2,00,000 = ₹12,50,000. Slab tax is ₹12,500 (5% of ₹2.5–5 lakh) + ₹1,00,000 (20% of ₹5–10 lakh) + ₹75,000 (30% of the ₹2,50,000 above ₹10 lakh) = ₹1,87,500, or ₹1,95,000 with cess. The new regime saves ₹97,500. At this income, the old regime only comes out cheaper once deductions go above ₹5,43,750, which usually takes HRA exemption and home loan interest on top of full 80C and health insurance claims."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Checks before you choose a regime",
+          "items": [
+            "Enter income before the standard deduction. A salary of up to ₹12,75,000 shows nil tax under the new regime because ₹75,000 comes off first.",
+            "Just above the limit, marginal relief caps new-regime tax at the taxable income above ₹12 lakh: a gross salary of ₹12,90,000 shows ₹15,600 with cess, not ₹64,740.",
+            "The standard deduction is only for salary and pension. If your income is from business or freelancing, the estimate can be lower than your real tax.",
+            "Count only deductions you can back with proof, and remember 80C is capped at ₹1,50,000 a year.",
+            "Surcharge, which applies above ₹50 lakh of income, is not included, so treat results at that level as a minimum.",
+            "Tell your employer your regime choice at the start of the year so TDS on your salary matches the tax you expect."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Take-Home Salary Calculator",
+              "href": "/calculators/take-home-salary-calculator"
+            },
+            {
+              "label": "Gratuity Calculator",
+              "href": "/calculators/gratuity-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Expense Tracker",
+              "href": "/tools/expense-tracker"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "gratuity-calculator",
@@ -672,6 +1460,22 @@
           {
             "question": "How is 'years of service' counted if I worked 7 years and 8 months?",
             "answer": "Under the Act, a period of service of more than 6 months past a completed year is typically rounded up to the next full year. So 7 years 8 months would usually be treated as 8 years for the calculation."
+          },
+          {
+            "question": "Which employers have to pay gratuity?",
+            "answer": "The Payment of Gratuity Act covers every factory, mine, oilfield, plantation, port and railway company, and every shop or other establishment that employs 10 or more people, or did on any day in the previous 12 months. Once covered, an employer stays covered even if headcount later falls below 10. Smaller employers can still pay gratuity voluntarily or under an employment contract."
+          },
+          {
+            "question": "What salary should I enter in the gratuity calculator?",
+            "answer": "Under the Payment of Gratuity Act, enter the last monthly salary drawn before leaving, counting only basic pay and dearness allowance. Leave out HRA, conveyance, special allowance, bonus, commission and overtime. Your payslip usually shows basic and DA as separate lines, so add just those two. If your company does not pay DA, enter basic pay alone."
+          },
+          {
+            "question": "How is gratuity worked out if my employer is not covered by the Act?",
+            "answer": "Employers outside the Act are not bound by its formula. When they do pay gratuity, the tax-exempt part is commonly worked out as half a month's average salary for each completed year, which means a divisor of 30 instead of 26 and no rounding up of part years. This calculator uses the Act's 26-day formula, so it will show a higher figure for that case."
+          },
+          {
+            "question": "How soon must an employer pay gratuity after an employee leaves?",
+            "answer": "Under the Act, the employer must work out the gratuity and pay it within 30 days of it becoming payable, which is when employment ends. If payment is late, simple interest is due on the amount for the period of delay. An employee who is not paid can apply to the controlling authority appointed under the Act."
           }
         ]
       },
@@ -682,7 +1486,67 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Gratuity formula",
+          "text": "Gratuity = Last drawn monthly salary (basic + DA) × 15 × Years of service ÷ 26. Gratuity payable = the lower of that figure and ₹20,00,000, the ceiling the calculator applies. When your figure is above the ceiling, the uncapped amount is shown in a note."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the gratuity calculator",
+          "steps": [
+            "Enter the last drawn monthly salary, counting only basic pay plus dearness allowance.",
+            "Enter completed years of service as a whole number, adding one year if the final part-year is more than six months.",
+            "Read the estimated gratuity payable, which updates as you type.",
+            "If the result reaches the ceiling, read the note below it for the uncapped figure.",
+            "Change the years to see how much one more year of service adds before an exit date."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: ₹40,000 basic + DA after 10 years",
+          "paragraphs": [
+            "A restaurant manager leaves with a last drawn [basic salary](/glossary/basic-salary) plus [dearness allowance](/glossary/dearness-allowance) of ₹40,000 a month and 10 years 4 months of service. The extra 4 months is not more than six, so the gratuity calculator is given 10 years. Gratuity = ₹40,000 × 15 × 10 ÷ 26 = ₹60,00,000 ÷ 26 = ₹2,30,769.23. Had the manager stayed to 10 years 8 months, service would count as 11 years and gratuity would be ₹66,00,000 ÷ 26 = ₹2,53,846.15, about ₹23,077 more.",
+            "A quick sanity check for any result: 15 ÷ 26 is about 0.577, so each year of service earns a little over half a month's basic + DA. The ceiling only matters at high salaries. A senior employee on ₹2,00,000 a month with 20 years works out to ₹23,07,692.31, so the calculator shows ₹20,00,000 and puts the uncapped figure in a note."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Gratuity tips for employers and employees",
+          "items": [
+            "Keep a gratuity nomination on file for every employee, so the amount can be paid quickly to a nominee if they die in service.",
+            "The calculator multiplies whatever you type, so round years of service before entering them rather than typing 7.8.",
+            "It does not check the five-year minimum, so confirm the employee is eligible before treating the figure as owed.",
+            "Gratuity is worked out on the last drawn salary, so a raise in the final year lifts the whole payout. Budget for that when giving increments to long-serving staff.",
+            "Owners with long-serving staff should set aside a yearly provision for gratuity in their books, so a resignation does not become a cash shock.",
+            "The labour codes, including the Code on Social Security, 2020, change some gratuity rules, such as eligibility for fixed-term employees and what counts as wages. Ask your CA which rules apply to your staff."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Take-Home Salary Calculator",
+              "href": "/calculators/take-home-salary-calculator"
+            },
+            {
+              "label": "Income Tax Calculator",
+              "href": "/calculators/income-tax-calculator"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            },
+            {
+              "label": "Budget vs Actual",
+              "href": "/tools/budget-vs-actual"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "online-order-commission-calculator",
@@ -730,6 +1594,22 @@
           {
             "question": "Can Setu Dine manage orders from multiple delivery platforms?",
             "answer": "Yes. Setu Dine can bring in orders from multiple aggregators into a single view, so your kitchen doesn't have to juggle separate tablets for every platform."
+          },
+          {
+            "question": "Can a restaurant claim input tax credit on the GST charged on commission?",
+            "answer": "Most standalone restaurants charge 5% GST on food without input tax credit. That means they cannot set off the GST a platform adds to its commission, so it is a real cost, and the calculator deducts it in full by default. If your business can claim that credit, set GST on commission to 0% to see your payout without the tax you get back. Confirm the treatment with your CA."
+          },
+          {
+            "question": "Does the calculator include discounts and ads I pay for on Swiggy or Zomato?",
+            "answer": "No. It deducts platform commission, GST on commission, the payment gateway fee and packaging cost. There are no separate fields for discounts you fund, ad or listing spend, or penalties. Packaging is subtracted as a flat rupee amount, so you can add the per-order cost of those charges to the packaging field to get an all-in payout."
+          },
+          {
+            "question": "Why does my take-home percentage drop on smaller orders?",
+            "answer": "Commission, GST on commission and the gateway fee are percentages, so they grow and shrink with the order. Packaging is a fixed rupee amount per order. ₹30 of packaging is 10% of a ₹300 order but under 4% of an ₹800 order. Change the order value in the calculator to see how much your take-home moves across your usual order sizes."
+          },
+          {
+            "question": "Can I use the commission calculator on my phone?",
+            "answer": "Yes. It works in any mobile browser, with no app to install and no sign-up. On small screens the input fields stack into a single column, and the payout updates as you type, so you can check an order's numbers at the counter. Your inputs are not saved, so they go back to the defaults when you reload the page."
           }
         ]
       },
@@ -740,7 +1620,72 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Online order commission formula",
+          "text": "Commission = Order value × Commission % ÷ 100. GST on commission = Commission × GST on commission % ÷ 100. Gateway fee = Order value × Gateway fee % ÷ 100. Total deductions = Commission + GST on commission + Gateway fee + Packaging cost. **Real payout = Order value − Total deductions**, and Take-home % = Real payout ÷ Order value × 100. See [aggregator commission](/glossary/aggregator-commission) for what the platform deduction covers."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Online Order Commission Calculator",
+          "intro": "Keep a recent payout statement from the delivery app open while you fill this in.",
+          "steps": [
+            "Enter the order value: the food value the platform charges its commission on, as shown on your payout statement.",
+            "Enter the platform commission percentage from your aggregator agreement or latest payout report.",
+            "Check GST on commission. It starts at 18%, the rate platforms charge on their commission.",
+            "Enter the payment gateway fee as a percentage of the order value.",
+            "Enter your packaging cost per order in rupees: containers, bags, cutlery and seals.",
+            "Read Total deductions, Your real payout and Take-home %. They update as you type, so you can run your small, average and large order sizes one after another."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: payout on an ₹800 delivery order",
+          "paragraphs": [
+            "Say a [cloud kitchen](/glossary/cloud-kitchen) gets an ₹800 order on an app charging 22% food delivery commission, with 18% GST on that commission, a 1.8% payment gateway fee and ₹30 of packaging. Commission is ₹800 × 22% = ₹176. GST on commission is ₹176 × 18% = ₹31.68. The gateway fee is ₹800 × 1.8% = ₹14.40. Add the ₹30 packaging and total deductions come to ₹252.08, so the real payout is ₹547.92, a take-home of 68.5%.",
+            "Now run a ₹300 order with the same settings. Commission is ₹66, GST on it ₹11.88, the gateway fee ₹5.40 and packaging still ₹30, so deductions total ₹113.28 and the payout is ₹186.72, only 62.2% of the order. Packaging is a fixed rupee cost, so it takes a bigger share of small orders. Work out your smallest common orders separately before you run discounts on them."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Tips for getting a realistic payout figure",
+          "items": [
+            "Take the commission rate from a recent payout report, not the rate card you signed up on. The effective rate on your statement can differ from the headline rate.",
+            "If your statement also charges GST on the gateway fee, include it in the gateway field: a 2% fee plus 18% GST is 2.36%.",
+            "Work out each platform separately. Commission, gateway fees and packaging rules differ between apps, and a single blended figure can hide a platform that loses you money.",
+            "Compare take-home % with your food cost. A 68% take-home on a dish whose food cost is 35% of the order value leaves 33% for rent, staff and profit.",
+            "Check the result against one real order from your payout report. If they differ by more than a few rupees, a charge is missing or the commission is charged on a different base."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators for delivery orders",
+          "links": [
+            {
+              "label": "Online Menu Price Calculator",
+              "href": "/calculators/online-menu-price-calculator"
+            },
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "MDR Calculator",
+              "href": "/calculators/mdr-calculator"
+            },
+            {
+              "label": "Average Order Value (AOV) Calculator",
+              "href": "/calculators/aov-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "online-menu-price-calculator",
@@ -790,6 +1735,22 @@
           {
             "question": "Can Setu Dine sync these prices to my delivery platforms?",
             "answer": "Yes. Setu Dine lets you manage menu pricing across dine-in and multiple aggregators from one screen, so updated prices go out everywhere at once."
+          },
+          {
+            "question": "What is the difference between the menu price calculator and the commission calculator?",
+            "answer": "They work in opposite directions. The Online Order Commission Calculator starts from an order value and shows what you take home after commission, GST on commission, gateway fee and packaging. This menu price calculator starts from the amount you want to take home and works back to the price to list. It also takes out the GST included in that price. Use this one to set prices and the other to check payouts."
+          },
+          {
+            "question": "How much markup do restaurants need on Swiggy and Zomato prices?",
+            "answer": "There is no single figure, because it depends on your commission, packaging and GST. At this calculator's default inputs (₹200 take-home, 25% commission, 18% GST on commission, 2% gateway fee, ₹20 packaging and 5% GST on food), the listed price comes to ₹345.16, a markup of 72.6%. A lower commission or packaging cost brings that down quickly."
+          },
+          {
+            "question": "Can I calculate the listed price for a whole order or combo?",
+            "answer": "Yes. Enter the take-home you want for the whole combo and the packaging cost for all its containers. The formula works the same way for a combo as for a single dish, because commission, gateway fee and GST are all percentages of the listed price, and packaging is a flat amount added to your target."
+          },
+          {
+            "question": "What GST rate should I enter for the item?",
+            "answer": "Enter the rate shown on your own tax invoice for that item. The default is 5%, the rate most standalone restaurants charge on food. The calculator uses this rate to take the GST portion out of the listed price, because that money goes to the government whether you or the platform pays it in."
           }
         ]
       },
@@ -800,7 +1761,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Online menu price formula",
+          "text": "Listed price = (Take-home + Packaging) ÷ (1 − GST share − Commission × (1 + GST on commission) − Gateway fee), with every percentage written as a decimal (25% = 0.25). GST share = Item GST ÷ (1 + Item GST), so 5% GST gives 0.05 ÷ 1.05 = 0.0476 of the listed price. **Markup % = (Listed price − Take-home) ÷ Take-home × 100.** Read more on [tax-inclusive pricing](/glossary/tax-inclusive-pricing)."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Online Menu Price Calculator",
+          "steps": [
+            "Enter the price you want to take home for the item: often your dine-in price before GST, or your food cost plus the margin you need.",
+            "Enter the platform commission percentage and the GST on commission, which is 18% by default.",
+            "Enter the payment gateway fee percentage your platform deducts.",
+            "Enter the packaging cost for this item in rupees.",
+            "Enter the GST you charge on this item. The default is 5%, the rate most standalone restaurants charge on food.",
+            "Read the price to list on the platform and the markup over your target, then check the breakdown: GST you will remit, commission plus GST on it, and gateway fee plus packaging."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: listing a ₹250 dish on a delivery app",
+          "paragraphs": [
+            "A restaurant sells paneer butter masala for ₹250 plus GST at the counter and wants its Zomato and Swiggy menu price to leave the same ₹250 on every order. Its platform charges 22% commission plus 18% GST on it and a 2% gateway fee, and the container costs ₹25. With 5% GST on food, the GST share of the listed price is 0.05 ÷ 1.05 = 0.04762. Commission with its GST is 0.22 × 1.18 = 0.2596. The bracket is 1 − 0.04762 − 0.2596 − 0.02 = 0.67278, so the listed price is (₹250 + ₹25) ÷ 0.67278 = ₹408.75, a 63.5% markup.",
+            "Check it the other way. The ₹408.75 listing carries ₹19.46 of GST, ₹106.11 of commission plus GST, and ₹33.18 of gateway fee plus packaging. That is ₹158.75 of deductions, which leaves exactly ₹250. This kind of [menu price padding](/glossary/menu-price-padding) only works if you round up: list it at ₹409 or a little more, never less, because rounding down misses the target on every order."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Before you upload new prices",
+          "items": [
+            "Round the listed price up to the next clean figure. Rounding down puts every order below your take-home target.",
+            "Packaging is added to your target before the deductions are grossed up, so it costs more than its face value. In the example above, the ₹25 container adds about ₹37 to the listed price.",
+            "Price combos and single items separately. Commission is a percentage but packaging is per container, so a combo packed in one box needs less markup than the same dishes sold one by one.",
+            "If your statement charges GST on the gateway fee, include it in the gateway field: a 2% fee plus 18% GST is 2.36%.",
+            "Keep a note of the target take-home behind each listed price, so you can rerun an item quickly when commission or GST rates change."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related pricing calculators",
+          "links": [
+            {
+              "label": "Online Order Commission Calculator",
+              "href": "/calculators/online-order-commission-calculator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "Recipe Costing Calculator",
+              "href": "/calculators/recipe-costing-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "recipe-costing-calculator",
@@ -810,7 +1835,7 @@
       "shortDescription": "Cost out a recipe ingredient by ingredient to find true cost per serving.",
       "seo": {
         "title": "Recipe Costing Calculator — Cost Per Serving | Setu",
-        "description": "Free recipe costing calculator for restaurants. Add ingredients and quantities to find total recipe cost, cost per serving and a suggested menu price.",
+        "description": "Free recipe costing calculator for restaurants. Enter what each ingredient costs to get total recipe cost, cost per serving and a suggested menu price.",
         "keywords": [
           "recipe costing calculator",
           "recipe cost calculator",
@@ -821,13 +1846,13 @@
       "hero": {
         "eyebrow": "Free Tool — Recipe Costing Calculator",
         "headline": "Recipe Costing Calculator",
-        "subheadline": "Add each ingredient and quantity to find the true cost of a recipe, per serving."
+        "subheadline": "Add what each ingredient costs in the recipe to find the true cost of a recipe, per serving."
       },
       "about": {
         "headline": "Cost the recipe, not just the headline ingredients",
         "paragraphs": [
           "Most menu pricing mistakes come from costing a dish on its 2-3 main ingredients and guessing the rest. Oil, spices, garnish and packaging are individually small but add up — and that gap compounds across hundreds of orders a month.",
-          "Add every ingredient in a recipe with its quantity and unit cost to get an accurate total cost and cost per serving. Once you know the real cost, use it alongside the food cost percentage calculator to set a menu price that protects your margin."
+          "Add every ingredient in a recipe with what the amount you use costs you to get an accurate total cost and cost per serving. Once you know the real cost, use it alongside the food cost percentage calculator to set a menu price that protects your margin."
         ]
       },
       "faq": {
@@ -848,6 +1873,22 @@
           {
             "question": "Can I save this for every dish on my menu?",
             "answer": "This tool doesn't store data between sessions, so note down the cost per serving for each dish as you go. Setu Dine can store recipe costs against menu items permanently and update automatically as ingredient prices change."
+          },
+          {
+            "question": "How do I account for peeling, trimming or cooking loss in recipe cost?",
+            "answer": "Base the cost on the usable weight, not the weight you bought. If 1 kg of onions costing ₹40 gives 900 g after peeling, each usable kilo costs ₹40 ÷ 0.9 = ₹44.44, so 200 g of peeled onion in the recipe costs about ₹8.89. Enter that figure in Cost used. Apply the same logic to chicken on the bone, fish and leafy greens, where the loss is usually larger."
+          },
+          {
+            "question": "What target food cost percentage should I enter?",
+            "answer": "Enter the share of the menu price you can afford to spend on ingredients once labour, rent and other running costs are covered. The calculator starts at 30%, and many restaurants work somewhere in the 25% to 35% range depending on format. A lower target gives a higher suggested price: a ₹50 plate cost needs a ₹200 price at 25%, but only ₹166.67 at 30%."
+          },
+          {
+            "question": "Can I cost a base gravy or batter that goes into several dishes?",
+            "answer": "Yes. Cost the base as its own recipe first: enter its ingredients and set Servings to the number of portions the batch gives, for example 20 ladles of makhani gravy. The cost per serving is then your cost per ladle. In each dish that uses the gravy, add one row with that per-ladle cost instead of listing the gravy ingredients again."
+          },
+          {
+            "question": "Is the recipe costing calculator free, and does it work on a phone?",
+            "answer": "Yes. It is free to use with no signup or download, and it runs in any modern mobile or desktop browser. The ingredient rows, servings and target fields fit a phone screen and the results recalculate as you type, so you can cost a dish standing in the kitchen or at the market. All the calculation happens in your browser."
           }
         ]
       },
@@ -858,7 +1899,72 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Recipe cost formula",
+          "text": "Total recipe cost = sum of the Cost used in every ingredient row. Cost per serving = Total recipe cost ÷ Servings this recipe yields. Suggested price per serving = Cost per serving ÷ (Target food cost % ÷ 100). The cost per serving is your [plate cost](/glossary/plate-cost), the figure every menu price should start from."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the recipe costing calculator",
+          "steps": [
+            "Replace the sample rows (Paneer, Spices & sauces, Oil & garnish) with your own ingredients, typing each name in the Ingredient column.",
+            "In Cost used, enter the rupee cost of the quantity that goes into this recipe, not the price of the whole pack. For example, 250 g of paneer from a ₹400 per kg block is ₹100.",
+            "Tap Add ingredient for every extra item, including oil, spices, garnish and packaging. Use the cross next to a row to remove it.",
+            "Enter Servings this recipe yields, the number of plates the batch actually produces.",
+            "Set Target food cost % to the share of the menu price you want ingredients to take. It starts at 30%.",
+            "Read Total recipe cost (all servings), Cost per serving and Suggested price per serving. They update as you type."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: costing a 10-plate batch of paneer butter masala",
+          "paragraphs": [
+            "Say your kitchen makes paneer butter masala in batches of 10 plates. In the recipe costing calculator, enter five rows: paneer ₹400 (1 kg, so 100 g a plate), tomato, onion and cashew gravy ₹110, butter and cream ₹120, spices and kasuri methi ₹30, and oil and garnish ₹20. Total recipe cost is ₹680, and with Servings set to 10 the cost per serving is ₹680 ÷ 10 = ₹68. Paneer alone is ₹40 of that, more than half the plate cost, so a paneer price rise is the first thing to watch.",
+            "At the default 30% target, the suggested price per serving is ₹68 ÷ 0.30 = ₹226.67. A menu price of ₹229 keeps food cost just under target (₹68 ÷ ₹229 = 29.7%). If a 35% food cost suits your format, the suggested price drops to ₹68 ÷ 0.35 = ₹194.29. Once you settle on a price, check its food cost % and gross profit in the [food cost percentage calculator](/calculators/food-cost-calculator)."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Recipe costing mistakes to avoid",
+          "items": [
+            "Using an old purchase price. Vegetable, dairy and oil prices move week to week, so recost a dish whenever your supplier bill changes.",
+            "Dividing by planned portions. Count the plates the batch actually gives after cooking and plating, not the number written on the recipe card.",
+            "Skipping packaging on delivery dishes. Add the container, lid, bag and cutlery as their own rows when you cost the takeaway version.",
+            "Costing a 100 g portion while the line plates 120 g. Weigh a few portions during service and correct the recipe quantities if they drift.",
+            "Reading the suggested price as GST-inclusive. The calculator adds no GST, so treat it as your price before tax: add GST on top for a tax-exclusive menu, or check that a GST-inclusive menu price still leaves this amount after tax.",
+            "Leaving out transport and loading charges. If you pay to bring stock in, spread that cost into the ingredient prices you enter."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "More restaurant costing tools",
+          "links": [
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "Menu Engineering Calculator",
+              "href": "/calculators/menu-engineering-calculator"
+            },
+            {
+              "label": "Online Menu Price Calculator",
+              "href": "/calculators/online-menu-price-calculator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            },
+            {
+              "label": "Liquor Pour Cost Calculator",
+              "href": "/calculators/liquor-cost-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "liquor-cost-calculator",
@@ -906,6 +2012,22 @@
           {
             "question": "How many pours should I get from one bottle?",
             "answer": "Pours per Bottle = Bottle Size ÷ Pour Size. A standard 750ml bottle poured at 30ml per drink should yield 25 pours — track actual pours against this to spot over-pouring or wastage."
+          },
+          {
+            "question": "How do I calculate the cost of a 60 ml large peg?",
+            "answer": "Enter 60 as the Pour size and the large-peg menu price as the Selling price per pour. A 750 ml bottle gives 12.5 large pegs. The Pours per bottle result is rounded to a whole number on screen, so it shows 13, but cost per pour uses the exact 12.5, so a ₹1,800 bottle works out to ₹144 per large peg."
+          },
+          {
+            "question": "Does pour cost include mixers, soda, ice or garnish?",
+            "answer": "No. The calculator covers only the liquor in the pour, based on bottle cost and bottle size. For a cocktail or a whisky-soda, work out the spirit cost here, then add the cost of mixers, syrups, fruit and garnish separately, for example with the recipe costing calculator, and compare the full drink cost against its menu price."
+          },
+          {
+            "question": "Can I use the pour cost calculator for wine by the glass or beer?",
+            "answer": "Yes. For wine, enter the bottle size (usually 750 ml) and your glass measure, such as 150 ml, which gives 5 glasses per bottle. For bottled beer sold whole, enter the same number in Bottle size and Pour size, so pours per bottle is 1 and cost per pour equals the bottle cost. For draught beer, enter the keg size in ml and your glass size."
+          },
+          {
+            "question": "What is the difference between pour cost percentage and profit per pour?",
+            "answer": "Pour cost % is the share of the selling price spent on liquor; profit per pour is the rupee amount left over. They can point in different directions. A ₹250 peg costing ₹50 runs at 20% and leaves ₹200, while a ₹900 single malt peg costing ₹270 runs at 30% yet leaves ₹630. Look at both before deciding which drinks to push."
           }
         ]
       },
@@ -916,7 +2038,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Pour cost formula",
+          "text": "Pours per bottle = Bottle size (ml) ÷ Pour size (ml). Cost per pour = Bottle cost ÷ Pours per bottle. Pour cost % = Cost per pour ÷ Selling price per pour × 100. Profit per pour = Selling price per pour − Cost per pour, which is what is left after the liquor alone, before mixers, staff or rent."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the liquor pour cost calculator",
+          "steps": [
+            "Enter Bottle cost, the price you pay for one bottle including delivery and any taxes on your purchase bill.",
+            "Enter Bottle size in ml, such as 750 for a full bottle, 375 for a half or 180 for a quarter.",
+            "Enter Pour size in ml, the measure you serve, such as 30 ml for a small peg or 60 ml for a large peg.",
+            "Enter Selling price per pour, the menu price for that measure.",
+            "Read Pour cost %, Profit per pour, Cost per pour and Pours per bottle. Pours per bottle is rounded to a whole number on screen, but the other results use the exact figure."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: a ₹1,800 whisky bottle sold in 30 ml pegs",
+          "paragraphs": [
+            "A bar pays ₹1,800 for a 750 ml bottle of whisky and sells it at ₹300 per 30 ml peg. The liquor cost calculator shows 750 ÷ 30 = 25 pours per bottle, a cost per pour of ₹1,800 ÷ 25 = ₹72, a [pour cost](/glossary/pour-cost) of ₹72 ÷ ₹300 × 100 = 24%, and a profit per pour of ₹300 − ₹72 = ₹228. Selling all 25 pegs brings in ₹7,500 from the bottle.",
+            "Now suppose pegs are free-poured at about 35 ml. Change Pour size to 35 and the bottle gives only 21.4 pours (shown as 21), cost per pour rises to ₹84, pour cost climbs to 28% and profit per peg falls to ₹216. Each peg still sells for ₹300, so the bottle now earns about ₹6,429 instead of ₹7,500, roughly ₹1,071 lost per bottle. That is why [portion control](/glossary/portion-control) with a proper peg measure matters as much as the menu price."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Bar cost control checklist",
+          "items": [
+            "Pour with a peg measure or jigger for every drink. Free pouring is where most extra millilitres go.",
+            "Enter the bottle price from your latest purchase bill, and update it when supplier or state excise prices change.",
+            "Measure or weigh open bottles at each stock count, and compare the pours your billing recorded with the pours each bottle should have given.",
+            "Record comps, spillage and breakage separately so they do not hide inside an over-pouring problem.",
+            "Recheck pour cost before a happy hour. A ₹300 peg costing ₹72 runs at 24%, but at a ₹200 happy-hour price the same peg runs at 36%."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related bar and kitchen calculators",
+          "links": [
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "Recipe Costing Calculator",
+              "href": "/calculators/recipe-costing-calculator"
+            },
+            {
+              "label": "Menu Engineering Calculator",
+              "href": "/calculators/menu-engineering-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "Stock Register",
+              "href": "/tools/stock-register"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "tip-split-calculator",
@@ -964,6 +2149,22 @@
           {
             "question": "Can I use this for a single shift or a whole week's tips?",
             "answer": "Either — enter the total tip pool for whatever period you're splitting (a shift, a day, a week) along with the hours or shares for that same period."
+          },
+          {
+            "question": "How do I split tips between front-of-house and kitchen staff?",
+            "answer": "Run the calculator twice. First choose By hours / shares and add two rows, Floor and Kitchen, with the agreed shares, such as 7 and 3, so a ₹10,000 pool splits into ₹7,000 and ₹3,000. Then run each group's amount across its own staff by hours or points. Agree the group shares with the team before the period starts."
+          },
+          {
+            "question": "Can I split tips by fixed percentages?",
+            "answer": "Yes. Choose By hours / shares and enter each person's percentage in the Hours / shares column, for example 50, 30 and 20. Because each entry is divided by the total of all entries, a ₹6,000 pool pays ₹3,000, ₹1,800 and ₹1,200. If your percentages do not add up to 100, the calculator scales them proportionally, so the full pool is still paid out."
+          },
+          {
+            "question": "Is the tip split calculator free to use on a phone?",
+            "answer": "Yes. It is free, needs no signup or app, and runs in your phone's browser, so you can settle tips at the counter at the end of a shift. The calculator does not save staff names or amounts between visits, so re-enter them each time or keep a screenshot of the payout list as your record."
+          },
+          {
+            "question": "Can I use this to split a service charge collected on bills?",
+            "answer": "The calculator splits whatever amount you enter, so it works the same way for a service charge pool as for tips. Whether you can charge it is a separate matter: in India, consumer protection guidelines say a service charge cannot be added to a bill automatically or made compulsory for the guest. Check the current rules before you bill it."
           }
         ]
       },
@@ -974,7 +2175,66 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Tip split formula",
+          "text": "Equal split: each person's share = Total tip pool ÷ number of staff rows. By hours / shares: each person's share = Total tip pool × (that person's hours or shares ÷ total hours or shares of everyone listed). In both modes the payouts add up to the full pool, as long as at least one person has hours or shares entered in the weighted mode. See [tip pooling](/glossary/tip-pooling) for the common ways pools are set up."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the tip split calculator",
+          "steps": [
+            "Choose Equal split or By hours / shares at the top.",
+            "Enter the Total tip pool, including any card or UPI tips you are pooling with cash.",
+            "Replace the sample rows (Staff 1, Staff 2, Staff 3) with your staff names. Tap Add staff member to add someone and the cross to remove a row.",
+            "If you chose By hours / shares, enter each person's hours worked or agreed points in the Hours / shares column. Equal split ignores this column.",
+            "Read each person's payout in the list below. Amounts show to the paisa and change as you type."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: splitting a ₹12,000 weekly tip pool",
+          "paragraphs": [
+            "A café collects ₹12,000 in tips over a week, cash and UPI together. Four people shared the floor, and the [shift roster](/glossary/shift-roster) shows Riya worked 40 hours, Arjun 30, Meena 30 and Sameer 20, a total of 120 hours. Choose By hours / shares, enter the pool and the hours, and the tip split calculator works out ₹100 per hour: Riya ₹4,000, Arjun ₹3,000, Meena ₹3,000 and Sameer ₹2,000. An equal split would pay everyone ₹3,000, moving ₹1,000 from Riya to Sameer.",
+            "If the team agrees on role points instead, enter those in the same column. With Riya as captain on 3 shares, Arjun and Meena on 2 each and Sameer as helper on 1, there are 8 shares worth ₹1,500 each, so the payouts are ₹4,500, ₹3,000, ₹3,000 and ₹1,500. To weight by both role and hours, multiply them before entering: 40 hours × 3 points = 120 for Riya."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Tip pooling checklist for managers",
+          "items": [
+            "Agree the method (equal, by hours or by points) with staff before the period starts, and write it down.",
+            "Take hours from your attendance register or shift roster for the same dates as the pool, not from memory.",
+            "Remove the row of anyone who was not on shift, and any blank row. In Equal split every row gets a share, even one with 0 hours or no name.",
+            "Shares show to the paisa, so round payouts to convenient amounts and carry the small remainder into the next pool.",
+            "Show the team the payout list, even a screenshot, so everyone can see how the split was worked out."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Other tools for restaurant managers",
+          "links": [
+            {
+              "label": "Table Turnover Rate Calculator",
+              "href": "/calculators/table-turnover-calculator"
+            },
+            {
+              "label": "Take-Home Salary Calculator",
+              "href": "/calculators/take-home-salary-calculator"
+            },
+            {
+              "label": "Cash Book",
+              "href": "/tools/cash-book"
+            },
+            {
+              "label": "Free Restaurant POS",
+              "href": "/products/free-restaurant-pos"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "inventory-turnover-calculator",
@@ -1022,6 +2282,22 @@
           {
             "question": "Why is my inventory turnover dropping?",
             "answer": "Common causes are overstocking ahead of demand, slow-moving SKUs accumulating, seasonal demand dips, or pricing that's no longer competitive enough to move stock at the previous pace."
+          },
+          {
+            "question": "Should I use sales or cost of goods sold to calculate inventory turnover?",
+            "answer": "Use cost of goods sold. Inventory is valued at cost, so dividing sales by it mixes two bases and inflates the ratio by your margin. A store with ₹1,50,000 average stock, ₹4,50,000 cost of goods sold and ₹6,30,000 sales shows 3x on cost but 4.2x on sales. If you have to use sales because COGS is not available, use sales in every period so the results still compare."
+          },
+          {
+            "question": "How do I calculate monthly inventory turnover?",
+            "answer": "Enter the month's cost of goods sold, the average stock value for that month, and 30 (or the actual number of days) in the days in period field. The ratio is per month, so if sales and stock levels stay similar all year, a monthly turnover of 1x works out to about 12x a year. Days inventory outstanding is always in days, so you can compare it across periods of different lengths."
+          },
+          {
+            "question": "How do I calculate cost of goods sold for a shop?",
+            "answer": "For a trading business, cost of goods sold is opening stock, plus purchases during the period, plus direct costs such as freight inward, minus closing stock. Value everything at cost, excluding GST you claim as input tax credit. You can usually get these figures from your accountant's trading account or the stock reports in your accounting software."
+          },
+          {
+            "question": "How can I improve my inventory turnover ratio?",
+            "answer": "Order slow-moving items in smaller quantities more often, stop reordering items that have not sold in months, and clear dead stock with markdowns or bundles. Rank items by the stock value you hold so you deal first with the ones that tie up the most cash. Recalculate each month to see whether the changes are working."
           }
         ]
       },
@@ -1032,7 +2308,72 @@
           "label": "Get notified",
           "href": "/contact"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Inventory turnover and days of stock formula",
+          "text": "Inventory turnover ratio = Cost of goods sold ÷ Average inventory value. Days inventory outstanding = Days in period ÷ Inventory turnover ratio. Take both money figures from the same period, valued at cost, and set **Days in period** to match: 30 for a month, 90 for a quarter, 365 for a year. See [COGS](/glossary/cogs) and [inventory turnover](/glossary/inventory-turnover) for the terms."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Inventory Turnover Calculator",
+          "steps": [
+            "Decide the period you want to measure, such as a month, a quarter or a financial year, and pull your figures for that period only.",
+            "Enter cost of goods sold for the period, valued at purchase cost rather than selling price.",
+            "Enter the average inventory value at cost for the same period.",
+            "Enter the days in the period, for example 30, 90 or 365.",
+            "Read the inventory turnover ratio, shown as times (such as 3x), and days inventory outstanding.",
+            "Note the result, then repeat for earlier periods or separate categories and compare the numbers."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: inventory turnover for a general store's quarter",
+          "paragraphs": [
+            "A general store's books for a 90-day quarter show cost of goods sold of ₹4,50,000. Stock at cost was ₹1,40,000 at the start of the quarter and ₹1,60,000 at the end, so average inventory is (₹1,40,000 + ₹1,60,000) ÷ 2 = ₹1,50,000. Inventory turnover for the quarter is ₹4,50,000 ÷ ₹1,50,000 = 3x. With 90 days in the period, days inventory outstanding is 90 ÷ 3 = 30 days, so the store holds about a month of stock.",
+            "If the owner entered sales of ₹6,30,000 instead of cost of goods sold, the calculator would show 4.2x and 21 days. Sales include your margin while inventory is valued at cost, so using sales makes stock look faster-moving than it really is. Keep both figures at cost to get a number you can compare from one quarter to the next."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Common mistakes that distort turnover",
+          "items": [
+            "Mixing bases: cost of goods sold at cost but inventory at MRP or selling price, or the other way round.",
+            "Entering 365 days when the cost of goods sold covers only a month or a quarter.",
+            "Using cost of goods sold for all outlets and the godown but stock from only one of them. Both figures must cover the same locations.",
+            "Including GST you claim as input tax credit in stock or purchase values. GST you get back is not part of inventory cost.",
+            "Averaging only opening and closing stock for a seasonal business. Average the month-end stock values across the period instead.",
+            "Running only one store-wide figure. A healthy overall ratio can hide dead stock sitting in one category."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related inventory tools",
+          "links": [
+            {
+              "label": "Stock Reorder Point Calculator",
+              "href": "/calculators/stock-reorder-point-calculator"
+            },
+            {
+              "label": "ABC Analysis",
+              "href": "/tools/abc-analysis"
+            },
+            {
+              "label": "Stock Register",
+              "href": "/tools/stock-register"
+            },
+            {
+              "label": "Financial Ratio Calculator",
+              "href": "/calculators/financial-ratio-calculator"
+            },
+            {
+              "label": "Purchase Price Variance Calculator",
+              "href": "/calculators/purchase-price-variance-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "stock-reorder-point-calculator",
@@ -1080,6 +2421,22 @@
           {
             "question": "Does this account for seasonal demand spikes?",
             "answer": "Not directly — this uses your average daily sales figure. For seasonal items, recalculate using the average daily sales expected during the upcoming season rather than a flat annual average."
+          },
+          {
+            "question": "What is the difference between reorder point and safety stock?",
+            "answer": "Safety stock is the buffer you want left on the shelf when a new delivery arrives, to cover busy days or a late supplier. The reorder point is the stock level at which you place an order. It includes that buffer plus the stock you expect to sell while you wait for delivery. In this calculator, reorder point equals lead-time demand plus safety stock."
+          },
+          {
+            "question": "How do I calculate average daily sales for one item?",
+            "answer": "Add up the units of that item sold over a recent period, such as the last 30 days, and divide by the number of days. If your shop closes one day a week, either divide by the days you were open and count lead time in working days too, or use calendar days for both. Mixing the two makes the reorder point too high or too low."
+          },
+          {
+            "question": "Can I use the reorder point calculator for restaurant ingredients?",
+            "answer": "Yes. Enter average daily usage instead of sales, such as kilograms of onions or litres of milk used per day, along with the supplier's lead time and a safety buffer. The fields are labelled in units, but any unit works as long as daily usage and safety stock use the same one."
+          },
+          {
+            "question": "What happens if I set safety stock to zero?",
+            "answer": "The reorder point then equals lead-time demand, so on an average day the last unit sells just as the delivery arrives. A busier day or a late delivery means you run out. Zero safety stock can work for items you can buy locally the same day, or ones customers will not miss. For fast sellers, keep at least a day or two of sales as a buffer."
           }
         ]
       },
@@ -1090,7 +2447,72 @@
           "label": "Get notified",
           "href": "/contact"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Reorder point and lead-time demand formula",
+          "text": "Lead-time demand = Average daily sales × Supplier lead time in days. **Reorder point = Lead-time demand + Safety stock.** Both results are shown rounded to whole units. When stock on hand falls to the [reorder point](/glossary/reorder-point), place the next order. See [lead time](/glossary/lead-time) and [safety stock](/glossary/safety-stock) for the other terms."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Stock Reorder Point Calculator",
+          "steps": [
+            "Pick one item. Reorder points are set per item (SKU), not for the whole shop.",
+            "Enter average daily sales in units: units sold over the last few weeks divided by the number of days.",
+            "Enter supplier lead time in days, from the day you place the order to the day the stock is ready to sell.",
+            "Enter safety stock in units, the buffer you want left when the new stock arrives.",
+            "Read Reorder at for the trigger level, and Lead-time demand for how much you expect to sell while you wait.",
+            "Write the reorder point in your stock register or on the shelf tag, and order as soon as stock falls to it."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: reorder point for cooking oil pouches",
+          "paragraphs": [
+            "A kirana store sells about 18 one-litre sunflower oil pouches a day, and its distributor takes 4 days to deliver. Lead-time demand is 18 × 4 = 72 pouches. The owner keeps two days of sales as safety stock, 18 × 2 = 36 pouches, so the reorder point is 72 + 36 = 108. When the count drops to 108 pouches, it is time to call the distributor.",
+            "Before Diwali, sales rise to 25 pouches a day and deliveries take 6 days. Lead-time demand becomes 25 × 6 = 150, and two days of safety stock is now 50, so the reorder point jumps to 200. If the owner kept the old figure of 108 that season, the shelf would run empty nearly two days before the new stock arrived."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Tips for reorder points that hold up",
+          "items": [
+            "Base average daily sales on the last four to eight weeks, and leave out one-off bulk orders that will not repeat.",
+            "Count only sellable stock against the reorder point. Exclude damaged, expired or already-reserved units.",
+            "Work in the unit you order in. If the supplier sells by the carton, convert the reorder point from pieces to cartons.",
+            "If you count stock only once a week, add up to a week of sales to the reorder point so an item cannot slip below it unnoticed between counts.",
+            "Review reorder points every month, and straight away when you switch supplier or delivery days change.",
+            "The reorder point tells you when to order, not how much. How much to order depends on the supplier's minimum order, your shelf space and the cash you have."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related stock and purchasing tools",
+          "links": [
+            {
+              "label": "Inventory Turnover Calculator",
+              "href": "/calculators/inventory-turnover-calculator"
+            },
+            {
+              "label": "Stock Register",
+              "href": "/tools/stock-register"
+            },
+            {
+              "label": "Purchase Order Generator",
+              "href": "/tools/purchase-order-generator"
+            },
+            {
+              "label": "ABC Analysis",
+              "href": "/tools/abc-analysis"
+            },
+            {
+              "label": "Supplier Book",
+              "href": "/tools/supplier-book"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "cac-calculator",
@@ -1138,6 +2560,22 @@
           {
             "question": "How is CAC different from average order value?",
             "answer": "CAC measures what you spent to win a customer; average order value measures what a customer spends per order once acquired. Comparing the two tells you roughly how many orders it takes to recover your acquisition cost."
+          },
+          {
+            "question": "What does the revenue-to-CAC ratio mean?",
+            "answer": "It shows how many rupees of revenue a typical new customer brings in for every rupee spent acquiring them. The calculator divides your average revenue per customer by the CAC. A ratio of 4x means ₹4 of revenue for each ₹1 of acquisition cost, while anything below 1x means customers bring in less than they cost to win. Because it uses revenue, multiply by your gross margin before judging profitability."
+          },
+          {
+            "question": "What is the difference between CAC and ROAS?",
+            "answer": "ROAS, or return on ad spend, divides the revenue a campaign generated by what you spent on the ads, counting every sale it drove, including repeat buyers. CAC divides total acquisition spend by the number of new customers won. ROAS tells you whether a campaign paid back in sales; CAC tells you the price of each new customer, which you then compare with what that customer is worth over time."
+          },
+          {
+            "question": "How do I calculate CAC if I don't spend on ads?",
+            "answer": "Add up whatever you spent to attract first-time customers: referral rewards, free samples, printed flyers, a stall at a local event or a housing society notice-board campaign. Divide that by the new customers who came in during the same period. Word-of-mouth customers cost little to win, but tracking CAC still tells you whether a referral reward or sampling drive is worth continuing."
+          },
+          {
+            "question": "How is customer lifetime value related to CAC?",
+            "answer": "Customer lifetime value is the total profit a customer is expected to bring in over the whole time they buy from you, while CAC is the one-time cost of winning them. Comparing the two shows whether acquisition pays off in the long run. An LTV-to-CAC ratio of around 3:1 is a commonly quoted target, though what works for you depends on your margins and cash flow."
           }
         ]
       },
@@ -1148,7 +2586,68 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Customer acquisition cost formula",
+          "text": "CAC = Marketing & sales spend ÷ New customers acquired, for the same period. Revenue-to-CAC ratio = Average revenue per customer ÷ CAC. The ratio is shown only when you enter an average revenue figure; leave that field empty and it shows a dash."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the CAC calculator",
+          "steps": [
+            "Choose one period, such as a month, a quarter or the length of a single campaign, and use it for every figure.",
+            "Enter Marketing & sales spend: the total you spent in that period to win new customers.",
+            "Enter New customers acquired: first-time customers only, not repeat visits or returning patients.",
+            "Optionally enter Average revenue per customer, ideally what a new customer spends with you over a fixed window such as their first six months.",
+            "Read Customer acquisition cost and the Revenue-to-CAC ratio. A ratio below 1x means a typical customer brings in less revenue than it cost to win them.",
+            "Repeat with the spend and new-customer count for each channel to see which one is cheapest."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: CAC for a clinic spending ₹30,000 a month",
+          "paragraphs": [
+            "A physiotherapy clinic spends ₹20,000 on Google ads and ₹10,000 on a local newspaper insert in one month, and gets 80 new patients. Entered as one total, the CAC calculator gives ₹30,000 ÷ 80 = ₹375 per new patient. If a new patient spends ₹1,500 on average over a course of treatment, the revenue-to-CAC ratio is ₹1,500 ÷ ₹375 = 4x.",
+            "Run the channels separately and the picture changes. The ads brought 64 patients, a CAC of ₹312.50 and a ratio of 4.8x. The newspaper brought 16, a CAC of ₹625 and a ratio of 2.4x. The ratio uses revenue, not profit. If the clinic keeps 40% of revenue after consumables and therapist pay, the newspaper returns ₹0.96 of gross profit for every ₹1 spent (2.4 × 40%), so it does not quite pay for itself, while the ads return ₹1.92. Comparing CAC with [customer lifetime value](/glossary/customer-lifetime-value) rather than one course of treatment makes this kind of call clearer."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Tips for an accurate CAC",
+          "items": [
+            "Count only first-time customers. Including repeat visits inflates the customer count and makes CAC look lower than it is.",
+            "Allow for delay. Customers often arrive weeks after you pay for ads, so measure over a full month or quarter rather than a few days.",
+            "Tag every new customer's source, by asking at billing or giving each channel its own coupon code, so you can calculate CAC per channel.",
+            "Compare against gross profit, not just revenue. Multiply the revenue-to-CAC ratio by your gross margin to see how much gross profit each rupee of marketing returns.",
+            "Do not judge a channel on first-bill revenue alone. A low ratio on the first visit can still work if those customers return regularly, so check their repeat rate before cutting it.",
+            "Track CAC every month. A steady rise on the same channel can mean the audience has tired of the ad or offer, or that more competitors are targeting the same customers."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related growth calculators",
+          "links": [
+            {
+              "label": "Average Order Value (AOV) Calculator",
+              "href": "/calculators/aov-calculator"
+            },
+            {
+              "label": "ROI Calculator",
+              "href": "/calculators/roi-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "Discount Calculator",
+              "href": "/calculators/discount-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "aov-calculator",
@@ -1196,6 +2695,22 @@
           {
             "question": "Is a higher AOV always better?",
             "answer": "Generally yes for revenue, but check it doesn't come at the cost of order frequency or customer satisfaction — pushing add-ons too aggressively can backfire. Track AOV alongside repeat order rate to catch that early."
+          },
+          {
+            "question": "What is the difference between AOV and average spend per cover?",
+            "answer": "AOV is revenue per order or bill, while average spend per cover is revenue per guest. For dine-in they can tell different stories: a ₹1,200 bill from a table of four is ₹300 a head, but the same bill from two guests is ₹600 a head. Restaurants usually track both, using AOV for takeaway and delivery and spend per cover for the dining room."
+          },
+          {
+            "question": "Is average order value the same as basket size?",
+            "answer": "No. Basket size is the average number of items per bill, while average order value is the average amount spent per bill. They usually move together, but not always: a customer who swaps two cheap items for one premium dish lowers basket size and raises AOV. Watching both shows whether an upsell push is adding items or simply moving customers to pricier ones."
+          },
+          {
+            "question": "Where do I find total revenue and number of orders for the AOV calculator?",
+            "answer": "Your POS or billing software's sales report for the period shows both: total sales and the count of bills or invoices. Exclude cancelled and voided bills. For delivery apps, take the delivered orders and their food value before GST from the partner dashboard, not your payout after commission, and run those orders separately from dine-in so the two AOVs stay comparable."
+          },
+          {
+            "question": "What is a good average order value for a restaurant or shop?",
+            "answer": "There is no single good figure. A tea stall, a quick-service outlet and a fine-dining restaurant will have AOVs that differ many times over, and a kirana store differs from a clothing shop in the same way. The useful comparison is your own AOV over time and by channel. Track it monthly and judge the effect of each menu, pricing or combo change against that history."
           }
         ]
       },
@@ -1206,7 +2721,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Average order value formula",
+          "text": "AOV = Total revenue ÷ Number of orders, for the same period. AOV at target increase = AOV × (1 + Target AOV increase % ÷ 100). Extra revenue = (AOV at target − AOV) × Number of orders, assuming order volume stays the same."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the AOV calculator",
+          "steps": [
+            "Pick a period, such as a day, a week or a month, and pull its sales figure from your billing or POS report.",
+            "Enter Total revenue (period). Use sales before GST and leave out cancelled or refunded orders.",
+            "Enter Number of orders: the count of completed bills or invoices in the same period.",
+            "Enter Target AOV increase as a percentage, for example 8 for an 8% lift.",
+            "Read Current AOV, AOV at target increase and Extra revenue, same order volume.",
+            "Change the target percentage to see what a smaller or larger lift would be worth before you settle on an upsell plan."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: AOV for a restaurant with 1,600 monthly orders",
+          "paragraphs": [
+            "A restaurant takes ₹6,40,000 over 1,600 orders in a month. The AOV calculator shows a current average order value of ₹400 (₹6,40,000 ÷ 1,600). With a target AOV increase of 12%, AOV at target becomes ₹448, and the extra revenue at the same order volume is ₹48 × 1,600 = ₹76,800 a month, or ₹9,21,600 over a year if order volume holds.",
+            "Tie the ₹48 to one specific action. If staff suggest a ₹120 dessert and 40% of bills add one, that is 640 desserts and exactly ₹76,800 of extra sales. The figure is revenue, not profit: at an ingredient cost of ₹36 per dessert, the extra [gross profit](/glossary/gross-profit) is 640 × ₹84 = ₹53,760. Set your target percentage from a concrete [upselling](/glossary/upselling) plan like this rather than a guess."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Reading your AOV correctly",
+          "items": [
+            "Watch order count alongside AOV. The extra revenue figure assumes orders stay the same; if AOV rises but orders fall, total sales may not grow.",
+            "Split by channel. Delivery app orders, takeaway and dine-in usually have very different AOVs, and a blended number hides changes in the mix.",
+            "Compare like with like. Weekends and festival weeks can run a higher AOV, so compare the same days or weeks before and after a change.",
+            "Leave out one-off bulk orders such as catering or corporate lunches, which can make a normal month's AOV look higher than it is.",
+            "Watch the discount behind a combo. A bundle that lifts AOV by selling items at a deep discount can raise revenue per bill while lowering profit per bill."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators",
+          "links": [
+            {
+              "label": "Customer Acquisition Cost (CAC) Calculator",
+              "href": "/calculators/cac-calculator"
+            },
+            {
+              "label": "Menu Engineering Calculator",
+              "href": "/calculators/menu-engineering-calculator"
+            },
+            {
+              "label": "Table Turnover Rate Calculator",
+              "href": "/calculators/table-turnover-calculator"
+            },
+            {
+              "label": "Discount Calculator",
+              "href": "/calculators/discount-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "menu-engineering-calculator",
@@ -1265,6 +2844,22 @@
           {
             "question": "Does this account for labour cost?",
             "answer": "No — this calculator uses ingredient cost only to find contribution margin. For a more complete profit picture, add an estimated labour cost per item (prep time, cooking time, plating) to your COGS before calculating margin."
+          },
+          {
+            "question": "Can I download the menu engineering report as Excel or PDF?",
+            "answer": "Yes. Export to Excel saves a file named menu-engineering-report.xlsx with each item's name, price, cost, margin, margin %, units sold and classification. Export to PDF saves a landscape A4 report with the date, total revenue, total cost, total contribution, average margin, the number of items in each category and the full item table. Both files are created in your browser."
+          },
+          {
+            "question": "How is this calculator different from the classic Kasavana-Smith menu engineering matrix?",
+            "answer": "The classic method compares each dish's rupee contribution margin with the menu's weighted average and treats a dish as popular if its share of sales is at least 70% of an equal share. This calculator compares margin % with the simple average and units sold with the average units, so the same menu can sort differently. Labels differ too: a popular, low-margin dish is a Puzzle here but a Plowhorse in the classic matrix."
+          },
+          {
+            "question": "Is Avg Margin % weighted by units sold?",
+            "answer": "No. Avg Margin % is a simple average of each dish's margin %, so every item counts once however many plates it sold. For your overall margin, divide Total Contribution by Total Revenue. With chai at ₹40 (₹10 cost, 500 sold) and a thali at ₹200 (₹100 cost, 50 sold), Avg Margin % shows 62.5%, while the sales-weighted margin is ₹20,000 ÷ ₹30,000 = 66.7%."
+          },
+          {
+            "question": "Does the menu engineering calculator save my menu items?",
+            "answer": "No. Items stay only while the page is open; refreshing or closing the tab brings back the four sample dishes. To keep your analysis, use Export to Excel or Export to PDF before you leave. The exported file cannot be loaded back into the calculator, so keep your item list handy to re-enter for next month's run."
           }
         ]
       },
@@ -1275,7 +2870,72 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Menu engineering formulas",
+          "text": "[Contribution margin](/glossary/contribution-margin) = Price − Cost. Margin % = (Price − Cost) ÷ Price × 100. Average margin % = simple average of every item's margin %, and average popularity = simple average of Units Sold. An item is high margin if its margin % is at or above the average, and high popularity if its units sold are at or above the average. Star = high margin and high popularity; Cash Cow = high margin, low popularity; Puzzle = low margin, high popularity; Dog = low on both. Total revenue = sum of Price × Units Sold. Total cost = sum of Cost × Units Sold. Total contribution = Total revenue − Total cost."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the menu engineering calculator",
+          "steps": [
+            "Delete the four sample dishes with the bin icon, or type over them with your own.",
+            "For each dish, enter the Item Name, its menu Price and its Cost, the ingredient cost of one plate.",
+            "Enter Units Sold for every dish from the same period, such as last month's sales report. Units must be whole numbers.",
+            "Tap Add Menu Item for each extra dish you want in the analysis.",
+            "Read the summary cards (Total Revenue, Total Cost, Total Contribution, Avg Margin %) and the count of Stars, Cash Cows, Puzzles and Dogs. Then check each dish's margin, margin % and badge in the results table, which is sorted by units sold.",
+            "Click Export to Excel or Export to PDF to save the analysis."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: five dishes from one month of sales",
+          "paragraphs": [
+            "Take five dishes and a month of sales: Veg Thali (₹200 price, ₹70 cost, 300 sold), Paneer Butter Masala (₹260, ₹78, 220), Chicken Biryani (₹320, ₹128, 250), Mushroom Tikka (₹240, ₹60, 90) and Fish Curry (₹380, ₹190, 60). Their margins are 65%, 70%, 60%, 75% and 50%, so the average margin is 320 ÷ 5 = 64%, and average units sold is 920 ÷ 5 = 184. The menu engineering calculator marks Veg Thali and Paneer Butter Masala as Stars, Chicken Biryani as a Puzzle, Mushroom Tikka as a Cash Cow and Fish Curry as a Dog. Total revenue is ₹2,41,600, total cost ₹86,960 and total contribution ₹1,54,640.",
+            "The Puzzle label does not make Chicken Biryani a weak dish. Its ₹192 margin across 250 plates is ₹48,000 of contribution, the most on the menu; it lands in Puzzle only because its 60% margin is below the 64% average. A ₹20 price rise would add ₹5,000 a month if volume holds at 250 plates. Fish Curry, the Dog, still earns ₹190 a plate, the second-highest rupee margin on the list, but spends half its price on ingredients and sold only 60 plates. Rework its cost in the [recipe costing calculator](/calculators/recipe-costing-calculator) or give it better menu placement before you decide to remove it."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Getting reliable menu engineering results",
+          "items": [
+            "Pull units sold for every dish from the same period of sales data, such as the last 30 days.",
+            "Analyse one menu section at a time. A ₹40 chai can outsell every main course and pull the popularity average up for the whole list.",
+            "Use a costed plate figure for Cost, not a guess. A ₹10 error on a ₹200 dish moves its margin by 5 points and can change its category.",
+            "Leave out dishes that were added or unavailable for part of the period, since fewer selling days make them look less popular than they are.",
+            "Before dropping a Dog or repricing a Puzzle, multiply its rupee Margin by Units Sold to see the contribution it brings in. The categories here are set by margin %, not rupee margin.",
+            "Export to Excel each month and keep the files, so you can see which dishes move between categories."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Tools to use alongside menu engineering",
+          "links": [
+            {
+              "label": "Recipe Costing Calculator",
+              "href": "/calculators/recipe-costing-calculator"
+            },
+            {
+              "label": "Food Cost Percentage Calculator",
+              "href": "/calculators/food-cost-calculator"
+            },
+            {
+              "label": "Online Menu Price Calculator",
+              "href": "/calculators/online-menu-price-calculator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            },
+            {
+              "label": "QR Menu Generator",
+              "href": "/tools/qr-menu-generator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "vat-calculator",
@@ -1325,6 +2985,22 @@
           {
             "question": "Which VAT rate should I use?",
             "answer": "Use the standard rate of the country where the sale is taxed — for example 20% in the UK, 19% in Germany, 5% in the UAE. Many countries also have reduced rates for essentials; check the category of your goods or services."
+          },
+          {
+            "question": "Which countries are in the VAT calculator's rate table?",
+            "answer": "The table holds standard rates for more than 60 countries, including the United Kingdom at 20%, Germany at 19%, Saudi Arabia at 15% and the UAE at 5%. Countries that call the tax GST, such as Australia, New Zealand, Singapore and Canada, carry a GST label. Search by country name or two-letter code to find a row, and tick Use a custom rate for any country that is not listed."
+          },
+          {
+            "question": "Can I calculate a reduced or zero VAT rate?",
+            "answer": "Yes. Tick Use a custom rate and type any rate, such as 5% for a UK reduced-rate item or 7% for Germany's reduced rate. For many countries the table also shows the reduced rates as a reminder, in the notes column on wider screens and under the selected rate. Enter 0 for a zero-rated item and the VAT amount shows as zero."
+          },
+          {
+            "question": "Can the VAT calculator show euros, pounds or dirhams instead of rupees?",
+            "answer": "Yes. Money on Setu's calculators is shown in the currency saved in the free Business Profile tool, which is Indian rupees until you change it. Pick euro, pound, dirham or any other currency there and the VAT calculator follows in the same browser. The VAT arithmetic is identical in every currency, so you can also leave it in rupees and read the numbers as your invoice currency."
+          },
+          {
+            "question": "Do Indian exporters have to charge VAT to overseas customers?",
+            "answer": "Usually not. Exports of goods and services from India are treated as zero-rated supplies under GST, and any VAT on imported goods is normally paid by the importer in the buyer's country. You charge foreign VAT yourself only if you are registered for VAT there, for example when selling from stock held in that country. Digital services sold to overseas consumers can follow different rules, so check with an adviser."
           }
         ]
       },
@@ -1335,7 +3011,67 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "VAT formula",
+          "text": "Add VAT: VAT = Net amount × Rate ÷ 100, and Gross amount = Net amount + VAT. Remove VAT: Net amount = Gross amount ÷ (1 + Rate ÷ 100), and VAT = Gross amount − Net amount. The rate is the standard rate of the country you pick in the table, or your own figure when **Use a custom rate** is ticked."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the VAT calculator",
+          "steps": [
+            "Choose Add VAT if your figure is before tax, or Remove VAT if it already includes VAT.",
+            "Search the country table by name or two-letter code, such as AE or GB, and tap the row to load its standard rate.",
+            "If the item takes a reduced or zero rate, tick Use a custom rate and type the rate that applies in the Custom rate field.",
+            "Enter the figure in Amount before VAT or Amount including VAT, depending on the mode.",
+            "Read the Net amount, VAT amount and Gross amount shown below the fields."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: VAT on a UAE quote and a London hotel bill",
+          "paragraphs": [
+            "A Dubai supplier quotes AED 8,000 plus [VAT](/glossary/vat) for a commercial oven for your new outlet there. In the VAT calculator, choose Add VAT, pick the United Arab Emirates at 5% and enter 8,000. VAT = 8,000 × 5 ÷ 100 = 400, so the gross amount you pay is **AED 8,400**.",
+            "Going the other way, a London hotel bill for a trade fair comes to £1,500 including 20% VAT. Choose Remove VAT, pick the United Kingdom and enter 1,500. Net = 1,500 ÷ 1.20 = £1,250, and VAT = 1,500 − 1,250 = **£250**. Taking 20% of £1,500 instead would give £300 of VAT and a wrong net of £1,200, overstating the tax by £50. Whatever currency the invoice is in, the arithmetic is the same."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "VAT tips for Indian businesses dealing abroad",
+          "items": [
+            "Check whether a foreign quote is net or gross. Business quotes in the UK and EU are usually net of VAT, while prices shown to consumers usually include it.",
+            "To check a VAT-inclusive figure in your head, the VAT is rate ÷ (100 + rate) of the gross: one-sixth at 20% and one twenty-first at 5%.",
+            "If you invoice from a VAT registration abroad, show the net amount, VAT rate and VAT amount as separate lines, as VAT invoices generally require.",
+            "For sales inside India, charge GST rather than VAT: split it into CGST and SGST for a sale within your state, or charge IGST for an interstate sale.",
+            "Record the VAT on a foreign supplier's invoice separately from the cost in your books; whether a foreign business can reclaim it depends on that country's rules.",
+            "Rates change with national budgets, so confirm the current rate on the tax authority's website before invoicing a large amount."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Sales Tax Calculator",
+              "href": "/calculators/sales-tax-calculator"
+            },
+            {
+              "label": "Invoice Generator",
+              "href": "/tools/invoice-generator"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "sales-tax-calculator",
@@ -1384,6 +3120,22 @@
           {
             "question": "Do all US states charge sales tax?",
             "answer": "No — Alaska, Delaware, Montana, New Hampshire and Oregon have no state-wide sales tax (though some Alaska localities charge their own). Every other state has a state rate, typically between 4% and 7.25%."
+          },
+          {
+            "question": "Why does the sales tax calculator show ₹ instead of $?",
+            "answer": "Money on Setu's calculators is shown in the currency saved in the Business Profile tool, which starts as Indian rupees. Change it to US dollar there and the sales tax calculator shows $ in the same browser. The calculation does not depend on the currency, so a result of ₹20.50 with rupees selected means $20.50 of tax on a dollar price."
+          },
+          {
+            "question": "How accurate are the local rates in the state table?",
+            "answer": "The local column is a population-weighted average of the county, city and district rates across each state, so it suits estimates and comparisons between states. The actual rate at a particular address can be higher or lower than that average. For an invoice or a refund claim, take the exact rate from the receipt or the state tax department and enter it as a custom rate."
+          },
+          {
+            "question": "What is the difference between sales tax and VAT?",
+            "answer": "US sales tax is charged once, when goods are sold to the final buyer, and businesses buying stock for resale generally do not pay it. VAT, like India's GST, is charged at every stage of the supply chain, and each registered business claims credit for the tax it paid on its purchases. The customer bears the tax either way, but the collection works differently."
+          },
+          {
+            "question": "Can I use a rate that is not in the table?",
+            "answer": "Yes. Tick Use a custom rate and type any combined rate, for a single city, a county or a special district, and the calculator uses it instead of the table. The table itself covers all 50 states plus Washington DC. For Canadian GST or another country's VAT, the VAT calculator has a country rate table that works the same way, with add and remove modes."
           }
         ]
       },
@@ -1394,7 +3146,66 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Sales tax formula",
+          "text": "Rate = State rate (State only), or State rate + Average local rate (Combined), or your own figure when **Use a custom rate** is ticked. Add tax: Sales tax = Pre-tax price × Rate ÷ 100, and Total price = Pre-tax price + Sales tax. Extract from total: Pre-tax price = Total paid ÷ (1 + Rate ÷ 100), and Sales tax = Total paid − Pre-tax price."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the sales tax calculator",
+          "steps": [
+            "Choose Add tax to price for a pre-tax figure, or Extract from total for an amount already paid.",
+            "Choose State only for the state rate alone, or Combined to add the state's average local rate.",
+            "Search the table by state name or two-letter code, such as TX or NY, and tap the row; all 50 states and Washington DC are listed.",
+            "For an exact city or county rate, tick Use a custom rate and enter it in Custom combined rate.",
+            "Enter the Pre-tax price or Total paid, then read the Pre-tax price, Sales tax and Total price."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: sales tax on a $250 order in Texas",
+          "paragraphs": [
+            "Take a $250 sale taxed in Texas. In the sales tax calculator, choose Add tax to price and Combined, then pick Texas: the 6.25% state rate plus a 1.95% average local rate gives 8.20%. [Sales tax](/glossary/sales-tax) = 250 × 8.20 ÷ 100 = $20.50, so the total price is **$270.50**. Switch to State only and the tax at 6.25% comes to $15.63, for a total of $265.63.",
+            "To back the tax out of a receipt, choose Extract from total. A New York City receipt shows $435.50 paid at 8.875%. Tick Use a custom rate, enter 8.875 and the total: pre-tax price = 435.50 ÷ 1.08875 = $400.00, and sales tax = **$35.50**. Using the New York row instead, at its 8.53% combined average, would give $401.27 and $34.23, which is why the exact rate on the receipt beats the state average."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Sales tax tips for sellers",
+          "items": [
+            "Record the state and rate used on each invoice, so a customer query or a state audit can be answered from your own files.",
+            "Keep the sales tax you collect out of revenue in your books, since it is owed to the state and is not income.",
+            "If you sell through a marketplace, check your payout report before adding tax, because large marketplaces usually collect and remit sales tax for their sellers.",
+            "Shipping and handling charges are taxable in some states and not in others, so check the state's rule before adding tax to delivery.",
+            "Many states exempt groceries and prescription medicines or tax them at a lower rate, so check the item before applying the general rate."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "VAT Calculator",
+              "href": "/calculators/vat-calculator"
+            },
+            {
+              "label": "GST Calculator",
+              "href": "/calculators/gst-calculator"
+            },
+            {
+              "label": "Invoice Generator",
+              "href": "/tools/invoice-generator"
+            },
+            {
+              "label": "Markup Calculator",
+              "href": "/calculators/markup-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "roi-calculator",
@@ -1443,6 +3254,22 @@
           {
             "question": "Does this include ongoing costs?",
             "answer": "Include them in the invested amount, or subtract them from the returned amount — either way, ROI is only as honest as the numbers you feed it. For marketing, our CAC calculator complements this by tracking cost per customer."
+          },
+          {
+            "question": "What is the difference between ROI and payback period?",
+            "answer": "ROI tells you how much an investment earned in total compared with what it cost. Payback period tells you how long it takes for the money coming back to equal the money you spent. A machine can have a high ROI but a long payback, which matters when cash is tight. This calculator gives total and annualized ROI. For a rough payback figure, divide the cost by the cash the investment brings in each year, if that cash is fairly even."
+          },
+          {
+            "question": "Can I use the ROI calculator for a period shorter than one year?",
+            "answer": "Yes. Enter the holding period as a decimal, such as 0.5 for six months or 0.25 for three months. For a gain, the annualized ROI will then be higher than the total ROI, because it assumes you could repeat the same return, compounded, for a full year. A loss looks worse once annualized. Use the figure to compare options, not as a promised yearly return."
+          },
+          {
+            "question": "What does a negative ROI mean?",
+            "answer": "It means you got back less than you put in. The first result switches to Net loss and the ROI shows as a negative percentage. For example, investing ₹1,00,000 and getting back ₹85,000 gives a net loss of ₹15,000 and an ROI of −15%. A negative figure early in an investment is not always final, so check whether returns are still coming in."
+          },
+          {
+            "question": "Is ROI the same as profit margin?",
+            "answer": "No. ROI compares profit with the money you invested, while profit margin compares profit with your sales. Say a shop spends ₹50,000 on a display fridge, and over the fridge's life the extra drinks it sells bring back ₹70,000 after the cost of the drinks. The ROI is 40%, because (70,000 − 50,000) ÷ 50,000 = 0.4, whatever margin the shop makes on each bottle. Use ROI to judge spending and margin to judge pricing."
           }
         ]
       },
@@ -1453,7 +3280,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "ROI formula",
+          "text": "Net profit = Amount returned − Amount invested. ROI % = (Amount returned − Amount invested) ÷ Amount invested × 100. Annualized ROI % = ((Amount returned ÷ Amount invested)^(1 ÷ Holding period in years) − 1) × 100. The annualized figure is shown only when the holding period is above zero."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the ROI calculator",
+          "steps": [
+            "Enter the amount invested: the full cost of the machine, campaign, renovation or stock you are judging.",
+            "Enter the amount returned: the total money that came back, not just the gain. If you put in ₹1,00,000 and earned ₹30,000 on top, enter ₹1,30,000.",
+            "Enter the holding period in years to get the annualized figure. Use decimals for part-years, such as 0.5 for six months, or clear the field if you only need total ROI.",
+            "Read the net profit (labelled net loss if you got back less than you put in), the ROI % and the annualized ROI %. All three update as you type.",
+            "Change one figure at a time to compare options, such as a cheaper machine that returns less, or the same spend over a shorter period."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: a ₹2,00,000 coffee machine over 3 years",
+          "paragraphs": [
+            "A café buys an espresso machine for ₹2,00,000. Over three years the extra coffee sales add ₹2,40,000 of profit after beans, milk and staff time, and the machine can be sold for ₹50,000 at the end, so ₹2,90,000 comes back in total. Enter ₹2,00,000 as invested, ₹2,90,000 as returned and 3 years as the holding period. The ROI calculator shows a net profit of ₹90,000, an ROI of 45% and an annualized ROI of 13.19%. That is lower than 45 ÷ 3 = 15% because the yearly rate compounds: 1.1319 × 1.1319 × 1.1319 ≈ 1.45.",
+            "Now compare ₹50,000 of extra festive stock that brings in ₹60,000 within six months. With a holding period of 0.5 years, ROI is 20% but annualized ROI is 44%, since 1.20 × 1.20 = 1.44. Per year the stock looks far better, but only if you can repeat that turnaround twice a year. For projects where cash arrives unevenly over many years, also look at the [payback period](/glossary/payback-period) and [net present value](/glossary/net-present-value)."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Tips for an honest ROI figure",
+          "items": [
+            "Enter the total amount returned, including the cost you recovered, not just the net gain. Typing only the gain can make a good investment look like a loss.",
+            "Use profit, not sales, as the return. ₹1,00,000 of extra sales at a 30% gross margin brings back only ₹30,000.",
+            "Count one-time costs that are easy to forget, such as delivery, installation, staff training and any GST you cannot claim back as input tax credit.",
+            "Compare options on annualized ROI when their timelines differ, and on total ROI only when they run for the same period.",
+            "Work out ROI twice, once with a cautious return and once with your expected return, so you know how much room for error the decision has."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "intro": "Use these alongside ROI when you weigh up a spend.",
+          "links": [
+            {
+              "label": "Customer Acquisition Cost (CAC) Calculator",
+              "href": "/calculators/cac-calculator"
+            },
+            {
+              "label": "Break-Even Point Calculator",
+              "href": "/calculators/break-even-calculator"
+            },
+            {
+              "label": "Business Loan EMI Calculator",
+              "href": "/calculators/loan-emi-calculator"
+            },
+            {
+              "label": "Depreciation Calculator",
+              "href": "/calculators/depreciation-calculator"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "depreciation-calculator",
@@ -1502,6 +3393,22 @@
           {
             "question": "What is salvage (residual) value?",
             "answer": "The amount you expect the asset to be worth at the end of its useful life — resale or scrap value. Depreciation stops once the book value reaches it."
+          },
+          {
+            "question": "Can I calculate depreciation for part of a year or by month?",
+            "answer": "The calculator works in whole years and rounds the useful life to the nearest year, up to 50. For a monthly figure under straight line, divide the annual depreciation by 12, so ₹46,666.67 a year is ₹3,888.89 a month. For an asset bought mid-year, multiply the first year's charge by the months it was in use and divide by 12, or follow the rule your CA applies for tax."
+          },
+          {
+            "question": "What is the difference between depreciation and amortisation?",
+            "answer": "Depreciation spreads the cost of physical assets such as machinery, furniture, vehicles and computers. Amortisation does the same for intangible assets such as software licences, franchise fees or trademarks, usually in equal amounts over the asset's term. You can use the straight-line mode here to amortise an intangible by entering its cost, a salvage value of zero and the term in years."
+          },
+          {
+            "question": "Is depreciation a cash expense?",
+            "answer": "No. You pay for the asset when you buy it, or through a loan, and depreciation only spreads that cost across later years in the profit and loss statement. It lowers reported profit, and tax depreciation lowers taxable profit, without any money leaving the bank that year. That is why it is added back to net profit when you prepare a cash flow statement using the indirect method."
+          },
+          {
+            "question": "What depreciation rate should I use for the WDV method?",
+            "answer": "For income tax, use the rate prescribed for the asset's block. Rates long applied include 15% for general plant and machinery, 10% for furniture and fittings and 40% for computers, but confirm the current rate with your CA. For your own accounts, pick a rate that brings the book value close to the salvage value by the end of the asset's useful life."
           }
         ]
       },
@@ -1512,7 +3419,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Depreciation formulas",
+          "text": "Straight line: Annual depreciation = (Asset cost − Salvage value) ÷ Useful life, charged every year until the book value reaches the salvage value. Written down value: Depreciation for the year = Opening value × Rate ÷ 100, but never more than Opening value − Salvage value. For both methods, Closing value = Opening value − Depreciation, each year's closing value becomes the next year's opening value, and the schedule runs for the useful life you enter."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the depreciation calculator",
+          "steps": [
+            "Choose Straight line or Written down value at the top.",
+            "Enter the Asset cost and the Salvage value you expect at the end of the asset's life.",
+            "Enter the Useful life in years; the calculator rounds it to a whole number and runs up to 50 years.",
+            "For written down value, enter the Depreciation rate as a percentage.",
+            "Read the annual or first-year depreciation and the book value at end of life, then check the year-by-year table of opening value, depreciation and closing value."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: depreciating ₹1,50,000 of billing computers",
+          "paragraphs": [
+            "A restaurant buys billing computers for ₹1,50,000 and expects to sell them for ₹10,000 after 3 years. With [straight-line depreciation](/glossary/straight-line-depreciation) the depreciation calculator charges (1,50,000 − 10,000) ÷ 3 = **₹46,666.67** each year, so the book value falls to ₹1,03,333.33, then ₹56,666.67, and ends at exactly ₹10,000.",
+            "Switch to [written down value](/glossary/written-down-value) at 40%, the rate long prescribed for computers in Indian income-tax rules. Year 1 depreciation is 40% of ₹1,50,000 = ₹60,000, leaving ₹90,000. Year 2 is 40% of ₹90,000 = ₹36,000, leaving ₹54,000. Year 3 is ₹21,600, leaving ₹32,400. WDV front-loads the expense, ₹60,000 against ₹46,666.67 in year one, but at this rate it does not reach the salvage value, so ₹32,400 is still on the books after three years."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Depreciation tips from accounting practice",
+          "items": [
+            "Include freight, installation and other costs of getting the asset ready for use in the asset cost.",
+            "Leave GST out of the asset cost if you claim it as input tax credit; you cannot claim both the credit and depreciation on the same tax.",
+            "The calculator charges a full year in year one; for income tax, an asset put to use for less than 180 days in its first year generally gets only half the rate that year.",
+            "Tax depreciation is worked out on blocks of similar assets, not on each item, so use this schedule per asset for your fixed asset register and let your CA compute the tax block.",
+            "To make WDV finish on your salvage value, use a rate of (1 − (Salvage ÷ Cost)^(1 ÷ Life)) × 100; for ₹1,50,000 down to ₹10,000 over 3 years that is about 59.5%.",
+            "Land is never depreciated, while buildings, furniture, machinery, vehicles and computers are."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Balance Sheet",
+              "href": "/tools/balance-sheet"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            },
+            {
+              "label": "ROI Calculator",
+              "href": "/calculators/roi-calculator"
+            },
+            {
+              "label": "Business Loan EMI Calculator",
+              "href": "/calculators/loan-emi-calculator"
+            },
+            {
+              "label": "Break-Even Point Calculator",
+              "href": "/calculators/break-even-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "payment-terms-calculator",
@@ -1562,6 +3533,22 @@
           {
             "question": "Should I offer early-payment discounts to my customers?",
             "answer": "If cash flow is tight or debtors pay slowly, a small discount can pull cash in dramatically faster and cut follow-up effort. Price it consciously — the same annualized-cost math applies to you as the seller."
+          },
+          {
+            "question": "Does the due date skip Sundays and bank holidays?",
+            "answer": "No. The calculator counts plain calendar days from the invoice date, so a net 30 due date can land on a Sunday or a public holiday. If your contract does not say how such dates are handled, pay on the previous working day so the payment is not late, or agree the rule with your supplier in writing."
+          },
+          {
+            "question": "Is the early payment discount worked out before or after GST?",
+            "answer": "The calculator applies the discount percentage to whatever invoice amount you enter. Enter the total bill if the supplier allows the discount on the full amount, or the taxable value if the terms say so. Whether the discount also reduces the GST depends on how it was agreed and documented, usually through a credit note, so confirm the treatment with your accountant."
+          },
+          {
+            "question": "What is the difference between due on receipt and net 30?",
+            "answer": "Due on receipt means the customer should pay as soon as the invoice arrives. Net 30 gives them 30 calendar days from the invoice date. To see a due-on-receipt invoice in this calculator, set the payment terms to 0 days and the due date will match the invoice date. Shorter terms bring cash in faster, but larger buyers often push for longer ones."
+          },
+          {
+            "question": "Does the calculator work out interest on late payments?",
+            "answer": "No. It covers the due date, the early payment discount and the cost of skipping it. Late payment interest depends on what your contract or invoice says. If your supplier is a micro or small manufacturer or service provider registered under Udyam, the MSMED Act sets interest on delayed payments at three times the bank rate notified by the RBI, compounded monthly, whatever the contract says."
           }
         ]
       },
@@ -1572,7 +3559,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Payment terms formulas",
+          "text": "Payment due date = Invoice date + Net days, counted in calendar days. Pay-early date = Invoice date + Discount window days. Early payment saving = Invoice amount × Discount % ÷ 100. Cost of skipping the discount (% per year) = Discount % ÷ (100 − Discount %) × 365 ÷ (Net days − Discount window days) × 100. When the discount window is as long as the net term or longer, the cost shows 0%."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the payment terms calculator",
+          "steps": [
+            "Enter the invoice amount.",
+            "Pick the invoice date. It starts on today's date, so change it for an older bill.",
+            "Type the payment terms in net days, or tap a preset: Net 7, 15, 30, 45, 60 or 90.",
+            "Enter the early payment discount % and the discount window in days. Set the discount to 0 if the invoice has plain net terms.",
+            "Read the payment due date. With a discount above 0 you also see the pay-early-by date, the rupee saving from paying early and the yearly cost of skipping the discount."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: 1/15 net 45 on a ₹2,50,000 invoice",
+          "paragraphs": [
+            "A restaurant gets a ₹2,50,000 bill from its dry-goods supplier dated 15 October 2026, on terms of 1/15 net 45: 1% off if paid within 15 days, otherwise the full amount in 45 days. In the payment terms calculator, enter ₹2,50,000, the invoice date, 45 net days, a 1% discount and a 15-day window. It shows a payment due date of 29 Nov 2026, a pay-early date of 30 Oct 2026 and a saving of ₹2,500. Paying early therefore means sending ₹2,47,500 instead of ₹2,50,000.",
+            "Skipping the discount buys 30 extra days of credit (45 − 15) for ₹2,500. The calculator annualizes that as 1 ÷ 99 × 365 ÷ 30 × 100 = 12.3% a year. If your overdraft or cash credit limit costs less than that and has room, paying early with borrowed money comes out cheaper. If it costs more, holding the cash until day 45 is the better use of your [working capital](/glossary/working-capital). For plain terms without a discount, see how [net 30](/glossary/net-30) works."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Payment terms tips for buyers and sellers",
+          "items": [
+            "Write terms in words on every invoice, such as \"1% off if paid within 15 days, otherwise due in 45 days\", so the customer's accounts team cannot misread them.",
+            "Agree terms in the quotation or purchase order before the goods ship, so the invoice only repeats what both sides already accepted.",
+            "If there is no early payment discount, pay on the due date rather than before it. Those days of credit cost you nothing.",
+            "Buying from a micro or small manufacturer or service provider registered under Udyam? The MSMED Act caps agreed credit at 45 days (15 days if nothing was agreed), and paying later can delay your income tax deduction for that expense until the year you actually pay.",
+            "Pay suppliers within 180 days of the invoice date. Under GST rules, input tax credit on bills still unpaid after 180 days has to be reversed, and can be claimed again once you pay.",
+            "Track open invoices by age so that bills past 30, 60 and 90 days get followed up before they turn into bad debts."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related tools for receivables and payables",
+          "links": [
+            {
+              "label": "Invoice Aging Report",
+              "href": "/tools/invoice-aging-report"
+            },
+            {
+              "label": "Accounts Payable Aging",
+              "href": "/tools/accounts-payable-aging"
+            },
+            {
+              "label": "Invoice Generator",
+              "href": "/tools/invoice-generator"
+            },
+            {
+              "label": "Customer Statement",
+              "href": "/tools/customer-statement"
+            },
+            {
+              "label": "Financial Ratio Calculator",
+              "href": "/calculators/financial-ratio-calculator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "purchase-price-variance-calculator",
@@ -1621,6 +3672,22 @@
           {
             "question": "How often should I review PPV?",
             "answer": "Monthly works for most small businesses — often enough to catch supplier increases before they compound, without drowning in noise. Review your highest-spend items first (our ABC analysis tool helps rank them)."
+          },
+          {
+            "question": "Can I calculate purchase price variance for several items at once?",
+            "answer": "Yes. Each row is one item, with its own standard cost, actual cost and quantity. Add as many rows as you need with the add item button. The calculator totals the variance across all of them and counts the items compared. When an item cost more than standard, it names the biggest overrun. When one cost less, it names the biggest saving."
+          },
+          {
+            "question": "Why is an item not included in the total variance?",
+            "answer": "A row counts only when it has an item name and a quantity above zero. If you enter prices but leave the name blank or the quantity empty, the variance impact shows a dash. The row is then left out of the total and the items compared count. Fill in both and the row is added straight away."
+          },
+          {
+            "question": "Should purchase price variance include GST?",
+            "answer": "If you claim input tax credit on the purchase, compare prices without GST, because you get the tax back and it is not part of your cost. If you cannot claim it, for example under the composition scheme, the GST is a real cost and you can include it. Either way, keep standard and actual prices on the same basis."
+          },
+          {
+            "question": "What is the difference between purchase price variance and budget variance?",
+            "answer": "Purchase price variance looks only at price: how much more or less you paid per unit, multiplied by the quantity you actually bought. Budget variance compares total actual spend with the total budget, so it mixes price changes with buying more or less than planned. A budget overrun can come entirely from buying more, even when the price variance is zero."
           }
         ]
       },
@@ -1631,7 +3698,71 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Purchase price variance formula",
+          "text": "**Variance impact = (Actual cost − Standard cost) × Qty**, worked out for each row. Total variance = the sum of the variance impacts of every row that has an item name and a quantity above zero. A positive total is unfavourable and a negative one is favourable. The percentage shown for the biggest overrun = (Actual cost − Standard cost) ÷ Standard cost × 100. See [purchase price variance](/glossary/purchase-price-variance) for the term."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the Purchase Price Variance Calculator",
+          "steps": [
+            "Overwrite the sample row (Raw material A) with your first item, typing its name in the Item column. A row counts only when it has a name and a quantity above zero.",
+            "Enter the standard cost per unit for the item.",
+            "Enter the actual cost per unit from the supplier's bill.",
+            "Enter the quantity bought at that price.",
+            "Use + Add item for more rows, and the cross button at the end of a row to remove it.",
+            "Read the variance impact on each row (red costs more than planned, green less), the total variance, Items compared, and the biggest overrun and saving shown below."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: purchase price variance at a sweet shop",
+          "paragraphs": [
+            "A sweet shop compares three items bought this month against its standard rates. Ghee: standard ₹560 per kg, actual ₹590, 80 kg bought, so (₹590 − ₹560) × 80 = ₹2,400 unfavourable. Sugar: standard ₹44 per kg, actual ₹42, 500 kg, so (₹42 − ₹44) × 500 = −₹1,000, a favourable variance. Khoya: standard ₹300 per kg, actual ₹320, 60 kg, so ₹20 × 60 = ₹1,200 unfavourable. Total variance is ₹2,400 − ₹1,000 + ₹1,200 = ₹2,600 unfavourable.",
+            "The calculator names ghee as the biggest overrun: ₹2,400 above plan, 5.4% per unit. Khoya's price rose faster, by 6.7% per unit, but the quantity was smaller, so it cost less in rupees. Ghee is the first supplier to talk to. Sugar shows as the biggest saving, ₹1,000 below plan. Check its quality and pack size before you count on that saving."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Getting a PPV figure you can act on",
+          "items": [
+            "Use the same unit for standard and actual cost: per kg against per kg, not per kg against a 25 kg bag.",
+            "Compare on the same tax basis. If you claim input tax credit, leave GST out of both prices.",
+            "Treat freight and loading the same way in both prices: include them in both as landed cost, or leave them out of both.",
+            "Fix standard prices for a set period, such as a quarter or a financial year. Resetting them after every bill makes the variance disappear.",
+            "Act on rupee impact, not just percentage. A small rise on a high-volume item usually costs more than a big rise on a minor one."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related purchasing tools",
+          "links": [
+            {
+              "label": "Vendor Comparison",
+              "href": "/tools/vendor-comparison"
+            },
+            {
+              "label": "ABC Analysis",
+              "href": "/tools/abc-analysis"
+            },
+            {
+              "label": "Purchase Register",
+              "href": "/tools/purchase-register"
+            },
+            {
+              "label": "Budget vs Actual",
+              "href": "/tools/budget-vs-actual"
+            },
+            {
+              "label": "Purchase Order Generator",
+              "href": "/tools/purchase-order-generator"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "financial-ratio-calculator",
@@ -1681,6 +3812,22 @@
           {
             "question": "What are receivable days (DSO)?",
             "answer": "Accounts receivable ÷ annual revenue × 365 — the average number of days customers take to pay. If your payment terms are 30 days but DSO is 55, collections need attention (our Invoice Aging tool shows exactly where)."
+          },
+          {
+            "question": "Where do I find these figures in a Tally balance sheet?",
+            "answer": "In Tally, Current Assets and Current Liabilities are standard groups. Inventory is Stock-in-Hand and receivables are Sundry Debtors, both inside Current Assets. Total debt is usually the Loans (Liability) group, which holds Bank OD and secured or unsecured loans. Tally keeps Bank OD outside Current Liabilities, so decide whether to add it there and do the same every year. Owner's equity is the Capital Account plus the Profit & Loss A/c balance. Revenue, cost of goods sold and net profit come from the same year's P&L."
+          },
+          {
+            "question": "Can I use this for a proprietorship or partnership firm?",
+            "answer": "Yes. The ratios work the same way for a proprietorship, partnership, LLP or company. For owner's equity, a proprietor uses the closing capital account balance after drawings and the year's profit; a partnership adds up all partners' capital accounts; a company uses share capital plus reserves and surplus. If the owner has lent money to the business separately, treat it the same way every year so the trend stays comparable."
+          },
+          {
+            "question": "What does an inventory turnover of 5 times mean?",
+            "answer": "It means the cost of what you sold in the year was five times the stock you hold, so stock is replaced roughly every 73 days (365 ÷ 5). Fast-moving trades such as groceries usually turn stock more often than jewellery or furniture shops. If your suppliers give you 30 days' credit but stock takes 73 days to sell, you are funding about 43 days of stock from your own cash or borrowings."
+          },
+          {
+            "question": "Why is my quick ratio below 1 when my business is profitable?",
+            "answer": "Profit and cash are different things. Profit may be tied up in stock and customer dues, or spent on loan repayments, equipment or the owner's drawings, so the money is not there to pay short-term bills. A quick ratio below 1 is common in stock-heavy trades such as retail and wholesale. What matters is whether it is steady or falling, and whether suppliers and the bank are being paid on time."
           }
         ]
       },
@@ -1691,7 +3838,70 @@
           "label": "Explore Setu Dine",
           "href": "/products/restaurant-pos"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "Financial ratio formulas",
+          "text": "Current ratio = Current assets ÷ Current liabilities. Quick ratio = (Current assets − Inventory) ÷ Current liabilities. Debt to equity = Total debt ÷ Owner's equity. Gross margin % = (Revenue − Cost of goods sold) ÷ Revenue × 100. Net margin % = Net profit ÷ Revenue × 100. Inventory turnover = Cost of goods sold ÷ Inventory. Receivable days = Accounts receivable ÷ Revenue × 365."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the financial ratio calculator",
+          "steps": [
+            "Under balance sheet figures, enter current assets, inventory (stock), current liabilities and accounts receivable (sundry debtors).",
+            "Enter total debt, meaning term loans, overdraft and other borrowings, and owner's equity, meaning capital plus profit kept in the business.",
+            "Under P&L figures, enter a full year's revenue, cost of goods sold and net profit.",
+            "Read the seven results: current ratio, quick ratio, debt to equity, gross margin, net margin, inventory turnover and receivable days.",
+            "Compare each figure with last year's and with the rules of thumb shown below the results."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: a hardware wholesaler with ₹60 lakh sales",
+          "paragraphs": [
+            "Take a hardware wholesaler with annual revenue of ₹60,00,000, cost of goods sold of ₹48,00,000 and net profit of ₹2,40,000. Its balance sheet shows current assets of ₹18,00,000, which include ₹9,00,000 of stock and ₹4,50,000 owed by customers, plus current liabilities of ₹12,00,000, total debt of ₹15,00,000 and owner's equity of ₹10,00,000. The financial ratio calculator gives a current ratio of 1.5 (18 ÷ 12), a quick ratio of 0.75 ((18 − 9) ÷ 12) and a debt to equity of 1.5 (15 ÷ 10).",
+            "Gross margin is 20% and net margin 4%. Inventory turnover is 5.3× (₹48 lakh ÷ ₹9 lakh), so stock sits for about 68 days on average, and receivable days come to 27 (4.5 ÷ 60 × 365). The weak spot is liquidity: without selling stock, the business can cover only 75 paise of each rupee it owes in the short term. Turning slow-moving stock into cash would lift the [quick ratio](/glossary/quick-ratio) without any new borrowing."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Getting ratios you can trust",
+          "items": [
+            "Make sure the current assets figure already includes the stock and receivables you enter separately. The quick ratio subtracts inventory from that total.",
+            "Use full-year P&L figures. One quarter's revenue and cost of goods sold make receivable days four times too high and inventory turnover four times too low.",
+            "If stock or debtors swing with the season, a year-end balance can mislead. Run the calculator again with average opening and closing balances, and read turnover and receivable days from that run.",
+            "Take every figure from the same financial year's accounts, not a mix of final and provisional numbers.",
+            "Compare with your own previous years first. A ratio that slips year after year matters more than one figure against an industry average."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related tools and calculators",
+          "links": [
+            {
+              "label": "Balance Sheet",
+              "href": "/tools/balance-sheet"
+            },
+            {
+              "label": "Profit & Loss Statement",
+              "href": "/tools/profit-loss-statement"
+            },
+            {
+              "label": "Inventory Turnover Calculator",
+              "href": "/calculators/inventory-turnover-calculator"
+            },
+            {
+              "label": "Invoice Aging Report",
+              "href": "/tools/invoice-aging-report"
+            },
+            {
+              "label": "Cash Flow Statement",
+              "href": "/tools/cash-flow-statement"
+            }
+          ]
+        }
+      ]
     },
     {
       "slug": "mdr-calculator",
@@ -1746,6 +3956,22 @@
           {
             "question": "Is GST charged on MDR?",
             "answer": "Yes. GST at 18% is charged on the MDR itself, not on your sale or on the UPI transaction. The calculator shows it as a separate line so you can see the full cost of collection, and GST-registered businesses can generally claim it as input tax credit."
+          },
+          {
+            "question": "Which payment methods does the MDR calculator cover?",
+            "answer": "The list has UPI merchant payments, UPI Autopay mandates, RuPay debit, UPI through a wallet, credit card on UPI, non-RuPay debit cards, credit cards, net banking and Amex or international cards, plus a custom option. Each fills in a typical rate, such as 0.9% for non-RuPay debit, 2% for credit cards and 1.8% for net banking. Treat these as starting points and overwrite them with the rate on your own agreement."
+          },
+          {
+            "question": "Why can MDR exclusive mode land a paisa more than I asked for?",
+            "answer": "The exact gross-up rarely comes to whole paise: receiving ₹10,000 on a 2% card with 18% GST needs a charge of about ₹10,241.704. A charge has to be in whole paise, and the fee and its GST are each rounded to the paisa, so the calculator rounds the charge up rather than down. Here it charges ₹10,241.71 and ₹10,000.01 settles to you, so you never land below your target."
+          },
+          {
+            "question": "What does effective cost of collection mean?",
+            "answer": "It is the total deducted, meaning the MDR plus the GST on it, as a percentage of what the customer paid. A 2% card rate works out to 2.36% once 18% GST is added. A flat per-transaction fee pushes the figure higher on small payments, and a capped payment method pushes it lower on large ones, which makes it a fairer number than the headline rate for comparing payment methods."
+          },
+          {
+            "question": "What happens if I change the rate on the UPI preset?",
+            "answer": "The rate you type is used, but the UPI preset's ₹2,000 free threshold and ₹300 cap keep applying, because they belong to the payment method rather than the rate. That lets you test a different negotiated rate under the same rules. If you want a plain percentage with no threshold or cap, choose Custom rate from the payment method list and enter your own figure."
           }
         ]
       },
@@ -1756,7 +3982,70 @@
           "label": "Try the UPI QR Generator",
           "href": "/tools/upi-qr-generator"
         }
-      }
+      },
+      "guide": [
+        {
+          "kind": "note",
+          "headline": "MDR formula",
+          "text": "MDR = Customer pays × MDR rate ÷ 100 + Flat fee. It is zero when the payment is at or below the payment method's free threshold, and it is held at the cap where the method has one. GST on MDR = MDR × GST rate ÷ 100. Total deducted = MDR + GST on MDR. You receive = Customer pays − Total deducted. Effective cost of collection = Total deducted ÷ Customer pays × 100. Each figure is rounded to the paisa. In **MDR exclusive** mode, Customer pays = (Target + Flat fee × (1 + GST ÷ 100)) ÷ (1 − MDR rate ÷ 100 × (1 + GST ÷ 100)), rounded up to the next paisa. Once the cap applies it is Target + Cap × (1 + GST ÷ 100), and it is simply the target when that sits at or below the free threshold; the calculator uses the lowest charge that delivers the target."
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the MDR calculator",
+          "steps": [
+            "Under Amount you are entering, choose MDR inclusive if you know what the customer pays, or MDR exclusive if you know what you want to receive.",
+            "Type the figure in Amount customer pays or Amount you want to receive.",
+            "Pick the Payment method; a typical rate fills the MDR rate field, which you can overwrite with the rate on your acquirer agreement.",
+            "Leave GST on the MDR at 18% unless your acquirer's invoice shows otherwise, and enter any Flat fee per transaction your gateway charges.",
+            "Read Customer pays, You receive, MDR charged, GST on MDR, Total deducted and Effective cost of collection.",
+            "To collect a large amount by UPI without MDR, tap Split this into zero-MDR QR codes to open the splitter with the amount filled in."
+          ]
+        },
+        {
+          "kind": "prose",
+          "headline": "Worked example: MDR on a ₹25,000 credit card payment",
+          "paragraphs": [
+            "A clinic collects ₹25,000 for a procedure by credit card at a 2% MDR. In MDR inclusive mode the MDR calculator shows an MDR of ₹500 (25,000 × 2 ÷ 100), GST on MDR of ₹90 (500 × 18 ÷ 100) and a total deduction of ₹590. You receive **₹24,410**, and the effective cost of collection is 2.36%, not 2%, because the GST sits on top of the fee.",
+            "If the full ₹25,000 has to land, switch to MDR exclusive and enter 25,000. The charge becomes 25,000 ÷ (1 − 0.02 × 1.18) = 25,000 ÷ 0.9764, rounded up to **₹25,604.27**, with ₹512.09 of MDR and ₹92.18 of GST coming off. Simply adding 2% and charging ₹25,500 would still leave you ₹24,898.20. The same ₹25,000 paid through the UPI merchant preset at 0.4% costs ₹100 plus ₹18 of GST, so ₹24,882 reaches your [settlement](/glossary/settlement)."
+          ]
+        },
+        {
+          "kind": "checklist",
+          "headline": "Practical checks on MDR",
+          "items": [
+            "Compare the You receive figure with one line of your real settlement report; if they differ, your agreed rate or flat fee is not the preset.",
+            "Enter the flat fee if your gateway charges one: on a ₹200 debit card payment at 0.9% plus ₹3, the total deduction is ₹5.66, an effective 2.83%, against 1.13% on a ₹5,000 payment.",
+            "On the UPI merchant preset the MDR stops at ₹300, reached at ₹75,000, so the effective cost falls on bigger payments: 0.47% on ₹25,000 but ₹354 in all, or 0.35%, on ₹1,00,000.",
+            "Make sure your GSTIN is on record with your acquirer and keep the tax invoices it issues for MDR, so the GST you pay on the fee is available as input tax credit."
+          ]
+        },
+        {
+          "kind": "links",
+          "headline": "Related calculators and tools",
+          "links": [
+            {
+              "label": "Zero-MDR UPI QR Splitter",
+              "href": "/tools/upi-qr-split"
+            },
+            {
+              "label": "Dynamic UPI QR Generator",
+              "href": "/tools/upi-qr-generator"
+            },
+            {
+              "label": "Online Order Commission Calculator",
+              "href": "/calculators/online-order-commission-calculator"
+            },
+            {
+              "label": "Bank Reconciliation",
+              "href": "/tools/bank-reconciliation"
+            },
+            {
+              "label": "Profit Margin Calculator",
+              "href": "/calculators/profit-margin-calculator"
+            }
+          ]
+        }
+      ]
     }
   ],
   "labels": {

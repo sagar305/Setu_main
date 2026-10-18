@@ -33,7 +33,11 @@ export function Faq({ headline, items }: { headline: string; items: FaqItem[] })
                     aria-hidden="true"
                   />
                 </button>
-                {isOpen && <p className="pb-5 text-sm leading-relaxed text-muted">{item.answer}</p>}
+                {/* Closed answers stay in the markup, hidden, so the server-rendered page
+                    carries every answer the FAQPage schema claims — not just the open one. */}
+                <p hidden={!isOpen} className="pb-5 text-sm leading-relaxed text-muted">
+                  {item.answer}
+                </p>
               </div>
             );
           })}

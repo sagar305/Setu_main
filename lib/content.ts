@@ -38,8 +38,20 @@ export type RetailContent = typeof retailData;
 export type ClinicContent = typeof clinicData;
 export type WorkflowContent = typeof workflowData;
 export type TuitionContent = typeof tuitionData;
-export type CalculatorsContent = typeof calculatorsData;
-export type CalculatorItem = CalculatorsContent["items"][number];
+type RawCalculatorsContent = typeof calculatorsData;
+/**
+ * One calculator. `guide` is the formula, how-to, worked example and tips that
+ * sit under the "about" copy — the same block shapes tool pages use, so one
+ * renderer covers both.
+ */
+export type CalculatorItem = Omit<RawCalculatorsContent["items"][number], "guide"> & {
+  guide?: ToolBodyBlock[];
+};
+/**
+ * The calculators page, with its items typed as CalculatorItem: inferred from
+ * the JSON, a guide block's `kind` is any string, not one ToolBody can render.
+ */
+export type CalculatorsContent = Omit<RawCalculatorsContent, "items"> & { items: CalculatorItem[] };
 export type ToolsContent = typeof toolsData;
 
 /**
@@ -526,16 +538,16 @@ export function getTuitionContent(): TuitionContent {
 }
 
 export function getCalculatorsContent(): CalculatorsContent {
-  return calculatorsData;
+  return calculatorsData as CalculatorsContent;
 }
 
 export function getCalculatorBySlug(slug: string): CalculatorItem | undefined {
-  return calculatorsData.items.find((item) => item.slug === slug);
+  return getCalculatorsContent().items.find((item) => item.slug === slug);
 }
 
 export function getRelatedCalculators(slug: string, count = 3): CalculatorItem[] {
   const current = getCalculatorBySlug(slug);
-  const rest = calculatorsData.items.filter((item) => item.slug !== slug);
+  const rest = getCalculatorsContent().items.filter((item) => item.slug !== slug);
   if (!current) return rest.slice(0, count);
 
   const sameCategory = rest.filter((item) => item.category === current.category);
