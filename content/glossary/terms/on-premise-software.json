@@ -1,0 +1,48 @@
+{
+  "slug": "on-premise-software",
+  "term": "On-Premise Software",
+  "category": "pos-tech",
+  "aliases": [
+    "on-premises software",
+    "on-prem software",
+    "locally installed software"
+  ],
+  "short": "Software installed on a machine you own and control, with the data stored on that machine rather than on a vendor's servers.",
+  "seoTitle": "On-Premise Software: Installed on Your Own Machine",
+  "metaDescription": "On-premise software runs on a computer you own, with your data on that machine. What it means for backups, multi-user access, cost and switching later.",
+  "updated": "2026-10-18",
+  "definition": "On-premise software is installed and run on hardware the business owns and controls, typically a desktop or a small server on the premises, with the data file sitting on that machine. The alternative is cloud software, where the application and the data live on the vendor's infrastructure and reach you through a browser. The practical difference is not where the code runs so much as who is responsible for the data surviving.",
+  "bodyHtml": "<h2>What you take on</h2><p>Backups become yours. So does the machine: its disk, its power supply, its operating system and the day it will not start. On-premise software with no backup regime is a business whose records have a single point of failure, and that failure is not hypothetical — it is the most common way small businesses lose their history.</p><h2>What you gain</h2><p>It keeps working when the internet does not, which in many locations is the deciding argument. The data sits with you rather than with a vendor, which some businesses prefer on principle and others need for a specific reason. And performance does not depend on a connection, so a busy counter stays fast.</p><h2>Multi-user is a separate question</h2><p>On-premise does not mean single-user. A machine on the shop network can serve several counters, but that arrangement needs a network, a designated machine that stays on, and someone to look after both. Cloud software gets multi-device access for free, which is often what a buyer is actually paying for when they move.</p><h2>Switching later</h2><p>Your data is in a file format the vendor chose, on your own machine. That sounds like control and is only half of it: control of the file does not mean the file opens anywhere else. Before committing to an on-premise package, confirm what it can export and in what format, because that export is the only exit that will exist in five years.</p>",
+  "faq": [
+    {
+      "question": "Is on-premise software safer than cloud software?",
+      "answer": "It is differently exposed rather than safer. Your data is not sitting on a third party's servers, which removes one category of risk. In exchange, the backup, the physical security of the machine and recovery after a failure are entirely your responsibility, and that is where small businesses most often come unstuck. A cloud vendor with real backups usually beats an on-premise install with none."
+    },
+    {
+      "question": "Can on-premise software be accessed from a phone?",
+      "answer": "Not by default. The data lives on one machine, so remote access needs either a vendor-provided remote facility, a companion cloud product, or a network arrangement someone has to configure and maintain. If being able to see your numbers away from the premises matters, treat it as a requirement to confirm before buying rather than something to solve afterwards."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "browser-based-pos"
+    },
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "cloud-backup",
+    "offline-mode",
+    "browser-storage",
+    "vendor-lock-in",
+    "perpetual-licence",
+    "data-migration"
+  ]
+}

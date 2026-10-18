@@ -1,0 +1,54 @@
+{
+  "slug": "total-cost-of-ownership",
+  "term": "Total Cost of Ownership",
+  "category": "pos-tech",
+  "aliases": [
+    "TCO"
+  ],
+  "short": "Everything a purchase costs over its life — price, setup, training, support, renewals and the cost of leaving — not just the sticker figure.",
+  "seoTitle": "Total Cost of Ownership: The Real Price of Software",
+  "metaDescription": "Total cost of ownership adds setup, training, support, renewals and exit costs to the purchase price, which is the only fair way to compare two systems.",
+  "updated": "2026-10-18",
+  "definition": "Total cost of ownership is the sum of everything a purchase will cost across the period you expect to use it, rather than the price on the quote. For business software that means the licence or subscription, implementation and data entry, training, hardware, annual support, the cost of additional users, and eventually the cost of migrating off it. Two products whose headline prices differ by a factor of three frequently have total costs within a few percent of each other.",
+  "formula": {
+    "expression": "TCO = Purchase price + Setup and training + (Annual running cost × Years) + Exit cost",
+    "note": "Use the same number of years for every option you are comparing, and include hardware and staff time, which are real costs even when nobody invoices for them."
+  },
+  "bodyHtml": "<h2>The items buyers leave out</h2><p>Three of them, almost universally. Staff time during implementation, which is a genuine cost even though no invoice arrives for it. The second user, because many products are priced per seat and quoted for one. And the exit — extraction, mapping and re-entry when you eventually move, which is invisible at purchase and painfully visible later.</p><h2>Comparing a free tool with a paid one</h2><p>Free is a price, not a total cost. A free tool with no storage behind it costs you in manual work, in retyping between tools and in the risk of a lost machine. That cost can be small and entirely acceptable, but writing it as zero makes the comparison meaningless. The useful question is what the cheaper option costs in hours, and whether those hours are worth more than the licence fee.</p><h2>Pick a horizon and hold it</h2><p>Three years is a reasonable default for business software and five for anything that will become a system of record. Whatever you choose, apply it identically to every option on the shortlist. Most unfair comparisons are unfair because the horizons differ, not because the figures are wrong.</p>",
+  "faq": [
+    {
+      "question": "How do I estimate the cost of switching away later?",
+      "answer": "You cannot price it exactly, but you can bound it. Ask what formats the system exports, whether the export covers history as well as current balances, and whether anyone you could hire has moved data out of it before. A product with a clean full export has a low exit cost; one where the answer is vague should carry a provision in your estimate, because that vagueness is the cost."
+    },
+    {
+      "question": "Should staff time count in total cost of ownership?",
+      "answer": "Yes, and leaving it out is the most common reason a comparison comes out wrong. Implementation, data entry and training consume hours from people you already pay, and those hours would otherwise have gone to the business. A rough hourly rate applied to an honest estimate of hours is far more accurate than treating that work as free."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    }
+  ],
+  "relatedTerms": [
+    "implementation-fee",
+    "annual-maintenance-contract",
+    "per-seat-pricing",
+    "vendor-lock-in",
+    "payback-period",
+    "perpetual-licence"
+  ]
+}

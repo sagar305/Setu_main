@@ -1,0 +1,52 @@
+{
+  "slug": "perpetual-licence",
+  "term": "Perpetual Licence",
+  "category": "pos-tech",
+  "aliases": [
+    "perpetual license",
+    "one-time licence",
+    "one-time license"
+  ],
+  "short": "A software purchase you pay for once and may keep using indefinitely, usually with support and updates charged separately each year.",
+  "seoTitle": "Perpetual Licence: Buy Once, Pay Yearly After",
+  "metaDescription": "A perpetual licence is a one-time software purchase you keep forever, with support and updates billed separately each year. How it compares to a subscription.",
+  "updated": "2026-10-18",
+  "definition": "A perpetual licence is a one-time payment that grants the right to use a specific version of a piece of software for as long as you like. It contrasts with a subscription, where the right to use the software ends when you stop paying. The catch is that a perpetual licence rarely covers everything: support, version upgrades and sometimes statutory updates are typically sold as a separate annual contract, so the ongoing cost is lower than a subscription rather than zero.",
+  "formula": {
+    "expression": "Five-year cost = Licence price + (Annual support × 5) + Setup and training",
+    "note": "Compare this total against five years of subscription fees. A licence that looks cheap in year one often converges with a subscription by year four once support renewals are counted."
+  },
+  "bodyHtml": "<h2>What you actually own</h2><p>You own the right to run the version you bought. You do not usually own the right to next year's version, and in markets where tax rules change annually that distinction has teeth: a statutory update may arrive only through the support contract. Read what the licence covers and what the annual contract covers as two separate questions, because vendors describe them as one purchase.</p><h2>Why the first-year price is misleading</h2><p>A licence price is the entry cost, not the cost. Installation, data entry, training and the machine the software runs on are usually quoted separately or not at all, and the annual support renewal starts in year two. Businesses comparing a licence against a subscription on the headline figure alone almost always understate the licence.</p><h2>Where it still wins</h2><p>Steady, long-lived use of a mature product with little need for new features is the case a licence is built for. A shop that will run the same billing software the same way for eight years pays less under a licence than under a subscription, provided the support contract stays optional and the machine keeps working. The risk sits at the other end: when the business changes shape, a licence is a sunk cost and a subscription is a decision you can stop making.</p><h2>Questions to settle before paying</h2><p>Three of them, in writing. What does the annual support contract cost and is it compulsory? Are version upgrades included in it or charged again? And what happens to your data and your access if you stop renewing — does the software keep working, or does it stop at the next statutory change?</p>",
+  "faq": [
+    {
+      "question": "Is a perpetual licence cheaper than a subscription?",
+      "answer": "Over a long enough horizon usually yes, but the crossover point is often further out than buyers expect. Add the annual support contract, setup and training to the licence price and compare the five-year totals rather than the first-year figures. If the business is likely to change shape within three years, the subscription's cancellability is worth real money."
+    },
+    {
+      "question": "Does a perpetual licence include updates?",
+      "answer": "Generally not beyond the version you bought. Updates and upgrades typically arrive through a separate annual support or maintenance contract. This matters most where compliance rules change every year, because a licence without a live support contract can quietly fall out of step with current filing requirements."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "vendor-comparison"
+    },
+    {
+      "type": "calculator",
+      "slug": "roi-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "budget-vs-actual"
+    }
+  ],
+  "relatedTerms": [
+    "annual-maintenance-contract",
+    "per-seat-pricing",
+    "implementation-fee",
+    "vendor-lock-in",
+    "total-cost-of-ownership",
+    "on-premise-software"
+  ]
+}

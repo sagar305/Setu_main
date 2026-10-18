@@ -1,0 +1,51 @@
+{
+  "slug": "data-migration",
+  "term": "Data Migration",
+  "category": "pos-tech",
+  "aliases": [
+    "data import",
+    "migrating data"
+  ],
+  "short": "Moving your existing records — customers, stock, ledgers, history — out of one system and into another in a usable shape.",
+  "seoTitle": "Data Migration: Moving Records Between Systems",
+  "metaDescription": "Data migration is moving customers, stock, ledgers and history from one system into another. What it involves, what breaks, and how to reduce the risk.",
+  "updated": "2026-10-18",
+  "definition": "Data migration is the work of taking the records a business holds in one system and loading them into another so they remain usable. It is rarely a single export and import: field names differ, dates and number formats differ, and the new system usually demands information the old one never captured. For a small business the realistic scope is opening balances, master records and a defined slice of history rather than everything ever recorded.",
+  "bodyHtml": "<h2>What usually breaks</h2><p>Dates in the wrong order, duplicate customers created because the match was on name rather than a code, stock quantities that arrive without their cost basis, and opening balances that do not foot. None of these are exotic. All of them are found by checking totals against the old system immediately after loading, which is the step most often skipped under time pressure.</p><h2>Decide what not to move</h2><p>Moving everything is slower, more expensive and more likely to fail than moving what you need. A common and sensible scope is current master data in full, opening balances as at a chosen cut-off date, and the current financial year's transactions. Older history stays readable in an export or a retained copy of the old system, which satisfies most of the reasons anyone looks it up.</p><h2>Run both for one period</h2><p>Where it is practical, keep the old system available in read-only form for a month or two after the switch. It costs very little and it is the only cheap way to answer the question that will inevitably arrive: what did this figure look like before.</p><h2>Why it is a buying question</h2><p>The cost of leaving a system is set at the moment you join it, by how well that system exports. Asking about export formats before purchase, when you have leverage, is substantially easier than asking afterwards.</p>",
+  "faq": [
+    {
+      "question": "How much history should I migrate into a new system?",
+      "answer": "Usually the current financial year plus opening balances as at the cut-off date. Full master data for customers, suppliers and items should come across in its entirety, because that is what you work with daily. Older transaction history is better kept as an export or a read-only copy of the old system than forced into a new structure it was not recorded in."
+    },
+    {
+      "question": "How do I check a migration worked?",
+      "answer": "Reconcile totals before you rely on the new system: trial balance, customer and supplier balances, stock quantity and value, and the record counts for each master list. Then pick a handful of individual records at random and compare them field by field. A migration that matches in total but garbles individual records will pass a casual look and fail in use."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    },
+    {
+      "type": "tool",
+      "slug": "chart-of-accounts"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "tool",
+      "slug": "customer-ledger"
+    }
+  ],
+  "relatedTerms": [
+    "opening-balance",
+    "csv-export",
+    "vendor-lock-in",
+    "cut-off",
+    "on-premise-software",
+    "trial-balance"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "bar-variance",
+  "term": "Bar Variance",
+  "category": "restaurant-ops",
+  "aliases": [
+    "liquor variance",
+    "beverage variance",
+    "pour cost variance"
+  ],
+  "short": "The gap between what your drink recipes say the bar should have consumed and what it actually consumed in the same period.",
+  "seoTitle": "Bar Variance: Theoretical vs Actual Liquor Cost",
+  "metaDescription": "Bar variance is the gap between the liquor your recipes predict and what the bar actually used. What a normal gap looks like and what a wide one means.",
+  "updated": "2026-10-18",
+  "definition": "Bar variance is the difference between theoretical beverage cost — what the drinks you rang up should have consumed, according to your recipes and pour sizes — and actual beverage cost, calculated from opening stock plus purchases minus closing stock. A small gap is normal in any venue. A wide one is money leaving the building, and the value of the measure is that it narrows a vague suspicion to a number you can act on.",
+  "formula": {
+    "expression": "Actual cost = Opening stock + Purchases − Closing stock; Variance = Actual cost % − Theoretical cost %",
+    "note": "Both percentages are taken against beverage sales for the same period. Around a point of variance is ordinary; three or more points warrants investigation."
+  },
+  "bodyHtml": "<h2>What a wide gap usually means</h2><p>The list is short and worth working through in order, cheapest first. Free-pouring that runs generous. Drinks served and never rung up. Breakage and spillage nobody recorded. Comps and staff drinks outside the system. A house pour that has quietly become a premium brand. And last, stock leaving the premises. Measurement problems are far more common than theft, and they are much cheaper to fix.</p><h2>Count weekly, not monthly</h2><p>A monthly count tells you something went wrong in the last thirty days, which is rarely enough to act on. A weekly count tells you which week, and often which shift. For spirits at least, weekly is the interval at which the number becomes useful rather than merely interesting.</p><h2>Rule out arithmetic first</h2><p>Before treating a gap as leakage, check that the pours-per-bottle figure in your pricing matches the one in your stock valuation, and that every recipe reflects what is actually served. A bar that prices on twenty-five pours and pours twenty-three will show a permanent variance that no amount of supervision will close, because nothing is going missing.</p>",
+  "faq": [
+    {
+      "question": "What is an acceptable bar variance?",
+      "answer": "Around one point between theoretical and actual cost is ordinary in a working bar and not worth chasing. Three or four points is worth investigating, and anything consistently wider than that usually has a specific and findable cause. What matters more than the absolute figure is the trend: a variance that is stable is a known cost, and one that is widening is a live problem."
+    },
+    {
+      "question": "Do I need a POS to measure bar variance?",
+      "answer": "You need a reliable record of what was sold and a reliable count of what is on the shelf. A point-of-sale system makes the sales side easy, but a bar with a disciplined manual count and an accurate sales summary can calculate the same figure. The stock count is the harder half — without a trustworthy closing stock there is no actual cost to compare against."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    },
+    {
+      "type": "calculator",
+      "slug": "liquor-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "inventory-turnover-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "pour-cost",
+    "peg-measure",
+    "house-pour",
+    "shrinkage",
+    "wastage",
+    "stock-take",
+    "comps-and-voids"
+  ]
+}

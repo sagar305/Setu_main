@@ -1,0 +1,48 @@
+{
+  "slug": "house-pour",
+  "term": "House Pour",
+  "category": "restaurant-ops",
+  "aliases": [
+    "well pour",
+    "house spirit",
+    "well spirit"
+  ],
+  "short": "The default brand poured when a guest orders a spirit without naming one, chosen by the bar for cost and acceptable quality.",
+  "seoTitle": "House Pour: The Default Brand Behind Your Bar",
+  "metaDescription": "A house pour is the brand served when a guest names no preference. How the choice affects pour cost, margin and the variance between theory and actual.",
+  "updated": "2026-10-18",
+  "definition": "The house pour is the brand a bar serves when a guest orders a category rather than a brand — a whisky and soda rather than a named label. Because it absorbs a large share of spirit volume in most venues, the house pour choice has more effect on total beverage cost than any single premium listing, and it is also the most common hidden cause of a bar running over its theoretical cost.",
+  "bodyHtml": "<h2>Why it moves the whole bar's numbers</h2><p>House pours are high volume by definition. A change of a hundred rupees a bottle on a brand that accounts for a fifth of your spirit volume outweighs a price change on a premium bottle that sells twice a month. Review the house selection whenever supplier prices move, not just the headline listings.</p><h2>The quiet substitution</h2><p>The classic variance problem is a house pour that has drifted upmarket. Staff reach for a better brand when the house bottle is empty, nobody records it, and actual cost rises with no change to the recipes or the menu. A bar that cannot explain a two or three point gap should check what is actually being poured before it looks anywhere else.</p><h2>Choosing one</h2><p>Cost is the obvious lever, but it is not the only one. A house pour that guests can taste as cheap pushes them to order by brand, which raises your average spend and may suit you, or pushes them to drink elsewhere, which does not. The usual settlement is a brand that is unobjectionable neat and invisible in a mix.</p>",
+  "faq": [
+    {
+      "question": "Should the house pour be the cheapest brand available?",
+      "answer": "Not automatically. The cheapest brand reduces cost per pour and can also reduce repeat visits if guests notice it, which costs more than the saving. Most bars settle on a brand that is acceptable served neat and disappears in a mixed drink, then review the choice whenever supplier pricing shifts."
+    },
+    {
+      "question": "How does the house pour affect bar variance?",
+      "answer": "It is one of the most common causes of an unexplained gap. If staff substitute a premium bottle when the house bottle runs out, or pour by habit rather than by spec, actual consumption diverges from what your recipes predict while the menu and pricing stay unchanged. Checking what is physically being poured is usually faster than auditing anything else."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "liquor-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "menu-engineering-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "stock-register"
+    }
+  ],
+  "relatedTerms": [
+    "pour-cost",
+    "peg-measure",
+    "bar-variance",
+    "portion-control",
+    "menu-mix",
+    "upselling"
+  ]
+}

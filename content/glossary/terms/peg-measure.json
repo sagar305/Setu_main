@@ -1,0 +1,52 @@
+{
+  "slug": "peg-measure",
+  "term": "Peg Measure",
+  "category": "restaurant-ops",
+  "aliases": [
+    "peg size",
+    "patiala peg",
+    "standard peg"
+  ],
+  "short": "The standard serving size for spirits in Indian bars — commonly 30ml for a small peg and 60ml for a large.",
+  "seoTitle": "Peg Measure: Standard Spirit Pour Sizes in India",
+  "metaDescription": "A peg is the standard spirit measure in Indian bars, usually 30ml small and 60ml large. How peg size sets pours per bottle and your cost per drink.",
+  "updated": "2026-10-18",
+  "definition": "A peg is the customary unit for serving spirits in India. A small peg is generally 30ml and a large or Patiala peg 60ml, though the exact measure is a house decision rather than a national standard and varies between venues. Peg size is the hinge of all bar costing: it determines how many servings a bottle yields, and therefore the cost of every drink poured from it.",
+  "formula": {
+    "expression": "Theoretical pours per bottle = Bottle volume in ml ÷ Peg size in ml",
+    "note": "750ml ÷ 30ml = 25 pours. In practice plan on 23–24 once residue, the last short pour and ordinary overpour are allowed for."
+  },
+  "bodyHtml": "<h2>Theoretical yield versus what you get</h2><p>A 750ml bottle gives twenty-five 30ml pegs on paper and twelve and a half large ones. No bar achieves that. Liquid clings to the bottle, the final pour often does not fill a measure, and free-poured drinks run generous when the bar is busy. The gap between twenty-five and twenty-three is around eight percent of liquor cost, which is large enough to explain an entire unexplained margin problem on its own.</p><h2>Use one figure everywhere</h2><p>The pours-per-bottle number you use for pricing has to be the same one you use when valuing stock and comparing theoretical against actual consumption. Bars that price on twenty-five and count on twenty-two produce a variance that looks like leakage and is really an arithmetic mismatch.</p><h2>Measuring it</h2><p>A jigger used consistently is the cheapest control in any bar. Where drinks are free-poured, the honest test is to pour a few into a measure and see what the actual size is; the result is usually larger than the staff estimate, and the difference compounds across every drink of the night.</p>",
+  "faq": [
+    {
+      "question": "Is a peg a legally fixed measure in India?",
+      "answer": "No. 30ml and 60ml are the customary small and large measures and are what most venues and menus use, but the serving size is set by the house and by state excise conditions rather than by a single national standard. Whatever you serve, state it on the menu and pour it consistently — guests notice variation faster than they notice size."
+    },
+    {
+      "question": "How many large pegs are in a 750ml bottle?",
+      "answer": "Twelve and a half at a 60ml measure, in theory. Allowing for residue and the short final pour, plan on eleven to twelve for costing purposes. Use the realistic figure in your pricing rather than the theoretical one, or every drink you sell will be slightly cheaper than you think it is."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "calculator",
+      "slug": "liquor-cost-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "recipe-costing-calculator"
+    },
+    {
+      "type": "calculator",
+      "slug": "profit-margin-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "pour-cost",
+    "portion-control",
+    "yield-percentage",
+    "house-pour",
+    "bar-variance",
+    "recipe-costing"
+  ]
+}
