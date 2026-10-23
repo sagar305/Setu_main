@@ -17,6 +17,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PharmacyProvider, usePharmacy } from "@/lib/pharmacy/store";
+import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
 import { expiryBuckets } from "@/lib/pharmacy/calc";
@@ -222,6 +223,7 @@ function PharmacyBody() {
   const { status, errorMessage } = usePharmacy();
   const [fullscreen, setFullscreen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  useAutoFullscreen(status, () => setFullscreen(true));
 
   /**
    * Two things at once, deliberately.
