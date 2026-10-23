@@ -47,6 +47,7 @@ import {
   Zap,
 } from "lucide-react";
 import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
+import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
@@ -675,6 +676,12 @@ export default function BrowserBasedPosPage() {
           })}
         </FadeInStagger>
       </section>
+
+      <YouTubeTutorial
+        videoId="OvNbwN4fJWw"
+        title="How to set up the Browser Based POS"
+        description="Watch how to set up your shop and start billing in a few minutes."
+      />
 
       {/* The POS app */}
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6">
