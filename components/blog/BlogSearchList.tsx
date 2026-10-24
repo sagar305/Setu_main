@@ -44,6 +44,7 @@ export function BlogSearchList({
         <div className="mt-5 flex flex-wrap gap-3">
           {categories.map((category) => (
             <Link
+              prefetch={false}
               key={category.slug}
               href={`/blog/${category.slug}`}
               className="rounded-full border border-muted-line/30 px-4 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo hover:text-indigo"

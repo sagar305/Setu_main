@@ -25,6 +25,7 @@ export function GlossarySidebar({
             {tools.map((tool) => (
               <li key={`${tool.type}-${tool.slug}`}>
                 <Link
+                  prefetch={false}
                   href={tool.href}
                   className="group flex items-start gap-3 rounded-xl border border-muted-line/20 p-3 transition hover:border-indigo/40 hover:bg-cream/40"
                 >
@@ -54,7 +55,7 @@ export function GlossarySidebar({
           <ul className="mt-4 flex flex-col gap-4">
             {relatedTerms.map((term) => (
               <li key={term.slug} className="border-b border-muted-line/20 pb-4 last:border-none last:pb-0">
-                <Link href={getGlossaryTermUrl(term.slug)} className="group block">
+                <Link prefetch={false} href={getGlossaryTermUrl(term.slug)} className="group block">
                   <span className="block text-sm font-semibold leading-snug text-ink transition group-hover:text-indigo">
                     {term.term}
                   </span>

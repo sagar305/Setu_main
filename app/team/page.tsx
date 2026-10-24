@@ -92,6 +92,7 @@ export default function TeamPage() {
                     {member.social.map((link) => (
                       <li key={link.href}>
                         <Link
+                          prefetch={false}
                           href={link.href}
                           className="text-sm font-semibold text-indigo hover:underline"
                         >

@@ -15,6 +15,7 @@ export function GlossaryText({ segments }: { segments: GlossarySegment[] }) {
       {segments.map((segment, index) =>
         segment.type === "link" ? (
           <Link
+            prefetch={false}
             key={`${segment.slug}-${index}`}
             href={getGlossaryTermUrl(segment.slug)}
             className="glossary-link"

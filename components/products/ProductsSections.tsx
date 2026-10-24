@@ -98,6 +98,7 @@ export function ProductsSections({
                 )}
 
                 <Link
+                  prefetch={false}
                   href={product.cta.href}
                   className="mt-6 inline-block text-sm font-semibold text-indigo hover:underline"
                 >

@@ -26,7 +26,7 @@ export function BlogSidebar({
           <ul className="mt-4 flex flex-col gap-4">
             {latestPosts.map((post) => (
               <li key={post.slug} className="border-b border-muted-line/20 pb-4 last:border-none last:pb-0">
-                <Link href={getBlogPostUrl(post)} className="group block">
+                <Link prefetch={false} href={getBlogPostUrl(post)} className="group block">
                   <span className="text-xs font-medium text-muted-warm">{formatDate(post.date)}</span>
                   <span className="mt-1 block text-sm font-semibold leading-snug text-ink transition group-hover:text-indigo">
                     {post.title}
@@ -47,6 +47,7 @@ export function BlogSidebar({
             {tools.map((tool) => (
               <li key={`${tool.type}-${tool.slug}`}>
                 <Link
+                  prefetch={false}
                   href={tool.href}
                   className="group flex items-start gap-3 rounded-xl border border-muted-line/20 p-3 transition hover:border-indigo/40 hover:bg-cream/40"
                 >

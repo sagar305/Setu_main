@@ -35,6 +35,7 @@ export function LanguageLinks({ page, current }: { page: PageKey; current: Langu
             return (
               <li key={language.code}>
                 <Link
+                  prefetch={false}
                   href={pathFor(page, language.code)}
                   hrefLang={hreflangFor(language.code)}
                   lang={language.code}

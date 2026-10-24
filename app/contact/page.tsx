@@ -45,17 +45,7 @@ const contactPageSchema = {
   url: "https://setutechnology.com/contact",
 };
 
-type ContactVariant = { eyebrow: string; headline: string; subheadline: string };
-
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ topic?: string }>;
-}) {
-  const { topic } = await searchParams;
-  const variants: Record<string, ContactVariant> = content.variants ?? {};
-  const hero = (topic && variants[topic]) || content.hero;
-
+export default function ContactPage() {
   return (
     <>
       <script
@@ -63,7 +53,7 @@ export default async function ContactPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
       />
 
-      <ContactSections content={content} hero={hero} lang="en" />
+      <ContactSections content={content} hero={content.hero} variants={content.variants} lang="en" />
     </>
   );
 }

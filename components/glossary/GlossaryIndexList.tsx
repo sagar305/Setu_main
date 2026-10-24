@@ -138,7 +138,7 @@ export function GlossaryIndexList({
           <ul className="mt-4 grid gap-x-8 gap-y-4 border-t border-muted-line/25 pt-5 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((term) => (
               <li key={term.slug}>
-                <Link href={getGlossaryTermUrl(term.slug)} className="group block">
+                <Link prefetch={false} href={getGlossaryTermUrl(term.slug)} className="group block">
                   <span className="block text-sm font-semibold text-ink transition group-hover:text-indigo">
                     {term.term}
                   </span>

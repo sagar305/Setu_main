@@ -42,13 +42,14 @@ export function LatestBlogs() {
               <span aria-hidden="true">·</span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
             </div>
-            <Link href={getBlogPostUrl(post)}>
+            <Link prefetch={false} href={getBlogPostUrl(post)}>
               <h3 className="mt-3 text-lg font-bold text-ink transition hover:text-indigo">
                 {post.title}
               </h3>
             </Link>
             <p className="mt-2 text-sm leading-relaxed text-muted">{post.excerpt}</p>
             <Link
+              prefetch={false}
               href={getBlogPostUrl(post)}
               className="mt-4 text-sm font-semibold text-indigo hover:underline"
             >

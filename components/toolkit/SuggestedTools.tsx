@@ -27,6 +27,7 @@ export function SuggestedTools({ current, lang = "en" }: { current: string; lang
       <div className="flex flex-wrap gap-3">
         {tools.map((tool) => (
           <Link
+            prefetch={false}
             key={tool.slug}
             href={localizedHref(tool.route!, lang)}
             className="inline-block rounded-lg border border-indigo/30 px-4 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/5"

@@ -36,6 +36,10 @@ export function generateStaticParams() {
   return getGlossaryTerms().map((term) => ({ slug: term.slug }));
 }
 
+// Every real slug is prerendered above; anything else 404s without rendering,
+// so bots probing made-up URLs don't cost an ISR write each.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -203,6 +207,7 @@ export default async function GlossaryTermPage({
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {relatedTerms.map((related) => (
                   <Link
+                    prefetch={false}
                     key={related.slug}
                     href={getGlossaryTermUrl(related.slug)}
                     className="group rounded-2xl border border-muted-line/20 bg-white p-5 transition hover:border-indigo/40"

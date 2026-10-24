@@ -786,7 +786,7 @@ export default function BrowserBasedPosPage() {
                     <ul className="space-y-2.5">
                       {tools.map((tool) => (
                         <li key={tool.slug}>
-                          <Link href={tool.route} className="group block text-sm">
+                          <Link prefetch={false} href={tool.route} className="group block text-sm">
                             <span className="font-semibold text-ink transition group-hover:text-indigo">
                               {tool.name}
                             </span>{" "}
