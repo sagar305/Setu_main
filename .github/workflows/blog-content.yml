@@ -5,10 +5,14 @@ name: Blog content
 # fingerprint automatically, then runs the same checks `npm run build` runs
 # locally, so a post with an over-length title or a missing category block is
 # caught here rather than at deploy time.
+#
+# main and stage only take pull requests, so the dates are filled in on the
+# pull request into stage, by a commit to its own branch. By the time stage
+# goes on to main they are already right.
 
 on:
   push:
-    branches: [main]
+    branches: [main, stage]
     paths:
       - "content/**"
       - "scripts/**"
@@ -24,15 +28,19 @@ on:
 
 jobs:
   sync-dates:
-    # Only on push: a pull request from a fork cannot be pushed back to.
-    if: github.event_name == 'push'
+    # Only on a pull request into stage from this repository: a fork cannot be
+    # pushed back to, and stage → main already carries the dates.
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.base.ref == 'stage' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.head_ref }}
 
       - uses: actions/setup-node@v4
         with:

@@ -1,0 +1,30 @@
+name: Branch policy
+
+# Changes reach production in two steps: every branch opens its pull request
+# into `stage`, and `main` only takes a pull request from `stage`. This check
+# fails any other pull request into main. It only blocks the merge once it is
+# a required status check on main's branch protection (see CLAUDE.md, Git
+# Workflow).
+
+on:
+  pull_request:
+    branches: [main]
+    # `edited` covers a pull request whose base is switched to main later.
+    types: [opened, reopened, synchronize, edited]
+
+jobs:
+  stage-only:
+    name: Only stage can merge into main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the source branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$HEAD_REF" = "stage" ] && [ "$HEAD_REPO" = "$GITHUB_REPOSITORY" ]; then
+            echo "Pull request from stage into main: allowed."
+            exit 0
+          fi
+          echo "::error::main only accepts pull requests from the stage branch. Change this pull request's base to stage, merge it there, then open stage → main."
+          exit 1
