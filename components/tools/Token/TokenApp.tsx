@@ -14,7 +14,6 @@ import {
   WifiOff,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { fill, type TKey } from "@/lib/i18n/translate";
 import { TokenProvider, useToken } from "@/lib/token/store";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
@@ -190,7 +189,6 @@ function TokenBody() {
   const { status, errorMessage } = useToken();
   const [fullscreen, setFullscreen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  useAutoFullscreen(status, () => setFullscreen(true));
 
   const toggleFullscreen = () => {
     setFullscreen((value) => {
