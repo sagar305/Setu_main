@@ -467,6 +467,8 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ students: [student] }, {}, ["t_students"]);
       setStudents((prev) => [...prev, student].sort((a, b) => a.name.localeCompare(b.name)));
+      // Raise the new student's dues now, not on the next visit.
+      duesGeneratedRef.current = false;
       return student;
     },
     [batchWithSync]
@@ -593,6 +595,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       }));
       await batchWithSync({ students: created }, {}, ["t_students"]);
       setStudents((prev) => [...prev, ...created].sort((a, b) => a.name.localeCompare(b.name)));
+      duesGeneratedRef.current = false;
       return created.length;
     },
     [batchWithSync]
@@ -659,9 +662,22 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
           );
         }
       }
-      if (created.length === 0) return 0;
-      await batchWithSync({ fee_dues: created }, {}, ["t_fees"]);
-      setDues((prev) => [...prev, ...created]);
+      // Dues raised by older versions could fall due before the student
+      // joined, showing a new student as overdue on day one. Only the date
+      // moves; the amount a due was raised for is never rewritten.
+      const redated: FeeDue[] = [];
+      for (const due of dues) {
+        if (due.kind !== "tuition") continue;
+        const student = students.find((s) => s.id === due.studentId);
+        const joined = student ? student.rejoinedOn || student.joinDate : "";
+        // Only the joining month, so a later change to the due day leaves
+        // every other month's history alone.
+        if (!joined || monthKey(joined) !== due.period || due.dueDate >= joined) continue;
+        redated.push({ ...due, dueDate: joined });
+      }
+      if (created.length === 0 && redated.length === 0) return 0;
+      await batchWithSync({ fee_dues: [...created, ...redated] }, {}, ["t_fees"]);
+      setDues((prev) => [...prev.map((d) => redated.find((r) => r.id === d.id) ?? d), ...created]);
       return created.length;
     },
     [batchWithSync, batches, dues, lang, settings.feeDueDay, students]
