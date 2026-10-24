@@ -11,6 +11,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
+import { NavigationProgress } from "@/components/NavigationProgress";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={sora.variable}>
       <body className="font-sora">
+        <NavigationProgress />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
