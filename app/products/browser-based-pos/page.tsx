@@ -681,6 +681,9 @@ export default function BrowserBasedPosPage() {
         videoId="OvNbwN4fJWw"
         title="How to set up the Browser Based POS"
         description="Watch how to set up your shop and start billing in a few minutes."
+        thumbnail="/tutorials/browser-based-pos.webp"
+        thumbnailSmall="/tutorials/browser-based-pos-960.webp"
+        showPlayButton={false}
       />
 
       {/* The POS app */}

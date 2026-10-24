@@ -11,15 +11,26 @@ import { FadeIn } from "@/components/motion/FadeIn";
  * megabyte of script, which every visitor would otherwise pay for a video most
  * of them never start. Until then the thumbnail is an ordinary link to the
  * video, so it still works without JavaScript and crawlers can follow it.
+ *
+ * The thumbnail is our own artwork from /public: YouTube's own is 480px wide
+ * and letterboxed, which blurs at this size. `thumbnail` is the full-size
+ * image and `thumbnailSmall` a 960px copy for phones. Artwork that already
+ * draws a play button turns ours off with `showPlayButton={false}`.
  */
 export function YouTubeTutorial({
   videoId,
   title,
   description,
+  thumbnail,
+  thumbnailSmall,
+  showPlayButton = true,
 }: {
   videoId: string;
   title: string;
   description: string;
+  thumbnail: string;
+  thumbnailSmall: string;
+  showPlayButton?: boolean;
 }) {
   const [playing, setPlaying] = useState(false);
   const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
@@ -54,21 +65,26 @@ export function YouTubeTutorial({
               aria-label={`Play video: ${title}`}
               className="group relative block h-full w-full"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- served by YouTube's CDN, not worth an image-optimisation transformation */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- already sized webp in /public; no image-optimisation transformation needed */}
               <img
-                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                src={thumbnail}
+                srcSet={`${thumbnailSmall} 960w, ${thumbnail} 1672w`}
+                sizes="(min-width: 896px) 846px, calc(100vw - 34px)"
                 alt={title}
                 loading="lazy"
                 decoding="async"
-                width={480}
-                height={360}
-                className="h-full w-full object-cover opacity-90 transition group-hover:opacity-100"
+                width={1672}
+                height={941}
+                className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
               />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-saffron text-ink shadow-lg transition group-hover:scale-105 sm:h-20 sm:w-20">
-                  <Play className="ml-1 h-7 w-7 fill-current sm:h-8 sm:w-8" />
+              {showPlayButton && (
+                // In the corner rather than the middle, where thumbnail artwork
+                // usually puts its headline.
+                <span className="absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-full bg-saffron px-3 py-1.5 text-xs font-semibold text-ink shadow-lg transition group-hover:scale-105 sm:bottom-5 sm:right-5 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm">
+                  <Play className="h-3.5 w-3.5 fill-current sm:h-4 sm:w-4" aria-hidden="true" />
+                  Watch tutorial
                 </span>
-              </span>
+              )}
             </a>
           )}
         </div>
