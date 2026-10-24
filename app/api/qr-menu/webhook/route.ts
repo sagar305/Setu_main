@@ -1,9 +1,15 @@
 import { NextRequest } from "next/server";
-import { cashfreeConfig, getOrder, isOrderId, verifyWebhookSignature } from "@/lib/cashfree";
+import {
+  cashfreeConfig,
+  getOrder,
+  isOrderId,
+  qrMenuOrderFromCashfree,
+  verifyWebhookSignature,
+} from "@/lib/cashfree";
 import { emailLicenseKey, licenseForOrder, licenseSecret } from "@/lib/qrMenuOrders";
 import { paymentsDisabledResponse } from "@/lib/qrMenuPaymentsGate";
 
-// Cashfree's payment webhook. Its only job is emailing the license key, so the
+// Cashfree's payment webhook (PayPal's is ../paypal-webhook). Its only job is emailing the license key, so the
 // buyer has it even if they closed the tab before the return page loaded.
 //
 // The payload is used only for the order id: the order is then fetched from
@@ -45,7 +51,8 @@ export async function POST(request: NextRequest) {
   const orderId = event.data?.order?.order_id;
   if (typeof orderId !== "string" || !isOrderId(orderId)) return Response.json({ ok: true });
 
-  const order = await getOrder(config, orderId);
+  const found = await getOrder(config, orderId);
+  const order = found ? qrMenuOrderFromCashfree(found) : null;
   const license = order ? licenseForOrder(order, secret) : null;
   if (order && license) await emailLicenseKey(order, license);
 

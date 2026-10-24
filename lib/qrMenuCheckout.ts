@@ -5,7 +5,10 @@
 // price comes from content/en/pricing.json, the same numbers /pricing and the
 // product page show, so there is no second price list to drift.
 //
-// Client-safe: no secrets here. The Cashfree calls live in lib/cashfree.ts.
+// Rupee prices are charged through Cashfree, dollar prices through PayPal.
+//
+// Client-safe: no secrets here. The gateway calls live in lib/cashfree.ts and
+// lib/paypal.ts.
 // ---------------------------------------------------------------------------
 
 import pricing from "@/content/en/pricing.json";
@@ -50,12 +53,22 @@ export function regionFor(country?: string | null, timezone?: string | null): Pr
 
 /**
  * The price list to charge: the buyer's own region, except that outside India
- * falls back to rupees while USD charging is switched off (see
- * qrMenuUsdEnabled in lib/featureFlags.ts — passed in to keep this file
- * client-safe).
+ * falls back to rupees (through Cashfree) while PayPal is switched off or not
+ * configured (see usdCheckoutEnabled in lib/qrMenuPaymentsGate.ts — passed in
+ * to keep this file client-safe).
  */
 export function pricingRegion(buyer: PricingRegionId, usdEnabled: boolean): PricingRegionId {
   return buyer === "INTL" && !usdEnabled ? "IN" : buyer;
+}
+
+export type CheckoutProvider = "cashfree" | "paypal";
+
+/**
+ * Which gateway takes a payment follows from the price list alone: Cashfree
+ * for rupees, PayPal for dollars.
+ */
+export function checkoutProvider(region: PricingRegionId): CheckoutProvider {
+  return region === "INTL" ? "paypal" : "cashfree";
 }
 
 /** The country header set by whichever host is in front of the site, if any. */
@@ -69,7 +82,7 @@ export function countryFromHeaders(headers: Headers): string | null {
 }
 
 /**
- * Cashfree wants a bare phone number. An Indian number is its last ten digits
+ * Cashfree wants a bare phone number (PayPal asks for none). An Indian number is its last ten digits
  * (dropping +91 or a leading 0); elsewhere the full international number is
  * kept. Null when it cannot be a phone number at all.
  */

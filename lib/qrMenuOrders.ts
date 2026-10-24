@@ -1,14 +1,38 @@
 import "server-only";
 
 import { Resend } from "resend";
-import type { CashfreeOrder } from "@/lib/cashfree";
 import { issueLicenseKey } from "@/lib/qrMenuLicense";
-import { BILLING_DAYS, isBilling, type Billing } from "@/lib/qrMenuCheckout";
+import { BILLING_DAYS, isBilling, type Billing, type CheckoutProvider } from "@/lib/qrMenuCheckout";
 import { QR_MENU_APP_URL } from "@/lib/premiumLinks";
 import { buildInvoicePdf, formatMoney, invoiceNumber } from "@/lib/qrMenuInvoice";
 
-/** Marks an order as ours, so a stray Cashfree order on the same account never yields a key. */
+/** Marks an order as ours, so a stray order on the same gateway account never yields a key. */
 export const ORDER_PRODUCT_TAG = "setu-qr-menu";
+
+/**
+ * An order as either gateway reports it, reduced to what issuing and emailing
+ * a key needs. lib/cashfree.ts and lib/paypal.ts each map their own order onto
+ * this, so nothing below knows which gateway took the money.
+ */
+export type QrMenuOrder = {
+  provider: CheckoutProvider;
+  orderId: string;
+  status: "paid" | "pending" | "failed";
+  amount: number;
+  currency: string;
+  /** ISO timestamp; the invoice date. */
+  createdAt?: string;
+  email?: string | null;
+  phone?: string;
+  /** What we tagged the order with when creating it. */
+  product?: string;
+  billing?: string;
+};
+
+export const PROVIDER_NAMES: Record<CheckoutProvider, string> = {
+  cashfree: "Cashfree",
+  paypal: "PayPal",
+};
 
 /**
  * Shared with the QR Menu backend, which needs the same value to read the keys
@@ -21,14 +45,14 @@ export function licenseSecret(): string | null {
 export type PaidLicense = { key: string; days: number; billing: Billing };
 
 /** The license key a paid order earns, or null while it is unpaid or not one of ours. */
-export function licenseForOrder(order: CashfreeOrder, secret: string): PaidLicense | null {
-  if (order.order_status !== "PAID") return null;
-  const tags = order.order_tags ?? {};
-  if (tags.product !== ORDER_PRODUCT_TAG || !isBilling(tags.billing)) return null;
+export function licenseForOrder(order: QrMenuOrder, secret: string): PaidLicense | null {
+  if (order.status !== "paid") return null;
+  if (order.product !== ORDER_PRODUCT_TAG || !isBilling(order.billing)) return null;
   // Days follow from the billing period rather than a separate tag, so the two
-  // can never disagree.
-  const days = BILLING_DAYS[tags.billing];
-  return { key: issueLicenseKey(order.order_id, days, secret), days, billing: tags.billing };
+  // can never disagree. Cashfree ids (qrm_...) and PayPal ids (upper-case
+  // alphanumerics) never collide, so neither gateway can mint the other's key.
+  const days = BILLING_DAYS[order.billing];
+  return { key: issueLicenseKey(order.orderId, days, secret), days, billing: order.billing };
 }
 
 const BRAND_INDIGO = "#26306B";
@@ -108,21 +132,21 @@ export function licenseEmailHtml(input: {
  * idempotency key (honoured for 24 hours) collapses the repeats into one email.
  *
  * Failures are logged and swallowed: the return page shows the key as well,
- * and the webhook must still answer Cashfree with a 200.
+ * and the webhook must still answer the gateway with a 200.
  */
-export async function emailLicenseKey(order: CashfreeOrder, license: PaidLicense) {
-  const to = order.customer_details?.customer_email;
+export async function emailLicenseKey(order: QrMenuOrder, license: PaidLicense) {
+  const to = order.email;
   if (!to) return;
-  const orderId = order.order_id;
+  const { orderId } = order;
   if (!process.env.RESEND_API_KEY) {
     console.error("RESEND_API_KEY is not set; QR Menu license email not sent for", orderId);
     return;
   }
 
   const settingsUrl = `${QR_MENU_APP_URL.replace(/\/+$/, "")}/app/settings`;
-  const issuedAt = order.created_at ? new Date(order.created_at) : new Date();
+  const issuedAt = order.createdAt ? new Date(order.createdAt) : new Date();
   const invoiceNo = invoiceNumber(orderId, issuedAt);
-  const amount = formatMoney(order.order_amount, order.order_currency);
+  const amount = formatMoney(order.amount, order.currency);
   const period = license.billing === "yearly" ? "1 year" : "1 month";
 
   let invoice: Buffer | null = null;
@@ -132,10 +156,11 @@ export async function emailLicenseKey(order: CashfreeOrder, license: PaidLicense
       issuedAt,
       billing: license.billing,
       days: license.days,
-      amount: order.order_amount,
-      currency: order.order_currency,
+      amount: order.amount,
+      currency: order.currency,
       customerEmail: to,
-      customerPhone: order.customer_details?.customer_phone,
+      customerPhone: order.phone,
+      paidVia: PROVIDER_NAMES[order.provider],
     });
   } catch (error) {
     // The key matters more than the invoice; send without it.

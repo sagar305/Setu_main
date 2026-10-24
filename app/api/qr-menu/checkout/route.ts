@@ -6,9 +6,10 @@ import {
   customerIdFor,
   newOrderId,
 } from "@/lib/cashfree";
-import { qrMenuUsdEnabled } from "@/lib/featureFlags";
+import { PayPalError, approveUrl, createPayPalOrder, paypalConfig } from "@/lib/paypal";
 import {
   BILLING_DAYS,
+  checkoutProvider,
   countryFromHeaders,
   isBilling,
   isCheckoutEmail,
@@ -19,24 +20,21 @@ import {
   regionFor,
 } from "@/lib/qrMenuCheckout";
 import { licenseSecret, ORDER_PRODUCT_TAG } from "@/lib/qrMenuOrders";
-import { paymentsDisabledResponse } from "@/lib/qrMenuPaymentsGate";
+import { paymentsDisabledResponse, usdCheckoutEnabled } from "@/lib/qrMenuPaymentsGate";
 
-// Starts a Cashfree order for QR Menu time and hands the page the session id
-// it opens checkout with. The amount is set here from pricing.json — nothing
-// the browser sends can change what is charged.
+// Starts an order for QR Menu time: a Cashfree order for rupees, whose session
+// id the page opens checkout with, or a PayPal order for dollars, whose
+// approval page the browser is sent to. The amount is set here from
+// pricing.json — nothing the browser sends can change what is charged.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+const NOT_SET_UP = "Online payments are not set up yet. Please contact us to buy.";
 
 export async function POST(request: NextRequest) {
   const disabled = paymentsDisabledResponse();
   if (disabled) return disabled;
-  const config = cashfreeConfig();
-  if (!config || !licenseSecret()) {
-    return Response.json(
-      { error: "Online payments are not set up yet. Please contact us to buy." },
-      { status: 503 }
-    );
-  }
+  if (!licenseSecret()) return Response.json({ error: NOT_SET_UP }, { status: 503 });
 
   let body: Record<string, unknown>;
   try {
@@ -55,12 +53,47 @@ export async function POST(request: NextRequest) {
   }
 
   // Where the buyer is decides how their phone number is read; what they are
-  // charged in can differ while USD charging is off.
+  // charged in, and so which gateway, can differ while PayPal is off.
   const buyerRegion = regionFor(
     countryFromHeaders(request.headers),
     typeof timezone === "string" ? timezone : null
   );
-  const regionId = pricingRegion(buyerRegion, qrMenuUsdEnabled());
+  const regionId = pricingRegion(buyerRegion, usdCheckoutEnabled());
+  const region = qrMenuRegion(regionId);
+  const amount = qrMenuAmounts(regionId)[billing];
+  const origin = request.nextUrl.origin;
+  const note = `Setu QR Menu, ${BILLING_DAYS[billing]} days`;
+  const tags = { product: ORDER_PRODUCT_TAG, billing, region: regionId };
+
+  if (checkoutProvider(regionId) === "paypal") {
+    const config = paypalConfig();
+    if (!config) return Response.json({ error: NOT_SET_UP }, { status: 503 });
+    try {
+      const order = await createPayPalOrder(config, {
+        amount,
+        currency: region.currency,
+        email: cleanEmail,
+        // PayPal adds &token=<order id>&PayerID=... to both.
+        returnUrl: `${origin}/products/qr-menu/payment?provider=paypal`,
+        cancelUrl: `${origin}/products/qr-menu#buy`,
+        description: note,
+        tags,
+      });
+      const url = approveUrl(order);
+      if (!url) throw new Error("PayPal returned no approval link");
+      return Response.json({ provider: "paypal", orderId: order.id, approveUrl: url });
+    } catch (error) {
+      console.error("QR Menu PayPal checkout failed:", error);
+      const reason = error instanceof PayPalError ? ` (${error.paypalMessage})` : "";
+      return Response.json(
+        { error: `Could not start the payment${reason}. Please try again in a minute.` },
+        { status: 502 }
+      );
+    }
+  }
+
+  const config = cashfreeConfig();
+  if (!config) return Response.json({ error: NOT_SET_UP }, { status: 503 });
   const cleanPhone = normaliseCheckoutPhone(typeof phone === "string" ? phone : "", buyerRegion);
   if (!cleanPhone) {
     return Response.json(
@@ -74,24 +107,20 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const region = qrMenuRegion(regionId);
-  const amount = qrMenuAmounts(regionId)[billing];
-  const origin = request.nextUrl.origin;
-  const orderId = newOrderId();
-
   try {
     const order = await createOrder(config, {
-      orderId,
+      orderId: newOrderId(),
       amount,
       currency: region.currency,
       customer: { id: customerIdFor(cleanEmail), email: cleanEmail, phone: cleanPhone },
       returnUrl: `${origin}/products/qr-menu/payment?order_id={order_id}`,
       notifyUrl: origin.startsWith("https://") ? `${origin}/api/qr-menu/webhook` : undefined,
-      note: `Setu QR Menu, ${BILLING_DAYS[billing]} days`,
-      tags: { product: ORDER_PRODUCT_TAG, billing, region: regionId },
+      note,
+      tags,
     });
     if (!order.payment_session_id) throw new Error("Cashfree returned no payment_session_id");
     return Response.json({
+      provider: "cashfree",
       orderId: order.order_id,
       paymentSessionId: order.payment_session_id,
       mode: config.mode,

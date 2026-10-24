@@ -6,6 +6,7 @@ import { formatPrice, yearlySavingPercent, type PricingRegionId } from "@/lib/pr
 import {
   BILLING_DAYS,
   BILLINGS,
+  checkoutProvider,
   qrMenuAmounts,
   qrMenuRegion,
   regionFor,
@@ -47,8 +48,9 @@ function browserTimezone(): string | null {
 
 /**
  * Buys QR Menu time. The region is detected rather than chosen, the buyer only
- * picks monthly or yearly, and Cashfree checkout opens in this tab. Afterwards
- * Cashfree returns to /products/qr-menu/payment, which shows the license key.
+ * picks monthly or yearly, and checkout opens in this tab: Cashfree for rupee
+ * prices, PayPal for dollar prices. Either gateway then returns to
+ * /products/qr-menu/payment, which shows the license key.
  */
 export function QrMenuBuy() {
   // The price list, and separately where the buyer is: someone abroad pays in
@@ -96,6 +98,11 @@ export function QrMenuBuy() {
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.error || "Could not start the payment.");
 
+      if (data.provider === "paypal") {
+        // The checkout route only hands back an https link on paypal.com.
+        window.location.assign(data.approveUrl);
+        return;
+      }
       const Cashfree = await loadCashfree();
       await Cashfree({ mode: data.mode }).checkout({
         paymentSessionId: data.paymentSessionId,
@@ -117,6 +124,8 @@ export function QrMenuBuy() {
 
   const region = qrMenuRegion(regionId);
   const amounts = qrMenuAmounts(regionId);
+  // Cashfree needs a phone number; PayPal collects what it needs itself.
+  const provider = checkoutProvider(regionId);
   const saving = yearlySavingPercent(amounts);
 
   return (
@@ -171,7 +180,7 @@ export function QrMenuBuy() {
         })}
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className={`mt-6 grid gap-4 ${provider === "cashfree" ? "sm:grid-cols-2" : ""}`}>
         <label className="block text-sm">
           <span className="font-medium text-ink">Email</span>
           <input
@@ -184,20 +193,22 @@ export function QrMenuBuy() {
           />
           <span className="mt-1 block text-xs text-muted">We email the key here too.</span>
         </label>
-        <label className="block text-sm">
-          <span className="font-medium text-ink">Mobile number</span>
-          <input
-            type="tel"
-            required
-            autoComplete="tel"
-            inputMode="tel"
-            placeholder={buyerRegion === "IN" ? "98765 43210" : "+1 555 123 4567"}
-            value={phone}
-            onChange={(event) => setPhone(event.target.value)}
-            className="mt-1 w-full rounded-lg border border-muted-line/40 px-3 py-2.5 text-ink outline-none focus:border-indigo"
-          />
-          <span className="mt-1 block text-xs text-muted">Required by the payment gateway.</span>
-        </label>
+        {provider === "cashfree" && (
+          <label className="block text-sm">
+            <span className="font-medium text-ink">Mobile number</span>
+            <input
+              type="tel"
+              required
+              autoComplete="tel"
+              inputMode="tel"
+              placeholder={buyerRegion === "IN" ? "98765 43210" : "+1 555 123 4567"}
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              className="mt-1 w-full rounded-lg border border-muted-line/40 px-3 py-2.5 text-ink outline-none focus:border-indigo"
+            />
+            <span className="mt-1 block text-xs text-muted">Required by the payment gateway.</span>
+          </label>
+        )}
       </div>
 
       {error && (
@@ -219,7 +230,7 @@ export function QrMenuBuy() {
         Buy {billing} · {formatPrice(amounts[billing], region)}
       </button>
       <p className="mt-3 text-xs text-muted">
-        Secure payment by Cashfree. Keys are one-time payments that never renew. See the{" "}
+        Secure payment by {provider === "paypal" ? "PayPal" : "Cashfree"}. Keys are one-time payments that never renew. See the{" "}
         <a href="/refund-policy" className="underline hover:text-ink">
           refund &amp; cancellation policy
         </a>
