@@ -207,7 +207,7 @@ function RentalShell({
 
 function RentalBody() {
   const { status, errorMessage } = useRental();
-  const { fullscreen, toggleFullscreen } = useAppFullscreen(status);
+  const { fullscreen, toggleFullscreen } = useAppFullscreen();
 
   return (
     <div

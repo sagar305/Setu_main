@@ -310,7 +310,7 @@ function RepairShell({
 
 function RepairBody() {
   const { status, errorMessage } = useRepair();
-  const { fullscreen, toggleFullscreen } = useAppFullscreen(status);
+  const { fullscreen, toggleFullscreen } = useAppFullscreen();
 
   return (
     <div

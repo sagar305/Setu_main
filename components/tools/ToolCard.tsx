@@ -34,6 +34,7 @@ export function ToolCard({
     : itemPathFor("tools", item.slug, itemLocalesFor("tools", item.slug).includes(lang) ? lang : "en");
   return (
     <Link
+      prefetch={false}
       href={href}
       className="group flex flex-col rounded-2xl border border-muted-line/30 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo/30 hover:shadow-md"
     >

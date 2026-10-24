@@ -1,7 +1,6 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import type { TKey } from "@/lib/i18n/translate";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -216,15 +215,12 @@ function TuitionShell({
 function TuitionRouter({
   fullscreen,
   onToggleFullscreen,
-  onAutoFullscreen,
 }: {
   fullscreen: boolean;
   onToggleFullscreen: () => void;
-  onAutoFullscreen: () => void;
 }) {
   const { t } = useI18n();
   const { status, errorMessage } = useTuition();
-  useAutoFullscreen(status, onAutoFullscreen);
 
   if (status === "loading") {
     return (
@@ -251,14 +247,6 @@ function TuitionRouter({
 export function TuitionApp() {
   const [fullscreen, setFullscreen] = useState(false);
 
-  // Cache the page for offline use once the browser is idle.
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/tuition-sw.js").catch(() => {
-      // Offline caching is best-effort; the app still works without it.
-    });
-  }, []);
 
   const toggleFullscreen = () => {
     const next = !fullscreen;
@@ -300,11 +288,7 @@ export function TuitionApp() {
             : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
         }
       >
-        <TuitionRouter
-          fullscreen={fullscreen}
-          onToggleFullscreen={toggleFullscreen}
-          onAutoFullscreen={() => setFullscreen(true)}
-        />
+        <TuitionRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
       </div>
     </TuitionProvider>
   );

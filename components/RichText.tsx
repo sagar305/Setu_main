@@ -40,7 +40,12 @@ export function RichText({ text }: { text: string }) {
             );
           }
           return (
-            <Link key={index} className="font-semibold text-indigo hover:underline" href={href}>
+            <Link
+              prefetch={false}
+              key={index}
+              className="font-semibold text-indigo hover:underline"
+              href={href}
+            >
               {label}
             </Link>
           );

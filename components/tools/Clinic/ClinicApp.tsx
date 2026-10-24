@@ -15,7 +15,6 @@ import {
   WifiOff,
 } from "lucide-react";
 import { ClinicProvider, useClinic } from "@/lib/clinic/store";
-import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { firstRunDisclaimer } from "@/lib/clinic/types";
 import { previewStyleSheet } from "@/lib/clinic/print";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
@@ -244,15 +243,12 @@ function ClinicShell({
 function ClinicRouter({
   fullscreen,
   onToggleFullscreen,
-  onAutoFullscreen,
 }: {
   fullscreen: boolean;
   onToggleFullscreen: () => void;
-  onAutoFullscreen: () => void;
 }) {
   const { t } = useI18n();
   const { status, errorMessage } = useClinic();
-  useAutoFullscreen(status, onAutoFullscreen);
 
   if (status === "loading") {
     return (
@@ -319,11 +315,7 @@ export function ClinicApp() {
             : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
         }
       >
-        <ClinicRouter
-          fullscreen={fullscreen}
-          onToggleFullscreen={toggleFullscreen}
-          onAutoFullscreen={() => setFullscreen(true)}
-        />
+        <ClinicRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
       </div>
     </ClinicProvider>
   );

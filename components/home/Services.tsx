@@ -25,6 +25,7 @@ export function Services({ services }: { services: HomeContent["services"] }) {
                 <h3 className="text-2xl font-semibold text-ink">{card.name}</h3>
                 <p className="text-base leading-relaxed text-muted">{card.description}</p>
                 <Link
+                  prefetch={false}
                   href={card.cta.href}
                   className="mt-2 inline-block self-start rounded-full bg-indigo px-5 py-2.5 text-sm font-semibold text-cream-paper transition hover:bg-ink"
                 >

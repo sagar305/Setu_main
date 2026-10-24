@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Ban, Receipt, ReceiptText } from "lucide-react";
+import { Ban, FileUp, Receipt, ReceiptText } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { formatMoney, type Order } from "@/lib/pos/types";
 import { ReceiptModal } from "./ReceiptModal";
-import { ConfirmDialog, EmptyState, SearchInput, inputClass } from "./ui";
+import { ImportSalesModal } from "./ImportSalesModal";
+import { ConfirmDialog, EmptyState, SearchInput, inputClass, secondaryBtnClass } from "./ui";
 
 type StatusFilter = "all" | "completed" | "cancelled";
 
@@ -21,6 +22,7 @@ export function OrdersScreen({
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [viewTarget, setViewTarget] = useState<Order | null>(null);
   const [cancelTarget, setCancelTarget] = useState<Order | null>(null);
+  const [importOpen, setImportOpen] = useState(false);
 
   useEffect(() => {
     if (externalQuery) setSearch(externalQuery.value);
@@ -64,7 +66,13 @@ export function OrdersScreen({
           <option value="completed">Completed</option>
           <option value="cancelled">Cancelled</option>
         </select>
+        <button type="button" onClick={() => setImportOpen(true)} className={secondaryBtnClass}>
+          <FileUp className="h-4 w-4" />
+          Import past sales
+        </button>
       </div>
+
+      <ImportSalesModal open={importOpen} onClose={() => setImportOpen(false)} />
 
       {orders.length === 0 ? (
         <div className="mt-6">
