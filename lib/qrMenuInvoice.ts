@@ -30,7 +30,7 @@ const LINE: [number, number, number] = [225, 222, 214];
 
 export type InvoiceInput = {
   orderId: string;
-  /** When Cashfree created the order; the invoice date. */
+  /** When the gateway created the order; the invoice date. */
   issuedAt: Date;
   billing: Billing;
   days: number;
@@ -38,6 +38,8 @@ export type InvoiceInput = {
   currency: string;
   customerEmail: string;
   customerPhone?: string;
+  /** The gateway's name, as in "Paid via PayPal". */
+  paidVia: string;
 };
 
 /**
@@ -114,7 +116,7 @@ export function buildInvoicePdf(input: InvoiceInput): Buffer {
     ["Invoice no.", invoiceNumber(input.orderId, input.issuedAt)],
     ["Date", formatDate(input.issuedAt)],
     ["Order ID", input.orderId],
-    ["Payment", "Paid via Cashfree"],
+    ["Payment", `Paid via ${input.paidVia}`],
   ];
   details.forEach(([label, value], index) => {
     const rowY = y + 16 + index * 14;

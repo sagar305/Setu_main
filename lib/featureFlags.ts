@@ -101,12 +101,12 @@ export function repairSoftwareEnabled(): boolean {
 /**
  * Buying Setu QR Menu time: the Buy button and buy box on /products/qr-menu,
  * the /products/qr-menu/payment return page, and the /api/qr-menu/* checkout,
- * order, region and webhook routes.
+ * order, region and both webhook routes.
  *
  * Off unless "true". When off the page shows no way to pay, the return page
  * 404s and the API routes answer 404 — so nothing can be charged even if
- * Cashfree keys are present. Set QR_MENU_PAYMENTS_ENABLED=true (with the
- * Cashfree keys and QR_MENU_LICENSE_SECRET) and redeploy to start selling.
+ * Cashfree or PayPal keys are present. Set QR_MENU_PAYMENTS_ENABLED=true (with
+ * the Cashfree keys and QR_MENU_LICENSE_SECRET) and redeploy to start selling.
  * The pages read it at build time; the API routes at request time.
  */
 export function qrMenuPaymentsEnabled(): boolean {
@@ -114,12 +114,13 @@ export function qrMenuPaymentsEnabled(): boolean {
 }
 
 /**
- * Charging buyers outside India in US dollars.
+ * Charging buyers outside India in US dollars, through PayPal.
  *
- * Off unless "true", and then everyone pays the Indian (INR) price. Cashfree
- * only accepts a USD order once international payments are enabled on the
- * merchant account; until then a USD order is refused and checkout fails. Turn
- * this on after Cashfree confirms international payments are live.
+ * Off unless "true", and then everyone pays the Indian (INR) price through
+ * Cashfree. On, buyers outside India pay the INTL price through PayPal — but
+ * only once PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET are set too (see
+ * usdCheckoutEnabled in lib/qrMenuPaymentsGate.ts). Indian buyers always pay
+ * through Cashfree.
  *
  * Read at request time by the /api/qr-menu routes, so changing it needs no
  * rebuild — but redeploy anyway so every instance picks it up.

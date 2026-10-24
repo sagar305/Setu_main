@@ -8,12 +8,27 @@ vi.mock("server-only", () => ({}));
 import { issueLicenseKey, readLicenseKey, MAX_LICENSE_DAYS } from "@/lib/qrMenuLicense";
 import {
   BILLING_DAYS,
+  checkoutProvider,
   normaliseCheckoutPhone,
   pricingRegion,
   qrMenuAmounts,
   regionFor,
 } from "@/lib/qrMenuCheckout";
-import { isOrderId, newOrderId, verifyWebhookSignature, type CashfreeOrder } from "@/lib/cashfree";
+import {
+  isOrderId,
+  newOrderId,
+  qrMenuOrderFromCashfree,
+  verifyWebhookSignature,
+  type CashfreeOrder,
+} from "@/lib/cashfree";
+import {
+  approveUrl,
+  decodeCustomId,
+  encodeCustomId,
+  isPayPalOrderId,
+  qrMenuOrderFromPayPal,
+  type PayPalOrder,
+} from "@/lib/paypal";
 import { licenseEmailHtml, licenseForOrder, ORDER_PRODUCT_TAG } from "@/lib/qrMenuOrders";
 import { buildInvoicePdf, invoiceNumber, splitInclusiveGst } from "@/lib/qrMenuInvoice";
 
@@ -112,14 +127,15 @@ describe("checkout", () => {
 });
 
 describe("paid orders", () => {
-  const order = (overrides: Partial<CashfreeOrder> = {}): CashfreeOrder => ({
-    order_id: "qrm_paid",
-    order_amount: 499,
-    order_currency: "INR",
-    order_status: "PAID",
-    order_tags: { product: ORDER_PRODUCT_TAG, billing: "yearly", region: "IN" },
-    ...overrides,
-  });
+  const order = (overrides: Partial<CashfreeOrder> = {}) =>
+    qrMenuOrderFromCashfree({
+      order_id: "qrm_paid",
+      order_amount: 499,
+      order_currency: "INR",
+      order_status: "PAID",
+      order_tags: { product: ORDER_PRODUCT_TAG, billing: "yearly", region: "IN" },
+      ...overrides,
+    });
 
   it("turns a paid order into a key for its billing period", () => {
     const license = licenseForOrder(order(), SECRET);
@@ -133,6 +149,91 @@ describe("paid orders", () => {
     expect(licenseForOrder(order({ order_status: "ACTIVE" }), SECRET)).toBeNull();
     expect(licenseForOrder(order({ order_tags: { product: "other", billing: "yearly" } }), SECRET)).toBeNull();
     expect(licenseForOrder(order({ order_tags: null }), SECRET)).toBeNull();
+  });
+});
+
+describe("paypal", () => {
+  const paypalOrder = (overrides: Partial<PayPalOrder> = {}, capture = "COMPLETED"): PayPalOrder => ({
+    id: "5O190127TN364715T",
+    status: "COMPLETED",
+    create_time: "2026-10-24T10:00:00Z",
+    purchase_units: [
+      {
+        custom_id: encodeCustomId({
+          product: ORDER_PRODUCT_TAG,
+          billing: "yearly",
+          region: "INTL",
+          email: "owner@example.com",
+        }),
+        amount: { currency_code: "USD", value: "19.99" },
+        payments: { captures: [{ id: "CAP1", status: capture }] },
+      },
+    ],
+    payer: { email_address: "paypal-account@example.com" },
+    ...overrides,
+  });
+
+  it("charges dollars through PayPal and rupees through Cashfree", () => {
+    expect(checkoutProvider("INTL")).toBe("paypal");
+    expect(checkoutProvider("IN")).toBe("cashfree");
+  });
+
+  it("round-trips its tags through custom_id, dropping an email that does not fit", () => {
+    const tags = { product: ORDER_PRODUCT_TAG, billing: "monthly", region: "INTL" };
+    expect(decodeCustomId(encodeCustomId({ ...tags, email: "a|b@example.com" }))).toEqual({
+      ...tags,
+      email: "a|b@example.com",
+    });
+    const long = encodeCustomId({ ...tags, email: `${"x".repeat(120)}@example.com` });
+    expect(long.length).toBeLessThanOrEqual(127);
+    expect(decodeCustomId(long)).toEqual(tags);
+    expect(decodeCustomId(null)).toEqual({});
+  });
+
+  it("turns a captured order into a key, emailed to the address given at checkout", () => {
+    const order = qrMenuOrderFromPayPal(paypalOrder());
+    expect(order).toMatchObject({ status: "paid", amount: 19.99, currency: "USD" });
+    expect(order.email).toBe("owner@example.com");
+    const license = licenseForOrder(order, SECRET);
+    expect(license?.days).toBe(365);
+    expect(license?.key).toBe(issueLicenseKey("5O190127TN364715T", 365, SECRET));
+  });
+
+  it("falls back to the PayPal account's email", () => {
+    const order = paypalOrder();
+    order.purchase_units![0].custom_id = `${ORDER_PRODUCT_TAG}|yearly|INTL`;
+    expect(qrMenuOrderFromPayPal(order).email).toBe("paypal-account@example.com");
+  });
+
+  it("gives no key until the money is captured", () => {
+    for (const order of [
+      qrMenuOrderFromPayPal(paypalOrder({ status: "APPROVED" })),
+      qrMenuOrderFromPayPal(paypalOrder({ status: "PAYER_ACTION_REQUIRED" })),
+      qrMenuOrderFromPayPal(paypalOrder({}, "PENDING")),
+    ]) {
+      expect(order.status).toBe("pending");
+      expect(licenseForOrder(order, SECRET)).toBeNull();
+    }
+    expect(qrMenuOrderFromPayPal(paypalOrder({}, "DECLINED")).status).toBe("failed");
+    expect(qrMenuOrderFromPayPal(paypalOrder({ status: "VOIDED" })).status).toBe("failed");
+    expect(qrMenuOrderFromPayPal(paypalOrder({ status: "APPROVED" }), true).status).toBe("failed");
+  });
+
+  it("only sends buyers to PayPal's own site", () => {
+    const withLink = (href: string) =>
+      approveUrl(paypalOrder({ links: [{ rel: "payer-action", href }] }));
+    expect(withLink("https://www.sandbox.paypal.com/checkoutnow?token=X")).toBe(
+      "https://www.sandbox.paypal.com/checkoutnow?token=X"
+    );
+    expect(withLink("https://paypal.com.evil.example/checkoutnow")).toBeNull();
+    expect(withLink("http://www.paypal.com/checkoutnow")).toBeNull();
+    expect(approveUrl(paypalOrder({ links: [] }))).toBeNull();
+  });
+
+  it("accepts PayPal order ids and nothing else", () => {
+    expect(isPayPalOrderId("5O190127TN364715T")).toBe(true);
+    expect(isPayPalOrderId("qrm_abc")).toBe(false);
+    expect(isPayPalOrderId("../etc")).toBe(false);
   });
 });
 
@@ -163,6 +264,7 @@ describe("invoice", () => {
       currency: "INR",
       customerEmail: "owner@example.com",
       customerPhone: "9876543210",
+      paidVia: "Cashfree",
     });
     expect(pdf.subarray(0, 5).toString()).toBe("%PDF-");
     if (process.env.INVOICE_SAMPLE_PATH) {
@@ -189,7 +291,7 @@ describe("license email", () => {
 });
 
 describe("pricing region", () => {
-  it("charges buyers abroad in rupees until USD is switched on", () => {
+  it("charges buyers abroad in rupees until PayPal is switched on", () => {
     expect(pricingRegion("IN", false)).toBe("IN");
     expect(pricingRegion("INTL", false)).toBe("IN");
     expect(pricingRegion("INTL", true)).toBe("INTL");

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { createHmac, createHash, randomBytes, timingSafeEqual } from "node:crypto";
+import type { QrMenuOrder } from "@/lib/qrMenuOrders";
 
 // ---------------------------------------------------------------------------
 // Cashfree Payment Gateway, PG API version 2023-08-01.
@@ -61,6 +62,24 @@ export type CashfreeOrder = {
   payment_session_id?: string;
   customer_details?: { customer_email?: string | null; customer_phone?: string } | null;
 };
+
+/** The gateway-neutral view of a Cashfree order. */
+export function qrMenuOrderFromCashfree(order: CashfreeOrder): QrMenuOrder {
+  const tags = order.order_tags ?? {};
+  return {
+    provider: "cashfree",
+    orderId: order.order_id,
+    status:
+      order.order_status === "PAID" ? "paid" : order.order_status === "ACTIVE" ? "pending" : "failed",
+    amount: order.order_amount,
+    currency: order.order_currency,
+    createdAt: order.created_at,
+    email: order.customer_details?.customer_email,
+    phone: order.customer_details?.customer_phone,
+    product: tags.product,
+    billing: tags.billing,
+  };
+}
 
 /** A non-2xx answer from Cashfree, keeping its own explanation for the buyer and the logs. */
 export class CashfreeError extends Error {

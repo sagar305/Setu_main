@@ -14,14 +14,17 @@ type OrderState =
   | { status: "not_found" }
   | { status: "error"; message: string };
 
-/** Cashfree can take a few seconds to mark an order paid after redirecting. */
+/** The gateway can take a few seconds to mark an order paid after redirecting. */
 const POLL_MS = 3000;
 const MAX_POLLS = 20;
 
 const SETTINGS_URL = `${QR_MENU_APP_URL.replace(/\/+$/, "")}/app/settings`;
 
 export function QrMenuPaymentStatus() {
-  const orderId = useSearchParams().get("order_id") ?? "";
+  // Cashfree comes back with ?order_id=, PayPal with ?provider=paypal&token=.
+  const params = useSearchParams();
+  const paypal = params.get("provider") === "paypal";
+  const orderId = (paypal ? params.get("token") : params.get("order_id")) ?? "";
   const [state, setState] = useState<OrderState>({ status: "loading" });
   const [copied, setCopied] = useState(false);
 
@@ -37,9 +40,10 @@ export function QrMenuPaymentStatus() {
     async function check() {
       polls += 1;
       try {
-        const response = await fetch(`/api/qr-menu/orders/${encodeURIComponent(orderId)}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/qr-menu/orders/${encodeURIComponent(orderId)}${paypal ? "?provider=paypal" : ""}`,
+          { cache: "no-store" }
+        );
         const data = await response.json().catch(() => ({}));
         if (cancelled) return;
         if (response.status === 404) return setState({ status: "not_found" });
@@ -65,7 +69,7 @@ export function QrMenuPaymentStatus() {
       cancelled = true;
       if (timer) clearTimeout(timer);
     };
-  }, [orderId]);
+  }, [orderId, paypal]);
 
   async function copyKey(key: string) {
     try {
@@ -84,7 +88,7 @@ export function QrMenuPaymentStatus() {
         <h1 className="text-2xl font-bold text-ink">Confirming your payment…</h1>
         <p className="text-sm text-muted">
           {state.status === "pending"
-            ? "Cashfree has not confirmed it yet. If you paid, this page will update by itself, and your key is emailed to you as well."
+            ? `${paypal ? "PayPal" : "Cashfree"} has not confirmed it yet. If you paid, this page will update by itself, and your key is emailed to you as well.`
             : "This takes a few seconds."}
         </p>
       </div>
