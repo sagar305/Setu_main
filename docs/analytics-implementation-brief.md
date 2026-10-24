@@ -118,6 +118,10 @@ Pure, framework-free, unit-testable. No React imports.
     explicitly. **`useSearchParams()` must sit inside a `<Suspense>` boundary
     or `next build` fails with a CSR-bailout error** — this is the most common
     way this feature breaks the build.
+  - The collector forwards `page_view` to PostHog as `$pageview`, with a full
+    `$current_url`, `$host`, `$pathname` and `$referring_domain`. PostHog Web
+    Analytics reads nothing else, and its Installation Health page reports the
+    setup as broken until it sees them.
   - The delegated click listener described under **How click tracking works**
     below.
   - Scroll depth (25/50/75/100, once each per page), time-on-page on exit,
