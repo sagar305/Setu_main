@@ -21,6 +21,7 @@ import {
   type WorkspaceSnapshot,
 } from "./sheetSync";
 import { calculateCartTotals } from "./calc";
+import type { ImportedSale } from "./salesImport";
 import type { LedgerEntry } from "@/lib/toolkit/types";
 import {
   createBackup,
@@ -143,6 +144,8 @@ type PosContextValue = {
   updateSettings: (updates: Partial<Omit<PosSettings, "id">>) => Promise<void>;
 
   checkout: (input: CheckoutInput) => Promise<Order>;
+  /** Save past sales from a CSV/Excel upload. Returns how many bills were added. */
+  importSales: (sales: ImportedSale[], options: { reduceStock: boolean }) => Promise<number>;
   cancelOrder: (orderId: string) => Promise<void>;
 
   holdCart: (input: HoldCartInput) => Promise<HeldCart>;
@@ -684,6 +687,114 @@ export function PosProvider({ children }: { children: ReactNode }) {
     [customers, orders, payments, products, settings]
   );
 
+  const importSales = useCallback(
+    async (sales: ImportedSale[], options: { reduceStock: boolean }) => {
+      if (sales.length === 0) return 0;
+      const now = nowIso();
+      // Oldest first, so invoice numbers run in date order.
+      const sorted = [...sales].sort((a, b) => a.date.localeCompare(b.date));
+
+      const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
+      let counter = settings.nextInvoiceNumber;
+      const nextInvoiceNumber = () => {
+        let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        while (usedNumbers.has(invoiceNumber)) {
+          counter += 1;
+          invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        }
+        usedNumbers.add(invoiceNumber);
+        counter += 1;
+        return invoiceNumber;
+      };
+
+      const newOrders: Order[] = [];
+      const items: OrderItem[] = [];
+      const stock = new Map<string, Product>();
+      const logs: InventoryLog[] = [];
+
+      for (const sale of sorted) {
+        const totals = calculateCartTotals(sale.lines, "flat", sale.discountValue, settings.taxEnabled);
+        const invoiceNumber = nextInvoiceNumber();
+        const order: Order = {
+          id: generateId(),
+          invoiceNumber,
+          date: sale.date,
+          customerId: sale.customerId,
+          customerName: sale.customerName,
+          subtotal: totals.subtotal,
+          discountType: "flat",
+          discountValue: sale.discountValue,
+          discountAmount: totals.discountAmount,
+          taxAmount: totals.taxAmount,
+          includedTaxAmount: totals.includedTaxAmount,
+          total: totals.total,
+          paymentMethodId: sale.paymentMethodId,
+          paymentMethodName: sale.paymentMethodName,
+          status: "completed",
+          createdAt: now,
+        };
+        newOrders.push(order);
+
+        for (const line of sale.lines) {
+          items.push({
+            id: generateId(),
+            orderId: order.id,
+            productId: line.productId || null,
+            name: line.name,
+            price: line.price,
+            quantity: line.quantity,
+            unit: line.unit,
+            taxRate: line.taxRate,
+            taxInclusive: line.taxInclusive,
+            lineSubtotal: Math.round(line.price * line.quantity * 100) / 100,
+          });
+
+          if (!options.reduceStock || !line.productId) continue;
+          const product = stock.get(line.productId) ?? products.find((p) => p.id === line.productId);
+          if (!product || !product.trackStock) continue;
+          const stockAfter = product.stock - line.quantity;
+          stock.set(product.id, { ...product, stock: stockAfter, updatedAt: now });
+          logs.push({
+            id: generateId(),
+            productId: product.id,
+            productName: product.name,
+            type: "sale",
+            change: -line.quantity,
+            stockAfter,
+            note: `Imported sale ${invoiceNumber} (${new Date(sale.date).toLocaleDateString()})`,
+            createdAt: now,
+          });
+        }
+      }
+
+      const updatedProducts = Array.from(stock.values());
+      const updatedSettings: PosSettings = { ...settings, nextInvoiceNumber: counter };
+
+      await batchWithSync(
+        {
+          orders: newOrders,
+          order_items: items,
+          products: updatedProducts,
+          inventory: logs,
+          settings: [updatedSettings],
+        },
+        {},
+        ["orders", "products", "meta"]
+      );
+
+      setOrders((prev) => [...newOrders, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
+      setOrderItems((prev) => [...prev, ...items]);
+      if (updatedProducts.length) {
+        setProducts((prev) => prev.map((p) => stock.get(p.id) ?? p));
+      }
+      if (logs.length) setInventoryLogs((prev) => [...logs.reverse(), ...prev]);
+      setSettings(updatedSettings);
+
+      return newOrders.length;
+    },
+    [orders, products, settings]
+  );
+
   const cancelOrder = useCallback(
     async (orderId: string) => {
       const order = orders.find((o) => o.id === orderId);
@@ -955,6 +1066,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       deletePaymentMethod,
       updateSettings,
       checkout,
+      importSales,
       cancelOrder,
       holdCart,
       removeHeldCart,
@@ -1000,6 +1112,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       deletePaymentMethod,
       updateSettings,
       checkout,
+      importSales,
       cancelOrder,
       holdCart,
       removeHeldCart,
