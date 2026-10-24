@@ -8,12 +8,15 @@ import {
   CalendarRange,
   ClipboardList,
   Lock,
+  Maximize2,
+  Minimize2,
   Settings,
   Sun,
   Users,
   WifiOff,
 } from "lucide-react";
 import { RentalProvider, useRental } from "@/lib/rental/store";
+import { useAppFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
 import { findConflicts } from "@/lib/rental/availability";
@@ -38,7 +41,13 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Sun }[] = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-function RentalShell() {
+function RentalShell({
+  fullscreen,
+  onToggleFullscreen,
+}: {
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+}) {
   const { bookings, business, items, maintenanceLogs, settings, today } = useRental();
   const [screen, setScreen] = useState<ScreenId>("today");
   const [focusBooking, setFocusBooking] = useState<string | null>(null);
@@ -138,16 +147,31 @@ function RentalShell() {
             </span>
           )}
         </div>
-        {hasPin && (
+        <div className="flex items-center gap-2">
+          {hasPin && (
+            <button
+              type="button"
+              onClick={() => setLocked(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40"
+            >
+              <Lock className="h-4 w-4" aria-hidden="true" />
+              Lock
+            </button>
+          )}
           <button
             type="button"
-            onClick={() => setLocked(true)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-muted-line/40 bg-white px-3 py-1.5 text-sm font-semibold text-ink transition hover:border-indigo/40"
+            onClick={onToggleFullscreen}
+            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
+            title={fullscreen ? "Exit full screen" : "Full screen"}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink transition hover:border-indigo/40 hover:text-indigo"
           >
-            <Lock className="h-4 w-4" aria-hidden="true" />
-            Lock
+            {fullscreen ? (
+              <Minimize2 className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Maximize2 className="h-4 w-4" aria-hidden="true" />
+            )}
           </button>
-        )}
+        </div>
       </div>
 
       <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Hire book sections">
@@ -183,9 +207,16 @@ function RentalShell() {
 
 function RentalBody() {
   const { status, errorMessage } = useRental();
+  const { fullscreen, toggleFullscreen } = useAppFullscreen(status);
 
   return (
-    <div className="rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6">
+    <div
+      className={
+        fullscreen
+          ? "fixed inset-0 z-[60] overflow-y-auto bg-cream-paper p-4 sm:p-6"
+          : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6"
+      }
+    >
       {status === "loading" && (
         <p className="py-16 text-center text-sm text-muted">Opening your hire book…</p>
       )}
@@ -209,7 +240,9 @@ function RentalBody() {
 
       {status === "welcome" && <WelcomeScreen />}
       {status === "setup" && <SetupScreen />}
-      {status === "ready" && <RentalShell />}
+      {status === "ready" && (
+        <RentalShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+      )}
     </div>
   );
 }

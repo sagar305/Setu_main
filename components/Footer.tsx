@@ -37,6 +37,7 @@ export function Footer({ site }: { site: SiteContent }) {
               </span>
               {col.links.map((link) => (
                 <Link
+                  prefetch={false}
                   key={link.label}
                   href={link.href}
                   className="text-sm text-cream-paper/80 transition hover:text-saffron"
@@ -53,6 +54,7 @@ export function Footer({ site }: { site: SiteContent }) {
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             {site.footer.legal.map((link) => (
               <Link
+                prefetch={false}
                 key={link.href}
                 href={link.href}
                 className="transition hover:text-saffron">

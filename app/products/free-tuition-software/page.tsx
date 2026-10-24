@@ -30,6 +30,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { TuitionApp } from "@/components/tools/Tuition/TuitionApp";
+import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
@@ -399,6 +400,12 @@ export default function FreeTuitionSoftwarePage() {
           })}
         </FadeInStagger>
       </section>
+
+      <YouTubeTutorial
+        videoId="3zUyF1t_uEs"
+        title="How to set up the Tuition Class Manager"
+        description="Watch how to set up your class and start tracking students, attendance and fees."
+      />
 
       {/* The app itself */}
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6">
