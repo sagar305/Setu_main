@@ -517,7 +517,7 @@ const FAQ_ITEMS = [
   {
     question: "What else can I plug into the POS?",
     answer:
-      `Setu has ${POS_TOOLS.length} free tools that read the same on-device data — invoicing, quotations, customer ledger, expenses, purchase register, profit and loss, stock register and more. Switch one on in Settings → Connected tools and it already knows your business, customers, products and sales.`,
+      `Setu has ${POS_TOOLS.length} free tools that read the same on-device data — customer ledger, expenses, cash book, purchase register, profit and loss, stock register and more. Switch one on in Settings → Connected tools and it already knows your business, customers, products and sales.`,
   },
 ];
 
@@ -681,6 +681,9 @@ export default function BrowserBasedPosPage() {
         videoId="OvNbwN4fJWw"
         title="How to set up the Browser Based POS"
         description="Watch how to set up your shop and start billing in a few minutes."
+        thumbnail="/tutorials/browser-based-pos.webp"
+        thumbnailSmall="/tutorials/browser-based-pos-960.webp"
+        showPlayButton={false}
       />
 
       {/* The POS app */}

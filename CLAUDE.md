@@ -169,7 +169,13 @@ Large share of users are on mobile, particularly in India. Always test responsiv
 
 - **Feature branches**: `claude/<feature-name>-<suffix>` (e.g., `claude/invoice-generator-requirements-z8qqmd`)
 - **Commit messages**: Clear, descriptive (e.g., "Add invoice line item form component")
-- **Push to feature branch**, then create a PR for review/merge
+- **Push to feature branch**, then open a PR **into `stage`** — never into `main`
+- **Releases**: `main` only accepts a PR from `stage`. The `Branch policy` workflow fails any other PR into main
+- **Deploys** (`vercel.json`): only `main` (production) and `stage` deploy; feature branches do not
+
+Branch protection that makes this binding is set in GitHub → Settings → Branches (or Rules):
+- `main`: require a pull request, require the status check **Only stage can merge into main**, no bypass
+- `stage`: require a pull request
 
 ## Useful File Paths
 

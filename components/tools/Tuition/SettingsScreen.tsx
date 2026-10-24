@@ -680,14 +680,16 @@ function TemplatesSection({
     >
       <div className="space-y-4">
         {TEMPLATE_LABELS.map(({ key, label }) => (
-          <Field key={key} label={label}>
+          <Field key={key} label={t(label)}>
             <textarea
               value={templates[key]}
               onChange={(event) =>
                 setTemplates((prev) => ({ ...prev, [key]: event.target.value }))
               }
-              rows={3}
-              className={inputClass}
+              // Tall enough for the whole message plus a line for wrapping, so
+              // the opening line is never scrolled out of sight.
+              rows={Math.max(3, templates[key].split("\n").length + 1)}
+              className={`${inputClass} resize-y`}
             />
           </Field>
         ))}

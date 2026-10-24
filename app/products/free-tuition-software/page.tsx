@@ -405,6 +405,8 @@ export default function FreeTuitionSoftwarePage() {
         videoId="3zUyF1t_uEs"
         title="How to set up the Tuition Class Manager"
         description="Watch how to set up your class and start tracking students, attendance and fees."
+        thumbnail="/tutorials/tuition-class-manager.webp"
+        thumbnailSmall="/tutorials/tuition-class-manager-960.webp"
       />
 
       {/* The app itself */}
