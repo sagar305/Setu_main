@@ -262,14 +262,6 @@ function DineRouter({
 export function FreeDineApp() {
   const [fullscreen, setFullscreen] = useState(false);
 
-  // Cache the page so the restaurant keeps billing through an outage.
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/dine-sw.js").catch(() => {
-      // Offline caching is best-effort; the app still works without it.
-    });
-  }, []);
 
   const toggleFullscreen = () => {
     const next = !fullscreen;

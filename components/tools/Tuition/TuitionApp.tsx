@@ -251,14 +251,6 @@ function TuitionRouter({
 export function TuitionApp() {
   const [fullscreen, setFullscreen] = useState(false);
 
-  // Cache the page for offline use once the browser is idle.
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/tuition-sw.js").catch(() => {
-      // Offline caching is best-effort; the app still works without it.
-    });
-  }, []);
 
   const toggleFullscreen = () => {
     const next = !fullscreen;

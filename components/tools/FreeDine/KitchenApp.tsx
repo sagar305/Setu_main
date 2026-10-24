@@ -230,14 +230,6 @@ function KitchenBody() {
 }
 
 export function KitchenApp() {
-  // Same worker as the counter, so the pass keeps working through an outage.
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/dine-sw.js").catch(() => {
-      // Offline caching is best-effort.
-    });
-  }, []);
 
   return (
     <DineProvider>

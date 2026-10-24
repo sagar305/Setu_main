@@ -94,6 +94,26 @@ function requestContext(request: Request): Record<string, string> {
   };
 }
 
+/**
+ * Our event names, as PostHog's own products expect them.
+ *
+ * Web Analytics only reads `$pageview`; under any other name the page views
+ * are just a custom event and its dashboard reports the install as broken.
+ * The client keeps its own neutral name so the vendor stays swappable here.
+ */
+const POSTHOG_EVENT_NAMES: Record<string, string> = {
+  page_view: "$pageview",
+};
+
+function referringDomain(referrer: string): string {
+  if (!referrer) return "$direct";
+  try {
+    return new URL(referrer).hostname;
+  } catch {
+    return "$direct";
+  }
+}
+
 export async function POST(request: Request) {
   const declared = Number(request.headers.get("content-length") ?? "0");
   if (declared > MAX_BODY_BYTES) {
@@ -126,7 +146,7 @@ export async function POST(request: Request) {
   // project's region when it is created and it cannot be moved afterwards, so
   // a wrong host here is not a slow degradation — every batch is rejected
   // outright by a region that has never heard of the key.
-  const host = process.env.POSTHOG_HOST ?? "https://us.i.posthog.com";
+  const posthogHost = process.env.POSTHOG_HOST ?? "https://us.i.posthog.com";
 
   if (!apiKey) {
     // Not configured. Acknowledging nothing keeps the events on the device;
@@ -138,9 +158,12 @@ export async function POST(request: Request) {
 
   const context = requestContext(request);
   const receivedTs = Date.now();
+  // The page's own origin, so $current_url is a full URL as PostHog expects.
+  const origin = new URL(request.url).origin;
+  const host = new URL(request.url).host;
 
   const posthogBatch = events.map((event) => ({
-    event: event.name,
+    event: POSTHOG_EVENT_NAMES[event.name] ?? event.name,
     // `uuid` is what lets a replayed batch collapse rather than double-count.
     // The client re-sends anything it could not get an acknowledgement for —
     // notably the beacon it fires as a tab closes — so duplicates are expected
@@ -152,8 +175,17 @@ export async function POST(request: Request) {
       ...context,
       distinct_id: event.visitorId,
       $session_id: event.sessionId,
-      $current_url: event.path,
-      $referrer: event.referrer,
+      $current_url: `${origin}${event.path}`,
+      $host: host,
+      $pathname: event.path,
+      $referrer: event.referrer || "$direct",
+      $referring_domain: referringDomain(event.referrer),
+      $device_type: context.device === "mobile" ? "Mobile" : "Desktop",
+      // These requests come from our server, so PostHog's own IP lookup
+      // would place every visitor wherever the function runs. Use the
+      // country Vercel read from the visitor's request instead.
+      $geoip_disable: true,
+      ...(context.country ? { $geoip_country_code: context.country } : {}),
       seq: event.seq,
       visitor_type: event.visitorType,
       visit_number: event.visitNumber,
@@ -166,7 +198,7 @@ export async function POST(request: Request) {
   }));
 
   try {
-    const response = await fetch(`${host}/batch/`, {
+    const response = await fetch(`${posthogHost}/batch/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ api_key: apiKey, batch: posthogBatch }),
