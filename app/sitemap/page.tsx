@@ -157,6 +157,7 @@ export default function SitemapPage() {
               {section.links.map((link) => (
                 <li key={link.href}>
                   <Link
+                    prefetch={false}
                     href={link.href}
                     className="text-sm text-ink transition hover:text-indigo hover:underline"
                   >

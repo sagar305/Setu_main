@@ -57,6 +57,7 @@ export function ShowcaseGrid({
                 <p className="text-sm font-medium text-indigo">{card.tagline}</p>
                 <p className="text-sm leading-relaxed text-muted">{card.description}</p>
                 <Link
+                  prefetch={false}
                   href={card.cta.href}
                   className="mt-auto inline-flex items-center gap-1.5 pt-1 text-sm font-semibold text-indigo hover:underline"
                 >

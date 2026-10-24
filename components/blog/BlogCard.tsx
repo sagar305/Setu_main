@@ -45,6 +45,7 @@ export function BlogCard({
         never cropped — which matters because these thumbnails carry text.
       */}
       <Link
+        prefetch={false}
         href={url}
         className={`relative block aspect-[3/2] w-full overflow-hidden ${
           horizontal ? "sm:h-full sm:w-auto sm:flex-shrink-0" : ""
@@ -58,7 +59,7 @@ export function BlogCard({
           <span aria-hidden="true">·</span>
           <time dateTime={post.date}>{formatDate(post.date)}</time>
         </div>
-        <Link href={url}>
+        <Link prefetch={false} href={url}>
           {/* Clamped in a row so a long headline cannot push the fixed height. */}
           <h2
             className={`mt-3 text-lg font-bold text-ink transition hover:text-indigo ${
@@ -75,7 +76,11 @@ export function BlogCard({
         >
           {post.excerpt}
         </p>
-        <Link href={url} className="mt-4 inline-block text-sm font-semibold text-indigo hover:underline">
+        <Link
+          prefetch={false}
+          href={url}
+          className="mt-4 inline-block text-sm font-semibold text-indigo hover:underline"
+        >
           Read more →
         </Link>
       </div>

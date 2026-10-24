@@ -76,6 +76,7 @@ export function SiteSearch({ items }: { items: SearchItem[] }) {
         {results.map((item) => (
           <li key={item.href}>
             <Link
+              prefetch={false}
               href={item.href}
               className="block rounded-xl border border-muted-line/30 bg-white p-5 shadow-sm transition hover:border-indigo/40 hover:shadow-md"
             >

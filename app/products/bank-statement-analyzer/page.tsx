@@ -829,6 +829,7 @@ export default function BankStatementAnalyzerPage() {
                     { href: "/tools/expense-tracker", label: "Expense Tracker" },
                   ].map((link) => (
                     <Link
+                      prefetch={false}
                       key={link.href}
                       href={link.href}
                       className="inline-block rounded-lg border border-indigo/30 px-4 py-2 text-sm font-semibold text-indigo transition hover:bg-indigo/5"

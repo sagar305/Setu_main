@@ -40,6 +40,10 @@ export function generateStaticParams() {
   }));
 }
 
+// Every real slug is prerendered above; anything else 404s without rendering,
+// so bots probing made-up URLs don't cost an ISR write each.
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {

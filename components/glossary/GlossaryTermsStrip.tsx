@@ -28,6 +28,7 @@ export function GlossaryTermsStrip({
       <div className="flex flex-wrap gap-3">
         {terms.map((term) => (
           <Link
+            prefetch={false}
             key={term.slug}
             href={getGlossaryTermUrl(term.slug)}
             title={term.short}

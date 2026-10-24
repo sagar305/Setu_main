@@ -807,6 +807,7 @@ export default function FreeRestaurantPosPage() {
             {RELATED_TOOLS.map((tool) => (
               <FadeInStaggerItem key={tool.href}>
                 <Link
+                  prefetch={false}
                   href={tool.href}
                   className="inline-flex items-center gap-2 rounded-full border border-muted-line/30 bg-white px-4 py-2 text-sm font-semibold text-ink shadow-sm transition hover:border-indigo/50 hover:text-indigo"
                 >
