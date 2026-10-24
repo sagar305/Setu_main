@@ -380,14 +380,6 @@ function PosRouter({
 export function FreePosApp() {
   const [fullscreen, setFullscreen] = useState(false);
 
-  // Cache the page for offline use once the browser is idle.
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("/pos-sw.js").catch(() => {
-      // Offline caching is best-effort; the POS still works without it.
-    });
-  }, []);
 
   const toggleFullscreen = () => {
     const next = !fullscreen;

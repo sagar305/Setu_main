@@ -258,6 +258,23 @@ Instrumenting this must not alter when the prompt appears, how often, or the
 finality of an answer. `tests/review.test.ts` covers that logic and must keep
 passing untouched.
 
+## Home-screen installs (PWA)
+
+Every free product app installs on its own (`lib/pwa/apps.ts`). The install
+bar, `components/pwa/InstallAppBar.tsx`, is a route wrapper, so it may track;
+the product code underneath still may not. Every event carries `app_id`,
+`app_name` and `platform` (`ios` \| `android` \| `mac-safari` \|
+`firefox-desktop` \| `desktop`), never anything the user typed.
+
+| Event | Fired from | Carries |
+|---|---|---|
+| `pwa_install_clicked` | the Install / Add to Home Screen button | `prompt_available` (false = the how-to dialog opened instead) |
+| `pwa_install_prompt_result` | after the browser's own install dialog closes | `outcome` (`accepted` \| `dismissed`) |
+| `pwa_installed` | Chromium's `appinstalled` (our button or the browser menu); on iOS, the first launch from the home-screen icon | `method` (`browser` \| `ios_first_open`) |
+
+Installs per app in PostHog = unique users (`distinct_id`, the visitor id) of
+`pwa_installed`, broken down by `app_name`.
+
 ## Non-negotiable constraints
 
 - **No analytics import inside offline product code.** Not in
