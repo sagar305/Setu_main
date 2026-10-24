@@ -89,6 +89,11 @@ export type CheckoutInput = {
    * cannot take credit. When set, paymentMethodId is ignored.
    */
   creditSale?: boolean;
+  /**
+   * Record an old sale: ISO datetime the sale actually happened. Must not be
+   * in the future. Omitted = the sale happens now.
+   */
+  saleDate?: string;
 };
 
 export type HoldCartInput = {
@@ -566,10 +571,19 @@ export function PosProvider({ children }: { children: ReactNode }) {
       }
 
       const now = nowIso();
+      let saleDate = now;
+      if (input.saleDate) {
+        const parsed = new Date(input.saleDate);
+        if (Number.isNaN(parsed.getTime())) throw new Error("The sale date is not valid.");
+        if (parsed.getTime() > Date.now()) throw new Error("The sale date cannot be in the future.");
+        saleDate = parsed.toISOString();
+      }
+      const isPastSale = saleDate !== now;
+
       const order: Order = {
         id: generateId(),
         invoiceNumber,
-        date: now,
+        date: saleDate,
         customerId: customer?.id ?? null,
         customerName: customer?.name ?? "",
         subtotal: totals.subtotal,
@@ -597,7 +611,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
               type: "credit",
               amount: totals.total,
               note: `POS sale ${invoiceNumber}`,
-              date: now.slice(0, 10),
+              date: saleDate.slice(0, 10),
               createdByTool: "browser-pos",
               createdAt: now,
             },
@@ -631,7 +645,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
             type: "sale",
             change: -line.quantity,
             stockAfter,
-            note: `Sale ${invoiceNumber}`,
+            note: isPastSale
+              ? `Sale ${invoiceNumber} (past sale, ${new Date(saleDate).toLocaleDateString()})`
+              : `Sale ${invoiceNumber}`,
             createdAt: now,
           });
         }
@@ -652,7 +668,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
         ["orders", "products", "meta"]
       );
 
-      setOrders((prev) => [order, ...prev]);
+      // Keep newest-first by sale date, so a past sale lands in its place.
+      setOrders((prev) => [order, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
       setOrderItems((prev) => [...prev, ...items]);
       if (updatedProducts.length) {
         setProducts((prev) =>

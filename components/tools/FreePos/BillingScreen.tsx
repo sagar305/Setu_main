@@ -32,6 +32,14 @@ import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 /** Sentinel payment id for udhaar sales (never stored as a payment method). */
 const CREDIT_PAYMENT_ID = "__customer_credit__";
 
+/** Local "YYYY-MM-DDTHH:mm" for a datetime-local input. */
+function toLocalDateTimeInput(date: Date): string {
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(
+    date.getHours()
+  )}:${pad(date.getMinutes())}`;
+}
+
 export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const {
     business,
@@ -65,6 +73,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [heldListOpen, setHeldListOpen] = useState(false);
   const [heldBusy, setHeldBusy] = useState(false);
   const [customerFormOpen, setCustomerFormOpen] = useState(false);
+  const [pastSale, setPastSale] = useState(false);
+  const [pastSaleDate, setPastSaleDate] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
 
   const effectiveTaxRate = (product: Product) =>
@@ -151,6 +161,16 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       setError("Add a payment method in Settings first.");
       return;
     }
+    let saleDate: string | undefined;
+    if (pastSale) {
+      // datetime-local values carry no zone, so this parses as local time.
+      const parsed = new Date(pastSaleDate);
+      if (!pastSaleDate || Number.isNaN(parsed.getTime())) {
+        setError("Pick the date and time of the past sale.");
+        return;
+      }
+      saleDate = parsed.toISOString();
+    }
     setCharging(true);
     try {
       const order = await checkout({
@@ -160,8 +180,10 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         customerId: customerId || null,
         paymentMethodId: methodId,
         creditSale: isCreditSale,
+        saleDate,
       });
       setCompletedOrder(order);
+      setPastSale(false);
       setLines([]);
       setDiscountValue(0);
       setCustomerId("");
@@ -529,6 +551,39 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               </div>
             </dl>
 
+            {/* Past sale (backdated bill) */}
+            <div className="mt-4">
+              <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold text-ink">
+                <input
+                  type="checkbox"
+                  checked={pastSale}
+                  onChange={(e) => {
+                    setPastSale(e.target.checked);
+                    if (e.target.checked && !pastSaleDate) {
+                      setPastSaleDate(toLocalDateTimeInput(new Date()));
+                    }
+                  }}
+                  className="h-4 w-4 accent-indigo"
+                />
+                Record a past sale
+              </label>
+              {pastSale ? (
+                <div className="mt-2">
+                  <input
+                    type="datetime-local"
+                    value={pastSaleDate}
+                    max={toLocalDateTimeInput(new Date())}
+                    onChange={(e) => setPastSaleDate(e.target.value)}
+                    aria-label="Date and time of the past sale"
+                    className={inputClass}
+                  />
+                  <p className="mt-1 text-xs text-muted">
+                    The bill is saved with this date, so it shows up in that day&apos;s reports.
+                  </p>
+                </div>
+              ) : null}
+            </div>
+
             {/* Payment method */}
             <div className="mt-4">
               <span className="text-xs font-semibold uppercase tracking-wide text-muted">
@@ -594,7 +649,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                 disabled={charging || lines.length === 0}
                 className={`${primaryBtnClass} flex-1 py-3 text-base`}
               >
-                {charging ? "Saving…" : `Charge ${formatMoney(totals.total, currency)}`}
+                {charging
+                  ? "Saving…"
+                  : `${pastSale ? "Record" : "Charge"} ${formatMoney(totals.total, currency)}`}
               </button>
             </div>
           </>
