@@ -624,7 +624,7 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
                   )
                 )
               }
-              className={`${inputClass} flex-1`}
+              className={`${inputClass} min-w-0 flex-1`}
               aria-label={t("mdrInstrument")}
             >
               {selectable(tender.methodId).map((method) => (
@@ -633,19 +633,23 @@ function PaymentModal({ bill, onClose }: { bill: DineBill; onClose: () => void }
                 </option>
               ))}
             </select>
-            <input
-              inputMode="decimal"
-              value={tender.amount}
-              onChange={(event) =>
-                setTenders((previous) =>
-                  previous.map((row, rowIndex) =>
-                    rowIndex === index ? { ...row, amount: event.target.value } : row
+            {/* Width on a wrapper: inputClass is w-full, which would beat a
+                width on the input itself and squeeze the method picker. */}
+            <div className="w-28 shrink-0 sm:w-32">
+              <input
+                inputMode="decimal"
+                value={tender.amount}
+                onChange={(event) =>
+                  setTenders((previous) =>
+                    previous.map((row, rowIndex) =>
+                      rowIndex === index ? { ...row, amount: event.target.value } : row
+                    )
                   )
-                )
-              }
-              aria-label={t("amount")}
-              className={`${inputClass} w-28`}
-            />
+                }
+                aria-label={t("amount")}
+                className={`${inputClass} text-right`}
+              />
+            </div>
             {tenders.length > 1 && (
               <button
                 type="button"

@@ -28,22 +28,6 @@ export type PosToolLink = {
 export const POS_TOOLS: PosToolLink[] = [
   // ---- Sales & billing ----------------------------------------------------
   {
-    slug: "invoice-generator",
-    name: "Invoice Generator",
-    route: "/tools/invoice-generator",
-    category: "Sales & billing",
-    description: "Raise a proper GST invoice for a customer.",
-    usesPosData: "Your business details, saved customers and products.",
-  },
-  {
-    slug: "quotation-generator",
-    name: "Quotation Generator",
-    route: "/tools/quotation-generator",
-    category: "Sales & billing",
-    description: "Send a polished quote before the sale.",
-    usesPosData: "Your business details, saved customers and products.",
-  },
-  {
     slug: "receipt-designer",
     name: "Receipt Generator",
     route: "/tools/receipt-designer",
@@ -51,22 +35,6 @@ export const POS_TOOLS: PosToolLink[] = [
     description: "Design your receipt and print one for any sale.",
     usesPosData: "Your business details and logo; saved designs print from the POS.",
     unlocks: "Saved receipt designs become printing options at checkout.",
-  },
-  {
-    slug: "sales-order-generator",
-    name: "Sales Order Generator",
-    route: "/tools/sales-order-generator",
-    category: "Sales & billing",
-    description: "Confirm a customer order before you dispatch it.",
-    usesPosData: "Your business details, saved customers and products.",
-  },
-  {
-    slug: "credit-note-generator",
-    name: "Credit Note Generator",
-    route: "/tools/credit-note-generator",
-    category: "Sales & billing",
-    description: "Handle returns and billing adjustments.",
-    usesPosData: "Your business details, saved customers and products.",
   },
 
   // ---- Money in -----------------------------------------------------------
@@ -80,28 +48,12 @@ export const POS_TOOLS: PosToolLink[] = [
     unlocks: "Adds the Credit (Udhaar) payment option at checkout for saved customers.",
   },
   {
-    slug: "customer-statement",
-    name: "Customer Statement",
-    route: "/tools/customer-statement",
-    category: "Money in",
-    description: "Send a statement of account to a customer.",
-    usesPosData: "Saved customers and their ledger transactions.",
-  },
-  {
     slug: "invoice-aging-report",
     name: "Invoice Aging Report",
     route: "/tools/invoice-aging-report",
     category: "Money in",
     description: "See who owes you, how much, and how overdue.",
     usesPosData: "Outstanding balances from your customer ledger.",
-  },
-  {
-    slug: "upi-qr-generator",
-    name: "UPI QR Generator",
-    route: "/tools/upi-qr-generator",
-    category: "Money in",
-    description: "Print a UPI QR so customers can pay by phone.",
-    usesPosData: "Your business UPI ID and name.",
   },
 
   // ---- Money out ----------------------------------------------------------
@@ -153,14 +105,6 @@ export const POS_TOOLS: PosToolLink[] = [
     description: "See which supplier bills to pay first.",
     usesPosData: "Unpaid bills from your purchase register.",
   },
-  {
-    slug: "debit-note-generator",
-    name: "Debit Note Generator",
-    route: "/tools/debit-note-generator",
-    category: "Money out",
-    description: "Raise a debit note for returns or short supply.",
-    usesPosData: "Your business details, saved suppliers and products.",
-  },
 
   // ---- Reports & analysis -------------------------------------------------
   {
@@ -180,44 +124,12 @@ export const POS_TOOLS: PosToolLink[] = [
     usesPosData: "Revenue from POS sales, costs from purchases and expenses.",
   },
   {
-    slug: "balance-sheet",
-    name: "Balance Sheet",
-    route: "/tools/balance-sheet",
-    category: "Reports & analysis",
-    description: "What you own, owe and what's left over.",
-    usesPosData: "Cash from your cash book, receivables from the customer ledger.",
-  },
-  {
-    slug: "cash-flow-statement",
-    name: "Cash Flow Statement",
-    route: "/tools/cash-flow-statement",
-    category: "Reports & analysis",
-    description: "Where the cash actually came from and went.",
-    usesPosData: "Your recorded cash book entries.",
-  },
-  {
     slug: "stock-register",
     name: "Stock Register",
     route: "/tools/stock-register",
     category: "Reports & analysis",
     description: "Track stock levels and movements.",
     usesPosData: "The same products and stock the POS sells from.",
-  },
-  {
-    slug: "abc-analysis",
-    name: "ABC Analysis",
-    route: "/tools/abc-analysis",
-    category: "Reports & analysis",
-    description: "Find the few items that drive most of your stock value.",
-    usesPosData: "Your product list and costs.",
-  },
-  {
-    slug: "budget-vs-actual",
-    name: "Budget vs Actual",
-    route: "/tools/budget-vs-actual",
-    category: "Reports & analysis",
-    description: "Compare what you planned to spend against reality.",
-    usesPosData: "Actual spend pulled from your expense categories.",
   },
   {
     slug: "barcode-generator",

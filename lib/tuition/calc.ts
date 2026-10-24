@@ -76,6 +76,18 @@ export function tuitionDueId(studentId: string, period: string): string {
   return `${studentId}:${period}`;
 }
 
+/**
+ * When a month's tuition falls due. Normally the configured day of the month,
+ * but never before the day the student joined (or rejoined): someone who
+ * starts on the 24th cannot already be overdue for the 5th.
+ */
+export function tuitionDueDate(student: Student, period: string, feeDueDay: number): string {
+  const day = String(Math.min(Math.max(feeDueDay, 1), 28)).padStart(2, "0");
+  const nominal = `${period}-${day}`;
+  const anchor = student.rejoinedOn || student.joinDate;
+  return anchor && monthKey(anchor) === period && anchor > nominal ? anchor : nominal;
+}
+
 /** The monthly tuition due for one student, snapshotting today's fee. */
 export function buildTuitionDue(
   student: Student,
@@ -86,7 +98,6 @@ export function buildTuitionDue(
   lang: LanguageCode
 ): FeeDue {
   const fee = studentMonthlyFee(student, batches);
-  const day = String(Math.min(Math.max(feeDueDay, 1), 28)).padStart(2, "0");
   return {
     id: tuitionDueId(student.id, period),
     studentId: student.id,
@@ -96,7 +107,7 @@ export function buildTuitionDue(
     amount: fee.total,
     breakdown: fee.breakdown,
     concession: fee.concession,
-    dueDate: `${period}-${day}`,
+    dueDate: tuitionDueDate(student, period, feeDueDay),
     waived: false,
     createdAt,
   };

@@ -7,6 +7,8 @@ import {
   ClipboardList,
   FileText,
   Lock,
+  Maximize2,
+  Minimize2,
   PackageX,
   Settings,
   ShieldCheck,
@@ -14,6 +16,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { RepairProvider, useRepair } from "@/lib/repair/store";
+import { useAppFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { LockScreen } from "@/components/tools/FreePos/LockScreen";
 import { primaryBtnClass } from "@/components/tools/FreePos/ui";
 import { agingLevel, isUncollected } from "@/lib/repair/calc";
@@ -42,7 +45,13 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof ClipboardList }[] =
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-function RepairShell() {
+function RepairShell({
+  fullscreen,
+  onToggleFullscreen,
+}: {
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+}) {
   const {
     business,
     jobs,
@@ -199,6 +208,19 @@ function RepairShell() {
               Lock
             </button>
           )}
+          <button
+            type="button"
+            onClick={onToggleFullscreen}
+            aria-label={fullscreen ? "Exit full screen" : "Enter full screen"}
+            title={fullscreen ? "Exit full screen" : "Full screen"}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-muted-line/40 bg-white text-ink transition hover:border-indigo/40 hover:text-indigo"
+          >
+            {fullscreen ? (
+              <Minimize2 className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Maximize2 className="h-4 w-4" aria-hidden="true" />
+            )}
+          </button>
         </div>
       </div>
 
@@ -288,9 +310,16 @@ function RepairShell() {
 
 function RepairBody() {
   const { status, errorMessage } = useRepair();
+  const { fullscreen, toggleFullscreen } = useAppFullscreen(status);
 
   return (
-    <div className="rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6">
+    <div
+      className={
+        fullscreen
+          ? "fixed inset-0 z-[60] overflow-y-auto bg-cream-paper p-4 sm:p-6"
+          : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 sm:p-6"
+      }
+    >
       {status === "loading" && (
         <p className="py-16 text-center text-sm text-muted">Opening your job card…</p>
       )}
@@ -314,7 +343,9 @@ function RepairBody() {
 
       {status === "welcome" && <WelcomeScreen />}
       {status === "setup" && <SetupScreen />}
-      {status === "ready" && <RepairShell />}
+      {status === "ready" && (
+        <RepairShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+      )}
     </div>
   );
 }

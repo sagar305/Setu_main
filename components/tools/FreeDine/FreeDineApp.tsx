@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { fill, type TKey } from "@/lib/i18n/translate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -225,12 +226,15 @@ function DineShell({
 function DineRouter({
   fullscreen,
   onToggleFullscreen,
+  onAutoFullscreen,
 }: {
   fullscreen: boolean;
   onToggleFullscreen: () => void;
+  onAutoFullscreen: () => void;
 }) {
   const { t } = useI18n();
   const { status, errorMessage } = useDine();
+  useAutoFullscreen(status, onAutoFullscreen);
 
   if (status === "loading") {
     return (
@@ -310,7 +314,11 @@ export function FreeDineApp() {
             : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
         }
       >
-        <DineRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+        <DineRouter
+          fullscreen={fullscreen}
+          onToggleFullscreen={toggleFullscreen}
+          onAutoFullscreen={() => setFullscreen(true)}
+        />
       </div>
     </DineProvider>
   );
