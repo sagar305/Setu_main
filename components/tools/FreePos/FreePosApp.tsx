@@ -16,7 +16,6 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PosProvider, usePos } from "@/lib/pos/store";
-import { useAutoFullscreen } from "@/lib/hooks/useAppFullscreen";
 import { LockScreen } from "./LockScreen";
 import type { NavigateFn, ScreenId } from "./nav";
 import { WelcomeScreen } from "./WelcomeScreen";
@@ -345,14 +344,11 @@ function PosShell({
 function PosRouter({
   fullscreen,
   onToggleFullscreen,
-  onAutoFullscreen,
 }: {
   fullscreen: boolean;
   onToggleFullscreen: () => void;
-  onAutoFullscreen: () => void;
 }) {
   const { status, errorMessage } = usePos();
-  useAutoFullscreen(status, onAutoFullscreen);
 
   if (status === "loading") {
     return (
@@ -425,11 +421,7 @@ export function FreePosApp() {
             : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
         }
       >
-        <PosRouter
-          fullscreen={fullscreen}
-          onToggleFullscreen={toggleFullscreen}
-          onAutoFullscreen={() => setFullscreen(true)}
-        />
+        <PosRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
       </div>
     </PosProvider>
   );
