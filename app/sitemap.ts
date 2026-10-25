@@ -100,6 +100,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/general-ledger",
     "/tools/bank-reconciliation",
     "/products/bank-statement-analyzer",
+    "/products/tb-analyzer",
     "/tools/trial-balance",
     "/tools/profit-loss-statement",
     "/tools/balance-sheet",
