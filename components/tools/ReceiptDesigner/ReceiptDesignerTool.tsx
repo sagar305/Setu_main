@@ -19,7 +19,7 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
-import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "@/lib/pos/types";
+import { currencySymbol, formatMoney, generateId, nowIso, taxIdLabel, type Business } from "@/lib/pos/types";
 import { dbPut } from "@/lib/pos/db";
 import { readLogoDataUrl } from "@/lib/toolkit/logo";
 import { useI18n } from "@/lib/i18n";
@@ -220,7 +220,7 @@ export function ReceiptDesignerTool() {
               <p class="bn">${esc(biz?.name ?? t("rdYourBusiness"))}</p>
               ${biz?.address ? `<p>${esc(biz.address)}</p>` : ""}
               ${biz?.phone ? `<p>${esc(biz.phone)}</p>` : ""}
-              ${draft.showGstin && biz?.taxNumber ? `<p>GSTIN: ${esc(biz.taxNumber)}</p>` : ""}
+              ${draft.showGstin && biz?.taxNumber ? `<p>${taxIdLabel(biz)}: ${esc(biz.taxNumber)}</p>` : ""}
             </div>`
           : ""
       }
@@ -420,7 +420,9 @@ export function ReceiptDesignerTool() {
                 </p>
                 <p>{biz?.address || "Shop address"}</p>
                 <p>{biz?.phone || "98765 43210"}</p>
-                {draft.showGstin ? <p>GSTIN: {biz?.taxNumber || "22AAAAA0000A1Z5"}</p> : null}
+                {draft.showGstin ? <p>
+                    {taxIdLabel(biz)}: {biz?.taxNumber || "22AAAAA0000A1Z5"}
+                  </p> : null}
               </div>
             ) : null}
             <div className={`my-2 ${sep}`} />

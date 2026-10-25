@@ -5,6 +5,7 @@ import { Download, Printer } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import {
   formatMoney,
+  taxIdLabel,
   type Order,
   type OrderItem,
   type ReceiptPaperSize,
@@ -89,7 +90,9 @@ export const ReceiptView = forwardRef<
           <div style={{ fontSize: 11, whiteSpace: "pre-wrap" }}>
             {business?.address && <div>{business.address}</div>}
             {business?.phone && <div>Ph: {business.phone}</div>}
-            {business?.taxNumber && showGstin && <div>Tax No: {business.taxNumber}</div>}
+            {business?.taxNumber && showGstin && <div>
+                {taxIdLabel(business)}: {business.taxNumber}
+              </div>}
           </div>
         )}
       </div>
