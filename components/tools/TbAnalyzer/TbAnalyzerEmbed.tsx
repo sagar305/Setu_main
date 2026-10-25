@@ -14,9 +14,7 @@ import { useAppFullscreen } from "@/lib/hooks/useAppFullscreen";
 const APP_SRC = "/products/tb-analyzer/app/";
 
 export function TbAnalyzerEmbed() {
-  // The analyzer keeps nothing between visits, so there is no returning user
-  // to open straight into full screen: it only ever opens from the button.
-  const { fullscreen, toggleFullscreen } = useAppFullscreen("welcome");
+  const { fullscreen, toggleFullscreen } = useAppFullscreen();
 
   return (
     <div
