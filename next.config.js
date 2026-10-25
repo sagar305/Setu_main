@@ -1,6 +1,18 @@
+// The TB Analyzer is its own static app (github.com/sagar305/TB-analyser),
+// deployed separately and served here under /products/tb-analyzer/app/ so it
+// lives on setutechnology.com. Override for local testing against
+// `node backend/server.mjs` in that repo.
+const TB_ANALYZER_ORIGIN = process.env.TB_ANALYZER_ORIGIN || "https://tb-analyser.vercel.app";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // The TB Analyzer loads its scripts and styles by relative path, so it must
+  // be opened at /products/tb-analyzer/app/ — with the slash. Next's built-in
+  // slash stripping is switched off and the first redirect below puts it back
+  // for every other path, so the rest of the site keeps one URL per page.
+  // middleware.ts adds the slash when the app is opened without one.
+  skipTrailingSlashRedirect: true,
   // Belt and braces for the dev-only benchmark route. It is prerendered, so no
   // function should be emitted for it — but if one ever were, its trace would
   // otherwise follow @huggingface/transformers to onnxruntime-node's 211 MB of
@@ -16,6 +28,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/:path((?!products/tb-analyzer/app/$).+)/",
+        destination: "/:path",
+        permanent: true,
+      },
       // The blog feed lives at /blog/rss.xml; point the addresses people and
       // feed readers habitually guess at it rather than 404ing them.
       {
@@ -52,6 +69,18 @@ const nextConfig = {
         source: "/tools/bank-statement-analyzer/:path*",
         destination: "/products/bank-statement-analyzer/:path*",
         permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/products/tb-analyzer/app/",
+        destination: `${TB_ANALYZER_ORIGIN}/`,
+      },
+      {
+        source: "/products/tb-analyzer/app/:path+",
+        destination: `${TB_ANALYZER_ORIGIN}/:path+`,
       },
     ];
   },

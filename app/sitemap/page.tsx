@@ -49,6 +49,7 @@ function buildSections(): Section[] {
         { label: "All products", href: "/products" },
         { label: "Browser Based POS", href: "/products/browser-based-pos" },
         { label: "Bank Statement Analyzer", href: "/products/bank-statement-analyzer" },
+        { label: "TB Analyzer", href: "/products/tb-analyzer" },
         { label: "Free Dine — Free Restaurant POS", href: "/products/free-restaurant-pos" },
         { label: "Setu QR Menu", href: "/products/qr-menu" },
         { label: "Setu QR Menu — live demo", href: "https://demo.qr-menu.setutechnology.com/" },
