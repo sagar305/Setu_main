@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, isLowStock, isOutOfStock } from "@/lib/pos/types";
 import {
   customersCsv,
   downloadCsv,
@@ -121,8 +121,8 @@ export function ReportsScreen() {
     const tracked = products.filter((p) => p.trackStock);
     return {
       tracked: tracked.length,
-      low: tracked.filter((p) => p.stock > 0 && p.stock <= 5),
-      out: tracked.filter((p) => p.stock <= 0),
+      low: tracked.filter(isLowStock),
+      out: tracked.filter(isOutOfStock),
     };
   }, [products]);
 

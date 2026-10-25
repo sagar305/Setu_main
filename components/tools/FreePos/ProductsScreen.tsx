@@ -11,13 +11,21 @@ import {
   Trash2,
 } from "lucide-react";
 import { usePos, type ProductInput } from "@/lib/pos/store";
-import { formatMoney, type Product } from "@/lib/pos/types";
+import {
+  DEFAULT_LOW_STOCK_THRESHOLD,
+  formatMoney,
+  inventoryValue,
+  isLowStock,
+  isOutOfStock,
+  type Product,
+} from "@/lib/pos/types";
 import {
   ConfirmDialog,
   EmptyState,
   Field,
   Modal,
   SearchInput,
+  StatCard,
   inputClass,
   primaryBtnClass,
   secondaryBtnClass,
@@ -34,6 +42,7 @@ const emptyForm: ProductInput = {
   taxInclusive: false,
   trackStock: false,
   stock: 0,
+  lowStockThreshold: null,
   unit: "",
   imageDataUrl: "",
   description: "",
@@ -54,6 +63,7 @@ function ProductFormModal({
   const [costText, setCostText] = useState("");
   const [taxText, setTaxText] = useState("");
   const [stockText, setStockText] = useState("");
+  const [thresholdText, setThresholdText] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -72,6 +82,7 @@ function ProductFormModal({
         taxInclusive: editing.taxInclusive ?? false,
         trackStock: editing.trackStock,
         stock: editing.stock,
+        lowStockThreshold: editing.lowStockThreshold ?? null,
         unit: editing.unit,
         imageDataUrl: editing.imageDataUrl,
         description: editing.description,
@@ -80,12 +91,16 @@ function ProductFormModal({
       setCostText(editing.costPrice === null ? "" : String(editing.costPrice));
       setTaxText(editing.taxRate === null ? "" : String(editing.taxRate));
       setStockText(String(editing.stock));
+      setThresholdText(
+        editing.lowStockThreshold == null ? "" : String(editing.lowStockThreshold)
+      );
     } else {
       setForm(emptyForm);
       setPriceText("");
       setCostText("");
       setTaxText("");
       setStockText("");
+      setThresholdText("");
     }
     setNewCategory("");
     setError("");
@@ -113,10 +128,16 @@ function ProductFormModal({
       return;
     }
     let stock = 0;
+    let threshold: number | null = null;
     if (form.trackStock) {
       stock = stockText.trim() === "" ? 0 : parseInt(stockText, 10);
       if (!Number.isInteger(stock)) {
         setError("Stock must be a whole number.");
+        return;
+      }
+      threshold = thresholdText.trim() === "" ? null : Number(thresholdText);
+      if (threshold !== null && (!Number.isInteger(threshold) || threshold < 0)) {
+        setError("Low stock alert must be a whole number, zero or more.");
         return;
       }
     }
@@ -141,6 +162,7 @@ function ProductFormModal({
         costPrice: cost,
         taxRate: tax,
         stock,
+        lowStockThreshold: threshold,
         categoryId,
         sku: form.sku.trim(),
         barcode: form.barcode.trim(),
@@ -314,6 +336,22 @@ function ProductFormModal({
             )}
           </label>
         </div>
+        {form.trackStock && (
+          <Field
+            label="Low stock alert"
+            hint={`Flag as low at or below this quantity. Blank = ${DEFAULT_LOW_STOCK_THRESHOLD}`}
+          >
+            <input
+              type="number"
+              min={0}
+              step="1"
+              value={thresholdText}
+              onChange={(event) => setThresholdText(event.target.value)}
+              placeholder={String(DEFAULT_LOW_STOCK_THRESHOLD)}
+              className={inputClass}
+            />
+          </Field>
+        )}
         <div className="sm:col-span-2">
           <Field label="Description">
             <textarea
@@ -583,8 +621,34 @@ export function ProductsScreen({
 
   const categoryName = (id: string) => categories.find((c) => c.id === id)?.name ?? "";
 
+  const stockSummary = useMemo(
+    () => ({
+      ...inventoryValue(products),
+      low: products.filter(isLowStock).length,
+      out: products.filter(isOutOfStock).length,
+    }),
+    [products]
+  );
+
   return (
     <div>
+      {products.length > 0 && (
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <StatCard
+            label="Inventory value"
+            value={formatMoney(stockSummary.value, currency)}
+            sub={
+              stockSummary.missingCost > 0
+                ? `At cost · ${stockSummary.missingCost} in-stock product${
+                    stockSummary.missingCost === 1 ? "" : "s"
+                  } without a cost price`
+                : "At cost price"
+            }
+          />
+          <StatCard label="Low stock" value={String(stockSummary.low)} sub="Products at or below their alert" />
+          <StatCard label="Out of stock" value={String(stockSummary.out)} sub="Products with no stock left" />
+        </div>
+      )}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex-1">
           <SearchInput
@@ -681,9 +745,9 @@ export function ProductsScreen({
                         type="button"
                         onClick={() => setStockTarget(product)}
                         className={`font-semibold underline-offset-2 hover:underline ${
-                          product.stock <= 0
+                          isOutOfStock(product)
                             ? "text-red-500"
-                            : product.stock <= 5
+                            : isLowStock(product)
                               ? "text-saffron"
                               : "text-ink"
                         }`}
