@@ -55,7 +55,7 @@
     {
       "name": "Analisador de extrato bancário",
       "headline": "Análise gratuita de extratos bancários, direto no seu navegador",
-      "description": "Um analisador de extratos totalmente gratuito para contadores e para quem mantém a escrituração. Importe um extrato em PDF, Excel ou CSV, classifique cada lançamento com regras que você define, concilie com o razão e exporte relatórios — sem login, sem assinatura, e o extrato nunca é enviado para lugar nenhum.",
+      "description": "Um analisador de extratos totalmente gratuito para contadores/CPA e para quem mantém a escrituração. Importe um extrato em PDF, Excel ou CSV, classifique cada lançamento com regras que você define, concilie com o razão e exporte relatórios — sem login, sem assinatura, e o extrato nunca é enviado para lugar nenhum.",
       "features": [
         "Importa PDF, XLSX, XLS e CSV, inclusive PDFs protegidos por senha",
         "Nada é enviado: leitura e análise acontecem no seu navegador",

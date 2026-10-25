@@ -548,7 +548,7 @@
         "headline": "Regime antigo ou novo: decida com os números na mão",
         "paragraphs": [
           "O sistema indiano de imposto de renda permite que a maioria dos contribuintes escolha entre o regime antigo (mais deduções, alíquotas de faixa mais altas) e o novo (menos deduções, alíquotas mais baixas). A escolha certa depende inteiramente de quantas deduções e isenções você realmente usa — não existe resposta universal.",
-          "Esta calculadora estima o imposto devido nos dois regimes para o exercício 2025-26 (ano fiscal 2026-27), com as faixas e a dedução padrão que temos registradas, incluindo o abatimento do artigo 87A. Ela não considera o adicional sobre rendas muito altas, os casos limite do alívio marginal nem todas as deduções possíveis — e as faixas costumam ser revistas a cada Orçamento anual, então confirme sempre as faixas oficiais mais recentes ou consulte um contador antes de declarar ou escolher o regime."
+          "Esta calculadora estima o imposto devido nos dois regimes para o exercício 2025-26 (ano fiscal 2026-27), com as faixas e a dedução padrão que temos registradas, incluindo o abatimento do artigo 87A. Ela não considera o adicional sobre rendas muito altas, os casos limite do alívio marginal nem todas as deduções possíveis — e as faixas costumam ser revistas a cada Orçamento anual, então confirme sempre as faixas oficiais mais recentes ou consulte um contador/CPA antes de declarar ou escolher o regime."
         ]
       },
       "faq": {
@@ -567,8 +567,8 @@
             "answer": "Depende de quanto você deduz — auxílio-moradia, investimentos do artigo 80C, juros do financiamento imobiliário e assim por diante. Se suas deduções elegíveis forem grandes, o regime antigo costuma sair mais barato; se você deduz pouco, as alíquotas menores do novo normalmente ganham. Compare os dois aqui com os seus números reais."
           },
           {
-            "question": "Isto substitui a orientação de um contador?",
-            "answer": "Não. É uma estimativa simplificada, apenas para planejamento: não inclui o adicional, nuances da contribuição em alguns casos e várias deduções detalhadas. Para a declaração real ou uma decisão de regime com dinheiro em jogo, confira as faixas vigentes e consulte um contador habilitado."
+            "question": "Isto substitui a orientação de um contador/CPA?",
+            "answer": "Não. É uma estimativa simplificada, apenas para planejamento: não inclui o adicional, nuances da contribuição em alguns casos e várias deduções detalhadas. Para a declaração real ou uma decisão de regime com dinheiro em jogo, confira as faixas vigentes e consulte um contador habilitado/CPA."
           }
         ]
       },
@@ -1392,7 +1392,7 @@
           },
           {
             "question": "Qual método devo usar?",
-            "answer": "Para fins de imposto de renda na Índia, o saldo decrescente às taxas de bloco previstas é o padrão para a maioria das empresas. Para a sua contabilidade gerencial, o linear é mais simples e mostra um custo estável. Companhias que reportam pela lei das sociedades seguem as vidas úteis do anexo II. Na dúvida, pergunte ao seu contador."
+            "answer": "Para fins de imposto de renda na Índia, o saldo decrescente às taxas de bloco previstas é o padrão para a maioria das empresas. Para a sua contabilidade gerencial, o linear é mais simples e mostra um custo estável. Companhias que reportam pela lei das sociedades seguem as vidas úteis do anexo II. Na dúvida, pergunte ao seu contador/CPA."
           },
           {
             "question": "O que é valor residual?",

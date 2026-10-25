@@ -62,7 +62,7 @@
       "status": "live",
       "name": "Bank Statement Analyzer",
       "headline": "Free bank statement analysis, right in your browser",
-      "description": "A completely free bank statement analyser for chartered accountants and anyone who keeps a set of books. Import a PDF, Excel or CSV statement, classify every transaction with rules you control, reconcile against your ledger and export CA reports — no login, no subscription, and the statement is never uploaded anywhere.",
+      "description": "A completely free bank statement analyser for chartered accountants/CPAs and anyone who keeps a set of books. Import a PDF, Excel or CSV statement, classify every transaction with rules you control, reconcile against your ledger and export CA/CPA reports — no login, no subscription, and the statement is never uploaded anywhere.",
       "features": [
         "Imports PDF, XLSX, XLS and CSV — including password-protected PDFs",
         "Nothing is uploaded: parsing and analysis run in your browser",
@@ -85,7 +85,7 @@
       "status": "live",
       "name": "TB Analyzer",
       "headline": "Free trial balance analysis, right in your browser",
-      "description": "A completely free trial balance analyser for chartered accountants and finance teams. Import up to three periods of client TBs from Excel or CSV, review the P&L, Balance Sheet, ratios and what drove the change, and export a review pack — no login, no subscription, and the workbook is never uploaded anywhere.",
+      "description": "A completely free trial balance analyser for chartered accountants/CPAs and finance teams. Import up to three periods of client TBs from Excel or CSV, review the P&L, Balance Sheet, ratios and what drove the change, and export a review pack — no login, no subscription, and the workbook is never uploaded anywhere.",
       "features": [
         "Imports XLSX, XLS, XLSM and CSV — up to 20 workbooks at once",
         "Nothing is uploaded: parsing and analysis run in your browser",
@@ -463,7 +463,7 @@
       "id": "workflow",
       "status": "coming-soon",
       "name": "Setu Workflow",
-      "headline": "Practice management for CA & accounting firms — in development",
+      "headline": "Practice management for CA/CPA & accounting firms — in development",
       "description": "A paid, multi-user cloud product for accounting firms: clients, engagements, versioned workflow stages, checklists, review points, time, capacity and management reports — so partners see where every job stands without chasing anyone for an update.",
       "features": [
         "Client and engagement masters with staffing",

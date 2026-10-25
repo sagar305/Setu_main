@@ -120,7 +120,7 @@ export const POS_TOOLS: PosToolLink[] = [
     name: "Profit & Loss Statement",
     route: "/tools/profit-loss-statement",
     category: "Reports & analysis",
-    description: "A full P&L you can print or hand to your CA.",
+    description: "A full P&L you can print or hand to your CA/CPA.",
     usesPosData: "Revenue from POS sales, costs from purchases and expenses.",
   },
   {

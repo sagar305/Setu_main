@@ -4,7 +4,7 @@ import { ExportStep } from "@/components/tools/BankStatementAnalyzer/ExportStep"
 
 // An application state, not indexable content — see the import step.
 export const metadata: Metadata = {
-  title: "Export CA reports | Setu",
+  title: "Export CA/CPA reports | Setu",
   robots: { index: false, follow: true },
 };
 

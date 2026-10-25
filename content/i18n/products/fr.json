@@ -55,7 +55,7 @@
     {
       "name": "Analyseur de relevés bancaires",
       "headline": "Analyse gratuite de relevés bancaires, directement dans votre navigateur",
-      "description": "Un analyseur de relevés bancaires entièrement gratuit pour les experts-comptables et pour quiconque tient une comptabilité. Importez un relevé PDF, Excel ou CSV, classez chaque opération avec vos propres règles, rapprochez-le de votre grand livre et exportez vos rapports — sans inscription, sans abonnement, et le relevé n'est jamais envoyé nulle part.",
+      "description": "Un analyseur de relevés bancaires entièrement gratuit pour les experts-comptables/CPA et pour quiconque tient une comptabilité. Importez un relevé PDF, Excel ou CSV, classez chaque opération avec vos propres règles, rapprochez-le de votre grand livre et exportez vos rapports — sans inscription, sans abonnement, et le relevé n'est jamais envoyé nulle part.",
       "features": [
         "Importe PDF, XLSX, XLS et CSV, y compris les PDF protégés par mot de passe",
         "Rien n'est envoyé : la lecture et l'analyse se font dans votre navigateur",

@@ -38,7 +38,7 @@ import { TbAnalyzerEmbed } from "@/components/tools/TbAnalyzer/TbAnalyzerEmbed";
 export const metadata: Metadata = {
   title: "TB Analyzer — Free Trial Balance Analysis | Setu",
   description:
-    "Free trial balance analyser for CAs. Compare three periods, get P&L, Balance Sheet, 15 ratios and Excel/PDF review packs — nothing is uploaded.",
+    "Free trial balance analyser for CAs/CPAs. Compare three periods, get P&L, Balance Sheet, 15 ratios and Excel/PDF review packs — nothing is uploaded.",
   keywords: [
     "trial balance analyzer",
     "trial balance analysis",
@@ -47,6 +47,7 @@ export const metadata: Metadata = {
     "financial ratio analysis from trial balance",
     "trial balance to balance sheet",
     "CA financial review tool",
+    "CPA financial review tool",
     "three year financial comparison",
     "offline trial balance software",
     "trial balance software India",
@@ -355,7 +356,7 @@ const softwareApplicationSchema = {
   applicationCategory: "FinanceApplication",
   operatingSystem: "Web",
   description:
-    "Free browser-based trial balance analyser for chartered accountants. Import up to three periods of trial balances from Excel or CSV, review P&L, Balance Sheet and Cash Flow, 15 ratios, working capital and management questions, and export Excel and PDF review packs. All processing happens on the device.",
+    "Free browser-based trial balance analyser for chartered accountants/CPAs. Import up to three periods of trial balances from Excel or CSV, review P&L, Balance Sheet and Cash Flow, 15 ratios, working capital and management questions, and export Excel and PDF review packs. All processing happens on the device.",
   featureList: [
     "XLSX, XLS, XLSM and CSV trial balance import",
     "Up to 20 workbooks and three periods per client",
@@ -629,7 +630,7 @@ export default function TbAnalyzerPage() {
                 <h2 className="mb-4 text-2xl font-bold text-ink">Who is this for?</h2>
                 <ul className="space-y-2 text-muted">
                   {[
-                    "Chartered accountants reviewing a client's financial position across years",
+                    "Chartered accountants/CPAs reviewing a client's financial position across years",
                     "Audit and accounting staff preparing analytical review working papers",
                     "Business owners who want to see what changed and why",
                   ].map((item) => (

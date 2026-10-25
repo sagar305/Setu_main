@@ -548,7 +548,7 @@
         "headline": "Régimen antiguo o nuevo: decide con los números delante",
         "paragraphs": [
           "El sistema indio del impuesto sobre la renta permite a la mayoría de contribuyentes elegir entre el régimen antiguo (más deducciones, tramos más altos) y el nuevo (menos deducciones, tramos más bajos). La elección correcta depende por completo de cuántas deducciones y exenciones aplicas de verdad: no hay una respuesta universal.",
-          "Esta calculadora estima el impuesto de ambos regímenes para el ejercicio 2025-26 (año fiscal 2026-27) con los tramos y la deducción estándar que tenemos registrados, incluida la bonificación del artículo 87A. No contempla el recargo sobre rentas muy altas, los casos límite de la reducción marginal ni todas las deducciones posibles — y los tramos suelen revisarse cada año en los Presupuestos, así que verifica siempre los tramos oficiales más recientes o consulta a un asesor fiscal antes de presentar la declaración o elegir régimen."
+          "Esta calculadora estima el impuesto de ambos regímenes para el ejercicio 2025-26 (año fiscal 2026-27) con los tramos y la deducción estándar que tenemos registrados, incluida la bonificación del artículo 87A. No contempla el recargo sobre rentas muy altas, los casos límite de la reducción marginal ni todas las deducciones posibles — y los tramos suelen revisarse cada año en los Presupuestos, así que verifica siempre los tramos oficiales más recientes o consulta a un asesor fiscal/CPA antes de presentar la declaración o elegir régimen."
         ]
       },
       "faq": {
@@ -567,7 +567,7 @@
             "answer": "Depende de cuánto deduzcas: ayuda de vivienda, inversiones del artículo 80C, intereses del préstamo hipotecario, etc. Si tus deducciones elegibles son grandes, el régimen antiguo suele salir más barato; si deduces poco, normalmente ganan los tramos más bajos del nuevo. Compara los dos aquí con tus cifras reales."
           },
           {
-            "question": "¿Sustituye al consejo de un asesor fiscal?",
+            "question": "¿Sustituye al consejo de un asesor fiscal/CPA?",
             "answer": "No. Es una estimación simplificada solo para planificar: excluye el recargo, matices del impuesto adicional en algunos casos y varias deducciones detalladas. Para tu declaración real o una decisión de régimen con dinero en juego, verifica los tramos vigentes y consulta a un profesional cualificado."
           }
         ]
@@ -1392,7 +1392,7 @@
           },
           {
             "question": "¿Qué método debo usar?",
-            "answer": "A efectos del impuesto sobre la renta en India, el saldo decreciente a los tipos de bloque previstos es lo estándar para la mayoría de los negocios. Para tu contabilidad de gestión, el lineal es más simple y muestra un coste estable. Las sociedades que informan bajo la ley de sociedades siguen las vidas útiles del anexo II. En caso de duda, pregunta a tu asesor."
+            "answer": "A efectos del impuesto sobre la renta en India, el saldo decreciente a los tipos de bloque previstos es lo estándar para la mayoría de los negocios. Para tu contabilidad de gestión, el lineal es más simple y muestra un coste estable. Las sociedades que informan bajo la ley de sociedades siguen las vidas útiles del anexo II. En caso de duda, pregunta a tu asesor/CPA."
           },
           {
             "question": "¿Qué es el valor residual?",
