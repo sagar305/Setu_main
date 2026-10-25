@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { ComponentType } from "react";
 import {
   AlertTriangle,
-  ArrowRight,
   Ban,
   BarChart3,
   Building2,
@@ -34,14 +33,7 @@ import {
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
-
-/**
- * The tool itself is a separate static app, served on this domain by the
- * rewrite in next.config.js. The trailing slash matters: the app loads its
- * scripts by relative path. A plain <a>, not <Link>, because it is not a Next
- * route.
- */
-const APP_HREF = "/products/tb-analyzer/app/";
+import { TbAnalyzerEmbed } from "@/components/tools/TbAnalyzer/TbAnalyzerEmbed";
 
 export const metadata: Metadata = {
   title: "TB Analyzer — Free Trial Balance Analysis | Setu",
@@ -495,13 +487,6 @@ export default function TbAnalyzerPage() {
               Compare three periods of trial balances, understand what drove the change, and export
               a review pack — all in your browser.
             </p>
-            <a
-              href={APP_HREF}
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-indigo px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo/90"
-            >
-              Open TB Analyzer — it&apos;s free
-              <ArrowRight className="h-4 w-4" />
-            </a>
           </div>
         </FadeIn>
 
@@ -520,6 +505,11 @@ export default function TbAnalyzerPage() {
         </FadeInStagger>
       </section>
 
+      {/* The app itself */}
+      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6">
+        <TbAnalyzerEmbed />
+      </section>
+
       {/* Sample prompt */}
       <section className="border-t border-muted-line/20 bg-cream-paper py-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
@@ -528,16 +518,10 @@ export default function TbAnalyzerPage() {
               Try it without a client&apos;s file
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-              Open the analyzer and choose <strong>Analyse three-period sample</strong> to load
+              In the analyzer above, choose <strong>Analyse three-period sample</strong> to load
               synthetic, clearly labelled demonstration data — or download the three-period
               template and fill in your own balances.
             </p>
-            <a
-              href={APP_HREF}
-              className="mt-6 inline-block rounded-lg bg-indigo px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo/90"
-            >
-              Open TB Analyzer
-            </a>
           </FadeIn>
         </div>
       </section>
