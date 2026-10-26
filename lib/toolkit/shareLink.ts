@@ -8,7 +8,7 @@
 // Wire keys are kept short so links stay small even before compression.
 
 import LZString from "lz-string";
-import { taxIdLabel, type Business } from "@/lib/pos/types";
+import type { Business } from "@/lib/pos/types";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { fill, translate, type TKey } from "@/lib/i18n/translate";
 
@@ -27,7 +27,6 @@ export function businessToShare(business: Business | null, fallbackCurrency = "I
     a: business?.address || undefined,
     p: business?.phone || undefined,
     g: business?.taxNumber || undefined,
-    gl: business?.taxNumber ? taxIdLabel(business) : undefined,
     u: business?.upiId || undefined,
     cur: business?.currency || fallbackCurrency,
   };
@@ -38,7 +37,7 @@ export type ShareBusiness = {
   a?: string; // address
   p?: string; // phone
   g?: string; // gstin / tax number
-  gl?: string; // tax number label (GSTIN, VAT, TRN); absent = GSTIN
+  gl?: string; // tax number label from the receipt template (e.g. TRN); absent = GSTIN
   u?: string; // upi id
   cur: string; // currency code
   logo?: string; // small logo data URL (optional; omitted to keep links tiny)

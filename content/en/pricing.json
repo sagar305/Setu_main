@@ -73,7 +73,7 @@
       "name": "Bank Statement Analyzer",
       "href": "/products/bank-statement-analyzer",
       "status": "free",
-      "summary": "Import a bank statement, classify every transaction and export CA-ready reports — without the file leaving your browser.",
+      "summary": "Import a bank statement, classify every transaction and export CA/CPA-ready reports — without the file leaving your browser.",
       "freeNote": "Free forever",
       "trial": null,
       "price": {
@@ -574,7 +574,7 @@
       "name": "Setu Workflow",
       "href": "/products/workflow",
       "status": "in-development",
-      "summary": "Practice management for CA and accounting firms — engagements, workflow, review points, time and capacity.",
+      "summary": "Practice management for CA/CPA and accounting firms — engagements, workflow, review points, time and capacity.",
       "freeNote": "In development",
       "trial": null,
       "price": null,

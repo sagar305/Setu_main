@@ -1,0 +1,48 @@
+{
+  "slug": "aggregate-turnover",
+  "term": "Aggregate Turnover",
+  "category": "gst-tax",
+  "aliases": [
+    "aggregate annual turnover"
+  ],
+  "short": "Total turnover across every GSTIN on one PAN, used to test GST thresholds.",
+  "seoTitle": "Aggregate Turnover — How GST Thresholds Work",
+  "metaDescription": "Aggregate turnover is the all-India total of taxable, exempt and export supplies across every GSTIN on one PAN. It decides registration and filing thresholds.",
+  "updated": "2026-10-25",
+  "definition": "Aggregate turnover is the all-India value of a business's taxable supplies, exempt supplies, exports and inter-state branch transfers, added together across every GST registration held on the same PAN, excluding the GST charged on those supplies.",
+  "formula": {
+    "expression": "Aggregate turnover = taxable supplies + exempt supplies + exports + inter-state branch transfers (summed across all GSTINs on one PAN)",
+    "note": "Computed excluding GST itself, and excluding inward supplies on which tax is paid under the reverse charge mechanism."
+  },
+  "bodyHtml": "<h2>Why it is bigger than the number you think of as sales</h2><p>Most business owners think in terms of taxable sales from one shop. Aggregate turnover is wider on two counts: it adds in supplies that carry no tax, such as exempt and zero-rated sales, and it adds up every registration on the same PAN. A business with one GSTIN in Maharashtra and one in Gujarat tests its thresholds on the combined figure, not on either state separately.</p><h2>What it decides</h2><p>Registration, scheme eligibility and filing obligations are all keyed to it: whether you must register at all, whether the composition scheme is open to you, whether quarterly filing is available, and whether the annual return and the reconciliation statement apply. Each of those uses its own threshold, so the same turnover figure is tested against several different limits.</p><h2>Where businesses get it wrong</h2><p>Three recurring errors: leaving out exempt or nil-rated sales because no tax was charged on them, testing each GSTIN separately, and reading turnover off the profit and loss statement without adjusting for items that are supplies under GST but not revenue in the accounts, or the reverse. Branch transfers between states are the classic example — no profit, but turnover.</p>",
+  "faq": [
+    {
+      "question": "Does aggregate turnover include exempt sales?",
+      "answer": "Yes. Exempt supplies, nil-rated supplies and exports all count towards it, which is why a business that charges tax on only part of what it sells can still cross a threshold. What it excludes is the GST element itself and inward supplies taxed under reverse charge."
+    },
+    {
+      "question": "Is aggregate turnover computed per GSTIN or per PAN?",
+      "answer": "Per PAN, across all states. Registrations held in different states on the same PAN are added together for threshold purposes, even though returns are filed GSTIN by GSTIN. Businesses with multiple registrations often discover a threshold has been crossed only when the figures are combined."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "calculator",
+      "slug": "gst-calculator"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-9",
+    "gstr-9c",
+    "composition-scheme",
+    "place-of-supply"
+  ]
+}

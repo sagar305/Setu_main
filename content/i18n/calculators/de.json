@@ -548,7 +548,7 @@
         "headline": "Altes oder neues Regime — entscheiden Sie mit Zahlen",
         "paragraphs": [
           "Im indischen Einkommensteuersystem können die meisten Steuerpflichtigen zwischen dem alten Regime (mehr Abzüge, höhere Stufensätze) und dem neuen Regime (weniger Abzüge, niedrigere Stufensätze) wählen. Was günstiger ist, hängt ganz davon ab, wie viele Abzüge und Freibeträge Sie tatsächlich geltend machen — eine allgemeingültige Antwort gibt es nicht.",
-          "Dieser Rechner schätzt die fällige Steuer in beiden Regimen für das Steuerjahr 2025-26 (Veranlagungsjahr 2026-27) anhand der bei uns erfassten aktuellen Stufen und des Pauschalabzugs, einschließlich der Ermäßigung nach Abschnitt 87A. Zuschläge auf sehr hohe Einkommen, Grenzfälle der Grenzentlastung und viele mögliche Abzüge sind nicht berücksichtigt — und die Stufen werden üblicherweise jedes Jahr im Haushalt angepasst. Prüfen Sie daher vor der Abgabe oder einer Regime-Entscheidung immer die aktuellen amtlichen Stufen oder fragen Sie einen Steuerberater."
+          "Dieser Rechner schätzt die fällige Steuer in beiden Regimen für das Steuerjahr 2025-26 (Veranlagungsjahr 2026-27) anhand der bei uns erfassten aktuellen Stufen und des Pauschalabzugs, einschließlich der Ermäßigung nach Abschnitt 87A. Zuschläge auf sehr hohe Einkommen, Grenzfälle der Grenzentlastung und viele mögliche Abzüge sind nicht berücksichtigt — und die Stufen werden üblicherweise jedes Jahr im Haushalt angepasst. Prüfen Sie daher vor der Abgabe oder einer Regime-Entscheidung immer die aktuellen amtlichen Stufen oder fragen Sie einen Steuerberater/CPA."
         ]
       },
       "faq": {
@@ -567,7 +567,7 @@
             "answer": "Das hängt davon ab, wie viel Sie absetzen — Wohnzuschuss, Anlagen nach Abschnitt 80C, Hypothekenzinsen und so weiter. Sind Ihre abzugsfähigen Posten hoch, ist das alte Regime oft günstiger; machen Sie wenig geltend, gewinnen meist die niedrigeren Stufensätze des neuen Regimes. Vergleichen Sie beides hier mit Ihren echten Zahlen."
           },
           {
-            "question": "Ersetzt das die Beratung durch einen Steuerberater?",
+            "question": "Ersetzt das die Beratung durch einen Steuerberater/CPA?",
             "answer": "Nein. Es ist eine vereinfachte Schätzung zur Planung: Zuschläge, Feinheiten der Abgabe in manchen Fällen und mehrere Einzelabzüge fehlen. Für die tatsächliche Abgabe oder eine Regime-Entscheidung mit echtem Geld prüfen Sie die aktuellen Stufen und fragen Sie eine qualifizierte Fachperson."
           }
         ]
@@ -1392,7 +1392,7 @@
           },
           {
             "question": "Welche Methode soll ich nutzen?",
-            "answer": "Für die indische Einkommensteuer ist die degressive Abschreibung zu den vorgeschriebenen Gruppensätzen bei den meisten Betrieben Standard. Für die eigene Managementrechnung ist linear einfacher und zeigt einen gleichmäßigen Aufwand. Gesellschaften, die nach dem Gesellschaftsrecht berichten, folgen den Nutzungsdauern des Anhangs II. Im Zweifel fragen Sie Ihren Steuerberater."
+            "answer": "Für die indische Einkommensteuer ist die degressive Abschreibung zu den vorgeschriebenen Gruppensätzen bei den meisten Betrieben Standard. Für die eigene Managementrechnung ist linear einfacher und zeigt einen gleichmäßigen Aufwand. Gesellschaften, die nach dem Gesellschaftsrecht berichten, folgen den Nutzungsdauern des Anhangs II. Im Zweifel fragen Sie Ihren Steuerberater/CPA."
           },
           {
             "question": "Was ist der Restwert?",

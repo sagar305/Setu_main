@@ -1,10 +1,11 @@
 {
   "seo": {
-    "title": "Setu Workflow — Practice Management for CA Firms",
-    "description": "Practice management software for CA and accounting firms — engagements, workflow stages, checklists, review points, time and capacity in one place.",
+    "title": "Setu Workflow — Practice Management for CA/CPA Firms",
+    "description": "Practice management software for CA/CPA and accounting firms — engagements, workflow stages, checklists, review points, time and capacity in one place.",
     "keywords": [
       "Setu Workflow",
       "practice management software for CA firms",
+      "practice management software for CPA firms",
       "accounting firm workflow software",
       "CPA practice management software",
       "engagement management software",
@@ -15,7 +16,7 @@
   },
   "hero": {
     "eyebrow": "Setu Workflow — Coming Soon",
-    "headline": "Practice Management Software for CA & Accounting Firms",
+    "headline": "Practice Management Software for CA/CPA & Accounting Firms",
     "subheadline": "Every client, engagement, workflow stage, checklist, review point and hour your team works — in one place, so partners know where every job stands without chasing anyone for an update."
   },
   "status": {

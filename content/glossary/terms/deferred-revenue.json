@@ -1,0 +1,49 @@
+{
+  "slug": "deferred-revenue",
+  "term": "Deferred Revenue",
+  "category": "accounting",
+  "aliases": [
+    "unearned revenue",
+    "deferred income"
+  ],
+  "short": "Money collected for goods or services you have not yet delivered.",
+  "seoTitle": "Deferred Revenue — Meaning and Treatment",
+  "metaDescription": "Deferred revenue is cash collected before the work is done. Why it sits as a liability rather than income, how it unwinds, and where businesses get it wrong.",
+  "updated": "2026-10-25",
+  "definition": "Deferred revenue is an amount a business has collected for goods or services it has not yet delivered. It sits as a liability until the delivery happens, at which point it becomes revenue in the accounts.",
+  "formula": {
+    "expression": "Deferred revenue = amount collected − value of goods or services already delivered",
+    "note": "The balance falls as delivery happens. It appears under current liabilities, not under income."
+  },
+  "bodyHtml": "<h2>Why cash received is not always revenue</h2><p>Under accrual accounting, revenue is recognised when the business does what it was paid for, not when the money lands. An annual maintenance contract billed in April is earned across twelve months; a block of ten sessions is earned one session at a time; a deposit on an order is earned when the order ships. Until then the business is holding someone else's money against a promise.</p><h2>How it unwinds</h2><p>Each delivery moves a slice of the balance from liability to income. If a business collected ₹60,000 for a year of service in April, roughly ₹5,000 becomes revenue each month and the liability falls by the same amount, reaching zero at the end of the term. Nothing changes in the bank account during that time, which is exactly why the two figures have to be tracked separately.</p><h2>Where small businesses get caught</h2><p>Counting the full collection as income in the month it arrives inflates that month and empties the next, which makes trend-reading impossible and can overstate tax position. The opposite error — keeping the money in a liability long after the work was done — understates profit and leaves a balance nobody can explain. Both are easy to avoid with a list of open commitments and a monthly line to release what was earned.</p>",
+  "faq": [
+    {
+      "question": "Where does deferred revenue appear in the accounts?",
+      "answer": "Under current liabilities on the balance sheet, because it represents an obligation to deliver rather than value earned. It moves to the profit and loss statement as revenue only as the goods or services are supplied."
+    },
+    {
+      "question": "Does deferred revenue apply if I use cash-basis accounting?",
+      "answer": "The concept still matters commercially even where the bookkeeping method records income on receipt, because the obligation to deliver is real regardless of how it is recorded. Which basis applies to you depends on your entity and tax position, so settle that with your accountant."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "balance-sheet"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    }
+  ],
+  "relatedTerms": [
+    "prepaid-package",
+    "accrual-accounting",
+    "advance-payment",
+    "cash-basis-accounting"
+  ]
+}

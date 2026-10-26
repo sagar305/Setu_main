@@ -9,8 +9,6 @@ export type Business = {
   currency: string; // ISO code, e.g. "INR"
   email: string;
   taxNumber: string;
-  /** What the tax number is called on receipts. Optional: older records lack it. */
-  taxIdLabel?: TaxIdLabel;
   logoDataUrl: string;
   /** UPI ID for payments (e.g. "shop@okhdfcbank"). Optional. */
   upiId?: string;
@@ -18,13 +16,6 @@ export type Business = {
   timezone?: string;
   createdAt: string;
 };
-
-export const TAX_ID_LABELS = ["GSTIN", "VAT", "TRN"] as const;
-export type TaxIdLabel = (typeof TAX_ID_LABELS)[number];
-
-export function taxIdLabel(business: Pick<Business, "taxIdLabel"> | null | undefined): TaxIdLabel {
-  return business?.taxIdLabel ?? "GSTIN";
-}
 
 export type Category = {
   id: string;
@@ -44,6 +35,9 @@ export type Product = {
   taxInclusive: boolean; // true = selling price already includes tax
   trackStock: boolean;
   stock: number;
+  // Stock at or below this counts as low. Absent on products saved before the
+  // field existed, and null means "use the default".
+  lowStockThreshold?: number | null;
   unit: string;
   imageDataUrl: string;
   description: string;
@@ -211,6 +205,36 @@ export function formatMoney(value: number, currency: string): string {
   } catch {
     return `${currencySymbol(currency)}${safe.toFixed(2)}`;
   }
+}
+
+export const DEFAULT_LOW_STOCK_THRESHOLD = 5;
+
+export function lowStockThreshold(product: Product): number {
+  return product.lowStockThreshold ?? DEFAULT_LOW_STOCK_THRESHOLD;
+}
+
+export function isOutOfStock(product: Product): boolean {
+  return product.trackStock && product.stock <= 0;
+}
+
+export function isLowStock(product: Product): boolean {
+  return product.trackStock && product.stock > 0 && product.stock <= lowStockThreshold(product);
+}
+
+/**
+ * Inventory value at cost: stock × cost price over tracked products. Products
+ * with no cost price, or no stock on hand, add nothing; the former are counted
+ * so the screen can say the total is incomplete.
+ */
+export function inventoryValue(products: Product[]): { value: number; missingCost: number } {
+  let value = 0;
+  let missingCost = 0;
+  for (const p of products) {
+    if (!p.trackStock || p.stock <= 0) continue;
+    if (p.costPrice === null) missingCost += 1;
+    else value += p.stock * p.costPrice;
+  }
+  return { value, missingCost };
 }
 
 export function generateId(): string {

@@ -789,7 +789,7 @@
           },
           {
             "question": "Is GST calculated before or after the discount?",
-            "answer": "When the discount is given at or before the time of sale and shown on the tax invoice, GST is charged on the discounted price. A ₹1,000 item with 10% off and 18% GST is billed at ₹900 plus ₹162 GST, a total of ₹1,062. Discounts given after the sale, such as year-end supplier rebates, follow stricter conditions, so check the treatment with your CA."
+            "answer": "When the discount is given at or before the time of sale and shown on the tax invoice, GST is charged on the discounted price. A ₹1,000 item with 10% off and 18% GST is billed at ₹900 plus ₹162 GST, a total of ₹1,062. Discounts given after the sale, such as year-end supplier rebates, follow stricter conditions, so check the treatment with your CA/CPA."
           },
           {
             "question": "What is the difference between a discount and a markdown?",
@@ -979,7 +979,7 @@
             "Ask whether the first EMI includes broken-period interest for the days between disbursal and the first due date; the calculator assumes equal instalments from the first month.",
             "Check the prepayment and foreclosure charges in the sanction letter if you expect to close the loan early from festive-season or year-end cash.",
             "On a floating-rate loan, rerun the numbers at a rate 1 to 2 points higher, since lenders often extend the tenure rather than raise the EMI when rates go up.",
-            "Interest on a loan used for the business is generally a deductible expense, but the principal part of each EMI is not, so ask your CA to split the EMIs correctly in your books."
+            "Interest on a loan used for the business is generally a deductible expense, but the principal part of each EMI is not, so ask your CA/CPA to split the EMIs correctly in your books."
           ]
         },
         {
@@ -1301,7 +1301,7 @@
         "headline": "Old regime or new regime — know before you choose",
         "paragraphs": [
           "India's income tax system lets most taxpayers choose between the old regime (more deductions, higher slab rates) and the new regime (fewer deductions, lower slab rates). The right choice depends entirely on how many deductions and exemptions you actually claim — there's no universal answer.",
-          "This calculator estimates tax payable under both regimes for FY 2025-26 (AY 2026-27) using the latest slabs and standard deduction we have on record, including the Section 87A rebate. It does not account for surcharge on very high incomes, marginal-relief edge cases, or every possible deduction — and tax slabs are typically revised in the Union Budget each year, so always cross-check against the latest official slabs or a chartered accountant before filing or making a regime decision."
+          "This calculator estimates tax payable under both regimes for FY 2025-26 (AY 2026-27) using the latest slabs and standard deduction we have on record, including the Section 87A rebate. It does not account for surcharge on very high incomes, marginal-relief edge cases, or every possible deduction — and tax slabs are typically revised in the Union Budget each year, so always cross-check against the latest official slabs or a chartered accountant/CPA before filing or making a regime decision."
         ]
       },
       "faq": {
@@ -1320,8 +1320,8 @@
             "answer": "It depends on how much you claim in deductions — HRA, 80C investments, home loan interest, and so on. If your eligible deductions are large, the old regime often works out cheaper; if you claim few deductions, the new regime's lower slab rates usually win. Compare both using this calculator with your actual numbers."
           },
           {
-            "question": "Is this calculator a substitute for filing advice from a CA?",
-            "answer": "No. This is a simplified estimate for planning purposes only — it excludes surcharge, cess nuances for some cases, and several itemised deductions. For your actual tax filing or a regime decision with real money at stake, verify the latest slabs and consult a qualified chartered accountant."
+            "question": "Is this calculator a substitute for filing advice from a CA/CPA?",
+            "answer": "No. This is a simplified estimate for planning purposes only — it excludes surcharge, cess nuances for some cases, and several itemised deductions. For your actual tax filing or a regime decision with real money at stake, verify the latest slabs and consult a qualified chartered accountant/CPA."
           },
           {
             "question": "Does the income tax calculator include the standard deduction?",
@@ -1337,7 +1337,7 @@
           },
           {
             "question": "Can I use this calculator for business or freelance income?",
-            "answer": "You can, but enter your taxable profit, not turnover, and expect the result to be low. The calculator always subtracts the ₹75,000 standard deduction, which the law allows only on salary and pension. Near the ₹12 lakh mark the gap is large: ₹12,50,000 of business profit shows nil tax, though about ₹52,000 is due under the new regime. People with business income also face limits on switching regimes, so confirm your choice with a CA."
+            "answer": "You can, but enter your taxable profit, not turnover, and expect the result to be low. The calculator always subtracts the ₹75,000 standard deduction, which the law allows only on salary and pension. Near the ₹12 lakh mark the gap is large: ₹12,50,000 of business profit shows nil tax, though about ₹52,000 is due under the new regime. People with business income also face limits on switching regimes, so confirm your choice with a CA/CPA."
           }
         ]
       },
@@ -1521,7 +1521,7 @@
             "It does not check the five-year minimum, so confirm the employee is eligible before treating the figure as owed.",
             "Gratuity is worked out on the last drawn salary, so a raise in the final year lifts the whole payout. Budget for that when giving increments to long-serving staff.",
             "Owners with long-serving staff should set aside a yearly provision for gratuity in their books, so a resignation does not become a cash shock.",
-            "The labour codes, including the Code on Social Security, 2020, change some gratuity rules, such as eligibility for fixed-term employees and what counts as wages. Ask your CA which rules apply to your staff."
+            "The labour codes, including the Code on Social Security, 2020, change some gratuity rules, such as eligibility for fixed-term employees and what counts as wages. Ask your CA/CPA which rules apply to your staff."
           ]
         },
         {
@@ -1597,7 +1597,7 @@
           },
           {
             "question": "Can a restaurant claim input tax credit on the GST charged on commission?",
-            "answer": "Most standalone restaurants charge 5% GST on food without input tax credit. That means they cannot set off the GST a platform adds to its commission, so it is a real cost, and the calculator deducts it in full by default. If your business can claim that credit, set GST on commission to 0% to see your payout without the tax you get back. Confirm the treatment with your CA."
+            "answer": "Most standalone restaurants charge 5% GST on food without input tax credit. That means they cannot set off the GST a platform adds to its commission, so it is a real cost, and the calculator deducts it in full by default. If your business can claim that credit, set GST on commission to 0% to see your payout without the tax you get back. Confirm the treatment with your CA/CPA."
           },
           {
             "question": "Does the calculator include discounts and ads I pay for on Swiggy or Zomato?",
@@ -3388,7 +3388,7 @@
           },
           {
             "question": "Which method should I use?",
-            "answer": "For Indian income-tax purposes, WDV at prescribed block rates is standard for most businesses. For your own management accounts, straight-line is simpler and shows a steady cost. Companies reporting under the Companies Act follow Schedule II useful lives. When in doubt, ask your CA."
+            "answer": "For Indian income-tax purposes, WDV at prescribed block rates is standard for most businesses. For your own management accounts, straight-line is simpler and shows a steady cost. Companies reporting under the Companies Act follow Schedule II useful lives. When in doubt, ask your CA/CPA."
           },
           {
             "question": "What is salvage (residual) value?",
@@ -3396,7 +3396,7 @@
           },
           {
             "question": "Can I calculate depreciation for part of a year or by month?",
-            "answer": "The calculator works in whole years and rounds the useful life to the nearest year, up to 50. For a monthly figure under straight line, divide the annual depreciation by 12, so ₹46,666.67 a year is ₹3,888.89 a month. For an asset bought mid-year, multiply the first year's charge by the months it was in use and divide by 12, or follow the rule your CA applies for tax."
+            "answer": "The calculator works in whole years and rounds the useful life to the nearest year, up to 50. For a monthly figure under straight line, divide the annual depreciation by 12, so ₹46,666.67 a year is ₹3,888.89 a month. For an asset bought mid-year, multiply the first year's charge by the months it was in use and divide by 12, or follow the rule your CA/CPA applies for tax."
           },
           {
             "question": "What is the difference between depreciation and amortisation?",
@@ -3408,7 +3408,7 @@
           },
           {
             "question": "What depreciation rate should I use for the WDV method?",
-            "answer": "For income tax, use the rate prescribed for the asset's block. Rates long applied include 15% for general plant and machinery, 10% for furniture and fittings and 40% for computers, but confirm the current rate with your CA. For your own accounts, pick a rate that brings the book value close to the salvage value by the end of the asset's useful life."
+            "answer": "For income tax, use the rate prescribed for the asset's block. Rates long applied include 15% for general plant and machinery, 10% for furniture and fittings and 40% for computers, but confirm the current rate with your CA/CPA. For your own accounts, pick a rate that brings the book value close to the salvage value by the end of the asset's useful life."
           }
         ]
       },
@@ -3452,7 +3452,7 @@
             "Include freight, installation and other costs of getting the asset ready for use in the asset cost.",
             "Leave GST out of the asset cost if you claim it as input tax credit; you cannot claim both the credit and depreciation on the same tax.",
             "The calculator charges a full year in year one; for income tax, an asset put to use for less than 180 days in its first year generally gets only half the rate that year.",
-            "Tax depreciation is worked out on blocks of similar assets, not on each item, so use this schedule per asset for your fixed asset register and let your CA compute the tax block.",
+            "Tax depreciation is worked out on blocks of similar assets, not on each item, so use this schedule per asset for your fixed asset register and let your CA/CPA compute the tax block.",
             "To make WDV finish on your salvage value, use a rate of (1 − (Salvage ÷ Cost)^(1 ÷ Life)) × 100; for ₹1,50,000 down to ₹10,000 over 3 years that is about 59.5%.",
             "Land is never depreciated, while buildings, furniture, machinery, vehicles and computers are."
           ]
