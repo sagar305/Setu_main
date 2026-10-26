@@ -100,8 +100,8 @@ export const PWA_APPS = [
   },
   {
     id: "tb",
-    name: "Setu TB Analyzer",
-    shortName: "TB Analyzer",
+    name: "Setu TB Analyser",
+    shortName: "TB Analyser",
     description: "Analyse trial balances privately in your browser: statements, ratios and review packs.",
     path: "/products/tb-analyzer",
   },

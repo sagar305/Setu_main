@@ -83,7 +83,7 @@
     {
       "id": "tb-analyzer",
       "status": "live",
-      "name": "TB Analyzer",
+      "name": "TB Analyser",
       "headline": "Free trial balance analysis, right in your browser",
       "description": "A completely free trial balance analyser for chartered accountants/CPAs and finance teams. Import up to three periods of client TBs from Excel or CSV, review the P&L, Balance Sheet, ratios and what drove the change, and export a review pack — no login, no subscription, and the workbook is never uploaded anywhere.",
       "features": [
@@ -99,7 +99,7 @@
         "Excel and PDF review packs generated on device"
       ],
       "cta": {
-        "label": "Open TB Analyzer — it's free",
+        "label": "Open TB Analyser — it's free",
         "href": "/products/tb-analyzer"
       }
     },
