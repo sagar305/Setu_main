@@ -37,6 +37,7 @@ export type ShareBusiness = {
   a?: string; // address
   p?: string; // phone
   g?: string; // gstin / tax number
+  gl?: string; // tax number label from the receipt template (e.g. TRN); absent = GSTIN
   u?: string; // upi id
   cur: string; // currency code
   logo?: string; // small logo data URL (optional; omitted to keep links tiny)

@@ -42,6 +42,8 @@ export const ReceiptView = forwardRef<
   const accent = template?.accentColor || "#111111";
   const showBizInfo = template ? template.showBusinessInfo : settings.showBusinessInfoOnReceipt;
   const showGstin = template ? template.showGstin : true;
+  // Matches the Receipt Designer preview, which defaults to GSTIN.
+  const taxLabel = template ? template.taxLabel?.trim() || "GSTIN" : "Tax No";
   const boldTotals = template ? template.boldTotals : true;
   const footerText = (template ? template.footerText : settings.receiptFooter) || "Thank you!";
 
@@ -89,7 +91,9 @@ export const ReceiptView = forwardRef<
           <div style={{ fontSize: 11, whiteSpace: "pre-wrap" }}>
             {business?.address && <div>{business.address}</div>}
             {business?.phone && <div>Ph: {business.phone}</div>}
-            {business?.taxNumber && showGstin && <div>Tax No: {business.taxNumber}</div>}
+            {business?.taxNumber && showGstin && <div>
+                {taxLabel}: {business.taxNumber}
+              </div>}
           </div>
         )}
       </div>
@@ -313,7 +317,7 @@ export function ReceiptModal({
       : undefined;
     return {
       t: "inv",
-      b: businessToShare(business, currency),
+      b: { ...businessToShare(business, currency), gl: template?.taxLabel?.trim() || undefined },
       no: order.invoiceNumber,
       dt: order.date,
       cn: order.customerName || undefined,

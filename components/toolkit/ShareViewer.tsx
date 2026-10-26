@@ -43,7 +43,7 @@ function BusinessHeader({ b, accent = "#26306B" }: { b: ShareBusiness; accent?: 
       </h1>
       {b.a ? <p className="mt-1 text-sm text-muted">{b.a}</p> : null}
       <p className="text-sm text-muted">
-        {[b.p, b.g ? `GSTIN: ${b.g}` : ""].filter(Boolean).join(" · ")}
+        {[b.p, b.g ? `${b.gl || "GSTIN"}: ${b.g}` : ""].filter(Boolean).join(" · ")}
       </p>
     </div>
   );

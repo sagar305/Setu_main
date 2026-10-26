@@ -44,6 +44,7 @@ type Draft = {
   showLogo: boolean;
   showBusinessInfo: boolean;
   showGstin: boolean;
+  taxLabel: string;
   boldTotals: boolean;
   separator: ReceiptTemplate["separator"];
 };
@@ -71,6 +72,7 @@ const DEFAULTS: Draft = {
   showLogo: true,
   showBusinessInfo: true,
   showGstin: true,
+  taxLabel: "",
   boldTotals: true,
   separator: "dashed",
 };
@@ -128,6 +130,7 @@ export function ReceiptDesignerTool() {
       showLogo: template.showLogo,
       showBusinessInfo: template.showBusinessInfo,
       showGstin: template.showGstin,
+      taxLabel: template.taxLabel ?? "",
       boldTotals: template.boldTotals,
       separator: template.separator as Draft["separator"],
     });
@@ -139,6 +142,7 @@ export function ReceiptDesignerTool() {
       id: editingId ?? generateId(),
       ...draft,
       name: draft.name.trim() || "My Receipt",
+      taxLabel: draft.taxLabel.trim(),
       createdByTool: existing?.createdByTool ?? "receipt-designer",
       createdAt: existing?.createdAt ?? nowIso(),
       updatedAt: nowIso(),
@@ -153,6 +157,7 @@ export function ReceiptDesignerTool() {
   };
 
   const biz = workspace.business;
+  const taxLabel = draft.taxLabel.trim() || "GSTIN";
 
   // Upload / change the business logo from here. It saves to the shared
   // business record, so the logo then appears on the receipt (and on invoices,
@@ -220,7 +225,7 @@ export function ReceiptDesignerTool() {
               <p class="bn">${esc(biz?.name ?? t("rdYourBusiness"))}</p>
               ${biz?.address ? `<p>${esc(biz.address)}</p>` : ""}
               ${biz?.phone ? `<p>${esc(biz.phone)}</p>` : ""}
-              ${draft.showGstin && biz?.taxNumber ? `<p>GSTIN: ${esc(biz.taxNumber)}</p>` : ""}
+              ${draft.showGstin && biz?.taxNumber ? `<p>${esc(taxLabel)}: ${esc(biz.taxNumber)}</p>` : ""}
             </div>`
           : ""
       }
@@ -330,6 +335,22 @@ export function ReceiptDesignerTool() {
                 </label>
               ))}
             </div>
+            {draft.showGstin ? (
+              <Field label={t("rdTaxLabel")}>
+                <TextInput
+                  value={draft.taxLabel}
+                  onChange={(e) => set("taxLabel", e.target.value)}
+                  placeholder="GSTIN"
+                  list="rd-tax-labels"
+                  maxLength={20}
+                />
+                <datalist id="rd-tax-labels">
+                  {["GSTIN", "VAT", "TRN", "TIN", "Tax No"].map((label) => (
+                    <option key={label} value={label} />
+                  ))}
+                </datalist>
+              </Field>
+            ) : null}
 
             {/* Logo — shown when "Show logo" is on. Saves to the shared
                 business, so the same logo appears everywhere. */}
@@ -420,7 +441,9 @@ export function ReceiptDesignerTool() {
                 </p>
                 <p>{biz?.address || "Shop address"}</p>
                 <p>{biz?.phone || "98765 43210"}</p>
-                {draft.showGstin ? <p>GSTIN: {biz?.taxNumber || "22AAAAA0000A1Z5"}</p> : null}
+                {draft.showGstin ? <p>
+                    {taxLabel}: {biz?.taxNumber || "22AAAAA0000A1Z5"}
+                  </p> : null}
               </div>
             ) : null}
             <div className={`my-2 ${sep}`} />

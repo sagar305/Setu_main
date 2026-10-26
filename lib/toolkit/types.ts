@@ -97,6 +97,8 @@ export type ReceiptTemplate = {
   showLogo: boolean;
   showBusinessInfo: boolean;
   showGstin: boolean;
+  /** Printed before the tax number, e.g. "TRN". Blank/absent = the business's own label. */
+  taxLabel?: string;
   boldTotals: boolean;
   separator: "dashed" | "solid" | "none";
   createdByTool: ToolSlug;
