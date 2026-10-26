@@ -391,7 +391,7 @@ const en: CalcDict = {
   itNewSaves: "New regime saves you",
   itOldSaves: "Old regime saves you",
   itDisclaimer:
-    "Estimate only, using FY 2025-26 (AY 2026-27) slabs and a simplified Section 87A rebate — it excludes surcharge and several itemised deductions. Tax slabs typically change with each Union Budget, so verify against the latest official slabs or a chartered accountant before filing or making a regime decision.",
+    "Estimate only, using FY 2025-26 (AY 2026-27) slabs and a simplified Section 87A rebate — it excludes surcharge and several itemised deductions. Tax slabs typically change with each Union Budget, so verify against the latest official slabs or a chartered accountant/CPA before filing or making a regime decision.",
   invCogs: "Cost of goods sold (period)",
   invAvgValue: "Average inventory value",
   invDaysPeriod: "Days in period",
@@ -706,7 +706,7 @@ const hi: Partial<CalcDict> = {
   itNewSaves: "नई व्यवस्था से आपकी बचत",
   itOldSaves: "पुरानी व्यवस्था से आपकी बचत",
   itDisclaimer:
-    "केवल अनुमान, FY 2025-26 (AY 2026-27) स्लैब और सरलीकृत धारा 87A छूट के आधार पर — इसमें सरचार्ज और कई मदवार कटौतियाँ शामिल नहीं हैं। कर स्लैब आमतौर पर हर केंद्रीय बजट में बदलते हैं, इसलिए फाइल करने या व्यवस्था चुनने से पहले नवीनतम आधिकारिक स्लैब या चार्टर्ड अकाउंटेंट से पुष्टि करें।",
+    "केवल अनुमान, FY 2025-26 (AY 2026-27) स्लैब और सरलीकृत धारा 87A छूट के आधार पर — इसमें सरचार्ज और कई मदवार कटौतियाँ शामिल नहीं हैं। कर स्लैब आमतौर पर हर केंद्रीय बजट में बदलते हैं, इसलिए फाइल करने या व्यवस्था चुनने से पहले नवीनतम आधिकारिक स्लैब या चार्टर्ड अकाउंटेंट/CPA से पुष्टि करें।",
   invCogs: "बेचे गए माल की लागत (अवधि)",
   invAvgValue: "औसत इन्वेंट्री मूल्य",
   invDaysPeriod: "अवधि के दिन",
@@ -1016,7 +1016,7 @@ const bn: Partial<CalcDict> = {
   itNewSaves: "নতুন ব্যবস্থায় আপনার সাশ্রয়",
   itOldSaves: "পুরনো ব্যবস্থায় আপনার সাশ্রয়",
   itDisclaimer:
-    "শুধুমাত্র আনুমানিক, FY 2025-26 (AY 2026-27) স্ল্যাব এবং সরলীকৃত ধারা 87A রিবেট ব্যবহার করে — এতে সারচার্জ ও বেশ কিছু আইটেমাইজড ছাড় বাদ। কর স্ল্যাব সাধারণত প্রতিটি কেন্দ্রীয় বাজেটে বদলায়, তাই ফাইল করার বা ব্যবস্থা বাছার আগে সর্বশেষ সরকারি স্ল্যাব বা একজন চার্টার্ড অ্যাকাউন্ট্যান্টের সঙ্গে যাচাই করুন।",
+    "শুধুমাত্র আনুমানিক, FY 2025-26 (AY 2026-27) স্ল্যাব এবং সরলীকৃত ধারা 87A রিবেট ব্যবহার করে — এতে সারচার্জ ও বেশ কিছু আইটেমাইজড ছাড় বাদ। কর স্ল্যাব সাধারণত প্রতিটি কেন্দ্রীয় বাজেটে বদলায়, তাই ফাইল করার বা ব্যবস্থা বাছার আগে সর্বশেষ সরকারি স্ল্যাব বা একজন চার্টার্ড অ্যাকাউন্ট্যান্টের/CPA সঙ্গে যাচাই করুন।",
   invCogs: "বিক্রীত পণ্যের খরচ (সময়কাল)",
   invAvgValue: "গড় ইনভেন্টরি মূল্য",
   invDaysPeriod: "সময়কালের দিন",
@@ -1325,7 +1325,7 @@ const ta: Partial<CalcDict> = {
   itNewSaves: "புதிய முறை உங்களுக்கு சேமிப்பது",
   itOldSaves: "பழைய முறை உங்களுக்கு சேமிப்பது",
   itDisclaimer:
-    "மதிப்பீடு மட்டுமே, FY 2025-26 (AY 2026-27) ஸ்லாப்கள் மற்றும் எளிமையாக்கப்பட்ட பிரிவு 87A தள்ளுபடியைப் பயன்படுத்தி — இதில் சர்சார்ஜ் மற்றும் பல விலக்குகள் இல்லை. வரி ஸ்லாப்கள் பொதுவாக ஒவ்வொரு பட்ஜெட்டிலும் மாறும், எனவே தாக்கல் செய்யும் முன் சமீபத்திய அதிகாரப்பூர்வ ஸ்லாப்கள் அல்லது சார்ட்டர்டு அக்கவுண்டண்டிடம் சரிபார்க்கவும்.",
+    "மதிப்பீடு மட்டுமே, FY 2025-26 (AY 2026-27) ஸ்லாப்கள் மற்றும் எளிமையாக்கப்பட்ட பிரிவு 87A தள்ளுபடியைப் பயன்படுத்தி — இதில் சர்சார்ஜ் மற்றும் பல விலக்குகள் இல்லை. வரி ஸ்லாப்கள் பொதுவாக ஒவ்வொரு பட்ஜெட்டிலும் மாறும், எனவே தாக்கல் செய்யும் முன் சமீபத்திய அதிகாரப்பூர்வ ஸ்லாப்கள் அல்லது சார்ட்டர்டு அக்கவுண்டண்டிடம்/CPA சரிபார்க்கவும்.",
   invCogs: "விற்கப்பட்ட பொருட்களின் செலவு (காலம்)",
   invAvgValue: "சராசரி சரக்கு மதிப்பு",
   invDaysPeriod: "காலத்தின் நாட்கள்",
@@ -1634,7 +1634,7 @@ const te: Partial<CalcDict> = {
   itNewSaves: "కొత్త విధానం మీకు ఆదా చేసేది",
   itOldSaves: "పాత విధానం మీకు ఆదా చేసేది",
   itDisclaimer:
-    "అంచనా మాత్రమే, FY 2025-26 (AY 2026-27) స్లాబ్‌లు మరియు సరళీకృత సెక్షన్ 87A రిబేట్‌ను ఉపయోగించి — ఇందులో సర్‌చార్జ్ మరియు అనేక మినహాయింపులు లేవు. పన్ను స్లాబ్‌లు సాధారణంగా ప్రతి బడ్జెట్‌లో మారతాయి, కాబట్టి ఫైల్ చేసే ముందు తాజా అధికారిక స్లాబ్‌లు లేదా చార్టర్డ్ అకౌంటెంట్‌తో నిర్ధారించండి.",
+    "అంచనా మాత్రమే, FY 2025-26 (AY 2026-27) స్లాబ్‌లు మరియు సరళీకృత సెక్షన్ 87A రిబేట్‌ను ఉపయోగించి — ఇందులో సర్‌చార్జ్ మరియు అనేక మినహాయింపులు లేవు. పన్ను స్లాబ్‌లు సాధారణంగా ప్రతి బడ్జెట్‌లో మారతాయి, కాబట్టి ఫైల్ చేసే ముందు తాజా అధికారిక స్లాబ్‌లు లేదా చార్టర్డ్ అకౌంటెంట్‌తో/CPA నిర్ధారించండి.",
   invCogs: "అమ్మిన వస్తువుల ఖర్చు (కాలం)",
   invAvgValue: "సగటు ఇన్వెంటరీ విలువ",
   invDaysPeriod: "కాలంలోని రోజులు",
@@ -1943,7 +1943,7 @@ const mr: Partial<CalcDict> = {
   itNewSaves: "नवी पद्धत तुमची बचत करते",
   itOldSaves: "जुनी पद्धत तुमची बचत करते",
   itDisclaimer:
-    "फक्त अंदाज, FY 2025-26 (AY 2026-27) स्लॅब व सरलीकृत कलम 87A सवलत वापरून — यात सरचार्ज व अनेक वजावटी नाहीत. कर स्लॅब सहसा प्रत्येक अर्थसंकल्पात बदलतात, त्यामुळे फाइल करण्यापूर्वी नवीनतम अधिकृत स्लॅब किंवा चार्टर्ड अकाउंटंटकडे तपासा.",
+    "फक्त अंदाज, FY 2025-26 (AY 2026-27) स्लॅब व सरलीकृत कलम 87A सवलत वापरून — यात सरचार्ज व अनेक वजावटी नाहीत. कर स्लॅब सहसा प्रत्येक अर्थसंकल्पात बदलतात, त्यामुळे फाइल करण्यापूर्वी नवीनतम अधिकृत स्लॅब किंवा चार्टर्ड अकाउंटंटकडे/CPA तपासा.",
   invCogs: "विकलेल्या मालाचा खर्च (कालावधी)",
   invAvgValue: "सरासरी इन्व्हेंटरी मूल्य",
   invDaysPeriod: "कालावधीतील दिवस",
@@ -2252,7 +2252,7 @@ const gu: Partial<CalcDict> = {
   itNewSaves: "નવી પદ્ધતિ તમારી બચત કરે છે",
   itOldSaves: "જૂની પદ્ધતિ તમારી બચત કરે છે",
   itDisclaimer:
-    "માત્ર અંદાજ, FY 2025-26 (AY 2026-27) સ્લેબ અને સરળીકૃત કલમ 87A રિબેટનો ઉપયોગ કરીને — તેમાં સરચાર્જ અને ઘણી કપાત નથી. કર સ્લેબ સામાન્ય રીતે દરેક બજેટમાં બદલાય છે, તેથી ફાઇલ કરતા પહેલા નવીનતમ સત્તાવાર સ્લેબ અથવા ચાર્ટર્ડ એકાઉન્ટન્ટ સાથે ખાતરી કરો.",
+    "માત્ર અંદાજ, FY 2025-26 (AY 2026-27) સ્લેબ અને સરળીકૃત કલમ 87A રિબેટનો ઉપયોગ કરીને — તેમાં સરચાર્જ અને ઘણી કપાત નથી. કર સ્લેબ સામાન્ય રીતે દરેક બજેટમાં બદલાય છે, તેથી ફાઇલ કરતા પહેલા નવીનતમ સત્તાવાર સ્લેબ અથવા ચાર્ટર્ડ એકાઉન્ટન્ટ/CPA સાથે ખાતરી કરો.",
   invCogs: "વેચાયેલા માલનો ખર્ચ (સમયગાળો)",
   invAvgValue: "સરેરાશ ઇન્વેન્ટરી મૂલ્ય",
   invDaysPeriod: "સમયગાળાના દિવસો",
@@ -2561,7 +2561,7 @@ const kn: Partial<CalcDict> = {
   itNewSaves: "ಹೊಸ ಪದ್ಧತಿ ನಿಮಗೆ ಉಳಿಸುತ್ತದೆ",
   itOldSaves: "ಹಳೆಯ ಪದ್ಧತಿ ನಿಮಗೆ ಉಳಿಸುತ್ತದೆ",
   itDisclaimer:
-    "ಅಂದಾಜು ಮಾತ್ರ, FY 2025-26 (AY 2026-27) ಸ್ಲ್ಯಾಬ್‌ಗಳು ಮತ್ತು ಸರಳೀಕೃತ ಸೆಕ್ಷನ್ 87A ರಿಬೇಟ್ ಬಳಸಿ — ಇದರಲ್ಲಿ ಸರ್ಚಾರ್ಜ್ ಮತ್ತು ಹಲವು ಕಡಿತಗಳಿಲ್ಲ. ತೆರಿಗೆ ಸ್ಲ್ಯಾಬ್‌ಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಪ್ರತಿ ಬಜೆಟ್‌ನಲ್ಲಿ ಬದಲಾಗುತ್ತವೆ, ಆದ್ದರಿಂದ ಫೈಲ್ ಮಾಡುವ ಮೊದಲು ಇತ್ತೀಚಿನ ಅಧಿಕೃತ ಸ್ಲ್ಯಾಬ್‌ಗಳು ಅಥವಾ ಚಾರ್ಟರ್ಡ್ ಅಕೌಂಟೆಂಟ್‌ರೊಂದಿಗೆ ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
+    "ಅಂದಾಜು ಮಾತ್ರ, FY 2025-26 (AY 2026-27) ಸ್ಲ್ಯಾಬ್‌ಗಳು ಮತ್ತು ಸರಳೀಕೃತ ಸೆಕ್ಷನ್ 87A ರಿಬೇಟ್ ಬಳಸಿ — ಇದರಲ್ಲಿ ಸರ್ಚಾರ್ಜ್ ಮತ್ತು ಹಲವು ಕಡಿತಗಳಿಲ್ಲ. ತೆರಿಗೆ ಸ್ಲ್ಯಾಬ್‌ಗಳು ಸಾಮಾನ್ಯವಾಗಿ ಪ್ರತಿ ಬಜೆಟ್‌ನಲ್ಲಿ ಬದಲಾಗುತ್ತವೆ, ಆದ್ದರಿಂದ ಫೈಲ್ ಮಾಡುವ ಮೊದಲು ಇತ್ತೀಚಿನ ಅಧಿಕೃತ ಸ್ಲ್ಯಾಬ್‌ಗಳು ಅಥವಾ ಚಾರ್ಟರ್ಡ್ ಅಕೌಂಟೆಂಟ್‌ರೊಂದಿಗೆ/CPA ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
   invCogs: "ಮಾರಾಟವಾದ ಸರಕುಗಳ ವೆಚ್ಚ (ಅವಧಿ)",
   invAvgValue: "ಸರಾಸರಿ ಇನ್ವೆಂಟರಿ ಮೌಲ್ಯ",
   invDaysPeriod: "ಅವಧಿಯ ದಿನಗಳು",
@@ -2870,7 +2870,7 @@ const ml: Partial<CalcDict> = {
   itNewSaves: "പുതിയ രീതി നിങ്ങൾക്ക് ലാഭിക്കുന്നു",
   itOldSaves: "പഴയ രീതി നിങ്ങൾക്ക് ലാഭിക്കുന്നു",
   itDisclaimer:
-    "കണക്ക് മാത്രം, FY 2025-26 (AY 2026-27) സ്ലാബുകളും ലളിതമാക്കിയ സെക്ഷൻ 87A റിബേറ്റും ഉപയോഗിച്ച് — ഇതിൽ സർചാർജും പല കിഴിവുകളും ഇല്ല. നികുതി സ്ലാബുകൾ സാധാരണയായി ഓരോ ബജറ്റിലും മാറുന്നു, അതിനാൽ ഫയൽ ചെയ്യുന്നതിന് മുമ്പ് ഏറ്റവും പുതിയ ഔദ്യോഗിക സ്ലാബുകളോ ചാർട്ടേഡ് അക്കൗണ്ടന്റോ പരിശോധിക്കുക.",
+    "കണക്ക് മാത്രം, FY 2025-26 (AY 2026-27) സ്ലാബുകളും ലളിതമാക്കിയ സെക്ഷൻ 87A റിബേറ്റും ഉപയോഗിച്ച് — ഇതിൽ സർചാർജും പല കിഴിവുകളും ഇല്ല. നികുതി സ്ലാബുകൾ സാധാരണയായി ഓരോ ബജറ്റിലും മാറുന്നു, അതിനാൽ ഫയൽ ചെയ്യുന്നതിന് മുമ്പ് ഏറ്റവും പുതിയ ഔദ്യോഗിക സ്ലാബുകളോ ചാർട്ടേഡ് അക്കൗണ്ടന്റോ/CPA പരിശോധിക്കുക.",
   invCogs: "വിറ്റ ചരക്കുകളുടെ ചെലവ് (കാലയളവ്)",
   invAvgValue: "ശരാശരി ഇൻവെന്ററി മൂല്യം",
   invDaysPeriod: "കാലയളവിലെ ദിവസങ്ങൾ",
@@ -3179,7 +3179,7 @@ const pa: Partial<CalcDict> = {
   itNewSaves: "ਨਵੀਂ ਪ੍ਰਣਾਲੀ ਤੁਹਾਡੀ ਬੱਚਤ ਕਰਦੀ ਹੈ",
   itOldSaves: "ਪੁਰਾਣੀ ਪ੍ਰਣਾਲੀ ਤੁਹਾਡੀ ਬੱਚਤ ਕਰਦੀ ਹੈ",
   itDisclaimer:
-    "ਸਿਰਫ਼ ਅਨੁਮਾਨ, FY 2025-26 (AY 2026-27) ਸਲੈਬ ਅਤੇ ਸਰਲੀਕ੍ਰਿਤ ਧਾਰਾ 87A ਰਿਬੇਟ ਵਰਤ ਕੇ — ਇਸ ਵਿੱਚ ਸਰਚਾਰਜ ਅਤੇ ਕਈ ਕਟੌਤੀਆਂ ਨਹੀਂ ਹਨ। ਟੈਕਸ ਸਲੈਬ ਆਮ ਤੌਰ 'ਤੇ ਹਰ ਬਜਟ ਵਿੱਚ ਬਦਲਦੇ ਹਨ, ਇਸ ਲਈ ਫਾਈਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਨਵੀਨਤਮ ਅਧਿਕਾਰਿਕ ਸਲੈਬ ਜਾਂ ਚਾਰਟਰਡ ਅਕਾਊਂਟੈਂਟ ਨਾਲ ਪੁਸ਼ਟੀ ਕਰੋ।",
+    "ਸਿਰਫ਼ ਅਨੁਮਾਨ, FY 2025-26 (AY 2026-27) ਸਲੈਬ ਅਤੇ ਸਰਲੀਕ੍ਰਿਤ ਧਾਰਾ 87A ਰਿਬੇਟ ਵਰਤ ਕੇ — ਇਸ ਵਿੱਚ ਸਰਚਾਰਜ ਅਤੇ ਕਈ ਕਟੌਤੀਆਂ ਨਹੀਂ ਹਨ। ਟੈਕਸ ਸਲੈਬ ਆਮ ਤੌਰ 'ਤੇ ਹਰ ਬਜਟ ਵਿੱਚ ਬਦਲਦੇ ਹਨ, ਇਸ ਲਈ ਫਾਈਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਨਵੀਨਤਮ ਅਧਿਕਾਰਿਕ ਸਲੈਬ ਜਾਂ ਚਾਰਟਰਡ ਅਕਾਊਂਟੈਂਟ/CPA ਨਾਲ ਪੁਸ਼ਟੀ ਕਰੋ।",
   invCogs: "ਵੇਚੇ ਗਏ ਮਾਲ ਦੀ ਲਾਗਤ (ਮਿਆਦ)",
   invAvgValue: "ਔਸਤ ਇਨਵੈਂਟਰੀ ਮੁੱਲ",
   invDaysPeriod: "ਮਿਆਦ ਦੇ ਦਿਨ",
@@ -3488,7 +3488,7 @@ const es: Partial<CalcDict> = {
   itNewSaves: "El régimen nuevo te ahorra",
   itOldSaves: "El régimen antiguo te ahorra",
   itDisclaimer:
-    "Solo una estimación, usando los tramos del FY 2025-26 (AY 2026-27) y una reducción simplificada de la Sección 87A: excluye el recargo y varias deducciones. Los tramos suelen cambiar con cada presupuesto, así que verifica con los tramos oficiales más recientes o un contador antes de declarar.",
+    "Solo una estimación, usando los tramos del FY 2025-26 (AY 2026-27) y una reducción simplificada de la Sección 87A: excluye el recargo y varias deducciones. Los tramos suelen cambiar con cada presupuesto, así que verifica con los tramos oficiales más recientes o un contador/CPA antes de declarar.",
   invCogs: "Costo de bienes vendidos (período)",
   invAvgValue: "Valor promedio del inventario",
   invDaysPeriod: "Días en el período",
@@ -3797,7 +3797,7 @@ const fr: Partial<CalcDict> = {
   itNewSaves: "Le nouveau régime vous fait économiser",
   itOldSaves: "L'ancien régime vous fait économiser",
   itDisclaimer:
-    "Estimation seulement, selon les tranches du FY 2025-26 (AY 2026-27) et un abattement simplifié de la Section 87A — hors surtaxe et plusieurs déductions. Les tranches changent souvent à chaque budget, vérifiez donc avec les tranches officielles récentes ou un expert-comptable avant de déclarer.",
+    "Estimation seulement, selon les tranches du FY 2025-26 (AY 2026-27) et un abattement simplifié de la Section 87A — hors surtaxe et plusieurs déductions. Les tranches changent souvent à chaque budget, vérifiez donc avec les tranches officielles récentes ou un expert-comptable/CPA avant de déclarer.",
   invCogs: "Coût des marchandises vendues (période)",
   invAvgValue: "Valeur moyenne du stock",
   invDaysPeriod: "Jours dans la période",
@@ -4106,7 +4106,7 @@ const ar: Partial<CalcDict> = {
   itNewSaves: "النظام الجديد يوفر لك",
   itOldSaves: "النظام القديم يوفر لك",
   itDisclaimer:
-    "تقدير فقط، باستخدام شرائح FY 2025-26 (AY 2026-27) وخصم مبسّط للمادة 87A — يستثني الرسم الإضافي وعدة خصومات. تتغير الشرائح عادة مع كل ميزانية، لذا تحقق من الشرائح الرسمية الأحدث أو محاسب قانوني قبل التقديم.",
+    "تقدير فقط، باستخدام شرائح FY 2025-26 (AY 2026-27) وخصم مبسّط للمادة 87A — يستثني الرسم الإضافي وعدة خصومات. تتغير الشرائح عادة مع كل ميزانية، لذا تحقق من الشرائح الرسمية الأحدث أو محاسب قانوني/CPA قبل التقديم.",
   invCogs: "تكلفة البضائع المباعة (الفترة)",
   invAvgValue: "متوسط قيمة المخزون",
   invDaysPeriod: "أيام الفترة",
@@ -4415,7 +4415,7 @@ const pt: Partial<CalcDict> = {
   itNewSaves: "O regime novo economiza para você",
   itOldSaves: "O regime antigo economiza para você",
   itDisclaimer:
-    "Apenas uma estimativa, usando as faixas do FY 2025-26 (AY 2026-27) e uma dedução simplificada da Seção 87A — exclui sobretaxa e várias deduções. As faixas costumam mudar a cada orçamento, então verifique com as faixas oficiais mais recentes ou um contador antes de declarar.",
+    "Apenas uma estimativa, usando as faixas do FY 2025-26 (AY 2026-27) e uma dedução simplificada da Seção 87A — exclui sobretaxa e várias deduções. As faixas costumam mudar a cada orçamento, então verifique com as faixas oficiais mais recentes ou um contador/CPA antes de declarar.",
   invCogs: "Custo das mercadorias vendidas (período)",
   invAvgValue: "Valor médio do estoque",
   invDaysPeriod: "Dias no período",
@@ -4724,7 +4724,7 @@ const id: Partial<CalcDict> = {
   itNewSaves: "Rezim baru menghemat Anda",
   itOldSaves: "Rezim lama menghemat Anda",
   itDisclaimer:
-    "Hanya perkiraan, menggunakan slab FY 2025-26 (AY 2026-27) dan potongan Section 87A yang disederhanakan — tidak termasuk surcharge dan beberapa potongan. Slab pajak biasanya berubah tiap anggaran, jadi periksa dengan slab resmi terbaru atau akuntan sebelum melapor.",
+    "Hanya perkiraan, menggunakan slab FY 2025-26 (AY 2026-27) dan potongan Section 87A yang disederhanakan — tidak termasuk surcharge dan beberapa potongan. Slab pajak biasanya berubah tiap anggaran, jadi periksa dengan slab resmi terbaru atau akuntan/CPA sebelum melapor.",
   invCogs: "Harga pokok penjualan (periode)",
   invAvgValue: "Nilai rata-rata inventaris",
   invDaysPeriod: "Hari dalam periode",
@@ -5033,7 +5033,7 @@ const de: Partial<CalcDict> = {
   itNewSaves: "Neues System spart Ihnen",
   itOldSaves: "Altes System spart Ihnen",
   itDisclaimer:
-    "Nur eine Schätzung, mit den Stufen des FY 2025-26 (AY 2026-27) und einem vereinfachten Abschlag nach Section 87A — ohne Zuschlag und mehrere Abzüge. Steuerstufen ändern sich meist mit jedem Haushalt, prüfen Sie daher vor der Erklärung die aktuellsten offiziellen Stufen oder einen Steuerberater.",
+    "Nur eine Schätzung, mit den Stufen des FY 2025-26 (AY 2026-27) und einem vereinfachten Abschlag nach Section 87A — ohne Zuschlag und mehrere Abzüge. Steuerstufen ändern sich meist mit jedem Haushalt, prüfen Sie daher vor der Erklärung die aktuellsten offiziellen Stufen oder einen Steuerberater/CPA.",
   invCogs: "Wareneinsatz (Zeitraum)",
   invAvgValue: "Durchschnittlicher Lagerwert",
   invDaysPeriod: "Tage im Zeitraum",
@@ -5341,7 +5341,7 @@ const zh: Partial<CalcDict> = {
   itNewSaves: "新制为您节省",
   itOldSaves: "旧制为您节省",
   itDisclaimer:
-    "仅为估算，采用 FY 2025-26（AY 2026-27）税级和简化的第 87A 条退税——不含附加税及若干专项扣除。税级通常随每份预算变动，申报前请核对最新官方税级或咨询注册会计师。",
+    "仅为估算，采用 FY 2025-26（AY 2026-27）税级和简化的第 87A 条退税——不含附加税及若干专项扣除。税级通常随每份预算变动，申报前请核对最新官方税级或咨询注册会计师/CPA。",
   invCogs: "已售商品成本（周期）",
   invAvgValue: "平均库存价值",
   invDaysPeriod: "周期天数",

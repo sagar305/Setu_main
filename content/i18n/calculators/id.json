@@ -548,7 +548,7 @@
         "headline": "Rezim lama atau baru — putuskan dengan angka di depan Anda",
         "paragraphs": [
           "Sistem pajak penghasilan India memberi hampir semua wajib pajak pilihan antara rezim lama (lebih banyak pengurang, tarif lapisan lebih tinggi) dan rezim baru (lebih sedikit pengurang, tarif lebih rendah). Pilihan yang tepat sepenuhnya bergantung pada seberapa banyak pengurang dan pembebasan yang benar-benar Anda ambil — tidak ada satu jawaban untuk semua orang.",
-          "Kalkulator ini memperkirakan pajak terutang pada kedua rezim untuk tahun fiskal 2025-26 (tahun penilaian 2026-27), memakai lapisan tarif dan pengurang standar terbaru yang kami catat, termasuk keringanan Pasal 87A. Ia tidak menghitung pungutan tambahan atas penghasilan sangat tinggi, kasus batas keringanan marginal, maupun setiap pengurang yang mungkin — dan lapisan tarif biasanya direvisi tiap tahun dalam anggaran negara, jadi selalu cek lapisan resmi terbaru atau tanya akuntan sebelum melapor atau memilih rezim."
+          "Kalkulator ini memperkirakan pajak terutang pada kedua rezim untuk tahun fiskal 2025-26 (tahun penilaian 2026-27), memakai lapisan tarif dan pengurang standar terbaru yang kami catat, termasuk keringanan Pasal 87A. Ia tidak menghitung pungutan tambahan atas penghasilan sangat tinggi, kasus batas keringanan marginal, maupun setiap pengurang yang mungkin — dan lapisan tarif biasanya direvisi tiap tahun dalam anggaran negara, jadi selalu cek lapisan resmi terbaru atau tanya akuntan/CPA sebelum melapor atau memilih rezim."
         ]
       },
       "faq": {
@@ -567,8 +567,8 @@
             "answer": "Bergantung pada berapa besar pengurang yang Anda ambil — tunjangan rumah, investasi Pasal 80C, bunga kredit rumah, dan seterusnya. Kalau pengurang yang memenuhi syarat besar, rezim lama sering lebih murah; kalau Anda mengambil sedikit pengurang, tarif lebih rendah rezim baru biasanya menang. Bandingkan keduanya di sini dengan angka Anda sendiri."
           },
           {
-            "question": "Apakah ini menggantikan saran akuntan?",
-            "answer": "Tidak. Ini perkiraan sederhana untuk perencanaan saja — tidak memasukkan pungutan tambahan, detail cukai pada beberapa kasus, dan beberapa pengurang terperinci. Untuk pelaporan sebenarnya atau keputusan rezim yang menyangkut uang nyata, cek lapisan tarif terbaru dan konsultasikan dengan akuntan bersertifikat."
+            "question": "Apakah ini menggantikan saran akuntan/CPA?",
+            "answer": "Tidak. Ini perkiraan sederhana untuk perencanaan saja — tidak memasukkan pungutan tambahan, detail cukai pada beberapa kasus, dan beberapa pengurang terperinci. Untuk pelaporan sebenarnya atau keputusan rezim yang menyangkut uang nyata, cek lapisan tarif terbaru dan konsultasikan dengan akuntan bersertifikat/CPA."
           }
         ]
       },
@@ -1392,7 +1392,7 @@
           },
           {
             "question": "Metode mana yang sebaiknya saya pakai?",
-            "answer": "Untuk keperluan pajak penghasilan di India, saldo menurun pada tarif kelompok yang ditentukan adalah hal lazim bagi sebagian besar usaha. Untuk pembukuan manajemen Anda sendiri, garis lurus lebih sederhana dan menunjukkan biaya yang stabil. Perseroan yang melapor menurut undang-undang perseroan mengikuti masa manfaat pada Lampiran II. Kalau ragu, tanyakan ke akuntan Anda."
+            "answer": "Untuk keperluan pajak penghasilan di India, saldo menurun pada tarif kelompok yang ditentukan adalah hal lazim bagi sebagian besar usaha. Untuk pembukuan manajemen Anda sendiri, garis lurus lebih sederhana dan menunjukkan biaya yang stabil. Perseroan yang melapor menurut undang-undang perseroan mengikuti masa manfaat pada Lampiran II. Kalau ragu, tanyakan ke akuntan/CPA Anda."
           },
           {
             "question": "Apa itu nilai residu?",

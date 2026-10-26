@@ -1437,7 +1437,7 @@
           "headline": "What is a stock register?",
           "paragraphs": [
             "A stock register, also called an inventory register, is a running record of every item you keep for sale: what came in, what went out and what is left. Each entry ties a quantity to a date and a reason, such as a supplier delivery, a sale, a customer return or breakage, so the closing figure can always be traced back. For a kirana shop, a medical store or a restaurant store room, it answers the daily question of what to reorder and the monthly one of where stock went missing.",
-            "In India the register also feeds your books. Your CA needs the [closing stock](/glossary/closing-stock) figure at the end of the financial year to finalise the profit and loss account and balance sheet, and dated movements make that figure easier to defend if it is questioned in an audit. GST rules also expect registered businesses, other than composition dealers, to keep stock accounts of goods received and supplied, including goods lost, stolen, destroyed, written off or given away as free samples, which is what a stock in and out register records.",
+            "In India the register also feeds your books. Your CA/CPA needs the [closing stock](/glossary/closing-stock) figure at the end of the financial year to finalise the profit and loss account and balance sheet, and dated movements make that figure easier to defend if it is questioned in an audit. GST rules also expect registered businesses, other than composition dealers, to keep stock accounts of goods received and supplied, including goods lost, stolen, destroyed, written off or given away as free samples, which is what a stock in and out register records.",
             "Setu's Stock Register works on the same products as the free [Browser Based POS](/products/browser-based-pos). For products with stock tracking switched on, counter sales are deducted automatically, so you only record what the till cannot see: deliveries, damaged packs, free samples and corrections after a physical count. That keeps the register short enough to maintain on a busy day, without a second copy of your stock list in a notebook or a spreadsheet."
           ]
         },
@@ -1492,7 +1492,7 @@
         {
           "kind": "note",
           "headline": "Always write a reason for stock out",
-          "text": "When stock goes down for any reason other than a sale, write why in the note: damage, expiry, theft, free sample or count correction. Leave it blank and the entry is saved as a plain \"Stock out\", and a month later nobody remembers what happened. The reason matters for tax too: input tax credit on goods that are lost, stolen, destroyed, written off or given away as free samples generally has to be reversed, so your CA will ask for exactly these entries. See [ITC reversal](/glossary/itc-reversal) and [shrinkage](/glossary/shrinkage)."
+          "text": "When stock goes down for any reason other than a sale, write why in the note: damage, expiry, theft, free sample or count correction. Leave it blank and the entry is saved as a plain \"Stock out\", and a month later nobody remembers what happened. The reason matters for tax too: input tax credit on goods that are lost, stolen, destroyed, written off or given away as free samples generally has to be reversed, so your CA/CPA will ask for exactly these entries. See [ITC reversal](/glossary/itc-reversal) and [shrinkage](/glossary/shrinkage)."
         },
         {
           "kind": "links",
@@ -1583,7 +1583,7 @@
           "headline": "What is a purchase register?",
           "paragraphs": [
             "A purchase register is a date-wise record of every bill you receive from suppliers: who you bought from, the bill number, what you bought, what it cost and how you paid. It answers everyday questions quickly. How much did we buy from this wholesaler last month? Was that bill paid in cash, or is it still on credit? For a shop, pharmacy or restaurant it is also where stock control starts, because what you buy is what should be on the shelf or in the kitchen.",
-            "Under GST, registered businesses have to keep accounts of their inward supplies, and the purchase register is the list your CA works from when matching supplier bills with [GSTR-2B](/glossary/gstr-2b) before claiming [input tax credit](/glossary/input-tax-credit). A bill missing from the register is easy to overlook at return time, and a bill entered twice can overstate both your costs and the credit you think you are owed.",
+            "Under GST, registered businesses have to keep accounts of their inward supplies, and the purchase register is the list your CA/CPA works from when matching supplier bills with [GSTR-2B](/glossary/gstr-2b) before claiming [input tax credit](/glossary/input-tax-credit). A bill missing from the register is easy to overlook at return time, and a bill entered twice can overstate both your costs and the credit you think you are owed.",
             "Kept up to date, a purchase register also shows how you buy. You can see which supplier you depend on most, how often you restock a fast-moving item and whether the unit cost of your key products is creeping up. That is the information you want in hand before you negotiate rates, switch suppliers or decide how much to order next time."
           ]
         },
@@ -1881,7 +1881,7 @@
           "headline": "What is a business expense tracker?",
           "paragraphs": [
             "An **expense tracker** is the digital form of the kharcha register many shops keep at the counter: a dated list of what the business spends on rent, salaries, electricity, transport, repairs, marketing and purchases. Each entry notes the date, category, amount, how it was paid and what it was for. Totalled by month and category, the register shows your running costs at a glance and gives you most of the figures for the [operating expenses](/glossary/operating-expense) section of your profit and loss account.",
-            "Expenses are where small-business profit quietly leaks. Cash paid to a plumber, a UPI transfer for diesel or a tea-and-snacks bill rarely reaches the books unless someone writes it down the same day. A monthly expense register lets you compare months, spot a bill that keeps creeping up, and hand your accountant one file instead of a bag of receipts. Keep the original bills and GST invoices as well, because your CA needs them to support the entries and to claim [input tax credit](/glossary/input-tax-credit) where it is allowed.",
+            "Expenses are where small-business profit quietly leaks. Cash paid to a plumber, a UPI transfer for diesel or a tea-and-snacks bill rarely reaches the books unless someone writes it down the same day. A monthly expense register lets you compare months, spot a bill that keeps creeping up, and hand your accountant one file instead of a bag of receipts. Keep the original bills and GST invoices as well, because your CA/CPA needs them to support the entries and to claim [input tax credit](/glossary/input-tax-credit) where it is allowed.",
             "Recording the payment mode pays off later. When each entry says cash, UPI, card or bank transfer, matching expenses against your bank statement and cash book takes minutes, and you can see how much of your spending still goes out in cash. That matters at tax time too: income tax rules generally disallow a business deduction for a cash payment above ₹10,000 to one person in a day, so large bills are better paid by UPI or bank transfer."
           ]
         },
@@ -2035,8 +2035,8 @@
           "headline": "What is a cash book?",
           "paragraphs": [
             "A cash book is the daily register of every rupee that comes into and goes out of the cash drawer, kept in date order with a running balance. Many shops know it as the rokad bahi or rojnamcha: cash sales collected on one side, payments for tea, transport, wages and small purchases on the other, and the day's closing balance carried forward as the next morning's opening. It is the simplest of the [books of accounts](/glossary/books-of-accounts) and often the first one a business keeps.",
-            "Cash is the asset that goes missing most easily. When the closing balance in the book is compared with the notes and coins actually in the drawer each evening, a shortfall shows up the same day, while the person on the counter still remembers what happened. A cash book also gives your CA a record that supports cash sales and cash expenses at year-end, and it supplies the cash figure your balance sheet and cash flow statement need.",
-            "Cash still pays for many small daily expenses in Indian shops, but income tax rules restrict large cash payments and receipts, and a business expense paid in cash above the permitted limit can be disallowed. Your CA can tell you the current limits. A dated cash book with a description against each entry is what you will need if a cash expense or a cash deposit into the bank is ever questioned. Record [petty cash](/glossary/petty-cash) spends as they happen rather than in one lump at month-end."
+            "Cash is the asset that goes missing most easily. When the closing balance in the book is compared with the notes and coins actually in the drawer each evening, a shortfall shows up the same day, while the person on the counter still remembers what happened. A cash book also gives your CA/CPA a record that supports cash sales and cash expenses at year-end, and it supplies the cash figure your balance sheet and cash flow statement need.",
+            "Cash still pays for many small daily expenses in Indian shops, but income tax rules restrict large cash payments and receipts, and a business expense paid in cash above the permitted limit can be disallowed. Your CA/CPA can tell you the current limits. A dated cash book with a description against each entry is what you will need if a cash expense or a cash deposit into the bank is ever questioned. Record [petty cash](/glossary/petty-cash) spends as they happen rather than in one lump at month-end."
           ]
         },
         {
@@ -2073,7 +2073,7 @@
             {
               "icon": "📊",
               "title": "Full-book CSV",
-              "text": "Exports Date, Type, Description, In, Out and a running Balance column for Excel, Google Sheets or your CA."
+              "text": "Exports Date, Type, Description, In, Out and a running Balance column for Excel, Google Sheets or your CA/CPA."
             },
             {
               "icon": "🔗",
@@ -2174,7 +2174,7 @@
           },
           {
             "question": "Does the profit shown include GST?",
-            "answer": "On the sales side, yes. Revenue is the total of each completed POS bill, including any GST charged on it, so for a GST-registered business the revenue and profit figures include output GST that you collect for the government. Cost of goods and expenses use whatever amounts you entered, with or without GST. For tax filing and returns, rely on your books or your CA's figures."
+            "answer": "On the sales side, yes. Revenue is the total of each completed POS bill, including any GST charged on it, so for a GST-registered business the revenue and profit figures include output GST that you collect for the government. Cost of goods and expenses use whatever amounts you entered, with or without GST. For tax filing and returns, rely on your books or your CA/CPA's figures."
           },
           {
             "question": "Can I export or print the profit dashboard?",
@@ -2335,7 +2335,7 @@
           "headline": "What is a customer ledger, and why keep one?",
           "paragraphs": [
             "A **customer ledger** is a separate account for each customer who buys on credit. Every time you hand over goods without collecting the full amount, their balance goes up; every time they pay, it comes down. In Indian shops this is the udhaar khata or bahi khata, the notebook behind the counter with a page for each family or regular buyer. Its job is simple: at any moment you should be able to say exactly who owes you how much, and since when, without flipping through months of handwriting.",
-            "Credit is how many kirana stores, medical shops, dairies and small wholesalers keep regular customers, but unrecorded udhaar is also where cash quietly leaks. A forgotten ₹200 here and ₹500 there add up over a year. Deciding a [credit limit](/glossary/credit-limit) for each regular customer, and checking their balance before you give more, stops one unpaid account from eating a month's margin. The total your customers owe is part of your [accounts receivable](/glossary/accounts-receivable), and your CA will ask for it when preparing your accounts. If you are GST-registered, a credit sale still needs its tax invoice or bill; the khata tracks who has paid, not the tax."
+            "Credit is how many kirana stores, medical shops, dairies and small wholesalers keep regular customers, but unrecorded udhaar is also where cash quietly leaks. A forgotten ₹200 here and ₹500 there add up over a year. Deciding a [credit limit](/glossary/credit-limit) for each regular customer, and checking their balance before you give more, stops one unpaid account from eating a month's margin. The total your customers owe is part of your [accounts receivable](/glossary/accounts-receivable), and your CA/CPA will ask for it when preparing your accounts. If you are GST-registered, a credit sale still needs its tax invoice or bill; the khata tracks who has paid, not the tax."
           ]
         },
         {
@@ -2485,7 +2485,7 @@
           "kind": "prose",
           "headline": "What is an appointment book?",
           "paragraphs": [
-            "An appointment book is the day-by-day record of who is coming, when, for which service and for how long. Salons, clinics, physiotherapists, tutors, CAs and repair shops have long kept one as a paper diary at the counter or a register next to the phone. A free appointment scheduler does the same job on screen: each booking holds a customer, a phone number, a service, a start time and a duration, so you can see at a glance which slots are taken and which are still open.",
+            "An appointment book is the day-by-day record of who is coming, when, for which service and for how long. Salons, clinics, physiotherapists, tutors, CAs/CPAs and repair shops have long kept one as a paper diary at the counter or a register next to the phone. A free appointment scheduler does the same job on screen: each booking holds a customer, a phone number, a service, a start time and a duration, so you can see at a glance which slots are taken and which are still open.",
             "The book matters most when time is what you sell. Give two customers the same 11 o'clock slot and one of them waits or walks out. A chair or consulting room left empty because someone did not turn up is income you cannot recover. Recording the outcome of every booking, whether completed, cancelled or a [no-show](/glossary/no-show), shows you which customers keep their appointments and which need a reminder or an advance. For a clinic or consultant, the dated list of completed visits also helps when you match fees collected against your books.",
             "In India, many bookings still arrive as phone calls and WhatsApp messages, and the details end up scattered across chats. Keeping them in one place, and sending the customer a written confirmation of the date and time, cuts down on arguments about who said what. For long services such as bridal make-up or a full-body check-up, asking for a booking fee by [UPI](/glossary/upi) before the day is a simple way to make sure the customer turns up."
           ]
@@ -2610,7 +2610,7 @@
           },
           {
             "question": "Is this credit note GST-compliant?",
-            "answer": "It carries the fields GST practice expects — your GSTIN, the customer's GSTIN, the original invoice reference, itemised lines with tax rates and a clear reason. Report it in your GST returns as your CA advises."
+            "answer": "It carries the fields GST practice expects — your GSTIN, the customer's GSTIN, the original invoice reference, itemised lines with tax rates and a clear reason. Report it in your GST returns as your CA/CPA advises."
           },
           {
             "question": "Is my data private?",
@@ -2663,7 +2663,7 @@
             {
               "icon": "🧾",
               "title": "Linked to the original invoice",
-              "text": "The Against invoice no. field prints as Ref on the note, so the customer and your CA can see exactly which bill is being reduced."
+              "text": "The Against invoice no. field prints as Ref on the note, so the customer and your CA/CPA can see exactly which bill is being reduced."
             },
             {
               "icon": "📋",
@@ -2796,7 +2796,7 @@
           "headline": "What is a debit note?",
           "paragraphs": [
             "A debit note is the buyer's formal claim against a supplier's bill. It names the bill, states the reason and values the adjustment line by line, so the supplier can check it and your books can show the reduced amount you owe. In your books it debits the supplier's account, which is where the name comes from, and in Tally it is the Debit Note voucher used for purchase returns. This debit note generator turns that claim into a numbered, printable document in a minute or two.",
-            "Under GST the term means something narrower. The GST law's [debit note](/glossary/debit-note) is issued by a supplier who undercharged, because the taxable value or tax on the invoice was too low, and it raises the amount payable. A buyer's debit note for a return is a commercial document: the GST adjustment happens when the supplier issues a matching [credit note](/glossary/credit-note) and reports it, after which you reduce the input tax credit you claimed. Keep both documents on file and tell your CA which is which.",
+            "Under GST the term means something narrower. The GST law's [debit note](/glossary/debit-note) is issued by a supplier who undercharged, because the taxable value or tax on the invoice was too low, and it raises the amount payable. A buyer's debit note for a return is a commercial document: the GST adjustment happens when the supplier issues a matching [credit note](/glossary/credit-note) and reports it, after which you reduce the input tax credit you claimed. Keep both documents on file and tell your CA/CPA which is which.",
             "A worked example: supplier bill B-7781 charged 50 kg of cashews at ₹900 a kg with GST at 5%, but the agreed rate was ₹860. Choose Rate difference / overcharge, enter B-7781 in Against bill / invoice no., and add one line of 50 Kg at ₹40, the difference per kg, with tax at 5%. The note totals ₹2,000 plus ₹100 tax, so ₹2,100. Deduct that when you pay the bill, and ask the supplier for a credit note for the same amount."
           ]
         },
@@ -3086,7 +3086,7 @@
           },
           {
             "question": "How do I record an advance on a sales order?",
-            "answer": "There is no separate advance field, so write it in Notes & terms, for example: Advance of ₹20,000 received by UPI on 3 October, balance on delivery. The order total stays the full value of the order. Record the advance itself in your cash book or customer ledger and adjust it against the final invoice. For services such as catering, GST is generally due on an advance when you receive it, so check with your CA."
+            "answer": "There is no separate advance field, so write it in Notes & terms, for example: Advance of ₹20,000 received by UPI on 3 October, balance on delivery. The order total stays the full value of the order. Record the advance itself in your cash book or customer ledger and adjust it against the final invoice. For services such as catering, GST is generally due on an advance when you receive it, so check with your CA/CPA."
           },
           {
             "question": "Can I make a sales order on my phone?",
@@ -3248,7 +3248,7 @@
           "headline": "What is a chart of accounts used for?",
           "paragraphs": [
             "A chart of accounts decides where every rupee is sorted before it reaches your [profit and loss statement](/glossary/profit-and-loss-statement) and [balance sheet](/glossary/balance-sheet). If rent, electricity and staff salaries all land in one Expenses account, you cannot tell which cost is rising. A good chart of accounts for a small business is short enough to use every day, yet detailed enough to answer the questions you ask most: how much went on purchases, what customers still owe and how much GST you owe.",
-            "Businesses that keep books in Tally know these accounts as ledgers, grouped under heads such as Current Assets, Sundry Debtors, Duties & Taxes and Indirect Expenses. The idea is the same: each account belongs to exactly one group, and the groups roll up into your final accounts. When your CA prepares the year-end statements or works on a tax audit, a clean and consistent account list makes the job faster and cuts down the questions sent back to you.",
+            "Businesses that keep books in Tally know these accounts as ledgers, grouped under heads such as Current Assets, Sundry Debtors, Duties & Taxes and Indirect Expenses. The idea is the same: each account belongs to exactly one group, and the groups roll up into your final accounts. When your CA/CPA prepares the year-end statements or works on a tax audit, a clean and consistent account list makes the job faster and cuts down the questions sent back to you.",
             "The chart is also where good bookkeeping habits start. Tax collected on sales goes into GST Payable, not Sales Revenue. Money the owner takes home goes into Owner's Drawings, not Salaries & Wages. A cash deposit into the bank is a move between two asset accounts, not income. Set these accounts up correctly once, and every journal entry, ledger and trial balance built on them follows the same rules."
           ]
         },
@@ -3309,7 +3309,7 @@
             "Record GST collected and paid in GST Payable, never inside Sales or Purchases.",
             "Book money the owner takes out in Owner's Drawings, not Salaries & Wages, so business profit is not understated.",
             "Keep Miscellaneous Expense small. If one cost keeps landing there, give it its own account.",
-            "Review the chart with your CA at the start of each financial year, before the first entries of the year are posted."
+            "Review the chart with your CA/CPA at the start of each financial year, before the first entries of the year are posted."
           ]
         },
         {
@@ -3402,7 +3402,7 @@
           "headline": "What is a journal entry in double-entry bookkeeping?",
           "paragraphs": [
             "A journal entry is the first record of a business transaction: the date, the accounts it touches, the amount on the debit side, the amount on the credit side and a narration saying what happened. In [double-entry bookkeeping](/glossary/double-entry-bookkeeping) the journal is called the book of original entry, because everything else, from account ledgers to the trial balance and final accounts, is built from it. Read in date order, it is the day-by-day history of your business.",
-            "If you have used Tally, you have already made journal entries, even if the screen called them payment, receipt, contra, sales or purchase vouchers. Each of those is a debit-and-credit record underneath. Your CA, and the auditor in a [tax audit](/glossary/tax-audit), trace figures in the final accounts back to these vouchers, so an entry with a clear narration and a bill or cheque reference saves time and follow-up questions at year end.",
+            "If you have used Tally, you have already made journal entries, even if the screen called them payment, receipt, contra, sales or purchase vouchers. Each of those is a debit-and-credit record underneath. Your CA/CPA, and the auditor in a [tax audit](/glossary/tax-audit), trace figures in the final accounts back to these vouchers, so an entry with a clear narration and a bill or cheque reference saves time and follow-up questions at year end.",
             "Many errors in small-business books come from picking the wrong account rather than from wrong arithmetic. GST collected gets credited to sales, the owner's withdrawals get booked as salary, and a cash deposit into the bank is recorded as income. Each of those entries balances perfectly and is still wrong. Choosing accounts deliberately, and asking what an entry does to profit and to what you owe, matters more than speed."
           ]
         },
@@ -3463,7 +3463,7 @@
             "The right account on each line, chosen from your chart of accounts.",
             "A narration naming the party and the document, such as the bill number, cheque number or UPI reference.",
             "GST on its own line whenever tax was collected or paid.",
-            "The supporting bill or receipt filed where you can find it for your CA or auditor."
+            "The supporting bill or receipt filed where you can find it for your CA/CPA or auditor."
           ]
         },
         {
@@ -3556,7 +3556,7 @@
           "headline": "What is a general ledger?",
           "paragraphs": [
             "A general ledger is the account-by-account record that sits behind your financial statements. The journal lists transactions in date order; the ledger regroups the same postings by account, so you can open Bank Account, Sales Revenue or Rent Expense and see every debit, every credit and the balance after each one. The closing balances of all the ledgers make up the [trial balance](/glossary/trial-balance), which in turn feeds the profit and loss statement and balance sheet.",
-            "In India, accountants often say ledger when they mean a single account: a party ledger for a supplier, the bank ledger, the GST ledger. Tally works the same way. When your CA prepares final accounts or checks figures for a tax audit, ledger extracts answer specific questions: why rent went up, whether a supplier's balance agrees with their [statement of account](/glossary/statement-of-account), and whether the GST booked matches what was paid.",
+            "In India, accountants often say ledger when they mean a single account: a party ledger for a supplier, the bank ledger, the GST ledger. Tally works the same way. When your CA/CPA prepares final accounts or checks figures for a tax audit, ledger extracts answer specific questions: why rent went up, whether a supplier's balance agrees with their [statement of account](/glossary/statement-of-account), and whether the GST booked matches what was paid.",
             "A running balance is also the quickest way to catch mistakes. A cash account that goes negative, a supplier account showing a debit balance, or an expense that doubles in one month usually means something was posted to the wrong account or on the wrong side. Spotting it in the ledger during the year is far easier than unpicking it after the books are closed."
           ]
         },
@@ -3875,9 +3875,9 @@
           "kind": "prose",
           "headline": "What is a trial balance used for?",
           "paragraphs": [
-            "A trial balance is the checkpoint between day-to-day bookkeeping and the final accounts. Before anyone draws up a profit and loss account or a balance sheet, the closing balance of every ledger account is listed as on one date and the debit and credit columns are totalled. Accountants prepare one at each [month-end close](/glossary/month-end-close) and again at 31 March, when the year's books are finalised. It is a working paper for you and your CA, not a statement you file or send to customers.",
+            "A trial balance is the checkpoint between day-to-day bookkeeping and the final accounts. Before anyone draws up a profit and loss account or a balance sheet, the closing balance of every ledger account is listed as on one date and the debit and credit columns are totalled. Accountants prepare one at each [month-end close](/glossary/month-end-close) and again at 31 March, when the year's books are finalised. It is a working paper for you and your CA/CPA, not a statement you file or send to customers.",
             "Matching totals prove that debits equal credits; they do not prove the books are right. An entry left out altogether, posted twice, or posted to the wrong account will still balance, and so will two mistakes that cancel each other. Use the trial balance to catch arithmetic and posting errors quickly, then review the accounts themselves. Read down the list as well as across the totals: a balance sitting on an unusual side is often the first sign of a posting error.",
-            "In India your CA will usually ask for a trial balance before finalising accounts for the income tax return or a [tax audit](/glossary/tax-audit), and Tally users will know it as one of the standard reports. If your books are kept elsewhere, a trial balance in a standard format, exported as CSV, gives the CA the same starting point: every account, its net balance and the side it falls on. A suspense account still carrying a balance at year-end means something has not been sorted out."
+            "In India your CA/CPA will usually ask for a trial balance before finalising accounts for the income tax return or a [tax audit](/glossary/tax-audit), and Tally users will know it as one of the standard reports. If your books are kept elsewhere, a trial balance in a standard format, exported as CSV, gives the CA/CPA the same starting point: every account, its net balance and the side it falls on. A suspense account still carrying a balance at year-end means something has not been sorted out."
           ]
         },
         {
@@ -4013,7 +4013,7 @@
           },
           {
             "question": "How often should a small business prepare a profit and loss statement?",
-            "answer": "Monthly is the most useful rhythm for a shop, restaurant or clinic, because problems with margins or overheads show up while they are still small. Your CA will prepare the annual statement for the financial year ending 31 March. Keeping a PDF or CSV of each month also lets you compare the same month across years, which matters for seasonal businesses."
+            "answer": "Monthly is the most useful rhythm for a shop, restaurant or clinic, because problems with margins or overheads show up while they are still small. Your CA/CPA will prepare the annual statement for the financial year ending 31 March. Keeping a PDF or CSV of each month also lets you compare the same month across years, which matters for seasonal businesses."
           }
         ]
       },
@@ -4023,7 +4023,7 @@
           "headline": "What is a profit and loss statement used for?",
           "paragraphs": [
             "A profit and loss statement, also called an income statement or P&L, measures performance over a period, such as a month, a quarter or the April to March financial year, rather than the position on one date. It answers a single question: after paying for stock, rent, salaries and everything else, did the business make money in that period, and how much? The balance sheet is a photograph of one day; the P&L explains the months that led up to it.",
-            "Your CA uses the P&L to work out taxable business income for the income tax return, and banks read it alongside the balance sheet before sanctioning a loan or overdraft. For the owner, a monthly P&L is more useful than an annual one. It shows a falling [gross profit](/glossary/gross-profit) margin soon after supplier rates rise, or rent and salaries creeping up as a share of sales, while there is still time to change prices or cut costs.",
+            "Your CA/CPA uses the P&L to work out taxable business income for the income tax return, and banks read it alongside the balance sheet before sanctioning a loan or overdraft. For the owner, a monthly P&L is more useful than an annual one. It shows a falling [gross profit](/glossary/gross-profit) margin soon after supplier rates rise, or rent and salaries creeping up as a share of sales, while there is still time to change prices or cut costs.",
             "Two habits keep an Indian P&L honest. Enter sales without the GST you charged, because that tax belongs to the government and only passes through your hands until you pay it with GSTR-3B. Enter purchases without GST too when you claim [input tax credit](/glossary/input-tax-credit) on them. A composition-scheme business is different: it cannot collect GST from customers or claim credit, so the GST on its purchases is part of their cost and the tax it pays on turnover is an expense."
           ]
         },
@@ -4070,7 +4070,7 @@
             },
             {
               "icon": "📊",
-              "title": "CSV for your CA",
+              "title": "CSV for your CA/CPA",
               "text": "Exports every line with its section, the tax amount, and the gross, operating and net profit results."
             }
           ]
@@ -4170,8 +4170,8 @@
           "headline": "What does a balance sheet tell a small business owner?",
           "paragraphs": [
             "A balance sheet answers \"where do I stand today?\" rather than \"how did I do this month?\". It is drawn up as of one date, most often 31 March, the last day of the Indian financial year, and sets everything the business owns against everything it owes. This balance sheet maker uses a simple single-column format: current and fixed assets add up to total assets, current and long-term liabilities add up to total liabilities, and equity is added to that to give total liabilities and equity.",
-            "Banks and NBFCs usually ask for a balance sheet, together with the profit and loss account, when you apply for a business loan, an overdraft or a [working capital](/glossary/working-capital) limit. Your CA prepares the final one at year-end for the income tax return or an audit. A balance sheet you build yourself during the year is still worth the effort: it shows early whether loans are growing faster than assets, whether stock is piling up, or whether losses are eating into the owner's capital.",
-            "For a GST-registered shop, a few lines need care. GST collected on sales but not yet paid to the government is a current liability, not income, so it belongs under GST payable. Unused input tax credit is usually shown as a current asset. Owner's capital is the money you put in, and [retained earnings](/glossary/retained-earnings) is the profit kept in the business over the years. For a proprietorship, many CAs show both as one capital account: opening capital plus profit, minus drawings."
+            "Banks and NBFCs usually ask for a balance sheet, together with the profit and loss account, when you apply for a business loan, an overdraft or a [working capital](/glossary/working-capital) limit. Your CA/CPA prepares the final one at year-end for the income tax return or an audit. A balance sheet you build yourself during the year is still worth the effort: it shows early whether loans are growing faster than assets, whether stock is piling up, or whether losses are eating into the owner's capital.",
+            "For a GST-registered shop, a few lines need care. GST collected on sales but not yet paid to the government is a current liability, not income, so it belongs under GST payable. Unused input tax credit is usually shown as a current asset. Owner's capital is the money you put in, and [retained earnings](/glossary/retained-earnings) is the profit kept in the business over the years. For a proprietorship, many CAs/CPAs show both as one capital account: opening capital plus profit, minus drawings."
           ]
         },
         {
@@ -4218,7 +4218,7 @@
             {
               "icon": "📊",
               "title": "CSV export",
-              "text": "Downloads every line with its section and amount, plus total assets and total liabilities and equity, ready for Excel, Google Sheets or your CA."
+              "text": "Downloads every line with its section and amount, plus total assets and total liabilities and equity, ready for Excel, Google Sheets or your CA/CPA."
             }
           ]
         },
@@ -4373,7 +4373,7 @@
             {
               "icon": "📊",
               "title": "CSV export",
-              "text": "Downloads each line by section, plus opening cash, net change and closing cash, for a spreadsheet or your CA."
+              "text": "Downloads each line by section, plus opening cash, net change and closing cash, for a spreadsheet or your CA/CPA."
             }
           ]
         },
@@ -4384,7 +4384,7 @@
             "Closing cash should equal the cash counted in hand plus your bank balances on the last day of the period.",
             "After a cash book pull, take out any opening-balance entry, move loans, capital introduced and drawings to financing, and move equipment paid for in cash to investing.",
             "If your cash book records drawer cash only, add bank, UPI and card receipts and payments after a pull, and take out cash you deposited into your own bank account, which is only a transfer.",
-            "Split each loan EMI into principal and interest: principal repaid is financing, and many CAs show interest paid there too.",
+            "Split each loan EMI into principal and interest: principal repaid is financing, and many CAs/CPAs show interest paid there too.",
             "Leave depreciation out, because it is a book entry and no cash moves.",
             "Count GST paid to the government as an operating outflow in the month you actually pay it."
           ]
@@ -4631,7 +4631,7 @@
           "kind": "prose",
           "headline": "What is debtor aging analysis, and who uses it?",
           "paragraphs": [
-            "An **invoice aging report**, also called accounts receivable aging or debtor aging analysis, lists the money customers owe you and sorts it by how far past the due date each invoice is. Your sales figures show what you earned; the aging report shows how much of it is still sitting with customers. Owners use it to plan collection calls. Banks commonly ask for a debtors list by age when working out drawing power on a cash credit account. Your CA uses it at year end to judge which old balances may never come in and should be treated as [bad debt](/glossary/bad-debt).",
+            "An **invoice aging report**, also called accounts receivable aging or debtor aging analysis, lists the money customers owe you and sorts it by how far past the due date each invoice is. Your sales figures show what you earned; the aging report shows how much of it is still sitting with customers. Owners use it to plan collection calls. Banks commonly ask for a debtors list by age when working out drawing power on a cash credit account. Your CA/CPA uses it at year end to judge which old balances may never come in and should be treated as [bad debt](/glossary/bad-debt).",
             "For a GST-registered business, an unpaid invoice costs more than the wait. GST on a sale generally becomes payable based on the invoice date, not the date the customer pays, so you deposit the tax in your next return even if the customer has not paid you anything. A customer who pays 60 days late is borrowing that tax from you as well. Companies also have to show trade receivables by age in the notes to their balance sheet, so a running aging list makes the year-end close quicker. Tracking [days sales outstanding](/glossary/days-sales-outstanding) month on month tells you whether collections are improving."
           ]
         },
@@ -4778,7 +4778,7 @@
           "headline": "What is an accounts payable aging report used for?",
           "paragraphs": [
             "An **accounts payable aging** report lists what you owe suppliers and sorts it by how long each bill has been past its due date, with a total for every age band and every supplier. It turns a pile of unpaid bills into figures you can act on: how much is overdue, how much is badly overdue, and to whom. Your accountant uses the same view to check trade payables at month end. It is also a quick first check when a supplier's statement does not match your books, because a very old unpaid bill is often one that was paid but never marked as paid.",
-            "In India, two rules make old payables costly. If you claim input tax credit on a purchase but do not pay the supplier within 180 days of the invoice date, you must [reverse that credit](/glossary/itc-reversal) with interest, and can claim it again once you pay. Udyam-registered micro and small manufacturers and service providers must be paid within the agreed credit period, capped at 45 days, or within 15 days if nothing is agreed in writing. Pay them later and the expense is deductible for income tax only in the year you actually pay. This [MSME 45-day rule](/glossary/msme-45-day-payment-rule) is why many CAs ask for payables by age before the year closes."
+            "In India, two rules make old payables costly. If you claim input tax credit on a purchase but do not pay the supplier within 180 days of the invoice date, you must [reverse that credit](/glossary/itc-reversal) with interest, and can claim it again once you pay. Udyam-registered micro and small manufacturers and service providers must be paid within the agreed credit period, capped at 45 days, or within 15 days if nothing is agreed in writing. Pay them later and the expense is deductible for income tax only in the year you actually pay. This [MSME 45-day rule](/glossary/msme-45-day-payment-rule) is why many CAs/CPAs ask for payables by age before the year closes."
           ]
         },
         {
@@ -4967,7 +4967,7 @@
             {
               "icon": "📤",
               "title": "CSV export",
-              "text": "Download the sheet with a favourable Yes or No column and a total row, ready for Excel, Google Sheets or your CA."
+              "text": "Download the sheet with a favourable Yes or No column and a total row, ready for Excel, Google Sheets or your CA/CPA."
             },
             {
               "icon": "💾",
@@ -5225,7 +5225,7 @@
           "headline": "What is a vendor comparison matrix?",
           "paragraphs": [
             "A **vendor comparison** matrix, also called a supplier scorecard or weighted decision matrix, lists the suppliers you are considering as columns and the things you care about as rows: price, quality, delivery reliability, credit terms and support. Each supplier gets a score on each row, each row carries a weight, and the weighted total ranks them. The result is one sheet that shows why a supplier was chosen, instead of a decision made from memory of the last phone call.",
-            "For a restaurant buying oil and dairy, a pharmacy choosing a distributor or a shop switching wholesalers, the cheapest rate card rarely tells the full story. Thirty days of credit instead of cash on delivery changes your [working capital](/glossary/working-capital). A supplier who issues correct tax invoices with your [GSTIN](/glossary/gstin) and files GST returns on time keeps your input tax credit flowing, while a distributor who misses delivery days forces emergency buying at retail rates. Writing these trade-offs down also gives you an answer when a partner, auditor or CA asks why a costlier vendor was approved.",
+            "For a restaurant buying oil and dairy, a pharmacy choosing a distributor or a shop switching wholesalers, the cheapest rate card rarely tells the full story. Thirty days of credit instead of cash on delivery changes your [working capital](/glossary/working-capital). A supplier who issues correct tax invoices with your [GSTIN](/glossary/gstin) and files GST returns on time keeps your input tax credit flowing, while a distributor who misses delivery days forces emergency buying at retail rates. Writing these trade-offs down also gives you an answer when a partner, auditor or CA/CPA asks why a costlier vendor was approved.",
             "The tool multiplies each score by its criterion weight, adds the results, divides by the total weight and multiplies by 10, giving a score out of 100. With the starting weights of Price 30, Quality 25, Delivery reliability 20, Credit terms 15 and Support 10, Vendor A scores 9, 6, 6, 8 and 5: 270 + 150 + 120 + 120 + 50 = 710, and 710 ÷ 100 × 10 = 71. Vendor B scores 6, 9, 9, 5 and 8: 180 + 225 + 180 + 75 + 80 = 740, or 74. B ranks first even though A has the better price."
           ]
         },

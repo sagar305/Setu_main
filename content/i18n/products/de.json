@@ -55,7 +55,7 @@
     {
       "name": "Kontoauszug-Analyse",
       "headline": "Kostenlose Kontoauszug-Analyse, direkt im Browser",
-      "description": "Eine vollständig kostenlose Kontoauszug-Analyse für Steuerberater und alle, die Bücher führen. Auszug als PDF, Excel oder CSV einlesen, jede Buchung nach Ihren eigenen Regeln klassifizieren, mit dem Hauptbuch abstimmen und Berichte exportieren — ohne Anmeldung, ohne Abo, und der Auszug wird nirgendwohin hochgeladen.",
+      "description": "Eine vollständig kostenlose Kontoauszug-Analyse für Steuerberater/CPA und alle, die Bücher führen. Auszug als PDF, Excel oder CSV einlesen, jede Buchung nach Ihren eigenen Regeln klassifizieren, mit dem Hauptbuch abstimmen und Berichte exportieren — ohne Anmeldung, ohne Abo, und der Auszug wird nirgendwohin hochgeladen.",
       "features": [
         "Liest PDF, XLSX, XLS und CSV, auch passwortgeschützte PDFs",
         "Nichts wird hochgeladen: Einlesen und Auswerten laufen in Ihrem Browser",
