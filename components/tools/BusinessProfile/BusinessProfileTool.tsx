@@ -15,7 +15,7 @@ import {
 } from "@/components/toolkit/ui";
 import { getBusiness } from "@/lib/toolkit/workspace";
 import { dbPut } from "@/lib/pos/db";
-import { nowIso, taxIdLabel, type Business } from "@/lib/pos/types";
+import { nowIso, type Business } from "@/lib/pos/types";
 import {
   allCurrencies,
   allTimezones,
@@ -123,8 +123,6 @@ export function BusinessProfileTool() {
   const save = async () => {
     if (!form.name.trim()) return;
     const record: Business = {
-      // Keep fields this form doesn't edit (e.g. the POS tax ID label).
-      ...existing,
       id: "main",
       ...form,
       name: form.name.trim(),
@@ -240,7 +238,7 @@ export function BusinessProfileTool() {
             {[form.phone, form.email].filter(Boolean).join(" · ")}
           </p>
           {form.taxNumber ? (
-            <p className="mt-1 text-xs text-muted">{taxIdLabel(existing)}: {form.taxNumber}</p>
+            <p className="mt-1 text-xs text-muted">GSTIN: {form.taxNumber}</p>
           ) : null}
         </div>
         <p className="mt-4 text-xs text-muted">

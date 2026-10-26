@@ -19,7 +19,7 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
-import { currencySymbol, formatMoney, generateId, nowIso, taxIdLabel, type Business } from "@/lib/pos/types";
+import { currencySymbol, formatMoney, generateId, nowIso, type Business } from "@/lib/pos/types";
 import { dbPut } from "@/lib/pos/db";
 import { readLogoDataUrl } from "@/lib/toolkit/logo";
 import { useI18n } from "@/lib/i18n";
@@ -157,7 +157,7 @@ export function ReceiptDesignerTool() {
   };
 
   const biz = workspace.business;
-  const taxLabel = draft.taxLabel.trim() || taxIdLabel(biz);
+  const taxLabel = draft.taxLabel.trim() || "GSTIN";
 
   // Upload / change the business logo from here. It saves to the shared
   // business record, so the logo then appears on the receipt (and on invoices,
@@ -340,7 +340,7 @@ export function ReceiptDesignerTool() {
                 <TextInput
                   value={draft.taxLabel}
                   onChange={(e) => set("taxLabel", e.target.value)}
-                  placeholder={taxIdLabel(biz)}
+                  placeholder="GSTIN"
                   list="rd-tax-labels"
                   maxLength={20}
                 />
