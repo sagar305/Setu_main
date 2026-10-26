@@ -17,6 +17,8 @@ import { calculateCartTotals } from "@/lib/pos/calc";
 import { isToolEnabled } from "@/lib/pos/posTools";
 import {
   formatMoney,
+  isLowStock,
+  isOutOfStock,
   type CartLine,
   type HeldCart,
   type Order,
@@ -336,8 +338,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         ) : (
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
             {filteredProducts.map((product) => {
-              const out = product.trackStock && product.stock <= 0;
-              const low = product.trackStock && product.stock > 0 && product.stock <= 5;
+              const out = isOutOfStock(product);
+              const low = isLowStock(product);
               return (
                 <button
                   key={product.id}
