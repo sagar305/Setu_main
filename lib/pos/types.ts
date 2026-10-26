@@ -9,6 +9,8 @@ export type Business = {
   currency: string; // ISO code, e.g. "INR"
   email: string;
   taxNumber: string;
+  /** What the tax number is called on receipts. Optional: older records lack it. */
+  taxIdLabel?: TaxIdLabel;
   logoDataUrl: string;
   /** UPI ID for payments (e.g. "shop@okhdfcbank"). Optional. */
   upiId?: string;
@@ -16,6 +18,13 @@ export type Business = {
   timezone?: string;
   createdAt: string;
 };
+
+export const TAX_ID_LABELS = ["GSTIN", "VAT", "TRN"] as const;
+export type TaxIdLabel = (typeof TAX_ID_LABELS)[number];
+
+export function taxIdLabel(business: Pick<Business, "taxIdLabel"> | null | undefined): TaxIdLabel {
+  return business?.taxIdLabel ?? "GSTIN";
+}
 
 export type Category = {
   id: string;

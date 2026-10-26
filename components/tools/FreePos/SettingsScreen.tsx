@@ -18,9 +18,12 @@ import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import {
   CURRENCIES,
+  TAX_ID_LABELS,
   formatInvoiceNumber,
+  taxIdLabel,
   type PosSettings,
   type ReceiptPaperSize,
+  type TaxIdLabel,
 } from "@/lib/pos/types";
 import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
 import {
@@ -93,6 +96,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     currency: "INR",
     email: "",
     taxNumber: "",
+    taxIdLabel: "GSTIN" as TaxIdLabel,
   });
   const [profileError, setProfileError] = useState("");
   const [profileSaved, setProfileSaved] = useState(false);
@@ -106,6 +110,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         currency: business.currency,
         email: business.email,
         taxNumber: business.taxNumber,
+        taxIdLabel: taxIdLabel(business),
       });
     }
   }, [business]);
@@ -123,6 +128,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       currency: profile.currency,
       email: profile.email.trim(),
       taxNumber: profile.taxNumber.trim(),
+      taxIdLabel: profile.taxIdLabel,
     });
     setProfileSaved(true);
     setTimeout(() => setProfileSaved(false), 2000);
@@ -288,7 +294,22 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               className={inputClass}
             />
           </Field>
-          <Field label="Tax number" hint="e.g. GSTIN — printed on receipts">
+          <Field label="Tax ID type" hint="The name printed before your tax number">
+            <select
+              value={profile.taxIdLabel}
+              onChange={(event) =>
+                setProfile((p) => ({ ...p, taxIdLabel: event.target.value as TaxIdLabel }))
+              }
+              className={inputClass}
+            >
+              {TAX_ID_LABELS.map((label) => (
+                <option key={label} value={label}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <Field label={`${profile.taxIdLabel} number`} hint="Printed on receipts">
             <input
               type="text"
               value={profile.taxNumber}

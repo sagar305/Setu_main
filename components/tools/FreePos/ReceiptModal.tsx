@@ -5,6 +5,7 @@ import { Download, Printer } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import {
   formatMoney,
+  taxIdLabel,
   type Order,
   type OrderItem,
   type ReceiptPaperSize,
@@ -42,6 +43,7 @@ export const ReceiptView = forwardRef<
   const accent = template?.accentColor || "#111111";
   const showBizInfo = template ? template.showBusinessInfo : settings.showBusinessInfoOnReceipt;
   const showGstin = template ? template.showGstin : true;
+  const taxLabel = template?.taxLabel?.trim() || taxIdLabel(business);
   const boldTotals = template ? template.boldTotals : true;
   const footerText = (template ? template.footerText : settings.receiptFooter) || "Thank you!";
 
@@ -89,7 +91,9 @@ export const ReceiptView = forwardRef<
           <div style={{ fontSize: 11, whiteSpace: "pre-wrap" }}>
             {business?.address && <div>{business.address}</div>}
             {business?.phone && <div>Ph: {business.phone}</div>}
-            {business?.taxNumber && showGstin && <div>Tax No: {business.taxNumber}</div>}
+            {business?.taxNumber && showGstin && <div>
+                {taxLabel}: {business.taxNumber}
+              </div>}
           </div>
         )}
       </div>
