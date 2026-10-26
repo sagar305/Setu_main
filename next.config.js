@@ -1,4 +1,4 @@
-// The TB Analyzer is its own static app (github.com/sagar305/TB-analyser),
+// The TB Analyser is its own static app (github.com/sagar305/TB-analyser),
 // deployed separately and served here under /products/tb-analyzer/app/ so it
 // lives on setutechnology.com. Override for local testing against
 // `node backend/server.mjs` in that repo.
@@ -7,7 +7,7 @@ const TB_ANALYZER_ORIGIN = process.env.TB_ANALYZER_ORIGIN || "https://tb-analyse
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // The TB Analyzer loads its scripts and styles by relative path, so it must
+  // The TB Analyser loads its scripts and styles by relative path, so it must
   // be opened at /products/tb-analyzer/app/ — with the slash. Next's built-in
   // slash stripping is switched off and the first redirect below puts it back
   // for every other path, so the rest of the site keeps one URL per page.

@@ -6,6 +6,7 @@ import type {
   OrderItem,
   Product,
 } from "./types";
+import { lowStockThreshold } from "./types";
 
 function csvEscape(value: unknown): string {
   const str = value === null || value === undefined ? "" : String(value);
@@ -39,7 +40,7 @@ export function downloadCsv(filename: string, csv: string): void {
 export function productsCsv(products: Product[], categories: Category[]): string {
   const categoryName = (id: string) => categories.find((c) => c.id === id)?.name ?? "";
   return toCsv(
-    ["Name", "SKU", "Barcode", "Category", "Selling Price", "Cost Price", "Tax %", "Tax Type", "Stock", "Unit", "Description"],
+    ["Name", "SKU", "Barcode", "Category", "Selling Price", "Cost Price", "Tax %", "Tax Type", "Stock", "Low Stock Alert", "Unit", "Description"],
     products.map((p) => [
       p.name,
       p.sku,
@@ -50,6 +51,7 @@ export function productsCsv(products: Product[], categories: Category[]): string
       p.taxRate ?? "",
       p.taxInclusive ? "inclusive" : "exclusive",
       p.trackStock ? p.stock : "",
+      p.trackStock ? lowStockThreshold(p) : "",
       p.unit,
       p.description,
     ])

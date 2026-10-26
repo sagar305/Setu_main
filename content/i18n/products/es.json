@@ -55,7 +55,7 @@
     {
       "name": "Analizador de extractos bancarios",
       "headline": "Análisis gratuito de extractos bancarios, dentro de tu navegador",
-      "description": "Un analizador de extractos bancarios totalmente gratuito para asesores contables y para cualquiera que lleve sus libros. Importa un extracto en PDF, Excel o CSV, clasifica cada movimiento con reglas que tú controlas, concilia con tu libro mayor y exporta informes: sin registro, sin suscripción, y el extracto nunca se sube a ningún sitio.",
+      "description": "Un analizador de extractos bancarios totalmente gratuito para asesores contables/CPA y para cualquiera que lleve sus libros. Importa un extracto en PDF, Excel o CSV, clasifica cada movimiento con reglas que tú controlas, concilia con tu libro mayor y exporta informes: sin registro, sin suscripción, y el extracto nunca se sube a ningún sitio.",
       "features": [
         "Importa PDF, XLSX, XLS y CSV, incluidos los PDF protegidos con contraseña",
         "No se sube nada: la lectura y el análisis ocurren en tu navegador",

@@ -1069,7 +1069,7 @@
           },
           {
             "question": "Cet avoir est-il conforme aux règles fiscales ?",
-            "answer": "Il porte les champs que la pratique attend : votre numéro fiscal, celui du client, la référence à la facture d'origine, des lignes détaillées avec leurs taux de taxe et un motif clair. Déclarez-le comme votre comptable vous l'indique."
+            "answer": "Il porte les champs que la pratique attend : votre numéro fiscal, celui du client, la référence à la facture d'origine, des lignes détaillées avec leurs taux de taxe et un motif clair. Déclarez-le comme votre comptable/CPA vous l'indique."
           },
           {
             "question": "Mes données restent-elles privées ?",

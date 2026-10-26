@@ -64,6 +64,56 @@
   ],
   "terms": [
     {
+      "slug": "aggregate-turnover",
+      "term": "Aggregate Turnover",
+      "category": "gst-tax",
+      "short": "Total turnover across every GSTIN on one PAN, used to test GST thresholds.",
+      "aliases": [
+        "aggregate annual turnover"
+      ]
+    },
+    {
+      "slug": "deferred-revenue",
+      "term": "Deferred Revenue",
+      "category": "accounting",
+      "short": "Money collected for goods or services you have not yet delivered.",
+      "aliases": [
+        "unearned revenue",
+        "deferred income"
+      ]
+    },
+    {
+      "slug": "gstr-9c",
+      "term": "GSTR-9C",
+      "category": "gst-tax",
+      "short": "The reconciliation statement filed with the GST annual return above ₹5 crore turnover.",
+      "aliases": [
+        "GSTR 9C",
+        "GST reconciliation statement"
+      ]
+    },
+    {
+      "slug": "prepaid-package",
+      "term": "Prepaid Package",
+      "category": "payments-finance",
+      "short": "A block of services sold and paid for upfront, delivered over time.",
+      "aliases": [
+        "prepaid plan",
+        "session package"
+      ]
+    },
+    {
+      "slug": "utilisation-rate",
+      "term": "Utilisation Rate",
+      "category": "pricing-profit",
+      "short": "The share of your available capacity that was actually booked and used.",
+      "aliases": [
+        "utilization rate",
+        "capacity utilisation",
+        "capacity utilization"
+      ]
+    },
+    {
       "slug": "perpetual-licence",
       "term": "Perpetual Licence",
       "category": "pos-tech",

@@ -65,6 +65,7 @@ export type ProductInput = {
   taxInclusive: boolean;
   trackStock: boolean;
   stock: number;
+  lowStockThreshold: number | null;
   unit: string;
   imageDataUrl: string;
   description: string;

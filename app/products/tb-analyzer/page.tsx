@@ -36,9 +36,9 @@ import { freeOffer } from "@/lib/schema";
 import { TbAnalyzerEmbed } from "@/components/tools/TbAnalyzer/TbAnalyzerEmbed";
 
 export const metadata: Metadata = {
-  title: "TB Analyzer — Free Trial Balance Analysis | Setu",
+  title: "TB Analyser — Free Trial Balance Analysis | Setu",
   description:
-    "Free trial balance analyser for CAs. Compare three periods, get P&L, Balance Sheet, 15 ratios and Excel/PDF review packs — nothing is uploaded.",
+    "Free trial balance analyser for CAs/CPAs. Compare three periods, get P&L, Balance Sheet, 15 ratios and Excel/PDF review packs — nothing is uploaded.",
   keywords: [
     "trial balance analyzer",
     "trial balance analysis",
@@ -47,13 +47,14 @@ export const metadata: Metadata = {
     "financial ratio analysis from trial balance",
     "trial balance to balance sheet",
     "CA financial review tool",
+    "CPA financial review tool",
     "three year financial comparison",
     "offline trial balance software",
     "trial balance software India",
   ],
   alternates: { canonical: "/products/tb-analyzer" },
   openGraph: {
-    title: "TB Analyzer — Free, Private Trial Balance Analysis",
+    title: "TB Analyser — Free, Private Trial Balance Analysis",
     description:
       "Import trial balances for up to three periods, review the statements, ratios and drivers, and export a review pack. Runs entirely in your browser.",
     url: "/products/tb-analyzer",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
         url: "/og/setu-og-image-1200x627.png",
         width: 1200,
         height: 627,
-        alt: "Setu Technology TB Analyzer",
+        alt: "Setu Technology TB Analyser",
       },
     ],
   },
@@ -351,11 +352,11 @@ const FAQ_ITEMS = [
 const softwareApplicationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Setu TB Analyzer",
+  name: "Setu TB Analyser",
   applicationCategory: "FinanceApplication",
   operatingSystem: "Web",
   description:
-    "Free browser-based trial balance analyser for chartered accountants. Import up to three periods of trial balances from Excel or CSV, review P&L, Balance Sheet and Cash Flow, 15 ratios, working capital and management questions, and export Excel and PDF review packs. All processing happens on the device.",
+    "Free browser-based trial balance analyser for chartered accountants/CPAs. Import up to three periods of trial balances from Excel or CSV, review P&L, Balance Sheet and Cash Flow, 15 ratios, working capital and management questions, and export Excel and PDF review packs. All processing happens on the device.",
   featureList: [
     "XLSX, XLS, XLSM and CSV trial balance import",
     "Up to 20 workbooks and three periods per client",
@@ -481,7 +482,7 @@ export default function TbAnalyzerPage() {
               <span className="text-sm font-semibold text-indigo">Free Product — Nothing Uploaded</span>
             </div>
             <h1 className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-              TB Analyzer — Trial Balance Analysis
+              TB Analyser — Trial Balance Analysis
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-xl text-muted">
               Compare three periods of trial balances, understand what drove the change, and export
@@ -518,7 +519,7 @@ export default function TbAnalyzerPage() {
               Try it without a client&apos;s file
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-              In the analyzer above, choose <strong>Analyse three-period sample</strong> to load
+              In the analyser above, choose <strong>Analyse three-period sample</strong> to load
               synthetic, clearly labelled demonstration data — or download the three-period
               template and fill in your own balances.
             </p>
@@ -629,7 +630,7 @@ export default function TbAnalyzerPage() {
                 <h2 className="mb-4 text-2xl font-bold text-ink">Who is this for?</h2>
                 <ul className="space-y-2 text-muted">
                   {[
-                    "Chartered accountants reviewing a client's financial position across years",
+                    "Chartered accountants/CPAs reviewing a client's financial position across years",
                     "Audit and accounting staff preparing analytical review working papers",
                     "Business owners who want to see what changed and why",
                   ].map((item) => (
@@ -682,7 +683,7 @@ export default function TbAnalyzerPage() {
         </div>
       </section>
 
-      <Faq headline="TB Analyzer — questions" items={FAQ_ITEMS} />
+      <Faq headline="TB Analyser — questions" items={FAQ_ITEMS} />
     </>
   );
 }

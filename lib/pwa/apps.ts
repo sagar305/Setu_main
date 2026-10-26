@@ -98,6 +98,13 @@ export const PWA_APPS = [
     description: "Classify and reconcile bank statements privately in your browser.",
     path: "/products/bank-statement-analyzer",
   },
+  {
+    id: "tb",
+    name: "Setu TB Analyser",
+    shortName: "TB Analyser",
+    description: "Analyse trial balances privately in your browser: statements, ratios and review packs.",
+    path: "/products/tb-analyzer",
+  },
 ] as const satisfies readonly PwaApp[];
 
 export type PwaAppId = (typeof PWA_APPS)[number]["id"];

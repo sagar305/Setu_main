@@ -1,0 +1,50 @@
+{
+  "slug": "utilisation-rate",
+  "term": "Utilisation Rate",
+  "category": "pricing-profit",
+  "aliases": [
+    "utilization rate",
+    "capacity utilisation",
+    "capacity utilization"
+  ],
+  "short": "The share of your available capacity that was actually booked and used.",
+  "seoTitle": "Utilisation Rate — Formula and Worked Example",
+  "metaDescription": "Utilisation rate measures booked hours against available capacity, the core number for any business that sells time. Formula, example and how to read it.",
+  "updated": "2026-10-25",
+  "definition": "Utilisation rate is the proportion of a business's available capacity that was actually used, expressed as a percentage — booked and delivered hours divided by the hours that were there to sell.",
+  "formula": {
+    "expression": "Utilisation rate = (booked hours ÷ available capacity hours) × 100",
+    "note": "Available capacity is service positions multiplied by open hours multiplied by days in the period. Count delivered hours, not booked-and-missed ones, if you want the number to reflect earnings."
+  },
+  "bodyHtml": "<h2>What it tells a business that sells time</h2><p>A salon chair, a consulting room, a treatment table, a billable hour and a workshop bay are all the same thing economically: capacity that expires. Unlike stock, an unsold hour cannot be sold tomorrow. Utilisation rate is the one number that puts a figure on how much of it expired unsold.</p><h2>Working it out</h2><p>Take the period, count the capacity, divide the delivered durations into it. Two chairs open nine hours a day for six days is 108 chair-hours in a week; 69 hours of delivered appointments against that is a utilisation rate of 64%, leaving 39 hours of rent and wages that earned nothing.</p><h2>Reading it properly</h2><p>The headline percentage matters less than its shape. Empty capacity is rarely spread evenly — it clusters in particular slots, particular days, particular staff. A business at 64% overall might be at 95% on Saturday and 30% on Tuesday morning, and those two numbers call for completely different responses: pricing or staffing on one, promotion on the other. Very high utilisation is not automatically good either, since a business running at 95% has no room to absorb a rush and nothing left to sell.</p>",
+  "faq": [
+    {
+      "question": "What is a good utilisation rate?",
+      "answer": "It depends on the cost of standing still. Rather than chase a benchmark, multiply your empty hours by what a delivered hour contributes after variable cost, and compare that against the rent and wages those hours carried. That gives you a figure to act on instead of a percentage to feel bad about."
+    },
+    {
+      "question": "Should no-shows count as utilised capacity?",
+      "answer": "Not if you want the number to track earnings. A booked slot that nobody turned up for cost you exactly as much as an empty one, so count delivered hours in the numerator and track no-shows separately — the two problems have different fixes."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "calculator",
+      "slug": "break-even-calculator"
+    },
+    {
+      "type": "tool",
+      "slug": "profit-dashboard"
+    }
+  ],
+  "relatedTerms": [
+    "no-show",
+    "break-even-point",
+    "contribution-margin",
+    "fixed-cost"
+  ]
+}

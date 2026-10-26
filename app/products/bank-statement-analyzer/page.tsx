@@ -53,13 +53,14 @@ import { DEMO_TOTALS } from "@/lib/bankStatement/demo/sampleStatement";
 export const metadata: Metadata = {
   title: "Bank Statement Analyzer — Free, Private | Setu",
   description:
-    "Free bank statement analyser for CAs. Import PDF, Excel or CSV, classify transactions, reconcile with your books and export reports — nothing is uploaded.",
+    "Free bank statement analyser for CAs/CPAs. Import PDF, Excel or CSV, classify transactions, reconcile with your books and export reports — nothing is uploaded.",
   keywords: [
     "bank statement analyzer",
     "bank statement analysis software",
     "free bank statement analyser",
     "bank statement to excel",
     "CA bank statement tool",
+    "CPA bank statement tool",
     "bank statement classification",
     "bank statement reconciliation",
     "convert bank statement pdf to excel",
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bank Statement Analyzer — Free, Private, No Upload",
     description:
-      "Import a statement, classify every transaction, reconcile with your books and export CA reports. Runs entirely in your browser.",
+      "Import a statement, classify every transaction, reconcile with your books and export CA/CPA reports. Runs entirely in your browser.",
     url: "/products/bank-statement-analyzer",
     type: "website",
     images: [
@@ -240,7 +241,7 @@ const REVIEW: FeatureSection = {
 
 const ANALYSIS: FeatureSection = {
   eyebrow: "Analysis",
-  title: "The reports a CA actually opens",
+  title: "The reports a CA/CPA actually opens",
   subtitle:
     "Every figure respects the duplicate policy and the extraction warnings, so what you see is what you can defend.",
   items: [
@@ -485,7 +486,7 @@ const softwareApplicationSchema = {
   applicationCategory: "FinanceApplication",
   operatingSystem: "Web",
   description:
-    "Free browser-based bank statement analyser for chartered accountants. Import PDF, XLSX, XLS or CSV statements, classify transactions with a rules engine, reconcile against a ledger and export Excel and PDF reports. All processing happens on the device.",
+    "Free browser-based bank statement analyser for chartered accountants/CPAs. Import PDF, XLSX, XLS or CSV statements, classify transactions with a rules engine, reconcile against a ledger and export Excel and PDF reports. All processing happens on the device.",
   featureList: [
     "PDF, XLSX, XLS and CSV statement import",
     "Password-protected PDF support",
@@ -789,7 +790,7 @@ export default function BankStatementAnalyzerPage() {
                 <h2 className="mb-4 text-2xl font-bold text-ink">Who is this for?</h2>
                 <ul className="space-y-2 text-muted">
                   {[
-                    "Chartered accountants working through a client's year of statements",
+                    "Chartered accountants/CPAs working through a client's year of statements",
                     "Accounting and audit staff preparing schedules and working papers",
                     "Bookkeepers reconciling a bank statement against the ledger each month",
                     "Business owners who want to see where the money actually went",
