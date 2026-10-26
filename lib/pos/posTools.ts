@@ -66,14 +66,6 @@ export const POS_TOOLS: PosToolLink[] = [
     usesPosData: "Your business details and suppliers; feeds the profit dashboard.",
   },
   {
-    slug: "cash-book",
-    name: "Cash Book",
-    route: "/tools/cash-book",
-    category: "Money out",
-    description: "Daily cash in, cash out and closing balance.",
-    usesPosData: "Your business details; pair with POS cash sales for a full day-book.",
-  },
-  {
     slug: "purchase-register",
     name: "Purchase Register",
     route: "/tools/purchase-register",
@@ -82,28 +74,12 @@ export const POS_TOOLS: PosToolLink[] = [
     usesPosData: "Saved suppliers and products; purchases can top up POS stock.",
   },
   {
-    slug: "purchase-order-generator",
-    name: "Purchase Order Generator",
-    route: "/tools/purchase-order-generator",
-    category: "Money out",
-    description: "Order stock from a supplier, formally.",
-    usesPosData: "Your business details, saved suppliers and products.",
-  },
-  {
     slug: "supplier-book",
     name: "Supplier Book",
     route: "/tools/supplier-book",
     category: "Money out",
     description: "Keep supplier contacts and GSTINs in one place.",
     usesPosData: "Shared with every purchase document you raise.",
-  },
-  {
-    slug: "accounts-payable-aging",
-    name: "Accounts Payable Aging",
-    route: "/tools/accounts-payable-aging",
-    category: "Money out",
-    description: "See which supplier bills to pay first.",
-    usesPosData: "Unpaid bills from your purchase register.",
   },
 
   // ---- Reports & analysis -------------------------------------------------
@@ -114,14 +90,6 @@ export const POS_TOOLS: PosToolLink[] = [
     category: "Reports & analysis",
     description: "Sales minus real expenses — actual profit.",
     usesPosData: "POS sales plus your recorded expenses.",
-  },
-  {
-    slug: "profit-loss-statement",
-    name: "Profit & Loss Statement",
-    route: "/tools/profit-loss-statement",
-    category: "Reports & analysis",
-    description: "A full P&L you can print or hand to your CA/CPA.",
-    usesPosData: "Revenue from POS sales, costs from purchases and expenses.",
   },
   {
     slug: "stock-register",
