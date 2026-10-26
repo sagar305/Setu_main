@@ -43,6 +43,7 @@ export const ReceiptView = forwardRef<
   const accent = template?.accentColor || "#111111";
   const showBizInfo = template ? template.showBusinessInfo : settings.showBusinessInfoOnReceipt;
   const showGstin = template ? template.showGstin : true;
+  const taxLabel = template?.taxLabel?.trim() || taxIdLabel(business);
   const boldTotals = template ? template.boldTotals : true;
   const footerText = (template ? template.footerText : settings.receiptFooter) || "Thank you!";
 
@@ -91,7 +92,7 @@ export const ReceiptView = forwardRef<
             {business?.address && <div>{business.address}</div>}
             {business?.phone && <div>Ph: {business.phone}</div>}
             {business?.taxNumber && showGstin && <div>
-                {taxIdLabel(business)}: {business.taxNumber}
+                {taxLabel}: {business.taxNumber}
               </div>}
           </div>
         )}
