@@ -99,6 +99,19 @@ export function repairSoftwareEnabled(): boolean {
 }
 
 /**
+ * Whether the TB Analyser card is left off the /products listing (and its
+ * translations).
+ *
+ * Hidden unless HIDE_TB_ANALYSER is explicitly "false". Only the card is
+ * hidden: /products/tb-analyzer itself, its app, the sitemaps and the
+ * home-screen install stay live for anyone with the link. Read at build time,
+ * so redeploy after changing it.
+ */
+export function tbAnalyserHidden(): boolean {
+  return process.env.HIDE_TB_ANALYSER !== "false";
+}
+
+/**
  * Buying Setu QR Menu time: the Buy button and buy box on /products/qr-menu,
  * the /products/qr-menu/payment return page, and the /api/qr-menu/* checkout,
  * order, region and both webhook routes.

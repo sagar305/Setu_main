@@ -7,6 +7,7 @@ import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
   repairSoftwareEnabled,
+  tbAnalyserHidden,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
 
@@ -40,6 +41,7 @@ export function ProductsSections({
     if (product.id === "free-rental" || product.id === "rental") return rentalSoftwareEnabled();
     if (product.id === "free-pharmacy" || product.id === "pharmacy") return pharmacySoftwareEnabled();
     if (product.id === "free-repair" || product.id === "repair") return repairSoftwareEnabled();
+    if (product.id === "tb-analyzer") return !tbAnalyserHidden();
     return true;
   });
 
