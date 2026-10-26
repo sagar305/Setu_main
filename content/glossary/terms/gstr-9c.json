@@ -1,0 +1,45 @@
+{
+  "slug": "gstr-9c",
+  "term": "GSTR-9C",
+  "category": "gst-tax",
+  "aliases": [
+    "GSTR 9C",
+    "GST reconciliation statement"
+  ],
+  "short": "The reconciliation statement filed with the GST annual return above ₹5 crore turnover.",
+  "seoTitle": "GSTR-9C — Reconciliation Statement Explained",
+  "metaDescription": "GSTR-9C reconciles a business's audited financial statements with its GST annual return. Who files it, the ₹5 crore threshold, and how it differs from GSTR-9.",
+  "updated": "2026-10-25",
+  "definition": "GSTR-9C is the reconciliation statement filed alongside the GST annual return by businesses above a prescribed turnover, tying the figures in their audited financial statements to the outward supplies, input tax credit and tax declared under GST, with every difference explained.",
+  "bodyHtml": "<h2>Who files it</h2><p>GSTR-9C applies once aggregate turnover for the financial year crosses ₹5 crore. It is filed together with GSTR-9 rather than as a separate exercise, so a business above the threshold files two documents at the same time: the annual return and the reconciliation that supports it.</p><h2>What it reconciles</h2><p>The statement works from the turnover in the audited accounts down to the turnover declared under GST, listing each adjustment — credit notes, exempt supplies, items that are not supplies at all, and timing differences where an invoice and its accounting entry fall in different periods. A second part does the same for input tax credit: credit available per the books against credit actually claimed in the returns.</p><h2>Self-certification</h2><p>For years ending from 2020-21 onwards the position has been that the taxpayer self-certifies GSTR-9C, replacing the earlier requirement for certification by a chartered accountant or cost accountant. Self-certified does not mean lightly prepared — the signature and the exposure both sit with the business. Older guidance describing a CA certification requirement still circulates, so confirm the current position before filing.</p><h2>Why the differences matter more than the form</h2><p>A reconciliation that cannot name its differences is the single most common source of departmental queries years later. Each line should trace back to something in the ledgers: a credit note number, an exempt sale, a reversal computed on a stated basis. Preparing it is easier when the monthly returns were reconciled through the year rather than reconstructed in December.</p>",
+  "faq": [
+    {
+      "question": "What is the turnover limit for GSTR-9C?",
+      "answer": "Aggregate turnover above ₹5 crore in the financial year, computed across all GSTINs on the same PAN. Thresholds are set by notification and have changed before, so check the position for the specific year you are filing."
+    },
+    {
+      "question": "Does a chartered accountant have to certify GSTR-9C?",
+      "answer": "Not under the current position — the taxpayer self-certifies it, following the removal of the earlier GST audit and certification requirement from 2020-21. Many businesses still have their accountant prepare it, because the responsibility for the figures rests with the taxpayer either way."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "profit-loss-statement"
+    },
+    {
+      "type": "tool",
+      "slug": "general-ledger"
+    },
+    {
+      "type": "tool",
+      "slug": "trial-balance"
+    }
+  ],
+  "relatedTerms": [
+    "gstr-9",
+    "aggregate-turnover",
+    "input-tax-credit",
+    "gstr-3b"
+  ]
+}

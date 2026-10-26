@@ -1,0 +1,49 @@
+{
+  "slug": "prepaid-package",
+  "term": "Prepaid Package",
+  "category": "payments-finance",
+  "aliases": [
+    "prepaid plan",
+    "session package"
+  ],
+  "short": "A block of services sold and paid for upfront, delivered over time.",
+  "seoTitle": "Prepaid Package — Cash Upfront, Service Owed",
+  "metaDescription": "A prepaid package is a block of sessions sold in advance. Why the cash is not yet income, how to value each session, and the liability it leaves on your books.",
+  "updated": "2026-10-25",
+  "definition": "A prepaid package is a bundle of services — sessions, visits, classes or treatments — sold and paid for in advance at a discount to the individual price, then delivered over the following weeks or months.",
+  "formula": {
+    "expression": "Revenue per session = package price ÷ sessions included",
+    "note": "The unearned balance is the price per session multiplied by the sessions still owed. That balance is a liability, not income."
+  },
+  "bodyHtml": "<h2>Why they are attractive, and risky</h2><p>Packages pull cash forward and lock a customer in, which is why salons, gyms, clinics and tuition centres sell them. The risk is the mirror image: you have been paid for work you still have to do, usually at a discount, and the staff hours to deliver it will be spent in a month when no new money arrives for them.</p><h2>How to record one</h2><p>The cash comes in on day one and belongs in the cash book that day — it really is in the account. What it is not is earned income. Divide the package price by the sessions included and treat that share as earned each time a session is delivered; the rest sits as an obligation until then. A business that counts the whole package as revenue on sale will report a strong month followed by a flat one, with no change in the actual work done.</p><h2>The three things to track</h2><p>How many packages are live, how many sessions remain in each, and when they expire. Without that list you cannot tell how much of your forward capacity is already sold, and expiry terms you never wrote down are the ones you end up honouring years later.</p>",
+  "faq": [
+    {
+      "question": "Is money from a prepaid package income when it is received?",
+      "answer": "It is cash when received but income only as the sessions are delivered. Until then the unused portion is an obligation to the customer. Mixing the two is what makes a package-heavy business look more profitable than it is in the month it sells well."
+    },
+    {
+      "question": "How should expiry on a prepaid package be handled?",
+      "answer": "Decide and write the terms down before you sell the first one, on the bill itself. Unwritten expiry is unenforceable in practice, and open-ended packages sit on your books as work you may be asked to do at any point, priced at rates that have since moved."
+    }
+  ],
+  "relatedTools": [
+    {
+      "type": "tool",
+      "slug": "appointment-book"
+    },
+    {
+      "type": "tool",
+      "slug": "cash-book"
+    },
+    {
+      "type": "tool",
+      "slug": "invoice-generator"
+    }
+  ],
+  "relatedTerms": [
+    "deferred-revenue",
+    "advance-payment",
+    "utilisation-rate",
+    "cash-flow"
+  ]
+}
