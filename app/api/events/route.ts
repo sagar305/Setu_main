@@ -103,6 +103,8 @@ function requestContext(request: Request): Record<string, string> {
  */
 const POSTHOG_EVENT_NAMES: Record<string, string> = {
   page_view: "$pageview",
+  page_leave: "$pageleave",
+  web_vitals: "$web_vitals",
 };
 
 function referringDomain(referrer: string): string {
@@ -177,6 +179,10 @@ export async function POST(request: Request) {
       $session_id: event.sessionId,
       $current_url: `${origin}${event.path}`,
       $host: host,
+      // Every event reaches PostHog through this first-party route, which is
+      // the reverse proxy its health check is looking for. It recognises one
+      // by this property, the same one its own SDK sets for a custom host.
+      $lib_custom_api_host: `${origin}/api/events`,
       $pathname: event.path,
       $referrer: event.referrer || "$direct",
       $referring_domain: referringDomain(event.referrer),

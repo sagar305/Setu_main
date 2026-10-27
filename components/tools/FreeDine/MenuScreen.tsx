@@ -15,7 +15,7 @@ import {
 import { useDine, type MenuItemInput } from "@/lib/dine/store";
 import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { downloadCsv, menuCsv, parseMenuCsv } from "@/lib/dine/csv";
-import { foodTypeLabel, type DineMenuItem, type FoodType } from "@/lib/dine/types";
+import { FOOD_TYPE_ORDER, foodTypeLabel, type DineMenuItem } from "@/lib/dine/types";
 import { RecipeBadge, RecipeModal } from "./RecipeModal";
 import {
   ConfirmDialog,
@@ -486,7 +486,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
           </Field>
           <Field label={t("typeLabel")}>
             <div className="flex gap-2">
-              {(Object.keys(foodTypeLabel) as FoodType[]).map((type) => (
+              {FOOD_TYPE_ORDER.map((type) => (
                 <button
                   key={type}
                   type="button"
@@ -549,14 +549,15 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
           title="dnMnSizes"
           hint="dnMnSizesHint"
           rows={form.variations.map((variation) => ({
+            id: variation.id,
             name: variation.name,
             value: formatPlain(variation.price),
           }))}
           valueLabel="price"
           onChange={(rows) =>
             patch({
-              variations: rows.map((row, index) => ({
-                id: form.variations[index]?.id,
+              variations: rows.map((row) => ({
+                id: row.id,
                 name: row.name,
                 price: parseAmount(row.value),
               })),
@@ -667,6 +668,7 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
               <ChildEditor
                 title="dnMnOptions"
                 rows={group.options.map((option) => ({
+                  id: option.id,
                   name: option.name,
                   value: formatPlain(option.priceDelta),
                 }))}
@@ -677,8 +679,8 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
                       index === groupIndex
                         ? {
                             ...row,
-                            options: rows.map((option, optionIndex) => ({
-                              id: row.options[optionIndex]?.id,
+                            options: rows.map((option) => ({
+                              id: option.id,
                               name: option.name,
                               priceDelta: parseAmount(option.value),
                             })),
@@ -710,28 +712,47 @@ function MenuItemModal({ item, onClose }: { item: DineMenuItem | null; onClose: 
   );
 }
 
-/** Small repeated name/price editor used for sizes and for option lists. */
+type ChildRow = { id?: string; name: string; value: string };
+
+/**
+ * Small repeated name/price editor used for sizes and for option lists.
+ *
+ * `rows` seeds it once; after that it keeps the text as typed. Echoing a
+ * parsed-and-reformatted amount back into the box on every keystroke turned
+ * "2" into "2.00" before the "0" of "20" could land, so the amount is only
+ * tidied to two decimals when the box loses focus. Row ids travel with their
+ * row, so removing one from the middle never hands its id to its neighbour.
+ */
 function ChildEditor({
   title,
   hint,
-  rows,
+  rows: initialRows,
   valueLabel,
   onChange,
 }: {
   title: TKey;
   hint?: TKey;
-  rows: { name: string; value: string }[];
+  rows: ChildRow[];
   valueLabel: TKey;
-  onChange: (rows: { name: string; value: string }[]) => void;
+  onChange: (rows: ChildRow[]) => void;
 }) {
   const { t } = useI18n();
+  const [rows, setRows] = useState(initialRows);
+
+  const update = (next: ChildRow[]) => {
+    setRows(next);
+    onChange(next);
+  };
+  const updateRow = (index: number, changes: Partial<ChildRow>) =>
+    update(rows.map((row, rowIndex) => (rowIndex === index ? { ...row, ...changes } : row)));
+
   return (
     <div>
       <div className="flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wide text-muted">{t(title)}</p>
         <button
           type="button"
-          onClick={() => onChange([...rows, { name: "", value: "0.00" }])}
+          onClick={() => update([...rows, { name: "", value: "" }])}
           className="text-xs font-semibold text-indigo"
         >
           {t("dnMnAddRow")}
@@ -740,36 +761,32 @@ function ChildEditor({
       {hint && <p className="mt-0.5 text-[11px] text-muted/80">{t(hint)}</p>}
       <div className="mt-2 space-y-2">
         {rows.map((row, index) => (
-          <div key={index} className="flex gap-2">
+          <div key={row.id ?? `new-${index}`} className="flex items-center gap-2">
+            {/* min-w-0 so the name can shrink; inputClass's w-full would
+                otherwise let the price box claim the whole row. */}
             <input
               value={row.name}
-              onChange={(event) =>
-                onChange(
-                  rows.map((item, itemIndex) =>
-                    itemIndex === index ? { ...item, name: event.target.value } : item
-                  )
-                )
-              }
+              onChange={(event) => updateRow(index, { name: event.target.value })}
               placeholder={t("name")}
               aria-label={fill(t("dnMnRowNameAria"), { title: t(title) })}
-              className={`${inputClass} flex-1`}
+              className={`${inputClass} min-w-0 flex-1`}
             />
-            <input
-              inputMode="decimal"
-              value={row.value}
-              onChange={(event) =>
-                onChange(
-                  rows.map((item, itemIndex) =>
-                    itemIndex === index ? { ...item, value: event.target.value } : item
-                  )
-                )
-              }
-              aria-label={t(valueLabel)}
-              className={`${inputClass} w-24`}
-            />
+            <div className="w-24 shrink-0 sm:w-28">
+              <input
+                inputMode="decimal"
+                value={row.value}
+                onChange={(event) => updateRow(index, { value: event.target.value })}
+                onBlur={() => {
+                  if (row.value.trim()) updateRow(index, { value: formatPlain(parseAmount(row.value)) });
+                }}
+                placeholder="0.00"
+                aria-label={t(valueLabel)}
+                className={inputClass}
+              />
+            </div>
             <button
               type="button"
-              onClick={() => onChange(rows.filter((_, itemIndex) => itemIndex !== index))}
+              onClick={() => update(rows.filter((_, rowIndex) => rowIndex !== index))}
               aria-label={t("remove")}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted hover:bg-red-50 hover:text-red-600"
             >

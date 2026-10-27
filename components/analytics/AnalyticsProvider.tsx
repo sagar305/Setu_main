@@ -10,7 +10,15 @@
 
 import { Suspense, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { flush, flushOnExit, resetCircuit, trackEvent, type EventProps } from "@/lib/analytics";
+import { useReportWebVitals } from "next/web-vitals";
+import {
+  flush,
+  flushOnExit,
+  resetCircuit,
+  trackEvent,
+  trackExitEvent,
+  type EventProps,
+} from "@/lib/analytics";
 import { gaPageView } from "@/lib/analytics/ga";
 
 const LABEL_ATTR = "data-analytics";
@@ -27,6 +35,12 @@ const CLICKABLE =
 const FLUSH_INTERVAL_MS = 30_000;
 
 const SCROLL_MARKS = [25, 50, 75, 100] as const;
+
+/**
+ * The Core Web Vitals PostHog reads, by the names Next reports them under.
+ * TTFB is reported too, but PostHog has nowhere to show it.
+ */
+const WEB_VITALS = new Set(["LCP", "INP", "CLS", "FCP"]);
 
 /**
  * Props declared on the element as `data-analytics-*`.
@@ -110,6 +124,19 @@ function resolveClick(event: MouseEvent): { name: string; props: EventProps } | 
 }
 
 /**
+ * Props for `$pageleave`, in PostHog's own names: without a leave event per
+ * page view its bounce rate and session duration are guesses.
+ */
+function leaveProps(path: string, startedAt: number, maxScroll: number): EventProps {
+  return {
+    $prev_pageview_pathname: path,
+    $prev_pageview_duration: Math.max(0, (Date.now() - startedAt) / 1000),
+    $prev_pageview_max_scroll_percentage: maxScroll,
+    $prev_pageview_max_content_percentage: maxScroll,
+  };
+}
+
+/**
  * Page views.
  *
  * Split out and wrapped in Suspense by the provider because `useSearchParams`
@@ -121,11 +148,26 @@ function PageViews() {
   const searchParams = useSearchParams();
   const lastPath = useRef<string | null>(null);
   const seenMarks = useRef<Set<number>>(new Set());
+  // What the leave event reports about the page being left.
+  const pageStartedAt = useRef(0);
+  const maxScroll = useRef(0);
+  const leaveSent = useRef(false);
 
   useEffect(() => {
     if (pathname === null || lastPath.current === pathname) return;
+
+    // A client-side navigation leaves the previous page without unloading it.
+    // The URL has already changed, so the leave names its page explicitly.
+    const previous = lastPath.current;
+    if (previous !== null && !leaveSent.current) {
+      trackEvent("page_leave", leaveProps(previous, pageStartedAt.current, maxScroll.current), { path: previous });
+    }
+
     lastPath.current = pathname;
     seenMarks.current = new Set();
+    pageStartedAt.current = Date.now();
+    maxScroll.current = 0;
+    leaveSent.current = false;
 
     trackEvent("page_view", {
       // Only whether a query string existed, never what was in it.
@@ -134,12 +176,34 @@ function PageViews() {
     gaPageView(pathname);
   }, [pathname, searchParams]);
 
+  // Leaving the site, closing the tab, or reloading.
+  useEffect(() => {
+    const onPageHide = () => {
+      const path = lastPath.current;
+      if (path === null || leaveSent.current) return;
+      leaveSent.current = true;
+      trackExitEvent("page_leave", leaveProps(path, pageStartedAt.current, maxScroll.current));
+    };
+    // Back from the back/forward cache: the same page view is live again.
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) leaveSent.current = false;
+    };
+    window.addEventListener("pagehide", onPageHide);
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("pagehide", onPageHide);
+      window.removeEventListener("pageshow", onPageShow);
+    };
+  }, []);
+
   // Scroll depth, once per mark per page.
   useEffect(() => {
     const onScroll = () => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollable <= 0) return;
-      const percent = ((window.scrollY / scrollable) * 100).toFixed(0);
+      const fraction = Math.min(1, window.scrollY / scrollable);
+      maxScroll.current = Math.max(maxScroll.current, fraction);
+      const percent = (fraction * 100).toFixed(0);
       for (const mark of SCROLL_MARKS) {
         if (Number(percent) >= mark && !seenMarks.current.has(mark)) {
           seenMarks.current.add(mark);
@@ -151,6 +215,25 @@ function PageViews() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  return null;
+}
+
+/**
+ * Core Web Vitals, one event per metric as the browser settles it.
+ *
+ * Next measures the initial load only; client-side navigations have no LCP of
+ * their own. Numbers only — the metric's `entries` name DOM nodes and stay
+ * here.
+ */
+function WebVitals() {
+  useReportWebVitals((metric) => {
+    const { name, value, rating } = metric;
+    if (!WEB_VITALS.has(name)) return;
+    trackEvent("web_vitals", {
+      [`$web_vitals_${name}_value`]: value,
+      [`$web_vitals_${name}_rating`]: rating,
+    });
+  });
   return null;
 }
 
@@ -229,6 +312,7 @@ export function AnalyticsProvider() {
         <PageViews />
       </Suspense>
       <Interactions />
+      <WebVitals />
     </>
   );
 }
