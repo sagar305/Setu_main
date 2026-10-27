@@ -72,6 +72,12 @@ export type AgentReply = {
   navigate?: { screen: ScreenId; query?: string };
   /** Follow-ups the user can tap instead of typing. */
   suggestions?: string[];
+  /** Set only on the "didn't get that" reply, so a smarter pass can take over. */
+  notUnderstood?: true;
+  /** A loose help-article match: a smarter pass may do better, but this stands if not. */
+  guess?: true;
+  /** When a downloaded pack reworded the request, what it was understood as. */
+  understoodAs?: string;
 };
 
 export const STARTER_SUGGESTIONS = [
@@ -163,6 +169,7 @@ function notUnderstood(): AgentReply {
   return {
     text: "Sorry, I didn't get that. Try one of these, or ask “what can you do?”.",
     suggestions: STARTER_SUGGESTIONS,
+    notUnderstood: true,
   };
 }
 
@@ -187,7 +194,7 @@ function scoreArticle(query: string, article: HelpArticle): number {
     if (target.length === 0) continue;
     let hits = 0;
     for (const word of words) {
-      if (target.some((t) => t === word || (word.length >= 4 && (t.startsWith(word) || word.startsWith(t))))) hits += 1;
+      if (target.some((t) => t === word || (word.length >= 4 && t.length >= 4 && (t.startsWith(word) || word.startsWith(t))))) hits += 1;
     }
     // Reward covering the question and covering the phrase, equally.
     best = Math.max(best, (hits / words.length + hits / target.length) / 2);
@@ -209,7 +216,7 @@ export function findArticle(query: string, threshold: number): HelpArticle | nul
   return top >= threshold ? winner : null;
 }
 
-function articleReply(article: HelpArticle): AgentReply {
+export function articleReply(article: HelpArticle): AgentReply {
   return {
     text: article.title,
     bullets: article.answer,
@@ -220,7 +227,7 @@ function articleReply(article: HelpArticle): AgentReply {
 
 function articleFallback(text: string): AgentReply | null {
   const article = findArticle(text, 0.45);
-  return article ? articleReply(article) : null;
+  return article ? { ...articleReply(article), guess: true } : null;
 }
 
 // ---------------------------------------------------------------------------
@@ -706,7 +713,7 @@ function findProduct(phrase: string, ctx: Ctx, rewrite: (optionName: string) => 
 // Questions about the shop's own data
 // ---------------------------------------------------------------------------
 
-type Period = { label: string; start: Date; end: Date };
+export type Period = { label: string; start: Date; end: Date };
 
 function queryReply(text: string, ctx: Ctx): AgentReply | null {
   return (
@@ -723,7 +730,7 @@ function queryReply(text: string, ctx: Ctx): AgentReply | null {
   );
 }
 
-function readPeriod(text: string, now: Date): Period | null {
+export function readPeriod(text: string, now: Date): Period | null {
   const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
   const today = startOfDay(now);
   const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);

@@ -10,8 +10,10 @@
 export function normalize(text: string): string {
   return text
     .toLowerCase()
+    // Devanagari digits (०–९) read as the numbers they are.
+    .replace(/[\u0966-\u096F]/g, (d) => String(d.charCodeAt(0) - 0x0966))
     .replace(/[’']/g, "")
-    .replace(/[^\p{L}\p{N}.,\-+@#/ ]+/gu, " ")
+    .replace(/[^\p{L}\p{M}\p{N}.,\-+@#/ ]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
