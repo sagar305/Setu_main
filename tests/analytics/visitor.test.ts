@@ -9,6 +9,8 @@ import {
   advanceVisitor,
   daysSinceFirstVisit,
   isSessionExpired,
+  isUuidV7,
+  mintSessionId,
   parseSession,
   parseVisitor,
   type SessionRecord,
@@ -120,5 +122,24 @@ describe("reading storage that cannot be trusted", () => {
 
   it("rejects a session whose timestamps are not numbers", () => {
     expect(parseSession('{"id":"s1","startedAt":"today","lastActivityAt":2}')).toBeNull();
+  });
+});
+
+describe("session ids", () => {
+  // PostHog's web analytics drops any page view whose $session_id is not a
+  // UUIDv7, so the shape is not cosmetic.
+  it("mints a UUIDv7", () => {
+    const id = mintSessionId(NOW);
+    expect(isUuidV7(id)).toBe(true);
+    expect(id[14]).toBe("7");
+  });
+
+  it("carries the start time in its first 48 bits", () => {
+    const id = mintSessionId(NOW);
+    expect(parseInt(id.replace(/-/g, "").slice(0, 12), 16)).toBe(NOW);
+  });
+
+  it("does not take a random v4 for a v7", () => {
+    expect(isUuidV7("3b241101-e2bb-4255-8caf-4136c566a962")).toBe(false);
   });
 });
