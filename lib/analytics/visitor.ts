@@ -45,6 +45,39 @@ export function mintId(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+/**
+ * A UUIDv7: the first 48 bits are the millisecond clock, the rest random.
+ *
+ * Session ids must be this exact shape. PostHog's web analytics reads the
+ * session's start time out of the id itself and leaves out any page view
+ * whose `$session_id` is not a v7, so a v4 here silently zeroes the visitor
+ * and session counts.
+ */
+export function mintSessionId(now: number = Date.now()): string {
+  const bytes = new Uint8Array(16);
+  const cryptoObj = typeof globalThis !== "undefined" ? globalThis.crypto : undefined;
+  if (cryptoObj && typeof cryptoObj.getRandomValues === "function") {
+    cryptoObj.getRandomValues(bytes);
+  } else {
+    for (let i = 0; i < bytes.length; i += 1) bytes[i] = Math.floor(Math.random() * 256);
+  }
+  let ms = Math.max(0, Math.floor(now));
+  for (let i = 5; i >= 0; i -= 1) {
+    bytes[i] = ms % 256;
+    ms = Math.floor(ms / 256);
+  }
+  bytes[6] = (bytes[6] & 0x0f) | 0x70;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
+const UUID_V7 = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+export function isUuidV7(id: string): boolean {
+  return UUID_V7.test(id);
+}
+
 /** The UTC day a timestamp falls in, for the midnight session rollover. */
 function utcDay(at: number): number {
   return Math.floor(at / DAY_MS);
@@ -214,11 +247,14 @@ export function currentIdentity(now: number): Identity {
   const live = storedSession && !isSessionExpired(storedSession, now) ? storedSession : null;
 
   if (live) {
-    writeSession({ ...live, lastActivityAt: now });
+    // A session minted before ids became UUIDv7 keeps its start but gets a
+    // usable id, rather than being dropped from web analytics until it expires.
+    const sessionId = isUuidV7(live.id) ? live.id : mintSessionId(live.startedAt);
+    writeSession({ ...live, id: sessionId, lastActivityAt: now });
     const visitor = readVisitor() ?? advanceVisitor(null, now, mintId()).record;
     return {
       visitorId: visitor.id,
-      sessionId: live.id,
+      sessionId,
       // Within a live session, the type is settled by whether this visitor
       // existed before the session began.
       visitorType: visitor.visitCount > 1 ? "returning" : "new",
@@ -230,7 +266,7 @@ export function currentIdentity(now: number): Identity {
 
   const { record, visitorType } = advanceVisitor(readVisitor(), now, mintId());
   writeVisitor(record);
-  const session: SessionRecord = { id: mintId(), startedAt: now, lastActivityAt: now };
+  const session: SessionRecord = { id: mintSessionId(now), startedAt: now, lastActivityAt: now };
   writeSession(session);
 
   return {

@@ -79,38 +79,68 @@ function scheduleFlush(): void {
 }
 
 /**
+ * Stamp one event. Throws only if the browser refuses something basic, which
+ * both callers swallow.
+ *
+ * `path` overrides the current location for an event about a page that is no
+ * longer on screen — the leave event of a client-side navigation fires after
+ * the URL has already changed.
+ */
+function buildEvent(name: string, props: EventProps, path?: string): AnalyticsEvent {
+  const now = Date.now();
+  const identity = currentIdentity(now);
+  return {
+    eventId: crypto.randomUUID(),
+    seq: nextSeq(),
+    name,
+    props,
+    clientTs: now,
+    visitorId: identity.visitorId,
+    sessionId: identity.sessionId,
+    visitorType: identity.visitorType,
+    visitNumber: identity.visitNumber,
+    path: path ?? window.location.pathname,
+    referrer: document.referrer,
+  };
+}
+
+/**
  * Queue one event.
  *
  * Fire and forget by design: the storage write is not awaited, so a click
  * handler that calls this returns immediately and a navigation is never
  * delayed. Ordering is still exact because `seq` is taken synchronously.
  */
-export function trackEvent(name: string, props: EventProps = {}): void {
+export function trackEvent(name: string, props: EventProps = {}, options: { path?: string } = {}): void {
   if (typeof window === "undefined") return;
   if (hasOptedOut()) return;
 
   try {
-    const now = Date.now();
-    const identity = currentIdentity(now);
-
-    const event: AnalyticsEvent = {
-      eventId: crypto.randomUUID(),
-      seq: nextSeq(),
-      name,
-      props,
-      clientTs: now,
-      visitorId: identity.visitorId,
-      sessionId: identity.sessionId,
-      visitorType: identity.visitorType,
-      visitNumber: identity.visitNumber,
-      path: window.location.pathname,
-      referrer: document.referrer,
-    };
-
-    void enqueue(event);
+    void enqueue(buildEvent(name, props, options.path));
     scheduleFlush();
   } catch {
     // An event that cannot be built is not worth a broken page.
+  }
+}
+
+/**
+ * Record an event from a tab that is closing.
+ *
+ * The queue write is asynchronous and a closing tab may not live to finish
+ * it, so the event is also beaconed straight away. It is still queued: if the
+ * beacon is lost it goes on the next visit, and if both arrive the collector
+ * dedupes on the event id.
+ */
+export function trackExitEvent(name: string, props: EventProps = {}): void {
+  if (typeof window === "undefined") return;
+  if (hasOptedOut()) return;
+
+  try {
+    const event = buildEvent(name, props);
+    flushWithBeacon([event], 0);
+    void enqueue(event);
+  } catch {
+    // Nothing useful left to do in a closing tab.
   }
 }
 
