@@ -21,7 +21,6 @@ import { aiSupported, assistantAi, type AiState } from "@/lib/pos/assistant/ai/c
 import { AI_MODELS } from "@/lib/pos/assistant/ai/models";
 import type { VoiceLanguage } from "@/lib/pos/assistant/ai/protocol";
 import { executeAction } from "@/lib/pos/assistant/executor";
-import { continueFlow, type Flow } from "@/lib/pos/assistant/flows";
 import { flatExamples, smartRespond, type AssistantPack } from "@/lib/pos/assistant/pack";
 import {
   DEFAULT_PREFS,
@@ -91,24 +90,13 @@ function spokenText(reply: AgentReply): string {
  * optional downloads (lib/pos/assistant/pack.ts, ai/) teach it more phrasings
  * and let it listen.
  */
-export type CartAddition = { productId: string; quantity: number }[];
-
-export function AssistantPanel({
-  onNavigate,
-  onAddToCart,
-}: {
-  onNavigate: NavigateFn;
-  /** Put items in the New Sale cart. */
-  onAddToCart: (items: CartAddition) => void;
-}) {
+export function AssistantPanel({ onNavigate }: { onNavigate: NavigateFn }) {
   const pos = usePos();
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<"chat" | "pack">("chat");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [thinking, setThinking] = useState(false);
-  /** The question the assistant is waiting on an answer to, if any. */
-  const [flow, setFlow] = useState<Flow | null>(null);
   const [receipt, setReceipt] = useState<Order | null>(null);
   const [prefs, setPrefsState] = useState<AssistantPrefs>(DEFAULT_PREFS);
   const [pack, setPack] = useState<AssistantPack | null>(null);
@@ -159,8 +147,6 @@ export function AssistantPanel({
 
   const say = (reply: AgentReply) => {
     push({ from: "assistant", reply, proposalState: reply.proposal ? "pending" : undefined });
-    setFlow(reply.flow ?? null);
-    if (reply.cart?.length) onAddToCart(reply.cart);
     if (reply.navigate) onNavigate(reply.navigate.screen, reply.navigate.query);
     if (prefs.speakReplies) speak(spokenText(reply), prefs.language);
   };
@@ -172,10 +158,6 @@ export function AssistantPanel({
     setInput("");
     setThinking(true);
     try {
-      if (flow) {
-        say(continueFlow(flow, trimmed, pos));
-        return;
-      }
       const meaningReady = ai.meaning.phase === "ready" && ai.indexed;
       const reply = await smartRespond(trimmed, pos, {
         pack,
@@ -206,11 +188,6 @@ export function AssistantPanel({
         updateProduct: pos.updateProduct,
         createProduct: pos.createProduct,
         createCustomer: pos.createCustomer,
-        createCategory: pos.createCategory,
-        updateSettings: pos.updateSettings,
-        updateBusiness: pos.updateBusiness,
-        addPaymentMethod: pos.addPaymentMethod,
-        deletePaymentMethod: pos.deletePaymentMethod,
         cancelOrder: pos.cancelOrder,
         exportBackup: pos.exportBackup,
       });
@@ -587,7 +564,7 @@ export function AssistantPanel({
                   ref={inputRef}
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
-                  placeholder={flow ? "Type your answer…" : canUseMic ? "Type or tap the mic" : "Ask, or say “sell 2 Maggi by UPI”"}
+                  placeholder={canUseMic ? "Type or tap the mic" : "Ask, or say “sell 2 Maggi by UPI”"}
                   aria-label="Message the assistant"
                   enterKeyHint="send"
                   className="w-full min-w-0 rounded-full border border-muted-line/40 bg-cream-paper px-4 py-2.5 text-sm text-ink placeholder:text-muted/60 focus:border-indigo focus:outline-none"

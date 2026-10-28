@@ -42,14 +42,7 @@ function toLocalDateTimeInput(date: Date): string {
   )}:${pad(date.getMinutes())}`;
 }
 
-export function BillingScreen({
-  onNavigate,
-  cartRequest,
-}: {
-  onNavigate: NavigateFn;
-  /** Items the assistant asked to put in the cart; a new nonce means a new request. */
-  cartRequest?: { items: { productId: string; quantity: number }[]; nonce: number } | null;
-}) {
+export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const {
     business,
     settings,
@@ -126,38 +119,6 @@ export function BillingScreen({
       ];
     });
   };
-
-  // Items added from the assistant ("add 2 maggi to the bill").
-  const handledCartNonce = useRef(0);
-  useEffect(() => {
-    if (!cartRequest || cartRequest.nonce === handledCartNonce.current) return;
-    handledCartNonce.current = cartRequest.nonce;
-    setError("");
-    setLines((prev) => {
-      let next = [...prev];
-      for (const { productId, quantity } of cartRequest.items) {
-        const product = products.find((p) => p.id === productId);
-        if (!product || quantity <= 0) continue;
-        const existing = next.find((line) => line.productId === productId);
-        next = existing
-          ? next.map((line) => (line.productId === productId ? { ...line, quantity: line.quantity + quantity } : line))
-          : [
-              ...next,
-              {
-                productId: product.id,
-                name: product.name,
-                price: product.sellingPrice,
-                quantity,
-                unit: product.unit,
-                taxRate: effectiveTaxRate(product),
-                taxInclusive: product.taxInclusive ?? false,
-              },
-            ];
-      }
-      return next;
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartRequest]);
 
   const handleSearchEnter = () => {
     const q = search.trim().toLowerCase();

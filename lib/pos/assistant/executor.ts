@@ -6,15 +6,7 @@
 // by hand. Nothing here writes to the database directly.
 
 import type { CheckoutInput, CustomerInput, ProductInput } from "@/lib/pos/store";
-import {
-  formatMoney,
-  type Business,
-  type Category,
-  type Customer,
-  type Order,
-  type PosSettings,
-  type Product,
-} from "@/lib/pos/types";
+import { formatMoney, type Customer, type Order, type Product } from "@/lib/pos/types";
 import type { AgentAction, AgentReply } from "./agent";
 
 /** The slice of the POS store the assistant is allowed to use. */
@@ -27,11 +19,6 @@ export type AssistantApi = {
   updateProduct: (id: string, input: ProductInput) => Promise<void>;
   createProduct: (input: ProductInput) => Promise<Product>;
   createCustomer: (input: CustomerInput) => Promise<Customer>;
-  createCategory: (name: string) => Promise<Category>;
-  updateSettings: (updates: Partial<Omit<PosSettings, "id">>) => Promise<void>;
-  updateBusiness: (updates: Partial<Omit<Business, "id" | "createdAt">>) => Promise<void>;
-  addPaymentMethod: (name: string) => Promise<void>;
-  deletePaymentMethod: (id: string) => Promise<void>;
   cancelOrder: (orderId: string) => Promise<void>;
   exportBackup: () => Promise<void>;
 };
@@ -98,36 +85,29 @@ export async function executeAction(action: AgentAction, api: AssistantApi): Pro
     }
 
     case "add-product": {
-      let categoryId = action.input.categoryId;
-      if (action.newCategoryName) categoryId = (await api.createCategory(action.newCategoryName)).id;
-      const product = await api.createProduct({ ...action.input, categoryId });
+      const product = await api.createProduct({
+        name: action.name,
+        sellingPrice: action.price,
+        sku: "",
+        barcode: "",
+        categoryId: "",
+        costPrice: null,
+        taxRate: null,
+        taxInclusive: false,
+        trackStock: action.stock !== null,
+        stock: action.stock ?? 0,
+        lowStockThreshold: null,
+        unit: "",
+        imageDataUrl: "",
+        description: "",
+      });
       return {
         reply: {
           text: `Added ${product.name} at ${formatMoney(product.sellingPrice, api.currency)}.`,
-          link: { screen: "products", query: product.name, label: "Show product" },
-          suggestions: [`add 1 ${product.name.toLowerCase()} to bill`, "Create a new product"],
+          link: { screen: "products", query: product.name, label: "Edit details" },
+          suggestions: [`sell 1 ${product.name} by cash`],
         },
       };
-    }
-
-    case "settings": {
-      await api.updateSettings(action.updates);
-      return { reply: { text: `Saved — ${action.label} updated.` } };
-    }
-
-    case "business": {
-      await api.updateBusiness(action.updates);
-      return { reply: { text: `Saved — ${action.label} updated.` } };
-    }
-
-    case "payment-add": {
-      await api.addPaymentMethod(action.name);
-      return { reply: { text: `${action.name} is now a payment method at checkout.` } };
-    }
-
-    case "payment-remove": {
-      await api.deletePaymentMethod(action.id);
-      return { reply: { text: "Payment method removed." } };
     }
 
     case "add-customer": {
