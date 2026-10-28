@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
+import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
 
@@ -640,6 +641,14 @@ export default function FreeRestaurantPosPage() {
           ))}
         </FadeInStagger>
       </section>
+
+      <YouTubeTutorial
+        videoId="j65z3fUqd0E"
+        title="How to set up the Free Restaurant POS"
+        description="Watch how to set up your tables, kitchen screen, stock and reports in a few minutes."
+        thumbnail="/tutorials/free-restaurant-pos.webp"
+        thumbnailSmall="/tutorials/free-restaurant-pos-960.webp"
+      />
 
       {/* The product itself, above the marketing — people came here to use it. */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
