@@ -16,7 +16,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PosProvider, usePos } from "@/lib/pos/store";
-import { AssistantPanel } from "./AssistantPanel";
+import { AssistantPanel, type CartAddition } from "./AssistantPanel";
 import { LockScreen } from "./LockScreen";
 import type { NavigateFn, ScreenId } from "./nav";
 import { WelcomeScreen } from "./WelcomeScreen";
@@ -40,6 +40,7 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
 ];
 
 type QueryRequest = { screen: ScreenId; value: string; nonce: number };
+type CartRequest = { items: CartAddition; nonce: number };
 
 function GlobalSearch({ onNavigate }: { onNavigate: NavigateFn }) {
   const { products, customers, orders } = usePos();
@@ -181,6 +182,7 @@ function PosShell({
   const { business, settings } = usePos();
   const [screen, setScreen] = useState<ScreenId>("dashboard");
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
+  const [cartRequest, setCartRequest] = useState<CartRequest | null>(null);
   const [offline, setOffline] = useState(false);
 
   // Counter lock. When a PIN is set the POS starts locked, so opening the tab
@@ -308,7 +310,7 @@ function PosShell({
           <DashboardScreen onNavigate={navigate} />
         </div>
         <div className={screen === "sell" ? "" : "hidden"}>
-          <BillingScreen onNavigate={navigate} />
+          <BillingScreen onNavigate={navigate} cartRequest={cartRequest} />
         </div>
         <div className={screen === "products" ? "" : "hidden"}>
           <ProductsScreen externalQuery={queryFor("products")} />
@@ -329,7 +331,10 @@ function PosShell({
 
       {/* Hidden, not unmounted, while locked so the conversation survives a lock. */}
       <div className={locked ? "hidden" : ""}>
-        <AssistantPanel onNavigate={navigate} />
+        <AssistantPanel
+          onNavigate={navigate}
+          onAddToCart={(items) => setCartRequest((prev) => ({ items, nonce: (prev?.nonce ?? 0) + 1 }))}
+        />
       </div>
 
       {locked && (
