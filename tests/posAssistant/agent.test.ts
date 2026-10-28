@@ -177,16 +177,13 @@ describe("actions are proposed, never performed", () => {
     expect(ask("set maggi price to 15").proposal?.action).toEqual({ kind: "price", productId: "maggi", price: 15 });
   });
 
-  it("adds a product, and asks for the price when it is missing", () => {
-    expect(ask("add product Good Day Biscuit at 30 with 24 stock").proposal?.action).toEqual({
-      kind: "add-product",
-      name: "Good Day Biscuit",
-      price: 30,
-      stock: 24,
-    });
-    const missing = ask("add product Lays");
-    expect(missing.proposal).toBeUndefined();
-    expect(missing.text).toMatch(/selling price of Lays/);
+  it("starts guided questions for a new product, skipping what was already said", () => {
+    const full = ask("add product Good Day Biscuit at 30 with 24 stock");
+    expect(full.proposal).toBeUndefined();
+    expect(full.flow).toMatchObject({ kind: "product", draft: { name: "Good Day Biscuit", sellingPrice: 30, trackStock: true, stock: 24 } });
+    const nameOnly = ask("add product Lays");
+    expect(nameOnly.flow).toMatchObject({ kind: "product", step: "price", draft: { name: "Lays" } });
+    expect(nameOnly.text).toMatch(/Selling price of Lays/);
   });
 
   it("adds a customer but not a duplicate", () => {
@@ -215,7 +212,7 @@ describe("conversation", () => {
     expect(ask("hello").suggestions?.length).toBeGreaterThan(0);
     expect(ask("open reports").navigate).toEqual({ screen: "reports" });
     expect(ask("show me products").navigate).toEqual({ screen: "products" });
-    expect(ask("i want to add a new product").text).toBe("Add a product");
+    expect(ask("i want to add a new product").flow).toMatchObject({ kind: "product", step: "name" });
   });
 
   it("admits when it does not understand", () => {
