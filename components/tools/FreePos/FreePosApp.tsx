@@ -16,7 +16,6 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PosProvider, usePos } from "@/lib/pos/store";
-import { AssistantPanel } from "./AssistantPanel";
 import { LockScreen } from "./LockScreen";
 import type { NavigateFn, ScreenId } from "./nav";
 import { WelcomeScreen } from "./WelcomeScreen";
@@ -325,11 +324,6 @@ function PosShell({
         <div className={screen === "settings" ? "" : "hidden"}>
           <SettingsScreen onLockNow={lockNow} />
         </div>
-      </div>
-
-      {/* Hidden, not unmounted, while locked so the conversation survives a lock. */}
-      <div className={locked ? "hidden" : ""}>
-        <AssistantPanel onNavigate={navigate} />
       </div>
 
       {locked && (
