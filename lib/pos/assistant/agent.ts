@@ -24,7 +24,6 @@ import {
   isOutOfStock,
   type Business,
   type CartLine,
-  type Category,
   type Customer,
   type Order,
   type OrderItem,
@@ -32,11 +31,7 @@ import {
   type PosSettings,
   type Product,
 } from "@/lib/pos/types";
-import type { CustomerInput, ProductInput } from "@/lib/pos/store";
-import { startProductFlow, type Flow, type ProductDraft } from "./flows";
-import { insightsReply } from "./insights";
 import { HELP_ARTICLES, type HelpArticle } from "./knowledge";
-import { settingsReply } from "./settings";
 import { foldName, hasAny, matchByName, nameScore, normalize, readNumber, tokens } from "./text";
 
 export type AssistantData = {
@@ -47,8 +42,6 @@ export type AssistantData = {
   orders: Order[];
   orderItems: OrderItem[];
   payments: PaymentMethod[];
-  /** Optional so callers without categories still work; new products then skip the choice. */
-  categories?: Category[];
 };
 
 export type AgentAction =
@@ -61,12 +54,8 @@ export type AgentAction =
     }
   | { kind: "stock"; productId: string; mode: "add" | "reduce" | "adjust"; quantity: number }
   | { kind: "price"; productId: string; price: number }
-  | { kind: "add-product"; input: ProductInput; newCategoryName: string | null }
+  | { kind: "add-product"; name: string; price: number; stock: number | null }
   | { kind: "add-customer"; name: string; phone: string }
-  | { kind: "settings"; updates: Partial<Omit<PosSettings, "id">>; label: string }
-  | { kind: "business"; updates: Partial<Omit<Business, "id" | "createdAt">>; label: string }
-  | { kind: "payment-add"; name: string }
-  | { kind: "payment-remove"; id: string }
   | { kind: "cancel-order"; orderId: string }
   | { kind: "backup" };
 
@@ -89,10 +78,6 @@ export type AgentReply = {
   guess?: true;
   /** When a downloaded pack reworded the request, what it was understood as. */
   understoodAs?: string;
-  /** A question is open: the next message answers it (see flows.ts). */
-  flow?: Flow;
-  /** Put these in the New Sale cart (harmless, so no confirmation). */
-  cart?: { productId: string; quantity: number }[];
 };
 
 export const STARTER_SUGGESTIONS = [
@@ -108,7 +93,7 @@ export const STARTER_SUGGESTIONS = [
 
 export function respond(input: string, data: AssistantData, now: Date = new Date()): AgentReply {
   const text = stripPoliteness(normalize(input));
-  const ctx: Ctx = { data, now, currency: data.business?.currency || "INR", raw: input };
+  const ctx: Ctx = { data, now, currency: data.business?.currency || "INR" };
 
   if (!text) return intro(ctx);
   if (/^(hi+|hello|hey|namaste|namaskar|hii+|good (morning|afternoon|evening))\b/.test(text) && text.split(" ").length <= 3) {
@@ -137,7 +122,7 @@ export function respond(input: string, data: AssistantData, now: Date = new Date
   );
 }
 
-type Ctx = { data: AssistantData; now: Date; currency: string; raw: string };
+type Ctx = { data: AssistantData; now: Date; currency: string };
 
 function stripPoliteness(text: string): string {
   return text
@@ -161,8 +146,7 @@ function intro(ctx: Ctx): AgentReply {
     bullets: [
       "“Today's sales” · “What is low on stock?”",
       "“Sell 2 Maggi and 1 Coke by UPI”",
-      "“Add 24 stock to Maggi” · “Turn on tax”",
-      "“Top customers” · “Who stopped coming?”",
+      "“Add 24 stock to Maggi” · “Cancel INV-00012”",
     ],
     suggestions: STARTER_SUGGESTIONS,
   };
@@ -175,11 +159,9 @@ function capabilities(): AgentReply {
       "Answer how-to questions about billing, stock, GST, receipts, backups and more.",
       "Report sales, profit, top products and payment split for today, yesterday, this week or month.",
       "Tell you stock and price of any product, and what is running low.",
-      "Show insights: top customers by spend, regulars who stopped coming, slow-moving stock, busiest day and hour.",
-      "Record a sale, fill the bill, add or reduce stock, change a price, add a product (I'll ask each field) or customer, cancel a bill, take a backup — each change only after you confirm.",
-      "Change settings: tax on/off, tax rate, invoice prefix, receipt footer, paper size, shop details, connected tools, payment methods.",
+      "Record a sale, add or reduce stock, change a price, add a product or customer, cancel a bill, take a backup — each only after you confirm.",
     ],
-    suggestions: ["Top customers", "Regulars who stopped coming", "Create a new product", "Change settings"],
+    suggestions: ["Sales this month", "Sell 1 item by cash", "Add customer Ramesh 9876543210", "Take a backup"],
   };
 }
 
@@ -258,15 +240,12 @@ const UNIT_WORDS = "(?:units?|pcs|pieces?|packets?|pkts?|nos|boxes?|bottles?|kg|
 
 function actionReply(text: string, ctx: Ctx): AgentReply | null {
   return (
-    settingsReply(ctx.raw, text, ctx.data) ??
     cancelOrderAction(text, ctx) ??
     backupAction(text) ??
     addCustomerAction(text, ctx) ??
     addProductAction(text, ctx) ??
-    cartAction(text, ctx) ??
     priceAction(text, ctx) ??
     stockAction(text, ctx) ??
-    whichAddAction(text, ctx) ??
     saleAction(text, ctx)
   );
 }
@@ -367,92 +346,58 @@ function addCustomerAction(text: string, ctx: Ctx): AgentReply | null {
 }
 
 function addProductAction(text: string, ctx: Ctx): AgentReply | null {
-  // "add product" on its own could mean a new product or one for the bill: ask.
-  if (/^(?:add|put)\s+(?:a\s+)?(?:product|item)s?$/.test(text)) {
-    return {
-      text: "Do you want to create a new product, or add a product to the current bill?",
-      suggestions: ["Create a new product", "Add to the bill"],
-    };
+  if (/^(?:add|create|new|save)\s+(?:a\s+)?(?:new\s+)?(?:product|item)s?$/.test(text)) {
+    const article = HELP_ARTICLES.find((a) => a.id === "add-product");
+    return article ? articleReply(article) : null;
   }
-  if (/^(?:add\s+)?(?:more\s+)?(?:(?:a\s+)?(?:product|item)s?\s+)?(?:to|in|into)\s+(?:the\s+)?(?:current\s+)?(?:bill|cart|sale|order)$/.test(text)) {
-    return askForCartItems();
-  }
-  // "create a new product", "new product", "naya product" → the guided questions.
-  if (/^(?:create|make|new|add|save|register)\s+(?:a\s+)?(?:new\s+)?(?:product|item)s?$|^(?:create|add|make)\s+(?:a\s+)?new\s+one$/.test(text)) {
-    return startProductFlow({}, ctx.data);
-  }
-
   const match = text.match(/^(?:add|create|new|save)\s+(?:a\s+)?(?:new\s+)?(?:product|item)\s+(?:named\s+|called\s+)?(.+)$/);
   if (!match) return null;
-  // Keep the user's own capitals for the name ("Parle-G", not "Parle G").
-  const rawRest = ctx.raw.trim().replace(/[?!]+$/, "").replace(/^.*?\b(?:product|item)\s+(?:named\s+|called\s+)?/i, "");
-  let rest = rawRest;
-  const draft: ProductDraft = {};
+  let rest = match[1];
 
-  const stockMatch = rest.match(new RegExp(`\\s+(?:with|and|stock)\\s+${QTY}\\s*(?:${UNIT_WORDS}\\s*)?(?:in\\s+)?(?:stock)?$`, "i"));
+  let stock: number | null = null;
+  const stockMatch = rest.match(new RegExp(`\\s+(?:with|and|stock)\\s+${QTY}\\s*(?:${UNIT_WORDS}\\s*)?(?:in\\s+)?(?:stock)?$`));
   if (stockMatch) {
-    const n = readNumber(stockMatch[1].toLowerCase());
+    const n = readNumber(stockMatch[1]);
     if (n !== null && Number.isInteger(n) && n >= 0) {
-      draft.trackStock = true;
-      draft.stock = n;
+      stock = n;
       rest = rest.slice(0, stockMatch.index);
     }
   }
-  const priceMatch =
-    rest.match(new RegExp(`\\s+(?:at|for|price|priced at|@|=|rs\\.?|₹)\\s*${MONEY}(?:\\s*(?:rs|rupees|each))?$`, "i")) ??
-    rest.match(new RegExp(`\\s+${MONEY}(?:\\s*(?:rs|rupees))?$`, "i"));
-  if (priceMatch) {
-    draft.sellingPrice = Number(priceMatch[1]);
-    rest = rest.slice(0, priceMatch.index);
+
+  const priceMatch = rest.match(new RegExp(`\\s+(?:at|for|price|priced at|@|=|rs\\.?|₹)\\s*${MONEY}(?:\\s*(?:rs|rupees|each))?$`)) ??
+    rest.match(new RegExp(`\\s+${MONEY}(?:\\s*(?:rs|rupees))?$`));
+  if (!priceMatch) {
+    const guess = titleCase(rest.trim());
+    return {
+      text: `What's the selling price of ${guess}?`,
+      suggestions: [`add product ${guess} at 10`],
+    };
   }
-  const name = rest.trim();
-  if (name) {
-    const existing = ctx.data.products.find((p) => foldName(p.name) === foldName(name));
-    if (existing) {
-      return {
-        text: `${existing.name} already exists at ${formatMoney(existing.sellingPrice, ctx.currency)}. Add it to the bill, add stock, or create a different product?`,
-        suggestions: [`add 1 ${foldName(existing.name)} to bill`, `add stock to ${foldName(existing.name)}`, "Create a new product"],
-      };
-    }
-    draft.name = name.charAt(0).toUpperCase() + name.slice(1);
+  const price = Number(priceMatch[1]);
+  const name = titleCase(rest.slice(0, priceMatch.index).trim());
+  if (!name) return { text: "What should the product be called?" };
+
+  const existing = ctx.data.products.find((p) => foldName(p.name) === foldName(name));
+  if (existing) {
+    return {
+      text: `${existing.name} already exists at ${formatMoney(existing.sellingPrice, ctx.currency)}.`,
+      suggestions: [`change price of ${existing.name} to ${price}`],
+    };
   }
-  return startProductFlow(draft, ctx.data);
-}
 
-function askForCartItems(): AgentReply {
   return {
-    text: "Which products, and how many? For example: “2 Maggi and 1 Coke”.",
-    suggestions: ["Cancel"],
-    flow: { kind: "ask", question: "Which products, and how many?", template: "add {answer} to bill" },
-  };
-}
-
-/** "add 2 maggi to the bill" — straight into the New Sale cart. */
-function cartAction(text: string, ctx: Ctx): AgentReply | null {
-  const match = text.match(/^(?:add|put|daal do|dalo)\s+(.+?)\s+(?:to|in|into|on|me|mein)\s+(?:the\s+)?(?:bill|cart|sale|order|basket|current bill)$/);
-  if (!match) return null;
-  const read = readLines(match[1], ctx, text);
-  if ("reply" in read) return read.reply;
-  return {
-    text: `Added ${read.lines.map((l) => `${l.quantity} × ${l.name}`).join(", ")} to the bill.`,
-    cart: read.lines.map((l) => ({ productId: l.productId, quantity: l.quantity })),
-    navigate: { screen: "sell" },
-    suggestions: ["Add more to the bill", "Today's sales"],
-  };
-}
-
-/** "add 2 maggi" names a product but not where: the bill, or the stock? */
-function whichAddAction(text: string, ctx: Ctx): AgentReply | null {
-  const match = text.match(/^add\s+(.+)$/);
-  if (!match || /\b(stock|bill|cart|customer|product|item|payment)\b/.test(match[1])) return null;
-  const item = readItem(match[1]);
-  if (!item) return null;
-  const found = findProduct(item.name, ctx, (option) => text.replace(item.name, foldName(option)));
-  if (found.reply) return found.ambiguous ? found.reply : null;
-  const name = foldName(found.product!.name);
-  return {
-    text: `Add ${item.qty} ${found.product!.name} to the current bill, or to your stock?`,
-    suggestions: [`add ${item.qty} ${name} to bill`, `add ${item.qty} stock to ${name}`],
+    text: `Add ${name} to your products?`,
+    proposal: {
+      action: { kind: "add-product", name, price, stock },
+      title: "Add product",
+      details: [
+        `Name: ${name}`,
+        `Selling price: ${formatMoney(price, ctx.currency)}`,
+        stock === null ? "Stock: not tracked" : `Opening stock: ${stock}`,
+        "Edit it later on Products to add SKU, barcode, cost or tax.",
+      ],
+      confirmLabel: "Add product",
+    },
   };
 }
 
@@ -489,19 +434,6 @@ function priceAction(text: string, ctx: Ctx): AgentReply | null {
 }
 
 function stockAction(text: string, ctx: Ctx): AgentReply | null {
-  // "add stock to maggi" with no count: ask how many.
-  const noQty = text.match(/^(?:add|update|restock)\s+(?:more\s+)?stock\s+(?:to|for|of|in)\s+(.+)$|^restock\s+([a-z].*?)$/);
-  if (noQty && !/\d/.test(noQty[1] ?? noQty[2])) {
-    const phrase = noQty[1] ?? noQty[2];
-    const found = findProduct(phrase, ctx, (option) => text.replace(phrase, foldName(option)));
-    if (found.reply) return found.reply;
-    const name = foldName(found.product!.name);
-    return {
-      text: `How many ${found.product!.name} should I add to stock? (${found.product!.stock} now)`,
-      suggestions: ["6", "12", "24", "Cancel"],
-      flow: { kind: "ask", question: `How many ${found.product!.name}?`, template: `add {answer} stock to ${name}`, chips: ["6", "12", "24"] },
-    };
-  }
   type Parsed = { mode: "add" | "reduce" | "adjust"; qty: string; name: string };
   const tryPatterns: [RegExp, (m: RegExpMatchArray) => Parsed][] = [
     // set maggi stock to 10 · set stock of maggi to 10
@@ -520,12 +452,7 @@ function stockAction(text: string, ctx: Ctx): AgentReply | null {
     ],
     // received 24 maggi · add 24 maggi to stock · restock maggi 24
     [
-      new RegExp(`^(?:received|receive|got|restock|restocked|stock in|aaya|aaye)\\s+${QTY}\\s+(?:${UNIT_WORDS}\\s+)?(?:of\\s+)?(.+?)(?:\\s+(?:to|in|into)\\s+(?:the\\s+)?(?:stock|inventory))?(?:\\s+stock)?$`),
-      (m) => ({ mode: "add", qty: m[1], name: m[2] }),
-    ],
-    // add 24 maggi to stock
-    [
-      new RegExp(`^add\\s+${QTY}\\s+(?:${UNIT_WORDS}\\s+)?(?:of\\s+)?(.+?)\\s+(?:to|in|into)\\s+(?:the\\s+)?(?:stock|inventory)$`),
+      new RegExp(`^(?:received|receive|got|restock|restocked|stock in|aaya|aaye|add)\\s+${QTY}\\s+(?:${UNIT_WORDS}\\s+)?(?:of\\s+)?(.+?)(?:\\s+(?:to|in|into)\\s+(?:the\\s+)?(?:stock|inventory))?(?:\\s+stock)?$`),
       (m) => ({ mode: "add", qty: m[1], name: m[2] }),
     ],
     [
@@ -642,9 +569,50 @@ function saleAction(text: string, ctx: Ctx): AgentReply | null {
   }
 
   // Items: "2 maggi and 1 coke", "maggi x2, coke".
-  const read = readLines(rest, ctx, text);
-  if ("reply" in read) return read.reply;
-  const { lines } = read;
+  const parts = rest
+    .split(/,|\band\b|\baur\b|\+|&/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+  if (parts.length === 0) return { text: "What should I sell? For example: “sell 2 Maggi by cash”." };
+
+  const lines: CartLine[] = [];
+  const missing: string[] = [];
+  for (const part of parts) {
+    const item = readItem(part);
+    if (!item) {
+      missing.push(part);
+      continue;
+    }
+    const found = findProduct(item.name, ctx, (option) => text.replace(item.name, foldName(option)));
+    if (found.reply) {
+      if (found.ambiguous) return found.reply;
+      missing.push(item.name);
+      continue;
+    }
+    const product = found.product!;
+    const existing = lines.find((line) => line.productId === product.id);
+    if (existing) {
+      existing.quantity += item.qty;
+      continue;
+    }
+    lines.push({
+      productId: product.id,
+      name: product.name,
+      price: product.sellingPrice,
+      quantity: item.qty,
+      unit: product.unit,
+      taxRate: ctx.data.settings.taxEnabled ? product.taxRate ?? ctx.data.settings.defaultTaxRate : 0,
+      taxInclusive: product.taxInclusive ?? false,
+    });
+  }
+
+  if (missing.length > 0) {
+    return {
+      text: `I couldn't find ${missing.map((m) => `“${m}”`).join(", ")} in your products.`,
+      link: { screen: "products", label: "Open Products" },
+      suggestions: missing.length === 1 ? [`add product ${titleCase(missing[0])} at 10`] : undefined,
+    };
+  }
 
   if (!creditSale && !paymentMethod) {
     paymentMethod = ctx.data.payments.find((p) => foldName(p.name) === "cash") ?? ctx.data.payments[0] ?? null;
@@ -679,57 +647,6 @@ function saleAction(text: string, ctx: Ctx): AgentReply | null {
       confirmLabel: `Charge ${formatMoney(totals.total, ctx.currency)}`,
     },
   };
-}
-
-/** Read "2 maggi and 1 coke" into cart lines, or the reply that asks / says what's missing. */
-function readLines(rest: string, ctx: Ctx, text: string): { lines: CartLine[] } | { reply: AgentReply } {
-  const parts = rest
-    .split(/,|\band\b|\baur\b|\+|&/)
-    .map((part) => part.trim())
-    .filter(Boolean);
-  if (parts.length === 0) return { reply: { text: "Which products? For example: “2 Maggi and 1 Coke”." } };
-
-  const lines: CartLine[] = [];
-  const missing: string[] = [];
-  for (const part of parts) {
-    const item = readItem(part);
-    if (!item) {
-      missing.push(part);
-      continue;
-    }
-    const found = findProduct(item.name, ctx, (option) => text.replace(item.name, foldName(option)));
-    if (found.reply) {
-      if (found.ambiguous) return { reply: found.reply };
-      missing.push(item.name);
-      continue;
-    }
-    const product = found.product!;
-    const existing = lines.find((line) => line.productId === product.id);
-    if (existing) {
-      existing.quantity += item.qty;
-      continue;
-    }
-    lines.push({
-      productId: product.id,
-      name: product.name,
-      price: product.sellingPrice,
-      quantity: item.qty,
-      unit: product.unit,
-      taxRate: ctx.data.settings.taxEnabled ? product.taxRate ?? ctx.data.settings.defaultTaxRate : 0,
-      taxInclusive: product.taxInclusive ?? false,
-    });
-  }
-
-  if (missing.length > 0) {
-    return {
-      reply: {
-        text: `I couldn't find ${missing.map((m) => `“${m}”`).join(", ")} in your products.`,
-        link: { screen: "products", label: "Open Products" },
-        suggestions: missing.length === 1 ? [`new product ${titleCase(missing[0])}`] : undefined,
-      },
-    };
-  }
-  return { lines };
 }
 
 /** "2 maggi", "maggi x2", "maggi 2", "two maggi", "maggi" → quantity and name. */
@@ -800,7 +717,6 @@ export type Period = { label: string; start: Date; end: Date };
 
 function queryReply(text: string, ctx: Ctx): AgentReply | null {
   return (
-    insightsReply(text, ctx.data, ctx.now) ??
     orderLookup(text, ctx) ??
     lowStockQuery(text, ctx) ??
     topProductsQuery(text, ctx) ??
