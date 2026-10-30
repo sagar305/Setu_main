@@ -38,6 +38,7 @@ import { APPS_SCRIPT_TEMPLATE } from "@/lib/dine/sheetSync";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { RestoreBackupButton } from "./RestoreBackupButton";
+import { QrMenuCard } from "./QrMenuCard";
 import {
   ConfirmDialog,
   Field,
@@ -698,6 +699,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
           {fill(t(customers.length === 1 ? "dnStDiner1" : "dnStDinerN"), { n: customers.length })}
         </p>
       </Card>
+
+      <QrMenuCard />
 
       <SheetSyncCard
         url={sheetSync.url}
