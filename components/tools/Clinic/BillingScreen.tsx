@@ -586,7 +586,7 @@ function BillComposer({
                       )
                     )
                   }
-                  className={`${inputClass} w-28 shrink-0`}
+                  className={`${inputClass} !w-28 shrink-0`}
                   aria-label={t("clBlAmount")}
                 />
                 <button
