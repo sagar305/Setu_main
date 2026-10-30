@@ -66,7 +66,7 @@ export function RxLineRow({
               value={line.name}
               onChange={(event) => patch({ name: event.target.value })}
               placeholder={t("clDocMedicine")}
-              className={`${inputClass} font-semibold`}
+              className={`${inputClass} min-w-0 flex-1 font-semibold`}
               aria-label={t("clRxMedicineName")}
             />
             <input
@@ -74,7 +74,7 @@ export function RxLineRow({
               value={line.strength}
               onChange={(event) => patch({ strength: event.target.value })}
               placeholder="500 mg"
-              className={`${inputClass} w-24 shrink-0`}
+              className={`${inputClass} !w-24 shrink-0`}
               aria-label={t("clRxStrength")}
             />
           </div>
