@@ -1,15 +1,22 @@
 // TEMPORARY — DIWALI 2026. Remove after Diwali (after 13 Nov 2026).
 // It switches itself off after the window below, but the code should go too.
-// To remove: delete this file, the DiwaliBar part of
-// components/NavigationProgress.tsx (and its currentFestival import/state),
-// and the "Diwali top loader" block at the end of app/globals.css.
+// To remove, delete this file and everything marked "TEMPORARY — DIWALI 2026":
+//   - app/layout.tsx: the FESTIVE_BOOT_SCRIPT <script> and suppressHydrationWarning
+//   - components/NavigationProgress.tsx: DiwaliBar and its currentFestival state
+//   - components/Logo.tsx: the diya and the "Happy Diwali!" wordmark
+//   - components/ReviewBanner.tsx + lib/reviewBanner.ts: the Diwali greeting
+//   - app/globals.css: the Diwali block at the end
 
 /**
- * Festive windows: date ranges in which the site swaps in a seasonal touch,
- * such as the Diwali "phuljhadi" top loader in components/NavigationProgress.
+ * Festive windows: date ranges in which the site swaps in a seasonal touch.
  *
- * Times are India Standard Time. Add next year's dates here when they are
- * known; nothing else needs to change.
+ * Pages are rendered ahead of time, so the date cannot be checked while
+ * rendering without the page flashing from the normal look to the festive one.
+ * Instead FESTIVE_BOOT_SCRIPT runs before the page paints and sets
+ * <html data-festive="diwali">, and the festive parts are switched on with CSS
+ * from that attribute — the same trick sites use for dark mode.
+ *
+ * Times are India Standard Time.
  */
 
 export type Festival = "diwali";
@@ -28,24 +35,20 @@ const WINDOWS: FestiveWindow[] = [
 ];
 
 /**
- * The festival running right now, or null. `?festive=diwali` in the URL forces
- * it on, so the effect can be previewed outside the window.
+ * Inline script for the top of <body>. Sets data-festive on <html> when a
+ * window is open. `?festive=diwali` forces it on and `?festive=off` forces it
+ * off, for previewing; the choice is remembered for the tab.
  */
-export function currentFestival(now: number = Date.now()): Festival | null {
-  if (typeof window !== "undefined") {
-    let forced = new URLSearchParams(window.location.search).get("festive");
-    // Remember the override for the tab, since the next link drops the query.
-    try {
-      if (forced) window.sessionStorage.setItem("setu-festive", forced);
-      else forced = window.sessionStorage.getItem("setu-festive");
-    } catch {
-      // Storage blocked: the override then lasts only for this URL.
-    }
-    if (forced === "diwali") return forced;
-    if (forced === "off") return null;
-  }
-  const active = WINDOWS.find(
-    (w) => now >= Date.parse(w.start) && now < Date.parse(w.end),
-  );
-  return active?.festival ?? null;
+export const FESTIVE_BOOT_SCRIPT = `(function(){try{
+var w=${JSON.stringify(WINDOWS)},n=Date.now(),f=null,q=null;
+for(var i=0;i<w.length;i++){if(n>=Date.parse(w[i].start)&&n<Date.parse(w[i].end)){f=w[i].festival;break}}
+try{q=new URLSearchParams(location.search).get("festive");if(q)sessionStorage.setItem("setu-festive",q);else q=sessionStorage.getItem("setu-festive")}catch(e){}
+if(q==="diwali")f="diwali";else if(q==="off")f=null;
+if(f)document.documentElement.setAttribute("data-festive",f);
+}catch(e){}})();`;
+
+/** The festival the boot script switched on for this page, or null. Client only. */
+export function currentFestival(): Festival | null {
+  if (typeof document === "undefined") return null;
+  return document.documentElement.getAttribute("data-festive") === "diwali" ? "diwali" : null;
 }

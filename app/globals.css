@@ -315,3 +315,155 @@ body {
     animation: none;
   }
 }
+
+/* TEMPORARY — DIWALI 2026 (continued). Remove after Diwali, with the rest of
+   this block. Everything below is switched on by <html data-festive="diwali">,
+   which lib/festive.ts sets before the page paints.
+
+   Show / hide by festival: */
+.diwali-diya,
+.diwali-show,
+.diwali-wordmark-greeting {
+  display: none;
+}
+html[data-festive="diwali"] .diwali-hide {
+  display: none;
+}
+html[data-festive="diwali"] .diwali-show {
+  display: block;
+}
+html[data-festive="diwali"] .diwali-diya {
+  display: inline-block;
+}
+
+/* The diya: flame flickers and its glow breathes. */
+.diwali-diya {
+  overflow: visible;
+}
+.diwali-diya-flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: diwali-flame 1.1s ease-in-out infinite;
+}
+.diwali-diya-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: diwali-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes diwali-flame {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.92, 1.08) rotate(-4deg);
+  }
+  50% {
+    transform: scale(1.05, 0.94) rotate(2deg);
+  }
+  75% {
+    transform: scale(0.96, 1.05) rotate(4deg);
+  }
+}
+@keyframes diwali-glow {
+  50% {
+    opacity: 0.6;
+    transform: scale(1.25);
+  }
+}
+
+/* Logo: "Setu🪔 / Technology" and "Happy Diwali! / From Setu" take turns,
+   like an animated GIF. Both sit in one grid cell, so nothing shifts. */
+html[data-festive="diwali"] .diwali-wordmark-greeting {
+  display: flex;
+  opacity: 0;
+  animation: diwali-wordmark-greeting 9s ease-in-out infinite;
+}
+html[data-festive="diwali"] .diwali-wordmark-main {
+  animation: diwali-wordmark-main 9s ease-in-out infinite;
+}
+@keyframes diwali-wordmark-main {
+  0%,
+  52% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  58%,
+  94% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes diwali-wordmark-greeting {
+  0%,
+  54% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  60%,
+  92% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98%,
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* Top banner: a little taller, to make room for a string of lights along
+   each edge. */
+html[data-festive="diwali"] .diwali-banner-inner {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+html[data-festive="diwali"] .diwali-lights {
+  display: flex;
+  gap: 14px;
+  height: 8px;
+  padding-inline: 6px;
+  align-items: center;
+  overflow: hidden;
+  /* The wire the bulbs hang on. */
+  background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18)) center / 100%
+    1px no-repeat;
+}
+.diwali-bulb {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  box-shadow: 0 0 6px 1px currentColor;
+  animation: diwali-twinkle 1.2s ease-in-out infinite;
+}
+@keyframes diwali-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diwali-diya-flame,
+  .diwali-diya-glow,
+  .diwali-bulb {
+    animation: none;
+  }
+  /* No swapping wordmark: keep "Setu" with its diya. */
+  html[data-festive="diwali"] .diwali-wordmark-main {
+    animation: none;
+  }
+  html[data-festive="diwali"] .diwali-wordmark-greeting {
+    display: none;
+  }
+}

@@ -1,3 +1,6 @@
+// TEMPORARY — DIWALI 2026: remove after Diwali.
+import { Diya } from "@/components/Diya";
+
 type LogoProps = {
   variant?: "light" | "dark";
   showWordmark?: boolean;
@@ -35,15 +38,34 @@ export function Logo({ variant = "light", showWordmark = true, size = 40, classN
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <LogoMark size={size} className={markColor} />
       {showWordmark && (
-        <span className="flex flex-col leading-none">
-          <span className={`text-2xl font-bold tracking-tight ${wordmarkColor}`}>
-            Setu<span className="text-saffron">.</span>
+        // TEMPORARY — DIWALI 2026: the grid stacks the normal wordmark and the
+        // "Happy Diwali!" one in the same cell, so the logo never changes
+        // width when they swap. Outside Diwali only the normal one shows.
+        // After Diwali, put back the plain <span> with "Setu." and "Technology".
+        <span className="grid leading-none">
+          <span className="diwali-wordmark-main col-start-1 row-start-1 flex flex-col">
+            <span className={`text-2xl font-bold tracking-tight ${wordmarkColor}`}>
+              Setu<span className="diwali-hide text-saffron">.</span>
+              <Diya className="ms-0.5 h-[0.62em] w-[0.62em] align-baseline" />
+            </span>
+            <span className={`mt-1 text-[10px] font-medium uppercase tracking-[0.42em] ${subColor}`}>
+              Technology
+            </span>
           </span>
-          <span className={`mt-1 text-[10px] font-medium uppercase tracking-[0.42em] ${subColor}`}>
-            Technology
+          <span
+            aria-hidden="true"
+            className="diwali-wordmark-greeting col-start-1 row-start-1 flex-col"
+          >
+            <span className={`whitespace-nowrap text-2xl font-bold tracking-tight ${wordmarkColor}`}>
+              Happy Diwali<span className="text-saffron">!</span>
+            </span>
+            <span className={`mt-1 text-[10px] font-medium uppercase tracking-[0.42em] ${subColor}`}>
+              From Setu
+            </span>
           </span>
         </span>
       )}
     </span>
   );
 }
+
