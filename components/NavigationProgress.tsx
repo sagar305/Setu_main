@@ -34,7 +34,7 @@ function ProgressBar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [progress, setProgress] = useState<number | null>(null);
-  // Checked per navigation, so the theme turns on and off without a reload.
+  // TEMPORARY — DIWALI 2026: remove after Diwali. Checked per navigation.
   const [festival, setFestival] = useState<Festival | null>(null);
   const trickle = useRef<number | undefined>(undefined);
   const giveUp = useRef<number | undefined>(undefined);
@@ -49,7 +49,8 @@ function ProgressBar() {
   const finish = () => {
     clearTimers();
     setProgress((value) => (value === null ? null : 100));
-    // Leave time for the crackers to go off at the end of a festive bar.
+    // TEMPORARY — DIWALI 2026: leave time for the crackers to go off. After Diwali put back
+    // `window.setTimeout(() => setProgress(null), 250)`.
     hide.current = window.setTimeout(() => setProgress(null), currentFestival() ? 700 : 250);
   };
 
@@ -72,7 +73,7 @@ function ProgressBar() {
       }
 
       clearTimers();
-      setFestival(currentFestival());
+      setFestival(currentFestival()); // TEMPORARY — DIWALI 2026: remove after Diwali.
       setProgress(15);
       // Creep towards 90% while waiting; the real end comes from the route change.
       trickle.current = window.setInterval(() => {
@@ -98,6 +99,7 @@ function ProgressBar() {
 
   if (progress === null) return null;
 
+  // TEMPORARY — DIWALI 2026: remove after Diwali.
   if (festival === "diwali") return <DiwaliBar progress={progress} />;
 
   return (

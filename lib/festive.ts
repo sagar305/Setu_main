@@ -1,11 +1,14 @@
 // TEMPORARY — DIWALI 2026. Remove after Diwali (after 13 Nov 2026).
 // It switches itself off after the window below, but the code should go too.
-// To remove, delete this file and everything marked "TEMPORARY — DIWALI 2026":
+// Every Diwali change carries the marker "TEMPORARY — DIWALI 2026", so
+//   grep -rn "TEMPORARY — DIWALI 2026" app components lib
+// lists all of it. To remove, delete this file, components/Diya.tsx and:
 //   - app/layout.tsx: the FESTIVE_BOOT_SCRIPT <script> and suppressHydrationWarning
 //   - components/NavigationProgress.tsx: DiwaliBar and its currentFestival state
 //   - components/Logo.tsx: the diya and the "Happy Diwali!" wordmark
-//   - components/ReviewBanner.tsx + lib/reviewBanner.ts: the Diwali greeting
-//   - app/globals.css: the Diwali block at the end
+//   - components/ReviewBanner.tsx + lib/reviewBanner.ts: the Diwali greeting,
+//     lights and diyas (the review ask comes back unchanged)
+//   - app/globals.css: the Diwali block at the end, down to END TEMPORARY
 
 /**
  * Festive windows: date ranges in which the site swaps in a seasonal touch.

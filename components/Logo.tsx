@@ -45,6 +45,7 @@ export function Logo({ variant = "light", showWordmark = true, size = 40, classN
         <span className="grid leading-none">
           <span className="diwali-wordmark-main col-start-1 row-start-1 flex flex-col">
             <span className={`text-2xl font-bold tracking-tight ${wordmarkColor}`}>
+              {/* TEMPORARY — DIWALI 2026: "diwali-hide" class and <Diya />. */}
               Setu<span className="diwali-hide text-saffron">.</span>
               <Diya className="ms-0.5 h-[0.62em] w-[0.62em] align-baseline" />
             </span>

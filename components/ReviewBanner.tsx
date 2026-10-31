@@ -8,6 +8,8 @@
 // jump when it appears. Closing it hides it for the rest of the visit; a reload
 // brings it back, which is the point of a standing ask.
 
+// TEMPORARY — DIWALI 2026: useEffect is only for the Diwali greeting; after Diwali this
+// line goes back to `import { useState } from "react";`.
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Star, X } from "lucide-react";
@@ -42,7 +44,7 @@ export function ReviewBanner() {
   // chosen language, as the rest of the toolkit does.
   const lang = route.lang ?? readerLang;
   const copy = REVIEW_BANNER_COPY[lang] ?? REVIEW_BANNER_COPY.en;
-  const diwaliCopy = DIWALI_BANNER_COPY[lang] ?? DIWALI_BANNER_COPY.en;
+  const diwaliCopy = DIWALI_BANNER_COPY[lang] ?? DIWALI_BANNER_COPY.en; // TEMPORARY — DIWALI 2026
   const dir = LANGUAGES.find((language) => language.code === lang)?.dir ?? "ltr";
 
   // Someone who goes to leave a review has answered the in-page prompt too.
@@ -50,6 +52,9 @@ export function ReviewBanner() {
     writeReviewState({ ...readReviewState(), ratedAt: Date.now() });
   }
 
+  // TEMPORARY — DIWALI 2026: in the markup below, after Diwali put back
+  //   aria-label={copy.label}, drop "overflow-hidden", "diwali-banner-inner"
+  //   and "diwali-hide", and delete the DiwaliLights, Diya and greeting <p>.
   return (
     <aside
       aria-label={diwali ? diwaliCopy.lead : copy.label}
@@ -62,6 +67,7 @@ export function ReviewBanner() {
       <DiwaliLights edge="bottom" />
 
       <div className="diwali-banner-inner mx-auto flex max-w-6xl items-center gap-3 px-6 py-2.5 pe-12 sm:pe-14">
+        {/* TEMPORARY — DIWALI 2026: "diwali-hide" class. */}
         <Star className="diwali-hide hidden h-4 w-4 shrink-0 text-saffron sm:block" aria-hidden="true" />
 
         {/* TEMPORARY — DIWALI 2026: the greeting, with a diya at each end. */}
@@ -72,6 +78,7 @@ export function ReviewBanner() {
         </p>
         <Diya className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
 
+        {/* TEMPORARY — DIWALI 2026: "diwali-hide" hides the review ask during Diwali. */}
         <p className="diwali-hide text-xs leading-relaxed sm:text-sm">
           <span className="font-semibold">{copy.lead}</span>{" "}
           <span className="hidden text-cream-paper/85 sm:inline">{copy.body}</span>{" "}
