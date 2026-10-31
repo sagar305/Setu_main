@@ -6,6 +6,7 @@ import {
   Barcode,
   Blocks,
   BookUser,
+  CalendarClock,
   CalendarRange,
   ClipboardList,
   Copy,
@@ -19,8 +20,10 @@ import {
   History,
   LayoutDashboard,
   LayoutGrid,
+  ListChecks,
   Layers,
   Lock,
+  PackagePlus,
   Palette,
   PauseCircle,
   Percent,
@@ -39,10 +42,12 @@ import {
   Timer,
   TrendingUp,
   Trophy,
+  Truck,
   TriangleAlert,
   Undo2,
   UserPlus,
   Users,
+  Wallet,
   WifiOff,
   Zap,
 } from "lucide-react";
@@ -370,6 +375,51 @@ const CUSTOMERS: FeatureSection = {
   ],
 };
 
+const SUPPLIERS: FeatureSection = {
+  eyebrow: "Suppliers & payables",
+  title: "Know what you owe, not just what you're owed",
+  subtitle:
+    "Switch on the Purchase Register, Supplier Ledger and Accounts Payable Aging in Settings → Connected tools, and the money going out is tracked as carefully as the money coming in.",
+  items: [
+    {
+      icon: Truck,
+      title: "One supplier book",
+      description:
+        "Save a supplier once — phone, GSTIN, address — and pick them on every purchase bill, purchase order and debit note.",
+    },
+    {
+      icon: PackagePlus,
+      title: "Purchases top up stock",
+      description:
+        "Record a supplier bill in the Purchase Register, link its lines to your products, and confirm to add the quantities to POS stock.",
+    },
+    {
+      icon: BookUser,
+      title: "Supplier Ledger",
+      description:
+        "Every purchase marked Credit becomes a bill on that supplier's ledger automatically, with a running balance of what you owe.",
+    },
+    {
+      icon: Wallet,
+      title: "Pay bill by bill",
+      description:
+        "Record a payment against one bill or let it clear the oldest bills first. Overpayments show as an advance; old balances go in as opening bills.",
+    },
+    {
+      icon: CalendarClock,
+      title: "Payables aging",
+      description:
+        "Accounts Payable Aging pulls in only unpaid Credit bills and sorts them into 1–30, 31–60, 61–90 and 90+ day buckets per supplier.",
+    },
+    {
+      icon: ListChecks,
+      title: "Mark paid once",
+      description:
+        "Mark a bill paid in the aging report and the payment lands in the Supplier Ledger, so the same bill is never chased twice.",
+    },
+  ],
+};
+
 const SAFETY: FeatureSection = {
   eyebrow: "Safety & continuity",
   title: "Locked at the till, backed up off it",
@@ -508,6 +558,11 @@ const FAQ_ITEMS = [
       "Yes. With the Customer Ledger switched on in Settings → Connected tools, a Credit (Udhaar) payment option appears for saved customers. The full amount is added to that customer's ledger balance instead of being collected at the counter, and the statement and aging tools read the same ledger.",
   },
   {
+    question: "Can I track what I owe my suppliers?",
+    answer:
+      "Yes. Record supplier bills in the Purchase Register and choose Credit as the payment mode for anything you haven't paid yet. The Supplier Ledger shows each supplier's balance and open bills, and lets you record payments against a bill or oldest-first. Accounts Payable Aging pulls in only the credit bills that are still unpaid, and marking one paid there records the payment in the Supplier Ledger.",
+  },
+  {
     question: "Can I stop staff from opening the POS?",
     answer:
       "Yes. Set a PIN under Settings → Counter lock. The POS then asks for it whenever the tab opens, you can lock the screen by hand at any time, and you can have it lock itself after a chosen number of idle minutes.",
@@ -537,6 +592,7 @@ const softwareApplicationSchema = {
     "Hold and recall parked carts",
     "Flat or percentage discounts",
     "Custom payment methods and credit (udhaar) sales",
+    "Supplier ledger and accounts payable aging for credit purchases",
     "Inventory tracking with a full stock movement log",
     "Thermal (80mm/58mm) and A4 receipt printing",
     "PDF receipts and shareable invoice links with UPI",
@@ -748,8 +804,16 @@ export default function BrowserBasedPosPage() {
         </div>
       </section>
 
-      {/* Lock, backup, sync */}
+      {/* Suppliers & payables */}
       <section className="border-t border-muted-line/20 bg-white py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionIntro section={SUPPLIERS} />
+          <FeatureCards items={SUPPLIERS.items} />
+        </div>
+      </section>
+
+      {/* Lock, backup, sync */}
+      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
         <div className="mx-auto max-w-6xl px-6">
           <SectionIntro section={SAFETY} />
           <FeatureCards items={SAFETY.items} />
@@ -757,7 +821,7 @@ export default function BrowserBasedPosPage() {
       </section>
 
       {/* Connected tools */}
-      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
+      <section className="border-t border-muted-line/20 bg-white py-16">
         <div className="mx-auto max-w-6xl px-6">
           <FadeIn>
             <div className="mx-auto max-w-2xl text-center">
@@ -810,7 +874,7 @@ export default function BrowserBasedPosPage() {
       </section>
 
       {/* Day-to-day details */}
-      <section className="border-t border-muted-line/20 bg-white py-16">
+      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
         <div className="mx-auto max-w-6xl px-6">
           <FadeIn>
             <h2 className="text-center text-3xl font-bold tracking-tight text-ink">
@@ -822,7 +886,7 @@ export default function BrowserBasedPosPage() {
       </section>
 
       {/* Info */}
-      <section className="border-t border-muted-line/20 bg-cream-paper py-16">
+      <section className="border-t border-muted-line/20 bg-white py-16">
         <div className="mx-auto max-w-4xl px-6">
           <div className="space-y-8">
             <FadeIn>
