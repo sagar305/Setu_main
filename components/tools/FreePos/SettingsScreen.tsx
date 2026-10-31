@@ -33,6 +33,9 @@ import {
 } from "@/lib/pos/pin";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
+import { fill, translate } from "@/lib/i18n/translate";
+import { NewPill } from "@/components/whatsNew/NewPill";
+import { useWhatsNewContext } from "@/components/whatsNew/WhatsNewContext";
 import {
   ConfirmDialog,
   Field,
@@ -43,17 +46,25 @@ import {
 } from "./ui";
 
 function Section({
+  id,
   title,
+  badge,
   description,
   children,
 }: {
+  id?: string;
   title: string;
+  /** Shown beside the title, e.g. a "2 new" tag. */
+  badge?: ReactNode;
   description?: string;
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-muted-line/30 bg-white p-5">
-      <h3 className="text-base font-bold text-ink">{title}</h3>
+    <section id={id} className="scroll-mt-24 rounded-2xl border border-muted-line/30 bg-white p-5 transition-shadow">
+      <h3 className="flex flex-wrap items-center gap-2 text-base font-bold text-ink">
+        {title}
+        {badge}
+      </h3>
       {description && <p className="mt-1 text-sm text-muted">{description}</p>}
       <div className="mt-4">{children}</div>
     </section>
@@ -84,6 +95,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     syncSheetNow,
     resyncSheetAll,
   } = usePos();
+
+  const whatsNew = useWhatsNewContext();
+  const newToolCount = whatsNew
+    ? POS_TOOLS.filter((tool) => whatsNew.isNewFeature(tool.slug)).length
+    : 0;
 
   // Business profile
   const [profile, setProfile] = useState({
@@ -622,7 +638,13 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       </Section>
 
       <Section
+        id="connected-tools"
         title="Connected tools"
+        badge={
+          newToolCount > 0 ? (
+            <NewPill label={fill(translate("en", "wnNNew"), { n: newToolCount })} />
+          ) : null
+        }
         description="Every tool here shares this POS's data — switch one on and it already knows your business, customers, products and sales when you open it. Some also unlock features inside the POS."
       >
         <ConnectedToolsPanel
@@ -748,6 +770,7 @@ function ConnectedToolsPanel({
   enabled: string[];
   onToggle: (slug: string, on: boolean) => void;
 }) {
+  const whatsNew = useWhatsNewContext();
   return (
     <div className="space-y-6">
       {POS_TOOL_CATEGORIES.map((category) => {
@@ -770,6 +793,9 @@ function ConnectedToolsPanel({
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
                           <p className="text-sm font-bold text-ink">{tool.name}</p>
+                          {whatsNew?.isNewFeature(tool.slug) && (
+                            <NewPill label={translate("en", "wnNew")} />
+                          )}
                           {tool.unlocks && (
                             <span className="rounded-full bg-saffron/20 px-2 py-0.5 text-[11px] font-semibold text-ink">
                               Unlocks a POS feature

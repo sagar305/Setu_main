@@ -50,6 +50,9 @@ import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
 import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { Faq } from "@/components/Faq";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
+import { WhatsNewStrip } from "@/components/whatsNew/WhatsNewStrip";
+import { NewPill } from "@/components/whatsNew/NewPill";
+import { isNewPosTool } from "@/lib/whatsNew";
 import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
 import { freeOffer } from "@/lib/schema";
 
@@ -675,6 +678,8 @@ export default function BrowserBasedPosPage() {
             );
           })}
         </FadeInStagger>
+
+        <WhatsNewStrip productId="browser-pos" />
       </section>
 
       <YouTubeTutorial
@@ -687,7 +692,7 @@ export default function BrowserBasedPosPage() {
       />
 
       {/* The POS app */}
-      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6">
+      <section id="pos-app" className="scroll-mt-24 mx-auto max-w-7xl px-4 pb-12 sm:px-6">
         <FreePosApp />
       </section>
 
@@ -790,6 +795,7 @@ export default function BrowserBasedPosPage() {
                             <span className="font-semibold text-ink transition group-hover:text-indigo">
                               {tool.name}
                             </span>{" "}
+                            {isNewPosTool(tool.slug) && <NewPill label="New" className="mr-1 align-middle" />}
                             <span className="text-muted">{tool.description}</span>
                           </Link>
                         </li>

@@ -11,6 +11,8 @@ import { QrSyncError } from "@/lib/dine/qrMenuSync";
 import { QR_MENU_APP_URL } from "@/lib/premiumLinks";
 import { shortLinksConfigured } from "@/lib/toolkit/shortLink";
 import { useQrMenuSync } from "./QrMenuSync";
+import { NewPill } from "@/components/whatsNew/NewPill";
+import { useWhatsNewContext } from "@/components/whatsNew/WhatsNewContext";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 
 type Choice = "free" | "premium";
@@ -26,6 +28,7 @@ export function QrMenuCard() {
   const { t, lang } = useI18n();
   const { business, settings, menuItems, updateSettings } = useDine();
   const sync = useQrMenuSync();
+  const whatsNew = useWhatsNewContext();
   const mode = settings.qrMenuMode;
 
   const [choice, setChoice] = useState<Choice>(
@@ -188,10 +191,16 @@ export function QrMenuCard() {
   );
 
   return (
-    <section className="space-y-4 rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm sm:p-5">
-      <h3 className="flex items-center gap-2 text-sm font-bold text-ink">
+    <section
+      id="qr-menu"
+      className="scroll-mt-24 space-y-4 rounded-2xl border border-muted-line/30 bg-white p-4 shadow-sm transition-shadow sm:p-5"
+    >
+      <h3 className="flex flex-wrap items-center gap-2 text-sm font-bold text-ink">
         <QrCode className="h-4 w-4 text-indigo" />
         {t("dnQrTitle")}
+        {whatsNew?.pendingOn("settings").some((update) => update.id === "dine-qr-sync") && (
+          <NewPill label={t("wnNew")} />
+        )}
       </h3>
       <p className="text-sm text-muted">{t("dnQrBlurb")}</p>
 

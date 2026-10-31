@@ -16,7 +16,9 @@ import { useDine, type FloorTable } from "@/lib/dine/store";
 import { formatPaise } from "@/lib/dine/money";
 import { orderTypeLabel, type DineReservation, type DineTicket } from "@/lib/dine/types";
 import { formatSlot, holdingTable, isLate, upcoming } from "@/lib/dine/reservation";
-import type { NavigateFn } from "./nav";
+import { scrollToFeature } from "@/lib/hooks/useWhatsNew";
+import { WhatsNewCards } from "@/components/whatsNew/WhatsNewContext";
+import type { NavigateFn, ScreenId } from "./nav";
 import {
   EmptyState,
   OrderTypeChip,
@@ -120,6 +122,13 @@ export function FloorScreen({
 
   return (
     <div className="space-y-6">
+      <WhatsNewCards
+        t={t}
+        onOpen={(update) => {
+          onNavigate(update.target.screen as ScreenId);
+          scrollToFeature(update.target.anchor);
+        }}
+      />
       <SectionHeading
         title={t("dnFlFloor")}
         subtitle={
