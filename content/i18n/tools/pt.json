@@ -1710,6 +1710,101 @@
           }
         ]
       }
+    },
+    {
+      "name": "Livro de fornecedores",
+      "shortDescription": "O que você deve a cada fornecedor: compras a prazo, pagamentos e saldos conta a conta.",
+      "seo": {
+        "title": "Livro de fornecedores grátis — Contas a pagar | Setu",
+        "description": "Acompanhe quanto você deve a cada fornecedor. Compras a prazo entram sozinhas; registre pagamentos conta a conta e veja o saldo. Grátis, offline e sem cadastro.",
+        "keywords": [
+          "livro de fornecedores",
+          "conta corrente de fornecedores",
+          "controle de pagamentos a fornecedores",
+          "razão de fornecedores grátis",
+          "contas a pagar"
+        ],
+        "ogTitle": "Livro de fornecedores",
+        "ogDescription": "Acompanhe quanto você deve a cada fornecedor. Compras a prazo entram sozinhas; registre pagamentos conta a conta e veja o saldo. Grátis, offline e sem cadastro."
+      },
+      "hero": {
+        "headline": "Livro de fornecedores",
+        "subheadline": "O que você deve a cada fornecedor: contas a prazo, pagamentos e saldo atual em um só lugar."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "O que é um livro de fornecedores?",
+            "answer": "Uma conta corrente para cada fornecedor de quem você compra a prazo. As contas aumentam o que você deve, os pagamentos diminuem, e o saldo mostra quanto ainda falta pagar — o lado credor dos seus livros."
+          },
+          {
+            "question": "Preciso lançar as compras duas vezes?",
+            "answer": "Não. Toda compra do Registro de compras da Setu com forma de pagamento Credit aparece sozinha no livro do fornecedor. Compras pagas em Cash, UPI, Card ou Bank foram quitadas na hora. O botão Trazer compras a prazo relê o registro."
+          },
+          {
+            "question": "Como os pagamentos são ligados às contas?",
+            "answer": "Escolha uma conta em Para a conta para pagar aquela especificamente, ou deixe Contas mais antigas primeiro e o pagamento quita as mais velhas. O que passar vira adiantamento."
+          },
+          {
+            "question": "Como funciona com o Aging de contas a pagar?",
+            "answer": "Os dois usam os mesmos números. Trazer do Registro de compras nesse relatório traz só contas a prazo em aberto, e Marcar como paga registra o pagamento neste livro, então a conta não volta."
+          },
+          {
+            "question": "Posso lançar saldos dos meus livros antigos?",
+            "answer": "Sim. Escolha Conta / saldo inicial, informe quanto devia ao fornecedor no dia em que começou e adicione uma nota como saldo antigo. Os pagamentos seguintes o quitam como qualquer conta."
+          },
+          {
+            "question": "Onde ficam meus dados?",
+            "answer": "No seu navegador, no seu aparelho, dentro do mesmo espaço de trabalho da Setu usado pelo PDV no navegador, pela Agenda de fornecedores e pelo Registro de compras. Nada é enviado; exporte um CSV quando quiser."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "O que é um livro de fornecedores (conta de credores)?",
+          "paragraphs": [
+            "Um **livro de fornecedores**, também chamado razão de credores ou de contas a pagar, mantém uma conta corrente por fornecedor. Cada conta recebida a prazo aumenta o que você deve, cada pagamento diminui, e o saldo é o que ainda falta pagar. É o espelho do [livro de clientes](/tools/customer-ledger): lá você vê quem lhe deve; aqui, a quem você deve."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Como usar o livro de fornecedores grátis",
+          "steps": [
+            "Registre as compras no Registro de compras e escolha Credit como forma de pagamento se ainda não pagou.",
+            "Abra o Livro de fornecedores e escolha o fornecedor — as contas a prazo já aparecem com o valor em aberto.",
+            "Ao pagar, escolha Pagamento feito, a conta ou Contas mais antigas primeiro, a forma de pagamento e toque em Registrar pagamento.",
+            "Use Conta / saldo inicial para dívidas anteriores ou contas que não foram lançadas no registro.",
+            "Veja o Aging de contas a pagar para saber quais contas em aberto estão envelhecendo."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Pague primeiro as contas mais antigas",
+          "text": "Os fornecedores costumam abater os pagamentos das contas mais antigas, e este livro quita um pagamento não vinculado do mesmo jeito, para o seu saldo bater com o deles. Se o fornecedor pedir para quitar uma conta específica, escolha-a em Para a conta ao registrar o pagamento. Veja toda semana o [Aging de contas a pagar](/tools/accounts-payable-aging) para nenhuma conta a prazo passar do vencimento."
+        },
+        {
+          "kind": "links",
+          "headline": "Ferramentas relacionadas a contas a pagar",
+          "links": [
+            {
+              "label": "Registro de compras"
+            },
+            {
+              "label": "Aging de contas a pagar"
+            },
+            {
+              "label": "Agenda de fornecedores"
+            },
+            {
+              "label": "Livro de clientes"
+            },
+            {
+              "label": "PDV no navegador"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -25,8 +25,8 @@ const itemFor = (slug: string) =>
   CONTENT.items.find((item: Record<string, any>) => item.slug === slug) as Record<string, any>;
 
 describe("tool pages keep their copy in content", () => {
-  it("finds the thirty-five tool pages", () => {
-    expect(SLUGS.length).toBe(35);
+  it("finds the thirty-six tool pages", () => {
+    expect(SLUGS.length).toBe(36);
   });
 
   /**

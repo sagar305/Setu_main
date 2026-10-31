@@ -81,6 +81,23 @@ export const POS_TOOLS: PosToolLink[] = [
     description: "Keep supplier contacts and GSTINs in one place.",
     usesPosData: "Shared with every purchase document you raise.",
   },
+  {
+    slug: "supplier-ledger",
+    name: "Supplier Ledger",
+    route: "/tools/supplier-ledger",
+    category: "Money out",
+    description: "Track what you owe each supplier and the payments you make.",
+    usesPosData:
+      "The same supplier book; credit purchases from the Purchase Register post here automatically.",
+  },
+  {
+    slug: "accounts-payable-aging",
+    name: "Accounts Payable Aging",
+    route: "/tools/accounts-payable-aging",
+    category: "Money out",
+    description: "See which unpaid supplier bills are due and how overdue.",
+    usesPosData: "Unpaid credit purchases from the Purchase Register, net of payments in the Supplier Ledger.",
+  },
 
   // ---- Reports & analysis -------------------------------------------------
   {

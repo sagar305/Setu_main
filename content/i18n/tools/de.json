@@ -1710,6 +1710,101 @@
           }
         ]
       }
+    },
+    {
+      "name": "Lieferantenkonto",
+      "shortDescription": "Was Sie jedem Lieferanten schulden — Kreditkäufe, Zahlungen und Salden pro Rechnung.",
+      "seo": {
+        "title": "Kostenloses Lieferantenkonto — Verbindlichkeiten | Setu",
+        "description": "Sehen Sie, was Sie jedem Lieferanten schulden. Kreditkäufe fließen automatisch ein, Zahlungen erfassen Sie pro Rechnung. Kostenlos, offline, ohne Anmeldung.",
+        "keywords": [
+          "Lieferantenkonto",
+          "Kreditorenkonto",
+          "Lieferantenzahlungen verfolgen",
+          "Kreditorenbuch kostenlos",
+          "Verbindlichkeiten"
+        ],
+        "ogTitle": "Lieferantenkonto",
+        "ogDescription": "Sehen Sie, was Sie jedem Lieferanten schulden. Kreditkäufe fließen automatisch ein, Zahlungen erfassen Sie pro Rechnung. Kostenlos, offline, ohne Anmeldung."
+      },
+      "hero": {
+        "headline": "Lieferantenkonto",
+        "subheadline": "Was Sie jedem Lieferanten schulden — Kreditrechnungen, Zahlungen und laufender Saldo an einem Ort."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Was ist ein Lieferantenkonto?",
+            "answer": "Ein laufendes Konto für jeden Lieferanten, bei dem Sie auf Kredit kaufen. Rechnungen erhöhen Ihre Schuld, Zahlungen senken sie, und der Saldo zeigt, was noch offen ist — die Kreditorenseite Ihrer Bücher."
+          },
+          {
+            "question": "Muss ich Einkäufe doppelt erfassen?",
+            "answer": "Nein. Jeder Einkauf im Setu-Einkaufsregister mit Zahlungsart Credit erscheint automatisch im Konto des Lieferanten. Einkäufe per Cash, UPI, Card oder Bank wurden sofort bezahlt. Die Schaltfläche Kreditkäufe holen liest das Register neu ein."
+          },
+          {
+            "question": "Wie werden Zahlungen Rechnungen zugeordnet?",
+            "answer": "Wählen Sie unter Für Rechnung eine bestimmte Rechnung, oder lassen Sie Älteste Rechnungen zuerst — dann begleicht die Zahlung die ältesten offenen Rechnungen. Eine Überzahlung erscheint als Vorauszahlung."
+          },
+          {
+            "question": "Wie arbeitet es mit der Fälligkeitsanalyse zusammen?",
+            "answer": "Beide nutzen dieselben Zahlen. Holen aus dem Einkaufsregister bringt dort nur unbezahlte Kreditrechnungen, und Als bezahlt markieren erfasst die Zahlung in diesem Konto, sodass die Rechnung nicht zurückkommt."
+          },
+          {
+            "question": "Kann ich Salden aus alten Büchern übernehmen?",
+            "answer": "Ja. Wählen Sie Rechnung / Anfangssaldo, tragen Sie ein, was Sie dem Lieferanten zum Start schuldeten, und notieren Sie etwa Altsaldo. Spätere Zahlungen begleichen ihn wie jede andere Rechnung."
+          },
+          {
+            "question": "Wo werden meine Daten gespeichert?",
+            "answer": "In Ihrem Browser auf Ihrem Gerät, im selben Setu-Arbeitsbereich wie das Browser-Kassensystem, das Lieferantenbuch und das Einkaufsregister. Nichts wird hochgeladen; exportieren Sie jederzeit eine CSV-Sicherung."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Was ist ein Lieferantenkonto (Kreditorenkonto)?",
+          "paragraphs": [
+            "Ein **Lieferantenkonto**, auch Kreditorenkonto oder Kreditorenbuch genannt, führt ein laufendes Konto pro Lieferant. Jede auf Kredit erhaltene Rechnung erhöht Ihre Schuld, jede Zahlung senkt sie, und der Saldo ist der noch offene Betrag. Es ist das Gegenstück zum [Kundenkonto](/tools/customer-ledger): dort, wer Ihnen schuldet; hier, wem Sie schulden."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "So nutzen Sie das kostenlose Lieferantenkonto",
+          "steps": [
+            "Erfassen Sie Einkäufe im Einkaufsregister und wählen Sie Credit als Zahlungsart, wenn Sie noch nicht bezahlt haben.",
+            "Öffnen Sie das Lieferantenkonto und wählen Sie den Lieferanten — seine Kreditrechnungen stehen schon mit dem offenen Betrag da.",
+            "Beim Bezahlen Zahlung geleistet wählen, dann die Rechnung oder Älteste zuerst, die Zahlungsart und Zahlung erfassen tippen.",
+            "Nutzen Sie Rechnung / Anfangssaldo für Altschulden oder Rechnungen, die nicht im Register stehen.",
+            "Prüfen Sie in der Fälligkeitsanalyse der Verbindlichkeiten, welche offenen Rechnungen altern."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Älteste Rechnungen zuerst bezahlen",
+          "text": "Lieferanten verrechnen Zahlungen meist mit ihren ältesten Rechnungen, und dieses Konto begleicht eine nicht zugeordnete Zahlung genauso, damit Ihr Saldo zu ihrem passt. Bittet ein Lieferant, eine bestimmte Rechnung zu begleichen, wählen Sie sie beim Erfassen unter Für Rechnung. Prüfen Sie wöchentlich die [Fälligkeitsanalyse der Verbindlichkeiten](/tools/accounts-payable-aging), damit keine Kreditrechnung überfällig wird."
+        },
+        {
+          "kind": "links",
+          "headline": "Passende Tools für Verbindlichkeiten",
+          "links": [
+            {
+              "label": "Einkaufsregister"
+            },
+            {
+              "label": "Fälligkeitsanalyse Verbindlichkeiten"
+            },
+            {
+              "label": "Lieferantenbuch"
+            },
+            {
+              "label": "Kundenkonto"
+            },
+            {
+              "label": "Browser-Kassensystem"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

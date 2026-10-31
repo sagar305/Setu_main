@@ -47,6 +47,7 @@ import type {
   Purchase,
   ReceiptTemplate,
   Supplier,
+  SupplierLedgerEntry,
   WorkspaceAsset,
 } from "@/lib/toolkit/types";
 
@@ -60,6 +61,7 @@ export type {
   Purchase,
   ReceiptTemplate,
   Supplier,
+  SupplierLedgerEntry,
   WorkspaceAsset,
 };
 
@@ -86,6 +88,12 @@ export const deleteAppointment = (id: string) => dbDelete("appointments", id);
 export const getLedgerEntries = () => dbGetAll<LedgerEntry>("ledger");
 export const saveLedgerEntry = (e: LedgerEntry) => dbPut<LedgerEntry>("ledger", e);
 export const deleteLedgerEntry = (id: string) => dbDelete("ledger", id);
+
+export const getSupplierLedgerEntries = () =>
+  dbGetAll<SupplierLedgerEntry>("supplier_ledger");
+export const saveSupplierLedgerEntry = (e: SupplierLedgerEntry) =>
+  dbPut<SupplierLedgerEntry>("supplier_ledger", e);
+export const deleteSupplierLedgerEntry = (id: string) => dbDelete("supplier_ledger", id);
 
 export const getReceiptTemplates = () => dbGetAll<ReceiptTemplate>("receipt_templates");
 export const saveReceiptTemplate = (t: ReceiptTemplate) =>
