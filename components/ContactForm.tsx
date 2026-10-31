@@ -29,9 +29,28 @@ export type ContactFormContent = {
   submitLabel: string;
 };
 
+/** The label text, with a red asterisk after it when the field is required. */
+function FieldLabel({ field, mark }: { field: ContactFormField; mark: boolean }) {
+  // One span, so the asterisk stays on the label's line inside the
+  // flex-column <label> rather than becoming its own row.
+  return (
+    <span>
+      {field.label}
+      {mark && field.required && (
+        // The input's own `required` attribute is what assistive tech announces;
+        // the asterisk is the visual cue only.
+        <span aria-hidden="true" className="ms-0.5 text-red-600">
+          *
+        </span>
+      )}
+    </span>
+  );
+}
+
 export function ContactForm({
   form,
   topic,
+  markRequired = false,
 }: {
   form: ContactFormContent;
   /**
@@ -39,6 +58,8 @@ export function ContactForm({
    * general one, and used as the analytics form name. Omitted on /contact.
    */
   topic?: string;
+  /** Show a red asterisk after the label of each required field. */
+  markRequired?: boolean;
 }) {
   const { t, lang } = useI18n();
   const [status, setStatus] = useState<Status>("idle");
@@ -106,7 +127,7 @@ export function ContactForm({
         if (field.type === "textarea") {
           return (
             <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-              {field.label}
+              <FieldLabel field={field} mark={markRequired} />
               <textarea name={field.name} required={field.required} rows={5} className={inputClass} />
             </label>
           );
@@ -115,7 +136,7 @@ export function ContactForm({
         if (field.type === "select") {
           return (
             <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-              {field.label}
+              <FieldLabel field={field} mark={markRequired} />
               <select
                 name={field.name}
                 required={field.required}
@@ -136,7 +157,9 @@ export function ContactForm({
         if (field.type === "tel") {
           return (
             <div key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-              <label htmlFor="contact-phone">{field.label}</label>
+              <label htmlFor="contact-phone">
+                <FieldLabel field={field} mark={markRequired} />
+              </label>
               <div className="flex gap-2">
                 <select
                   name="phoneCountry"
@@ -184,7 +207,7 @@ export function ContactForm({
 
         return (
           <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-            {field.label}
+            <FieldLabel field={field} mark={markRequired} />
             <input
               type={field.type}
               name={field.name}
