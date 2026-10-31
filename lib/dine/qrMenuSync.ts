@@ -85,10 +85,27 @@ function variationsOf(source: DineMenuSource, itemId: string): DineVariation[] {
 // Free QR menu
 // ---------------------------------------------------------------------------
 
+/** A dish's option groups (add-ons, spice level) with their named choices. */
+function optionGroupsOf(source: DineMenuSource, itemId: string) {
+  return source.modifierGroups
+    .filter((group) => group.menuItemId === itemId)
+    .sort(bySort)
+    .map((group) => ({
+      group,
+      options: source.modifiers
+        .filter((modifier) => modifier.groupId === group.id && modifier.name.trim())
+        .sort(bySort)
+        .slice(0, 30),
+    }))
+    .filter(({ options }) => options.length > 0);
+}
+
 /**
- * The free tool's menu shape. It has one variant group per dish and no
- * add-ons or sold-out badge, so variations become the group and unavailable
- * dishes are left off unless the owner asked to keep them.
+ * The free tool's menu shape. Variations become the dish's variant (each with
+ * its full price) and option groups follow it as extra groups, priced "+30"
+ * on top of the dish; a free choice ("no onion", "mild") shows no price. It
+ * has no sold-out badge, so unavailable dishes are left off unless the owner
+ * asked to keep them.
  */
 export function toFreeQrMenu(source: DineMenuSource, hideUnavailable: boolean): QrMenuData {
   const business = source.business;
@@ -119,12 +136,20 @@ export function toFreeQrMenu(source: DineMenuSource, hideUnavailable: boolean): 
                   })),
                 }
               : null,
+          extras: optionGroupsOf(source, item.id).map(({ group, options }) => ({
+            name: clip(group.name, LIMITS.option),
+            options: options.map((modifier) => ({
+              name: clip(modifier.name, LIMITS.option),
+              price: modifier.priceDelta ? `+${priceText(modifier.priceDelta)}` : "",
+            })),
+          })),
         };
       }),
     })),
   };
 }
 
+/** The free menu with the default look; Free Dine itself publishes it branded (lib/qrmenu-pos-link). */
 export function freeMenuPayload(source: DineMenuSource, hideUnavailable: boolean): string {
   return encodeMenu(toFreeQrMenu(source, hideUnavailable));
 }
@@ -178,26 +203,17 @@ export function toPremiumCategories(source: DineMenuSource): PremiumCategory[] {
         });
       }
 
-      const modifierGroups = source.modifierGroups
-        .filter((group) => group.menuItemId === item.id)
-        .sort(bySort);
-      for (const group of modifierGroups) {
-        const options = source.modifiers
-          .filter((modifier) => modifier.groupId === group.id && modifier.name.trim())
-          .sort(bySort)
-          .slice(0, 30)
-          .map((modifier) => ({
-            name: clip(modifier.name, LIMITS.option),
-            // A free modifier ("no onion") shows no price at all.
-            price: modifier.priceDelta ? priceText(modifier.priceDelta) : "",
-            isDefault: false,
-          }));
-        if (options.length === 0) continue;
+      for (const { group, options } of optionGroupsOf(source, item.id)) {
         groups.push({
           name: clip(group.name, LIMITS.option),
           priceMode: "addon",
           selection: group.maxSelect > 1 ? "multi" : "single",
-          options,
+          options: options.map((modifier) => ({
+            name: clip(modifier.name, LIMITS.option),
+            // A free modifier ("no onion") shows no price at all.
+            price: modifier.priceDelta ? priceText(modifier.priceDelta) : "",
+            isDefault: false,
+          })),
         });
       }
 

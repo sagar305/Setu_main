@@ -261,6 +261,18 @@ export function QrMenuCard() {
           )}
 
           {mode === "free" && (
+            <a
+              href="/tools/qr-menu-generator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-indigo underline underline-offset-2"
+            >
+              {t("dnQrEditLook")}
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          )}
+
+          {mode === "free" && (
             <label className="flex cursor-pointer items-start gap-3 text-sm text-ink">
               <input
                 type="checkbox"

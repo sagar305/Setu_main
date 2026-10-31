@@ -25,17 +25,29 @@ import {
 import { useDine } from "@/lib/dine/store";
 import {
   checkPremiumKey,
-  freeMenuPayload,
   premiumMenuPayload,
   publishFreeMenu,
   pushPremiumMenu,
   QrSyncError,
+  toFreeQrMenu,
   type DineMenuSource,
 } from "@/lib/dine/qrMenuSync";
 import { clearPublishedMenu, getPublishedMenu } from "@/lib/qrmenu-publish";
+import {
+  clearPosMenuLink,
+  getPosMenuLink,
+  getQrMenuBranding,
+  linkedMenuPayload,
+  setPosMenuLink,
+  setQrMenuBranding,
+  subscribePosMenuLink,
+  type QrMenuBranding,
+} from "@/lib/qrmenu-pos-link";
 import { shortMenuUrl } from "@/lib/toolkit/shortLink";
 
 const STORAGE_KEY = "setu-free-dine-qr-sync-v1";
+/** The free QR Menu Generator's own saved menu, read once to carry its look over. */
+const FREE_TOOL_MENU_KEY = "setu-qr-menu-generator-v1";
 const DEBOUNCE_MS = 3000;
 
 type SyncRecord = {
@@ -108,12 +120,21 @@ export function QrMenuSyncProvider({ children }: { children: ReactNode }) {
   const [origin, setOrigin] = useState("");
   const [existingFreeCode, setExistingFreeCode] = useState<string | null>(null);
   const [retryTick, setRetryTick] = useState(0);
+  // Tagline and brand colour, set in the QR Menu Generator (lib/qrmenu-pos-link).
+  const [branding, setBranding] = useState<QrMenuBranding>(() => getQrMenuBranding());
   const inFlight = useRef(false);
 
   useEffect(() => {
     setOrigin(window.location.origin);
     setRecord(readRecord());
     setExistingFreeCode(getPublishedMenu()?.code ?? null);
+    setBranding(getQrMenuBranding());
+    return subscribePosMenuLink(() => {
+      const next = getQrMenuBranding();
+      setBranding((current) =>
+        current.tagline === next.tagline && current.accent === next.accent ? current : next
+      );
+    });
   }, []);
 
   const source: DineMenuSource = useMemo(
@@ -128,11 +149,40 @@ export function QrMenuSyncProvider({ children }: { children: ReactNode }) {
         ? `premium:${settings.qrMenuPremiumKey.slice(-4)}`
         : "";
 
+  const freeMenu = useMemo(
+    () => toFreeQrMenu(source, settings.qrMenuHideUnavailable),
+    [source, settings.qrMenuHideUnavailable]
+  );
+
   const payload = useMemo(() => {
-    if (mode === "free") return freeMenuPayload(source, settings.qrMenuHideUnavailable);
+    if (mode === "free") return linkedMenuPayload(freeMenu, branding);
     if (mode === "premium") return premiumMenuPayload(source);
     return "";
-  }, [mode, source, settings.qrMenuHideUnavailable]);
+  }, [mode, source, freeMenu, branding]);
+
+  // Share the free menu with the QR Menu Generator, which shows its QR and lets
+  // the owner set the tagline and colour but locks everything Free Dine owns.
+  // Cleared the moment Free Dine stops owning it, so the tool becomes editable.
+  useEffect(() => {
+    if (mode === "free" && settings.qrMenuFreeCode && settings.qrMenuFreeEditToken) {
+      const current = getPosMenuLink();
+      const unchanged =
+        current?.code === settings.qrMenuFreeCode &&
+        current.editToken === settings.qrMenuFreeEditToken &&
+        JSON.stringify(current.menu) === JSON.stringify(freeMenu);
+      if (!unchanged) {
+        setPosMenuLink({
+          source: "free-dine",
+          code: settings.qrMenuFreeCode,
+          editToken: settings.qrMenuFreeEditToken,
+          menu: freeMenu,
+          updatedAt: new Date().toISOString(),
+        });
+      }
+    } else {
+      clearPosMenuLink();
+    }
+  }, [mode, settings.qrMenuFreeCode, settings.qrMenuFreeEditToken, freeMenu]);
 
   const upToDate = Boolean(target) && record?.target === target && record.payload === payload;
 
@@ -193,7 +243,24 @@ export function QrMenuSyncProvider({ children }: { children: ReactNode }) {
 
   const enableFree = useCallback(
     async ({ adoptExisting }: { adoptExisting: boolean }) => {
-      const nextPayload = freeMenuPayload(source, settings.qrMenuHideUnavailable);
+      let nextBranding = branding;
+      if (adoptExisting && getPublishedMenu()) {
+        // Keep the look of the QR that is already on the tables.
+        try {
+          const saved = JSON.parse(window.localStorage.getItem(FREE_TOOL_MENU_KEY) ?? "null");
+          if (saved && typeof saved.accent === "string") {
+            nextBranding = {
+              tagline: typeof saved.tagline === "string" ? saved.tagline : "",
+              accent: saved.accent || branding.accent,
+            };
+            setQrMenuBranding(nextBranding);
+            setBranding(nextBranding);
+          }
+        } catch {
+          // Unreadable: the default look is fine.
+        }
+      }
+      const nextPayload = linkedMenuPayload(freeMenu, nextBranding);
       let published = settings.qrMenuFreeCode
         ? { code: settings.qrMenuFreeCode, editToken: settings.qrMenuFreeEditToken }
         : null;
@@ -224,7 +291,7 @@ export function QrMenuSyncProvider({ children }: { children: ReactNode }) {
       setRecord(next);
       setError(null);
     },
-    [source, settings.qrMenuHideUnavailable, settings.qrMenuFreeCode, settings.qrMenuFreeEditToken, updateSettings]
+    [freeMenu, branding, settings.qrMenuFreeCode, settings.qrMenuFreeEditToken, updateSettings]
   );
 
   const enablePremium = useCallback(
