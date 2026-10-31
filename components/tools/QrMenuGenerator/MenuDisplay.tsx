@@ -2,7 +2,13 @@ import { Phone, MapPin } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
 import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
-import { hasVariant, type QrMenuData, type DietTag } from "@/lib/qrmenu";
+import {
+  displayPrice,
+  hasVariant,
+  type QrMenuData,
+  type QrVariant,
+  type DietTag,
+} from "@/lib/qrmenu";
 
 // FSSAI-style diet markers: green square + dot for veg, red square + triangle
 // for non-veg — instantly recognisable to Indian diners.
@@ -113,7 +119,7 @@ export function MenuDisplay({
                             single price alongside them would contradict it. */}
                         {item.price.trim() && !hasVariant(item) && (
                           <span className="whitespace-nowrap font-semibold text-ink">
-                            {/^[0-9]/.test(item.price.trim()) ? `₹${item.price.trim()}` : item.price.trim()}
+                            {displayPrice(item.price)}
                           </span>
                         )}
                       </div>
@@ -122,34 +128,9 @@ export function MenuDisplay({
                           {item.description}
                         </p>
                       )}
-                      {hasVariant(item) && (
-                        <div className="mt-2">
-                          {item.variant?.name.trim() && (
-                            <p className="text-xs font-bold uppercase tracking-wide text-muted">
-                              {item.variant.name}
-                            </p>
-                          )}
-                          <ul className="mt-1 space-y-1 border-l-2 border-muted-line/30 pl-2">
-                            {item.variant?.options
-                              .filter((option) => option.name.trim())
-                              .map((option, optionIndex) => (
-                                <li
-                                  key={`${option.name}-${optionIndex}`}
-                                  className="flex justify-between gap-3 text-sm"
-                                >
-                                  <span className="text-ink">{option.name}</span>
-                                  {option.price.trim() && (
-                                    <span className="whitespace-nowrap font-semibold text-ink">
-                                      {/^[0-9]/.test(option.price.trim())
-                                        ? `₹${option.price.trim()}`
-                                        : option.price.trim()}
-                                    </span>
-                                  )}
-                                </li>
-                              ))}
-                          </ul>
-                        </div>
-                      )}
+                      {[item.variant, ...(item.extras ?? [])].map((group, groupIndex) => (
+                        <OptionGroup key={groupIndex} group={group} />
+                      ))}
                     </div>
                   </li>
                 ))}
@@ -171,6 +152,31 @@ export function MenuDisplay({
           {t("qmCredit")}
         </a>
       </div>
+    </div>
+  );
+}
+
+/** One set of choices under a dish: its sizes, or a group of add-ons. */
+function OptionGroup({ group }: { group: QrVariant | null }) {
+  const options = group?.options.filter((option) => option.name.trim()) ?? [];
+  if (!group || options.length === 0) return null;
+  return (
+    <div className="mt-2">
+      {group.name.trim() && (
+        <p className="text-xs font-bold uppercase tracking-wide text-muted">{group.name}</p>
+      )}
+      <ul className="mt-1 space-y-1 border-l-2 border-muted-line/30 pl-2">
+        {options.map((option, optionIndex) => (
+          <li key={`${option.name}-${optionIndex}`} className="flex justify-between gap-3 text-sm">
+            <span className="text-ink">{option.name}</span>
+            {option.price.trim() && (
+              <span className="whitespace-nowrap font-semibold text-ink">
+                {displayPrice(option.price)}
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
