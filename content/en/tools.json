@@ -5316,6 +5316,109 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "supplier-ledger",
+      "name": "Supplier Ledger",
+      "category": "inventory",
+      "icon": "truck",
+      "shortDescription": "What you owe each supplier — credit purchases, payments made and balances, bill by bill.",
+      "seo": {
+        "title": "Free Supplier Ledger — Track Supplier Payables | Setu",
+        "description": "Track what you owe each supplier. Credit purchases post automatically, record payments bill by bill, see running balances. Free, offline, no signup.",
+        "keywords": [
+          "supplier ledger",
+          "creditor ledger",
+          "supplier payment tracker",
+          "vendor ledger free",
+          "accounts payable ledger"
+        ],
+        "ogTitle": "Free Supplier Ledger — Track Supplier Payables",
+        "ogDescription": "Credit purchases post automatically; record payments and see what you owe each supplier. Offline, no signup."
+      },
+      "hero": {
+        "headline": "Supplier Ledger",
+        "subheadline": "What you owe every supplier — credit bills, payments made and running balances in one place."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "What is a supplier ledger?",
+            "answer": "A running account for each supplier you buy from on credit. Bills increase what you owe them, payments reduce it, and the balance tells you exactly how much is still payable — the creditor side of your books, the mirror image of a customer udhaar khata."
+          },
+          {
+            "question": "Do I need to enter purchases twice?",
+            "answer": "No. Any purchase recorded in the Setu Purchase Register with payment mode Credit appears in the supplier's ledger automatically. Purchases paid by Cash, UPI, Card or Bank transfer were settled on the spot, so they are not added as bills."
+          },
+          {
+            "question": "How are payments matched to bills?",
+            "answer": "Pick a bill under Against bill to pay that bill specifically, or leave it on Oldest bills first and the payment settles the supplier's oldest unpaid bills first. If you pay more than you owe, the extra shows as an advance with that supplier."
+          },
+          {
+            "question": "How does it work with the Accounts Payable Aging report?",
+            "answer": "Both use the same numbers. Pull from Purchase Register in the aging report brings in only credit bills that are still unpaid, and tapping Mark paid there records the payment in this ledger, so the bill never comes back."
+          },
+          {
+            "question": "Can I enter balances from my old books?",
+            "answer": "Yes. Choose Bill / opening balance, enter the amount you owed the supplier on the day you started, and add a note such as old balance. Payments you record afterwards settle it like any other bill."
+          },
+          {
+            "question": "Where is my data stored?",
+            "answer": "In your browser on your device, inside your Setu business workspace — the same one the Browser Based POS, Supplier Book and Purchase Register use. Nothing is uploaded; export a CSV backup any time."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "What is a supplier ledger (creditors ledger)?",
+          "paragraphs": [
+            "A **supplier ledger**, also called a creditors ledger or accounts payable ledger, keeps one running account per supplier. Every bill you receive on credit increases what you owe, every payment you make reduces it, and the balance is the amount still payable. It is the mirror image of a [customer ledger](/tools/customer-ledger): there you track who owes you, here you track whom you owe."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "How to use the free supplier ledger",
+          "steps": [
+            "Record purchases in the Purchase Register and choose Credit as the payment mode when you have not paid yet.",
+            "Open the Supplier Ledger and pick the supplier — their credit bills are already listed with the amount due.",
+            "When you pay, choose Payment made, pick the bill or leave Oldest bills first, choose how you paid and tap Record payment.",
+            "Use Bill / opening balance for amounts owed from before you started, or bills you did not record in the register.",
+            "Check the Accounts Payable Aging report to see which unpaid bills are getting old."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Pay the oldest bills first",
+          "text": "Suppliers usually apply payments to their oldest invoices, and this ledger settles an unlinked payment the same way, so your balance matches theirs. If a supplier asks you to clear a specific bill, pick it under Against bill when you record the payment. Check the [Accounts Payable Aging](/tools/accounts-payable-aging) report every week so no credit bill slips past its due date."
+        },
+        {
+          "kind": "links",
+          "headline": "Related tools for payables",
+          "links": [
+            {
+              "label": "Purchase Register",
+              "href": "/tools/purchase-register"
+            },
+            {
+              "label": "Accounts Payable Aging",
+              "href": "/tools/accounts-payable-aging"
+            },
+            {
+              "label": "Supplier Book",
+              "href": "/tools/supplier-book"
+            },
+            {
+              "label": "Customer Ledger",
+              "href": "/tools/customer-ledger"
+            },
+            {
+              "label": "Browser Based POS",
+              "href": "/products/browser-based-pos"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -517,7 +517,7 @@ const FAQ_ITEMS = [
   {
     question: "What else can I plug into the POS?",
     answer:
-      `Setu has ${POS_TOOLS.length} free tools that read the same on-device data — customer ledger, expenses, purchase register, profit dashboard, stock register and more. Switch one on in Settings → Connected tools and it already knows your business, customers, products and sales.`,
+      `Setu has ${POS_TOOLS.length} free tools that read the same on-device data — customer ledger, supplier ledger, expenses, purchase register, payables aging, profit dashboard, stock register and more. Switch one on in Settings → Connected tools and it already knows your business, customers, products and sales.`,
   },
 ];
 

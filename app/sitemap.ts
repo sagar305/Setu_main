@@ -89,6 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/cash-book",
     "/tools/profit-dashboard",
     "/tools/customer-ledger",
+    "/tools/supplier-ledger",
     "/tools/appointment-book",
     "/tools/quotation-generator",
     "/tools/credit-note-generator",
