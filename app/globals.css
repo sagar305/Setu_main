@@ -222,3 +222,96 @@ body {
     animation-duration: 400ms;
   }
 }
+
+/* TEMPORARY — DIWALI 2026. Remove this whole block after Diwali (after
+   13 Nov 2026), together with lib/festive.ts and DiwaliBar in
+   components/NavigationProgress.tsx.
+
+   Diwali top loader (components/NavigationProgress.tsx): the burning tip of
+   the phuljhadi, its sparks, and the crackers that pop when a page arrives. */
+.diwali-tip {
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  margin-right: -3px;
+  border-radius: 9999px;
+  background: #fff7d6;
+  box-shadow:
+    0 0 6px 2px #ffe08a,
+    0 0 14px 4px rgba(242, 160, 61, 0.8);
+  animation: diwali-flicker 120ms steps(2) infinite;
+}
+
+.diwali-spark,
+.diwali-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 2px;
+  margin: -1px 0 0 -1px;
+  border-radius: 9999px;
+  box-shadow: 0 0 4px currentColor;
+  opacity: 0;
+}
+
+.diwali-spark {
+  animation: diwali-fly 480ms ease-out infinite;
+}
+
+.diwali-burst {
+  width: 3px;
+  height: 3px;
+  animation: diwali-fly 620ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.diwali-flash {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #fff 0%, rgba(255, 224, 138, 0.8) 40%, transparent 70%);
+  opacity: 0;
+  animation: diwali-pop 300ms ease-out forwards;
+}
+
+@keyframes diwali-fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+  }
+}
+
+@keyframes diwali-pop {
+  0% {
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+@keyframes diwali-flicker {
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diwali-spark,
+  .diwali-burst,
+  .diwali-flash {
+    display: none;
+  }
+  .diwali-tip {
+    animation: none;
+  }
+}
