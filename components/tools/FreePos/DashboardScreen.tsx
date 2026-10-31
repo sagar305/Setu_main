@@ -10,7 +10,10 @@ import {
 } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { formatMoney } from "@/lib/pos/types";
-import type { NavigateFn } from "./nav";
+import { translate } from "@/lib/i18n/translate";
+import { scrollToFeature } from "@/lib/hooks/useWhatsNew";
+import { WhatsNewCards } from "@/components/whatsNew/WhatsNewContext";
+import type { NavigateFn, ScreenId } from "./nav";
 import { StatCard, secondaryBtnClass } from "./ui";
 
 function isSameDay(iso: string, day: Date): boolean {
@@ -56,6 +59,13 @@ export function DashboardScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   return (
     <div className="space-y-6">
+      <WhatsNewCards
+        t={(key) => translate("en", key)}
+        onOpen={(update) => {
+          onNavigate(update.target.screen as ScreenId);
+          scrollToFeature(update.target.anchor);
+        }}
+      />
       {backupOverdue && (
         <div className="flex flex-col gap-3 rounded-xl border border-saffron/40 bg-saffron/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">

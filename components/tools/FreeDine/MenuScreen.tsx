@@ -7,6 +7,7 @@ import {
   Download,
   Pencil,
   Plus,
+  QrCode,
   Trash2,
   Upload,
   UtensilsCrossed,
@@ -17,6 +18,9 @@ import { formatPaise, formatPlain, parseAmount } from "@/lib/dine/money";
 import { downloadCsv, menuCsv, parseMenuCsv } from "@/lib/dine/csv";
 import { FOOD_TYPE_ORDER, foodTypeLabel, type DineMenuItem } from "@/lib/dine/types";
 import { RecipeBadge, RecipeModal } from "./RecipeModal";
+import { scrollToFeature } from "@/lib/hooks/useWhatsNew";
+import { useWhatsNewContext } from "@/components/whatsNew/WhatsNewContext";
+import type { NavigateFn } from "./nav";
 import {
   ConfirmDialog,
   EmptyState,
@@ -31,8 +35,17 @@ import {
   tapTargetClass,
 } from "./ui";
 
-export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
+const QR_MENU_HINT = "dine-qr-sync:menu";
+
+export function MenuScreen({
+  externalQuery,
+  onNavigate,
+}: {
+  externalQuery?: string;
+  onNavigate?: NavigateFn;
+}) {
   const { lang, t } = useI18n();
+  const whatsNew = useWhatsNewContext();
   const {
     menuItems,
     categories,
@@ -88,8 +101,44 @@ export function MenuScreen({ externalQuery }: { externalQuery?: string }) {
     if (fileRef.current) fileRef.current.value = "";
   };
 
+  // The menu is where the QR menu pays off, so an owner who has not connected
+  // one hears about it here too — once, until they dismiss it or turn it on.
+  const showQrHint =
+    Boolean(onNavigate) &&
+    menuItems.length > 0 &&
+    Boolean(whatsNew?.pendingOn("settings").some((update) => update.id === "dine-qr-sync")) &&
+    !whatsNew?.isDismissed(QR_MENU_HINT);
+
   return (
     <div className="space-y-5">
+      {showQrHint && (
+        <div className="flex flex-col gap-2 rounded-xl border border-saffron/40 bg-saffron/10 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <p className="flex items-start gap-2 text-ink">
+            <QrCode className="mt-0.5 h-4 w-4 shrink-0 text-indigo" aria-hidden="true" />
+            <span>{t("wnDineQrMenuHint")}</span>
+          </p>
+          <div className="flex shrink-0 items-center gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                whatsNew?.dismiss(QR_MENU_HINT);
+                onNavigate?.("settings");
+                scrollToFeature("qr-menu");
+              }}
+              className="font-semibold text-indigo hover:underline"
+            >
+              {t("wnDineQrCta")} →
+            </button>
+            <button
+              type="button"
+              onClick={() => whatsNew?.dismiss(QR_MENU_HINT)}
+              className="text-xs font-semibold text-muted hover:text-ink"
+            >
+              {t("wnDismiss")}
+            </button>
+          </div>
+        </div>
+      )}
       <SectionHeading
         title={t("dnNavMenu")}
         subtitle={fill(t("dnMnSubtitle"), {

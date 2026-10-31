@@ -44,6 +44,7 @@ import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
 import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
+import { WhatsNewStrip } from "@/components/whatsNew/WhatsNewStrip";
 import { freeOffer } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -661,6 +662,8 @@ export default function FreeRestaurantPosPage() {
             </FadeInStaggerItem>
           ))}
         </FadeInStagger>
+
+        <WhatsNewStrip productId="free-dine" />
       </section>
 
       <YouTubeTutorial
@@ -672,7 +675,7 @@ export default function FreeRestaurantPosPage() {
       />
 
       {/* The product itself, above the marketing — people came here to use it. */}
-      <section className="mx-auto max-w-7xl px-6 pb-16">
+      <section id="dine-app" className="scroll-mt-24 mx-auto max-w-7xl px-6 pb-16">
         <FreeDineApp />
       </section>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BarChart3,
   LayoutDashboard,
@@ -16,6 +16,12 @@ import {
   WifiOff,
 } from "lucide-react";
 import { PosProvider, usePos } from "@/lib/pos/store";
+import { isToolEnabled } from "@/lib/pos/posTools";
+import { useWhatsNew } from "@/lib/hooks/useWhatsNew";
+import type { AppUpdate } from "@/lib/whatsNew";
+import { translate } from "@/lib/i18n/translate";
+import { NewDot } from "@/components/whatsNew/NewPill";
+import { WhatsNewProvider } from "@/components/whatsNew/WhatsNewContext";
 import { LockScreen } from "./LockScreen";
 import type { NavigateFn, ScreenId } from "./nav";
 import { WelcomeScreen } from "./WelcomeScreen";
@@ -232,7 +238,20 @@ function PosShell({
     };
   }, []);
 
+  // What's new for owners who set up before a feature shipped. "Taken up"
+  // means every tool the update introduces is already switched on.
+  const connectedTools = settings.connectedTools;
+  const isTakenUp = useCallback(
+    (update: AppUpdate, feature?: string) => {
+      const features = feature ? [feature] : update.features ?? [];
+      return features.length > 0 && features.every((slug) => isToolEnabled(connectedTools, slug));
+    },
+    [connectedTools]
+  );
+  const whatsNew = useWhatsNew("pos", business?.createdAt, isTakenUp);
+
   const navigate: NavigateFn = (target, query) => {
+    whatsNew.visit(target);
     setScreen(target);
     if (query !== undefined) {
       setQueryRequest((prev) => ({ screen: target, value: query, nonce: (prev?.nonce ?? 0) + 1 }));
@@ -243,6 +262,7 @@ function PosShell({
     queryRequest && queryRequest.screen === target ? queryRequest : null;
 
   return (
+    <WhatsNewProvider value={whatsNew}>
     <div>
       <div className="flex flex-col gap-3 border-b border-muted-line/20 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
@@ -297,6 +317,9 @@ function PosShell({
           >
             <item.icon className="h-4 w-4" />
             {item.label}
+            {screen !== item.id && whatsNew.hasDot(item.id) && (
+              <NewDot label={translate("en", "wnNewOnTab")} />
+            )}
           </button>
         ))}
       </nav>
@@ -338,6 +361,7 @@ function PosShell({
         />
       )}
     </div>
+    </WhatsNewProvider>
   );
 }
 
