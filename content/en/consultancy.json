@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Consultancy",
     "headline": "Accounting, Bookkeeping & Payroll Services",
-    "subheadline": "We provide Accounting, Bookkeeping and Payroll services tailored to your needs — on a weekly, bi-weekly, monthly, quarterly or yearly basis. From day-to-day transactions to financial statements, we keep your books accurate and audit-ready."
+    "subheadline": "We provide Accounting, Bookkeeping and Payroll services tailored to your needs — on a weekly, bi-weekly, monthly, quarterly or yearly basis. From day-to-day transactions to financial statements, we keep your books accurate and audit-ready.",
+    "teamNote": "Led by a team of Chartered Accountants and CPAs with 10+ years of industry experience"
+  },
+  "frequency": {
+    "headline": "On your schedule",
+    "subtext": "Choose the cadence that fits how your business runs.",
+    "options": [
+      "Weekly",
+      "Bi-weekly",
+      "Monthly",
+      "Quarterly",
+      "Yearly"
+    ]
   },
   "overview": {
     "headline": "Complete maintenance of your books of accounts",
@@ -37,26 +49,126 @@
     "headline": "Services included",
     "subtext": "A clear, ongoing scope so you always know what's covered.",
     "items": [
-      "Monthly bookkeeping (ongoing)",
-      "Bank & credit card reconciliation",
-      "Categorization of income & expenses",
-      "Chart of accounts review",
-      "Monthly Profit & Loss & Balance Sheet",
-      "Journal entries & adjustments",
-      "AR/AP tracking (basic)"
+      {
+        "title": "Monthly bookkeeping (ongoing)",
+        "description": "Every sale, purchase, expense and receipt recorded in your books each month. Your ledgers stay current, so you never face a year-end backlog."
+      },
+      {
+        "title": "Bank & credit card reconciliation",
+        "description": "Each bank and card account matched line by line against your books. Missing entries, duplicates and unexplained charges are flagged and cleared."
+      },
+      {
+        "title": "Categorization of income & expenses",
+        "description": "Transactions posted to the right income and expense heads, consistently from month to month. Your P&L shows where the money actually goes, and tax filing gets simpler."
+      },
+      {
+        "title": "Chart of accounts review",
+        "description": "We clean up and restructure your account list to fit how your business runs. Fewer junk accounts, clearer reports and a setup that scales as you grow."
+      },
+      {
+        "title": "Monthly Profit & Loss & Balance Sheet",
+        "description": "A reviewed P&L and Balance Sheet delivered every month. You see profit, cash and liabilities while there is still time to act on them."
+      },
+      {
+        "title": "Journal entries & adjustments",
+        "description": "Accruals, prepayments, depreciation and corrections passed as proper journal entries. Your statements reflect the true position, not just cash movements."
+      },
+      {
+        "title": "AR/AP tracking (basic)",
+        "description": "Who owes you and whom you owe, tracked with ageing. Overdue invoices and upcoming payables are flagged before they become a cash-flow problem."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Our products for accountants",
+    "subtext": "Free analytics tools our own team uses on client work. They run entirely in your browser, and your data is never uploaded.",
+    "freeLabel": "Free",
+    "items": [
+      {
+        "id": "tb-analyzer",
+        "icon": "scale",
+        "name": "Trial Balance Analytics",
+        "description": "Import up to three periods of trial balances from Excel or CSV and get the P&L, Balance Sheet, key ratios and variance analysis in minutes.",
+        "highlights": [
+          "Three-period comparison with automatic layout detection",
+          "15 key ratios, EBITDA bridge and working capital analysis",
+          "Excel and PDF review packs generated on your device"
+        ],
+        "cta": {
+          "label": "Open Trial Balance Analytics",
+          "href": "/products/tb-analyzer"
+        }
+      },
+      {
+        "id": "bank-statement-analyzer",
+        "icon": "landmark",
+        "name": "Bank Statement Analytics",
+        "description": "Import PDF, Excel or CSV bank statements, classify every transaction with rules you control and reconcile against your ledger.",
+        "highlights": [
+          "Reads PDF, XLSX and CSV, including password-protected PDFs",
+          "Cash flow, counterparty, bank charge and high-value reports",
+          "Ledger reconciliation with exact, date-window and fuzzy matching"
+        ],
+        "cta": {
+          "label": "Open Bank Statement Analytics",
+          "href": "/products/bank-statement-analyzer"
+        }
+      }
     ]
   },
   "software": {
     "headline": "Software expertise",
     "subtext": "We work inside the tools you already use — or help you pick the right one.",
     "items": [
-      { "name": "QuickBooks", "detail": "Online & Desktop", "color": "#2CA01C", "mark": "qb", "logo": "/logos/quickbooks.svg" },
-      { "name": "Xero", "detail": "Cloud accounting", "color": "#13B5EA", "mark": "X", "logo": "/logos/xero.svg" },
-      { "name": "Zoho", "detail": "Zoho Books", "color": "#E42527", "mark": "Z", "logo": "/logos/zoho.svg" },
-      { "name": "Appfolio", "detail": "Property management", "color": "#1B9CD8", "mark": "A", "logo": "" },
-      { "name": "Resman", "detail": "Property management", "color": "#0060A9", "mark": "R", "logo": "" },
-      { "name": "FreshBooks", "detail": "Invoicing & books", "color": "#0075DD", "mark": "FB", "logo": "" },
-      { "name": "Wave", "detail": "Small business accounting", "color": "#2872E0", "mark": "W", "logo": "" }
+      {
+        "name": "QuickBooks",
+        "detail": "Online & Desktop",
+        "color": "#2CA01C",
+        "mark": "qb",
+        "logo": "/logos/quickbooks.svg"
+      },
+      {
+        "name": "Xero",
+        "detail": "Cloud accounting",
+        "color": "#13B5EA",
+        "mark": "X",
+        "logo": "/logos/xero.svg"
+      },
+      {
+        "name": "Zoho",
+        "detail": "Zoho Books",
+        "color": "#E42527",
+        "mark": "Z",
+        "logo": "/logos/zoho.svg"
+      },
+      {
+        "name": "Appfolio",
+        "detail": "Property management",
+        "color": "#1B9CD8",
+        "mark": "A",
+        "logo": ""
+      },
+      {
+        "name": "Resman",
+        "detail": "Property management",
+        "color": "#0060A9",
+        "mark": "R",
+        "logo": ""
+      },
+      {
+        "name": "FreshBooks",
+        "detail": "Invoicing & books",
+        "color": "#0075DD",
+        "mark": "FB",
+        "logo": ""
+      },
+      {
+        "name": "Wave",
+        "detail": "Small business accounting",
+        "color": "#2872E0",
+        "mark": "W",
+        "logo": ""
+      }
     ]
   },
   "idealFor": {
@@ -68,14 +180,203 @@
       "E-commerce, Real Estate, healthcare and professional services"
     ]
   },
-  "frequency": {
-    "headline": "On your schedule",
-    "subtext": "Choose the cadence that fits how your business runs.",
-    "options": ["Weekly", "Bi-weekly", "Monthly", "Quarterly", "Yearly"]
+  "blog": {
+    "headline": "Latest from our accounting blog",
+    "subtext": "Practical guides on bookkeeping, reconciliation and month-end close, written by our accounting team.",
+    "category": "accounting",
+    "readMore": "Read more",
+    "seeMore": {
+      "label": "See more",
+      "href": "/blog/accounting"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Free accounting tools",
+    "subtext": "Do it yourself with the same free tools we recommend to our clients. No signup required.",
+    "slugs": [
+      "trial-balance",
+      "bank-reconciliation",
+      "invoice-generator"
+    ],
+    "seeMore": {
+      "label": "See all tools",
+      "href": "/tools"
+    }
+  },
+  "calculators": {
+    "headline": "Free calculators",
+    "subtext": "Quick answers for tax, loans and payroll, worked out as you type.",
+    "slugs": [
+      "vat-calculator",
+      "loan-emi-calculator",
+      "take-home-salary-calculator"
+    ],
+    "seeMore": {
+      "label": "See all calculators",
+      "href": "/calculators"
+    }
+  },
+  "contact": {
     "headline": "Ready to hand off your books?",
     "subtext": "Tell us about your business and we'll put together an accounting and bookkeeping plan that fits your needs.",
-    "cta": { "label": "Talk to us", "href": "/contact?topic=consultancy" }
+    "floatingLabel": "Contact us",
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "required": true
+        },
+        {
+          "name": "company",
+          "label": "Business name",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "businessType",
+          "label": "Business type (optional)",
+          "type": "select",
+          "required": false,
+          "placeholder": "Select business type",
+          "options": [
+            {
+              "value": "retail-ecommerce",
+              "label": "Retail / E-commerce"
+            },
+            {
+              "value": "restaurant-food",
+              "label": "Restaurant / Food business"
+            },
+            {
+              "value": "professional-services",
+              "label": "Professional services"
+            },
+            {
+              "value": "real-estate",
+              "label": "Real estate / Property management"
+            },
+            {
+              "value": "healthcare",
+              "label": "Healthcare"
+            },
+            {
+              "value": "manufacturing-trading",
+              "label": "Manufacturing / Trading"
+            },
+            {
+              "value": "other",
+              "label": "Other"
+            }
+          ]
+        },
+        {
+          "name": "frequency",
+          "label": "Preferred frequency (optional)",
+          "type": "select",
+          "required": false,
+          "placeholder": "Select frequency",
+          "options": [
+            {
+              "value": "weekly",
+              "label": "Weekly"
+            },
+            {
+              "value": "bi-weekly",
+              "label": "Bi-weekly"
+            },
+            {
+              "value": "monthly",
+              "label": "Monthly"
+            },
+            {
+              "value": "quarterly",
+              "label": "Quarterly"
+            },
+            {
+              "value": "yearly",
+              "label": "Yearly"
+            },
+            {
+              "value": "not-sure",
+              "label": "Not sure yet"
+            }
+          ]
+        },
+        {
+          "name": "software",
+          "label": "Accounting software (optional)",
+          "type": "select",
+          "required": false,
+          "placeholder": "Select software",
+          "options": [
+            {
+              "value": "quickbooks",
+              "label": "QuickBooks"
+            },
+            {
+              "value": "xero",
+              "label": "Xero"
+            },
+            {
+              "value": "zoho-books",
+              "label": "Zoho Books"
+            },
+            {
+              "value": "tally",
+              "label": "Tally"
+            },
+            {
+              "value": "appfolio",
+              "label": "Appfolio"
+            },
+            {
+              "value": "resman",
+              "label": "Resman"
+            },
+            {
+              "value": "freshbooks",
+              "label": "FreshBooks"
+            },
+            {
+              "value": "wave",
+              "label": "Wave"
+            },
+            {
+              "value": "spreadsheets",
+              "label": "Excel / Spreadsheets"
+            },
+            {
+              "value": "none",
+              "label": "Not using any yet"
+            },
+            {
+              "value": "other",
+              "label": "Other"
+            }
+          ]
+        },
+        {
+          "name": "message",
+          "label": "Message",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "submitLabel": "Send enquiry"
+    }
   }
 }

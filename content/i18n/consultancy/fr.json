@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Conseil",
     "headline": "Comptabilité, tenue de livres et paie",
-    "subheadline": "Nous assurons la comptabilité, la tenue de livres et la paie selon vos besoins — hebdomadaire, bimensuelle, mensuelle, trimestrielle ou annuelle. De l'écriture quotidienne aux états financiers, vos livres restent justes et prêts pour un audit."
+    "subheadline": "Nous assurons la comptabilité, la tenue de livres et la paie selon vos besoins — hebdomadaire, bimensuelle, mensuelle, trimestrielle ou annuelle. De l'écriture quotidienne aux états financiers, vos livres restent justes et prêts pour un audit.",
+    "teamNote": "Dirigé par une équipe d'experts-comptables (Chartered Accountants et CPA) forte de plus de 10 ans d'expérience"
+  },
+  "frequency": {
+    "headline": "À votre rythme",
+    "subtext": "Choisissez la cadence qui correspond à votre activité.",
+    "options": [
+      "Hebdomadaire",
+      "Bimensuelle",
+      "Mensuelle",
+      "Trimestrielle",
+      "Annuelle"
+    ]
   },
   "overview": {
     "headline": "Tenue complète de vos livres comptables",
@@ -37,13 +49,65 @@
     "headline": "Prestations incluses",
     "subtext": "Un périmètre clair et continu, pour savoir à tout moment ce qui est couvert.",
     "items": [
-      "Tenue de livres mensuelle (en continu)",
-      "Rapprochement bancaire et cartes",
-      "Catégorisation des produits et charges",
-      "Revue du plan comptable",
-      "Résultat et bilan mensuels",
-      "Écritures et ajustements",
-      "Suivi clients/fournisseurs (de base)"
+      {
+        "title": "Tenue de livres mensuelle (en continu)",
+        "description": "Chaque vente, achat, dépense et encaissement du mois est enregistré dans vos livres. Vos grands livres restent à jour : plus de retard accumulé à la clôture de l'exercice."
+      },
+      {
+        "title": "Rapprochement bancaire et cartes",
+        "description": "Chaque compte bancaire et carte est rapproché ligne par ligne de votre comptabilité. Écritures manquantes, doublons et frais inexpliqués sont repérés et réglés."
+      },
+      {
+        "title": "Catégorisation des produits et charges",
+        "description": "Les opérations sont imputées aux bons comptes de produits et de charges, avec la même logique chaque mois. Votre compte de résultat montre où part réellement l'argent, et vos déclarations fiscales s'en trouvent simplifiées."
+      },
+      {
+        "title": "Revue du plan comptable",
+        "description": "Nous nettoyons et restructurons votre plan comptable pour qu'il colle à votre activité. Moins de comptes inutiles, des états plus clairs et une structure qui grandit avec vous."
+      },
+      {
+        "title": "Résultat et bilan mensuels",
+        "description": "Un compte de résultat et un bilan revus chaque mois. Vous voyez bénéfice, trésorerie et dettes tant qu'il est encore temps d'agir."
+      },
+      {
+        "title": "Écritures et ajustements",
+        "description": "Charges à payer, charges constatées d'avance, amortissements et corrections passés en écritures d'OD en bonne et due forme. Vos états reflètent la situation réelle, pas seulement les flux de trésorerie."
+      },
+      {
+        "title": "Suivi clients/fournisseurs (de base)",
+        "description": "Qui vous doit et à qui vous devez, suivi avec une balance âgée. Factures en retard et échéances à venir sont signalées avant de devenir un problème de trésorerie."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Nos produits pour les comptables",
+    "subtext": "Des outils d'analyse gratuits que notre propre équipe utilise sur les dossiers clients. Ils fonctionnent entièrement dans votre navigateur et vos données ne sont jamais envoyées.",
+    "freeLabel": "Gratuit",
+    "items": [
+      {
+        "name": "Analyse de balance",
+        "description": "Importez jusqu'à trois exercices de balances depuis Excel ou CSV et obtenez en quelques minutes le compte de résultat, le bilan, les ratios clés et l'analyse des écarts.",
+        "highlights": [
+          "Comparaison sur trois exercices, avec détection automatique de la mise en page",
+          "15 ratios clés, pont d'EBITDA et analyse du BFR",
+          "Dossiers de revue Excel et PDF générés sur votre appareil"
+        ],
+        "cta": {
+          "label": "Ouvrir l'analyse de balance"
+        }
+      },
+      {
+        "name": "Analyse de relevés bancaires",
+        "description": "Importez des relevés bancaires PDF, Excel ou CSV, classez chaque opération avec vos propres règles et rapprochez-les de votre grand livre.",
+        "highlights": [
+          "Lit les PDF, XLSX et CSV, y compris les PDF protégés par mot de passe",
+          "Rapports de trésorerie, tiers, frais bancaires et montants élevés",
+          "Rapprochement avec le grand livre : exact, par plage de dates et approché"
+        ],
+        "cta": {
+          "label": "Ouvrir l'analyse bancaire"
+        }
+      }
     ]
   },
   "software": {
@@ -82,22 +146,125 @@
       "E-commerce, immobilier, santé et services professionnels"
     ]
   },
-  "frequency": {
-    "headline": "À votre rythme",
-    "subtext": "Choisissez la cadence qui correspond à votre activité.",
-    "options": [
-      "Hebdomadaire",
-      "Bimensuelle",
-      "Mensuelle",
-      "Trimestrielle",
-      "Annuelle"
-    ]
+  "blog": {
+    "headline": "Les derniers articles de notre blog comptable",
+    "subtext": "Des guides pratiques sur la tenue des comptes, le rapprochement et la clôture mensuelle, écrits par notre équipe comptable.",
+    "readMore": "Lire la suite",
+    "seeMore": {
+      "label": "Voir plus"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Outils comptables gratuits",
+    "subtext": "Faites-le vous-même avec les outils gratuits que nous recommandons à nos clients. Sans inscription.",
+    "seeMore": {
+      "label": "Voir tous les outils"
+    }
+  },
+  "calculators": {
+    "headline": "Calculateurs gratuits",
+    "subtext": "Des réponses rapides sur la fiscalité, les prêts et la paie, calculées pendant la saisie.",
+    "seeMore": {
+      "label": "Voir tous les calculateurs"
+    }
+  },
+  "contact": {
     "headline": "Prêt à confier vos livres ?",
     "subtext": "Parlez-nous de votre activité et nous bâtirons un plan de comptabilité et de tenue de livres qui vous convient.",
-    "cta": {
-      "label": "Parlez-nous"
+    "floatingLabel": "Nous contacter",
+    "form": {
+      "fields": [
+        {
+          "label": "Nom"
+        },
+        {
+          "label": "E-mail"
+        },
+        {
+          "label": "Téléphone"
+        },
+        {
+          "label": "Nom de l'entreprise"
+        },
+        {
+          "label": "Type d'activité (facultatif)",
+          "placeholder": "Choisissez le type d'activité",
+          "options": [
+            {
+              "label": "Commerce de détail / E-commerce"
+            },
+            {
+              "label": "Restaurant / Restauration"
+            },
+            {
+              "label": "Services professionnels"
+            },
+            {
+              "label": "Immobilier / Gestion locative"
+            },
+            {
+              "label": "Santé"
+            },
+            {
+              "label": "Industrie / Négoce"
+            },
+            {
+              "label": "Autre"
+            }
+          ]
+        },
+        {
+          "label": "Fréquence souhaitée (facultatif)",
+          "placeholder": "Choisissez la fréquence",
+          "options": [
+            {
+              "label": "Hebdomadaire"
+            },
+            {
+              "label": "Bimensuelle"
+            },
+            {
+              "label": "Mensuelle"
+            },
+            {
+              "label": "Trimestrielle"
+            },
+            {
+              "label": "Annuelle"
+            },
+            {
+              "label": "Je ne sais pas encore"
+            }
+          ]
+        },
+        {
+          "label": "Logiciel comptable (facultatif)",
+          "placeholder": "Choisissez le logiciel",
+          "options": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+              "label": "Excel / Tableurs"
+            },
+            {
+              "label": "Aucun pour l'instant"
+            },
+            {
+              "label": "Autre"
+            }
+          ]
+        },
+        {
+          "label": "Message"
+        }
+      ],
+      "submitLabel": "Envoyer la demande"
     }
   }
 }
