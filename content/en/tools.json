@@ -4760,15 +4760,15 @@
           },
           {
             "question": "Why does the same supplier appear twice in the report?",
-            "answer": "Bills are grouped by the supplier name exactly as it was typed, so Sharma Traders and Sharma Traders Pvt Ltd become two separate rows, and so do two different spellings or capitalisations. Use one spelling per supplier. Saving suppliers once in the Supplier Book and picking them in the Purchase Register keeps names consistent when you pull bills into the report."
+            "answer": "Bills are grouped by supplier name. Bills pulled from the Purchase Register are matched to your saved suppliers, ignoring capitals and extra spaces, so a purchase typed as sharma traders still lands under the saved Sharma Traders. Names typed by hand in this report are used exactly as entered, so Sharma Traders and Sharma Traders Pvt Ltd become two rows. Save each supplier once in the Supplier Book and pick them in the Purchase Register to keep names consistent."
           },
           {
             "question": "Can I record a part payment against a supplier bill?",
-            "answer": "There is no separate part-payment entry. Each bill is entered at the amount still outstanding. When you pay part of a bill, tap Paid / remove on it and add it again with the new balance and the same due date, so the remaining amount stays in the correct aging bucket and the supplier total stays accurate."
+            "answer": "Yes, for bills pulled from the Purchase Register. Record the part payment against that bill in the Supplier Ledger, then tap Pull from Purchase Register again and the bill comes back at the balance still owed, in the same aging bucket. For a bill you typed in by hand, tap Paid / remove and add it again with the new balance and the same due date."
           },
           {
             "question": "What is the difference between accounts payable aging and a purchase register?",
-            "answer": "A purchase register records every purchase bill you receive, paid or unpaid, in date order, with the supplier, items, total and payment mode. It is the permanent record behind your stock and purchase figures. An accounts payable aging report shows only what is still unpaid, grouped by how overdue it is. You keep the register for good, while the aging list should shrink each time you pay a supplier and remove the bill."
+            "answer": "A purchase register records every purchase bill you receive, paid or unpaid, in date order, with the supplier, items, total and payment mode. It is the permanent record behind your stock and purchase figures. An accounts payable aging report shows only what is still unpaid, grouped by how overdue it is. That is why Pull from Purchase Register brings in only bills with payment mode Credit that are not yet recorded as paid, and the list shrinks each time you mark a bill paid."
           }
         ]
       },
@@ -4787,9 +4787,9 @@
           "steps": [
             "Under Add unpaid bill, enter the supplier name, the bill number, the due date and the amount still outstanding.",
             "Tap Add to report. Repeat for every unpaid bill; for a part-paid bill, enter only the balance you still owe.",
-            "If you record purchases in the Setu Purchase Register, tap Use workspace on the banner if it appears, then Pull from Purchase Register to load them instead. Pulling replaces the bills currently in the report.",
+            "If you record purchases in the Setu Purchase Register, tap Use workspace on the banner if it appears, then Pull from Purchase Register. Only purchases with payment mode Credit that are not yet recorded as paid come in, at the amount still owed. Pulling refreshes the pulled bills and keeps the ones you typed in by hand.",
             "Read the Aging summary: the total in each bucket from Not yet due to 90+ days, the grand total, and one row per supplier with the largest balance at the top.",
-            "When you pay a bill, tap Paid / remove next to it in the bill list so the report stays current.",
+            "When you pay a pulled bill, tap Mark paid: the payment is recorded in the Supplier Ledger and the bill is never pulled again. Use Remove to take a bill out of the report without recording a payment, and Paid / remove for bills you typed in by hand.",
             "Tap Export CSV to download the supplier-by-bucket table for your accountant or for planning payments in Excel."
           ]
         },
@@ -4810,7 +4810,7 @@
             {
               "icon": "🔄",
               "title": "Pull from Purchase Register",
-              "text": "Load purchase bills you have already recorded in your Setu workspace instead of retyping supplier names, bill numbers and amounts."
+              "text": "Load only the bills you still owe: purchases with payment mode Credit, less any payments recorded in the Supplier Ledger. Cash, UPI, Card and Bank purchases are left out because they were paid on the spot."
             },
             {
               "icon": "⚠️",
@@ -4832,7 +4832,7 @@
         {
           "kind": "note",
           "headline": "Age bills from the due date, not the bill date",
-          "text": "A bill dated 1 August on 30-day credit falls due on 31 August and is not overdue until 1 September. Counting it as overdue earlier makes your payables look worse than they are, so enter the real due date when you add a bill by hand. **Pull from Purchase Register** has no due date to work with, so it treats each bill date as the due date and brings in the full bill total. It also brings in every recorded purchase, including ones marked Cash, UPI or Card that were paid on the spot. After pulling, remove anything already paid and re-add credit bills with their agreed due date and the balance still owed. Your [payment terms](/glossary/payment-terms) with each supplier decide that date."
+          "text": "A bill dated 1 August on 30-day credit falls due on 31 August and is not overdue until 1 September. Counting it as overdue earlier makes your payables look worse than they are, so enter the real due date when you add a bill by hand. **Pull from Purchase Register** has no due date to work with, so it treats each bill date as the due date. It brings in only unpaid Credit purchases, at the balance left after payments recorded in the [Supplier Ledger](/tools/supplier-ledger). If a supplier gives you 30 days, remember those bills are aged from the bill date. Your [payment terms](/glossary/payment-terms) with each supplier decide the real due date."
         },
         {
           "kind": "links",
@@ -4855,8 +4855,8 @@
               "href": "/calculators/payment-terms-calculator"
             },
             {
-              "label": "Invoice Aging Report",
-              "href": "/tools/invoice-aging-report"
+              "label": "Supplier Ledger",
+              "href": "/tools/supplier-ledger"
             }
           ]
         }
