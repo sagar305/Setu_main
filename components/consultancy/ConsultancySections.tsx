@@ -373,7 +373,7 @@ export function ConsultancySections({
             </p>
           </div>
           <div className="min-w-0 text-ink">
-            <ContactForm form={content.contact.form} topic="consultancy" />
+            <ContactForm form={content.contact.form} topic="consultancy" markRequired />
           </div>
         </div>
       </section>
