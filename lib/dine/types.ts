@@ -683,6 +683,24 @@ export type DineSettings = {
    * else. Unlocking needs the counter PIN.
    */
   kitchenLocked: boolean;
+
+  /**
+   * Keep a QR menu in step with this POS (see lib/dine/qrMenuSync.ts).
+   *
+   * "free" publishes through the free QR Menu Generator's permanent
+   * /menu/<code> link — no account, the edit token below is the only proof of
+   * ownership. "premium" pushes into a Setu QR Menu account with the sync key
+   * generated in that app's Settings. Either way the printed QR never changes;
+   * every menu edit here repoints what it shows.
+   */
+  qrMenuMode: "off" | "free" | "premium";
+  /** Premium sync key (sqm_pos_…). Never written to the Google Sheet. */
+  qrMenuPremiumKey: string;
+  /** The free menu's public code and its edit token; "" until first publish. */
+  qrMenuFreeCode: string;
+  qrMenuFreeEditToken: string;
+  /** Leave sold-out dishes off the free menu, which has no sold-out badge. */
+  qrMenuHideUnavailable: boolean;
 };
 
 export const DEFAULT_DINE_SETTINGS: DineSettings = {
@@ -730,6 +748,12 @@ export const DEFAULT_DINE_SETTINGS: DineSettings = {
   pinSalt: "",
   autoLockMinutes: 0,
   kitchenLocked: false,
+
+  qrMenuMode: "off",
+  qrMenuPremiumKey: "",
+  qrMenuFreeCode: "",
+  qrMenuFreeEditToken: "",
+  qrMenuHideUnavailable: true,
 };
 
 const PAYMENT_METHOD_KEYS: TKey[] = ["dnPayCash", "dnPayUpi", "dnPayCard"];

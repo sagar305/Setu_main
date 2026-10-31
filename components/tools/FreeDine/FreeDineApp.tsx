@@ -31,6 +31,7 @@ import { InventoryScreen } from "./InventoryScreen";
 import { ReservationsScreen } from "./ReservationsScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
+import { QrMenuSyncProvider } from "./QrMenuSync";
 import { previewStyleSheet } from "./printing";
 
 const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Receipt }[] = [
@@ -252,7 +253,13 @@ function DineRouter({
   }
   if (status === "welcome") return <WelcomeScreen />;
   if (status === "setup") return <SetupScreen />;
-  return <DineShell fullscreen={fullscreen} onToggleFullscreen={onToggleFullscreen} />;
+  // Only the counter keeps the QR menu updated — the kitchen screen is a
+  // separate app and never mounts this.
+  return (
+    <QrMenuSyncProvider>
+      <DineShell fullscreen={fullscreen} onToggleFullscreen={onToggleFullscreen} />
+    </QrMenuSyncProvider>
+  );
 }
 
 export function FreeDineApp() {

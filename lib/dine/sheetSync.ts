@@ -104,7 +104,10 @@ function menuItemForSync(item: DineMenuItem): DineMenuItem {
  */
 function settingsForSync(settings: DineSettings): Omit<DineSettings, "pinHash" | "pinSalt"> {
   const { pinHash: _pinHash, pinSalt: _pinSalt, ...rest } = settings;
-  return { ...rest, sheetSyncUrl: "" };
+  // The premium QR key can be regenerated in seconds, so it stays off the
+  // Sheet. The free menu's edit token cannot — losing it freezes a printed QR
+  // for good — so it travels with the rest, like it does in the JSON backup.
+  return { ...rest, sheetSyncUrl: "", qrMenuPremiumKey: "" };
 }
 
 function metaTab(meta: DineMetaSnapshot): TabPayload {
