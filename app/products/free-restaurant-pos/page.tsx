@@ -37,6 +37,8 @@ import {
   BookUser,
   UserRound,
   Palette,
+  QrCode,
+  ImageIcon,
 } from "lucide-react";
 import { FreeDineApp } from "@/components/tools/FreeDine/FreeDineApp";
 import { Faq } from "@/components/Faq";
@@ -94,6 +96,7 @@ const HIGHLIGHTS: { icon: ComponentType<{ className?: string }>; label: string }
   { icon: Split, label: "Split & merge bills" },
   { icon: Percent, label: "GST with CGST/SGST" },
   { icon: Salad, label: "Half / full & add-ons" },
+  { icon: QrCode, label: "QR menu that updates itself" },
   { icon: Boxes, label: "Recipes & raw material stock" },
   { icon: Printer, label: "80mm / 58mm / A4" },
   { icon: Lock, label: "PIN counter lock" },
@@ -180,6 +183,18 @@ const MENU: Feature[] = [
     title: "Per-dish tax rates",
     description:
       "Set a default and override it where you need to. Inclusive and exclusive pricing both work, and the bill shows the split either way.",
+  },
+  {
+    icon: QrCode,
+    title: "A QR menu that keeps up with the till",
+    description:
+      "Turn on the free QR menu in Settings and print one code for every table. Change a price, add a dish or mark it sold out at the counter, and the menu diners scan updates itself a few seconds later — the printed QR never changes. No account needed, and a QR you already printed from the free QR Menu Generator can be kept.",
+  },
+  {
+    icon: ImageIcon,
+    title: "Or link it to Setu QR Menu Premium",
+    description:
+      "Paste a sync key from Setu QR Menu and the same live updates flow into your premium menu, with dish photos, sold-out badges, add-on prices, templates and scan analytics. Photos and badges you add there are kept every time the POS updates the dishes.",
   },
 ];
 
@@ -374,7 +389,8 @@ const SECTIONS: { eyebrow: string; title: string; subtitle: string; items: Featu
   {
     eyebrow: "Menu",
     title: "A menu shaped like a real one",
-    subtitle: "Sizes, add-ons, veg marks and the dish that runs out at eight.",
+    subtitle:
+      "Sizes, add-ons, veg marks, the dish that runs out at eight — and a QR menu on every table that follows all of it.",
     items: MENU,
   },
   {
@@ -447,7 +463,7 @@ const FAQ_ITEMS = [
   {
     question: "Do I need to create an account?",
     answer:
-      "No. There is no signup, no login and no server. Your menu, tables and bills are stored in this browser on this device, which is why nothing is uploaded and nobody else can read it.",
+      "No. There is no signup, no login and no server. Your menu, tables and bills are stored in this browser on this device, which is why nothing is uploaded and nobody else can read it. The one exception is opt-in: if you turn on the QR menu, the menu itself (dishes and prices, never bills or customers) is published so diners can scan it.",
   },
   {
     question: "What happens if I clear my browser data?",
@@ -457,7 +473,7 @@ const FAQ_ITEMS = [
   {
     question: "Does it work without internet?",
     answer:
-      "Yes. Once the page has loaded, it keeps working with the wifi down — you can take orders, fire kitchen tickets and print bills through an outage. Nothing needs a connection because nothing is sent anywhere.",
+      "Yes. Once the page has loaded, it keeps working with the wifi down — you can take orders, fire kitchen tickets and print bills through an outage. Billing never needs a connection. The only thing that does is the optional QR menu, which catches up with your latest changes as soon as the internet is back.",
   },
   {
     question: "Can I print KOTs to my kitchen printer?",
@@ -523,6 +539,11 @@ const FAQ_ITEMS = [
     question: "Does money owed on account count as sales?",
     answer:
       "The bill counts as a sale on the day it was rung up, because the food left the kitchen that day. What changes is the cash: the reports show what is owed on account and what is held as booking advances separately from the takings, so you can tell the difference between a good night and a night everyone put on a tab.",
+  },
+  {
+    question: "Can diners scan a QR code to see my menu?",
+    answer:
+      "Yes. In Settings, turn on the QR menu and print the code it shows. With the free option there is no account: the menu is published through Setu's free QR Menu Generator, and if you already printed a code from that tool you can keep it. With the premium option you paste a sync key from Setu QR Menu and get photos, sold-out badges, add-on prices and scan analytics. Either way the POS updates the menu on its own a few seconds after you change a dish, price or availability, and the printed QR never has to be replaced. Only the menu is sent — never bills, tables or customers.",
   },
   {
     question: "Can I move my data to Setu Dine later?",
