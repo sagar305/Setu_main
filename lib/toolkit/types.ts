@@ -87,6 +87,38 @@ export type LedgerEntry = {
   createdAt: string;
 };
 
+export type SupplierLedgerEntryType = "bill" | "payment";
+
+/**
+ * One movement in the Supplier Ledger. Credit purchases from the Purchase
+ * Register are NOT copied in here — the ledger reads them live from the
+ * `purchases` store, so deleting a purchase can never leave a stale bill
+ * behind. This store holds only what the register doesn't know about:
+ * payments made to a supplier, and bills/opening balances entered by hand.
+ *
+ * "bill" = you owe the supplier more, "payment" = you paid them.
+ */
+export type SupplierLedgerEntry = {
+  id: string;
+  /** Workspace supplier id, or null for a supplier known only by name. */
+  supplierId: string | null;
+  supplierName: string;
+  type: SupplierLedgerEntryType;
+  amount: number;
+  note: string;
+  date: string; // ISO date (yyyy-mm-dd)
+  /** For payments: how it was paid (Cash / UPI / Bank transfer / Cheque). */
+  paymentMode?: string;
+  /**
+   * For payments made against one specific bill: "p:<purchaseId>" for a
+   * Purchase Register bill, "e:<entryId>" for a bill entered in the ledger.
+   * Unlinked payments settle the supplier's oldest open bills first.
+   */
+  billRef?: string;
+  createdByTool: ToolSlug;
+  createdAt: string;
+};
+
 export type ReceiptTemplate = {
   id: string;
   name: string;

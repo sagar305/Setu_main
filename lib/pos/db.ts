@@ -18,9 +18,11 @@ const DB_NAME = "POS_DATABASE";
 // Those are prefixed because `appointments` already belongs to the Appointment
 // Book tool with an incompatible shape, and the rest would be too generic to
 // hand to one tool in a database every tool shares.
+// v8 adds supplier_ledger (bills and payments to suppliers) for the Supplier
+// Ledger and Accounts Payable Aging tools.
 // The upgrade handler creates any missing stores, so bumping the version
 // migrates older databases in place.
-const DB_VERSION = 7;
+const DB_VERSION = 8;
 
 export const STORES = [
   "business",
@@ -66,6 +68,7 @@ export const STORES = [
   "clinic_charges",
   "clinic_bills",
   "clinic_settings",
+  "supplier_ledger",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
@@ -96,6 +99,9 @@ export function openPosDb(): Promise<IDBDatabase> {
           }
           if (store === "ledger") {
             objectStore.createIndex("customerId", "customerId", { unique: false });
+          }
+          if (store === "supplier_ledger") {
+            objectStore.createIndex("supplierId", "supplierId", { unique: false });
           }
           if (store === "purchases") {
             objectStore.createIndex("supplierId", "supplierId", { unique: false });

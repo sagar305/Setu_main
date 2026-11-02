@@ -12,6 +12,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 import { NavigationProgress } from "@/components/NavigationProgress";
+// TEMPORARY — DIWALI 2026: remove after Diwali.
+import { FESTIVE_BOOT_SCRIPT } from "@/lib/festive";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -89,8 +91,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const site = getSiteContent();
 
   return (
-    <html lang="en" className={sora.variable}>
+    // TEMPORARY — DIWALI 2026: suppressHydrationWarning is only for the
+    // data-festive attribute the script below adds; remove after Diwali.
+    <html lang="en" className={sora.variable} suppressHydrationWarning>
       <body className="font-sora">
+        {/* TEMPORARY — DIWALI 2026: switches on the Diwali look before the
+            page paints (see lib/festive.ts). Remove after Diwali. */}
+        <script dangerouslySetInnerHTML={{ __html: FESTIVE_BOOT_SCRIPT }} />
         <NavigationProgress />
         <script
           type="application/ld+json"

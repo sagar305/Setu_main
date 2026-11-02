@@ -1710,6 +1710,101 @@
           }
         ]
       }
+    },
+    {
+      "name": "Libro de proveedores",
+      "shortDescription": "Lo que debes a cada proveedor: compras a crédito, pagos y saldos factura por factura.",
+      "seo": {
+        "title": "Libro de proveedores gratis — Cuentas por pagar | Setu",
+        "description": "Controla lo que debes a cada proveedor. Las compras a crédito se suman solas y registras los pagos por factura. Gratis, sin conexión y sin registro.",
+        "keywords": [
+          "libro de proveedores",
+          "cuenta corriente de proveedores",
+          "control de pagos a proveedores",
+          "libro mayor de proveedores gratis",
+          "cuentas por pagar"
+        ],
+        "ogTitle": "Libro de proveedores",
+        "ogDescription": "Controla lo que debes a cada proveedor. Las compras a crédito se suman solas y registras los pagos por factura. Gratis, sin conexión y sin registro."
+      },
+      "hero": {
+        "headline": "Libro de proveedores",
+        "subheadline": "Lo que debes a cada proveedor: facturas a crédito, pagos y saldo al día en un solo lugar."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "¿Qué es un libro de proveedores?",
+            "answer": "Una cuenta corriente para cada proveedor al que compras a crédito. Las facturas aumentan lo que debes, los pagos lo reducen y el saldo te dice cuánto queda por pagar: el lado acreedor de tus libros."
+          },
+          {
+            "question": "¿Tengo que registrar las compras dos veces?",
+            "answer": "No. Toda compra del Registro de compras de Setu con forma de pago Credit aparece sola en el libro del proveedor. Las pagadas con Cash, UPI, Card o Bank se saldaron en el acto y no son facturas pendientes. El botón Traer compras a crédito vuelve a leer el registro."
+          },
+          {
+            "question": "¿Cómo se asignan los pagos a las facturas?",
+            "answer": "Elige una factura en Contra la factura para pagar esa en concreto, o deja Primero las facturas más antiguas y el pago cubrirá las más viejas. Si pagas de más, el exceso aparece como anticipo."
+          },
+          {
+            "question": "¿Cómo funciona con la Antigüedad de cuentas por pagar?",
+            "answer": "Ambos usan los mismos números. Traer del Registro de compras en ese informe solo trae facturas a crédito pendientes, y Marcar como pagada registra el pago en este libro, así la factura no vuelve."
+          },
+          {
+            "question": "¿Puedo pasar saldos de mis libros anteriores?",
+            "answer": "Sí. Elige Factura / saldo inicial, escribe lo que debías al proveedor el día que empezaste y añade una nota como saldo anterior. Los pagos posteriores lo saldan como cualquier otra factura."
+          },
+          {
+            "question": "¿Dónde se guardan mis datos?",
+            "answer": "En tu navegador, en tu dispositivo, dentro del mismo espacio de trabajo de Setu que usan el POS en el navegador, la Agenda de proveedores y el Registro de compras. No se sube nada; exporta un CSV cuando quieras."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "¿Qué es un libro de proveedores (cuenta de acreedores)?",
+          "paragraphs": [
+            "Un **libro de proveedores**, también llamado libro de acreedores o de cuentas por pagar, lleva una cuenta corriente por proveedor. Cada factura recibida a crédito aumenta lo que debes, cada pago lo reduce y el saldo es lo que queda por pagar. Es la imagen opuesta del [libro de clientes](/tools/customer-ledger): allí ves quién te debe; aquí, a quién le debes."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Cómo usar el libro de proveedores gratis",
+          "steps": [
+            "Registra las compras en el Registro de compras y elige Credit como forma de pago si aún no has pagado.",
+            "Abre el Libro de proveedores y elige el proveedor: sus facturas a crédito ya aparecen con el importe pendiente.",
+            "Al pagar, elige Pago realizado, escoge la factura o deja Primero las más antiguas, indica cómo pagaste y pulsa Registrar pago.",
+            "Usa Factura / saldo inicial para deudas anteriores o facturas que no registraste.",
+            "Revisa la Antigüedad de cuentas por pagar para ver qué facturas pendientes se están haciendo viejas."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Paga primero las facturas más antiguas",
+          "text": "Los proveedores suelen aplicar los pagos a sus facturas más antiguas, y este libro salda igual un pago no asignado, así tu saldo coincide con el suyo. Si un proveedor te pide saldar una factura concreta, elígela en Contra la factura al registrar el pago. Revisa cada semana la [Antigüedad de cuentas por pagar](/tools/accounts-payable-aging) para que ninguna factura a crédito se pase de fecha."
+        },
+        {
+          "kind": "links",
+          "headline": "Herramientas relacionadas con cuentas por pagar",
+          "links": [
+            {
+              "label": "Registro de compras"
+            },
+            {
+              "label": "Antigüedad de cuentas por pagar"
+            },
+            {
+              "label": "Agenda de proveedores"
+            },
+            {
+              "label": "Libro de clientes"
+            },
+            {
+              "label": "POS en el navegador"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

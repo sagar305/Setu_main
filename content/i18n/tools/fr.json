@@ -1710,6 +1710,101 @@
           }
         ]
       }
+    },
+    {
+      "name": "Grand livre fournisseurs",
+      "shortDescription": "Ce que vous devez à chaque fournisseur : achats à crédit, paiements et soldes facture par facture.",
+      "seo": {
+        "title": "Grand livre fournisseurs gratuit — Dettes | Setu",
+        "description": "Suivez ce que vous devez à chaque fournisseur. Les achats à crédit s'ajoutent seuls ; saisissez les paiements par facture. Gratuit, hors ligne, sans compte.",
+        "keywords": [
+          "grand livre fournisseurs",
+          "compte fournisseur",
+          "suivi paiements fournisseurs",
+          "livre fournisseurs gratuit",
+          "dettes fournisseurs"
+        ],
+        "ogTitle": "Grand livre fournisseurs",
+        "ogDescription": "Suivez ce que vous devez à chaque fournisseur. Les achats à crédit s'ajoutent seuls ; saisissez les paiements par facture. Gratuit, hors ligne, sans compte."
+      },
+      "hero": {
+        "headline": "Grand livre fournisseurs",
+        "subheadline": "Ce que vous devez à chaque fournisseur : factures à crédit, paiements et solde courant au même endroit."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Qu'est-ce qu'un grand livre fournisseurs ?",
+            "answer": "Un compte courant pour chaque fournisseur chez qui vous achetez à crédit. Les factures augmentent ce que vous devez, les paiements le réduisent et le solde indique ce qui reste à payer : le côté créancier de votre comptabilité."
+          },
+          {
+            "question": "Dois-je saisir mes achats deux fois ?",
+            "answer": "Non. Tout achat du Registre des achats Setu avec le mode de paiement Credit apparaît automatiquement dans le compte du fournisseur. Les achats payés en Cash, UPI, Card ou Bank ont été réglés sur-le-champ. Le bouton Importer les achats à crédit relit le registre."
+          },
+          {
+            "question": "Comment les paiements sont-ils affectés aux factures ?",
+            "answer": "Choisissez une facture dans Pour la facture pour la régler précisément, ou laissez Les plus anciennes d'abord et le paiement solde les plus vieilles factures. Un trop-payé apparaît comme une avance."
+          },
+          {
+            "question": "Comment cela fonctionne-t-il avec l'antériorité des dettes ?",
+            "answer": "Les deux utilisent les mêmes chiffres. L'import depuis le Registre des achats n'y ramène que les factures à crédit impayées, et Marquer payée enregistre le paiement dans ce grand livre, si bien que la facture ne revient pas."
+          },
+          {
+            "question": "Puis-je reprendre les soldes de mes anciens livres ?",
+            "answer": "Oui. Choisissez Facture / solde d'ouverture, saisissez ce que vous deviez au fournisseur au démarrage et ajoutez une note comme ancien solde. Les paiements suivants le soldent comme toute autre facture."
+          },
+          {
+            "question": "Où sont stockées mes données ?",
+            "answer": "Dans votre navigateur, sur votre appareil, dans le même espace de travail Setu que le POS navigateur, le Carnet fournisseurs et le Registre des achats. Rien n'est envoyé ; exportez un CSV quand vous voulez."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Qu'est-ce qu'un grand livre fournisseurs (compte créanciers) ?",
+          "paragraphs": [
+            "Un **grand livre fournisseurs**, aussi appelé compte créanciers ou livre des dettes, tient un compte courant par fournisseur. Chaque facture reçue à crédit augmente ce que vous devez, chaque paiement le réduit, et le solde est ce qui reste à payer. C'est le pendant du [grand livre clients](/tools/customer-ledger) : là, qui vous doit ; ici, à qui vous devez."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Comment utiliser le grand livre fournisseurs gratuit",
+          "steps": [
+            "Saisissez vos achats dans le Registre des achats et choisissez Credit comme mode de paiement si vous n'avez pas encore payé.",
+            "Ouvrez le Grand livre fournisseurs et choisissez le fournisseur : ses factures à crédit sont déjà listées avec le montant dû.",
+            "Quand vous payez, choisissez Paiement effectué, la facture ou Les plus anciennes d'abord, le moyen de paiement, puis Enregistrer le paiement.",
+            "Utilisez Facture / solde d'ouverture pour les dettes antérieures ou les factures non saisies dans le registre.",
+            "Consultez l'Antériorité des dettes fournisseurs pour voir quelles factures impayées vieillissent."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Payez d'abord les factures les plus anciennes",
+          "text": "Les fournisseurs imputent en général vos paiements sur leurs plus anciennes factures, et ce grand livre solde de la même façon un paiement non affecté, pour que votre solde corresponde au leur. Si un fournisseur demande de régler une facture précise, choisissez-la dans Pour la facture en saisissant le paiement. Consultez chaque semaine l'[Antériorité des dettes fournisseurs](/tools/accounts-payable-aging) pour qu'aucune facture à crédit ne dépasse son échéance."
+        },
+        {
+          "kind": "links",
+          "headline": "Outils liés aux dettes fournisseurs",
+          "links": [
+            {
+              "label": "Registre des achats"
+            },
+            {
+              "label": "Antériorité des dettes fournisseurs"
+            },
+            {
+              "label": "Carnet fournisseurs"
+            },
+            {
+              "label": "Grand livre clients"
+            },
+            {
+              "label": "POS dans le navigateur"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

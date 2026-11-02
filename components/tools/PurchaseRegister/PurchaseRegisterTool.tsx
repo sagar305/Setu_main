@@ -251,6 +251,14 @@ export function PurchaseRegisterTool() {
                 ))}
               </Select>
             </Field>
+            {paymentMode === "Credit" ? (
+              <p className="text-xs text-muted sm:col-span-2">
+                {t("prCreditHint")}{" "}
+                <a href="/tools/supplier-ledger" className="font-semibold text-indigo hover:underline">
+                  {t("prOpenSupplierLedger")} →
+                </a>
+              </p>
+            ) : null}
           </div>
 
           <h3 className="mb-2 mt-6 text-sm font-bold text-ink">{t("items")}</h3>

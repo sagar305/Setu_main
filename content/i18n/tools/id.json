@@ -1710,6 +1710,101 @@
           }
         ]
       }
+    },
+    {
+      "name": "Buku Besar Pemasok",
+      "shortDescription": "Utang Anda ke setiap pemasok — pembelian kredit, pembayaran, dan saldo per tagihan.",
+      "seo": {
+        "title": "Buku Besar Pemasok Gratis — Lacak Utang Usaha | Setu",
+        "description": "Lacak utang Anda ke setiap pemasok. Pembelian kredit masuk otomatis; catat pembayaran per tagihan dan lihat saldo berjalan. Gratis, offline, tanpa daftar akun.",
+        "keywords": [
+          "buku besar pemasok",
+          "kartu utang pemasok",
+          "pelacak pembayaran pemasok",
+          "buku besar vendor gratis",
+          "utang usaha"
+        ],
+        "ogTitle": "Buku Besar Pemasok",
+        "ogDescription": "Lacak utang Anda ke setiap pemasok. Pembelian kredit masuk otomatis; catat pembayaran per tagihan dan lihat saldo berjalan. Gratis, offline, tanpa daftar akun."
+      },
+      "hero": {
+        "headline": "Buku Besar Pemasok",
+        "subheadline": "Utang Anda ke setiap pemasok — tagihan kredit, pembayaran, dan saldo berjalan di satu tempat."
+      },
+      "faq": {
+        "items": [
+          {
+            "question": "Apa itu buku besar pemasok?",
+            "answer": "Rekening berjalan untuk setiap pemasok tempat Anda membeli secara kredit. Tagihan menambah utang, pembayaran menguranginya, dan saldo menunjukkan sisa yang harus dibayar — sisi kreditur pembukuan Anda."
+          },
+          {
+            "question": "Apakah pembelian harus dicatat dua kali?",
+            "answer": "Tidak. Setiap pembelian di Register Pembelian Setu dengan cara bayar Credit otomatis muncul di buku besar pemasok. Pembelian Cash, UPI, Card, atau Bank sudah dibayar saat itu. Tombol Tarik pembelian kredit membaca ulang register."
+          },
+          {
+            "question": "Bagaimana pembayaran dicocokkan dengan tagihan?",
+            "answer": "Pilih tagihan di Untuk tagihan untuk melunasi tagihan itu, atau biarkan Tagihan terlama dulu sehingga pembayaran melunasi tagihan terlama. Kelebihan bayar muncul sebagai uang muka."
+          },
+          {
+            "question": "Bagaimana kaitannya dengan laporan Umur Utang Usaha?",
+            "answer": "Keduanya memakai angka yang sama. Tarik dari Register Pembelian di laporan itu hanya membawa tagihan kredit yang belum dibayar, dan Tandai lunas mencatat pembayaran di buku besar ini sehingga tagihan tidak muncul lagi."
+          },
+          {
+            "question": "Bisakah saya memasukkan saldo dari buku lama?",
+            "answer": "Bisa. Pilih Tagihan / saldo awal, isi utang ke pemasok pada hari Anda mulai, dan tambahkan catatan seperti saldo lama. Pembayaran berikutnya melunasinya seperti tagihan lain."
+          },
+          {
+            "question": "Di mana data saya disimpan?",
+            "answer": "Di browser pada perangkat Anda, dalam ruang kerja Setu yang sama dengan POS berbasis browser, Buku Pemasok, dan Register Pembelian. Tidak ada yang diunggah; ekspor CSV kapan saja."
+          }
+        ]
+      },
+      "body": [
+        {
+          "kind": "prose",
+          "headline": "Apa itu buku besar pemasok (kartu utang)?",
+          "paragraphs": [
+            "**Buku besar pemasok**, disebut juga kartu utang atau buku besar utang usaha, menyimpan satu rekening berjalan per pemasok. Setiap tagihan kredit menambah utang, setiap pembayaran menguranginya, dan saldo adalah sisa yang harus dibayar. Ini kebalikan dari [buku besar pelanggan](/tools/customer-ledger): di sana siapa yang berutang kepada Anda, di sini kepada siapa Anda berutang."
+          ]
+        },
+        {
+          "kind": "steps",
+          "headline": "Cara memakai buku besar pemasok gratis",
+          "steps": [
+            "Catat pembelian di Register Pembelian dan pilih Credit sebagai cara bayar jika belum dibayar.",
+            "Buka Buku Besar Pemasok dan pilih pemasok — tagihan kreditnya sudah tampil dengan jumlah terutang.",
+            "Saat membayar, pilih Pembayaran dilakukan, pilih tagihan atau Tagihan terlama dulu, cara bayar, lalu ketuk Catat pembayaran.",
+            "Gunakan Tagihan / saldo awal untuk utang sebelum mulai atau tagihan yang tidak dicatat di register.",
+            "Periksa laporan Umur Utang Usaha untuk melihat tagihan mana yang makin lama belum dibayar."
+          ]
+        },
+        {
+          "kind": "note",
+          "headline": "Bayar tagihan terlama lebih dulu",
+          "text": "Pemasok biasanya membukukan pembayaran ke tagihan terlama, dan buku besar ini melunasi pembayaran tanpa tagihan dengan cara yang sama, sehingga saldo Anda cocok dengan milik mereka. Jika pemasok meminta tagihan tertentu dilunasi, pilih di Untuk tagihan saat mencatat pembayaran. Periksa [Umur Utang Usaha](/tools/accounts-payable-aging) setiap minggu agar tidak ada tagihan kredit yang lewat jatuh tempo."
+        },
+        {
+          "kind": "links",
+          "headline": "Alat terkait utang usaha",
+          "links": [
+            {
+              "label": "Register Pembelian"
+            },
+            {
+              "label": "Umur Utang Usaha"
+            },
+            {
+              "label": "Buku Pemasok"
+            },
+            {
+              "label": "Buku Besar Pelanggan"
+            },
+            {
+              "label": "POS Berbasis Browser"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

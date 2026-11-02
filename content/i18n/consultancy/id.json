@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Konsultasi",
     "headline": "Jasa akuntansi, pembukuan, dan payroll",
-    "subheadline": "Kami menyediakan jasa akuntansi, pembukuan, dan payroll sesuai kebutuhan Anda — mingguan, dua mingguan, bulanan, triwulanan, atau tahunan. Dari transaksi harian sampai laporan keuangan, pembukuan Anda tetap akurat dan siap diaudit."
+    "subheadline": "Kami menyediakan jasa akuntansi, pembukuan, dan payroll sesuai kebutuhan Anda — mingguan, dua mingguan, bulanan, triwulanan, atau tahunan. Dari transaksi harian sampai laporan keuangan, pembukuan Anda tetap akurat dan siap diaudit.",
+    "teamNote": "Dipimpin oleh tim Chartered Accountant dan CPA dengan pengalaman industri lebih dari 10 tahun"
+  },
+  "frequency": {
+    "headline": "Sesuai jadwal Anda",
+    "subtext": "Pilih ritme yang cocok dengan cara usaha Anda berjalan.",
+    "options": [
+      "Mingguan",
+      "Dua mingguan",
+      "Bulanan",
+      "Triwulanan",
+      "Tahunan"
+    ]
   },
   "overview": {
     "headline": "Pemeliharaan lengkap pembukuan Anda",
@@ -37,13 +49,65 @@
     "headline": "Layanan yang termasuk",
     "subtext": "Ruang lingkup yang jelas dan berkelanjutan, jadi Anda selalu tahu apa yang tercakup.",
     "items": [
-      "Pembukuan bulanan (berkelanjutan)",
-      "Rekonsiliasi bank dan kartu kredit",
-      "Kategorisasi pendapatan dan beban",
-      "Peninjauan bagan akun",
-      "Laba rugi dan neraca bulanan",
-      "Jurnal dan penyesuaian",
-      "Pemantauan piutang/utang (dasar)"
+      {
+        "title": "Pembukuan bulanan (berkelanjutan)",
+        "description": "Setiap penjualan, pembelian, biaya, dan penerimaan bulan ini dicatat di pembukuan Anda. Buku besar selalu mutakhir, jadi tidak ada tumpukan pekerjaan di akhir tahun."
+      },
+      {
+        "title": "Rekonsiliasi bank dan kartu kredit",
+        "description": "Setiap rekening bank dan kartu direkonsiliasi baris demi baris dengan pembukuan Anda. Entri yang terlewat, duplikat, dan biaya yang tidak jelas ditandai lalu diselesaikan."
+      },
+      {
+        "title": "Kategorisasi pendapatan dan beban",
+        "description": "Transaksi dibukukan ke akun pendapatan dan beban yang tepat, dengan cara yang sama setiap bulan. Laporan laba rugi menunjukkan ke mana uang sebenarnya pergi, dan pelaporan pajak jadi lebih mudah."
+      },
+      {
+        "title": "Peninjauan bagan akun",
+        "description": "Kami merapikan dan menyusun ulang bagan akun agar sesuai dengan cara bisnis Anda berjalan. Lebih sedikit akun tak berguna, laporan lebih jelas, dan struktur yang ikut tumbuh bersama bisnis."
+      },
+      {
+        "title": "Laba rugi dan neraca bulanan",
+        "description": "Laporan laba rugi dan neraca yang sudah ditinjau setiap bulan. Anda melihat laba, kas, dan kewajiban selagi masih ada waktu untuk bertindak."
+      },
+      {
+        "title": "Jurnal dan penyesuaian",
+        "description": "Akrual, pembayaran di muka, penyusutan, dan koreksi dicatat sebagai jurnal yang benar. Laporan Anda mencerminkan posisi yang sebenarnya, bukan hanya pergerakan kas."
+      },
+      {
+        "title": "Pemantauan piutang/utang (dasar)",
+        "description": "Siapa yang berutang kepada Anda dan kepada siapa Anda berutang, dipantau berdasarkan umur. Tagihan yang jatuh tempo dan pembayaran mendatang ditandai sebelum menjadi masalah arus kas."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Produk kami untuk akuntan",
+    "subtext": "Alat analitik gratis yang dipakai tim kami sendiri untuk pekerjaan klien. Semuanya berjalan di browser Anda, dan data Anda tidak pernah diunggah.",
+    "freeLabel": "Gratis",
+    "items": [
+      {
+        "name": "Analitik Neraca Saldo",
+        "description": "Impor neraca saldo hingga tiga periode dari Excel atau CSV, lalu dapatkan laba rugi, neraca, rasio utama, dan analisis selisih dalam hitungan menit.",
+        "highlights": [
+          "Perbandingan tiga periode dengan deteksi tata letak otomatis",
+          "15 rasio utama, jembatan EBITDA, dan analisis modal kerja",
+          "Paket tinjauan Excel dan PDF dibuat di perangkat Anda"
+        ],
+        "cta": {
+          "label": "Buka Analitik Neraca Saldo"
+        }
+      },
+      {
+        "name": "Analitik Rekening Koran",
+        "description": "Impor rekening koran dalam PDF, Excel, atau CSV, klasifikasikan setiap transaksi dengan aturan yang Anda kendalikan, dan rekonsiliasi dengan buku besar.",
+        "highlights": [
+          "Membaca PDF, XLSX, dan CSV, termasuk PDF berkata sandi",
+          "Laporan arus kas, lawan transaksi, biaya bank, dan nilai besar",
+          "Rekonsiliasi buku besar dengan pencocokan persis, rentang tanggal, dan fuzzy"
+        ],
+        "cta": {
+          "label": "Buka Analitik Rekening Koran"
+        }
+      }
     ]
   },
   "software": {
@@ -82,22 +146,125 @@
       "E-commerce, properti, layanan kesehatan, dan jasa profesional"
     ]
   },
-  "frequency": {
-    "headline": "Sesuai jadwal Anda",
-    "subtext": "Pilih ritme yang cocok dengan cara usaha Anda berjalan.",
-    "options": [
-      "Mingguan",
-      "Dua mingguan",
-      "Bulanan",
-      "Triwulanan",
-      "Tahunan"
-    ]
+  "blog": {
+    "headline": "Terbaru dari blog akuntansi kami",
+    "subtext": "Panduan praktis tentang pembukuan, rekonsiliasi, dan tutup buku bulanan, ditulis oleh tim akuntansi kami.",
+    "readMore": "Baca selengkapnya",
+    "seeMore": {
+      "label": "Lihat lainnya"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Alat akuntansi gratis",
+    "subtext": "Kerjakan sendiri dengan alat gratis yang sama yang kami rekomendasikan kepada klien. Tanpa daftar.",
+    "seeMore": {
+      "label": "Lihat semua alat"
+    }
+  },
+  "calculators": {
+    "headline": "Kalkulator gratis",
+    "subtext": "Jawaban cepat untuk pajak, pinjaman, dan penggajian, dihitung saat Anda mengetik.",
+    "seeMore": {
+      "label": "Lihat semua kalkulator"
+    }
+  },
+  "contact": {
     "headline": "Siap menyerahkan pembukuan Anda?",
     "subtext": "Ceritakan usaha Anda dan kami susun rencana akuntansi serta pembukuan yang pas.",
-    "cta": {
-      "label": "Hubungi kami"
+    "floatingLabel": "Hubungi kami",
+    "form": {
+      "fields": [
+        {
+          "label": "Nama"
+        },
+        {
+          "label": "Email"
+        },
+        {
+          "label": "Nomor telepon"
+        },
+        {
+          "label": "Nama usaha"
+        },
+        {
+          "label": "Jenis usaha (opsional)",
+          "placeholder": "Pilih jenis usaha",
+          "options": [
+            {
+              "label": "Ritel / E-commerce"
+            },
+            {
+              "label": "Restoran / Usaha makanan"
+            },
+            {
+              "label": "Jasa profesional"
+            },
+            {
+              "label": "Properti / Manajemen properti"
+            },
+            {
+              "label": "Kesehatan"
+            },
+            {
+              "label": "Manufaktur / Perdagangan"
+            },
+            {
+              "label": "Lainnya"
+            }
+          ]
+        },
+        {
+          "label": "Frekuensi yang diinginkan (opsional)",
+          "placeholder": "Pilih frekuensi",
+          "options": [
+            {
+              "label": "Mingguan"
+            },
+            {
+              "label": "Dua mingguan"
+            },
+            {
+              "label": "Bulanan"
+            },
+            {
+              "label": "Triwulanan"
+            },
+            {
+              "label": "Tahunan"
+            },
+            {
+              "label": "Belum tahu"
+            }
+          ]
+        },
+        {
+          "label": "Software akuntansi (opsional)",
+          "placeholder": "Pilih software",
+          "options": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+              "label": "Excel / Spreadsheet"
+            },
+            {
+              "label": "Belum memakai apa pun"
+            },
+            {
+              "label": "Lainnya"
+            }
+          ]
+        },
+        {
+          "label": "Pesan"
+        }
+      ],
+      "submitLabel": "Kirim pertanyaan"
     }
   }
 }

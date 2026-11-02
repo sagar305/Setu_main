@@ -3,6 +3,9 @@ import { PageHero } from "@/components/PageHero";
 import { LanguageLinks } from "@/components/home/LanguageLinks";
 import type { ProductsContent } from "@/lib/content";
 import type { LanguageCode } from "@/lib/i18n/config";
+import { translate } from "@/lib/i18n/translate";
+import { productTag } from "@/lib/whatsNew";
+import { NewPill } from "@/components/whatsNew/NewPill";
 import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
@@ -57,6 +60,7 @@ export function ProductsSections({
         <div className="flex flex-col gap-10">
           {visibleProducts.map((product) => {
             const isLive = product.status === "live";
+            const tag = isLive ? productTag(product.id) : null;
             return (
               <div
                 key={product.id}
@@ -67,6 +71,12 @@ export function ProductsSections({
               >
                 <div className="flex flex-wrap items-center gap-3">
                   <h2 className="text-2xl font-bold text-ink">{product.name}</h2>
+                  {tag && (
+                    <NewPill
+                      tone={tag}
+                      label={translate(lang, tag === "new" ? "wnNew" : "wnUpdated")}
+                    />
+                  )}
                   {!isLive && (
                     <span className="rounded-full bg-cream px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-warm">
                       {content.labels.comingSoon}

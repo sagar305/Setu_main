@@ -48,6 +48,7 @@ export type ToolSlug =
   | "customer-book"
   | "supplier-book"
   | "customer-ledger"
+  | "supplier-ledger"
   | "loyalty-card"
   // Inventory
   | "stock-register"
@@ -462,6 +463,25 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: ["business-profile"],
     paidPath: "retail-pos",
     integrations: [{ with: "purchase-register", ux: "Reuse supplier details on purchase bills" }],
+  },
+  {
+    slug: "supplier-ledger",
+    name: "Supplier Ledger",
+    category: "customer-management",
+    kind: "app",
+    tier: "foundation",
+    status: "built",
+    route: "/tools/supplier-ledger",
+    owns: "supplier_ledger",
+    reads: ["business", "suppliers", "purchases"],
+    writes: ["supplier_ledger", "suppliers"],
+    dependsOn: ["supplier-book"],
+    paidPath: "retail-pos",
+    integrations: [
+      { with: "purchase-register", ux: "Credit purchases post to the supplier's balance automatically" },
+      { with: "accounts-payable-aging", ux: "Payments recorded here clear bills from the aging report" },
+      { with: "browser-pos", ux: "Track what the shop owes each supplier alongside POS sales" },
+    ],
   },
 
   // ---- Built today --------------------------------------------------------

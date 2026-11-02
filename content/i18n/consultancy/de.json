@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Beratung",
     "headline": "Buchhaltung, Buchführung und Lohnabrechnung",
-    "subheadline": "Wir übernehmen Buchhaltung, Buchführung und Lohnabrechnung nach Ihrem Bedarf — wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. Vom täglichen Beleg bis zum Jahresabschluss bleiben Ihre Bücher korrekt und prüfungsbereit."
+    "subheadline": "Wir übernehmen Buchhaltung, Buchführung und Lohnabrechnung nach Ihrem Bedarf — wöchentlich, zweiwöchentlich, monatlich, quartalsweise oder jährlich. Vom täglichen Beleg bis zum Jahresabschluss bleiben Ihre Bücher korrekt und prüfungsbereit.",
+    "teamNote": "Geleitet von einem Team aus Chartered Accountants und CPAs mit über 10 Jahren Branchenerfahrung"
+  },
+  "frequency": {
+    "headline": "In Ihrem Takt",
+    "subtext": "Wählen Sie den Rhythmus, der zu Ihrem Betrieb passt.",
+    "options": [
+      "Wöchentlich",
+      "Zweiwöchentlich",
+      "Monatlich",
+      "Quartalsweise",
+      "Jährlich"
+    ]
   },
   "overview": {
     "headline": "Vollständige Führung Ihrer Bücher",
@@ -37,13 +49,65 @@
     "headline": "Enthaltene Leistungen",
     "subtext": "Ein klarer, laufender Umfang — Sie wissen jederzeit, was abgedeckt ist.",
     "items": [
-      "Monatliche Buchführung (laufend)",
-      "Abstimmung von Bank und Kreditkarte",
-      "Kategorisierung von Erträgen und Aufwendungen",
-      "Prüfung des Kontenplans",
-      "Monatliche GuV und Bilanz",
-      "Buchungen und Anpassungen",
-      "Debitoren-/Kreditorenübersicht (Basis)"
+      {
+        "title": "Monatliche Buchführung (laufend)",
+        "description": "Jeder Verkauf, Einkauf, jede Ausgabe und jeder Zahlungseingang des Monats wird in Ihren Büchern erfasst. Ihre Konten bleiben aktuell, sodass sich zum Jahresabschluss nichts mehr aufstaut."
+      },
+      {
+        "title": "Abstimmung von Bank und Kreditkarte",
+        "description": "Jedes Bank- und Kartenkonto wird Zeile für Zeile mit Ihrer Buchhaltung abgestimmt. Fehlende Buchungen, Doppelbuchungen und unerklärliche Gebühren werden erkannt und geklärt."
+      },
+      {
+        "title": "Kategorisierung von Erträgen und Aufwendungen",
+        "description": "Buchungen landen jeden Monat nach denselben Regeln auf den richtigen Erlös- und Aufwandskonten. Ihre GuV zeigt, wohin das Geld wirklich fließt, und die Steuererklärung wird einfacher."
+      },
+      {
+        "title": "Prüfung des Kontenplans",
+        "description": "Wir bereinigen und strukturieren Ihren Kontenplan so, dass er zu Ihrem Geschäft passt. Weniger überflüssige Konten, klarere Auswertungen und eine Struktur, die mitwächst."
+      },
+      {
+        "title": "Monatliche GuV und Bilanz",
+        "description": "Eine geprüfte GuV und Bilanz jeden Monat. Sie sehen Gewinn, Liquidität und Verbindlichkeiten, solange noch Zeit zum Handeln ist."
+      },
+      {
+        "title": "Buchungen und Anpassungen",
+        "description": "Abgrenzungen, Vorauszahlungen, Abschreibungen und Korrekturen als ordentliche Buchungssätze. Ihre Abschlüsse zeigen die tatsächliche Lage, nicht nur Zahlungsströme."
+      },
+      {
+        "title": "Debitoren-/Kreditorenübersicht (Basis)",
+        "description": "Wer Ihnen etwas schuldet und wem Sie etwas schulden, mit Altersstruktur verfolgt. Überfällige Rechnungen und anstehende Zahlungen werden gemeldet, bevor sie zum Liquiditätsproblem werden."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Unsere Produkte für Buchhalter",
+    "subtext": "Kostenlose Analysetools, die unser eigenes Team bei Mandantenarbeit nutzt. Sie laufen vollständig in Ihrem Browser, und Ihre Daten werden nie hochgeladen.",
+    "freeLabel": "Kostenlos",
+    "items": [
+      {
+        "name": "Summen- und Saldenlisten-Analyse",
+        "description": "Importieren Sie Saldenlisten für bis zu drei Perioden aus Excel oder CSV und erhalten Sie in Minuten GuV, Bilanz, wichtige Kennzahlen und eine Abweichungsanalyse.",
+        "highlights": [
+          "Vergleich über drei Perioden mit automatischer Layout-Erkennung",
+          "15 Kernkennzahlen, EBITDA-Brücke und Working-Capital-Analyse",
+          "Prüfungspakete als Excel und PDF, direkt auf Ihrem Gerät erstellt"
+        ],
+        "cta": {
+          "label": "Saldenlisten-Analyse öffnen"
+        }
+      },
+      {
+        "name": "Kontoauszugs-Analyse",
+        "description": "Importieren Sie Kontoauszüge als PDF, Excel oder CSV, ordnen Sie jede Buchung mit eigenen Regeln zu und gleichen Sie sie mit Ihrem Hauptbuch ab.",
+        "highlights": [
+          "Liest PDF, XLSX und CSV, auch passwortgeschützte PDFs",
+          "Berichte zu Cashflow, Geschäftspartnern, Bankgebühren und hohen Beträgen",
+          "Hauptbuchabgleich mit exaktem, datumsbasiertem und unscharfem Matching"
+        ],
+        "cta": {
+          "label": "Kontoauszugs-Analyse öffnen"
+        }
+      }
     ]
   },
   "software": {
@@ -82,22 +146,125 @@
       "E-Commerce, Immobilien, Gesundheitswesen und freie Berufe"
     ]
   },
-  "frequency": {
-    "headline": "In Ihrem Takt",
-    "subtext": "Wählen Sie den Rhythmus, der zu Ihrem Betrieb passt.",
-    "options": [
-      "Wöchentlich",
-      "Zweiwöchentlich",
-      "Monatlich",
-      "Quartalsweise",
-      "Jährlich"
-    ]
+  "blog": {
+    "headline": "Neues aus unserem Buchhaltungsblog",
+    "subtext": "Praxisleitfäden zu Buchführung, Kontenabstimmung und Monatsabschluss, geschrieben von unserem Buchhaltungsteam.",
+    "readMore": "Weiterlesen",
+    "seeMore": {
+      "label": "Mehr ansehen"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Kostenlose Buchhaltungstools",
+    "subtext": "Machen Sie es selbst, mit denselben kostenlosen Tools, die wir unseren Mandanten empfehlen. Ohne Anmeldung.",
+    "seeMore": {
+      "label": "Alle Tools ansehen"
+    }
+  },
+  "calculators": {
+    "headline": "Kostenlose Rechner",
+    "subtext": "Schnelle Antworten zu Steuern, Krediten und Lohnabrechnung, berechnet während der Eingabe.",
+    "seeMore": {
+      "label": "Alle Rechner ansehen"
+    }
+  },
+  "contact": {
     "headline": "Bereit, die Bücher abzugeben?",
     "subtext": "Erzählen Sie uns von Ihrem Unternehmen, und wir stellen einen passenden Buchhaltungs- und Buchführungsplan zusammen.",
-    "cta": {
-      "label": "Sprechen Sie mit uns"
+    "floatingLabel": "Kontakt aufnehmen",
+    "form": {
+      "fields": [
+        {
+          "label": "Name"
+        },
+        {
+          "label": "E-Mail"
+        },
+        {
+          "label": "Telefon"
+        },
+        {
+          "label": "Name des Unternehmens"
+        },
+        {
+          "label": "Branche (optional)",
+          "placeholder": "Branche auswählen",
+          "options": [
+            {
+              "label": "Einzelhandel / E-Commerce"
+            },
+            {
+              "label": "Restaurant / Gastronomie"
+            },
+            {
+              "label": "Freiberufliche Dienstleistungen"
+            },
+            {
+              "label": "Immobilien / Hausverwaltung"
+            },
+            {
+              "label": "Gesundheitswesen"
+            },
+            {
+              "label": "Produktion / Handel"
+            },
+            {
+              "label": "Sonstiges"
+            }
+          ]
+        },
+        {
+          "label": "Gewünschter Rhythmus (optional)",
+          "placeholder": "Rhythmus auswählen",
+          "options": [
+            {
+              "label": "Wöchentlich"
+            },
+            {
+              "label": "Zweiwöchentlich"
+            },
+            {
+              "label": "Monatlich"
+            },
+            {
+              "label": "Quartalsweise"
+            },
+            {
+              "label": "Jährlich"
+            },
+            {
+              "label": "Noch unklar"
+            }
+          ]
+        },
+        {
+          "label": "Buchhaltungssoftware (optional)",
+          "placeholder": "Software auswählen",
+          "options": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+              "label": "Excel / Tabellen"
+            },
+            {
+              "label": "Noch keine"
+            },
+            {
+              "label": "Sonstiges"
+            }
+          ]
+        },
+        {
+          "label": "Nachricht"
+        }
+      ],
+      "submitLabel": "Anfrage senden"
     }
   }
 }

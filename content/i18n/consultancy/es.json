@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Consultoría",
     "headline": "Contabilidad, teneduría de libros y nóminas",
-    "subheadline": "Ofrecemos contabilidad, teneduría de libros y nóminas a la medida de tu negocio: semanal, quincenal, mensual, trimestral o anual. Del asiento diario a las cuentas anuales, mantenemos tus libros exactos y listos para una auditoría."
+    "subheadline": "Ofrecemos contabilidad, teneduría de libros y nóminas a la medida de tu negocio: semanal, quincenal, mensual, trimestral o anual. Del asiento diario a las cuentas anuales, mantenemos tus libros exactos y listos para una auditoría.",
+    "teamNote": "Liderado por un equipo de contadores públicos (Chartered Accountants y CPA) con más de 10 años de experiencia en el sector"
+  },
+  "frequency": {
+    "headline": "A tu ritmo",
+    "subtext": "Elige la cadencia que encaje con cómo funciona tu negocio.",
+    "options": [
+      "Semanal",
+      "Quincenal",
+      "Mensual",
+      "Trimestral",
+      "Anual"
+    ]
   },
   "overview": {
     "headline": "Mantenimiento completo de tus libros",
@@ -37,13 +49,65 @@
     "headline": "Servicios incluidos",
     "subtext": "Un alcance claro y continuo, para que siempre sepas qué está cubierto.",
     "items": [
-      "Teneduría mensual (continua)",
-      "Conciliación de bancos y tarjetas",
-      "Categorización de ingresos y gastos",
-      "Revisión del plan de cuentas",
-      "Resultados y balance mensuales",
-      "Asientos y ajustes",
-      "Seguimiento de cobros y pagos (básico)"
+      {
+        "title": "Teneduría mensual (continua)",
+        "description": "Cada venta, compra, gasto y cobro del mes queda registrado en tus libros. Tus mayores se mantienen al día, así que nunca llegas al cierre del año con trabajo atrasado."
+      },
+      {
+        "title": "Conciliación de bancos y tarjetas",
+        "description": "Cada cuenta bancaria y de tarjeta se concilia línea por línea con tus libros. Detectamos y resolvemos asientos faltantes, duplicados y cargos sin explicación."
+      },
+      {
+        "title": "Categorización de ingresos y gastos",
+        "description": "Las transacciones se registran en las cuentas de ingresos y gastos correctas, con el mismo criterio cada mes. Tu estado de resultados muestra adónde va realmente el dinero y la declaración de impuestos se simplifica."
+      },
+      {
+        "title": "Revisión del plan de cuentas",
+        "description": "Depuramos y reorganizamos tu plan de cuentas para que refleje cómo funciona tu negocio. Menos cuentas inútiles, informes más claros y una estructura que crece contigo."
+      },
+      {
+        "title": "Resultados y balance mensuales",
+        "description": "Un estado de resultados y un balance general revisados cada mes. Ves la utilidad, el efectivo y las obligaciones cuando todavía hay tiempo para actuar."
+      },
+      {
+        "title": "Asientos y ajustes",
+        "description": "Devengos, prepagos, depreciación y correcciones registrados como asientos de diario correctos. Tus estados reflejan la situación real, no solo los movimientos de efectivo."
+      },
+      {
+        "title": "Seguimiento de cobros y pagos (básico)",
+        "description": "Quién te debe y a quién le debes, con seguimiento por antigüedad. Las facturas vencidas y los pagos próximos se señalan antes de que se conviertan en un problema de flujo de caja."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Nuestros productos para contadores",
+    "subtext": "Herramientas de análisis gratuitas que nuestro propio equipo usa con sus clientes. Funcionan por completo en tu navegador y tus datos nunca se suben.",
+    "freeLabel": "Gratis",
+    "items": [
+      {
+        "name": "Análisis de balanza de comprobación",
+        "description": "Importa hasta tres periodos de balanzas de comprobación desde Excel o CSV y obtén en minutos el estado de resultados, el balance, las razones clave y el análisis de variaciones.",
+        "highlights": [
+          "Comparación de tres periodos con detección automática del formato",
+          "15 razones clave, puente de EBITDA y análisis del capital de trabajo",
+          "Paquetes de revisión en Excel y PDF generados en tu dispositivo"
+        ],
+        "cta": {
+          "label": "Abrir análisis de balanza"
+        }
+      },
+      {
+        "name": "Análisis de estados de cuenta bancarios",
+        "description": "Importa estados de cuenta en PDF, Excel o CSV, clasifica cada movimiento con reglas que tú controlas y concílialo con tu libro mayor.",
+        "highlights": [
+          "Lee PDF, XLSX y CSV, incluso PDF protegidos con contraseña",
+          "Informes de flujo de caja, contrapartes, comisiones bancarias y montos altos",
+          "Conciliación con el mayor por coincidencia exacta, por rango de fechas y aproximada"
+        ],
+        "cta": {
+          "label": "Abrir análisis bancario"
+        }
+      }
     ]
   },
   "software": {
@@ -82,22 +146,125 @@
       "Comercio electrónico, inmobiliario, salud y servicios profesionales"
     ]
   },
-  "frequency": {
-    "headline": "A tu ritmo",
-    "subtext": "Elige la cadencia que encaje con cómo funciona tu negocio.",
-    "options": [
-      "Semanal",
-      "Quincenal",
-      "Mensual",
-      "Trimestral",
-      "Anual"
-    ]
+  "blog": {
+    "headline": "Lo último de nuestro blog de contabilidad",
+    "subtext": "Guías prácticas sobre teneduría de libros, conciliación y cierre de mes, escritas por nuestro equipo contable.",
+    "readMore": "Leer más",
+    "seeMore": {
+      "label": "Ver más"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Herramientas contables gratuitas",
+    "subtext": "Hazlo tú mismo con las mismas herramientas gratuitas que recomendamos a nuestros clientes. Sin registro.",
+    "seeMore": {
+      "label": "Ver todas las herramientas"
+    }
+  },
+  "calculators": {
+    "headline": "Calculadoras gratuitas",
+    "subtext": "Respuestas rápidas sobre impuestos, préstamos y nómina, calculadas mientras escribes.",
+    "seeMore": {
+      "label": "Ver todas las calculadoras"
+    }
+  },
+  "contact": {
     "headline": "¿Listo para delegar tus libros?",
     "subtext": "Cuéntanos cómo es tu negocio y preparamos un plan de contabilidad y teneduría a tu medida.",
-    "cta": {
-      "label": "Habla con nosotros"
+    "floatingLabel": "Contáctanos",
+    "form": {
+      "fields": [
+        {
+          "label": "Nombre"
+        },
+        {
+          "label": "Correo electrónico"
+        },
+        {
+          "label": "Teléfono"
+        },
+        {
+          "label": "Nombre del negocio"
+        },
+        {
+          "label": "Tipo de negocio (opcional)",
+          "placeholder": "Selecciona el tipo de negocio",
+          "options": [
+            {
+              "label": "Comercio minorista / E-commerce"
+            },
+            {
+              "label": "Restaurante / Negocio de alimentos"
+            },
+            {
+              "label": "Servicios profesionales"
+            },
+            {
+              "label": "Bienes raíces / Administración de propiedades"
+            },
+            {
+              "label": "Salud"
+            },
+            {
+              "label": "Manufactura / Comercio"
+            },
+            {
+              "label": "Otro"
+            }
+          ]
+        },
+        {
+          "label": "Frecuencia preferida (opcional)",
+          "placeholder": "Selecciona la frecuencia",
+          "options": [
+            {
+              "label": "Semanal"
+            },
+            {
+              "label": "Quincenal"
+            },
+            {
+              "label": "Mensual"
+            },
+            {
+              "label": "Trimestral"
+            },
+            {
+              "label": "Anual"
+            },
+            {
+              "label": "Aún no lo sé"
+            }
+          ]
+        },
+        {
+          "label": "Software contable (opcional)",
+          "placeholder": "Selecciona el software",
+          "options": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+              "label": "Excel / Hojas de cálculo"
+            },
+            {
+              "label": "Aún no uso ninguno"
+            },
+            {
+              "label": "Otro"
+            }
+          ]
+        },
+        {
+          "label": "Mensaje"
+        }
+      ],
+      "submitLabel": "Enviar consulta"
     }
   }
 }

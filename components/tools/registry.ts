@@ -186,6 +186,10 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
     Tool: dynamic(() => import("@/components/tools/SupplierBook/SupplierBookTool").then((m) => m.SupplierBookTool)),
     schema: true, suggested: true, suspense: false,
   },
+  "supplier-ledger": {
+    Tool: dynamic(() => import("@/components/tools/SupplierLedger/SupplierLedgerTool").then((m) => m.SupplierLedgerTool)),
+    schema: true, suggested: true, suspense: false,
+  },
   "trial-balance": {
     Tool: dynamic(() => import("@/components/tools/bookkeeping/TrialBalanceTool").then((m) => m.TrialBalanceTool)),
     schema: false, suggested: false, suspense: false,

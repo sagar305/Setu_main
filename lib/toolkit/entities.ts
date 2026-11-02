@@ -77,6 +77,7 @@ export type EntityName =
   | "cashbook"
   | "appointments"
   | "ledger"
+  | "supplier_ledger"
   | "purchases"
   | "inventory"
   | "payments"
@@ -254,6 +255,15 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     ownedBy: "workspace",
     primaryEditor: "customer-ledger",
     store: "ledger",
+    dangerousOps: ["delete", "adjust-balance"],
+    status: "live",
+  },
+  supplier_ledger: {
+    name: "supplier_ledger",
+    label: "Supplier Ledger (Payables)",
+    ownedBy: "workspace",
+    primaryEditor: "supplier-ledger",
+    store: "supplier_ledger",
     dangerousOps: ["delete", "adjust-balance"],
     status: "live",
   },

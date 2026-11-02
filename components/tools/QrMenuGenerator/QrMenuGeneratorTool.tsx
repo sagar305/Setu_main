@@ -52,6 +52,8 @@ import { exportMenuFile, importMenuFile } from "@/lib/qrmenu-io";
 import { useI18n } from "@/lib/i18n";
 import { fill, splitAround } from "@/lib/i18n/translate";
 import { MenuDisplay } from "./MenuDisplay";
+import { LinkedPosMenu } from "./LinkedPosMenu";
+import { getPosMenuLink, subscribePosMenuLink, type PosMenuLink } from "@/lib/qrmenu-pos-link";
 import { ShareButton } from "@/components/tools/ShareButton";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
@@ -78,6 +80,12 @@ export function QrMenuGeneratorTool() {
   const [origin, setOrigin] = useState("");
   const [copied, setCopied] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  // Set while Free Dine owns this browser's free QR menu (lib/qrmenu-pos-link).
+  const [posLink, setPosLink] = useState<PosMenuLink | null>(null);
+  useEffect(() => {
+    setPosLink(getPosMenuLink());
+    return subscribePosMenuLink(() => setPosLink(getPosMenuLink()));
+  }, []);
   const [importing, setImporting] = useState(false);
   const importInputRef = useRef<HTMLInputElement>(null);
 
@@ -448,6 +456,12 @@ export function QrMenuGeneratorTool() {
   };
 
   // --- render ----------------------------------------------------------------
+
+  // Free Dine keeps this menu's dishes up to date, so editing them here would
+  // only be overwritten. Show its QR and let the owner change the look instead.
+  if (posLink) {
+    return <LinkedPosMenu link={posLink} accentPresets={ACCENT_PRESETS} inputClass={inputClass} />;
+  }
 
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">

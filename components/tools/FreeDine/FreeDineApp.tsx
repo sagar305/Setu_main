@@ -31,7 +31,11 @@ import { InventoryScreen } from "./InventoryScreen";
 import { ReservationsScreen } from "./ReservationsScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
+import { QrMenuSyncProvider } from "./QrMenuSync";
 import { previewStyleSheet } from "./printing";
+import { useWhatsNew } from "@/lib/hooks/useWhatsNew";
+import { NewDot } from "@/components/whatsNew/NewPill";
+import { WhatsNewProvider } from "@/components/whatsNew/WhatsNewContext";
 
 const NAV_ITEMS: { id: ScreenId; label: TKey; icon: typeof Receipt }[] = [
   { id: "floor", label: "dnFlFloor", icon: LayoutGrid },
@@ -61,11 +65,22 @@ function DineShell({
   const [locked, setLocked] = useState(hasPin);
   const unlockedOnceRef = useRef(false);
 
+  // What's new for restaurants set up before a feature shipped. The QR menu
+  // counts as taken up once it is connected, free or premium.
+  const qrMenuOn = settings.qrMenuMode !== "off";
+  const isTakenUp = useCallback(
+    (update: { id: string }) => update.id === "dine-qr-sync" && qrMenuOn,
+    [qrMenuOn]
+  );
+  const whatsNew = useWhatsNew("dine", business?.createdAt, isTakenUp);
+  const { visit } = whatsNew;
+
   const navigate = useCallback<NavigateFn>((next, value) => {
+    visit(next);
     setOpenTicketId(null);
     setScreen(next);
     setQuery(value ? { screen: next, value } : null);
-  }, []);
+  }, [visit]);
 
   const lockNow = useCallback(() => setLocked(true), []);
 
@@ -93,6 +108,7 @@ function DineShell({
   const runningCount = openTickets.length;
 
   return (
+    <WhatsNewProvider value={whatsNew}>
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -169,6 +185,7 @@ function DineShell({
             >
               <item.icon className="h-4 w-4" />
               {t(item.label)}
+              {screen !== item.id && whatsNew.hasDot(item.id) && <NewDot label={t("wnNewOnTab")} />}
             </button>
           ))}
         </nav>
@@ -183,7 +200,10 @@ function DineShell({
               <FloorScreen onOpenTicket={setOpenTicketId} onNavigate={navigate} />
             </div>
             <div className={screen === "menu" ? "" : "hidden"}>
-              <MenuScreen externalQuery={query?.screen === "menu" ? query.value : undefined} />
+              <MenuScreen
+                externalQuery={query?.screen === "menu" ? query.value : undefined}
+                onNavigate={navigate}
+              />
             </div>
             <div className={screen === "tables" ? "" : "hidden"}>
               <TablesScreen />
@@ -219,6 +239,7 @@ function DineShell({
         />
       )}
     </div>
+    </WhatsNewProvider>
   );
 }
 
@@ -252,7 +273,13 @@ function DineRouter({
   }
   if (status === "welcome") return <WelcomeScreen />;
   if (status === "setup") return <SetupScreen />;
-  return <DineShell fullscreen={fullscreen} onToggleFullscreen={onToggleFullscreen} />;
+  // Only the counter keeps the QR menu updated — the kitchen screen is a
+  // separate app and never mounts this.
+  return (
+    <QrMenuSyncProvider>
+      <DineShell fullscreen={fullscreen} onToggleFullscreen={onToggleFullscreen} />
+    </QrMenuSyncProvider>
+  );
 }
 
 export function FreeDineApp() {

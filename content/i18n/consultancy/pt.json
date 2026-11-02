@@ -15,7 +15,19 @@
   "hero": {
     "eyebrow": "Setu Consultoria",
     "headline": "Contabilidade, escrituração e folha de pagamento",
-    "subheadline": "Oferecemos contabilidade, escrituração e folha de pagamento sob medida — semanal, quinzenal, mensal, trimestral ou anual. Do lançamento do dia a dia às demonstrações financeiras, mantemos seus livros corretos e prontos para auditoria."
+    "subheadline": "Oferecemos contabilidade, escrituração e folha de pagamento sob medida — semanal, quinzenal, mensal, trimestral ou anual. Do lançamento do dia a dia às demonstrações financeiras, mantemos seus livros corretos e prontos para auditoria.",
+    "teamNote": "Liderado por uma equipe de contadores (Chartered Accountants e CPAs) com mais de 10 anos de experiência no setor"
+  },
+  "frequency": {
+    "headline": "No seu ritmo",
+    "subtext": "Escolha a periodicidade que combina com o jeito que o seu negócio funciona.",
+    "options": [
+      "Semanal",
+      "Quinzenal",
+      "Mensal",
+      "Trimestral",
+      "Anual"
+    ]
   },
   "overview": {
     "headline": "Manutenção completa dos seus livros contábeis",
@@ -37,13 +49,65 @@
     "headline": "Serviços incluídos",
     "subtext": "Um escopo claro e contínuo, para você saber sempre o que está coberto.",
     "items": [
-      "Escrituração mensal (contínua)",
-      "Conciliação de banco e cartão",
-      "Categorização de receitas e despesas",
-      "Revisão do plano de contas",
-      "DRE e balanço mensais",
-      "Lançamentos e ajustes",
-      "Controle de contas a pagar/receber (básico)"
+      {
+        "title": "Escrituração mensal (contínua)",
+        "description": "Cada venda, compra, despesa e recebimento do mês é lançado nos seus livros. Seus razões ficam sempre em dia, então o fechamento do ano nunca vira uma pilha de pendências."
+      },
+      {
+        "title": "Conciliação de banco e cartão",
+        "description": "Cada conta bancária e de cartão é conciliada linha a linha com a sua contabilidade. Lançamentos faltantes, duplicidades e tarifas sem explicação são identificados e resolvidos."
+      },
+      {
+        "title": "Categorização de receitas e despesas",
+        "description": "As transações vão para as contas de receita e despesa corretas, com o mesmo critério todo mês. Sua DRE mostra para onde o dinheiro realmente vai, e a apuração de impostos fica mais simples."
+      },
+      {
+        "title": "Revisão do plano de contas",
+        "description": "Limpamos e reorganizamos o seu plano de contas para refletir como o seu negócio funciona. Menos contas inúteis, relatórios mais claros e uma estrutura que cresce com você."
+      },
+      {
+        "title": "DRE e balanço mensais",
+        "description": "DRE e balanço patrimonial revisados todo mês. Você enxerga lucro, caixa e obrigações enquanto ainda há tempo para agir."
+      },
+      {
+        "title": "Lançamentos e ajustes",
+        "description": "Provisões, pagamentos antecipados, depreciação e correções lançados como lançamentos contábeis adequados. Seus demonstrativos mostram a posição real, não só a movimentação de caixa."
+      },
+      {
+        "title": "Controle de contas a pagar/receber (básico)",
+        "description": "Quem deve a você e a quem você deve, com acompanhamento por vencimento. Faturas em atraso e pagamentos próximos são sinalizados antes de virarem um problema de fluxo de caixa."
+      }
+    ]
+  },
+  "products": {
+    "headline": "Nossos produtos para contadores",
+    "subtext": "Ferramentas de análise gratuitas que a nossa própria equipe usa no trabalho com clientes. Funcionam inteiramente no seu navegador, e seus dados nunca são enviados.",
+    "freeLabel": "Grátis",
+    "items": [
+      {
+        "name": "Análise de balancete",
+        "description": "Importe até três períodos de balancetes do Excel ou CSV e obtenha em minutos a DRE, o balanço, os principais índices e a análise de variações.",
+        "highlights": [
+          "Comparação de três períodos com detecção automática do layout",
+          "15 índices principais, ponte de EBITDA e análise de capital de giro",
+          "Pacotes de revisão em Excel e PDF gerados no seu dispositivo"
+        ],
+        "cta": {
+          "label": "Abrir análise de balancete"
+        }
+      },
+      {
+        "name": "Análise de extratos bancários",
+        "description": "Importe extratos bancários em PDF, Excel ou CSV, classifique cada transação com regras que você controla e concilie com o seu razão.",
+        "highlights": [
+          "Lê PDF, XLSX e CSV, inclusive PDFs protegidos por senha",
+          "Relatórios de fluxo de caixa, contrapartes, tarifas bancárias e valores altos",
+          "Conciliação com o razão por correspondência exata, por janela de datas e aproximada"
+        ],
+        "cta": {
+          "label": "Abrir análise de extratos"
+        }
+      }
     ]
   },
   "software": {
@@ -82,22 +146,125 @@
       "E-commerce, imobiliário, saúde e serviços profissionais"
     ]
   },
-  "frequency": {
-    "headline": "No seu ritmo",
-    "subtext": "Escolha a periodicidade que combina com o jeito que o seu negócio funciona.",
-    "options": [
-      "Semanal",
-      "Quinzenal",
-      "Mensal",
-      "Trimestral",
-      "Anual"
-    ]
+  "blog": {
+    "headline": "O mais recente do nosso blog de contabilidade",
+    "subtext": "Guias práticos sobre escrituração, conciliação e fechamento mensal, escritos pela nossa equipe contábil.",
+    "readMore": "Ler mais",
+    "seeMore": {
+      "label": "Ver mais"
+    }
   },
-  "cta": {
+  "tools": {
+    "headline": "Ferramentas contábeis gratuitas",
+    "subtext": "Faça você mesmo com as mesmas ferramentas gratuitas que recomendamos aos nossos clientes. Sem cadastro.",
+    "seeMore": {
+      "label": "Ver todas as ferramentas"
+    }
+  },
+  "calculators": {
+    "headline": "Calculadoras gratuitas",
+    "subtext": "Respostas rápidas sobre impostos, empréstimos e folha de pagamento, calculadas enquanto você digita.",
+    "seeMore": {
+      "label": "Ver todas as calculadoras"
+    }
+  },
+  "contact": {
     "headline": "Pronto para passar seus livros adiante?",
     "subtext": "Conte sobre o seu negócio e montamos um plano de contabilidade e escrituração que sirva para você.",
-    "cta": {
-      "label": "Fale com a gente"
+    "floatingLabel": "Fale conosco",
+    "form": {
+      "fields": [
+        {
+          "label": "Nome"
+        },
+        {
+          "label": "E-mail"
+        },
+        {
+          "label": "Telefone"
+        },
+        {
+          "label": "Nome do negócio"
+        },
+        {
+          "label": "Tipo de negócio (opcional)",
+          "placeholder": "Selecione o tipo de negócio",
+          "options": [
+            {
+              "label": "Varejo / E-commerce"
+            },
+            {
+              "label": "Restaurante / Negócio de alimentação"
+            },
+            {
+              "label": "Serviços profissionais"
+            },
+            {
+              "label": "Imobiliário / Administração de imóveis"
+            },
+            {
+              "label": "Saúde"
+            },
+            {
+              "label": "Indústria / Comércio"
+            },
+            {
+              "label": "Outro"
+            }
+          ]
+        },
+        {
+          "label": "Frequência preferida (opcional)",
+          "placeholder": "Selecione a frequência",
+          "options": [
+            {
+              "label": "Semanal"
+            },
+            {
+              "label": "Quinzenal"
+            },
+            {
+              "label": "Mensal"
+            },
+            {
+              "label": "Trimestral"
+            },
+            {
+              "label": "Anual"
+            },
+            {
+              "label": "Ainda não sei"
+            }
+          ]
+        },
+        {
+          "label": "Software contábil (opcional)",
+          "placeholder": "Selecione o software",
+          "options": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+              "label": "Excel / Planilhas"
+            },
+            {
+              "label": "Ainda não uso nenhum"
+            },
+            {
+              "label": "Outro"
+            }
+          ]
+        },
+        {
+          "label": "Mensagem"
+        }
+      ],
+      "submitLabel": "Enviar consulta"
     }
   }
 }

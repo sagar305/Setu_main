@@ -37,6 +37,12 @@ export interface QrMenuItem {
   description: string;
   tag: DietTag;
   variant: QrVariant | null;
+  /**
+   * Further option groups — add-ons, spice level — after the variant. Only
+   * Free Dine writes these; the free editor neither shows nor keeps them. An
+   * add-on price is written "+30", meaning on top of the dish's price.
+   */
+  extras?: QrVariant[];
 }
 
 export interface QrMenuCategory {
@@ -60,10 +66,15 @@ export interface QrMenuData {
 // The 5th element is only written when a dish actually has variants, so menus
 // without them encode to exactly the same bytes as before and QR codes printed
 // from earlier versions still decode here.
+//
+// An optional 6th element carries further option groups (see QrMenuItem.extras).
+// When a dish has extras but no variant, the 5th element is 0. Readers that
+// predate it simply ignore the extra element.
 type WireVariant = [string, [string, string][]];
 type WireItem =
   | [string, string, string, number]
-  | [string, string, string, number, WireVariant];
+  | [string, string, string, number, WireVariant]
+  | [string, string, string, number, WireVariant | 0, WireVariant[]];
 interface WireCategory {
   n: string;
   i: WireItem[];
@@ -96,6 +107,17 @@ export function createEmptyItem(): QrMenuItem {
 
 export function createEmptyVariant(): QrVariant {
   return { name: "", options: [{ name: "", price: "" }] };
+}
+
+/**
+ * A menu price as diners read it: "249" → "₹249", an add-on "+30" → "+₹30",
+ * and anything else ("MRP", "Market price") exactly as typed.
+ */
+export function displayPrice(raw: string): string {
+  const price = raw.trim();
+  if (/^[0-9]/.test(price)) return `₹${price}`;
+  if (/^\+[0-9]/.test(price)) return `+₹${price.slice(1)}`;
+  return price;
 }
 
 /** Variants replace the single price, so only count ones with a named option. */
@@ -138,17 +160,22 @@ function toWire(menu: QrMenuData): WireMenu {
               TAG_TO_NUM[item.tag] ?? 0,
             ];
 
-            const options = (item.variant?.options ?? [])
-              .filter((option) => option.name.trim())
-              .map((option): [string, string] => [
-                option.name.trim(),
-                option.price.trim(),
-              ]);
+            const toWireVariant = (group: QrVariant | null | undefined): WireVariant | null => {
+              const options = (group?.options ?? [])
+                .filter((option) => option.name.trim())
+                .map((option): [string, string] => [option.name.trim(), option.price.trim()]);
+              return options.length > 0 ? [group?.name.trim() ?? "", options] : null;
+            };
+            const variant = toWireVariant(item.variant);
+            const extras = (item.extras ?? [])
+              .map(toWireVariant)
+              .filter((group): group is WireVariant => group !== null);
 
-            // Omit the element entirely when there are no variants, so menus
+            // Omit the elements entirely when there is nothing in them, so menus
             // without them cost nothing extra in the QR payload.
-            if (options.length === 0) return base;
-            return [...base, [item.variant?.name.trim() ?? "", options]];
+            if (extras.length > 0) return [...base, variant ?? 0, extras];
+            if (!variant) return base;
+            return [...base, variant];
           }),
       }))
       .filter((category) => category.n || category.i.length > 0),
@@ -195,7 +222,12 @@ function fromWire(wire: WireMenu): QrMenuData {
         description: typeof item[2] === "string" ? item[2] : "",
         tag: NUM_TO_TAG[item[3]] ?? "",
         // Absent on QR codes generated before variants existed.
-        variant: parseWireVariant(item[4]),
+        variant: parseWireVariant(item[4] || undefined),
+        extras: Array.isArray(item[5])
+          ? item[5]
+              .map((group) => parseWireVariant(group))
+              .filter((group): group is QrVariant => group !== null)
+          : [],
       })),
     })),
   };

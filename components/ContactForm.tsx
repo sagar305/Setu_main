@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
-import type { ContactContent } from "@/lib/content";
 import { useI18n } from "@/lib/i18n";
 import {
   composePhone,
@@ -14,7 +13,54 @@ import {
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function ContactForm({ form }: { form: ContactContent["form"] }) {
+export type ContactFormField = {
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+  /** Select only: the empty first option, shown until the reader picks one. */
+  placeholder?: string;
+  /** Select only. `value` is what reaches the inbox, `label` what the reader sees. */
+  options?: { value: string; label: string }[];
+};
+
+export type ContactFormContent = {
+  fields: ContactFormField[];
+  submitLabel: string;
+};
+
+/** The label text, with a red asterisk after it when the field is required. */
+function FieldLabel({ field, mark }: { field: ContactFormField; mark: boolean }) {
+  // One span, so the asterisk stays on the label's line inside the
+  // flex-column <label> rather than becoming its own row.
+  return (
+    <span>
+      {field.label}
+      {mark && field.required && (
+        // The input's own `required` attribute is what assistive tech announces;
+        // the asterisk is the visual cue only.
+        <span aria-hidden="true" className="ms-0.5 text-red-600">
+          *
+        </span>
+      )}
+    </span>
+  );
+}
+
+export function ContactForm({
+  form,
+  topic,
+  markRequired = false,
+}: {
+  form: ContactFormContent;
+  /**
+   * Sent with the submission so the inbox can tell a consultancy enquiry from a
+   * general one, and used as the analytics form name. Omitted on /contact.
+   */
+  topic?: string;
+  /** Show a red asterisk after the label of each required field. */
+  markRequired?: boolean;
+}) {
   const { t, lang } = useI18n();
   const [status, setStatus] = useState<Status>("idle");
   const [country, setCountry] = useState(DEFAULT_DIAL_COUNTRY);
@@ -34,7 +80,8 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
     }
     setPhoneError(false);
     setStatus("submitting");
-    trackEvent("form_submitted", { form: "contact" });
+    const formName = topic ?? "contact";
+    trackEvent("form_submitted", { form: formName });
 
     const element = event.currentTarget;
     const { phoneNational: _raw, ...fields } = Object.fromEntries(new FormData(element));
@@ -43,6 +90,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
       // Whatever spacing or brackets were typed, one shape leaves the browser.
       phone: composePhone(country, phone),
       phoneCountry: country,
+      ...(topic ? { topic } : {}),
     };
 
     try {
@@ -52,7 +100,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
         body: JSON.stringify(data),
       });
       setStatus(res.ok ? "success" : "error");
-      trackEvent(res.ok ? "form_succeeded" : "form_failed", { form: "contact" });
+      trackEvent(res.ok ? "form_succeeded" : "form_failed", { form: formName });
       if (res.ok) {
         element.reset();
         setPhone("");
@@ -60,7 +108,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
       }
     } catch {
       setStatus("error");
-      trackEvent("form_failed", { form: "contact" });
+      trackEvent("form_failed", { form: formName });
     }
   }
 
@@ -79,8 +127,29 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
         if (field.type === "textarea") {
           return (
             <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-              {field.label}
+              <FieldLabel field={field} mark={markRequired} />
               <textarea name={field.name} required={field.required} rows={5} className={inputClass} />
+            </label>
+          );
+        }
+
+        if (field.type === "select") {
+          return (
+            <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
+              <FieldLabel field={field} mark={markRequired} />
+              <select
+                name={field.name}
+                required={field.required}
+                defaultValue=""
+                className={`${inputClass} bg-white`}
+              >
+                <option value="">{field.placeholder ?? ""}</option>
+                {field.options?.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             </label>
           );
         }
@@ -88,7 +157,9 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
         if (field.type === "tel") {
           return (
             <div key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-              <label htmlFor="contact-phone">{field.label}</label>
+              <label htmlFor="contact-phone">
+                <FieldLabel field={field} mark={markRequired} />
+              </label>
               <div className="flex gap-2">
                 <select
                   name="phoneCountry"
@@ -136,7 +207,7 @@ export function ContactForm({ form }: { form: ContactContent["form"] }) {
 
         return (
           <label key={field.name} className="flex flex-col gap-2 text-sm font-medium text-ink">
-            {field.label}
+            <FieldLabel field={field} mark={markRequired} />
             <input
               type={field.type}
               name={field.name}

@@ -12,6 +12,16 @@ export async function POST(request: Request) {
   }
 
   const { name, email, phone, phoneCountry, company, message } = body as Record<string, string>;
+  // The consultancy page's form adds these three, all optional. Anything that is
+  // not a short string is dropped rather than echoed into the email.
+  const optional = (key: string) => {
+    const value = body[key];
+    return typeof value === "string" && value.trim() ? value.trim().slice(0, 100) : null;
+  };
+  const isConsultancy = optional("topic") === "consultancy";
+  const businessType = optional("businessType");
+  const frequency = optional("frequency");
+  const software = optional("software");
 
   // Checked here as well as in the form: the browser's `required` only binds
   // the browser, and this endpoint is reachable without one.
@@ -28,12 +38,18 @@ export async function POST(request: Request) {
     from: "Setu Technology <noreply@setutechnology.com>",
     to: NOTIFY_EMAIL,
     replyTo: email,
-    subject: `New contact form submission from ${name}`,
+    subject: isConsultancy
+      ? `New consultancy enquiry from ${name}`
+      : `New contact form submission from ${name}`,
     text: [
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}${phoneCountry ? ` (${phoneCountry})` : ""}`,
       company ? `Business name: ${company}` : null,
+      businessType ? `Business type: ${businessType}` : null,
+      frequency ? `Preferred frequency: ${frequency}` : null,
+      software ? `Accounting software: ${software}` : null,
+      isConsultancy ? "Source: Consultancy page" : null,
       "",
       "Message:",
       message,

@@ -193,3 +193,89 @@ export const REVIEW_BANNER_COPY: Record<LanguageCode, ReviewBannerCopy> = {
     dismiss: "关闭",
   },
 };
+
+// ---------------------------------------------------------------------------
+// TEMPORARY — DIWALI 2026. Remove after Diwali (see lib/festive.ts).
+//
+// During Diwali the banner greets instead of asking for a review. Same pages,
+// same close button; only the words change. Every language the site is
+// published in, like the review copy above.
+// ---------------------------------------------------------------------------
+
+export type DiwaliBannerCopy = {
+  /** The greeting, in bold. The only line shown on a phone. */
+  lead: string;
+  /** The wish; from the small breakpoint up. */
+  body: string;
+};
+
+export const DIWALI_BANNER_COPY: Record<LanguageCode, DiwaliBannerCopy> = {
+  en: {
+    lead: "Shubh Deepavali from Team Setu Technology!",
+    body: "May your business shine bright and your books always balance.",
+  },
+  hi: {
+    lead: "Team Setu Technology की ओर से शुभ दीपावली!",
+    body: "आपका कारोबार जगमगाए और आपके खाते हमेशा बराबर रहें।",
+  },
+  bn: {
+    lead: "Team Setu Technology-র পক্ষ থেকে শুভ দীপাবলি!",
+    body: "আপনার ব্যবসা আলোয় ঝলমল করুক, আর হিসাব সবসময় মিলে যাক।",
+  },
+  ta: {
+    lead: "Team Setu Technology-இன் இனிய தீபாவளி நல்வாழ்த்துகள்!",
+    body: "உங்கள் வணிகம் ஒளிர்ந்திடவும், உங்கள் கணக்குகள் என்றும் சரியாக இருக்கவும் வாழ்த்துகிறோம்.",
+  },
+  te: {
+    lead: "Team Setu Technology తరఫున దీపావళి శుభాకాంక్షలు!",
+    body: "మీ వ్యాపారం వెలుగులతో నిండాలి, మీ లెక్కలు ఎప్పుడూ సరిపోవాలి.",
+  },
+  mr: {
+    lead: "Team Setu Technology कडून दीपावलीच्या हार्दिक शुभेच्छा!",
+    body: "तुमचा व्यवसाय उजळून निघो आणि तुमचे हिशोब नेहमी जुळोत.",
+  },
+  gu: {
+    lead: "Team Setu Technology તરફથી શુભ દીપાવલી!",
+    body: "તમારો વેપાર ઝળહળતો રહે અને તમારા હિસાબ હંમેશાં સરભર રહે.",
+  },
+  kn: {
+    lead: "Team Setu Technology ಕಡೆಯಿಂದ ದೀಪಾವಳಿಯ ಶುಭಾಶಯಗಳು!",
+    body: "ನಿಮ್ಮ ವ್ಯಾಪಾರ ಬೆಳಗಲಿ, ನಿಮ್ಮ ಲೆಕ್ಕಗಳು ಸದಾ ಸರಿಹೊಂದಲಿ.",
+  },
+  ml: {
+    lead: "Team Setu Technology-യുടെ ദീപാവലി ആശംസകൾ!",
+    body: "നിങ്ങളുടെ ബിസിനസ് പ്രകാശിക്കട്ടെ, കണക്കുകൾ എപ്പോഴും ഒത്തുവരട്ടെ.",
+  },
+  pa: {
+    lead: "Team Setu Technology ਵੱਲੋਂ ਦੀਵਾਲੀ ਦੀਆਂ ਲੱਖ-ਲੱਖ ਵਧਾਈਆਂ!",
+    body: "ਤੁਹਾਡਾ ਕਾਰੋਬਾਰ ਰੌਸ਼ਨ ਰਹੇ ਅਤੇ ਤੁਹਾਡਾ ਹਿਸਾਬ ਹਮੇਸ਼ਾ ਸਹੀ ਰਹੇ।",
+  },
+  es: {
+    lead: "¡Feliz Diwali de parte del equipo de Setu Technology!",
+    body: "Que tu negocio brille y tus cuentas siempre cuadren.",
+  },
+  fr: {
+    lead: "Joyeux Diwali de la part de l'équipe Setu Technology !",
+    body: "Que votre entreprise rayonne et que vos comptes soient toujours équilibrés.",
+  },
+  ar: {
+    lead: "عيد ديوالي سعيد من فريق Setu Technology!",
+    body: "نتمنى أن يزدهر عملك وأن تبقى حساباتك متوازنة دائمًا.",
+  },
+  pt: {
+    lead: "Feliz Diwali da equipe Setu Technology!",
+    body: "Que o seu negócio brilhe e as suas contas sempre fechem.",
+  },
+  id: {
+    lead: "Selamat Diwali dari Tim Setu Technology!",
+    body: "Semoga usaha Anda bersinar terang dan pembukuan Anda selalu seimbang.",
+  },
+  de: {
+    lead: "Frohes Diwali vom Team Setu Technology!",
+    body: "Möge Ihr Geschäft hell erstrahlen und Ihre Bücher immer stimmen.",
+  },
+  zh: {
+    lead: "Setu Technology 团队祝你排灯节快乐！",
+    body: "愿你的生意红红火火，账目永远平衡。",
+  },
+};

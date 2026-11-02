@@ -4,6 +4,8 @@ import { CalculatorIcon } from "@/components/calculators/CalculatorIcon";
 import type { LanguageCode } from "@/lib/i18n/config";
 import { itemLocalesFor, itemPathFor, localizedHref } from "@/lib/i18n/pages";
 import { translate } from "@/lib/i18n/translate";
+import { isNewTool } from "@/lib/whatsNew";
+import { NewPill } from "@/components/whatsNew/NewPill";
 
 /** Just the fields a card shows, so a localized item can be passed straight in. */
 type CardItem = {
@@ -38,8 +40,11 @@ export function ToolCard({
       href={href}
       className="group flex flex-col rounded-2xl border border-muted-line/30 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo/30 hover:shadow-md"
     >
-      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream text-indigo">
-        <CalculatorIcon name={item.icon} className="h-5 w-5" />
+      <span className="flex items-start justify-between gap-3">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cream text-indigo">
+          <CalculatorIcon name={item.icon} className="h-5 w-5" />
+        </span>
+        {isNewTool(item.slug) && <NewPill label={translate(lang, "wnNew")} />}
       </span>
       <h3 className="mt-4 text-lg font-bold text-ink">{item.name}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{item.shortDescription}</p>

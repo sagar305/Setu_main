@@ -18,7 +18,9 @@ import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore, generateLocalId } from "@/lib/hooks/useLocalStore";
 import { useFinanceWorkspace } from "@/lib/hooks/useFinanceWorkspace";
 import { usePreferredCurrency } from "@/lib/hooks/usePreferredCurrency";
-import { formatMoney } from "@/lib/pos/types";
+import { formatMoney, generateId, nowIso } from "@/lib/pos/types";
+import { computePayables, openBills } from "@/lib/toolkit/payables";
+import { saveSupplierLedgerEntry, type SupplierLedgerEntry } from "@/lib/toolkit/workspace";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n, type DictKey } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
@@ -31,6 +33,13 @@ type AgingDoc = {
   number: string;
   dueDate: string;
   amount: number;
+  /**
+   * Payables pulled from the workspace carry the bill they came from
+   * ("p:<purchaseId>" / "e:<ledgerEntryId>"), so marking one paid can record
+   * the payment in the Supplier Ledger and it never gets pulled again.
+   */
+  billRef?: string;
+  supplierId?: string | null;
 };
 
 const BUCKETS = [
@@ -129,6 +138,8 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
   const [dueDate, setDueDate] = useState(todayIso());
   const [amount, setAmount] = useState("");
   const [deleting, setDeleting] = useState<AgingDoc | null>(null);
+  const [paying, setPaying] = useState<AgingDoc | null>(null);
+  const [pullNote, setPullNote] = useState<string | null>(null);
 
   // Receivables come from customers still carrying a positive ledger balance
   // (using their oldest credit's date as the aging reference). Payables come
@@ -156,15 +167,53 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
         }));
       setDocs(pulled);
     } else {
-      const pulled: AgingDoc[] = workspace.purchases.map((p) => ({
+      // Only bills still owed: Purchase Register entries bought on Credit
+      // (plus bills typed into the Supplier Ledger), minus every payment
+      // already recorded against them. Cash/UPI/Card/Bank purchases were paid
+      // at the counter and never show up here.
+      const positions = computePayables(
+        workspace.suppliers,
+        workspace.purchases,
+        workspace.supplierLedger,
+      );
+      const pulled: AgingDoc[] = openBills(positions).map((b) => ({
         id: generateLocalId(),
-        party: p.supplierName,
-        number: p.billNumber,
-        dueDate: p.date,
-        amount: p.total,
+        party: b.partyName,
+        number: b.number || (b.source === "ledger" ? t("agOpeningBalance") : ""),
+        dueDate: b.date,
+        amount: b.outstanding,
+        billRef: b.ref,
+        supplierId: b.supplierId,
       }));
-      setDocs(pulled);
+      // Keep bills typed in by hand; replace the previously pulled ones.
+      setDocs((prev) => [...prev.filter((d) => !d.billRef), ...pulled]);
+      setPullNote(
+        pulled.length === 0
+          ? t("agNoUnpaidCredit")
+          : fill(t("agPulledCredit"), { count: pulled.length }),
+      );
     }
+  };
+
+  // Record the payment in the Supplier Ledger against this exact bill, so the
+  // supplier's balance drops and the bill is not pulled again next time.
+  const markPaid = async (doc: AgingDoc) => {
+    if (!doc.billRef) return;
+    const entry: SupplierLedgerEntry = {
+      id: generateId(),
+      supplierId: doc.supplierId ?? null,
+      supplierName: doc.party,
+      type: "payment",
+      amount: doc.amount,
+      note: `Paid from AP aging${doc.number ? ` — ${doc.number}` : ""}`,
+      date: todayIso(),
+      billRef: doc.billRef,
+      createdByTool: "accounts-payable-aging",
+      createdAt: nowIso(),
+    };
+    await saveSupplierLedgerEntry(entry);
+    setDocs((prev) => prev.filter((d) => d.id !== doc.id));
+    await workspace.reload();
   };
 
   const money = (v: number) => formatMoney(v, currency);
@@ -248,6 +297,12 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
             <SecondaryButton onClick={pullFromWorkspace}>
               ↻ {t(labels.pull)}
             </SecondaryButton>
+            {kind === "payable" ? (
+              <p className="mt-2 text-xs text-muted">{t("agCreditOnlyHint")}</p>
+            ) : null}
+            {pullNote ? (
+              <p className="mt-2 text-xs font-medium text-emerald-600">{pullNote}</p>
+            ) : null}
           </div>
         ) : null}
         <div className="space-y-4">
@@ -382,13 +437,32 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
                   </div>
                   <div className="flex items-center gap-3">
                     <p className="text-sm font-bold text-ink">{money(doc.amount)}</p>
-                    <button
-                      type="button"
-                      onClick={() => setDeleting(doc)}
-                      className="text-xs font-semibold text-red-500 hover:text-red-600"
-                    >
-                      {kind === "receivable" ? "Paid / remove" : "Paid / remove"}
-                    </button>
+                    {doc.billRef && workspace.connected ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setPaying(doc)}
+                          className="text-xs font-semibold text-emerald-600 hover:text-emerald-700"
+                        >
+                          {t("agMarkPaid")}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setDeleting(doc)}
+                          className="text-xs font-semibold text-red-500 hover:text-red-600"
+                        >
+                          {t("remove")}
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setDeleting(doc)}
+                        className="text-xs font-semibold text-red-500 hover:text-red-600"
+                      >
+                        Paid / remove
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -415,6 +489,26 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
           setDeleting(null);
         }}
         onCancel={() => setDeleting(null)}
+      />
+
+      <ConfirmDialog
+        open={paying !== null}
+        title={t("agMarkPaidTitle")}
+        message={
+          paying
+            ? fill(t("agMarkPaidMessage"), {
+                amount: money(paying.amount),
+                party: paying.number ? `${paying.party} (${paying.number})` : paying.party,
+              })
+            : ""
+        }
+        confirmLabel={t("agMarkPaid")}
+        danger={false}
+        onConfirm={async () => {
+          if (paying) await markPaid(paying);
+          setPaying(null);
+        }}
+        onCancel={() => setPaying(null)}
       />
       </div>
     </div>
