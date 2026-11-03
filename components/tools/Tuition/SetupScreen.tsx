@@ -4,8 +4,8 @@ import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
-import { CURRENCIES } from "@/lib/pos/types";
 import { Field, inputClass, primaryBtnClass } from "@/components/tools/FreePos/ui";
+import { currencyOptions, detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 export function SetupScreen() {
   const { t } = useI18n();
@@ -13,7 +13,7 @@ export function SetupScreen() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [currency, setCurrency] = useState("INR");
+  const [currency, setCurrency] = useState(() => detectCurrency());
   const [email, setEmail] = useState("");
   const [upiId, setUpiId] = useState("");
   const [error, setError] = useState("");
@@ -100,7 +100,7 @@ export function SetupScreen() {
               onChange={(event) => setCurrency(event.target.value)}
               className={inputClass}
             >
-              {CURRENCIES.map((c) => (
+              {currencyOptions(currency).map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.label}
                 </option>

@@ -17,7 +17,6 @@ import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import {
-  CURRENCIES,
   formatInvoiceNumber,
   type PosSettings,
   type ReceiptPaperSize,
@@ -45,6 +44,7 @@ import {
   secondaryBtnClass,
 } from "./ui";
 import { canOpenAsTab } from "./ToolsScreen";
+import { currencyOptions } from "@/lib/toolkit/currencyDetect";
 
 function Section({
   id,
@@ -290,7 +290,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               onChange={(event) => setProfile((p) => ({ ...p, currency: event.target.value }))}
               className={inputClass}
             >
-              {CURRENCIES.map((c) => (
+              {currencyOptions(profile.currency).map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.label}
                 </option>

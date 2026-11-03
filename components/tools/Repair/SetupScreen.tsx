@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRepair } from "@/lib/repair/store";
 import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
+import { detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 /**
  * Three fields, two of them usually pre-filled.
@@ -43,7 +44,7 @@ export function SetupScreen() {
           name: name.trim(),
           phone: phone.trim(),
           address: business?.address ?? "",
-          currency: business?.currency ?? "INR",
+          currency: business?.currency ?? detectCurrency(),
           email: business?.email ?? "",
           taxNumber: business?.taxNumber ?? "",
           logoDataUrl: business?.logoDataUrl ?? "",

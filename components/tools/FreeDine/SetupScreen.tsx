@@ -5,9 +5,9 @@ import { fill } from "@/lib/i18n/translate";
 import { useState } from "react";
 import { ChevronDown, TriangleAlert } from "lucide-react";
 import { useDine } from "@/lib/dine/store";
-import { CURRENCIES } from "@/lib/dine/types";
 import { SAMPLE_MENU } from "@/lib/dine/sampleMenu";
 import { Field, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
+import { currencyOptions, detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 const SAMPLE_ITEM_COUNT = SAMPLE_MENU.reduce((sum, category) => sum + category.items.length, 0);
 
@@ -29,7 +29,7 @@ export function SetupScreen() {
   const { completeSetup, backToWelcome } = useDine();
 
   const [name, setName] = useState("");
-  const [currency, setCurrency] = useState("INR");
+  const [currency, setCurrency] = useState(() => detectCurrency());
   const [seedSampleMenu, setSeedSampleMenu] = useState(true);
   const [showMore, setShowMore] = useState(false);
   const [phone, setPhone] = useState("");
@@ -99,7 +99,7 @@ export function SetupScreen() {
             onChange={(event) => setCurrency(event.target.value)}
             className={inputClass}
           >
-            {CURRENCIES.map((option) => (
+            {currencyOptions(currency).map((option) => (
               <option key={option.code} value={option.code}>
                 {option.label}
               </option>
