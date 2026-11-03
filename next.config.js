@@ -55,6 +55,18 @@ const nextConfig = {
         destination: "/products/restaurant-pos",
         permanent: true,
       },
+      // Customer Statement was folded into Customer Ledger, which already
+      // shows each customer's running balance and transactions.
+      {
+        source: "/tools/customer-statement",
+        destination: "/tools/customer-ledger",
+        permanent: true,
+      },
+      {
+        source: "/:lang/tools/customer-statement",
+        destination: "/:lang/tools/customer-ledger",
+        permanent: true,
+      },
       {
         source: "/free-pos",
         destination: "/products/browser-based-pos",

@@ -2402,10 +2402,6 @@
           "headline": "Related tools for credit customers",
           "links": [
             {
-              "label": "Customer Statement",
-              "href": "/tools/customer-statement"
-            },
-            {
               "label": "Invoice Aging Report",
               "href": "/tools/invoice-aging-report"
             },
@@ -2721,10 +2717,6 @@
             {
               "label": "Customer Ledger",
               "href": "/tools/customer-ledger"
-            },
-            {
-              "label": "Customer Statement",
-              "href": "/tools/customer-statement"
             },
             {
               "label": "GST Calculator",
@@ -4418,159 +4410,6 @@
       ]
     },
     {
-      "slug": "customer-statement",
-      "href": "/tools/customer-statement",
-      "name": "Customer Statement",
-      "category": "statements",
-      "icon": "book-user",
-      "shortDescription": "Statement of account per customer — invoices, payments and running balance. Print to PDF.",
-      "seo": {
-        "title": "Free Customer Statement Generator | Setu",
-        "description": "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup.",
-        "keywords": [
-          "customer statement",
-          "statement of account",
-          "customer account statement format",
-          "outstanding balance statement",
-          "debtor statement"
-        ],
-        "ogTitle": "Customer Statement",
-        "ogDescription": "Generate a customer statement of account — invoices, payments and credit notes with a running balance. Print to PDF or export CSV. Free, no signup."
-      },
-      "hero": {
-        "headline": "Customer Statement",
-        "subheadline": "Every invoice, payment and adjustment for one customer — with the running balance that settles arguments."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "What is a statement of account?",
-            "answer": "A summary of all transactions with one customer over a period — invoices raised, payments received, credit notes issued — ending in the balance they currently owe."
-          },
-          {
-            "question": "When should I send customer statements?",
-            "answer": "Monthly for regular credit customers, and immediately when chasing overdue payment. A clear statement resolves most \"we already paid that\" conversations."
-          },
-          {
-            "question": "How is the balance calculated?",
-            "answer": "Opening balance plus invoices, minus payments and credit notes, in date order. The tool recalculates the running balance automatically as you add transactions."
-          },
-          {
-            "question": "Can I save the customer statement as a PDF?",
-            "answer": "Yes. Tap Print / PDF and the statement opens in a new window laid out for A4 paper, with the print dialog ready. Choose Save as PDF as the printer on a computer, or the PDF option in your phone's print menu, and you get a file you can email or send on WhatsApp. If nothing opens, allow pop-ups for the site and try again."
-          },
-          {
-            "question": "How do I show TDS deducted by a customer on the statement?",
-            "answer": "Add the amount you actually received as a Payment received line, then add the tax the customer deducted as a separate Credit note / adjustment line with a reference such as TDS deducted. Both reduce the balance, so the invoice shows as settled while the statement still separates cash received from tax deducted on your behalf."
-          },
-          {
-            "question": "Can I make statements for more than one customer?",
-            "answer": "The tool holds one statement at a time, so save the PDF or export the CSV before moving on. If your customers are in the Setu Customer Ledger, picking another name from the saved-customer list rebuilds the statement from that customer's entries. For a statement typed by hand, change the customer name and opening balance, and delete the old lines before adding new ones."
-          },
-          {
-            "question": "What is the difference between a customer statement and an invoice?",
-            "answer": "An invoice is the bill for one sale, with items, rates and GST, and it is the document your customer uses to record the purchase and claim input tax credit. A statement summarises invoices, payments and credit notes over a period and ends in the balance owed. It asks for payment of that balance but does not replace the tax invoice."
-          }
-        ]
-      },
-      "body": [
-        {
-          "kind": "prose",
-          "headline": "What is a debtor statement used for?",
-          "paragraphs": [
-            "A **customer statement**, also called a [statement of account](/glossary/statement-of-account) or debtor statement, lets a customer check your figures line by line instead of disputing a lump sum. In your books the customer is a debtor, so what you bill them sits in the Debit column, and what they pay or you allow back sits in Credit. Their accounts team keeps the mirror image: your invoices are credits in their account for you, and their payments are debits. When both sides list the same lines, the closing balances agree. When they do not, the statement shows exactly where the difference starts.",
-            "In India, statements do much of their work around 31 March, when auditors often ask businesses to confirm balances with major customers. Differences usually come from three places: a payment received but not yet entered, a credit note one side has missed, or [TDS](/glossary/tds) the customer deducted before paying you. TDS settles part of the invoice even though that money went to the government and not to your bank, so it needs its own line instead of being left as an unexplained gap. Ask the customer to confirm the closing balance in writing, and keep their reply with your year-end papers."
-          ]
-        },
-        {
-          "kind": "steps",
-          "headline": "How to use the free customer statement generator",
-          "steps": [
-            "If your customers are in the Setu Customer Ledger, tap Use workspace on the banner if it appears, then pick the customer under Load a saved customer's ledger. Their entries replace any lines already on the statement and the opening balance resets to zero.",
-            "Otherwise, enter your business name, the customer's name and the opening balance they already owed when the statement period starts.",
-            "Under Add transaction, pick the date and the type: Invoice, Payment received, or Credit note / adjustment.",
-            "Add a reference such as the invoice number or UPI reference, enter the amount and tap Add transaction.",
-            "Check the statement table. Lines sort by date on their own, the balance updates after each line, and Delete removes a wrong entry.",
-            "Tap Print / PDF to open a print-ready A4 statement and save it as a PDF, or Export CSV for a spreadsheet copy."
-          ]
-        },
-        {
-          "kind": "features",
-          "headline": "What the statement generator does",
-          "items": [
-            {
-              "icon": "📑",
-              "title": "Debit and credit columns",
-              "text": "Invoices appear under Debit, payments and credit notes under Credit, with the balance after every line, laid out the way accountants read a ledger."
-            },
-            {
-              "icon": "🧾",
-              "title": "Three entry types",
-              "text": "Record invoices, payments received and credit notes or adjustments, each with its own reference such as INV-1042 or a UPI reference."
-            },
-            {
-              "icon": "🖨️",
-              "title": "A4 print and PDF",
-              "text": "Print / PDF opens a Statement of Account with your business name, the customer's name, an opening balance row and the balance due."
-            },
-            {
-              "icon": "📥",
-              "title": "CSV export",
-              "text": "Download Date, Type, Reference, Debit, Credit and Balance columns to check against the customer's figures in Excel or Google Sheets."
-            },
-            {
-              "icon": "📒",
-              "title": "Built from your khata",
-              "text": "Pick a saved customer to turn their Customer Ledger credits into invoice lines and their payments into payment lines in one step."
-            },
-            {
-              "icon": "💾",
-              "title": "Saved as you go",
-              "text": "The statement you are working on stays in this browser, so you can close the tab and finish it later without signing up."
-            }
-          ]
-        },
-        {
-          "kind": "checklist",
-          "headline": "What to include on a statement of account",
-          "items": [
-            "An opening balance that matches the closing balance on your last statement or in your books.",
-            "Every invoice in the period, with its invoice number in the Reference field.",
-            "Every payment received, with the UPI reference, cheque number or bank UTR.",
-            "Credit notes and adjustments such as goods returned, discounts allowed after the sale or TDS deducted by the customer.",
-            "Your business name and the customer's name exactly as they appear on your invoices.",
-            "A quick check that the balance due matches what your own books show before you send it."
-          ]
-        },
-        {
-          "kind": "links",
-          "headline": "Related tools for customer accounts",
-          "links": [
-            {
-              "label": "Customer Ledger",
-              "href": "/tools/customer-ledger"
-            },
-            {
-              "label": "Invoice Aging Report",
-              "href": "/tools/invoice-aging-report"
-            },
-            {
-              "label": "Credit Note Generator",
-              "href": "/tools/credit-note-generator"
-            },
-            {
-              "label": "Invoice Generator",
-              "href": "/tools/invoice-generator"
-            },
-            {
-              "label": "Payment Terms Calculator",
-              "href": "/calculators/payment-terms-calculator"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "slug": "invoice-aging-report",
       "href": "/tools/invoice-aging-report",
       "name": "Invoice Aging Report",
@@ -4692,10 +4531,6 @@
           "kind": "links",
           "headline": "Related tools for collections",
           "links": [
-            {
-              "label": "Customer Statement",
-              "href": "/tools/customer-statement"
-            },
             {
               "label": "Customer Ledger",
               "href": "/tools/customer-ledger"

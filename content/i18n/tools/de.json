@@ -1490,43 +1490,6 @@
       }
     },
     {
-      "name": "Kundenkontoauszug",
-      "shortDescription": "Kontoauszug je Kunde — Rechnungen, Zahlungen und laufender Saldo. Druck als PDF.",
-      "seo": {
-        "title": "Kostenloser Kundenkontoauszug-Generator",
-        "description": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos.",
-        "keywords": [
-          "Kundenkontoauszug",
-          "Kontoauszug",
-          "Muster Kundenkontoauszug",
-          "Auszug offener Posten",
-          "Debitorenauszug"
-        ],
-        "ogTitle": "Kundenkontoauszug",
-        "ogDescription": "Erstellen Sie den Kontoauszug eines Kunden — Rechnungen, Zahlungen und Gutschriften mit laufendem Saldo. Als PDF drucken oder als CSV exportieren. Kostenlos."
-      },
-      "hero": {
-        "headline": "Kundenkontoauszug",
-        "subheadline": "Jede Rechnung, Zahlung und Korrektur eines Kunden — mit dem laufenden Saldo, der Diskussionen beendet."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "Was ist ein Kontoauszug?",
-            "answer": "Eine Zusammenfassung aller Vorgänge mit einem Kunden in einem Zeitraum — gestellte Rechnungen, erhaltene Zahlungen, erteilte Gutschriften — die mit dem aktuell offenen Saldo endet."
-          },
-          {
-            "question": "Wann sollte ich Kundenkontoauszüge verschicken?",
-            "answer": "Monatlich an regelmäßige Kreditkunden und sofort, wenn Sie eine überfällige Zahlung anmahnen. Ein klarer Auszug klärt die meisten Gespräche nach dem Muster „das haben wir doch bezahlt“."
-          },
-          {
-            "question": "Wie wird der Saldo berechnet?",
-            "answer": "Anfangssaldo plus Rechnungen, minus Zahlungen und Gutschriften, in zeitlicher Reihenfolge. Das Tool rechnet den laufenden Saldo automatisch neu, während Sie Vorgänge ergänzen."
-          }
-        ]
-      }
-    },
-    {
       "name": "Offene-Posten-Liste",
       "shortDescription": "Offene Kundenrechnungen nach Altersklassen — von aktuell bis 90+ Tage, je Kunde. CSV-Export.",
       "seo": {

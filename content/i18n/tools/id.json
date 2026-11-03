@@ -1490,43 +1490,6 @@
       }
     },
     {
-      "name": "Laporan akun pelanggan",
-      "shortDescription": "Laporan akun per pelanggan — faktur, pembayaran, dan saldo berjalan. Cetak ke PDF.",
-      "seo": {
-        "title": "Pembuat laporan akun pelanggan gratis",
-        "description": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran.",
-        "keywords": [
-          "laporan akun pelanggan",
-          "laporan rekening",
-          "format laporan akun pelanggan",
-          "laporan saldo tertunggak",
-          "laporan debitur"
-        ],
-        "ogTitle": "Laporan akun pelanggan",
-        "ogDescription": "Buat laporan akun seorang pelanggan — faktur, pembayaran, dan nota kredit dengan saldo berjalan. Cetak ke PDF atau ekspor CSV. Gratis, tanpa pendaftaran."
-      },
-      "hero": {
-        "headline": "Laporan akun pelanggan",
-        "subheadline": "Setiap faktur, pembayaran, dan penyesuaian satu pelanggan — dengan saldo berjalan yang menutup perdebatan."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "Apa itu laporan rekening?",
-            "answer": "Ringkasan semua transaksi dengan satu pelanggan dalam satu periode — faktur yang diterbitkan, pembayaran yang diterima, nota kredit yang diberikan — dan berakhir pada saldo yang masih ia tanggung."
-          },
-          {
-            "question": "Kapan laporan akun pelanggan perlu dikirim?",
-            "answer": "Tiap bulan untuk pelanggan kredit tetap, dan langsung saat menagih pembayaran yang telat. Laporan yang jelas menyelesaikan hampir semua percakapan “itu sudah kami bayar”."
-          },
-          {
-            "question": "Bagaimana saldo dihitung?",
-            "answer": "Saldo awal ditambah faktur, dikurangi pembayaran dan nota kredit, berurutan menurut tanggal. Alat ini menghitung ulang saldo berjalan sendiri setiap kali Anda menambah transaksi."
-          }
-        ]
-      }
-    },
-    {
       "name": "Laporan umur piutang",
       "shortDescription": "Faktur pelanggan belum dibayar per rentang umur — lancar sampai 90+ hari. Ekspor CSV.",
       "seo": {

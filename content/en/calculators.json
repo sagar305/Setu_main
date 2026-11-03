@@ -3614,10 +3614,6 @@
               "href": "/tools/invoice-generator"
             },
             {
-              "label": "Customer Statement",
-              "href": "/tools/customer-statement"
-            },
-            {
               "label": "Financial Ratio Calculator",
               "href": "/calculators/financial-ratio-calculator"
             }

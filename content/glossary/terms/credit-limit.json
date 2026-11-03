@@ -32,10 +32,6 @@
     },
     {
       "type": "tool",
-      "slug": "customer-statement"
-    },
-    {
-      "type": "tool",
       "slug": "upi-qr-generator"
     },
     {
