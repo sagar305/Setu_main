@@ -1594,7 +1594,7 @@
             "Pick a supplier saved in your Supplier Book, or type the supplier's name if they are not saved there.",
             "Enter the bill date, the payment mode (Cash, UPI, Card, Bank transfer or Credit) and the supplier's bill number. The Bill number box appears once you pick a saved supplier, or straight away if your Supplier Book is empty.",
             "Add each item with its name, quantity and unit cost, using + Add item for more lines. If you have connected your workspace, use Link product to fill in a saved product's name and cost price.",
-            "Keep Also record as a business expense ticked for costs such as supplies. Untick it for resale stock whose cost you track through product cost price, so the cost is not counted twice in profit.",
+            "Tick Returnable for items the supplier takes back, and set the last return date and whether they settle with a replacement or a credit note. Return to supplier on a saved bill takes those units out of stock.",
             "Click Save purchase. If any line is linked to a product, choose Save & update stock or Save without stock.",
             "Use Export CSV to download every purchase with date, supplier, bill number, items, total, payment mode and stock status."
           ]
@@ -1610,8 +1610,8 @@
             },
             {
               "icon": "🧾",
-              "title": "Linked to the Expense Tracker",
-              "text": "A purchase can be copied into the Expense Tracker under Purchases, and deleting the purchase later removes that expense too."
+              "title": "Returns to suppliers",
+              "text": "Mark items returnable with a deadline and a replacement or credit note. Credit notes reduce what you owe in the Supplier Ledger; replacements come back into stock when they arrive."
             },
             {
               "icon": "💳",

@@ -28,12 +28,32 @@ export function ExpiryBadge({ expiry }: { expiry: string }) {
   );
 }
 
-type Draft = { batchNo: string; expiry: string; cost: string; qty: string };
+function ReturnBadge({ batch }: { batch: StockBatch }) {
+  if (!batch.returnBy || batch.quantity <= 0) return null;
+  const today = new Date().toISOString().slice(0, 10);
+  const closed = batch.returnBy < today;
+  return (
+    <span
+      className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+        closed ? "bg-cream-paper text-muted line-through" : "bg-indigo/10 text-indigo"
+      }`}
+      title="From the Purchase Register"
+    >
+      Returnable till {batch.returnBy}
+      {batch.returnType ? ` · ${batch.returnType === "replacement" ? "replacement" : "credit note"}` : ""}
+    </span>
+  );
+}
+
+type Draft = { batchNo: string; expiry: string; cost: string; price: string; qty: string };
+
+const EMPTY: Draft = { batchNo: "", expiry: "", cost: "", price: "", qty: "" };
 
 const draftOf = (b: StockBatch): Draft => ({
   batchNo: b.batchNo,
   expiry: b.expiry,
   cost: b.costPrice === null ? "" : String(b.costPrice),
+  price: b.sellingPrice == null ? "" : String(b.sellingPrice),
   qty: String(Math.max(b.quantity, 0)),
 });
 
@@ -56,12 +76,20 @@ function BatchRow({ batch, product, currency }: { batch: StockBatch; product: Pr
   const save = async () => {
     const qty = Number(draft.qty);
     const cost = parseCost(draft.cost);
+    const price = parseCost(draft.price);
     if (!Number.isInteger(qty) || qty < 0) return setError("Quantity must be a whole number, zero or more.");
     if (cost === undefined) return setError("Cost must be zero or more.");
+    if (price === undefined) return setError("Selling price must be zero or more.");
     setSaving(true);
     setError("");
     try {
-      await updateBatch(batch.id, { batchNo: draft.batchNo, expiry: draft.expiry, costPrice: cost, quantity: qty });
+      await updateBatch(batch.id, {
+        batchNo: draft.batchNo,
+        expiry: draft.expiry,
+        costPrice: cost,
+        sellingPrice: price,
+        quantity: qty,
+      });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not save the batch.");
     } finally {
@@ -78,9 +106,11 @@ function BatchRow({ batch, product, currency }: { batch: StockBatch; product: Pr
         </span>
         <ExpiryBadge expiry={batch.expiry} />
         <span>Received {batch.receivedAt}</span>
-        {cost !== null ? <span>· {formatMoney(cost, currency)} / unit</span> : null}
+        {cost !== null ? <span>· cost {formatMoney(cost, currency)}</span> : null}
+        {batch.sellingPrice != null ? <span>· sells at {formatMoney(batch.sellingPrice, currency)}</span> : null}
+        <ReturnBadge batch={batch} />
       </div>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
         <Field label="Batch no.">
           <input
             value={draft.batchNo}
@@ -104,6 +134,17 @@ function BatchRow({ batch, product, currency }: { batch: StockBatch; product: Pr
             value={draft.cost}
             placeholder={product.costPrice === null ? "" : String(product.costPrice)}
             onChange={(e) => setDraft((d) => ({ ...d, cost: e.target.value }))}
+            className={inputClass}
+          />
+        </Field>
+        <Field label="Selling price">
+          <input
+            type="number"
+            min={0}
+            step="0.01"
+            value={draft.price}
+            placeholder={String(product.sellingPrice)}
+            onChange={(e) => setDraft((d) => ({ ...d, price: e.target.value }))}
             className={inputClass}
           />
         </Field>
@@ -137,11 +178,11 @@ export function BatchesModal({ product, onClose }: { product: Product | null; on
   const { business, stockBatches, adjustStock } = usePos();
   const currency = business?.currency ?? "INR";
   const [showEmpty, setShowEmpty] = useState(false);
-  const [add, setAdd] = useState<Draft>({ batchNo: "", expiry: "", cost: "", qty: "" });
+  const [add, setAdd] = useState<Draft>(EMPTY);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setAdd({ batchNo: "", expiry: "", cost: "", qty: "" });
+    setAdd(EMPTY);
     setError("");
     setShowEmpty(false);
   }, [product?.id]);
@@ -155,15 +196,18 @@ export function BatchesModal({ product, onClose }: { product: Product | null; on
   const addBatch = async () => {
     const qty = Number(add.qty);
     const cost = parseCost(add.cost);
+    const price = parseCost(add.price);
     if (!Number.isInteger(qty) || qty <= 0) return setError("Enter a quantity greater than zero.");
     if (cost === undefined) return setError("Cost must be zero or more.");
+    if (price === undefined) return setError("Selling price must be zero or more.");
     setError("");
     await adjustStock(product.id, "add", qty, "New batch", {
       batchNo: add.batchNo,
       expiry: add.expiry,
       costPrice: cost,
+      sellingPrice: price,
     });
-    setAdd({ batchNo: "", expiry: "", cost: "", qty: "" });
+    setAdd(EMPTY);
   };
 
   return (
@@ -194,7 +238,7 @@ export function BatchesModal({ product, onClose }: { product: Product | null; on
 
       <div className="mt-6 rounded-xl bg-cream-paper/60 p-3">
         <p className="mb-2 text-sm font-semibold text-ink">Add a batch</p>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
           <Field label="Batch no.">
             <input
               value={add.batchNo}
@@ -219,6 +263,17 @@ export function BatchesModal({ product, onClose }: { product: Product | null; on
               value={add.cost}
               placeholder={product.costPrice === null ? "Optional" : String(product.costPrice)}
               onChange={(e) => setAdd((d) => ({ ...d, cost: e.target.value }))}
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Selling price">
+            <input
+              type="number"
+              min={0}
+              step="0.01"
+              value={add.price}
+              placeholder={String(product.sellingPrice)}
+              onChange={(e) => setAdd((d) => ({ ...d, price: e.target.value }))}
               className={inputClass}
             />
           </Field>

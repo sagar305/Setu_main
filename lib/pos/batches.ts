@@ -40,6 +40,11 @@ export type StockBatch = {
   purchaseId: string | null;
   /** True for the catch-all batch that holds stock with no batch details. */
   opening?: boolean;
+  /** Selling price for units of this batch; null/absent = product's selling price. */
+  sellingPrice?: number | null;
+  /** Supplier takes it back until this day ("yyyy-mm-dd"), from the purchase. */
+  returnBy?: string;
+  returnType?: "replacement" | "credit-note";
   note: string;
   createdAt: string;
   updatedAt: string;
@@ -62,6 +67,9 @@ export type NewBatchInput = {
   receivedAt?: string;
   purchaseId?: string | null;
   note?: string;
+  sellingPrice?: number | null;
+  returnBy?: string;
+  returnType?: "replacement" | "credit-note";
 };
 
 export const EXPIRY_SOON_DAYS = 30;
@@ -103,6 +111,9 @@ export function makeBatch(product: Product, quantity: number, input: NewBatchInp
     receivedAt: input.receivedAt ?? now.slice(0, 10),
     purchaseId: input.purchaseId ?? null,
     note: input.note ?? "",
+    ...(input.sellingPrice != null ? { sellingPrice: input.sellingPrice } : {}),
+    ...(input.returnBy ? { returnBy: input.returnBy } : {}),
+    ...(input.returnType ? { returnType: input.returnType } : {}),
     createdAt: now,
     updatedAt: now,
   };

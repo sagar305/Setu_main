@@ -45,6 +45,7 @@ import type {
   Expense,
   LedgerEntry,
   Purchase,
+  PurchaseReturn,
   ReceiptTemplate,
   Supplier,
   SupplierLedgerEntry,
@@ -59,6 +60,7 @@ export type {
   Expense,
   LedgerEntry,
   Purchase,
+  PurchaseReturn,
   ReceiptTemplate,
   Supplier,
   SupplierLedgerEntry,
@@ -104,6 +106,8 @@ export const getPurchases = () => dbGetAll<Purchase>("purchases");
 export const savePurchase = (p: Purchase) => dbPut<Purchase>("purchases", p);
 export const deletePurchase = (id: string) => dbDelete("purchases", id);
 
+export const getPurchaseReturns = () => dbGetAll<PurchaseReturn>("purchase_returns");
+
 export const getAssets = () => dbGetAll<WorkspaceAsset>("assets");
 export const saveAsset = (a: WorkspaceAsset) => dbPut<WorkspaceAsset>("assets", a);
 export const deleteAsset = (id: string) => dbDelete("assets", id);
@@ -131,6 +135,9 @@ export async function applyPurchaseToStock(purchase: Purchase): Promise<void> {
         costPrice: item.unitCost > 0 ? item.unitCost : null,
         receivedAt: purchase.date,
         purchaseId: purchase.id,
+        sellingPrice: item.sellingPrice ?? null,
+        returnBy: item.returnable ? item.returnBy ?? "" : "",
+        returnType: item.returnable ? item.returnType : undefined,
       }
     );
   }

@@ -11,7 +11,9 @@
 
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import {
+  allocate,
   makeBatch,
+  mergeBatches,
   reconcileBatches,
   type NewBatchInput,
   type StockBatch,
@@ -123,11 +125,21 @@ export async function updateStock(
   };
   let batches: StockBatch[] = [];
   if ((await getSettings()).batchTracking) {
-    const named = Boolean(batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null);
-    batches =
-      change > 0 && named
-        ? [makeBatch(updated, change, { note, ...batch })]
-        : reconcileBatches(updated, await getStockBatches());
+    const named = Boolean(
+      batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null || batch?.sellingPrice != null
+    );
+    if (change > 0 && named) {
+      batches = [makeBatch(updated, change, { note, ...batch })];
+    } else if (change < 0 && batch?.purchaseId) {
+      // Returning goods to a supplier: take them from the batch that purchase
+      // brought in first, then earliest expiry for anything left.
+      const all = await getStockBatches();
+      const own = all.find((b) => b.productId === productId && b.purchaseId === batch.purchaseId);
+      const taken = allocate(all, product, -change, own?.id).updated;
+      batches = [...taken, ...reconcileBatches(updated, mergeBatches(all, taken))];
+    } else {
+      batches = reconcileBatches(updated, await getStockBatches());
+    }
   }
   await dbBatch({ products: [updated], inventory: [log], stock_batches: batches });
 }

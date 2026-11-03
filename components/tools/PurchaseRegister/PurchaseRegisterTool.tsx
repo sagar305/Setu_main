@@ -15,8 +15,16 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
-import { applyPurchaseToStock, getSettings, getSuppliers, deleteExpense } from "@/lib/toolkit/workspace";
-import type { Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
+import {
+  applyPurchaseToStock,
+  getSettings,
+  getSuppliers,
+  deleteExpense,
+  updateStock,
+} from "@/lib/toolkit/workspace";
+import { closingSoon, returnAmount, returnWindow, returnableLines, returnedQuantities } from "@/lib/toolkit/purchaseReturns";
+import { ReceiveDialog, ReturnDialog, ReturnsList, type NewReturn, type ReceiveInfo } from "./PurchaseReturns";
+import type { PurchaseReturn, Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
@@ -38,6 +46,14 @@ export function PurchaseRegisterTool() {
   const workspace = useWorkspaceConnection("purchase-register");
   const { t } = useI18n();
   const { items: purchases, save, remove } = useEntityList<Purchase>("purchases");
+  const {
+    items: returns,
+    save: saveReturn,
+    remove: removeReturn,
+  } = useEntityList<PurchaseReturn>("purchase_returns");
+  const [returning, setReturning] = useState<Purchase | null>(null);
+  const [receiving, setReceiving] = useState<PurchaseReturn | null>(null);
+  const [deletingReturn, setDeletingReturn] = useState<PurchaseReturn | null>(null);
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
 
   const [supplierId, setSupplierId] = useState("");
@@ -157,6 +173,73 @@ export function PurchaseRegisterTool() {
     setPendingStock(null);
   };
 
+  // ---- Returns to suppliers ------------------------------------------------
+  const stockNote = (r: { supplierName: string }) => r.supplierName || t("prUnknownSupplier");
+
+  const createReturn = async (purchase: Purchase, input: NewReturn) => {
+    // Only purchases that put units into stock take them back out.
+    const stockApplied = purchase.stockApplied && workspace.connected;
+    if (stockApplied) {
+      for (const i of input.items) {
+        if (!i.productId) continue;
+        await updateStock(i.productId, -i.quantity, `${t("prReturnToSupplier")}: ${stockNote(purchase)}`, {
+          purchaseId: purchase.id,
+        });
+      }
+      await workspace.reload();
+    }
+    const ret: PurchaseReturn = {
+      id: generateId(),
+      purchaseId: purchase.id,
+      supplierId: purchase.supplierId,
+      supplierName: purchase.supplierName,
+      billNumber: purchase.billNumber,
+      date: input.date,
+      mode: input.mode,
+      items: input.items,
+      amount: returnAmount(input.items),
+      status: input.mode === "credit-note" ? "settled" : "pending",
+      stockApplied,
+      note: input.note,
+      createdByTool: "purchase-register",
+      createdAt: nowIso(),
+    };
+    await saveReturn(ret);
+    setMessage(fill(t("prReturnSaved"), { amount: formatMoney(ret.amount, currency) }));
+  };
+
+  const receiveReplacement = async (ret: PurchaseReturn, info: ReceiveInfo) => {
+    if (ret.stockApplied) {
+      for (const i of ret.items) {
+        if (!i.productId) continue;
+        await updateStock(i.productId, i.quantity, `${t("prReturnReceived")}: ${stockNote(ret)}`, {
+          batchNo: info.batchNo,
+          expiry: info.expiry,
+          costPrice: i.unitCost > 0 ? i.unitCost : null,
+          sellingPrice: info.sellingPrice,
+          receivedAt: todayIso(),
+        });
+      }
+      await workspace.reload();
+    }
+    await saveReturn({ ...ret, status: "received", receivedAt: todayIso() });
+  };
+
+  const deleteReturnRecord = async (ret: PurchaseReturn) => {
+    // Undo the stock it moved: units taken out go back, unless a received
+    // replacement already brought them back.
+    if (ret.stockApplied && ret.status !== "received") {
+      for (const i of ret.items) {
+        if (!i.productId) continue;
+        await updateStock(i.productId, i.quantity, `${t("prDeleteReturnTitle")} (${stockNote(ret)})`);
+      }
+      await workspace.reload();
+    }
+    await removeReturn(ret.id);
+  };
+
+  const dueSoon = useMemo(() => closingSoon(purchases, returns), [purchases, returns]);
+
   const exportCsv = () =>
     downloadCsv(
       "purchases.csv",
@@ -184,6 +267,20 @@ export function PurchaseRegisterTool() {
         connection={workspace}
         message={t("prConnectHint")}
       />
+
+      {dueSoon.length > 0 ? (
+        <div className="mb-6 rounded-xl border border-saffron/40 bg-saffron/10 p-4 text-sm text-ink">
+          <p className="font-semibold">{t("prReturnSoonBanner")}</p>
+          <ul className="mt-1 space-y-0.5 text-xs">
+            {dueSoon.map(({ purchase, line }) => (
+              <li key={`${purchase.id}-${line.itemIndex}`}>
+                {line.item.name} ×{line.left} — {purchase.supplierName || t("prUnknownSupplier")} ·{" "}
+                {fill(t("prReturnTill"), { date: line.item.returnBy ?? "" })}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
         <Card className="h-fit">
@@ -303,7 +400,7 @@ export function PurchaseRegisterTool() {
                   {t("remove")}
                 </button>
                 {batchTracking && item.productId ? (
-                  <div className="col-span-2 grid grid-cols-2 gap-2 sm:col-span-5">
+                  <div className="col-span-2 grid grid-cols-2 gap-2 sm:col-span-5 sm:grid-cols-3">
                     <Field label={t("prBatchNo")}>
                       <TextInput
                         value={item.batchNo ?? ""}
@@ -318,8 +415,59 @@ export function PurchaseRegisterTool() {
                         onChange={(e) => updateItem(item.key, { expiry: e.target.value })}
                       />
                     </Field>
+                    <Field label={t("prSellingPrice")}>
+                      <NumberInput
+                        min={0}
+                        step="0.01"
+                        value={item.sellingPrice ?? ""}
+                        placeholder={t("optional")}
+                        onChange={(e) =>
+                          updateItem(item.key, {
+                            sellingPrice: e.target.value === "" ? null : Number(e.target.value),
+                          })
+                        }
+                      />
+                    </Field>
                   </div>
                 ) : null}
+                <div className="col-span-2 sm:col-span-5">
+                  <label className="flex items-center gap-2 text-sm text-ink">
+                    <input
+                      type="checkbox"
+                      checked={item.returnable === true}
+                      onChange={(e) =>
+                        updateItem(item.key, {
+                          returnable: e.target.checked,
+                          returnType: item.returnType ?? "credit-note",
+                        })
+                      }
+                      className="h-4 w-4 accent-indigo"
+                    />
+                    {t("prReturnable")}
+                  </label>
+                  {item.returnable ? (
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      <Field label={t("prReturnBy")}>
+                        <TextInput
+                          type="date"
+                          value={item.returnBy ?? ""}
+                          onChange={(e) => updateItem(item.key, { returnBy: e.target.value })}
+                        />
+                      </Field>
+                      <Field label={t("prReturnAs")}>
+                        <Select
+                          value={item.returnType ?? "credit-note"}
+                          onChange={(e) =>
+                            updateItem(item.key, { returnType: e.target.value as "replacement" | "credit-note" })
+                          }
+                        >
+                          <option value="credit-note">{t("prCreditNote")}</option>
+                          <option value="replacement">{t("prReplacement")}</option>
+                        </Select>
+                      </Field>
+                    </div>
+                  ) : null}
+                </div>
               </div>
             ))}
           </div>
@@ -380,19 +528,98 @@ export function PurchaseRegisterTool() {
                   <p className="mt-1 text-xs text-muted">
                     {p.items.map((i) => `${i.name} ×${i.quantity}`).join(", ")}
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => setDeleting(p)}
-                    className="mt-2 text-xs font-semibold text-red-500 hover:text-red-600"
-                  >
-                    {t("delete")}
-                  </button>
+                  {(() => {
+                    const returned = returnedQuantities(p.id, returns);
+                    const chips = p.items
+                      .map((i, idx) => ({ i, idx, w: returnWindow(i) }))
+                      .filter(({ w }) => w !== "none");
+                    if (chips.length === 0) return null;
+                    return (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {chips.map(({ i, idx, w }) => (
+                          <span
+                            key={idx}
+                            className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                              w === "closed"
+                                ? "bg-cream-paper text-muted line-through"
+                                : w === "closing"
+                                  ? "bg-saffron/15 text-ink"
+                                  : "bg-indigo/10 text-indigo"
+                            }`}
+                          >
+                            {i.name}:{" "}
+                            {w === "closed"
+                              ? fill(t("prReturnClosed"), { date: i.returnBy ?? "" })
+                              : i.returnBy
+                                ? fill(t("prReturnTill"), { date: i.returnBy })
+                                : t("prReturnNoDeadline")}
+                            {" · "}
+                            {i.returnType === "replacement" ? t("prReplacement") : t("prCreditNote")}
+                            {returned.get(idx) ? ` · ${fill(t("prReturnedQty"), { qty: returned.get(idx)! })}` : ""}
+                          </span>
+                        ))}
+                      </div>
+                    );
+                  })()}
+                  <div className="mt-2 flex flex-wrap gap-4">
+                    {returnableLines(p, returns).length > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => setReturning(p)}
+                        className="text-xs font-semibold text-indigo hover:underline"
+                      >
+                        {t("prReturnToSupplier")}
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => setDeleting(p)}
+                      className="text-xs font-semibold text-red-500 hover:text-red-600"
+                    >
+                      {t("delete")}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
           )}
+          <ReturnsList
+            returns={returns}
+            currency={currency}
+            onReceive={setReceiving}
+            onDelete={setDeletingReturn}
+          />
         </Card>
       </div>
+
+      {returning ? (
+        <ReturnDialog
+          purchase={returning}
+          returns={returns}
+          currency={currency}
+          onSave={(r) => createReturn(returning, r)}
+          onClose={() => setReturning(null)}
+        />
+      ) : null}
+      {receiving ? (
+        <ReceiveDialog
+          ret={receiving}
+          batchTracking={batchTracking}
+          onConfirm={(info) => receiveReplacement(receiving, info)}
+          onClose={() => setReceiving(null)}
+        />
+      ) : null}
+      <ConfirmDialog
+        open={deletingReturn !== null}
+        title={t("prDeleteReturnTitle")}
+        message={t("prDeleteReturnMessage")}
+        confirmLabel={t("delete")}
+        onConfirm={async () => {
+          if (deletingReturn) await deleteReturnRecord(deletingReturn);
+          setDeletingReturn(null);
+        }}
+        onCancel={() => setDeletingReturn(null)}
+      />
 
       <ConfirmDialog
         open={pendingStock !== null}

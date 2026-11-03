@@ -90,6 +90,8 @@ export type BatchEdit = {
   batchNo: string;
   expiry: string;
   costPrice: number | null;
+  /** Selling price for this batch; null = product's selling price. */
+  sellingPrice?: number | null;
   quantity: number;
   note?: string;
 };
@@ -517,7 +519,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
       // anything else is absorbed by reconcile (opening batch / FEFO).
       let batches: StockBatch[] = [];
       if (batchMode) {
-        const named = Boolean(batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null);
+        const named = Boolean(
+          batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null || batch?.sellingPrice != null
+        );
         if (change > 0 && named) {
           batches = [makeBatch(updated, change, { note, ...batch })];
         } else {
@@ -553,6 +557,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         batchNo: edit.batchNo.trim(),
         expiry: edit.expiry,
         costPrice: edit.costPrice,
+        sellingPrice: edit.sellingPrice ?? null,
         quantity: edit.quantity,
         // Once it has details it is a real batch, not the catch-all.
         opening: batch.opening && !named ? true : undefined,

@@ -534,10 +534,12 @@ function StockAdjustModal({
   const [batchNo, setBatchNo] = useState("");
   const [expiry, setExpiry] = useState("");
   const [costText, setCostText] = useState("");
+  const [priceText, setPriceText] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (product) {
+      setPriceText("");
       setMode("add");
       setQtyText("");
       setNote("");
@@ -556,14 +558,21 @@ function StockAdjustModal({
       setError("Enter a quantity greater than zero.");
       return;
     }
-    let batch: { batchNo: string; expiry: string; costPrice: number | null } | undefined;
+    let batch:
+      | { batchNo: string; expiry: string; costPrice: number | null; sellingPrice: number | null }
+      | undefined;
     if (batchMode && mode === "add") {
       const cost = costText.trim() === "" ? null : parseFloat(costText);
       if (cost !== null && (!Number.isFinite(cost) || cost < 0)) {
         setError("Cost must be zero or more.");
         return;
       }
-      batch = { batchNo, expiry, costPrice: cost };
+      const price = priceText.trim() === "" ? null : parseFloat(priceText);
+      if (price !== null && (!Number.isFinite(price) || price < 0)) {
+        setError("Selling price must be zero or more.");
+        return;
+      }
+      batch = { batchNo, expiry, costPrice: cost, sellingPrice: price };
     }
     await adjustStock(product.id, mode, qty, note.trim(), batch);
     onClose();
@@ -606,7 +615,7 @@ function StockAdjustModal({
           />
         </Field>
         {batchMode && mode === "add" && (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3">
             <Field label="Batch no.">
               <input
                 value={batchNo}
@@ -631,6 +640,17 @@ function StockAdjustModal({
                 value={costText}
                 onChange={(event) => setCostText(event.target.value)}
                 placeholder={product.costPrice === null ? "Optional" : String(product.costPrice)}
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Selling price">
+              <input
+                type="number"
+                min={0}
+                step="0.01"
+                value={priceText}
+                onChange={(event) => setPriceText(event.target.value)}
+                placeholder={String(product.sellingPrice)}
                 className={inputClass}
               />
             </Field>

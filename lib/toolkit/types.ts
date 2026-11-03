@@ -146,6 +146,50 @@ export type PurchaseItem = {
   /** Batch number and expiry ("yyyy-mm-dd"), filled when POS batch tracking is on. */
   batchNo?: string;
   expiry?: string;
+  /** Selling price for this batch (batch tracking only); blank = product's price. */
+  sellingPrice?: number | null;
+  /** The supplier takes this item back. */
+  returnable?: boolean;
+  /** Last day it can be returned, "yyyy-mm-dd"; "" = no deadline. */
+  returnBy?: string;
+  /** How the supplier settles a return. */
+  returnType?: ReturnType;
+};
+
+export type ReturnType = "replacement" | "credit-note";
+
+export type PurchaseReturnItem = {
+  /** Index of the line in the purchase it came from. */
+  itemIndex: number;
+  productId: string | null;
+  name: string;
+  quantity: number;
+  unitCost: number;
+};
+
+/**
+ * Goods sent back to a supplier. A credit note settles at once and reduces
+ * what you owe the supplier; a replacement stays "pending" until the new
+ * goods arrive, then "received" (stock comes back in as a new batch).
+ */
+export type PurchaseReturn = {
+  id: string;
+  purchaseId: string;
+  supplierId: string | null;
+  supplierName: string;
+  billNumber: string;
+  date: string; // ISO date (yyyy-mm-dd)
+  mode: ReturnType;
+  items: PurchaseReturnItem[];
+  /** Σ quantity × unit cost — the credit note value. */
+  amount: number;
+  status: "settled" | "pending" | "received";
+  /** Whether the returned units were taken out of product stock. */
+  stockApplied: boolean;
+  receivedAt?: string;
+  note: string;
+  createdByTool: ToolSlug;
+  createdAt: string;
 };
 
 export type Purchase = {

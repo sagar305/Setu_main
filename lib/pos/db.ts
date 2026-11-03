@@ -22,9 +22,11 @@ const DB_NAME = "POS_DATABASE";
 // Ledger and Accounts Payable Aging tools.
 // v9 adds stock_batches (optional batch & expiry tracking for the POS, see
 // lib/pos/batches). Named so because `batches` belongs to the tuition stores.
+// v10 adds purchase_returns (goods sent back to a supplier for a replacement
+// or a credit note) for the Purchase Register.
 // The upgrade handler creates any missing stores, so bumping the version
 // migrates older databases in place.
-const DB_VERSION = 9;
+const DB_VERSION = 10;
 
 export const STORES = [
   "business",
@@ -72,6 +74,7 @@ export const STORES = [
   "clinic_settings",
   "supplier_ledger",
   "stock_batches",
+  "purchase_returns",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];

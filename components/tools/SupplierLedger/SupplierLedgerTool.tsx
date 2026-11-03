@@ -77,8 +77,8 @@ export function SupplierLedgerTool() {
   const money = (v: number) => formatMoney(v, currency);
 
   const positions = useMemo(
-    () => computePayables(workspace.suppliers, workspace.purchases, entries),
-    [workspace.suppliers, workspace.purchases, entries],
+    () => computePayables(workspace.suppliers, workspace.purchases, entries, workspace.purchaseReturns),
+    [workspace.suppliers, workspace.purchases, entries, workspace.purchaseReturns],
   );
 
   const parties = useMemo(
@@ -125,6 +125,25 @@ export function SupplierLedgerTool() {
         source: "purchase",
       });
     }
+    // Goods returned for a credit note reduce what is owed.
+    for (const r of workspace.purchaseReturns) {
+      if (r.mode !== "credit-note" || !(r.amount > 0)) continue;
+      if (resolve(r.supplierId, r.supplierName) !== selected.key) continue;
+      rows.push({
+        key: `r:${r.id}`,
+        date: r.date,
+        sortKey: r.createdAt,
+        label: t("slCreditNote"),
+        detail: [
+          r.billNumber ? fill(t("slBillNo"), { number: r.billNumber }) : "",
+          r.items.map((i) => `${i.name} ×${i.quantity}`).join(", "),
+        ]
+          .filter(Boolean)
+          .join(" · "),
+        signed: -r.amount,
+        source: "purchase",
+      });
+    }
     for (const e of entries) {
       if (resolve(e.supplierId, e.supplierName) !== selected.key) continue;
       const linked = e.billRef ? selected.bills.find((b) => b.ref === e.billRef) : undefined;
@@ -155,7 +174,7 @@ export function SupplierLedgerTool() {
       running += r.signed;
       return { ...r, running };
     });
-  }, [selected, workspace.suppliers, workspace.purchases, entries, t]);
+  }, [selected, workspace.suppliers, workspace.purchases, workspace.purchaseReturns, entries, t]);
 
   // Credit purchases are read live from the Purchase Register; pulling just
   // re-reads the register (connecting the workspace first if needed) so bills
