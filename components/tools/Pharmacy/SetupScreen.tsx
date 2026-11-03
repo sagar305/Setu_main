@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { usePharmacy } from "@/lib/pharmacy/store";
 import { MEDICINE_FORMS, FORM_LABELS, TAX_RATES } from "@/lib/pharmacy/types";
 import { Field, inputClass, primaryBtnClass } from "./ui";
+import { detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 /**
  * Shop details, licence numbers, and one medicine.
@@ -54,7 +55,7 @@ export function SetupScreen() {
           name: name.trim(),
           phone: phone.trim(),
           address: business?.address ?? "",
-          currency: business?.currency ?? "INR",
+          currency: business?.currency ?? detectCurrency(),
           email: business?.email ?? "",
           taxNumber: gstin.trim() || (business?.taxNumber ?? ""),
           logoDataUrl: business?.logoDataUrl ?? "",

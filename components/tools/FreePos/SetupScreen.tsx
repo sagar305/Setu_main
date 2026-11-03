@@ -3,15 +3,15 @@
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
-import { CURRENCIES } from "@/lib/pos/types";
 import { Field, inputClass, primaryBtnClass } from "./ui";
+import { currencyOptions, detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 export function SetupScreen() {
   const { createBusiness, backToWelcome } = usePos();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [currency, setCurrency] = useState("INR");
+  const [currency, setCurrency] = useState(() => detectCurrency());
   const [email, setEmail] = useState("");
   const [taxNumber, setTaxNumber] = useState("");
   const [upiId, setUpiId] = useState("");
@@ -102,7 +102,7 @@ export function SetupScreen() {
             onChange={(event) => setCurrency(event.target.value)}
             className={inputClass}
           >
-            {CURRENCIES.map((c) => (
+            {currencyOptions(currency).map((c) => (
               <option key={c.code} value={c.code}>
                 {c.label}
               </option>

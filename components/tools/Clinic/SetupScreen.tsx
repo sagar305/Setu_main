@@ -3,9 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useClinic } from "@/lib/clinic/store";
-import { CURRENCIES } from "@/lib/pos/types";
 import { Field, inputClass, primaryBtnClass } from "@/components/tools/FreePos/ui";
 import { useI18n } from "@/lib/i18n";
+import { currencyOptions, detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 /**
  * Two things in one form: the clinic (the workspace Business) and the doctor
@@ -19,7 +19,7 @@ export function SetupScreen() {
   const [name, setName] = useState(business?.name ?? "");
   const [phone, setPhone] = useState(business?.phone ?? "");
   const [address, setAddress] = useState(business?.address ?? "");
-  const [currency, setCurrency] = useState(business?.currency ?? "INR");
+  const [currency, setCurrency] = useState(() => business?.currency ?? detectCurrency());
   const [upiId, setUpiId] = useState(business?.upiId ?? "");
 
   const [doctorName, setDoctorName] = useState("");
@@ -128,7 +128,7 @@ export function SetupScreen() {
               onChange={(event) => setCurrency(event.target.value)}
               className={inputClass}
             >
-              {CURRENCIES.map((item) => (
+              {currencyOptions(currency).map((item) => (
                 <option key={item.code} value={item.code}>
                   {item.label}
                 </option>

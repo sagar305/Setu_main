@@ -2,8 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
+  ArrowDownLeft,
+  ArrowUpRight,
   BarChart3,
-  BookOpen,
+  LineChart,
+  Printer,
   LayoutDashboard,
   Lock,
   Maximize2,
@@ -34,7 +37,15 @@ import { OrdersScreen } from "./OrdersScreen";
 import { CustomersScreen } from "./CustomersScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
-import { CashBookTool } from "@/components/tools/CashBook/CashBookTool";
+import { ToolScreen, tabTools, toolScreenId, toolSlugOf } from "./ToolsScreen";
+import type { PosToolCategory } from "@/lib/pos/posTools";
+
+const TOOL_ICONS: Record<PosToolCategory, typeof Package> = {
+  "Sales & billing": Printer,
+  "Money in": ArrowDownLeft,
+  "Money out": ArrowUpRight,
+  "Reports & analysis": LineChart,
+};
 
 const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -42,7 +53,6 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
   { id: "products", label: "Products", icon: Package },
   { id: "orders", label: "Orders", icon: Receipt },
   { id: "customers", label: "Customers", icon: Users },
-  { id: "cashbook", label: "Cash Book", icon: BookOpen },
   { id: "reports", label: "Reports", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings },
 ];
@@ -186,8 +196,28 @@ function PosShell({
   fullscreen: boolean;
   onToggleFullscreen: () => void;
 }) {
-  const { business, settings } = usePos();
+  const { business, settings, reload } = usePos();
   const [screen, setScreen] = useState<ScreenId>("dashboard");
+
+  // Connected tools the owner chose to show as tabs, just before Settings.
+  const tools = tabTools(settings.connectedTools, settings.toolTabs);
+  const navItems = useMemo(() => {
+    const toolItems = tools.map((tool) => ({
+      id: toolScreenId(tool.slug) as ScreenId,
+      label: tool.name,
+      icon: TOOL_ICONS[tool.category],
+    }));
+    const settingsItem = NAV_ITEMS[NAV_ITEMS.length - 1];
+    return [...NAV_ITEMS.slice(0, -1), ...toolItems, settingsItem];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tools.map((t) => t.slug).join(",")]);
+  const activeToolSlug = toolSlugOf(screen);
+  const activeTool = activeToolSlug ? tools.find((t) => t.slug === activeToolSlug) : undefined;
+
+  // A tool switched off while its tab was open: fall back to the dashboard.
+  useEffect(() => {
+    if (activeToolSlug && !activeTool) setScreen("dashboard");
+  }, [activeToolSlug, activeTool]);
   const [queryRequest, setQueryRequest] = useState<QueryRequest | null>(null);
   const [offline, setOffline] = useState(false);
 
@@ -254,6 +284,9 @@ function PosShell({
   const whatsNew = useWhatsNew("pos", business?.createdAt, isTakenUp);
 
   const navigate: NavigateFn = (target, query) => {
+    // Leaving a tool tab: the tool saved straight to the database, so re-read
+    // it before the POS writes anything from its in-memory copy.
+    if (toolSlugOf(screen) && target !== screen) void reload();
     whatsNew.visit(target);
     setScreen(target);
     if (query !== undefined) {
@@ -306,7 +339,7 @@ function PosShell({
         className="-mx-1 mt-4 flex gap-1 overflow-x-auto pb-1"
         aria-label="POS sections"
       >
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <button
             key={item.id}
             type="button"
@@ -344,8 +377,8 @@ function PosShell({
         <div className={screen === "customers" ? "" : "hidden"}>
           <CustomersScreen externalQuery={queryFor("customers")} onNavigate={navigate} />
         </div>
-        {/* Mounted only while open, so it re-reads today's sales each visit. */}
-        {screen === "cashbook" ? <CashBookTool embedded /> : null}
+        {/* Mounted only while open, so each visit reads current data. */}
+        {activeTool ? <ToolScreen key={activeTool.slug} tool={activeTool} /> : null}
         <div className={screen === "reports" ? "" : "hidden"}>
           <ReportsScreen />
         </div>

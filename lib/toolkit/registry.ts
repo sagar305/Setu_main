@@ -252,7 +252,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: ["business-profile"],
     paidPath: "platform",
     integrations: [
-      { with: "browser-pos", ux: "POS sales show as money in; also a Cash Book tab inside the POS" },
+      { with: "browser-pos", ux: "POS sales show as money in; listed under POS connected tools" },
       { with: "purchase-register", ux: "Purchases not on credit show as money out" },
       { with: "expense-tracker", ux: "Expenses show as money out" },
       { with: "supplier-ledger", ux: "Supplier payments show as money out" },

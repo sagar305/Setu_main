@@ -26,6 +26,7 @@ import {
 } from "@/lib/toolkit/preferences";
 import { shortLinksConfigured } from "@/lib/toolkit/shortLink";
 import { useI18n } from "@/lib/i18n";
+import { detectCurrency } from "@/lib/toolkit/currencyDetect";
 
 const BLANK = {
   name: "",
@@ -80,7 +81,9 @@ export function BusinessProfileTool() {
 
   useEffect(() => {
     setTimezones(allTimezones());
-    setForm((f) => ({ ...f, timezone: f.timezone || detectTimezone() }));
+    // A new profile starts in the currency of where the browser is (saved
+    // profiles load their own below).
+    setForm((f) => ({ ...f, timezone: f.timezone || detectTimezone(), currency: detectCurrency() }));
     getBusiness()
       .then((b) => {
         if (b) {

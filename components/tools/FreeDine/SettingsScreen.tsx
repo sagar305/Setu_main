@@ -27,7 +27,6 @@ import { formatPlain, parseAmount } from "@/lib/dine/money";
 import { daysSinceBackup } from "@/lib/dine/backup";
 import { isValidPinFormat } from "@/lib/dine/pin";
 import {
-  CURRENCIES,
   ORDER_TYPE_ORDER,
   orderTypeLabel,
   paymentMethodLabel,
@@ -49,6 +48,7 @@ import {
   secondaryBtnClass,
   tapTargetClass,
 } from "./ui";
+import { currencyOptions } from "@/lib/toolkit/currencyDetect";
 
 const PAPER_SIZES: { id: PaperSize; labelKey: TKey }[] = [
   { id: "80mm", labelKey: "dnStPaper80" },
@@ -155,7 +155,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow: () => void }) {
               onChange={(event) => void updateBusiness({ currency: event.target.value })}
               className={inputClass}
             >
-              {CURRENCIES.map((option) => (
+              {currencyOptions(business?.currency).map((option) => (
                 <option key={option.code} value={option.code}>
                   {option.label}
                 </option>

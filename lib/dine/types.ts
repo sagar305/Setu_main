@@ -854,6 +854,7 @@ export const CURRENCIES = [
   { code: "EUR", symbol: "€", label: "Euro (€)" },
   { code: "GBP", symbol: "£", label: "British Pound (£)" },
   { code: "AED", symbol: "د.إ", label: "UAE Dirham (د.إ)" },
+  { code: "PKR", symbol: "Rs", label: "Pakistani Rupee (Rs)" },
   { code: "SGD", symbol: "S$", label: "Singapore Dollar (S$)" },
 ] as const;
 

@@ -41,12 +41,7 @@ const SOURCE_LABEL: Record<Exclude<CashSource, "manual">, DictKey> = {
   "supplier-payment": "cbSrcSupplier",
 };
 
-/**
- * `embedded` is set when the Cash Book runs inside the Browser POS: the POS
- * owns the workspace, so its sales and the linked tools' records are read
- * straight away instead of asking first.
- */
-export function CashBookTool({ embedded = false }: { embedded?: boolean } = {}) {
+export function CashBookTool() {
   const { t, lang } = useI18n();
   const { items: entries, loading, error, save, remove } = useEntityList<CashEntry>("cashbook");
   const workspace = useFinanceWorkspace("cash-book");
@@ -60,10 +55,7 @@ export function CashBookTool({ embedded = false }: { embedded?: boolean } = {}) 
   const [viewDate, setViewDate] = useState(todayIso());
   const [deleting, setDeleting] = useState<CashEntry | null>(null);
 
-  const { ready, exists, connected, connect } = workspace;
-  useEffect(() => {
-    if (embedded && ready && exists && !connected) connect().catch(() => {});
-  }, [embedded, ready, exists, connected, connect]);
+  const { connected } = workspace;
 
   // Manual entries plus the money in/out recorded by the POS and linked tools.
   const rows = useMemo(() => {
@@ -172,9 +164,7 @@ export function CashBookTool({ embedded = false }: { embedded?: boolean } = {}) 
 
   return (
     <div>
-      {embedded ? null : (
-        <WorkspaceBanner connection={workspace} message={t("cbConnectHint")} />
-      )}
+      <WorkspaceBanner connection={workspace} message={t("cbConnectHint")} />
     <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
       <Card className="h-fit">
         <h2 className="mb-4 text-lg font-bold text-ink">{t("addEntry")}</h2>
