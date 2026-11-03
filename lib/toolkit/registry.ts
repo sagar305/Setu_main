@@ -637,12 +637,12 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     status: "built",
     route: "/tools/purchase-register",
     reads: ["suppliers", "products"],
-    writes: ["inventory", "expenses"],
+    writes: ["inventory"],
     dependsOn: ["supplier-book", "stock-register"],
     paidPath: "retail-pos",
     integrations: [
       { with: "stock-register", ux: "Update stock from recorded purchases" },
-      { with: "expense-tracker", ux: "Optionally log a purchase as a business expense" },
+      { with: "profit-dashboard", ux: "Purchase cost becomes cost of goods when the stock sells" },
     ],
   },
   {
@@ -667,11 +667,14 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     tier: "growth",
     status: "built",
     route: "/tools/profit-dashboard",
-    reads: ["orders", "expenses", "products"],
+    reads: ["orders", "expenses", "products", "purchases"],
     writes: [],
     dependsOn: ["expense-tracker"],
     paidPath: "platform",
-    integrations: [{ with: "expense-tracker", ux: "Uses actual expenses, not estimates" }],
+    integrations: [
+      { with: "expense-tracker", ux: "Uses actual expenses, not estimates" },
+      { with: "purchase-register", ux: "Prices cost of goods from what you paid for the stock" },
+    ],
   },
 
   // ---- Future / Ideas (vocabulary; lighter metadata) ----------------------

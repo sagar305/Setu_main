@@ -15,8 +15,8 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
-import { applyPurchaseToStock, getSuppliers, saveExpense, deleteExpense } from "@/lib/toolkit/workspace";
-import type { Expense, Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
+import { applyPurchaseToStock, getSuppliers, deleteExpense } from "@/lib/toolkit/workspace";
+import type { Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
 import { useI18n } from "@/lib/i18n";
@@ -46,7 +46,6 @@ export function PurchaseRegisterTool() {
   const [date, setDate] = useState(todayIso());
   const [paymentMode, setPaymentMode] = useState("Cash");
   const [notes, setNotes] = useState("");
-  const [recordExpense, setRecordExpense] = useState(true);
   const [items, setItems] = useState<ItemRow[]>([blankItem()]);
 
   const [pendingStock, setPendingStock] = useState<Purchase | null>(null);
@@ -109,37 +108,17 @@ export function PurchaseRegisterTool() {
     };
   };
 
-  // Save the purchase, optionally applying stock and optionally mirroring it
-  // into the Expense Tracker (category "Purchases") linked back via expenseId.
+  // Save the purchase, optionally applying stock. A purchase is stock (cost of
+  // goods), not an expense, so it is never copied into the Expense Tracker —
+  // the Profit Dashboard charges its cost when the stock sells.
   const finalize = async (purchase: Purchase, applyStock: boolean) => {
     if (applyStock) {
       await applyPurchaseToStock(purchase);
       purchase.stockApplied = true;
       await workspace.reload();
     }
-    if (recordExpense) {
-      const expense: Expense = {
-        id: generateId(),
-        date: purchase.date,
-        category: "Purchases",
-        description: `Purchase${purchase.billNumber ? ` ${purchase.billNumber}` : ""} from ${
-          purchase.supplierName || "supplier"
-        }`,
-        amount: purchase.total,
-        paymentMode: purchase.paymentMode,
-        supplierId: purchase.supplierId,
-        createdByTool: "purchase-register",
-        createdAt: nowIso(),
-        updatedAt: nowIso(),
-      };
-      await saveExpense(expense);
-      purchase.expenseId = expense.id;
-    }
     await save(purchase);
-    const extras = [
-      applyStock ? t("prStockUpdated") : null,
-      recordExpense ? t("prAddedToExpenses") : null,
-    ].filter(Boolean);
+    const extras = [applyStock ? t("prStockUpdated") : null].filter(Boolean);
     setMessage(
       fill(t("prRecordedToast"), {
         amount: formatMoney(purchase.total, currency),
@@ -329,20 +308,9 @@ export function PurchaseRegisterTool() {
             />
           </Field>
 
-          <label className="mt-4 flex items-start gap-2 rounded-lg border border-muted-line/30 bg-cream-paper/40 p-3">
-            <input
-              type="checkbox"
-              checked={recordExpense}
-              onChange={(e) => setRecordExpense(e.target.checked)}
-              className="mt-0.5 h-4 w-4 accent-indigo"
-            />
-            <span className="text-sm text-ink">
-              {t("prAlsoExpense")}
-              <span className="block text-xs text-muted">
-                {t("prExpenseHint")}
-              </span>
-            </span>
-          </label>
+          <p className="mt-4 rounded-lg border border-muted-line/30 bg-cream-paper/40 p-3 text-xs text-muted">
+            {t("prCogsNote")}
+          </p>
 
           <div className="mt-5 flex items-center justify-between border-t border-muted-line/30 pt-4">
             <p className="text-lg font-bold text-ink">{t("total")}: {formatMoney(total, currency)}</p>
