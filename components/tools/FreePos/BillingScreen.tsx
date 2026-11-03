@@ -13,6 +13,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
+import { batchLabel, batchesFor, expiryStatus } from "@/lib/pos/batches";
 import { calculateCartTotals } from "@/lib/pos/calc";
 import { isToolEnabled } from "@/lib/pos/posTools";
 import {
@@ -54,7 +55,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     heldCarts,
     holdCart,
     removeHeldCart,
+    stockBatches,
   } = usePos();
+  const batchMode = settings.batchTracking === true;
   const currency = business?.currency ?? "INR";
   // Credit (udhaar) only appears when the Customer Ledger tool is switched on
   // in Settings → Connected tools.
@@ -96,6 +99,25 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [products, search, categoryId]);
 
+  // Batch tracking: a batch can carry its own selling price (e.g. a new MRP).
+  // The line is priced from the picked batch, or the one sold first.
+  const batchFor = (productId: string, batchId?: string | null) => {
+    if (!batchMode) return undefined;
+    const own = batchesFor(stockBatches, productId);
+    return own.find((b) => b.id === batchId) ?? own[0];
+  };
+
+  /** Price and tax for a line: the batch's own when it has them, else the product's. */
+  const linePricing = (product: Product, batchId?: string | null) => {
+    const batch = batchFor(product.id, batchId);
+    const hasBatchTax = batch?.taxRate != null;
+    return {
+      price: batch?.sellingPrice ?? product.sellingPrice,
+      taxRate: hasBatchTax ? (settings.taxEnabled ? batch!.taxRate! : 0) : effectiveTaxRate(product),
+      taxInclusive: hasBatchTax ? batch!.taxInclusive ?? false : product.taxInclusive ?? false,
+    };
+  };
+
   const addToCart = (product: Product) => {
     setError("");
     setLines((prev) => {
@@ -110,11 +132,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         {
           productId: product.id,
           name: product.name,
-          price: product.sellingPrice,
+          ...linePricing(product),
           quantity: 1,
           unit: product.unit,
-          taxRate: effectiveTaxRate(product),
-          taxInclusive: product.taxInclusive ?? false,
         },
       ];
     });
@@ -134,6 +154,16 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       searchRef.current?.focus();
     }
   };
+
+  const setLineBatch = (productId: string, batchId: string) =>
+    setLines((prev) =>
+      prev.map((line) => {
+        if (line.productId !== productId) return line;
+        const product = products.find((p) => p.id === productId);
+        if (!product) return { ...line, batchId: batchId || null };
+        return { ...line, batchId: batchId || null, ...linePricing(product, batchId || null) };
+      })
+    );
 
   const setQuantity = (productId: string, quantity: number) => {
     if (!Number.isInteger(quantity) || quantity < 1) return;
@@ -411,6 +441,41 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     {line.taxRate > 0 &&
                       ` · ${line.taxRate}% tax${line.taxInclusive ? " incl." : ""}`}
                   </p>
+                  {batchMode && (() => {
+                    const own = batchesFor(stockBatches, line.productId);
+                    if (own.length === 0) return null;
+                    const picked = own.find((b) => b.id === line.batchId);
+                    const first = picked ?? own[0];
+                    const expired = expiryStatus(first.expiry) === "expired";
+                    return (
+                      <>
+                        {own.length > 1 ? (
+                          <select
+                            value={picked?.id ?? ""}
+                            onChange={(event) => setLineBatch(line.productId, event.target.value)}
+                            aria-label={`Batch for ${line.name}`}
+                            className="mt-1 w-full max-w-[16rem] rounded-md border border-muted-line/40 bg-white px-2 py-1 text-xs text-ink focus:border-indigo focus:outline-none"
+                          >
+                            <option value="">Auto — earliest expiry first</option>
+                            {own.map((b) => (
+                              <option key={b.id} value={b.id}>
+                                {batchLabel(b)} · {b.quantity} left
+                                {b.sellingPrice != null ? ` · ${formatMoney(b.sellingPrice, currency)}` : ""}
+                                {expiryStatus(b.expiry) === "expired" ? " · EXPIRED" : ""}
+                              </option>
+                            ))}
+                          </select>
+                        ) : (
+                          <p className="mt-0.5 text-xs text-muted">Batch: {batchLabel(first)}</p>
+                        )}
+                        {expired && (
+                          <p className="mt-0.5 text-xs font-semibold text-red-600">
+                            {picked ? "This batch" : "The earliest batch"} expired on {first.expiry}
+                          </p>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
                 <div className="flex items-center gap-1">
                   <button

@@ -94,10 +94,6 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
     Tool: dynamic(() => import("@/components/tools/CustomerLedger/CustomerLedgerTool").then((m) => m.CustomerLedgerTool)),
     schema: true, suggested: true, suspense: false,
   },
-  "customer-statement": {
-    Tool: dynamic(() => import("@/components/tools/statements/CustomerStatementTool").then((m) => m.CustomerStatementTool)),
-    schema: false, suggested: false, suspense: false,
-  },
   "debit-note-generator": {
     Tool: dynamic(async () => {
       const { DocumentTool } = await import("@/components/tools/docgen/DocumentTool");

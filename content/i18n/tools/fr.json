@@ -1490,43 +1490,6 @@
       }
     },
     {
-      "name": "Relevé de compte client",
-      "shortDescription": "Relevé par client : factures, règlements et solde progressif. Impression en PDF.",
-      "seo": {
-        "title": "Générateur de relevé de compte client gratuit",
-        "description": "Générez le relevé de compte d'un client — factures, règlements et avoirs avec le solde cumulé. Imprimez en PDF ou exportez en CSV. Gratuit, sans inscription.",
-        "keywords": [
-          "relevé de compte client",
-          "relevé de compte",
-          "modèle de relevé de compte client",
-          "relevé du solde dû",
-          "relevé débiteur"
-        ],
-        "ogTitle": "Relevé de compte client",
-        "ogDescription": "Générez le relevé de compte d'un client — factures, règlements et avoirs avec le solde cumulé. Imprimez en PDF ou exportez en CSV. Gratuit, sans inscription."
-      },
-      "hero": {
-        "headline": "Relevé de compte client",
-        "subheadline": "Chaque facture, règlement et ajustement d'un client — avec le solde cumulé qui met fin aux discussions."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "Qu'est-ce qu'un relevé de compte ?",
-            "answer": "Le récapitulatif de toutes les opérations avec un client sur une période — factures émises, règlements reçus, avoirs accordés — qui se termine par le solde dû aujourd'hui."
-          },
-          {
-            "question": "Quand envoyer un relevé à un client ?",
-            "answer": "Chaque mois aux clients réguliers à crédit, et immédiatement en cas de relance. Un relevé clair règle la plupart des échanges du type « nous avons déjà payé »."
-          },
-          {
-            "question": "Comment le solde est-il calculé ?",
-            "answer": "Solde d'ouverture plus les factures, moins les règlements et les avoirs, dans l'ordre des dates. L'outil recalcule le solde cumulé tout seul à mesure que vous ajoutez des opérations."
-          }
-        ]
-      }
-    },
-    {
       "name": "Balance âgée clients",
       "shortDescription": "Factures clients impayées par tranches d'ancienneté, de courant à 90+ jours. Export CSV.",
       "seo": {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { creditNoteTotal } from "@/lib/toolkit/purchaseReturns";
 import { Card, Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useLocalStore } from "@/lib/hooks/useLocalStore";
@@ -96,7 +97,9 @@ export function ProfitLossTool() {
   const pullFromWorkspace = () => {
     const completed = workspace.orders.filter((o) => o.status === "completed");
     const netSales = completed.reduce((s, o) => s + (o.subtotal - o.discountAmount), 0);
-    const purchasesTotal = workspace.purchases.reduce((s, p) => s + p.total, 0);
+    // Goods returned for a credit note were never really bought.
+    const purchasesTotal =
+      workspace.purchases.reduce((s, p) => s + p.total, 0) - creditNoteTotal(workspace.purchaseReturns);
 
     const byCategory = new Map<string, number>();
     for (const e of workspace.expenses) {

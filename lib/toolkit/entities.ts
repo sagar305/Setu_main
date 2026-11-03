@@ -79,6 +79,8 @@ export type EntityName =
   | "ledger"
   | "supplier_ledger"
   | "purchases"
+  | "purchase_returns"
+  | "stock_batches"
   | "inventory"
   | "payments"
   | "assets"
@@ -274,6 +276,24 @@ export const ENTITIES: Record<EntityName, EntityDescriptor> = {
     primaryEditor: "purchase-register",
     store: "purchases",
     dangerousOps: ["delete"],
+    status: "live",
+  },
+  purchase_returns: {
+    name: "purchase_returns",
+    label: "Purchase Returns",
+    ownedBy: "workspace",
+    primaryEditor: "purchase-register",
+    store: "purchase_returns",
+    dangerousOps: ["delete"],
+    status: "live",
+  },
+  stock_batches: {
+    name: "stock_batches",
+    label: "Stock Batches",
+    ownedBy: "workspace",
+    primaryEditor: "browser-pos",
+    store: "stock_batches",
+    dangerousOps: ["delete", "adjust-stock"],
     status: "live",
   },
   inventory: {

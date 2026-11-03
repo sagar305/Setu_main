@@ -16,8 +16,12 @@
 //   2. Every other payment — and any leftover from a linked one — settles the
 //      supplier's OLDEST open bills first (FIFO), the way suppliers expect.
 //   3. Anything still left is an advance with that supplier.
+//
+// Credit notes (goods returned to the supplier for credit, see
+// purchaseReturns.ts) settle bills the same way a payment linked to that
+// purchase would, but are counted as `credited`, not `paid`.
 
-import type { Purchase, Supplier, SupplierLedgerEntry } from "@/lib/toolkit/types";
+import type { Purchase, PurchaseReturn, Supplier, SupplierLedgerEntry } from "@/lib/toolkit/types";
 
 export const CREDIT_PAYMENT_MODE = "Credit";
 
@@ -74,7 +78,9 @@ export type SupplierPosition = {
   phone: string;
   billed: number;
   paid: number;
-  /** billed − paid. Positive = you owe them; negative = advance with them. */
+  /** Credit notes received for returned goods. */
+  credited: number;
+  /** billed − paid − credited. Positive = you owe them; negative = advance with them. */
   balance: number;
   bills: OpenBill[];
 };
@@ -84,6 +90,7 @@ export function computePayables(
   suppliers: Supplier[],
   purchases: Purchase[],
   entries: SupplierLedgerEntry[],
+  returns: PurchaseReturn[] = [],
 ): Map<string, SupplierPosition> {
   const resolve = makePartyResolver(suppliers);
   const positions = new Map<string, SupplierPosition>();
@@ -101,6 +108,7 @@ export function computePayables(
         phone: saved?.phone ?? "",
         billed: 0,
         paid: 0,
+        credited: 0,
         balance: 0,
         bills: [],
       };
@@ -158,16 +166,39 @@ export function computePayables(
     row.bills.sort((a, b) => a.date.localeCompare(b.date) || a.ref.localeCompare(b.ref));
   }
 
-  // 2. Payments: linked ones first, then FIFO for the rest.
-  const payments = entries
-    .filter((e) => e.type === "payment" && e.amount > 0)
-    .sort((a, b) => a.date.localeCompare(b.date) || a.createdAt.localeCompare(b.createdAt));
+  // 2. Payments and credit notes: linked ones first, then FIFO for the rest.
+  type Settlement = {
+    supplierId: string | null;
+    supplierName: string;
+    amount: number;
+    billRef?: string;
+    date: string;
+    createdAt: string;
+    credit: boolean;
+  };
+  const payments: Settlement[] = [
+    ...entries
+      .filter((e) => e.type === "payment" && e.amount > 0)
+      .map((e) => ({ ...e, credit: false })),
+    ...returns
+      .filter((r) => r.mode === "credit-note" && r.amount > 0)
+      .map((r) => ({
+        supplierId: r.supplierId,
+        supplierName: r.supplierName,
+        amount: r.amount,
+        billRef: purchaseBillRef(r.purchaseId),
+        date: r.date,
+        createdAt: r.createdAt,
+        credit: true,
+      })),
+  ].sort((a, b) => a.date.localeCompare(b.date) || a.createdAt.localeCompare(b.createdAt));
   const leftovers = new Map<string, number>();
 
   for (const pay of payments) {
     const key = resolve(pay.supplierId, pay.supplierName);
     const row = position(key, pay.supplierId, pay.supplierName);
-    row.paid += pay.amount;
+    if (pay.credit) row.credited += pay.amount;
+    else row.paid += pay.amount;
     let remaining = pay.amount;
     const linked = pay.billRef ? billsByRef.get(pay.billRef) : undefined;
     if (linked && linked.partyKey === key) {
@@ -192,7 +223,7 @@ export function computePayables(
   }
 
   for (const row of positions.values()) {
-    row.balance = row.billed - row.paid;
+    row.balance = row.billed - row.paid - row.credited;
     for (const bill of row.bills) {
       if (bill.outstanding < EPSILON) bill.outstanding = 0;
     }

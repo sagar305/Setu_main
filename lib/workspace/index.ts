@@ -11,6 +11,14 @@
 
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import {
+  allocate,
+  makeBatch,
+  mergeBatches,
+  reconcileBatches,
+  type NewBatchInput,
+  type StockBatch,
+} from "@/lib/pos/batches";
+import {
   DEFAULT_SETTINGS,
   generateId,
   nowIso,
@@ -81,14 +89,24 @@ export async function getSettings(): Promise<PosSettings> {
   return stored ? { ...DEFAULT_SETTINGS, ...stored } : DEFAULT_SETTINGS;
 }
 
+export async function getStockBatches(): Promise<StockBatch[]> {
+  return dbGetAll<StockBatch>("stock_batches");
+}
+
 /**
  * Adjust a product's stock from outside the POS (e.g. an invoice tool
  * recording a sale). Records the movement in the inventory log.
+ *
+ * When the POS has batch tracking on, stock added with batch details becomes
+ * its own batch, and any other change is absorbed by reconcileBatches (opening
+ * batch for extra units, earliest expiry first for removed ones). With batch
+ * tracking off, `batch` is ignored and nothing but stock changes.
  */
 export async function updateStock(
   productId: string,
   change: number,
-  note = ""
+  note = "",
+  batch?: NewBatchInput
 ): Promise<void> {
   const products = await getProducts();
   const product = products.find((p) => p.id === productId);
@@ -105,5 +123,27 @@ export async function updateStock(
     note,
     createdAt: nowIso(),
   };
-  await dbBatch({ products: [updated], inventory: [log] });
+  let batches: StockBatch[] = [];
+  if ((await getSettings()).batchTracking) {
+    const named = Boolean(
+      batch?.batchNo?.trim() ||
+        batch?.expiry ||
+        batch?.costPrice != null ||
+        batch?.sellingPrice != null ||
+        batch?.taxRate != null
+    );
+    if (change > 0 && named) {
+      batches = [makeBatch(updated, change, { note, ...batch })];
+    } else if (change < 0 && batch?.purchaseId) {
+      // Returning goods to a supplier: take them from the batch that purchase
+      // brought in first, then earliest expiry for anything left.
+      const all = await getStockBatches();
+      const own = all.find((b) => b.productId === productId && b.purchaseId === batch.purchaseId);
+      const taken = allocate(all, product, -change, own?.id).updated;
+      batches = [...taken, ...reconcileBatches(updated, mergeBatches(all, taken))];
+    } else {
+      batches = reconcileBatches(updated, await getStockBatches());
+    }
+  }
+  await dbBatch({ products: [updated], inventory: [log], stock_batches: batches });
 }

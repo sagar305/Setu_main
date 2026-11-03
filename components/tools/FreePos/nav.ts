@@ -4,6 +4,7 @@ export type ScreenId =
   | "products"
   | "orders"
   | "customers"
+  | "cashbook"
   | "reports"
   | "settings";
 

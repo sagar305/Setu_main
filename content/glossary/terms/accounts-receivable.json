@@ -35,10 +35,6 @@
     },
     {
       "type": "tool",
-      "slug": "customer-statement"
-    },
-    {
-      "type": "tool",
       "slug": "journal-entry"
     },
     {

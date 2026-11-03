@@ -93,7 +93,6 @@ export type ToolSlug =
   | "profit-loss-statement"
   | "balance-sheet"
   | "cash-flow-statement"
-  | "customer-statement"
   | "invoice-aging-report"
   | "accounts-payable-aging"
   // Financial analysis
@@ -248,11 +247,16 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     status: "built",
     route: "/tools/cash-book",
     owns: "cashbook",
-    reads: ["business", "orders"],
+    reads: ["business", "orders", "ledger", "purchases", "expenses", "supplier_ledger"],
     writes: ["cashbook"],
     dependsOn: ["business-profile"],
     paidPath: "platform",
-    integrations: [{ with: "browser-pos", ux: "Record end-of-day cash closing automatically" }],
+    integrations: [
+      { with: "browser-pos", ux: "POS sales show as money in; also a Cash Book tab inside the POS" },
+      { with: "purchase-register", ux: "Purchases not on credit show as money out" },
+      { with: "expense-tracker", ux: "Expenses show as money out" },
+      { with: "supplier-ledger", ux: "Supplier payments show as money out" },
+    ],
   },
   {
     slug: "appointment-book",
@@ -637,12 +641,12 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     status: "built",
     route: "/tools/purchase-register",
     reads: ["suppliers", "products"],
-    writes: ["inventory", "expenses"],
+    writes: ["inventory"],
     dependsOn: ["supplier-book", "stock-register"],
     paidPath: "retail-pos",
     integrations: [
       { with: "stock-register", ux: "Update stock from recorded purchases" },
-      { with: "expense-tracker", ux: "Optionally log a purchase as a business expense" },
+      { with: "profit-dashboard", ux: "Purchase cost becomes cost of goods when the stock sells" },
     ],
   },
   {
@@ -667,11 +671,14 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     tier: "growth",
     status: "built",
     route: "/tools/profit-dashboard",
-    reads: ["orders", "expenses", "products"],
+    reads: ["orders", "expenses", "products", "purchases"],
     writes: [],
     dependsOn: ["expense-tracker"],
     paidPath: "platform",
-    integrations: [{ with: "expense-tracker", ux: "Uses actual expenses, not estimates" }],
+    integrations: [
+      { with: "expense-tracker", ux: "Uses actual expenses, not estimates" },
+      { with: "purchase-register", ux: "Prices cost of goods from what you paid for the stock" },
+    ],
   },
 
   // ---- Future / Ideas (vocabulary; lighter metadata) ----------------------
@@ -919,20 +926,6 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     dependsOn: [],
     paidPath: "platform",
     integrations: [{ with: "cash-book", ux: "Pull operating cash from the cash book" }],
-  },
-  {
-    slug: "customer-statement",
-    name: "Customer Statement",
-    category: "customer-management",
-    kind: "app",
-    tier: "growth",
-    status: "built",
-    route: "/tools/customer-statement",
-    reads: ["business", "customers", "ledger"],
-    writes: [],
-    dependsOn: [],
-    paidPath: "retail-pos",
-    integrations: [{ with: "customer-ledger", ux: "Build a statement from ledger transactions" }],
   },
   {
     slug: "invoice-aging-report",

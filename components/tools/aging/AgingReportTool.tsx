@@ -175,6 +175,7 @@ export function AgingReportTool({ kind }: { kind: AgingKind }) {
         workspace.suppliers,
         workspace.purchases,
         workspace.supplierLedger,
+        workspace.purchaseReturns,
       );
       const pulled: AgingDoc[] = openBills(positions).map((b) => ({
         id: generateLocalId(),

@@ -1,9 +1,13 @@
 "use client";
 
 // Profit Dashboard — net profit from real data:
-//   revenue (POS orders) − cost of goods (product costPrice) − expenses
-// Orders/products come from the shared workspace (consent-gated);
-// expenses come from the Expense Tracker's store.
+//   revenue (POS orders) − cost of goods sold − expenses
+// Cost of goods is the cost of the items sold: the batch cost saved on the
+// sale when POS batch tracking is on, otherwise priced from the Purchase
+// Register (falling back to product costPrice). Expenses are the Expense
+// Tracker's entries only: purchase-register mirrors are excluded, so stock
+// isn't charged twice (see lib/toolkit/profit.ts).
+// Orders/products come from the shared workspace (consent-gated).
 // Chart palette (#4F46E5 revenue / #D97706 expenses) validated for CVD
 // separation and contrast on the light surface.
 
@@ -12,8 +16,9 @@ import { Card, EmptyState, SecondaryButton, TextInput } from "@/components/toolk
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useLocalizedHref } from "@/lib/i18n/use-localized-href";
-import { getExpenses, getOrderItems, getOrders } from "@/lib/toolkit/workspace";
-import type { Expense } from "@/lib/toolkit/types";
+import { getExpenses, getOrderItems, getOrders, getPurchases } from "@/lib/toolkit/workspace";
+import type { Expense, Purchase } from "@/lib/toolkit/types";
+import { buildUnitCostLookup, operatingExpenses } from "@/lib/toolkit/profit";
 import type { Order, OrderItem } from "@/lib/pos/types";
 import { formatMoney } from "@/lib/pos/types";
 import { useI18n } from "@/lib/i18n";
@@ -55,6 +60,7 @@ export function ProfitDashboardTool() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [range, setRange] = useState<RangeKey>("30d");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -63,6 +69,7 @@ export function ProfitDashboardTool() {
 
   useEffect(() => {
     getExpenses().then(setExpenses).catch(() => {});
+    getPurchases().then(setPurchases).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -75,23 +82,28 @@ export function ProfitDashboardTool() {
   const currency = workspace.business?.currency ?? "INR";
   const { start, end } = rangeDates(range, from, to);
 
-  const costOf = useMemo(() => {
-    const map = new Map(workspace.products.map((p) => [p.id, p.costPrice ?? 0]));
-    return (item: OrderItem) => (item.productId ? (map.get(item.productId) ?? 0) : 0);
-  }, [workspace.products]);
+  const unitCost = useMemo(
+    () => buildUnitCostLookup(workspace.products, purchases),
+    [workspace.products, purchases],
+  );
 
   const data = useMemo(() => {
     const days = eachDay(start, end);
     const inRange = (isoDate: string) => isoDate >= start && isoDate <= end;
 
     const completed = orders.filter((o) => o.status === "completed" && inRange(o.date.slice(0, 10)));
-    const orderIds = new Set(completed.map((o) => o.id));
+    const saleDay = new Map(completed.map((o) => [o.id, o.date.slice(0, 10)]));
     const revenue = completed.reduce((s, o) => s + o.total, 0);
-    const cogs = orderItems
-      .filter((i) => orderIds.has(i.orderId))
-      .reduce((s, i) => s + costOf(i) * i.quantity, 0);
+    const cogs = orderItems.reduce((s, i) => {
+      const day = saleDay.get(i.orderId);
+      if (!day) return s;
+      // A sale made with batch tracking on saved the cost of the batches it used.
+      const cost = i.unitCost ?? unitCost(i.productId, day);
+      return s + cost * i.quantity;
+    }, 0);
 
-    const expInRange = expenses.filter((e) => inRange(e.date));
+    // Purchases are cost of goods (charged above when sold), never expenses.
+    const expInRange = operatingExpenses(expenses, purchases).filter((e) => inRange(e.date));
     const expenseTotal = expInRange.reduce((s, e) => s + e.amount, 0);
 
     const daily = days.map((day) => ({
@@ -114,7 +126,7 @@ export function ProfitDashboardTool() {
       daily,
       byCategory: Array.from(byCategory.entries()).sort((a, b) => b[1] - a[1]),
     };
-  }, [orders, orderItems, expenses, start, end, costOf]);
+  }, [orders, orderItems, expenses, purchases, start, end, unitCost]);
 
   const hasAnyData = orders.length > 0 || expenses.length > 0;
   const maxDaily = Math.max(...data.daily.map((d) => d.revenue), 1);
@@ -205,6 +217,7 @@ export function ProfitDashboardTool() {
               </Card>
             ))}
           </div>
+          <p className="-mt-3 mb-6 text-xs text-muted">{t("pdCogsNote")}</p>
 
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Revenue by day — single-series bar chart */}
