@@ -40,7 +40,9 @@ describe("website tags", () => {
 
   it("tags TB Analyser New and the POS and Free Dine Updated", () => {
     expect(productTag("tb-analyzer", nov1)).toBe("new");
-    expect(productTag("browser-pos", nov1)).toBe("updated");
+    // The POS update shipped on 3 Nov: not tagged before it, tagged after.
+    expect(productTag("browser-pos", nov1)).toBeNull();
+    expect(productTag("browser-pos", at("2026-11-03T12:00:00Z"))).toBe("updated");
     expect(productTag("free-dine", nov1)).toBe("updated");
     expect(productTag("free-clinic", nov1)).toBeNull();
   });
@@ -60,6 +62,13 @@ describe("updatesFor", () => {
   it("tells a business set up before the launch", () => {
     const ids = updatesFor("pos", "2026-06-01T10:00:00.000Z", nov2).map((u) => u.id);
     expect(ids).toEqual(["pos-supplier-ledger"]);
+  });
+
+  it("adds batch tracking and the Cash Book from 3 Nov", () => {
+    const ids = updatesFor("pos", "2026-06-01T10:00:00.000Z", at("2026-11-04T00:00:00Z")).map((u) => u.id);
+    expect(ids).toEqual(["pos-batch-tracking", "pos-cash-book", "pos-supplier-ledger"]);
+    expect(updatesFor("pos", "2026-11-03T12:00:00.000Z", at("2026-11-04T00:00:00Z"))).toEqual([]);
+    expect(isNewPosTool("cash-book", at("2026-11-04T00:00:00Z"))).toBe(true);
   });
 
   it("stays quiet for a business set up after the launch", () => {

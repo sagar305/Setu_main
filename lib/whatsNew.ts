@@ -43,7 +43,7 @@ export const NEW_PRODUCTS: Record<string, string> = {
 
 /** Existing products that gained a feature, keyed by product id. */
 export const UPDATED_PRODUCTS: Record<string, string> = {
-  "browser-pos": "2026-10-31",
+  "browser-pos": "2026-11-03",
   "free-dine": "2026-10-30",
 };
 
@@ -69,6 +69,34 @@ export type ProductNote = { addedOn: string; title: string; body: string; href: 
 
 export const PRODUCT_NOTES: Record<string, ProductNote[]> = {
   "browser-pos": [
+    {
+      addedOn: "2026-11-03",
+      title: "Batch & expiry tracking",
+      body: "Optional and off by default. Keep stock in batches with their own batch number, expiry, cost, selling price and tax. Sales use the earliest expiry first, warn on expired stock and record real cost of goods.",
+      href: "#pos-app",
+      cta: "Open the POS → Settings → Batch & expiry tracking",
+    },
+    {
+      addedOn: "2026-11-03",
+      title: "Cash Book fills itself in",
+      body: "POS sales, paid purchases, expenses and supplier payments now appear in the Cash Book as money in and out automatically, with a Cash only view for the cash drawer. Switch it on in the POS under Settings → Connected tools.",
+      href: "/tools/cash-book",
+      cta: "Open Cash Book",
+    },
+    {
+      addedOn: "2026-11-03",
+      title: "Returns to suppliers",
+      body: "Mark purchase lines returnable with a deadline and a replacement or credit note. Credit notes reduce what you owe; replacements come back into stock as a new batch.",
+      href: "/tools/purchase-register",
+      cta: "Open Purchase Register",
+    },
+    {
+      addedOn: "2026-11-03",
+      title: "Profit without double-counted stock",
+      body: "Purchases now count as cost of goods when the stock sells, not as an expense when bought, so the Profit Dashboard no longer charges stock twice.",
+      href: "/tools/profit-dashboard",
+      cta: "Open Profit Dashboard",
+    },
     {
       addedOn: "2026-10-31",
       title: "Supplier Ledger",
@@ -123,6 +151,25 @@ export type AppUpdate = {
 };
 
 export const APP_UPDATES: AppUpdate[] = [
+  {
+    id: "pos-batch-tracking",
+    app: "pos",
+    addedOn: "2026-11-03",
+    title: "wnPosBatchTitle",
+    body: "wnPosBatchBody",
+    cta: "wnShowMe",
+    target: { screen: "settings", anchor: "batch-tracking" },
+  },
+  {
+    id: "pos-cash-book",
+    app: "pos",
+    addedOn: "2026-11-03",
+    title: "wnPosCashBookTitle",
+    body: "wnPosCashBookBody",
+    cta: "wnShowMe",
+    target: { screen: "settings", anchor: "connected-tools" },
+    features: ["cash-book"],
+  },
   {
     id: "pos-supplier-ledger",
     app: "pos",

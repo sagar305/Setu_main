@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   BarChart3,
-  BookOpen,
   LayoutDashboard,
   Lock,
   Maximize2,
@@ -34,7 +33,6 @@ import { OrdersScreen } from "./OrdersScreen";
 import { CustomersScreen } from "./CustomersScreen";
 import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
-import { CashBookTool } from "@/components/tools/CashBook/CashBookTool";
 
 const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -42,7 +40,6 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
   { id: "products", label: "Products", icon: Package },
   { id: "orders", label: "Orders", icon: Receipt },
   { id: "customers", label: "Customers", icon: Users },
-  { id: "cashbook", label: "Cash Book", icon: BookOpen },
   { id: "reports", label: "Reports", icon: BarChart3 },
   { id: "settings", label: "Settings", icon: Settings },
 ];
@@ -344,8 +341,6 @@ function PosShell({
         <div className={screen === "customers" ? "" : "hidden"}>
           <CustomersScreen externalQuery={queryFor("customers")} onNavigate={navigate} />
         </div>
-        {/* Mounted only while open, so it re-reads today's sales each visit. */}
-        {screen === "cashbook" ? <CashBookTool embedded /> : null}
         <div className={screen === "reports" ? "" : "hidden"}>
           <ReportsScreen />
         </div>
