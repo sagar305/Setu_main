@@ -124,7 +124,14 @@ export async function applyPurchaseToStock(purchase: Purchase): Promise<void> {
     await updateStock(
       item.productId,
       item.quantity,
-      `Purchase ${purchase.billNumber || purchase.id.slice(0, 6)}`
+      `Purchase ${purchase.billNumber || purchase.id.slice(0, 6)}`,
+      {
+        batchNo: item.batchNo,
+        expiry: item.expiry,
+        costPrice: item.unitCost > 0 ? item.unitCost : null,
+        receivedAt: purchase.date,
+        purchaseId: purchase.id,
+      }
     );
   }
 }

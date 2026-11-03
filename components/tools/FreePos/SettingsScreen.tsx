@@ -458,6 +458,32 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       </Section>
 
       <Section
+        id="batch-tracking"
+        title="Batch & expiry tracking"
+        description="Optional. Keep stock in batches with their own batch number, expiry date and cost — useful for grocery, FMCG and anything that expires. Off by default; when off, the POS works exactly as before."
+      >
+        <label className="flex items-start gap-3 rounded-lg border border-muted-line/40 bg-white px-3 py-3">
+          <input
+            type="checkbox"
+            checked={settings.batchTracking === true}
+            onChange={(event) => void updateSettings({ batchTracking: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-indigo"
+          />
+          <span className="text-sm text-ink">
+            Track batches and expiry
+            <span className="mt-1 block text-xs text-muted">
+              When you turn this on, each product&apos;s current stock becomes an &quot;Opening stock&quot;
+              batch — add batch numbers and expiry dates from Products → Batches. Sales take stock from
+              the batch that expires first (or the one you pick at checkout) and remember its cost, so
+              the Profit Dashboard shows real cost of goods. Turning it off later keeps your batches;
+              stock sold while it is off is taken from the earliest-expiring batches when you turn it
+              back on.
+            </span>
+          </span>
+        </label>
+      </Section>
+
+      <Section
         title="Payment methods"
         description="Cash, UPI and Card are set up by default. Add anything else you accept."
       >

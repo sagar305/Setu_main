@@ -21,6 +21,18 @@ import {
   type WorkspaceSnapshot,
 } from "./sheetSync";
 import { calculateCartTotals } from "./calc";
+import {
+  allocate,
+  allocationUnitCost,
+  makeBatch,
+  mergeBatches,
+  reconcileAll,
+  reconcileBatches,
+  restoreAllocations,
+  type BatchAllocation,
+  type NewBatchInput,
+  type StockBatch,
+} from "./batches";
 import type { ImportedSale } from "./salesImport";
 import type { LedgerEntry } from "@/lib/toolkit/types";
 import {
@@ -69,6 +81,17 @@ export type ProductInput = {
   unit: string;
   imageDataUrl: string;
   description: string;
+  /** Batch details for the opening stock of a new product (batch tracking only). */
+  openingBatch?: NewBatchInput;
+};
+
+/** Edits to one batch from the Batches panel. */
+export type BatchEdit = {
+  batchNo: string;
+  expiry: string;
+  costPrice: number | null;
+  quantity: number;
+  note?: string;
 };
 
 export type CustomerInput = {
@@ -119,6 +142,8 @@ type PosContextValue = {
   payments: PaymentMethod[];
   inventoryLogs: InventoryLog[];
   heldCarts: HeldCart[];
+  /** Stock batches (only maintained while settings.batchTracking is on). */
+  stockBatches: StockBatch[];
 
   startSetup: () => void;
   backToWelcome: () => void;
@@ -129,7 +154,15 @@ type PosContextValue = {
   updateProduct: (id: string, input: ProductInput) => Promise<void>;
   duplicateProduct: (id: string) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
-  adjustStock: (productId: string, type: "add" | "reduce" | "adjust", quantity: number, note?: string) => Promise<void>;
+  adjustStock: (
+    productId: string,
+    type: "add" | "reduce" | "adjust",
+    quantity: number,
+    note?: string,
+    batch?: NewBatchInput
+  ) => Promise<void>;
+  /** Edit a batch's details or quantity; stock moves by the quantity change. */
+  updateBatch: (batchId: string, edit: BatchEdit) => Promise<void>;
 
   createCategory: (name: string) => Promise<Category>;
   renameCategory: (id: string, name: string) => Promise<void>;
@@ -185,6 +218,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const [payments, setPayments] = useState<PaymentMethod[]>([]);
   const [inventoryLogs, setInventoryLogs] = useState<InventoryLog[]>([]);
   const [heldCarts, setHeldCarts] = useState<HeldCart[]>([]);
+  const [stockBatches, setStockBatches] = useState<StockBatch[]>([]);
+  const batchMode = settings.batchTracking === true;
   const [dirtySlices, setDirtySlices] = useState<SyncSlice[]>([]);
   const [sheetSyncing, setSheetSyncing] = useState(false);
   const [sheetLastSyncAt, setSheetLastSyncAt] = useState<string | null>(null);
@@ -249,6 +284,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       settingsRows,
       heldCartRows,
       dirtyRows,
+      batchRows,
     ] = await Promise.all([
       dbGetAll<Business>("business"),
       dbGetAll<Product>("products"),
@@ -261,6 +297,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       dbGetAll<PosSettings>("settings"),
       dbGetAll<HeldCart>("held_carts"),
       dbGetAll<SyncDirtyRow>("sync_queue"),
+      dbGetAll<StockBatch>("stock_batches"),
     ]);
 
     const loadedBusiness = businessRows.find((b) => b.id === "main") ?? null;
@@ -277,6 +314,18 @@ export function PosProvider({ children }: { children: ReactNode }) {
     // Merge with defaults so records saved by older versions pick up new fields.
     const storedSettings = settingsRows.find((s) => s.id === "main");
     setSettings(storedSettings ? { ...DEFAULT_SETTINGS, ...storedSettings } : DEFAULT_SETTINGS);
+
+    // With batch tracking on, absorb any stock change made without a batch
+    // (another tool, a restore, a sheet pull) so batches match stock again.
+    let batches = batchRows;
+    if (storedSettings?.batchTracking) {
+      const fixes = reconcileAll(productRows, batchRows);
+      if (fixes.length) {
+        await dbBatch({ stock_batches: fixes });
+        batches = mergeBatches(batchRows, fixes);
+      }
+    }
+    setStockBatches(batches);
 
     return loadedBusiness;
   }, []);
@@ -346,7 +395,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
   const createProduct = useCallback(async (input: ProductInput) => {
     const now = nowIso();
-    const product: Product = { ...input, id: generateId(), createdAt: now, updatedAt: now };
+    const { openingBatch, ...fields } = input;
+    const product: Product = { ...fields, id: generateId(), createdAt: now, updatedAt: now };
     const logs: InventoryLog[] = [];
     if (product.trackStock && product.stock !== 0) {
       logs.push({
@@ -360,17 +410,29 @@ export function PosProvider({ children }: { children: ReactNode }) {
         createdAt: now,
       });
     }
-    await batchWithSync({ products: [product], inventory: logs }, {}, ["products"]);
+    const batches: StockBatch[] = [];
+    if (batchMode && product.trackStock && product.stock > 0) {
+      const named = Boolean(openingBatch?.batchNo?.trim() || openingBatch?.expiry);
+      const batch = makeBatch(product, product.stock, { note: "Opening stock", ...openingBatch });
+      batches.push(named ? batch : { ...batch, opening: true });
+    }
+    await batchWithSync(
+      { products: [product], inventory: logs, stock_batches: batches },
+      {},
+      ["products"]
+    );
     setProducts((prev) => [...prev, product]);
     if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
+    if (batches.length) setStockBatches((prev) => [...prev, ...batches]);
     return product;
-  }, []);
+  }, [batchMode]);
 
   const updateProduct = useCallback(
     async (id: string, input: ProductInput) => {
       const existing = products.find((p) => p.id === id);
       if (!existing) return;
-      const updated: Product = { ...existing, ...input, updatedAt: nowIso() };
+      const { openingBatch: _openingBatch, ...fields } = input;
+      const updated: Product = { ...existing, ...fields, updatedAt: nowIso() };
       const logs: InventoryLog[] = [];
       if (updated.trackStock && existing.stock !== updated.stock) {
         logs.push({
@@ -384,11 +446,17 @@ export function PosProvider({ children }: { children: ReactNode }) {
           createdAt: nowIso(),
         });
       }
-      await batchWithSync({ products: [updated], inventory: logs }, {}, ["products"]);
+      const batches = batchMode ? reconcileBatches(updated, stockBatches) : [];
+      await batchWithSync(
+        { products: [updated], inventory: logs, stock_batches: batches },
+        {},
+        ["products"]
+      );
       setProducts((prev) => prev.map((p) => (p.id === id ? updated : p)));
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
+      if (batches.length) setStockBatches((prev) => mergeBatches(prev, batches));
     },
-    [products]
+    [products, batchMode, stockBatches]
   );
 
   const duplicateProduct = useCallback(
@@ -412,13 +480,24 @@ export function PosProvider({ children }: { children: ReactNode }) {
     [products]
   );
 
-  const deleteProduct = useCallback(async (id: string) => {
-    await batchWithSync({}, { products: [id] }, ["products"]);
-    setProducts((prev) => prev.filter((p) => p.id !== id));
-  }, []);
+  const deleteProduct = useCallback(
+    async (id: string) => {
+      const batchIds = stockBatches.filter((b) => b.productId === id).map((b) => b.id);
+      await batchWithSync({}, { products: [id], stock_batches: batchIds }, ["products"]);
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+      if (batchIds.length) setStockBatches((prev) => prev.filter((b) => b.productId !== id));
+    },
+    [stockBatches]
+  );
 
   const adjustStock = useCallback(
-    async (productId: string, type: "add" | "reduce" | "adjust", quantity: number, note = "") => {
+    async (
+      productId: string,
+      type: "add" | "reduce" | "adjust",
+      quantity: number,
+      note = "",
+      batch?: NewBatchInput
+    ) => {
       const product = products.find((p) => p.id === productId);
       if (!product) return;
       const change = type === "reduce" ? -Math.abs(quantity) : type === "add" ? Math.abs(quantity) : quantity - product.stock;
@@ -434,11 +513,84 @@ export function PosProvider({ children }: { children: ReactNode }) {
         note,
         createdAt: nowIso(),
       };
-      await batchWithSync({ products: [updated], inventory: [log] }, {}, ["products"]);
+      // Batch tracking: stock added with batch details becomes its own batch;
+      // anything else is absorbed by reconcile (opening batch / FEFO).
+      let batches: StockBatch[] = [];
+      if (batchMode) {
+        const named = Boolean(batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null);
+        if (change > 0 && named) {
+          batches = [makeBatch(updated, change, { note, ...batch })];
+        } else {
+          batches = reconcileBatches(updated, stockBatches);
+        }
+      }
+      await batchWithSync(
+        { products: [updated], inventory: [log], stock_batches: batches },
+        {},
+        ["products"]
+      );
       setProducts((prev) => prev.map((p) => (p.id === productId ? updated : p)));
       setInventoryLogs((prev) => [log, ...prev]);
+      if (batches.length) setStockBatches((prev) => mergeBatches(prev, batches));
     },
-    [products]
+    [products, batchMode, stockBatches]
+  );
+
+  const updateBatch = useCallback(
+    async (batchId: string, edit: BatchEdit) => {
+      const batch = stockBatches.find((b) => b.id === batchId);
+      if (!batch) return;
+      const product = products.find((p) => p.id === batch.productId);
+      if (!product) return;
+      if (!Number.isInteger(edit.quantity) || edit.quantity < 0) {
+        throw new Error("Quantity must be a whole number, zero or more.");
+      }
+      const now = nowIso();
+      const delta = edit.quantity - Math.max(batch.quantity, 0);
+      const named = Boolean(edit.batchNo.trim() || edit.expiry);
+      const updatedBatch: StockBatch = {
+        ...batch,
+        batchNo: edit.batchNo.trim(),
+        expiry: edit.expiry,
+        costPrice: edit.costPrice,
+        quantity: edit.quantity,
+        // Once it has details it is a real batch, not the catch-all.
+        opening: batch.opening && !named ? true : undefined,
+        updatedAt: now,
+      };
+      const writes: Partial<Record<StoreName, unknown[]>> = { stock_batches: [updatedBatch] };
+      let updatedProduct: Product | null = null;
+      let log: InventoryLog | null = null;
+      if (delta !== 0) {
+        const stockAfter = product.stock + delta;
+        updatedProduct = { ...product, trackStock: true, stock: stockAfter, updatedAt: now };
+        log = {
+          id: generateId(),
+          productId: product.id,
+          productName: product.name,
+          type: delta > 0 ? "add" : "reduce",
+          change: delta,
+          stockAfter,
+          note:
+            edit.note?.trim() ||
+            `Batch ${updatedBatch.batchNo || "(no number)"} ${delta > 0 ? "increased" : "reduced"}`,
+          createdAt: now,
+        };
+        writes.products = [updatedProduct];
+        writes.inventory = [log];
+      }
+      await batchWithSync(writes, {}, delta !== 0 ? ["products"] : []);
+      setStockBatches((prev) => mergeBatches(prev, [updatedBatch]));
+      if (updatedProduct) {
+        const next = updatedProduct;
+        setProducts((prev) => prev.map((p) => (p.id === next.id ? next : p)));
+      }
+      if (log) {
+        const entry = log;
+        setInventoryLogs((prev) => [entry, ...prev]);
+      }
+    },
+    [products, stockBatches]
   );
 
   const createCategory = useCallback(async (name: string) => {
@@ -525,10 +677,15 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const updateSettings = useCallback(
     async (updates: Partial<Omit<PosSettings, "id">>) => {
       const updated: PosSettings = { ...settings, ...updates, id: "main" };
-      await batchWithSync({ settings: [updated] }, {}, ["meta"]);
+      // Turning batch tracking on: put each product's current stock into an
+      // "Opening stock" batch so batches and stock agree from the start.
+      const fixes =
+        updated.batchTracking && !settings.batchTracking ? reconcileAll(products, stockBatches) : [];
+      await batchWithSync({ settings: [updated], stock_batches: fixes }, {}, ["meta"]);
       setSettings(updated);
+      if (fixes.length) setStockBatches((prev) => mergeBatches(prev, fixes));
     },
-    [settings]
+    [settings, products, stockBatches]
   );
 
   const checkout = useCallback(
@@ -622,26 +779,46 @@ export function PosProvider({ children }: { children: ReactNode }) {
           ]
         : [];
 
-      const items: OrderItem[] = input.lines.map((line) => ({
-        id: generateId(),
-        orderId: order.id,
-        productId: line.productId || null,
-        name: line.name,
-        price: line.price,
-        quantity: line.quantity,
-        unit: line.unit,
-        taxRate: line.taxRate,
-        taxInclusive: line.taxInclusive,
-        lineSubtotal: Math.round(line.price * line.quantity * 100) / 100,
-      }));
+      // Batch tracking: take each line's units from the picked batch, then
+      // earliest expiry first, and remember which batches (and costs) it used.
+      let workingBatches = stockBatches;
+      const changedBatches = new Map<string, StockBatch>();
+      const items: OrderItem[] = input.lines.map((line) => {
+        const item: OrderItem = {
+          id: generateId(),
+          orderId: order.id,
+          productId: line.productId || null,
+          name: line.name,
+          price: line.price,
+          quantity: line.quantity,
+          unit: line.unit,
+          taxRate: line.taxRate,
+          taxInclusive: line.taxInclusive,
+          lineSubtotal: Math.round(line.price * line.quantity * 100) / 100,
+        };
+        const product = batchMode ? products.find((p) => p.id === line.productId) : undefined;
+        if (product && product.trackStock) {
+          const result = allocate(workingBatches, product, line.quantity, line.batchId);
+          workingBatches = mergeBatches(workingBatches, result.updated);
+          for (const b of result.updated) changedBatches.set(b.id, b);
+          item.batchAllocations = result.allocations;
+          item.unitCost = allocationUnitCost(result.allocations, product.costPrice);
+        }
+        return item;
+      });
 
       const updatedProducts: Product[] = [];
       const logs: InventoryLog[] = [];
       for (const line of input.lines) {
         const product = products.find((p) => p.id === line.productId);
         if (product && product.trackStock) {
-          const stockAfter = product.stock - line.quantity;
-          updatedProducts.push({ ...product, stock: stockAfter, updatedAt: now });
+          // Two lines of the same product (e.g. different batches) stack up.
+          const current = updatedProducts.find((p) => p.id === product.id) ?? product;
+          const stockAfter = current.stock - line.quantity;
+          const next = { ...current, stock: stockAfter, updatedAt: now };
+          const at = updatedProducts.findIndex((p) => p.id === product.id);
+          if (at >= 0) updatedProducts[at] = next;
+          else updatedProducts.push(next);
           logs.push({
             id: generateId(),
             productId: product.id,
@@ -667,10 +844,12 @@ export function PosProvider({ children }: { children: ReactNode }) {
           inventory: logs,
           settings: [updatedSettings],
           ledger: ledgerEntries,
+          stock_batches: Array.from(changedBatches.values()),
         },
         {},
         ["orders", "products", "meta"]
       );
+      if (changedBatches.size) setStockBatches(workingBatches);
 
       // Keep newest-first by sale date, so a past sale lands in its place.
       setOrders((prev) => [order, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
@@ -685,7 +864,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
       return order;
     },
-    [customers, orders, payments, products, settings]
+    [customers, orders, payments, products, settings, batchMode, stockBatches]
   );
 
   const importSales = useCallback(
@@ -712,6 +891,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const items: OrderItem[] = [];
       const stock = new Map<string, Product>();
       const logs: InventoryLog[] = [];
+      let workingBatches = stockBatches;
+      const changedBatches = new Map<string, StockBatch>();
 
       for (const sale of sorted) {
         const totals = calculateCartTotals(sale.lines, "flat", sale.discountValue, settings.taxEnabled);
@@ -737,7 +918,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         newOrders.push(order);
 
         for (const line of sale.lines) {
-          items.push({
+          const item: OrderItem = {
             id: generateId(),
             orderId: order.id,
             productId: line.productId || null,
@@ -748,11 +929,19 @@ export function PosProvider({ children }: { children: ReactNode }) {
             taxRate: line.taxRate,
             taxInclusive: line.taxInclusive,
             lineSubtotal: Math.round(line.price * line.quantity * 100) / 100,
-          });
+          };
+          items.push(item);
 
           if (!options.reduceStock || !line.productId) continue;
           const product = stock.get(line.productId) ?? products.find((p) => p.id === line.productId);
           if (!product || !product.trackStock) continue;
+          if (batchMode) {
+            const result = allocate(workingBatches, product, line.quantity);
+            workingBatches = mergeBatches(workingBatches, result.updated);
+            for (const b of result.updated) changedBatches.set(b.id, b);
+            item.batchAllocations = result.allocations;
+            item.unitCost = allocationUnitCost(result.allocations, product.costPrice);
+          }
           const stockAfter = product.stock - line.quantity;
           stock.set(product.id, { ...product, stock: stockAfter, updatedAt: now });
           logs.push({
@@ -778,10 +967,12 @@ export function PosProvider({ children }: { children: ReactNode }) {
           products: updatedProducts,
           inventory: logs,
           settings: [updatedSettings],
+          stock_batches: Array.from(changedBatches.values()),
         },
         {},
         ["orders", "products", "meta"]
       );
+      if (changedBatches.size) setStockBatches(workingBatches);
 
       setOrders((prev) => [...newOrders, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
       setOrderItems((prev) => [...prev, ...items]);
@@ -793,7 +984,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
       return newOrders.length;
     },
-    [orders, products, settings]
+    [orders, products, settings, batchMode, stockBatches]
   );
 
   const cancelOrder = useCallback(
@@ -807,13 +998,28 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
       const updatedProducts: Product[] = [];
       const logs: InventoryLog[] = [];
+      let workingBatches = stockBatches;
+      const changedBatches = new Map<string, StockBatch>();
       for (const item of items) {
         const product = item.productId
           ? products.find((p) => p.id === item.productId)
           : undefined;
         if (product && product.trackStock) {
-          const stockAfter = product.stock + item.quantity;
-          updatedProducts.push({ ...product, stock: stockAfter, updatedAt: now });
+          const current = updatedProducts.find((p) => p.id === product.id) ?? product;
+          const stockAfter = current.stock + item.quantity;
+          const next = { ...current, stock: stockAfter, updatedAt: now };
+          const at = updatedProducts.findIndex((p) => p.id === product.id);
+          if (at >= 0) updatedProducts[at] = next;
+          else updatedProducts.push(next);
+          if (batchMode) {
+            // Back into the batches it came from; a sale made before batch
+            // tracking was on goes to the opening batch via reconcile.
+            const restored = item.batchAllocations?.length
+              ? restoreAllocations(workingBatches, product, item.batchAllocations)
+              : reconcileBatches(next, workingBatches);
+            workingBatches = mergeBatches(workingBatches, restored);
+            for (const b of restored) changedBatches.set(b.id, b);
+          }
           logs.push({
             id: generateId(),
             productId: product.id,
@@ -828,10 +1034,16 @@ export function PosProvider({ children }: { children: ReactNode }) {
       }
 
       await batchWithSync(
-        { orders: [cancelled], products: updatedProducts, inventory: logs },
+        {
+          orders: [cancelled],
+          products: updatedProducts,
+          inventory: logs,
+          stock_batches: Array.from(changedBatches.values()),
+        },
         {},
         ["orders", "products"]
       );
+      if (changedBatches.size) setStockBatches(workingBatches);
 
       setOrders((prev) => prev.map((o) => (o.id === orderId ? cancelled : o)));
       if (updatedProducts.length) {
@@ -841,7 +1053,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       }
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
     },
-    [orderItems, orders, products]
+    [orderItems, orders, products, batchMode, stockBatches]
   );
 
   const holdCart = useCallback(
@@ -1017,6 +1229,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setPayments([]);
     setInventoryLogs([]);
     setHeldCarts([]);
+    setStockBatches([]);
     setDirtySlices([]);
     setSheetLastError("");
     setSettings(DEFAULT_SETTINGS);
@@ -1048,6 +1261,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       payments,
       inventoryLogs,
       heldCarts,
+      stockBatches,
       startSetup,
       backToWelcome,
       createBusiness,
@@ -1057,6 +1271,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       duplicateProduct,
       deleteProduct,
       adjustStock,
+      updateBatch,
       createCategory,
       renameCategory,
       deleteCategory,
@@ -1094,6 +1309,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       payments,
       inventoryLogs,
       heldCarts,
+      stockBatches,
       startSetup,
       backToWelcome,
       createBusiness,
@@ -1103,6 +1319,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       duplicateProduct,
       deleteProduct,
       adjustStock,
+      updateBatch,
       createCategory,
       renameCategory,
       deleteCategory,

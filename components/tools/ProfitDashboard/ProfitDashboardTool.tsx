@@ -2,7 +2,8 @@
 
 // Profit Dashboard — net profit from real data:
 //   revenue (POS orders) − cost of goods sold − expenses
-// Cost of goods is the cost of the items sold, priced from the Purchase
+// Cost of goods is the cost of the items sold: the batch cost saved on the
+// sale when POS batch tracking is on, otherwise priced from the Purchase
 // Register (falling back to product costPrice). Expenses are the Expense
 // Tracker's entries only: purchase-register mirrors are excluded, so stock
 // isn't charged twice (see lib/toolkit/profit.ts).
@@ -95,7 +96,10 @@ export function ProfitDashboardTool() {
     const revenue = completed.reduce((s, o) => s + o.total, 0);
     const cogs = orderItems.reduce((s, i) => {
       const day = saleDay.get(i.orderId);
-      return day ? s + unitCost(i.productId, day) * i.quantity : s;
+      if (!day) return s;
+      // A sale made with batch tracking on saved the cost of the batches it used.
+      const cost = i.unitCost ?? unitCost(i.productId, day);
+      return s + cost * i.quantity;
     }, 0);
 
     // Purchases are cost of goods (charged above when sold), never expenses.

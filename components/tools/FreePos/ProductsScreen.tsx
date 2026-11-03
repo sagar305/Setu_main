@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Boxes,
+  CalendarClock,
   Copy,
+  Download,
   FolderOpen,
   Package,
   Pencil,
@@ -11,6 +13,9 @@ import {
   Trash2,
 } from "lucide-react";
 import { usePos, type ProductInput } from "@/lib/pos/store";
+import { batchesFor, expiryStatus, sortFefo } from "@/lib/pos/batches";
+import { downloadCsv, toCsv } from "@/lib/pos/csv";
+import { BatchesModal, ExpiryBadge } from "./BatchesModal";
 import {
   DEFAULT_LOW_STOCK_THRESHOLD,
   formatMoney,
@@ -65,8 +70,11 @@ function ProductFormModal({
   const [stockText, setStockText] = useState("");
   const [thresholdText, setThresholdText] = useState("");
   const [newCategory, setNewCategory] = useState("");
+  const [batchNoText, setBatchNoText] = useState("");
+  const [expiryText, setExpiryText] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  const batchMode = usePos().settings.batchTracking === true;
 
   useEffect(() => {
     if (!open) return;
@@ -103,6 +111,8 @@ function ProductFormModal({
       setThresholdText("");
     }
     setNewCategory("");
+    setBatchNoText("");
+    setExpiryText("");
     setError("");
   }, [open, editing]);
 
@@ -168,6 +178,8 @@ function ProductFormModal({
         barcode: form.barcode.trim(),
         unit: form.unit.trim(),
         description: form.description.trim(),
+        openingBatch:
+          batchMode && !editing ? { batchNo: batchNoText, expiry: expiryText } : undefined,
       };
       if (editing) {
         await updateProduct(editing.id, input);
@@ -336,6 +348,25 @@ function ProductFormModal({
             )}
           </label>
         </div>
+        {batchMode && !editing && form.trackStock && (
+          <>
+            <Field label="Batch no." hint="For the opening stock. Optional">
+              <input
+                value={batchNoText}
+                onChange={(event) => setBatchNoText(event.target.value)}
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Expiry" hint="Optional">
+              <input
+                type="date"
+                value={expiryText}
+                onChange={(event) => setExpiryText(event.target.value)}
+                className={inputClass}
+              />
+            </Field>
+          </>
+        )}
         {form.trackStock && (
           <Field
             label="Low stock alert"
@@ -495,10 +526,14 @@ function StockAdjustModal({
   product: Product | null;
   onClose: () => void;
 }) {
-  const { adjustStock } = usePos();
+  const { adjustStock, settings } = usePos();
+  const batchMode = settings.batchTracking === true;
   const [mode, setMode] = useState<"add" | "reduce">("add");
   const [qtyText, setQtyText] = useState("");
   const [note, setNote] = useState("");
+  const [batchNo, setBatchNo] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [costText, setCostText] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -506,6 +541,9 @@ function StockAdjustModal({
       setMode("add");
       setQtyText("");
       setNote("");
+      setBatchNo("");
+      setExpiry("");
+      setCostText("");
       setError("");
     }
   }, [product]);
@@ -518,7 +556,16 @@ function StockAdjustModal({
       setError("Enter a quantity greater than zero.");
       return;
     }
-    await adjustStock(product.id, mode, qty, note.trim());
+    let batch: { batchNo: string; expiry: string; costPrice: number | null } | undefined;
+    if (batchMode && mode === "add") {
+      const cost = costText.trim() === "" ? null : parseFloat(costText);
+      if (cost !== null && (!Number.isFinite(cost) || cost < 0)) {
+        setError("Cost must be zero or more.");
+        return;
+      }
+      batch = { batchNo, expiry, costPrice: cost };
+    }
+    await adjustStock(product.id, mode, qty, note.trim(), batch);
     onClose();
   };
 
@@ -558,6 +605,43 @@ function StockAdjustModal({
             autoFocus
           />
         </Field>
+        {batchMode && mode === "add" && (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <Field label="Batch no.">
+              <input
+                value={batchNo}
+                onChange={(event) => setBatchNo(event.target.value)}
+                placeholder="Optional"
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Expiry">
+              <input
+                type="date"
+                value={expiry}
+                onChange={(event) => setExpiry(event.target.value)}
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Cost / unit">
+              <input
+                type="number"
+                min={0}
+                step="0.01"
+                value={costText}
+                onChange={(event) => setCostText(event.target.value)}
+                placeholder={product.costPrice === null ? "Optional" : String(product.costPrice)}
+                className={inputClass}
+              />
+            </Field>
+          </div>
+        )}
+        {batchMode && mode === "reduce" && (
+          <p className="text-xs text-muted">
+            Taken from the batch that expires first. To write off a particular batch, open Batches and
+            set its quantity.
+          </p>
+        )}
         <Field label="Note">
           <input
             type="text"
@@ -590,8 +674,12 @@ export function ProductsScreen({
 }: {
   externalQuery: { value: string; nonce: number } | null;
 }) {
-  const { business, products, categories, duplicateProduct, deleteProduct } = usePos();
+  const { business, products, categories, duplicateProduct, deleteProduct, settings, stockBatches } =
+    usePos();
   const currency = business?.currency ?? "INR";
+  const batchMode = settings.batchTracking === true;
+  const [batchTarget, setBatchTarget] = useState<Product | null>(null);
+  const [expiryFilter, setExpiryFilter] = useState<"" | "expired" | "soon">("");
 
   const [search, setSearch] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -611,24 +699,68 @@ export function ProductsScreen({
       .filter((p) => (categoryId ? p.categoryId === categoryId : true))
       .filter(
         (p) =>
+          !batchMode ||
+          !expiryFilter ||
+          batchesFor(stockBatches, p.id).some((b) => expiryStatus(b.expiry) === expiryFilter)
+      )
+      .filter(
+        (p) =>
           !q ||
           p.name.toLowerCase().includes(q) ||
           p.sku.toLowerCase().includes(q) ||
           p.barcode.toLowerCase().includes(q)
       )
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [products, search, categoryId]);
+  }, [products, search, categoryId, batchMode, expiryFilter, stockBatches]);
 
   const categoryName = (id: string) => categories.find((c) => c.id === id)?.name ?? "";
 
-  const stockSummary = useMemo(
-    () => ({
+  const stockSummary = useMemo(() => {
+    const base = {
       ...inventoryValue(products),
       low: products.filter(isLowStock).length,
       out: products.filter(isOutOfStock).length,
-    }),
-    [products]
-  );
+      expired: 0,
+      soon: 0,
+    };
+    if (!batchMode) return base;
+    // With batches, value stock at each batch's own cost.
+    let value = 0;
+    let missingCost = 0;
+    for (const p of products) {
+      if (!p.trackStock || p.stock <= 0) continue;
+      let missing = false;
+      for (const b of batchesFor(stockBatches, p.id)) {
+        const cost = b.costPrice ?? p.costPrice;
+        if (cost === null) missing = true;
+        else value += cost * b.quantity;
+        const status = expiryStatus(b.expiry);
+        if (status === "expired") base.expired += 1;
+        if (status === "soon") base.soon += 1;
+      }
+      if (missing) missingCost += 1;
+    }
+    return { ...base, value, missingCost };
+  }, [products, batchMode, stockBatches]);
+
+  const exportBatches = () => {
+    const rows = sortFefo(stockBatches.filter((b) => b.quantity > 0)).map((b) => {
+      const p = products.find((x) => x.id === b.productId);
+      return [
+        p?.name ?? "",
+        p?.sku ?? "",
+        b.batchNo || (b.opening ? "Opening stock" : ""),
+        b.expiry,
+        b.quantity,
+        b.costPrice ?? p?.costPrice ?? "",
+        b.receivedAt,
+      ];
+    });
+    downloadCsv(
+      "stock-batches.csv",
+      toCsv(["Product", "SKU", "Batch no", "Expiry", "Quantity", "Cost per unit", "Received"], rows)
+    );
+  };
 
   return (
     <div>
@@ -647,6 +779,43 @@ export function ProductsScreen({
           />
           <StatCard label="Low stock" value={String(stockSummary.low)} sub="Products at or below their alert" />
           <StatCard label="Out of stock" value={String(stockSummary.out)} sub="Products with no stock left" />
+        </div>
+      )}
+      {batchMode && products.length > 0 && (
+        <div className="mb-6 flex flex-wrap items-center gap-2 rounded-2xl border border-muted-line/30 bg-white p-3 text-sm">
+          <CalendarClock className="h-4 w-4 text-muted" />
+          <span className="font-semibold text-ink">Batches</span>
+          {(
+            [
+              ["", "All products"],
+              ["expired", `Expired (${stockSummary.expired})`],
+              ["soon", `Expiring in 30 days (${stockSummary.soon})`],
+            ] as const
+          ).map(([key, label]) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={expiryFilter === key}
+              onClick={() => setExpiryFilter(key)}
+              className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                expiryFilter === key
+                  ? "bg-indigo text-white"
+                  : key === "expired" && stockSummary.expired > 0
+                    ? "bg-red-50 text-red-600"
+                    : "border border-muted-line/40 text-muted hover:text-indigo"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={exportBatches}
+            className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Export batches CSV
+          </button>
         </div>
       )}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -741,6 +910,7 @@ export function ProductsScreen({
                   </td>
                   <td className="px-4 py-3 text-right">
                     {product.trackStock ? (
+                      <>
                       <button
                         type="button"
                         onClick={() => setStockTarget(product)}
@@ -754,6 +924,23 @@ export function ProductsScreen({
                       >
                         {product.stock}
                       </button>
+                      {batchMode && (() => {
+                        const own = batchesFor(stockBatches, product.id);
+                        if (own.length === 0) return null;
+                        const next = own.find((b) => b.expiry);
+                        return (
+                          <button
+                            type="button"
+                            onClick={() => setBatchTarget(product)}
+                            className="mt-0.5 flex w-full flex-wrap items-center justify-end gap-1 text-xs text-muted hover:text-indigo"
+                          >
+                            {own.length} batch{own.length === 1 ? "" : "es"}
+                            {next ? <span>· exp {next.expiry}</span> : null}
+                            {next ? <ExpiryBadge expiry={next.expiry} /> : null}
+                          </button>
+                        );
+                      })()}
+                      </>
                     ) : (
                       <button
                         type="button"
@@ -766,6 +953,17 @@ export function ProductsScreen({
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
+                      {batchMode && product.trackStock && (
+                        <button
+                          type="button"
+                          aria-label={`Batches of ${product.name}`}
+                          title="Batches & expiry"
+                          onClick={() => setBatchTarget(product)}
+                          className="rounded-lg p-2 text-muted transition hover:bg-cream hover:text-indigo"
+                        >
+                          <CalendarClock className="h-4 w-4" />
+                        </button>
+                      )}
                       <button
                         type="button"
                         aria-label={`Adjust stock of ${product.name}`}
@@ -824,6 +1022,10 @@ export function ProductsScreen({
       <ProductFormModal open={formOpen} onClose={() => setFormOpen(false)} editing={editing} />
       <CategoryManagerModal open={categoriesOpen} onClose={() => setCategoriesOpen(false)} />
       <StockAdjustModal product={stockTarget} onClose={() => setStockTarget(null)} />
+      <BatchesModal
+        product={batchTarget ? products.find((p) => p.id === batchTarget.id) ?? null : null}
+        onClose={() => setBatchTarget(null)}
+      />
       <ConfirmDialog
         open={deleteTarget !== null}
         title="Delete product?"

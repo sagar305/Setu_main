@@ -20,9 +20,11 @@ const DB_NAME = "POS_DATABASE";
 // hand to one tool in a database every tool shares.
 // v8 adds supplier_ledger (bills and payments to suppliers) for the Supplier
 // Ledger and Accounts Payable Aging tools.
+// v9 adds stock_batches (optional batch & expiry tracking for the POS, see
+// lib/pos/batches). Named so because `batches` belongs to the tuition stores.
 // The upgrade handler creates any missing stores, so bumping the version
 // migrates older databases in place.
-const DB_VERSION = 8;
+const DB_VERSION = 9;
 
 export const STORES = [
   "business",
@@ -69,6 +71,7 @@ export const STORES = [
   "clinic_bills",
   "clinic_settings",
   "supplier_ledger",
+  "stock_batches",
 ] as const;
 
 export type StoreName = (typeof STORES)[number];
@@ -99,6 +102,9 @@ export function openPosDb(): Promise<IDBDatabase> {
           }
           if (store === "ledger") {
             objectStore.createIndex("customerId", "customerId", { unique: false });
+          }
+          if (store === "stock_batches") {
+            objectStore.createIndex("productId", "productId", { unique: false });
           }
           if (store === "supplier_ledger") {
             objectStore.createIndex("supplierId", "supplierId", { unique: false });

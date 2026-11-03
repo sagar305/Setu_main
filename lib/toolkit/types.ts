@@ -143,6 +143,9 @@ export type PurchaseItem = {
   name: string;
   quantity: number;
   unitCost: number;
+  /** Batch number and expiry ("yyyy-mm-dd"), filled when POS batch tracking is on. */
+  batchNo?: string;
+  expiry?: string;
 };
 
 export type Purchase = {

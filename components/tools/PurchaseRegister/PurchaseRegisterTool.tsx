@@ -15,7 +15,7 @@ import {
 import { WorkspaceBanner } from "@/components/toolkit/WorkspaceBanner";
 import { useWorkspaceConnection } from "@/lib/hooks/useWorkspaceConnection";
 import { useEntityList } from "@/lib/hooks/useEntityList";
-import { applyPurchaseToStock, getSuppliers, deleteExpense } from "@/lib/toolkit/workspace";
+import { applyPurchaseToStock, getSettings, getSuppliers, deleteExpense } from "@/lib/toolkit/workspace";
 import type { Purchase, PurchaseItem, Supplier } from "@/lib/toolkit/types";
 import { currencySymbol, formatMoney, generateId, nowIso } from "@/lib/pos/types";
 import { toCsv, downloadCsv } from "@/lib/pos/csv";
@@ -55,6 +55,16 @@ export function PurchaseRegisterTool() {
   useEffect(() => {
     getSuppliers().then(setSuppliers).catch(() => {});
   }, []);
+
+  // POS batch tracking on → linked items get batch number and expiry fields,
+  // and applying stock creates a batch for each.
+  const [batchTracking, setBatchTracking] = useState(false);
+  useEffect(() => {
+    if (!workspace.connected) return;
+    getSettings()
+      .then((s) => setBatchTracking(s.batchTracking === true))
+      .catch(() => {});
+  }, [workspace.connected]);
 
   const currency = workspace.business?.currency ?? "INR";
   const symbol = currencySymbol(currency);
@@ -292,6 +302,24 @@ export function PurchaseRegisterTool() {
                 >
                   {t("remove")}
                 </button>
+                {batchTracking && item.productId ? (
+                  <div className="col-span-2 grid grid-cols-2 gap-2 sm:col-span-5">
+                    <Field label={t("prBatchNo")}>
+                      <TextInput
+                        value={item.batchNo ?? ""}
+                        onChange={(e) => updateItem(item.key, { batchNo: e.target.value })}
+                        placeholder={t("optional")}
+                      />
+                    </Field>
+                    <Field label={t("prExpiry")}>
+                      <TextInput
+                        type="date"
+                        value={item.expiry ?? ""}
+                        onChange={(e) => updateItem(item.key, { expiry: e.target.value })}
+                      />
+                    </Field>
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>
