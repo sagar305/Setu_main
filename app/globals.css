@@ -115,6 +115,14 @@ body {
   list-style: disc;
 }
 
+.blog-content ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  list-style: decimal;
+}
+
 .blog-content strong {
   font-weight: 700;
   color: #0E1124;
@@ -144,6 +152,30 @@ body {
   background-color: rgba(38, 48, 107, 0.06);
   color: #0E1124;
   font-weight: 700;
+}
+
+.blog-content figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-content img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(183, 174, 153, 0.4);
+  background-color: #F2EFE7;
+}
+
+.blog-content figcaption {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #5F6478;
+  text-align: center;
 }
 
 /* Glossary — the formula callout inside a term's body, and the inline links the
