@@ -42,6 +42,10 @@ export type StockBatch = {
   opening?: boolean;
   /** Selling price for units of this batch; null/absent = product's selling price. */
   sellingPrice?: number | null;
+  /** Tax % on this batch's selling price; null/absent = product's tax. */
+  taxRate?: number | null;
+  /** Whether that selling price already includes the tax. */
+  taxInclusive?: boolean;
   /** Supplier takes it back until this day ("yyyy-mm-dd"), from the purchase. */
   returnBy?: string;
   returnType?: "replacement" | "credit-note";
@@ -68,6 +72,8 @@ export type NewBatchInput = {
   purchaseId?: string | null;
   note?: string;
   sellingPrice?: number | null;
+  taxRate?: number | null;
+  taxInclusive?: boolean;
   returnBy?: string;
   returnType?: "replacement" | "credit-note";
 };
@@ -112,6 +118,7 @@ export function makeBatch(product: Product, quantity: number, input: NewBatchInp
     purchaseId: input.purchaseId ?? null,
     note: input.note ?? "",
     ...(input.sellingPrice != null ? { sellingPrice: input.sellingPrice } : {}),
+    ...(input.taxRate != null ? { taxRate: input.taxRate, taxInclusive: input.taxInclusive ?? false } : {}),
     ...(input.returnBy ? { returnBy: input.returnBy } : {}),
     ...(input.returnType ? { returnType: input.returnType } : {}),
     createdAt: now,

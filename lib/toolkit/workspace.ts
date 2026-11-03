@@ -136,6 +136,8 @@ export async function applyPurchaseToStock(purchase: Purchase): Promise<void> {
         receivedAt: purchase.date,
         purchaseId: purchase.id,
         sellingPrice: item.sellingPrice ?? null,
+        taxRate: item.sellingTaxRate ?? null,
+        taxInclusive: item.sellingTaxInclusive ?? false,
         returnBy: item.returnable ? item.returnBy ?? "" : "",
         returnType: item.returnable ? item.returnType : undefined,
       }

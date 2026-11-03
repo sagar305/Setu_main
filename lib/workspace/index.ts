@@ -126,7 +126,11 @@ export async function updateStock(
   let batches: StockBatch[] = [];
   if ((await getSettings()).batchTracking) {
     const named = Boolean(
-      batch?.batchNo?.trim() || batch?.expiry || batch?.costPrice != null || batch?.sellingPrice != null
+      batch?.batchNo?.trim() ||
+        batch?.expiry ||
+        batch?.costPrice != null ||
+        batch?.sellingPrice != null ||
+        batch?.taxRate != null
     );
     if (change > 0 && named) {
       batches = [makeBatch(updated, change, { note, ...batch })];

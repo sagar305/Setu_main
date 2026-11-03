@@ -15,7 +15,7 @@ import {
 import { usePos, type ProductInput } from "@/lib/pos/store";
 import { batchesFor, expiryStatus, sortFefo } from "@/lib/pos/batches";
 import { downloadCsv, toCsv } from "@/lib/pos/csv";
-import { BatchesModal, ExpiryBadge } from "./BatchesModal";
+import { BatchesModal, ExpiryBadge, TaxFields, parseTax } from "./BatchesModal";
 import {
   DEFAULT_LOW_STOCK_THRESHOLD,
   formatMoney,
@@ -535,11 +535,15 @@ function StockAdjustModal({
   const [expiry, setExpiry] = useState("");
   const [costText, setCostText] = useState("");
   const [priceText, setPriceText] = useState("");
+  const [taxText, setTaxText] = useState("");
+  const [inclusive, setInclusive] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (product) {
       setPriceText("");
+      setTaxText("");
+      setInclusive(product.taxInclusive ?? false);
       setMode("add");
       setQtyText("");
       setNote("");
@@ -559,7 +563,14 @@ function StockAdjustModal({
       return;
     }
     let batch:
-      | { batchNo: string; expiry: string; costPrice: number | null; sellingPrice: number | null }
+      | {
+          batchNo: string;
+          expiry: string;
+          costPrice: number | null;
+          sellingPrice: number | null;
+          taxRate: number | null;
+          taxInclusive: boolean;
+        }
       | undefined;
     if (batchMode && mode === "add") {
       const cost = costText.trim() === "" ? null : parseFloat(costText);
@@ -572,7 +583,12 @@ function StockAdjustModal({
         setError("Selling price must be zero or more.");
         return;
       }
-      batch = { batchNo, expiry, costPrice: cost, sellingPrice: price };
+      const tax = parseTax(taxText);
+      if (tax === undefined) {
+        setError("Tax must be between 0 and 100.");
+        return;
+      }
+      batch = { batchNo, expiry, costPrice: cost, sellingPrice: price, taxRate: tax, taxInclusive: inclusive };
     }
     await adjustStock(product.id, mode, qty, note.trim(), batch);
     onClose();
@@ -654,6 +670,13 @@ function StockAdjustModal({
                 className={inputClass}
               />
             </Field>
+            <TaxFields
+              tax={taxText}
+              inclusive={inclusive}
+              onTax={setTaxText}
+              onInclusive={setInclusive}
+              product={product}
+            />
           </div>
         )}
         {batchMode && mode === "reduce" && (

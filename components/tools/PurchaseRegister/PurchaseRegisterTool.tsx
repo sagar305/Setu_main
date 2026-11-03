@@ -101,7 +101,12 @@ export function PurchaseRegisterTool() {
     updateItem(
       key,
       p
-        ? { productId: p.id, name: p.name, unitCost: p.costPrice ?? 0 }
+        ? {
+            productId: p.id,
+            name: p.name,
+            unitCost: p.costPrice ?? 0,
+            sellingTaxInclusive: p.taxInclusive ?? false,
+          }
         : { productId: null }
     );
   };
@@ -217,6 +222,8 @@ export function PurchaseRegisterTool() {
           expiry: info.expiry,
           costPrice: i.unitCost > 0 ? i.unitCost : null,
           sellingPrice: info.sellingPrice,
+          taxRate: info.taxRate,
+          taxInclusive: info.taxInclusive,
           receivedAt: todayIso(),
         });
       }
@@ -400,7 +407,7 @@ export function PurchaseRegisterTool() {
                   {t("remove")}
                 </button>
                 {batchTracking && item.productId ? (
-                  <div className="col-span-2 grid grid-cols-2 gap-2 sm:col-span-5 sm:grid-cols-3">
+                  <div className="col-span-2 grid grid-cols-2 gap-2 sm:col-span-5 sm:grid-cols-5">
                     <Field label={t("prBatchNo")}>
                       <TextInput
                         value={item.batchNo ?? ""}
@@ -427,6 +434,34 @@ export function PurchaseRegisterTool() {
                           })
                         }
                       />
+                    </Field>
+                    <Field label={t("taxPct")}>
+                      <NumberInput
+                        min={0}
+                        max={100}
+                        step="0.01"
+                        value={item.sellingTaxRate ?? ""}
+                        placeholder={t("optional")}
+                        onChange={(e) =>
+                          updateItem(item.key, {
+                            sellingTaxRate:
+                              e.target.value === ""
+                                ? null
+                                : Math.min(100, Math.max(0, Number(e.target.value) || 0)),
+                          })
+                        }
+                      />
+                    </Field>
+                    <Field label={t("prTaxOnPrice")}>
+                      <Select
+                        value={item.sellingTaxInclusive ? "inclusive" : "exclusive"}
+                        onChange={(e) =>
+                          updateItem(item.key, { sellingTaxInclusive: e.target.value === "inclusive" })
+                        }
+                      >
+                        <option value="exclusive">{t("prTaxExclusive")}</option>
+                        <option value="inclusive">{t("prTaxInclusive")}</option>
+                      </Select>
                     </Field>
                   </div>
                 ) : null}

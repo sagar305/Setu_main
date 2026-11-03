@@ -101,11 +101,21 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   // Batch tracking: a batch can carry its own selling price (e.g. a new MRP).
   // The line is priced from the picked batch, or the one sold first.
-  const batchPrice = (productId: string, batchId?: string | null): number | null => {
-    if (!batchMode) return null;
+  const batchFor = (productId: string, batchId?: string | null) => {
+    if (!batchMode) return undefined;
     const own = batchesFor(stockBatches, productId);
-    const batch = own.find((b) => b.id === batchId) ?? own[0];
-    return batch?.sellingPrice ?? null;
+    return own.find((b) => b.id === batchId) ?? own[0];
+  };
+
+  /** Price and tax for a line: the batch's own when it has them, else the product's. */
+  const linePricing = (product: Product, batchId?: string | null) => {
+    const batch = batchFor(product.id, batchId);
+    const hasBatchTax = batch?.taxRate != null;
+    return {
+      price: batch?.sellingPrice ?? product.sellingPrice,
+      taxRate: hasBatchTax ? (settings.taxEnabled ? batch!.taxRate! : 0) : effectiveTaxRate(product),
+      taxInclusive: hasBatchTax ? batch!.taxInclusive ?? false : product.taxInclusive ?? false,
+    };
   };
 
   const addToCart = (product: Product) => {
@@ -122,11 +132,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         {
           productId: product.id,
           name: product.name,
-          price: batchPrice(product.id) ?? product.sellingPrice,
+          ...linePricing(product),
           quantity: 1,
           unit: product.unit,
-          taxRate: effectiveTaxRate(product),
-          taxInclusive: product.taxInclusive ?? false,
         },
       ];
     });
@@ -152,8 +160,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
       prev.map((line) => {
         if (line.productId !== productId) return line;
         const product = products.find((p) => p.id === productId);
-        const price = batchPrice(productId, batchId || null) ?? product?.sellingPrice ?? line.price;
-        return { ...line, batchId: batchId || null, price };
+        if (!product) return { ...line, batchId: batchId || null };
+        return { ...line, batchId: batchId || null, ...linePricing(product, batchId || null) };
       })
     );
 

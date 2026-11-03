@@ -156,7 +156,13 @@ export function ReturnDialog({
   );
 }
 
-export type ReceiveInfo = { batchNo: string; expiry: string; sellingPrice: number | null };
+export type ReceiveInfo = {
+  batchNo: string;
+  expiry: string;
+  sellingPrice: number | null;
+  taxRate: number | null;
+  taxInclusive: boolean;
+};
 
 export function ReceiveDialog({
   ret,
@@ -173,13 +179,22 @@ export function ReceiveDialog({
   const [batchNo, setBatchNo] = useState("");
   const [expiry, setExpiry] = useState("");
   const [price, setPrice] = useState("");
+  const [tax, setTax] = useState("");
+  const [inclusive, setInclusive] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const confirm = async () => {
     setSaving(true);
     try {
       const sp = price.trim() === "" ? null : Number(price);
-      await onConfirm({ batchNo, expiry, sellingPrice: sp !== null && Number.isFinite(sp) && sp >= 0 ? sp : null });
+      const tx = tax.trim() === "" ? null : Number(tax);
+      await onConfirm({
+        batchNo,
+        expiry,
+        sellingPrice: sp !== null && Number.isFinite(sp) && sp >= 0 ? sp : null,
+        taxRate: tx !== null && Number.isFinite(tx) && tx >= 0 && tx <= 100 ? tx : null,
+        taxInclusive: inclusive,
+      });
       onClose();
     } finally {
       setSaving(false);
@@ -191,7 +206,7 @@ export function ReceiveDialog({
       <p className="text-sm text-ink">{ret.items.map((i) => `${i.name} ×${i.quantity}`).join(", ")}</p>
       <p className="mt-1 text-xs text-muted">{t("prReceiveHint")}</p>
       {batchTracking ? (
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <Field label={t("prBatchNo")}>
             <TextInput value={batchNo} onChange={(e) => setBatchNo(e.target.value)} placeholder={t("optional")} />
           </Field>
@@ -200,6 +215,15 @@ export function ReceiveDialog({
           </Field>
           <Field label={t("prSellingPrice")}>
             <NumberInput min={0} step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} placeholder={t("optional")} />
+          </Field>
+          <Field label={t("taxPct")}>
+            <NumberInput min={0} max={100} step="0.01" value={tax} onChange={(e) => setTax(e.target.value)} placeholder={t("optional")} />
+          </Field>
+          <Field label={t("prTaxOnPrice")}>
+            <Select value={inclusive ? "inclusive" : "exclusive"} onChange={(e) => setInclusive(e.target.value === "inclusive")}>
+              <option value="exclusive">{t("prTaxExclusive")}</option>
+              <option value="inclusive">{t("prTaxInclusive")}</option>
+            </Select>
           </Field>
         </div>
       ) : null}

@@ -148,6 +148,10 @@ export type PurchaseItem = {
   expiry?: string;
   /** Selling price for this batch (batch tracking only); blank = product's price. */
   sellingPrice?: number | null;
+  /** Tax % on that selling price; blank = product's tax. */
+  sellingTaxRate?: number | null;
+  /** Whether the selling price already includes the tax. */
+  sellingTaxInclusive?: boolean;
   /** The supplier takes this item back. */
   returnable?: boolean;
   /** Last day it can be returned, "yyyy-mm-dd"; "" = no deadline. */
