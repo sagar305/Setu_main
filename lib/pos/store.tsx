@@ -204,6 +204,15 @@ type PosContextValue = {
   restoreFromSheet: (url: string) => Promise<void>;
 
   exportBackup: () => Promise<void>;
+  /**
+   * Re-read everything from IndexedDB. Connected tools opened inside the POS
+   * save straight to the database, so the POS reloads when you leave them —
+   * otherwise its in-memory copy (stock, products…) would be stale and the
+   * next save would overwrite what the tool wrote.
+   */
+  reload: () => Promise<void>;
+  /** True while reload() runs — checkout waits so it never saves stale stock. */
+  reloading: boolean;
   applyRestoredBackup: (backup: PosBackup) => Promise<void>;
   resetAll: () => Promise<void>;
 };
@@ -1219,6 +1228,16 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setSettings(updated);
   }, [settings]);
 
+  const [reloading, setReloading] = useState(false);
+  const reload = useCallback(async () => {
+    setReloading(true);
+    try {
+      await loadAll();
+    } finally {
+      setReloading(false);
+    }
+  }, [loadAll]);
+
   const applyRestoredBackup = useCallback(
     async (backup: PosBackup) => {
       await restoreBackup(backup);
@@ -1307,6 +1326,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
       resyncSheetAll,
       restoreFromSheet,
       exportBackup,
+      reload,
+      reloading,
       applyRestoredBackup,
       resetAll,
     }),
@@ -1355,6 +1376,8 @@ export function PosProvider({ children }: { children: ReactNode }) {
       resyncSheetAll,
       restoreFromSheet,
       exportBackup,
+      reload,
+      reloading,
       applyRestoredBackup,
       resetAll,
     ]

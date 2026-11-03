@@ -152,6 +152,11 @@ export type PosSettings = {
    * older records means off, so existing users see no change.
    */
   batchTracking?: boolean;
+  /**
+   * Connected tools the owner chose to open as tabs inside the POS (a subset
+   * of connectedTools). Undefined on older records = no tool tabs.
+   */
+  toolTabs?: string[];
 };
 
 /** Which slices of the workspace can be marked dirty for Sheet sync. */

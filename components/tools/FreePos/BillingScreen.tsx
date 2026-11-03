@@ -56,6 +56,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     holdCart,
     removeHeldCart,
     stockBatches,
+    reloading,
   } = usePos();
   const batchMode = settings.batchTracking === true;
   const currency = business?.currency ?? "INR";
@@ -186,6 +187,8 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const review = useReviewPrompt();
 
   const handleCharge = async () => {
+    // Just back from a tool tab: wait for the fresh data before saving.
+    if (reloading) return;
     setError("");
     const isCreditSale = paymentMethodId === CREDIT_PAYMENT_ID;
     const methodId = isCreditSale ? "" : paymentMethodId || payments[0]?.id || "";
@@ -713,11 +716,13 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               <button
                 type="button"
                 onClick={() => void handleCharge()}
-                disabled={charging || lines.length === 0}
+                disabled={charging || reloading || lines.length === 0}
                 className={`${primaryBtnClass} flex-1 py-3 text-base`}
               >
                 {charging
                   ? "Saving…"
+                  : reloading
+                    ? "Updating…"
                   : `${pastSale ? "Record" : "Charge"} ${formatMoney(totals.total, currency)}`}
               </button>
             </div>
