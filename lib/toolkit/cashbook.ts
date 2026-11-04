@@ -80,12 +80,31 @@ export function derivedCashRows(src: CashSources): CashRow[] {
   for (const o of src.orders ?? []) {
     if (o.status !== "completed" || o.paymentMethodId === CREDIT_METHOD_ID) continue;
     if (!(o.total > 0)) continue;
+    const description = `POS sale ${o.invoiceNumber}${o.customerName ? ` — ${o.customerName}` : ""}`;
+    // A split bill is one row per method, so cash in hand matches the drawer.
+    const parts = o.payments && o.payments.length > 1 ? o.payments : null;
+    if (parts) {
+      for (const p of parts) {
+        if (!(p.amount > 0)) continue;
+        rows.push({
+          id: `pos:${o.id}:${p.methodId}`,
+          date: o.date.slice(0, 10),
+          type: "in",
+          amount: p.amount,
+          description,
+          mode: p.methodName,
+          source: "pos-sale",
+          createdAt: o.createdAt || o.date,
+        });
+      }
+      continue;
+    }
     rows.push({
       id: `pos:${o.id}`,
       date: o.date.slice(0, 10),
       type: "in",
       amount: o.total,
-      description: `POS sale ${o.invoiceNumber}${o.customerName ? ` — ${o.customerName}` : ""}`,
+      description,
       mode: o.paymentMethodName ?? "",
       source: "pos-sale",
       createdAt: o.createdAt || o.date,
