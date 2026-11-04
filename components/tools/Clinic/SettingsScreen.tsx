@@ -26,7 +26,6 @@ import {
   isValidPinFormat,
   verifyPin,
 } from "@/lib/pos/pin";
-import { CURRENCIES } from "@/lib/pos/types";
 import {
   defaultMessageTemplates,
   defaultRxFooter,
@@ -60,6 +59,7 @@ import { useI18n } from "@/lib/i18n";
 import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import { intlLocaleFor } from "@/lib/i18n/pages";
 import type { LanguageCode } from "@/lib/i18n/config";
+import { currencyOptions } from "@/lib/toolkit/currencyDetect";
 
 /** Short weekday names from Intl, so the weekly-off chips follow the reader. */
 function shortWeekdays(lang: LanguageCode): string[] {
@@ -350,7 +350,7 @@ function ClinicDetails({
             onChange={(event) => onSave({ currency: event.target.value })}
             className={inputClass}
           >
-            {CURRENCIES.map((item) => (
+            {currencyOptions(business.currency).map((item) => (
               <option key={item.code} value={item.code}>
                 {item.label}
               </option>

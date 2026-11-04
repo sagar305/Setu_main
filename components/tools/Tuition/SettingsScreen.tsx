@@ -33,7 +33,7 @@ import {
   isValidPinFormat,
   verifyPin,
 } from "@/lib/pos/pin";
-import { CURRENCIES, formatMoney } from "@/lib/pos/types";
+import { formatMoney } from "@/lib/pos/types";
 import {
   defaultTemplates,
   describeDays,
@@ -54,6 +54,7 @@ import {
   primaryBtnClass,
   secondaryBtnClass,
 } from "@/components/tools/FreePos/ui";
+import { currencyOptions } from "@/lib/toolkit/currencyDetect";
 
 function Section({
   title,
@@ -213,7 +214,7 @@ function ProfileSection({
             onChange={(event) => setForm((p) => ({ ...p, currency: event.target.value }))}
             className={inputClass}
           >
-            {CURRENCIES.map((c) => (
+            {currencyOptions(form.currency).map((c) => (
               <option key={c.code} value={c.code}>
                 {c.label}
               </option>

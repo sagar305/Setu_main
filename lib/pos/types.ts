@@ -1,6 +1,8 @@
 // Data model for the Browser Based POS (/products/browser-based-pos).
 // Everything is stored client-side in IndexedDB — no backend, no login.
 
+import type { BatchAllocation } from "./batches";
+
 export type Business = {
   id: "main";
   name: string;
@@ -94,6 +96,13 @@ export type OrderItem = {
   taxRate: number;
   taxInclusive: boolean;
   lineSubtotal: number; // price * quantity, before discount/tax
+  /**
+   * Cost per unit at the time of sale. Only written while batch tracking is
+   * on (from the batches used); older sales and batch-off sales leave it out.
+   */
+  unitCost?: number | null;
+  /** Batches the units came from, when batch tracking is on. */
+  batchAllocations?: BatchAllocation[];
 };
 
 export type InventoryLogType = "opening" | "add" | "reduce" | "sale" | "restock" | "adjust";
@@ -138,6 +147,16 @@ export type PosSettings = {
   pinSalt?: string;
   /** Lock the screen after this many idle minutes; 0 = never. */
   autoLockMinutes?: number;
+  /**
+   * Batch & expiry tracking (lib/pos/batches). Off by default; undefined on
+   * older records means off, so existing users see no change.
+   */
+  batchTracking?: boolean;
+  /**
+   * Connected tools the owner chose to open as tabs inside the POS (a subset
+   * of connectedTools). Undefined on older records = no tool tabs.
+   */
+  toolTabs?: string[];
 };
 
 /** Which slices of the workspace can be marked dirty for Sheet sync. */
@@ -155,6 +174,8 @@ export type CartLine = {
   unit: string;
   taxRate: number;
   taxInclusive: boolean;
+  /** Batch the cashier picked; omitted = earliest expiry first. Batch tracking only. */
+  batchId?: string | null;
 };
 
 /** A parked (held) sale that can be recalled later on the billing screen. */

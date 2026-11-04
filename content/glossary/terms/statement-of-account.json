@@ -24,10 +24,6 @@
   "relatedTools": [
     {
       "type": "tool",
-      "slug": "customer-statement"
-    },
-    {
-      "type": "tool",
       "slug": "invoice-aging-report"
     },
     {

@@ -106,7 +106,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/profit-loss-statement",
     "/tools/balance-sheet",
     "/tools/cash-flow-statement",
-    "/tools/customer-statement",
     "/tools/invoice-aging-report",
     "/tools/accounts-payable-aging",
     "/tools/budget-vs-actual",

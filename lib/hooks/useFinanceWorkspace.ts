@@ -19,6 +19,7 @@ import {
   getPurchases,
   getCashEntries,
   getSupplierLedgerEntries,
+  getPurchaseReturns,
   grantConsent,
   hasConsent,
   hasWorkspace,
@@ -32,6 +33,7 @@ import {
   type Purchase,
   type CashEntry,
   type SupplierLedgerEntry,
+  type PurchaseReturn,
 } from "@/lib/toolkit/workspace";
 
 export type FinanceWorkspace = {
@@ -49,6 +51,7 @@ export type FinanceWorkspace = {
   purchases: Purchase[];
   cashEntries: CashEntry[];
   supplierLedger: SupplierLedgerEntry[];
+  purchaseReturns: PurchaseReturn[];
   reload: () => Promise<void>;
 };
 
@@ -66,9 +69,10 @@ export function useFinanceWorkspace(tool: string): FinanceWorkspace {
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [cashEntries, setCashEntries] = useState<CashEntry[]>([]);
   const [supplierLedger, setSupplierLedger] = useState<SupplierLedgerEntry[]>([]);
+  const [purchaseReturns, setPurchaseReturns] = useState<PurchaseReturn[]>([]);
 
   const load = useCallback(async () => {
-    const [biz, prods, custs, sups, ords, exps, led, purch, cash, supLed] = await Promise.all([
+    const [biz, prods, custs, sups, ords, exps, led, purch, cash, supLed, rets] = await Promise.all([
       getBusiness(),
       getProducts(),
       getCustomers(),
@@ -79,6 +83,7 @@ export function useFinanceWorkspace(tool: string): FinanceWorkspace {
       getPurchases(),
       getCashEntries(),
       getSupplierLedgerEntries(),
+      getPurchaseReturns(),
     ]);
     setBusiness(biz);
     setProducts(prods);
@@ -90,6 +95,7 @@ export function useFinanceWorkspace(tool: string): FinanceWorkspace {
     setPurchases(purch);
     setCashEntries(cash);
     setSupplierLedger(supLed);
+    setPurchaseReturns(rets);
   }, []);
 
   useEffect(() => {
@@ -135,6 +141,7 @@ export function useFinanceWorkspace(tool: string): FinanceWorkspace {
     purchases,
     cashEntries,
     supplierLedger,
+    purchaseReturns,
     reload: load,
   };
 }

@@ -1,7 +1,7 @@
 "use client";
 
 // Shared building blocks for the financial statement tools (P&L, Balance
-// Sheet, Cash Flow, Customer Statement): an editable list of labelled amounts,
+// Sheet, Cash Flow): an editable list of labelled amounts,
 // and a generic print pipeline that renders a clean A4 statement.
 
 import { Field, NumberInput, SecondaryButton, TextInput } from "@/components/toolkit/ui";

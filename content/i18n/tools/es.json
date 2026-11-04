@@ -1490,43 +1490,6 @@
       }
     },
     {
-      "name": "Extracto de cliente",
-      "shortDescription": "Estado de cuenta por cliente: facturas, cobros y saldo corriente. Imprime en PDF.",
-      "seo": {
-        "title": "Generador de extractos de cliente gratis",
-        "description": "Genera el extracto de cuenta de un cliente — facturas, cobros y notas de crédito con el saldo acumulado. Imprime en PDF o exporta a CSV. Gratis, sin registro.",
-        "keywords": [
-          "extracto de cliente",
-          "extracto de cuenta",
-          "formato de extracto de cuenta de cliente",
-          "extracto de saldo pendiente",
-          "extracto de deudor"
-        ],
-        "ogTitle": "Extracto de cliente",
-        "ogDescription": "Genera el extracto de cuenta de un cliente — facturas, cobros y notas de crédito con el saldo acumulado. Imprime en PDF o exporta a CSV. Gratis, sin registro."
-      },
-      "hero": {
-        "headline": "Extracto de cliente",
-        "subheadline": "Cada factura, cobro y ajuste de un cliente — con el saldo acumulado que zanja las discusiones."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "¿Qué es un extracto de cuenta?",
-            "answer": "Un resumen de todas las operaciones con un cliente en un periodo — facturas emitidas, cobros recibidos, notas de crédito concedidas — que acaba en el saldo que debe ahora."
-          },
-          {
-            "question": "¿Cuándo conviene enviar extractos a los clientes?",
-            "answer": "Cada mes a los clientes habituales a crédito, y de inmediato al reclamar un pago vencido. Un extracto claro resuelve casi todas las conversaciones del tipo “eso ya lo pagamos”."
-          },
-          {
-            "question": "¿Cómo se calcula el saldo?",
-            "answer": "Saldo inicial más facturas, menos cobros y notas de crédito, por orden de fecha. La herramienta recalcula el saldo acumulado sola a medida que añades operaciones."
-          }
-        ]
-      }
-    },
-    {
       "name": "Informe de facturas vencidas",
       "shortDescription": "Facturas de clientes sin cobrar por tramos de antigüedad, de corrientes a 90+ días. Exporta a CSV.",
       "seo": {

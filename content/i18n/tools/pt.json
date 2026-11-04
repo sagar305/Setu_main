@@ -1490,43 +1490,6 @@
       }
     },
     {
-      "name": "Extrato do cliente",
-      "shortDescription": "Extrato de conta por cliente — faturas, pagamentos e saldo corrente. Imprima em PDF.",
-      "seo": {
-        "title": "Gerador de extrato do cliente grátis",
-        "description": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro.",
-        "keywords": [
-          "extrato do cliente",
-          "extrato de conta",
-          "modelo de extrato de conta do cliente",
-          "extrato de saldo em aberto",
-          "extrato do devedor"
-        ],
-        "ogTitle": "Extrato do cliente",
-        "ogDescription": "Gere o extrato de conta de um cliente — faturas, recebimentos e notas de crédito com o saldo acumulado. Imprima em PDF ou exporte em CSV. Grátis, sem cadastro."
-      },
-      "hero": {
-        "headline": "Extrato do cliente",
-        "subheadline": "Cada fatura, recebimento e ajuste de um cliente — com o saldo acumulado que encerra discussões."
-      },
-      "faq": {
-        "items": [
-          {
-            "question": "O que é um extrato de conta?",
-            "answer": "Um resumo de todas as operações com um cliente num período — faturas emitidas, recebimentos, notas de crédito concedidas — terminando no saldo que ele deve agora."
-          },
-          {
-            "question": "Quando enviar extratos aos clientes?",
-            "answer": "Todo mês aos clientes habituais a prazo, e na hora ao cobrar um pagamento em atraso. Um extrato claro resolve quase toda conversa do tipo “isso já foi pago”."
-          },
-          {
-            "question": "Como o saldo é calculado?",
-            "answer": "Saldo inicial mais faturas, menos recebimentos e notas de crédito, em ordem de data. A ferramenta recalcula o saldo acumulado sozinha conforme você adiciona operações."
-          }
-        ]
-      }
-    },
-    {
       "name": "Relatório de aging de faturas",
       "shortDescription": "Faturas em aberto por faixa de atraso — do corrente a 90+ dias, por cliente. Exportação CSV.",
       "seo": {

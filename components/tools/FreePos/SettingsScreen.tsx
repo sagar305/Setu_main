@@ -17,7 +17,6 @@ import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import {
-  CURRENCIES,
   formatInvoiceNumber,
   type PosSettings,
   type ReceiptPaperSize,
@@ -44,6 +43,8 @@ import {
   primaryBtnClass,
   secondaryBtnClass,
 } from "./ui";
+import { canOpenAsTab } from "./ToolsScreen";
+import { currencyOptions } from "@/lib/toolkit/currencyDetect";
 
 function Section({
   id,
@@ -289,7 +290,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               onChange={(event) => setProfile((p) => ({ ...p, currency: event.target.value }))}
               className={inputClass}
             >
-              {CURRENCIES.map((c) => (
+              {currencyOptions(profile.currency).map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.label}
                 </option>
@@ -455,6 +456,32 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
           </button>
           <SavedFlash show={posSaved} />
         </div>
+      </Section>
+
+      <Section
+        id="batch-tracking"
+        title="Batch & expiry tracking"
+        description="Optional. Keep stock in batches with their own batch number, expiry date and cost — useful for grocery, FMCG and anything that expires. Off by default; when off, the POS works exactly as before."
+      >
+        <label className="flex items-start gap-3 rounded-lg border border-muted-line/40 bg-white px-3 py-3">
+          <input
+            type="checkbox"
+            checked={settings.batchTracking === true}
+            onChange={(event) => void updateSettings({ batchTracking: event.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-indigo"
+          />
+          <span className="text-sm text-ink">
+            Track batches and expiry
+            <span className="mt-1 block text-xs text-muted">
+              When you turn this on, each product&apos;s current stock becomes an &quot;Opening stock&quot;
+              batch — add batch numbers and expiry dates from Products → Batches. Sales take stock from
+              the batch that expires first (or the one you pick at checkout) and remember its cost, so
+              the Profit Dashboard shows real cost of goods. Turning it off later keeps your batches;
+              stock sold while it is off is taken from the earliest-expiring batches when you turn it
+              back on.
+            </span>
+          </span>
+        </label>
       </Section>
 
       <Section
@@ -645,14 +672,22 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
             <NewPill label={fill(translate("en", "wnNNew"), { n: newToolCount })} />
           ) : null
         }
-        description="Every tool here shares this POS's data — switch one on and it already knows your business, customers, products and sales when you open it. Some also unlock features inside the POS."
+        description="Every tool here shares this POS's data — switch one on and it already knows your business, customers, products and sales when you open it. Tick “Show as a tab in the POS” to use it right here without leaving the POS. Some also unlock features inside the POS."
       >
         <ConnectedToolsPanel
           enabled={settings.connectedTools ?? []}
+          tabs={settings.toolTabs ?? []}
           onToggle={(slug, on) => {
             const current = settings.connectedTools ?? [];
             const next = on ? [...current, slug] : current.filter((s) => s !== slug);
-            void updateSettings({ connectedTools: next });
+            // Switching a tool off also takes away its tab.
+            const tabs = on ? settings.toolTabs : (settings.toolTabs ?? []).filter((s) => s !== slug);
+            void updateSettings({ connectedTools: next, toolTabs: tabs });
+          }}
+          onToggleTab={(slug, on) => {
+            const current = settings.toolTabs ?? [];
+            const next = on ? [...current.filter((s) => s !== slug), slug] : current.filter((s) => s !== slug);
+            void updateSettings({ toolTabs: next });
           }}
         />
       </Section>
@@ -765,10 +800,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
  */
 function ConnectedToolsPanel({
   enabled,
+  tabs,
   onToggle,
+  onToggleTab,
 }: {
   enabled: string[];
+  tabs: string[];
   onToggle: (slug: string, on: boolean) => void;
+  onToggleTab: (slug: string, on: boolean) => void;
 }) {
   const whatsNew = useWhatsNewContext();
   return (
@@ -811,15 +850,28 @@ function ConnectedToolsPanel({
                           <p className="mt-1 text-xs font-medium text-indigo">{tool.unlocks}</p>
                         )}
                         {on && (
-                          <a
-                            href={tool.route}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
-                          >
-                            Open {tool.name}
-                            <ExternalLink className="h-3 w-3" />
-                          </a>
+                          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+                            {canOpenAsTab(tool.slug) && (
+                              <label className="inline-flex cursor-pointer items-center gap-2 text-xs font-semibold text-ink">
+                                <input
+                                  type="checkbox"
+                                  checked={tabs.includes(tool.slug)}
+                                  onChange={(event) => onToggleTab(tool.slug, event.target.checked)}
+                                  className="h-3.5 w-3.5 accent-indigo"
+                                />
+                                Show as a tab in the POS
+                              </label>
+                            )}
+                            <a
+                              href={tool.route}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 text-xs font-semibold text-indigo hover:underline"
+                            >
+                              Open {tool.name}
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          </div>
                         )}
                       </div>
                       <label className="flex shrink-0 cursor-pointer items-center gap-2">

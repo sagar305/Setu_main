@@ -102,6 +102,7 @@ const SYMBOLS: Record<string, string> = {
   EUR: "€",
   GBP: "£",
   AED: "د.إ",
+  PKR: "Rs",
   SGD: "S$",
 };
 
@@ -189,8 +190,9 @@ export function amountInWords(paise: number, currency = "INR"): string {
   const rupees = Math.floor(abs / 100);
   const fraction = abs % 100;
 
-  const unit = currency === "INR" ? "Rupees" : currency;
-  const subUnit = currency === "INR" ? "Paise" : "Cents";
+  // Pakistan also counts in lakh and crore, so the same words apply.
+  const unit = currency === "INR" || currency === "PKR" ? "Rupees" : currency;
+  const subUnit = currency === "INR" ? "Paise" : currency === "PKR" ? "Paisa" : "Cents";
 
   const parts: string[] = [];
   const crore = Math.floor(rupees / 10000000);

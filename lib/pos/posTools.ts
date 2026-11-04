@@ -48,6 +48,15 @@ export const POS_TOOLS: PosToolLink[] = [
     unlocks: "Adds the Credit (Udhaar) payment option at checkout for saved customers.",
   },
   {
+    slug: "cash-book",
+    name: "Cash Book",
+    route: "/tools/cash-book",
+    category: "Money in",
+    description: "Daily money in and out with opening and closing balance.",
+    usesPosData:
+      "POS sales show as money in; paid purchases, expenses and supplier payments as money out — automatically.",
+  },
+  {
     slug: "invoice-aging-report",
     name: "Invoice Aging Report",
     route: "/tools/invoice-aging-report",

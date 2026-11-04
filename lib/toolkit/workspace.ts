@@ -45,6 +45,7 @@ import type {
   Expense,
   LedgerEntry,
   Purchase,
+  PurchaseReturn,
   ReceiptTemplate,
   Supplier,
   SupplierLedgerEntry,
@@ -59,6 +60,7 @@ export type {
   Expense,
   LedgerEntry,
   Purchase,
+  PurchaseReturn,
   ReceiptTemplate,
   Supplier,
   SupplierLedgerEntry,
@@ -104,6 +106,8 @@ export const getPurchases = () => dbGetAll<Purchase>("purchases");
 export const savePurchase = (p: Purchase) => dbPut<Purchase>("purchases", p);
 export const deletePurchase = (id: string) => dbDelete("purchases", id);
 
+export const getPurchaseReturns = () => dbGetAll<PurchaseReturn>("purchase_returns");
+
 export const getAssets = () => dbGetAll<WorkspaceAsset>("assets");
 export const saveAsset = (a: WorkspaceAsset) => dbPut<WorkspaceAsset>("assets", a);
 export const deleteAsset = (id: string) => dbDelete("assets", id);
@@ -124,7 +128,19 @@ export async function applyPurchaseToStock(purchase: Purchase): Promise<void> {
     await updateStock(
       item.productId,
       item.quantity,
-      `Purchase ${purchase.billNumber || purchase.id.slice(0, 6)}`
+      `Purchase ${purchase.billNumber || purchase.id.slice(0, 6)}`,
+      {
+        batchNo: item.batchNo,
+        expiry: item.expiry,
+        costPrice: item.unitCost > 0 ? item.unitCost : null,
+        receivedAt: purchase.date,
+        purchaseId: purchase.id,
+        sellingPrice: item.sellingPrice ?? null,
+        taxRate: item.sellingTaxRate ?? null,
+        taxInclusive: item.sellingTaxInclusive ?? false,
+        returnBy: item.returnable ? item.returnBy ?? "" : "",
+        returnType: item.returnable ? item.returnType : undefined,
+      }
     );
   }
 }
