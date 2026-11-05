@@ -32,9 +32,7 @@ export function isFresh(addedOn: string, now: number = Date.now()): boolean {
 // ---- Website ---------------------------------------------------------------
 
 /** Standalone tools (by slug in content/en/tools.json) and their launch dates. */
-export const NEW_TOOLS: Record<string, string> = {
-  "supplier-ledger": "2026-10-31",
-};
+export const NEW_TOOLS: Record<string, string> = {};
 
 /** Products (by id in content/en/products.json) launched recently. */
 export const NEW_PRODUCTS: Record<string, string> = {
@@ -43,7 +41,7 @@ export const NEW_PRODUCTS: Record<string, string> = {
 
 /** Existing products that gained a feature, keyed by product id. */
 export const UPDATED_PRODUCTS: Record<string, string> = {
-  "browser-pos": "2026-11-03",
+  "browser-pos": "2026-11-05",
   "free-dine": "2026-10-30",
 };
 
@@ -69,6 +67,13 @@ export type ProductNote = { addedOn: string; title: string; body: string; href: 
 
 export const PRODUCT_NOTES: Record<string, ProductNote[]> = {
   "browser-pos": [
+    {
+      addedOn: "2026-11-05",
+      title: "UPI QR for the exact amount, and split payments",
+      body: "Pick UPI and the bill shows a QR with the amount already filled in. Split a bill across methods — ₹200 cash and the rest by UPI — and the QR asks for just the ₹43 balance. You can also print the UPI QR on the receipt.",
+      href: "#pos-app",
+      cta: "Open the POS → New Sale → Split",
+    },
     {
       addedOn: "2026-11-03",
       title: "Batch & expiry tracking",
@@ -96,20 +101,6 @@ export const PRODUCT_NOTES: Record<string, ProductNote[]> = {
       body: "Purchases now count as cost of goods when the stock sells, not as an expense when bought, so the Profit Dashboard no longer charges stock twice.",
       href: "/tools/profit-dashboard",
       cta: "Open Profit Dashboard",
-    },
-    {
-      addedOn: "2026-10-31",
-      title: "Supplier Ledger",
-      body: "See what you owe each supplier. Credit purchases from the Purchase Register post as bills, and payments settle them bill by bill.",
-      href: "/tools/supplier-ledger",
-      cta: "Open Supplier Ledger",
-    },
-    {
-      addedOn: "2026-10-31",
-      title: "Accounts Payable Aging",
-      body: "Pull unpaid credit purchases straight from the Purchase Register; marking one paid records it in the Supplier Ledger.",
-      href: "/tools/accounts-payable-aging",
-      cta: "Open Payables Aging",
     },
   ],
   "free-dine": [
@@ -169,16 +160,6 @@ export const APP_UPDATES: AppUpdate[] = [
     cta: "wnShowMe",
     target: { screen: "settings", anchor: "connected-tools" },
     features: ["cash-book"],
-  },
-  {
-    id: "pos-supplier-ledger",
-    app: "pos",
-    addedOn: "2026-10-31",
-    title: "wnPosSupplierTitle",
-    body: "wnPosSupplierBody",
-    cta: "wnShowMe",
-    target: { screen: "settings", anchor: "connected-tools" },
-    features: ["supplier-ledger", "accounts-payable-aging"],
   },
   {
     id: "dine-qr-sync",
