@@ -95,3 +95,26 @@ describe("derivedCashRows", () => {
     expect(rows.filter(isCashMode).map((r) => r.id).sort()).toEqual(["cl:l1", "pos:sale", "pur:paid"]);
   });
 });
+
+describe("derivedCashRows — split POS bills", () => {
+  it("writes one row per payment method", () => {
+    const rows = derivedCashRows({
+      orders: [
+        order({
+          id: "split",
+          total: 243,
+          paymentMethodId: "split",
+          paymentMethodName: "Cash + UPI",
+          payments: [
+            { methodId: "cash", methodName: "Cash", amount: 200 },
+            { methodId: "upi", methodName: "UPI", amount: 43 },
+          ],
+        }),
+      ],
+    });
+    expect(rows.map((r) => [r.mode, r.amount])).toEqual([
+      ["Cash", 200],
+      ["UPI", 43],
+    ]);
+  });
+});

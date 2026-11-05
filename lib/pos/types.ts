@@ -79,10 +79,23 @@ export type Order = {
   taxAmount: number; // tax added on top of the price
   includedTaxAmount: number; // tax already contained in item prices
   total: number;
+  /** "split" for a split payment (see `payments`), "credit" for udhaar. */
   paymentMethodId: string;
+  /** Method name, or e.g. "Cash + UPI" for a split payment. */
   paymentMethodName: string;
+  /**
+   * Split payment breakdown (e.g. ₹200 Cash + ₹43 UPI), summing to `total`.
+   * Only set when more than one method was used; older orders lack it.
+   */
+  payments?: OrderPayment[];
   status: OrderStatus;
   createdAt: string;
+};
+
+export type OrderPayment = {
+  methodId: string;
+  methodName: string;
+  amount: number;
 };
 
 export type OrderItem = {
@@ -131,6 +144,11 @@ export type PosSettings = {
   receiptPaperSize: ReceiptPaperSize;
   /** Saved Receipt Generator template to print with; "" = built-in default. */
   receiptTemplateId?: string;
+  /**
+   * Print a UPI QR for the amount due by UPI on receipts (needs the
+   * business UPI ID). Undefined on older records = off.
+   */
+  printUpiQrOnReceipt?: boolean;
   lastBackupAt: string | null;
   /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
   sheetSyncUrl: string;

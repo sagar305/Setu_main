@@ -22,6 +22,7 @@ import {
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
 import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
+import { looksLikeUpiId } from "@/lib/pos/payments";
 import {
   PIN_MAX_LENGTH,
   PIN_MIN_LENGTH,
@@ -110,6 +111,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     currency: "INR",
     email: "",
     taxNumber: "",
+    upiId: "",
   });
   const [profileError, setProfileError] = useState("");
   const [profileSaved, setProfileSaved] = useState(false);
@@ -123,6 +125,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         currency: business.currency,
         email: business.email,
         taxNumber: business.taxNumber,
+        upiId: business.upiId ?? "",
       });
     }
   }, [business]);
@@ -132,8 +135,13 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       setProfileError("Business name is required.");
       return;
     }
+    if (profile.upiId.trim() && !looksLikeUpiId(profile.upiId)) {
+      setProfileError("UPI ID should look like shopname@okhdfcbank.");
+      return;
+    }
     setProfileError("");
     await updateBusiness({
+      upiId: profile.upiId.trim(),
       name: profile.name.trim(),
       phone: profile.phone.trim(),
       address: profile.address.trim(),
@@ -154,6 +162,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   const [showBusinessInfo, setShowBusinessInfo] = useState(settings.showBusinessInfoOnReceipt);
   const [paperSize, setPaperSize] = useState<ReceiptPaperSize>(settings.receiptPaperSize);
   const [templateId, setTemplateId] = useState(settings.receiptTemplateId ?? "");
+  const [printUpiQr, setPrintUpiQr] = useState(settings.printUpiQrOnReceipt === true);
   const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
   const [posError, setPosError] = useState("");
   const [posSaved, setPosSaved] = useState(false);
@@ -167,6 +176,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     setShowBusinessInfo(settings.showBusinessInfoOnReceipt);
     setPaperSize(settings.receiptPaperSize ?? "80mm");
     setTemplateId(settings.receiptTemplateId ?? "");
+    setPrintUpiQr(settings.printUpiQrOnReceipt === true);
   }, [settings]);
 
   // Templates designed in the Receipt Designer live in the shared workspace.
@@ -195,6 +205,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       showBusinessInfoOnReceipt: showBusinessInfo,
       receiptPaperSize: paperSize,
       receiptTemplateId: templateId,
+      printUpiQrOnReceipt: printUpiQr,
     });
     setPosSaved(true);
     setTimeout(() => setPosSaved(false), 2000);
@@ -310,6 +321,17 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               type="text"
               value={profile.taxNumber}
               onChange={(event) => setProfile((p) => ({ ...p, taxNumber: event.target.value }))}
+              className={inputClass}
+            />
+          </Field>
+          <Field label="UPI ID" hint="Billing shows a QR for the exact amount — e.g. shopname@okhdfcbank">
+            <input
+              type="text"
+              value={profile.upiId}
+              onChange={(event) => setProfile((p) => ({ ...p, upiId: event.target.value }))}
+              placeholder="shopname@okhdfcbank"
+              autoCapitalize="none"
+              spellCheck={false}
               className={inputClass}
             />
           </Field>
@@ -442,6 +464,22 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
             />
             <span className="text-sm text-ink">
               Show business address, phone and tax number on receipts
+            </span>
+          </label>
+          <label className="flex items-start gap-2 sm:col-span-2">
+            <input
+              type="checkbox"
+              checked={printUpiQr}
+              onChange={(event) => setPrintUpiQr(event.target.checked)}
+              className="mt-0.5 h-4 w-4 accent-indigo"
+            />
+            <span className="text-sm text-ink">
+              Print a UPI QR on receipts
+              <span className="mt-0.5 block text-xs text-muted">
+                For the amount paid by UPI — the UPI part of a split bill, or the full amount for
+                UPI and udhaar sales. Needs your UPI ID in Business profile. You can also switch it
+                per receipt.
+              </span>
             </span>
           </label>
         </div>
