@@ -1,28 +1,99 @@
 {
   "seo": {
-    "title": "Setu Retail — Retail POS & Inventory Software",
-    "description": "Setu Retail is retail store management software for inventory, billing and store operations, built for India and global businesses. Get notified at launch.",
-    "keywords": ["Setu Retail", "retail management software India", "retail POS software", "inventory management software"]
-  },
-  "hero": {
-    "eyebrow": "Setu Retail — Coming Soon",
-    "headline": "Retail Management Software for India & Global Businesses",
-    "subheadline": "Inventory tracking, billing and store operations built for retail businesses in India and worldwide — part of the same platform powering Setu Dine."
-  },
-  "body": {
-    "headline": "What we're building",
-    "paragraphs": [
-      "Setu Retail brings the same operator-first approach behind Setu Dine to retail stores — inventory that stays accurate, billing that's fast at the counter, and visibility across every store location.",
-      "We're building it on the same multi-outlet architecture as Setu Dine, so retail chains get multi-store reporting from day one."
+    "title": "Setu Retail — Cloud POS with GST Billing & Inventory",
+    "description": "Cloud POS for Indian shops: GST billing that works offline, stock with batches, udhaar, purchases, cash book and branch reports. 3 months free.",
+    "keywords": [
+      "Setu Retail",
+      "retail POS software India",
+      "GST billing software",
+      "cloud POS",
+      "inventory management software",
+      "multi branch POS"
     ]
   },
+  "hero": {
+    "eyebrow": "Setu Retail",
+    "headline": "The cloud POS for shops, from one counter to a hundred branches",
+    "subheadline": "GST billing that keeps going when the internet drops, stock with batches and expiry, udhaar, purchases and a cash book — for owners, managers and cashiers. Start with 3 months of Basic free."
+  },
+  "features": [
+    {
+      "title": "GST billing, even offline",
+      "text": "Fast counter billing with CGST/SGST/IGST and HSN on every receipt. Counters keep billing with no internet and sync when it's back."
+    },
+    {
+      "title": "Stock, batches and expiry",
+      "text": "Branch-wise stock, low-stock alerts, batches with expiry picked earliest-first, barcode labels and a full stock register."
+    },
+    {
+      "title": "Udhaar and payments",
+      "text": "Credit sales post to the customer ledger; record payments received, oldest dues first, with invoice aging."
+    },
+    {
+      "title": "Purchases and suppliers",
+      "text": "Supplier bills that add stock and record input GST, returns to suppliers, payables aging and a cash book per branch."
+    },
+    {
+      "title": "Owners, managers, cashiers",
+      "text": "Every person has their own login and role. Cashiers bill; managers run their branches; the owner sees everything, with an audit log."
+    },
+    {
+      "title": "Many branches",
+      "text": "Branch prices, stock transfers that are checked on arrival, and branches compared side by side."
+    }
+  ],
+  "plansHeadline": "Plans",
+  "plansNote": "Prices include GST and are per business. Plans differ only in how many branches you can run; every plan has every feature.",
+  "contactSales": {
+    "text": "Running more than 100 branches?",
+    "cta": {
+      "label": "Contact sales",
+      "href": "/contact"
+    }
+  },
+  "howKeys": {
+    "headline": "How buying works",
+    "steps": [
+      "Sign up in the app and verify your email: you get 3 months of Basic free.",
+      "Pick a plan here and pay by UPI, card or net banking (PayPal outside India).",
+      "We show and email a license key. Press Redeem in Setu Retail and the days are added after your current plan."
+    ]
+  },
+  "faq": [
+    {
+      "question": "Is there a free trial?",
+      "answer": "Yes: 3 months of Setu Retail Basic, free, after you verify your email. No card needed."
+    },
+    {
+      "question": "What happens when my plan ends?",
+      "answer": "The account locks online until a key is redeemed; your data stays. Counters already offline keep billing, and their bills sync once you renew."
+    },
+    {
+      "question": "Can I move to a bigger plan?",
+      "answer": "Yes. Redeem a key for the new plan and choose to switch now (the days you had left are converted) or to start it when the current plan ends."
+    },
+    {
+      "question": "I use the free Browser Based POS. Can I bring my data?",
+      "answer": "Yes. Download POS_BACKUP.json from the free POS and import it in Settings → Import & export: products, customers, stock and batches, plus suppliers, purchases, expenses and udhaar history."
+    },
+    {
+      "question": "Do prices include GST?",
+      "answer": "Yes. Every price shown includes GST, and the invoice we email shows it."
+    }
+  ],
   "cta": {
-    "headline": "Want early access to Setu Retail?",
-    "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches.",
-    "cta": { "label": "Get notified", "href": "/contact" }
+    "headline": "Start your 3-month free trial",
+    "subtext": "Sign up with your shop's details, verify your email and start billing in minutes.",
+    "cta": {
+      "label": "Start free trial",
+      "href": "https://app.retail-pos.setutechnology.com/sign-up"
+    }
   },
   "crossSell": {
-    "text": "Running a restaurant? Free Dine is a complete restaurant POS you can open today, free forever.",
-    "cta": { "label": "Open Free Dine", "href": "/products/free-restaurant-pos" }
+    "text": "Just one counter and no need for the cloud? The Browser Based POS is free forever.",
+    "cta": {
+      "label": "Open the free POS",
+      "href": "/products/browser-based-pos"
+    }
   }
 }

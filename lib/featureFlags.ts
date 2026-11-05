@@ -141,3 +141,20 @@ export function qrMenuPaymentsEnabled(): boolean {
 export function qrMenuUsdEnabled(): boolean {
   return enabled(process.env.QR_MENU_USD_ENABLED);
 }
+
+/**
+ * Buying Setu Retail keys: the buy box on /products/retail, the
+ * /products/retail/payment return page, and the /api/retail/* checkout, order,
+ * region and webhook routes.
+ *
+ * Off unless "true". When off the product page shows the plans and prices
+ * with "Start free trial" but no way to pay, the return page 404s and the API
+ * routes answer 404, so nothing can be charged even with gateway keys present.
+ * Set RETAIL_PAYMENTS_ENABLED=true (with the Cashfree keys and
+ * RETAIL_LICENSE_SECRET, the same value as setu-retail-be's) and redeploy to
+ * start selling. Dollar prices use QR_MENU_USD_ENABLED and the PayPal keys, as
+ * QR Menu does. The pages read it at build time; the API routes at request time.
+ */
+export function retailPaymentsEnabled(): boolean {
+  return enabled(process.env.RETAIL_PAYMENTS_ENABLED);
+}

@@ -12,7 +12,7 @@
   "hero": {
     "eyebrow": "Pricing",
     "headline": "Priced per business, not per outlet",
-    "subheadline": "Most of what we build is free forever, with no signup. Setu QR Menu is the one paid product, priced per business — and free for your first year."
+    "subheadline": "Most of what we build is free forever, with no signup. Setu QR Menu and Setu Retail are the paid products, priced per business — with a free year of QR Menu and 3 free months of Retail."
   },
   "billingNote": "All prices are per business account and include GST. Yearly billing is charged once for twelve months.",
   "regions": [
@@ -61,7 +61,8 @@
       ],
       "paidSoon": {
         "name": "Setu Retail",
-        "note": "Cloud database, several counters and staff logins."
+        "note": "Cloud database, several counters and staff logins.",
+        "href": "/products/retail"
       },
       "cta": {
         "label": "Open the POS",
@@ -448,22 +449,93 @@
       }
     },
     {
-      "slug": "setu-retail",
-      "name": "Setu Retail",
+      "slug": "setu-retail-basic",
+      "name": "Setu Retail Basic",
       "href": "/products/retail",
-      "status": "in-development",
-      "summary": "Retail store management for inventory, billing and store operations.",
-      "freeNote": "In development",
-      "trial": null,
-      "price": null,
+      "status": "paid",
+      "summary": "Cloud POS for shops: billing, stock, staff and books in every branch.",
+      "freeNote": "3 months free",
+      "trial": "3 months free on Basic",
+      "price": {
+        "IN": {
+          "monthly": 249,
+          "yearly": 2499
+        },
+        "INTL": {
+          "monthly": 4.99,
+          "yearly": 49.99
+        }
+      },
       "features": [
-        "Inventory and stock control",
-        "Store billing",
-        "Store operations reporting"
+        "1 branch",
+        "GST billing with CGST/SGST/IGST and HSN",
+        "Counters keep billing with no internet",
+        "All 12 connected tools: udhaar, cash book, purchases and more",
+        "Owner, manager and cashier logins",
+        "Import from the free Browser Based POS"
       ],
       "cta": {
-        "label": "Get notified at launch",
-        "href": "/contact"
+        "label": "Start free trial",
+        "href": "https://app.retail-pos.setutechnology.com/sign-up"
+      }
+    },
+    {
+      "slug": "setu-retail-gold",
+      "name": "Setu Retail Gold",
+      "href": "/products/retail",
+      "status": "paid",
+      "summary": "For growing shops with more than one branch.",
+      "freeNote": "Most popular",
+      "trial": "3 months free on Basic",
+      "price": {
+        "IN": {
+          "monthly": 499,
+          "yearly": 4999
+        },
+        "INTL": {
+          "monthly": 9.99,
+          "yearly": 99.99
+        }
+      },
+      "features": [
+        "Up to 10 branches",
+        "Stock transfers between branches",
+        "Branch reports side by side",
+        "Everything in Basic"
+      ],
+      "cta": {
+        "label": "Buy Gold",
+        "href": "/products/retail?plan=gold#buy"
+      }
+    },
+    {
+      "slug": "setu-retail-platinum",
+      "name": "Setu Retail Platinum",
+      "href": "/products/retail",
+      "status": "paid",
+      "summary": "For retail chains with many branches.",
+      "freeNote": "For chains",
+      "trial": "3 months free on Basic",
+      "price": {
+        "IN": {
+          "monthly": 999,
+          "yearly": 9999
+        },
+        "INTL": {
+          "monthly": 19.99,
+          "yearly": 199.99
+        }
+      },
+      "features": [
+        "Up to 100 branches",
+        "Stock transfers between branches",
+        "Branch reports side by side",
+        "More than 100 branches? Contact sales",
+        "Everything in Basic"
+      ],
+      "cta": {
+        "label": "Buy Platinum",
+        "href": "/products/retail?plan=platinum#buy"
       }
     },
     {
@@ -596,11 +668,15 @@
     "items": [
       {
         "question": "Which Setu products are free?",
-        "answer": "All of them except Setu QR Menu. The Browser Based POS, Free Dine, the Bank Statement Analyzer, the Tuition Class Manager and the Free Clinic Manager are free forever, need no signup, and keep your data on your device. Every calculator and tool on the site is free too."
+        "answer": "All of them except Setu QR Menu and Setu Retail. The Browser Based POS, Free Dine, the Bank Statement Analyzer, the Tuition Class Manager and the Free Clinic Manager are free forever, need no signup, and keep your data on your device. Every calculator and tool on the site is free too."
       },
       {
         "question": "Is pricing per outlet or per business?",
-        "answer": "Per business account. One Setu QR Menu plan covers your whole business, however many outlets or staff logins you run, so growing does not change what you pay."
+        "answer": "Per business account. One Setu QR Menu plan covers your whole business, however many outlets or staff logins you run. Setu Retail plans are per business too and differ only in how many branches you can run: Basic 1, Gold 10, Platinum 100."
+      },
+      {
+        "question": "How does the Setu Retail free trial work?",
+        "answer": "Sign up and verify your email to get 3 months of Setu Retail Basic free, no card needed. Before it ends, buy a key on this site and redeem it in Settings → Plan & key; the days are added after your current plan. Running more than 100 branches? Contact us for a custom plan."
       },
       {
         "question": "Do the prices include GST?",
