@@ -573,12 +573,22 @@
       "slug": "setu-workflow",
       "name": "Setu Workflow",
       "href": "/products/workflow",
-      "status": "in-development",
+      "status": "paid",
       "summary": "Practice management for CA/CPA and accounting firms — engagements, workflow, review points, time and capacity.",
-      "freeNote": "In development",
-      "trial": null,
-      "price": null,
+      "freeNote": "15-day free trial",
+      "trial": "15-day free trial",
+      "price": {
+        "IN": {
+          "monthly": 999,
+          "yearly": 9999
+        },
+        "INTL": {
+          "monthly": 9.99,
+          "yearly": 99.99
+        }
+      },
       "features": [
+        "3 users included; more through sales",
         "Clients, engagements and staffing",
         "Workflow stages and checklists",
         "Queries and review points",
@@ -586,8 +596,8 @@
         "Management dashboard and reports"
       ],
       "cta": {
-        "label": "Get notified at launch",
-        "href": "/contact"
+        "label": "Start your 15-day trial",
+        "href": "/products/workflow"
       }
     }
   ],

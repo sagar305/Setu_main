@@ -20,8 +20,8 @@
     "subheadline": "Every client, engagement, workflow stage, checklist, review point and hour your team works — in one place, so partners know where every job stands without chasing anyone for an update."
   },
   "status": {
-    "label": "Paid product · In development",
-    "text": "Setu Workflow is a paid, multi-user cloud product. It is in development and will launch soon — pricing will be announced at launch."
+    "label": "Paid product · 15-day free trial",
+    "text": "Setu Workflow is a paid, multi-user cloud product for CA/CPA and accounting firms. Start with a 15-day free trial — no card needed — then buy a key for your firm."
   },
   "body": {
     "headline": "Why we're building it",
@@ -100,13 +100,48 @@
       "Secure login, invitations and password reset"
     ]
   },
+  "pricing": {
+    "badge": "15-day free trial",
+    "title": "One simple plan for your firm.",
+    "subtitle": "Every plan covers 3 users with every module included. Larger teams add users through sales.",
+    "note": "Prices shown in your region's currency, inclusive of GST. A key is a one-time payment that never auto-renews; redeem it in Admin → Subscription.",
+    "extraUsers": "Need more than 3 users? Extra users are $4.99 per user per month — contact sales and we'll issue a key for your whole team.",
+    "plans": [
+      {
+        "region": "India",
+        "currency": "INR",
+        "symbol": "₹",
+        "monthly": "999",
+        "yearly": "9999",
+        "monthlyLabel": "₹999",
+        "yearlyLabel": "₹9,999",
+        "saveLabel": "Save ₹1,989 a year"
+      },
+      {
+        "region": "Rest of the world",
+        "currency": "USD",
+        "symbol": "$",
+        "monthly": "9.99",
+        "yearly": "99.99",
+        "monthlyLabel": "$9.99",
+        "yearlyLabel": "$99.99",
+        "saveLabel": "Save $19.89 a year"
+      }
+    ]
+  },
   "cta": {
-    "headline": "Want early access to Setu Workflow?",
-    "subtext": "Tell us about your firm — how many people, which services you run — and we'll reach out as soon as Setu Workflow launches.",
-    "cta": { "label": "Get notified at launch", "href": "/contact" }
+    "headline": "More than 3 people in your firm?",
+    "subtext": "Tell us how many users you need. Extra users are $4.99 per user per month, and we'll send one key that covers your whole team.",
+    "cta": {
+      "label": "Contact sales",
+      "href": "/contact"
+    }
   },
   "crossSell": {
     "text": "Working through client bank statements today? The Bank Statement Analyzer is free and runs entirely in your browser.",
-    "cta": { "label": "Open the Bank Statement Analyzer", "href": "/products/bank-statement-analyzer" }
+    "cta": {
+      "label": "Open the Bank Statement Analyzer",
+      "href": "/products/bank-statement-analyzer"
+    }
   }
 }
