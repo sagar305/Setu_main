@@ -8,6 +8,7 @@ import { WORKFLOW_INCLUDED_USERS, WORKFLOW_SIGNUP_URL } from "@/lib/workflowChec
 import { PageHero } from "@/components/PageHero";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WorkflowBuy } from "@/components/WorkflowBuy";
+import { WorkflowRolesShowcase } from "@/components/WorkflowRolesShowcase";
 
 const content = getWorkflowContent();
 
@@ -124,20 +125,15 @@ export default function WorkflowPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-16">
+      {/* Roles: an auto-playing walkthrough of what each person sees and does */}
+      <section id="roles" className="mx-auto max-w-6xl scroll-mt-24 px-6 pb-16">
         <FadeIn>
-          <h2 className="text-2xl font-bold tracking-tight text-ink">{content.team.headline}</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-ink">{content.roles.headline}</h2>
+          <p className="mt-3 max-w-2xl text-muted">{content.roles.subheadline}</p>
         </FadeIn>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {content.team.items.map((item) => (
-            <FadeIn key={item.title}>
-              <div className="h-full rounded-2xl border border-muted-line/30 bg-white/60 p-6">
-                <h3 className="text-base font-semibold text-indigo">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        <FadeIn className="mt-8">
+          <WorkflowRolesShowcase roles={content.roles.items} />
+        </FadeIn>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 pb-16">
@@ -199,6 +195,19 @@ export default function WorkflowPage() {
             </FadeIn>
           ))}
         </div>
+        <FadeIn>
+          <div className="mt-8 rounded-2xl border border-muted-line/20 bg-white p-8">
+            <h3 className="font-bold text-ink">Included on every plan</h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {content.pricing.includes.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-ink/80">
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
         <FadeIn>
           <p className="mt-6 flex items-start gap-2 rounded-xl border border-muted-line/30 bg-cream/60 p-4 text-sm text-ink/80">
             <Users className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo" />
