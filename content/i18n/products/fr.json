@@ -52,6 +52,7 @@
         "label": "Ouvrir la caisse dans le navigateur — c'est gratuit"
       }
     },
+    {},
     {
       "name": "Analyseur de relevés bancaires",
       "headline": "Analyse gratuite de relevés bancaires, directement dans votre navigateur",
@@ -72,6 +73,7 @@
         "label": "Ouvrir l'analyseur de relevés — c'est gratuit"
       }
     },
+    {},
     {},
     {
       "headline": "Une caisse de restaurant gratuite qui tourne dans le navigateur",
@@ -296,13 +298,6 @@
       }
     },
     {
-      "headline": "La gestion de magasin, bientôt disponible",
-      "description": "Suivi du stock, facturation et exploitation de magasin, conçus pour les commerces de détail du monde entier.",
-      "cta": {
-        "label": "Découvrir Setu Retail"
-      }
-    },
-    {
       "headline": "La gestion des cours de soutien, bientôt disponible",
       "description": "Messages automatiques aux parents, vue parent en direct, encaissement des frais en ligne et synchronisation cloud entre vos appareils — toujours pensé pour un professeur, pas pour un établissement.",
       "cta": {
@@ -365,7 +360,6 @@
         "label": "Me prévenir au lancement"
       }
     },
-    {},
     {
       "name": "Setu pour votre activité",
       "headline": "Le prochain secteur que nous construisons, c'est le vôtre",

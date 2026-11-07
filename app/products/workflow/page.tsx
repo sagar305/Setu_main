@@ -6,6 +6,8 @@ import { planOffers } from "@/lib/schema";
 import { workflowPaymentsEnabled } from "@/lib/featureFlags";
 import { WORKFLOW_INCLUDED_USERS, WORKFLOW_SIGNUP_URL } from "@/lib/workflowCheckout";
 import { PageHero } from "@/components/PageHero";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
+import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WorkflowBuy } from "@/components/WorkflowBuy";
 import { WorkflowRolesShowcase } from "@/components/WorkflowRolesShowcase";
@@ -213,9 +215,9 @@ export default function WorkflowPage() {
             <Users className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo" />
             <span>
               {content.pricing.extraUsers}{" "}
-              <Link href="/contact" className="font-semibold text-indigo hover:underline">
+              <a href="#contact-sales" className="font-semibold text-indigo hover:underline">
                 Contact sales →
-              </Link>
+              </a>
             </span>
           </p>
           <p className="mt-4 text-xs text-muted">{content.pricing.note}</p>
@@ -227,6 +229,30 @@ export default function WorkflowPage() {
           </div>
         )}
       </section>
+
+      {/* Contact sales: larger teams; scroll-mt keeps it clear of the sticky nav on #contact-sales */}
+      <section id="contact-sales" aria-labelledby="contact-sales-h" className="scroll-mt-24 bg-indigo py-16">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-saffron">{content.contactSales.eyebrow}</p>
+            <h2 id="contact-sales-h" className="mt-4 text-3xl font-bold tracking-tight text-cream-paper">
+              {content.contactSales.headline}
+            </h2>
+            <p className="mt-4 leading-relaxed text-cream-paper/80">{content.contactSales.text}</p>
+            <ul className="mt-6 space-y-3">
+              {content.contactSales.points.map((point) => (
+                <li key={point} className="flex gap-3 text-cream-paper/90">
+                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-saffron" aria-hidden="true" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ContactForm form={content.contactSales.form} topic="workflow-sales" markRequired />
+        </div>
+      </section>
+
+      <RelatedProducts group="accounting" current="workflow" />
 
       <section className="bg-indigo py-16 text-center text-cream-paper">
         <div className="mx-auto max-w-2xl px-6">

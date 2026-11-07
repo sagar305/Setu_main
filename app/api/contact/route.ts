@@ -18,7 +18,14 @@ export async function POST(request: Request) {
     const value = body[key];
     return typeof value === "string" && value.trim() ? value.trim().slice(0, 100) : null;
   };
-  const isConsultancy = optional("topic") === "consultancy";
+  const topic = optional("topic");
+  const isConsultancy = topic === "consultancy";
+  // Setu Retail's "more than 100 branches" form on /products/retail.
+  const isRetailEnterprise = topic === "retail-enterprise";
+  const branches = optional("branches");
+  // Setu Workflow's "more than 3 users" form on /products/workflow.
+  const isWorkflowSales = topic === "workflow-sales";
+  const users = optional("users");
   const businessType = optional("businessType");
   const frequency = optional("frequency");
   const software = optional("software");
@@ -40,7 +47,11 @@ export async function POST(request: Request) {
     replyTo: email,
     subject: isConsultancy
       ? `New consultancy enquiry from ${name}`
-      : `New contact form submission from ${name}`,
+      : isRetailEnterprise
+        ? `Setu Retail enterprise enquiry (100+ branches) from ${name}`
+        : isWorkflowSales
+          ? `Setu Workflow sales enquiry (more than 3 users) from ${name}`
+          : `New contact form submission from ${name}`,
     text: [
       `Name: ${name}`,
       `Email: ${email}`,
@@ -49,7 +60,11 @@ export async function POST(request: Request) {
       businessType ? `Business type: ${businessType}` : null,
       frequency ? `Preferred frequency: ${frequency}` : null,
       software ? `Accounting software: ${software}` : null,
+      branches ? `Branches: ${branches}` : null,
+      users ? `Users: ${users}` : null,
       isConsultancy ? "Source: Consultancy page" : null,
+      isRetailEnterprise ? "Source: Setu Retail page — more than 100 branches" : null,
+      isWorkflowSales ? "Source: Setu Workflow page — more than 3 users" : null,
       "",
       "Message:",
       message,

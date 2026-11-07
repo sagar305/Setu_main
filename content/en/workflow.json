@@ -246,5 +246,76 @@
       "label": "Open the Bank Statement Analyzer",
       "href": "/products/bank-statement-analyzer"
     }
+  },
+  "contactSales": {
+    "eyebrow": "Contact sales",
+    "headline": "More than 3 users, or several offices?",
+    "text": "Tell us about your firm and we'll issue one key that covers your whole team — extra users are $4.99 per user per month. Your clients and engagements come across by CSV import.",
+    "points": [
+      "One key for the whole firm, any number of users",
+      "Every module for every user",
+      "Offices and custom roles for each team",
+      "CSV import for clients and engagements"
+    ],
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Work email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "required": true
+        },
+        {
+          "name": "company",
+          "label": "Firm name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "users",
+          "label": "Number of users",
+          "type": "select",
+          "required": true,
+          "placeholder": "Select",
+          "options": [
+            {
+              "value": "4-10",
+              "label": "4 – 10"
+            },
+            {
+              "value": "11-25",
+              "label": "11 – 25"
+            },
+            {
+              "value": "26-50",
+              "label": "26 – 50"
+            },
+            {
+              "value": "50+",
+              "label": "More than 50"
+            }
+          ]
+        },
+        {
+          "name": "message",
+          "label": "What kind of work does your firm do, and what do you use today?",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "submitLabel": "Talk to sales"
+    }
   }
 }
