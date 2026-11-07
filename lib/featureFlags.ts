@@ -157,6 +157,9 @@ export function qrMenuUsdEnabled(): boolean {
  */
 export function retailPaymentsEnabled(): boolean {
   return enabled(process.env.RETAIL_PAYMENTS_ENABLED);
+}
+
+/**
  * Buying Setu Workflow keys: the buy box on /products/workflow, the
  * /products/workflow/payment return page, and the /api/workflow/* checkout,
  * order, region and webhook routes.
