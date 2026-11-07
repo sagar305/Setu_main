@@ -52,6 +52,7 @@
         "label": "Browser-Kasse öffnen — kostenlos"
       }
     },
+    {},
     {
       "name": "Kontoauszug-Analyse",
       "headline": "Kostenlose Kontoauszug-Analyse, direkt im Browser",
@@ -72,6 +73,7 @@
         "label": "Kontoauszug-Analyse öffnen — kostenlos"
       }
     },
+    {},
     {},
     {
       "headline": "Eine kostenlose Restaurantkasse, die im Browser läuft",
@@ -296,13 +298,6 @@
       }
     },
     {
-      "headline": "Einzelhandelsverwaltung, in Kürze",
-      "description": "Bestandsführung, Abrechnung und Filialbetrieb, gebaut für Einzelhändler weltweit.",
-      "cta": {
-        "label": "Setu Retail entdecken"
-      }
-    },
-    {
       "headline": "Verwaltung von Nachhilfeinstituten, in Kürze",
       "description": "Automatische Elternnachrichten, eine Live-Ansicht für Eltern, Online-Beitragseinzug und Cloud-Abgleich über Ihre eigenen Geräte — weiterhin um eine Lehrkraft herum gebaut, nicht um ein Institut.",
       "cta": {
@@ -365,7 +360,6 @@
         "label": "Zum Start benachrichtigen"
       }
     },
-    {},
     {
       "name": "Setu für Ihren Betrieb",
       "headline": "Als Nächstes bauen wir für Ihre Branche",

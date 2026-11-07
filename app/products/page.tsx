@@ -4,6 +4,7 @@ import {
   pharmacySoftwareEnabled,
   rentalSoftwareEnabled,
   repairSoftwareEnabled,
+  tbAnalyserHidden,
   tokenSystemEnabled,
 } from "@/lib/featureFlags";
 import { languageAlternates } from "@/lib/i18n/pages";
@@ -50,6 +51,10 @@ export const metadata: Metadata = {
  */
 const listedProducts: { name: string; path: string }[] = [
   { name: "Browser Based POS", path: "/products/browser-based-pos" },
+  { name: "Setu Retail", path: "/products/retail" },
+  { name: "Bank Statement Analyzer", path: "/products/bank-statement-analyzer" },
+  { name: "Setu Workflow", path: "/products/workflow" },
+  ...(tbAnalyserHidden() ? [] : [{ name: "TB Analyser", path: "/products/tb-analyzer" }]),
   { name: "Free Dine — Free Restaurant POS", path: "/products/free-restaurant-pos" },
   { name: "Setu QR Menu", path: "/products/qr-menu" },
   { name: "Tuition Class Manager", path: "/products/free-tuition-software" },
@@ -68,10 +73,8 @@ const listedProducts: { name: string; path: string }[] = [
     : []),
   { name: "Setu Dine", path: "/products/restaurant-pos" },
   { name: "Setu Queue", path: "/products/queue" },
-  { name: "Setu Retail", path: "/products/retail" },
   { name: "Setu Tuition", path: "/products/tuition" },
   { name: "Setu Clinic", path: "/products/clinic" },
-  { name: "Setu Workflow", path: "/products/workflow" },
 ];
 
 const itemListSchema = {

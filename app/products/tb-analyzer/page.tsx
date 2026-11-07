@@ -31,6 +31,7 @@ import {
   WifiOff,
 } from "lucide-react";
 import { Faq } from "@/components/Faq";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
 import { TbAnalyzerEmbed } from "@/components/tools/TbAnalyzer/TbAnalyzerEmbed";
@@ -682,6 +683,8 @@ export default function TbAnalyzerPage() {
           </div>
         </div>
       </section>
+
+      <RelatedProducts group="accounting" current="tb-analyzer" />
 
       <Faq headline="TB Analyser — questions" items={FAQ_ITEMS} />
     </>

@@ -6,6 +6,7 @@ import { planOffers } from "@/lib/schema";
 import { workflowPaymentsEnabled } from "@/lib/featureFlags";
 import { WORKFLOW_INCLUDED_USERS, WORKFLOW_SIGNUP_URL } from "@/lib/workflowCheckout";
 import { PageHero } from "@/components/PageHero";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WorkflowBuy } from "@/components/WorkflowBuy";
 import { WorkflowRolesShowcase } from "@/components/WorkflowRolesShowcase";
@@ -227,6 +228,8 @@ export default function WorkflowPage() {
           </div>
         )}
       </section>
+
+      <RelatedProducts group="accounting" current="workflow" />
 
       <section className="bg-indigo py-16 text-center text-cream-paper">
         <div className="mx-auto max-w-2xl px-6">

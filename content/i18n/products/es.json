@@ -52,6 +52,7 @@
         "label": "Abrir el TPV en el navegador — es gratis"
       }
     },
+    {},
     {
       "name": "Analizador de extractos bancarios",
       "headline": "Análisis gratuito de extractos bancarios, dentro de tu navegador",
@@ -72,6 +73,7 @@
         "label": "Abrir el analizador de extractos — es gratis"
       }
     },
+    {},
     {},
     {
       "headline": "Un TPV de restaurante gratuito que funciona en el navegador",
@@ -296,13 +298,6 @@
       }
     },
     {
-      "headline": "Gestión de tiendas, muy pronto",
-      "description": "Control de inventario, facturación y operativa de tienda pensados para negocios de retail de todo el mundo.",
-      "cta": {
-        "label": "Descubre Setu Retail"
-      }
-    },
-    {
       "headline": "Gestión de academias, muy pronto",
       "description": "Mensajes automáticos a las familias, vista en vivo para los padres, cobro de cuotas en línea y sincronización en la nube entre tus propios dispositivos, siempre pensado para un profesor y no para un centro.",
       "cta": {
@@ -365,7 +360,6 @@
         "label": "Avísame en el lanzamiento"
       }
     },
-    {},
     {
       "name": "Setu para tu negocio",
       "headline": "El siguiente sector que construimos es el tuyo",

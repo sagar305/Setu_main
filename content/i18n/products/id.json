@@ -52,6 +52,7 @@
         "label": "Buka kasir browser — gratis"
       }
     },
+    {},
     {
       "name": "Penganalisis rekening koran",
       "headline": "Analisis rekening koran gratis, langsung di browser Anda",
@@ -72,6 +73,7 @@
         "label": "Buka penganalisis rekening koran — gratis"
       }
     },
+    {},
     {},
     {
       "headline": "POS restoran gratis yang berjalan di browser",
@@ -296,13 +298,6 @@
       }
     },
     {
-      "headline": "Manajemen toko ritel, segera hadir",
-      "description": "Pelacakan persediaan, penagihan, dan operasional toko yang dibuat untuk usaha ritel di seluruh dunia.",
-      "cta": {
-        "label": "Jelajahi Setu Retail"
-      }
-    },
-    {
       "headline": "Manajemen bimbingan belajar, segera hadir",
       "description": "Pesan otomatis ke orang tua, tampilan langsung untuk orang tua, penerimaan iuran daring, dan sinkronisasi awan antar perangkat Anda sendiri — tetap dibangun untuk satu guru, bukan untuk sebuah lembaga.",
       "cta": {
@@ -365,7 +360,6 @@
         "label": "Beri tahu saya saat diluncurkan"
       }
     },
-    {},
     {
       "name": "Setu untuk usaha Anda",
       "headline": "Berikutnya kami bangun untuk bidang Anda",
