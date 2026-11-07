@@ -762,10 +762,10 @@ export function PosProvider({ children }: { children: ReactNode }) {
       // (e.g. after restoring an older backup).
       const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
       let counter = settings.nextInvoiceNumber;
-      let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+      let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
       while (usedNumbers.has(invoiceNumber)) {
         counter += 1;
-        invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
       }
 
       const customer = input.customerId
@@ -931,10 +931,10 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
       let counter = settings.nextInvoiceNumber;
       const nextInvoiceNumber = () => {
-        let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
         while (usedNumbers.has(invoiceNumber)) {
           counter += 1;
-          invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+          invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
         }
         usedNumbers.add(invoiceNumber);
         counter += 1;

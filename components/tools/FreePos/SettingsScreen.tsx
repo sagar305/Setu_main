@@ -17,7 +17,10 @@ import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import {
+  MAX_INVOICE_DIGITS,
+  MIN_INVOICE_DIGITS,
   formatInvoiceNumber,
+  invoiceDigits,
   type PosSettings,
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
@@ -156,6 +159,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   // Invoice / tax / receipt settings
   const [prefix, setPrefix] = useState(settings.invoicePrefix);
   const [nextNumberText, setNextNumberText] = useState(String(settings.nextInvoiceNumber));
+  const [digits, setDigits] = useState(invoiceDigits(settings.invoiceNumberDigits));
   const [taxEnabled, setTaxEnabled] = useState(settings.taxEnabled);
   const [taxRateText, setTaxRateText] = useState(String(settings.defaultTaxRate));
   const [footer, setFooter] = useState(settings.receiptFooter);
@@ -170,6 +174,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   useEffect(() => {
     setPrefix(settings.invoicePrefix);
     setNextNumberText(String(settings.nextInvoiceNumber));
+    setDigits(invoiceDigits(settings.invoiceNumberDigits));
     setTaxEnabled(settings.taxEnabled);
     setTaxRateText(String(settings.defaultTaxRate));
     setFooter(settings.receiptFooter);
@@ -199,6 +204,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     await updateSettings({
       invoicePrefix: prefix.trim(),
       nextInvoiceNumber: nextNumber,
+      invoiceNumberDigits: digits,
       taxEnabled,
       defaultTaxRate: taxRate,
       receiptFooter: footer,
@@ -356,7 +362,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
             label="Invoice prefix"
-            hint={`Next invoice: ${formatInvoiceNumber(prefix, parseInt(nextNumberText, 10) || 1)}`}
+            hint={`Next invoice: ${formatInvoiceNumber(prefix, parseInt(nextNumberText, 10) || 1, digits)}`}
           >
             <input
               type="text"
@@ -375,6 +381,25 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               onChange={(event) => setNextNumberText(event.target.value)}
               className={inputClass}
             />
+          </Field>
+          <Field
+            label="Invoice number digits"
+            hint="Zeros are added in front to fill the length. Bills already issued keep their number."
+          >
+            <select
+              value={digits}
+              onChange={(event) => setDigits(Number(event.target.value))}
+              className={inputClass}
+            >
+              {Array.from(
+                { length: MAX_INVOICE_DIGITS - MIN_INVOICE_DIGITS + 1 },
+                (_, i) => MIN_INVOICE_DIGITS + i
+              ).map((n) => (
+                <option key={n} value={n}>
+                  {n} digits — {formatInvoiceNumber(prefix, 1, n)}
+                </option>
+              ))}
+            </select>
           </Field>
           <div>
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">

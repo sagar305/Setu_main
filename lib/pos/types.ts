@@ -137,6 +137,11 @@ export type PosSettings = {
   id: "main";
   invoicePrefix: string;
   nextInvoiceNumber: number;
+  /**
+   * How many digits the invoice number is zero-padded to (3–9), e.g. 5 →
+   * INV-00042. Undefined on older records = 5, the original format.
+   */
+  invoiceNumberDigits?: number;
   taxEnabled: boolean;
   defaultTaxRate: number;
   receiptFooter: string;
@@ -287,10 +292,15 @@ export function nowIso(): string {
   return new Date().toISOString();
 }
 
+export const MIN_INVOICE_DIGITS = 3;
+export const MAX_INVOICE_DIGITS = 9;
+export const DEFAULT_INVOICE_DIGITS = 5;
+
 export const DEFAULT_SETTINGS: PosSettings = {
   id: "main",
   invoicePrefix: "INV-",
   nextInvoiceNumber: 1,
+  invoiceNumberDigits: DEFAULT_INVOICE_DIGITS,
   taxEnabled: false,
   defaultTaxRate: 0,
   receiptFooter: "Thank you for your business!",
@@ -309,6 +319,17 @@ export const DEFAULT_SETTINGS: PosSettings = {
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
 
-export function formatInvoiceNumber(prefix: string, n: number): string {
-  return `${prefix}${String(n).padStart(5, "0")}`;
+/** A usable digit count: whole number within 3–9, else the default 5. */
+export function invoiceDigits(digits: number | null | undefined): number {
+  return Number.isInteger(digits) && digits! >= MIN_INVOICE_DIGITS && digits! <= MAX_INVOICE_DIGITS
+    ? digits!
+    : DEFAULT_INVOICE_DIGITS;
+}
+
+/**
+ * "INV-" + 42 → "INV-00042" (5 digits). Numbers longer than the digit count
+ * are never cut: with 3 digits, bill 1000 is "INV-1000".
+ */
+export function formatInvoiceNumber(prefix: string, n: number, digits?: number): string {
+  return `${prefix}${String(n).padStart(invoiceDigits(digits), "0")}`;
 }
