@@ -157,4 +157,19 @@ export function qrMenuUsdEnabled(): boolean {
  */
 export function retailPaymentsEnabled(): boolean {
   return enabled(process.env.RETAIL_PAYMENTS_ENABLED);
+ * Buying Setu Workflow keys: the buy box on /products/workflow, the
+ * /products/workflow/payment return page, and the /api/workflow/* checkout,
+ * order, region and webhook routes.
+ *
+ * Off unless "true". When off the product page shows the plan and prices but
+ * no way to pay, the return page 404s and the API routes answer 404, so
+ * nothing can be charged even with gateway keys present. Set
+ * WORKFLOW_PAYMENTS_ENABLED=true (with the Cashfree keys and
+ * WORKFLOW_LICENSE_SECRET, the same value as the Setu Workflow app's) and
+ * redeploy to start selling. Dollar prices use QR_MENU_USD_ENABLED and the
+ * PayPal keys, as QR Menu does. The pages read it at build time; the API
+ * routes at request time.
+ */
+export function workflowPaymentsEnabled(): boolean {
+  return enabled(process.env.WORKFLOW_PAYMENTS_ENABLED);
 }

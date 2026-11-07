@@ -22,6 +22,14 @@ import {
 } from "./sheetSync";
 import { calculateCartTotals } from "./calc";
 import {
+  SPLIT_PAYMENT_ID,
+  checkSplit,
+  splitLabel,
+  toOrderPayments,
+  type SplitPart,
+} from "./payments";
+import type { OrderPayment } from "./types";
+import {
   allocate,
   allocationUnitCost,
   makeBatch,
@@ -113,6 +121,11 @@ export type CheckoutInput = {
   discountValue: number;
   customerId: string | null;
   paymentMethodId: string;
+  /**
+   * Split payment: two or more parts (e.g. ₹200 Cash + ₹43 UPI) that must add
+   * up to the bill total. When set, paymentMethodId is ignored.
+   */
+  splitPayments?: SplitPart[];
   /**
    * Udhaar sale: the total is recorded as credit in the shared Customer
    * Ledger instead of being paid now. Requires a SAVED customer — walk-ins
@@ -725,8 +738,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
           throw new Error(`"${line.name}" has an invalid quantity.`);
         }
       }
+      const isSplit = !input.creditSale && (input.splitPayments?.length ?? 0) > 0;
       const paymentMethod = payments.find((p) => p.id === input.paymentMethodId);
-      if (!input.creditSale && !paymentMethod) {
+      if (!input.creditSale && !isSplit && !paymentMethod) {
         throw new Error("Please choose a payment method.");
       }
 
@@ -737,14 +751,21 @@ export function PosProvider({ children }: { children: ReactNode }) {
         settings.taxEnabled
       );
 
+      let splitParts: OrderPayment[] | undefined;
+      if (isSplit) {
+        const check = checkSplit(input.splitPayments!, totals.total, payments);
+        if (!check.ok) throw new Error(check.error);
+        splitParts = toOrderPayments(input.splitPayments!, payments);
+      }
+
       // Guarantee a unique invoice number even if the counter drifted
       // (e.g. after restoring an older backup).
       const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
       let counter = settings.nextInvoiceNumber;
-      let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+      let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
       while (usedNumbers.has(invoiceNumber)) {
         counter += 1;
-        invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
       }
 
       const customer = input.customerId
@@ -777,8 +798,18 @@ export function PosProvider({ children }: { children: ReactNode }) {
         taxAmount: totals.taxAmount,
         includedTaxAmount: totals.includedTaxAmount,
         total: totals.total,
-        paymentMethodId: input.creditSale ? "credit" : paymentMethod!.id,
-        paymentMethodName: input.creditSale ? "Customer Credit" : paymentMethod!.name,
+        // A "split" across one method (e.g. two UPI parts) is just that method.
+        ...(input.creditSale
+          ? { paymentMethodId: "credit", paymentMethodName: "Customer Credit" }
+          : splitParts && splitParts.length > 1
+            ? {
+                paymentMethodId: SPLIT_PAYMENT_ID,
+                paymentMethodName: splitLabel(splitParts),
+                payments: splitParts,
+              }
+            : splitParts
+              ? { paymentMethodId: splitParts[0].methodId, paymentMethodName: splitParts[0].methodName }
+              : { paymentMethodId: paymentMethod!.id, paymentMethodName: paymentMethod!.name }),
         status: "completed",
         createdAt: now,
       };
@@ -900,10 +931,10 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
       let counter = settings.nextInvoiceNumber;
       const nextInvoiceNumber = () => {
-        let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+        let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
         while (usedNumbers.has(invoiceNumber)) {
           counter += 1;
-          invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter);
+          invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
         }
         usedNumbers.add(invoiceNumber);
         counter += 1;

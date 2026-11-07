@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Expand,
   History,
   Minus,
   PackageSearch,
@@ -16,8 +17,11 @@ import { usePos } from "@/lib/pos/store";
 import { batchLabel, batchesFor, expiryStatus } from "@/lib/pos/batches";
 import { calculateCartTotals } from "@/lib/pos/calc";
 import { isToolEnabled } from "@/lib/pos/posTools";
+import { checkSplit, isUpiMethod, round2, upiPaymentLink } from "@/lib/pos/payments";
+import { UpiQrCard } from "./UpiQr";
 import {
   formatMoney,
+  generateId,
   isLowStock,
   isOutOfStock,
   type CartLine,
@@ -34,6 +38,12 @@ import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
 
 /** Sentinel payment id for udhaar sales (never stored as a payment method). */
 const CREDIT_PAYMENT_ID = "__customer_credit__";
+
+/** Sentinel payment id for the "Split" option on the billing screen. */
+const SPLIT_PAYMENT_UI_ID = "__split__";
+
+/** One row of a split payment; amount is the raw input text. */
+type SplitRow = { key: string; methodId: string; amount: string };
 
 /** Local "YYYY-MM-DDTHH:mm" for a datetime-local input. */
 function toLocalDateTimeInput(date: Date): string {
@@ -81,6 +91,10 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [customerFormOpen, setCustomerFormOpen] = useState(false);
   const [pastSale, setPastSale] = useState(false);
   const [pastSaleDate, setPastSaleDate] = useState("");
+  // Split payment rows. The LAST row is the balance: its amount is always
+  // total − the others, so "₹200 cash" leaves exactly ₹43 for the UPI QR.
+  const [splitRows, setSplitRows] = useState<SplitRow[]>([]);
+  const [qrZoomOpen, setQrZoomOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
 
   const effectiveTaxRate = (product: Product) =>
@@ -179,6 +193,72 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
 
   const totals = calculateCartTotals(lines, discountType, discountValue, settings.taxEnabled);
 
+  const isSplit = paymentMethodId === SPLIT_PAYMENT_UI_ID;
+  const parseAmount = (text: string) => {
+    const n = parseFloat(text);
+    return Number.isFinite(n) ? round2(n) : 0;
+  };
+  const splitParts = splitRows.map((row, index) =>
+    index === splitRows.length - 1
+      ? {
+          methodId: row.methodId,
+          amount: round2(
+            totals.total -
+              splitRows.slice(0, -1).reduce((sum, r) => sum + parseAmount(r.amount), 0)
+          ),
+        }
+      : { methodId: row.methodId, amount: parseAmount(row.amount) }
+  );
+  const splitCheck = isSplit ? checkSplit(splitParts, totals.total, payments) : null;
+
+  const startSplit = () => {
+    const upi = payments.find((m) => isUpiMethod(m));
+    const first = payments.find((m) => m.id !== upi?.id) ?? payments[0];
+    const balance = upi ?? payments.find((m) => m.id !== first?.id) ?? payments[0];
+    setSplitRows([
+      { key: generateId(), methodId: first?.id ?? "", amount: "" },
+      { key: generateId(), methodId: balance?.id ?? "", amount: "" },
+    ]);
+    setPaymentMethodId(SPLIT_PAYMENT_UI_ID);
+  };
+
+  const updateSplitRow = (key: string, patch: Partial<SplitRow>) =>
+    setSplitRows((rows) => rows.map((r) => (r.key === key ? { ...r, ...patch } : r)));
+
+  const addSplitRow = () =>
+    setSplitRows((rows) => {
+      const used = new Set(rows.map((r) => r.methodId));
+      const next = payments.find((m) => !used.has(m.id)) ?? payments[0];
+      // New rows go before the balance row so the balance stays last.
+      return [
+        ...rows.slice(0, -1),
+        { key: generateId(), methodId: next?.id ?? "", amount: "" },
+        ...rows.slice(-1),
+      ];
+    });
+
+  const removeSplitRow = (key: string) =>
+    setSplitRows((rows) => (rows.length <= 2 ? rows : rows.filter((r) => r.key !== key)));
+
+  // What the UPI QR should ask for right now: the full bill when UPI is the
+  // method, or just the UPI share of a split.
+  const upiAmount = isSplit
+    ? round2(
+        splitParts
+          .filter((p) => isUpiMethod(payments.find((m) => m.id === p.methodId)))
+          .reduce((sum, p) => sum + Math.max(p.amount, 0), 0)
+      )
+    : isUpiMethod(payments.find((m) => m.id === (paymentMethodId || payments[0]?.id)))
+      ? totals.total
+      : 0;
+  const upiLink = upiPaymentLink({
+    upiId: business?.upiId,
+    amount: upiAmount,
+    currency,
+    businessName: business?.name,
+    note: business?.name ? `Bill at ${business.name}` : "POS bill",
+  });
+
   const stockWarnings = lines.filter((line) => {
     const product = products.find((p) => p.id === line.productId);
     return product?.trackStock && line.quantity > product.stock;
@@ -191,8 +271,12 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     if (reloading) return;
     setError("");
     const isCreditSale = paymentMethodId === CREDIT_PAYMENT_ID;
-    const methodId = isCreditSale ? "" : paymentMethodId || payments[0]?.id || "";
-    if (!isCreditSale && !methodId) {
+    if (isSplit && splitCheck && !splitCheck.ok) {
+      setError(splitCheck.error);
+      return;
+    }
+    const methodId = isCreditSale || isSplit ? "" : paymentMethodId || payments[0]?.id || "";
+    if (!isCreditSale && !isSplit && !methodId) {
       setError("Add a payment method in Settings first.");
       return;
     }
@@ -214,11 +298,16 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         discountValue,
         customerId: customerId || null,
         paymentMethodId: methodId,
+        splitPayments: isSplit ? splitParts : undefined,
         creditSale: isCreditSale,
         saleDate,
       });
       setCompletedOrder(order);
       setPastSale(false);
+      if (isSplit) {
+        setPaymentMethodId("");
+        setSplitRows([]);
+      }
       setLines([]);
       setDiscountValue(0);
       setCustomerId("");
@@ -248,6 +337,10 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     setDiscountValue(0);
     setCustomerId("");
     setError("");
+    if (isSplit) {
+      setPaymentMethodId("");
+      setSplitRows([]);
+    }
   };
 
   const handleHold = async (label: string) => {
@@ -688,7 +781,132 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                     Credit (Udhaar)
                   </button>
                 ) : null}
+                {payments.length >= 2 ? (
+                  <button
+                    type="button"
+                    onClick={() => (isSplit ? setPaymentMethodId("") : startSplit())}
+                    title="Take part of the bill in one method and the rest in another"
+                    className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
+                      isSplit
+                        ? "bg-indigo text-white"
+                        : "border border-dashed border-muted-line/60 bg-white text-muted hover:text-indigo"
+                    }`}
+                  >
+                    Split
+                  </button>
+                ) : null}
               </div>
+              {isSplit ? (
+                <div className="mt-3 space-y-2 rounded-xl border border-muted-line/30 bg-cream-paper p-3">
+                  {splitRows.map((row, index) => {
+                    const isBalance = index === splitRows.length - 1;
+                    const amount = splitParts[index]?.amount ?? 0;
+                    return (
+                      <div key={row.key} className="flex items-center gap-2">
+                        <select
+                          value={row.methodId}
+                          onChange={(e) => updateSplitRow(row.key, { methodId: e.target.value })}
+                          aria-label={`Payment method for part ${index + 1}`}
+                          className={`${inputClass} !w-auto min-w-0 flex-1`}
+                        >
+                          {payments.map((m) => (
+                            <option key={m.id} value={m.id}>
+                              {m.name}
+                            </option>
+                          ))}
+                        </select>
+                        {isBalance ? (
+                          <span
+                            className={`w-28 shrink-0 rounded-lg border px-3 py-2 text-right text-sm font-semibold ${
+                              amount < 0
+                                ? "border-red-300 bg-red-50 text-red-700"
+                                : "border-muted-line/40 bg-white text-ink"
+                            }`}
+                            title="Balance — the rest of the bill"
+                          >
+                            {formatMoney(amount, currency)}
+                          </span>
+                        ) : (
+                          <div className="w-28 shrink-0">
+                            <input
+                              type="number"
+                              inputMode="decimal"
+                              min={0}
+                              step="0.01"
+                              value={row.amount}
+                              onChange={(e) => updateSplitRow(row.key, { amount: e.target.value })}
+                              placeholder="0"
+                              aria-label={`Amount for part ${index + 1}`}
+                              autoFocus={index === 0}
+                              className={`${inputClass} text-right`}
+                            />
+                          </div>
+                        )}
+                        {splitRows.length > 2 ? (
+                          <button
+                            type="button"
+                            onClick={() => removeSplitRow(row.key)}
+                            aria-label={`Remove part ${index + 1}`}
+                            className="shrink-0 text-muted/60 transition hover:text-red-500"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                  <div className="flex items-center justify-between gap-2 pt-1 text-xs">
+                    <span className="text-muted">Last line is the balance — it fills in itself.</span>
+                    {splitRows.length < payments.length ? (
+                      <button
+                        type="button"
+                        onClick={addSplitRow}
+                        className="shrink-0 font-semibold text-indigo hover:underline"
+                      >
+                        + Add method
+                      </button>
+                    ) : null}
+                  </div>
+                  {splitCheck && !splitCheck.ok && lines.length > 0 && splitRows.slice(0, -1).some((r) => r.amount.trim() !== "") ? (
+                    <p className="text-xs font-semibold text-red-600">{splitCheck.error}</p>
+                  ) : null}
+                </div>
+              ) : null}
+              {upiAmount > 0 && lines.length > 0 ? (
+                <div className="mt-3">
+                  {upiLink ? (
+                    <div className="relative">
+                      <UpiQrCard
+                        link={upiLink}
+                        amountLabel={formatMoney(upiAmount, currency)}
+                        upiId={business?.upiId ?? ""}
+                        size={160}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setQrZoomOpen(true)}
+                        aria-label="Show the UPI QR full size for the customer"
+                        title="Show full size"
+                        className="absolute right-2 top-2 rounded-md bg-white/80 p-1.5 text-emerald-700 transition hover:bg-white"
+                      >
+                        <Expand className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : currency !== "INR" ? null : (
+                    <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-800">
+                      Add your shop&apos;s UPI ID in{" "}
+                      <button
+                        type="button"
+                        onClick={() => onNavigate("settings")}
+                        className="font-semibold underline"
+                      >
+                        Settings → Business profile
+                      </button>{" "}
+                      to show a QR for the exact amount here.
+                    </p>
+                  )}
+                </div>
+              ) : null}
               {selectedPaymentId === CREDIT_PAYMENT_ID ? (
                 <p className="mt-2 text-xs text-amber-700">
                   The full amount will be added to this customer&apos;s ledger balance instead of
@@ -716,7 +934,9 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
               <button
                 type="button"
                 onClick={() => void handleCharge()}
-                disabled={charging || reloading || lines.length === 0}
+                disabled={
+                  charging || reloading || lines.length === 0 || (splitCheck !== null && !splitCheck.ok)
+                }
                 className={`${primaryBtnClass} flex-1 py-3 text-base`}
               >
                 {charging
@@ -740,6 +960,17 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         }}
         title="Sale complete"
       />
+
+      <Modal open={qrZoomOpen && !!upiLink} onClose={() => setQrZoomOpen(false)} title="Pay by UPI">
+        {upiLink ? (
+          <UpiQrCard
+            link={upiLink}
+            amountLabel={formatMoney(upiAmount, currency)}
+            upiId={business?.upiId ?? ""}
+            size={300}
+          />
+        ) : null}
+      </Modal>
 
       <ReviewPromptDialog
         open={review.open}

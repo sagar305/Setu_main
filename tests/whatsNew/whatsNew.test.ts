@@ -33,23 +33,22 @@ describe("isFresh", () => {
 describe("website tags", () => {
   const nov1 = at("2026-11-01T00:00:00Z");
 
-  it("tags the Supplier Ledger tool New", () => {
-    expect(isNewTool("supplier-ledger", nov1)).toBe(true);
+  it("no longer tags the Supplier Ledger tool New", () => {
+    expect(isNewTool("supplier-ledger", nov1)).toBe(false);
     expect(isNewTool("customer-ledger", nov1)).toBe(false);
   });
 
   it("tags TB Analyser New and the POS and Free Dine Updated", () => {
     expect(productTag("tb-analyzer", nov1)).toBe("new");
-    // The POS update shipped on 3 Nov: not tagged before it, tagged after.
+    // The latest POS update shipped on 5 Nov: not tagged before it, tagged after.
     expect(productTag("browser-pos", nov1)).toBeNull();
-    expect(productTag("browser-pos", at("2026-11-03T12:00:00Z"))).toBe("updated");
+    expect(productTag("browser-pos", at("2026-11-05T12:00:00Z"))).toBe("updated");
     expect(productTag("free-dine", nov1)).toBe("updated");
     expect(productTag("free-clinic", nov1)).toBeNull();
   });
 
   it("drops every tag and note once the window has passed", () => {
     const later = at("2027-03-01T00:00:00Z");
-    expect(isNewTool("supplier-ledger", later)).toBe(false);
     expect(productTag("tb-analyzer", later)).toBeNull();
     expect(productTag("browser-pos", later)).toBeNull();
     expect(productNotes("browser-pos", later)).toEqual([]);
@@ -59,14 +58,13 @@ describe("website tags", () => {
 describe("updatesFor", () => {
   const nov2 = at("2026-11-02T00:00:00Z");
 
-  it("tells a business set up before the launch", () => {
-    const ids = updatesFor("pos", "2026-06-01T10:00:00.000Z", nov2).map((u) => u.id);
-    expect(ids).toEqual(["pos-supplier-ledger"]);
+  it("no longer announces the Supplier Ledger or Payables Aging", () => {
+    expect(updatesFor("pos", "2026-06-01T10:00:00.000Z", nov2)).toEqual([]);
   });
 
   it("adds batch tracking and the Cash Book from 3 Nov", () => {
     const ids = updatesFor("pos", "2026-06-01T10:00:00.000Z", at("2026-11-04T00:00:00Z")).map((u) => u.id);
-    expect(ids).toEqual(["pos-batch-tracking", "pos-cash-book", "pos-supplier-ledger"]);
+    expect(ids).toEqual(["pos-batch-tracking", "pos-cash-book"]);
     expect(updatesFor("pos", "2026-11-03T12:00:00.000Z", at("2026-11-04T00:00:00Z"))).toEqual([]);
     expect(isNewPosTool("cash-book", at("2026-11-04T00:00:00Z"))).toBe(true);
   });
@@ -81,10 +79,12 @@ describe("updatesFor", () => {
     expect(ids).toEqual(["dine-qr-sync"]);
   });
 
-  it("flags the new POS tools", () => {
-    expect(isNewPosTool("supplier-ledger", nov2)).toBe(true);
-    expect(isNewPosTool("accounts-payable-aging", nov2)).toBe(true);
-    expect(isNewPosTool("expense-tracker", nov2)).toBe(false);
+  it("flags only the tools of announced updates", () => {
+    const nov4 = at("2026-11-04T00:00:00Z");
+    expect(isNewPosTool("cash-book", nov4)).toBe(true);
+    expect(isNewPosTool("supplier-ledger", nov4)).toBe(false);
+    expect(isNewPosTool("accounts-payable-aging", nov4)).toBe(false);
+    expect(isNewPosTool("expense-tracker", nov4)).toBe(false);
   });
 });
 

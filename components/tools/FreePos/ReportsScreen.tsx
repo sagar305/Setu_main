@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
+import { orderPaymentParts } from "@/lib/pos/payments";
 import { formatMoney, isLowStock, isOutOfStock } from "@/lib/pos/types";
 import {
   customersCsv,
@@ -94,10 +95,13 @@ export function ReportsScreen() {
   const paymentBreakdown = useMemo(() => {
     const map = new Map<string, { count: number; total: number }>();
     for (const order of rangeOrders) {
-      const entry = map.get(order.paymentMethodName) ?? { count: 0, total: 0 };
-      entry.count += 1;
-      entry.total += order.total;
-      map.set(order.paymentMethodName, entry);
+      // A split bill adds its parts to each method (₹200 Cash, ₹43 UPI).
+      for (const part of orderPaymentParts(order)) {
+        const entry = map.get(part.methodName) ?? { count: 0, total: 0 };
+        entry.count += 1;
+        entry.total += part.amount;
+        map.set(part.methodName, entry);
+      }
     }
     return Array.from(map.entries()).sort((a, b) => b[1].total - a[1].total);
   }, [rangeOrders]);

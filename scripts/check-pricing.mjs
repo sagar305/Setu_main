@@ -26,6 +26,7 @@ const PRODUCT_FILES = {
   "content/en/restaurant-pos.json": "setu-dine",
   "content/en/queue.json": "setu-queue",
   "content/en/qr-menu.json": "qr-menu",
+  "content/en/workflow.json": "setu-workflow",
 };
 
 /** Product page region label -> region id in pricing.json. */
