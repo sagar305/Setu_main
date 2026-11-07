@@ -79,10 +79,23 @@ export type Order = {
   taxAmount: number; // tax added on top of the price
   includedTaxAmount: number; // tax already contained in item prices
   total: number;
+  /** "split" for a split payment (see `payments`), "credit" for udhaar. */
   paymentMethodId: string;
+  /** Method name, or e.g. "Cash + UPI" for a split payment. */
   paymentMethodName: string;
+  /**
+   * Split payment breakdown (e.g. ₹200 Cash + ₹43 UPI), summing to `total`.
+   * Only set when more than one method was used; older orders lack it.
+   */
+  payments?: OrderPayment[];
   status: OrderStatus;
   createdAt: string;
+};
+
+export type OrderPayment = {
+  methodId: string;
+  methodName: string;
+  amount: number;
 };
 
 export type OrderItem = {
@@ -124,6 +137,11 @@ export type PosSettings = {
   id: "main";
   invoicePrefix: string;
   nextInvoiceNumber: number;
+  /**
+   * How many digits the invoice number is zero-padded to (3–9), e.g. 5 →
+   * INV-00042. Undefined on older records = 5, the original format.
+   */
+  invoiceNumberDigits?: number;
   taxEnabled: boolean;
   defaultTaxRate: number;
   receiptFooter: string;
@@ -131,6 +149,11 @@ export type PosSettings = {
   receiptPaperSize: ReceiptPaperSize;
   /** Saved Receipt Generator template to print with; "" = built-in default. */
   receiptTemplateId?: string;
+  /**
+   * Print a UPI QR for the amount due by UPI on receipts (needs the
+   * business UPI ID). Undefined on older records = off.
+   */
+  printUpiQrOnReceipt?: boolean;
   lastBackupAt: string | null;
   /** Google Apps Script web-app URL for Sheet sync; "" = not connected. */
   sheetSyncUrl: string;
@@ -269,10 +292,15 @@ export function nowIso(): string {
   return new Date().toISOString();
 }
 
+export const MIN_INVOICE_DIGITS = 3;
+export const MAX_INVOICE_DIGITS = 9;
+export const DEFAULT_INVOICE_DIGITS = 5;
+
 export const DEFAULT_SETTINGS: PosSettings = {
   id: "main",
   invoicePrefix: "INV-",
   nextInvoiceNumber: 1,
+  invoiceNumberDigits: DEFAULT_INVOICE_DIGITS,
   taxEnabled: false,
   defaultTaxRate: 0,
   receiptFooter: "Thank you for your business!",
@@ -291,6 +319,17 @@ export const DEFAULT_SETTINGS: PosSettings = {
 
 export const DEFAULT_PAYMENT_METHODS = ["Cash", "UPI", "Card"];
 
-export function formatInvoiceNumber(prefix: string, n: number): string {
-  return `${prefix}${String(n).padStart(5, "0")}`;
+/** A usable digit count: whole number within 3–9, else the default 5. */
+export function invoiceDigits(digits: number | null | undefined): number {
+  return Number.isInteger(digits) && digits! >= MIN_INVOICE_DIGITS && digits! <= MAX_INVOICE_DIGITS
+    ? digits!
+    : DEFAULT_INVOICE_DIGITS;
+}
+
+/**
+ * "INV-" + 42 → "INV-00042" (5 digits). Numbers longer than the digit count
+ * are never cut: with 3 digits, bill 1000 is "INV-1000".
+ */
+export function formatInvoiceNumber(prefix: string, n: number, digits?: number): string {
+  return `${prefix}${String(n).padStart(invoiceDigits(digits), "0")}`;
 }

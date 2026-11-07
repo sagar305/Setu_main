@@ -5,14 +5,19 @@ import {
   Banknote,
   Barcode,
   Blocks,
+  BookOpen,
   BookUser,
+  Boxes,
+  CalendarDays,
   CalendarClock,
   CalendarRange,
   ClipboardList,
   Copy,
+  CalendarX,
   CreditCard,
   DatabaseBackup,
   FileSpreadsheet,
+  FileUp,
   Globe,
   HandCoins,
   Hash,
@@ -24,6 +29,8 @@ import {
   Layers,
   Lock,
   PackagePlus,
+  PackageX,
+  PanelTop,
   Palette,
   PauseCircle,
   Percent,
@@ -37,6 +44,7 @@ import {
   Search,
   Share2,
   Sheet,
+  Split,
   ShieldCheck,
   Tags,
   Timer,
@@ -64,7 +72,7 @@ import { freeOffer } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Browser Based POS — Free, Offline, No Login | Setu",
   description:
-    "Free browser-based POS for small shops. Barcode billing, held carts, udhaar, inventory, reports, PIN lock and Sheet sync — works offline, no signup.",
+    "Free browser-based POS for small shops. Barcode billing, UPI QR & split payments, udhaar, batch & expiry, inventory, reports, Sheet sync — offline, no signup.",
   keywords: [
     "browser based POS",
     "free POS",
@@ -73,6 +81,9 @@ export const metadata: Metadata = {
     "free billing software",
     "POS for small business",
     "free POS software India",
+    "POS with UPI QR",
+    "split payment POS",
+    "POS with batch and expiry tracking",
     "no login POS",
     "retail billing",
     "udhaar POS",
@@ -116,7 +127,10 @@ const HIGHLIGHTS: { icon: ComponentType<{ className?: string }>; label: string }
   { icon: WifiOff, label: "Works offline" },
   { icon: ScanBarcode, label: "Barcode ready" },
   { icon: PauseCircle, label: "Hold & recall carts" },
+  { icon: QrCode, label: "UPI QR, exact amount" },
+  { icon: Split, label: "Split payments" },
   { icon: HandCoins, label: "Udhaar / credit sales" },
+  { icon: CalendarX, label: "Batch & expiry" },
   { icon: Lock, label: "PIN counter lock" },
   { icon: Sheet, label: "Google Sheet sync" },
   { icon: Printer, label: "80mm / 58mm / A4" },
@@ -204,6 +218,24 @@ const COUNTER: FeatureSection = {
       description:
         "Switch on the Customer Ledger and a Credit button appears for saved customers — the bill goes to their ledger balance instead of the till.",
     },
+    {
+      icon: QrCode,
+      title: "UPI QR for the exact amount",
+      description:
+        "Pick UPI and the cart shows a QR with the bill amount already filled in. The customer scans with GPay, PhonePe, Paytm or any UPI app — no typing, no wrong amounts. Enlarge it to turn the screen towards them.",
+    },
+    {
+      icon: Split,
+      title: "Split payments",
+      description:
+        "Part cash, part UPI? Type ₹200 against Cash and the balance line fills itself with ₹43 — and the UPI QR asks for just that ₹43. Add a third method if needed; the bill can't be charged until the parts add up.",
+    },
+    {
+      icon: CalendarDays,
+      title: "Record a past sale",
+      description:
+        "Missed a bill during a rush or a power cut? Tick “Record a past sale”, pick the date and time, and it lands in that day's reports with stock adjusted.",
+    },
   ],
 };
 
@@ -248,6 +280,24 @@ const CATALOGUE: FeatureSection = {
       title: "Stock movement log",
       description:
         "Add, reduce or correct stock with a note. Every opening balance, sale, restock and adjustment is kept with the resulting stock level.",
+    },
+    {
+      icon: CalendarX,
+      title: "Batch & expiry tracking",
+      description:
+        "Optional and off by default. Keep stock in batches, each with its own batch number, expiry date and cost — ideal for medicines, food and cosmetics.",
+    },
+    {
+      icon: Boxes,
+      title: "Earliest expiry sells first",
+      description:
+        "Billing takes stock from the batch that expires first, or the one you pick, warns before expired stock is sold, and records the real cost of every unit.",
+    },
+    {
+      icon: Tags,
+      title: "Price and tax per batch",
+      description:
+        "A new lot with a new MRP? Give the batch its own selling price and tax rate, inclusive or exclusive, and the cart prices each line from the batch it comes from.",
     },
   ],
 };
@@ -294,6 +344,12 @@ const RECEIPTS: FeatureSection = {
       description:
         "The share sheet shows a QR of the link for a phone across the counter, and adds your UPI ID so the customer can pay from the bill.",
     },
+    {
+      icon: Receipt,
+      title: "UPI QR printed on the receipt",
+      description:
+        "Turn it on in Settings, or per bill, and the receipt prints a QR for the amount due by UPI — the UPI part of a split, or the full amount for UPI and udhaar bills. Split bills list each method and amount.",
+    },
   ],
 };
 
@@ -325,7 +381,7 @@ const NUMBERS: FeatureSection = {
       icon: PieChart,
       title: "Payment breakdown",
       description:
-        "How much came in by cash, UPI, card or any method you added — with the count of sales behind each one.",
+        "How much came in by cash, UPI, card or any method you added — with the count of sales behind each one. Split bills count each part under its own method.",
     },
     {
       icon: Trophy,
@@ -379,7 +435,7 @@ const SUPPLIERS: FeatureSection = {
   eyebrow: "Suppliers & payables",
   title: "Know what you owe, not just what you're owed",
   subtitle:
-    "Switch on the Purchase Register, Supplier Ledger and Accounts Payable Aging in Settings → Connected tools, and the money going out is tracked as carefully as the money coming in.",
+    "Switch on the Purchase Register, Supplier Ledger, Accounts Payable Aging and Cash Book in Settings → Connected tools, and the money going out is tracked as carefully as the money coming in.",
   items: [
     {
       icon: Truck,
@@ -416,6 +472,24 @@ const SUPPLIERS: FeatureSection = {
       title: "Mark paid once",
       description:
         "Mark a bill paid in the aging report and the payment lands in the Supplier Ledger, so the same bill is never chased twice.",
+    },
+    {
+      icon: PackageX,
+      title: "Returns to suppliers",
+      description:
+        "Mark purchase lines returnable with a deadline and choose a replacement or a credit note. Credit notes reduce what you owe; replacements come back into stock as a new batch.",
+    },
+    {
+      icon: BookOpen,
+      title: "A Cash Book that fills itself",
+      description:
+        "POS sales, paid purchases, expenses and supplier payments appear as money in and out automatically, with a Cash only view that matches the drawer — split bills included.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Profit without double-counting",
+      description:
+        "Purchased stock counts as cost of goods when it sells, not as an expense the day it arrives, so the Profit Dashboard never charges the same stock twice.",
     },
   ],
 };
@@ -502,6 +576,18 @@ const OPERATIONS: Feature[] = [
     description:
       "Drop the connection and a quiet “Offline — sales still work” badge appears instead of a broken screen.",
   },
+  {
+    icon: FileUp,
+    title: "Import past sales",
+    description:
+      "Moving from a register or another app? Upload a CSV or Excel sheet from the Orders screen — rows with the same bill number become one bill. Read on your device, never uploaded.",
+  },
+  {
+    icon: PanelTop,
+    title: "Connected tools as tabs",
+    description:
+      "Tick “Show as a tab in the POS” on any connected tool — Cash Book, Customer Ledger, Purchase Register — and it opens right inside the POS, no new window.",
+  },
 ];
 
 const TOOL_CATEGORY_ICONS: Record<string, ComponentType<{ className?: string }>> = {
@@ -558,6 +644,21 @@ const FAQ_ITEMS = [
       "Yes. With the Customer Ledger switched on in Settings → Connected tools, a Credit (Udhaar) payment option appears for saved customers. The full amount is added to that customer's ledger balance instead of being collected at the counter, and the statement and aging tools read the same ledger.",
   },
   {
+    question: "Can customers pay by UPI QR for the exact bill amount?",
+    answer:
+      "Yes. Add your shop's UPI ID in Settings → Business profile. When you pick UPI at billing, the cart shows a QR with the amount already filled in, which the customer scans with GPay, PhonePe, Paytm or any UPI app. You can also print the UPI QR on the receipt — switch it on in Settings or for a single bill.",
+  },
+  {
+    question: "Can a customer pay part in cash and part by UPI?",
+    answer:
+      "Yes. Tap Split under Payment, enter the cash amount, and the balance line fills itself — for a ₹243 bill with ₹200 in cash, the UPI line and its QR show ₹43. Receipts list each method and amount, and reports and the Cash Book count each part under its own method.",
+  },
+  {
+    question: "Can it track batches and expiry dates?",
+    answer:
+      "Yes, if you switch on Batch & expiry tracking in Settings (it is off by default). Each batch keeps its own batch number, expiry, cost, selling price and tax. Billing uses the earliest-expiring batch first, or the one you pick, and warns before expired stock is sold.",
+  },
+  {
     question: "Can I track what I owe my suppliers?",
     answer:
       "Yes. Record supplier bills in the Purchase Register and choose Credit as the payment mode for anything you haven't paid yet. The Supplier Ledger shows each supplier's balance and open bills, and lets you record payments against a bill or oldest-first. Accounts Payable Aging pulls in only the credit bills that are still unpaid, and marking one paid there records the payment in the Supplier Ledger.",
@@ -592,6 +693,11 @@ const softwareApplicationSchema = {
     "Hold and recall parked carts",
     "Flat or percentage discounts",
     "Custom payment methods and credit (udhaar) sales",
+    "UPI QR for the exact bill amount, printable on receipts",
+    "Split payments across cash, UPI, card and other methods",
+    "Record past (backdated) sales and import past sales from CSV or Excel",
+    "Optional batch and expiry tracking with per-batch price and tax",
+    "Purchase returns to suppliers and an automatic cash book",
     "Supplier ledger and accounts payable aging for credit purchases",
     "Inventory tracking with a full stock movement log",
     "Thermal (80mm/58mm) and A4 receipt printing",

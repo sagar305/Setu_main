@@ -10,6 +10,8 @@ import {
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
 import { exportReceiptToPdf } from "@/lib/pos/receiptPdf";
+import { upiAmountForOrder, upiPaymentLink } from "@/lib/pos/payments";
+import { useQrDataUrl } from "./UpiQr";
 import { getReceiptTemplates } from "@/lib/toolkit/workspace";
 import type { ReceiptTemplate } from "@/lib/toolkit/types";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
@@ -31,10 +33,30 @@ function separatorStyle(kind: ReceiptTemplate["separator"] | undefined): React.C
 
 export const ReceiptView = forwardRef<
   HTMLDivElement,
-  { order: Order; items: OrderItem[]; template?: ReceiptTemplate | null }
->(function ReceiptView({ order, items, template }, ref) {
+  {
+    order: Order;
+    items: OrderItem[];
+    template?: ReceiptTemplate | null;
+    /** Print a UPI QR for the amount due by UPI. Defaults to the POS setting. */
+    showUpiQr?: boolean;
+  }
+>(function ReceiptView({ order, items, template, showUpiQr }, ref) {
   const { business, settings } = usePos();
   const currency = business?.currency ?? "INR";
+
+  const upiAmount = upiAmountForOrder(order);
+  const upiLink =
+    (showUpiQr ?? settings.printUpiQrOnReceipt === true)
+      ? upiPaymentLink({
+          upiId: business?.upiId,
+          amount: upiAmount,
+          currency,
+          businessName: business?.name,
+          note: `Bill ${order.invoiceNumber}`,
+        })
+      : "";
+  // A data-URL image, so it survives the print iframe and html2canvas.
+  const upiQr = useQrDataUrl(upiLink, 320);
 
   // A saved Receipt Designer template overrides the POS's built-in look;
   // without one the receipt renders exactly as before.
@@ -165,8 +187,36 @@ export const ReceiptView = forwardRef<
       </div>
       <div style={row("", "")}>
         <span>Paid via</span>
-        <span>{order.paymentMethodName}</span>
+        <span>{order.payments && order.payments.length > 1 ? "Split" : order.paymentMethodName}</span>
       </div>
+      {order.payments && order.payments.length > 1
+        ? order.payments.map((p) => (
+            <div key={p.methodId} style={{ ...row("", ""), paddingLeft: 8 }}>
+              <span>{p.methodName}</span>
+              <span>{formatMoney(p.amount, currency)}</span>
+            </div>
+          ))
+        : null}
+
+      {upiLink && upiQr ? (
+        <>
+          <div style={line} />
+          <div style={{ textAlign: "center" }}>
+            <div style={{ fontSize: 12, fontWeight: 700 }}>
+              Scan to pay {formatMoney(upiAmount, currency)} by UPI
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={upiQr}
+              alt=""
+              width={140}
+              height={140}
+              style={{ display: "block", width: 140, height: 140, margin: "6px auto 2px" }}
+            />
+            <div style={{ fontSize: 10, wordBreak: "break-all" }}>{business?.upiId}</div>
+          </div>
+        </>
+      ) : null}
 
       <div style={line} />
 
@@ -270,6 +320,9 @@ export function ReceiptModal({
   const [error, setError] = useState("");
   const [template, setTemplate] = useState<ReceiptTemplate | null>(null);
   const [sharing, setSharing] = useState<SharedDoc | null>(null);
+  // Per-receipt override of the "Print UPI QR on receipt" setting.
+  const [qrOverride, setQrOverride] = useState<boolean | null>(null);
+  useEffect(() => setQrOverride(null), [order?.id]);
 
   // Load the Receipt Designer template chosen in POS settings (if any).
   const templateId = settings.receiptTemplateId ?? "";
@@ -291,6 +344,11 @@ export function ReceiptModal({
 
   if (!order) return null;
   const items = orderItems.filter((item) => item.orderId === order.id);
+  const upiAmount = upiAmountForOrder(order);
+  const canShowQr =
+    upiAmount > 0 &&
+    upiPaymentLink({ upiId: business?.upiId, amount: upiAmount, currency: business?.currency ?? "INR" }) !== "";
+  const showUpiQr = canShowQr && (qrOverride ?? settings.printUpiQrOnReceipt === true);
   const paperSize: ReceiptPaperSize = template?.paperSize ?? settings.receiptPaperSize ?? "80mm";
 
   const handleDownload = async () => {
@@ -339,8 +397,26 @@ export function ReceiptModal({
   return (
     <Modal open={open} onClose={onClose} title={title}>
       <div className="rounded-xl border border-muted-line/30 bg-cream-paper p-4">
-        <ReceiptView ref={receiptRef} order={order} items={items} template={template} />
+        <ReceiptView
+          ref={receiptRef}
+          order={order}
+          items={items}
+          template={template}
+          showUpiQr={showUpiQr}
+        />
       </div>
+
+      {canShowQr ? (
+        <label className="mt-3 flex cursor-pointer items-center gap-2 text-sm text-ink">
+          <input
+            type="checkbox"
+            checked={showUpiQr}
+            onChange={(e) => setQrOverride(e.target.checked)}
+            className="h-4 w-4 accent-indigo"
+          />
+          Print UPI QR for {formatMoney(upiAmount, business?.currency ?? "INR")} on this receipt
+        </label>
+      ) : null}
 
       {error && (
         <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">

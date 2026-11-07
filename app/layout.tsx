@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import Script from "next/script";
@@ -15,9 +15,13 @@ import { NavigationProgress } from "@/components/NavigationProgress";
 // TEMPORARY — DIWALI 2026: remove after Diwali.
 import { FESTIVE_BOOT_SCRIPT } from "@/lib/festive";
 
-const sora = Sora({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+// Self-hosted Sora (variable, weights 100–800, SIL OFL — see app/fonts/Sora-OFL.txt).
+// Using next/font/local instead of next/font/google so the build never has to
+// reach fonts.googleapis.com — that fetch was failing on Vercel and breaking deploys.
+const sora = localFont({
+  src: "./fonts/Sora-Variable.woff2",
+  weight: "100 800",
+  style: "normal",
   variable: "--font-sora",
   display: "swap",
 });

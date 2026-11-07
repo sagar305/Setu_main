@@ -17,11 +17,15 @@ import { usePos } from "@/lib/pos/store";
 import { parseBackupFile, type PosBackup } from "@/lib/pos/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/pos/sheetSync";
 import {
+  MAX_INVOICE_DIGITS,
+  MIN_INVOICE_DIGITS,
   formatInvoiceNumber,
+  invoiceDigits,
   type PosSettings,
   type ReceiptPaperSize,
 } from "@/lib/pos/types";
 import { POS_TOOLS, POS_TOOL_CATEGORIES } from "@/lib/pos/posTools";
+import { looksLikeUpiId } from "@/lib/pos/payments";
 import {
   PIN_MAX_LENGTH,
   PIN_MIN_LENGTH,
@@ -110,6 +114,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     currency: "INR",
     email: "",
     taxNumber: "",
+    upiId: "",
   });
   const [profileError, setProfileError] = useState("");
   const [profileSaved, setProfileSaved] = useState(false);
@@ -123,6 +128,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         currency: business.currency,
         email: business.email,
         taxNumber: business.taxNumber,
+        upiId: business.upiId ?? "",
       });
     }
   }, [business]);
@@ -132,8 +138,13 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
       setProfileError("Business name is required.");
       return;
     }
+    if (profile.upiId.trim() && !looksLikeUpiId(profile.upiId)) {
+      setProfileError("UPI ID should look like shopname@okhdfcbank.");
+      return;
+    }
     setProfileError("");
     await updateBusiness({
+      upiId: profile.upiId.trim(),
       name: profile.name.trim(),
       phone: profile.phone.trim(),
       address: profile.address.trim(),
@@ -148,12 +159,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   // Invoice / tax / receipt settings
   const [prefix, setPrefix] = useState(settings.invoicePrefix);
   const [nextNumberText, setNextNumberText] = useState(String(settings.nextInvoiceNumber));
+  const [digits, setDigits] = useState(invoiceDigits(settings.invoiceNumberDigits));
   const [taxEnabled, setTaxEnabled] = useState(settings.taxEnabled);
   const [taxRateText, setTaxRateText] = useState(String(settings.defaultTaxRate));
   const [footer, setFooter] = useState(settings.receiptFooter);
   const [showBusinessInfo, setShowBusinessInfo] = useState(settings.showBusinessInfoOnReceipt);
   const [paperSize, setPaperSize] = useState<ReceiptPaperSize>(settings.receiptPaperSize);
   const [templateId, setTemplateId] = useState(settings.receiptTemplateId ?? "");
+  const [printUpiQr, setPrintUpiQr] = useState(settings.printUpiQrOnReceipt === true);
   const [templates, setTemplates] = useState<ReceiptTemplate[]>([]);
   const [posError, setPosError] = useState("");
   const [posSaved, setPosSaved] = useState(false);
@@ -161,12 +174,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
   useEffect(() => {
     setPrefix(settings.invoicePrefix);
     setNextNumberText(String(settings.nextInvoiceNumber));
+    setDigits(invoiceDigits(settings.invoiceNumberDigits));
     setTaxEnabled(settings.taxEnabled);
     setTaxRateText(String(settings.defaultTaxRate));
     setFooter(settings.receiptFooter);
     setShowBusinessInfo(settings.showBusinessInfoOnReceipt);
     setPaperSize(settings.receiptPaperSize ?? "80mm");
     setTemplateId(settings.receiptTemplateId ?? "");
+    setPrintUpiQr(settings.printUpiQrOnReceipt === true);
   }, [settings]);
 
   // Templates designed in the Receipt Designer live in the shared workspace.
@@ -189,12 +204,14 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     await updateSettings({
       invoicePrefix: prefix.trim(),
       nextInvoiceNumber: nextNumber,
+      invoiceNumberDigits: digits,
       taxEnabled,
       defaultTaxRate: taxRate,
       receiptFooter: footer,
       showBusinessInfoOnReceipt: showBusinessInfo,
       receiptPaperSize: paperSize,
       receiptTemplateId: templateId,
+      printUpiQrOnReceipt: printUpiQr,
     });
     setPosSaved(true);
     setTimeout(() => setPosSaved(false), 2000);
@@ -313,6 +330,17 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               className={inputClass}
             />
           </Field>
+          <Field label="UPI ID" hint="Billing shows a QR for the exact amount — e.g. shopname@okhdfcbank">
+            <input
+              type="text"
+              value={profile.upiId}
+              onChange={(event) => setProfile((p) => ({ ...p, upiId: event.target.value }))}
+              placeholder="shopname@okhdfcbank"
+              autoCapitalize="none"
+              spellCheck={false}
+              className={inputClass}
+            />
+          </Field>
         </div>
         {profileError && (
           <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
@@ -334,7 +362,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         <div className="grid gap-4 sm:grid-cols-2">
           <Field
             label="Invoice prefix"
-            hint={`Next invoice: ${formatInvoiceNumber(prefix, parseInt(nextNumberText, 10) || 1)}`}
+            hint={`Next invoice: ${formatInvoiceNumber(prefix, parseInt(nextNumberText, 10) || 1, digits)}`}
           >
             <input
               type="text"
@@ -353,6 +381,25 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
               onChange={(event) => setNextNumberText(event.target.value)}
               className={inputClass}
             />
+          </Field>
+          <Field
+            label="Invoice number digits"
+            hint="Zeros are added in front to fill the length. Bills already issued keep their number."
+          >
+            <select
+              value={digits}
+              onChange={(event) => setDigits(Number(event.target.value))}
+              className={inputClass}
+            >
+              {Array.from(
+                { length: MAX_INVOICE_DIGITS - MIN_INVOICE_DIGITS + 1 },
+                (_, i) => MIN_INVOICE_DIGITS + i
+              ).map((n) => (
+                <option key={n} value={n}>
+                  {n} digits — {formatInvoiceNumber(prefix, 1, n)}
+                </option>
+              ))}
+            </select>
           </Field>
           <div>
             <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">
@@ -442,6 +489,22 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
             />
             <span className="text-sm text-ink">
               Show business address, phone and tax number on receipts
+            </span>
+          </label>
+          <label className="flex items-start gap-2 sm:col-span-2">
+            <input
+              type="checkbox"
+              checked={printUpiQr}
+              onChange={(event) => setPrintUpiQr(event.target.checked)}
+              className="mt-0.5 h-4 w-4 accent-indigo"
+            />
+            <span className="text-sm text-ink">
+              Print a UPI QR on receipts
+              <span className="mt-0.5 block text-xs text-muted">
+                For the amount paid by UPI — the UPI part of a split bill, or the full amount for
+                UPI and udhaar sales. Needs your UPI ID in Business profile. You can also switch it
+                per receipt.
+              </span>
             </span>
           </label>
         </div>
