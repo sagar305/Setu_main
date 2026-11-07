@@ -27,6 +27,7 @@
   "labels": {
     "comingSoon": "Coming Soon",
     "paidSoonEyebrow": "Paid product coming soon",
+    "paidAvailableEyebrow": "Paid upgrade available",
     "paidSoonSuffix": "Everything above stays free."
   },
   "products": [
@@ -50,7 +51,8 @@
       ],
       "paidSoon": {
         "name": "Setu Retail",
-        "note": "Cloud database, several counters and staff logins."
+        "note": "Cloud database, several counters and staff logins.",
+        "href": "/products/retail"
       },
       "cta": {
         "label": "Open Browser Based POS — it's free",
@@ -368,14 +370,21 @@
     },
     {
       "id": "retail",
-      "status": "coming-soon",
+      "status": "live",
       "name": "Setu Retail",
-      "headline": "Retail store management, coming soon",
-      "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
+      "headline": "Cloud POS for shops, from one counter to a hundred branches",
+      "description": "GST billing that keeps working offline, stock with batches and expiry, udhaar, purchases, cash book, staff roles and branch reports. Basic ₹249/month, Gold ₹499, Platinum ₹999 — 3 months of Basic free.",
       "cta": {
         "label": "Explore Setu Retail",
         "href": "/products/retail"
-      }
+      },
+      "features": [
+        "GST billing that works offline",
+        "Stock, batches and expiry",
+        "Udhaar, purchases and cash book",
+        "Owner, manager and cashier logins",
+        "Up to 100 branches"
+      ]
     },
     {
       "id": "tuition",

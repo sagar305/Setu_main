@@ -130,10 +130,17 @@ export function PricingTable({ content }: { content: PricingContent }) {
               {plan.paidSoon && (
                 <div className="mt-5 rounded-xl border border-muted-line/30 bg-cream/60 p-3">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-warm">
-                    Paid product coming soon
+                    {plan.paidSoon.href ? "Paid upgrade available" : "Paid product coming soon"}
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-ink/80">
-                    <span className="font-semibold text-ink">{plan.paidSoon.name}</span> —{" "}
+                    {plan.paidSoon.href ? (
+                      <Link href={plan.paidSoon.href} className="font-semibold text-indigo hover:underline">
+                        {plan.paidSoon.name}
+                      </Link>
+                    ) : (
+                      <span className="font-semibold text-ink">{plan.paidSoon.name}</span>
+                    )}{" "}
+                    —{" "}
                     {plan.paidSoon.note} Everything above stays free.
                   </p>
                 </div>
