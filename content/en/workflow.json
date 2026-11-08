@@ -232,14 +232,6 @@
       }
     ]
   },
-  "cta": {
-    "headline": "More than 3 people in your firm?",
-    "subtext": "Tell us how many users you need. Extra users are $4.99 per user per month, and we'll send one key that covers your whole team.",
-    "cta": {
-      "label": "Contact sales",
-      "href": "/contact"
-    }
-  },
   "crossSell": {
     "text": "Working through client bank statements today? The Bank Statement Analyzer is free and runs entirely in your browser.",
     "cta": {

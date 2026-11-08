@@ -108,14 +108,6 @@
       "answer": "Yes. Every price shown includes GST, and the invoice we email shows it."
     }
   ],
-  "cta": {
-    "headline": "Start your 3-month free trial",
-    "subtext": "Sign up with your shop's details, verify your email and get 3 months of Basic free. Upgrade to Gold or Platinum any time — your data stays.",
-    "cta": {
-      "label": "Start free trial",
-      "href": "https://app.retail-pos.setutechnology.com/sign-up"
-    }
-  },
   "crossSell": {
     "text": "Just one counter and no need for the cloud? The Browser Based POS is free forever.",
     "cta": {
