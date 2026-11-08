@@ -413,9 +413,13 @@ export function WorkflowRolesShowcase({ roles }: { roles: RoleContent[] }) {
   return (
     <div
       ref={ref}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
+      // Pause only for keyboard users moving through the tabs. A mouse click
+      // also focuses the tab, and hovering is just where the cursor rests on a
+      // desktop — pausing on either left the walkthrough stuck until the reader
+      // clicked somewhere else, so a click jumps to that role and keeps playing.
+      onFocusCapture={(event) => {
+        if (event.target instanceof HTMLElement && event.target.matches(":focus-visible")) setPaused(true);
+      }}
       onBlurCapture={() => setPaused(false)}
     >
       <div role="tablist" aria-label="Roles" className="flex gap-2 overflow-x-auto pb-1">
