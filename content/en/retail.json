@@ -92,6 +92,10 @@
       "answer": "Yes: 3 months of Setu Retail Basic, free, after you verify your email. No card needed."
     },
     {
+      "question": "Can I look around before signing up?",
+      "answer": "Yes. Open the live demo at demo.setu-retail.setutechnology.com and try Setu Retail before you sign up. When you're ready, sign up at app.setu-retail.setutechnology.com for your 3-month free trial."
+    },
+    {
       "question": "What happens when my plan ends?",
       "answer": "The account locks online until a key is redeemed; your data stays. Counters already offline keep billing, and their bills sync once you renew."
     },

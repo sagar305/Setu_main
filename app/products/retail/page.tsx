@@ -45,7 +45,7 @@ import { getPricingContent, getPricingPlan, getRetailContent } from "@/lib/conte
 import { retailPaymentsEnabled } from "@/lib/featureFlags";
 import { formatPrice } from "@/lib/pricing";
 import { faqPageSchema, planOffers } from "@/lib/schema";
-import { RETAIL_SIGNUP_URL } from "@/lib/retailCheckout";
+import { RETAIL_DEMO_URL, RETAIL_SIGNUP_URL } from "@/lib/retailCheckout";
 import { PageHero } from "@/components/PageHero";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { RetailBuy } from "@/components/RetailBuy";
@@ -228,6 +228,14 @@ export default function RetailPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <a href={RETAIL_SIGNUP_URL} className="rounded-full bg-saffron px-7 py-3 text-sm font-semibold text-ink transition hover:brightness-95">
             Start free trial →
+          </a>
+          <a
+            href={RETAIL_DEMO_URL}
+            target="_blank"
+            rel="noopener"
+            className="rounded-full border border-indigo bg-indigo px-7 py-3 text-sm font-semibold text-cream-paper transition hover:bg-ink"
+          >
+            Try the live demo ↗
           </a>
           <a href="#plans" className="rounded-full border border-indigo/30 px-7 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5">
             See plans
@@ -491,9 +499,19 @@ export default function RetailPage() {
                 <p className="mt-2 text-sm leading-relaxed text-muted">
                   Online purchase of Gold and Platinum keys opens soon. Start your free trial now; your data stays when you move to a bigger plan.
                 </p>
-                <a href={RETAIL_SIGNUP_URL} className="mt-6 inline-block rounded-lg bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink">
-                  Start free trial
-                </a>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a href={RETAIL_SIGNUP_URL} className="inline-block rounded-lg bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-ink">
+                    Start free trial
+                  </a>
+                  <a
+                    href={RETAIL_DEMO_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="inline-block rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
+                  >
+                    Try the live demo ↗
+                  </a>
+                </div>
               </div>
             )}
           </div>

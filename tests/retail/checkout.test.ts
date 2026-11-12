@@ -75,7 +75,7 @@ describe("Setu Retail prices and tags", () => {
   });
 
   it("puts the key after # in the redeem link, so it never reaches a server", () => {
-    expect(retailRedeemUrl("SETU-R-AB")).toBe("https://app.retail-pos.setutechnology.com/settings/plan#key=SETU-R-AB");
+    expect(retailRedeemUrl("SETU-R-AB")).toBe("https://app.setu-retail.setutechnology.com/settings/plan#key=SETU-R-AB");
   });
 });
 
