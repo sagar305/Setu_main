@@ -7,9 +7,9 @@ import { CHANGELOG } from "@/lib/changelog";
 // nothing is deployed. English only.
 export const revalidate = 86400;
 
-const title = "Changelog — new features, fixes and launches | Setu Technology";
+const title = "Setu Changelog: new features, bug fixes and launches";
 const description =
-  "Every feature added, bug fixed and product launched across Setu Technology's products and free tools, newest first.";
+  "Every feature added, bug fixed and product launched across Setu Technology's POS, restaurant, clinic and retail software and free business tools, newest first.";
 
 export const metadata: Metadata = {
   title,
