@@ -44,9 +44,11 @@ export function planFromProductTag(tag: string | undefined | null): RetailPlan |
   return isRetailPlan(plan) ? plan : null;
 }
 
-/** The Setu Retail app. */
-export const RETAIL_APP_URL = (process.env.NEXT_PUBLIC_RETAIL_APP_URL || "https://app.retail-pos.setutechnology.com").replace(/\/+$/, "");
+/** The Setu Retail app (production). */
+export const RETAIL_APP_URL = (process.env.NEXT_PUBLIC_RETAIL_APP_URL || "https://app.setu-retail.setutechnology.com").replace(/\/+$/, "");
 export const RETAIL_SIGNUP_URL = `${RETAIL_APP_URL}/sign-up`;
+/** A demo copy of the app to look around in before signing up. */
+export const RETAIL_DEMO_URL = (process.env.NEXT_PUBLIC_RETAIL_DEMO_URL || "https://demo.setu-retail.setutechnology.com").replace(/\/+$/, "");
 
 /**
  * Opens Settings → Plan & key with the key filled in. The key goes after #,
