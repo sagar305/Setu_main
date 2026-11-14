@@ -133,6 +133,10 @@ function buildSections(): Section[] {
         { label: "Refund & cancellation policy", href: "/refund-policy" },
       ],
     },
+    {
+      heading: "Updates",
+      links: [{ label: "Changelog", href: "/changelog" }],
+    },
   ];
 }
 
