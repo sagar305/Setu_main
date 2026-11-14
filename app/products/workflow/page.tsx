@@ -4,12 +4,13 @@ import { Check, Gift, KeyRound, Users } from "lucide-react";
 import { getWorkflowContent, getPricingPlan } from "@/lib/content";
 import { planOffers } from "@/lib/schema";
 import { workflowPaymentsEnabled } from "@/lib/featureFlags";
-import { WORKFLOW_INCLUDED_USERS, WORKFLOW_SIGNUP_URL } from "@/lib/workflowCheckout";
+import { WORKFLOW_INCLUDED_USERS } from "@/lib/workflowCheckout";
 import { PageHero } from "@/components/PageHero";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { WorkflowBuy } from "@/components/WorkflowBuy";
+import { WorkflowWaitlist } from "@/components/WorkflowWaitlist";
 import { WorkflowRolesShowcase } from "@/components/WorkflowRolesShowcase";
 
 const content = getWorkflowContent();
@@ -84,12 +85,7 @@ export default function WorkflowPage() {
             <p className="mt-1 text-sm text-ink/80">{content.status.text}</p>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={WORKFLOW_SIGNUP_URL}
-              className="inline-flex items-center gap-2 rounded-lg border border-indigo bg-indigo px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
-            >
-              Start your 15-day free trial
-            </a>
+            <WorkflowWaitlist />
             <a
               href={workflowPaymentsEnabled() ? "#buy" : "#pricing"}
               className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"

@@ -653,8 +653,8 @@
       "href": "/products/workflow",
       "status": "paid",
       "summary": "Practice management for CA/CPA and accounting firms — engagements, workflow, review points, time and capacity.",
-      "freeNote": "15-day free trial",
-      "trial": "15-day free trial",
+      "freeNote": "Waiting list",
+      "trial": null,
       "price": {
         "IN": {
           "monthly": 999,
@@ -666,7 +666,7 @@
         }
       },
       "features": [
-        "3 users included; more through sales",
+        "10 users included; more through sales",
         "Clients and engagements with staffing",
         "Workflow stages, checklists and review points",
         "Work allocation, time and budgets",
@@ -674,7 +674,7 @@
         "Custom roles, audit trail, CSV import/export"
       ],
       "cta": {
-        "label": "Start your 15-day trial",
+        "label": "Join the waiting list",
         "href": "/products/workflow"
       }
     }

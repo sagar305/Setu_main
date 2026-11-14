@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   // Setu Retail's "more than 100 branches" form on /products/retail.
   const isRetailEnterprise = topic === "retail-enterprise";
   const branches = optional("branches");
-  // Setu Workflow's "more than 3 users" form on /products/workflow.
+  // Setu Workflow's "more than 10 users" form on /products/workflow.
   const isWorkflowSales = topic === "workflow-sales";
   const users = optional("users");
   const businessType = optional("businessType");
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       : isRetailEnterprise
         ? `Setu Retail enterprise enquiry (100+ branches) from ${name}`
         : isWorkflowSales
-          ? `Setu Workflow sales enquiry (more than 3 users) from ${name}`
+          ? `Setu Workflow sales enquiry (more than 10 users) from ${name}`
           : `New contact form submission from ${name}`,
     text: [
       `Name: ${name}`,
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       users ? `Users: ${users}` : null,
       isConsultancy ? "Source: Consultancy page" : null,
       isRetailEnterprise ? "Source: Setu Retail page — more than 100 branches" : null,
-      isWorkflowSales ? "Source: Setu Workflow page — more than 3 users" : null,
+      isWorkflowSales ? "Source: Setu Workflow page — more than 10 users" : null,
       "",
       "Message:",
       message,

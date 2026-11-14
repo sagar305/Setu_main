@@ -15,7 +15,7 @@ import {
 import { WORKFLOW_EXTRA_USER_USD, WORKFLOW_INCLUDED_USERS, workflowAmounts } from "@/lib/workflowCheckout";
 
 /**
- * Buys a Setu Workflow key for 3 users, as QrMenuBuy does for QR Menu: the
+ * Buys a Setu Workflow key for 10 users, as QrMenuBuy does for QR Menu: the
  * region is detected, the buyer picks monthly or yearly, and checkout opens in
  * this tab (Cashfree for rupees, PayPal for dollars). Either gateway returns
  * to /products/workflow/payment, which shows the key.
