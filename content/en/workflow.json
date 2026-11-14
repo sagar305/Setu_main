@@ -15,77 +15,158 @@
     ]
   },
   "hero": {
-    "eyebrow": "Setu Workflow — Coming Soon",
+    "eyebrow": "Setu Workflow",
     "headline": "Practice Management Software for CA/CPA & Accounting Firms",
     "subheadline": "Every client, engagement, workflow stage, checklist, review point and hour your team works — in one place, so partners know where every job stands without chasing anyone for an update."
   },
   "status": {
-    "label": "Paid product · In development",
-    "text": "Setu Workflow is a paid, multi-user cloud product. It is in development and will launch soon — pricing will be announced at launch."
+    "label": "Paid product · Join the waiting list",
+    "text": "Setu Workflow is a paid, multi-user cloud product for CA/CPA and accounting firms. Join the waiting list and we'll email you as soon as it opens for your firm."
   },
   "body": {
-    "headline": "Why we're building it",
+    "headline": "Why firms use it",
     "paragraphs": [
       "Most firms run their practice on a spreadsheet of due dates, a WhatsApp group for review notes and a manager's memory of who is doing what. It works until the busy season, when a return sits in review for a week because nobody noticed it was waiting, or a query to the client was answered and then lost in a thread.",
       "Setu Workflow gives the whole firm one record of the work: which engagements are open, which stage each one is in and who owns it, what is still outstanding on the checklist, which review points are blocking sign-off, and how the hours spent compare with the budget."
     ]
   },
   "modules": {
-    "headline": "What's inside",
-    "subheadline": "Built as one connected system — Firm → Client → Engagement → Workflow → Checklist & Points — not a set of separate tools.",
+    "headline": "Everything you get",
+    "subheadline": "One connected system — Firm → Client → Engagement → Workflow → Checklist & Points — not a set of separate tools. Every module below is included in every plan.",
     "items": [
       {
         "title": "Client Master",
-        "description": "Client records with entity type, addresses, contacts, service lines and an owner. Custom fields, full activity history, search and filters, plus CSV import, export and bulk updates."
+        "description": "Client records with entity type, addresses, contacts, service lines, partner and manager. Your own custom fields, full activity history, search and filters, CSV import with a preview, CSV export and bulk ownership and status updates."
       },
       {
         "title": "Engagement Master",
-        "description": "Every job linked to its client, with type, period, due dates, priority and budgeted hours. Partner, Manager, Reviewer and Preparer staffing, lifecycle history and record-level access."
+        "description": "Every job linked to its client, with engagement type, period, due dates, priority and budgeted hours. Partner, Manager, Reviewer and Preparer staffing, status lifecycle from Draft to Completed, assignment history, custom fields, CSV import and export."
       },
       {
         "title": "Workflow templates & stages",
-        "description": "Build versioned templates once — Preparation, Review, Partner sign-off — and apply them to engagements. Move work forward, return it, reassign or reopen, with every movement and stage age recorded."
+        "description": "Build versioned templates once — Preparation, Review, Partner sign-off — and apply them to engagements. Move work forward, return it with a reason, reassign, skip optional stages, complete or reopen, with every movement and stage age recorded."
       },
       {
         "title": "Checklists",
-        "description": "Stage-wise checklist items with owners, due dates and required flags. Required items gate the workflow, completions and reopenings are logged, and each person has their own checklist queue."
+        "description": "Stage-wise checklist templates with owners, due dates and required flags. Required items gate the workflow, items can be commented on, completions and reopenings are logged, and each person has their own checklist queue."
       },
       {
         "title": "Queries & review points",
-        "description": "Client questions, review points, instructions and internal issues in one numbered thread per engagement. Explicit resolve and reopen, aging in days, and blocking points that hold the workflow until cleared."
+        "description": "Client questions, review points, knowledge instructions and internal issues in one numbered thread per engagement. Replies, explicit resolve, close and reopen, aging in days, and blocking points that hold the workflow until cleared or overridden."
       },
       {
         "title": "Work allocation",
-        "description": "Plan dated hours for each person across engagements, preview before saving, reassign or cancel with history, and see a budget comparison before you commit the team's week."
+        "description": "Plan dated hours for each person across one or many engagements, preview before saving, reassign or cancel with history, and see weekly capacity and budget warnings before you commit the team's week."
       },
       {
         "title": "Time & budget",
-        "description": "Staff log actual hours against engagements and stages from My Time. Budget, planned, actual and remaining hours for every engagement, with warnings at 80%, 90% and over budget."
+        "description": "Staff log hours against engagements and stages from My Time, then submit them. Managers correct submitted time with an audited reason. Budget, planned, actual and remaining hours on every engagement, with warnings at 80%, 90% and over budget."
       },
       {
         "title": "Team capacity",
-        "description": "Weekly capacity, planned load and available hours for every person, adjusted for leave, training and holidays. Find who is free before assigning the next job."
+        "description": "Weekly capacity, planned load and available hours for every person, adjusted for leave, training, holidays and other time off. Find who is free before assigning the next job."
+      },
+      {
+        "title": "My Work & My Day",
+        "description": "Each person opens to their own day: workflow stages they own, checklist items and points assigned to them, planned work and what is due — then updates progress and logs the hours against it."
       },
       {
         "title": "Dashboard & reports",
-        "description": "A Needs Attention view for overdue engagements, blocking points, stalled stages and budget overruns, plus engagement health, deadlines and exportable management reports."
+        "description": "A Needs Attention view for overdue engagements, blocking points, stalled stages and budget overruns, plus engagement health and deadlines. Six reports — Engagement Status, Budget vs Actual, Open Points Aging, Team Capacity, Workflow Aging and Checklist Progress — each exportable to CSV."
+      },
+      {
+        "title": "Firm administration",
+        "description": "Offices across locations, users and email invitations, five ready-made roles from Firm Admin to Associate, custom roles with granular permissions, and firm settings for timezone, currency and standard weekly hours."
+      },
+      {
+        "title": "Subscription & access",
+        "description": "Your firm's account owner redeems license keys in Admin → Subscription and chooses exactly which people have access. Add users any time through sales; renewals stack after the current plan."
       }
     ]
   },
-  "team": {
-    "headline": "Built for the way a firm actually runs",
+  "roles": {
+    "headline": "Five roles, one workspace",
+    "subheadline": "Everyone opens Setu Workflow to a different view. These are the five roles every firm starts with — and you can create custom roles with exactly the permissions you choose.",
     "items": [
       {
-        "title": "Partners & managers",
-        "description": "See every engagement's stage, blocker and budget at a glance, and drill into exceptions instead of asking for a status update."
+        "id": "admin",
+        "name": "Firm Admin",
+        "who": "The person who runs the practice set-up — often a partner or the office manager.",
+        "sees": [
+          "Everything in the firm, plus Admin",
+          "Users, offices, roles and firm settings",
+          "Subscription: who has access, and license keys (account owner)"
+        ],
+        "can": [
+          "Invite colleagues by email and set their role",
+          "Create custom roles with granular permissions",
+          "Configure templates, custom fields, entity types and service lines",
+          "Import clients and engagements from CSV"
+        ]
       },
       {
-        "title": "Reviewers",
-        "description": "Raise numbered review points against a stage or checklist item, track responses and mark them resolved only when they are."
+        "id": "partner",
+        "name": "Partner",
+        "who": "Owns client relationships and signs off the work.",
+        "sees": [
+          "Every engagement in the firm",
+          "The Needs Attention dashboard and all six reports",
+          "Budgets, time and team capacity"
+        ],
+        "can": [
+          "Create and edit clients and engagements",
+          "Staff engagements and set budgets",
+          "Move, return, reassign, skip, complete or reopen any workflow stage",
+          "Allocate and reassign the team's work"
+        ]
       },
       {
-        "title": "Staff",
-        "description": "Open My Work and My Day to see exactly what is assigned, what is due and what is waiting — then log the hours against it."
+        "id": "manager",
+        "name": "Manager",
+        "who": "Runs a team and keeps the week on track.",
+        "sees": [
+          "Engagements where they are Partner, Manager, Reviewer or Preparer",
+          "Their team's capacity, load and leave",
+          "Budget vs actual on their engagements"
+        ],
+        "can": [
+          "Plan dated hours for each person, with capacity warnings",
+          "Adjust capacity for leave, training and holidays",
+          "Move work through stages and reassign owners",
+          "Correct submitted time with an audited reason"
+        ]
+      },
+      {
+        "id": "reviewer",
+        "name": "Senior / Reviewer",
+        "who": "Reviews the preparer's work before it goes to sign-off.",
+        "sees": [
+          "Engagements they review or prepare",
+          "Their own stage queue, checklist items and points",
+          "Their planned work and time"
+        ],
+        "can": [
+          "Raise numbered review points — blocking ones hold the stage",
+          "Resolve, close or reopen points when they are answered",
+          "Return a stage with a reason, or move it forward",
+          "Complete and comment on checklist items"
+        ]
+      },
+      {
+        "id": "preparer",
+        "name": "Associate / Preparer",
+        "who": "Does the work — prepares returns, reconciliations and schedules.",
+        "sees": [
+          "My Day: what is assigned, due and waiting",
+          "Engagements they are staffed on",
+          "Points and checklist items assigned to them"
+        ],
+        "can": [
+          "Tick off checklist items and add comments",
+          "Reply to queries and review points",
+          "Log hours against the engagement and stage, then submit",
+          "Send their stage on to review"
+        ]
       }
     ]
   },
@@ -97,16 +178,135 @@
       "Record-level visibility for engagements",
       "Full audit trail of every change and movement",
       "Firm-level timezone for due dates and aging",
-      "Secure login, invitations and password reset"
+      "Secure login, email invitations and password reset",
+      "Your account owner decides who has access",
+      "If a plan ends, nothing is deleted — the workspace turns read-only and you can still view and export"
     ]
   },
-  "cta": {
-    "headline": "Want early access to Setu Workflow?",
-    "subtext": "Tell us about your firm — how many people, which services you run — and we'll reach out as soon as Setu Workflow launches.",
-    "cta": { "label": "Get notified at launch", "href": "/contact" }
+  "pricing": {
+    "badge": "Waiting list open",
+    "title": "One simple plan for your firm.",
+    "subtitle": "Every plan covers 10 users with every module included. Larger teams add users through sales.",
+    "note": "Prices shown in your region's currency, inclusive of GST. A key is a one-time payment that never auto-renews; redeem it in Admin → Subscription.",
+    "extraUsers": "Need more than 10 users? Extra users are $4.99 per user per month — contact sales and we'll issue a key for your whole team.",
+    "includes": [
+      "10 users with full access",
+      "Client Master with custom fields",
+      "Engagement Master with staffing and budgets",
+      "Versioned workflow templates and stages",
+      "Stage checklists with required-item gates",
+      "Queries and review points with aging",
+      "Work allocation and planning",
+      "Time entry, submission and corrections",
+      "Budget vs actual tracking",
+      "Team capacity with leave and holidays",
+      "My Work and My Day queues",
+      "Needs Attention dashboard",
+      "Six management reports with CSV export",
+      "CSV import and export for clients and engagements",
+      "Offices, users and custom roles",
+      "Full audit trail",
+      "Email support"
+    ],
+    "plans": [
+      {
+        "region": "India",
+        "currency": "INR",
+        "symbol": "₹",
+        "monthly": "999",
+        "yearly": "9999",
+        "monthlyLabel": "₹999",
+        "yearlyLabel": "₹9,999",
+        "saveLabel": "Save ₹1,989 a year"
+      },
+      {
+        "region": "Rest of the world",
+        "currency": "USD",
+        "symbol": "$",
+        "monthly": "9.99",
+        "yearly": "99.99",
+        "monthlyLabel": "$9.99",
+        "yearlyLabel": "$99.99",
+        "saveLabel": "Save $19.89 a year"
+      }
+    ]
   },
   "crossSell": {
     "text": "Working through client bank statements today? The Bank Statement Analyzer is free and runs entirely in your browser.",
-    "cta": { "label": "Open the Bank Statement Analyzer", "href": "/products/bank-statement-analyzer" }
+    "cta": {
+      "label": "Open the Bank Statement Analyzer",
+      "href": "/products/bank-statement-analyzer"
+    }
+  },
+  "contactSales": {
+    "eyebrow": "Contact sales",
+    "headline": "More than 10 users, or several offices?",
+    "text": "Tell us about your firm and we'll issue one key that covers your whole team — extra users are $4.99 per user per month. Your clients and engagements come across by CSV import.",
+    "points": [
+      "One key for the whole firm, any number of users",
+      "Every module for every user",
+      "Offices and custom roles for each team",
+      "CSV import for clients and engagements"
+    ],
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Work email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "required": true
+        },
+        {
+          "name": "company",
+          "label": "Firm name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "users",
+          "label": "Number of users",
+          "type": "select",
+          "required": true,
+          "placeholder": "Select",
+          "options": [
+            {
+              "value": "11-25",
+              "label": "11 – 25"
+            },
+            {
+              "value": "26-50",
+              "label": "26 – 50"
+            },
+            {
+              "value": "51-100",
+              "label": "51 – 100"
+            },
+            {
+              "value": "100+",
+              "label": "More than 100"
+            }
+          ]
+        },
+        {
+          "name": "message",
+          "label": "What kind of work does your firm do, and what do you use today?",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "submitLabel": "Talk to sales"
+    }
   }
 }

@@ -1,28 +1,576 @@
 {
   "seo": {
-    "title": "Setu Retail — Retail POS & Inventory Software",
-    "description": "Setu Retail is retail store management software for inventory, billing and store operations, built for India and global businesses. Get notified at launch.",
-    "keywords": ["Setu Retail", "retail management software India", "retail POS software", "inventory management software"]
-  },
-  "hero": {
-    "eyebrow": "Setu Retail — Coming Soon",
-    "headline": "Retail Management Software for India & Global Businesses",
-    "subheadline": "Inventory tracking, billing and store operations built for retail businesses in India and worldwide — part of the same platform powering Setu Dine."
-  },
-  "body": {
-    "headline": "What we're building",
-    "paragraphs": [
-      "Setu Retail brings the same operator-first approach behind Setu Dine to retail stores — inventory that stays accurate, billing that's fast at the counter, and visibility across every store location.",
-      "We're building it on the same multi-outlet architecture as Setu Dine, so retail chains get multi-store reporting from day one."
+    "title": "Setu Retail — Cloud POS with GST Billing & Inventory",
+    "description": "Cloud POS for Indian shops: GST billing that works offline, stock with batches, udhaar, purchases, cash book and branch reports. 3 months free.",
+    "keywords": [
+      "Setu Retail",
+      "retail POS software India",
+      "GST billing software",
+      "cloud POS",
+      "inventory management software",
+      "multi branch POS"
     ]
   },
-  "cta": {
-    "headline": "Want early access to Setu Retail?",
-    "subtext": "Tell us about your retail business and we'll notify you as soon as Setu Retail launches.",
-    "cta": { "label": "Get notified", "href": "/contact" }
+  "hero": {
+    "eyebrow": "Setu Retail",
+    "headline": "The cloud POS for shops, from one counter to a hundred branches",
+    "subheadline": "GST billing that keeps going when the internet drops, stock with batches and expiry, udhaar, purchases and a cash book — for owners, managers and cashiers. Start with 3 months of Basic free."
   },
+  "highlights": [
+    {
+      "icon": "WifiOff",
+      "label": "Bills offline"
+    },
+    {
+      "icon": "Receipt",
+      "label": "GST with HSN"
+    },
+    {
+      "icon": "Users",
+      "label": "Owner, manager, cashier"
+    },
+    {
+      "icon": "Building2",
+      "label": "Up to 100 branches"
+    },
+    {
+      "icon": "ArrowLeftRight",
+      "label": "Stock transfers"
+    },
+    {
+      "icon": "HandCoins",
+      "label": "Udhaar ledger"
+    },
+    {
+      "icon": "Layers",
+      "label": "Batches & expiry"
+    },
+    {
+      "icon": "History",
+      "label": "2-year audit log"
+    }
+  ],
+  "features": [
+    {
+      "title": "GST billing, even offline",
+      "text": "Fast counter billing with CGST/SGST/IGST and HSN on every receipt. Counters keep billing with no internet and sync when it's back."
+    },
+    {
+      "title": "Stock, batches and expiry",
+      "text": "Branch-wise stock, low-stock alerts, batches with expiry picked earliest-first, barcode labels and a full stock register."
+    },
+    {
+      "title": "Udhaar and payments",
+      "text": "Credit sales post to the customer ledger; record payments received, oldest dues first, with invoice aging."
+    },
+    {
+      "title": "Purchases and suppliers",
+      "text": "Supplier bills that add stock and record input GST, returns to suppliers, payables aging and a cash book per branch."
+    },
+    {
+      "title": "Owners, managers, cashiers",
+      "text": "Every person has their own login and role. Cashiers bill; managers run their branches; the owner sees everything, with an audit log."
+    },
+    {
+      "title": "Many branches",
+      "text": "Branch prices, stock transfers that are checked on arrival, and branches compared side by side."
+    }
+  ],
+  "plansHeadline": "Plans",
+  "plansNote": "Prices include GST and are per business. Every plan has every feature; plans differ in how many branches, staff, products, customers and bills a month they hold.",
+  "howKeys": {
+    "headline": "How buying works",
+    "steps": [
+      "Sign up in the app and verify your email: you get 3 months of Basic free.",
+      "Pick a plan here and pay by UPI, card or net banking (PayPal outside India).",
+      "We show and email a license key. Press Redeem in Setu Retail and the days are added after your current plan."
+    ]
+  },
+  "faq": [
+    {
+      "question": "Is there a free trial?",
+      "answer": "Yes: 3 months of Setu Retail Basic, free, after you verify your email. No card needed."
+    },
+    {
+      "question": "Can I look around before signing up?",
+      "answer": "Yes. Open the live demo at demo.setu-retail.setutechnology.com and try Setu Retail before you sign up. When you're ready, sign up at app.setu-retail.setutechnology.com for your 3-month free trial."
+    },
+    {
+      "question": "What happens when my plan ends?",
+      "answer": "The account locks online until a key is redeemed; your data stays. Counters already offline keep billing, and their bills sync once you renew."
+    },
+    {
+      "question": "Can I move to a bigger plan?",
+      "answer": "Yes. Redeem a key for the new plan and choose to switch now (the days you had left are converted) or to start it when the current plan ends."
+    },
+    {
+      "question": "I use the free Browser Based POS. Can I bring my data?",
+      "answer": "Yes. Download POS_BACKUP.json from the free POS and import it in Settings → Import & export: products, customers, stock and batches, plus suppliers, purchases, expenses and udhaar history."
+    },
+    {
+      "question": "Do prices include GST?",
+      "answer": "Yes. Every price shown includes GST, and the invoice we email shows it."
+    }
+  ],
   "crossSell": {
-    "text": "Running a restaurant? Free Dine is a complete restaurant POS you can open today, free forever.",
-    "cta": { "label": "Open Free Dine", "href": "/products/free-restaurant-pos" }
+    "text": "Just one counter and no need for the cloud? The Browser Based POS is free forever.",
+    "cta": {
+      "label": "Open the free POS",
+      "href": "/products/browser-based-pos"
+    }
+  },
+  "sections": [
+    {
+      "eyebrow": "At the counter",
+      "title": "Built for the minute a customer is waiting",
+      "subtitle": "The billing screen is the one your cashiers live on, so everything on it is one tap or one scan away — online or not.",
+      "items": [
+        {
+          "icon": "ScanBarcode",
+          "title": "Scan or search",
+          "text": "One box searches name, SKU and barcode. Any USB or Bluetooth scanner that types works, and the item drops into the cart on Enter."
+        },
+        {
+          "icon": "PauseCircle",
+          "title": "Hold and recall carts",
+          "text": "Park a cart with a note, serve the next customer, and bring the first one back exactly as it was."
+        },
+        {
+          "icon": "Percent",
+          "title": "Discounts with a cap",
+          "text": "Flat or percent on the bill. Cashiers can give up to a cap the owner sets (10% to start); managers and owners any amount."
+        },
+        {
+          "icon": "CreditCard",
+          "title": "Split payments",
+          "text": "Cash, UPI, card or any method you add — and one bill can be paid across more than one of them."
+        },
+        {
+          "icon": "WifiOff",
+          "title": "Keeps billing offline",
+          "text": "Lose the internet and counters keep billing and taking payments. Bills sync on their own when the connection is back."
+        },
+        {
+          "icon": "Hash",
+          "title": "No clashing bill numbers",
+          "text": "Every branch and counter has its own series, like B1-C2-00045, so two offline counters never issue the same number."
+        }
+      ]
+    },
+    {
+      "eyebrow": "GST & receipts",
+      "title": "Receipts your accountant will not send back",
+      "subtitle": "Prices include GST, and every bill carries the split, the HSN and the place of supply.",
+      "items": [
+        {
+          "icon": "Receipt",
+          "title": "CGST, SGST and IGST",
+          "text": "The tax is split by place of supply on every line, with HSN codes and your GSTIN printed on the receipt."
+        },
+        {
+          "icon": "Printer",
+          "title": "Thermal and A4",
+          "text": "80mm and 58mm thermal rolls or plain A4. Print, download a PDF, or share a link on WhatsApp."
+        },
+        {
+          "icon": "Palette",
+          "title": "Receipt designs per branch",
+          "text": "Save several designs, pick a default for the business, let each branch choose its own — the cashier can switch when printing."
+        },
+        {
+          "icon": "RotateCcw",
+          "title": "Cancels and returns",
+          "text": "Owners and managers cancel or refund a bill; stock goes back and the change is written to the audit log."
+        }
+      ]
+    },
+    {
+      "eyebrow": "Catalogue & stock",
+      "title": "One product list, stock in every branch",
+      "subtitle": "Products are shared across the business. Price, stock and batches are kept per branch.",
+      "items": [
+        {
+          "icon": "Tags",
+          "title": "Branch prices",
+          "text": "Set one default price, and let any branch charge its own. Billing uses the branch price and falls back to the default."
+        },
+        {
+          "icon": "Layers",
+          "title": "Batches and expiry",
+          "text": "Track batches with expiry dates. Billing picks the earliest expiry first, or the cashier picks the batch."
+        },
+        {
+          "icon": "TriangleAlert",
+          "title": "Low-stock alerts",
+          "text": "Every branch sees what is running low or already out, before a customer asks for it."
+        },
+        {
+          "icon": "Barcode",
+          "title": "Barcode labels",
+          "text": "A4 label sheets, thermal label rolls and single labels — and in-store EAN-13 codes for items that never had one."
+        },
+        {
+          "icon": "History",
+          "title": "Stock register",
+          "text": "Every opening, sale, purchase, transfer and adjustment is kept with the resulting stock level."
+        },
+        {
+          "icon": "FileSpreadsheet",
+          "title": "Import from the free POS",
+          "text": "Bring POS_BACKUP.json from the Browser Based POS: products, customers, stock, batches and your full udhaar history."
+        }
+      ]
+    },
+    {
+      "eyebrow": "Customers & udhaar",
+      "title": "Remember the regulars, chase what they owe",
+      "subtitle": "A customer book that fills itself at billing and feeds the ledger, aging and statements.",
+      "items": [
+        {
+          "icon": "UserPlus",
+          "title": "Add mid-sale",
+          "text": "A walk-in becomes a saved customer without leaving the billing screen — any role can do it."
+        },
+        {
+          "icon": "HandCoins",
+          "title": "Credit (udhaar) sales",
+          "text": "Bill to a customer's ledger instead of the till. Payments received clear the oldest dues first."
+        },
+        {
+          "icon": "CalendarRange",
+          "title": "Invoice aging",
+          "text": "Set credit days for the business or per customer, and see dues as not due, 1–30, 31–60, 61–90 and 90+ days late."
+        },
+        {
+          "icon": "BookUser",
+          "title": "Purchase history",
+          "text": "Open any customer to see every bill they took, their total spend and what is still outstanding."
+        }
+      ]
+    },
+    {
+      "eyebrow": "Purchases & money out",
+      "title": "The books behind the counter",
+      "subtitle": "All 12 connected tools from the free POS, rebuilt on cloud data and shared by every branch.",
+      "items": [
+        {
+          "icon": "ClipboardList",
+          "title": "Purchase register",
+          "text": "A supplier bill adds stock to a branch, updates cost price and records input GST per line. Paid, on credit or part-paid."
+        },
+        {
+          "icon": "Undo2",
+          "title": "Purchase returns",
+          "text": "Send goods back for a credit note that reduces what you owe, or for a replacement you mark when it arrives."
+        },
+        {
+          "icon": "Banknote",
+          "title": "Supplier ledger & payables aging",
+          "text": "Payments to suppliers clear the oldest bills first, and payables aging shows what is due when."
+        },
+        {
+          "icon": "Wallet",
+          "title": "Cash book per branch",
+          "text": "Cash sales, refunds, expenses and payments post on their own. A day's opening is the previous day's closing."
+        },
+        {
+          "icon": "Receipt",
+          "title": "Expense tracker",
+          "text": "Rent, salaries, electricity — recorded per branch, offline too, for owners and managers."
+        },
+        {
+          "icon": "PieChart",
+          "title": "Profit dashboard",
+          "text": "Net sales before GST, minus cost of goods sold, minus expenses — by branch and by day or month."
+        }
+      ]
+    },
+    {
+      "eyebrow": "Many branches",
+      "title": "From one shop to a hundred",
+      "subtitle": "Built on the same multi-outlet base as Setu Dine, so a chain gets branch reporting from the first day.",
+      "onDark": true,
+      "items": [
+        {
+          "icon": "ArrowLeftRight",
+          "title": "Send, then receive",
+          "text": "Sending takes stock out as in transit. The receiving branch checks the goods; short or damaged lines go back or are written off."
+        },
+        {
+          "icon": "Layers",
+          "title": "Batches travel with stock",
+          "text": "Transferred batches keep the same batch number, expiry and cost in the receiving branch."
+        },
+        {
+          "icon": "LayoutDashboard",
+          "title": "Branches side by side",
+          "text": "Sales, bills, average bill, returns, profit, expenses, stock value and udhaar outstanding for every branch."
+        },
+        {
+          "icon": "Building2",
+          "title": "Stock across branches",
+          "text": "Each product's stock in every branch, with low in one and spare in another highlighted for a transfer."
+        },
+        {
+          "icon": "TrendingUp",
+          "title": "Transfer report",
+          "text": "What moved, what is still in transit and what came up short."
+        },
+        {
+          "icon": "Globe",
+          "title": "A branch switcher",
+          "text": "Owners and managers move between their branches in one tap; cashiers stay on the one they work in."
+        }
+      ]
+    },
+    {
+      "eyebrow": "Safety & control",
+      "title": "Every login is a person, every change is on record",
+      "subtitle": "Access is checked on the server for every request, so removing someone takes effect at once.",
+      "items": [
+        {
+          "icon": "Lock",
+          "title": "Own login and counter PIN",
+          "text": "Everyone signs in with email or username and a password, plus a PIN to sign in at the counter offline."
+        },
+        {
+          "icon": "Timer",
+          "title": "Shift-length sessions",
+          "text": "A sign-in lasts one 12-hour shift. Five wrong passwords lock that login for 15 minutes."
+        },
+        {
+          "icon": "History",
+          "title": "Audit log for 2 years",
+          "text": "Sign-ins, staff and roles, prices and stock, cancels, payments, transfers and imports — before and after, filterable, CSV."
+        },
+        {
+          "icon": "ShieldCheck",
+          "title": "Cashiers see no margins",
+          "text": "Cost price and profit never reach a cashier's device. A different person signing in clears the previous person's copy."
+        },
+        {
+          "icon": "DatabaseBackup",
+          "title": "Nightly backups",
+          "text": "The database is backed up every night and kept for 90 days, on top of your own CSV exports."
+        },
+        {
+          "icon": "CloudOff",
+          "title": "Plan ends, data stays",
+          "text": "If a plan lapses the account locks online until a key is redeemed; nothing is deleted, and offline bills sync once you renew."
+        }
+      ]
+    }
+  ],
+  "roles": {
+    "eyebrow": "Multi-role",
+    "title": "Owners, managers and cashiers each see their own POS",
+    "subtitle": "Give every person their own login and role. Managers run one or more branches; cashiers work in exactly one. The menu hides what a role cannot use, and the server refuses it anyway.",
+    "columns": [
+      "Owner",
+      "Manager",
+      "Cashier"
+    ],
+    "rows": [
+      [
+        "Billing, hold and recall, print receipts",
+        "yes",
+        "yes",
+        "yes"
+      ],
+      [
+        "Add a customer at billing",
+        "yes",
+        "yes",
+        "yes"
+      ],
+      [
+        "Discounts",
+        "Any",
+        "Any",
+        "Up to a cap"
+      ],
+      [
+        "See cost price and margin",
+        "yes",
+        "yes",
+        "no"
+      ],
+      [
+        "Cancel or refund a bill",
+        "yes",
+        "Own branches",
+        "no"
+      ],
+      [
+        "Products, stock and batches",
+        "yes",
+        "Own branches",
+        "View only"
+      ],
+      [
+        "Stock transfers",
+        "yes",
+        "Between own branches",
+        "no"
+      ],
+      [
+        "Customer ledger",
+        "yes",
+        "yes",
+        "Add and receive payment"
+      ],
+      [
+        "Expenses and supplier payments",
+        "yes",
+        "yes",
+        "no"
+      ],
+      [
+        "Reports and tools",
+        "All branches",
+        "Own branches",
+        "Own sales today"
+      ],
+      [
+        "Manage cashiers",
+        "yes",
+        "Own branches",
+        "no"
+      ],
+      [
+        "Manage managers and branches",
+        "yes",
+        "no",
+        "no"
+      ],
+      [
+        "Plan, license key and billing",
+        "yes",
+        "no",
+        "no"
+      ],
+      [
+        "Audit log",
+        "yes",
+        "Own branches",
+        "no"
+      ]
+    ]
+  },
+  "planLimits": {
+    "headline": "Compare plans",
+    "note": "Bills a month are counted across all branches. Your data stays when you move to a bigger plan.",
+    "rows": [
+      {
+        "label": "Branches",
+        "basic": "1",
+        "gold": "10",
+        "platinum": "100"
+      },
+      {
+        "label": "Staff logins",
+        "basic": "3",
+        "gold": "30",
+        "platinum": "300"
+      },
+      {
+        "label": "Products",
+        "basic": "1,000",
+        "gold": "10,000",
+        "platinum": "1,00,000"
+      },
+      {
+        "label": "Customers",
+        "basic": "2,000",
+        "gold": "20,000",
+        "platinum": "Unlimited"
+      },
+      {
+        "label": "Bills a month",
+        "basic": "3,000",
+        "gold": "30,000",
+        "platinum": "Unlimited"
+      },
+      {
+        "label": "Free trial",
+        "basic": "3 months",
+        "gold": "—",
+        "platinum": "—"
+      }
+    ]
+  },
+  "enterprise": {
+    "eyebrow": "Enterprise",
+    "name": "More than 100 branches",
+    "summary": "For large chains and franchises. Limits set to fit, a key issued for your account, and help moving every branch over.",
+    "cardCta": "Contact sales",
+    "headline": "Running more than 100 branches?",
+    "text": "Tell us about your chain and we'll set up a plan with the branches, staff and limits you need. We issue a key for your account once it's agreed, and help you bring every branch across.",
+    "points": [
+      "Branches, staff, products and bills set to your size",
+      "A key issued for your account only",
+      "Help importing from your current software",
+      "One invoice for the whole business, GST included"
+    ],
+    "form": {
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Work email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "required": true
+        },
+        {
+          "name": "company",
+          "label": "Business name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "branches",
+          "label": "Number of branches",
+          "type": "select",
+          "required": true,
+          "placeholder": "Select",
+          "options": [
+            {
+              "value": "101-250",
+              "label": "101 – 250"
+            },
+            {
+              "value": "251-500",
+              "label": "251 – 500"
+            },
+            {
+              "value": "501-1000",
+              "label": "501 – 1,000"
+            },
+            {
+              "value": "1000+",
+              "label": "More than 1,000"
+            }
+          ]
+        },
+        {
+          "name": "message",
+          "label": "What do you sell, and what do you use today?",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "submitLabel": "Talk to sales"
+    }
   }
 }

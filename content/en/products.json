@@ -27,6 +27,7 @@
   "labels": {
     "comingSoon": "Coming Soon",
     "paidSoonEyebrow": "Paid product coming soon",
+    "paidAvailableEyebrow": "Paid upgrade available",
     "paidSoonSuffix": "Everything above stays free."
   },
   "products": [
@@ -50,12 +51,31 @@
       ],
       "paidSoon": {
         "name": "Setu Retail",
-        "note": "Cloud database, several counters and staff logins."
+        "note": "Cloud database, several counters and staff logins.",
+        "href": "/products/retail"
       },
       "cta": {
         "label": "Open Browser Based POS — it's free",
         "href": "/products/browser-based-pos"
       }
+    },
+    {
+      "id": "retail",
+      "status": "live",
+      "name": "Setu Retail",
+      "headline": "Cloud POS for shops, from one counter to a hundred branches",
+      "description": "GST billing that keeps working offline, stock with batches and expiry, udhaar, purchases, cash book, staff roles and branch reports. Basic ₹249/month, Gold ₹499, Platinum ₹999 — 3 months of Basic free.",
+      "cta": {
+        "label": "Explore Setu Retail",
+        "href": "/products/retail"
+      },
+      "features": [
+        "GST billing that works offline",
+        "Stock, batches and expiry",
+        "Udhaar, purchases and cash book",
+        "Owner, manager and cashier logins",
+        "Up to 100 branches"
+      ]
     },
     {
       "id": "bank-statement-analyzer",
@@ -78,6 +98,27 @@
       "cta": {
         "label": "Open Bank Statement Analyzer — it's free",
         "href": "/products/bank-statement-analyzer"
+      }
+    },
+    {
+      "id": "workflow",
+      "status": "live",
+      "name": "Setu Workflow",
+      "headline": "Practice management for CA/CPA & accounting firms",
+      "description": "A paid, multi-user cloud product for accounting firms: clients, engagements, versioned workflow stages, checklists, review points, work allocation, time, capacity and management reports — so partners see where every job stands without chasing anyone for an update. Join the waiting list; plans from ₹999 / $9.99 a month for 10 users.",
+      "features": [
+        "Client and engagement masters with staffing",
+        "Versioned workflow templates and stages",
+        "Stage checklists with required-item gates",
+        "Numbered queries and review points",
+        "Work allocation, time entry and budgets",
+        "Team capacity, My Day and My Work",
+        "Needs Attention dashboard and six reports",
+        "Custom roles, audit trail and CSV import/export"
+      ],
+      "cta": {
+        "label": "Explore Setu Workflow",
+        "href": "/products/workflow"
       }
     },
     {
@@ -367,17 +408,6 @@
       }
     },
     {
-      "id": "retail",
-      "status": "coming-soon",
-      "name": "Setu Retail",
-      "headline": "Retail store management, coming soon",
-      "description": "Inventory tracking, billing and store operations built for retail businesses across the globe.",
-      "cta": {
-        "label": "Explore Setu Retail",
-        "href": "/products/retail"
-      }
-    },
-    {
       "id": "tuition",
       "status": "coming-soon",
       "name": "Setu Tuition",
@@ -458,25 +488,6 @@
       "cta": {
         "label": "Get notified at launch",
         "href": "/contact"
-      }
-    },
-    {
-      "id": "workflow",
-      "status": "coming-soon",
-      "name": "Setu Workflow",
-      "headline": "Practice management for CA/CPA & accounting firms — in development",
-      "description": "A paid, multi-user cloud product for accounting firms: clients, engagements, versioned workflow stages, checklists, review points, time, capacity and management reports — so partners see where every job stands without chasing anyone for an update.",
-      "features": [
-        "Client and engagement masters with staffing",
-        "Versioned workflow templates and stages",
-        "Stage checklists with required-item gates",
-        "Numbered queries and review points",
-        "Work allocation, time entry and budgets",
-        "Team capacity, dashboard and reports"
-      ],
-      "cta": {
-        "label": "Explore Setu Workflow",
-        "href": "/products/workflow"
       }
     },
     {

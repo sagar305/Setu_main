@@ -62,6 +62,7 @@ import {
 import { FreePosApp } from "@/components/tools/FreePos/FreePosApp";
 import { YouTubeTutorial } from "@/components/products/YouTubeTutorial";
 import { Faq } from "@/components/Faq";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { WhatsNewStrip } from "@/components/whatsNew/WhatsNewStrip";
 import { NewPill } from "@/components/whatsNew/NewPill";
@@ -1066,6 +1067,8 @@ export default function BrowserBasedPosPage() {
           </div>
         </div>
       </section>
+
+      <RelatedProducts group="shop" current="browser-based-pos" />
 
       <Faq headline="Browser Based POS — questions" items={FAQ_ITEMS} />
     </>
