@@ -20,8 +20,8 @@
     "subheadline": "Every client, engagement, workflow stage, checklist, review point and hour your team works — in one place, so partners know where every job stands without chasing anyone for an update."
   },
   "status": {
-    "label": "Paid product · 15-day free trial",
-    "text": "Setu Workflow is a paid, multi-user cloud product for CA/CPA and accounting firms. Start with a 15-day free trial — no card needed — then buy a key for your firm."
+    "label": "Paid product · Join the waiting list",
+    "text": "Setu Workflow is a paid, multi-user cloud product for CA/CPA and accounting firms. Join the waiting list and we'll email you as soon as it opens for your firm."
   },
   "body": {
     "headline": "Why firms use it",
@@ -180,17 +180,17 @@
       "Firm-level timezone for due dates and aging",
       "Secure login, email invitations and password reset",
       "Your account owner decides who has access",
-      "If a plan or trial ends, nothing is deleted — the workspace turns read-only and you can still view and export"
+      "If a plan ends, nothing is deleted — the workspace turns read-only and you can still view and export"
     ]
   },
   "pricing": {
-    "badge": "15-day free trial",
+    "badge": "Waiting list open",
     "title": "One simple plan for your firm.",
-    "subtitle": "Every plan covers 3 users with every module included. Larger teams add users through sales.",
+    "subtitle": "Every plan covers 10 users with every module included. Larger teams add users through sales.",
     "note": "Prices shown in your region's currency, inclusive of GST. A key is a one-time payment that never auto-renews; redeem it in Admin → Subscription.",
-    "extraUsers": "Need more than 3 users? Extra users are $4.99 per user per month — contact sales and we'll issue a key for your whole team.",
+    "extraUsers": "Need more than 10 users? Extra users are $4.99 per user per month — contact sales and we'll issue a key for your whole team.",
     "includes": [
-      "3 users with full access",
+      "10 users with full access",
       "Client Master with custom fields",
       "Engagement Master with staffing and budgets",
       "Versioned workflow templates and stages",
@@ -206,8 +206,7 @@
       "CSV import and export for clients and engagements",
       "Offices, users and custom roles",
       "Full audit trail",
-      "Email support",
-      "15-day free trial before you pay"
+      "Email support"
     ],
     "plans": [
       {
@@ -241,7 +240,7 @@
   },
   "contactSales": {
     "eyebrow": "Contact sales",
-    "headline": "More than 3 users, or several offices?",
+    "headline": "More than 10 users, or several offices?",
     "text": "Tell us about your firm and we'll issue one key that covers your whole team — extra users are $4.99 per user per month. Your clients and engagements come across by CSV import.",
     "points": [
       "One key for the whole firm, any number of users",
@@ -283,10 +282,6 @@
           "placeholder": "Select",
           "options": [
             {
-              "value": "4-10",
-              "label": "4 – 10"
-            },
-            {
               "value": "11-25",
               "label": "11 – 25"
             },
@@ -295,8 +290,12 @@
               "label": "26 – 50"
             },
             {
-              "value": "50+",
-              "label": "More than 50"
+              "value": "51-100",
+              "label": "51 – 100"
+            },
+            {
+              "value": "100+",
+              "label": "More than 100"
             }
           ]
         },

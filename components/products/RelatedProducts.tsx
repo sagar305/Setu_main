@@ -53,7 +53,7 @@ const GROUPS = {
       {
         id: "workflow",
         name: "Setu Workflow",
-        tag: "15-day free trial",
+        tag: "Waiting list",
         text: "Practice management for the firm: engagements, stages, checklists, review points, time and capacity in one place.",
         href: "/products/workflow",
         cta: "Explore Setu Workflow",

@@ -45,7 +45,7 @@ describe("Setu Workflow keys", () => {
 });
 
 describe("Setu Workflow prices and tags", () => {
-  it("sells the published prices (GST included) for 3 users", () => {
+  it("sells the published prices (GST included) for 10 users", () => {
     expect(workflowAmounts("IN")).toEqual({ monthly: 999, yearly: 9999 });
     expect(workflowAmounts("INTL")).toEqual({ monthly: 9.99, yearly: 99.99 });
   });
@@ -79,11 +79,11 @@ const cashfreeOrder = (over: Partial<CashfreeOrder> = {}): CashfreeOrder => ({
 });
 
 describe("paid orders", () => {
-  it("a paid Workflow order earns a 3-user key for its period; nothing else does", () => {
+  it("a paid Workflow order earns a 10-user key for its period; nothing else does", () => {
     const order = qrMenuOrderFromCashfree(cashfreeOrder());
     const license = licenseForWorkflowOrder(order, SECRET)!;
-    expect(license).toMatchObject({ days: 365, billing: "yearly", seats: 3 });
-    expect(readLicenseKey(license.key, SECRET)).toMatchObject({ days: 365, seats: 3 });
+    expect(license).toMatchObject({ days: 365, billing: "yearly", seats: 10 });
+    expect(readLicenseKey(license.key, SECRET)).toMatchObject({ days: 365, seats: 10 });
     expect(licenseForWorkflowOrder(order, SECRET)!.key).toBe(license.key);
     expect(licenseForWorkflowOrder(qrMenuOrderFromCashfree(cashfreeOrder({ order_status: "ACTIVE" })), SECRET)).toBeNull();
     // A QR Menu order never mints a Workflow key, and a Workflow order never a QR Menu one.
@@ -97,7 +97,7 @@ describe("paid orders", () => {
     const html = workflowEmailHtml({ license, invoiceNo: "SWF-20261107-TEST0001", amount: "INR 9999.00", orderId: order.orderId });
     expect(html).toContain(license.key);
     expect(html).toContain(`admin/subscription#key=${encodeURIComponent(license.key)}`);
-    expect(html).toContain("up to 3 users");
+    expect(html).toContain("up to 10 users");
     expect(invoiceNumber("swf_test_1", new Date("2026-11-07T00:00:00Z"), "SWF")).toBe("SWF-20261107-SWFTEST1");
   });
 });
@@ -144,8 +144,8 @@ describe("routes", () => {
     const { GET } = await import("@/app/api/workflow/orders/[orderId]/route");
     const r = await GET(new NextRequest("https://setutechnology.com/api/workflow/orders/swf_test_1"), { params: Promise.resolve({ orderId: "swf_test_1" }) });
     const body = await r.json();
-    expect(body).toMatchObject({ status: "paid", days: 365, seats: 3 });
-    expect(readLicenseKey(body.key, SECRET)).toMatchObject({ days: 365, seats: 3 });
+    expect(body).toMatchObject({ status: "paid", days: 365, seats: 10 });
+    expect(readLicenseKey(body.key, SECRET)).toMatchObject({ days: 365, seats: 10 });
     expect(sent).toHaveLength(1);
     expect(sent[0]).toMatchObject({ to: "partner@firm.example", idempotencyKey: "setu-workflow-license/swf_test_1" });
     expect(sent[0]!.subject).toContain("Setu Workflow license key (1 year)");

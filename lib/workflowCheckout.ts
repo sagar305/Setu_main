@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Buying Setu Workflow on setutechnology.com.
 //
-// One plan for 3 users, monthly or yearly; the region is worked out for the
+// One plan for 10 users, monthly or yearly; the region is worked out for the
 // buyer exactly as for QR Menu (lib/qrMenuCheckout.ts, whose helpers this
 // reuses). Prices come from content/en/pricing.json (slug setu-workflow), the
 // same numbers /pricing and /products/workflow show. Firms that need more
@@ -16,7 +16,7 @@ import type { PricingAmounts, PricingRegionId } from "@/lib/pricing";
 import type { Billing } from "@/lib/qrMenuCheckout";
 
 /** Users every self-serve plan covers. */
-export const WORKFLOW_INCLUDED_USERS = 3;
+export const WORKFLOW_INCLUDED_USERS = 10;
 /** Each extra user, per month, arranged through sales. */
 export const WORKFLOW_EXTRA_USER_USD = 4.99;
 
