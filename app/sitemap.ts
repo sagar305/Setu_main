@@ -117,6 +117,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/products/free-clinic-software",
     "/blog",
     "/glossary",
+    "/changelog",
     "/contact",
     "/book-demo",
     // Unreleased routes are listed only when their flag is on. A sitemap entry
