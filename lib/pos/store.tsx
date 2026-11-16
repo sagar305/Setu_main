@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbClearAll, dbGetAll, type StoreName } from "./db";
 import {
   buildBackupFromSheetPull,
@@ -406,6 +407,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       setPayments(seededPayments);
       setSettings(newSettings);
       setStatus("ready");
+      reportActivity("pos", "setup_completed");
     },
     []
   );
@@ -451,6 +453,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setProducts((prev) => [...prev, product]);
     if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
     if (batches.length) setStockBatches((prev) => [...prev, ...batches]);
+    reportActivity("pos", "product_created");
     return product;
   }, [batchMode]);
 
@@ -503,6 +506,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ products: [copy] }, {}, ["products"]);
       setProducts((prev) => [...prev, copy]);
+      reportActivity("pos", "product_created");
     },
     [products]
   );
@@ -669,6 +673,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     const customer: Customer = { ...input, id: generateId(), createdAt: nowIso() };
     await batchWithSync({ customers: [customer] }, {}, ["customers"]);
     setCustomers((prev) => [...prev, customer]);
+    reportActivity("pos", "customer_created");
     return customer;
   }, []);
 
@@ -916,6 +921,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
       setSettings(updatedSettings);
 
+      reportActivity("pos", "order_created");
       return order;
     },
     [customers, orders, payments, products, settings, batchMode, stockBatches]
@@ -1036,6 +1042,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       if (logs.length) setInventoryLogs((prev) => [...logs.reverse(), ...prev]);
       setSettings(updatedSettings);
 
+      reportActivity("pos", "sales_imported", newOrders.length);
       return newOrders.length;
     },
     [orders, products, settings, batchMode, stockBatches]
@@ -1106,6 +1113,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         );
       }
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
+      reportActivity("pos", "order_cancelled");
     },
     [orderItems, orders, products, batchMode, stockBatches]
   );
@@ -1129,6 +1137,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       };
       await dbBatch({ held_carts: [held] });
       setHeldCarts((prev) => [...prev, held]);
+      reportActivity("pos", "cart_held");
       return held;
     },
     [customers]
@@ -1218,6 +1227,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       await updateSettings({ sheetSyncUrl: trimmed });
       // First sync sends the whole workspace.
       await batchWithSync({}, {}, SYNC_SLICES);
+      reportActivity("pos", "sheet_connected");
     },
     [updateSettings, batchWithSync]
   );
@@ -1247,6 +1257,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       await restoreBackup(backup);
       const loadedBusiness = await loadAll();
       setStatus(loadedBusiness ? "ready" : "welcome");
+      reportActivity("pos", "backup_restored");
     },
     [loadAll]
   );
@@ -1278,6 +1289,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       });
       const loadedBusiness = await loadAll();
       setStatus(loadedBusiness ? "ready" : "welcome");
+      reportActivity("pos", "backup_restored");
     },
     [loadAll]
   );

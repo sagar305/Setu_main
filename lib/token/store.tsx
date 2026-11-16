@@ -24,6 +24,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import { nowIso as posNowIso, type Business } from "@/lib/pos/types";
 import {
@@ -475,6 +476,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       setCounters([counter]);
       setToday(businessDate(new Date(), nextSettings.dailyResetHour));
       setStatus("ready");
+      reportActivity("token", "setup_completed");
     },
     [batchWithSync, lang]
   );
@@ -521,6 +523,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
           : [...previous, service];
         return next.sort((a, b) => a.sortOrder - b.sortOrder);
       });
+      if (!existing) reportActivity("token", "service_created");
       return service;
     },
     [batchWithSync, services]
@@ -568,6 +571,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
           ? previous.map((row) => (row.id === counter.id ? counter : row))
           : [...previous, counter]
       );
+      if (!existing) reportActivity("token", "counter_created");
       return counter;
     },
     [batchWithSync, counters]
@@ -638,6 +642,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       broadcast().post(["tokens"]);
       setTokens((previous) => [...previous, token]);
       setToday(day);
+      reportActivity("token", "token_issued");
       return token;
     },
     [broadcast]
@@ -692,6 +697,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       await batchWithSync({ tokens: [...closed, called] });
       const byId = new Map([...closed, called].map((token) => [token.id, token]));
       setTokens((previous) => previous.map((token) => byId.get(token.id) ?? token));
+      reportActivity("token", "token_called");
       return called;
     },
     [batchWithSync, closeCurrentForCounter]
@@ -738,6 +744,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
   const completeToken = useCallback(
     async (tokenId: string) => {
       await patchToken(tokenId, { status: "served", closedAt: nowIso() });
+      reportActivity("token", "token_completed");
     },
     [patchToken]
   );
@@ -909,6 +916,7 @@ export function TokenProvider({ children }: { children: ReactNode }) {
       await restoreBackup(backup);
       broadcast().post(["settings", "services", "counters", "tokens"]);
       await load();
+      reportActivity("token", "backup_restored");
     },
     [broadcast, load]
   );

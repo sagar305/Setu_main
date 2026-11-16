@@ -8,7 +8,7 @@
     "headline": "Política de privacidade",
     "subheadline": "O que medimos, o que deliberadamente não conseguimos ver e como desligar."
   },
-  "lastUpdated": "Última atualização em 7 de setembro de 2026.",
+  "lastUpdated": "Última atualização em 16 de novembro de 2026.",
   "translationNote": "Esta tradução é oferecida por conveniência. Em caso de divergência com a versão em inglês, prevalece a versão em inglês.",
   "sections": [
     {
@@ -23,6 +23,7 @@
       "list": [
         "As páginas abertas e a página de onde você veio.",
         "Botões e links clicados — identificados pelo nome que damos a eles no nosso próprio código, como “download invoice PDF”, nunca pelo que mostram na tela.",
+        "Marcos dentro dos apps gratuitos, como “pedido criado” ou “aluno adicionado” — registrados com um nome de uma lista fixa do nosso próprio código. Apenas o fato de ter acontecido, nunca o conteúdo.",
         "Até onde você rolou a página e, aproximadamente, quanto tempo ficou.",
         "Se o aparelho é um celular ou um computador, e de que país veio a solicitação.",
         "Um identificador aleatório guardado no seu navegador, para que uma visita repetida seja reconhecida como repetida.",

@@ -8,7 +8,7 @@
     "headline": "Datenschutzerklärung",
     "subheadline": "Was wir messen, was wir bewusst nicht sehen können und wie Sie es abschalten."
   },
-  "lastUpdated": "Zuletzt aktualisiert am 7. September 2026.",
+  "lastUpdated": "Zuletzt aktualisiert am 16. November 2026.",
   "translationNote": "Diese Übersetzung dient der Bequemlichkeit. Weicht sie von der englischen Fassung ab, gilt die englische Fassung.",
   "sections": [
     {
@@ -23,6 +23,7 @@
       "list": [
         "Geöffnete Seiten und die Seite, von der Sie kamen.",
         "Gedrückte Schaltflächen und Links — erkannt an dem Namen, den wir ihnen in unserem eigenen Code geben, etwa „download invoice PDF“, nie an dem, was auf dem Bildschirm steht.",
+        "Meilensteine in den kostenlosen Apps, etwa „Bestellung angelegt“ oder „Schüler hinzugefügt“ — erfasst mit einem Namen aus einer festen Liste in unserem eigenen Code. Nur die Tatsache, dass es geschehen ist, nie der Inhalt.",
         "Wie weit Sie auf der Seite nach unten gescrollt haben und ungefähr wie lange Sie geblieben sind.",
         "Ob das Gerät ein Telefon oder ein Computer ist und aus welchem Land die Anfrage kam.",
         "Eine zufällige Kennung in Ihrem Browser, damit ein erneuter Besuch als erneuter Besuch erkennbar ist.",
