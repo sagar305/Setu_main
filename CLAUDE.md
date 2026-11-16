@@ -177,6 +177,31 @@ Branch protection that makes this binding is set in GitHub → Settings → Bran
 - `main`: require a pull request, require the status check **Only stage can merge into main**, no bypass
 - `stage`: require a pull request
 
+## Changelog (required for every user-facing change)
+
+The public changelog at `/changelog` (`app/changelog/page.tsx`) lists what changed on the live site. Its entries live in **`lib/changelog.ts`** (`CHANGELOG` array, newest first). It shows the last 30 days by default and older entries behind "Load more", so nothing on the page itself needs editing when you add one.
+
+**Whenever a change you make falls under one of these, add an entry to `CHANGELOG` in the same commit/PR — without being asked:**
+
+| `type` | When |
+|--------|------|
+| `launch` | A new product, tool, calculator or public page goes live |
+| `feature` | A new capability in an existing product, tool or page |
+| `improvement` | A visible change to how an existing feature works or looks |
+| `fix` | A bug fixed that a user could have noticed |
+
+**Never add an entry for:** blog posts, glossary terms, SEO copy/metadata/schema/sitemap changes, translations of existing copy, blog date bumps, and internal work with no visible effect (refactors, CI, lint, build config, dependency bumps). A build fix counts only if the live site was actually broken. A change hidden behind a feature flag gets its entry when the flag is turned on, not before.
+
+How to write an entry:
+- Add it at the **top** of the array. `date` is today (`yyyy-mm-dd`), the day the PR is opened.
+- `product`: the product or area as users know it (e.g. "Browser Based POS", "Free Dine", "Invoice Generator", "Website").
+- `title`: one plain-language line about what the user gets, not how it was built (no file names, flags or PR numbers).
+- `description` (optional): one or two sentences of detail. `href` (optional): internal link to where the change can be seen.
+- One entry per user-visible change; group small related tweaks into one entry.
+- If a later PR reverts or replaces a change before it reaches main, remove or edit its entry instead of adding a new one.
+
+Why the PR date is fine: the page reads the code it ships with, so an entry merged into `stage` only appears on production when `stage` is released to `main`.
+
 ## Useful File Paths
 
 | Purpose | Path |
@@ -186,6 +211,7 @@ Branch protection that makes this binding is set in GitHub → Settings → Bran
 | Add utility function | `lib/[feature].ts` |
 | Add new route | `app/[path]/page.tsx` |
 | Add API endpoint | `app/api/[path]/route.ts` |
+| Log a user-facing change | `lib/changelog.ts` |
 
 ## Debugging Tips
 

@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getWorkflowContent } from "@/lib/content";
-import { quoteOffer } from "@/lib/schema";
+import { Check, Gift, KeyRound, Users } from "lucide-react";
+import { getWorkflowContent, getPricingPlan } from "@/lib/content";
+import { planOffers } from "@/lib/schema";
+import { workflowPaymentsEnabled } from "@/lib/featureFlags";
+import { WORKFLOW_INCLUDED_USERS } from "@/lib/workflowCheckout";
 import { PageHero } from "@/components/PageHero";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
+import { ContactForm } from "@/components/ContactForm";
 import { FadeIn } from "@/components/motion/FadeIn";
+import { WorkflowBuy } from "@/components/WorkflowBuy";
+import { WorkflowWaitlist } from "@/components/WorkflowWaitlist";
+import { WorkflowRolesShowcase } from "@/components/WorkflowRolesShowcase";
 
 const content = getWorkflowContent();
 
@@ -46,11 +54,7 @@ const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description: content.seo.description,
-  offers: quoteOffer({
-    url: "/contact",
-    description: "Setu Workflow is a paid product that has not launched yet. Pricing will be announced at launch.",
-    availability: "PreOrder",
-  }),
+  offers: planOffers(getPricingPlan("setu-workflow")!),
   provider: {
     "@type": "Organization",
     name: "Setu Technology",
@@ -79,6 +83,16 @@ export default function WorkflowPage() {
               {content.status.label}
             </p>
             <p className="mt-1 text-sm text-ink/80">{content.status.text}</p>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <WorkflowWaitlist />
+            <a
+              href={workflowPaymentsEnabled() ? "#buy" : "#pricing"}
+              className="inline-flex items-center gap-2 rounded-lg border border-indigo/30 px-5 py-3 text-sm font-semibold text-indigo transition hover:bg-indigo/5"
+            >
+              <KeyRound className="h-4 w-4" />
+              {workflowPaymentsEnabled() ? "Buy a key" : "See pricing"}
+            </a>
           </div>
         </FadeIn>
 
@@ -109,20 +123,15 @@ export default function WorkflowPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-16">
+      {/* Roles: an auto-playing walkthrough of what each person sees and does */}
+      <section id="roles" className="mx-auto max-w-6xl scroll-mt-24 px-6 pb-16">
         <FadeIn>
-          <h2 className="text-2xl font-bold tracking-tight text-ink">{content.team.headline}</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-ink">{content.roles.headline}</h2>
+          <p className="mt-3 max-w-2xl text-muted">{content.roles.subheadline}</p>
         </FadeIn>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {content.team.items.map((item) => (
-            <FadeIn key={item.title}>
-              <div className="h-full rounded-2xl border border-muted-line/30 bg-white/60 p-6">
-                <h3 className="text-base font-semibold text-indigo">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        <FadeIn className="mt-8">
+          <WorkflowRolesShowcase roles={content.roles.items} />
+        </FadeIn>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 pb-16">
@@ -148,18 +157,98 @@ export default function WorkflowPage() {
         </FadeIn>
       </section>
 
-      <section className="bg-indigo py-16 text-center text-cream-paper">
-        <div className="mx-auto max-w-2xl px-6">
-          <h2 className="text-3xl font-bold tracking-tight">{content.cta.headline}</h2>
-          <p className="mt-4 text-lg text-cream-paper/85">{content.cta.subtext}</p>
-          <Link
-            href={content.cta.cta.href}
-            className="mt-8 inline-block rounded-full bg-saffron px-7 py-3 text-sm font-semibold text-ink transition hover:brightness-95"
-          >
-            {content.cta.cta.label} →
-          </Link>
+      {/* Pricing; scroll-mt keeps the heading clear of the sticky nav on a #pricing link */}
+      <section id="pricing" className="mx-auto max-w-5xl scroll-mt-24 px-6 pb-16">
+        <FadeIn>
+          <div className="text-center">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-saffron/20 px-3 py-1 text-xs font-bold uppercase tracking-wide text-ink">
+              <Gift className="h-3.5 w-3.5" />
+              {content.pricing.badge}
+            </span>
+            <h2 className="mt-4 text-3xl font-bold text-ink">{content.pricing.title}</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-muted">{content.pricing.subtitle}</p>
+          </div>
+        </FadeIn>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {content.pricing.plans.map((plan) => (
+            <FadeIn key={plan.region}>
+              <div className="h-full rounded-2xl border border-indigo/15 bg-white p-8 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">{plan.region}</p>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-ink">{plan.monthlyLabel}</span>
+                  <span className="text-sm text-muted">/ month</span>
+                </div>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="text-lg font-semibold text-ink">{plan.yearlyLabel}</span>
+                  <span className="text-sm text-muted">/ year</span>
+                  <span className="rounded-full bg-saffron/20 px-2 py-0.5 text-[11px] font-semibold text-ink">
+                    {plan.saveLabel}
+                  </span>
+                </div>
+                <p className="mt-4 flex items-center gap-2 text-sm text-muted">
+                  <Check className="h-4 w-4 text-indigo" />
+                  {WORKFLOW_INCLUDED_USERS} users, every module included.
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn>
+          <div className="mt-8 rounded-2xl border border-muted-line/20 bg-white p-8">
+            <h3 className="font-bold text-ink">Included on every plan</h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {content.pricing.includes.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-ink/80">
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
+        <FadeIn>
+          <p className="mt-6 flex items-start gap-2 rounded-xl border border-muted-line/30 bg-cream/60 p-4 text-sm text-ink/80">
+            <Users className="mt-0.5 h-4 w-4 flex-shrink-0 text-indigo" />
+            <span>
+              {content.pricing.extraUsers}{" "}
+              <a href="#contact-sales" className="font-semibold text-indigo hover:underline">
+                Contact sales →
+              </a>
+            </span>
+          </p>
+          <p className="mt-4 text-xs text-muted">{content.pricing.note}</p>
+        </FadeIn>
+        {/* scroll-mt keeps the box clear of the sticky nav on a #buy link */}
+        {workflowPaymentsEnabled() && (
+          <div id="buy" className="mt-8 scroll-mt-24">
+            <WorkflowBuy />
+          </div>
+        )}
+      </section>
+
+      {/* Contact sales: larger teams; scroll-mt keeps it clear of the sticky nav on #contact-sales */}
+      <section id="contact-sales" aria-labelledby="contact-sales-h" className="scroll-mt-24 bg-indigo py-16">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-saffron">{content.contactSales.eyebrow}</p>
+            <h2 id="contact-sales-h" className="mt-4 text-3xl font-bold tracking-tight text-cream-paper">
+              {content.contactSales.headline}
+            </h2>
+            <p className="mt-4 leading-relaxed text-cream-paper/80">{content.contactSales.text}</p>
+            <ul className="mt-6 space-y-3">
+              {content.contactSales.points.map((point) => (
+                <li key={point} className="flex gap-3 text-cream-paper/90">
+                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-saffron" aria-hidden="true" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ContactForm form={content.contactSales.form} topic="workflow-sales" markRequired />
         </div>
       </section>
+
+      <RelatedProducts group="accounting" current="workflow" />
     </>
   );
 }

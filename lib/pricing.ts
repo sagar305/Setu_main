@@ -31,7 +31,7 @@ export type PricingPlan = {
    * It is a different, larger product rather than a paid tier of this plan,
    * so the free plan's own price stays ₹0 and its features stay free.
    */
-  paidSoon?: { name: string; note: string };
+  paidSoon?: { name: string; note: string; href?: string };
   cta: { label: string; href: string };
 };
 

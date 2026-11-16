@@ -36,8 +36,10 @@ function baseUrl(mode: CashfreeMode): string {
 }
 
 /** Order ids are public (they ride on the return URL) so they must be unguessable. */
-export function newOrderId(): string {
-  return `qrm_${Date.now().toString(36)}_${randomBytes(12).toString("hex")}`;
+
+/** "qrm_…" for QR Menu, "swf_…" for Setu Workflow: the prefix says whose order it is. */
+export function newOrderId(prefix: "qrm" | "swf" | "rtl" = "qrm"): string {
+  return `${prefix}_${Date.now().toString(36)}_${randomBytes(12).toString("hex")}`;
 }
 
 /** Cashfree only allows these characters in an order id. */

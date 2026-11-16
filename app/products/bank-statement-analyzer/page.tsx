@@ -46,6 +46,7 @@ import { ImportStep } from "@/components/tools/BankStatementAnalyzer/ImportStep"
 import { StepNav } from "@/components/tools/BankStatementAnalyzer/StepNav";
 import { SampleDownload } from "@/components/tools/BankStatementAnalyzer/SampleDownload";
 import { Faq } from "@/components/Faq";
+import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { FadeIn, FadeInStagger, FadeInStaggerItem } from "@/components/motion/FadeIn";
 import { freeOffer } from "@/lib/schema";
 import { DEMO_TOTALS } from "@/lib/bankStatement/demo/sampleStatement";
@@ -844,6 +845,8 @@ export default function BankStatementAnalyzerPage() {
           </div>
         </div>
       </section>
+
+      <RelatedProducts group="accounting" current="bank-statement-analyzer" />
 
       <Faq headline="Bank Statement Analyzer — questions" items={FAQ_ITEMS} />
     </>

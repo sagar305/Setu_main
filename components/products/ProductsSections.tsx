@@ -100,10 +100,17 @@ export function ProductsSections({
                 {"paidSoon" in product && product.paidSoon && (
                   <div className="mt-6 rounded-xl border border-muted-line/30 bg-cream/60 p-4">
                     <p className="text-xs font-semibold uppercase tracking-wide text-muted-warm">
-                      {content.labels.paidSoonEyebrow}
+                      {"href" in product.paidSoon && product.paidSoon.href ? content.labels.paidAvailableEyebrow : content.labels.paidSoonEyebrow}
                     </p>
                     <p className="mt-1 text-sm text-ink/80">
-                      <span className="font-semibold text-ink">{product.paidSoon.name}</span> —{" "}
+                      {"href" in product.paidSoon && product.paidSoon.href ? (
+                        <Link prefetch={false} href={product.paidSoon.href} className="font-semibold text-indigo hover:underline">
+                          {product.paidSoon.name}
+                        </Link>
+                      ) : (
+                        <span className="font-semibold text-ink">{product.paidSoon.name}</span>
+                      )}{" "}
+                      —{" "}
                       {product.paidSoon.note} {content.labels.paidSoonSuffix}
                     </p>
                   </div>

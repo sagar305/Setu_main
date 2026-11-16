@@ -40,16 +40,20 @@ export type InvoiceInput = {
   customerPhone?: string;
   /** The gateway's name, as in "Paid via PayPal". */
   paidVia: string;
+  /** Setu Retail and other products; QR Menu when left out. */
+  product?: { name: string; line: string; invoicePrefix: string };
 };
+
+const QR_MENU_PRODUCT = { name: "Setu QR Menu", invoicePrefix: "SQM" };
 
 /**
  * A stable invoice number for an order, so the webhook and the return page
  * (which may both email it) always print the same one.
  */
-export function invoiceNumber(orderId: string, issuedAt: Date): string {
+export function invoiceNumber(orderId: string, issuedAt: Date, prefix = QR_MENU_PRODUCT.invoicePrefix): string {
   const day = issuedAt.toISOString().slice(0, 10).replace(/-/g, "");
   const suffix = orderId.replace(/[^A-Za-z0-9]/g, "").slice(-8).toUpperCase();
-  return `SQM-${day}-${suffix}`;
+  return `${prefix}-${day}-${suffix}`;
 }
 
 export function formatMoney(amount: number, currency: string): string {
@@ -113,7 +117,7 @@ export function buildInvoicePdf(input: InvoiceInput): Buffer {
   seller.forEach((line, index) => doc.text(line, left, y + 16 + index * 14));
 
   const details: [string, string][] = [
-    ["Invoice no.", invoiceNumber(input.orderId, input.issuedAt)],
+    ["Invoice no.", invoiceNumber(input.orderId, input.issuedAt, input.product?.invoicePrefix)],
     ["Date", formatDate(input.issuedAt)],
     ["Order ID", input.orderId],
     ["Payment", `Paid via ${input.paidVia}`],
@@ -153,7 +157,7 @@ export function buildInvoicePdf(input: InvoiceInput): Buffer {
 
   const period = input.billing === "yearly" ? "Yearly" : "Monthly";
   doc.setFont("helvetica", "normal");
-  doc.text(`Setu QR Menu premium - ${period} (${input.days} days)`, left + 10, y + 20);
+  doc.text(input.product?.line ?? `Setu QR Menu premium - ${period} (${input.days} days)`, left + 10, y + 20);
   doc.setTextColor(...MUTED);
   doc.setFontSize(9);
   doc.text(
@@ -202,7 +206,7 @@ export function buildInvoicePdf(input: InvoiceInput): Buffer {
   doc.setDrawColor(...LINE);
   doc.line(left, footerY - 16, right, footerY - 16);
   doc.text(
-    "Thank you for choosing Setu QR Menu. This is a computer-generated invoice and needs no signature.",
+    `Thank you for choosing ${input.product?.name ?? QR_MENU_PRODUCT.name}. This is a computer-generated invoice and needs no signature.`,
     width / 2,
     footerY,
     { align: "center" }

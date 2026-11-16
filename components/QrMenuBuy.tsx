@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { KeyRound, Loader2, ShoppingCart } from "lucide-react";
 import { formatPrice, yearlySavingPercent, type PricingRegionId } from "@/lib/pricing";
+import { browserTimezone, loadCashfree } from "@/lib/cashfreeClient";
 import {
   BILLING_DAYS,
   BILLINGS,
@@ -12,39 +13,6 @@ import {
   regionFor,
   type Billing,
 } from "@/lib/qrMenuCheckout";
-
-type CashfreeCheckout = {
-  checkout: (options: { paymentSessionId: string; redirectTarget?: "_self" }) => Promise<unknown>;
-};
-
-declare global {
-  interface Window {
-    Cashfree?: (options: { mode: "sandbox" | "production" }) => CashfreeCheckout;
-  }
-}
-
-const SDK_URL = "https://sdk.cashfree.com/js/v3/cashfree.js";
-
-function loadCashfree(): Promise<NonNullable<Window["Cashfree"]>> {
-  if (window.Cashfree) return Promise.resolve(window.Cashfree);
-  return new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = SDK_URL;
-    script.async = true;
-    script.onload = () =>
-      window.Cashfree ? resolve(window.Cashfree) : reject(new Error("Cashfree did not load"));
-    script.onerror = () => reject(new Error("Cashfree did not load"));
-    document.head.appendChild(script);
-  });
-}
-
-function browserTimezone(): string | null {
-  try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? null;
-  } catch {
-    return null;
-  }
-}
 
 /**
  * Buys QR Menu time. The region is detected rather than chosen, the buyer only
