@@ -27,6 +27,17 @@ function sourceFiles(directory: string): string[] {
 
 const PRODUCTS = Object.keys(PRODUCT_ACTIVITIES) as ActivityProduct[];
 
+/**
+ * Where each product's calls live. Most announce from their store; the bank
+ * statement analyzer announces from its screens, because nothing under
+ * lib/bankStatement may know that anything outside it exists.
+ */
+function homeOf(product: ActivityProduct): string {
+  return product === "bank"
+    ? join("components", "tools", "BankStatementAnalyzer")
+    : join("lib", product);
+}
+
 describe("the signal an app raises", () => {
   it("accepts a listed milestone", () => {
     expect(parseActivity({ product: "pos", name: "order_created" })).toEqual({
@@ -71,6 +82,23 @@ describe("the signal an app raises", () => {
   });
 });
 
+describe("the bank statement analyzer", () => {
+  // Its promise is the strictest on the site, so its milestones say the least:
+  // that a step was reached. Not how many statements, rows or rupees.
+  it("never sends a count", () => {
+    expect(parseActivity({ product: "bank", name: "statement_imported", count: 3 })).toEqual({
+      product: "bank",
+      name: "statement_imported",
+    });
+  });
+
+  it("announces nothing from the code that reads the statement", () => {
+    for (const file of sourceFiles(join(process.cwd(), "lib", "bankStatement"))) {
+      expect(stripComments(readFileSync(file, "utf8")), file).not.toMatch(/reportActivity|@\/lib\/activity/);
+    }
+  });
+});
+
 describe("the file the apps call", () => {
   const source = stripComments(readFileSync(join(process.cwd(), "lib", "activity.ts"), "utf8"));
 
@@ -93,7 +121,7 @@ describe("the calls inside the apps", () => {
   const calls: { file: string; product: string; name: string; count: string | undefined }[] = [];
 
   for (const product of PRODUCTS) {
-    for (const file of sourceFiles(join(process.cwd(), "lib", product))) {
+    for (const file of sourceFiles(join(process.cwd(), homeOf(product)))) {
       const source = stripComments(readFileSync(file, "utf8"));
       for (const match of source.matchAll(CALL)) {
         const [first, second, third] = match[1].split(",").map((part) => part.trim());
@@ -114,7 +142,7 @@ describe("the calls inside the apps", () => {
   it("announce only as the product they live in, and only listed names", () => {
     for (const call of calls) {
       expect(call.file, `${call.product} announced from ${call.file}`).toContain(
-        join("lib", call.product)
+        homeOf(call.product as ActivityProduct)
       );
       expect(PRODUCT_ACTIVITIES[call.product as ActivityProduct], call.file).toContain(call.name);
     }

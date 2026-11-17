@@ -3,6 +3,7 @@
 // Step 5 — Export. Excel workbook, PDF report and a plain CSV, all generated in
 // the browser (§18). Nothing is uploaded and no email is sent.
 
+import { reportActivity } from "@/lib/activity";
 import { useI18n } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
 import { intlLocaleFor } from "@/lib/i18n/pages";
@@ -55,6 +56,7 @@ export function ExportStep() {
         categories
       );
       actions.log({ code: "REPORT_EXPORTED", format: "excel" }, "Report exported", "Excel workbook");
+      reportActivity("bank", "excel_exported");
     } finally {
       setBusy(null);
     }
@@ -72,6 +74,7 @@ export function ExportStep() {
         lang
       );
       actions.log({ code: "REPORT_EXPORTED", format: "pdf" }, "Report exported", "PDF report");
+      reportActivity("bank", "pdf_exported");
     } finally {
       setBusy(null);
     }
@@ -106,6 +109,7 @@ export function ExportStep() {
         )
       );
       actions.log({ code: "REPORT_EXPORTED", format: "csv" }, "Report exported", "Transactions CSV");
+      reportActivity("bank", "csv_exported");
     } finally {
       setBusy(null);
     }

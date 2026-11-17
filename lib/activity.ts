@@ -118,6 +118,17 @@ export const PRODUCT_ACTIVITIES = {
     "token_completed",
     "backup_restored",
   ],
+  bank: [
+    "statement_imported",
+    "sample_loaded",
+    "ai_categorisation_run",
+    "rule_created",
+    "category_created",
+    "reconciliation_run",
+    "excel_exported",
+    "pdf_exported",
+    "csv_exported",
+  ],
 } as const;
 
 export type ActivityProduct = keyof typeof PRODUCT_ACTIVITIES;
@@ -169,6 +180,8 @@ export function parseActivity(detail: unknown): Activity | null {
   if (typeof name !== "string" || !names.includes(name)) return null;
 
   const activity: Activity = { product: product as ActivityProduct, name };
+  // The bank statement analyzer says that a step happened and nothing more.
+  if (product === "bank") return activity;
   if (typeof count === "number" && Number.isInteger(count) && count >= 0) {
     activity.count = Math.min(count, MAX_COUNT);
   }

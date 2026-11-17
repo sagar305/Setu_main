@@ -305,6 +305,12 @@ In PostHog each milestone is its own event (`order_created`, `job_created`,
 `payment_received`, `backup_restored`) per app. The full list is
 `PRODUCT_ACTIVITIES` in `lib/activity.ts`.
 
+The bank statement analyzer (`product: "bank"`) announces from its screens in
+`components/tools/BankStatementAnalyzer/`, never from `lib/bankStatement/**`,
+and never carries a count: `statement_imported`, `sample_loaded`,
+`ai_categorisation_run`, `rule_created`, `category_created`,
+`reconciliation_run`, `excel_exported`, `pdf_exported`, `csv_exported`.
+
 To add one: add the name to the list, then call `reportActivity` in the store
 right after the write succeeds. Report a create only on create (`if (!existing)`),
 not on every save.

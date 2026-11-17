@@ -9,6 +9,7 @@
 // No Zustand (decision 2) — feature hooks over React state, as the repo does.
 
 import { useI18n } from "@/lib/i18n";
+import { reportActivity } from "@/lib/activity";
 import { fill } from "@/lib/i18n/translate";
 import {
   createContext,
@@ -408,12 +409,14 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
   const saveRule = useCallback(
     async (rule: ClassificationRule) => {
       let rules: ClassificationRule[] = [];
+      const isNew = !stateRef.current.rules.some((existing) => existing.id === rule.id);
       setState((current) => {
         rules = [...current.rules.filter((existing) => existing.id !== rule.id), rule];
         writeRules(rules);
         return { ...current, rules };
       });
       appendAudit({ code: "RULE_SAVED", name: rule.name }, "Rule saved", rule.name);
+      if (isNew) reportActivity("bank", "rule_created");
       setState((current) => ({ ...current, audit: readAudit() }));
     },
     []
@@ -647,6 +650,7 @@ export function AnalyzerProvider({ children }: { children: ReactNode }) {
       }
 
       setState((state) => ({ ...state, audit: readAudit() }));
+      reportActivity("bank", "category_created");
       return { created: true, categoryId, rows };
     },
     [resolveAiSuggestion]
