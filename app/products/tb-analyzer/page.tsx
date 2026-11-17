@@ -261,9 +261,9 @@ const PRIVACY: Feature[] = [
   },
   {
     icon: CircleSlash,
-    title: "No analytics, no cloud services",
+    title: "Your figures are never tracked",
     description:
-      "The app makes no network calls with your data and loads no third-party scripts at runtime.",
+      "The app makes no network calls and loads no third-party scripts at runtime. We count only that a step happened, such as a review pack being exported, never what was in it.",
   },
   {
     icon: Lock,
@@ -372,7 +372,7 @@ const softwareApplicationSchema = {
     "Peer company comparison",
     "Excel and PDF review packs",
     "Works offline after first visit",
-    "No upload, no login, no analytics",
+    "No upload, no login, figures never leave your device",
   ],
   offers: freeOffer({ url: "/products/tb-analyzer" }),
   provider: {

@@ -129,6 +129,17 @@ export const PRODUCT_ACTIVITIES = {
     "pdf_exported",
     "csv_exported",
   ],
+  // The TB Analyser is a separate app (github.com/sagar305/TB-analyser) framed
+  // on its product page. It raises the same event on this window from inside
+  // its frame, through its own frontend/activity.js; the names must match.
+  tb: [
+    "sample_loaded",
+    "template_downloaded",
+    "periods_imported",
+    "cash_flow_saved",
+    "excel_exported",
+    "pdf_exported",
+  ],
 } as const;
 
 export type ActivityProduct = keyof typeof PRODUCT_ACTIVITIES;
@@ -180,8 +191,9 @@ export function parseActivity(detail: unknown): Activity | null {
   if (typeof name !== "string" || !names.includes(name)) return null;
 
   const activity: Activity = { product: product as ActivityProduct, name };
-  // The bank statement analyzer says that a step happened and nothing more.
-  if (product === "bank") return activity;
+  // The two analysers read a client's books. They say that a step happened
+  // and nothing more.
+  if (product === "bank" || product === "tb") return activity;
   if (typeof count === "number" && Number.isInteger(count) && count >= 0) {
     activity.count = Math.min(count, MAX_COUNT);
   }

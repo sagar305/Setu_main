@@ -311,6 +311,13 @@ and never carries a count: `statement_imported`, `sample_loaded`,
 `ai_categorisation_run`, `rule_created`, `category_created`,
 `reconciliation_run`, `excel_exported`, `pdf_exported`, `csv_exported`.
 
+The TB Analyser (`product: "tb"`) is a separate app in `sagar305/TB-analyser`,
+framed at `/products/tb-analyzer`. Its own `frontend/activity.js` raises the
+same event on this window from inside the frame, so the names in that file and
+in `PRODUCT_ACTIVITIES.tb` must match: `sample_loaded`, `template_downloaded`,
+`periods_imported`, `cash_flow_saved`, `excel_exported`, `pdf_exported`. It
+never carries a count either.
+
 To add one: add the name to the list, then call `reportActivity` in the store
 right after the write succeeds. Report a create only on create (`if (!existing)`),
 not on every save.

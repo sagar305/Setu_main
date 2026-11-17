@@ -28,6 +28,13 @@ function sourceFiles(directory: string): string[] {
 const PRODUCTS = Object.keys(PRODUCT_ACTIVITIES) as ActivityProduct[];
 
 /**
+ * Products whose calls can be read here. The TB Analyser lives in its own
+ * repository and is only framed by this site, so its calls are checked by its
+ * own tests; what this site can and does check is what it accepts from it.
+ */
+const IN_THIS_REPO = PRODUCTS.filter((product) => product !== "tb");
+
+/**
  * Where each product's calls live. Most announce from their store; the bank
  * statement analyzer announces from its screens, because nothing under
  * lib/bankStatement may know that anything outside it exists.
@@ -99,6 +106,16 @@ describe("the bank statement analyzer", () => {
   });
 });
 
+describe("the TB Analyser, which is framed rather than built here", () => {
+  it("is heard from inside its frame, by name only", () => {
+    expect(parseActivity({ product: "tb", name: "excel_exported", count: 3, company: "Aarohi" })).toEqual({
+      product: "tb",
+      name: "excel_exported",
+    });
+    expect(parseActivity({ product: "tb", name: "order_created" })).toBeNull();
+  });
+});
+
 describe("the file the apps call", () => {
   const source = stripComments(readFileSync(join(process.cwd(), "lib", "activity.ts"), "utf8"));
 
@@ -120,7 +137,7 @@ describe("the calls inside the apps", () => {
   const CALL = /reportActivity\(([^)]*)\)/g;
   const calls: { file: string; product: string; name: string; count: string | undefined }[] = [];
 
-  for (const product of PRODUCTS) {
+  for (const product of IN_THIS_REPO) {
     for (const file of sourceFiles(join(process.cwd(), homeOf(product)))) {
       const source = stripComments(readFileSync(file, "utf8"));
       for (const match of source.matchAll(CALL)) {
@@ -157,7 +174,7 @@ describe("the calls inside the apps", () => {
   });
 
   it("use every name on the list, so the list is not a wish", () => {
-    for (const product of PRODUCTS) {
+    for (const product of IN_THIS_REPO) {
       const used = new Set(calls.filter((call) => call.product === product).map((call) => call.name));
       expect([...used].sort(), product).toEqual([...PRODUCT_ACTIVITIES[product]].sort());
     }
