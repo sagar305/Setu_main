@@ -37,6 +37,33 @@ export const CHANGE_TYPE_LABELS: Record<ChangeType, string> = {
 /** Newest first. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-17",
+    type: "feature",
+    product: "Tuition Class Manager",
+    title: "See your monthly profit: fees collected minus what the class costs",
+    description:
+      "Reports now show expenses and net profit for the month. Add rent, salaries and other costs right there; they are shared with the Expense Tracker.",
+    href: "/products/free-tuition-software",
+  },
+  {
+    date: "2026-11-17",
+    type: "feature",
+    product: "Tuition Class Manager",
+    title: "Set a maximum number of students for each batch",
+    description:
+      "A batch with a limit shows its seats taken and cannot be given more students once it is full.",
+    href: "/products/free-tuition-software",
+  },
+  {
+    date: "2026-11-17",
+    type: "improvement",
+    product: "Tuition Class Manager",
+    title: "Attendance lists only the batches that have a class that day",
+    description:
+      "Other batches are one tap away when you hold an extra class.",
+    href: "/products/free-tuition-software",
+  },
+  {
     date: "2026-11-14",
     type: "improvement",
     product: "Setu Workflow",

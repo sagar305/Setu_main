@@ -82,6 +82,7 @@ export function StudentDetail({
   const [leaveOpen, setLeaveOpen] = useState(false);
   const [leftOn, setLeftOn] = useState(todayIso());
   const [leaveReason, setLeaveReason] = useState("");
+  const [reinstateError, setReinstateError] = useState("");
   const currency = business?.currency ?? "INR";
   const period = currentMonthKey();
 
@@ -177,12 +178,23 @@ export function StudentDetail({
             </p>
             <button
               type="button"
-              onClick={() => void reinstateStudent(student.id)}
+              onClick={() => {
+                setReinstateError("");
+                // Refused when one of their batches filled up while they were away.
+                reinstateStudent(student.id).catch((caught) =>
+                  setReinstateError(caught instanceof Error ? caught.message : t("tuSfErrSave"))
+                );
+              }}
               className={`${secondaryBtnClass} px-3 py-1.5`}
             >
               <RotateCcw className="h-4 w-4" />
               {t("tuSdTheyreBack")}
             </button>
+            {reinstateError && (
+              <p role="alert" className="w-full text-sm text-red-700">
+                {reinstateError}
+              </p>
+            )}
           </div>
         )}
 
