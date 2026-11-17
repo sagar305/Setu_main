@@ -17,6 +17,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import { nowIso as posNowIso, type Business } from "@/lib/pos/types";
 import {
@@ -481,6 +482,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
       setCategories([category]);
       setItems(newItems);
       setStatus(newItems.length > 0 ? "ready" : "welcome");
+      reportActivity("rental", "setup_completed");
     },
     []
   );
@@ -555,6 +557,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         : { ...input, id: generateId(), createdAt: timestamp, updatedAt: timestamp };
       await rentalBatch({ items: [next] });
       setItems((rows) => [...rows.filter((row) => row.id !== next.id), next]);
+      if (!existing) reportActivity("rental", "item_created");
       return next;
     },
     [items]
@@ -619,6 +622,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         : { ...input, id: generateId(), createdAt: timestamp, updatedAt: timestamp };
       await rentalBatch({ customers: [next] });
       setCustomers((rows) => [...rows.filter((row) => row.id !== next.id), next]);
+      if (!existing) reportActivity("rental", "customer_created");
       return next;
     },
     [customers]
@@ -686,6 +690,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         ...current,
         nextBookingNumber: Math.max(current.nextBookingNumber + 1, 1),
       }));
+      reportActivity("rental", "booking_created");
       return created;
     },
     [bookings, itemMap, settings, today, writeBooking]
@@ -719,6 +724,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         ...booking,
         payments: [...booking.payments, buildPayment(payment)],
       });
+      reportActivity("rental", "payment_received");
     },
     [bookingOrThrow, buildPayment, writeBooking]
   );
@@ -787,6 +793,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         const byId = new Map(touchedUnits.map((unit) => [unit.id, unit]));
         setUnits((rows) => rows.map((unit) => byId.get(unit.id) ?? unit));
       }
+      reportActivity("rental", "booking_dispatched");
       return void saved;
     },
     [bookingOrThrow, units, writeBooking]
@@ -905,6 +912,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         const byId = new Map(touchedUnits.map((unit) => [unit.id, unit]));
         setUnits((rows) => rows.map((unit) => byId.get(unit.id) ?? unit));
       }
+      reportActivity("rental", "booking_returned");
     },
     [bookingOrThrow, buildPayment, itemMap, persistSettings, settings, units, writeBooking]
   );
@@ -933,6 +941,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
         const byId = new Map(touchedUnits.map((unit) => [unit.id, unit]));
         setUnits((rows) => rows.map((unit) => byId.get(unit.id) ?? unit));
       }
+      reportActivity("rental", "booking_cancelled");
     },
     [bookingOrThrow, units, writeBooking]
   );
@@ -1001,6 +1010,7 @@ export function RentalProvider({ children }: { children: ReactNode }) {
     async (backup: RentalBackup) => {
       await restoreBackup(backup);
       await load();
+      reportActivity("rental", "backup_restored");
     },
     [load]
   );

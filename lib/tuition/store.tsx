@@ -7,6 +7,7 @@
 // another Setu tool on this device lands straight in the app with their name,
 // phone, logo and UPI ID already filled in.
 
+import { reportActivity } from "@/lib/activity";
 import { useI18n } from "@/lib/i18n";
 import { fill, translate } from "@/lib/i18n/translate";
 import {
@@ -385,6 +386,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setBusiness(newBusiness);
       setSettings(newSettings);
       setStatus("ready");
+      reportActivity("tuition", "setup_completed");
     },
     [batchWithSync, lang]
   );
@@ -422,6 +424,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const batch: Batch = { ...input, id: generateId(), createdAt: nowIso(), updatedAt: nowIso() };
       await batchWithSync({ batches: [batch] }, {}, ["t_meta"]);
       setBatches((prev) => [...prev, batch].sort((a, b) => a.startTime.localeCompare(b.startTime)));
+      reportActivity("tuition", "batch_created");
       return batch;
     },
     [batchWithSync, assertBatchAllowed]
@@ -494,6 +497,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setStudents((prev) => [...prev, student].sort((a, b) => a.name.localeCompare(b.name)));
       // Raise the new student's dues now, not on the next visit.
       duesGeneratedRef.current = false;
+      reportActivity("tuition", "student_created");
       return student;
     },
     [batchWithSync, assertSeats]
@@ -634,6 +638,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       await batchWithSync({ students: created }, {}, ["t_students"]);
       setStudents((prev) => [...prev, ...created].sort((a, b) => a.name.localeCompare(b.name)));
       duesGeneratedRef.current = false;
+      reportActivity("tuition", "students_imported", created.length);
       return created.length;
     },
     [batchWithSync, batches, students]
@@ -666,6 +671,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
         for (const record of records) byId.set(record.id, record);
         return [...byId.values()];
       });
+      reportActivity("tuition", "attendance_marked");
     },
     [attendance, batchWithSync]
   );
@@ -716,6 +722,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       if (created.length === 0 && redated.length === 0) return 0;
       await batchWithSync({ fee_dues: [...created, ...redated] }, {}, ["t_fees"]);
       setDues((prev) => [...prev.map((d) => redated.find((r) => r.id === d.id) ?? d), ...created]);
+      if (created.length > 0) reportActivity("tuition", "fees_generated", created.length);
       return created.length;
     },
     [batchWithSync, batches, dues, lang, settings.feeDueDay, students]
@@ -799,6 +806,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       );
       setPayments((prev) => [payment, ...prev]);
       setSettings(nextSettings);
+      reportActivity("tuition", "payment_received");
       return payment;
     },
     [students, settings, batchWithSync]
@@ -819,6 +827,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const test: TestRecord = { ...input, id: generateId(), createdAt: nowIso() };
       await batchWithSync({ tests: [test] }, {}, ["t_marks"]);
       setTests((prev) => [test, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
+      reportActivity("tuition", "test_created");
       return test;
     },
     [batchWithSync]
@@ -938,6 +947,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ enquiries: [enquiry] }, {}, ["t_meta"]);
       setEnquiries((prev) => [enquiry, ...prev]);
+      reportActivity("tuition", "enquiry_created");
     },
     [batchWithSync]
   );
@@ -1066,6 +1076,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       await updateSettings({ sheetSyncUrl: trimmed });
       // The first sync sends everything.
       await batchWithSync({}, {}, SYNC_SLICES);
+      reportActivity("tuition", "sheet_connected");
     },
     [updateSettings, batchWithSync]
   );
@@ -1117,6 +1128,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const loaded = await loadAll();
       duesGeneratedRef.current = false;
       setStatus(loaded.business ? "ready" : "welcome");
+      reportActivity("tuition", "backup_restored");
     },
     [loadAll]
   );
@@ -1139,6 +1151,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const loaded = await loadAll();
       duesGeneratedRef.current = false;
       setStatus(loaded.business ? "ready" : "welcome");
+      reportActivity("tuition", "backup_restored");
     },
     [loadAll]
   );

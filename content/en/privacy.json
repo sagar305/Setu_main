@@ -8,7 +8,7 @@
     "headline": "Privacy Policy",
     "subheadline": "What we measure, what we deliberately cannot see, and how to switch it off."
   },
-  "lastUpdated": "Last updated 7 September 2026.",
+  "lastUpdated": "Last updated 16 November 2026.",
   "translationNote": "This translation is provided for convenience. If it differs from the English version, the English version applies.",
   "sections": [
     {
@@ -25,6 +25,7 @@
       "list": [
         "Pages opened, and the page you arrived from.",
         "Buttons and links pressed — identified by the name we give them in our own code, such as “download invoice PDF”, never by what they contain on screen.",
+        "Milestones inside the free apps, such as “order created” or “student added” — recorded as a name from a fixed list in our own code. Only the fact that it happened, never what was in it.",
         "How far down a page you scrolled, and roughly how long you stayed.",
         "Whether the device is a phone or a computer, and which country the request came from.",
         "A random identifier stored in your browser, so a repeat visit is recognisable as a repeat visit.",

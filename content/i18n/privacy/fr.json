@@ -8,7 +8,7 @@
     "headline": "Politique de confidentialité",
     "subheadline": "Ce que nous mesurons, ce que nous ne pouvons délibérément pas voir, et comment le couper."
   },
-  "lastUpdated": "Dernière mise à jour le 7 septembre 2026.",
+  "lastUpdated": "Dernière mise à jour le 16 novembre 2026.",
   "translationNote": "Cette traduction est fournie par commodité. En cas de divergence avec la version anglaise, c'est la version anglaise qui s'applique.",
   "sections": [
     {
@@ -23,6 +23,7 @@
       "list": [
         "Les pages ouvertes, et la page d'où vous venez.",
         "Les boutons et liens cliqués — identifiés par le nom que nous leur donnons dans notre propre code, par exemple « download invoice PDF », jamais par ce qu'ils affichent à l'écran.",
+        "Les étapes franchies dans les applications gratuites, comme « commande créée » ou « élève ajouté » — enregistrées sous un nom tiré d’une liste fixe de notre propre code. Uniquement le fait que cela s’est produit, jamais ce que cela contenait.",
         "Jusqu'où vous avez fait défiler la page, et approximativement combien de temps vous êtes resté.",
         "Si l'appareil est un téléphone ou un ordinateur, et de quel pays vient la requête.",
         "Un identifiant aléatoire stocké dans votre navigateur, pour qu'une visite répétée soit reconnue comme telle.",

@@ -6,6 +6,7 @@
 // in the existing /tools/bank-reconciliation tool, which we link to rather than
 // duplicate.
 
+import { reportActivity } from "@/lib/activity";
 import { useI18n } from "@/lib/i18n";
 import { fill, translate, type TKey } from "@/lib/i18n/translate";
 import { intlLocaleFor } from "@/lib/i18n/pages";
@@ -95,6 +96,7 @@ export function ReconcileStep() {
       "Reconciliation run",
       `${matches.length} results`
     );
+    reportActivity("bank", "reconciliation_run");
   }, [actions, activeTransactions, fileName, ledger]);
 
   const summary = useMemo(

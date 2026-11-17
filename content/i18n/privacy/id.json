@@ -8,7 +8,7 @@
     "headline": "Kebijakan Privasi",
     "subheadline": "Apa yang kami ukur, apa yang sengaja tidak bisa kami lihat, dan cara mematikannya."
   },
-  "lastUpdated": "Terakhir diperbarui 7 September 2026.",
+  "lastUpdated": "Terakhir diperbarui 16 November 2026.",
   "translationNote": "Terjemahan ini disediakan demi kemudahan. Bila berbeda dari versi bahasa Inggris, versi bahasa Inggris yang berlaku.",
   "sections": [
     {
@@ -23,6 +23,7 @@
       "list": [
         "Halaman yang dibuka, dan halaman asal Anda datang.",
         "Tombol dan tautan yang ditekan — dikenali dari nama yang kami beri di kode kami sendiri, misalnya “download invoice PDF”, bukan dari isinya di layar.",
+        "Tonggak di dalam aplikasi gratis, seperti “pesanan dibuat” atau “siswa ditambahkan” — dicatat dengan nama dari daftar tetap di kode kami sendiri. Hanya fakta bahwa hal itu terjadi, tidak pernah isinya.",
         "Seberapa jauh Anda menggulir halaman, dan kira-kira berapa lama Anda bertahan.",
         "Apakah perangkatnya ponsel atau komputer, dan dari negara mana permintaan datang.",
         "Sebuah penanda acak yang disimpan di peramban Anda, agar kunjungan ulang dikenali sebagai kunjungan ulang.",

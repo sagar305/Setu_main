@@ -26,6 +26,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbClearStores, dbGetAll, type StoreName } from "@/lib/pos/db";
 import { generateId, nowIso, type Business, type Customer } from "@/lib/pos/types";
 import { useI18n } from "@/lib/i18n";
@@ -418,6 +419,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       setSettings(newSettings);
       setDoctors([doctor]);
       setStatus("ready");
+      reportActivity("clinic", "setup_completed");
     },
     [batchWithSync, lang]
   );
@@ -444,6 +446,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ clinic_doctors: [doctor] }, {}, ["c_meta"]);
       setDoctors((prev) => [...prev, doctor].sort((a, b) => a.name.localeCompare(b.name)));
+      reportActivity("clinic", "doctor_created");
       return doctor;
     },
     [batchWithSync]
@@ -516,6 +519,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       );
       setPatients((prev) => [...prev, patient].sort((a, b) => a.name.localeCompare(b.name)));
       setSettings(nextSettings);
+      reportActivity("clinic", "patient_registered");
       return patient;
     },
     [settings, batchWithSync]
@@ -599,6 +603,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         [...prev, ...created].sort((a, b) => a.name.localeCompare(b.name))
       );
       setSettings(nextSettings);
+      reportActivity("clinic", "patients_imported", created.length);
       return created.length;
     },
     [settings, batchWithSync, findCustomerByPhone]
@@ -625,6 +630,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ clinic_appointments: [appointment] }, {}, ["c_appointments"]);
       setAppointments((prev) => [...prev, appointment]);
+      reportActivity("clinic", "appointment_booked");
       return appointment;
     },
     [batchWithSync]
@@ -690,6 +696,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ clinic_appointments: [appointment] }, {}, ["c_appointments"]);
       setAppointments((prev) => [...prev, appointment]);
+      reportActivity("clinic", "walk_in_added");
       return appointment;
     },
     [appointments, settings.slotMinutes, batchWithSync]
@@ -826,6 +833,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       );
       setVisits((prev) => [visit, ...prev]);
       setAppointments((prev) => prev.map((a) => (a.id === appointmentId ? nextAppointment : a)));
+      reportActivity("clinic", "consult_started");
       return visit;
     },
     [appointments, visits, blankVisit, batchWithSync, patchAppointment, lang]
@@ -836,6 +844,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       const visit = blankVisit(patientId, doctorId, null);
       await batchWithSync({ clinic_visits: [visit] }, {}, ["c_visits"]);
       setVisits((prev) => [visit, ...prev]);
+      reportActivity("clinic", "consult_started");
       return visit;
     },
     [blankVisit, batchWithSync]
@@ -919,6 +928,8 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
         const settled = nextAppointment;
         setAppointments((prev) => prev.map((a) => (a.id === settled.id ? settled : a)));
       }
+      // Re-finalising an edited visit is the same prescription, not a new one.
+      if (!visit.finalisedAt) reportActivity("clinic", "prescription_created");
     },
     [visits, medicines, appointments, batchWithSync]
   );
@@ -1086,6 +1097,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       );
       setBills((prev) => [bill, ...prev]);
       setSettings(nextSettings);
+      reportActivity("clinic", "bill_created");
       return bill;
     },
     [settings, batchWithSync]
@@ -1124,6 +1136,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ clinic_bills: [next] }, {}, ["c_bills"]);
       setBills((prev) => prev.map((b) => (b.id === id ? next : b)));
+      reportActivity("clinic", "payment_received");
     },
     [bills, batchWithSync]
   );
@@ -1188,6 +1201,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       if (!test.ok) throw new Error(test.error ?? translate(lang, "appCouldNotReachScript"));
       await updateSettings({ sheetSyncUrl: trimmed });
       setDirtySlices([...SYNC_SLICES]);
+      reportActivity("clinic", "sheet_connected");
     },
     [updateSettings]
   );
@@ -1231,6 +1245,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       });
       await loadAll();
       setStatus("ready");
+      reportActivity("clinic", "backup_restored");
     },
     [loadAll]
   );
@@ -1248,6 +1263,7 @@ export function ClinicProvider({ children }: { children: ReactNode }) {
       await restoreBackup(backup);
       const loaded = await loadAll();
       setStatus(loaded.hasSetup && loaded.doctors.length > 0 ? "ready" : "welcome");
+      reportActivity("clinic", "backup_restored");
     },
     [loadAll]
   );

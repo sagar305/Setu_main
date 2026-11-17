@@ -22,6 +22,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import { nowIso as posNowIso, type Business } from "@/lib/pos/types";
 import {
@@ -361,6 +362,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       setTechnicians(techs);
       setStatus("ready");
+      reportActivity("repair", "setup_completed");
     },
     []
   );
@@ -404,6 +406,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
           ? previous.map((customer) => (customer.id === record.id ? record : customer))
           : [...previous, record]
       );
+      if (!existing) reportActivity("repair", "customer_created");
       return record;
     },
     [customers]
@@ -517,6 +520,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
       setJobs((previous) => [...previous, job]);
       setSettings((previous) => ({ ...previous, nextJobNumber: previous.nextJobNumber + 1 }));
+      reportActivity("repair", "job_created");
 
       // The link is minted here so the "received" message can carry it. When
       // the shop is offline the job still saves, the message still goes, and
@@ -695,6 +699,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       if (!input.bill) {
         await repairBatch({ jobs: [base] });
         setJobs((previous) => previous.map((job) => (job.id === id ? base : job)));
+        reportActivity("repair", "job_delivered");
         const syncedFree = await applyTracking(base, null);
         await persistTracking(base, syncedFree);
         return syncedFree;
@@ -747,6 +752,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
       setJobs((previous) => previous.map((job) => (job.id === id ? delivered : job)));
       setBills((previous) => [...previous, bill]);
+      reportActivity("repair", "job_delivered");
       setSettings((previous) => ({
         ...previous,
         nextInvoiceNumber: previous.nextInvoiceNumber + 1,
@@ -801,6 +807,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         warrantyClaimOfJobId: original.id,
       });
 
+      reportActivity("repair", "warranty_claim_raised");
       return claim;
     },
     [createJob, jobMap]
@@ -848,6 +855,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       setParts((previous) =>
         existing ? previous.map((part) => (part.id === record.id ? record : part)) : [...previous, record]
       );
+      if (!existing) reportActivity("repair", "part_created");
       return record;
     },
     [partMap]
@@ -970,6 +978,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       const updated: Job = { ...existing, tracking: pushed, trackingQueuedAt: null };
       await repairBatch({ jobs: [updated] });
       setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      reportActivity("repair", "estimate_sent");
       return updated;
     },
     [jobMap, business, settings, billByJob]
@@ -1070,6 +1079,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     async (backup: RepairBackup) => {
       await restoreBackup(backup);
       await load();
+      reportActivity("repair", "backup_restored");
     },
     [load]
   );
