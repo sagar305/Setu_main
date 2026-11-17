@@ -417,8 +417,9 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     status: "built",
     route: "/products/free-tuition-software",
     owns: "students",
-    reads: ["business"],
+    reads: ["business", "expenses"],
     writes: [
+      "expenses",
       "students",
       "batches",
       "attendance",
@@ -435,7 +436,7 @@ export const TOOLKIT_REGISTRY: ToolDescriptor[] = [
     integrations: [
       { with: "business-profile", ux: "Fee receipts carry your name, phone and UPI ID" },
       { with: "upi-qr-generator", ux: "Parents pay a fee reminder straight from the link" },
-      { with: "expense-tracker", ux: "Track what the class costs against what it collects" },
+      { with: "expense-tracker", ux: "Reports show fees collected minus recorded expenses as profit" },
     ],
   },
   {

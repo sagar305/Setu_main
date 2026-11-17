@@ -9,7 +9,7 @@ import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { CalendarDays, Check, MessageCircle, Save, UserX } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
-import { batchesOnDate, studentsInBatch } from "@/lib/tuition/calc";
+import { batchesForAttendance, studentsInBatch } from "@/lib/tuition/calc";
 import { fillTemplate, type OutboundMessage } from "@/lib/tuition/messages";
 import {
   attendanceLabel,
@@ -60,23 +60,49 @@ export function AttendanceScreen({
   const [entries, setEntries] = useState<Record<string, AttendanceStatus>>({});
   const [saved, setSaved] = useState(false);
   const [queueOpen, setQueueOpen] = useState(false);
+  // An extra class on an off day: the teacher asks for the other batches.
+  const [showOthers, setShowOthers] = useState(false);
 
-  const scheduled = useMemo(() => batchesOnDate(batches, date), [batches, date]);
   const activeBatches = useMemo(() => batches.filter((b) => b.active), [batches]);
+  // Only the batches that have a class on the chosen day.
+  const scheduled = useMemo(
+    () => batchesForAttendance(batches, attendance, date),
+    [batches, attendance, date]
+  );
+  const others = useMemo(
+    () => activeBatches.filter((b) => !scheduled.some((s) => s.id === b.id)),
+    [activeBatches, scheduled]
+  );
   const holiday = holidays.find((h) => h.date === date);
 
-  // Default to the first batch running on the chosen day.
+  const listed = useMemo(
+    () => (showOthers ? [...scheduled, ...others] : scheduled),
+    [scheduled, others, showOthers]
+  );
+
+  // Default to the first batch running on the chosen day; a day with no class
+  // selects nothing unless the teacher opened another batch themselves.
   useEffect(() => {
-    if (batchId && activeBatches.some((b) => b.id === batchId)) return;
-    setBatchId(scheduled[0]?.id ?? activeBatches[0]?.id ?? "");
-  }, [scheduled, activeBatches, batchId]);
+    if (batchId && (showOthers ? activeBatches : scheduled).some((b) => b.id === batchId)) return;
+    setBatchId(scheduled[0]?.id ?? "");
+  }, [scheduled, activeBatches, batchId, showOthers]);
+
+  const changeDate = (next: string) => {
+    setDate(next);
+    setShowOthers(false);
+  };
 
   // Opening a specific class from the Today screen jumps straight to it.
   useEffect(() => {
     if (batchRequest?.value) {
       setBatchId(batchRequest.value);
       setDate(todayIso());
+      setShowOthers(!batchesForAttendance(batches, attendance, todayIso()).some(
+        (b) => b.id === batchRequest.value
+      ));
     }
+    // Runs only when the Today screen asks; the lists are read at that moment.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [batchRequest]);
 
   const batch = batches.find((b) => b.id === batchId) ?? null;
@@ -184,13 +210,13 @@ export function AttendanceScreen({
             <input
               type="date"
               value={date}
-              onChange={(event) => setDate(event.target.value || todayIso())}
+              onChange={(event) => changeDate(event.target.value || todayIso())}
               className={`${inputClass} w-auto`}
             />
           </label>
           <button
             type="button"
-            onClick={() => setDate(todayIso())}
+            onClick={() => changeDate(todayIso())}
             className={`${secondaryBtnClass} h-[38px]`}
           >
             {t("today")}
@@ -211,8 +237,7 @@ export function AttendanceScreen({
       )}
 
       <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto pb-1" aria-label={t("tuAtBatches")}>
-        {activeBatches.map((item) => {
-          const runsToday = scheduled.some((b) => b.id === item.id);
+        {listed.map((item) => {
           return (
             <button
               key={item.id}
@@ -230,12 +255,39 @@ export function AttendanceScreen({
                 className={`text-xs ${batchId === item.id ? "text-white/70" : "text-muted"}`}
               >
                 {formatTime(item.startTime, lang)}
-                {runsToday ? t("tuAtRunsToday") : ""}
               </span>
             </button>
           );
         })}
+        {!showOthers && others.length > 0 && listed.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setShowOthers(true)}
+            className="inline-flex shrink-0 items-center rounded-xl border border-dashed border-muted-line/50 px-3 py-2 text-sm font-semibold text-muted transition hover:border-indigo/40 hover:text-indigo"
+          >
+            {t("tuAtOtherBatches")}
+          </button>
+        )}
       </div>
+
+      {listed.length === 0 && (
+        <div className="mt-6">
+          <EmptyState
+            icon={<CalendarDays className="h-6 w-6" />}
+            title={t("tuAtNoClassTitle")}
+            message={fill(t("tuAtNoClassBody"), { date: formatDate(date, lang) })}
+            action={
+              <button
+                type="button"
+                onClick={() => setShowOthers(true)}
+                className={secondaryBtnClass}
+              >
+                {t("tuAtOtherBatches")}
+              </button>
+            }
+          />
+        </div>
+      )}
 
       {!batch ? null : roll.length === 0 ? (
         <div className="mt-6">

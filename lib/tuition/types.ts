@@ -31,6 +31,8 @@ export type Batch = {
   endTime: string; // "19:30"
   /** Fee every enrolled student pays for this batch, per cycle. */
   monthlyFee: number;
+  /** Most students the batch takes; null / missing / 0 = no limit. */
+  maxStudents?: number | null;
   venue: string;
   active: boolean;
   createdAt: string;
