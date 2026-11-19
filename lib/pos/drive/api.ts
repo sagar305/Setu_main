@@ -11,6 +11,8 @@ export class DriveError extends Error {
   constructor(
     message: string,
     readonly status: number,
+    /** Google's machine-readable reason, e.g. "insufficientPermissions". */
+    readonly reason = "",
   ) {
     super(message);
     this.name = "DriveError";
@@ -44,13 +46,17 @@ export class DriveClient {
     });
     if (!response.ok) {
       let detail = "";
+      let reason = "";
       try {
-        const body = (await response.json()) as { error?: { message?: string } };
+        const body = (await response.json()) as {
+          error?: { message?: string; errors?: { reason?: string }[]; details?: { reason?: string }[] };
+        };
         detail = body.error?.message ?? "";
+        reason = body.error?.errors?.[0]?.reason ?? body.error?.details?.[0]?.reason ?? "";
       } catch {
         // Body was not JSON; the status says enough.
       }
-      throw new DriveError(driveErrorMessage(response.status, detail), response.status);
+      throw new DriveError(driveErrorMessage(response.status, detail, reason), response.status, reason);
     }
     if (response.status === 204) return undefined as T;
     return (parse === "json" ? response.json() : response.text()) as Promise<T>;
@@ -166,12 +172,29 @@ export class DriveClient {
   }
 }
 
-function driveErrorMessage(status: number, detail: string): string {
+export function driveErrorMessage(status: number, detail: string, reason = ""): string {
+  const text = `${reason} ${detail}`.toLowerCase();
   if (status === 401) return "Your Google sign-in expired. Sign in again to keep syncing.";
   if (status === 403) {
-    return detail.toLowerCase().includes("rate")
-      ? "Google Drive is busy. Sync will retry shortly."
-      : "You don't have access to this shop's Drive folder. Ask the owner to invite you again.";
+    if (text.includes("ratelimit") || text.includes("rate limit") || text.includes("userratelimitexceeded")) {
+      return "Google Drive is busy. Sync will retry shortly.";
+    }
+    if (text.includes("accessnotconfigured") || text.includes("service_disabled") || text.includes("has not been used") || text.includes("is disabled")) {
+      return "The Google Drive API is not turned on for this site's Google Cloud project. The site owner needs to enable \"Google Drive API\" in Google Cloud → APIs & Services → Library.";
+    }
+    if (text.includes("filepermission") || text.includes("sufficient permissions for this file")) {
+      return "You don't have access to this shop's Drive files. Ask the owner to invite you again.";
+    }
+    if (text.includes("insufficient") || text.includes("scope")) {
+      return "Google Drive permission wasn't given. Sign in again and tick the Google Drive box on Google's screen.";
+    }
+    if (text.includes("storagequota") || text.includes("quota")) {
+      return "The owner's Google Drive is full. Free up space in Drive to keep syncing.";
+    }
+    if (text.includes("notfound") || text.includes("forbidden") || text.includes("permission")) {
+      return "You don't have access to this shop's Drive files. Ask the owner to invite you again.";
+    }
+    return detail || "Google Drive refused the request (403).";
   }
   if (status === 404) return "The shop's Drive folder or file was not found. It may have been deleted or unshared.";
   if (status === 507 || detail.toLowerCase().includes("quota")) {
