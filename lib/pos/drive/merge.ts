@@ -8,7 +8,7 @@
 
 import type { Customer, InventoryLog, Order, OrderItem, Product } from "../types";
 import { compareOps, type ChangesFile, type Member, type Op, type ShopBase, type SyncRecord } from "./ops";
-import { creditLedgerId } from "./scope";
+import { creditLedgerId, creditReversalLedgerId } from "./scope";
 import { checkSale, roleAllows } from "./roles";
 
 export type RejectReason =
@@ -95,10 +95,15 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
   }
 
   // 3. Orders first, so stock moves can be checked against the sale they claim.
-  const orders = new Map<string, Order>();
-  const orderAuthor = new Map<string, string>();
-  const items: OrderItem[] = [];
-  const usedInvoices = new Set<string>();
+  // The base may already hold sales history (the hub's own data): seed it so
+  // cancellations, stock moves and invoice checks see those sales too.
+  const seeded = base.records ?? {};
+  const orders = new Map<string, Order>(
+    ((seeded.orders ?? []) as unknown as Order[]).map((o) => [o.id, { ...o }]),
+  );
+  const orderAuthor = new Map<string, string>(Object.entries(base.orderAuthors ?? {}));
+  const items: OrderItem[] = ((seeded.order_items ?? []) as unknown as OrderItem[]).map((i) => ({ ...i }));
+  const usedInvoices = new Set<string>(Array.from(orders.values(), (o) => o.invoiceNumber));
   for (const entry of allowed) {
     const { op } = entry;
     if (op.type !== "order.create" || orders.has(op.order.id)) continue;
@@ -129,11 +134,16 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
     }
     return map;
   };
-  for (const [store, rows] of Object.entries(base.records ?? {})) {
+  for (const [store, rows] of Object.entries(seeded)) {
+    if (SPECIAL_STORES.has(store)) continue; // seeded separately above
     const map = storeMap(store);
     for (const row of rows) map.set(row.id, { ...row });
   }
-  const inventoryLog: InventoryLog[] = [];
+  const inventoryLog: InventoryLog[] = ((seeded.inventory ?? []) as unknown as InventoryLog[]).map(
+    (log) => ({ ...log }),
+  );
+  const seenLogs = new Set(inventoryLog.map((log) => log.id));
+  const cancelledAt = new Map<string, string>();
   let lastOpAt: string | null = null;
 
   for (const entry of allowed) {
@@ -145,7 +155,10 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
       case "order.cancel": {
         const order = orders.get(op.orderId);
         if (!order) rejected.push({ ...entry, reason: "unknown-order" });
-        else order.status = "cancelled";
+        else {
+          order.status = "cancelled";
+          if (!cancelledAt.has(order.id)) cancelledAt.set(order.id, op.at);
+        }
         break;
       }
       case "customer.create":
@@ -194,6 +207,7 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
           rejected.push({ ...entry, reason: "not-allowed-for-role" });
           break;
         }
+        if (seenLogs.has(op.id)) break; // already in the base's history
         const product = products.get(move.productId);
         if (!product) break; // product deleted since; nothing to count against
         if (product.trackStock) product.stock += move.change;
@@ -217,6 +231,22 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
   const ledger = storeMap("ledger");
   for (const order of orders.values()) {
     if (order.paymentMethodId !== "credit" || !order.customerId) continue;
+    if (order.status === "cancelled") {
+      const reversalId = creditReversalLedgerId(order.id);
+      if (!ledger.has(reversalId)) {
+        ledger.set(reversalId, {
+          id: reversalId,
+          customerId: order.customerId,
+          customerName: order.customerName,
+          type: "payment",
+          amount: order.total,
+          note: `Sale ${order.invoiceNumber} cancelled`,
+          date: (cancelledAt.get(order.id) ?? order.date).slice(0, 10),
+          createdByTool: "browser-pos",
+          createdAt: cancelledAt.get(order.id) ?? order.createdAt,
+        });
+      }
+    }
     const id = creditLedgerId(order.id);
     if (ledger.has(id)) continue;
     ledger.set(id, {

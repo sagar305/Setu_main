@@ -49,6 +49,11 @@ import {
 } from "./ui";
 import { canOpenAsTab } from "./ToolsScreen";
 import { currencyOptions } from "@/lib/toolkit/currencyDetect";
+import { TeamPanel } from "./team/TeamPanel";
+import { useTeam } from "./team/TeamSyncContext";
+
+const TEAM_LOCKED_NOTE =
+  "Not available while Google Drive team sync is on. Turn off team sync above first.";
 
 function Section({
   id,
@@ -101,6 +106,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     resyncSheetAll,
   } = usePos();
 
+  const { available: teamAvailable, team, isCashier } = useTeam();
+  const inTeam = Boolean(team);
   const whatsNew = useWhatsNewContext();
   const newToolCount = whatsNew
     ? POS_TOOLS.filter((tool) => whatsNew.isNewFeature(tool.slug)).length
@@ -271,8 +278,42 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
     }
   };
 
+  const teamSection = teamAvailable ? (
+    <Section
+      id="team-sync"
+      title="Team & Google Drive sync"
+      description="Use this POS on several devices and give staff their own login, synced through your Google Drive."
+    >
+      <TeamPanel />
+    </Section>
+  ) : null;
+
+  const counterLockSection = (
+    <Section
+      title="Counter lock"
+      description="Set a PIN to protect the till. The POS asks for it when it opens and whenever the screen is locked — nothing on screen responds until the right PIN is entered."
+    >
+      <CounterLockPanel
+        settings={settings}
+        onSave={(updates) => updateSettings(updates)}
+        onLockNow={onLockNow}
+      />
+    </Section>
+  );
+
+  // A cashier only manages their own device: sync status and the PIN.
+  if (isCashier) {
+    return (
+      <div className="space-y-6">
+        {teamSection}
+        {counterLockSection}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
+      {teamSection}
       <Section title="Business profile" description="Shown on your receipts.">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Business name" required>
@@ -526,10 +567,22 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         title="Batch & expiry tracking"
         description="Optional. Keep stock in batches with their own batch number, expiry date and cost — useful for grocery, FMCG and anything that expires. Off by default; when off, the POS works exactly as before."
       >
-        <label className="flex items-start gap-3 rounded-lg border border-muted-line/40 bg-white px-3 py-3">
+        {inTeam && (
+          <p className="mb-3 rounded-lg border border-saffron/50 bg-saffron/10 px-3 py-2 text-sm text-ink">
+            <strong>Not available while Google Drive team sync is on.</strong> Batch &amp; expiry tracking
+            is switched off on every device in the team. Batches recorded earlier stay on this device but
+            aren&apos;t used. Turn off team sync to use it again.
+          </p>
+        )}
+        <label
+          className={`flex items-start gap-3 rounded-lg border border-muted-line/40 bg-white px-3 py-3 ${
+            inTeam ? "opacity-60" : ""
+          }`}
+        >
           <input
             type="checkbox"
-            checked={settings.batchTracking === true}
+            checked={!inTeam && settings.batchTracking === true}
+            disabled={inTeam}
             onChange={(event) => void updateSettings({ batchTracking: event.target.checked })}
             className="mt-0.5 h-4 w-4 accent-indigo"
           />
@@ -755,16 +808,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         />
       </Section>
 
-      <Section
-        title="Counter lock"
-        description="Set a PIN to protect the till. The POS asks for it when it opens and whenever the screen is locked — nothing on screen responds until the right PIN is entered."
-      >
-        <CounterLockPanel
-          settings={settings}
-          onSave={(updates) => updateSettings(updates)}
-          onLockNow={onLockNow}
-        />
-      </Section>
+      {counterLockSection}
 
       <Section
         title="Backup & restore"
@@ -791,6 +835,8 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
+            disabled={inTeam}
+            title={inTeam ? TEAM_LOCKED_NOTE : undefined}
             className={secondaryBtnClass}
           >
             <Upload className="h-4 w-4" />
@@ -808,6 +854,7 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
             }}
           />
         </div>
+        {inTeam && <p className="mt-3 text-xs text-muted">Restore: {TEAM_LOCKED_NOTE}</p>}
         {backupError && (
           <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
             {backupError}
@@ -819,10 +866,11 @@ export function SettingsScreen({ onLockNow }: { onLockNow?: () => void }) {
         title="Danger zone"
         description="Deletes every product, order, customer and setting from this browser."
       >
-        <button type="button" onClick={() => setResetOpen(true)} className={dangerBtnClass}>
+        <button type="button" onClick={() => setResetOpen(true)} disabled={inTeam} className={dangerBtnClass}>
           <Trash2 className="h-4 w-4" />
           Delete all data
         </button>
+        {inTeam && <p className="mt-2 text-xs text-muted">{TEAM_LOCKED_NOTE}</p>}
       </Section>
 
       <ConfirmDialog

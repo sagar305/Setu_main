@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { captureOps, type CaptureContext, type WriteBatch } from "@/lib/pos/drive/capture";
 import { mergeShop } from "@/lib/pos/drive/merge";
 import type { Member, Op, Role } from "@/lib/pos/drive/ops";
-import { creditLedgerId, sharedSettings, syncedStores, withSharedSettings } from "@/lib/pos/drive/scope";
+import { creditLedgerId, creditReversalLedgerId, sharedSettings, syncedStores, withSharedSettings } from "@/lib/pos/drive/scope";
 import { DEFAULT_SETTINGS, type InventoryLog, type Order, type OrderItem, type Product } from "@/lib/pos/types";
 
 let counter = 0;
@@ -172,5 +172,42 @@ describe("shared settings on another device", () => {
     expect(next.nextInvoiceNumber).toBe(40);
     expect(next.receiptPaperSize).toBe("58mm");
     expect(next.batchTracking).toBe(false);
+  });
+});
+
+describe("cancelled credit sale", () => {
+  it("adds a reversing ledger entry on every device, once", () => {
+    const members: Member[] = [
+      { email: "o@x", role: "owner", code: "O", addedAt: "" },
+      { email: "c@x", role: "cashier", code: "C1", addedAt: "" },
+    ];
+    const saleOps = captureOps(checkoutBatch, ctx("cashier"));
+    const cancelOps = captureOps(
+      {
+        writes: {
+          orders: [{ ...order, status: "cancelled" }],
+          ledger: [{ id: creditReversalLedgerId("o1"), type: "payment", amount: 20 }],
+        },
+        deletes: {},
+      },
+      { ...ctx("owner"), now: "2026-11-19T09:00:00Z" },
+    );
+    // The owner's reversal entry is rebuilt by the merge, not sent as-is.
+    expect(cancelOps.map((op) => op.type)).toEqual(["order.cancel"]);
+    const merged = mergeShop(
+      { members, products: [{ ...product, stock: 10 }], customers: [], cutoff: null },
+      [
+        { memberCode: "C1", ops: saleOps },
+        { memberCode: "O", ops: cancelOps },
+      ],
+    );
+    const ledger = merged.records.ledger;
+    expect(ledger).toHaveLength(2);
+    expect(ledger.find((e) => e.id === creditReversalLedgerId("o1"))).toMatchObject({
+      type: "payment",
+      amount: 20,
+      customerId: "cust",
+      date: "2026-11-19",
+    });
   });
 });

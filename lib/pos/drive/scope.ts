@@ -77,11 +77,17 @@ export function withSharedSettings(local: PosSettings, shared: Partial<SharedSet
   for (const key of DEVICE_SETTINGS) {
     (next as Record<string, unknown>)[key] = local[key];
   }
-  next.batchTracking = false;
+  // Batch tracking stays off in a team; only touch it when it is on.
+  if (next.batchTracking) next.batchTracking = false;
   return next;
 }
 
 /** Ledger entry id for a POS credit sale, the same on every device. */
 export function creditLedgerId(orderId: string): string {
   return `pos-credit-${orderId}`;
+}
+
+/** Ledger entry id that reverses a cancelled credit sale. */
+export function creditReversalLedgerId(orderId: string): string {
+  return `pos-credit-cancel-${orderId}`;
 }
