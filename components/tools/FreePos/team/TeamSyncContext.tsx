@@ -7,9 +7,11 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { onCapturedWrite } from "@/lib/pos/db";
-import { driveConfig } from "@/lib/pos/drive/auth";
+import { driveConfig, silentToken } from "@/lib/pos/drive/auth";
 import {
+  leaveTeam,
   loadTeam,
+  saveTeamNotice,
   onTeamDataChanged,
   setConnectedTools,
   signIn,
@@ -38,7 +40,7 @@ type TeamContextValue = {
 const TeamContext = createContext<TeamContextValue | null>(null);
 
 export function TeamSyncProvider({ children }: { children: ReactNode }) {
-  const { settings, reload, status } = usePos();
+  const { settings, reload, status, resetAll } = usePos();
   const available = driveConfig() !== null;
   const [team, setTeam] = useState<TeamState | null>(null);
   const [ready, setReady] = useState(false);
@@ -64,6 +66,30 @@ export function TeamSyncProvider({ children }: { children: ReactNode }) {
       active = false;
     };
   }, [status]);
+
+  // Pick up this device's stay-signed-in session early, so actions like
+  // "Sign in with Google" don't need a popup when it's already connected.
+  useEffect(() => {
+    if (available) void silentToken();
+  }, [available]);
+
+  // Removed by the owner (seen on reopen or the next sync): this device's
+  // copy of the shop is deleted and the POS goes back to its welcome screen,
+  // which explains why.
+  const wipingRef = useRef(false);
+  useEffect(() => {
+    if (!team?.removed || team.isPrimary || wipingRef.current) return;
+    wipingRef.current = true;
+    saveTeamNotice({ kind: "removed", shopName: team.shopName, at: new Date().toISOString() });
+    void (async () => {
+      try {
+        await leaveTeam({ wipe: true, signOut: true });
+        await resetAll();
+      } finally {
+        wipingRef.current = false;
+      }
+    })();
+  }, [team, resetAll]);
 
   const sync = useCallback(async () => {
     setSyncing(true);

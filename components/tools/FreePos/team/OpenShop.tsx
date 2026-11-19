@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle, Cloud, LogIn, Store } from "lucide-react";
 import { findMyShops, openShop, type FoundShop } from "@/lib/pos/drive/engine";
+import { signOut } from "@/lib/pos/drive/auth";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
 import { ROLE_LABELS } from "@/lib/pos/drive/roles";
 import { usePos } from "@/lib/pos/store";
@@ -158,6 +159,23 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
         )}
 
         {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-700">{error}</p>}
+
+        {result && (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={async () => {
+              // This device stays signed in; let someone else use their account.
+              await signOut();
+              setResult(null);
+              setChosen(null);
+              setError("");
+            }}
+            className="text-xs font-semibold text-indigo underline"
+          >
+            Not {result.email}? Use a different Google account
+          </button>
+        )}
 
         {result && (
           <div className="flex justify-end gap-3">

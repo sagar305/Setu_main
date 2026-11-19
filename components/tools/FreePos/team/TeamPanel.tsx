@@ -343,7 +343,7 @@ function OwnerTeam({ team }: { team: TeamState }) {
         confirmLabel="Turn off"
         onConfirm={() => {
           setTurningOff(false);
-          void leaveTeam();
+          void leaveTeam({ wipe: false });
         }}
         onCancel={() => setTurningOff(false)}
       />
@@ -632,6 +632,7 @@ function EditMemberModal({ member, onClose }: { member: TeamMember | null; onClo
 // ---------------------------------------------------------------------------
 
 function MemberTeam({ team }: { team: TeamState }) {
+  const { resetAll } = usePos();
   const [leaving, setLeaving] = useState(false);
   const [promoting, setPromoting] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -705,11 +706,20 @@ function MemberTeam({ team }: { team: TeamState }) {
       <ConfirmDialog
         open={leaving}
         title="Leave this team?"
-        message="This device stops syncing. Sales not yet uploaded will not reach the owner — sync first if you are online. The data already on this device stays here. You can sign in again later to rejoin."
-        confirmLabel="Leave team"
+        message="Sales not yet sent are uploaded first if you're online. Then everything from this shop is deleted from this device, it's signed out of Google, and the POS goes back to its start screen. You can sign in again later to rejoin."
+        confirmLabel="Leave & delete from this device"
         onConfirm={() => {
           setLeaving(false);
-          void leaveTeam();
+          setBusy(true);
+          void (async () => {
+            try {
+              await leaveTeam({ wipe: true, flush: true, signOut: true });
+              await resetAll();
+            } catch (e) {
+              setError(errorText(e));
+              setBusy(false);
+            }
+          })();
         }}
         onCancel={() => setLeaving(false)}
       />

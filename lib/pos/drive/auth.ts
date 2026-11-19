@@ -86,11 +86,11 @@ export function currentToken(): string | null {
 }
 
 /**
- * Ask Google for an access token. `interactive` shows the account chooser and
- * consent (must run from a click, or the popup is blocked); otherwise Google
- * reuses an earlier consent with as little UI as it can.
+ * Browser-only sign-in (Google's token popup), used when this site isn't set
+ * up with the stay-signed-in routes. The key it gives lives an hour and is
+ * lost on refresh.
  */
-export async function requestToken(interactive: boolean): Promise<string> {
+async function popupToken(interactive: boolean): Promise<string> {
   const config = driveConfig();
   if (!config) throw new Error("Google Drive sync is not set up on this site.");
   await loadScript(GIS_SRC);
@@ -138,15 +138,173 @@ export async function requestToken(interactive: boolean): Promise<string> {
   });
 }
 
-/** The current token, refreshing it quietly when it has expired. */
-export async function getToken(): Promise<string> {
-  return currentToken() ?? requestToken(false);
+// ---------------------------------------------------------------------------
+// Stay signed in: the site's /api/pos-google routes keep a refresh token for
+// this device in an encrypted HttpOnly cookie, so a refresh, a reopened tab or
+// the hourly expiry renews silently. Falls back to the popup above when the
+// deployment doesn't have GOOGLE_CLIENT_SECRET / POS_TOKEN_COOKIE_KEY.
+// ---------------------------------------------------------------------------
+
+type ServerMode = "unknown" | "on" | "off";
+let serverMode: ServerMode = "unknown";
+let refreshing: Promise<string | null> | null = null;
+
+const ROUTES = "/api/pos-google";
+
+/** Ask the site for a fresh key from this device's cookie. Null = not signed in here. */
+async function serverRefresh(): Promise<string | null> {
+  if (serverMode === "off") return null;
+  if (!refreshing) {
+    refreshing = (async () => {
+      try {
+        const response = await fetch(`${ROUTES}/token`, { method: "POST", credentials: "same-origin" });
+        if (response.status === 501 || response.status === 404) {
+          serverMode = "off";
+          return null;
+        }
+        serverMode = "on";
+        if (!response.ok) return null;
+        const body = (await response.json()) as { access_token?: string; expires_in?: number };
+        if (!body.access_token) return null;
+        token = { value: body.access_token, expiresAt: Date.now() + (body.expires_in ?? 3600) * 1000 };
+        return body.access_token;
+      } catch {
+        return null; // offline: try again on the next sync
+      } finally {
+        refreshing = null;
+      }
+    })();
+  }
+  return refreshing;
 }
 
-/** Sign out: revoke the token at Google and forget it here. */
+/**
+ * A valid key without showing anything: the one in memory, or a fresh one
+ * from this device's stay-signed-in cookie. Null means "needs a tap".
+ */
+export async function silentToken(): Promise<string | null> {
+  return currentToken() ?? (await serverRefresh());
+}
+
+type SignInResult = { type: "setu-pos-google"; nonce: string; ok: boolean; error: string };
+
+const SIGN_IN_ERRORS: Record<string, string> = {
+  not_configured: "not_configured",
+};
+
+/**
+ * One-time sign-in through the site (popup). Must start from a tap. The
+ * result comes back on a BroadcastChannel/localStorage message, because
+ * Google's pages can cut the popup's link to this tab.
+ */
+function serverSignIn(loginHint?: string): Promise<void> {
+  const nonce = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  const params = new URLSearchParams({ n: nonce, popup: "1" });
+  if (loginHint) params.set("hint", loginHint);
+  const popup = window.open(`${ROUTES}/start?${params}`, "setu-pos-google", "width=500,height=680");
+  if (!popup) {
+    // Popups blocked: do the sign-in in this tab and come back here.
+    const full = new URLSearchParams({ n: nonce, return: window.location.pathname + window.location.search });
+    window.location.assign(`${ROUTES}/start?${full}`);
+    return new Promise(() => undefined);
+  }
+
+  return new Promise<void>((resolve, reject) => {
+    let done = false;
+    let closedAt = 0;
+    let channel: BroadcastChannel | null = null;
+    const finish = (error?: Error) => {
+      if (done) return;
+      done = true;
+      window.clearInterval(timer);
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("message", onMessage);
+      channel?.close();
+      if (error) reject(error);
+      else resolve();
+    };
+    const handle = (data: unknown) => {
+      const result = data as SignInResult | null;
+      if (!result || result.type !== "setu-pos-google" || result.nonce !== nonce) return;
+      if (result.ok) finish();
+      else finish(new Error(SIGN_IN_ERRORS[result.error] ?? (result.error || "Google sign-in failed.")));
+    };
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === "setu-pos-google-result" && event.newValue) {
+        try {
+          handle(JSON.parse(event.newValue));
+        } catch {
+          // ignore
+        }
+      }
+    };
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin === window.location.origin) handle(event.data);
+    };
+    try {
+      channel = new BroadcastChannel("setu-pos-google");
+      channel.onmessage = (event) => handle(event.data);
+    } catch {
+      channel = null;
+    }
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("message", onMessage);
+    // If the window is closed without a result, check whether the sign-in
+    // finished anyway (the message can be missed), then give up.
+    const timer = window.setInterval(async () => {
+      if (done) return;
+      let closed = false;
+      try {
+        closed = popup.closed;
+      } catch {
+        closed = false;
+      }
+      if (!closed) return;
+      closedAt ||= Date.now();
+      if (await serverRefresh()) finish();
+      else if (Date.now() - closedAt > 4000) finish(new Error("Google sign-in was closed before finishing."));
+    }, 1000);
+  });
+}
+
+/**
+ * Get a key, showing Google's sign-in when needed. `interactive` must come
+ * from a tap. With the site's stay-signed-in routes the person signs in once
+ * per device; otherwise Google's popup is used each time.
+ */
+export async function requestToken(interactive: boolean, loginHint?: string): Promise<string> {
+  const config = driveConfig();
+  if (!config) throw new Error("Google Drive sync is not set up on this site.");
+  if (!interactive) {
+    const quiet = await silentToken();
+    if (quiet) return quiet;
+    if (serverMode === "on") throw new Error("Google sign-in needed.");
+    return popupToken(false);
+  }
+  if (serverMode !== "off") {
+    try {
+      await serverSignIn(loginHint);
+      const fresh = await serverRefresh();
+      if (fresh) return fresh;
+      throw new Error("Signed in, but Google didn't give access. Please try again.");
+    } catch (error) {
+      if (!(error instanceof Error) || error.message !== "not_configured") throw error;
+      serverMode = "off";
+    }
+  }
+  return popupToken(true);
+}
+
+/** The current token, refreshing it quietly when it has expired. */
+export async function getToken(): Promise<string> {
+  return (await silentToken()) ?? requestToken(false);
+}
+
+/** Sign this device out: revoke at Google, delete the stay-signed-in cookie. */
 export async function signOut(): Promise<void> {
   const value = token?.value;
   token = null;
+  await fetch(`${ROUTES}/signout`, { method: "POST", credentials: "same-origin" }).catch(() => undefined);
   if (value && window.google?.accounts?.oauth2) {
     await new Promise<void>((resolve) => window.google!.accounts!.oauth2!.revoke(value, resolve));
   }
