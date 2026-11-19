@@ -89,8 +89,31 @@ export async function pickShopFolder(): Promise<{ id: string; name: string } | n
   });
 }
 
+/** One Google Picker round: returns the ids picked, or null if cancelled. */
+export type PickRound = (remaining: string[], step: number, total: number) => Promise<string[] | null>;
+
 /**
- * Ask the user to tick the exact files they were invited to. With the
+ * Keep asking until every invited file has been picked. On a phone Google's
+ * picker selects one file at a time, so each round shows only the files still
+ * missing; on a computer someone may pick them all in one go. Stops after a
+ * few rounds that pick nothing new, so a stuck picker can't loop forever.
+ */
+export async function pickAllFiles(fileIds: string[], pickOnce: PickRound): Promise<string[] | null> {
+  const picked = new Set<string>();
+  let idleRounds = 0;
+  while (picked.size < fileIds.length && idleRounds < 3) {
+    const remaining = fileIds.filter((id) => !picked.has(id));
+    const result = await pickOnce(remaining, picked.size + 1, fileIds.length);
+    if (result === null) return null;
+    const before = picked.size;
+    for (const id of result) if (fileIds.includes(id)) picked.add(id);
+    idleRounds = picked.size > before ? 0 : idleRounds + 1;
+  }
+  return Array.from(picked);
+}
+
+/**
+ * Ask the user to pick the exact files they were invited to. With the
  * drive.file permission, picking a file is what lets this app open it; a
  * picked folder would not give access to the files inside. Resolves with the
  * ids picked, or null if they cancel.
@@ -100,23 +123,30 @@ export async function pickInvitedFiles(fileIds: string[]): Promise<string[] | nu
   if (!config) throw new Error("Google Drive sync is not set up on this site.");
   const [picker, token] = await Promise.all([loadPicker(), getToken()]);
 
-  const view = new picker.DocsView(picker.ViewId.DOCS);
-  view.setFileIds(fileIds.join(","));
-  view.setMode(picker.DocsViewMode.LIST);
+  const pickOnce: PickRound = (remaining, step, total) => {
+    const view = new picker.DocsView(picker.ViewId.DOCS);
+    view.setFileIds(remaining.join(","));
+    view.setMode(picker.DocsViewMode.LIST);
+    const title =
+      remaining.length === 1
+        ? `Step ${step} of ${total}: select this file, then Select`
+        : `Step ${step} of ${total}: select a file (or all), then Select`;
+    return new Promise((resolve) => {
+      new picker.PickerBuilder()
+        .addView(view)
+        .enableFeature(picker.Feature.MULTISELECT_ENABLED)
+        .setOAuthToken(token)
+        .setDeveloperKey(config.apiKey)
+        .setAppId(config.projectNumber)
+        .setTitle(title)
+        .setCallback((data) => {
+          if (data.action === picker.Action.PICKED) resolve((data.docs ?? []).map((d) => d.id));
+          else if (data.action === picker.Action.CANCEL) resolve(null);
+        })
+        .build()
+        .setVisible(true);
+    });
+  };
 
-  return new Promise((resolve) => {
-    new picker.PickerBuilder()
-      .addView(view)
-      .enableFeature(picker.Feature.MULTISELECT_ENABLED)
-      .setOAuthToken(token)
-      .setDeveloperKey(config.apiKey)
-      .setAppId(config.projectNumber)
-      .setTitle(`Select all ${fileIds.length} files, then click Select`)
-      .setCallback((data) => {
-        if (data.action === picker.Action.PICKED) resolve((data.docs ?? []).map((d) => d.id));
-        else if (data.action === picker.Action.CANCEL) resolve(null);
-      })
-      .build()
-      .setVisible(true);
-  });
+  return pickAllFiles(fileIds, pickOnce);
 }

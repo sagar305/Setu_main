@@ -67,8 +67,9 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
           <strong>1.</strong> Sign in with Google as <strong>{invite.e}</strong>.
         </li>
         <li>
-          <strong>2.</strong> Google shows {fileCount} shop files — <strong>tick all {fileCount}</strong> and press
-          Select. This is what lets the POS open them; it can&apos;t see anything else in your Drive.
+          <strong>2.</strong> Google shows the shop&apos;s files. Select one and press <strong>Select</strong> — it
+          opens again for the next one, {fileCount} files in all. This is what lets the POS open them; it can&apos;t
+          see anything else in your Drive.
         </li>
       </ol>
 

@@ -14,9 +14,11 @@ export type DriveConfig = { clientId: string; apiKey: string; projectNumber: str
 
 /** The public values from .env (see .env.example). Null hides Drive sync. */
 export function driveConfig(): DriveConfig | null {
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "";
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY ?? "";
-  const projectNumber = process.env.NEXT_PUBLIC_GOOGLE_PROJECT_NUMBER ?? "";
+  // Trimmed: a stray space or quote pasted into Vercel breaks Google sign-in.
+  const clean = (value: string | undefined) => (value ?? "").trim().replace(/^["']|["']$/g, "");
+  const clientId = clean(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
+  const apiKey = clean(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
+  const projectNumber = clean(process.env.NEXT_PUBLIC_GOOGLE_PROJECT_NUMBER);
   if (!clientId || !apiKey || !projectNumber) return null;
   return { clientId, apiKey, projectNumber };
 }
@@ -38,6 +40,7 @@ type GoogleOAuth2 = {
     error_callback?: (error: { type: string; message?: string }) => void;
   }) => TokenClient;
   revoke: (token: string, done?: () => void) => void;
+  hasGrantedAllScopes: (response: TokenResponse, ...scopes: string[]) => boolean;
 };
 
 declare global {
@@ -94,6 +97,16 @@ export async function requestToken(interactive: boolean): Promise<string> {
       callback: (response) => {
         if (!response.access_token) {
           reject(new Error(response.error_description || response.error || "Google sign-in was cancelled."));
+          return;
+        }
+        // Google lets people untick individual permissions on its consent
+        // screen. Without the Drive one, every Drive request fails.
+        if (!oauth2.hasGrantedAllScopes(response, DRIVE_SCOPE)) {
+          reject(
+            new Error(
+              "Google Drive permission wasn't given. Try again and tick the box \"See, edit, create and delete only the specific Google Drive files you use with this app\" on Google's screen.",
+            ),
+          );
           return;
         }
         token = {

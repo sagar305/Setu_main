@@ -436,7 +436,9 @@ export async function joinTeam(payload: InvitePayload, pick: (ids: string[]) => 
   const picked = await pick(ids);
   if (!picked) throw new Error("Joining was cancelled.");
   const missing = ids.filter((id) => !picked.includes(id));
-  if (missing.length) throw new Error(`Please select all ${ids.length} files in the Google window.`);
+  if (missing.length) {
+    throw new Error(`${missing.length} of the shop's files still weren't selected. Tap join again and select each file Google shows.`);
+  }
 
   const shop = await drive.readJson<unknown>(payload.s);
   if (!isShopFile(shop)) throw new Error("This doesn't look like a Setu POS shop file.");
