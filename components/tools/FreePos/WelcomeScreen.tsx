@@ -5,6 +5,7 @@ import { Sheet, ShoppingCart, Upload, WifiOff, Lock, IndianRupee } from "lucide-
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile } from "@/lib/pos/backup";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
+import { OpenShopButton } from "./team/OpenShop";
 
 export function WelcomeScreen() {
   const { startSetup, applyRestoredBackup, restoreFromSheet } = usePos();
@@ -92,6 +93,13 @@ export function WelcomeScreen() {
           <Sheet className="h-4 w-4" />
           Restore from Google Sheet
         </button>
+      </div>
+
+      <div className="mt-6">
+        <OpenShopButton
+          className={`${secondaryBtnClass} px-6 py-3`}
+          hint="Already use this POS with Google Drive team sync — as an owner or staff?"
+        />
       </div>
 
       {sheetOpen && (

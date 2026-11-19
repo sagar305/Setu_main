@@ -137,3 +137,46 @@ describe("cashier rebuilds from what the hub published", () => {
     expect(plan.writes.settings?.[0].batchTracking).toBeFalsy();
   });
 });
+
+import { consumedKey, deviceSections, freshOps, withDeviceSection } from "@/lib/pos/drive/hub";
+import { deviceTag } from "@/lib/pos/drive/engine";
+import type { Op } from "@/lib/pos/drive/ops";
+
+describe("one person on several devices", () => {
+  const op = (id: string): Op =>
+    ({ id, at: "2026-11-19T10:00:00Z", type: "customer.create", customer: { id } }) as unknown as Op;
+
+  it("each device writes only its own section and keeps the others", () => {
+    let file = withDeviceSection(null, "C1", "phone", [op("p1")]);
+    file = withDeviceSection(file, "C1", "tablet", [op("t1"), op("t2")]);
+    file = withDeviceSection(file, "C1", "phone", [op("p1"), op("p2")]);
+    expect(Object.keys(deviceSections(file))).toEqual(["phone", "tablet"]);
+    expect(deviceSections(file).phone.map((o) => o.id)).toEqual(["p1", "p2"]);
+    expect(deviceSections(file).tablet).toHaveLength(2);
+  });
+
+  it("the hub takes only new operations, counted per device", () => {
+    const file = {
+      app: "setu-pos-team" as const,
+      memberCode: "C1",
+      devices: { phone: [op("p1"), op("p2")], tablet: [op("t1")] },
+    };
+    const first = freshOps("C1", file, {});
+    expect(first.ops.map((o) => o.id)).toEqual(["p1", "p2", "t1"]);
+    expect(first.consumed).toEqual({ [consumedKey("C1", "phone")]: 2, [consumedKey("C1", "tablet")]: 1 });
+
+    const later = { ...file, devices: { ...file.devices, phone: [...file.devices.phone, op("p3")] } };
+    expect(freshOps("C1", later, first.consumed).ops.map((o) => o.id)).toEqual(["p3"]);
+  });
+
+  it("reads first-version files (one list per person) without repeating applied ops", () => {
+    const legacy = { app: "setu-pos-team" as const, memberCode: "C1", ops: [op("a"), op("b"), op("c")] };
+    // The first version recorded progress per member: 2 already applied.
+    expect(freshOps("C1", legacy, { C1: 2 }).ops.map((o) => o.id)).toEqual(["c"]);
+  });
+
+  it("gives every device its own invoice tag", () => {
+    expect(deviceTag("dk7q2x9ab")).toBe("9AB");
+    expect(deviceTag("dk7q2x9ab")).not.toBe(deviceTag("dzz11pq7c"));
+  });
+});

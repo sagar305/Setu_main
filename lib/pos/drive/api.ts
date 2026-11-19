@@ -73,6 +73,12 @@ export class DriveClient {
     return this.call<DriveFile>(`${API}/files/${encodeURIComponent(id)}?fields=id,name,modifiedTime,mimeType`);
   }
 
+  /** The folder a file sits in (the shop folder for shop.json). */
+  async getFolderOf(id: string): Promise<string | null> {
+    const r = await this.call<{ parents?: string[] }>(`${API}/files/${encodeURIComponent(id)}?fields=parents`);
+    return r.parents?.[0] ?? null;
+  }
+
   createFolder(name: string, parentId?: string): Promise<DriveFile> {
     return this.call<DriveFile>(`${API}/files?fields=id,name,modifiedTime,mimeType`, {
       method: "POST",
@@ -124,6 +130,20 @@ export class DriveClient {
   async readJson<T>(id: string): Promise<T> {
     const text = await this.call<string>(`${API}/files/${encodeURIComponent(id)}?alt=media`, {}, "text");
     return JSON.parse(text) as T;
+  }
+
+  /** Find a file by name in this app's hidden folder (drive.appdata). */
+  async findAppDataFile(name: string): Promise<DriveFile | null> {
+    const q = encodeURIComponent(`name='${name.replace(/'/g, "\\'")}' and trashed=false`);
+    const r = await this.call<{ files: DriveFile[] }>(
+      `${API}/files?spaces=appDataFolder&q=${q}&fields=files(id,name,modifiedTime)&pageSize=10`,
+    );
+    return r.files[0] ?? null;
+  }
+
+  /** Create a JSON file in this app's hidden folder. */
+  createAppDataJson(name: string, data: unknown): Promise<DriveFile> {
+    return this.createJson(name, "appDataFolder", data);
   }
 
   /** Share a file or folder with an email. Google emails them when `notify`. */
