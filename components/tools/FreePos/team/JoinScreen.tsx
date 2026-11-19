@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, Cloud, Users } from "lucide-react";
 import { joinTeam, type InvitePayload } from "@/lib/pos/drive/engine";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
+import { signOut } from "@/lib/pos/drive/auth";
 import { usePos } from "@/lib/pos/store";
 import { primaryBtnClass, secondaryBtnClass } from "../ui";
 import { useTeam } from "./TeamSyncContext";
@@ -91,7 +92,21 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
         </p>
       )}
       {error && (
-        <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>
+        <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          <p>{error}</p>
+          {error.includes("but you signed in as") && (
+            <button
+              type="button"
+              onClick={async () => {
+                await signOut();
+                setError("");
+              }}
+              className="mt-1 text-xs font-semibold underline"
+            >
+              Sign out and use {invite.e}
+            </button>
+          )}
+        </div>
       )}
 
       <div className="mt-6 flex flex-wrap gap-3">

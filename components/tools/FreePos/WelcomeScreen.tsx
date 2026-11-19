@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sheet, ShoppingCart, Upload, WifiOff, Lock, IndianRupee } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
 import { parseBackupFile } from "@/lib/pos/backup";
 import { inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 import { OpenShopButton } from "./team/OpenShop";
+import { clearTeamNotice, readTeamNotice, type TeamNotice } from "@/lib/pos/drive/engine";
 
 export function WelcomeScreen() {
   const { startSetup, applyRestoredBackup, restoreFromSheet } = usePos();
@@ -15,6 +16,9 @@ export function WelcomeScreen() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sheetUrl, setSheetUrl] = useState("");
   const [sheetRestoring, setSheetRestoring] = useState(false);
+  // Shown once after this device was cleared because its person was removed.
+  const [notice, setNotice] = useState<TeamNotice | null>(null);
+  useEffect(() => setNotice(readTeamNotice()), []);
 
   const handleSheetRestore = async () => {
     setImportError("");
@@ -53,6 +57,28 @@ export function WelcomeScreen() {
       <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo text-white">
         <ShoppingCart className="h-8 w-8" />
       </span>
+      {notice && (
+        <div
+          role="alert"
+          className="mx-auto mb-6 max-w-lg rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-left text-sm text-red-800"
+        >
+          <p className="font-semibold">You were removed from {notice.shopName}&apos;s team</p>
+          <p className="mt-1">
+            The owner took away your access, so the shop&apos;s data was deleted from this device and it was signed
+            out of Google. If this is a mistake, ask the owner to invite you again.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              clearTeamNotice();
+              setNotice(null);
+            }}
+            className="mt-2 text-xs font-semibold underline"
+          >
+            OK, dismiss
+          </button>
+        </div>
+      )}
       <h2 className="mt-6 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
         Welcome to your free POS
       </h2>

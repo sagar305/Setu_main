@@ -12,7 +12,7 @@
 import { dbBatchRaw, dbClearAll, dbGet, dbGetAll, setCaptureSink, type StoreName } from "../db";
 import { DEFAULT_SETTINGS, type Order, type PosSettings } from "../types";
 import { DriveClient, DriveError } from "./api";
-import { currentToken, requestToken } from "./auth";
+import { currentToken, requestToken, signOut as googleSignOut, silentToken } from "./auth";
 import { captureOps } from "./capture";
 import {
   TEAM_APP,
@@ -79,9 +79,20 @@ export type TeamState = {
   needsSignIn: boolean;
   rejected: RejectedNote[];
   oversold: string[];
-  /** The owner removed this member. */
+  /** The owner removed this member (or deleted the shop's files). */
   removed: boolean;
+  /**
+   * Times in a row the shop's files couldn't be opened by the right account.
+   * Removal is only concluded on the second time, so a network or Google
+   * hiccup never wipes a device.
+   */
+  accessStrikes?: number;
+  /** When the shop's files first couldn't be opened in this run of failures. */
+  accessFailedSince?: string | null;
 };
+
+/** Removal is only concluded after failing this long (and twice in a row). */
+const REMOVAL_CONFIRM_MS = 2 * 60_000;
 
 type OpRow = { id: string; seq: number; op: Op };
 
@@ -178,9 +189,12 @@ export class NeedsSignInError extends Error {
   }
 }
 
-/** Never opens a popup by itself; a popup needs the user's tap. */
+/**
+ * Never opens a popup by itself (that needs the user's tap). It renews
+ * silently through the site's stay-signed-in cookie when it can.
+ */
 const drive = new DriveClient(async () => {
-  const token = currentToken();
+  const token = currentToken() ?? (await silentToken());
   if (!token) throw new NeedsSignInError();
   return token;
 });
@@ -734,13 +748,65 @@ export async function makeMainDevice() {
   }).catch(() => undefined);
 }
 
-/** Stop syncing on this device. Data stays on the device; sign in to rejoin. */
-export async function leaveTeam() {
+export type LeaveOptions = {
+  /** Delete everything on this device (staff devices: the data is the shop's). */
+  wipe: boolean;
+  /** Try to send sales not yet uploaded first (skipped when removed). */
+  flush?: boolean;
+  /** Sign this device out of Google (revoke + delete the stay-signed-in cookie). */
+  signOut?: boolean;
+};
+
+/**
+ * Stop syncing on this device. With `wipe`, every POS record on the device is
+ * deleted (the caller then shows the welcome screen); without it the data
+ * stays (the owner's main device turning sync off).
+ */
+export async function leaveTeam(options: LeaveOptions = { wipe: false }) {
+  if (options.flush && session && !session.removed && navigator.onLine) {
+    await syncNow().catch(() => undefined);
+  }
   setCaptureSink(null);
-  await dbBatchRaw({}, { drive_state: ["main"] });
-  const ops = await dbGetAll<OpRow>("drive_ops");
-  if (ops.length) await dbBatchRaw({}, { drive_ops: ops.map((o) => o.id) });
+  if (options.wipe) {
+    await dbClearAll();
+  } else {
+    await dbBatchRaw({}, { drive_state: ["main"] });
+    const ops = await dbGetAll<OpRow>("drive_ops");
+    if (ops.length) await dbBatchRaw({}, { drive_ops: ops.map((o) => o.id) });
+  }
   publishSession(null);
+  if (options.signOut) await googleSignOut().catch(() => undefined);
+}
+
+// A note shown on the welcome screen after this device was wiped because its
+// person was removed. Kept in localStorage: the POS database is gone by then.
+const NOTICE_KEY = "setu-pos-team-notice";
+
+export type TeamNotice = { kind: "removed"; shopName: string; at: string };
+
+export function saveTeamNotice(notice: TeamNotice) {
+  try {
+    window.localStorage.setItem(NOTICE_KEY, JSON.stringify(notice));
+  } catch {
+    // Storage blocked: the wipe still happens, just without the note.
+  }
+}
+
+export function readTeamNotice(): TeamNotice | null {
+  try {
+    const raw = window.localStorage.getItem(NOTICE_KEY);
+    return raw ? (JSON.parse(raw) as TeamNotice) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function clearTeamNotice() {
+  try {
+    window.localStorage.removeItem(NOTICE_KEY);
+  } catch {
+    // ignore
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -762,13 +828,15 @@ export function syncNow(): Promise<void> {
 async function syncOnce() {
   const state = session;
   if (!state || state.removed) return;
-  if (!currentToken()) {
+  if (!(await silentToken())) {
     if (!state.needsSignIn) await saveState({ ...state, needsSignIn: true });
     return;
   }
   try {
     const next = state.isPrimary ? await syncHub(state) : await syncMember(state);
-    await saveState({ ...next, lastSyncAt: new Date().toISOString(), lastError: "", needsSignIn: false });
+    // A pending "can't open the shop's files" check keeps its message.
+    const lastError = next.accessStrikes ? next.lastError : "";
+    await saveState({ ...next, lastSyncAt: new Date().toISOString(), lastError, needsSignIn: false });
   } catch (error) {
     const signIn = error instanceof NeedsSignInError || (error instanceof DriveError && error.status === 401);
     await saveState({
@@ -899,12 +967,33 @@ async function syncMember(state: TeamState): Promise<TeamState> {
     throw e;
   });
   if (!meta) {
-    // Unshared or deleted: the owner removed this member.
+    // Unshared or deleted — most likely the owner removed this member. Make
+    // sure it's the right Google account, and only conclude it on the second
+    // sync in a row, so a passing glitch never wipes a device.
+    const me = await drive.about();
+    if (!sameEmail(me.emailAddress, state.email)) {
+      throw new Error(
+        `Signed in to Google as ${me.emailAddress}, but this device belongs to ${state.email}. Reconnect with ${state.email}.`,
+      );
+    }
+    const strikes = (state.accessStrikes ?? 0) + 1;
+    const since = state.accessFailedSince ?? new Date().toISOString();
+    const longEnough = Date.now() - new Date(since).getTime() >= REMOVAL_CONFIRM_MS;
+    if (strikes < 2 || !longEnough) {
+      return {
+        ...state,
+        uploaded,
+        remoteSeen,
+        accessStrikes: strikes,
+        accessFailedSince: since,
+        lastError: "Can't open the shop's files — checking again shortly.",
+      };
+    }
     setCaptureSink(null);
-    return { ...state, uploaded, remoteSeen, removed: true };
+    return { ...state, uploaded, remoteSeen, accessStrikes: strikes, accessFailedSince: since, removed: true };
   }
   if (remoteSeen[state.shopFileId] === meta.modifiedTime && uploaded === state.uploaded) {
-    return { ...state, uploaded, remoteSeen };
+    return { ...state, uploaded, remoteSeen, accessStrikes: 0, accessFailedSince: null };
   }
 
   const shop = await drive.readJson<ShopFile>(state.shopFileId);
@@ -914,6 +1003,7 @@ async function syncMember(state: TeamState): Promise<TeamState> {
 
   const me = shop.members.find((m) => m.code === state.memberCode);
   if (!me || me.removedAt) {
+    // The shop file itself says so: certain, no second check needed.
     setCaptureSink(null);
     return { ...state, uploaded, remoteSeen, removed: true, members: shop.members };
   }
@@ -933,6 +1023,8 @@ async function syncMember(state: TeamState): Promise<TeamState> {
     ...state,
     uploaded,
     remoteSeen,
+    accessStrikes: 0,
+    accessFailedSince: null,
     shopName: shop.shopName,
     members: shop.members,
     consumed: shop.consumed,
