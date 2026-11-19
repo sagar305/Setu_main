@@ -85,3 +85,8 @@ export function withSharedSettings(local: PosSettings, shared: Partial<SharedSet
 export function creditLedgerId(orderId: string): string {
   return `pos-credit-${orderId}`;
 }
+
+/** Ledger entry id that reverses a cancelled credit sale. */
+export function creditReversalLedgerId(orderId: string): string {
+  return `pos-credit-cancel-${orderId}`;
+}

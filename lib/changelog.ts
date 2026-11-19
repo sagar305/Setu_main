@@ -37,6 +37,15 @@ export const CHANGE_TYPE_LABELS: Record<ChangeType, string> = {
 /** Newest first. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-19",
+    type: "fix",
+    product: "Browser Based POS",
+    title: "Cancelling a credit (udhaar) sale now clears what the customer owes for it",
+    description:
+      "The Customer Ledger gets a matching entry when you cancel the bill, so the customer's balance drops back instead of still showing the cancelled amount.",
+    href: "/products/browser-based-pos",
+  },
+  {
     date: "2026-11-17",
     type: "feature",
     product: "Tuition Class Manager",

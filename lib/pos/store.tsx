@@ -21,7 +21,7 @@ import {
   testSheetConnection,
   type WorkspaceSnapshot,
 } from "./sheetSync";
-import { creditLedgerId } from "./drive/scope";
+import { creditLedgerId, creditReversalLedgerId } from "./drive/scope";
 import { calculateCartTotals } from "./calc";
 import {
   SPLIT_PAYMENT_ID,
@@ -1097,11 +1097,31 @@ export function PosProvider({ children }: { children: ReactNode }) {
         }
       }
 
+      // A cancelled udhaar sale is no longer owed: post a matching entry in
+      // the Customer Ledger so the customer's balance drops back.
+      const reversal: LedgerEntry[] =
+        order.paymentMethodId === "credit" && order.customerId
+          ? [
+              {
+                id: creditReversalLedgerId(order.id),
+                customerId: order.customerId,
+                customerName: order.customerName,
+                type: "payment",
+                amount: order.total,
+                note: `Sale ${order.invoiceNumber} cancelled`,
+                date: now.slice(0, 10),
+                createdByTool: "browser-pos",
+                createdAt: now,
+              },
+            ]
+          : [];
+
       await batchWithSync(
         {
           orders: [cancelled],
           products: updatedProducts,
           inventory: logs,
+          ledger: reversal,
           stock_batches: Array.from(changedBatches.values()),
         },
         {},
