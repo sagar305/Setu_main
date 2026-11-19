@@ -438,7 +438,7 @@ export async function enableTeam(shopName: string): Promise<TeamState> {
   const orderAuthors = authorsForExisting((local.orders ?? []) as unknown as Order[], code, {});
   const hub = { deviceId, primaryEmail: me.emailAddress };
   const shop = await drive.createJson("shop.json", folder.id, buildShopFile(local, shopName, code, members, {}, now, hub));
-  const books = await drive.createJson("books.json", folder.id, buildBooksFile(local, synced, orderAuthors, now));
+  const books = await drive.createJson("books.json", folder.id, buildBooksFile(local, synced, orderAuthors, now, members));
 
   const state = baseState({
     shopName,
@@ -482,6 +482,8 @@ function requirePrimary(): TeamState {
 export type InviteInput = {
   email: string;
   name: string;
+  /** Mobile number already normalized (normalizePhone), or "". */
+  phone: string;
   role: Role;
   permissions: MemberPermissions;
 };
@@ -527,6 +529,7 @@ export async function inviteMember(input: InviteInput): Promise<string> {
     code,
     addedAt: new Date().toISOString(),
     fileId: file.id,
+    ...(input.phone ? { phone: input.phone } : {}),
     permissions: input.role === "cashier" ? input.permissions : undefined,
   };
   const next = { ...state, members: [...state.members, member] };
@@ -550,9 +553,17 @@ export function memberInviteLink(code: string): string | null {
   });
 }
 
-export async function updateMember(code: string, patch: { permissions?: MemberPermissions; name?: string }) {
+export async function updateMember(
+  code: string,
+  patch: { permissions?: MemberPermissions; name?: string; phone?: string },
+) {
   const state = requirePrimary();
-  const members = state.members.map((m) => (m.code === code ? { ...m, ...patch } : m));
+  const members = state.members.map((m) => {
+    if (m.code !== code) return m;
+    const updated: TeamMember = { ...m, ...patch };
+    if (!updated.phone) delete updated.phone;
+    return updated;
+  });
   const next = { ...state, members };
   await saveState(next);
   await publish(next);
@@ -700,7 +711,11 @@ export async function makeMainDevice() {
     ...current,
     isPrimary: true,
     folderId,
-    members: shop.members,
+    // shop.json has no phone numbers; books.json (owners only) keeps them.
+    members: shop.members.map((m) => {
+      const phone = books?.memberPhones?.[m.code];
+      return phone ? { ...m, phone } : m;
+    }),
     consumed,
     orderAuthors: books?.orderAuthors ?? {},
     lastError: "",
@@ -845,7 +860,7 @@ async function publish(state: TeamState): Promise<string> {
     }),
   );
   if (state.booksFileId) {
-    await drive.updateJson(state.booksFileId, buildBooksFile(local, synced, state.orderAuthors, now));
+    await drive.updateJson(state.booksFileId, buildBooksFile(local, synced, state.orderAuthors, now, state.members));
   }
   if (session) publishSession({ ...session, remoteSeen: { ...session.remoteSeen, [state.shopFileId]: shop.modifiedTime } });
   return shop.modifiedTime;

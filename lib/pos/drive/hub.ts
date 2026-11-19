@@ -22,6 +22,11 @@ export type TeamMember = Member & {
   fileId: string;
   /** Display name the owner typed, optional. */
   name?: string;
+  /**
+   * Mobile number (country code + digits) for WhatsApp invites. Private to
+   * owners: never written to shop.json, which cashiers can read.
+   */
+  phone?: string;
 };
 
 export type Catalog = {
@@ -60,6 +65,8 @@ export type BooksFile = {
   updatedAt: string;
   productCosts: Record<string, number | null>;
   orderAuthors: Record<string, string>;
+  /** Staff mobile numbers by member code (owners only, like this file). */
+  memberPhones?: Record<string, string>;
   /** orders, order_items, inventory and every synced tool store. */
   records: Record<string, SyncRecord[]>;
 };
@@ -253,7 +260,8 @@ export function buildShopFile(
     updatedAt: now,
     primaryCode,
     ...(hub ? { hubDeviceId: hub.deviceId, primaryEmail: hub.primaryEmail } : {}),
-    members,
+    // Cashiers can read this file: keep staff phone numbers out of it.
+    members: members.map(({ phone: _phone, ...member }) => member),
     consumed,
     catalog: {
       business: (local.business ?? []).find((b) => b.id === "main") ?? null,
@@ -276,6 +284,7 @@ export function buildBooksFile(
   synced: ReadonlySet<string>,
   orderAuthors: Record<string, string>,
   now: string,
+  members: TeamMember[] = [],
 ): BooksFile {
   const records: Record<string, SyncRecord[]> = {};
   for (const store of synced) {
@@ -285,7 +294,9 @@ export function buildBooksFile(
   for (const store of BOOK_STORES) records[store] = local[store] ?? [];
   const productCosts: Record<string, number | null> = {};
   for (const p of (local.products ?? []) as unknown as Product[]) productCosts[p.id] = p.costPrice ?? null;
-  return { app: TEAM_APP, version: TEAM_FILE_VERSION, updatedAt: now, productCosts, orderAuthors, records };
+  const memberPhones: Record<string, string> = {};
+  for (const m of members) if (m.phone) memberPhones[m.code] = m.phone;
+  return { app: TEAM_APP, version: TEAM_FILE_VERSION, updatedAt: now, productCosts, orderAuthors, memberPhones, records };
 }
 
 /** Which stores a member device replaces from the published files. */
