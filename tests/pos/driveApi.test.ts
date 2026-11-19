@@ -40,3 +40,42 @@ describe("Drive errors say what actually went wrong", () => {
     expect(driveErrorMessage(403, "Something unusual happened.", "weirdReason")).toBe("Something unusual happened.");
   });
 });
+
+import { pickAllFiles, type PickRound } from "@/lib/pos/drive/picker";
+
+describe("joining picks every invited file, one at a time if needed", () => {
+  it("asks again for the remaining file when the picker allows only one (phones)", async () => {
+    const rounds: string[][] = [];
+    const onePerRound: PickRound = async (remaining) => {
+      rounds.push(remaining);
+      return [remaining[0]];
+    };
+    expect(await pickAllFiles(["shop", "mine"], onePerRound)).toEqual(["shop", "mine"]);
+    expect(rounds).toEqual([["shop", "mine"], ["mine"]]);
+  });
+
+  it("finishes in one round when all are picked together (computers)", async () => {
+    let calls = 0;
+    const all: PickRound = async (remaining) => {
+      calls += 1;
+      return remaining;
+    };
+    expect(await pickAllFiles(["shop", "books", "mine"], all)).toHaveLength(3);
+    expect(calls).toBe(1);
+  });
+
+  it("stops when the person cancels", async () => {
+    const cancel: PickRound = async () => null;
+    expect(await pickAllFiles(["shop", "mine"], cancel)).toBeNull();
+  });
+
+  it("gives up after rounds that pick nothing new instead of looping forever", async () => {
+    let calls = 0;
+    const stuck: PickRound = async () => {
+      calls += 1;
+      return ["something-else"];
+    };
+    expect(await pickAllFiles(["shop", "mine"], stuck)).toEqual([]);
+    expect(calls).toBe(3);
+  });
+});
