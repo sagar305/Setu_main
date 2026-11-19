@@ -21,6 +21,7 @@ import {
   testSheetConnection,
   type WorkspaceSnapshot,
 } from "./sheetSync";
+import { creditLedgerId } from "./drive/scope";
 import { calculateCartTotals } from "./calc";
 import {
   SPLIT_PAYMENT_ID,
@@ -825,7 +826,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const ledgerEntries: LedgerEntry[] = input.creditSale
         ? [
             {
-              id: generateId(),
+              // Derived from the order so every synced device names it the
+              // same (lib/pos/drive merges rebuild it from the sale).
+              id: creditLedgerId(order.id),
               customerId: customer!.id,
               customerName: customer!.name,
               type: "credit",
