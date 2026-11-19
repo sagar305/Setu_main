@@ -77,7 +77,8 @@ export function withSharedSettings(local: PosSettings, shared: Partial<SharedSet
   for (const key of DEVICE_SETTINGS) {
     (next as Record<string, unknown>)[key] = local[key];
   }
-  next.batchTracking = false;
+  // Batch tracking stays off in a team; only touch it when it is on.
+  if (next.batchTracking) next.batchTracking = false;
   return next;
 }
 

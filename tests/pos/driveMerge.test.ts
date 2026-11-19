@@ -277,11 +277,13 @@ describe("compactBase", () => {
 });
 
 describe("roles", () => {
-  it("limits cashiers to billing and customers", () => {
+  it("limits cashiers to billing, customers, their own orders and settings", () => {
     expect(canSeeScreen("cashier", "billing")).toBe(true);
     expect(canSeeScreen("cashier", "customers")).toBe(true);
     expect(canSeeScreen("cashier", "reports")).toBe(false);
     expect(canSeeScreen("cashier", "products")).toBe(false);
+    expect(canSeeScreen("cashier", "dashboard")).toBe(false);
+    expect(canSeeScreen("cashier", "orders")).toBe(true);
     expect(canSeeScreen("owner", "team")).toBe(true);
   });
 

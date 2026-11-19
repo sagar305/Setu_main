@@ -95,10 +95,15 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
   }
 
   // 3. Orders first, so stock moves can be checked against the sale they claim.
-  const orders = new Map<string, Order>();
-  const orderAuthor = new Map<string, string>();
-  const items: OrderItem[] = [];
-  const usedInvoices = new Set<string>();
+  // The base may already hold sales history (the hub's own data): seed it so
+  // cancellations, stock moves and invoice checks see those sales too.
+  const seeded = base.records ?? {};
+  const orders = new Map<string, Order>(
+    ((seeded.orders ?? []) as unknown as Order[]).map((o) => [o.id, { ...o }]),
+  );
+  const orderAuthor = new Map<string, string>(Object.entries(base.orderAuthors ?? {}));
+  const items: OrderItem[] = ((seeded.order_items ?? []) as unknown as OrderItem[]).map((i) => ({ ...i }));
+  const usedInvoices = new Set<string>(Array.from(orders.values(), (o) => o.invoiceNumber));
   for (const entry of allowed) {
     const { op } = entry;
     if (op.type !== "order.create" || orders.has(op.order.id)) continue;
@@ -129,11 +134,15 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
     }
     return map;
   };
-  for (const [store, rows] of Object.entries(base.records ?? {})) {
+  for (const [store, rows] of Object.entries(seeded)) {
+    if (SPECIAL_STORES.has(store)) continue; // seeded separately above
     const map = storeMap(store);
     for (const row of rows) map.set(row.id, { ...row });
   }
-  const inventoryLog: InventoryLog[] = [];
+  const inventoryLog: InventoryLog[] = ((seeded.inventory ?? []) as unknown as InventoryLog[]).map(
+    (log) => ({ ...log }),
+  );
+  const seenLogs = new Set(inventoryLog.map((log) => log.id));
   const cancelledAt = new Map<string, string>();
   let lastOpAt: string | null = null;
 
@@ -198,6 +207,7 @@ export function mergeShop(base: ShopBase, files: ChangesFile[]): MergedState {
           rejected.push({ ...entry, reason: "not-allowed-for-role" });
           break;
         }
+        if (seenLogs.has(op.id)) break; // already in the base's history
         const product = products.get(move.productId);
         if (!product) break; // product deleted since; nothing to count against
         if (product.trackStock) product.stock += move.change;

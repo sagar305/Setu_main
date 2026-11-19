@@ -12,14 +12,18 @@ type PickerData = { action: string; docs?: PickerDoc[] };
 
 type PickerNamespace = {
   Action: { PICKED: string; CANCEL: string };
-  ViewId: { FOLDERS: string };
+  ViewId: { FOLDERS: string; DOCS: string };
+  Feature: { MULTISELECT_ENABLED: string };
   DocsView: new (viewId?: string) => {
     setIncludeFolders: (v: boolean) => unknown;
     setSelectFolderEnabled: (v: boolean) => unknown;
     setMimeTypes: (v: string) => unknown;
     setOwnedByMe: (v: boolean) => unknown;
     setParent: (id: string) => unknown;
+    setFileIds: (ids: string) => unknown;
+    setMode: (mode: string) => unknown;
   };
+  DocsViewMode: { LIST: string };
   PickerBuilder: new () => PickerBuilder;
 };
 
@@ -30,6 +34,7 @@ type PickerBuilder = {
   setAppId: (id: string) => PickerBuilder;
   setTitle: (title: string) => PickerBuilder;
   setCallback: (cb: (data: PickerData) => void) => PickerBuilder;
+  enableFeature: (feature: string) => PickerBuilder;
   build: () => { setVisible: (v: boolean) => void };
 };
 
@@ -78,6 +83,38 @@ export async function pickShopFolder(): Promise<{ id: string; name: string } | n
         } else if (data.action === picker.Action.CANCEL) {
           resolve(null);
         }
+      })
+      .build()
+      .setVisible(true);
+  });
+}
+
+/**
+ * Ask the user to tick the exact files they were invited to. With the
+ * drive.file permission, picking a file is what lets this app open it; a
+ * picked folder would not give access to the files inside. Resolves with the
+ * ids picked, or null if they cancel.
+ */
+export async function pickInvitedFiles(fileIds: string[]): Promise<string[] | null> {
+  const config = driveConfig();
+  if (!config) throw new Error("Google Drive sync is not set up on this site.");
+  const [picker, token] = await Promise.all([loadPicker(), getToken()]);
+
+  const view = new picker.DocsView(picker.ViewId.DOCS);
+  view.setFileIds(fileIds.join(","));
+  view.setMode(picker.DocsViewMode.LIST);
+
+  return new Promise((resolve) => {
+    new picker.PickerBuilder()
+      .addView(view)
+      .enableFeature(picker.Feature.MULTISELECT_ENABLED)
+      .setOAuthToken(token)
+      .setDeveloperKey(config.apiKey)
+      .setAppId(config.projectNumber)
+      .setTitle(`Select all ${fileIds.length} files, then click Select`)
+      .setCallback((data) => {
+        if (data.action === picker.Action.PICKED) resolve((data.docs ?? []).map((d) => d.id));
+        else if (data.action === picker.Action.CANCEL) resolve(null);
       })
       .build()
       .setVisible(true);

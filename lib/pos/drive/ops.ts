@@ -87,8 +87,14 @@ export type ShopBase = {
   /** Products as of `cutoff`; `stock` is the opening stock at that moment. */
   products: Product[];
   customers: Customer[];
-  /** Other synced stores as of `cutoff`, keyed by store name. */
+  /**
+   * Other synced stores as of `cutoff`, keyed by store name. May include
+   * "orders", "order_items" and "inventory" when the base carries sales
+   * history (the hub's own data).
+   */
   records?: Record<string, SyncRecord[]>;
+  /** Who made each order already in the base (order id → member code). */
+  orderAuthors?: Record<string, string>;
   /** Operations at or before this time are already folded into the base. */
   cutoff: string | null;
 };

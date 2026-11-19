@@ -58,7 +58,9 @@ const ROLE_SCREENS: Record<Role, ReadonlySet<PosScreen>> = {
     "settings",
     "team",
   ]),
-  cashier: new Set<PosScreen>(["billing", "customers"]),
+  // Orders shows only their own sales; Settings shows only sync status,
+  // their limits and the counter lock.
+  cashier: new Set<PosScreen>(["billing", "customers", "orders", "settings"]),
 };
 
 export function canUseOp(role: Role, type: OpType): boolean {
