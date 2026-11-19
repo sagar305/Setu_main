@@ -16,6 +16,7 @@ import {
   enableTeam,
   inviteMember,
   leaveTeam,
+  makeMainDevice,
   memberInviteLink,
   removeMember,
   updateMember,
@@ -27,6 +28,7 @@ import { ROLE_LABELS, permissionsOf } from "@/lib/pos/drive/roles";
 import { usePos } from "@/lib/pos/store";
 import { ConfirmDialog, Field, Modal, dangerBtnClass, inputClass, primaryBtnClass, secondaryBtnClass } from "../ui";
 import { timeAgo, useTeam } from "./TeamSyncContext";
+import { OpenShopButton } from "./OpenShop";
 
 const REJECT_LABELS: Record<string, string> = {
   "unknown-member": "from someone not in the team",
@@ -137,13 +139,17 @@ function TurnOnTeam() {
         <li>• Your data is kept in <strong className="text-ink">your own Google Drive</strong>. Setu never receives it.</li>
         <li>• Cashiers can only bill and add customers, with the discount and credit limits you set.</li>
       </ul>
+      <div className="flex flex-wrap gap-3">
+        <button type="button" onClick={() => setConfirming(true)} className={primaryBtnClass}>
+          <Cloud className="h-4 w-4" />
+          Turn on team sync
+        </button>
+        <OpenShopButton label="Sign in to open my shop" />
+      </div>
       <p className="text-xs text-muted">
-        Got an invite from a shop owner? Open the invite link on this device instead.
+        Already using team sync on another device, or invited by a shop owner? Use <strong>Sign in to open my
+        shop</strong> — the first time as staff, open the owner&apos;s invite link instead.
       </p>
-      <button type="button" onClick={() => setConfirming(true)} className={primaryBtnClass}>
-        <Cloud className="h-4 w-4" />
-        Turn on team sync
-      </button>
 
       <Modal open={confirming} onClose={() => !busy && setConfirming(false)} title="Turn on Google Drive team sync?">
         <div className="space-y-3 text-sm text-ink">
@@ -247,7 +253,7 @@ function OwnerTeam({ team }: { team: TeamState }) {
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold text-ink">
                     {m.name || m.email}
-                    {isMe && <span className="ml-1 text-xs font-normal text-muted">(you, main device)</span>}
+                    {isMe && <span className="ml-1 text-xs font-normal text-muted">(you · this is the main device)</span>}
                   </p>
                   <p className="truncate text-xs text-muted">
                     {m.name ? `${m.email} · ` : ""}
@@ -409,8 +415,9 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             <CheckCircle2 className="h-4 w-4" /> Invited. Google has emailed them the link.
           </p>
           <p className="text-muted">
-            They open it on their device, sign in with <strong className="text-ink">{email}</strong> and tick the shop
-            files Google shows them. You can also send the link yourself:
+            They open it once, sign in with <strong className="text-ink">{email}</strong> and select the shop files
+            Google shows. After that they just <strong className="text-ink">sign in with Google</strong> on any device.
+            You can also send the link yourself:
           </p>
           <input readOnly value={link} onFocus={(e) => e.target.select()} className={inputClass} />
           <div className="flex justify-end gap-3">
@@ -522,14 +529,55 @@ function LimitsModal({ member, onClose }: { member: TeamMember | null; onClose: 
 
 function MemberTeam({ team }: { team: TeamState }) {
   const [leaving, setLeaving] = useState(false);
+  const [promoting, setPromoting] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
   const limits = team.permissions;
+  const isShopOwnerAccount =
+    team.role === "owner" && team.email.trim().toLowerCase() === team.primaryEmail.trim().toLowerCase();
+
+  const promote = async () => {
+    setPromoting(false);
+    setBusy(true);
+    setError("");
+    try {
+      await makeMainDevice();
+    } catch (e) {
+      setError(errorText(e));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <div className="space-y-3 text-sm">
       <SyncStatus />
       <p className="text-ink">
         You&apos;re in <strong>{team.shopName}</strong> as <strong>{ROLE_LABELS[team.role]}</strong> ({team.email}).
-        Your bills are numbered with <strong>{team.memberCode}</strong>.
+        Bills made on this device are numbered with <strong>{team.memberCode}</strong>.
       </p>
+      <p className="text-muted">
+        The shop&apos;s main device last synced <strong className="text-ink">{timeAgo(team.hubSeenAt)}</strong>.
+        Changes from other devices reach you after it syncs.
+      </p>
+      {isShopOwnerAccount && (
+        <div className="rounded-lg border border-muted-line/40 bg-cream-paper px-3 py-2">
+          <p className="text-ink">
+            <strong>Main device</strong> merges everyone&apos;s sales and is where you manage the team. Switching to a
+            new or replacement computer? Make this device the main device.
+          </p>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => setPromoting(true)}
+            className={`${primaryBtnClass} mt-2 px-3 py-1.5`}
+          >
+            <ShieldCheck className="h-4 w-4" />
+            {busy ? "Switching…" : "Make this the main device"}
+          </button>
+        </div>
+      )}
+      {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-700">{error}</p>}
       {team.role === "cashier" && (
         <p className="text-muted">
           You can give up to <strong className="text-ink">{limits.maxDiscountPercent}%</strong> discount, and credit
@@ -542,9 +590,18 @@ function MemberTeam({ team }: { team: TeamState }) {
         Leave team on this device
       </button>
       <ConfirmDialog
+        open={promoting}
+        title="Make this the main device?"
+        message="This device will merge everyone's sales and manage the team. The current main device steps down on its next sync and keeps working as one of your devices. Keep this device open during working hours."
+        confirmLabel="Make main device"
+        danger={false}
+        onConfirm={() => void promote()}
+        onCancel={() => setPromoting(false)}
+      />
+      <ConfirmDialog
         open={leaving}
         title="Leave this team?"
-        message="This device stops syncing. Sales not yet uploaded will not reach the owner — sync first if you are online. The data already on this device stays here."
+        message="This device stops syncing. Sales not yet uploaded will not reach the owner — sync first if you are online. The data already on this device stays here. You can sign in again later to rejoin."
         confirmLabel="Leave team"
         onConfirm={() => {
           setLeaving(false);

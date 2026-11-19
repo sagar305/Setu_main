@@ -7,6 +7,13 @@
 // localStorage — so a stolen page snapshot can't reuse it.
 
 export const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive.file";
+/**
+ * The app's hidden folder in the user's Drive. It holds a small "my shops"
+ * note so signing in on any device finds the shop. Invisible in Drive's
+ * file list and readable only by this app.
+ */
+export const APPDATA_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
+const SCOPES = `${DRIVE_SCOPE} ${APPDATA_SCOPE}`;
 
 const GIS_SRC = "https://accounts.google.com/gsi/client";
 
@@ -93,7 +100,7 @@ export async function requestToken(interactive: boolean): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const client = oauth2.initTokenClient({
       client_id: config.clientId,
-      scope: DRIVE_SCOPE,
+      scope: SCOPES,
       callback: (response) => {
         if (!response.access_token) {
           reject(new Error(response.error_description || response.error || "Google sign-in was cancelled."));
@@ -101,10 +108,10 @@ export async function requestToken(interactive: boolean): Promise<string> {
         }
         // Google lets people untick individual permissions on its consent
         // screen. Without the Drive one, every Drive request fails.
-        if (!oauth2.hasGrantedAllScopes(response, DRIVE_SCOPE)) {
+        if (!oauth2.hasGrantedAllScopes(response, DRIVE_SCOPE, APPDATA_SCOPE)) {
           reject(
             new Error(
-              "Google Drive permission wasn't given. Try again and tick the box \"See, edit, create and delete only the specific Google Drive files you use with this app\" on Google's screen.",
+              "Google Drive permission wasn't given. Try again and tick both Google Drive boxes on Google's screen (the shop's files, and this app's own settings).",
             ),
           );
           return;

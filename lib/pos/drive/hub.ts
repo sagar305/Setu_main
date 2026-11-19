@@ -41,8 +41,15 @@ export type ShopFile = {
   updatedAt: string;
   /** Code of the owner whose device is the hub. */
   primaryCode: string;
+  /** Google account that owns the shop's files (only it can run the hub). */
+  primaryEmail?: string;
+  /** The device currently acting as the hub ("main device"). */
+  hubDeviceId?: string;
   members: TeamMember[];
-  /** How many operations of each member's file the hub has applied. */
+  /**
+   * How many operations the hub has applied, per member device:
+   * key `${memberCode}/${deviceId}` (see consumedKey).
+   */
   consumed: Record<string, number>;
   catalog: Catalog;
 };
@@ -57,7 +64,66 @@ export type BooksFile = {
   records: Record<string, SyncRecord[]>;
 };
 
-export type ChangesFileBody = { app: typeof TEAM_APP; memberCode: string; ops: Op[] };
+/**
+ * A member's changes file. Each of their devices writes only its own section,
+ * so one person can bill on a phone and a tablet without overwriting each
+ * other. `ops` is the single-list layout of the first version.
+ */
+export type ChangesFileBody = {
+  app: typeof TEAM_APP;
+  memberCode: string;
+  devices?: Record<string, Op[]>;
+  ops?: Op[];
+};
+
+const LEGACY_DEVICE = "legacy";
+
+/** Key for the hub's per-device progress. */
+export function consumedKey(memberCode: string, deviceId: string): string {
+  return `${memberCode}/${deviceId}`;
+}
+
+/** Every device section of a changes file (old single-list files included). */
+export function deviceSections(body: ChangesFileBody | null | undefined): Record<string, Op[]> {
+  const sections: Record<string, Op[]> = { ...(body?.devices ?? {}) };
+  if (body?.ops?.length) sections[LEGACY_DEVICE] = [...(sections[LEGACY_DEVICE] ?? []), ...body.ops];
+  return sections;
+}
+
+/**
+ * This device's section written into the file, keeping every other device's.
+ * Used for read-modify-write uploads; if two devices write at the same time
+ * and one is lost, that device re-uploads on its next sync.
+ */
+export function withDeviceSection(
+  body: ChangesFileBody | null | undefined,
+  memberCode: string,
+  deviceId: string,
+  ops: Op[],
+): ChangesFileBody {
+  return { app: TEAM_APP, memberCode, devices: { ...deviceSections(body), [deviceId]: ops } };
+}
+
+/**
+ * New operations per device the hub hasn't applied yet, and the updated
+ * progress. Returns one ChangesFile per member (merge only needs the member).
+ */
+export function freshOps(
+  memberCode: string,
+  body: ChangesFileBody,
+  consumed: Record<string, number>,
+): { ops: Op[]; consumed: Record<string, number> } {
+  const next = { ...consumed };
+  const ops: Op[] = [];
+  for (const [deviceId, list] of Object.entries(deviceSections(body))) {
+    const key = consumedKey(memberCode, deviceId);
+    // First-version progress was kept per member, not per device.
+    const done = next[key] ?? (deviceId === LEGACY_DEVICE ? consumed[memberCode] ?? 0 : 0);
+    ops.push(...list.slice(done));
+    next[key] = list.length;
+  }
+  return { ops, consumed: next };
+}
 
 /** Every store a device reads to build or apply a snapshot. */
 export type LocalSnapshot = Record<string, SyncRecord[]>;
@@ -177,6 +243,7 @@ export function buildShopFile(
   members: TeamMember[],
   consumed: Record<string, number>,
   now: string,
+  hub?: { deviceId: string; primaryEmail: string },
 ): ShopFile {
   const settings = (local.settings ?? []).find((s) => s.id === "main") as unknown as PosSettings | undefined;
   return {
@@ -185,6 +252,7 @@ export function buildShopFile(
     shopName,
     updatedAt: now,
     primaryCode,
+    ...(hub ? { hubDeviceId: hub.deviceId, primaryEmail: hub.primaryEmail } : {}),
     members,
     consumed,
     catalog: {
