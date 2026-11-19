@@ -7,6 +7,8 @@ import {
   Cloud,
   Copy,
   LogOut,
+  MessageCircle,
+  Pencil,
   RefreshCw,
   ShieldCheck,
   UserMinus,
@@ -26,6 +28,13 @@ import type { TeamMember } from "@/lib/pos/drive/hub";
 import { DEFAULT_CASHIER_PERMISSIONS, type MemberPermissions, type Role } from "@/lib/pos/drive/ops";
 import { ROLE_LABELS, permissionsOf } from "@/lib/pos/drive/roles";
 import { usePos } from "@/lib/pos/store";
+import {
+  defaultCountryFor,
+  formatPhone,
+  inviteMessage,
+  normalizePhone,
+  whatsappUrl,
+} from "@/lib/pos/drive/whatsapp";
 import { ConfirmDialog, Field, Modal, dangerBtnClass, inputClass, primaryBtnClass, secondaryBtnClass } from "../ui";
 import { timeAgo, useTeam } from "./TeamSyncContext";
 import { OpenShopButton } from "./OpenShop";
@@ -255,8 +264,9 @@ function OwnerTeam({ team }: { team: TeamState }) {
                     {m.name || m.email}
                     {isMe && <span className="ml-1 text-xs font-normal text-muted">(you · this is the main device)</span>}
                   </p>
-                  <p className="truncate text-xs text-muted">
+                  <p className="break-words text-xs text-muted">
                     {m.name ? `${m.email} · ` : ""}
+                    {m.phone ? `${formatPhone(m.phone)} · ` : ""}
                     {ROLE_LABELS[m.role]} · code {m.code}
                     {m.role === "cashier" &&
                       ` · discount up to ${limits.maxDiscountPercent}% · credit ${limits.allowCredit ? "allowed" : "off"}`}
@@ -268,12 +278,13 @@ function OwnerTeam({ team }: { team: TeamState }) {
                       {copied === m.code ? <CheckCircle2 className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                       {copied === m.code ? "Copied" : "Invite link"}
                     </button>
-                    {m.role === "cashier" && (
-                      <button type="button" onClick={() => setEditing(m)} className={`${secondaryBtnClass} px-3 py-1.5`}>
-                        <ShieldCheck className="h-4 w-4" />
-                        Limits
-                      </button>
+                    {m.phone && (
+                      <WhatsAppInviteLink member={m} shopName={team.shopName} className={`${secondaryBtnClass} px-3 py-1.5`} />
                     )}
+                    <button type="button" onClick={() => setEditing(m)} className={`${secondaryBtnClass} px-3 py-1.5`}>
+                      <Pencil className="h-4 w-4" />
+                      Edit
+                    </button>
                     <button type="button" onClick={() => setRemoving(m)} className={`${dangerBtnClass} px-3 py-1.5`}>
                       <UserMinus className="h-4 w-4" />
                       Remove
@@ -311,7 +322,7 @@ function OwnerTeam({ team }: { team: TeamState }) {
       </button>
 
       <InviteModal open={inviting} onClose={() => setInviting(false)} />
-      <LimitsModal member={editing} onClose={() => setEditing(null)} />
+      <EditMemberModal member={editing} onClose={() => setEditing(null)} />
 
       <ConfirmDialog
         open={removing !== null}
@@ -375,9 +386,54 @@ function PermissionFields({
   );
 }
 
+/** "Send on WhatsApp" for a member's invite: opens the owner's WhatsApp. */
+function WhatsAppInviteLink({
+  member,
+  shopName,
+  className,
+  label = "WhatsApp",
+}: {
+  member: TeamMember;
+  shopName: string;
+  className: string;
+  label?: string;
+}) {
+  const link = memberInviteLink(member.code);
+  if (!member.phone || !link) return null;
+  const message = inviteMessage({ name: member.name, shopName, email: member.email, link });
+  return (
+    <a href={whatsappUrl(member.phone, message)} target="_blank" rel="noopener noreferrer" className={className}>
+      <MessageCircle className="h-4 w-4" />
+      {label}
+    </a>
+  );
+}
+
+/** Mobile number input with the WhatsApp hint; reports the normalized number. */
+function PhoneField({ value, onChange }: { value: string; onChange: (raw: string) => void }) {
+  return (
+    <Field label="Mobile number (optional)" hint="To send the invite on WhatsApp. Include the country code if not Indian.">
+      <input
+        type="tel"
+        inputMode="tel"
+        autoComplete="off"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="98765 43210"
+        className={inputClass}
+      />
+    </Field>
+  );
+}
+
 function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { business } = usePos();
+  const { team } = useTeam();
+  const country = defaultCountryFor(business?.currency);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phoneRaw, setPhoneRaw] = useState("");
+  const [phone, setPhone] = useState("");
   const [role, setRole] = useState<Role>("cashier");
   const [permissions, setPermissions] = useState<MemberPermissions>(DEFAULT_CASHIER_PERMISSIONS);
   const [busy, setBusy] = useState(false);
@@ -388,6 +444,8 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     if (busy) return;
     setEmail("");
     setName("");
+    setPhoneRaw("");
+    setPhone("");
     setRole("cashier");
     setPermissions(DEFAULT_CASHIER_PERMISSIONS);
     setError("");
@@ -396,10 +454,20 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   };
 
   const submit = async () => {
+    const normalized = phoneRaw.trim() ? normalizePhone(phoneRaw, country) : "";
+    if (normalized === null) {
+      setError(
+        country
+          ? "Enter a 10-digit mobile number, or include the country code (e.g. +971 50 123 4567)."
+          : "Enter the mobile number with its country code, e.g. +44 7700 900123.",
+      );
+      return;
+    }
     setBusy(true);
     setError("");
     try {
-      setLink(await inviteMember({ email, name, role, permissions }));
+      setPhone(normalized);
+      setLink(await inviteMember({ email, name, phone: normalized, role, permissions }));
     } catch (e) {
       setError(errorText(e));
     } finally {
@@ -414,6 +482,17 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           <p className="flex items-center gap-2 font-semibold text-emerald-700">
             <CheckCircle2 className="h-4 w-4" /> Invited. Google has emailed them the link.
           </p>
+          {phone && (
+            <a
+              href={whatsappUrl(phone, inviteMessage({ name, shopName: team?.shopName ?? "our shop", email, link }))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1ebe5b]"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Send invite on WhatsApp to {formatPhone(phone)}
+            </a>
+          )}
           <p className="text-muted">
             They open it once, sign in with <strong className="text-ink">{email}</strong> and select the shop files
             Google shows. After that they just <strong className="text-ink">sign in with Google</strong> on any device.
@@ -454,6 +533,7 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           <Field label="Name (optional)">
             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Ramesh" className={inputClass} />
           </Field>
+          <PhoneField value={phoneRaw} onChange={setPhoneRaw} />
           <Field label="Role" required>
             <select value={role} onChange={(e) => setRole(e.target.value as Role)} className={inputClass}>
               <option value="cashier">Cashier — billing and adding customers only</option>
@@ -476,46 +556,70 @@ function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   );
 }
 
-function LimitsModal({ member, onClose }: { member: TeamMember | null; onClose: () => void }) {
-  const [value, setValue] = useState<MemberPermissions | null>(null);
+function EditMemberModal({ member, onClose }: { member: TeamMember | null; onClose: () => void }) {
+  const { business } = usePos();
+  const country = defaultCountryFor(business?.currency);
+  const [name, setName] = useState<string | null>(null);
+  const [phoneRaw, setPhoneRaw] = useState<string | null>(null);
+  const [limits, setLimits] = useState<MemberPermissions | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const current = value ?? (member ? permissionsOf(member) : DEFAULT_CASHIER_PERMISSIONS);
+  const currentName = name ?? member?.name ?? "";
+  const currentPhone = phoneRaw ?? (member?.phone ? formatPhone(member.phone) : "");
+  const currentLimits = limits ?? (member ? permissionsOf(member) : DEFAULT_CASHIER_PERMISSIONS);
 
   const close = () => {
-    setValue(null);
+    setName(null);
+    setPhoneRaw(null);
+    setLimits(null);
     setError("");
     onClose();
   };
 
+  const save = async () => {
+    if (!member) return;
+    const phone = currentPhone.trim() ? normalizePhone(currentPhone, country) : "";
+    if (phone === null) {
+      setError("That mobile number doesn't look right. Include the country code if it isn't Indian.");
+      return;
+    }
+    setBusy(true);
+    setError("");
+    try {
+      await updateMember(member.code, {
+        name: currentName.trim(),
+        phone,
+        ...(member.role === "cashier" ? { permissions: currentLimits } : {}),
+      });
+      close();
+    } catch (e) {
+      setError(errorText(e));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
-    <Modal open={member !== null} onClose={close} title={`Limits for ${member?.name || member?.email}`}>
+    <Modal open={member !== null} onClose={close} title={`Edit ${member?.name || member?.email}`}>
       <div className="space-y-3">
-        <PermissionFields value={current} onChange={setValue} />
-        <p className="text-xs text-muted">Applies on their device after their next sync (about a minute).</p>
+        <p className="text-xs text-muted">{member?.email} · {member ? ROLE_LABELS[member.role] : ""}</p>
+        <Field label="Name">
+          <input value={currentName} onChange={(e) => setName(e.target.value)} className={inputClass} />
+        </Field>
+        <PhoneField value={currentPhone} onChange={setPhoneRaw} />
+        {member?.role === "cashier" && (
+          <>
+            <PermissionFields value={currentLimits} onChange={setLimits} />
+            <p className="text-xs text-muted">Limits apply on their device after their next sync (about a minute).</p>
+          </>
+        )}
         {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
         <div className="flex justify-end gap-3">
           <button type="button" onClick={close} className={secondaryBtnClass}>
             Cancel
           </button>
-          <button
-            type="button"
-            disabled={busy}
-            className={primaryBtnClass}
-            onClick={async () => {
-              if (!member) return;
-              setBusy(true);
-              try {
-                await updateMember(member.code, { permissions: current });
-                close();
-              } catch (e) {
-                setError(errorText(e));
-              } finally {
-                setBusy(false);
-              }
-            }}
-          >
-            Save limits
+          <button type="button" disabled={busy} className={primaryBtnClass} onClick={() => void save()}>
+            {busy ? "Saving…" : "Save"}
           </button>
         </div>
       </div>
