@@ -399,7 +399,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
     held.lines.reduce((sum, line) => sum + line.price * line.quantity, 0);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+    <div className="grid gap-6 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px]">
       {/* Product picker */}
       <div className="min-w-0">
         <input
@@ -541,14 +541,63 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         ) : (
           <ul className="mt-4 space-y-3">
             {lines.map((line) => (
-              <li key={line.productId} className="flex items-center gap-2">
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-ink">{line.name}</p>
-                  <p className="text-xs text-muted">
+              <li key={line.productId} className="border-b border-muted-line/15 pb-3 last:border-0 last:pb-0">
+                {/* Row 1: the name gets the full cart width (wraps to 2 lines). */}
+                <div className="flex items-start gap-2">
+                  <p
+                    title={line.name}
+                    className="min-w-0 flex-1 break-words text-sm font-semibold leading-snug text-ink line-clamp-2"
+                  >
+                    {line.name}
+                  </p>
+                  <button
+                    type="button"
+                    aria-label={`Remove ${line.name}`}
+                    onClick={() => removeLine(line.productId)}
+                    className="shrink-0 text-muted/60 transition hover:text-red-500"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+                {/* Row 2: unit price · quantity · line total. */}
+                <div className="mt-1.5 flex items-center gap-2">
+                  <p className="min-w-0 flex-1 truncate text-xs text-muted">
                     {formatMoney(line.price, currency)}
                     {line.taxRate > 0 &&
                       ` · ${line.taxRate}% tax${line.taxInclusive ? " incl." : ""}`}
                   </p>
+                  <div className="flex shrink-0 items-center gap-1">
+                    <button
+                      type="button"
+                      aria-label={`Decrease quantity of ${line.name}`}
+                      onClick={() =>
+                        line.quantity > 1
+                          ? setQuantity(line.productId, line.quantity - 1)
+                          : removeLine(line.productId)
+                      }
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-muted-line/40 text-muted hover:border-indigo hover:text-indigo"
+                    >
+                      <Minus className="h-3.5 w-3.5" />
+                    </button>
+                    <QuantityInput
+                      value={line.quantity}
+                      label={`Quantity of ${line.name}`}
+                      overStock={stockWarnings.some((w) => w.productId === line.productId)}
+                      onChange={(quantity) => setQuantity(line.productId, quantity)}
+                    />
+                    <button
+                      type="button"
+                      aria-label={`Increase quantity of ${line.name}`}
+                      onClick={() => setQuantity(line.productId, line.quantity + 1)}
+                      className="flex h-7 w-7 items-center justify-center rounded-full border border-muted-line/40 text-muted hover:border-indigo hover:text-indigo"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                  <div className="w-20 shrink-0 text-right text-sm font-semibold text-ink">
+                    {formatMoney(line.price * line.quantity, currency)}
+                  </div>
+                </div>
                   {batchMode && (() => {
                     const own = batchesFor(stockBatches, line.productId);
                     if (own.length === 0) return null;
@@ -584,43 +633,6 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                       </>
                     );
                   })()}
-                </div>
-                <div className="flex items-center gap-1">
-                  <button
-                    type="button"
-                    aria-label={`Decrease quantity of ${line.name}`}
-                    onClick={() =>
-                      line.quantity > 1
-                        ? setQuantity(line.productId, line.quantity - 1)
-                        : removeLine(line.productId)
-                    }
-                    className="flex h-7 w-7 items-center justify-center rounded-full border border-muted-line/40 text-muted hover:border-indigo hover:text-indigo"
-                  >
-                    <Minus className="h-3.5 w-3.5" />
-                  </button>
-                  <span className="w-8 text-center text-sm font-bold text-ink">
-                    {line.quantity}
-                  </span>
-                  <button
-                    type="button"
-                    aria-label={`Increase quantity of ${line.name}`}
-                    onClick={() => setQuantity(line.productId, line.quantity + 1)}
-                    className="flex h-7 w-7 items-center justify-center rounded-full border border-muted-line/40 text-muted hover:border-indigo hover:text-indigo"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-                <div className="w-20 text-right text-sm font-semibold text-ink">
-                  {formatMoney(line.price * line.quantity, currency)}
-                </div>
-                <button
-                  type="button"
-                  aria-label={`Remove ${line.name}`}
-                  onClick={() => removeLine(line.productId)}
-                  className="text-muted/60 transition hover:text-red-500"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </button>
               </li>
             ))}
           </ul>
@@ -1080,5 +1092,66 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
         onSaved={(customer) => setCustomerId(customer.id)}
       />
     </div>
+  );
+}
+
+/**
+ * Typeable cart quantity. Keeps its own draft text so the field can be cleared
+ * and retyped (e.g. "50"); commits whole numbers ≥ 1 as you type and snaps back
+ * to the last valid quantity on blur if left empty or invalid.
+ */
+function QuantityInput({
+  value,
+  label,
+  overStock,
+  onChange,
+}: {
+  value: number;
+  label: string;
+  overStock: boolean;
+  onChange: (quantity: number) => void;
+}) {
+  const [draft, setDraft] = useState(String(value));
+  const [focused, setFocused] = useState(false);
+
+  // Follow outside changes (+/− buttons, tapping the product again).
+  useEffect(() => {
+    if (!focused) setDraft(String(value));
+  }, [value, focused]);
+
+  const commit = (text: string) => {
+    const n = Number(text);
+    if (text.trim() !== "" && Number.isInteger(n) && n >= 1) onChange(Math.min(n, 99999));
+  };
+
+  return (
+    <input
+      type="text"
+      inputMode="numeric"
+      pattern="[0-9]*"
+      aria-label={label}
+      value={draft}
+      onFocus={(event) => {
+        setFocused(true);
+        event.target.select();
+      }}
+      onChange={(event) => {
+        const text = event.target.value.replace(/[^0-9]/g, "").slice(0, 5);
+        setDraft(text);
+        commit(text);
+      }}
+      onBlur={() => {
+        setFocused(false);
+        setDraft(String(value));
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Enter") event.currentTarget.blur();
+      }}
+      className={`h-7 w-12 rounded-md border bg-white px-1 text-center text-sm font-bold text-ink focus:outline-none ${
+        overStock
+          ? "border-saffron focus:border-saffron"
+          : "border-muted-line/40 focus:border-indigo"
+      }`}
+    />
   );
 }
