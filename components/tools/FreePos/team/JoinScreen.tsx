@@ -5,6 +5,8 @@ import { AlertTriangle, Cloud, Users } from "lucide-react";
 import { joinTeam, type InvitePayload } from "@/lib/pos/drive/engine";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
 import { signOut } from "@/lib/pos/drive/auth";
+import { recordTeamConsent } from "@/lib/pos/drive/consent";
+import { TeamConsent } from "./TeamConsent";
 import { usePos } from "@/lib/pos/store";
 import { primaryBtnClass, secondaryBtnClass } from "../ui";
 import { useTeam } from "./TeamSyncContext";
@@ -14,6 +16,7 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
   const { business, orders, reload } = usePos();
   const { available, team } = useTeam();
   const [busy, setBusy] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const topRef = useRef<HTMLDivElement>(null);
   // The POS sits below the product page's intro; bring the invite into view.
@@ -37,6 +40,8 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
   }
 
   const join = async () => {
+    if (!agreed) return;
+    recordTeamConsent();
     setBusy(true);
     setError("");
     try {
@@ -109,8 +114,17 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
         </div>
       )}
 
+      <div className="mt-5">
+        <TeamConsent checked={agreed} onChange={setAgreed} />
+      </div>
+
       <div className="mt-6 flex flex-wrap gap-3">
-        <button type="button" disabled={busy || Boolean(team)} onClick={() => void join()} className={primaryBtnClass}>
+        <button
+          type="button"
+          disabled={busy || Boolean(team) || !agreed}
+          onClick={() => void join()}
+          className={primaryBtnClass}
+        >
           <Cloud className="h-4 w-4" />
           {busy ? "Joining…" : hasData ? "Replace & join" : "Sign in with Google & join"}
         </button>

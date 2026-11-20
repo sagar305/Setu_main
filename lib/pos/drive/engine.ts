@@ -39,6 +39,7 @@ import {
 } from "./hub";
 import { DEFAULT_CASHIER_PERMISSIONS, type MemberPermissions, type Op, type Role } from "./ops";
 import { checkSale, type SaleCheck } from "./roles";
+import { readTeamConsent } from "./consent";
 import { CORE_STORES, syncedStores } from "./scope";
 
 // ---------------------------------------------------------------------------
@@ -89,6 +90,9 @@ export type TeamState = {
   accessStrikes?: number;
   /** When the shop's files first couldn't be opened in this run of failures. */
   accessFailedSince?: string | null;
+  /** Terms/Privacy version agreed to on this device for team sync, and when. */
+  termsVersion?: string | null;
+  termsAcceptedAt?: string | null;
 };
 
 /** Removal is only concluded after failing this long (and twice in a row). */
@@ -400,7 +404,10 @@ export async function signIn(): Promise<void> {
 }
 
 function baseState(fields: Partial<TeamState> & Pick<TeamState, "shopName" | "memberCode" | "role" | "email" | "shopFileId">): TeamState {
+  const consent = readTeamConsent();
   return {
+    termsVersion: consent?.version ?? null,
+    termsAcceptedAt: consent?.at ?? null,
     id: "main",
     isPrimary: false,
     deviceId: thisDeviceId(),

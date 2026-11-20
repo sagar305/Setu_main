@@ -38,6 +38,8 @@ import {
 import { ConfirmDialog, Field, Modal, dangerBtnClass, inputClass, primaryBtnClass, secondaryBtnClass } from "../ui";
 import { timeAgo, useTeam } from "./TeamSyncContext";
 import { OpenShopButton } from "./OpenShop";
+import { TeamConsent } from "./TeamConsent";
+import { recordTeamConsent } from "@/lib/pos/drive/consent";
 
 const REJECT_LABELS: Record<string, string> = {
   "unknown-member": "from someone not in the team",
@@ -124,11 +126,14 @@ export function TeamPanel() {
 function TurnOnTeam() {
   const { business, settings } = usePos();
   const [confirming, setConfirming] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const batchOn = settings.batchTracking === true;
 
   const turnOn = async () => {
+    if (!agreed) return;
+    recordTeamConsent();
     setBusy(true);
     setError("");
     try {
@@ -186,12 +191,13 @@ function TurnOnTeam() {
             <li>• Restore from backup and Delete all data are turned off while sync is on.</li>
             <li>• Google asks you to reconnect about once an hour of use; sales keep working meanwhile.</li>
           </ul>
+          <TeamConsent checked={agreed} onChange={setAgreed} />
           {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-red-700">{error}</p>}
           <div className="flex justify-end gap-3 pt-1">
             <button type="button" disabled={busy} onClick={() => setConfirming(false)} className={secondaryBtnClass}>
               Cancel
             </button>
-            <button type="button" disabled={busy} onClick={() => void turnOn()} className={primaryBtnClass}>
+            <button type="button" disabled={busy || !agreed} onClick={() => void turnOn()} className={primaryBtnClass}>
               {busy ? "Setting up…" : "Sign in with Google & turn on"}
             </button>
           </div>
