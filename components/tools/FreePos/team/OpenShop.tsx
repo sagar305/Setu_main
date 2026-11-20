@@ -4,6 +4,8 @@ import { useState } from "react";
 import { AlertTriangle, Cloud, LogIn, Store } from "lucide-react";
 import { findMyShops, openShop, type FoundShop } from "@/lib/pos/drive/engine";
 import { signOut } from "@/lib/pos/drive/auth";
+import { recordTeamConsent } from "@/lib/pos/drive/consent";
+import { TeamConsent } from "./TeamConsent";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
 import { ROLE_LABELS } from "@/lib/pos/drive/roles";
 import { usePos } from "@/lib/pos/store";
@@ -43,6 +45,7 @@ export function OpenShopButton({
 function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { business, orders, reload } = usePos();
   const [busy, setBusy] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<{ email: string; shops: FoundShop[] } | null>(null);
   const [chosen, setChosen] = useState<FoundShop | null>(null);
@@ -52,10 +55,13 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
     setError("");
     setResult(null);
     setChosen(null);
+    setAgreed(false);
     onClose();
   };
 
   const signIn = async () => {
+    if (!agreed) return;
+    recordTeamConsent();
     setBusy(true);
     setError("");
     try {
@@ -96,7 +102,8 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
               Sign in with the Google account you use for your shop — as the owner, or the email the owner invited.
               Your shop opens with the access the owner gave you.
             </p>
-            <button type="button" disabled={busy} onClick={() => void signIn()} className={primaryBtnClass}>
+            <TeamConsent checked={agreed} onChange={setAgreed} />
+            <button type="button" disabled={busy || !agreed} onClick={() => void signIn()} className={primaryBtnClass}>
               <Cloud className="h-4 w-4" />
               {busy ? "Signing in…" : "Sign in with Google"}
             </button>
