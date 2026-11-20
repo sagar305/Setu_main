@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Camera, ClipboardList, Lock, Upload, WifiOff } from "lucide-react";
 import { useRepair } from "@/lib/repair/store";
 import { parseBackupFile } from "@/lib/repair/backup";
 import { primaryBtnClass, secondaryBtnClass } from "./ui";
+import { OpenShopButton } from "./team/OpenShop";
+import { clearTeamNotice, readTeamNotice, type TeamNotice } from "@/lib/repair/team/engine";
 
 const POINTS = [
   {
@@ -21,6 +23,9 @@ export function WelcomeScreen() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [importError, setImportError] = useState("");
   const [importing, setImporting] = useState(false);
+  // Shown once after this device was wiped because its person was removed from a team.
+  const [notice, setNotice] = useState<TeamNotice | null>(null);
+  useEffect(() => setNotice(readTeamNotice()), []);
 
   const handleImportFile = async (file: File) => {
     setImportError("");
@@ -41,6 +46,25 @@ export function WelcomeScreen() {
 
   return (
     <div className="mx-auto max-w-2xl py-10 text-center">
+      {notice && (
+        <div className="mx-auto mb-6 max-w-md rounded-xl border border-saffron/50 bg-saffron/10 p-3 text-left text-sm text-ink">
+          <p className="font-semibold">You were removed from {notice.shopName}&apos;s team</p>
+          <p className="mt-1 text-muted">
+            The owner removed your access, so the shop&apos;s data was deleted from this device and it was signed out
+            of Google.
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              clearTeamNotice();
+              setNotice(null);
+            }}
+            className="mt-2 text-xs font-semibold text-indigo underline"
+          >
+            OK
+          </button>
+        </div>
+      )}
       <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo text-white">
         <ClipboardList className="h-8 w-8" />
       </span>
@@ -89,6 +113,13 @@ export function WelcomeScreen() {
           }}
         />
       </div>
+
+      <div className="mt-4 flex justify-center">
+        <OpenShopButton label="Sign in with Google to open my shop" />
+      </div>
+      <p className="mx-auto mt-2 max-w-md text-xs text-muted">
+        Working in a shop that uses team sync? Sign in with the Google account the owner invited.
+      </p>
 
       {importError && (
         <p className="mt-4 text-sm font-semibold text-red-600" role="alert">

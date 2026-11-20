@@ -33,6 +33,7 @@ import {
   type RepairStoreName,
 } from "./db";
 import { restoreBackup, type RepairBackup } from "./backup";
+import { getTeamSession, leaveTeam, teamDiscountAllowed, teamNumberPrefix, teamRole } from "./team/engine";
 import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
 import { billTotals, currentOutside, nextChallanNo, round2, stockDeltas } from "./calc";
 import {
@@ -210,6 +211,10 @@ type RepairContextValue = {
   applyRestoredBackup: (backup: RepairBackup) => Promise<void>;
   syncToSheet: () => Promise<void>;
   reloadAll: () => Promise<void>;
+  /** Re-read everything, the business profile and setup status included (after team sync). */
+  reload: () => Promise<void>;
+  /** Bring customers' tracking links up to date for jobs another device changed. */
+  refreshTracking: (jobIds: string[]) => Promise<void>;
 
   /** Mint this job's tracking link, or re-push it after a failed attempt. */
   publishJobTracking: (jobId: string) => Promise<Job>;
@@ -491,6 +496,10 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     async (job: Job, billForThisJob: Bill | null): Promise<Job> => {
       if (!settings.trackingEnabled) return job;
       if (typeof window === "undefined") return job;
+      // A technician's device holds the job without its prices, so a payload
+      // built there would wipe the amount off the customer's page. The main
+      // device re-publishes the link once it has merged their change.
+      if (teamRole() === "technician") return job;
       const origin = window.location.origin;
 
       try {
@@ -529,7 +538,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       const timestamp = nowIso();
       const job = await allocateNumber<Job>("nextJobNumber", "jobs", (next) => ({
         id: generateId(),
-        jobNo: jobNumberFrom(settings.jobPrefix, next),
+        jobNo: jobNumberFrom(teamNumberPrefix(settings.jobPrefix), next),
         customerId: input.customerId,
         deviceKind: input.deviceKind,
         brand: input.brand,
@@ -781,6 +790,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         },
         settings
       );
+      const draftLines = existing.partsUsed.map((part) => ({ amount: part.sellingPrice * part.quantity }));
+      if (
+        !teamDiscountAllowed({ discount: totals.discount, partLines: draftLines, labourCharge: totals.labourCharge })
+      ) {
+        throw new Error(
+          `That discount is more than the ${getTeamSession()?.permissions.maxDiscountPercent ?? 0}% the owner allows you. Ask the owner, or reduce it.`
+        );
+      }
 
       // The bill and the job that points at it are allocated and written in one
       // transaction: an invoice number handed out for a job that then failed to
@@ -791,7 +808,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         (next) => {
           const record: Bill = {
             id: generateId(),
-            invoiceNo: invoiceNumberFrom(settings.invoicePrefix, next),
+            invoiceNo: invoiceNumberFrom(teamNumberPrefix(settings.invoicePrefix), next),
             jobId: existing.id,
             customerId: existing.customerId,
             date: input.deliveredOn,
@@ -1249,6 +1266,8 @@ export function RepairProvider({ children }: { children: ReactNode }) {
    * ------------------------------------------------------------------ */
 
   const clearAllData = useCallback(async () => {
+    // In a team, stop syncing first: otherwise this device keeps capturing.
+    if (getTeamSession()) await leaveTeam({ wipe: true });
     await repairClearAll();
     setCustomers([]);
     setJobs([]);
@@ -1262,6 +1281,11 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
   const applyRestoredBackup = useCallback(
     async (backup: RepairBackup) => {
+      if (getTeamSession()) {
+        throw new Error(
+          "This device is in a team. Restoring a backup would overwrite the whole team's data — leave the team first."
+        );
+      }
       await restoreBackup(backup);
       await load();
       reportActivity("repair", "backup_restored");
@@ -1279,6 +1303,22 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     );
     await pushToSheet(settings.sheetSyncUrl, payloads);
   }, [business, settings, customers, jobs, parts, technicians, bills]);
+
+  const refreshTracking = useCallback(
+    async (jobIds: string[]) => {
+      if (!settings.trackingEnabled || jobIds.length === 0) return;
+      const fresh = await repairGetAll<Job>("jobs");
+      const freshBills = await repairGetAll<Bill>("bills");
+      for (const id of jobIds) {
+        const job = fresh.find((row) => row.id === id);
+        if (!job) continue;
+        const bill = freshBills.find((row) => row.jobId === id) ?? null;
+        const synced = await applyTracking(job, bill);
+        await persistTracking(job, synced);
+      }
+    },
+    [settings.trackingEnabled, applyTracking, persistTracking]
+  );
 
   const value = useMemo<RepairContextValue>(
     () => ({
@@ -1321,6 +1361,8 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      reload: load,
+      refreshTracking,
       publishJobTracking,
       openEstimateForApproval,
       checkEstimateDecision,
@@ -1372,6 +1414,8 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      load,
+      refreshTracking,
       publishJobTracking,
       openEstimateForApproval,
       checkEstimateDecision,

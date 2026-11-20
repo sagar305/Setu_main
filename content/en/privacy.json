@@ -16,7 +16,7 @@
       "heading": "The short version",
       "paragraphs": [
         "The calculators and tools on this site do their work inside your browser. Invoices, quotations, bank statements, bills, patient notes and fee records are written to storage on your own device and are never uploaded to us. We cannot read them, we cannot recover them for you, and clearing your browser data deletes them for good.",
-        "The one exception you choose yourself: if a shop owner turns on **Google Drive team sync** in the Browser Based POS, the shop's POS data is also copied to **that owner's own Google Drive**, so their staff and other devices can use it. It still does not come to us. [How team sync handles data](#google-drive-team-sync) is explained in full below.",
+        "The one exception you choose yourself: if a shop owner turns on **Google Drive team sync** in the Browser Based POS or the Free Repair Job Card, the shop's data is also copied to **that owner's own Google Drive**, so their staff and other devices can use it. It still does not come to us. [How team sync handles data](#google-drive-team-sync) is explained in full below.",
         "Separately, we count how the site is used — which pages open, which buttons are pressed — so we know which tools are worth improving. That measurement never includes anything you type."
       ]
     },
@@ -50,7 +50,7 @@
       "paragraphs": [
         "Usage measurement is processed by **PostHog** (analytics), **Google Analytics** (analytics, which sets a cookie in your browser) and **Vercel**, who host the site and provide cookie-free traffic and performance figures. Each receives the events described above and nothing else.",
         "When you submit the contact or demo form, what you wrote is emailed to us through **Resend**. We do not sell data to anyone, and we do not use it for advertising.",
-        "If you use Google Drive team sync in the Browser Based POS, **Google** handles your sign-in and stores the shop's files in the shop owner's Google Drive, under [Google's Privacy Policy](https://policies.google.com/privacy). Details are in the team sync sections below."
+        "If you use Google Drive team sync in the Browser Based POS or the Free Repair Job Card, **Google** handles your sign-in and stores the shop's files in the shop owner's Google Drive, under [Google's Privacy Policy](https://policies.google.com/privacy). Details are in the team sync sections below."
       ]
     },
     {
@@ -143,7 +143,25 @@
         "**A member leaving on a device** — sales not yet sent are uploaded first if the device is online; then the shop's data is deleted from that device and it is signed out of Google.",
         "**A member removed by the owner** — their access to the shop's files ends. When their device next syncs or opens, it deletes the shop's data and signs out, and shows them why. What they synced before removal stays in the owner's books.",
         "**The owner turning team sync off on the main device** — that device keeps its data and stops syncing. The files stay in the owner's Google Drive until the owner deletes them.",
-        "**Deleting everything** — the shop owner deletes the “Setu POS – ⟨shop name⟩” folder in Google Drive, removes the app's access in their Google Account (Security → Third-party apps & services), and can delete the app's hidden data in Google Drive (Settings → Manage apps → Setu POS → Delete hidden app data). Because Setu holds no copy and no key, there is nothing for us to delete; we also cannot restore files deleted from Drive or recover a lost key."
+        "**Deleting everything** — the shop owner deletes the “Setu POS – ⟨shop name⟩” (or “Setu Repair – ⟨shop name⟩”) folder in Google Drive, removes the app's access in their Google Account (Security → Third-party apps & services), and can delete the app's hidden data in Google Drive (Settings → Manage apps → Setu POS → Delete hidden app data). Because Setu holds no copy and no key, there is nothing for us to delete; we also cannot restore files deleted from Drive or recover a lost key."
+      ]
+    },
+    {
+      "id": "team-sync-repair",
+      "heading": "Team sync in the Free Repair Job Card",
+      "paragraphs": [
+        "Team sync works the same way in the Free Repair Job Card — the same Google sign-in, the same encryption and keys, the same invitations, leaving and removal described above — with its own folder, “Setu Repair – ⟨shop name⟩”, in the shop owner's Google Drive. A team has at most five people, the owner included.",
+        "The files in that folder, every one compressed and encrypted:"
+      ],
+      "list": [
+        "**live** (shop key) — parts stock, the team list (each person's name, Google email, role, discount limit and which technician they are) and sync progress.",
+        "**catalog** (shop key) — the business profile, shared job card settings, the technician list and the parts list **without prices or stock**.",
+        "**books** (books key) — customers, jobs (without photos or signatures), bills, outside-repair vendors, part prices and staff mobile numbers.",
+        "**archive** (books key) — older closed jobs, in blocks of 300.",
+        "**media** (books key) — intake photos (reduced in size) and signatures of jobs still open. Photos stay at full size only on the device that took them.",
+        "**bench-⟨code⟩** (shop key) — one per technician, shared with that technician only: the open jobs assigned to them, including the device unlock code and reduced intake photos, with every price, bill and customer contact detail removed (customers' names only).",
+        "**changes-⟨code⟩** (shop key) — one per team member, holding their devices' changes until the owner's main device has merged them.",
+        "**Who sees what:** the owner and members invited as Owner see everything. **Front desk** members get both keys and see all jobs, customers, bills and reports, but cannot change settings or the team. **Technicians** get only the shop key and only live, catalog, their own bench and changes files: they never receive customers' phone numbers or addresses, prices, bills, other technicians' jobs or staff mobile numbers. What each role may change is checked again on the owner's main device, which ignores any change outside that role."
       ]
     },
     {

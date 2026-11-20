@@ -38,6 +38,42 @@ export const CHANGE_TYPE_LABELS: Record<ChangeType, string> = {
 export const CHANGELOG: ChangelogEntry[] = [
   {
     date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "Team sync: front desk and technician logins for up to five people",
+    description:
+      "Turn it on in Settings and invite staff by email or WhatsApp. Front desk handles intake, delivery and billing within the discount you allow; a technician sees only their own jobs and never prices or bills. The data stays encrypted in your own Google Drive.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "See every engineer's workload, and jobs done per engineer",
+    description:
+      "A new By engineer view on the board shows how many open, urgent and overdue jobs each engineer has. Reports count the jobs each engineer marked ready, with labour and average days.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "Keep track of devices sent to another service centre",
+    description:
+      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. The vendor's charge counts as your cost, and customers only see \"With our repair partner\".",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "improvement",
+    product: "Free Repair Job Card",
+    title: "Job cards print in larger type, laid out like a proper service receipt",
+    description:
+      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. The shop copy carries the device password and internal notes.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
     type: "improvement",
     product: "Browser Based POS",
     title: "Type the quantity straight into the cart, and see full product names",

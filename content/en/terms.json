@@ -30,15 +30,15 @@
       "id": "your-data",
       "heading": "Your data is yours, and it is your responsibility",
       "paragraphs": [
-        "Work created in these tools is stored in your own browser, not on our servers. That has an important consequence: **we hold no copy and cannot recover anything for you.** Clearing your browsing data, using private browsing, switching browser or switching device will lose it. Export or download anything you need to keep. If you turn on Google Drive team sync in the Browser Based POS, a copy is also kept in the shop owner's own Google Drive — still not with us (see [Google Drive team sync](#google-drive-team-sync) below).",
+        "Work created in these tools is stored in your own browser, not on our servers. That has an important consequence: **we hold no copy and cannot recover anything for you.** Clearing your browsing data, using private browsing, switching browser or switching device will lose it. Export or download anything you need to keep. If you turn on Google Drive team sync in the Browser Based POS or the Free Repair Job Card, a copy is also kept in the shop owner's own Google Drive — still not with us (see [Google Drive team sync](#google-drive-team-sync) below).",
         "You are responsible for the accuracy and legality of what you put into the tools, including any invoice, bill or record you generate and issue to someone else."
       ]
     },
     {
       "id": "google-drive-team-sync",
-      "heading": "Google Drive team sync (Browser Based POS)",
+      "heading": "Google Drive team sync (Browser Based POS and Free Repair Job Card)",
       "paragraphs": [
-        "Team sync is an optional, free feature that lets a shop owner use the Browser Based POS on several devices and give up to four other people their own access, by keeping the shop's data — encrypted — in **the owner's own Google Drive**. Before turning it on, joining a shop or signing in to one, you must tick that you have read and agree to these terms and our [Privacy Policy](/privacy#google-drive-team-sync). If you do not agree, do not use team sync — the rest of the POS keeps working on your device without it.",
+        "Team sync is an optional, free feature that lets a shop owner use the Browser Based POS or the Free Repair Job Card on several devices and give up to four other people their own access, by keeping the shop's data — encrypted — in **the owner's own Google Drive**. Before turning it on, joining a shop or signing in to one, you must tick that you have read and agree to these terms and our [Privacy Policy](/privacy#google-drive-team-sync). If you do not agree, do not use team sync — the rest of the app keeps working on your device without it.",
         "How team sync stores and shares data is described in detail in the [Privacy Policy](/privacy#google-drive-team-sync). This section covers the rules for using it."
       ]
     },
@@ -48,14 +48,14 @@
       "list": [
         "You need a Google account, and using team sync also means accepting [Google's Terms of Service](https://policies.google.com/terms). The POS asks Google only for access to the files it creates or you pick, its own hidden settings folder, and your email address.",
         "The shop's files live in the shop owner's Google Drive and count towards their Google storage. Google's availability, limits and decisions — an outage, a full Drive, a suspended account, a change to Google's services — can stop sync or lose access to the files. Setu is not responsible for them.",
-        "Do not edit, move, rename or delete the files in the “Setu POS – ⟨shop name⟩” folder yourself, and do not share them with anyone outside the POS. Doing so can break sync or expose the shop's data. Deleting the folder deletes the shop's synced data, and we cannot restore it."
+        "Do not edit, move, rename or delete the files in the “Setu POS – ⟨shop name⟩” or “Setu Repair – ⟨shop name⟩” folder yourself, and do not share them with anyone outside the POS. Doing so can break sync or expose the shop's data. Deleting the folder deletes the shop's synced data, and we cannot restore it."
       ]
     },
     {
       "id": "team-sync-owner-responsibilities",
       "heading": "The shop owner's responsibilities",
       "list": [
-        "**Who you invite and what they can do.** You choose each person's role (Owner or Cashier) and a cashier's discount and credit limits. Anyone you invite as Owner can see and change everything, including cost prices, sales and other tools' data. Remove people promptly when they leave.",
+        "**Who you invite and what they can do.** You choose each person's role (Owner or Cashier) and a cashier's discount and credit limits. Anyone you invite as Owner can see and change everything, including cost prices, sales and other tools' data. Remove people promptly when they leave. In the Free Repair Job Card the roles are Owner, Front desk (with a discount limit) and Technician (linked to one technician name, who sees only the jobs assigned to it, including the device unlock code, but no prices, bills or customer contact details).",
         "**Team size.** A team has at most five people, you included. Each person can use more than one device.",
         "**Permission to add people.** You confirm you have the agreement of each person whose email address or mobile number you add, and that you are allowed to share it with them through Google and WhatsApp.",
         "**Your customers' and staff's personal data.** Customer and staff details in the POS are yours to look after. You are responsible for handling them lawfully, including under India's Digital Personal Data Protection Act, 2023.",

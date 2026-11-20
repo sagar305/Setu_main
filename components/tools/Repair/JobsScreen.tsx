@@ -72,7 +72,8 @@ export function JobsScreen({
   onNewJob,
 }: {
   onOpenJob: (id: string) => void;
-  onNewJob: () => void;
+  /** Absent for a technician, who can't take a device in. */
+  onNewJob?: () => void;
 }) {
   const { jobs, customers, technicians, settings, business, today, billForJob } = useRepair();
   const [search, setSearch] = useState("");
@@ -257,10 +258,12 @@ export function JobsScreen({
             </button>
           ))}
         </div>
-        <button type="button" onClick={onNewJob} className={primaryBtnClass}>
-          <Plus className="h-4 w-4" aria-hidden="true" />
-          New job
-        </button>
+        {onNewJob && (
+          <button type="button" onClick={onNewJob} className={primaryBtnClass}>
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            New job
+          </button>
+        )}
       </div>
 
       {view === "engineers" ? (
@@ -352,7 +355,7 @@ export function JobsScreen({
               : "No job matches that search and those filters."
           }
           action={
-            jobs.length === 0 ? (
+            jobs.length === 0 && onNewJob ? (
               <button type="button" onClick={onNewJob} className={primaryBtnClass}>
                 <Plus className="h-4 w-4" aria-hidden="true" />
                 Take in a device

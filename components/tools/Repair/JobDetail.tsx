@@ -70,6 +70,8 @@ import {
 } from "@/lib/repair/print";
 import { formatMoney } from "@/lib/pos/types";
 import { SendQueue } from "./SendQueue";
+import { useRepairTeam } from "./team/TeamSyncContext";
+import { TECHNICIAN_STATUSES } from "@/lib/repair/team/roles";
 import { PhotoLightbox } from "./PhotoLightbox";
 import { DeliveryModal } from "./DeliveryModal";
 import { OutsideRepairSection } from "./OutsideRepair";
@@ -108,6 +110,9 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
   } = useRepair();
 
   const job = jobById(jobId);
+  // A technician works the job but never sees or sets prices, never bills,
+  // and can't reassign it or change what the customer was promised.
+  const { isTechnician: tech } = useRepairTeam();
   const [photoIndex, setPhotoIndex] = useState(-1);
   const [queue, setQueue] = useState<{ title: string; messages: OutboundMessage[] } | null>(null);
   const [pendingChangeId, setPendingChangeId] = useState<string | null>(null);
@@ -239,7 +244,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
     try {
       const updated = await setJobStatus(job.id, next);
       const templateKey = STATUS_TEMPLATE[next];
-      if (!templateKey || !customer) return;
+      if (!templateKey || !customer || tech) return;
       const change = updated.statusHistory[updated.statusHistory.length - 1];
       setPendingChangeId(change?.id ?? null);
       setQueue({
@@ -333,8 +338,8 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
         {customer && (
           <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-muted-line/20 pt-3">
             <span className="text-sm font-semibold text-ink">{customer.name}</span>
-            <span className="text-sm text-muted">{customer.phone}</span>
-            {customer.phone && (
+            {!tech && <span className="text-sm text-muted">{customer.phone}</span>}
+            {customer.phone && !tech && (
               <>
                 <a
                   href={`tel:${customer.phone}`}
@@ -380,7 +385,10 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             onChange={(event) => void moveTo(event.target.value as JobStatus)}
           >
             {BOARD_STATUSES.filter(
-              (status) => status !== "delivered" && status !== "outside-repair"
+              (status) =>
+                status !== "delivered" &&
+                status !== "outside-repair" &&
+                (!tech || TECHNICIAN_STATUSES.includes(status) || status === job.status)
             ).map((status) => (
               <option key={status} value={status}>
                 {JOB_STATUS_LABELS[status]}
@@ -390,16 +398,18 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             {job.status === "outside-repair" && (
               <option value="outside-repair">{JOB_STATUS_LABELS["outside-repair"]}</option>
             )}
-            <option value="returned-unrepaired">Returned unrepaired</option>
-            <option value="cancelled">Cancelled</option>
+            {!tech && <option value="returned-unrepaired">Returned unrepaired</option>}
+            {!tech && <option value="cancelled">Cancelled</option>}
           </select>
         </label>
 
+        {!tech && (
         <button type="button" onClick={() => void printJobSlip(context)} className={secondaryBtnClass}>
           <Printer className="h-4 w-4" aria-hidden="true" />
           Job card
         </button>
-        {!isTwoCopy(settings) && (
+        )}
+        {!tech && !isTwoCopy(settings) && (
           <button
             type="button"
             onClick={() => void printJobSlip(context, "shop")}
@@ -413,10 +423,12 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
           <Tag className="h-4 w-4" aria-hidden="true" />
           Device tag
         </button>
-        <button type="button" onClick={() => void printEstimate(context)} className={secondaryBtnClass}>
-          <FileText className="h-4 w-4" aria-hidden="true" />
-          Estimate
-        </button>
+        {!tech && (
+          <button type="button" onClick={() => void printEstimate(context)} className={secondaryBtnClass}>
+            <FileText className="h-4 w-4" aria-hidden="true" />
+            Estimate
+          </button>
+        )}
         {bill && (
           <button
             type="button"
@@ -427,13 +439,13 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             Invoice
           </button>
         )}
-        {job.status === "ready" && (
+        {job.status === "ready" && !tech && (
           <button type="button" onClick={() => setDelivering(true)} className={primaryBtnClass}>
             <PackageCheck className="h-4 w-4" aria-hidden="true" />
             Deliver
           </button>
         )}
-        {job.status === "delivered" && warrantyState === "covered" && (
+        {job.status === "delivered" && warrantyState === "covered" && !tech && (
           <button
             type="button"
             onClick={async () => {
@@ -450,7 +462,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             Raise warranty claim
           </button>
         )}
-        {!job.billId && (
+        {!job.billId && !tech && (
           <button
             type="button"
             onClick={() => setConfirmDelete(true)}
@@ -488,10 +500,10 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
         </div>
       )}
 
-      <OutsideRepairSection job={job} context={context} canManage onError={setError} />
+      <OutsideRepairSection job={job} context={context} canManage={!tech} onError={setError} />
 
       {/* Tracking link ---------------------------------------------------- */}
-      {settings.trackingEnabled && (
+      {settings.trackingEnabled && !tech && (
         <SectionCard title="Customer tracking link">
           {tracking ? (
             <div className="grid gap-3">
@@ -781,6 +793,12 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
               onChange={(event) => setWorkDone(event.target.value)}
             />
           </Field>
+          {tech ? (
+            <p className="text-xs text-muted">
+              {job.promisedDate ? `Promised to the customer by ${formatDate(job.promisedDate)}. ` : ""}
+              The front desk sets the estimate, the promised date and who the job is with.
+            </p>
+          ) : (
           <div className="grid gap-3 sm:grid-cols-3">
             <Field label="Technician">
               <select
@@ -813,6 +831,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
               />
             </Field>
           </div>
+          )}
           {job.estimateApprovedOn && (
             <p className="text-xs font-semibold text-green-700">
               Estimate approved {formatDate(job.estimateApprovedOn)}.
@@ -843,10 +862,12 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
                   </option>
                 ))}
             </select>
-            <button type="button" onClick={addAdHocPart} className={secondaryBtnClass}>
-              <Plus className="h-4 w-4" aria-hidden="true" />
-              Other part
-            </button>
+            {!tech && (
+              <button type="button" onClick={addAdHocPart} className={secondaryBtnClass}>
+                <Plus className="h-4 w-4" aria-hidden="true" />
+                Other part
+              </button>
+            )}
           </div>
         }
       >
@@ -857,11 +878,14 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             {partsUsed.map((part) => (
               <div
                 key={part.id}
-                className="grid gap-2 rounded-xl border border-muted-line/30 p-3 sm:grid-cols-[1fr_auto_auto_auto_auto]"
+                className={`grid gap-2 rounded-xl border border-muted-line/30 p-3 ${
+                  tech ? "sm:grid-cols-[1fr_auto_auto]" : "sm:grid-cols-[1fr_auto_auto_auto_auto]"
+                }`}
               >
                 <input
                   className={inputClass}
                   value={part.name}
+                  readOnly={tech}
                   onChange={(event) => patchPart(part.id, { name: event.target.value })}
                   placeholder="Part name"
                 />
@@ -876,6 +900,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
                     inputMode="numeric"
                   />
                 </label>
+                {!tech && (
                 <label className="text-xs text-muted">
                   Cost
                   <input
@@ -887,6 +912,8 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
                     inputMode="decimal"
                   />
                 </label>
+                )}
+                {!tech && (
                 <label className="text-xs text-muted">
                   Selling
                   <input
@@ -898,6 +925,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
                     inputMode="decimal"
                   />
                 </label>
+                )}
                 <button
                   type="button"
                   onClick={() =>
@@ -913,6 +941,8 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
           </div>
         )}
 
+        {!tech && (
+        <>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <Field label="Labour charge" hint="Pure margin — no part cost against it.">
             <input
@@ -944,6 +974,8 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             </strong>
           </span>
         </div>
+        </>
+        )}
       </SectionCard>
 
       {/* Notes ----------------------------------------------------------- */}
@@ -953,6 +985,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             <textarea
               className={inputClass}
               rows={3}
+              readOnly={tech}
               value={customerNotes}
               onChange={(event) => setCustomerNotes(event.target.value)}
             />

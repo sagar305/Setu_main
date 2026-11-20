@@ -30,6 +30,8 @@ import {
 import { APPS_SCRIPT_TEMPLATE, isValidSyncUrl, testSheetConnection } from "@/lib/repair/sheetSync";
 import { TEMPLATE_LABELS } from "@/lib/repair/messages";
 import { VendorsSettings } from "./OutsideRepair";
+import { TeamPanel } from "./team/TeamPanel";
+import { useRepairTeam } from "./team/TeamSyncContext";
 import { dataUrlBytes, formatBytes } from "@/lib/repair/photos";
 import {
   DEFAULT_MESSAGE_TEMPLATES,
@@ -97,6 +99,8 @@ export function SettingsScreen() {
     updateSettings,
   } = useRepair();
 
+  const { team } = useRepairTeam();
+  const teamOnOtherDevice = Boolean(team && !team.isPrimary);
   const fileRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -162,8 +166,19 @@ export function SettingsScreen() {
         </p>
       )}
 
+      {/* Team ------------------------------------------------------------ */}
+      <SectionCard title="Team · Google Drive sync">
+        <TeamPanel />
+      </SectionCard>
+
       {/* Shop ------------------------------------------------------------ */}
       <SectionCard title="Shop details">
+        {teamOnOtherDevice && (
+          <p className="mb-3 rounded-lg bg-saffron/10 p-2 text-xs text-ink">
+            The shop details are shared from the main device. Change them there, or they will be put back on
+            the next sync.
+          </p>
+        )}
         <div className="grid gap-3 sm:grid-cols-2">
           <Field label="Shop name">
             <input

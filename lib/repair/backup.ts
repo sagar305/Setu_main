@@ -15,7 +15,7 @@ import {
   repairBatch,
   repairClearStores,
   repairGetAll,
-  REPAIR_STORES,
+  REPAIR_DATA_STORES,
   type RepairStoreName,
 } from "./db";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
@@ -25,7 +25,7 @@ import type { Job } from "./types";
 export const BACKUP_APP_MARKER = "setu-repair";
 export const BACKUP_VERSION = 1;
 
-export const REPAIR_BACKUP_STORES: RepairStoreName[] = [...REPAIR_STORES];
+export const REPAIR_BACKUP_STORES: RepairStoreName[] = [...REPAIR_DATA_STORES];
 
 export type RepairBackup = {
   app: string;
@@ -120,7 +120,7 @@ export function parseBackupFile(text: string): BackupValidation {
 }
 
 export function backupSummary(backup: RepairBackup): { label: string; count: number }[] {
-  const labels: Record<RepairStoreName, string> = {
+  const labels: Partial<Record<RepairStoreName, string>> = {
     customers: "Customers",
     jobs: "Jobs",
     parts: "Parts",
@@ -130,7 +130,7 @@ export function backupSummary(backup: RepairBackup): { label: string; count: num
     repairSettings: "Settings",
   };
   return REPAIR_BACKUP_STORES.map((store) => ({
-    label: labels[store],
+    label: labels[store] ?? store,
     count: (backup.data[store] ?? []).length,
   }));
 }
