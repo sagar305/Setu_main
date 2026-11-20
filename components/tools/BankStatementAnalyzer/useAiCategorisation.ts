@@ -11,6 +11,7 @@
 // call, so the analyzer's first paint is exactly what it was before.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { reportActivity } from "@/lib/activity";
 import { useAnalyzer } from "@/components/tools/BankStatementAnalyzer/AnalyzerProvider";
 import { buildCategoryProfiles } from "@/lib/bankStatement/ai/categoryProfiles";
 import { groupSuggestions, needsAiCategorisation } from "@/lib/bankStatement/ai/approval";
@@ -197,6 +198,7 @@ export function useAiCategorisation() {
         "AI categorisation run",
         `${tally.confident + tally.tentative} suggested for review · ${tally.unresolved} left`
       );
+      reportActivity("bank", "ai_categorisation_run");
     } catch (failure) {
       setError(failure instanceof Error ? failure.message : String(failure));
     } finally {

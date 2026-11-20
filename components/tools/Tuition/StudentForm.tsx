@@ -5,7 +5,7 @@ import { fill } from "@/lib/i18n/translate";
 import { useEffect, useMemo, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { useTuition, type StudentInput } from "@/lib/tuition/store";
-import { studentMonthlyFee } from "@/lib/tuition/calc";
+import { batchCapacity, batchStrength, studentMonthlyFee } from "@/lib/tuition/calc";
 import { formatMoney } from "@/lib/pos/types";
 import {
   commonCustomFields,
@@ -51,7 +51,7 @@ export function StudentForm({
   onClose: () => void;
 }) {
   const { t, lang } = useI18n();
-  const { batches, business, createStudent, updateStudent } = useTuition();
+  const { batches, students, business, createStudent, updateStudent } = useTuition();
   const [form, setForm] = useState<StudentInput>(EMPTY);
   const [customFee, setCustomFee] = useState("");
   const [error, setError] = useState("");
@@ -124,8 +124,9 @@ export function StudentForm({
       if (student) await updateStudent(student.id, payload);
       else await createStudent(payload);
       onClose();
-    } catch {
-      setError(t("tuSfErrSave"));
+    } catch (caught) {
+      // A full batch explains itself; anything else is a failed save.
+      setError(caught instanceof Error && caught.message ? caught.message : t("tuSfErrSave"));
     } finally {
       setSaving(false);
     }
@@ -188,21 +189,30 @@ export function StudentForm({
             <div className="flex flex-wrap gap-2">
               {activeBatches.map((batch) => {
                 const on = form.batchIds.includes(batch.id);
+                const capacity = batchCapacity(batch);
+                // Seats taken by everyone else, plus this student if selected.
+                const taken = batchStrength(students, batch.id, student?.id) + (on ? 1 : 0);
+                const full = capacity !== null && !on && taken >= capacity;
                 return (
                   <button
                     key={batch.id}
                     type="button"
                     onClick={() => toggleBatch(batch.id)}
                     aria-pressed={on}
+                    disabled={full}
                     className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
                       on
                         ? "border-indigo bg-indigo text-white"
-                        : "border-muted-line/40 bg-white text-muted hover:text-indigo"
+                        : full
+                          ? "cursor-not-allowed border-muted-line/30 bg-cream-paper text-muted/60"
+                          : "border-muted-line/40 bg-white text-muted hover:text-indigo"
                     }`}
                   >
                     {batch.name}
                     <span className={`ml-1.5 text-xs ${on ? "text-white/75" : "text-muted/70"}`}>
                       {formatMoney(batch.monthlyFee, currency)}
+                      {capacity !== null &&
+                        ` · ${full ? t("tuBatchFull") : fill(t("tuBatchSeats"), { count: taken, max: capacity })}`}
                     </span>
                   </button>
                 );

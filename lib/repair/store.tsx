@@ -22,6 +22,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbGetAll } from "@/lib/pos/db";
 import { nowIso as posNowIso, type Business } from "@/lib/pos/types";
 import {
@@ -32,8 +33,9 @@ import {
   type RepairStoreName,
 } from "./db";
 import { restoreBackup, type RepairBackup } from "./backup";
+import { getTeamSession, leaveTeam, teamDiscountAllowed, teamNumberPrefix, teamRole } from "./team/engine";
 import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
-import { billTotals, round2, stockDeltas } from "./calc";
+import { billTotals, currentOutside, nextChallanNo, round2, stockDeltas } from "./calc";
 import {
   TrackingError,
   mintReplyChannel,
@@ -42,6 +44,7 @@ import {
   readDecision,
 } from "./tracking";
 import {
+  CLOSED_STATUSES,
   DEFAULT_SETTINGS,
   generateId,
   invoiceNumberFrom,
@@ -56,7 +59,9 @@ import {
   type JobTracking,
   type Part,
   type RepairSettings,
+  type OutsideRepair,
   type Technician,
+  type Vendor,
 } from "./types";
 
 export type AppStatus = "loading" | "welcome" | "setup" | "ready" | "error";
@@ -64,6 +69,28 @@ export type AppStatus = "loading" | "welcome" | "setup" | "ready" | "error";
 export type CustomerInput = Omit<Customer, "id" | "createdAt" | "updatedAt">;
 export type PartInput = Omit<Part, "id" | "createdAt" | "updatedAt">;
 export type TechnicianInput = Omit<Technician, "id" | "createdAt">;
+export type VendorInput = Omit<Vendor, "id" | "createdAt" | "updatedAt">;
+
+/** What "Send outside" asks for. */
+export type SendOutsideInput = {
+  vendorId: string;
+  sentWhat: string;
+  problem: string;
+  sentOn: string;
+  sentVia: string;
+  docketNo: string;
+  quotedCharge: number | null;
+  expectedBackOn: string | null;
+  note: string;
+};
+
+/** What "Received back" asks for. */
+export type ReceiveOutsideInput = {
+  receivedOn: string;
+  outcome: "repaired" | "not-repaired";
+  finalCharge: number | null;
+  returnNote: string;
+};
 
 /** What the intake wizard collects. Everything else on a job starts empty. */
 export type IntakeInput = {
@@ -140,6 +167,7 @@ type RepairContextValue = {
   jobs: Job[];
   parts: Part[];
   technicians: Technician[];
+  vendors: Vendor[];
   bills: Bill[];
   today: string;
 
@@ -172,10 +200,21 @@ type RepairContextValue = {
   saveTechnician: (input: TechnicianInput, id?: string) => Promise<Technician>;
   deleteTechnician: (id: string) => Promise<void>;
 
+  saveVendor: (input: VendorInput, id?: string) => Promise<Vendor>;
+  deleteVendor: (id: string) => Promise<void>;
+  /** Record the device (or a part of it) going to a vendor; moves the job to Outside repair. */
+  sendOutside: (jobId: string, input: SendOutsideInput) => Promise<Job>;
+  /** Record it coming back; the job returns to In repair whatever the outcome. */
+  receiveFromOutside: (jobId: string, input: ReceiveOutsideInput) => Promise<Job>;
+
   clearAllData: () => Promise<void>;
   applyRestoredBackup: (backup: RepairBackup) => Promise<void>;
   syncToSheet: () => Promise<void>;
   reloadAll: () => Promise<void>;
+  /** Re-read everything, the business profile and setup status included (after team sync). */
+  reload: () => Promise<void>;
+  /** Bring customers' tracking links up to date for jobs another device changed. */
+  refreshTracking: (jobIds: string[]) => Promise<void>;
 
   /** Mint this job's tracking link, or re-push it after a failed attempt. */
   publishJobTracking: (jobId: string) => Promise<Job>;
@@ -190,6 +229,7 @@ type RepairContextValue = {
   customerById: (id: string) => Customer | undefined;
   partById: (id: string) => Part | undefined;
   technicianById: (id: string) => Technician | undefined;
+  vendorById: (id: string) => Vendor | undefined;
   billForJob: (jobId: string) => Bill | undefined;
 };
 
@@ -214,6 +254,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [parts, setParts] = useState<Part[]>([]);
   const [technicians, setTechnicians] = useState<Technician[]>([]);
+  const [vendors, setVendors] = useState<Vendor[]>([]);
   const [bills, setBills] = useState<Bill[]>([]);
   const [today, setToday] = useState<string>(() => todayKey());
 
@@ -239,6 +280,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         storedTechnicians,
         storedBills,
         workspace,
+        storedVendors,
       ] = await Promise.all([
         repairGetAll<RepairSettings>("repairSettings"),
         repairGetAll<Customer>("customers"),
@@ -247,6 +289,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         repairGetAll<Technician>("technicians"),
         repairGetAll<Bill>("bills"),
         dbGetAll<Business>("business"),
+        repairGetAll<Vendor>("vendors"),
       ]);
 
       const stored = storedSettings.find((row) => row.id === "main");
@@ -255,6 +298,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       setJobs(storedJobs);
       setParts(storedParts);
       setTechnicians(storedTechnicians);
+      setVendors(storedVendors);
       setBills(storedBills);
       setToday(todayKey());
       setBusiness(workspace.find((row) => row.id === "main") ?? null);
@@ -292,16 +336,25 @@ export function RepairProvider({ children }: { children: ReactNode }) {
   }, [status]);
 
   const reloadAll = useCallback(async () => {
-    const [storedSettings, storedCustomers, storedJobs, storedParts, storedTechs, storedBills] =
-      await Promise.all([
+    const [
+      storedSettings,
+      storedCustomers,
+      storedJobs,
+      storedParts,
+      storedTechs,
+      storedBills,
+      storedVendors,
+    ] = await Promise.all([
         repairGetAll<RepairSettings>("repairSettings"),
         repairGetAll<Customer>("customers"),
         repairGetAll<Job>("jobs"),
         repairGetAll<Part>("parts"),
         repairGetAll<Technician>("technicians"),
         repairGetAll<Bill>("bills"),
+        repairGetAll<Vendor>("vendors"),
       ]);
     setSettings({ ...DEFAULT_SETTINGS, ...(storedSettings.find((r) => r.id === "main") ?? {}) });
+    setVendors(storedVendors);
     setCustomers(storedCustomers);
     setJobs(storedJobs);
     setParts(storedParts);
@@ -361,6 +414,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       setTechnicians(techs);
       setStatus("ready");
+      reportActivity("repair", "setup_completed");
     },
     []
   );
@@ -404,6 +458,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
           ? previous.map((customer) => (customer.id === record.id ? record : customer))
           : [...previous, record]
       );
+      if (!existing) reportActivity("repair", "customer_created");
       return record;
     },
     [customers]
@@ -441,6 +496,10 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     async (job: Job, billForThisJob: Bill | null): Promise<Job> => {
       if (!settings.trackingEnabled) return job;
       if (typeof window === "undefined") return job;
+      // A technician's device holds the job without its prices, so a payload
+      // built there would wipe the amount off the customer's page. The main
+      // device re-publishes the link once it has merged their change.
+      if (teamRole() === "technician") return job;
       const origin = window.location.origin;
 
       try {
@@ -479,7 +538,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       const timestamp = nowIso();
       const job = await allocateNumber<Job>("nextJobNumber", "jobs", (next) => ({
         id: generateId(),
-        jobNo: jobNumberFrom(settings.jobPrefix, next),
+        jobNo: jobNumberFrom(teamNumberPrefix(settings.jobPrefix), next),
         customerId: input.customerId,
         deviceKind: input.deviceKind,
         brand: input.brand,
@@ -511,12 +570,16 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         warrantyClaimOfJobId: input.warrantyClaimOfJobId ?? null,
         billId: null,
         statusHistory: [statusChange(null, "received", "Device received")],
+        assignmentHistory: input.technicianId
+          ? [{ technicianId: input.technicianId, at: nowIso() }]
+          : [],
         createdAt: timestamp,
         updatedAt: timestamp,
       }));
 
       setJobs((previous) => [...previous, job]);
       setSettings((previous) => ({ ...previous, nextJobNumber: previous.nextJobNumber + 1 }));
+      reportActivity("repair", "job_created");
 
       // The link is minted here so the "received" message can carry it. When
       // the shop is offline the job still saves, the message still goes, and
@@ -543,6 +606,15 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       if (!existing) throw new Error("That job no longer exists.");
 
       const next: Job = { ...existing, ...updates, updatedAt: nowIso() };
+      if (
+        updates.technicianId !== undefined &&
+        updates.technicianId !== existing.technicianId
+      ) {
+        next.assignmentHistory = [
+          ...(existing.assignmentHistory ?? []),
+          { technicianId: updates.technicianId, at: nowIso() },
+        ];
+      }
       const deltas = updates.partsUsed
         ? stockDeltas(existing.partsUsed, next.partsUsed)
         : new Map<string, number>();
@@ -590,6 +662,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         throw new Error("Use Deliver, so the bill and signature are recorded with it.");
       }
       if (existing.status === next) return existing;
+      // Outside repair carries a vendor, a date and a challan; a bare status
+      // change would leave the board saying "outside" with no record of where.
+      if (next === "outside-repair") {
+        throw new Error("Use Send outside, so the vendor and dates are recorded.");
+      }
+      if (currentOutside(existing)) {
+        throw new Error("This job is still with an outside vendor. Use Received back first.");
+      }
 
       const updated: Job = {
         ...existing,
@@ -695,6 +775,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       if (!input.bill) {
         await repairBatch({ jobs: [base] });
         setJobs((previous) => previous.map((job) => (job.id === id ? base : job)));
+        reportActivity("repair", "job_delivered");
         const syncedFree = await applyTracking(base, null);
         await persistTracking(base, syncedFree);
         return syncedFree;
@@ -709,6 +790,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         },
         settings
       );
+      const draftLines = existing.partsUsed.map((part) => ({ amount: part.sellingPrice * part.quantity }));
+      if (
+        !teamDiscountAllowed({ discount: totals.discount, partLines: draftLines, labourCharge: totals.labourCharge })
+      ) {
+        throw new Error(
+          `That discount is more than the ${getTeamSession()?.permissions.maxDiscountPercent ?? 0}% the owner allows you. Ask the owner, or reduce it.`
+        );
+      }
 
       // The bill and the job that points at it are allocated and written in one
       // transaction: an invoice number handed out for a job that then failed to
@@ -719,7 +808,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         (next) => {
           const record: Bill = {
             id: generateId(),
-            invoiceNo: invoiceNumberFrom(settings.invoicePrefix, next),
+            invoiceNo: invoiceNumberFrom(teamNumberPrefix(settings.invoicePrefix), next),
             jobId: existing.id,
             customerId: existing.customerId,
             date: input.deliveredOn,
@@ -747,6 +836,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
       setJobs((previous) => previous.map((job) => (job.id === id ? delivered : job)));
       setBills((previous) => [...previous, bill]);
+      reportActivity("repair", "job_delivered");
       setSettings((previous) => ({
         ...previous,
         nextInvoiceNumber: previous.nextInvoiceNumber + 1,
@@ -801,6 +891,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         warrantyClaimOfJobId: original.id,
       });
 
+      reportActivity("repair", "warranty_claim_raised");
       return claim;
     },
     [createJob, jobMap]
@@ -848,6 +939,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       setParts((previous) =>
         existing ? previous.map((part) => (part.id === record.id ? record : part)) : [...previous, record]
       );
+      if (!existing) reportActivity("repair", "part_created");
       return record;
     },
     [partMap]
@@ -899,6 +991,123 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     await repairBatch({}, { technicians: [id] });
     setTechnicians((previous) => previous.filter((tech) => tech.id !== id));
   }, []);
+
+  /* ---------------------------------------------------------------------
+   * Outside repair
+   * ------------------------------------------------------------------ */
+
+  const saveVendor = useCallback(
+    async (input: VendorInput, id?: string) => {
+      const existing = id ? vendors.find((vendor) => vendor.id === id) : undefined;
+      const at = nowIso();
+      const record: Vendor = existing
+        ? { ...existing, ...input, updatedAt: at }
+        : { ...input, id: generateId(), createdAt: at, updatedAt: at };
+      await repairBatch({ vendors: [record] });
+      setVendors((previous) =>
+        existing ? previous.map((vendor) => (vendor.id === record.id ? record : vendor)) : [...previous, record]
+      );
+      return record;
+    },
+    [vendors]
+  );
+
+  /**
+   * Remove a vendor. Jobs keep the name and city they were sent under, so a
+   * removed vendor never leaves a job saying "sent to —".
+   */
+  const deleteVendor = useCallback(async (id: string) => {
+    await repairBatch({}, { vendors: [id] });
+    setVendors((previous) => previous.filter((vendor) => vendor.id !== id));
+  }, []);
+
+  const sendOutside = useCallback(
+    async (jobId: string, input: SendOutsideInput) => {
+      const existing = jobMap.get(jobId);
+      if (!existing) throw new Error("That job no longer exists.");
+      if (currentOutside(existing)) {
+        throw new Error("This job is already out for repair. Record it as received back first.");
+      }
+      if (CLOSED_STATUSES.includes(existing.status)) {
+        throw new Error("This job is closed. Reopen it before sending it outside.");
+      }
+      const vendor = vendors.find((row) => row.id === input.vendorId);
+      if (!vendor) throw new Error("Pick a vendor to send it to.");
+
+      const trip: OutsideRepair = {
+        id: generateId(),
+        vendorId: vendor.id,
+        vendorName: vendor.name,
+        vendorCity: vendor.city,
+        sentWhat: input.sentWhat.trim() || "Whole device",
+        problem: input.problem.trim(),
+        sentOn: input.sentOn || todayKey(),
+        sentVia: input.sentVia.trim(),
+        docketNo: input.docketNo.trim(),
+        quotedCharge: input.quotedCharge,
+        expectedBackOn: input.expectedBackOn,
+        note: input.note.trim(),
+        previousStatus: existing.status,
+        challanNo: nextChallanNo(existing),
+        receivedOn: null,
+        outcome: null,
+        finalCharge: null,
+        returnNote: "",
+        sentAt: nowIso(),
+        receivedAt: null,
+      };
+      const updated: Job = {
+        ...existing,
+        outsideRepairs: [...(existing.outsideRepairs ?? []), trip],
+        status: "outside-repair",
+        statusHistory: [
+          ...existing.statusHistory,
+          statusChange(existing.status, "outside-repair", `Sent to ${vendor.name}${vendor.city ? `, ${vendor.city}` : ""}`),
+        ],
+        updatedAt: nowIso(),
+      };
+      await repairBatch({ jobs: [updated] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      const synced = await applyTracking(updated, billByJob.get(updated.id) ?? null);
+      await persistTracking(updated, synced);
+      return synced;
+    },
+    [jobMap, vendors, applyTracking, persistTracking, billByJob]
+  );
+
+  const receiveFromOutside = useCallback(
+    async (jobId: string, input: ReceiveOutsideInput) => {
+      const existing = jobMap.get(jobId);
+      if (!existing) throw new Error("That job no longer exists.");
+      const trip = currentOutside(existing);
+      if (!trip) throw new Error("This job is not out for repair.");
+
+      const back: OutsideRepair = {
+        ...trip,
+        receivedOn: input.receivedOn || todayKey(),
+        outcome: input.outcome,
+        finalCharge: input.finalCharge,
+        returnNote: input.returnNote.trim(),
+        receivedAt: nowIso(),
+      };
+      const note = `Back from ${trip.vendorName} — ${
+        input.outcome === "repaired" ? "repaired" : "not repaired"
+      }`;
+      const updated: Job = {
+        ...existing,
+        outsideRepairs: (existing.outsideRepairs ?? []).map((row) => (row.id === trip.id ? back : row)),
+        status: "in-repair",
+        statusHistory: [...existing.statusHistory, statusChange(existing.status, "in-repair", note)],
+        updatedAt: nowIso(),
+      };
+      await repairBatch({ jobs: [updated] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      const synced = await applyTracking(updated, billByJob.get(updated.id) ?? null);
+      await persistTracking(updated, synced);
+      return synced;
+    },
+    [jobMap, applyTracking, persistTracking, billByJob]
+  );
 
   /* ---------------------------------------------------------------------
    * Customer tracking links
@@ -970,6 +1179,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       const updated: Job = { ...existing, tracking: pushed, trackingQueuedAt: null };
       await repairBatch({ jobs: [updated] });
       setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      reportActivity("repair", "estimate_sent");
       return updated;
     },
     [jobMap, business, settings, billByJob]
@@ -1056,11 +1266,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
    * ------------------------------------------------------------------ */
 
   const clearAllData = useCallback(async () => {
+    // In a team, stop syncing first: otherwise this device keeps capturing.
+    if (getTeamSession()) await leaveTeam({ wipe: true });
     await repairClearAll();
     setCustomers([]);
     setJobs([]);
     setParts([]);
     setTechnicians([]);
+    setVendors([]);
     setBills([]);
     setSettings(DEFAULT_SETTINGS);
     setStatus("welcome");
@@ -1068,8 +1281,14 @@ export function RepairProvider({ children }: { children: ReactNode }) {
 
   const applyRestoredBackup = useCallback(
     async (backup: RepairBackup) => {
+      if (getTeamSession()) {
+        throw new Error(
+          "This device is in a team. Restoring a backup would overwrite the whole team's data — leave the team first."
+        );
+      }
       await restoreBackup(backup);
       await load();
+      reportActivity("repair", "backup_restored");
     },
     [load]
   );
@@ -1085,6 +1304,22 @@ export function RepairProvider({ children }: { children: ReactNode }) {
     await pushToSheet(settings.sheetSyncUrl, payloads);
   }, [business, settings, customers, jobs, parts, technicians, bills]);
 
+  const refreshTracking = useCallback(
+    async (jobIds: string[]) => {
+      if (!settings.trackingEnabled || jobIds.length === 0) return;
+      const fresh = await repairGetAll<Job>("jobs");
+      const freshBills = await repairGetAll<Bill>("bills");
+      for (const id of jobIds) {
+        const job = fresh.find((row) => row.id === id);
+        if (!job) continue;
+        const bill = freshBills.find((row) => row.jobId === id) ?? null;
+        const synced = await applyTracking(job, bill);
+        await persistTracking(job, synced);
+      }
+    },
+    [settings.trackingEnabled, applyTracking, persistTracking]
+  );
+
   const value = useMemo<RepairContextValue>(
     () => ({
       status,
@@ -1095,6 +1330,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       jobs,
       parts,
       technicians,
+      vendors,
       bills,
       today,
       startSetup,
@@ -1117,10 +1353,16 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       deletePart,
       saveTechnician,
       deleteTechnician,
+      saveVendor,
+      deleteVendor,
+      sendOutside,
+      receiveFromOutside,
       clearAllData,
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      reload: load,
+      refreshTracking,
       publishJobTracking,
       openEstimateForApproval,
       checkEstimateDecision,
@@ -1129,6 +1371,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       customerById: (id: string) => customers.find((customer) => customer.id === id),
       partById: (id: string) => partMap.get(id),
       technicianById: (id: string) => technicians.find((tech) => tech.id === id),
+      vendorById: (id: string) => vendors.find((vendor) => vendor.id === id),
       billForJob: (jobId: string) => billByJob.get(jobId),
     }),
     [
@@ -1140,6 +1383,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       jobs,
       parts,
       technicians,
+      vendors,
       bills,
       today,
       startSetup,
@@ -1162,10 +1406,16 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       deletePart,
       saveTechnician,
       deleteTechnician,
+      saveVendor,
+      deleteVendor,
+      sendOutside,
+      receiveFromOutside,
       clearAllData,
       applyRestoredBackup,
       syncToSheet,
       reloadAll,
+      load,
+      refreshTracking,
       publishJobTracking,
       openEstimateForApproval,
       checkEstimateDecision,

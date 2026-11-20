@@ -7,8 +7,9 @@
 // another Setu tool on this device lands straight in the app with their name,
 // phone, logo and UPI ID already filled in.
 
+import { reportActivity } from "@/lib/activity";
 import { useI18n } from "@/lib/i18n";
-import { translate } from "@/lib/i18n/translate";
+import { fill, translate } from "@/lib/i18n/translate";
 import {
   createContext,
   useCallback,
@@ -31,7 +32,10 @@ import {
   type TuitionSnapshot,
 } from "./sheetSync";
 import {
+  allotSeats,
+  batchCapacity,
   buildTuitionDue,
+  isBatchFull,
   missingDuePeriods,
   studentBalance,
   tuitionDueId,
@@ -382,6 +386,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setBusiness(newBusiness);
       setSettings(newSettings);
       setStatus("ready");
+      reportActivity("tuition", "setup_completed");
     },
     [batchWithSync, lang]
   );
@@ -419,6 +424,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const batch: Batch = { ...input, id: generateId(), createdAt: nowIso(), updatedAt: nowIso() };
       await batchWithSync({ batches: [batch] }, {}, ["t_meta"]);
       setBatches((prev) => [...prev, batch].sort((a, b) => a.startTime.localeCompare(b.startTime)));
+      reportActivity("tuition", "batch_created");
       return batch;
     },
     [batchWithSync, assertBatchAllowed]
@@ -457,8 +463,30 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
 
   // ---- Students ------------------------------------------------------------
 
+  /**
+   * A batch with a size limit cannot take one more student than it has seats
+   * for. Checked here as well as in the form, so no screen can overfill one.
+   */
+  const assertSeats = useCallback(
+    (batchIds: string[], ignoreStudentId?: string) => {
+      for (const batchId of batchIds) {
+        const batch = batches.find((b) => b.id === batchId);
+        if (batch && isBatchFull(batch, students, ignoreStudentId)) {
+          throw new Error(
+            fill(translate(lang, "tuBrBatchFull"), {
+              name: batch.name,
+              max: batchCapacity(batch) ?? 0,
+            })
+          );
+        }
+      }
+    },
+    [batches, students, lang]
+  );
+
   const createStudent = useCallback(
     async (input: StudentInput) => {
+      if (input.status === "active") assertSeats(input.batchIds);
       const student: Student = {
         ...input,
         id: generateId(),
@@ -469,22 +497,32 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setStudents((prev) => [...prev, student].sort((a, b) => a.name.localeCompare(b.name)));
       // Raise the new student's dues now, not on the next visit.
       duesGeneratedRef.current = false;
+      reportActivity("tuition", "student_created");
       return student;
     },
-    [batchWithSync]
+    [batchWithSync, assertSeats]
   );
 
   const updateStudent = useCallback(
     async (id: string, input: StudentInput) => {
       const existing = students.find((s) => s.id === id);
       if (!existing) return;
+      // Only batches the student is newly joining need a free seat.
+      if (input.status === "active") {
+        assertSeats(
+          input.batchIds.filter(
+            (batchId) => existing.status !== "active" || !existing.batchIds.includes(batchId)
+          ),
+          id
+        );
+      }
       const next: Student = { ...existing, ...input, updatedAt: nowIso() };
       await batchWithSync({ students: [next] }, {}, ["t_students"]);
       setStudents((prev) =>
         prev.map((s) => (s.id === id ? next : s)).sort((a, b) => a.name.localeCompare(b.name))
       );
     },
-    [students, batchWithSync]
+    [students, batchWithSync, assertSeats]
   );
 
   /** Deleting a student removes their attendance, fees, marks and notes too. */
@@ -546,6 +584,8 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
     async (id: string) => {
       const existing = students.find((s) => s.id === id);
       if (!existing) return;
+      // Their old seat may have gone to someone else while they were away.
+      assertSeats(existing.batchIds, id);
       const next: Student = {
         ...existing,
         status: "active",
@@ -559,14 +599,16 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       setStudents((prev) => prev.map((s) => (s.id === id ? next : s)));
       duesGeneratedRef.current = false;
     },
-    [students, batchWithSync]
+    [students, batchWithSync, assertSeats]
   );
 
   const importStudents = useCallback(
     async (rows: ParsedStudentRow[]) => {
       if (rows.length === 0) return 0;
       const today = todayIso();
-      const created: Student[] = rows.map((row) => ({
+      // Rows that do not fit in a full batch are added without that batch.
+      const seated = allotSeats(rows, batches, students).rows;
+      const created: Student[] = seated.map((row) => ({
         id: generateId(),
         name: row.name,
         rollNo: row.rollNo,
@@ -596,9 +638,10 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       await batchWithSync({ students: created }, {}, ["t_students"]);
       setStudents((prev) => [...prev, ...created].sort((a, b) => a.name.localeCompare(b.name)));
       duesGeneratedRef.current = false;
+      reportActivity("tuition", "students_imported", created.length);
       return created.length;
     },
-    [batchWithSync]
+    [batchWithSync, batches, students]
   );
 
   // ---- Attendance ----------------------------------------------------------
@@ -628,6 +671,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
         for (const record of records) byId.set(record.id, record);
         return [...byId.values()];
       });
+      reportActivity("tuition", "attendance_marked");
     },
     [attendance, batchWithSync]
   );
@@ -678,6 +722,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       if (created.length === 0 && redated.length === 0) return 0;
       await batchWithSync({ fee_dues: [...created, ...redated] }, {}, ["t_fees"]);
       setDues((prev) => [...prev.map((d) => redated.find((r) => r.id === d.id) ?? d), ...created]);
+      if (created.length > 0) reportActivity("tuition", "fees_generated", created.length);
       return created.length;
     },
     [batchWithSync, batches, dues, lang, settings.feeDueDay, students]
@@ -761,6 +806,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       );
       setPayments((prev) => [payment, ...prev]);
       setSettings(nextSettings);
+      reportActivity("tuition", "payment_received");
       return payment;
     },
     [students, settings, batchWithSync]
@@ -781,6 +827,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const test: TestRecord = { ...input, id: generateId(), createdAt: nowIso() };
       await batchWithSync({ tests: [test] }, {}, ["t_marks"]);
       setTests((prev) => [test, ...prev].sort((a, b) => b.date.localeCompare(a.date)));
+      reportActivity("tuition", "test_created");
       return test;
     },
     [batchWithSync]
@@ -900,6 +947,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ enquiries: [enquiry] }, {}, ["t_meta"]);
       setEnquiries((prev) => [enquiry, ...prev]);
+      reportActivity("tuition", "enquiry_created");
     },
     [batchWithSync]
   );
@@ -1028,6 +1076,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       await updateSettings({ sheetSyncUrl: trimmed });
       // The first sync sends everything.
       await batchWithSync({}, {}, SYNC_SLICES);
+      reportActivity("tuition", "sheet_connected");
     },
     [updateSettings, batchWithSync]
   );
@@ -1079,6 +1128,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const loaded = await loadAll();
       duesGeneratedRef.current = false;
       setStatus(loaded.business ? "ready" : "welcome");
+      reportActivity("tuition", "backup_restored");
     },
     [loadAll]
   );
@@ -1101,6 +1151,7 @@ export function TuitionProvider({ children }: { children: ReactNode }) {
       const loaded = await loadAll();
       duesGeneratedRef.current = false;
       setStatus(loaded.business ? "ready" : "welcome");
+      reportActivity("tuition", "backup_restored");
     },
     [loadAll]
   );

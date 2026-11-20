@@ -18,6 +18,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbGetAll } from "@/lib/pos/db";
 import type { Business } from "@/lib/pos/types";
 import {
@@ -405,6 +406,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
       setSettings(nextSettings);
       setMedicines(created);
       setStatus(created.length > 0 ? "ready" : "welcome");
+      reportActivity("pharmacy", "setup_completed");
     },
     []
   );
@@ -430,6 +432,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
         return next.sort((a, b) => a.name.localeCompare(b.name));
       });
       if (status === "welcome") setStatus("ready");
+      if (!existing) reportActivity("pharmacy", "medicine_created");
       return record;
     },
     [medicines, status]
@@ -489,6 +492,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
         return [...merged.values()].sort((a, b) => a.name.localeCompare(b.name));
       });
       if (status === "welcome") setStatus("ready");
+      reportActivity("pharmacy", "medicines_imported", written.length);
       return written.length;
     },
     [medicines, status]
@@ -509,6 +513,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
           : [...previous, record]
         ).sort((a, b) => a.name.localeCompare(b.name))
       );
+      if (!existing) reportActivity("pharmacy", "supplier_created");
       return record;
     },
     [suppliers]
@@ -534,6 +539,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
           : [...previous, record]
         ).sort((a, b) => a.name.localeCompare(b.name))
       );
+      if (!existing) reportActivity("pharmacy", "customer_created");
       return record;
     },
     [customers]
@@ -659,6 +665,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
         return [...merged.values()];
       });
       setStockLogs((previous) => [...logs, ...previous]);
+      reportActivity("pharmacy", "purchase_created");
       return purchase;
     },
     [batches, medicineMap]
@@ -890,6 +897,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
           return [...merged.values()];
         });
       }
+      reportActivity("pharmacy", "sale_created");
       return sale;
     },
     [batchMap, refillReminders, settings]
@@ -905,6 +913,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
       };
       await pharmacyPut("sales", next);
       setSales((previous) => previous.map((row) => (row.id === saleId ? next : row)));
+      reportActivity("pharmacy", "payment_received");
     },
     [sales]
   );
@@ -965,6 +974,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
       setSaleReturns((previous) => [record, ...previous]);
       setBatches((previous) => previous.map((batch) => touched.get(batch.id) ?? batch));
       setStockLogs((previous) => [...logs, ...previous]);
+      reportActivity("pharmacy", "sale_returned");
       return record;
     },
     [batchMap, medicineMap, sales]
@@ -1117,6 +1127,7 @@ export function PharmacyProvider({ children }: { children: ReactNode }) {
     async (backup: PharmacyBackup) => {
       await restoreBackup(backup);
       await load();
+      reportActivity("pharmacy", "backup_restored");
     },
     [load]
   );

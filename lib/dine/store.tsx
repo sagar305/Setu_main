@@ -14,6 +14,7 @@
 // all: a ticket is a database record from the moment the table is tapped, and
 // every mutation is a write.
 
+import { reportActivity } from "@/lib/activity";
 import { useI18n } from "@/lib/i18n";
 import { translate } from "@/lib/i18n/translate";
 import {
@@ -1008,6 +1009,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setMaterials(materialRows);
       setRecipeLines(recipeRows);
       setStatus("ready");
+      reportActivity("dine", "setup_completed");
     },
     []
   );
@@ -1193,6 +1195,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setVariations((previous) => [...previous, ...children.variationRows]);
       setModifierGroups((previous) => [...previous, ...children.groupRows]);
       setModifiers((previous) => [...previous, ...children.modifierRows]);
+      reportActivity("dine", "menu_item_created");
       return record;
     },
     [menuItems, writeItemChildren]
@@ -1397,6 +1400,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       );
       setModifierGroups((previous) => (replaceExisting ? groupRows : [...previous, ...groupRows]));
       setModifiers((previous) => (replaceExisting ? modifierRows : [...previous, ...modifierRows]));
+      reportActivity("dine", "menu_imported", menuRows.length);
       return menuRows.length;
     },
     [categories, menuItems, modifierGroups, modifiers, variations]
@@ -1452,6 +1456,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       };
       await commit({ dine_tables: [record] });
       setTables((previous) => [...previous, record]);
+      reportActivity("dine", "table_created");
       return record;
     },
     [tables]
@@ -1488,6 +1493,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       if (rows.length === 0) return;
       await commit({ dine_tables: rows });
       setTables((previous) => [...previous, ...rows]);
+      reportActivity("dine", "table_created", rows.length);
     },
     [tables]
   );
@@ -1578,6 +1584,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       // the lookup misses and the ticket silently keeps no customer at all.
       customersRef.current = [...customersRef.current, record];
       void publishCustomer(record);
+      reportActivity("dine", "customer_created");
       return record;
     },
     [commit, publishCustomer]
@@ -1978,6 +1985,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       announce(["dine_tickets", "dine_settings"]);
       setTickets((previous) => [...previous, record]);
       setSettings(nextSettings);
+      reportActivity("dine", "order_created");
       return record;
     },
     [announce, settingsFrom]
@@ -2184,6 +2192,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       setKots((previous) => [...previous, kot]);
       setTickets((previous) => previous.map((row) => (row.id === ticketId ? nextTicket : row)));
       setSettings(nextSettings);
+      reportActivity("dine", "kot_sent");
       return kot;
     },
     [allocateKot, announce, consumeForItems, ticketItems, tickets]
@@ -2455,6 +2464,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         settledAt: nowIso(),
         discountReason: reason,
       });
+      reportActivity("dine", "order_cancelled");
     },
     [patchTicket]
   );
@@ -2516,6 +2526,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
 
       await commit({ dine_reservations: [record] });
       setReservations((previous) => [...previous, record]);
+      reportActivity("dine", "reservation_created");
       return record;
     },
     [commit]
@@ -2881,6 +2892,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         );
       }
       setTickets((previous) => previous.map((row) => (row.id === ticketId ? nextTicket : row)));
+      reportActivity("dine", "bill_created");
       setSettings(nextSettings);
       return billRows;
     },
@@ -3031,6 +3043,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         const settled = nextTicket;
         setTickets((previous) => previous.map((row) => (row.id === settled.id ? settled : row)));
       }
+      reportActivity("dine", "payment_received");
     },
     [bills, commit, paymentMethods, postToLedger, tickets, unpostFromLedger]
   );
@@ -3240,6 +3253,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       await dineBatch({
         dine_sync_queue: DINE_SYNC_SLICES.map((id) => ({ id, dirtyAt: nowIso() })),
       });
+      reportActivity("dine", "sheet_connected");
     },
     [countSheetCall, writeSettings]
   );
@@ -3272,6 +3286,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
         await restoreDineBackup(backup);
         const restored = await loadAll();
         setStatus(restored ? "ready" : "welcome");
+        reportActivity("dine", "backup_restored");
       } finally {
         setSheetSyncing(false);
       }
@@ -3290,6 +3305,7 @@ export function DineProvider({ children }: { children: ReactNode }) {
       await restoreDineBackup(backup);
       const restored = await loadAll();
       setStatus(restored ? "ready" : "welcome");
+      reportActivity("dine", "backup_restored");
     },
     [loadAll]
   );

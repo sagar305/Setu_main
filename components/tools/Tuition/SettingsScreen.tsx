@@ -17,6 +17,7 @@ import {
   Upload,
 } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
+import { batchCapacity, batchStrength } from "@/lib/tuition/calc";
 import { parseBackupFile, type TuitionBackup } from "@/lib/tuition/backup";
 import { APPS_SCRIPT_TEMPLATE } from "@/lib/tuition/sheetSync";
 import {
@@ -250,6 +251,7 @@ const EMPTY_BATCH: Omit<Batch, "id" | "createdAt" | "updatedAt"> = {
   startTime: "17:00",
   endTime: "18:00",
   monthlyFee: 0,
+  maxStudents: null,
   venue: "",
   active: true,
 };
@@ -301,7 +303,12 @@ function BatchesSection() {
     setSaving(true);
     setError("");
     try {
-      const payload = { ...form, name: form.name.trim(), monthlyFee: Number(form.monthlyFee) || 0 };
+      const payload = {
+        ...form,
+        name: form.name.trim(),
+        monthlyFee: Number(form.monthlyFee) || 0,
+        maxStudents: Number(form.maxStudents) >= 1 ? Math.floor(Number(form.maxStudents)) : null,
+      };
       if (editing) await updateBatch(editing.id, payload);
       else await createBatch(payload);
       setOpen(false);
@@ -333,9 +340,8 @@ function BatchesSection() {
       ) : (
         <ul className="space-y-2">
           {batches.map((batch) => {
-            const count = students.filter(
-              (s) => s.status === "active" && s.batchIds.includes(batch.id)
-            ).length;
+            const count = batchStrength(students, batch.id);
+            const capacity = batchCapacity(batch);
             return (
               <li
                 key={batch.id}
@@ -355,7 +361,9 @@ function BatchesSection() {
                       batch.subject,
                       describeDays(batch.days, lang),
                       `${batch.startTime}–${batch.endTime}`,
-                      fill(t(count === 1 ? "tuStCountOne" : "tuStCountMany"), { count }),
+                      capacity === null
+                        ? fill(t(count === 1 ? "tuStCountOne" : "tuStCountMany"), { count })
+                        : fill(t("tuBatchSeats"), { count, max: capacity }),
                     ]
                       .filter(Boolean)
                       .join(" · ")}
@@ -466,14 +474,31 @@ function BatchesSection() {
               />
             </Field>
           </div>
-          <Field label={t("tuStgVenueOptional")}>
-            <input
-              type="text"
-              value={form.venue}
-              onChange={(event) => setForm((p) => ({ ...p, venue: event.target.value }))}
-              className={inputClass}
-            />
-          </Field>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Field label={t("tuStgMaxStudents")} hint={t("tuStgMaxStudentsHint")}>
+              <input
+                type="number"
+                min={1}
+                step={1}
+                inputMode="numeric"
+                value={form.maxStudents || ""}
+                onChange={(event) =>
+                  setForm((p) => ({ ...p, maxStudents: Number(event.target.value) || null }))
+                }
+                className={inputClass}
+              />
+            </Field>
+            <div className="sm:col-span-2">
+              <Field label={t("tuStgVenueOptional")}>
+                <input
+                  type="text"
+                  value={form.venue}
+                  onChange={(event) => setForm((p) => ({ ...p, venue: event.target.value }))}
+                  className={inputClass}
+                />
+              </Field>
+            </div>
+          </div>
           <label className="flex items-center gap-2 text-sm text-muted">
             <input
               type="checkbox"

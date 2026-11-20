@@ -8,7 +8,7 @@
 
 import {
   CLOSED_STATUSES,
-  IN_SHOP_STATUSES,
+  OPEN_STATUSES,
   REPEAT_FAILURE_DAYS,
   addDays,
   dateKeyOf,
@@ -16,6 +16,7 @@ import {
   todayKey,
   type Bill,
   type Job,
+  type OutsideRepair,
   type Part,
   type PartUsage,
   type RepairSettings,
@@ -61,7 +62,7 @@ export function agingLevel(
   settings: RepairSettings,
   today = todayKey()
 ): AgingLevel {
-  if (!IN_SHOP_STATUSES.includes(job.status)) return "fresh";
+  if (!OPEN_STATUSES.includes(job.status)) return "fresh";
   const days = daysInShop(job, today);
   if (days >= settings.agingRedDays) return "red";
   if (days >= settings.agingAmberDays) return "amber";
@@ -71,7 +72,7 @@ export function agingLevel(
 /** The promise has been broken: a date was given, it has passed, the device is here. */
 export function isOverdue(job: Job, today = todayKey()): boolean {
   if (!job.promisedDate) return false;
-  if (!IN_SHOP_STATUSES.includes(job.status)) return false;
+  if (!OPEN_STATUSES.includes(job.status)) return false;
   return job.promisedDate < today;
 }
 
@@ -219,7 +220,45 @@ export function jobMargin(job: Job, bill: Bill | null, settings: RepairSettings)
   const revenue = bill
     ? bill.total - bill.taxAmount
     : billTotals(job, settings).taxable;
-  return round2(revenue - partsCostTotal(job.partsUsed));
+  return round2(revenue - partsCostTotal(job.partsUsed) - outsideCostTotal(job));
+}
+
+// ---------------------------------------------------------------------------
+// Outside repair
+// ---------------------------------------------------------------------------
+
+/** The trip that is out right now, if any. */
+export function currentOutside(job: Job): OutsideRepair | null {
+  const trips = job.outsideRepairs ?? [];
+  const last = trips[trips.length - 1];
+  return last && !last.receivedOn ? last : null;
+}
+
+/**
+ * What vendors charged the shop for this job.
+ *
+ * The final charge once known, else the quote — a margin figure that ignores a
+ * quoted ₹3,000 board repair because the invoice has not arrived yet would
+ * flatter the job. It is a cost only: nothing here reaches the customer's bill.
+ */
+export function outsideCostTotal(job: Job): number {
+  return round2(
+    (job.outsideRepairs ?? []).reduce(
+      (sum, trip) => sum + (trip.finalCharge ?? trip.quotedCharge ?? 0),
+      0
+    )
+  );
+}
+
+/** Out with a vendor past the date they gave. */
+export function isOutsideOverdue(job: Job, today = todayKey()): boolean {
+  const trip = currentOutside(job);
+  return Boolean(trip?.expectedBackOn && trip.expectedBackOn < today);
+}
+
+/** The next outward challan number for this job: "JC-0412/O1", "/O2"... */
+export function nextChallanNo(job: Job): string {
+  return `${job.jobNo}/O${(job.outsideRepairs?.length ?? 0) + 1}`;
 }
 
 /** What the customer is being asked for, billed or not yet. */

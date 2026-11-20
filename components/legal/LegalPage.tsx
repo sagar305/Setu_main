@@ -40,7 +40,7 @@ export function LegalPage({
         )}
 
         {content.sections.map((section) => (
-          <section key={section.id} className="mt-10">
+          <section key={section.id} id={section.id} className="mt-10 scroll-mt-24">
             <h2 className="text-xl font-bold text-ink">{section.heading}</h2>
             <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted">
               {section.paragraphs?.map((text, index) => (

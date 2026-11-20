@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { reportActivity } from "@/lib/activity";
 import { dbBatch, dbClearAll, dbGetAll, type StoreName } from "./db";
 import {
   buildBackupFromSheetPull,
@@ -20,6 +21,11 @@ import {
   testSheetConnection,
   type WorkspaceSnapshot,
 } from "./sheetSync";
+import { creditLedgerId, creditReversalLedgerId } from "./drive/scope";
+import { checkTeamSale, getTeamSession, teamInvoicePrefix } from "./drive/engine";
+
+const TEAM_BLOCKED =
+  "Not available while Google Drive team sync is on. Turn off team sync in Settings first.";
 import { calculateCartTotals } from "./calc";
 import {
   SPLIT_PAYMENT_ID,
@@ -406,6 +412,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       setPayments(seededPayments);
       setSettings(newSettings);
       setStatus("ready");
+      reportActivity("pos", "setup_completed");
     },
     []
   );
@@ -451,6 +458,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     setProducts((prev) => [...prev, product]);
     if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
     if (batches.length) setStockBatches((prev) => [...prev, ...batches]);
+    reportActivity("pos", "product_created");
     return product;
   }, [batchMode]);
 
@@ -503,6 +511,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       };
       await batchWithSync({ products: [copy] }, {}, ["products"]);
       setProducts((prev) => [...prev, copy]);
+      reportActivity("pos", "product_created");
     },
     [products]
   );
@@ -669,6 +678,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
     const customer: Customer = { ...input, id: generateId(), createdAt: nowIso() };
     await batchWithSync({ customers: [customer] }, {}, ["customers"]);
     setCustomers((prev) => [...prev, customer]);
+    reportActivity("pos", "customer_created");
     return customer;
   }, []);
 
@@ -712,6 +722,11 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
   const updateSettings = useCallback(
     async (updates: Partial<Omit<PosSettings, "id">>) => {
+      if (updates.batchTracking && getTeamSession()) {
+        throw new Error(
+          "Batch & expiry tracking isn't available while Google Drive team sync is on."
+        );
+      }
       const updated: PosSettings = { ...settings, ...updates, id: "main" };
       // Turning batch tracking on: put each product's current stock into an
       // "Opening stock" batch so batches and stock agree from the start.
@@ -751,6 +766,20 @@ export function PosProvider({ children }: { children: ReactNode }) {
         settings.taxEnabled
       );
 
+      // Team sync: a cashier's discount and credit limits, set by the owner.
+      const limits = checkTeamSale({
+        subtotal: totals.subtotal,
+        discountAmount: totals.discountAmount,
+        paymentMethodId: input.creditSale ? "credit" : "",
+      });
+      if (!limits.ok) {
+        throw new Error(
+          limits.reason === "credit-not-allowed"
+            ? "The owner has turned off credit (udhaar) sales for you."
+            : "This discount is more than the owner allows you to give."
+        );
+      }
+
       let splitParts: OrderPayment[] | undefined;
       if (isSplit) {
         const check = checkSplit(input.splitPayments!, totals.total, payments);
@@ -761,11 +790,13 @@ export function PosProvider({ children }: { children: ReactNode }) {
       // Guarantee a unique invoice number even if the counter drifted
       // (e.g. after restoring an older backup).
       const usedNumbers = new Set(orders.map((o) => o.invoiceNumber));
+      // In a team, each member bills in their own series (INV-C1-00001).
+      const invoicePrefix = teamInvoicePrefix(settings.invoicePrefix);
       let counter = settings.nextInvoiceNumber;
-      let invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
+      let invoiceNumber = formatInvoiceNumber(invoicePrefix, counter, settings.invoiceNumberDigits);
       while (usedNumbers.has(invoiceNumber)) {
         counter += 1;
-        invoiceNumber = formatInvoiceNumber(settings.invoicePrefix, counter, settings.invoiceNumberDigits);
+        invoiceNumber = formatInvoiceNumber(invoicePrefix, counter, settings.invoiceNumberDigits);
       }
 
       const customer = input.customerId
@@ -820,7 +851,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
       const ledgerEntries: LedgerEntry[] = input.creditSale
         ? [
             {
-              id: generateId(),
+              // Derived from the order so every synced device names it the
+              // same (lib/pos/drive merges rebuild it from the sale).
+              id: creditLedgerId(order.id),
               customerId: customer!.id,
               customerName: customer!.name,
               type: "credit",
@@ -916,6 +949,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
       setSettings(updatedSettings);
 
+      reportActivity("pos", "order_created");
       return order;
     },
     [customers, orders, payments, products, settings, batchMode, stockBatches]
@@ -924,6 +958,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const importSales = useCallback(
     async (sales: ImportedSale[], options: { reduceStock: boolean }) => {
       if (sales.length === 0) return 0;
+      if (getTeamSession()?.role === "cashier") throw new Error("Only the owner can import past sales.");
       const now = nowIso();
       // Oldest first, so invoice numbers run in date order.
       const sorted = [...sales].sort((a, b) => a.date.localeCompare(b.date));
@@ -1036,6 +1071,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       if (logs.length) setInventoryLogs((prev) => [...logs.reverse(), ...prev]);
       setSettings(updatedSettings);
 
+      reportActivity("pos", "sales_imported", newOrders.length);
       return newOrders.length;
     },
     [orders, products, settings, batchMode, stockBatches]
@@ -1087,11 +1123,31 @@ export function PosProvider({ children }: { children: ReactNode }) {
         }
       }
 
+      // A cancelled udhaar sale is no longer owed: post a matching entry in
+      // the Customer Ledger so the customer's balance drops back.
+      const reversal: LedgerEntry[] =
+        order.paymentMethodId === "credit" && order.customerId
+          ? [
+              {
+                id: creditReversalLedgerId(order.id),
+                customerId: order.customerId,
+                customerName: order.customerName,
+                type: "payment",
+                amount: order.total,
+                note: `Sale ${order.invoiceNumber} cancelled`,
+                date: now.slice(0, 10),
+                createdByTool: "browser-pos",
+                createdAt: now,
+              },
+            ]
+          : [];
+
       await batchWithSync(
         {
           orders: [cancelled],
           products: updatedProducts,
           inventory: logs,
+          ledger: reversal,
           stock_batches: Array.from(changedBatches.values()),
         },
         {},
@@ -1106,6 +1162,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
         );
       }
       if (logs.length) setInventoryLogs((prev) => [...logs, ...prev]);
+      reportActivity("pos", "order_cancelled");
     },
     [orderItems, orders, products, batchMode, stockBatches]
   );
@@ -1129,6 +1186,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       };
       await dbBatch({ held_carts: [held] });
       setHeldCarts((prev) => [...prev, held]);
+      reportActivity("pos", "cart_held");
       return held;
     },
     [customers]
@@ -1218,6 +1276,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       await updateSettings({ sheetSyncUrl: trimmed });
       // First sync sends the whole workspace.
       await batchWithSync({}, {}, SYNC_SLICES);
+      reportActivity("pos", "sheet_connected");
     },
     [updateSettings, batchWithSync]
   );
@@ -1247,6 +1306,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
       await restoreBackup(backup);
       const loadedBusiness = await loadAll();
       setStatus(loadedBusiness ? "ready" : "welcome");
+      reportActivity("pos", "backup_restored");
     },
     [loadAll]
   );
@@ -1263,7 +1323,9 @@ export function PosProvider({ children }: { children: ReactNode }) {
   const reload = useCallback(async () => {
     setReloading(true);
     try {
-      await loadAll();
+      const loaded = await loadAll();
+      // Joining a team fills an empty device: leave the welcome screen.
+      if (loaded) setStatus((prev) => (prev === "welcome" ? "ready" : prev));
     } finally {
       setReloading(false);
     }
@@ -1271,6 +1333,7 @@ export function PosProvider({ children }: { children: ReactNode }) {
 
   const applyRestoredBackup = useCallback(
     async (backup: PosBackup) => {
+      if (getTeamSession()) throw new Error(TEAM_BLOCKED);
       await restoreBackup(backup);
       // The restored data is the new truth — push all of it on next flush.
       await dbBatch({
@@ -1278,11 +1341,13 @@ export function PosProvider({ children }: { children: ReactNode }) {
       });
       const loadedBusiness = await loadAll();
       setStatus(loadedBusiness ? "ready" : "welcome");
+      reportActivity("pos", "backup_restored");
     },
     [loadAll]
   );
 
   const resetAll = useCallback(async () => {
+    if (getTeamSession()) throw new Error(TEAM_BLOCKED);
     await dbClearAll();
     setBusiness(null);
     setProducts([]);

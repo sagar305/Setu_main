@@ -279,6 +279,42 @@ the product code underneath still may not. Every event carries `app_id`,
 Installs per app in PostHog = unique users (`distinct_id`, the visitor id) of
 `pwa_installed`, broken down by `app_name`.
 
+## Product milestones (what people actually do in the apps)
+
+Clicks say a button was pressed, not what it did. The free apps therefore
+announce their own milestones through `lib/activity.ts`:
+
+```ts
+reportActivity("pos", "order_created");
+reportActivity("tuition", "students_imported", created.length);
+```
+
+That file imports nothing and raises a `setu:activity` browser event.
+`AnalyticsProvider` is the only listener: it re-checks the product and name
+against `PRODUCT_ACTIVITIES` and forwards the event under that name with a
+`product` property (and `count` for bulk imports). The apps still never import
+the pipeline, so the boundary test stands unchanged.
+
+A signal can carry a product, a listed name and a whole-number row count —
+nothing else. No amounts, names, phone numbers or free text; `tests/analytics/activity.test.ts`
+enforces that, and that every call uses a listed name.
+
+In PostHog each milestone is its own event (`order_created`, `job_created`,
+`student_created`, `patient_registered`, `product_created`, …). Break down by
+`product` to split the shared names (`setup_completed`, `customer_created`,
+`payment_received`, `backup_restored`) per app. The full list is
+`PRODUCT_ACTIVITIES` in `lib/activity.ts`.
+
+The bank statement analyzer (`product: "bank"`) announces from its screens in
+`components/tools/BankStatementAnalyzer/`, never from `lib/bankStatement/**`,
+and never carries a count: `statement_imported`, `sample_loaded`,
+`ai_categorisation_run`, `rule_created`, `category_created`,
+`reconciliation_run`, `excel_exported`, `pdf_exported`, `csv_exported`.
+
+To add one: add the name to the list, then call `reportActivity` in the store
+right after the write succeeds. Report a create only on create (`if (!existing)`),
+not on every save.
+
 ## Non-negotiable constraints
 
 - **No analytics import inside offline product code.** Not in

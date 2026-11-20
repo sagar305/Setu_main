@@ -8,6 +8,7 @@ import { useI18n } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
 import { useMemo, useRef, useState } from "react";
 import { FileUp, Upload } from "lucide-react";
+import { allotSeats, batchCapacity } from "@/lib/tuition/calc";
 import { useTuition } from "@/lib/tuition/store";
 import { parseStudentImport, type ImportResult } from "@/lib/tuition/csv";
 import {
@@ -24,7 +25,7 @@ Diya Patel, Class 9, Nisha Patel, 9876500011, Science Morning | Maths Evening`;
 
 export function ImportStudents({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t, lang } = useI18n();
-  const { batches, importStudents } = useTuition();
+  const { batches, students, importStudents } = useTuition();
   const [text, setText] = useState("");
   const [result, setResult] = useState<ImportResult | null>(null);
   const [fallbackBatch, setFallbackBatch] = useState("");
@@ -46,15 +47,28 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
     setDone(0);
   };
 
+  // Each row with the batch it will actually be put in.
+  const plannedRows = useMemo(
+    () =>
+      (result?.rows ?? []).map((row) => ({
+        ...row,
+        batchIds:
+          row.batchIds.length > 0 ? row.batchIds : fallbackBatch ? [fallbackBatch] : [],
+      })),
+    [result, fallbackBatch]
+  );
+
+  // Batches with a size limit that this file would overfill.
+  const overflowed = useMemo(
+    () => allotSeats(plannedRows, batches, students).overflowed,
+    [plannedRows, batches, students]
+  );
+
   const runImport = async () => {
     if (!result || result.rows.length === 0) return;
     setImporting(true);
     try {
-      const rows = result.rows.map((row) => ({
-        ...row,
-        batchIds:
-          row.batchIds.length > 0 ? row.batchIds : fallbackBatch ? [fallbackBatch] : [],
-      }));
+      const rows = plannedRows;
       const count = await importStudents(rows);
       setDone(count);
       setText("");
@@ -136,6 +150,16 @@ export function ImportStudents({ open, onClose }: { open: boolean; onClose: () =
           {result.unknownBatches.length > 0 && (
             <p className="mt-2 rounded-lg bg-saffron/10 px-3 py-2 text-xs text-ink">
               {fill(t("tuImUnknownBatches"), { names: result.unknownBatches.join(", ") })}
+            </p>
+          )}
+
+          {overflowed.length > 0 && (
+            <p className="mt-2 rounded-lg bg-saffron/10 px-3 py-2 text-xs text-ink">
+              {fill(t("tuImOverCapacity"), {
+                names: overflowed
+                  .map((batch) => `${batch.name} (${batchCapacity(batch)})`)
+                  .join(", "),
+              })}
             </p>
           )}
 

@@ -1,7 +1,8 @@
 "use client";
 
-// Monthly reports: what was collected, what is still out, who is missing
-// classes. Every row can be shared with the parent as a link.
+// Monthly reports: what was collected, what the class cost and what is left
+// as profit, what is still out, who is missing classes. Every attendance row
+// can be shared with the parent as a link.
 
 import { useI18n } from "@/lib/i18n";
 import { fill } from "@/lib/i18n/translate";
@@ -10,7 +11,9 @@ import { Download, Share2, TriangleAlert } from "lucide-react";
 import { useTuition } from "@/lib/tuition/store";
 import {
   attendanceStats,
+  expensesInMonth,
   filterAttendance,
+  monthProfit,
   studentBalance,
   studentMonthlyFee,
 } from "@/lib/tuition/calc";
@@ -20,7 +23,10 @@ import { currentMonthKey, formatDate, formatMonth, monthsBetween } from "@/lib/t
 import type { SharedDoc } from "@/lib/toolkit/shareLink";
 import { ShareDialog } from "@/components/toolkit/ShareDialog";
 import { inputClass, secondaryBtnClass, StatCard } from "@/components/tools/FreePos/ui";
+import { useEntityList } from "@/lib/hooks/useEntityList";
+import type { Expense } from "@/lib/toolkit/types";
 import { attendanceDoc } from "./share";
+import { ExpensesSection } from "./ExpensesSection";
 
 const LOW_ATTENDANCE = 75;
 
@@ -30,29 +36,32 @@ export function ReportsScreen() {
   const [period, setPeriod] = useState(currentMonthKey());
   const [shareDoc, setShareDoc] = useState<SharedDoc | null>(null);
   const currency = business?.currency ?? "INR";
+  // The Expense Tracker's own records — read and written in place.
+  const { items: expenses, save: saveExpense, remove: removeExpense } =
+    useEntityList<Expense>("expenses");
 
   // Offer every month that has any activity, newest first.
   const periods = useMemo(() => {
     const earliest = [
       ...students.map((s) => s.joinDate).filter(Boolean),
       ...payments.map((p) => p.date.slice(0, 10)),
+      ...expenses.map((e) => e.date).filter(Boolean),
     ].sort()[0];
     const months = monthsBetween(earliest ?? currentMonthKey(), currentMonthKey());
     return months.length > 0 ? months.reverse() : [currentMonthKey()];
-  }, [students, payments]);
+  }, [students, payments, expenses]);
 
   const activeStudents = useMemo(
     () => students.filter((s) => s.status === "active"),
     [students]
   );
 
-  const collected = useMemo(
-    () =>
-      payments
-        .filter((payment) => payment.date.slice(0, 7) === period)
-        .reduce((sum, payment) => sum + payment.amount, 0),
-    [payments, period]
+  const profit = useMemo(
+    () => monthProfit(payments, expenses, period),
+    [payments, expenses, period]
   );
+  const collected = profit.collected;
+  const monthExpenses = useMemo(() => expensesInMonth(expenses, period), [expenses, period]);
 
   const billed = useMemo(
     () =>
@@ -146,12 +155,33 @@ export function ReportsScreen() {
         </div>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard
           label={t("tuRpCollected")}
           value={formatMoney(collected, currency)}
           sub={formatMonth(period, lang)}
         />
+        <StatCard
+          label={t("tuRpExpenses")}
+          value={formatMoney(profit.expenses, currency)}
+          sub={formatMonth(period, lang)}
+        />
+        <div className="rounded-2xl border border-muted-line/30 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+            {t("netProfit")}
+          </p>
+          <p
+            className={`mt-2 text-2xl font-bold tracking-tight ${
+              profit.profit < 0 ? "text-red-600" : "text-emerald-600"
+            }`}
+          >
+            {formatMoney(profit.profit, currency)}
+          </p>
+          <p className="mt-1 text-xs text-muted">
+            {t("tuRpProfitSub")}
+            {profit.marginPercent !== null ? ` · ${profit.marginPercent}%` : ""}
+          </p>
+        </div>
         <StatCard
           label={t("tuRpBilled")}
           value={formatMoney(billed, currency)}
@@ -168,6 +198,16 @@ export function ReportsScreen() {
           sub={t("tuRpAllMonths")}
         />
       </div>
+
+      <ExpensesSection
+        period={period}
+        currency={currency}
+        expenses={monthExpenses}
+        byCategory={profit.byCategory}
+        total={profit.expenses}
+        onSave={saveExpense}
+        onRemove={removeExpense}
+      />
 
       {lowAttendance.length > 0 && (
         <div className="mt-5 rounded-xl border border-saffron/40 bg-saffron/10 p-4">

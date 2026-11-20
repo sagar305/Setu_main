@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Pencil, Plus, Trash2, UserRound, Users } from "lucide-react";
 import { usePos, type CustomerInput } from "@/lib/pos/store";
+import { useTeam } from "./team/TeamSyncContext";
 import { formatMoney, type Customer } from "@/lib/pos/types";
 import type { NavigateFn } from "./nav";
 import {
@@ -228,6 +229,8 @@ export function CustomersScreen({
   onNavigate: NavigateFn;
 }) {
   const { business, customers, orders, deleteCustomer } = usePos();
+  // In a team a cashier can add customers, not change or remove them.
+  const { isCashier } = useTeam();
   const currency = business?.currency ?? "INR";
 
   const [search, setSearch] = useState("");
@@ -330,7 +333,7 @@ export function CustomersScreen({
                     </span>
                   </span>
                 </button>
-                <div className="mt-3 flex justify-end gap-1 border-t border-muted-line/15 pt-2">
+                {!isCashier && <div className="mt-3 flex justify-end gap-1 border-t border-muted-line/15 pt-2">
                   <button
                     type="button"
                     aria-label={`Edit ${customer.name}`}
@@ -350,7 +353,7 @@ export function CustomersScreen({
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
-                </div>
+                </div>}
               </div>
             );
           })}

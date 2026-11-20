@@ -37,6 +37,88 @@ export const CHANGE_TYPE_LABELS: Record<ChangeType, string> = {
 /** Newest first. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "Team sync: front desk and technician logins for up to five people",
+    description:
+      "Turn it on in Settings and invite staff by email or WhatsApp. Front desk handles intake, delivery and billing within the discount you allow; a technician sees only their own jobs and never prices or bills. The data stays encrypted in your own Google Drive.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "See every engineer's workload, and jobs done per engineer",
+    description:
+      "A new By engineer view on the board shows how many open, urgent and overdue jobs each engineer has. Reports count the jobs each engineer marked ready, with labour and average days.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "feature",
+    product: "Free Repair Job Card",
+    title: "Keep track of devices sent to another service centre",
+    description:
+      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. The vendor's charge counts as your cost, and customers only see \"With our repair partner\".",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "improvement",
+    product: "Free Repair Job Card",
+    title: "Job cards print in larger type, laid out like a proper service receipt",
+    description:
+      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. The shop copy carries the device password and internal notes.",
+    href: "/products/free-repair-shop-software",
+  },
+  {
+    date: "2026-11-20",
+    type: "improvement",
+    product: "Browser Based POS",
+    title: "Type the quantity straight into the cart, and see full product names",
+    description:
+      "Tap the quantity in the billing cart to type any number, like 50, instead of pressing + again and again. Long product names now wrap onto two lines instead of being cut off.",
+    href: "/products/browser-based-pos",
+  },
+  {
+    date: "2026-11-19",
+    type: "fix",
+    product: "Browser Based POS",
+    title: "Cancelling a credit (udhaar) sale now clears what the customer owes for it",
+    description:
+      "The Customer Ledger gets a matching entry when you cancel the bill, so the customer's balance drops back instead of still showing the cancelled amount.",
+    href: "/products/browser-based-pos",
+
+  },
+  {
+    date: "2026-11-17",
+    type: "feature",
+    product: "Tuition Class Manager",
+    title: "See your monthly profit: fees collected minus what the class costs",
+    description:
+      "Reports now show expenses and net profit for the month. Add rent, salaries and other costs right there; they are shared with the Expense Tracker.",
+    href: "/products/free-tuition-software",
+  },
+  {
+    date: "2026-11-17",
+    type: "feature",
+    product: "Tuition Class Manager",
+    title: "Set a maximum number of students for each batch",
+    description:
+      "A batch with a limit shows its seats taken and cannot be given more students once it is full.",
+    href: "/products/free-tuition-software",
+  },
+  {
+    date: "2026-11-17",
+    type: "improvement",
+    product: "Tuition Class Manager",
+    title: "Attendance lists only the batches that have a class that day",
+    description:
+      "Other batches are one tap away when you hold an extra class.",
+    href: "/products/free-tuition-software",
+  },
+  {
     date: "2026-11-14",
     type: "improvement",
     product: "Setu Workflow",

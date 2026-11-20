@@ -29,12 +29,25 @@ export function RichText({ text }: { text: string }) {
         const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
         if (link) {
           const [, label, href] = link;
-          // Only mail and in-site links appear here; next/link handles the
-          // latter, and an external href would need target/rel handling that
-          // the legal pages have never needed.
-          if (href.startsWith("mailto:")) {
+          // Mail and in-page (#section) links are plain anchors; another site
+          // (e.g. Google's privacy policy) opens in a new tab without giving
+          // it a handle on this page; in-site paths go through next/link.
+          if (href.startsWith("mailto:") || href.startsWith("#")) {
             return (
               <a key={index} className="font-semibold text-indigo hover:underline" href={href}>
+                {label}
+              </a>
+            );
+          }
+          if (/^https?:\/\//.test(href)) {
+            return (
+              <a
+                key={index}
+                className="font-semibold text-indigo hover:underline"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {label}
               </a>
             );

@@ -35,6 +35,46 @@ import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 import { WarrantyLookup } from "./WarrantyLookup";
 import { SendQueue } from "./SendQueue";
+import { RepairTeamProvider, timeAgo, useRepairTeam } from "./team/TeamSyncContext";
+import { JoinScreen } from "./team/JoinScreen";
+import { decodeInvite } from "@/lib/repair/team/engine";
+import type { RepairScreen } from "@/lib/repair/team/roles";
+import { ROLE_LABELS } from "@/lib/repair/team/roles";
+import { MemberTeam } from "./team/TeamPanel";
+
+/** "Synced 20 sec ago" chip for the header while in a team. */
+function TeamChip({ onOpen }: { onOpen: () => void }) {
+  const { team, syncing } = useRepairTeam();
+  const [, tick] = useState(0);
+  useEffect(() => {
+    const timer = window.setInterval(() => tick((n) => n + 1), 15_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  if (!team) return null;
+  const problem = team.removed || team.needsSignIn || Boolean(team.lastError);
+  const label = team.removed
+    ? "Removed from team"
+    : team.needsSignIn
+      ? "Reconnect Google"
+      : team.lastError
+        ? "Sync problem"
+        : syncing
+          ? "Syncing…"
+          : `${ROLE_LABELS[team.role]} · synced ${timeAgo(team.lastSyncAt)}`;
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      title="Google Drive team sync"
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+        problem ? "bg-saffron/20 text-ink" : "bg-emerald-50 text-emerald-700"
+      }`}
+    >
+      <span className={`h-2 w-2 rounded-full ${problem ? "bg-saffron" : "bg-emerald-500"}`} />
+      {label}
+    </button>
+  );
+}
 
 const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof ClipboardList }[] = [
   { id: "jobs", label: "Jobs", icon: ClipboardList },
@@ -62,8 +102,15 @@ function RepairShell({
     customerById,
     retryPendingTracking,
   } = useRepair();
+  const { canSee, team } = useRepairTeam();
+  const navItems = NAV_ITEMS.filter((item) => canSee(item.id as RepairScreen));
 
   const [screen, setScreen] = useState<ScreenId>("jobs");
+
+  // Anyone on a screen their role hides goes back to the jobs board.
+  useEffect(() => {
+    if (!canSee(screen as RepairScreen)) setScreen("jobs");
+  }, [canSee, screen]);
   const [openJobId, setOpenJobId] = useState<string | null>(null);
   const [lookingUpWarranty, setLookingUpWarranty] = useState(false);
   const [offline, setOffline] = useState(false);
@@ -157,6 +204,12 @@ function RepairShell({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="text-lg font-bold text-ink">{business?.name || "Job card"}</h2>
+          <TeamChip
+            onOpen={() => {
+              setOpenJobId(null);
+              setScreen(canSee("settings") ? "settings" : "jobs");
+            }}
+          />
           {red > 0 && (
             <button
               type="button"
@@ -169,7 +222,7 @@ function RepairShell({
               {red} sitting too long
             </button>
           )}
-          {uncollected > 0 && (
+          {uncollected > 0 && canSee("reports") && (
             <button
               type="button"
               onClick={() => {
@@ -225,7 +278,7 @@ function RepairShell({
       </div>
 
       <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1" aria-label="Job card sections">
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <button
             key={item.id}
             type="button"
@@ -248,7 +301,10 @@ function RepairShell({
         (openJobId ? (
           <JobDetail jobId={openJobId} onBack={() => setOpenJobId(null)} />
         ) : (
-          <JobsScreen onOpenJob={openJob} onNewJob={() => setScreen("intake")} />
+          <JobsScreen
+            onOpenJob={openJob}
+            onNewJob={canSee("intake") ? () => setScreen("intake") : undefined}
+          />
         ))}
 
       {screen === "intake" && (
@@ -260,7 +316,7 @@ function RepairShell({
               technicians.find((tech) => tech.id === job.technicianId) ?? null;
 
             // §3.2: print the slip and offer the "received" message.
-            printJobSlip({ business, job, customer, technician, settings });
+            void printJobSlip({ business, job, customer, technician, settings });
             if (customer) {
               setIntakeMessages([
                 outboundFor("received", job, customer, business, settings),
@@ -282,6 +338,7 @@ function RepairShell({
       {screen === "billing" && <BillingScreen onOpenJob={openJob} />}
       {screen === "reports" && <ReportsScreen onOpenJob={openJob} />}
       {screen === "settings" && <SettingsScreen />}
+      {team && !canSee("settings") && screen === "jobs" && !openJobId && <MemberFooter />}
 
       <WarrantyLookup
         open={lookingUpWarranty}
@@ -308,9 +365,40 @@ function RepairShell({
   );
 }
 
+/** Team members who can't open Settings still need sync status and "Leave team". */
+function MemberFooter() {
+  const { team } = useRepairTeam();
+  const [open, setOpen] = useState(false);
+  if (!team || team.isPrimary) return null;
+  return (
+    <div className="rounded-2xl border border-muted-line/30 bg-white p-4">
+      <button type="button" onClick={() => setOpen((v) => !v)} className="text-sm font-semibold text-indigo">
+        {open ? "Hide team sync" : "Team sync & leaving the team"}
+      </button>
+      {open && (
+        <div className="mt-3">
+          <MemberTeam team={team} />
+        </div>
+      )}
+    </div>
+  );
+}
+
 function RepairBody() {
   const { status, errorMessage } = useRepair();
   const { fullscreen, toggleFullscreen } = useAppFullscreen();
+  const [joinParam, setJoinParam] = useState<string | null>(null);
+
+  useEffect(() => {
+    setJoinParam(new URLSearchParams(window.location.search).get("join"));
+  }, []);
+
+  const finishJoin = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("join");
+    window.history.replaceState(null, "", url.toString());
+    setJoinParam(null);
+  };
 
   return (
     <div
@@ -341,10 +429,16 @@ function RepairBody() {
         </div>
       )}
 
+      {joinParam !== null && status !== "loading" && status !== "error" ? (
+        <JoinScreen invite={decodeInvite(joinParam)} onDone={finishJoin} />
+      ) : (
+        <>
       {status === "welcome" && <WelcomeScreen />}
       {status === "setup" && <SetupScreen />}
       {status === "ready" && (
         <RepairShell fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+      )}
+        </>
       )}
     </div>
   );
@@ -353,7 +447,9 @@ function RepairBody() {
 export function RepairApp() {
   return (
     <RepairProvider>
-      <RepairBody />
+      <RepairTeamProvider>
+        <RepairBody />
+      </RepairTeamProvider>
     </RepairProvider>
   );
 }

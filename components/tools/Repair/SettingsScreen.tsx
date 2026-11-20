@@ -29,9 +29,13 @@ import {
 } from "@/lib/repair/backup";
 import { APPS_SCRIPT_TEMPLATE, isValidSyncUrl, testSheetConnection } from "@/lib/repair/sheetSync";
 import { TEMPLATE_LABELS } from "@/lib/repair/messages";
+import { VendorsSettings } from "./OutsideRepair";
+import { TeamPanel } from "./team/TeamPanel";
+import { useRepairTeam } from "./team/TeamSyncContext";
 import { dataUrlBytes, formatBytes } from "@/lib/repair/photos";
 import {
   DEFAULT_MESSAGE_TEMPLATES,
+  DEFAULT_SLIP_TERMS,
   DEVICE_KIND_LABELS,
   MESSAGE_PLACEHOLDERS,
   nowIso,
@@ -95,6 +99,8 @@ export function SettingsScreen() {
     updateSettings,
   } = useRepair();
 
+  const { team } = useRepairTeam();
+  const teamOnOtherDevice = Boolean(team && !team.isPrimary);
   const fileRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -160,8 +166,19 @@ export function SettingsScreen() {
         </p>
       )}
 
+      {/* Team ------------------------------------------------------------ */}
+      <SectionCard title="Team · Google Drive sync">
+        <TeamPanel />
+      </SectionCard>
+
       {/* Shop ------------------------------------------------------------ */}
       <SectionCard title="Shop details">
+        {teamOnOtherDevice && (
+          <p className="mb-3 rounded-lg bg-saffron/10 p-2 text-xs text-ink">
+            The shop details are shared from the main device. Change them there, or they will be put back on
+            the next sync.
+          </p>
+        )}
         <div className="grid gap-3 sm:grid-cols-2">
           <Field label="Shop name">
             <input
@@ -377,6 +394,8 @@ export function SettingsScreen() {
           </button>
         </div>
       </SectionCard>
+
+      <VendorsSettings />
 
       {/* Board rules ----------------------------------------------------- */}
       <SectionCard title="Ageing and reminders">
@@ -607,8 +626,61 @@ export function SettingsScreen() {
             >
               <option value="58mm">58mm thermal</option>
               <option value="80mm">80mm thermal</option>
+              <option value="a5">A5</option>
               <option value="a4">A4</option>
             </select>
+          </Field>
+        </div>
+      </SectionCard>
+
+      {/* Job card printing ------------------------------------------------ */}
+      <SectionCard title="Job card printing">
+        <p className="mb-3 text-xs text-muted">
+          The job card and the estimate print on this paper. The customer copy never shows the
+          device password or your internal notes; the shop copy does.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field label="Job card paper">
+            <select
+              className={inputClass}
+              value={settings.slipPaperSize ?? "a5"}
+              onChange={(event) =>
+                void updateSettings({ slipPaperSize: event.target.value as "a4" | "a5" })
+              }
+            >
+              <option value="a5">A5 — customer copy</option>
+              <option value="a4">A4</option>
+            </select>
+          </Field>
+          {(settings.slipPaperSize ?? "a5") === "a4" && (
+            <Field label="A4 layout">
+              <select
+                className={inputClass}
+                value={settings.slipA4Layout ?? "two-copy"}
+                onChange={(event) =>
+                  void updateSettings({
+                    slipA4Layout: event.target.value as "single" | "two-copy",
+                  })
+                }
+              >
+                <option value="two-copy">Customer + shop copy on one sheet (cut in half)</option>
+                <option value="single">One copy on the full page</option>
+              </select>
+            </Field>
+          )}
+        </div>
+        <div className="mt-4">
+          <Field
+            label="Terms and conditions"
+            hint="One per line; they print numbered. Leave blank to use the standard terms."
+          >
+            <textarea
+              className={inputClass}
+              rows={5}
+              placeholder={DEFAULT_SLIP_TERMS}
+              value={settings.slipTerms ?? ""}
+              onChange={(event) => void updateSettings({ slipTerms: event.target.value })}
+            />
           </Field>
         </div>
       </SectionCard>

@@ -303,6 +303,134 @@ export function studentsInBatch(students: Student[], batchId: string): Student[]
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/**
+ * Batches the teacher would take attendance for on a date: the ones scheduled
+ * that weekday, the ones with no fixed days (they can run any day), and any
+ * batch already marked on that date — an extra class that was held.
+ */
+export function batchesForAttendance(
+  batches: Batch[],
+  attendance: AttendanceRecord[],
+  dateKey: string
+): Batch[] {
+  const weekday = new Date(`${dateKey}T00:00:00`).getDay();
+  const marked = new Set(attendance.filter((r) => r.date === dateKey).map((r) => r.batchId));
+  return batches
+    .filter(
+      (batch) =>
+        batch.active &&
+        (batch.days.length === 0 || batch.days.includes(weekday) || marked.has(batch.id))
+    )
+    .sort((a, b) => a.startTime.localeCompare(b.startTime));
+}
+
+// ---------------------------------------------------------------------------
+// Batch size
+// ---------------------------------------------------------------------------
+
+/** The batch's student limit, or null when it takes any number. */
+export function batchCapacity(batch: Batch): number | null {
+  const max = Number(batch.maxStudents);
+  return Number.isFinite(max) && max >= 1 ? Math.floor(max) : null;
+}
+
+/** Active students enrolled in a batch — the ones who take up a seat. */
+export function batchStrength(students: Student[], batchId: string, ignoreStudentId?: string): number {
+  return students.filter(
+    (s) => s.status === "active" && s.id !== ignoreStudentId && s.batchIds.includes(batchId)
+  ).length;
+}
+
+/** Whether a batch has no seat left for one more student. */
+export function isBatchFull(batch: Batch, students: Student[], ignoreStudentId?: string): boolean {
+  const capacity = batchCapacity(batch);
+  return capacity !== null && batchStrength(students, batch.id, ignoreStudentId) >= capacity;
+}
+
+/**
+ * Seats new students in their batches in order, until each batch is full. A
+ * row that does not fit loses that batch (the student is still added) and the
+ * batch is reported, so a bulk import can never push a batch past its limit.
+ */
+export function allotSeats<T extends { batchIds: string[] }>(
+  rows: T[],
+  batches: Batch[],
+  students: Student[]
+): { rows: T[]; overflowed: Batch[] } {
+  const left = new Map<string, number>();
+  for (const batch of batches) {
+    const capacity = batchCapacity(batch);
+    if (capacity !== null) left.set(batch.id, capacity - batchStrength(students, batch.id));
+  }
+  const overflowed = new Set<string>();
+  const seated = rows.map((row) => {
+    const batchIds = row.batchIds.filter((id) => {
+      const seats = left.get(id);
+      if (seats === undefined) return true;
+      if (seats <= 0) {
+        overflowed.add(id);
+        return false;
+      }
+      left.set(id, seats - 1);
+      return true;
+    });
+    return batchIds.length === row.batchIds.length ? row : { ...row, batchIds };
+  });
+  return { rows: seated, overflowed: batches.filter((b) => overflowed.has(b.id)) };
+}
+
+// ---------------------------------------------------------------------------
+// Profit
+// ---------------------------------------------------------------------------
+
+type ExpenseLike = { date: string; amount: number; category: string; createdByTool?: string };
+
+/**
+ * A month's running costs from the shared Expense Tracker. Purchase Register
+ * mirrors are stock, not a running cost, so they are left out — the same rule
+ * the Profit Dashboard follows.
+ */
+export function expensesInMonth<T extends ExpenseLike>(expenses: T[], period: string): T[] {
+  return expenses
+    .filter((e) => e.createdByTool !== "purchase-register" && monthKey(e.date) === period)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export type MonthProfit = {
+  collected: number;
+  expenses: number;
+  profit: number;
+  /** Profit as a share of what was collected; null when nothing came in. */
+  marginPercent: number | null;
+  byCategory: { category: string; amount: number }[];
+};
+
+/** Fees actually collected in a month, less what the class cost to run. */
+export function monthProfit(
+  payments: FeePayment[],
+  expenses: ExpenseLike[],
+  period: string
+): MonthProfit {
+  const collected = round2(
+    payments.filter((p) => monthKey(p.date) === period).reduce((sum, p) => sum + p.amount, 0)
+  );
+  const totals = new Map<string, number>();
+  for (const e of expensesInMonth(expenses, period)) {
+    totals.set(e.category, round2((totals.get(e.category) ?? 0) + e.amount));
+  }
+  const spent = round2([...totals.values()].reduce((sum, v) => sum + v, 0));
+  const profit = round2(collected - spent);
+  return {
+    collected,
+    expenses: spent,
+    profit,
+    marginPercent: collected > 0 ? Math.round((profit / collected) * 100) : null,
+    byCategory: [...totals.entries()]
+      .map(([category, amount]) => ({ category, amount }))
+      .sort((a, b) => b.amount - a.amount),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Tests & marks
 // ---------------------------------------------------------------------------

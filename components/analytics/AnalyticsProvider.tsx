@@ -20,6 +20,7 @@ import {
   type EventProps,
 } from "@/lib/analytics";
 import { gaPageView } from "@/lib/analytics/ga";
+import { ACTIVITY_EVENT, parseActivity } from "@/lib/activity";
 
 const LABEL_ATTR = "data-analytics";
 const LABEL_PREFIX = "data-analytics-";
@@ -261,6 +262,22 @@ function Interactions() {
       document.removeEventListener("click", onClick, { capture: true });
       document.removeEventListener("auxclick", onClick, { capture: true });
     };
+  }, []);
+
+  // Milestones the free apps announce: "order_created", "student_created".
+  // The apps never import this pipeline; they raise a browser event carrying a
+  // product and a name from a fixed list, and this is the only thing listening.
+  useEffect(() => {
+    const onActivity = (event: Event) => {
+      const activity = parseActivity((event as CustomEvent<unknown>).detail);
+      if (!activity) return;
+      trackEvent(activity.name, {
+        product: activity.product,
+        ...(activity.count !== undefined ? { count: activity.count } : {}),
+      });
+    };
+    window.addEventListener(ACTIVITY_EVENT, onActivity);
+    return () => window.removeEventListener(ACTIVITY_EVENT, onActivity);
   }, []);
 
   useEffect(() => {

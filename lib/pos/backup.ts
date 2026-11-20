@@ -1,4 +1,4 @@
-import { STORES, dbClearStores, dbBatch, dbGetAll, type StoreName } from "./db";
+import { STORES, SYNC_INTERNAL_STORES, dbClearStores, dbBatch, dbGetAll, type StoreName } from "./db";
 
 export const BACKUP_APP_MARKER = "setu-free-pos";
 export const BACKUP_VERSION = 1;
@@ -19,6 +19,8 @@ export type PosBackup = {
 export async function createBackup(): Promise<PosBackup> {
   const data = {} as Record<StoreName, unknown[]>;
   for (const store of STORES) {
+    // Team-sync bookkeeping belongs to this device's membership, not the shop.
+    if (SYNC_INTERNAL_STORES.includes(store)) continue;
     data[store] = await dbGetAll(store);
   }
   return {

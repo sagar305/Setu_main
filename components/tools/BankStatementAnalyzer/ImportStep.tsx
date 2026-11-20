@@ -49,6 +49,7 @@ import {
   parseStatusLabel,
   validationIssueLabel,
 } from "@/lib/bankStatement/messages";
+import { reportActivity } from "@/lib/activity";
 import { buildDemoData } from "@/lib/bankStatement/demo/sampleStatement";
 import type {
   ColumnMapping,
@@ -172,6 +173,7 @@ export function ImportStep() {
   const confirmImport = useCallback(async () => {
     if (!pending) return;
     await actions.addStatement(pending.outcome.statement, pending.outcome.transactions);
+    reportActivity("bank", "statement_imported");
     setPending(null);
     setMapping(null);
     setDateFormat(null);
@@ -182,6 +184,7 @@ export function ImportStep() {
     const { statement, transactions: demoTransactions } = buildDemoData();
     await actions.addStatement(statement, demoTransactions);
     actions.log({ code: "DEMO_LOADED" }, "Demo statement loaded");
+    reportActivity("bank", "sample_loaded");
   }, [actions]);
 
   // "Try Sample Statement" from the landing page arrives as ?demo=1. Load it
