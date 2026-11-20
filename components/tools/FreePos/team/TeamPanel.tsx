@@ -15,6 +15,8 @@ import {
   UserPlus,
 } from "lucide-react";
 import {
+  MAX_TEAM_SIZE,
+  currentRecoveryKey,
   enableTeam,
   inviteMember,
   leaveTeam,
@@ -149,8 +151,11 @@ function TurnOnTeam() {
   return (
     <div className="space-y-3">
       <ul className="space-y-1.5 text-sm text-muted">
-        <li>• Use this POS on more devices and invite staff by email — free, no Setu account.</li>
-        <li>• Your data is kept in <strong className="text-ink">your own Google Drive</strong>. Setu never receives it.</li>
+        <li>• Use this POS on more devices and invite up to 4 more people by email — free, no Setu account.</li>
+        <li>
+          • Your data is kept <strong className="text-ink">encrypted in your own Google Drive</strong>. Setu never
+          receives it or its keys.
+        </li>
         <li>• Cashiers can only bill and add customers, with the discount and credit limits you set.</li>
       </ul>
       <div className="flex flex-wrap gap-3">
@@ -188,6 +193,7 @@ function TurnOnTeam() {
           </div>
           <ul className="space-y-1 text-muted">
             <li>• This device becomes the shop&apos;s <strong className="text-ink">main device</strong>. Keep it open during working hours — staff see each other&apos;s sales and stock after it syncs (every minute).</li>
+            <li>• The shop&apos;s files are encrypted with keys only your team has. Save the recovery key from Settings afterwards — it&apos;s the only way back in if every device is lost.</li>
             <li>• Restore from backup and Delete all data are turned off while sync is on.</li>
             <li>• Google asks you to reconnect about once an hour of use; sales keep working meanwhile.</li>
           </ul>
@@ -253,12 +259,26 @@ function OwnerTeam({ team }: { team: TeamState }) {
 
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h4 className="text-sm font-bold text-ink">Team ({active.length})</h4>
-          <button type="button" onClick={() => setInviting(true)} className={`${primaryBtnClass} px-3 py-1.5`}>
+          <h4 className="text-sm font-bold text-ink">
+            Team ({active.length} of {MAX_TEAM_SIZE})
+          </h4>
+          <button
+            type="button"
+            onClick={() => setInviting(true)}
+            disabled={active.length >= MAX_TEAM_SIZE}
+            title={active.length >= MAX_TEAM_SIZE ? `Up to ${MAX_TEAM_SIZE} people, you included` : undefined}
+            className={`${primaryBtnClass} px-3 py-1.5`}
+          >
             <UserPlus className="h-4 w-4" />
             Invite by email
           </button>
         </div>
+        {active.length >= MAX_TEAM_SIZE && (
+          <p className="mt-1 text-xs text-muted">
+            Your team is full — team sync allows up to {MAX_TEAM_SIZE} people, you included. Remove someone to invite
+            another person.
+          </p>
+        )}
         <ul className="mt-2 divide-y divide-muted-line/20 rounded-lg border border-muted-line/30">
           {active.map((m) => {
             const limits = permissionsOf(m);
@@ -322,6 +342,8 @@ function OwnerTeam({ team }: { team: TeamState }) {
 
       {error && <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
 
+      <RecoveryKeyBox />
+
       <button type="button" onClick={() => setTurningOff(true)} className={`${secondaryBtnClass} px-3 py-1.5`}>
         <LogOut className="h-4 w-4" />
         Turn off team sync on this device
@@ -353,6 +375,74 @@ function OwnerTeam({ team }: { team: TeamState }) {
         }}
         onCancel={() => setTurningOff(false)}
       />
+    </div>
+  );
+}
+
+/**
+ * The shop's data in Drive is encrypted with keys kept only on the team's
+ * devices and in each person's hidden Drive note. If the owner ever loses
+ * those (all devices gone and the note deleted), this key opens the shop.
+ */
+function RecoveryKeyBox() {
+  const [shown, setShown] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const key = currentRecoveryKey();
+  if (!key) return null;
+  return (
+    <div className="rounded-lg border border-muted-line/40 bg-cream-paper px-3 py-2 text-sm">
+      <p className="flex items-center gap-2 font-semibold text-ink">
+        <ShieldCheck className="h-4 w-4 text-indigo" />
+        Encrypted · Recovery key
+      </p>
+      <p className="mt-1 text-xs text-muted">
+        Your shop&apos;s files in Google Drive are encrypted; only your team&apos;s devices have the key. Save this
+        recovery key somewhere safe (print it, or keep it in a password manager). It&apos;s the only way to open the
+        shop if every device is lost. Anyone with it can read your shop&apos;s data — never share it.
+      </p>
+      {shown ? (
+        <>
+          <textarea
+            readOnly
+            value={key}
+            rows={3}
+            onFocus={(e) => e.target.select()}
+            className="mt-2 w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 font-mono text-xs text-ink"
+          />
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                void navigator.clipboard
+                  .writeText(key)
+                  .then(() => {
+                    setCopied(true);
+                    window.setTimeout(() => setCopied(false), 2000);
+                  })
+                  .catch(() => undefined);
+              }}
+              className={`${secondaryBtnClass} px-3 py-1.5`}
+            >
+              {copied ? <CheckCircle2 className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copied ? "Copied" : "Copy"}
+            </button>
+            <a
+              href={`data:text/plain;charset=utf-8,${encodeURIComponent(`Setu POS recovery key\n\n${key}\n\nKeep this private. Anyone with it can read your shop's data.\n`)}`}
+              download="setu-pos-recovery-key.txt"
+              className={`${secondaryBtnClass} px-3 py-1.5`}
+            >
+              Download
+            </a>
+            <button type="button" onClick={() => setShown(false)} className={`${secondaryBtnClass} px-3 py-1.5`}>
+              Hide
+            </button>
+          </div>
+        </>
+      ) : (
+        <button type="button" onClick={() => setShown(true)} className={`${secondaryBtnClass} mt-2 px-3 py-1.5`}>
+          Show recovery key
+        </button>
+      )}
     </div>
   );
 }

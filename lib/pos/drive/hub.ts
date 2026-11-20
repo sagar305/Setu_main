@@ -1,119 +1,162 @@
-// The files a shop keeps in the owner's Google Drive, and how a device turns
-// them into its local data. Pure — engine.ts does the network and IndexedDB.
+// The files a shop keeps in the owner's Google Drive (format v2), and how a
+// device turns them into its local data. Pure — engine.ts does the network,
+// encryption (crypto.ts) and IndexedDB.
 //
 // Why a hub: with the light `drive.file` permission an invited person can only
-// open the files they picked, not a whole folder. So the owner's main device
-// (the one that turned sync on) is the hub. It reads every member's changes
-// file, merges them into its own data and publishes:
-//   shop.json   — members, products and stock, customers, settings (everyone)
-//   books.json  — sales, stock history, cost prices, tool data (owners only)
-// Each member writes only their own changes-<code>.json.
+// open files they picked once, so the set of files is fixed when they join.
+// The owner's main device (the hub) reads every member's changes file, merges
+// them into its own data and publishes. Every file is encrypted:
+//
+//   live.json     shop key   stock, team list, merge progress  — small, every sync
+//   catalog.json  shop key   products (no cost/stock), customers' name + phone,
+//                            business and shared settings      — when it changes
+//   books.json    books key  current orders (< 500), cost prices, full customer
+//                            details, tool data, staff phones  — owners only
+//   archive.json  books key  older orders and stock history    — rewritten about
+//                                                                once per 500 orders
+//   changes-<code>.json  shop key  each member device's section of changes,
+//                                  trimmed once the hub has merged them
+//
+// Cashiers open live, catalog and their own changes file; owners also books
+// and archive.
 
-import type { Order, PosSettings, Product } from "../types";
+import type { Customer, InventoryLog, Order, OrderItem, PosSettings, Product } from "../types";
 import { mergeShop, type MergedState, type RejectedOp } from "./merge";
 import type { ChangesFile, Member, Op, ShopBase, SyncRecord } from "./ops";
 import { sharedSettings, withSharedSettings, type SharedSettings } from "./scope";
 
 export const TEAM_APP = "setu-pos-team";
-export const TEAM_FILE_VERSION = 1;
+export const TEAM_FILE_VERSION = 2;
+
+/** People in one shop's team, the owner included. */
+export const MAX_TEAM_SIZE = 5;
+
+/** Current orders stay in books.json until this many, then move to the archive. */
+export const ORDER_CHUNK = 500;
+/** Same for stock-history entries. */
+export const STOCK_LOG_CHUNK = 1500;
+
+/** Encryption labels, binding each file's content to its role. */
+export const FILE_LABEL = {
+  live: "live",
+  catalog: "catalog",
+  books: "books",
+  archive: "archive",
+  changes: (code: string) => `changes:${code}`,
+} as const;
 
 export type TeamMember = Member & {
   /** Drive id of this member's changes file. */
   fileId: string;
   /** Display name the owner typed, optional. */
   name?: string;
-  /**
-   * Mobile number (country code + digits) for WhatsApp invites. Private to
-   * owners: never written to shop.json, which cashiers can read.
-   */
+  /** Mobile number for WhatsApp invites. Owners only: kept in books.json. */
   phone?: string;
 };
 
-export type Catalog = {
+export type ShopFileIds = {
+  live: string;
+  catalog: string;
+  books: string;
+  archive: string;
+};
+
+/** Small, changes every sync. Everyone can open it. */
+export type LiveFile = {
+  version: typeof TEAM_FILE_VERSION;
+  shopName: string;
+  updatedAt: string;
+  primaryCode: string;
+  primaryEmail: string;
+  hubDeviceId: string;
+  members: TeamMember[];
+  /** Operations applied per member device: key `${code}/${deviceId}`. */
+  consumed: Record<string, number>;
+  /** Stock on hand by product id. */
+  stock: Record<string, number>;
+  files: ShopFileIds;
+  /** Fingerprints of the other files, so devices download only what changed. */
+  revs: { catalog: string; books: string; archive: string };
+};
+
+export type CustomerSummary = Pick<Customer, "id" | "name" | "phone" | "createdAt">;
+
+/** Changes when the catalog does. Everyone can open it. */
+export type CatalogFile = {
+  version: typeof TEAM_FILE_VERSION;
   business: SyncRecord | null;
   settings: Partial<SharedSettings>;
   categories: SyncRecord[];
   payments: SyncRecord[];
-  /** Cost prices removed: cashiers can open this file. */
+  /** Without cost price, photo or stock (stock is in live.json). */
   products: Product[];
-  customers: SyncRecord[];
+  /** Only what billing needs: name and phone. Full details are in books.json. */
+  customers: CustomerSummary[];
 };
 
-export type ShopFile = {
-  app: typeof TEAM_APP;
-  version: number;
-  shopName: string;
-  updatedAt: string;
-  /** Code of the owner whose device is the hub. */
-  primaryCode: string;
-  /** Google account that owns the shop's files (only it can run the hub). */
-  primaryEmail?: string;
-  /** The device currently acting as the hub ("main device"). */
-  hubDeviceId?: string;
-  members: TeamMember[];
-  /**
-   * How many operations the hub has applied, per member device:
-   * key `${memberCode}/${deviceId}` (see consumedKey).
-   */
-  consumed: Record<string, number>;
-  catalog: Catalog;
-};
-
-export type BooksFile = {
-  app: typeof TEAM_APP;
-  version: number;
-  updatedAt: string;
-  productCosts: Record<string, number | null>;
+export type HistoryPart = {
+  orders: Order[];
+  order_items: OrderItem[];
+  inventory: InventoryLog[];
+  /** Who made each of these orders (order id → member code). */
   orderAuthors: Record<string, string>;
-  /** Staff mobile numbers by member code (owners only, like this file). */
-  memberPhones?: Record<string, string>;
-  /** orders, order_items, inventory and every synced tool store. */
+};
+
+/** Owners only. */
+export type BooksFile = {
+  version: typeof TEAM_FILE_VERSION;
+  productCosts: Record<string, number | null>;
+  memberPhones: Record<string, string>;
+  /** Full customer records. */
+  customers: SyncRecord[];
+  /** Data of tools switched on from the POS (ledger, cash book, ...). */
   records: Record<string, SyncRecord[]>;
+  /** The newest orders and stock history (the rest is in archive.json). */
+  open: HistoryPart;
 };
 
-/**
- * A member's changes file. Each of their devices writes only its own section,
- * so one person can bill on a phone and a tablet without overwriting each
- * other. `ops` is the single-list layout of the first version.
- */
+/** Owners only; rewritten about once per ORDER_CHUNK orders. */
+export type ArchiveFile = { version: typeof TEAM_FILE_VERSION } & HistoryPart;
+
+/** One device's not-yet-trimmed changes; `base` = how many earlier ones were trimmed. */
+export type DeviceSection = { base: number; ops: Op[] };
+
 export type ChangesFileBody = {
-  app: typeof TEAM_APP;
   memberCode: string;
-  devices?: Record<string, Op[]>;
-  ops?: Op[];
+  devices: Record<string, DeviceSection>;
 };
 
-const LEGACY_DEVICE = "legacy";
+// ---------------------------------------------------------------------------
+// Changes files and merge progress
+// ---------------------------------------------------------------------------
 
 /** Key for the hub's per-device progress. */
 export function consumedKey(memberCode: string, deviceId: string): string {
   return `${memberCode}/${deviceId}`;
 }
 
-/** Every device section of a changes file (old single-list files included). */
-export function deviceSections(body: ChangesFileBody | null | undefined): Record<string, Op[]> {
-  const sections: Record<string, Op[]> = { ...(body?.devices ?? {}) };
-  if (body?.ops?.length) sections[LEGACY_DEVICE] = [...(sections[LEGACY_DEVICE] ?? []), ...body.ops];
-  return sections;
+export function deviceSections(body: ChangesFileBody | null | undefined): Record<string, DeviceSection> {
+  return { ...(body?.devices ?? {}) };
 }
 
 /**
  * This device's section written into the file, keeping every other device's.
- * Used for read-modify-write uploads; if two devices write at the same time
- * and one is lost, that device re-uploads on its next sync.
+ * If two devices of one person write at the same time and one is lost, that
+ * device re-uploads on its next sync.
  */
 export function withDeviceSection(
   body: ChangesFileBody | null | undefined,
   memberCode: string,
   deviceId: string,
-  ops: Op[],
+  section: DeviceSection,
 ): ChangesFileBody {
-  return { app: TEAM_APP, memberCode, devices: { ...deviceSections(body), [deviceId]: ops } };
+  return { memberCode, devices: { ...deviceSections(body), [deviceId]: section } };
 }
 
 /**
- * New operations per device the hub hasn't applied yet, and the updated
- * progress. Returns one ChangesFile per member (merge only needs the member).
+ * Operations the hub hasn't applied yet, per device, and the new progress.
+ * Progress counts every operation the device ever made, including ones it has
+ * since trimmed (`base`).
  */
 export function freshOps(
   memberCode: string,
@@ -122,15 +165,69 @@ export function freshOps(
 ): { ops: Op[]; consumed: Record<string, number> } {
   const next = { ...consumed };
   const ops: Op[] = [];
-  for (const [deviceId, list] of Object.entries(deviceSections(body))) {
+  for (const [deviceId, section] of Object.entries(deviceSections(body))) {
     const key = consumedKey(memberCode, deviceId);
-    // First-version progress was kept per member, not per device.
-    const done = next[key] ?? (deviceId === LEGACY_DEVICE ? consumed[memberCode] ?? 0 : 0);
-    ops.push(...list.slice(done));
-    next[key] = list.length;
+    const done = next[key] ?? 0;
+    const start = Math.max(0, done - section.base);
+    ops.push(...section.ops.slice(start));
+    next[key] = Math.max(done, section.base + section.ops.length);
   }
   return { ops, consumed: next };
 }
+
+/** A device's operations not yet applied by the hub, from its local list. */
+export function pendingOps(ops: Op[], localBase: number, consumed: number): Op[] {
+  return ops.slice(Math.max(0, consumed - localBase));
+}
+
+// ---------------------------------------------------------------------------
+// Splitting history: open (books.json) vs archive (archive.json)
+// ---------------------------------------------------------------------------
+
+const byTime = <T extends { id: string }>(time: (row: T) => string) => (a: T, b: T) => {
+  const ta = time(a);
+  const tb = time(b);
+  return ta !== tb ? (ta < tb ? -1 : 1) : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+};
+
+/**
+ * Oldest whole blocks of ORDER_CHUNK orders (and STOCK_LOG_CHUNK stock
+ * entries) go to the archive; the rest stay open. The archive changes only
+ * when a block fills up, or an archived order is changed (e.g. cancelled).
+ */
+export function splitHistory(
+  orders: Order[],
+  items: OrderItem[],
+  inventory: InventoryLog[],
+  orderAuthors: Record<string, string>,
+): { open: HistoryPart; archive: HistoryPart } {
+  const sortedOrders = [...orders].sort(byTime<Order>((o) => o.createdAt || o.date || ""));
+  const cut = Math.floor(sortedOrders.length / ORDER_CHUNK) * ORDER_CHUNK;
+  const archivedIds = new Set(sortedOrders.slice(0, cut).map((o) => o.id));
+
+  const sortedLogs = [...inventory].sort(byTime<InventoryLog>((l) => l.createdAt || ""));
+  const logCut = Math.floor(sortedLogs.length / STOCK_LOG_CHUNK) * STOCK_LOG_CHUNK;
+
+  const part = (keep: (orderId: string) => boolean, logs: InventoryLog[]): HistoryPart => {
+    const partOrders = sortedOrders.filter((o) => keep(o.id));
+    const authors: Record<string, string> = {};
+    for (const o of partOrders) if (orderAuthors[o.id]) authors[o.id] = orderAuthors[o.id];
+    return {
+      orders: partOrders,
+      order_items: items.filter((i) => keep(i.orderId)),
+      inventory: logs,
+      orderAuthors: authors,
+    };
+  };
+  return {
+    archive: part((id) => archivedIds.has(id), sortedLogs.slice(0, logCut)),
+    open: part((id) => !archivedIds.has(id), sortedLogs.slice(logCut)),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Building the files on the hub
+// ---------------------------------------------------------------------------
 
 /** Every store a device reads to build or apply a snapshot. */
 export type LocalSnapshot = Record<string, SyncRecord[]>;
@@ -138,10 +235,82 @@ export type LocalSnapshot = Record<string, SyncRecord[]>;
 const CATALOG_STORES = ["business", "settings", "categories", "payments", "products", "customers"];
 const BOOK_STORES = ["orders", "order_items", "inventory"];
 
-export function isShopFile(value: unknown): value is ShopFile {
-  const v = value as Partial<ShopFile> | null;
-  return !!v && v.app === TEAM_APP && Array.isArray(v.members) && !!v.catalog;
+export function summarizeCustomer(c: SyncRecord): CustomerSummary {
+  const customer = c as unknown as Customer;
+  return { id: customer.id, name: customer.name ?? "", phone: customer.phone ?? "", createdAt: customer.createdAt ?? "" };
 }
+
+export function buildCatalog(local: LocalSnapshot): CatalogFile {
+  const settings = (local.settings ?? []).find((s) => s.id === "main") as unknown as PosSettings | undefined;
+  return {
+    version: TEAM_FILE_VERSION,
+    business: (local.business ?? []).find((b) => b.id === "main") ?? null,
+    settings: settings ? sharedSettings(settings) : {},
+    categories: local.categories ?? [],
+    payments: local.payments ?? [],
+    products: ((local.products ?? []) as unknown as Product[]).map((p) => ({
+      ...p,
+      costPrice: null,
+      imageDataUrl: "",
+      stock: 0,
+    })),
+    customers: (local.customers ?? []).map(summarizeCustomer),
+  };
+}
+
+export function buildStock(local: LocalSnapshot): Record<string, number> {
+  const stock: Record<string, number> = {};
+  for (const p of (local.products ?? []) as unknown as Product[]) stock[p.id] = p.stock ?? 0;
+  return stock;
+}
+
+export function buildBooksAndArchive(
+  local: LocalSnapshot,
+  synced: ReadonlySet<string>,
+  orderAuthors: Record<string, string>,
+  members: TeamMember[],
+): { books: BooksFile; archive: ArchiveFile } {
+  const records: Record<string, SyncRecord[]> = {};
+  for (const store of synced) {
+    if (CATALOG_STORES.includes(store) || BOOK_STORES.includes(store)) continue;
+    records[store] = local[store] ?? [];
+  }
+  const productCosts: Record<string, number | null> = {};
+  for (const p of (local.products ?? []) as unknown as Product[]) productCosts[p.id] = p.costPrice ?? null;
+  const memberPhones: Record<string, string> = {};
+  for (const m of members) if (m.phone) memberPhones[m.code] = m.phone;
+  const { open, archive } = splitHistory(
+    (local.orders ?? []) as unknown as Order[],
+    (local.order_items ?? []) as unknown as OrderItem[],
+    (local.inventory ?? []) as unknown as InventoryLog[],
+    orderAuthors,
+  );
+  return {
+    books: {
+      version: TEAM_FILE_VERSION,
+      productCosts,
+      memberPhones,
+      customers: local.customers ?? [],
+      records,
+      open,
+    },
+    archive: { version: TEAM_FILE_VERSION, ...archive },
+  };
+}
+
+/** The team list as everyone may see it: no phone numbers. */
+export function publicMembers(members: TeamMember[]): TeamMember[] {
+  return members.map(({ phone: _phone, ...member }) => member);
+}
+
+/** People in the team now (removed ones don't count towards the limit). */
+export function activeMembers(members: TeamMember[]): TeamMember[] {
+  return members.filter((m) => !m.removedAt);
+}
+
+// ---------------------------------------------------------------------------
+// Merging and applying
+// ---------------------------------------------------------------------------
 
 /** The hub's local data as a merge base. */
 export function baseFromLocal(
@@ -165,25 +334,42 @@ export function baseFromLocal(
   };
 }
 
-/** A member's merge base, from what the hub last published. */
-export function baseFromPublished(shop: ShopFile, books: BooksFile | null): ShopBase {
-  const products = shop.catalog.products.map((p) => ({
+/**
+ * A member's merge base from what the hub published. Cashiers pass only live
+ * and catalog; owners also books and archive.
+ */
+export function baseFromPublished(
+  live: LiveFile,
+  catalog: CatalogFile,
+  books: BooksFile | null,
+  archive: ArchiveFile | null,
+): ShopBase {
+  const products = catalog.products.map((p) => ({
     ...p,
+    stock: live.stock[p.id] ?? 0,
     costPrice: books ? books.productCosts[p.id] ?? null : null,
   }));
   const records: Record<string, SyncRecord[]> = {
-    business: shop.catalog.business ? [shop.catalog.business] : [],
-    settings: [{ ...shop.catalog.settings, id: "main" } as SyncRecord],
-    categories: shop.catalog.categories,
-    payments: shop.catalog.payments,
-    ...(books?.records ?? {}),
+    business: catalog.business ? [catalog.business] : [],
+    settings: [{ ...catalog.settings, id: "main" } as SyncRecord],
+    categories: catalog.categories,
+    payments: catalog.payments,
   };
+  let orderAuthors: Record<string, string> = {};
+  if (books) {
+    Object.assign(records, books.records);
+    const parts = [archive, books.open].filter((p): p is HistoryPart => Boolean(p));
+    records.orders = parts.flatMap((p) => p.orders) as unknown as SyncRecord[];
+    records.order_items = parts.flatMap((p) => p.order_items) as unknown as SyncRecord[];
+    records.inventory = parts.flatMap((p) => p.inventory) as unknown as SyncRecord[];
+    orderAuthors = Object.assign({}, ...parts.map((p) => p.orderAuthors));
+  }
   return {
-    members: shop.members,
+    members: live.members,
     products,
-    customers: shop.catalog.customers as never,
+    customers: (books ? books.customers : catalog.customers) as never,
     records,
-    orderAuthors: books?.orderAuthors ?? {},
+    orderAuthors,
     cutoff: null,
   };
 }
@@ -240,63 +426,6 @@ export function planApply(local: LocalSnapshot, target: LocalSnapshot, stores: r
     if (gone.length && store !== "settings" && store !== "business") deletes[store] = gone;
   }
   return { writes, deletes };
-}
-
-/** shop.json from the hub's data. */
-export function buildShopFile(
-  local: LocalSnapshot,
-  shopName: string,
-  primaryCode: string,
-  members: TeamMember[],
-  consumed: Record<string, number>,
-  now: string,
-  hub?: { deviceId: string; primaryEmail: string },
-): ShopFile {
-  const settings = (local.settings ?? []).find((s) => s.id === "main") as unknown as PosSettings | undefined;
-  return {
-    app: TEAM_APP,
-    version: TEAM_FILE_VERSION,
-    shopName,
-    updatedAt: now,
-    primaryCode,
-    ...(hub ? { hubDeviceId: hub.deviceId, primaryEmail: hub.primaryEmail } : {}),
-    // Cashiers can read this file: keep staff phone numbers out of it.
-    members: members.map(({ phone: _phone, ...member }) => member),
-    consumed,
-    catalog: {
-      business: (local.business ?? []).find((b) => b.id === "main") ?? null,
-      settings: settings ? sharedSettings(settings) : {},
-      categories: local.categories ?? [],
-      payments: local.payments ?? [],
-      products: ((local.products ?? []) as unknown as Product[]).map((p) => ({
-        ...p,
-        costPrice: null,
-        imageDataUrl: "",
-      })),
-      customers: local.customers ?? [],
-    },
-  };
-}
-
-/** books.json from the hub's data (owners only). */
-export function buildBooksFile(
-  local: LocalSnapshot,
-  synced: ReadonlySet<string>,
-  orderAuthors: Record<string, string>,
-  now: string,
-  members: TeamMember[] = [],
-): BooksFile {
-  const records: Record<string, SyncRecord[]> = {};
-  for (const store of synced) {
-    if (CATALOG_STORES.includes(store)) continue;
-    records[store] = local[store] ?? [];
-  }
-  for (const store of BOOK_STORES) records[store] = local[store] ?? [];
-  const productCosts: Record<string, number | null> = {};
-  for (const p of (local.products ?? []) as unknown as Product[]) productCosts[p.id] = p.costPrice ?? null;
-  const memberPhones: Record<string, string> = {};
-  for (const m of members) if (m.phone) memberPhones[m.code] = m.phone;
-  return { app: TEAM_APP, version: TEAM_FILE_VERSION, updatedAt: now, productCosts, orderAuthors, memberPhones, records };
 }
 
 /** Which stores a member device replaces from the published files. */

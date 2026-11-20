@@ -38,7 +38,7 @@
       "id": "google-drive-team-sync",
       "heading": "Google Drive team sync (Browser Based POS)",
       "paragraphs": [
-        "Team sync is an optional, free feature that lets a shop owner use the Browser Based POS on several devices and give staff their own access, by keeping the shop's data in **the owner's own Google Drive**. Before turning it on, joining a shop or signing in to one, you must tick that you have read and agree to these terms and our [Privacy Policy](/privacy#google-drive-team-sync). If you do not agree, do not use team sync — the rest of the POS keeps working on your device without it.",
+        "Team sync is an optional, free feature that lets a shop owner use the Browser Based POS on several devices and give up to four other people their own access, by keeping the shop's data — encrypted — in **the owner's own Google Drive**. Before turning it on, joining a shop or signing in to one, you must tick that you have read and agree to these terms and our [Privacy Policy](/privacy#google-drive-team-sync). If you do not agree, do not use team sync — the rest of the POS keeps working on your device without it.",
         "How team sync stores and shares data is described in detail in the [Privacy Policy](/privacy#google-drive-team-sync). This section covers the rules for using it."
       ]
     },
@@ -56,10 +56,12 @@
       "heading": "The shop owner's responsibilities",
       "list": [
         "**Who you invite and what they can do.** You choose each person's role (Owner or Cashier) and a cashier's discount and credit limits. Anyone you invite as Owner can see and change everything, including cost prices, sales and other tools' data. Remove people promptly when they leave.",
+        "**Team size.** A team has at most five people, you included. Each person can use more than one device.",
         "**Permission to add people.** You confirm you have the agreement of each person whose email address or mobile number you add, and that you are allowed to share it with them through Google and WhatsApp.",
         "**Your customers' and staff's personal data.** Customer and staff details in the POS are yours to look after. You are responsible for handling them lawfully, including under India's Digital Personal Data Protection Act, 2023.",
         "**The main device.** The device that turned sync on is the shop's main device: it merges everyone's changes and manages the team. Keep it open while the shop is working, and use “Make this the main device” when you replace it.",
-        "**Backups.** Team sync is not a backup service. Keep exporting backups from Settings, and keep your Google account secure."
+        "**Backups.** Team sync is not a backup service. Keep exporting backups from Settings, and keep your Google account secure.",
+        "**Keys and invite links.** The shop's data is encrypted with keys only your team holds. Invite links carry a key: send them only to the person invited and never post or forward them. Keep the recovery key private and safe — if every device is lost and it is lost too, nobody, including Setu, can open the shop's synced data again."
       ]
     },
     {
@@ -79,7 +81,7 @@
       "id": "team-sync-staff-devices",
       "heading": "Staff and their devices",
       "list": [
-        "The shop's data on a staff member's device belongs to the shop. A staff member may use it only for the shop's work, and must not copy, export or share it elsewhere.",
+        "The shop's data on a staff member's device belongs to the shop. A staff member may use it only for the shop's work, and must not copy, export, share or try to decrypt it outside the POS, or pass on their invite link.",
         "**Leaving a team** on a device deletes the shop's data from that device and signs it out of Google, after first sending any sales not yet uploaded if the device is online.",
         "**When the owner removes someone**, their access to the shop's files ends. Their devices delete the shop's data on their next sync or when the POS is next opened, and tell them why.",
         "Each device stays signed in to Google for up to about six months. On a shared or public computer, leave the team or sign out when you are done. Use the POS's counter PIN to stop others using an unattended device."

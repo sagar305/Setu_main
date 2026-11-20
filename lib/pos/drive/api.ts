@@ -132,6 +132,18 @@ export class DriveClient {
     return JSON.parse(text) as T;
   }
 
+  /**
+   * Stop people the file is shared with as editors from sharing it onward
+   * (Drive's "Editors can change permissions and share" off).
+   */
+  async preventResharing(id: string): Promise<void> {
+    await this.call<DriveFile>(`${API}/files/${encodeURIComponent(id)}?fields=id`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ writersCanShare: false }),
+    });
+  }
+
   /** Find a file by name in this app's hidden folder (drive.appdata). */
   async findAppDataFile(name: string): Promise<DriveFile | null> {
     const q = encodeURIComponent(`name='${name.replace(/'/g, "\\'")}' and trashed=false`);

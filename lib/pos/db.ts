@@ -27,9 +27,11 @@ const DB_NAME = "POS_DATABASE";
 // v11 adds drive_ops (this device's not-yet-merged Google Drive team sync
 // operations) and drive_state (this device's team membership), see
 // lib/pos/drive.
+// v12 adds drive_cache (decrypted copies of the shop's Drive files last
+// downloaded, so unchanged files aren't fetched again after a reload).
 // The upgrade handler creates any missing stores, so bumping the version
 // migrates older databases in place.
-const DB_VERSION = 11;
+const DB_VERSION = 12;
 
 export const STORES = [
   "business",
@@ -80,10 +82,11 @@ export const STORES = [
   "purchase_returns",
   "drive_ops",
   "drive_state",
+  "drive_cache",
 ] as const;
 
 /** Stores that belong to Google Drive team sync itself, never backed up or synced. */
-export const SYNC_INTERNAL_STORES: readonly StoreName[] = ["drive_ops", "drive_state"];
+export const SYNC_INTERNAL_STORES: readonly StoreName[] = ["drive_ops", "drive_state", "drive_cache"];
 
 export type StoreName = (typeof STORES)[number];
 

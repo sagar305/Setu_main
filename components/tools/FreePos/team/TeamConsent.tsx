@@ -28,8 +28,8 @@ export function TeamConsent({ checked, onChange }: { checked: boolean; onChange:
         </a>{" "}
         for Google Drive team sync.
         <span id="team-consent-note" className="mt-1 block text-xs text-muted">
-          The shop&apos;s data is kept in the shop owner&apos;s Google Drive and synced to the team&apos;s devices. Setu
-          doesn&apos;t receive it.
+          The shop&apos;s data is kept encrypted in the shop owner&apos;s Google Drive and synced to the team&apos;s
+          devices. Setu never receives it or its keys.
         </span>
       </span>
     </label>

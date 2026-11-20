@@ -557,13 +557,13 @@ const TEAM_SYNC: FeatureSection = {
   eyebrow: "Team & devices",
   title: "Your staff, their own logins — synced through your Google Drive",
   subtitle:
-    "Optional and free. Turn on Google Drive team sync and the same shop runs on your laptop, your phone and every cashier's device. The data stays in your own Google Drive — it never comes to Setu.",
+    "Optional and free, for up to 5 people per shop. Turn on Google Drive team sync and the same shop runs on your laptop, your phone and every cashier's device. The data stays in your own Google Drive, encrypted — it never comes to Setu.",
   items: [
     {
       icon: Cloud,
-      title: "Stored in your own Google Drive",
+      title: "Encrypted in your own Google Drive",
       description:
-        "Turning it on creates a “Setu POS – your shop” folder in your Drive. No Setu account, no Setu server holding your sales, nothing to pay.",
+        "Your shop's files sit in a “Setu POS – your shop” folder in your Drive, encrypted with keys only your team has — opened in Drive they're unreadable. No Setu account, no Setu server, nothing to pay.",
     },
     {
       icon: UserPlus,
@@ -587,7 +587,7 @@ const TEAM_SYNC: FeatureSection = {
       icon: ShieldCheck,
       title: "Cost prices stay private",
       description:
-        "Cashiers' devices never receive cost prices, other staff's sales, your books or staff phone numbers — not even in the files they can open.",
+        "Cashiers' devices never receive cost prices, customers' addresses or notes, other staff's sales, your books or staff phone numbers — and they can't open or share the shop's files from Drive.",
     },
     {
       icon: LogIn,
@@ -605,7 +605,7 @@ const TEAM_SYNC: FeatureSection = {
       icon: TriangleAlert,
       title: "Good to know",
       description:
-        "Updates reach other devices about a minute after your main device syncs, so keep it open while the shop works. Batch & expiry tracking is off while sync is on.",
+        "Up to 5 people per shop. Updates reach other devices about a minute after your main device syncs, so keep it open while the shop works. Batch & expiry tracking is off while sync is on.",
     },
   ],
 };
@@ -673,22 +673,22 @@ const TEAM_SYNC_FAQ = [
   {
     question: "Can my staff use the POS on their own phones or a second counter?",
     answer:
-      "Yes, with Google Drive team sync (Settings → Team & Google Drive sync). You turn it on once with your Google account, then invite each staff member by their Google email — Google emails them the invite, or you can send it on WhatsApp. They open the invite once; after that they just tap “Sign in with Google” on any device and the shop opens with the role you gave them. It is optional and free, and you must agree to the Terms of Use and Privacy Policy before using it.",
+      "Yes, with Google Drive team sync (Settings → Team & Google Drive sync), for up to 5 people per shop, you included. You turn it on once with your Google account, then invite each staff member by their Google email — Google emails them the invite, or you can send it on WhatsApp. They open the invite once; after that they just tap “Sign in with Google” on any device and the shop opens with the role you gave them. It is optional and free, and you must agree to the Terms of Use and Privacy Policy before using it.",
   },
   {
     question: "What are the pros and cons of Google Drive team sync?",
     answer:
-      "Pros: it's free; your data stays in your own Google Drive and never on Setu's servers; staff get their own logins with Cashier or Owner roles, discount and credit limits; cashiers never see cost prices or other staff's sales; every device keeps billing offline; it works on any phone or computer with a browser; and a removed staff member's device deletes the shop's data automatically. Cons: it isn't real time — other devices see changes about a minute after your main device syncs, and only while that device is open; two counters can sell the very last unit at the same moment (the POS flags it so you can correct stock); every device needs a Google account and an internet connection to sync; Batch & expiry tracking, Restore from backup and Delete all data are turned off while it is on; product photos don't sync; and Google's outages or a full Google Drive can pause sync. It is not a backup service, so keep exporting backups.",
+      "Pros: it's free; your data stays in your own Google Drive, encrypted so it's unreadable if opened there, and never on Setu's servers; staff get their own logins with Cashier or Owner roles, discount and credit limits; cashiers never see cost prices or other staff's sales; every device keeps billing offline; it works on any phone or computer with a browser; and a removed staff member's device deletes the shop's data automatically. Cons: it isn't real time — other devices see changes about a minute after your main device syncs, and only while that device is open; two counters can sell the very last unit at the same moment (the POS flags it so you can correct stock); every device needs a Google account and an internet connection to sync; Batch & expiry tracking, Restore from backup and Delete all data are turned off while it is on; product photos don't sync; a team is limited to 5 people; invite links carry the shop's key, so they must never be forwarded; if you lose every device and your recovery key, the synced data can't be opened again; and Google's outages or a full Google Drive can pause sync. It is not a backup service, so keep exporting backups.",
   },
   {
     question: "With team sync on, where is my data and can Setu see it?",
     answer:
-      "Your shop's data is kept in a “Setu POS – your shop” folder in your own Google Drive and on each team device. Each device talks to Google Drive directly, so the shop's data never passes through Setu's servers and we cannot read it. The POS can only open the files it creates — not the rest of your Drive. To keep a device signed in after a refresh, our website keeps an encrypted Google sign-in cookie on that device; it carries no shop data. You can delete the folder or remove the app's access in your Google account at any time.",
+      "Your shop's data is kept in a “Setu POS – your shop” folder in your own Google Drive and on each team device. Every file is encrypted on your device with keys only your team has, so opened in Drive it's unreadable. Each device talks to Google Drive directly, so the shop's data — and its keys — never pass through Setu's servers and we cannot read it. Keep the recovery key from Settings somewhere safe. The POS can only open the files it creates — not the rest of your Drive. To keep a device signed in after a refresh, our website keeps an encrypted Google sign-in cookie on that device; it carries no shop data. You can delete the folder or remove the app's access in your Google account at any time.",
   },
   {
     question: "What can a cashier see and do?",
     answer:
-      "A cashier sees New Sale, their own sales, Customers (they can add, not edit or delete) and their device settings. They can give discounts only up to the limit you set and sell on credit only if you allow it — anything else is blocked on their device and refused again by your main device. They never receive cost prices, other staff's sales, your books or staff phone numbers. Invite a partner as Owner instead if they need full access.",
+      "A cashier sees New Sale, their own sales, Customers (they can add, not edit or delete) and their device settings. They can give discounts only up to the limit you set and sell on credit only if you allow it — anything else is blocked on their device and refused again by your main device. They see customers' names and phone numbers, not addresses or notes, and never receive cost prices, other staff's sales, your books or staff phone numbers. Invite a partner as Owner instead if they need full access.",
   },
   {
     question: "What happens when a staff member leaves or I remove them?",
@@ -811,7 +811,7 @@ const softwareApplicationSchema = {
     "JSON backup and restore",
     "One-way Google Sheet sync and restore",
     ...(TEAM_SYNC_LIVE
-      ? ["Optional Google Drive team sync with staff logins, roles and discount/credit limits"]
+      ? ["Optional encrypted Google Drive team sync for up to 5 people, with staff logins, roles and discount/credit limits"]
       : []),
     "Works offline, no login required",
   ],
