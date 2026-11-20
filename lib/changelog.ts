@@ -37,6 +37,14 @@ export const CHANGE_TYPE_LABELS: Record<ChangeType, string> = {
 /** Newest first. */
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-20",
+    type: "improvement",
+    product: "Browser Based POS",
+    title: "Type the quantity straight into the cart, and see full product names",
+    description:
+      "Tap the quantity in the billing cart to type any number, like 50, instead of pressing + again and again. Long product names now wrap onto two lines instead of being cut off.",
+  },
+  {
     date: "2026-11-17",
     type: "feature",
     product: "Tuition Class Manager",
