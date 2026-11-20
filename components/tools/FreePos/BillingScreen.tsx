@@ -35,6 +35,8 @@ import { CustomerFormModal } from "./CustomersScreen";
 import { EmptyState, Field, Modal, inputClass, primaryBtnClass, secondaryBtnClass } from "./ui";
 import { useReviewPrompt } from "@/lib/hooks/useReviewPrompt";
 import { ReviewPromptDialog } from "@/components/review/ReviewPrompt";
+import { TeamBillingNotice } from "./team/TeamBillingNotice";
+import { useTeam } from "./team/TeamSyncContext";
 
 /** Sentinel payment id for udhaar sales (never stored as a payment method). */
 const CREDIT_PAYMENT_ID = "__customer_credit__";
@@ -77,6 +79,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
   const [search, setSearch] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [lines, setLines] = useState<CartLine[]>([]);
+  const { isCashier } = useTeam();
   const [discountType, setDiscountType] = useState<"flat" | "percent">("flat");
   const [discountValue, setDiscountValue] = useState(0);
   const [customerId, setCustomerId] = useState("");
@@ -413,6 +416,7 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
           placeholder="Search or scan — name, SKU, barcode…"
           className={`${inputClass} py-3`}
         />
+        <TeamBillingNotice lines={lines} products={products} />
 
         {categories.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -449,9 +453,13 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
             <EmptyState
               icon={<PackageSearch className="h-6 w-6" />}
               title="No products yet"
-              message="Add your first product to start billing."
+              message={
+                isCashier
+                  ? "The owner's products appear here after the first sync."
+                  : "Add your first product to start billing."
+              }
               action={
-                <button
+                isCashier ? undefined : <button
                   type="button"
                   onClick={() => onNavigate("products")}
                   className={primaryBtnClass}
@@ -485,7 +493,11 @@ export function BillingScreen({ onNavigate }: { onNavigate: NavigateFn }) {
                         out ? "text-red-500" : low ? "text-saffron" : "text-muted"
                       }`}
                     >
-                      {out ? "Out of stock" : `${product.stock} ${product.unit || "in stock"}`}
+                      {product.stock < 0
+                        ? `${product.stock} — sold more than in stock`
+                        : out
+                          ? "Out of stock"
+                          : `${product.stock} ${product.unit || "in stock"}`}
                     </span>
                   )}
                 </button>

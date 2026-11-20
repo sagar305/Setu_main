@@ -48,6 +48,106 @@
       ]
     },
     {
+      "id": "google-drive-team-sync",
+      "heading": "Google Drive team sync in the Browser Based POS",
+      "paragraphs": [
+        "Team sync is an **optional** feature of the Browser Based POS. It is off unless a shop owner turns it on, and nobody can turn it on or join a shop without first agreeing to these terms and this policy.",
+        "When it is on, the shop's POS data is copied to a folder in **the shop owner's own Google Drive**, named “Setu POS – ⟨shop name⟩”, so the owner's other devices and up to four invited people can work on the same shop. **Every file in that folder is encrypted on the owner's device before it is uploaded**, so opened in Google Drive it is unreadable. **Setu has no database for it, never receives the shop's data or its keys, and cannot read, change or recover it.** Each device talks to Google Drive directly from the browser."
+      ]
+    },
+    {
+      "id": "team-sync-what-is-stored",
+      "heading": "What team sync stores, and where",
+      "paragraphs": [
+        "In the shop owner's Google Drive folder — every file compressed and encrypted (see the next sections):"
+      ],
+      "list": [
+        "**live** — stock on hand, the team list (each person's name, Google email, role and limits) and sync progress. Rewritten on every sync.",
+        "**catalog** — the business profile, shared POS settings (such as tax and invoice settings), categories, payment methods, products and prices (without cost prices or stock), and customers' **names and phone numbers only**.",
+        "**books** — the most recent sales and their items and stock history, product cost prices, full customer details (address, notes), which team member made each sale, staff mobile numbers, and the data of tools switched on from the POS (customer ledger, cash book, expenses, purchases and returns, suppliers and supplier ledger, receipt designs).",
+        "**archive** — older sales and stock history, in blocks of 500 sales (1,500 stock entries).",
+        "**changes-⟨code⟩** — one file per team member, holding the changes their devices made (sales, new customers, stock movements and, for owners, edits). Changes are removed from it once the owner's main device has merged them.",
+        "In each team member's own Google Drive, in a **hidden app folder** only this app can open: a small “my shops” note with the shop's name, the ids of its files and **that person's keys for it**, so signing in on another device opens the shop. It holds no sales, customers or other shop data.",
+        "On each device: a full working copy in the browser's storage, a cached copy of the shop's files it last downloaded, the shop's keys, and the device's own settings (PIN, invoice counter, receipt paper size, held carts).",
+        "**Not synced:** product photos, PIN and other device-only settings, Batch & expiry tracking (switched off while team sync is on), and data of tools not switched on from the POS, such as the Clinic or Tuition managers."
+      ]
+    },
+    {
+      "id": "team-sync-who-can-see",
+      "heading": "Who can see team sync data",
+      "paragraphs": [
+        "A team has **at most five people**, the shop owner included."
+      ],
+      "list": [
+        "**The shop owner** — everything, from any of their devices. It is their Google Drive: they can download, share or delete the files at any time (opened directly in Drive, the files are encrypted).",
+        "**Members invited as Owner** (for example a partner) — the same as the shop owner, except managing the team.",
+        "**Members invited as Cashier** — are given only the live, catalog and their own changes file, and only the shop key, not the books key. In the POS they see products, prices, stock, customers' names and phone numbers, and the team list (names and emails). They never receive cost prices, customers' addresses or notes, other members' sales, the books or staff mobile numbers. They see only billing, their own sales, adding customers and their device settings. Team members cannot share the files onward from Drive.",
+        "**Google** — stores the encrypted files for the owner and handles sign-in, under Google's own terms and privacy policy. See the note on keys below.",
+        "**Setu** — none of it. We never receive the shop's files, their contents or their keys."
+      ]
+    },
+    {
+      "id": "team-sync-encryption",
+      "heading": "How team sync data is encrypted",
+      "list": [
+        "When the owner turns team sync on, their device creates two random 256-bit keys for the shop: a **shop key** (products, stock, team list, changes) and a **books key** (sales, stock history, cost prices, full customer details, tool data, staff phone numbers). Every file is compressed and encrypted with AES-256-GCM before it leaves a device, and decrypted only on team devices.",
+        "Cashiers are given only the shop key. Owners and members invited as Owner get both.",
+        "**How keys reach a team member:** inside the invite link, after the “#” sign. Web browsers never send that part of a link to any server, so it does not reach Setu's website. It is part of the invitation email Google sends and of the WhatsApp message if the owner sends one — anyone who has the full link and access to the shop's files could read them, so the link must not be forwarded.",
+        "After joining, each person's keys are kept on their devices and in the hidden app folder in their own Google Drive, so “Sign in with Google” works on their other devices.",
+        "**What this protects against:** anyone opening, downloading or forwarding the shop's files from Google Drive without the keys — including team members trying to read files outside what the POS shows them — and anyone who gets the files without the keys.",
+        "**What it does not protect against:** what a team member's own POS shows them (to bill, their device must decrypt what their role allows, and a technical person could read the keys from their own browser); and, because the keys sit in each person's hidden app folder in Google Drive, it is not a guarantee against Google itself.",
+        "**Recovery key:** the shop owner can view and download a recovery key containing both keys from the main device. If every device is lost and the hidden note is deleted, it is the only way to open the shop's data again. Anyone with it can read the shop's data, so it must be kept private."
+      ]
+    },
+    {
+      "id": "team-sync-google-access",
+      "heading": "What Google access the POS asks for",
+      "paragraphs": [
+        "When you sign in with Google for team sync, the POS asks only for:"
+      ],
+      "list": [
+        "**See, edit, create and delete only the specific Google Drive files you use with this app** (drive.file) — the shop's files it creates, and files you pick for it. It cannot see any other file in your Drive.",
+        "**See, create and delete its own configuration data in your Google Drive** (drive.appdata) — the hidden “my shops” note described above.",
+        "**Your Google account's email address** (openid, email) — to know which team member signed in and which role the owner gave them.",
+        "It never asks for access to Gmail, Contacts, Photos, Calendar or the rest of your Drive. You can remove its access at any time in your Google Account → Security → Third-party apps & services."
+      ]
+    },
+    {
+      "id": "team-sync-staying-signed-in",
+      "heading": "Staying signed in on a device",
+      "paragraphs": [
+        "So that a device stays connected after a refresh or when the POS is reopened, the first sign-in on a device gives our website a Google **refresh token** for that device. We keep it **only in an encrypted, HttpOnly cookie on that device** (page scripts cannot read it; it is sent only to this site's sign-in addresses under /api/pos-google). It lasts up to about six months.",
+        "When the POS needs a fresh access key, the device sends that cookie to our website, which decrypts it, asks Google for the key and passes it back to the device in the same request. **We do not store the token or the key, keep no record of them in a database, and do not log them.** The shop's data never passes through our website — only these sign-in keys do.",
+        "Leaving a team, being removed from one or signing out revokes the token at Google and deletes the cookie. Clearing your browser's site data also deletes it. If the site isn't set up for this, the POS uses Google's own sign-in window instead and nothing is kept between visits."
+      ]
+    },
+    {
+      "id": "team-sync-invites",
+      "heading": "Inviting staff by email and WhatsApp",
+      "paragraphs": [
+        "To invite someone (up to five people in a team, the owner included), the shop owner enters their Google email address and, optionally, their name and mobile number. The POS shares the shop's files with that email through Google, and **Google** (not Setu) emails them the invitation, which contains the join link with the shop's key.",
+        "“Send invite on WhatsApp” opens **the owner's own WhatsApp** with a ready-made message, including the join link, to that number. Setu does not send WhatsApp messages, has no WhatsApp account for this, and does not see the message or the number.",
+        "Staff email addresses and mobile numbers are kept in the owner's Google Drive (mobile numbers only in books.json, which cashiers cannot open) and on the owner's devices. The shop owner is responsible for having the staff member's agreement before adding their details."
+      ]
+    },
+    {
+      "id": "team-sync-leaving-and-deletion",
+      "heading": "Leaving, removal and deleting team sync data",
+      "list": [
+        "**A member leaving on a device** — sales not yet sent are uploaded first if the device is online; then the shop's data is deleted from that device and it is signed out of Google.",
+        "**A member removed by the owner** — their access to the shop's files ends. When their device next syncs or opens, it deletes the shop's data and signs out, and shows them why. What they synced before removal stays in the owner's books.",
+        "**The owner turning team sync off on the main device** — that device keeps its data and stops syncing. The files stay in the owner's Google Drive until the owner deletes them.",
+        "**Deleting everything** — the shop owner deletes the “Setu POS – ⟨shop name⟩” folder in Google Drive, removes the app's access in their Google Account (Security → Third-party apps & services), and can delete the app's hidden data in Google Drive (Settings → Manage apps → Setu POS → Delete hidden app data). Because Setu holds no copy and no key, there is nothing for us to delete; we also cannot restore files deleted from Drive or recover a lost key."
+      ]
+    },
+    {
+      "id": "team-sync-customer-and-staff-data",
+      "heading": "Your customers' and staff's information",
+      "paragraphs": [
+        "Customer and staff details a shop records in the POS — and copies to Google Drive with team sync — are decided and controlled by that shop. For that information the shop owner is responsible under applicable law, including India's Digital Personal Data Protection Act, 2023: collecting it fairly, telling people, keeping it accurate and deleting it when asked. Setu does not hold it and cannot act on it, but we will help explain how the tool stores it if asked at [privacy@setutechnology.com](mailto:privacy@setutechnology.com)."
+      ]
+    },
+    {
       "heading": "ಎಷ್ಟು ಕಾಲ ಇಟ್ಟುಕೊಳ್ಳುತ್ತೇವೆ",
       "paragraphs": [
         "ಪ್ರತ್ಯೇಕ ಬಳಕೆಯ ಘಟನೆಗಳನ್ನು 14 ತಿಂಗಳ ನಂತರ ಅಳಿಸಲಾಗುತ್ತದೆ. ಸಾರಾಂಶದ ಅಂಕಿಅಂಶಗಳು — ತಿಂಗಳಿಗೆ ಎಷ್ಟು ಭೇಟಿ, ಯಾವ ಟೂಲ್ ಬಳಕೆಯಾಯಿತು — ಅನಿರ್ದಿಷ್ಟವಾಗಿ ಉಳಿಯುತ್ತವೆ, ಏಕೆಂದರೆ ಅವುಗಳಲ್ಲಿ ಯಾರನ್ನೂ ಗುರುತಿಸುವಂಥದ್ದು ಏನೂ ಇಲ್ಲ. ಸಂಪರ್ಕ ಮತ್ತು ಡೆಮೊ ವಿಚಾರಣೆಗಳನ್ನು ಉತ್ತರಿಸಬೇಕಾದಷ್ಟು ಕಾಲ ಇಮೇಲ್ ರೂಪದಲ್ಲಿ ಇಡಲಾಗುತ್ತದೆ."

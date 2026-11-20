@@ -24,9 +24,14 @@ const DB_NAME = "POS_DATABASE";
 // lib/pos/batches). Named so because `batches` belongs to the tuition stores.
 // v10 adds purchase_returns (goods sent back to a supplier for a replacement
 // or a credit note) for the Purchase Register.
+// v11 adds drive_ops (this device's not-yet-merged Google Drive team sync
+// operations) and drive_state (this device's team membership), see
+// lib/pos/drive.
+// v12 adds drive_cache (decrypted copies of the shop's Drive files last
+// downloaded, so unchanged files aren't fetched again after a reload).
 // The upgrade handler creates any missing stores, so bumping the version
 // migrates older databases in place.
-const DB_VERSION = 10;
+const DB_VERSION = 12;
 
 export const STORES = [
   "business",
@@ -75,9 +80,47 @@ export const STORES = [
   "supplier_ledger",
   "stock_batches",
   "purchase_returns",
+  "drive_ops",
+  "drive_state",
+  "drive_cache",
 ] as const;
 
+/** Stores that belong to Google Drive team sync itself, never backed up or synced. */
+export const SYNC_INTERNAL_STORES: readonly StoreName[] = ["drive_ops", "drive_state", "drive_cache"];
+
 export type StoreName = (typeof STORES)[number];
+
+// ---------------------------------------------------------------------------
+// Change capture for Google Drive team sync.
+//
+// While a device is part of a team, lib/pos/drive registers a sink here. Every
+// write through dbPut / dbDelete / dbBatch — from the POS or any connected
+// tool — is offered to the sink, and the operations it returns are saved to
+// drive_ops in the SAME transaction, so a write and its sync record can never
+// get separated. Writes that apply data received from the team use
+// dbBatchRaw and are not captured.
+// ---------------------------------------------------------------------------
+
+export type CapturedWrite = {
+  writes: Partial<Record<string, unknown[]>>;
+  deletes: Partial<Record<string, string[]>>;
+};
+
+/** Returns rows to add to drive_ops (each with a string id), or none. */
+export type CaptureSink = (write: CapturedWrite) => { id: string }[];
+
+let captureSink: CaptureSink | null = null;
+const writeListeners = new Set<() => void>();
+
+export function setCaptureSink(sink: CaptureSink | null): void {
+  captureSink = sink;
+}
+
+/** Called after every captured write commits (used to schedule an upload). */
+export function onCapturedWrite(listener: () => void): () => void {
+  writeListeners.add(listener);
+  return () => writeListeners.delete(listener);
+}
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -190,17 +233,11 @@ export async function dbGet<T>(store: StoreName, id: string): Promise<T | undefi
 }
 
 export async function dbPut<T>(store: StoreName, value: T): Promise<void> {
-  const db = await openPosDb();
-  const tx = db.transaction(store, "readwrite");
-  tx.objectStore(store).put(value);
-  await txDone(tx);
+  await dbBatch({ [store]: [value] });
 }
 
 export async function dbDelete(store: StoreName, id: string): Promise<void> {
-  const db = await openPosDb();
-  const tx = db.transaction(store, "readwrite");
-  tx.objectStore(store).delete(id);
-  await txDone(tx);
+  await dbBatch({}, { [store]: [id] });
 }
 
 /**
@@ -208,6 +245,20 @@ export async function dbDelete(store: StoreName, id: string): Promise<void> {
  * `writes` maps store name -> records to put; `deletes` maps store name -> ids to remove.
  */
 export async function dbBatch(
+  writes: Partial<Record<StoreName, unknown[]>>,
+  deletes: Partial<Record<StoreName, string[]>> = {}
+): Promise<void> {
+  const captured = captureSink ? captureSink({ writes, deletes }) : [];
+  if (captured.length === 0) {
+    await dbBatchRaw(writes, deletes);
+    return;
+  }
+  await dbBatchRaw({ ...writes, drive_ops: [...(writes.drive_ops ?? []), ...captured] }, deletes);
+  writeListeners.forEach((listener) => listener());
+}
+
+/** dbBatch without change capture: for applying data received from the team. */
+export async function dbBatchRaw(
   writes: Partial<Record<StoreName, unknown[]>>,
   deletes: Partial<Record<StoreName, string[]>> = {}
 ): Promise<void> {

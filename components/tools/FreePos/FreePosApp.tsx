@@ -39,6 +39,51 @@ import { ReportsScreen } from "./ReportsScreen";
 import { SettingsScreen } from "./SettingsScreen";
 import { ToolScreen, tabTools, toolScreenId, toolSlugOf } from "./ToolsScreen";
 import type { PosToolCategory } from "@/lib/pos/posTools";
+import type { PosScreen } from "@/lib/pos/drive/roles";
+import { decodeInvite } from "@/lib/pos/drive/engine";
+import { TeamSyncProvider, timeAgo, useTeam } from "./team/TeamSyncContext";
+import { JoinScreen } from "./team/JoinScreen";
+
+/** Which role rule covers each POS screen. */
+function rolesScreen(id: ScreenId): PosScreen {
+  if (id === "sell") return "billing";
+  if (id.startsWith("tool:")) return "tools";
+  return id as PosScreen;
+}
+
+/** Small "Synced 20 sec ago" chip for the header while in a team. */
+function TeamChip({ onOpen }: { onOpen: () => void }) {
+  const { team, syncing } = useTeam();
+  const [, tick] = useState(0);
+  useEffect(() => {
+    const timer = window.setInterval(() => tick((n) => n + 1), 15_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  if (!team) return null;
+  const problem = team.removed || team.needsSignIn || Boolean(team.lastError);
+  const label = team.removed
+    ? "Removed from team"
+    : team.needsSignIn
+      ? "Reconnect Google"
+      : team.lastError
+        ? "Sync problem"
+        : syncing
+          ? "Syncing…"
+          : `Synced ${timeAgo(team.lastSyncAt)}`;
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      title="Google Drive team sync"
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
+        problem ? "bg-saffron/20 text-ink" : "bg-emerald-50 text-emerald-700"
+      }`}
+    >
+      <span className={`h-2 w-2 rounded-full ${problem ? "bg-saffron" : "bg-emerald-500"}`} />
+      {label}
+    </button>
+  );
+}
 
 const TOOL_ICONS: Record<PosToolCategory, typeof Package> = {
   "Sales & billing": Printer,
@@ -60,7 +105,10 @@ const NAV_ITEMS: { id: ScreenId; label: string; icon: typeof Package }[] = [
 type QueryRequest = { screen: ScreenId; value: string; nonce: number };
 
 function GlobalSearch({ onNavigate }: { onNavigate: NavigateFn }) {
-  const { products, customers, orders } = usePos();
+  const { products: allProducts, customers, orders } = usePos();
+  const { canSee } = useTeam();
+  // Search only leads to screens this person can open.
+  const products = canSee("products") ? allProducts : [];
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -197,6 +245,7 @@ function PosShell({
   onToggleFullscreen: () => void;
 }) {
   const { business, settings, reload } = usePos();
+  const { canSee, isCashier } = useTeam();
   const [screen, setScreen] = useState<ScreenId>("dashboard");
 
   // Connected tools the owner chose to show as tabs, just before Settings.
@@ -208,9 +257,16 @@ function PosShell({
       icon: TOOL_ICONS[tool.category],
     }));
     const settingsItem = NAV_ITEMS[NAV_ITEMS.length - 1];
-    return [...NAV_ITEMS.slice(0, -1), ...toolItems, settingsItem];
+    return [...NAV_ITEMS.slice(0, -1), ...toolItems, settingsItem].filter((item) =>
+      canSee(rolesScreen(item.id))
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tools.map((t) => t.slug).join(",")]);
+  }, [tools.map((t) => t.slug).join(","), canSee]);
+
+  // A cashier starts on billing; anyone on a screen their role hides moves off it.
+  useEffect(() => {
+    if (!canSee(rolesScreen(screen))) setScreen(isCashier ? "sell" : "dashboard");
+  }, [canSee, isCashier, screen]);
   const activeToolSlug = toolSlugOf(screen);
   const activeTool = activeToolSlug ? tools.find((t) => t.slug === activeToolSlug) : undefined;
 
@@ -303,6 +359,7 @@ function PosShell({
       <div className="flex flex-col gap-3 border-b border-muted-line/20 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <h2 className="text-lg font-bold text-ink">{business?.name}</h2>
+          <TeamChip onOpen={() => navigate("settings")} />
           {offline && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-saffron/15 px-2.5 py-1 text-xs font-semibold text-ink">
               <WifiOff className="h-3.5 w-3.5 text-saffron" />
@@ -411,6 +468,22 @@ function PosRouter({
   onToggleFullscreen: () => void;
 }) {
   const { status, errorMessage } = usePos();
+  const [joinParam, setJoinParam] = useState<string | null>(null);
+
+  useEffect(() => {
+    setJoinParam(new URLSearchParams(window.location.search).get("join"));
+  }, []);
+
+  const finishJoin = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("join");
+    window.history.replaceState(null, "", url.toString());
+    setJoinParam(null);
+  };
+
+  if (joinParam !== null && status !== "loading" && status !== "error") {
+    return <JoinScreen invite={decodeInvite(joinParam)} onDone={finishJoin} />;
+  }
 
   if (status === "loading") {
     return (
@@ -483,7 +556,9 @@ export function FreePosApp() {
             : "rounded-3xl border border-muted-line/30 bg-cream-paper p-4 shadow-sm sm:p-6"
         }
       >
-        <PosRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+        <TeamSyncProvider>
+          <PosRouter fullscreen={fullscreen} onToggleFullscreen={toggleFullscreen} />
+        </TeamSyncProvider>
       </div>
     </PosProvider>
   );

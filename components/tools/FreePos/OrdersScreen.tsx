@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Ban, FileUp, Receipt, ReceiptText } from "lucide-react";
 import { usePos } from "@/lib/pos/store";
+import { useTeam } from "./team/TeamSyncContext";
 import { formatMoney, type Order } from "@/lib/pos/types";
 import { ReceiptModal } from "./ReceiptModal";
 import { ImportSalesModal } from "./ImportSalesModal";
@@ -16,6 +17,8 @@ export function OrdersScreen({
   externalQuery: { value: string; nonce: number } | null;
 }) {
   const { business, orders, orderItems, cancelOrder } = usePos();
+  // Cancelling bills and importing past sales are the owner's.
+  const { isCashier } = useTeam();
   const currency = business?.currency ?? "INR";
 
   const [search, setSearch] = useState("");
@@ -66,10 +69,12 @@ export function OrdersScreen({
           <option value="completed">Completed</option>
           <option value="cancelled">Cancelled</option>
         </select>
-        <button type="button" onClick={() => setImportOpen(true)} className={secondaryBtnClass}>
-          <FileUp className="h-4 w-4" />
-          Import past sales
-        </button>
+        {!isCashier && (
+          <button type="button" onClick={() => setImportOpen(true)} className={secondaryBtnClass}>
+            <FileUp className="h-4 w-4" />
+            Import past sales
+          </button>
+        )}
       </div>
 
       <ImportSalesModal open={importOpen} onClose={() => setImportOpen(false)} />
@@ -132,7 +137,7 @@ export function OrdersScreen({
                       >
                         <ReceiptText className="h-4 w-4" />
                       </button>
-                      {order.status === "completed" && (
+                      {order.status === "completed" && !isCashier && (
                         <button
                           type="button"
                           aria-label={`Cancel order ${order.invoiceNumber}`}

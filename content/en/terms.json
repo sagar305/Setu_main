@@ -8,7 +8,7 @@
     "headline": "Terms of Use",
     "subheadline": "The short set of rules that come with using these tools."
   },
-  "lastUpdated": "Last updated 7 September 2026.",
+  "lastUpdated": "Last updated 20 November 2026.",
   "translationNote": "This translation is provided for convenience. If it differs from the English version, the English version applies.",
   "sections": [
     {
@@ -30,14 +30,76 @@
       "id": "your-data",
       "heading": "Your data is yours, and it is your responsibility",
       "paragraphs": [
-        "Work created in these tools is stored in your own browser, not on our servers. That has an important consequence: **we hold no copy and cannot recover anything for you.** Clearing your browsing data, using private browsing, switching browser or switching device will lose it. Export or download anything you need to keep.",
+        "Work created in these tools is stored in your own browser, not on our servers. That has an important consequence: **we hold no copy and cannot recover anything for you.** Clearing your browsing data, using private browsing, switching browser or switching device will lose it. Export or download anything you need to keep. If you turn on Google Drive team sync in the Browser Based POS, a copy is also kept in the shop owner's own Google Drive — still not with us (see [Google Drive team sync](#google-drive-team-sync) below).",
         "You are responsible for the accuracy and legality of what you put into the tools, including any invoice, bill or record you generate and issue to someone else."
+      ]
+    },
+    {
+      "id": "google-drive-team-sync",
+      "heading": "Google Drive team sync (Browser Based POS)",
+      "paragraphs": [
+        "Team sync is an optional, free feature that lets a shop owner use the Browser Based POS on several devices and give up to four other people their own access, by keeping the shop's data — encrypted — in **the owner's own Google Drive**. Before turning it on, joining a shop or signing in to one, you must tick that you have read and agree to these terms and our [Privacy Policy](/privacy#google-drive-team-sync). If you do not agree, do not use team sync — the rest of the POS keeps working on your device without it.",
+        "How team sync stores and shares data is described in detail in the [Privacy Policy](/privacy#google-drive-team-sync). This section covers the rules for using it."
+      ]
+    },
+    {
+      "id": "team-sync-google",
+      "heading": "Team sync runs on your Google account",
+      "list": [
+        "You need a Google account, and using team sync also means accepting [Google's Terms of Service](https://policies.google.com/terms). The POS asks Google only for access to the files it creates or you pick, its own hidden settings folder, and your email address.",
+        "The shop's files live in the shop owner's Google Drive and count towards their Google storage. Google's availability, limits and decisions — an outage, a full Drive, a suspended account, a change to Google's services — can stop sync or lose access to the files. Setu is not responsible for them.",
+        "Do not edit, move, rename or delete the files in the “Setu POS – ⟨shop name⟩” folder yourself, and do not share them with anyone outside the POS. Doing so can break sync or expose the shop's data. Deleting the folder deletes the shop's synced data, and we cannot restore it."
+      ]
+    },
+    {
+      "id": "team-sync-owner-responsibilities",
+      "heading": "The shop owner's responsibilities",
+      "list": [
+        "**Who you invite and what they can do.** You choose each person's role (Owner or Cashier) and a cashier's discount and credit limits. Anyone you invite as Owner can see and change everything, including cost prices, sales and other tools' data. Remove people promptly when they leave.",
+        "**Team size.** A team has at most five people, you included. Each person can use more than one device.",
+        "**Permission to add people.** You confirm you have the agreement of each person whose email address or mobile number you add, and that you are allowed to share it with them through Google and WhatsApp.",
+        "**Your customers' and staff's personal data.** Customer and staff details in the POS are yours to look after. You are responsible for handling them lawfully, including under India's Digital Personal Data Protection Act, 2023.",
+        "**The main device.** The device that turned sync on is the shop's main device: it merges everyone's changes and manages the team. Keep it open while the shop is working, and use “Make this the main device” when you replace it.",
+        "**Backups.** Team sync is not a backup service. Keep exporting backups from Settings, and keep your Google account secure.",
+        "**Keys and invite links.** The shop's data is encrypted with keys only your team holds. Invite links carry a key: send them only to the person invited and never post or forward them. Keep the recovery key private and safe — if every device is lost and it is lost too, nobody, including Setu, can open the shop's synced data again."
+      ]
+    },
+    {
+      "id": "team-sync-how-it-behaves",
+      "heading": "How sync behaves, and its limits",
+      "list": [
+        "**Not real time.** A device sends its changes within seconds when online, but other devices see them only after the main device has synced — about a minute while it is open. If the main device is closed, everyone keeps billing on their own device and changes merge when it reopens.",
+        "**Stock can briefly be wrong.** Two counters can sell the last units of an item at the same moment before either has synced. The POS then shows stock below zero and alerts the owner; physical stock must be checked and corrected by the shop.",
+        "**Separate invoice series.** Devices other than the main device number their bills in their own series (for example INV-C1-K7Q-00001), so numbers never collide. It is the shop's responsibility to make sure this numbering meets its invoicing and tax obligations.",
+        "**Changes outside a role are refused.** A sale above a cashier's discount limit, a credit sale a cashier isn't allowed, or an edit their role doesn't allow is blocked on their device and refused again by the main device, which lists it for the owner.",
+        "**Some features pause.** While team sync is on, Batch & expiry tracking is switched off on every device, and Restore from backup and Delete all data are disabled.",
+        "**Offline and leaving.** Sales made offline are kept on the device and sent when it is back online. Sales that never reached Google Drive before a device was wiped, reset or lost cannot be recovered.",
+        "We work to keep sync correct, but like the rest of the tools it is provided **as is, without warranty**, and we are not liable for lost or incorrect data, lost sales or business decisions resulting from sync delays, conflicts, errors or Google outages."
+      ]
+    },
+    {
+      "id": "team-sync-staff-devices",
+      "heading": "Staff and their devices",
+      "list": [
+        "The shop's data on a staff member's device belongs to the shop. A staff member may use it only for the shop's work, and must not copy, export, share or try to decrypt it outside the POS, or pass on their invite link.",
+        "**Leaving a team** on a device deletes the shop's data from that device and signs it out of Google, after first sending any sales not yet uploaded if the device is online.",
+        "**When the owner removes someone**, their access to the shop's files ends. Their devices delete the shop's data on their next sync or when the POS is next opened, and tell them why.",
+        "Each device stays signed in to Google for up to about six months. On a shared or public computer, leave the team or sign out when you are done. Use the POS's counter PIN to stop others using an unattended device."
+      ]
+    },
+    {
+      "id": "team-sync-changes",
+      "heading": "Changes to team sync",
+      "paragraphs": [
+        "Team sync is free and we may change, limit or withdraw it at any time. If we do, the shop's files remain in the owner's Google Drive and each device keeps its local copy, so you can export a backup and continue without sync."
       ]
     },
     {
       "id": "acceptable-use",
       "heading": "Acceptable use",
-      "paragraphs": ["You agree not to:"],
+      "paragraphs": [
+        "You agree not to:"
+      ],
       "list": [
         "Use the site to create false or fraudulent documents.",
         "Attempt to break, overload or gain unauthorised access to the site or its systems.",
