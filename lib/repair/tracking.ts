@@ -142,7 +142,11 @@ export function buildTrackPayload(
     jobNo: job.jobNo,
     device: deviceLabel(job),
     status: job.status,
-    statusLabel: JOB_STATUS_LABELS[job.status],
+    // A job out with a vendor reads as being with "our repair partner": the
+    // customer's contract is with this shop, and the vendor's name is the
+    // shop's business, not theirs.
+    statusLabel:
+      job.status === "outside-repair" ? "With our repair partner" : JOB_STATUS_LABELS[job.status],
     receivedOn: job.createdAt,
     updatedAt: nowIso(),
     promisedDate: job.promisedDate ?? undefined,

@@ -11,7 +11,8 @@
 // different database, read through lib/pos/db.
 
 const DB_NAME = "REPAIR_DATABASE";
-const DB_VERSION = 1;
+// v2 adds "vendors" (outside repair). The upgrade only creates missing stores.
+const DB_VERSION = 2;
 
 export const REPAIR_STORES = [
   "customers",
@@ -20,6 +21,7 @@ export const REPAIR_STORES = [
   "technicians",
   "bills",
   "repairSettings",
+  "vendors",
 ] as const;
 
 export type RepairStoreName = (typeof REPAIR_STORES)[number];

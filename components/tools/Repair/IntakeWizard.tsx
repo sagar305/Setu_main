@@ -770,7 +770,7 @@ export function IntakeWizard({
               />
             </Field>
 
-            <Field label="Internal notes" hint="Never printed, never sent.">
+            <Field label="Internal notes" hint="Printed on the shop copy only. Never on the customer's copy, never sent.">
               <textarea
                 className={inputClass}
                 rows={2}

@@ -260,7 +260,7 @@ function RepairShell({
               technicians.find((tech) => tech.id === job.technicianId) ?? null;
 
             // §3.2: print the slip and offer the "received" message.
-            printJobSlip({ business, job, customer, technician, settings });
+            void printJobSlip({ business, job, customer, technician, settings });
             if (customer) {
               setIntakeMessages([
                 outboundFor("received", job, customer, business, settings),

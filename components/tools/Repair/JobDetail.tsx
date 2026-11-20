@@ -65,12 +65,14 @@ import {
   printEstimate,
   printInvoice,
   printJobSlip,
+  isTwoCopy,
   type PrintContext,
 } from "@/lib/repair/print";
 import { formatMoney } from "@/lib/pos/types";
 import { SendQueue } from "./SendQueue";
 import { PhotoLightbox } from "./PhotoLightbox";
 import { DeliveryModal } from "./DeliveryModal";
+import { OutsideRepairSection } from "./OutsideRepair";
 import {
   AgingBadge,
   ConfirmDialog,
@@ -377,26 +379,41 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
             value={job.status}
             onChange={(event) => void moveTo(event.target.value as JobStatus)}
           >
-            {BOARD_STATUSES.filter((status) => status !== "delivered").map((status) => (
+            {BOARD_STATUSES.filter(
+              (status) => status !== "delivered" && status !== "outside-repair"
+            ).map((status) => (
               <option key={status} value={status}>
                 {JOB_STATUS_LABELS[status]}
               </option>
             ))}
             {job.status === "delivered" && <option value="delivered">Delivered</option>}
+            {job.status === "outside-repair" && (
+              <option value="outside-repair">{JOB_STATUS_LABELS["outside-repair"]}</option>
+            )}
             <option value="returned-unrepaired">Returned unrepaired</option>
             <option value="cancelled">Cancelled</option>
           </select>
         </label>
 
-        <button type="button" onClick={() => printJobSlip(context)} className={secondaryBtnClass}>
+        <button type="button" onClick={() => void printJobSlip(context)} className={secondaryBtnClass}>
           <Printer className="h-4 w-4" aria-hidden="true" />
-          Job slip
+          Job card
         </button>
+        {!isTwoCopy(settings) && (
+          <button
+            type="button"
+            onClick={() => void printJobSlip(context, "shop")}
+            className={secondaryBtnClass}
+          >
+            <Printer className="h-4 w-4" aria-hidden="true" />
+            Shop copy
+          </button>
+        )}
         <button type="button" onClick={() => printDeviceTag(context)} className={secondaryBtnClass}>
           <Tag className="h-4 w-4" aria-hidden="true" />
           Device tag
         </button>
-        <button type="button" onClick={() => printEstimate(context)} className={secondaryBtnClass}>
+        <button type="button" onClick={() => void printEstimate(context)} className={secondaryBtnClass}>
           <FileText className="h-4 w-4" aria-hidden="true" />
           Estimate
         </button>
@@ -470,6 +487,8 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
           )}
         </div>
       )}
+
+      <OutsideRepairSection job={job} context={context} canManage onError={setError} />
 
       {/* Tracking link ---------------------------------------------------- */}
       {settings.trackingEnabled && (
@@ -938,7 +957,7 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
               onChange={(event) => setCustomerNotes(event.target.value)}
             />
           </Field>
-          <Field label="Internal" hint="Never printed, never sent.">
+          <Field label="Internal" hint="Printed on the shop copy only. Never on the customer's copy, never sent.">
             <textarea
               className={inputClass}
               rows={3}

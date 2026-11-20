@@ -11,8 +11,10 @@ import {
   CLOSED_STATUSES,
   DEVICE_KIND_LABELS,
   IN_SHOP_STATUSES,
+  OPEN_STATUSES,
   JOB_STATUS_LABELS,
   dateKeyOf,
+  daysBetween,
   deviceLabel,
   todayKey,
   type Bill,
@@ -26,7 +28,10 @@ import {
 import {
   agingLevel,
   averageOf,
+  currentOutside,
   daysInShop,
+  isOutsideOverdue,
+  isOverdue,
   isLowStock,
   isUncollected,
   isWarrantyClaim,
@@ -86,7 +91,7 @@ export function jobsByStatus(
     inShop: jobs.filter((job) => IN_SHOP_STATUSES.includes(job.status)).length,
     overdue: jobs.filter(
       (job) =>
-        IN_SHOP_STATUSES.includes(job.status) &&
+        OPEN_STATUSES.includes(job.status) &&
         job.promisedDate !== null &&
         job.promisedDate < today
     ).length,
@@ -407,4 +412,192 @@ export function jobsDeliveredInPeriod(jobs: Job[], period: Period): Job[] {
       job.deliveredOn >= period.from &&
       job.deliveredOn <= period.to
   );
+}
+
+// ---------------------------------------------------------------------------
+// Engineer workload (live) and jobs done per engineer
+// ---------------------------------------------------------------------------
+
+/** Statuses a technician's open work is counted under, in board order. */
+export const WORKLOAD_STATUSES: JobStatus[] = [
+  "received",
+  "diagnosing",
+  "estimate-sent",
+  "approved",
+  "in-repair",
+  "awaiting-parts",
+  "outside-repair",
+  "ready",
+];
+
+export type WorkloadRow = {
+  technicianId: string | null;
+  name: string;
+  /** Every open job held, outside repair included. */
+  open: number;
+  byStatus: Partial<Record<JobStatus, number>>;
+  urgent: number;
+  /** Past the date promised to the customer. */
+  overdue: number;
+  /** Out with a vendor. */
+  outside: number;
+  /** Days the oldest open job has been in. */
+  oldestDays: number;
+  active: boolean;
+};
+
+/**
+ * Who is holding what right now.
+ *
+ * "Ready" is listed but not counted as load: the work is done and the device
+ * is waiting for the customer, not for the engineer. Every active technician
+ * gets a row even with nothing on their bench, so the owner can see who is
+ * free; removed or inactive ones appear only while they still hold jobs.
+ */
+export function workloadByTechnician(
+  jobs: Job[],
+  technicians: Technician[],
+  today = todayKey()
+): WorkloadRow[] {
+  const rows = new Map<string, WorkloadRow>();
+  const blank = (technicianId: string | null, name: string, active: boolean): WorkloadRow => ({
+    technicianId,
+    name,
+    open: 0,
+    byStatus: {},
+    urgent: 0,
+    overdue: 0,
+    outside: 0,
+    oldestDays: 0,
+    active,
+  });
+  for (const tech of technicians) {
+    if (tech.active) rows.set(tech.id, blank(tech.id, tech.name, true));
+  }
+  const nameById = new Map(technicians.map((tech) => [tech.id, tech]));
+
+  for (const job of jobs) {
+    if (!WORKLOAD_STATUSES.includes(job.status)) continue;
+    const key = job.technicianId ?? "";
+    let row = rows.get(key);
+    if (!row) {
+      const tech = key ? nameById.get(key) : undefined;
+      row = blank(key || null, key ? (tech?.name ?? "Removed technician") : "Unassigned", Boolean(tech?.active));
+      rows.set(key, row);
+    }
+    row.byStatus[job.status] = (row.byStatus[job.status] ?? 0) + 1;
+    if (job.status === "ready") continue;
+    row.open += 1;
+    if (job.priority === "urgent") row.urgent += 1;
+    if (isOverdue(job, today)) row.overdue += 1;
+    if (job.status === "outside-repair") row.outside += 1;
+    row.oldestDays = Math.max(row.oldestDays, daysInShop(job, today));
+  }
+
+  return [...rows.values()].sort((a, b) => {
+    // Unassigned last; otherwise heaviest bench first.
+    if (!a.technicianId !== !b.technicianId) return a.technicianId ? -1 : 1;
+    return b.open - a.open || a.name.localeCompare(b.name);
+  });
+}
+
+export type VendorLoadRow = {
+  vendorId: string;
+  name: string;
+  city: string;
+  out: number;
+  overdue: number;
+  jobs: Job[];
+};
+
+/** Devices out with each vendor right now, overdue ones counted. */
+export function outsideByVendor(jobs: Job[], today = todayKey()): VendorLoadRow[] {
+  const rows = new Map<string, VendorLoadRow>();
+  for (const job of jobs) {
+    const trip = currentOutside(job);
+    if (!trip) continue;
+    const row = rows.get(trip.vendorId) ?? {
+      vendorId: trip.vendorId,
+      name: trip.vendorName,
+      city: trip.vendorCity,
+      out: 0,
+      overdue: 0,
+      jobs: [],
+    };
+    row.out += 1;
+    if (isOutsideOverdue(job, today)) row.overdue += 1;
+    row.jobs.push(job);
+    rows.set(trip.vendorId, row);
+  }
+  return [...rows.values()].sort((a, b) => b.out - a.out);
+}
+
+/** Who held a job at a moment: the last assignment at or before it. */
+export function assigneeAt(job: Job, at: string): string | null {
+  const history = job.assignmentHistory ?? [];
+  if (history.length === 0) return job.technicianId;
+  let holder: string | null = null;
+  let found = false;
+  for (const entry of history) {
+    if (entry.at <= at) {
+      holder = entry.technicianId;
+      found = true;
+    }
+  }
+  // Assigned only after the moment (or history starts late): fall back to the
+  // first recorded holder rather than calling it unassigned.
+  return found ? holder : history[0].technicianId;
+}
+
+export type JobsDoneRow = {
+  technicianId: string | null;
+  name: string;
+  done: number;
+  /** Labour charged on those jobs; warranty claims count as jobs, not labour. */
+  labour: number;
+  /** Average days from intake to ready. */
+  averageDays: number;
+  jobIds: string[];
+};
+
+/**
+ * Jobs done per engineer: a job counts once, on the first day it was marked
+ * Ready inside the period, for whoever was assigned to it at that moment.
+ *
+ * Ready rather than delivered, because delivery waits on the customer — an
+ * engineer who finished a laptop on the 3rd should not have it land in next
+ * month's count because the customer collected it on the 2nd.
+ */
+export function jobsDonePerTechnician(
+  jobs: Job[],
+  technicians: Technician[],
+  period: { from: string; to: string }
+): JobsDoneRow[] {
+  const nameById = new Map(technicians.map((tech) => [tech.id, tech.name]));
+  const groups = new Map<string, { jobs: Job[]; days: number[] }>();
+
+  for (const job of jobs) {
+    const firstReady = job.statusHistory.find((change) => change.to === "ready" && change.from !== "ready");
+    if (!firstReady) continue;
+    const day = dateKeyOf(firstReady.at);
+    if (!day || day < period.from || day > period.to) continue;
+    const key = assigneeAt(job, firstReady.at) ?? "";
+    const group = groups.get(key) ?? { jobs: [], days: [] };
+    group.jobs.push(job);
+    group.days.push(Math.max(0, daysBetween(dateKeyOf(job.createdAt), day)));
+    groups.set(key, group);
+  }
+
+  return [...groups.entries()]
+    .map(([key, group]) => ({
+      technicianId: key || null,
+      name: key ? (nameById.get(key) ?? "Removed technician") : "Unassigned",
+      done: group.jobs.length,
+      labour: round2(
+        group.jobs.filter((job) => !isWarrantyClaim(job)).reduce((sum, job) => sum + job.labourCharge, 0)
+      ),
+      averageDays: averageOf(group.days),
+      jobIds: group.jobs.map((job) => job.id),
+    }))
+    .sort((a, b) => b.done - a.done);
 }

@@ -125,6 +125,7 @@ export function backupSummary(backup: RepairBackup): { label: string; count: num
     jobs: "Jobs",
     parts: "Parts",
     technicians: "Technicians",
+    vendors: "Outside repair vendors",
     bills: "Bills",
     repairSettings: "Settings",
   };

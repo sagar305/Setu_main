@@ -28,6 +28,7 @@ export type JobStatus =
   | "approved"
   | "in-repair"
   | "awaiting-parts"
+  | "outside-repair"
   | "ready"
   | "delivered"
   | "returned-unrepaired"
@@ -101,6 +102,17 @@ export type Job = {
   billId: string | null;
   statusHistory: StatusChange[];
   /**
+   * Every trip this job made to an outside service centre, oldest first.
+   * Optional because jobs from before the feature have none.
+   */
+  outsideRepairs?: OutsideRepair[];
+  /**
+   * Who the job was assigned to, and when — newest last. The engineer report
+   * credits a job to whoever held it when it was marked ready. Optional:
+   * older jobs have only `technicianId`.
+   */
+  assignmentHistory?: Assignment[];
+  /**
    * The customer-facing tracking link, when this job has one.
    *
    * Optional throughout, because jobs taken in before tracking existed — and
@@ -151,6 +163,67 @@ export type JobTracking = {
     decision?: "yes" | "no" | null;
     decidedAt?: string | null;
   } | null;
+};
+
+/**
+ * A service centre or specialist the shop sends work to when it cannot do the
+ * repair itself — another city's chip-level lab, a brand service centre.
+ */
+export type Vendor = {
+  id: string;
+  name: string;
+  city: string;
+  phone: string;
+  contactPerson: string;
+  /** "Motherboard", "Chip-level", "Display" — what they are sent. */
+  speciality: string;
+  /** Printed on the outward challan. */
+  address: string;
+  gstin: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+/**
+ * One trip to a vendor and back.
+ *
+ * The vendor's name and city are copied in at the time of sending, so the job
+ * still reads correctly after the vendor record is edited or removed.
+ */
+export type OutsideRepair = {
+  id: string;
+  vendorId: string;
+  vendorName: string;
+  vendorCity: string;
+  /** "Whole device", or the part that went: "Motherboard only". */
+  sentWhat: string;
+  /** What the vendor is asked to fix. */
+  problem: string;
+  sentOn: string; // date key
+  /** "By hand", "DTDC", "Bus parcel" — free text. */
+  sentVia: string;
+  docketNo: string;
+  /** What the vendor said it would cost. */
+  quotedCharge: number | null;
+  expectedBackOn: string | null; // date key
+  note: string;
+  /** Status the job was in before it went out, so the board can show where it came from. */
+  previousStatus: JobStatus;
+  /** Outward challan number, e.g. "JC-0412/O1". */
+  challanNo: string;
+  receivedOn: string | null; // date key; null while still out
+  outcome: "repaired" | "not-repaired" | null;
+  /** What the vendor actually charged. Counted as the shop's cost, never billed automatically. */
+  finalCharge: number | null;
+  returnNote: string;
+  sentAt: string;
+  receivedAt: string | null;
+};
+
+export type Assignment = {
+  technicianId: string | null;
+  at: string;
 };
 
 export type StatusChange = {
@@ -244,7 +317,17 @@ export type RepairSettings = {
    */
   trackingEnabled: boolean; // default false
   messageTemplates: Record<RepairTemplateKey, string>;
-  receiptPaperSize: "58mm" | "80mm" | "a4";
+  receiptPaperSize: "58mm" | "80mm" | "a5" | "a4";
+  /** Paper the job card and estimate print on. Absent on older records = A5. */
+  slipPaperSize?: "a4" | "a5";
+  /**
+   * On A4 only: "single" prints one copy on the whole page; "two-copy" prints
+   * the customer copy on the top half and the shop copy on the bottom, with a
+   * cut line between. A5 always prints the customer copy alone.
+   */
+  slipA4Layout?: "single" | "two-copy";
+  /** The numbered terms on the job card, one per line. Blank = the defaults. */
+  slipTerms?: string;
   lastBackupAt: string | null;
   sheetSyncUrl: string;
   pinHash?: string;
@@ -286,6 +369,7 @@ export const JOB_STATUS_LABELS: Record<JobStatus, string> = {
   approved: "Approved",
   "in-repair": "In repair",
   "awaiting-parts": "Awaiting parts",
+  "outside-repair": "Outside repair",
   ready: "Ready",
   delivered: "Delivered",
   "returned-unrepaired": "Returned unrepaired",
@@ -310,6 +394,7 @@ export const BOARD_STATUSES: JobStatus[] = [
   "approved",
   "in-repair",
   "awaiting-parts",
+  "outside-repair",
   "ready",
   "delivered",
 ];
@@ -331,6 +416,9 @@ export const IN_SHOP_STATUSES: JobStatus[] = [
   "awaiting-parts",
   "ready",
 ];
+
+/** Open jobs: anything not closed, whether in the shop or out with a vendor. */
+export const OPEN_STATUSES: JobStatus[] = [...IN_SHOP_STATUSES, "outside-repair"];
 
 /** Which template a move into each status offers to send. */
 export const STATUS_TEMPLATE: Partial<Record<JobStatus, RepairTemplateKey>> = {
@@ -480,6 +568,14 @@ export const MESSAGE_PLACEHOLDERS: { token: string; meaning: string }[] = [
   },
 ];
 
+/** The job card's terms until the shop writes its own, one per line. */
+export const DEFAULT_SLIP_TERMS = [
+  "Devices not collected within 90 days of being ready may be disposed of to recover charges.",
+  "Data loss can occur during any repair. Please keep your own backup — we are not responsible for data.",
+  "The estimate is indicative. Any change will be told to you before the work is done.",
+  "This slip must be produced when collecting the device.",
+].join("\n");
+
 export const DEFAULT_PAYMENT_MODES = ["Cash", "UPI", "Card", "Bank transfer"];
 
 // ---------------------------------------------------------------------------
@@ -507,6 +603,9 @@ export const DEFAULT_SETTINGS: RepairSettings = {
   trackingEnabled: false,
   messageTemplates: DEFAULT_MESSAGE_TEMPLATES,
   receiptPaperSize: "58mm",
+  slipPaperSize: "a5",
+  slipA4Layout: "two-copy",
+  slipTerms: "",
   lastBackupAt: null,
   sheetSyncUrl: "",
 };

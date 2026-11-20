@@ -18,7 +18,7 @@ import {
   lowStockParts,
   marginReport,
   repeatFailureReport,
-  technicianThroughput,
+  jobsDonePerTechnician,
   turnaroundByKind,
   uncollectedDevices,
 } from "@/lib/repair/reports";
@@ -85,9 +85,9 @@ export function ReportsScreen({ onOpenJob }: { onOpenJob: (id: string) => void }
     [deliveredInPeriod, bills, settings]
   );
   const turnaround = useMemo(() => turnaroundByKind(deliveredInPeriod), [deliveredInPeriod]);
-  const throughput = useMemo(
-    () => technicianThroughput(deliveredInPeriod, bills, technicians, settings),
-    [deliveredInPeriod, bills, technicians, settings]
+  const jobsDone = useMemo(
+    () => jobsDonePerTechnician(jobs, technicians, period),
+    [jobs, technicians, period]
   );
   const repeats = useMemo(() => repeatFailureReport(jobs), [jobs]);
   const conversion = useMemo(() => estimateConversion(jobs), [jobs]);
@@ -372,24 +372,36 @@ export function ReportsScreen({ onOpenJob }: { onOpenJob: (id: string) => void }
           )}
         </SectionCard>
 
-        <SectionCard title="Technician throughput">
-          {throughput.length === 0 ? (
-            <p className="text-sm text-muted">Nothing delivered in this window yet.</p>
+        <SectionCard title="Jobs done per engineer">
+          <p className="mb-3 text-xs text-muted">
+            A job counts when it is first marked <strong>Ready</strong> in this period, for the
+            engineer it was assigned to at that moment.
+          </p>
+          {jobsDone.length === 0 ? (
+            <p className="text-sm text-muted">No job was marked ready in this window.</p>
           ) : (
-            <ul className="grid gap-2">
-              {throughput.map((row) => (
-                <li
-                  key={row.technicianId ?? "unassigned"}
-                  className="rounded-xl border border-muted-line/30 p-3"
-                >
-                  <p className="text-sm font-bold text-ink">{row.name}</p>
-                  <p className="text-xs text-muted">
-                    {row.completed} completed · {row.averageDays} days average ·{" "}
-                    {money(row.revenue)} billed · {money(row.margin)} margin
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[320px] text-sm">
+                <thead>
+                  <tr className="border-b border-muted-line/30 text-left text-xs uppercase tracking-wide text-muted">
+                    <th className="py-2">Engineer</th>
+                    <th className="py-2 text-right">Jobs done</th>
+                    <th className="py-2 text-right">Labour</th>
+                    <th className="py-2 text-right">Avg days</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {jobsDone.map((row) => (
+                    <tr key={row.technicianId ?? "unassigned"} className="border-b border-muted-line/20">
+                      <td className="py-2 font-semibold text-ink">{row.name}</td>
+                      <td className="py-2 text-right font-bold text-ink">{row.done}</td>
+                      <td className="py-2 text-right text-ink">{money(row.labour)}</td>
+                      <td className="py-2 text-right text-muted">{row.averageDays}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </SectionCard>
       </div>
