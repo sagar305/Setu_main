@@ -63,6 +63,7 @@ const STATUS_STYLES: Record<JobStatus, string> = {
   approved: "bg-indigo/10 text-indigo border-indigo/40",
   "in-repair": "bg-saffron/15 text-ink border-saffron/60",
   "awaiting-parts": "bg-amber-50 text-amber-800 border-amber-300",
+  "outside-repair": "bg-sky-50 text-sky-800 border-sky-300",
   ready: "bg-green-50 text-green-800 border-green-300",
   delivered: "bg-cream text-muted border-muted-line/40",
   "returned-unrepaired": "bg-red-50 text-red-700 border-red-200",

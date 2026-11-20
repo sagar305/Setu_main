@@ -21,7 +21,15 @@ import {
   X,
 } from "lucide-react";
 import { useRepair } from "@/lib/repair/store";
-import { agingLevel, daysInShop, isOverdue, jobValue } from "@/lib/repair/calc";
+import { WorkloadStrip, WorkloadView } from "./Workload";
+import {
+  agingLevel,
+  currentOutside,
+  daysInShop,
+  isOutsideOverdue,
+  isOverdue,
+  jobValue,
+} from "@/lib/repair/calc";
 import {
   BOARD_STATUSES,
   DEVICE_KIND_LABELS,
@@ -64,7 +72,8 @@ export function JobsScreen({
   onNewJob,
 }: {
   onOpenJob: (id: string) => void;
-  onNewJob: () => void;
+  /** Absent for a technician, who can't take a device in. */
+  onNewJob?: () => void;
 }) {
   const { jobs, customers, technicians, settings, business, today, billForJob } = useRepair();
   const [search, setSearch] = useState("");
@@ -75,6 +84,14 @@ export function JobsScreen({
   const [urgentOnly, setUrgentOnly] = useState(false);
   const [overdueOnly, setOverdueOnly] = useState(false);
   const [extra, setExtra] = useState<ExtraFilter>("all");
+  const [view, setView] = useState<"board" | "engineers">("board");
+
+  /** From the workload view: open the board filtered to one engineer. */
+  const pickTechnician = (id: string) => {
+    setTechnicianId(id);
+    setShowFilters(true);
+    setView("board");
+  };
 
   const currency = business?.currency ?? "INR";
   const customerById = useMemo(
@@ -161,6 +178,7 @@ export function JobsScreen({
     const level = agingLevel(job, settings, today);
     const tech = job.technicianId ? techById.get(job.technicianId) : null;
     const value = jobValue(job, billForJob(job.id) ?? null, settings);
+    const outside = currentOutside(job);
 
     return (
       <button
@@ -178,7 +196,14 @@ export function JobsScreen({
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <AgingBadge days={daysInShop(job, today)} level={level} />
           {isOverdue(job, today) && <Pill tone="danger">Past promise</Pill>}
+          {isOutsideOverdue(job, today) && <Pill tone="danger">Vendor late</Pill>}
         </div>
+        {outside && (
+          <p className="mt-1 truncate text-xs font-semibold text-sky-800">
+            At {outside.vendorName}
+            {outside.vendorCity ? `, ${outside.vendorCity}` : ""}
+          </p>
+        )}
         <div className="mt-2 flex items-center justify-between gap-2 text-xs">
           <span className="truncate text-muted">{tech ? tech.name : "Unassigned"}</span>
           {value > 0 && (
@@ -218,11 +243,34 @@ export function JobsScreen({
           Filters
           {filtersOn && <span className="ml-1 h-2 w-2 rounded-full bg-indigo" aria-hidden="true" />}
         </button>
-        <button type="button" onClick={onNewJob} className={primaryBtnClass}>
-          <Plus className="h-4 w-4" aria-hidden="true" />
-          New job
-        </button>
+        <div className="inline-flex rounded-lg border border-muted-line/40 bg-white p-0.5" role="group" aria-label="View">
+          {(["board", "engineers"] as const).map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => setView(option)}
+              aria-pressed={view === option}
+              className={`rounded-md px-3 py-1.5 text-sm font-semibold transition ${
+                view === option ? "bg-indigo text-white" : "text-muted hover:text-indigo"
+              }`}
+            >
+              {option === "board" ? "Board" : "By engineer"}
+            </button>
+          ))}
+        </div>
+        {onNewJob && (
+          <button type="button" onClick={onNewJob} className={primaryBtnClass}>
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            New job
+          </button>
+        )}
       </div>
+
+      {view === "engineers" ? (
+        <WorkloadView onPickTechnician={pickTechnician} onOpenJob={onOpenJob} />
+      ) : (
+      <>
+      <WorkloadStrip onPickTechnician={pickTechnician} onShowWorkload={() => setView("engineers")} />
 
       {showFilters && (
         <div className="grid gap-3 rounded-2xl border border-muted-line/30 bg-white p-4">
@@ -307,7 +355,7 @@ export function JobsScreen({
               : "No job matches that search and those filters."
           }
           action={
-            jobs.length === 0 ? (
+            jobs.length === 0 && onNewJob ? (
               <button type="button" onClick={onNewJob} className={primaryBtnClass}>
                 <Plus className="h-4 w-4" aria-hidden="true" />
                 Take in a device
@@ -388,6 +436,8 @@ export function JobsScreen({
             })}
           </div>
         </>
+      )}
+      </>
       )}
     </div>
   );

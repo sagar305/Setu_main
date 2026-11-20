@@ -48,6 +48,7 @@ function stepIndexOf(status: JobStatus): number {
       return 1;
     case "in-repair":
     case "awaiting-parts":
+    case "outside-repair":
       return 2;
     case "ready":
       return 3;

@@ -248,12 +248,12 @@ const FAQ_ITEMS = [
   {
     question: "Can two people use it at once?",
     answer:
-      "Not in the free app. Everything lives in one browser's storage with no account, so the counter tablet and the workbench laptop cannot share a board. Keeping several devices in step needs a server between them, which is the one thing an app that works offline and asks for no login cannot do.",
+      "Yes, with team sync. The owner turns it on in Settings and invites up to four more people by email as Front desk (intake, delivery, billing) or Technician (only their own jobs, no prices or bills). The shop's data is kept encrypted in the owner's own Google Drive and synced between the team's devices — Setu never receives it. Without team sync, everything stays in one browser on one device.",
   },
   {
     question: "Where is my data, and can I get it out?",
     answer:
-      "In that browser, on that device, and nowhere else unless you send it. Download a full JSON backup whenever you like — including or excluding the photos, since photos are most of the size — and restore it on another machine. Every list also exports as CSV.",
+      "In that browser, on that device, and nowhere else unless you send it or turn on team sync (then an encrypted copy is also kept in the owner's own Google Drive). Download a full JSON backup whenever you like — including or excluding the photos, since photos are most of the size — and restore it on another machine. Every list also exports as CSV.",
   },
 ];
 

@@ -140,6 +140,7 @@
         "**Deleting everything** — the shop owner deletes the “Setu POS – ⟨shop name⟩” folder in Google Drive, removes the app's access in their Google Account (Security → Third-party apps & services), and can delete the app's hidden data in Google Drive (Settings → Manage apps → Setu POS → Delete hidden app data). Because Setu holds no copy and no key, there is nothing for us to delete; we also cannot restore files deleted from Drive or recover a lost key."
       ]
     },
+    {},
     {
       "id": "team-sync-customer-and-staff-data",
       "heading": "Your customers' and staff's information",
