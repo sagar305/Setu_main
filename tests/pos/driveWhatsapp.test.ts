@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildBooksFile, buildShopFile, type TeamMember } from "@/lib/pos/drive/hub";
+import { buildBooksAndArchive, publicMembers, type TeamMember } from "@/lib/pos/drive/hub";
 import { syncedStores } from "@/lib/pos/drive/scope";
 import {
   defaultCountryFor,
@@ -73,14 +73,12 @@ describe("phone numbers stay private to owners", () => {
     { email: "ramesh@x", role: "cashier", code: "C1", addedAt: "", fileId: "f-c1", phone: "919876543210" },
   ];
 
-  it("are left out of shop.json, which cashiers can read", () => {
-    const shop = buildShopFile({}, "Sharma Kirana", "O", members, {}, "now");
-    expect(JSON.stringify(shop)).not.toContain("9876543210");
-    expect(shop.members[1]).not.toHaveProperty("phone");
+  it("are left out of the team list cashiers can read", () => {
+    expect(JSON.stringify(publicMembers(members))).not.toContain("9876543210");
   });
 
   it("are kept in books.json for owners and a new main device", () => {
-    const books = buildBooksFile({}, syncedStores([]), {}, "now", members);
+    const { books } = buildBooksAndArchive({}, syncedStores([]), {}, members);
     expect(books.memberPhones).toEqual({ C1: "919876543210" });
   });
 });

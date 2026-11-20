@@ -5,6 +5,7 @@ import { AlertTriangle, Cloud, LogIn, Store } from "lucide-react";
 import { findMyShops, openShop, type FoundShop } from "@/lib/pos/drive/engine";
 import { signOut } from "@/lib/pos/drive/auth";
 import { recordTeamConsent } from "@/lib/pos/drive/consent";
+import { parseRecoveryKey } from "@/lib/pos/drive/crypto";
 import { TeamConsent } from "./TeamConsent";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
 import { ROLE_LABELS } from "@/lib/pos/drive/roles";
@@ -46,6 +47,7 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
   const { business, orders, reload } = usePos();
   const [busy, setBusy] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [recoveryText, setRecoveryText] = useState("");
   const [error, setError] = useState("");
   const [result, setResult] = useState<{ email: string; shops: FoundShop[] } | null>(null);
   const [chosen, setChosen] = useState<FoundShop | null>(null);
@@ -67,7 +69,7 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
     try {
       const found = await findMyShops();
       setResult(found);
-      const usable = found.shops.filter((s) => s.role && !s.unreachable);
+      const usable = found.shops.filter((s) => (s.role && !s.unreachable) || s.needsKey);
       if (usable.length === 1) setChosen(usable[0]);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Google sign-in failed.");
@@ -81,7 +83,12 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
     setBusy(true);
     setError("");
     try {
-      await openShop(chosen, pickInvitedFiles);
+      let recovery;
+      if (chosen.needsKey) {
+        recovery = parseRecoveryKey(recoveryText);
+        if (!recovery) throw new Error("That doesn't look like a recovery key. It starts with SETU-POS-KEY.");
+      }
+      await openShop(chosen, pickInvitedFiles, recovery ?? undefined);
       await reload();
       setBusy(false);
       close();
@@ -121,10 +128,10 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
             <p className="text-muted">Signed in as {result.email}. Choose a shop:</p>
             <ul className="space-y-2">
               {result.shops.map((shop) => {
-                const usable = Boolean(shop.role) && !shop.unreachable;
-                const selected = chosen?.pointer.shopFileId === shop.pointer.shopFileId;
+                const usable = (Boolean(shop.role) && !shop.unreachable) || shop.needsKey;
+                const selected = chosen?.pointer.files.live === shop.pointer.files.live;
                 return (
-                  <li key={shop.pointer.shopFileId}>
+                  <li key={shop.pointer.files.live}>
                     <button
                       type="button"
                       disabled={!usable}
@@ -139,7 +146,9 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
                         <span className="block text-xs text-muted">
                           {shop.unreachable
                             ? "Can't be opened — the owner may have deleted it or removed you"
-                            : shop.removed
+                            : shop.needsKey
+                              ? "This account's copy of the shop key is missing — enter the owner's recovery key"
+                              : shop.removed
                               ? "You're no longer in this shop's team"
                               : `${ROLE_LABELS[shop.role!]}${shop.isPrimaryAccount ? " (shop owner)" : ""} · main device synced ${timeAgo(shop.hubSeenAt)}`}
                         </span>
@@ -150,6 +159,20 @@ function OpenShopModal({ open, onClose }: { open: boolean; onClose: () => void }
               })}
             </ul>
           </div>
+        )}
+
+        {chosen?.needsKey && (
+          <label className="block">
+            <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">Recovery key</span>
+            <textarea
+              value={recoveryText}
+              onChange={(e) => setRecoveryText(e.target.value)}
+              rows={3}
+              spellCheck={false}
+              placeholder="SETU-POS-KEY.…"
+              className="w-full rounded-lg border border-muted-line/40 bg-white px-3 py-2 font-mono text-xs text-ink focus:border-indigo focus:outline-none"
+            />
+          </label>
         )}
 
         {chosen && hasData && (

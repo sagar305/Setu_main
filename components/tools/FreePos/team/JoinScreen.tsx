@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, Cloud, Users } from "lucide-react";
 import { joinTeam, type InvitePayload } from "@/lib/pos/drive/engine";
 import { pickInvitedFiles } from "@/lib/pos/drive/picker";
-import { signOut } from "@/lib/pos/drive/auth";
+import { RETURN_HASH_KEY, signOut } from "@/lib/pos/drive/auth";
+import { keysFromFragment, type ShopKeys } from "@/lib/pos/drive/crypto";
 import { recordTeamConsent } from "@/lib/pos/drive/consent";
 import { TeamConsent } from "./TeamConsent";
 import { usePos } from "@/lib/pos/store";
@@ -19,11 +20,30 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const topRef = useRef<HTMLDivElement>(null);
-  // The POS sits below the product page's intro; bring the invite into view.
+  // The shop's keys are after "#" in the invite link (never sent to a server).
+  // Read them once, then take them out of the address bar.
+  const [keys, setKeys] = useState<ShopKeys | null>(null);
+  const [keysChecked, setKeysChecked] = useState(false);
   useEffect(() => {
+    // The POS sits below the product page's intro; bring the invite into view.
     topRef.current?.scrollIntoView({ block: "start" });
+    let hash = window.location.hash;
+    try {
+      // Back from a full-page Google sign-in in this tab.
+      hash ||= window.sessionStorage.getItem(RETURN_HASH_KEY) ?? "";
+      if (hash) window.sessionStorage.setItem(RETURN_HASH_KEY, hash);
+    } catch {
+      // ignore
+    }
+    setKeys(keysFromFragment(hash));
+    setKeysChecked(true);
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
   }, []);
-  const fileCount = invite?.b ? 3 : 2;
+  const fileCount = invite?.b ? 5 : 3;
+  const ownerInvite = Boolean(invite?.b);
+  const keysMissing = keysChecked && (!keys || (ownerInvite && !keys.books));
 
   if (!invite || !available) {
     return (
@@ -45,7 +65,13 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
     setBusy(true);
     setError("");
     try {
-      await joinTeam(invite, pickInvitedFiles);
+      if (!keys) throw new Error("This invite link is missing the shop's key.");
+      await joinTeam(invite, keys, pickInvitedFiles);
+      try {
+        window.sessionStorage.removeItem(RETURN_HASH_KEY);
+      } catch {
+        // ignore
+      }
       await reload();
       onDone();
     } catch (e) {
@@ -65,8 +91,16 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
       <h2 className="mt-4 text-xl font-bold text-ink">Join {invite.n}</h2>
       <p className="mt-2 text-sm text-muted">
         You&apos;ve been invited to bill for <strong className="text-ink">{invite.n}</strong> on this device. The
-        shop&apos;s products, prices and customers will sync here through the owner&apos;s Google Drive.
+        shop&apos;s products, prices and customers will sync here through the owner&apos;s Google Drive, encrypted
+        with a key only your team has.
       </p>
+
+      {keysMissing && (
+        <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          This link is missing the shop&apos;s key — the part after “#” got cut off. Ask the owner to send the invite
+          again on WhatsApp, or copy the whole link from the email, and open it exactly as it is.
+        </p>
+      )}
 
       <ol className="mt-5 space-y-2 text-sm text-ink">
         <li>
@@ -121,7 +155,7 @@ export function JoinScreen({ invite, onDone }: { invite: InvitePayload | null; o
       <div className="mt-6 flex flex-wrap gap-3">
         <button
           type="button"
-          disabled={busy || Boolean(team) || !agreed}
+          disabled={busy || Boolean(team) || !agreed || keysMissing || !keysChecked}
           onClick={() => void join()}
           className={primaryBtnClass}
         >

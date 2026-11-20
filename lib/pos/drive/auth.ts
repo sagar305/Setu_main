@@ -151,6 +151,9 @@ let refreshing: Promise<string | null> | null = null;
 
 const ROUTES = "/api/pos-google";
 
+/** Where an invite link's #keys wait during a full-page sign-in (same tab only). */
+export const RETURN_HASH_KEY = "setu-pos-return-hash";
+
 /** Ask the site for a fresh key from this device's cookie. Null = not signed in here. */
 async function serverRefresh(): Promise<string | null> {
   if (serverMode === "off") return null;
@@ -203,7 +206,14 @@ function serverSignIn(loginHint?: string): Promise<void> {
   if (loginHint) params.set("hint", loginHint);
   const popup = window.open(`${ROUTES}/start?${params}`, "setu-pos-google", "width=500,height=680");
   if (!popup) {
-    // Popups blocked: do the sign-in in this tab and come back here.
+    // Popups blocked: do the sign-in in this tab and come back here. The
+    // part after "#" (an invite's keys) never goes to a server, so keep it in
+    // this tab's session storage to restore after coming back.
+    try {
+      if (window.location.hash) window.sessionStorage.setItem(RETURN_HASH_KEY, window.location.hash);
+    } catch {
+      // ignore
+    }
     const full = new URLSearchParams({ n: nonce, return: window.location.pathname + window.location.search });
     window.location.assign(`${ROUTES}/start?${full}`);
     return new Promise(() => undefined);
