@@ -17,6 +17,7 @@ export const DEVICE_SETTINGS = [
   "receiptPaperSize",
   "slipPaperSize",
   "slipA4Layout",
+  "invoicePaper",
 ] as const;
 
 /** The shop-wide part of a settings row. */

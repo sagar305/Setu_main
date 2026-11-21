@@ -67,9 +67,9 @@ export const CHANGELOG: ChangelogEntry[] = [
     date: "2026-11-20",
     type: "improvement",
     product: "Free Repair Job Card",
-    title: "Job cards print in larger type, laid out like a proper service receipt",
+    title: "Job cards and invoices print in larger type, laid out like proper shop documents",
     description:
-      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. The shop copy carries the device password and internal notes.",
+      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. Invoices now print on the same paper as the job card, with the amount in words, or as a till receipt on a thermal roll.",
     href: "/products/free-repair-shop-software",
   },
   {

@@ -326,6 +326,12 @@ export type RepairSettings = {
    * cut line between. A5 always prints the customer copy alone.
    */
   slipA4Layout?: "single" | "two-copy";
+  /**
+   * Paper the invoice prints on. "slip" (the default, also for records saved
+   * before this field) means the job card's paper, A4 or A5; a thermal roll
+   * gets a receipt layout. `receiptPaperSize` above is no longer read.
+   */
+  invoicePaper?: "slip" | "58mm" | "80mm" | "a5" | "a4";
   /** The numbered terms on the job card, one per line. Blank = the defaults. */
   slipTerms?: string;
   lastBackupAt: string | null;
