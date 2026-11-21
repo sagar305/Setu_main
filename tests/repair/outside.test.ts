@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   currentOutside,
+  defaultOutsideLabel,
+  outsideBillLine,
   isOutsideOverdue,
   isOverdue,
   jobMargin,
@@ -129,5 +131,21 @@ describe("outside repair", () => {
     expect(html).toContain("Motherboard only");
     expect(html).toContain("Not for sale");
     expect(html).not.toContain("Rohit Verma");
+  });
+
+  it("puts the vendor's work on the bill as a line, and counts its cost only once", () => {
+    const back = trip({ receivedOn: "2026-11-14", outcome: "repaired", finalCharge: 3000 });
+    expect(defaultOutsideLabel(back)).toBe("Outside repair – Short near charging IC");
+    const line = outsideBillLine(back, "Motherboard repair", 3800, "line-1");
+    expect(line).toMatchObject({ name: "Motherboard repair", quantity: 1, costPrice: 3000, sellingPrice: 3800, partId: null });
+
+    const billed = job({ labourCharge: 500, outsideRepairs: [{ ...back, billedLineId: "line-1" }], partsUsed: [line] });
+    expect(outsideCostTotal(billed)).toBe(0);
+    // Revenue 3800 + 500, cost 3000 (on the line) → 1300, not 3800 + 500 − 3000 − 3000.
+    expect(jobMargin(billed, null, DEFAULT_SETTINGS)).toBe(1300);
+
+    // If the line is removed from the bill, the cost comes back as an outside cost.
+    const removed = { ...billed, partsUsed: [] };
+    expect(outsideCostTotal(removed)).toBe(3000);
   });
 });

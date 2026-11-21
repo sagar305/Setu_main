@@ -614,20 +614,21 @@ export function SettingsScreen() {
               }
             />
           </Field>
-          <Field label="Invoice paper">
+          <Field label="Invoice paper" hint="A thermal roll prints a till-style receipt.">
             <select
               className={inputClass}
-              value={settings.receiptPaperSize}
+              value={settings.invoicePaper ?? "slip"}
               onChange={(event) =>
                 void updateSettings({
-                  receiptPaperSize: event.target.value as typeof settings.receiptPaperSize,
+                  invoicePaper: event.target.value as NonNullable<typeof settings.invoicePaper>,
                 })
               }
             >
-              <option value="58mm">58mm thermal</option>
-              <option value="80mm">80mm thermal</option>
-              <option value="a5">A5</option>
+              <option value="slip">Same as the job card ({(settings.slipPaperSize ?? "a5").toUpperCase()})</option>
               <option value="a4">A4</option>
+              <option value="a5">A5</option>
+              <option value="80mm">80mm thermal roll</option>
+              <option value="58mm">58mm thermal roll</option>
             </select>
           </Field>
         </div>

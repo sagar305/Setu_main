@@ -5,6 +5,8 @@ import {
   buildEstimateHtml,
   buildInvoiceHtml,
   buildJobSlipHtml,
+  amountInWords,
+  invoicePaperOf,
   isTwoCopy,
   slipPaperOf,
   slipTermsOf,
@@ -161,6 +163,33 @@ describe("job card content", () => {
   });
 });
 
+describe("invoice", () => {
+  const bill = {
+    id: "b1", invoiceNo: "INV-0001", jobId: "job-1", customerId: "cust-1", date: "2026-11-21",
+    partLines: [{ label: "Vendor Repair Cost", quantity: 1, unitPrice: 3000, amount: 3000 }],
+    labourCharge: 500, discount: 0, taxRate: 0, taxAmount: 0, total: 3500, paid: 3500, paymentMode: "UPI", createdAt: "",
+  };
+
+  it("prints on the job card's paper unless a roll is chosen", () => {
+    expect(invoicePaperOf({ ...DEFAULT_SETTINGS, invoicePaper: undefined, slipPaperSize: "a4" })).toBe("a4");
+    expect(invoicePaperOf({ ...DEFAULT_SETTINGS, invoicePaper: "slip", slipPaperSize: "a5" })).toBe("a5");
+    expect(invoicePaperOf({ ...DEFAULT_SETTINGS, invoicePaper: "80mm" })).toBe("80mm");
+  });
+
+  it("carries the amount in words, Indian numbering", () => {
+    expect(amountInWords(350000, "INR")).toBe("Three Lakh Fifty Thousand Rupees Only");
+    expect(amountInWords(100, "USD")).toBe("");
+    expect(buildInvoiceHtml({ ...context(), bill }, "a4")).toContain("Three Thousand Five Hundred Rupees Only");
+  });
+
+  it("lays out a till receipt on a thermal roll instead of a four-column table", () => {
+    const html = buildInvoiceHtml({ ...context(), bill }, "58mm");
+    expect(html).toContain('class="receipt"');
+    expect(html).not.toContain("<table");
+    expect(html).toContain("1 × ₹3,000.00");
+  });
+});
+
 // Set PRINT_PREVIEW_DIR to write each document to disk for a visual check.
 describe("print previews", () => {
   it("writes preview files when asked", () => {
@@ -183,22 +212,25 @@ describe("print previews", () => {
       paymentMode: "UPI",
       createdAt: "",
     };
-    const files: [string, string, "a4" | "a5", boolean][] = [
+    const files: [string, string, "a4" | "a5" | "58mm" | "80mm", boolean][] = [
       ["a4-two-copy", buildJobSlipHtml(context({ slipPaperSize: "a4", slipA4Layout: "two-copy" })), "a4", true],
       ["a4-single", buildJobSlipHtml(context({ slipPaperSize: "a4", slipA4Layout: "single" })), "a4", false],
       ["a5-customer", buildJobSlipHtml(context({ slipPaperSize: "a5" })), "a5", false],
       ["a4-shop-copy", buildJobSlipHtml(context({ slipPaperSize: "a4", slipA4Layout: "single" }), "shop"), "a4", false],
       ["a5-estimate", buildEstimateHtml(context()), "a5", false],
-      [
-        "a4-invoice",
-        buildInvoiceHtml({ ...context({}, { deliveredOn: "2026-11-21", workDone: "Replaced charging IC" }), bill }),
-        "a4",
-        false,
-      ],
+      ...(["a4", "a5", "80mm", "58mm"] as const).map(
+        (paper) =>
+          [
+            `invoice-${paper}`,
+            buildInvoiceHtml({ ...context({}, { deliveredOn: "2026-11-21", workDone: "Replaced charging IC" }), bill }, paper),
+            paper,
+            false,
+          ] as [string, string, "a4" | "a5" | "58mm" | "80mm", boolean]
+      ),
     ];
     for (const [name, html, paper, twoCopy] of files) {
       writeFileSync(join(dir, `${name}.html`), wrapDocument(html, paper, name, twoCopy));
     }
-    expect(files.length).toBe(6);
+    expect(files.length).toBe(9);
   });
 });

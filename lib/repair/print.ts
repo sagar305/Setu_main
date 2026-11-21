@@ -40,6 +40,7 @@ import {
   type Vendor,
 } from "./types";
 import { billTotals } from "./calc";
+import { amountInWordsIndian } from "@/lib/invoice";
 
 export type RepairPaperSize = "58mm" | "80mm" | "a5" | "a4";
 
@@ -167,6 +168,19 @@ export function documentStyles(paper: RepairPaperSize, twoCopy = false): string 
     .sign img { height: ${scale === "full" ? "13mm" : "9mm"}; object-fit: contain; align-self: flex-start; }
     .sign .who { border-top: 0.75pt solid #000; padding-top: 0.8mm; font-size: ${size.small}; font-weight: 700; }
 
+    table.grid { table-layout: fixed; }
+    td, th { overflow-wrap: anywhere; }
+    .sumrow { display: flex; gap: 4mm; align-items: flex-start; padding: ${narrow ? "0" : "1.5mm 3mm 0"}; }
+    .sumrow .words { flex: 1; padding-top: 1mm; }
+    .sumrow .sums { width: ${scale === "full" ? "44%" : "52%"}; }
+    .receipt { font-size: ${size.base}; }
+    .receipt .row { display: flex; justify-content: space-between; gap: 2mm; }
+    .receipt .row > span:last-child { text-align: right; white-space: nowrap; }
+    .receipt .rtitle { margin: 1.5mm 0; font-weight: 800; letter-spacing: 0.1em; border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 0.6mm 0; }
+    .receipt .rrule { border-top: 1px dashed #000; margin: 1.5mm 0; }
+    .receipt .rline { margin: 0.8mm 0; }
+    .receipt .rgrand { font-weight: 800; font-size: ${size.title}; border-top: 1px solid #000; padding-top: 0.8mm; margin-top: 0.5mm; }
+    .receipt .rsig { height: 12mm; object-fit: contain; display: block; margin-top: 2mm; }
     .money td { border: 0; border-top: 0.5pt solid #BBB; padding: ${narrow ? "0.6mm 0" : "1mm 2mm"}; }
     .money .grand td { border-top: 1.2pt solid #000; font-weight: 800; font-size: ${size.title}; }
 
@@ -739,88 +753,198 @@ export async function printEstimate(context: PrintContext): Promise<boolean> {
  * back holding, and printing the actual expiry date rather than "90 days"
  * removes the argument about when the clock started.
  */
-export function buildInvoiceHtml(context: PrintContext): string {
-  const { job, bill, settings } = context;
-  if (!bill) return "";
+/** The paper the invoice prints on: the job card's (A4/A5) unless a roll is chosen. */
+export function invoicePaperOf(settings: RepairSettings): RepairPaperSize {
+  const chosen = settings.invoicePaper ?? "slip";
+  return chosen === "slip" ? slipPaperOf(settings) : chosen;
+}
 
-  const warrantyEnd =
-    job.warrantyDays > 0 && job.deliveredOn ? addDays(job.deliveredOn, job.warrantyDays) : "";
+/** The total in words, Indian numbering — what Indian invoices carry under the total. */
+export function amountInWords(amount: number, currency: string): string {
+  if (currency !== "INR") return "";
+  // "Three Thousand Five Hundred Rupees Only" (paise are left off, as on most bills).
+  return amountInWordsIndian(Math.round(amount));
+}
+
+type InvoiceParts = {
+  lines: { label: string; quantity: number; rate: string; amount: string }[];
+  totals: [string, string, boolean?][];
+  due: number;
+  warrantyEnd: string;
+  words: string;
+};
+
+function invoiceParts(context: PrintContext): InvoiceParts | null {
+  const { job, bill } = context;
+  if (!bill) return null;
+  const lines = bill.partLines.map((line) => ({
+    label: line.label,
+    quantity: line.quantity,
+    rate: money(line.unitPrice, context),
+    amount: money(line.amount, context),
+  }));
+  if (bill.labourCharge) {
+    lines.push({
+      label: "Labour / service charge",
+      quantity: 1,
+      rate: money(bill.labourCharge, context),
+      amount: money(bill.labourCharge, context),
+    });
+  }
+  const gross = bill.partLines.reduce((sum, line) => sum + line.amount, 0) + bill.labourCharge;
   const due = Math.max(0, bill.total - bill.paid);
-
-  const rows = [
-    ...bill.partLines.map((line) =>
-      priceRow(
-        line.label,
-        line.quantity,
-        escapeHtml(money(line.unitPrice, context)),
-        escapeHtml(money(line.amount, context))
-      )
-    ),
-    bill.labourCharge
-      ? priceRow(
-          "Labour / service charge",
-          1,
-          escapeHtml(money(bill.labourCharge, context)),
-          escapeHtml(money(bill.labourCharge, context))
-        )
-      : "",
-  ].join("");
-
-  const lines: [string, string, boolean?][] = [];
-  if (bill.discount) lines.push(["Discount", `− ${escapeHtml(money(bill.discount, context))}`]);
-  if (bill.taxAmount) lines.push([`Tax (${bill.taxRate}%)`, escapeHtml(money(bill.taxAmount, context))]);
-  lines.push(["Total", escapeHtml(money(bill.total, context)), true]);
-  lines.push([
+  const totals: [string, string, boolean?][] = [];
+  if (bill.discount || bill.taxAmount) totals.push(["Sub-total", escapeHtml(money(gross, context))]);
+  if (bill.discount) totals.push(["Discount", `− ${escapeHtml(money(bill.discount, context))}`]);
+  if (bill.taxAmount) totals.push([`Tax (${bill.taxRate}%)`, escapeHtml(money(bill.taxAmount, context))]);
+  totals.push(["Total", escapeHtml(money(bill.total, context)), true]);
+  totals.push([
     `Paid${bill.paymentMode ? ` (${escapeHtml(bill.paymentMode)})` : ""}`,
     escapeHtml(money(bill.paid, context)),
   ]);
-  if (due > 0) lines.push(["<strong>Balance due</strong>", `<strong>${escapeHtml(money(due, context))}</strong>`]);
+  if (due > 0) totals.push(["<strong>Balance due</strong>", `<strong>${escapeHtml(money(due, context))}</strong>`]);
+  return {
+    lines,
+    totals,
+    due,
+    warrantyEnd: job.warrantyDays > 0 && job.deliveredOn ? addDays(job.deliveredOn, job.warrantyDays) : "",
+    words: amountInWords(bill.total, context.business?.currency || "INR"),
+  };
+}
+
+function warrantyText(job: Job, warrantyEnd: string): string {
+  return warrantyEnd
+    ? `This repair is covered for <span class="strong">${job.warrantyDays} days</span>, until <span class="strong">${escapeHtml(
+        formatDate(warrantyEnd)
+      )}</span>.`
+    : "No warranty is offered on this repair.";
+}
+
+const WARRANTY_SMALL_PRINT =
+  "Cover applies to the same fault and the parts replaced here. It does not cover physical damage, liquid damage, or a device opened elsewhere after this repair. Please bring this invoice when making a claim.";
+
+/**
+ * The bill, with the warranty terms and expiry on it.
+ *
+ * The warranty line is not decoration: it is the thing the customer will come
+ * back holding, and printing the actual expiry date rather than "90 days"
+ * removes the argument about when the clock started.
+ *
+ * A4/A5 get the full invoice; a thermal roll gets a receipt laid out for its
+ * width — one column, each line with its quantity and rate underneath — since
+ * a four-column table cannot fit in 48mm of print.
+ */
+export function buildInvoiceHtml(context: PrintContext, paper: RepairPaperSize = "a4"): string {
+  const parts = invoiceParts(context);
+  if (!parts || !context.bill) return "";
+  if (paper === "58mm" || paper === "80mm") return buildInvoiceReceiptHtml(context, parts);
+  const { job, bill, settings } = context;
+
+  const rows = parts.lines
+    .map((line, index) =>
+      `<tr><td class="center">${index + 1}</td><td>${escapeHtml(line.label)}</td><td class="right">${line.quantity}</td><td class="right">${escapeHtml(
+        line.rate
+      )}</td><td class="right">${escapeHtml(line.amount)}</td></tr>`
+    )
+    .join("");
 
   return `
     <div class="sheet">
       ${letterhead(context, false)}
-      ${titleBar(settings.taxEnabled ? "Tax invoice" : "Invoice", bill.invoiceNo)}
+      ${titleBar(settings.taxEnabled ? "Tax invoice" : "Invoice", settings.taxEnabled ? "" : "Bill of supply")}
       <table class="grid">
         <tr>
-          ${cell("Invoice no.", `<span class="strong">${escapeHtml(bill.invoiceNo)}</span>`)}
-          ${cell("Date", escapeHtml(formatDate(bill.date)))}
-          ${cell("Job no.", escapeHtml(job.jobNo))}
+          ${cell("Invoice no.", `<span class="jobno">${escapeHtml(bill.invoiceNo)}</span>`)}
+          ${cell("Invoice date", escapeHtml(formatDate(bill.date)))}
+          ${cell("Job no.", `<span class="strong">${escapeHtml(job.jobNo)}</span>`)}
         </tr>
       </table>
-      ${partyRow(context)}
-      ${job.workDone ? `<table class="grid">${row("Work done", multiline(job.workDone))}</table>` : ""}
       <table class="grid">
-        <thead><tr><th>Description</th><th class="right">Qty</th><th class="right">Rate</th><th class="right">Amount</th></tr></thead>
-        <tbody>${rows || `<tr><td colspan="4" class="muted">No charge</td></tr>`}</tbody>
+        <tr>
+          ${cell("Bill to", customerLines(context.customer, true))}
+          ${cell("Device repaired", deviceLines(job))}
+        </tr>
       </table>
-      ${totalsTable(lines)}
+      ${job.workDone ? `<table class="grid">${row("Work done", multiline(job.workDone))}</table>` : ""}
+      <table class="grid items">
+        <thead><tr><th class="center" style="width:8%">#</th><th>Description</th><th class="right" style="width:9%">Qty</th><th class="right" style="width:18%">Rate</th><th class="right" style="width:20%">Amount</th></tr></thead>
+        <tbody>${rows || `<tr><td colspan="5" class="muted">No charge</td></tr>`}</tbody>
+      </table>
+      <div class="sumrow">
+        <div class="words">
+          ${parts.words ? `<span class="lbl">Amount in words</span><div class="strong">${escapeHtml(parts.words)}</div>` : ""}
+        </div>
+        <div class="sums">${totalsTable(parts.totals)}</div>
+      </div>
       <div class="terms grow">
         <span class="lbl">Warranty</span>
-        ${
-          warrantyEnd
-            ? `<div>This repair is covered for <span class="strong">${job.warrantyDays} days</span>, until <span class="strong">${escapeHtml(
-                formatDate(warrantyEnd)
-              )}</span>.</div>`
-            : `<div>No warranty is offered on this repair.</div>`
-        }
-        <div class="muted">Cover applies to the same fault and the parts replaced here. It does not cover physical damage, liquid damage, or a device opened elsewhere after this repair. Please bring this invoice when making a claim.</div>
-        ${settings.taxEnabled ? "" : `<div class="muted" style="margin-top:1mm">This is a bill of supply for your records.</div>`}
+        <div>${warrantyText(job, parts.warrantyEnd)}</div>
+        <div class="muted">${WARRANTY_SMALL_PRINT}</div>
       </div>
       ${signatureRow(
         { label: "Received by (customer)", image: job.deliverySignatureDataUrl },
-        { label: shopSignLabel(context) }
+        { label: `Authorised signatory · ${shopSignLabel(context)}` }
       )}
+    </div>
+  `;
+}
+
+/** The invoice as a till receipt, for 58mm / 80mm rolls. */
+function buildInvoiceReceiptHtml(context: PrintContext, parts: InvoiceParts): string {
+  const { job, bill, customer, business, settings } = context;
+  if (!bill) return "";
+  const lines = parts.lines
+    .map(
+      (line) => `
+        <div class="rline">
+          <div class="row"><span>${escapeHtml(line.label)}</span><span class="strong">${escapeHtml(line.amount)}</span></div>
+          <div class="muted">${line.quantity} × ${escapeHtml(line.rate)}</div>
+        </div>`
+    )
+    .join("");
+  return `
+    <div class="receipt">
+      <div class="center">
+        <div class="biz">${escapeHtml(business?.name || "Repair shop")}</div>
+        ${business?.address ? `<div>${multiline(business.address)}</div>` : ""}
+        ${business?.phone ? `<div>Ph: ${escapeHtml(business.phone)}</div>` : ""}
+        ${business?.taxNumber ? `<div>GSTIN: ${escapeHtml(business.taxNumber)}</div>` : ""}
+        <div class="rtitle">${settings.taxEnabled ? "TAX INVOICE" : "INVOICE"}</div>
+      </div>
+      <div class="row"><span>Invoice</span><span class="strong">${escapeHtml(bill.invoiceNo)}</span></div>
+      <div class="row"><span>Date</span><span>${escapeHtml(formatDate(bill.date))}</span></div>
+      <div class="row"><span>Job</span><span>${escapeHtml(job.jobNo)}</span></div>
+      <div class="rrule"></div>
+      <div class="strong">${escapeHtml(customer?.name || "—")}</div>
+      ${customer?.phone ? `<div>${escapeHtml(customer.phone)}</div>` : ""}
+      <div>${escapeHtml(deviceLabel(job))}${job.serialNo ? ` · ${escapeHtml(job.serialNo)}` : ""}</div>
+      <div class="rrule"></div>
+      ${lines || `<div class="muted">No charge</div>`}
+      <div class="rrule"></div>
+      ${parts.totals
+        .map(
+          ([label, value, grand]) =>
+            `<div class="row${grand ? " rgrand" : ""}"><span>${label}</span><span>${value}</span></div>`
+        )
+        .join("")}
+      ${parts.words ? `<div class="muted" style="margin-top:1mm">${escapeHtml(parts.words)}</div>` : ""}
+      <div class="rrule"></div>
+      <div>${warrantyText(job, parts.warrantyEnd)}</div>
+      <div class="muted">${WARRANTY_SMALL_PRINT}</div>
+      ${
+        job.deliverySignatureDataUrl
+          ? `<img class="rsig" src="${job.deliverySignatureDataUrl}" alt="" /><div class="muted">Customer's signature</div>`
+          : ""
+      }
+      <div class="center" style="margin-top:2mm">Thank you!</div>
     </div>
   `;
 }
 
 export function printInvoice(context: PrintContext, paper?: RepairPaperSize): boolean {
   if (!context.bill) return false;
-  return printHtml(
-    buildInvoiceHtml(context),
-    paper ?? context.settings.receiptPaperSize,
-    `Invoice ${context.bill.invoiceNo}`
-  );
+  const chosen = paper ?? invoicePaperOf(context.settings);
+  return printHtml(buildInvoiceHtml(context, chosen), chosen, `Invoice ${context.bill.invoiceNo}`);
 }
 
 // ---------------------------------------------------------------------------

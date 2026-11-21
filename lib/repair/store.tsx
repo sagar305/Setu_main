@@ -35,7 +35,7 @@ import {
 import { restoreBackup, type RepairBackup } from "./backup";
 import { getTeamSession, leaveTeam, teamDiscountAllowed, teamNumberPrefix, teamRole } from "./team/engine";
 import { ALL_SYNC_SLICES, buildTabPayloads, isValidSyncUrl, pushToSheet } from "./sheetSync";
-import { billTotals, currentOutside, nextChallanNo, round2, stockDeltas } from "./calc";
+import { billTotals, currentOutside, nextChallanNo, outsideBillLine, round2, stockDeltas } from "./calc";
 import {
   TrackingError,
   mintReplyChannel,
@@ -60,6 +60,7 @@ import {
   type Part,
   type RepairSettings,
   type OutsideRepair,
+  type PartUsage,
   type Technician,
   type Vendor,
 } from "./types";
@@ -90,6 +91,8 @@ export type ReceiveOutsideInput = {
   outcome: "repaired" | "not-repaired";
   finalCharge: number | null;
   returnNote: string;
+  /** Put the vendor's work on the customer's bill as a line with this name and price. */
+  billLine?: { label: string; price: number } | null;
 };
 
 /** What the intake wizard collects. Everything else on a job starts empty. */
@@ -206,6 +209,8 @@ type RepairContextValue = {
   sendOutside: (jobId: string, input: SendOutsideInput) => Promise<Job>;
   /** Record it coming back; the job returns to In repair whatever the outcome. */
   receiveFromOutside: (jobId: string, input: ReceiveOutsideInput) => Promise<Job>;
+  /** Put an outside trip on the customer's bill after it came back. */
+  billOutsideTrip: (jobId: string, tripId: string, line: { label: string; price: number }) => Promise<Job>;
 
   clearAllData: () => Promise<void>;
   applyRestoredBackup: (backup: RepairBackup) => Promise<void>;
@@ -1082,7 +1087,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       const trip = currentOutside(existing);
       if (!trip) throw new Error("This job is not out for repair.");
 
-      const back: OutsideRepair = {
+      let back: OutsideRepair = {
         ...trip,
         receivedOn: input.receivedOn || todayKey(),
         outcome: input.outcome,
@@ -1090,12 +1095,19 @@ export function RepairProvider({ children }: { children: ReactNode }) {
         returnNote: input.returnNote.trim(),
         receivedAt: nowIso(),
       };
+      const extraLines: PartUsage[] = [];
+      if (input.billLine && !existing.billId) {
+        const line = outsideBillLine(back, input.billLine.label, input.billLine.price, generateId());
+        extraLines.push(line);
+        back = { ...back, billedLineId: line.id };
+      }
       const note = `Back from ${trip.vendorName} — ${
         input.outcome === "repaired" ? "repaired" : "not repaired"
       }`;
       const updated: Job = {
         ...existing,
         outsideRepairs: (existing.outsideRepairs ?? []).map((row) => (row.id === trip.id ? back : row)),
+        partsUsed: [...existing.partsUsed, ...extraLines],
         status: "in-repair",
         statusHistory: [...existing.statusHistory, statusChange(existing.status, "in-repair", note)],
         updatedAt: nowIso(),
@@ -1107,6 +1119,32 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       return synced;
     },
     [jobMap, applyTracking, persistTracking, billByJob]
+  );
+
+  const billOutsideTrip = useCallback(
+    async (jobId: string, tripId: string, input: { label: string; price: number }) => {
+      const existing = jobMap.get(jobId);
+      if (!existing) throw new Error("That job no longer exists.");
+      if (existing.billId) throw new Error("This job is already billed.");
+      const trip = (existing.outsideRepairs ?? []).find((row) => row.id === tripId);
+      if (!trip) throw new Error("That outside repair is not on this job.");
+      if (trip.billedLineId && existing.partsUsed.some((line) => line.id === trip.billedLineId)) {
+        throw new Error("This outside repair is already on the bill.");
+      }
+      const line = outsideBillLine(trip, input.label, input.price, generateId());
+      const updated: Job = {
+        ...existing,
+        partsUsed: [...existing.partsUsed, line],
+        outsideRepairs: (existing.outsideRepairs ?? []).map((row) =>
+          row.id === tripId ? { ...row, billedLineId: line.id } : row
+        ),
+        updatedAt: nowIso(),
+      };
+      await repairBatch({ jobs: [updated] });
+      setJobs((previous) => previous.map((job) => (job.id === jobId ? updated : job)));
+      return updated;
+    },
+    [jobMap]
   );
 
   /* ---------------------------------------------------------------------
@@ -1357,6 +1395,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       deleteVendor,
       sendOutside,
       receiveFromOutside,
+      billOutsideTrip,
       clearAllData,
       applyRestoredBackup,
       syncToSheet,
@@ -1410,6 +1449,7 @@ export function RepairProvider({ children }: { children: ReactNode }) {
       deleteVendor,
       sendOutside,
       receiveFromOutside,
+      billOutsideTrip,
       clearAllData,
       applyRestoredBackup,
       syncToSheet,

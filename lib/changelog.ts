@@ -60,16 +60,16 @@ export const CHANGELOG: ChangelogEntry[] = [
     product: "Free Repair Job Card",
     title: "Keep track of devices sent to another service centre",
     description:
-      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. The vendor's charge counts as your cost, and customers only see \"With our repair partner\".",
+      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. When it comes back, put it on the customer's bill as a line with your own wording and price — the vendor's charge is that line's cost. Customers' tracking page only says \"With our repair partner\".",
     href: "/products/free-repair-shop-software",
   },
   {
     date: "2026-11-20",
     type: "improvement",
     product: "Free Repair Job Card",
-    title: "Job cards print in larger type, laid out like a proper service receipt",
+    title: "Job cards and invoices print in larger type, laid out like proper shop documents",
     description:
-      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. The shop copy carries the device password and internal notes.",
+      "Choose A4 or A5 in Settings, print the customer and shop copies on one A4 sheet, and write your own terms. Invoices now print on the same paper as the job card, with the amount in words, or as a till receipt on a thermal roll.",
     href: "/products/free-repair-shop-software",
   },
   {

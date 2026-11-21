@@ -13,9 +13,14 @@
 // front desk decides what to charge.
 
 import { useEffect, useState } from "react";
-import { PackageOpen, Plus, Printer, Truck, Undo2 } from "lucide-react";
+import { PackageOpen, Plus, Printer, Receipt, Truck, Undo2 } from "lucide-react";
 import { useRepair, type VendorInput } from "@/lib/repair/store";
-import { currentOutside, isOutsideOverdue, outsideCostTotal } from "@/lib/repair/calc";
+import {
+  currentOutside,
+  defaultOutsideLabel,
+  isOutsideOverdue,
+  outsideCostTotal,
+} from "@/lib/repair/calc";
 import { printOutsideChallan, type PrintContext } from "@/lib/repair/print";
 import {
   CLOSED_STATUSES,
@@ -73,6 +78,7 @@ export function OutsideRepairSection({
   const { vendors, vendorById, today, business } = useRepair();
   const [sending, setSending] = useState(false);
   const [receiving, setReceiving] = useState(false);
+  const [billing, setBilling] = useState<OutsideRepair | null>(null);
   const currency = business?.currency || "INR";
   const trips = job.outsideRepairs ?? [];
   const open = currentOutside(job);
@@ -167,6 +173,21 @@ export function OutsideRepairSection({
                       : ""}
                   {trip.returnNote ? ` · ${trip.returnNote}` : ""}
                 </p>
+                {trip.billedLineId && job.partsUsed.some((line) => line.id === trip.billedLineId) ? (
+                  <p className="mt-1 text-xs font-semibold text-green-700">On the customer&apos;s bill</p>
+                ) : (
+                  canManage &&
+                  !job.billId && (
+                    <button
+                      type="button"
+                      onClick={() => setBilling(trip)}
+                      className="mt-1.5 inline-flex items-center gap-1 text-xs font-semibold text-indigo"
+                    >
+                      <Receipt className="h-3.5 w-3.5" aria-hidden="true" />
+                      Add to the customer&apos;s bill
+                    </button>
+                  )
+                )}
               </li>
             ))}
         </ul>
@@ -175,7 +196,7 @@ export function OutsideRepairSection({
       {cost > 0 && (
         <p className="mt-3 text-xs text-muted">
           Vendor cost on this job: <strong className="text-ink">{formatMoney(cost, currency)}</strong>.
-          It counts against the job&apos;s margin; it is not added to the customer&apos;s bill.
+          It counts against the job&apos;s margin. To charge the customer for it, add it to their bill.
         </p>
       )}
 
@@ -188,6 +209,7 @@ export function OutsideRepairSection({
         onError={onError}
       />
       <ReceiveBackModal job={job} open={receiving} onClose={() => setReceiving(false)} onError={onError} />
+      <AddToBillModal job={job} trip={billing} onClose={() => setBilling(null)} onError={onError} />
     </SectionCard>
   );
 }
@@ -395,15 +417,25 @@ function ReceiveBackModal({
   const [outcome, setOutcome] = useState<"repaired" | "not-repaired">("repaired");
   const [charge, setCharge] = useState("");
   const [returnNote, setReturnNote] = useState("");
+  const [addToBill, setAddToBill] = useState(true);
+  const [billLabel, setBillLabel] = useState("");
+  const [billPrice, setBillPrice] = useState("");
+  const [priceTouched, setPriceTouched] = useState(false);
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState("");
+  const billed = Boolean(job.billId);
 
   useEffect(() => {
     if (!open) return;
+    const quote = trip?.quotedCharge !== null && trip?.quotedCharge !== undefined ? String(trip.quotedCharge) : "";
     setReceivedOn(todayKey());
     setOutcome("repaired");
-    setCharge(trip?.quotedCharge !== null && trip?.quotedCharge !== undefined ? String(trip.quotedCharge) : "");
+    setCharge(quote);
     setReturnNote("");
+    setAddToBill(!billed);
+    setBillLabel(trip ? defaultOutsideLabel(trip) : "");
+    setBillPrice(quote);
+    setPriceTouched(false);
     setFormError("");
   }, [open]);
 
@@ -418,6 +450,7 @@ function ReceiveBackModal({
         outcome,
         finalCharge: charge.trim() === "" ? null : Number(charge) || 0,
         returnNote,
+        billLine: addToBill && !billed ? { label: billLabel, price: Number(billPrice) || 0 } : null,
       });
       onClose();
     } catch (caught) {
@@ -458,13 +491,48 @@ function ReceiveBackModal({
           <Field label="Received on">
             <input type="date" className={inputClass} value={receivedOn} onChange={(e) => setReceivedOn(e.target.value)} />
           </Field>
-          <Field label="Vendor charged" hint="Your cost. Not added to the customer's bill.">
-            <input className={inputClass} inputMode="decimal" value={charge} onChange={(e) => setCharge(e.target.value)} />
+          <Field label="Vendor charged you" hint="Your cost — counts against the job's margin.">
+            <input
+              className={inputClass}
+              inputMode="decimal"
+              value={charge}
+              onChange={(e) => {
+                setCharge(e.target.value);
+                // Until the shop sets its own price, charge the customer what the vendor charged.
+                if (!priceTouched) setBillPrice(e.target.value);
+              }}
+            />
           </Field>
         </div>
         <Field label="Note">
           <input className={inputClass} value={returnNote} onChange={(e) => setReturnNote(e.target.value)} />
         </Field>
+        {billed ? (
+          <p className="text-xs text-muted">This job is already billed, so nothing is added to the bill.</p>
+        ) : (
+          <div className="grid gap-3 rounded-xl border border-muted-line/30 p-3">
+            <label className="flex items-center gap-2 text-sm font-semibold text-ink">
+              <input
+                type="checkbox"
+                className="h-5 w-5 rounded border-muted-line/50 text-indigo focus:ring-indigo"
+                checked={addToBill}
+                onChange={(e) => setAddToBill(e.target.checked)}
+              />
+              Add to the customer&apos;s bill
+            </label>
+            {addToBill && (
+              <BillLineFields
+                label={billLabel}
+                price={billPrice}
+                onLabel={setBillLabel}
+                onPrice={(value) => {
+                  setPriceTouched(true);
+                  setBillPrice(value);
+                }}
+              />
+            )}
+          </div>
+        )}
         {formError && (
           <p className="text-sm font-semibold text-red-600" role="alert">
             {formError}
@@ -477,6 +545,92 @@ function ReceiveBackModal({
           <button type="button" onClick={() => void submit()} disabled={busy} className={primaryBtnClass}>
             <Undo2 className="h-4 w-4" aria-hidden="true" />
             Mark received
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+/** Name and price of the line the vendor's work goes on the bill as. */
+function BillLineFields({
+  label,
+  price,
+  onLabel,
+  onPrice,
+}: {
+  label: string;
+  price: string;
+  onLabel: (value: string) => void;
+  onPrice: (value: string) => void;
+}) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-[1fr_10rem]">
+      <Field label="Name on the bill" hint="Write it the way the customer should read it.">
+        <input className={inputClass} value={label} onChange={(e) => onLabel(e.target.value)} />
+      </Field>
+      <Field label="Charge to customer">
+        <input className={inputClass} inputMode="decimal" value={price} onChange={(e) => onPrice(e.target.value)} />
+      </Field>
+    </div>
+  );
+}
+
+/** Put a trip that already came back on the bill. */
+function AddToBillModal({
+  job,
+  trip,
+  onClose,
+  onError,
+}: {
+  job: Job;
+  trip: OutsideRepair | null;
+  onClose: () => void;
+  onError: (message: string) => void;
+}) {
+  const { billOutsideTrip } = useRepair();
+  const [label, setLabel] = useState("");
+  const [price, setPrice] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (!trip) return;
+    setLabel(defaultOutsideLabel(trip));
+    const cost = trip.finalCharge ?? trip.quotedCharge;
+    setPrice(cost === null || cost === undefined ? "" : String(cost));
+  }, [trip]);
+
+  if (!trip) return null;
+  return (
+    <Modal open onClose={onClose} title="Add to the customer's bill">
+      <div className="grid gap-4">
+        <p className="text-sm text-muted">
+          Added as a line under Parts and labour, like a part: the vendor&apos;s charge is its cost, and the price
+          here is what the customer pays.
+        </p>
+        <BillLineFields label={label} price={price} onLabel={setLabel} onPrice={setPrice} />
+        <div className="flex justify-end gap-2">
+          <button type="button" onClick={onClose} className={secondaryBtnClass}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              try {
+                await billOutsideTrip(job.id, trip.id, { label, price: Number(price) || 0 });
+                onClose();
+              } catch (caught) {
+                onError(caught instanceof Error ? caught.message : "Could not add it.");
+              } finally {
+                setBusy(false);
+              }
+            }}
+            className={primaryBtnClass}
+          >
+            <Receipt className="h-4 w-4" aria-hidden="true" />
+            Add to bill
           </button>
         </div>
       </div>
