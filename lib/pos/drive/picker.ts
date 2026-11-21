@@ -32,6 +32,7 @@ type PickerBuilder = {
   setOAuthToken: (token: string) => PickerBuilder;
   setDeveloperKey: (key: string) => PickerBuilder;
   setAppId: (id: string) => PickerBuilder;
+  setOrigin: (origin: string) => PickerBuilder;
   setTitle: (title: string) => PickerBuilder;
   setCallback: (cb: (data: PickerData) => void) => PickerBuilder;
   enableFeature: (feature: string) => PickerBuilder;
@@ -58,6 +59,10 @@ async function loadPicker(): Promise<PickerNamespace> {
   return picker;
 }
 
+// Every picker names the page's origin. Without it, Google infers the origin
+// from the referrer, which iPhone Safari and some in-app browsers trim or
+// drop — and a website-restricted API key is then refused as "invalid".
+
 /** Let the user pick a shared shop folder. Resolves null if they cancel. */
 export async function pickShopFolder(): Promise<{ id: string; name: string } | null> {
   const config = driveConfig();
@@ -76,6 +81,7 @@ export async function pickShopFolder(): Promise<{ id: string; name: string } | n
       .setOAuthToken(token)
       .setDeveloperKey(config.apiKey)
       .setAppId(config.projectNumber)
+        .setOrigin(window.location.origin)
       .setTitle("Pick the shop folder you were invited to")
       .setCallback((data) => {
         if (data.action === picker.Action.PICKED && data.docs?.[0]) {
@@ -138,6 +144,7 @@ export async function pickInvitedFiles(fileIds: string[]): Promise<string[] | nu
         .setOAuthToken(token)
         .setDeveloperKey(config.apiKey)
         .setAppId(config.projectNumber)
+        .setOrigin(window.location.origin)
         .setTitle(title)
         .setCallback((data) => {
           if (data.action === picker.Action.PICKED) resolve((data.docs ?? []).map((d) => d.id));
