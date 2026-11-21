@@ -242,12 +242,41 @@ export function currentOutside(job: Job): OutsideRepair | null {
  * flatter the job. It is a cost only: nothing here reaches the customer's bill.
  */
 export function outsideCostTotal(job: Job): number {
+  const lines = new Set(job.partsUsed.map((line) => line.id));
   return round2(
     (job.outsideRepairs ?? []).reduce(
-      (sum, trip) => sum + (trip.finalCharge ?? trip.quotedCharge ?? 0),
+      // A trip put on the bill carries its cost on that line instead.
+      (sum, trip) =>
+        trip.billedLineId && lines.has(trip.billedLineId)
+          ? sum
+          : sum + (trip.finalCharge ?? trip.quotedCharge ?? 0),
       0
     )
   );
+}
+
+/** The bill line for an outside trip: the vendor's charge as its cost, the shop's price as its rate. */
+export function outsideBillLine(
+  trip: OutsideRepair,
+  label: string,
+  price: number,
+  id: string
+): PartUsage {
+  return {
+    id,
+    partId: null,
+    name: label.trim() || `Outside repair – ${trip.sentWhat}`,
+    quantity: 1,
+    costPrice: trip.finalCharge ?? trip.quotedCharge ?? 0,
+    sellingPrice: Math.max(0, price),
+    supplierWarrantyDays: 0,
+  };
+}
+
+/** What the bill line is called unless the shop types something else. */
+export function defaultOutsideLabel(trip: OutsideRepair): string {
+  const what = trip.problem || trip.sentWhat;
+  return what ? `Outside repair – ${what}` : "Outside repair charges";
 }
 
 /** Out with a vendor past the date they gave. */

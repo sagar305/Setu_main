@@ -60,7 +60,7 @@ export const CHANGELOG: ChangelogEntry[] = [
     product: "Free Repair Job Card",
     title: "Keep track of devices sent to another service centre",
     description:
-      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. The vendor's charge counts as your cost, and customers only see \"With our repair partner\".",
+      "Send a job outside to a vendor with an outward challan, see what is out and what is late, and record it coming back. When it comes back, put it on the customer's bill as a line with your own wording and price — the vendor's charge is that line's cost. Customers' tracking page only says \"With our repair partner\".",
     href: "/products/free-repair-shop-software",
   },
   {

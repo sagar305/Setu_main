@@ -137,6 +137,18 @@ export function JobDetail({ jobId, onBack }: { jobId: string; onBack: () => void
   const [technicianId, setTechnicianId] = useState(job?.technicianId ?? "");
   const [promisedDate, setPromisedDate] = useState(job?.promisedDate ?? "");
   const [partsUsed, setPartsUsed] = useState<PartUsage[]>(job?.partsUsed ?? []);
+  // The parts list can change without this screen's Save: an outside repair
+  // added to the bill, or the team's sync. Take the new list unless there are
+  // unsaved edits to it here, which the next Save would otherwise overwrite.
+  const savedPartsJson = JSON.stringify(job?.partsUsed ?? []);
+  const [lastSavedParts, setLastSavedParts] = useState(savedPartsJson);
+  useEffect(() => {
+    if (savedPartsJson === lastSavedParts) return;
+    setPartsUsed((current) =>
+      JSON.stringify(current) === lastSavedParts ? (JSON.parse(savedPartsJson) as PartUsage[]) : current
+    );
+    setLastSavedParts(savedPartsJson);
+  }, [savedPartsJson, lastSavedParts]);
 
   const customer = job ? (customerById(job.customerId) ?? null) : null;
   const technician = job?.technicianId ? (technicians.find((t) => t.id === job.technicianId) ?? null) : null;

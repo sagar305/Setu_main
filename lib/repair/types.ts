@@ -217,6 +217,12 @@ export type OutsideRepair = {
   /** What the vendor actually charged. Counted as the shop's cost, never billed automatically. */
   finalCharge: number | null;
   returnNote: string;
+  /**
+   * The parts line this trip was put on the customer's bill as, if it was.
+   * The vendor's charge is then that line's cost, and is not counted again
+   * as a separate outside cost.
+   */
+  billedLineId?: string | null;
   sentAt: string;
   receivedAt: string | null;
 };
